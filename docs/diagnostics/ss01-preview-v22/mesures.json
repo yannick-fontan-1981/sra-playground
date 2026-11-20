@@ -1,0 +1,5203 @@
+{
+  "publicPrefix": [
+    {
+      "id": 1,
+      "from": "c62141ed0108269b",
+      "to": "5e428d3570476a4d"
+    },
+    {
+      "id": 3,
+      "from": "5e428d3570476a4d",
+      "to": "dfbfe8ad705b802c"
+    },
+    {
+      "id": 2,
+      "from": "dfbfe8ad705b802c",
+      "to": "78c473696b589aa4"
+    },
+    {
+      "id": 4,
+      "from": "78c473696b589aa4",
+      "to": "b0a369cedcfb782a"
+    },
+    {
+      "id": 5,
+      "from": "b0a369cedcfb782a",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 31,
+        "y": 59
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 20,
+        "y": 36
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 28,
+        "y": 18
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 50,
+        "y": 15
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 44,
+        "y": 24
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "07d217e2c41f5b4b"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      },
+      "from": "07d217e2c41f5b4b",
+      "to": "ffc2da9c395a0bda"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      },
+      "from": "ffc2da9c395a0bda",
+      "to": "b0a369cedcfb782a"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "b0a369cedcfb782a",
+      "to": "b0a369cedcfb782a"
+    },
+    {
+      "id": 4,
+      "from": "b0a369cedcfb782a",
+      "to": "0c7f3db242c54a60"
+    },
+    {
+      "id": 4,
+      "from": "0c7f3db242c54a60",
+      "to": "1ad9eba8156f1377"
+    },
+    {
+      "id": 4,
+      "from": "1ad9eba8156f1377",
+      "to": "1ad9eba8156f1377"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      },
+      "from": "1ad9eba8156f1377",
+      "to": "71d293f63ba46ae2"
+    },
+    {
+      "id": 4,
+      "from": "71d293f63ba46ae2",
+      "to": "b90e6adfb0ed4497"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "b90e6adfb0ed4497",
+      "to": "e50bcd7035874830"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "e50bcd7035874830",
+      "to": "e50bcd7035874830"
+    },
+    {
+      "id": 4,
+      "from": "e50bcd7035874830",
+      "to": "e50bcd7035874830"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "e50bcd7035874830",
+      "to": "e50bcd7035874830"
+    },
+    {
+      "id": 4,
+      "from": "e50bcd7035874830",
+      "to": "e50bcd7035874830"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "e50bcd7035874830",
+      "to": "e50bcd7035874830"
+    },
+    {
+      "id": 4,
+      "from": "e50bcd7035874830",
+      "to": "e50bcd7035874830"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "e50bcd7035874830",
+      "to": "b90e6adfb0ed4497"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      },
+      "from": "b90e6adfb0ed4497",
+      "to": "b90e6adfb0ed4497"
+    },
+    {
+      "id": 4,
+      "from": "b90e6adfb0ed4497",
+      "to": "a41edf7f1622c62d"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "a41edf7f1622c62d",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 17,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 17,
+        "y": 19
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 28
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 17,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 19,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 19,
+        "y": 19
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 22,
+        "y": 33
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 19,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 31,
+        "y": 31
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 19
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 31,
+        "y": 31
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 38,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 38,
+        "y": 18
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 38,
+        "y": 19
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 38,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 19
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 40,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 17
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 40,
+        "y": 18
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 40,
+        "y": 19
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 23
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 24
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 14
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 15
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 14
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 4,
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 59,
+        "y": 37
+      },
+      "from": "034770d16b285dd2",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 1,
+      "from": "034770d16b285dd2",
+      "to": "9f70331766f30936"
+    },
+    {
+      "id": 4,
+      "from": "9f70331766f30936",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 4,
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 4,
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 28
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 20,
+        "y": 30
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 14
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 14
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 4,
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 17,
+        "y": 17
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 17
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 17
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 17
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 4,
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 19
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 19
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 19,
+        "y": 17
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 19,
+        "y": 17
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 4,
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 1,
+      "from": "1da7ddc11ae052a7",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "4afbb9f5c0a73c54",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 28
+      },
+      "from": "4afbb9f5c0a73c54",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 27
+      },
+      "from": "4afbb9f5c0a73c54",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 1,
+      "from": "4afbb9f5c0a73c54",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 2,
+      "from": "4afbb9f5c0a73c54",
+      "to": "e2399f2907288d62"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 29
+      },
+      "from": "e2399f2907288d62",
+      "to": "e2399f2907288d62"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "e2399f2907288d62",
+      "to": "e2399f2907288d62"
+    },
+    {
+      "id": 2,
+      "from": "e2399f2907288d62",
+      "to": "33610ae89daede1d"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 32
+      },
+      "from": "33610ae89daede1d",
+      "to": "33610ae89daede1d"
+    },
+    {
+      "id": 3,
+      "from": "33610ae89daede1d",
+      "to": "b76ea07e9728da82"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 25,
+        "y": 18
+      },
+      "from": "b76ea07e9728da82",
+      "to": "b76ea07e9728da82"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 25
+      },
+      "from": "b76ea07e9728da82",
+      "to": "b76ea07e9728da82"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "b76ea07e9728da82",
+      "to": "b76ea07e9728da82"
+    },
+    {
+      "id": 3,
+      "from": "b76ea07e9728da82",
+      "to": "d47f6cac4a66c699"
+    },
+    {
+      "id": 4,
+      "from": "d47f6cac4a66c699",
+      "to": "14485f748f44f5ac"
+    },
+    {
+      "id": 1,
+      "from": "14485f748f44f5ac",
+      "to": "9f0047765dae5724"
+    },
+    {
+      "id": 1,
+      "from": "9f0047765dae5724",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 4,
+      "from": "e4efa8af6f54ad17",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "bea12168e3d2c64d",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 4,
+      "from": "bea12168e3d2c64d",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 3,
+      "from": "bea12168e3d2c64d",
+      "to": "e017d67b6c771b35"
+    },
+    {
+      "id": 4,
+      "from": "e017d67b6c771b35",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 1,
+      "from": "bea12168e3d2c64d",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 4,
+      "from": "4afbb9f5c0a73c54",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      },
+      "from": "bea12168e3d2c64d",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 3,
+      "from": "bea12168e3d2c64d",
+      "to": "e017d67b6c771b35"
+    },
+    {
+      "id": 1,
+      "from": "e017d67b6c771b35",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 4,
+      "from": "e4efa8af6f54ad17",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 1,
+      "from": "bea12168e3d2c64d",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 4,
+      "from": "4afbb9f5c0a73c54",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      },
+      "from": "bea12168e3d2c64d",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 2,
+      "from": "bea12168e3d2c64d",
+      "to": "e2399f2907288d62"
+    },
+    {
+      "id": 3,
+      "from": "e2399f2907288d62",
+      "to": "044c9fa228adce37"
+    },
+    {
+      "id": 1,
+      "from": "044c9fa228adce37",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 2,
+      "from": "e4efa8af6f54ad17",
+      "to": "2b7456539b643d9d"
+    },
+    {
+      "id": 4,
+      "from": "2b7456539b643d9d",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 4,
+      "from": "1da7ddc11ae052a7",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 3,
+      "from": "1da7ddc11ae052a7",
+      "to": "044c9fa228adce37"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      },
+      "from": "044c9fa228adce37",
+      "to": "044c9fa228adce37"
+    },
+    {
+      "id": 1,
+      "from": "044c9fa228adce37",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 2,
+      "from": "e4efa8af6f54ad17",
+      "to": "2b7456539b643d9d"
+    },
+    {
+      "id": 2,
+      "from": "2b7456539b643d9d",
+      "to": "afb0d9edc5f85d3b"
+    },
+    {
+      "id": 4,
+      "from": "afb0d9edc5f85d3b",
+      "to": "034770d16b285dd2"
+    },
+    {
+      "id": 2,
+      "from": "034770d16b285dd2",
+      "to": "3e50f79ab40f7943"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 16
+      },
+      "from": "3e50f79ab40f7943",
+      "to": "3e50f79ab40f7943"
+    },
+    {
+      "id": 4,
+      "from": "3e50f79ab40f7943",
+      "to": "3a357ddd344fa303"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "3a357ddd344fa303",
+      "to": "3a357ddd344fa303"
+    },
+    {
+      "id": 3,
+      "from": "3a357ddd344fa303",
+      "to": "4e2da0f5ea5aa29d"
+    },
+    {
+      "id": 4,
+      "from": "4e2da0f5ea5aa29d",
+      "to": "3a357ddd344fa303"
+    },
+    {
+      "id": 3,
+      "from": "3a357ddd344fa303",
+      "to": "4e2da0f5ea5aa29d"
+    },
+    {
+      "id": 3,
+      "from": "4e2da0f5ea5aa29d",
+      "to": "350b040d01b084f2"
+    },
+    {
+      "id": 3,
+      "from": "350b040d01b084f2",
+      "to": "f2fc2d2ed1ed8a38"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      },
+      "from": "f2fc2d2ed1ed8a38",
+      "to": "f2fc2d2ed1ed8a38"
+    },
+    {
+      "id": 3,
+      "from": "f2fc2d2ed1ed8a38",
+      "to": "91b04c554d476328"
+    },
+    {
+      "id": 5,
+      "from": "91b04c554d476328",
+      "to": "af799b829a729581"
+    },
+    {
+      "id": 4,
+      "from": "af799b829a729581",
+      "to": "a4eb861f27b78715"
+    },
+    {
+      "id": 4,
+      "from": "a4eb861f27b78715",
+      "to": "49d434c3f05108d6"
+    },
+    {
+      "id": 4,
+      "from": "49d434c3f05108d6",
+      "to": "4c88b0c542093ccd"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      },
+      "from": "4c88b0c542093ccd",
+      "to": "4c88b0c542093ccd"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "4c88b0c542093ccd",
+      "to": "4c88b0c542093ccd"
+    },
+    {
+      "id": 1,
+      "from": "4c88b0c542093ccd",
+      "to": "2932bfc539962d76"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "2932bfc539962d76",
+      "to": "2932bfc539962d76"
+    },
+    {
+      "id": 1,
+      "from": "2932bfc539962d76",
+      "to": "9f0047765dae5724"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "9f0047765dae5724",
+      "to": "9f0047765dae5724"
+    },
+    {
+      "id": 1,
+      "from": "9f0047765dae5724",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 1,
+      "from": "e4efa8af6f54ad17",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 2,
+      "from": "e4efa8af6f54ad17",
+      "to": "2b7456539b643d9d"
+    },
+    {
+      "id": 1,
+      "from": "2b7456539b643d9d",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 3,
+      "from": "e4efa8af6f54ad17",
+      "to": "848aca58fea41d06"
+    },
+    {
+      "id": 4,
+      "from": "848aca58fea41d06",
+      "to": "b9aef4799a89cf43"
+    },
+    {
+      "id": 2,
+      "from": "b9aef4799a89cf43",
+      "to": "2b7456539b643d9d"
+    },
+    {
+      "id": 2,
+      "from": "2b7456539b643d9d",
+      "to": "afb0d9edc5f85d3b"
+    },
+    {
+      "id": 1,
+      "from": "afb0d9edc5f85d3b",
+      "to": "9f0047765dae5724"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      },
+      "from": "9f0047765dae5724",
+      "to": "9f0047765dae5724"
+    },
+    {
+      "id": 4,
+      "from": "9f0047765dae5724",
+      "to": "1da7ddc11ae052a7"
+    },
+    {
+      "id": 1,
+      "from": "1da7ddc11ae052a7",
+      "to": "4afbb9f5c0a73c54"
+    },
+    {
+      "id": 3,
+      "from": "4afbb9f5c0a73c54",
+      "to": "e017d67b6c771b35"
+    },
+    {
+      "id": 1,
+      "from": "e017d67b6c771b35",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 2,
+      "from": "e4efa8af6f54ad17",
+      "to": "2b7456539b643d9d"
+    },
+    {
+      "id": 2,
+      "from": "2b7456539b643d9d",
+      "to": "afb0d9edc5f85d3b"
+    },
+    {
+      "id": 1,
+      "from": "afb0d9edc5f85d3b",
+      "to": "9f0047765dae5724"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "9f0047765dae5724",
+      "to": "9f0047765dae5724"
+    },
+    {
+      "id": 1,
+      "from": "9f0047765dae5724",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      },
+      "from": "e4efa8af6f54ad17",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 1,
+      "from": "e4efa8af6f54ad17",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      },
+      "from": "e4efa8af6f54ad17",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 4,
+      "from": "e4efa8af6f54ad17",
+      "to": "bea12168e3d2c64d"
+    },
+    {
+      "id": 2,
+      "from": "bea12168e3d2c64d",
+      "to": "e2399f2907288d62"
+    },
+    {
+      "id": 3,
+      "from": "e2399f2907288d62",
+      "to": "044c9fa228adce37"
+    },
+    {
+      "id": 1,
+      "from": "044c9fa228adce37",
+      "to": "e4efa8af6f54ad17"
+    },
+    {
+      "id": 5,
+      "from": "e4efa8af6f54ad17",
+      "to": "6b01b7095169e1c1"
+    }
+  ],
+  "at210": {
+    "physical": {
+      "from": [
+        6,
+        9
+      ],
+      "to": [
+        9,
+        6
+      ],
+      "stationaryMerchantBefore": [
+        [
+          6,
+          13
+        ]
+      ],
+      "stationaryMerchantAfter": [
+        [
+          6,
+          13
+        ]
+      ],
+      "indicated": [
+        9,
+        6
+      ],
+      "landedOnValidMark": true,
+      "subjectMatches": null,
+      "markMatches": null
+    },
+    "controls": [
+      {
+        "q": 1,
+        "to": [
+          6,
+          9
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 2,
+        "to": [
+          6,
+          10
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 3,
+        "to": [
+          5,
+          9
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 4,
+        "to": [
+          7,
+          9
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      },
+      {
+        "q": 5,
+        "to": [
+          9,
+          6
+        ],
+        "other": [
+          [
+            6,
+            13
+          ]
+        ]
+      }
+    ],
+    "matches": [
+      {
+        "relation": "indicator_marks_subject_arrival_after_action",
+        "actor": "524c84acc9ad5eca57fd7923",
+        "indicator": "d74c41540e5c4c1135206209",
+        "subjectForm": "17acd4dc945da8b6dbcfcdb49a71e90596b0e97031003f1b99ee16ab511d7f08",
+        "indicatorForm": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6",
+        "before": "test-q210:epoch:1:revision:210:frame:e4efa8af6f54ad17",
+        "after": "test-q210:epoch:1:revision:211:frame:6b01b7095169e1c1",
+        "command": "ACTION5",
+        "observedPeerCount": 0,
+        "from": [
+          6,
+          9
+        ],
+        "indicated": [
+          9,
+          6
+        ],
+        "arrival": [
+          9,
+          6
+        ]
+      }
+    ]
+  },
+  "guided": {
+    "l1": [
+      {
+        "action": 3,
+        "physical": {
+          "from": [
+            6,
+            12
+          ],
+          "to": [
+            12,
+            6
+          ],
+          "stationaryMerchantBefore": [
+            [
+              4,
+              13
+            ]
+          ],
+          "stationaryMerchantAfter": [
+            [
+              4,
+              13
+            ]
+          ],
+          "indicated": [
+            12,
+            6
+          ],
+          "landedOnValidMark": true,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "matches": [
+          {
+            "relation": "indicator_marks_subject_arrival_after_action",
+            "actor": "524c84acc9ad5eca57fd7923",
+            "indicator": "d74c41540e5c4c1135206209",
+            "subjectForm": "f8f4b355e08c8496430afc737ba598901c41a5d9209031c2aa7d6d8e6715dccc",
+            "indicatorForm": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6",
+            "before": "test-guided:epoch:1:revision:3:frame:294910b031277dcf",
+            "after": "test-guided:epoch:1:revision:4:frame:524c8d76b270a202",
+            "command": "ACTION5",
+            "observedPeerCount": 0,
+            "from": [
+              6,
+              12
+            ],
+            "indicated": [
+              12,
+              6
+            ],
+            "arrival": [
+              12,
+              6
+            ]
+          }
+        ]
+      },
+      {
+        "action": 14,
+        "physical": {
+          "from": [
+            6,
+            12
+          ],
+          "to": [
+            12,
+            6
+          ],
+          "stationaryMerchantBefore": [
+            [
+              17,
+              5
+            ]
+          ],
+          "stationaryMerchantAfter": [
+            [
+              17,
+              5
+            ]
+          ],
+          "indicated": [
+            12,
+            6
+          ],
+          "landedOnValidMark": true,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "matches": []
+      }
+    ],
+    "l2": [
+      {
+        "at": 20,
+        "levelAction": 1,
+        "selected": "witnessedPreview",
+        "referenceAction": 4,
+        "forecast": {
+          "sealed": "7b13697c004e80948297a589175edf69c9638233789d71ec900ee3f806d28089",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            6,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            7,
+            3
+          ],
+          "situation": {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              7,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                6,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                6,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                5,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                6,
+                3
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            7,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 21,
+        "levelAction": 2,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "cd1989917d12fe0f044f9ba638ac028ea677e8118bd1a1503d0a1841ba9ea5ba",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            7,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            8,
+            3
+          ],
+          "situation": {
+            "from": [
+              7,
+              3
+            ],
+            "to": [
+              8,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                7,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                7,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                6,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                7,
+                3
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            7,
+            3
+          ],
+          "to": [
+            7,
+            4
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 22,
+        "levelAction": 3,
+        "selected": "witnessedPreview",
+        "referenceAction": 4,
+        "forecast": {
+          "sealed": "77458ad8a9875d10ee661665985b87000fa532de49305e470883b412b31ad0a1",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            7,
+            4
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            8,
+            4
+          ],
+          "situation": {
+            "from": [
+              7,
+              4
+            ],
+            "to": [
+              8,
+              4
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                7,
+                3
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                7,
+                5
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                6,
+                4
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            7,
+            4
+          ],
+          "to": [
+            8,
+            4
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 23,
+        "levelAction": 4,
+        "selected": "witnessedPreview",
+        "referenceAction": 5,
+        "forecast": {
+          "sealed": "2412484c654479d07f447c7118ba2f84dd342b5e5a7c7414da7ed2f6cc59ad52",
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "from": [
+            9,
+            3
+          ],
+          "indicated": [
+            8,
+            3
+          ],
+          "witness": "test-guided:epoch:1:revision:3:frame:294910b031277dcf",
+          "status": "contradicted",
+          "actual": [
+            8,
+            4
+          ],
+          "situation": {
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              9,
+              3
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": false,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                8,
+                3
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                8,
+                5
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                7,
+                4
+              ]
+            },
+            {
+              "q": 4,
+              "to": [
+                9,
+                4
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            8,
+            4
+          ],
+          "to": [
+            9,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            9,
+            3
+          ],
+          "landedOnValidMark": true,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "3e3814be389f0c5dec3a79342032426f572f7619a53ce705add46fbb9f87d31b",
+          "subject": [
+            8,
+            4
+          ],
+          "mark": [
+            9,
+            3
+          ],
+          "actual": [
+            9,
+            3
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              9,
+              3
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 24,
+        "levelAction": 5,
+        "selected": "witnessedPreview",
+        "referenceAction": 3,
+        "forecast": {
+          "sealed": "65ab20de678c31db404524424e5e179e2924d1c0fc79bb77cd65de4336f66573",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            9,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            10,
+            3
+          ],
+          "situation": {
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              10,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              8,
+              4
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                9,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                9,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                8,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                8,
+                4
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            9,
+            3
+          ],
+          "to": [
+            8,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            8,
+            4
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "48638691734d675d0c24af49381f04da977f0a781ca3a5da132b6effee6fb385",
+          "subject": [
+            9,
+            3
+          ],
+          "mark": [
+            8,
+            4
+          ],
+          "actual": [
+            8,
+            4
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              8,
+              4
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 25,
+        "levelAction": 6,
+        "selected": "witnessedPreview",
+        "referenceAction": 3,
+        "forecast": {
+          "sealed": "69e4d4a5b1b667563a366eea9ab6bc7d34b54e29c1cc56436d9915e3211cdca9",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            8,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            9,
+            3
+          ],
+          "situation": {
+            "from": [
+              8,
+              3
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              7,
+              4
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                8,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                8,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                7,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                7,
+                4
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            7,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            7,
+            4
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "01c08d2bbf8ed2c45a4dbf081ce2f73bf2fb8d3e76746398ef4b95cc0e6e9723",
+          "subject": [
+            8,
+            3
+          ],
+          "mark": [
+            7,
+            4
+          ],
+          "actual": [
+            7,
+            4
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              8,
+              3
+            ],
+            "to": [
+              7,
+              4
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              7,
+              4
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 26,
+        "levelAction": 7,
+        "selected": "witnessedPreview",
+        "referenceAction": 3,
+        "forecast": {
+          "sealed": "8eaad99bdd87e54d722ffa033ae1c1f6c69f596d584179e8011a21012e6625c4",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            7,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            8,
+            3
+          ],
+          "situation": {
+            "from": [
+              7,
+              3
+            ],
+            "to": [
+              8,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              6,
+              4
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                7,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                7,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                6,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                6,
+                4
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            7,
+            3
+          ],
+          "to": [
+            6,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            6,
+            4
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "fb9665699930079ec144c41fa58f34dca673acf1028dcbfd1b2291fd7af62873",
+          "subject": [
+            7,
+            3
+          ],
+          "mark": [
+            6,
+            4
+          ],
+          "actual": [
+            6,
+            4
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              7,
+              3
+            ],
+            "to": [
+              6,
+              4
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              6,
+              4
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 27,
+        "levelAction": 8,
+        "selected": "witnessedPreview",
+        "referenceAction": 4,
+        "forecast": {
+          "sealed": "534bb0e77fc688fe51d744056c1ab4d5115978591ae175c68a8662113a96426e",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            6,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            7,
+            3
+          ],
+          "situation": {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              7,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              4
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                6,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                6,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                6,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                4
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            6,
+            3
+          ],
+          "to": [
+            7,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            5,
+            4
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "3feafc6505456e187de413c406a491a21cc53968f37b726efe331b71a6dec428",
+          "subject": [
+            6,
+            3
+          ],
+          "mark": [
+            5,
+            4
+          ],
+          "actual": [
+            5,
+            4
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              5,
+              4
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              4
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 28,
+        "levelAction": 9,
+        "selected": "witnessedPreview",
+        "referenceAction": 4,
+        "forecast": {
+          "sealed": "0082522c0fe3406ebe901e5cad949d55a8c117257af08a9d9bfa5adbe548d7af",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            7,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            8,
+            3
+          ],
+          "situation": {
+            "from": [
+              7,
+              3
+            ],
+            "to": [
+              8,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                7,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                7,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                6,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                7,
+                3
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            7,
+            3
+          ],
+          "to": [
+            8,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 29,
+        "levelAction": 10,
+        "selected": "witnessedPreview",
+        "referenceAction": 4,
+        "forecast": {
+          "sealed": "41e8ff9559255292b31ec3b80ea08f6731f738072a6b29cb66365955d834893e",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            8,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            9,
+            3
+          ],
+          "situation": {
+            "from": [
+              8,
+              3
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                8,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                8,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                7,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                8,
+                3
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            8,
+            3
+          ],
+          "to": [
+            9,
+            3
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 30,
+        "levelAction": 11,
+        "selected": "witnessedPreview",
+        "referenceAction": 5,
+        "forecast": {
+          "sealed": "e8f689463cd808c1d3cfedadf69b19f302e5eb76aed625e12780805878d0cf8a",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            9,
+            3
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            10,
+            3
+          ],
+          "situation": {
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              10,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              7
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                9,
+                2
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                9,
+                4
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                8,
+                3
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                7
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            9,
+            3
+          ],
+          "to": [
+            5,
+            7
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            5,
+            7
+          ],
+          "landedOnValidMark": true,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "8673dc228d1366f765ab5f854b57291b4efaf3b72f92bc4f59baa3fca98c1307",
+          "subject": [
+            9,
+            3
+          ],
+          "mark": [
+            5,
+            7
+          ],
+          "actual": [
+            5,
+            7
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              5,
+              7
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              7
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 31,
+        "levelAction": 12,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "e858de46b494d4098045449283f94f5485fe19487584745e277bdc8a8ddc4869",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            5,
+            7
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            7
+          ],
+          "situation": {
+            "from": [
+              5,
+              7
+            ],
+            "to": [
+              5,
+              7
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              9,
+              3
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                5,
+                7
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                5,
+                8
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                4,
+                7
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                9,
+                3
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            5,
+            7
+          ],
+          "to": [
+            5,
+            8
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            9,
+            3
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "67af536ca2297ad4c61dc506ed4d6c3bed737b0d9c0d7d2c289a17e9b4c8c495",
+          "subject": [
+            5,
+            7
+          ],
+          "mark": [
+            9,
+            3
+          ],
+          "actual": [
+            9,
+            3
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              5,
+              7
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              9,
+              3
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 32,
+        "levelAction": 13,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "f07894e0a7a641229a4fe8346717d60e29a464ee9ff43b398262c2347446841b",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            5,
+            8
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            6,
+            8
+          ],
+          "situation": {
+            "from": [
+              5,
+              8
+            ],
+            "to": [
+              6,
+              8
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              10,
+              3
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                5,
+                7
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                5,
+                9
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                4,
+                8
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                10,
+                3
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            5,
+            8
+          ],
+          "to": [
+            5,
+            9
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            10,
+            3
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "89e66fc8aa6ab3f41678ed567281ba31a6bf602bbeb1f7e9db832fe08f49d0bd",
+          "subject": [
+            5,
+            8
+          ],
+          "mark": [
+            10,
+            3
+          ],
+          "actual": [
+            10,
+            3
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              5,
+              8
+            ],
+            "to": [
+              10,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              10,
+              3
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 33,
+        "levelAction": 14,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "f2cd7865a784ded9fe6af28f93159b198d9140f45d58d73a2fd8a4b0af7a61e0",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            5,
+            9
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            6,
+            9
+          ],
+          "situation": {
+            "from": [
+              5,
+              9
+            ],
+            "to": [
+              6,
+              9
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                5,
+                8
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                5,
+                10
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                4,
+                9
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                9
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            5,
+            9
+          ],
+          "to": [
+            5,
+            10
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 34,
+        "levelAction": 15,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "af253bec0e477fa3768e86af161bda8276f60bc9604733a8c484abc53607d958",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            5,
+            10
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            6,
+            10
+          ],
+          "situation": {
+            "from": [
+              5,
+              10
+            ],
+            "to": [
+              6,
+              10
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                5,
+                9
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                5,
+                11
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                4,
+                10
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                10
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            5,
+            10
+          ],
+          "to": [
+            5,
+            11
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 35,
+        "levelAction": 16,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "44918accceb4f8975ca002e004150922a3cd20f456423fe818a8d7f80552a1f6",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            5,
+            11
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            6,
+            11
+          ],
+          "situation": {
+            "from": [
+              5,
+              11
+            ],
+            "to": [
+              6,
+              11
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                5,
+                10
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                5,
+                12
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                4,
+                11
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                11
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            5,
+            11
+          ],
+          "to": [
+            5,
+            12
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 36,
+        "levelAction": 17,
+        "selected": "witnessedPreview",
+        "referenceAction": 3,
+        "forecast": {
+          "sealed": "9d367d047da9c6cddbe98218f0dda90dcc073100e865f4c6c3acdddc94d5b5ea",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            5,
+            12
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            6,
+            12
+          ],
+          "situation": {
+            "from": [
+              5,
+              12
+            ],
+            "to": [
+              6,
+              12
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                5,
+                11
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                5,
+                13
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                4,
+                12
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                12
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            5,
+            12
+          ],
+          "to": [
+            4,
+            12
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 37,
+        "levelAction": 18,
+        "selected": "witnessedPreview",
+        "referenceAction": 1,
+        "forecast": {
+          "sealed": "6d5f3910489f2cc78e89f79df09472f78ee48156270b591b36ef708788b90a6f",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            12
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            12
+          ],
+          "situation": {
+            "from": [
+              4,
+              12
+            ],
+            "to": [
+              5,
+              12
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              11
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                11
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                13
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                12
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                11
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            12
+          ],
+          "to": [
+            4,
+            11
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            5,
+            11
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "d6ee64e7326385508302c824db05d3368191026ebc38bf850a96931d47d27fbe",
+          "subject": [
+            4,
+            12
+          ],
+          "mark": [
+            5,
+            11
+          ],
+          "actual": [
+            5,
+            11
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              4,
+              12
+            ],
+            "to": [
+              5,
+              11
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              11
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 38,
+        "levelAction": 19,
+        "selected": "witnessedPreview",
+        "referenceAction": 1,
+        "forecast": {
+          "sealed": "f90dd1c9ccf664ce52912f997dd06127a9f11d758324d0e38fb44546c976753f",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            11
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            11
+          ],
+          "situation": {
+            "from": [
+              4,
+              11
+            ],
+            "to": [
+              5,
+              11
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              10
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                10
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                12
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                11
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                10
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            11
+          ],
+          "to": [
+            4,
+            10
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            5,
+            10
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "6901fe76bcf69cb5ba2833db8db7eff0f6bb80002728cd6c460bd49f5a37a3e3",
+          "subject": [
+            4,
+            11
+          ],
+          "mark": [
+            5,
+            10
+          ],
+          "actual": [
+            5,
+            10
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              4,
+              11
+            ],
+            "to": [
+              5,
+              10
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              10
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 39,
+        "levelAction": 20,
+        "selected": "witnessedPreview",
+        "referenceAction": 1,
+        "forecast": {
+          "sealed": "ddd17133d623bbd95cfe5b01dd049c8c2c02a587bcaf2b3758f871d3d778356c",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            10
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            10
+          ],
+          "situation": {
+            "from": [
+              4,
+              10
+            ],
+            "to": [
+              5,
+              10
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              9
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                9
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                11
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                10
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                9
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            10
+          ],
+          "to": [
+            4,
+            9
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            5,
+            9
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "cd31dee47906f75650ae72e3b4e35c9265d04aadf36c172edef371b9692267bf",
+          "subject": [
+            4,
+            10
+          ],
+          "mark": [
+            5,
+            9
+          ],
+          "actual": [
+            5,
+            9
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              4,
+              10
+            ],
+            "to": [
+              5,
+              9
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              9
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 40,
+        "levelAction": 21,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "b7ee3d4f1584620966e5c8f34eb943579bc038af035cc21a85435f477bd62a54",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            9
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            9
+          ],
+          "situation": {
+            "from": [
+              4,
+              9
+            ],
+            "to": [
+              5,
+              9
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              8
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                8
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                10
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                9
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                5,
+                8
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            9
+          ],
+          "to": [
+            4,
+            10
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            5,
+            8
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "ef628ddcd9308e62f75708b8689c4152bd2c22f98e7957d930bffabce06409fd",
+          "subject": [
+            4,
+            9
+          ],
+          "mark": [
+            5,
+            8
+          ],
+          "actual": [
+            5,
+            8
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              4,
+              9
+            ],
+            "to": [
+              5,
+              8
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              5,
+              8
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 41,
+        "levelAction": 22,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "64c0773ae1093f08727235ac95a3e24b64d568ba7a6f672d77f545d5e72975cf",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            10
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            10
+          ],
+          "situation": {
+            "from": [
+              4,
+              10
+            ],
+            "to": [
+              5,
+              10
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              6,
+              8
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                9
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                11
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                10
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                6,
+                8
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            10
+          ],
+          "to": [
+            4,
+            11
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            6,
+            8
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "eed5eeeaa5f0a9900c001b5fd3c22b680bfe52261cf76bb628108f9becaa2984",
+          "subject": [
+            4,
+            10
+          ],
+          "mark": [
+            6,
+            8
+          ],
+          "actual": [
+            6,
+            8
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              4,
+              10
+            ],
+            "to": [
+              6,
+              8
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              6,
+              8
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 42,
+        "levelAction": 23,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "1029044842810557f17565962892174b8cca240a31a042e6bfce8a13a5ef0b8e",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            11
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            11
+          ],
+          "situation": {
+            "from": [
+              4,
+              11
+            ],
+            "to": [
+              5,
+              11
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                10
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                12
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                11
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                4,
+                11
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            11
+          ],
+          "to": [
+            4,
+            12
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 43,
+        "levelAction": 24,
+        "selected": "witnessedPreview",
+        "referenceAction": 2,
+        "forecast": {
+          "sealed": "beb786c98011a235fb05a3cdde946bb831cf2e08b1df42ec5931b200d46fd35d",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            12
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            12
+          ],
+          "situation": {
+            "from": [
+              4,
+              12
+            ],
+            "to": [
+              5,
+              12
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                11
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                13
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                12
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                4,
+                12
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            12
+          ],
+          "to": [
+            4,
+            13
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": null,
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        }
+      },
+      {
+        "at": 44,
+        "levelAction": 25,
+        "selected": "witnessedPreview",
+        "referenceAction": 5,
+        "forecast": {
+          "sealed": "9a5e7107b8a3c54b72208a8873955bb51f3968ba59b81cddcccede9b95cb418f",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            4,
+            13
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            5,
+            13
+          ],
+          "situation": {
+            "from": [
+              4,
+              13
+            ],
+            "to": [
+              5,
+              13
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              9,
+              8
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                4,
+                12
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                4,
+                14
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                3,
+                13
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                9,
+                8
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            4,
+            13
+          ],
+          "to": [
+            9,
+            8
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            9,
+            8
+          ],
+          "landedOnValidMark": true,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "8896d2ac5aeedf9ad575135a2ade6ad3c3f3ac926a43d7cd6bdc77b77889fb16",
+          "subject": [
+            4,
+            13
+          ],
+          "mark": [
+            9,
+            8
+          ],
+          "actual": [
+            9,
+            8
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              4,
+              13
+            ],
+            "to": [
+              9,
+              8
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              9,
+              8
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 45,
+        "levelAction": 26,
+        "selected": "witnessedPreview",
+        "referenceAction": 4,
+        "forecast": {
+          "sealed": "36fca2d832cf6919578ab96f420fc69b3f35a865d209b7e82ae3a15627936377",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            9,
+            8
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "contradicted",
+          "actual": [
+            10,
+            8
+          ],
+          "situation": {
+            "from": [
+              9,
+              8
+            ],
+            "to": [
+              10,
+              8
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              4,
+              13
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                9,
+                7
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                9,
+                9
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                9,
+                8
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                4,
+                13
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            9,
+            8
+          ],
+          "to": [
+            10,
+            8
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            4,
+            13
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "90103f1ed7ff188c5b02320f3dcb4b2a147980d0b0fe76ae0607a8e81d91cf63",
+          "subject": [
+            9,
+            8
+          ],
+          "mark": [
+            4,
+            13
+          ],
+          "actual": [
+            4,
+            13
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              9,
+              8
+            ],
+            "to": [
+              4,
+              13
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              4,
+              13
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      },
+      {
+        "at": 46,
+        "levelAction": 27,
+        "selected": "witnessedPreview",
+        "referenceAction": 4,
+        "forecast": {
+          "sealed": "431fac7530a4c392a845d73f6fb0d858854fe57708b78993df22431807c49527",
+          "op": 4,
+          "basis": "observed_in_previous_level",
+          "from": [
+            10,
+            8
+          ],
+          "indicated": [
+            11,
+            8
+          ],
+          "witness": "test-guided:epoch:1:revision:9:frame:7bde207587269d47",
+          "status": "inapplicable",
+          "actual": [
+            6,
+            11
+          ],
+          "situation": {
+            "from": [
+              10,
+              8
+            ],
+            "to": [
+              11,
+              8
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              4,
+              14
+            ],
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          },
+          "rivals": [
+            {
+              "q": 1,
+              "to": [
+                10,
+                7
+              ]
+            },
+            {
+              "q": 2,
+              "to": [
+                10,
+                9
+              ]
+            },
+            {
+              "q": 3,
+              "to": [
+                9,
+                8
+              ]
+            },
+            {
+              "q": 5,
+              "to": [
+                4,
+                14
+              ]
+            }
+          ]
+        },
+        "physical": {
+          "from": [
+            10,
+            8
+          ],
+          "to": [
+            11,
+            8
+          ],
+          "stationaryMerchantBefore": [],
+          "stationaryMerchantAfter": [],
+          "indicated": [
+            4,
+            14
+          ],
+          "landedOnValidMark": false,
+          "subjectMatches": null,
+          "markMatches": null
+        },
+        "isolated": {
+          "op": 5,
+          "basis": "observed_in_previous_level",
+          "seal": "f8c56d3620348f5dfef8cc52fb8d23d63229923e56d94fd18cfbed5fd989ef16",
+          "subject": [
+            10,
+            8
+          ],
+          "mark": [
+            4,
+            14
+          ],
+          "actual": [
+            4,
+            14
+          ],
+          "status": "realized",
+          "physical": {
+            "from": [
+              10,
+              8
+            ],
+            "to": [
+              4,
+              14
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              4,
+              14
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        }
+      }
+    ],
+    "distinctBindings": 9,
+    "officialL1": 1,
+    "identifiedRuleRetained": true,
+    "closedLoops": [
+      {
+        "start": "official_level_entry",
+        "actions": 6,
+        "stop": "family_abstained",
+        "firstL1Read": {
+          "step": 1,
+          "op": 4,
+          "seal": "7b13697c004e80948297a589175edf69c9638233789d71ec900ee3f806d28089",
+          "forecastBasis": "observed_in_previous_level",
+          "from": [
+            6,
+            3
+          ],
+          "mark": [
+            11,
+            8
+          ],
+          "result": "contradicted",
+          "physical": {
+            "from": [
+              6,
+              3
+            ],
+            "to": [
+              7,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": null,
+            "landedOnValidMark": false,
+            "subjectMatches": true,
+            "markMatches": false
+          }
+        },
+        "firstCorrectRead": null,
+        "physicalActivations": [],
+        "territory": [
+          "7,3",
+          "8,3",
+          "9,3",
+          "9,2"
+        ],
+        "counts": {
+          "witnessedPreview": 4,
+          "prepare": 1,
+          "probe": 1
+        },
+        "won": false
+      },
+      {
+        "start": "after_three_public_demonstration_moves",
+        "actions": 53,
+        "stop": "family_abstained",
+        "firstL1Read": {
+          "step": 1,
+          "op": 5,
+          "seal": "2412484c654479d07f447c7118ba2f84dd342b5e5a7c7414da7ed2f6cc59ad52",
+          "forecastBasis": "observed_in_previous_level",
+          "from": [
+            9,
+            3
+          ],
+          "mark": [
+            8,
+            3
+          ],
+          "result": "contradicted",
+          "physical": {
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              9,
+              3
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": false,
+            "markMatches": false
+          }
+        },
+        "firstCorrectRead": {
+          "step": 17,
+          "op": 5,
+          "seal": "2b0ced485dbbf61f1a4a6b06c678556610bba3cccb948c80f1115b64beabeb00",
+          "forecastBasis": "observed_here",
+          "from": [
+            8,
+            5
+          ],
+          "mark": [
+            10,
+            3
+          ],
+          "result": "realized",
+          "physical": {
+            "from": [
+              8,
+              5
+            ],
+            "to": [
+              10,
+              3
+            ],
+            "stationaryMerchantBefore": [],
+            "stationaryMerchantAfter": [],
+            "indicated": [
+              10,
+              3
+            ],
+            "landedOnValidMark": true,
+            "subjectMatches": true,
+            "markMatches": true
+          }
+        },
+        "physicalActivations": [
+          {
+            "step": 1,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 8,
+            "from": [
+              10,
+              3
+            ],
+            "to": [
+              8,
+              5
+            ]
+          },
+          {
+            "step": 9,
+            "from": [
+              8,
+              5
+            ],
+            "to": [
+              10,
+              3
+            ]
+          },
+          {
+            "step": 11,
+            "from": [
+              10,
+              3
+            ],
+            "to": [
+              8,
+              5
+            ]
+          },
+          {
+            "step": 12,
+            "from": [
+              8,
+              5
+            ],
+            "to": [
+              10,
+              3
+            ]
+          },
+          {
+            "step": 14,
+            "from": [
+              10,
+              3
+            ],
+            "to": [
+              8,
+              5
+            ]
+          },
+          {
+            "step": 15,
+            "from": [
+              8,
+              5
+            ],
+            "to": [
+              10,
+              3
+            ]
+          },
+          {
+            "step": 16,
+            "from": [
+              10,
+              3
+            ],
+            "to": [
+              8,
+              5
+            ]
+          },
+          {
+            "step": 17,
+            "from": [
+              8,
+              5
+            ],
+            "to": [
+              10,
+              3
+            ]
+          },
+          {
+            "step": 18,
+            "from": [
+              10,
+              3
+            ],
+            "to": [
+              8,
+              5
+            ]
+          },
+          {
+            "step": 20,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 21,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 22,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 23,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 39,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 40,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 41,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 42,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 43,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 44,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 45,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 46,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 47,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 48,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 49,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          },
+          {
+            "step": 50,
+            "from": [
+              9,
+              3
+            ],
+            "to": [
+              8,
+              4
+            ]
+          },
+          {
+            "step": 51,
+            "from": [
+              8,
+              4
+            ],
+            "to": [
+              9,
+              3
+            ]
+          }
+        ],
+        "territory": [
+          "9,3",
+          "10,3",
+          "8,5",
+          "8,4",
+          "9,4",
+          "10,4"
+        ],
+        "counts": {
+          "witnessedPreview": 36,
+          "prepare": 1,
+          "probe": 2,
+          "accessTrigger": 1,
+          "conditionSetup": 1,
+          "conditionTrigger": 1,
+          "accessSetup": 2,
+          "control": 1,
+          "instrumentSite": 5,
+          "transportControl": 1,
+          "frontierProbe": 1,
+          "occupancy": 1
+        },
+        "won": false
+      }
+    ]
+  },
+  "candidate": "456be4fd8713cfab058f5e7a4127546c9da4bd02",
+  "autonomous": [
+    {
+      "level": 1,
+      "actions": 422,
+      "forecastCount": 253,
+      "physicalTransfers": 0,
+      "exactNamedTransfers": 0,
+      "wrongSubjectCount": 129,
+      "firstNamed": null,
+      "uniqueNamedSites": [],
+      "official": false,
+      "visitedCells": 28
+    },
+    {
+      "level": 2,
+      "actions": 505,
+      "forecastCount": 35,
+      "physicalTransfers": 0,
+      "exactNamedTransfers": 0,
+      "wrongSubjectCount": 1,
+      "firstNamed": null,
+      "uniqueNamedSites": [],
+      "official": false,
+      "visitedCells": 18
+    }
+  ]
+}

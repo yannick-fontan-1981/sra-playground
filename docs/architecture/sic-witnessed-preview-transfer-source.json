@@ -1,0 +1,2032 @@
+{
+  "games": 100,
+  "publicTransitions": 2985,
+  "gamesWithBindings": 54,
+  "scoredExposures": 84,
+  "upperTests": 9,
+  "upperOutcomes": {
+    "contradicted": 6,
+    "realized": 2,
+    "unobserved": 1
+  },
+  "byGame": [
+    {
+      "code": "AMZE",
+      "observed": 3,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 3,
+          "bindings": 13,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "AR25",
+      "observed": 17,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 17,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "AS66",
+      "observed": 11,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 11,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "BP35",
+      "observed": 54,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 54,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CASC",
+      "observed": 6,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 6,
+          "bindings": 11,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CATL",
+      "observed": 8,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 8,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CATR",
+      "observed": 12,
+      "scored": 3,
+      "byLevel": {
+        "1": {
+          "steps": 3,
+          "bindings": 0,
+          "inherited": 0
+        },
+        "2": {
+          "steps": 4,
+          "bindings": 10,
+          "inherited": 0
+        },
+        "3": {
+          "steps": 5,
+          "bindings": 14,
+          "inherited": 10
+        }
+      }
+    },
+    {
+      "code": "CAVA",
+      "observed": 7,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 7,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CD82",
+      "observed": 9,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 9,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CGWL",
+      "observed": 15,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 15,
+          "bindings": 1,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CLRS",
+      "observed": 17,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 17,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CN04",
+      "observed": 18,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 18,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "COLM",
+      "observed": 20,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 20,
+          "bindings": 23,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "COMB",
+      "observed": 8,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 8,
+          "bindings": 7,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CONN",
+      "observed": 24,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 24,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CRAF",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "CWSE",
+      "observed": 9,
+      "scored": 2,
+      "byLevel": {
+        "1": {
+          "steps": 4,
+          "bindings": 7,
+          "inherited": 0
+        },
+        "2": {
+          "steps": 5,
+          "bindings": 7,
+          "inherited": 7
+        }
+      }
+    },
+    {
+      "code": "DAME",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 12,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "DC22",
+      "observed": 24,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 24,
+          "bindings": 1,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "DICO",
+      "observed": 5,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "DNOI",
+      "observed": 3,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 3,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "ELAS",
+      "observed": 16,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 16,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "ESCT",
+      "observed": 16,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 16,
+          "bindings": 20,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "ETAG",
+      "observed": 7,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 7,
+          "bindings": 15,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "EVAS",
+      "observed": 3,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 3,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "FITE",
+      "observed": 20,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 20,
+          "bindings": 1,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "FOGW",
+      "observed": 18,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 18,
+          "bindings": 21,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "FT09",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "FUIT",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "G50T",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 3,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "GABA",
+      "observed": 49,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 49,
+          "bindings": 47,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "GARE",
+      "observed": 16,
+      "scored": 3,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 0,
+          "inherited": 0
+        },
+        "2": {
+          "steps": 8,
+          "bindings": 0,
+          "inherited": 0
+        },
+        "3": {
+          "steps": 3,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "GIGO",
+      "observed": 52,
+      "scored": 5,
+      "byLevel": {
+        "1": {
+          "steps": 6,
+          "bindings": 2,
+          "inherited": 0
+        },
+        "2": {
+          "steps": 9,
+          "bindings": 5,
+          "inherited": 2
+        },
+        "3": {
+          "steps": 9,
+          "bindings": 7,
+          "inherited": 5
+        },
+        "4": {
+          "steps": 11,
+          "bindings": 11,
+          "inherited": 7
+        },
+        "5": {
+          "steps": 17,
+          "bindings": 15,
+          "inherited": 11
+        }
+      }
+    },
+    {
+      "code": "GLOB",
+      "observed": 9,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 9,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "GMAP",
+      "observed": 5,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "GORI",
+      "observed": 15,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 15,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "GRAV",
+      "observed": 36,
+      "scored": 5,
+      "byLevel": {
+        "1": {
+          "steps": 2,
+          "bindings": 0,
+          "inherited": 0
+        },
+        "2": {
+          "steps": 10,
+          "bindings": 8,
+          "inherited": 0
+        },
+        "3": {
+          "steps": 6,
+          "bindings": 17,
+          "inherited": 8
+        },
+        "4": {
+          "steps": 8,
+          "bindings": 17,
+          "inherited": 17
+        },
+        "5": {
+          "steps": 10,
+          "bindings": 18,
+          "inherited": 17
+        }
+      }
+    },
+    {
+      "code": "GRIL",
+      "observed": 5,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 1,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "HANO",
+      "observed": 6,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 6,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "HOLE",
+      "observed": 5,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 6,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "HPDL",
+      "observed": 7,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 7,
+          "bindings": 12,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "ISOS",
+      "observed": 3,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 3,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "KA59",
+      "observed": 15,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 15,
+          "bindings": 13,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "KATA",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "KEYD",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 12,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "KLOT",
+      "observed": 30,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 30,
+          "bindings": 11,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "LF52",
+      "observed": 31,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 31,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "LIFE",
+      "observed": 26,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 26,
+          "bindings": 10,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "LKEY",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 29,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "LOGI",
+      "observed": 16,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 16,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "LP85",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "LS19",
+      "observed": 5,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "LS20",
+      "observed": 18,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 18,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "M0R0",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "MEMO",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "MIND",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 6,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "MOTO",
+      "observed": 12,
+      "scored": 2,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 2,
+          "inherited": 0
+        },
+        "2": {
+          "steps": 7,
+          "bindings": 4,
+          "inherited": 2
+        }
+      }
+    },
+    {
+      "code": "ONDE",
+      "observed": 7,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 7,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "PIPE",
+      "observed": 4,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 4,
+          "bindings": 13,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "POLA",
+      "observed": 25,
+      "scored": 5,
+      "byLevel": {
+        "1": {
+          "steps": 2,
+          "bindings": 0,
+          "inherited": 0
+        },
+        "2": {
+          "steps": 3,
+          "bindings": 1,
+          "inherited": 0
+        },
+        "3": {
+          "steps": 4,
+          "bindings": 2,
+          "inherited": 1
+        },
+        "4": {
+          "steps": 7,
+          "bindings": 7,
+          "inherited": 2
+        },
+        "5": {
+          "steps": 9,
+          "bindings": 8,
+          "inherited": 7
+        }
+      }
+    },
+    {
+      "code": "PORT",
+      "observed": 17,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 17,
+          "bindings": 16,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "PRTL",
+      "observed": 6,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 6,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "R11L",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 5,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "RE86",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "RECR",
+      "observed": 3,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 3,
+          "bindings": 1,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "REGN",
+      "observed": 2,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 2,
+          "bindings": 6,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "REWI",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 31,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "RSWP",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "S5I5",
+      "observed": 50,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 50,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SB26",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SC25",
+      "observed": 17,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 17,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SELE",
+      "observed": 30,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 30,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SEQN",
+      "observed": 4,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 4,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SERI",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 74,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SIGN",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SK48",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 14,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SKBN",
+      "observed": 22,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 22,
+          "bindings": 30,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SMLP",
+      "observed": 47,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 47,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SNAR",
+      "observed": 17,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 17,
+          "bindings": 23,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SP80",
+      "observed": 30,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 30,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SPOR",
+      "observed": 18,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 18,
+          "bindings": 3,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "STCK",
+      "observed": 3,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 3,
+          "bindings": 2,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SU15",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 1,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SWCH",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "SYME",
+      "observed": 9,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 9,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "TEQU",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 37,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "THER",
+      "observed": 21,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 21,
+          "bindings": 9,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "TICT",
+      "observed": 5,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 5,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "TN36",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "TR87",
+      "observed": 22,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 22,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "TRCP",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "TRIA",
+      "observed": 20,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 20,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "TU93",
+      "observed": 50,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 50,
+          "bindings": 9,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "UPST",
+      "observed": 30,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 30,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "VALV",
+      "observed": 25,
+      "scored": 1,
+      "byLevel": {
+        "1": {
+          "steps": 25,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "VC33",
+      "observed": 50,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 50,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "VOIS",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 10,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "WA30",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 0,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "WEAV",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 17,
+          "inherited": 0
+        }
+      }
+    },
+    {
+      "code": "ZIPP",
+      "observed": 60,
+      "scored": 0,
+      "byLevel": {
+        "1": {
+          "steps": 60,
+          "bindings": 66,
+          "inherited": 0
+        }
+      }
+    }
+  ],
+  "tests": [
+    {
+      "code": "CATR",
+      "level": 3,
+      "seal": "363a684e2cd070902a17589dac68b77584ba0d4ac88182409460e7846cfa3f08",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"c049974bc3d06fb03155410d\",\"00abc3ef589254e48ac745cf\",\"ACTION6\",\"indicator\"]",
+        "actor": "c049974bc3d06fb03155410d",
+        "indicator": "00abc3ef589254e48ac745cf",
+        "gesture": {
+          "op": "ACTION6",
+          "point": "indicator"
+        },
+        "command": "ACTION6:42,51",
+        "from": [
+          42,
+          102
+        ],
+        "indicated": [
+          84,
+          102
+        ],
+        "peers": [],
+        "before": "CATR:epoch:3:revision:9:frame:908a46930d441d60f24028c5772693da59ac51f615839f11b51c0d3fe1e550f8",
+        "epoch": 3,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "CATR:epoch:2:revision:6:frame:0e4b4bfae02b2afbbb3b8ba8fd52dfa9c21d1d14a34096076dbd925871f9ee6e",
+          "after": "CATR:epoch:2:revision:7:frame:e9d634e38a12bfd0744f54b6ea7ac456809b180b7f56de71e2f7af56d573529f",
+          "epoch": 2,
+          "command": "ACTION6:38,51",
+          "from": [
+            42,
+            102
+          ],
+          "indicated": [
+            84,
+            102
+          ],
+          "arrived": [
+            84,
+            102
+          ],
+          "peers": [],
+          "fromBox": [
+            13,
+            43,
+            29,
+            59
+          ],
+          "arrivedBox": [
+            34,
+            43,
+            50,
+            59
+          ],
+          "indicatorForm": "77bf31bc54962a916750fe204664ff8737fa7d9c6ec145eadf82a58516114fb0",
+          "subjectForm": "57a6f0479c115df9c9ac873fffc121841ccd97e90c63e885d8535c65b2ba0d69",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION6:42,51",
+          "publicHash": "908a46930d441d60f24028c5772693da59ac51f615839f11b51c0d3fe1e550f8",
+          "subject": [
+            42,
+            102
+          ],
+          "status": "contradicted"
+        },
+        {
+          "q": "ACTION7",
+          "publicHash": "ce1fda4d59a5bad94c080babf49f5ee077fe767b78d9e18ebc5496c6b5513f5c",
+          "subject": null,
+          "status": "unobserved"
+        }
+      ]
+    },
+    {
+      "code": "GRAV",
+      "level": 3,
+      "seal": "d24666febbc7440864e05676d189a737509780541edc472e03803cc7bce1377d",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"e102d4488ae0a028c4e3d8f5\",\"fd1eb5d3fde814ebf37be4b7\",\"ACTION1\",null]",
+        "actor": "e102d4488ae0a028c4e3d8f5",
+        "indicator": "fd1eb5d3fde814ebf37be4b7",
+        "gesture": {
+          "op": "ACTION1"
+        },
+        "command": "ACTION1",
+        "from": [
+          62,
+          4
+        ],
+        "indicated": [
+          4,
+          62
+        ],
+        "peers": [],
+        "before": "GRAV:epoch:3:revision:14:frame:8f0a87680ed4afad55a0571b051105fa631d2d739e470f9fb2650b32eccc34de",
+        "epoch": 3,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "GRAV:epoch:2:revision:10:frame:351686e5da6dbfe70d19f9cfb2fa2352a18dda37722e9abc0145aa75420310ce",
+          "after": "GRAV:epoch:2:revision:11:frame:9fb5ae37bc5a2e3cc7bdad2ce80edcc0e7f658ebe1d1f847584f2103faab542d",
+          "epoch": 2,
+          "command": "ACTION1",
+          "from": [
+            122,
+            62
+          ],
+          "indicated": [
+            62,
+            4
+          ],
+          "arrived": [
+            62,
+            4
+          ],
+          "peers": [],
+          "fromBox": [
+            60,
+            30,
+            62,
+            32
+          ],
+          "arrivedBox": [
+            30,
+            1,
+            32,
+            3
+          ],
+          "indicatorForm": "c798e059e1f37cf6cd1f52c304b914812fef7dd03cf60ec6891247f337b0640f",
+          "subjectForm": "3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION1",
+          "publicHash": "e88c412fac2434ee6e5f525bcbcabb70673f7954d49220005d98d55cdb0e306a",
+          "subject": [
+            62,
+            4
+          ],
+          "status": "contradicted"
+        },
+        {
+          "q": "ACTION2",
+          "publicHash": "ef9eb2da93abe2a401fd8ea6bcc6ebd893b378cc019c944e05faa3de06091972",
+          "subject": [
+            62,
+            122
+          ],
+          "status": "contradicted"
+        }
+      ]
+    },
+    {
+      "code": "GRAV",
+      "level": 4,
+      "seal": "c31530d497f9f38ee119d99ae2c2b0379b2a051b1e0aa7d7f47d34d52d3039da",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"e102d4488ae0a028c4e3d8f5\",\"fd1eb5d3fde814ebf37be4b7\",\"ACTION1\",null]",
+        "actor": "e102d4488ae0a028c4e3d8f5",
+        "indicator": "fd1eb5d3fde814ebf37be4b7",
+        "gesture": {
+          "op": "ACTION1"
+        },
+        "command": "ACTION1",
+        "from": [
+          122,
+          62
+        ],
+        "indicated": [
+          62,
+          4
+        ],
+        "peers": [],
+        "before": "GRAV:epoch:4:revision:20:frame:7b191c4b51fd3a14a6b8d3d1a99acf725f0af4357f414af58f2b8584c5cf2ae5",
+        "epoch": 4,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "GRAV:epoch:3:revision:17:frame:2a3d686d7dc490590ca1b17f947bf8f138827cc6db7e6002bbc9ba25121e5d05",
+          "after": "GRAV:epoch:3:revision:18:frame:8a418b6736f19778a4f59b6a345511de76bf20192792ce9a079374ff9740bf7d",
+          "epoch": 3,
+          "command": "ACTION1",
+          "from": [
+            122,
+            62
+          ],
+          "indicated": [
+            62,
+            4
+          ],
+          "arrived": [
+            62,
+            4
+          ],
+          "peers": [],
+          "fromBox": [
+            60,
+            30,
+            62,
+            32
+          ],
+          "arrivedBox": [
+            30,
+            1,
+            32,
+            3
+          ],
+          "indicatorForm": "c798e059e1f37cf6cd1f52c304b914812fef7dd03cf60ec6891247f337b0640f",
+          "subjectForm": "3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION1",
+          "publicHash": "235d7c9ae2fde4756c72505b4445a7d9ecfc2252e5dfcebc0d1ac30945b29949",
+          "subject": [
+            62,
+            4
+          ],
+          "status": "realized"
+        },
+        {
+          "q": "ACTION2",
+          "publicHash": "f619e46fff23fd184cbf486d083caab2556c8ffc7fc2ae5b31d7c45579f5dfec",
+          "subject": [
+            62,
+            122
+          ],
+          "status": "contradicted"
+        }
+      ]
+    },
+    {
+      "code": "GRAV",
+      "level": 5,
+      "seal": "af9c371fa3eade135406741a5a0a5c948acf4516f1a1338c256f0e009607f677",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"e102d4488ae0a028c4e3d8f5\",\"fd1eb5d3fde814ebf37be4b7\",\"ACTION1\",null]",
+        "actor": "e102d4488ae0a028c4e3d8f5",
+        "indicator": "fd1eb5d3fde814ebf37be4b7",
+        "gesture": {
+          "op": "ACTION1"
+        },
+        "command": "ACTION1",
+        "from": [
+          122,
+          62
+        ],
+        "indicated": [
+          62,
+          4
+        ],
+        "peers": [],
+        "before": "GRAV:epoch:5:revision:28:frame:8dbb8b4f6c9c5f568fe8f606133284c3d74cd404aeb7a22fcc70ac73d6ffb795",
+        "epoch": 5,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "GRAV:epoch:4:revision:24:frame:858fbeeea70051c4fcaadc687d4b3ee342819cbb90f399f6120201601a919ceb",
+          "after": "GRAV:epoch:4:revision:25:frame:40b34a4dfe03264b1b22503b2d77673cc780724443056b619c441722acc05bf3",
+          "epoch": 4,
+          "command": "ACTION1",
+          "from": [
+            62,
+            122
+          ],
+          "indicated": [
+            62,
+            4
+          ],
+          "arrived": [
+            62,
+            4
+          ],
+          "peers": [],
+          "fromBox": [
+            30,
+            60,
+            32,
+            62
+          ],
+          "arrivedBox": [
+            30,
+            1,
+            32,
+            3
+          ],
+          "indicatorForm": "c798e059e1f37cf6cd1f52c304b914812fef7dd03cf60ec6891247f337b0640f",
+          "subjectForm": "3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION1",
+          "publicHash": "f0985628945da64156c6bfe70e3b25bc497c30076e3af06386fdd274ca4b3f55",
+          "subject": [
+            62,
+            4
+          ],
+          "status": "realized"
+        },
+        {
+          "q": "ACTION2",
+          "publicHash": "da085c373a693fa6d30ce619a8d1a18375ebaee32fa2d30318131b4900db930f",
+          "subject": [
+            62,
+            122
+          ],
+          "status": "contradicted"
+        }
+      ]
+    },
+    {
+      "code": "GIGO",
+      "level": 4,
+      "seal": "844e4ab5ed5205cc60780d57f117ca2d46671bd0b090116afdd5212a5d6bc441",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"94e49564b8b865b18a4d073b\",\"68ecf00a1737e9c05b9827ff\",\"ACTION2\",null]",
+        "actor": "94e49564b8b865b18a4d073b",
+        "indicator": "68ecf00a1737e9c05b9827ff",
+        "gesture": {
+          "op": "ACTION2"
+        },
+        "command": "ACTION2",
+        "from": [
+          46,
+          54
+        ],
+        "indicated": [
+          46,
+          52
+        ],
+        "peers": [],
+        "before": "GIGO:epoch:4:revision:25:frame:ecf48aa040b0b50b60aa523f57e96db6a931aeba1f9263697132f3e9055942a9",
+        "epoch": 4,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "GIGO:epoch:3:revision:23:frame:b1e728947a67439ca97d09efbe66a19a5112a3329e955c8aa9b70d79fbd3d337",
+          "after": "GIGO:epoch:3:revision:24:frame:fe978a7a2cdde59d1e82813ed92c64530c7e99092f8b485b87af0f2471e249af",
+          "epoch": 3,
+          "command": "ACTION2",
+          "from": [
+            46,
+            56
+          ],
+          "indicated": [
+            46,
+            58
+          ],
+          "arrived": [
+            46,
+            58
+          ],
+          "peers": [],
+          "fromBox": [
+            23,
+            28,
+            23,
+            28
+          ],
+          "arrivedBox": [
+            23,
+            29,
+            23,
+            29
+          ],
+          "indicatorForm": "613842cecb762962eab9e0c2943051de778b921747a96e5fa176670583eb66fa",
+          "subjectForm": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION2",
+          "publicHash": "ecf48aa040b0b50b60aa523f57e96db6a931aeba1f9263697132f3e9055942a9",
+          "subject": [
+            46,
+            54
+          ],
+          "status": "contradicted"
+        },
+        {
+          "q": "ACTION1",
+          "publicHash": "ecf48aa040b0b50b60aa523f57e96db6a931aeba1f9263697132f3e9055942a9",
+          "subject": [
+            46,
+            54
+          ],
+          "status": "contradicted"
+        }
+      ]
+    },
+    {
+      "code": "GIGO",
+      "level": 5,
+      "seal": "4f6d915ea2a61f331a035524e0aeaf9bca8fcde741a950c7c16c826285cd49b9",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"94e49564b8b865b18a4d073b\",\"68ecf00a1737e9c05b9827ff\",\"ACTION3\",null]",
+        "actor": "94e49564b8b865b18a4d073b",
+        "indicator": "68ecf00a1737e9c05b9827ff",
+        "gesture": {
+          "op": "ACTION3"
+        },
+        "command": "ACTION3",
+        "from": [
+          48,
+          30
+        ],
+        "indicated": [
+          48,
+          28
+        ],
+        "peers": [],
+        "before": "GIGO:epoch:5:revision:36:frame:e31a6d74a561f4d8d06fec6ecaeb5cc5672a94eb189fb7b0c3bd93decb4cb035",
+        "epoch": 5,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "GIGO:epoch:4:revision:27:frame:13876834491e10fff15732b7112a07001667c29c247cba41e14ac1de50ef76dd",
+          "after": "GIGO:epoch:4:revision:28:frame:38d452379c4ec952290097bcd226eacaed09538b3b6f4b1e50c87a6bf50e9984",
+          "epoch": 4,
+          "command": "ACTION3",
+          "from": [
+            42,
+            54
+          ],
+          "indicated": [
+            40,
+            54
+          ],
+          "arrived": [
+            40,
+            54
+          ],
+          "peers": [],
+          "fromBox": [
+            21,
+            27,
+            21,
+            27
+          ],
+          "arrivedBox": [
+            20,
+            27,
+            20,
+            27
+          ],
+          "indicatorForm": "613842cecb762962eab9e0c2943051de778b921747a96e5fa176670583eb66fa",
+          "subjectForm": "6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION3",
+          "publicHash": "e31a6d74a561f4d8d06fec6ecaeb5cc5672a94eb189fb7b0c3bd93decb4cb035",
+          "subject": [
+            48,
+            30
+          ],
+          "status": "contradicted"
+        },
+        {
+          "q": "ACTION1",
+          "publicHash": "e31a6d74a561f4d8d06fec6ecaeb5cc5672a94eb189fb7b0c3bd93decb4cb035",
+          "subject": [
+            48,
+            30
+          ],
+          "status": "contradicted"
+        }
+      ]
+    },
+    {
+      "code": "MOTO",
+      "level": 2,
+      "seal": "34e220a80d456b5f8c0bbef9243ceafee3ae568b5457789b739cdb76b7012642",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"c5c5d82ef43dc1c2c30d2c05\",\"fd1eb5d3fde814ebf37be4b7\",\"ACTION6\",\"indicator\"]",
+        "actor": "c5c5d82ef43dc1c2c30d2c05",
+        "indicator": "fd1eb5d3fde814ebf37be4b7",
+        "gesture": {
+          "op": "ACTION6",
+          "point": "indicator"
+        },
+        "command": "ACTION6:6,6",
+        "from": [
+          84,
+          92
+        ],
+        "indicated": [
+          12,
+          12
+        ],
+        "peers": [],
+        "before": "MOTO:epoch:2:revision:6:frame:d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+        "epoch": 2,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "MOTO:epoch:1:revision:2:frame:d48c6c9284e4f43b4bbb0587c9558a46c3218b6b42ba5af75b54d8b006343b6e",
+          "after": "MOTO:epoch:1:revision:3:frame:829af8ce55185553080d4303fc44bc71095fcf8719217a17c4598ef52a0133ca",
+          "epoch": 1,
+          "command": "ACTION6:22,42",
+          "from": [
+            68,
+            60
+          ],
+          "indicated": [
+            44,
+            84
+          ],
+          "arrived": [
+            44,
+            84
+          ],
+          "peers": [],
+          "fromBox": [
+            32,
+            29,
+            36,
+            31
+          ],
+          "arrivedBox": [
+            20,
+            41,
+            24,
+            43
+          ],
+          "indicatorForm": "c798e059e1f37cf6cd1f52c304b914812fef7dd03cf60ec6891247f337b0640f",
+          "subjectForm": "6c3c9690c8e35f5dfb0a92ac2c3c0a4056af97b8bd0aa63cc86620693ca67f2a",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION6:6,6",
+          "publicHash": "d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+          "subject": [
+            84,
+            92
+          ],
+          "status": "contradicted"
+        },
+        {
+          "q": "ACTION1",
+          "publicHash": "d931b706d32c80273423b3dc0af69549bb0b30d3555f710286e55e823f3de89e",
+          "subject": [
+            84,
+            92
+          ],
+          "status": "contradicted"
+        }
+      ]
+    },
+    {
+      "code": "CWSE",
+      "level": 2,
+      "seal": "0e37de47a981fc09fa562ce6dc3f7174c7e36a74315be54a6d9e4df4f9122e0b",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"6d03bdb58aa99e1047447761\",\"49c1c62c0c731c3e3de0dcd2\",\"ACTION4\",null]",
+        "actor": "6d03bdb58aa99e1047447761",
+        "indicator": "49c1c62c0c731c3e3de0dcd2",
+        "gesture": {
+          "op": "ACTION4"
+        },
+        "command": "ACTION4",
+        "from": [
+          9,
+          2
+        ],
+        "indicated": [
+          21,
+          2
+        ],
+        "peers": [],
+        "before": "CWSE:epoch:2:revision:5:frame:f172436b7a7b73f1cf3f0f2a3cd35116acc7325401f6c27a8079e676cd3ce768",
+        "epoch": 2,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "CWSE:epoch:1:revision:2:frame:17dd6cde2c053e405c4101a5f83ae8c8fe16c5d8f253f0f7fdeeb3e4c9e3ef31",
+          "after": "CWSE:epoch:1:revision:3:frame:d95932e4cc8015d46bcd3256376889551ab67f704cc3c549d9916961abf5042e",
+          "epoch": 1,
+          "command": "ACTION4",
+          "from": [
+            9,
+            2
+          ],
+          "indicated": [
+            21,
+            2
+          ],
+          "arrived": [
+            21,
+            2
+          ],
+          "peers": [],
+          "fromBox": [
+            3,
+            1,
+            6,
+            1
+          ],
+          "arrivedBox": [
+            9,
+            1,
+            12,
+            1
+          ],
+          "indicatorForm": "2adf2d93302b07700b498a70300e9144988ac3f5b99dcdfbc93e85b4edf4dab5",
+          "subjectForm": "9f368c541653fc814b493c5c5e69a120104958f4a3f5260a32c5c18151685f49",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION4",
+          "publicHash": "5e2896faea4b908f6aab4d9ceb08e013b4958949b75b19db87cc3c65f9d95e13",
+          "subject": [
+            9,
+            2
+          ],
+          "status": "contradicted"
+        },
+        {
+          "q": "ACTION1",
+          "publicHash": "82359cd5771c1cf80bced9e3142040b2f3db7ef78603f6df063d3adc4a18dc8d",
+          "subject": [
+            9,
+            2
+          ],
+          "status": "contradicted"
+        }
+      ]
+    },
+    {
+      "code": "POLA",
+      "level": 5,
+      "seal": "170cfa395dc4361fcf616ed9019373377c45bc6d7d8ff9842a8e2b729844f0c5",
+      "forecast": {
+        "kind": "action_conditioned_subject_arrival",
+        "key": "[\"9c038b5097b29f625c3c112a\",\"cba1c9e1e41f45379185b4a4\",\"ACTION6\",\"indicator\"]",
+        "actor": "9c038b5097b29f625c3c112a",
+        "indicator": "cba1c9e1e41f45379185b4a4",
+        "gesture": {
+          "op": "ACTION6",
+          "point": "indicator"
+        },
+        "command": "ACTION6:6,5",
+        "from": [
+          52,
+          20
+        ],
+        "indicated": [
+          12,
+          10
+        ],
+        "peers": [],
+        "before": "POLA:epoch:5:revision:18:frame:e7cc8d4e5aa771e75e42097e402e5fbebc898e778e2082eab69104b9519c7b7c",
+        "epoch": 5,
+        "basis": "observed_in_previous_level",
+        "witness": {
+          "before": "POLA:epoch:4:revision:15:frame:a1688ff49aa678e1d3d0557544f558f49abaf1adae90b5f9ba18d228ce6b8674",
+          "after": "POLA:epoch:4:revision:16:frame:b0d75cd2b093f41ff3307d94cf46362a46baeed6e7ac857b5444978a348d9f2d",
+          "epoch": 4,
+          "command": "ACTION6:31,40",
+          "from": [
+            62,
+            50
+          ],
+          "indicated": [
+            62,
+            80
+          ],
+          "arrived": [
+            62,
+            80
+          ],
+          "peers": [],
+          "fromBox": [
+            30,
+            24,
+            32,
+            26
+          ],
+          "arrivedBox": [
+            30,
+            39,
+            32,
+            41
+          ],
+          "indicatorForm": "167867cd516de891b978cf4e55ddc13d0dbbd3785cb7ea0640ee5c2191764d84",
+          "subjectForm": "e8e6116eab3920b02f638b0e8ef08f05e207807cfdcc96b3ec4275c61dd48563",
+          "indicatorChanged": true
+        }
+      },
+      "branches": [
+        {
+          "q": "ACTION6:6,5",
+          "publicHash": "b593a73ddce4884f068c3f7f530b5945ca6ee2174b2c8ce6870dd4283d7fb4f0",
+          "subject": null,
+          "status": "unobserved"
+        },
+        {
+          "q": "ACTION3",
+          "publicHash": "cfa055879e93127a4face7a750a709e6c90ebd90449524256fae72dc3b07a565",
+          "subject": [
+            52,
+            20
+          ],
+          "status": "contradicted"
+        }
+      ]
+    }
+  ]
+}
