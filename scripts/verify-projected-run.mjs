@@ -6,6 +6,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceReplay } from './sic-study-source-replay.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
+import { contextAudit } from './verify-context-events.mjs';
 import { siteShape } from '../src/sic/site-operations.ts';
 
 const [environment, file, sourceCode] = process.argv.slice(2);
@@ -24,7 +25,7 @@ const engine = sourceCode
       throw Error('Unexpected backend');
     });
 const hash = (v) => createHash('sha256').update(JSON.stringify(v)).digest('hex');
-let board = sourceCode
+const openBoard = async () => sourceCode
   ? sourceReplay(
       engine,
       JSON.parse(
@@ -33,6 +34,7 @@ let board = sourceCode
       run
     ).restore(0)
   : await engine.dispatch({ type: 'load', code: run.code, level: run.start });
+let board=await openBoard();
 if (board.level !== run.start && board.canSelectLevel)
   board = await engine.dispatch({ type: 'selectLevel', level: run.start });
 if (
@@ -43,7 +45,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -110,10 +112,11 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
+const audit=contextAudit(run,hash,partsAt,commandKey);
 for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
   const action = commandKey(cmd);
@@ -133,7 +136,10 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   });
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
   const event = events.get(i + 1);
+  if ((cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
   if (!event) continue;
+  if (event.retained){audit.retainedEvent(event,cmd,i,board);continue;}
+  if (event.transport||event.instrument){await audit.check(event,cmd,i,cache.get(cmd.from),board);continue;}
   if (event.exchange) {
     const v = event.exchange, step = v.steps[v.index], first = i-v.index;
     const seal = hash([v.roles,v.refs,v.steps,v.alternatives,...(v.aims ? [v.aims] : [])]);
@@ -653,6 +659,11 @@ for (const [i, cmd] of run.replayCommands.entries()) {
 }
 const won = board.levelsCompleted > run.initialCompleted || board.level > run.start || board.state === 'WIN';
 if (won !== run.levels[0].won) throw Error('Official replay differs');
+await audit.branches(async()=>{
+  let b=await openBoard();
+  if(b.level!==run.start&&b.canSelectLevel)b=await engine.dispatch({type:'selectLevel',level:run.start});
+  return b;
+},cmd=>engine.dispatch({type:'action',actionId:cmd.id,...(cmd.id===6?{data:cmd.data}:{})}));
 console.log(
   JSON.stringify({
     code: run.code,
@@ -672,6 +683,9 @@ console.log(
     conditions,
     delayed,
     transfers,
+    instrument:audit.sites,
+    transport:audit.transports,
+    retained:audit.retained,
     exchanges: {...exchanges,destinations:exchanges.destinations.size},
   })
 );

@@ -27,7 +27,7 @@ export function poseOf(g: Groups, roles: RolePair): Layout | null {
     b = resolveRole(g, roles[1]);
   return a && b ? [[...a.position], [...b.position]] : null;
 }
-export function observedExchanges(before: Groups, after: Groups) {
+export function observedRoleMoves(before: Groups, after: Groups) {
   const moves: { role: Role; from: XY; to: XY }[] = [];
   for (const [signature, old] of before) {
     const next = after.get(signature);
@@ -42,6 +42,10 @@ export function observedExchanges(before: Groups, after: Groups) {
     });
   }
   moves.sort((a, b) => a.role.signature.localeCompare(b.role.signature));
+  return moves;
+}
+export function observedExchanges(before: Groups, after: Groups) {
+  const moves = observedRoleMoves(before,after);
   const pairs: RolePair[] = [];
   for (const [i, a] of moves.entries())
     for (const b of moves.slice(i + 1))

@@ -1,3 +1,7 @@
+import {newRetainedMemory,offerRetained,recordRetained,type RetainedTrial,type RetainedMemory} from './retained-edits.ts';
+import { newInstrumentMemory, offerInstrument, recordInstrument, type SiteTrial, type InstrumentMemory } from './instrument-experiment.ts';
+import { newContextMemory, offerContext, recordContext, type ContextMemory, type ContextTrial } from './transported-control.ts';
+import { witnessManipulation, type Manipulation } from './return-programs.ts';
 import {newExchangeMemory,exchangeOffer,observeExchange,recordExchange,type ExchangeMemory,type ExchangeTrial} from './placed-exchange.ts';
 import { newDelayedMemory, selectDelayed, recordDelayed, type DelayedTrial, type DelayedMemory } from './distinguishing-suffix.ts';
 import type {
@@ -56,6 +60,7 @@ export type Edge = {
   anchors: Record<string, Anchor>;
   mark?: Mark;
   visibleAfter?: string[];
+  manipulation?: Manipulation;
 };
 export type Pair = {
   origin: number;
@@ -77,6 +82,8 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'instrumentSite'
+    | 'transportControl'
     | 'placedExchange'
     | 'configuredTransfer'
     | 'conditionSetup' | 'conditionTrigger' | 'conditionUse'
@@ -119,6 +126,9 @@ export type Experiment = {
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
   projection?: Trial;
+  instrument?:SiteTrial;
+  retained?:RetainedTrial;
+  transport?:ContextTrial;
   exchange?: ExchangeTrial;
   transfer?: TransferTrial;
   placement?: Placement;
@@ -153,6 +163,9 @@ export type Outcome = {
   frontier?: Record<string, unknown>;
   condition?: Record<string, unknown>;
   projection?: Record<string, unknown>;
+  instrument?:Record<string,unknown>;
+  retained?:Record<string,unknown>;
+  transport?:Record<string,unknown>;
   exchange?: Record<string, unknown>;
   transfer?: Record<string, unknown>;
 };
@@ -164,6 +177,9 @@ export type Memory = {
   reconsiderPlacement?: ReconsiderPlacement | null;
   conditionLearned?: Record<string,LearnedPlacement>;
   projection: ProjectionMemory;
+  instrument?: InstrumentMemory;
+  retained?:RetainedMemory;
+  contexts?: ContextMemory;
   exchanges?: ExchangeMemory;
   transfers?: TransferMemory;
   space: SpatialMemory;
@@ -190,6 +206,9 @@ export const initialMemory = (epoch: number): Memory => ({
   delayed: newDelayedMemory(),
   frontier:newFrontierMemory(),
   projection: newProjectionMemory(),
+  instrument: newInstrumentMemory(),
+  retained:newRetainedMemory(),
+  contexts: newContextMemory(),
   exchanges: newExchangeMemory(),
   transfers: newTransferMemory(),
   space: newSpatialMemory(),
@@ -368,6 +387,21 @@ export function selectExperiment(
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
+  const free = !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
+    !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
+    !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
+  if (rows && (m.retained?.active || free)) {
+    const offer = offerRetained(m, s, available);
+    if (offer) return offer;
+  }
+  if (rows && (m.contexts?.active || free)) {
+    const offer = offerContext(m, o, rows, available, s);
+    if (offer) return offer;
+  }
+  if (rows && (m.instrument?.active || free)) {
+    const offer = offerInstrument(m, o, rows, available, s);
+    if (offer) return offer;
+  }
   const exchange = m.exchanges;
   if (rows && exchange && (exchange.active || (!m.transfers?.active && !m.condition && !m.pending && !m.projection.active && !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active))) {
     const proposal = exchangeOffer(exchange,o,rows,available,s);
@@ -672,6 +706,12 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  m.instrument ??= newInstrumentMemory();
+  if(!x?.instrument)m.instrument.active=null;
+  m.retained??=newRetainedMemory();
+  if(!x?.retained)m.retained.active=null;
+  m.contexts ??= newContextMemory();
+  if(!x?.transport)m.contexts.active=null;
   m.exchanges ??= newExchangeMemory();
   if (!x?.exchange) m.exchanges.active = null;
   observeExchange(m.exchanges,b,a,op);
@@ -742,6 +782,7 @@ export function recordExperiment(
     });
   }
   const edge = m.edges[index]!;
+  if(!edge.manipulation && edge.stable){const measurement=witnessManipulation(b,a,rows,next);if(measurement)edge.manipulation=measurement;}
   Object.assign(edge.anchors, anchors);
   edge.visibleAfter = a.entities
     .filter((z) => !z.identity_ambiguous && edge.anchors[z.signature])
@@ -772,6 +813,12 @@ export function recordExperiment(
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
     return {...out,result,condition:detail};
+  }
+  if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.retained){const {result,detail}=recordRetained(m,x.retained,b,a,rows,next,t);return {...out,result,retained:detail};}
+  if(x.transport){
+    const {result,detail}=recordContext(m.contexts,x.transport,b,a,t,next,m.turns);
+    return {...out,result,transport:detail};
   }
   if (x.exchange) {
     const {result, detail} = recordExchange(m.exchanges,x.exchange,b,a);

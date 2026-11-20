@@ -176,6 +176,9 @@ async function run(code, games) {
       if (board.level > finish) throw Error('Action after target level');
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
+      const retainedSeal=plan?.retainedForecast?hash(plan.retainedForecast):null;
+      const siteSeal=plan?.instrumentForecast?hash(plan.instrumentForecast):null;
+      const transportSeal=plan?.transportForecast?hash(plan.transportForecast):null;
       const forecast = plan?.exchangeForecast;
       const forecastSeal = forecast ? hash([forecast.roles,forecast.refs,forecast.steps,forecast.alternatives,forecast.aims]) : null;
       const began = performance.now();
@@ -189,7 +192,7 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
@@ -294,6 +297,9 @@ async function run(code, games) {
           equation,
           projection,
           exchange,
+          transport,
+          instrument,
+          retained,
           transfer,
           frontier,
           condition,
@@ -344,6 +350,9 @@ async function run(code, games) {
           predictedGap,
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
+          ...(retained ? {retained} : {}),
+          ...(instrument ? {instrument} : {}),
+          ...(transport ? {transport} : {}),
           ...(exchange ? {exchange} : {}),
           ...(projection ? {projection} : {}),
           ...(delayed ? { delayed } : {}),
