@@ -1,4 +1,4 @@
-// Post-freeze diagnostic. Run with Node's TypeScript support. No imports from the solver.
+// Post-freeze replay with the frozen observer and movement measurement. No agent decisions are generated.
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -457,6 +457,10 @@ async function audit(name, file) {
     if (lv === 2 && s.mirrors.every((p, j) => same(p, world.mirrors[j])) && possible) {
       h.initialFeasibleX++;
       h.initialFeasibleByAction[a] = (h.initialFeasibleByAction[a] ?? 0) + 1;
+      (h.initialOpportunities ??= []).push({
+        command: n, player: at, destination: l(valid[0].to), action: a,
+        phase: e?.phase ?? null, hypothesis: e?.hypothesis ?? null, result: e?.result ?? null,
+      });
     }
     if (
       lv === 2 &&
@@ -738,6 +742,10 @@ const verified = evidence.runs.candidate.hist[2],
   plans = verified.territorial.filter((v) => v.cursor === 0);
 if (
   fixed.size !== 18 ||
+  verified.initialOpportunities.map(v => v.command).join(',') !== '55,57,59,61,63,172' ||
+  verified.initialOpportunities.some(v =>
+    v.player.join(',') !== '8,4' || v.destination.join(',') !== '9,3' || v.action === 5
+  ) ||
   outgoing.size !== 4 ||
   verified.firstLost.n !== 172 ||
   verified.firstLost.descendantStates !== 72 ||

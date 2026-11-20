@@ -4762,6 +4762,98 @@
               "success": true,
               "changedMirror": false
             }
+          ],
+          "initialOpportunities": [
+            {
+              "command": 55,
+              "player": [
+                8,
+                4
+              ],
+              "destination": [
+                9,
+                3
+              ],
+              "action": 3,
+              "phase": null,
+              "hypothesis": null,
+              "result": null
+            },
+            {
+              "command": 57,
+              "player": [
+                8,
+                4
+              ],
+              "destination": [
+                9,
+                3
+              ],
+              "action": 4,
+              "phase": "control",
+              "hypothesis": "21|ACTION3|ACTION4",
+              "result": "differential"
+            },
+            {
+              "command": 59,
+              "player": [
+                8,
+                4
+              ],
+              "destination": [
+                9,
+                3
+              ],
+              "action": 3,
+              "phase": null,
+              "hypothesis": null,
+              "result": null
+            },
+            {
+              "command": 61,
+              "player": [
+                8,
+                4
+              ],
+              "destination": [
+                9,
+                3
+              ],
+              "action": 4,
+              "phase": "confirmControl",
+              "hypothesis": "21|ACTION3|ACTION4",
+              "result": "control_replicated"
+            },
+            {
+              "command": 63,
+              "player": [
+                8,
+                4
+              ],
+              "destination": [
+                9,
+                3
+              ],
+              "action": 3,
+              "phase": "route",
+              "hypothesis": "21|ACTION3|ACTION4",
+              "result": "observed"
+            },
+            {
+              "command": 172,
+              "player": [
+                8,
+                4
+              ],
+              "destination": [
+                9,
+                3
+              ],
+              "action": 1,
+              "phase": "transportControl",
+              "hypothesis": "driver_at_recipient",
+              "result": "transport_return_observed"
+            }
           ]
         }
       }
@@ -5652,7 +5744,84 @@
             "4": 134,
             "5": 144
           },
-          "territorial": []
+          "territorial": [],
+          "initialOpportunities": [
+            {
+              "command": 124,
+              "player": [
+                9,
+                3
+              ],
+              "destination": [
+                8,
+                4
+              ],
+              "action": 4,
+              "phase": "probe",
+              "hypothesis": "21|ACTION2|ACTION4",
+              "result": "differential"
+            },
+            {
+              "command": 125,
+              "player": [
+                10,
+                3
+              ],
+              "destination": [
+                8,
+                5
+              ],
+              "action": 3,
+              "phase": null,
+              "hypothesis": null,
+              "result": null
+            },
+            {
+              "command": 126,
+              "player": [
+                9,
+                3
+              ],
+              "destination": [
+                8,
+                4
+              ],
+              "action": 4,
+              "phase": null,
+              "hypothesis": null,
+              "result": null
+            },
+            {
+              "command": 127,
+              "player": [
+                10,
+                3
+              ],
+              "destination": [
+                8,
+                5
+              ],
+              "action": 3,
+              "phase": "position",
+              "hypothesis": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6/component:2a0c3d7b914524bf:0@33,17/32/17/ACTION3",
+              "result": "observed"
+            },
+            {
+              "command": 128,
+              "player": [
+                9,
+                3
+              ],
+              "destination": [
+                8,
+                4
+              ],
+              "action": 3,
+              "phase": "positionB",
+              "hypothesis": "7327e7df667d8ae9f3fc0a22b1727629fdf398245f6d426d8b4d3849119b7bf6/component:2a0c3d7b914524bf:0@33,17/32/17/ACTION3",
+              "result": "different_effect_at_placement"
+            }
+          ]
         }
       }
     },

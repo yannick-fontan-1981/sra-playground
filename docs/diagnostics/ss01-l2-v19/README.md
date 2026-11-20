@@ -70,6 +70,21 @@ J’ai vérifié l’identité annoncée au départ de **chacun des 22 plans**. 
 
 La croix constitue pourtant un bon indice. Avant la commande 55, elle indique `(9,3)` alors que le marchand se trouve en `(8,4)`. L’expérience qui distingue leurs rôles consiste à annoncer « si j’active maintenant, le marchand arrive là où se trouve la croix », puis à mesurer le marchand à l’arrivée. Le raisonnement inverse peut ensuite chercher où mettre le miroir **et** où placer le marchand pour que cette arrivée tombe sur un autre îlot. Cette relation entre les trois positions manque aux décisions vérifiées.
 
+### Les six occasions où l’expérience pouvait être déclenchée
+
+Avec le miroir dans sa configuration initiale, SIC se retrouve six fois sur la case `(8,4)` avec un aperçu valide en `(9,3)`. Ces deux cases sont sur l’îlot du haut. Activer à cet instant teste donc l’identité du voyageur à faible coût et le place du côté est du miroir, d’où une poussée vers l’ouest devient possible. Les six occasions présentent **la même géométrie**. Elles ne constituent pas six preuves distinctes de la loi du miroir.
+
+| Commande en L2 | Décision effective | Ce que le journal permet d’attribuer à SIC |
+|---|---|---|
+| 55 | Ouest | Aucune expérience de préparation consignée à cette commande. C’est la première occasion d’activer sur une arrivée valide. |
+| 57 | Est | SIC compare les commandes ouest et est. Il enregistre une différence. |
+| 59 | Ouest | Aucune expérience de préparation consignée à cette commande. |
+| 61 | Est | SIC reproduit le résultat de sa comparaison ouest/est. |
+| 63 | Ouest | Il suit une route associée à cette même paire de commandes. |
+| 172 | Nord | Il enregistre le retour d’une autre expérience. Le geste déplace réellement le miroir et ferme la route vers la gauche. |
+
+Le numéro 63 apparaît aussi dans le trajet dirigé. Dans la trajectoire autonome, 63 est un pas à l’ouest. Dans la trajectoire dirigée, qui a bifurqué à 55, c’est la première traversée entre îlots. Le replay ne donne aucune intention vérifiable pour les deux gestes sans expérience consignée.
+
 ### Pourquoi 172 est un seuil irréversible dans cet épisode
 
 Avant la commande 172, le marchand se tient en `(8,4)`, immédiatement au sud du miroir `(8,3)`. J’ai calculé les suites possibles pour chacune des cinq commandes depuis cet état exact.
