@@ -2,7 +2,7 @@
 
 ## Portée et références
 
-Le laboratoire **0.1.2 / HTML v3**, intitulé **Le Chœur des Miroirs**, est la source de l’intégration de SS09 dans Custom 4. Ce document décrit le travail à réaliser ; il ne prétend pas que le raccordement natif ou la publication Site sont déjà faits.
+Le laboratoire **0.1.2 / HTML v3**, intitulé **Le Chœur des Miroirs**, fournit le moteur et les huit cartes du neuvième jeu de Custom 4. Le HTML autonome et le Playground partagent les lecteurs de pixels et les douze découvertes de `src/tutorial.ts`.
 
 La source fonctionnelle approuvée est `ee842d20d59d51312f10d2a8249b5c978d15c545`. Les chemins d’intégration ont été vérifiés sur le dépôt `yannick-fontan-1981/sra-playground`, `main` au commit `f4d28aee9ebbb35533bb97a26968efd22887473d`, qui possédait SS01–SS08 natifs. Relire l’état courant avant modification ; ce relevé ne justifie pas d’écraser des changements plus récents.
 
@@ -81,6 +81,8 @@ Conserver l’aura pointillée magenta sous les glyphes, les prévisualisations 
 La référence de laboratoire validée possède **108 tests réussis**, **huit parcours gagnants**, **443 actions dont 33 sélections**, **1 312 images**, **douze découvertes pédagogiques**, quatre cas d’interférence et deux défaites réellement atteignables. Le compteur de déplacements affiché par le HTML exclut ACTION6 ; il ne faut pas le confondre avec le nombre total de commandes des témoins. Les onze groupes Happy DOM vérifient le HTML compilé ; ils n’attestent pas encore du fonctionnement natif dans le navigateur du Playground.
 
 La validation d’intégration compare chaque observation du moteur et de l’adaptateur : métadonnées, pixels finaux, images intermédiaires et durées. Elle couvre les chargements invalides, les niveaux invalides, ACTION6 hors grille ou non entière, le passage entre jeux natifs et anciens, l’absence de chargement Python pour SS09 et l’absence d’état privé dans les messages publics.
+
+`tests/custom4-native.test.ts` rejoue les huit témoins sur le routeur et l’adaptateur. Le test du clignotement utilise le niveau 5 avec un pas vers le bas après les 42 premières actions du témoin, puis vérifie la répétition du signal et le retour Undo à l’état avant ce pas.
 
 Le contrôle navigateur reprend l’infrastructure `scripts/native-browser-checks.mjs` et les méthodes de `verify-ss08-browser.mjs`, avec un paramètre d’URL propre à SS09. Vérifier les témoins via les vrais contrôles, les douze découvertes, les interruptions d’animation, Undo après défaite et changement de salle, les deux héros, les retours de miroir, le chemin d’action SRA, le mobile et la galerie. Les galeries proviennent des huit `selectLevel(N)` du moteur : aucun aperçu dessiné séparément. Le lien de chaque salle est `/?game=SS09&level=N#playground`.
 

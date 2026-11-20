@@ -37,13 +37,19 @@ import { SS08_LEVELS } from '../experiments/sinking-star-ss08/src/levels.ts';
 import { lessonIds as transpositionLessonIds, observeLesson as observeTranspositionLesson, visibleHeroes as visibleTranspositionHeroes, type TranspositionLesson } from '../experiments/sinking-star-ss08/src/tutorial.ts';
 import ss08Witnesses from '../experiments/sinking-star-ss08/tests/witnesses.json' with { type: 'json' };
 import ss08Failures from '../experiments/sinking-star-ss08/tests/failures.json' with { type: 'json' };
+import { createSs09Backend } from '../src/games/sinking-star-ss09.ts';
+import { DuoPuzzleSession as ChorusDuoSession } from '../experiments/sinking-star-ss09/src/core.ts';
+import { SS09_LEVELS } from '../experiments/sinking-star-ss09/src/levels.ts';
+import { heroSelection as chorusHeroSelection, lessonIds as chorusLessonIds, observeLesson as observeChorusLesson, visibleHeroes as visibleChorusHeroes, type ChorusLesson } from '../experiments/sinking-star-ss09/src/tutorial.ts';
+import ss09Witnesses from '../experiments/sinking-star-ss09/tests/witnesses.json' with { type: 'json' };
+import ss09Failures from '../experiments/sinking-star-ss09/tests/failures.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS08 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS09 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 108);
+  assert.equal(GAME_CATALOG.length, 109);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -80,6 +86,13 @@ test('Custom 4 lists SS01 through SS08 and preserves all four legacy collections
   assert.equal(ss08?.levels, 8);
   assert.equal(ss08?.availability, 'playable');
   assert.match(ss08!.sourceUrl, /experiments\/sinking-star-ss08\/src\/levels\.ts$/);
+  const ss09 = getGameByCode(' ss09 ');
+  assert.equal(ss09?.id, 'ss09-c4000001');
+  assert.equal(ss09?.name, 'Le Chœur des Miroirs');
+  assert.equal(ss09?.family, 'sinking_star_duo');
+  assert.equal(ss09?.levels, 8);
+  assert.equal(ss09?.availability, 'playable');
+  assert.match(ss09!.sourceUrl, /experiments\/sinking-star-ss09\/src\/levels\.ts$/);
 });
 test('SS01 loads natively without invoking the Python loader', async () => {
   let legacyLoads = 0;
@@ -212,10 +225,11 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS06' })).gameCode, 'SS06');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS07' })).gameCode, 'SS07');
   assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS08' })).gameCode, 'SS08');
+  assert.equal((await dispatcher.dispatch({ type: 'load', code: 'SS09' })).gameCode, 'SS09');
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS08']) {
+  for (const code of ['CASC', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS09']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -934,6 +948,151 @@ for (const { level, actions } of ss08Failures) {
     }
     assert.equal(current.state, 'GAME_OVER');
     assert.ok(current.frames.length >= 3);
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), reference.observe());
+    const restored = await dispatcher.dispatch({ type: 'undo' });
+    assert.deepEqual(restored, reference.undo());
+    assert.deepEqual(restored.frame, previous.frame);
+    assert.equal(restored.state, 'NOT_FINISHED');
+    assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), initial);
+  });
+}
+
+test('SS09 replays the eight unmodified witnesses through adapter and router and satisfies all twelve lessons', async () => {
+  const backend = createSs09Backend();
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new ChorusDuoSession(SS09_LEVELS);
+  const learned = new Set<ChorusLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss09 ' });
+  assert.deepEqual(current, await backend.dispatch({ type: 'load', code: 'SS09' }));
+  assert.deepEqual(current, reference.observe());
+  const publicKeys = ['gameCode', 'frame', 'frames', 'state', 'availableActionIds', 'canUndo',
+    'canSelectLevel', 'level', 'levelCount', 'levelsCompleted', 'defaultFps', 'palette'].sort();
+  assert.deepEqual(Object.keys(current).sort(), publicKeys);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss09Witnesses) {
+    assert.equal(current.level, level);
+    assert.deepEqual(visibleChorusHeroes(current.frame).map(h => h.kind).sort(), ['bard', 'merchant']);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const request = { type: 'action', actionId: id, data } as const;
+      const expected = reference.action(id, data);
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(await backend.dispatch(request), expected);
+      assert.deepEqual(current.availableActionIds, [1, 2, 3, 4, 5, 6]);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.ok(current.frames.every(frame => frame.length === 64 && frame.every(row => row.length === 64)));
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleChorusHeroes(frame).map(({ x, y, kind }) => ({ x, y, kind }));
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      observeChorusLesson(learned, before, current, id);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    if (level === 1) assert.deepEqual(chorusLessonIds.filter(lesson => learned.has(lesson)), [...chorusLessonIds]);
+  }
+  assert.deepEqual([actions, selections, frames], [443, 33, 1312]);
+  assert.equal(current.state, 'WIN');
+  for (const actionId of [1, 5, 6]) {
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId, data: { x: 3, y: 3 } }), reference.observe());
+  }
+  assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), reference.undo());
+});
+
+test('SS09 validates loads and ACTION6 and can replay a coordinate-bearing selection', async () => {
+  const backend = createSs09Backend();
+  const reference = new ChorusDuoSession(SS09_LEVELS);
+  const initial = await backend.dispatch({ type: 'load', code: 'SS09', level: 8 });
+  assert.deepEqual(initial, reference.selectLevel(8));
+  for (const level of [0, 9, 1.5]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS09', level }), /Invalid level/);
+    assert.throws(() => backend.dispatch({ type: 'selectLevel', level }), /Invalid level/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS09 action/);
+  assert.throws(() => backend.dispatch({ type: 'nextMerchant' }), /ACTION6/);
+  for (const data of [undefined, { x: -1, y: 3 }, { x: 3, y: 64 }, { x: 1.5, y: 3 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  const data = chorusHeroSelection(initial.frame, 'bard');
+  assert.ok(data);
+  const selection = { type: 'action', actionId: 6, data } as const;
+  const selected = await backend.dispatch(selection);
+  assert.deepEqual(selected, reference.action(6, data));
+  assert.deepEqual(await backend.dispatch({ type: 'action', actionId: 6, data }), reference.observe());
+  assert.deepEqual(await backend.dispatch({ type: 'undo' }), initial);
+  assert.deepEqual(await backend.dispatch(selection), selected);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  await dispatcher.dispatch({ type: 'load', code: 'SS09' });
+  await assert.rejects(async () => dispatcher.dispatch({ type: 'load', code: 'SS09', level: 9 }), /Invalid level/);
+  await assert.rejects(async () => dispatcher.dispatch({ type: 'action', actionId: 5 }), /Load a game/);
+});
+
+test('SS09 level 5 replays the four red-white frames of one blocked mirror and leaves Undo unchanged', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new ChorusDuoSession(SS09_LEVELS);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'load', code: 'SS09', level: 5 }), reference.selectLevel(5));
+  for (const { id, data } of ss09Witnesses[4]!.actions.slice(0, 42) as DuoAction[]) {
+    assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: id, data }), reference.action(id, data));
+  }
+  assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 2 }), reference.action(2));
+  const before = reference.observe();
+  const warning = await dispatcher.dispatch({ type: 'action', actionId: 5 });
+  assert.deepEqual(warning, reference.action(5));
+  assert.deepEqual(warning.frame, before.frame);
+  assert.deepEqual(warning.frameDurationsMs, [110, 70, 110, 0]);
+  assert.equal(warning.frames.length, 4);
+  assert.deepEqual(warning.frames[0], warning.frames[2]);
+  assert.deepEqual(warning.frames[1], before.frame);
+  assert.deepEqual(warning.frames[3], before.frame);
+  const tiles = new Set<string>();
+  for (let y=0; y<64; y++) for (let x=0; x<64; x++) {
+    if (warning.frames[0]![y]![x] === before.frame[y]![x]) continue;
+    assert.deepEqual([before.frame[y]![x], warning.frames[0]![y]![x]], [0,8]);
+    tiles.add(`${Math.floor((x-2)/3)},${Math.floor((y-2)/3)}`);
+  }
+  assert.equal(tiles.size, 1);
+  for (let n=0; n<2; n++) assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), warning);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), reference.reset());
+});
+
+test('SS09 chooses the first unfinished level, restores a transition, and restarts at level 1', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const reference = new ChorusDuoSession(SS09_LEVELS);
+  let current = await dispatcher.dispatch({ type: 'load', code: 'SS09', level: 8 });
+  assert.deepEqual(current, reference.selectLevel(8));
+  for (const { id, data } of ss09Witnesses[7]!.actions as DuoAction[]) {
+    current = await dispatcher.dispatch({ type: 'action', actionId: id, data });
+    assert.deepEqual(current, reference.action(id, data));
+  }
+  assert.deepEqual([current.level, current.levelsCompleted], [1, 1]);
+  const restored = await dispatcher.dispatch({ type: 'undo' });
+  assert.deepEqual(restored, reference.undo());
+  assert.deepEqual([restored.level, restored.levelsCompleted], [8, 0]);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'restart' }), reference.restart());
+});
+
+for (const [index, { level, actions }] of ss09Failures.entries()) {
+  test(`SS09 defeat ${index + 1} at level ${level} ends after the last frame and Undo restores the state`, async () => {
+    const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+    const reference = new ChorusDuoSession(SS09_LEVELS);
+    const initial = await dispatcher.dispatch({ type: 'load', code: 'SS09', level });
+    assert.deepEqual(initial, reference.selectLevel(level));
+    let previous = initial, current = initial;
+    for (const { id, data } of actions as DuoAction[]) {
+      previous = current;
+      current = await dispatcher.dispatch({ type: 'action', actionId: id, data });
+      assert.deepEqual(current, reference.action(id, data));
+    }
+    assert.equal(current.state, 'GAME_OVER');
+    assert.ok(current.frames.length >= 3);
+    assert.deepEqual(current.frames.at(-1), current.frame);
     assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), reference.observe());
     const restored = await dispatcher.dispatch({ type: 'undo' });
     assert.deepEqual(restored, reference.undo());

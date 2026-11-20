@@ -530,9 +530,10 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .native-game-tutorial-content li.done::before{content:'✓';color:#83cdae}
 .duo-role-controls{flex-direction:row;flex-wrap:wrap;margin-top:10px}
 .duo-role-controls button[aria-pressed="true"]{outline:2px solid #ef4141;outline-offset:1px}
-.duo-role-controls button:is([data-ss06-hero="merchant"],[data-ss07-hero="merchant"],[data-ss08-hero="merchant"])[aria-pressed="true"]{outline-color:#f59e29}
+.duo-role-controls button:is([data-ss06-hero="merchant"],[data-ss07-hero="merchant"],[data-ss08-hero="merchant"],[data-ss09-hero="merchant"])[aria-pressed="true"]{outline-color:#f59e29}
 .duo-role-controls button[data-ss07-hero="thief"][aria-pressed="true"]{outline-color:#50b848}
 .duo-role-controls button[data-ss08-hero="wizard"][aria-pressed="true"]{outline-color:#9e6bdb}
+.duo-role-controls button[data-ss09-hero="bard"][aria-pressed="true"]{outline-color:#e03bca}
 #ss07-platform-help{--platform-circuit:#50b848}
 .duo-platform-legend{display:flex;flex-wrap:wrap;gap:12px}
 .duo-platform-legend span{display:inline-flex;align-items:center;gap:5px}

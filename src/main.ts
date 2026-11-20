@@ -33,11 +33,13 @@ import { LEVEL_INFO as SS07_LEVEL_INFO } from '../experiments/sinking-star-ss07/
 import { actionFeedback as thiefFeedback, heroSelection as thiefHeroSelection, lessonIds as thiefLessonIds, lessonPrompt as thiefPrompt, observeLesson as observeThiefLesson, visibleHeroes as visibleThiefHeroes, type ThiefLesson } from '../experiments/sinking-star-ss07/src/tutorial.ts';
 import { LEVEL_INFO as SS08_LEVEL_INFO } from '../experiments/sinking-star-ss08/src/level-info.ts';
 import { actionFeedback as transpositionFeedback, heroSelection as transpositionHeroSelection, lessonIds as transpositionLessonIds, lessonPrompt as transpositionPrompt, observeLesson as observeTranspositionLesson, TUTORIAL_LEVEL as SS08_TUTORIAL_LEVEL, visibleHeroes as visibleTranspositionHeroes, type TranspositionLesson } from '../experiments/sinking-star-ss08/src/tutorial.ts';
+import { LEVEL_INFO as SS09_LEVEL_INFO } from '../experiments/sinking-star-ss09/src/level-info.ts';
+import { actionFeedback as chorusFeedback, heroSelection as chorusHeroSelection, lessonIds as chorusLessonIds, lessonPrompt as chorusPrompt, observeLesson as observeChorusLesson, TUTORIAL_LEVEL as SS09_TUTORIAL_LEVEL, visibleHeroes as visibleChorusHeroes, type ChorusLesson } from '../experiments/sinking-star-ss09/src/tutorial.ts';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
-type DuoGameCode = 'SS06' | 'SS07' | 'SS08';
-const isDuoNativeGame = (code: string): code is DuoGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08';
+type DuoGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09';
+const isDuoNativeGame = (code: string): code is DuoGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09';
 const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || isDuoNativeGame(code);
 const usesNativeManualControls = (code: string): boolean => usesReflectionShortcut(code) || isDirectionalNativeGame(code);
 const fallbackPalette = [
@@ -205,6 +207,10 @@ app.innerHTML = `
               <div id="ss08-role-controls" class="utility-controls duo-role-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
                 <button type="button" class="utility-button" data-ss08-hero="merchant" aria-pressed="false">Marchand · 1</button>
                 <button type="button" class="utility-button" data-ss08-hero="wizard" aria-pressed="false">Magicien · 2</button>
+              </div>
+              <div id="ss09-role-controls" class="utility-controls duo-role-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+                <button type="button" class="utility-button" data-ss09-hero="merchant" aria-pressed="false">Marchand · 1</button>
+                <button type="button" class="utility-button" data-ss09-hero="bard" aria-pressed="false">Barde · 2</button>
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
               <p id="ss02-level-info" class="native-game-level-info" lang="fr" hidden></p>
@@ -471,6 +477,52 @@ app.innerHTML = `
                   </div>
                 </details>
               </div>
+              <div id="ss09-room-help" lang="fr" hidden>
+                <p id="ss09-objective" class="native-game-level-info"></p>
+                <p class="native-game-level-info"><span id="ss09-source-label"></span> <a id="ss09-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+                <details id="ss09-tutorial" class="native-game-tutorial" open hidden>
+                  <summary>Niveau 1 · Le chantier des deux voix</summary>
+                  <div class="native-game-tutorial-content">
+                    <p id="ss09-lesson-next" aria-live="polite"></p>
+                    <ul>
+                      <li data-ss09-lesson="select">Sélectionner l’autre personnage.</li>
+                      <li data-ss09-lesson="move">Avancer avec le personnage sélectionné.</li>
+                      <li data-ss09-lesson="merchant-push">Pousser une pièce avec le Marchand.</li>
+                      <li data-ss09-lesson="bard-song">Déplacer une pièce avec le chant.</li>
+                      <li data-ss09-lesson="partner-song">Entraîner le Marchand avec le chant.</li>
+                      <li data-ss09-lesson="selective-song">Déplacer une pièce pendant qu’une autre reste en place.</li>
+                      <li data-ss09-lesson="platform">Créer un appui dans l’eau.</li>
+                      <li data-ss09-lesson="support-slide">Faire glisser un appui avec le chant.</li>
+                      <li data-ss09-lesson="mirror-motion">Déplacer un miroir avec le Marchand.</li>
+                      <li data-ss09-lesson="mirror">Transporter un occupant par reflet.</li>
+                      <li data-ss09-lesson="gate">Commander une porte ou une presse avec un bouton.</li>
+                      <li data-ss09-lesson="goals">Occuper les deux cibles simultanément.</li>
+                    </ul>
+                    <p id="ss09-lesson-progress"></p>
+                  </div>
+                </details>
+                <details class="native-game-tutorial" open>
+                  <summary>Poussée, chant et reflets</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Le Marchand pousse une seule pièce, y compris le Barde. Avant chaque pas du Barde, son aura de 5 × 5 cases choisit les caisses, monstres, appuis et le Marchand qu’il peut entraîner. Les diagonales comptent et les murs ne coupent pas la portée.</p>
+                    <p>Les pièces bloquées et les miroirs restent en place. L’appui sous un héros et celui à l’arrivée du Barde restent ancrés. Une poussée subie, une presse ou un reflet ne déclenche aucun chant.</p>
+                    <p>Espace, X et Reflet activent les miroirs sans chant. L’occupant le plus proche traverse. À distance égale, les deux échangent leur place. Le + gris clair indique l’arrivée d’un héros et le contour celle d’une caisse. La diagonale d’un miroir responsable d’un refus clignote en rouge.</p>
+                  </div>
+                </details>
+                <details id="ss09-piston-help" class="native-game-tutorial" open hidden>
+                  <summary>La porte qui pousse</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Les boutons reliés doivent être occupés ensemble. Une presse qui se ferme pousse la file dans le sens de son repère. Z annule la cascade entière.</p>
+                  </div>
+                </details>
+                <details id="ss09-platform-help" class="native-game-tutorial" open hidden>
+                  <summary>Les portes-plateformes dans l’eau</summary>
+                  <div class="native-game-tutorial-content">
+                    <p class="duo-platform-legend"><span><i aria-hidden="true"></i> Déployée</span><span><i class="is-retracted" aria-hidden="true"></i> Retirée</span></p>
+                    <p>Le repère central indique le circuit. Une caisse immergée devient un appui marqué d’un X cyan. Le chant peut faire glisser un appui entre deux cases d’eau.</p>
+                  </div>
+                </details>
+              </div>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -721,6 +773,7 @@ const ss05Lessons = new Set<BardLesson>();
 const ss06Lessons = new Set<DuoLesson>();
 const ss07Lessons = new Set<ThiefLesson>();
 const ss08Lessons = new Set<TranspositionLesson>();
+const ss09Lessons = new Set<ChorusLesson>();
 const duoRoomHelp = {
   SS06: { partner: 'Guerrier', directions: 'Flèches pour marcher ou pousser.', rooms: SS06_LEVEL_INFO,
     heroes: visibleHeroes, lessons: ss06Lessons, total: duoLessonIds.length, prompt: () => duoPrompt(ss06Lessons), tutorialLevel: 1 },
@@ -729,6 +782,9 @@ const duoRoomHelp = {
   SS08: { partner: 'Magicien', directions: 'Flèches pour marcher, pousser ou transposer.', rooms: SS08_LEVEL_INFO,
     heroes: visibleTranspositionHeroes, lessons: ss08Lessons, total: transpositionLessonIds.length,
     prompt: () => transpositionPrompt(ss08Lessons), tutorialLevel: SS08_TUTORIAL_LEVEL },
+  SS09: { partner: 'Barde', directions: 'Flèches pour marcher, pousser ou chanter.', rooms: SS09_LEVEL_INFO,
+    heroes: visibleChorusHeroes, lessons: ss09Lessons, total: chorusLessonIds.length,
+    prompt: () => chorusPrompt(ss09Lessons), tutorialLevel: SS09_TUTORIAL_LEVEL },
 };
 let ss06Solo = false;
 let loading = false;
@@ -1085,9 +1141,10 @@ function updateDuoRoomHelp(game: DuoGameCode, current: GameObservation | null, c
   element(`#${id}-room-help`).hidden = !info;
   element(`#${id}-role-controls`).hidden = !info || solo;
   if (!info || !current) return;
-  element(`#${id}-objective`).textContent = solo
+  const objective = solo
     ? 'Amène le Guerrier rouge sur l’unique contour jaune.'
     : `Amène le Marchand et le ${partner} sur les deux contours jaunes en même temps.`;
+  element(`#${id}-objective`).textContent = game === 'SS09' && 'objective' in info ? info.objective : objective;
   if (game === 'SS06') element('#ss06-cooperation-help').hidden = solo;
   const selected = heroes(current.frame).find(hero => hero.selected)?.kind;
   const roleAttribute = `data-${id}-hero`;
@@ -1103,7 +1160,7 @@ function updateDuoRoomHelp(game: DuoGameCode, current: GameObservation | null, c
   link.hidden = !info.url;
   if (info.url) {
     link.href = info.url;
-    link.textContent = `Voir l’énigme ${info.puzzle} de référence ↗`;
+    link.textContent = 'puzzle' in info && info.puzzle ? `Voir l’énigme ${info.puzzle} de référence ↗` : 'Voir la source ↗';
   }
   element(`#${id}-piston-help`).hidden = !info.piston;
   element(`#${id}-platform-help`).hidden = !('platform' in info && info.platform);
@@ -1271,6 +1328,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS05' && action !== undefined) observeBardLesson(ss05Lessons, before, next, action);
     if (next.gameCode === 'SS06' && action !== undefined) observeDuoLesson(ss06Lessons, before, next, action);
     if (next.gameCode === 'SS07' && action !== undefined) observeThiefLesson(ss07Lessons, before, next, action);
+    if (next.gameCode === 'SS09' && action !== undefined) observeChorusLesson(ss09Lessons, before, next, action);
     if (next.gameCode === 'SS08') {
       if (action !== undefined) observeTranspositionLesson(ss08Lessons, before, next, action);
       if (next.level === SS08_TUTORIAL_LEVEL && (control === 'selectLevel' || control === 'reset')) {
@@ -1288,6 +1346,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS06' && action !== undefined) element('#game-feedback').textContent = duoFeedback(before, next, action);
     else if (next.gameCode === 'SS07' && action !== undefined) element('#game-feedback').textContent = thiefFeedback(before, next, action);
     else if (next.gameCode === 'SS08' && action !== undefined) element('#game-feedback').textContent = transpositionFeedback(before, next, action);
+    else if (next.gameCode === 'SS09' && action !== undefined) element('#game-feedback').textContent = chorusFeedback(before, next, action);
     else if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
@@ -1308,7 +1367,8 @@ function canSelectDuoHero(code: string): boolean {
 function selectDuoHero(role?: 'merchant' | 'partner'): void {
   if (!canSelectDuoHero(selectedGame.code) || !ready() || !observation) return;
   const frame = observation.frame;
-  const target = selectedGame.code === 'SS08' ? transpositionHeroSelection(frame, role === 'partner' ? 'wizard' : role)
+  const target = selectedGame.code === 'SS09' ? chorusHeroSelection(frame, role === 'partner' ? 'bard' : role)
+    : selectedGame.code === 'SS08' ? transpositionHeroSelection(frame, role === 'partner' ? 'wizard' : role)
     : selectedGame.code === 'SS07' ? thiefHeroSelection(frame, role === 'partner' ? 'thief' : role)
     : heroSelection(frame, role === 'partner' ? 'warrior' : role);
   if (target) perform(6, target);
@@ -1369,6 +1429,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   ss06Lessons.clear();
   ss07Lessons.clear();
   ss08Lessons.clear();
+  ss09Lessons.clear();
   ss06Solo = false;
   if (isDuoNativeGame(game.code)) element<HTMLDetailsElement>(`#${game.code.toLowerCase()}-tutorial`).open = true;
   if (game.code === 'SS03' || game.code === 'SS04' || bard) {
@@ -1379,7 +1440,8 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   for (const id of ['ss03-tutorial', 'ss03-level-info', 'ss03-piston-help', 'ss04-tutorial', 'ss04-level-info',
     'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
     'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'ss06-room-help', 'ss06-role-controls',
-    'ss07-room-help', 'ss07-role-controls', 'ss08-room-help', 'ss08-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
+    'ss07-room-help', 'ss07-role-controls', 'ss08-room-help', 'ss08-role-controls', 'ss09-room-help',
+    'ss09-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
   const primaryAction = element<HTMLButtonElement>('#space-button');
   primaryAction.hidden = directional;
   primaryAction.title = reflection ? 'Reflet (Espace ou X)' : 'Space';
@@ -1506,9 +1568,9 @@ canvas.addEventListener('keydown', (event: KeyboardEvent) => {
   perform(action);
 });
 element('#merchant-button').addEventListener('click', () => { nextMerchant(); focusCanvas(); });
-for (const button of document.querySelectorAll<HTMLButtonElement>('[data-ss06-hero], [data-ss07-hero], [data-ss08-hero]')) {
+for (const button of document.querySelectorAll<HTMLButtonElement>('[data-ss06-hero], [data-ss07-hero], [data-ss08-hero], [data-ss09-hero]')) {
   button.addEventListener('click', () => {
-    const hero = button.dataset.ss06Hero ?? button.dataset.ss07Hero ?? button.dataset.ss08Hero;
+    const hero = button.dataset.ss06Hero ?? button.dataset.ss07Hero ?? button.dataset.ss08Hero ?? button.dataset.ss09Hero;
     selectDuoHero(hero === 'merchant' ? 'merchant' : 'partner');
     focusCanvas();
   });
