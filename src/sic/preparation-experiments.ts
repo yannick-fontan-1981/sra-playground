@@ -38,6 +38,7 @@ import {
   type CapabilityTrial,
 } from './derive-capabilities.ts';
 import { newProjectionMemory, proposeProjection, recordProjection, type Trial, type ProjectionMemory } from './projected-affordances.ts';
+import {newFrontierMemory,selectFrontier,recordFrontier,type FrontierMemory,type FrontierTrial} from './experimental-frontier.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -71,6 +72,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'frontierRoute' | 'frontierProbe' | 'frontierUse'
     | 'projection'
     | 'prepare'
     | 'probe'
@@ -104,6 +106,7 @@ export type Experiment = {
   prepEffect?: string;
   purpose?: string;
   refs: number[];
+  frontier?: FrontierTrial;
   projection?: Trial;
   placement?: Placement;
   derive?: Derivation;
@@ -133,10 +136,12 @@ export type Outcome = {
   strictMatch?: boolean;
   access?: Record<string, unknown>;
   equation?: Record<string, unknown>;
+  frontier?: Record<string, unknown>;
   projection?: Record<string, unknown>;
 };
 export type Memory = {
   epoch: number;
+  frontier:FrontierMemory;
   projection: ProjectionMemory;
   space: SpatialMemory;
   equations: CapabilityMemory;
@@ -159,6 +164,7 @@ export type Memory = {
 };
 export const initialMemory = (epoch: number): Memory => ({
   epoch,
+  frontier:newFrontierMemory(),
   projection: newProjectionMemory(),
   space: newSpatialMemory(),
   equations: freshCapabilities(),
@@ -269,7 +275,7 @@ function pairs(m: Memory): Pair[] {
 function firstRoutes(m: Memory, start: number, limit: number) {
   const outgoing = new Map<number, Edge[]>();
   for (const e of m.edges)
-    if (e.stable && e.s !== e.t) {
+    if (e.stable && e.s !== e.t && e.effect.key!=='completion' && !e.effect.key.startsWith('terminal:')) {
       const g = outgoing.get(e.s) ?? [];
       g.push(e);
       outgoing.set(e.s, g);
@@ -334,6 +340,12 @@ export function selectExperiment(
   const s = m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
+  const frontier=m.frontier;
+  frontier.choices[s]=[...available];
+  if(frontier.question || frontier.follow || (!m.projection.active && (frontier.exploring || m.turns-frontier.lastEdge>=4 || m.turns-frontier.lastScene>=Math.max(12,2*available.size)))) {
+    const search=selectFrontier(m,s,available,firstRoutes(m,s,m.scenes.length));
+    if(search)return search;
+  }
   if (rows && (m.projection.active || (!m.pending && !m.equations.active && !m.space.active))) {
     const projection = proposeProjection(m, o, rows, available, s);
     if (projection) return projection;
@@ -583,6 +595,10 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  const frontier=m.frontier;
+  const newScene=m.seenAt[t]===undefined && t!==s;
+  if(newScene){frontier.lastScene=m.turns;frontier.exploring=false;}
+  if(!x?.frontier){frontier.question=null;frontier.follow=null;}
   if (!x?.projection) m.projection.active = null;
   if (!x?.equation) {
     m.equations.active = null;
@@ -627,6 +643,7 @@ export function recordExperiment(
   const anchors = witnessAnchors(b, rows, new Set([...tracked, ...marks]), marks);
   let index = m.edges.findIndex((e) => e.s === s && e.cmd === op);
   if (index < 0) {
+    frontier.lastEdge=m.turns;
     index = m.edges.length;
     m.edges.push({
       s,
@@ -664,6 +681,12 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if(x.frontier){
+    if(!newScene)frontier.exploring=true;
+    const {result,detail}=recordFrontier(m,x.frontier,edge,a.levels_completed>b.levels_completed||a.state==='WIN',
+      id=>a.entities.find(e=>!e.identity_ambiguous&&e.signature===id)?.position.join()??null);
+    return {...out,result,frontier:detail};
+  }
   if (x.projection) {
     const { result, detail } = recordProjection(m, x.projection, b, a);
     return { ...out, result, projection: detail };
