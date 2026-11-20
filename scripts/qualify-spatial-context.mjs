@@ -337,16 +337,59 @@ async function audit(c) {
       : null;
   }
   const samples = new Map(),
-    conflicts = new Set();
+    conflicts = new Set(),
+    twoStage = process.argv.includes('--two-stage') && !!c.follow,
+    arrivalSamples = new Map(),
+    arrivalConflicts = new Set();
+  const referenceMove =
+    destination === 'WIN' ? null : destination.split(',').map((v, i) => Number(v) - placed[actor][i]);
+  async function probeBoth(ready, learn = false) {
+    const after = step(ready.b, suffix[0]);
+    if (!active(after)) return null;
+    const positionsAfter = await positions(after),
+      land = layout(positionsAfter);
+    if (!land || !primary.every((id) => land.objects[id])) return null;
+    const arrivalKey = hash(after);
+    if (learn) {
+      const k = ready.key + '/' + suffix[0];
+      if (!edges.has(k))
+        edges.set(k, {
+          k: suffix[0],
+          from: { ...ready.l.objects, [actor]: ready.l.actor },
+          to: positionsAfter,
+          target: arrivalKey,
+        });
+    }
+    const moved = land.actor.every((v, i) => v - ready.l.actor[i] === referenceMove[i]);
+    const end = step(after, c.follow.key);
+    if (!end) return null;
+    let used = win(end);
+    if (c.follow.effect !== 'WIN') {
+      if (!active(end)) used = false;
+      else {
+        const final = (await positions(end))[actor];
+        if (!final) return null;
+        used = final.every((v, i) => v - land.actor[i] === c.follow.effect[i]);
+      }
+    }
+    return { moved, used, arrivalKey, land };
+  }
   for (const w of train) {
     const prepared = await prepare(w, true);
     if (!prepared) continue;
-    const y = await consequence(prepared);
+    const pair = twoStage ? await probeBoth(prepared, true) : null;
+    const y = twoStage ? (pair?.moved ?? null) : await consequence(prepared);
     if (y === null) continue;
+    if (pair) {
+      if (arrivalSamples.has(pair.arrivalKey) && arrivalSamples.get(pair.arrivalKey).outcome !== pair.used)
+        arrivalConflicts.add(pair.arrivalKey);
+      arrivalSamples.set(pair.arrivalKey, { layout: pair.land, outcome: pair.used });
+    }
     if (samples.has(prepared.key) && samples.get(prepared.key).outcome !== y) conflicts.add(prepared.key);
     samples.set(prepared.key, { layout: prepared.l, outcome: y });
   }
   for (const key of conflicts) samples.delete(key);
+  for (const key of arrivalConflicts) arrivalSamples.delete(key);
   const history = [...samples.values()],
     knownJoint = new Set(history.map((s) => joint(s.layout)));
   const modes = ['pair', 'board', 'landmarks'],
@@ -423,6 +466,126 @@ async function audit(c) {
     return c.follow.effect === 'WIN'
       ? !!next && win(next)
       : !!before && !!after && after.every((v, i) => v - before[i] === c.follow.effect[i]);
+  }
+  if (twoStage) {
+    const landingHistory = [...arrivalSamples.values()],
+      afterModel = fitSpatialCapability(landingHistory, primary, 'board');
+    function classifier(history, model) {
+      const labels = new Map();
+      for (const sample of history) {
+        const k = joint(sample.layout),
+          prior = labels.get(k) ?? new Set();
+        prior.add(sample.outcome);
+        labels.set(k, prior);
+      }
+      return (l) => {
+        const witnessed = labels.get(joint(l));
+        if (witnessed?.size === 1) return [...witnessed][0];
+        if (witnessed?.size > 1) return null;
+        return predictSpatialCapability(model, l);
+      };
+    }
+    const beforeOpen = classifier(history, models.board),
+      afterOpen = classifier(landingHistory, afterModel),
+      beforeKnown = new Set(history.map((r) => joint(r.layout))),
+      afterKnown = new Set(landingHistory.map((r) => joint(r.layout)));
+    // Select by the predicted place after B and the independent capability of C.
+    // New suffixes combine two inserted controls and one deletion from the reference word.
+    const pool = [];
+    for (let i = 0; i < word.length; i++) {
+      const base = word.filter((_, j) => i !== j);
+      for (let j = 0; j <= base.length; j++)
+        for (let k = j; k <= base.length; k++)
+          for (const a of vocab)
+            for (const b of vocab)
+              pool.push([...base.slice(0, j), a, ...base.slice(j, k), b, ...base.slice(k)]);
+    }
+    const seenWords = new Set([...train, ...test].map((w) => w.join('/')));
+    const fresh = choose(
+      pool.filter((w) => !seenWords.has(w.join('/'))),
+      128
+    );
+    const plans = fresh.map((w) => {
+      const before = imagine(w),
+        after = imagine([...w, suffix[0]]);
+      const forecast = before ? beforeOpen(before) : null,
+        future = after ? afterOpen(after) : null;
+      const movement =
+        before && after ? after.actor.every((v, i) => v - before.actor[i] === referenceMove[i]) : null;
+      return {
+        w,
+        before,
+        after,
+        forecast,
+        future,
+        movement,
+        novel: !!before && !beforeKnown.has(joint(before)),
+        newAfter: !!after && !afterKnown.has(joint(after)),
+      };
+    });
+    const positive = plans.filter((p) => p.forecast && p.movement);
+    function pick(ps) {
+      return (
+        ps.find((p) => p.novel && p.newAfter) ??
+        ps.find((p) => p.novel) ??
+        ps.find((p) => p.newAfter) ??
+        ps[0]
+      );
+    }
+    const basePlan = pick(positive),
+      full = pick(positive.filter((p) => p.future));
+    const report = {
+      words: plans.length,
+      trainingBefore: history.length,
+      trainingAfter: landingHistory.length,
+      afterPositives: landingHistory.filter((x) => x.outcome).length,
+      afterModel,
+      unique: score(),
+      paired: null,
+      withFuture: null,
+      bare: null,
+    };
+    const measured = new Set([...samples.keys(), ...conflicts]);
+    for (const p of plans) {
+      const r = await prepare(p.w),
+        actual = r ? await probeBoth(r) : null;
+      if (p === basePlan || p === full) {
+        const row = {
+          word: p.w,
+          measured: !!actual,
+          ...(actual
+            ? {
+                moved: actual.moved,
+                used: actual.used,
+                beforeExact: joint(p.before) === joint(r.l),
+                afterExact: joint(p.after) === joint(actual.land),
+                newBefore: !beforeKnown.has(joint(r.l)),
+                newAfter: !afterKnown.has(joint(actual.land)),
+                newImage: !samples.has(r.key),
+              }
+            : {}),
+        };
+        if (p === basePlan) report.paired = row;
+        if (p === full) report.withFuture = row;
+      }
+      if (!actual || measured.has(r.key)) continue;
+      measured.add(r.key);
+      const pred =
+        p.forecast === false || p.future === false || p.movement === false
+          ? false
+          : p.forecast && p.future && p.movement
+            ? true
+            : null;
+      record(report.unique, pred, actual.moved && actual.used);
+    }
+    const empty = await prepare([]),
+      bare = empty ? await probeBoth(empty) : null;
+    if (bare) report.bare = { moved: bare.moved, used: bare.used };
+    return {
+      ...result,
+      goal: c.follow.effect === 'WIN' ? 'official' : 'next displacement',
+      twoStage: report,
+    };
   }
   if (process.argv.includes('--alternatives')) {
     const { qualifyPreparationAlternatives } = await import('./qualify-preparation-alternatives.mjs');
