@@ -1,3 +1,4 @@
+import {newFrameMemory,offerFrame,recordFrame,type FrameMemory,type FrameTrial} from './inverse-frame-experiment.ts';
 import {newRetainedMemory,offerRetained,recordRetained,type RetainedTrial,type RetainedMemory} from './retained-edits.ts';
 import { newInstrumentMemory, offerInstrument, recordInstrument, type SiteTrial, type InstrumentMemory } from './instrument-experiment.ts';
 import { newContextMemory, offerContext, recordContext, type ContextMemory, type ContextTrial } from './transported-control.ts';
@@ -82,6 +83,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'inverseFrame'
     | 'instrumentSite'
     | 'transportControl'
     | 'placedExchange'
@@ -126,6 +128,7 @@ export type Experiment = {
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
   projection?: Trial;
+  frame?:FrameTrial;
   instrument?:SiteTrial;
   retained?:RetainedTrial;
   transport?:ContextTrial;
@@ -163,6 +166,7 @@ export type Outcome = {
   frontier?: Record<string, unknown>;
   condition?: Record<string, unknown>;
   projection?: Record<string, unknown>;
+  frame?:Record<string,unknown>;
   instrument?:Record<string,unknown>;
   retained?:Record<string,unknown>;
   transport?:Record<string,unknown>;
@@ -177,6 +181,7 @@ export type Memory = {
   reconsiderPlacement?: ReconsiderPlacement | null;
   conditionLearned?: Record<string,LearnedPlacement>;
   projection: ProjectionMemory;
+  frames?:FrameMemory;
   instrument?: InstrumentMemory;
   retained?:RetainedMemory;
   contexts?: ContextMemory;
@@ -207,6 +212,7 @@ export const initialMemory = (epoch: number): Memory => ({
   frontier:newFrontierMemory(),
   projection: newProjectionMemory(),
   instrument: newInstrumentMemory(),
+  frames:newFrameMemory(),
   retained:newRetainedMemory(),
   contexts: newContextMemory(),
   exchanges: newExchangeMemory(),
@@ -387,9 +393,13 @@ export function selectExperiment(
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
-  const free = !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
+  const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
+  if (rows && (m.frames?.active || free)) {
+    const offer = offerFrame(m, o, rows, s, available);
+    if (offer) return offer;
+  }
   if (rows && (m.retained?.active || free)) {
     const offer = offerRetained(m, s, available);
     if (offer) return offer;
@@ -708,6 +718,8 @@ export function recordExperiment(
   m.turns++;
   m.instrument ??= newInstrumentMemory();
   if(!x?.instrument)m.instrument.active=null;
+  m.frames??=newFrameMemory();
+  if(!x?.frame)m.frames.active=null;
   m.retained??=newRetainedMemory();
   if(!x?.retained)m.retained.active=null;
   m.contexts ??= newContextMemory();
@@ -815,6 +827,7 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.frame){const {result,detail}=recordFrame(m,x.frame,b,a);return {...out,result,frame:detail};}
   if(x.retained){const {result,detail}=recordRetained(m,x.retained,b,a,rows,next,t);return {...out,result,retained:detail};}
   if(x.transport){
     const {result,detail}=recordContext(m.contexts,x.transport,b,a,t,next,m.turns);

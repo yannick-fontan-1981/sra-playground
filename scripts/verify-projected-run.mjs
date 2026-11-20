@@ -6,6 +6,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceReplay } from './sic-study-source-replay.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
+import { inverseFrameAudit } from './verify-native-inverse-frames.mjs';
 import { contextAudit } from './verify-context-events.mjs';
 import { siteShape } from '../src/sic/site-operations.ts';
 
@@ -45,7 +46,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -112,11 +113,12 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange || e.instrument || e.transport || e.retained || e.frame
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 const audit=contextAudit(run,hash,partsAt,commandKey);
+const frames=inverseFrameAudit(run,hash,partsAt,cache,commandKey);
 for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
   const action = commandKey(cmd);
@@ -136,8 +138,9 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   });
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
   const event = events.get(i + 1);
-  if ((cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
+  if ((cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
   if (!event) continue;
+  if (event.frame){await frames.record(event,cmd,i,board);continue;}
   if (event.retained){audit.retainedEvent(event,cmd,i,board);continue;}
   if (event.transport||event.instrument){await audit.check(event,cmd,i,cache.get(cmd.from),board);continue;}
   if (event.exchange) {
@@ -659,11 +662,14 @@ for (const [i, cmd] of run.replayCommands.entries()) {
 }
 const won = board.levelsCompleted > run.initialCompleted || board.level > run.start || board.state === 'WIN';
 if (won !== run.levels[0].won) throw Error('Official replay differs');
-await audit.branches(async()=>{
+const reopen=async()=>{
   let b=await openBoard();
   if(b.level!==run.start&&b.canSelectLevel)b=await engine.dispatch({type:'selectLevel',level:run.start});
   return b;
-},cmd=>engine.dispatch({type:'action',actionId:cmd.id,...(cmd.id===6?{data:cmd.data}:{})}));
+};
+const dispatchCommand=cmd=>engine.dispatch({type:'action',actionId:cmd.id,...(cmd.id===6?{data:cmd.data}:{})});
+await audit.branches(reopen,dispatchCommand);
+await frames.compare(reopen,dispatchCommand);
 console.log(
   JSON.stringify({
     code: run.code,
@@ -686,6 +692,7 @@ console.log(
     instrument:audit.sites,
     transport:audit.transports,
     retained:audit.retained,
+    responseFrames:frames.stats,
     exchanges: {...exchanges,destinations:exchanges.destinations.size},
   })
 );

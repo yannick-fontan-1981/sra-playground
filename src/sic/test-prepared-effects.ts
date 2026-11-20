@@ -1,3 +1,4 @@
+import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
@@ -23,6 +24,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  inverseFrame:'Place a learned reference to reach a predicted destination and continue from it',
   instrumentSite:'Test the control at a new spatial binding and compare what becomes reachable',
   transportControl: 'Test which component inherits a command when the original configuration is restored',
   placedExchange: 'Place a movable partner to reach and use a predicted destination',
@@ -98,7 +100,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       ].includes(phase)
         ? a
         : b;
-      const command = available.find((c) => observedCommandKey(c) === key);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.frame ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = labels[phase],
@@ -167,6 +169,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         actions: [command],
         experiment,
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
+        ...(experiment.frame ? {frameForecast:experiment.frame} : {}),
         ...(experiment.retained ? {retainedForecast: experiment.retained} : {}),
         ...(experiment.transport ? { transportForecast: experiment.transport.plan } : {}),
         ...(experiment.exchange ? { exchangeForecast: experiment.exchange.program } : {}),
