@@ -403,7 +403,8 @@ function presentation(w:World,detail:DetailedStep):{frames:number[][][];duration
   if(detail.blockedMirrorIndices?.length){
     const normal=()=>renderWorld(w,detail.state),red=()=>{
       const frame=normal();
-      for(const index of detail.blockedMirrorIndices!){const mirror=detail.state.mirrors[index];if(mirror)stamp(frame,mirror.at,mirrorSprite(mirror.facing).map(row=>row.map(pixel=>pixel===0?8:pixel)));}
+      // Warn on the black backing (5); preserve the white reflective diagonal (0).
+      for(const index of detail.blockedMirrorIndices!){const mirror=detail.state.mirrors[index];if(mirror)stamp(frame,mirror.at,mirrorSprite(mirror.facing).map(row=>row.map(pixel=>pixel===5?8:pixel)));}
       return frame;
     };
     return {frames:[red(),normal(),red(),normal()],durations:[110,70,110,0]};

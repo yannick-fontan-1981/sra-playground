@@ -1,6 +1,18 @@
-# SS10 — Validation de la version HTML v1
+# SS10 — Validation de la version HTML
 
-## Résultats
+## Correction du socle des miroirs — 20 novembre 2026
+
+L'avertissement de réflexion impossible colore désormais en rouge les pixels noirs du socle (5 → 8), en conservant la diagonale blanche (0). Les deux clignotements et les règles de réflexion sont inchangés.
+
+- Compilation TypeScript stricte et **87 tests du moteur réussis** après correction.
+- Vérification ciblée au niveau 5 : depuis Recommencer, `LLUULCDX` (`C` = Tab, `X` = Espace) provoque deux destinations incompatibles pour le Guerrier.
+- Les deux miroirs responsables sont signalés : leurs six pixels de socle alternent rouge/noir/rouge/noir ; leurs six pixels de diagonale restent blancs. Aucun autre pixel ni aucune position ne change.
+
+Empreinte du HTML corrigé : `565a6a1612a7c641fe5b59a8e862898705b33e3782e845529fc0f68179922584`.
+
+Les résultats détaillés ci-dessous concernent la validation initiale v1. Cette correction visuelle a fait l'objet du contrôle ciblé ci-dessus ; elle ne modifie aucune carte ni aucune règle.
+
+## Résultats de la validation initiale v1
 
 - Compilation TypeScript stricte et **87 tests du moteur réussis**.
 - Huit témoins gagnants : **475 actions**, dont **44 sélections**, et **1 392 images**.

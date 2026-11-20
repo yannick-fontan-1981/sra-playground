@@ -369,15 +369,16 @@ test('a fatal initial forced landing on an absent bridge rejects the new campaig
   let session=new DuoPuzzleSession([valid]);session.nextHero();const before=session.observe();assert.throws(()=>{session=new DuoPuzzleSession([valid,fatal]);},/Initial piston circuit/);assert.deepEqual(session.observe(),before);
 });
 
-test('the mirror physically blocking a reflection blinks red twice and leaves every actor in place',()=>{
+test('the black back of a blocking mirror blinks red twice while its diagonal stays white',()=>{
   const f=fixture({W:[5,3],mirrors:[[5,5,'NE'],[6,5,'SE'],[11,1,'NE']]}),before=JSON.stringify(f.state),detail=stepDetailed(f.world,f.state,5),session=new DuoPuzzleSession([f.spec]);
   const initial=session.observe(),view=session.action(5),pixel=cellToPixel(f.at(6,5));
   assert.equal(detail.state.failed,true);assert.deepEqual(detail.phases,[]);assert.deepEqual(detail.blockedMirrorIndices,[1]);
   assert.deepEqual({...detail.state,failed:false},f.state);assert.equal(JSON.stringify(f.state),before);
   assert.equal(view.frames.length,4);assert.deepEqual(view.frameDurationsMs,[110,70,110,0]);
-  assert.deepEqual(view.frames.map(frame=>frame[pixel.y+1][pixel.x+1]),[8,0,8,0]);
+  assert.deepEqual(view.frames.map(frame=>frame[pixel.y][pixel.x]),[8,5,8,5]);
+  assert.deepEqual(view.frames.map(frame=>frame[pixel.y+1][pixel.x+1]),[0,0,0,0]);
   const diff=[];for(let y=0;y<64;y++)for(let x=0;x<64;x++)if(view.frames[0][y][x]!==initial.frame[y][x])diff.push([x,y]);
-  assert.deepEqual(diff,[[pixel.x+2,pixel.y],[pixel.x+1,pixel.y+1],[pixel.x,pixel.y+2]]);
+  assert.deepEqual(diff,[[pixel.x,pixel.y],[pixel.x+1,pixel.y],[pixel.x,pixel.y+1]]);
   assert.deepEqual(view.frames[1],initial.frame);assert.deepEqual(view.frames.at(-1),view.frame);assert.deepEqual(view.frame,initial.frame);
   assert.equal(view.state,'NOT_FINISHED');assert.equal(view.canUndo,false);
   assert.deepEqual(Object.keys(view).sort(),[...Object.keys(initial),'frameDurationsMs'].sort());
@@ -394,7 +395,11 @@ test('both interfering mirrors blink for incompatible destinations of one actor,
   assert.equal(d.state.failed,true);assert.deepEqual(d.blockedMirrorIndices,[0,1]);assert.deepEqual(d.phases,[]);
   assert.deepEqual(d.state.heroes,f.state.heroes);assert.deepEqual(d.state.mirrors,f.state.mirrors);
   const frames=transitionFrames(f.world,f.state,d.state,5);
-  for(const [i,m] of f.state.mirrors.entries()){const p=cellToPixel(m.at);assert.equal(frames[0][p.y+1][p.x+1],i<2?8:0);}
+  for(const [i,m] of f.state.mirrors.entries()){
+    const p=cellToPixel(m.at),backY=m.facing==='NE'?2:0;
+    assert.equal(frames[0][p.y+1][p.x+1],0,'reflective diagonal stays white');
+    assert.equal(frames[0][p.y+backY][p.x],i<2?8:5,'only involved mirror backs blink red');
+  }
 });
 test('mirror transfers competing for one destination identify both sources and remain atomic',()=>{
   const f=fixture({W:[5,3],T:[9,3],mirrors:[[5,5,'NE'],[9,5,'NW']]}),d=stepDetailed(f.world,f.state,5);

@@ -46,7 +46,8 @@ candidat plus éloigné ne bloque pas le plus proche.
 Espace active tous les miroirs simultanément. Les trajectoires et arrivées doivent être
 compatibles. Le reflet d’un héros est annoncé par un + gris clair et celui d’une caisse
 par un contour carré gris clair. Il n’y a pas de prévisualisation de poussée.
-Un miroir qui empêche une réflexion clignote deux fois en rouge ; ce signal peut être
+Le socle noir d'un miroir qui empêche une réflexion clignote deux fois en rouge,
+en conservant sa diagonale blanche ; ce signal peut être
 rejoué sans consommer de tour ni créer d’entrée Annuler.
 Les miroirs restent visibles au-dessus des boutons et repères.
 
