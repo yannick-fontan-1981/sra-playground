@@ -47,6 +47,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
     id: `sic-plan:${observation.observation_ref}`, family, strategy, objective, authority,
     subObjective: typeof subObjective === 'string' ? subObjective : null,
     ...(strategyObjective ? { strategyObjective } : {}),
+    ...(proposal.exchangeForecast ? { exchangeForecast: proposal.exchangeForecast } : {}),
     ...(missingControl ? { missingControl } : {}),
     ...(need?.status === 'assigned' ? { need } : {}),
     ...(need?.status === 'assigned' && need.kind === 'observe_untried_input_effect'

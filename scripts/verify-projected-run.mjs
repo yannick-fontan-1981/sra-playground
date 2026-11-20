@@ -43,7 +43,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer || e.exchange)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -89,6 +89,7 @@ const controlled = new Set();
 const counts = { issued: 0, observed: 0, verifiedLanding: 0, verifiedContinuation: 0, refuted: 0 };
 const cache = new Map();
 const delayed = { issued: 0, preparedAccess: 0, exactPredictions: 0, followingMovements: 0 };
+const exchanges = { plans:0, placements:0, triggers:0, arrivals:0, uses:0, exactUses:0, official:0, destinations: new Set(), exclusionUses:0 };
 const transfers = { issued:0, preparations:0, verifiedPreparations:0, triggers:0, exact:0, uses:0, exactUses:0, official:0 };
 const commandKey = (cmd) => 'ACTION' + cmd.id + (cmd.id === 6 ? ':' + cmd.data.x + ',' + cmd.data.y : '');
 async function partsAt(board, key, revision) {
@@ -109,13 +110,14 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer || e.exchange
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.from) throw Error('Divergent source at ' + i);
   const action = commandKey(cmd);
+  const priorState = board.state;
   if (needPositionHistory) await partsAt(board, cmd.from, i + 1);
   const input = [cmd.from, board.level, board.state, board.availableActionIds.join(','), action].join('/');
   const prior = witnessed.get(input) ?? new Set();
@@ -132,6 +134,61 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
   const event = events.get(i + 1);
   if (!event) continue;
+  if (event.exchange) {
+    const v = event.exchange, step = v.steps[v.index], first = i-v.index;
+    const seal = hash([v.roles,v.refs,v.steps,v.alternatives,...(v.aims ? [v.aims] : [])]);
+    const contents = x => JSON.stringify([x.roles.map(r=>[r.signature,r.fixed]),x.refs,
+      x.steps.map(s=>[s.kind,s.op,s.before,s.after]),x.alternatives.map(t=>[t.placement,t.arrival,t.next]),(x.aims??[]).map(a=>[a.member,a.feature,a.at,a.gap,a.directGap,a.value])]);
+    const start = events.get(first+1)?.exchange;
+    if (first<0 || !step || step.op!==action || seal!==cmd.forecastSeal || !start || start.index!==0 ||
+        contents(start)!==contents(v) || (v.index && events.get(i)?.exchange?.index!==v.index-1))
+      throw Error('Exchange forecast missing before its first action at '+i);
+    function layout(parts) {
+      const positions = v.roles.map(r => {
+        const group = parts.filter(e=>e.signature===r.signature).map(e=>e.position.join());
+        const left = group.filter(p=>!r.fixed.includes(p));
+        return group.length===r.fixed.length+1 && left.length===1 && r.fixed.every(p=>group.includes(p))
+          ? left[0].split(',').map(Number) : null;
+      });
+      return positions.every(Boolean) ? positions : null;
+    }
+    const eq = (a,b)=>JSON.stringify(a)===JSON.stringify(b);
+    const p = layout(cache.get(cmd.from)), q = layout(await partsAt(board,cmd.to,i+2));
+    const boundary = board.levelsCompleted>run.initialCompleted || board.state==='WIN';
+    const exact = !boundary && board.state===priorState && eq(step.after,q);
+    if (!eq(p,step.before) || !eq(q,v.observed) || v.won!==boundary ||
+        v.exact!==exact || event.result!=='placed_'+step.kind+(boundary?'_completion':exact?'_verified':'_refuted'))
+      throw Error('Incorrect exchange receipt at '+i);
+    const trigger = v.steps.at(-2);
+    if (v.steps.length<3 || v.steps[0].kind!=='prepare' || trigger.kind!=='exchange' ||
+        v.steps.at(-1).kind!=='use' || !eq(trigger.before,[trigger.after[1],trigger.after[0]]) ||
+        v.steps.some((s,j)=>j>0 && !eq(s.before,v.steps[j-1].after)))
+      throw Error('Invalid composed exchange at '+i);
+    if (!v.index) {
+      const witnesses = v.refs.map(ref=>{
+        const j=i+ref-event.revision;
+        if (j<0 || j>=first) throw Error('Future exchange witness');
+        const src=run.replayCommands[j];
+        return {before:layout(cache.get(src.from)),after:layout(cache.get(src.to)),cmd:commandKey(src)};
+      });
+      if (!witnesses.some(s=>s.before && s.after && eq(s.before,[s.after[1],s.after[0]]) &&
+          (s.cmd===trigger.op || (s.cmd.startsWith('ACTION6:') && trigger.op.startsWith('ACTION6:')))))
+        throw Error('Missing reciprocal evidence at '+i);
+      const delta = s => s.after.map((p,j)=>p.map((k,i)=>k-s.before[j][i]));
+      if (v.steps.filter(s=>s.kind!=='exchange').some(s=>!witnesses.some(w=>w.cmd===s.op && w.before && w.after && eq(delta(w),delta(s)))))
+        throw Error('Missing translation evidence at '+i);
+      exchanges.plans++;
+    }
+    exchanges.placements+=Number(step.kind==='prepare' && exact);
+    exchanges.triggers+=Number(step.kind==='exchange');
+    exchanges.arrivals+=Number(step.kind==='exchange' && exact);
+    exchanges.uses+=Number(step.kind==='use');
+    exchanges.exactUses+=Number(step.kind==='use' && exact);
+    exchanges.exclusionUses+=Number(step.kind==='use' && exact && v.roles.some(r=>r.fixed.length));
+    if(step.kind==='exchange' && exact) exchanges.destinations.add(JSON.stringify([v.roles,step.after]));
+    exchanges.official+=Number(boundary);
+    continue;
+  }
   if(event.transfer){
     const v=event.transfer, before=cache.get(cmd.from), after=await partsAt(board,cmd.to,i+2);
     const present=(es,p)=>es.some(e=>e.position.join()===p.join()&&siteShape(e)===v.shape);
@@ -615,5 +672,6 @@ console.log(
     conditions,
     delayed,
     transfers,
+    exchanges: {...exchanges,destinations:exchanges.destinations.size},
   })
 );

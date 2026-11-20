@@ -1,3 +1,4 @@
+import {newExchangeMemory,exchangeOffer,observeExchange,recordExchange,type ExchangeMemory,type ExchangeTrial} from './placed-exchange.ts';
 import { newDelayedMemory, selectDelayed, recordDelayed, type DelayedTrial, type DelayedMemory } from './distinguishing-suffix.ts';
 import type {
   NativeCommand,
@@ -76,6 +77,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'placedExchange'
     | 'configuredTransfer'
     | 'conditionSetup' | 'conditionTrigger' | 'conditionUse'
     | 'frontierRoute' | 'frontierProbe' | 'frontierUse' | 'frontierConsequence'
@@ -117,6 +119,7 @@ export type Experiment = {
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
   projection?: Trial;
+  exchange?: ExchangeTrial;
   transfer?: TransferTrial;
   placement?: Placement;
   derive?: Derivation;
@@ -150,6 +153,7 @@ export type Outcome = {
   frontier?: Record<string, unknown>;
   condition?: Record<string, unknown>;
   projection?: Record<string, unknown>;
+  exchange?: Record<string, unknown>;
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
@@ -160,6 +164,7 @@ export type Memory = {
   reconsiderPlacement?: ReconsiderPlacement | null;
   conditionLearned?: Record<string,LearnedPlacement>;
   projection: ProjectionMemory;
+  exchanges?: ExchangeMemory;
   transfers?: TransferMemory;
   space: SpatialMemory;
   equations: CapabilityMemory;
@@ -185,6 +190,7 @@ export const initialMemory = (epoch: number): Memory => ({
   delayed: newDelayedMemory(),
   frontier:newFrontierMemory(),
   projection: newProjectionMemory(),
+  exchanges: newExchangeMemory(),
   transfers: newTransferMemory(),
   space: newSpatialMemory(),
   equations: freshCapabilities(),
@@ -362,6 +368,11 @@ export function selectExperiment(
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
+  const exchange = m.exchanges;
+  if (rows && exchange && (exchange.active || (!m.transfers?.active && !m.condition && !m.pending && !m.projection.active && !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active))) {
+    const proposal = exchangeOffer(exchange,o,rows,available,s);
+    if (proposal) return proposal;
+  }
   if(rows && (m.transfers?.active || (!m.condition && !m.reconsiderPlacement && !m.pending && !m.projection.active && !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active))) {
     const transfer=chooseTransfer(m,o,rows,available,s);
     if(transfer)return transfer;
@@ -661,6 +672,9 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  m.exchanges ??= newExchangeMemory();
+  if (!x?.exchange) m.exchanges.active = null;
+  observeExchange(m.exchanges,b,a,op);
   m.transfers??=newTransferMemory();
   m.transfers.sites=witnessedSites(m.transfers.sites,b,a,rows,next,op);
   if(!x?.transfer)m.transfers.active=null;
@@ -758,6 +772,10 @@ export function recordExperiment(
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
     return {...out,result,condition:detail};
+  }
+  if (x.exchange) {
+    const {result, detail} = recordExchange(m.exchanges,x.exchange,b,a);
+    return {...out,result,exchange:detail};
   }
   if(x.transfer) {
     const {result,detail}=recordTransfer(m,x.transfer,b,a);

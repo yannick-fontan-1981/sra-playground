@@ -23,6 +23,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  placedExchange: 'Place a movable partner to reach and use a predicted destination',
   configuredTransfer: 'Test the predicted destination and next move after configuring two sites',
   conditionSetup: 'Place a partner where the observed spatial conditions predict a motion',
   conditionTrigger: 'Compare the predicted motion with the inactive control at the original placement',
@@ -135,7 +136,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         : null;
       const projected = experiment.projection?.plan;
       const link=experiment.transfer?.plan;
-      const imagined = link ? {role:link.role,entry:link.entry,exit:link.exit,placement:link.prepare,arrival:link.desired,subsequent:link.following,alternatives:link.alternatives} : projected ? { roles: projected.roles, placement: projected.steps[projected.arrival]!.from,
+      const imagined = experiment.exchange?.program ?? (link ? {role:link.role,entry:link.entry,exit:link.exit,placement:link.prepare,arrival:link.desired,subsequent:link.following,alternatives:link.alternatives} : projected ? { roles: projected.roles, placement: projected.steps[projected.arrival]!.from,
         arrival: projected.steps[projected.arrival]!.to, continuation: projected.steps[projected.arrival+1], control: projected.steps[projected.arrival]!.control ?? null, goals: projected.goals, alternatives: experiment.projection?.alternatives ?? [] } : experiment.access
         ? {
             chosen: {
@@ -149,7 +150,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
             },
             alternatives: experiment.access.alternatives,
           }
-        : null;
+        : null);
       const need = { ...question, id: sicNeedId(question), status: 'assigned', evidence };
       const witness =
         command.action_ref === 'ACTION6'
@@ -163,6 +164,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         kind: preparedEffectsId,
         actions: [command],
         experiment,
+        ...(experiment.exchange ? { exchangeForecast: experiment.exchange.program } : {}),
         ...(imagined ? { spatial_forecast: imagined } : {}),
         ...(experiment.delayed ? { conditional_program: experiment.delayed } : {}),
         ...(experiment.frontier ? { reachable_experiment: experiment.frontier } : {}),

@@ -11,7 +11,7 @@ type Aim = {
   stride: number;
   transfers: XY[];
 };
-function contactEvidence(body: NativeEntity, f: NativeEntity) {
+export function contactEvidence(body: NativeEntity, f: NativeEntity) {
   const width = f.bbox[2] - f.bbox[0] + 1,
     height = f.bbox[3] - f.bbox[1] + 1;
   const tags: (keyof typeof prior.movement.features)[] = ['contact', 'centered'];
