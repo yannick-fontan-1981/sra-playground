@@ -7,12 +7,21 @@ import type {
   NativeProposal,
 } from '../logos-engine/v6-native-types.ts';
 import { observedCommandKey } from './observed-command-frontier.ts';
-import { initialMemory, selectExperiment, recordExperiment, type Experiment } from './preparation-experiments.ts';
+import {
+  initialMemory,
+  selectExperiment,
+  recordExperiment,
+  type Experiment,
+} from './preparation-experiments.ts';
 import { sicNeedId } from './need-identity.ts';
 import { exhaustedGroup } from './test-observed-compositions.ts';
 export const preparedEffectsId = 'sic_test_prepared_effects';
+import { newSpatialMemory } from './spatial-access.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  accessContinue: 'Exercise an untested command at the predicted destination',
+  accessSetup: 'Arrange the measured bodies for a predicted destination',
+  accessTrigger: 'Test the destination derived from this spatial configuration',
   prepare: 'Prepare a second condition for an action with a measured baseline',
   probe: 'Measure B after A from the matched starting scene',
   control: 'Measure B alone from the original starting scene',
@@ -58,9 +67,16 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows);
       if (!experiment) return null;
       const { a, b, phase } = experiment;
-      const key = ['prepare', 'confirmA', 'reuseA', 'route', 'inverse', 'position', 'deriveA', 'carry'].includes(
-        phase
-      )
+      const key = [
+        'prepare',
+        'confirmA',
+        'reuseA',
+        'route',
+        'inverse',
+        'position',
+        'deriveA',
+        'carry',
+      ].includes(phase)
         ? a
         : b;
       const command = available.find((c) => observedCommandKey(c) === key);
@@ -86,6 +102,20 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         parentObjective: parent,
         satisfactionContract: 'compare_the_public_effect_of_B_after_each_preparation',
       };
+      const imagined = experiment.access
+        ? {
+            chosen: {
+              actor: experiment.access.card.law.actor,
+              trigger: experiment.access.card.law.op,
+              launch: experiment.access.card.launch,
+              placement: experiment.access.card.anchorAt,
+              destination: experiment.access.card.destination,
+              interest: experiment.access.card.interest,
+              score: experiment.access.card.score,
+            },
+            alternatives: experiment.access.alternatives,
+          }
+        : null;
       const need = { ...question, id: sicNeedId(question), status: 'assigned', evidence };
       const witness =
         command.action_ref === 'ACTION6'
@@ -99,6 +129,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         kind: preparedEffectsId,
         actions: [command],
         experiment,
+        ...(imagined ? { spatial_forecast: imagined } : {}),
         steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: o.level_epoch },
         sicSituationCard: {
@@ -112,7 +143,11 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         compositions: [
           { id: need.id, observed: false, open_question: label, relations: ['contributes_to:' + parent] },
         ],
-        question: { reason: label, hypothesis_refs: evidence },
+        question: {
+          reason: label,
+          hypothesis_refs: evidence,
+          ...(imagined ? { spatial_forecast: imagined } : {}),
+        },
         route_refs: evidence,
         sicLocalDecision: { strategy: phase, objective: { id: need.id, label, parent }, need },
         bundle_template: {
@@ -145,11 +180,14 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     },
     record(b, a, c, r, n, p) {
       const outcome = acquire(b, a, c, r, n, p.experiment);
-      return { events: outcome ? [{ kind: 'sic_preparation_outcome', epoch: b.level_epoch, ...outcome }] : [] };
+      return {
+        events: outcome ? [{ kind: 'sic_preparation_outcome', epoch: b.level_epoch, ...outcome }] : [],
+      };
     },
     state: () => m,
     restore(value) {
       m = structuredClone(value as typeof m);
+      m.space ??= newSpatialMemory();
     },
   };
 }

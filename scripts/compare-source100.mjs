@@ -165,8 +165,11 @@ async function run(code, games) {
       });
       const executionMs = performance.now() - began;
       issued++;
+      if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
+        console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push(action.id === 6 ? { id: action.id, data: action.data } : { id: action.id });
+        replayCommands.push({id:action.id, ...(action.id === 6 ? { data:action.data } : {}),
+          from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
       if (!source) observeCoverage(previous, board, action, nextHash);
@@ -206,7 +209,15 @@ async function run(code, games) {
         effectsBefore = changes,
         newBefore = newScenes,
         relationalBefore = relational;
-      await agent.run(cap);
+      let previousIssued;
+      do {
+        previousIssued = issued;
+        const left = cap - (issued - actionsBefore);
+        await agent.run(Math.min(600, left));
+        if (agent.snapshot.status === 'error') throw Error(agent.snapshot.message);
+      } while (issued > previousIssued && issued - actionsBefore < cap && board.level === level &&
+        board.levelsCompleted === wonBefore && board.state !== 'WIN' && board.state !== 'GAME_OVER' &&
+        agent.snapshot.canRun && agent.snapshot.status !== 'stopped');
       const snapshot = agent.snapshot;
       if (snapshot.status === 'error') throw Error(snapshot.message);
       const won = board.levelsCompleted > wonBefore || board.level > level || board.state === 'WIN';
@@ -256,6 +267,7 @@ async function run(code, games) {
       preparation: [...preparation.values()].map(
         ({
           epoch,
+          access,
           phase,
           hypothesis,
           result,
@@ -300,6 +312,7 @@ async function run(code, games) {
           precondition,
           capability,
           predictedGap,
+          ...(access ? {access} : {}),
         })
       ),
       ...(source ? { steps } : {}),

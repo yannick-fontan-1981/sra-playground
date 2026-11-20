@@ -2750,7 +2750,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       { id: exhaustedGroup, families: [preparedEffectsId,compositionFamily] }] : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 179 : 177,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 180 : 177,
       groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior, preparationReturns } : {}) };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

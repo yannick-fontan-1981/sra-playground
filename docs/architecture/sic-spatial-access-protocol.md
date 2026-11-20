@@ -1,0 +1,23 @@
+# SIC Fallback · Dispositions donnant accès à un lieu
+
+## Origine de l’hypothèse
+
+Le seul corpus de conception est constitué des 100 traces L1 `source-final-{0..7}` du témoin de composition. Le collecteur impose la liste des 100 jeux du catalogue et vérifie les empreintes publiques avant et après chacune des 2 904 actions. Les 1 667 images distinctes comptées jeu par jeu sont représentées localement par les positions des composantes identifiables sans ambiguïté. Les rôles sont inférés dans chaque partie. Aucune identité de jeu, position, palette, commande préparatoire ou recette du corpus n’est embarquée dans le nouveau planificateur.
+
+Dans six jeux sources, un mobile reste au même endroit pendant qu’un autre élément bouge, puis la même commande aboutit à une autre position selon que cette préparation a eu lieu. Les 40 descriptions incluent des parties co-mobiles d’un même objet. Dans VOIS et ESCT, six relations candidates décrivent l’arrivée par un décalage constant par rapport à une autre pièce, malgré des vecteurs de déplacement différents. L’audit des interventions prend toutes ces relations, énumère les préparations d’une ou deux commandes observées, conserve les dispositions où seul le repère parmi les deux variables mesurées a changé de position, et écarte les sites d’apprentissage ainsi que les déclenchements déjà présents dans les traces. VOIS donne 24 interventions physiques distinctes. Les deux descripteurs co-mobiles prédisent les 24 arrivées. Les autres relations ne fournissent aucun essai admissible sous ces contraintes.
+
+## Choix avant exécution
+
+Le planificateur dérive des destinations dans le repère d’une autre pièce, par un déplacement exceptionnel observé ou sous une condition d’alignement issue d’un contraste avec et sans préparation. Il projette ensemble le voyageur et le repère pendant une séquence de placements. Il examine au plus 512 états par loi, sur douze préparations au plus. Les poids et limites de recherche sont des choix de conception. Il estime le terrain grâce aux pixels que libèrent les pièces. Les régions ainsi obtenues sont des hypothèses visuelles.
+
+Chaque proposition contient l’objet, la disposition requise, la commande, l’arrivée prédite, le coût et jusqu’à quatre possibilités écartées. L’intérêt dépend de l’accès à une région encore inexplorée, d’une continuation précise vers un endroit neuf, d’un rapprochement inédit d’un élément visible et de la capacité de discriminer deux résultats. Une préparation démentie interrompt le plan. Une arrivée vérifiée entre dans un registre réutilisable. Une commande encore inexplorée peut ensuite être essayée sur place.
+
+## Épreuve enregistrée avant le premier accès de ce chantier à Custom 4
+
+- Témoin du solveur `2c823c51a885b0b05309f64d787973513a82d8d8`. Le point de départ du code comprend également le rapport précédent. Le moteur de jeu est figé à `f4d28aee9ebbb35533bb97a26968efd22887473d`. La balise distante `sic-spatial-access-source100-candidate-v1` fixe le candidat.
+- Qualification source avec les trois parties VOIS, SWCH et KEYD à 90 actions. Contrôle de régression sur la totalité des 100 niveaux, avec 60 actions par jeu. Toute victoire est déterminée par le compteur officiel.
+- Cible primaire SS01 L2 en entrée directe, 600 actions, quatre travailleurs de raisonnement et aucun guidage. Comparaison avec le témoin de préparation de la même entrée. Après un échec à 600, une deuxième session du même candidat peut poursuivre jusqu’à 1 200 actions avec un plafond de niveau fixé dès son initialisation. Vérifier l’empreinte initiale et comparer les préfixes effectivement exécutés.
+- Audit hors agent des déclenchements prospectifs, en repartant du préfixe public identique pour exécuter le déclenchement immédiat et son bras préparé. Le changement de région décrit par le plan reste une prédiction visuelle. Une traversée d’îlot exige également une géométrie publique indépendante stable, une arrivée observée dans l’autre région et l’identité conservée du voyageur.
+- Pour les douze premières décisions offrant plusieurs configurations, comparer hors ligne le choix et les alternatives effectivement enregistrées avant action, depuis le même préfixe, pour la réalisation du placement, de l’arrivée et de la continuation. Cette petite comparaison descriptive ne donne pas une estimation générale de l’optimalité du classement.
+- La victoire sur SS01 L2, les prédictions correctes et les interventions causales sont trois résultats mesurés séparément. La cible était déjà connue des études précédentes. Le gel protège ce nouvel essai des ajustements sur ses résultats. SS09 L2 reste réservé.
+

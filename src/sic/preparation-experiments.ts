@@ -21,6 +21,15 @@ import {
   type Derivation,
 } from './derive-at-site.ts';
 
+import { observeFloor } from './access-terrain.ts';
+import {
+  proposeAccess,
+  recordAccess,
+  newSpatialMemory,
+  type SpatialMemory,
+  type AccessCard,
+} from './spatial-access.ts';
+
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -32,6 +41,7 @@ export type Edge = {
   stable: boolean;
   anchors: Record<string, Anchor>;
   mark?: Mark;
+  visibleAfter?: string[];
 };
 export type Pair = {
   origin: number;
@@ -70,7 +80,10 @@ export type Experiment = {
     | 'deriveA'
     | 'deriveB'
     | 'carry'
-    | 'carryB';
+    | 'carryB'
+    | 'accessContinue'
+    | 'accessSetup'
+    | 'accessTrigger';
   origin: number;
   a: string;
   b: string;
@@ -82,6 +95,7 @@ export type Experiment = {
   refs: number[];
   placement?: Placement;
   derive?: Derivation;
+  access?: { card: AccessCard; step: number; alternatives: Record<string, unknown>[] };
 };
 export type Outcome = {
   precondition?: string;
@@ -104,9 +118,11 @@ export type Outcome = {
   enabledMotion?: boolean;
   capability?: Derivation['capability'];
   strictMatch?: boolean;
+  access?: Record<string, unknown>;
 };
 export type Memory = {
   epoch: number;
+  space: SpatialMemory;
   scenes: string[];
   revisionScene: Record<number, number>;
   edges: Edge[];
@@ -126,6 +142,7 @@ export type Memory = {
 };
 export const initialMemory = (epoch: number): Memory => ({
   epoch,
+  space: newSpatialMemory(),
   scenes: [],
   revisionScene: {},
   edges: [],
@@ -179,7 +196,8 @@ export function measureEffect(
     });
   }
   moves.sort((a, b) => a.actor.localeCompare(b.actor));
-  if (moves.length) return { key: 'move:' + moves.map((m) => [m.actor, m.dx, m.dy].join('/')).join('|'), moves };
+  if (moves.length)
+    return { key: 'move:' + moves.map((m) => [m.actor, m.dx, m.dy].join('/')).join('|'), moves };
   // Compare the change attributable to B in its own arm. Absolute endpoints include A.
   const replacements = new Map<string, number>();
   for (let y = 0; y < rows.length; y++)
@@ -216,7 +234,16 @@ function pairs(m: Memory): Pair[] {
     const d = index.get(a.s + '|' + b.cmd);
     if (!d || d.effect.key === b.effect.key) continue;
     const id = idOf(a.s, a.cmd, b.cmd);
-    pairs.set(id, { id, origin: a.s, prepared: a.t, prep: a.cmd, probe: b.cmd, direct: d, after: b, first: a });
+    pairs.set(id, {
+      id,
+      origin: a.s,
+      prepared: a.t,
+      prep: a.cmd,
+      probe: b.cmd,
+      direct: d,
+      after: b,
+      first: a,
+    });
   }
   return [...pairs.values()];
 }
@@ -228,7 +255,9 @@ function firstRoutes(m: Memory, start: number, limit: number) {
       g.push(e);
       outgoing.set(e.s, g);
     }
-  const routes = new Map<number, { first: Edge | null; length: number }>([[start, { first: null, length: 0 }]]),
+  const routes = new Map<number, { first: Edge | null; length: number }>([
+      [start, { first: null, length: 0 }],
+    ]),
     queue = [start];
   for (const s of queue) {
     const path = routes.get(s)!;
@@ -286,6 +315,10 @@ export function selectExperiment(
   const s = m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
+  if (rows && (!m.pending || m.space.active)) {
+    const access = proposeAccess(m, o, rows, available, s);
+    if (access) return access;
+  }
   const pending = m.pending;
   if (pending?.phase === 'explore') {
     const fresh = [...available].find((op) => !m.edges.some((e) => e.s === s && e.cmd === op));
@@ -316,13 +349,22 @@ export function selectExperiment(
   if (outstanding) {
     const d = outstanding.derive!;
     const bare = m.edges.find(
-      (e) => e.s === outstanding.origin && e.cmd === outstanding.b && e.stable && e.effect.key === d.bareEffect
+      (e) =>
+        e.s === outstanding.origin && e.cmd === outstanding.b && e.stable && e.effect.key === d.bareEffect
     );
     if (bare && s === outstanding.origin && available.has(outstanding.a)) return outstanding;
     const route = routes.get(outstanding.origin)?.first;
     const id = 'derive-route:' + outstanding.rule + ':' + d.site;
     if (bare && route && available.has(route.cmd) && (m.attempts['route:' + id] ?? 0) < 6)
-      return mk('route', s, route.cmd, outstanding.b, [bare.ref, route.ref], id, 'return_for_derived_treatment');
+      return mk(
+        'route',
+        s,
+        route.cmd,
+        outstanding.b,
+        [bare.ref, route.ref],
+        id,
+        'return_for_derived_treatment'
+      );
     if (bare && s === bare.t && bare.s !== bare.t) {
       const trials = [];
       for (const op of available) {
@@ -333,7 +375,13 @@ export function selectExperiment(
           const f = m.edges[c.first]!,
             g = m.edges[c.second]!;
           return (
-            f.cmd === bare.cmd && g.cmd === op && f.s !== s && f.s !== f.t && g.t === f.s && f.stable && g.stable
+            f.cmd === bare.cmd &&
+            g.cmd === op &&
+            f.s !== s &&
+            f.s !== f.t &&
+            g.t === f.s &&
+            f.stable &&
+            g.stable
           );
         });
         if (witnesses.length || source)
@@ -465,7 +513,9 @@ export function selectExperiment(
         !outgoing.some((h) => h.cmd === e.cmd)
     );
     if (controls.length) {
-      const d = controls.sort((x, y) => Number(y.effect.key === 'still') - Number(x.effect.key === 'still'))[0]!;
+      const d = controls.sort(
+        (x, y) => Number(y.effect.key === 'still') - Number(x.effect.key === 'still')
+      )[0]!;
       return mk('probe', prev.s, prev.cmd, d.cmd, [prev.ref, d.ref], idOf(prev.s, prev.cmd, d.cmd));
     }
   }
@@ -506,6 +556,8 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  if(!x?.access){m.space.active=null;m.space.continuation=null;}
+  observeFloor(m.space.floor, b, a, next, effect.moves);
   for (const move of effect.moves) delete m.blocked[[move.actor, ...move.from.split(','), op].join('/')];
   updatePlacement(m, b, a, op, x);
   m.revisionScene[b.revision] = s;
@@ -535,14 +587,28 @@ export function recordExperiment(
     marks.add(mark.bare);
     marks.add(mark.prepared);
   }
+  // Retain initial poses so a component identified as mobile later can be measured in its earlier controls.
+  for (const e of b.entities) if (!e.identity_ambiguous) tracked.add(e.signature);
   const anchors = witnessAnchors(b, rows, new Set([...tracked, ...marks]), marks);
   let index = m.edges.findIndex((e) => e.s === s && e.cmd === op);
   if (index < 0) {
     index = m.edges.length;
-    m.edges.push({ s, t, cmd: op, effect, ref: a.revision, stable: true, anchors, ...(mark ? { mark } : {}) });
+    m.edges.push({
+      s,
+      t,
+      cmd: op,
+      effect,
+      ref: a.revision,
+      stable: true,
+      anchors,
+      ...(mark ? { mark } : {}),
+    });
   }
   const edge = m.edges[index]!;
   Object.assign(edge.anchors, anchors);
+  edge.visibleAfter = a.entities
+    .filter((z) => !z.identity_ambiguous && edge.anchors[z.signature])
+    .map((z) => z.signature);
   if (edge.t !== t || edge.effect.key !== effect.key) edge.stable = false;
   if (previous?.t === s && !m.chains.some((c) => c.first === m.previous && c.second === index))
     m.chains.push({ first: m.previous, second: index });
@@ -563,6 +629,10 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if (x.access) {
+    const { result, detail } = recordAccess(m, x, b, a);
+    return { ...out, result, access: detail };
+  }
   if (x.derive && x.phase !== 'explore') {
     out.result = derivationReceipt(m, x, edge, effect.key, b, a);
     out.trainedSite = x.derive.trained;
