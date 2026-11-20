@@ -1,5 +1,15 @@
 # SS10 — Validation de la version HTML
 
+## Bouton et porte-presse rose-blanc du niveau 7 — 20 novembre 2026
+
+L'accent du circuit `presse` passe du rose (7) au blanc (0) : bouton rose à centre blanc et porte-presse rose avec marques blanches. Le générateur, la référence du niveau et les données compilées utilisent la même couleur.
+
+- Compilation TypeScript stricte réussie et sprites inspectés visuellement.
+- Parcours gagnant du niveau 7 rejoué : **69 actions et 206 images**.
+- Comparaison avec la couleur précédente à chaque action : états, mouvements et effets identiques ; seules les deux cellules du bouton et de la porte-presse comportent des pixels modifiés, exclusivement du rose vers le blanc.
+
+Empreinte du HTML livré : `e9cf7cba9cd42f6b76bf9dd5ef2e611e008bc7781127b4efd474014b194e64a1`.
+
 ## Correction du socle des miroirs — 20 novembre 2026
 
 L'avertissement de réflexion impossible colore désormais en rouge les pixels noirs du socle (5 → 8), en conservant la diagonale blanche (0). Les deux clignotements et les règles de réflexion sont inchangés.

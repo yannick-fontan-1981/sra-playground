@@ -272,7 +272,7 @@ export const SS10_LEVELS:readonly LevelSpec[]=[
             "y": 9
           }
         ],
-        "color": 7
+        "color": 0
       },
       {
         "id": "pont",

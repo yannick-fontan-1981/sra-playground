@@ -2,7 +2,7 @@ import {Author,board} from './author.mjs';
 const {put,fill,strings}=board(14,15,'~');
 fill(1,8,3,10);fill(7,1,11,6);fill(8,5,11,10);fill(4,4,6,4);fill(9,12,11,13);put(10,11,'.');
 put(2,9,'W');put(7,4,'T');put(7,1,'o');put(7,2,'o');put(7,3,'o');put(9,13,'g');put(11,13,'g');
-const spec={id:'ss10-07',title:'Le convoyeur à trois charges',rows:strings(),facing:'S',circuits:[{id:'presse',buttons:[{x:2,y:9}],color:7},{id:'pont',buttons:[{x:4,y:4}],color:14},{id:'sortie',buttons:[{x:11,y:6}],color:15}],gates:[{at:{x:7,y:4},circuit:'presse',direction:'W',closedWhen:'released'},{at:{x:10,y:11},circuit:'sortie',direction:'S',closedWhen:'released'}],platforms:[4,5,6,7].map(x=>({at:{x,y:8},circuit:'pont',activeWhen:'pressed'}))};
+const spec={id:'ss10-07',title:'Le convoyeur à trois charges',rows:strings(),facing:'S',circuits:[{id:'presse',buttons:[{x:2,y:9}],color:0},{id:'pont',buttons:[{x:4,y:4}],color:14},{id:'sortie',buttons:[{x:11,y:6}],color:15}],gates:[{at:{x:7,y:4},circuit:'presse',direction:'W',closedWhen:'released'},{at:{x:10,y:11},circuit:'sortie',direction:'S',closedWhen:'released'}],platforms:[4,5,6,7].map(x=>({at:{x,y:8},circuit:'pont',activeWhen:'pressed'}))};
 const a=new Author(spec);
 a.select('thief').act('D').select('warrior').act('R').stage('Première impulsion : la presse prend le relais de la traction.');
 a.act('L').go(7,3,'thief').act('DD').select('warrior').act('R').stage('Deuxième impulsion : les caisses avancent ensemble dans le conduit inaccessible.');
