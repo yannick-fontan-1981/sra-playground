@@ -13,7 +13,8 @@ export type Territory = {
   stride: XY;
   ops: Stroke[];
   seen: Set<string>;
-  basis: 'substrate' | 'failed_stroke';
+  basis: 'substrate' | 'failed_stroke' | 'translated_orbit';
+  analogy?: { near: XY; far: XY; landmark: string; shift: XY; corroborating: number; refs: number[] };
   home: Set<number>;
   initialRegion: Set<number> | null;
   foreign: Set<number>;

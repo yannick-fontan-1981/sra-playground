@@ -8,13 +8,31 @@ import {
   type Stroke,
 } from './controllable-territory.ts';
 import { groupsOf, resolveRole, type Role } from './exchange-roles.ts';
+import {
+  openCapacityQuestion,
+  offerCapacityWord,
+  recordCapacityWord,
+  type CapacityTicket,
+  type WordMemory,
+} from './probe-territorial-capacity.ts';
+import { orbitTerritories } from './translated-orbit.ts';
+import { walkToOrbit } from './walk-to-orbit.ts';
 import { imaginedPlacements } from './imagine-territory-placement.ts';
 import type { ReferenceRecipe } from './route-to-reference.ts';
 import { frameEvidence } from './inverse-frame-experiment.ts';
 import { measuredReferenceRecipes } from './measured-reference-recipes.ts';
 import type { Experiment, Memory } from './preparation-experiments.ts';
 
-type Stage = 'approach' | 'challenge' | 'displace' | 'interact' | 'land' | 'explore';
+type Stage =
+  | 'approach'
+  | 'challenge'
+  | 'displace'
+  | 'interact'
+  | 'land'
+  | 'explore'
+  | 'capacity_input'
+  | 'capacity_read'
+  | 'capacity_return';
 export type TerritorialStep = {
   op: string;
   stage: Stage;
@@ -22,11 +40,13 @@ export type TerritorialStep = {
   to?: XY;
   marker?: XY;
   expectedMarker?: XY;
+  expectedFrame?: string;
   ref?: number;
 };
 type Step = TerritorialStep;
 type Goal = {
   basis: Territory['basis'];
+  analogy?: Territory['analogy'];
   actor: string;
   from: XY;
   initial: XY;
@@ -50,6 +70,10 @@ type Goal = {
 };
 type Proposal = {
   kind:
+    | 'capacity_word'
+    | 'capacity_reuse'
+    | 'revisit_capacity'
+    | 'walk_to_analogue'
     | 'ordinary_limit'
     | 'imagined_transport'
     | 'learned_transport'
@@ -68,12 +92,15 @@ type Proposal = {
 };
 export type TerritorialTrial = {
   goal: Goal;
+  capacity?: CapacityTicket;
   plan: Proposal;
   cursor: number;
   choices: { kind: string; site: XY | null; ideal: XY | null; arrival: XY }[];
 };
 export type TerritorialMemory = {
   active: TerritorialTrial | null;
+  words?: WordMemory;
+  failedWalks?: Record<string, number>;
   tried: Record<string, number>;
   last: number;
   goal?: Goal;
@@ -98,6 +125,7 @@ export function inTerritory(g: Goal, p: XY) {
 function goalFor(t: Territory): Goal {
   return {
     basis: t.basis,
+    ...(t.analogy ? { analogy: t.analogy } : {}),
     actor: t.actor,
     from: t.from,
     initial: t.origin,
@@ -169,7 +197,8 @@ function hypotheses(
       at,
       ideal,
       first?.from,
-      program.filter((x) => x.stage !== 'approach').map((x) => x.op),
+      ...(kind === 'walk_to_analogue' ? [t.from] : []),
+      program.filter((x) => kind === 'walk_to_analogue' || x.stage !== 'approach').map((x) => x.op),
     ]);
     if (m.territory?.tried[key] !== undefined) return;
     offers.push({
@@ -183,6 +212,21 @@ function hypotheses(
       score: score - Math.log2(1 + program.length),
       refs: [...new Set([...refs, ...program.flatMap((x) => (x.ref ? [x.ref] : []))])],
     });
+  }
+  if (t.analogy) {
+    const walk = walkToOrbit(t, m, rows, available, actor),
+      failures = m.territory?.failedWalks?.[JSON.stringify([t.actor, t.analogy.near, t.analogy.far])] ?? 0;
+    if (walk.length)
+      submit(
+        'walk_to_analogue',
+        null,
+        null,
+        null,
+        walk.at(-1)!.to!,
+        walk,
+        48 / (1 + failures),
+        t.analogy.refs
+      );
   }
   const route = navigation(t, t.rim.p);
   if (route && t.rim.tested === null)
@@ -433,10 +477,18 @@ export function offerTerritory(
   const state = m.territory;
   if (!state) return null;
   let t = state.active;
+  if (
+    !t &&
+    (state.last < m.turns || state.words?.primed?.ref === o.revision || state.words?.resume === o.revision)
+  )
+    t = offerCapacityWord(m, o, available);
   if (!t) {
     if (m.turns < 4 || m.turns <= state.last) return null;
-    const maps = territorialMaps(m, o, rows);
-    for (const map of maps) {
+    function* maps() {
+      yield* territorialMaps(m, o, rows);
+      yield* orbitTerritories(m, o, rows);
+    }
+    for (const map of maps()) {
       const plans = hypotheses(m, o, rows, map, s, available),
         plan = plans[0];
       if (!plan) continue;
@@ -519,24 +571,46 @@ export function recordTerritory(m: Memory, t: TerritorialTrial, b: NativeObserva
   const beforeMarker = t.plan.site ? resolveRole(groupsOf(b), t.plan.site) : null;
   const atContact = step.to ? !!landed && same(landed, step.to) : live;
   const markerMoved = !!beforeMarker && !!mark && !same([...beforeMarker.position], mark);
+  const isWord = step.stage === 'capacity_input' || step.stage === 'capacity_read';
   const success =
-    step.stage === 'approach' || step.stage === 'challenge' || step.stage === 'explore'
-      ? !!landed && !!step.to && same(landed, step.to)
-      : step.stage === 'displace'
-        ? live &&
-          markerMoved &&
-          !!beforeMarker &&
-          !!step.marker &&
-          same([...beforeMarker.position], step.marker) &&
-          !!mark &&
-          !!step.expectedMarker &&
-          same(mark, step.expectedMarker)
-        : step.stage === 'land'
-          ? crossed
-          : live && (atContact || markerMoved || crossed);
+    step.stage === 'capacity_return'
+      ? live && a.frame_hash === step.expectedFrame
+      : step.stage === 'capacity_input'
+        ? live
+        : step.stage === 'capacity_read'
+          ? crossed ||
+            (!!mark &&
+              !!t.plan.ideal &&
+              !!t.plan.siteAt &&
+              !same(mark, t.plan.siteAt) &&
+              same(mark, t.plan.ideal))
+          : step.stage === 'approach' || step.stage === 'challenge' || step.stage === 'explore'
+            ? !!landed && !!step.to && same(landed, step.to)
+            : step.stage === 'displace'
+              ? live &&
+                markerMoved &&
+                !!beforeMarker &&
+                !!step.marker &&
+                same([...beforeMarker.position], step.marker) &&
+                !!mark &&
+                !!step.expectedMarker &&
+                same(mark, step.expectedMarker)
+              : step.stage === 'land'
+                ? crossed
+                : live && (atContact || markerMoved || crossed);
   state.last = m.turns;
   state.tried[t.plan.key] = a.revision;
   state.goal = t.goal;
+  if (t.goal.analogy && t.plan.kind === 'walk_to_analogue' && !success && !crossed) {
+    const id = JSON.stringify([t.goal.actor, t.goal.analogy.near, t.goal.analogy.far]);
+    const failures = (state.failedWalks ??= {});
+    failures[id] = (failures[id] ?? 0) + 1;
+  }
+  if (step.stage === 'capacity_return' && state.words) {
+    if (!success) (state.words.failedReturns ??= {})[t.plan.key] = a.revision;
+    else if (t.cursor + 1 === t.plan.program.length) state.words.resume = a.revision;
+  }
+  if (!crossed && live && !isWord && step.stage === 'displace') openCapacityQuestion(m, t, b, a);
   if (crossed && step.stage !== 'explore') state.crossed = a.revision;
   if (
     crossed &&
@@ -564,6 +638,7 @@ export function recordTerritory(m: Memory, t: TerritorialTrial, b: NativeObserva
     live && success && !crossed && t.cursor + 1 < t.plan.program.length
       ? { ...t, cursor: t.cursor + 1 }
       : null;
+  if (isWord && t.capacity) state.active = recordCapacityWord(m, t, b, a, crossed, won);
   if (
     live &&
     landed &&
@@ -624,13 +699,16 @@ export function recordTerritory(m: Memory, t: TerritorialTrial, b: NativeObserva
     }
   }
   return {
-    result: won
-      ? 'territory_completion'
-      : crossed
-        ? 'territory_entry'
-        : success
-          ? 'territory_step'
-          : 'territory_refuted',
+    result:
+      isWord && !won && !crossed && !success
+        ? 'capacity_unconfirmed'
+        : won
+          ? 'territory_completion'
+          : crossed
+            ? 'territory_entry'
+            : success
+              ? 'territory_step'
+              : 'territory_refuted',
     detail: { trial: t, stage: step.stage, landed, marker: mark, success, crossed, won },
   };
 }

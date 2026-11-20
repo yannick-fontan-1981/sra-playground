@@ -13,6 +13,7 @@ const inside = (g, ranges, p) =>
     return n >= 0 && n % g.stride[0] === 0 && n / g.stride[0] < count;
   });
 export function territoryAudit(run, hash, partsAt, cache, commandKey) {
+  const seenAnalogies = new Set();
   const plans = new Map(),
     branches = [],
     examples = [];
@@ -78,6 +79,49 @@ export function territoryAudit(run, hash, partsAt, cache, commandKey) {
         ),
         'overlapping regions'
       );
+      if (g.basis === 'translated_orbit') {
+        const a = g.analogy,
+          id = JSON.stringify([g.actor, a?.landmark, a?.near, a?.far, a?.refs]);
+        insist(a && same([a.far[0] - a.near[0], a.far[1] - a.near[1]], a.shift), 'invalid translation');
+        if (!seenAnalogies.has(id)) {
+          const markers = cache.get(cmd.from).filter((e) => e.signature === a.landmark);
+          insist(
+            markers.some((e) => same(e.position, a.near)) && markers.some((e) => same(e.position, a.far)),
+            'unwitnessed homologous sites'
+          );
+          const forward = new Map(),
+            back = new Map();
+          function add(g, k, v) {
+            const s = g.get(k) ?? new Set();
+            s.add(v);
+            g.set(k, s);
+          }
+          for (const ref of a.refs) {
+            const action = history(ref),
+              p = position(cache.get(action.from), role),
+              z = position(cache.get(action.to), role);
+            insist(p && z && !same(p, z), 'unwitnessed orbit segment');
+            add(forward, p.join(), z.join());
+            add(back, z.join(), p.join());
+          }
+          function component(g) {
+            const s = new Set([before.join()]);
+            for (const k of s) for (const n of g.get(k) ?? []) s.add(n);
+            return s;
+          }
+          const backToStart = component(back),
+            orbit = [...component(forward)].filter((k) => backToStart.has(k));
+          insist(orbit.length >= 3 && orbit.length === g.homeSize, 'insufficient closed orbit');
+          const homes = new Set(orbit);
+          for (const [start, count] of g.territory)
+            for (let j = 0; j < count; j++) {
+              const n = start + j * g.stride[0],
+                origin = [(n % g.width) - a.shift[0], Math.floor(n / g.width) - a.shift[1]];
+              insist(homes.has(origin.join()), 'target outside translated orbit');
+            }
+          seenAnalogies.add(id);
+        }
+      }
       for (const stroke of g.ops) {
         const d = history(stroke.ref),
           a = position(cache.get(d.from), role),
@@ -156,14 +200,32 @@ export function territoryAudit(run, hash, partsAt, cache, commandKey) {
     if (g.basis) {
       const exact = same(landed, step.to);
       const contact = live && (!step.to || exact || (prevMark && mark && !same(prevMark, mark)) || inGoal);
+      if (step.stage === 'capacity_return') {
+        const d = history(step.ref);
+        insist(
+          commandKey(d) === step.op && cmd.from === d.from && d.to === step.expectedFrame,
+          'unwitnessed return to a control'
+        );
+      }
       const success =
-        step.stage === 'displace'
-          ? live && displaced
-          : step.stage === 'land'
-            ? inGoal
-            : step.stage === 'interact'
-              ? !!contact
-              : exact;
+        step.stage === 'capacity_return'
+          ? live && cmd.to === step.expectedFrame
+          : step.stage === 'capacity_input'
+            ? live
+            : step.stage === 'capacity_read'
+              ? inGoal ||
+                (!!mark &&
+                  !!plan.ideal &&
+                  !!plan.siteAt &&
+                  !same(mark, plan.siteAt) &&
+                  same(mark, plan.ideal))
+              : step.stage === 'displace'
+                ? live && displaced
+                : step.stage === 'land'
+                  ? inGoal
+                  : step.stage === 'interact'
+                    ? !!contact
+                    : exact;
       insist(v.success === success, 'incorrect step verdict');
     }
     stats.actions++;

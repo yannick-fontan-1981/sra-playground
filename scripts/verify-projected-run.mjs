@@ -6,6 +6,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceReplay } from './sic-study-source-replay.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
+import {wordAudit} from './verify-territorial-words.mjs';
 import {territoryAudit} from './verify-native-territory.mjs';
 import {activationAudit} from './verify-native-activation.mjs';
 import { inverseFrameAudit } from './verify-native-inverse-frames.mjs';
@@ -121,6 +122,7 @@ const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
 const audit=contextAudit(run,hash,partsAt,commandKey);
 const frames=inverseFrameAudit(run,hash,partsAt,cache,commandKey);
+const words=wordAudit(run,partsAt,cache,commandKey,hash);
 const territories=territoryAudit(run,hash,partsAt,cache,commandKey);
 const activations=activationAudit(run,hash,partsAt,cache,commandKey);
 for (const [i, cmd] of run.replayCommands.entries()) {
@@ -144,7 +146,7 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   const event = events.get(i + 1);
   if ((cmd.territorySeal&&!event?.territorial)||(cmd.activationSeal&&!event?.activation)||(cmd.frameSeal&&!event?.frame)||(cmd.retainedSeal&&!event?.retained)||(cmd.transportSeal&&!event?.transport)||(cmd.siteSeal&&!event?.instrument))throw Error('Missing intervention receipt at '+i);
   if (!event) continue;
-  if(event.territorial){await territories.record(event,cmd,i,board,priorState);continue;}
+  if(event.territorial){await territories.record(event,cmd,i,board,priorState);await words.record(event,i,cmd,board,priorState);continue;}
   if(event.activation){await activations.record(event,cmd,i,board);continue;}
   if (event.frame){await frames.record(event,cmd,i,board);continue;}
   if (event.retained){audit.retainedEvent(event,cmd,i,board);continue;}
@@ -677,6 +679,7 @@ const dispatchCommand=cmd=>engine.dispatch({type:'action',actionId:cmd.id,...(cm
 await audit.branches(reopen,dispatchCommand);
 await frames.compare(reopen,dispatchCommand);
 await territories.compare(reopen,dispatchCommand);
+await words.compare(reopen,dispatchCommand);
 await activations.compare(reopen,dispatchCommand);
 console.log(
   JSON.stringify({
@@ -701,6 +704,7 @@ console.log(
     transport:audit.transports,
     retained:audit.retained,
     territories:territories.stats,
+    capacityWords:words.stats,capacityWordExamples:words.examples,
     territoryExamples:territories.examples,
     activations:activations.stats,
     activationExamples:activations.examples,

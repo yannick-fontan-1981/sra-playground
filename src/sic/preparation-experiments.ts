@@ -414,7 +414,7 @@ function selectEstablishedExperiment(
   const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
-  if(rows&&(m.territory?.active||free)){
+  if(rows&&(m.territory?.active||m.territory?.words?.primed?.ref===o.revision||m.territory?.words?.resume===o.revision||free)){
     const intent=offerTerritory(m,o,rows,s,available);if(intent)return intent;
   }
   if(rows&&free&&returnedToPlacement(m)){

@@ -1,0 +1,2699 @@
+{
+  "lower": {
+    "levels": 100,
+    "prefixForks": {
+      "proposals": 172,
+      "entered": 3,
+      "used": 3,
+      "official": 13,
+      "hadPlacement": 5,
+      "entryNeedsPreparation": 0,
+      "necessaryWins": 0
+    },
+    "delayed": {
+      "failedPlans": 36,
+      "wordComparisons": 1052,
+      "entries": 0,
+      "wins": 8,
+      "newMotion": 3,
+      "newActuation": 10
+    },
+    "delayedExamples": [
+      {
+        "code": "CN04",
+        "level": 1,
+        "i": 16,
+        "kind": "relocate",
+        "from": [
+          17,
+          32
+        ],
+        "site": [
+          32,
+          41
+        ],
+        "ideal": [
+          35,
+          41
+        ],
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION2",
+          "ACTION4",
+          "ACTION4"
+        ],
+        "sameTraveller": false,
+        "sameMarker": false,
+        "tested": 30,
+        "entries": 0,
+        "wins": 1,
+        "newMotion": 0,
+        "newActuation": 0,
+        "examples": [
+          {
+            "suffix": [
+              "ACTION3",
+              "ACTION1"
+            ],
+            "entry": false,
+            "win": true,
+            "newMotion": false,
+            "markerMoves": false,
+            "alone": {
+              "win": false,
+              "p": [
+                20,
+                32
+              ],
+              "marker": null
+            },
+            "joint": {
+              "win": true,
+              "p": null,
+              "marker": null
+            }
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "from": [
+          24,
+          25
+        ],
+        "site": [
+          32,
+          27
+        ],
+        "ideal": [
+          38,
+          27
+        ],
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION2"
+        ],
+        "sameTraveller": true,
+        "sameMarker": true,
+        "tested": 42,
+        "entries": 0,
+        "wins": 0,
+        "newMotion": 3,
+        "newActuation": 5,
+        "examples": [
+          {
+            "suffix": [
+              "ACTION1"
+            ],
+            "entry": false,
+            "win": false,
+            "newMotion": false,
+            "markerMoves": true,
+            "alone": {
+              "win": false,
+              "p": [
+                24,
+                19
+              ],
+              "marker": [
+                32,
+                33
+              ]
+            },
+            "joint": {
+              "win": false,
+              "p": [
+                24,
+                19
+              ],
+              "marker": [
+                32,
+                27
+              ]
+            }
+          },
+          {
+            "suffix": [
+              "ACTION2"
+            ],
+            "entry": false,
+            "win": false,
+            "newMotion": false,
+            "markerMoves": true,
+            "alone": {
+              "win": false,
+              "p": [
+                24,
+                25
+              ],
+              "marker": [
+                32,
+                33
+              ]
+            },
+            "joint": {
+              "win": false,
+              "p": [
+                24,
+                25
+              ],
+              "marker": [
+                32,
+                27
+              ]
+            }
+          },
+          {
+            "suffix": [
+              "ACTION2",
+              "ACTION4"
+            ],
+            "entry": false,
+            "win": false,
+            "newMotion": true,
+            "markerMoves": false,
+            "alone": {
+              "win": false,
+              "p": [
+                24,
+                25
+              ],
+              "marker": [
+                32,
+                27
+              ]
+            },
+            "joint": {
+              "win": false,
+              "p": [
+                30,
+                25
+              ],
+              "marker": null
+            }
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "from": [
+          24,
+          25
+        ],
+        "site": [
+          32,
+          27
+        ],
+        "ideal": [
+          38,
+          27
+        ],
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION3"
+        ],
+        "sameTraveller": false,
+        "sameMarker": true,
+        "tested": 42,
+        "entries": 0,
+        "wins": 0,
+        "newMotion": 0,
+        "newActuation": 5,
+        "examples": [
+          {
+            "suffix": [
+              "ACTION1"
+            ],
+            "entry": false,
+            "win": false,
+            "newMotion": false,
+            "markerMoves": true,
+            "alone": {
+              "win": false,
+              "p": [
+                18,
+                19
+              ],
+              "marker": [
+                32,
+                33
+              ]
+            },
+            "joint": {
+              "win": false,
+              "p": [
+                24,
+                19
+              ],
+              "marker": [
+                32,
+                27
+              ]
+            }
+          },
+          {
+            "suffix": [
+              "ACTION2"
+            ],
+            "entry": false,
+            "win": false,
+            "newMotion": false,
+            "markerMoves": true,
+            "alone": {
+              "win": false,
+              "p": [
+                18,
+                25
+              ],
+              "marker": [
+                32,
+                33
+              ]
+            },
+            "joint": {
+              "win": false,
+              "p": [
+                24,
+                25
+              ],
+              "marker": [
+                32,
+                27
+              ]
+            }
+          },
+          {
+            "suffix": [
+              "ACTION3"
+            ],
+            "entry": false,
+            "win": false,
+            "newMotion": false,
+            "markerMoves": true,
+            "alone": {
+              "win": false,
+              "p": [
+                12,
+                25
+              ],
+              "marker": [
+                32,
+                33
+              ]
+            },
+            "joint": {
+              "win": false,
+              "p": [
+                18,
+                25
+              ],
+              "marker": [
+                32,
+                27
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "code": "CLRS",
+        "level": 1,
+        "i": 16,
+        "kind": "select_and_move",
+        "from": [
+          42,
+          15
+        ],
+        "site": [
+          40,
+          18
+        ],
+        "ideal": [
+          40,
+          23
+        ],
+        "a": "ACTION2",
+        "prefix": [
+          "ACTION1"
+        ],
+        "sameTraveller": false,
+        "sameMarker": false,
+        "tested": 42,
+        "entries": 0,
+        "wins": 6,
+        "newMotion": 0,
+        "newActuation": 0,
+        "examples": [
+          {
+            "suffix": [
+              "ACTION5"
+            ],
+            "entry": false,
+            "win": true,
+            "newMotion": false,
+            "markerMoves": false,
+            "alone": {
+              "win": false,
+              "p": [
+                39,
+                15
+              ],
+              "marker": null
+            },
+            "joint": {
+              "win": true,
+              "p": null,
+              "marker": null
+            }
+          },
+          {
+            "suffix": [
+              "ACTION5",
+              "ACTION1"
+            ],
+            "entry": false,
+            "win": true,
+            "newMotion": false,
+            "markerMoves": false,
+            "alone": {
+              "win": false,
+              "p": [
+                39,
+                10
+              ],
+              "marker": null
+            },
+            "joint": {
+              "win": true,
+              "p": null,
+              "marker": null
+            }
+          },
+          {
+            "suffix": [
+              "ACTION5",
+              "ACTION3"
+            ],
+            "entry": false,
+            "win": true,
+            "newMotion": false,
+            "markerMoves": false,
+            "alone": {
+              "win": false,
+              "p": [
+                34,
+                15
+              ],
+              "marker": null
+            },
+            "joint": {
+              "win": true,
+              "p": null,
+              "marker": null
+            }
+          }
+        ]
+      },
+      {
+        "code": "CLRS",
+        "level": 1,
+        "i": 16,
+        "kind": "relocate",
+        "from": [
+          42,
+          15
+        ],
+        "site": [
+          40,
+          18
+        ],
+        "ideal": [
+          40,
+          23
+        ],
+        "a": "ACTION2",
+        "prefix": [],
+        "sameTraveller": false,
+        "sameMarker": false,
+        "tested": 42,
+        "entries": 0,
+        "wins": 1,
+        "newMotion": 0,
+        "newActuation": 0,
+        "examples": [
+          {
+            "suffix": [
+              "ACTION1",
+              "ACTION5"
+            ],
+            "entry": false,
+            "win": true,
+            "newMotion": false,
+            "markerMoves": false,
+            "alone": {
+              "win": false,
+              "p": [
+                39,
+                15
+              ],
+              "marker": null
+            },
+            "joint": {
+              "win": true,
+              "p": null,
+              "marker": null
+            }
+          }
+        ]
+      }
+    ],
+    "rivals": [
+      {
+        "code": "CN04",
+        "level": 1,
+        "i": 16,
+        "kind": "relocate",
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION2",
+          "ACTION4",
+          "ACTION4"
+        ],
+        "suffix": [
+          "ACTION3",
+          "ACTION1"
+        ],
+        "entry": false,
+        "win": true,
+        "newMotion": false,
+        "newActuation": false,
+        "joint": {
+          "win": true,
+          "p": null,
+          "marker": null
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            20,
+            32
+          ],
+          "marker": null
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": true,
+            "win": true
+          },
+          {
+            "a": "ACTION2",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION2"
+        ],
+        "suffix": [
+          "ACTION1"
+        ],
+        "entry": false,
+        "win": false,
+        "newMotion": false,
+        "newActuation": true,
+        "joint": {
+          "win": false,
+          "p": [
+            24,
+            19
+          ],
+          "marker": [
+            32,
+            27
+          ]
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            24,
+            19
+          ],
+          "marker": [
+            32,
+            33
+          ]
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION2",
+            "matched": true,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": true,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION2"
+        ],
+        "suffix": [
+          "ACTION2"
+        ],
+        "entry": false,
+        "win": false,
+        "newMotion": false,
+        "newActuation": true,
+        "joint": {
+          "win": false,
+          "p": [
+            24,
+            25
+          ],
+          "marker": [
+            32,
+            27
+          ]
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            24,
+            25
+          ],
+          "marker": [
+            32,
+            33
+          ]
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION2",
+            "matched": true,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": true,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION2"
+        ],
+        "suffix": [
+          "ACTION2",
+          "ACTION4"
+        ],
+        "entry": false,
+        "win": false,
+        "newMotion": true,
+        "newActuation": false,
+        "joint": {
+          "win": false,
+          "p": [
+            30,
+            25
+          ],
+          "marker": null
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            24,
+            25
+          ],
+          "marker": [
+            32,
+            27
+          ]
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION2",
+            "matched": true,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": true,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION3"
+        ],
+        "suffix": [
+          "ACTION1"
+        ],
+        "entry": false,
+        "win": false,
+        "newMotion": false,
+        "newActuation": true,
+        "joint": {
+          "win": false,
+          "p": [
+            24,
+            19
+          ],
+          "marker": [
+            32,
+            27
+          ]
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            18,
+            19
+          ],
+          "marker": [
+            32,
+            33
+          ]
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION2",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION3"
+        ],
+        "suffix": [
+          "ACTION2"
+        ],
+        "entry": false,
+        "win": false,
+        "newMotion": false,
+        "newActuation": true,
+        "joint": {
+          "win": false,
+          "p": [
+            24,
+            25
+          ],
+          "marker": [
+            32,
+            27
+          ]
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            18,
+            25
+          ],
+          "marker": [
+            32,
+            33
+          ]
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION2",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "i": 7,
+        "kind": "select_and_move",
+        "a": "ACTION4",
+        "prefix": [
+          "ACTION3"
+        ],
+        "suffix": [
+          "ACTION3"
+        ],
+        "entry": false,
+        "win": false,
+        "newMotion": false,
+        "newActuation": true,
+        "joint": {
+          "win": false,
+          "p": [
+            18,
+            25
+          ],
+          "marker": [
+            32,
+            27
+          ]
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            12,
+            25
+          ],
+          "marker": [
+            32,
+            33
+          ]
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION2",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": true,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "CLRS",
+        "level": 1,
+        "i": 16,
+        "kind": "select_and_move",
+        "a": "ACTION2",
+        "prefix": [
+          "ACTION1"
+        ],
+        "suffix": [
+          "ACTION5"
+        ],
+        "entry": false,
+        "win": true,
+        "newMotion": false,
+        "newActuation": false,
+        "joint": {
+          "win": true,
+          "p": null,
+          "marker": null
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            39,
+            15
+          ],
+          "marker": null
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION4",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "CLRS",
+        "level": 1,
+        "i": 16,
+        "kind": "select_and_move",
+        "a": "ACTION2",
+        "prefix": [
+          "ACTION1"
+        ],
+        "suffix": [
+          "ACTION5",
+          "ACTION1"
+        ],
+        "entry": false,
+        "win": true,
+        "newMotion": false,
+        "newActuation": false,
+        "joint": {
+          "win": true,
+          "p": null,
+          "marker": null
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            39,
+            10
+          ],
+          "marker": null
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION4",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "CLRS",
+        "level": 1,
+        "i": 16,
+        "kind": "select_and_move",
+        "a": "ACTION2",
+        "prefix": [
+          "ACTION1"
+        ],
+        "suffix": [
+          "ACTION5",
+          "ACTION3"
+        ],
+        "entry": false,
+        "win": true,
+        "newMotion": false,
+        "newActuation": false,
+        "joint": {
+          "win": true,
+          "p": null,
+          "marker": null
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            34,
+            15
+          ],
+          "marker": null
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION4",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      },
+      {
+        "code": "CLRS",
+        "level": 1,
+        "i": 16,
+        "kind": "relocate",
+        "a": "ACTION2",
+        "prefix": [],
+        "suffix": [
+          "ACTION1",
+          "ACTION5"
+        ],
+        "entry": false,
+        "win": true,
+        "newMotion": false,
+        "newActuation": false,
+        "joint": {
+          "win": true,
+          "p": null,
+          "marker": null
+        },
+        "alone": {
+          "win": false,
+          "p": [
+            39,
+            15
+          ],
+          "marker": null
+        },
+        "shams": [
+          {
+            "a": "ACTION1",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION3",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION4",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          },
+          {
+            "a": "ACTION5",
+            "matched": false,
+            "reproduces": true,
+            "win": true
+          },
+          {
+            "a": "ACTION7",
+            "matched": false,
+            "reproduces": false,
+            "win": false
+          }
+        ]
+      }
+    ],
+    "orbit": {
+      "forecasts": 20,
+      "reachedInArchive": 3,
+      "exactInArchive": 2,
+      "byLevel": [
+        {
+          "code": "SIGN",
+          "level": 1,
+          "forecastAt": 9,
+          "foot": [
+            36,
+            26
+          ],
+          "actual": {
+            "i": 26,
+            "at": [
+              31,
+              26
+            ],
+            "exact": false,
+            "op": "ACTION4"
+          }
+        },
+        {
+          "code": "ZIPP",
+          "level": 1,
+          "forecastAt": 17,
+          "foot": [
+            45,
+            9
+          ],
+          "actual": {
+            "i": 24,
+            "at": [
+              45,
+              9
+            ],
+            "exact": true,
+            "op": "ACTION4"
+          }
+        },
+        {
+          "code": "ZIPP",
+          "level": 1,
+          "forecastAt": 17,
+          "foot": [
+            45,
+            9
+          ],
+          "actual": {
+            "i": 24,
+            "at": [
+              45,
+              9
+            ],
+            "exact": true,
+            "op": "ACTION4"
+          }
+        }
+      ]
+    },
+    "orbitInterventions": {
+      "roots": 11,
+      "found": 6,
+      "actions": 1986,
+      "candidateWins": 1,
+      "results": [
+        {
+          "code": "SKBN",
+          "level": 1,
+          "i": 17,
+          "from": [
+            30,
+            27
+          ],
+          "near": [
+            20,
+            9
+          ],
+          "far": [
+            44,
+            17
+          ],
+          "foothold": [
+            46,
+            19
+          ],
+          "component": 12,
+          "support": 0,
+          "expanded": 4,
+          "actions": 20,
+          "states": 15,
+          "official": 0,
+          "firstWin": null,
+          "reached": 1,
+          "first": {
+            "word": [
+              "ACTION1",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "arrived": [
+              46,
+              19
+            ],
+            "foothold": [
+              46,
+              19
+            ]
+          },
+          "improvement": 24
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "i": 21,
+          "from": [
+            30,
+            11
+          ],
+          "near": [
+            28,
+            17
+          ],
+          "far": [
+            44,
+            33
+          ],
+          "foothold": [
+            46,
+            35
+          ],
+          "component": 12,
+          "support": 0,
+          "expanded": 4,
+          "actions": 20,
+          "states": 13,
+          "official": 1,
+          "firstWin": [
+            "ACTION4"
+          ],
+          "reached": 1,
+          "first": {
+            "word": [
+              "ACTION2",
+              "ACTION2",
+              "ACTION4"
+            ],
+            "arrived": [
+              38,
+              27
+            ],
+            "foothold": [
+              46,
+              35
+            ]
+          },
+          "improvement": 24
+        },
+        {
+          "code": "KLOT",
+          "level": 1,
+          "i": 21,
+          "from": [
+            25,
+            20
+          ],
+          "near": [
+            24,
+            11
+          ],
+          "far": [
+            40,
+            27
+          ],
+          "foothold": [
+            33,
+            28
+          ],
+          "component": 3,
+          "support": 0,
+          "expanded": 48,
+          "actions": 432,
+          "states": 87,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 0
+        },
+        {
+          "code": "SERI",
+          "level": 1,
+          "i": 9,
+          "from": [
+            1,
+            3
+          ],
+          "near": [
+            5,
+            3
+          ],
+          "far": [
+            45,
+            3
+          ],
+          "foothold": [
+            41,
+            3
+          ],
+          "component": 3,
+          "support": 6,
+          "expanded": 48,
+          "actions": 432,
+          "states": 82,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 0
+        },
+        {
+          "code": "SERI",
+          "level": 1,
+          "i": 13,
+          "from": [
+            1,
+            25
+          ],
+          "near": [
+            4,
+            13
+          ],
+          "far": [
+            44,
+            13
+          ],
+          "foothold": [
+            41,
+            14
+          ],
+          "component": 4,
+          "support": 6,
+          "expanded": 48,
+          "actions": 432,
+          "states": 85,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 11
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "i": 45,
+          "from": [
+            56,
+            60
+          ],
+          "near": [
+            32,
+            61
+          ],
+          "far": [
+            2,
+            61
+          ],
+          "foothold": [
+            10,
+            60
+          ],
+          "component": 3,
+          "support": 0,
+          "expanded": 48,
+          "actions": 432,
+          "states": 91,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 16
+        },
+        {
+          "code": "SIGN",
+          "level": 1,
+          "i": 9,
+          "from": [
+            16,
+            11
+          ],
+          "near": [
+            20,
+            15
+          ],
+          "far": [
+            40,
+            25
+          ],
+          "foothold": [
+            36,
+            26
+          ],
+          "component": 4,
+          "support": 0,
+          "expanded": 8,
+          "actions": 48,
+          "states": 17,
+          "official": 0,
+          "firstWin": null,
+          "reached": 1,
+          "first": {
+            "word": [
+              "ACTION2",
+              "ACTION2",
+              "ACTION4",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "arrived": [
+              31,
+              21
+            ],
+            "foothold": [
+              36,
+              26
+            ]
+          },
+          "improvement": 25
+        },
+        {
+          "code": "SIGN",
+          "level": 1,
+          "i": 37,
+          "from": [
+            51,
+            21
+          ],
+          "near": [
+            40,
+            25
+          ],
+          "far": [
+            20,
+            15
+          ],
+          "foothold": [
+            26,
+            16
+          ],
+          "component": 4,
+          "support": 0,
+          "expanded": 6,
+          "actions": 36,
+          "states": 15,
+          "official": 0,
+          "firstWin": null,
+          "reached": 1,
+          "first": {
+            "word": [
+              "ACTION7",
+              "ACTION4",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "arrived": [
+              26,
+              11
+            ],
+            "foothold": [
+              26,
+              16
+            ]
+          },
+          "improvement": 25
+        },
+        {
+          "code": "ZIPP",
+          "level": 1,
+          "i": 17,
+          "from": [
+            13,
+            9
+          ],
+          "near": [
+            9,
+            20
+          ],
+          "far": [
+            41,
+            20
+          ],
+          "foothold": [
+            45,
+            9
+          ],
+          "component": 4,
+          "support": 1,
+          "expanded": 2,
+          "actions": 18,
+          "states": 4,
+          "official": 0,
+          "firstWin": null,
+          "reached": 1,
+          "first": {
+            "word": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "arrived": [
+              45,
+              9
+            ],
+            "foothold": [
+              45,
+              9
+            ]
+          },
+          "improvement": 32
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "i": 53,
+          "from": [
+            8,
+            7
+          ],
+          "near": [
+            12,
+            36
+          ],
+          "far": [
+            27,
+            36
+          ],
+          "foothold": [
+            23,
+            37
+          ],
+          "component": 10,
+          "support": 1,
+          "expanded": 16,
+          "actions": 96,
+          "states": 18,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 10
+        },
+        {
+          "code": "RE86",
+          "level": 1,
+          "i": 25,
+          "from": [
+            21,
+            27
+          ],
+          "near": [
+            21,
+            16
+          ],
+          "far": [
+            21,
+            28
+          ],
+          "foothold": [
+            21,
+            36
+          ],
+          "component": 8,
+          "support": 0,
+          "expanded": 4,
+          "actions": 20,
+          "states": 20,
+          "official": 0,
+          "firstWin": null,
+          "reached": 1,
+          "first": {
+            "word": [
+              "ACTION2",
+              "ACTION2",
+              "ACTION2"
+            ],
+            "arrived": [
+              21,
+              36
+            ],
+            "foothold": [
+              21,
+              36
+            ]
+          },
+          "improvement": 9
+        }
+      ]
+    },
+    "crossedInterventions": {
+      "levels": 100,
+      "usableRectangles": 18,
+      "aligned": 0,
+      "nonAdditive": 1,
+      "jointMotion": 0,
+      "relationRestored": 0,
+      "jointWin": 0,
+      "examples": [
+        {
+          "code": "ESCT",
+          "level": 1,
+          "i": 8,
+          "a": "ACTION4",
+          "q": "ACTION5",
+          "b": [
+            "ACTION1",
+            "ACTION2"
+          ],
+          "z": [
+            0,
+            -4
+          ],
+          "aligned": false,
+          "nonAdditive": true,
+          "jointMotion": false,
+          "relationRestored": false,
+          "jointWin": false,
+          "ds": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              -4
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              4,
+              0
+            ]
+          ],
+          "wins": [
+            false,
+            false,
+            false,
+            false
+          ],
+          "reverseSame": true,
+          "reverseDifferentPixels": false,
+          "origins": [
+            [
+              [
+                11,
+                33
+              ],
+              [
+                18,
+                16
+              ]
+            ],
+            [
+              [
+                11,
+                33
+              ],
+              [
+                22,
+                16
+              ]
+            ],
+            [
+              [
+                11,
+                29
+              ],
+              [
+                18,
+                16
+              ]
+            ],
+            [
+              [
+                11,
+                29
+              ],
+              [
+                22,
+                16
+              ]
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "upper": {
+    "levels": 18,
+    "prefixForks": {
+      "proposals": 124,
+      "entered": 5,
+      "used": 0,
+      "official": 0,
+      "hadPlacement": 6,
+      "entryNeedsPreparation": 0,
+      "necessaryWins": 0
+    },
+    "delayed": {
+      "failedPlans": 17,
+      "wordComparisons": 666,
+      "entries": 0,
+      "wins": 0,
+      "newMotion": 0,
+      "newActuation": 0
+    },
+    "delayedExamples": [],
+    "rivals": [],
+    "orbit": {
+      "forecasts": 33,
+      "reachedInArchive": 1,
+      "exactInArchive": 1,
+      "byLevel": [
+        {
+          "code": "GIGO",
+          "level": 5,
+          "forecastAt": 81,
+          "foot": [
+            24,
+            16
+          ],
+          "actual": {
+            "i": 84,
+            "at": [
+              24,
+              16
+            ],
+            "exact": true,
+            "op": "ACTION2"
+          }
+        }
+      ]
+    },
+    "orbitInterventions": {
+      "roots": 9,
+      "found": 1,
+      "actions": 2417,
+      "candidateWins": 0,
+      "results": [
+        {
+          "code": "CWSE",
+          "level": 2,
+          "i": 85,
+          "from": [
+            40,
+            33
+          ],
+          "near": [
+            41,
+            34
+          ],
+          "far": [
+            59,
+            51
+          ],
+          "foothold": [
+            58,
+            50
+          ],
+          "component": 24,
+          "support": 0,
+          "expanded": 48,
+          "actions": 432,
+          "states": 87,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 0
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "i": 89,
+          "from": [
+            40,
+            28
+          ],
+          "near": [
+            46,
+            29
+          ],
+          "far": [
+            59,
+            51
+          ],
+          "foothold": [
+            58,
+            50
+          ],
+          "component": 24,
+          "support": 0,
+          "expanded": 48,
+          "actions": 432,
+          "states": 94,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 10
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "i": 45,
+          "from": [
+            52,
+            8
+          ],
+          "near": [
+            53,
+            9
+          ],
+          "far": [
+            53,
+            37
+          ],
+          "foothold": [
+            52,
+            36
+          ],
+          "component": 3,
+          "support": 0,
+          "expanded": 48,
+          "actions": 384,
+          "states": 118,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 20
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "i": 53,
+          "from": [
+            36,
+            8
+          ],
+          "near": [
+            30,
+            60
+          ],
+          "far": [
+            1,
+            30
+          ],
+          "foothold": [
+            3,
+            22
+          ],
+          "component": 8,
+          "support": 0,
+          "expanded": 48,
+          "actions": 384,
+          "states": 122,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 10
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "i": 37,
+          "from": [
+            8,
+            4
+          ],
+          "near": [
+            13,
+            3
+          ],
+          "far": [
+            7,
+            9
+          ],
+          "foothold": [
+            6,
+            10
+          ],
+          "component": 10,
+          "support": 0,
+          "expanded": 36,
+          "actions": 324,
+          "states": 45,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 4
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "i": 41,
+          "from": [
+            16,
+            4
+          ],
+          "near": [
+            21,
+            3
+          ],
+          "far": [
+            15,
+            9
+          ],
+          "foothold": [
+            14,
+            10
+          ],
+          "component": 10,
+          "support": 0,
+          "expanded": 45,
+          "actions": 405,
+          "states": 52,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 4
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "i": 9,
+          "from": [
+            22,
+            11
+          ],
+          "near": [
+            28,
+            21
+          ],
+          "far": [
+            43,
+            11
+          ],
+          "foothold": [
+            37,
+            1
+          ],
+          "component": 3,
+          "support": 1,
+          "expanded": 2,
+          "actions": 8,
+          "states": 2,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 0
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "i": 13,
+          "from": [
+            37,
+            21
+          ],
+          "near": [
+            22,
+            21
+          ],
+          "far": [
+            7,
+            31
+          ],
+          "foothold": [
+            12,
+            31
+          ],
+          "component": 3,
+          "support": 2,
+          "expanded": 3,
+          "actions": 12,
+          "states": 3,
+          "official": 0,
+          "firstWin": null,
+          "reached": 0,
+          "first": null,
+          "improvement": 0
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "i": 81,
+          "from": [
+            23,
+            14
+          ],
+          "near": [
+            24,
+            15
+          ],
+          "far": [
+            26,
+            17
+          ],
+          "foothold": [
+            24,
+            16
+          ],
+          "component": 4,
+          "support": 0,
+          "expanded": 4,
+          "actions": 36,
+          "states": 11,
+          "official": 0,
+          "firstWin": null,
+          "reached": 1,
+          "first": {
+            "word": [
+              "ACTION4",
+              "ACTION2",
+              "ACTION2"
+            ],
+            "arrived": [
+              24,
+              16
+            ],
+            "foothold": [
+              24,
+              16
+            ]
+          },
+          "improvement": 3
+        }
+      ]
+    },
+    "crossedInterventions": {
+      "levels": 18,
+      "usableRectangles": 0,
+      "aligned": 0,
+      "nonAdditive": 0,
+      "jointMotion": 0,
+      "relationRestored": 0,
+      "jointWin": 0,
+      "examples": []
+    }
+  },
+  "equalDurationSpatialControls": [
+    {
+      "code": "ESCT",
+      "level": 1,
+      "i": 8,
+      "a": "ACTION4",
+      "b": [
+        "ACTION1",
+        "ACTION2"
+      ],
+      "q": "ACTION5",
+      "positions": [
+        [
+          [
+            11,
+            33
+          ],
+          [
+            18,
+            16
+          ]
+        ],
+        [
+          [
+            11,
+            33
+          ],
+          [
+            22,
+            16
+          ]
+        ],
+        [
+          [
+            11,
+            29
+          ],
+          [
+            18,
+            16
+          ]
+        ],
+        [
+          [
+            11,
+            29
+          ],
+          [
+            22,
+            16
+          ]
+        ]
+      ],
+      "forecast": [
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          -4
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          4,
+          0
+        ]
+      ],
+      "rounds": [
+        {
+          "length": 0,
+          "slots": [
+            {
+              "count": 1,
+              "correct": 1,
+              "actual": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "witnesses": [
+                []
+              ],
+              "images": 1
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            }
+          ]
+        },
+        {
+          "length": 1,
+          "slots": [
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 1,
+              "correct": 1,
+              "actual": [
+                [
+                  0,
+                  -4
+                ]
+              ],
+              "witnesses": [
+                [
+                  "ACTION4"
+                ]
+              ],
+              "images": 1
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            }
+          ]
+        },
+        {
+          "length": 2,
+          "slots": [
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 4,
+              "correct": 1,
+              "actual": [
+                [
+                  0,
+                  0
+                ]
+              ],
+              "witnesses": [
+                [
+                  "ACTION1",
+                  "ACTION2"
+                ]
+              ],
+              "images": 1
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            }
+          ]
+        },
+        {
+          "length": 3,
+          "slots": [
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 9,
+              "correct": 1,
+              "actual": [
+                [
+                  4,
+                  0
+                ]
+              ],
+              "witnesses": [
+                [
+                  "ACTION1",
+                  "ACTION2",
+                  "ACTION4"
+                ]
+              ],
+              "images": 1
+            }
+          ]
+        },
+        {
+          "length": 4,
+          "slots": [
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            },
+            {
+              "count": 0,
+              "correct": 0,
+              "actual": [],
+              "witnesses": [],
+              "images": 0
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "nativeQualification": [
+    {
+      "code": "SKBN",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {},
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "ZIPP",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {},
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "RE86",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {},
+      "entries": [
+        {
+          "action": 18,
+          "kind": "walk_to_analogue",
+          "stage": "challenge",
+          "from": [
+            21,
+            33
+          ],
+          "to": [
+            21,
+            36
+          ],
+          "home": 8,
+          "target": 3,
+          "foothold": [
+            21,
+            36
+          ],
+          "knownLimit": false,
+          "previouslyUnvisited": true,
+          "placed": false
+        },
+        {
+          "action": 32,
+          "kind": "walk_to_analogue",
+          "stage": "challenge",
+          "from": [
+            27,
+            36
+          ],
+          "to": [
+            30,
+            36
+          ],
+          "home": 14,
+          "target": 4,
+          "foothold": [
+            30,
+            36
+          ],
+          "knownLimit": false,
+          "previouslyUnvisited": true,
+          "placed": false
+        }
+      ],
+      "uses": 0
+    },
+    {
+      "code": "SIGN",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {
+        "started": 4,
+        "prepared": 2,
+        "durationControl": 2,
+        "complete": 3
+      },
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "GIGO",
+      "level": 5,
+      "won": false,
+      "actions": 120,
+      "wordArms": {},
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "PORT",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {
+        "started": 2,
+        "prepared": 2,
+        "complete": 2
+      },
+      "entries": [
+        {
+          "action": 16,
+          "kind": "contact",
+          "stage": "land",
+          "from": [
+            27,
+            15
+          ],
+          "to": [
+            43,
+            15
+          ],
+          "home": 53,
+          "target": 53,
+          "foothold": [
+            35,
+            19
+          ],
+          "knownLimit": true,
+          "previouslyUnvisited": true,
+          "placed": false,
+          "withoutPreparation": [
+            23,
+            11
+          ],
+          "sameOrigin": false,
+          "dependent": true
+        }
+      ],
+      "uses": 1
+    },
+    {
+      "code": "ESCT",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {
+        "started": 4,
+        "bare": 2,
+        "prepared": 2,
+        "complete": 4
+      },
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "CGWL",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {
+        "started": 8,
+        "bare": 3,
+        "prepared": 3,
+        "durationControl": 2,
+        "complete": 7
+      },
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "CLRS",
+      "level": 1,
+      "won": false,
+      "actions": 36,
+      "wordArms": {},
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "SWCH",
+      "level": 1,
+      "won": false,
+      "actions": 60,
+      "wordArms": {},
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "MOTO",
+      "level": 3,
+      "won": false,
+      "actions": 120,
+      "wordArms": {
+        "started": 10,
+        "bare": 1,
+        "prepared": 7,
+        "durationControl": 2,
+        "complete": 10
+      },
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "GRAV",
+      "level": 3,
+      "won": false,
+      "actions": 120,
+      "wordArms": {},
+      "entries": [],
+      "uses": 0
+    },
+    {
+      "code": "CWSE",
+      "level": 3,
+      "won": false,
+      "actions": 120,
+      "wordArms": {},
+      "entries": [
+        {
+          "action": 14,
+          "kind": "walk_to_analogue",
+          "stage": "challenge",
+          "from": [
+            23,
+            20
+          ],
+          "to": [
+            23,
+            16
+          ],
+          "home": 5,
+          "target": 5,
+          "foothold": [
+            23,
+            16
+          ],
+          "knownLimit": false,
+          "previouslyUnvisited": true,
+          "placed": false
+        }
+      ],
+      "uses": 1
+    },
+    {
+      "code": "GARE",
+      "level": 3,
+      "won": false,
+      "actions": 120,
+      "wordArms": {
+        "started": 7,
+        "prepared": 3,
+        "durationControl": 4,
+        "complete": 7
+      },
+      "entries": [],
+      "uses": 0
+    }
+  ]
+}
