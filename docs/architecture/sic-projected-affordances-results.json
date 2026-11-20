@@ -46,6 +46,18 @@
         "SMLP",
         "TRIA"
       ]
+    },
+    "v10": {
+      "games": 100,
+      "wins": 65,
+      "gained": [
+        "CGWL",
+        "VOIS"
+      ],
+      "lost": [
+        "SMLP",
+        "TRIA"
+      ]
     }
   },
   "ss01Level2": {
@@ -335,6 +347,79 @@
         "actions": 523,
         "controlImages": 129,
         "candidateImages": 150
+      }
+    },
+    "v10": {
+      "candidate": "a291968a11cc6185be9305b9a1fd22ebe51c9efd",
+      "actions": 447,
+      "images": 145,
+      "won": false,
+      "state": "NOT_FINISHED",
+      "reason": "level_active_time_budget",
+      "projection": {
+        "issued": 17,
+        "observed": 11,
+        "verifiedLanding": 0,
+        "verifiedContinuation": 0,
+        "refuted": 11
+      },
+      "frontier": {
+        "routes": 29,
+        "newProbes": 35,
+        "arrivals": 6,
+        "continuations": 3,
+        "subsequentUses": 0
+      },
+      "openings": {
+        "proposed": 1,
+        "placements": 1,
+        "transported": 0,
+        "matchedControl": 0,
+        "subsequentUses": 0
+      },
+      "alternatives": {
+        "tried": 0,
+        "moved": 0,
+        "exact": 0,
+        "matchedPreparation": 0
+      },
+      "conditions": {
+        "selected": 3,
+        "completedPlacements": 0,
+        "observedPreparations": 1,
+        "tested": 1,
+        "moved": 1,
+        "exact": 1,
+        "fixedOriginExact": 0,
+        "used": 1,
+        "official": 0,
+        "reused": 0,
+        "boardPrograms": 0,
+        "boardTested": 0,
+        "boardExact": 0,
+        "boardUsed": 0,
+        "boardNoRelativeExact": 0,
+        "boardNoRelativeUsed": 0,
+        "boardSameOffsetExact": 0,
+        "boardSameOffsetUsed": 0,
+        "reconsidered": 0,
+        "reconsideredExact": 0,
+        "reconsideredUsed": 0,
+        "reuseUsed": 0
+      },
+      "delayed": {
+        "issued": 37,
+        "preparedAccess": 0,
+        "exactPredictions": 0,
+        "followingMovements": 0
+      },
+      "independentRegionCrossings": 0,
+      "trajectory": "cd53f3eb00ffd9eff136d5f7147678fcf2494597d1b5df605c07eede157696dc",
+      "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+      "matchedPrefix": {
+        "actions": 447,
+        "controlImages": 119,
+        "candidateImages": 145
       }
     }
   },
@@ -1038,6 +1123,18 @@
         "activated": 5,
         "continued": 5,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 5,
+        "boardPrograms": 2,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 4,
+        "continued": 4,
+        "boardActivated": 2,
+        "boardContinued": 2
       }
     },
     {
@@ -1068,6 +1165,18 @@
         "activated": 12,
         "continued": 10,
         "reused": 1
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 12,
+        "boardPrograms": 2,
+        "reconsidered": 0,
+        "reused": 1,
+        "activated": 12,
+        "continued": 10,
+        "boardActivated": 2,
+        "boardContinued": 1
       }
     },
     {
@@ -1098,6 +1207,18 @@
         "activated": 12,
         "continued": 7,
         "reused": 5
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 17,
+        "boardPrograms": 8,
+        "reconsidered": 0,
+        "reused": 3,
+        "activated": 5,
+        "continued": 2,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -1128,6 +1249,18 @@
         "activated": 6,
         "continued": 6,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 16,
+        "boardPrograms": 9,
+        "reconsidered": 1,
+        "reused": 1,
+        "activated": 10,
+        "continued": 7,
+        "boardActivated": 5,
+        "boardContinued": 2
       }
     },
     {
@@ -1158,6 +1291,18 @@
         "activated": 8,
         "continued": 4,
         "reused": 2
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 19,
+        "boardPrograms": 0,
+        "reconsidered": 1,
+        "reused": 3,
+        "activated": 9,
+        "continued": 6,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -1188,6 +1333,18 @@
         "activated": 2,
         "continued": 2,
         "reused": 1
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 11,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 10,
+        "continued": 8,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -1218,6 +1375,18 @@
         "activated": 0,
         "continued": 0,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 2,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 0,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     }
   ],
@@ -3697,6 +3866,18 @@
         "activated": 6,
         "continued": 5,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 8,
+        "boardPrograms": 3,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 7,
+        "continued": 7,
+        "boardActivated": 3,
+        "boardContinued": 3
       }
     },
     {
@@ -3719,6 +3900,18 @@
         "activated": 12,
         "continued": 10,
         "reused": 1
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 12,
+        "boardPrograms": 2,
+        "reconsidered": 0,
+        "reused": 1,
+        "activated": 12,
+        "continued": 10,
+        "boardActivated": 2,
+        "boardContinued": 1
       }
     },
     {
@@ -3741,6 +3934,18 @@
         "activated": 0,
         "continued": 0,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": true,
+        "actions": 13,
+        "programs": 0,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 0,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -3763,6 +3968,18 @@
         "activated": 0,
         "continued": 0,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": true,
+        "actions": 9,
+        "programs": 0,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 0,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -3785,6 +4002,18 @@
         "activated": 1,
         "continued": 0,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": true,
+        "actions": 74,
+        "programs": 8,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 1,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -3807,6 +4036,18 @@
         "activated": 2,
         "continued": 2,
         "reused": 1
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 11,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 10,
+        "continued": 8,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -3829,6 +4070,18 @@
         "activated": 2,
         "continued": 1,
         "reused": 1
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 4,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 1,
+        "activated": 2,
+        "continued": 1,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     }
   ],
@@ -4338,6 +4591,18 @@
         "activated": 0,
         "continued": 0,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": true,
+        "actions": 12,
+        "programs": 0,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 0,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -4355,6 +4620,18 @@
         "activated": 0,
         "continued": 0,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": true,
+        "actions": 13,
+        "programs": 0,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 0,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -4376,6 +4653,18 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 23,
+        "boardPrograms": 1,
+        "reconsidered": 0,
+        "reused": 1,
+        "activated": 8,
+        "continued": 4,
+        "boardActivated": 1,
+        "boardContinued": 0
       }
     },
     {
@@ -4393,6 +4682,18 @@
         "activated": 1,
         "continued": 1,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 15,
+        "boardPrograms": 7,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 5,
+        "continued": 1,
+        "boardActivated": 2,
+        "boardContinued": 0
       }
     },
     {
@@ -4414,6 +4715,18 @@
       "candidateV8": {
         "won": false,
         "actions": 120
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 0,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 0,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     },
     {
@@ -4431,6 +4744,18 @@
         "activated": 0,
         "continued": 0,
         "reused": 0
+      },
+      "candidateV10": {
+        "won": false,
+        "actions": 120,
+        "programs": 0,
+        "boardPrograms": 0,
+        "reconsidered": 0,
+        "reused": 0,
+        "activated": 0,
+        "continued": 0,
+        "boardActivated": 0,
+        "boardContinued": 0
       }
     }
   ],
@@ -7705,6 +8030,2742 @@
           }
         }
       }
+    }
+  },
+  "worldCoordinatesV10": {
+    "chronological": {
+      "all": {
+        "pair": {
+          "measured": 132,
+          "actual": 70,
+          "classified": 33,
+          "correct": 28,
+          "called": 17,
+          "confirmed": 14
+        },
+        "board": {
+          "measured": 132,
+          "actual": 70,
+          "classified": 85,
+          "correct": 76,
+          "called": 56,
+          "confirmed": 49
+        },
+        "landmarks": {
+          "measured": 132,
+          "actual": 70,
+          "classified": 89,
+          "correct": 75,
+          "called": 61,
+          "confirmed": 49
+        },
+        "majority": {
+          "measured": 132,
+          "actual": 70,
+          "classified": 132,
+          "correct": 86,
+          "called": 78,
+          "confirmed": 51
+        }
+      },
+      "shifted": {
+        "pair": {
+          "measured": 41,
+          "actual": 17,
+          "classified": 16,
+          "correct": 14,
+          "called": 8,
+          "confirmed": 6
+        },
+        "board": {
+          "measured": 41,
+          "actual": 17,
+          "classified": 26,
+          "correct": 22,
+          "called": 16,
+          "confirmed": 12
+        },
+        "landmarks": {
+          "measured": 41,
+          "actual": 17,
+          "classified": 30,
+          "correct": 21,
+          "called": 21,
+          "confirmed": 12
+        },
+        "majority": {
+          "measured": 41,
+          "actual": 17,
+          "classified": 41,
+          "correct": 31,
+          "called": 11,
+          "confirmed": 9
+        }
+      }
+    },
+    "disagreements": {
+      "disagreements": 2,
+      "correct": 0,
+      "opened": 2,
+      "confirmed": 0
+    },
+    "sourceLaboratory": {
+      "fourLower": {
+        "entries": 4,
+        "usable": 4,
+        "fitted": 3,
+        "newJoint": {
+          "pair": {
+            "measured": 30,
+            "positiveCases": 5,
+            "classified": 21,
+            "correct": 18,
+            "called": 5,
+            "confirmed": 2,
+            "missed": 0
+          },
+          "board": {
+            "measured": 30,
+            "positiveCases": 5,
+            "classified": 30,
+            "correct": 30,
+            "called": 5,
+            "confirmed": 5,
+            "missed": 0
+          },
+          "landmarks": {
+            "measured": 30,
+            "positiveCases": 5,
+            "classified": 30,
+            "correct": 30,
+            "called": 5,
+            "confirmed": 5,
+            "missed": 0
+          },
+          "majority": {
+            "measured": 30,
+            "positiveCases": 5,
+            "classified": 30,
+            "correct": 22,
+            "called": 9,
+            "confirmed": 3,
+            "missed": 2
+          },
+          "imagined": {
+            "measured": 30,
+            "positiveCases": 5,
+            "classified": 26,
+            "correct": 26,
+            "called": 4,
+            "confirmed": 4,
+            "missed": 0
+          }
+        },
+        "perLevel": [
+          {
+            "code": "GIGO",
+            "level": 1,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 12,
+            "heldOutWords": 171,
+            "selection": null
+          },
+          {
+            "code": "CGWL",
+            "level": 1,
+            "source": "official",
+            "positive": 3,
+            "trainingImages": 19,
+            "heldOutWords": 192,
+            "selection": {
+              "word": [
+                "ACTION3",
+                "ACTION5",
+                "ACTION4",
+                "ACTION4",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "exact": false,
+              "works": true,
+              "unseenImage": true,
+              "unseenJoint": true,
+              "omissions": {
+                "count": 15,
+                "unknown": 0,
+                "alsoWork": 2,
+                "shortest": [
+                  "ACTION3",
+                  "ACTION5",
+                  "ACTION4"
+                ],
+                "bare": false
+              }
+            }
+          },
+          {
+            "code": "SKBN",
+            "level": 1,
+            "source": "role displacement",
+            "positive": 13,
+            "trainingImages": 25,
+            "heldOutWords": 192,
+            "selection": {
+              "word": [
+                "ACTION4",
+                "ACTION2",
+                "ACTION2",
+                "ACTION3",
+                "ACTION2",
+                "ACTION2"
+              ],
+              "measurable": true,
+              "exact": false,
+              "works": true,
+              "unseenImage": false,
+              "unseenJoint": false,
+              "omissions": {
+                "count": 27,
+                "unknown": 0,
+                "alsoWork": 18,
+                "shortest": [
+                  "ACTION4"
+                ],
+                "bare": false
+              }
+            }
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "source": "official",
+            "positive": 2,
+            "trainingImages": 36,
+            "heldOutWords": 192,
+            "selection": {
+              "word": [
+                "ACTION1",
+                "ACTION4",
+                "ACTION1",
+                "ACTION4",
+                "ACTION4",
+                "ACTION2",
+                "ACTION3"
+              ],
+              "measurable": true,
+              "exact": true,
+              "works": true,
+              "unseenImage": true,
+              "unseenJoint": false,
+              "omissions": {
+                "count": 67,
+                "unknown": 0,
+                "alsoWork": 3,
+                "shortest": [
+                  "ACTION1",
+                  "ACTION1",
+                  "ACTION4",
+                  "ACTION4",
+                  "ACTION2"
+                ],
+                "bare": false
+              }
+            }
+          }
+        ]
+      },
+      "upperWinningSuffix": {
+        "entries": 18,
+        "usable": 12,
+        "fitted": 2,
+        "newJoint": {
+          "pair": {
+            "measured": 80,
+            "positiveCases": 0,
+            "classified": 17,
+            "correct": 17,
+            "called": 0,
+            "confirmed": 0,
+            "missed": 0
+          },
+          "board": {
+            "measured": 80,
+            "positiveCases": 0,
+            "classified": 17,
+            "correct": 17,
+            "called": 0,
+            "confirmed": 0,
+            "missed": 0
+          },
+          "landmarks": {
+            "measured": 80,
+            "positiveCases": 0,
+            "classified": 17,
+            "correct": 16,
+            "called": 1,
+            "confirmed": 0,
+            "missed": 0
+          },
+          "majority": {
+            "measured": 80,
+            "positiveCases": 0,
+            "classified": 80,
+            "correct": 80,
+            "called": 0,
+            "confirmed": 0,
+            "missed": 0
+          },
+          "imagined": {
+            "measured": 80,
+            "positiveCases": 0,
+            "classified": 17,
+            "correct": 17,
+            "called": 0,
+            "confirmed": 0,
+            "missed": 0
+          }
+        },
+        "perLevel": [
+          {
+            "code": "CATR",
+            "level": 2,
+            "source": "official",
+            "positive": 2,
+            "trainingImages": 15,
+            "heldOutWords": 86,
+            "selection": {
+              "word": [
+                "ACTION6:25,51",
+                "ACTION6:17,51",
+                "ACTION6:17,51"
+              ],
+              "measurable": true,
+              "exact": false,
+              "works": false,
+              "unseenImage": true,
+              "unseenJoint": false
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 3,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 23,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "GRAV",
+            "level": 5,
+            "excluded": "no relocated partner"
+          },
+          {
+            "code": "CATR",
+            "level": 3,
+            "source": "official",
+            "positive": 3,
+            "trainingImages": 36,
+            "heldOutWords": 144,
+            "selection": {
+              "word": [
+                "ACTION6:21,47",
+                "ACTION7",
+                "ACTION6:46,51",
+                "ACTION6:21,47"
+              ],
+              "measurable": true,
+              "exact": true,
+              "works": false,
+              "unseenImage": true,
+              "unseenJoint": false
+            }
+          },
+          {
+            "code": "GIGO",
+            "level": 4,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 21,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "MOTO",
+            "level": 2,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 46,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "CWSE",
+            "level": 2,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 7,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "GIGO",
+            "level": 5,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 42,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "POLA",
+            "level": 2,
+            "excluded": "no relocated partner"
+          },
+          {
+            "code": "GARE",
+            "level": 2,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 31,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "GRAV",
+            "level": 2,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 9,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "POLA",
+            "level": 3,
+            "excluded": "no relocated partner"
+          },
+          {
+            "code": "GARE",
+            "level": 3,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 3,
+            "heldOutWords": 15,
+            "selection": null
+          },
+          {
+            "code": "GRAV",
+            "level": 3,
+            "excluded": "no relocated partner"
+          },
+          {
+            "code": "POLA",
+            "level": 4,
+            "source": "official",
+            "positive": 1,
+            "trainingImages": 23,
+            "heldOutWords": 192,
+            "selection": null
+          },
+          {
+            "code": "GIGO",
+            "level": 2,
+            "excluded": "no relocated partner"
+          },
+          {
+            "code": "GRAV",
+            "level": 4,
+            "excluded": "no relocated partner"
+          },
+          {
+            "code": "POLA",
+            "level": 5,
+            "source": "official",
+            "positive": 2,
+            "trainingImages": 42,
+            "heldOutWords": 192,
+            "selection": null
+          }
+        ]
+      },
+      "upperIntermediate": {
+        "entries": 18,
+        "usable": 14,
+        "fitted": 6,
+        "newJoint": {
+          "pair": {
+            "measured": 57,
+            "positiveCases": 12,
+            "classified": 18,
+            "correct": 16,
+            "called": 4,
+            "confirmed": 3,
+            "missed": 1
+          },
+          "board": {
+            "measured": 57,
+            "positiveCases": 12,
+            "classified": 22,
+            "correct": 19,
+            "called": 6,
+            "confirmed": 4,
+            "missed": 1
+          },
+          "landmarks": {
+            "measured": 57,
+            "positiveCases": 12,
+            "classified": 22,
+            "correct": 19,
+            "called": 6,
+            "confirmed": 4,
+            "missed": 1
+          },
+          "majority": {
+            "measured": 57,
+            "positiveCases": 12,
+            "classified": 57,
+            "correct": 42,
+            "called": 11,
+            "confirmed": 4,
+            "missed": 8
+          },
+          "imagined": {
+            "measured": 57,
+            "positiveCases": 12,
+            "classified": 18,
+            "correct": 14,
+            "called": 5,
+            "confirmed": 3,
+            "missed": 2
+          }
+        },
+        "perLevel": [
+          {
+            "code": "CATR",
+            "level": 2,
+            "excluded": "no differential movement followed by another movement or victory"
+          },
+          {
+            "code": "GARE",
+            "level": 2,
+            "source": "role displacement",
+            "positive": 1,
+            "trainingImages": 4,
+            "heldOutWords": 48,
+            "selection": null,
+            "follow": {
+              "key": "ACTION6:11,13",
+              "effect": "WIN"
+            },
+            "sameOrigin": true,
+            "inactiveBare": true
+          },
+          {
+            "code": "GIGO",
+            "level": 3,
+            "source": "role displacement",
+            "positive": 5,
+            "trainingImages": 12,
+            "heldOutWords": 132,
+            "selection": null,
+            "follow": {
+              "key": "ACTION2",
+              "effect": [
+                0,
+                1
+              ]
+            },
+            "sameOrigin": true,
+            "inactiveBare": true
+          },
+          {
+            "code": "GRAV",
+            "level": 2,
+            "source": "role displacement",
+            "positive": 2,
+            "trainingImages": 5,
+            "heldOutWords": 63,
+            "selection": {
+              "word": [
+                "ACTION6:2,29",
+                "ACTION6:2,29"
+              ],
+              "measurable": false
+            },
+            "follow": {
+              "key": "ACTION4",
+              "effect": [
+                28,
+                0
+              ]
+            },
+            "sameOrigin": true,
+            "inactiveBare": false
+          },
+          {
+            "code": "GRAV",
+            "level": 5,
+            "source": "role displacement",
+            "positive": 7,
+            "trainingImages": 24,
+            "heldOutWords": 171,
+            "selection": {
+              "word": [
+                "ACTION7",
+                "ACTION4",
+                "ACTION2",
+                "ACTION3"
+              ],
+              "measurable": true,
+              "exact": false,
+              "works": false,
+              "unseenImage": true,
+              "unseenJoint": false
+            },
+            "follow": {
+              "key": "ACTION1",
+              "effect": "WIN"
+            },
+            "sameOrigin": false,
+            "inactiveBare": true
+          },
+          {
+            "code": "POLA",
+            "level": 3,
+            "excluded": "no differential movement followed by another movement or victory"
+          },
+          {
+            "code": "CATR",
+            "level": 3,
+            "source": "role displacement",
+            "positive": 10,
+            "trainingImages": 15,
+            "heldOutWords": 86,
+            "selection": {
+              "word": [
+                "ACTION6:42,47",
+                "ACTION6:42,47",
+                "ACTION6:46,51"
+              ],
+              "measurable": true,
+              "exact": false,
+              "works": true,
+              "unseenImage": false,
+              "unseenJoint": false,
+              "follow": false,
+              "omissions": {
+                "count": 5,
+                "unknown": 0,
+                "alsoWork": 4,
+                "shortest": [
+                  "ACTION6:42,47"
+                ],
+                "bare": false
+              }
+            },
+            "follow": {
+              "key": "ACTION6:17,51",
+              "effect": "WIN"
+            },
+            "sameOrigin": false,
+            "inactiveBare": true
+          },
+          {
+            "code": "GARE",
+            "level": 3,
+            "source": "role displacement",
+            "positive": 1,
+            "trainingImages": 2,
+            "heldOutWords": 8,
+            "selection": null,
+            "follow": {
+              "key": "ACTION6:49,43",
+              "effect": "WIN"
+            },
+            "sameOrigin": false,
+            "inactiveBare": true
+          },
+          {
+            "code": "GIGO",
+            "level": 4,
+            "source": "role displacement",
+            "positive": 4,
+            "trainingImages": 9,
+            "heldOutWords": 132,
+            "selection": null,
+            "follow": {
+              "key": "ACTION4",
+              "effect": [
+                1,
+                0
+              ]
+            },
+            "sameOrigin": true,
+            "inactiveBare": true
+          },
+          {
+            "code": "GRAV",
+            "level": 3,
+            "source": "role displacement",
+            "positive": 9,
+            "trainingImages": 22,
+            "heldOutWords": 130,
+            "selection": {
+              "word": [
+                "ACTION2",
+                "ACTION3",
+                "ACTION2",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "exact": false,
+              "works": true,
+              "unseenImage": true,
+              "unseenJoint": false,
+              "follow": false,
+              "omissions": {
+                "count": 13,
+                "unknown": 0,
+                "alsoWork": 6,
+                "shortest": [
+                  "ACTION4"
+                ],
+                "bare": false
+              }
+            },
+            "follow": {
+              "key": "ACTION3",
+              "effect": "WIN"
+            },
+            "sameOrigin": false,
+            "inactiveBare": true
+          },
+          {
+            "code": "MOTO",
+            "level": 2,
+            "source": "role displacement",
+            "positive": 1,
+            "trainingImages": 8,
+            "heldOutWords": 96,
+            "selection": null,
+            "follow": {
+              "key": "ACTION5",
+              "effect": "WIN"
+            },
+            "sameOrigin": true,
+            "inactiveBare": true
+          },
+          {
+            "code": "POLA",
+            "level": 4,
+            "source": "role displacement",
+            "positive": 5,
+            "trainingImages": 12,
+            "heldOutWords": 121,
+            "selection": {
+              "word": [
+                "ACTION5",
+                "ACTION3"
+              ],
+              "measurable": true,
+              "exact": true,
+              "works": true,
+              "unseenImage": false,
+              "unseenJoint": false,
+              "follow": false,
+              "omissions": {
+                "count": 3,
+                "unknown": 0,
+                "alsoWork": 1,
+                "shortest": [
+                  "ACTION5"
+                ],
+                "bare": false
+              }
+            },
+            "follow": {
+              "key": "ACTION4",
+              "effect": "WIN"
+            },
+            "sameOrigin": false,
+            "inactiveBare": false
+          },
+          {
+            "code": "CWSE",
+            "level": 2,
+            "excluded": "no differential movement followed by another movement or victory"
+          },
+          {
+            "code": "GIGO",
+            "level": 2,
+            "source": "role displacement",
+            "positive": 5,
+            "trainingImages": 7,
+            "heldOutWords": 192,
+            "selection": {
+              "word": [
+                "ACTION2",
+                "ACTION1",
+                "ACTION1",
+                "ACTION3",
+                "ACTION3"
+              ],
+              "measurable": true,
+              "exact": true,
+              "works": false,
+              "unseenImage": true,
+              "unseenJoint": true
+            },
+            "follow": {
+              "key": "ACTION2",
+              "effect": [
+                0,
+                2
+              ]
+            },
+            "sameOrigin": false,
+            "inactiveBare": true
+          },
+          {
+            "code": "GIGO",
+            "level": 5,
+            "source": "role displacement",
+            "positive": 9,
+            "trainingImages": 14,
+            "heldOutWords": 160,
+            "selection": null,
+            "follow": {
+              "key": "ACTION2",
+              "effect": [
+                0,
+                1
+              ]
+            },
+            "sameOrigin": true,
+            "inactiveBare": true
+          },
+          {
+            "code": "GRAV",
+            "level": 4,
+            "source": "role displacement",
+            "positive": 1,
+            "trainingImages": 5,
+            "heldOutWords": 24,
+            "selection": null,
+            "follow": {
+              "key": "ACTION4",
+              "effect": [
+                16,
+                0
+              ]
+            },
+            "sameOrigin": false,
+            "inactiveBare": true
+          },
+          {
+            "code": "POLA",
+            "level": 2,
+            "excluded": "no differential movement followed by another movement or victory"
+          },
+          {
+            "code": "POLA",
+            "level": 5,
+            "source": "role displacement",
+            "positive": 1,
+            "trainingImages": 5,
+            "heldOutWords": 48,
+            "selection": null,
+            "follow": {
+              "key": "ACTION6:46,25",
+              "effect": [
+                10,
+                0
+              ]
+            },
+            "sameOrigin": false,
+            "inactiveBare": true
+          }
+        ]
+      }
+    },
+    "feedback": {
+      "lower": {
+        "entries": 4,
+        "selected": 3,
+        "openWorks": 2,
+        "feedbackWorks": 2,
+        "cases": [
+          {
+            "code": "CGWL",
+            "level": 1,
+            "source": "official",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION3",
+                "ACTION1",
+                "ACTION3",
+                "ACTION5",
+                "ACTION2",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "works": false,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": false,
+              "exact": false,
+              "newJoint": false,
+              "newImage": false
+            },
+            "feedback": {
+              "abstained": true,
+              "prefix": [
+                "ACTION3",
+                "ACTION1",
+                "ACTION3"
+              ]
+            },
+            "changes": 0
+          },
+          {
+            "code": "SKBN",
+            "level": 1,
+            "source": "role displacement",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION4",
+                "ACTION1",
+                "ACTION1",
+                "ACTION3",
+                "ACTION2",
+                "ACTION2",
+                "ACTION3",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": true,
+              "newImage": true
+            },
+            "feedback": {
+              "word": [
+                "ACTION4",
+                "ACTION1",
+                "ACTION1",
+                "ACTION3",
+                "ACTION2",
+                "ACTION2",
+                "ACTION3",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": true,
+              "newImage": true
+            },
+            "changes": 0
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "source": "official",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION7",
+                "ACTION7",
+                "ACTION1",
+                "ACTION4",
+                "ACTION1",
+                "ACTION4",
+                "ACTION4",
+                "ACTION2"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": false,
+              "newImage": false
+            },
+            "feedback": {
+              "word": [
+                "ACTION7",
+                "ACTION7",
+                "ACTION1",
+                "ACTION4",
+                "ACTION1",
+                "ACTION4",
+                "ACTION4",
+                "ACTION2"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": false,
+              "newImage": false
+            },
+            "changes": 0
+          }
+        ]
+      },
+      "upper": {
+        "entries": 18,
+        "selected": 2,
+        "openWorks": 1,
+        "feedbackWorks": 1,
+        "cases": [
+          {
+            "code": "CATR",
+            "level": 2,
+            "source": "official",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION6:38,51",
+                "ACTION6:17,51",
+                "ACTION6:25,51",
+                "ACTION6:17,51"
+              ],
+              "measurable": true,
+              "works": false,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": false,
+              "exact": false,
+              "newJoint": false,
+              "newImage": true
+            },
+            "feedback": {
+              "word": [
+                "ACTION6:38,51",
+                "ACTION6:17,51",
+                "ACTION6:25,51",
+                "ACTION6:17,51"
+              ],
+              "measurable": true,
+              "works": false,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": false,
+              "exact": false,
+              "newJoint": false,
+              "newImage": true
+            },
+            "changes": 0
+          },
+          {
+            "code": "CATR",
+            "level": 3,
+            "source": "official",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION6:42,47",
+                "ACTION6:21,47",
+                "ACTION6:42,47",
+                "ACTION6:46,51",
+                "ACTION6:42,47"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": false,
+              "newImage": false
+            },
+            "feedback": {
+              "word": [
+                "ACTION6:42,47",
+                "ACTION6:21,47",
+                "ACTION6:42,47",
+                "ACTION6:46,51",
+                "ACTION6:42,47"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": false,
+              "newImage": false
+            },
+            "changes": 0
+          }
+        ]
+      },
+      "upper-motion": {
+        "entries": 18,
+        "selected": 6,
+        "openWorks": 3,
+        "feedbackWorks": 3,
+        "cases": [
+          {
+            "code": "GRAV",
+            "level": 3,
+            "source": "role displacement",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION4",
+                "ACTION3",
+                "ACTION2",
+                "ACTION1",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": false,
+              "exact": false,
+              "newJoint": false,
+              "newImage": true,
+              "continued": false
+            },
+            "feedback": {
+              "word": [
+                "ACTION4",
+                "ACTION3",
+                "ACTION2",
+                "ACTION1",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": false,
+              "exact": false,
+              "newJoint": false,
+              "newImage": true,
+              "continued": false
+            },
+            "changes": 0
+          },
+          {
+            "code": "GRAV",
+            "level": 5,
+            "source": "role displacement",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION4",
+                "ACTION1",
+                "ACTION4",
+                "ACTION6:61,62",
+                "ACTION2"
+              ],
+              "measurable": false
+            },
+            "feedback": {
+              "word": [
+                "ACTION4",
+                "ACTION1",
+                "ACTION4",
+                "ACTION6:61,62",
+                "ACTION2"
+              ],
+              "measurable": false
+            },
+            "changes": 0
+          },
+          {
+            "code": "POLA",
+            "level": 4,
+            "source": "role displacement",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION6:31,25",
+                "ACTION6:31,25",
+                "ACTION3",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": false,
+              "newImage": false,
+              "continued": false
+            },
+            "feedback": {
+              "word": [
+                "ACTION6:31,25",
+                "ACTION6:31,25",
+                "ACTION3",
+                "ACTION4"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": true,
+              "exact": true,
+              "newJoint": false,
+              "newImage": false,
+              "continued": false
+            },
+            "changes": 0
+          },
+          {
+            "code": "CATR",
+            "level": 3,
+            "source": "role displacement",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION6:46,51",
+                "ACTION6:42,47",
+                "ACTION6:21,47",
+                "ACTION6:46,51"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": false,
+              "exact": false,
+              "newJoint": false,
+              "newImage": true,
+              "continued": false
+            },
+            "feedback": {
+              "word": [
+                "ACTION6:46,51",
+                "ACTION6:42,47",
+                "ACTION6:21,47",
+                "ACTION6:46,51"
+              ],
+              "measurable": true,
+              "works": true,
+              "predicted": 1,
+              "predictedPositions": 1,
+              "covered": false,
+              "exact": false,
+              "newJoint": false,
+              "newImage": true,
+              "continued": false
+            },
+            "changes": 0
+          },
+          {
+            "code": "GIGO",
+            "level": 2,
+            "source": "role displacement",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION1",
+                "ACTION1",
+                "ACTION3",
+                "ACTION6:22,10",
+                "ACTION3",
+                "ACTION3"
+              ],
+              "measurable": false
+            },
+            "feedback": {
+              "abstained": true,
+              "prefix": [
+                "ACTION1",
+                "ACTION1",
+                "ACTION3",
+                "ACTION6:22,10",
+                "ACTION3"
+              ]
+            },
+            "changes": 0
+          },
+          {
+            "code": "GRAV",
+            "level": 2,
+            "source": "role displacement",
+            "eligible": true,
+            "testWords": 96,
+            "selected": true,
+            "bare": false,
+            "open": {
+              "word": [
+                "ACTION3",
+                "ACTION6:31,4",
+                "ACTION3"
+              ],
+              "measurable": false
+            },
+            "feedback": {
+              "abstained": true,
+              "prefix": [
+                "ACTION3",
+                "ACTION6:31,4"
+              ]
+            },
+            "changes": 0
+          }
+        ]
+      }
+    },
+    "firstAutonomousL1": {
+      "entries": 100,
+      "complete": 8,
+      "uniquePosition": [
+        "MIND/1"
+      ],
+      "distinctFutureAtSharedPosition": []
+    },
+    "firstAutonomousUpper": {
+      "entries": 18,
+      "complete": 10,
+      "uniquePosition": [],
+      "distinctFutureAtSharedPosition": []
+    },
+    "twoStage": {
+      "entries": 18,
+      "eligible": 14,
+      "newImages": {
+        "measured": 131,
+        "positiveCases": 11,
+        "classified": 84,
+        "correct": 75,
+        "called": 6,
+        "confirmed": 0,
+        "missed": 3
+      },
+      "cases": [
+        {
+          "code": "GARE",
+          "level": 2,
+          "goal": "official",
+          "words": 1,
+          "trainingBefore": 4,
+          "trainingAfter": 3,
+          "afterPositives": 1,
+          "paired": null,
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GIGO",
+          "level": 3,
+          "goal": "next displacement",
+          "words": 128,
+          "trainingBefore": 11,
+          "trainingAfter": 11,
+          "afterPositives": 4,
+          "paired": {
+            "word": [
+              "ACTION2",
+              "ACTION3",
+              "ACTION6:20,25"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "withFuture": {
+            "word": [
+              "ACTION2",
+              "ACTION3",
+              "ACTION6:20,25"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "goal": "next displacement",
+          "words": 1,
+          "trainingBefore": 1,
+          "trainingAfter": 1,
+          "afterPositives": 0,
+          "paired": null,
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "goal": "official",
+          "words": 128,
+          "trainingBefore": 24,
+          "trainingAfter": 16,
+          "afterPositives": 1,
+          "paired": {
+            "word": [
+              "ACTION4",
+              "ACTION5",
+              "ACTION1",
+              "ACTION2"
+            ],
+            "measured": false
+          },
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "goal": "official",
+          "words": 21,
+          "trainingBefore": 15,
+          "trainingAfter": 8,
+          "afterPositives": 1,
+          "paired": {
+            "word": [
+              "ACTION6:46,51",
+              "ACTION6:21,47",
+              "ACTION6:42,47"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": false,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": true
+          },
+          "withFuture": {
+            "word": [
+              "ACTION6:46,51",
+              "ACTION6:21,47",
+              "ACTION6:42,47"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": false,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": true
+          },
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "goal": "official",
+          "words": 1,
+          "trainingBefore": 1,
+          "trainingAfter": 1,
+          "afterPositives": 0,
+          "paired": null,
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GIGO",
+          "level": 4,
+          "goal": "next displacement",
+          "words": 128,
+          "trainingBefore": 9,
+          "trainingAfter": 9,
+          "afterPositives": 4,
+          "paired": {
+            "word": [
+              "ACTION6:15,21",
+              "ACTION4",
+              "ACTION5"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "withFuture": {
+            "word": [
+              "ACTION6:15,21",
+              "ACTION4",
+              "ACTION5"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "goal": "official",
+          "words": 128,
+          "trainingBefore": 22,
+          "trainingAfter": 15,
+          "afterPositives": 1,
+          "paired": {
+            "word": [
+              "ACTION2",
+              "ACTION3",
+              "ACTION1",
+              "ACTION4"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": false,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": true,
+            "newAfter": true,
+            "newImage": true
+          },
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "goal": "official",
+          "words": 48,
+          "trainingBefore": 8,
+          "trainingAfter": 3,
+          "afterPositives": 1,
+          "paired": {
+            "word": [
+              "ACTION6:54,30",
+              "ACTION5"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "withFuture": {
+            "word": [
+              "ACTION6:54,30",
+              "ACTION5"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "POLA",
+          "level": 4,
+          "goal": "official",
+          "words": 122,
+          "trainingBefore": 12,
+          "trainingAfter": 7,
+          "afterPositives": 1,
+          "paired": {
+            "word": [
+              "ACTION3",
+              "ACTION3",
+              "ACTION6:31,25"
+            ],
+            "measured": false
+          },
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GIGO",
+          "level": 2,
+          "goal": "next displacement",
+          "words": 128,
+          "trainingBefore": 6,
+          "trainingAfter": 4,
+          "afterPositives": 2,
+          "paired": {
+            "word": [
+              "ACTION1",
+              "ACTION1",
+              "ACTION1",
+              "ACTION1",
+              "ACTION3"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": false,
+            "beforeExact": false,
+            "afterExact": false,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "withFuture": {
+            "word": [
+              "ACTION1",
+              "ACTION1",
+              "ACTION6:22,10",
+              "ACTION1",
+              "ACTION1"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": false,
+            "afterExact": false,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "goal": "next displacement",
+          "words": 128,
+          "trainingBefore": 14,
+          "trainingAfter": 13,
+          "afterPositives": 7,
+          "paired": {
+            "word": [
+              "ACTION6:16,12",
+              "ACTION6:33,14",
+              "ACTION7"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "withFuture": {
+            "word": [
+              "ACTION6:16,12",
+              "ACTION6:33,14",
+              "ACTION7"
+            ],
+            "measured": true,
+            "moved": true,
+            "used": true,
+            "beforeExact": true,
+            "afterExact": true,
+            "newBefore": false,
+            "newAfter": false,
+            "newImage": false
+          },
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "goal": "next displacement",
+          "words": 1,
+          "trainingBefore": 5,
+          "trainingAfter": 3,
+          "afterPositives": 1,
+          "paired": null,
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "goal": "next displacement",
+          "words": 1,
+          "trainingBefore": 5,
+          "trainingAfter": 5,
+          "afterPositives": 1,
+          "paired": null,
+          "withFuture": null,
+          "bare": {
+            "moved": false,
+            "used": false
+          }
+        }
+      ]
+    },
+    "verifiedUpperPrograms": {
+      "combined": {
+        "selected": 140,
+        "completedPlacements": 50,
+        "observedPreparations": 71,
+        "tested": 120,
+        "moved": 102,
+        "exact": 73,
+        "fixedOriginExact": 0,
+        "used": 50,
+        "official": 0,
+        "reused": 10,
+        "boardPrograms": 32,
+        "boardTested": 23,
+        "boardExact": 15,
+        "boardUsed": 8,
+        "boardNoRelativeExact": 15,
+        "boardNoRelativeUsed": 8,
+        "boardSameOffsetExact": 4,
+        "boardSameOffsetUsed": 1,
+        "reconsidered": 2,
+        "reconsideredExact": 2,
+        "reconsideredUsed": 2,
+        "reuseUsed": 0
+      },
+      "byLevel": [
+        {
+          "code": "CATR",
+          "level": 2,
+          "selected": 8,
+          "completedPlacements": 7,
+          "observedPreparations": 1,
+          "tested": 7,
+          "moved": 7,
+          "exact": 7,
+          "fixedOriginExact": 0,
+          "used": 7,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 3,
+          "boardTested": 3,
+          "boardExact": 3,
+          "boardUsed": 3,
+          "boardNoRelativeExact": 3,
+          "boardNoRelativeUsed": 3,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "selected": 5,
+          "completedPlacements": 2,
+          "observedPreparations": 2,
+          "tested": 4,
+          "moved": 4,
+          "exact": 4,
+          "fixedOriginExact": 0,
+          "used": 4,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 2,
+          "boardTested": 2,
+          "boardExact": 2,
+          "boardUsed": 2,
+          "boardNoRelativeExact": 2,
+          "boardNoRelativeUsed": 2,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "selected": 12,
+          "completedPlacements": 7,
+          "observedPreparations": 5,
+          "tested": 12,
+          "moved": 12,
+          "exact": 12,
+          "fixedOriginExact": 0,
+          "used": 10,
+          "official": 0,
+          "reused": 1,
+          "boardPrograms": 2,
+          "boardTested": 2,
+          "boardExact": 2,
+          "boardUsed": 1,
+          "boardNoRelativeExact": 2,
+          "boardNoRelativeUsed": 1,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GARE",
+          "level": 2,
+          "selected": 0,
+          "completedPlacements": 0,
+          "observedPreparations": 0,
+          "tested": 0,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "selected": 17,
+          "completedPlacements": 6,
+          "observedPreparations": 2,
+          "tested": 8,
+          "moved": 6,
+          "exact": 5,
+          "fixedOriginExact": 0,
+          "used": 2,
+          "official": 0,
+          "reused": 3,
+          "boardPrograms": 8,
+          "boardTested": 1,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GIGO",
+          "level": 2,
+          "selected": 0,
+          "completedPlacements": 0,
+          "observedPreparations": 0,
+          "tested": 0,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GIGO",
+          "level": 3,
+          "selected": 0,
+          "completedPlacements": 0,
+          "observedPreparations": 0,
+          "tested": 0,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GIGO",
+          "level": 4,
+          "selected": 0,
+          "completedPlacements": 0,
+          "observedPreparations": 0,
+          "tested": 0,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "selected": 16,
+          "completedPlacements": 8,
+          "observedPreparations": 6,
+          "tested": 14,
+          "moved": 10,
+          "exact": 10,
+          "fixedOriginExact": 0,
+          "used": 7,
+          "official": 0,
+          "reused": 1,
+          "boardPrograms": 9,
+          "boardTested": 7,
+          "boardExact": 5,
+          "boardUsed": 2,
+          "boardNoRelativeExact": 5,
+          "boardNoRelativeUsed": 2,
+          "boardSameOffsetExact": 4,
+          "boardSameOffsetUsed": 1,
+          "reconsidered": 1,
+          "reconsideredExact": 1,
+          "reconsideredUsed": 1,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "selected": 8,
+          "completedPlacements": 0,
+          "observedPreparations": 8,
+          "tested": 8,
+          "moved": 4,
+          "exact": 1,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "selected": 23,
+          "completedPlacements": 9,
+          "observedPreparations": 13,
+          "tested": 22,
+          "moved": 19,
+          "exact": 8,
+          "fixedOriginExact": 0,
+          "used": 4,
+          "official": 0,
+          "reused": 1,
+          "boardPrograms": 1,
+          "boardTested": 1,
+          "boardExact": 1,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 1,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "selected": 15,
+          "completedPlacements": 0,
+          "observedPreparations": 15,
+          "tested": 15,
+          "moved": 12,
+          "exact": 5,
+          "fixedOriginExact": 0,
+          "used": 1,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 7,
+          "boardTested": 7,
+          "boardExact": 2,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 2,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "selected": 19,
+          "completedPlacements": 9,
+          "observedPreparations": 7,
+          "tested": 16,
+          "moved": 16,
+          "exact": 9,
+          "fixedOriginExact": 0,
+          "used": 6,
+          "official": 0,
+          "reused": 3,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 1,
+          "reconsideredExact": 1,
+          "reconsideredUsed": 1,
+          "reuseUsed": 0
+        },
+        {
+          "code": "MOTO",
+          "level": 2,
+          "selected": 11,
+          "completedPlacements": 0,
+          "observedPreparations": 10,
+          "tested": 10,
+          "moved": 10,
+          "exact": 10,
+          "fixedOriginExact": 0,
+          "used": 8,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "POLA",
+          "level": 2,
+          "selected": 4,
+          "completedPlacements": 2,
+          "observedPreparations": 0,
+          "tested": 2,
+          "moved": 2,
+          "exact": 2,
+          "fixedOriginExact": 0,
+          "used": 1,
+          "official": 0,
+          "reused": 1,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "POLA",
+          "level": 3,
+          "selected": 0,
+          "completedPlacements": 0,
+          "observedPreparations": 0,
+          "tested": 0,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "POLA",
+          "level": 4,
+          "selected": 0,
+          "completedPlacements": 0,
+          "observedPreparations": 0,
+          "tested": 0,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "selected": 2,
+          "completedPlacements": 0,
+          "observedPreparations": 2,
+          "tested": 2,
+          "moved": 0,
+          "exact": 0,
+          "fixedOriginExact": 0,
+          "used": 0,
+          "official": 0,
+          "reused": 0,
+          "boardPrograms": 0,
+          "boardTested": 0,
+          "boardExact": 0,
+          "boardUsed": 0,
+          "boardNoRelativeExact": 0,
+          "boardNoRelativeUsed": 0,
+          "boardSameOffsetExact": 0,
+          "boardSameOffsetUsed": 0,
+          "reconsidered": 0,
+          "reconsideredExact": 0,
+          "reconsideredUsed": 0,
+          "reuseUsed": 0
+        }
+      ]
+    },
+    "boardOmissions": [
+      {
+        "code": "CWSE",
+        "level": 2,
+        "first": 70,
+        "word": [
+          "ACTION4",
+          "ACTION3",
+          "ACTION1"
+        ],
+        "origin": [
+          15,
+          28
+        ],
+        "partnerInitial": [
+          9,
+          1
+        ],
+        "departure": [
+          20,
+          28
+        ],
+        "partnerPrepared": [
+          9,
+          1
+        ],
+        "arrival": [
+          15,
+          28
+        ],
+        "endpoint": "15,23",
+        "shorter": 7,
+        "shortest": 1,
+        "matches": 2,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": false,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 0
+      },
+      {
+        "code": "CATR",
+        "level": 2,
+        "first": 106,
+        "word": [
+          "ACTION6:42,47",
+          "ACTION6:21,47",
+          "ACTION7",
+          "ACTION6:42,47"
+        ],
+        "origin": [
+          44,
+          48
+        ],
+        "partnerInitial": [
+          26,
+          45
+        ],
+        "departure": [
+          47,
+          48
+        ],
+        "partnerPrepared": [
+          23,
+          45
+        ],
+        "arrival": [
+          44,
+          48
+        ],
+        "endpoint": "47,48",
+        "shorter": 14,
+        "shortest": 1,
+        "matches": 6,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": false,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 0
+      },
+      {
+        "code": "CATR",
+        "level": 2,
+        "first": 110,
+        "word": [
+          "ACTION6:21,47",
+          "ACTION6:42,47",
+          "ACTION7",
+          "ACTION6:21,47"
+        ],
+        "origin": [
+          23,
+          45
+        ],
+        "partnerInitial": [
+          47,
+          48
+        ],
+        "departure": [
+          26,
+          45
+        ],
+        "partnerPrepared": [
+          44,
+          48
+        ],
+        "arrival": [
+          23,
+          45
+        ],
+        "endpoint": "26,45",
+        "shorter": 14,
+        "shortest": 1,
+        "matches": 6,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": false,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 0
+      },
+      {
+        "code": "CATR",
+        "level": 2,
+        "first": 114,
+        "word": [
+          "ACTION6:42,47",
+          "ACTION6:21,55",
+          "ACTION7",
+          "ACTION6:42,47"
+        ],
+        "origin": [
+          44,
+          48
+        ],
+        "partnerInitial": [
+          41,
+          50
+        ],
+        "departure": [
+          47,
+          48
+        ],
+        "partnerPrepared": [
+          41,
+          50
+        ],
+        "arrival": [
+          44,
+          48
+        ],
+        "endpoint": "47,48",
+        "shorter": 14,
+        "shortest": 1,
+        "matches": 6,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": false,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 0
+      },
+      {
+        "code": "CATR",
+        "level": 3,
+        "first": 74,
+        "word": [
+          "ACTION6:21,55",
+          "ACTION6:16,5",
+          "ACTION6:42,55",
+          "ACTION6:21,55",
+          "ACTION6:42,55"
+        ],
+        "origin": [
+          41,
+          50
+        ],
+        "partnerInitial": [
+          15,
+          56
+        ],
+        "departure": [
+          20,
+          50
+        ],
+        "partnerPrepared": [
+          18,
+          56
+        ],
+        "arrival": [
+          41,
+          50
+        ],
+        "endpoint": "20,50",
+        "shorter": 25,
+        "shortest": 1,
+        "matches": 14,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": false,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 3
+      },
+      {
+        "code": "CATR",
+        "level": 3,
+        "first": 78,
+        "word": [
+          "ACTION6:42,55",
+          "ACTION6:21,55",
+          "ACTION6:42,55"
+        ],
+        "origin": [
+          41,
+          50
+        ],
+        "partnerInitial": [
+          15,
+          56
+        ],
+        "departure": [
+          20,
+          50
+        ],
+        "partnerPrepared": [
+          15,
+          56
+        ],
+        "arrival": [
+          41,
+          50
+        ],
+        "endpoint": "20,50",
+        "shorter": 6,
+        "shortest": 1,
+        "matches": 3,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": false,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 1
+      },
+      {
+        "code": "GIGO",
+        "level": 5,
+        "first": 42,
+        "word": [
+          "ACTION4",
+          "ACTION1",
+          "ACTION1",
+          "ACTION2",
+          "ACTION1",
+          "ACTION4"
+        ],
+        "origin": [
+          32,
+          28
+        ],
+        "partnerInitial": [
+          33,
+          12
+        ],
+        "departure": [
+          33,
+          29
+        ],
+        "partnerPrepared": [
+          33,
+          12
+        ],
+        "arrival": [
+          33,
+          28
+        ],
+        "endpoint": "34,28",
+        "shorter": 38,
+        "shortest": 2,
+        "matches": 6,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": false,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 4
+      },
+      {
+        "code": "GIGO",
+        "level": 5,
+        "first": 113,
+        "word": [
+          "ACTION2",
+          "ACTION2",
+          "ACTION4",
+          "ACTION2"
+        ],
+        "origin": [
+          32,
+          29
+        ],
+        "partnerInitial": [
+          24,
+          15
+        ],
+        "departure": [
+          32,
+          31
+        ],
+        "partnerPrepared": [
+          24,
+          17
+        ],
+        "arrival": [
+          33,
+          31
+        ],
+        "endpoint": "33,32",
+        "shorter": 9,
+        "shortest": null,
+        "matches": 0,
+        "terminal": 0,
+        "missing": 0,
+        "uniquePosition": true,
+        "distinctFutureAtSharedPosition": false,
+        "alreadyPlaced": 2,
+        "initialForecast": {
+          "declaredBeforePreparation": true,
+          "plannedPartner": [
+            24,
+            16
+          ],
+          "actualPartner": [
+            24,
+            17
+          ],
+          "plannedDeparture": [
+            32,
+            31
+          ],
+          "plannedArrival": [
+            33,
+            31
+          ],
+          "plannedUse": [
+            33,
+            32
+          ],
+          "confirmedArrival": true,
+          "confirmedUse": true,
+          "correctionAction": 115,
+          "rules": [
+            {
+              "axis": 0,
+              "low": null,
+              "high": 24,
+              "subject": "partner",
+              "reference": "board"
+            },
+            {
+              "axis": 1,
+              "low": 16,
+              "high": null,
+              "subject": "partner",
+              "reference": "board"
+            }
+          ]
+        },
+        "shorterWalks": {
+          "buttons": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION3",
+            "ACTION4"
+          ],
+          "priorEndpoint": false,
+          "tested": 85,
+          "matched": 0,
+          "unknown": 0,
+          "terminal": 0,
+          "permutations": [
+            {
+              "keys": [
+                "ACTION2",
+                "ACTION2",
+                "ACTION4",
+                "ACTION2"
+              ],
+              "at": "33,32"
+            },
+            {
+              "keys": [
+                "ACTION2",
+                "ACTION2",
+                "ACTION2",
+                "ACTION4"
+              ],
+              "at": "33,32"
+            },
+            {
+              "keys": [
+                "ACTION2",
+                "ACTION4",
+                "ACTION2",
+                "ACTION2"
+              ],
+              "at": "32,32"
+            },
+            {
+              "keys": [
+                "ACTION4",
+                "ACTION2",
+                "ACTION2",
+                "ACTION2"
+              ],
+              "at": "32,32"
+            }
+          ]
+        }
+      }
+    ],
+    "neverActiveCommand": {
+      "baseline": {
+        "forecasts": 883,
+        "measured": 873,
+        "opened": 75,
+        "exact": 0
+      },
+      "sharedGate": {
+        "forecasts": 10,
+        "measured": 10,
+        "opened": 2,
+        "exact": 0
+      },
+      "cases": [
+        {
+          "code": "KEYD",
+          "baseline": {
+            "forecasts": 38,
+            "measured": 38,
+            "opened": 4,
+            "exact": 0
+          },
+          "gates": {
+            "forecasts": 2,
+            "measured": 2,
+            "opened": 0,
+            "exact": 0
+          },
+          "first": {
+            "donor": "ACTION3",
+            "command": "ACTION2",
+            "opened": false,
+            "exact": false
+          }
+        },
+        {
+          "code": "SKBN",
+          "baseline": {
+            "forecasts": 14,
+            "measured": 14,
+            "opened": 4,
+            "exact": 0
+          },
+          "gates": {
+            "forecasts": 8,
+            "measured": 8,
+            "opened": 2,
+            "exact": 0
+          },
+          "first": {
+            "donor": "ACTION2",
+            "command": "ACTION3",
+            "opened": false,
+            "exact": false
+          }
+        }
+      ]
     }
   }
 }

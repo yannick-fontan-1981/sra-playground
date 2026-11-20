@@ -130,11 +130,11 @@ export async function qualifyPreparationAlternatives({
   }
   async function assess(w, p) {
     const r = await prepare(w);
-    if (!r) return { word: w, legal: false };
+    if (!r) return { word: w, measurable: false };
     const v = key(vec(r.l)),
       result = {
         word: w,
-        legal: true,
+        measurable: true,
         works: await consequence(r),
         predicted: p.success,
         predictedPositions: p.worlds.length,

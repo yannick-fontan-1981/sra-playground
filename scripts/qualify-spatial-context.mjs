@@ -616,7 +616,7 @@ async function audit(c) {
   for (const p of plans) {
     const ready = await prepare(p.w);
     if (!ready) {
-      if (p === selected) selection = { word: p.w, legal: false };
+      if (p === selected) selection = { word: p.w, measurable: false };
       continue;
     }
     const forecasts = Object.fromEntries(modes.map((m) => [m, predictSpatialCapability(models[m], ready.l)]));
@@ -629,7 +629,7 @@ async function audit(c) {
     if (p === selected)
       selection = {
         word: p.w,
-        legal: true,
+        measurable: true,
         exact: isExact,
         works: y,
         unseenImage: !samples.has(ready.key),
