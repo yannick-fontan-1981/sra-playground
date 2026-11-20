@@ -1,3 +1,4 @@
+import {compareUseScores} from './check-use-against-score.mjs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
@@ -58,4 +59,16 @@ for(const witness of pack.predictions) {
   const selectiveUse=use&&discriminatesAction(base,steps,p,branch,true).selective;
   assert.deepEqual({aOK,enabled,use,selective,selectiveUse},expected);
 }
-console.log(JSON.stringify({games:pack.games.length,pairedPredictions:pack.predictions.length}));
+for(const testCase of pack.scoreControls??[]){
+  const trace=pack.games.find(g=>g.condition===testCase.condition), lesson=pack.lessons[trace.lesson];
+  let from=trace.initial.slice(0,16);
+  const steps=trace.commands.map(([a,x,y,to])=>{
+    const row={a,from,to,...(a===6?{data:{x,y}}:{})};from=to;return row;
+  });
+  const replayCommands=steps.map((s,i)=>({id:s.a,from:s.from,to:s.to,localCapacity:testCase.plans[i+1]}));
+  const measured=compareUseScores(engine,{code:trace.code,start:trace.level,initial:trace.initial,
+    initialCompleted:trace.initialCompleted,levels:[{won:true}],issued:steps.length,steps,replayCommands,
+    publicLesson:lesson.commands,lessonEndLevel:lesson.endLevel,observedPriorLevelActions:lesson.commands.length});
+  assert.deepEqual(measured,testCase.expected);
+}
+console.log(JSON.stringify({games:pack.games.length,pairedPredictions:pack.predictions.length,scoreControls:pack.scoreControls?.length??0}));
