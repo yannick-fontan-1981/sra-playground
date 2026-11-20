@@ -1,6 +1,7 @@
 import type { NativeEntity, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Experiment, Memory } from './preparation-experiments.ts';
 import { point, same, terrain, type XY } from './access-terrain.ts';
+import { proposeSiteProbe } from './site-probe.ts';
 import { allocateHorizon, contactAspirations } from './contact-aspirations.ts';
 import { supportProjection } from './projected-support.ts';
 import {
@@ -13,7 +14,7 @@ import {
 } from './projected-motion.ts';
 
 type Control = { role: string; held: string; from: Layout; expected: Layout };
-type Step = {
+export type Step = {
   control?: Control;
   interaction?: Destination;
   op: string;
@@ -23,6 +24,7 @@ type Step = {
 };
 type Destination = { role: string; feature: string; position: XY };
 export type Prospect = {
+  site?: { operand: string; trigger: string; at: XY; grounded: boolean };
   roles: Roles;
   steps: Step[];
   arrival: number;
@@ -35,7 +37,12 @@ export type Trial = {
   index: number;
   alternatives?: { placement: Layout; arrival: Layout; after: Layout; score: number }[];
 };
-export type ProjectionMemory = { active: Trial | null; attempted: Record<string, number>; plans: number };
+export type ProjectionMemory = {
+  active: Trial | null;
+  attempted: Record<string, number>;
+  plans: number;
+  refutations?: number;
+};
 export const newProjectionMemory = (): ProjectionMemory => ({ active: null, attempted: {}, plans: 0 });
 function mobilePairs(m: Memory, o: NativeObservation) {
   const visible = new Set(o.entities.filter((e) => !e.identity_ambiguous).map((e) => e.signature));
@@ -389,10 +396,19 @@ export function proposeProjection(
   if (!trial) {
     m.projection.active = null;
     if (m.turns < 6 || m.recurrences < 2) return null;
-    const choices = mobilePairs(m, o)
-      .slice(0, 2)
-      .flatMap(({ roles }) => catalogue(m, o, rows, available, scene, roles))
-      .sort((a, b) => b.score - a.score);
+    const exploreSites = (m.projection.refutations ?? 0) >= 3 || (m.recurrences >= 10 && m.turns >= 40);
+    const site =
+      exploreSites && m.projection.plans % 3 !== 1 ? proposeSiteProbe(m, o, rows, available, scene) : null;
+    const choices = site
+      ? [site]
+      : mobilePairs(m, o)
+          .slice(0, 2)
+          .flatMap(({ roles }) => catalogue(m, o, rows, available, scene, roles))
+          .sort((a, b) => b.score - a.score);
+    if (!choices.length && !site && exploreSites) {
+      const fallback = proposeSiteProbe(m, o, rows, available, scene);
+      if (fallback) choices.push(fallback);
+    }
     if (!choices.length) return null;
     const plan = choices[0]!;
     trial = {
@@ -438,14 +454,21 @@ export function recordProjection(m: Memory, x: Trial, b: NativeObservation, a: N
       : !matched
         ? 'projection_refuted'
         : index === plan.arrival
-          ? 'arrival_verified'
+          ? plan.site && !plan.site.grounded
+            ? 'site_probe_without_motion'
+            : 'arrival_verified'
           : index === plan.arrival + 1
-            ? 'continuation_verified'
+            ? plan.site && !plan.site.grounded
+              ? 'site_followup_observed'
+              : 'continuation_verified'
             : index > plan.arrival + 1
               ? 'subsequent_step_verified'
               : 'placement_verified';
   const id = key(plan.roles, step.from, step.op);
   m.projection.attempted[id] = (m.projection.attempted[id] ?? 0) + 1;
+  if (result === 'projection_refuted' && !plan.site)
+    m.projection.refutations = (m.projection.refutations ?? 0) + 1;
+  if (result === 'continuation_verified' && !plan.site) m.projection.refutations = 0;
   if (!index) m.projection.plans++;
   m.projection.active =
     matched && !won && a.level_epoch === b.level_epoch && a.state === b.state && index + 1 < plan.steps.length
@@ -459,6 +482,7 @@ export function recordProjection(m: Memory, x: Trial, b: NativeObservation, a: N
       destination: plan.steps[plan.arrival]!.to,
       subsequent: plan.steps[plan.arrival + 1]!.interaction ?? plan.steps[plan.arrival + 1]!.to,
       control: plan.steps[plan.arrival]!.control ?? null,
+      site: plan.site ?? null,
       continuation: plan.steps[plan.arrival + 1]!.op,
       goals: plan.goals,
       region: plan.region,

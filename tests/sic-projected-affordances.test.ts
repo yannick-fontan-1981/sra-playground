@@ -11,7 +11,8 @@ import { contactAspirations, allocateHorizon } from '../src/sic/contact-aspirati
 import type { NativeEntity } from '../src/logos-engine/v6-native-types.ts';
 import { recordProjection, newProjectionMemory } from '../src/sic/projected-affordances.ts';
 import type { NativeObservation } from '../src/logos-engine/v6-native-types.ts';
-import { initialMemory } from '../src/sic/preparation-experiments.ts';
+import { proposeSiteProbe } from '../src/sic/site-probe.ts';
+import { initialMemory, recordExperiment } from '../src/sic/preparation-experiments.ts';
 const sample = (before: Layout, after: Layout, ref: number): Sample => ({ before, after, ref });
 test('an unseen marker column retains the motion enabled on its row', () => {
   const records: Sample[] = [];
@@ -228,4 +229,57 @@ test('separate goals retain search paths when aggregate reward favors one direct
   assert.ok(kept.includes(nodes[0]!));
   assert.ok(kept.includes(nodes[19]!));
   assert.equal(kept.length, 8);
+});
+
+test('seeks an untested operand position with a single known mobile before the landmark ever moves', () => {
+  const m = initialMemory(1),
+    rows = [Array(12).fill(0) as number[]];
+  const entity = (id: string, x: number) =>
+    ({
+      id,
+      signature: id,
+      position: [x, 0],
+      bbox: [x, 0, x, 0],
+      area: 1,
+      mask: [[0, 0]],
+      identity_ambiguous: false,
+    }) as NativeEntity;
+  const scene = (x: number, rev: number) =>
+    ({
+      revision: rev,
+      level_epoch: 1,
+      levels_completed: 0,
+      state: 'PLAY',
+      frame_hash: 'pose' + x,
+      available_action_refs: ['left', 'right', 'use'],
+      entities: [entity('pointer', x), entity('fixture', 8)],
+    }) as NativeObservation;
+  let o = scene(2, 0);
+  for (const [op, x] of [
+    ['use', 2],
+    ['right', 3],
+    ['left', 2],
+    ['right', 3],
+    ['right', 4],
+    ['left', 3],
+    ['left', 2],
+    ['right', 3],
+    ['left', 2],
+    ['right', 3],
+    ['left', 2],
+    ['right', 3],
+    ['left', 2],
+  ] as const) {
+    const next = scene(x, o.revision + 1);
+    recordExperiment(m, o, next, { action_ref: op, data: {} }, rows, rows);
+    o = next;
+  }
+  const plan = proposeSiteProbe(m, o, rows, new Set(['left', 'right', 'use']), m.revisionScene[o.revision]!)!;
+  assert.ok(plan);
+  assert.equal(plan.site?.trigger, 'use');
+  assert.equal(plan.site?.operand, 'pointer');
+  assert.notDeepEqual(plan.site?.at, [2, 0]);
+  assert.ok(plan.steps.length > 2);
+  assert.equal(plan.site?.grounded, false);
+  assert.equal(plan.steps[plan.arrival]!.op, 'use');
 });
