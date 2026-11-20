@@ -348,28 +348,6 @@ export function selectExperiment(
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
-  const ongoingPlan = frontier.question || frontier.follow || m.projection.active || m.equations.active ||
-    m.space.active || (m.pending && m.pending.phase !== 'explore');
-  if (m.delayed.active || !ongoingPlan) {
-    const experiment = selectDelayed(m, o, s, available);
-    if (experiment) return experiment;
-  }
-  if(frontier.question || frontier.follow || (!m.projection.active && (frontier.exploring || m.turns-frontier.lastEdge>=4 || m.turns-frontier.lastScene>=Math.max(12,2*available.size)))) {
-    const search=selectFrontier(m,s,available,firstRoutes(m,s,m.scenes.length));
-    if(search)return search;
-  }
-  if (rows && (m.projection.active || (!m.pending && !m.equations.active && !m.space.active))) {
-    const projection = proposeProjection(m, o, rows, available, s);
-    if (projection) return projection;
-  }
-  if (rows && (m.equations.active || (!m.pending && !m.space.active))) {
-    const capability = proposeCapability(m, o, rows, available, s);
-    if (capability) return capability;
-  }
-  if (rows && (!m.pending || m.space.active)) {
-    const access = proposeAccess(m, o, rows, available, s);
-    if (access) return access;
-  }
   const pending = m.pending;
   if (pending?.phase === 'explore') {
     const fresh = [...available].find((op) => !m.edges.some((e) => e.s === s && e.cmd === op));
@@ -378,7 +356,46 @@ export function selectExperiment(
     const next = carryStep(m, o, rows, available, pending);
     if (next) return next;
   } else if (pending && available.has(pending.b)) return pending;
-  if (!late && !m.placement && (m.recurrences < 3 || (m.turns - m.lastTrial === 1 && m.turns % 4 === 0)))
+  // Finish committed controls and exercise a verified access while its original
+  // preparation and a fresh continuation are both available.
+  const localRules = new Set(
+    Object.values(m.rules)
+      .filter(r => r.id.startsWith(s + '|') && r.evaluations > 0 && r.uses < 2 && r.refutations < 2)
+      .map(r => r.id)
+  );
+  const localPairs = localRules.size ? pairs(m) : null;
+  const reuseReady = localPairs?.some(p =>
+    localRules.has(p.id) && available.has(p.prep) && p.after.effect.key !== 'still' &&
+    !p.after.effect.key.startsWith('terminal:') &&
+    [...available].some(op => !m.edges.some(e => e.s === p.after.t && e.cmd === op))
+  );
+  if (!reuseReady) {
+    const ongoingPlan = frontier.question || frontier.follow || m.projection.active ||
+      m.equations.active || m.space.active || (pending && pending.phase !== 'explore');
+    if (m.delayed.active || !ongoingPlan) {
+      const experiment = selectDelayed(m, o, s, available);
+      if (experiment) return experiment;
+    }
+    const stalled = m.turns - frontier.lastEdge >= 4 ||
+      m.turns - frontier.lastScene >= Math.max(12, 2 * available.size);
+    if (frontier.question || frontier.follow || (!m.projection.active && (frontier.exploring || stalled))) {
+      const search = selectFrontier(m, s, available, firstRoutes(m, s, m.scenes.length));
+      if (search) return search;
+    }
+    if (rows && (m.projection.active || (!m.pending && !m.equations.active && !m.space.active))) {
+      const projection = proposeProjection(m, o, rows, available, s);
+      if (projection) return projection;
+    }
+    if (rows && (m.equations.active || (!m.pending && !m.space.active))) {
+      const capability = proposeCapability(m, o, rows, available, s);
+      if (capability) return capability;
+    }
+    if (rows && (!m.pending || m.space.active)) {
+      const access = proposeAccess(m, o, rows, available, s);
+      if (access) return access;
+    }
+  }
+  if (!reuseReady && !late && !m.placement && (m.recurrences < 3 || (m.turns - m.lastTrial === 1 && m.turns % 4 === 0)))
     return null;
   const outgoing = m.edges.filter((e) => e.s === s && e.stable);
   const prev = m.edges[m.previous],
@@ -392,7 +409,7 @@ export function selectExperiment(
     rule = '',
     purpose?: string
   ): Experiment => ({ phase, origin, a, b, refs, rule, ...(purpose ? { purpose } : {}) });
-  const candidates = pairs(m).filter(
+  const candidates = (localPairs ?? pairs(m)).filter(
     (p) => p.after.effect.key !== 'still' && !p.after.effect.key.startsWith('terminal:')
   );
   const routes = firstRoutes(m, s, 12);

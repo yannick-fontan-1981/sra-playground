@@ -22,6 +22,14 @@ Sur GRAV L2, enlever le premier geste de la suite gagnante donne une première d
 
 Les interventions antérieures sur GARE L2 séparent l’accès à un lieu et l’usage qu’il permet. Sur 38 images inédites, la rangée d’un repère prédit 8 arrivées et 30 absences d’arrivée. Dans une série de 30 dispositions distinctes après deux préparations, 14 donnent l’arrivée attendue. Seules 3 de ces 14 gagnent avec la commande suivante fixée. L’hypothèse de victoire fondée sur une seule pose exacte produit aussi quatre faux positifs sur les 38 nouvelles images.
 
+## Peut-on composer deux changements de disposition ?
+
+L’expérience suivante utilise exactement les mêmes commandes et le même nombre de gestes. Pour chacun des 18 programmes vérifiés, nous avons d’abord échangé deux gestes voisins distincts à la fois. Sur 94 échanges, 19 conservent la victoire. Nous avons ensuite prédit la réussite d’une combinaison de deux échanges disjoints lorsque chacun réussissait isolément. Le résultat de la combinaison était encore inconnu au moment du pronostic.
+
+Sur 195 combinaisons, les 21 pronostics positifs gagnent. Parmi les 174 pronostics négatifs, une combinaison gagne également. Les 21 programmes positifs exécutent effectivement les deux échanges avant de finir. Dans 13 de ces 21 cas, le premier échange modifiait encore l’observation publique au terme de ses deux gestes. Les positifs se répartissent entre GRAV L2 (16), CATR L2–3 (4) et GARE L2 (1). Sur GRAV L2, les 13 triples échanges disjoints prédits gagnants à partir des seuls essais simples ont ensuite été exécutés. Les 13 gagnent. Le cas manqué au test double sur GRAV L2 transforme le suffixe de quatre commandes `4,1,3,2` en `1,4,2,3`.
+
+Dans ces exemples, SIC pourrait explorer une petite famille de modifications locales, puis en composer plusieurs pour proposer une disposition nouvelle. Ces mesures ont été faites par intervention sur des solutions sources connues après le gel du cinquième candidat. Le candidat testé sur SS01 ne reçoit aucune de ces solutions.
+
 ## Comparaison des candidats figés
 
 Entrée directe SS01 L2, agent neuf, même moteur et budgets. Le temps actif a limité tous les essais avant 1 200 commandes, avec une charge machine variable. Le nombre d’images distinctes inclut l’image initiale. Le témoin et les candidats ont tous terminé dans l’état officiel `NOT_FINISHED`.

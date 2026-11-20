@@ -50,3 +50,7 @@ Sur les 100 journaux d’origine, la première préparation visiblement effectiv
 Sur les préfixes archivés des 100 jeux, la première sonde disponible, avec le seul historique public, a été physiquement exécutée dans onze jeux. Sur SWCH, l’arrivée alternative annoncée est exacte au deuxième geste. Sur RSWP, le deuxième geste donne un autre déplacement que le contrôle et la suite fait bouger le rôle, mais l’arrivée exacte annoncée est réfutée. Sur KEYD, les deux gestes reproduisent le contrôle. La reproduction du préfixe précède l’intervention du module dans ces expériences externes.
 
 La balise `sic-projected-affordances-source100-candidate-v5` fige les règles avant leur essai supplémentaire sur SS01 L2. Le témoin, l’entrée, le moteur, le budget de 1 200 commandes et les quatre travailleurs déclarés restent ceux de la première série. SS09 L2 reste réservé.
+
+## Sixième série · Préserver la réutilisation d’un résultat vérifié
+
+Le test générique de préparation contrôlée du dépôt a révélé qu’une nouvelle expérience pouvait être choisie alors qu’un effet vérifié permettait d’atteindre une commande encore inexplorée. La sixième variante termine le programme en cours et donne la priorité à cet usage quand la préparation nécessaire est à nouveau accessible. Le gel `sic-projected-affordances-source100-candidate-v6` précède l’évaluation de ce correctif sur SS01 L2. Le moteur et les budgets sont inchangés.

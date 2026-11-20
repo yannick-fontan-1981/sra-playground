@@ -361,5 +361,372 @@
     "3": 3,
     "4": 1,
     "1": 1
-  }
+  },
+  "orderInterventions": [
+    {
+      "code": "CATR",
+      "level": 2,
+      "singles": 3,
+      "singleWins": 3,
+      "double": {
+        "P1": 1,
+        "P0": 0,
+        "N1": 0,
+        "N0": 0
+      },
+      "afterFirstDifferent": 1,
+      "bothSwapsExecuted": 1,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "CATR",
+      "level": 3,
+      "singles": 4,
+      "singleWins": 4,
+      "double": {
+        "P1": 3,
+        "P0": 0,
+        "N1": 0,
+        "N0": 0
+      },
+      "afterFirstDifferent": 3,
+      "bothSwapsExecuted": 3,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "CWSE",
+      "level": 2,
+      "singles": 2,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 0
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GARE",
+      "level": 2,
+      "singles": 7,
+      "singleWins": 3,
+      "double": {
+        "P1": 1,
+        "P0": 0,
+        "N1": 0,
+        "N0": 14
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 1,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GARE",
+      "level": 3,
+      "singles": 2,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 0
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GIGO",
+      "level": 2,
+      "singles": 6,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 11
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GIGO",
+      "level": 3,
+      "singles": 4,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 5
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GIGO",
+      "level": 4,
+      "singles": 6,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 12
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GIGO",
+      "level": 5,
+      "singles": 10,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 38
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GRAV",
+      "level": 2,
+      "singles": 9,
+      "singleWins": 7,
+      "double": {
+        "P1": 16,
+        "P0": 0,
+        "N1": 1,
+        "N0": 11
+      },
+      "afterFirstDifferent": 9,
+      "bothSwapsExecuted": 16,
+      "winningTriples": {
+        "tested": 13,
+        "won": 13,
+        "allExecuted": 13
+      },
+      "formerlyUnpredicted": [
+        [
+          6,
+          8
+        ]
+      ]
+    },
+    {
+      "code": "GRAV",
+      "level": 3,
+      "singles": 5,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 6
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GRAV",
+      "level": 4,
+      "singles": 7,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 15
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "GRAV",
+      "level": 5,
+      "singles": 9,
+      "singleWins": 2,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 28
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "MOTO",
+      "level": 2,
+      "singles": 6,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 10
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "POLA",
+      "level": 2,
+      "singles": 1,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 0
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "POLA",
+      "level": 3,
+      "singles": 1,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 0
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "POLA",
+      "level": 4,
+      "singles": 5,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 7
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    },
+    {
+      "code": "POLA",
+      "level": 5,
+      "singles": 7,
+      "singleWins": 0,
+      "double": {
+        "P1": 0,
+        "P0": 0,
+        "N1": 0,
+        "N0": 16
+      },
+      "afterFirstDifferent": 0,
+      "bothSwapsExecuted": 0,
+      "winningTriples": {
+        "tested": 0,
+        "won": 0,
+        "allExecuted": 0
+      },
+      "formerlyUnpredicted": []
+    }
+  ]
 }
