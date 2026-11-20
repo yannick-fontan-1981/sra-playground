@@ -1,16 +1,21 @@
 {
   "game": "SS10",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "coreTests": 87,
   "corePassed": 87,
   "strictTypeScript": true,
   "winningLevels": 8,
-  "actions": 627,
-  "selections": 58,
-  "frames": 1807,
+  "actions": 503,
+  "selections": 44,
+  "frames": 1463,
   "tutorialDiscoveries": 12,
-  "htmlSha256": "cfad02b0336ebe019eae60dcb8668a237c16dcc5a73bc9dc7e60679bfaaef845",
+  "htmlSha256": "b55ac1d1f1239e22c7c80f2e8bdf66b96991acae8dca0e4997a6d2f9145a7eec",
   "compiledHtmlDomVerification": true,
-  "nativeBrowserVerified": false,
-  "nativeBrowserLimitation": "Chromium process launch denied by the environment (socket EPERM), before page load."
+  "nativeBrowserVerified": true,
+  "finale": {
+    "initialCrates": 5,
+    "initialSupports": 0,
+    "permanentSupports": 5,
+    "independentlyRequiredCuts": 5
+  }
 }

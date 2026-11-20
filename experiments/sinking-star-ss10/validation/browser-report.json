@@ -1,21 +1,64 @@
 {
-  "success": false,
-  "environment": "Native /usr/bin/chromium, Playwright, file:// standalone HTML",
-  "htmlSha256": "0b32e24486618c064d8e58bdba0212118b93f2e870bfd98a8cf3bcef047d3edf",
-  "checks": [],
+  "success": true,
+  "environment": "Chromium, Playwright, file:// standalone HTML",
+  "htmlSha256": "b55ac1d1f1239e22c7c80f2e8bdf66b96991acae8dca0e4997a6d2f9145a7eec",
+  "checks": [
+    "Initial level1 tutorial is open; pixel click, Tab,1/2 and hero buttons select without incrementing movement counter; Shift+Tab exits canvas.",
+    "All eight witnesses finish through real keyboard/pixel events; all final canvas frames match native reference RGBA byte-for-byte and all animation-frame hashes agree.",
+    "All twelve level1 tutorial discoveries are earned by its real winning route; final campaign shows VICTORY and8/8.",
+    "Reachable defeat route displays GAME_OVER, disables play, and supports panel Undo and Reset with exact restoration.",
+    "Normal three-frame movement renders1/2/3pixel advances with real delays; commands are locked while busy; Undo,Reset and level selection cancel stale animations.",
+    "Death overlay waits for the real teleport animation; mid-animation Undo restores the living frame and no stale death repaint occurs.",
+    "375px mobile layout has no horizontal overflow and scaled canvas pixel selection, movement and Reset work."
+  ],
   "campaign": {
-    "levels": 0,
-    "actions": 0,
-    "frames": 0,
-    "selections": 0,
-    "finalFramesComparedByteForByte": 0
+    "levels": 8,
+    "actions": 503,
+    "frames": 1463,
+    "selections": 44,
+    "finalFramesComparedByteForByte": 503
   },
   "networkRequests": [],
   "consoleErrors": [],
   "pageErrors": [],
-  "screenshots": [],
-  "error": {
-    "message": "browserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-r8lgn5 --remote-debugging-pipe --no-startup-window\n<launched> pid=17\n[pid=17][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator\n[pid=17][err] [17:17:1119/223013.368637:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\n[pid=17][err] [1119/223013.369312:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)\nCall log:\n\u001b[2m  - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-r8lgn5 --remote-debugging-pipe --no-startup-window\u001b[22m\n\u001b[2m  - <launched> pid=17\u001b[22m\n\u001b[2m  - [pid=17][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator\u001b[22m\n\u001b[2m  - [pid=17][err] [17:17:1119/223013.368637:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\u001b[22m\n\u001b[2m  - [pid=17][err] [1119/223013.369312:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)\u001b[22m\n\u001b[2m  - [pid=17] <gracefully close start>\u001b[22m\n\u001b[2m  - [pid=17] <kill>\u001b[22m\n\u001b[2m  - [pid=17] <will force kill>\u001b[22m\n\u001b[2m  - [pid=17] <process did exit: exitCode=null, signal=SIGABRT>\u001b[22m\n\u001b[2m  - [pid=17] starting temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=17] finished temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=17] <gracefully close end>\u001b[22m\n",
-    "stack": "browserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-r8lgn5 --remote-debugging-pipe --no-startup-window\n<launched> pid=17\n[pid=17][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator\n[pid=17][err] [17:17:1119/223013.368637:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\n[pid=17][err] [1119/223013.369312:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)\nCall log:\n\u001b[2m  - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --user-data-dir=/tmp/playwright_chromiumdev_profile-r8lgn5 --remote-debugging-pipe --no-startup-window\u001b[22m\n\u001b[2m  - <launched> pid=17\u001b[22m\n\u001b[2m  - [pid=17][err] /usr/bin/chromium: 9: [: 5225713664: unexpected operator\u001b[22m\n\u001b[2m  - [pid=17][err] [17:17:1119/223013.368637:FATAL:chrome/browser/process_singleton_posix.cc:297] Check failed: . socket() failed: Operation not permitted (1)\u001b[22m\n\u001b[2m  - [pid=17][err] [1119/223013.369312:ERROR:third_party/crashpad/crashpad/util/linux/scoped_ptrace_attach.cc:27] ptrace: Operation not permitted (1)\u001b[22m\n\u001b[2m  - [pid=17] <gracefully close start>\u001b[22m\n\u001b[2m  - [pid=17] <kill>\u001b[22m\n\u001b[2m  - [pid=17] <will force kill>\u001b[22m\n\u001b[2m  - [pid=17] <process did exit: exitCode=null, signal=SIGABRT>\u001b[22m\n\u001b[2m  - [pid=17] starting temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=17] finished temporary directories cleanup\u001b[22m\n\u001b[2m  - [pid=17] <gracefully close end>\u001b[22m\n\n    at /workspace/scratch/53c36d260116/ss10-work/sinking-star-ss10/scripts/verify-browser.mjs:76:25\n    at async node:internal/modules/esm/loader:647:26"
+  "screenshots": [
+    "validation/visual/desktop-initial.png",
+    "validation/visual/mobile-375.png"
+  ],
+  "chromiumVersion": "157.0.4341.60",
+  "tutorial": {
+    "actions": 57,
+    "discoveries": [
+      "move",
+      "select",
+      "warrior-push",
+      "chain",
+      "thief-pull",
+      "single-pull",
+      "release",
+      "mirror-motion",
+      "platform",
+      "mirror",
+      "gate",
+      "goals"
+    ],
+    "count": 12
+  },
+  "normalAnimation": {
+    "frames": 3,
+    "intervalsMs": [
+      63.200000047683716,
+      86.79999995231628
+    ],
+    "expectedDelayMs": [
+      60,
+      80
+    ]
+  },
+  "mobile": {
+    "viewport": 375,
+    "document": 375,
+    "body": 375,
+    "canvas": 329
   }
 }
