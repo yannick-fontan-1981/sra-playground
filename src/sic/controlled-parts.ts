@@ -116,7 +116,12 @@ export function stationaryPivots(
   }
   return result;
 }
-export function anchoredSamples(witnesses: PreviewWitness[], role: string, actor: XY, pitch: XY) {
+export function anchoredSamples(
+  witnesses: Pick<PreviewWitness, 'from' | 'arrived' | 'geometry'>[],
+  role: string,
+  actor: XY,
+  pitch: XY
+) {
   const out: { actor: XY; centre: XY; indicator: XY; ref: number }[] = [];
   for (const w of witnesses) {
     const samples = [];
@@ -124,7 +129,7 @@ export function anchoredSamples(witnesses: PreviewWitness[], role: string, actor
       if (c.role !== role) continue;
       const centre = aligned(c.at, w.from, pitch),
         origin = diff(w.from, centre),
-        arrival = diff(w.arrived, centre);
+        arrival = diff(aligned(w.arrived, w.from, pitch), centre);
       if (!size(origin) || !size(arrival) || same(origin, arrival)) continue;
       if (
         !(

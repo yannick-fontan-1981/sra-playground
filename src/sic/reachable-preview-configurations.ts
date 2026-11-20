@@ -15,7 +15,7 @@ export type ReachablePreview = {
   launch: XY;
   arrival: XY;
   continuation: XY | null;
-  source: 'translated_witness' | 'fitted_symmetry';
+  source: 'translated_witness' | 'fitted_symmetry' | 'projected_same_ray';
   witness: number;
   transform: number | null;
   steps: LayoutStep[];
@@ -31,6 +31,8 @@ type Input = {
   otherCentres: XY[];
   baselineRead?: XY;
   readWitnessed: boolean;
+  useCurrent?: boolean;
+  extendRay?: boolean;
   allowWrites: boolean;
   stateLimit: number;
   attempted?: (s: LayoutStep) => boolean;
@@ -56,7 +58,7 @@ function ray(p: XY): string {
 }
 // A relative layout observed at one centre can be translated to another centre.
 // Extending it to an unobserved distance needs an independently fitted transformation.
-export function previewLaw(examples: ProbePattern[]) {
+export function previewLaw(examples: ProbePattern[], extendRay = false) {
   const measured = new Map<string, { offset: XY; ref: number } | null>();
   for (const e of examples) {
     const key = diff(e.actor, e.centre).join(),
@@ -87,6 +89,24 @@ export function previewLaw(examples: ProbePattern[]) {
         },
       ];
     if (observed === null || !rays.has(ray(relative))) return [];
+    if (extendRay && !transforms.length) {
+      const proposals = new Map<
+        string,
+        { at: XY; source: 'projected_same_ray'; ref: number; transform: null }
+      >();
+      for (const v of valid) {
+        const from = diff(v.actor, v.centre);
+        if (ray(from) !== ray(relative) || !size(from)) continue;
+        const u = diff(v.indicator, v.centre),
+          ratio = size(relative) / size(from),
+          dx = u[0] * ratio,
+          dy = u[1] * ratio;
+        if (!Number.isInteger(dx) || !Number.isInteger(dy)) continue;
+        const at = add(c, [dx, dy]);
+        proposals.set(at.join(), { at, source: 'projected_same_ray', ref: v.ref, transform: null });
+      }
+      if (proposals.size === 1) return [...proposals.values()];
+    }
     const sites = new Map<string, { at: XY; source: 'fitted_symmetry'; ref: number; transform: number }>();
     for (const i of transforms) {
       const at = add(c, transform(relative, i));
@@ -99,12 +119,13 @@ export function reachablePreviewConfigurations(input: Input) {
   const { actor, centre, motors, otherCentres, op } = input;
   const blocked = new Set(otherCentres.map((p) => p.join())),
     open = (p: XY) => !blocked.has(p.join()) && input.passable(p);
-  const predict = previewLaw(input.patterns),
+  const predict = previewLaw(input.patterns, input.extendRay),
     home = new Set([actor.join()]),
     initial = [actor];
   for (const p of initial) {
     const moves = motors.map((s) => add(p, s.d));
-    if (input.readWitnessed) for (const forecast of predict(p, centre)) moves.push(forecast.at);
+    if (input.readWitnessed && !input.useCurrent)
+      for (const forecast of predict(p, centre)) moves.push(forecast.at);
     for (const v of moves)
       if (!same(v, centre) && open(v) && !home.has(v.join())) {
         home.add(v.join());
@@ -120,7 +141,7 @@ export function reachablePreviewConfigurations(input: Input) {
   let complete = true;
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i]!;
-    if (node.writes) {
+    if (node.writes || input.useCurrent) {
       for (const projected of predict(node.p, node.c)) {
         const at = projected.at;
         if (

@@ -37,7 +37,9 @@ type PredictiveEvidence = {
   lastMiss?: string;
   lastRival?: string;
 };
+export type VisibleGeometry = { from: XY; indicated: XY; before: string; pivots: { role: string; at: XY }[] };
 export type WitnessedBinding = {
+  displays?: VisibleGeometry[];
   calibration?: PredictiveEvidence;
   relation: 'indicator_marks_subject_arrival_after_action';
   actor: string;
@@ -125,6 +127,39 @@ function gesture(command: string, p: Body, r: Body): Gesture | null {
 }
 const keyOf = (p: string, r: string, g: Gesture) => JSON.stringify([p, r, g.op, g.point ?? null]);
 const contextKey = (k: string, from: XY, to: XY) => JSON.stringify([k, from, to]);
+function rememberVisibleGeometry(learned: PreviewLearning, o: NativeObservation, layout: VisualLayout) {
+  for (const b of Object.values(learned.bindings)) {
+    const subjects = layout[b.actor],
+      marks = layout[b.indicator],
+      last = learned.lastActor[b.actor];
+    if (!subjects || !marks || !b.witnesses.length) continue;
+    const subject = subjects.length === 1 ? subjects[0] : subjects.find((z) => last && same(z.at, last));
+    if (!subject) continue;
+    const free = marks.filter((z) => !subjects.some((p) => covers(p, z.at)));
+    if (free.length !== 1) continue;
+    const r = free[0]!,
+      prior = b.witnesses.at(-1)!,
+      shift = diff(prior.arrived, prior.indicated),
+      projected: XY = [r.at[0] + shift[0], r.at[1] + shift[1]];
+    const allowed = new Set(b.witnesses.flatMap((w) => w.geometry?.pivots.map((c) => c.role) ?? []));
+    const pivots = stationaryPivots(b.actor, b.indicator, subject.at, projected, layout, layout).filter((c) =>
+      allowed.has(c.role)
+    );
+    if (!pivots.length) continue;
+    const observations = (b.displays ??= []);
+    if (
+      observations.some(
+        (z) =>
+          same(z.from, subject.at) &&
+          same(z.indicated, r.at) &&
+          pivots.every((c) => z.pivots.some((v) => v.role === c.role && same(v.at, c.at)))
+      )
+    )
+      continue;
+    observations.push({ from: subject.at, indicated: r.at, before: o.observation_ref, pivots });
+    if (observations.length > 24) observations.splice(1, 1);
+  }
+}
 export function observePreviewBindings(
   learned: PreviewLearning,
   b: NativeObservation,
@@ -143,6 +178,7 @@ export function observePreviewBindings(
   const event = b.observation_ref + '/' + command + '/' + a.observation_ref;
   if (learned.last === event) return;
   learned.last = event;
+  rememberVisibleGeometry(learned, b, before);
   calibrateVisibleReadings(learned, b, a, before, after, command);
   for (const [actor, parts] of Object.entries(before)) {
     const motion = moved(parts, after[actor] ?? []);
@@ -208,6 +244,7 @@ export function observePreviewBindings(
       }
     }
   }
+  rememberVisibleGeometry(learned, a, after);
 }
 export function carryPreviewBindings(
   learned: PreviewLearning,

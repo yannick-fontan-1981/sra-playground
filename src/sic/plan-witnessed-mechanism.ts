@@ -87,8 +87,23 @@ export function plansForWitnessedSubjects(
     for (const role of new Set(b.witnesses.flatMap((w) => (w.geometry?.pivots ?? []).map((v) => v.role)))) {
       const sites = layout[role];
       if (!sites || sites.length > 12) continue;
-      const examples = anchoredSamples(b.witnesses, role, p, pitch);
-      if (!examples.length) continue;
+      const executed = anchoredSamples(b.witnesses, role, p, pitch);
+      if (!executed.length) continue;
+      const shift = diff(b.witnesses.at(-1)!.arrived, b.witnesses.at(-1)!.indicated);
+      const displays = anchoredSamples(
+        (b.displays ?? []).map((z) => ({
+          from: z.from,
+          arrived: add(z.indicated, shift),
+          geometry: { pivots: z.pivots },
+        })),
+        role,
+        p,
+        pitch
+      );
+      const examples = [
+        ...executed,
+        ...displays.filter((z) => !executed.some((e) => same(e.actor, z.actor))),
+      ];
       const variety = new Set(examples.map((x) => diff(x.actor, x.centre).join())).size;
       for (const site of sites) {
         const c = aligned(site.at, p, pitch),
@@ -186,7 +201,7 @@ export function plansForWitnessedSubjects(
               Math.log2(1 + steps.length),
           });
         }
-        const calc = reachablePreviewConfigurations({
+        const input = {
           actor: p,
           centre: c,
           motors: motors.map((z) => ({ ...z, ref: 0 })),
@@ -195,16 +210,46 @@ export function plansForWitnessedSubjects(
           otherCentres: fixed.map((z) => aligned(z, p, pitch)),
           passable: allowed,
           readWitnessed: true,
+          extendRay: true,
           allowWrites: true,
           stateLimit: Math.min(4096, rows.length * rows[0]!.length * 2),
           attempted: denied,
-        });
+        };
+        const current = reachablePreviewConfigurations({ ...input, useCurrent: true, allowWrites: false });
+        const calc = reachablePreviewConfigurations(input);
         const knownSites = new Set(
           Object.keys(stats.sites).map((k) => key(aligned(k.split(',').map(Number) as XY, p, pitch)))
         );
-        for (const variant of calc.configurations.slice(0, 12)) {
+        const relaxed = new Set([key(p)]),
+          queue = [p],
+          axes: XY[] = [
+            [pitch[0], 0],
+            [-pitch[0], 0],
+            [0, pitch[1]],
+            [0, -pitch[1]],
+          ];
+        for (const before of queue)
+          for (const d of axes) {
+            const z = add(before, d);
+            if (!relaxed.has(key(z)) && (allowed(z) || remaining.has(key(z)))) {
+              relaxed.add(key(z));
+              queue.push(z);
+            }
+          }
+        const retained = m.localProgress?.realizedPlacement;
+        const sameFamily = retained?.actor === b.actor && retained?.part === role;
+        for (const variant of [...current.configurations, ...calc.configurations]
+          .sort(
+            (a, b) =>
+              Number(relaxed.has(key(a.arrival))) - Number(relaxed.has(key(b.arrival))) ||
+              a.steps.length - b.steps.length
+          )
+          .slice(0, 24)) {
           const steps = variant.steps.map(real),
-            placement = add(variant.placed, offset);
+            placement = add(variant.placed, offset),
+            noWrite = !steps.some((z) => z.stage === 'write'),
+            otherSurface = !relaxed.has(key(variant.arrival));
+          if (noWrite && !otherSurface) continue;
           const attempt = JSON.stringify([
             k,
             p,
@@ -222,17 +267,23 @@ export function plansForWitnessedSubjects(
               arrival: variant.arrival,
               use: variant.continuation,
               indicator: b.indicator,
+              projectionBasis: variant.source,
               steps,
               key: attempt,
-              basis: 'move_to_change_access',
+              basis: noWrite ? 'use_prepared_access' : 'move_to_change_access',
+              otherSurface,
               support: [],
-              home: calc.home.size,
+              home: noWrite ? current.home.size : calc.home.size,
               otherSetups: calc.configurations.length,
               opensCells: variant.gain,
               recoverable: false,
             },
             rank:
               96 +
+              80 * Number(otherSurface) +
+              28 * Number(noWrite) +
+              48 * Number(sameFamily) +
+              10 * Number(sameFamily && same(site.at, retained!.at)) +
               confidence +
               6 * Number(!knownSites.has(key(variant.arrival))) +
               Math.min(6, variant.gain) -

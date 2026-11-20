@@ -55,3 +55,44 @@ test('different distances require a consistent transform and an observed directi
   );
   assert.deepEqual(forecast([6, 6], [6, 9]), []);
 });
+
+test('a useful existing placement can be used immediately without another write', () => {
+  const open = new Set(['0,0', '1,0', '2,0', '3,0', '4,0', '3,2', '4,2']);
+  const found = reachablePreviewConfigurations({
+    actor: [1, 0],
+    centre: [3, 0],
+    motors,
+    op: 'query',
+    patterns: [{ actor: [4, 4], centre: [5, 4], indicator: [5, 6], ref: 2 }],
+    otherCentres: [],
+    passable: (p) => open.has(p.join()),
+    readWitnessed: true,
+    allowWrites: false,
+    useCurrent: true,
+    stateLimit: 100,
+  });
+  assert.equal(found.home.has('3,2'), false);
+  const target = found.configurations.find((x) => x.arrival.join() === '3,2')!;
+  assert.deepEqual(
+    target.steps.map((x) => x.stage),
+    ['move', 'read', 'use']
+  );
+  assert.deepEqual(target.placed, [3, 0]);
+  assert.deepEqual(target.continuation, [4, 2]);
+});
+
+test('an unmeasured radius can receive a prospective landing only along a witnessed ray', () => {
+  const law = previewLaw([{ actor: [10, 8], centre: [8, 8], indicator: [6, 8], ref: 3 }], true);
+  assert.deepEqual(law([14, 8], [8, 8]), [
+    { at: [2, 8], source: 'projected_same_ray', ref: 3, transform: null },
+  ]);
+  assert.deepEqual(law([8, 14], [8, 8]), []);
+  const conflicting = previewLaw(
+    [
+      { actor: [10, 8], centre: [8, 8], indicator: [6, 8], ref: 3 },
+      { actor: [12, 8], centre: [8, 8], indicator: [6, 8], ref: 4 },
+    ],
+    true
+  );
+  assert.deepEqual(conflicting([14, 8], [8, 8]), []);
+});

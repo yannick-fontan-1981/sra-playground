@@ -11,7 +11,7 @@ def rotations(v):
     return ((x,y),(-x,y),(x,-y),(-x,-y),(y,x),(-y,x),(y,-x),(-y,-x))
 
 
-def study(run):
+def study(run, passive=False, ray=False):
     frames={h:peer.groups(rows) for h,rows in run['frames'].items()}
     tracked,relations,excluded,counts={},defaultdict(dict),set(),Counter()
     samples=[]; roots={}
@@ -31,6 +31,12 @@ def study(run):
                     predictions={seen[relative]}
                 elif len(fits) and any(u[0]*relative[1]==u[1]*relative[0] and u[0]*relative[0]+u[1]*relative[1]>0 for u in seen):
                     predictions={rotations(relative)[j] for j in fits}
+                elif ray:
+                    predictions=set()
+                    for u,v in seen.items():
+                        d=abs(u[0])+abs(u[1]); n=abs(relative[0])+abs(relative[1])
+                        if not d or not n or u[0]*relative[1]!=u[1]*relative[0] or u[0]*relative[0]+u[1]*relative[1]<=0:continue
+                        if v[0]*n%d==0 and v[1]*n%d==0:predictions.add((v[0]*n//d,v[1]*n//d))
                 else:continue
                 if len(predictions)!=1:continue
                 dx,dy=predictions.pop(); dest=anchor[0]+dx,anchor[1]+dy
@@ -41,6 +47,22 @@ def study(run):
                 counts['exact']+=int(exact)
                 roots[h,q,p,pos,dest]=exact
                 if exact and len(samples)<2:samples.append([i+1,p,r,c,pos,anchor,dest])
+        if passive:
+            # These displayed pairs may contribute only to later forecasts, after the action has been bound.
+            for (p,r,c,command),evidence in list(relations.items()):
+                if any(x not in b for x in (p,r,c)) or len(b[r])!=1:continue
+                pos=next(iter(b[p])) if len(b[p])==1 else tracked.get(p)
+                mark=next(iter(b[r]))
+                if not pos or pos not in b[p] or mark in b[p]:continue
+                compatible=[]
+                for at in b[c]:
+                    u,v=peer.delta(pos,at),peer.delta(mark,at)
+                    if at not in (pos,mark) and v in rotations(u)[1:]:compatible.append((sum(map(abs,u)),u,v))
+                compatible.sort()
+                if compatible and (len(compatible)==1 or compatible[0][0]<compatible[1][0]):
+                    _,u,v=compatible[0]
+                    if u not in evidence:evidence[u]=v
+                    elif evidence[u]!=v:evidence[u]=None
         for p,sites in b.items():
             end=a.get(p,set()); gone,new=sites-end,end-sites
             if len(gone)!=1 or len(new)!=1:
@@ -61,8 +83,8 @@ def study(run):
     return dict(code=run['code'],level=run['level'],counts=dict(counts),examples=samples)
 
 if __name__=='__main__':
-    root,dest=map(Path,sys.argv[1:])
-    result=[study(r) for f in sorted(root.glob('poses20-*.json')) for r in json.loads(f.read_bytes())]
+    root,dest=map(Path,sys.argv[1:3]); passive='--displays' in sys.argv[3:]
+    result=[study(r,passive,'--ray' in sys.argv[3:]) for f in sorted(root.glob('poses20-*.json')) for r in json.loads(f.read_bytes())]
     dest.write_bytes(json.dumps(result).encode()); total=Counter()
     for r in result:total.update(r['counts'])
     print(len(result),sum(bool(r['counts']) for r in result),sum(bool(r['counts'].get('exact')) for r in result),dict(total))

@@ -31,7 +31,9 @@ export type MechanismPlan = {
   indicator: string | null;
   steps: LayoutStep[];
   key: string;
-  basis: 'move_to_change_access' | 'test_displacement';
+  basis: 'move_to_change_access' | 'test_displacement' | 'use_prepared_access';
+  otherSurface?: boolean;
+  projectionBasis?: string;
   support: number[];
   home: number;
   otherSetups: number;
@@ -607,6 +609,14 @@ export function finishMechanism(
     ] = a.revision;
   if (matched && !won && step.stage === 'write' && t.plan.actorPeers !== undefined) {
     state.afterPlacement = { cause: t.cause, frame: a.frame_hash, actor: t.plan.p, part: t.plan.c };
+    state.realizedPlacement = {
+      cause: t.cause,
+      actor: t.plan.p,
+      part: t.plan.c,
+      at: actual.site!,
+      read: t.plan.steps.find((z) => z.stage === 'read')?.op ?? t.cause.op,
+      revision: a.revision,
+    };
   }
   state.active = matched && !won && t.index + 1 < t.plan.steps.length ? { ...t, index: t.index + 1 } : null;
   return { trial: t, stage: step.stage, matched, won, actual, continued: !!state.active };

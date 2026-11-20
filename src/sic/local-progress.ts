@@ -35,6 +35,14 @@ export type AccessLimit = {
 };
 export type MechanismReason = ZoneRepeat | AccessLimit;
 export type LocalProgress = {
+  realizedPlacement?: {
+    cause: MechanismReason;
+    actor: string;
+    part: string;
+    at: XY;
+    read: string;
+    revision: number;
+  };
   calibration?: { cause: MechanismReason; frame: string; actor: string; part: string };
   afterPlacement?: { cause: MechanismReason; frame: string; actor: string; part: string };
   last: ZoneRepeat | null;
