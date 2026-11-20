@@ -1,0 +1,636 @@
+{
+  "spec": {
+    "id": "ss10-07",
+    "title": "Le convoyeur à trois charges",
+    "rows": [
+      "~~~~~~~~~~~~~~",
+      "~~~~~~~o....~~",
+      "~~~~~~~o....~~",
+      "~~~~~~~o....~~",
+      "~~~~...T....~~",
+      "~~~~~~~.....~~",
+      "~~~~~~~.....~~",
+      "~~~~~~~~....~~",
+      "~...~~~~....~~",
+      "~.W.~~~~....~~",
+      "~...~~~~....~~",
+      "~~~~~~~~~~.~~~",
+      "~~~~~~~~~...~~",
+      "~~~~~~~~~g.g~~",
+      "~~~~~~~~~~~~~~"
+    ],
+    "facing": "S",
+    "circuits": [
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 9
+          }
+        ],
+        "color": 0
+      },
+      {
+        "id": "pont",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 4
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 6
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 4
+        },
+        "circuit": "presse",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 11
+        },
+        "circuit": "sortie",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 4,
+          "y": 8
+        },
+        "circuit": "pont",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 8
+        },
+        "circuit": "pont",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 8
+        },
+        "circuit": "pont",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 8
+        },
+        "circuit": "pont",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CDCRLCUUDDCRLCUUUDDDCRLCURRDLDDRCURRRRRRRRUUULLLDRRRDDDDDDDLCDDDRDDRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation de Heroes and Light 2 · alimenter une presse latérale en plusieurs charges",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2",
+    "puzzle": 2,
+    "objective": "Alimenter une presse à distance, faire avancer trois caisses jusqu’au bouton du pont, récupérer une caisse sans fermer le pont, puis reprendre la main avec le Guerrier."
+  },
+  "metrics": {
+    "actions": 69,
+    "selections": 9,
+    "warriorPushes": 3,
+    "thiefPulls": 10,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 19,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 3,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Première impulsion : la presse prend le relais de la traction.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "presse": false,
+        "pont": false,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Deuxième impulsion : les caisses avancent ensemble dans le conduit inaccessible.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "presse": false,
+        "pont": false,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Troisième impulsion : la rangée maintient le bouton du pont et libère le Guerrier.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "presse": false,
+        "pont": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur récupère la dernière caisse du convoyeur tout en laissant le bouton du pont couvert.",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "presse": true,
+        "pont": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Arrivé par le pont, le Guerrier reprend cette caisse et la pousse contre la rive.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "presse": false,
+        "pont": true,
+        "sortie": true
+      }
+    },
+    {
+      "label": "Les deux partenaires rejoignent les sorties du convoyeur.",
+      "turn": 69,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "presse": false,
+        "pont": true,
+        "sortie": true
+      }
+    }
+  ],
+  "adaptation": "Reprise du convoyeur latéral de Heroes and Light 2 : plusieurs caisses sont chargées et la rangée atteint un bouton à distance. Géométrie originale avec le Guerrier isolé aux commandes et le Voleur dans le magasin. Le Guerrier ne peut rejoindre le convoyeur qu’après la troisième impulsion. Le Voleur récupère ensuite une des trois caisses du convoyeur ; cette même caisse ouvre la porte finale grâce à une poussée impossible à remplacer par la traction. Les faisceaux du jeu d’origine sont remplacés par un pont hydraulique explicite."
+}

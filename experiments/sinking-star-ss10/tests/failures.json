@@ -1,0 +1,89 @@
+[
+  {
+    "level": 1,
+    "cause": "Miroir déplacé sur un axe dont l’arrivée est dans l’eau",
+    "commands": "UCUUURUUUURRRLLLLCDDDDRX",
+    "actions": [
+      {
+        "id": 1
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 12,
+          "y": 45
+        }
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 12,
+          "y": 33
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      }
+    ]
+  }
+]

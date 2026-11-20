@@ -1,0 +1,862 @@
+{
+  "spec": {
+    "id": "ss10-06",
+    "title": "Le dernier changement de sens",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~gg~~~~~~",
+      "~~~~~~~~~~~..~~~~~~",
+      "~~~~~~~~~~~#~~~~~~~",
+      "~~~~~~~~~~..~~~~~~~",
+      "~~~~~~~~~~.m...~~~~",
+      "~~~~~~~~~~....~~~~~",
+      "~..o.o..~~~..~~~~~~",
+      "~..T....~~~m~~~~~~~",
+      "~.......~~.o...~~~~",
+      "~.W.....~~.....~~~~",
+      "~.......~~.....~~~~",
+      "~.......~~.....~~~~",
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 13,
+          "y": 6
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "cle",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 6
+          }
+        ],
+        "color": 7
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 12,
+          "y": 4
+        },
+        "circuit": "cle",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CDDRCLURRRRRCUURDDLCULLLDRRRRRRDRUUUUULUCURRRRRRRUUUURLLDRDRURULLDLCRRRCURULCDLLLURLXULUCDXUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": true,
+    "label": "Synthèse adaptée de Heroes and Water 3–4 et Heroes and Mirrors 6",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3",
+    "puzzle": 3,
+    "objective": "Construire deux appuis, provoquer un duel derrière une caisse, puis garer et replacer le miroir pour transformer la caisse de combat en clé du dernier reflet."
+  },
+  "metrics": {
+    "actions": 93,
+    "selections": 9,
+    "warriorPushes": 18,
+    "thiefPulls": 13,
+    "partnerMoves": 2,
+    "chainPushes": 2,
+    "stoneMoves": 22,
+    "mirrorMoves": 7,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 2,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Premier appui : le Voleur extrait la caisse du bord, le Guerrier ouvre l’accès à l’eau.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "cle": false
+      }
+    },
+    {
+      "label": "Second appui : les deux caisses permettent maintenant de contourner le dernier chargement.",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "cle": false
+      }
+    },
+    {
+      "label": "Le Guerrier avance derrière la caisse : les deux monstres se frappent, puis la caisse atteint la butée nord.",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cle": false
+      }
+    },
+    {
+      "label": "Le Voleur dégage le miroir du rail et le gare dans la baie latérale.",
+      "turn": 62,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cle": false
+      }
+    },
+    {
+      "label": "Le Voleur récupère la caisse sous le mur et rabat le miroir derrière lui.",
+      "turn": 67,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cle": false
+      }
+    },
+    {
+      "label": "La même caisse devient la clé de la plateforme d’arrivée.",
+      "turn": 71,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cle": true
+      }
+    },
+    {
+      "label": "Le Voleur remonte le miroir, sans pouvoir le pousser vers sa dernière case.",
+      "turn": 76,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cle": true
+      }
+    },
+    {
+      "label": "Le Guerrier règle la dernière diagonale, franchit le reflet et libère l’arrivée.",
+      "turn": 88,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cle": true
+      }
+    },
+    {
+      "label": "Le Voleur rejoint le Guerrier sur les deux destinations finales.",
+      "turn": 93,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cle": true
+      }
+    }
+  ],
+  "adaptation": "Géométrie originale. Le relais poussée/traction pour construire des appuis vient de Heroes and Water 3 ; le duel de deux monstres est adapté de Heroes and Water 4 (https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-4). Le réglage du miroir selon la diagonale et le choix des trous à combler viennent de Heroes and Mirrors 6 (https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6). Deux caisses servent au pont ; la troisième sert d’abord de protection contre les monstres puis maintient la plateforme finale. Le miroir doit sortir du rail avant la livraison de cette caisse, puis revenir sur le rail par traction et poussée."
+}

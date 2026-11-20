@@ -1,0 +1,706 @@
+{
+  "spec": {
+    "id": "ss10-01",
+    "title": "L’atelier du contrepoids",
+    "rows": [
+      "####################",
+      "####################",
+      "#.....~~~~~~#~~#####",
+      "#.....~~~~~~#~~#####",
+      "#....#o~~~~~#~~#####",
+      "#.....~....~~~~..gg#",
+      "#.....~###~~#~~#####",
+      "#.......~~~~#~~#####",
+      "#.......~~~~#~~#####",
+      "#..W....~~~~#~~#####",
+      "#.......~~~~#~~#####",
+      "#.......~~~~#~~#####",
+      "#ooT....~~.~#~~#####",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "rose",
+        "color": 7,
+        "buttons": [
+          {
+            "x": 3,
+            "y": 8
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 4
+        },
+        "circuit": "rose",
+        "direction": "S",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "UUUURRRRRRLLLLDDDDLCRRRRULLLDLLRRRUCDDLDRRRRRRRXRCDRRRRRX",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Tutoriel original · le relais pousser / tirer",
+    "url": "https://sinkingstarwalkthrough.com/fr/north/",
+    "objective": "Extraire les caisses, construire les appuis et préparer le miroir pour les deux héros."
+  },
+  "metrics": {
+    "actions": 57,
+    "selections": 3,
+    "warriorPushes": 7,
+    "thiefPulls": 7,
+    "partnerMoves": 0,
+    "chainPushes": 2,
+    "stoneMoves": 15,
+    "mirrorMoves": 2,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 3,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le bouton ferme la presse : sa caisse construit l’appui indispensable devant la passerelle du miroir.",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 14
+        },
+        {
+          "x": 2,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le Guerrier pousse le miroir jusqu’au seul axe dont le rayon descend jusqu’à l’îlot.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 14
+        },
+        {
+          "x": 2,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Voleur tire seulement la caisse la plus proche. Un pas de côté la laisse en place.",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 14
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la caisse coincée contre les deux murs : le Guerrier ne peut pas la pousser depuis ce coin.",
+      "turn": 35,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 14
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Guerrier rapproche les deux caisses avant le canal.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 14
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "La poussée en chaîne puis les appuis successifs construisent les deux cases manquantes du pont.",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 14
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Guerrier traverse le bassin par le miroir, sans consommer les appuis.",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 14
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Le Voleur emprunte le même passage ; le reflet ne tire aucun objet.",
+      "turn": 57,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 14
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    },
+    {
+      "label": "Les deux héros occupent les deux destinations.",
+      "turn": 57,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 14
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": false
+      }
+    }
+  ],
+  "adaptation": "Atelier original consacré à la complémentarité Guerrier/Voleur. Les caisses du fond sont extraites par traction, regroupées puis poussées en chaîne pour combler le canal. Une presse construit le seul appui donnant accès au miroir ; deux murs empêchent les reflets avant son déplacement sur le bon axe. Aucune reproduction de capture revendiquée."
+}

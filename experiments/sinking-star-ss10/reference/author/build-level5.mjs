@@ -1,0 +1,11 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(14,11,'~');
+fill(2,3,5,6);fill(8,4,11,7);fill(8,1,9,1);put(3,1,'g');put(7,5,'.');put(9,1,'g');
+put(3,3,'~');put(8,7,'#');put(4,4,'T');put(11,6,'W');
+const spec={id:'ss10-05',title:'Les deux diagonales du relais',rows:strings(),facing:'W',mirrors:[{at:{x:4,y:3},facing:'NE'},{at:{x:10,y:6},facing:'NW'}],circuits:[{id:'ancre',buttons:[{x:3,y:5}],color:7}],gates:[{at:{x:7,y:5},circuit:'ancre',direction:'N',closedWhen:'released'}]};
+const a=new Author(spec);
+a.act('LL').stage('Le Guerrier règle la diagonale d’arrivée du Voleur.');
+a.select('thief').act('DD').go(3,5).act('L').go(3,6).stage('Le Voleur extrait le miroir et le place sur le bouton sans pouvoir le pousser.');
+a.act('XR').stage('Le reflet libère le Voleur, qui laisse le miroir maintenir la porte.');
+a.go(7,5,'warrior').act('X').stage('Le Guerrier emprunte la seconde diagonale vers sa destination isolée.');
+a.save(new URL('../level5-design.json',import.meta.url),{label:'Adaptation de Heroes and Mirrors 5 · laisser le miroir sur son bouton',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5',puzzle:5,objective:'Extraire un miroir par traction, régler la réception par poussée et laisser deux diagonales conduire les héros à deux îlots distincts.'},'Géométrie originale à quatre îlots et deux destinations isolées. Le principe du miroir conservé sur un bouton et de la sortie par reflet vient de Heroes and Mirrors 5. Le Guerrier ajouté doit déplacer le miroir récepteur ; le Voleur seul peut extraire le miroir du bord nord et le décaler sur le bouton. Deux destinations différentes remplacent la sortie unique du guide.');

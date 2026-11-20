@@ -1,0 +1,14 @@
+import {Author,board} from './author.mjs';
+const {put,fill,strings}=board(15,9,'~');
+fill(0,0,14,0,'#');fill(0,8,14,8,'#');fill(0,0,0,8,'#');fill(14,0,14,8,'#');
+fill(2,1,5,4);put(5,5);fill(1,1,1,6,'#');
+fill(7,4,12,4);fill(9,2,12,6);fill(11,2,11,6,'#');put(11,4,'D');
+put(2,2,'W');put(3,4,'T');put(2,4,'1');put(4,1,'m');put(8,4,'m');put(9,5,'o');put(9,2,'b');put(12,2,'g');put(12,6,'g');
+const spec={id:'ss10-04',title:'Le miroir désenclavé',rows:strings(),facing:'E'};
+const a=new Author(spec);
+a.select('thief').act('RRD').stage('Le Voleur tire le miroir hors du bord puis quitte son rayon de côté');
+a.act('X').stage('Le monstre le plus proche rejoint son adversaire : le passage est libéré');
+a.go(4,1,'warrior').act('X').stage('Le Guerrier utilise la diagonale libérée pour gagner l’autre îlot');
+a.go(9,6).act('UUU').stage('La poussée termine le placement du poids sur le bouton contre le bord nord');
+a.go(12,2).go(4,1,'thief').act('X').go(12,6).stage('Le Voleur rejoint à son tour l’entrepôt sans déplacer le miroir');
+a.save(new URL('../level4-design.json',import.meta.url),{label:'Adaptation de Heroes and Mirrors 4 · tirer le miroir puis quitter son axe',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-4',puzzle:4,objective:'Sortir le miroir de sa niche, refléter le monstre proche pour dégager la traversée, puis laisser le Guerrier verrouiller la porte ouverte.'},'Adaptation libre du placement de miroir et du départ par reflet enseignés dans Heroes and Mirrors 4. La géométrie originale ajoute le Guerrier, deux destinations, un poids contre un bord et un duel de monstres. Le miroir commence contre une paroi qui empêche la poussée vers l’est ; la traction du Voleur le décale. Le monstre à trois cases est prioritaire sur celui à quatre cases et les deux s’éliminent après son reflet. Le Guerrier finit ensuite la caisse sur un bouton au bord nord, inaccessible à la traction finale.');
