@@ -7,7 +7,7 @@ import { sourceBackend } from './sic-study-source-games.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 
-const [environment, file, output] = process.argv.slice(2);
+const [environment, file, output, scope = 'registered'] = process.argv.slice(2);
 const r = JSON.parse((await readFile(file, 'utf8')).trim());
 if (r.start !== r.finish || r.sic !== r.issued) throw Error('Expected single level and full SIC authority');
 const source = GAME_CATALOG.some((g) => g.code === r.code);
@@ -96,7 +96,8 @@ async function fork(n, c) {
   let b = await rewind(n);
   const initial = await measure(b),
     state = b.state,
-    level = b.level;
+    level = b.level,
+    baseHash = hash(b.frame);
   const terminal = (v) => v.state !== state || v.level !== level;
   const bareBoard = await step(c.op),
     bare = terminal(bareBoard) ? null : ((await measure(bareBoard))[c.actor]?.p ?? null);
@@ -112,6 +113,28 @@ async function fork(n, c) {
   const triggered = await step(c.op),
     after = terminal(triggered) ? {} : await measure(triggered),
     actual = after[c.actor]?.p ?? null;
+  const bareParts = terminal(bareBoard) ? {} : await measure(bareBoard);
+  const enabled = [];
+  for (const [actor, part] of Object.entries(before)) {
+    if (
+      initial[actor] &&
+      bareParts[actor] &&
+      after[actor] &&
+      eq(part.p, initial[actor].p) &&
+      eq(initial[actor].p, bareParts[actor].p) &&
+      !eq(part.p, after[actor].p)
+    )
+      enabled.push({ actor, from: part.p, to: after[actor].p });
+  }
+  const contrast = {
+    before: initial[c.actor]?.p ?? null,
+    atTrigger: before[c.actor]?.p ?? null,
+    wantedMarker: c.anchorAt,
+    actualMarker: before[c.anchor]?.p ?? null,
+    bareChanged: baseHash !== hash(bareBoard.frame),
+    preparedChanged: hash(b.frame) !== hash(triggered.frame),
+    enabled,
+  };
   const hit = placed && !!eq(actual, c.destination),
     next = c.interest?.productiveNext;
   let continuation = null;
@@ -121,6 +144,7 @@ async function fork(n, c) {
   }
   return {
     setup: placed,
+    contrast,
     hit,
     actual,
     bare,
@@ -149,13 +173,17 @@ for (const e of log.filter((e) => e.phase === 'accessTrigger')) {
   trials.push({ action: e.actionIndex, kind: e.access.kind, card: c, result });
 }
 for (const e of log
-  .filter((e) => e.phase !== 'accessContinue' && e.access.step === 0 && e.access.alternatives.length)
-  .slice(0, 12)) {
+  .filter(
+    (e) =>
+      e.phase !== 'accessContinue' && e.access.step === 0 && (scope === 'all' || e.access.alternatives.length)
+  )
+  .slice(0, scope === 'all' ? Infinity : 12)) {
   const choices = [card(e.access), ...e.access.alternatives],
     evaluated = [];
   for (const c of choices)
     evaluated.push({
       destination: c.destination,
+      ...(scope === 'all' ? { setupCommands: c.setup, trigger: c.op, actor: c.actor, anchor: c.anchor } : {}),
       score: c.score,
       interest: c.interest,
       ...(await fork(e.actionIndex - 1, c)),
