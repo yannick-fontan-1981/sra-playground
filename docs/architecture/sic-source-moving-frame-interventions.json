@@ -1,0 +1,1679 @@
+{
+  "parentCandidate": "53b18cc02cc8dfc9cb78fbecdb9c9fead193da41",
+  "custom4Runs": 0,
+  "fixedPrograms": {
+    "original": [
+      {
+        "code": "ESCT",
+        "level": 1,
+        "proposals": 2,
+        "v15": "1170f2e0a37af1dba3990c84e0de757701dddac96e0bf4d80c2390f59a4ebbfd",
+        "nested": "93e434277c69ae77a2866c55f3111d2080f2d3f6d8fae2769c0e1ce8c857cee3"
+      },
+      {
+        "code": "PORT",
+        "level": 1,
+        "proposals": 10,
+        "v15": "99040a728dde9bb633c61c894aa4ea772fe2f5562cdae332a0ef66af60389345",
+        "nested": "e99a326b7ff2ffab7854885dc2a9bb772fe1c1c4159eec7dfd5f04312c437035"
+      },
+      {
+        "code": "SNAR",
+        "level": 1,
+        "proposals": 2,
+        "v15": "cd0f0db4347579f00d560698ece03dad2dd0955842f198b3bc50e7eac30092a0",
+        "nested": "574a9755167d9adcf6f3ebc54deba77b674cec68f1f82035cd75daf34409a45f"
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "proposals": 22,
+        "v15": "6224cfd871bb490d662b73abbbac5ebdf8bb92dc878771e4165ea37561d7df8d",
+        "nested": "88c7166ad5938846e78f344845d7752e5f7c2922662de93dbaf1448f8cbc4acb"
+      }
+    ],
+    "upper": [
+      {
+        "code": "CATR",
+        "level": 2,
+        "proposals": 30,
+        "v15": "2cd84e70677e42b0bac909dbf83c80a2feaeb2b777a07600fefa1fd288019b34",
+        "nested": "0d5d4c3192173bea5e2cc6706b309f53b603f7b3232bf49779483cd5529893de"
+      },
+      {
+        "code": "CATR",
+        "level": 3,
+        "proposals": 31,
+        "v15": "21a45d107a5bb749f79272b339e2de3909453b37bad1f10a1f0adcf2d407b66b",
+        "nested": "aa94f487ebbb22c984b530c0142927c769f102e2c0200e31765cff660c2d1d00"
+      },
+      {
+        "code": "GRAV",
+        "level": 3,
+        "proposals": 18,
+        "v15": "42700f794d4d5511a4e7b94dcf49e2eb5b0aa66b447af7de77cc08775175bf15",
+        "nested": "dba6fb45e9c0ce51079ee7c17c5fd984aac4a88f4c00d0c8ee4f1ce01892e380"
+      },
+      {
+        "code": "GRAV",
+        "level": 4,
+        "proposals": 18,
+        "v15": "69f0240e4226e71b701650a0f01b665ed52cb86f1cf006cad7791e6bd27d3569",
+        "nested": "3577187ac06cd9e09b0887c365e02efd9ed07f21ab6422045ccad8a1fea19aeb"
+      },
+      {
+        "code": "POLA",
+        "level": 5,
+        "proposals": 24,
+        "v15": "1a6a08f213fa33040947609f70474d5e790acdb0437b4517df080f7b7a6e3401",
+        "nested": "9370f8ff0a666cd9a9cb11089f500ed1f50a05697f57cbed195b68e3225c7748"
+      }
+    ]
+  },
+  "projectingPreparations": {
+    "original": {
+      "levels": 100,
+      "total": {
+        "trials": 36,
+        "unmeasuredFirstAction": 32,
+        "measurable": 36,
+        "ordinaryPlacement": 24,
+        "nestedPlacement": 25,
+        "ordinaryPair": 20,
+        "nestedPair": 22,
+        "entirePath": 22,
+        "unmeasuredOrdinary": 22,
+        "unmeasuredNested": 23,
+        "actuallyMoved": 26,
+        "movingOrdinary": 24,
+        "movingNested": 24,
+        "measurableArrival": 35,
+        "ordinaryArrival": 24,
+        "nestedArrival": 24,
+        "ordinaryChain": 20,
+        "nestedChain": 22,
+        "controlledNew": 22,
+        "fixedTraveller": 16,
+        "separateActions": 18,
+        "correctRejection": 1,
+        "controlledUse": 6
+      },
+      "byLevel": [
+        {
+          "code": "VOIS",
+          "level": 1,
+          "counts": {
+            "trials": 22,
+            "unmeasuredFirstAction": 18,
+            "measurable": 22,
+            "ordinaryPlacement": 16,
+            "nestedPlacement": 16,
+            "ordinaryPair": 16,
+            "nestedPair": 16,
+            "entirePath": 16,
+            "correctRejection": 0,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 14,
+            "unmeasuredNested": 14,
+            "actuallyMoved": 17,
+            "movingOrdinary": 16,
+            "movingNested": 16,
+            "measurableArrival": 22,
+            "ordinaryArrival": 16,
+            "nestedArrival": 16,
+            "ordinaryChain": 16,
+            "nestedChain": 16,
+            "controlledNew": 16,
+            "fixedTraveller": 16,
+            "separateActions": 16,
+            "controlledUse": 0
+          },
+          "examples": [
+            {
+              "i": 16,
+              "setup": "ACTION4",
+              "length": 3,
+              "q": "ACTION5",
+              "before": [
+                14,
+                22
+              ],
+              "placement": [
+                26,
+                22
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "patient": [
+                42,
+                22
+              ],
+              "alone": [
+                14,
+                22
+              ],
+              "arrival": [
+                26,
+                22
+              ],
+              "knownFirst": false
+            },
+            {
+              "i": 16,
+              "setup": "ACTION4",
+              "length": 4,
+              "q": "ACTION5",
+              "before": [
+                14,
+                22
+              ],
+              "placement": [
+                30,
+                22
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "patient": [
+                42,
+                22
+              ],
+              "alone": [
+                14,
+                22
+              ],
+              "arrival": [
+                30,
+                22
+              ],
+              "knownFirst": false
+            },
+            {
+              "i": 19,
+              "setup": "ACTION4",
+              "length": 4,
+              "q": "ACTION5",
+              "before": [
+                10,
+                26
+              ],
+              "placement": [
+                26,
+                26
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "patient": [
+                42,
+                22
+              ],
+              "alone": [
+                10,
+                26
+              ],
+              "arrival": [
+                26,
+                26
+              ],
+              "knownFirst": false
+            },
+            {
+              "i": 19,
+              "setup": "ACTION4",
+              "length": 5,
+              "q": "ACTION5",
+              "before": [
+                10,
+                26
+              ],
+              "placement": [
+                30,
+                26
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "patient": [
+                42,
+                22
+              ],
+              "alone": [
+                10,
+                26
+              ],
+              "arrival": [
+                30,
+                26
+              ],
+              "knownFirst": false
+            }
+          ]
+        },
+        {
+          "code": "ESCT",
+          "level": 1,
+          "counts": {
+            "trials": 2,
+            "unmeasuredFirstAction": 2,
+            "measurable": 2,
+            "ordinaryPlacement": 0,
+            "nestedPlacement": 1,
+            "ordinaryPair": 0,
+            "nestedPair": 0,
+            "entirePath": 0,
+            "correctRejection": 1,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 0,
+            "unmeasuredNested": 1,
+            "actuallyMoved": 1,
+            "movingOrdinary": 0,
+            "movingNested": 0,
+            "measurableArrival": 1,
+            "ordinaryArrival": 0,
+            "nestedArrival": 0,
+            "ordinaryChain": 0,
+            "nestedChain": 0
+          },
+          "examples": []
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "counts": {
+            "trials": 2,
+            "unmeasuredFirstAction": 2,
+            "measurable": 2,
+            "ordinaryPlacement": 0,
+            "nestedPlacement": 0,
+            "ordinaryPair": 0,
+            "nestedPair": 0,
+            "entirePath": 0,
+            "correctRejection": 0,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 0,
+            "unmeasuredNested": 0,
+            "measurableArrival": 2,
+            "ordinaryArrival": 0,
+            "nestedArrival": 0,
+            "ordinaryChain": 0,
+            "nestedChain": 0
+          },
+          "examples": []
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "counts": {
+            "trials": 10,
+            "unmeasuredFirstAction": 10,
+            "measurable": 10,
+            "ordinaryPlacement": 8,
+            "nestedPlacement": 8,
+            "ordinaryPair": 4,
+            "nestedPair": 6,
+            "entirePath": 6,
+            "correctRejection": 0,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 8,
+            "unmeasuredNested": 8,
+            "actuallyMoved": 8,
+            "movingOrdinary": 8,
+            "movingNested": 8,
+            "measurableArrival": 10,
+            "ordinaryArrival": 8,
+            "nestedArrival": 8,
+            "ordinaryChain": 4,
+            "nestedChain": 6,
+            "controlledNew": 6,
+            "fixedTraveller": 0,
+            "separateActions": 2,
+            "controlledUse": 6
+          },
+          "examples": [
+            {
+              "i": 4,
+              "setup": "ACTION2",
+              "length": 1,
+              "q": "ACTION2",
+              "before": [
+                11,
+                15
+              ],
+              "placement": [
+                11,
+                19
+              ],
+              "from": [
+                12,
+                17
+              ],
+              "patient": [
+                12,
+                21
+              ],
+              "alone": [
+                12,
+                21
+              ],
+              "arrival": [
+                12,
+                25
+              ],
+              "knownFirst": false
+            },
+            {
+              "i": 4,
+              "setup": "ACTION2",
+              "length": 2,
+              "q": "ACTION2",
+              "before": [
+                11,
+                15
+              ],
+              "placement": [
+                11,
+                23
+              ],
+              "from": [
+                12,
+                17
+              ],
+              "patient": [
+                12,
+                25
+              ],
+              "alone": [
+                12,
+                21
+              ],
+              "arrival": [
+                12,
+                29
+              ],
+              "knownFirst": false
+            },
+            {
+              "i": 10,
+              "setup": "ACTION2",
+              "length": 1,
+              "q": "ACTION2",
+              "before": [
+                19,
+                23
+              ],
+              "placement": [
+                19,
+                27
+              ],
+              "from": [
+                18,
+                24
+              ],
+              "patient": [
+                20,
+                29
+              ],
+              "alone": [
+                20,
+                29
+              ],
+              "arrival": [
+                20,
+                33
+              ],
+              "knownFirst": false
+            },
+            {
+              "i": 10,
+              "setup": "ACTION2",
+              "length": 2,
+              "q": "ACTION2",
+              "before": [
+                19,
+                23
+              ],
+              "placement": [
+                19,
+                31
+              ],
+              "from": [
+                18,
+                24
+              ],
+              "patient": [
+                20,
+                33
+              ],
+              "alone": [
+                20,
+                29
+              ],
+              "arrival": [
+                20,
+                37
+              ],
+              "knownFirst": false
+            }
+          ]
+        }
+      ]
+    },
+    "sevenUpper": {
+      "levels": 18,
+      "total": {
+        "trials": 121,
+        "unmeasuredFirstAction": 91,
+        "measurable": 115,
+        "nestedPlacement": 72,
+        "nestedPair": 62,
+        "entirePath": 60,
+        "correctRejection": 66,
+        "unmeasuredNested": 55,
+        "actuallyMoved": 64,
+        "movingNested": 34,
+        "measurableArrival": 115,
+        "nestedArrival": 32,
+        "nestedChain": 24,
+        "controlledNew": 3,
+        "ordinaryPlacement": 6,
+        "unmeasuredOrdinary": 3,
+        "movingOrdinary": 6,
+        "ordinaryArrival": 3,
+        "ordinaryPair": 2,
+        "ordinaryChain": 1,
+        "separateActions": 1
+      },
+      "byLevel": [
+        {
+          "code": "CATR",
+          "level": 2,
+          "counts": {
+            "trials": 30,
+            "unmeasuredFirstAction": 28,
+            "measurable": 30,
+            "ordinaryPlacement": 0,
+            "nestedPlacement": 22,
+            "ordinaryPair": 0,
+            "nestedPair": 20,
+            "entirePath": 20,
+            "correctRejection": 22,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 0,
+            "unmeasuredNested": 20,
+            "actuallyMoved": 18,
+            "movingOrdinary": 0,
+            "movingNested": 13,
+            "measurableArrival": 30,
+            "ordinaryArrival": 0,
+            "nestedArrival": 15,
+            "ordinaryChain": 0,
+            "nestedChain": 13,
+            "controlledNew": 1,
+            "fixedTraveller": 0,
+            "separateActions": 0,
+            "controlledUse": 0
+          },
+          "examples": [
+            {
+              "i": 88,
+              "setup": "ACTION6:21,55",
+              "length": 3,
+              "q": "ACTION6:21,55",
+              "before": [
+                27,
+                22
+              ],
+              "placement": [
+                24,
+                28
+              ],
+              "from": [
+                23,
+                56
+              ],
+              "patient": [
+                26,
+                56
+              ],
+              "alone": [
+                26,
+                56
+              ],
+              "arrival": [
+                23,
+                56
+              ],
+              "knownFirst": false
+            }
+          ]
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "counts": {
+            "trials": 18,
+            "unmeasuredFirstAction": 15,
+            "measurable": 17,
+            "ordinaryPlacement": 4,
+            "nestedPlacement": 4,
+            "ordinaryPair": 0,
+            "nestedPair": 2,
+            "entirePath": 2,
+            "correctRejection": 0,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 2,
+            "unmeasuredNested": 2,
+            "actuallyMoved": 15,
+            "movingOrdinary": 4,
+            "movingNested": 4,
+            "measurableArrival": 17,
+            "ordinaryArrival": 2,
+            "nestedArrival": 2,
+            "ordinaryChain": 0,
+            "nestedChain": 0
+          },
+          "examples": []
+        },
+        {
+          "code": "CATR",
+          "level": 3,
+          "counts": {
+            "trials": 31,
+            "unmeasuredFirstAction": 11,
+            "measurable": 31,
+            "ordinaryPlacement": 0,
+            "nestedPlacement": 17,
+            "ordinaryPair": 0,
+            "nestedPair": 14,
+            "entirePath": 12,
+            "correctRejection": 17,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 0,
+            "unmeasuredNested": 6,
+            "actuallyMoved": 20,
+            "movingOrdinary": 0,
+            "movingNested": 12,
+            "measurableArrival": 31,
+            "ordinaryArrival": 0,
+            "nestedArrival": 8,
+            "ordinaryChain": 0,
+            "nestedChain": 5,
+            "controlledNew": 1,
+            "fixedTraveller": 0,
+            "separateActions": 0,
+            "controlledUse": 0
+          },
+          "examples": [
+            {
+              "i": 70,
+              "setup": "ACTION6:21,55",
+              "length": 1,
+              "q": "ACTION6:21,55",
+              "before": [
+                15,
+                56
+              ],
+              "placement": [
+                18,
+                56
+              ],
+              "from": [
+                26,
+                53
+              ],
+              "patient": [
+                23,
+                53
+              ],
+              "alone": [
+                23,
+                53
+              ],
+              "arrival": [
+                26,
+                53
+              ],
+              "knownFirst": false
+            }
+          ]
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "counts": {
+            "trials": 18,
+            "unmeasuredFirstAction": 13,
+            "measurable": 13,
+            "ordinaryPlacement": 2,
+            "nestedPlacement": 7,
+            "ordinaryPair": 2,
+            "nestedPair": 4,
+            "entirePath": 4,
+            "correctRejection": 5,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 1,
+            "unmeasuredNested": 5,
+            "actuallyMoved": 11,
+            "movingOrdinary": 2,
+            "movingNested": 5,
+            "measurableArrival": 13,
+            "ordinaryArrival": 1,
+            "nestedArrival": 3,
+            "ordinaryChain": 1,
+            "nestedChain": 2,
+            "controlledNew": 1,
+            "fixedTraveller": 0,
+            "separateActions": 1,
+            "controlledUse": 0
+          },
+          "examples": [
+            {
+              "i": 109,
+              "setup": "ACTION7",
+              "length": 2,
+              "q": "ACTION4",
+              "before": [
+                8,
+                12
+              ],
+              "placement": [
+                12,
+                44
+              ],
+              "from": [
+                20,
+                8
+              ],
+              "patient": [
+                20,
+                24
+              ],
+              "alone": [
+                48,
+                8
+              ],
+              "arrival": [
+                52,
+                24
+              ],
+              "knownFirst": false,
+              "shorter": {
+                "examined": 1722,
+                "hits": 2,
+                "withoutSetup": 0,
+                "unidentified": 2,
+                "maxLength": 2,
+                "first": [
+                  "ACTION7",
+                  "ACTION4"
+                ],
+                "partitions": 10
+              },
+              "matchedTraveller": {
+                "layouts": 0,
+                "identifiable": 0,
+                "forecasts": 0,
+                "distinctArrivals": 0,
+                "examples": []
+              }
+            }
+          ]
+        },
+        {
+          "code": "POLA",
+          "level": 5,
+          "counts": {
+            "trials": 24,
+            "unmeasuredFirstAction": 24,
+            "measurable": 24,
+            "ordinaryPlacement": 0,
+            "nestedPlacement": 22,
+            "ordinaryPair": 0,
+            "nestedPair": 22,
+            "entirePath": 22,
+            "correctRejection": 22,
+            "incorrectRevision": 0,
+            "unmeasuredOrdinary": 0,
+            "unmeasuredNested": 22,
+            "measurableArrival": 24,
+            "ordinaryArrival": 0,
+            "nestedArrival": 4,
+            "ordinaryChain": 0,
+            "nestedChain": 4
+          },
+          "examples": []
+        }
+      ]
+    }
+  },
+  "competingFrames": {
+    "sourcePaired": {
+      "levels": 100,
+      "total": {
+        "plans": 139,
+        "placed": 55,
+        "placementAndPatient": 50,
+        "directExact": 41,
+        "visible": 130,
+        "oneExample": 139,
+        "onlyOnePriorResponse": 105,
+        "continuations": 79,
+        "landingExact": 20,
+        "jointlyRequired": 21,
+        "controlledLanding": 20,
+        "sameStartLanding": 20,
+        "referenceOnly": 20,
+        "confirmedAfterFirstResponse": 6,
+        "novelControlled": 19,
+        "independentControls": 20,
+        "distinctControlled": 20,
+        "twoDestinations": 8,
+        "official": 1
+      },
+      "referenceOnly": [
+        {
+          "code": "VOIS",
+          "level": 1,
+          "counts": {
+            "plans": 20,
+            "placed": 20,
+            "placementAndPatient": 20,
+            "directExact": 20,
+            "visible": 20,
+            "landingExact": 20,
+            "official": 0,
+            "jointlyRequired": 20,
+            "controlledLanding": 20,
+            "sameStartLanding": 20,
+            "oneExample": 20,
+            "referenceOnly": 20,
+            "onlyOnePriorResponse": 6,
+            "confirmedAfterFirstResponse": 6,
+            "novelControlled": 19,
+            "independentControls": 20,
+            "continuations": 4,
+            "exactContinuation": 0,
+            "controlledContinuation": 0,
+            "continuationWon": 0,
+            "winsAfterControlledLanding": 0,
+            "distinctControlled": 20,
+            "twoDestinations": 8
+          },
+          "strata": {
+            "all": {
+              "plans": 20,
+              "confirmed": 20
+            },
+            "previously_occupied": {
+              "plans": 6,
+              "confirmed": 6
+            },
+            "paired_setup": {
+              "plans": 20,
+              "confirmed": 20
+            },
+            "first_measurement": {
+              "plans": 6,
+              "confirmed": 6
+            }
+          },
+          "examples": [
+            {
+              "i": 13,
+              "setup": "ACTION1",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                38,
+                18
+              ],
+              "anchorTo": [
+                38,
+                14
+              ],
+              "from": [
+                14,
+                22
+              ],
+              "afterSetup": [
+                14,
+                22
+              ],
+              "alone": [
+                38,
+                18
+              ],
+              "arrival": [
+                38,
+                14
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            },
+            {
+              "i": 13,
+              "setup": "ACTION4",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                38,
+                18
+              ],
+              "anchorTo": [
+                42,
+                18
+              ],
+              "from": [
+                14,
+                22
+              ],
+              "afterSetup": [
+                14,
+                22
+              ],
+              "alone": [
+                38,
+                18
+              ],
+              "arrival": [
+                42,
+                18
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            },
+            {
+              "i": 16,
+              "setup": "ACTION1",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                15,
+                23
+              ],
+              "anchorTo": [
+                15,
+                19
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "afterSetup": [
+                42,
+                22
+              ],
+              "alone": [
+                14,
+                22
+              ],
+              "arrival": [
+                14,
+                18
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            },
+            {
+              "i": 16,
+              "setup": "ACTION1",
+              "length": 2,
+              "act": "ACTION5",
+              "anchorFrom": [
+                15,
+                23
+              ],
+              "anchorTo": [
+                15,
+                15
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "afterSetup": [
+                42,
+                22
+              ],
+              "alone": [
+                14,
+                22
+              ],
+              "arrival": [
+                14,
+                14
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            }
+          ]
+        }
+      ]
+    },
+    "sourceUnpaired": {
+      "levels": 100,
+      "total": {
+        "plans": 334,
+        "placed": 119,
+        "placementAndPatient": 47,
+        "directExact": 103,
+        "visible": 205,
+        "landingExact": 32,
+        "jointlyRequired": 44,
+        "controlledLanding": 28,
+        "sameStartLanding": 18,
+        "oneExample": 334,
+        "referenceOnly": 18,
+        "novelControlled": 24,
+        "independentControls": 28,
+        "continuations": 185,
+        "distinctControlled": 28,
+        "twoDestinations": 8,
+        "exactContinuation": 3,
+        "controlledContinuation": 3
+      },
+      "referenceOnly": [
+        {
+          "code": "VOIS",
+          "level": 1,
+          "counts": {
+            "plans": 20,
+            "placed": 20,
+            "placementAndPatient": 18,
+            "directExact": 18,
+            "visible": 18,
+            "landingExact": 18,
+            "official": 0,
+            "jointlyRequired": 18,
+            "controlledLanding": 18,
+            "sameStartLanding": 18,
+            "oneExample": 20,
+            "referenceOnly": 18,
+            "novelControlled": 17,
+            "independentControls": 18,
+            "continuations": 4,
+            "exactContinuation": 0,
+            "controlledContinuation": 0,
+            "continuationWon": 0,
+            "winsAfterControlledLanding": 0,
+            "distinctControlled": 18,
+            "twoDestinations": 7
+          },
+          "examples": [
+            {
+              "i": 13,
+              "setup": "ACTION1",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                38,
+                18
+              ],
+              "anchorTo": [
+                38,
+                14
+              ],
+              "from": [
+                14,
+                22
+              ],
+              "afterSetup": [
+                14,
+                22
+              ],
+              "alone": [
+                38,
+                18
+              ],
+              "arrival": [
+                38,
+                14
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            },
+            {
+              "i": 13,
+              "setup": "ACTION4",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                38,
+                18
+              ],
+              "anchorTo": [
+                42,
+                18
+              ],
+              "from": [
+                14,
+                22
+              ],
+              "afterSetup": [
+                14,
+                22
+              ],
+              "alone": [
+                38,
+                18
+              ],
+              "arrival": [
+                42,
+                18
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            },
+            {
+              "i": 16,
+              "setup": "ACTION1",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                15,
+                23
+              ],
+              "anchorTo": [
+                15,
+                19
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "afterSetup": [
+                42,
+                22
+              ],
+              "alone": [
+                14,
+                22
+              ],
+              "arrival": [
+                14,
+                18
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            },
+            {
+              "i": 16,
+              "setup": "ACTION1",
+              "length": 2,
+              "act": "ACTION5",
+              "anchorFrom": [
+                15,
+                23
+              ],
+              "anchorTo": [
+                15,
+                15
+              ],
+              "from": [
+                42,
+                22
+              ],
+              "afterSetup": [
+                42,
+                22
+              ],
+              "alone": [
+                14,
+                22
+              ],
+              "arrival": [
+                14,
+                14
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            }
+          ]
+        }
+      ]
+    },
+    "extraUpperPaired": {
+      "levels": 8,
+      "total": {
+        "plans": 121,
+        "placed": 80,
+        "placementAndPatient": 80,
+        "oneExample": 121,
+        "onlyOnePriorResponse": 96,
+        "directExact": 25,
+        "visible": 34,
+        "landingExact": 1,
+        "jointlyRequired": 3,
+        "controlledLanding": 1,
+        "sameStartLanding": 1,
+        "referenceOnly": 1,
+        "confirmedAfterFirstResponse": 1,
+        "novelControlled": 1,
+        "independentControls": 1,
+        "distinctControlled": 1,
+        "continuations": 35
+      },
+      "referenceOnly": [
+        {
+          "code": "VOIS",
+          "level": 4,
+          "counts": {
+            "plans": 21,
+            "placed": 20,
+            "placementAndPatient": 20,
+            "directExact": 1,
+            "visible": 1,
+            "landingExact": 1,
+            "official": 0,
+            "jointlyRequired": 1,
+            "controlledLanding": 1,
+            "sameStartLanding": 1,
+            "oneExample": 21,
+            "referenceOnly": 1,
+            "onlyOnePriorResponse": 19,
+            "confirmedAfterFirstResponse": 1,
+            "novelControlled": 1,
+            "independentControls": 1,
+            "distinctControlled": 1,
+            "twoDestinations": 0
+          },
+          "strata": {
+            "all": {
+              "plans": 21,
+              "confirmed": 1
+            },
+            "previously_occupied": {
+              "plans": 19,
+              "confirmed": 1
+            },
+            "paired_setup": {
+              "plans": 21,
+              "confirmed": 1
+            },
+            "first_measurement": {
+              "plans": 19,
+              "confirmed": 1
+            }
+          },
+          "examples": [
+            {
+              "i": 40,
+              "setup": "ACTION2",
+              "length": 2,
+              "act": "ACTION5",
+              "anchorFrom": [
+                18,
+                14
+              ],
+              "anchorTo": [
+                18,
+                22
+              ],
+              "from": [
+                38,
+                10
+              ],
+              "afterSetup": [
+                38,
+                10
+              ],
+              "alone": [
+                18,
+                14
+              ],
+              "arrival": [
+                18,
+                22
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            }
+          ]
+        }
+      ]
+    },
+    "extraUpperUnpaired": {
+      "levels": 8,
+      "total": {
+        "plans": 144,
+        "placed": 94,
+        "placementAndPatient": 65,
+        "oneExample": 144,
+        "onlyOnePriorResponse": 111,
+        "directExact": 49,
+        "visible": 65,
+        "landingExact": 25,
+        "jointlyRequired": 38,
+        "controlledLanding": 25,
+        "novelControlled": 25,
+        "independentControls": 25,
+        "continuations": 57,
+        "exactContinuation": 13,
+        "controlledContinuation": 11,
+        "distinctControlled": 25,
+        "sameStartLanding": 2,
+        "referenceOnly": 2,
+        "confirmedAfterFirstResponse": 2,
+        "twoDestinations": 6
+      },
+      "referenceOnly": [
+        {
+          "code": "VOIS",
+          "level": 4,
+          "counts": {
+            "plans": 20,
+            "placed": 20,
+            "placementAndPatient": 20,
+            "directExact": 2,
+            "visible": 2,
+            "landingExact": 2,
+            "official": 0,
+            "jointlyRequired": 2,
+            "controlledLanding": 2,
+            "sameStartLanding": 2,
+            "oneExample": 20,
+            "referenceOnly": 2,
+            "onlyOnePriorResponse": 18,
+            "confirmedAfterFirstResponse": 2,
+            "novelControlled": 2,
+            "independentControls": 2,
+            "distinctControlled": 2,
+            "twoDestinations": 1
+          },
+          "examples": [
+            {
+              "i": 40,
+              "setup": "ACTION3",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                18,
+                14
+              ],
+              "anchorTo": [
+                14,
+                14
+              ],
+              "from": [
+                38,
+                10
+              ],
+              "afterSetup": [
+                38,
+                10
+              ],
+              "alone": [
+                18,
+                14
+              ],
+              "arrival": [
+                14,
+                14
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            },
+            {
+              "i": 40,
+              "setup": "ACTION4",
+              "length": 1,
+              "act": "ACTION5",
+              "anchorFrom": [
+                18,
+                14
+              ],
+              "anchorTo": [
+                22,
+                14
+              ],
+              "from": [
+                38,
+                10
+              ],
+              "afterSetup": [
+                38,
+                10
+              ],
+              "alone": [
+                18,
+                14
+              ],
+              "arrival": [
+                22,
+                14
+              ],
+              "goal": null,
+              "solved": null,
+              "next": null
+            }
+          ]
+        }
+      ]
+    },
+    "sevenUpperUnpaired": {
+      "levels": 18,
+      "total": {
+        "plans": 240,
+        "placed": 66,
+        "directExact": 68,
+        "visible": 128,
+        "oneExample": 240,
+        "onlyOnePriorResponse": 200,
+        "continuations": 106,
+        "jointlyRequired": 14,
+        "landingExact": 4,
+        "controlledLanding": 2,
+        "novelControlled": 2,
+        "independentControls": 2,
+        "exactContinuation": 2,
+        "distinctControlled": 2,
+        "twoDestinations": 1,
+        "placementAndPatient": 23
+      },
+      "referenceOnly": []
+    }
+  },
+  "autonomous": {
+    "earlier": [
+      {
+        "code": "GRAV",
+        "start": 3,
+        "won": false,
+        "actions": 120,
+        "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+        "responseFrames": {
+          "plans": 3,
+          "actions": 3,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 3,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "GIGO",
+        "start": 3,
+        "won": true,
+        "actions": 12,
+        "initial": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+        "responseFrames": {
+          "plans": 0,
+          "actions": 0,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "VOIS",
+        "start": 4,
+        "won": false,
+        "actions": 120,
+        "initial": "f2d24e488d9132c3f2758284ea41575a0da85a5e026238f9229da63169d2e3f0",
+        "responseFrames": {
+          "plans": 2,
+          "actions": 3,
+          "placed": 1,
+          "arrivals": 1,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 1,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 2,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "KA59",
+        "start": 4,
+        "won": false,
+        "actions": 120,
+        "initial": "c228108c7a90c50118350fa4c705a7d3cd1b484b0df5e77550d203ea664e051e",
+        "responseFrames": {
+          "plans": 0,
+          "actions": 0,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      }
+    ],
+    "fallback": [
+      {
+        "code": "GRAV",
+        "start": 3,
+        "won": true,
+        "actions": 53,
+        "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+        "responseFrames": {
+          "plans": 0,
+          "actions": 0,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "GIGO",
+        "start": 3,
+        "won": true,
+        "actions": 12,
+        "initial": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+        "responseFrames": {
+          "plans": 0,
+          "actions": 0,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "VOIS",
+        "start": 1,
+        "won": true,
+        "actions": 50,
+        "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+        "responseFrames": {
+          "plans": 2,
+          "actions": 7,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 1,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "PORT",
+        "start": 1,
+        "won": true,
+        "actions": 20,
+        "initial": "3e7e40321ad15433fc75d6adecc02c58d7d5c16546c8f49f14c2883710f9f9e3",
+        "responseFrames": {
+          "plans": 3,
+          "actions": 5,
+          "placed": 1,
+          "arrivals": 1,
+          "exact": 1,
+          "uses": 1,
+          "exactUses": 1,
+          "controls": 1,
+          "dependent": 1,
+          "sameStart": 0,
+          "dependentUse": 1,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "ZIPP",
+        "start": 1,
+        "won": false,
+        "actions": 60,
+        "initial": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+        "responseFrames": {
+          "plans": 0,
+          "actions": 0,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "VOIS",
+        "start": 4,
+        "won": false,
+        "actions": 120,
+        "initial": "f2d24e488d9132c3f2758284ea41575a0da85a5e026238f9229da63169d2e3f0",
+        "responseFrames": {
+          "plans": 0,
+          "actions": 0,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      },
+      {
+        "code": "KA59",
+        "start": 4,
+        "won": false,
+        "actions": 120,
+        "initial": "c228108c7a90c50118350fa4c705a7d3cd1b484b0df5e77550d203ea664e051e",
+        "responseFrames": {
+          "plans": 0,
+          "actions": 0,
+          "placed": 0,
+          "arrivals": 0,
+          "exact": 0,
+          "uses": 0,
+          "exactUses": 0,
+          "controls": 0,
+          "dependent": 0,
+          "sameStart": 0,
+          "dependentUse": 0,
+          "official": 0,
+          "identifications": 0,
+          "separated": 0,
+          "reused": 0,
+          "reusedExact": 0
+        }
+      }
+    ]
+  },
+  "checks": {
+    "typescript": true,
+    "tests": 156,
+    "passed": 155,
+    "failure": "existing oriented-cycle recharge walk array"
+  }
+}
