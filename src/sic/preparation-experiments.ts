@@ -1,3 +1,4 @@
+import {offerActivation,recordActivation,type Activation,type ActivationReceipt} from './latent-response.ts';
 import {
   newFrameMemory,
   offerFrame,
@@ -90,6 +91,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'activateResponse'
     | 'inverseFrame'
     | 'instrumentSite'
     | 'transportControl'
@@ -136,6 +138,7 @@ export type Experiment = {
   condition?: ConditionalTrial;
   projection?: Trial;
   frame?:FrameTrial;
+  activation?:Activation;
   instrument?:SiteTrial;
   retained?:RetainedTrial;
   transport?:ContextTrial;
@@ -174,6 +177,7 @@ export type Outcome = {
   condition?: Record<string, unknown>;
   projection?: Record<string, unknown>;
   frame?:Record<string,unknown>;
+  activation?:Record<string,unknown>;
   instrument?:Record<string,unknown>;
   retained?:Record<string,unknown>;
   transport?:Record<string,unknown>;
@@ -181,6 +185,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  activations?:ActivationReceipt[];
   epoch: number;
   delayed: DelayedMemory;
   frontier:FrontierMemory;
@@ -403,6 +408,10 @@ function selectEstablishedExperiment(
   const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
+  if(rows&&free&&returnedToPlacement(m)){
+    const experiment=offerFrame(m,o,rows,s,available,'opportunity')??offerActivation(m,o,rows,s,available);
+    if(experiment)return experiment;
+  }
   if (rows && (m.frames?.active || free)) {
     const offer = offerFrame(m, o, rows, s, available);
     if (offer) return offer;
@@ -708,13 +717,45 @@ function selectEstablishedExperiment(
   }
   return null;
 }
+const placementVisits = new WeakMap<Memory, {turn: number; revisited: boolean}>();
+function returnedToPlacement(m: Memory) {
+  const prior = placementVisits.get(m);
+  if (prior?.turn === m.turns) return prior.revisited;
+  const last = m.edges[m.previous];
+  if (!last?.stable || !last.manipulation?.moves.length) return false;
+  const returned = new Set(last.manipulation.moves.map(v => JSON.stringify([v.role, v.to])));
+  const revisited = m.delayed.history.slice(0, -1).some(j =>
+    m.edges[j]?.manipulation?.moves.some(v =>
+      returned.has(JSON.stringify([v.role, v.from])) || returned.has(JSON.stringify([v.role, v.to]))
+    )
+  );
+  placementVisits.set(m, {turn: m.turns, revisited});
+  return revisited;
+}
+export function experimentCommand(x: Experiment) {
+  const first = ['prepare', 'confirmA', 'reuseA', 'route', 'inverse', 'position', 'deriveA', 'carry'];
+  return first.includes(x.phase) ? x.a : x.b;
+}
 export function selectExperiment(
   m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows
 ): Experiment | null {
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if (established || !late || !rows) return established;
-  const scene = m.scenes.indexOf(sceneKey(o));
-  return scene < 0 ? null : offerFrame(m, o, rows, scene, new Set(inputs.map(observedCommandKey)), true);
+  if (!rows || established?.frame) return established;
+  const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
+  const available=new Set(inputs.map(observedCommandKey));
+  const recent=m.delayed.history.slice(-8);
+  const repeated=recent.filter((v,i)=>m.delayed.history.indexOf(v)<m.delayed.history.length-recent.length+i).length;
+  const replaceable=!established||['explore','frontierProbe','probe','position','control'].includes(established.phase);
+  const cmd=established?experimentCommand( established ):null;
+  const knownStep=cmd&&m.edges.some(e=>e.s===scene&&e.cmd===cmd&&e.stable);
+  if(replaceable&&(knownStep||(!established&&late)||repeated>=Math.ceil(recent.length/2)&&recent.length>=4)){
+    const opportunity=offerFrame(m,o,rows,scene,available,'opportunity');
+    if(opportunity)return opportunity;
+    const activation=offerActivation(m,o,rows,scene,available);
+    if(activation)return activation;
+  }
+  if(established||!late)return established;
+  return offerFrame(m,o,rows,scene,available,'identify');
 }
 export function recordExperiment(
   m: Memory,
@@ -844,6 +885,7 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
+  if(x.activation){const {result,detail}=recordActivation(m,x.activation,b,a);return {...out,result,activation:detail};}
   if(x.frame){const {result,detail}=recordFrame(m,x.frame,b,a);return {...out,result,frame:detail};}
   if(x.retained){const {result,detail}=recordRetained(m,x.retained,b,a,rows,next,t);return {...out,result,retained:detail};}
   if(x.transport){

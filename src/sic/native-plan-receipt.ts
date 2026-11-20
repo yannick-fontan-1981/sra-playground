@@ -48,6 +48,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
     subObjective: typeof subObjective === 'string' ? subObjective : null,
     ...(strategyObjective ? { strategyObjective } : {}),
     ...(proposal.instrumentForecast ? { instrumentForecast: proposal.instrumentForecast, instrumentPosition: proposal.instrumentPosition??null } : {}),
+    ...(proposal.activationForecast ? {activationForecast:proposal.activationForecast} : {}),
     ...(proposal.frameForecast ? {frameForecast:proposal.frameForecast} : {}),
     ...(proposal.retainedForecast ? {retainedForecast:proposal.retainedForecast} : {}),
     ...(proposal.transportForecast ? { transportForecast: proposal.transportForecast } : {}),

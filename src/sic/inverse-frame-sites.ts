@@ -1,6 +1,7 @@
 import { add, diff, same, size, type XY } from './access-terrain.ts';
 import { bases, type AxisPair, type FrameEffect, type FramePose } from './motion-frames.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { ReferenceStep } from './route-to-reference.ts';
 import type { Groups, Role } from './exchange-roles.ts';
 export type FrameUse = { op: string; to: XY; refs: number[]; score: number };
 export type InversePlan = {
@@ -27,7 +28,9 @@ export type InversePlan = {
   key: string;
   score: number;
   follow: FrameUse | null;
-  basis?: 'single_response';
+  basis?: 'single_response' | 'observed_preparation';
+  beforeReference?: XY;
+  via?: ReferenceStep[];
   alternatives?: { traveller: XY; world: XY };
   priorMoving?: number;
   existingReference?: boolean;

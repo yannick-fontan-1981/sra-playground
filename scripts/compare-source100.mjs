@@ -177,6 +177,7 @@ async function run(code, games) {
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
+      const activationSeal=plan?.activationForecast?hash(plan.activationForecast):null;
       const retainedSeal=plan?.retainedForecast?hash(plan.retainedForecast):null;
       const siteSeal=plan?.instrumentForecast?hash(plan.instrumentForecast):null;
       const transportSeal=plan?.transportForecast?hash(plan.transportForecast):null;
@@ -193,7 +194,7 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
@@ -301,6 +302,7 @@ async function run(code, games) {
           transport,
           instrument,
           frame,
+          activation,
           retained,
           transfer,
           frontier,
@@ -352,6 +354,7 @@ async function run(code, games) {
           predictedGap,
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
+          ...(activation ? {activation} : {}),
           ...(frame ? {frame} : {}),
           ...(retained ? {retained} : {}),
           ...(instrument ? {instrument} : {}),

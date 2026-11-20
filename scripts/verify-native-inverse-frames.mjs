@@ -1,6 +1,6 @@
 // Replay evidence for a native placement in a learned moving coordinate frame.
 const eq = (a, b) => !!a && !!b && a[0] === b[0] && a[1] === b[1];
-function position(parts, role) {
+export function position(parts, role) {
   if (!parts) return null;
   const g = parts.filter((e) => e.signature === role.signature),
     fixed = role.fixed;
@@ -24,6 +24,11 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
     official: 0,
     identifications: 0,
     separated: 0,
+    alreadyPrepared: 0,
+    witnessedRoutes: 0,
+    routedArrivals: 0,
+    matchedBoth: 0,
+    naturalUse: 0,
     reused: 0,
     reusedExact: 0,
   };
@@ -47,7 +52,8 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
     if (
       hash(t) !== cmd.frameSeal ||
       stage !== v.stage ||
-      commandKey(cmd) !== (stage === 'place' ? p.a : stage === 'arrive' ? p.q : p.follow.op)
+      commandKey(cmd) !==
+        (stage === 'place' ? (p.via?.[k]?.op ?? p.a) : stage === 'arrive' ? p.q : p.follow.op)
     )
       fail('Missing frame forecast');
     const norm = (x) =>
@@ -71,13 +77,46 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
         if (j < 0 || j >= i) fail('Future frame evidence');
         return run.replayCommands[j];
       };
-      const stride = p.placement.map((v, j) => (v - p.at[j]) / p.length);
-      for (const ref of p.actuatorRefs) {
+      const natural = p.basis === 'observed_preparation';
+      if (
+        natural &&
+        (p.length !== 0 || !p.beforeReference || !eq(p.placement, p.at) || p.actuatorRefs.length !== 1)
+      )
+        fail('Bad prepared binding');
+      const stride = p.placement.map((v, j) =>
+        natural ? v - p.beforeReference[j] : (v - p.at[j]) / p.length
+      );
+      if (p.via) {
+        if (!p.length || p.via.length !== p.length || p.actuatorRefs.length !== p.length)
+          fail('Broken arrangement route');
+        let head = cmd.from;
+        for (const [j, step] of p.via.entries()) {
+          const past = edge(step.ref);
+          if (
+            p.actuatorRefs[j] !== step.ref ||
+            past.from !== head ||
+            commandKey(past) !== step.op ||
+            !eq(position(cache.get(past.to), anchor), step.at) ||
+            !eq(position(cache.get(past.to), patient), step.patient)
+          )
+            fail('Unwitnessed arrangement route');
+          head = past.to;
+        }
+        if (!eq(p.via.at(-1).at, p.placement) || !eq(p.via.at(-1).patient, p.patient))
+          fail('Incorrect terminal placement');
+        stats.witnessedRoutes++;
+      }
+      for (const ref of p.via ? [] : p.actuatorRefs) {
         const a = edge(ref),
           left = position(cache.get(a.from), anchor),
           right = position(cache.get(a.to), anchor);
         if (
           commandKey(a) !== p.a ||
+          (natural &&
+            (a.to !== cmd.from ||
+              !eq(left, p.beforeReference) ||
+              !eq(right, p.at) ||
+              !eq(position(cache.get(a.from), patient), p.from))) ||
           !left ||
           !right ||
           !eq(
@@ -111,7 +150,19 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
           fail('Wrong moving-frame relation');
         supports.push({ s, r, out, image: q.from });
       }
-      if (p.basis === 'single_response') {
+      if (
+        p.via &&
+        (!eq(
+          p.to,
+          p.placement.map((v, j) => v + p.offset[j])
+        ) ||
+          !eq(
+            p.direct,
+            p.at.map((v, j) => v + p.offset[j])
+          ))
+      )
+        fail('Incorrect projected route arrival');
+      if (p.basis === 'single_response' || natural) {
         const first = supports[0];
         if (
           supports.length !== 1 ||
@@ -127,6 +178,29 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
         )
           fail('Unseparated frame hypotheses');
         stats.identifications++;
+        if (natural) {
+          if (
+            !eq(
+              p.direct,
+              p.beforeReference.map((v, j) => v + p.offset[j])
+            ) ||
+            !eq(
+              p.to,
+              p.placement.map((v, j) => v + p.offset[j])
+            )
+          )
+            fail('Bad destination equation');
+          if (p.follow) {
+            const f = edge(p.follow.refs[0]);
+            if (
+              commandKey(f) !== p.follow.op ||
+              !eq(position(cache.get(f.from), patient), p.to) ||
+              !eq(position(cache.get(f.to), patient), p.follow.to)
+            )
+              fail('Unwitnessed continuation');
+          }
+          stats.alreadyPrepared++;
+        }
       } else if (
         !supports.some((x) =>
           supports.some(
@@ -150,7 +224,14 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
           fail('Unwitnessed relation reuse');
         stats.reused++;
       }
-      trials.set(start, { id, start, p, step: -1, reused: !!t.identifiedRef });
+      trials.set(start, {
+        id,
+        start,
+        p,
+        step: -1,
+        reused: !!t.identifiedRef,
+        controlAt: natural ? i + p.actuatorRefs[0] - e.revision : start,
+      });
       stats.plans++;
     }
     const track = trials.get(start);
@@ -160,15 +241,19 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
     stats.official += Number(won(board));
     const expected =
       stage === 'place'
-        ? p.patient.map((v, j) => p.from[j] + ((v - p.from[j]) * (k + 1)) / p.length)
+        ? (p.via?.[k]?.patient ?? p.patient.map((v, j) => p.from[j] + ((v - p.from[j]) * (k + 1)) / p.length))
         : stage === 'arrive'
           ? p.to
           : p.follow.to;
     const reference =
-      stage === 'place' ? p.placement.map((v, j) => p.at[j] + ((v - p.at[j]) * (k + 1)) / p.length) : null;
+      stage === 'place'
+        ? (p.via?.[k]?.at ?? p.placement.map((v, j) => p.at[j] + ((v - p.at[j]) * (k + 1)) / p.length))
+        : null;
     const dest = position(after, patient),
       r = position(after, anchor);
-    const exact = eq(dest, expected) && (!reference || eq(r, reference));
+    const via = p.via?.[k],
+      replayed = !via || run.replayCommands[i + via.ref - e.revision]?.to === cmd.to;
+    const exact = replayed && eq(dest, expected) && (!reference || eq(r, reference));
     if (
       !eq(v.expected, expected) ||
       JSON.stringify(dest) !== JSON.stringify(v.patient) ||
@@ -181,10 +266,11 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
     if (stage === 'arrive') {
       stats.arrivals++;
       stats.exact += Number(exact && !won(board));
+      stats.routedArrivals += Number(!!p.via && exact && !won(board));
       track.arrived = dest;
       track.staged = position(before, patient);
       track.exact = exact && !won(board);
-      if (track.exact && p.basis === 'single_response') established.set(i, p);
+      if (track.exact && p.basis) established.set(i, p);
       stats.reusedExact += Number(track.exact && track.reused);
       branches.push(track);
     }
@@ -197,7 +283,7 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
   async function compare(open, dispatch) {
     for (const t of branches) {
       let b = await open();
-      for (let j = 0; j < t.start; j++) {
+      for (let j = 0; j < t.controlAt; j++) {
         b = await dispatch(run.replayCommands[j]);
         if (hash(b.frame).slice(0, 16) !== run.replayCommands[j].to)
           throw Error('Divergent native omission prefix');
@@ -211,14 +297,17 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
       stats.controls++;
       stats.dependent += Number(!!dependent);
       stats.sameStart += Number(!!dependent && eq(t.staged, t.p.from));
-      stats.separated += Number(!!dependent && t.p.basis === 'single_response' && eq(t.staged, t.p.from));
+      stats.separated += Number(!!dependent && !!t.p.basis && eq(t.staged, t.p.from));
+      stats.matchedBoth += Number(
+        !!dependent && t.p.basis === 'observed_preparation' && eq(former, t.p.direct)
+      );
       if (dependent && examples.length < 4)
         examples.push({
           first: t.start + 1,
           setup: t.p.a,
           length: t.p.length,
           command: t.p.q,
-          reference: t.p.at,
+          reference: t.p.beforeReference ?? t.p.at,
           placement: t.p.placement,
           traveller: t.p.from,
           afterSetup: t.staged,
@@ -229,6 +318,19 @@ export function inverseFrameAudit(run, hash, partsAt, cache, commandKey) {
       if (dependent && t.continued) {
         const later = await dispatch(run.replayCommands[i + 1]),
           v = await at(later);
+        if (t.p.basis === 'observed_preparation' && !won(later) && v && !eq(v, t.continued)) {
+          let alt = await open();
+          for (let j = 0; j < t.start; j++) {
+            alt = await dispatch(run.replayCommands[j]);
+            if (hash(alt.frame).slice(0, 16) !== run.replayCommands[j].to)
+              throw Error('Divergent shortcut control');
+          }
+          const omit = await dispatch(run.replayCommands[i + 1]),
+            coordinate = await at(omit);
+          stats.naturalUse += Number(
+            !won(omit) && !!coordinate && !eq(coordinate, t.continued) && !eq(t.continued, t.arrived)
+          );
+        }
         stats.dependentUse += Number(
           !won(later) && !!v && !eq(v, t.continued) && !eq(t.continued, t.arrived)
         );

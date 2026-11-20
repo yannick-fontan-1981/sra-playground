@@ -1,3 +1,5 @@
+import { unseenResponse } from './hypothesize-unseen-response.mjs';
+import { naturalControls } from '../src/sic/natural-reference-controls.ts';
 import { projectPreparation } from './project-source-preparations.mjs';
 import { bases } from '../src/sic/motion-frames.ts';
 import { proposeIdentification } from '../src/sic/identify-moving-frames.ts';
@@ -42,6 +44,7 @@ for (const [t, r] of runs.entries())
       history = new Map(),
       known = new Map(),
       cache = new Map();
+    const transitions = [];
     const inverses = [],
       tried = new Set();
     const counts = {},
@@ -85,6 +88,46 @@ for (const [t, r] of runs.entries())
         const from = resolveRole(before, r)?.position,
           to = resolveRole(after, r)?.position;
         return from && to ? { from, to } : null;
+      }
+      if (process.env.SIC_STUDY_UNSEEN === '1' && inverses.length < 32) {
+        const available = [
+          ...board.availableActionIds.filter((n) => n !== 6).map((n) => 'ACTION' + n),
+          ...(board.availableActionIds.includes(6)
+            ? [...known.keys()].filter((k) => k.startsWith('ACTION6:'))
+            : []),
+        ];
+        const proposal = unseenResponse({
+          i,
+          now,
+          known,
+          history,
+          pairAt,
+          sample,
+          tried,
+          transitions,
+          cache,
+          available,
+        })[0];
+        if (proposal) {
+          inverses.push(proposal);
+          tried.add(proposal.key);
+        }
+      }
+      if (process.env.SIC_STUDY_NATURAL === '1' && inverses.length < 18) {
+        const proposal = naturalControls({
+          i,
+          now,
+          rows: board.frame,
+          known,
+          history,
+          pairAt,
+          sample,
+          tried,
+        })[0];
+        if (proposal) {
+          inverses.push(proposal);
+          tried.add(proposal.key);
+        }
       }
       if (process.env.SIC_STUDY_PAIRED_IDENTIFY === '1' && i % 3 === 0 && inverses.length < 20)
         inverses.push(
@@ -224,6 +267,7 @@ for (const [t, r] of runs.entries())
           }
         }
       }
+      transitions.push({ op: action, from: now.s, to: next.s, index: i });
       prev = now;
       now = next;
     }

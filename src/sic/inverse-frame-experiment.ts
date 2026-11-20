@@ -1,3 +1,6 @@
+import { measuredReferenceRecipes } from './measured-reference-recipes.ts';
+import { routeToReference, type ReferenceRecipe } from './route-to-reference.ts';
+import { naturalControls, usePreparedReference } from './natural-reference-controls.ts';
 import { proposeIdentification } from './identify-moving-frames.ts';
 import type { NativeCommand, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Experiment, Memory } from './preparation-experiments.ts';
@@ -11,6 +14,7 @@ export type FrameTrial = { plan: InversePlan; step: number; choices: Choice[]; i
 export type FrameMemory = {
   active: FrameTrial | null;
   tried: Record<string, number>;
+  recipes?: Record<string, ReferenceRecipe>;
   last: number;
   identified?: Record<string, { ref: number; placement: XY }>;
   opposed?: Record<string, number>;
@@ -53,13 +57,12 @@ const sampleAt = (
   anchors.set('world', [0, 0]);
   return { scene: s, index, role: r, from, anchors };
 };
-function forecast(
+export function frameEvidence(
   m: Memory,
   o: NativeObservation,
   rows: NativeRows,
   s: number,
-  available: Set<string>,
-  identify: boolean
+  available: Set<string>
 ) {
   const known = new Map<string, Map<string, Role>>(),
     mobile = new Set<string>();
@@ -76,14 +79,14 @@ function forecast(
       group.set(identity(v.role), v.role);
       if (!v.role.fixed.length) mobile.add(v.role.signature);
     }
-  if (!mobile.size || known.size < 2) return [];
+  if (!mobile.size || known.size < 2) return null;
   const g = groupsOf(o),
     current = new Map<string, XY>();
   for (const k of mobile) {
     const group = g.get(k);
     if (group?.size === 1) current.set(k, [...group.values().next().value!.position]);
   }
-  if (!current.size) return [];
+  if (!current.size) return null;
   const history = new Map<string, FrameEffect[]>();
   for (const e of edges) {
     const roles = known.get(e.cmd);
@@ -107,7 +110,7 @@ function forecast(
       }
       const k = e.cmd + '/' + id,
         list = history.get(k) ?? [];
-      list.push({ ...sampleAt(e.s, r, from, anchors, e.ref), to });
+      list.push({ ...sampleAt(e.s, r, from, anchors, e.ref), to, afterScene: e.t });
       history.set(k, list);
     }
   }
@@ -122,8 +125,8 @@ function forecast(
     const pos = all.find((p) => !r.fixed.includes(p));
     return pos ? point(pos) : null;
   };
-  const pairAt = (e: FrameEffect, r: Role): { from: XY; to: XY } | null => {
-    const w = byRef.get(e.index);
+  const effectAt = (index: number, r: Role): { from: XY; to: XY } | null => {
+    const w = byRef.get(index);
     if (!w) return null;
     if (r.fixed.length) {
       const from = duplicateAt(w.s, r),
@@ -139,7 +142,9 @@ function forecast(
       ? { from, to: from }
       : null;
   };
-  const inputs = {
+  return {
+    effectAt,
+    pairAt: (e: FrameEffect, r: Role) => effectAt(e.index, r),
     i: o.revision - 1,
     now: { s, g },
     rows,
@@ -148,9 +153,32 @@ function forecast(
     sample,
     tried: new Set(Object.keys(m.frames!.tried)),
   };
-  if (!identify) return inversePlans(inputs);
+}
+
+function forecast(
+  m: Memory,
+  o: NativeObservation,
+  rows: NativeRows,
+  s: number,
+  available: Set<string>,
+  mode: 'fitted' | 'identify' | 'opportunity'
+) {
+  const inputs = frameEvidence(m, o, rows, s, available);
+  if (!inputs) return [];
+  if (mode === 'fitted') return inversePlans(inputs);
+  if (mode === 'opportunity') {
+    const recipes = [...Object.values(m.frames!.recipes ?? {}), ...measuredReferenceRecipes(inputs)];
+    const routes = routeToReference(m, o, s, rows, recipes);
+    if (routes.length) return routes;
+    const plans = naturalControls(inputs)
+      .filter((p) => p.offset[0] === 0 && p.offset[1] === 0)
+      .map(usePreparedReference);
+    return plans
+      .filter((p) => !m.frames!.identified?.[relation(p)] && (m.frames!.opposed?.[relation(p)] ?? 0) < 1)
+      .slice(0, 2);
+  }
   if (!m.recurrences || m.turns - m.frontier.lastScene < 3) return [];
-  return proposeIdentification({ ...inputs, pairAt }).filter(
+  return proposeIdentification(inputs).filter(
     (p) =>
       m.turns - m.frontier.lastScene >= p.length + 2 &&
       (m.frames!.opposed?.[relation(p) + '/' + p.refs[0]] ?? 0) < 2
@@ -158,7 +186,7 @@ function forecast(
 }
 function action(t: FrameTrial) {
   const p = t.plan;
-  return t.step < p.length ? p.a : t.step === p.length ? p.q : p.follow?.op;
+  return t.step < p.length ? (p.via?.[t.step]?.op ?? p.a) : t.step === p.length ? p.q : p.follow?.op;
 }
 export function offerFrame(
   m: Memory,
@@ -166,14 +194,16 @@ export function offerFrame(
   rows: NativeRows,
   s: number,
   available: Set<string>,
-  identify = false
+  mode: 'fitted' | 'identify' | 'opportunity' = 'fitted'
 ): Experiment | null {
   const state = m.frames;
   if (!state) return null;
   let t = state.active;
   if (!t) {
-    if (m.edges.length < 6 || m.turns % 3 || m.turns - state.last < 3) return null;
-    const plans = forecast(m, o, rows, s, available, identify),
+    const scheduled = m.edges.length >= 6 && m.turns % 3 === 0 && m.turns - state.last >= 3;
+    if (mode !== 'opportunity' && !scheduled) return null;
+    if (mode === 'opportunity' && m.turns <= state.last) return null;
+    const plans = forecast(m, o, rows, s, available, mode),
       p = plans[0];
     if (!p) return null;
     const learned = state.identified?.[relation(p)];
@@ -186,6 +216,7 @@ export function offerFrame(
   }
   const p = t.plan,
     op = action(t);
+  if (p.via?.[t.step] && p.via[t.step]!.source !== s) return null;
   if (!op || (!available.has(op) && !repeatedFrameCommand(op, o, rows))) return null;
   const refs = [
     ...new Set([
@@ -200,10 +231,13 @@ export function offerFrame(
     origin: Number(p.root),
     a: p.a,
     b: op,
-    rule:
-      p.basis === 'single_response'
-        ? 'separate_competing_arrival_frames'
-        : 'move_the_reference_for_a_predicted_arrival',
+    rule: p.via
+      ? 'reach_a_witnessed_binding_and_apply_a_learned_response'
+      : p.basis === 'observed_preparation'
+        ? 'test_response_to_an_already_moved_reference'
+        : p.basis === 'single_response'
+          ? 'separate_competing_arrival_frames'
+          : 'move_the_reference_for_a_predicted_arrival',
     refs,
     frame: t,
   };
@@ -221,9 +255,14 @@ export function recordFrame(m: Memory, t: FrameTrial, b: NativeObservation, a: N
   const intermediate = (from: XY, to: XY): XY =>
     [0, 1].map((i) => from[i]! + ((to[i]! - from[i]!) * (k + 1)) / p.length) as XY;
   const expected =
-    stage === 'place' ? intermediate(p.from, p.patient) : stage === 'arrive' ? p.to : p.follow!.to;
-  const reference = stage === 'place' ? intermediate(p.at, p.placement) : null;
+    stage === 'place'
+      ? (p.via?.[k]?.patient ?? intermediate(p.from, p.patient))
+      : stage === 'arrive'
+        ? p.to
+        : p.follow!.to;
+  const reference = stage === 'place' ? (p.via?.[k]?.at ?? intermediate(p.at, p.placement)) : null;
   const exact =
+    (!p.via?.[k] || p.via[k]!.target === m.revisionScene[a.revision]) &&
     !!patient &&
     same([...patient.position], expected) &&
     (!reference || (!!at && same([...at.position], reference)));
@@ -231,8 +270,18 @@ export function recordFrame(m: Memory, t: FrameTrial, b: NativeObservation, a: N
     const actual: XY = [...patient.position];
     if (exact && !same(actual, p.alternatives.world) && !same(actual, p.alternatives.traveller)) {
       (state.identified ??= {})[relation(p)] = { ref: a.revision, placement: p.placement };
+      if (p.basis === 'observed_preparation') {
+        (state.recipes ??= {})[relation(p)] = {
+          q: p.q,
+          role: p.role,
+          anchor: p.anchor,
+          offset: p.offset,
+          refs: [p.refs[0]!, a.revision],
+          placement: p.placement,
+        };
+      }
     } else if (same(actual, p.alternatives.world) || same(actual, p.alternatives.traveller)) {
-      const key = relation(p) + '/' + p.refs[0],
+      const key = p.basis === 'observed_preparation' ? relation(p) : relation(p) + '/' + p.refs[0],
         opposed = (state.opposed ??= {});
       opposed[key] = (opposed[key] ?? 0) + 1;
     }
