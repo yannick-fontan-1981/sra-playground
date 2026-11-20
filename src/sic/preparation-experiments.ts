@@ -39,6 +39,8 @@ import {
   type CapabilityTrial,
 } from './derive-capabilities.ts';
 import { newProjectionMemory, proposeProjection, recordProjection, type Trial, type ProjectionMemory } from './projected-affordances.ts';
+import {chooseTransfer,newTransferMemory,recordTransfer,type TransferTrial,type TransferMemory} from './configurable-transfers.ts';
+import {witnessedSites} from './site-operations.ts';
 import {newFrontierMemory,selectFrontier,recordFrontier,type FrontierMemory,type FrontierTrial} from './experimental-frontier.ts';
 import {conditionalPlacements,placementOffer,placementReceipt,type ConditionalTrial,type LearnedPlacement,type ReconsiderPlacement} from './conditional-placements.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
@@ -74,6 +76,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'configuredTransfer'
     | 'conditionSetup' | 'conditionTrigger' | 'conditionUse'
     | 'frontierRoute' | 'frontierProbe' | 'frontierUse' | 'frontierConsequence'
     | 'delayedProbe'
@@ -114,6 +117,7 @@ export type Experiment = {
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
   projection?: Trial;
+  transfer?: TransferTrial;
   placement?: Placement;
   derive?: Derivation;
   equation?: CapabilityTrial;
@@ -146,6 +150,7 @@ export type Outcome = {
   frontier?: Record<string, unknown>;
   condition?: Record<string, unknown>;
   projection?: Record<string, unknown>;
+  transfer?: Record<string, unknown>;
 };
 export type Memory = {
   epoch: number;
@@ -155,6 +160,7 @@ export type Memory = {
   reconsiderPlacement?: ReconsiderPlacement | null;
   conditionLearned?: Record<string,LearnedPlacement>;
   projection: ProjectionMemory;
+  transfers?: TransferMemory;
   space: SpatialMemory;
   equations: CapabilityMemory;
   scenes: string[];
@@ -179,6 +185,7 @@ export const initialMemory = (epoch: number): Memory => ({
   delayed: newDelayedMemory(),
   frontier:newFrontierMemory(),
   projection: newProjectionMemory(),
+  transfers: newTransferMemory(),
   space: newSpatialMemory(),
   equations: freshCapabilities(),
   scenes: [],
@@ -355,6 +362,10 @@ export function selectExperiment(
   if (s < 0 || !available.size) return null;
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
+  if(rows && (m.transfers?.active || (!m.condition && !m.reconsiderPlacement && !m.pending && !m.projection.active && !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active))) {
+    const transfer=chooseTransfer(m,o,rows,available,s);
+    if(transfer)return transfer;
+  }
   if(m.condition?.scene===s) {
     const continuing=placementOffer(m.condition,o,available);
     if(continuing) return continuing;
@@ -650,6 +661,9 @@ export function recordExperiment(
     effect = measureEffect(b, a, rows, next);
   const previous = m.edges[m.previous];
   m.turns++;
+  m.transfers??=newTransferMemory();
+  m.transfers.sites=witnessedSites(m.transfers.sites,b,a,rows,next,op);
+  if(!x?.transfer)m.transfers.active=null;
   const frontier=m.frontier;
   if(!x?.condition)m.condition=null;
   if(m.reconsiderPlacement)m.reconsiderPlacement=null;
@@ -744,6 +758,10 @@ export function recordExperiment(
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
     return {...out,result,condition:detail};
+  }
+  if(x.transfer) {
+    const {result,detail}=recordTransfer(m,x.transfer,b,a);
+    return {...out,result,transfer:detail};
   }
   if (x.delayed) {
     const won = a.levels_completed > b.levels_completed || a.state === 'WIN';

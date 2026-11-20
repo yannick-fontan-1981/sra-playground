@@ -6,6 +6,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceReplay } from './sic-study-source-replay.mjs';
 import { GAME_CATALOG } from '../src/games/catalog.ts';
+import { siteShape } from '../src/sic/site-operations.ts';
 
 const [environment, file, sourceCode] = process.argv.slice(2);
 const recorded = readFileSync(file, 'utf8').trim().split('\n').map(JSON.parse);
@@ -42,7 +43,7 @@ if (
   throw Error('Initial observation differs');
 const events = new Map(
   run.preparation
-    .filter((e) => e.projection || e.frontier || e.delayed || e.condition)
+    .filter((e) => e.projection || e.frontier || e.delayed || e.condition || e.transfer)
     .map((e) => [e.actionIndex, e])
 );
 const witnessed = new Map();
@@ -88,6 +89,7 @@ const controlled = new Set();
 const counts = { issued: 0, observed: 0, verifiedLanding: 0, verifiedContinuation: 0, refuted: 0 };
 const cache = new Map();
 const delayed = { issued: 0, preparedAccess: 0, exactPredictions: 0, followingMovements: 0 };
+const transfers = { issued:0, preparations:0, verifiedPreparations:0, triggers:0, exact:0, uses:0, exactUses:0, official:0 };
 const commandKey = (cmd) => 'ACTION' + cmd.id + (cmd.id === 6 ? ':' + cmd.data.x + ',' + cmd.data.y : '');
 async function partsAt(board, key, revision) {
   if (!cache.has(key)) {
@@ -107,7 +109,7 @@ async function partsAt(board, key, revision) {
   return cache.get(key);
 }
 const needPositionHistory = run.preparation.some(
-  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition
+  (e) => e.delayed || e.frontier?.place || e.frontier?.calibration || e.frontier?.repertoire || e.condition || e.transfer
 );
 const location = (parts, role) =>
   parts?.find((e) => !e.identity_ambiguous && e.signature === role)?.position.join() ?? null;
@@ -130,6 +132,22 @@ for (const [i, cmd] of run.replayCommands.entries()) {
   if (hash(board.frame).slice(0, 16) !== cmd.to) throw Error('Divergent return at ' + i);
   const event = events.get(i + 1);
   if (!event) continue;
+  if(event.transfer){
+    const v=event.transfer, before=cache.get(cmd.from), after=await partsAt(board,cmd.to,i+2);
+    const present=(es,p)=>es.some(e=>e.position.join()===p.join()&&siteShape(e)===v.shape);
+    if(action!==v.op || location(before,v.role)!==v.from.join())throw Error('Unbound transfer prediction at '+i);
+    if(v.stage!=='prepare' && !v.sites.every(p=>present(before,p)))throw Error('Missing transfer site at '+i);
+    const actual=location(after,v.role),geometry=v.stage!=='prepare'||v.sites.every(p=>present(after,p));
+    if((v.actual?.join()??null)!==actual||v.geometry!==geometry||v.matched!==(geometry&&actual===v.to.join()))
+      throw Error('Transfer result differs at '+i);
+    const boundary=board.levelsCompleted>run.initialCompleted||board.state==='WIN';
+    if(v.official!==boundary)throw Error('False transfer completion at '+i);
+    transfers.issued++;
+    transfers.preparations+=Number(v.stage==='prepare');transfers.verifiedPreparations+=Number(v.stage==='prepare'&&v.matched);
+    transfers.triggers+=Number(v.stage==='cross');transfers.exact+=Number(v.stage==='cross'&&v.matched);
+    transfers.uses+=Number(v.stage==='use');transfers.exactUses+=Number(v.stage==='use'&&v.matched);transfers.official+=Number(boundary);
+    continue;
+  }
   if (event.condition) {
     const { plan, index, actual, held } = event.condition,
       n = plan.preparation.length,
@@ -596,5 +614,6 @@ console.log(
     alternatives,
     conditions,
     delayed,
+    transfers,
   })
 );

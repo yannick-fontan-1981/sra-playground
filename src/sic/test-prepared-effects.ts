@@ -23,6 +23,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  configuredTransfer: 'Test the predicted destination and next move after configuring two sites',
   conditionSetup: 'Place a partner where the observed spatial conditions predict a motion',
   conditionTrigger: 'Compare the predicted motion with the inactive control at the original placement',
   conditionUse: 'Test the predicted use of the newly reached location',
@@ -133,7 +134,8 @@ export function createPreparedEffects(): NativeFamily<Offer> {
           }
         : null;
       const projected = experiment.projection?.plan;
-      const imagined = projected ? { roles: projected.roles, placement: projected.steps[projected.arrival]!.from,
+      const link=experiment.transfer?.plan;
+      const imagined = link ? {role:link.role,entry:link.entry,exit:link.exit,placement:link.prepare,arrival:link.desired,subsequent:link.following,alternatives:link.alternatives} : projected ? { roles: projected.roles, placement: projected.steps[projected.arrival]!.from,
         arrival: projected.steps[projected.arrival]!.to, continuation: projected.steps[projected.arrival+1], control: projected.steps[projected.arrival]!.control ?? null, goals: projected.goals, alternatives: experiment.projection?.alternatives ?? [] } : experiment.access
         ? {
             chosen: {

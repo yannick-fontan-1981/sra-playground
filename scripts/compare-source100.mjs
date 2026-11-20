@@ -291,6 +291,7 @@ async function run(code, games) {
           access,
           equation,
           projection,
+          transfer,
           frontier,
           condition,
           delayed,
@@ -344,6 +345,7 @@ async function run(code, games) {
           ...(delayed ? { delayed } : {}),
           ...(frontier ? {frontier} : {}),
           ...(condition ? {condition} : {}),
+          ...(transfer ? {transfer} : {}),
         })
       ),
       ...(source ? { steps } : {}),
