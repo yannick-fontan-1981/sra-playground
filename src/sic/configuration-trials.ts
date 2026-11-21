@@ -59,14 +59,19 @@ export function observeConfiguration(m: ConfigurationMemory, before: NativeRows,
 export function nextConfiguration(m:ConfigurationMemory, rows:NativeRows, available:readonly string[]):ConfigurationTrial|null {
   const from=configuration(m.factors,rows);
   if(from===null || m.factors.length<2)return null;
+  // A non-positional command may have passed through the site only once.
+  // A return at the same site supplies a second witness that the control addresses it.
+  const bound=m.factors.map((factor,index)=>({factor,index})).filter(({factor})=>
+    (clickSite(factor.action)!==null || !!factor.reverse) && available.includes(factor.action.split(':')[0]!));
+  if(bound.length<2)return null;
   const visited=new Set(m.visited), seen=new Set([from]), blocked=new Set(m.failures);
   const queue:[string,number][]=[[from,-1]];
   for(let i=0;i<queue.length;i++){
     const [at,first]=queue[i]!;
-    const order=m.factors.map((f,j)=>({f,j,verified:at[j]==='0'||!!f.reverse}))
+    const order=bound.map(({factor:f,index:j})=>({f,j,verified:at[j]==='0'||!!f.reverse}))
       .sort((a,b)=>Number(b.verified)-Number(a.verified));
     for(const {f,j} of order){
-      if(!available.includes(f.action.split(':')[0]!) || blocked.has(at+'/'+f.action))continue;
+      if(blocked.has(at+'/'+f.action))continue;
       const target=changedBit(at,j);
       if(seen.has(target))continue;
       seen.add(target);

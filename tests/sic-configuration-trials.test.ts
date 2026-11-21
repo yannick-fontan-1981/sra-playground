@@ -42,3 +42,14 @@ test('requires two distinct controls, an available command and a known local val
   assert.equal(nextConfiguration(pair, board(3,6), ['ACTION1']), null);
   assert.equal(nextConfiguration(pair, board(0,6), ['ACTION6']), null);
 });
+
+test('learns a spatial binding for commands that contain no coordinates', () => {
+  const m = newConfigurationMemory();
+  observeConfiguration(m, board(3,3), board(8,3), 'ACTION1', 'left-out');
+  observeConfiguration(m, board(8,3), board(3,3), 'ACTION1', 'left-back');
+  observeConfiguration(m, board(3,3), board(3,6), 'ACTION2', 'right-out');
+  const controls = ['ACTION1','ACTION2'];
+  assert.equal(nextConfiguration(m, board(3,6), controls), null);
+  observeConfiguration(m, board(3,6), board(3,3), 'ACTION2', 'right-back');
+  assert.ok(nextConfiguration(m, board(3,3), controls));
+});
