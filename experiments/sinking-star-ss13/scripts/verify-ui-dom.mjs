@@ -54,7 +54,7 @@ const createHarness=(spec,{reducedMotion=false,single=false}={})=>{
  equal(ref.observe());
  return{window,errors,ref,$,board,key,click,dispatch,equal,settled,action,choose,reset,learned,advance,flush,captures,timers,waits,get pixels(){return pixels;},close:()=>window.happyDOM.close()};
 };
-const report={success:false,htmlSha256:createHash('sha256').update(html).digest('hex'),scope:fixturesOnly?'fixtures-only':tutorialOnly?'tutorial-only':'focused-ui-and-tutorial',environment:'Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue',visualBrowserTest:false,checks:[]};
+const report={success:false,htmlSha256:createHash('sha256').update(html).digest('hex'),scope:fixturesOnly?'fixtures-only':tutorialOnly?'tutorial-only':'focused-ui-and-full-campaign',environment:'Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue',visualBrowserTest:false,checks:[]};
 const checkReflectionFixtures=async()=>{
  const result=[];
  for(const f of [{name:'near hero ignores farther blocked arrival',farBlocked:true},{name:'near crate has a square outline',crate:true},{name:'equal distances exchange both heroes',tie:true}]){
@@ -216,10 +216,19 @@ try{
    if(SS13_LEVELS[level-1].rows.some(r=>r.includes('m'))){assert.equal(h.$('monster-help').hidden,false);assert.equal(h.$('monster-help').open,true);h.$('monster-help').open=false;const other=heroes(initial.frame).find(p=>p.color===15);await h.action({id:6,data:other.data});assert.equal(h.$('monster-help').open,false,'Help respects manual collapse during a room');}
   }
   assert.deepEqual(h.errors,[]);report.checks.push('All eight actual rooms expose two heroes, two goals, both source links and contextual help.');await h.reset('restart');await h.close();h=undefined;
-  const path=resolve(root,'reference/level1-design.json');assert.ok(existsSync(path),'The authored tutorial must exist');const design=JSON.parse(readFileSync(path,'utf8'));h=createHarness(design.spec);
-  for(const action of design.actions)await h.action(action);assert.equal(h.ref.observe().levelsCompleted,1);
-  for(const id of lessonIds)assert.equal(h.learned()[id],true,'Real tutorial acquisition: '+id);
-  assert.deepEqual(h.errors,[]);report.tutorialCoverage={level:1,actions:design.actions.length,discoveries:[...lessonIds]};report.checks.push('The authored level1 route earns all fourteen discoveries from displayed public pixels.');
+  h=createHarness();report.campaignCoverage=[];
+  for(let level=1;level<=(tutorialOnly?1:8);level++){
+   const path=resolve(root,`reference/level${level}-design.json`);assert.ok(existsSync(path),'The authored room must exist');const design=JSON.parse(readFileSync(path,'utf8'));
+   assert.equal(h.ref.observe().level,level);assert.equal(h.board.dataset.level,String(level));let beforeLast;
+   for(const action of design.actions){beforeLast=h.ref.observe();await h.action(action);}
+   assert.equal(h.ref.observe().levelsCompleted,level);
+   if(level===1){for(const id of lessonIds)assert.equal(h.learned()[id],true,'Real tutorial acquisition: '+id);report.tutorialCoverage={level:1,actions:design.actions.length,discoveries:[...lessonIds]};}
+   const completed=h.ref.observe();await h.reset('undo');h.equal(beforeLast);assert.equal(h.$('victory').hidden,true);
+   await h.action(design.actions.at(-1));assert.deepEqual(h.ref.observe(),completed);assert.deepEqual(h.errors,[]);
+   report.campaignCoverage.push({level,title:design.spec.title,actions:design.actions.length,exactPixelsAndTiming:true,completionUndo:true});
+  }
+  report.checks.push('The authored level1 route earns all fourteen discoveries from displayed public pixels.');
+  if(!tutorialOnly){assert.equal(h.ref.observe().state,'WIN');assert.equal(h.$('victory').hidden,false);report.checks.push('All eight actual rooms, including the rebuilt finals, win through compiled HTML inputs with every frame and duration checked; each completion is undone and replayed.');}
  }
  report.success=true;
 }catch(error){report.error=error.stack;process.exitCode=1;}

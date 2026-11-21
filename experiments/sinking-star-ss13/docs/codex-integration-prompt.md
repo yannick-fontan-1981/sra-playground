@@ -8,6 +8,8 @@ Intègre nativement **SS13 — L’Ancre Verte**, duo **Voleur vert 14 + Magicie
 
 Le laboratoire est `experiments/sinking-star-ss13/`. Lis son `README.md`, `docs/specification.md`, `docs/level-design.md`, `docs/source-audit.md`, `docs/validation.md` et `docs/roadmap.md`.
 
+Utilise la **campagne 0.2.0 ou ultérieure**, avec les niveaux 7 et 8 reconstruits et durcis. Les anciennes salles de 49 et 48 entrées appartiennent à la version 0.1.0 et ne doivent pas remplacer ces nouvelles cartes. Vérifie la parité avec les références actuelles et consulte `validation/hard-finals-report.json` ; conserve les règles du contrat moteur 0.1.0.
+
 Réutilise `src/core.ts`, les huit cartes `src/levels.ts`, leurs textes `src/level-info.ts` et le tutoriel `src/tutorial.ts`. Inspecte le raccordement natif de SS11 et les éventuels jeux SS intégrés plus récemment. Adapte le modèle actuel du catalogue, du dispatcher, de l’interface et des tests Custom 4.
 
 ## Travail
@@ -21,7 +23,7 @@ Réutilise `src/core.ts`, les huit cartes `src/levels.ts`, leurs textes `src/lev
 7. Exécuter les tests, TypeScript et build requis, ainsi que les non-régressions Custom 4 pertinentes. Si un chemin partagé du runtime est modifié, comparer le coût global avant/après dans les mêmes conditions, avec la tolérance globale de +10 % convenue.
 8. Commiter et pousser régulièrement ; intégrer les changements testés sur le `main` actuel sans écraser les avancées concurrentes. Vérifier le commit distant, publier depuis cet état, puis contrôler le chargement de SS13, le lien direct et les commandes sur le Site déployé.
 
-Commandes du laboratoire : `npm test`, `npm run validate`, `node scripts/verify-ui-dom.mjs`. Le dernier script requiert Happy DOM (`HAPPY_DOM_MODULE` optionnel). Le script `verify-ui-browser.mjs` prépare le contrôle du laboratoire avec Playwright/Chromium ; il ne remplace pas celui de l’intégration Playground.
+Commandes du laboratoire : `npm test`, `npm run validate`, `node scripts/verify-design-constraints.mjs`, `node scripts/audit-hard-finals.mjs`, `node scripts/verify-ui-dom.mjs`. Le dernier script requiert Happy DOM (`HAPPY_DOM_MODULE` optionnel). Le script `verify-ui-browser.mjs` prépare le contrôle du laboratoire avec Playwright/Chromium ; il ne remplace pas celui de l’intégration Playground.
 
 Les témoins prouvent la solvabilité, pas une réussite autonome de SRA. Toute exécution de l’agent doit être évaluée séparément depuis les seules observations publiques.
 

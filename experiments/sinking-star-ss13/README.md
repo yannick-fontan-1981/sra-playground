@@ -4,6 +4,8 @@ Laboratoire autonome du treizième jeu de la série Sinking Star pour SRA Playgr
 
 La campagne comprend **huit salles**, avec un **tutoriel de quatorze découvertes au niveau 1**. Les adaptations s’appuient sur des énigmes identifiées des guides [North](https://sinkingstarwalkthrough.com/fr/north/) et [Crossovers](https://sinkingstarwalkthrough.com/fr/crossovers/). Les cartes sont originales ; les contraintes reprises et les différences sont déclarées dans `docs/source-audit.md` et `docs/level-design.md`.
 
+La **version 0.2.0** reconstruit les niveaux **7 et 8** pour augmenter fortement leurs exigences de planification : ressources réemployées, commandes interdépendantes, retours et préparations à conserver. Les niveaux 1 à 6, le moteur et le tutoriel conservent leur contenu de la version 0.1.0. `validation/hard-finals-report.json` documente la comparaison et les erreurs d’ordre vérifiées ; les longueurs des parcours d’auteur ne sont pas des minima.
+
 ## Jouer et reconstruire
 
 Depuis ce répertoire, avec Node et TypeScript 5.9.3 :
@@ -31,6 +33,8 @@ Les scripts `reference/author/build-levelN.mjs` fabriquent les cartes et vérifi
 ```sh
 npm test
 npm run validate
+node scripts/verify-design-constraints.mjs
+node scripts/audit-hard-finals.mjs
 node scripts/verify-ui-dom.mjs
 ```
 

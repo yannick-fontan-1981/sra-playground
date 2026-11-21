@@ -1,26 +1,27 @@
 {
   "spec": {
     "id": "ss13-08",
-    "title": "La ligne libre et le poids gardé",
+    "title": "Les deux retours de l’ancre",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~........~",
-      "~~~~~~~~~~~.....gg.~",
-      "~~~~~~~~~~~........~",
-      "~~~~~~~~~~~........~",
-      "~~~~~~~~#~~o.......~",
-      "~........~~........~",
-      "~.....#..~~........~",
-      "~....#m#.~~........~",
-      "~.Z...o..~~.....o..~",
+      "~~~~~~~~~~~~~~~~~..~",
+      "~~~~~~~~~~~....~~g.~",
+      "~~~~~~~~~~~.....~.g~",
+      "~~~~~~~~~~~.....~..~",
+      "~~~~~~~~~~~....~~#.~",
+      "~~~~~~~~#~~m...~~..~",
+      "~........~~....~~~~~",
+      "~.....#..~~....~~~~~",
+      "~....#m#.~~....~~~~~",
+      "~.Z...o..~~...o....~",
       "~.....T..~~........~",
       "~........~~........~",
-      "~........~~........~",
+      "~.......~~~........~",
       "~........~~~~~~~~.~~",
-      "~........~~~~~~~~.~~",
-      "~........#~~~~~~~~~~",
-      "~........~~~~~~~~~~~",
+      "~~~~~~~#.~~~~~~~~.~~",
+      "~~~~~~~#.#~~~~~~~~~~",
+      "~~~~~~~~#~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
       "~~~~~~~~~~~~~~~~~~~~"
     ],
     "facing": "S",
@@ -34,7 +35,7 @@
       },
       {
         "at": {
-          "x": 16,
+          "x": 14,
           "y": 6
         },
         "facing": "SW"
@@ -42,28 +43,132 @@
     ],
     "circuits": [
       {
-        "id": "arrivee",
+        "id": "ancre-vivante",
         "buttons": [
           {
-            "x": 16,
+            "x": 14,
+            "y": 8
+          },
+          {
+            "x": 14,
             "y": 10
           }
         ],
+        "color": 10
+      },
+      {
+        "id": "retour",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 7
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "dernier-miroir",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 12
+          }
+        ],
         "color": 14
+      },
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 2
+          }
+        ],
+        "color": 0
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 14
+        },
+        "circuit": "retour",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 6
+        },
+        "circuit": "presse",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 6
+        },
+        "circuit": "dernier-miroir",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 18,
+          "y": 6
+        },
+        "circuit": "retour",
+        "direction": "N",
+        "closedWhen": "pressed"
       }
     ],
     "platforms": [
       {
         "at": {
+          "x": 8,
+          "y": 13
+        },
+        "circuit": "ancre-vivante",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
           "x": 16,
           "y": 15
         },
-        "circuit": "arrivee",
+        "circuit": "ancre-vivante",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 6
+        },
+        "circuit": "ancre-vivante",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 12
+        },
+        "circuit": "retour",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 12
+        },
+        "circuit": "retour",
         "activeWhen": "pressed"
       }
     ]
   },
-  "commands": "DRDDDRULUUUURUUUCRUURRDCXRCUULUUUURCUUUUUUUUUUUU",
+  "commands": "DRDDRDULUUUURUUUCRUURDXCRCULUUUULLCUUULLLLULUUUURRDLULLDDDDDLLLLLDRURRRRRRULLUUURRURULUUURDRULLDDDDDDLDDUUUUUUUUXCURLCDDDDDDDDLCRDDDDDDDDLDDRRRRRRURUUURRRCDDDUUULURUCUCXUUURUUCDDRRDDRLCLCUURRRRRRUUUULCURRRRRRRUUU",
   "actions": [
     {
       "id": 2
@@ -78,10 +183,10 @@
       "id": 2
     },
     {
-      "id": 2
+      "id": 4
     },
     {
-      "id": 4
+      "id": 2
     },
     {
       "id": 1
@@ -133,33 +238,79 @@
       "id": 4
     },
     {
-      "id": 4
-    },
-    {
       "id": 2
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 24
-      }
     },
     {
       "id": 5
     },
     {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
       "id": 4
     },
     {
       "id": 6,
       "data": {
-        "x": 51,
-        "y": 30
+        "x": 45,
+        "y": 27
       }
     },
     {
       "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
     },
     {
       "id": 1
@@ -183,10 +334,453 @@
       "id": 4
     },
     {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
       "id": 6,
       "data": {
-        "x": 54,
-        "y": 48
+        "x": 36,
+        "y": 12
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 9
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 30
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
       }
     },
     {
@@ -196,7 +790,22 @@
       "id": 1
     },
     {
-      "id": 1
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 1
@@ -211,10 +820,38 @@
       "id": 1
     },
     {
-      "id": 1
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 24
+      }
     },
     {
       "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 1
@@ -227,39 +864,39 @@
     }
   ],
   "source": {
-    "piston": false,
+    "piston": true,
     "platform": true,
     "puzzle": 10,
-    "label": "Adaptation de Heroes and Water · énigme 10 · garder libre la ligne d’échange",
+    "label": "Adaptation de Heroes and Water · énigme 10 · préserver puis réemployer une ligne d’échange",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-10",
-    "objective": "Retirer une cible proche dangereuse, préparer la transposition lointaine, remplacer la commande par une caisse et utiliser la priorité des reflets pour transporter les deux héros sans retirer ce poids.",
+    "objective": "Préparer deux retours, conserver les bonnes ancres et choisir quels poids pourront être sacrifiés avant de réunir le duo sur la dernière rive.",
     "secondary": {
-      "label": "Heroes and Mirrors · énigme 5 · maintenir le poids en quittant par reflet",
+      "label": "Heroes and Mirrors · énigme 5 · conserver les miroirs comme poids",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5"
     }
   },
   "metrics": {
-    "actions": 48,
-    "selections": 4,
-    "thiefPulls": 2,
+    "actions": 212,
+    "selections": 14,
+    "thiefPulls": 30,
     "partnerMoves": 0,
-    "swaps": 2,
-    "partnerSwaps": 0,
+    "swaps": 5,
+    "partnerSwaps": 1,
     "bentSwaps": 1,
-    "monsterSwaps": 0,
-    "stoneMoves": 3,
-    "mirrorMoves": 1,
-    "reflections": 1,
-    "heroReflections": 2,
-    "pistonPushes": 0,
-    "platformsCreated": 0,
+    "monsterSwaps": 1,
+    "stoneMoves": 23,
+    "mirrorMoves": 12,
+    "reflections": 3,
+    "heroReflections": 4,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
     "monstersRemoved": 0,
     "blocked": 0,
     "deaths": 0
   },
   "stages": [
     {
-      "label": "Le Voleur retire la cible proche de la ligne du Magicien sans approcher le monstre",
+      "label": "La caisse proche quitte la ligne gardée : elle devra encore servir de cargaison.",
       "turn": 1,
       "heroes": [
         {
@@ -279,15 +916,11 @@
       ],
       "stones": [
         {
-          "x": 11,
-          "y": 6
-        },
-        {
           "x": 6,
           "y": 11
         },
         {
-          "x": 16,
+          "x": 14,
           "y": 10
         }
       ],
@@ -302,7 +935,7 @@
         },
         {
           "at": {
-            "x": 16,
+            "x": 14,
             "y": 6
           },
           "facing": "SW"
@@ -310,16 +943,23 @@
       ],
       "monsters": [
         {
+          "x": 11,
+          "y": 6
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
       }
     },
     {
-      "label": "Le Voleur décale son miroir pour libérer le rayon horizontal",
+      "label": "Le premier miroir est extrait de son angle, mais sa commande finale reste inaccessible.",
       "turn": 7,
       "heroes": [
         {
@@ -339,15 +979,11 @@
       ],
       "stones": [
         {
-          "x": 11,
-          "y": 6
-        },
-        {
           "x": 6,
           "y": 11
         },
         {
-          "x": 16,
+          "x": 14,
           "y": 10
         }
       ],
@@ -362,7 +998,7 @@
         },
         {
           "at": {
-            "x": 16,
+            "x": 14,
             "y": 6
           },
           "facing": "SW"
@@ -370,16 +1006,23 @@
       ],
       "monsters": [
         {
+          "x": 11,
+          "y": 6
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
       }
     },
     {
-      "label": "Le Voleur attend au seul rayon qui peut atteindre l’appui d’arrivée",
+      "label": "Le Voleur prépare la seule arrivée soutenue de son miroir.",
       "turn": 16,
       "heroes": [
         {
@@ -399,15 +1042,11 @@
       ],
       "stones": [
         {
-          "x": 11,
-          "y": 6
-        },
-        {
           "x": 6,
           "y": 11
         },
         {
-          "x": 16,
+          "x": 14,
           "y": 10
         }
       ],
@@ -422,84 +1061,31 @@
         },
         {
           "at": {
-            "x": 16,
+            "x": 14,
             "y": 6
           },
           "facing": "SW"
         }
       ],
       "monsters": [
-        {
-          "x": 6,
-          "y": 9
-        }
-      ],
-      "circuits": {
-        "arrivee": true
-      }
-    },
-    {
-      "label": "La ligne dégagée permet au Magicien d’atteindre la cible lointaine et de reprendre sa commande",
-      "turn": 18,
-      "heroes": [
-        {
-          "kind": "thief",
-          "at": {
-            "x": 8,
-            "y": 7
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 16,
-            "y": 10
-          }
-        }
-      ],
-      "stones": [
         {
           "x": 11,
           "y": 6
         },
         {
           "x": 6,
-          "y": 11
-        },
-        {
-          "x": 2,
-          "y": 10
-        }
-      ],
-      "supports": [],
-      "mirrors": [
-        {
-          "at": {
-            "x": 8,
-            "y": 15
-          },
-          "facing": "NE"
-        },
-        {
-          "at": {
-            "x": 16,
-            "y": 6
-          },
-          "facing": "SW"
-        }
-      ],
-      "monsters": [
-        {
-          "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
       }
     },
     {
-      "label": "Le rayon dévié échange la caisse de la rive droite avec le Magicien et garde la commande occupée",
+      "label": "Le Magicien réemploie l’ancre lointaine et installe le monstre vivant sur la commande profonde.",
       "turn": 19,
       "heroes": [
         {
@@ -519,10 +1105,6 @@
       ],
       "stones": [
         {
-          "x": 16,
-          "y": 10
-        },
-        {
           "x": 6,
           "y": 11
         },
@@ -542,7 +1124,7 @@
         },
         {
           "at": {
-            "x": 16,
+            "x": 14,
             "y": 6
           },
           "facing": "SW"
@@ -550,17 +1132,24 @@
       ],
       "monsters": [
         {
+          "x": 14,
+          "y": 10
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
       }
     },
     {
-      "label": "Le Magicien contourne la visée du miroir puis devient sa cible la plus proche",
-      "turn": 23,
+      "label": "Le Magicien devient la cible proche du miroir droit.",
+      "turn": 22,
       "heroes": [
         {
           "kind": "thief",
@@ -572,16 +1161,12 @@
         {
           "kind": "wizard",
           "at": {
-            "x": 13,
+            "x": 12,
             "y": 6
           }
         }
       ],
       "stones": [
-        {
-          "x": 16,
-          "y": 10
-        },
         {
           "x": 6,
           "y": 11
@@ -602,7 +1187,7 @@
         },
         {
           "at": {
-            "x": 16,
+            "x": 14,
             "y": 6
           },
           "facing": "SW"
@@ -610,254 +1195,1425 @@
       ],
       "monsters": [
         {
+          "x": 14,
+          "y": 10
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
       }
     },
     {
-      "label": "Les deux miroirs déplacent les héros; la caisse plus éloignée reste sur la commande de l’appui",
+      "label": "Le premier reflet coordonné transporte le duo et active l’appui au moment de l’arrivée.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": true,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le Voleur quitte l’appui temporaire ; le Magicien peut désormais le désactiver.",
       "turn": 25,
       "heroes": [
         {
           "kind": "thief",
           "at": {
-            "x": 16,
+            "x": 17,
             "y": 15
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 16,
+            "x": 14,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": true,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le miroir droit devient le poids du retour : le pont s’ouvre, mais le miroir gauche et la sortie sont verrouillés.",
+      "turn": 55,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": true,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "La caisse dégagée au début revient par le pont ; elle n’est pas encore sacrifiée à l’eau.",
+      "turn": 74,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": true,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le miroir du pont est récupéré et repositionné : le retour disparaît, sa future ligne de chargement apparaît.",
+      "turn": 93,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "La cargaison traverse l’emplacement de l’ancienne commande et rejoint le rayon du miroir déplacé.",
+      "turn": 112,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le second emploi du miroir droit charge la presse, sans déplacer le monstre plus éloigné.",
+      "turn": 113,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "La commande distante pousse latéralement la caisse dans l’eau : le premier appui final devient permanent.",
+      "turn": 116,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": true
+      }
+    },
+    {
+      "label": "Le Magicien libère la presse pour rendre le passage praticable.",
+      "turn": 117,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "L’ancienne caisse d’arrivée sert une deuxième fois d’ancre : le Magicien retourne à gauche et la caisse revient dans l’atelier.",
+      "turn": 138,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "L’échange entre partenaires restitue le Voleur à son miroir sans rouvrir le pont.",
+      "turn": 148,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le Magicien reprend temporairement les deux appuis pendant la dernière extraction.",
+      "turn": 154,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": true,
+        "retour": false,
+        "dernier-miroir": false,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le miroir gauche est repris, traverse l’appui temporaire puis devient le poids de la dernière porte.",
+      "turn": 165,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
             "y": 9
           }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
         }
       ],
       "stones": [
         {
-          "x": 16,
-          "y": 10
-        },
-        {
-          "x": 6,
-          "y": 11
-        },
-        {
-          "x": 2,
+          "x": 12,
           "y": 10
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
       "mirrors": [
         {
           "at": {
             "x": 8,
-            "y": 15
+            "y": 12
           },
           "facing": "NE"
         },
         {
           "at": {
-            "x": 16,
-            "y": 6
+            "x": 14,
+            "y": 4
           },
           "facing": "SW"
         }
       ],
       "monsters": [
         {
+          "x": 14,
+          "y": 10
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": true,
+        "retour": false,
+        "dernier-miroir": true,
+        "presse": false
       }
     },
     {
-      "label": "Le Voleur quitte l’appui hydraulique vers le quai solide",
-      "turn": 26,
+      "label": "Le Magicien choisit une distance de reflet sûre ; retirer la commande ne retire plus aucun poids engagé sur l’eau.",
+      "turn": 167,
       "heroes": [
         {
           "kind": "thief",
           "at": {
-            "x": 17,
-            "y": 15
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 16,
+            "x": 8,
             "y": 9
           }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
         }
       ],
       "stones": [
         {
-          "x": 16,
-          "y": 10
-        },
-        {
-          "x": 6,
-          "y": 11
-        },
-        {
-          "x": 2,
+          "x": 12,
           "y": 10
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
       "mirrors": [
         {
           "at": {
             "x": 8,
-            "y": 15
+            "y": 12
           },
           "facing": "NE"
         },
         {
           "at": {
-            "x": 16,
-            "y": 6
+            "x": 14,
+            "y": 4
           },
           "facing": "SW"
         }
       ],
       "monsters": [
         {
+          "x": 14,
+          "y": 10
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": true,
+        "presse": false
       }
     },
     {
-      "label": "Le Magicien rejoint la première destination en laissant le poids durable en place",
-      "turn": 35,
+      "label": "Le deuxième retour par les miroirs transporte les deux héros et conserve le monstre lointain.",
+      "turn": 169,
       "heroes": [
         {
           "kind": "thief",
           "at": {
-            "x": 17,
-            "y": 15
+            "x": 11,
+            "y": 12
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 16,
-            "y": 3
+            "x": 11,
+            "y": 4
           }
         }
       ],
       "stones": [
         {
-          "x": 16,
-          "y": 10
-        },
-        {
-          "x": 6,
-          "y": 11
-        },
-        {
-          "x": 2,
+          "x": 12,
           "y": 10
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
       "mirrors": [
         {
           "at": {
             "x": 8,
-            "y": 15
+            "y": 12
           },
           "facing": "NE"
         },
         {
           "at": {
-            "x": 16,
-            "y": 6
+            "x": 14,
+            "y": 4
           },
           "facing": "SW"
         }
       ],
       "monsters": [
         {
+          "x": 14,
+          "y": 10
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": false,
+        "retour": false,
+        "dernier-miroir": true,
+        "presse": false
       }
     },
     {
-      "label": "Le Voleur rejoint la deuxième destination après le transfert physique entre les rives",
-      "turn": 48,
+      "label": "Le Voleur remet l’ancienne ancre dans la ligne de remplacement de la dernière commande.",
+      "turn": 175,
       "heroes": [
         {
           "kind": "thief",
           "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": false,
+        "retour": true,
+        "dernier-miroir": true,
+        "presse": false
+      }
+    },
+    {
+      "label": "La caisse remplace enfin le Magicien : les deux poids durables autorisent le départ des deux héros.",
+      "turn": 184,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": true,
+        "retour": true,
+        "dernier-miroir": true,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le Magicien traverse l’appui immergé et la passerelle finale.",
+      "turn": 200,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
             "x": 17,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "ancre-vivante": true,
+        "retour": false,
+        "dernier-miroir": true,
+        "presse": false
+      }
+    },
+    {
+      "label": "Le Voleur rejoint la seconde destination ; tous les poids nécessaires restent en place.",
+      "turn": 212,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
             "y": 3
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 16,
-            "y": 3
+            "x": 17,
+            "y": 2
           }
         }
       ],
       "stones": [
         {
-          "x": 16,
-          "y": 10
-        },
-        {
-          "x": 6,
-          "y": 11
-        },
-        {
-          "x": 2,
-          "y": 10
+          "x": 14,
+          "y": 8
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 15,
+          "y": 6
+        }
+      ],
       "mirrors": [
         {
           "at": {
             "x": 8,
-            "y": 15
+            "y": 12
           },
           "facing": "NE"
         },
         {
           "at": {
-            "x": 16,
-            "y": 6
+            "x": 14,
+            "y": 4
           },
           "facing": "SW"
         }
       ],
       "monsters": [
         {
+          "x": 14,
+          "y": 10
+        },
+        {
           "x": 6,
           "y": 9
         }
       ],
       "circuits": {
-        "arrivee": true
+        "ancre-vivante": true,
+        "retour": false,
+        "dernier-miroir": true,
+        "presse": false
       }
     }
   ],
-  "adaptation": "Heroes and Water 10 fournit la contrainte de réorganiser les cibles pour conserver une ligne d’échange utile; Heroes and Mirrors 5 fournit le maintien d’un poids pendant le départ par reflet. SS13 compose une cible proche gardée par un monstre, une ancre lointaine sur commande, un échange à rayon dévié et deux miroirs activés ensemble. Le Magicien doit se placer plus près que la caisse sur le second miroir afin de laisser l’appui du Voleur actif. La caisse sous garde, la priorité proche de la série SS et cette géométrie sont des adaptations originales, sans revendication de reproduction exacte ni d’unicité de la solution."
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Heroes and Water 10 : une première cible peut condamner la ligne utile ; une ancre doit être conservée et réemployée.",
+      "Heroes and Mirrors 5 : un miroir sert à la fois au transport et au maintien d’une commande.",
+      "Heroes and Light 1 : une presse dépose latéralement une cargaison hors de portée de la traction."
+    ],
+    "changed": [
+      "Deux caisses, deux miroirs, deux monstres et quatre circuits forment une boucle entre deux rives et une sortie sans ancre initiale.",
+      "Le pont de retour interdit simultanément l’extraction du miroir gauche et l’accès final ; récupérer son miroir change donc les routes possibles.",
+      "Le premier transport et la dernière extraction utilisent la même commande à deux poids, d’abord occupée par le Magicien puis relayée par une caisse.",
+      "La priorité proche des reflets, la traction unitaire et les monstres stationnaires sont les règles de SS13."
+    ],
+    "sourceReading": "Heroes and Water 10 demande de préserver un échange utile malgré ses premières cibles. Heroes and Mirrors 5 associe départ par reflet et poids conservé. Heroes and Light 1 fournit le dépôt par presse ; aucune géométrie source n’est reproduite exactement et aucun pouvoir absent du duo n’est ajouté.",
+    "additionalSources": [
+      {
+        "label": "Heroes and Light · énigme 1",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1"
+      }
+    ],
+    "localCounterfactuals": [
+      {
+        "label": "near-target-is-fatal",
+        "afterTurn": 0,
+        "commands": "CR",
+        "meaning": "Depuis le départ, le premier échange vers l’est atteint la caisse gardée ; il ne saute pas cette cible proche.",
+        "failed": false,
+        "dead": true,
+        "supports": [],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 6
+          },
+          {
+            "x": 6,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "label": "early-mirror-extraction-refused",
+        "afterTurn": 7,
+        "commands": "U",
+        "meaning": "L’appui de la seconde traction est encore retiré : le miroir ne peut pas être monté immédiatement jusqu’à sa commande finale.",
+        "failed": true,
+        "dead": false,
+        "supports": [],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 6
+          },
+          {
+            "x": 6,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "label": "arrival-weight-cannot-leave-first",
+        "afterTurn": 23,
+        "commands": "L",
+        "meaning": "Si le Magicien quitte sa commande avant que le Voleur quitte son appui, le retrait hydraulique tue le Voleur.",
+        "failed": false,
+        "dead": true,
+        "supports": [],
+        "monsters": [
+          {
+            "x": 14,
+            "y": 10
+          },
+          {
+            "x": 6,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "label": "mirror-is-not-a-free-final-weight",
+        "afterTurn": 51,
+        "commands": "D",
+        "meaning": "Tirer le miroir jusqu’à la commande du Magicien est une action effective, mais place le Voleur contre le monstre : la substitution immédiate n’est pas une solution.",
+        "failed": false,
+        "dead": true,
+        "supports": [],
+        "monsters": [
+          {
+            "x": 14,
+            "y": 10
+          },
+          {
+            "x": 6,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "label": "premature-bridge-immersion",
+        "afterTurn": 72,
+        "commands": "UUUURRUR",
+        "meaning": "Récupérer le miroir pendant que la caisse est encore sur le pont consomme cette caisse en appui fixe au mauvais endroit ; la cargaison ne peut plus être tirée vers la presse.",
+        "supports": [
+          {
+            "x": 10,
+            "y": 12
+          }
+        ],
+        "dead": false
+      },
+      {
+        "label": "extraction-weight-cannot-leave-first",
+        "afterTurn": 159,
+        "commands": "CL",
+        "meaning": "Pendant la reprise du miroir, le Voleur occupe encore l’appui provisoire : le Magicien doit maintenir sa commande jusqu’à la fin des trois tractions.",
+        "failed": false,
+        "dead": true,
+        "supports": [
+          {
+            "x": 15,
+            "y": 6
+          }
+        ],
+        "monsters": [
+          {
+            "x": 14,
+            "y": 10
+          },
+          {
+            "x": 6,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "label": "wrong-second-reflection-distance",
+        "afterTurn": 165,
+        "commands": "X",
+        "meaning": "Le Magicien est déjà plus proche que le monstre, mais sa distance de quatre le ferait encore tomber dans l’eau ; le placement exact compte une seconde fois.",
+        "failed": false,
+        "dead": true,
+        "supports": [
+          {
+            "x": 15,
+            "y": 6
+          }
+        ],
+        "monsters": [
+          {
+            "x": 14,
+            "y": 10
+          },
+          {
+            "x": 6,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "label": "unprotected-final-reflection-loses-monster",
+        "afterTurn": 167,
+        "commands": "LX",
+        "meaning": "Quitter entièrement le rayon avant le reflet emporte le monstre-poids dans l’eau. Le reflet est valide, mais détruit cette ressource vivante.",
+        "failed": false,
+        "dead": false,
+        "supports": [
+          {
+            "x": 15,
+            "y": 6
+          }
+        ],
+        "monsters": [
+          {
+            "x": 6,
+            "y": 9
+          }
+        ]
+      }
+    ],
+    "proofScope": "Ces vérifications exécutent des branches locales sur la route témoin. Elles ne prouvent ni l’unicité de la solution, ni une longueur minimale, ni la nécessité globale de chaque étape de cette route.",
+    "requiredInWitness": [
+      "near-target-clearance",
+      "bent-monster-swap",
+      "living-weight",
+      "two-coordinated-transfers",
+      "mirror-recovery",
+      "opposed-return-gates",
+      "cargo-return",
+      "lateral-piston",
+      "delayed-immersion",
+      "anchor-recovery",
+      "partner-swap",
+      "temporary-hydraulic-extraction",
+      "permanent-weight-relay"
+    ]
+  }
 }

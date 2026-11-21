@@ -10,8 +10,8 @@ Les sources sont les guides français [North](https://sinkingstarwalkthrough.com
 | 4 | Le miroir reste à quai | Heroes and Mirrors 4 et 5 | 32 |
 | 5 | Le gardien devenu poids | Heroes 2: Monsters 15 | 44 |
 | 6 | La presse délivre le tireur | Heroes and Light 1 et 2 | 62 |
-| 7 | Les deux diagonales de l’ancre | Heroes and Mirrors 6 | 49 |
-| 8 | La ligne libre et le poids gardé | Heroes and Water 10 + Heroes and Mirrors 5 | 48 |
+| 7 | L’amarre et les trois diagonales | Heroes and Mirrors 6 ; Water 7 et 10 | 231 |
+| 8 | Les deux retours de l’ancre | Heroes and Water 10 + Heroes and Mirrors 5 ; presse inspirée de Light 1 | 212 |
 
 Ces longueurs incluent les sélections et ne sont ni des minima ni une échelle absolue de difficulté. La progression passe d’un atelier guidé à des contraintes de placement et de maintien de plusieurs relations simultanées.
 
@@ -55,24 +55,34 @@ La seconde presse dépose un poids dans une alcôve bordée de deux murs et d’
 
 La salle reprend les dépôts inaccessibles par traction et les commandes distantes de [Light 1 et 2](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/). La première version permettait au Voleur d’activer lui-même son appui : le raccordement a été corrigé et le refus du pas volontaire vérifié. Le rôle de chaque presse est démontré dans le témoin ; aucune nécessité globale de la première presse n’est affirmée. Dans ce parcours, le Magicien sert de partenaire de commande et ne lance pas de sort.
 
-## 7. Les deux diagonales de l’ancre
+## 7. L’amarre et les trois diagonales
 
-Le premier déplacement du miroir corrige la diagonale d’arrivée d’une caisse. Sans ce déplacement, elle atterrit sur le sol ; après lui, elle comble le trou utile. Le Voleur transporte ensuite le même miroir sur le passage nouvellement construit.
+Quatre rives forment une boucle. Trois caisses construisent les passages ; la quatrième reste d’abord au sud comme poids d’amarre. Cette commande entretient les accès nécessaires au transport du miroir, mais ferme une porte de la chambre finale. La relâcher inverse les liaisons : le raccourci nord disparaît et le passage du chantier vers l’est apparaît.
 
-Depuis la rive intermédiaire, le Magicien peut viser la caisse de la dernière île, dont la visée était coupée par un mur depuis le départ. L’échange place cette caisse sur le nouvel axe du miroir. Un second reflet crée le deuxième appui et permet de réunir les héros.
+Le même miroir doit être placé sur trois postes. Le premier reflet crée l’appui qui permet de transporter le miroir jusqu’au chantier. Un échange à rayon coudé importe ensuite une caisse de la rive nord. Son reflet complète une traversée qui dépend encore de la commande sud. Le Magicien prépare la dernière caisse pendant que le Voleur fait monter le miroir. La troisième configuration construit le passage vers la rive est.
 
-Cette succession conserve la relation miroir–diagonale–trou de [Mirrors 6](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6), avec une géométrie originale à trois rives.
+La sortie demande deux poids éloignés : une caisse dans l’alcôve nord et le miroir transporté sur la commande est. La caisse sud peut alors être récupérée ; il faut dégager sa ligne pour que le Magicien quitte son ancienne position sans la rééchanger. Cette récupération retire les premières passerelles et oblige à gérer la nouvelle circulation autour de la boucle.
 
-## 8. La ligne libre et le poids gardé
+La presse est d’abord tenue ouverte pour une visée, puis sert au déplacement conjoint de la caisse et du Voleur. Au poste de chargement, le prochain pas volontaire du Voleur arriverait sur une plateforme inactive. Le relâchement de la commande ferme la presse et déploie cette arrivée pendant la poussée. Le Magicien peut ensuite revenir par l’est et envoyer la caisse dans l’alcôve finale.
 
-Une caisse proche masque l’ancre lointaine du Magicien. Un sort immédiat atteint cette mauvaise cible et l’expose au monstre voisin. Le Voleur retire cette caisse de l’axe, puis le Magicien peut utiliser l’ancre lointaine.
+Le réemploi du miroir et le changement de diagonale adaptent [Mirrors 6](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6). Les échanges réciproques, le transfert physique et la conservation des ressources s’appuient aussi sur [Water 7 et 10](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/). La boucle, les circuits opposés et la presse sont une composition propre à SS13.
 
-Un échange par rayon dévié remplace ensuite le Magicien par une caisse sur la commande. Le Magicien se rapproche du second miroir pour avoir priorité sur ce poids lors du reflet. Deux reflets simultanés transportent les deux héros en laissant la caisse maintenir l’appui du Voleur.
+La revue a rejeté un premier prototype : une caisse du nord pouvait ouvrir seule la sortie en 89 entrées, sans le dernier passage ni la récupération du poids. Elle a aussi montré qu’une simple traction remplaçait la première version de la presse. La commande finale à deux poids, la porte liée à l’amarre et l’arrivée hydraulique ont été ajoutées pour traiter ces contournements ; les régressions sont consignées dans l’audit des finales.
 
-La ligne à conserver de [Water 10](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-10) et le poids à laisser en place de [Mirrors 5](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5) deviennent ici une synthèse de traction, première cible, rayon dévié, priorité de reflet et commande hydraulique.
+## 8. Les deux retours de l’ancre
+
+Le final dispose de deux caisses, deux miroirs et deux monstres. Ses quatre circuits relient le transfert initial, le retour au chantier, l’extraction du miroir gauche et la sortie. Les commandes ont des effets opposés : ouvrir le pont de retour ferme le passage du miroir gauche et une porte de la chambre finale.
+
+La caisse proche masque toujours la première cible utile. Après son dégagement, le Magicien utilise la caisse d’arrivée comme ancre et la renvoie sur la rive de départ. Un échange dévié installe le monstre sur l’une des deux commandes hydrauliques. Ce poids vivant reste nécessaire au parcours : les héros ne peuvent pas se contenter de vider l’atelier de ses dangers.
+
+Le miroir droit change de fonction : il assure un transfert, maintient le pont pendant le retour de la cargaison, puis est récupéré et déplacé pour charger une presse latérale. Cette presse transforme la première caisse en appui permanent de la sortie. L’immersion intervient après son transport et son alignement ; cette caisse ne peut plus servir de cible après avoir coulé.
+
+La seconde caisse est réemployée comme ancre pour ramener le Magicien à gauche. Un échange entre partenaires restitue le Voleur à son miroir. Le Magicien maintient temporairement l’hydraulique pendant que le Voleur extrait ce miroir et le dépose sur la dernière commande. Un nouveau transfert coordonné ramène les héros vers la sortie. La caisse d’ancrage remplace enfin le Magicien sur le circuit à deux poids, pour permettre le départ des deux partenaires.
+
+La salle compose la ligne d’échange à préserver de [Water 10](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-10), le miroir servant aussi de poids de [Mirrors 5](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5) et le dépôt latéral de [Light 1](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1). La géométrie, les quatre circuits et les deux retours sont propres à SS13.
 
 ## Preuves et limites
 
-`validation/levels-report.json` rejoue les huit témoins, vérifie les états intermédiaires, les images et durées, les annulations de fin de salle et l’exclusion des itinéraires du bundle. Les contrôles locaux de conception sont documentés séparément.
+`validation/levels-report.json` rejoue les huit témoins, vérifie les états intermédiaires, les images et durées, les annulations de fin de salle et l’exclusion des itinéraires du bundle. Les contrôles locaux des salles 4–6 sont dans `validation/design-constraints-report.json`. La comparaison des finales avant/après, les contrefactuels et les limites des recherches de raccourcis sont dans `validation/hard-finals-report.json`.
 
 Une victoire établit la solvabilité. L’utilisation d’une mécanique dans un témoin ne prouve pas qu’elle est nécessaire à toute solution. Les contraintes reprises sont expliquées concrètement ; aucun témoin n’est présenté comme optimal, unique ou produit par SRA.

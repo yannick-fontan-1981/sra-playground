@@ -68,3 +68,11 @@ Le Voleur commence dans une cellule isolée qui maintient le passage nord. Le Ma
 Une caisse prend la place du Magicien sur la commande hydraulique qui permet au Voleur de changer de côté par reflet. Le Voleur tracte ensuite le miroir sur une commande ouvrant le passage du Magicien. Son dernier reflet laisse ce poids en place. Le parcours validé comporte 32 entrées, quatre tractions de miroir, trois échanges de caisses et deux reflets, sans refus ni mort.
 
 Le script d’auteur contrôle deux suites locales : un pas volontaire vers l’est après la pose du miroir produit une traction et libère le bouton ; le départ par reflet déplace le héros seul et conserve ce bouton. Il s’agit d’une vérification causale locale, sans affirmation d’unicité de la solution.
+
+### Révision 0.2.0 — finales 7 et 8
+
+La révision conserve les guides et le moteur, mais reconstruit les deux dernières géométries. Le niveau 7 développe le réemploi d’un miroir de Mirrors 6 en une boucle de traversées avec récupération d’un poids. Water 7 et 10 servent de références complémentaires pour le transfert physique, les échanges réciproques et les ressources à préserver. La presse et les liaisons commandées opposées sont des ajouts de conception SS13.
+
+Le niveau 8 conserve Water 10 et Mirrors 5, et cite désormais Light 1 pour son dépôt latéral par presse. Ses deux caisses changent de fonction : l’une devient un appui après transport ; l’autre sert d’ancre aller, d’ancre retour puis de poids hydraulique. Les deux miroirs servent au transport et aux commandes, avec récupération du miroir du pont. Les quatre circuits et les portes qui ferment quand le pont s’ouvre sont une recomposition originale.
+
+`validation/hard-finals-report.json` compare les versions avec le commit de référence et documente les essais de raccourcis. Les mesures distinguent les déplacements des manipulations ; une route longue ne suffit pas à établir la difficulté. Les erreurs d’ordre sont vérifiées à des états précis, sans prétention d’exhaustivité ou d’optimalité.

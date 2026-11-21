@@ -64,22 +64,26 @@ export const LEVEL_INFO=[
     }
   },
   {
-    "piston": false,
-    "platform": false,
+    "piston": true,
+    "platform": true,
     "puzzle": 6,
-    "label": "Adaptation de Heroes and Mirrors · énigme 6 · déplacer la diagonale pour combler les trous",
+    "label": "Adaptation de Heroes and Mirrors · énigme 6 · une diagonale mobile, une ressource à conserver",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-6",
-    "objective": "Déplacer le même miroir pour créer deux appuis successifs; le premier passage permet de préparer un échange avec la caisse de la dernière île."
+    "objective": "Ouvrir la chambre des deux destinations en organisant trois passages et le retour des ressources. Chaque caisse engagée change les possibilités restantes.",
+    "secondary": {
+      "label": "Heroes and Water · énigmes 7 et 10 · conserver les relais et l’ordre des caisses",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/"
+    }
   },
   {
-    "piston": false,
+    "piston": true,
     "platform": true,
     "puzzle": 10,
-    "label": "Adaptation de Heroes and Water · énigme 10 · garder libre la ligne d’échange",
+    "label": "Adaptation de Heroes and Water · énigme 10 · préserver puis réemployer une ligne d’échange",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-10",
-    "objective": "Retirer une cible proche dangereuse, préparer la transposition lointaine, remplacer la commande par une caisse et utiliser la priorité des reflets pour transporter les deux héros sans retirer ce poids.",
+    "objective": "Préparer deux retours, conserver les bonnes ancres et choisir quels poids pourront être sacrifiés avant de réunir le duo sur la dernière rive.",
     "secondary": {
-      "label": "Heroes and Mirrors · énigme 5 · maintenir le poids en quittant par reflet",
+      "label": "Heroes and Mirrors · énigme 5 · conserver les miroirs comme poids",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5"
     }
   }

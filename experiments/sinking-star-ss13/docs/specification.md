@@ -1,5 +1,7 @@
 # SS13 — Contrat 0.1.0
 
+Ce contrat moteur reste celui de la campagne **0.2.0**, qui reconstruit les niveaux 7 et 8 sans modifier les règles, les commandes ou les observations publiques.
+
 ## Duo, commandes et objectif
 
 **L’Ancre Verte** associe le Voleur vert (`thief`, couleur 14, symbole de carte `T`) et le Magicien violet (`wizard`, couleur 15, symbole `Z`). Le Voleur est sélectionné initialement. Chaque salle possède deux destinations ; les deux héros doivent les occuper simultanément. Un héros arrivé reste jouable.

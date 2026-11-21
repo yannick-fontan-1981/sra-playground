@@ -46,33 +46,7 @@ check('l6-press-opens-its-own-forced-landing',6,
  {voluntaryFromTurn:l6.stages[0].turn,voluntary:outcome(l6,voluntary),landingDevice,forced:{action:forced.action,phases:forced.phases.map(p=>p.kind),moves:piston.moves,
  landingActiveBefore:platformActive(l6.world,forced.before,landingIndex),landingActiveAfter:platformActive(l6.world,forced.after,landingIndex)}});
 
-const l7=load(7),unshifted=act(l7,initialState(l7.world),'X'),shifted=act(l7,stage(l7,0),'X');
-check('l7-mirror-offset-changes-water-landing',7,
- 'Avant décalage, le reflet laisse la caisse sur le sol; après décalage, il crée le premier appui dans l’eau. Le parcours en crée ensuite un second.',
- good(unshifted)&&good(shifted)&&unshifted.state.supports.length===0&&shifted.state.supports.length===1&&stage(l7,6).supports.length===2,
- {beforeOffset:outcome(l7,unshifted),afterOffset:outcome(l7,shifted),secondSupportTurn:l7.stages[6].turn,secondSupports:stage(l7,6).supports});
-
-const l8=load(8),mage=act(l8,initialState(l8.world),'C').state,unsafeCast=act(l8,mage,'R');
-check('l8-near-target-is-unsafe-before-thief-clears-it',8,
- 'L’échange initial vers l’est vise la caisse proche gardée et tue le Magicien; le parcours retire cette caisse avant son échange lointain.',
- !unsafeCast.state.failed&&unsafeCast.state.dead&&unsafeCast.phases.some(p=>p.kind==='swap')&&unsafeCast.phases.some(p=>p.kind==='combat'),
- {prematureCast:outcome(l8,unsafeCast),clearedLineTurn:l8.stages[0].turn,safeFarExchangeTurn:l8.stages[3].turn});
-const early=act(l8,stage(l8,3),'X');
-check('l8-reflection-before-weight-handoff-is-fatal',8,
- 'Refléter avant que la caisse relève le Magicien retire la commande et fait disparaître l’appui d’arrivée du Voleur.',
- !early.state.failed&&early.state.dead&&!circuitPressed(l8.world,early.state,'arrivee'),
- {fromTurn:l8.stages[3].turn,result:outcome(l8,early)});
-const farther=act(l8,stage(l8,4),'X');
-check('l8-weight-handoff-alone-is-insufficient',8,
- 'Après le remplacement du poids mais avant le rapprochement du Magicien, le miroir déplace la caisse de commande et l’arrivée du Voleur reste fatale.',
- !farther.state.failed&&farther.state.dead&&!circuitPressed(l8.world,farther.state,'arrivee')&&moved(farther,'stone').length===1,
- {fromTurn:l8.stages[4].turn,result:outcome(l8,farther)});
-const ready=act(l8,stage(l8,5),'X');
-check('l8-prepared-priority-moves-two-heroes-keeps-weight',8,
- 'Lorsque le Magicien devient la cible la plus proche, les deux miroirs déplacent les deux héros et conservent la caisse sur la commande.',
- good(ready)&&moved(ready,'hero').length===2&&moved(ready,'stone').length===0&&circuitPressed(l8.world,ready.state,'arrivee'),
- {fromTurn:l8.stages[5].turn,result:outcome(l8,ready)});
-
+// The rebuilt final rooms are checked independently by audit-hard-finals.mjs.
 const report={schemaVersion:1,scope:'Local counterfactuals at documented author-route states; no solver search.',
  limitations:['These checks do not prove global necessity, uniqueness or optimality of any solution.','Author routes and this report are validation-only and are not agent observations.'],
  sources,passed:checks.length,total:checks.length,checks};

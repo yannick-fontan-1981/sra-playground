@@ -1,7 +1,7 @@
 {
   "success": true,
-  "htmlSha256": "5aa93541831a66053b7fd28cee3b6fb4672c5c5873bdcb7a8120ebad6d41932c",
-  "scope": "focused-ui-and-tutorial",
+  "htmlSha256": "d645b075d54d59a9ebdd12ca919f3814c3f5f721ee227c3e7c04d1f0de4dccfd",
+  "scope": "focused-ui-and-full-campaign",
   "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
   "visualBrowserTest": false,
   "checks": [
@@ -16,7 +16,8 @@
     "Defeat waits for the final combat frame and its Undo restores the live room.",
     "VICTORY appears after the final frame and allows Undo or Restart.",
     "All eight actual rooms expose two heroes, two goals, both source links and contextual help.",
-    "The authored level1 route earns all fourteen discoveries from displayed public pixels."
+    "The authored level1 route earns all fourteen discoveries from displayed public pixels.",
+    "All eight actual rooms, including the rebuilt finals, win through compiled HTML inputs with every frame and duration checked; each completion is undone and replayed."
   ],
   "roleCoverage": [
     {
@@ -227,6 +228,64 @@
     "repeatedLoop": true,
     "undo": true
   },
+  "campaignCoverage": [
+    {
+      "level": 1,
+      "title": "L’atelier de l’ancre verte",
+      "actions": 77,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 2,
+      "title": "Une place de plus sur l’autre rive",
+      "actions": 36,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 3,
+      "title": "La cellule et les trois relèves",
+      "actions": 87,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 4,
+      "title": "Le miroir reste à quai",
+      "actions": 32,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 5,
+      "title": "Le gardien devenu poids",
+      "actions": 44,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 6,
+      "title": "La presse délivre le tireur",
+      "actions": 62,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 7,
+      "title": "L’amarre et les trois diagonales",
+      "actions": 231,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 8,
+      "title": "Les deux retours de l’ancre",
+      "actions": 212,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    }
+  ],
   "tutorialCoverage": {
     "level": 1,
     "actions": 77,
