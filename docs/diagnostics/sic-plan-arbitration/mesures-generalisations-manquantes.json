@@ -13133,6 +13133,68 @@
       "payoff56-colm-upper.json": "a7f4bec8dc79491bb9e0434ba874093e43c2ab68cc03e200de3ef3444c48f0d1"
     },
     "custom4RunsForThisStudy": 0,
-    "ss09L2Used": false
+    "ss09L2Used": false,
+    "subsequentUse": {
+      "preparedCases": 12,
+      "withPriorMatchingContext": 1,
+      "withHypotheses": 1,
+      "testedOperations": 2,
+      "predictedChangesConfirmed": 1,
+      "predictedChangesLostUnderEveryControl": 0,
+      "officialWins": 0,
+      "casesWithHypotheses": [
+        {
+          "code": "COLM",
+          "level": 3,
+          "prefix": 16,
+          "a": "ACTION4",
+          "b": "ACTION4",
+          "c": "ACTION5",
+          "coverage": {
+            "isolatedSites": 3,
+            "equalContexts": 6,
+            "changedContexts": 6
+          },
+          "tests": [
+            {
+              "input": "ACTION3",
+              "fromSites": 1,
+              "unchangedMatches": 0,
+              "full": {
+                "win": false,
+                "matched": true
+              },
+              "controlsAvailable": true,
+              "matchingPreparations": [
+                [
+                  "ACTION4",
+                  "ACTION4"
+                ]
+              ],
+              "controlsMatched": true,
+              "controlsWon": false
+            },
+            {
+              "input": "ACTION2",
+              "fromSites": 1,
+              "unchangedMatches": 0,
+              "full": {
+                "win": false,
+                "matched": false
+              },
+              "controlsAvailable": true,
+              "matchingPreparations": [],
+              "controlsMatched": false,
+              "controlsWon": false
+            }
+          ]
+        }
+      ],
+      "localEvidenceSHA256": {
+        "reuse56-0.json": "e1d62f2abad91728405a801bb3f9c6210ca2cc1f53b41d55a84d6a24148b6629",
+        "reuse56-3.json": "fc41d7c26580435203a2cc0611a184df1e08aa59a8a4fbb680f2a8c7d71d2b0b",
+        "reuse56-colm-upper.json": "7dd68fa2072cb3d93981aa5d8c503fdea3b336e6e5c27a76b8a2e626aa56b50f"
+      }
+    }
   }
 }
