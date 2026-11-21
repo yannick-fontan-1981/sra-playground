@@ -55,7 +55,9 @@ try {
     assert.ok(paints.every(paint => paint.victoryHidden && paint.defeatHidden));
   };
   const visit = async level => {
-    assert.equal((await page.goto(origin + link(level))).status(), 200);
+    const url = origin + link(level);
+    const response = page.url() === url ? await page.reload() : await page.goto(url);
+    assert.equal(response?.status(), 200, url);
     ref.restart();
     const expected = level ? ref.selectLevel(level) : ref.observe();
     await settled(1, expected);
