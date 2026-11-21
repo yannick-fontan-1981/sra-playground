@@ -1,0 +1,158 @@
+{
+  "sourceV38": {
+    "verified": 100,
+    "wins": 100,
+    "unchangedFromV34": 96,
+    "changes": [
+      {
+        "code": "SPOR",
+        "actions": 14,
+        "won": true
+      },
+      {
+        "code": "UPST",
+        "actions": 57,
+        "won": true
+      },
+      {
+        "code": "CATR",
+        "actions": 32,
+        "won": true
+      },
+      {
+        "code": "CONN",
+        "actions": 29,
+        "won": true
+      }
+    ]
+  },
+  "pairedMovements": {
+    "summary": {
+      "episodes": 87,
+      "withExperiments": 4,
+      "forks": 14,
+      "completed": 1,
+      "conversions": []
+    },
+    "probes": [
+      {
+        "code": "FITE",
+        "level": 1,
+        "initialWin": true,
+        "forks": 1,
+        "scores": 1
+      },
+      {
+        "code": "ESCT",
+        "level": 1,
+        "initialWin": true,
+        "forks": 1,
+        "scores": 0
+      },
+      {
+        "code": "GABA",
+        "level": 1,
+        "initialWin": true,
+        "forks": 10,
+        "scores": 0
+      },
+      {
+        "code": "GABA",
+        "level": 5,
+        "initialWin": false,
+        "forks": 2,
+        "scores": 0
+      }
+    ]
+  },
+  "substitutedControls": {
+    "development": {
+      "episodes": 74,
+      "origins": 172,
+      "redirected": 100,
+      "enabled": 14,
+      "converted": []
+    },
+    "upper": {
+      "episodes": 23,
+      "origins": 107,
+      "redirected": 40,
+      "enabled": 4,
+      "converted": []
+    }
+  },
+  "coldV38": [
+    {
+      "code": "SS01",
+      "actions": 44,
+      "won": true,
+      "reason": "target_levels_completed",
+      "configurationForecasts": 0,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS02",
+      "actions": 326,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "configurationForecasts": 0,
+      "tapeDigest": "52c9e6a165ee64a76298e6120dc06b0ba5f65435c0c18ae767f01aa516909a8b"
+    },
+    {
+      "code": "SS03",
+      "actions": 493,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "configurationForecasts": 1,
+      "tapeDigest": "26c6dbcf1152ea6872914277ea046b5e23075aefcc8a99abbff377b701206621"
+    },
+    {
+      "code": "SS04",
+      "actions": 60,
+      "won": true,
+      "reason": "target_levels_completed",
+      "configurationForecasts": 0,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    },
+    {
+      "code": "SS05",
+      "actions": 253,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "configurationForecasts": 0,
+      "tapeDigest": "fb49180890b0de8be39017b39f1fe0fd16d304412083e4872be1610e5ea4c22c"
+    },
+    {
+      "code": "SS06",
+      "actions": 215,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "configurationForecasts": 2,
+      "tapeDigest": "37491bc028206274e66b1a69fc952c07327a0e2546f56c16c6b8e21eac4b8c8e"
+    },
+    {
+      "code": "SS07",
+      "actions": 5,
+      "won": false,
+      "reason": "native_game_over",
+      "configurationForecasts": 0,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+    },
+    {
+      "code": "SS08",
+      "actions": 490,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "configurationForecasts": 0,
+      "tapeDigest": "56e8f68588549593741f20382eae2bd8adee3a301eee8d55bb8b087f47d71944"
+    },
+    {
+      "code": "SS10",
+      "actions": 425,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "configurationForecasts": 3,
+      "tapeDigest": "a0984b595c000831e296ad5b2b70048589a266014277227b3470176045c2d281"
+    }
+  ]
+}
