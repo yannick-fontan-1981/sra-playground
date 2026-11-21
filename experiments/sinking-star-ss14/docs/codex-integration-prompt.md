@@ -10,6 +10,8 @@ Le laboratoire est `experiments/sinking-star-ss14/`. Lis son `README.md`, `docs/
 
 Réutilise le moteur `src/core.ts`, les huit cartes `src/levels.ts`, leurs métadonnées `src/level-info.ts` et le tutoriel `src/tutorial.ts`. Inspecte le raccordement natif actuel des autres jeux SS. Adapte le catalogue, le dispatcher, l’interface et les tests Custom 4 selon la structure présente dans `main`.
 
+Prendre au minimum la révision 0.1.1 : préserver le bouton violet de L8 sur fond gris avec son plus rose, et la séparation entre le bouton bleu en (8,3) et la presse violette en (13,8) de L6. Le centre de cette presse est noir fermé et gris ouvert ; aucun bleu ne doit apparaître dans son glyphe.
+
 ## Travail à réaliser
 
 1. Ajouter l’adaptateur natif, l’entrée de catalogue Custom 4, la vignette, la sélection et le lien direct SS14. Garder les huit niveaux dans leur ordre, tutoriel en premier, puis les deux finales de conservation et de réemploi des ressources.

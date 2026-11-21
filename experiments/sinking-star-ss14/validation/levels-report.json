@@ -1,6 +1,6 @@
 {
   "game": "SS14",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "campaignSearch": false,
   "scope": "Eight authored routes, public observations, animation contracts and tutorial coverage",
   "levels": [
@@ -123,7 +123,7 @@
       "solved": true,
       "mapSha256": "6ffa55e4a59098833b9e01be582ede994dbbf0f1e235503eb9b396029411f042",
       "witnessSha256": "abe4c693fe0c49e4090003938dda3583d7da81d8e9800452a4d44da922a5318b",
-      "observationsSha256": "539a127648513da8d6b202fce9633b961720dc264552c1a780a8a78f3f138059"
+      "observationsSha256": "93b90b3e4192e285152bb8529b7464564fa0391e71ae903e3a420af645359370"
     },
     {
       "level": 3,
@@ -184,7 +184,7 @@
       "solved": true,
       "mapSha256": "ddf76f7de9eba0acf9f379213a7476ddefe1ebbb57721d09ea89e91ccfdb2861",
       "witnessSha256": "93c5801d0854f9a3b67d07dcc81f56ffebef3123ecf34377965e3b07f7f8937e",
-      "observationsSha256": "c9b1b46cf29b1c7fec17cd48f85fae3ac8e98b5d25e7b1c0255eaadfa280148d"
+      "observationsSha256": "1db571de5f93cf80f7f4f3518f3b117b504d74cf882de84964ddaef312596d9f"
     },
     {
       "level": 4,
@@ -245,7 +245,7 @@
       "solved": true,
       "mapSha256": "359872d5c3375733dea19a09428ad783c070c25e981a2d9a3f698ae1501c76a6",
       "witnessSha256": "5040f94694ded7e04510bef7a361938b0baf4e516b0371ed4a7ed332bbc5a840",
-      "observationsSha256": "3211c6bb6ade33b0d51e2a098f4500764c40ae038f7a6bd453d77b14a597a35e"
+      "observationsSha256": "a97b462063be377e2f7788a48fc425590d84b69ff7b9faeeb4299b2caed54f27"
     },
     {
       "level": 5,
@@ -306,7 +306,7 @@
       "solved": true,
       "mapSha256": "d2b87651ab85002a42f07dc7d3a846e389cadf5a56fd628cb3f6e83c3e72b069",
       "witnessSha256": "d086b0dcbdc1b0d5bf8c5b302373805523d477e9e21b7885c87b628bc023a642",
-      "observationsSha256": "848e0d6fc332d7c6bdd3e26d305b69622c666a27490167ac7ffca7ac60eb65be"
+      "observationsSha256": "ba674c33dec89745ee04b5df8610d6eb41e6ef7270dd5e6a5de797930999993e"
     },
     {
       "level": 6,
@@ -318,7 +318,7 @@
         "puzzle": 1,
         "label": "Adaptation de Heroes and Light · énigme 1 · dépôts par presses orientées",
         "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1",
-        "objective": "Créer les traversées par les presses, conduire le miroir entre leurs axes et dégager la porte sans emporter les appuis.",
+        "objective": "Créer les traversées par les presses, maintenir le quai avec le Barde et conduire le miroir sans emporter les appuis.",
         "secondary": {
           "label": "Heroes and Light · énigme 41 · butée, commande et départ forcé",
           "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-41"
@@ -359,15 +359,15 @@
       "mirrorsDestroyed": 0,
       "cratesCrushed": 0,
       "simultaneousHeroReflections": 0,
-      "hydraulicChanges": 5,
-      "frames": 335,
+      "hydraulicChanges": 2,
+      "frames": 326,
       "maxFrames": 8,
       "recordedStages": 14,
       "completionUndo": true,
       "solved": true,
-      "mapSha256": "1369af4a0c504a91fa90d3fbc6940803ea995ada8504b77c2b2d34a36ba310dc",
+      "mapSha256": "0fd6978169c16db0b7a534ce0a43563b774784fda83122608bad893814a8a4c8",
       "witnessSha256": "3164869f6b4126af2811e726e8ce2ebd1e05970d3603cafce29d08785e3dc6cf",
-      "observationsSha256": "c832b450aaf0458c1955753366bcd23cf826a3cf6757a87c0db92f6742c2cb52"
+      "observationsSha256": "c334b956a5e5b7ae2d9d686055a5738a3a81747ff02c0a7e68028eb890644d3f"
     },
     {
       "level": 7,
@@ -428,7 +428,7 @@
       "solved": true,
       "mapSha256": "c75c57ba9eccd06a38588617a2dd8c3c663d30cc354174fb2e338c36c248aeff",
       "witnessSha256": "6b406b72c22e67aa1541a2dcf9cc3661e46143dc7a4be467c81311693fed8310",
-      "observationsSha256": "afd9b0b9baa3c3745685659ff815d51f50f7f4c0c81c24c97d78ea4d01028a2e"
+      "observationsSha256": "6b2cd53fb36036b0edb93a714a9bf5d187720cb7955504b0918a55f0b3de1eb5"
     },
     {
       "level": 8,
@@ -489,7 +489,7 @@
       "solved": true,
       "mapSha256": "1514b6733cf3a1fca23194c4fba9123a07fa59b14d3f058304013344da359504",
       "witnessSha256": "057f66c8c4b481cc3d91b1ba56b63e3b95b607339028590423afc389801439a0",
-      "observationsSha256": "7500f410386ea75b3c4b33723a5ff926dcb6c81f4d1f8fa6d191517b6c7dd14e"
+      "observationsSha256": "b073c57989769a15de7f5d7e1a627b2b4cfd692b0b7ff9ee45a18d7bbae884eb"
     }
   ],
   "totals": {
@@ -515,8 +515,8 @@
     "mirrorsDestroyed": 0,
     "cratesCrushed": 0,
     "simultaneousHeroReflections": 1,
-    "hydraulicChanges": 13,
-    "frames": 3048
+    "hydraulicChanges": 10,
+    "frames": 3039
   },
   "success": true,
   "controlChecks": {
@@ -653,7 +653,7 @@
       "reflections": 2,
       "pistonPushes": 2,
       "combatWaves": 1,
-      "hydraulicChanges": 5
+      "hydraulicChanges": 2
     },
     {
       "level": 7,
@@ -691,7 +691,7 @@
     "witnessesExcluded": true,
     "networkIndependent": true
   },
-  "htmlSha256": "4ec3fdc3e33c4b7860863f61bee99ef3d850a2deb638e6d25f823d8884c7c9de",
+  "htmlSha256": "39b393719bff52015ff7745f290f2f156bbabef159422aa4bbbba29f761b10a6",
   "limitations": [
     "Source adaptations are declared, not certified exact reconstructions.",
     "Witnesses prove solvability, not optimality, uniqueness or autonomous SRA success.",

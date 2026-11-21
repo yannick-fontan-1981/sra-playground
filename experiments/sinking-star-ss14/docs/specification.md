@@ -1,4 +1,4 @@
-# SS14 — Contrat 0.1.0
+# SS14 — Contrat 0.1.1
 
 ## Identité et observation
 
@@ -52,6 +52,8 @@ Le reflet ne déclenche ni chant ni traction. Il peut ainsi éloigner un héros 
 ## Commandes, presses et combat
 
 Tous les boutons d’un circuit doivent être occupés. Héros, caisse, monstre, miroir ou porte fermée peuvent fournir un poids. Chaque porte/presse déclare si elle se ferme à l’appui ou au relâchement de sa commande. À la fermeture, elle pousse les occupants dans la direction indiquée. Une file bloquée peut provoquer l’écrasement de l’occupant sur la presse.
+
+Un bouton libre occupe une cellule opaque : fond gris 3, plus rose 7, centre de la couleur du circuit. Lorsqu’une presse ouverte partage sa case, le bouton reste seul visible ; la presse fermée le recouvre. Une presse sans bouton conserve ses marques directionnelles et un centre noir 5 à la fermeture, gris 3 à l’ouverture. Les occupants et les aperçus de reflet gardent leur priorité d’affichage habituelle.
 
 Les circuits et plateformes se stabilisent avant la résolution des arrivées forcées dans l’eau. Une arrivée volontaire sur une plateforme actuellement inactive reste interdite. Quitter une commande peut retirer une plateforme sous le partenaire : cette conséquence est dangereuse et annulable.
 

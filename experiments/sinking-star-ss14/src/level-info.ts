@@ -64,7 +64,7 @@ export const LEVEL_INFO=[
     "puzzle": 1,
     "label": "Adaptation de Heroes and Light · énigme 1 · dépôts par presses orientées",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1",
-    "objective": "Créer les traversées par les presses, conduire le miroir entre leurs axes et dégager la porte sans emporter les appuis.",
+    "objective": "Créer les traversées par les presses, maintenir le quai avec le Barde et conduire le miroir sans emporter les appuis.",
     "secondary": {
       "label": "Heroes and Light · énigme 41 · butée, commande et départ forcé",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-41"

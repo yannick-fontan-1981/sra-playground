@@ -15,7 +15,7 @@ Les reprises portent sur des contraintes identifiables dans les guides demandés
 | 3 | L’appui sous le partenaire | Recaler un appui avec une butée, l’ancrer sous le Voleur et transporter le miroir sur la commande d’une arrivée hydraulique. | Heroes and Water, 27–28. |
 | 4 | Les deux départs sans geste | Préparer deux poids, quitter leurs portées par reflet, puis libérer un partenaire sans retirer son miroir. | Heroes and Mirrors, 1 et 4–5. |
 | 5 | Les gardiens et le poids retiré | Garder les monstres vivants sur leurs commandes, déposer les cargaisons en niche et préserver les poids pendant le départ. | Heroes 2: Monsters, 22 ; Heroes 3, 18–19. |
-| 6 | Le passage des deux presses | Créer deux traversées, rouvrir les presses, changer l’axe du miroir et sortir du quai provisoire avant son retrait. | Heroes and Light, 1 et 41. |
+| 6 | Le passage des deux presses | Créer deux traversées, rouvrir les presses, changer l’axe du miroir et maintenir le quai avec le Barde pendant le passage du Voleur. | Heroes and Light, 1 et 41. |
 | 7 | La pierre des trois traversées | Réemployer un seul appui dans trois bras, conserver les ressources sèches et faire voyager un miroir qui change de rôle. | Heroes and Water, 27 ; Heroes and Mirrors, 1 et 4. |
 | 8 | Le dernier accord des deux rives | Faire passer les mêmes monstres du pont provisoire aux commandes finales ; préparer le passage durable avant cette relève. | Heroes 3, 14 ; Heroes and Light, 1 ; Heroes and Mirrors, 1 et 4. |
 
@@ -29,7 +29,7 @@ Le parcours de validation acquiert les dix-sept découvertes. Les coches suivent
 
 Les niveaux 2 à 4 développent la question du départ : comment quitter un poids ou un partenaire après avoir obtenu le bon placement ? La traction forcée, le reflet et le chant du partenaire donnent des réponses différentes. L’appui immergé apporte une seconde contrainte : un déplacement utile au groupe peut retirer le chemin dont l’autre héros aura besoin.
 
-Les niveaux 5 et 6 ajoutent le maintien des gardiens et les circuits qui changent de fonction. Une caisse n’est pas seulement une masse à transporter : elle peut servir de poids, devenir un appui ou occuper un emplacement qui interdit une traction directe. Un miroir peut ouvrir un passage pendant son transit, puis cette ouverture disparaît quand il est repris. Les salles demandent de préparer le côté par lequel les deux héros pourront repartir.
+Les niveaux 5 et 6 ajoutent le maintien des gardiens et les circuits qui changent de fonction. Une caisse peut servir de poids, devenir un appui ou occuper un emplacement qui interdit une traction directe. Au niveau 6, le bouton bleu du quai se trouve en (8,3), séparé de la presse violette en (13,8). Le Barde le maintient pendant que le Voleur traverse et conduit le miroir vers la commande finale. Il quitte ensuite le bouton, retire le quai et rejoint la descente ouverte par le miroir. Les salles demandent de préparer le côté par lequel les deux héros pourront repartir.
 
 ## Niveau 7 : une ressource, trois traversées
 

@@ -1,6 +1,6 @@
 {
   "success": true,
-  "htmlSha256": "4ec3fdc3e33c4b7860863f61bee99ef3d850a2deb638e6d25f823d8884c7c9de",
+  "htmlSha256": "39b393719bff52015ff7745f290f2f156bbabef159422aa4bbbba29f761b10a6",
   "scope": "focused-ui-and-full-campaign",
   "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
   "visualBrowserTest": false,

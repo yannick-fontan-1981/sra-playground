@@ -1,0 +1,95 @@
+{
+  "success": true,
+  "version": "0.1.1",
+  "htmlSha256": "39b393719bff52015ff7745f290f2f156bbabef159422aa4bbbba29f761b10a6",
+  "scope": "Exact public 3x3 device glyphs from actual level states; actor and reflection-preview overlays retain their normal priority.",
+  "level8": {
+    "at": {
+      "x": 11,
+      "y": 14
+    },
+    "state": "initial",
+    "button": [
+      [
+        3,
+        7,
+        3
+      ],
+      [
+        7,
+        15,
+        7
+      ],
+      [
+        3,
+        7,
+        3
+      ]
+    ],
+    "noBluePixel": true
+  },
+  "level6": {
+    "pressAt": {
+      "x": 13,
+      "y": 8
+    },
+    "buttonMovedFrom": {
+      "x": 13,
+      "y": 8
+    },
+    "buttonMovedTo": {
+      "x": 8,
+      "y": 3
+    },
+    "pressIsButton": false,
+    "open": {
+      "turn": 49,
+      "pixels": [
+        [
+          7,
+          3,
+          7
+        ],
+        [
+          15,
+          3,
+          15
+        ],
+        [
+          7,
+          15,
+          7
+        ]
+      ],
+      "center": 3
+    },
+    "closed": {
+      "turn": 47,
+      "pixels": [
+        [
+          7,
+          7,
+          7
+        ],
+        [
+          15,
+          5,
+          15
+        ],
+        [
+          7,
+          15,
+          7
+        ]
+      ],
+      "center": 5
+    },
+    "noBluePixel": true,
+    "witness": {
+      "actions": 107,
+      "blocked": 0,
+      "deaths": 0,
+      "complete": true
+    }
+  }
+}

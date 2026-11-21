@@ -6,6 +6,8 @@ Laboratoire autonome du quatorzième jeu Sinking Star : **Voleur vert + Barde ma
 
 Construire puis ouvrir `dist/SS14-demo.html`. Ce fichier contient le jeu complet et fonctionne sans réseau.
 
+**Version 0.1.1** : bouton violet du niveau 8 lisible sur fond gris ; commande bleue du niveau 6 séparée de la presse violette, dont le centre est noir à la fermeture et gris à l’ouverture. Les huit parcours de référence restent gagnants avec les mêmes commandes.
+
 - **Flèches** : avancer avec le héros sélectionné. Le Voleur tire un occupant adjacent derrière lui ; le Barde entraîne les éléments proches.
 - **Tab, 1, 2 ou clic sur un héros** : sélectionner le Voleur ou le Barde sans faire avancer le monde.
 - **Espace / X** : activer les miroirs.

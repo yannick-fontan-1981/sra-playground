@@ -1,8 +1,8 @@
-# SS14 — validation du laboratoire 0.1.0
+# SS14 — validation du laboratoire 0.1.1
 
 ## Résultat vérifié
 
-**Huit salles gagnantes, 1 028 entrées publiques, 3 048 images d’animation vérifiées, aucun refus et aucune perte de héros sur les parcours de référence.** Le premier atelier acquiert les **17 découvertes** depuis les images publiques. Les **33 tests du moteur** passent.
+**Huit salles gagnantes, 1 028 entrées publiques, 3 039 images d’animation vérifiées, aucun refus et aucune perte de héros sur les parcours de référence.** Le premier atelier acquiert les **17 découvertes** depuis les images publiques. Les **33 tests du moteur** passent.
 
 | Salle | Entrées, sélections incluses | Tractions | Chants entraînant un participant | Déplacements d’appui | Images |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -11,10 +11,10 @@
 | 3 | 93 | 9 | 20 | 8 | 279 |
 | 4 | 85 | 15 | 12 | 0 | 248 |
 | 5 | 107 | 10 | 12 | 0 | 311 |
-| 6 | 107 | 23 | 11 | 0 | 335 |
+| 6 | 107 | 23 | 11 | 0 | 326 |
 | 7 | 195 | 10 | 59 | 36 | 568 |
 | 8 | 289 | 50 | 27 | 3 | 863 |
-| **Total** | **1 028** | **133** | **161** | **48** | **3 048** |
+| **Total** | **1 028** | **133** | **161** | **48** | **3 039** |
 
 Ces comptes décrivent les routes exécutées. Ils ne sont ni des minima ni une mesure de difficulté. `forcedBardMoves` et `partnerPulls` comptent les tractions du Barde dans le rapport ; les transports par reflet ou presse ont leurs métriques distinctes.
 
@@ -25,6 +25,20 @@ Ces comptes décrivent les routes exécutées. Ils ne sont ni des minima ni une 
 `scripts/validate-levels.mjs` compare cartes, crédits et témoins à leurs références. Il contrôle les invariants d’acteurs, les images 64 × 64 et leur palette, la durée de chaque image, l’ordre des cascades, les sélections en coordonnées pixel et l’absence d’état privé dans les observations. Chaque fin de salle est annulée puis rejouée ; la progression et la victoire finale sont déterministes.
 
 Rapport : `validation/levels-report.json`.
+
+## Correction des glyphes et séparation au niveau 6
+
+Les matrices 3 × 3 ont été extraites des images publiques des vraies salles et comparées pixel par pixel, puis rendues en agrandissement pour inspection :
+
+| Élément | État contrôlé | Résultat |
+| --- | --- | --- |
+| L8, bouton en (11,14) | Initial | Fond gris 3, bras roses 7 et centre violet 15 ; aucun bleu 9. |
+| L6, presse en (13,8) | Fermée, après 47 entrées | Centre noir 5 ; aucun bleu 9. |
+| L6, presse en (13,8) | Ouverte, après 49 entrées | Centre gris 3 ; aucun bleu 9. |
+
+Le bouton bleu de L6 est déplacé en (8,3) ; la case de la presse n’appartient plus à aucun bouton. Les huit séquences auteur sont inchangées. Le nouveau contrôle local `67 + CD` vérifie qu’un départ prématuré du Barde retire le quai sous le Voleur ; le parcours complet attend la fin de la traversée et reste gagnant en 107 entrées. La route comporte deux changements hydrauliques au lieu de cinq, soit neuf images en moins.
+
+Rapport : `validation/pixel-fix-report.json`. Les occupants et les aperçus de reflet conservent leur priorité habituelle sur les dispositifs.
 
 ## Interface du HTML compilé
 
@@ -71,8 +85,8 @@ Les générateurs `reference/author/build-level1.mjs` à `build-level8.mjs` reco
 
 Le HTML validé possède l’empreinte SHA-256 :
 
-`4ec3fdc3e33c4b7860863f61bee99ef3d850a2deb638e6d25f823d8884c7c9de`
+`39b393719bff52015ff7745f290f2f156bbabef159422aa4bbbba29f761b10a6`
 
-Les rapports de campagne et d’interface portent la même empreinte. Le bundle est autonome : aucun script distant, témoin, solveur ou outil d’auteur n’est nécessaire pour jouer ou présent dans le code livré au joueur.
+Les rapports de campagne, d’interface et de correction des pixels portent la même empreinte. Le bundle est autonome : aucun script distant, témoin, solveur ou outil d’auteur n’est nécessaire pour jouer ou présent dans le code livré au joueur.
 
 Les témoins prouvent la solvabilité, pas l’unicité, l’optimalité ou une réussite autonome de SRA. Les sources sont des adaptations déclarées, pas des reconstructions certifiées. Le laboratoire n’a modifié aucun chemin partagé du runtime : la qualification de coût global et les non-régressions d’intégration concernent le prochain raccordement natif.

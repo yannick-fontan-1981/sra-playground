@@ -362,9 +362,10 @@ function heroSprite(h:Hero,selected:boolean):Sprite {
 const circuitColors:readonly number[]=[0,10,12,15,2,8,11,14];
 const circuitColor=(w:World,id:string):number=>w.circuits.find(c=>c.id===id)?.color??circuitColors[w.circuits.findIndex(c=>c.id===id)%circuitColors.length]!;
 function pistonSprite(d:Direction,closed:boolean,accent:number):Sprite {
-  const spr:(number|null)[][]=closed?[[7,7,7],[7,5,7],[7,7,7]]:[[7,null,7],[null,null,null],[7,null,7]],tip=VECTORS[d],side={x:-tip.y,y:tip.x};
+  const spr:(number|null)[][]=closed?[[7,7,7],[7,5,7],[7,7,7]]:[[7,3,7],[3,3,3],[7,3,7]],tip=VECTORS[d],side={x:-tip.y,y:tip.x};
   spr[1+tip.y]![1+tip.x]=accent;spr[1+side.y]![1+side.x]=accent;spr[1-side.y]![1-side.x]=accent;return spr;
 }
+const buttonSprite=(accent:number):Sprite=>[[3,7,3],[7,accent,7],[3,7,3]];
 const platformSprite=(active:boolean,accent:number):Sprite=>active?[[7,7,7],[7,accent,7],[7,7,7]]:[[7,null,7],[null,accent,null],[7,null,7]];
 const supportSprite:Sprite=[[10,13,10],[13,10,13],[10,13,10]];
 const monsterSprite:Sprite=[[8,5,8],[5,8,5],[8,5,8]];
@@ -389,9 +390,13 @@ function renderScene(w:World,s:State,stones:readonly Point[]=s.stones,monsters:r
   }
   w.platforms.forEach((p,i)=>stamp(f,p.at,platformSprite(platformActive(w,s,i),circuitColor(w,p.circuit))));
   for(const p of supports)stamp(f,p,supportSprite);
-  for(const p of w.buttons){stamp(f,p,cross(7));const c=w.circuits.find(c=>contains(c.buttons,p));if(c)stamp(f,p,[[null,null,null],[null,circuitColor(w,c.id),null],[null,null,null]]);}
+  for(const p of w.buttons){const c=w.circuits.find(c=>contains(c.buttons,p));stamp(f,p,buttonSprite(c?circuitColor(w,c.id):7));}
   for(const p of w.doors)stamp(f,p,doorsOpen(w,s)?[[7,null,7],[null,null,null],[7,null,7]]:square(7,5));
-  w.gates.forEach((g,i)=>stamp(f,g.at,pistonSprite(g.direction,gateClosed(w,s,i),circuitColor(w,g.circuit))));
+  w.gates.forEach((g,i)=>{
+    const closed=gateClosed(w,s,i);
+    // An open press exposes its plate. A closed press remains an opaque gate.
+    if(closed||!contains(w.buttons,g.at))stamp(f,g.at,pistonSprite(g.direction,closed,circuitColor(w,g.circuit)));
+  });
   for(const p of w.goals)stamp(f,p,((contains(w.doors,p)&&!doorsOpen(w,s))||w.gates.some((g,i)=>equal(g.at,p)&&gateClosed(w,s,i)))?[[11,null,11],[null,null,null],[11,null,11]]:square(11));
   if(preview)for(const m of planReflection(w,s)?.moves??[])stamp(f,m.to,m.actor==='hero'?cross(1):square(1));
   for(const p of stones)stamp(f,p,square(13,5));for(const p of monsters)stamp(f,p,monsterSprite);

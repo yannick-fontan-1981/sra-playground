@@ -405,8 +405,8 @@ export const SS14_LEVELS:readonly LevelSpec[]=[
         "id": "retour-sous-charge",
         "buttons": [
           {
-            "x": 13,
-            "y": 8
+            "x": 8,
+            "y": 3
           }
         ],
         "color": 9
