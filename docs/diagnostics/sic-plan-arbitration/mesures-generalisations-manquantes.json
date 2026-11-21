@@ -11300,6 +11300,554 @@
       "wins": 2,
       "decisions": 1635,
       "matchedPrefixPerGame": true
+    },
+    "nativeUpperSourceRepeatedFromFrozenExport": [
+      "CATR",
+      "TRCP"
+    ]
+  },
+  "sourcePlacementAndUse": {
+    "identicalLocalEffect": {
+      "sourceLevels": 114,
+      "eligibleLevels": 16,
+      "groups": 51,
+      "usesAgainstAllEquivalentPlacements": 721,
+      "matchedScoreOrImageDifferences": [
+        {
+          "code": "CATR",
+          "level": 2,
+          "prefix": 74,
+          "use": [
+            "ACTION6:42,47",
+            "ACTION6:42,47"
+          ],
+          "bare": {
+            "used": 2,
+            "won": false,
+            "lost": false,
+            "changed": false
+          },
+          "criterion": "differentEndImage",
+          "positive": [
+            [
+              "ACTION6:21,55"
+            ]
+          ],
+          "rivals": [
+            [
+              "ACTION6:42,47"
+            ]
+          ]
+        },
+        {
+          "code": "FT09",
+          "level": 1,
+          "prefix": 23,
+          "use": [
+            "ACTION6:54,46"
+          ],
+          "bare": {
+            "used": 1,
+            "won": false,
+            "lost": false,
+            "changed": true
+          },
+          "criterion": "score",
+          "positive": [
+            [
+              "ACTION6:38,54"
+            ]
+          ],
+          "rivals": [
+            [
+              "ACTION6:46,38"
+            ],
+            [
+              "ACTION6:54,38"
+            ],
+            [
+              "ACTION6:54,46"
+            ],
+            [
+              "ACTION6:46,54"
+            ],
+            [
+              "ACTION6:54,54"
+            ]
+          ]
+        },
+        {
+          "code": "FT09",
+          "level": 1,
+          "prefix": 23,
+          "use": [
+            "ACTION6:38,54"
+          ],
+          "bare": {
+            "used": 1,
+            "won": false,
+            "lost": false,
+            "changed": true
+          },
+          "criterion": "score",
+          "positive": [
+            [
+              "ACTION6:54,46"
+            ]
+          ],
+          "rivals": [
+            [
+              "ACTION6:46,38"
+            ],
+            [
+              "ACTION6:54,38"
+            ],
+            [
+              "ACTION6:38,54"
+            ],
+            [
+              "ACTION6:46,54"
+            ],
+            [
+              "ACTION6:54,54"
+            ]
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 2,
+          "prefix": 87,
+          "use": [
+            "ACTION6:15,26"
+          ],
+          "bare": {
+            "used": 1,
+            "won": false,
+            "lost": false,
+            "changed": false
+          },
+          "criterion": "differentEndImage",
+          "positive": [
+            [
+              "ACTION6:26,11"
+            ],
+            [
+              "ACTION6:32,11"
+            ],
+            [
+              "ACTION6:11,20"
+            ],
+            [
+              "ACTION6:11,32"
+            ]
+          ],
+          "rivals": [
+            [
+              "ACTION6:11,26"
+            ]
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 2,
+          "prefix": 87,
+          "use": [
+            "ACTION2",
+            "ACTION6:15,26"
+          ],
+          "bare": {
+            "used": 2,
+            "won": false,
+            "lost": false,
+            "changed": false
+          },
+          "criterion": "differentEndImage",
+          "positive": [
+            [
+              "ACTION6:26,11"
+            ],
+            [
+              "ACTION6:32,11"
+            ],
+            [
+              "ACTION6:11,20"
+            ],
+            [
+              "ACTION6:11,32"
+            ]
+          ],
+          "rivals": [
+            [
+              "ACTION6:11,26"
+            ]
+          ]
+        }
+      ],
+      "continuedNonterminalDifferences": [
+        {
+          "code": "CATR",
+          "level": 2,
+          "prefix": 74,
+          "use": [
+            "ACTION6:42,47",
+            "ACTION6:42,47"
+          ],
+          "continuations": 8,
+          "wins": [],
+          "bareIntermediateChanges": [
+            true,
+            true
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 2,
+          "prefix": 87,
+          "use": [
+            "ACTION6:15,26"
+          ],
+          "continuations": 15,
+          "wins": [],
+          "bareIntermediateChanges": [
+            false
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 2,
+          "prefix": 87,
+          "use": [
+            "ACTION2",
+            "ACTION6:15,26"
+          ],
+          "continuations": 16,
+          "wins": [],
+          "bareIntermediateChanges": [
+            false,
+            false
+          ]
+        }
+      ],
+      "scoreMatrices": [
+        {
+          "code": "FT09",
+          "level": 1,
+          "prefix": 23,
+          "gestures": [
+            [
+              "ACTION6:46,38"
+            ],
+            [
+              "ACTION6:54,38"
+            ],
+            [
+              "ACTION6:54,46"
+            ],
+            [
+              "ACTION6:38,54"
+            ],
+            [
+              "ACTION6:46,54"
+            ],
+            [
+              "ACTION6:54,54"
+            ]
+          ],
+          "singleWins": 0,
+          "pairsTested": 36,
+          "winningPairs": [
+            [
+              2,
+              3
+            ],
+            [
+              3,
+              2
+            ]
+          ]
+        }
+      ]
+    },
+    "persistentDisplacement": {
+      "sourceLevels": 146,
+      "sourceL1": 100,
+      "distinctIneffectiveUsesExamined": 395,
+      "preparationsTested": 1873,
+      "matched": [
+        {
+          "code": "G50T",
+          "level": 2,
+          "matchedGroups": 8,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "G50T",
+          "level": 3,
+          "matchedGroups": 4,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "SNAR",
+          "level": 3,
+          "matchedGroups": 1,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "G50T",
+          "level": 4,
+          "matchedGroups": 8,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "FUIT",
+          "level": 2,
+          "matchedGroups": 8,
+          "positiveContrasts": 7,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "FUIT",
+          "level": 3,
+          "matchedGroups": 8,
+          "positiveContrasts": 7,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 1,
+          "matchedGroups": 6,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "HPDL",
+          "level": 1,
+          "matchedGroups": 2,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "matchedGroups": 1,
+          "positiveContrasts": 1,
+          "wins": 0,
+          "undidFirstMove": 1,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "CGWL",
+          "level": 1,
+          "matchedGroups": 4,
+          "positiveContrasts": 9,
+          "wins": 0,
+          "undidFirstMove": 7,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "COMB",
+          "level": 1,
+          "matchedGroups": 5,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "FITE",
+          "level": 1,
+          "matchedGroups": 4,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "G50T",
+          "level": 1,
+          "matchedGroups": 1,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "THER",
+          "level": 1,
+          "matchedGroups": 4,
+          "positiveContrasts": 4,
+          "wins": 0,
+          "undidFirstMove": 4,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "LS19",
+          "level": 2,
+          "matchedGroups": 14,
+          "positiveContrasts": 8,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "LS19",
+          "level": 3,
+          "matchedGroups": 6,
+          "positiveContrasts": 8,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "WA30",
+          "level": 3,
+          "matchedGroups": 14,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "VOIS",
+          "level": 3,
+          "matchedGroups": 1,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "CWSE",
+          "level": 2,
+          "matchedGroups": 16,
+          "positiveContrasts": 22,
+          "wins": 0,
+          "undidFirstMove": 22,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 2,
+          "matchedGroups": 13,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GARE",
+          "level": 3,
+          "matchedGroups": 6,
+          "positiveContrasts": 6,
+          "wins": 0,
+          "undidFirstMove": 6,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GIGO",
+          "level": 3,
+          "matchedGroups": 22,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 3,
+          "matchedGroups": 15,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 4,
+          "matchedGroups": 24,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "matchedGroups": 68,
+          "positiveContrasts": 60,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "matchedGroups": 16,
+          "positiveContrasts": 0,
+          "wins": 0,
+          "undidFirstMove": 0,
+          "keptPlacementAndMovedPreviouslyStationaryShape": 0
+        }
+      ],
+      "distinctActionContrasts": {
+        "total": 49,
+        "score": 0,
+        "undo": 19,
+        "kept": 4,
+        "keptAndIndependent": 0
+      },
+      "continuedRetainedDisplacements": [
+        {
+          "code": "GIGO",
+          "level": 5,
+          "prefix": 10,
+          "use": [
+            "ACTION6:30,9"
+          ],
+          "continuations": 12,
+          "wins": []
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "prefix": 10,
+          "use": [
+            "ACTION6:30,9"
+          ],
+          "continuations": 12,
+          "wins": []
+        },
+        {
+          "code": "GIGO",
+          "level": 5,
+          "prefix": 14,
+          "use": [
+            "ACTION6:30,29"
+          ],
+          "continuations": 12,
+          "wins": []
+        }
+      ]
     }
   }
 }
