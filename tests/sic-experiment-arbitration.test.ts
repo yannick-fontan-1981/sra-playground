@@ -48,3 +48,11 @@ test('all original fallback entries retain their order and experiments share the
   assert.ok(explore.families.indexOf(preparedEffectsId) < explore.families.indexOf(publicInputExplorationId));
   assert.ok(explore.families.lastIndexOf(preparedEffectsId) > explore.families.indexOf(publicInputExplorationId));
 });
+
+test('a pack can place a grounded coverage forecast ahead of independent projected inputs',()=>{
+  const base=planningGroupsWithExperiments(standalonePlanningGroups);
+  const candidate=planningGroupsWithExperiments(standalonePlanningGroups,true);
+  assert.equal(candidate[0]!.entryPoints![0],'test_or_continue_a_grounded_coverage_plan');
+  assert.deepEqual(candidate[0]!.families.slice(1),base[0]!.families);
+  assert.deepEqual(candidate.slice(1),base.slice(1));
+});

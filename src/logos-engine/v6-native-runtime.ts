@@ -2787,7 +2787,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const now = options.now ?? (() => performance.now());
     const testCompositions = recovery.solver === 'sic-fallback';
-    const groups = testCompositions ? planningGroupsWithExperiments(standalonePlanningGroups) : standalonePlanningGroups;
+    const groups = testCompositions ? planningGroupsWithExperiments(standalonePlanningGroups, recovery.informationPreference?.mode==='active' && recovery.informationPreference.strategy==='prefer_a_verified_coverage_experiment') : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
     const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 190 : 183,

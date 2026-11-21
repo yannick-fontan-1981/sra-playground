@@ -8,6 +8,7 @@ export const informationStrategies = {
   indicated_access: 'Seek an indication at a traversable site when ordinary movement fails to reach a destination',
   plan_after_selection: 'Use a verified change of control to plan a placement and test the return to the previous subject',
   test_partner_preparation: 'Retest a blocked movement after changing the other subject’s placement',
+  prefer_a_verified_coverage_experiment: 'Give a grounded placement experiment or its verified continuation priority over independent exploration',
   prepare_a_contact_stance: 'Plan the approach to a pushing or pulling position that makes a required placement feasible',
   test_contact_on_another_subject: 'Extend a witnessed displacement mechanism to another subject and test the contact',
   maintain_access_by_composing_piece_effects: 'Choose a subject and movement to maintain access with the displaced pieces',

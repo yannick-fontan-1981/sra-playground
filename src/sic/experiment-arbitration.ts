@@ -1,5 +1,6 @@
 import type { Experiment, Memory } from './preparation-experiments.ts';
 
+export const coveragePlanGroup='test_or_continue_a_grounded_coverage_plan';
 export const evidencedPlanGroup = 'continue_or_test_a_witnessed_effect';
 export const recurrentExperimentGroup = 'experiment_after_unproductive_returns';
 

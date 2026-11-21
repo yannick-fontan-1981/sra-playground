@@ -1,5 +1,5 @@
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
-import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
+import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import {offerCursorTrial,newCursorMemory,measuredReturnSelection} from './marked-cursor-selection.ts';
@@ -104,7 +104,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const prepareStance=comparePreparations && informationPreference?.strategy==='prepare_a_contact_stance';
+  const prioritizeCoverage=comparePreparations && informationPreference?.strategy==='prefer_a_verified_coverage_experiment';
+  const prepareStance=prioritizeCoverage || comparePreparations && informationPreference?.strategy==='prepare_a_contact_stance';
   const testBodyContact=prepareStance || comparePreparations && informationPreference?.strategy==='test_contact_on_another_subject';
   const planCoverage=testBodyContact || comparePreparations && informationPreference?.strategy==='maintain_access_by_composing_piece_effects';
   const followMarkedPose=planCoverage || comparePreparations && informationPreference?.strategy==='follow_a_marked_displacement';
@@ -204,6 +205,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
       if(remaining<1)return null;
+      const focused=group===coveragePlanGroup;
+      if(focused){if(!prioritizeCoverage||!m.coverage)return null;group=evidencedPlanGroup;}
       const motorCount=o.available_action_refs.filter(ref=>/^ACTION[1-4]$/.test(ref)).length;
       const opening = !m.turns || (m.cursorSelection?.returns??0)>=2*Math.max(2,motorCount) ||
         (m.cursorSelection?.blocked?.length??0)>=2;
@@ -223,6 +226,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       }
       const coverage=planCoverage&&group===evidencedPlanGroup&&m.coverage&&limits
         ?proposeCoverage(m.coverage,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
+      if(focused&&!coverage)return null;
       const cooperative=coverage??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
         ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);
       let landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')

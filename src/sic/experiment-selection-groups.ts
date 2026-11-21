@@ -1,12 +1,16 @@
 import type { NativeSelectionGroup } from '../logos-engine/v6-native-types.ts';
-import { evidencedPlanGroup, recurrentExperimentGroup } from './experiment-arbitration.ts';
+import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup } from './experiment-arbitration.ts';
 import { observedPressureRecoveryGroup, projectedPublicEffectsGroup, publicInputExplorationId } from './public-input-exploration.ts';
 import { compositionFamily, cycleGroup, exhaustedGroup, followCompositionGroup, composeAtReturnGroup } from './test-observed-compositions.ts';
 import { preparedEffectsId } from './test-prepared-effects.ts';
 import {fieldGroup} from './compose-field-relations.ts';
 
-export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[]): NativeSelectionGroup[] {
+export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[],prioritizeCoverage=false): NativeSelectionGroup[] {
   const projected = { id: projectedPublicEffectsGroup, families: [compositionFamily,publicInputExplorationId], entryPoints:[fieldGroup,null] };
+  if(prioritizeCoverage){
+    projected.families.unshift(preparedEffectsId);
+    projected.entryPoints.unshift(coveragePlanGroup);
+  }
   return [projected, ...groups.map(group => {
     if (group.id !== observedPressureRecoveryGroup && group.id !== 'explore_available_inputs') return group;
     const entries = group.families.map((id, i) => ({ id, entry: group.entryPoints?.[i] ?? null }));
