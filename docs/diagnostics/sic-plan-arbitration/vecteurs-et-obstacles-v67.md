@@ -4,7 +4,7 @@ Le témoin figé est v66 (`6f49591a8`). Sur SS05 il commence à chercher un rep�
 
 ## Ce que le diagnostic de SS05 permet de tester
 
-Sur le graphe du banc, la position du sujet seule couvre 30 cases. En ajoutant la disposition de trois objets suivis, les 1 661 images examinées se réduisent à 524 configurations. Sur les 2 065 couples configuration–direction réobservables, aucune transition mesurée ne conduit à deux dispositions différentes. Un même déplacement depuis la même case du sujet peut cependant être possible ou bloqué suivant les positions des pièces.
+Sur le graphe du banc, la position du sujet seule couvre 30 cases. En ajoutant la disposition de trois objets suivis, les 1 661 images examinées se réduisent à 524 configurations. Sur les 2 065 couples configuration–direction mesurés, aucune transition mesurée ne conduit à deux dispositions différentes. Un même déplacement depuis la même case du sujet peut cependant être possible ou bloqué suivant les positions des pièces.
 
 Un ajustement rétrospectif sur ce graphe explique les 6 611 transitions directionnelles non terminales dont les deux extrémités ont été examinées. Une pièce à portée suit la translation, une pièce arrêtée par un obstacle reste en place, et le sujet doit pouvoir atteindre sa propre case. Cette mesure utilise les transitions du banc. Elle ne compte ni comme prédiction indépendante ni comme action ou victoire de SIC. Les commandes du chemin gagnant, les positions et la valeur de portée mesurée ne sont pas transmises au pilote.
 
