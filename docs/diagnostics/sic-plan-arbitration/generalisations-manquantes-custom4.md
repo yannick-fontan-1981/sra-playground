@@ -2,7 +2,7 @@
 
 Le critère principal est le premier L2 gagné en partie autonome sur **un jeu supplémentaire**. Les neuf L2 ouverts donnent deux victoires à froid à v31 et à v34, SS01 et SS04. SS03 a déjà été gagné après le L1. Un premier succès à froid sur SS03 constitue donc un gain d’autonomie distinct. Les six occasions de gagner le L2 d’un autre jeu déjà ouvert sont SS02, SS05, SS06, SS07, SS08 et SS10. SS09 L2 reste la confirmation indépendante. [Bilan des parties complètes de v34](qualification-reprise-v34.md)
 
-**Dernier bilan vérifié.** V41 gagne VOIS L2 à froid en 53 coups sur les sources et conserve les 100 victoires L1. Sur Custom 4, v40 et v41 gagnent chacune **2 L2 sur 9 à froid**. Le gain sur les sources apporte **zéro jeu supplémentaire sur Custom 4**. Le premier chantier à poursuivre est le choix de la pièce à tester, puis la conservation d’un premier placement pendant que SIC commande un deuxième sujet. [Comparaison à longueur égale et scores officiels](mesures-generalisations-manquantes.json)
+**Dernier bilan vérifié.** V43 conserve les 100 victoires sources L1 et gagne **2 L2 sur 9 à froid sur Custom 4**, comme v41. SS01 gagne en 44 coups à froid et en 32 après le L1. SS04 gagne en 60 à froid. Aucun des sept autres L2 ouverts ne gagne. Sur chacun des neuf, les deux versions émettent les mêmes commandes et obtiennent les mêmes images pendant toute la longueur comparable. La priorité pour SS06, SS08 et SS10 est donc de déclencher une première expérience de changement de sujet dans une scène où plusieurs pièces peuvent expliquer le mouvement. [Scores et préfixes comparés](mesures-generalisations-manquantes.json)
 
 ## Capacités manquantes et travaux associés
 
@@ -67,11 +67,33 @@ Rejouer les 100 L1 au plafond de 60, puis VOIS L2 et LOGI L5 au plafond de 90. L
 | SS08 | 480 | 475 | Arrêt au temps |
 | SS10 | 367 | 402 | Arrêt au temps |
 
-### Prochaine expérience utile par cible
+### Expérience de v43 et résultat du transfert
 
 **Protocole du candidat v43, écrit avant son évaluation sur Custom 4.** SIC compare la surface qu’une pièce vient de couvrir avec celle que couvrirait une autre pièce après le même déplacement. Le banc choisit le clic et la direction avant l’intervention, puis compare cette direction seule à la séquence clic puis direction. Sur 56 prédictions de déplacement sur VOIS L1/L5 et MOTO L2, 42 arrivent au déplacement annoncé. Pour le placement, un clic et un mouvement observés par une stratégie peuvent servir de preuve à une autre. Lorsque les pièces sont plus nombreuses que les places du modèle, SIC peut essayer une disposition de soutien dont certaines relations de voisinage restent à vérifier. Une couleur observée en désaccord avec la prédiction élimine cette disposition. [Banc de choix prospectif](../../../scripts/measure-source-cursor-opportunities.mjs) · [Tests du raisonnement de placement](../../../tests/sic-transferred-population-selection.test.ts)
 
 Le témoin de transfert est v41. Figer v43 sous le tag `sic-source100-projected-choice-v43`. Rejouer les 100 L1 au plafond de 60 et les quatre témoins prioritaires. Comparer à froid SS01 à SS08 et SS10 L2, au plafond de 1 200 commandes, avec le même moteur que v41. Contrôler SS01 avec les 19 commandes publiques du L1 dans une partie séparée. Relever le premier écart de commande ou d’image, les mouvements anticipés et les scores officiels. Rejouer chaque parcours. En cas de nouvelle victoire, retirer la capacité impliquée pour vérifier l’attribution. SS09 L2 reste en réserve.
+
+| L2 à froid | Coups v41 | Coups v43 | Score v43 au rejeu |
+| --- | ---: | ---: | --- |
+| SS01 | 44 | 44 | Victoire |
+| SS02 | 361 | 269 | Arrêt au temps |
+| SS03 | 424 | 253 | Arrêt au temps |
+| SS04 | 60 | 60 | Victoire |
+| SS05 | 319 | 245 | Arrêt au temps |
+| SS06 | 271 | 206 | Arrêt au temps |
+| SS07 | 5 | 5 | Défaite au cinquième coup |
+| SS08 | 475 | 260 | Arrêt au temps |
+| SS10 | 402 | 254 | Arrêt au temps |
+
+**Où s’arrête la généralisation.** Le candidat figé au commit `4b4c9f949` a proposé zéro expérience de sélection par marque sur les neuf parties froides. Il n’a donc eu aucune occasion d’exploiter sa nouvelle prédiction de déplacement sur ces parcours. Sur les jeux sources, la distinction est mesurable. Sur MOTO L2, le mouvement prévu apparaît 3 fois sur 3, mais le clic ne redirige effectivement la commande de l’ancienne pièce vers la nouvelle que dans un des trois essais. Sur VOIS L1 et L5, les chiffres correspondants sont 39 déplacements prévus réalisés sur 53 et 36 redirections. Les branches préparées puis suivies de la suite historique n’ont converti aucune défaite. [Mesures par épisode, empreinte du candidat et preuves de rejeu](mesures-generalisations-manquantes.json)
+
+**Acquis et coût sur les sources.** Les 100 L1 de v43 ont été rejoués. Les 100 gagnent et 99 trajectoires sont identiques à v41. VOIS L1 passe de 57 à 21 coups. SKBN, SWCH, KEYD et GABA restent à 22, 25, 35 et 49. Sur VOIS L3, le candidat figé prend 75 coups, contre 68 pour v41. Sur VOIS L4, les deux versions épuisent le budget de 120. Les 165 tests ciblés de v43 passent.
+
+**Travail rattaché aux capacités 1 et 2.** Une pièce déjà contrôlée peut redevenir intéressante à une autre position. Dans deux parties sources autonomes de VOIS L4, le pilote qui conserve cette possibilité gagne en 107 coups sur la même trajectoire. Les 36 premières commandes sont identiques à v43. Au coup 37, le pilote clique sur une pièce pour laquelle il prévoit un déplacement mesurable. V43 choisit une autre commande. VOIS L5 échoue encore au plafond de 120. Ce résultat établit une nouvelle victoire source sur un niveau supérieur. Son transfert vers un autre jeu reste à éprouver. [Règle de décision](../../../src/sic/marked-cursor-selection.ts) · [Test qui distingue un site nouveau d’un site déjà essayé](../../../tests/sic-marked-cursor-selection.test.ts)
+
+### Prochaine expérience utile par cible
+
+Le candidat v44 isole le changement testé sur VOIS L4. Le témoin est v43. Figer la règle sous le tag `sic-source100-local-choice-v44`. Comparer les neuf L2 ouverts à froid, le contrôle SS01 avec le L1 et les 100 L1 sources dans les mêmes conditions que v43. Compter un transfert uniquement si le moteur accorde un nouveau score. Comparer ensuite la première divergence de trajectoire et reproduire toute nouvelle victoire.
 
 | L2 | Expérience à préparer sur les jeux sources | Décision que SIC doit ensuite prendre seul |
 | --- | --- | --- |

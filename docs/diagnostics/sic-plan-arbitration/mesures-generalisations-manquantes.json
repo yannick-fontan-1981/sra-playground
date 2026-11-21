@@ -1128,5 +1128,307 @@
       "firstPlacementCommand": null,
       "tapeDigest": "f8acf1cbc33f17d4f5547a8200af2abf9ac73768ff7e30be8013a41bb840f72d"
     }
-  ]
+  ],
+  "sourceV43": {
+    "verified": 100,
+    "wins": 100,
+    "comparedTo": "v41",
+    "identicalTrajectories": 99,
+    "changedTrajectories": [
+      "VOIS"
+    ],
+    "guards": {
+      "KEYD": 35,
+      "SKBN": 22,
+      "GABA": 49,
+      "SWCH": 25
+    },
+    "canonicalExport": {
+      "sha": "4b4c9f949057569a429adb91281897e8bde433d8",
+      "files": 2551,
+      "manifestHash": "4c7953bae3f007d8baaf5c8977ad4689f0576b289ff002d2585ec1c405b814b3"
+    },
+    "tests": 165
+  },
+  "coldV43": [
+    {
+      "code": "SS01",
+      "v41Actions": 44,
+      "actions": 44,
+      "won": true,
+      "trajectory": "b78b819c6501230bf31a6424f95bedaa53bf35ea70cacb0d8341a7f539f4f2a1",
+      "cold": true,
+      "reason": "target_levels_completed",
+      "commonPrefix": 44,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS02",
+      "v41Actions": 361,
+      "actions": 269,
+      "won": false,
+      "trajectory": "c180d29026ca7b86ac161709ba8154b4eff56332c9de28555a9e797ff0a52e7c",
+      "cold": true,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 269,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "0a350eba7dbf421550c56a2a9ad93690e36136d44524408d6b347a428fc58e8b"
+    },
+    {
+      "code": "SS03",
+      "v41Actions": 424,
+      "actions": 253,
+      "won": false,
+      "trajectory": "55aa84ac90871721a73af7a2909edb6852a7a2ed15c6c5b8be05c7e2a4cf2186",
+      "cold": true,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 253,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "0473790d553a0a6a8c00660de6f6d429f716a0835631868700aa68d0de89b78f"
+    },
+    {
+      "code": "SS04",
+      "v41Actions": 60,
+      "actions": 60,
+      "won": true,
+      "trajectory": "320e891b4e6d7a69130cebf5020a6e8addc23070667e9711a81cc39c12b0b769",
+      "cold": true,
+      "reason": "target_levels_completed",
+      "commonPrefix": 60,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    },
+    {
+      "code": "SS05",
+      "v41Actions": 319,
+      "actions": 245,
+      "won": false,
+      "trajectory": "e2977bc812424d9df06a72aa0274f860a1447a913b780092a5ab5e42aa2694a8",
+      "cold": true,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 245,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "1f501b9d463e3ff6e7d8e7e41ba531ecf945c2185f66cc81b7ff6b8029f9b654"
+    },
+    {
+      "code": "SS06",
+      "v41Actions": 271,
+      "actions": 206,
+      "won": false,
+      "trajectory": "8207bd6cef5a53ff7cc4bff5f3d289ff994081791f36c0873431a9b9e27e4efb",
+      "cold": true,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 206,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "bba29adc894350bb0812e932c3431f19c7542409f2c1d43f0ecc3520b02661db"
+    },
+    {
+      "code": "SS07",
+      "v41Actions": 5,
+      "actions": 5,
+      "won": false,
+      "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+      "cold": true,
+      "reason": "native_game_over",
+      "commonPrefix": 5,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+    },
+    {
+      "code": "SS08",
+      "v41Actions": 475,
+      "actions": 260,
+      "won": false,
+      "trajectory": "0eff246998e6c8b5232a632a36eb56ee5acba4e3f22ea26e923e01be38179dd2",
+      "cold": true,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 260,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "85e072c1681ef0fc7b67e1f3e8bf3b19494aaf25bd7e24b5dad04525b6bf6267"
+    },
+    {
+      "code": "SS10",
+      "v41Actions": 402,
+      "actions": 254,
+      "won": false,
+      "trajectory": "b8e68e3ed2f30dbb8977ba3d327a02ab5a916ff46927f9e9f9f65c209b703261",
+      "cold": true,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 254,
+      "firstDivergentAction": null,
+      "selectionForecasts": 0,
+      "projectedMotors": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "d772aa7efcee2d12899c14a2dc5090f6d40698d8fcdec8bee573370498f015b6"
+    }
+  ],
+  "warmV43": {
+    "code": "SS01",
+    "lesson": 19,
+    "levels": [
+      {
+        "level": 2,
+        "actions": 32,
+        "won": true
+      }
+    ],
+    "tapeDigest": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+  },
+  "sourceProjectionExperimentV43": [
+    {
+      "game": "VOIS",
+      "level": 1,
+      "forecasts": 27,
+      "matched": 21,
+      "redirected": 21,
+      "converted": 0
+    },
+    {
+      "game": "VOIS",
+      "level": 5,
+      "forecasts": 26,
+      "matched": 18,
+      "redirected": 15,
+      "converted": 0
+    },
+    {
+      "game": "MOTO",
+      "level": 2,
+      "forecasts": 3,
+      "matched": 3,
+      "redirected": 1,
+      "converted": 0
+    }
+  ],
+  "autonomousSourceVOIS": {
+    "1": {
+      "v43pilot": {
+        "actions": 21,
+        "won": true,
+        "trajectory": "5941565c25d5371e5b1c5496b4ca011ef0f001687fb44b3ce46e016eb544de37",
+        "cold": true
+      },
+      "v44pilot": {
+        "actions": 21,
+        "won": true,
+        "trajectory": "5941565c25d5371e5b1c5496b4ca011ef0f001687fb44b3ce46e016eb544de37",
+        "cold": true
+      }
+    },
+    "2": {
+      "v43pilot": {
+        "actions": 31,
+        "won": true,
+        "trajectory": "26cb19603aaddcc00debbce65fe5dfc7b39a1aae81373d61bdffac5da5d11aa4",
+        "cold": true
+      },
+      "v44pilot": {
+        "actions": 31,
+        "won": true,
+        "trajectory": "26cb19603aaddcc00debbce65fe5dfc7b39a1aae81373d61bdffac5da5d11aa4",
+        "cold": true
+      }
+    },
+    "3": {
+      "v41": {
+        "actions": 68,
+        "won": true,
+        "trajectory": "cee984398ac69d5ba00208b23b60ad5d06d050739f2b21999c92de036fb12ee5",
+        "cold": true
+      },
+      "v43": {
+        "actions": 75,
+        "won": true,
+        "trajectory": "e648c19a52953cccabcd17e278a64037917c2cb724bc5f5949c77fe51a857db0",
+        "cold": true
+      }
+    },
+    "4": {
+      "v41": {
+        "actions": 120,
+        "won": false,
+        "trajectory": "b0eaecd6125211227d9eb7b297e6a86f84b46707f8d53ff8b5e2b1823c9bab53",
+        "cold": true
+      },
+      "v43pilot": {
+        "actions": 120,
+        "won": false,
+        "trajectory": "cd0ceec7a8c9bcc23c1efc06d341f1b8485afabf9931ae561d9b1d9bcf05dfcf",
+        "cold": true
+      },
+      "v43": {
+        "actions": 120,
+        "won": false,
+        "trajectory": "cd0ceec7a8c9bcc23c1efc06d341f1b8485afabf9931ae561d9b1d9bcf05dfcf",
+        "cold": true
+      },
+      "v44pilot": {
+        "actions": 107,
+        "won": true,
+        "trajectory": "cd11525a7d33e3bbf5c864f1cff384e05fe98803a7e6e5833d4189fa66a83686",
+        "cold": true
+      },
+      "v44repeat": {
+        "actions": 107,
+        "won": true,
+        "trajectory": "cd11525a7d33e3bbf5c864f1cff384e05fe98803a7e6e5833d4189fa66a83686",
+        "cold": true
+      }
+    },
+    "5": {
+      "v41": {
+        "actions": 120,
+        "won": false,
+        "trajectory": "ebb7911af02b4803d17e8eb2f1abb3653ba1d13164c481e3036e1116b25c476b",
+        "cold": true
+      },
+      "v43pilot": {
+        "actions": 120,
+        "won": false,
+        "trajectory": "46512b0a1b754987d631e517e7b8b0febc84d41e7c30bca6ec69db09ac826a5b",
+        "cold": true
+      },
+      "v44pilot": {
+        "actions": 120,
+        "won": false,
+        "trajectory": "294bb2b2fdf265166ca0da5f831cbf6f0c3294717512f0baac11bbaa6caced0e",
+        "cold": true
+      }
+    }
+  },
+  "sourceLocalExperiment": {
+    "source": "VOIS",
+    "level": 4,
+    "cap": 120,
+    "commonPrefix": 36,
+    "firstDivergentAction": 37,
+    "v43Command": 5,
+    "v44Command": 6,
+    "v44RepeatIdentical": true
+  }
 }

@@ -129,3 +129,20 @@ test('can hypothesize from an attached dot outside an otherwise identical silhou
   assert.deepEqual(trial.offsets,[[2,-1]]);
   assert.deepEqual(trial.point,[15,8]);
 });
+
+test('a known choice of body can be useful again at a new site with a measurable consequence',async()=>{
+  const memory=newCursorMemory(),before=board(),selected=board(1),moved=board(1,15);
+  const [a,b,c]=await Promise.all([before,selected,moved].map((rows,i)=>observation(rows,i)));
+  const select=offerCursorTrial(memory,a!,before,true)!;
+  recordCursorTrial(memory,a!,b!,before,selected,select.command,select);
+  const verify=offerCursorTrial(memory,b!,selected)!;
+  recordCursorTrial(memory,b!,c!,selected,moved,'ACTION4',verify);
+  assert.equal(memory.established?.length,1);
+  const prior=board(0,17,3,false,2),fresh=board(0,17);
+  const here=await observation(fresh,4);
+  recordCursorTrial(memory,await observation(prior,3),here,prior,fresh,'ACTION4');
+  const next=offerCursorTrial(memory,here,fresh,false,true);
+  assert.deepEqual(next?.point,[19,8]);
+  assert.deepEqual(next?.projectedMove?.delta,[1,0]);
+  assert.equal(offerCursorTrial(memory,await observation(before,5),before,false,true),null);
+});

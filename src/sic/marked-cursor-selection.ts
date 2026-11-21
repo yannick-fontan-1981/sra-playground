@@ -177,7 +177,8 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
   choices.sort((a,b)=>Number(!!b.projectedMove)-Number(!!a.projectedMove));
   for(const {mark,projectedMove} of choices){
     if(requireProjection&&!projectedMove)continue;
-    if(m.tried.includes(signature(mark))||m.established?.includes(hypothesis(mark))||!projectedMove&&m.refuted?.includes(hypothesis(mark)))continue;
+    const familiar=m.established?.includes(hypothesis(mark));
+    if(m.tried.includes(signature(mark)) || (!projectedMove && (familiar || m.refuted?.includes(hypothesis(mark)))))continue;
     if(m.verified && mark.source.ink!==mark.target.ink && sharedSurroundings(rows,mark)<0.5)continue;
     const [x,y]=mark.point;
     const evidence=[...new Set(m.motions.filter(v=>inside(v.box,mark.source.box)).map(v=>v.ref))];
