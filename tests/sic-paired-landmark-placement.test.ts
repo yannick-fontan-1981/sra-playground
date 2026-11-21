@@ -48,6 +48,14 @@ test('a contradicted edge is not repeated and a moving landmark is discarded',()
   assert.equal(m.active,undefined);
   assert.equal(m.pairs.length,0);
 });
+test('an inconclusive click or an incompatible landmark spacing cannot justify investing in a preparation',()=>{
+  const m=observeLandmarks(undefined,base,base,'initial');
+  observePlacement(m,undefined,base,'cursor_click_visually_unchanged',trial,base);
+  assert.equal(proposeLandmark(m,base,o,rows,{mover:motion},trial,100),undefined);
+  const fresh=observeLandmarks(undefined,base,base,'other');
+  const inconsistent={...motion,axes:{ACTION2:{x:{d:[5,0] as XY,count:7,first:'a',last:'b'}}}};
+  assert.equal(proposeLandmark(fresh,base,o,rows,{mover:inconsistent},trial,100),undefined);
+});
 test('the paired-arrival preference inherits motion contrasts and respects the declared minimum',()=>{
   const p={mode:'active',strategy:'paired_arrival',minimumOutcomes:2} as const;
   assert.equal(informationPriority({strategy:'motion_contrast',distinctOutcomes:2},p),1);

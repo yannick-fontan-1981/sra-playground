@@ -16,7 +16,7 @@ export type LandmarkTrial = Assignment & {
 };
 export type LandmarkMemory = {
   pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string;
-  blocked:string[]; tried:string[]; handoff?:boolean; lastResult?:string;
+  blocked:string[]; tried:string[]; inconclusiveSelections?:string[]; handoff?:boolean; lastResult?:string;
 };
 
 export function observeLandmarks(m:LandmarkMemory|undefined, before:VisualLayout, after:VisualLayout, ref:string):LandmarkMemory {
@@ -41,21 +41,24 @@ function singleton(l:VisualLayout,role:string){const g=l[role];return g?.length=
 function covered(l:VisualLayout,a:Assignment,site:XY) {
   return !l[a.pair.role]?.some(p=>cellMatches(p.at,site,a.pitch));
 }
-function movement(motions:Record<string,PartMotion>,role:string,o:NativeObservation) {
+function movement(motions:Record<string,PartMotion>,role:string,o:NativeObservation,pair:Pair) {
   const motion=motions[role];
-  return motion && spatialControls(motion,new Set(o.available_action_refs.filter(k=>/^ACTION[1-4]$/.test(k))),'',{},o.frame_hash,role);
+  const separation=diff(pair.sites[0]!,pair.sites[1]!);
+  return motion && spatialControls(motion,new Set(o.available_action_refs.filter(k=>/^ACTION[1-4]$/.test(k))),'',{},o.frame_hash,role,
+    length=>separation.every(delta=>delta%length===0));
 }
 const edgeKey=(role:string,at:XY,op:string)=>JSON.stringify([role,at,op]);
 function nearestAssignment(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,selection:CursorTrial,motions:Record<string,PartMotion>):Assignment|undefined {
   if(selection.stage!=='select'||!selection.contrast)return;
   const actor=bodyRole(l,selection.source.box),peer=bodyRole(l,selection.target.box);
   if(!actor||!peer||actor===peer)return;
-  const control=movement(motions,actor,o);
-  if(!control)return;
+  if(m.inconclusiveSelections?.includes(JSON.stringify([peer,l[peer]![0]!.at])))return;
   const from=l[actor]![0]!.at, retained=l[peer]![0]!.at;
   const options:{a:Assignment;cost:number;first:number}[]=[];
   for(const pair of m.pairs){
     if(pair.role===actor||pair.role===peer||l[pair.role]?.length!==2)continue;
+    const control=movement(motions,actor,o,pair);
+    if(!control)continue;
     for(const [i,home] of pair.sites.entries()){
       const other=pair.sites[1-i]!,first=size(diff(home,from)),second=size(diff(other,retained));
       if(first>second || m.tried.includes(JSON.stringify([actor,peer,pair.role,home])))continue;
@@ -68,7 +71,7 @@ function nearestAssignment(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,s
 // Route over the measured motor lattice. Unknown cells are legal experiments,
 // exposed substrate costs less, and a refuted edge is local to the actor and site.
 function nextStep(m:LandmarkMemory,a:Assignment,role:string,from:XY,goal:XY,guard:XY,o:NativeObservation,rows:NativeRows,motions:Record<string,PartMotion>,limit:number) {
-  const controls=movement(motions,role,o)??movement(motions,a.actor,o);
+  const controls=movement(motions,role,o,a.pair)??movement(motions,a.actor,o,a.pair);
   if(!controls||!same(controls.pitch,a.pitch))return;
   const ground=Object.entries(motions[role]?.substrate??{}).sort((x,y)=>y[1]-x[1])[0]?.[0];
   const start=aligned(from,goal,a.pitch),dist=(p:XY)=>size(diff(p,goal))/a.pitch[0];
@@ -129,6 +132,13 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     const key=edgeKey(role,aligned(t.from,goal,t.pitch),t.command);
     if(!m.blocked.includes(key))m.blocked.push(key);
     return m.lastResult='approach_refuted_replan';
+  }
+  if(selection?.stage==='select' && cursorResult==='cursor_click_visually_unchanged'){
+    const peer=bodyRole(before,selection.target.box);
+    if(peer){
+      const key=JSON.stringify([peer,before[peer]![0]!.at]), sites=m.inconclusiveSelections??=[];
+      if(!sites.includes(key))sites.push(key);
+    }
   }
   if(!m.active||!m.handoff||!selection||selection.stage!=='verify')return;
   if(cursorResult==='new_cursor_moved_while_previous_cursor_stayed'){
