@@ -917,9 +917,10 @@ const agent = new BrowserV6Agent({
     }
   },
   recoveryConfiguration: () => {
-    const { maxDepth, maxNodes } = recoveryConfiguration();
+    const { maxDepth, maxNodes, informationPreference } = recoveryConfiguration();
     const solver = element<HTMLSelectElement>('#agent-planning').value === 'sic-fallback' ? 'sic-fallback' : 'sic';
-    return { ...defaultRecoveryPack, maxDepth, maxNodes, solver };
+    return { ...defaultRecoveryPack, maxDepth, maxNodes, solver,
+      ...(solver === 'sic-fallback' && informationPreference ? { informationPreference } : {}) };
   },
   dispatch: async action => {
     if (!canDispatchAgentAction() || !observation?.availableActionIds.includes(action.id)) {

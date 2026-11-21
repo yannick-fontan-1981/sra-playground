@@ -1,11 +1,16 @@
 import { fallbackPalette } from '../runtime/display-palette.ts';
+import { informationPriority, type InformationPreference } from './information-preference.ts';
 import type {NativeBox,NativeEntity,NativeObservation,NativePoint,NativeRows} from '../logos-engine/v6-native-types.ts';
 
 type Part = {box:NativeBox; ink:number};
 type Motion = {box:NativeBox; form:string; command:string; ref:string; dx:number; dy:number; entry?:string};
 type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[]; ink:number; shape:string};
 type ProjectedMove = {command:string; delta:NativePoint; evidence:string};
-export type CursorTrial = Mark & { stage:'select'|'verify'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; binding?:string };
+type ControlContrast = {
+  strategy: 'motion_contrast'; mode: 'exploration'; minimumOutcomes: number;
+  motor: string; baselineDelta: NativePoint; evidence: string; outcomes: readonly ['previous_subject_moves', 'selected_subject_moves'];
+};
+export type CursorTrial = Mark & { stage:'select'|'verify'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string };
 export type CursorMemory = {
   motions:Motion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
@@ -169,21 +174,30 @@ function possibleMove(m:CursorMemory,mark:Mark,rows:NativeRows) {
     && entrySurface(rows,mark.target.box,v.dx,v.dy)===v.entry);
   if(body)return {command:body.command,delta:[body.dx,body.dy] as NativePoint,evidence:body.ref};
 }
-export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,rows:NativeRows,allowStatic=false,requireProjection=false):CursorTrial|null {
+function distinguishControl(m:CursorMemory, mark:Mark, o:NativeObservation, preference?:InformationPreference):ControlContrast|undefined {
+  if (preference?.mode !== 'active' || !informationPriority({strategy:'motion_contrast', distinctOutcomes:2},preference)) return;
+  const motion = m.motions.find(v => inside(v.box,mark.source.box) && (v.dx===0)!==(v.dy===0)
+    && /^ACTION[1-4]$/.test(v.command) && o.available_action_refs.includes(v.command));
+  if (!motion) return;
+  return {strategy:'motion_contrast', mode:'exploration', minimumOutcomes:preference.minimumOutcomes,
+    motor:motion.command, baselineDelta:[motion.dx,motion.dy], evidence:motion.ref, outcomes:['previous_subject_moves','selected_subject_moves']};
+}
+export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,rows:NativeRows,allowStatic=false,requireProjection=false,preference?:InformationPreference):CursorTrial|null {
   if(!m || !o.available_action_refs.includes('ACTION6'))return null;
   if(m.pending)return !m.pending.passive && o.available_action_refs.includes(m.pending.command)?m.pending:null;
   if(!m.motions.length&&!allowStatic)return null;
   const choices=cursorCandidates(o,rows,m).map(mark=>({mark,projectedMove:possibleMove(m,mark,rows)}));
   choices.sort((a,b)=>Number(!!b.projectedMove)-Number(!!a.projectedMove));
   for(const {mark,projectedMove} of choices){
-    if(requireProjection&&!projectedMove)continue;
+    const contrast = !projectedMove && !m.verified ? distinguishControl(m,mark,o,preference) : undefined;
+    if(requireProjection&&!projectedMove&&!contrast)continue;
     const familiar=m.established?.includes(hypothesis(mark));
     if(m.tried.includes(signature(mark)) || (!projectedMove && (familiar || m.refuted?.includes(hypothesis(mark)))))continue;
     if(m.verified && mark.source.ink!==mark.target.ink && sharedSurroundings(rows,mark)<0.5)continue;
     const [x,y]=mark.point;
     const evidence=[...new Set(m.motions.filter(v=>inside(v.box,mark.source.box)).map(v=>v.ref))];
     if(m.verified?.shape===mark.shape && m.verified.mark===mark.ink)evidence.push(...m.verified.refs);
-    return {...mark,stage:'select',command:'ACTION6:'+x+','+y,evidence,...(projectedMove?{projectedMove}:{})};
+    return {...mark,stage:'select',command:'ACTION6:'+x+','+y,evidence,...(projectedMove?{projectedMove}:{}),...(contrast?{contrast}:{})};
   }
   return null;
 }
@@ -212,7 +226,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     const {source,target,offsets,ink}=trial;
     const marked=(r:NativeRows,p:Part)=>offsets.every(([x,y])=>r[p.box[1]+y]?.[p.box[0]+x]===ink);
     const transfer=marked(rows,source)&&!marked(rows,target)&&!marked(next,source)&&marked(next,target);
-    const forecastMotor=trial.projectedMove?.command;
+    const forecastMotor=trial.contrast?.motor ?? trial.projectedMove?.command;
     const motor=forecastMotor&&a.available_action_refs.includes(forecastMotor)?forecastMotor:m.motions.find(v=>inside(v.box,source.box)&&a.available_action_refs.includes(v.command))?.command ??
       (transfer?a.available_action_refs.find(ref=>/^ACTION[1-4]$/.test(ref)):undefined);
     if(motor){
@@ -232,6 +246,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       row.slice(trial.source.box[0],trial.source.box[2]+1).every((v,j)=>next[trial.source.box[1]+i]?.[trial.source.box[0]+j]===v));
     const target=trial.target;
     const moved=moves.some(v=>{
+      if(trial.contrast && (input!==trial.contrast.motor || v.dx!==trial.contrast.baselineDelta[0] || v.dy!==trial.contrast.baselineDelta[1]))return false;
       if(!inside([v.box[0]-v.dx,v.box[1]-v.dy,v.box[2]-v.dx,v.box[3]-v.dy],target.box))return false;
       let vacated=false,body=0;
       for(let y=target.box[1];y<=target.box[3];y++)for(let x=target.box[0];x<=target.box[2];x++){
@@ -252,7 +267,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     }
     const triedMotors=[...(trial.triedMotors??[]),input];
     const alternative=a.available_action_refs.find(ref=>/^ACTION[1-4]$/.test(ref)&&!triedMotors.includes(ref));
-    if(b.frame_hash===a.frame_hash && alternative){
+    if(!trial.contrast && b.frame_hash===a.frame_hash && alternative){
       m.pending={...trial,command:alternative,triedMotors,evidence:[...trial.evidence,a.observation_ref]};
       return 'cursor_move_blocked_try_another_direction';
     }

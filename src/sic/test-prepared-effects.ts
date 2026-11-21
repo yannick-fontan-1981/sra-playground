@@ -3,6 +3,7 @@ import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity,
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import {offerCursorTrial,newCursorMemory} from './marked-cursor-selection.ts';
+import type { InformationPreference } from './information-preference.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
@@ -82,7 +83,7 @@ const labels: Record<Experiment['phase'], string> = {
 };
 import {completionContacts} from './terminal-contact.ts';
 import {exposedUnderParts} from './controlled-parts.ts';
-export function createPreparedEffects(): NativeFamily<Offer> {
+export function createPreparedEffects(informationPreference?:InformationPreference): NativeFamily<Offer> {
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
@@ -125,7 +126,8 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const again = !!m.cursorSelection?.motions.length && (!m.cursorSelection.verified
         || (m.cursorSelection.returns??0)>0 || !!m.cursorSelection.blocked?.length);
       const cursor = group===recurrentExperimentGroup && (opening || again || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
-        ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening) : null;
+        ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
+          group===recurrentExperimentGroup ? informationPreference : undefined) : null;
       if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       if (!cursor && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
@@ -141,6 +143,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const experiment:Experiment|null = cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
         rule:cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
+          cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
       if(!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
@@ -183,7 +186,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       if(cursor){
         question.subjects=[cursor.source.box.join(','),cursor.target.box.join(','),String(cursor.ink)];
         question.satisfactionContract=cursor.stage==='select'
-          ? 'test_whether_the_distinctive_mark_transfers_to_the_clicked_peer'
+          ? cursor.contrast?'choose_between_previous_and_selected_subject_by_repeating_the_witnessed_command':'test_whether_the_distinctive_mark_transfers_to_the_clicked_peer'
           : 'test_whether_the_new_cursor_moves_while_the_previous_one_stays';
       }
       const equation = experiment.equation?.claim;

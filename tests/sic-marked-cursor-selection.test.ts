@@ -5,8 +5,35 @@ import {newCursorMemory,offerCursorTrial,recordCursorTrial} from '../src/sic/mar
 import {createPreparedEffects} from '../src/sic/test-prepared-effects.ts';
 import {evidencedPlanGroup,recurrentExperimentGroup} from '../src/sic/experiment-arbitration.ts';
 import {validateV6PublicObservation} from '../src/runtime/v6-agent-protocol.ts';
+import {defaultRecoveryPack} from '../src/sic/active-recovery.ts';
+import {readRecoveryRevision,recoveryRevision} from '../src/sic/recovery-pack.ts';
 
 const palette=['#141414','#e36b28','#2674db','#fff','#292929','#f4df14'];
+
+test('an exploration preference can test two control hypotheses on unfamiliar ground',async()=>{
+  const first=board(),advanced=board(0,13,3,false,5),selected=board(1,13,3,false,5),moved=board(1,15,3,false,5);
+  for (const rows of [first,advanced,selected]) rows[7]![19]=4;
+  const [a,b,c,d]=await Promise.all([first,advanced,selected,moved].map((frame,i)=>observation(frame,i)));
+  for (const [mode,minimumOutcomes,shouldOffer] of [['shadow',2,false],['active',3,false],['active',2,true]] as const) {
+    const pack=recoveryRevision({...defaultRecoveryPack,solver:'sic-fallback',informationPreference:{strategy:'motion_contrast',mode,minimumOutcomes}});
+    const family=createPreparedEffects(readRecoveryRevision(pack).configuration.informationPreference);
+    await family.observePublicOutcome!(a!,b!,{action_ref:'ACTION4',data:{}},first,advanced);
+    const solving=await family.proposeInGroup!(evidencedPlanGroup,b!,advanced,[],20,{});
+    assert.ok(!solving?.cursorSelectionForecast);
+    const plan=await family.proposeInGroup!(recurrentExperimentGroup,b!,advanced,[],20,{});
+    const trial=plan?.cursorSelectionForecast;
+    assert.equal(!!trial,shouldOffer);
+    if(!trial)continue;
+    assert.equal(trial.projectedMove,undefined);
+    assert.equal(trial.contrast.motor,'ACTION4');
+    assert.deepEqual(trial.contrast.outcomes,['previous_subject_moves','selected_subject_moves']);
+    await family.record!(b!,c!,plan.actions[0]!,advanced,selected,plan);
+    const follow=await family.proposeInGroup!(evidencedPlanGroup,c!,selected,[],19,{});
+    assert.equal(follow.actions[0]?.action_ref,'ACTION4');
+    const receipt=await family.record!(c!,d!,follow.actions[0]!,selected,moved,follow);
+    assert.equal(receipt.events[0]?.result,'new_cursor_moved_while_previous_cursor_stayed');
+  }
+});
 function board(active=0,right=13,mark=3,edge=false,first=3) {
   const rows=Array.from({length:20},()=>Array<number>(26).fill(0));
   for(const [i,left] of [first,right].entries()){

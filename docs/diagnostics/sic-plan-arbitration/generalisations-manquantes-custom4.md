@@ -6,6 +6,8 @@ Le critère principal est le premier L2 gagné en partie autonome sur **un jeu C
 
 ## Campagnes continues sur les onze jeux Custom 4
 
+**Protocole v63 fixé avant évaluation.** SS06 L2 sert au diagnostic. SS09 entier est tenu à l’écart de la conception de ce candidat. Ses scores historiques v62 sont connus. Comparer sur le même moteur les déclarations `motion_contrast` en mode `shadow` et `active`, toutes deux au seuil de deux retours et avec les mêmes budgets, puis vérifier le score avec le témoin v62. Le graphe SIC offre déjà P05 pour tester un effet inconnu et la préférence d’information exprime le nombre minimal de retours. Le chemin de SIC Fallback écartait cette préférence. Le producteur de tests du curseur exigeait aussi une projection spatiale préalable. Le nouveau producteur peut proposer une comparaison dans le groupe d’exploration lorsqu’un geste public a déjà déplacé le premier sujet. Le groupe de poursuite du plan conserve sa priorité. La cible et la commande proviennent du jeu en cours. Le reçu lie deux prédictions distinctes aux observations. Relever le test choisi, le sujet dont le déplacement est confirmé, la conservation d’un placement dans les commandes suivantes, puis le score officiel. [Déclaration active](controle-v63-active.json) · [Déclaration témoin](controle-v63-shadow.json)
+
 Le même agent SIC Fallback v62 joue depuis la première observation du L1. Chaque victoire est confirmée par un second passage dans le moteur public, commande par commande. Une partie arrêtée au L1 laisse le résultat du L2 indéterminé dans cette condition. Les colonnes indiquent des coups du niveau concerné.
 
 | Jeu | Campagne L1 | Campagne L2 | L2 à froid |

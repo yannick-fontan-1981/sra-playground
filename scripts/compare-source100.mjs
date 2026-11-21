@@ -21,6 +21,10 @@ const { BrowserV6Agent } = await load(solverRoot, 'src/runtime/v6-agent.ts');
 const { V6AgentService } = await load(solverRoot, 'src/runtime/v6-agent-service.ts');
 const { createNativeV6Runtime } = await load(solverRoot, 'src/logos-engine/v6-native-runtime.ts');
 const { defaultRecoveryPack } = await load(solverRoot, 'src/sic/active-recovery.ts');
+const packPath = process.env.SIC_STUDY_RECOVERY_PACK;
+const packRevision = packPath ? (await load(solverRoot,'src/sic/recovery-pack.ts')).readRecoveryRevision(
+  JSON.parse(await readFile(packPath,'utf8'))) : null;
+if (packRevision && packRevision.configuration.solver !== 'sic-fallback') throw Error('SIC Fallback pack required');
 const declarationsRoot = join(
   environment,
   'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6'
@@ -104,7 +108,21 @@ async function run(code, games) {
           levelCount: board.levelCount - start + 1,
           levelsCompleted: board.levelsCompleted - initialCompleted,
         };
-  const service = new V6AgentService(async(recovery) => {const backend=await createNativeV6Runtime(declarations,{recovery});return lesson?lesson.wrap(backend):backend;});
+  const cursorAudit = process.env.SIC_STUDY_CURSOR_OFFERS ? [] : null;
+  const service = new V6AgentService(async(recovery) => {
+    const backend=await createNativeV6Runtime(declarations,{recovery});
+    if (cursorAudit) {
+      const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
+      const original = family.proposeInGroup.bind(family);
+      family.proposeInGroup = async (...args) => {
+        const proposal = await original(...args);
+        const trial = proposal?.cursorSelectionForecast ?? proposal?.experiment?.cursorTrial;
+        cursorAudit.push({decision:issued+1, group:args[0], offered:trial?.stage??null});
+        return proposal;
+      };
+    }
+    return lesson?lesson.wrap(backend):backend;
+  });
   const transport = { request: (operation) => service.handle(operation), reset() {}, dispose() {} };
   const trajectory = createHash('sha256'),
     levels = [],
@@ -177,7 +195,7 @@ async function run(code, games) {
     targetLevels: finish - start + 1,
     actionsPerLevel: cap,
     parallelWorkers: Number(process.env.SIC_STUDY_WORKERS ?? 4),
-    recoveryConfiguration: () => ({ ...defaultRecoveryPack, solver: 'sic-fallback' }),
+    recoveryConfiguration: () => packRevision?.configuration ?? { ...defaultRecoveryPack, solver: 'sic-fallback' },
     canDispatch: () => true,
     onState: collectPreparation,
     getObservation: observation,
@@ -249,6 +267,8 @@ async function run(code, games) {
       if(plan?.cursorSelectionForecast && replayCommands){
         const cursor=plan.cursorSelectionForecast;
         Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor)});
+        if(cursor.contrast) Object.assign(replayCommands.at(-1),{controlContrast:cursor.contrast,
+          observedSubjects:[cursor.source.box,cursor.target.box]});
         if(cursor.projectedMove) Object.assign(replayCommands.at(-1),{cursorMotor:cursor.projectedMove.command,
           cursorDelta:cursor.projectedMove.delta});
       }
@@ -421,6 +441,8 @@ async function run(code, games) {
           ...(transfer ? {transfer} : {}),
         })
       ),
+      ...(cursorAudit ? {cursorAudit} : {}),
+      ...(packRevision ? {packDigest:packRevision.digest} : {}),
       ...(source ? { steps } : {}),
     };
   } finally {

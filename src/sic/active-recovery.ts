@@ -52,10 +52,13 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
   }
   if (Object.hasOwn(pack, 'solver')) {
     if ((pack.solver !== 'sic' && pack.solver !== 'sic-fallback') || pack.mode !== 'active'
-      || fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'solver'].includes(field))) {
+      || fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'solver'].includes(field)
+        && !(pack.solver === 'sic-fallback' && field === 'informationPreference'))) {
       throw new TypeError('SIC-only resolution requires an active standalone pack.');
     }
-    return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes, solver: pack.solver });
+    const preference = Object.hasOwn(pack, 'informationPreference') ? compileInformationPreference(pack.informationPreference) : undefined;
+    return Object.freeze({ version: 1, mode: pack.mode, maxDepth: pack.maxDepth, maxNodes: pack.maxNodes, solver: pack.solver,
+      ...(preference ? { informationPreference: preference } : {}) });
   }
   const order = pack.strategyOrder;
   if (Object.hasOwn(pack, 'strategyOrder') && (!Array.isArray(order) || order.length !== contactRecoveryOrder.length
