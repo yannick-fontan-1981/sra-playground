@@ -12699,5 +12699,440 @@
       },
       "identicalChosenInputs": true
     }
+  },
+  "sourceProjectedEncounterStudy": {
+    "scope": "Source-only interventions. The level score is the engine transition. Native SIC unchanged by this study.",
+    "nativeControl": "sic-source100-joint-field-v55",
+    "sourceGames": 100,
+    "levels": 146,
+    "sourceL1": 100,
+    "sourceUpper": 46,
+    "additionalUpperLevels": [
+      "COLM/2",
+      "COLM/3"
+    ],
+    "training": "Other games only, L1 penultimate states with eligible projections. Score the withheld game at fixed prefixes and near the recorded end. Features are relational.",
+    "rulesAcrossHeldOutGames": {
+      "contact": 98,
+      "unique": 2
+    },
+    "choiceEvaluations": {
+      "sourceL1End": {
+        "counts": {
+          "prefixes": 64,
+          "eligible": 19,
+          "executedPairs": 292,
+          "projectedPairs": 40,
+          "confirmedPreparations": 19,
+          "projectedWinsRequiringBoth": 10,
+          "choicesRanked": 17,
+          "tiedFirst": 8,
+          "selectedPairs": 38,
+          "selectedWinsRequiringBoth": 8,
+          "positionsWithWinningPair": 12,
+          "positionsWithSelectedWin": 8,
+          "selectedWinsWithVerifiedSetupAndLosingRival": 6
+        },
+        "casesWithWinningPairAndLosingRival": [
+          {
+            "game": "KEYD",
+            "level": 1,
+            "prefix": 33,
+            "flag": "contact",
+            "plan": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "losingPreparations": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION3"
+            ],
+            "tied": 1
+          },
+          {
+            "game": "SKBN",
+            "level": 1,
+            "prefix": 20,
+            "flag": "contact",
+            "plan": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "losingPreparations": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION3"
+            ],
+            "tied": 11
+          },
+          {
+            "game": "G50T",
+            "level": 1,
+            "prefix": 25,
+            "flag": "contact",
+            "plan": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "losingPreparations": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION3"
+            ],
+            "tied": 1
+          },
+          {
+            "game": "KLOT",
+            "level": 1,
+            "prefix": 28,
+            "flag": "contact",
+            "plan": [
+              "ACTION3",
+              "ACTION2"
+            ],
+            "losingPreparations": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION4"
+            ],
+            "tied": 4
+          },
+          {
+            "game": "DC22",
+            "level": 1,
+            "prefix": 22,
+            "flag": "contact",
+            "plan": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "losingPreparations": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION3"
+            ],
+            "tied": 1
+          },
+          {
+            "game": "SNAR",
+            "level": 1,
+            "prefix": 15,
+            "flag": "contact",
+            "plan": [
+              "ACTION4",
+              "ACTION4"
+            ],
+            "losingPreparations": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION3"
+            ],
+            "tied": 1
+          }
+        ],
+        "meanWinProbabilityWithUniformTies": 0.3436,
+        "meanWinProbabilityForUniformPairs": 0.0551,
+        "meanWinProbabilityRepeatingOneMotor": 0.1176,
+        "meanWinProbabilityForFrequentWord": 0.3529
+      },
+      "sourceUpperEnd": {
+        "counts": {
+          "prefixes": 32,
+          "eligible": 6,
+          "executedPairs": 96,
+          "projectedPairs": 15,
+          "confirmedPreparations": 5,
+          "projectedWinsRequiringBoth": 0,
+          "choicesRanked": 5,
+          "tiedFirst": 4,
+          "selectedPairs": 13,
+          "selectedWinsRequiringBoth": 0,
+          "positionsWithWinningPair": 0,
+          "positionsWithSelectedWin": 0
+        },
+        "casesWithWinningPairAndLosingRival": [],
+        "meanWinProbabilityWithUniformTies": 0,
+        "meanWinProbabilityForUniformPairs": 0,
+        "meanWinProbabilityRepeatingOneMotor": 0,
+        "meanWinProbabilityForFrequentWord": 0
+      },
+      "fixedL1": {
+        "counts": {
+          "prefixes": 130,
+          "eligible": 16,
+          "executedPairs": 256,
+          "projectedPairs": 40,
+          "confirmedPreparations": 17,
+          "projectedWinsRequiringBoth": 1,
+          "choicesRanked": 16,
+          "tiedFirst": 9,
+          "selectedPairs": 40,
+          "selectedWinsRequiringBoth": 1,
+          "positionsWithWinningPair": 2,
+          "positionsWithSelectedWin": 1,
+          "selectedWinsWithVerifiedSetupAndLosingRival": 1
+        },
+        "casesWithWinningPairAndLosingRival": [
+          {
+            "game": "FITE",
+            "level": 1,
+            "prefix": 8,
+            "flag": "contact",
+            "plan": [
+              "ACTION2",
+              "ACTION4"
+            ],
+            "losingPreparations": [
+              "ACTION1",
+              "ACTION3",
+              "ACTION4"
+            ],
+            "tied": 4
+          }
+        ],
+        "meanWinProbabilityWithUniformTies": 0.0156,
+        "meanWinProbabilityForUniformPairs": 0.0195,
+        "meanWinProbabilityRepeatingOneMotor": 0.0156,
+        "meanWinProbabilityForFrequentWord": 0.0625
+      },
+      "fixedUpper": {
+        "counts": {
+          "prefixes": 93,
+          "eligible": 18,
+          "executedPairs": 288,
+          "projectedPairs": 59,
+          "confirmedPreparations": 29,
+          "projectedWinsRequiringBoth": 0,
+          "choicesRanked": 16,
+          "tiedFirst": 14,
+          "selectedPairs": 52,
+          "selectedWinsRequiringBoth": 0,
+          "positionsWithWinningPair": 0,
+          "positionsWithSelectedWin": 0
+        },
+        "casesWithWinningPairAndLosingRival": [],
+        "meanWinProbabilityWithUniformTies": 0,
+        "meanWinProbabilityForUniformPairs": 0,
+        "meanWinProbabilityRepeatingOneMotor": 0,
+        "meanWinProbabilityForFrequentWord": 0
+      }
+    },
+    "routesFromEightPublicInputs": {
+      "sourceL1": {
+        "2": {
+          "levels": 100,
+          "withRoute": 8,
+          "withLongRoute": 0,
+          "issued": 31,
+          "matched": 5,
+          "checked": 12,
+          "reachedLastGesture": 19,
+          "wins": 0
+        },
+        "6": {
+          "levels": 100,
+          "withRoute": 10,
+          "withLongRoute": 5,
+          "issued": 106,
+          "matched": 14,
+          "checked": 68,
+          "reachedLastGesture": 38,
+          "wins": 0
+        }
+      },
+      "sourceUpper": {
+        "2": {
+          "levels": 46,
+          "withRoute": 6,
+          "withLongRoute": 0,
+          "issued": 29,
+          "matched": 6,
+          "checked": 9,
+          "reachedLastGesture": 20,
+          "wins": 0
+        },
+        "6": {
+          "levels": 46,
+          "withRoute": 11,
+          "withLongRoute": 8,
+          "issued": 126,
+          "matched": 45,
+          "checked": 88,
+          "reachedLastGesture": 38,
+          "wins": 0
+        }
+      }
+    },
+    "routeAdditionalActionBudget": 32,
+    "causalThirdGesture": {
+      "trials": 132,
+      "games": 15,
+      "levels": 17,
+      "withControls": 132,
+      "localChanges": 66,
+      "isolatedChanges": 19,
+      "unseenLocal": 7,
+      "officialWins": 0,
+      "unseenCases": [
+        {
+          "code": "COLM",
+          "level": 1,
+          "prefix": 8,
+          "a": "ACTION4",
+          "b": "ACTION4",
+          "c": "ACTION5"
+        },
+        {
+          "code": "COLM",
+          "level": 1,
+          "prefix": 18,
+          "a": "ACTION3",
+          "b": "ACTION3",
+          "c": "ACTION5"
+        },
+        {
+          "code": "ESCT",
+          "level": 2,
+          "prefix": 4,
+          "a": "ACTION1",
+          "b": "ACTION1",
+          "c": "ACTION5"
+        },
+        {
+          "code": "ESCT",
+          "level": 2,
+          "prefix": 4,
+          "a": "ACTION2",
+          "b": "ACTION2",
+          "c": "ACTION5"
+        },
+        {
+          "code": "ESCT",
+          "level": 2,
+          "prefix": 8,
+          "a": "ACTION1",
+          "b": "ACTION1",
+          "c": "ACTION5"
+        },
+        {
+          "code": "ESCT",
+          "level": 2,
+          "prefix": 8,
+          "a": "ACTION2",
+          "b": "ACTION2",
+          "c": "ACTION5"
+        },
+        {
+          "code": "ESCT",
+          "level": 2,
+          "prefix": 16,
+          "a": "ACTION2",
+          "b": "ACTION2",
+          "c": "ACTION5"
+        }
+      ]
+    },
+    "followUpCOLM": {
+      "trials": 51,
+      "games": 1,
+      "levels": 2,
+      "withControls": 51,
+      "localChanges": 30,
+      "isolatedChanges": 10,
+      "unseenLocal": 5,
+      "officialWins": 0,
+      "unseenCases": [
+        {
+          "code": "COLM",
+          "level": 2,
+          "prefix": 8,
+          "a": "ACTION3",
+          "b": "ACTION3",
+          "c": "ACTION5"
+        },
+        {
+          "code": "COLM",
+          "level": 2,
+          "prefix": 8,
+          "a": "ACTION4",
+          "b": "ACTION4",
+          "c": "ACTION5"
+        },
+        {
+          "code": "COLM",
+          "level": 2,
+          "prefix": 16,
+          "a": "ACTION4",
+          "b": "ACTION4",
+          "c": "ACTION5"
+        },
+        {
+          "code": "COLM",
+          "level": 3,
+          "prefix": 4,
+          "a": "ACTION3",
+          "b": "ACTION3",
+          "c": "ACTION5"
+        },
+        {
+          "code": "COLM",
+          "level": 3,
+          "prefix": 16,
+          "a": "ACTION4",
+          "b": "ACTION4",
+          "c": "ACTION5"
+        }
+      ]
+    },
+    "scoreWithIdenticalContinuations": {
+      "initial": {
+        "comparisons": 14,
+        "preparedWins": 0,
+        "preparedWinsAlsoWonWithNoPreparation": 0,
+        "preparedWinsWithAllRivalsLosing": 0
+      },
+      "additionalCOLM": {
+        "comparisons": 10,
+        "preparedWins": 4,
+        "preparedWinsAlsoWonWithNoPreparation": 4,
+        "preparedWinsWithAllRivalsLosing": 0
+      }
+    },
+    "additionalNativeSourceControl": [
+      {
+        "level": 2,
+        "won": true,
+        "actions": 24,
+        "trajectory": "6b0bb9404937c4bf5f97bf4ad73b1f9ebf627f7c469422c28463d0fb3826e4be"
+      },
+      {
+        "level": 3,
+        "won": true,
+        "actions": 37,
+        "trajectory": "a12801b944fdbb2376627a25eef935bf5875643af44ceb780a0cb2d16aef783e"
+      }
+    ],
+    "localEvidenceSHA256": {
+      "encounter56-check-0.json": "04794d5f269019ba060810751c3948b38bdfb1ec6b8db5f8f43dcf5c9bc0043e",
+      "encounter56-check-1.json": "572ebfc60fbdefaded20331d6bbe24c993aac587c44a566f230c363004b3b74d",
+      "encounter56-check-2.json": "9aea79b56c90ae725911ddef41e0eb05c2f573b8e16f73d4ef032b3beb75641e",
+      "encounter56-check-3.json": "3c2e2e15e6421af0cca4b7e6542548ca68180a40154c0acd70a2b2c6eb26f9f1",
+      "continue56-final-0.json": "39b0dfedf4d5c42bde53fad05669d893111e319ca61299e737972a98ce87c881",
+      "continue56-final-1.json": "66f520d80defc7d94efa4516318467863120e7af6852ddb995944ebc9f457580",
+      "continue56-final-2.json": "d90084e4f4a95fcb7a5a3c87e07735f96eb478d0ff882f64f55aedfd6e52a571",
+      "continue56-final-3.json": "333811db2ad0bc5f64edeb15108edd99e9d2dfbe095223cf464dfdd8b35ae232",
+      "routes56-0.json": "d802029d10ce8434cd5f0d3fc4b61cfd5b377197db68e9070ed3068d0817ace1",
+      "routes56-1.json": "1c27e7920db7125eea514fb44279d3f00fc6f9b2d687782c87d7a4a21a99c768",
+      "routes56-2.json": "18434319e7eeedc41f75992f5e629909585fd8b4c08856387f4f9cfd36a5ea87",
+      "routes56-3.json": "922300f3824e079be7dd65b51762a5a45112ac628db2b1198e3a4cea2253dcc6",
+      "encounter56-colm-upper.json": "3032c36be242e86c42484bea3af0b5637a3cac5976e04c387927c7aa97d8cbaf",
+      "continue56-colm-upper.json": "a2ad4eaae193f9290ac80108d2493650f481597858f3faeaecffddfa8e03faff",
+      "payoff56-0.json": "67a8d4fa2b5693d9d458b6eee34bc00bd6097b2ffcf86ceeb4f9ef2d36175f34",
+      "payoff56-3.json": "6a26168e8a38dda9aadd9748128433cd32df517c570b07bae7f875c0bc286854",
+      "payoff56-colm-upper.json": "a7f4bec8dc79491bb9e0434ba874093e43c2ab68cc03e200de3ef3444c48f0d1"
+    },
+    "custom4RunsForThisStudy": 0,
+    "ss09L2Used": false
   }
 }
