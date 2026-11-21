@@ -133,8 +133,10 @@ function fitResponse(g:Graph,r:Response,origin:XY):Fitted|undefined{
   const fitted={predicted,ranks:captureRanks(g.cells,g.actorEdges,g.peerEdges,true,predicted)};
   if(g.models.size>=8)g.models.delete(g.models.keys().next().value!);g.models.set(k,fitted);return fitted;
 }
+export type PursuitTerrain={actor:string;peer:string;from:XY;targets:XY[];pitch:number;floor:number;known:Set<string>;
+  reachable:XY[];motors:{op:string;d:XY}[]};
 export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:VisualLayout,rows:NativeRows,available:Set<string>,
-  attempts:Record<string,number>={}):PursuitChoice|null {
+  attempts:Record<string,number>={},inspect?:(terrain:PursuitTerrain)=>void):PursuitChoice|null {
   let best:{score:number;choice:PursuitChoice}|undefined;
   for(const r of Object.values(memory.pairs)){
     const subject=view[r.actor],targets=view[r.peer],motion=learn.partMotion?.[r.actor];
@@ -156,6 +158,7 @@ export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:Vi
       if(!occupied.has(k)&&!sites.has(k)&&color(p)!==floor)continue;
       seen.add(k);open.push(p);
     }
+    inspect?.({actor:r.actor,peer:r.peer,from:a,targets:targets.map(t=>aligned(t.at,a,step)),pitch,floor,known:sites,reachable:open,motors});
     if(open.length>192)continue;
     const g=graph(open,motors.map(m=>m.d),full),ai=g.indices.get(a.join())!,n=g.cells.length,fit=fitResponse(g,r,a);
     for(const target of targets){
