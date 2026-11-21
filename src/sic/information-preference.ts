@@ -25,7 +25,7 @@ export interface InformationOfferSummary {
 }
 
 export function informationPriority(offer: InformationOfferSummary, preference: InformationPreference) {
-const prepared=['paired_arrival','indicated_access','plan_after_selection','test_partner_preparation','reclassify_displaced_goal','prepare_joint_arrivals','transfer_registered_footing'].includes(preference.strategy);
+  const prepared=['paired_arrival','indicated_access','plan_after_selection','test_partner_preparation','reclassify_displaced_goal','prepare_joint_arrivals','transfer_registered_footing','compose_observed_transports'].includes(preference.strategy);
   const matches=offer.strategy===preference.strategy || (prepared && offer.strategy==='motion_contrast');
   return matches && offer.distinctOutcomes >= preference.minimumOutcomes ? 1 : 0;
 }

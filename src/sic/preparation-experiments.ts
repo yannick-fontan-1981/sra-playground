@@ -108,6 +108,7 @@ type Rule = {
 import {observePlacement} from './paired-landmark-placement.ts';
 export type Experiment = {
   phase:
+    | 'composeObservedTransport'
     | 'testLandmarkPlacement'
     | 'selectMarkedCursor'
     | 'verifyMarkedCursor'
@@ -171,6 +172,7 @@ export type Experiment = {
   refs: number[];
   localCapacity?: LocalForecast;
   configurationTrial?: ConfigurationTrial;
+  cooperative?: import('./transport-observations.ts').TransportForecast;
   cursorTrial?: CursorTrial;
   landmark?: import('./paired-landmark-placement.ts').LandmarkTrial;
   cue?: CueTest;
@@ -245,6 +247,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  transportLearning?: import('./transport-observations.ts').TransportMemory;
   cursorSelection?: CursorMemory;
   landmarkMemory?: import('./paired-landmark-placement.ts').LandmarkMemory;
   relativeMotion?: RelativeMemory;
@@ -1077,6 +1080,7 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if(x.cooperative)return out;
   if(x.localCapacity) {
     const receipt=assessLocal(local,x.localCapacity,b,a,rows,next);
     return {...out,result:'local_capacity_'+receipt.stage+(receipt.matches?'_matched':'_refuted'),localCapacity:receipt};
