@@ -29,3 +29,13 @@ test('derives equal-duration preparations differing only in where the first subj
   assert.equal(plan.test.input,'L');assert.deepEqual(plan.destination,[3,0]);
   assert.equal(planRoleOccupancy([0,0],[4,0],motors,p=>p[0]>=0&&p[0]<=4,2),null);
 });
+
+test('moves the preparer into a measured contact pose and keeps the same subsequent command in both arms',()=>{
+  const motors=[{input:'advance',dx:1,dy:0,ref:3},{input:'retreat',dx:-1,dy:0,ref:4}];
+  const plan=planRoleOccupancy([0,0],[3,0],motors,p=>p[0]>=0&&p[0]<=4,2,new Set(),
+    {input:'advance',offset:[-1,0]})!;
+  assert.deepEqual(plan.occupied.map(p=>p.input),['advance','advance']);
+  assert.deepEqual(plan.clear.map(p=>p.input),['advance','retreat']);
+  assert.deepEqual(plan.destination,[2,0]);
+  assert.equal(plan.test.input,'advance');
+});

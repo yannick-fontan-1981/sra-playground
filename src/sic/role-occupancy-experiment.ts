@@ -10,6 +10,7 @@ export function planRoleOccupancy(
   first: RoleSite, second: RoleSite, motors: readonly MeasuredMotor[],
   possible: (site: RoleSite) => boolean, maxSteps: number,
   exclude: ReadonlySet<string> = new Set(),
+  observedRelation?: {input:string; offset:RoleSite},
 ): OccupancyExperiment | null {
   const secondKey=key(second);
   if (key(first)===secondKey || maxSteps<1) return null;
@@ -24,7 +25,9 @@ export function planRoleOccupancy(
         if(key(target)!==secondKey && possible(target)) endings.push({input:motor.input,site:target});
       }
       for(const test of motors){
-        const destination:RoleSite=[second[0]+test.dx,second[1]+test.dy];
+        if(observedRelation && test.input!==observedRelation.input)continue;
+        const relative=observedRelation?.offset??[test.dx,test.dy];
+        const destination:RoleSite=[second[0]+relative[0]!,second[1]+relative[1]!];
         const occupied=endings.find(step=>key(step.site)===key(destination));
         if(!occupied)continue;
         for(const clear of endings){
