@@ -9850,5 +9850,1036 @@
         }
       ]
     }
+  },
+  "retainedOperandsStudy": {
+    "sourceL1": {
+      "choice": {
+        "levels": 100,
+        "groups": 18,
+        "matchedGroups": 12,
+        "allPhysicalAlternatives": 167,
+        "strongContrast": 11,
+        "decisions": [
+          {
+            "code": "SYME",
+            "level": 1,
+            "prefix": 2,
+            "alternatives": 7,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "SYME",
+            "level": 1,
+            "prefix": 3,
+            "alternatives": 6,
+            "first": false,
+            "neighborhood": false,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "SYME",
+            "level": 1,
+            "prefix": 4,
+            "alternatives": 5,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "SYME",
+            "level": 1,
+            "prefix": 5,
+            "alternatives": 4,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 1,
+            "prefix": 44,
+            "alternatives": 4,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 1,
+            "prefix": 45,
+            "alternatives": 3,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 1,
+            "prefix": 47,
+            "alternatives": 2,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TRCP",
+            "level": 1,
+            "prefix": 4,
+            "alternatives": 19,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TRCP",
+            "level": 1,
+            "prefix": 5,
+            "alternatives": 20,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "FT09",
+            "level": 1,
+            "prefix": 23,
+            "alternatives": 18,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "FT09",
+            "level": 1,
+            "prefix": 24,
+            "alternatives": 17,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "FT09",
+            "level": 1,
+            "prefix": 24,
+            "alternatives": 17,
+            "first": false,
+            "neighborhood": true,
+            "geometry": false,
+            "geometryWon": false
+          }
+        ]
+      },
+      "retainedEffects": {
+        "episodes": 100,
+        "branches": 23,
+        "outcomes": {
+          "score": 3,
+          "no_continuation": 12,
+          "effect_missing": 6,
+          "acquired_effect_lost": 2
+        },
+        "officialScores": [
+          {
+            "code": "DNOI",
+            "level": 1,
+            "prefix": 2,
+            "length": 1,
+            "baselineWon": true,
+            "word": [
+              "ACTION6:31,35"
+            ],
+            "controls": [
+              {
+                "type": "recorded",
+                "won": true,
+                "length": 1,
+                "identical": true
+              },
+              {
+                "type": "constant",
+                "input": "ACTION6:31,35",
+                "won": true,
+                "length": 1
+              },
+              {
+                "type": "omit",
+                "index": 0,
+                "won": false,
+                "length": 0
+              }
+            ]
+          },
+          {
+            "code": "SYME",
+            "level": 1,
+            "prefix": 8,
+            "length": 1,
+            "baselineWon": true,
+            "word": [
+              "ACTION6:55,29"
+            ],
+            "controls": [
+              {
+                "type": "recorded",
+                "won": true,
+                "length": 1,
+                "identical": true
+              },
+              {
+                "type": "constant",
+                "input": "ACTION6:55,29",
+                "won": true,
+                "length": 1
+              },
+              {
+                "type": "omit",
+                "index": 0,
+                "won": false,
+                "length": 0
+              }
+            ]
+          },
+          {
+            "code": "CATR",
+            "level": 1,
+            "prefix": 31,
+            "length": 1,
+            "baselineWon": true,
+            "word": [
+              "ACTION6:27,51"
+            ],
+            "controls": [
+              {
+                "type": "recorded",
+                "won": true,
+                "length": 1,
+                "identical": true
+              },
+              {
+                "type": "constant",
+                "input": "ACTION6:27,51",
+                "won": true,
+                "length": 1
+              },
+              {
+                "type": "omit",
+                "index": 0,
+                "won": false,
+                "length": 0
+              }
+            ]
+          }
+        ]
+      },
+      "coordinates": {
+        "episodes": 100,
+        "plans": 113,
+        "outcomes": {
+          "arrived": 13,
+          "blocked": 78,
+          "marker_changed": 10,
+          "score": 4,
+          "other_effect": 8
+        },
+        "wins": [
+          {
+            "code": "LS20",
+            "level": 1,
+            "prefix": 11,
+            "rank": 2,
+            "planned": 4,
+            "actual": 4,
+            "baselineWon": true
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "prefix": 6,
+            "rank": 0,
+            "planned": 4,
+            "actual": 1,
+            "baselineWon": true
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "prefix": 6,
+            "rank": 1,
+            "planned": 5,
+            "actual": 1,
+            "baselineWon": true
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "prefix": 6,
+            "rank": 2,
+            "planned": 6,
+            "actual": 1,
+            "baselineWon": true
+          }
+        ]
+      },
+      "preparedUse": {
+        "preparations": 40,
+        "uses": 316,
+        "opened": 0,
+        "preparedWins": [
+          {
+            "code": "TN36",
+            "level": 1,
+            "baselineWon": true,
+            "prefix": 50,
+            "prepared": [
+              "ACTION6:41,45",
+              "ACTION6:41,42"
+            ],
+            "use": [
+              "ACTION6:36,55",
+              "ACTION6:21,42"
+            ],
+            "bareWin": false,
+            "shortenedWin": false,
+            "timeControl": {
+              "used": 1,
+              "won": true,
+              "changed": true,
+              "image": "b13e4faa55ea51bf",
+              "lost": false
+            }
+          },
+          {
+            "code": "CATR",
+            "level": 1,
+            "baselineWon": true,
+            "prefix": 27,
+            "prepared": [
+              "ACTION6:35,51"
+            ],
+            "use": [
+              "ACTION6:31,47"
+            ],
+            "bareWin": false,
+            "shortenedWin": false,
+            "timeControl": {
+              "used": 1,
+              "won": false,
+              "changed": true,
+              "image": "addd7a326e497971",
+              "lost": false
+            }
+          },
+          {
+            "code": "CATR",
+            "level": 1,
+            "baselineWon": true,
+            "prefix": 27,
+            "prepared": [
+              "ACTION6:35,51"
+            ],
+            "use": [
+              "ACTION6:31,44",
+              "ACTION6:31,47"
+            ],
+            "bareWin": false,
+            "shortenedWin": false,
+            "timeControl": {
+              "used": 2,
+              "won": false,
+              "changed": true,
+              "image": "addd7a326e497971",
+              "lost": false
+            }
+          },
+          {
+            "code": "THER",
+            "level": 1,
+            "baselineWon": true,
+            "prefix": 16,
+            "prepared": [
+              "ACTION6:21,32"
+            ],
+            "use": [
+              "ACTION6:49,32",
+              "ACTION6:19,32"
+            ],
+            "bareWin": true,
+            "shortenedWin": true,
+            "timeControl": {
+              "used": 2,
+              "won": false,
+              "changed": true,
+              "image": "08dfe42ac665fdc8",
+              "lost": false
+            }
+          },
+          {
+            "code": "FT09",
+            "level": 1,
+            "baselineWon": true,
+            "prefix": 24,
+            "prepared": [
+              "ACTION6:54,38",
+              "ACTION6:55,47"
+            ],
+            "use": [
+              "ACTION6:54,38"
+            ],
+            "bareWin": false,
+            "shortenedWin": false,
+            "timeControl": null
+          }
+        ]
+      }
+    },
+    "sixSourceFamiliesL2L3": {
+      "choice": {
+        "levels": 12,
+        "groups": 39,
+        "matchedGroups": 14,
+        "allPhysicalAlternatives": 382,
+        "strongContrast": 23,
+        "decisions": [
+          {
+            "code": "DNOI",
+            "level": 2,
+            "prefix": 2,
+            "alternatives": 4,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "DNOI",
+            "level": 2,
+            "prefix": 4,
+            "alternatives": 2,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "DNOI",
+            "level": 3,
+            "prefix": 2,
+            "alternatives": 4,
+            "first": true,
+            "neighborhood": false,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 2,
+            "prefix": 46,
+            "alternatives": 18,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 2,
+            "prefix": 49,
+            "alternatives": 18,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 2,
+            "prefix": 50,
+            "alternatives": 18,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 2,
+            "prefix": 50,
+            "alternatives": 17,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 3,
+            "prefix": 46,
+            "alternatives": 24,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 3,
+            "prefix": 48,
+            "alternatives": 28,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "TN36",
+            "level": 3,
+            "prefix": 51,
+            "alternatives": 24,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          },
+          {
+            "code": "SYME",
+            "level": 2,
+            "prefix": 3,
+            "alternatives": 5,
+            "first": false,
+            "neighborhood": false,
+            "geometry": false,
+            "geometryWon": false
+          },
+          {
+            "code": "SYME",
+            "level": 2,
+            "prefix": 4,
+            "alternatives": 4,
+            "first": false,
+            "neighborhood": false,
+            "geometry": false,
+            "geometryWon": false
+          },
+          {
+            "code": "SYME",
+            "level": 2,
+            "prefix": 4,
+            "alternatives": 4,
+            "first": false,
+            "neighborhood": false,
+            "geometry": false,
+            "geometryWon": false
+          },
+          {
+            "code": "SYME",
+            "level": 3,
+            "prefix": 4,
+            "alternatives": 6,
+            "first": false,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          }
+        ]
+      },
+      "retainedEffects": {
+        "episodes": 12,
+        "branches": 42,
+        "outcomes": {
+          "no_continuation": 24,
+          "score": 2,
+          "effect_missing": 15,
+          "acquired_effect_lost": 1
+        },
+        "officialScores": [
+          {
+            "code": "DNOI",
+            "level": 2,
+            "prefix": 4,
+            "length": 2,
+            "baselineWon": true,
+            "word": [
+              "ACTION6:43,53",
+              "ACTION6:49,29"
+            ],
+            "controls": [
+              {
+                "type": "recorded",
+                "won": true,
+                "length": 2,
+                "identical": true
+              },
+              {
+                "type": "constant",
+                "input": "ACTION6:43,53",
+                "won": false,
+                "length": 2
+              },
+              {
+                "type": "constant",
+                "input": "ACTION6:49,29",
+                "won": false,
+                "length": 2
+              },
+              {
+                "type": "omit",
+                "index": 0,
+                "won": false,
+                "length": 1
+              },
+              {
+                "type": "omit",
+                "index": 1,
+                "won": false,
+                "length": 1
+              }
+            ]
+          },
+          {
+            "code": "DNOI",
+            "level": 2,
+            "prefix": 5,
+            "length": 1,
+            "baselineWon": true,
+            "word": [
+              "ACTION6:49,29"
+            ],
+            "controls": [
+              {
+                "type": "recorded",
+                "won": true,
+                "length": 1,
+                "identical": true
+              },
+              {
+                "type": "constant",
+                "input": "ACTION6:49,29",
+                "won": true,
+                "length": 1
+              },
+              {
+                "type": "omit",
+                "index": 0,
+                "won": false,
+                "length": 0
+              }
+            ]
+          }
+        ]
+      },
+      "coordinates": {
+        "episodes": 12,
+        "plans": 0,
+        "outcomes": {},
+        "wins": []
+      },
+      "preparedUse": {
+        "preparations": 39,
+        "uses": 279,
+        "opened": 0,
+        "preparedWins": []
+      }
+    },
+    "otherUpper": {
+      "choice": {
+        "levels": 34,
+        "groups": 2,
+        "matchedGroups": 1,
+        "allPhysicalAlternatives": 7,
+        "strongContrast": 0,
+        "decisions": [
+          {
+            "code": "WEAV",
+            "level": 2,
+            "prefix": 87,
+            "alternatives": 5,
+            "first": true,
+            "neighborhood": true,
+            "geometry": true,
+            "geometryWon": false
+          }
+        ]
+      },
+      "retainedEffects": {
+        "episodes": 34,
+        "branches": 8,
+        "outcomes": {
+          "no_continuation": 5,
+          "acquired_effect_lost": 2,
+          "effect_missing": 1
+        },
+        "officialScores": []
+      },
+      "coordinates": {
+        "episodes": 34,
+        "plans": 145,
+        "outcomes": {
+          "blocked": 68,
+          "other_effect": 43,
+          "arrived": 23,
+          "marker_changed": 11
+        },
+        "wins": []
+      },
+      "preparedUse": {
+        "preparations": 21,
+        "uses": 208,
+        "opened": 6,
+        "preparedWins": []
+      }
+    },
+    "scoreCoordinates": [
+      {
+        "code": "DNOI",
+        "level": 1,
+        "prefix": 0,
+        "goal": [
+          1,
+          1,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [
+            "count",
+            "occupied"
+          ],
+          [
+            "occupied"
+          ],
+          [
+            "occupied"
+          ]
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "PORT",
+        "level": 1,
+        "prefix": 14,
+        "goal": [
+          1,
+          2
+        ],
+        "equalImages": false,
+        "privateByInput": [
+          [
+            "y"
+          ],
+          [
+            "x"
+          ]
+        ],
+        "arrivals": [
+          {
+            "role": "cd9f22043d80",
+            "start": [
+              39,
+              87
+            ],
+            "projected": [
+              23,
+              95
+            ],
+            "goals": [
+              {
+                "target": "a0f6a912be98",
+                "position": [
+                  23,
+                  95
+                ],
+                "copies": 1
+              },
+              {
+                "target": "4b77a3e7e2d3",
+                "position": [
+                  23,
+                  95
+                ],
+                "copies": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "SYME",
+        "level": 1,
+        "prefix": 6,
+        "goal": [
+          1,
+          1,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [
+            "occupied"
+          ],
+          [
+            "count",
+            "occupied"
+          ],
+          [
+            "occupied"
+          ]
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "CLRS",
+        "level": 1,
+        "prefix": 14,
+        "goal": [
+          2,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [],
+          []
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "DC22",
+        "level": 1,
+        "prefix": 21,
+        "goal": [
+          1,
+          2
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [
+            "y"
+          ],
+          [
+            "x"
+          ]
+        ],
+        "arrivals": [
+          {
+            "role": "5fd0a3e1c0aa",
+            "start": [
+              41,
+              45
+            ],
+            "projected": [
+              49,
+              41
+            ],
+            "goals": [
+              {
+                "target": "4b77a3e7e2d3",
+                "position": [
+                  49,
+                  41
+                ],
+                "copies": 1
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "PIPE",
+        "level": 1,
+        "prefix": 1,
+        "goal": [
+          1,
+          1,
+          1
+        ],
+        "equalImages": false,
+        "privateByInput": [
+          [
+            "count",
+            "occupied"
+          ],
+          [
+            "occupied"
+          ],
+          [
+            "count",
+            "occupied"
+          ]
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "TRCP",
+        "level": 1,
+        "prefix": 21,
+        "goal": [
+          1,
+          1,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [
+            "count",
+            "occupied"
+          ],
+          [
+            "occupied"
+          ],
+          [
+            "count",
+            "occupied"
+          ]
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "FT09",
+        "level": 1,
+        "prefix": 22,
+        "goal": [
+          1,
+          1,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [
+            "occupied"
+          ],
+          [
+            "occupied"
+          ],
+          [
+            "occupied"
+          ]
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "RE86",
+        "level": 1,
+        "prefix": 23,
+        "goal": [
+          2,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [],
+          [
+            "occupied"
+          ]
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "TICT",
+        "level": 1,
+        "prefix": 2,
+        "goal": [
+          1,
+          1,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [
+            "occupied"
+          ],
+          [
+            "occupied"
+          ],
+          [
+            "occupied"
+          ]
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "TRIA",
+        "level": 1,
+        "prefix": 23,
+        "goal": [
+          2,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [],
+          []
+        ],
+        "arrivals": []
+      },
+      {
+        "code": "VOIS",
+        "level": 2,
+        "prefix": 28,
+        "goal": [
+          2,
+          1
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [
+            "y"
+          ],
+          [
+            "count",
+            "x"
+          ]
+        ],
+        "arrivals": [
+          {
+            "role": "3044ff806c78",
+            "start": [
+              46,
+              54
+            ],
+            "projected": [
+              54,
+              38
+            ],
+            "goals": [
+              {
+                "target": "c8f5d711bec5",
+                "position": [
+                  54,
+                  38
+                ],
+                "copies": 6
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "VOIS",
+        "level": 3,
+        "prefix": 47,
+        "goal": [
+          1,
+          2
+        ],
+        "equalImages": true,
+        "privateByInput": [
+          [],
+          []
+        ],
+        "arrivals": []
+      }
+    ]
   }
 }

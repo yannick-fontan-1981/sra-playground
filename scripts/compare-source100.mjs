@@ -221,6 +221,7 @@ async function run(code, games) {
           ...(plan?.compositionForecast?{composition:plan.compositionForecast}:{}),
           ...(plan?.roleArrangementForecast?{roleArrangement:plan.roleArrangementForecast}:{}),
           ...(plan?.reactiveContactForecast?{reactiveContact:plan.reactiveContactForecast}:{}),
+          ...(plan?.operandForecast?{operand:plan.operandForecast}:{}),
           ...(plan?.terminalContactForecast?.witness?.basis==='unique_contact_hypothesis'?{contactHypothesis:{
             actor:plan.terminalContactForecast.witness.actor,marker:plan.terminalContactForecast.witness.marker,
             from:plan.terminalContactForecast.from,to:plan.terminalContactForecast.to,site:plan.terminalContactForecast.site,

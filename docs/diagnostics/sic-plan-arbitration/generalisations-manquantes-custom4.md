@@ -186,6 +186,16 @@ Le planificateur expérimental tente ensuite de visiter les exemplaires restants
 
 **Autres épreuves de transfert sur les sources.** Sur G50T, ESCT et SNAR, v48 et v50 échouent à froid aux L2, L3 et L4 dans la limite de 100 coups. Les 18 trajectoires ont été rejouées. L’amélioration gagnante sur FUIT L2 a donc une portée mesurable et encore limitée. [Résultats des parties et des interventions](mesures-generalisations-manquantes.json)
 
+### Choisir le second emplacement en préservant le premier
+
+**Chantiers 2, 3 et 5.** Une action change une forme présente en plusieurs exemplaires. SIC retient son état local avant et après, puis attend qu’une autre action modifie le tableau tout en laissant ce résultat visible. Pour réutiliser l’opération, il peut adresser un autre exemplaire par un point ou retrouver la position relative depuis laquelle le sujet contrôlé avait agi. Il annonce les deux résultats attendus à chaque essai. Il vérifie également la position du sujet à chaque déplacement préparatoire. [Apprentissage et exécution](../../../src/sic/operand-composition.ts)
+
+**Départager des exemplaires de même apparence.** Le banc propose des correspondances par translation, rotation ou réflexion. Il en retient une lorsqu’elle relie le résultat local précédemment obtenu à des pixels visibles ailleurs et qu’elle distingue au moins deux choix pour la prochaine action. Depuis chaque état source, toutes les alternatives admissibles ont été exécutées séparément. Sur les 12 groupes de choix L1 où une correspondance départage les candidats, elle choisit 11 fois une transformation conforme préservant l’acquis ou une victoire. Le premier choix disponible réussit 4 fois. Sur 14 groupes aux L2 et L3 de six jeux sources, ces nombres sont 11 et 6. Plusieurs groupes proviennent d’une même partie. Ces nombres mesurent le choix d’un effet local. [Comparaison des emplacements](../../../scripts/audit-source-operand-choices.mjs) · [Correspondances](../../../src/sic/operand-correspondence.ts)
+
+**Quand employer ensuite une autre commande ?** Au préfixe 27 de CATR L1, la préparation locale suivie d’un retour sur une commande antérieure gagne en deux actions. Cette dernière commande jouée directement au préfixe échoue. La partie autonome du témoin demandait encore cinq actions. Cette victoire de branche motive le contrôle de B avec et sans A. [Interventions appariées](../../../scripts/test-source-prepared-use.mjs)
+
+**Protocole fixé avant Custom 4.** V51 est le témoin. Geler le nouveau candidat sur la branche expérimentale. Comparer les parties froides sur SS01 à SS08 et SS10 L2, avec les mêmes plafonds de 1 200 commandes et de temps actif. Vérifier les scores et les commandes communes au rejeu indépendant. Contrôler les 100 L1, les quatre témoins historiques, FUIT L2 en 80, SS01 en 44 à froid et en 32 après le L1 et SS04 en 60 à froid. Le critère principal est la victoire sur un jeu supplémentaire. En cas de gain, répéter la partie et comparer avec retrait de la capacité. SS09 L2 reste réservé. [Rejeu indépendant des prévisions](../../../scripts/verify-operand-forecasts.mjs)
+
 ### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |
