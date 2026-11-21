@@ -1,3 +1,4 @@
+import { markedPoseMotion } from './marked-pose-motion.ts';
 import { fallbackPalette } from '../runtime/display-palette.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
 import { informationPriority, type InformationPreference } from './information-preference.ts';
@@ -16,7 +17,7 @@ type RepairOption = {command:string; prediction:'new_placement'|'unknown'|'retur
 export type CursorTrial = Mark & { recurrentPlacement?:{key:string;verifiedReturns:number;alternative:string;returnedFrame:string};stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[]; beyondReturn?:boolean };
 export type CursorMemory = {
   motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
-  verifyPoseChange?:boolean;
+  verifyPoseChange?:boolean; followMarkedPose?:boolean;
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
   bearings?:Record<string,{dx:number;dy:number;ref:string}>;
 };
@@ -421,7 +422,9 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       }
       return 'protected_advance_unconfirmed';
     }
-    if(oldStill&&moved){
+    const verifiedMotion=(oldStill && moved) || (m.followMarkedPose && trial.feedback && !trial.contrast
+      ? markedPoseMotion(rows,next,trial.source,target,trial.ink) : undefined);
+    if(verifiedMotion){
       m.verified={shape:trial.shape,...(trial.feedback?{mark:trial.ink}:{}),refs:[...trial.evidence,a.observation_ref]};
       const established=m.established??=[],binding=trial.binding??hypothesis(trial);
       if(!established.includes(binding))established.push(binding);
@@ -429,7 +432,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       // Reuse the measured binding once in a different layout. The next
       // observation must still account for the parked subject and the new mover.
       if(trial.contrast && !trial.passive && a.available_action_refs.includes(input)){
-        const shift=(box:NativeBox):NativeBox=>[box[0]+moved.dx,box[1]+moved.dy,box[2]+moved.dx,box[3]+moved.dy];
+        const shift=(box:NativeBox):NativeBox=>[box[0]+verifiedMotion.dx,box[1]+verifiedMotion.dy,box[2]+verifiedMotion.dx,box[3]+verifiedMotion.dy];
         const now=rotated?.box??shift(target.box),destination=shift(now);
         if(disjoint(destination,trial.source.box)&&destination[0]>=0&&destination[1]>=0&&
           destination[2]<next[0]!.length&&destination[3]<next.length){

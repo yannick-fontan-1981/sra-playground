@@ -102,7 +102,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const verifyPoseChange=comparePreparations && informationPreference?.strategy==='verify_control_across_pose_changes';
+  const followMarkedPose=comparePreparations && informationPreference?.strategy==='follow_a_marked_displacement';
+  const verifyPoseChange=followMarkedPose || comparePreparations && informationPreference?.strategy==='verify_control_across_pose_changes';
   const retrySelection=verifyPoseChange || comparePreparations && informationPreference?.strategy==='challenge_recurrent_placements';
   const stageRegions=retrySelection || comparePreparations && informationPreference?.strategy==='compose_transport_by_region';
   const composeTransport=stageRegions || comparePreparations && informationPreference?.strategy==='compose_observed_transports';
@@ -165,7 +166,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       exposedUnderParts(learning,b,a,rows,next,before,after);
     }
     if (!x && (b.level_epoch !== a.level_epoch || b.state !== a.state)) return null;
-    if(verifyPoseChange && b.available_action_refs.includes('ACTION6'))(m.cursorSelection??=newCursorMemory()).verifyPoseChange=true;
+    if(verifyPoseChange && b.available_action_refs.includes('ACTION6')){
+      const cursor=m.cursorSelection??=newCursorMemory();cursor.verifyPoseChange=true;
+      if(followMarkedPose)cursor.followMarkedPose=true;
+    }
     const result=recordExperiment(m, b, a, cmd, rows, next, x);
     if(x?.cooperative&&result)return {...result,result:a.levels_completed>b.levels_completed?'transport_official':transportResult??'transport_unresolved'};
     return result;
