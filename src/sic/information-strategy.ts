@@ -4,6 +4,7 @@ export const informationStrategies = {
   point_contrast: 'Compare competing explanations for a clicked feature',
   coupled_displays: 'Measure which displays respond together',
   motion_contrast: 'Test competing predictions for a movement',
+  paired_arrival: 'Compare selection before and after a subject reaches a repeated landmark',
 } as const;
 
 export type InformationStrategy = keyof typeof informationStrategies;

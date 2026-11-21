@@ -276,6 +276,7 @@ async function run(code, games) {
       );
       if (configuration && replayCommands)
         Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
+      if(plan?.landmarkForecast && replayCommands)Object.assign(replayCommands.at(-1),{landmark:plan.landmarkForecast});
       if(plan?.cursorSelectionForecast && replayCommands){
         const cursor=plan.cursorSelectionForecast;
         Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor),

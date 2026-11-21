@@ -105,8 +105,10 @@ type Rule = {
   last: number;
   verifiedAt?: number;
 };
+import {observePlacement} from './paired-landmark-placement.ts';
 export type Experiment = {
   phase:
+    | 'testLandmarkPlacement'
     | 'selectMarkedCursor'
     | 'verifyMarkedCursor'
     | 'advanceSelectedCursor'
@@ -170,6 +172,7 @@ export type Experiment = {
   localCapacity?: LocalForecast;
   configurationTrial?: ConfigurationTrial;
   cursorTrial?: CursorTrial;
+  landmark?: import('./paired-landmark-placement.ts').LandmarkTrial;
   cue?: CueTest;
   relative?: RelativeTrial;
   delayed?: DelayedTrial;
@@ -243,6 +246,7 @@ export type Outcome = {
 };
 export type Memory = {
   cursorSelection?: CursorMemory;
+  landmarkMemory?: import('./paired-landmark-placement.ts').LandmarkMemory;
   relativeMotion?: RelativeMemory;
   configurations?: ConfigurationMemory;
   configurationOpportunity?: boolean;
@@ -928,7 +932,10 @@ export function recordExperiment(
   const local=m.localCapacity??=newLocalMemory();
   const cursorResult=b.available_action_refs.includes('ACTION6')
     ? recordCursorTrial(m.cursorSelection??=newCursorMemory(),b,a,rows,next,op,x?.cursorTrial) : undefined;
-  if (b.level_epoch===a.level_epoch && a.levels_completed===b.levels_completed && b.state===a.state) {
+  const sameBoard=b.level_epoch===a.level_epoch && a.levels_completed===b.levels_completed && b.state===a.state;
+  const placementResult=m.landmarkMemory && sameBoard && (x?.landmark||m.landmarkMemory.handoff)
+    ? observePlacement(m.landmarkMemory,x?.landmark,visualLayout(a,next),cursorResult,x?.cursorTrial,visualLayout(b,rows)):undefined;
+  if (sameBoard) {
     const configurations=m.configurations??=newConfigurationMemory();
     const trial=x?.configurationTrial;
     observeConfiguration(configurations,rows,next,op,a.observation_ref,trial);
@@ -1080,6 +1087,7 @@ export function recordExperiment(
     return {...out,result:a.levels_completed>b.levels_completed?'configuration_completed_level':
       failed?'configuration_prediction_refuted':'configuration_observed'};
   }
+  if(x.landmark)return {...out,result:a.levels_completed>b.levels_completed?'joint_placement_official':placementResult??'joint_placement_ended_at_boundary'};
   if(x.cursorTrial)return {...out,result:cursorResult??'cursor_trial_ended_at_boundary'};
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);

@@ -3,6 +3,7 @@ import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity,
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import {offerCursorTrial,newCursorMemory} from './marked-cursor-selection.ts';
+import {observeLandmarks,proposeLandmark,refreshedSelection} from './paired-landmark-placement.ts';
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
@@ -34,6 +35,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  testLandmarkPlacement:'Test whether placing one subject first enables a second arrival while it stays there',
   selectMarkedCursor:'Test whether clicking a matching piece transfers the distinctive cursor mark',
   verifyMarkedCursor:'Measure whether the newly selected piece moves while the previous piece stays in place',
   advanceSelectedCursor:'Use the verified control to advance the selected subject while preserving the other placement',
@@ -96,6 +98,7 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
+  const prepareArrival=comparePreparations && informationPreference?.strategy==='paired_arrival';
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
@@ -123,6 +126,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         retainSituatedOperations(learning,observedSituatedOperations(learning,b,a,before,after,key));
       observePreviewBindings(learning,b,a,before,after,key);
       if(comparePreparations){
+        if(prepareArrival && b.available_action_refs.includes('ACTION6'))m.landmarkMemory=observeLandmarks(m.landmarkMemory,before,after,b.observation_ref);
         observeCueCondition(learning,b,a,before,after,key);
         if(limits && learning.terminal?.length)observeRelativeMotion(m.relativeMotion??={models:{}},learning.terminal,b,a,rows,before,after,key,learning.partMotion);
       }
@@ -145,35 +149,39 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         (m.cursorSelection?.blocked?.length??0)>=2;
       const again = (!!m.cursorSelection?.motions.length || comparePreparations && !!m.cursorSelection?.oriented?.length) && (!m.cursorSelection?.verified
         || (m.cursorSelection.returns??0)>0 || !!m.cursorSelection.blocked?.length);
-      const cursor = group===recurrentExperimentGroup && (opening || again || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
+      const offeredCursor = group===recurrentExperimentGroup && (opening || again || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
         ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
-      if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
+      const landmark=prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && m.landmarkMemory.active || group===recurrentExperimentGroup && offeredCursor?.stage==='select')
+        ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},offeredCursor,limits.maxNodes):undefined;
+      const cursor=landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor;
+      if (!landmark && !cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const missingCue=!!m.previewLearning?.cueSearch?.seeking;
       const justMovedLine=Object.values(m.relativeMotion?.models??{}).some(v=>v.contact?.latestDisplacement===o.observation_ref && !!v.contact?.freeWalk && !v.contact.contradicted);
       const repair=missingCue || justMovedLine || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
         ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
-      if (!cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      if (!landmark && !cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
       const configurationOpportunity=(group===recurrentExperimentGroup || group===exhaustedGroup) &&
         !!m.configurationOpportunity && (m.configurations?.factors.length??0)>=2;
-      if (!cursor && group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
+      if (!landmark && !cursor && group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment:Experiment|null = cursor ? {
+      const experiment:Experiment|null = landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
+        rule:'compare_two_arrivals_with_a_preserved_first_contact',landmark,...(cursor?{cursorTrial:cursor}:{})} : cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':cursor.stage==='advance'?'advanceSelectedCursor':cursor.stage==='reroute'?'repairSelectedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
         rule:cursor.beyondReturn?'test_if_the_recovered_movement_extends_beyond_the_previous_site':cursor.stage==='reroute'?'test_another_motor_after_the_verified_step_stalls':cursor.stage==='advance'?'reuse_measured_control_preserving_the_parked_subject':
           cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
-      if(!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
-      if (!experiment || (!cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
+      if(!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
+      if (!experiment || (!landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
       const command = available.find((c) => observedCommandKey(c) === key) ?? (cursor||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
@@ -187,6 +195,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(positioned?.completionRef ? [positioned.completionRef] : []),
         ref,
         ...(cursor?.evidence??[]),
+        ...(landmark?[landmark.pair.ref,landmark.firstRef,...landmark.selection.evidence]:[]),
         ...(experiment.cue?.evidence??[]),
         ...(relative?[relative.learned,relative.contrast,relative.contact,...(relative.motorEvidence?[relative.motorEvidence]:[])]:[]),
         ...(experiment.configurationTrial?.evidence??[]),
@@ -230,6 +239,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         question.satisfactionContract=cursor.stage==='select'
           ? cursor.contrast?'choose_between_previous_and_selected_subject_by_repeating_the_witnessed_command':'test_whether_the_distinctive_mark_transfers_to_the_clicked_peer'
           : cursor.stage==='reroute'?'verify_an_alternative_movement_with_the_previous_subject_still_parked':cursor.stage==='advance'?'verify_the_next_displacement_and_the_preserved_placement':'test_whether_the_new_cursor_moves_while_the_previous_one_stays';
+      }
+      if(landmark){
+        question.subjects=[landmark.actor,landmark.peer,landmark.pair.role];
+        question.satisfactionContract='verify_named_arrival_and_retained_partner_position';
       }
       const equation = experiment.equation?.claim;
       const capability = equation
@@ -279,6 +292,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'||cursor.beyondReturn?{
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
+        ...(landmark ? {landmarkForecast:{stage:landmark.stage,role:landmark.pair.role,home:landmark.home,other:landmark.other,
+          from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,
+          alternatives:['subject_approaches_with_partner_parked','approach_or_preservation_fails']}} : {}),
         ...(relative ? {relativePlacementForecast:relativeReceipt(relative)} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
