@@ -145,6 +145,11 @@ for (const skip of starts.split(",").map(Number)) {
       match,
       won,
       desired: plan.desired ?? null,
+      ...(plan.capacity ? { contactExperiment: {
+        longestObserved: model.contact?.longest ?? 0,
+        projectedLength: plan.capacity.expectedPiecesMoved,
+        checking: !!plan.checkingContact,
+      }} : {}),
       rigid: plan.objective.rigidRoute,
       open: Object.values(model.playerTerrain).filter((v) => v.open).length,
       blocked: Object.values(model.playerTerrain).filter((v) => !v.open).length,
