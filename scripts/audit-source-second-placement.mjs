@@ -110,7 +110,8 @@ for(const row of JSON.parse(await readFile(study,'utf8'))){
     }
     results.push({code:run.code,level:run.start,prefix:trial.prefix,trajectory:run.trajectory,desired:desired.split(',').map(Number),
       inputs:[...inputs],firstControls,allowPeerTransit,maxDepth,expanded,poses,pairs,
-      poseOutcomes,effectReached:achieved.length,found:found??null});
+      poseOutcomes,effectReached:achieved.length,found:found??null,
+      reachedExamples:reachedNodes.slice(0,4).map(s=>({word:s.word,frame:s.frame,outcome:outcome(s)}))});
   }
 }
 await writeFile(output,JSON.stringify(results));console.log('cases',results.length,'repaired',results.filter(r=>r.found).length);

@@ -220,6 +220,10 @@ async function run(code, games) {
         replayCommands.push({id:action.id, ...(localSeal?{localCapacity,localSeal}:{}), ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           ...(plan?.compositionForecast?{composition:plan.compositionForecast}:{}),
           ...(plan?.roleArrangementForecast?{roleArrangement:plan.roleArrangementForecast}:{}),
+          ...(plan?.terminalContactForecast?.witness?.basis==='unique_contact_hypothesis'?{contactHypothesis:{
+            actor:plan.terminalContactForecast.witness.actor,marker:plan.terminalContactForecast.witness.marker,
+            from:plan.terminalContactForecast.from,to:plan.terminalContactForecast.to,site:plan.terminalContactForecast.site,
+            distance:plan.terminalContactForecast.distance}}:{}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);

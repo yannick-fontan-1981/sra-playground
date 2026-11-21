@@ -19,8 +19,11 @@ export type TerminalContact = {
   support: number;
   peers: number;
 };
+type ContactHypothesis = Pick<TerminalContact,'actor'|'marker'|'offset'|'support'|'before'|'after'> & {
+  basis: 'unique_contact_hypothesis';
+};
 export type TerminalTrial = {
-  witness: TerminalContact;
+  witness: TerminalContact | ContactHypothesis;
   from: XY;
   to: XY;
   goal: XY;
@@ -35,6 +38,35 @@ export type TerminalTrial = {
 };
 const selectBody = (v: VisualLayout, p: string, last?: XY) =>
   v[p]?.length === 1 ? v[p]![0] : v[p]?.find((x) => last && same(x.at, last));
+
+// A contact is an experiment until an official transition identifies a scoring event.
+function untestedContacts(learn:PreviewLearning, layout:VisualLayout, available:Set<string>, ref:string): ContactHypothesis[] {
+  const proposals:ContactHypothesis[]=[];
+  for(const [actor,motion] of Object.entries(learn.partMotion??{})){
+    const group=layout[actor];if(group?.length!==1)continue;
+    const body=group[0]!,p=body.at,box=body.box,w=box[2]!-box[0]!+1,h=box[3]!-box[1]!+1;
+    const model=spatialControls(motion,available,'',{},'',actor);
+    if(!model)continue;
+    const measured=model.motors.filter(m=>m.basis==='observed'&&m.support>0&&/^ACTION[1-4]$/.test(m.op));
+    if(measured.length<2)continue;
+    const goals=new Map<string,typeof measured[number]>();
+    for(const last of measured){
+      goals.set(add(p,last.d).join(),last);
+      for(const first of measured)goals.set(add(add(p,first.d),last.d).join(),last);
+    }
+    for(const [marker,parts] of Object.entries(layout)){
+      if(actor===marker||parts.length!==1)continue;
+      const part=parts[0]!,b=part.box,sw=b[2]!-b[0]!+1,sh=b[3]!-b[1]!+1;
+      if(Math.max(sw,sh)>model.pitch[0]||sw*sh>4*w*h)continue;
+      const goal=aligned(part.at,p,model.pitch),offset=diff(part.at,goal),last=goals.get(goal.join());
+      if(!last||same(goal,p)||Math.abs(offset[0])>w||Math.abs(offset[1])>h)continue;
+      if(Math.abs(part.at[0]-p[0])<w&&Math.abs(part.at[1]-p[1])<h)continue;
+      const observed=(motion.displacements??motion.axes)[last.op]?.[last.d.join()];
+      if(observed)proposals.push({basis:'unique_contact_hypothesis',actor,marker,offset,support:last.support,before:observed.first,after:ref});
+    }
+  }
+  return proposals;
+}
 export function completionContacts(
   learn: PreviewLearning,
   b: NativeObservation,
@@ -82,14 +114,17 @@ export function offerTerminalContact(
   scene: number,
   o: NativeObservation,
   rows: NativeRows,
-  available: Set<string>
+  available: Set<string>,
+  hypothesize = false,
 ): Experiment | null {
   const learn = m.previewLearning,
     layout = visualLayout(o, rows);
-  if (!learn?.terminal?.length) return null;
+  if (!learn) return null;
+  const witnesses=hypothesize?untestedContacts(learn,layout,available,o.observation_ref):learn.terminal;
+  if (!witnesses?.length) return null;
   let winner: { trial: TerminalTrial; score: number } | null = null;
   const attempts = learn.goalAttempts ?? {};
-  for (const w of learn.terminal) {
+  for (const w of witnesses) {
     const body = selectBody(layout, w.actor, learn.lastActor[w.actor]),
       motion = learn.partMotion?.[w.actor],
       markers = layout[w.marker];
@@ -105,7 +140,7 @@ export function offerTerminalContact(
     const known = new Set(
       Object.keys(motion.sites).map((k) => aligned(k.split(',').map(Number) as XY, p, pitch).join())
     );
-    const moves = model.motors.filter((z) => z.support > 0 || available.size >= 4);
+    const moves = model.motors.filter((z) => hypothesize ? z.basis==='observed'&&z.support>0 : z.support > 0 || available.size >= 4);
     for (const part of markers) {
       const goal = aligned(diff(part.at, w.offset), p, pitch);
       if (same(goal, p) || peers.some((z) => cellMatches(z, goal, pitch))) continue;
@@ -118,6 +153,7 @@ export function offerTerminalContact(
       for (const u of queue) {
         if (same(u, goal)) break;
         const parent = seen.get(u.join())!;
+        if(hypothesize&&parent.n>=2)continue;
         for (const d of moves) {
           const v = add(u, d.d),
             k = v.join();
@@ -184,11 +220,11 @@ export function offerTerminalContact(
   if (!winner) return null;
   const trial = winner.trial;
   return {
-    phase: 'seekTerminalContact',
+    phase: hypothesize?'testScoringContact':'seekTerminalContact',
     origin: scene,
     a: trial.op,
     b: trial.op,
-    rule: 'approach_the_visible_contact_that_preceded_official_completion',
+    rule: hypothesize?'test_if_the_learned_move_into_a_distinct_target_completes_the_level':'approach_the_visible_contact_that_preceded_official_completion',
     refs: [],
     terminalContact: trial,
   };

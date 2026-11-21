@@ -34,6 +34,7 @@ const labels: Record<Experiment['phase'], string> = {
   testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
+  testScoringContact:'Test whether a measured move onto a single visible target completes the level',
   testMechanismMobility:'Test an untried control for moving a persistent part after a repeated return',
   reconfigureMechanism:'Test whether moving a mechanism opens access beyond a stagnant return',
   unreadIndicator:'Test a command while the possible arrival of this subject is displayed',
@@ -178,6 +179,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         parentObjective: parent,
         satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
+      if(phase==='testScoringContact')question.satisfactionContract='check_the_predicted_approach_and_then_measure_official_progress_at_contact';
       if(cursor){
         question.subjects=[cursor.source.box.join(','),cursor.target.box.join(','),String(cursor.ink)];
         question.satisfactionContract=cursor.stage==='select'
