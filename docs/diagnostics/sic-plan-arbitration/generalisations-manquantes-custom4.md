@@ -2,6 +2,8 @@
 
 Le critère principal est le premier L2 gagné en partie autonome sur **un jeu supplémentaire**. Les neuf L2 ouverts donnent deux victoires à froid à v31 et à v34, SS01 et SS04. SS03 a déjà été gagné après le L1. Un premier succès à froid sur SS03 constitue donc un gain d’autonomie distinct. Les six occasions de gagner le L2 d’un autre jeu déjà ouvert sont SS02, SS05, SS06, SS07, SS08 et SS10. SS09 L2 reste la confirmation indépendante. [Bilan des parties complètes de v34](qualification-reprise-v34.md)
 
+**Dernier bilan vérifié.** V41 gagne VOIS L2 à froid en 53 coups sur les sources et conserve les 100 victoires L1. Sur Custom 4, v40 et v41 gagnent chacune **2 L2 sur 9 à froid**. Le gain sur les sources apporte **zéro jeu supplémentaire sur Custom 4**. Le premier chantier à poursuivre est le choix de la pièce à tester, puis la conservation d’un premier placement pendant que SIC commande un deuxième sujet. [Comparaison à longueur égale et scores officiels](mesures-generalisations-manquantes.json)
+
 ## Capacités manquantes et travaux associés
 
 Les constats sur cible indiquent où chercher. Les expériences de conception emploient les jeux sources. La règle de la marque vive a été proposée explicitement par Yannick après le gel de v38.
@@ -25,12 +27,15 @@ Les chantiers 9 et 13 du programme portent sur l’information hors champ et les
 | [Combinaisons de commandes, v38](gel-configurations-v38.md) | 2 et 5 | LOGI L5 gagné en 39. Les 100 L1 gagnent au rejeu. La trajectoire change sur quatre jeux. | Une combinaison de rôles spatiaux obtenue de façon autonome. Une combinaison de commandes binaires ne démontre pas cette capacité. |
 | [Banc des mouvements relatifs](../../../scripts/measure-source-relative-motion.mjs) | 1 et 3 | Le pilote a distingué des lois de mouvement et exploré des contacts. Sa seule victoire de branche se trouve sur FITE L1, déjà gagné par le témoin. | Trouver un contact dont la conséquence ouvre une action nécessaire à un score supplémentaire. |
 | [Banc des changements de contrôle](../../../scripts/measure-source-control-changes.mjs) | 1 et 2 | Après remplacement de A, le même B déplace des formes dans des régions disjointes dans 100 essais de développement et 40 essais sur les entrées supérieures ou L2. La suite historique fixée ne convertit aucune défaite dans les deux lots. | Séparer un vrai changement de sujet d’une animation concomitante, puis choisir une nouvelle continuation adaptée au sujet. |
+| [Cliquer à nouveau sur le sujet précédent](../../../scripts/measure-source-control-changes.mjs) et [vérifier le mouvement proposé par SIC](../../../scripts/measure-source-selected-motor.mjs) | 1 et 2 | Depuis 17 préfixes sources, 24 comparaisons changent uniquement la cible du deuxième clic puis jouent le même B. Recliquer sur la nouvelle pièce la fait répondre à B. Recliquer sur l’ancienne redirige B vers elle. VOIS L1/L5 fournit 13 comparaisons positives, KLOT L1 et REWI L1 deux chacune, MOTO L2 sept. Les résultats sur SERI et TEQU sont nuls dans cet échantillon. | Sur ces 24 cas choisis pour leur réponse physique, v41 vérifie le mouvement dans 12. Le pilote qui suit la silhouette d’une pièce recolorée en vérifie 16, dont quatre sur MOTO L2 malgré la réfutation de la marque. Les clics de départ ont été imposés dans ce test. La prochaine preuve est que SIC choisisse lui-même le clic utile et gagne la partie. |
 | [Conserver la position du premier curseur](../../../scripts/measure-source-parked-cursor.mjs) | 2 | Sur la partie gagnante de VOIS L2, juste avant le changement de sujet du coup 76, trois déplacements différents du premier sujet font perdre avec la même suite. Une commande supplémentaire qui laisse le plateau inchangé conserve la victoire. Aux changements de sujet des coups 15 et 23, les six déplacements essayés conservent aussi la victoire. | Apprendre en partie comment reconnaître la position à préserver, puis commander le second sujet sans défaire la première condition. Le banc a testé cette hypothèse sur des préfixes déjà atteints. |
 | [Relire les pièces après un changement de sélection](../../../src/sic/population-placement.ts) · v41 | 1 et 2 | Sur VOIS L2 à froid, v40 perd en 90. Aux coups 30, 31 et 38, le transfert de marque rend quatre pièces illisibles pour le planificateur de placement. Après le clic, l’ancienne pièce révèle sa couleur et la nouvelle porte le même motif au même endroit. V41 exploite cette mesure pour retrouver la disposition. Il prend le relais au coup 31 et gagne en 53. VOIS L1 reste gagné en 57. | Tester le transfert vers un autre jeu. Cette lecture exige encore un modèle de disposition visible. Les deux destinations de personnages différents constituent une épreuve distincte. |
 | [Règle de la marque vive](../../../src/sic/marked-cursor-selection.ts) et [tests de comportement](../../../tests/sic-marked-cursor-selection.test.ts) | 1, préalable à 2 | Intégration dans SIC Fallback. Le clic est une hypothèse. Le transfert visuel et le contrôle moteur produisent des constats distincts. Une direction bloquée permet d’en essayer une autre. | Mesurer le déclenchement dans les parties sources et sur le candidat figé. Vérifier une nouvelle victoire avec et sans la règle. |
 | [Remplacer une commande avant une perte](../../../scripts/measure-source-terminal-alternatives.mjs) | 6 | Sur CAVA L1/L5, SIGN L1/L6 et SMLP L1/L5, 317 substitutions ont été jouées depuis un préfixe vérifié, en conservant les commandes suivantes. Aucune n’a provoqué de défaite officielle. En qualification séparée sur la partie perdue de TU93 L1, les 39 substitutions perdent aussi. Les trois autres directions disponibles au dernier coup perdent toutes immédiatement. | Rechercher une situation source où, au même instant, une action provoque une perte et une autre conserve une continuation gagnante. L’issue de TU93 ne permet pas de choisir une direction sûre sur SS07. |
 
 Les chiffres détaillés par expérience et les quatre trajectoires L1 modifiées par v38 sont disponibles dans le [relevé de mesures](mesures-generalisations-manquantes.json).
+
+**Décision sur le pilote de contrôle moteur.** Après une sélection qui recolore la pièce, le pilote peut la suivre par sa silhouette et tester une direction déjà observée. Dans les parties autonomes sur MOTO, KLOT et REWI L2, il reproduit pourtant les trois trajectoires de v41 : échec au plafond de 90, victoire en 31 et victoire en 5. Il conserve VOIS L2 en 53. Ce pilote reste au stade source. L’expérience suivante doit comparer plusieurs cibles du clic et prédire laquelle ouvre une action de progression. Un clic qui réfute la marque d’une pièce laisse à tester la capacité de ses voisines. [Capacité implémentée](../../../src/sic/marked-cursor-selection.ts) · [Résultats des parties autonomes et des interventions](mesures-generalisations-manquantes.json)
 
 ### Règle de la marque vive, ce qui est déjà établi
 
@@ -47,6 +52,20 @@ Le témoin est v40 et le candidat porte le tag `sic-source100-transferred-placem
 Rejouer les 100 L1 au plafond de 60, puis VOIS L2 et LOGI L5 au plafond de 90. Les témoins prioritaires sont SKBN 22, SWCH 25, KEYD 35 et GABA 49. Évaluer SS01 à SS08 et SS10 au L2 avec le même moteur et le même plafond de 1 200 commandes que v40. Pour chaque jeu, relever le score officiel et le premier coup du plan de placement. Comparer aussi les parties jusqu’à la dernière commande commune en cas de limite de temps. Vérifier SS01 en 32 séparément avec les 19 commandes publiques du L1. Un nouveau jeu gagné doit être reproduit par rejeu et comparé au témoin v40 privé de cette capacité. SS09 L2 reste réservé.
 
 **Résultat source du candidat figé.** V40 et v41 exécutent les mêmes 30 premiers coups de VOIS L2. Au coup 31, v41 reprend le placement et gagne en 53. Les deux parties autonomes de v41 examinées donnent la même trajectoire. Les 100 L1 de v41 gagnent et reproduisent entièrement les 100 trajectoires de v40. LOGI L5 gagne en 39. Les 158 tests ciblés passent sur les fichiers de référence canoniques. Le tag de v41 pointe sur `ca12abca1`. [Trajectoires et empreinte des 2 551 fichiers figés](mesures-generalisations-manquantes.json)
+
+**Résultat Custom 4 du candidat figé.** SS01 gagne en 44 à froid et en 32 après le L1. SS04 gagne en 60 à froid. Le rejeu des neuf parties froides et de la partie avec leçon confirme les scores. Sur chacun des neuf L2, v40 et v41 produisent exactement les mêmes commandes et les mêmes images jusqu’à la fin de la plus courte des deux parties. Le plan de placement appris sur VOIS ne se déclenche sur aucun des neuf. Les différences de longueur des parties arrêtées au temps ne signalent donc aucun gain attribuable à la correction.
+
+| L2 à froid | v40, coups | v41, coups | Résultat des deux versions |
+| --- | ---: | ---: | --- |
+| SS01 | 44 | 44 | Victoire |
+| SS02 | 491 | 361 | Arrêt au temps |
+| SS03 | 298 | 424 | Arrêt au temps |
+| SS04 | 60 | 60 | Victoire |
+| SS05 | 400 | 319 | Arrêt au temps |
+| SS06 | 319 | 271 | Arrêt au temps |
+| SS07 | 5 | 5 | Défaite |
+| SS08 | 480 | 475 | Arrêt au temps |
+| SS10 | 367 | 402 | Arrêt au temps |
 
 ### Prochaine expérience utile par cible
 

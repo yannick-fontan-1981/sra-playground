@@ -137,7 +137,8 @@ export function createPreparedEffects(): NativeFamily<Offer> {
           available.push({ action_ref: op, data: {} });
       const experiment:Experiment|null = cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
-        rule:'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
+        rule:cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
+          'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
       if(!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (!experiment || (!cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;

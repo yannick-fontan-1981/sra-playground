@@ -47,6 +47,25 @@ test('uses the rendered colors when two games assign different RGB values to the
   assert.throws(()=>validateV6PublicObservation({...packet,palette:['private metadata']}));
 });
 
+test('a refuted visual prediction can still be followed by a motor test of the two surviving bodies',async()=>{
+  const m=newCursorMemory(),start=board(0,13,3,false,2),a=board(),b=board(),c=board(0,15);
+  b[2]![3]=5;c[2]![3]=5;
+  for(let y=6;y<11;y++){b[y]!.fill(5,13,18);c[y]!.fill(5,15,20);}
+  const oa=await observation(a,1),ob=await observation(b,2);
+  recordCursorTrial(m,await observation(start,0),oa,start,a,'ACTION4');
+  const click=offerCursorTrial(m,oa,a)!;
+  assert.equal(recordCursorTrial(m,oa,ob,a,b,click.command),'cursor_mark_prediction_refuted');
+  const motor=offerCursorTrial(m,ob,b)!;
+  assert.equal(motor.command,'ACTION4');
+  assert.equal(motor.target.ink,5);
+  assert.equal(recordCursorTrial(m,ob,await observation(c,3),b,c,motor.command,motor),'new_cursor_moved_while_previous_cursor_stayed');
+  assert.ok(m.verified);assert.equal(m.verified.mark,undefined);
+  const removed=board();for(let y=6;y<11;y++)removed[y]!.fill(0,13,18);
+  const fresh=newCursorMemory();recordCursorTrial(fresh,await observation(start,0),oa,start,a,'ACTION4');
+  recordCursorTrial(fresh,oa,await observation(removed,2),a,removed,click.command,click);
+  assert.equal(fresh.pending,undefined);
+});
+
 test('requires an available click, a salient mark and a matching silhouette',async()=>{
   const m=newCursorMemory(),r=board();
   assert.equal(offerCursorTrial(m,await observation(r,0,['ACTION1']),r,true),null);

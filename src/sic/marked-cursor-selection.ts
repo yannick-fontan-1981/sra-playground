@@ -7,7 +7,7 @@ type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[];
 export type CursorTrial = Mark & { stage:'select'|'verify'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean };
 export type CursorMemory = {
   motions:Motion[]; tried:string[]; refuted?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
-  pending?:CursorTrial; verified?:{shape:string;mark:number;refs:string[]};
+  pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
 };
 export const newCursorMemory=():CursorMemory=>({motions:[],tried:[]});
 const tag=(b:NativeBox)=>b.join(',');
@@ -22,6 +22,18 @@ function clickPoint(peer:NativeEntity):NativePoint {
 }
 const signature=(m:Mark)=>[m.shape,m.ink,m.target.ink,tag(m.target.box)].join('/');
 const hypothesis=(m:Mark)=>[m.shape,m.ink,m.source.ink,m.target.ink,JSON.stringify(m.offsets)].join('/');
+function bodyAfterClick(part:Part,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows):Part|undefined {
+  let body=0,retained=0;
+  for(let y=part.box[1];y<=part.box[3];y++)for(let x=part.box[0];x<=part.box[2];x++){
+    if(rows[y]?.[x]!==part.ink)continue;
+    body++;if(next[y]?.[x]===part.ink)retained++;
+  }
+  if(retained*2>body)return part;
+  const box=tag(part.box),before=b.entities.find(e=>e.palette_value===part.ink&&tag(e.bbox)===box);
+  if(!before)return;
+  const after=a.entities.find(e=>e.area===before.area&&tag(e.bbox)===box&&JSON.stringify(e.mask)===JSON.stringify(before.mask));
+  if(after)return {box:part.box,ink:after.palette_value};
+}
 function refute(m:CursorMemory,t:CursorTrial){
   const refuted=m.refuted??=[];const key=hypothesis(t);
   if(!refuted.includes(key))refuted.push(key);
@@ -180,8 +192,12 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     const transfer=marked(rows,source)&&!marked(rows,target)&&!marked(next,source)&&marked(next,target);
     const motor=m.motions.find(v=>inside(v.box,source.box)&&a.available_action_refs.includes(v.command))?.command ??
       (transfer?a.available_action_refs.find(ref=>/^ACTION[1-4]$/.test(ref)):undefined);
-    if(motor && (transfer || b.frame_hash===a.frame_hash))
-      m.pending={...trial,stage:'verify',command:motor,feedback:transfer,evidence:[...trial.evidence,a.observation_ref]};
+    if(motor){
+      const sourceNow=transfer?source:bodyAfterClick(source,b,a,rows,next);
+      const targetNow=transfer?target:bodyAfterClick(target,b,a,rows,next);
+      if(sourceNow&&targetNow)m.pending={...trial,source:sourceNow,target:targetNow,stage:'verify',command:motor,
+        passive:trial.passive && targetNow.ink===target.ink,feedback:transfer,evidence:[...trial.evidence,a.observation_ref]};
+    }
     if(!transfer&&!m.pending)refute(m,trial);
     m.motions=[];m.blocked=[];m.returns=0;
     return transfer?'cursor_mark_transferred':b.frame_hash===a.frame_hash?'cursor_click_visually_unchanged':'cursor_mark_prediction_refuted';
@@ -204,7 +220,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     });
     m.motions=moves;
     if(oldStill&&moved){
-      m.verified={shape:trial.shape,mark:trial.ink,refs:[...trial.evidence,a.observation_ref]};
+      m.verified={shape:trial.shape,...(trial.feedback?{mark:trial.ink}:{}),refs:[...trial.evidence,a.observation_ref]};
       m.tried.push(signature({...trial,target:trial.source}));
       return 'new_cursor_moved_while_previous_cursor_stayed';
     }

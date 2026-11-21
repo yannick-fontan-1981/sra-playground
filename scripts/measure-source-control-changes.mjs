@@ -17,6 +17,36 @@ const overlap=([l,t,r,b],[x,y,u,v])=>l<=u && t<=v && x<=r && y<=b;
 const shape=p=>p.bbox.slice(2).map((n,i)=>n-p.bbox[i]+1);
 const moves=(a,b)=>measureComponentTranslations(a.frame,b.frame,p=>small(a.frame,p));
 const alive=(rep,b)=>b.state==='NOT_FINISHED'&&!rep.win(b);
+function checkClickedBody(rep, prefixLength, input, motor, direct, ready, prepared, next) {
+  const [x,y]=input.slice(8).split(',').map(Number);
+  const clicked=ready.filter(m=>overlap([x,y,x,y],m.from.bbox));
+  if(!clicked.length)return 'motion_elsewhere';
+  const stable=([l,t,r,b])=>prepared.frame.slice(t,b+1).every((row,i)=>
+    row.slice(l,r+1).every((v,j)=>v===next.frame[t+i][l+j]));
+  const former=direct.filter(m=>stable(m.from.bbox));
+  if(!former.length)return 'former_body_changed';
+  // Keep the first selection, number of clicks, motor and time identical in both arms.
+  function arm(second) {
+    rep.restore(prefixLength);
+    let board=rep.act(input);
+    if(!alive(rep,board)||!board.availableActionIds.includes(6))return [];
+    board=rep.act(second);
+    if(!alive(rep,board)||!board.availableActionIds.includes(Number(motor.slice(6))))return [];
+    const result=rep.act(motor);
+    return alive(rep,result)?moves(board,result):[];
+  }
+  const origin=(movements,part)=>movements.some(m=>overlap(m.from.bbox,part.from.bbox));
+  const repeat=arm(input);
+  if(!clicked.some(part=>origin(repeat,part))||former.some(part=>origin(repeat,part)))return 'repeat_not_selective';
+  for(const old of former){
+    const [l,t,r,b]=old.from.bbox;
+    const centerDistance=([dx,dy])=>Math.hypot(dx-(r-l)/2,dy-(b-t)/2);
+    const [dx,dy]=old.from.mask.reduce((best,p)=>centerDistance(p)<centerDistance(best)?p:best);
+    const switched=arm('ACTION6:'+(l+dx)+','+(t+dy));
+    if(origin(switched,old)&&clicked.every(part=>!origin(switched,part)))return 'reversible_body_choice';
+  }
+  return 'return_not_selective';
+}
 function alternatives(root,command,history,knownMoves) {
   const result=new Set();
   for(const n of root.availableActionIds)
@@ -70,7 +100,10 @@ for(const file of files) for(const line of (await readFile(file,'utf8')).trim().
             if(!end.availableActionIds.includes(step.a)){valid=false;break;}
             end=rep.act(op(step));
           }
-          tests.push({at:i+1,input,b:op(b),redirected,enabled,score:valid?Number(rep.win(end)):null});
+          const selection=redirected&&input.startsWith('ACTION6:')
+            ? checkClickedBody(rep,i,input,op(b),normal,ready,prepared,next) : undefined;
+          const clickChangedFrame=selection ? hash(root)!==hash(prepared) : undefined;
+          tests.push({at:i+1,input,b:op(b),redirected,enabled,score:valid?Number(rep.win(end)):null,selection,clickChangedFrame});
         }
         board=rep.restore(i);
       }

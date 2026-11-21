@@ -809,5 +809,324 @@
       "branchWins": 0,
       "interrupted": 0
     }
+  ],
+  "clickTargetMotorEvidence": {
+    "pairedInterventions": [
+      {
+        "code": "VOIS",
+        "level": 1,
+        "examples": 3,
+        "distinctOrigins": 3,
+        "visibleChanges": 3
+      },
+      {
+        "code": "KLOT",
+        "level": 1,
+        "examples": 2,
+        "distinctOrigins": 2,
+        "visibleChanges": 2
+      },
+      {
+        "code": "SERI",
+        "level": 1,
+        "examples": 0,
+        "distinctOrigins": 0,
+        "visibleChanges": 0
+      },
+      {
+        "code": "TEQU",
+        "level": 1,
+        "examples": 0,
+        "distinctOrigins": 0,
+        "visibleChanges": 0
+      },
+      {
+        "code": "REWI",
+        "level": 1,
+        "examples": 2,
+        "distinctOrigins": 2,
+        "visibleChanges": 2
+      },
+      {
+        "code": "VOIS",
+        "level": 5,
+        "examples": 10,
+        "distinctOrigins": 7,
+        "visibleChanges": 10
+      },
+      {
+        "code": "MOTO",
+        "level": 2,
+        "examples": 7,
+        "distinctOrigins": 3,
+        "visibleChanges": 7
+      }
+    ],
+    "probeResults": {
+      "v41": {
+        "VOIS L1": {
+          "offeredClicks": 3,
+          "triedMotor": 3,
+          "verifiedMotor": 3,
+          "afterVisualRefutation": 0
+        },
+        "KLOT L1": {
+          "offeredClicks": 2,
+          "triedMotor": 0,
+          "verifiedMotor": 0,
+          "afterVisualRefutation": 0
+        },
+        "REWI L1": {
+          "offeredClicks": 2,
+          "triedMotor": 0,
+          "verifiedMotor": 0,
+          "afterVisualRefutation": 0
+        },
+        "VOIS L5": {
+          "offeredClicks": 10,
+          "triedMotor": 9,
+          "verifiedMotor": 9,
+          "afterVisualRefutation": 0
+        },
+        "MOTO L2": {
+          "offeredClicks": 7,
+          "triedMotor": 0,
+          "verifiedMotor": 0,
+          "afterVisualRefutation": 0
+        }
+      },
+      "c": {
+        "VOIS L1": {
+          "offeredClicks": 3,
+          "triedMotor": 3,
+          "verifiedMotor": 3,
+          "afterVisualRefutation": 0
+        },
+        "KLOT L1": {
+          "offeredClicks": 2,
+          "triedMotor": 0,
+          "verifiedMotor": 0,
+          "afterVisualRefutation": 0
+        },
+        "REWI L1": {
+          "offeredClicks": 2,
+          "triedMotor": 0,
+          "verifiedMotor": 0,
+          "afterVisualRefutation": 0
+        },
+        "VOIS L5": {
+          "offeredClicks": 10,
+          "triedMotor": 9,
+          "verifiedMotor": 9,
+          "afterVisualRefutation": 0
+        },
+        "MOTO L2": {
+          "offeredClicks": 7,
+          "triedMotor": 5,
+          "verifiedMotor": 4,
+          "afterVisualRefutation": 4
+        }
+      }
+    },
+    "selection": "Counterfactual clicks at a verified source prefix. The motor direction is chosen by the solver; blocked directions are retried. Passive motor probes are driven by the harness.",
+    "scope": "Four sources with reversible motion at the selected location. No autonomous victory attributed to these interventions.",
+    "autonomousSourceUpper": [
+      {
+        "code": "MOTO",
+        "level": 2,
+        "commands": 90,
+        "won": false,
+        "sameTrajectoryAsV41": true
+      },
+      {
+        "code": "KLOT",
+        "level": 2,
+        "commands": 31,
+        "won": true,
+        "sameTrajectoryAsV41": true
+      },
+      {
+        "code": "REWI",
+        "level": 2,
+        "commands": 5,
+        "won": true,
+        "sameTrajectoryAsV41": true
+      }
+    ],
+    "autonomousSourceGuards": [
+      {
+        "code": "SKBN",
+        "level": 1,
+        "commands": 22,
+        "won": true
+      },
+      {
+        "code": "SWCH",
+        "level": 1,
+        "commands": 25,
+        "won": true
+      },
+      {
+        "code": "KEYD",
+        "level": 1,
+        "commands": 35,
+        "won": true
+      },
+      {
+        "code": "GABA",
+        "level": 1,
+        "commands": 49,
+        "won": true
+      },
+      {
+        "code": "MOTO",
+        "level": 1,
+        "commands": 11,
+        "won": true
+      },
+      {
+        "code": "KLOT",
+        "level": 1,
+        "commands": 30,
+        "won": true
+      },
+      {
+        "code": "REWI",
+        "level": 1,
+        "commands": 5,
+        "won": true
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "commands": 57,
+        "won": true
+      },
+      {
+        "code": "VOIS",
+        "level": 2,
+        "commands": 53,
+        "won": true
+      }
+    ]
+  },
+  "coldV41": [
+    {
+      "code": "SS01",
+      "won": true,
+      "actions": 44,
+      "reason": "target_levels_completed",
+      "commonPrefix": 44,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS02",
+      "won": false,
+      "actions": 361,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 361,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "a40f3259f2541a29d3788e0bee0ccde77b10b5953d77cfebda73e9e360db7686"
+    },
+    {
+      "code": "SS03",
+      "won": false,
+      "actions": 424,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 298,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "323359380bf6ef5e61e7d9ff9c19d3d3c7e643ff31441cc07471b61dd1e0b02c"
+    },
+    {
+      "code": "SS04",
+      "won": true,
+      "actions": 60,
+      "reason": "target_levels_completed",
+      "commonPrefix": 60,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    },
+    {
+      "code": "SS05",
+      "won": false,
+      "actions": 319,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 319,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "11bb6a697602335b443eb185fe6080705a33de0c4677657d651c794bd44b86b7"
+    },
+    {
+      "code": "SS06",
+      "won": false,
+      "actions": 271,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 271,
+      "selectionForecasts": 1,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "cb238954016d5a4fbb3368b956940c3af6683a919150912a9bcdeaf32878b21e"
+    },
+    {
+      "code": "SS07",
+      "won": false,
+      "actions": 5,
+      "reason": "native_game_over",
+      "commonPrefix": 5,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+    },
+    {
+      "code": "SS08",
+      "won": false,
+      "actions": 475,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 475,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "a30847a80ea1f8f51e29a48935e0a5cdfc2f967dd13ad0512d8bb4e58ea891d3"
+    },
+    {
+      "code": "SS10",
+      "won": false,
+      "actions": 402,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 367,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "f8acf1cbc33f17d4f5547a8200af2abf9ac73768ff7e30be8013a41bb840f72d"
+    }
   ]
 }
