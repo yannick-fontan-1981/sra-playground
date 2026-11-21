@@ -62,6 +62,8 @@ Ces trois lots ont chacun un échec observable, une façon de le reproduire et u
 
 Le couplage des chantiers 5 et 11 a apporté un résultat supplémentaire. Attendre une commande sans effet visible avant de lancer une expérience de configuration a réduit la victoire autonome sur LOGI L5 de 84 à 39 coups, tout en récupérant les victoires sources de CRAF et de VOIS. Le moteur a rejoué chaque action. Le nombre de nouveaux jeux gagnés sur Custom 4 est publié séparément pour chaque version figée. [Candidat et expérience sur LOGI, CRAF et VOIS](gel-configurations-v38.md)
 
+Le premier test du chantier spatial a départagé deux mécanismes dont le mouvement en ligne droite se ressemble. Depuis exactement le même préfixe, le banc a remplacé la commande par un mouvement perpendiculaire. Sur GABA L1 et L5, le deuxième objet a pris le même déplacement latéral que le premier dans 22 essais sur 22. Sur ESCT L1, il est entré dans l’ancienne position du premier dans 5 essais sur 5. Pour prédire une disposition après un virage, ces deux lois donnent des réponses différentes. Le banc a choisi ces expériences. Leur sélection et leur exploitation par SIC en partie autonome restent à mesurer. [Commandes alternatives et résultats par préfixe](score-configurations-v38.json)
+
 ## À quoi serviront les autres L2 de Custom 4 après le gel ?
 
 | Épreuve déjà observée | Question de transfert après gel |
