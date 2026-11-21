@@ -6,7 +6,7 @@ import {offerCursorTrial,newCursorMemory,measuredReturnSelection} from './marked
 import {observeLandmarks,observeLandmarkAccess,proposeLandmark,refreshedSelection} from './paired-landmark-placement.ts';
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {detectTransportSelection,observeTransport} from './transport-observations.ts';
-import {registerCoverage,observeCoverage} from './controlled-coverage.ts';
+import {registerCoverage,registerCoverageFromControl,observeCoverage} from './controlled-coverage.ts';
 import {proposeCoverage} from './plan-controlled-coverage.ts';
 import {chooseTransport} from './compose-transport.ts';
 import {challengePlacement,recordPlacementVisit} from './recurrent-placement.ts';
@@ -104,7 +104,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const planCoverage=comparePreparations && informationPreference?.strategy==='maintain_access_by_composing_piece_effects';
+  const testBodyContact=comparePreparations && informationPreference?.strategy==='test_contact_on_another_subject';
+  const planCoverage=testBodyContact || comparePreparations && informationPreference?.strategy==='maintain_access_by_composing_piece_effects';
   const followMarkedPose=planCoverage || comparePreparations && informationPreference?.strategy==='follow_a_marked_displacement';
   const verifyPoseChange=followMarkedPose || comparePreparations && informationPreference?.strategy==='verify_control_across_pose_changes';
   const retrySelection=verifyPoseChange || comparePreparations && informationPreference?.strategy==='challenge_recurrent_placements';
@@ -154,7 +155,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
             const scene=registerCoverage(rows,next,x.cursorTrial.source.box,x.cursorTrial.target.box,a.observation_ref);
             if(scene)m.coverage=scene;
           }
+          if(testBodyContact&&!m.coverage&&m.transportLearning&&cmd.action_ref==='ACTION6'){
+            const recovered=registerCoverageFromControl(rows,next,m.transportLearning,a.observation_ref);
+            if(recovered)m.coverage=recovered;
+          }
           if(m.coverage){
+            if(testBodyContact)m.coverage.testContacts=true;
             const outcome=observeCoverage(m.coverage,rows,next,key,a.observation_ref,x?.cooperative?.coverage?x.cooperative:undefined);
             if(outcome)transportResult=outcome;
           }

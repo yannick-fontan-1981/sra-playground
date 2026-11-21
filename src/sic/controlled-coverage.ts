@@ -1,6 +1,9 @@
 import type { NativeBox, NativeRows } from '../logos-engine/v6-native-types.ts';
 import {
   neighbor,
+  readTransport,
+  sitePoint,
+  type TransportMemory,
   poseId,
   type TransportSide,
   type TransportState,
@@ -42,6 +45,10 @@ export type Coverage = {
   tried: Record<string, true>;
   denied: Record<string, true>;
   discovery?: string;
+  testContacts?: boolean;
+  pullCandidate?: TransportSide;
+  peerPush?: Partial<Record<TransportSide, string>>;
+  refusedPeerPush?: Partial<Record<TransportSide, string>>;
   opening?: string;
   plan?: TransportStep[];
 };
@@ -221,6 +228,49 @@ export function registerCoverage(
     return;
   return m;
 }
+export function registerCoverageFromControl(
+  rows: NativeRows,
+  after: NativeRows,
+  m: TransportMemory,
+  ref: string,
+) {
+  const view = readTransport(m, rows);
+  if (!view) return;
+  const box = (n: number): NativeBox => {
+    const [x, y] = sitePoint(m.grid, n) as [number, number],
+      h = Math.floor(m.grid.pitch / 2);
+    return [x - h, y - h, x + h, y + h];
+  };
+  const c = registerCoverage(
+    rows,
+    after,
+    box(view.subject[0]),
+    box(view.subject[1]),
+    ref,
+  );
+  if (!c) return;
+  const state = readCoverage(c, after);
+  if (!state) return;
+  const ground = new Set(c.terrain);
+  const directions = [
+    [0, 1],
+    [0, -1],
+    [1, 0],
+    [-1, 0],
+  ];
+  // When no push can dislodge a cornered piece, test whether drawing it away is possible.
+  if (
+    state.pieces.some((p) =>
+      directions.every(
+        ([dx, dy]) =>
+          !ground.has(neighbor(c.grid, p, dx!, dy!)) ||
+          !ground.has(neighbor(c.grid, p, -dx!, -dy!)),
+      ),
+    )
+  )
+    c.pullCandidate = state.active;
+  return c;
+}
 export function readCoverage(
   c: Coverage,
   rows: NativeRows,
@@ -284,6 +334,21 @@ export function observeCoverage(
     c.tried[poseId(before) + '/' + op] = true;
     const dx = (end % cols) - (start % cols),
       dy = Math.floor(end / cols) - Math.floor(start / cols);
+    const motor = c.motors[op],
+      touch =
+        motor &&
+        neighbor(c.grid, start, motor.dx, motor.dy) === before.subjects[peer];
+    if (c.testContacts && side === after.active && touch) {
+      const dest = neighbor(c.grid, before.subjects[peer], motor.dx, motor.dy);
+      if (end === before.subjects[peer] && after.subjects[peer] === dest)
+        (c.peerPush ??= {})[side] = ref;
+      else if (
+        f?.coverage?.testPeerPush &&
+        end === start &&
+        after.subjects[peer] === before.subjects[peer]
+      )
+        (c.refusedPeerPush ??= {})[side] = ref;
+    }
     if (
       side === after.active &&
       before.subjects[peer] === after.subjects[peer] &&

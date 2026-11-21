@@ -76,12 +76,28 @@ export function proposeCoverage(
   depth: number,
   limit: number,
 ): TransportForecast | undefined {
-  if (!c.discovery) return;
+  if (
+    !c.discovery &&
+    !(c.pullCandidate !== undefined && Object.keys(c.motors).length)
+  )
+    return;
   const initial = readCoverage(c, rows);
   if (!initial) return;
   const g = c.grid,
     ground = new Set(c.terrain),
     laws = c.observations.map(inferPieceLaw);
+  if (
+    c.pullCandidate !== undefined &&
+    !c.observations.some((data) => data.some((o) => o.moved))
+  ) {
+    const pull = [c.pullCandidate, other(c.pullCandidate)].find(
+      (side) =>
+        !c.observations[side]!.some(
+          (o) => o.x === -o.dx && o.y === -o.dy && !o.moved,
+        ),
+    );
+    if (pull !== undefined) laws[pull] = { kind: 'pull', radius: 1 };
+  }
   const lawId = laws.map((l) => l.kind + l.radius).join('/');
   const key = (s: TransportState, op: string) =>
     lawId + '/' + poseId(s) + '/' + op;
@@ -97,7 +113,8 @@ export function proposeCoverage(
     'ACTION6:' + sitePoint(g, s.subjects[other(s.active)]).join(',');
   const evidence = [
     c.selection,
-    c.discovery,
+    ...(c.discovery ? [c.discovery] : []),
+    ...Object.values(c.peerPush ?? {}),
     ...c.observations.flatMap((z) =>
       z
         .filter((o) => o.moved)
@@ -117,6 +134,12 @@ export function proposeCoverage(
     evidence: [...new Set(evidence)],
     open: [
       ...(!c.opening ? ['covering_the_controls_keeps_the_passage_open'] : []),
+      ...(s.state.active === s.after.active &&
+      s.state.subjects[other(s.state.active)] !==
+        s.after.subjects[other(s.state.active)] &&
+      !c.peerPush?.[s.state.active]
+        ? ['contact_can_displace_the_parked_subject']
+        : []),
       ...laws.flatMap((l, i) =>
         c.observations[i]!.some((o) => o.moved)
           ? []
@@ -128,6 +151,11 @@ export function proposeCoverage(
       gate: c.gate,
       goals: c.goals,
       laws: laws.map((l) => ({ ...l })),
+      ...(s.state.active === s.after.active &&
+      s.state.subjects[other(s.state.active)] !==
+        s.after.subjects[other(s.state.active)]
+        ? { testPeerPush: true }
+        : {}),
       openBefore: maintained(c, s.state),
       openAfter: maintained(c, s.after),
     },
@@ -140,11 +168,21 @@ export function proposeCoverage(
     for (const [op, { dx, dy }] of Object.entries(c.motors)) {
       if (c.denied[key(s, op)]) continue;
       const to = neighbor(g, from, dx, dy);
-      if (
-        to === parked ||
-        (!ground.has(to) && !(to === c.gate && maintained(c, s)))
-      )
-        continue;
+      const walkable = (n: number) =>
+        ground.has(n) || (n === c.gate && maintained(c, s));
+      if (!walkable(to)) continue;
+      let nextPeer = parked;
+      if (to === parked) {
+        if (
+          !c.testContacts ||
+          c.refusedPeerPush?.[active] ||
+          (!c.peerPush?.[active] &&
+            (!maintained(c, s) || laws[active]!.kind !== 'push'))
+        )
+          continue;
+        nextPeer = neighbor(g, parked, dx, dy);
+        if (!walkable(nextPeer) || s.pieces.includes(nextPeer)) continue;
+      }
       const displaced = s.pieces
         .map((p) => {
           const x = (p % g.columns) - (from % g.columns),
@@ -158,9 +196,10 @@ export function proposeCoverage(
             : p;
         })
         .sort((a, b) => a - b);
-      if (displaced.includes(to)) continue;
+      if (displaced.includes(to) || displaced.includes(nextPeer)) continue;
       const subjects: [number, number] = [...s.subjects];
       subjects[active] = to;
+      subjects[other(active)] = nextPeer;
       result.push({
         state: s,
         command: op,

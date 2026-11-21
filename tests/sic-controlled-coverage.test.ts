@@ -94,3 +94,28 @@ test('contact and traction remain distinct alternatives to a range model', () =>
     { kind: 'range', radius: 2 },
   );
 });
+
+test('joint movement binds a contact capability to the actual subject', () => {
+  const a = scene(0),
+    b = scene(1),
+    c = registerCoverage(a, b, [3, 9, 5, 11], [9, 9, 11, 11], 'choose')!;
+  c.testContacts = true;
+  c.motors['ACTION4'] = { dx: 1, dy: 0, ref: 'calibrate' };
+  function adjacent(x: number) {
+    const rows = scene(0);
+    for (let y = 9; y < 12; y++) rows[y]!.fill(1, 3, 18);
+    for (const [i, n] of [x, x + 1].entries()) {
+      const ink = i === 0 ? 11 : 12;
+      [1, ink, 1, ink, i === 0 ? 15 : ink, ink, 1, ink, 1].forEach((v, k) => {
+        rows[9 + Math.floor(k / 3)]![3 * n + (k % 3)] = v;
+      });
+    }
+    return rows;
+  }
+  const before = adjacent(2),
+    after = adjacent(3);
+  observeCoverage(c, before, after, 'ACTION4', 'joint');
+  assert.equal(c.peerPush?.[0], 'joint');
+  assert.equal(c.peerPush?.[1], undefined);
+  assert.equal(c.discovery, undefined);
+});
