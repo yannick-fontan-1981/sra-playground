@@ -278,9 +278,12 @@ async function run(code, games) {
         Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
       if(plan?.cursorSelectionForecast && replayCommands){
         const cursor=plan.cursorSelectionForecast;
-        Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor)});
-        if(cursor.contrast) Object.assign(replayCommands.at(-1),{controlContrast:cursor.contrast,decisionMode:cursor.decisionMode,
+        Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor),
           observedSubjects:[cursor.source.box,cursor.target.box]});
+        if(cursor.decisionMode)Object.assign(replayCommands.at(-1),{decisionMode:cursor.decisionMode});
+        if(cursor.contrast)Object.assign(replayCommands.at(-1),{controlContrast:cursor.contrast});
+        if(cursor.repairOptions)Object.assign(replayCommands.at(-1),{repairOptions:cursor.repairOptions,triedMotors:cursor.triedMotors});
+        if(cursor.beyondReturn)Object.assign(replayCommands.at(-1),{beyondReturn:true});
         if(cursor.projectedMove) Object.assign(replayCommands.at(-1),{cursorMotor:cursor.projectedMove.command,
           cursorDelta:cursor.projectedMove.delta});
       }

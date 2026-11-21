@@ -167,7 +167,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           available.push({ action_ref: op, data: {} });
       const experiment:Experiment|null = cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':cursor.stage==='advance'?'advanceSelectedCursor':cursor.stage==='reroute'?'repairSelectedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
-        rule:cursor.stage==='reroute'?'test_another_motor_after_the_verified_step_stalls':cursor.stage==='advance'?'reuse_measured_control_preserving_the_parked_subject':
+        rule:cursor.beyondReturn?'test_if_the_recovered_movement_extends_beyond_the_previous_site':cursor.stage==='reroute'?'test_another_motor_after_the_verified_step_stalls':cursor.stage==='advance'?'reuse_measured_control_preserving_the_parked_subject':
           cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
@@ -276,7 +276,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         kind: preparedEffectsId,
         actions: [command],
         experiment,
-        ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'?{
+        ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'||cursor.beyondReturn?{
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
         ...(relative ? {relativePlacementForecast:relativeReceipt(relative)} : {}),

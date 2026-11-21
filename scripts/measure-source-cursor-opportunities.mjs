@@ -81,7 +81,11 @@ for(const file of files)for(const line of (await readFile(file,'utf8')).trim().s
             preparedAgain();const n=rep.act('ACTION'+action);
             const parked=n.frame.slice(t,bottom+1).every((row,j)=>row.slice(l,r+1).every((value,k)=>value===next.frame[t+j][l+k]));
             const travelled=alive(rep,n)&&nextSubjects.some(box=>moves(next,n).some(v=>contains(box,v.from.bbox)));
-            alternatives.push({motor:'ACTION'+action,parked,travelled,won:rep.win(n)});
+            const second=alive(rep,n) && i+5<=run.cap?rep.act('ACTION'+action):n;
+            const stillParked=second.frame.slice(t,bottom+1).every((row,j)=>row.slice(l,r+1).every((v,k)=>v===next.frame[t+j][l+k]));
+            const advanced=alive(rep,second)&&moves(next,n).some(first=>nextSubjects.some(box=>contains(box,first.from.bbox))
+              && moves(n,second).some(follow=>contains(first.to.bbox,follow.from.bbox)&&follow.displacement.join()===first.displacement.join()));
+            alternatives.push({motor:'ACTION'+action,parked,travelled,won:rep.win(n),continued:stillParked&&(advanced||rep.win(second))});
           }
           blockedAdvance={alternatives};
         }

@@ -13,7 +13,7 @@ type ControlContrast = {
   motor: string; baselineDelta: NativePoint; evidence: string; outcomes: readonly ['previous_subject_moves', 'selected_subject_moves'];
 };
 type RepairOption = {command:string; prediction:'new_placement'|'unknown'|'return_or_overlap'; ref?:string};
-export type CursorTrial = Mark & { stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[] };
+export type CursorTrial = Mark & { stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[]; beyondReturn?:boolean };
 export type CursorMemory = {
   motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
@@ -268,6 +268,12 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
   }
   return null;
 }
+function controlledFootprint(o:NativeObservation,target:Part):NativeBox|undefined {
+  const visible=o.entities.filter(e=>e.palette_value===target.ink && e.area>=2 && inside(e.bbox,target.box)).sort((a,b)=>b.area-a.area);
+  const first=visible[0];
+  return first && (!visible[1]||first.area>visible[1].area)?first.bbox:undefined;
+}
+const centerGap=(a:NativeBox,b:NativeBox)=>Math.max(Math.abs(a[0]+a[2]-b[0]-b[2]),Math.abs(a[1]+a[3]-b[1]-b[3]));
 function repairBlockedStep(m:CursorMemory,t:CursorTrial,o:NativeObservation,rows:NativeRows,input:string){
   const tried=[...(t.triedMotors??[]),input];
   const options:RepairOption[]=o.available_action_refs.filter(q=>/^ACTION[1-4]$/.test(q)&&!tried.includes(q)).map(command=>{
@@ -347,8 +353,13 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       row.slice(trial.source.box[0],trial.source.box[2]+1).every((v,j)=>next[trial.source.box[1]+i]?.[trial.source.box[0]+j]===v));
     const target=trial.target;
     const repairing=trial.stage==='reroute';
-    const rotated=(repairing||trial.basis && trial.contrast?.motor===input) ? m.oriented?.find(v=>tag(v.fromBox)===tag(target.box)
-      && (repairing||Math.max(Math.abs(v.dx),Math.abs(v.dy))*2>=Math.max(...trial.contrast!.baselineDelta.map(Math.abs)))):undefined;
+    // A selection mark may enlarge the target box. Follow the unique main body
+    // of its ink through the pose change while checking the parked site separately.
+    const protectedTest=repairing||!!trial.beyondReturn;
+    const followed=protectedTest?controlledFootprint(b,target):target.box;
+    const rotated=followed && (protectedTest||trial.basis && trial.contrast?.motor===input)
+      ? m.oriented?.find(v=>tag(v.fromBox)===tag(followed)
+        && (protectedTest||Math.max(Math.abs(v.dx),Math.abs(v.dy))*2>=Math.max(...trial.contrast!.baselineDelta.map(Math.abs)))):undefined;
     const moved=rotated??moves.find(v=>{
       if(!repairing && trial.contrast && (input!==trial.contrast.motor || (!trial.basis && (v.dx!==trial.contrast.baselineDelta[0] || v.dy!==trial.contrast.baselineDelta[1]))))return false;
       if(trial.basis && trial.contrast){
@@ -368,11 +379,19 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     m.motions=moves;
     if(trial.stage==='advance'||repairing){
       if(oldStill&&moved){
-        if(!repairing)return 'advanced_selected_subject_preserving_previous_placement';
-        if(trial.priorBox && tag(moved.box)===tag(trial.priorBox))return 'alternative_returned_to_previous_placement';
+        if(!repairing)return trial.beyondReturn?'continued_alternative_preserving_previous_placement':'advanced_selected_subject_preserving_previous_placement';
+        if(trial.priorBox && centerGap(moved.box,trial.priorBox)*2<=centerGap(target.box,trial.priorBox)){
+          const now=moved.box;
+          const destination:NativeBox=[now[0]+moved.dx,now[1]+moved.dy,now[2]+moved.dx,now[3]+moved.dy];
+          if(disjoint(destination,trial.source.box)&&destination[0]>=0&&destination[1]>=0&&
+            destination[2]<next[0]!.length&&destination[3]<next.length&&a.available_action_refs.includes(input)){
+            m.pending={...trial,stage:'advance',target:{...target,box:now},beyondReturn:true,evidence:[...trial.evidence,a.observation_ref]};
+          }
+          return 'alternative_returned_to_previous_placement';
+        }
         return 'alternative_moved_selected_subject_preserving_previous_placement';
       }
-      if(oldStill && b.frame_hash===a.frame_hash && m.verified){
+      if(oldStill && b.frame_hash===a.frame_hash && m.verified && !trial.beyondReturn){
         repairBlockedStep(m,trial,a,next,input);
         if(m.pending)return 'protected_advance_blocked_try_another_motor';
       }

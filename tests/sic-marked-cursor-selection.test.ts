@@ -142,6 +142,32 @@ test('repairs a blocked protected step and checks both subjects again',async()=>
   }
 });
 
+test('follows the rotated body within a marked footprint and checks a step past the recovered site',async()=>{
+  function scene(top:number,turned:boolean,onlyMark=false){
+    const rows=Array.from({length:18},()=>Array<number>(30).fill(0));
+    for(let y=4;y<=6;y++)rows[y]!.fill(1,4,7);
+    const shape=turned?[[1,0],[1,1],[1,2],[0,0]]:[[0,0],[1,0],[2,0],[0,1]];
+    for(const [x,y] of shape)rows[top+y!]![15+x!]=2;
+    rows[top+2]![onlyMark?17:15]=3;
+    return rows;
+  }
+  const first=scene(8,false),turned=scene(5,true),extended=scene(2,true);
+  const [a,b,c]=await Promise.all([first,turned,extended].map((r,i)=>observation(r,i)));
+  const trial={source:{box:[4,4,6,6],ink:1},target:{box:[15,8,17,10],ink:2},point:[16,8],
+    priorBox:[15,5,17,7],offsets:[[0,2]],ink:3,shape:'different-bodies',stage:'reroute',command:'ACTION1',evidence:[],feedback:true} as const;
+  const memory=newCursorMemory();
+  const repair={...trial,source:{...trial.source},target:{...trial.target},evidence:[],offsets:[trial.offsets[0]]};
+  assert.equal(recordCursorTrial(memory,a!,b!,first,turned,'ACTION1',repair),'alternative_returned_to_previous_placement');
+  const step=offerCursorTrial(memory,b!,turned)!;
+  assert.ok(step.beyondReturn);assert.equal(step.command,'ACTION1');
+  assert.equal(recordCursorTrial(memory,b!,c!,turned,extended,'ACTION1',step),'continued_alternative_preserving_previous_placement');
+  assert.equal(memory.pending,undefined);
+  const blink=scene(8,false,true);
+  const other=newCursorMemory();
+  assert.equal(recordCursorTrial(other,a!,await observation(blink,1),first,blink,'ACTION1',repair),'protected_advance_unconfirmed');
+  assert.equal(other.pending,undefined);
+});
+
 test('the exploration family proposes a matching piece, records the transferred mark and verifies the actual new mover',async()=>{
   const family=createPreparedEffects(),a=board(),b=board(1),c=board(1,15);
   const oa=await observation(a,0),ob=await observation(b,1),oc=await observation(c,2);

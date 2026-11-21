@@ -270,6 +270,10 @@ for (const file of files) {
     pack: r.packDigest ?? null,
     level: r.start,
     actions: r.issued,
+    repairs:tape.flatMap((c,i)=>(c.cursorStage==='reroute'||c.beyondReturn)&&c.observedSubjects&&live(frames[i+1])?[{
+      decision:i+1,stage:c.cursorStage,command:word(c),previousStayed:unchanged(frames[i],frames[i+1],c.observedSubjects[0]),
+      departures:departure(frames[i],frames[i+1],c.observedSubjects[1]),beyondReturn:!!c.beyondReturn,
+    }]:[]),
     won: r.levels[0].won,
     proposals: r.cursorAudit?.filter((e) => e.offered).length ?? null,
     tests,
