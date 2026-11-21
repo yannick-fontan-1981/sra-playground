@@ -29,7 +29,7 @@ export type PairInquiry = {
   lesson?: ReusableEffects;
 };
 export function inquiry(lesson?: ReusableEffects): PairInquiry {
-  return { learning: fresh(), lesson };
+  return { learning: fresh(), ...(lesson ? {lesson} : {}) };
 }
 export function carryPair(
   q: PairInquiry,
@@ -61,9 +61,10 @@ export function seePair(
       ? (op.slice(8).split(',').map(Number) as [number, number])
       : undefined;
   if (!q.scene && (!q.initialChecked || point)) {
-    q.scene =
+    const scene =
       pairedScene(layout, b, point) ??
       (!q.initialChecked ? pairedScene(layout, b) : undefined);
+    if (scene) q.scene = scene;
     q.initialChecked = true;
   }
   if (!q.scene) return;

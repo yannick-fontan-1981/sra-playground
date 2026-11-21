@@ -145,7 +145,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     const learning=m.previewLearning??=newPreviewLearning();
     if(a.levels_completed>b.levels_completed){const contacts=completionContacts(learning,b,a,visualLayout(b,rows),observedCommandKey(cmd));if(contacts.length)learning.terminal=contacts;}
     if(a.levels_completed>b.levels_completed&&m.localCapacity)m.localCarry=nextLocalLevel(m.localCapacity);
-    if(learnScope&&m.pairInquiry&&a.levels_completed>b.levels_completed)m.pairLesson=carryPair(m.pairInquiry,a.observation_ref);
+    if(learnScope&&m.pairInquiry&&a.levels_completed>b.levels_completed){const lesson=carryPair(m.pairInquiry,a.observation_ref);if(lesson)m.pairLesson=lesson;}
     const boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){

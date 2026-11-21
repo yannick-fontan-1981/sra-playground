@@ -258,8 +258,8 @@ export function forecast(
     paired: {
       laws: [law(m, 0), law(m, 1)],
       radius: m.radius,
-      scope: m.scope,
-      lesson: m.carry,
+      ...(m.scope ? {scope:m.scope} : {}),
+      ...(m.carry ? {lesson:m.carry} : {}),
     },
     command,
     from: v,
