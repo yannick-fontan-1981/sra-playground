@@ -1,0 +1,17 @@
+import {Author,board} from './author.mjs';
+const b=board(20,17,'#');
+b.fill(1,1,10,13);b.fill(11,1,13,14,'~');b.fill(12,5,18,12);
+b.put(8,10,'#');b.put(2,3,'T');b.put(4,5,'Z');b.put(2,2,'o');b.put(3,9,'o');b.put(8,9,'o');
+b.put(5,3,'1');b.put(8,5,'2');b.put(3,11,'m');b.put(5,11,'m');b.put(16,9,'g');b.put(17,9,'g');
+const spec={id:'ss13-01',title:'L’atelier de l’ancre verte',rows:b.strings(),circuits:[{id:'atelier',buttons:[{x:2,y:7}],color:10}],gates:[{at:{x:3,y:9},circuit:'atelier',direction:'E',closedWhen:'pressed'},{at:{x:3,y:11},circuit:'atelier',direction:'E',closedWhen:'pressed'}]};
+const a=new Author(spec);
+a.act('D').stage('Le Voleur recule et tire une caisse, sans pousser');
+a.go(4,4).act('U').stage('Le partenaire entraîné ne lance aucun sort');
+a.select('wizard').act('UL').stage('Échanger avec le partenaire puis avec la première caisse');
+a.go(5,1,'thief');a.go(8,3,'wizard').act('L').stage('Le rayon dévié par la face blanche échange les deux héros');
+a.go(8,6,'thief').act('DL').stage('Le Voleur recule pour réaligner le miroir du canal');
+a.act('X').stage('Un reflet transporte le Magicien, l’autre immerge la caisse pour créer un appui');
+a.go(2,6).act('D').stage('Deux presses : une caisse déplacée et deux monstres éliminés à distance');
+a.act('L').go(16,9).stage('Le premier héros traverse l’appui et reste disponible sur sa destination');
+a.go(17,9,'wizard').stage('Les deux destinations doivent être occupées ensemble');
+a.save(new URL('../level1-design.json',import.meta.url),{label:'Tutoriel original · règles de North et Crossovers',url:'https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/',puzzle:'5, 9 et 13',secondary:{label:'Miroirs, eau et presses · Crossovers',url:'https://sinkingstarwalkthrough.com/fr/crossovers/'},objective:'Découvre la traction, les échanges et les deux usages des miroirs. Fabrique l’appui du canal, commande les presses à distance et conduis les deux héros à leurs destinations.'},{kind:'tutorial',preserved:['Le Voleur tire un occupant en reculant.','Le Magicien échange avec la première cible de son rayon, y compris le partenaire.','Les boutons, miroirs, eau et monstres suivent les règles déclarées de la série.'],changed:['Atelier original réunissant quatorze découvertes, sans prétendre reproduire une salle source.','Deux presses liées montrent le déplacement d’une caisse et le combat simultané à distance.','Le pont exige l’immersion d’une caisse alignée par le déplacement d’un miroir.'],sourceReading:'Les premiers enseignements reprennent les capacités présentées dans Heroes of Hauling 5,9,13 ; le parcours et les dispositifs sont une composition pédagogique originale.'});

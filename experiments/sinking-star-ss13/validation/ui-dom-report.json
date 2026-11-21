@@ -1,0 +1,250 @@
+{
+  "success": true,
+  "htmlSha256": "5aa93541831a66053b7fd28cee3b6fb4672c5c5873bdcb7a8120ebad6d41932c",
+  "scope": "focused-ui-and-tutorial",
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Twelve compiled-HTML role fixtures cover exact single traction, partner, mirrors, swaps, bent rays, presses, water and reciprocal combat.",
+    "Reflection keys, nearest source, equal-distance exchange and gray previews.",
+    "A pulled mirror remains legible above its button and a gate transition is distinguished from a press.",
+    "Blocking backs alone blink red; ordinary inputs lock and mid-warning Undo restores the preceding state.",
+    "A returning ray displays its circuit, reports the loop and awards no false lesson.",
+    "Keyboard, role buttons and public-pixel selection preserve the world; Shift+Tab exits and outside input is ignored.",
+    "Undo, Reset, Restart and level selection interrupt animations without stale frames; Reset clears discoveries.",
+    "Reduced motion uses no timer waits.",
+    "Defeat waits for the final combat frame and its Undo restores the live room.",
+    "VICTORY appears after the final frame and allows Undo or Restart.",
+    "All eight actual rooms expose two heroes, two goals, both source links and contextual help.",
+    "The authored level1 route earns all fourteen discoveries from displayed public pixels."
+  ],
+  "roleCoverage": [
+    {
+      "case": "exactly one rear crate follows",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "thief-pull"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a perpendicular step releases the crate",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a front crate refuses the whole movement",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "pulling the Wizard never casts",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "thief-pull",
+        "partner-pull"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "pulling a mirror changes its axes",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "thief-pull",
+        "mirror-motion"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard exchanges the first crate only",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard exchanges the partner",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "wizard-partner"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard ray bends at the white face",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "wizard-bend"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard cannot push a black mirror back",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "remote press carries Thief without traction",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "press sends a crate into water",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press",
+        "platform"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "swapped monsters fight while an unrelated gate stays unchanged",
+      "frames": 8,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "monster"
+      ],
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square outline",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange both heroes",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    }
+  ],
+  "mirrorButtonCoverage": {
+    "mirrorAboveButton": true,
+    "mirrorMotionLesson": true,
+    "gateLesson": true,
+    "noSpuriousPress": true,
+    "frames": 4
+  },
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible destinations flash both mirrors",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "mirror hiding the only source flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "Undo during warning restores previous actual movement",
+      "midAnimationUndo": true,
+      "exactPreviousState": true,
+      "cancelledFramesCannotRepaint": true,
+      "noReflectionLesson": true
+    }
+  ],
+  "rayLoopCoverage": {
+    "frames": 9,
+    "exactPixelsAndTiming": true,
+    "unchangedPositions": true,
+    "noSpuriousLessons": true,
+    "repeatedLoop": true,
+    "undo": true
+  },
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 77,
+    "discoveries": [
+      "move",
+      "select",
+      "thief-pull",
+      "partner-pull",
+      "wizard-swap",
+      "wizard-partner",
+      "wizard-bend",
+      "mirror-motion",
+      "platform",
+      "mirror",
+      "gate",
+      "press",
+      "monster",
+      "goals"
+    ]
+  }
+}

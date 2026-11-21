@@ -1,0 +1,644 @@
+{
+  "schemaVersion": 1,
+  "scope": "Local counterfactuals at documented author-route states; no solver search.",
+  "limitations": [
+    "These checks do not prove global necessity, uniqueness or optimality of any solution.",
+    "Author routes and this report are validation-only and are not agent observations."
+  ],
+  "sources": [
+    {
+      "level": 4,
+      "path": "reference/level4-design.json",
+      "sha256": "8f0021dd8d437a8abd3598b1ac08351bf8fd0f461f090c85aa56fb2078372c4c"
+    },
+    {
+      "level": 5,
+      "path": "reference/level5-design.json",
+      "sha256": "16f26fcf2fadaa7a3f42d1f505540703b08f4322c12ce50b9fc2c8cf5343f997"
+    },
+    {
+      "level": 6,
+      "path": "reference/level6-design.json",
+      "sha256": "68941eaaf34f46fa5a9b9e789084e7a3b7ade16ac2bc010e89aeb69b4bd5dcd8"
+    },
+    {
+      "level": 7,
+      "path": "reference/level7-design.json",
+      "sha256": "be78bc9826a10ef0c73d0efef46a99233d4c46badc1184c89ffb629953ad52e0"
+    },
+    {
+      "level": 8,
+      "path": "reference/level8-design.json",
+      "sha256": "f96713f099b08b12c3b2cbceaa3fe2b0f8983c0de70b3922800ef5b63810fdd4"
+    }
+  ],
+  "passed": 8,
+  "total": 8,
+  "checks": [
+    {
+      "id": "l4-walk-removes-weight-reflection-keeps-it",
+      "level": 4,
+      "claim": "Au point de départ contrôlé, marcher vers l’est tire le miroir hors du bouton; le départ prévu par reflet conserve la commande.",
+      "status": "PASS",
+      "evidence": {
+        "walkingFromTurn": 8,
+        "walking": {
+          "refused": false,
+          "dead": false,
+          "phases": [
+            "pull",
+            "gate"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 7,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 14,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "return-anchor": true,
+            "mirror-mooring": false
+          },
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 6,
+                "y": 10
+              },
+              "to": {
+                "x": 7,
+                "y": 10
+              }
+            },
+            {
+              "actor": "mirror",
+              "from": {
+                "x": 5,
+                "y": 10
+              },
+              "to": {
+                "x": 6,
+                "y": 10
+              }
+            }
+          ]
+        },
+        "reflectionFromTurn": 31,
+        "reflection": {
+          "refused": false,
+          "dead": false,
+          "phases": [
+            "reflect"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 11
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 16,
+                "y": 14
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "return-anchor": true,
+            "mirror-mooring": true
+          },
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 6,
+                "y": 10
+              },
+              "to": {
+                "x": 5,
+                "y": 11
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "l5-mirror-must-be-cleared-in-tested-setup",
+      "level": 5,
+      "claim": "Le miroir initial refuse le reflet; le parcours déplace ce miroir avant le transfert réussi du Voleur.",
+      "status": "PASS",
+      "evidence": {
+        "initial": {
+          "refused": true,
+          "dead": false,
+          "phases": [],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 2,
+                "y": 6
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 4,
+                "y": 7
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "deux-poids": false
+          },
+          "moves": []
+        },
+        "witnessTransfer": {
+          "action": {
+            "id": 5
+          },
+          "phases": [
+            "reflect"
+          ],
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 2,
+                "y": 6
+              },
+              "to": {
+                "x": 8,
+                "y": 12
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "l6-press-opens-its-own-forced-landing",
+      "level": 6,
+      "claim": "Après chargement, le pas volontaire vers l’est est refusé; la commande distante déclenche la presse et active l’appui sous l’arrivée forcée du Voleur.",
+      "status": "PASS",
+      "evidence": {
+        "voluntaryFromTurn": 5,
+        "voluntary": {
+          "refused": true,
+          "dead": false,
+          "phases": [],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 11,
+                "y": 8
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 2,
+                "y": 5
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "chargement": false,
+            "premiere-caisse": true,
+            "depot": false,
+            "derniere-caisse": false
+          },
+          "moves": []
+        },
+        "landingDevice": {
+          "at": {
+            "x": 12,
+            "y": 8
+          },
+          "circuit": "chargement",
+          "activeWhen": "pressed"
+        },
+        "forced": {
+          "action": {
+            "id": 2
+          },
+          "phases": [
+            "walk",
+            "piston",
+            "platform"
+          ],
+          "moves": [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 10,
+                "y": 8
+              },
+              "to": {
+                "x": 11,
+                "y": 8
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 11,
+                "y": 8
+              },
+              "to": {
+                "x": 12,
+                "y": 8
+              }
+            }
+          ],
+          "landingActiveBefore": false,
+          "landingActiveAfter": true
+        }
+      }
+    },
+    {
+      "id": "l7-mirror-offset-changes-water-landing",
+      "level": 7,
+      "claim": "Avant décalage, le reflet laisse la caisse sur le sol; après décalage, il crée le premier appui dans l’eau. Le parcours en crée ensuite un second.",
+      "status": "PASS",
+      "evidence": {
+        "beforeOffset": {
+          "refused": false,
+          "dead": false,
+          "phases": [
+            "reflect"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 16
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 3,
+                "y": 15
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {},
+          "moves": [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 16
+              },
+              "to": {
+                "x": 6,
+                "y": 13
+              }
+            }
+          ]
+        },
+        "afterOffset": {
+          "refused": false,
+          "dead": false,
+          "phases": [
+            "reflect"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 4,
+                "y": 16
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 3,
+                "y": 15
+              },
+              "dead": false
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 12
+            }
+          ],
+          "circuits": {},
+          "moves": [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 16
+              },
+              "to": {
+                "x": 5,
+                "y": 12
+              }
+            }
+          ]
+        },
+        "secondSupportTurn": 37,
+        "secondSupports": [
+          {
+            "x": 5,
+            "y": 12
+          },
+          {
+            "x": 5,
+            "y": 5
+          }
+        ]
+      }
+    },
+    {
+      "id": "l8-near-target-is-unsafe-before-thief-clears-it",
+      "level": 8,
+      "claim": "L’échange initial vers l’est vise la caisse proche gardée et tue le Magicien; le parcours retire cette caisse avant son échange lointain.",
+      "status": "PASS",
+      "evidence": {
+        "prematureCast": {
+          "refused": false,
+          "dead": true,
+          "phases": [
+            "swap",
+            "combat"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 6,
+                "y": 11
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 6,
+                "y": 10
+              },
+              "dead": true
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "arrivee": true
+          },
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 2,
+                "y": 10
+              },
+              "to": {
+                "x": 6,
+                "y": 10
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 6,
+                "y": 10
+              },
+              "to": {
+                "x": 2,
+                "y": 10
+              }
+            }
+          ]
+        },
+        "clearedLineTurn": 1,
+        "safeFarExchangeTurn": 18
+      }
+    },
+    {
+      "id": "l8-reflection-before-weight-handoff-is-fatal",
+      "level": 8,
+      "claim": "Refléter avant que la caisse relève le Magicien retire la commande et fait disparaître l’appui d’arrivée du Voleur.",
+      "status": "PASS",
+      "evidence": {
+        "fromTurn": 18,
+        "result": {
+          "refused": false,
+          "dead": true,
+          "phases": [
+            "reflect",
+            "platform"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 16,
+                "y": 15
+              },
+              "dead": true
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 12,
+                "y": 6
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "arrivee": false
+          },
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 7
+              },
+              "to": {
+                "x": 16,
+                "y": 15
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 16,
+                "y": 10
+              },
+              "to": {
+                "x": 12,
+                "y": 6
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "l8-weight-handoff-alone-is-insufficient",
+      "level": 8,
+      "claim": "Après le remplacement du poids mais avant le rapprochement du Magicien, le miroir déplace la caisse de commande et l’arrivée du Voleur reste fatale.",
+      "status": "PASS",
+      "evidence": {
+        "fromTurn": 19,
+        "result": {
+          "refused": false,
+          "dead": true,
+          "phases": [
+            "reflect",
+            "platform"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 16,
+                "y": 15
+              },
+              "dead": true
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 11,
+                "y": 6
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "arrivee": false
+          },
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 7
+              },
+              "to": {
+                "x": 16,
+                "y": 15
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 16,
+                "y": 10
+              },
+              "to": {
+                "x": 12,
+                "y": 6
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "l8-prepared-priority-moves-two-heroes-keeps-weight",
+      "level": 8,
+      "claim": "Lorsque le Magicien devient la cible la plus proche, les deux miroirs déplacent les deux héros et conservent la caisse sur la commande.",
+      "status": "PASS",
+      "evidence": {
+        "fromTurn": 23,
+        "result": {
+          "refused": false,
+          "dead": false,
+          "phases": [
+            "reflect"
+          ],
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 16,
+                "y": 15
+              },
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 16,
+                "y": 9
+              },
+              "dead": false
+            }
+          ],
+          "supports": [],
+          "circuits": {
+            "arrivee": true
+          },
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 7
+              },
+              "to": {
+                "x": 16,
+                "y": 15
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 13,
+                "y": 6
+              },
+              "to": {
+                "x": 16,
+                "y": 9
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

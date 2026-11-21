@@ -1,0 +1,863 @@
+{
+  "spec": {
+    "id": "ss13-08",
+    "title": "La ligne libre et le poids gardé",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~........~",
+      "~~~~~~~~~~~.....gg.~",
+      "~~~~~~~~~~~........~",
+      "~~~~~~~~~~~........~",
+      "~~~~~~~~#~~o.......~",
+      "~........~~........~",
+      "~.....#..~~........~",
+      "~....#m#.~~........~",
+      "~.Z...o..~~.....o..~",
+      "~.....T..~~........~",
+      "~........~~........~",
+      "~........~~........~",
+      "~........~~~~~~~~.~~",
+      "~........~~~~~~~~.~~",
+      "~........#~~~~~~~~~~",
+      "~........~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "S",
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 16
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 6
+        },
+        "facing": "SW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "arrivee",
+        "buttons": [
+          {
+            "x": 16,
+            "y": 10
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 16,
+          "y": 15
+        },
+        "circuit": "arrivee",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "DRDDDRULUUUURUUUCRUURRDCXRCUULUUUURCUUUUUUUUUUUU",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 24
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": true,
+    "puzzle": 10,
+    "label": "Adaptation de Heroes and Water · énigme 10 · garder libre la ligne d’échange",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-10",
+    "objective": "Retirer une cible proche dangereuse, préparer la transposition lointaine, remplacer la commande par une caisse et utiliser la priorité des reflets pour transporter les deux héros sans retirer ce poids.",
+    "secondary": {
+      "label": "Heroes and Mirrors · énigme 5 · maintenir le poids en quittant par reflet",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5"
+    }
+  },
+  "metrics": {
+    "actions": 48,
+    "selections": 4,
+    "thiefPulls": 2,
+    "partnerMoves": 0,
+    "swaps": 2,
+    "partnerSwaps": 0,
+    "bentSwaps": 1,
+    "monsterSwaps": 0,
+    "stoneMoves": 3,
+    "mirrorMoves": 1,
+    "reflections": 1,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur retire la cible proche de la ligne du Magicien sans approcher le monstre",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 16
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Le Voleur décale son miroir pour libérer le rayon horizontal",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Le Voleur attend au seul rayon qui peut atteindre l’appui d’arrivée",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "La ligne dégagée permet au Magicien d’atteindre la cible lointaine et de reprendre sa commande",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Le rayon dévié échange la caisse de la rive droite avec le Magicien et garde la commande occupée",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Le Magicien contourne la visée du miroir puis devient sa cible la plus proche",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Les deux miroirs déplacent les héros; la caisse plus éloignée reste sur la commande de l’appui",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Le Voleur quitte l’appui hydraulique vers le quai solide",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Le Magicien rejoint la première destination en laissant le poids durable en place",
+      "turn": 35,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Le Voleur rejoint la deuxième destination après le transfert physique entre les rives",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 15
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "arrivee": true
+      }
+    }
+  ],
+  "adaptation": "Heroes and Water 10 fournit la contrainte de réorganiser les cibles pour conserver une ligne d’échange utile; Heroes and Mirrors 5 fournit le maintien d’un poids pendant le départ par reflet. SS13 compose une cible proche gardée par un monstre, une ancre lointaine sur commande, un échange à rayon dévié et deux miroirs activés ensemble. Le Magicien doit se placer plus près que la caisse sur le second miroir afin de laisser l’appui du Voleur actif. La caisse sous garde, la priorité proche de la série SS et cette géométrie sont des adaptations originales, sans revendication de reproduction exacte ni d’unicité de la solution."
+}

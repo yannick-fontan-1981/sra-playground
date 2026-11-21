@@ -1,0 +1,415 @@
+{
+  "spec": {
+    "id": "ss13-02",
+    "title": "Une place de plus sur l’autre rive",
+    "rows": [
+      "~~~~~~~~~~~~~~",
+      "~.....~......~",
+      "~.....~......~",
+      "~..2..~......~",
+      "~.T...~......~",
+      "~..Z..~..o...~",
+      "~.....~~~.~~~~",
+      "~.....~~~....~",
+      "~.....~~~..gg~",
+      "~.....~~~....~",
+      "~~~~~~~~~~~~~~"
+    ],
+    "circuits": [
+      {
+        "id": "ancre",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 3
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 6
+        },
+        "circuit": "ancre",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRCDDRDXUUURURRRRRCRCDDDDDRRCLDDRRRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Water 7",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+    "puzzle": 7,
+    "objective": "Un échange conserve le nombre d’occupants sur chaque rive. Fabrique le passage, traverse à pied, puis amène le miroir sur la commande."
+  },
+  "metrics": {
+    "actions": 36,
+    "selections": 5,
+    "thiefPulls": 6,
+    "partnerMoves": 0,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "bentSwaps": 0,
+    "monsterSwaps": 0,
+    "stoneMoves": 3,
+    "mirrorMoves": 5,
+    "reflections": 1,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Échanger conserve un seul occupant sur la rive de droite",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": false
+      }
+    },
+    {
+      "label": "La caisse est tirée à la distance exacte du miroir",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": false
+      }
+    },
+    {
+      "label": "Le reflet crée le seul appui entre les deux rives",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": false
+      }
+    },
+    {
+      "label": "Le Voleur traverse à pied et tracte le miroir sur la commande",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": true
+      }
+    },
+    {
+      "label": "Les deux héros occupent enfin la rive d’arrivée",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "ancre": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Les échanges seuls conservent le nombre d’occupants de chaque île.",
+      "Les deux destinations exigent de faire passer réellement un héros vers la rive initialement occupée par une seule caisse."
+    ],
+    "changed": [
+      "La traversée utilise une caisse immergée par reflet.",
+      "Le miroir tracté devient ensuite le poids durable ouvrant la chambre finale.",
+      "Géométrie et parcours originaux pour le duo SS13."
+    ],
+    "sourceReading": "Heroes and Water 7 explique l’invariant de population par île et la nécessité d’un trajet physique ; le transport du miroir est une prolongation originale."
+  }
+}

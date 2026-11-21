@@ -1,0 +1,533 @@
+{
+  "spec": {
+    "id": "ss13-04",
+    "title": "Le miroir reste à quai",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~...~~~~",
+      "~~~~~~~~~~~~~.Z.~~~~",
+      "~~~~~~~~~~~~~...~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~....~~~~~~~~~",
+      "~~~~~~~..o.~.....~~~",
+      "~~~~~~~....~.....~~~",
+      "~~~2~~~....~..o..~~~",
+      "~~~T~~~....~.....~~~",
+      "~~~.~...~~~~~~~~~~~~",
+      "~~~.~g~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~..#..~~~....~~",
+      "~~~~~~.o#..~~~..g.~~",
+      "~~~~~~..#.........~~",
+      "~~~~~~.....~~~....~~",
+      "~~~~~~~~~~~~~~....~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "circuits": [
+      {
+        "id": "return-anchor",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 2
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "mirror-mooring",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 10
+          }
+        ],
+        "color": 9
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 15
+        },
+        "circuit": "mirror-mooring",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 4,
+          "y": 10
+        },
+        "circuit": "return-anchor",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CDCDDXRRCLUURLLLDDDRRURRRRRRURCX",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation de Heroes and Mirrors · énigmes 4 et 5",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5",
+    "puzzle": 5,
+    "objective": "Faire relayer la commande par une caisse, changer le côté de traction du miroir, puis se refléter pour le laisser maintenir la sortie du partenaire.",
+    "secondary": {
+      "label": "Heroes and Mirrors · énigme 4 · changer de côté par reflet",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-4"
+    }
+  },
+  "metrics": {
+    "actions": 32,
+    "selections": 4,
+    "thiefPulls": 4,
+    "partnerMoves": 0,
+    "swaps": 3,
+    "partnerSwaps": 0,
+    "bentSwaps": 0,
+    "monsterSwaps": 0,
+    "stoneMoves": 3,
+    "mirrorMoves": 4,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La première caisse relève le Magicien sur la commande de la plateforme.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 8
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "return-anchor": true,
+        "mirror-mooring": false
+      }
+    },
+    {
+      "label": "Le reflet donne accès à l’autre côté du miroir, sur la plateforme tenue à distance.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "return-anchor": true,
+        "mirror-mooring": false
+      }
+    },
+    {
+      "label": "Le Voleur tire le miroir sur sa commande ; le passage final du Magicien s’ouvre.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "return-anchor": true,
+        "mirror-mooring": true
+      }
+    },
+    {
+      "label": "Le Magicien utilise les deux ancres suivantes sans retirer la caisse de la commande initiale.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "return-anchor": true,
+        "mirror-mooring": true
+      }
+    },
+    {
+      "label": "Le Magicien franchit la porte maintenue par le miroir.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "return-anchor": true,
+        "mirror-mooring": true
+      }
+    },
+    {
+      "label": "Le Voleur quitte le quai par reflet, laissant le miroir sur son bouton.",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 2
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "return-anchor": true,
+        "mirror-mooring": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Le Voleur change de côté par reflet.",
+      "Le miroir est tiré jusqu’à une commande et le Voleur s’éloigne sans pas volontaire afin de conserver le poids."
+    ],
+    "changed": [
+      "Une plateforme commandée à distance et trois ancres d’échange ajoutent le Magicien au problème.",
+      "Le duo s’ouvre mutuellement ses passages ; un seul miroir mobile suffit dans cette géométrie."
+    ],
+    "sourceReading": "Heroes and Mirrors 4 associe traction du miroir et reflet pour changer de côté. L’énigme 5 fait quitter au Voleur une commande par reflet afin de laisser le miroir dessus. SS13 reprend ces deux contraintes avec une géométrie et une coopération nouvelles.",
+    "localCounterfactual": "Après la pose du miroir sur son bouton, un pas volontaire vers l’est est valide, tire le miroir et referme la porte. Le parcours conserve cette commande en utilisant le reflet. Ce contrôle local ne prouve pas l’unicité globale.",
+    "requiredInWitness": [
+      "stone-swap",
+      "thief-pull",
+      "mirror-motion",
+      "hero-reflection",
+      "button-relay",
+      "two-destinations"
+    ]
+  }
+}

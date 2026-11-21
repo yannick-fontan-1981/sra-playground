@@ -1,0 +1,656 @@
+{
+  "spec": {
+    "id": "ss13-03",
+    "title": "La cellule et les trois relèves",
+    "rows": [
+      "###################",
+      "###################",
+      "###############...#",
+      "###T###########.gg#",
+      "###~########...#.##",
+      "###~########......#",
+      "###~####o.........#",
+      "###~########......#",
+      "###~#########.#####",
+      "###~#########.#####",
+      "#....#............#",
+      "#....#............#",
+      "#..Z.#............#",
+      "#.......o.........#",
+      "#........#........#",
+      "#........#........#",
+      "#........#........#",
+      "#.................#",
+      "###################"
+    ],
+    "circuits": [
+      {
+        "id": "anchor",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "color": 9
+      },
+      {
+        "id": "extraction",
+        "buttons": [
+          {
+            "x": 15,
+            "y": 6
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "exit",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 5
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 13,
+          "y": 8
+        },
+        "circuit": "anchor",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 6
+        },
+        "circuit": "extraction",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 4
+        },
+        "circuit": "exit",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CUCDRRRRLLLLURULDLCDDRRRUUURRRRRRRUUUURRCDRRRRUUURRRRRRRUUUULLLLRRRRRULUCURUURCRDDRURUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes of Hauling · énigmes 13 et 19",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-19",
+    "puzzle": 19,
+    "objective": "Libérer le Voleur sans relâcher la commande, substituer une caisse au Magicien enfermé, puis coopérer pour extraire le poids de la dernière porte.",
+    "secondary": {
+      "label": "Heroes of Hauling · énigme 13 · relève sur un bouton",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13"
+    }
+  },
+  "metrics": {
+    "actions": 87,
+    "selections": 6,
+    "thiefPulls": 12,
+    "partnerMoves": 0,
+    "swaps": 2,
+    "partnerSwaps": 1,
+    "bentSwaps": 0,
+    "monsterSwaps": 0,
+    "stoneMoves": 13,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Magicien relève le Voleur dans la cellule et maintient le passage nord.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "anchor": true,
+        "extraction": false,
+        "exit": false
+      }
+    },
+    {
+      "label": "Le Voleur place une caisse dans la ligne de retour, hors de la cellule.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "anchor": true,
+        "extraction": false,
+        "exit": false
+      }
+    },
+    {
+      "label": "La caisse remplace le prisonnier sur le bouton ; les deux héros sont libres.",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "anchor": true,
+        "extraction": false,
+        "exit": false
+      }
+    },
+    {
+      "label": "Le Magicien maintient la porte de l’alcôve pendant l’extraction.",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "anchor": true,
+        "extraction": true,
+        "exit": false
+      }
+    },
+    {
+      "label": "La seconde caisse maintient la commande finale ; le Voleur la quitte par le côté.",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "anchor": true,
+        "extraction": true,
+        "exit": true
+      }
+    },
+    {
+      "label": "Les deux héros occupent les deux destinations.",
+      "turn": 87,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "anchor": true,
+        "extraction": false,
+        "exit": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un échange transfère le partenaire en laissant la commande occupée.",
+      "Une caisse prend ensuite la place du héros enfermé."
+    ],
+    "changed": [
+      "Deux héros et deux destinations ; la cellule visible au-delà de l’eau remplace les barreaux.",
+      "Le Voleur prépare les deux cargaisons par traction. Une deuxième alcôve exige une extraction pendant que le Magicien tient une porte."
+    ],
+    "sourceReading": "Heroes of Hauling 13 présente la relève du partenaire sur une commande ; l’énigme 19 libère les héros enfermés et laisse des cristaux à leur place. SS13 combine ces contraintes dans une carte originale.",
+    "requiredInWitness": [
+      "partner-swap",
+      "stone-swap",
+      "thief-pull",
+      "button-relay",
+      "two-destinations"
+    ]
+  }
+}

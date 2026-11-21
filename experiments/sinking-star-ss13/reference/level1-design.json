@@ -1,0 +1,911 @@
+{
+  "spec": {
+    "id": "ss13-01",
+    "title": "L’atelier de l’ancre verte",
+    "rows": [
+      "####################",
+      "#..........~~~######",
+      "#.o........~~~######",
+      "#.T..1.....~~~######",
+      "#..........~~~######",
+      "#...Z...2..~.......#",
+      "#..........~.......#",
+      "#..........~.......#",
+      "#..........~.......#",
+      "#..o....o..~....gg.#",
+      "#.......#..~.......#",
+      "#..m.m.....~.......#",
+      "#..........~.......#",
+      "#..........~~~######",
+      "###########~~~######",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "atelier",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 7
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 3,
+          "y": 9
+        },
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 11
+        },
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "DRRUCULCLUUURRCURRRRDRRLCDLDDRDLXLULLLLDLRRRRRRRRRURRDDDRRRRCDDRRDRRRDDRRRRRD",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Tutoriel original · règles de North et Crossovers",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/",
+    "puzzle": "5, 9 et 13",
+    "secondary": {
+      "label": "Miroirs, eau et presses · Crossovers",
+      "url": "https://sinkingstarwalkthrough.com/fr/crossovers/"
+    },
+    "objective": "Découvre la traction, les échanges et les deux usages des miroirs. Fabrique l’appui du canal, commande les presses à distance et conduis les deux héros à leurs destinations."
+  },
+  "metrics": {
+    "actions": 77,
+    "selections": 5,
+    "thiefPulls": 3,
+    "partnerMoves": 1,
+    "swaps": 3,
+    "partnerSwaps": 2,
+    "bentSwaps": 1,
+    "monsterSwaps": 0,
+    "stoneMoves": 4,
+    "mirrorMoves": 1,
+    "reflections": 1,
+    "heroReflections": 1,
+    "pistonPushes": 2,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur recule et tire une caisse, sans pousser",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Le partenaire entraîné ne lance aucun sort",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Échanger avec le partenaire puis avec la première caisse",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Le rayon dévié par la face blanche échange les deux héros",
+      "turn": 24,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 6
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Le Voleur recule pour réaligner le miroir du canal",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Un reflet transporte le Magicien, l’autre immerge la caisse pour créer un appui",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Deux presses : une caisse déplacée et deux monstres éliminés à distance",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true
+      }
+    },
+    {
+      "label": "Le premier héros traverse l’appui et reste disponible sur sa destination",
+      "turn": 60,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    },
+    {
+      "label": "Les deux destinations doivent être occupées ensemble",
+      "turn": 77,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 4
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "tutorial",
+    "preserved": [
+      "Le Voleur tire un occupant en reculant.",
+      "Le Magicien échange avec la première cible de son rayon, y compris le partenaire.",
+      "Les boutons, miroirs, eau et monstres suivent les règles déclarées de la série."
+    ],
+    "changed": [
+      "Atelier original réunissant quatorze découvertes, sans prétendre reproduire une salle source.",
+      "Deux presses liées montrent le déplacement d’une caisse et le combat simultané à distance.",
+      "Le pont exige l’immersion d’une caisse alignée par le déplacement d’un miroir."
+    ],
+    "sourceReading": "Les premiers enseignements reprennent les capacités présentées dans Heroes of Hauling 5,9,13 ; le parcours et les dispositifs sont une composition pédagogique originale."
+  }
+}

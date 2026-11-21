@@ -1,0 +1,12 @@
+{
+  "game": "SS13",
+  "nativeBrowserExecuted": false,
+  "nativeVisualValidated": false,
+  "reason": "Prior SS12 session established native Chromium socket restriction and managed-browser rejection of local file URLs. No workaround or new native browser claim is made for SS13.",
+  "fallbacks": [
+    "Actual compiled HTML run in Happy DOM with exact public canvas pixels and frame timing.",
+    "All eight initial public pixel matrices rendered and visually inspected."
+  ],
+  "preparedScript": "scripts/verify-ui-browser.mjs",
+  "nextStep": "Run native desktop/mobile UI checks in an authorized integration environment."
+}

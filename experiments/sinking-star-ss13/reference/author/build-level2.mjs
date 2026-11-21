@@ -1,0 +1,13 @@
+import {Author,board} from './author.mjs';
+const b=board(14,11,'~');
+b.fill(1,1,5,9);b.fill(7,1,12,5);b.fill(9,7,12,9);b.put(9,6,'.');
+b.put(2,4,'T');b.put(3,5,'Z');b.put(9,5,'o');b.put(3,3,'2');
+b.put(11,8,'g');b.put(12,8,'g');
+const spec={id:'ss13-02',title:'Une place de plus sur l’autre rive',rows:b.strings(),circuits:[{id:'ancre',buttons:[{x:8,y:3}],color:14}],gates:[{at:{x:9,y:6},circuit:'ancre',direction:'S',closedWhen:'released'}]};
+const a=new Author(spec);
+a.select('wizard').act('R').stage('Échanger conserve un seul occupant sur la rive de droite');
+a.select('thief').go(3,6).act('D').stage('La caisse est tirée à la distance exacte du miroir');
+a.act('X').stage('Le reflet crée le seul appui entre les deux rives');
+a.go(4,3).act('RRRRR').stage('Le Voleur traverse à pied et tracte le miroir sur la commande');
+a.select('wizard').act('R').select('thief').go(11,8).select('wizard').go(12,8).stage('Les deux héros occupent enfin la rive d’arrivée');
+a.save(new URL('../level2-design.json',import.meta.url),{label:'Adaptation · Heroes and Water 7',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/',puzzle:7,objective:'Un échange conserve le nombre d’occupants sur chaque rive. Fabrique le passage, traverse à pied, puis amène le miroir sur la commande.'},{kind:'adaptation',preserved:['Les échanges seuls conservent le nombre d’occupants de chaque île.','Les deux destinations exigent de faire passer réellement un héros vers la rive initialement occupée par une seule caisse.'],changed:['La traversée utilise une caisse immergée par reflet.','Le miroir tracté devient ensuite le poids durable ouvrant la chambre finale.','Géométrie et parcours originaux pour le duo SS13.'],sourceReading:'Heroes and Water 7 explique l’invariant de population par île et la nécessité d’un trajet physique ; le transport du miroir est une prolongation originale.'});

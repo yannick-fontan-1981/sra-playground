@@ -1,0 +1,546 @@
+{
+  "spec": {
+    "id": "ss13-05",
+    "title": "Le gardien devenu poids",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~.....~~~~~~~~~~~~~~",
+      "~.....~~......~~~~~~",
+      "~.T...~~......~~~~~~",
+      "~...Z.~~...m..~~~~~~",
+      "~.....~~......~~~~~~",
+      "~.....~~......~....~",
+      "~.....~~o.....~..g.~",
+      "~.....~~......~....~",
+      "~.....~~......~..g.~",
+      "~~.#~~~~~~~~~~~....~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 2,
+          "y": 10
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "deux-poids",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 11,
+            "y": 7
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 14,
+          "y": 8
+        },
+        "circuit": "deux-poids",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "DDDDDDURUUUUULCRDDDLDRRRRRRRURRCXURRRRRRRDRR",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 21
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": true,
+    "puzzle": 15,
+    "label": "Adaptation de Heroes 2: Monsters · énigme 15 · le monstre comme poids durable",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-15",
+    "objective": "Échanger avec un monstre pour maintenir une commande distante, puis placer une caisse sur la seconde et transporter le Voleur par le miroir qu’il a déplacé."
+  },
+  "metrics": {
+    "actions": 44,
+    "selections": 2,
+    "thiefPulls": 1,
+    "partnerMoves": 0,
+    "swaps": 2,
+    "partnerSwaps": 0,
+    "bentSwaps": 0,
+    "monsterSwaps": 1,
+    "stoneMoves": 1,
+    "mirrorMoves": 1,
+    "reflections": 1,
+    "heroReflections": 1,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur tire le miroir au-dessus du mur qui coupait son rayon horizontal",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Voleur se décroche du miroir et prépare son point de reflet",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Magicien traverse l’eau en laissant le monstre vivant sur la première commande",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "La caisse remplace le Magicien sur la seconde commande et le passage final apparaît",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Le Magicien rejoint la rive finale, loin du gardien conservé comme poids",
+      "turn": 31,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Le miroir déplacé livre le Voleur sur la deuxième île",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Les deux héros empruntent le passage tenu par le monstre et la caisse",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "deux-poids": true
+      }
+    }
+  ],
+  "adaptation": "Le monstre et la caisse maintiennent deux boutons comme dans Heroes 2: Monsters 15. Le Magicien effectue les remplacements à distance sûre; aucun monstre ne doit être tué. Les îles, le miroir à extraire derrière son mur, la traction du Voleur et le pont hydraulique sont une composition originale destinée au duo SS13. La géométrie et la présence du partenaire diffèrent de la source."
+}
