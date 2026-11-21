@@ -87,6 +87,31 @@ test('different silhouettes can compete for control before the second displaceme
   }
 });
 
+test('distinguishes a transported turn from turning in place during a control experiment',async()=>{
+  const corner=[[0,0],[1,0],[2,0],[0,1],[0,2]],hook=[[0,0],[1,0],[2,0],[0,1],[1,1],[0,2]];
+  function frame(first:number,second:number,turnA=false,turnB=false){
+    const rows=Array.from({length:20},()=>Array<number>(35).fill(0));
+    for(const [origin,ink,mask,turn] of [[first,1,corner,turnA],[second,2,hook,turnB]] as const){
+      for(const [x,y] of mask)rows[6+(turn?x!:y!)]![origin+(turn?2-y!:x!)]=ink;
+    }
+    return rows;
+  }
+  const initial=frame(2,17),walk=frame(5,17,true),turnOnly=frame(5,17,true,true),transit=frame(5,20,true,true);
+  const [a,b,c,d]=await Promise.all([initial,walk,turnOnly,transit].map((v,i)=>observation(v,i)));
+  for(const [result,visible,expected] of [[c!,turnOnly,false],[d!,transit,true]] as const){
+    const mem=newCursorMemory(),preference={mode:'active',strategy:'motion_contrast',minimumOutcomes:2} as const;
+    recordCursorTrial(mem,a!,b!,initial,walk,'ACTION4');
+    assert.equal(mem.motions.some(m=>m.box[0]===5),false);
+    const t=offerCursorTrial(mem,b!,walk,false,true,preference)!;
+    assert.deepEqual(t.target.box,[17,6,19,8]);
+    assert.equal(recordCursorTrial(mem,b!,b!,walk,walk,t.command,t),'cursor_click_visually_unchanged');
+    const verify=offerCursorTrial(mem,b!,walk)!;
+    const receipt=recordCursorTrial(mem,b!,result,walk,visible,verify.command,verify);
+    assert.equal(receipt==='new_cursor_moved_while_previous_cursor_stayed',expected);
+    assert.equal(!!mem.verified,expected);
+  }
+});
+
 test('the exploration family proposes a matching piece, records the transferred mark and verifies the actual new mover',async()=>{
   const family=createPreparedEffects(),a=board(),b=board(1),c=board(1,15);
   const oa=await observation(a,0),ob=await observation(b,1),oc=await observation(c,2);

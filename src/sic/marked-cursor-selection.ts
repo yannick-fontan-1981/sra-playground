@@ -1,9 +1,11 @@
 import { fallbackPalette } from '../runtime/display-palette.ts';
+import { visualLayout } from './witnessed-preview-transfer.ts';
 import { informationPriority, type InformationPreference } from './information-preference.ts';
 import type {NativeBox,NativeEntity,NativeObservation,NativePoint,NativeRows} from '../logos-engine/v6-native-types.ts';
 
 type Part = {box:NativeBox; ink:number};
 type Motion = {box:NativeBox; form:string; command:string; ref:string; dx:number; dy:number; entry?:string};
+type PoseMotion = Motion & { fromBox:NativeBox };
 type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[]; ink:number; shape:string; basis?:'motor_scale'};
 type ProjectedMove = {command:string; delta:NativePoint; evidence:string};
 type ControlContrast = {
@@ -12,7 +14,7 @@ type ControlContrast = {
 };
 export type CursorTrial = Mark & { stage:'select'|'verify'|'advance'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string };
 export type CursorMemory = {
-  motions:Motion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
+  motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
 };
 export const newCursorMemory=():CursorMemory=>({motions:[],tried:[]});
@@ -34,7 +36,8 @@ function bodyAfterClick(part:Part,b:NativeObservation,a:NativeObservation,rows:N
     if(rows[y]?.[x]!==part.ink)continue;
     body++;if(next[y]?.[x]===part.ink)retained++;
   }
-  if(retained*2>body)return part;
+  const mostlyRetained=retained*2>body;
+  if(mostlyRetained&&(!allowReshape||a.entities.some(e=>e.palette_value===part.ink&&tag(e.bbox)===tag(part.box))))return part;
   const box=tag(part.box),before=b.entities.find(e=>e.palette_value===part.ink&&tag(e.bbox)===box);
   if(!before)return;
   const after=a.entities.find(e=>e.area===before.area&&tag(e.bbox)===box&&JSON.stringify(e.mask)===JSON.stringify(before.mask));
@@ -49,6 +52,7 @@ function bodyAfterClick(part:Part,b:NativeObservation,a:NativeObservation,rows:N
     return common*2>e.area;
   });
   if(peers.length===1)return {box:peers[0]!.bbox,ink:peers[0]!.palette_value};
+  if(mostlyRetained)return part;
 }
 function refute(m:CursorMemory,t:CursorTrial){
   const refuted=m.refuted??=[];const key=hypothesis(t);
@@ -98,6 +102,22 @@ function translations(b:NativeObservation,a:NativeObservation,input:string,rows:
     const box=to[0]!.bbox,dx=box[0]-from[0]!.bbox[0],dy=box[1]-from[0]!.bbox[1];
     const entry=entrySurface(rows,from[0]!.bbox,dx,dy);
     found.push({box,form,dx,dy,command:input,ref:a.observation_ref,...(entry?{entry}:{})});
+  }
+  return found;
+}
+function motionAcrossPoses(b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,input:string):PoseMotion[] {
+  const before=visualLayout(b,rows),after=visualLayout(a,next),found:PoseMotion[]=[];
+  for(const [role,group] of Object.entries(before)){
+    const later=after[role];
+    if(group.length!==1 || later?.length!==1)continue;
+    const old=group[0]!,now=later[0]!;
+    if(old.form===now.form)continue;
+    const dx=(now.at[0]-old.at[0])/2,dy=(now.at[1]-old.at[1])/2;
+    const width=old.box[2]!-old.box[0]!+1,height=old.box[3]!-old.box[1]!+1;
+    // A turn in place can move the center of a pixel box by half a pixel.
+    if(Math.max(Math.abs(dx),Math.abs(dy))<Math.max(1,Math.max(width,height)/2))continue;
+    found.push({fromBox:[old.box[0]!,old.box[1]!,old.box[2]!,old.box[3]!],box:[now.box[0]!,now.box[1]!,now.box[2]!,now.box[3]!],
+      form:now.form,dx,dy,command:input,ref:a.observation_ref});
   }
   return found;
 }
@@ -186,7 +206,8 @@ function possibleMove(m:CursorMemory,mark:Mark,rows:NativeRows) {
 }
 function distinguishControl(m:CursorMemory, mark:Mark, o:NativeObservation, preference?:InformationPreference):ControlContrast|undefined {
   if (preference?.mode !== 'active' || !informationPriority({strategy:'motion_contrast', distinctOutcomes:2},preference)) return;
-  const motion = m.motions.find(v => inside(v.box,mark.source.box) && (v.dx===0)!==(v.dy===0)
+  const observed=mark.basis?[...m.motions,...(m.oriented??[])]:m.motions;
+  const motion = observed.find(v => inside(v.box,mark.source.box) && (v.dx===0)!==(v.dy===0)
     && /^ACTION[1-4]$/.test(v.command) && o.available_action_refs.includes(v.command));
   if (!motion) return;
   return {strategy:'motion_contrast', mode:'exploration', minimumOutcomes:preference.minimumOutcomes,
@@ -198,7 +219,8 @@ export function motorScalePeers(o:NativeObservation,m:CursorMemory):Mark[] {
   const ranked:{mark:Mark;cost:number}[]=[];
   const frequency=new Map<string,number>();
   for(const e of o.entities)frequency.set(e.signature,1+(frequency.get(e.signature)??0));
-  for(const move of m.motions){
+  const observed=[...m.motions,...(m.oriented??[])];
+  for(const move of observed){
     if((move.dx===0)===(move.dy===0))continue;
     const span=Math.abs(move.dx)+Math.abs(move.dy);
     const base=o.entities.find(e=>e.signature===move.form&&tag(e.bbox)===tag(move.box));
@@ -206,7 +228,7 @@ export function motorScalePeers(o:NativeObservation,m:CursorMemory):Mark[] {
     const width=base.bbox[2]-base.bbox[0]+1,height=base.bbox[3]-base.bbox[1]+1;
     if(span<Math.max(width,height)/2||span>2*Math.max(width,height))continue;
     for(const peer of o.entities){
-      if(peer.area<2||!disjoint(move.box,peer.bbox)||m.motions.some(v=>!disjoint(v.box,peer.bbox)))continue;
+      if(peer.area<2||!disjoint(move.box,peer.bbox)||observed.some(v=>!disjoint(v.box,peer.bbox)))continue;
       const w=peer.bbox[2]-peer.bbox[0]+1,h=peer.bbox[3]-peer.bbox[1]+1;
       if(Math.max(w,h)>2*span||Math.min(w,h)*2<span||Math.max(w,h)>2*Math.max(width,height))continue;
       const phase=(a:number,b:number)=>{const d=Math.abs(a-b)%(span*2);return Math.min(d,span*2-d)/span;};
@@ -224,8 +246,9 @@ export function motorScalePeers(o:NativeObservation,m:CursorMemory):Mark[] {
 export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,rows:NativeRows,allowStatic=false,requireProjection=false,preference?:InformationPreference):CursorTrial|null {
   if(!m || !o.available_action_refs.includes('ACTION6'))return null;
   if(m.pending)return !m.pending.passive && o.available_action_refs.includes(m.pending.command)?m.pending:null;
-  if(!m.motions.length&&!allowStatic)return null;
-  const marked=cursorCandidates(o,rows,m);
+  const allowPoses=!!m.oriented?.length && preference?.mode==='active';
+  if(!m.motions.length&&!allowStatic&&!allowPoses)return null;
+  const marked=m.motions.length||allowStatic?cursorCandidates(o,rows,m):[];
   const candidates=!marked.length && preference?.mode==='active' && !m.verified ? motorScalePeers(o,m):marked;
   const choices=candidates.map(mark=>({mark,projectedMove:mark.basis?undefined:possibleMove(m,mark,rows)}));
   choices.sort((a,b)=>Number(!!b.projectedMove)-Number(!!a.projectedMove));
@@ -236,7 +259,8 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
     if(m.tried.includes(signature(mark)) || (!projectedMove && (familiar || m.refuted?.includes(hypothesis(mark)))))continue;
     if(m.verified && mark.source.ink!==mark.target.ink && sharedSurroundings(rows,mark)<0.5)continue;
     const [x,y]=mark.point;
-    const evidence=[...new Set(m.motions.filter(v=>inside(v.box,mark.source.box)).map(v=>v.ref))];
+    const observations=mark.basis?[...m.motions,...(m.oriented??[])]:m.motions;
+    const evidence=[...new Set(observations.filter(v=>inside(v.box,mark.source.box)).map(v=>v.ref))];
     if(m.verified?.shape===mark.shape && m.verified.mark===mark.ink)evidence.push(...m.verified.refs);
     return {...mark,stage:'select',command:'ACTION6:'+x+','+y,evidence,...(projectedMove?{projectedMove}:{}),...(contrast?{contrast}:{})};
   }
@@ -253,6 +277,12 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     if(observed)trial={...observed,stage:'select',command:input,evidence:[b.observation_ref],passive:true};
   }
   const moves=/^ACTION[1-4]$/.test(input) && b.frame_hash!==a.frame_hash ? translations(b,a,input,rows):[];
+  if(b.frame_hash!==a.frame_hash || /^ACTION[1-4]$/.test(input)){
+    const oriented=/^ACTION[1-4]$/.test(input)&&b.frame_hash!==a.frame_hash&&b.available_action_refs.includes('ACTION6')
+      ? motionAcrossPoses(b,a,rows,next,input):[];
+    if(oriented.length)m.oriented=oriented;
+    else delete m.oriented;
+  }
   if(/^ACTION[1-4]$/.test(input)){
     if(moves.length){
       const sites=m.motorSites??={},fresh=moves.some(v=>!sites[v.form+'/'+tag(v.box)]);
@@ -288,7 +318,9 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     const oldStill=rows.slice(trial.source.box[1],trial.source.box[3]+1).every((row,i)=>
       row.slice(trial.source.box[0],trial.source.box[2]+1).every((v,j)=>next[trial.source.box[1]+i]?.[trial.source.box[0]+j]===v));
     const target=trial.target;
-    const moved=moves.find(v=>{
+    const rotated=trial.basis && trial.contrast?.motor===input ? m.oriented?.find(v=>tag(v.fromBox)===tag(target.box)
+      && Math.max(Math.abs(v.dx),Math.abs(v.dy))*2>=Math.max(...trial.contrast!.baselineDelta.map(Math.abs))):undefined;
+    const moved=rotated??moves.find(v=>{
       if(trial.contrast && (input!==trial.contrast.motor || (!trial.basis && (v.dx!==trial.contrast.baselineDelta[0] || v.dy!==trial.contrast.baselineDelta[1]))))return false;
       if(trial.basis && trial.contrast){
         const stride=Math.max(...trial.contrast.baselineDelta.map(Math.abs));
@@ -316,7 +348,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       // observation must still account for the parked subject and the new mover.
       if(trial.contrast && !trial.passive && a.available_action_refs.includes(input)){
         const shift=(box:NativeBox):NativeBox=>[box[0]+moved.dx,box[1]+moved.dy,box[2]+moved.dx,box[3]+moved.dy];
-        const now=shift(target.box),destination=shift(now);
+        const now=rotated?.box??shift(target.box),destination=shift(now);
         if(disjoint(destination,trial.source.box)&&destination[0]>=0&&destination[1]>=0&&
           destination[2]<next[0]!.length&&destination[3]<next.length){
           m.pending={...trial,stage:'advance',target:{...target,box:now},evidence:[...trial.evidence,a.observation_ref]};

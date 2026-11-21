@@ -5,6 +5,7 @@ import { pathToFileURL } from 'node:url';
 import { getGameByCode } from '../src/games/catalog.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { measureComponentTranslations } from '../src/sic/observed-translation.ts';
+import { poseFamilyKey } from '../src/sic/pose-families.ts';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { hash, op, sourceReplay } from './sic-study-source-replay.mjs';
 
@@ -16,6 +17,21 @@ const preference=packPath?JSON.parse(await readFile(packPath,'utf8')).configurat
 const engine=await sourceBackend(resolve(env)),episodes=[];
 const contains=([l,t,r,b],[x,y,u,v])=>l<=x&&t<=y&&r>=u&&b>=v;
 const alive=(rep,b)=>b.state==='NOT_FINISHED'&&!rep.win(b);
+function leavesFootprint(a,b,box){
+  const forms=o=>{
+    const m=new Map();
+    for(const e of o.entities.filter(e=>e.area>=2)){
+      const k=poseFamilyKey(e),v=m.get(k)??[];v.push(e);m.set(k,v);
+    }return m;
+  };
+  const old=forms(a),fresh=forms(b);
+  return [...old].some(([k,v])=>{
+    if(v.length!==1||fresh.get(k)?.length!==1)return false;
+    const p=v[0].bbox,q=fresh.get(k)[0].bbox;
+    if(!contains(box,p))return false;
+    return Math.max(Math.abs(q[0]+q[2]-p[0]-p[2]),Math.abs(q[1]+q[3]-p[1]-p[3]))>=Math.max(2,p[2]-p[0]+1,p[3]-p[1]+1);
+  });
+}
 for(const file of files)for(const line of (await readFile(file,'utf8')).trim().split(/\r?\n/)){
   const run=JSON.parse(line),game=getGameByCode(run.code);
   assert.ok(game&&game.group!=='custom_4');
@@ -48,12 +64,16 @@ for(const file of files)for(const line of (await readFile(file,'utf8')).trim().s
       const oldStayed=prepared.frame.slice(t,bottom+1).every((row,y)=>row.slice(l,r+1).every((v,x)=>v===next.frame[t+y][l+x]));
       const redirected=oldStayed&&fromTarget.length>0&&baseMoves.some(m=>contains(offer.source.box,m.from.bbox))
         && !baseMoves.some(m=>contains(offer.target.box,m.from.bbox));
+      const directObservation=await observe(direct),preparedObservation=await observe(prepared),endObservation=await observe(next);
+      const redirectedAcrossPoses=oldStayed&&engaged&&alive(rep,direct)&&alive(rep,next)&&leavesFootprint(o,directObservation,offer.source.box)
+        && !leavesFootprint(o,directObservation,offer.target.box)&&leavesFootprint(preparedObservation,endObservation,offer.target.box);
       let end=next;
       for(const s of run.steps.slice(i+2)){
         if(!alive(rep,end)||!end.availableActionIds.includes(s.a))break;
         end=rep.act(op(s));
       }
-      trials.push({at:i+1,click:offer.command,motor,basis:offer.basis??'mark',projected:!!predicted,matched,redirected,won:rep.win(end)});
+      trials.push({at:i+1,click:offer.command,motor,basis:offer.basis??'mark',oriented:memory.oriented?.some(m=>contains(offer.source.box,m.box))??false,
+        projected:!!predicted,matched,redirected,redirectedAcrossPoses,won:rep.win(end)});
       rep.restore(i);
     }
     const n=rep.act(op(step));assert.equal(hash(n).slice(0,16),step.to);
