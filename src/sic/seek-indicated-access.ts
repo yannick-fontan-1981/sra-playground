@@ -101,6 +101,9 @@ export function chooseIndicatedAccess(m:IndicatedMemory,c:Context,root:string,mo
         if(!site||!hasSite(m,site,c)||cellMatches(site,s.at,c.pitch)||cellMatches(site,c.home,c.pitch))continue;
         const scores=m.readings[q+'/'+cue];
         if(scores&&!scores.hits&&scores.misses)continue;
+        // A fresh destination hypothesis must identify one traversed cell.
+        // At an exact half-step rounding alone can select either neighbour.
+        if(!scores?.hits&&!cellMatches(site,cell(site,c),c.pitch))continue;
         const witness=m.productions.find(p=>p.cue===cue)!;
         consider(path,q,site,4*limits.maxDepth+Number(!!scores?.hits)*limits.maxDepth-gap(site,c.goal),cue,site,witness.ref);
       }

@@ -25,6 +25,16 @@ test('after a refutation SIC uses a measured production to set up an indication 
   learnIndicatedAccess(m,context,'ready','arrived',view(12,20),view(20,12),'ACTION5','e6',read.expected,read);
   assert.equal(m.readings['ACTION5/cue']?.hits,1);assert.equal(m.repair,false);
 });
+test('rounding a mark halfway between two cells cannot establish a specific reachable destination',()=>{
+  const m=newIndicatedMemory(),context={...c,goal:[32,0] as XY};
+  learnIndicatedAccess(m,context,'visited','start',view(12),view(4),'ACTION2','walk');
+  learnIndicatedAccess(m,context,'start','ready',view(4),view(8,10),'ACTION1','mark');
+  m.repair=true;
+  const choose=()=>chooseIndicatedAccess(m,context,'ready',motors,ops,{maxDepth:5,maxNodes:8});
+  assert.notEqual(choose()?.purpose,'test_indication');
+  m.readings['ACTION5/cue']={hits:1,misses:0};
+  assert.equal(choose()?.purpose,'test_indication');
+});
 test('a displaced partner invalidates the experiment and adjacent disclosed substrate does not create a remote cue',()=>{
   const m=newIndicatedMemory();
   learnIndicatedAccess(m,c,'before','after',view(4),view(8,4),'ACTION1','e');
