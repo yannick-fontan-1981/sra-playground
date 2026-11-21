@@ -1,8 +1,38 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
-Le critère principal est le premier L2 gagné en partie autonome sur **un jeu supplémentaire**. Les neuf L2 ouverts donnent deux victoires à froid à v31 et à v34, SS01 et SS04. SS03 a déjà été gagné après le L1. Un premier succès à froid sur SS03 constitue donc un gain d’autonomie distinct. Les six occasions de gagner le L2 d’un autre jeu déjà ouvert sont SS02, SS05, SS06, SS07, SS08 et SS10. SS09 L2 reste la confirmation indépendante. [Bilan des parties complètes de v34](qualification-reprise-v34.md)
+Le critère principal est le premier L2 gagné en partie autonome sur **un jeu Custom 4 supplémentaire**. Les deux conditions acceptées sont l’entrée directe au L2 et une campagne continue dans laquelle le même SIC gagne le L1 puis le L2. Le score du L2 est compté une fois par jeu, avec mention de la condition. **SS09 L2 fait désormais partie des cibles.** Le catalogue du moteur de référence `f0a1ff437` comprend SS01 à SS11. Sur le lot historique de neuf L2, SS01 et SS04 étaient gagnés à froid et SS03 avait déjà été gagné après le L1. [Bilan de référence](qualification-reprise-v34.md)
 
-**Dernier bilan sur Custom 4.** Le candidat figé v60 et le témoin v58 gagnent **2 L2 sur 9 à froid**. SS01 gagne en 44 coups à froid et en 32 après les 19 actions du L1. SS04 gagne en 60 à froid. Sur les 1 434 décisions à froid de v60, le moteur retrouve le même préfixe d’actions et d’images que v58. Le détecteur de pièces, d’orientation et de récepteurs utilisé par le nouveau composeur reconnaît zéro disposition. SS09 L2 reste réservé. [Qualification de v60](#transfert-de-la-composition-apprise-en-partie)
+**Dernier bilan sur Custom 4.** En campagne autonome, v62 gagne cinq L1 et trois L2 sur onze jeux. À froid, il gagne deux L2 sur onze. Ensemble, les deux conditions donnent trois jeux distincts déjà connus, SS01, SS03 et SS04. Le gain de KLOT L4 sur le corpus source reste à transférer. [Scores des onze jeux](#campagnes-continues-sur-les-onze-jeux-custom-4)
+
+## Campagnes continues sur les onze jeux Custom 4
+
+Le même agent SIC Fallback v62 joue depuis la première observation du L1. Chaque victoire est confirmée par un second passage dans le moteur public, commande par commande. Une partie arrêtée au L1 laisse le résultat du L2 indéterminé dans cette condition. Les colonnes indiquent des coups du niveau concerné.
+
+| Jeu | Campagne L1 | Campagne L2 | L2 à froid |
+| --- | ---: | ---: | ---: |
+| SS01 | gagné en 36 | gagné en 32 | gagné en 44 |
+| SS02 | gagné en 40 | budget atteint à 327 | budget atteint à 271 |
+| SS03 | gagné en 47 | gagné en 97 | budget atteint à 249 |
+| SS04 | gagné en 49 | gagné en 143 | gagné en 60 |
+| SS05 | gagné en 44 | budget atteint à 258 | budget atteint à 240 |
+| SS06 | budget atteint à 174 | non atteint | budget atteint à 218 |
+| SS07 | budget atteint à 184 | non atteint | fin de partie à 5 |
+| SS08 | fin de partie à 47 | non atteint | budget atteint à 272 |
+| SS09 | budget atteint à 174 | non atteint | budget atteint à 170 |
+| SS10 | budget atteint à 170 | non atteint | budget atteint à 255 |
+| SS11 | budget atteint à 185 | non atteint | budget atteint à 163 |
+
+Sur les cinq jeux où v62 atteint le L2, le témoin figé v60 a aussi joué les campagnes depuis le L1 sur le même moteur. Toutes les commandes et images concordent sur leur longueur commune, y compris 367 décisions sur SS02 et 302 sur SS05. Les deux versions gagnent les trois mêmes L2 aux mêmes scores. Sur SS02 et SS05, v60 dispose de davantage de décisions avant l’expiration du temps de calcul et échoue également (540 et 382 coups au L2).
+
+Le moteur du lot historique a fourni les neuf entrées directes SS01 à SS08 et SS10. Les onze campagnes et les deux entrées supplémentaires emploient le moteur du catalogue au commit `f0a1ff437`. Les scores d’arrêt au budget dépendent du temps de calcul disponible. À froid, v60 atteint également la limite sur SS09 (171 coups) et SS11 (163). La démonstration publique de 19 coups sur SS01 donne encore un L2 autonome de 32 coups, en plus de la campagne issue des propres 36 coups du solveur.
+
+**Deux priorités pour exploiter le L1.** SS02 et SS05 commencent leur L2 de campagne sur la même image publique que leur L2 à froid. Sur SS02, SIC tente 60 fois de rejoindre un contact associé à la victoire du L1. Il prédit correctement 41 pas d’approche, sans atteindre le contact par ces essais. Sur SS05, seuls 4 des 32 pas sont confirmés et le sujet reste immobile 19 fois. La première mesure à améliorer sur SS02 est la réalisation du dernier pas après une approche correcte. Sur SS05, c’est la détection de ce qui empêche déjà le prochain pas. Il faut vérifier sur les jeux sources si une action préparatoire lève cet obstacle et si SIC réutilise la relation acquise au niveau suivant. [Scores individuels et interventions](mesures-generalisations-manquantes.json)
+
+**Contrôles sources.** Les 100 victoires L1 gardent leur trajectoire, dont SKBN, SWCH, KEYD et GABA. Quinze des seize niveaux supérieurs contrôlés sont gagnés. KLOT L4 passe d’un échec à 100 coups à une victoire en 37. Dans l’expérience indépendante de préparation, 44 continuations partent de 13 situations sources et produisent 11 victoires. Aucune situation ne gagne exclusivement grâce à la branche préparée dans l’enveloppe des 48 coups suivants.
+
+**Quel geste du L1 mérite d’être réutilisé ?** Sur les 100 victoires sources, le banc remplace ou omet chacune des 62 commandes ACTION5 antérieures au dernier coup, en gardant toute la suite. Dans 46 cas, l’omission fait perdre la victoire de cette séquence. Dans 20 cas répartis sur neuf jeux, on dispose aussi d’une direction de remplacement qui laisse l’image initiale intacte et qui fait perdre, comme tous les autres témoins de ce type à cet endroit. Sur SS05 L1, SIC gagne au coup 44 après une remise à zéro au coup 12. Le geste 40 change l’image et quatre commandes mènent à la victoire. L’omission et les quatre substitutions directionnelles échouent, dont une qui conserve l’image du départ. L’expérience établit le rôle de ce geste dans cette séquence. Le transfert de sa condition spatiale au L2 reste à démontrer. [Banc de rejeu avec substitutions](../../../scripts/audit-winning-level-preparations.mjs)
+
+**Comment choisir le sujet à contrôler ?** Sur 42 préfixes sources où un changement de sujet est vérifié à durée égale, un classement par ressemblance avec les silhouettes récemment déplacées peut attribuer un rang à une réponse correcte dans 27 cas. Dans 12 cas, une réponse correcte figure assurément parmi les trois premiers, même en tenant compte des ex æquo. Au test postérieur sur SS06, ce classement s’abstient sur les deux points dont le transfert de contrôle est confirmé. Une ressemblance apprise aide sur certaines sources, mais elle ne suffit pas ici pour choisir le premier geste. Cette expérience reste extérieure aux décisions de v62. [Mesure des candidats avant le clic](../../../scripts/source-control-candidates.mjs) · [Contrôle de l’effet après le clic](../../../scripts/audit-frozen-control-transfers.mjs)
 
 **Ce qui a progressé dans l’élaboration d’une composition.** Sur CWSE L2, SIC apprend en partie dans quelles circonstances une pièce accompagne le sujet et dans quelles circonstances elle réagit à l’orientation. Il utilise ces effets pour chercher comment remplir un récepteur, constate que la disposition change et calcule la suite. Il gagne à froid en **63 actions**, contre un échec à 120 pour v58. Retirer séparément chacun des neuf derniers gestes fait perdre la victoire au bout de la séquence. Le principal chantier ouvert est d’identifier ces rôles à partir de leurs effets quand les objets ont une tout autre apparence. [Expérience source et contrôles](#apprendre-les-conditions-dun-effet-et-composer-un-trajet-jusquau-but)
 
@@ -463,6 +493,16 @@ Dans KLOT L4, une route géométrique promet un déplacement, mais la pièce res
 Le témoin et le candidat jouent les mêmes 21 premiers gestes. Au coup 22, v62 sélectionne de nouveau la pièce déjà visée au coup 19. La partie à froid gagne au coup **37**. Depuis le même état au coup 21, la suite perd si on omet la nouvelle sélection, si on la remplace par le geste du témoin, si on répète le geste précédent, ou si on clique sur la pièce sélectionnée plus tôt au coup 14. Ces quatre interventions conservent la suite choisie par SIC. Sur KLOT L5, les deux versions échouent à 100. [Arbitrage et vérification des déplacements](../../../src/sic/move-masked-pieces.ts) · [Test d’une sélection contredite](../../../tests/v6-selected-rigid-native.test.ts)
 
 **Protocole v62 fixé avant Custom 4.** Geler `sic-source100-rebind-control-v62` et le comparer à `sic-source100-confirmed-reception-v60` sur SS01 à SS08 et SS10 L2 à froid avec les mêmes budgets. Vérifier SS01 après les 19 gestes publics de son L1, les 100 L1 sources et les victoires supérieures du témoin. Le nouveau gain source à reproduire est KLOT L4 au score officiel. Le critère principal reste un L2 gagné sur un jeu Custom 4 supplémentaire. SS09 L2 est réservé à la confirmation.
+
+**Extension après le gel de v62, à la demande de Yannick.** Ajouter SS09 et SS11 au lot à froid et évaluer les onze campagnes complètes L1 → L2. Pour une campagne, indiquer si SIC a gagné le L1 et atteint le L2. Un essai dans lequel le L1 échoue ne compte pas comme une défaite du L2. Le score de SS01 sur démonstration publique du L1 reste une troisième condition expérimentale distincte.
+
+| Besoin de résolution | Expérience effectuée sur le L2 figé | Conséquence pour le chantier |
+| --- | --- | --- |
+| SS06 · sélectionner un autre sujet et reprendre le premier | Sur quatre départs pris aux coups 0, 8, 24 et 48, le banc propose jusqu’à 32 points visibles. Au départ et au coup 48, un clic change le sujet déplacé par la même commande. Après ce déplacement, cliquer sur le premier sujet permet de l’actionner, alors qu’un autre clic au même instant conserve la commande sur le second. | Faire choisir cette expérience par SIC, puis lui faire conserver une première position pendant qu’il mène l’autre sujet vers sa destination. Le score se mesure dans une partie indépendante. |
+| SS08 · déterminer comment obtenir une seconde capacité de déplacement | Sur ces quatre départs, le même protocole essaie 24 ou 25 points visibles et une commande sans coordonnées. Aucun transfert réciproque n’est confirmé. Dans sa partie à froid, v62 n’émet aucun clic. | Déterminer sur les sources comment distinguer un changement de contrôle, un effet différé et le mouvement simultané de plusieurs sujets. Mesurer séparément intervention, effet et accès à la destination. |
+| SS09 · établir les deux conditions de référence | Ce jeu est entré dans le protocole après le gel de v60 et v62. Les deux solveurs disposent du même moteur et de la même enveloppe de calcul. | Comparer les deux entrées directes et consigner jusqu’où va la campagne autonome. |
+
+Le banc de transfert interroge le moteur après la partie et restaure exactement le préfixe entre deux interventions. Il établit qu’une commande peut produire une conséquence. Seule une partie autonome établit que SIC la découvre, la choisit et en tire une victoire. [Protocole du contrôle expérimental](../../../scripts/audit-frozen-control-transfers.mjs)
 
 ### Expériences de contrôle et de placement antérieures
 

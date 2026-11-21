@@ -16895,5 +16895,954 @@
         }
       ]
     }
+  },
+  "sourceReboundControlV62": {
+    "candidate": "sic-source100-rebind-control-v62",
+    "baseline": "sic-source100-confirmed-reception-v60",
+    "freeze": {
+      "sha": "749b4bee20e71e15a21b5f7a82020eead02b1bc9",
+      "files": 2563,
+      "manifestHash": "564b5396b4926f8993c5ab1ef53c00061fecd883f7fb543859cdcec6a3712eb8",
+      "baselineComparableHash": "1c8a02ee3273fea6cec2a03312dbe9af7bbceb0887efcc8efc7c65c5dcf77cd6",
+      "algorithm": "sorted relative POSIX path UTF-8, NUL, binary SHA-256 of file"
+    },
+    "extendedCampaignEngine": {
+      "engine": "f0a1ff43799880f6fed476187200defb5de11925",
+      "files": 817,
+      "archiveSha256": "90228532c44d3756b483ab563f64b70cf12e87c59b597c1324003e65f473a4d3"
+    },
+    "sourceL1": {
+      "wins": 100,
+      "verified": 100,
+      "identicalTrajectories": 100
+    },
+    "sourceUpper": [
+      {
+        "code": "CWSE",
+        "level": 2,
+        "won": true,
+        "actions": 63,
+        "trajectory": "44ac173488b6245467616c8920cd6be26150f36aaee66f517c4189153e1ed792"
+      },
+      {
+        "code": "FT09",
+        "level": 2,
+        "won": true,
+        "actions": 7,
+        "trajectory": "3540463f11957520ca4f805b1c66be1712504ee8797d8f66b1af7d4ae36177be"
+      },
+      {
+        "code": "FT09",
+        "level": 3,
+        "won": true,
+        "actions": 14,
+        "trajectory": "d01a5fc92f15c54b430a2cba8fa943c5698c29bc3675816df02d50f9342ff423"
+      },
+      {
+        "code": "FT09",
+        "level": 4,
+        "won": true,
+        "actions": 16,
+        "trajectory": "7700b7a149b32c08f121e62f0bab095779adf021d8ce3aeb959c2e8b2ee63581"
+      },
+      {
+        "code": "FUIT",
+        "level": 2,
+        "won": true,
+        "actions": 80,
+        "trajectory": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8"
+      },
+      {
+        "code": "GIGO",
+        "level": 5,
+        "won": true,
+        "actions": 20,
+        "trajectory": "f0f3e4fba7188ba1d407ac0a5fb8d5de143e452c9885278e0c52e21bfdc73cb5"
+      },
+      {
+        "code": "KLOT",
+        "level": 2,
+        "won": true,
+        "actions": 31,
+        "trajectory": "d6bcd41df80de0fff0baf66c51fdac9629def52f5f15df1ba7e9a4f76e36e8d3"
+      },
+      {
+        "code": "KLOT",
+        "level": 3,
+        "won": true,
+        "actions": 33,
+        "trajectory": "895e16a22434fd784e0d594d1005fcc120755215d64f92cba39ef2844107efed"
+      },
+      {
+        "code": "KLOT",
+        "level": 4,
+        "won": true,
+        "actions": 37,
+        "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c"
+      },
+      {
+        "code": "KLOT",
+        "level": 5,
+        "won": false,
+        "actions": 100,
+        "trajectory": "70c9b77766966aea2b7c5ffb8565e4dd72d0b4a777569e3abf59d5fa42981a49"
+      },
+      {
+        "code": "MOTO",
+        "level": 2,
+        "won": true,
+        "actions": 13,
+        "trajectory": "a4bfdc7ecd8d0e8ce1847f75d8dfa314953020e2d7a7aae7c9037db9cf231e51"
+      },
+      {
+        "code": "MOTO",
+        "level": 3,
+        "won": true,
+        "actions": 15,
+        "trajectory": "768170f6b3a66299ac70296cfc383381cfa95490f75d3ec6f95205db55fe9935"
+      },
+      {
+        "code": "MOTO",
+        "level": 4,
+        "won": true,
+        "actions": 17,
+        "trajectory": "1635ab83a5124c9dc178cdca81e907099435710e8e1eadc65b402ba917ef6674"
+      },
+      {
+        "code": "MOTO",
+        "level": 5,
+        "won": true,
+        "actions": 17,
+        "trajectory": "c1437fac3ffb9e2c7d1d253f35917715fd2b2c201be2662253a2652b31405657"
+      },
+      {
+        "code": "WA30",
+        "level": 2,
+        "won": true,
+        "actions": 55,
+        "trajectory": "01292713c7317db5f5b7ff4b045635e3833168c707b62dbcd6ee95736280d81f"
+      },
+      {
+        "code": "WA30",
+        "level": 3,
+        "won": true,
+        "actions": 80,
+        "trajectory": "786ab93d562dfc1955a2eb4a464a1c20ec16bebfb14d3a1c470ee6ef25056e46"
+      }
+    ],
+    "KLOT4Interventions": {
+      "code": "KLOT",
+      "level": 4,
+      "actions": 37,
+      "commonPrefix": 21,
+      "selected": "ACTION6:20,39",
+      "priorSelection": 19,
+      "cases": {
+        "full": {
+          "won": true,
+          "final": "e2c8ddc1ddc2432dff39b9f7d053d5ee06ce41b87195ec7cb745544199405d16"
+        },
+        "omit": {
+          "won": false,
+          "final": "048dc7e2440df73c6fd523b4ec05567cc1f8e3f7c488fc9faf91fd1eab04f7e1"
+        },
+        "baseline": {
+          "won": false,
+          "final": "c542de83d16eff844b0a6bf350798f08463c1b7afb10074f208740a95b0da0aa"
+        },
+        "repeatPrevious": {
+          "won": false,
+          "final": "c542de83d16eff844b0a6bf350798f08463c1b7afb10074f208740a95b0da0aa"
+        },
+        "reselectEarlier": {
+          "won": false,
+          "final": "c542de83d16eff844b0a6bf350798f08463c1b7afb10074f208740a95b0da0aa"
+        }
+      }
+    },
+    "sourceContinuationForks": {
+      "checkpointCount": 13,
+      "independentlyReplayed": 44,
+      "wins": 11,
+      "exclusivePreparedWins": 0,
+      "maxContinuation": 48
+    },
+    "historicalColdAndObservedLesson": [
+      {
+        "code": "SS01",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 44,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "final": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e"
+      },
+      {
+        "code": "SS02",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "090e7ef6b25a52cfb02ea4a0c103e887c1d5167f8f32939ee5fe77b49e59c023",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 271,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "78de465295e0cf30a5f53839fa581c65c487531b1b429853c8040dd1f4f9b84d",
+        "final": "4a04674cd8d59907c8f660a946ba83390e8fd7539c7505f018a8dec2555740cf"
+      },
+      {
+        "code": "SS03",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "a4e15a326a06d11b9baa11e7db6d3ae00b9938a8d564a2ce7775806f11d34b4a",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 249,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "ed706551fd94c8eca084b4fdb731c773f826d73cccf1e1aa260dd935f7a56aae",
+        "final": "7060fd3b21c84b50be839b9eb215e00b3689c38ff8d8eca8ded8c45e87b3227e"
+      },
+      {
+        "code": "SS04",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "bbd7f619447096344a27e6d3462f01ea361a2d023f056b9881ae25707810581f",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 60,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "final": "93e2bd8bd7b3b193d9c2842458b59942ca3728f390f62dcfdcc83e7e3cefd1d4"
+      },
+      {
+        "code": "SS05",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "25fa7e75c56e03d9c2abf88c7c52ef9cf353b9d1a5e9ef93bd6feac7c5fa0336",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 240,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "a4f4af1adf9b1d5b0cf148e334b2f8fb13073f918f14dc215d7cc0f62458490c",
+        "final": "9cbb51af343b7eed2f0e03f43e5f1a5bd0d23b44afa9faf369c6026762e5e44f"
+      },
+      {
+        "code": "SS06",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 218,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "e9ec8a4a4145db44d250bdff1e82d95817eb6855b6e94ff194843fcd661e10c3",
+        "final": "dda9ae87c2062ee60975ecf0ba5c044dedce5e2f5e3868c1f6f258a3e632554c"
+      },
+      {
+        "code": "SS07",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 5,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "final": "df8d16405266a4b2a316ca1b21de9aacd29b678202f9113b5a445b612a57d9aa"
+      },
+      {
+        "code": "SS08",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 272,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "6e36d1e1d9654c213cb54984c987a4e659120629d9e4160e34662e6c8cd7285f",
+        "final": "85ebec42dd77ed0f590c44670f62768818eaa1a02ee6c0548f2e8c2d73ad9051"
+      },
+      {
+        "code": "SS10",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "97b6b03984aedadd03896ea0ae756203cb6e17cf59f5e04769a0277a2675ff84",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 255,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "42b03c20e4e4c39ef5709a0402df626ebe4795df4ac25604f684cc16749afba2",
+        "final": "57cc5c504676902b359844ff127874a93f1904c8f400dd356f1cef4cc26faee5"
+      },
+      {
+        "code": "SS01",
+        "start": 2,
+        "finish": 2,
+        "lesson": 19,
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 32,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a"
+      }
+    ],
+    "currentAutonomousCampaignsAndAdditionalCold": [
+      {
+        "code": "SS01",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 36,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 32,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+        "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a"
+      },
+      {
+        "code": "SS02",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 327,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "53903e9b6f1dcf50d9b971c2542da759aca8b0793aae5cbd81f1e70919f9f71f",
+        "final": "16a59abc0b251995f85480f58a41fb3b9a2b72b0029bc01cc62e9fdca7f073b0"
+      },
+      {
+        "code": "SS03",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "6f98abeead39c4e050e9d264a0f9eb988070c510dc803fa1b9f60e55c3b2bac8",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 97,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa"
+      },
+      {
+        "code": "SS04",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "93e2bd8bd7b3b193d9c2842458b59942ca3728f390f62dcfdcc83e7e3cefd1d4",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 143,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+        "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f"
+      },
+      {
+        "code": "SS05",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 258,
+            "won": false
+          }
+        ],
+        "resets": [
+          12
+        ],
+        "tapeDigest": "bc00d14b15dbb5518168eab5e78a68dc8579af00486c8874bfa5b094f7095ea1",
+        "final": "d42518e553e7d4de8132ce1c6f6b93608b0e12bcff403a284b075c4d4814a462"
+      },
+      {
+        "code": "SS06",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 174,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "8dc8e2b9655a08e21ee76d43c07486f628c2f1db88ebcec6f570d2800bb99080",
+        "final": "e9e0ec28f690541c4c5e8665ff4d3a9bcab82a8de4624c0784344fc2d8626875"
+      },
+      {
+        "code": "SS07",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 184,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "8b7ae2a684f9b2ade1af2d80247a25d4576514097e1b541dbca4cddeb527ecc7",
+        "final": "b92fe191a5ec4f10239635ddd5e27cabdcc42cd5f16c66bc137c10ded52c2ee6"
+      },
+      {
+        "code": "SS08",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "d8b4a1078031b59b69a1d02ad0323c6d7c53cc1928ef817b247f23b00862ff09",
+        "final": "8ea659c9aca111c2026178876aadff12a8c375932936e119b2fdddee7578e830"
+      },
+      {
+        "code": "SS09",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 174,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "e3ea408e6eab0e26e568462b4eb04cc48a7332c3fc655f4ecd50a73f49843231",
+        "final": "e533e71e93f522a2cf1ba51f6a8ddae8852d8c521af4707e6c0d778014dd52cd"
+      },
+      {
+        "code": "SS09",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 170,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "ac9a17eda00ef789d39444ce6c9c94824404a9cc24eb563f59b01c1522fbd410",
+        "final": "e1e0e1ee5df18fe168eb7445319a0c5d6d2bbc7a766e107166758bf78deab97d"
+      },
+      {
+        "code": "SS10",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "658f1e0737f5548040927e642e6387f1da887bdb558378a290033dfebdb0c164",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 170,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "6e4db7491e4426bdeacf919d2cf4eddfb75f06e57432e5f42bd4a9217cb9c07d",
+        "final": "23109514630363cbcd19b51dd63acf9d1b16870ca6f97a0c9e2a680b903f2cd7"
+      },
+      {
+        "code": "SS11",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "846a64c7027d7796bb5dc64004b76f60b3e463cabbc8aaea5a1834d8ce4387fb",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 185,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "0b5080732ce090595f9f9b27e30d708a537a3d5a2b286ea79874165b8c49f421",
+        "final": "fbc9c00b93198ce630a58059bb5548a930b762d69a6d30f3873dd0c570dc0bf4"
+      },
+      {
+        "code": "SS11",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "cf27ccaa9a05e54d3ac2e3de7ad430d77768e89d255d782fc61a039dd7f50561",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 163,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "56912bd931ac8f5e19321e4992340b89f576d6818131d2ba56c1988b675f41dc",
+        "final": "9c7c12bb2c3fe35acbc258efc750730aa217d6a6466e0dba53b2db2c36177f43"
+      }
+    ],
+    "comparatorAdditionalCold": [
+      {
+        "code": "SS09",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 171,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "182813af0d1ce72b9066d18b4e8b0dcd6967c8b63894d77deffc853c58a32a31",
+        "final": "e1e0e1ee5df18fe168eb7445319a0c5d6d2bbc7a766e107166758bf78deab97d"
+      },
+      {
+        "code": "SS11",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "cf27ccaa9a05e54d3ac2e3de7ad430d77768e89d255d782fc61a039dd7f50561",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 163,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "56912bd931ac8f5e19321e4992340b89f576d6818131d2ba56c1988b675f41dc",
+        "final": "9c7c12bb2c3fe35acbc258efc750730aa217d6a6466e0dba53b2db2c36177f43"
+      }
+    ],
+    "warmFailures": {
+      "SS02": {
+        "level2": 327,
+        "returns": 224,
+        "contactTrials": 60,
+        "approachMatched": 41,
+        "landedOnPredictedTerminal": 0,
+        "actorStationary": 10
+      },
+      "SS05": {
+        "level2": 258,
+        "returns": 134,
+        "contactTrials": 32,
+        "approachMatched": 4,
+        "landedOnPredictedTerminal": 0,
+        "actorStationary": 19
+      }
+    },
+    "postRunControlTests": [
+      {
+        "code": "SS06",
+        "level": 2,
+        "actualClicks": 66,
+        "changedImage": 4,
+        "visualCue": 4,
+        "prefixes": [
+          {
+            "prefix": 0,
+            "clickPoints": 32,
+            "changed": 2,
+            "matched": 1,
+            "reciprocal": 1,
+            "reciprocalWithPredictedSites": 0
+          },
+          {
+            "prefix": 8,
+            "clickPoints": 32,
+            "changed": 1,
+            "matched": 0,
+            "reciprocal": 0,
+            "reciprocalWithPredictedSites": 0
+          },
+          {
+            "prefix": 24,
+            "clickPoints": 32,
+            "changed": 1,
+            "matched": 0,
+            "reciprocal": 0,
+            "reciprocalWithPredictedSites": 0
+          },
+          {
+            "prefix": 48,
+            "clickPoints": 32,
+            "changed": 1,
+            "matched": 1,
+            "reciprocal": 1,
+            "reciprocalWithPredictedSites": 0
+          }
+        ]
+      },
+      {
+        "code": "SS08",
+        "level": 2,
+        "actualClicks": 0,
+        "changedImage": 0,
+        "visualCue": 0,
+        "prefixes": [
+          {
+            "prefix": 0,
+            "clickPoints": 24,
+            "changed": 1,
+            "matched": 0,
+            "reciprocal": 0,
+            "reciprocalWithPredictedSites": 0
+          },
+          {
+            "prefix": 8,
+            "clickPoints": 24,
+            "changed": 1,
+            "matched": 0,
+            "reciprocal": 0,
+            "reciprocalWithPredictedSites": 0
+          },
+          {
+            "prefix": 24,
+            "clickPoints": 25,
+            "changed": 2,
+            "matched": 0,
+            "reciprocal": 0,
+            "reciprocalWithPredictedSites": 0
+          },
+          {
+            "prefix": 48,
+            "clickPoints": 25,
+            "changed": 2,
+            "matched": 0,
+            "reciprocal": 0,
+            "reciprocalWithPredictedSites": 0
+          }
+        ]
+      }
+    ]
+  },
+  "warmTransferDiagnosticsV62": {
+    "frozenCampaignBaseline": [
+      {
+        "code": "SS01",
+        "baselineScore": [
+          {
+            "level": 1,
+            "actions": 36,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 32,
+            "won": true
+          }
+        ],
+        "digest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+        "commonDecisions": 68,
+        "compared": 68
+      },
+      {
+        "code": "SS02",
+        "baselineScore": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 540,
+            "won": false
+          }
+        ],
+        "digest": "7af11e0f85933085c25ecb56754c4c7a152729498da55d0424e3e0a2eeedf6d3",
+        "commonDecisions": 367,
+        "compared": 367
+      },
+      {
+        "code": "SS03",
+        "baselineScore": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 97,
+            "won": true
+          }
+        ],
+        "digest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "commonDecisions": 144,
+        "compared": 144
+      },
+      {
+        "code": "SS04",
+        "baselineScore": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 143,
+            "won": true
+          }
+        ],
+        "digest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+        "commonDecisions": 192,
+        "compared": 192
+      },
+      {
+        "code": "SS05",
+        "baselineScore": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 382,
+            "won": false
+          }
+        ],
+        "digest": "46b6d861c101a2a8f99c066f6a567a9283ca4ade0662facff2e5c84122432386",
+        "commonDecisions": 302,
+        "compared": 302
+      }
+    ],
+    "sourceL1Credit": {
+      "sourceGames": 100,
+      "nonterminalScalarActions": 62,
+      "omissionLoses": 46,
+      "sameImageSameDurationControlsLose": {
+        "LKEY": 3,
+        "VOIS": 1,
+        "CGWL": 1,
+        "G50T": 1,
+        "TEQU": 3,
+        "WA30": 2,
+        "GABA": 7,
+        "POLA": 1,
+        "TRIA": 1
+      },
+      "verifiedDifferentialMotionUnderLaterInput": {
+        "LKEY": 1,
+        "WA30": 2,
+        "GABA": 4,
+        "POLA": 1
+      }
+    },
+    "SS05PublicL1Replay": {
+      "code": "SS05",
+      "actions": 44,
+      "trials": [
+        {
+          "action": 40,
+          "suffix": 4,
+          "changed": true,
+          "movingOutlines": 0,
+          "arms": [
+            {
+              "substitute": null,
+              "sameImageAsOrigin": true,
+              "won": false,
+              "consumedSuffix": 4,
+              "firstSuffixDivergence": 41,
+              "rejoinedAt": null,
+              "openings": []
+            },
+            {
+              "substitute": "ACTION1",
+              "sameImageAsOrigin": false,
+              "won": false,
+              "consumedSuffix": 4,
+              "firstSuffixDivergence": 41,
+              "rejoinedAt": null,
+              "openings": []
+            },
+            {
+              "substitute": "ACTION2",
+              "sameImageAsOrigin": false,
+              "won": false,
+              "consumedSuffix": 4,
+              "firstSuffixDivergence": 41,
+              "rejoinedAt": null,
+              "openings": []
+            },
+            {
+              "substitute": "ACTION3",
+              "sameImageAsOrigin": false,
+              "won": false,
+              "consumedSuffix": 4,
+              "firstSuffixDivergence": 41,
+              "rejoinedAt": null,
+              "openings": []
+            },
+            {
+              "substitute": "ACTION4",
+              "sameImageAsOrigin": true,
+              "won": false,
+              "consumedSuffix": 4,
+              "firstSuffixDivergence": 41,
+              "rejoinedAt": null,
+              "openings": []
+            }
+          ]
+        }
+      ]
+    },
+    "predictControlFromPriorOutlines": {
+      "sourceMatchedStates": 42,
+      "sourceScorableCorrect": 27,
+      "sourceGuaranteedTop3": 12,
+      "customActualReciprocalCases": [
+        {
+          "prefix": 0,
+          "loci": 32,
+          "scorable": 0
+        },
+        {
+          "prefix": 48,
+          "loci": 32,
+          "scorable": 0
+        }
+      ]
+    }
   }
 }

@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceInterface } from './sic-study-source-interface.mjs';
+import { fromSourceFork } from './sic-study-source-fork.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -436,14 +437,22 @@ if (selected.some((code) => !catalogue.includes(code))) throw Error('Game outsid
 const [index, shards] = shardArg.split('/').map(Number);
 const variation = process.env.SIC_STUDY_SOURCE_INTERFACE;
 if (variation && !source) throw Error('Interface variations apply only to the source cohort');
+const forkFile = process.env.SIC_STUDY_SOURCE_FORKS;
+if (forkFile && (!source || start !== finish || variation || process.env.SIC_STUDY_PUBLIC_PREFIX || process.env.SIC_STUDY_OBSERVED_LESSON))
+  throw Error('A source fork requires one direct-entry source level');
+const forks = forkFile ? JSON.parse(await readFile(forkFile, 'utf8')) : null;
 const games = source
   ? sourceInterface(await sourceBackend(environment), variation)
   : (await load(environment, 'src/runtime/native-game-dispatcher.ts')).createGameDispatcher(() => {
       throw Error('Native evaluation unexpectedly requested a legacy game');
     });
-for (const code of selected.filter((_, i) => i % shards === index)) {
+const jobs = forks ? forks.filter(f => selected.includes(f.code) && f.level === start)
+  : selected.map(code => ({code}));
+for (const job of jobs.filter((_, i) => i % shards === index)) {
+  const {code} = job;
   try {
-    const result = await run(code, games);
+    const result = await run(code, forks ? fromSourceFork(games, job) : games);
+    if (forks) result.sourceFork = { id: job.id, prefix: job.prefix, arm: job.arm, initial: job.initial };
     if (variation) result.sourceInterface = variation;
     await appendFile(output, JSON.stringify(result) + '\n');
     console.log(
@@ -451,7 +460,7 @@ for (const code of selected.filter((_, i) => i % shards === index)) {
       result.levels.map((level) => [level.won, level.actions])
     );
   } catch (error) {
-    await appendFile(output, JSON.stringify({ code, error: String(error) }) + '\n');
+    await appendFile(output, JSON.stringify({ code, ...(forks ? {sourceFork: job.id} : {}), error: String(error) }) + '\n');
     process.exitCode = 1;
   }
 }

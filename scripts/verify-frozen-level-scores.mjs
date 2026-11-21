@@ -22,7 +22,6 @@ const load=async p=>JSON.parse(await readFile(p,'utf8'));
 for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().split(/\r?\n/)) {
   const r=JSON.parse(line);
   if(r.error) {unavailable.push(r.code);continue;}
-  assert.notEqual(r.code,'SS09');
   const key=[r.code,r.start,r.finish,r.observedPriorLevelActions??0].join('/');
   const engine=createGameDispatcher(()=>{throw Error('Unexpected engine')});
   const transient = process.env.SIC_AUDIT_TRANSIENT_SUBJECTS ? await transientSubjectAudit(process.env.SIC_AUDIT_TRANSIENT_SUBJECTS) : null;
