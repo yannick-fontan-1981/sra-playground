@@ -154,5 +154,153 @@
       "configurationForecasts": 3,
       "tapeDigest": "a0984b595c000831e296ad5b2b70048589a266014277227b3470176045c2d281"
     }
-  ]
+  ],
+  "markedCursorSource": {
+    "VOIS2": [
+      {
+        "version": "v38",
+        "score": 0,
+        "actions": 90,
+        "cap": 90,
+        "trajectory": "4a040d0099dee13c13a2958913b09e05d0244d558820350c00b14c406f7d4367",
+        "edits": []
+      },
+      {
+        "version": "pilot_b",
+        "score": 1,
+        "actions": 80,
+        "cap": 90,
+        "trajectory": "800f883f0e480ed2f359b22080c8e590f13f28c2d01064b0bbd0304a2b33787f",
+        "edits": [
+          {
+            "at": 7,
+            "stage": "select",
+            "scoreWithout": 1
+          },
+          {
+            "at": 8,
+            "stage": "verify",
+            "scoreWithout": 1
+          },
+          {
+            "at": 9,
+            "stage": "select",
+            "scoreWithout": 1
+          },
+          {
+            "at": 15,
+            "stage": "select",
+            "scoreWithout": 1
+          },
+          {
+            "at": 16,
+            "stage": "verify",
+            "scoreWithout": 1
+          },
+          {
+            "at": 17,
+            "stage": "select",
+            "scoreWithout": 1
+          },
+          {
+            "at": 23,
+            "stage": "select",
+            "scoreWithout": 1
+          },
+          {
+            "at": 24,
+            "stage": "verify",
+            "scoreWithout": 1
+          },
+          {
+            "at": 25,
+            "stage": "verify",
+            "scoreWithout": 1
+          },
+          {
+            "at": 26,
+            "stage": "select",
+            "scoreWithout": 1
+          },
+          {
+            "at": 36,
+            "stage": "select",
+            "scoreWithout": 1
+          },
+          {
+            "at": 49,
+            "stage": "select",
+            "scoreWithout": 1
+          }
+        ],
+        "jointOmissions": [
+          {
+            "omit": "both",
+            "used": 68,
+            "score": 1
+          },
+          {
+            "omit": "select",
+            "used": 72,
+            "score": 1
+          },
+          {
+            "omit": "verify",
+            "used": 76,
+            "score": 1
+          }
+        ]
+      }
+    ],
+    "VOIS1": [
+      {
+        "i": 30,
+        "stage": "select",
+        "body": [
+          10,
+          18,
+          12,
+          20
+        ],
+        "target": [
+          42,
+          22,
+          44,
+          24
+        ],
+        "inks": [
+          13,
+          13,
+          0
+        ],
+        "offsets": 1,
+        "actionMatches": true,
+        "result": "cursor_mark_transferred"
+      },
+      {
+        "i": 31,
+        "stage": "verify",
+        "body": [
+          10,
+          18,
+          12,
+          20
+        ],
+        "target": [
+          42,
+          22,
+          44,
+          24
+        ],
+        "inks": [
+          13,
+          13,
+          0
+        ],
+        "offsets": 1,
+        "actionMatches": true,
+        "result": "new_cursor_moved_while_previous_cursor_stayed"
+      }
+    ]
+  }
 }

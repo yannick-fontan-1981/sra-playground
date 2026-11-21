@@ -118,7 +118,9 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
       if(remaining<1)return null;
-      const opening = !m.turns || !!m.configurationOpportunity || hasExperimentOpportunity(m);
+      const motorCount=o.available_action_refs.filter(ref=>/^ACTION[1-4]$/.test(ref)).length;
+      const opening = !m.turns || (m.cursorSelection?.returns??0)>=2*Math.max(2,motorCount) ||
+        (m.cursorSelection?.blocked?.length??0)>=2;
       const cursor = group===recurrentExperimentGroup && (opening || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
         ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity) : null;
       if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;

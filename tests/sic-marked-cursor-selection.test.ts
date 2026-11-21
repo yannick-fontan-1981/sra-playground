@@ -7,9 +7,9 @@ import {evidencedPlanGroup,recurrentExperimentGroup} from '../src/sic/experiment
 import {validateV6PublicObservation} from '../src/runtime/v6-agent-protocol.ts';
 
 const palette=['#141414','#e36b28','#2674db','#fff','#292929','#f4df14'];
-function board(active=0,right=13,mark=3,edge=false) {
+function board(active=0,right=13,mark=3,edge=false,first=3) {
   const rows=Array.from({length:20},()=>Array<number>(26).fill(0));
-  for(const [i,left] of [3,right].entries()){
+  for(const [i,left] of [first,right].entries()){
     for(let y=6;y<11;y++)rows[y]!.fill(i+1,left,left+5);
     if(i===active)rows[edge?6:8]![left+2]=mark;
   }
@@ -74,4 +74,23 @@ test('a refused click or a moving mark alone does not establish motor control',a
   const blink=board(1);blink[8]![15]=2;blink[8]![16]=3;
   assert.equal(recordCursorTrial(n,ob,await observation(blink,2),b,blink,next.command,next),'cursor_control_unconfirmed');
   assert.equal(n.verified,undefined);
+});
+
+test('learns from an ordinary click and move while leaving the other family in control',async()=>{
+  const m=newCursorMemory(),a=board(),b=board(0,13,3,false,5),c=board(1,13,3,false,5),d=board(1,15,3,false,5);
+  const [oa,ob,oc,od]=await Promise.all([a,b,c,d].map((r,i)=>observation(r,i)));
+  recordCursorTrial(m,oa!,ob!,a,b,'ACTION4');
+  const receipt=recordCursorTrial(m,ob!,oc!,b,c,'ACTION6:15,8');
+  assert.equal(receipt,'cursor_mark_transferred');
+  assert.equal(offerCursorTrial(m,oc!,c,true),null);
+  assert.equal(recordCursorTrial(m,oc!,od!,c,d,'ACTION4'),'new_cursor_moved_while_previous_cursor_stayed');
+  assert.ok(m.verified);
+});
+
+test('can hypothesize from an attached dot outside an otherwise identical silhouette',async()=>{
+  const rows=board(-1);rows[5]![5]=5;
+  const trial=offerCursorTrial(newCursorMemory(),await observation(rows,0),rows,true);
+  assert.equal(trial?.stage,'select');
+  assert.deepEqual(trial.offsets,[[2,-1]]);
+  assert.deepEqual(trial.point,[15,8]);
 });

@@ -30,6 +30,12 @@ Les chantiers 9 et 13 du programme portent sur l’information hors champ et les
 
 Les chiffres détaillés par expérience et les quatre trajectoires L1 modifiées par v38 sont disponibles dans le [relevé de mesures](mesures-generalisations-manquantes.json).
 
+### Règle de la marque vive, ce qui est déjà établi
+
+Sur VOIS L1, le pilote expérimental a prédit au coup 30 que cliquer sur la seconde pièce transférerait la marque. Au coup 31 il a fait bouger cette pièce tandis que la première restait immobile. Les deux effets ont été retrouvés dans un rejeu physique des commandes. Ce pilote échoue au plafond de 60 sur le niveau que v38 gagne en 57. Une prédiction juste peut donc interrompre un meilleur plan. Le travail d’arbitrage consiste à apprendre aussi des clics engagés par d’autres stratégies et à réserver l’initiative du test aux retours sans expansion ou aux directions bloquées.
+
+Sur VOIS L2, une première variante plus entreprenante gagne en 80 contre un échec de v38 à 90. La marque change puis le mouvement du nouveau sujet est confirmé trois fois pendant cette victoire. Retirer les douze commandes propres à ces expériences et conserver la suite choisie par le pilote gagne encore en 68. Le score et la sélection de plusieurs sujets sont vérifiés. La nécessité de ces douze commandes pour gagner ne l’est pas. Cette variante avait perdu VOIS L1 et reste un essai de recherche. [Scores, contrôles par omission et constats mécaniques](mesures-generalisations-manquantes.json)
+
 ## Méthode de qualification
 
 **Point de comparaison du candidat v38.** Les neuf parties froides ont été rejouées indépendamment dans le moteur. SS01 et SS04 gagnent en 44 et 60, soit deux jeux sur neuf. SS01 gagne aussi en 32 avec la leçon publique du L1. Les prévisions de configuration apparaissent une fois sur SS03, deux sur SS06 et trois sur SS10. Aucune de ces trois parties ne gagne. Les six autres n’émettent aucune prévision de ce type. Cette distinction permet de séparer un mécanisme jamais sollicité d’un mécanisme essayé sans gain de score. [Parties, motifs d’arrêt et empreintes de rejeu](mesures-generalisations-manquantes.json)

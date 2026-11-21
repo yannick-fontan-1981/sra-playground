@@ -2,11 +2,12 @@ import { fallbackPalette } from '../runtime/display-palette.ts';
 import type {NativeBox,NativeEntity,NativeObservation,NativePoint,NativeRows} from '../logos-engine/v6-native-types.ts';
 
 type Part = {box:NativeBox; ink:number};
-type Motion = {box:NativeBox; command:string; ref:string; dx:number; dy:number};
+type Motion = {box:NativeBox; form:string; command:string; ref:string; dx:number; dy:number};
 type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[]; ink:number; shape:string};
-export type CursorTrial = Mark & { stage:'select'|'verify'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[] };
+export type CursorTrial = Mark & { stage:'select'|'verify'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean };
 export type CursorMemory = {
-  motions:Motion[]; tried:string[]; refuted?:string[]; pending?:CursorTrial; verified?:{shape:string;mark:number;refs:string[]};
+  motions:Motion[]; tried:string[]; refuted?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
+  pending?:CursorTrial; verified?:{shape:string;mark:number;refs:string[]};
 };
 export const newCursorMemory=():CursorMemory=>({motions:[],tried:[]});
 const tag=(b:NativeBox)=>b.join(',');
@@ -56,7 +57,7 @@ function translations(b:NativeObservation,a:NativeObservation,input:string):Moti
     const from=past.filter(e=>!present.has(tag(e.bbox))),to=now.filter(e=>!prior.has(tag(e.bbox)));
     if(from.length!==1||to.length!==1)continue;
     const box=to[0]!.bbox,dx=box[0]-from[0]!.bbox[0],dy=box[1]-from[0]!.bbox[1];
-    found.push({box,dx,dy,command:input,ref:a.observation_ref});
+    found.push({box,form,dx,dy,command:input,ref:a.observation_ref});
   }
   return found;
 }
@@ -121,15 +122,30 @@ function findMarks(o:NativeObservation,rows:NativeRows,m:CursorMemory):Mark[] {
   }
   return marks;
 }
+function sharedSurroundings(rows:NativeRows,m:Mark) {
+  const [x,y,r,b]=m.source.box,[u,v]=m.target.box;let same=0,total=0;
+  for(let j=-1;j<=b-y+1;j++)for(let i=-1;i<=r-x+1;i++){
+    if(i>=0&&j>=0&&i<=r-x&&j<=b-y)continue;
+    const first=rows[y+j]?.[x+i],second=rows[v+j]?.[u+i];
+    if(first!==undefined&&second!==undefined){total++;if(first===second)same++;}
+  }
+  return total?same/total:0;
+}
+function cursorCandidates(o:NativeObservation,rows:NativeRows,m:CursorMemory) {
+  const marks=findMarks(o,rows,m);
+  if(new Set(marks.map(v=>tag(v.source.box))).size!==1)return [];
+  // A previously witnessed role or a matching body provides more evidence than
+  // an isolated icon of the same size. Color is a priority, not a prerequisite.
+  const rank=(t:Mark)=>Number(t.source.ink===t.target.ink)+sharedSurroundings(rows,t);
+  return marks.sort((a,b)=>rank(b)-rank(a));
+}
 export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,rows:NativeRows,allowStatic=false):CursorTrial|null {
   if(!m || !o.available_action_refs.includes('ACTION6'))return null;
-  if(m.pending && o.available_action_refs.includes(m.pending.command))return m.pending;
+  if(m.pending)return !m.pending.passive && o.available_action_refs.includes(m.pending.command)?m.pending:null;
   if(!m.motions.length&&!allowStatic)return null;
-  const marks=findMarks(o,rows,m);
-  const sources=new Set(marks.map(v=>tag(v.source.box)));
-  if(sources.size!==1)return null;
-  for(const mark of marks){
+  for(const mark of cursorCandidates(o,rows,m)){
     if(m.tried.includes(signature(mark))||m.refuted?.includes(hypothesis(mark)))continue;
+    if(m.verified && mark.source.ink!==mark.target.ink && sharedSurroundings(rows,mark)<0.5)continue;
     const [x,y]=mark.point;
     const evidence=[...new Set(m.motions.filter(v=>inside(v.box,mark.source.box)).map(v=>v.ref))];
     if(m.verified?.shape===mark.shape && m.verified.mark===mark.ink)evidence.push(...m.verified.refs);
@@ -140,7 +156,23 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
 export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,
   input:string,trial?:CursorTrial) {
   if(b.level_epoch!==a.level_epoch || b.state!==a.state || b.levels_completed!==a.levels_completed){delete m.pending;return;}
+  if(!trial && m.pending && (m.pending.command===input || m.pending.passive && /^ACTION[1-4]$/.test(input)))
+    trial={...m.pending,command:input};
+  if(!trial && input.startsWith('ACTION6:') && m.motions.length && b.frame_hash!==a.frame_hash) {
+    const [x,y]=input.slice(8).split(',').map(Number);
+    const observed=cursorCandidates(b,rows,m).find(t=>at(x!,y!,t.target.box));
+    if(observed)trial={...observed,stage:'select',command:input,evidence:[b.observation_ref],passive:true};
+  }
   const moves=/^ACTION[1-4]$/.test(input) && b.frame_hash!==a.frame_hash ? translations(b,a,input):[];
+  if(/^ACTION[1-4]$/.test(input)){
+    if(moves.length){
+      const sites=m.motorSites??={},fresh=moves.some(v=>!sites[v.form+'/'+tag(v.box)]);
+      for(const v of moves)sites[v.form+'/'+tag(v.box)]=true;
+      m.returns=fresh?0:(m.returns??0)+1;m.blocked=[];
+    }else if(b.frame_hash===a.frame_hash && m.motions.length){
+      const blocked=m.blocked??=[];if(!blocked.includes(input))blocked.push(input);
+    }
+  }
   if(trial?.stage==='select'){
     m.tried.push(signature(trial));
     const {source,target,offsets,ink}=trial;
@@ -151,7 +183,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     if(motor && (transfer || b.frame_hash===a.frame_hash))
       m.pending={...trial,stage:'verify',command:motor,feedback:transfer,evidence:[...trial.evidence,a.observation_ref]};
     if(!transfer&&!m.pending)refute(m,trial);
-    m.motions=[];
+    m.motions=[];m.blocked=[];m.returns=0;
     return transfer?'cursor_mark_transferred':b.frame_hash===a.frame_hash?'cursor_click_visually_unchanged':'cursor_mark_prediction_refuted';
   }
   if(trial?.stage==='verify'){
