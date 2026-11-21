@@ -39,6 +39,7 @@ type PredictiveEvidence = {
 };
 export type VisibleGeometry = { from: XY; indicated: XY; before: string; pivots: { role: string; at: XY }[] };
 export type WitnessedBinding = {
+  producer?: import('./seek-missing-preview.ts').CueProducer;
   displays?: VisibleGeometry[];
   calibration?: PredictiveEvidence;
   relation: 'indicator_marks_subject_arrival_after_action';
@@ -66,6 +67,7 @@ export type ReadOffer = {
 import type { TerminalContact } from './terminal-contact.ts';
 import type { SituatedWitness } from './situated-preparation.ts';
 export type PreviewLearning = {
+  cueSearch?: import('./seek-missing-preview.ts').CueSearchMemory;
   recentPreparations?: SituatedWitness[];
   inheritedPreparations?: SituatedWitness[];
   blockedGoal?: {before:string; after:string};
@@ -411,9 +413,11 @@ export function offerWitnessedPreview(
   learned: PreviewLearning,
   o: NativeObservation,
   layout: VisualLayout,
-  available: Set<string>
+  available: Set<string>,
+  bindingKey?: string
 ): ReadOffer | null {
-  const choices = visibleReadings(learned, o, layout, available).sort((a, b) => b.legacy - a.legacy);
+  const readings = visibleReadings(learned, o, layout, available);
+  const choices = (bindingKey ? readings.filter(c=>c.offer.key===bindingKey) : readings).sort((a, b) => b.legacy - a.legacy);
   const command = choices[0]?.offer.command;
   if (!command) return null;
   let best: ReadOffer | null = null,

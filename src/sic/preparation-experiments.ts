@@ -3,6 +3,7 @@ import { hasExperimentOpportunity, recordReturn, type ReturnHistory } from './ex
 import {newCursorMemory,recordCursorTrial,type CursorMemory,type CursorTrial} from './marked-cursor-selection.ts';
 
 import { nextConfiguration, newConfigurationMemory, observeConfiguration, type ConfigurationMemory, type ConfigurationTrial } from './configuration-trials.ts';
+import {searchForMissingCue,type CueTest} from './seek-missing-preview.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
 import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
@@ -110,6 +111,7 @@ export type Experiment = {
     | 'testConfiguration'
     | 'localCapacity'
     | 'seekTerminalContact'
+    | 'seekMissingCue'
     | 'positionForOperation'
     | 'usePositionedOperation'
     | 'testScoringContact'
@@ -164,6 +166,7 @@ export type Experiment = {
   localCapacity?: LocalForecast;
   configurationTrial?: ConfigurationTrial;
   cursorTrial?: CursorTrial;
+  cue?: CueTest;
   delayed?: DelayedTrial;
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
@@ -220,6 +223,7 @@ export type Outcome = {
   territorial?:Record<string,unknown>;
   localRepeat?:ZoneRepeat;
   terminalContact?:Record<string,unknown>;
+  cueSearch?:Pick<CueTest,'binding'|'probe'|'target'|'routing'> & {visible:boolean};
   mobilityProbe?:Record<string,unknown>;
   mechanism?:Record<string,unknown>;
   unreadIndicator?:Record<string,unknown>;
@@ -464,6 +468,17 @@ function selectEstablishedExperiment(
   const s = retained ? sceneIndex(m, o) : m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
+  const sought=m.previewLearning?.cueSearch?.seeking;
+  if(rows && sought && m.previewLearning){
+    const layout=visualLayout(o,rows);
+    const read=offerWitnessedPreview(m.previewLearning,o,layout,available,sought);
+    if(read)return {phase:'witnessedPreview',origin:s,a:read.command,b:read.command,refs:[],rule:'use_the_rediscovered_cue',witnessedPreview:read};
+    // A testable scoring contact is an alternative to recovering the old capacity.
+    const contact=m.previewLearning.terminal?.length ? offerTerminalContact(m,s,o,rows,available) : null;
+    if(contact?.terminalContact?.distance===1)return contact;
+    const probe=searchForMissingCue(m,s,o,layout,available,firstRoutes(m,s,m.scenes.length));
+    if(probe)return probe;
+  }
   if(rows && m.previewLearning?.blockedGoal && m.previewLearning.inheritedPreparations?.length){
     const situated=offerTerminalContact(m,s,o,rows,available,'positioned');
     if(situated)return situated;
@@ -853,13 +868,13 @@ export function selectExperiment(
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
   if (configurationOpportunity && rows && m.configurations && !m.pending && !m.space.active &&
       !m.equations.active && !m.occupancy?.active && !m.territory?.active && !m.frames?.active &&
-      !established?.mechanism && !established?.witnessedPreview && !established?.terminalContact) {
+      !established?.cue && !established?.mechanism && !established?.witnessedPreview && !established?.terminalContact) {
     const plan = nextConfiguration(m.configurations, rows, o.available_action_refs);
     if (plan) return { phase:'testConfiguration', origin:m.scenes.indexOf(sceneKey(o)), a:plan.action, b:plan.action,
       rule:'test_an_unseen_configuration_of_observed_controls', configurationTrial:plan, refs:[] };
   }
   if(local && rows && localOpportunity
-      && !established?.mechanism && !established?.terminalContact && !established?.witnessedPreview
+      && !established?.cue && !established?.mechanism && !established?.terminalContact && !established?.witnessedPreview
       && !m.frames?.active && !m.occupancy?.active && !m.territory?.active && !m.pending
       && !m.space.active && !m.equations.active && !m.condition && !m.projection.active && !m.delayed.active){
     const repeated=stalledLocal(local,o.frame_hash), revisited=revisitedChoice(local,o.frame_hash);
@@ -869,7 +884,7 @@ export function selectExperiment(
       (analogous && p.stage==='control' && !!p.analogousUseRef));
     if(plan)return bindLocal(plan);
   }
-  if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.terminalContact || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
+  if (!rows || established?.cue || established?.frame || established?.territorial || established?.occupancy || established?.terminalContact || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
   const available=new Set(inputs.map(observedCommandKey));
   const recent=m.delayed.history.slice(-8);
@@ -1063,6 +1078,11 @@ export function recordExperiment(
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
     return {...out,result,condition:detail};
   }
+  if(x.cue){
+    const visible=!!visualLayout(a,next)[x.cue.indicator]?.length;
+    const result=a.levels_completed>b.levels_completed||a.state==='WIN'?'cue_search_official':visible?'cue_became_visible':x.cue.routing?'returned_toward_untested_movement':'cue_remains_absent';
+    return {...out,result,cueSearch:{binding:x.cue.binding,probe:x.cue.probe,target:x.cue.target,routing:x.cue.routing,visible}};
+  }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
   if(x.terminalContact&&m.previewLearning){
     const detail=measureTerminalContact(m.previewLearning,x.terminalContact,b,a,op,visualLayout(a,next));
@@ -1080,6 +1100,7 @@ export function recordExperiment(
   }
   if(x.witnessedPreview&&m.previewLearning){
     const detail=checkWitnessedPreview(m.previewLearning,x.witnessedPreview,b,a,visualLayout(b,rows),visualLayout(a,next),op);
+    if(m.previewLearning.cueSearch?.seeking===x.witnessedPreview.key && detail.status==='realized')delete m.previewLearning.cueSearch.seeking;
     return {...out,result:'preview_'+detail.status,witnessedPreview:detail};
   }
   if(x.occupancy){

@@ -48,6 +48,31 @@ async function scene(
   return { o, rows, layout: visualLayout(o, rows) };
 }
 const q: NativeCommand = { action_ref: 'ACTION5', data: {} };
+test('the active pack seeks a cue after failed uses, then measures the rediscovered operation', async()=>{
+  const move:NativeCommand={action_ref:'ACTION2',data:{}};
+  const frames=await Promise.all([
+    scene(1,1,[[3,4]],null),scene(1,2,[[5,4]],[17,4]),scene(1,3,[[17,4]],null),
+    scene(2,4,[[3,7]],null),scene(2,5,[[3,7]],null),scene(2,6,[[5,7]],null),
+    scene(2,7,[[5,7]],null),scene(2,8,[[7,7]],[19,7]),scene(2,9,[[19,7]],null),
+  ]);
+  for(const mode of ['active','shadow'] as const){
+    const family=createPreparedEffects({mode,minimumOutcomes:2,strategy:'motion_contrast'});
+    const step=async(i:number,c:NativeCommand)=>{const u=frames[i]!,v=frames[i+1]!;
+      await family.observePublicOutcome!(u.o,v.o,c,u.rows,v.rows);};
+    for(const [i,c] of [move,q,move,q,move,q].entries())await step(i,c);
+    const probe=await family.proposeInGroup!('continue_or_test_a_witnessed_effect',frames[6]!.o,frames[6]!.rows,[move,q],20,{});
+    if(mode==='shadow'){assert.ok(!probe?.cueSearchForecast);continue;}
+    assert.equal(probe?.experiment.phase,'seekMissingCue');assert.equal(probe?.actions[0]?.action_ref,'ACTION2');
+    assert.equal(probe?.sicSituationCard.mode,'exploration');assert.equal(probe?.cueSearchForecast.blocked.length,2);
+    const result=await family.record!(frames[6]!.o,frames[7]!.o,move,frames[6]!.rows,frames[7]!.rows,probe);
+    assert.equal(result.events[0]?.result,'cue_became_visible');
+    const use=await family.proposeInGroup!('continue_or_test_a_witnessed_effect',frames[7]!.o,frames[7]!.rows,[move,q],19,{});
+    assert.equal(use?.experiment.rule,'use_the_rediscovered_cue');assert.equal(use.actions[0]?.action_ref,'ACTION5');
+    const measured=await family.record!(frames[7]!.o,frames[8]!.o,q,frames[7]!.rows,frames[8]!.rows,use);
+    assert.equal(measured.events[0]?.result,'preview_realized');
+    assert.equal(family.state!().previewLearning.cueSearch.seeking,undefined);
+  }
+});
 test('a winning boundary transfers the relative pose for an operation and tests the feature at a different site',async()=>{
   const frames=await Promise.all([1,3,5].map((x,i)=>scene(1,i+1,[[x,4]],[8,4])));
   const used=await scene(1,4,[[5,4]],null);

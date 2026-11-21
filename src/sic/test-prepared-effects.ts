@@ -6,6 +6,7 @@ import {offerCursorTrial,newCursorMemory} from './marked-cursor-selection.ts';
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
+import {observeCueCondition} from './seek-missing-preview.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
   NativeFamily,
@@ -37,6 +38,7 @@ const labels: Record<Experiment['phase'], string> = {
   testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
+  seekMissingCue:'Explore an untested movement to look for the mark that enabled a previous action',
   positionForOperation:'Reach the relative position where a previous operation changed a visible feature',
   usePositionedOperation:'Test the previous operation at the reached position and inspect the feature',
   testScoringContact:'Test whether a measured move onto a single visible target completes the level',
@@ -114,7 +116,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const key=observedCommandKey(cmd);
       if(comparePreparations && /^ACTION[5-7]$/.test(key))
         retainSituatedOperations(learning,observedSituatedOperations(learning,b,a,before,after,key));
-      observePreviewBindings(learning,b,a,before,after,observedCommandKey(cmd));
+      observePreviewBindings(learning,b,a,before,after,key);
+      if(comparePreparations)observeCueCondition(learning,b,a,before,after,key);
       exposedUnderParts(learning,b,a,rows,next,before,after);
     }
     if (!x && (b.level_epoch !== a.level_epoch || b.state !== a.state)) return null;
@@ -171,6 +174,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(positioned?.completionRef ? [positioned.completionRef] : []),
         ref,
         ...(cursor?.evidence??[]),
+        ...(experiment.cue?.evidence??[]),
         ...(experiment.configurationTrial?.evidence??[]),
         ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
         ...(experiment.localCapacity?.observedPrefix?Object.values(experiment.localCapacity.observedPrefix):[]),
@@ -199,6 +203,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(phase==='testScoringContact')question.satisfactionContract='check_the_predicted_approach_and_then_measure_official_progress_at_contact';
       if(phase==='positionForOperation'||phase==='usePositionedOperation')
         question.satisfactionContract='test_the_previous_level_operation_at_its_observed_relative_position';
+      if(experiment.cue){
+        question.subjects=[experiment.cue.actor,experiment.cue.indicator,experiment.cue.operation];
+        question.satisfactionContract='inspect_whether_the_required_mark_appears_after_the_untested_movement';
+      }
       if(cursor){
         question.subjects=[cursor.source.box.join(','),cursor.target.box.join(','),String(cursor.ink)];
         question.satisfactionContract=cursor.stage==='select'
@@ -255,6 +263,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         }:{})}} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
+        ...(experiment.cue ? {cueSearchForecast:{...experiment.cue,decisionMode:'explore_competing_explanations',outcomes:['cue_becomes_visible','cue_remains_absent']}} : {}),
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
         ...(experiment.terminalContact ? {terminalContactForecast: {
           ...experiment.terminalContact,

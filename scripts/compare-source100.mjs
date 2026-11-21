@@ -127,7 +127,8 @@ async function run(code, games) {
             matchedInTraining:law.matchedInTraining}));
           boundaryAudit.push({epoch,decision:issued+1,laws,terminalContacts:memory.previewLearning?.terminal?.length??0,
             previewBindings:Object.keys(memory.previewLearning?.bindings??{}).length,
-            situatedPreparations:memory.previewLearning?.inheritedPreparations?.length??0});
+            situatedPreparations:memory.previewLearning?.inheritedPreparations?.length??0,
+            producedCues:Object.values(memory.previewLearning?.bindings??{}).filter(binding=>binding.producer).length});
         }
         return proposal;
       };
@@ -379,7 +380,7 @@ async function run(code, games) {
           frame,
           activation,
           territorial,
-          terminalContact,mobilityProbe,mechanism,localRepeat,
+          terminalContact,mobilityProbe,mechanism,localRepeat,cueSearch,
           unreadIndicator,
           witnessedPreview,
           occupancy,
@@ -435,6 +436,7 @@ async function run(code, games) {
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
           ...(terminalContact?{terminalContact}:{}), ...(mobilityProbe?{mobilityProbe}:{}), ...(mechanism?{mechanism}:{}), ...(localRepeat?{localRepeat}:{}),
+          ...(cueSearch?{cueSearch}:{}),
           ...(unreadIndicator ? {unreadIndicator} : {}),
           ...(witnessedPreview ? {witnessedPreview} : {}),
           ...(occupancy ? {occupancy} : {}),
