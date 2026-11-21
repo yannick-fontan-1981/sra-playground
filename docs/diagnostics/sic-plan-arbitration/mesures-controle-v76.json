@@ -1,0 +1,975 @@
+{
+  "engine": "f0a1ff437",
+  "baselineV71": "82ad65c88a5cc1bb1b0aedb777e8233a8a3a1ed1",
+  "revisions": {
+    "72": "4831f4522451a11a6821067626425e868d3d3893",
+    "73": "95a3cd72b9888cbf0cb72cf70c0dc469db71626e",
+    "74": "02e87ce0abfb2ef097f36616d035478c6a133e4c",
+    "75": "5603727c75e0c5c131b298ef134ff2aaf51e6c0d",
+    "76": "92446de44d910c7e931b27c6a21d4705845a31d5"
+  },
+  "packs": {
+    "active": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+    "shadow": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31"
+  },
+  "budgets": {
+    "depth": 88,
+    "nodes": 1000,
+    "perLevel": 1200,
+    "workers": 4,
+    "activeMs": 514286,
+    "sourceL1Actions": 60
+  },
+  "cold": {
+    "v72": {
+      "active": {
+        "SS07": {
+          "actions": 5,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 5,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "nativeTapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+        },
+        "SS09": {
+          "actions": 566,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 566,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "237391a757179b291147ae212332bce406735a0a0a97748174b6c074f48166ac",
+          "nativeTapeDigest": "1667e98d88ba3d81ad030490a03ed636c084cae498f9d493560715c8099caf6e"
+        }
+      },
+      "shadow": {
+        "SS07": {
+          "actions": 5,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 5,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "nativeTapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+        },
+        "SS09": {
+          "actions": 352,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 352,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "b4e590d26afbc548b2e4546207a5220857fcdaf28b472530f05b19e98d398f8f",
+          "nativeTapeDigest": "d36b7b88e0f78d69fe06b2f694fc80f975b26ca5c7432d05993b8c53e0adad9e"
+        }
+      }
+    },
+    "v73": {
+      "active": {
+        "SS07": {
+          "actions": 175,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 175,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "732ab251d9950bc69bcf31267dd89d1471c356037a532c8f700b2a6d86a13725",
+          "nativeTapeDigest": "965566fd39b38379fee070aa43cf02c1749906e8259f59e69ae5f41bc6e1ba3c"
+        },
+        "SS09": {
+          "actions": 520,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 520,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "d7a1ef4b775891facca522fe68e02a669960cb1081186e93002d2180945e533e",
+          "nativeTapeDigest": "9f00f66d1078d77a6643b695c1fd556d7e6973c5ba1ccf42933e5bbaffe0dc0f"
+        }
+      },
+      "shadow": {
+        "SS07": {
+          "actions": 5,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 5,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "nativeTapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+        },
+        "SS09": {
+          "actions": 337,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 337,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "8b73c1dbf827047a7be34423c9682f55df7b786360d82dd8d849db61a61bd270",
+          "nativeTapeDigest": "4d878f31e88234c8f90d6fa171fbebf6abeff16d7280855c8d003016b0820e46"
+        }
+      }
+    },
+    "v74": {
+      "active": {
+        "SS07": {
+          "actions": 13,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 13,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "c2e81b7e969ede4a1087b976e67a0c390ee297c65bd24f4105890836b6a3d460",
+          "nativeTapeDigest": "7cacfecd3c59620b5336e2eedc540f10e818e6eca7b3fe0495bb5aecadcd6c8a"
+        },
+        "SS09": {
+          "actions": 489,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 489,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "90f3186579495b0a3fa23b6401477b9bf2aadce83a799df686883ddb587f9d00",
+          "nativeTapeDigest": "b558e5ef3cfc76fe923118c23fcc116d5f4cc7cf2870be12cf49deac1745c0f7"
+        }
+      },
+      "shadow": {
+        "SS07": {
+          "actions": 5,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 5,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "nativeTapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+        },
+        "SS09": {
+          "actions": 321,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 321,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "fb5b951878bc50904f724dd62f539e56b428a4c8a4117bae6f77f099b0187092",
+          "nativeTapeDigest": "6917bc64e0d85894c9c034077979438cd6d51bb7a87ab933a0d1e8776096aa3f"
+        }
+      }
+    },
+    "v75": {
+      "active": {
+        "SS07": {
+          "actions": 51,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 51,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "adb6022b74daea30009be0a7534b9118f6774d3334732247cab90e7b009c57d1",
+          "nativeTapeDigest": "cd5fa5cdd286b07cee6bc89ed732855f2226717b41e6f5da13ab283688df92aa"
+        },
+        "SS09": {
+          "actions": 318,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 318,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "6cd4d474aef7df5dab9dcf894f5a7fc66b101d73e997488372f73ec9e1cd5304",
+          "nativeTapeDigest": "c1c8eccdfe4ab8f4eaf4e68fef0c684890347eaa01ddc4a18c23bcd7e016940e"
+        }
+      },
+      "shadow": {
+        "SS07": {
+          "actions": 5,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 5,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "nativeTapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+        },
+        "SS09": {
+          "actions": 219,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 219,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "207a36e551123932b26cce4b25966af98c8662b64b2b617e912ffd589eafa2fa",
+          "nativeTapeDigest": "8072d53cd8591e890c72753423681778408f6b4dcf0de2de9fec6d4ae139940c"
+        }
+      }
+    },
+    "v76": {
+      "active": {
+        "SS07": {
+          "actions": 51,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 51,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "adb6022b74daea30009be0a7534b9118f6774d3334732247cab90e7b009c57d1",
+          "nativeTapeDigest": "cd5fa5cdd286b07cee6bc89ed732855f2226717b41e6f5da13ab283688df92aa"
+        },
+        "SS09": {
+          "actions": 258,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 258,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "d7d792e94bb8eb6be2215eab767dcb531eae9fa59ff031b378053985c2b453db",
+          "nativeTapeDigest": "c96b4c348d2ae0f3da46b40025c5d572426ce3f5a540a1cb34d5e1b507901331"
+        }
+      },
+      "shadow": {
+        "SS07": {
+          "actions": 5,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 5,
+              "won": false,
+              "reason": "native_game_over"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+          "nativeTapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+        },
+        "SS09": {
+          "actions": 297,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 297,
+              "won": false,
+              "reason": "level_active_time_budget"
+            }
+          ],
+          "resets": 0,
+          "trajectory": "edcd8c2d00e3448d4d8d4fbd01d3df80c73d0c82c03fefd1ed6f01cb82c327f5",
+          "nativeTapeDigest": "6491c0732632f2850cc873ee65d6daec4d250c20bbf364392912e343b26d1436"
+        }
+      }
+    }
+  },
+  "firstDifferenceV76": {
+    "SS07": {
+      "decision": 2,
+      "sharedImage": "9159256ac20ab0a0",
+      "activeAction": 6,
+      "shadowAction": 3
+    },
+    "SS09": {
+      "decision": 6,
+      "sharedImage": "39df1102afc8525a",
+      "activeAction": 6,
+      "shadowAction": 5
+    }
+  },
+  "controlV76": {
+    "SS07": {
+      "active": {
+        "initiated": 3,
+        "followed": 3,
+        "sameStateConfirmed": [
+          {
+            "click": 8,
+            "motor": "ACTION2",
+            "arms": {
+              "ordinary": [
+                [
+                  0,
+                  3
+                ]
+              ],
+              "selected": [
+                [
+                  0,
+                  3
+                ]
+              ],
+              "shamMoves": [
+                [
+                  0,
+                  3
+                ]
+              ],
+              "selectedStayedWithoutClick": true,
+              "previousStayedAfterClick": true,
+              "controlClickNeutral": true,
+              "selectedStayedAfterControlClick": true,
+              "redirected": true
+            }
+          }
+        ],
+        "recognizedAt": [
+          9
+        ],
+        "repairs": [
+          {
+            "decision": 11,
+            "stage": "reroute",
+            "command": "ACTION1",
+            "previousStayed": true,
+            "departures": [
+              [
+                0,
+                -2
+              ]
+            ],
+            "beyondReturn": false
+          },
+          {
+            "decision": 12,
+            "stage": "advance",
+            "command": "ACTION1",
+            "previousStayed": true,
+            "departures": [
+              [
+                0,
+                -3
+              ]
+            ],
+            "beyondReturn": true
+          }
+        ]
+      },
+      "shadow": {
+        "initiated": 0,
+        "followed": 0,
+        "sameStateConfirmed": [],
+        "recognizedAt": [],
+        "repairs": []
+      }
+    },
+    "SS09": {
+      "active": {
+        "initiated": 24,
+        "followed": 24,
+        "sameStateConfirmed": [],
+        "recognizedAt": [],
+        "repairs": []
+      },
+      "shadow": {
+        "initiated": 0,
+        "followed": 0,
+        "sameStateConfirmed": [],
+        "recognizedAt": [],
+        "repairs": []
+      }
+    }
+  },
+  "independentPreparationV76": {
+    "game": "SS07",
+    "level": 2,
+    "afterAction": 10,
+    "scalar": 5,
+    "maxDepth": 12,
+    "maxNodes": 1800,
+    "examined": 160,
+    "seen": 160,
+    "exhaustedWithinDepth": true,
+    "firstExchange": 9,
+    "depths": [
+      {
+        "unchanged": 1
+      },
+      {
+        "lost": 1,
+        "unchanged": 2
+      },
+      {
+        "unchanged": 3,
+        "lost": 3
+      },
+      {
+        "unchanged": 4,
+        "lost": 3
+      },
+      {
+        "unchanged": 12
+      },
+      {
+        "unchanged": 9,
+        "lost": 1
+      },
+      {
+        "unchanged": 22,
+        "lost": 2
+      },
+      {
+        "unchanged": 16,
+        "lost": 1
+      },
+      {
+        "unchanged": 19
+      },
+      {
+        "unchanged": 8,
+        "position_exchange": 1
+      },
+      {
+        "unchanged": 12,
+        "position_exchange": 2
+      },
+      {
+        "unchanged": 9,
+        "position_exchange": 1,
+        "lost": 1
+      },
+      {
+        "unchanged": 24,
+        "lost": 3
+      }
+    ],
+    "access": {
+      "comparable": true,
+      "continuationDepth": 3,
+      "control": 6,
+      "withOperation": 16,
+      "withoutOperation": 36,
+      "verifiedStridePixels": 3,
+      "atLeastOneStrideApart": 2,
+      "newlyReachableCenters": 12,
+      "centersOnlyInControl": 32,
+      "scoredWith": 0,
+      "scoredWithout": 0
+    }
+  },
+  "offlineSolver": {
+    "examined": 11664,
+    "actions": 69,
+    "commandDigest": "a9ce427c92b67cae365952bc5a5e08c90536fe1ce060954f3b048dd1cdac4788",
+    "nativeRepeat": {
+      "full": {
+        "actions": 69,
+        "score": 1,
+        "state": "NOT_FINISHED",
+        "won": true
+      },
+      "without": [
+        {
+          "step": 3,
+          "action": 6,
+          "actions": 19,
+          "score": 0,
+          "state": "GAME_OVER",
+          "won": false
+        },
+        {
+          "step": 20,
+          "action": 5,
+          "actions": 68,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "won": false
+        },
+        {
+          "step": 24,
+          "action": 5,
+          "actions": 68,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "won": false
+        },
+        {
+          "step": 43,
+          "action": 5,
+          "actions": 68,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "won": false
+        },
+        {
+          "step": 47,
+          "action": 5,
+          "actions": 68,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "won": false
+        },
+        {
+          "step": 59,
+          "action": 5,
+          "actions": 68,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "won": false
+        },
+        {
+          "step": 63,
+          "action": 5,
+          "actions": 68,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "won": false
+        }
+      ]
+    }
+  },
+  "nativeCampaignV76": {
+    "active": {
+      "actions": 235,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 235,
+          "won": false,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "58e3a89acd9a9ae706dcac524dd6d4add24808a84691c47e7c514578c425e483",
+      "nativeTapeDigest": "39f60c38dd5d3fe8437d50b858a8ab58925ece22134bd1921915d315e97ba8c5"
+    },
+    "shadow": {
+      "actions": 242,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 242,
+          "won": false,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "805087e03ee83fcf57d8e74f3d8e1c3f1df8d84d02032c89b262072795fbdce0",
+      "nativeTapeDigest": "3baead1a5092b918ae37ff7261714407f816d8b73a91a9b55411f82fdde7bf1d"
+    }
+  },
+  "fiveCampaignsV76": {
+    "SS01": {
+      "actions": 68,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 36,
+          "won": true,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "actions": 32,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "c7663bc2c446a1985c786790a15303093989753c6ee658dcb5b86e58a12d6406",
+      "nativeTapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+      "unchangedFromV71": true
+    },
+    "SS02": {
+      "actions": 86,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 40,
+          "won": true,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "actions": 46,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "486929570da591c12c3c2cb61cdad9d5ca4bfdb50d1418aafa1eb7651140c483",
+      "nativeTapeDigest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7",
+      "unchangedFromV71": true
+    },
+    "SS03": {
+      "actions": 144,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 47,
+          "won": true,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "actions": 97,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "0ba157f7d16a589123b532bdd1def23001967441634d6a5185c6a3721ac84ca9",
+      "nativeTapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+      "unchangedFromV71": true
+    },
+    "SS04": {
+      "actions": 192,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "actions": 143,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "c426733eeecd25f9d74595a5d16ca5b664cc208a056d2bdf5ff604b8b77a0850",
+      "nativeTapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+      "unchangedFromV71": true
+    },
+    "SS05": {
+      "actions": 117,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 44,
+          "won": true,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "actions": 73,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 1,
+      "trajectory": "7a39810beb1d8b95dcdae1af5bb13bc658e2cf8bcd2442968dc89fd137d53220",
+      "nativeTapeDigest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+      "unchangedFromV71": true
+    }
+  },
+  "sourceL1": {
+    "v72": {
+      "runs": 100,
+      "won": 99,
+      "identicalToV71": 97,
+      "changed": [
+        {
+          "code": "COMB",
+          "actions": 3,
+          "previous": 8,
+          "won": true
+        },
+        {
+          "code": "REWI",
+          "actions": 60,
+          "previous": 5,
+          "won": false
+        },
+        {
+          "code": "THER",
+          "actions": 27,
+          "previous": 21,
+          "won": true
+        }
+      ]
+    },
+    "v73": {
+      "runs": 100,
+      "won": 99,
+      "identicalToV71": 97,
+      "changed": [
+        {
+          "code": "COMB",
+          "actions": 3,
+          "previous": 8,
+          "won": true
+        },
+        {
+          "code": "REWI",
+          "actions": 60,
+          "previous": 5,
+          "won": false
+        },
+        {
+          "code": "THER",
+          "actions": 27,
+          "previous": 21,
+          "won": true
+        }
+      ]
+    },
+    "v76": {
+      "runs": 100,
+      "won": 100,
+      "identicalToV71": 98,
+      "changed": [
+        {
+          "code": "COMB",
+          "actions": 3,
+          "previous": 8,
+          "won": true
+        },
+        {
+          "code": "THER",
+          "actions": 27,
+          "previous": 21,
+          "won": true
+        }
+      ]
+    }
+  },
+  "sourceRepairForks": [
+    {
+      "code": "VOIS",
+      "level": 5,
+      "at": 19,
+      "alternatives": [
+        {
+          "motor": "ACTION2",
+          "parked": true,
+          "travelled": true,
+          "won": false,
+          "continued": true
+        },
+        {
+          "motor": "ACTION3",
+          "parked": true,
+          "travelled": false,
+          "won": false,
+          "continued": false
+        },
+        {
+          "motor": "ACTION4",
+          "parked": true,
+          "travelled": true,
+          "won": false,
+          "continued": true
+        }
+      ]
+    },
+    {
+      "code": "MOTO",
+      "level": 2,
+      "at": 45,
+      "alternatives": [
+        {
+          "motor": "ACTION1",
+          "parked": true,
+          "travelled": true,
+          "won": false,
+          "continued": true
+        },
+        {
+          "motor": "ACTION2",
+          "parked": true,
+          "travelled": true,
+          "won": false,
+          "continued": true
+        },
+        {
+          "motor": "ACTION4",
+          "parked": true,
+          "travelled": true,
+          "won": false,
+          "continued": false
+        }
+      ]
+    }
+  ],
+  "sourcePublicOpportunitiesV76": {
+    "episodes": 102,
+    "withoutMatchingSilhouette": 51,
+    "sameCommandRedirected": 5,
+    "redirectedBySource": {
+      "THER/1": 1,
+      "MOTO/2": 4
+    }
+  },
+  "v74v75SourceRejection": {
+    "74": {
+      "actions": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "reason": "session_action_budget"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "66fd81d8eff3d897ab891658725d785283d94e22d1964ec4a54f7124a53edf1d"
+    },
+    "75": {
+      "actions": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": false,
+          "reason": "session_action_budget"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "66fd81d8eff3d897ab891658725d785283d94e22d1964ec4a54f7124a53edf1d"
+    }
+  },
+  "evaluation": {
+    "diagnostic": "SS07",
+    "heldOutForThisFamily": "SS09",
+    "nativeCampaignStartsAt": 1,
+    "benchRestoresAllowedOnlyOutsideDriver": true
+  },
+  "intermediateGuards": {
+    "v72": {
+      "campaigns": 5,
+      "identicalToV71": 5
+    },
+    "v73": {
+      "campaigns": 5,
+      "identicalToV71": 5
+    },
+    "v74": {
+      "campaigns": 5,
+      "identicalToV71": 5
+    },
+    "v75": {
+      "campaigns": 5,
+      "identicalToV71": 5
+    }
+  },
+  "upperSourceV76": {
+    "CWSE": {
+      "actions": 59,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 59,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1",
+      "identicalToV71": true
+    },
+    "KLOT": {
+      "actions": 37,
+      "levels": [
+        {
+          "level": 4,
+          "actions": 37,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c",
+      "identicalToV71": true
+    },
+    "GABA": {
+      "actions": 99,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "trajectory": "640938ef0cbcf6e905f4b57182c0db704cab2b77ebb101c0bb9d224427f8e744",
+      "identicalToV71": true
+    }
+  },
+  "automatedTests": {
+    "v72": 487,
+    "v73": 488,
+    "v74": 489,
+    "v75": 490,
+    "v76": 491
+  },
+  "typecheckExitCode": 0
+}
