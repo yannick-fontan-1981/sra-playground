@@ -15346,5 +15346,565 @@
       "equation58-source-verified.json": "c84e395b6844298db8f3930cad9d2f3825aa42b993e8d841ae8cecb2632c9618",
       "equation58-upper-verified.json": "12e79f1b4f9b3662fbc4a869df1789af360390d9dd0f79354dbfb4b2c7bc64aa"
     }
+  },
+  "sourceCompositionChoices": {
+    "sourceOnly": true,
+    "baseline": "sic-source100-transient-composition-v58",
+    "newRuntime": false,
+    "newCustom4Runs": 0,
+    "reserveAccesses": 0,
+    "trainingAndForecasts": "Same state within an episode. Hold out every example of the evaluated game when ranking. Source upper levels are direct-entry traces. All post-prefix decisions in the free-use experiments are independent of the recorded suffix.",
+    "givenUse": {
+      "observed": {
+        "states": 99,
+        "withAlternatives": 99,
+        "decisiveRank": 34,
+        "choices": 1700,
+        "metrics": {
+          "win": {
+            "statesWithAWinningOption": 30,
+            "winningOptions": 102,
+            "firstWins": 7,
+            "meanOverTiedFirst": 0.08067981401314735,
+            "uniform": 0.08542568542568545
+          },
+          "necessary": {
+            "statesWithAWinningOption": 13,
+            "winningOptions": 13,
+            "firstWins": 3,
+            "meanOverTiedFirst": 0.024017957351290684,
+            "uniform": 0.012794612794612794
+          },
+          "independent": {
+            "statesWithAWinningOption": 3,
+            "winningOptions": 3,
+            "firstWins": 1,
+            "meanOverTiedFirst": 0.0058922558922558915,
+            "uniform": 0.0038480038480038477
+          }
+        }
+      },
+      "analogous": {
+        "states": 99,
+        "withAlternatives": 99,
+        "decisiveRank": 28,
+        "choices": 1703,
+        "metrics": {
+          "win": {
+            "statesWithAWinningOption": 36,
+            "winningOptions": 111,
+            "firstWins": 9,
+            "meanOverTiedFirst": 0.08421516754850089,
+            "uniform": 0.09218374218374223
+          },
+          "necessary": {
+            "statesWithAWinningOption": 16,
+            "winningOptions": 18,
+            "firstWins": 4,
+            "meanOverTiedFirst": 0.025533108866442198,
+            "uniform": 0.01619368286034953
+          },
+          "independent": {
+            "statesWithAWinningOption": 6,
+            "winningOptions": 6,
+            "firstWins": 3,
+            "meanOverTiedFirst": 0.017508417508417508,
+            "uniform": 0.007888407888407887
+          }
+        }
+      },
+      "analogousWithUse": {
+        "states": 99,
+        "withAlternatives": 99,
+        "decisiveRank": 24,
+        "choices": 1658,
+        "metrics": {
+          "win": {
+            "statesWithAWinningOption": 34,
+            "winningOptions": 72,
+            "firstWins": 8,
+            "meanOverTiedFirst": 0.0771444604777938,
+            "uniform": 0.08121693121693123
+          },
+          "necessary": {
+            "statesWithAWinningOption": 16,
+            "winningOptions": 18,
+            "firstWins": 3,
+            "meanOverTiedFirst": 0.023849607182940515,
+            "uniform": 0.01619368286034953
+          },
+          "independent": {
+            "statesWithAWinningOption": 6,
+            "winningOptions": 6,
+            "firstWins": 2,
+            "meanOverTiedFirst": 0.01582491582491582,
+            "uniform": 0.007888407888407887
+          }
+        }
+      }
+    },
+    "twoOrders": {
+      "joint59": {
+        "win": {
+          "games": 99,
+          "possible": 35,
+          "options": 3400,
+          "uniform": 0.08574635241301908,
+          "effects": {
+            "first": 7,
+            "meanTied": 0.07930094596761263
+          },
+          "geometry": {
+            "first": 11,
+            "meanTied": 0.1127946127946128
+          }
+        },
+        "necessary": {
+          "games": 99,
+          "possible": 18,
+          "options": 3400,
+          "uniform": 0.01015712682379349,
+          "effects": {
+            "first": 3,
+            "meanTied": 0.023793490460157128
+          },
+          "geometry": {
+            "first": 3,
+            "meanTied": 0.024999999999999998
+          }
+        }
+      },
+      "aff59-analogous": {
+        "win": {
+          "games": 99,
+          "possible": 44,
+          "options": 3406,
+          "uniform": 0.09219175885842552,
+          "effects": {
+            "first": 9,
+            "meanTied": 0.09108545775212441
+          },
+          "geometry": {
+            "first": 15,
+            "meanTied": 0.14393939393939395
+          }
+        },
+        "necessary": {
+          "games": 99,
+          "possible": 24,
+          "options": 3406,
+          "uniform": 0.015335898669232002,
+          "effects": {
+            "first": 4,
+            "meanTied": 0.031200897867564532
+          },
+          "geometry": {
+            "first": 4,
+            "meanTied": 0.026936026936026935
+          }
+        }
+      },
+      "aff59-analogous-with-use": {
+        "win": {
+          "games": 99,
+          "possible": 44,
+          "options": 3316,
+          "uniform": 0.07920474587141253,
+          "effects": {
+            "first": 8,
+            "meanTied": 0.08384640051306717
+          },
+          "geometry": {
+            "first": 13,
+            "meanTied": 0.12794612794612795
+          }
+        },
+        "necessary": {
+          "games": 99,
+          "possible": 24,
+          "options": 3316,
+          "uniform": 0.015335898669232002,
+          "effects": {
+            "first": 3,
+            "meanTied": 0.03372615039281706
+          },
+          "geometry": {
+            "first": 4,
+            "meanTied": 0.03439153439153439
+          }
+        }
+      }
+    },
+    "spatialCoverage": {
+      "states": 40,
+      "rankLimitToJointReplayWin": {
+        "short": {
+          "3": 8,
+          "6": 9,
+          "12": 9,
+          "24": 9,
+          "48": 9,
+          "128": 9
+        },
+        "visible": {
+          "3": 8,
+          "6": 9,
+          "12": 11,
+          "24": 22,
+          "48": 27,
+          "128": 31
+        },
+        "analogy": {
+          "3": 8,
+          "6": 16,
+          "12": 21,
+          "24": 26,
+          "48": 28,
+          "128": 32
+        }
+      },
+      "strictClickControls": 8,
+      "strictClickControlsWithinSix": {
+        "visible": 0,
+        "analogy": 5
+      }
+    },
+    "fixedSourceFailures": {
+      "states": 8,
+      "withAlternatives": 8,
+      "decisiveRank": 0,
+      "choices": 192,
+      "metrics": {
+        "win": {
+          "statesWithAWinningOption": 0,
+          "winningOptions": 0,
+          "firstWins": 0,
+          "meanOverTiedFirst": 0,
+          "uniform": 0
+        },
+        "necessary": {
+          "statesWithAWinningOption": 0,
+          "winningOptions": 0,
+          "firstWins": 0,
+          "meanOverTiedFirst": 0,
+          "uniform": 0
+        },
+        "independent": {
+          "statesWithAWinningOption": 0,
+          "winningOptions": 0,
+          "firstWins": 0,
+          "meanOverTiedFirst": 0,
+          "uniform": 0
+        }
+      }
+    },
+    "unknownUse": {
+      "sourceL1": {
+        "states": 99,
+        "proposalsScored": 99,
+        "uniformControlsScored": 1584,
+        "won": {
+          "proposed": 4,
+          "meanUniform": 0.036616161616161616,
+          "levels": [
+            [
+              "LS20",
+              1,
+              15
+            ],
+            [
+              "SYME",
+              1,
+              6
+            ],
+            [
+              "ESCT",
+              1,
+              13
+            ],
+            [
+              "DICO",
+              1,
+              2
+            ]
+          ]
+        },
+        "necessary": {
+          "proposed": 1,
+          "meanUniform": 0.005050505050505051,
+          "levels": [
+            [
+              "SYME",
+              1,
+              6
+            ]
+          ]
+        },
+        "inferTerminalRoleFromOtherGames": {
+          "won": {
+            "firstWins": 4,
+            "games": [
+              "FITE",
+              "ESCT",
+              "DICO",
+              "SELE"
+            ]
+          },
+          "necessary": {
+            "firstWins": 0,
+            "games": []
+          }
+        },
+        "winningProgramNovelty": [
+          {
+            "code": "LS20",
+            "actionsToWin": 3,
+            "fullPlannedSequenceSeenInPrefix": true,
+            "sameAsWithheldSuffix": false,
+            "necessary": false
+          },
+          {
+            "code": "SYME",
+            "actionsToWin": 3,
+            "fullPlannedSequenceSeenInPrefix": false,
+            "sameAsWithheldSuffix": true,
+            "necessary": true
+          },
+          {
+            "code": "ESCT",
+            "actionsToWin": 3,
+            "fullPlannedSequenceSeenInPrefix": false,
+            "sameAsWithheldSuffix": false,
+            "necessary": false
+          },
+          {
+            "code": "DICO",
+            "actionsToWin": 3,
+            "fullPlannedSequenceSeenInPrefix": false,
+            "sameAsWithheldSuffix": false,
+            "necessary": false
+          }
+        ]
+      },
+      "fixedFailedSourceL2": {
+        "states": 8,
+        "proposalsScored": 8,
+        "uniformControlsScored": 128,
+        "won": {
+          "proposed": 0,
+          "meanUniform": 0,
+          "levels": []
+        },
+        "necessary": {
+          "proposed": 0,
+          "meanUniform": 0,
+          "levels": []
+        },
+        "inferTerminalRoleFromOtherGames": {
+          "won": {
+            "firstWins": 0,
+            "games": []
+          },
+          "necessary": {
+            "firstWins": 0,
+            "games": []
+          }
+        }
+      },
+      "sealedSha256": "7272e73276efdeadbcbb197ec398ca398d2e06971385571e9fd02291c5fdfbc8",
+      "shuffle": "SHA-256 of the public origin as the random seed, shared ranking and reference ordering",
+      "referenceLimit": 16
+    },
+    "closedLoop": {
+      "sourceL1": {
+        "states": 99,
+        "levels": 99,
+        "games": 99,
+        "singleWinsIn12": 5,
+        "compositionWinsIn12": 4,
+        "proposed": 36,
+        "executed": 32,
+        "confirmed": 27,
+        "survivesOmissionAndDuplicate": 24,
+        "strictByGame": {
+          "VOIS": 6,
+          "AR25": 1,
+          "WA30": 5,
+          "CN04": 4,
+          "KATA": 3,
+          "SP80": 5
+        },
+        "strictByKinds": {
+          "scalar->scalar": 24
+        },
+        "requirePreviouslyUnresponsiveUse": {
+          "states": 99,
+          "wins": 5,
+          "strictAgainstTwoControls": 6,
+          "proposed": 7,
+          "executed": 6,
+          "strictByGame": {
+            "VOIS": 6
+          }
+        }
+      },
+      "sourceL2toL5": {
+        "states": 127,
+        "levels": 37,
+        "games": 16,
+        "singleWinsIn12": 2,
+        "compositionWinsIn12": 2,
+        "proposed": 63,
+        "executed": 55,
+        "confirmed": 50,
+        "survivesOmissionAndDuplicate": 50,
+        "strictByGame": {
+          "CWSE": 2,
+          "GIGO": 4,
+          "LS19": 23,
+          "WA30": 5,
+          "VOIS": 10,
+          "FUIT": 6
+        },
+        "strictByKinds": {
+          "scalar->scalar": 48,
+          "scalar->point": 1,
+          "point->scalar": 1
+        },
+        "requirePreviouslyUnresponsiveUse": {
+          "states": 127,
+          "wins": 2,
+          "strictAgainstTwoControls": 37,
+          "proposed": 43,
+          "executed": 41,
+          "strictByGame": {
+            "CWSE": 2,
+            "GIGO": 3,
+            "LS19": 16,
+            "VOIS": 10,
+            "FUIT": 6
+          }
+        }
+      },
+      "sourceL2toL5StatesAtActionCounts": [
+        0,
+        8,
+        24,
+        48
+      ],
+      "maxActions": 12,
+      "higherLevelCounterexample": {
+        "code": "GIGO",
+        "level": 5,
+        "prefix": 24,
+        "policyActionsBeforeProbe": 1,
+        "first": "ACTION2",
+        "second": "ACTION6:29,11",
+        "afterPair": true,
+        "secondAlone": false,
+        "twiceSecond": false
+      }
+    },
+    "requiredSourceControls": [
+      "GIGO L5 and CWSE L2 use distinct commands to produce predicted local changes",
+      "Preserve a score-bearing goal when an alternative experiment produces a local effect. AR25 L1 loses a finish reached by the single-operator control."
+    ],
+    "evidenceSha256": {
+      "aff59-analogous-alternatives-0.jsonl": "3f36a80a3369d9412a1f5f4de3e6f846689241b74dfbb7a03abb4333fb10f3af",
+      "aff59-analogous-alternatives-1.jsonl": "de517410828b9e7dfabd6efa18ff9cd84fff24446e51df11d325620d6a01527a",
+      "aff59-analogous-alternatives-2.jsonl": "9404ef0e032566015720421f86892452fb17f63bdcea91c5b7bc4b3aea994ede",
+      "aff59-analogous-alternatives-3.jsonl": "af0a69300fec20ee5aefd2eb9166a349e1068c2672ccde1d071459b42375217f",
+      "aff59-analogous-predictions-0.jsonl": "108f9630f327bde082f7b7e9c1b2c5badf177f627a7545e5dcba21968734b568",
+      "aff59-analogous-predictions-1.jsonl": "6f44b8cf092e85deb4f5693287f79e28ff526f919536b0a994c12a209c1469b5",
+      "aff59-analogous-predictions-2.jsonl": "3e2d7f9ec97ea861799ad54a2ba89b529274178671040d5ee76520188668b488",
+      "aff59-analogous-predictions-3.jsonl": "4f84623fc9c1653afdf387f2dc2ebb163c8d87953f568bf6364251d18d70acf8",
+      "aff59-analogous-with-use-alternatives-0.jsonl": "f83ddf44e735c45cedf3cd84549d19918fc12c86f612b40139557ada0c86f037",
+      "aff59-analogous-with-use-alternatives-1.jsonl": "875a7875ebe1069745ce55896f80442dd3312d6b4928df19e8ebfdedba8b35ec",
+      "aff59-analogous-with-use-alternatives-2.jsonl": "1bf37febac4bb8e0546956112e939cdb1839306730240ff40e0590b103cc05e7",
+      "aff59-analogous-with-use-alternatives-3.jsonl": "9e3730276e6726bb40ee1d126ae8041441506049c99a1b0187738097c3fe0fbe",
+      "aff59-analogous-with-use-predictions-0.jsonl": "da378db39c3d991745333d1b10a9bc4d7c01e8ec3c5778794fd419fc6b822642",
+      "aff59-analogous-with-use-predictions-1.jsonl": "3a99e2993561804c728ebffb83e945bcfd8a039b89146097fb0008ab716a06de",
+      "aff59-analogous-with-use-predictions-2.jsonl": "58e59fac878889489fa4f0f1bf838306a92e975e7eb2da3d2d67ffe39e40aa20",
+      "aff59-analogous-with-use-predictions-3.jsonl": "bd9555f42173754d6408261af237327806bcb09d606957378d4d21513034e02b",
+      "joint59-alternatives-0.jsonl": "9ae2c0d5aa44cc31638237a617b1036838104c1823bd05f839ae63fcd09b5efe",
+      "joint59-alternatives-1.jsonl": "99312f002a3841eef1d8210e2f9d716bc0421eb147ac32c81b585929d9ee0433",
+      "joint59-alternatives-2.jsonl": "a036296929edb117aa12d111cc5f69fd38bf2330822f3c157846f1f4f8944387",
+      "joint59-alternatives-3.jsonl": "a5941d82ea2a34bc7652a9d9db7ee3aee3b6109b767cc13bf7879c7f4f5face2",
+      "joint59-alternatives-upper0.jsonl": "11627e55d7fe2bb2a711794996de010f4eae057565730fa60499e336c81a37ab",
+      "joint59-alternatives-upper1.jsonl": "417f8f1e81823c5e6ebe9cf7b9552c8d7445e6f5d7dbf9a0fba8c7915766f916",
+      "joint59-alternatives-upper2.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "joint59-predictions-0.jsonl": "7ea3e8596b1a610a742ea2eebfdb8cf33c1e48b7dc90014895e084fd342754ee",
+      "joint59-predictions-1.jsonl": "d4585fb260e124145db720656c4df84db47adc0c53c33818f5f0e039e2af9f1c",
+      "joint59-predictions-2.jsonl": "67a3c64d27006336c3ba65eb8a51421e3bca16f9036f11efba7585269aab0006",
+      "joint59-predictions-3.jsonl": "374b8b6b15074587dc30f9bc18f5ffd490846a9bfb50c340bb4de06834a81567",
+      "joint59-predictions-upper0.jsonl": "7564ea1cede541868f41a8f8f5e121cc8b13d3880d1f991a5deec185f68d3e3f",
+      "joint59-predictions-upper1.jsonl": "0bda1f3752c72575560e49691acfe5293a8ff6b867b6d31c636aff51a9c460bc",
+      "joint59-predictions-upper2.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "joint59-site-coverage-0.jsonl": "23f473c83f93fae52ca99cda04ff7d068e6ce158226c568207e3ef8caa14cc5b",
+      "joint59-site-coverage-1.jsonl": "2dfe8f8bb4702c2f6b2e3f0ef971afa5d205c612739f12d2f06abaa3fd526027",
+      "joint59-site-coverage-2.jsonl": "f7c475a9146647f40fcefdebd44fa26d9d6c8151492e118922530b55bde338a0",
+      "joint59-site-coverage-3.jsonl": "c2c7602841e2c0eed830717b593359144162e078745309344d0c38eab6c7b2ba",
+      "joint59-tables.json": "7a5b931e271cc8a71947563ba1afe3fdbd008c26e46ed30939babaff47d75c01",
+      "proof59-0.jsonl": "e8736b477d176aa99e9fa66448600c53f42ca90c9961c8f09c161dc409e5dd7f",
+      "proof59-1.jsonl": "0c22f2449767b7f2a350522cb49684145a640496fc708b69ef2e3a1dfc74ed8a",
+      "proof59-2.jsonl": "fedd88b599bf816a3e5fb30100e43b1eafb5ef1f32f237164068c3a1bd6026e1",
+      "proof59-fixed3.jsonl": "914bc4e9553b0beede0642836f8d00566fbfe8602aa3589dd7fc63a2eb05bcaa",
+      "proof59-upper0.jsonl": "0001c3802812326d507603f77e9e03f651ec8fad4d85d35748cebff362b631f8",
+      "proof59-upper1.jsonl": "29d34fd874af4d2683297553bc70596d5f1158cca616a9661d544154b87fe83c",
+      "proof59-upper2.jsonl": "09da48f00798e4244c09b8388293b9ec83c7c20fe66ff8f1769828e5f2bbaebb",
+      "proof59-varied.jsonl": "7894f2be8126204a7dbf92f7507cbf33fef037821aa03721476aa8a53b633e6f",
+      "unknown59-0.jsonl": "a5e723b650db16f12a2dcae005d559c78cfe1a1a310737601e93f2ba706ae6fb",
+      "unknown59-1.jsonl": "51554b419d680e5f8f81f782b2114d71aef0ac972f97c34757cbebabb0199a3b",
+      "unknown59-2.jsonl": "261323372db60ff6a7ad1a206d363ea7f7aa8623fc1bfc9f03defe610fc18e26",
+      "unknown59-fixed3.jsonl": "a3b7dcc98679d1ae4be9b0da1263cd8c5fc7446d080982ad347253a6e01dcaca",
+      "unknown59-sealed.jsonl": "7272e73276efdeadbcbb197ec398ca398d2e06971385571e9fd02291c5fdfbc8",
+      "unknown59-upper.jsonl": "a7806e835d0c709df77dfe2a34ae72a72f05d1434d16465f48b24fbfc0f2a553",
+      "gate59-0.jsonl": "49d65321ec978a3e9964ed37856bcc64d2e9355387a5da4512f2e4504cb681e2",
+      "gate59-1.jsonl": "97458aaa70055267c19550045f1067289f41bf89c757533c1534880636be3008",
+      "gate59-2.jsonl": "2de4274d78a4bf7c551b941ac1f36d4bad14aa192a8659c54dc6aa2d2a202c71",
+      "gate59-3.jsonl": "2d9edd1bda3be2f0b3f58e9e38a629a5b2a8e821a69ea3d9eba6abcd449d9ae9",
+      "gate59-upper0.jsonl": "b07912e1a7c0a3e669f2aacd1b4b913b8082df1faa38f78428276b510dae2861",
+      "gate59-upper1.jsonl": "480e9763e8879600f98827a2fa745272772c7194e880dc006ceece877e0beb26",
+      "gate59-upper2.jsonl": "357749f58bca09c8b6f2117e9a8885c44481ab23445f4b841f5f06946af47da8",
+      "gate59-varied.jsonl": "e34d7ab5889acec9141e5ea06fc65fb2992866f2e818ccb2243a860a8ea9c93e",
+      "intent59-0.jsonl": "e8b82bebc311c5c0ea6ba850887f8535ff192b48284d308abe09d35c69dc5bf4",
+      "intent59-1.jsonl": "f5370304a2af220d35ecb25549488a04080503d71bf5e4e555d9cdbf1252853f",
+      "intent59-2.jsonl": "2eaff48982a674c9defed9bbd64c92e2d3abd7e005bf49328d81b9df44e5226b",
+      "intent59-3.jsonl": "ba92c73e9b1c1bc496e8ebc9400aa5971a60827709d16471772ad7d8068e689b",
+      "intent59-upper.jsonl": "b08758f2a9daf8c716664e14a78f98146dda821f71d65f8b3fb0a1df24f929c7",
+      "review59-free-wins.json": "f5e8f74e586408eb582b875943b4eef66fbcb8aed31a1533aae3fecbe6c963a2",
+      "intent59-sealed.jsonl": "01d899a2ce4ec461dedf6b045526504a6fa619729ef4795b0c48b17e03677a7b",
+      "equation58-source-0.jsonl": "8c96108c36b653ba7f6c1299a6ddd2b845379f8e7d604d6973dcb0384e15dece",
+      "equation58-source-1.jsonl": "49d181569154346c3c7893e8f95aaa7fee822449bcd9360a024310bac6e4baa1",
+      "equation58-source-2.jsonl": "476c956defb87aac90d4541ade57f2b30826145cf85ad9be2160ab9f51190c04",
+      "equation58-source-3.jsonl": "ee6e6419fcf6af06f094c69ecb75888e311a66e28d9985774d375559a0171f73",
+      "joint59-control-files.json": "af1d7d150f0fa8b7a4a67bf78e9773583025fe15f98e126e533c42e529f0ff68",
+      "joint59-related-tests.log": "4e46ad4dc77cb41f56cec1e4fcbec6448db4c2e0ce08b45a9d6f9b9ac903d1cd",
+      "joint59-tests.log": "588c9c78b0cd7a80eaf306d20dc0b8d931d2396cdac1f99a5da528f0609489d1",
+      "joint59-control-matched.log": "1033e7f4f2b9c1a85b0e7e8930699ced2ba3bfe8b3db2bf0c445be0b2ad31e9b"
+    },
+    "studyCommit": "d9af54f5b",
+    "verification": {
+      "relatedCompositionTests": {
+        "total": 32,
+        "passed": 32
+      },
+      "workingCheckout": {
+        "tests": 16081,
+        "pass": 15946,
+        "fail": 135,
+        "cancelled": 0
+      },
+      "v58FailingFilesOnly": {
+        "tests": 12443,
+        "pass": 12308,
+        "fail": 135,
+        "cancelled": 0
+      },
+      "sameFailingFileAndTestNames": 135,
+      "baselineFailingFiles": 132,
+      "verifiedBaseline": "sic-source100-transient-composition-v58",
+      "fullRuntimeChange": false
+    }
   }
 }
