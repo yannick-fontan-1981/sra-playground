@@ -267,6 +267,29 @@
           }
         }
       ]
+    },
+    "alreadyObservedTargets": {
+      "first": {
+        "step": 22,
+        "traversed": 5,
+        "enabled": 4,
+        "false": 0,
+        "nearby": true
+      },
+      "end": {
+        "step": 253,
+        "traversed": 85,
+        "enabled": 7,
+        "false": 0,
+        "nearby": false
+      },
+      "peakWithinPlan": {
+        "step": 162,
+        "traversed": 76,
+        "enabled": 7,
+        "false": 0,
+        "nearby": true
+      }
     }
   },
   "heldOut": [
@@ -405,6 +428,39 @@
           "state": "NOT_FINISHED"
         }
       ]
+    },
+    {
+      "code": "SS08",
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 262,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS10",
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 580,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS11",
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 307,
+          "state": "NOT_FINISHED"
+        }
+      ]
     }
   ],
   "v81Campaign": [
@@ -420,6 +476,11 @@
       ]
     }
   ],
+  "sourceL1": {
+    "played": 100,
+    "won": 100,
+    "unchangedFromV71": 98
+  },
   "v81CampaignGuards": [
     {
       "code": "SS01",
@@ -471,6 +532,89 @@
           "state": "NOT_FINISHED"
         }
       ]
+    },
+    {
+      "code": "SS04",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 49,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 143,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS05",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 44,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 73,
+          "state": "NOT_FINISHED"
+        }
+      ]
     }
-  ]
+  ],
+  "sourceIndicatedSites": {
+    "episodes": 108,
+    "counts": {
+      "false": {
+        "unchanged": 141,
+        "other_change": 760,
+        "arrived": 1,
+        "official": 8
+      },
+      "true": {
+        "unchanged": 16,
+        "other_change": 82,
+        "arrived": 10,
+        "official": 2
+      }
+    },
+    "interventions": [
+      {
+        "visited": true,
+        "forks": 80,
+        "arrived": 7
+      },
+      {
+        "visited": false,
+        "forks": 251,
+        "arrived": 1
+      }
+    ],
+    "positiveGames": [
+      "SKBN L1",
+      "G50T L1",
+      "KLOT L1",
+      "GABA L1",
+      "SNAR L1",
+      "WEAV L1",
+      "SK48 L1"
+    ]
+  },
+  "sourceComparisonWithV76": {
+    "compared": 100,
+    "changes": []
+  },
+  "ss08Comparison": {
+    "reference": 339,
+    "candidate": 262,
+    "firstDifference": 27,
+    "referenceWon": false,
+    "candidateWon": false
+  }
 }

@@ -37,6 +37,27 @@ Les 11 premières activations atterrissent toutes sur des lieux déjà atteignab
 
 Les mesures compactes distinguent les décisions de SIC, l’épreuve avec la suite du banc, les contrôles en campagne et le transfert. [Mesures par révision et par configuration](mesures-placements-v81.json)
 
+Dans l’historique strictement antérieur à la décision 22, le second sujet a déjà occupé cinq centres visuels. Ces observations suffiraient à reconnaître la destination de quatre des onze échanges si SIC savait quelle indication viser et comment la faire apparaître. Au dernier déplacement orienté vers le second repère, ce nombre monte à sept. Le rapprochement est celui de l’évaluateur, qui connaît le rôle confirmé par le banc.
+
+## La même priorité a-t-elle un appui sur les sources ?
+
+Sur 108 épisodes sources, dont les 100 L1, une expérience propose une indication visible ayant déjà changé quand le sujet bougeait. Avant de tester une commande non directionnelle, elle distingue si ce sujet a personnellement occupé le lieu indiqué plus tôt dans sa partie. Plusieurs hypothèses peuvent partager une même commande depuis la même image.
+
+| Destination lors de la prédiction | Prévisions vérifiables | Prévisions d’arrivée confirmées | Interventions distinctes avec arrivée confirmée |
+| --- | ---: | ---: | ---: |
+| Déjà occupée par le sujet | 110 | 10 | 7 sur 80 |
+| Jamais occupée par le sujet jusqu’ici | 910 | 1 | 1 sur 251 |
+
+Les sept confirmations de la première ligne proviennent de sept jeux, SKBN, G50T, KLOT, GABA, SNAR, WEAV et SK48. L’autre confirmation vient d’ESCT. Ce signal peut servir à classer des expériences. La majorité des hypothèses restent fausses dans les deux groupes. Sur SS07, le banc connaissait toute la zone accessible et a identifié le rôle de l’indication après l’échange. Les sources testent une situation plus exigeante dans laquelle seule l’histoire publique antérieure aide à choisir le rôle. [Sondage prospectif et contrôles d’état](../../../scripts/measure-source-indicated-sites.mjs)
+
 ## Transfert et contrôles
 
+Les 100 L1 sources gagnent sur v81 et leurs trajectoires sont identiques à v76. Les 100 scores sont rejoués indépendamment dans le moteur. Les cinq L2 déjà gagnés en campagne sont préservés et rejoués indépendamment. SS01 gagne en 32 actions, SS02 en 46, SS03 en 97, SS04 en 143 et SS05 en 73. La suite de 496 tests passe.
+
+Sur SS06 L2 à froid, SIC vérifie un transfert de contrôle mais ne prépare aucun repère. Sur SS08 L2 à froid, le même pack propose dix déplacements de préparation. La première commande différente du témoin vient au coup 27. Trois déplacements sont confirmés avec le partenaire immobile, aucun ne confirme le contact. À temps actif égal, SS08 s’arrête en 262 actions avec le pack candidat et 339 avec le témoin. SS06 s’arrête en 296 actions.
+
+SS10 révèle le risque d’insister sur une préparation. Sur 580 gestes, 491 visent à placer le premier sujet. Le mouvement immédiat correspond à la prévision 454 fois, mais le contact visé et le relais ne se produisent jamais. SS11 vérifie une fois le changement de contrôle, n’engage aucun placement et s’arrête au temps après 307 gestes.
+
 SS09 entier a été réservé avant le choix de la règle. Ses résultats historiques étaient connus. Avec v81 et le même plafond de temps actif, les 254 premières commandes et images sont identiques dans les deux configurations. Le candidat s’arrête au temps en 254 actions, le témoin en 255. SIC n’y propose aucun placement préparé et le L2 ne marque dans aucune des deux conditions. En campagne sur SS07, v81 s’arrête au L1 après 511 actions. Le L2 a été évalué à froid.
+
+Le moteur confirme cinq jeux Custom 4 avec un L2 gagné en campagne. Les six autres L2 ont chacun été essayés à froid sur le candidat figé et n’ajoutent aucun score.
