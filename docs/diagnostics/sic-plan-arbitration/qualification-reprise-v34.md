@@ -9,4 +9,8 @@ Le critère de transfert sur Custom 4 est une victoire officielle supplémentair
 - Sur KEYD L2 avec la leçon publique du L1, v34 gagne en 62. Dans une copie isolée de l’export, désactiver uniquement l’autorisation d’essayer B seul par analogie fait perdre au plafond de 90. Les 49 premières commandes sont identiques dans les deux bras. Le premier écart de commande survient au coup 50. Au coup 57 de la branche gagnante, supprimer ou remplacer l’action par l’un des quatre autres contrôles donne zéro point au lieu d’un, avec le reste de la suite fixé. V32 avait déjà gagné ce niveau. Le progrès du candidat est de combiner cette capacité de v32 avec la préservation complète des 100 trajectoires.
 - SS01 L2 gagne en 44 à froid et en 32 après la leçon rejouée de 19 commandes publiques du L1. SS04 L2 gagne en 60 à froid. Ces trois scores ont été vérifiés action par action dans le moteur du témoin.
 
+## Neuf L2 connus de Custom 4 à froid
+
+Le rejeu indépendant de toutes les commandes confirme deux victoires sur neuf, comme pour v31. SS01 et SS04 gagnent en 44 et 60. Les autres parties se terminent sans victoire après 354 coups sur SS02, 416 sur SS03, 440 sur SS05, 321 sur SS06, 5 sur SS07, 396 sur SS08 et 400 sur SS10. Ces longueurs sont celles des parties enregistrées. Les campagnes parties du L1 sur SS06, SS07 et SS08 s’arrêtent avant le L2 avec v31 comme avec v34. SS09 L2 reste en réserve.
+
 Le [protocole de gel](gel-reprise-v34.md), les [mesures sur les actions nécessaires au score](reprises-sources-v34.md) et les [scores, témoins et empreintes par jeu](qualification-reprise-v34.json) précisent les comparaisons. La campagne de transfert complète utilise le même tag.
