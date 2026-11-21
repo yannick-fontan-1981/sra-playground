@@ -7,7 +7,7 @@ const rounds = Number(roundsArg);
 assert.ok(before && after && Number.isInteger(rounds) && rounds >= 3, 'Usage: node scripts/compare-custom4-browser-cost.mjs BEFORE_URL AFTER_URL [ROUNDS]');
 const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ? pathToFileURL(process.env.PLAYWRIGHT_MODULE).href : 'playwright');
 const browser = await chromium.launch({ headless: true });
-const games = ['SS09', 'SS11'];
+const games = process.env.CUSTOM4_BENCH_GAMES?.split(',') ?? ['SS09', 'SS11'];
 const stepLimit = 4;
 const median = values => {
   const sorted = [...values].sort((a, b) => a - b);

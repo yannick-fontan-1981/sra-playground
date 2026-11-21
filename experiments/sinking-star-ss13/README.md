@@ -38,7 +38,7 @@ node scripts/audit-hard-finals.mjs
 node scripts/verify-ui-dom.mjs
 ```
 
-Le dernier contrôle exige Happy DOM ; `HAPPY_DOM_MODULE` peut désigner son module installé. `scripts/verify-ui-browser.mjs` prépare la vérification dans un navigateur autorisé, avec Playwright/Chromium. Le rapport de livraison distingue explicitement le contrôle DOM du rendu natif encore non validé.
+Le dernier contrôle exige Happy DOM ; `HAPPY_DOM_MODULE` peut désigner son module installé. `scripts/verify-ui-browser.mjs` vérifie le rendu et les commandes dans Chromium avec Playwright. Le rapport est dans `validation/browser-report.json`.
 
 ## Documents
 
@@ -49,4 +49,4 @@ Le dernier contrôle exige Happy DOM ; `HAPPY_DOM_MODULE` peut désigner son mod
 - `docs/roadmap.md` : état du laboratoire et prochaine étape.
 - `docs/codex-integration-prompt.md` : raccordement natif à Custom 4 et publication ultérieure.
 
-Les témoins prouvent la solvabilité du jeu. Ils ne constituent pas une évaluation de SRA. Cette livraison ajoute uniquement le laboratoire ; l’adaptateur natif et la publication du Site sont une étape distincte.
+Les témoins prouvent la solvabilité du jeu. Ils ne constituent pas une évaluation de SRA. Le Playground reprend le moteur et les cartes du laboratoire. `docs/roadmap.md` indique l’état de l’intégration et de la publication.

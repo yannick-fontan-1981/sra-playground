@@ -59,13 +59,18 @@ import { DuoPuzzleSession as ColumnDuoSession } from '../experiments/sinking-sta
 import { SS12_LEVELS } from '../experiments/sinking-star-ss12/src/levels.ts';
 import { heroSelection as columnHeroSelection, lessonIds as columnLessonIds, observeLesson as observeColumnLesson, TUTORIAL_LEVEL as SS12_TUTORIAL_LEVEL, visibleHeroes as visibleColumnHeroes, type ChorusLesson as ColumnLesson } from '../experiments/sinking-star-ss12/src/tutorial.ts';
 import ss12Witnesses from '../experiments/sinking-star-ss12/tests/witnesses.json' with { type: 'json' };
+import { createSs13Backend } from '../src/games/sinking-star-ss13.ts';
+import { DuoPuzzleSession as AnchorDuoSession } from '../experiments/sinking-star-ss13/src/core.ts';
+import { SS13_LEVELS } from '../experiments/sinking-star-ss13/src/levels.ts';
+import { heroSelection as anchorHeroSelection, lessonIds as anchorLessonIds, observeLesson as observeAnchorLesson, TUTORIAL_LEVEL as SS13_TUTORIAL_LEVEL, visibleHeroes as visibleAnchorHeroes, type TranspositionLesson as AnchorLesson } from '../experiments/sinking-star-ss13/src/tutorial.ts';
+import ss13Witnesses from '../experiments/sinking-star-ss13/tests/witnesses.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS12 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS13 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 112);
+  assert.equal(GAME_CATALOG.length, 113);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -253,7 +258,7 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
+  for (const code of ['CASC', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -1422,6 +1427,91 @@ test('SS12 rejects invalid loads and actions and preserves selection, Undo, Rese
   }
   assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS12 action/);
   const data = columnHeroSelection(initial.frame, 'bard')!;
+  assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
+  assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(backend.dispatch({ type: 'selectLevel', level: 8 }), reference.selectLevel(8));
+  assert.deepEqual(backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+test('SS13 preserves eight ordered levels, public observations, animations and fourteen tutorial discoveries', async () => {
+  const { getGameByCode } = await import('../src/games/catalog.ts');
+  const entry = getGameByCode(' ss13 ')!;
+  assert.deepEqual([entry.id, entry.name, entry.group, entry.family, entry.levels, entry.availability],
+    ['ss13-c4000001', 'L’Ancre Verte', 'custom_4', 'sinking_star_duo', 8, 'playable']);
+  assert.equal(entry.sourcePath, 'experiments/sinking-star-ss13/src/levels.ts');
+  assert.deepEqual(SS13_LEVELS.map(level => level.title), [
+    'L’atelier de l’ancre verte', 'Une place de plus sur l’autre rive', 'La cellule et les trois relèves', 'Le miroir reste à quai',
+    'Le gardien devenu poids', 'La presse délivre le tireur', 'L’amarre et les trois diagonales', 'Les deux retours de l’ancre',
+  ]);
+  assert.equal(SS13_TUTORIAL_LEVEL, 1);
+  assert.deepEqual(ss13Witnesses.slice(6).map(({ actions }) => actions.length), [231, 212]);
+  assert.deepEqual(SS13_LEVELS.map(level => level.id), Array.from({ length: 8 }, (_, i) => `ss13-0${i + 1}`));
+
+  const backend = createSs13Backend(), reference = new AnchorDuoSession(SS13_LEVELS);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const lessons = new Set<AnchorLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss13 ' });
+  assert.deepEqual(current, reference.observe());
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS13' }), current);
+  const publicKeys = Object.keys(current);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss13Witnesses) {
+    assert.equal(current.level, level);
+    assert.equal(current.palette?.length, 16);
+    assert.deepEqual(visibleAnchorHeroes(current.frame).map(({ kind, selected }) => ({ kind, selected })).sort((a, b) => a.kind.localeCompare(b.kind)),
+      [{ kind: 'thief', selected: true }, { kind: 'wizard', selected: false }]);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const expected = reference.action(id, data);
+      const request = { type: 'action', actionId: id, data } as const;
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(backend.dispatch(request), expected);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleAnchorHeroes(frame).map(({ kind, x, y }) => [kind, x, y]);
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      observeAnchorLesson(lessons, before, current, id);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    const victory = current;
+    const undo = reference.undo();
+    assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), undo);
+    assert.deepEqual(backend.dispatch({ type: 'undo' }), undo);
+    assert.equal(undo.level, level);
+    assert.equal(undo.levelsCompleted, level - 1);
+    const last = route.at(-1)! as DuoAction;
+    const request = { type: 'action', actionId: last.id, data: last.data } as const;
+    assert.deepEqual(reference.action(last.id, last.data), victory);
+    current = await dispatcher.dispatch(request);
+    assert.deepEqual(current, victory);
+    assert.deepEqual(backend.dispatch(request), victory);
+    assert.deepEqual(anchorLessonIds.filter(id => lessons.has(id)), [...anchorLessonIds]);
+  }
+  assert.equal(current.state, 'WIN');
+  assert.deepEqual([actions, selections, frames], [781, 49, 2411]);
+});
+
+test('SS13 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart', async () => {
+  const backend = createSs13Backend(), reference = new AnchorDuoSession(SS13_LEVELS);
+  const initial = reference.selectLevel(6);
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS13', level: 6 }), initial);
+  for (const level of [0, 9, 1.5, NaN]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS13', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: 1.5, y: 20 }, { x: -1, y: 0 }, { x: 0, y: 64 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS13 action/);
+  const data = anchorHeroSelection(initial.frame, 'wizard')!;
   assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
   assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
   assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());

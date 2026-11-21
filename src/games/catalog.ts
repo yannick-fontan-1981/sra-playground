@@ -1174,6 +1174,10 @@ records.push({code:'SS12',id:'ss12-c4000001',name:'La Colonne en Marche',group:'
   description:'Push mixed chains with the Warrior and guide nearby allies, crates, monsters and supports with the Bard’s song.',
   sourcePath:'experiments/sinking-star-ss12/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS13',id:'ss13-c4000001',name:'L’Ancre Verte',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Pull single objects with the Thief and swap with the Wizard to preserve anchors, power circuits and cross the water.',
+  sourcePath:'experiments/sinking-star-ss13/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

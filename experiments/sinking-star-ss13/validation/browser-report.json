@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "browser": "158.0.4370.33",
+  "htmlSha256": "d645b075d54d59a9ebdd12ca919f3814c3f5f721ee227c3e7c04d1f0de4dccfd",
+  "checks": [
+    "All eight authored routes win through actual keyboard and canvas selection events, with matching visible pixels after every input.",
+    "All fourteen tutorial discoveries are acquired and the final VICTORY panel is visible.",
+    "Undo restores the winning action; Restart clears progress; normal animation advances and remains undoable.",
+    "390px mobile layout has no horizontal overflow and level/role controls work.",
+    "The entire browser run performs zero network requests and reports zero JavaScript errors."
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "title": "L’atelier de l’ancre verte",
+      "actions": 77,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 2,
+      "title": "Une place de plus sur l’autre rive",
+      "actions": 36,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 3,
+      "title": "La cellule et les trois relèves",
+      "actions": 87,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 4,
+      "title": "Le miroir reste à quai",
+      "actions": 32,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 5,
+      "title": "Le gardien devenu poids",
+      "actions": 44,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 6,
+      "title": "La presse délivre le tireur",
+      "actions": 62,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 7,
+      "title": "L’amarre et les trois diagonales",
+      "actions": 231,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 8,
+      "title": "Les deux retours de l’ancre",
+      "actions": 212,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    }
+  ],
+  "mobile": {
+    "documentWidth": 390,
+    "viewport": 390,
+    "canvasWidth": 344,
+    "levelSelection": true,
+    "roleSelection": true
+  }
+}

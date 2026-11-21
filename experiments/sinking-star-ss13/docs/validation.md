@@ -15,9 +15,9 @@
 | HTML compilé dans Happy DOM | Réussi, huit routes complètes, pixels et durées contrôlés |
 | Audit indépendant des finales | **16/16 contrefactuels** ; 9 fichiers hors périmètre identiques |
 | Régénération des deux fichiers d’auteur | Identique octet pour octet ; 5 + 8 branches locales rejouées |
-| Rendu dans un véritable navigateur | **Non validé dans cet environnement** |
+| Rendu dans Chromium (Microsoft Edge 158.0.4370.33) | **Réussi** sur ordinateur et à 390 px |
 
-Les rapports détaillés sont `validation/levels-report.json`, `validation/ui-dom-report.json`, `validation/design-constraints-report.json` et `validation/hard-finals-report.json`. Les deux premiers portent le SHA-256 exact du HTML vérifié. `validation/browser-availability.json` explicite la limite navigateur.
+Les rapports détaillés sont `validation/levels-report.json`, `validation/ui-dom-report.json`, `validation/design-constraints-report.json` et `validation/hard-finals-report.json`. Les deux premiers portent le SHA-256 exact du HTML vérifié. `validation/browser-report.json` contient le contrôle Chromium. `validation/browser-availability.json` décrit les tentatives historiques.
 
 ## Différences mesurées des finales
 
@@ -57,11 +57,9 @@ Ces vérifications confortent les contraintes reprises des sources. Elles ne pro
 
 ## Navigateur
 
-Le contrôle natif reste à effectuer lors de l’intégration. Dans la validation SS12 immédiatement précédente, Chromium a échoué sur une création de socket interdite et le navigateur géré a refusé l’ouverture d’une URL locale. Ces restrictions n’ont pas été contournées pour SS13 ; aucun nouveau test natif n’est prétendu réussi.
+Le 21 novembre 2026, Playwright a contrôlé le HTML autonome dans Microsoft Edge 158.0.4370.33. Le clavier et les clics réels sur le canvas ont rejoué les huit parcours. Les pixels stabilisés correspondent au moteur après chaque entrée, avec 231 et 212 entrées pour les deux finales. Les quatorze découvertes et le panneau VICTORY ont été observés.
 
-Les matrices publiques des huit grilles ont été rendues et inspectées. Cette inspection et Happy DOM ne certifient pas la mise en page CSS, les périphériques tactiles ou l’affichage dans chaque navigateur.
-
-`scripts/verify-ui-browser.mjs` prépare la vérification Playwright/Chromium pour un environnement autorisé. Il n’a pas été exécuté avec succès dans cette livraison.
+Annuler restaure la dernière action gagnante et Repartir revient au niveau 1. À 390 px, le canvas mesure 344 px et la page reste à 390 px. Les sélecteurs fonctionnent au format mobile. Le HTML autonome a joué sans requête réseau et sans erreur JavaScript.
 
 ## Reproduire
 
@@ -84,4 +82,4 @@ Le build ne lance aucun solveur. Après une modification de carte, reconstruire 
 
 ## Portée de la livraison
 
-Les témoins démontrent que les huit salles sont solubles dans le moteur livré. Ils ne mesurent pas les performances de SRA. Aucun adaptateur natif ou chemin partagé du runtime Playground n’est modifié à cette étape ; aucune comparaison de coût global n’est donc revendiquée. Elle sera requise si l’intégration modifie un chemin partagé.
+Les témoins démontrent que les huit salles sont solubles dans le moteur livré. Ils ne mesurent pas les performances de SRA. La feuille de route consigne les résultats du raccordement natif et de la mesure du coût global.
