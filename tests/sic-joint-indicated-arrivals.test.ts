@@ -49,6 +49,26 @@ test('two agreeing landmark displacements allow a falsifiable step onto the coun
   assert.equal(measureJointReturn(m,registered,s,candidate),'joint_preparation_refuted');
   assert.equal(offer(registered),undefined);
 });
+test('a second arrangement lets the other side verify a missing footing with a horizontal motor',()=>{
+  const c:JointContext={roles:['pen','rest'],goals:[[20,8],[20,32]],pitch:[4,4],pivot:'switch',
+    alternate:{actor:'pen',peer:'rest',alternateActor:'idle',alternatePeer:'driver',ref:'selected'},
+    registration:{originalPivots:[[16,8],[16,32]],pivotRef:'knobs',goalRef:'contacts'}};
+  const diagram=(driver:XY,marked:boolean):VisualLayout=>({
+    idle:[body([16,4],'idle')],driver:[body(driver,'driver')],switch:[body([16,8],'knob'),body([16,32],'knob')],
+    signal:marked?[body(c.goals[0],'light')]:[]});
+  const m=newJointMemory(),start=diagram([12,28],true),clutter=Array.from({length:22},()=>Array<number>(18).fill(9));
+  observeJointIndications(m,c,diagram([12,32],false),start,'ACTION1','fixed-light');
+  const propose=(ctx:JointContext)=>chooseJointArrival(m,ctx,start,o,clutter,motors,3,12,120);
+  assert.equal(propose({...c,registration:undefined}),undefined);
+  const proposal=propose(c)!;
+  assert.equal(proposal.side,1);assert.equal(proposal.command,'ACTION2');assert.deepEqual(proposal.expected,[16,28]);
+  assert.deepEqual(proposal.registeredFooting?.translation,[0,24]);
+  assert.equal(m.sites[1]['16,28'],undefined);
+  const result=diagram([16,28],true);
+  assert.equal(measureJointReturn(m,c,result,proposal),'preparation_matched_with_other_geometry_preserved');
+  observeJointIndications(m,c,start,result,'ACTION2','entered-second-board');
+  assert.equal(m.sites[1]['16,28'],true);
+});
 test('a changing partner or an ambiguous pairing cannot support a remote indication',()=>{
   const m=newJointMemory(),before=view([8,12],[],[28,24]),after=view([8,8],[[32,16]]);
   observeJointIndications(m,context,before,after,'ACTION1','uncontrolled');
