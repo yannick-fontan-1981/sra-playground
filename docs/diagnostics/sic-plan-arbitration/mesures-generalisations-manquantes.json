@@ -549,5 +549,265 @@
         }
       ]
     }
-  }
+  },
+  "sourceV40": {
+    "verified": 100,
+    "wins": 100,
+    "comparedTo": "v38",
+    "identicalTrajectories": 96,
+    "changedTrajectories": [
+      "MOTO",
+      "GLOB",
+      "KATA",
+      "POLA"
+    ]
+  },
+  "sourceV41": {
+    "verified": 100,
+    "wins": 100,
+    "comparedTo": "v40",
+    "identicalTrajectories": 100,
+    "changedTrajectories": []
+  },
+  "coldV40": [
+    {
+      "code": "SS01",
+      "won": true,
+      "actions": 44,
+      "reason": "target_levels_completed",
+      "commonPrefix": 44,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS02",
+      "won": false,
+      "actions": 491,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 326,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "35b61d92830f398b3a4a7d6f2f54b0a272d7f0cdd7c3d47e4b818b68c03f86ca"
+    },
+    {
+      "code": "SS03",
+      "won": false,
+      "actions": 298,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 298,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "8eafb26a04f3a053e9e31472af62348e748c2b22a6cdb1fbce20c8932d3e5b28"
+    },
+    {
+      "code": "SS04",
+      "won": true,
+      "actions": 60,
+      "reason": "target_levels_completed",
+      "commonPrefix": 60,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    },
+    {
+      "code": "SS05",
+      "won": false,
+      "actions": 400,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 253,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "afb92f8ecaf509b8febd6ba71ce358d3de7b2dbe8cfda9faf4c27e05548c807b"
+    },
+    {
+      "code": "SS06",
+      "won": false,
+      "actions": 319,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 215,
+      "selectionForecasts": 1,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "a050f1ba617f6c05043919438d59b292637e7e91114e1f7e410033a8ebcd7bad"
+    },
+    {
+      "code": "SS07",
+      "won": false,
+      "actions": 5,
+      "reason": "native_game_over",
+      "commonPrefix": 5,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+    },
+    {
+      "code": "SS08",
+      "won": false,
+      "actions": 480,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 480,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "4db9d6f8bfb50cffc4f800c2ab32b341bfc9e1745d712403a7f54fbcc4d1db45"
+    },
+    {
+      "code": "SS10",
+      "won": false,
+      "actions": 367,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 367,
+      "selectionForecasts": 0,
+      "motorForecasts": 0,
+      "markTransferred": 0,
+      "motorConfirmed": 0,
+      "firstPlacementCommand": null,
+      "tapeDigest": "5016046095f788f2c1a05f4f4372b87923180523e75730803fe70fc69867eef6"
+    }
+  ],
+  "placementTransferSource": {
+    "code": "VOIS",
+    "level": 2,
+    "cold": true,
+    "initial": "96f2c80ac547316aa363b0ef44029561cb7845c410c1b393f174dcd999e5f2f4",
+    "v40": {
+      "actions": 90,
+      "won": false,
+      "trajectory": "4a040d0099dee13c13a2958913b09e05d0244d558820350c00b14c406f7d4367"
+    },
+    "v41": {
+      "actions": 53,
+      "won": true,
+      "trajectory": "91c82b4ff653e54fa1df715db98c731f12c49ab76e3afa30287298bd1d739498"
+    },
+    "identicalOpeningCommands": 30,
+    "firstPlacementCommand": 31,
+    "canonicalExport": {
+      "sha": "ca12abca1925d53c3239962a78e02fff9fb6353c",
+      "files": 2551,
+      "manifestHash": "2f62ab2b0631a61a94a8a0a7f4b2eaf215e14e18ca606d326cf8878c635d5963"
+    },
+    "tests": 158
+  },
+  "singleCommandTerminalAlternatives": [
+    {
+      "code": "TU93",
+      "level": 1,
+      "split": "qualification",
+      "baseline": "loss",
+      "actions": 50,
+      "tested": 39,
+      "immediateLoss": 3,
+      "laterLoss": 36,
+      "branchWins": 0,
+      "interrupted": 0
+    },
+    {
+      "code": "TU93",
+      "level": 1,
+      "split": "qualification",
+      "baseline": "win",
+      "actions": 30,
+      "tested": 36,
+      "immediateLoss": 0,
+      "laterLoss": 0,
+      "branchWins": 12,
+      "interrupted": 0
+    },
+    {
+      "code": "SMLP",
+      "level": 1,
+      "split": "development",
+      "baseline": "win",
+      "actions": 47,
+      "tested": 69,
+      "immediateLoss": 0,
+      "laterLoss": 0,
+      "branchWins": 58,
+      "interrupted": 0
+    },
+    {
+      "code": "SMLP",
+      "level": 5,
+      "split": "development",
+      "baseline": "live",
+      "actions": 90,
+      "tested": 72,
+      "immediateLoss": 0,
+      "laterLoss": 0,
+      "branchWins": 0,
+      "interrupted": 0
+    },
+    {
+      "code": "SIGN",
+      "level": 1,
+      "split": "development",
+      "baseline": "win",
+      "actions": 16,
+      "tested": 40,
+      "immediateLoss": 0,
+      "laterLoss": 0,
+      "branchWins": 2,
+      "interrupted": 0
+    },
+    {
+      "code": "CAVA",
+      "level": 1,
+      "split": "development",
+      "baseline": "win",
+      "actions": 7,
+      "tested": 18,
+      "immediateLoss": 0,
+      "laterLoss": 0,
+      "branchWins": 0,
+      "interrupted": 0
+    },
+    {
+      "code": "SIGN",
+      "level": 6,
+      "split": "development",
+      "baseline": "live",
+      "actions": 90,
+      "tested": 58,
+      "immediateLoss": 0,
+      "laterLoss": 0,
+      "branchWins": 0,
+      "interrupted": 0
+    },
+    {
+      "code": "CAVA",
+      "level": 5,
+      "split": "development",
+      "baseline": "live",
+      "actions": 90,
+      "tested": 60,
+      "immediateLoss": 0,
+      "laterLoss": 0,
+      "branchWins": 0,
+      "interrupted": 0
+    }
+  ]
 }
