@@ -1,0 +1,819 @@
+{
+  "spec": {
+    "id": "ss14-04",
+    "title": "Les deux départs sans geste",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~......~~.....B.o.~",
+      "~~g...g.~~.........~",
+      "~~......~~.........~",
+      "~~......~~.........~",
+      "~~~~~~~.~~.........~",
+      "~~~~~~~............~",
+      "~~~~~~~~~~.........~",
+      "~~~~~~~~~~.........~",
+      "~~.......~.........~",
+      "~~.......~.........~",
+      "~~.T...#.~.........~",
+      "~~.......~.........~",
+      "~~.......~~~~~~~~~~~",
+      "~~.......~~~~~~~~~~~",
+      "~~.......~~~~~~~~~~~",
+      "~~........~~~~~~~~~~",
+      "~~........~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 3,
+          "y": 11
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 7
+        },
+        "facing": "SW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "accord",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 14,
+            "y": 10
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 13
+        },
+        "circuit": "accord",
+        "activeWhen": "pressed"
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 6
+        },
+        "circuit": "accord",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDDDDDDDDLLLCDDDDDDRURRRRRDLLUURUUUUXCRDDDDRCURRRRRRCUUUULLLLUUUULLLLLCULLLLUXLLUUUUL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "puzzle": 1,
+    "label": "Adaptation de Heroes and Mirrors · énigme 1 · départ du Barde par reflet",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1",
+    "objective": "Préparer les deux commandes et choisir des départs qui les laissent occupées jusqu’à l’arrivée du duo.",
+    "secondary": {
+      "label": "Heroes and Mirrors · énigmes 4 et 5 · miroir tracté et poids maintenu",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-5"
+    }
+  },
+  "metrics": {
+    "actions": 85,
+    "selections": 6,
+    "thiefPulls": 15,
+    "bardSongs": 12,
+    "partnerSongs": 1,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 0,
+    "supportMoves": 0,
+    "partnerPulls": 0,
+    "stoneMoves": 11,
+    "mirrorMoves": 15,
+    "reflections": 2,
+    "heroReflections": 3,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Barde cale la caisse sur sa commande et reste à portée de ce poids",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": false
+      }
+    },
+    {
+      "label": "Le Voleur change l’axe du miroir dans la cour inférieure",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 17
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 17
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": false
+      }
+    },
+    {
+      "label": "Le miroir devient le second poids ; le Voleur ne peut quitter son poste à pied sans le retirer",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": true
+      }
+    },
+    {
+      "label": "Les deux départs simultanés conservent la caisse et le miroir sur leurs boutons",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": true
+      }
+    },
+    {
+      "label": "Le Barde revient au quai et entraîne le Voleur hors de l’appui sans retirer le miroir-poids",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": true
+      }
+    },
+    {
+      "label": "Le Voleur dégage la portée du chanteur avant son retour vers la rive haute",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": true
+      }
+    },
+    {
+      "label": "Le Barde rejoint sa destination après son départ sans chant",
+      "turn": 70,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": true
+      }
+    },
+    {
+      "label": "Le Voleur emprunte le second miroir pour rejoindre son partenaire",
+      "turn": 85,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 7
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "accord": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Le Barde quitte la portée d’une caisse-poids par reflet pour éviter de la déplacer avec son chant.",
+      "Le Voleur déplace un miroir puis doit s’éloigner en conservant ce miroir sur son bouton."
+    ],
+    "changed": [
+      "Deux rives séparées préparent une commande commune à deux poids.",
+      "Le premier reflet transporte les deux héros simultanément ; le Barde revient ensuite délivrer le Voleur de son appui par chant avant le second passage.",
+      "Une arrivée hydraulique et une porte haute sont alimentées par le même accord."
+    ],
+    "sourceReading": "Mirrors 1 inspire le départ du Barde sans chant après placement d’un poids. Mirrors 4 et 5 inspirent la traction du miroir et le départ qui préserve sa commande. La géométrie à deux départs simultanés est originale ; les reflets suivent la priorité proche de SS14 et ne créent pas de doubles.",
+    "localChecks": [
+      {
+        "turn": 37,
+        "alternative": "R",
+        "effect": "Après le premier reflet, un pas volontaire du Voleur tracte le miroir sur le quai, retire son propre poids, rétracte le quai et détruit le miroir ; le relais par chant conserve la commande.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 1,
+          "supports": [],
+          "platformActive": [
+            false
+          ],
+          "accord": false
+        }
+      },
+      {
+        "turn": 36,
+        "alternative": "U",
+        "effect": "Avant le reflet, monter entraîne le miroir hors de son bouton et referme la porte.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 2,
+          "supports": [],
+          "platformActive": [
+            false
+          ],
+          "accord": false
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales du parcours auteur ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}

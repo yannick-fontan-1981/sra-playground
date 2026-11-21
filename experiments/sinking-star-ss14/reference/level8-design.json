@@ -1,0 +1,2668 @@
+{
+  "spec": {
+    "id": "ss14-08",
+    "title": "Le dernier accord des deux rives",
+    "rows": [
+      "####################",
+      "#........~~....#...#",
+      "#........~~....#.g.#",
+      "#..m.B.m.~~........#",
+      "#...#.#..~~....#.g.#",
+      "#...#.#..~~...o#...#",
+      "#...#.#..~~....#####",
+      "#........~~........#",
+      "#........~~........#",
+      "#........~~........#",
+      "#....T#..~~........#",
+      "#........~~........#",
+      "#.......#~~........#",
+      "#.......#~~........#",
+      "#....#...~~........#",
+      "#........~~........#",
+      "#.......#~~#.o.....#",
+      "#........~~........#",
+      "#........~~........#",
+      "####################"
+    ],
+    "facing": "S",
+    "mirrors": [
+      {
+        "at": {
+          "x": 6,
+          "y": 14
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "choeur",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 5
+          },
+          {
+            "x": 7,
+            "y": 5
+          }
+        ],
+        "color": 11
+      },
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 14
+          }
+        ],
+        "color": 9
+      },
+      {
+        "id": "charge",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 14
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "dernier-accord",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 7
+          },
+          {
+            "x": 7,
+            "y": 7
+          },
+          {
+            "x": 14,
+            "y": 4
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 14
+        },
+        "circuit": "presse",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 13
+        },
+        "circuit": "presse",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 15
+        },
+        "circuit": "presse",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 12
+        },
+        "circuit": "charge",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 14
+        },
+        "circuit": "charge",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 15
+        },
+        "circuit": "charge",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 16
+        },
+        "circuit": "charge",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 13
+        },
+        "circuit": "presse",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 14
+        },
+        "circuit": "presse",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 15
+        },
+        "circuit": "charge",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 13
+        },
+        "circuit": "choeur",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 3
+        },
+        "circuit": "dernier-accord",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 3
+        },
+        "circuit": "choeur",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 8
+        },
+        "circuit": "choeur",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "circuit": "choeur",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 15
+        },
+        "circuit": "dernier-accord",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 12
+        },
+        "circuit": "presse",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 13
+        },
+        "circuit": "presse",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 12
+        },
+        "circuit": "presse",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 13
+        },
+        "circuit": "presse",
+        "activeWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDDCUUUUDDDCDDDDLLLLCRUUUUURRRRRRRRRUURRRDDDLULLLLLLLLLDRDDDRURXCUUUURRRRRRRRRRDDDRDRCUUURRRRDDDDDDDRRUURDDDRCLLCUUUUULLLLUURRRCUULLLLLLCULLLLLLDDDLDLDLLDDRRRURRULURDRRRRRULUUUUUUUUULDDDDDLLLLLULLLUUUUULLDLDLDDDDCDDCDRRRURUUDDDDDLDDDDDRRRURURCDDDLDDDRRRURRUURRRRUUUUUUUUUURRRDRCLUULUURRRUR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "puzzle": 14,
+    "label": "Adaptation de Heroes 3: Bard, Druid · énigme 14 · quitter le chœur sans déplacer ses poids",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14",
+    "objective": "Préparer le passage durable, réemployer le miroir et donner leur dernier poste aux deux gardiens avant de réunir les héros.",
+    "secondary": {
+      "label": "Heroes and Light · énigme 1 · dépôt latéral par une presse",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1"
+    }
+  },
+  "metrics": {
+    "actions": 289,
+    "selections": 14,
+    "thiefPulls": 50,
+    "bardSongs": 27,
+    "partnerSongs": 21,
+    "selectiveSongs": 7,
+    "forcedBardMoves": 15,
+    "supportMoves": 3,
+    "partnerPulls": 15,
+    "stoneMoves": 22,
+    "mirrorMoves": 18,
+    "reflections": 1,
+    "heroReflections": 0,
+    "pistonPushes": 2,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Les deux gardiens occupent ensemble les commandes du premier pont.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 5
+        },
+        {
+          "x": 13,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": false,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait le Barde sans chant : le pont provisoire reste alimenté.",
+      "turn": 11,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 5
+        },
+        {
+          "x": 13,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": false,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le miroir tient la presse distante ouverte avant tout chargement.",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 1,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 5
+        },
+        {
+          "x": 13,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": false,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "La première caisse revient par le pont provisoire dans le rayon du miroir.",
+      "turn": 63,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 13,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": false,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le reflet prépare le premier appui ; le miroir maintient toujours la presse ouverte.",
+      "turn": 64,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": false,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le Voleur place la seconde caisse dans la portée exacte du Barde.",
+      "turn": 109,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": false,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le chant charge la presse ; la caisse verrouille le flanc de l’atelier et libère la reprise du miroir.",
+      "turn": 112,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": true,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait le Barde de l’atelier sans déplacer la cargaison chargée.",
+      "turn": 127,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": true,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le Voleur rejoint le flanc libéré du miroir pendant que la cargaison attend sur la presse.",
+      "turn": 159,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": true,
+        "charge": true,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "La reprise du miroir libère la presse ; la caisse devient le second appui et le retour pousse le Voleur avec le miroir.",
+      "turn": 160,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le miroir contourne la presse fermée par son parvis hydraulique, sur les deux appuis préparés.",
+      "turn": 168,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le même miroir devient le troisième poids de la chambre finale.",
+      "turn": 183,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Le Voleur replace le Barde au milieu du chœur sans déplacer les gardiens.",
+      "turn": 202,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 7,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "choeur": true,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": false
+      }
+    },
+    {
+      "label": "Les deux gardiens changent de service : le premier pont se retire et les commandes finales sont occupées.",
+      "turn": 215,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 1,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "choeur": false,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": true
+      }
+    },
+    {
+      "label": "Le Voleur extrait une seconde fois le Barde ; cette fois les poids doivent rester sur les commandes finales.",
+      "turn": 229,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "choeur": false,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": true
+      }
+    },
+    {
+      "label": "Le Voleur revient ancrer le premier appui pour le passage du Barde.",
+      "turn": 242,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "choeur": false,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": true
+      }
+    },
+    {
+      "label": "Le chant emporte le Voleur sur le parvis en conservant l’arrivée du Barde ; les deux appuis changent ensuite de place.",
+      "turn": 260,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 10,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "choeur": false,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": true
+      }
+    },
+    {
+      "label": "Les deux partenaires atteignent la chambre par le passage préparé en conservant les trois poids.",
+      "turn": 289,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 10,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "choeur": false,
+        "presse": false,
+        "charge": true,
+        "dernier-accord": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Heroes 3, 14 : deux monstres servent de poids ; le Barde est déplacé sans chant après leur mise en place.",
+      "Light 1 : une presse dépose latéralement une caisse hors de portée d’une traction normale.",
+      "Mirrors 1 et 4 : le miroir est transporté puis conservé comme poids après son dernier emploi."
+    ],
+    "changed": [
+      "Les deux gardiens assurent deux services successifs ; le pont provisoire s’efface quand leurs commandes finales sont occupées.",
+      "Deux caisses doivent être rapportées ou chargées avant leur immersion ; le reflet et la presse fabriquent les deux appuis du passage durable.",
+      "Le miroir commande d’abord la presse ; sa reprise libère le dépôt et déclenche une poussée en file du miroir et du Voleur.",
+      "Une cloison de chargement empêche de remplacer le dépôt latéral par un simple pas chanté vers l’ouest.",
+      "Le miroir traverse ensuite les appuis et le parvis hydraulique, puis devient le troisième poids final.",
+      "Après le dépôt, la presse fermée maintient elle-même la commande de chargement ; une ouverture opposée permet de quitter son parvis.",
+      "Au dernier passage, le Voleur ancre un appui avant d’être chanté sur le parvis ; le Barde peut alors rejoindre son arrivée en laissant glisser les autres appuis."
+    ],
+    "sourceReading": "Heroes 3, énigme 14 fournit le départ accompagné du Barde après la pose de deux poids vivants. Light 1 fournit le dépôt par presse ; Mirrors 1 et 4 fournissent la conservation et la reprise du miroir. La double fonction des gardiens, les deux rives, les circuits opposés et la cascade de chargement sont originaux ; aucun faisceau ni pouvoir absent du duo n’est repris.",
+    "additionalSources": [
+      {
+        "label": "Heroes and Mirrors · énigmes 1 et 4",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/"
+      }
+    ],
+    "localCounterfactuals": [
+      {
+        "label": "walking-away-breaks-the-choir",
+        "afterTurn": 3,
+        "commands": "D",
+        "meaning": "Un départ volontaire du Barde entraîne les deux poids et retire le pont.",
+        "refused": false,
+        "dead": false,
+        "monsters": [
+          {
+            "x": 3,
+            "y": 6
+          },
+          {
+            "x": 7,
+            "y": 6
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "supports": []
+      },
+      {
+        "label": "north-extraction-restores-mirror",
+        "afterTurn": 64,
+        "commands": "DLDU",
+        "meaning": "La traction nord est effective mais sa presse de retour remet le miroir sur sa commande ; cette branche ne transporte pas le miroir vers le pont haut.",
+        "refused": false,
+        "dead": false,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 6,
+              "y": 12
+            },
+            "facing": "N",
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 1,
+              "y": 12
+            },
+            "facing": "W",
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 14
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 6,
+              "y": 14
+            },
+            "facing": "NE"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 3,
+            "y": 5
+          },
+          {
+            "x": 7,
+            "y": 5
+          }
+        ],
+        "circuits": {
+          "choeur": true,
+          "presse": true,
+          "charge": false,
+          "dernier-accord": false
+        },
+        "phases": [
+          "pull",
+          "piston",
+          "gate",
+          "gate"
+        ]
+      },
+      {
+        "label": "voluntary-exit-rearranges-the-load",
+        "afterTurn": 112,
+        "commands": "D",
+        "meaning": "Le départ sud est légal : il déplace aussi la cargaison et le premier appui et retire la commande de chargement. Un second pas sud peut placer le Barde lui-même sur cette commande ; cette préparation différente n’est pas déclarée insoluble.",
+        "refused": false,
+        "dead": false,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 16
+            },
+            "facing": "E",
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 11,
+              "y": 13
+            },
+            "facing": "S",
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 11,
+            "y": 15
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 15
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 6,
+              "y": 14
+            },
+            "facing": "NE"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 3,
+            "y": 5
+          },
+          {
+            "x": 7,
+            "y": 5
+          }
+        ],
+        "circuits": {
+          "choeur": true,
+          "presse": true,
+          "charge": false,
+          "dernier-accord": false
+        },
+        "phases": [
+          "song",
+          "gate"
+        ]
+      },
+      {
+        "label": "missing-first-support-kills-piston-arrival",
+        "afterTurn": 63,
+        "commands": "CUUUURRRRRRRRRRDDDDRRCUUURRRRDDDDDDDRRUURDDDRCLLCUUUUULLLLUURRRCUULLLLLLCULLLLLLDDDLDLLDLDDRRRUR",
+        "meaning": "En omettant le premier reflet, le dépôt latéral crée bien le second appui, mais la poussée en file envoie le Voleur sur l’arrivée encore vide.",
+        "refused": false,
+        "dead": true,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 14
+            },
+            "facing": "E",
+            "dead": true
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 5,
+              "y": 8
+            },
+            "facing": "W",
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 6,
+            "y": 11
+          }
+        ],
+        "supports": [
+          {
+            "x": 10,
+            "y": 14
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 14
+            },
+            "facing": "NE"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 3,
+            "y": 5
+          },
+          {
+            "x": 7,
+            "y": 5
+          }
+        ],
+        "circuits": {
+          "choeur": true,
+          "presse": false,
+          "charge": true,
+          "dernier-accord": false
+        },
+        "phases": [
+          "pull",
+          "piston",
+          "piston",
+          "platform"
+        ]
+      },
+      {
+        "label": "walking-away-breaks-last-weights",
+        "afterTurn": 215,
+        "commands": "D",
+        "meaning": "Le pas volontaire sud décale les deux poids vivants après leur second service ; les commandes finales cessent de tenir.",
+        "refused": false,
+        "dead": false,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 1,
+              "y": 8
+            },
+            "facing": "S",
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 5,
+              "y": 6
+            },
+            "facing": "S",
+            "dead": false
+          }
+        ],
+        "stones": [],
+        "supports": [
+          {
+            "x": 9,
+            "y": 14
+          },
+          {
+            "x": 10,
+            "y": 14
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "facing": "NE"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 3,
+            "y": 8
+          },
+          {
+            "x": 7,
+            "y": 8
+          }
+        ],
+        "circuits": {
+          "choeur": false,
+          "presse": false,
+          "charge": true,
+          "dernier-accord": false
+        },
+        "phases": [
+          "song",
+          "gate",
+          "platform"
+        ]
+      },
+      {
+        "label": "leaving-before-anchoring-loses-bard-arrival",
+        "afterTurn": 242,
+        "commands": "UURRUUUUUUUUURRRRRURCDDDLDDDRRRURRU",
+        "meaning": "Si le Voleur part avant le chant d’approche, le premier appui glisse ; le Barde atteint son quai mais son pas suivant vers l’arrivée prévue est refusé.",
+        "refused": true,
+        "dead": false,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 17,
+              "y": 2
+            },
+            "facing": "E",
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 9,
+              "y": 15
+            },
+            "facing": "N",
+            "dead": false
+          }
+        ],
+        "stones": [],
+        "supports": [
+          {
+            "x": 10,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 14
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "facing": "NE"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 3,
+            "y": 7
+          },
+          {
+            "x": 7,
+            "y": 7
+          }
+        ],
+        "circuits": {
+          "choeur": false,
+          "presse": false,
+          "charge": true,
+          "dernier-accord": true
+        },
+        "phases": []
+      }
+    ],
+    "proofScope": "Les routes et branches locales sont exécutées. Aucun résultat de recherche bornée ni compteur d’actions ne prouve l’unicité ou la longueur minimale."
+  },
+  "difficultyNotes": {
+    "role": "Finale à ressources réemployées et passages opposés.",
+    "resources": {
+      "dryCrates": 2,
+      "mobileMirrors": 1,
+      "livingMonsters": 2,
+      "finalWeights": 3
+    },
+    "referencePlanDependencies": [
+      "Maintenir les deux gardiens pendant la première sortie forcée du Barde.",
+      "Revenir avec la première caisse avant de retirer le pont provisoire.",
+      "Conserver le miroir sur la presse pendant la préparation du reflet et du chargement.",
+      "Placer le second chargement avec les deux héros avant sa translation par chant.",
+      "Créer le premier appui avant la cascade qui pousse le Voleur et le miroir sur cette arrivée.",
+      "Employer la fermeture de la presse pour créer le second appui et déployer son contournement hydraulique.",
+      "Transporter le miroir après son rôle de commande et de réflecteur.",
+      "Replacer les deux mêmes gardiens et extraire le Barde une dernière fois sans chant."
+    ],
+    "claimScope": "Dépendances du plan de référence, vérifiées par ses étapes et des branches locales. Les départs chantés alternatifs peuvent produire d’autres préparations ; aucune nécessité globale, unicité ou longueur minimale n’est revendiquée."
+  }
+}

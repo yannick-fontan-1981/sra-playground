@@ -1,0 +1,1621 @@
+{
+  "spec": {
+    "id": "ss14-07",
+    "title": "La pierre des trois traversées",
+    "rows": [
+      "..........~........#",
+      ".....~....~........#",
+      "....~.~...~........#",
+      ".....~....~........#",
+      "..#.......~...####.#",
+      "..........~....o.#.#",
+      "..#.......~...####.#",
+      "..........~........#",
+      "..........~........#",
+      "..........~........#",
+      "~~~~#s~~~~~~~~~~~~~#",
+      "..........~....#...#",
+      "..........~....#####",
+      "..........~....#...#",
+      "...B......~....#.g.#",
+      "..........~....#...#",
+      "..........~........#",
+      ".....T....~....#.g.#",
+      "..........~....#...#",
+      "####################"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 5,
+          "y": 15
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "reserve",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 15
+          }
+        ],
+        "color": 11
+      },
+      {
+        "id": "deux-poids",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 2
+          },
+          {
+            "x": 5,
+            "y": 5
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 13,
+          "y": 5
+        },
+        "circuit": "reserve",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 16
+        },
+        "circuit": "deux-poids",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CURRUUUULLRRRRRUUUUULDRRRRRRLLLLLLLLLLLLLDDDRRRRRUUUURURRDDDDDLLLLLCULUURUUUUCLLLCUUUUUURXRDRCDRRRRRRRRUUUUCDRDDRRUUUURRRRRRCLDRRRRRRDRRRRRUUUULLLLLDLDDDDRRRCDDDDDDDDDDRRRUURCULLDDDDDDDDDRRRDRCUL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 54
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 3,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 27,
+    "label": "Adaptation de Heroes and Water · énigme 27 · changer l’écart entre le Barde et l’appui",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27",
+    "objective": "Un seul appui dessert les trois bras de la rivière. Faites voyager les bonnes ressources avant de rejoindre la chambre des deux destinations.",
+    "secondary": {
+      "label": "Heroes and Mirrors · énigmes 1 et 4 · conserver un poids et réemployer le miroir tracté",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 195,
+    "selections": 10,
+    "thiefPulls": 10,
+    "bardSongs": 59,
+    "partnerSongs": 18,
+    "selectiveSongs": 4,
+    "forcedBardMoves": 0,
+    "supportMoves": 36,
+    "partnerPulls": 0,
+    "stoneMoves": 14,
+    "mirrorMoves": 10,
+    "reflections": 1,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Barde franchit le premier bras ; le miroir garde la réserve ouverte à distance.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 17
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le même appui change deux fois d’axe et dessert désormais la réserve nord-est.",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 17
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Barde atteint la caisse par le passage maintenu par le miroir resté au sud.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 17
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "La caisse traverse sur l’appui conservé et rejoint le rayon ouest du futur miroir.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 17
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 0,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Barde ramène le seul appui au bras initial ; la caisse est retenue entre deux murs.",
+      "turn": 67,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 17
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Voleur occupe l’appui et l’ancre pendant que le miroir attend derrière lui.",
+      "turn": 77,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Barde s’écarte sans déplacer l’appui sous son partenaire.",
+      "turn": 81,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 0,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le miroir franchit l’appui, ferme la réserve et devient le second poids final.",
+      "turn": 89,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 0,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "La caisse conservée atteint l’île de commande par le reflet du miroir réemployé.",
+      "turn": 90,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 0,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "L’appui sert à nouveau : les deux héros doivent encore rejoindre la rive des destinations.",
+      "turn": 107,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Le Voleur a franchi le bras nord avant son retrait.",
+      "turn": 124,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "L’appui quitte le passage nord et se place dans le troisième bras, vers la chambre finale.",
+      "turn": 157,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Le Barde arrive au sud-est ; les deux poids restent à l’écart de son chant.",
+      "turn": 187,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Les deux partenaires atteignent leurs destinations avec la caisse et le miroir encore sur les commandes.",
+      "turn": 195,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 2
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": false,
+        "deux-poids": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Water 27 : les obstacles permettent de modifier l’écart entre le Barde et un appui immergé avant de lui faire changer d’axe.",
+      "Mirrors 4 : le miroir est tracté entre plusieurs positions et doit être laissé en place après son dernier emploi.",
+      "Mirrors 1 : une ressource reste sur sa commande pendant le départ des héros."
+    ],
+    "changed": [
+      "Une seule pierre immergée est réemployée entre les trois bras d’un réseau en croix.",
+      "Le miroir maintient d’abord la réserve ouverte, franchit ensuite le passage initial et sert enfin au reflet et au second poids.",
+      "La caisse doit rester sèche pour atteindre par reflet une île inaccessible à la traction.",
+      "Les deux héros traversent avant chaque retrait du passage utile ; les appuis occupés restent ancrés conformément aux règles de SS14."
+    ],
+    "sourceReading": "Water 27 fournit le transport d’un cristal immergé et le recalage par les murs. Mirrors 4 fournit le réemploi du miroir tracté ; Mirrors 1 la conservation d’une commande lors du départ. La carte, les circuits, l’île de réception et la contrainte d’une seule pierre sont originaux. Aucun déplacement double ni pouvoir d’un autre héros n’est repris.",
+    "localCounterfactuals": [
+      {
+        "label": "anchor-keeps-the-ferry",
+        "afterTurn": 77,
+        "commands": "CL",
+        "meaning": "Le pas latéral du Barde laisse l’appui occupé en place ; le mur ouest retient aussi le Voleur.",
+        "refused": false,
+        "dead": false,
+        "stones": [
+          {
+            "x": 2,
+            "y": 5
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 10
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 5,
+              "y": 11
+            },
+            "facing": "NW"
+          }
+        ]
+      },
+      {
+        "label": "remove-mirror-with-bard-in-vault",
+        "afterTurn": 28,
+        "commands": "CULUURUCL",
+        "meaning": "Retirer ici le miroir ferme la réserve et presse le Barde à l’intérieur ; son essai de retour par la porte est refusé. Une autre relève de poids n’est pas exclue.",
+        "refused": true,
+        "dead": false,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 5,
+              "y": 13
+            },
+            "facing": "N",
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "facing": "W",
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 15,
+            "y": 5
+          }
+        ],
+        "supports": [
+          {
+            "x": 10,
+            "y": 5
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 5,
+              "y": 14
+            },
+            "facing": "NW"
+          }
+        ],
+        "circuits": {
+          "reserve": false,
+          "deux-poids": false
+        },
+        "phases": []
+      },
+      {
+        "label": "withdraw-north-support-before-thief",
+        "afterTurn": 107,
+        "commands": "DCDRDR",
+        "meaning": "Déplacer l’appui d’une ligne avant la traversée laisse l’arrivée nord choisie sans soutien ; ce pas du Voleur est refusé.",
+        "refused": true,
+        "dead": false,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "facing": "E",
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 8,
+              "y": 6
+            },
+            "facing": "S",
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 5,
+            "y": 2
+          }
+        ],
+        "supports": [
+          {
+            "x": 10,
+            "y": 7
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 5,
+              "y": 5
+            },
+            "facing": "NW"
+          }
+        ],
+        "circuits": {
+          "reserve": false,
+          "deux-poids": true
+        },
+        "phases": []
+      },
+      {
+        "label": "wrong-distance-immerses-final-crate",
+        "afterTurn": 89,
+        "commands": "CRRRURX",
+        "meaning": "Décaler la caisse d’une case change sa distance de reflet : elle devient un appui dans l’eau voisine au lieu d’un poids sur l’île.",
+        "refused": false,
+        "dead": false,
+        "complete": false,
+        "heroes": [
+          {
+            "kind": "thief",
+            "at": {
+              "x": 6,
+              "y": 4
+            },
+            "facing": "E",
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 4,
+              "y": 7
+            },
+            "facing": "E",
+            "dead": false
+          }
+        ],
+        "stones": [],
+        "supports": [
+          {
+            "x": 5,
+            "y": 10
+          },
+          {
+            "x": 5,
+            "y": 3
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 5,
+              "y": 5
+            },
+            "facing": "NW"
+          }
+        ],
+        "circuits": {
+          "reserve": false,
+          "deux-poids": false
+        },
+        "phases": [
+          "reflect"
+        ]
+      }
+    ],
+    "proofScope": "Les branches locales et la route témoin établissent leurs seuls résultats exécutés. Elles ne prouvent ni unicité ni longueur minimale."
+  },
+  "difficultyNotes": {
+    "role": "Finale de conservation et de transport couplé, sans longueur minimale revendiquée.",
+    "resources": {
+      "dryCrates": 1,
+      "submergedSupports": 1,
+      "mobileMirrors": 1,
+      "finalWeights": 2
+    },
+    "referencePlanDependencies": [
+      "Conserver le miroir sur la réserve pendant la sortie de la seule caisse.",
+      "Déplacer la pierre dans le bras nord puis la ramener pour le miroir.",
+      "Préserver la caisse sèche pour le reflet vers son île.",
+      "Réutiliser le même miroir comme poids et comme angle de transport.",
+      "Faire franchir le bras nord aux deux héros avant de retirer son unique appui.",
+      "Acheminer la même pierre vers le troisième bras pour le départ final."
+    ],
+    "claimScope": "Ces dépendances décrivent le plan de référence. Le miroir sur la réserve et la caisse sur l’île peuvent être relayés temporairement par un héros dans des branches distinctes ; aucune unicité n’est revendiquée."
+  }
+}

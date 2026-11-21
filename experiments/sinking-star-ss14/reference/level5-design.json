@@ -1,0 +1,1057 @@
+{
+  "spec": {
+    "id": "ss14-05",
+    "title": "Les gardiens et le poids retiré",
+    "rows": [
+      "##################",
+      "##################",
+      "###m....##########",
+      "#######.##########",
+      "#..B....##########",
+      "#.#####.##########",
+      "#.####......#m####",
+      "#.####......#.####",
+      "#.oT........#.####",
+      "#.#.........#.####",
+      "#.o.#.......#.####",
+      "#...........#.####",
+      "##..........######",
+      "##.....#.#########",
+      "###....#.#########",
+      "###..##....#######",
+      "#######g..g#######",
+      "##################",
+      "##################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 6,
+          "y": 8
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 4
+          },
+          {
+            "x": 13,
+            "y": 11
+          },
+          {
+            "x": 4,
+            "y": 9
+          },
+          {
+            "x": 2,
+            "y": 11
+          },
+          {
+            "x": 10,
+            "y": 8
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 13
+        },
+        "circuit": "sortie",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRRRRDDRRRRDDDDDLLUDDLLLDLLLUUUUCRRDRRURRRRCDCDDDLLLLLLLLDDDDRUUUURUUURUURRRRRCRRUURRRDDDDRRCDDDDDDLLLDDDDL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 22,
+    "label": "Adaptation de Heroes 2: Monsters · énigme 22 · garder les poids vivants",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-22",
+    "objective": "Conserver les gardiens à leurs postes, placer les caisses et éloigner le chanteur en maintenant toutes les commandes.",
+    "secondary": {
+      "label": "Heroes 3: Bard, Druid · énigmes 18 et 19 · coins et niches",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-18"
+    }
+  },
+  "metrics": {
+    "actions": 107,
+    "selections": 6,
+    "thiefPulls": 10,
+    "bardSongs": 12,
+    "partnerSongs": 0,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 4,
+    "supportMoves": 0,
+    "partnerPulls": 4,
+    "stoneMoves": 4,
+    "mirrorMoves": 4,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le premier gardien suit le chant jusqu’au coude qui le retiendra sur sa commande",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "circuits": {
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le second gardien prend son poste ; les murs les maintiennent quand le Barde change d’axe",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Barde rejoint la niche avant que la caisse entre dans la dernière portée",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur prépare la caisse au-dessus de la poche inaccessible par traction",
+      "turn": 35,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le miroir obturateur est extrait et devient le dernier poids pour la porte",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le chant dépose les deux caisses sur leurs commandes : l’une au-dessus de la butée, l’autre encore mobile",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": true
+      }
+    },
+    {
+      "label": "Le Voleur éloigne le Barde des deux caisses sans déclencher de chant ni retirer un poids",
+      "turn": 61,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 15
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": true
+      }
+    },
+    {
+      "label": "Le Voleur quitte la portée du chemin de retour du Barde",
+      "turn": 78,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": true
+      }
+    },
+    {
+      "label": "Le Barde rejoint sa destination en conservant les deux gardiens vivants",
+      "turn": 92,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": true
+      }
+    },
+    {
+      "label": "Les cinq poids restent en place pendant l’arrivée du second partenaire",
+      "turn": 107,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 3,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "sortie": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Deux monstres et une caisse servent de poids conservés sur des commandes.",
+      "Les coins et les butées permettent au Barde de changer d’axe sans déplacer un gardien déjà installé.",
+      "La cargaison reçoit un placement en niche que la traction seule ne peut pas effectuer."
+    ],
+    "changed": [
+      "Le Voleur prépare une caisse et déplace un miroir qui devient un poids de commande.",
+      "Une seconde caisse interdit au Barde de repartir simplement vers le bas en profitant de la butée.",
+      "Le départ du Barde hors de la niche est une traction forcée sans chant.",
+      "Les échanges de la source sont remplacés par les chants, les blocages locaux et les deux capacités présentes dans SS14."
+    ],
+    "sourceReading": "Monsters 22 fournit les deux poids vivants et la caisse de commande. Heroes 3 énigmes 18 et 19 fournissent les coins de guidage et le travail des niches. La géométrie à cinq poids et le relais final du Voleur sont originaux.",
+    "localChecks": [
+      {
+        "turn": 45,
+        "alternative": "D",
+        "effect": "Descendre volontairement retire le second poids tandis que la caisse de la poche reste bloquée.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 1,
+          "supports": [],
+          "platformActive": [],
+          "sortie": false
+        }
+      },
+      {
+        "turn": 45,
+        "alternative": "U",
+        "effect": "Remonter volontairement retire les deux caisses de leurs commandes.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 1,
+          "supports": [],
+          "platformActive": [],
+          "sortie": false
+        }
+      },
+      {
+        "turn": 45,
+        "alternative": "L",
+        "effect": "Partir à gauche retire les deux caisses de leurs commandes.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 1,
+          "supports": [],
+          "platformActive": [],
+          "sortie": false
+        }
+      },
+      {
+        "turn": 45,
+        "alternative": "R",
+        "effect": "Le départ à droite rencontre le fond de la poche et est refusé. Les quatre départs immédiats sont ainsi bloqués ou défont une commande, sans preuve d’unicité globale.",
+        "observed": {
+          "refusals": 1,
+          "dead": false,
+          "mirrors": 1,
+          "supports": [],
+          "platformActive": [],
+          "sortie": true
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales du parcours auteur ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}

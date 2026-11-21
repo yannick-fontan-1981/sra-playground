@@ -1,0 +1,675 @@
+{
+  "spec": {
+    "id": "ss14-02",
+    "title": "La relève silencieuse",
+    "rows": [
+      "####################",
+      "####################",
+      "#########..#.#..####",
+      "#.o.....#.......####",
+      "#########..........#",
+      "#.B............#g..#",
+      "#.#######......#...#",
+      "#.o.....#......#..g#",
+      "#.####.........#####",
+      "######.........#####",
+      "######T.....o..#####",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "rails",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 7
+          }
+        ],
+        "color": 11
+      },
+      {
+        "id": "alcove",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 2
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "circuit": "rails",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 4
+        },
+        "circuit": "alcove",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRRRCUURRRUUULLLRRRRRDCURRRRCLDDDDLUUUUUULDDDDDLCUURDDRDDDRRCUUUURRRRRRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 14,
+    "label": "Adaptation de Heroes 3: Bard, Druid · énigme 14 · deux poids à conserver",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14",
+    "objective": "Maintenir les deux rails, transporter le partenaire et préparer la commande reculée de la sortie.",
+    "secondary": {
+      "label": "Heroes 3: Bard, Druid · énigme 19 · commande en alcôve",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-19"
+    }
+  },
+  "metrics": {
+    "actions": 72,
+    "selections": 6,
+    "thiefPulls": 11,
+    "bardSongs": 9,
+    "partnerSongs": 4,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 5,
+    "supportMoves": 0,
+    "partnerPulls": 5,
+    "stoneMoves": 14,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le chant place deux poids au milieu de leurs rails ; les déplacer encore retirerait la commande",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true,
+        "alcove": false
+      }
+    },
+    {
+      "label": "Le Voleur remorque le Barde sans chant à travers la porte maintenue",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true,
+        "alcove": false
+      }
+    },
+    {
+      "label": "La troisième caisse remonte vers une alcôve sans case de traction au nord",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true,
+        "alcove": false
+      }
+    },
+    {
+      "label": "Le Voleur libère la zone du dernier chant",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true,
+        "alcove": false
+      }
+    },
+    {
+      "label": "Le chant à travers le mur dépose le poids dans l’alcôve",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true,
+        "alcove": true
+      }
+    },
+    {
+      "label": "Le Barde sort de la portée du poids avant de descendre vers sa destination",
+      "turn": 60,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true,
+        "alcove": true
+      }
+    },
+    {
+      "label": "Le partenaire rejoint la seconde destination en laissant les trois poids en place",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 12,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true,
+        "alcove": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Deux poids restent sur leurs plaques pendant le déplacement imposé du Barde.",
+      "Le placement du chanteur autour d’une niche permet de déplacer une cargaison inaccessible par traction directe."
+    ],
+    "changed": [
+      "Le Voleur remorque le Barde depuis l’avant au lieu d’une poussée de Guerrier.",
+      "Les poids sont des caisses ; une troisième caisse et une alcôve composent une seconde relève.",
+      "La portée carrée de deux cases traverse les murs, selon le contrat SS14."
+    ],
+    "sourceReading": "Heroes 3 énigme 14 inspire le maintien de deux poids par départ sans chant. L’énigme 19 inspire le travail de cargaison autour d’une niche. La carte et l’enchaînement sont originaux, sans empilement ni déplacement double.",
+    "localChecks": [
+      {
+        "turn": 4,
+        "alternative": "R",
+        "effect": "Un pas volontaire supplémentaire du Barde retire les deux poids et ferme la porte des rails.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 0,
+          "supports": [],
+          "platformActive": [],
+          "rails": false,
+          "alcove": false
+        }
+      },
+      {
+        "turn": 51,
+        "alternative": "D",
+        "effect": "Descendre immédiatement après le dépôt retire la caisse de l’alcôve ; le départ latéral retenu dans le parcours la conserve.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 0,
+          "supports": [],
+          "platformActive": [],
+          "rails": true,
+          "alcove": false
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales du parcours auteur ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}

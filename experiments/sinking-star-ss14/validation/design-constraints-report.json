@@ -1,0 +1,8282 @@
+{
+  "schemaVersion": 1,
+  "success": true,
+  "scope": "Independent final-room local counterfactuals and isolated reflection geometry.",
+  "requiredLevels": [
+    7,
+    8
+  ],
+  "limitations": [
+    "Author witnesses and their action counts are existence checks, not difficulty or optimality proofs.",
+    "Successful local substitutions are reported as successes, not suppressed to preserve the intended solution.",
+    "Failed branches establish only the actions and states shown; no global necessity or unsolvability is inferred.",
+    "The reflection boundary probe uses explicitly synthetic supports and poses; it is limited to one reflection while the final gate is closed.",
+    "No BFS, state cap or time limit is used as evidence of necessity.",
+    "These artifacts are author validation only and are never part of SRA observations."
+  ],
+  "sources": [
+    {
+      "level": 7,
+      "path": "reference/level7-design.json",
+      "sha256": "6ad4e4b31446264f4d3dca12f3bf56d63371900cb72f29bfdac9ad334cd867ec"
+    },
+    {
+      "level": 8,
+      "path": "reference/level8-design.json",
+      "sha256": "bc781153bb7fec3e84fcfb16b64e98b026d7f6a7fac4f61c511698b50dfbd31d"
+    }
+  ],
+  "witnesses": [
+    {
+      "level": 7,
+      "actions": 195,
+      "commands": 195,
+      "complete": true,
+      "refusals": 0,
+      "deaths": 0,
+      "scope": "Executed author route; neither a lower bound nor an optimality certificate."
+    },
+    {
+      "level": 8,
+      "actions": 289,
+      "commands": 289,
+      "complete": true,
+      "refusals": 0,
+      "deaths": 0,
+      "scope": "Executed author route; neither a lower bound nor an optimality certificate."
+    }
+  ],
+  "passed": 24,
+  "total": 24,
+  "checks": [
+    {
+      "id": "l7-initial-reflection-refuses",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Dans la disposition initiale testée, X ne trouve aucun transfert et ne déplace aucun occupant.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 0,
+        "commands": "X",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 17
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 14
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "X",
+            "action": {
+              "id": 5
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 17
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 14
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-early-mirror-removal-closes-reserve",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Cette traction précoce retire le miroir de sa commande et ferme la réserve avant extraction de la caisse.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 0,
+        "commands": "LUUURU",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 17
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 14
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 17
+                },
+                "to": {
+                  "x": 4,
+                  "y": 17
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 17
+                },
+                "to": {
+                  "x": 4,
+                  "y": 16
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 16
+                },
+                "to": {
+                  "x": 4,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 15
+                },
+                "to": {
+                  "x": 4,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 14
+                },
+                "to": {
+                  "x": 5,
+                  "y": 14
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 3,
+                  "y": 14
+                },
+                "to": {
+                  "x": 4,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull",
+              "gate"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 14
+                },
+                "to": {
+                  "x": 5,
+                  "y": 13
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 5,
+                  "y": 15
+                },
+                "to": {
+                  "x": 5,
+                  "y": 14
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 13
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 4,
+                "y": 14
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 14
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": false,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-bard-can-substitute-for-reserve-mirror",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Le Barde peut réellement remplacer le miroir comme poids temporaire de la réserve. Cette branche ne gagne pas le niveau.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 0,
+        "commands": "LUUURUCDR",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 17
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 14
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 17
+                },
+                "to": {
+                  "x": 4,
+                  "y": 17
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 17
+                },
+                "to": {
+                  "x": 4,
+                  "y": 16
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 16
+                },
+                "to": {
+                  "x": 4,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 15
+                },
+                "to": {
+                  "x": 4,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 14
+                },
+                "to": {
+                  "x": 5,
+                  "y": 14
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 3,
+                  "y": 14
+                },
+                "to": {
+                  "x": 4,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull",
+              "gate"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 14
+                },
+                "to": {
+                  "x": 5,
+                  "y": 13
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 5,
+                  "y": 15
+                },
+                "to": {
+                  "x": 5,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "C",
+            "action": {
+              "id": 6,
+              "data": {
+                "x": 15,
+                "y": 45
+              }
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 14
+                },
+                "to": {
+                  "x": 4,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "song",
+              "gate"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 15
+                },
+                "to": {
+                  "x": 5,
+                  "y": 15
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 13
+                },
+                "to": {
+                  "x": 6,
+                  "y": 13
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 6,
+                "y": 13
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 14
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-original-crossing-refuses-after-support-departure",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Quand l’appui dessert le bras nord, cette approche du Voleur refuse le pas vers l’ancien passage (5,10). Aucune impossibilité de récupération n’est déduite.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 20,
+        "commands": "CRUUUUUULU",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 17
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 8,
+                "y": 4
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 10,
+              "y": 5
+            }
+          ],
+          "monsters": [],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "C",
+            "action": {
+              "id": 6,
+              "data": {
+                "x": 18,
+                "y": 54
+              }
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 17
+                },
+                "to": {
+                  "x": 6,
+                  "y": 17
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 17
+                },
+                "to": {
+                  "x": 6,
+                  "y": 16
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 16
+                },
+                "to": {
+                  "x": 6,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 15
+                },
+                "to": {
+                  "x": 6,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 14
+                },
+                "to": {
+                  "x": 6,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 13
+                },
+                "to": {
+                  "x": 6,
+                  "y": 12
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 12
+                },
+                "to": {
+                  "x": 6,
+                  "y": 11
+                }
+              }
+            ]
+          },
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 11
+                },
+                "to": {
+                  "x": 5,
+                  "y": 11
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 11
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 8,
+                "y": 4
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 10,
+              "y": 5
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-support-cannot-be-sung-onto-dry-bank",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Le pas gauche du Barde réussit mais l’appui reste sur l’eau (10,5), sa destination (9,5) étant sèche.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 20,
+        "commands": "L",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 17
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 8,
+                "y": 4
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 10,
+              "y": 5
+            }
+          ],
+          "monsters": [],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 8,
+                  "y": 4
+                },
+                "to": {
+                  "x": 7,
+                  "y": 4
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 17
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 7,
+                "y": 4
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 15,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 10,
+              "y": 5
+            }
+          ],
+          "monsters": [],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": true,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-sacrificed-crate-becomes-support",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Cette branche transforme la seule caisse sèche en appui isolé (4,2). Le pas suivant ne le fait pas remonter sur l’île sèche (5,2).",
+      "evidence": {
+        "immersion": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 41,
+          "commands": "RUUUR",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 5,
+                  "y": 17
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 0,
+                  "y": 5
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 2,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 15
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 5
+              }
+            ],
+            "monsters": [],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              true
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": true,
+              "deux-poids": false
+            }
+          },
+          "steps": [
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 0,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 5
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 2,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 4
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 3
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 3
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 3
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 2
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 3
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 2
+                  }
+                }
+              ]
+            },
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 2
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 2
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 2
+                  },
+                  "to": {
+                    "x": 4,
+                    "y": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 5,
+                  "y": 17
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 2,
+                  "y": 2
+                },
+                "dead": false
+              }
+            ],
+            "stones": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 15
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 4,
+                "y": 2
+              }
+            ],
+            "monsters": [],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              true
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": true,
+              "deux-poids": false
+            }
+          }
+        },
+        "nextStep": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 41,
+          "commands": "RUUURR",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 5,
+                  "y": 17
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 0,
+                  "y": 5
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 2,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 15
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 5
+              }
+            ],
+            "monsters": [],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              true
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": true,
+              "deux-poids": false
+            }
+          },
+          "steps": [
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 0,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 5
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 2,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 4
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 3
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 3
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 3
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 2
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 3
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 2
+                  }
+                }
+              ]
+            },
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 2
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 2
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 3,
+                    "y": 2
+                  },
+                  "to": {
+                    "x": 4,
+                    "y": 2
+                  }
+                }
+              ]
+            },
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 2,
+                    "y": 2
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 5,
+                  "y": 17
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 3,
+                  "y": 2
+                },
+                "dead": false
+              }
+            ],
+            "stones": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 15
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 4,
+                "y": 2
+              }
+            ],
+            "monsters": [],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              true
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": true,
+              "deux-poids": false
+            }
+          }
+        },
+        "scope": "A resource conversion and one attempted dry-bank slide, not a global unsolvability result."
+      }
+    },
+    {
+      "id": "l7-occupied-support-anchors-during-song",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Le pas latéral testé du Barde garde l’appui sous le Voleur ; le mur retient aussi le partenaire. Aucun pouvoir ne se déclenche sur le miroir.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 77,
+        "commands": "CL",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 2,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": false,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "C",
+            "action": {
+              "id": 6,
+              "data": {
+                "x": 12,
+                "y": 27
+              }
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 3,
+                  "y": 8
+                },
+                "to": {
+                  "x": 2,
+                  "y": 8
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 2,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 2,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "bard",
+          "gateClosed": [
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": false,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-early-reflection-is-legal-and-changes-river-bank",
+      "level": 7,
+      "status": "PASS",
+      "claim": "X est légal à ce point précoce : il ramène le Voleur en (4,11), côté sud-ouest, sans ouvrir la porte finale.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 77,
+        "commands": "X",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 2,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": false,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "X",
+            "action": {
+              "id": 5
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "reflect"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 10
+                },
+                "to": {
+                  "x": 4,
+                  "y": 11
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 4,
+                "y": 11
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 2,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": false,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-mirror-haul-toward-island-refuses-at-water",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Depuis la position du miroir réemployé, le Voleur ne peut pas le tracter au nord : son arrivée (5,3) n’a aucun appui dans cette branche.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 89,
+        "commands": "LU",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 6,
+                "y": 4
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 0,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 2,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 5
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": false,
+            "deux-poids": false
+          }
+        },
+        "steps": [
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 4
+                },
+                "to": {
+                  "x": 5,
+                  "y": 4
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 4
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 0,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 2,
+              "y": 5
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 5,
+                "y": 5
+              },
+              "facing": "NW"
+            }
+          ],
+          "supports": [
+            {
+              "x": 5,
+              "y": 10
+            }
+          ],
+          "monsters": [],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "reserve": false,
+            "deux-poids": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l7-hero-can-temporarily-replace-crate-on-island",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Après dégagement de la caisse, le Voleur est le plus proche du miroir et atteint l’île par reflet. Il ouvre la porte comme poids temporaire ; le reflet retour la referme.",
+      "evidence": {
+        "weight": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 89,
+          "commands": "CRRULCLLLDLX",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 6,
+                  "y": 4
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 0,
+                  "y": 8
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 2,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 5,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "active": "thief",
+            "gateClosed": [
+              true,
+              true
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": false,
+              "deux-poids": false
+            }
+          },
+          "steps": [
+            {
+              "command": "C",
+              "action": {
+                "id": 6,
+                "data": {
+                  "x": 3,
+                  "y": 27
+                }
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [],
+              "moves": []
+            },
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 0,
+                    "y": 8
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 8
+                  }
+                }
+              ]
+            },
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 8
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 8
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 2,
+                    "y": 8
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 7
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 2,
+                    "y": 7
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 7
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 2,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "C",
+              "action": {
+                "id": 6,
+                "data": {
+                  "x": 21,
+                  "y": 15
+                }
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [],
+              "moves": []
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 6,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 4,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 4,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 3,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 3,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "X",
+              "action": {
+                "id": 5
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "reflect",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 2,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 2
+                  }
+                }
+              ]
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 1,
+                  "y": 7
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 1,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 5,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "active": "thief",
+            "gateClosed": [
+              true,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": false,
+              "deux-poids": true
+            }
+          }
+        },
+        "departure": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 89,
+          "commands": "CRRULCLLLDLXX",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 6,
+                  "y": 4
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 0,
+                  "y": 8
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 2,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 5,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "active": "thief",
+            "gateClosed": [
+              true,
+              true
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": false,
+              "deux-poids": false
+            }
+          },
+          "steps": [
+            {
+              "command": "C",
+              "action": {
+                "id": 6,
+                "data": {
+                  "x": 3,
+                  "y": 27
+                }
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [],
+              "moves": []
+            },
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 0,
+                    "y": 8
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 8
+                  }
+                }
+              ]
+            },
+            {
+              "command": "R",
+              "action": {
+                "id": 4
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 1,
+                    "y": 8
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 8
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 2,
+                    "y": 8
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 7
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 2,
+                    "y": 7
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 7
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 2,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 1,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "C",
+              "action": {
+                "id": 6,
+                "data": {
+                  "x": 21,
+                  "y": 15
+                }
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [],
+              "moves": []
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 6,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 4,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 4,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 4
+                  }
+                }
+              ]
+            },
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 3,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 3,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "L",
+              "action": {
+                "id": 3
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "walk"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 3,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "command": "X",
+              "action": {
+                "id": 5
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "reflect",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 2,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 2
+                  }
+                }
+              ]
+            },
+            {
+              "command": "X",
+              "action": {
+                "id": 5
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "reflect",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 2
+                  },
+                  "to": {
+                    "x": 2,
+                    "y": 5
+                  }
+                }
+              ]
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 2,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 1,
+                  "y": 7
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 1,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              }
+            ],
+            "supports": [
+              {
+                "x": 5,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "active": "thief",
+            "gateClosed": [
+              true,
+              true
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "reserve": false,
+              "deux-poids": false
+            }
+          }
+        },
+        "scope": "Executed temporary substitution. No alternative winning route is asserted."
+      }
+    },
+    {
+      "id": "l7-no-direct-nw-reflection-through-closed-chamber-boundary",
+      "level": 7,
+      "status": "PASS",
+      "claim": "Aucun des couples géométriques testés ne fournit un reflet NW direct depuis l’extérieur vers la chambre finale fermée.",
+      "evidence": {
+        "kind": "exhaustive-single-reflection-geometry-with-synthetic-supports",
+        "facing": "NW",
+        "finalGate": {
+          "x": 15,
+          "y": 16
+        },
+        "chamberCells": 18,
+        "mirrorPlacements": 339,
+        "candidates": 23,
+        "accepted": [],
+        "rejected": [
+          {
+            "mirror": {
+              "x": 18,
+              "y": 13
+            },
+            "from": {
+              "x": 18,
+              "y": 11
+            },
+            "to": {
+              "x": 16,
+              "y": 13
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 15
+            },
+            "from": {
+              "x": 14,
+              "y": 15
+            },
+            "to": {
+              "x": 16,
+              "y": 13
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 16
+            },
+            "from": {
+              "x": 15,
+              "y": 16
+            },
+            "to": {
+              "x": 16,
+              "y": 15
+            },
+            "distance": 1
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 16
+            },
+            "from": {
+              "x": 14,
+              "y": 16
+            },
+            "to": {
+              "x": 16,
+              "y": 14
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 16
+            },
+            "from": {
+              "x": 13,
+              "y": 16
+            },
+            "to": {
+              "x": 16,
+              "y": 13
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 17,
+              "y": 16
+            },
+            "from": {
+              "x": 15,
+              "y": 16
+            },
+            "to": {
+              "x": 17,
+              "y": 14
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 17,
+              "y": 16
+            },
+            "from": {
+              "x": 14,
+              "y": 16
+            },
+            "to": {
+              "x": 17,
+              "y": 13
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 18,
+              "y": 16
+            },
+            "from": {
+              "x": 15,
+              "y": 16
+            },
+            "to": {
+              "x": 18,
+              "y": 13
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 17
+            },
+            "from": {
+              "x": 14,
+              "y": 17
+            },
+            "to": {
+              "x": 16,
+              "y": 15
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 17
+            },
+            "from": {
+              "x": 13,
+              "y": 17
+            },
+            "to": {
+              "x": 16,
+              "y": 14
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 17
+            },
+            "from": {
+              "x": 12,
+              "y": 17
+            },
+            "to": {
+              "x": 16,
+              "y": 13
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 17,
+              "y": 17
+            },
+            "from": {
+              "x": 14,
+              "y": 17
+            },
+            "to": {
+              "x": 17,
+              "y": 14
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 17,
+              "y": 17
+            },
+            "from": {
+              "x": 13,
+              "y": 17
+            },
+            "to": {
+              "x": 17,
+              "y": 13
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 18,
+              "y": 17
+            },
+            "from": {
+              "x": 14,
+              "y": 17
+            },
+            "to": {
+              "x": 18,
+              "y": 13
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 18
+            },
+            "from": {
+              "x": 14,
+              "y": 18
+            },
+            "to": {
+              "x": 16,
+              "y": 16
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 18
+            },
+            "from": {
+              "x": 13,
+              "y": 18
+            },
+            "to": {
+              "x": 16,
+              "y": 15
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 18
+            },
+            "from": {
+              "x": 12,
+              "y": 18
+            },
+            "to": {
+              "x": 16,
+              "y": 14
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 18
+            },
+            "from": {
+              "x": 11,
+              "y": 18
+            },
+            "to": {
+              "x": 16,
+              "y": 13
+            },
+            "distance": 5
+          },
+          {
+            "mirror": {
+              "x": 17,
+              "y": 18
+            },
+            "from": {
+              "x": 14,
+              "y": 18
+            },
+            "to": {
+              "x": 17,
+              "y": 15
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 17,
+              "y": 18
+            },
+            "from": {
+              "x": 13,
+              "y": 18
+            },
+            "to": {
+              "x": 17,
+              "y": 14
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 17,
+              "y": 18
+            },
+            "from": {
+              "x": 12,
+              "y": 18
+            },
+            "to": {
+              "x": 17,
+              "y": 13
+            },
+            "distance": 5
+          },
+          {
+            "mirror": {
+              "x": 18,
+              "y": 18
+            },
+            "from": {
+              "x": 14,
+              "y": 18
+            },
+            "to": {
+              "x": 18,
+              "y": 14
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 18,
+              "y": 18
+            },
+            "from": {
+              "x": 13,
+              "y": 18
+            },
+            "to": {
+              "x": 18,
+              "y": 13
+            },
+            "distance": 5
+          }
+        ],
+        "scope": "Tests one reflection in the stated orientation with the final gate closed. Does not establish route optimality, global necessity, reachability of synthetic placements or absence of other multi-action strategies."
+      }
+    },
+    {
+      "id": "l8-voluntary-departure-moves-living-weights",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Après le premier accord, un pas volontaire du Barde déplace les deux gardiens et retire le pont provisoire.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 3,
+        "commands": "D",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 5
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        },
+        "steps": [
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "song",
+              "gate",
+              "platform"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 5
+                },
+                "to": {
+                  "x": 5,
+                  "y": 6
+                }
+              },
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 3,
+                  "y": 5
+                },
+                "to": {
+                  "x": 3,
+                  "y": 6
+                }
+              },
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 7,
+                  "y": 5
+                },
+                "to": {
+                  "x": 7,
+                  "y": 6
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 6
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 6
+            },
+            {
+              "x": 7,
+              "y": 6
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-forced-departure-keeps-living-weights",
+      "level": 8,
+      "status": "PASS",
+      "claim": "La sortie forcée exécutée conserve les deux gardiens sur leurs commandes et le pont actif, sans chant récursif.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 3,
+        "commands": "CUUUUDDD",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 5
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        },
+        "steps": [
+          {
+            "command": "C",
+            "action": {
+              "id": 6,
+              "data": {
+                "x": 18,
+                "y": 33
+              }
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 10
+                },
+                "to": {
+                  "x": 5,
+                  "y": 9
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 9
+                },
+                "to": {
+                  "x": 5,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 8
+                },
+                "to": {
+                  "x": 5,
+                  "y": 7
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 7
+                },
+                "to": {
+                  "x": 5,
+                  "y": 6
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 6
+                },
+                "to": {
+                  "x": 5,
+                  "y": 7
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 5
+                },
+                "to": {
+                  "x": 5,
+                  "y": 6
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 7
+                },
+                "to": {
+                  "x": 5,
+                  "y": 8
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 6
+                },
+                "to": {
+                  "x": 5,
+                  "y": 7
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 8
+                },
+                "to": {
+                  "x": 5,
+                  "y": 9
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 7
+                },
+                "to": {
+                  "x": 5,
+                  "y": 8
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 9
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-north-mirror-extraction-is-returned-by-press",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Cette extraction latérale testée est suivie d’une presse qui ramène le miroir sur sa commande initiale.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 0,
+        "commands": "DRDDU",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 3
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        },
+        "steps": [
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 10
+                },
+                "to": {
+                  "x": 5,
+                  "y": 11
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 11
+                },
+                "to": {
+                  "x": 6,
+                  "y": 11
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 11
+                },
+                "to": {
+                  "x": 6,
+                  "y": 12
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 12
+                },
+                "to": {
+                  "x": 6,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull",
+              "piston",
+              "gate",
+              "gate"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 13
+                },
+                "to": {
+                  "x": 6,
+                  "y": 12
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 6,
+                  "y": 14
+                },
+                "to": {
+                  "x": 6,
+                  "y": 13
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 6,
+                  "y": 13
+                },
+                "to": {
+                  "x": 6,
+                  "y": 14
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 6,
+                "y": 12
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 3
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-south-mirror-extraction-is-returned-by-press",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Cette extraction latérale testée est suivie d’une presse qui ramène le miroir sur sa commande initiale.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 0,
+        "commands": "LDDDDDRRD",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 3
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        },
+        "steps": [
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 10
+                },
+                "to": {
+                  "x": 4,
+                  "y": 10
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 10
+                },
+                "to": {
+                  "x": 4,
+                  "y": 11
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 11
+                },
+                "to": {
+                  "x": 4,
+                  "y": 12
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 12
+                },
+                "to": {
+                  "x": 4,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 13
+                },
+                "to": {
+                  "x": 4,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 14
+                },
+                "to": {
+                  "x": 4,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 15
+                },
+                "to": {
+                  "x": 5,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 15
+                },
+                "to": {
+                  "x": 6,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull",
+              "piston",
+              "gate",
+              "gate"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 15
+                },
+                "to": {
+                  "x": 6,
+                  "y": 16
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 6,
+                  "y": 14
+                },
+                "to": {
+                  "x": 6,
+                  "y": 15
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 6,
+                  "y": 15
+                },
+                "to": {
+                  "x": 6,
+                  "y": 14
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 6,
+                "y": 16
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 3
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 14,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 16
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 3
+            },
+            {
+              "x": 7,
+              "y": 3
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": true,
+            "charge": false,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-loaded-west-song-refuses",
+      "level": 8,
+      "status": "PASS",
+      "claim": "À ce point de chargement, le pas ouest du Barde est refusé et la caisse reste sur la presse. Ce seul refus n’établit aucune nécessité globale de la presse.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 112,
+        "commands": "L",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 15,
+                "y": 16
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 11,
+                "y": 12
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 11,
+              "y": 14
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": true,
+            "charge": true,
+            "dernier-accord": false
+          }
+        },
+        "steps": [
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 15,
+                "y": 16
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 11,
+                "y": 12
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 11,
+              "y": 14
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": true,
+            "charge": true,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-loaded-south-song-is-a-valid-alternative-preparation",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Le départ sud est légal : il déplace la caisse et le premier appui et libère la commande de charge. Un retour nord rétablit les positions et commandes initiales.",
+      "evidence": {
+        "departure": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 112,
+          "commands": "D",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 12
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 14
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": true,
+              "dernier-accord": false
+            }
+          },
+          "steps": [
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 12
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 13
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 11,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 15
+                  }
+                },
+                {
+                  "actor": "support",
+                  "from": {
+                    "x": 9,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 9,
+                    "y": 15
+                  }
+                }
+              ]
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 13
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 15
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 15
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              false,
+              true,
+              false,
+              true,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": false,
+              "dernier-accord": false
+            }
+          }
+        },
+        "return": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 112,
+          "commands": "DU",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 12
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 14
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": true,
+              "dernier-accord": false
+            }
+          },
+          "steps": [
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 12
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 13
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 11,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 15
+                  }
+                },
+                {
+                  "actor": "support",
+                  "from": {
+                    "x": 9,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 9,
+                    "y": 15
+                  }
+                }
+              ]
+            },
+            {
+              "command": "U",
+              "action": {
+                "id": 1
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 13
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 12
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 11,
+                    "y": 15
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 14
+                  }
+                },
+                {
+                  "actor": "support",
+                  "from": {
+                    "x": 9,
+                    "y": 15
+                  },
+                  "to": {
+                    "x": 9,
+                    "y": 14
+                  }
+                }
+              ]
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 12
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 14
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": true,
+              "dernier-accord": false
+            }
+          }
+        },
+        "scope": "Successful alternative local preparation and reversal, without an alternative winning route."
+      }
+    },
+    {
+      "id": "l8-bard-can-temporarily-substitute-for-loaded-crate",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Un second pas sud place le Barde lui-même sur la commande de charge ; la caisse reste en (11,15) et l’appui avance en (9,16). Le reflet immédiat testé est refusé.",
+      "evidence": {
+        "substitution": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 112,
+          "commands": "DD",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 12
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 14
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": true,
+              "dernier-accord": false
+            }
+          },
+          "steps": [
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 12
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 13
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 11,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 15
+                  }
+                },
+                {
+                  "actor": "support",
+                  "from": {
+                    "x": 9,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 9,
+                    "y": 15
+                  }
+                }
+              ]
+            },
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 13
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 14
+                  }
+                },
+                {
+                  "actor": "support",
+                  "from": {
+                    "x": 9,
+                    "y": 15
+                  },
+                  "to": {
+                    "x": 9,
+                    "y": 16
+                  }
+                }
+              ]
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 15
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 16
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": true,
+              "dernier-accord": false
+            }
+          }
+        },
+        "reflection": {
+          "kind": "executed-author-prefix-branch",
+          "afterTurn": 112,
+          "commands": "DDX",
+          "startingState": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 12
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 14
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": true,
+              "dernier-accord": false
+            }
+          },
+          "steps": [
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 12
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 13
+                  }
+                },
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 11,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 15
+                  }
+                },
+                {
+                  "actor": "support",
+                  "from": {
+                    "x": 9,
+                    "y": 14
+                  },
+                  "to": {
+                    "x": 9,
+                    "y": 15
+                  }
+                }
+              ]
+            },
+            {
+              "command": "D",
+              "action": {
+                "id": 2
+              },
+              "refused": false,
+              "dead": false,
+              "phases": [
+                "song",
+                "gate"
+              ],
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 13
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 14
+                  }
+                },
+                {
+                  "actor": "support",
+                  "from": {
+                    "x": 9,
+                    "y": 15
+                  },
+                  "to": {
+                    "x": 9,
+                    "y": 16
+                  }
+                }
+              ]
+            },
+            {
+              "command": "X",
+              "action": {
+                "id": 5
+              },
+              "refused": true,
+              "dead": false,
+              "phases": [],
+              "moves": []
+            }
+          ],
+          "result": {
+            "heroes": [
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 11,
+                "y": 15
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 6,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 16
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "active": "bard",
+            "gateClosed": [
+              false,
+              false,
+              false,
+              true,
+              true,
+              true,
+              true,
+              true,
+              false,
+              false,
+              true,
+              true,
+              true
+            ],
+            "platformActive": [
+              true,
+              true,
+              false,
+              false,
+              false,
+              false,
+              false
+            ],
+            "dead": false,
+            "complete": false,
+            "circuits": {
+              "choeur": true,
+              "presse": true,
+              "charge": true,
+              "dernier-accord": false
+            }
+          }
+        },
+        "scope": "A real temporary actor/weight substitution; no impossibility of later recovery is inferred."
+      }
+    },
+    {
+      "id": "l8-loaded-cascade-creates-support-and-transports-mirror",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Dans cette cascade exécutée, la reprise du miroir immerge la caisse en (10,14), pousse le miroir en (8,14) et le Voleur sur l’appui (9,14), puis déploie le parvis hydraulique.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 159,
+        "commands": "R",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 7,
+                "y": 14
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 11,
+              "y": 14
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": true,
+            "charge": true,
+            "dernier-accord": false
+          }
+        },
+        "steps": [
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "pull",
+              "piston",
+              "piston",
+              "platform"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 7,
+                  "y": 14
+                },
+                "to": {
+                  "x": 8,
+                  "y": 14
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 6,
+                  "y": 14
+                },
+                "to": {
+                  "x": 7,
+                  "y": 14
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 11,
+                  "y": 14
+                },
+                "to": {
+                  "x": 10,
+                  "y": 14
+                }
+              },
+              {
+                "actor": "mirror",
+                "from": {
+                  "x": 7,
+                  "y": 14
+                },
+                "to": {
+                  "x": 8,
+                  "y": 14
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 8,
+                  "y": 14
+                },
+                "to": {
+                  "x": 9,
+                  "y": 14
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 9,
+                "y": 14
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-omitting-first-reflection-drowns-thief-in-replayed-cascade",
+      "level": 8,
+      "status": "PASS",
+      "claim": "En omettant uniquement le premier X et en rejouant cette séquence précise jusqu’à la reprise du miroir, le Voleur meurt sur (9,14), tandis que le second appui est créé.",
+      "evidence": {
+        "kind": "executed-witness-with-one-action-omitted",
+        "omittedAction": "first X",
+        "commands": "CDDCUUUUDDDCDDDDLLLLCRUUUUURRRRRRRRRUURRRDDDLULLLLLLLLLDRDDDRURCUUUURRRRRRRRRRDDDRDRCUUURRRRDDDDDDDRRUURDDDRCLLCUUUUULLLLUURRRCUULLLLLLCULLLLLLDDDLDLDLLDDRRRUR",
+        "firstHarmAt": 159,
+        "refusals": 0,
+        "deaths": 1,
+        "beforeCascade": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 7,
+                "y": 14
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 6,
+              "y": 12
+            },
+            {
+              "x": 11,
+              "y": 14
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 6,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            false,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": true,
+            "charge": true,
+            "dernier-accord": false
+          }
+        },
+        "afterCascade": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 9,
+                "y": 14
+              },
+              "dead": true
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 8
+              },
+              "dead": false
+            }
+          ],
+          "stones": [
+            {
+              "x": 6,
+              "y": 12
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": true,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": false
+          }
+        },
+        "phases": [
+          "pull",
+          "piston",
+          "piston",
+          "platform"
+        ],
+        "scope": "Only this edited sequence is shown to fail. Other bridge preparations are not ruled out."
+      }
+    },
+    {
+      "id": "l8-retuning-while-partner-waits-on-bridge-drowns-him",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Cette branche place le Voleur sur le pont provisoire avant le changement de poste des gardiens ; le premier pas du Barde retire son appui hydraulique et le noie.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 202,
+        "commands": "LLLLDDDDDDRRRRRRRRCD",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 5,
+                "y": 2
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 3
+              },
+              "dead": false
+            }
+          ],
+          "stones": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 14,
+                "y": 4
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 7,
+              "y": 5
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            true,
+            true,
+            true
+          ],
+          "platformActive": [
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": true,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": false
+          }
+        },
+        "steps": [
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 2
+                },
+                "to": {
+                  "x": 4,
+                  "y": 2
+                }
+              }
+            ]
+          },
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 2
+                },
+                "to": {
+                  "x": 3,
+                  "y": 2
+                }
+              }
+            ]
+          },
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 3,
+                  "y": 2
+                },
+                "to": {
+                  "x": 2,
+                  "y": 2
+                }
+              }
+            ]
+          },
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 2,
+                  "y": 2
+                },
+                "to": {
+                  "x": 1,
+                  "y": 2
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 1,
+                  "y": 2
+                },
+                "to": {
+                  "x": 1,
+                  "y": 3
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 1,
+                  "y": 3
+                },
+                "to": {
+                  "x": 1,
+                  "y": 4
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 1,
+                  "y": 4
+                },
+                "to": {
+                  "x": 1,
+                  "y": 5
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 1,
+                  "y": 5
+                },
+                "to": {
+                  "x": 1,
+                  "y": 6
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 1,
+                  "y": 6
+                },
+                "to": {
+                  "x": 1,
+                  "y": 7
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 1,
+                  "y": 7
+                },
+                "to": {
+                  "x": 1,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 1,
+                  "y": 8
+                },
+                "to": {
+                  "x": 2,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 2,
+                  "y": 8
+                },
+                "to": {
+                  "x": 3,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 3,
+                  "y": 8
+                },
+                "to": {
+                  "x": 4,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 8
+                },
+                "to": {
+                  "x": 5,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 8
+                },
+                "to": {
+                  "x": 6,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 8
+                },
+                "to": {
+                  "x": 7,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 7,
+                  "y": 8
+                },
+                "to": {
+                  "x": 8,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 8,
+                  "y": 8
+                },
+                "to": {
+                  "x": 9,
+                  "y": 8
+                }
+              }
+            ]
+          },
+          {
+            "command": "C",
+            "action": {
+              "id": 6,
+              "data": {
+                "x": 18,
+                "y": 12
+              }
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": true,
+            "phases": [
+              "song",
+              "gate",
+              "platform"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 3
+                },
+                "to": {
+                  "x": 5,
+                  "y": 4
+                }
+              },
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 3,
+                  "y": 5
+                },
+                "to": {
+                  "x": 3,
+                  "y": 6
+                }
+              },
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 7,
+                  "y": 5
+                },
+                "to": {
+                  "x": 7,
+                  "y": 6
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 9,
+                "y": 8
+              },
+              "dead": true
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 4
+              },
+              "dead": false
+            }
+          ],
+          "stones": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 14,
+                "y": 4
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 6
+            },
+            {
+              "x": 7,
+              "y": 6
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": true,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-final-voluntary-song-removes-two-required-local-weights",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Dans la position finale préparée, un pas volontaire du Barde déplace les deux gardiens en rangée8 et referme la porte. Le miroir reste sur son poids en (14,4).",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 215,
+        "commands": "D",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 1,
+                "y": 8
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 5
+              },
+              "dead": false
+            }
+          ],
+          "stones": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 14,
+                "y": 4
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 7
+            },
+            {
+              "x": 7,
+              "y": 7
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": true
+          }
+        },
+        "steps": [
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "song",
+              "gate",
+              "platform"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 5
+                },
+                "to": {
+                  "x": 5,
+                  "y": 6
+                }
+              },
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 3,
+                  "y": 7
+                },
+                "to": {
+                  "x": 3,
+                  "y": 8
+                }
+              },
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 7,
+                  "y": 7
+                },
+                "to": {
+                  "x": 7,
+                  "y": 8
+                }
+              }
+            ]
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 1,
+                "y": 8
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 6
+              },
+              "dead": false
+            }
+          ],
+          "stones": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 14,
+                "y": 4
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 8
+            },
+            {
+              "x": 7,
+              "y": 8
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            true,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            false,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": false
+          }
+        }
+      }
+    },
+    {
+      "id": "l8-leaving-anchor-disrupts-the-tested-bard-crossing",
+      "level": 8,
+      "status": "PASS",
+      "claim": "En avançant le Voleur d’un pas au nord avant la même approche du Barde, cette séquence rencontre des refus à la remontée ; les deux appuis ont changé de place.",
+      "evidence": {
+        "kind": "executed-author-prefix-branch",
+        "afterTurn": 242,
+        "commands": "UCDDDLDDDRRRURRUURR",
+        "startingState": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 9,
+                "y": 14
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 5,
+                "y": 10
+              },
+              "dead": false
+            }
+          ],
+          "stones": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 14,
+                "y": 4
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 9,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 7
+            },
+            {
+              "x": 7,
+              "y": 7
+            }
+          ],
+          "active": "thief",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": true
+          }
+        },
+        "steps": [
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 9,
+                  "y": 14
+                },
+                "to": {
+                  "x": 9,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "C",
+            "action": {
+              "id": 6,
+              "data": {
+                "x": 18,
+                "y": 33
+              }
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 10
+                },
+                "to": {
+                  "x": 5,
+                  "y": 11
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 11
+                },
+                "to": {
+                  "x": 5,
+                  "y": 12
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 12
+                },
+                "to": {
+                  "x": 5,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "L",
+            "action": {
+              "id": 3
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 13
+                },
+                "to": {
+                  "x": 4,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 13
+                },
+                "to": {
+                  "x": 4,
+                  "y": 14
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 14
+                },
+                "to": {
+                  "x": 4,
+                  "y": 15
+                }
+              }
+            ]
+          },
+          {
+            "command": "D",
+            "action": {
+              "id": 2
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 15
+                },
+                "to": {
+                  "x": 4,
+                  "y": 16
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 4,
+                  "y": 16
+                },
+                "to": {
+                  "x": 5,
+                  "y": 16
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 16
+                },
+                "to": {
+                  "x": 6,
+                  "y": 16
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "walk"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 16
+                },
+                "to": {
+                  "x": 7,
+                  "y": 16
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "song"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 7,
+                  "y": 16
+                },
+                "to": {
+                  "x": 7,
+                  "y": 15
+                }
+              },
+              {
+                "actor": "support",
+                "from": {
+                  "x": 9,
+                  "y": 14
+                },
+                "to": {
+                  "x": 9,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "song"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 7,
+                  "y": 15
+                },
+                "to": {
+                  "x": 8,
+                  "y": 15
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 9,
+                  "y": 13
+                },
+                "to": {
+                  "x": 10,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": false,
+            "dead": false,
+            "phases": [
+              "song"
+            ],
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 8,
+                  "y": 15
+                },
+                "to": {
+                  "x": 9,
+                  "y": 15
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 10,
+                  "y": 13
+                },
+                "to": {
+                  "x": 11,
+                  "y": 13
+                }
+              },
+              {
+                "actor": "support",
+                "from": {
+                  "x": 9,
+                  "y": 13
+                },
+                "to": {
+                  "x": 10,
+                  "y": 13
+                }
+              }
+            ]
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "U",
+            "action": {
+              "id": 1
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          },
+          {
+            "command": "R",
+            "action": {
+              "id": 4
+            },
+            "refused": true,
+            "dead": false,
+            "phases": [],
+            "moves": []
+          }
+        ],
+        "result": {
+          "heroes": [
+            {
+              "kind": "thief",
+              "at": {
+                "x": 11,
+                "y": 13
+              },
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 9,
+                "y": 15
+              },
+              "dead": false
+            }
+          ],
+          "stones": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 14,
+                "y": 4
+              },
+              "facing": "NE"
+            }
+          ],
+          "supports": [
+            {
+              "x": 10,
+              "y": 13
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "monsters": [
+            {
+              "x": 3,
+              "y": 7
+            },
+            {
+              "x": 7,
+              "y": 7
+            }
+          ],
+          "active": "bard",
+          "gateClosed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            false,
+            false,
+            false,
+            false
+          ],
+          "platformActive": [
+            false,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "dead": false,
+          "complete": false,
+          "circuits": {
+            "choeur": false,
+            "presse": false,
+            "charge": true,
+            "dernier-accord": true
+          }
+        },
+        "scope": "An explicit failure of the reused suffix, not a claim that the resulting position is unsolvable."
+      }
+    },
+    {
+      "id": "l8-no-direct-ne-reflection-through-closed-chamber-boundary",
+      "level": 8,
+      "status": "PASS",
+      "claim": "Aucun des couples géométriques testés ne fournit un reflet NE direct depuis l’extérieur vers la chambre finale fermée.",
+      "evidence": {
+        "kind": "exhaustive-single-reflection-geometry-with-synthetic-supports",
+        "facing": "NE",
+        "finalGate": {
+          "x": 15,
+          "y": 3
+        },
+        "chamberCells": 15,
+        "mirrorPlacements": 304,
+        "candidates": 11,
+        "accepted": [],
+        "rejected": [
+          {
+            "mirror": {
+              "x": 14,
+              "y": 3
+            },
+            "from": {
+              "x": 14,
+              "y": 1
+            },
+            "to": {
+              "x": 16,
+              "y": 3
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 13,
+              "y": 4
+            },
+            "from": {
+              "x": 13,
+              "y": 1
+            },
+            "to": {
+              "x": 16,
+              "y": 4
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 14,
+              "y": 4
+            },
+            "from": {
+              "x": 14,
+              "y": 2
+            },
+            "to": {
+              "x": 16,
+              "y": 4
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 14,
+              "y": 4
+            },
+            "from": {
+              "x": 14,
+              "y": 1
+            },
+            "to": {
+              "x": 17,
+              "y": 4
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 12,
+              "y": 5
+            },
+            "from": {
+              "x": 12,
+              "y": 1
+            },
+            "to": {
+              "x": 16,
+              "y": 5
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 13,
+              "y": 5
+            },
+            "from": {
+              "x": 13,
+              "y": 2
+            },
+            "to": {
+              "x": 16,
+              "y": 5
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 13,
+              "y": 5
+            },
+            "from": {
+              "x": 13,
+              "y": 1
+            },
+            "to": {
+              "x": 17,
+              "y": 5
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 14,
+              "y": 5
+            },
+            "from": {
+              "x": 14,
+              "y": 3
+            },
+            "to": {
+              "x": 16,
+              "y": 5
+            },
+            "distance": 2
+          },
+          {
+            "mirror": {
+              "x": 14,
+              "y": 5
+            },
+            "from": {
+              "x": 14,
+              "y": 2
+            },
+            "to": {
+              "x": 17,
+              "y": 5
+            },
+            "distance": 3
+          },
+          {
+            "mirror": {
+              "x": 14,
+              "y": 5
+            },
+            "from": {
+              "x": 14,
+              "y": 1
+            },
+            "to": {
+              "x": 18,
+              "y": 5
+            },
+            "distance": 4
+          },
+          {
+            "mirror": {
+              "x": 16,
+              "y": 7
+            },
+            "from": {
+              "x": 18,
+              "y": 7
+            },
+            "to": {
+              "x": 16,
+              "y": 5
+            },
+            "distance": 2
+          }
+        ],
+        "scope": "Tests one reflection in the stated orientation with the final gate closed. Does not establish route optimality, global necessity, reachability of synthetic placements or absence of other multi-action strategies."
+      }
+    }
+  ]
+}

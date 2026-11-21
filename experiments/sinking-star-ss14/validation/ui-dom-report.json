@@ -1,0 +1,415 @@
+{
+  "success": true,
+  "htmlSha256": "4ec3fdc3e33c4b7860863f61bee99ef3d850a2deb638e6d25f823d8884c7c9de",
+  "scope": "focused-ui-and-full-campaign",
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Twenty-three compiled-HTML role fixtures cover unitary traction, non-recursive duo movement, song dependencies, supports, presses, hydraulic arrivals and simultaneous combat.",
+    "Reflection keys, nearest source, equal-distance exchange and gray previews.",
+    "A pulled mirror remains legible above its button and a gate transition is distinguished from a press.",
+    "Blocking backs alone blink red; ordinary inputs lock and mid-warning Undo restores the preceding state.",
+    "Keyboard, role buttons and public-pixel selection preserve the world; Shift+Tab exits and outside input is ignored.",
+    "Undo, Reset, Restart and level selection interrupt animations without stale frames; Reset clears discoveries.",
+    "Reduced motion uses no timer waits.",
+    "Defeat waits for the final combat frame and its Undo restores the live room.",
+    "VICTORY appears after the final frame and allows Undo or Restart.",
+    "All eight actual rooms expose two heroes, two goals, both source links and contextual help.",
+    "The authored level1 route earns all seventeen discoveries from displayed public pixels.",
+    "All eight actual rooms, including the rebuilt finals, win through compiled HTML inputs with every frame and duration checked; each completion is undone and replayed."
+  ],
+  "roleCoverage": [
+    {
+      "case": "exactly one rear crate follows",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "thief-pull"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a perpendicular step releases previously pulled cargo",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "thief-pull",
+        "release"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a front crate refuses the whole movement",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "pulling the Bard never sings nearby cargo",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "thief-pull",
+        "partner-pull"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "pulling a mirror changes its axes without rotating",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "thief-pull",
+        "mirror-motion"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "near crate follows one Bard step",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "song crosses an intervening wall",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "diagonal corner belongs to the radius-two square",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "one blocked choir member stays while a free member follows",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "selective-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "simultaneous same-colour dependencies advance the whole nearby row",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "an outside-aura crate holds the inner row and blocks the Bard",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "a sung Thief does not pull the mirror behind him",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "partner-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "song never pushes a mirror in front of the Bard",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "sunken support slides from water to water",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "support-slide"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a support cannot climb onto dry floor",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "the Bard destination support stays anchored",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "support-anchor"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "sung crate becomes a permanent water support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "platform"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "unsafe sung partner landing refuses every movement",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "remote press carries Thief without mirror traction",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "remote press carries Bard without singing cargo",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "press sends a crate into water",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press",
+        "platform"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "hydraulics settle before checking a pressed Bard over water",
+      "frames": 9,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "sung monsters attack one another simultaneously",
+      "frames": 8,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "monster"
+      ],
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square outline",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange both heroes",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    }
+  ],
+  "mirrorButtonCoverage": {
+    "mirrorAboveButton": true,
+    "mirrorMotionLesson": true,
+    "gateLesson": true,
+    "noSpuriousPress": true,
+    "frames": 4
+  },
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible destinations flash both mirrors",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "mirror hiding the only source flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "Undo during warning restores previous actual movement",
+      "midAnimationUndo": true,
+      "exactPreviousState": true,
+      "cancelledFramesCannotRepaint": true,
+      "noReflectionLesson": true
+    }
+  ],
+  "campaignCoverage": [
+    {
+      "level": 1,
+      "title": "L’atelier des deux voix",
+      "actions": 80,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 2,
+      "title": "La relève silencieuse",
+      "actions": 72,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 3,
+      "title": "L’appui sous le partenaire",
+      "actions": 93,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 4,
+      "title": "Les deux départs sans geste",
+      "actions": 85,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 5,
+      "title": "Les gardiens et le poids retiré",
+      "actions": 107,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 6,
+      "title": "Le passage des deux presses",
+      "actions": 107,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 7,
+      "title": "La pierre des trois traversées",
+      "actions": 195,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 8,
+      "title": "Le dernier accord des deux rives",
+      "actions": 289,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    }
+  ],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 80,
+    "discoveries": [
+      "select",
+      "move",
+      "thief-pull",
+      "partner-pull",
+      "release",
+      "bard-song",
+      "partner-song",
+      "selective-song",
+      "platform",
+      "support-slide",
+      "support-anchor",
+      "mirror-motion",
+      "mirror",
+      "gate",
+      "press",
+      "monster",
+      "goals"
+    ]
+  }
+}

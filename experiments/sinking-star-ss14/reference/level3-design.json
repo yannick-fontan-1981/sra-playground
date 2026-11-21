@@ -1,0 +1,771 @@
+{
+  "spec": {
+    "id": "ss14-03",
+    "title": "L’appui sous le partenaire",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~........~",
+      "~~~~~~~~~~~g.....g.~",
+      "~~~~~~~~~~~........~",
+      "~~~~....~~~........~",
+      "~~~~.#~.~~~~~~~~~~~~",
+      "~........~....~....~",
+      "~....T...#.........~",
+      "~........~.........~",
+      "~........~.........~",
+      "~........~.........~",
+      "~........~.........~",
+      "~........~.........~",
+      "~........~.........~",
+      "~......B.~.........~",
+      "~........~.........~",
+      "~........s.........~",
+      "~........~.........~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 6,
+          "y": 8
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "haut-quai",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 9
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 14,
+          "y": 5
+        },
+        "circuit": "haut-quai",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CUUUUUUUUUUCDRRRDRCLLLDDDDDRRRRURRRRDDDDRRCUUULLLLLLLLLRRRRRRRRDLDRRURRXUUULLLCUURURRRXUUURRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": true,
+    "puzzle": 27,
+    "label": "Adaptation de Heroes and Water · énigme 27 · appui mobile et butée",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27",
+    "objective": "Ramener le quai mobile, conserver son emplacement pendant le relais et transporter le miroir jusqu’à la commande du haut quai.",
+    "secondary": {
+      "label": "Heroes and Water · énigme 28 · préserver l’appui pendant le passage",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-28"
+    }
+  },
+  "metrics": {
+    "actions": 93,
+    "selections": 5,
+    "thiefPulls": 9,
+    "bardSongs": 20,
+    "partnerSongs": 13,
+    "selectiveSongs": 6,
+    "forcedBardMoves": 0,
+    "supportMoves": 8,
+    "partnerPulls": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 9,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "L’appui remonte le canal ; la butée le retient pendant que le Barde corrige sa distance",
+      "turn": 11,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": false
+      }
+    },
+    {
+      "label": "Le Voleur se pose sur l’appui : il devient son ancre pendant le retour du chanteur",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": false
+      }
+    },
+    {
+      "label": "Le Barde avance vers l’appui ancré puis entraîne son partenaire sur la rive opposée",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": false
+      }
+    },
+    {
+      "label": "Le chanteur dégage la traversée pour permettre le retour du Voleur",
+      "turn": 42,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": false
+      }
+    },
+    {
+      "label": "Le Voleur transporte le miroir à travers l’appui désormais placé",
+      "turn": 63,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": false
+      }
+    },
+    {
+      "label": "Le miroir est descendu sur la commande du haut quai sans changer son orientation",
+      "turn": 67,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": true
+      }
+    },
+    {
+      "label": "Le Voleur prend le premier reflet et libère l’arrivée hydraulique",
+      "turn": 78,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": true
+      }
+    },
+    {
+      "label": "Le Barde emprunte le même reflet sans chanter pendant le transport",
+      "turn": 93,
+      "heroes": [
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "haut-quai": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un appui immergé est guidé dans un canal et retenu par une butée pour corriger le placement du Barde.",
+      "Le passage dépend de la conservation de cet appui pendant le déplacement du chanteur."
+    ],
+    "changed": [
+      "Le Voleur ancre l’appui sous ses pieds avant que le Barde revienne dans sa portée.",
+      "Le chant entraîne ensuite le partenaire sans déclencher sa traction.",
+      "Le miroir mobile franchit le quai, devient un poids et permet deux reflets vers une arrivée hydraulique inaccessible à pied."
+    ],
+    "sourceReading": "Water 27 inspire le guidage de l’appui et les butées ; Water 28 inspire la conservation de l’appui pendant le transfert du Barde. L’ancrage sous les héros, le chant carré et le miroir-poids sont les règles et la composition propres à SS14.",
+    "localChecks": [
+      {
+        "turn": 11,
+        "alternative": "DDD",
+        "effect": "Sans l’ancrage préparé, un retour direct du Barde vers le bas décale l’appui hors du passage.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirrors": 1,
+          "supports": [
+            {
+              "x": 9,
+              "y": 9
+            }
+          ],
+          "platformActive": [
+            false
+          ],
+          "haut-quai": false
+        }
+      },
+      {
+        "turn": 18,
+        "alternative": "CDDD",
+        "effect": "Après l’ancrage, le même retour direct est refusé car le chant enverrait le Voleur sur de l’eau sans appui ; le détour conserve les deux positions.",
+        "observed": {
+          "refusals": 1,
+          "dead": false,
+          "mirrors": 1,
+          "supports": [
+            {
+              "x": 9,
+              "y": 8
+            }
+          ],
+          "platformActive": [
+            false
+          ],
+          "haut-quai": false
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales du parcours auteur ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}

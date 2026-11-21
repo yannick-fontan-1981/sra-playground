@@ -1,0 +1,8 @@
+{
+  "game": "SS14",
+  "nativeBrowserExecuted": false,
+  "nativeVisualValidated": false,
+  "reason": "The preceding SS12/SS13 work established a native Chromium socket restriction and managed-browser rejection of local file URLs. No workaround or native browser execution is claimed for SS14.",
+  "validationScope": "The compiled HTML is checked in Happy DOM against public canvas pixels and controlled frame timers. This does not certify native CSS, mobile layout or browser accessibility behavior.",
+  "nextStep": "Run native desktop/mobile UI checks in the authorized SRA Playground integration environment before Site publication."
+}
