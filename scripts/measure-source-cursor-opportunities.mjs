@@ -11,12 +11,14 @@ import { hash, op, sourceReplay } from './sic-study-source-replay.mjs';
 // At each fresh offer the solver chooses both the click and the motor before we play either arm.
 const [env,solver,out,...files]=process.argv.slice(2);
 const {newCursorMemory,offerCursorTrial,recordCursorTrial}=await import(pathToFileURL(resolve(solver,'src/sic/marked-cursor-selection.ts')).href);
+const packPath=process.env.SIC_STUDY_RECOVERY_PACK;
+const preference=packPath?JSON.parse(await readFile(packPath,'utf8')).configuration.informationPreference:undefined;
 const engine=await sourceBackend(resolve(env)),episodes=[];
 const contains=([l,t,r,b],[x,y,u,v])=>l<=x&&t<=y&&r>=u&&b>=v;
 const alive=(rep,b)=>b.state==='NOT_FINISHED'&&!rep.win(b);
 for(const file of files)for(const line of (await readFile(file,'utf8')).trim().split(/\r?\n/)){
   const run=JSON.parse(line),game=getGameByCode(run.code);
-  assert.ok(game&&game.group!=='custom_4'&&game.group!=='official');
+  assert.ok(game&&game.group!=='custom_4');
   assert.ok(!run.error&&!run.resets&&!run.sourcePrefixActions&&!run.observedPriorLevelActions);
   const rep=sourceReplay(engine,{},run),cache=new Map(),memory=newCursorMemory(),tested=new Set(),trials=[];
   async function observe(b){
@@ -29,8 +31,8 @@ for(const file of files)for(const line of (await readFile(file,'utf8')).trim().s
   let b=rep.restore(0);
   for(const [i,step] of run.steps.entries()){
     const o=await observe(b);
-    const offer=offerCursorTrial(memory,o,b.frame);
-    const motor=offer?.projectedMove?.command??memory.motions.find(m=>offer&&contains(offer.source.box,m.box))?.command;
+    const offer=offerCursorTrial(memory,o,b.frame,false,false,preference);
+    const motor=offer?.contrast?.motor??offer?.projectedMove?.command??memory.motions.find(m=>offer&&contains(offer.source.box,m.box))?.command;
     const id=JSON.stringify([step.from,offer?.command,motor]);
     if(i+2<=run.cap&&offer?.stage==='select'&&motor&&!tested.has(id)){
       tested.add(id);
@@ -51,7 +53,7 @@ for(const file of files)for(const line of (await readFile(file,'utf8')).trim().s
         if(!alive(rep,end)||!end.availableActionIds.includes(s.a))break;
         end=rep.act(op(s));
       }
-      trials.push({at:i+1,click:offer.command,motor,projected:!!predicted,matched,redirected,won:rep.win(end)});
+      trials.push({at:i+1,click:offer.command,motor,basis:offer.basis??'mark',projected:!!predicted,matched,redirected,won:rep.win(end)});
       rep.restore(i);
     }
     const n=rep.act(op(step));assert.equal(hash(n).slice(0,16),step.to);

@@ -4,7 +4,7 @@ import type {NativeBox,NativeEntity,NativeObservation,NativePoint,NativeRows} fr
 
 type Part = {box:NativeBox; ink:number};
 type Motion = {box:NativeBox; form:string; command:string; ref:string; dx:number; dy:number; entry?:string};
-type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[]; ink:number; shape:string};
+type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[]; ink:number; shape:string; basis?:'motor_scale'};
 type ProjectedMove = {command:string; delta:NativePoint; evidence:string};
 type ControlContrast = {
   strategy: 'motion_contrast'; mode: 'exploration'; minimumOutcomes: number;
@@ -28,7 +28,7 @@ function clickPoint(peer:NativeEntity):NativePoint {
 }
 const signature=(m:Mark)=>[m.shape,m.ink,m.target.ink,tag(m.target.box)].join('/');
 const hypothesis=(m:Mark)=>[m.shape,m.ink,m.source.ink,m.target.ink,JSON.stringify(m.offsets)].join('/');
-function bodyAfterClick(part:Part,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows):Part|undefined {
+function bodyAfterClick(part:Part,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,allowReshape=false):Part|undefined {
   let body=0,retained=0;
   for(let y=part.box[1];y<=part.box[3];y++)for(let x=part.box[0];x<=part.box[2];x++){
     if(rows[y]?.[x]!==part.ink)continue;
@@ -39,6 +39,16 @@ function bodyAfterClick(part:Part,b:NativeObservation,a:NativeObservation,rows:N
   if(!before)return;
   const after=a.entities.find(e=>e.area===before.area&&tag(e.bbox)===box&&JSON.stringify(e.mask)===JSON.stringify(before.mask));
   if(after)return {box:part.box,ink:after.palette_value};
+  // A selection can redraw a sprite. Keep its identity only if one newly drawn
+  // component substantially overlaps its old footprint and its center stays there.
+  if(!allowReshape)return;
+  const peers=a.entities.filter(e=>{
+    if(e.area<2 || e.area>2*before.area || before.area>2*e.area || !at(...center(e.bbox),part.box))return false;
+    if(b.entities.some(old=>old.signature===e.signature&&tag(old.bbox)===tag(e.bbox)))return false;
+    const common=e.mask.filter(([x,y])=>at(x+e.bbox[0],y+e.bbox[1],part.box)).length;
+    return common*2>e.area;
+  });
+  if(peers.length===1)return {box:peers[0]!.bbox,ink:peers[0]!.palette_value};
 }
 function refute(m:CursorMemory,t:CursorTrial){
   const refuted=m.refuted??=[];const key=hypothesis(t);
@@ -182,15 +192,46 @@ function distinguishControl(m:CursorMemory, mark:Mark, o:NativeObservation, pref
   return {strategy:'motion_contrast', mode:'exploration', minimumOutcomes:preference.minimumOutcomes,
     motor:motion.command, baselineDelta:[motion.dx,motion.dy], evidence:motion.ref, outcomes:['previous_subject_moves','selected_subject_moves']};
 }
+// A second subject may have another silhouette. An observed motor supplies a
+// spatial scale and a verification command even when the new response is unknown.
+export function motorScalePeers(o:NativeObservation,m:CursorMemory):Mark[] {
+  const ranked:{mark:Mark;cost:number}[]=[];
+  const frequency=new Map<string,number>();
+  for(const e of o.entities)frequency.set(e.signature,1+(frequency.get(e.signature)??0));
+  for(const move of m.motions){
+    if((move.dx===0)===(move.dy===0))continue;
+    const span=Math.abs(move.dx)+Math.abs(move.dy);
+    const base=o.entities.find(e=>e.signature===move.form&&tag(e.bbox)===tag(move.box));
+    if(!base||base.area<2||frequency.get(base.signature)!==1)continue;
+    const width=base.bbox[2]-base.bbox[0]+1,height=base.bbox[3]-base.bbox[1]+1;
+    if(span<Math.max(width,height)/2||span>2*Math.max(width,height))continue;
+    for(const peer of o.entities){
+      if(peer.area<2||!disjoint(move.box,peer.bbox)||m.motions.some(v=>!disjoint(v.box,peer.bbox)))continue;
+      const w=peer.bbox[2]-peer.bbox[0]+1,h=peer.bbox[3]-peer.bbox[1]+1;
+      if(Math.max(w,h)>2*span||Math.min(w,h)*2<span||Math.max(w,h)>2*Math.max(width,height))continue;
+      const phase=(a:number,b:number)=>{const d=Math.abs(a-b)%(span*2);return Math.min(d,span*2-d)/span;};
+      const grid=phase(move.box[0]+move.box[2],peer.bbox[0]+peer.bbox[2])+phase(move.box[1]+move.box[3],peer.bbox[1]+peer.bbox[3]);
+      const cost=Math.abs(w-width)/span+Math.abs(h-height)/span+Math.abs(peer.area/(w*h)-base.area/(width*height))+
+        Math.log2(frequency.get(peer.signature)!)+grid;
+      const mark:Mark={source:{box:move.box,ink:base.palette_value},target:{box:peer.bbox,ink:peer.palette_value},
+        point:clickPoint(peer),offsets:[],ink:base.palette_value,shape:move.form+"/"+peer.signature,basis:"motor_scale"};
+      ranked.push({mark,cost});
+    }
+  }
+  return ranked.sort((a,b)=>a.cost-b.cost).map(v=>v.mark);
+}
+
 export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,rows:NativeRows,allowStatic=false,requireProjection=false,preference?:InformationPreference):CursorTrial|null {
   if(!m || !o.available_action_refs.includes('ACTION6'))return null;
   if(m.pending)return !m.pending.passive && o.available_action_refs.includes(m.pending.command)?m.pending:null;
   if(!m.motions.length&&!allowStatic)return null;
-  const choices=cursorCandidates(o,rows,m).map(mark=>({mark,projectedMove:possibleMove(m,mark,rows)}));
+  const marked=cursorCandidates(o,rows,m);
+  const candidates=!marked.length && preference?.mode==='active' && !m.verified ? motorScalePeers(o,m):marked;
+  const choices=candidates.map(mark=>({mark,projectedMove:mark.basis?undefined:possibleMove(m,mark,rows)}));
   choices.sort((a,b)=>Number(!!b.projectedMove)-Number(!!a.projectedMove));
   for(const {mark,projectedMove} of choices){
     const contrast = !projectedMove && !m.verified ? distinguishControl(m,mark,o,preference) : undefined;
-    if(requireProjection&&!projectedMove&&!contrast)continue;
+    if((requireProjection||mark.basis)&&!projectedMove&&!contrast)continue;
     const familiar=m.established?.includes(hypothesis(mark));
     if(m.tried.includes(signature(mark)) || (!projectedMove && (familiar || m.refuted?.includes(hypothesis(mark)))))continue;
     if(m.verified && mark.source.ink!==mark.target.ink && sharedSurroundings(rows,mark)<0.5)continue;
@@ -225,20 +266,22 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     m.tried.push(signature(trial));
     const {source,target,offsets,ink}=trial;
     const marked=(r:NativeRows,p:Part)=>offsets.every(([x,y])=>r[p.box[1]+y]?.[p.box[0]+x]===ink);
-    const transfer=marked(rows,source)&&!marked(rows,target)&&!marked(next,source)&&marked(next,target);
+    const transfer=offsets.length>0 && marked(rows,source)&&!marked(rows,target)&&!marked(next,source)&&marked(next,target);
     const forecastMotor=trial.contrast?.motor ?? trial.projectedMove?.command;
     const motor=forecastMotor&&a.available_action_refs.includes(forecastMotor)?forecastMotor:m.motions.find(v=>inside(v.box,source.box)&&a.available_action_refs.includes(v.command))?.command ??
       (transfer?a.available_action_refs.find(ref=>/^ACTION[1-4]$/.test(ref)):undefined);
     if(motor){
-      const sourceNow=transfer?source:bodyAfterClick(source,b,a,rows,next);
-      const targetNow=transfer?target:bodyAfterClick(target,b,a,rows,next);
+      const sourceNow=transfer?source:bodyAfterClick(source,b,a,rows,next,!!trial.basis);
+      const targetNow=transfer?target:bodyAfterClick(target,b,a,rows,next,!!trial.basis);
       if(sourceNow&&targetNow)m.pending={...trial,source:sourceNow,target:targetNow,stage:'verify',command:motor,
         binding:hypothesis(trial),passive:!!trial.passive && targetNow.ink===target.ink,
         feedback:transfer,evidence:[...trial.evidence,a.observation_ref]};
     }
     if(!transfer&&!m.pending)refute(m,trial);
     m.motions=[];m.blocked=[];m.returns=0;
-    return transfer?'cursor_mark_transferred':b.frame_hash===a.frame_hash?'cursor_click_visually_unchanged':'cursor_mark_prediction_refuted';
+    if(b.frame_hash===a.frame_hash)return 'cursor_click_visually_unchanged';
+    if(trial.basis)return m.pending?'selection_changed_pending_motor':'selection_bodies_unresolved';
+    return transfer?'cursor_mark_transferred':'cursor_mark_prediction_refuted';
   }
   if(trial?.stage==='verify'||trial?.stage==='advance'){
     delete m.pending;
@@ -246,7 +289,11 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       row.slice(trial.source.box[0],trial.source.box[2]+1).every((v,j)=>next[trial.source.box[1]+i]?.[trial.source.box[0]+j]===v));
     const target=trial.target;
     const moved=moves.find(v=>{
-      if(trial.contrast && (input!==trial.contrast.motor || v.dx!==trial.contrast.baselineDelta[0] || v.dy!==trial.contrast.baselineDelta[1]))return false;
+      if(trial.contrast && (input!==trial.contrast.motor || (!trial.basis && (v.dx!==trial.contrast.baselineDelta[0] || v.dy!==trial.contrast.baselineDelta[1]))))return false;
+      if(trial.basis && trial.contrast){
+        const stride=Math.max(...trial.contrast.baselineDelta.map(Math.abs));
+        if(Math.max(Math.abs(v.dx),Math.abs(v.dy))*2<stride)return false;
+      }
       if(!inside([v.box[0]-v.dx,v.box[1]-v.dy,v.box[2]-v.dx,v.box[3]-v.dy],target.box))return false;
       let vacated=false,body=0;
       for(let y=target.box[1];y<=target.box[3];y++)for(let x=target.box[0];x<=target.box[2];x++){
@@ -284,6 +331,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       return 'cursor_move_blocked_try_another_direction';
     }
     if(!trial.feedback && moves.length)refute(m,trial);
+
     return 'cursor_control_unconfirmed';
   }
   if(m.pending && b.frame_hash!==a.frame_hash)delete m.pending;

@@ -56,6 +56,37 @@ const observation=(rows:number[][],rev:number,controls=['ACTION1','ACTION4','ACT
   state:'NOT_FINISHED',step_index:rev,palette,available_action_refs:controls,
 },rev,'test');
 
+test('different silhouettes can compete for control before the second displacement is known',async()=>{
+  function scene(first:number,second:number,selected=false) {
+    const rows=Array.from({length:18},()=>Array<number>(32).fill(0));
+    for(let y=5;y<8;y++)rows[y]!.fill(1,first,first+3);
+    for(let y=5;y<8;y++)rows[y]!.fill(selected?5:2,second,second+2);
+    rows[7]![second+2]=selected?5:2;
+    return rows;
+  }
+  const frames=[scene(2,17),scene(5,17),scene(5,17,true),scene(5,19,true),scene(5,21,true)];
+  const [a,b,c,d,e]=await Promise.all(frames.map((f,i)=>observation(f,i)));
+  for(const mode of ['shadow','active'] as const){
+    const f=createPreparedEffects({mode,strategy:'motion_contrast',minimumOutcomes:2});
+    await f.observePublicOutcome!(a!,b!,{action_ref:'ACTION4',data:{}},frames[0]!,frames[1]!);
+    const offer=await f.proposeInGroup!(recurrentExperimentGroup,b!,frames[1]!,[],12,{});
+    if(mode==='shadow'){assert.ok(!offer?.cursorSelectionForecast);continue;}
+    const t=offer?.cursorSelectionForecast;
+    assert.equal(t?.basis,'motor_scale');assert.deepEqual(t.contrast.baselineDelta,[3,0]);
+    assert.equal(t.projectedMove,undefined);assert.deepEqual(t.target.box,[17,5,19,7]);
+    const clicked=await f.record!(b!,c!,offer.actions[0]!,frames[1]!,frames[2]!,offer);
+    assert.equal(clicked.events[0]?.result,'selection_changed_pending_motor');
+    const verify=await f.proposeInGroup!(evidencedPlanGroup,c!,frames[2]!,[],11,{});
+    assert.equal(verify.actions[0].action_ref,'ACTION4');
+    const observed=await f.record!(c!,d!,verify.actions[0]!,frames[2]!,frames[3]!,verify);
+    assert.equal(observed.events[0].result,'new_cursor_moved_while_previous_cursor_stayed');
+    const reuse=await f.proposeInGroup!(evidencedPlanGroup,d!,frames[3]!,[],10,{});
+    assert.equal(reuse.cursorSelectionForecast.stage,'advance');
+    const result=await f.record!(d!,e!,reuse.actions[0]!,frames[3]!,frames[4]!,reuse);
+    assert.equal(result.events[0].result,'advanced_selected_subject_preserving_previous_placement');
+  }
+});
+
 test('the exploration family proposes a matching piece, records the transferred mark and verifies the actual new mover',async()=>{
   const family=createPreparedEffects(),a=board(),b=board(1),c=board(1,15);
   const oa=await observation(a,0),ob=await observation(b,1),oc=await observation(c,2);
