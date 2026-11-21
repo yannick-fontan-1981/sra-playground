@@ -7,6 +7,7 @@ import {observeLandmarks,observeLandmarkAccess,proposeLandmark,refreshedSelectio
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {detectTransportSelection,observeTransport} from './transport-observations.ts';
 import {registerCoverage,registerCoverageFromControl,observeCoverage} from './controlled-coverage.ts';
+import {registerCrossing,observeCrossing,proposeCrossing} from './sustained-crossing.ts';
 import {proposeCoverage} from './plan-controlled-coverage.ts';
 import {chooseTransport} from './compose-transport.ts';
 import {challengePlacement,recordPlacementVisit} from './recurrent-placement.ts';
@@ -104,7 +105,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const prioritizeCoverage=comparePreparations && informationPreference?.strategy==='prefer_a_verified_coverage_experiment';
+  const bridgeSeries=comparePreparations && informationPreference?.strategy==='compose_a_sustained_crossing';
+  const prioritizeCoverage=bridgeSeries || comparePreparations && informationPreference?.strategy==='prefer_a_verified_coverage_experiment';
   const prepareStance=prioritizeCoverage || comparePreparations && informationPreference?.strategy==='prepare_a_contact_stance';
   const testBodyContact=prepareStance || comparePreparations && informationPreference?.strategy==='test_contact_on_another_subject';
   const planCoverage=testBodyContact || comparePreparations && informationPreference?.strategy==='maintain_access_by_composing_piece_effects';
@@ -151,7 +153,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           const selected=detectTransportSelection(before,rows,next,[cmd.data.x,cmd.data.y],a.observation_ref);
           if(selected)m.transportLearning=selected;
         }
-        if(m.transportLearning)transportResult=observeTransport(m.transportLearning,rows,next,key,a.observation_ref,x?.cooperative?.coverage?undefined:x?.cooperative);
+        if(m.transportLearning)transportResult=observeTransport(m.transportLearning,rows,next,key,a.observation_ref,x?.cooperative?.coverage||x?.cooperative?.crossing?undefined:x?.cooperative);
         if(planCoverage){
           if(!m.coverage && x?.cursorTrial?.stage==='select' && cmd.action_ref==='ACTION6'){
             const scene=registerCoverage(rows,next,x.cursorTrial.source.box,x.cursorTrial.target.box,a.observation_ref);
@@ -160,6 +162,23 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           if(testBodyContact&&!m.coverage&&m.transportLearning&&cmd.action_ref==='ACTION6'){
             const recovered=registerCoverageFromControl(rows,next,m.transportLearning,a.observation_ref);
             if(recovered)m.coverage=recovered;
+          }
+          if(bridgeSeries&&!m.coverage&&m.transportLearning){
+            const transport=m.transportLearning;
+            if(!m.crossing&&cmd.action_ref==='ACTION6'){
+              const scene=registerCrossing(transport,rows);
+              if(scene){
+                m.crossing=scene;
+                for(const [op,v] of Object.entries(m.cursorSelection?.bearings??{})){
+                  if(!transport.motors[op]&&Math.abs(v.dx)+Math.abs(v.dy)===transport.grid.pitch&&(v.dx===0||v.dy===0))
+                    transport.motors[op]={dx:Math.sign(v.dx),dy:Math.sign(v.dy),ref:v.ref};
+                }
+              }
+            }
+            if(m.crossing){
+              const observed=observeCrossing(m.crossing,transport,rows,next,key,a.observation_ref,x?.cooperative?.crossing?x.cooperative:undefined);
+              if(observed)transportResult=observed;
+            }
           }
           if(m.coverage){
             if(testBodyContact)m.coverage.testContacts=true;
@@ -206,7 +225,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       enter(o);
       if(remaining<1)return null;
       const focused=group===coveragePlanGroup;
-      if(focused){if(!prioritizeCoverage||!m.coverage)return null;group=evidencedPlanGroup;}
+      if(focused){if(!prioritizeCoverage||!m.coverage&&!m.crossing)return null;group=evidencedPlanGroup;}
       const motorCount=o.available_action_refs.filter(ref=>/^ACTION[1-4]$/.test(ref)).length;
       const opening = !m.turns || (m.cursorSelection?.returns??0)>=2*Math.max(2,motorCount) ||
         (m.cursorSelection?.blocked?.length??0)>=2;
@@ -226,8 +245,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       }
       const coverage=planCoverage&&group===evidencedPlanGroup&&m.coverage&&limits
         ?proposeCoverage(m.coverage,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
-      if(focused&&!coverage)return null;
-      const cooperative=coverage??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
+      const crossing=bridgeSeries&&group===evidencedPlanGroup&&m.crossing&&m.transportLearning&&limits
+        ?proposeCrossing(m.crossing,m.transportLearning,rows,limits.maxDepth,limits.maxNodes):undefined;
+      if(focused&&!coverage&&!crossing)return null;
+      const cooperative=coverage??crossing??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
         ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);
       let landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
         ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;

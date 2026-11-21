@@ -1,0 +1,17 @@
+{
+  "id": "sic.native-strategies",
+  "schemaVersion": 6,
+  "configuration": {
+    "version": 1,
+    "mode": "active",
+    "maxDepth": 88,
+    "maxNodes": 1000,
+    "solver": "sic-fallback",
+    "informationPreference": {
+      "mode": "active",
+      "strategy": "compose_a_sustained_crossing",
+      "minimumOutcomes": 2
+    }
+  },
+  "digest": "d89fc50ca8f2ecc167930160ad42fdde372111fcb8cb6185bf8ab26639127eed"
+}
