@@ -8,7 +8,7 @@ import {visualLayout} from '../src/sic/witnessed-preview-transfer.ts';
 
 // Offline only. Hold the click and every subsequent command fixed while
 // replacing all movements leading up to the click. Never supply a prefix to SIC.
-const [engineRoot,code,levelText,tapeFile,out]=process.argv.slice(2),level=Number(levelText);
+const [engineRoot,code,levelText,tapeFile,out,autonomousTape]=process.argv.slice(2),level=Number(levelText);
 const {createGameDispatcher}=await import(pathToFileURL(resolve(engineRoot,'src/runtime/native-game-dispatcher.ts')));
 const raw=JSON.parse(await readFile(tapeFile,'utf8')),tape=raw.win??raw.replayCommands;
 const click=tape.findIndex(c=>c.id===6);
@@ -64,5 +64,24 @@ for(const r of branches){
 const original=branches.find(r=>r.word.every((v,i)=>v===tape[i].id));
 assert.equal(original.won,true,'The benchmark suffix must score from its original preparation');
 const report={code,level,prefixLength:click,commands:tape.length,alternativePrefixes:branches.length,stablePairs:stable.length,groups:[...groups.values()]};
+if(autonomousTape){
+  const run=JSON.parse(await readFile(autonomousTape,'utf8'));
+  assert.ok(run.code===code && run.start===level && run.finish===level && !run.resets && !run.observedPriorLevelActions);
+  const handoff=run.replayCommands.findIndex(c=>c.landmark?.stage==='select_after_contact');
+  assert.ok(handoff>=0,'The autonomous tape contains no prepared handoff');
+  const check=async commands=>{
+    let b=await reset();
+    for(const c of commands){
+      if(c.from)assert.equal(hash(b).slice(0,16),c.from);
+      b=await act(c);
+      if(c.to)assert.equal(hash(b).slice(0,16),c.to);
+    }
+    const entry=hash(b);let used=0;
+    for(const c of tape.slice(click+1)){if(!live(b))break;b=await act(c);used++;}
+    return {entry,preparation:commands.length,suffix:used,official:wins(b)};
+  };
+  const bench=await check(tape.slice(0,click+1)),autonomous=await check(run.replayCommands.slice(0,handoff+1));
+  report.handoff={bench,autonomous,samePublicEntry:bench.entry===autonomous.entry,unaidedScore:run.levels[0].won};
+}
 await writeFile(out,JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report));
