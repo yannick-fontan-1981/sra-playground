@@ -4030,6 +4030,512 @@
             "end": "bb0f2bb08faadbff"
           }
         }
+      ],
+      "exactDeparture": [
+        {
+          "code": "SWCH",
+          "level": 2,
+          "actions": 120,
+          "won": false,
+          "started": 0
+        },
+        {
+          "code": "UPST",
+          "level": 1,
+          "actions": 57,
+          "won": true,
+          "started": 2
+        },
+        {
+          "code": "VOIS",
+          "level": 4,
+          "actions": 107,
+          "won": true,
+          "started": 0
+        }
+      ]
+    },
+    "frozenV47": {
+      "canonicalExport": {
+        "sha": "56939e673d31d262ef58bd73b2d948060e88b356",
+        "files": 2553,
+        "manifestHash": "48c04240ba4704c6073fd6347fc2447f20fc4d1c8f05f5ab74560a9be3bd44ba"
+      },
+      "compositionTests": 9,
+      "typecheck": true,
+      "projectionCounts": {
+        "started": 1,
+        "fullyPredicted": 1,
+        "newImages": 1,
+        "returnedToOrigin": 0,
+        "refuted": 0,
+        "interrupted": 0
+      },
+      "nativeControls": [
+        {
+          "code": "SS06",
+          "level": 2,
+          "start": 200,
+          "word": [
+            "ACTION1",
+            "ACTION2",
+            "ACTION4",
+            "ACTION1"
+          ],
+          "source": 6,
+          "changes": 10,
+          "expectedBox": [
+            38,
+            44,
+            40,
+            49
+          ],
+          "full": {
+            "available": true,
+            "actualChanges": 10,
+            "atSite": true,
+            "anywhere": true,
+            "won": false,
+            "end": "731c9bf8fc924e12",
+            "moved": []
+          },
+          "bare": {
+            "available": true,
+            "actualChanges": 10,
+            "atSite": false,
+            "anywhere": false,
+            "won": false,
+            "end": "fe5bffd738ef569c",
+            "moved": []
+          },
+          "omitLastPreparation": {
+            "available": true,
+            "actualChanges": 10,
+            "atSite": false,
+            "anywhere": false,
+            "won": false,
+            "end": "fe5bffd738ef569c",
+            "moved": []
+          },
+          "sham": "ACTION3",
+          "equalLength": {
+            "available": true,
+            "actualChanges": 10,
+            "atSite": false,
+            "anywhere": false,
+            "won": false,
+            "end": "fe5bffd738ef569c",
+            "moved": []
+          }
+        }
+      ],
+      "selectedCanonicalTests": {
+        "pass": 201,
+        "fail": 0
+      },
+      "fullMutableCheckoutSuite": "failed, including missing fixture, pinned source hashes and time/node bound mismatch"
+    },
+    "sourceSpatialCompositions": {
+      "kind": "prospective source bench; both primitive operators witnessed at different sites before composing; no runtime selection",
+      "upper": {
+        "episodes": 8,
+        "repeatedSchemas": 5,
+        "withProposals": 1,
+        "trials": [
+          {
+            "code": "VOIS",
+            "level": 3,
+            "repeatedAtDistinctSites": 5,
+            "trials": [
+              {
+                "prefix": 20,
+                "word": [
+                  "ACTION4",
+                  "ACTION1"
+                ],
+                "sites": [
+                  [
+                    14,
+                    18
+                  ],
+                  [
+                    18,
+                    14
+                  ]
+                ],
+                "firstWitnesses": [
+                  [
+                    "26,10",
+                    11
+                  ],
+                  [
+                    "42,10",
+                    14
+                  ]
+                ],
+                "secondWitnesses": [
+                  [
+                    "18,6",
+                    6
+                  ],
+                  [
+                    "30,6",
+                    8
+                  ]
+                ],
+                "firstRelocated": true,
+                "whole": {
+                  "first": true,
+                  "last": true,
+                  "won": false,
+                  "end": "9598c205fe8fbcdc"
+                },
+                "bare": {
+                  "first": null,
+                  "last": false,
+                  "won": false,
+                  "end": "4dc5af85fe476bf5"
+                },
+                "replacement": "ACTION2",
+                "control": {
+                  "first": false,
+                  "last": false,
+                  "won": false,
+                  "end": "443b4ce4f97c7e27"
+                }
+              },
+              {
+                "prefix": 36,
+                "word": [
+                  "ACTION1",
+                  "ACTION3"
+                ],
+                "sites": [
+                  [
+                    18,
+                    10
+                  ],
+                  [
+                    14,
+                    10
+                  ]
+                ],
+                "firstWitnesses": [
+                  [
+                    "18,6",
+                    6
+                  ],
+                  [
+                    "30,6",
+                    8
+                  ]
+                ],
+                "secondWitnesses": [
+                  [
+                    "26,10",
+                    10
+                  ],
+                  [
+                    "42,22",
+                    26
+                  ]
+                ],
+                "firstRelocated": true,
+                "whole": {
+                  "first": true,
+                  "last": true,
+                  "won": false,
+                  "end": "7886dbad6d0f1966"
+                },
+                "bare": {
+                  "first": null,
+                  "last": false,
+                  "won": false,
+                  "end": "8b93da0999f17ce3"
+                },
+                "replacement": "ACTION2",
+                "control": {
+                  "first": false,
+                  "last": false,
+                  "won": false,
+                  "end": "3b490ac6f601e4db"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "independentFamilies": {
+        "episodes": 66,
+        "repeatedSchemas": 9,
+        "withProposals": 1,
+        "trials": [
+          {
+            "code": "FUIT",
+            "level": 1,
+            "repeatedAtDistinctSites": 5,
+            "trials": [
+              {
+                "prefix": 12,
+                "word": [
+                  "ACTION4",
+                  "ACTION1"
+                ],
+                "sites": [
+                  [
+                    28,
+                    22
+                  ],
+                  [
+                    33,
+                    17
+                  ]
+                ],
+                "firstWitnesses": [
+                  [
+                    "8,32",
+                    7
+                  ],
+                  [
+                    "13,32",
+                    8
+                  ]
+                ],
+                "secondWitnesses": [
+                  [
+                    "28,27",
+                    11
+                  ],
+                  [
+                    "28,22",
+                    12
+                  ]
+                ],
+                "firstRelocated": true,
+                "whole": {
+                  "first": true,
+                  "last": true,
+                  "won": false,
+                  "end": "bc5b1e8beda54ba2"
+                },
+                "bare": {
+                  "first": null,
+                  "last": false,
+                  "won": false,
+                  "end": "b36079d3f3cb565f"
+                },
+                "replacement": "ACTION2",
+                "control": {
+                  "first": false,
+                  "last": false,
+                  "won": false,
+                  "end": "b3f0c3f2facfaee5"
+                }
+              },
+              {
+                "prefix": 16,
+                "word": [
+                  "ACTION2",
+                  "ACTION1"
+                ],
+                "sites": [
+                  [
+                    33,
+                    17
+                  ],
+                  [
+                    33,
+                    17
+                  ]
+                ],
+                "firstWitnesses": [
+                  [
+                    "8,22",
+                    5
+                  ],
+                  [
+                    "8,27",
+                    6
+                  ]
+                ],
+                "secondWitnesses": [
+                  [
+                    "28,27",
+                    11
+                  ],
+                  [
+                    "28,22",
+                    12
+                  ]
+                ],
+                "firstRelocated": true,
+                "whole": {
+                  "first": true,
+                  "last": true,
+                  "won": false,
+                  "end": "b4a0f02a5bd55dcb"
+                },
+                "bare": {
+                  "first": null,
+                  "last": false,
+                  "won": false,
+                  "end": "a50ede1d17aecbb1"
+                },
+                "replacement": "ACTION4",
+                "control": {
+                  "first": false,
+                  "last": false,
+                  "won": false,
+                  "end": "a50ede1d17aecbb1"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "VOIS3RoleCheck": [
+        {
+          "prefix": 20,
+          "arms": {
+            "whole": [
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    14,
+                    18
+                  ],
+                  "dx": 4,
+                  "dy": 0,
+                  "shape": "3044ff806c78"
+                }
+              ],
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    18,
+                    18
+                  ],
+                  "dx": 0,
+                  "dy": -4,
+                  "shape": "3044ff806c78"
+                }
+              ]
+            ],
+            "bare": [
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    14,
+                    18
+                  ],
+                  "dx": 0,
+                  "dy": -4,
+                  "shape": "3044ff806c78"
+                }
+              ]
+            ],
+            "control": [
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    14,
+                    18
+                  ],
+                  "dx": 0,
+                  "dy": 4,
+                  "shape": "3044ff806c78"
+                }
+              ],
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    14,
+                    22
+                  ],
+                  "dx": 0,
+                  "dy": -4,
+                  "shape": "3044ff806c78"
+                }
+              ]
+            ]
+          }
+        },
+        {
+          "prefix": 36,
+          "arms": {
+            "whole": [
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    18,
+                    14
+                  ],
+                  "dx": 0,
+                  "dy": -4,
+                  "shape": "3044ff806c78"
+                }
+              ],
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    18,
+                    10
+                  ],
+                  "dx": -4,
+                  "dy": 0,
+                  "shape": "3044ff806c78"
+                }
+              ]
+            ],
+            "bare": [
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    18,
+                    14
+                  ],
+                  "dx": -4,
+                  "dy": 0,
+                  "shape": "3044ff806c78"
+                }
+              ]
+            ],
+            "control": [
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    18,
+                    14
+                  ],
+                  "dx": 0,
+                  "dy": 4,
+                  "shape": "3044ff806c78"
+                }
+              ],
+              [
+                {
+                  "size": 8,
+                  "origin": [
+                    18,
+                    18
+                  ],
+                  "dx": -4,
+                  "dy": 0,
+                  "shape": "3044ff806c78"
+                }
+              ]
+            ]
+          }
+        }
       ]
     }
   },
@@ -4248,6 +4754,226 @@
       "sha": "33446a5db8f78cdeb46fab821908e8c1d814ad47",
       "files": 2553,
       "manifestHash": "66cbf0fc432f99b1db63fae1bf7ca381d4fa95b9228840e9c72464738ed3ece6"
+    }
+  },
+  "coldV47": [
+    {
+      "code": "SS02",
+      "won": false,
+      "actions": 266,
+      "reason": "level_active_time_budget",
+      "v44": 323,
+      "commonPrefix": 266,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "933256006f3d155e9ca0ec1075d71a84bf121faf15812e191a47cd139af847fd",
+      "v46Actions": 206,
+      "commonPrefixV46": 51
+    },
+    {
+      "code": "SS03",
+      "won": false,
+      "actions": 248,
+      "reason": "level_active_time_budget",
+      "v44": 295,
+      "commonPrefix": 248,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "2de66e6f873d1f2e3488b41857392b3a3c3febb05cb901f64f546423162eabd0",
+      "v46Actions": 190,
+      "commonPrefixV46": 106
+    },
+    {
+      "code": "SS05",
+      "won": false,
+      "actions": 234,
+      "reason": "level_active_time_budget",
+      "v44": 292,
+      "commonPrefix": 234,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "6ec81f3a381c5754a3ce4a694f41a70291a97695b841d1860bd9a2965024ff4d",
+      "v46Actions": 198,
+      "commonPrefixV46": 17
+    },
+    {
+      "code": "SS06",
+      "won": false,
+      "actions": 210,
+      "reason": "level_active_time_budget",
+      "v44": 245,
+      "commonPrefix": 201,
+      "firstDivergence": 202,
+      "firstForecast": 200,
+      "compositionCommands": 4,
+      "started": 1,
+      "fullyPredicted": 1,
+      "newImages": 1,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "70440f425dfeb6ab0df3fabdd343f90caab5c72d77b6e320edde446ce48d44c8",
+      "v46Actions": 151,
+      "commonPrefixV46": 71
+    },
+    {
+      "code": "SS07",
+      "won": false,
+      "actions": 5,
+      "reason": "native_game_over",
+      "v44": 5,
+      "commonPrefix": 5,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+      "v46Actions": 5,
+      "commonPrefixV46": 5
+    },
+    {
+      "code": "SS01",
+      "won": true,
+      "actions": 44,
+      "reason": "target_levels_completed",
+      "v44": 44,
+      "commonPrefix": 44,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+      "v46Actions": 44,
+      "commonPrefixV46": 44
+    },
+    {
+      "code": "SS04",
+      "won": true,
+      "actions": 60,
+      "reason": "target_levels_completed",
+      "v44": 60,
+      "commonPrefix": 60,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+      "v46Actions": 60,
+      "commonPrefixV46": 60
+    },
+    {
+      "code": "SS08",
+      "won": false,
+      "actions": 265,
+      "reason": "level_active_time_budget",
+      "v44": 311,
+      "commonPrefix": 265,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "abaeb39048bfb6330056c33629d3f23e3c2472177bca362b7ac7a369f6a320bd",
+      "v46Actions": 206,
+      "commonPrefixV46": 9
+    },
+    {
+      "code": "SS10",
+      "won": false,
+      "actions": 253,
+      "reason": "level_active_time_budget",
+      "v44": 336,
+      "commonPrefix": 253,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "3a0180d4f9d5372ab72fa8f0be6d39d6a12824e9a88459e67178d8d0cdcf5150",
+      "v46Actions": 197,
+      "commonPrefixV46": 52
+    }
+  ],
+  "warmV47": {
+    "code": "SS01",
+    "lesson": 19,
+    "levels": [
+      {
+        "level": 2,
+        "actions": 32,
+        "won": true
+      }
+    ],
+    "tapeDigest": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+  },
+  "sourceV47": {
+    "verified": 100,
+    "wins": 100,
+    "comparedTo": "v44",
+    "identicalTrajectories": 99,
+    "changedTrajectories": [
+      {
+        "code": "UPST",
+        "won": true,
+        "actions": 57,
+        "same": false,
+        "end": "1d975dc69973a304"
+      }
+    ],
+    "guards": {
+      "KEYD": 35,
+      "SKBN": 22,
+      "GABA": 49,
+      "SWCH": 25
+    },
+    "canonicalExport": {
+      "sha": "56939e673d31d262ef58bd73b2d948060e88b356",
+      "files": 2553,
+      "manifestHash": "48c04240ba4704c6073fd6347fc2447f20fc4d1c8f05f5ab74560a9be3bd44ba"
     }
   }
 }
