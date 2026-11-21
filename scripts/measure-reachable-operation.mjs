@@ -9,7 +9,12 @@ import { visualLayout } from "../src/sic/witnessed-preview-transfer.ts";
 const [env, runfile, input, output, maxArg, graphOutput] =
     process.argv.slice(2),
   r = JSON.parse(await readFile(runfile, "utf8")),
-  c = input === "-" ? null : JSON.parse(await readFile(input, "utf8")).cases[0],
+  c =
+    input === "-"
+      ? null
+      : /^[57]$/.test(input)
+        ? { op: Number(input) }
+        : JSON.parse(await readFile(input, "utf8")).cases[0],
   max = Number(maxArg);
 assert.ok(
   (!c || [5, 7].includes(c.op)) && max > 0 && Number.isSafeInteger(max),
@@ -67,7 +72,7 @@ for (let i = 0; i < queue.length && i < max; i++) {
     "public-search",
   );
   const l = visualLayout(obs, b.frame),
-    hasCue = !!c && !!l[c.roles[0][1]]?.length;
+    hasCue = !!c?.roles?.length && !!l[c.roles[0][1]]?.length;
   if (graphOutput)
     projections.set(
       s.h,
