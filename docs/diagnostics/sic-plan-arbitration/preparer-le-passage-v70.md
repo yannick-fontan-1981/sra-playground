@@ -28,3 +28,15 @@ Le candidat v71 figé dans `82ad65c88` gagne SS02 L1 en 40 puis L2 en 46 dans un
 | Réutiliser | Au coup 36, le pilote prévoit que trois pièces suivront alors que la plus grande rangée observée jusque-là en compte deux. Il les déplace, puis répète sur trois pièces au coup 37. | En retirant le plan après le coup 36 et en reconstruisant son modèle à partir des seules observations antérieures, le pilote prévoit trois pièces, les déplace à nouveau et gagne en dix gestes. Sept états ont été testés séparément avec le plan retiré, tous conduisent à un score. |
 
 La partie reste la seule comptée comme victoire autonome. Les variantes qui repartent d’un préfixe connu mesurent les prédictions et la capacité à replanifier. Au coup 36, le moteur confirme aussi le gain d’une case annoncé par le pilote, de 33 à 34 cases accessibles avec les pièces immobiles. [Interventions depuis la même observation](../../../scripts/verify-planned-contact-tests.mjs) · [Mesures, empreintes de rejeu et budgets](mesures-passage-v71.json)
+
+## Contrôles du candidat figé
+
+| Condition | Préférence active | Préférence témoin |
+|---|---|---|
+| SS02 L2 en campagne | gagné en 46 après le L1 en 40 | plafond de temps actif en 326 après le L1 en 40 |
+| SS08 L2 en entrée directe | plafond en 357 | plafond en 367 |
+| SS08 depuis le L1 | L1 au plafond en 269, L2 non atteint | fin de partie au L1 en 47, L2 non atteint |
+
+SS02 L2 à froid termine sans score en 417 actions en mode actif. La nouvelle stratégie de placement relatif dépend encore d’une observation de score du L1. Sur SS08, le même pack actif essaie en campagne un clic au neuvième geste, là où le témoin choisit une direction. Le transfert de la stratégie de passage à ce jeu reste à démontrer.
+
+Les quatre autres L2 gagnés reproduisent les suites intégrales de v69, en 32 sur SS01, 97 sur SS03, 143 sur SS04 et 73 sur SS05. Les 100 L1 sources sont gagnés et rejoués indépendamment, avec les mêmes trajectoires qu’en v66. Les contrôles de niveaux supérieurs reproduisent également CWSE L2 en 59 à froid, KLOT L4 en 37 à froid et GABA L2 en 50 après le L1. Les 486 tests de la suite SIC et du chemin natif passent et TypeScript compile. Le candidat qualifié est sur la branche expérimentale `codex/sic-source100-capacity-audit`.

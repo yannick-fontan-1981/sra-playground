@@ -400,6 +400,13 @@
     "v70": 485,
     "v71": 486
   },
+  "firstDifferenceDeclarative": {
+    "campaign": 64,
+    "levelStep": 24,
+    "fromFrame": "77e6bf790bce1275",
+    "candidate": 1,
+    "comparison": 4
+  },
   "nativeReplay": {
     "cap70-active": [
       {
@@ -526,7 +533,45 @@
         "stop": "level_active_time_budget"
       }
     ],
-    "cap70-shadow": [],
+    "cap70-shadow": [
+      {
+        "code": "SS02",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 343,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "de0a5e0f33f21ee8d0a7da672e53704457cfc1a64f8af39d01112dabeda2573e",
+        "final": "f12f639830931545a88ddc330b065a14bd2799af7e58abcd49dfd81fb1de15e5",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 335,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "fe3d88a373d9f78e83caa36b0110a533142fefc0f1abc38aaa09c3f57911f3a9",
+        "final": "70e28b76be4d4711cbaa4f5edabd54a2fe6389d1288d6f1d81064f92514a94fb",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      }
+    ],
     "cap71-active": [
       {
         "code": "SS01",
@@ -551,6 +596,22 @@
       },
       {
         "code": "SS02",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 417,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "f72365368eab3b03bae43f7143c7d08f01aca77c94b1f292017eeafe88cf8ab8",
+        "final": "9fc8ddf03300fa64fe0aa7b0790601f13aaa980b4ed74c8b8795179076b8ebb6",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS02",
         "entry": "warm",
         "levels": [
           {
@@ -569,8 +630,270 @@
         "final": "9469602325bfbd494dd48edb62a9abbb7c3684ed3b7a19f7be91a0ed57624e64",
         "capacitySteps": 24,
         "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS03",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 97,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS04",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 143,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+        "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS05",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 73,
+            "won": true
+          }
+        ],
+        "resets": [
+          12
+        ],
+        "commands": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+        "final": "bcc85ed983fd11ebe9ac9d5bc458cbfd238e5e00e1665606d014562c5b0555cb",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS07",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 5,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "final": "df8d16405266a4b2a316ca1b21de9aacd29b678202f9113b5a445b612a57d9aa",
+        "capacitySteps": 0,
+        "stop": "native_game_over"
+      },
+      {
+        "code": "SS08",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 357,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "21e1bea494479ec8439e3bc744d0b0793761d42580973a40a6a64ad27cc8e896",
+        "final": "7e3a60f2122845ea851b6a08e28e068f386dfe26c0822fbbb0192f1d6ef18536",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 269,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "00a35c55464676cd437465e54e9212e831cd7a8c86cf1595356caab1122ce1e4",
+        "final": "4c701748cecaedc3dec569bebdfad4a9475e588b03458fadad3aefa7350c5685",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
       }
     ],
-    "cap71-shadow": []
+    "cap71-shadow": [
+      {
+        "code": "SS02",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 326,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "967f8ce440ef9f4812be111b77bf08333986f8368b9b21f941a50d91e954444b",
+        "final": "39abdfa749a2431d6beb74d9ef4511ae98324aca0f44c5c572cacf2b15bbc2ec",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 367,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "31a4ba25450f0629f28c29eae45f6e94ec2c402a9d4e70113126f35e8f2ebae6",
+        "final": "6a3c49feace0ce19491c982d87e1dae820f1a197a401de847fca8b490dad8c1d",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "d8b4a1078031b59b69a1d02ad0323c6d7c53cc1928ef817b247f23b00862ff09",
+        "final": "8ea659c9aca111c2026178876aadff12a8c375932936e119b2fdddee7578e830",
+        "capacitySteps": 0,
+        "stop": "native_game_over"
+      }
+    ]
+  },
+  "cap70Source": {
+    "verified": 100,
+    "wins": 100,
+    "unchanged": 100,
+    "differences": []
+  },
+  "cap71Source": {
+    "verified": 100,
+    "wins": 100,
+    "unchanged": 100,
+    "differences": []
+  },
+  "upper": [
+    {
+      "code": "CWSE",
+      "levels": [
+        {
+          "level": 2,
+          "won": true,
+          "actions": 59
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1",
+      "end": "aadf3039f6845922196730fe91fd4e5cee4a28e1e0188eb9568a889ba78ae2d6"
+    },
+    {
+      "code": "KLOT",
+      "levels": [
+        {
+          "level": 4,
+          "won": true,
+          "actions": 37
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c",
+      "end": "e2c8ddc1ddc2432dff39b9f7d053d5ee06ce41b87195ec7cb745544199405d16"
+    },
+    {
+      "code": "GABA",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 49
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 50
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "640938ef0cbcf6e905f4b57182c0db704cab2b77ebb101c0bb9d224427f8e744",
+      "end": "5afd237cf3699637b01810a6d334fd6e8ff377008f2058818a45acb8499315e0"
+    }
+  ],
+  "previousFourFullCommandTapesUnchanged": [
+    "SS01",
+    "SS03",
+    "SS04",
+    "SS05"
+  ],
+  "ss07NextDiagnostic": {
+    "code": "SS07",
+    "states": 30,
+    "pairedTrials": 974,
+    "changedImmediately": 30,
+    "changedScalarReturn": 30,
+    "safeAfterLosingControl": 0,
+    "official": 0,
+    "affectedOrigins": 0,
+    "afterInitialSelection": {
+      "examined": 900,
+      "differentDirectionalReturns": 436,
+      "safePreparedScalar": 815,
+      "safeAndChanged": 18,
+      "firstSafeAfterMovements": 1,
+      "winningPreparedScalar": 0,
+      "directionalWin": false,
+      "controlImages": 30,
+      "selectedImages": 174,
+      "queueDrained": false
+    }
+  },
+  "staticTypecheckExitCode": 0,
+  "heldOutFirstCampaignDifference": {
+    "step": 9,
+    "active": 6,
+    "shadow": 1,
+    "activeFamily": "sic_test_prepared_effects",
+    "shadowFamily": "sic_public_input_exploration",
+    "sameObservedOrigin": true
   }
 }
