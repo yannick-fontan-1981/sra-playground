@@ -2,11 +2,12 @@ import { fallbackPalette } from '../runtime/display-palette.ts';
 import type {NativeBox,NativeEntity,NativeObservation,NativePoint,NativeRows} from '../logos-engine/v6-native-types.ts';
 
 type Part = {box:NativeBox; ink:number};
-type Motion = {box:NativeBox; form:string; command:string; ref:string; dx:number; dy:number};
+type Motion = {box:NativeBox; form:string; command:string; ref:string; dx:number; dy:number; entry?:string};
 type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[]; ink:number; shape:string};
-export type CursorTrial = Mark & { stage:'select'|'verify'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean };
+type ProjectedMove = {command:string; delta:NativePoint; evidence:string};
+export type CursorTrial = Mark & { stage:'select'|'verify'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; binding?:string };
 export type CursorMemory = {
-  motions:Motion[]; tried:string[]; refuted?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
+  motions:Motion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
 };
 export const newCursorMemory=():CursorMemory=>({motions:[],tried:[]});
@@ -55,7 +56,18 @@ function brightAccent(accent:number,body:number,palette:readonly string[]) {
   return high>=168 && (0.213*a[0]!+0.715*a[1]!+0.072*a[2]!>=145||chroma>=80)
     && Math.max(...a.map((v,i)=>Math.abs(v-b[i]!)))>=52;
 }
-function translations(b:NativeObservation,a:NativeObservation,input:string):Motion[] {
+// Pixels newly covered by a translated box are visible before the movement.
+function entrySurface(rows:NativeRows,[l,t,r,b]:NativeBox,dx:number,dy:number) {
+  if((dx===0)===(dy===0)||Math.abs(dx)>2*(r-l+1)||Math.abs(dy)>2*(b-t+1))return;
+  const pixels:number[]=[];
+  for(let y=t+dy;y<=b+dy;y++)for(let x=l+dx;x<=r+dx;x++){
+    if(l<=x&&x<=r&&t<=y&&y<=b)continue;
+    const value=rows[y]?.[x];if(value===undefined)return;
+    pixels.push(value);
+  }
+  return pixels.join(',');
+}
+function translations(b:NativeObservation,a:NativeObservation,input:string,rows:NativeRows):Motion[] {
   const group=(o:NativeObservation)=>{
     const g=new Map<string,NativeEntity[]>();
     for(const e of o.entities){const list=g.get(e.signature)??[];list.push(e);g.set(e.signature,list);}
@@ -69,7 +81,8 @@ function translations(b:NativeObservation,a:NativeObservation,input:string):Moti
     const from=past.filter(e=>!present.has(tag(e.bbox))),to=now.filter(e=>!prior.has(tag(e.bbox)));
     if(from.length!==1||to.length!==1)continue;
     const box=to[0]!.bbox,dx=box[0]-from[0]!.bbox[0],dy=box[1]-from[0]!.bbox[1];
-    found.push({box,form,dx,dy,command:input,ref:a.observation_ref});
+    const entry=entrySurface(rows,from[0]!.bbox,dx,dy);
+    found.push({box,form,dx,dy,command:input,ref:a.observation_ref,...(entry?{entry}:{})});
   }
   return found;
 }
@@ -151,17 +164,25 @@ function cursorCandidates(o:NativeObservation,rows:NativeRows,m:CursorMemory) {
   const rank=(t:Mark)=>Number(t.source.ink===t.target.ink)+sharedSurroundings(rows,t);
   return marks.sort((a,b)=>rank(b)-rank(a));
 }
-export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,rows:NativeRows,allowStatic=false):CursorTrial|null {
+function possibleMove(m:CursorMemory,mark:Mark,rows:NativeRows) {
+  const body=m.motions.find(v=>v.entry&&tag(v.box)===tag(mark.source.box)
+    && entrySurface(rows,mark.target.box,v.dx,v.dy)===v.entry);
+  if(body)return {command:body.command,delta:[body.dx,body.dy] as NativePoint,evidence:body.ref};
+}
+export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,rows:NativeRows,allowStatic=false,requireProjection=false):CursorTrial|null {
   if(!m || !o.available_action_refs.includes('ACTION6'))return null;
   if(m.pending)return !m.pending.passive && o.available_action_refs.includes(m.pending.command)?m.pending:null;
   if(!m.motions.length&&!allowStatic)return null;
-  for(const mark of cursorCandidates(o,rows,m)){
-    if(m.tried.includes(signature(mark))||m.refuted?.includes(hypothesis(mark)))continue;
+  const choices=cursorCandidates(o,rows,m).map(mark=>({mark,projectedMove:possibleMove(m,mark,rows)}));
+  choices.sort((a,b)=>Number(!!b.projectedMove)-Number(!!a.projectedMove));
+  for(const {mark,projectedMove} of choices){
+    if(requireProjection&&!projectedMove)continue;
+    if(m.tried.includes(signature(mark))||m.established?.includes(hypothesis(mark))||!projectedMove&&m.refuted?.includes(hypothesis(mark)))continue;
     if(m.verified && mark.source.ink!==mark.target.ink && sharedSurroundings(rows,mark)<0.5)continue;
     const [x,y]=mark.point;
     const evidence=[...new Set(m.motions.filter(v=>inside(v.box,mark.source.box)).map(v=>v.ref))];
     if(m.verified?.shape===mark.shape && m.verified.mark===mark.ink)evidence.push(...m.verified.refs);
-    return {...mark,stage:'select',command:'ACTION6:'+x+','+y,evidence};
+    return {...mark,stage:'select',command:'ACTION6:'+x+','+y,evidence,...(projectedMove?{projectedMove}:{})};
   }
   return null;
 }
@@ -175,7 +196,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     const observed=cursorCandidates(b,rows,m).find(t=>at(x!,y!,t.target.box));
     if(observed)trial={...observed,stage:'select',command:input,evidence:[b.observation_ref],passive:true};
   }
-  const moves=/^ACTION[1-4]$/.test(input) && b.frame_hash!==a.frame_hash ? translations(b,a,input):[];
+  const moves=/^ACTION[1-4]$/.test(input) && b.frame_hash!==a.frame_hash ? translations(b,a,input,rows):[];
   if(/^ACTION[1-4]$/.test(input)){
     if(moves.length){
       const sites=m.motorSites??={},fresh=moves.some(v=>!sites[v.form+'/'+tag(v.box)]);
@@ -190,13 +211,15 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     const {source,target,offsets,ink}=trial;
     const marked=(r:NativeRows,p:Part)=>offsets.every(([x,y])=>r[p.box[1]+y]?.[p.box[0]+x]===ink);
     const transfer=marked(rows,source)&&!marked(rows,target)&&!marked(next,source)&&marked(next,target);
-    const motor=m.motions.find(v=>inside(v.box,source.box)&&a.available_action_refs.includes(v.command))?.command ??
+    const forecastMotor=trial.projectedMove?.command;
+    const motor=forecastMotor&&a.available_action_refs.includes(forecastMotor)?forecastMotor:m.motions.find(v=>inside(v.box,source.box)&&a.available_action_refs.includes(v.command))?.command ??
       (transfer?a.available_action_refs.find(ref=>/^ACTION[1-4]$/.test(ref)):undefined);
     if(motor){
       const sourceNow=transfer?source:bodyAfterClick(source,b,a,rows,next);
       const targetNow=transfer?target:bodyAfterClick(target,b,a,rows,next);
       if(sourceNow&&targetNow)m.pending={...trial,source:sourceNow,target:targetNow,stage:'verify',command:motor,
-        passive:trial.passive && targetNow.ink===target.ink,feedback:transfer,evidence:[...trial.evidence,a.observation_ref]};
+        binding:hypothesis(trial),passive:!!trial.passive && targetNow.ink===target.ink,
+        feedback:transfer,evidence:[...trial.evidence,a.observation_ref]};
     }
     if(!transfer&&!m.pending)refute(m,trial);
     m.motions=[];m.blocked=[];m.returns=0;
@@ -221,6 +244,8 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     m.motions=moves;
     if(oldStill&&moved){
       m.verified={shape:trial.shape,...(trial.feedback?{mark:trial.ink}:{}),refs:[...trial.evidence,a.observation_ref]};
+      const established=m.established??=[],binding=trial.binding??hypothesis(trial);
+      if(!established.includes(binding))established.push(binding);
       m.tried.push(signature({...trial,target:trial.source}));
       return 'new_cursor_moved_while_previous_cursor_stayed';
     }

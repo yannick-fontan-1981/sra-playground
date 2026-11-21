@@ -69,6 +69,10 @@ Rejouer les 100 L1 au plafond de 60, puis VOIS L2 et LOGI L5 au plafond de 90. L
 
 ### Prochaine expérience utile par cible
 
+**Protocole du candidat v43, écrit avant son évaluation sur Custom 4.** SIC compare la surface qu’une pièce vient de couvrir avec celle que couvrirait une autre pièce après le même déplacement. Le banc choisit le clic et la direction avant l’intervention, puis compare cette direction seule à la séquence clic puis direction. Sur 56 prédictions de déplacement sur VOIS L1/L5 et MOTO L2, 42 arrivent au déplacement annoncé. Pour le placement, un clic et un mouvement observés par une stratégie peuvent servir de preuve à une autre. Lorsque les pièces sont plus nombreuses que les places du modèle, SIC peut essayer une disposition de soutien dont certaines relations de voisinage restent à vérifier. Une couleur observée en désaccord avec la prédiction élimine cette disposition. [Banc de choix prospectif](../../../scripts/measure-source-cursor-opportunities.mjs) · [Tests du raisonnement de placement](../../../tests/sic-transferred-population-selection.test.ts)
+
+Le témoin de transfert est v41. Figer v43 sous le tag `sic-source100-projected-choice-v43`. Rejouer les 100 L1 au plafond de 60 et les quatre témoins prioritaires. Comparer à froid SS01 à SS08 et SS10 L2, au plafond de 1 200 commandes, avec le même moteur que v41. Contrôler SS01 avec les 19 commandes publiques du L1 dans une partie séparée. Relever le premier écart de commande ou d’image, les mouvements anticipés et les scores officiels. Rejouer chaque parcours. En cas de nouvelle victoire, retirer la capacité impliquée pour vérifier l’attribution. SS09 L2 reste en réserve.
+
 | L2 | Expérience à préparer sur les jeux sources | Décision que SIC doit ensuite prendre seul |
 | --- | --- | --- |
 | SS02 | Sur SKBN ou GABA, comparer deux placements du même objet depuis le même préfixe. Mesurer les cellules accessibles après chacun. | Choisir une poussée pour le passage qu’elle ouvre, puis emprunter ce passage. |

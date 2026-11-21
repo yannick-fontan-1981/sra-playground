@@ -47,6 +47,22 @@ test('uses the rendered colors when two games assign different RGB values to the
   assert.throws(()=>validateV6PublicObservation({...packet,palette:['private metadata']}));
 });
 
+test('a peer with a measured landing surface offers an immediately testable motor',async()=>{
+  const m=newCursorMemory(),start=board(0,13,3,false,2),rows=board();
+  for(const frame of [start,rows]){
+    for(let y=6;y<11;y++)frame[y]!.fill(2,20,25);
+    frame[8]![18]=4;
+    frame[5]!.fill(4,19,25);
+  }
+  const o=await observation(rows,1);
+  recordCursorTrial(m,await observation(start,0),o,start,rows,'ACTION4');
+  const trial=offerCursorTrial(m,o,rows,false,true);
+  assert.deepEqual(trial?.point,[22,8]);
+  assert.deepEqual(trial?.projectedMove,{command:'ACTION4',delta:[1,0],evidence:o.observation_ref});
+  rows[8]![25]=4;
+  assert.equal(offerCursorTrial(m,o,rows,false,true),null);
+});
+
 test('a refuted visual prediction can still be followed by a motor test of the two surviving bodies',async()=>{
   const m=newCursorMemory(),start=board(0,13,3,false,2),a=board(),b=board(),c=board(0,15);
   b[2]![3]=5;c[2]![3]=5;

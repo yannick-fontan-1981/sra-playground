@@ -121,8 +121,10 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const motorCount=o.available_action_refs.filter(ref=>/^ACTION[1-4]$/.test(ref)).length;
       const opening = !m.turns || (m.cursorSelection?.returns??0)>=2*Math.max(2,motorCount) ||
         (m.cursorSelection?.blocked?.length??0)>=2;
-      const cursor = group===recurrentExperimentGroup && (opening || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
-        ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity) : null;
+      const again = !!m.cursorSelection?.motions.length && (!m.cursorSelection.verified
+        || (m.cursorSelection.returns??0)>0 || !!m.cursorSelection.blocked?.length);
+      const cursor = group===recurrentExperimentGroup && (opening || again || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
+        ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening) : null;
       if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       if (!cursor && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&

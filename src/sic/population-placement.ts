@@ -26,11 +26,12 @@ type Scene = { q: number; offset: Cell; floor: Cell[]; zone_box: NativeBox; refe
   observed_marker_patterns?: number[][][]; comparisonCells?: Cell[] };
 type Controls = Record<string, { delta: Cell }>;
 type Neighborhood = Partial<Record<number, { appearance: number | null; ref: string }>>;
-type Support = { cells: Cell[]; evidence: string[] };
+type Support = { cells: Cell[]; evidence: string[]; unknownMasks?: number[] };
 type Assignment = { slot: Cell; previous: Cell; retained: boolean };
 type State = { epoch: number; scene: Scene; selection: Cell | null; active: boolean; controls: Controls;
   tried: string[]; evidence: string[]; frame: string; stopped: boolean; probes?: number; changedNeighbors?: Cell[];
-  assignment?: Assignment | null; ordered?: Choice[]; neighborhood?: Neighborhood; support?: Support | null; rejectedSupport?: string[] };
+  assignment?: Assignment | null; ordered?: Choice[]; neighborhood?: Neighborhood; neighborEffectRef?: string;
+  support?: Support | null; rejectedSupport?: string[] };
 type PlacementWitness = { epoch: number; score: number; pitch: number; controls: Controls; evidence: string[]; neighborhood?: Neighborhood };
 type Choice = { command: NativeCommand; cell: Cell; expected: Cell | null; slot: Cell | null; retainsSlot?: boolean; ordered?: boolean };
 type Proposal = NativeProposal & { local: State; choice: Choice; route?: Choice[]; strategy: keyof typeof populationPlacementStrategies; needId: string };
@@ -47,13 +48,13 @@ const cellBox = (scene: Scene, [row, col]: Cell): NativeBox => {
   return [x, y, x + scene.q - 2, y + scene.q - 2];
 };
 
-function compareMovement({ local, choice }: Pick<Proposal, 'local' | 'choice'>, rows: NativeRows) {
-  const next = measureReferencePopulation(rows, local.scene) as Scene | null;
+function compareMovement(scene: Scene, selected: Cell, rows: NativeRows) {
+  const next = measureReferencePopulation(rows, scene) as Scene | null;
   if (!next) return null;
-  const occupied = new Set(local.scene.bodies.map(body => key(body.cell))), current = new Set(next.bodies.map(body => key(body.cell)));
+  const occupied = new Set(scene.bodies.map(body => key(body.cell))), current = new Set(next.bodies.map(body => key(body.cell)));
   const gone = [...occupied].filter(cell => !current.has(cell)), added = next.bodies.filter(body => !occupied.has(key(body.cell)));
   if (!gone.length && !added.length) return { next, destination: null };
-  if (gone.length !== 1 || gone[0] !== key(choice.cell) || added.length !== 1 || distance(choice.cell, added[0]!.cell) !== 1) return null;
+  if (gone.length !== 1 || gone[0] !== key(selected) || added.length !== 1 || distance(selected, added[0]!.cell) !== 1) return null;
   return { next, destination: added[0]!.cell };
 }
 
@@ -110,7 +111,7 @@ export function measureTransferredPopulationSelection(first: NativeRows, second:
     if (!gone.every((p, i) => p.x + dx === added[i]!.x && p.y + dy === added[i]!.y)) continue;
     const plain = first.map(row => [...row]);
     for (const p of gone) plain[p.y]![p.x] = p.after;
-    const layout = measureReferencePopulation(plain) as Scene | null;
+    const layout = measureReferencePopulation(plain, null, { allowSurplus: true }) as Scene | null;
     if (!layout) continue;
     const source = layout.bodies.find(body => inside(gone[0]!.x, gone[0]!.y, cellBox(layout, body.cell)));
     const target = layout.bodies.find(body => inside(point[0], point[1], cellBox(layout, body.cell)));
@@ -168,16 +169,22 @@ function orderReferencePlacements(scene: Scene, controls: Controls, deadline: nu
   return search(scene.bodies.map(body => body.cell));
 }
 
-function supportEvidence(scene: Scene, cells: readonly Cell[], neighborhood: Neighborhood): string[] | null {
+export function assessPopulationSupport(scene: Pick<Scene, 'target'>, cells: readonly Cell[], neighborhood: Neighborhood, observedEffect?: string) {
   const occupied = new Set([...cells.map(key), ...scene.target.map(([y, x]) => key([y, x]))]);
-  const refs = new Set<string>();
+  const refs = new Set<string>(), unknown = new Map<number, number>();
   for (const [y, x, appearance] of scene.target) {
     const { local_direction_mask: mask } = referencePopulationNeighborhood([y, x], occupied);
     const observed = neighborhood[mask];
-    if (!observed || observed.appearance !== appearance) return null;
-    refs.add(observed.ref);
+    if (observed) {
+      if (observed.appearance !== appearance) return null;
+      refs.add(observed.ref);
+    } else {
+      if (!observedEffect || (unknown.has(mask) && unknown.get(mask) !== appearance)) return null;
+      unknown.set(mask, appearance);
+    }
   }
-  return [...refs];
+  if (observedEffect && unknown.size) refs.add(observedEffect);
+  return { evidence: [...refs], unknownMasks: [...unknown.keys()] };
 }
 
 function planSupport(local: State, controls: Controls, deadline: number): { support: Support; ordered: Choice[] } | null {
@@ -191,27 +198,36 @@ function planSupport(local: State, controls: Controls, deadline: number): { supp
     const cell: Cell = [row + dy, col + dx], id = key(cell);
     if (floor.has(id) && !targetKeys.has(id) && !compared.has(id)) candidates.set(id, cell);
   }
+  if (local.neighborEffectRef) for (const { cell } of scene.bodies) {
+    if (!targetKeys.has(key(cell)) && !compared.has(key(cell))) candidates.set(key(cell), cell);
+  }
   const positions = [...candidates.values()], rejected = new Set(local.rejectedSupport);
-  let best: { support: Support; ordered: Choice[] } | null = null;
+  const options: { support: Support & { unknownMasks: number[] }; cost: number }[] = [];
+  const enumerationDeadline = performance.now() + (deadline - performance.now()) / 2;
   const evaluate = (cells: Cell[]) => {
     if (rejected.has(supportAttempt(scene, cells))) return;
-    const evidence = supportEvidence(scene, cells, neighborhood);
-    if (!evidence) return;
-    const plan = orderReferencePlacements(scene, controls, deadline, [...target, ...cells]);
-    if (!plan?.length) return;
-    const ordered = local.selection && key(local.selection) === key(plan[0]!.cell) ? plan.slice(1) : plan;
-    if (ordered.length && (!best || ordered.length < best.ordered.length)) {
-      best = { support: { cells, evidence }, ordered };
-    }
+    const assessment = assessPopulationSupport(scene, cells, neighborhood, local.neighborEffectRef);
+    if (!assessment) return;
+    const cost = cells.reduce((sum, cell) => sum + Math.min(...scene.bodies.map(body => distance(cell, body.cell))), 0);
+    options.push({ support: { cells, ...assessment }, cost });
   };
   function choose(start: number, cells: Cell[]) {
     const missing = surplus - cells.length;
     if (!missing) return evaluate(cells);
-    for (let i = start; i <= positions.length - missing && performance.now() < deadline; i++) {
+    for (let i = start; i <= positions.length - missing && performance.now() < enumerationDeadline; i++) {
       choose(i + 1, [...cells, positions[i]!]);
     }
   }
   choose(0, []);
+  options.sort((a,b) => a.support.unknownMasks.length - b.support.unknownMasks.length || a.cost - b.cost);
+  let best: { support: Support & { unknownMasks: number[] }; ordered: Choice[] } | null = null;
+  for (const { support } of options) {
+    if (performance.now() >= deadline || (best && support.unknownMasks.length > best.support.unknownMasks.length)) break;
+    const plan = orderReferencePlacements(scene, controls, deadline, [...target, ...support.cells]);
+    if (!plan?.length) continue;
+    const ordered = local.selection && key(local.selection) === key(plan[0]!.cell) ? plan.slice(1) : plan;
+    if (ordered.length && (!best || ordered.length < best.ordered.length)) best = { support, ordered };
+  }
   return best;
 }
 
@@ -236,14 +252,42 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    observePublicOutcome(before, after, command, first, second) {
+      if (!learns || before.level_epoch !== after.level_epoch || before.state !== after.state
+        || before.levels_completed !== after.levels_completed || before.frame_hash === after.frame_hash) return;
+      const prior = state?.epoch === before.level_epoch && state.frame === before.frame_hash ? state : null;
+      if (command.action_ref === 'ACTION6') {
+        const result = measureTransferredPopulationSelection(first, second, [command.data.x!, command.data.y!]);
+        if (!result) return;
+        const carry = prior?.scene.reference_digest === result.scene.reference_digest ? prior : null;
+        // A switch by itself leaves the destinations of spare pieces unresolved.
+        if (result.scene.population !== result.scene.target.length && !carry?.support) return;
+        state = { ...result, epoch: after.level_epoch, active: false, tried: [], controls: carry?.controls ?? {},
+          frame: after.frame_hash, stopped: false, evidence: [before.observation_ref, after.observation_ref],
+          neighborhood: rememberNeighborhood(result.scene, carry?.neighborhood, after.observation_ref),
+          ...(carry?.neighborEffectRef ? { neighborEffectRef: carry.neighborEffectRef } : {}) };
+      } else if (prior?.selection && (prior.scene.population === prior.scene.target.length || prior.support)
+        && cardinal.includes(command.action_ref)) {
+        const step = compareMovement(prior.scene, prior.selection, second);
+        if (!step?.destination) return;
+        const from = prior.selection, to = step.destination, delta: Cell = [to[0] - from[0], to[1] - from[1]];
+        const neighbors = changedNeighbors(prior.scene, step.next, from, to);
+        state = { ...prior, scene: step.next, selection: to, active: true, frame: after.frame_hash,
+          controls: { ...prior.controls, [command.action_ref]: { delta } }, ordered: [], assignment: null, support: null,
+          evidence: [...prior.evidence.slice(-3), after.observation_ref], changedNeighbors: neighbors,
+          neighborhood: rememberNeighborhood(step.next, prior.neighborhood, after.observation_ref),
+          ...(neighbors.length ? { neighborEffectRef: after.observation_ref } : {}) };
+      }
+    },
     async proposeInGroup(group, observation, rows, inputs, remaining, execution): Promise<Proposal | null> {
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, inputs, remaining, execution);
       const epoch = observation.level_epoch;
-      const continuing = state?.epoch === epoch && state.frame === observation.frame_hash && state.ordered?.length;
+      const continuing = state?.epoch === epoch && state.frame === observation.frame_hash
+        && (state.ordered?.length || (learns && state.selection && !state.stopped));
       const transferred = witness?.epoch === epoch && witness.score === observation.levels_completed;
-      if (!continuing && !transferred) return null;
+      if (!continuing && !transferred && !(learns && execution?.readPriorClickScene)) return null;
       const proposal = await this.propose(observation, rows, inputs, remaining, execution);
-      return proposal?.choice.ordered ? proposal : null;
+      return proposal && (proposal.choice.ordered || (learns && proposal.local.selection && proposal.local.evidence.length)) ? proposal : null;
     },
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
@@ -260,9 +304,8 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
           const [l, t, r, b] = cellBox(previous, cell);
           return x! >= l && x! <= r && y! >= t && y! <= b;
         });
-        if (!piece) return null;
-        const scene = selectionScene(previous, piece.cell, first, rows);
-        return scene ? { scene, selection: piece.cell } : null;
+        const scene = piece && selectionScene(previous, piece.cell, first, rows);
+        return scene && piece ? { scene, selection: piece.cell } : measureTransferredPopulationSelection(first, rows, [x!, y!]);
       }) : null;
       if (learns && !prior && !recall && (!click || click.afterRef !== observation.observation_ref || click.levelEpoch !== observation.level_epoch)) return null;
       const previous = witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed ? witness : null;
@@ -275,7 +318,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
         controls: transferred?.controls ?? {}, tried: [], evidence: click ? [click.beforeRef, click.afterRef] : transferred?.evidence ?? [],
         frame: observation.frame_hash, stopped: false,
         ...(transferred?.neighborhood ? { neighborhood: transferred.neighborhood } : {}) };
-      if (local.support && !supportEvidence(scene, local.support.cells, local.neighborhood ?? {})) {
+      if (local.support && !assessPopulationSupport(scene, local.support.cells, local.neighborhood ?? {}, local.neighborEffectRef)) {
         local = { ...local, support: null, ordered: [] };
       }
       const surplus = scene.population - scene.target.length;
@@ -294,13 +337,14 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
           if (plan?.length) local = { ...local, ordered: plan };
         }
       }
-      if ((surplus || scene.population > 8) && !local.ordered?.length) return null;
+      const calibratingSurplus = learns && surplus > 0 && !!local.selection && Object.keys(controls).length < available.length;
+      if (((surplus && !calibratingSurplus) || scene.population > 8) && !local.ordered?.length) return null;
       const targets = scene.target.map(([y, x]): Cell => [y, x]);
       if (local.support) targets.push(...local.support.cells);
       const occupied = new Set(scene.bodies.map(body => key(body.cell)));
       const unsettled = scene.bodies.map(body => body.cell).filter(cell => targets.every(target => key(target) !== key(cell)));
       const empty = targets.filter(cell => !occupied.has(key(cell)));
-      if (!empty.length || unsettled.length !== empty.length) return null;
+      if ((!empty.length || unsettled.length !== empty.length) && !calibratingSurplus) return null;
       const index = unsettled.findIndex(cell => local.selection && key(cell) === key(local.selection));
       let move: Choice | null = null, probe: Choice | null = null, pick: Choice | null = null;
       let route: Choice[] = [];
@@ -407,6 +451,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
           piece: cellBox(scene, choice.cell), target: choice.slot ? cellBox(scene, choice.slot) : scene.zone_box,
           reference: scene.reference_box,
           ...(supportMove ? { supportingPlacement: true } : {}),
+          ...(local.support?.unknownMasks?.length ? { untestedNeighborMasks: local.support.unknownMasks } : {}),
           ...(multipleSupports ? { supportPositions: local.support!.cells.map(cell => cellBox(scene, cell)) } : {}),
           ...(predictedNeighbors.length ? { predictedNeighbors } : {}),
           ...(local.changedNeighbors?.length ? { neighbors: local.changedNeighbors.map(cell => cellBox(scene, cell)) } : {}) },
@@ -439,7 +484,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       }
       const choice = proposal.route?.[index] ?? proposal.choice;
       const scene = index > 0 ? measureReferencePopulation(first, proposal.local.scene) as Scene | null : proposal.local.scene;
-      const measured = scene && compareMovement({ local: { ...proposal.local, scene }, choice }, second), expected = choice.expected;
+      const measured = scene && compareMovement(scene, choice.cell, second), expected = choice.expected;
       const matched = !!measured && (!expected || !!measured.destination && key(measured.destination) === key(expected));
       if (matched && proposal.local.support && proposal.local.ordered?.length === index + 1) {
         return { matched: false, seal_prefix: true, reason: 'neighbor_placement_did_not_complete_reference' };
@@ -470,7 +515,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
           ...(local.assignment ? { assignment: null } : {}) };
         return { events: [] };
       }
-      const measured = compareMovement({ local, choice }, second), destination = measured?.destination;
+      const measured = compareMovement(local.scene, choice.cell, second), destination = measured?.destination;
       const tried = [...local.tried, JSON.stringify([choice.command.action_ref, choice.cell])];
       const controls = { ...local.controls };
       const contradicted = !!choice.expected && (!destination || key(destination) !== key(choice.expected));
@@ -482,6 +527,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       const exhaustedSupport = local.support && choice.ordered && local.ordered?.length === 1 && !contradicted;
       state = { ...current, scene: measured?.next ?? local.scene, selection: destination ?? choice.cell,
         active: local.active || !!destination, tried, controls, stopped: !measured, changedNeighbors: neighbors,
+        ...(neighbors.length ? { neighborEffectRef: after.observation_ref } : {}),
         ...(choice.ordered ? { ordered: contradicted ? [] : local.ordered!.slice(1) } : {}),
         ...(measured ? { neighborhood: rememberNeighborhood(measured.next, local.neighborhood, after.observation_ref) } : {}),
         ...(exhaustedSupport ? { support: null, rejectedSupport: [...(local.rejectedSupport ?? []), supportAttempt(local.scene, local.support!.cells)] } : {}),

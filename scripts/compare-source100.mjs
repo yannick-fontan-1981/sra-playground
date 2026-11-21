@@ -233,6 +233,8 @@ async function run(code, games) {
       if(plan?.cursorSelectionForecast && replayCommands){
         const cursor=plan.cursorSelectionForecast;
         Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor)});
+        if(cursor.projectedMove) Object.assign(replayCommands.at(-1),{cursorMotor:cursor.projectedMove.command,
+          cursorDelta:cursor.projectedMove.delta});
       }
       if (source)
         steps.push({
