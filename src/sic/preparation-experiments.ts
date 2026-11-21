@@ -1,4 +1,4 @@
-import { assessLocal, demonstratedLimit, localCommand, newLocalMemory, observeLocal, proposeLocal, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
+import { assessLocal, continuationAt, demonstratedLimit, localCommand, newLocalMemory, observeLocal, proposeLocal, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
 import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
@@ -819,6 +819,10 @@ export function selectExperiment(
       rule:'translated_public_effect',localCapacity:plan,refs:[]};
   }
   if(local && rows && local.pending && local.expect===o.frame_hash) return bindLocal(local.pending);
+  if(local && rows){
+    const continuation=continuationAt(local,o,rows);
+    if(continuation)return bindLocal(continuation);
+  }
   if(local?.retained?.state===o.frame_hash && rows){
     const revision=proposeLocal(local,o,rows,true);
     if(revision?.revised)return bindLocal(revision);

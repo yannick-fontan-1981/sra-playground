@@ -114,7 +114,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
       if (remaining < 1 || !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
-      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m,o.frame_hash)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity && stalledLocal(m.localCapacity,o.frame_hash);
       if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity) return null;
       const available = [...inputs];
@@ -134,6 +134,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const evidence = [
         ref,
         ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
+        ...(experiment.localCapacity?.observedPrefix?Object.values(experiment.localCapacity.observedPrefix):[]),
         ...(experiment.occupancy?.plan.preparedPreview?.priorRead?[experiment.occupancy.plan.preparedPreview.priorRead.before,experiment.occupancy.plan.preparedPreview.priorRead.after]:[]),
         ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
         ...(experiment.mechanism?.plan.witnessRefs??[]),

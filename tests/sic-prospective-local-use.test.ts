@@ -3,6 +3,7 @@ import test from 'node:test';
 import type { NativeObservation } from '../src/logos-engine/v6-native-types.ts';
 import {
   assessLocal,
+  continuationAt,
   demonstratedLimit,
   stalledLocal,
   newLocalMemory,
@@ -69,6 +70,39 @@ test('a second disposition inherits A, B and the distinct next use from public t
       .matches
   );
 });
+test('a publicly witnessed preparation can be resumed after a detour and consumed by any family', () => {
+  const training = newLocalMemory();
+  for (let i = 0; i < 3; i++) {
+    observeLocal(training, observation('t'+i), observation('t'+(i+1)), scene(2,i).frame, scene(2,i+1).frame, ops[i]!);
+  }
+  const transfer = (bare: boolean) => {
+    const m = nextLocalLevel(training);
+    const step = (from: string, to: string, a: number, b: number, command: string) =>
+      observeLocal(m, observation(from), observation(to), scene(15,a).frame, scene(15,b).frame, command);
+    if (bare) step('root','root',0,0,ops[1]!);
+    step('root','prepared',0,1,ops[0]!);
+    step('prepared','enabled',1,2,ops[1]!);
+    return { m, step };
+  };
+  const lookup = (m: ReturnType<typeof newLocalMemory>, state: string, phase: number) =>
+    continuationAt(m, observation(state), scene(15,phase).frame);
+  assert.equal(lookup(transfer(false).m,'enabled',2),null);
+  const {m,step} = transfer(true);
+  const choice = lookup(m,'enabled',2);
+  assert.ok(choice);
+  assert.equal(choice.c,ops[2]);
+  assert.deepEqual(choice.observedPrefix,{first:'obs/prepared',second:'obs/enabled'});
+  assert.equal(lookup(m,'enabled',3),null);
+  assert.equal(continuationAt(m,{...observation('enabled'),available_action_refs:[]},scene(15,2).frame),null);
+  step('enabled','detour',2,1,ops[4]!);
+  assert.equal(lookup(m,'detour',1),null);
+  step('detour','enabled',1,2,ops[3]!);
+  assert.deepEqual(lookup(m,'enabled',2),choice);
+  step('enabled','used',2,3,ops[2]!);
+  assert.equal(lookup(m,'enabled',2),null);
+  assert.equal(lookup(nextLocalLevel(m),'enabled',2),null);
+});
+
 test('refuting B preserves the confirmed A and allows another B at the retained disposition', () => {
   const m = newLocalMemory(),
     first = scene(12, 0),

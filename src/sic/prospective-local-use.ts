@@ -49,6 +49,7 @@ export type LocalForecast = {
   afterC?: string;
   revised: boolean;
   controlRef?: string;
+  observedPrefix?: { first: string; second: string };
 };
 type Packed = { width: number; cells: string };
 export type LocalMemory = {
@@ -63,6 +64,7 @@ export type LocalMemory = {
   facts?: { origin: string; a: string; site: Site; after: string; ref: string; failed: string[] }[];
   retained?: { plan: LocalForecast; state: string };
   suspended?: LocalForecast;
+  continuations?: { frame: string; plan: LocalForecast }[];
 };
 export const newLocalMemory = (): LocalMemory => ({
   pictures: {},
@@ -173,10 +175,65 @@ export function observeLocal(
 ) {
   if (a.level_epoch !== b.level_epoch || a.levels_completed !== b.levels_completed || a.state !== b.state)
     return;
+  if (m.continuations?.length) {
+    m.continuations = m.continuations.filter(item => item.frame !== b.frame_hash || item.plan.c !== op);
+  }
   remember(m, b.frame_hash, rows);
   remember(m, a.frame_hash, next);
   bounded(m.steps, { from: b.frame_hash, to: a.frame_hash, op, ref: a.observation_ref }, 128);
+  recordObservedPrefix(m, a.frame_hash, { frame: rows }, { frame: next });
   learn(m);
+}
+
+// Any family can supply the preparation. Its two actual transitions, a prior
+// response to B alone and the translated training example ground the prediction for C.
+function recordObservedPrefix(m: LocalMemory, frame: string, prepared: Picture, enabled: Picture) {
+  const first = m.steps.at(-2), second = m.steps.at(-1);
+  if (!first || !second || first.to !== second.from || first.from === first.to || second.from === frame) return;
+  if (!m.laws.length) return;
+  const bare = direct(m, first.from, second.op);
+  if (!bare || bare.to === frame) return;
+  const root = read(m, first.from), control = read(m, bare.to);
+  if (!root || !control) return;
+  const laws = m.laws.filter(law => law.third && law.origin !== first.from &&
+    law.a.split(':')[0] === first.op.split(':')[0] && law.b.split(':')[0] === second.op.split(':')[0]);
+  if (!laws.length) return;
+  const changed = publicEdits(root, prepared, []);
+  for (const law of laws) {
+    const use = law.third!;
+    for (const edit of changed) {
+      if (edit.from !== law.first.from || edit.to !== law.first.to || separation(edit.p, law.first.p) < 3) continue;
+      const shift = siteOffset(edit.p, law.first.p);
+      if (translateCommand(law.a, shift, root) !== first.op || translateCommand(law.b, shift, root) !== second.op) continue;
+      const siteB = shiftSite(law.second.p, shift), siteC = shiftSite(use.p, shift);
+      const c = translateCommand(law.c, shift, enabled);
+      if (!c || localPatch(root, siteB) !== law.bareB || localPatch(prepared, siteB) !== law.second.from ||
+          localPatch(enabled, siteB) !== law.second.to || localPatch(control, siteB) === law.second.to ||
+          localPatch(enabled, siteC) !== use.from || m.steps.some(step => step.from === frame && step.op === c)) continue;
+      const shortcuts = [direct(m, first.to, c), direct(m, bare.to, c)];
+      if (shortcuts.some(step => step && localPatch(read(m, step.to), siteC) === use.to)) continue;
+      const saved = m.continuations ??= [];
+      if (saved.some(item => item.frame === frame && item.plan.c === c && item.plan.law === law.key)) continue;
+      bounded(saved, { frame, plan: {
+        stage: 'use', origin: first.from, law: law.key, training: law.origin, trainedSite: law.first.p,
+        ref: law.ref, controlRef: bare.ref, observedPrefix: { first: first.ref, second: second.ref },
+        a: first.op, b: second.op, c, site: edit.p, siteB, siteC,
+        firstBefore: edit.from, firstAfter: edit.to, beforeB: law.second.from, afterB: law.second.to,
+        beforeC: use.from, afterC: use.to, revised: false,
+      } }, 64);
+    }
+  }
+}
+
+export function continuationAt(m: LocalMemory, o: NativeObservation, rows: NativeRows): LocalForecast | null {
+  const board = { frame: rows };
+  for (const item of m.continuations ?? []) {
+    const p = item.plan;
+    if (item.frame !== o.frame_hash || !p.siteC || !o.available_action_refs.includes(p.c.split(':')[0]!) ||
+        localPatch(board, p.siteC) !== p.beforeC || m.steps.some(step => step.from === item.frame && step.op === p.c)) continue;
+    return p;
+  }
+  return null;
 }
 function locations(board: Picture) {
   const map = new Map<string, Site[]>();
