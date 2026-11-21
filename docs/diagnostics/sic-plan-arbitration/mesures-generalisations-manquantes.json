@@ -302,5 +302,252 @@
         "result": "new_cursor_moved_while_previous_cursor_stayed"
       }
     ]
+  },
+  "preservingTheFirstCursor": {
+    "source": {
+      "summary": {
+        "episodes": 20,
+        "confirmedSwitches": 0,
+        "branches": 0,
+        "changedWinningScores": 0,
+        "converted": []
+      },
+      "witnessedEpisodes": []
+    },
+    "upper": {
+      "summary": {
+        "episodes": 5,
+        "confirmedSwitches": 6,
+        "branches": 20,
+        "changedWinningScores": 7,
+        "converted": []
+      },
+      "witnessedEpisodes": [
+        {
+          "code": "VOIS",
+          "level": 5,
+          "won": false,
+          "switches": 1,
+          "forks": [
+            {
+              "switchAt": 84,
+              "verifiedAt": 87,
+              "input": 2,
+              "used": 90,
+              "score": 0,
+              "stationary": {
+                "action": 1,
+                "used": 90,
+                "score": 0
+              }
+            },
+            {
+              "switchAt": 84,
+              "verifiedAt": 87,
+              "input": 3,
+              "used": 90,
+              "score": 0,
+              "stationary": {
+                "action": 1,
+                "used": 90,
+                "score": 0
+              }
+            },
+            {
+              "switchAt": 84,
+              "verifiedAt": 87,
+              "input": 4,
+              "used": 90,
+              "score": 0,
+              "stationary": {
+                "action": 1,
+                "used": 90,
+                "score": 0
+              }
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "won": true,
+          "switches": 5,
+          "forks": [
+            {
+              "switchAt": 7,
+              "verifiedAt": 8,
+              "input": 1,
+              "used": 81,
+              "score": 1,
+              "stationary": null
+            },
+            {
+              "switchAt": 7,
+              "verifiedAt": 8,
+              "input": 2,
+              "used": 81,
+              "score": 1,
+              "stationary": null
+            },
+            {
+              "switchAt": 7,
+              "verifiedAt": 8,
+              "input": 3,
+              "used": 81,
+              "score": 1,
+              "stationary": null
+            },
+            {
+              "switchAt": 7,
+              "verifiedAt": 8,
+              "input": 4,
+              "used": 81,
+              "score": 1,
+              "stationary": null
+            },
+            {
+              "switchAt": 15,
+              "verifiedAt": 16,
+              "input": 2,
+              "used": 81,
+              "score": 1,
+              "stationary": {
+                "action": 1,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 15,
+              "verifiedAt": 16,
+              "input": 3,
+              "used": 81,
+              "score": 1,
+              "stationary": {
+                "action": 1,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 15,
+              "verifiedAt": 16,
+              "input": 4,
+              "used": 81,
+              "score": 1,
+              "stationary": {
+                "action": 1,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 23,
+              "verifiedAt": 25,
+              "input": 2,
+              "used": 81,
+              "score": 1,
+              "stationary": {
+                "action": 1,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 23,
+              "verifiedAt": 25,
+              "input": 3,
+              "used": 81,
+              "score": 1,
+              "stationary": {
+                "action": 1,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 23,
+              "verifiedAt": 25,
+              "input": 4,
+              "used": 81,
+              "score": 1,
+              "stationary": {
+                "action": 1,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 69,
+              "verifiedAt": 70,
+              "input": 1,
+              "used": 81,
+              "score": 0,
+              "stationary": null
+            },
+            {
+              "switchAt": 69,
+              "verifiedAt": 70,
+              "input": 2,
+              "used": 81,
+              "score": 0,
+              "stationary": null
+            },
+            {
+              "switchAt": 69,
+              "verifiedAt": 70,
+              "input": 3,
+              "used": 81,
+              "score": 0,
+              "stationary": null
+            },
+            {
+              "switchAt": 69,
+              "verifiedAt": 70,
+              "input": 4,
+              "used": 81,
+              "score": 0,
+              "stationary": null
+            },
+            {
+              "switchAt": 76,
+              "verifiedAt": 77,
+              "input": 1,
+              "used": 81,
+              "score": 0,
+              "stationary": {
+                "action": 2,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 76,
+              "verifiedAt": 77,
+              "input": 3,
+              "used": 81,
+              "score": 0,
+              "stationary": {
+                "action": 2,
+                "used": 81,
+                "score": 1
+              }
+            },
+            {
+              "switchAt": 76,
+              "verifiedAt": 77,
+              "input": 4,
+              "used": 81,
+              "score": 0,
+              "stationary": {
+                "action": 2,
+                "used": 81,
+                "score": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
   }
 }
