@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {observeLandmarks, proposeLandmark, observePlacement, refreshedSelection} from '../src/sic/paired-landmark-placement.ts';
 import {informationPriority} from '../src/sic/information-preference.ts';
+import {recordPlacementVisit,challengePlacement,type PlacementVisits} from '../src/sic/recurrent-placement.ts';
 import type {CursorTrial} from '../src/sic/marked-cursor-selection.ts';
 import type {VisualLayout} from '../src/sic/witnessed-preview-transfer.ts';
 import type {NativeObservation} from '../src/logos-engine/v6-native-types.ts';
@@ -36,6 +37,21 @@ test('a verified switch without a prior plan retains the two roles for a later p
   assert.equal(offer?.returnRef,'verified');
   observePlacement(m,undefined,base,'cursor_click_visually_unchanged',trial,moved);
   assert.equal(m.previousControl,undefined);
+});
+test('two identical placement returns justify a fresh click on the currently observed peer',()=>{
+  const memory=observeLandmarks(undefined,base,base,'seen');
+  const proposed=proposeLandmark(memory,base,o,rows,{mover:motion},trial,100)!;
+  const book:PlacementVisits={edges:{},tested:{}};
+  const obs={...o,entities:[{signature:'remote',bbox:[9,3,9,3],mask:[[0,0]]}]} as unknown as NativeObservation;
+  recordPlacementVisit(book,proposed,o.frame_hash,'one','r1');
+  assert.equal(challengePlacement(book,proposed,obs,base),undefined);
+  recordPlacementVisit(book,proposed,o.frame_hash,'different','r2');
+  assert.equal(challengePlacement(book,proposed,obs,base),undefined);
+  recordPlacementVisit(book,proposed,o.frame_hash,'different','r3');
+  const click=challengePlacement(book,proposed,obs,base)!;
+  assert.equal(click.command,'ACTION6:9,3');assert.ok(click.evidence.includes('r3'));
+  book.tested[click.recurrentPlacement!.key]=true;
+  assert.equal(challengePlacement(book,proposed,obs,base),undefined);
 });
 test('two different placements separate an immediate switch from a prepared one',()=>{
   const m=observeLandmarks(undefined,base,base,'first');

@@ -13,7 +13,7 @@ type ControlContrast = {
   motor: string; baselineDelta: NativePoint; evidence: string; outcomes: readonly ['previous_subject_moves', 'selected_subject_moves'];
 };
 type RepairOption = {command:string; prediction:'new_placement'|'unknown'|'return_or_overlap'; ref?:string};
-export type CursorTrial = Mark & { stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[]; beyondReturn?:boolean };
+export type CursorTrial = Mark & { recurrentPlacement?:{key:string;verifiedReturns:number;alternative:string;returnedFrame:string};stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[]; beyondReturn?:boolean };
 export type CursorMemory = {
   motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};

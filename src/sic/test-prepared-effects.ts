@@ -7,6 +7,7 @@ import {observeLandmarks,observeLandmarkAccess,proposeLandmark,refreshedSelectio
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {detectTransportSelection,observeTransport} from './transport-observations.ts';
 import {chooseTransport} from './compose-transport.ts';
+import {challengePlacement,recordPlacementVisit} from './recurrent-placement.ts';
 import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import {observeCueCondition} from './seek-missing-preview.ts';
@@ -101,7 +102,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const stageRegions=comparePreparations && informationPreference?.strategy==='compose_transport_by_region';
+  const retrySelection=comparePreparations && informationPreference?.strategy==='challenge_recurrent_placements';
+  const stageRegions=retrySelection || comparePreparations && informationPreference?.strategy==='compose_transport_by_region';
   const composeTransport=stageRegions || comparePreparations && informationPreference?.strategy==='compose_observed_transports';
   const transferFooting=composeTransport || comparePreparations && informationPreference?.strategy==='transfer_registered_footing';
   const prepareJoint=transferFooting || comparePreparations && informationPreference?.strategy==='prepare_joint_arrivals';
@@ -134,6 +136,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
       const before=visualLayout(b,rows),after=visualLayout(a,next);
       const key=observedCommandKey(cmd);
+      if(retrySelection&&x?.landmark)recordPlacementVisit(m.placementVisits??={edges:{},tested:{}},x.landmark,b.frame_hash,a.frame_hash,a.observation_ref);
+      if(x?.cursorTrial?.recurrentPlacement&&m.placementVisits)m.placementVisits.tested[x.cursorTrial.recurrentPlacement.key]=true;
       if(composeTransport&&b.available_action_refs.includes('ACTION6')){
         if(!m.transportLearning&&cmd.action_ref==='ACTION6'&&cmd.data.x!==undefined&&cmd.data.y!==undefined){
           const selected=detectTransportSelection(before,rows,next,[cmd.data.x,cmd.data.y],a.observation_ref);
@@ -192,9 +196,13 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       }
       const cooperative=composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
         ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined;
-      const landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
+      let landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
         ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
-      const cursor=cooperative?null:landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor;
+      const challenge=landmark&&retrySelection&&m.placementVisits&&!m.cursorSelection?.pending
+        ?challengePlacement(m.placementVisits,landmark,o,visualLayout(o,rows)):undefined;
+      const verifyChallenge=retrySelection&&m.cursorSelection?.pending?.recurrentPlacement&&offeredCursor;
+      if(challenge||verifyChallenge)landmark=undefined;
+      const cursor=cooperative?null:challenge??(landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor);
       if (!cooperative && !landmark && !cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const missingCue=!!m.previewLearning?.cueSearch?.seeking;
       const justMovedLine=Object.values(m.relativeMotion?.models??{}).some(v=>v.contact?.latestDisplacement===o.observation_ref && !!v.contact?.freeWalk && !v.contact.contradicted);

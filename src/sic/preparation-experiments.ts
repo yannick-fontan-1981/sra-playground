@@ -247,6 +247,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  placementVisits?:import('./recurrent-placement.ts').PlacementVisits;
   transportLearning?: import('./transport-observations.ts').TransportMemory;
   cursorSelection?: CursorMemory;
   landmarkMemory?: import('./paired-landmark-placement.ts').LandmarkMemory;
