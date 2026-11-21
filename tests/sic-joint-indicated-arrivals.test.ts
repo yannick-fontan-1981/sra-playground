@@ -33,6 +33,22 @@ test('a preparation keeps the other actor and its mechanism fixed; a failed edge
   assert.equal(measureJointReturn(m,context,s,first),'joint_preparation_refuted');
   assert.notEqual(proposal()?.key,first.key);
 });
+test('two agreeing landmark displacements allow a falsifiable step onto the counterpart of an occupied site',()=>{
+  const m=newJointMemory(),before=view([12,12],[]),s=view([8,12],[[32,16]]);
+  observeJointIndications(m,context,before,s,'ACTION4','observed-mark');
+  const clutter=rows.map(row=>row.map(()=>9));
+  const registered:JointContext={...context,registration:{originalPivots:[[12,8],[32,20]],goalRef:'two-goals',pivotRef:'two-pivots'}};
+  const offer=(c:JointContext)=>chooseJointArrival(m,c,s,o,clutter,motors,3,12,120);
+  assert.equal(offer(context),undefined);
+  assert.equal(offer({...registered,registration:{...registered.registration!,originalPivots:[[16,8],[32,20]]}}),undefined);
+  const candidate=offer(registered)!;
+  assert.equal(candidate.command,'ACTION1');
+  assert.deepEqual(candidate.registeredFooting?.site,[8,8]);
+  assert.equal(candidate.registeredFooting?.goalRef,'two-goals');
+  assert.equal(m.sites[0]['8,8'],undefined);
+  assert.equal(measureJointReturn(m,registered,s,candidate),'joint_preparation_refuted');
+  assert.equal(offer(registered),undefined);
+});
 test('a changing partner or an ambiguous pairing cannot support a remote indication',()=>{
   const m=newJointMemory(),before=view([8,12],[],[28,24]),after=view([8,8],[[32,16]]);
   observeJointIndications(m,context,before,after,'ACTION1','uncontrolled');

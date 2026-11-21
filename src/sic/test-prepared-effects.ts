@@ -98,7 +98,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const prepareJoint=comparePreparations && informationPreference?.strategy==='prepare_joint_arrivals';
+  const transferFooting=comparePreparations && informationPreference?.strategy==='transfer_registered_footing';
+  const prepareJoint=transferFooting || comparePreparations && informationPreference?.strategy==='prepare_joint_arrivals';
   const reconsiderDestination=prepareJoint || comparePreparations && informationPreference?.strategy==='reclassify_displaced_goal';
   const testPartner=reconsiderDestination || comparePreparations && informationPreference?.strategy==='test_partner_preparation';
   const planAfterSelection=testPartner || comparePreparations && informationPreference?.strategy==='plan_after_selection';
@@ -137,6 +138,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           if(testPartner)m.landmarkMemory.testPartner=true;
           if(reconsiderDestination)m.landmarkMemory.reconsiderDestination=true;
           if(prepareJoint)m.landmarkMemory.prepareJoint=true;
+          if(transferFooting)m.landmarkMemory.transferFooting=true;
         }
         if(seekAccess&&m.landmarkMemory)observeLandmarkAccess(m.landmarkMemory,before,after,b,a,rows,next,key,x?.landmark);
         observeCueCondition(learning,b,a,before,after,key);

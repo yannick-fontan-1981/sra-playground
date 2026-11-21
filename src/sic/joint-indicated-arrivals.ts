@@ -1,5 +1,5 @@
 import type {NativeObservation,NativeRows} from '../logos-engine/v6-native-types.ts';
-import {diff,same,type XY} from './access-terrain.ts';
+import {add,diff,same,type XY} from './access-terrain.ts';
 import {aligned} from './controlled-parts.ts';
 import {cellMatches} from './calibrate-spatial-controls.ts';
 import {previewLaw,type ProbePattern} from './reachable-preview-configurations.ts';
@@ -10,7 +10,9 @@ import type {VisualLayout} from './witnessed-preview-transfer.ts';
 type Side=0|1;
 type Pair<T>=[T,T];
 type Motor={op:string;d:XY};
-export type JointContext={roles:Pair<string>;goals:Pair<XY>;pivot:string;pitch:XY;alternate:VerifiedPartnerForms};
+type Registration={originalPivots:Pair<XY>;pivotRef:string;goalRef:string};
+type Support={site:XY;occupiedByPartner:XY;translation:XY;pivotRef:string;goalRef:string};
+export type JointContext={roles:Pair<string>;goals:Pair<XY>;pivot:string;pitch:XY;alternate:VerifiedPartnerForms;registration?:Registration};
 type Pose={actors:Pair<XY>;pivots:Pair<XY>;active:Side;forms:Pair<string>};
 type Witness={pattern:ProbePattern;ref:string;producer:string};
 export type JointMemory={witnesses:Record<string,Witness[]>;sites:Pair<Record<string,true>>;
@@ -18,7 +20,7 @@ export type JointMemory={witnesses:Record<string,Witness[]>;sites:Pair<Record<st
 export const newJointMemory=():JointMemory=>({witnesses:{},sites:[{},{}],denied:{},failedReads:{},failedDisplays:{}});
 export type JointForecast={purpose:'position_for_shared_operation'|'select_remaining_subject'|'test_joint_arrivals';
   command:string;side:Side;goals:Pair<XY>;actors:Pair<XY>;pivots:Pair<XY>;cue:string;witness:string;producer:string;
-  expected:XY;placed:XY;ready:Pair<boolean>;displayed:Pair<boolean>;verifyDisplay?:boolean;key:string};
+  expected:XY;placed:XY;ready:Pair<boolean>;displayed:Pair<boolean>;verifyDisplay?:boolean;registeredFooting?:Support;key:string};
 const sides=[0,1] as const;
 const other=(i:Side):Side=>i===0?1:0;
 const single=(l:VisualLayout,k:string)=>l[k]?.length===1?l[k]![0]:undefined;
@@ -62,12 +64,23 @@ export function observeJointIndications(m:JointMemory,c:JointContext,before:Visu
   }
 }
 
-type Step={command:string;expected:XY;placed:XY};
+function registeredSupport(c:JointContext,p:Pose,i:Side):Support|undefined{
+  const registration=c.registration;
+  if(!registration)return;
+  const j=other(i),translation=diff(c.goals[i],c.goals[j]);
+  const origins=registration.originalPivots.map(at=>grid(at,c));
+  if(same(c.goals[i],c.goals[j])||same(c.goals[i],origins[i]!)||!same(translation,diff(origins[i]!,origins[j]!)))return;
+  return {site:add(p.actors[j],translation),occupiedByPartner:p.actors[j],translation,
+    pivotRef:registration.pivotRef,goalRef:registration.goalRef};
+}
+type Step={command:string;expected:XY;placed:XY;registeredFooting?:Support};
 function route(m:JointMemory,c:JointContext,p:Pose,i:Side,rows:NativeRows,motors:Motor[],ground:number|undefined,
   predict:ReturnType<typeof previewLaw>,producer:string,depth:number,limit:number,finishWithProducer:boolean):Step[]|undefined{
   const goal=c.goals[i],loc=p.actors[i],anchor=p.pivots[i],guard=p.actors[other(i)];
   const scene={at:loc,visible:{[c.pivot]:anchor},form:'',next:{}};
-  const board=visibleBoard({sites:m.sites[i],scenes:{current:scene}},
+  const support=registeredSupport(c,p,i);
+  const partnerSites=support?{[support.site.join()]:support.pivotRef}:undefined;
+  const board=visibleBoard({sites:m.sites[i],scenes:{current:scene},partnerSites},
     {actor:p.forms[i],parked:p.forms[other(i)],home:guard,goal,pitch:c.pitch},scene,c.pivot,rows,motors,ground);
   if(!board)return;
   const {points,walk}=board;
@@ -82,7 +95,9 @@ function route(m:JointMemory,c:JointContext,p:Pose,i:Side,rows:NativeRows,motors
       for(let k=j;nodes[k]!.parent>=0;k=nodes[k]!.parent){
         const n=nodes[k]!;path.push({command:motors[n.motor]!.op,expected:points[n.pos]!,placed:points[n.pivot]!});
       }
-      return path.reverse();
+      path.reverse();
+      if(support&&path.length&&board.partnerVisits.size&&path.some(s=>same(s.expected,support.site)||same(s.placed,support.site)))path[0]!.registeredFooting=support;
+      return path;
     }
     if(node.length>=depth)continue;
     for(const [index,motor] of motors.entries()){

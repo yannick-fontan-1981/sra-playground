@@ -25,7 +25,7 @@ export type LandmarkTrial = Assignment & {
 export type LandmarkMemory = {
   pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string; access?:IndicatedMemory;
   redrawn?:{parked:string;selected:string};
-  planAfterSelection?:boolean; prepareJoint?:boolean; joint?:JointMemory;
+  planAfterSelection?:boolean; prepareJoint?:boolean; transferFooting?:boolean; joint?:JointMemory;
   previousControl?:{parked:string;moving:string;at:XY;ref:string;motor?:{op:string;d:XY;ref:string}};
   testPartner?:boolean; probe?:PartnerTest; probedEdges?:string[]; verifiedForms?:VerifiedPartnerForms;
   reconsiderDestination?:boolean; redirect?:{assignment:Assignment;displaced:DisplacedDestination};
@@ -132,7 +132,12 @@ function nextStep(m:LandmarkMemory,a:Assignment,role:string,from:XY,goal:XY,guar
 function jointContext(m:LandmarkMemory,a?:Assignment):JointContext|undefined{
   const alt=m.verifiedForms;
   if(!m.prepareJoint||!a?.displaced||!alt||alt.actor!==a.actor||alt.peer!==a.peer)return;
-  return {roles:[a.actor,a.peer],goals:[a.home,a.other],pitch:a.pitch,pivot:a.displaced.role,alternate:alt};
+  const copies=a.displaced.stationaryCopies;
+  const context:JointContext={roles:[a.actor,a.peer],goals:[a.home,a.other],pitch:a.pitch,pivot:a.displaced.role,alternate:alt};
+  if(m.transferFooting&&copies.length===1&&a.pair.role!==a.displaced.role){
+    context.registration={originalPivots:[a.displaced.from,copies[0]!],pivotRef:a.displaced.ref,goalRef:a.pair.ref};
+  }
+  return context;
 }
 function accessContext(m:LandmarkMemory){
   const a=m.active;
