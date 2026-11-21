@@ -10,6 +10,8 @@
 
 ## Quatorze chantiers, chacun avec une expérience qui peut échouer
 
+Le [registre des généralisations manquantes pour Custom 4](generalisations-manquantes-custom4.md) relie ces chantiers aux niveaux ouverts, aux réalisations dans le solveur et aux preuves encore nécessaires.
+
 ### Première priorité · Décider quoi faire après un changement
 
 | N° | Capacité recherchée | Première expérience sur les sources | Ce qui ferait retenir la piste |
