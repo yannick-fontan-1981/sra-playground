@@ -29,6 +29,17 @@ test('the same refused input is retested only in the restored control configurat
   assert.equal(advancePartnerTest(s,back,back,pitch),'still_blocked');
   assert.equal(advancePartnerTest(s,back,{...back,active:[body(3,2,'selected')]},pitch),'released');
 });
+test('a previously verified pair can be rebound when another mark also appears at the partner',()=>{
+  const a=visible(), b={...switched(),glow:[body(5,4,'indicator')]};
+  assert.equal(advancePartnerTest(begin(),a,b,pitch),'lost');
+  const known={actor:'active',peer:'peer',alternateActor:'held',alternatePeer:'preparer',ref:'measured-movement'};
+  const s={...begin(),verifiedForms:known};
+  assert.equal(advancePartnerTest(s,a,b,pitch),'partner_selected');
+  assert.equal(s.alternatePeer,'preparer');
+  assert.equal(advancePartnerTest(s,b,{...b,glow:[body(3,4,'indicator')]},pitch),'partner_preparation_refuted');
+  const incomplete={...begin(),verifiedForms:{...known,alternateActor:'missing'}};
+  assert.equal(advancePartnerTest(incomplete,a,b,pitch),'lost');
+});
 test('a redraw or a moving partner alone cannot verify the release',()=>{
   const s=begin(),a=visible();assert.equal(advancePartnerTest(s,a,a,pitch),'lost');
   s.phase='retry';

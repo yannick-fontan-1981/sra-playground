@@ -7,7 +7,7 @@ import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
 import {chooseIndicatedAccess,learnIndicatedAccess,localAccessBody,newIndicatedMemory,type AccessExperiment,type IndicatedMemory} from './seek-indicated-access.ts';
 import {chooseMobileIndication,tileValues} from './plan-mobile-indication.ts';
-import {advancePartnerTest,nextPartnerTest,observedBodyClick,sitePatch,type PartnerTest,type PartnerOffer} from './test-partner-preparation.ts';
+import {advancePartnerTest,nextPartnerTest,observedBodyClick,sitePatch,type PartnerTest,type PartnerOffer,type VerifiedPartnerForms} from './test-partner-preparation.ts';
 import {measureDisplacedDestination,type DisplacedDestination} from './displaced-destination.ts';
 
 type Pair = {role:string; sites:XY[]; ref:string};
@@ -17,7 +17,7 @@ type Assignment = {
 };
 export type LandmarkTrial = Assignment & {
   stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked'|'test_partner_preparation';
-  partnerTest?:PartnerOffer & {refusal:string;motorRef:string;destination:XY};
+  partnerTest?:PartnerOffer & {refusal:string;motorRef:string;destination:XY;verifiedFormsRef?:string};
   command:string; from:XY; expected:XY; guard:XY; basis:string; access?:AccessExperiment;
 };
 export type LandmarkMemory = {
@@ -25,7 +25,7 @@ export type LandmarkMemory = {
   redrawn?:{parked:string;selected:string};
   planAfterSelection?:boolean;
   previousControl?:{parked:string;moving:string;at:XY;ref:string;motor?:{op:string;d:XY;ref:string}};
-  testPartner?:boolean; probe?:PartnerTest; probedEdges?:string[];
+  testPartner?:boolean; probe?:PartnerTest; probedEdges?:string[]; verifiedForms?:VerifiedPartnerForms;
   reconsiderDestination?:boolean; redirect?:{assignment:Assignment;displaced:DisplacedDestination};
   releasedEdges?:{role:string;from:XY;command:string;partner:XY;destination:XY;ref:string}[];
   blocked:string[]; tried:string[]; inconclusiveSelections?:string[]; handoff?:boolean; lastResult?:string;
@@ -171,7 +171,8 @@ export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservat
   if(m.probe){
     const step=nextPartnerTest(m.probe,l,o,rows,a.pitch);
     if(step)return {...a,stage:'test_partner_preparation',command:step.command,from:step.from,expected:step.expected,guard:step.guard,
-      basis:step.phase,partnerTest:{...step,refusal:m.probe.refusal,motorRef:m.probe.motorRef,destination:m.probe.destination}};
+      basis:step.phase,partnerTest:{...step,refusal:m.probe.refusal,motorRef:m.probe.motorRef,destination:m.probe.destination,
+        ...(m.probe.verifiedForms?{verifiedFormsRef:m.probe.verifiedForms.ref}:{})}};
     return;
   }
   const role=m.secondRole??a.actor,peer=m.parkedRole??a.peer,body=singleton(l,role),parked=singleton(l,peer);
@@ -233,6 +234,9 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     delete m.redirect;
     if(t.partnerTest && m.probe){
       const s=m.probe, result=advancePartnerTest(s,before,l,t.pitch);
+      if(result==='partner_preparation_confirmed'&&s.alternateActor&&s.alternatePeer&&observationRef){
+        m.verifiedForms={actor:s.actor,peer:s.peer,alternateActor:s.alternateActor,alternatePeer:s.alternatePeer,ref:observationRef};
+      }
       if(result==='lost'){drop(m);delete m.previousControl;return m.lastResult='partner_experiment_lost_subject';}
       if(result==='released'||result==='still_blocked'){
         if(m.previousControl)m.previousControl.at=s.partnerAt;
@@ -272,7 +276,8 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
       (m.probedEdges??=[]).push(key);
       m.probe={phase:'select_partner',actor:t.actor,peer:t.peer,origin:body.at,destination:t.expected,initialPartner:parked.at,
         partnerAt:parked.at,blockedMotor:t.command,prepareMotor:motor.op,prepareDelta:motor.d,refusal:observationRef,
-        motorRef:motor.ref,originalPatch:sitePatch(rows,t.expected,t.pitch)};
+        motorRef:motor.ref,originalPatch:sitePatch(rows,t.expected,t.pitch),
+        ...(m.verifiedForms?.actor===t.actor&&m.verifiedForms.peer===t.peer?{verifiedForms:m.verifiedForms}:{})};
     }
     return m.lastResult='approach_refuted_replan';
   }

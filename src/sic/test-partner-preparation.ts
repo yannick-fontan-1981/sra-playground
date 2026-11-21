@@ -4,10 +4,11 @@ import type {VisualLayout} from './witnessed-preview-transfer.ts';
 import type {NativeObservation,NativeRows} from '../logos-engine/v6-native-types.ts';
 
 export type PartnerPhase='select_partner'|'move_partner'|'restore_subject'|'retry';
+export type VerifiedPartnerForms={actor:string;peer:string;alternateActor:string;alternatePeer:string;ref:string};
 export type PartnerTest={
   phase:PartnerPhase; actor:string; peer:string; origin:XY; destination:XY; initialPartner:XY; partnerAt:XY;
   blockedMotor:string; prepareMotor:string; prepareDelta:XY; refusal:string; motorRef:string;
-  originalPatch:string; alternateActor?:string; alternatePeer?:string;
+  originalPatch:string; alternateActor?:string; alternatePeer?:string; verifiedForms?:VerifiedPartnerForms;
 };
 export type PartnerOffer={phase:PartnerPhase;command:string;from:XY;expected:XY;guard:XY;changedSite?:boolean};
 
@@ -49,11 +50,15 @@ function redrawn(before:VisualLayout,after:VisualLayout,site:XY,pitch:XY){
     const next=single(after,k);
     return next&&cellMatches(next.at,site,pitch)&&!cellMatches(single(before,k)?.at??null,site,pitch);
   });
-  return roles.length===1?roles[0]:undefined;
+  return roles;
 }
 export function advancePartnerTest(s:PartnerTest,before:VisualLayout,after:VisualLayout,pitch:XY){
   if(s.phase==='select_partner'){
-    const actor=redrawn(before,after,s.origin,pitch),peer=redrawn(before,after,s.partnerAt,pitch);
+    const actors=redrawn(before,after,s.origin,pitch),peers=redrawn(before,after,s.partnerAt,pitch);
+    const known=s.verifiedForms;
+    const matches=known?.actor===s.actor&&known.peer===s.peer&&actors.includes(known.alternateActor)&&peers.includes(known.alternatePeer);
+    const actor=matches?known.alternateActor:actors.length===1?actors[0]:undefined;
+    const peer=matches?known.alternatePeer:peers.length===1?peers[0]:undefined;
     if(!actor||!peer||actor===peer)return 'lost';
     s.alternateActor=actor;s.alternatePeer=peer;s.phase='move_partner';return 'partner_selected';
   }
