@@ -1,5 +1,7 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
+**SS09 L2 est ouvert au diagnostic et à la résolution, à froid et en campagne.** SIC confirme le changement de contrôle en quatre coups. Le banc gagne en 26 commandes après avoir choisi un sujet capable de déplacer deux caisses et un autre capable de finir un placement par contact. SIC v98 échoue à froid après 280 commandes. Les mentions historiques de la réserve correspondent aux versions précédentes. [Expérience, contre-épreuves et scores](selection-et-pose-ss09-v98.md)
+
 **SS08 devient le huitième jeu Custom 4 dont SIC gagne le L2.** V95 gagne à froid en **70 actions autonomes**. Après un échange de positions observé, SIC amène le sujet qui pousse sur une rive utile, transforme une pièce en appui et utilise la case nouvellement praticable pour rejoindre les deux repères. Deux autres configurations à 70 commandes restent sans point. Le banc confirme qu’en ramenant les deux sujets aux mêmes positions par une autre préparation, la même traversée échoue. Les sept victoires précédentes et les 100 trajectoires sources sont préservées. Sur SS10, le prochain chantier associe la sortie d’une boucle d’approche à la recherche d’un placement qui maintient un passage ouvert. [Décisions, expérience comparée et certificats](transports-par-region-v95.md)
 
 **SS06 devient le septième jeu Custom 4 dont SIC gagne le L2.** À froid, v93 gagne en **54 commandes autonomes**. La même version avec le pack témoin reste à zéro après 54 commandes. Au coup 31, SIC engage un trajet car deux paires de repères lui permettent de proposer qu’une case occupée chez A a un équivalent praticable chez B. Il vérifie ce pas au coup 34, laisse B en place, pilote A et active le mécanisme commun lorsque les deux arrivées prévues sont marquées. Cette expérience rattache les chantiers de sélection du sujet, d’exploration spatiale et de composition à un point officiel supplémentaire. [Première divergence, témoins et qualification](arrivees-conjointes-v93.md)
@@ -635,7 +637,7 @@ Sur L4, le pilote emprunte les 10 premières commandes de SIC, puis choisit une 
 | SS06, SS08, SS10 | Sur un préfixe source à plusieurs pièces, désigner avant le clic la pièce qui doit répondre. Faire bouger celle-ci, immobiliser l’ancienne, puis échanger les rôles. Comparer aussi un clic qui échoue. | Identifier le sujet contrôlable, conserver la première position utile et conduire l’autre sujet à la sienne. Le premier contrôle est le tout premier changement de sujet vérifié. |
 | SS07 | Trouver d’abord deux branches sources du même état qui séparent perte immédiate et continuation gagnante. Vérifier le signal sur un autre préfixe. | Choisir une action qui laisse les deux sujets en jeu puis poursuivre la coordination. |
 
-SS01 et SS04 assurent le contrôle des acquis. SS09 L2 est réservé à la confirmation. Le score principal reste le nombre de jeux supplémentaires dont SIC gagne le L2.
+SS01 et SS04 assurent le contrôle des acquis. SS09 L2 participe aux diagnostics et aux essais de résolution. Le score principal reste le nombre de jeux supplémentaires dont SIC gagne le L2.
 
 ## Méthode de qualification
 
@@ -647,6 +649,6 @@ SS01 et SS04 assurent le contrôle des acquis. SS09 L2 est réservé à la confi
 2. **Comparer depuis le même préfixe.** Rejouer la préparation présente, absente ou remplacée. Conserver le nombre de commandes et distinguer une branche de laboratoire d’une partie où SIC choisit tous ses coups.
 3. **Contrôler les acquis et figer.** Comparer les 100 L1 et les quatre victoires SKBN, SWCH, KEYD et GABA. Figer code, réglages et critères avant le premier essai Custom 4 de ce candidat. V38 conserve 100 victoires sur 100 au rejeu, avec 96 trajectoires identiques à v34.
 4. **Mesurer le transfert.** Comparer à froid sur les neuf L2 ouverts et relever le motif d’arrêt. Comparer séparément les parties passées par le L1. Si les temps actifs diffèrent, comparer également le préfixe de même longueur.
-5. **Attribuer les victoires.** Rejouer dans le moteur chaque nouvelle victoire, retirer la capacité et répéter l’essai. SS09 L2 reste fermé jusqu’à la confirmation finale.
+5. **Attribuer les victoires.** Rejouer dans le moteur chaque nouvelle victoire, retirer la capacité et répéter l’essai. Pour SS09 L2, documenter explicitement les observations qui ont orienté chaque candidat.
 
 [Rejeux SS02, SS03, SS05 et SS10](autres-l2.md) · [Mesures sur SS06, SS07 et SS08](bilan-trois-chantiers.md) · [Expérience de configuration v38](gel-configurations-v38.md) · [Interventions sur les mouvements relatifs](score-configurations-v38.json)
