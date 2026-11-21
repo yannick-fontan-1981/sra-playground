@@ -7,6 +7,7 @@ export const informationStrategies = {
   paired_arrival: 'Compare selection before and after a subject reaches a repeated landmark',
   indicated_access: 'Seek an indication at a traversable site when ordinary movement fails to reach a destination',
   plan_after_selection: 'Use a verified change of control to plan a placement and test the return to the previous subject',
+  test_partner_preparation: 'Retest a blocked movement after changing the other subject’s placement',
 } as const;
 
 export type InformationStrategy = keyof typeof informationStrategies;

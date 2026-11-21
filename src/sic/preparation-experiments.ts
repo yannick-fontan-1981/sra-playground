@@ -934,7 +934,7 @@ export function recordExperiment(
     ? recordCursorTrial(m.cursorSelection??=newCursorMemory(),b,a,rows,next,op,x?.cursorTrial) : undefined;
   const sameBoard=b.level_epoch===a.level_epoch && a.levels_completed===b.levels_completed && b.state===a.state;
   const placementResult=m.landmarkMemory && sameBoard && (x?.landmark||x?.cursorTrial||m.landmarkMemory.handoff)
-    ? observePlacement(m.landmarkMemory,x?.landmark,visualLayout(a,next),cursorResult,x?.cursorTrial,visualLayout(b,rows),m.cursorSelection?.pending,a.observation_ref):undefined;
+    ? observePlacement(m.landmarkMemory,x?.landmark,visualLayout(a,next),cursorResult,x?.cursorTrial,visualLayout(b,rows),m.cursorSelection?.pending,a.observation_ref,next):undefined;
   if (sameBoard) {
     const configurations=m.configurations??=newConfigurationMemory();
     const trial=x?.configurationTrial;

@@ -25,7 +25,7 @@ export interface InformationOfferSummary {
 }
 
 export function informationPriority(offer: InformationOfferSummary, preference: InformationPreference) {
-  const prepared=preference.strategy==='paired_arrival'||preference.strategy==='indicated_access'||preference.strategy==='plan_after_selection';
+  const prepared=['paired_arrival','indicated_access','plan_after_selection','test_partner_preparation'].includes(preference.strategy);
   const matches=offer.strategy===preference.strategy || (prepared && offer.strategy==='motion_contrast');
   return matches && offer.distinctOutcomes >= preference.minimumOutcomes ? 1 : 0;
 }

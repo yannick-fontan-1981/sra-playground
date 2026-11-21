@@ -277,11 +277,12 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
 }
 // A verified switch nominates just one former subject for a possible return.
 export function measuredReturnSelection(m:CursorMemory,o:NativeObservation,rows:NativeRows,
-  source:NativeBox,target:NativeBox,previousRef:string,preference:InformationPreference):CursorTrial|null {
-  if(m.pending || !m.verified || !o.available_action_refs.includes('ACTION6'))return null;
+  source:readonly number[],target:readonly number[],previousRef:string,preference:InformationPreference):CursorTrial|null {
+  if(m.pending || !m.verified || !o.available_action_refs.includes('ACTION6') || source.length!==4 || target.length!==4)return null;
   const marks=[...cursorCandidates(o,rows,m),...motorScalePeers(o,m)];
   for(const mark of marks){
-    if(!inside(source,mark.source.box)||!inside(target,mark.target.box))continue;
+    if(!inside([source[0]!,source[1]!,source[2]!,source[3]!],mark.source.box)||
+       !inside([target[0]!,target[1]!,target[2]!,target[3]!],mark.target.box))continue;
     const contrast=distinguishControl(m,mark,o,preference);
     if(!contrast)continue;
     const [x,y]=mark.point;

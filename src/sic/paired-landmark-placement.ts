@@ -7,6 +7,7 @@ import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
 import {chooseIndicatedAccess,learnIndicatedAccess,newIndicatedMemory,type AccessExperiment,type IndicatedMemory} from './seek-indicated-access.ts';
 import {chooseMobileIndication,tileValues} from './plan-mobile-indication.ts';
+import {advancePartnerTest,nextPartnerTest,observedBodyClick,sitePatch,type PartnerTest,type PartnerOffer} from './test-partner-preparation.ts';
 
 type Pair = {role:string; sites:XY[]; ref:string};
 type Assignment = {
@@ -14,14 +15,17 @@ type Assignment = {
   pitch:XY; firstRef:string; returnRef?:string;
 };
 export type LandmarkTrial = Assignment & {
-  stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked';
+  stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked'|'test_partner_preparation';
+  partnerTest?:PartnerOffer & {refusal:string;motorRef:string;destination:XY};
   command:string; from:XY; expected:XY; guard:XY; basis:string; access?:AccessExperiment;
 };
 export type LandmarkMemory = {
   pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string; access?:IndicatedMemory;
   redrawn?:{parked:string;selected:string};
   planAfterSelection?:boolean;
-  previousControl?:{parked:string;moving:string;at:XY;ref:string};
+  previousControl?:{parked:string;moving:string;at:XY;ref:string;motor?:{op:string;d:XY;ref:string}};
+  testPartner?:boolean; probe?:PartnerTest; probedEdges?:string[];
+  releasedEdges?:{role:string;from:XY;command:string;partner:XY;destination:XY;ref:string}[];
   blocked:string[]; tried:string[]; inconclusiveSelections?:string[]; handoff?:boolean; lastResult?:string;
 };
 
@@ -37,7 +41,7 @@ export function observeLandmarks(m:LandmarkMemory|undefined, before:VisualLayout
   return m;
 }
 function drop(m:LandmarkMemory) {
-  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;delete m.access;
+  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;delete m.access;delete m.probe;
 }
 function bodyRole(layout:VisualLayout,box:NativeBox) {
   const matches=Object.entries(layout).filter(([,g])=>g.length===1 && g[0]!.box.every((v,i)=>v===box[i]));
@@ -111,11 +115,13 @@ function nextStep(m:LandmarkMemory,a:Assignment,role:string,from:XY,goal:XY,guar
       const at=add(cur.p,motor.d);
       if(at[0]<0||at[1]<0||at[0]>2*(rows[0]!.length-1)||at[1]>2*(rows.length-1)||cellMatches(at,guard,a.pitch))continue;
       const pixel=rows[Math.round(at[1]/2)]?.[Math.round(at[0]/2)];
-      const unknown=ground!==undefined && String(pixel)!==ground && !same(at,goal);
+      const released=m.releasedEdges?.find(e=>e.role===role&&e.command===motor.op&&cellMatches(guard,e.partner,a.pitch)&&
+        cellMatches(cur.p,e.from,a.pitch)&&cellMatches(at,e.destination,a.pitch));
+      const unknown=!released && ground!==undefined && String(pixel)!==ground && !same(at,goal);
       const cost=cur.cost+1+Number(unknown)*controls.motors.length;
       if(cost>=(best.get(at.join())??Infinity))continue;
       best.set(at.join(),cost);
-      queue.push({p:at,cost,estimate:cost+dist(at),first:cur.first??{op:motor.op,at,basis:motor.basis}});
+      queue.push({p:at,cost,estimate:cost+dist(at),first:cur.first??{op:motor.op,at,basis:released?'verified_partner_preparation':motor.basis}});
     }
   }
 }
@@ -124,6 +130,7 @@ function accessContext(m:LandmarkMemory){
   return a&&m.secondRole&&m.parkedRole?{actor:m.secondRole,parked:m.parkedRole,home:a.home,goal:a.other,pitch:a.pitch}:undefined;
 }
 export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after:VisualLayout,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,op:string,t?:LandmarkTrial){
+  if(m.probe && !t?.partnerTest && a.frame_hash!==b.frame_hash){drop(m);delete m.previousControl;}
   if(t?.stage==='place_before_selection'){
     const start=singleton(before,t.actor),end=singleton(after,t.actor),still=singleton(after,t.peer);
     if(start&&end&&still&&cellMatches(still.at,t.guard,t.pitch)&&!cellMatches(start.at,end.at,t.pitch)){
@@ -148,12 +155,25 @@ export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after
 export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,rows:NativeRows,motions:Record<string,PartMotion>,candidate:CursorTrial|null,limit:number,accessDepth?:number):LandmarkTrial|undefined {
   const a=m.active??(candidate && nearestAssignment(m,l,o,candidate,motions));
   if(!a||m.handoff&&!m.secondRole)return;
+  if(m.probe){
+    const step=nextPartnerTest(m.probe,l,o,rows,a.pitch);
+    if(step)return {...a,stage:'test_partner_preparation',command:step.command,from:step.from,expected:step.expected,guard:step.guard,
+      basis:step.phase,partnerTest:{...step,refusal:m.probe.refusal,motorRef:m.probe.motorRef,destination:m.probe.destination}};
+    return;
+  }
   const role=m.secondRole??a.actor,peer=m.parkedRole??a.peer,body=singleton(l,role),parked=singleton(l,peer);
   if(!body||!parked||m.secondRole&&(!cellMatches(parked.at,a.home,a.pitch)||!covered(l,a,a.home)))return;
   const goal=m.secondRole?a.other:a.home;
   if(cellMatches(body.at,goal,a.pitch)){
     if(m.secondRole||!covered(l,a,goal))return;
-    return {...a,stage:'select_after_contact',command:a.selection.command,from:body.at,expected:body.at,guard:parked.at,basis:'observed_contact'};
+    let selection=a.selection;
+    if(m.testPartner&&a.returnRef){
+      const command=observedBodyClick(l,peer,o);
+      if(!command)return;
+      const [x,y]=command.slice(8).split(',').map(Number),b=parked.box;
+      selection={...selection,command,point:[x!,y!],target:{...selection.target,box:[b[0]!,b[1]!,b[2]!,b[3]!]}};
+    }
+    return {...a,selection,stage:'select_after_contact',command:selection.command,from:body.at,expected:body.at,guard:parked.at,basis:'observed_contact'};
   }
   const c=accessContext(m);
   if(c&&accessDepth&&m.access){
@@ -184,10 +204,24 @@ export function refreshedSelection(t:LandmarkTrial,l:VisualLayout):CursorTrial {
   return {...t.selection,source:{...t.selection.source,box:[box[0]!,box[1]!,box[2]!,box[3]!]},
     evidence:[...t.selection.evidence,t.pair.ref,t.firstRef]};
 }
-export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:VisualLayout,cursorResult:string|undefined,selection:CursorTrial|undefined,before:VisualLayout,pending?:CursorTrial,observationRef?:string) {
+export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:VisualLayout,cursorResult:string|undefined,selection:CursorTrial|undefined,before:VisualLayout,pending?:CursorTrial,observationRef?:string,rows?:NativeRows) {
   if(m.planAfterSelection && selection?.stage==='select')delete m.previousControl;
   if(t){
     m.active??={pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef,...(t.returnRef?{returnRef:t.returnRef}:{})};
+    if(t.partnerTest && m.probe){
+      const s=m.probe, result=advancePartnerTest(s,before,l,t.pitch);
+      if(result==='lost'){drop(m);delete m.previousControl;return m.lastResult='partner_experiment_lost_subject';}
+      if(result==='released'||result==='still_blocked'){
+        if(m.previousControl)m.previousControl.at=s.partnerAt;
+        if(result==='released' && observationRef){
+          const key=edgeKey(s.actor,aligned(s.origin,t.home,t.pitch),s.blockedMotor);
+          m.blocked=m.blocked.filter(k=>k!==key);
+          (m.releasedEdges??=[]).push({role:s.actor,from:s.origin,command:s.blockedMotor,partner:s.partnerAt,destination:s.destination,ref:observationRef});
+        }
+        delete m.probe;
+      }
+      return m.lastResult=result;
+    }
     if(t.stage==='select_after_contact'){
       // A predicted change of the highlight can fail while the control test
       // remains pending. The next motor determines whether the subject switched.
@@ -208,6 +242,14 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     }
     const key=edgeKey(role,aligned(t.from,goal,t.pitch),t.command);
     if(!m.blocked.includes(key))m.blocked.push(key);
+    const previous=m.previousControl,motor=previous?.motor;
+    if(m.testPartner && t.returnRef && t.stage==='place_before_selection' && t.basis!=='untested' &&
+      previous && motor && rows && observationRef && cellMatches(body.at,t.from,t.pitch) && !m.probedEdges?.includes(key)){
+      (m.probedEdges??=[]).push(key);
+      m.probe={phase:'select_partner',actor:t.actor,peer:t.peer,origin:body.at,destination:t.expected,initialPartner:parked.at,
+        partnerAt:parked.at,blockedMotor:t.command,prepareMotor:motor.op,prepareDelta:motor.d,refusal:observationRef,
+        motorRef:motor.ref,originalPatch:sitePatch(rows,t.expected,t.pitch)};
+    }
     return m.lastResult='approach_refuted_replan';
   }
   if(selection?.stage==='select' && cursorResult==='cursor_click_visually_unchanged'){
@@ -223,7 +265,9 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     const old=parked&&singleton(before,parked),still=parked&&singleton(l,parked);
     const from=moving&&singleton(before,moving),to=moving&&singleton(l,moving);
     if(parked && moving && parked!==moving && old && still && same(old.at,still.at) && from && to && !same(from.at,to.at)){
-      m.previousControl={parked,moving,at:still.at,ref:observationRef};
+      const witness=selection.contrast;
+      const motor=witness && {op:witness.motor,d:[2*witness.baselineDelta[0],2*witness.baselineDelta[1]] as XY,ref:witness.evidence};
+      m.previousControl={parked,moving,at:still.at,ref:observationRef,...(m.testPartner&&motor?{motor}:{})};
     }
   }
   if(!m.active||!m.handoff||!selection||selection.stage!=='verify')return;
