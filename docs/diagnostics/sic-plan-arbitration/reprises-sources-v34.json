@@ -708,7 +708,10 @@
       "matched": 40,
       "contradicted": 7,
       "controlled": 40,
-      "followedHistorically": 33
+      "followedHistorically": 33,
+      "requiredForRecordedWin": 6,
+      "substitutedLossToWin": 0,
+      "substitutedWinToLoss": 9
     },
     "proposalsPerLevel": [
       {
@@ -724,7 +727,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 8,
@@ -734,7 +740,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 23,
@@ -744,7 +753,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 29,
@@ -754,7 +766,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 38,
@@ -764,7 +779,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 40,
@@ -774,7 +792,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 45,
@@ -784,7 +805,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 48,
@@ -794,7 +818,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -811,7 +838,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 11,
@@ -821,7 +851,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 12,
@@ -831,7 +864,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 13,
@@ -841,7 +877,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 14,
@@ -851,7 +890,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 15,
@@ -861,7 +903,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -878,7 +923,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 17,
@@ -888,7 +936,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 18,
@@ -898,7 +949,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 19,
@@ -908,7 +962,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 20,
@@ -918,7 +975,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 52,
@@ -928,7 +988,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 53,
@@ -938,7 +1001,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 54,
@@ -948,7 +1014,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 55,
@@ -958,7 +1027,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 56,
@@ -968,7 +1040,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 57,
@@ -978,7 +1053,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 58,
@@ -988,7 +1066,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -1005,7 +1086,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 7,
@@ -1015,7 +1099,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 8,
@@ -1025,7 +1112,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 25,
@@ -1035,7 +1125,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 26,
@@ -1045,7 +1138,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 27,
@@ -1055,7 +1151,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 28,
@@ -1065,7 +1164,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 42,
@@ -1075,7 +1177,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 43,
@@ -1085,7 +1190,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 50,
@@ -1095,7 +1203,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 51,
@@ -1105,7 +1216,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 52,
@@ -1115,7 +1229,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": true
           },
           {
             "i": 59,
@@ -1125,7 +1242,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -1142,7 +1262,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           }
         ]
       },
@@ -1159,7 +1282,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 22,
@@ -1169,7 +1295,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 23,
@@ -1179,7 +1308,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 24,
@@ -1189,7 +1321,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -1206,7 +1341,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 44,
@@ -1216,7 +1354,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 51,
@@ -1226,7 +1367,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           }
         ]
       }
@@ -1241,7 +1385,10 @@
       "matched": 32,
       "contradicted": 2,
       "controlled": 32,
-      "followedHistorically": 19
+      "followedHistorically": 19,
+      "requiredForRecordedWin": 15,
+      "substitutedLossToWin": 0,
+      "substitutedWinToLoss": 14
     },
     "proposalsPerLevel": [
       {
@@ -1257,7 +1404,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
           },
           {
             "i": 7,
@@ -1267,7 +1417,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
           },
           {
             "i": 8,
@@ -1277,7 +1430,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -1294,7 +1450,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
           },
           {
             "i": 6,
@@ -1304,7 +1463,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
           },
           {
             "i": 15,
@@ -1314,7 +1476,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
           },
           {
             "i": 16,
@@ -1324,7 +1489,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 24,
@@ -1334,7 +1502,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -1351,7 +1522,10 @@
             "matched": false,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 6,
@@ -1361,7 +1535,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 24,
@@ -1371,7 +1548,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 28,
@@ -1381,7 +1561,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 37,
@@ -1391,7 +1574,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 40,
@@ -1401,7 +1587,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 44,
@@ -1411,7 +1600,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           }
         ]
       },
@@ -1428,7 +1620,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 14,
@@ -1438,7 +1633,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 22,
@@ -1448,7 +1646,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 33,
@@ -1458,7 +1659,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           }
         ]
       },
@@ -1475,7 +1679,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 11,
@@ -1485,7 +1692,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 12,
@@ -1495,7 +1705,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 13,
@@ -1505,7 +1718,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 14,
@@ -1515,7 +1731,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 15,
@@ -1525,7 +1744,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           }
         ]
       },
@@ -1542,7 +1764,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           }
         ]
       },
@@ -1559,7 +1784,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 8,
@@ -1569,7 +1797,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 23,
@@ -1579,7 +1810,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 29,
@@ -1589,7 +1823,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 38,
@@ -1599,7 +1836,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
           },
           {
             "i": 40,
@@ -1609,7 +1849,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 45,
@@ -1619,7 +1862,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 48,
@@ -1629,7 +1875,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
           }
         ]
       }
@@ -1644,7 +1893,10 @@
       "matched": 2,
       "contradicted": 0,
       "controlled": 2,
-      "followedHistorically": 2
+      "followedHistorically": 2,
+      "requiredForRecordedWin": 0,
+      "substitutedLossToWin": 0,
+      "substitutedWinToLoss": 0
     },
     "proposalsPerLevel": [
       {
@@ -1660,7 +1912,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           },
           {
             "i": 69,
@@ -1670,7 +1925,10 @@
             "matched": true,
             "withoutA": false,
             "withoutB": false,
-            "alone": false
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
           }
         ]
       }

@@ -54,9 +54,20 @@ for (const file of files) {
         }
         return b.level === run.start && !replay.win(b) && b.state === 'NOT_FINISHED' ? localPatch(b,plan.siteC) === plan.afterC : null;
       }
+      function scoreAfter(first) {
+        let b = replay.restore(i);
+        const rest = run.steps.slice(i+1).map(op);
+        for (const command of first ? [first,...rest] : rest) {
+          if (replay.win(b) || b.state !== 'NOT_FINISHED') break;
+          if (!b.availableActionIds.includes(Number(command.split(':')[0].slice(6)))) return null;
+          b = replay.act(command);
+        }
+        return replay.win(b);
+      }
       checks.push({ i, root, c: plan.c, followed: op(run.steps[i]) === plan.c,
         matched: check(i,[plan.c]), withoutA: check(root,[plan.b,plan.c]), withoutB: check(root,[plan.a,plan.c]),
-        alone: check(root,[plan.c]) });
+        alone: check(root,[plan.c]), originalWin:run.levels[0].won,
+        withC:scoreAfter(plan.c), omitNext:scoreAfter(null) });
     }
     entries.push({code:run.code,level:run.start,steps:run.issued,checks});
   }
@@ -66,6 +77,9 @@ const summary = { entries:entries.length, actions:entries.reduce((n,e)=>n+e.step
   entriesWithProposal:entries.filter(e=>e.checks.length).length, matched:trials.filter(r=>r.matched===true).length,
   contradicted:trials.filter(r=>r.matched===false).length,
   controlled:trials.filter(r=>r.matched===true && [r.withoutA,r.withoutB,r.alone].every(v=>v===false)).length,
-  followedHistorically:trials.filter(r=>r.followed).length };
+  followedHistorically:trials.filter(r=>r.followed).length,
+  requiredForRecordedWin:trials.filter(r=>r.followed && r.originalWin && r.withC===true && r.omitNext===false).length,
+  substitutedLossToWin:trials.filter(r=>!r.originalWin && r.withC===true).length,
+  substitutedWinToLoss:trials.filter(r=>r.originalWin && r.withC===false).length };
 await writeFile(output, JSON.stringify({summary,entries},null,2)+'\n');
 console.log(JSON.stringify(summary));
