@@ -160,6 +160,8 @@ Pour chaque position possible de A et B, le planificateur part des endroits où 
 
 Le premier pilote de contact avec un élément unique a été écarté de l’arbitrage autonome. Il perturbait SKBN L2. Son banc et son commit `144a61f40` restent consultables. Le candidat v50 retient la composition qui tient compte des réponses de B. **Critère figé avant Custom 4** : comparer v50 à v48 sur les neuf L2 ouverts, compter les nouvelles victoires officielles, qualifier les 100 L1 et rejouer les témoins SS01 en 44 et 32 coups et SS04 en 60. SS09 L2 reste en réserve.
 
+**Décision v51 prise sur les sources.** Sur GIGO L1, au cinquième coup, v50 abandonne une stratégie gagnante pour une route dont la réussite exige une réponse favorable de B. La partie atteint le plafond de 60 coups. Sur FUIT L2, chacune des 24 décisions utiles couvre toutes les directions de fuite admises par le modèle. V51 laisse donc la main au plan en cours quand la nouvelle composition dépend uniquement d’une réponse favorable. Sur les deux sources qui motivent ce changement, le pilote retrouve GIGO en 7 coups et FUIT L2 en 80. Le critère de transfert fixé pour v50 est reconduit à l’identique pour v51 avant son premier essai sur Custom 4.
+
 ### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |

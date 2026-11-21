@@ -221,11 +221,11 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       if(family===learnReactiveMotionId&&sampledResponse.epoch===observation.level_epoch&&sampledResponse.multiple&&remaining>0){
         const trial=choosePursuit(sampledResponse.response,sampledResponse.learn,visualLayout(observation,rows),rows,
           new Set(available.map(c=>c.action_ref)),sampledResponse.attempts);
-        if(trial){
-          const routeSupported=trial.basis!=='one_possible_response',mode=execution?.reasoningMode??'exploration';
-          const facts={routeSupported,eligibleProbe:!routeSupported,knownInteraction:false,mode};
+        if(trial&&trial.basis!=='one_possible_response'){
+          const mode=execution?.reasoningMode??'exploration';
+          const facts={routeSupported:true,eligibleProbe:false,knownInteraction:false,mode};
           const decision=await decide?.run({situation:facts},{signal:execution?.signal});
-          const strategy=routeSupported?'P07':'P05';
+          const strategy='P07';
           if(decision?.result===strategy){
             const ref=observation.observation_ref,parent='G_official_completion',actions=[{action_ref:trial.input,data:{}}];
             const evidence:[string,...string[]]=[ref,...trial.refs.filter(s=>s!==ref)];
