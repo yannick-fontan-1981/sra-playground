@@ -16,6 +16,7 @@ type RepairOption = {command:string; prediction:'new_placement'|'unknown'|'retur
 export type CursorTrial = Mark & { recurrentPlacement?:{key:string;verifiedReturns:number;alternative:string;returnedFrame:string};stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[]; beyondReturn?:boolean };
 export type CursorMemory = {
   motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
+  verifyPoseChange?:boolean;
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
   bearings?:Record<string,{dx:number;dy:number;ref:string}>;
 };
@@ -439,6 +440,25 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
     }
     const triedMotors=[...(trial.triedMotors??[]),input];
     const alternative=a.available_action_refs.find(ref=>/^ACTION[1-4]$/.test(ref)&&!triedMotors.includes(ref));
+    if(m.verifyPoseChange && trial.feedback && oldStill && alternative && !trial.contrast && trial.stage==='verify'){
+      const retained=(r:NativeRows)=>{
+        const [left,top,right,bottom]=target.box;
+        let body=0,mark=0;
+        for(let y=top;y<=bottom;y++)for(let x=left;x<=right;x++){
+          const ink=r[y]?.[x];
+          if(ink===target.ink)body++;
+          if(ink===trial.ink)mark++;
+        }
+        return [body,mark] as const;
+      };
+      const [body,mark]=retained(rows),[newBody,newMark]=retained(next);
+      const [left,top,right,bottom]=target.box;
+      const localChange=rows.slice(top,bottom+1).some((row,i)=>row.slice(left,right+1).some((v,j)=>v!==next[top+i]?.[left+j]));
+      if(body>0 && mark>0 && body===newBody && mark===newMark && localChange){
+        m.pending={...trial,command:alternative,triedMotors,evidence:[...trial.evidence,a.observation_ref]};
+        return 'marked_subject_retained_try_another_motor';
+      }
+    }
     if(!trial.contrast && b.frame_hash===a.frame_hash && alternative){
       m.pending={...trial,command:alternative,triedMotors,evidence:[...trial.evidence,a.observation_ref]};
       return 'cursor_move_blocked_try_another_direction';

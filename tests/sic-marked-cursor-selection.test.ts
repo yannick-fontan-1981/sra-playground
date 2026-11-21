@@ -56,6 +56,23 @@ const observation=(rows:number[][],rev:number,controls=['ACTION1','ACTION4','ACT
   state:'NOT_FINISHED',step_index:rev,palette,available_action_refs:controls,
 },rev,'test');
 
+test('a verified mark can survive a turn in place before an alternative motor reveals translation',async()=>{
+  const first=board(), selected=board(1), turned=board(1,13,3,true), moved=board(1,18,3,true);
+  const [a,b,c,d]=await Promise.all([first,selected,turned,moved].map((rows,i)=>observation(rows,i)));
+  for(const enabled of [false,true]){
+    const m=newCursorMemory();m.verifyPoseChange=enabled;
+    const trial=offerCursorTrial(m,a!,first,true)!;
+    assert.equal(recordCursorTrial(m,a!,b!,first,selected,trial.command,trial),'cursor_mark_transferred');
+    const verify=m.pending!;
+    const result=recordCursorTrial(m,b!,c!,selected,turned,verify.command,verify);
+    assert.equal(result,enabled?'marked_subject_retained_try_another_motor':'cursor_control_unconfirmed');
+    if(enabled){
+      assert.equal(m.pending!.command,'ACTION4');
+      assert.equal(recordCursorTrial(m,c!,d!,turned,moved,'ACTION4',m.pending),'new_cursor_moved_while_previous_cursor_stayed');
+    }else assert.equal(m.pending,undefined);
+  }
+});
+
 test('different silhouettes can compete for control before the second displacement is known',async()=>{
   function scene(first:number,second:number,selected=false) {
     const rows=Array.from({length:18},()=>Array<number>(32).fill(0));
