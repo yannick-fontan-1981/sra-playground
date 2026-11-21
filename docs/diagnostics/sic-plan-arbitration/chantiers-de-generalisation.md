@@ -1,6 +1,6 @@
 # Quels chantiers de généralisation pour SIC Fallback ?
 
-**Je commencerais par apprendre à SIC à reconnaître ce qu’un changement lui permet de faire ensuite, puis à reprendre un plan depuis la situation obtenue.** Une poussée, une permutation, une attente ou un changement de personnage peuvent tous rendre une commande utile. SIC doit pouvoir annoncer laquelle, l’essayer et reconnaître l’occasion de s’en servir à nouveau. Cette question se teste sur des jeux dont les commandes et les buts diffèrent.
+**La priorité actuelle est de composer plusieurs changements utiles et de savoir quand lancer cette expérience.** Sur LOGI L5, cette combinaison a produit une victoire autonome en 39 coups, depuis un départ où le témoin échoue à 90. Les deux autres priorités sont de déduire où déplacer un mécanisme pour ouvrir une possibilité, puis de retrouver une continuation depuis la situation obtenue. Une poussée, une permutation, une attente ou un changement de personnage peuvent rendre une commande ultérieure utile. Chacun des quatorze chantiers ci-dessous a une expérience sur les jeux sources et un critère pour juger le résultat.
 
 ## Les faits qui orientent le choix
 
@@ -45,7 +45,7 @@ Une capacité à trois gestes est déjà attestée sur VOIS et ZIPP. Le pas de r
 
 Les exemples de cette troisième série proviennent des parcours sources de SIC seul. Leur réussite historique donne des situations et des témoins pour éprouver le Fallback. Le choix futur des règles, des seuils et des commandes appartient à l’expérience sur les sources. [Descriptions et conditions par niveau](../../architecture/sic-v8-validation.md)
 
-## Ordre de travail et seuil d’un progrès décisif
+## Ordre initial de travail et seuil d’un progrès décisif
 
 1. **Premier lot proposé** — Partir de v31. Faire trois variantes isolables pour l’utilité, la révision et la reprise (1–3), plus leur combinaison. Préparer les paires de préfixes et les contrôles sources avant d’écrire les variantes. Garder KEYD comme témoin causal et SWCH comme témoin du passage du banc à la partie autonome. Employer VOIS pour détecter un excès d’expérimentation. Réserver une autre famille source entière pour la nouvelle hypothèse avant d’examiner ses résultats. POLA L3 a déjà servi au choix entre v32 et v33.
 2. **Lots suivants** — Pour les mécanismes mobiles, tester 4 et 5 avant de les combiner avec 6. Pour la coordination, tester 7 puis 11. Temps, mémoire et décisions irréversibles (8–10) peuvent être évalués séparément sur les sources. Approfondissement et abstraction (12–13) ont leurs propres témoins non spatiaux. Mesurer le transfert sélectif (14) à chaque lot disposant de deux niveaux comparables.
@@ -59,6 +59,8 @@ Les exemples de cette troisième série proviennent des parcours sources de SIC 
 3. **Retrouver une continuation, vérifier ce qu’elle apporte et la corriger localement** (1 à 3 et 5). Sur 103 comparaisons sources où A provoque un changement local, retirer A modifie la réponse mesurée après B dans 80 cas. Dans 49 cas, retirer A fait perdre une suite gagnante dont la fin est conservée. Cette manipulation indique où une préparation importe. La difficulté restante est que SIC la choisisse, l’exploite et reprenne le plan dans une nouvelle partie. [Interventions sur A puis B](qualification-configurations-v36.json)
 
 Ces trois lots ont chacun un échec observable, une façon de le reproduire et une décision précise à améliorer. Les chantiers sur le temps, l’information manquante et l’irréversibilité gardent leurs propres épreuves sources. Les neuf L2 connus restent des mesures de transfert après gel.
+
+Le couplage des chantiers 5 et 11 a apporté un résultat supplémentaire. Attendre une commande sans effet visible avant de lancer une expérience de configuration a réduit la victoire autonome sur LOGI L5 de 84 à 39 coups, tout en récupérant les victoires sources de CRAF et de VOIS. Le moteur a rejoué chaque action. Le nombre de nouveaux jeux gagnés sur Custom 4 est publié séparément pour chaque version figée. [Candidat et expérience sur LOGI, CRAF et VOIS](gel-configurations-v38.md)
 
 ## À quoi serviront les autres L2 de Custom 4 après le gel ?
 
