@@ -291,6 +291,16 @@ Sur les douze préparations déjà isolées sur COLM et ESCT, l’ancienne compa
 
 Les résultats distinguent trois capacités mesurables : produire un changement ailleurs, franchir un passage, et choisir la composition nécessaire au score. [Passages testés](../../../scripts/test-source-changed-crossings.mjs) · [Placements avant activation](../../../scripts/test-source-positioned-use.mjs) · [Calcul des résultats et validation croisée](../../../scripts/summarize-source-use-transfer.py)
 
+### Réutiliser immédiatement une capacité observée chez un autre sujet
+
+**Chantiers 2, 3, 5 et 11, candidat v57.** Sur WA30 L3 à froid, SIC voit cinq caisses et huit places de réception. À sa première translation mesurée, il peut déjà proposer un déplacement. Une garde interne écartait la proposition dès que le récepteur dépassait six places. En autorisant la recherche ordinaire dans le budget géométrique existant, le premier mouvement devient possible. Cette seule modification échoue encore à 100 gestes. Après la prise d’une caisse, plusieurs gestes butent au même endroit pendant qu’un autre sujet transporte une caisse distincte.
+
+La capacité manquante était d’intégrer cette observation au plan en cours. SIC lie le porteur à un déplacement de caisse observé et vérifie la géométrie de la zone de remise. Il peut dès lors choisir une position d’où il déposera une caisse pour que le second porteur prenne le relais. La preuve peut être acquise dans le niveau courant. Dans la scène synthétique de contrôle, la même géométrie donne un plan direct avant la preuve de transport et un plan de remise après celle-ci. [Calcul du plan coopératif](../../../src/sic/oriented-delivery.ts) · [Test des deux états de connaissance](../../../tests/sic-delivery-passage.test.ts)
+
+**Essais sources avant le gel.** V55 perd WA30 L3 à froid en 100 coups. Lever le seuil seul, mémoriser le premier mouvement bloqué, ou proposer une stratégie de passage sans identifier la zone de relais échouent également. Le candidat gagne WA30 L3 en **80 coups à froid**. Retirer la mémoire supplémentaire des mouvements bloqués reproduit exactement les 80 actions et observations. Cette mémoire a été écartée du candidat. Au banc, autoriser à poser la caisse pour la reprendre d’un autre côté donne le même début de route que la prise unique sur WA30 L3. Les deux prévisions divergent du moteur au sixième geste. [Expérience de changement de prise](../../../scripts/test-source-regrasp-delivery.mjs)
+
+**Protocole de transfert fixé avant Custom 4.** Le témoin est l’export v55 `sic-source100-joint-field-v55`. Le candidat est l’export `sic-source100-observed-handoff-v57`. Tester les neuf L2 ouverts à froid avec le même moteur, la même entrée et un plafond de 1 200 gestes. Rejouer les commandes dans le moteur pour vérifier chaque score. Contrôler SS01 L2 après les 19 gestes publics du L1, les 100 L1 sources, FUIT L2, FT09 L2 à L4 et WA30 L3 à froid. Le critère principal reste une victoire sur un jeu Custom 4 supplémentaire. SS09 L2 est réservé à la confirmation.
+
 ### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |

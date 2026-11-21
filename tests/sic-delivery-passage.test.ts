@@ -6,6 +6,46 @@ import { measureDeliveryPassage } from '../src/sic/delivery-passage.ts';
 import { createSicVerifyOrientedDelivery } from '../src/sic/oriented-delivery.ts';
 import { measureSectorNetwork } from '../src/sic/sector-delivery.ts';
 
+test('an observed carrier can justify a handoff during the level where its movement was learned', async () => {
+  const pitch = 4, rows = Array.from({ length: 36 }, () => Array<number>(44).fill(1));
+  function paint(x: number, y: number, ink: (dx: number, dy: number) => number) {
+    for (let dy = 0; dy < pitch; dy++) for (let dx = 0; dx < pitch; dx++) {
+      rows[y * pitch + dy]![x * pitch + dx] = ink(dx, dy);
+    }
+  }
+  const parts: NativePoint[] = [[3, 6], [4, 4]];
+  for (const y of [2, 3, 5]) paint(4, y, dx => dx === 0 ? 7 : 1);
+  for (const [x, y] of parts) paint(x, y, (dx, dy) => dx === 0 || dy === 0 || dx === 3 || dy === 3 ? 4 : 9);
+  paint(1, 4, dx => dx === 3 ? 0 : 14);
+  paint(6, 4, () => 15);
+  const targets: NativePoint[] = [];
+  for (const x of [8, 9]) for (const y of [3, 4, 5, 6]) {
+    targets.push([x, y]);
+    paint(x, y, () => 9);
+  }
+  const observation = await measureNativeObservation({ frame_rows: rows, frame_hash: 'observed-room',
+    level: 1, levels_completed: 0, state: 'NOT_FINISHED',
+    available_action_refs: ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4', 'ACTION5'] }, 8);
+  const carrier = observation.entities.find(e => e.palette_value === 15)!;
+  const state = { epoch: observation.level_epoch, color: 14, held: null, invitation: null, free: {}, loaded: {},
+    tried: [], refs: [observation.observation_ref], count: 6, geometry: {
+      pitch, phase: [0, 0], background: 1, core: 9, rest_shell: 4, targets, initial_boxes: parts,
+    } };
+  const provider = createSicVerifyOrientedDelivery();
+  await provider.attachPrograms?.({
+    registerProgram: async () => ({ run: async () => ({ result: 'P05', receipt: {} }) }),
+  } as unknown as NativeProgramRegistry);
+  provider.restore({ state });
+  const direct = await provider.propose(observation, rows, [], 80);
+  assert.ok(direct);
+  assert.equal(direct.local.relay, undefined);
+  provider.restore({ state: { ...state, sharedEvidence: 'observed-other-carrier', transportCarriers: [carrier.signature] } });
+  const joint = await provider.propose(observation, rows, [], 80);
+  assert.ok(joint?.local.relay);
+  assert.equal(joint.local.relay.carrier, carrier.signature);
+  assert.deepEqual(joint.local.relay.evidence, ['observed-other-carrier', observation.observation_ref]);
+});
+
 test('local receivers coexist with a relay to a separate sector that has a carrier', () => {
   const targets: NativePoint[] = [[1, 1], [5, 1]];
   const actor: NativePoint = [1, 2];

@@ -729,16 +729,18 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         invitation: shellChanges.length ? ahead : null, free: receipt && delta ? { [receipt.command]: delta } : {}, loaded: {},
         tried: priorScene ? [JSON.stringify([priorScene.scene.pose, priorScene.scene.face, priorScene.scene.boxes, null, priorScene.command])] : [],
         refs: receipt ? [receipt.beforeRef, receipt.afterRef] : [], count: receipt ? 1 : 0 };
-      const relay = prior?.relay ?? (!prior && previous && !divided && !inset ? measureRelay(rows, observation, initial, scene, previous) : null);
+      const carrierEvidence = prior?.sharedEvidence ? prior : previous;
+      const relay = prior?.relay ?? (carrierEvidence && !divided && !inset && !parallel && !prior?.sectorNetwork
+        ? measureRelay(rows, observation, initial, scene, carrierEvidence) : null);
       const sectorNetwork = prior?.sectorNetwork ?? (!parallel && divided && previous
         ? measureSectorNetwork(rows, geometry, scene.pose, positions(scene), sectorCarriers(observation, { ...initial, transportCarriers: previous.transportCarriers })) : null);
-      const measurePassage = !prior && !!previous && !relay && !divided && !inset;
+      const measurePassage = !!carrierEvidence && !prior?.passage && !relay && !divided && !inset && !sectorNetwork && !parallel;
       const peers = prior?.passage || measurePassage
-        ? sectorCarriers(observation, { ...initial, transportCarriers: previous?.transportCarriers ?? prior?.transportCarriers }) : [];
-      const passage = prior?.passage ?? (measurePassage
+        ? sectorCarriers(observation, { ...initial, transportCarriers: carrierEvidence?.transportCarriers ?? prior?.transportCarriers }) : [];
+      const passage = relay ? null : prior?.passage ?? (measurePassage
         ? measureDeliveryPassage(rows, geometry, scene.pose, positions(scene), peers) : null);
       const handsOff = !!relay || !!sectorNetwork || !!passage;
-      if (!parallel && !handsOff && (divided || geometry.targets.length > 6)) return null;
+      if (divided && !parallel && !handsOff) return null;
       const previousInk = corridor && previous?.interceptedInk;
       const predecessor = typeof previousInk === 'number' && previous?.interceptionRef
         && carrierForms(rows, geometry, previousInk).length === 1 ? { ink: previousInk, ref: previous.interceptionRef } : null;
@@ -750,6 +752,11 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
           ...(parallel ? { parallel } : {}),
           free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
           transportCarriers: [...(previous.transportCarriers ?? [])] } : initial;
+      if (passage && !local.passage) local = { ...local, passage };
+      if (relay && !local.relay) {
+        local = { ...local, relay, waits: 0, stalledWaits: 0 };
+        delete local.passage;
+      }
       const commands: Readonly<Record<string, NativePoint>> = { ...labels, ...local.free, ...(local.held ? local.loaded : {}) };
       const reserved = (local.transports ?? []).filter(item => item.sources.length >= 2);
       const invited = same(ahead, local.invitation) && Object.hasOwn(scene.boxes, key(ahead)) && !reserved.some(item => same(item.box, ahead));
