@@ -5,7 +5,7 @@ import {newCursorMemory,recordCursorTrial,type CursorMemory,type CursorTrial} fr
 import { nextConfiguration, newConfigurationMemory, observeConfiguration, type ConfigurationMemory, type ConfigurationTrial } from './configuration-trials.ts';
 import {searchForMissingCue,type CueTest} from './seek-missing-preview.ts';
 import {equalPose,readGroup,type RelativeMemory} from './relative-motion-learning.ts';
-import type {RelativeTrial} from './relative-motion-plan.ts';
+import {continueRelativePlan,relativeReceipt,type RelativeTrial} from './relative-motion-plan.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
 import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
@@ -1088,7 +1088,8 @@ export function recordExperiment(
     const plan=x.relative, actual=readGroup(m.relativeMotion.models[plan.model]!,visualLayout(a,next));
     const won=a.levels_completed>b.levels_completed||a.state==='WIN';
     const matched=!!actual && equalPose(actual,plan.next);
-    return {...out,result:won?'relative_placement_official':matched?'relative_placement_matched':'relative_placement_refuted',relativePlacement:{plan,actual:won?null:actual,matched,won}};
+    continueRelativePlan(m.relativeMotion,plan,a,matched,won);
+    return {...out,result:won?'relative_placement_official':matched?'relative_placement_matched':'relative_placement_refuted',relativePlacement:{plan:relativeReceipt(plan),actual:won?null:actual,matched,won}};
   }
   if(x.cue){
     const visible=!!visualLayout(a,next)[x.cue.indicator]?.length;

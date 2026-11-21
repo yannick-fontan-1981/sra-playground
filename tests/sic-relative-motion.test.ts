@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { splitNativeState } from "../src/logos-engine/v6-native-state-graph.ts";
 import type { NativeObservation } from "../src/logos-engine/v6-native-types.ts";
 import {
   destinations,
@@ -9,7 +10,10 @@ import {
   type RelativeModel,
   type GroupPose,
 } from "../src/sic/relative-motion-learning.ts";
-import { chooseRelativePlan } from "../src/sic/relative-motion-plan.ts";
+import {
+  chooseRelativePlan,
+  continueRelativePlan,
+} from "../src/sic/relative-motion-plan.ts";
 import type { TerminalContact } from "../src/sic/terminal-contact.ts";
 import type { PartMotion } from "../src/sic/controlled-parts.ts";
 import type { RelativeMemory } from "../src/sic/relative-motion-learning.ts";
@@ -154,6 +158,7 @@ test("backchain from a goal and change the relative vector using a wall; the liv
   const goal = cell(1, 0);
   m.goals.exit = [goal];
   let s: GroupPose = { actor: cell(3, 0), pieces: [cell(2, 0)] };
+  const memory: RelativeMemory = { models: { e: m } };
   let witnessed = false;
   for (let n = 0; n < 8 && s.actor !== goal; n++) {
     const obs = {
@@ -161,7 +166,7 @@ test("backchain from a goal and change the relative vector using a wall; the liv
       observation_ref: "test" + n,
     } as NativeObservation;
     const trial = chooseRelativePlan(
-      { models: { e: m } },
+      memory,
       {
         walker: [render(s.actor)],
         stone: s.pieces.map(render),
@@ -173,6 +178,7 @@ test("backchain from a goal and change the relative vector using a wall; the liv
       { maxDepth: 16, maxNodes: 150 },
     );
     assert.ok(trial);
+    assert.doesNotThrow(() => splitNativeState(trial, "relative-plan"));
     if (!n) {
       assert.equal(trial.objective.rigidRoute, false);
       assert.ok(trial.desired);
@@ -187,6 +193,14 @@ test("backchain from a goal and change the relative vector using a wall; the liv
     witnessed ||= q === p;
     s = { actor: landed, pieces: [q] };
     assert.equal(poseKey(trial.next), poseKey(s));
+    if (n > 0) assert.equal(trial.predictions, 0);
+    const returned = { ...obs, observation_ref: "test" + (n + 1) };
+    continueRelativePlan(memory, trial, returned, true, landed === goal);
+    if (!n) {
+      const rejected: RelativeMemory = { ...memory };
+      continueRelativePlan(rejected, trial, returned, false, false);
+      assert.equal(rejected.active, undefined);
+    }
   }
   assert.equal(s.actor, goal);
   assert.equal(witnessed, true);

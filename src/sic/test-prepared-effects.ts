@@ -8,7 +8,7 @@ import {observedSituatedOperations,retainSituatedOperations} from './situated-pr
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import {observeCueCondition} from './seek-missing-preview.ts';
 import {observeRelativeMotion} from './relative-motion-learning.ts';
-import {chooseRelativePlan} from './relative-motion-plan.ts';
+import {chooseRelativePlan,relativeReceipt} from './relative-motion-plan.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
   NativeFamily,
@@ -109,6 +109,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     x?: Experiment
   ) {
     enter(b);
+    if(!x?.relative && m.relativeMotion?.active)delete m.relativeMotion.active;
     const learning=m.previewLearning??=newPreviewLearning();
     if(a.levels_completed>b.levels_completed){const contacts=completionContacts(learning,b,a,visualLayout(b,rows),observedCommandKey(cmd));if(contacts.length)learning.terminal=contacts;}
     if(a.levels_completed>b.levels_completed&&m.localCapacity)m.localCarry=nextLocalLevel(m.localCapacity);
@@ -148,7 +149,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
       if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const missingCue=!!m.previewLearning?.cueSearch?.seeking;
-      const repair=missingCue || hasExperimentOpportunity(m);
+      const repair=missingCue || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
         ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
       if (!cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
@@ -276,7 +277,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast?{
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
-        ...(relative ? {relativePlacementForecast:relative} : {}),
+        ...(relative ? {relativePlacementForecast:relativeReceipt(relative)} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
         ...(experiment.cue ? {cueSearchForecast:{...experiment.cue,decisionMode:'explore_competing_explanations',outcomes:['cue_becomes_visible','cue_remains_absent']}} : {}),

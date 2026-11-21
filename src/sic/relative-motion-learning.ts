@@ -5,7 +5,8 @@ import type {
 import type { VisualLayout } from "./witnessed-preview-transfer.ts";
 import type { TerminalContact } from "./terminal-contact.ts";
 import type { PartMotion } from "./controlled-parts.ts";
-import { spatialControls } from "./calibrate-spatial-controls.ts";
+import { cellMatches, spatialControls } from "./calibrate-spatial-controls.ts";
+import type { RelativeTrial } from "./relative-motion-plan.ts";
 import type { XY } from "./access-terrain.ts";
 
 type Point = number;
@@ -44,7 +45,10 @@ export type RelativeModel = {
   occupiedFailures?: Record<number, string>;
   obstruction?: string;
 };
-export type RelativeMemory = { models: Record<string, RelativeModel> };
+export type RelativeMemory = {
+  models: Record<string, RelativeModel>;
+  active?: RelativeTrial;
+};
 export const poseKey = (s: GroupPose) => [s.actor, ...s.pieces].join(",");
 export const equalPose = (p: GroupPose, q: GroupPose) =>
   poseKey(p) === poseKey(q);
@@ -200,13 +204,15 @@ export function observeRelativeMotion(
         if (controls?.pitch[0] === m.pitch) {
           for (const motor of controls.motors.filter(
             (v) =>
-              v.basis === "observed" &&
+              v.basis !== "untested" &&
               v.support > 0 &&
               /^ACTION[1-4]$/.test(v.op),
           )) {
             const observed = Object.values(
               motion!.displacements?.[motor.op] ?? motion!.axes[motor.op] ?? {},
-            ).find((v) => v.d[0] === motor.d[0] && v.d[1] === motor.d[1]);
+            )
+              .filter((v) => cellMatches(v.d, motor.d, controls.pitch))
+              .sort((a, b) => b.count - a.count)[0];
             if (!observed) continue;
             m.moves[motor.op] = (motor.d[0] + motor.d[1] * m.width) / m.pitch;
             (m.inheritedMoves ??= {})[motor.op] = observed.first;

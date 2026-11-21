@@ -26,6 +26,8 @@ export type RelativeTrial = {
   next: GroupPose;
   goal: number;
   remaining: number;
+  route?: { op: string; next: GroupPose }[];
+  continuedAfter?: string;
   desired?: {
     initial: XY;
     wanted: XY;
@@ -53,6 +55,35 @@ export type RelativeTrial = {
     targetOffsets: XY[];
   };
 };
+export function relativeReceipt(plan: RelativeTrial) {
+  const { route, ...forecast } = plan;
+  return forecast;
+}
+// Engage a suffix only when the chosen action has just produced the entire
+// predicted public layout. A refutation releases it before replanning.
+export function continueRelativePlan(
+  mem: RelativeMemory,
+  plan: RelativeTrial,
+  a: NativeObservation,
+  matched: boolean,
+  won: boolean,
+) {
+  delete mem.active;
+  if (!matched || won || !plan.route?.length) return;
+  const [step, ...tail] = plan.route;
+  mem.active = {
+    ...plan,
+    op: step!.op,
+    from: plan.next,
+    next: step!.next,
+    before: a.observation_ref,
+    continuedAfter: a.observation_ref,
+    route: tail,
+    remaining: tail.length + 1,
+    predictions: 0,
+    usedMeasured: false,
+  };
+}
 type Step = {
   op: string;
   pose: GroupPose;
@@ -130,6 +161,18 @@ function board(
       (v.open ? good : bad).add(texture(m, rows, Number(k)));
   }
   for (const p of visited) if (!occupied.has(p)) good.add(texture(m, rows, p));
+  function majority(key: string) {
+    const values = key.split(","),
+      counts = new Map<string, number>();
+    for (const value of values) {
+      const n = (counts.get(value) ?? 0) + 1;
+      if (n * 2 > values.length) return value;
+      counts.set(value, n);
+    }
+    return undefined;
+  }
+  const positive = new Set([...good].map(majority).filter(Boolean)),
+    negative = new Set([...bad].map(majority).filter(Boolean));
   const cells = new Int8Array(m.width * m.height);
   cells.fill(-1);
   for (let p = 0; p < cells.length; p++) {
@@ -139,7 +182,13 @@ function board(
       cells[p] = 1;
       continue;
     }
-    if (!bad.has(t)) cells[p] = 0;
+    if (bad.has(t)) continue;
+    const ink = majority(t);
+    if (ink && positive.has(ink) && !negative.has(ink)) {
+      cells[p] = 1;
+      continue;
+    }
+    if (!ink || !negative.has(ink) || positive.has(ink)) cells[p] = 0;
   }
   // Separate a stopped object inside a confirmed influence range from an
   // inert one outside it. Only the former supplies evidence of a wall.
@@ -322,6 +371,22 @@ export function chooseRelativePlan(
   limits: { maxNodes: number; maxDepth: number },
   requireObstruction = false,
 ): RelativeTrial | null {
+  const retained = mem.active;
+  if (
+    retained &&
+    retained.before === o.observation_ref &&
+    o.available_action_refs.includes(retained.op)
+  ) {
+    const model = mem.models[retained.model],
+      pose = model && readGroup(model, layout);
+    const known = pose && model?.measured[poseKey(pose) + "/" + retained.op];
+    if (
+      pose &&
+      poseKey(pose) === poseKey(retained.from) &&
+      (!known || poseKey(known) === poseKey(retained.next))
+    )
+      return retained;
+  }
   const models = Object.entries(mem.models)
     .filter(
       ([, m]) =>
@@ -416,14 +481,17 @@ export function chooseRelativePlan(
         model: key,
         goal: result.goal,
         remaining: result.path.length,
-        desired,
+        route: result.path.slice(1).map((s) => ({ op: s.op, next: s.pose })),
+        ...(desired ? { desired } : {}),
         law,
         purpose: optimistic ? "test_unknown_route" : "reach_scoring_contact",
         learned: m.first,
         contrast: m.obstruction ?? m.differingRef!,
         contact: refs[marker]!,
         before: o.observation_ref,
-        motorEvidence: m.inheritedMoves?.[step.op],
+        ...(m.inheritedMoves?.[step.op]
+          ? { motorEvidence: m.inheritedMoves[step.op] }
+          : {}),
         predictions: limits.maxNodes - remaining,
         alternatives: goals.size,
         usedMeasured: step.measured,
