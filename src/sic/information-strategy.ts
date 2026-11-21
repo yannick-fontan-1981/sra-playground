@@ -8,6 +8,7 @@ export const informationStrategies = {
   indicated_access: 'Seek an indication at a traversable site when ordinary movement fails to reach a destination',
   plan_after_selection: 'Use a verified change of control to plan a placement and test the return to the previous subject',
   test_partner_preparation: 'Retest a blocked movement after changing the other subject’s placement',
+  bind_earlier_motions_to_registered_subjects: 'Recover witnessed movements after subject registration and reuse them to plan a continuous crossing',
   compose_a_sustained_crossing: 'Compose a maintained opening, chained displacements and successive changes in traversable terrain',
   prefer_a_verified_coverage_experiment: 'Give a grounded placement experiment or its verified continuation priority over independent exploration',
   prepare_a_contact_stance: 'Plan the approach to a pushing or pulling position that makes a required placement feasible',

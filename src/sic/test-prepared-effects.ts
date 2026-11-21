@@ -8,6 +8,7 @@ import {informationPriority, type InformationPreference} from './information-pre
 import {detectTransportSelection,observeTransport} from './transport-observations.ts';
 import {registerCoverage,registerCoverageFromControl,observeCoverage} from './controlled-coverage.ts';
 import {registerCrossing,observeCrossing,proposeCrossing} from './sustained-crossing.ts';
+import {retainMotion,recoverRegisteredMotions} from './motion-before-selection.ts';
 import {proposeCoverage} from './plan-controlled-coverage.ts';
 import {chooseTransport} from './compose-transport.ts';
 import {challengePlacement,recordPlacementVisit} from './recurrent-placement.ts';
@@ -105,7 +106,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const bridgeSeries=comparePreparations && informationPreference?.strategy==='compose_a_sustained_crossing';
+  const recallMotions=comparePreparations && informationPreference?.strategy==='bind_earlier_motions_to_registered_subjects';
+  const bridgeSeries=recallMotions || comparePreparations && informationPreference?.strategy==='compose_a_sustained_crossing';
   const prioritizeCoverage=bridgeSeries || comparePreparations && informationPreference?.strategy==='prefer_a_verified_coverage_experiment';
   const prepareStance=prioritizeCoverage || comparePreparations && informationPreference?.strategy==='prepare_a_contact_stance';
   const testBodyContact=prepareStance || comparePreparations && informationPreference?.strategy==='test_contact_on_another_subject';
@@ -149,6 +151,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(retrySelection&&x?.landmark)recordPlacementVisit(m.placementVisits??={edges:{},tested:{}},x.landmark,b.frame_hash,a.frame_hash,a.observation_ref);
       if(x?.cursorTrial?.recurrentPlacement&&m.placementVisits)m.placementVisits.tested[x.cursorTrial.recurrentPlacement.key]=true;
       if(composeTransport&&b.available_action_refs.includes('ACTION6')){
+        if(recallMotions&&!m.transportLearning&&b.frame_hash!==a.frame_hash&&/^ACTION[1-4]$/.test(key))
+          retainMotion(m.priorMotions??={},key,rows,next,a.observation_ref);
         if(!m.transportLearning&&cmd.action_ref==='ACTION6'&&cmd.data.x!==undefined&&cmd.data.y!==undefined){
           const selected=detectTransportSelection(before,rows,next,[cmd.data.x,cmd.data.y],a.observation_ref);
           if(selected)m.transportLearning=selected;
@@ -169,6 +173,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
               const scene=registerCrossing(transport,rows);
               if(scene){
                 m.crossing=scene;
+                if(recallMotions&&m.priorMotions)recoverRegisteredMotions(transport,m.priorMotions);
                 for(const [op,v] of Object.entries(m.cursorSelection?.bearings??{})){
                   if(!transport.motors[op]&&Math.abs(v.dx)+Math.abs(v.dy)===transport.grid.pitch&&(v.dx===0||v.dy===0))
                     transport.motors[op]={dx:Math.sign(v.dx),dy:Math.sign(v.dy),ref:v.ref};
