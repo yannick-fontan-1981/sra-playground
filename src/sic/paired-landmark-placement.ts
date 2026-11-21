@@ -9,6 +9,7 @@ import {chooseIndicatedAccess,learnIndicatedAccess,localAccessBody,newIndicatedM
 import {chooseMobileIndication,tileValues} from './plan-mobile-indication.ts';
 import {advancePartnerTest,nextPartnerTest,observedBodyClick,sitePatch,type PartnerTest,type PartnerOffer,type VerifiedPartnerForms} from './test-partner-preparation.ts';
 import {measureDisplacedDestination,type DisplacedDestination} from './displaced-destination.ts';
+import {chooseJointArrival,measureJointReturn,newJointMemory,observeJointIndications,type JointContext,type JointForecast,type JointMemory} from './joint-indicated-arrivals.ts';
 
 type Pair = {role:string; sites:XY[]; ref:string};
 type Assignment = {
@@ -16,14 +17,15 @@ type Assignment = {
   pitch:XY; firstRef:string; returnRef?:string; displaced?:DisplacedDestination;
 };
 export type LandmarkTrial = Assignment & {
-  stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked'|'test_partner_preparation';
+  stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked'|'test_partner_preparation'|'prepare_joint_arrivals';
+  joint?:JointForecast;
   partnerTest?:PartnerOffer & {refusal:string;motorRef:string;destination:XY;verifiedFormsRef?:string};
   command:string; from:XY; expected:XY; guard:XY; basis:string; access?:AccessExperiment;
 };
 export type LandmarkMemory = {
   pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string; access?:IndicatedMemory;
   redrawn?:{parked:string;selected:string};
-  planAfterSelection?:boolean;
+  planAfterSelection?:boolean; prepareJoint?:boolean; joint?:JointMemory;
   previousControl?:{parked:string;moving:string;at:XY;ref:string;motor?:{op:string;d:XY;ref:string}};
   testPartner?:boolean; probe?:PartnerTest; probedEdges?:string[]; verifiedForms?:VerifiedPartnerForms;
   reconsiderDestination?:boolean; redirect?:{assignment:Assignment;displaced:DisplacedDestination};
@@ -43,7 +45,7 @@ export function observeLandmarks(m:LandmarkMemory|undefined, before:VisualLayout
   return m;
 }
 function drop(m:LandmarkMemory) {
-  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;delete m.access;delete m.probe;delete m.redirect;
+  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;delete m.access;delete m.probe;delete m.redirect;delete m.joint;
 }
 function bodyRole(layout:VisualLayout,box:NativeBox) {
   const matches=Object.entries(layout).filter(([,g])=>g.length===1 && g[0]!.box.every((v,i)=>v===box[i]));
@@ -127,6 +129,11 @@ function nextStep(m:LandmarkMemory,a:Assignment,role:string,from:XY,goal:XY,guar
     }
   }
 }
+function jointContext(m:LandmarkMemory,a?:Assignment):JointContext|undefined{
+  const alt=m.verifiedForms;
+  if(!m.prepareJoint||!a?.displaced||!alt||alt.actor!==a.actor||alt.peer!==a.peer)return;
+  return {roles:[a.actor,a.peer],goals:[a.home,a.other],pitch:a.pitch,pivot:a.displaced.role,alternate:alt};
+}
 function accessContext(m:LandmarkMemory){
   const a=m.active;
   if(a&&m.secondRole&&m.parkedRole)return {actor:m.secondRole,parked:m.parkedRole,home:a.home,goal:a.other,pitch:a.pitch};
@@ -154,6 +161,8 @@ export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after
   }
   const c=accessContext(m);
   if(c)learnIndicatedAccess(m.access??=newIndicatedMemory(),c,b.frame_hash,a.frame_hash,before,after,op,a.observation_ref,t?.expected,t?.access);
+  const joint=jointContext(m,m.active??t);
+  if(joint)observeJointIndications(m.joint??=newJointMemory(),joint,before,after,op,a.observation_ref);
 }
 export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,rows:NativeRows,motions:Record<string,PartMotion>,candidate:CursorTrial|null,limit:number,accessDepth?:number):LandmarkTrial|undefined {
   let a=m.active??(candidate && nearestAssignment(m,l,o,candidate,motions));
@@ -174,6 +183,13 @@ export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservat
       basis:step.phase,partnerTest:{...step,refusal:m.probe.refusal,motorRef:m.probe.motorRef,destination:m.probe.destination,
         ...(m.probe.verifiedForms?{verifiedFormsRef:m.probe.verifiedForms.ref}:{})}};
     return;
+  }
+  const joint=jointContext(m,a);
+  if(joint&&m.joint&&accessDepth){
+    const controls=movement(motions,a.actor,o,a.pair),ground=Object.entries(motions[a.actor]?.substrate??{}).sort((x,y)=>y[1]-x[1])[0];
+    const offer=controls&&chooseJointArrival(m.joint,joint,l,o,rows,controls.motors,ground?Number(ground[0]):undefined,accessDepth,limit);
+    if(offer)return {...a,stage:'prepare_joint_arrivals',joint:offer,command:offer.command,from:offer.actors[offer.side],
+      expected:offer.expected,guard:offer.actors[offer.side===0?1:0],basis:offer.purpose};
   }
   const role=m.secondRole??a.actor,peer=m.parkedRole??a.peer,body=singleton(l,role),parked=singleton(l,peer);
   if(!body||!parked||m.secondRole&&(!cellMatches(parked.at,a.home,a.pitch)||!covered(l,a,a.home)))return;
@@ -232,6 +248,10 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     }
     m.active??={pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef,...(t.returnRef?{returnRef:t.returnRef}:{}),...(t.displaced?{displaced:t.displaced}:{})};
     delete m.redirect;
+    if(t.joint&&m.joint){
+      const context=jointContext(m,t);
+      if(context)return m.lastResult=measureJointReturn(m.joint,context,l,t.joint);
+    }
     if(t.partnerTest && m.probe){
       const s=m.probe, result=advancePartnerTest(s,before,l,t.pitch);
       if(result==='partner_preparation_confirmed'&&s.alternateActor&&s.alternatePeer&&observationRef){

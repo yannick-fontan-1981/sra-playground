@@ -58,7 +58,7 @@ function dominant(values:number[]){
   return [...counts].sort((a,b)=>b[1]-a[1])[0]?.[0];
 }
 type Board={points:XY[];index:Map<string,number>;walk:number[][];goal:number;start:number;centre:number;prepared:Set<number>;partnerVisits:Map<number,string>};
-function visibleBoard(m:IndicatedMemory,c:AccessContext,s:AccessScene,pivot:string,rows:NativeRows,motors:Motor[],learnedGround?:number):Board|undefined{
+export function visibleBoard(m:Pick<IndicatedMemory,'sites'|'scenes'|'preparedGround'|'partnerSites'>,c:AccessContext,s:AccessScene,pivot:string,rows:NativeRows,motors:Motor[],learnedGround?:number):Board|undefined{
   const centre=s.visible[pivot];if(!centre)return;
   const ground=learnedGround??surfaceFromVisits(Object.fromEntries(Object.keys(m.sites).map(k=>[k,1])),rows,c.goal,c.pitch,
     [s.at,c.home,centre,c.goal]);

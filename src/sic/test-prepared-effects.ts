@@ -98,7 +98,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const reconsiderDestination=comparePreparations && informationPreference?.strategy==='reclassify_displaced_goal';
+  const prepareJoint=comparePreparations && informationPreference?.strategy==='prepare_joint_arrivals';
+  const reconsiderDestination=prepareJoint || comparePreparations && informationPreference?.strategy==='reclassify_displaced_goal';
   const testPartner=reconsiderDestination || comparePreparations && informationPreference?.strategy==='test_partner_preparation';
   const planAfterSelection=testPartner || comparePreparations && informationPreference?.strategy==='plan_after_selection';
   const seekAccess=planAfterSelection || comparePreparations && informationPreference?.strategy==='indicated_access';
@@ -135,6 +136,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           if(planAfterSelection)m.landmarkMemory.planAfterSelection=true;
           if(testPartner)m.landmarkMemory.testPartner=true;
           if(reconsiderDestination)m.landmarkMemory.reconsiderDestination=true;
+          if(prepareJoint)m.landmarkMemory.prepareJoint=true;
         }
         if(seekAccess&&m.landmarkMemory)observeLandmarkAccess(m.landmarkMemory,before,after,b,a,rows,next,key,x?.landmark);
         observeCueCondition(learning,b,a,before,after,key);
@@ -192,7 +194,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
       const experiment:Experiment|null = landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
-        rule:landmark.partnerTest?'retry_a_blocked_movement_after_changing_the_partner_placement':'compare_two_arrivals_with_a_preserved_first_contact',landmark,...(cursor?{cursorTrial:cursor}:{})} : cursor ? {
+        rule:landmark.joint?'prepare_every_indicated_arrival_before_the_common_operation':landmark.partnerTest?'retry_a_blocked_movement_after_changing_the_partner_placement':'compare_two_arrivals_with_a_preserved_first_contact',landmark,...(cursor?{cursorTrial:cursor}:{})} : cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':cursor.stage==='advance'?'advanceSelectedCursor':cursor.stage==='reroute'?'repairSelectedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
         rule:cursor.beyondReturn?'test_if_the_recovered_movement_extends_beyond_the_previous_site':cursor.stage==='reroute'?'test_another_motor_after_the_verified_step_stalls':cursor.stage==='advance'?'reuse_measured_control_preserving_the_parked_subject':
           cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
@@ -203,7 +205,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if (!experiment || (!landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (cursor||landmark?.partnerTest||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
@@ -313,7 +315,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         }:{})}} : {}),
         ...(landmark ? {landmarkForecast:{stage:landmark.stage,role:landmark.pair.role,home:landmark.home,other:landmark.other,
           from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,...(landmark.returnRef?{verifiedReturnSource:landmark.returnRef}:{}),
-          ...(landmark.displaced?{displacedDestination:landmark.displaced}:{}),...(landmark.partnerTest?{partnerTest:landmark.partnerTest}:{}),...(landmark.access?{access:landmark.access.mobile?{
+          ...(landmark.joint?{joint:landmark.joint}:{}),...(landmark.displaced?{displacedDestination:landmark.displaced}:{}),...(landmark.partnerTest?{partnerTest:landmark.partnerTest}:{}),...(landmark.access?{access:landmark.access.mobile?{
             purpose:landmark.access.purpose,cue:landmark.access.cue,pivot:landmark.access.mobile.pivot,motion:landmark.access.mobile.motion,
             first:landmark.access.mobile.path[0],length:landmark.access.mobile.path.length,reads:landmark.access.mobile.path.filter(s=>s.read).length,examined:landmark.access.mobile.examined
           }:landmark.access}:{}),
