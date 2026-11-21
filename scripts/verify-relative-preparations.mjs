@@ -206,10 +206,9 @@ for (const event of held.filter((e) => !e.occupied && e.bareFailure)) {
         continue;
       sameActor++;
       const alternateEnd = key(b);
-      const observedAfter = [],
-        originalActor = expected.actor;
-      let alternateScore = false,
-        lastActor = originalActor;
+      let firstActorDifference = null,
+        alternateScore = false,
+        previousAlternative = other;
       for (const [index, c] of commands.slice(end).entries()) {
         if (completed(b) || b.state === "GAME_OVER") break;
         b = await send(alternative.g, c);
@@ -218,22 +217,34 @@ for (const event of held.filter((e) => !e.occupied && e.bareFailure)) {
         const baseline = byIndex.get(end + index + 1)?.relativePlacement;
         const otherPose = readGroup(m, await layout(b));
         if (
+          !firstActorDifference &&
           baseline?.matched &&
           otherPose &&
+          previousAlternative &&
           baseline.actual.actor !== otherPose.actor
         ) {
-          observedAfter.push({
+          const destination = baseline.actual.actor;
+          firstActorDifference = {
             horizon: index + 1,
-            sameStartActor: baseline.plan.from.actor === lastActor,
+            sameStartActor:
+              baseline.plan.from.actor === previousAlternative.actor,
+            destinationOccupiedBefore: {
+              positive: baseline.plan.from.pieces.includes(destination),
+              alternative: previousAlternative.pieces.includes(destination),
+            },
             plannedDisplacement: vector(
               m,
               baseline.plan.from.actor,
               baseline.actual.actor,
             ),
-            alternateDisplacement: vector(m, lastActor, otherPose.actor),
-          });
+            alternateDisplacement: vector(
+              m,
+              previousAlternative.actor,
+              otherPose.actor,
+            ),
+          };
         }
-        if (otherPose) lastActor = otherPose.actor;
+        previousAlternative = otherPose;
       }
       if (alternateScore) continue;
       pair = {
@@ -242,7 +253,7 @@ for (const event of held.filter((e) => !e.occupied && e.bareFailure)) {
         length,
         positiveEnd: key(positive.b),
         alternateEnd,
-        firstActorDifference: observedAfter[0] ?? null,
+        firstActorDifference,
         sameActor: true,
         positiveVectors: expected.pieces.map((p) =>
           vector(m, expected.actor, p),

@@ -14,7 +14,9 @@
     "maxDepth": 88,
     "maxNodes": 1000,
     "actionsPerLevel": 1200,
-    "sameActiveTimeBudget": true
+    "sameActiveTimeBudget": true,
+    "parallelWorkers": 4,
+    "activeMillisecondsPerLevel": 514286
   },
   "firstComparedToV66Active": {
     "campaign": 67,
@@ -179,6 +181,23 @@
       },
       {
         "code": "SS05",
+        "start": 2,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 368,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "20220b0f32e09d9e2565220a8675434fa030b8dc4e38072977457bea52c6e8e4",
+        "final": "f777d6deda03940a7e5ae48f46485aa174cee7bb07dbc7de04a11336c4087054",
+        "relativeDecisions": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS05",
         "start": 1,
         "finish": 2,
         "levels": [
@@ -203,6 +222,28 @@
       }
     ],
     "shadow": [
+      {
+        "code": "SS02",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 519,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "691df545d06f8360fb157974f551646e3c006dbb36107ef8fe19cdf6eaa1f409",
+        "final": "50450b76b8398783a521f0e2601ef11611cd5ce015e089e5de5e99fd26a4b882",
+        "relativeDecisions": 0,
+        "stop": "level_active_time_budget"
+      },
       {
         "code": "SS05",
         "start": 1,
@@ -250,6 +291,10 @@
       "firstActorDifference": {
         "horizon": 7,
         "sameStartActor": true,
+        "destinationOccupiedBefore": {
+          "positive": false,
+          "alternative": true
+        },
         "plannedDisplacement": [
           1,
           0
@@ -401,5 +446,26 @@
   "activeUnitTests": {
     "passed": 484,
     "failed": 0
+  },
+  "sources100": {
+    "verified": 100,
+    "wins": 100,
+    "unchangedFromV66": 100,
+    "differingGames": [],
+    "digestOfSortedGameTrajectories": "baf1166510c4798f28aee8c0fdc78175694eebc37b0890f2a6c11aade9ada442"
+  },
+  "v67Retest": {
+    "levels": [
+      {
+        "level": 1,
+        "won": true,
+        "actions": 44
+      },
+      {
+        "level": 2,
+        "won": false,
+        "actions": 713
+      }
+    ]
   }
 }
