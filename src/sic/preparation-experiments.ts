@@ -224,6 +224,7 @@ export type Outcome = {
 };
 export type Memory = {
   configurations?: ConfigurationMemory;
+  configurationOpportunity?: boolean;
   localCapacity?: LocalMemory;
   localCarry?: LocalMemory;
   returnHistory?: ReturnHistory;
@@ -885,8 +886,16 @@ export function recordExperiment(
     op = observedCommandKey(cmd),
     effect = measureEffect(b, a, rows, next);
   const local=m.localCapacity??=newLocalMemory();
-  if (b.level_epoch===a.level_epoch && a.levels_completed===b.levels_completed && b.state===a.state)
-    observeConfiguration(m.configurations??=newConfigurationMemory(),rows,next,op,a.observation_ref,x?.configurationTrial);
+  if (b.level_epoch===a.level_epoch && a.levels_completed===b.levels_completed && b.state===a.state) {
+    const configurations=m.configurations??=newConfigurationMemory();
+    const trial=x?.configurationTrial;
+    observeConfiguration(configurations,rows,next,op,a.observation_ref,trial);
+    // Start searching after an observed failure to change the board. Continue
+    // while successive commands implement the configuration being tested.
+    m.configurationOpportunity=trial
+      ? !configurations.failures.includes(trial.from+'/'+trial.action)
+      : b.frame_hash===a.frame_hash;
+  } else m.configurationOpportunity=false;
   if(!x?.localCapacity){delete local.pending;delete local.expect;}
   observeLocal(local,b,a,rows,next,op);
   const previous = m.edges[m.previous];

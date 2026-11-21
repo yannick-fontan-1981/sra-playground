@@ -120,7 +120,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
       const configurationOpportunity=(group===recurrentExperimentGroup || group===exhaustedGroup) &&
-        (m.configurations?.factors.length??0)>=2;
+        !!m.configurationOpportunity && (m.configurations?.factors.length??0)>=2;
       if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
