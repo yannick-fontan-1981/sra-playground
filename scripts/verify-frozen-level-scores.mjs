@@ -3,6 +3,7 @@ import {createHash} from 'node:crypto';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
+import {transientSubjectAudit} from './study-transient-subjects.mjs';
 
 const [root,output,...paths]=process.argv.slice(2);
 // Optional post-run measurement. Import the recognizer from the solver that produced the tape.
@@ -20,6 +21,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   assert.notEqual(r.code,'SS09');
   const key=[r.code,r.start,r.finish,r.observedPriorLevelActions??0].join('/');
   const engine=createGameDispatcher(()=>{throw Error('Unexpected engine')});
+  const transient = process.env.SIC_AUDIT_TRANSIENT_SUBJECTS ? await transientSubjectAudit(process.env.SIC_AUDIT_TRANSIENT_SUBJECTS) : null;
   const act=c=>engine.dispatch({type:'action',actionId:c.id,...(c.id===6?{data:c.data}:{})});
   let b=await engine.dispatch({type:'load',code:r.code,level:r.observedPriorLevelActions?1:r.start});
   if(r.observedPriorLevelActions) {
@@ -57,8 +59,9 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
       entry.inputsAndDirectionalGeometry += Number(allowed && previousDirectionalGeometry);
       previousDirectionalGeometry = Boolean(geometry) && c.id >= 1 && c.id <= 4;
     }
-    const {level,levelsCompleted}=b;
+    const {level,levelsCompleted}=b, before=b;
     b=await act(c);
+    transient?.observe(before,b,c.id);
     assert.equal(hash(b.frame).slice(0,16),c.to);
     const record=visits.get(level)??{level,actions:0,won:false};
     record.actions++;record.won ||= b.levelsCompleted>levelsCompleted || b.state==='WIN';
@@ -72,6 +75,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   const result={code:r.code,start:r.start,finish:r.finish,lesson:r.observedPriorLevelActions??0,initial:r.initial,
     cap:r.cap,levels,resets,tapeDigest:hash(tape),final:hash(b.frame)};
   if (delivery) result.coldDeliveryEntry = entry;
+  if (transient) result.transientSubjects = transient.tally;
   if(games.has(key)) assert.deepEqual(games.get(key),result);
   games.set(key,result);
 }

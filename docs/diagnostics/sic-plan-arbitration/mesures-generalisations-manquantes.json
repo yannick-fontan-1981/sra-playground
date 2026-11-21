@@ -14300,5 +14300,1051 @@
       }
     ],
     "sourceResultsSha256": "1d99cbbf91e15026097b72ad2e5fdef7a6dd002dc06280e2cdd22d1a2e88faf5"
+  },
+  "sourceTransientCompositionV58": {
+    "frozen": {
+      "sha": "2142d232199d23a4d2588eeb74c1515a8908b5b3",
+      "files": 2562,
+      "manifestHash": "3bec127a01660de928c29b99fc6bbae92f2307a10edc2a907c3dc584cbac9267",
+      "baselineComparableHash": "4d5dd93e950cdc9de013a58813715c091a890934b32da81ac2f277488b67591c",
+      "algorithm": "sorted relative POSIX path UTF-8, NUL, binary SHA-256 of file"
+    },
+    "control": {
+      "sha": "f34e8bfc4744f192375ae742128e12facf3be9e3",
+      "files": 2562,
+      "manifestHash": "9b991ff6b8a2ca13fc24b338a5c7fa7376c2195d8952114150b48d2731357ce7"
+    },
+    "baselineTag": "sic-source100-observed-handoff-v57",
+    "candidateTag": "sic-source100-transient-composition-v58",
+    "sourceOnlyDesign": true,
+    "reserved": "SS09 L2",
+    "canonicalTests": 431,
+    "controls100": {
+      "won": 100,
+      "identical": 100,
+      "core": [
+        {
+          "code": "KEYD",
+          "actions": 35,
+          "won": true
+        },
+        {
+          "code": "SKBN",
+          "actions": 22,
+          "won": true
+        },
+        {
+          "code": "GABA",
+          "actions": 49,
+          "won": true
+        },
+        {
+          "code": "SWCH",
+          "actions": 25,
+          "won": true
+        }
+      ]
+    },
+    "upperControls": [
+      {
+        "code": "FUIT",
+        "level": 2,
+        "baseline": [
+          true,
+          80
+        ],
+        "candidate": [
+          true,
+          80
+        ],
+        "identical": true,
+        "trajectory": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8"
+      },
+      {
+        "code": "FT09",
+        "level": 2,
+        "baseline": [
+          true,
+          7
+        ],
+        "candidate": [
+          true,
+          7
+        ],
+        "identical": true,
+        "trajectory": "3540463f11957520ca4f805b1c66be1712504ee8797d8f66b1af7d4ae36177be"
+      },
+      {
+        "code": "FT09",
+        "level": 3,
+        "baseline": [
+          true,
+          14
+        ],
+        "candidate": [
+          true,
+          14
+        ],
+        "identical": true,
+        "trajectory": "d01a5fc92f15c54b430a2cba8fa943c5698c29bc3675816df02d50f9342ff423"
+      },
+      {
+        "code": "FT09",
+        "level": 4,
+        "baseline": [
+          true,
+          16
+        ],
+        "candidate": [
+          true,
+          16
+        ],
+        "identical": true,
+        "trajectory": "7700b7a149b32c08f121e62f0bab095779adf021d8ce3aeb959c2e8b2ee63581"
+      },
+      {
+        "code": "WA30",
+        "level": 2,
+        "baseline": [
+          true,
+          55
+        ],
+        "candidate": [
+          true,
+          55
+        ],
+        "identical": true,
+        "trajectory": "01292713c7317db5f5b7ff4b045635e3833168c707b62dbcd6ee95736280d81f"
+      },
+      {
+        "code": "WA30",
+        "level": 3,
+        "baseline": [
+          true,
+          80
+        ],
+        "candidate": [
+          true,
+          80
+        ],
+        "identical": true,
+        "trajectory": "786ab93d562dfc1955a2eb4a464a1c20ec16bebfb14d3a1c470ee6ef25056e46"
+      },
+      {
+        "code": "MOTO",
+        "level": 2,
+        "baseline": [
+          false,
+          120
+        ],
+        "candidate": [
+          true,
+          13
+        ],
+        "identical": false,
+        "trajectory": "a4bfdc7ecd8d0e8ce1847f75d8dfa314953020e2d7a7aae7c9037db9cf231e51"
+      },
+      {
+        "code": "MOTO",
+        "level": 3,
+        "baseline": [
+          false,
+          120
+        ],
+        "candidate": [
+          true,
+          15
+        ],
+        "identical": false,
+        "trajectory": "768170f6b3a66299ac70296cfc383381cfa95490f75d3ec6f95205db55fe9935"
+      },
+      {
+        "code": "MOTO",
+        "level": 4,
+        "baseline": [
+          false,
+          120
+        ],
+        "candidate": [
+          true,
+          17
+        ],
+        "identical": false,
+        "trajectory": "1635ab83a5124c9dc178cdca81e907099435710e8e1eadc65b402ba917ef6674"
+      },
+      {
+        "code": "MOTO",
+        "level": 5,
+        "baseline": [
+          false,
+          120
+        ],
+        "candidate": [
+          true,
+          17
+        ],
+        "identical": false,
+        "trajectory": "c1437fac3ffb9e2c7d1d253f35917715fd2b2c201be2662253a2652b31405657"
+      }
+    ],
+    "sourceActivationInterventions": [
+      {
+        "code": "MOTO",
+        "level": 2,
+        "won": true,
+        "actions": 13,
+        "trajectory": "a4bfdc7ecd8d0e8ce1847f75d8dfa314953020e2d7a7aae7c9037db9cf231e51",
+        "prefix": 6,
+        "pairs": 3,
+        "original": true,
+        "activationAlone": false,
+        "withoutActivation": false,
+        "leaveOneOut": [
+          false,
+          false,
+          false
+        ],
+        "inIsolation": [
+          false,
+          false,
+          false
+        ],
+        "swapped": [
+          {
+            "first": 1,
+            "second": 2,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "won": true
+          }
+        ],
+        "reverseOrder": true
+      },
+      {
+        "code": "MOTO",
+        "level": 3,
+        "won": true,
+        "actions": 15,
+        "trajectory": "768170f6b3a66299ac70296cfc383381cfa95490f75d3ec6f95205db55fe9935",
+        "prefix": 6,
+        "pairs": 4,
+        "original": true,
+        "activationAlone": false,
+        "withoutActivation": false,
+        "leaveOneOut": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "inIsolation": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "swapped": [
+          {
+            "first": 1,
+            "second": 2,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "won": true
+          }
+        ],
+        "reverseOrder": true
+      },
+      {
+        "code": "MOTO",
+        "level": 4,
+        "won": true,
+        "actions": 17,
+        "trajectory": "1635ab83a5124c9dc178cdca81e907099435710e8e1eadc65b402ba917ef6674",
+        "prefix": 6,
+        "pairs": 5,
+        "original": true,
+        "activationAlone": false,
+        "withoutActivation": false,
+        "leaveOneOut": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "inIsolation": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "swapped": [
+          {
+            "first": 1,
+            "second": 2,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "won": true
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "won": true
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "won": true
+          }
+        ],
+        "reverseOrder": true
+      },
+      {
+        "code": "MOTO",
+        "level": 5,
+        "won": true,
+        "actions": 17,
+        "trajectory": "c1437fac3ffb9e2c7d1d253f35917715fd2b2c201be2662253a2652b31405657",
+        "prefix": 6,
+        "pairs": 5,
+        "original": true,
+        "activationAlone": false,
+        "withoutActivation": false,
+        "leaveOneOut": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "inIsolation": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "swapped": [
+          {
+            "first": 1,
+            "second": 2,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 3,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 1,
+            "second": 5,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 3,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 2,
+            "second": 5,
+            "won": true
+          },
+          {
+            "first": 3,
+            "second": 4,
+            "won": true
+          },
+          {
+            "first": 3,
+            "second": 5,
+            "won": true
+          },
+          {
+            "first": 4,
+            "second": 5,
+            "won": true
+          }
+        ],
+        "reverseOrder": true
+      }
+    ],
+    "openCustom4": [
+      {
+        "code": "SS01",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "commonActionsAndFrames": 44,
+        "stop": "target_levels_completed",
+        "chosen": 0,
+        "transient": {
+          "actions": 44,
+          "animated": 4,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 0,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "baselineTape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+      },
+      {
+        "code": "SS01",
+        "priorLevelActions": 19,
+        "baseline": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "commonActionsAndFrames": 32,
+        "stop": "target_levels_completed",
+        "chosen": 0,
+        "transient": {
+          "actions": 32,
+          "animated": 2,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 0,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "baselineTape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+      },
+      {
+        "code": "SS02",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 312,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 273,
+          "won": false
+        },
+        "commonActionsAndFrames": 273,
+        "stop": "level_active_time_budget",
+        "chosen": 0,
+        "transient": {
+          "actions": 273,
+          "animated": 4,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 0,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "c084ae68505c8e0b1378f64b0a29ad7b5dfbff729f9f02503e0bd92fbad4df59",
+        "baselineTape": "9fab8ea57d4748747ecd05c0db1498f825c599e873dabf1b3aa4a7d7928cb1cd"
+      },
+      {
+        "code": "SS03",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 279,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 250,
+          "won": false
+        },
+        "commonActionsAndFrames": 250,
+        "stop": "level_active_time_budget",
+        "chosen": 0,
+        "transient": {
+          "actions": 250,
+          "animated": 18,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 0,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "278c0f547f7b8b4d5070ca3badf53abc123ba65af4311415a02fc9ca0e8c01c5",
+        "baselineTape": "dc6881001de123d47501432d5c97c2654b150d8ae7f8b7c6935fa726ad6f74f8"
+      },
+      {
+        "code": "SS04",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "commonActionsAndFrames": 60,
+        "stop": "target_levels_completed",
+        "chosen": 0,
+        "transient": {
+          "actions": 60,
+          "animated": 7,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 0,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "baselineTape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+      },
+      {
+        "code": "SS05",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 263,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 239,
+          "won": false
+        },
+        "commonActionsAndFrames": 239,
+        "stop": "level_active_time_budget",
+        "chosen": 0,
+        "transient": {
+          "actions": 239,
+          "animated": 155,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 0,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "72ffa7e0dc16fdd6ea5ee1ad6c3505a6e6fbfa89e30296cfdb2a5c9e2198f278",
+        "baselineTape": "487a2d5f77d1bdf802869e004909f63ff4fe5dfaf5d57f9db87bca4fa0cb13d6"
+      },
+      {
+        "code": "SS06",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 250,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 217,
+          "won": false
+        },
+        "commonActionsAndFrames": 217,
+        "stop": "level_active_time_budget",
+        "chosen": 0,
+        "transient": {
+          "actions": 217,
+          "animated": 107,
+          "returningSubject": 1,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 15,
+          "animatedInteraction": 1,
+          "returningOnInteraction": 1
+        },
+        "candidateTape": "939b4b4d574512087d81383549f98d2122674b339b5f9bb1d18005a35d859e9e",
+        "baselineTape": "b424d28bc5e41a126a8df4040e256a7eea52a68e5696a13d0f2bded89c96e75e"
+      },
+      {
+        "code": "SS07",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "commonActionsAndFrames": 5,
+        "stop": "native_game_over",
+        "chosen": 0,
+        "transient": {
+          "actions": 5,
+          "animated": 3,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 1,
+          "animatedInteraction": 1,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "baselineTape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+      },
+      {
+        "code": "SS08",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 308,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 270,
+          "won": false
+        },
+        "commonActionsAndFrames": 270,
+        "stop": "level_active_time_budget",
+        "chosen": 0,
+        "transient": {
+          "actions": 270,
+          "animated": 165,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 29,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "072dbdc247a0161d9bcccf69ba0bf994157b2544c8987fcdc8ed90cc3d9738da",
+        "baselineTape": "6a64af7f76ebed9a4a73ee3837b9c54d534753437e7ed806069fb8343893ed8a"
+      },
+      {
+        "code": "SS10",
+        "priorLevelActions": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 282,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 257,
+          "won": false
+        },
+        "commonActionsAndFrames": 257,
+        "stop": "level_active_time_budget",
+        "chosen": 0,
+        "transient": {
+          "actions": 257,
+          "animated": 171,
+          "returningSubject": 0,
+          "stableCentre": 0,
+          "interactionWithClickAvailable": 22,
+          "animatedInteraction": 0,
+          "returningOnInteraction": 0
+        },
+        "candidateTape": "214f6f035de899d4db69e25317de78717f545b30ee3273cc47826e38a46ea931",
+        "baselineTape": "357d5a4a05ca2222bff9e2eb96e1541e14e9f2e1bfe9df49c6750cc3e9f8fbc1"
+      }
+    ],
+    "commonColdActions": 1615,
+    "coldInputs": 1615,
+    "newColdGames": [],
+    "sourceEquations": {
+      "levels": 149,
+      "predictions": 133,
+      "correct": 113,
+      "endedOrUntracked": 12,
+      "gestureArms": 126,
+      "landings": 33,
+      "identicalToClickingLandmark": 126,
+      "directWin": 0,
+      "orderDependentFollowupWins": 0,
+      "differentReferencePairs": 82,
+      "bothPredicted": 76,
+      "fixedInitialSubject": 0
+    },
+    "sourceTransientL1": {
+      "levels": 100,
+      "gamesWithReturningSubjects": [
+        "BP35",
+        "CATR",
+        "COLM",
+        "GARE",
+        "LF52",
+        "MOTO",
+        "RECR",
+        "RSWP",
+        "SERI",
+        "SNAR",
+        "SU15",
+        "TN36"
+      ],
+      "gamesWithReturningSubjectsAndStaticCentre": [
+        "CATR",
+        "LF52",
+        "TN36"
+      ],
+      "totals": {
+        "actions": 1549,
+        "animated": 571,
+        "returningSubject": 22,
+        "stableCentre": 6,
+        "returningOnInteraction": 3
+      }
+    },
+    "sourceTransientUpper": {
+      "levels": 4,
+      "gamesWithReturningSubjects": [
+        "MOTO"
+      ],
+      "gamesWithReturningSubjectsAndStaticCentre": [
+        "MOTO"
+      ],
+      "totals": {
+        "actions": 62,
+        "animated": 8,
+        "returningSubject": 5,
+        "stableCentre": 2,
+        "returningOnInteraction": 5
+      }
+    },
+    "sourceTransientSeparateGamesUpper": [
+      {
+        "code": "CATR",
+        "level": 2,
+        "actions": 100,
+        "animated": 24,
+        "returningSubject": 8,
+        "stableCentre": 8,
+        "interactionWithClickAvailable": 0,
+        "animatedInteraction": 0,
+        "returningOnInteraction": 0
+      },
+      {
+        "code": "CATR",
+        "level": 3,
+        "actions": 100,
+        "animated": 24,
+        "returningSubject": 0,
+        "stableCentre": 0,
+        "interactionWithClickAvailable": 0,
+        "animatedInteraction": 0,
+        "returningOnInteraction": 0
+      },
+      {
+        "code": "TN36",
+        "level": 2,
+        "actions": 54,
+        "animated": 7,
+        "returningSubject": 2,
+        "stableCentre": 0,
+        "interactionWithClickAvailable": 0,
+        "animatedInteraction": 0,
+        "returningOnInteraction": 0
+      },
+      {
+        "code": "TN36",
+        "level": 3,
+        "actions": 58,
+        "animated": 11,
+        "returningSubject": 2,
+        "stableCentre": 0,
+        "interactionWithClickAvailable": 0,
+        "animatedInteraction": 0,
+        "returningOnInteraction": 0
+      }
+    ],
+    "independentPreparations": {
+      "sourceGames": 100,
+      "all": {
+        "windows": 278,
+        "bothOrders": 115,
+        "strict": 41,
+        "distinctStrictGames": [
+          "BP35",
+          "CATR",
+          "CN04",
+          "DC22",
+          "DNOI",
+          "FOGW",
+          "FT09",
+          "HOLE",
+          "HPDL",
+          "KA59",
+          "KATA",
+          "LS19",
+          "MOTO",
+          "PIPE",
+          "PORT",
+          "PRTL",
+          "RSWP",
+          "SB26",
+          "SIGN",
+          "SYME",
+          "TEQU",
+          "TICT",
+          "TN36",
+          "TRCP",
+          "TRIA",
+          "VOIS"
+        ]
+      },
+      "fullOverlayEligible": {
+        "windows": 99,
+        "bothOrders": 41,
+        "strict": 35,
+        "distinctStrictGames": [
+          "BP35",
+          "CATR",
+          "DC22",
+          "DNOI",
+          "FOGW",
+          "FT09",
+          "HOLE",
+          "KA59",
+          "KATA",
+          "LS19",
+          "MOTO",
+          "PORT",
+          "PRTL",
+          "RSWP",
+          "SB26",
+          "SIGN",
+          "SYME",
+          "TICT",
+          "TN36",
+          "TRCP",
+          "TRIA",
+          "VOIS"
+        ]
+      },
+      "fullOverlay": {
+        "windows": 3,
+        "bothOrders": 3,
+        "strict": 3,
+        "distinctStrictGames": [
+          "HOLE",
+          "PRTL",
+          "RSWP"
+        ]
+      },
+      "independentPixelsEligible": {
+        "windows": 143,
+        "bothOrders": 51,
+        "strict": 41,
+        "distinctStrictGames": [
+          "BP35",
+          "CATR",
+          "CN04",
+          "DC22",
+          "DNOI",
+          "FOGW",
+          "FT09",
+          "HOLE",
+          "HPDL",
+          "KA59",
+          "KATA",
+          "LS19",
+          "MOTO",
+          "PIPE",
+          "PORT",
+          "PRTL",
+          "RSWP",
+          "SB26",
+          "SIGN",
+          "SYME",
+          "TEQU",
+          "TICT",
+          "TN36",
+          "TRCP",
+          "TRIA",
+          "VOIS"
+        ]
+      },
+      "independentPixels": {
+        "windows": 17,
+        "bothOrders": 17,
+        "strict": 16,
+        "distinctStrictGames": [
+          "DNOI",
+          "FT09",
+          "HOLE",
+          "PRTL",
+          "RSWP",
+          "SB26",
+          "SYME",
+          "TICT",
+          "TN36"
+        ]
+      },
+      "summedMotionEligible": {
+        "windows": 68,
+        "bothOrders": 25,
+        "strict": 15,
+        "distinctStrictGames": [
+          "CATR",
+          "CN04",
+          "DC22",
+          "FOGW",
+          "KA59",
+          "KATA",
+          "LS19",
+          "PIPE",
+          "PORT",
+          "SIGN",
+          "VOIS"
+        ]
+      },
+      "summedMotion": {
+        "windows": 18,
+        "bothOrders": 13,
+        "strict": 11,
+        "distinctStrictGames": [
+          "CATR",
+          "CN04",
+          "DC22",
+          "KA59",
+          "LS19",
+          "PORT",
+          "SIGN",
+          "VOIS"
+        ]
+      },
+      "separateMotionEligible": {
+        "windows": 14,
+        "bothOrders": 2,
+        "strict": 2,
+        "distinctStrictGames": [
+          "MOTO",
+          "SB26"
+        ]
+      },
+      "separateMotion": {
+        "windows": 3,
+        "bothOrders": 2,
+        "strict": 2,
+        "distinctStrictGames": [
+          "MOTO",
+          "SB26"
+        ]
+      },
+      "heldOutExperimentRanking": {
+        "sourceGamesWithAtLeastTwoWindows": 82,
+        "modelMean": 0.2276422764227642,
+        "uniformMean": 0.16463414634146342,
+        "better": 10,
+        "worse": 4,
+        "equal": 68,
+        "pairedBootstrap95Difference": [
+          0.01829268292682927,
+          0.11280487804878049
+        ],
+        "resamples": 10000,
+        "seed": 58,
+        "task": "Select a source window to test; each test game entirely excluded from training. Not an autonomous score."
+      }
+    },
+    "evidenceSha256": {
+      "equation58-all-verified.json": "2f80fabc693f9c3a749bb1e230803e289e0af2b00fba00b00cca99e0155ea0a8",
+      "equation58-animation-0.json": "482f77784ce96c32b55f7d339f002f04c3d54b113a6e8bf509832636523c711f",
+      "equation58-animation-1.json": "cbec6415f007e0b2759145d41ff16ddfba07675d818d888e2435cd82a23535d5",
+      "equation58-animation-2.json": "d7a88e1440c97e339e840f8dc284ba51fef4726661c8210a00043c72ad8da092",
+      "equation58-animation-3.json": "cc1262fbd27eb2fd33fbee310a6cd36d288be8727cbfdb1c196487045270a399",
+      "equation58-animation-upper.json": "7c8449d4f9df37e5da8bb3c4690c43cb2652ea9741efb602966e60d11bcc2d1f",
+      "equation58-baseline.json": "5f1fcabd5828ab8a90b08c6eae62a233679c760ecb49443ddd95134521747b5a",
+      "equation58-canonical-complete.log": "56a3906669dd04d4ad335959d2d4722d442ae1100cf4a299b092635ef606da57",
+      "equation58-freeze.json": "ce7ce91ee29f20a763458819df969c9e0dec7957d416a05d5e28ddaf976bf759",
+      "equation58-order-ranking.json": "e8b09a8370bcc9647c96e51dfbbcd905f7838eab0d494285dff047b407ea1a5f",
+      "equation58-placements.json": "994c002bca8e92c8e00195a6f5663eda77ca369772513f11dbec09c231b1ff4f",
+      "equation58-probes-0.json": "1a0de606abf2c21f72187bf2c2ea29d4987dc409d99a3b6370b30f134f6d1cd9",
+      "equation58-probes-4.json": "b695c4ae83cc83d73351a177645f42418bcde38e2f3d8b525114b90f9d0ea1dd",
+      "equation58-probes-5.json": "45afa5b2428504c945d27c46d626faea21bb25e6aaba5d184b925715ad1d9bd2",
+      "equation58-relorders-0.json": "3bc7b1a41e1f6e66a698270de8ab27f58a34d8e56e67e81f6e71e079c1c73fb9",
+      "equation58-relorders-1.json": "3962960b13c4fa27634c4e363aab737f5245b5c34f19ac7e13d9574ed6b691fe",
+      "equation58-relorders-2.json": "d2ee76a518b476b5f278fc86eee5f06f92a62feef0faf8fa411b61799e1740e8",
+      "equation58-relorders-3.json": "4b77c689d40d29219065b404771400543262026b7891496e31f63350eebdd9f8",
+      "equation58-source-verified.json": "c84e395b6844298db8f3930cad9d2f3825aa42b993e8d841ae8cecb2632c9618",
+      "equation58-upper-verified.json": "12e79f1b4f9b3662fbc4a869df1789af360390d9dd0f79354dbfb4b2c7bc64aa"
+    }
   }
 }

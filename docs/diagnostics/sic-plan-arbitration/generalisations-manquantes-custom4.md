@@ -2,9 +2,9 @@
 
 Le critère principal est le premier L2 gagné en partie autonome sur **un jeu supplémentaire**. Les neuf L2 ouverts donnent deux victoires à froid à v31 et à v34, SS01 et SS04. SS03 a déjà été gagné après le L1. Un premier succès à froid sur SS03 constitue donc un gain d’autonomie distinct. Les six occasions de gagner le L2 d’un autre jeu déjà ouvert sont SS02, SS05, SS06, SS07, SS08 et SS10. SS09 L2 reste la confirmation indépendante. [Bilan des parties complètes de v34](qualification-reprise-v34.md)
 
-**Dernier bilan sur Custom 4.** Le témoin v55 et le candidat figé v57 gagnent **2 L2 sur 9 à froid**. SS01 gagne en 44 coups à froid et en 32 après les 19 actions du L1. SS04 gagne en 60 à froid. Les deux versions produisent les mêmes actions et observations sur les 1 454 coups comparables. SS09 L2 reste réservé. [Scores et conditions de déclenchement](#qualification-du-relais-et-limite-de-transfert)
+**Dernier bilan sur Custom 4.** Le candidat figé v58 et le témoin v57 gagnent **2 L2 sur 9 à froid**. SS01 gagne en 44 coups à froid et en 32 après les 19 actions du L1. SS04 gagne en 60 à froid. Les deux versions produisent les mêmes actions et observations sur les 1 615 coups comparables. SS09 L2 reste réservé. [Résultats de v58 et limites du transfert](#qualification-de-la-composition-de-plusieurs-placements)
 
-**Ce que SIC compose désormais.** V51 gagne FUIT L2 en tenant compte des réactions d’un autre sujet. V55 gagne FT09 L2 à L4 en combinant les contraintes de plusieurs motifs là où ils se recouvrent. V57 gagne WA30 L3 directement en 80 coups. SIC apprend au cours de la partie qu’un autre porteur déplace des caisses, choisit où lui en remettre une, puis réutilise ce plan pour les suivantes. Cette capacité reste liée à la reconnaissance visuelle du matériel de livraison. [Contraintes simultanées dans FT09](#composer-des-contraintes-apprises-sur-plusieurs-exemples-visibles) · [Remises dans WA30 et test du transfert](#qualification-du-relais-et-limite-de-transfert)
+**Ce que SIC compose désormais.** V51 gagne FUIT L2 en tenant compte des réactions d’un autre sujet. V55 gagne FT09 L2 à L4 en combinant les contraintes de motifs qui se recouvrent. V57 gagne WA30 L3 grâce à la remise de caisses à un autre porteur. V58 organise de trois à cinq placements nécessaires à une même activation et gagne MOTO L2 à L5 à froid. Le prochain enjeu est de découvrir, dans un jeu différent, quels effets doivent être réunis avant d’activer un mécanisme. [Contraintes simultanées dans FT09](#composer-des-contraintes-apprises-sur-plusieurs-exemples-visibles) · [Remises dans WA30](#qualification-du-relais-et-limite-de-transfert) · [Placements et contrôles de nécessité](#qualification-de-la-composition-de-plusieurs-placements)
 
 **Choisir une composition avant de jouer.** Un nouveau banc a confronté deux questions sur 100 jeux sources. Peut-on trouver les gestes qui amènent deux pièces au contact ? Ce contact donne-t-il ensuite une capacité utile ? Sur COLM L1 et ESCT L2, la préparation ouvre effectivement un effet local inédit. Le gain de score reste à établir. [Expériences de placement et d’utilisation](#choisir-une-composition-pour-la-commande-quelle-rend-utile)
 
@@ -357,6 +357,38 @@ Sur 6 655 gestes enregistrés, le banc émet 133 prévisions individuelles, pa
 **Quand poursuivre plutôt qu’expérimenter ?** Aux L3, L4 et L5 de MOTO, un autre essai interrompt le placement au coup 12, 8 ou 10. En exécutant le reste du plan calculé au même état, le moteur accorde la victoire dans les trois cas. V58 reprend donc ce plan dans le groupe des mécanismes observés lorsque la dernière action de sélection ou de placement a été confirmée et que cette observation est toujours l’observation courante. Une prédiction contredite efface la disposition retenue. Depuis l’entrée directe, le pilote gagne les L2 à L5 en 13, 15, 17 et 17 coups. [Planification et vérification des placements](../../../src/sic/arrange-turn-posts.ts) · [Contrôles par retrait et permutation](../../../scripts/verify-source-arranged-activation.mjs)
 
 **Mesure de transfert annoncée avant Custom 4.** Le témoin est `sic-source100-observed-handoff-v57`, le candidat `sic-source100-transient-composition-v58`. Comparer SS01 à SS08 et SS10 L2 à froid, contrôler SS01 après les 19 gestes publics du L1, et vérifier les résultats dans le moteur indépendant. Conserver les 100 L1, les témoins supérieurs FUIT, FT09 et WA30, puis reproduire les quatre niveaux de MOTO depuis l’export figé. Le critère primaire reste un jeu supplémentaire de Custom 4 dont le L2 est gagné. SS09 L2 reste réservé.
+
+### Qualification de la composition de plusieurs placements
+
+Le moteur indépendant a reproduit les quatre victoires depuis le candidat figé `2142d2321`. La colonne « retraits perdants » compte les suppressions individuelles d’un couple sélection–placement. La colonne suivante compte les permutations gagnantes obtenues en échangeant deux couples entiers, puis en conservant l’activation finale.
+
+| MOTO, entrée directe | V57 | V58 | Retraits perdants | Échanges d’ordre gagnants |
+| --- | --- | --- | ---: | ---: |
+| L2 | Échec à 120 coups | Victoire en 13 | 3 sur 3 | 3 sur 3 |
+| L3 | Échec à 120 coups | Victoire en 15 | 4 sur 4 | 6 sur 6 |
+| L4 | Échec à 120 coups | Victoire en 17 | 5 sur 5 | 10 sur 10 |
+| L5 | Échec à 120 coups | Victoire en 17 | 5 sur 5 | 10 sur 10 |
+
+Chaque placement isolé suivi du déclenchement échoue. L’activation seule échoue, tout comme la préparation complète privée de son activation. Inverser la liste entière de placements conserve les quatre victoires. Ce sont donc les propriétés de la disposition finale qui importent dans ces essais. [Rejeux et permutations](../../../scripts/verify-source-arranged-activation.mjs)
+
+**Transfert à Custom 4.** SS01 et SS04 gagnent en 44 et 60 coups à froid. SS01 gagne en 32 après les 19 actions publiques du L1. SS02, SS03, SS05, SS06, SS08 et SS10 atteignent le budget de temps sans victoire, respectivement à 273, 250, 239, 217, 270 et 257 coups. SS07 perd au cinquième coup dans les deux versions. Chacune des 1 615 décisions à froid du candidat correspond au témoin, y compris ses coordonnées et les images obtenues. La famille de planification des placements ne fournit aucune de ces décisions. SS09 L2 reste réservé. Les 431 tests passent et les 100 L1 sources conservent leurs victoires avec des trajectoires identiques à v57. FUIT L2, FT09 L2 à L4 et WA30 L2 et L3 conservent leurs scores et trajectoires. [Mesures détaillées par niveau](mesures-generalisations-manquantes.json)
+
+**Quelle partie du raisonnement se transfère déjà ?** Le détecteur a reconnu un déplacement temporaire suivi d’un retour dans 12 jeux sources de niveau 1. Dans CATR, TN36 et LF52, il en reconnaît alors que la couleur au centre du rectangle de la silhouette reste constante. Sur les 634 actions de Custom 4 à froid dont le moteur fournit plusieurs images, un retour de silhouette est confirmé, dans SS06. Le détecteur y trouve donc un fait perceptif. SIC doit encore établir quelle autre opération peut modifier la destination ou la conséquence de ce déplacement. [Mesure sur les sources](../../../scripts/measure-source-transient-subjects.mjs) · [Vérification sur les trajectoires figées](../../../scripts/verify-frozen-level-scores.mjs)
+
+### Déduire quelles préparations doivent être réunies
+
+**Chantiers 2, 3, 5 et 11.** Depuis les mêmes préfixes des 100 victoires sources en L1, le banc isole deux préparations A et B et une suite d’utilisation commune. Il teste A puis B, B puis A, chaque préparation seule, aucune préparation, deux fois A et deux fois B. Les deux derniers témoins gardent le même nombre d’actions que la préparation complète. Sur 278 fenêtres mesurées, **115 gagnent dans les deux ordres**. Dans **41 fenêtres de 26 jeux**, tous les témoins perdent. Ces cas incluent CATR, DNOI, FT09, MOTO, PORT, SYME, TN36 et VOIS. Les 41 observations proviennent de fenêtres de fins de parties qui peuvent se recouvrir. [Interventions à préfixe identique](../../../scripts/test-source-commuting-preparations.mjs)
+
+Pour élaborer une nouvelle composition, SIC a besoin d’annoncer une conséquence avant d’essayer la combinaison. Voici ce que les effets de A seule et de B seule permettent de prévoir au banc. Une prévision est confirmée si elle se réalise dans les deux ordres.
+
+| Conséquence prédite depuis les préparations isolées | Prévisions émises | Confirmées dans les deux ordres | Parmi les confirmations, les deux préparations sont nécessaires au score |
+| --- | ---: | ---: | ---: |
+| L’image complète sera la superposition des changements compatibles | 99 | 3 | 3 |
+| Les cellules modifiées exclusivement par A ou exclusivement par B conserveront leur valeur | 143 | 17 | 16 |
+| Un même sujet atteindra la somme des deux déplacements mesurés | 68 | 18 | 11 |
+| Les sujets déplacés exclusivement par A et ceux déplacés exclusivement par B garderont chacun leur position annoncée | 14 | 3 | 2 |
+
+Un premier classement choisit quelle expérience tenter à partir des effets isolés, avant de voir l’effet combiné. Pour chaque jeu évalué, toutes ses observations sont exclues de l’apprentissage. Sur les 82 jeux offrant au moins deux fenêtres, le taux moyen d’expériences où les deux préparations sont nécessaires passe de **16,5 % avec un choix uniforme à 22,8 % avec le classement**. Les ex æquo sont départagés uniformément. Dix jeux progressent, quatre reculent et 68 donnent le même taux. Cette mesure porte sur le choix entre des fenêtres déjà disponibles. Le prochain test consiste à proposer soi-même deux préparations concurrentes **depuis une seule observation**, annoncer les propriétés que chacune devrait conserver, puis choisir et exécuter la composition qui ouvre l’action voulue. [Classement en laissant chaque jeu entier de côté](../../../scripts/choose-source-preparation-experiments.py)
 
 ### Expériences de contrôle et de placement antérieures
 
