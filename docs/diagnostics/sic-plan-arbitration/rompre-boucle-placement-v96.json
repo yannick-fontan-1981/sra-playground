@@ -1,0 +1,17 @@
+{
+  "id": "sic.native-strategies",
+  "schemaVersion": 6,
+  "configuration": {
+    "version": 1,
+    "mode": "active",
+    "maxDepth": 88,
+    "maxNodes": 1000,
+    "solver": "sic-fallback",
+    "informationPreference": {
+      "mode": "active",
+      "strategy": "challenge_recurrent_placements",
+      "minimumOutcomes": 2
+    }
+  },
+  "digest": "85fa902b4b810e9a067977d223929bde92ec7cde17a44c3cc6c88c2cbac60e30"
+}

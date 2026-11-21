@@ -1,5 +1,6 @@
 import type { Experiment, Memory } from './preparation-experiments.ts';
 
+export const coveragePlanGroup='test_or_continue_a_grounded_coverage_plan';
 export const evidencedPlanGroup = 'continue_or_test_a_witnessed_effect';
 export const recurrentExperimentGroup = 'experiment_after_unproductive_returns';
 
@@ -22,6 +23,7 @@ export function hasExperimentOpportunity(m: Memory): boolean {
 }
 
 export function mayPursueWitnessedEffect(m: Memory): boolean {
+  if(m.localCapacity?.pending||m.localCapacity?.retained||m.previewLearning?.cueSearch?.seeking)return true;
   // Give the current strategy a chance to continue after opening a new public state.
   if (m.turns && m.frontier.lastScene === m.turns && m.lastTrial !== m.turns) return false;
   return !!m.localProgress?.active || !!m.previewLearning?.terminal?.length
@@ -30,7 +32,11 @@ export function mayPursueWitnessedEffect(m: Memory): boolean {
 }
 
 export function witnessedObjective(x: Experiment): boolean {
-  if (x.terminalContact || x.witnessedPreview?.basis === 'observed_in_previous_level') return true;
+  if(x.relative)return true;
+  if (x.cue) return x.cue.blocked.length>=2;
+  if (x.localCapacity && x.localCapacity.stage!=='control')return true;
+  if (x.terminalContact?.preparationKey) return !!x.terminalContact.blockedGoal;
+  if ((x.terminalContact && x.phase!=='testScoringContact') || x.witnessedPreview?.basis === 'observed_in_previous_level') return true;
   const trial = x.mechanism;
   return !!trial?.plan.arrival && (trial.cause.tag === 'projected_access_limit' || trial.index > 0);
 }

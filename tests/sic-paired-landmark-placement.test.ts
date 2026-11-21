@@ -1,0 +1,106 @@
+import assert from 'node:assert/strict';
+import test from 'node:test';
+import {observeLandmarks, proposeLandmark, observePlacement, refreshedSelection} from '../src/sic/paired-landmark-placement.ts';
+import {informationPriority} from '../src/sic/information-preference.ts';
+import {recordPlacementVisit,challengePlacement,type PlacementVisits} from '../src/sic/recurrent-placement.ts';
+import type {CursorTrial} from '../src/sic/marked-cursor-selection.ts';
+import type {VisualLayout} from '../src/sic/witnessed-preview-transfer.ts';
+import type {NativeObservation} from '../src/logos-engine/v6-native-types.ts';
+import type {XY} from '../src/sic/access-terrain.ts';
+
+const part=(x:number,y:number,form:string)=>({at:[x*2,y*2] as XY,box:[x,y,x,y] as const,form});
+const rows=Array.from({length:8},()=>Array<number>(14).fill(0));
+const o={available_action_refs:['ACTION1','ACTION2','ACTION3','ACTION4','ACTION6'],frame_hash:'now',observation_ref:'preparation'} as NativeObservation;
+const left=part(4,3,'mark'),right=part(11,3,'mark');
+const base:VisualLayout={mover:[part(3,3,'old')],peer:[part(9,3,'remote')],mark:[left,right]};
+const motion={axes:{ACTION2:{x:{d:[2,0] as XY,count:3,last:'motion',first:'before'}}},sites:{},substrate:{0:4}};
+const trial:CursorTrial={stage:'select',source:{box:[3,3,3,3],ink:2},target:{box:[9,3,9,3],ink:5},
+  point:[9,3],offsets:[],ink:8,shape:'peer',command:'ACTION6:9,3',evidence:['motor'],
+  contrast:{strategy:'motion_contrast',mode:'exploration',minimumOutcomes:2,motor:'ACTION2',baselineDelta:[1,0],
+    evidence:'motor',outcomes:['previous_subject_moves','selected_subject_moves']}};
+
+test('a verified switch without a prior plan retains the two roles for a later placement',()=>{
+  const m=observeLandmarks(undefined,base,base,'initial');
+  m.planAfterSelection=true;
+  const verify:CursorTrial={...trial,stage:'verify',command:'ACTION2'};
+  const moved={...base,peer:[part(10,3,'remote')]};
+  const {contrast:unused,...uncalibrated}=verify;
+  observePlacement(m,undefined,moved,'new_cursor_moved_while_previous_cursor_stayed',uncalibrated,base,undefined,'no-prior-motor');
+  assert.equal(m.previousControl,undefined);
+  observePlacement(m,undefined,moved,'cursor_control_unconfirmed',verify,base,undefined,'failed');
+  assert.equal(m.previousControl,undefined);
+  observePlacement(m,undefined,moved,'new_cursor_moved_while_previous_cursor_stayed',verify,base,undefined,'verified');
+  assert.deepEqual(m.previousControl,{parked:'mover',moving:'peer',at:base.mover![0]!.at,ref:'verified'});
+  const reverse:CursorTrial={...trial,source:{...trial.target,box:[10,3,10,3]},target:trial.source,point:[3,3],command:'ACTION6:3,3'};
+  const offer=proposeLandmark(m,moved,o,rows,{peer:motion},reverse,100);
+  assert.equal(offer?.stage,'place_before_selection');
+  assert.equal(offer?.returnRef,'verified');
+  observePlacement(m,undefined,base,'cursor_click_visually_unchanged',trial,moved);
+  assert.equal(m.previousControl,undefined);
+});
+test('two identical placement returns justify a fresh click on the currently observed peer',()=>{
+  const memory=observeLandmarks(undefined,base,base,'seen');
+  const proposed=proposeLandmark(memory,base,o,rows,{mover:motion},trial,100)!;
+  const book:PlacementVisits={edges:{},tested:{}};
+  const obs={...o,entities:[{signature:'remote',bbox:[9,3,9,3],mask:[[0,0]]}]} as unknown as NativeObservation;
+  recordPlacementVisit(book,proposed,o.frame_hash,'one','r1');
+  assert.equal(challengePlacement(book,proposed,obs,base),undefined);
+  recordPlacementVisit(book,proposed,o.frame_hash,'different','r2');
+  assert.equal(challengePlacement(book,proposed,obs,base),undefined);
+  recordPlacementVisit(book,proposed,o.frame_hash,'different','r3');
+  const click=challengePlacement(book,proposed,obs,base)!;
+  assert.equal(click.command,'ACTION6:9,3');assert.ok(click.evidence.includes('r3'));
+  book.tested[click.recurrentPlacement!.key]=true;
+  assert.equal(challengePlacement(book,proposed,obs,base),undefined);
+});
+test('two different placements separate an immediate switch from a prepared one',()=>{
+  const m=observeLandmarks(undefined,base,base,'first');
+  const movement={mover:motion,selected:motion};
+  const first=proposeLandmark(m,base,o,rows,movement,trial,100)!;
+  assert.equal(first.command,'ACTION2');
+  const parked={...base,mover:[part(4,3,'old')],mark:[right]};
+  assert.equal(observePlacement(m,first,parked,undefined,undefined,base),'subject_covers_named_landmark');
+  const select=proposeLandmark(m,parked,o,rows,movement,null,100)!;
+  assert.equal(select.stage,'select_after_contact');
+  const clicked=refreshedSelection(select,parked);
+  assert.deepEqual(clicked.source.box,parked.mover[0]!.box);
+  const switched={inactive:[part(4,3,'inactive')],selected:[part(9,3,'selected')],mark:[right]};
+  observePlacement(m,select,switched,'cursor_mark_prediction_refuted',clicked,parked,{...clicked,stage:'verify'});
+  assert.equal(proposeLandmark(m,switched,o,rows,movement,null,100),undefined);
+  const verified={...switched,selected:[part(10,3,'selected')]};
+  const partialBox:CursorTrial={...clicked,stage:'verify',source:{ink:2,box:[3,2,3,2]}};
+  observePlacement(m,undefined,verified,'new_cursor_moved_while_previous_cursor_stayed',partialBox,switched);
+  const second=proposeLandmark(m,verified,o,rows,movement,null,100)!;
+  assert.equal(second.stage,'approach_with_partner_parked');
+  assert.deepEqual(second.expected,right.at);
+  assert.equal(proposeLandmark(m,{...verified,inactive:[part(5,3,'inactive')]},o,rows,movement,null,100),undefined);
+});
+test('a contradicted edge is not repeated and a moving landmark is discarded',()=>{
+  const m=observeLandmarks(undefined,base,base,'first');
+  const move=proposeLandmark(m,base,o,rows,{mover:motion},trial,100)!;
+  observePlacement(m,move,base,undefined,undefined,base);
+  assert.notEqual(proposeLandmark(m,base,o,rows,{mover:motion},null,100)?.command,move.command);
+  observeLandmarks(m,base,{...base,mark:[part(3,5,'mark'),right]},'later');
+  assert.equal(m.active,undefined);
+  assert.equal(m.pairs.length,0);
+});
+test('an inconclusive click or an incompatible landmark spacing cannot justify investing in a preparation',()=>{
+  const m=observeLandmarks(undefined,base,base,'initial');
+  observePlacement(m,undefined,base,'cursor_click_visually_unchanged',trial,base);
+  assert.equal(proposeLandmark(m,base,o,rows,{mover:motion},trial,100),undefined);
+  const fresh=observeLandmarks(undefined,base,base,'other');
+  const inconsistent={...motion,axes:{ACTION2:{x:{d:[5,0] as XY,count:7,first:'a',last:'b'}}}};
+  assert.equal(proposeLandmark(fresh,base,o,rows,{mover:inconsistent},trial,100),undefined);
+});
+test('a highlight may enclose a unique subject, while two enclosed candidates leave its role unresolved',()=>{
+  const m=observeLandmarks(undefined,base,base,'first');
+  const halo:CursorTrial={...trial,source:{...trial.source,box:[2,2,4,4]}};
+  assert.equal(proposeLandmark(m,base,o,rows,{mover:motion},halo,100)?.actor,'mover');
+  assert.equal(proposeLandmark(m,{...base,debris:[part(2,3,'debris')]},o,rows,{mover:motion},halo,100),undefined);
+});
+test('the paired-arrival preference inherits motion contrasts and respects the declared minimum',()=>{
+  const p={mode:'active',strategy:'paired_arrival',minimumOutcomes:2} as const;
+  assert.equal(informationPriority({strategy:'motion_contrast',distinctOutcomes:2},p),1);
+  assert.equal(informationPriority({strategy:'paired_arrival',distinctOutcomes:1},p),0);
+  assert.equal(informationPriority({strategy:'paired_arrival',distinctOutcomes:2},{...p,strategy:'motion_contrast'}),0);
+});

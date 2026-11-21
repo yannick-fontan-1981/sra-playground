@@ -1,0 +1,1937 @@
+{
+  "joins34-source-l1": {
+    "heldoutFamilies": [
+      "hanoi_order",
+      "official_arc_agi_3"
+    ],
+    "pairedEntryDigest": "7a9e9a9cbf4ddbaa6453b45443514bc5b45f5a4741f5c3a081bdd8aa6f0007f0",
+    "inputDigests": [
+      "169248d0ed345c61d6612311a12a1eceb057f5dca163f7f0fd7e70938ca8ef23",
+      "9660d20aff3b533e4bf8dcb44ee2cca2d72de537499e5773c5f08ed1e52cd6c6",
+      "fa2e8e44e29ba5da2f1ccbd2927069958358e2735eb3dc2cf22e38c22a89c931",
+      "d32e7ba354eae4e15eb048cfa3cb531bfdefa1a177d4ed3ebdeb5d97a653134a",
+      "2fc38b24ef7fb1ba768258dc8498114d4350926e318cc3c04402742483161ef9",
+      "5af028467b29b8b1fd61ba66859ba5faefff8340f394119eac7636f50b54cd05",
+      "b5a977f1b6ef232be91b70b44a01151be87ff9bbdd68d81f8c31f06cab85d8b9",
+      "9de64330bc1e87f35bdb3cc36ffeb6eca2e6dc2fa50b9e7c00f9cc0ae36dcf6f",
+      "783f9724208f3ceae3f9b5d359ea3599498e61809ac68860281a32446819a470",
+      "d18e8d5a2a865337913f84837e238d01cad8d54b758752a563012a5a602b99d8",
+      "976baa7fb761d3fcc026e97a6583bc034399b69d60140c22333f3f649d8c1851",
+      "724d56c8e6f6176635227e600c8751825705daa6aad683ca243e20c7efebf7e8",
+      "c8697440cfff4da7ca60291fed2533cb091c521b3874a84da27dc26acb2f285b",
+      "ac52438dae8e18260f067bf74383021c8983e40388727612549cad2ffa9db101"
+    ],
+    "summary": {
+      "pairedEntries": 74,
+      "qualifyingEntries": 12,
+      "directions": 24,
+      "exactFirst": 24,
+      "exactWhole": 24,
+      "scoredSuppliers": 17,
+      "retainedWin": 17,
+      "convertedLoss": 7,
+      "controlOffered": 22,
+      "controlExactWhole": 2,
+      "controlWins": 6
+    },
+    "results": [
+      {
+        "code": "FITE",
+        "level": 1,
+        "initial": "d87fbc49803097ac0ba44180e25bdb74e570f659e14320faedc958eaeb4385d1",
+        "common": 4,
+        "intoLeft": {
+          "at": 9,
+          "cut": 5,
+          "length": 7,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 7,
+            "identical": 7,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 7,
+            "issued": 7,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        },
+        "intoRight": {
+          "at": 5,
+          "cut": 9,
+          "length": 11,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 11,
+            "identical": 11,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 4,
+            "issued": 11,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "KEYD",
+        "level": 1,
+        "initial": "1968dffaf6bef93353bc2796ce9df0ebb70698d8baf58f7da9b0783c6aa7f5ee",
+        "common": 1,
+        "intoLeft": {
+          "at": 50,
+          "cut": 2,
+          "length": 33,
+          "donorWon": true,
+          "receiverWon": false,
+          "matched": {
+            "issued": 33,
+            "identical": 33,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 49,
+            "issued": 33,
+            "identical": 0,
+            "complete": true,
+            "won": true,
+            "score": 1
+          }
+        },
+        "intoRight": {
+          "at": 2,
+          "cut": 50,
+          "length": 10,
+          "donorWon": false,
+          "receiverWon": true,
+          "matched": {
+            "issued": 10,
+            "identical": 10,
+            "complete": true,
+            "won": false,
+            "score": 0
+          },
+          "displaced": {
+            "at": 1,
+            "issued": 10,
+            "identical": 10,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "LKEY",
+        "level": 1,
+        "initial": "8d0eaeb50c797a2aa1e22d0a4ebbfc101b6b8c16ffce0d9a4fb1626689eebfc2",
+        "common": 0,
+        "intoLeft": {
+          "at": 5,
+          "cut": 1,
+          "length": 7,
+          "donorWon": true,
+          "receiverWon": false,
+          "matched": {
+            "issued": 7,
+            "identical": 7,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 3,
+            "issued": 7,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        },
+        "intoRight": {
+          "at": 1,
+          "cut": 5,
+          "length": 55,
+          "donorWon": false,
+          "receiverWon": true,
+          "matched": {
+            "issued": 55,
+            "identical": 55,
+            "complete": true,
+            "won": false,
+            "score": 0
+          },
+          "displaced": {
+            "at": 0,
+            "issued": 55,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "MEMO",
+        "level": 1,
+        "initial": "27ba4cd855a64b3d790f42ff92a5a4edce4d661801613b2583acd119432c7211",
+        "common": 0,
+        "intoLeft": {
+          "at": 3,
+          "cut": 1,
+          "length": 9,
+          "donorWon": true,
+          "receiverWon": false,
+          "matched": {
+            "issued": 9,
+            "identical": 9,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 2,
+            "issued": 9,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        },
+        "intoRight": {
+          "at": 1,
+          "cut": 3,
+          "length": 57,
+          "donorWon": false,
+          "receiverWon": true,
+          "matched": {
+            "issued": 57,
+            "identical": 57,
+            "complete": true,
+            "won": false,
+            "score": 0
+          },
+          "displaced": {
+            "at": 0,
+            "issued": 57,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "REWI",
+        "level": 1,
+        "initial": "470ca6d4cd27a31e2474b9d2c31e2a0b6acd5517dd84f3a80230e5a10f60a345",
+        "common": 3,
+        "intoLeft": {
+          "at": 15,
+          "cut": 4,
+          "length": 1,
+          "donorWon": true,
+          "receiverWon": false,
+          "matched": {
+            "issued": 1,
+            "identical": 1,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 14,
+            "issued": 1,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        },
+        "intoRight": {
+          "at": 4,
+          "cut": 15,
+          "length": 45,
+          "donorWon": false,
+          "receiverWon": true,
+          "matched": {
+            "issued": 45,
+            "identical": 45,
+            "complete": true,
+            "won": false,
+            "score": 0
+          },
+          "displaced": {
+            "at": 3,
+            "issued": 45,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "SELE",
+        "level": 1,
+        "initial": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+        "common": 0,
+        "intoLeft": {
+          "at": 1,
+          "cut": 1,
+          "length": 35,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 35,
+            "identical": 35,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": null
+        },
+        "intoRight": {
+          "at": 1,
+          "cut": 1,
+          "length": 29,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 29,
+            "identical": 29,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": null
+        }
+      },
+      {
+        "code": "SIGN",
+        "level": 1,
+        "initial": "bbef948cb4925d829a7f5d95461d85ec055d1d78afa9ad728ad04f52ed3739b5",
+        "common": 2,
+        "intoLeft": {
+          "at": 5,
+          "cut": 3,
+          "length": 13,
+          "donorWon": true,
+          "receiverWon": false,
+          "matched": {
+            "issued": 13,
+            "identical": 13,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 3,
+            "issued": 13,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        },
+        "intoRight": {
+          "at": 3,
+          "cut": 5,
+          "length": 55,
+          "donorWon": false,
+          "receiverWon": true,
+          "matched": {
+            "issued": 55,
+            "identical": 55,
+            "complete": true,
+            "won": false,
+            "score": 0
+          },
+          "displaced": {
+            "at": 2,
+            "issued": 55,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "SMLP",
+        "level": 1,
+        "initial": "63772d1746311d0c37da6dcd30cff4ba62157a79f1e16ec4aa08459daebc1b8c",
+        "common": 36,
+        "intoLeft": {
+          "at": 26,
+          "cut": 37,
+          "length": 10,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 10,
+            "identical": 10,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 25,
+            "issued": 4,
+            "identical": 0,
+            "complete": false,
+            "won": true,
+            "score": 1
+          }
+        },
+        "intoRight": {
+          "at": 37,
+          "cut": 26,
+          "length": 30,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 30,
+            "identical": 30,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 35,
+            "issued": 30,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "SWCH",
+        "level": 1,
+        "initial": "2a01379c598b3d702d63422050272988fe3438f432111386b085561b5c32d65d",
+        "common": 1,
+        "intoLeft": {
+          "at": 13,
+          "cut": 13,
+          "length": 12,
+          "donorWon": true,
+          "receiverWon": false,
+          "matched": {
+            "issued": 12,
+            "identical": 12,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 12,
+            "issued": 12,
+            "identical": 0,
+            "complete": true,
+            "won": true,
+            "score": 1
+          }
+        },
+        "intoRight": {
+          "at": 13,
+          "cut": 13,
+          "length": 47,
+          "donorWon": false,
+          "receiverWon": true,
+          "matched": {
+            "issued": 47,
+            "identical": 47,
+            "complete": true,
+            "won": false,
+            "score": 0
+          },
+          "displaced": {
+            "at": 12,
+            "issued": 47,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "TRIA",
+        "level": 1,
+        "initial": "a3db269ad73475b813151f988b54a441394e6903a148f291a88f454d4a150be7",
+        "common": 15,
+        "intoLeft": {
+          "at": 14,
+          "cut": 18,
+          "length": 8,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 8,
+            "identical": 8,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 13,
+            "issued": 8,
+            "identical": 0,
+            "complete": true,
+            "won": true,
+            "score": 1
+          }
+        },
+        "intoRight": {
+          "at": 18,
+          "cut": 14,
+          "length": 14,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 14,
+            "identical": 14,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 17,
+            "issued": 14,
+            "identical": 0,
+            "complete": true,
+            "won": true,
+            "score": 1
+          }
+        }
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+        "common": 10,
+        "intoLeft": {
+          "at": 5,
+          "cut": 15,
+          "length": 42,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 42,
+            "identical": 42,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 4,
+            "issued": 42,
+            "identical": 0,
+            "complete": true,
+            "won": true,
+            "score": 1
+          }
+        },
+        "intoRight": {
+          "at": 15,
+          "cut": 5,
+          "length": 14,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 14,
+            "identical": 14,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 14,
+            "issued": 14,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      },
+      {
+        "code": "ZIPP",
+        "level": 1,
+        "initial": "32f5e9dc5ce9d135fc44aeecf95f6e6396bcb5d9a14350a3f8c13a1553c49c4d",
+        "common": 0,
+        "intoLeft": {
+          "at": 22,
+          "cut": 1,
+          "length": 7,
+          "donorWon": true,
+          "receiverWon": false,
+          "matched": {
+            "issued": 7,
+            "identical": 7,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 21,
+            "issued": 7,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        },
+        "intoRight": {
+          "at": 1,
+          "cut": 22,
+          "length": 38,
+          "donorWon": false,
+          "receiverWon": true,
+          "matched": {
+            "issued": 38,
+            "identical": 38,
+            "complete": true,
+            "won": false,
+            "score": 0
+          },
+          "displaced": {
+            "at": 0,
+            "issued": 38,
+            "identical": 38,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      }
+    ]
+  },
+  "joins34-source-l3": {
+    "heldoutFamilies": [
+      "hanoi_order",
+      "official_arc_agi_3"
+    ],
+    "pairedEntryDigest": "d5295037989f1c4a1bb1d21406ea08faa91f24b9cc2b2a5a1393395e14823015",
+    "inputDigests": [
+      "bea0151538636373f2ba946179e85612c729d53b82229cc3b95eeb1f292ab75d",
+      "8b72790e52623f82d54ba36c0b7451e8edd924913284ebe5193fc16cc07b784f"
+    ],
+    "summary": {
+      "pairedEntries": 2,
+      "qualifyingEntries": 1,
+      "directions": 2,
+      "exactFirst": 2,
+      "exactWhole": 2,
+      "scoredSuppliers": 2,
+      "retainedWin": 2,
+      "convertedLoss": 0,
+      "controlOffered": 2,
+      "controlExactWhole": 0,
+      "controlWins": 0
+    },
+    "results": [
+      {
+        "code": "GRAV",
+        "level": 3,
+        "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+        "common": 15,
+        "intoLeft": {
+          "at": 19,
+          "cut": 18,
+          "length": 35,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 35,
+            "identical": 35,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 17,
+            "issued": 35,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        },
+        "intoRight": {
+          "at": 18,
+          "cut": 19,
+          "length": 35,
+          "donorWon": true,
+          "receiverWon": true,
+          "matched": {
+            "issued": 35,
+            "identical": 35,
+            "complete": true,
+            "won": true,
+            "score": 1
+          },
+          "displaced": {
+            "at": 17,
+            "issued": 35,
+            "identical": 0,
+            "complete": true,
+            "won": false,
+            "score": 0
+          }
+        }
+      }
+    ]
+  },
+  "incidental34-original": {
+    "summary": {
+      "entries": 74,
+      "actions": 1855,
+      "proposals": 47,
+      "entriesWithProposal": 7,
+      "matched": 40,
+      "contradicted": 7,
+      "controlled": 40,
+      "followedHistorically": 33,
+      "requiredForRecordedWin": 6,
+      "substitutedLossToWin": 0,
+      "substitutedWinToLoss": 9
+    },
+    "proposalsPerLevel": [
+      {
+        "code": "GABA",
+        "level": 1,
+        "steps": 49,
+        "checks": [
+          {
+            "i": 7,
+            "root": 5,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 8,
+            "root": 6,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 23,
+            "root": 21,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 29,
+            "root": 27,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 38,
+            "root": 36,
+            "c": "ACTION3",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 40,
+            "root": 38,
+            "c": "ACTION3",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 45,
+            "root": 43,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 48,
+            "root": 46,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "PORT",
+        "level": 1,
+        "steps": 17,
+        "checks": [
+          {
+            "i": 8,
+            "root": 6,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 11,
+            "root": 9,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 12,
+            "root": 10,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 13,
+            "root": 11,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 14,
+            "root": 12,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 15,
+            "root": 13,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "TEQU",
+        "level": 1,
+        "steps": 60,
+        "checks": [
+          {
+            "i": 13,
+            "root": 11,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 17,
+            "root": 15,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 18,
+            "root": 16,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 19,
+            "root": 17,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 20,
+            "root": 18,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 52,
+            "root": 50,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 53,
+            "root": 51,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 54,
+            "root": 52,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 55,
+            "root": 53,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 56,
+            "root": 54,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 57,
+            "root": 55,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 58,
+            "root": 56,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "CGWL",
+        "level": 1,
+        "steps": 60,
+        "checks": [
+          {
+            "i": 6,
+            "root": 4,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 7,
+            "root": 5,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 8,
+            "root": 6,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 25,
+            "root": 23,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 26,
+            "root": 24,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 27,
+            "root": 25,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 28,
+            "root": 26,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 42,
+            "root": 40,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 43,
+            "root": 41,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 50,
+            "root": 48,
+            "c": "ACTION3",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 51,
+            "root": 49,
+            "c": "ACTION3",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 52,
+            "root": 50,
+            "c": "ACTION3",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": true
+          },
+          {
+            "i": 59,
+            "root": 57,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "ESCT",
+        "level": 1,
+        "steps": 16,
+        "checks": [
+          {
+            "i": 10,
+            "root": 8,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "FUIT",
+        "level": 1,
+        "steps": 60,
+        "checks": [
+          {
+            "i": 21,
+            "root": 19,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 22,
+            "root": 20,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 23,
+            "root": 21,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 24,
+            "root": 22,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 1,
+        "steps": 60,
+        "checks": [
+          {
+            "i": 43,
+            "root": 41,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 44,
+            "root": 42,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 51,
+            "root": 49,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      }
+    ]
+  },
+  "incidental34-v31": {
+    "summary": {
+      "entries": 74,
+      "actions": 1088,
+      "proposals": 34,
+      "entriesWithProposal": 7,
+      "matched": 32,
+      "contradicted": 2,
+      "controlled": 32,
+      "followedHistorically": 19,
+      "requiredForRecordedWin": 15,
+      "substitutedLossToWin": 0,
+      "substitutedWinToLoss": 14
+    },
+    "proposalsPerLevel": [
+      {
+        "code": "CGWL",
+        "level": 1,
+        "steps": 15,
+        "checks": [
+          {
+            "i": 6,
+            "root": 4,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
+          },
+          {
+            "i": 7,
+            "root": 5,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
+          },
+          {
+            "i": 8,
+            "root": 6,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 1,
+        "steps": 25,
+        "checks": [
+          {
+            "i": 5,
+            "root": 3,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
+          },
+          {
+            "i": 6,
+            "root": 4,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
+          },
+          {
+            "i": 15,
+            "root": 13,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": true
+          },
+          {
+            "i": 16,
+            "root": 14,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 24,
+            "root": 22,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "FUIT",
+        "level": 1,
+        "steps": 49,
+        "checks": [
+          {
+            "i": 5,
+            "root": 3,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": false,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 6,
+            "root": 4,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 24,
+            "root": 22,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 28,
+            "root": 26,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 37,
+            "root": 35,
+            "c": "ACTION1",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 40,
+            "root": 38,
+            "c": "ACTION3",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 44,
+            "root": 42,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "KEYD",
+        "level": 1,
+        "steps": 35,
+        "checks": [
+          {
+            "i": 10,
+            "root": 8,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 14,
+            "root": 12,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 22,
+            "root": 20,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 33,
+            "root": 31,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "PORT",
+        "level": 1,
+        "steps": 17,
+        "checks": [
+          {
+            "i": 8,
+            "root": 6,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 11,
+            "root": 9,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 12,
+            "root": 10,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 13,
+            "root": 11,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 14,
+            "root": 12,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 15,
+            "root": 13,
+            "c": "ACTION4",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "ESCT",
+        "level": 1,
+        "steps": 16,
+        "checks": [
+          {
+            "i": 10,
+            "root": 8,
+            "c": "ACTION4",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          }
+        ]
+      },
+      {
+        "code": "GABA",
+        "level": 1,
+        "steps": 49,
+        "checks": [
+          {
+            "i": 7,
+            "root": 5,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 8,
+            "root": 6,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 23,
+            "root": 21,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 29,
+            "root": 27,
+            "c": "ACTION1",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 38,
+            "root": 36,
+            "c": "ACTION3",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": true,
+            "omitNext": false
+          },
+          {
+            "i": 40,
+            "root": 38,
+            "c": "ACTION3",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 45,
+            "root": 43,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 48,
+            "root": 46,
+            "c": "ACTION2",
+            "followed": false,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": true,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      }
+    ]
+  },
+  "incidental34-upper": {
+    "summary": {
+      "entries": 7,
+      "actions": 490,
+      "proposals": 2,
+      "entriesWithProposal": 1,
+      "matched": 2,
+      "contradicted": 0,
+      "controlled": 2,
+      "followedHistorically": 2,
+      "requiredForRecordedWin": 0,
+      "substitutedLossToWin": 0,
+      "substitutedWinToLoss": 0
+    },
+    "proposalsPerLevel": [
+      {
+        "code": "MOTO",
+        "level": 2,
+        "steps": 70,
+        "checks": [
+          {
+            "i": 68,
+            "root": 66,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          },
+          {
+            "i": 69,
+            "root": 67,
+            "c": "ACTION2",
+            "followed": true,
+            "matched": true,
+            "withoutA": false,
+            "withoutB": false,
+            "alone": false,
+            "originalWin": false,
+            "withC": false,
+            "omitNext": false
+          }
+        ]
+      }
+    ]
+  }
+}

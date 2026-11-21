@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { NativeSelectedRigid, SELECTED_RIGID_STATE_SCHEMA } from '../src/logos-engine/v6-selected-rigid.ts';
+import { createSicMoveMaskedPieces, learnSelectedAccessId } from '../src/sic/move-masked-pieces.ts';
 import { selectedRigidInputCandidates, selectedRigidMoved, selectedRigidPoint, selectedRigidPoses,
   selectedRigidScene } from '../src/logos-engine/v6-selected-rigid-geometry.ts';
 import { SELECTED_RIGID_LIMITS, SelectedRigidIncomplete, selectedRigidLimits,
@@ -45,6 +46,28 @@ async function packet(rows: number[][], revision: number, epoch = 1, score = 0, 
     frame_hash: await publicFrameHash(rows) };
   return { publicPacket, observation: await measureNativeObservation(publicPacket, revision, 'selected-rigid-synthetic') };
 }
+
+test('a contradicted movement rechecks the selected subject and retains its learned controls', async () => {
+  const rows = raster(), first = await packet(rows, 1), next = await packet(rows, 2);
+  const scene = selectedRigidScene(rows)!;
+  const goal = { ...scene.receptacle, access: [scene.receptacle.position] };
+  const local = { ...scene, receptacle: goal };
+  const poses = selectedRigidPoses(local), down: Cell = [0, 1];
+  const afterMove = selectedRigidMoved(local, poses, 0, down);
+  assert.notDeepEqual(afterMove, poses);
+  const models = [[[0, -1], down, [-1, 0], [1, 0]]];
+  const family = createSicMoveMaskedPieces(learnSelectedAccessId);
+  family.restore!({ state: { epoch: first.observation.level_epoch, scene: local, active: 0,
+    models, route: [[0, down, afterMove]], refs: [] }, transfer: null });
+  const offer = await family.propose(first.observation, rows, inputs, 1);
+  assert.ok(offer);
+  assert.equal(offer.actions[0]!.action_ref, 'ACTION2');
+  await family.record(first.observation, next.observation, offer.actions[0]!, rows, rows, offer, 0, []);
+  const retained = family.state!().state as { active: number | null; models: unknown; route: unknown };
+  assert.equal(retained.active, null);
+  assert.deepEqual(retained.models, models);
+  assert.equal(retained.route, null);
+});
 function proposed(value: Awaited<ReturnType<NativeSelectedRigid['propose']>>): asserts value is SelectedRigidProposal {
   assert.ok(value && value.status === 'proposed');
 }

@@ -3,6 +3,9 @@ import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
+import {observedSituatedOperations,retainSituatedOperations} from '../src/sic/situated-preparation.ts';
+import {initialMemory} from '../src/sic/preparation-experiments.ts';
+import {offerTerminalContact,measureTerminalContact} from '../src/sic/terminal-contact.ts';
 import {
   acceptPreviewCarry,
   carryPreviewBindings,
@@ -45,6 +48,64 @@ async function scene(
   return { o, rows, layout: visualLayout(o, rows) };
 }
 const q: NativeCommand = { action_ref: 'ACTION5', data: {} };
+test('the active pack seeks a cue after failed uses, then measures the rediscovered operation', async()=>{
+  const move:NativeCommand={action_ref:'ACTION2',data:{}};
+  const frames=await Promise.all([
+    scene(1,1,[[3,4]],null),scene(1,2,[[5,4]],[17,4]),scene(1,3,[[17,4]],null),
+    scene(2,4,[[3,7]],null),scene(2,5,[[3,7]],null),scene(2,6,[[5,7]],null),
+    scene(2,7,[[5,7]],null),scene(2,8,[[7,7]],[19,7]),scene(2,9,[[19,7]],null),
+  ]);
+  for(const mode of ['active','shadow'] as const){
+    const family=createPreparedEffects({mode,minimumOutcomes:2,strategy:'motion_contrast'});
+    const step=async(i:number,c:NativeCommand)=>{const u=frames[i]!,v=frames[i+1]!;
+      await family.observePublicOutcome!(u.o,v.o,c,u.rows,v.rows);};
+    for(const [i,c] of [move,q,move,q,move,q].entries())await step(i,c);
+    const probe=await family.proposeInGroup!('continue_or_test_a_witnessed_effect',frames[6]!.o,frames[6]!.rows,[move,q],20,{});
+    if(mode==='shadow'){assert.ok(!probe?.cueSearchForecast);continue;}
+    assert.equal(probe?.experiment.phase,'seekMissingCue');assert.equal(probe?.actions[0]?.action_ref,'ACTION2');
+    assert.equal(probe?.sicSituationCard.mode,'exploration');assert.equal(probe?.cueSearchForecast.blocked.length,2);
+    const result=await family.record!(frames[6]!.o,frames[7]!.o,move,frames[6]!.rows,frames[7]!.rows,probe);
+    assert.equal(result.events[0]?.result,'cue_became_visible');
+    const use=await family.proposeInGroup!('continue_or_test_a_witnessed_effect',frames[7]!.o,frames[7]!.rows,[move,q],19,{});
+    assert.equal(use?.experiment.rule,'use_the_rediscovered_cue');assert.equal(use.actions[0]?.action_ref,'ACTION5');
+    const measured=await family.record!(frames[7]!.o,frames[8]!.o,q,frames[7]!.rows,frames[8]!.rows,use);
+    assert.equal(measured.events[0]?.result,'preview_realized');
+    assert.equal(family.state!().previewLearning.cueSearch.seeking,undefined);
+  }
+});
+test('a winning boundary transfers the relative pose for an operation and tests the feature at a different site',async()=>{
+  const frames=await Promise.all([1,3,5].map((x,i)=>scene(1,i+1,[[x,4]],[8,4])));
+  const used=await scene(1,4,[[5,4]],null);
+  const learn=newPreviewLearning();
+  for(let i=1;i<frames.length;i++){
+    const u=frames[i-1]!,v=frames[i]!;
+    observePreviewBindings(learn,u.o,v.o,u.layout,v.layout,'ACTION2');
+  }
+  const at=frames[2]!;
+  const observed=observedSituatedOperations(learn,at.o,used.o,at.layout,used.layout,'ACTION5');
+  assert.ok(observed.length);
+  retainSituatedOperations(learn,observed);
+  const entered=await scene(2,5,[[9,7]],[14,7]),ready=await scene(2,6,[[11,7]],[14,7]),opened=await scene(2,7,[[11,7]],null);
+  const carry=carryPreviewBindings(learn,used.o,entered.o);
+  assert.ok(carry);
+  assert.equal(acceptPreviewCarry(carry,(await scene(2,5,[[9,7]],[14,7],'another-game')).o).inheritedPreparations,undefined);
+  const m=initialMemory(2),available=new Set(entered.o.available_action_refs);
+  m.previewLearning=acceptPreviewCarry(carry,entered.o);
+  const approach=offerTerminalContact(m,0,entered.o,entered.rows,available,'positioned')!;
+  assert.equal(approach.phase,'positionForOperation');
+  assert.equal(approach.a,'ACTION2');
+  const motion=measureTerminalContact(m.previewLearning,approach.terminalContact!,entered.o,ready.o,approach.a,ready.layout);
+  assert.equal(motion.matched,true);
+  const use=offerTerminalContact(m,1,ready.o,ready.rows,available,'positioned')!;
+  assert.equal(use.phase,'usePositionedOperation');
+  assert.equal(use.a,'ACTION5');
+  const noEffect=measureTerminalContact(structuredClone(m.previewLearning),use.terminalContact!,ready.o,ready.o,use.a,ready.layout);
+  assert.equal(noEffect.matched,false);
+  const result=measureTerminalContact(m.previewLearning,use.terminalContact!,ready.o,opened.o,use.a,opened.layout);
+  assert.equal(result.matched,true);
+  assert.equal(result.won,false);
+  assert.equal(offerTerminalContact(m,1,ready.o,ready.rows,available,'positioned'),null);
+});
 test('one measured arrival binds the moving individual despite a matching stationary peer', async () => {
   const before = await scene(
       1,

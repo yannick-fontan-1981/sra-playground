@@ -10,6 +10,7 @@ import {
   createCompositionTrials,
   cycleGroup,
   exhaustedGroup,
+  followCompositionGroup,
   chooseSequence,
 } from '../src/sic/test-observed-compositions.ts';
 import { actionRelation, type Step } from '../src/sic/composition-context.ts';
@@ -94,4 +95,33 @@ test('an addressed action distinguishes a new region from repeating the same com
   ];
   const click = (x: number): NativeCommand => ({ action_ref: 'ACTION6', data: { x, y: 1 } });
   assert.deepEqual(chooseSequence(h, 'x', [click(1), click(4)]), click(4));
+});
+
+test('executes one inferred link at a time and retains a verified prefix on refutation',async()=>{
+  const family=createCompositionTrials(),start=observation('start'),other=observation('elsewhere');
+  const initialRows=[[0,0]];
+  for(let i=0;i<4;i++){
+    await family.observePublicOutcome!(start,other,control(4),initialRows,initialRows);
+    await family.observePublicOutcome!(other,start,control(3),initialRows,initialRows);
+  }
+  const steps=[
+    {op:'ACTION1',ref:5,count:1,size:1,changes:[[0,0,1]]},
+    {op:'ACTION2',ref:2,count:1,size:2,changes:[[0,1,0],[1,0,1]]},
+    {op:'ACTION3',ref:7,count:1,size:1,changes:[[1,1,2]]},
+    {op:'ACTION4',ref:4,count:1,size:1,changes:[[1,2,3]]},
+  ];
+  family.restore({...family.state(),rewrites:steps});
+  let b=start,rows=initialRows,group=cycleGroup;
+  for(const [i,result] of [[[1,0]],[[0,1]],[[0,1]]].entries()){
+    const proposal=await family.proposeInGroup!(group,b,rows,inputs,20);
+    assert.ok(proposal?.program);
+    assert.equal(proposal.program.index,i);
+    const command=proposal.actions[0]!,a=observation('future'+i);
+    assert.equal(command.action_ref,steps[i]!.op);
+    assert.equal((await family.after(proposal,0,b,a,rows,result)).matched,i<2);
+    await family.record(b,a,command,rows,result,proposal,0,[]);
+    b=a;rows=result;group=followCompositionGroup;
+  }
+  assert.equal(await family.proposeInGroup!(followCompositionGroup,b,rows,inputs,20),null);
+  assert.deepEqual((family.state().verifiedPrograms as {op:string}[][])[0]!.map(s=>s.op),['ACTION1','ACTION2']);
 });

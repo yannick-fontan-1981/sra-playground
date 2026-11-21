@@ -1,0 +1,120 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+import { getGameByCode } from '../src/games/catalog.ts';
+import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import { measureComponentTranslations } from '../src/sic/observed-translation.ts';
+import { poseFamilyKey } from '../src/sic/pose-families.ts';
+import { sourceBackend } from './sic-study-source-games.mjs';
+import { hash, op, sourceReplay } from './sic-study-source-replay.mjs';
+import { measureReturnedControl } from './measure-returned-control.mjs';
+
+// At each fresh offer the solver chooses both the click and the motor before we play either arm.
+const [env,solver,out,...files]=process.argv.slice(2);
+const {newCursorMemory,offerCursorTrial,recordCursorTrial}=await import(pathToFileURL(resolve(solver,'src/sic/marked-cursor-selection.ts')).href);
+const packPath=process.env.SIC_STUDY_RECOVERY_PACK;
+const preference=packPath?JSON.parse(await readFile(packPath,'utf8')).configuration.informationPreference:undefined;
+const engine=await sourceBackend(resolve(env)),episodes=[];
+const contains=([l,t,r,b],[x,y,u,v])=>l<=x&&t<=y&&r>=u&&b>=v;
+const alive=(rep,b)=>b.state==='NOT_FINISHED'&&!rep.win(b);
+function leavesFootprint(a,b,box){
+  const forms=o=>{
+    const m=new Map();
+    for(const e of o.entities.filter(e=>e.area>=2)){
+      const k=poseFamilyKey(e),v=m.get(k)??[];v.push(e);m.set(k,v);
+    }return m;
+  };
+  const old=forms(a),fresh=forms(b);
+  return [...old].some(([k,v])=>{
+    if(v.length!==1||fresh.get(k)?.length!==1)return false;
+    const p=v[0].bbox,q=fresh.get(k)[0].bbox;
+    if(!contains(box,p))return false;
+    return Math.max(Math.abs(q[0]+q[2]-p[0]-p[2]),Math.abs(q[1]+q[3]-p[1]-p[3]))>=Math.max(2,p[2]-p[0]+1,p[3]-p[1]+1);
+  });
+}
+for(const file of files)for(const line of (await readFile(file,'utf8')).trim().split(/\r?\n/)){
+  const run=JSON.parse(line),game=getGameByCode(run.code);
+  assert.ok(game&&game.group!=='custom_4');
+  assert.ok(!run.error&&!run.resets&&!run.sourcePrefixActions&&!run.observedPriorLevelActions);
+  const rep=sourceReplay(engine,{},run),cache=new Map(),memory=newCursorMemory(),tested=new Set(),trials=[];
+  async function observe(b){
+    const h=hash(b);
+    if(!cache.has(h))cache.set(h,await measureNativeObservation({frame_rows:b.frame,frame_hash:h,state:b.state,
+      level:b.level,levels_completed:b.levelsCompleted,available_action_refs:b.availableActionIds.map(a=>'ACTION'+a),
+      palette:b.palette},cache.size,'source'));
+    return cache.get(h);
+  }
+  let b=rep.restore(0);
+  for(const [i,step] of run.steps.entries()){
+    const o=await observe(b);
+    const offer=offerCursorTrial(memory,o,b.frame,false,false,preference);
+    const motor=offer?.contrast?.motor??offer?.projectedMove?.command??memory.motions.find(m=>offer&&contains(offer.source.box,m.box))?.command;
+    const id=JSON.stringify([step.from,offer?.command,motor]);
+    if(i+2<=run.cap&&offer?.stage==='select'&&motor&&!tested.has(id)){
+      tested.add(id);
+      const moves=(a,n)=>alive(rep,n)?measureComponentTranslations(a.frame,n.frame,p=>p.area>=2&&p.area<a.frame.length*a.frame[0].length/12):[];
+      const direct=rep.act(motor),baseMoves=moves(b,direct);
+      rep.restore(i);
+      const prepared=rep.act(offer.command),engaged=alive(rep,prepared)&&prepared.availableActionIds.includes(Number(motor.slice(6)));
+      const next=engaged?rep.act(motor):prepared,readyMoves=engaged?moves(prepared,next):[];
+      const fromTarget=readyMoves.filter(m=>contains(offer.target.box,m.from.bbox));
+      const predicted=offer.projectedMove?.delta;
+      const matched=predicted?fromTarget.some(m=>m.displacement[0]===predicted[0]&&m.displacement[1]===predicted[1]):null;
+      const [l,t,r,bottom]=offer.source.box;
+      const oldStayed=prepared.frame.slice(t,bottom+1).every((row,y)=>row.slice(l,r+1).every((v,x)=>v===next.frame[t+y][l+x]));
+      const redirected=oldStayed&&fromTarget.length>0&&baseMoves.some(m=>contains(offer.source.box,m.from.bbox))
+        && !baseMoves.some(m=>contains(offer.target.box,m.from.bbox));
+      const directObservation=await observe(direct),preparedObservation=await observe(prepared),endObservation=await observe(next);
+      const redirectedAcrossPoses=oldStayed&&engaged&&alive(rep,direct)&&alive(rep,next)&&leavesFootprint(o,directObservation,offer.source.box)
+        && !leavesFootprint(o,directObservation,offer.target.box)&&leavesFootprint(preparedObservation,endObservation,offer.target.box);
+      let blockedAdvance;
+      if(process.env.SIC_STUDY_BLOCKED_ADVANCE==='1' && (redirected||redirectedAcrossPoses) && alive(rep,next) && i+4<=run.cap){
+        const nextSubjects=fromTarget.map(m=>m.to.bbox);
+        const preparedAgain=()=>{
+          rep.restore(i);rep.act(offer.command);const repeated=rep.act(motor);
+          assert.equal(hash(repeated),hash(next));return repeated;
+        };
+        const attempt=rep.act(motor);
+        if(alive(rep,attempt) && hash(attempt)===hash(next)){
+          const alternatives=[];
+          for(const action of next.availableActionIds.filter(a=>a>=1&&a<=4 && 'ACTION'+a!==motor)){
+            preparedAgain();const n=rep.act('ACTION'+action);
+            const parked=n.frame.slice(t,bottom+1).every((row,j)=>row.slice(l,r+1).every((value,k)=>value===next.frame[t+j][l+k]));
+            const travelled=alive(rep,n)&&nextSubjects.some(box=>moves(next,n).some(v=>contains(box,v.from.bbox)));
+            const second=alive(rep,n) && i+5<=run.cap?rep.act('ACTION'+action):n;
+            const stillParked=second.frame.slice(t,bottom+1).every((row,j)=>row.slice(l,r+1).every((v,k)=>v===next.frame[t+j][l+k]));
+            const advanced=alive(rep,second)&&moves(next,n).some(first=>nextSubjects.some(box=>contains(box,first.from.bbox))
+              && moves(n,second).some(follow=>contains(first.to.bbox,follow.from.bbox)&&follow.displacement.join()===first.displacement.join()));
+            alternatives.push({motor:'ACTION'+action,parked,travelled,won:rep.win(n),continued:stillParked&&(advanced||rep.win(second))});
+          }
+          blockedAdvance={alternatives};
+        }
+        preparedAgain();
+      }
+      let reverseSelection;
+      if(process.env.SIC_STUDY_RETURN_SELECTION==='1' && redirected && alive(rep,next) && fromTarget.length && i+4<=run.cap){
+        const selected=fromTarget.slice().sort((a,b)=>b.to.area-a.to.area)[0].to.bbox;
+        const reset=()=>{rep.restore(i);rep.act(offer.command);const b=rep.act(motor);assert.equal(hash(b),hash(next));return b;};
+        reverseSelection=measureReturnedControl({reset,rep,entities:endObservation.entities,previous:offer.source.box,
+          selected,motor,moves,live:b=>alive(rep,b)});
+      }
+      let end=next;
+      for(const s of run.steps.slice(i+2)){
+        if(!alive(rep,end)||!end.availableActionIds.includes(s.a))break;
+        end=rep.act(op(s));
+      }
+      trials.push({at:i+1,click:offer.command,motor,basis:offer.basis??'mark',oriented:memory.oriented?.some(m=>contains(offer.source.box,m.box))??false,
+        projected:!!predicted,matched,redirected,redirectedAcrossPoses,...(blockedAdvance?{blockedAdvance}:{}),
+        ...(reverseSelection?{reverseSelection}:{}),won:rep.win(end)});
+      rep.restore(i);
+    }
+    const n=rep.act(op(step));assert.equal(hash(n).slice(0,16),step.to);
+    recordCursorTrial(memory,o,await observe(n),b.frame,n.frame,op(step));
+    b=n;
+  }
+  assert.equal(rep.win(b),run.levels[0].won);
+  episodes.push({code:run.code,level:run.start,won:rep.win(b),trials});
+  console.log(run.code,run.start,trials.length,trials.filter(x=>x.redirected).length,trials.filter(x=>x.matched).length,trials.filter(x=>x.won).length);
+}
+await writeFile(out,JSON.stringify(episodes));

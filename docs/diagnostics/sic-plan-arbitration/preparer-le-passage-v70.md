@@ -1,0 +1,42 @@
+# Mettre une commande en capacité de libérer un passage
+
+Le témoin v69 est `21650a79d`. Il gagne quatre L2 distincts en campagne. Sur SS02 L2, il joue 506 coups, réalise 64 approches du contact hérité du L1 et n’émet aucune prévision de placement relatif. Hors arbitrage, le planificateur v69 n’offre aucun trajet sur ces mêmes préfixes. Un groupe public de dix pièces change de disposition, tandis que le détecteur précédent limite l’examen à huit. Une ligne de pièces contiguës peut avancer lorsqu’un sujet entre dans la première case. Les quatre directions publiques du niveau permettent de tester cette capacité.
+
+## Conception et sources
+
+Sur les 100 traces sources, SKBN et FUIT fournissent une observation de déplacement au contact, ainsi qu’un déplacement du sujet laissant les autres pièces en place. Depuis le même état dans le moteur source, le banc compare un geste direct au même geste après une préparation d’un pas. Une prédiction exige que la préparation garde toutes les pièces en place, que la branche directe déplace seulement le sujet et que la branche préparée déplace exactement les pièces annoncées. Sur SKBN, six des huit propositions satisfont cette prédiction. Sur FUIT, une sur huit la satisfait. Cela justifie de traiter la portée du contact comme une hypothèse vérifiable. Une expérience synthétique place plusieurs pièces consécutives dans un autre corridor et change les noms de commandes. [Interventions sources](../../../scripts/test-prepared-contact-sources.mjs) · [Test de la prédiction et de sa réutilisation](../../../tests/sic-contact-preparation.test.ts)
+
+Le nouveau candidat cherche ce qui empêche le sujet de rejoindre le lieu visé avec les objets immobiles. Il regroupe les cases entre lesquelles le sujet peut marcher sans déplacer d’objet. Une préparation déplace une ligne de pièces et modifie les cases accessibles. Pour un même geste, le pilote compare deux positions qu’il sait rejoindre en laissant les pièces en place. Il prédit combien de pièces suivraient depuis chaque position et dans quel sens l’accès pourrait progresser. Il choisit une suite, joue ses propres commandes et compare le sujet et toutes les pièces à la prévision. Une vérification réelle fournit une référence à l’expérience suivante. Le modèle, le choix de la cible, les positions de préparation et la longueur des lignes sont issus de la partie. L’auteur fixe le mode et les budgets. [Calcul des préparations](../../../src/sic/contact-preparation.ts)
+
+## Qualification déclarée avant les parties
+
+SS02 devient le cas de diagnostic de ce chantier après son rôle de contrôle en v69. SS08 entier est réservé à l’évaluation après le gel, ses scores historiques sont connus. Une étude indépendante a testé un modèle sur le graphe de SS02 et obtenu un score en 27 gestes. Les commandes du banc restent extérieures au pilote. Comparer v70 actif et témoin déclaratif sur SS02 en campagne et SS08 à froid, avec le même moteur `f0a1ff437`, 1 200 actions maximum par niveau, quatre travailleurs déclarés, 88 pas de planification et 1 000 nœuds. Rejouer les scores dans un moteur vierge. Contrôler aussi les quatre L2 déjà gagnés et les 100 jeux sources. Distinguer les prédictions formulées, les expériences jouées, les vérifications, la réutilisation et le score du jeu.
+
+## Se souvenir de la comparaison avant le premier contact
+
+Le gel v70 est `051886c76`. Sur les 506 commandes archivées du L2 de v69, v70 ne propose aucun trajet. En rejouant ces mêmes observations, une intervention sur la mémoire qui lui accorde provisoirement le contraste avec un geste libre fait apparaître une offre unique au coup 24 du L2. Dès le coup suivant, la même projection ne trouve plus de route. Cette intervention est diagnostique. Le candidat v71 doit observer lui-même le déplacement libre avec les pièces effectivement immobiles et sa provenance, avant de confronter cette observation au premier déplacement en contact. Une prévision de passage peut alors être soumise à l’arbitrage dès le déplacement observé. Un test part d’un groupe immobile, observe le premier déplacement de deux pièces adjacentes et vérifie que les deux observations restent identifiables. Garder le même témoin, les mêmes budgets et SS08 réservé après gel.
+
+## Victoire et première divergence
+
+Le candidat v71 figé dans `82ad65c88` gagne SS02 L1 en 40 puis L2 en 46 dans une campagne autonome. Une nouvelle instance du moteur reproduit les 86 commandes, chaque empreinte d’image et les deux points de score. La partie entière compte zéro remise à zéro. V70 actif gagne le L1 en 40 puis échoue au L2 en 328 au plafond de temps actif. Le témoin historique v69 actif échouait en 506. Les durées de calcul identiques autorisent des nombres d’actions différents.
+
+| Étape | Décision de SIC | Contrôle indépendant |
+|---|---|---|
+| Formuler la capacité | Au coup 23 du L2, le reçu vise un passage, annonce deux pièces déplacées et sept nouvelles cases accessibles. | Une recherche exhaustive par les commandes directionnelles en conservant toutes les pièces en place atteint 17 cases après la préparation choisie et 10 après l’autre. Le gain mesuré est de sept cases, comme annoncé. |
+| Comparer les préparations | Le pilote choisit deux positions atteignables en gardant le groupe fixe, et une même commande depuis ces deux positions. | Sur onze tests joués, dix comparaisons reproduisent les deux déplacements prévus. Le dernier geste déclenche le score et change de niveau, ce qui empêche d’en compter à nouveau les pièces. |
+| Jouer et vérifier | Au coup 23, la première commande du plan coïncide encore avec celle du témoin historique. La première commande différente arrive au coup 24, depuis la même image et le même préfixe. | Le moteur vérifie les 23 dispositions intermédiaires du plan de 24 commandes. La dernière donne le score. |
+| Réutiliser | Au coup 36, le pilote prévoit que trois pièces suivront alors que la plus grande rangée observée jusque-là en compte deux. Il les déplace, puis répète sur trois pièces au coup 37. | En retirant le plan après le coup 36 et en reconstruisant son modèle à partir des seules observations antérieures, le pilote prévoit trois pièces, les déplace à nouveau et gagne en dix gestes. Sept états ont été testés séparément avec le plan retiré, tous conduisent à un score. |
+
+La partie reste la seule comptée comme victoire autonome. Les variantes qui repartent d’un préfixe connu mesurent les prédictions et la capacité à replanifier. Au coup 36, le moteur confirme aussi le gain d’une case annoncé par le pilote, de 33 à 34 cases accessibles avec les pièces immobiles. [Interventions depuis la même observation](../../../scripts/verify-planned-contact-tests.mjs) · [Mesures, empreintes de rejeu et budgets](mesures-passage-v71.json)
+
+## Contrôles du candidat figé
+
+| Condition | Préférence active | Préférence témoin |
+|---|---|---|
+| SS02 L2 en campagne | gagné en 46 après le L1 en 40 | plafond de temps actif en 326 après le L1 en 40 |
+| SS08 L2 en entrée directe | plafond en 357 | plafond en 367 |
+| SS08 depuis le L1 | L1 au plafond en 269, L2 non atteint | fin de partie au L1 en 47, L2 non atteint |
+
+SS02 L2 à froid termine sans score en 417 actions en mode actif. La nouvelle stratégie de placement relatif dépend encore d’une observation de score du L1. Sur SS08, le même pack actif essaie en campagne un clic au neuvième geste, là où le témoin choisit une direction. Le transfert de la stratégie de passage à ce jeu reste à démontrer.
+
+Les quatre autres L2 gagnés reproduisent les suites intégrales de v69, en 32 sur SS01, 97 sur SS03, 143 sur SS04 et 73 sur SS05. Les 100 L1 sources sont gagnés et rejoués indépendamment, avec les mêmes trajectoires qu’en v66. Les contrôles de niveaux supérieurs reproduisent également CWSE L2 en 59 à froid, KLOT L4 en 37 à froid et GABA L2 en 50 après le L1. Les 486 tests de la suite SIC et du chemin natif passent et TypeScript compile. Le candidat qualifié est sur la branche expérimentale `codex/sic-source100-capacity-audit`.

@@ -1,0 +1,3899 @@
+{
+  "main": "cf6069a1d05b8655a6056d2b25d971427b276a43",
+  "environment": "f4d28aee9ebbb35533bb97a26968efd22887473d",
+  "v32": {
+    "tag": "sic-source100-local-capacity-v32",
+    "candidate": "9600279bccd29994fbbec9dd238e2f7146b3c6c3",
+    "files": 2548,
+    "sha256": "6f3fb2b97981d44a028e8c84704405b02d4d8627418f35a1c96c7742eac8fade",
+    "tests": {
+      "tests": 752,
+      "pass": 752,
+      "fail": 0
+    }
+  },
+  "v33": {
+    "tag": "sic-source100-witnessed-limit-v33",
+    "candidate": "b043be875b06551f51c68ba1bffd7cca204f84a6",
+    "files": 2548,
+    "sha256": "7410e6363c84a6d9baaba503da665a77240b1e3c8bc762ca911496ce0679b5dc",
+    "tests": {
+      "tests": 753,
+      "pass": 753,
+      "fail": 0
+    }
+  },
+  "reserve": "SS09 L2",
+  "custom4": {
+    "SS06": {
+      "oldMain": {
+        "actions": 46,
+        "reason": "no_applicable_transferred_family",
+        "frames": 44,
+        "replayed": 0,
+        "victory": false,
+        "trajectory": "b678b723dbbe9aa509a6749e129b997b2d2c3a9a1cd9ce923c9c53e440500314",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        }
+      },
+      "v31": {
+        "actions": 151,
+        "reason": "native_game_over",
+        "frames": 70,
+        "replayed": 20,
+        "victory": false,
+        "trajectory": "bc5970d940f359c6334534948f8f43403f4b9fb3b803537bd4907ba2e02ea5b0",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant",
+            "warrior"
+          ]
+        },
+        "fatal": {
+          "step": 151,
+          "action": 5,
+          "family": "sic_test_prepared_effects",
+          "phases": [
+            "reflect"
+          ],
+          "deaths": [
+            "merchant"
+          ],
+          "survivingNonclickFromSameState": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      },
+      "v32": {
+        "actions": 242,
+        "reason": "native_game_over",
+        "frames": 80,
+        "replayed": 77,
+        "victory": false,
+        "trajectory": "d4ba10dc689e0d0bd4786b0aa8402d3ce18088271f3b4c9235b2a19ba5b5a315",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "fatal": {
+          "step": 242,
+          "action": 5,
+          "family": "sic_test_prepared_effects",
+          "phases": [
+            "reflect"
+          ],
+          "deaths": [
+            "merchant"
+          ],
+          "survivingNonclickFromSameState": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "commonHorizonVs31": 151,
+        "firstDifferentActionVs31": 54
+      },
+      "v33": {
+        "actions": 173,
+        "reason": "native_game_over",
+        "frames": 70,
+        "replayed": 36,
+        "victory": false,
+        "trajectory": "482c238f047a345764efd3d2f0002dd5840c47fb160185dc2811b3ae6fb1636d",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant",
+            "warrior"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 11,
+          "cellsByHero": {
+            "merchant": 26,
+            "warrior": 1
+          },
+          "controlled": [
+            "merchant",
+            "warrior"
+          ]
+        },
+        "fatal": {
+          "step": 173,
+          "action": 5,
+          "family": "sic_test_prepared_effects",
+          "phases": [
+            "reflect"
+          ],
+          "deaths": [
+            "merchant"
+          ],
+          "survivingNonclickFromSameState": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "commonHorizonVs31": 151,
+        "firstDifferentActionVs31": 145
+      }
+    },
+    "SS07": {
+      "oldMain": {
+        "actions": 5,
+        "reason": "native_game_over",
+        "frames": 5,
+        "replayed": 0,
+        "victory": false,
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "fatal": {
+          "step": 5,
+          "action": 5,
+          "family": "sic_public_input_exploration",
+          "phases": [
+            "reflect"
+          ],
+          "deaths": [
+            "thief"
+          ],
+          "survivingNonclickFromSameState": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      },
+      "v31": {
+        "actions": 5,
+        "reason": "native_game_over",
+        "frames": 5,
+        "replayed": 0,
+        "victory": false,
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "fatal": {
+          "step": 5,
+          "action": 5,
+          "family": "sic_public_input_exploration",
+          "phases": [
+            "reflect"
+          ],
+          "deaths": [
+            "thief"
+          ],
+          "survivingNonclickFromSameState": [
+            1,
+            2,
+            3,
+            4
+          ]
+        }
+      },
+      "v32": {
+        "actions": 5,
+        "reason": "native_game_over",
+        "frames": 5,
+        "replayed": 0,
+        "victory": false,
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "fatal": {
+          "step": 5,
+          "action": 5,
+          "family": "sic_public_input_exploration",
+          "phases": [
+            "reflect"
+          ],
+          "deaths": [
+            "thief"
+          ],
+          "survivingNonclickFromSameState": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "commonHorizonVs31": 5,
+        "firstDifferentActionVs31": null
+      },
+      "v33": {
+        "actions": 5,
+        "reason": "native_game_over",
+        "frames": 5,
+        "replayed": 0,
+        "victory": false,
+        "trajectory": "4c9d27858655143a99d94cfd3ea2c0c099494677fafed7e4e6d3bb95f92a959c",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 2,
+            "thief": 1
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "fatal": {
+          "step": 5,
+          "action": 5,
+          "family": "sic_public_input_exploration",
+          "phases": [
+            "reflect"
+          ],
+          "deaths": [
+            "thief"
+          ],
+          "survivingNonclickFromSameState": [
+            1,
+            2,
+            3,
+            4
+          ]
+        },
+        "commonHorizonVs31": 5,
+        "firstDifferentActionVs31": null
+      }
+    },
+    "SS08": {
+      "oldMain": {
+        "actions": 124,
+        "reason": "no_applicable_transferred_family",
+        "frames": 66,
+        "replayed": 3,
+        "victory": false,
+        "trajectory": "f2ffa4ee7ec967dde352a42e38a48950115a5eb978497dc5486d11a26eac581c",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 10,
+            "wizard": 9
+          },
+          "controlled": [
+            "merchant",
+            "wizard"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 10,
+          "cellsByHero": {
+            "merchant": 10,
+            "wizard": 9
+          },
+          "controlled": [
+            "merchant",
+            "wizard"
+          ]
+        }
+      },
+      "v31": {
+        "actions": 544,
+        "reason": "level_active_time_budget",
+        "frames": 30,
+        "replayed": 302,
+        "victory": false,
+        "trajectory": "420423a49ef3391a62f9f38f1d0c985de9df50e50b38f46af027ee3c58e58aaf",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 12,
+          "cellsByHero": {
+            "merchant": 8,
+            "wizard": 2
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 12,
+          "cellsByHero": {
+            "merchant": 8,
+            "wizard": 2
+          },
+          "controlled": [
+            "merchant"
+          ]
+        }
+      },
+      "v32": {
+        "actions": 519,
+        "reason": "level_active_time_budget",
+        "frames": 32,
+        "replayed": 317,
+        "victory": false,
+        "trajectory": "bafe7e9518178562b2a91edd92197cc198fedb051b8865ace98b542bede78522",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 12,
+          "cellsByHero": {
+            "merchant": 8,
+            "wizard": 2
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 12,
+          "cellsByHero": {
+            "merchant": 8,
+            "wizard": 2
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "commonHorizonVs31": 519,
+        "firstDifferentActionVs31": 8
+      },
+      "v33": {
+        "actions": 396,
+        "reason": "level_active_time_budget",
+        "frames": 30,
+        "replayed": 199,
+        "victory": false,
+        "trajectory": "45a57d0913b72aca9f59f438980a7773888325a3fa6c693541dfcfd3f0dfb98c",
+        "common": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 12,
+          "cellsByHero": {
+            "merchant": 8,
+            "wizard": 2
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "final": {
+          "peakOccupied": 0,
+          "firstOccupied": null,
+          "minJointManhattan": 12,
+          "cellsByHero": {
+            "merchant": 8,
+            "wizard": 2
+          },
+          "controlled": [
+            "merchant"
+          ]
+        },
+        "commonHorizonVs31": 396,
+        "firstDifferentActionVs31": 42
+      }
+    }
+  },
+  "cohorts": {
+    "v32": {
+      "summary": {
+        "games": 100,
+        "mainWins": 100,
+        "candidateWins": 99,
+        "identical": 96,
+        "lost": [
+          "VOIS"
+        ],
+        "gained": []
+      },
+      "games": [
+        {
+          "code": "AMZE",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "AR25",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "AS66",
+          "main": [
+            true,
+            11
+          ],
+          "candidate": [
+            true,
+            11
+          ],
+          "same": true,
+          "prefix": 11
+        },
+        {
+          "code": "BP35",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "CASC",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "CATL",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "CATR",
+          "main": [
+            true,
+            29
+          ],
+          "candidate": [
+            true,
+            29
+          ],
+          "same": true,
+          "prefix": 29
+        },
+        {
+          "code": "CAVA",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "CD82",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "CGWL",
+          "main": [
+            true,
+            15
+          ],
+          "candidate": [
+            true,
+            15
+          ],
+          "same": true,
+          "prefix": 15
+        },
+        {
+          "code": "CLRS",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "CN04",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "COLM",
+          "main": [
+            true,
+            20
+          ],
+          "candidate": [
+            true,
+            20
+          ],
+          "same": true,
+          "prefix": 20
+        },
+        {
+          "code": "COMB",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "CONN",
+          "main": [
+            true,
+            24
+          ],
+          "candidate": [
+            true,
+            24
+          ],
+          "same": true,
+          "prefix": 24
+        },
+        {
+          "code": "CRAF",
+          "main": [
+            true,
+            12
+          ],
+          "candidate": [
+            true,
+            12
+          ],
+          "same": true,
+          "prefix": 12
+        },
+        {
+          "code": "CWSE",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "DAME",
+          "main": [
+            true,
+            29
+          ],
+          "candidate": [
+            true,
+            29
+          ],
+          "same": true,
+          "prefix": 29
+        },
+        {
+          "code": "DC22",
+          "main": [
+            true,
+            24
+          ],
+          "candidate": [
+            true,
+            24
+          ],
+          "same": true,
+          "prefix": 24
+        },
+        {
+          "code": "DICO",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "DNOI",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "ELAS",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "ESCT",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "ETAG",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "EVAS",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "FITE",
+          "main": [
+            true,
+            12
+          ],
+          "candidate": [
+            true,
+            14
+          ],
+          "same": false,
+          "prefix": 9
+        },
+        {
+          "code": "FOGW",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "FT09",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "FUIT",
+          "main": [
+            true,
+            49
+          ],
+          "candidate": [
+            true,
+            49
+          ],
+          "same": true,
+          "prefix": 49
+        },
+        {
+          "code": "G50T",
+          "main": [
+            true,
+            27
+          ],
+          "candidate": [
+            true,
+            27
+          ],
+          "same": true,
+          "prefix": 27
+        },
+        {
+          "code": "GABA",
+          "main": [
+            true,
+            49
+          ],
+          "candidate": [
+            true,
+            49
+          ],
+          "same": true,
+          "prefix": 49
+        },
+        {
+          "code": "GARE",
+          "main": [
+            true,
+            11
+          ],
+          "candidate": [
+            true,
+            11
+          ],
+          "same": true,
+          "prefix": 11
+        },
+        {
+          "code": "GIGO",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "GLOB",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "GMAP",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "GORI",
+          "main": [
+            true,
+            15
+          ],
+          "candidate": [
+            true,
+            15
+          ],
+          "same": true,
+          "prefix": 15
+        },
+        {
+          "code": "GRAV",
+          "main": [
+            true,
+            11
+          ],
+          "candidate": [
+            true,
+            11
+          ],
+          "same": true,
+          "prefix": 11
+        },
+        {
+          "code": "GRIL",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "HANO",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "HOLE",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "HPDL",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "ISOS",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "KA59",
+          "main": [
+            true,
+            15
+          ],
+          "candidate": [
+            true,
+            15
+          ],
+          "same": true,
+          "prefix": 15
+        },
+        {
+          "code": "KATA",
+          "main": [
+            true,
+            14
+          ],
+          "candidate": [
+            true,
+            14
+          ],
+          "same": true,
+          "prefix": 14
+        },
+        {
+          "code": "KEYD",
+          "main": [
+            true,
+            35
+          ],
+          "candidate": [
+            true,
+            35
+          ],
+          "same": true,
+          "prefix": 35
+        },
+        {
+          "code": "KLOT",
+          "main": [
+            true,
+            30
+          ],
+          "candidate": [
+            true,
+            30
+          ],
+          "same": true,
+          "prefix": 30
+        },
+        {
+          "code": "LF52",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "LIFE",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "LKEY",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "LOGI",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "LP85",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "LS19",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "LS20",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "M0R0",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            59
+          ],
+          "same": false,
+          "prefix": 23
+        },
+        {
+          "code": "MEMO",
+          "main": [
+            true,
+            10
+          ],
+          "candidate": [
+            true,
+            10
+          ],
+          "same": true,
+          "prefix": 10
+        },
+        {
+          "code": "MIND",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "MOTO",
+          "main": [
+            true,
+            10
+          ],
+          "candidate": [
+            true,
+            10
+          ],
+          "same": true,
+          "prefix": 10
+        },
+        {
+          "code": "ONDE",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "PIPE",
+          "main": [
+            true,
+            4
+          ],
+          "candidate": [
+            true,
+            4
+          ],
+          "same": true,
+          "prefix": 4
+        },
+        {
+          "code": "POLA",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "PORT",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "PRTL",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "R11L",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "RE86",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "RECR",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "REGN",
+          "main": [
+            true,
+            2
+          ],
+          "candidate": [
+            true,
+            2
+          ],
+          "same": true,
+          "prefix": 2
+        },
+        {
+          "code": "REWI",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "RSWP",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "S5I5",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "SB26",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "SC25",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "SELE",
+          "main": [
+            true,
+            36
+          ],
+          "candidate": [
+            true,
+            36
+          ],
+          "same": true,
+          "prefix": 36
+        },
+        {
+          "code": "SEQN",
+          "main": [
+            true,
+            4
+          ],
+          "candidate": [
+            true,
+            4
+          ],
+          "same": true,
+          "prefix": 4
+        },
+        {
+          "code": "SERI",
+          "main": [
+            true,
+            4
+          ],
+          "candidate": [
+            true,
+            4
+          ],
+          "same": true,
+          "prefix": 4
+        },
+        {
+          "code": "SIGN",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "SK48",
+          "main": [
+            true,
+            19
+          ],
+          "candidate": [
+            true,
+            19
+          ],
+          "same": true,
+          "prefix": 19
+        },
+        {
+          "code": "SKBN",
+          "main": [
+            true,
+            22
+          ],
+          "candidate": [
+            true,
+            22
+          ],
+          "same": true,
+          "prefix": 22
+        },
+        {
+          "code": "SMLP",
+          "main": [
+            true,
+            47
+          ],
+          "candidate": [
+            true,
+            47
+          ],
+          "same": true,
+          "prefix": 47
+        },
+        {
+          "code": "SNAR",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "SP80",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "SPOR",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "STCK",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "SU15",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "SWCH",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "SYME",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "TEQU",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "THER",
+          "main": [
+            true,
+            21
+          ],
+          "candidate": [
+            true,
+            21
+          ],
+          "same": true,
+          "prefix": 21
+        },
+        {
+          "code": "TICT",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "TN36",
+          "main": [
+            true,
+            53
+          ],
+          "candidate": [
+            true,
+            53
+          ],
+          "same": true,
+          "prefix": 53
+        },
+        {
+          "code": "TR87",
+          "main": [
+            true,
+            22
+          ],
+          "candidate": [
+            true,
+            22
+          ],
+          "same": true,
+          "prefix": 22
+        },
+        {
+          "code": "TRCP",
+          "main": [
+            true,
+            24
+          ],
+          "candidate": [
+            true,
+            24
+          ],
+          "same": true,
+          "prefix": 24
+        },
+        {
+          "code": "TRIA",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            36
+          ],
+          "same": false,
+          "prefix": 23
+        },
+        {
+          "code": "TU93",
+          "main": [
+            true,
+            30
+          ],
+          "candidate": [
+            true,
+            30
+          ],
+          "same": true,
+          "prefix": 30
+        },
+        {
+          "code": "UPST",
+          "main": [
+            true,
+            30
+          ],
+          "candidate": [
+            true,
+            30
+          ],
+          "same": true,
+          "prefix": 30
+        },
+        {
+          "code": "VALV",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "VC33",
+          "main": [
+            true,
+            12
+          ],
+          "candidate": [
+            true,
+            12
+          ],
+          "same": true,
+          "prefix": 12
+        },
+        {
+          "code": "VOIS",
+          "main": [
+            true,
+            57
+          ],
+          "candidate": [
+            false,
+            60
+          ],
+          "same": false,
+          "prefix": 9
+        },
+        {
+          "code": "WA30",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "WEAV",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "ZIPP",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        }
+      ]
+    },
+    "v33": {
+      "summary": {
+        "games": 100,
+        "mainWins": 100,
+        "candidateWins": 100,
+        "identical": 100,
+        "lost": [],
+        "gained": []
+      },
+      "games": [
+        {
+          "code": "AMZE",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "AR25",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "AS66",
+          "main": [
+            true,
+            11
+          ],
+          "candidate": [
+            true,
+            11
+          ],
+          "same": true,
+          "prefix": 11
+        },
+        {
+          "code": "BP35",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "CASC",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "CATL",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "CATR",
+          "main": [
+            true,
+            29
+          ],
+          "candidate": [
+            true,
+            29
+          ],
+          "same": true,
+          "prefix": 29
+        },
+        {
+          "code": "CAVA",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "CD82",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "CGWL",
+          "main": [
+            true,
+            15
+          ],
+          "candidate": [
+            true,
+            15
+          ],
+          "same": true,
+          "prefix": 15
+        },
+        {
+          "code": "CLRS",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "CN04",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "COLM",
+          "main": [
+            true,
+            20
+          ],
+          "candidate": [
+            true,
+            20
+          ],
+          "same": true,
+          "prefix": 20
+        },
+        {
+          "code": "COMB",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "CONN",
+          "main": [
+            true,
+            24
+          ],
+          "candidate": [
+            true,
+            24
+          ],
+          "same": true,
+          "prefix": 24
+        },
+        {
+          "code": "CRAF",
+          "main": [
+            true,
+            12
+          ],
+          "candidate": [
+            true,
+            12
+          ],
+          "same": true,
+          "prefix": 12
+        },
+        {
+          "code": "CWSE",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "DAME",
+          "main": [
+            true,
+            29
+          ],
+          "candidate": [
+            true,
+            29
+          ],
+          "same": true,
+          "prefix": 29
+        },
+        {
+          "code": "DC22",
+          "main": [
+            true,
+            24
+          ],
+          "candidate": [
+            true,
+            24
+          ],
+          "same": true,
+          "prefix": 24
+        },
+        {
+          "code": "DICO",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "DNOI",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "ELAS",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "ESCT",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "ETAG",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "EVAS",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "FITE",
+          "main": [
+            true,
+            12
+          ],
+          "candidate": [
+            true,
+            12
+          ],
+          "same": true,
+          "prefix": 12
+        },
+        {
+          "code": "FOGW",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "FT09",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "FUIT",
+          "main": [
+            true,
+            49
+          ],
+          "candidate": [
+            true,
+            49
+          ],
+          "same": true,
+          "prefix": 49
+        },
+        {
+          "code": "G50T",
+          "main": [
+            true,
+            27
+          ],
+          "candidate": [
+            true,
+            27
+          ],
+          "same": true,
+          "prefix": 27
+        },
+        {
+          "code": "GABA",
+          "main": [
+            true,
+            49
+          ],
+          "candidate": [
+            true,
+            49
+          ],
+          "same": true,
+          "prefix": 49
+        },
+        {
+          "code": "GARE",
+          "main": [
+            true,
+            11
+          ],
+          "candidate": [
+            true,
+            11
+          ],
+          "same": true,
+          "prefix": 11
+        },
+        {
+          "code": "GIGO",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "GLOB",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "GMAP",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "GORI",
+          "main": [
+            true,
+            15
+          ],
+          "candidate": [
+            true,
+            15
+          ],
+          "same": true,
+          "prefix": 15
+        },
+        {
+          "code": "GRAV",
+          "main": [
+            true,
+            11
+          ],
+          "candidate": [
+            true,
+            11
+          ],
+          "same": true,
+          "prefix": 11
+        },
+        {
+          "code": "GRIL",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "HANO",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "HOLE",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "HPDL",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "ISOS",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "KA59",
+          "main": [
+            true,
+            15
+          ],
+          "candidate": [
+            true,
+            15
+          ],
+          "same": true,
+          "prefix": 15
+        },
+        {
+          "code": "KATA",
+          "main": [
+            true,
+            14
+          ],
+          "candidate": [
+            true,
+            14
+          ],
+          "same": true,
+          "prefix": 14
+        },
+        {
+          "code": "KEYD",
+          "main": [
+            true,
+            35
+          ],
+          "candidate": [
+            true,
+            35
+          ],
+          "same": true,
+          "prefix": 35
+        },
+        {
+          "code": "KLOT",
+          "main": [
+            true,
+            30
+          ],
+          "candidate": [
+            true,
+            30
+          ],
+          "same": true,
+          "prefix": 30
+        },
+        {
+          "code": "LF52",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "LIFE",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "LKEY",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "LOGI",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "LP85",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "LS19",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "LS20",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "M0R0",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "MEMO",
+          "main": [
+            true,
+            10
+          ],
+          "candidate": [
+            true,
+            10
+          ],
+          "same": true,
+          "prefix": 10
+        },
+        {
+          "code": "MIND",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "MOTO",
+          "main": [
+            true,
+            10
+          ],
+          "candidate": [
+            true,
+            10
+          ],
+          "same": true,
+          "prefix": 10
+        },
+        {
+          "code": "ONDE",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "PIPE",
+          "main": [
+            true,
+            4
+          ],
+          "candidate": [
+            true,
+            4
+          ],
+          "same": true,
+          "prefix": 4
+        },
+        {
+          "code": "POLA",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "PORT",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "PRTL",
+          "main": [
+            true,
+            6
+          ],
+          "candidate": [
+            true,
+            6
+          ],
+          "same": true,
+          "prefix": 6
+        },
+        {
+          "code": "R11L",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "RE86",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "RECR",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "REGN",
+          "main": [
+            true,
+            2
+          ],
+          "candidate": [
+            true,
+            2
+          ],
+          "same": true,
+          "prefix": 2
+        },
+        {
+          "code": "REWI",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "RSWP",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "S5I5",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "SB26",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "SC25",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "SELE",
+          "main": [
+            true,
+            36
+          ],
+          "candidate": [
+            true,
+            36
+          ],
+          "same": true,
+          "prefix": 36
+        },
+        {
+          "code": "SEQN",
+          "main": [
+            true,
+            4
+          ],
+          "candidate": [
+            true,
+            4
+          ],
+          "same": true,
+          "prefix": 4
+        },
+        {
+          "code": "SERI",
+          "main": [
+            true,
+            4
+          ],
+          "candidate": [
+            true,
+            4
+          ],
+          "same": true,
+          "prefix": 4
+        },
+        {
+          "code": "SIGN",
+          "main": [
+            true,
+            16
+          ],
+          "candidate": [
+            true,
+            16
+          ],
+          "same": true,
+          "prefix": 16
+        },
+        {
+          "code": "SK48",
+          "main": [
+            true,
+            19
+          ],
+          "candidate": [
+            true,
+            19
+          ],
+          "same": true,
+          "prefix": 19
+        },
+        {
+          "code": "SKBN",
+          "main": [
+            true,
+            22
+          ],
+          "candidate": [
+            true,
+            22
+          ],
+          "same": true,
+          "prefix": 22
+        },
+        {
+          "code": "SMLP",
+          "main": [
+            true,
+            47
+          ],
+          "candidate": [
+            true,
+            47
+          ],
+          "same": true,
+          "prefix": 47
+        },
+        {
+          "code": "SNAR",
+          "main": [
+            true,
+            17
+          ],
+          "candidate": [
+            true,
+            17
+          ],
+          "same": true,
+          "prefix": 17
+        },
+        {
+          "code": "SP80",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "SPOR",
+          "main": [
+            true,
+            18
+          ],
+          "candidate": [
+            true,
+            18
+          ],
+          "same": true,
+          "prefix": 18
+        },
+        {
+          "code": "STCK",
+          "main": [
+            true,
+            3
+          ],
+          "candidate": [
+            true,
+            3
+          ],
+          "same": true,
+          "prefix": 3
+        },
+        {
+          "code": "SU15",
+          "main": [
+            true,
+            7
+          ],
+          "candidate": [
+            true,
+            7
+          ],
+          "same": true,
+          "prefix": 7
+        },
+        {
+          "code": "SWCH",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "SYME",
+          "main": [
+            true,
+            9
+          ],
+          "candidate": [
+            true,
+            9
+          ],
+          "same": true,
+          "prefix": 9
+        },
+        {
+          "code": "TEQU",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        },
+        {
+          "code": "THER",
+          "main": [
+            true,
+            21
+          ],
+          "candidate": [
+            true,
+            21
+          ],
+          "same": true,
+          "prefix": 21
+        },
+        {
+          "code": "TICT",
+          "main": [
+            true,
+            5
+          ],
+          "candidate": [
+            true,
+            5
+          ],
+          "same": true,
+          "prefix": 5
+        },
+        {
+          "code": "TN36",
+          "main": [
+            true,
+            53
+          ],
+          "candidate": [
+            true,
+            53
+          ],
+          "same": true,
+          "prefix": 53
+        },
+        {
+          "code": "TR87",
+          "main": [
+            true,
+            22
+          ],
+          "candidate": [
+            true,
+            22
+          ],
+          "same": true,
+          "prefix": 22
+        },
+        {
+          "code": "TRCP",
+          "main": [
+            true,
+            24
+          ],
+          "candidate": [
+            true,
+            24
+          ],
+          "same": true,
+          "prefix": 24
+        },
+        {
+          "code": "TRIA",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "TU93",
+          "main": [
+            true,
+            30
+          ],
+          "candidate": [
+            true,
+            30
+          ],
+          "same": true,
+          "prefix": 30
+        },
+        {
+          "code": "UPST",
+          "main": [
+            true,
+            30
+          ],
+          "candidate": [
+            true,
+            30
+          ],
+          "same": true,
+          "prefix": 30
+        },
+        {
+          "code": "VALV",
+          "main": [
+            true,
+            25
+          ],
+          "candidate": [
+            true,
+            25
+          ],
+          "same": true,
+          "prefix": 25
+        },
+        {
+          "code": "VC33",
+          "main": [
+            true,
+            12
+          ],
+          "candidate": [
+            true,
+            12
+          ],
+          "same": true,
+          "prefix": 12
+        },
+        {
+          "code": "VOIS",
+          "main": [
+            true,
+            57
+          ],
+          "candidate": [
+            true,
+            57
+          ],
+          "same": true,
+          "prefix": 57
+        },
+        {
+          "code": "WA30",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "WEAV",
+          "main": [
+            true,
+            26
+          ],
+          "candidate": [
+            true,
+            26
+          ],
+          "same": true,
+          "prefix": 26
+        },
+        {
+          "code": "ZIPP",
+          "main": [
+            true,
+            8
+          ],
+          "candidate": [
+            true,
+            8
+          ],
+          "same": true,
+          "prefix": 8
+        }
+      ]
+    }
+  },
+  "ss01": {
+    "v32": {
+      "cold": {
+        "won": true,
+        "actions": 44,
+        "state": "NOT_FINISHED",
+        "reason": "target_levels_completed",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "b78b819c6501230bf31a6424f95bedaa53bf35ea70cacb0d8341a7f539f4f2a1",
+        "prior": 0
+      },
+      "warm": {
+        "won": true,
+        "actions": 32,
+        "state": "NOT_FINISHED",
+        "reason": "target_levels_completed",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "78028e7fd57df5407040ce8345d1627099ccdc957be1aa8b457ef77d29cb634e",
+        "prior": 19
+      }
+    },
+    "v33": {
+      "cold": {
+        "won": true,
+        "actions": 44,
+        "state": "NOT_FINISHED",
+        "reason": "target_levels_completed",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "b78b819c6501230bf31a6424f95bedaa53bf35ea70cacb0d8341a7f539f4f2a1",
+        "prior": 0
+      },
+      "warm": {
+        "won": true,
+        "actions": 32,
+        "state": "NOT_FINISHED",
+        "reason": "target_levels_completed",
+        "initial": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "trajectory": "78028e7fd57df5407040ce8345d1627099ccdc957be1aa8b457ef77d29cb634e",
+        "prior": 19
+      }
+    }
+  },
+  "heldOut": {
+    "2": {
+      "base32": {
+        "cold": {
+          "won": true,
+          "actions": 79,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "trajectory": "f8c13938897130a679589680b289bbb061f4d6a9da581254a194ad076527c879",
+          "prior": 0
+        },
+        "warm": {
+          "won": true,
+          "actions": 67,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "trajectory": "40d74f730dea1fee6b4bf22a5b28e04e25c60a823fa7fd8475cad0ac0a53b623",
+          "prior": 6
+        }
+      },
+      "freeze32": {
+        "cold": {
+          "won": true,
+          "actions": 79,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "trajectory": "f8c13938897130a679589680b289bbb061f4d6a9da581254a194ad076527c879",
+          "prior": 0,
+          "forecasts": {
+            "proposals": 0,
+            "claims": 0,
+            "verified": 0,
+            "selective": 0,
+            "playedB": 0,
+            "verifiedUse": 0,
+            "selectiveUse": 0,
+            "playedUse": 0,
+            "successfulRevisions": 0
+          }
+        },
+        "warm": {
+          "won": true,
+          "actions": 67,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "trajectory": "40d74f730dea1fee6b4bf22a5b28e04e25c60a823fa7fd8475cad0ac0a53b623",
+          "prior": 6,
+          "forecasts": {
+            "proposals": 0,
+            "claims": 0,
+            "verified": 0,
+            "selective": 0,
+            "playedB": 0,
+            "verifiedUse": 0,
+            "selectiveUse": 0,
+            "playedUse": 0,
+            "successfulRevisions": 0
+          }
+        }
+      },
+      "freeze33": {
+        "cold": {
+          "won": true,
+          "actions": 79,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "trajectory": "f8c13938897130a679589680b289bbb061f4d6a9da581254a194ad076527c879",
+          "prior": 0
+        },
+        "warm": {
+          "won": true,
+          "actions": 67,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+          "trajectory": "40d74f730dea1fee6b4bf22a5b28e04e25c60a823fa7fd8475cad0ac0a53b623",
+          "prior": 6
+        }
+      },
+      "fixedRootAudit": {
+        "cold": {
+          "code": "POLA",
+          "level": 2,
+          "priorActions": 0,
+          "roots": 17,
+          "forecasts": 0,
+          "verified": 0,
+          "selective": 0,
+          "selectiveUse": 0,
+          "uses": 0,
+          "revisions": 0,
+          "revisedVerified": 0,
+          "priorForecasts": 0,
+          "priorVerified": 0
+        },
+        "warm": {
+          "code": "POLA",
+          "level": 2,
+          "priorActions": 6,
+          "roots": 17,
+          "forecasts": 0,
+          "verified": 0,
+          "selective": 0,
+          "selectiveUse": 0,
+          "uses": 0,
+          "revisions": 0,
+          "revisedVerified": 0,
+          "priorForecasts": 0,
+          "priorVerified": 0
+        }
+      }
+    },
+    "3": {
+      "base32": {
+        "cold": {
+          "won": false,
+          "actions": 90,
+          "state": "NOT_FINISHED",
+          "reason": "session_action_budget",
+          "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "trajectory": "2ba21473b3d730f21d118217dd7a2faa7b7856bd00830472e8aaa999c0b6dfa0",
+          "prior": 0
+        },
+        "warm": {
+          "won": false,
+          "actions": 90,
+          "state": "NOT_FINISHED",
+          "reason": "session_action_budget",
+          "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "trajectory": "9b47b9fd26c4dbab241e523dd13e9dcce073956e0f108cd711c09260727549b4",
+          "prior": 6
+        }
+      },
+      "freeze32": {
+        "cold": {
+          "won": true,
+          "actions": 61,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "trajectory": "08578f86d5332f034d8041ac3fc707e644a537f61a4cca82c292133110842d6b",
+          "prior": 0,
+          "forecasts": {
+            "proposals": 2,
+            "claims": 1,
+            "verified": 0,
+            "selective": 0,
+            "playedB": 0,
+            "verifiedUse": 0,
+            "selectiveUse": 0,
+            "playedUse": 0,
+            "successfulRevisions": 0
+          }
+        },
+        "warm": {
+          "won": true,
+          "actions": 61,
+          "state": "NOT_FINISHED",
+          "reason": "target_levels_completed",
+          "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "trajectory": "08578f86d5332f034d8041ac3fc707e644a537f61a4cca82c292133110842d6b",
+          "prior": 6,
+          "forecasts": {
+            "proposals": 2,
+            "claims": 1,
+            "verified": 0,
+            "selective": 0,
+            "playedB": 0,
+            "verifiedUse": 0,
+            "selectiveUse": 0,
+            "playedUse": 0,
+            "successfulRevisions": 0
+          }
+        }
+      },
+      "freeze33": {
+        "cold": {
+          "won": false,
+          "actions": 90,
+          "state": "NOT_FINISHED",
+          "reason": "session_action_budget",
+          "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "trajectory": "2ba21473b3d730f21d118217dd7a2faa7b7856bd00830472e8aaa999c0b6dfa0",
+          "prior": 0
+        },
+        "warm": {
+          "won": false,
+          "actions": 90,
+          "state": "NOT_FINISHED",
+          "reason": "session_action_budget",
+          "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+          "trajectory": "9b47b9fd26c4dbab241e523dd13e9dcce073956e0f108cd711c09260727549b4",
+          "prior": 6
+        }
+      },
+      "fixedRootAudit": {
+        "cold": {
+          "code": "POLA",
+          "level": 3,
+          "priorActions": 0,
+          "roots": 19,
+          "forecasts": 11,
+          "verified": 2,
+          "selective": 2,
+          "selectiveUse": 0,
+          "uses": 0,
+          "revisions": 0,
+          "revisedVerified": 0,
+          "priorForecasts": 0,
+          "priorVerified": 0
+        },
+        "warm": {
+          "code": "POLA",
+          "level": 3,
+          "priorActions": 6,
+          "roots": 19,
+          "forecasts": 11,
+          "verified": 2,
+          "selective": 2,
+          "selectiveUse": 0,
+          "uses": 0,
+          "revisions": 0,
+          "revisedVerified": 0,
+          "priorForecasts": 0,
+          "priorVerified": 0
+        }
+      }
+    },
+    "confirmation": {
+      "31": {
+        "won": false,
+        "actions": 180,
+        "state": "NOT_FINISHED",
+        "reason": "session_action_budget",
+        "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+        "trajectory": "12c93fa59889a51bb00ad5708eb7cd822b0111f12e20e2daab2c622aeafd2c1f",
+        "prior": 0
+      },
+      "32": {
+        "won": true,
+        "actions": 61,
+        "state": "NOT_FINISHED",
+        "reason": "target_levels_completed",
+        "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+        "trajectory": "08578f86d5332f034d8041ac3fc707e644a537f61a4cca82c292133110842d6b",
+        "prior": 0
+      }
+    },
+    "actionSwap": {
+      "code": "POLA",
+      "level": 3,
+      "step": 41,
+      "from": "56e00ad9ac1d188d452d0180e7f2a01dc9aa8bed67fe37f62dbbc4fab090ae2e",
+      "old": "ACTION7",
+      "updated": "ACTION4",
+      "outcomes": [
+        {
+          "actionFrom": "v31",
+          "suffixFrom": "v31",
+          "issuedAfterPrefix": 50,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "final": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6"
+        },
+        {
+          "actionFrom": "v32",
+          "suffixFrom": "v31",
+          "issuedAfterPrefix": 50,
+          "score": 0,
+          "state": "NOT_FINISHED",
+          "final": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6"
+        },
+        {
+          "actionFrom": "v31",
+          "suffixFrom": "v32",
+          "issuedAfterPrefix": 21,
+          "score": 1,
+          "state": "NOT_FINISHED",
+          "final": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5"
+        },
+        {
+          "actionFrom": "v32",
+          "suffixFrom": "v32",
+          "issuedAfterPrefix": 21,
+          "score": 1,
+          "state": "NOT_FINISHED",
+          "final": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5"
+        }
+      ]
+    }
+  },
+  "revisionAssays": [
+    {
+      "code": "CATR",
+      "level": 2,
+      "priorActions": 29,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 7,
+      "forecasts": 0,
+      "verified": 0,
+      "selective": 0,
+      "selectiveUse": 0,
+      "uses": 0,
+      "revisions": 0,
+      "revisedVerified": 0,
+      "priorForecasts": 0,
+      "priorVerified": 0
+    },
+    {
+      "code": "CATR",
+      "level": 3,
+      "priorActions": 29,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 9,
+      "forecasts": 3,
+      "verified": 0,
+      "selective": 0,
+      "selectiveUse": 0,
+      "uses": 0,
+      "revisions": 0,
+      "revisedVerified": 0,
+      "priorForecasts": 0,
+      "priorVerified": 0
+    },
+    {
+      "code": "GARE",
+      "level": 2,
+      "priorActions": 11,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 9,
+      "forecasts": 9,
+      "verified": 0,
+      "selective": 0,
+      "selectiveUse": 0,
+      "uses": 0,
+      "revisions": 0,
+      "revisedVerified": 0,
+      "priorForecasts": 9,
+      "priorVerified": 0
+    },
+    {
+      "code": "GARE",
+      "level": 3,
+      "priorActions": 13,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 23,
+      "forecasts": 23,
+      "verified": 0,
+      "selective": 0,
+      "selectiveUse": 0,
+      "uses": 0,
+      "revisions": 0,
+      "revisedVerified": 0,
+      "priorForecasts": 6,
+      "priorVerified": 0
+    },
+    {
+      "code": "KEYD",
+      "level": 2,
+      "priorActions": 35,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 47,
+      "forecasts": 50,
+      "verified": 21,
+      "selective": 21,
+      "selectiveUse": 3,
+      "uses": 3,
+      "revisions": 3,
+      "revisedVerified": 0,
+      "priorForecasts": 48,
+      "priorVerified": 21
+    },
+    {
+      "code": "KEYD",
+      "level": 3,
+      "priorActions": 60,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 63,
+      "forecasts": 67,
+      "verified": 22,
+      "selective": 22,
+      "selectiveUse": 13,
+      "uses": 13,
+      "revisions": 4,
+      "revisedVerified": 0,
+      "priorForecasts": 67,
+      "priorVerified": 22
+    },
+    {
+      "code": "SWCH",
+      "level": 2,
+      "priorActions": 25,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 81,
+      "forecasts": 89,
+      "verified": 6,
+      "selective": 4,
+      "selectiveUse": 2,
+      "uses": 2,
+      "revisions": 9,
+      "revisedVerified": 2,
+      "priorForecasts": 26,
+      "priorVerified": 2
+    },
+    {
+      "code": "SWCH",
+      "level": 3,
+      "priorActions": 25,
+      "matchedRevision": true,
+      "verifiedAfterReturn": 0,
+      "roots": 53,
+      "forecasts": 47,
+      "verified": 4,
+      "selective": 4,
+      "selectiveUse": 2,
+      "uses": 2,
+      "revisions": 2,
+      "revisedVerified": 2,
+      "priorForecasts": 17,
+      "priorVerified": 2
+    }
+  ],
+  "officialSourceUses": {
+    "freeze32-KEYD2-warm": {
+      "won": true,
+      "actions": 62,
+      "state": "NOT_FINISHED",
+      "reason": "target_levels_completed",
+      "initial": "c644c821b6563b7c6aeabf1c2899f9c53cafcec28dbd01f48b0e314950fe5b1b",
+      "trajectory": "f0b7b612984c6ec521451f94689239f6c16751fa781c80fde8be039461b026d4",
+      "prior": 35,
+      "forecasts": {
+        "proposals": 9,
+        "claims": 4,
+        "verified": 3,
+        "selective": 3,
+        "playedB": 2,
+        "verifiedUse": 3,
+        "selectiveUse": 3,
+        "playedUse": 2,
+        "successfulRevisions": 0
+      }
+    },
+    "freeze33-KEYD2-warm": {
+      "won": false,
+      "actions": 90,
+      "state": "NOT_FINISHED",
+      "reason": "session_action_budget",
+      "initial": "c644c821b6563b7c6aeabf1c2899f9c53cafcec28dbd01f48b0e314950fe5b1b",
+      "trajectory": "d413b73fa912cc60021d9ce4e2e698ad6ae42bc99a47e6061b643115775f57a3",
+      "prior": 35,
+      "forecasts": {
+        "proposals": 0,
+        "claims": 0,
+        "verified": 0,
+        "selective": 0,
+        "playedB": 0,
+        "verifiedUse": 0,
+        "selectiveUse": 0,
+        "playedUse": 0,
+        "successfulRevisions": 0
+      }
+    },
+    "freeze32-SWCH2-warm": {
+      "won": false,
+      "actions": 90,
+      "state": "NOT_FINISHED",
+      "reason": "session_action_budget",
+      "initial": "449bc3cd63cc209a45f26142f803b1ccc2e0e41967798641c5fdf0bb3b0f022d",
+      "trajectory": "93a997dca099fc55cea1c96de1c4b7f39e41fd100e1ebfe4f5828bf601b7b99c",
+      "prior": 25,
+      "forecasts": {
+        "proposals": 16,
+        "claims": 14,
+        "verified": 2,
+        "selective": 0,
+        "playedB": 1,
+        "verifiedUse": 0,
+        "selectiveUse": 0,
+        "playedUse": 0,
+        "successfulRevisions": 0
+      }
+    },
+    "freeze33-SWCH2-warm": {
+      "won": false,
+      "actions": 90,
+      "state": "NOT_FINISHED",
+      "reason": "session_action_budget",
+      "initial": "449bc3cd63cc209a45f26142f803b1ccc2e0e41967798641c5fdf0bb3b0f022d",
+      "trajectory": "ba79da3ff234730d7b0e16e93d67fdde1c9b5111bf6e0c877633e1fcddc30e1a",
+      "prior": 25,
+      "forecasts": {
+        "proposals": 0,
+        "claims": 0,
+        "verified": 0,
+        "selective": 0,
+        "playedB": 0,
+        "verifiedUse": 0,
+        "selectiveUse": 0,
+        "playedUse": 0,
+        "successfulRevisions": 0
+      }
+    },
+    "native32-VOIS1-cold": {
+      "won": false,
+      "actions": 60,
+      "state": "NOT_FINISHED",
+      "reason": "session_action_budget",
+      "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+      "trajectory": "76a9144d30966d6e8d9e3a51cefee4982945858a7c119dfd27bf7ee492b35f46",
+      "prior": 0,
+      "forecasts": {
+        "proposals": 25,
+        "claims": 14,
+        "verified": 13,
+        "selective": 13,
+        "playedB": 6,
+        "verifiedUse": 11,
+        "selectiveUse": 11,
+        "playedUse": 5,
+        "successfulRevisions": 0
+      }
+    },
+    "check32long-VOIS1-cold": {
+      "won": true,
+      "actions": 103,
+      "state": "NOT_FINISHED",
+      "reason": "target_levels_completed",
+      "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+      "trajectory": "f86bd75787caacd2d227fec07e81157dc9a8422d25695266e04389d0b0a9ac61",
+      "prior": 0
+    },
+    "guard33b-VOIS1-cold": {
+      "won": true,
+      "actions": 57,
+      "state": "NOT_FINISHED",
+      "reason": "target_levels_completed",
+      "initial": "d1bacc3cc20afcc86908da990af89337b1f06efe6851c9a1d234ce54afbede01",
+      "trajectory": "dd6d0fc1bc1bd1997f9775428b72d1266647d029a91e1c36d69a2ba6ebf59aa4",
+      "prior": 0
+    },
+    "base32-KEYD2-warm": {
+      "won": false,
+      "actions": 90,
+      "state": "NOT_FINISHED",
+      "reason": "session_action_budget",
+      "initial": "c644c821b6563b7c6aeabf1c2899f9c53cafcec28dbd01f48b0e314950fe5b1b",
+      "trajectory": "d413b73fa912cc60021d9ce4e2e698ad6ae42bc99a47e6061b643115775f57a3",
+      "prior": 35
+    },
+    "base32-SWCH2-warm": {
+      "won": false,
+      "actions": 90,
+      "state": "NOT_FINISHED",
+      "reason": "session_action_budget",
+      "initial": "449bc3cd63cc209a45f26142f803b1ccc2e0e41967798641c5fdf0bb3b0f022d",
+      "trajectory": "ba79da3ff234730d7b0e16e93d67fdde1c9b5111bf6e0c877633e1fcddc30e1a",
+      "prior": 25
+    }
+  },
+  "useAgainstOfficialScore": {
+    "code": "KEYD",
+    "level": 2,
+    "prior": 35,
+    "actions": 62,
+    "results": [
+      {
+        "i": 30,
+        "from": "932aa233e067d624",
+        "planned": "ACTION3",
+        "site": [
+          16,
+          43
+        ],
+        "outcomes": [
+          {
+            "op": null,
+            "score": 1,
+            "issued": 32,
+            "final": "fcc9b0ae55245ea7"
+          },
+          {
+            "op": "ACTION3",
+            "score": 1,
+            "issued": 33,
+            "final": "fcc9b0ae55245ea7"
+          },
+          {
+            "op": "ACTION1",
+            "score": 1,
+            "issued": 33,
+            "final": "fcc9b0ae55245ea7"
+          },
+          {
+            "op": "ACTION2",
+            "score": 1,
+            "issued": 33,
+            "final": "fcc9b0ae55245ea7"
+          },
+          {
+            "op": "ACTION4",
+            "score": 1,
+            "issued": 33,
+            "final": "fcc9b0ae55245ea7"
+          },
+          {
+            "op": "ACTION5",
+            "score": 1,
+            "issued": 33,
+            "final": "fcc9b0ae55245ea7"
+          }
+        ]
+      },
+      {
+        "i": 57,
+        "from": "0e7ae2cd8a29220f",
+        "planned": "ACTION4",
+        "site": [
+          36,
+          33
+        ],
+        "outcomes": [
+          {
+            "op": null,
+            "score": 0,
+            "issued": 5,
+            "final": "3624685d8c8d5803"
+          },
+          {
+            "op": "ACTION4",
+            "score": 1,
+            "issued": 6,
+            "final": "fcc9b0ae55245ea7"
+          },
+          {
+            "op": "ACTION1",
+            "score": 0,
+            "issued": 6,
+            "final": "8a8b448b78f9ad52"
+          },
+          {
+            "op": "ACTION2",
+            "score": 0,
+            "issued": 6,
+            "final": "1ec8df8896b26ff8"
+          },
+          {
+            "op": "ACTION3",
+            "score": 0,
+            "issued": 6,
+            "final": "6e115f02143bc668"
+          },
+          {
+            "op": "ACTION5",
+            "score": 0,
+            "issued": 6,
+            "final": "68939fa2ac879a6e"
+          }
+        ]
+      }
+    ]
+  }
+}

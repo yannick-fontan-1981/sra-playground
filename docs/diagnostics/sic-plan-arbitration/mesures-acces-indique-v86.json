@@ -1,0 +1,561 @@
+{
+  "referenceCode": "0b50430c8",
+  "candidateCode": "e71a5ed66d9a67161b726db3b149bc067f4235c1",
+  "engine": "f0a1ff437",
+  "maxActionsPerLevel": 1200,
+  "depth": 88,
+  "nodes": 1000,
+  "activeTimeMs": 514286,
+  "packs": {
+    "reference": "829f43432d2f2ab391124a39ba7249fd1e0d3ab132e9a79d6b1ba298163d2aa9",
+    "candidate": "b16597edbcf0442563bad57deccfb220551e135f10c4af009e602c31eff35386"
+  },
+  "sameRuntime": {
+    "reference": {
+      "code": "SS07",
+      "entry": 2,
+      "actions": 253,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 253,
+          "reason": "native_game_over"
+        }
+      ],
+      "resets": 0,
+      "digest": "40bd0c955d95402c2fcf723fb674c1f41bb301a7fbe7b7f7699dbaed3fe46ef0"
+    },
+    "candidate": {
+      "code": "SS07",
+      "entry": 2,
+      "actions": 118,
+      "levels": [
+        {
+          "level": 2,
+          "won": true,
+          "actions": 118,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "digest": "dcb746edfc9192fbb7bb061be6b8b5f97bfbd1c395d5a4dd4cf27207cf072b0d"
+    },
+    "commonActionsAndImages": 21,
+    "firstDivergence": {
+      "action": 22,
+      "reference": 3,
+      "candidate": 4,
+      "referenceReason": "untested",
+      "candidateReason": "seek_preparation"
+    },
+    "previouslyFrozenReference": {
+      "commonActionsAndImages": 253,
+      "firstDivergence": null
+    },
+    "candidateCertified": {
+      "code": "SS07",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 118,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "a95db0e031b579c1a20edb83757330799f3710105121cc164db843479f43baf9",
+      "final": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a"
+    },
+    "referenceCertified": {
+      "code": "SS07",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 253,
+          "won": false
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "f16ec71fd47055b73de570e35a7c884c3a69a0ebcadd02d90f061b0c5a2095ad",
+      "final": "42fbdf41188edb9dd665564d3800be45f321eae2a9013982ce899cb0a7a76b5e"
+    }
+  },
+  "iterations": [
+    {
+      "version": 83,
+      "code": "SS07",
+      "entry": 2,
+      "actions": 447,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 447,
+          "reason": "native_game_over"
+        }
+      ],
+      "resets": 0,
+      "digest": "6f3aedd65db3e43cc26b8a9ec2549d10804380139c0b7ab8a990a6c9460e53f4",
+      "comparisonToWinner": {
+        "commonActionsAndImages": 64,
+        "firstDivergence": {
+          "action": 65,
+          "reference": 3,
+          "candidate": 1,
+          "referenceReason": "seek_preparation",
+          "candidateReason": "use_mobile_indication"
+        }
+      }
+    },
+    {
+      "version": 84,
+      "code": "SS07",
+      "entry": 2,
+      "actions": 447,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 447,
+          "reason": "native_game_over"
+        }
+      ],
+      "resets": 0,
+      "digest": "6f3aedd65db3e43cc26b8a9ec2549d10804380139c0b7ab8a990a6c9460e53f4",
+      "comparisonToWinner": {
+        "commonActionsAndImages": 64,
+        "firstDivergence": {
+          "action": 65,
+          "reference": 3,
+          "candidate": 1,
+          "referenceReason": "seek_preparation",
+          "candidateReason": "use_mobile_indication"
+        }
+      }
+    },
+    {
+      "version": 85,
+      "code": "SS07",
+      "entry": 2,
+      "actions": 447,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 447,
+          "reason": "native_game_over"
+        }
+      ],
+      "resets": 0,
+      "digest": "6f3aedd65db3e43cc26b8a9ec2549d10804380139c0b7ab8a990a6c9460e53f4",
+      "comparisonToWinner": {
+        "commonActionsAndImages": 64,
+        "firstDivergence": {
+          "action": 65,
+          "reference": 3,
+          "candidate": 1,
+          "referenceReason": "seek_preparation",
+          "candidateReason": "use_mobile_indication"
+        }
+      }
+    }
+  ],
+  "invalidAttempt": {
+    "version": 82,
+    "error": "Error: Native state requires explicit JSON values Start a new reasoning session to continue."
+  },
+  "publicAudit": {
+    "game": "SS07",
+    "level": 2,
+    "official": true,
+    "actions": 118,
+    "selection": 17,
+    "guarded": 101,
+    "firstMobileAction": 65,
+    "plannedActions": 54,
+    "predictedPosesObserved": 53,
+    "reads": [
+      71,
+      74,
+      77,
+      92,
+      95,
+      98,
+      109,
+      112
+    ],
+    "borrowed": [
+      115
+    ],
+    "initialCompleted": 0,
+    "finalCompleted": 1
+  },
+  "experimentFromDecision65": {
+    "forecast": 54,
+    "nodes": 283,
+    "predictedReads": 8,
+    "usedPartner": true,
+    "moves": 54,
+    "reads": 8,
+    "divergence": null,
+    "official": true,
+    "state": "NOT_FINISHED"
+  },
+  "controls": [
+    {
+      "reserved": true,
+      "code": "SS09",
+      "entry": 2,
+      "actions": 279,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 279,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "resets": 0,
+      "digest": "39557e60e2e1ab6d2b20418de4cd73afe20116a90ee4750692b3db5a4554b52f",
+      "referenceActions": 254,
+      "commonActionsAndImages": 254,
+      "firstDivergence": null,
+      "verifications": 0,
+      "placementOffers": 0,
+      "preparatoryContact": 0,
+      "accessOffers": 0,
+      "scoreReplayed": true
+    },
+    {
+      "reserved": false,
+      "code": "SS06",
+      "entry": 2,
+      "actions": 369,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 369,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "resets": 0,
+      "digest": "c559a1f24adc5854f640b7d396c779c8d8ed7f2e5e62bcd7d949cdad20bd76d4",
+      "referenceActions": 296,
+      "commonActionsAndImages": 296,
+      "firstDivergence": null,
+      "verifications": 1,
+      "placementOffers": 0,
+      "preparatoryContact": 0,
+      "accessOffers": 0,
+      "scoreReplayed": true
+    },
+    {
+      "reserved": false,
+      "code": "SS08",
+      "entry": 2,
+      "actions": 340,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 340,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "resets": 0,
+      "digest": "3e17051e202b9eeb3669865bd410cbe4b1187deb9f054f8052ce0a3be310d752",
+      "referenceActions": 262,
+      "commonActionsAndImages": 262,
+      "firstDivergence": null,
+      "verifications": 2,
+      "placementOffers": 10,
+      "preparatoryContact": 0,
+      "accessOffers": 0,
+      "scoreReplayed": true
+    }
+  ],
+  "sourceEvidence": {
+    "episodes": 108,
+    "indicatedVisited": {
+      "confirmed": 7,
+      "tests": 80
+    },
+    "indicatedUnvisited": {
+      "confirmed": 1,
+      "tests": 251
+    }
+  },
+  "checks": {
+    "tests": 501,
+    "passed": 501,
+    "typecheck": "passed"
+  },
+  "campaigns": [
+    {
+      "code": "SS01",
+      "entry": 1,
+      "actions": 68,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 36,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 32,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "digest": "b6539f7968e9709381d47ed942c601e742603cab1e9ac25634dbba10372960c9",
+      "commonActionsAndImages": 68,
+      "firstDivergence": null,
+      "replayed": true
+    },
+    {
+      "code": "SS02",
+      "entry": 1,
+      "actions": 86,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 40,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 46,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "digest": "598a6ea59ce6a825028701cc94454615e88540bb3d2c2b7e98f4779d76fc9417",
+      "commonActionsAndImages": 86,
+      "firstDivergence": null,
+      "replayed": true
+    },
+    {
+      "code": "SS03",
+      "entry": 1,
+      "actions": 144,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 47,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 97,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "digest": "a98be4607013cf0428643fcef9b18b92df4f63e1cd71929267cc3c0b16bee3c0",
+      "commonActionsAndImages": 144,
+      "firstDivergence": null,
+      "replayed": true
+    },
+    {
+      "code": "SS04",
+      "entry": 1,
+      "actions": 192,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 49,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 143,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 0,
+      "digest": "85c47f298b25064f3134a1cb5885e48011bcad0502b12abb18069c99b6c4f216",
+      "commonActionsAndImages": 192,
+      "firstDivergence": null,
+      "replayed": true
+    },
+    {
+      "code": "SS05",
+      "entry": 1,
+      "actions": 117,
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 44,
+          "reason": null
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 73,
+          "reason": "target_levels_completed"
+        }
+      ],
+      "resets": 1,
+      "digest": "74a4b3f03af64b1deb20b9de5b39a1225613b288dd7522fc28d4d0bbe50d5306",
+      "commonActionsAndImages": 117,
+      "firstDivergence": null,
+      "replayed": true
+    }
+  ],
+  "sourceLevel1": {
+    "played": 100,
+    "won": 100,
+    "replayed": 100,
+    "identicalToV81": 100,
+    "cap": 60
+  },
+  "upperSources": [
+    {
+      "code": "CWSE",
+      "level": 2,
+      "actions": 59,
+      "won": true,
+      "cap": 120,
+      "identicalToV76": true
+    },
+    {
+      "code": "KLOT",
+      "level": 4,
+      "actions": 37,
+      "won": true,
+      "cap": 100,
+      "identicalToV76": true
+    }
+  ],
+  "ss06MatchedPreparations": {
+    "code": "SS06",
+    "level": 2,
+    "commonPrefix": 1,
+    "attempted": 37,
+    "confirmed": 37,
+    "suffixes": 195,
+    "maxSuffix": 5,
+    "equalLengthPairs": 250,
+    "differentPairs": 75,
+    "byLength": {
+      "3": 75,
+      "4": 140
+    },
+    "outcomes": {
+      "different_official_state": 75,
+      "different_position": 140
+    },
+    "scores": 0,
+    "unresolved": 0,
+    "examples": {
+      "different_official_state": {
+        "preparations": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "suffix": [
+          1,
+          1,
+          5
+        ],
+        "results": [
+          "GAME_OVER",
+          "18,37"
+        ],
+        "beforeLast": [
+          {
+            "second": [
+              18,
+              37
+            ],
+            "first": [
+              78,
+              84
+            ],
+            "state": "NOT_FINISHED"
+          },
+          {
+            "second": [
+              18,
+              37
+            ],
+            "first": [
+              78,
+              96
+            ],
+            "state": "NOT_FINISHED"
+          }
+        ]
+      },
+      "different_position": {
+        "preparations": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "suffix": [
+          1,
+          1,
+          4,
+          4
+        ],
+        "results": [
+          "29,36",
+          "23,36"
+        ],
+        "beforeLast": [
+          {
+            "second": [
+              23,
+              36
+            ],
+            "first": [
+              78,
+              84
+            ],
+            "state": "NOT_FINISHED"
+          },
+          {
+            "second": [
+              23,
+              36
+            ],
+            "first": [
+              78,
+              96
+            ],
+            "state": "NOT_FINISHED"
+          }
+        ]
+      }
+    }
+  }
+}

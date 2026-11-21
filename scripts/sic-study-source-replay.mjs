@@ -12,9 +12,19 @@ export function sourceReplay(engine, programs, run) {
     });
   }
   function openEntry() {
-    let b = engine.dispatch({ type: 'load', code: run.code, level: run.sourcePrefixActions ? 1 : run.start });
+    const lessonEnd=run.lessonEndLevel??run.start;
+    let b = engine.dispatch({ type: 'load', code: run.code, level: run.publicLesson ? lessonEnd - 1 : run.sourcePrefixActions ? 1 : run.start });
     let entry = 0;
-    if (run.sourcePrefixActions) {
+    if (run.observedPriorLevelActions) {
+      if (!run.publicLesson || run.publicLesson.length !== run.observedPriorLevelActions || run.sourcePrefixActions) throw Error('Missing authenticated public lesson');
+      for (const c of run.publicLesson) {
+        if (b.level !== lessonEnd - 1 || hash(b).slice(0,16) !== c.from) throw Error('Divergent lesson origin');
+        b = act(op({a:c.id,data:c.data}));
+        if (hash(b).slice(0,16) !== c.to) throw Error('Divergent lesson transition');
+      }
+      if(b.level!==lessonEnd)throw Error('Lesson did not reach its authenticated boundary');
+      if(lessonEnd!==run.start)b=engine.dispatch({type:'selectLevel',level:run.start});
+    } else if (run.sourcePrefixActions) {
       for (let level = 1; level < run.start; level++) {
         const path =
           level === 1

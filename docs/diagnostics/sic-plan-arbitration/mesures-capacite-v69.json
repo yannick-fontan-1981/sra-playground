@@ -1,0 +1,471 @@
+{
+  "engine": "f0a1ff437",
+  "frozen": {
+    "v66": "6f49591a80c41b8e5d288794071363091b90e0cb",
+    "v67": "f5b3a9fad875ac7cc1e4d3ea662602316d897fa3",
+    "v68": "de9caf58f73bb5c64dd502df78bdae00c845f8e5",
+    "v69": "21650a79d4d613d656612f303cd81b86eb82ed4e"
+  },
+  "declarativePacks": {
+    "active": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+    "shadow": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31"
+  },
+  "limits": {
+    "maxDepth": 88,
+    "maxNodes": 1000,
+    "actionsPerLevel": 1200,
+    "sameActiveTimeBudget": true,
+    "parallelWorkers": 4,
+    "activeMillisecondsPerLevel": 514286
+  },
+  "firstComparedToV66Active": {
+    "campaign": 67,
+    "levelStep": 23,
+    "frame": "cac9bb427cbf7dbf",
+    "activeCommand": 3,
+    "comparisonCommand": 4
+  },
+  "firstComparedToV69Shadow": {
+    "campaign": 54,
+    "levelStep": 10,
+    "frame": "9143eaeab797a317",
+    "activeCommand": 4,
+    "comparisonCommand": 1
+  },
+  "firstPlan": {
+    "remaining": 51,
+    "desired": {
+      "initial": [
+        -3,
+        4
+      ],
+      "wanted": [
+        -2,
+        4
+      ],
+      "piece": 321,
+      "blockedAt": 320,
+      "step": 1,
+      "cause": "limit_of_range"
+    },
+    "predictions": 448,
+    "purpose": "reach_scoring_contact",
+    "objective": {
+      "rigidRoute": false,
+      "alternatives": 30,
+      "incompatible": [
+        [
+          1,
+          0
+        ],
+        [
+          -3,
+          4
+        ],
+        [
+          -2,
+          4
+        ]
+      ],
+      "targetOffsets": [
+        [
+          1,
+          -2
+        ],
+        [
+          8,
+          -1
+        ],
+        [
+          8,
+          0
+        ]
+      ]
+    },
+    "law": {
+      "metric": "square",
+      "radius": 2,
+      "disagreements": 0,
+      "evidence": 7
+    }
+  },
+  "nativeVerification": {
+    "active": [
+      {
+        "code": "SS01",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 36,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 32,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+        "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a",
+        "relativeDecisions": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS02",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 506,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "6046c670aa27039bc79d75f66d5433ddd5773a113167e684c12e6b2721b0e56a",
+        "final": "07f968cdad3a9ee49f9ae0ba2b681c750533f4ba644bd5c67699d19ec2c76317",
+        "relativeDecisions": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS03",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 97,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa",
+        "relativeDecisions": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS04",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 143,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+        "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f",
+        "relativeDecisions": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS05",
+        "start": 2,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 368,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "20220b0f32e09d9e2565220a8675434fa030b8dc4e38072977457bea52c6e8e4",
+        "final": "f777d6deda03940a7e5ae48f46485aa174cee7bb07dbc7de04a11336c4087054",
+        "relativeDecisions": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS05",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 73,
+            "won": true
+          }
+        ],
+        "resets": [
+          12
+        ],
+        "tapeDigest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+        "final": "bcc85ed983fd11ebe9ac9d5bc458cbfd238e5e00e1665606d014562c5b0555cb",
+        "relativeDecisions": 51,
+        "stop": "target_levels_completed"
+      }
+    ],
+    "shadow": [
+      {
+        "code": "SS02",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 519,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "691df545d06f8360fb157974f551646e3c006dbb36107ef8fe19cdf6eaa1f409",
+        "final": "50450b76b8398783a521f0e2601ef11611cd5ce015e089e5de5e99fd26a4b882",
+        "relativeDecisions": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS05",
+        "start": 1,
+        "finish": 2,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 351,
+            "won": false
+          }
+        ],
+        "resets": [
+          12
+        ],
+        "tapeDigest": "5494bee208d738adf97cde89b436b25fb3b965597b1b0ae5a421e89d67e562fe",
+        "final": "41580e5e1ceff2a5bcfc570115ed24e540f2cb048722d31899554d03d9e410fb",
+        "relativeDecisions": 0,
+        "stop": "level_active_time_budget"
+      }
+    ]
+  },
+  "paired": {
+    "code": "SS05",
+    "level": 2,
+    "firstPlannedStep": 23,
+    "projectedSteps": 51,
+    "matchedBeforeScore": 50,
+    "committed": 50,
+    "score": true,
+    "heldInRange": 27,
+    "distinctStepsWithTerrainArrest": 21,
+    "comparisons": 91,
+    "sameActor": 1,
+    "pair": {
+      "origin": "2bfa8b5d70589759",
+      "stepL2": 31,
+      "length": 2,
+      "positiveEnd": "04fb68b3123023ca",
+      "alternateEnd": "ee727dc4c355c3ac",
+      "firstActorDifference": {
+        "horizon": 7,
+        "sameStartActor": true,
+        "destinationOccupiedBefore": {
+          "positive": false,
+          "alternative": true
+        },
+        "plannedDisplacement": [
+          1,
+          0
+        ],
+        "alternateDisplacement": [
+          0,
+          0
+        ]
+      },
+      "sameActor": true,
+      "positiveVectors": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "alternateVectors": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          3,
+          4
+        ]
+      ],
+      "heldVectorBefore": [
+        1,
+        1
+      ],
+      "heldVectorAfter": [
+        0,
+        1
+      ],
+      "independentWallWitness": "c90aa06f242a412c",
+      "commonSuffixLength": 42,
+      "positiveScore": true,
+      "alternateScore": false
+    }
+  },
+  "graph": [
+    {
+      "members": 3,
+      "arrangements": 524,
+      "actorSites": 30,
+      "ambiguousSubjectControls": 15,
+      "observedTransitions": 2065,
+      "ambiguousJointControls": 0,
+      "law": [
+        "square",
+        2
+      ],
+      "train": [
+        4014,
+        4014
+      ],
+      "heldOut": [
+        2597,
+        2597
+      ],
+      "globalHeldOut": [
+        1689,
+        2597
+      ],
+      "goalMatches": true,
+      "search": {
+        "unrestricted": {
+          "depth": 59,
+          "visited": 1661,
+          "unexpanded": 27
+        },
+        "rigid": {
+          "depth": null,
+          "visited": 2,
+          "unexpanded": 0
+        },
+        "without_wall_arrest": {
+          "depth": null,
+          "visited": 44,
+          "unexpanded": 0
+        },
+        "without_terrain_arrest": {
+          "depth": null,
+          "visited": 44,
+          "unexpanded": 0
+        }
+      }
+    }
+  ],
+  "heldOutGame": "SS02",
+  "sourcesUpper": [
+    {
+      "code": "CWSE",
+      "levels": [
+        {
+          "level": 2,
+          "won": true,
+          "actions": 59
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1",
+      "end": "aadf3039f6845922196730fe91fd4e5cee4a28e1e0188eb9568a889ba78ae2d6"
+    },
+    {
+      "code": "KLOT",
+      "levels": [
+        {
+          "level": 4,
+          "won": true,
+          "actions": 37
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c",
+      "end": "e2c8ddc1ddc2432dff39b9f7d053d5ee06ce41b87195ec7cb745544199405d16"
+    },
+    {
+      "code": "GABA",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 49
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 50
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "640938ef0cbcf6e905f4b57182c0db704cab2b77ebb101c0bb9d224427f8e744",
+      "end": "5afd237cf3699637b01810a6d334fd6e8ff377008f2058818a45acb8499315e0"
+    }
+  ],
+  "activeUnitTests": {
+    "passed": 484,
+    "failed": 0
+  },
+  "sources100": {
+    "verified": 100,
+    "wins": 100,
+    "unchangedFromV66": 100,
+    "differingGames": [],
+    "digestOfSortedGameTrajectories": "baf1166510c4798f28aee8c0fdc78175694eebc37b0890f2a6c11aade9ada442"
+  },
+  "v67Retest": {
+    "levels": [
+      {
+        "level": 1,
+        "won": true,
+        "actions": 44
+      },
+      {
+        "level": 2,
+        "won": false,
+        "actions": 713
+      }
+    ]
+  }
+}

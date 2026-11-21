@@ -7,9 +7,11 @@ import { motionIntoFootprint } from './observed-translation.ts';
 import { chooseReception, receptionMotionModule } from './reception-motion-card.ts';
 import { compileStrategyGraph, observedMechanicsGroup, resolveStrategyGraph } from './strategy-agenda.ts';
 import { resolveNavigationPrimitives } from './navigation-primitives.ts';
-import { exposureBearing, exposureMatches, exposureMoves, exposurePoint, exposureRules, finishedExposure,
+import { exposureBearing, exposureLayout, exposureMatches, exposureMoves, exposurePoint, exposureRules, finishedExposure,
   planExposure, readExposureBoard, readTrackedExposure,
   type CouplingColors, type ExposureBoard, type ExposureDial, type ExposureScene, type ExposureSite, type ExposureState } from './coupled-exposure.ts';
+import { observeExposureConditions, type ExposureObservations } from './observed-exposure-conditions.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const directionalReceptionId = 'sic_directional_reception';
 export const learnDirectionalReceptionId = 'sic_learn_reception_from_motion';
@@ -43,7 +45,7 @@ type PhotoWitness = { epoch: number; shadow: number; lit: number; ref: string };
 type CouplingWitness = CouplingColors & { epoch: number; ref: string };
 type ExposureMemory = { epoch: number; board: ExposureBoard; scene: Scene; dialInk: number; current: ExposureState;
   route: number[]; refs: string[]; lastRef: string; stopped: boolean };
-type ExposureProposal = NativeProposal & { exposure: ExposureMemory; expected: ExposureState; needId: string };
+type ExposureProposal = NativeProposal & { exposure: ExposureMemory; forecasts: ExposureState[]; needId: string };
 const isExposure = (proposal: Proposal | ExposureProposal): proposal is ExposureProposal => 'exposure' in proposal;
 const hints: Readonly<Record<string, NativePoint>> = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] };
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
@@ -127,8 +129,19 @@ function matchesAim(actual: Scene | null, planned: Scene, dial: Dial): boolean {
 }
 
 function observeExposure(rows: NativeRows, memory: ExposureMemory, expected: ExposureState): boolean {
+  if (memory.board.colors.linked === null) {
+    const visible = measureExposedReception(rows) as Scene | null;
+    if (visible?.layout === memory.scene.layout && exposureMatches(memory.board, expected, visible)) return true;
+  }
   const next = readTrackedExposure(rows, memory.scene, memory.board, memory.dialInk);
   return !!next && exposureMatches(memory.board, expected, next);
+}
+
+function confirmedNextLayout(rows: NativeRows, frames: readonly NativeRows[], memory: ExposureMemory, expected: ExposureState) {
+  if (!finishedExposure(memory.board, expected)) return null;
+  const next = measureExposedReception(rows) as Scene | null;
+  if (!next || next.layout === memory.scene.layout || next.pitch !== memory.scene.pitch) return null;
+  return frames.some(frame => observeExposure(frame, memory, expected)) ? next : null;
 }
 
 export function createSicDirectionalReception(family = directionalReceptionId, transferObservedReception = false): NativeFamily<Proposal | ExposureProposal> {
@@ -138,19 +151,35 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
   let photo: PhotoWitness | null = null;
   let coupling: CouplingWitness | null = null;
   let exposure: ExposureMemory | null = null;
+  let observations: ExposureObservations | null = null;
+  function learnConditions(before: NativeObservation, after: NativeObservation, input: NativeCommand, first: NativeRows, second: NativeRows) {
+    if (!learns || before.level_epoch !== after.level_epoch || before.state !== after.state ||
+        before.levels_completed !== after.levels_completed) return;
+    const a = measureExposedReception(first) as Scene | null, b = a && measureExposedReception(second) as Scene | null;
+    if (a && b) observations = observeExposureConditions(observations, before.level_epoch, a, b, input, after.observation_ref);
+  }
   let choose: NativeProgramHandle | undefined;
   async function offerExposure(observation: NativeObservation, rows: NativeRows, remaining: number,
     execution?: NativeExecution): Promise<ExposureProposal | null> {
     const { level_epoch: epoch, observation_ref: ref, available_action_refs: available } = observation;
-    if (learns || photo?.epoch !== epoch - 1 || known?.completed !== observation.levels_completed || remaining < 1
-      || !available.includes('ACTION6')) return null;
+    if (remaining < 1 || !available.includes('ACTION6')) return null;
+    const fitted = learns && observations?.epoch === epoch && !observations.rejected ? observations.calibrated : undefined;
+    const inherited = !learns && photo?.epoch === epoch - 1 && known?.completed === observation.levels_completed;
+    if (!fitted && !inherited) return null;
+    const directions = fitted ? observations!.directions : known!.directions;
     let memory = exposure?.epoch === epoch ? exposure : null;
-    if (memory && (memory.stopped || memory.lastRef !== ref)) return null;
-    const retained = coupling?.epoch === epoch - 1 ? coupling : null;
+    if (memory?.stopped) return null;
+    if (memory && memory.lastRef !== ref) {
+      if (!fitted) return null;
+      memory = null;
+    }
+    const retained = inherited && coupling?.epoch === epoch - 1 ? coupling : null;
     if (!memory) {
-      const scene = (measureExposedReception(rows) ?? (retained ? measureRetainedExposedReception(rows, known.pitch) : null)) as Scene | null;
-      if (!scene || scene.size[0] * scene.size[1] > (retained ? 196 : 144) || Object.values(known.directions).length < 1) return null;
-      const measured = readExposureBoard(scene, { shadow: photo.shadow, lit: photo.lit }, retained ?? undefined);
+      const scene = (measureExposedReception(rows) ?? (retained ? measureRetainedExposedReception(rows, known!.pitch) : null)) as Scene | null;
+      if (!scene || scene.size[0] * scene.size[1] > (retained ? 196 : 144) || !Object.keys(directions).length ||
+          fitted && observations!.layout !== scene.layout) return null;
+      const measured = fitted ? exposureLayout(scene, {shadow: fitted.shadow, lit: fitted.lit, linked: null, released: null})
+        : readExposureBoard(scene, { shadow: photo!.shadow, lit: photo!.lit }, retained ?? undefined);
       const active = scene.dial.find(d => d.active);
       if (!measured || !active) return null;
       const dialInk = rows[active.point[1]]?.[active.point[0]];
@@ -162,7 +191,7 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
     if (!observeExposure(rows, memory, current)) return null;
     const commands = new Map<number, NativeCommand>();
     for (const action_ref of available) {
-      const delta = known.directions[action_ref] ?? hints[action_ref];
+      const delta = directions[action_ref] ?? (inherited ? hints[action_ref] : undefined);
       const index = delta ? exposureMoves.findIndex(move => same(move, delta)) : -1;
       if (index >= 0) commands.set(index, { action_ref, data: {} });
     }
@@ -175,9 +204,10 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
       remaining, execution);
     const step = route[0], action = step === undefined ? null : commands.get(step);
     if (step === undefined || !action) return null;
-    const expected = exposureRules(board).project(current, step), movement = step < 4;
+    const rules = exposureRules(board);
+    const expected = rules.project(current, step), movement = step < 4;
     const evidence: [string, ...string[]] = [ref,
-      ...new Set([photo.ref, known.ref, ...(retained ? [retained.ref] : []), ...memory.refs].filter(value => value !== ref))];
+      ...new Set([...(fitted ? fitted.refs : [photo!.ref, known!.ref]), ...(retained ? [retained.ref] : []), ...memory.refs].filter(value => value !== ref))];
     const mode = execution?.reasoningMode ?? 'solving', offer = { input: action.action_ref, expected: exposurePoint(expected.actor, board.width), evidence };
     const navigation = resolveNavigationPrimitives({ mode, evidence, probe: null, access: movement ? offer : null, interaction: movement ? null : offer });
     if (!navigation.selected) return null;
@@ -191,15 +221,38 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
           : !movement ? 'Change the beam or let its measured effect move a piece'
             : 'Move along the route and verify the cursor, the pieces and the occupied receivers';
     const point = action.action_ref === 'ACTION6' ? [Number(action.data.x), Number(action.data.y)] as NativePoint : null;
-    const binding = point && await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: situation, evidence });
-    if (point && !binding) return null;
+    const actions: NativeCommand[] = [], steps: NativeRecord[] = [], forecasts: ExposureState[] = [];
+    const inactiveInk = new Set(scene.dial.filter(d => exposureBearing(d.vector) !== current.facing)
+      .map(d => rows[d.point[1]]?.[d.point[0]]));
+    let prior = current;
+    for (const operation of route.slice(0, fitted ? Math.min(remaining, maximumCommittedActions) : 1)) {
+      const command = commands.get(operation);
+      if (!command) break;
+      let binding;
+      if (command.action_ref === 'ACTION6') {
+        const locus: NativePoint = [command.data.x!, command.data.y!];
+        binding = await ObservedInputDomain.makeLocusWitness(observation, rows, locus, { reason: situation, evidence });
+        if (operation - 5 === current.facing && prior.facing !== current.facing) {
+          const [ink] = inactiveInk;
+          if (inactiveInk.size !== 1 || ink === undefined) break;
+          binding = await ObservedInputDomain.projectLocusWitness(binding, ink);
+        } else if (operation - 5 === prior.facing && prior.facing !== current.facing) {
+          binding = await ObservedInputDomain.projectLocusWitness(binding, memory.dialInk);
+        }
+      }
+      const forecast = rules.project(prior, operation);
+      actions.push(command);
+      steps.push({ action: command, expected_after: forecast, ...(binding ? { point_binding: binding } : {}) });
+      forecasts.push(forecast);
+      prior = forecast;
+    }
     const parent = 'G_official_completion';
     const goal = { kind: 'satisfy_receivers_through_coupled_motion_and_exposure', scope: ref.split(':revision:', 1)[0]!,
       subjects: scene.slots.map(slot => slot.pos.join(',')), parentObjective: parent, satisfactionContract: 'official_progress_after_matching_all_receivers' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence }, id = family + ':' + need.id;
-    return { status: 'proposed', kind: family, exposure: { ...memory, route }, expected, needId: need.id, actions: [action],
+    return { status: 'proposed', kind: family, exposure: { ...memory, route }, forecasts, needId: need.id, actions,
       binding: { observation_ref: ref, level_epoch: epoch },
-      steps: [{ action, expected_after: expected, ...(binding ? { point_binding: binding } : {}) }],
+      steps,
       sicSituationCard: { strategy: navigation.selected.id, need: 'Fill every receiver with a piece of the required color',
         situation, evidence, agenda: navigation.entries, mode, triggerCard: navigation.card,
         actor: cellBox(scene, exposurePoint(current.actor, board.width)),
@@ -209,7 +262,7 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
       compositions: [{ id, observed: false, open_question: situation, relations: ['contributes_to:' + parent] }],
       sicLocalDecision: { strategy: navigation.selected.id, objective: { id, label: situation, parent }, need },
       bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: parent, purpose: situation, preconditions: {},
-        preserve_refs: [], evidence, actions: [action], outcome_guard: { path: ['value'], contains: id } } };
+        preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
   }
   return {
     id: family,
@@ -322,6 +375,12 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (index > 0 && isExposure(proposal)) {
+        const prior = proposal.forecasts[index - 1];
+        const admitted = proposal.binding?.level_epoch === observation.level_epoch && !!prior
+          && observeExposure(packet.frame_rows, proposal.exposure, prior);
+        return { admitted, reason: admitted ? 'previous_configuration_confirmed' : 'previous_configuration_changed' };
+      }
       const aims = isExposure(proposal) ? undefined : proposal.aims;
       const aim = aims?.[index], previous = aims?.[index - 1];
       const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
@@ -329,12 +388,16 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
           && matchesAim(measureExposedReception(packet.frame_rows) as Scene | null, aim.scene, previous.choice.dial);
       return { admitted, reason: admitted ? 'directional_reception_bound' : 'directional_reception_changed' };
     },
-    after(proposal, index, before, after, _first, second) {
+    after(proposal, index, before, after, _first, second, frames = []) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true,
         reason: 'official_boundary', sic_need: { id: proposal.needId, status: 'satisfied' } };
       if (isExposure(proposal)) {
-        const matched = observeExposure(second, proposal.exposure, proposal.expected);
-        return { matched, seal_prefix: true, reason: matched ? 'cursor_exposure_and_piece_positions_confirmed' : 'coupled_exposure_prediction_contradicted' };
+        const expected = proposal.forecasts[index]!;
+        const matched = observeExposure(second, proposal.exposure, expected);
+        if (!matched && learns && confirmedNextLayout(second, frames, proposal.exposure, expected))
+          return { matched: true, seal_prefix: true, reason: 'receiver_completed_before_new_layout' };
+        return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
+          reason: matched ? 'cursor_exposure_and_piece_positions_confirmed' : 'coupled_exposure_prediction_contradicted' };
       }
       if (proposal.aims?.[index]) {
         const current = proposal.aims[index]!, next = proposal.aims[index + 1];
@@ -355,8 +418,9 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
     },
     record(before, after, issued, _first, second: NativeRows, proposal, index, frames) {
       if (isExposure(proposal)) {
-        const { exposure: local, expected } = proposal;
-        if (after.levels_completed > before.levels_completed && known && photo && local.refs.length && finishedExposure(local.board, expected)) {
+        const local = proposal.exposure, expected = proposal.forecasts[index]!;
+        if (after.levels_completed > before.levels_completed && known && photo && local.refs.length && finishedExposure(local.board, expected)
+            && local.board.colors.linked !== null && local.board.colors.released !== null) {
           const { linked, released } = local.board.colors;
           coupling = { linked, released, epoch: before.level_epoch, ref: after.observation_ref };
           known = { ...known, completed: after.levels_completed, pitch: local.scene.pitch, ref: after.observation_ref };
@@ -364,11 +428,24 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
         }
         if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
         const matched = observeExposure(second, local, expected);
-        exposure = { ...local, current: matched ? expected : local.current, route: matched ? local.route.slice(1) : [],
-          refs: matched ? [...local.refs.slice(-4), after.observation_ref] : local.refs, stopped: !matched, lastRef: after.observation_ref };
+        if (learns && observations?.calibrated && !matched) {
+          const next = confirmedNextLayout(second, frames, local, expected);
+          if (next) {
+            observations = { ...observations, layout: next.layout, samples: [], calibrated: {
+              ...observations.calibrated, refs: [...observations.calibrated.refs.slice(0, 3), after.observation_ref],
+            } };
+            exposure = null;
+            return { events: [{status: 'receiver_completed_before_new_layout', evidence: [before.observation_ref, after.observation_ref]}] };
+          }
+          observations.rejected = true;
+        }
+        const priorRefs = index > 0 && exposure ? exposure.refs : local.refs;
+        exposure = { ...local, current: matched ? expected : local.current, route: matched ? local.route.slice(index + 1) : [],
+          refs: matched ? [...priorRefs.slice(-4), after.observation_ref] : priorRefs, stopped: !matched, lastRef: after.observation_ref };
         return { events: [] };
       }
       const local = index > 0 ? state ?? proposal.local : proposal.local;
+      learnConditions(before, after, issued, _first, second);
       if (after.levels_completed > before.levels_completed && Object.keys(local.directions).length) {
         known = { completed: after.levels_completed, pitch: proposal.scene.pitch, directions: local.directions, ref: after.observation_ref,
           ...(transferObservedReception ? { measuredAt: local.evidence.at(-1) ?? before.observation_ref } : {}) };
@@ -419,13 +496,17 @@ export function createSicDirectionalReception(family = directionalReceptionId, t
       const status = returned?.layout !== scene.layout ? 'receiver_layout_changed' : colorMatched ? 'receiver_color_match_observed' : 'receiver_return_measured';
       return { events: [{ status, evidence: [before.observation_ref, after.observation_ref] }] };
     },
-    state: () => ({ state, known, photo, exposure, coupling }),
+    observePublicOutcome(before, after, input, first, second) {
+      if (learns && state?.epoch === before.level_epoch) learnConditions(before, after, input, first, second);
+    },
+    state: () => ({ state, known, photo, exposure, coupling, ...(observations ? {observations} : {}) }),
     restore(value: NativeRecord) {
       state = structuredClone(value.state as State | null);
       known = structuredClone((value.known as LearnedControls | undefined) ?? null);
       photo = structuredClone((value.photo ?? null) as PhotoWitness | null);
       exposure = structuredClone((value.exposure ?? null) as ExposureMemory | null);
       coupling = structuredClone((value.coupling ?? null) as CouplingWitness | null);
+      observations = structuredClone((value.observations ?? null) as ExposureObservations | null);
     },
   };
 }

@@ -1,0 +1,29 @@
+# Désirer et vérifier un changement de position relative
+
+Le témoin figé est v66 (`6f49591a8`). Sur SS05 il commence à chercher un repère au neuvième coup du L2. La première commande différente du témoin déclaratif arrive au dixième coup, après le même préfixe de 53 commandes en campagne. Il vérifie 161 mouvements dont le repère reste absent et effectue 26 mouvements de retour. Le L2 échoue en 203 actions pour le pack actif et 191 pour le témoin. Sur SS02, le pack actif choisit six étapes de recherche et les deux configurations échouent en 237 actions. Les 100 trajectoires sources sont préservées. [Résultats et empreintes des rejeux](mesures-exploration-v65-v66.json)
+
+## Ce que le diagnostic de SS05 permet de tester
+
+Sur le graphe du banc, la position du sujet seule couvre 30 cases. En ajoutant la disposition de trois objets suivis, les 1 661 images examinées se réduisent à 524 configurations. Sur les 2 065 couples configuration–direction mesurés, aucune transition mesurée ne conduit à deux dispositions différentes. Un même déplacement depuis la même case du sujet peut cependant être possible ou bloqué suivant les positions des pièces.
+
+Un ajustement rétrospectif sur ce graphe explique les 6 611 transitions directionnelles non terminales dont les deux extrémités ont été examinées. Une pièce à portée suit la translation, une pièce arrêtée par un obstacle reste en place, et le sujet doit pouvoir atteindre sa propre case. Cette mesure utilise les transitions du banc. Elle ne compte ni comme prédiction indépendante ni comme action ou victoire de SIC. Les commandes du chemin gagnant, les positions et la valeur de portée mesurée ne sont pas transmises au pilote.
+
+## Ce que SIC a le droit d’apprendre
+
+Le pilote observe les déplacements, leur granularité, les pièces momentanément arrêtées et le contact d’un niveau antérieur sanctionné par le score. Il compare trois hypothèses pour la portée d’un geste, à savoir une portée globale, un carré et un losange. Les tailles finies sont estimées sur les déplacements observés en partie. Là où la même case a déjà permis à une pièce de passer, son immobilité dans une autre disposition apporte un contre-exemple à la portée globale. Les 100 parties sources ont fourni 22 contacts de score candidats et deux jeux, SKBN et FUIT, où le suivi des mouvements reconnaît également un déplacement commun et un arrêt différentiel. Ces observations rendent une hypothèse testable. [Mesure sur les traces sources](../../../scripts/measure-relative-motion-sources.mjs)
+
+Avant de projeter ses commandes, SIC détermine quels décalages à l’arrivée placeraient chaque pièce sur une case libre et distincte du but du sujet. Il vérifie aussi s’il existe un trajet qui conserverait tous les décalages initiaux. Le planificateur explore ensuite ses propres transitions hypothétiques dans les limites de profondeur et de nœuds déclarées par le pack. Il conserve le premier mouvement, le vecteur initial, le vecteur visé, le site qui devrait retenir la pièce et les positions finales recherchées. Le jeu fournit l’observation suivante, qui peut réfuter le plan.
+
+La qualification compare les deux packs aux mêmes budgets, d’abord sur SS05 en campagne, puis sur le jeu SS02 gardé à part pour ce candidat. Les trois L2 déjà gagnés doivent rester gagnés en campagne, en particulier SS01 en 32 coups. La mesure principale est un changement de niveau produit par les commandes autonomes de SIC et reproduit par un rejeu indépendant. [Test d’une autre géométrie](../../../tests/sic-relative-motion.test.ts)
+
+## Seconde qualification
+
+Le gel v67 est `f5b3a9fad`. Interrogé sur les observations de la campagne v66 de SS05, ce candidat n’offre son premier trajet relatif qu’à l’action 172 de la campagne. Il reste longtemps limité aux deux directions pour lesquelles il a vu le groupe bouger au L2, alors que les déplacements du sujet ont déjà été appris au L1. Sur les préfixes des campagnes gagnantes de SS01 et SS03, il propose aussi des plans concurrents respectivement 13 et 57 fois. Ce sont des propositions sur des observations archivées. [Mesure des offres](../../../scripts/locate-relative-plan.mjs)
+
+V68 conserve le moteur observé dans une autre disposition et le corrige si le nouveau mouvement le réfute. Une texture précédemment franchie apporte une hypothèse de passage, retirée si une observation de cette texture la contredit. L’arbitrage ouvre cette recherche quand le plan précédent manque d’un repère testé ou que l’agent stagne devant une pièce qui occupe un site déjà franchissable. Le scénario de qualification déplace un groupe dans une autre salle et vérifie la provenance de la commande réutilisée. Les budgets, le témoin et le jeu gardé à part sont les mêmes que pour v67.
+
+## Poursuite et réajustement
+
+Le gel v68 est `de9caf58f`. Depuis un préfixe archivé de 140 coups au L2, la famille v68 choisit 20 mouvements de suite dont les positions prédites sont toutes vérifiées. Elle revient cependant à un choix précédent en recalculant toute la route à chaque mouvement. Sur la même situation v67 revient à un choix précédent après trois mouvements. Cette expérience conditionnelle apporte un diagnostic de poursuite. [Comparaisons depuis des états identiques](../../../scripts/test-relative-plan-continuations.mjs)
+
+V69 conserve la suite du plan qu’il a projeté lui-même quand le jeu confirme la position du sujet et de chaque pièce. Il rend la main à la recherche dès qu’une prévision est réfutée. Il accepte les déplacements observés dont la petite variation de silhouette conserve la case mesurée. Il peut rapprocher des textures de terrain par leur couleur majoritaire lorsque le terrain franchi et le terrain bloqué les distinguent. Un test passe le plan à l’encodeur natif avant l’exécution. Le gel précède les nouvelles campagnes sur SS05 et SS02 et la vérification des victoires déjà obtenues.

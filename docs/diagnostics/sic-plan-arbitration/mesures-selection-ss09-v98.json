@@ -1,0 +1,706 @@
+{
+  "candidate": "bfa0552a746c7e98acd6d49053215664a378aab1",
+  "engine": "f0a1ff437",
+  "condition": "SS09 diagnostic and development",
+  "coldDecisionComparisons": {
+    "v96": {
+      "pack": "85fa902b4b810e9a067977d223929bde92ec7cde17a44c3cc6c88c2cbac60e30",
+      "commands": [
+        6,
+        1,
+        1,
+        2,
+        3,
+        6,
+        3,
+        4
+      ],
+      "firstFiveImages": [
+        "adc92bf0be6dff12",
+        "d4292ab14345e198",
+        "d4292ab14345e198",
+        "698831f074a257eb",
+        "39df1102afc8525a"
+      ],
+      "receipts": [
+        {
+          "actionIndex": 1,
+          "phase": "selectMarkedCursor",
+          "result": "cursor_mark_transferred"
+        },
+        {
+          "actionIndex": 2,
+          "phase": "verifyMarkedCursor",
+          "result": "cursor_control_unconfirmed"
+        },
+        {
+          "actionIndex": 6,
+          "phase": "selectMarkedCursor",
+          "result": "cursor_click_visually_unchanged"
+        },
+        {
+          "actionIndex": 7,
+          "phase": "verifyMarkedCursor",
+          "result": "cursor_control_unconfirmed"
+        }
+      ]
+    },
+    "v97": {
+      "pack": "98df882d5ce9d8b8c9ba5a273b073d6779652a9aa2a53a3b0ecf9f7d25425ea5",
+      "commands": [
+        6,
+        1,
+        2,
+        3,
+        6,
+        3,
+        1,
+        3
+      ],
+      "firstFiveImages": [
+        "adc92bf0be6dff12",
+        "d4292ab14345e198",
+        "698831f074a257eb",
+        "39df1102afc8525a",
+        "39df1102afc8525a"
+      ],
+      "receipts": [
+        {
+          "actionIndex": 1,
+          "phase": "selectMarkedCursor",
+          "result": "cursor_mark_transferred"
+        },
+        {
+          "actionIndex": 2,
+          "phase": "verifyMarkedCursor",
+          "result": "marked_subject_retained_try_another_motor"
+        },
+        {
+          "actionIndex": 3,
+          "phase": "verifyMarkedCursor",
+          "result": "marked_subject_retained_try_another_motor"
+        },
+        {
+          "actionIndex": 4,
+          "phase": "verifyMarkedCursor",
+          "result": "cursor_control_unconfirmed"
+        },
+        {
+          "actionIndex": 5,
+          "phase": "selectMarkedCursor",
+          "result": "cursor_click_visually_unchanged"
+        }
+      ]
+    },
+    "v98": {
+      "pack": "3d5f53165bd1b4659cf82c03bb13867d935c29b4aa5f31135c82425bd0112bf2",
+      "commands": [
+        6,
+        1,
+        2,
+        3,
+        1,
+        3,
+        2,
+        4
+      ],
+      "firstFiveImages": [
+        "adc92bf0be6dff12",
+        "d4292ab14345e198",
+        "698831f074a257eb",
+        "39df1102afc8525a",
+        "4b17d0dd64ca1622"
+      ],
+      "receipts": [
+        {
+          "actionIndex": 1,
+          "phase": "selectMarkedCursor",
+          "result": "cursor_mark_transferred"
+        },
+        {
+          "actionIndex": 2,
+          "phase": "verifyMarkedCursor",
+          "result": "marked_subject_retained_try_another_motor"
+        },
+        {
+          "actionIndex": 3,
+          "phase": "verifyMarkedCursor",
+          "result": "marked_subject_retained_try_another_motor"
+        },
+        {
+          "actionIndex": 4,
+          "phase": "verifyMarkedCursor",
+          "result": "new_cursor_moved_while_previous_cursor_stayed"
+        }
+      ]
+    }
+  },
+  "ss09": {
+    "v96": {
+      "cold": {
+        "cap": 1200,
+        "track": "e6057a0614b7ae246541f63923814a1e6c353c6c94a856b9eabf8c95cc0ed291",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 341,
+            "won": false,
+            "reason": "level_active_time_budget"
+          }
+        ]
+      },
+      "campaign": {
+        "cap": 1200,
+        "track": "10a3a4275f8cbdaf07491d8400a17a9858949d7b278aaf81fc2adbec31d0d35d",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 418,
+            "won": false,
+            "reason": "level_active_time_budget"
+          }
+        ]
+      }
+    },
+    "v97": {
+      "cold": {
+        "cap": 1200,
+        "track": "f6008e4d9dedd458e9506f69403a0bc9054d3167cc71065275cc1fdca7ffbf51",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 271,
+            "won": false,
+            "reason": "level_active_time_budget"
+          }
+        ]
+      },
+      "campaign": {
+        "cap": 1200,
+        "track": "852be4e290dd725353b17e77991a132abcee4b9eec552c8ecf243cf87fe75eab",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 340,
+            "won": false,
+            "reason": "level_active_time_budget"
+          }
+        ]
+      }
+    },
+    "v98": {
+      "cold": {
+        "cap": 1200,
+        "track": "21009fc66505459ace1bf76a7667c720e817e8bc0763b925676b313ddbc9d832",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 280,
+            "won": false,
+            "reason": "level_active_time_budget"
+          }
+        ]
+      },
+      "campaign": {
+        "cap": 1200,
+        "track": "7f2208a2ba4d03878273b4327540205c41f6da50bb92c1041cb05558f0f01e14",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 268,
+            "won": false,
+            "reason": "level_active_time_budget"
+          }
+        ]
+      }
+    }
+  },
+  "independentSelection": {
+    "step": 1,
+    "nextInput": 1,
+    "alternatives": [
+      {
+        "id": 1,
+        "without": {
+          "subjects": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "changed": true,
+          "won": false
+        },
+        "with": {
+          "subjects": [
+            [
+              [
+                0,
+                0
+              ]
+            ],
+            []
+          ],
+          "changed": true,
+          "won": false
+        }
+      },
+      {
+        "id": 2,
+        "without": {
+          "subjects": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "changed": true,
+          "won": false
+        },
+        "with": {
+          "subjects": [
+            [
+              [
+                0,
+                0
+              ]
+            ],
+            []
+          ],
+          "changed": true,
+          "won": false
+        }
+      },
+      {
+        "id": 3,
+        "without": {
+          "subjects": [
+            [],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "changed": true,
+          "won": false
+        },
+        "with": {
+          "subjects": [
+            [],
+            []
+          ],
+          "changed": true,
+          "won": false
+        }
+      },
+      {
+        "id": 4,
+        "without": {
+          "subjects": [
+            [
+              [
+                3,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "changed": true,
+          "won": false
+        },
+        "with": {
+          "subjects": [
+            [
+              [
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                3,
+                0
+              ]
+            ]
+          ],
+          "changed": true,
+          "won": false
+        }
+      },
+      {
+        "id": 5,
+        "without": {
+          "subjects": [
+            [
+              [
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "changed": false,
+          "won": false
+        },
+        "with": {
+          "subjects": [
+            [
+              [
+                0,
+                0
+              ]
+            ],
+            [
+              [
+                0,
+                0
+              ]
+            ]
+          ],
+          "changed": false,
+          "won": false
+        }
+      }
+    ],
+    "tracking": [
+      {
+        "step": 2,
+        "id": 1,
+        "stationary": true,
+        "sites": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "step": 3,
+        "id": 2,
+        "stationary": true,
+        "sites": [
+          [
+            0,
+            0
+          ]
+        ]
+      },
+      {
+        "step": 4,
+        "id": 3,
+        "stationary": true,
+        "sites": [
+          [
+            -3,
+            0
+          ]
+        ]
+      }
+    ]
+  },
+  "alternativePreparations": {
+    "code": "SS09",
+    "level": 2,
+    "fork": 1,
+    "sampled": [
+      {
+        "depth": 1,
+        "states": 4,
+        "comparable": 1,
+        "contrasts": 0
+      },
+      {
+        "depth": 2,
+        "states": 8,
+        "comparable": 2,
+        "contrasts": 0
+      },
+      {
+        "depth": 3,
+        "states": 12,
+        "comparable": 3,
+        "contrasts": 0
+      }
+    ],
+    "contrasts": [],
+    "partnerSamples": [
+      {
+        "depth": 1,
+        "states": 4,
+        "contrasts": 0
+      },
+      {
+        "depth": 2,
+        "states": 10,
+        "contrasts": 0
+      },
+      {
+        "depth": 3,
+        "states": 14,
+        "contrasts": 0
+      },
+      {
+        "depth": 4,
+        "states": 18,
+        "contrasts": 0
+      }
+    ],
+    "partner": []
+  },
+  "objectEffect": {
+    "armOrder": [
+      "noClick",
+      "clickFirst",
+      "clickSecond"
+    ],
+    "countsByCommand": {
+      "1": [
+        0,
+        0,
+        0
+      ],
+      "2": [
+        0,
+        0,
+        0
+      ],
+      "3": [
+        0,
+        0,
+        1
+      ],
+      "4": [
+        0,
+        0,
+        2
+      ],
+      "5": [
+        0,
+        0,
+        0
+      ]
+    },
+    "observedTransitionsWithDisplacement": 38
+  },
+  "bench": {
+    "expandedEdges": 454,
+    "distinctFrames": 181,
+    "officialReplay": {
+      "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+      "final": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a",
+      "from": 0,
+      "to": 1,
+      "actions": 26,
+      "clicks": 2
+    },
+    "milestones": [
+      {
+        "step": 1,
+        "parked": 0,
+        "selected": 1
+      },
+      {
+        "step": 3,
+        "parked": 1,
+        "selected": 1
+      },
+      {
+        "step": 4,
+        "parked": 1,
+        "selected": 0
+      },
+      {
+        "step": 10,
+        "parked": 2,
+        "selected": 0
+      },
+      {
+        "step": 26,
+        "won": true
+      }
+    ],
+    "matchedAlternatives": [
+      {
+        "reselectedAt": 1,
+        "firstBoxDifference": 2,
+        "firstPlacementDifference": 2,
+        "actions": 26,
+        "won": false
+      },
+      {
+        "reselectedAt": 4,
+        "firstBoxDifference": 7,
+        "firstPlacementDifference": 5,
+        "actions": 26,
+        "won": false
+      }
+    ],
+    "reachComparisons": {
+      "pilot": [
+        {
+          "sample": 0,
+          "unique": 0,
+          "translated": 0,
+          "contactErrors": 0,
+          "unrestrictedErrors": 0,
+          "rangeErrors": []
+        },
+        {
+          "sample": 118,
+          "unique": 28,
+          "translated": 80,
+          "contactErrors": 80,
+          "unrestrictedErrors": 8,
+          "rangeErrors": [
+            {
+              "range": 2,
+              "errors": 0
+            },
+            {
+              "range": 3,
+              "errors": 8
+            }
+          ]
+        }
+      ],
+      "branch": [
+        {
+          "sample": 42,
+          "unique": 42,
+          "translated": 1,
+          "contactErrors": 0,
+          "unrestrictedErrors": 32,
+          "rangeErrors": [
+            {
+              "range": 1,
+              "errors": 0
+            },
+            {
+              "range": 2,
+              "errors": 12
+            },
+            {
+              "range": 3,
+              "errors": 18
+            },
+            {
+              "range": 4,
+              "errors": 29
+            },
+            {
+              "range": 5,
+              "errors": 32
+            }
+          ]
+        },
+        {
+          "sample": 4,
+          "unique": 2,
+          "translated": 4,
+          "contactErrors": 4,
+          "unrestrictedErrors": 0,
+          "rangeErrors": [
+            {
+              "range": 2,
+              "errors": 0
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "autonomousCustom4": {
+    "SS01": {
+      "start": 1,
+      "actions": 32,
+      "won": true,
+      "hash": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+    },
+    "SS02": {
+      "start": 1,
+      "actions": 46,
+      "won": true,
+      "hash": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7"
+    },
+    "SS03": {
+      "start": 1,
+      "actions": 97,
+      "won": true,
+      "hash": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17"
+    },
+    "SS04": {
+      "start": 1,
+      "actions": 143,
+      "won": true,
+      "hash": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f"
+    },
+    "SS05": {
+      "start": 1,
+      "actions": 73,
+      "won": true,
+      "hash": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57"
+    },
+    "SS06": {
+      "start": 2,
+      "actions": 54,
+      "won": true,
+      "hash": "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867"
+    },
+    "SS07": {
+      "start": 2,
+      "actions": 117,
+      "won": true,
+      "hash": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+    },
+    "SS08": {
+      "start": 2,
+      "actions": 70,
+      "won": true,
+      "hash": "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5"
+    }
+  },
+  "sources": {
+    "count": 100,
+    "sameTrajectoryAsV95": 100,
+    "independentlyWon": 100,
+    "upper": [
+      {
+        "game": "CWSE",
+        "level": 2,
+        "cap": 120,
+        "actions": 59,
+        "won": true,
+        "identical": true,
+        "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1"
+      },
+      {
+        "game": "KLOT",
+        "level": 4,
+        "cap": 120,
+        "actions": 37,
+        "won": true,
+        "identical": true,
+        "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c"
+      }
+    ]
+  },
+  "tests": 519
+}

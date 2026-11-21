@@ -37,8 +37,8 @@ const lessonFrames=new Map();
 if(run.observedPriorLevelActions&&!process.env.SIC_STUDY_OBSERVED_LESSON)throw Error('Set SIC_STUDY_OBSERVED_LESSON to the recorded public lesson');
 const packedLesson=run.observedPriorLevelActions?JSON.parse(readFileSync(process.env.SIC_STUDY_OBSERVED_LESSON,'utf8')):null;
 const lesson=packedLesson?.lesson??packedLesson;
-if(lesson&&(lesson.code!==run.code||lesson.endLevel!==run.start||lesson.commands.length!==run.observedPriorLevelActions))throw Error('Wrong observed lesson');
-if(lesson)run.publicLesson=lesson.commands;
+if(lesson&&(lesson.code!==run.code||(lesson.endLevel!==run.start&&lesson.transferTo!==run.start)||lesson.commands.length!==run.observedPriorLevelActions))throw Error('Wrong observed lesson');
+if(lesson){run.publicLesson=lesson.commands;run.lessonEndLevel=lesson.endLevel;}
 async function openNativeBoard(){
   let b=await engine.dispatch({type:'load',code:run.code,level:lesson?run.start-1:run.start});
   if(!lesson)return b;

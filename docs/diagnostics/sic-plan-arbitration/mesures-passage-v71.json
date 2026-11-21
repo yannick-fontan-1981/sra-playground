@@ -1,0 +1,899 @@
+{
+  "engine": "f0a1ff437",
+  "solver": {
+    "v69": "21650a79d4d613d656612f303cd81b86eb82ed4e",
+    "v70": "051886c769b2872c491f39a7ec997800da6f74a3",
+    "v71": "82ad65c88a5cc1bb1b0aedb777e8233a8a3a1ed1"
+  },
+  "packs": {
+    "active": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+    "shadow": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31"
+  },
+  "budgets": {
+    "depth": 88,
+    "nodes": 1000,
+    "perLevel": 1200,
+    "workers": 4,
+    "activeMs": 514286
+  },
+  "discoverySources": [
+    {
+      "code": "FUIT",
+      "proposed": 8,
+      "preparedOnly": 1,
+      "refuted": 7,
+      "unobservable": 0
+    },
+    {
+      "code": "SKBN",
+      "proposed": 8,
+      "preparedOnly": 6,
+      "refuted": 2,
+      "unobservable": 0
+    }
+  ],
+  "updatedDiscoverySources": [
+    {
+      "code": "FUIT",
+      "proposed": 8,
+      "preparedOnly": 1,
+      "refuted": 7,
+      "unobservable": 0
+    },
+    {
+      "code": "SKBN",
+      "proposed": 8,
+      "preparedOnly": 6,
+      "refuted": 2,
+      "unobservable": 0
+    }
+  ],
+  "sourceL1sScreened": 100,
+  "triage": {
+    "diagnostic": "SS02",
+    "evaluationOnly": "SS08"
+  },
+  "firstDifferenceV69": {
+    "campaign": 64,
+    "levelStep": 24,
+    "fromFrame": "77e6bf790bce1275",
+    "candidate": 1,
+    "comparison": 4
+  },
+  "selectedExperiments": {
+    "code": "SS02",
+    "firstDecision": 63,
+    "proposalsPlayed": 24,
+    "pairs": [
+      {
+        "action": 63,
+        "origin": "d7ec1094c662e231",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          2,
+          0
+        ],
+        "observed": [
+          2,
+          0
+        ],
+        "access": {
+          "predictedGained": 7,
+          "measuredGained": 7,
+          "positiveSites": 17,
+          "controlSites": 10,
+          "exhausted": true,
+          "exploredImages": [
+            46,
+            28
+          ]
+        },
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": false,
+        "distinctOptions": true
+      },
+      {
+        "action": 67,
+        "origin": "77e6bf790bce1275",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          1,
+          0
+        ],
+        "observed": [
+          1,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 72,
+        "origin": "6c1e54d374f318b3",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          1,
+          0
+        ],
+        "observed": [
+          1,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 73,
+        "origin": "b6324dd0bf53a1fb",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          1,
+          0
+        ],
+        "observed": [
+          1,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 75,
+        "origin": "ac8f783fd4def887",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          1,
+          0
+        ],
+        "observed": [
+          1,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 76,
+        "origin": "38091fe8d93dbe5f",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          3,
+          0
+        ],
+        "observed": [
+          3,
+          0
+        ],
+        "access": {
+          "predictedGained": 1,
+          "measuredGained": 1,
+          "positiveSites": 34,
+          "controlSites": 33,
+          "exhausted": true,
+          "exploredImages": [
+            89,
+            85
+          ]
+        },
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 77,
+        "origin": "87b57218fe941b3a",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          3,
+          0
+        ],
+        "observed": [
+          3,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 81,
+        "origin": "bcdaf171aced5e2b",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          1,
+          0
+        ],
+        "observed": [
+          1,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 82,
+        "origin": "e3c94937c78b3c30",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          2,
+          0
+        ],
+        "observed": [
+          2,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 83,
+        "origin": "47a713784fc1b106",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          2,
+          0
+        ],
+        "observed": [
+          2,
+          0
+        ],
+        "bothConfirmed": true,
+        "matched": true,
+        "won": false,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      },
+      {
+        "action": 86,
+        "origin": "57d215bc18f47892",
+        "matchingStances": true,
+        "samePieces": true,
+        "predicted": [
+          1,
+          0
+        ],
+        "observed": [
+          null,
+          0
+        ],
+        "bothConfirmed": false,
+        "matched": false,
+        "won": true,
+        "usedEarlierTest": true,
+        "distinctOptions": true
+      }
+    ],
+    "verifiedReuses": 9,
+    "score": [
+      {
+        "level": 1,
+        "actions": 40,
+        "won": true
+      },
+      {
+        "level": 2,
+        "actions": 46,
+        "won": true
+      }
+    ]
+  },
+  "independentPlanning": [
+    {
+      "afterL2Steps": 22,
+      "noPlanRetained": true,
+      "nativeWin": true,
+      "steps": 24,
+      "first": {
+        "longestObserved": 2,
+        "projectedLength": 2,
+        "checking": true
+      }
+    },
+    {
+      "afterL2Steps": 34,
+      "noPlanRetained": true,
+      "nativeWin": true,
+      "steps": 12,
+      "first": {
+        "longestObserved": 2,
+        "projectedLength": 1,
+        "checking": true
+      }
+    },
+    {
+      "afterL2Steps": 35,
+      "noPlanRetained": true,
+      "nativeWin": true,
+      "steps": 11,
+      "first": {
+        "longestObserved": 2,
+        "projectedLength": 3,
+        "checking": true
+      }
+    },
+    {
+      "afterL2Steps": 36,
+      "noPlanRetained": true,
+      "nativeWin": true,
+      "steps": 10,
+      "first": {
+        "longestObserved": 3,
+        "projectedLength": 3,
+        "checking": true
+      }
+    },
+    {
+      "afterL2Steps": 37,
+      "noPlanRetained": true,
+      "nativeWin": true,
+      "steps": 9,
+      "first": {
+        "longestObserved": 3,
+        "projectedLength": 1,
+        "checking": false
+      }
+    },
+    {
+      "afterL2Steps": 40,
+      "noPlanRetained": true,
+      "nativeWin": true,
+      "steps": 6,
+      "first": {
+        "longestObserved": 3,
+        "projectedLength": 1,
+        "checking": true
+      }
+    },
+    {
+      "afterL2Steps": 42,
+      "noPlanRetained": true,
+      "nativeWin": true,
+      "steps": 4,
+      "first": {
+        "longestObserved": 3,
+        "projectedLength": 2,
+        "checking": true
+      }
+    }
+  ],
+  "externalModelOnly": {
+    "expandedImages": 4500,
+    "eligibleDirectionalTransitions": 15616,
+    "projectedAndReplayedCommands": 27,
+    "nativeWin": true
+  },
+  "tests": {
+    "v70": 485,
+    "v71": 486
+  },
+  "firstDifferenceDeclarative": {
+    "campaign": 64,
+    "levelStep": 24,
+    "fromFrame": "77e6bf790bce1275",
+    "candidate": 1,
+    "comparison": 4
+  },
+  "nativeReplay": {
+    "cap70-active": [
+      {
+        "code": "SS01",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 36,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 32,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+        "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS02",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 328,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "85914b44897e642036517bd5b3c8014fceaed933fa87810e91c7738d72a6bb75",
+        "final": "9e781b057fbfb1f85d10592d045345322d8ab77fbf53e43ce8ac8b2b6180fddf",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS03",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 97,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS04",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 143,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+        "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS05",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 73,
+            "won": true
+          }
+        ],
+        "resets": [
+          12
+        ],
+        "commands": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+        "final": "bcc85ed983fd11ebe9ac9d5bc458cbfd238e5e00e1665606d014562c5b0555cb",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS08",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 280,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "2ea92115aa45df9ab9b3b6848eeeab23f513803bc57d429d7b0f249c39dc7ca1",
+        "final": "77a8b8eda7f1cfb00564c243c7cc1b0a523c192175543111953ff556d891d87d",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      }
+    ],
+    "cap70-shadow": [
+      {
+        "code": "SS02",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 343,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "de0a5e0f33f21ee8d0a7da672e53704457cfc1a64f8af39d01112dabeda2573e",
+        "final": "f12f639830931545a88ddc330b065a14bd2799af7e58abcd49dfd81fb1de15e5",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 335,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "fe3d88a373d9f78e83caa36b0110a533142fefc0f1abc38aaa09c3f57911f3a9",
+        "final": "70e28b76be4d4711cbaa4f5edabd54a2fe6389d1288d6f1d81064f92514a94fb",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      }
+    ],
+    "cap71-active": [
+      {
+        "code": "SS01",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 36,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 32,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+        "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS02",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 417,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "f72365368eab3b03bae43f7143c7d08f01aca77c94b1f292017eeafe88cf8ab8",
+        "final": "9fc8ddf03300fa64fe0aa7b0790601f13aaa980b4ed74c8b8795179076b8ebb6",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS02",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 46,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7",
+        "final": "9469602325bfbd494dd48edb62a9abbb7c3684ed3b7a19f7be91a0ed57624e64",
+        "capacitySteps": 24,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS03",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 97,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS04",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 143,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "commands": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+        "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS05",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 73,
+            "won": true
+          }
+        ],
+        "resets": [
+          12
+        ],
+        "commands": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+        "final": "bcc85ed983fd11ebe9ac9d5bc458cbfd238e5e00e1665606d014562c5b0555cb",
+        "capacitySteps": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS07",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 5,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "final": "df8d16405266a4b2a316ca1b21de9aacd29b678202f9113b5a445b612a57d9aa",
+        "capacitySteps": 0,
+        "stop": "native_game_over"
+      },
+      {
+        "code": "SS08",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 357,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "21e1bea494479ec8439e3bc744d0b0793761d42580973a40a6a64ad27cc8e896",
+        "final": "7e3a60f2122845ea851b6a08e28e068f386dfe26c0822fbbb0192f1d6ef18536",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 269,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "00a35c55464676cd437465e54e9212e831cd7a8c86cf1595356caab1122ce1e4",
+        "final": "4c701748cecaedc3dec569bebdfad4a9475e588b03458fadad3aefa7350c5685",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      }
+    ],
+    "cap71-shadow": [
+      {
+        "code": "SS02",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 40,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 326,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "967f8ce440ef9f4812be111b77bf08333986f8368b9b21f941a50d91e954444b",
+        "final": "39abdfa749a2431d6beb74d9ef4511ae98324aca0f44c5c572cacf2b15bbc2ec",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "cold",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 367,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "31a4ba25450f0629f28c29eae45f6e94ec2c402a9d4e70113126f35e8f2ebae6",
+        "final": "6a3c49feace0ce19491c982d87e1dae820f1a197a401de847fca8b490dad8c1d",
+        "capacitySteps": 0,
+        "stop": "level_active_time_budget"
+      },
+      {
+        "code": "SS08",
+        "entry": "warm",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "commands": "d8b4a1078031b59b69a1d02ad0323c6d7c53cc1928ef817b247f23b00862ff09",
+        "final": "8ea659c9aca111c2026178876aadff12a8c375932936e119b2fdddee7578e830",
+        "capacitySteps": 0,
+        "stop": "native_game_over"
+      }
+    ]
+  },
+  "cap70Source": {
+    "verified": 100,
+    "wins": 100,
+    "unchanged": 100,
+    "differences": []
+  },
+  "cap71Source": {
+    "verified": 100,
+    "wins": 100,
+    "unchanged": 100,
+    "differences": []
+  },
+  "upper": [
+    {
+      "code": "CWSE",
+      "levels": [
+        {
+          "level": 2,
+          "won": true,
+          "actions": 59
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1",
+      "end": "aadf3039f6845922196730fe91fd4e5cee4a28e1e0188eb9568a889ba78ae2d6"
+    },
+    {
+      "code": "KLOT",
+      "levels": [
+        {
+          "level": 4,
+          "won": true,
+          "actions": 37
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c",
+      "end": "e2c8ddc1ddc2432dff39b9f7d053d5ee06ce41b87195ec7cb745544199405d16"
+    },
+    {
+      "code": "GABA",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 49
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 50
+        }
+      ],
+      "unchanged": true,
+      "trajectory": "640938ef0cbcf6e905f4b57182c0db704cab2b77ebb101c0bb9d224427f8e744",
+      "end": "5afd237cf3699637b01810a6d334fd6e8ff377008f2058818a45acb8499315e0"
+    }
+  ],
+  "previousFourFullCommandTapesUnchanged": [
+    "SS01",
+    "SS03",
+    "SS04",
+    "SS05"
+  ],
+  "ss07NextDiagnostic": {
+    "code": "SS07",
+    "states": 30,
+    "pairedTrials": 974,
+    "changedImmediately": 30,
+    "changedScalarReturn": 30,
+    "safeAfterLosingControl": 0,
+    "official": 0,
+    "affectedOrigins": 0,
+    "afterInitialSelection": {
+      "examined": 900,
+      "differentDirectionalReturns": 436,
+      "safePreparedScalar": 815,
+      "safeAndChanged": 18,
+      "firstSafeAfterMovements": 1,
+      "winningPreparedScalar": 0,
+      "directionalWin": false,
+      "controlImages": 30,
+      "selectedImages": 174,
+      "queueDrained": false
+    }
+  },
+  "staticTypecheckExitCode": 0,
+  "heldOutFirstCampaignDifference": {
+    "step": 9,
+    "active": 6,
+    "shadow": 1,
+    "activeFamily": "sic_test_prepared_effects",
+    "shadowFamily": "sic_public_input_exploration",
+    "sameObservedOrigin": true
+  }
+}

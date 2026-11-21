@@ -1,0 +1,78 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {chooseJointArrival,jointPose,measureJointReturn,newJointMemory,observeJointIndications,type JointContext} from '../src/sic/joint-indicated-arrivals.ts';
+import type {XY} from '../src/sic/access-terrain.ts';
+import type {VisualLayout} from '../src/sic/witnessed-preview-transfer.ts';
+import type {NativeObservation} from '../src/logos-engine/v6-native-types.ts';
+
+const context:JointContext={roles:['brush','parked'],goals:[[12,4],[32,16]],pitch:[4,4],pivot:'turnstile',
+  alternate:{actor:'brush',peer:'parked',alternateActor:'resting',alternatePeer:'navigator',ref:'verified-selector'}};
+const body=(at:XY,name:string)=>({at,box:[at[0]/2,at[1]/2,at[0]/2,at[1]/2],form:name});
+function view(actor:XY,marks:XY[],partner:XY=[28,20]):VisualLayout{
+  return {brush:[body(actor,'b')],parked:[body(partner,'p')],turnstile:[body([12,8],'t'),body([32,20],'t')],cue:marks.map(p=>body(p,'c'))};
+}
+const rows=Array.from({length:16},()=>Array<number>(23).fill(3));
+const motors=([{op:'ACTION1',d:[0,-4]},{op:'ACTION2',d:[4,0]},{op:'ACTION3',d:[0,4]},{op:'ACTION4',d:[-4,0]}]) as {op:string;d:XY}[];
+const o={available_action_refs:['ACTION1','ACTION2','ACTION3','ACTION4','ACTION5','ACTION6'],entities:[],frame_hash:'public-hash'} as unknown as NativeObservation;
+test('the same operation can be proposed after both independently projected destinations are marked',()=>{
+  const m=newJointMemory(),before=view([8,12],[]),part=view([8,8],[[32,16]]),both=view([8,8],[[32,16],[12,4]]);
+  observeJointIndications(m,context,before,part,'ACTION1','remote-marker');
+  assert.equal(m.witnesses.cue?.[0]?.ref,'remote-marker');
+  assert.notEqual(chooseJointArrival(m,context,part,o,rows,motors,3,20,500)?.purpose,'test_joint_arrivals');
+  const offer=chooseJointArrival(m,context,both,o,rows,motors,3,20,500)!;
+  assert.equal(offer.purpose,'test_joint_arrivals');assert.equal(offer.command,'ACTION5');
+  assert.deepEqual(offer.displayed,[true,true]);assert.equal(offer.witness,'remote-marker');
+  assert.equal(measureJointReturn(m,context,both,offer),'joint_arrival_not_confirmed');
+  assert.notEqual(chooseJointArrival(m,context,both,o,rows,motors,3,20,500)?.purpose,'test_joint_arrivals');
+});
+test('a preparation keeps the other actor and its mechanism fixed; a failed edge is not reused',()=>{
+  const m=newJointMemory(),s=view([8,12],[[32,16]]),before=view([12,12],[]);
+  observeJointIndications(m,context,before,s,'ACTION4','return');
+  const proposal=()=>chooseJointArrival(m,context,s,o,rows,motors,3,30,600);
+  const first=proposal()!;assert.equal(first.purpose,'position_for_shared_operation');
+  assert.equal(measureJointReturn(m,context,s,first),'joint_preparation_refuted');
+  assert.notEqual(proposal()?.key,first.key);
+});
+test('two agreeing landmark displacements allow a falsifiable step onto the counterpart of an occupied site',()=>{
+  const m=newJointMemory(),before=view([12,12],[]),s=view([8,12],[[32,16]]);
+  observeJointIndications(m,context,before,s,'ACTION4','observed-mark');
+  const clutter=rows.map(row=>row.map(()=>9));
+  const registered:JointContext={...context,registration:{originalPivots:[[12,8],[32,20]],goalRef:'two-goals',pivotRef:'two-pivots'}};
+  const offer=(c:JointContext)=>chooseJointArrival(m,c,s,o,clutter,motors,3,12,120);
+  assert.equal(offer(context),undefined);
+  assert.equal(offer({...registered,registration:{...registered.registration!,originalPivots:[[16,8],[32,20]]}}),undefined);
+  const candidate=offer(registered)!;
+  assert.equal(candidate.command,'ACTION1');
+  assert.deepEqual(candidate.registeredFooting?.site,[8,8]);
+  assert.equal(candidate.registeredFooting?.goalRef,'two-goals');
+  assert.equal(m.sites[0]['8,8'],undefined);
+  assert.equal(measureJointReturn(m,registered,s,candidate),'joint_preparation_refuted');
+  assert.equal(offer(registered),undefined);
+});
+test('a second arrangement lets the other side verify a missing footing with a horizontal motor',()=>{
+  const c:JointContext={roles:['pen','rest'],goals:[[20,8],[20,32]],pitch:[4,4],pivot:'switch',
+    alternate:{actor:'pen',peer:'rest',alternateActor:'idle',alternatePeer:'driver',ref:'selected'},
+    registration:{originalPivots:[[16,8],[16,32]],pivotRef:'knobs',goalRef:'contacts'}};
+  const diagram=(driver:XY,marked:boolean):VisualLayout=>({
+    idle:[body([16,4],'idle')],driver:[body(driver,'driver')],switch:[body([16,8],'knob'),body([16,32],'knob')],
+    signal:marked?[body(c.goals[0],'light')]:[]});
+  const m=newJointMemory(),start=diagram([12,28],true),clutter=Array.from({length:22},()=>Array<number>(18).fill(9));
+  observeJointIndications(m,c,diagram([12,32],false),start,'ACTION1','fixed-light');
+  const propose=(ctx:JointContext)=>chooseJointArrival(m,ctx,start,o,clutter,motors,3,12,120);
+  assert.equal(propose({...c,registration:undefined}),undefined);
+  const proposal=propose(c)!;
+  assert.equal(proposal.side,1);assert.equal(proposal.command,'ACTION2');assert.deepEqual(proposal.expected,[16,28]);
+  assert.deepEqual(proposal.registeredFooting?.translation,[0,24]);
+  assert.equal(m.sites[1]['16,28'],undefined);
+  const result=diagram([16,28],true);
+  assert.equal(measureJointReturn(m,c,result,proposal),'preparation_matched_with_other_geometry_preserved');
+  observeJointIndications(m,c,start,result,'ACTION2','entered-second-board');
+  assert.equal(m.sites[1]['16,28'],true);
+});
+test('a changing partner or an ambiguous pairing cannot support a remote indication',()=>{
+  const m=newJointMemory(),before=view([8,12],[],[28,24]),after=view([8,8],[[32,16]]);
+  observeJointIndications(m,context,before,after,'ACTION1','uncontrolled');
+  assert.deepEqual(m.witnesses,{});
+  after.turnstile=[body([16,12],'t'),body([16,12],'t')];
+  assert.equal(jointPose(after,context),undefined);
+});

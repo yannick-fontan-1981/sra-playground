@@ -1,0 +1,17 @@
+{
+  "id": "sic.native-strategies",
+  "schemaVersion": 6,
+  "configuration": {
+    "version": 1,
+    "mode": "active",
+    "maxDepth": 88,
+    "maxNodes": 1000,
+    "solver": "sic-fallback",
+    "informationPreference": {
+      "mode": "active",
+      "strategy": "transfer_registered_footing",
+      "minimumOutcomes": 2
+    }
+  },
+  "digest": "da9dce573a5233073f1411a5c444a83025ccdc1617d3ee71cba006f3e372ffaf"
+}

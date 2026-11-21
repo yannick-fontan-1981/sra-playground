@@ -1,5 +1,6 @@
 /// <reference types="vite/client" />
 import './styles.css';
+import { fallbackPalette } from './runtime/display-palette.ts';
 import './sra-agent.css';
 import { renderSiteHeader } from './site-header';
 import { BrowserGameRuntime, type GameObservation } from './runtime/browser-games';
@@ -52,11 +53,6 @@ type DuoGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' 
 const isDuoNativeGame = (code: string): code is DuoGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14';
 const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || isDuoNativeGame(code);
 const usesNativeManualControls = (code: string): boolean => usesReflectionShortcut(code) || isDirectionalNativeGame(code);
-const fallbackPalette = [
-  '#F3F2EB', '#C9CDC8', '#37404B', '#66707B', '#1B2028', '#11161C',
-  '#614439', '#E7B9A3', '#F06B65', '#679DEB', '#63D5D6', '#F1CE62',
-  '#EBA258', '#86513A', '#77CB93', '#BB94EB',
-];
 const icon = (name: string, cls = ''): string => {
   const paths: Record<string, string> = {
     arrow: '<path d="M5 12h14m-6-6 6 6-6 6"/>',
@@ -1302,9 +1298,10 @@ const agent = new BrowserV6Agent({
     }
   },
   recoveryConfiguration: () => {
-    const { maxDepth, maxNodes } = recoveryConfiguration();
+    const { maxDepth, maxNodes, informationPreference } = recoveryConfiguration();
     const solver = element<HTMLSelectElement>('#agent-planning').value === 'sic-fallback' ? 'sic-fallback' : 'sic';
-    return { ...defaultRecoveryPack, maxDepth, maxNodes, solver };
+    return { ...defaultRecoveryPack, maxDepth, maxNodes, solver,
+      ...(solver === 'sic-fallback' && informationPreference ? { informationPreference } : {}) };
   },
   dispatch: async action => {
     if (!canDispatchAgentAction() || !observation?.availableActionIds.includes(action.id)) {

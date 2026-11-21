@@ -1,0 +1,620 @@
+{
+  "engine": "f0a1ff437",
+  "configuration": {
+    "reference": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+    "candidate": "829f43432d2f2ab391124a39ba7249fd1e0d3ab132e9a79d6b1ba298163d2aa9"
+  },
+  "sources": [
+    {
+      "game": "DC22",
+      "level": 1,
+      "step": 24,
+      "predictions": [
+        4
+      ],
+      "branches": [
+        [
+          1,
+          false
+        ],
+        [
+          2,
+          false
+        ],
+        [
+          3,
+          false
+        ],
+        [
+          4,
+          true
+        ]
+      ],
+      "parkedOther": false
+    },
+    {
+      "game": "LS19",
+      "level": 1,
+      "step": 5,
+      "predictions": [
+        1
+      ],
+      "branches": [
+        [
+          1,
+          true
+        ],
+        [
+          2,
+          false
+        ],
+        [
+          3,
+          false
+        ],
+        [
+          4,
+          false
+        ]
+      ],
+      "parkedOther": false
+    }
+  ],
+  "witness": {
+    "official": false,
+    "actions": 51
+  },
+  "versions": [
+    {
+      "version": 77,
+      "official": false,
+      "actions": 13,
+      "state": "GAME_OVER",
+      "firstDifferentAction": 6,
+      "contact": [],
+      "preparedSelection": [],
+      "verifiedControl": [],
+      "pursueOther": 0,
+      "actionAndImageDigest": "7d84a475c0e3d93dfe40b2ec96df10ef91e5d977e5a3e76490346530390513b6"
+    },
+    {
+      "version": 78,
+      "official": false,
+      "actions": 51,
+      "state": "GAME_OVER",
+      "firstDifferentAction": null,
+      "contact": [],
+      "preparedSelection": [],
+      "verifiedControl": [
+        9
+      ],
+      "pursueOther": 0,
+      "actionAndImageDigest": "20f617984ad64a13e4fffcd25795da03d521b5558e345195857c1861e8105c43"
+    },
+    {
+      "version": 79,
+      "official": false,
+      "actions": 48,
+      "state": "GAME_OVER",
+      "firstDifferentAction": 8,
+      "contact": [
+        16
+      ],
+      "preparedSelection": [
+        17
+      ],
+      "verifiedControl": [
+        18
+      ],
+      "pursueOther": 0,
+      "actionAndImageDigest": "12138bf11aac1cb6fc8451878774d06eddc8dcd5683b1b348d469ce01b2a0559"
+    },
+    {
+      "version": 80,
+      "official": false,
+      "actions": 48,
+      "state": "GAME_OVER",
+      "firstDifferentAction": 8,
+      "contact": [
+        16
+      ],
+      "preparedSelection": [
+        17
+      ],
+      "verifiedControl": [
+        18
+      ],
+      "pursueOther": 0,
+      "actionAndImageDigest": "12138bf11aac1cb6fc8451878774d06eddc8dcd5683b1b348d469ce01b2a0559"
+    },
+    {
+      "version": 81,
+      "official": false,
+      "actions": 253,
+      "state": "GAME_OVER",
+      "firstDifferentAction": 8,
+      "contact": [
+        16
+      ],
+      "preparedSelection": [
+        17
+      ],
+      "verifiedControl": [
+        18
+      ],
+      "pursueOther": 144,
+      "actionAndImageDigest": "40bd0c955d95402c2fcf723fb674c1f41bb301a7fbe7b7f7699dbaed3fe46ef0"
+    }
+  ],
+  "bench": {
+    "code": "SS07",
+    "level": 2,
+    "prefixLength": 2,
+    "commands": 69,
+    "alternativePrefixes": 16,
+    "stablePairs": 1,
+    "groups": [
+      {
+        "remoteBodyCoversLandmark": false,
+        "visibleClick": true,
+        "official": false,
+        "count": 15
+      },
+      {
+        "remoteBodyCoversLandmark": true,
+        "visibleClick": true,
+        "official": true,
+        "count": 1
+      }
+    ],
+    "handoff": {
+      "bench": {
+        "entry": "defadf47e6c54e07ba67a25c82c96ca1c5245f2bbc0b11b01bfe22f95e63ed5b",
+        "preparation": 3,
+        "suffix": 66,
+        "official": true
+      },
+      "autonomous": {
+        "entry": "defadf47e6c54e07ba67a25c82c96ca1c5245f2bbc0b11b01bfe22f95e63ed5b",
+        "preparation": 17,
+        "suffix": 66,
+        "official": true
+      },
+      "samePublicEntry": true,
+      "unaidedScore": false
+    }
+  },
+  "v81": {
+    "decisionsWithFirstContact": 237,
+    "secondSelectedWithFirstContact": 236,
+    "secondMovesWithFirstContact": 134,
+    "reachable": {
+      "nodes": 198,
+      "queued": 198,
+      "exhausted": true,
+      "directionalSites": 102,
+      "wonByMotor": 0,
+      "best": 17,
+      "scalar": {
+        "lost": 22,
+        "unchanged": 165,
+        "relocated_preserving_first": 11
+      },
+      "relocations": 11,
+      "firstRelocationDepth": 8,
+      "forwardRelocations": 7,
+      "newLandingSites": 0,
+      "oneActivation": {
+        "seeds": 11,
+        "newJointStates": 204,
+        "examined": 204,
+        "exhausted": true,
+        "newSites": 2,
+        "best": 17,
+        "official": 0
+      }
+    },
+    "opportunitiesAlongActualRun": {
+      "unique": 97,
+      "counts": {
+        "lost": 13,
+        "unchanged": 84
+      },
+      "positive": []
+    },
+    "accessAudit": {
+      "game": "SS07",
+      "level": 2,
+      "fromAction": 17,
+      "pitchPixels": 3,
+      "directionsOnly": {
+        "examined": 198,
+        "queued": 198,
+        "exhausted": true,
+        "official": 0,
+        "best": 17,
+        "sites": 102,
+        "newPixelCenters": null
+      },
+      "afterRelocation": {
+        "examined": 204,
+        "queued": 204,
+        "exhausted": true,
+        "official": 0,
+        "best": 17,
+        "sites": 102,
+        "newPixelCenters": 2
+      },
+      "effects": {
+        "lost": 22,
+        "unchanged": 165,
+        "relocation": 11
+      },
+      "evidence": [
+        {
+          "operation": 5,
+          "firstRelocationDepth": 8,
+          "groups": {
+            "outside_measured_sites": {
+              "lost": 22
+            },
+            "absent": {
+              "unchanged": 165
+            },
+            "on_reachable_site": {
+              "relocation": 11
+            }
+          }
+        }
+      ]
+    },
+    "alreadyObservedTargets": {
+      "first": {
+        "step": 22,
+        "traversed": 5,
+        "enabled": 4,
+        "false": 0,
+        "nearby": true
+      },
+      "end": {
+        "step": 253,
+        "traversed": 85,
+        "enabled": 7,
+        "false": 0,
+        "nearby": false
+      },
+      "peakWithinPlan": {
+        "step": 162,
+        "traversed": 76,
+        "enabled": 7,
+        "false": 0,
+        "nearby": true
+      }
+    }
+  },
+  "heldOut": [
+    {
+      "version": 77,
+      "official": false,
+      "actions": 330,
+      "reason": "level_active_time_budget",
+      "experiment": 0
+    },
+    {
+      "version": 79,
+      "official": false,
+      "actions": 240,
+      "reason": "level_active_time_budget",
+      "experiment": 0
+    },
+    {
+      "version": 80,
+      "official": false,
+      "actions": 236,
+      "reason": "level_active_time_budget",
+      "experiment": 0,
+      "controlActions": 237,
+      "controlWon": false,
+      "common": 236,
+      "identicalPrefix": true
+    },
+    {
+      "version": 81,
+      "official": false,
+      "actions": 254,
+      "reason": "level_active_time_budget",
+      "experiment": 0,
+      "controlActions": 255,
+      "controlWon": false,
+      "common": 254,
+      "identicalPrefix": true
+    }
+  ],
+  "v79CampaignGuards": [
+    {
+      "code": "SS01",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 36,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 32,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS02",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 40,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 46,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS03",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 47,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 97,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS04",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 49,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 143,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS05",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 44,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 73,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    }
+  ],
+  "v81OtherGames": [
+    {
+      "code": "SS06",
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 296,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS08",
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 262,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS10",
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 580,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS11",
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 307,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    }
+  ],
+  "v81Campaign": [
+    {
+      "code": "SS07",
+      "levels": [
+        {
+          "level": 1,
+          "won": false,
+          "actions": 511,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    }
+  ],
+  "sourceL1": {
+    "played": 100,
+    "won": 100,
+    "unchangedFromV71": 98
+  },
+  "v81CampaignGuards": [
+    {
+      "code": "SS01",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 36,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 32,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS02",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 40,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 46,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS03",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 47,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 97,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS04",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 49,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 143,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    },
+    {
+      "code": "SS05",
+      "levels": [
+        {
+          "level": 1,
+          "won": true,
+          "actions": 44,
+          "state": "NOT_FINISHED"
+        },
+        {
+          "level": 2,
+          "won": true,
+          "actions": 73,
+          "state": "NOT_FINISHED"
+        }
+      ]
+    }
+  ],
+  "sourceIndicatedSites": {
+    "episodes": 108,
+    "counts": {
+      "false": {
+        "unchanged": 141,
+        "other_change": 760,
+        "arrived": 1,
+        "official": 8
+      },
+      "true": {
+        "unchanged": 16,
+        "other_change": 82,
+        "arrived": 10,
+        "official": 2
+      }
+    },
+    "interventions": [
+      {
+        "visited": true,
+        "forks": 80,
+        "arrived": 7
+      },
+      {
+        "visited": false,
+        "forks": 251,
+        "arrived": 1
+      }
+    ],
+    "positiveGames": [
+      "SKBN L1",
+      "G50T L1",
+      "KLOT L1",
+      "GABA L1",
+      "SNAR L1",
+      "WEAV L1",
+      "SK48 L1"
+    ]
+  },
+  "sourceComparisonWithV76": {
+    "compared": 100,
+    "changes": []
+  },
+  "ss08Comparison": {
+    "reference": 339,
+    "candidate": 262,
+    "firstDifference": 27,
+    "referenceWon": false,
+    "candidateWon": false
+  }
+}

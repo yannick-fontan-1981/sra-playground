@@ -134,7 +134,7 @@ import { createSicVerifyCombinedMarks } from '../sic/staged-marks.ts';
 import { createSicMoveMaskedPieces, learnSelectedAccessId } from '../sic/move-masked-pieces.ts';
 import { createSicLinkOpenings, learnLinkOpeningsId } from '../sic/link-openings.ts';
 import { createSicReproduceCue, learnAnimatedCueId } from '../sic/reproduce-cue.ts';
-import { measureAnimatedCells, measureAnimatedContact, type AnimatedContactEvidence } from '../sic/observed-animation.ts';
+import { measureAnimatedCells, measureAnimatedContact, returningTranslation, type AnimatedContactEvidence } from '../sic/observed-animation.ts';
 import { regionChanged, singleChangedPoint, solidRegionValue, type ClickMarkerEvidence } from '../sic/observed-click-regions.ts';
 import { framedRows } from './v6-coupled-displays.ts';
 import { countChangesInside } from '../sic/workspace-click.ts';
@@ -164,6 +164,7 @@ import { createPreparedEffects, preparedEffectsId } from '../sic/test-prepared-e
 import { preparationReturns } from '../sic/preparation-experiments.ts';
 import { decidePlanContinuation, maximumCommittedActions } from '../sic/plan-step.ts';
 import { planningGroupsWithExperiments } from '../sic/experiment-selection-groups.ts';
+import { sourceFieldRelations } from '../sic/compose-field-relations.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
@@ -430,6 +431,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readClickMarker?: NativeExecution['readClickMarker'];
   private readWorkspaceClick?: NativeExecution['readWorkspaceClick'];
   private readAnimatedCells?: NativeExecution['readAnimatedCells'];
+  private readReturningTranslation?: NativeExecution['readReturningTranslation'];
   private readAnimatedContact?: NativeExecution['readAnimatedContact'];
   private latestInformationLevel: number | null = null;
   private planning: { execution: NativeExecution; inputs: readonly NativeCommand[];
@@ -825,6 +827,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.readClickMarker ? { readClickMarker: this.readClickMarker } : {}),
       ...(this.readWorkspaceClick ? { readWorkspaceClick: this.readWorkspaceClick } : {}),
       ...(this.readAnimatedCells ? { readAnimatedCells: this.readAnimatedCells } : {}),
+      ...(this.readReturningTranslation ? { readReturningTranslation: this.readReturningTranslation } : {}),
       ...(this.readAnimatedContact ? { readAnimatedContact: this.readAnimatedContact } : {}) },
       inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [], observedTrials: new Map() };
     try {
@@ -1535,6 +1538,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.readClickMarker = undefined;
       this.readWorkspaceClick = undefined;
       this.readAnimatedCells = undefined;
+      this.readReturningTranslation = undefined;
       this.readAnimatedContact = undefined;
       if (authority === 'sicOnly' && !publicBoundary && /^ACTION[1-4]$/.test(outcome.command.action_ref)) {
         const rows = this.current!.frame_rows;
@@ -1620,6 +1624,11 @@ export class NativeV6Runtime implements NativeV6Backend {
           if (this.observation?.observation_ref !== context.afterRef) return null;
           const cells = measureAnimatedCells(first.frame_rows, rows, frames, points);
           return cells.length ? freeze({ ...context, cells }) : null;
+        };
+        this.readReturningTranslation = (action, footprint) => {
+          if (action !== context.action || this.observation?.observation_ref !== context.afterRef) return null;
+          const displacement = returningTranslation(first.frame_rows, rows, frames, footprint);
+          return displacement ? freeze({ ...context, displacement }) : null;
         };
         if (outcome.command.action_ref === 'ACTION6' && frames.length >= 3) {
           const point = [outcome.command.data.x!, outcome.command.data.y!] as const;
@@ -2778,15 +2787,15 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const sequence = (configuration.window_constraints as R).labeled_sequence_composition.labeled_sequence_question;
     const now = options.now ?? (() => performance.now());
     const testCompositions = recovery.solver === 'sic-fallback';
-    const groups = testCompositions ? planningGroupsWithExperiments(standalonePlanningGroups) : standalonePlanningGroups;
+    const groups = testCompositions ? planningGroupsWithExperiments(standalonePlanningGroups, recovery.informationPreference?.mode==='active' && ['prefer_a_verified_coverage_experiment','compose_a_sustained_crossing','bind_earlier_motions_to_registered_subjects'].includes(recovery.informationPreference.strategy)) : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 189 : 183,
-      groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior, preparationReturns } : {}) };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 190 : 183,
+      groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior, preparationReturns, sourceFieldRelations } : {}) };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      ...(testCompositions ? [createCompositionTrials(), createPreparedEffects()] : []),
+      ...(testCompositions ? [createCompositionTrials(), createPreparedEffects(recovery.informationPreference,recovery)] : []),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
@@ -2804,6 +2813,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
       createSicQueuedPlacement(), createSicQueuedPlacement(learnQueuedPlacementId), createSicLegendRecolor(), createSicLegendRecolor(matchExampleId), createSicVerifyPatternChoice(), createSicFacetGrowth(), createSicFacetGrowth(learnFacetGrowthId, recovery.solver === 'sic-fallback'), createSicChartRoute(), createSicChartRoute(learnChartRouteId), createSicVerifyReferencePlacement(), createSicVerifyReferencePlacement(learnReferencePlacementId, recovery.solver === 'sic-fallback'), createSicCarryToFrame(), createSicCarryToFrame(learnCarryToFrameId), createSicPortPairing(), createSicPortPairing(learnPortPairingId), createSicFollowStableReference(), createSicVerifySequenceEdits(), createSicDisplayCoupling(), createSicContrastControls(), createSicFieldIsolation(), createSicFieldIsolation(learnFieldIsolationId), createSicDirectionalReception(), createSicDirectionalReception(learnDirectionalReceptionId, recovery.solver === 'sic-fallback'), createSicWindowCoverage(), createSicWindowCoverage(learnWindowCoverageId), createSicVerifyPanelConfiguration(), createSicVerifyCrossingRows(), createSicVerifyCrossingRows(learnCrossingRowsId, recovery.solver === 'sic-fallback'), createSicVerifyTraceCoverage(), createSicRadialConnection(), createSicRadialConnection(learnRadialConnectionId), createSicVerifyCaptureRoute(), createSicVerifyCaptureRoute(learnCaptureRouteId), createSicVerifyBranchAlignment(), createSicVerifyBranchAlignment(learnBranchAlignmentId), createSicVerifyOrderedFeedback(), createSicCatalogueComparison(), createSicCatalogueComparison(revealedExampleId), createSicReceptionAccess(), createSicVerifyMarkerPlacement(), createSicFramedReception(), createSicFramedReception(learnFramedReceptionId), createSicWindowRelation(), createSicWindowRelation(learnWindowRelationId), createSicAnimationContact(), createSicAnimationContact(learnAnimationContactId, recovery.solver === 'sic-fallback'), createSicReflectedPlacement(), createSicReflectedPlacement(coordinateObservedMotionId), createSicMaterialAssembly(), createSicMaterialAssembly(learnMaterialAssemblyId), createSicTranslateCoupledPieces(), createSicVerifyCoupledRoute(), createSicVerifyConnectedRoute(), createSicVerifyConnectedRoute(learnConnectedRouteId), createSicVerifyInventoryTransfer(), createSicVerifyInventoryTransfer(learnInventoryTransferId), createSicVerifyRemoteReplay(), createSicVerifyRemoteReplay(learnRemoteReplayId), createSicVerifyOrientedDelivery(), createSicVerifyOrientedDelivery(learnOrientedDeliveryId), createSicIndicatedJump(), createSicIndicatedJump(learnIndicatedJumpId), createSicHighlightedRoute(), createSicHighlightedRoute(learnHighlightedRouteId), createSicPairedPassage(), createSicPairedPassage(learnPairedPassageId, recovery.solver === 'sic-fallback'), createSicVerifyFrameContact(), createSicVerifyFrameContact(learnFrameAccessId, recovery.solver === 'sic-fallback'), createSicSwitchedSurface(), createSicSwitchedSurface(learnSwitchedSurfaceId, recovery.solver === 'sic-fallback'), createSicVerifyGaugeEffect(), createSicVerifyGaugeEffect(learnGaugeEffectId), createSicCoupledGaugeRoute(), createSicVerifyReactiveMotion(), createSicVerifyReactiveMotion(learnReactiveMotionId), createSicVerifyChannelAccess(), createSicVerifyCompartmentGrowth(), createSicVerifyPointAccess(), createSicMergeForDemand(), createSicVerifyLinkedMotion(), createSicLinkedGroupRoute(), createSicVerifyRemovableSupport(), createSicVerifyRemovableSupport(learnRemovableSupportId), createSicProtectGravityRoute(), createSicGatedCascade(), createSicGatedCascade(learnCascadeId), createSicLayeredFit(), createSicLayeredFit(learnLayeredFitId), createSicLitRoute(), createSicLitRoute(learnLitRouteId), createSicPivotCargo(), createSicPivotCargo(learnPivotCargoId, recovery.solver === 'sic-fallback'), createSicMoveMaskedPieces(), createSicNestedPassage(), createSicNestedPassage(learnNestedPassageId), createSicLinkOpenings(), createSicLinkOpenings(learnLinkOpeningsId), createSicReproduceCue(), createSicReproduceCue(learnAnimatedCueId, recovery.solver === 'sic-fallback'), createSicNavigateRevealedGrid(), createSicArrangeTurnPosts(), createSicArrangeTurnPosts(learnTurnPostsId), createSicCavityAccess(), createSicLearnCorrespondence(), createSicLearnCorrespondence(learnRepeatedCellsId), createSicCompareAvailableControls(), createSicPublicInputExploration(recovery.solver === 'sic-fallback'), createSicRecheckDirectionalControls(), createSicTrialRepeatedLinearControls(), createSicContrastControls(contrastProbeId),
     ],
       authorityPolicy: loaded.common, familyAgenda: 'active', withdrawPrimaryFamily: recovery.solver === 'sic-fallback',
+      informationPreference: recovery.informationPreference,
       adaptiveReasoning: true, maxPointOccurrences: loaded.common.input_domain.max_point_occurrences,
       ...(options.now ? { now: options.now } : {}) });
   }

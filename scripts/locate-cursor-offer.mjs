@@ -1,0 +1,94 @@
+import assert from "node:assert/strict";
+import { readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { pathToFileURL } from "node:url";
+import { hash } from "./sic-study-source-replay.mjs";
+import { dispatchWord } from "./sic-study-source-fork.mjs";
+const [solver, engine, file, output] = process.argv.slice(2);
+const mod = (root, p) => import(pathToFileURL(resolve(root, p)).href);
+const {
+  cursorCandidates,
+  newCursorMemory,
+  offerCursorTrial,
+  recordCursorTrial,
+} = await mod(solver, "src/sic/marked-cursor-selection.ts");
+const { measureNativeObservation, ObservedInputDomain } = await mod(
+  solver,
+  "src/logos-engine/v6-native-observer.ts",
+);
+const { createGameDispatcher } = await mod(
+  engine,
+  "src/runtime/native-game-dispatcher.ts",
+);
+const env = createGameDispatcher(() => {
+  throw Error("Unexpected backend");
+});
+const r = JSON.parse((await readFile(file, "utf8")).trim());
+assert.equal(r.resets, 0);
+assert.equal(r.start, r.finish);
+const o = (b, n) =>
+  measureNativeObservation(
+    {
+      frame_rows: b.frame,
+      frame_hash: hash(b),
+      level: 1,
+      levels_completed: 0,
+      state: b.state,
+      available_action_refs: b.availableActionIds.map((k) => "ACTION" + k),
+    },
+    n,
+    "cursor-diagnosis",
+  );
+let b = await env.dispatch({ type: "load", code: r.code, level: r.start });
+if (b.level !== r.start && b.canSelectLevel)
+  b = await env.dispatch({ type: "selectLevel", level: r.start });
+assert.equal(hash(b), r.initial);
+const m = newCursorMemory(),
+  steps = [],
+  domain = new ObservedInputDomain(32);
+let before = await o(b, 1);
+for (const [i, c] of r.replayCommands.entries()) {
+  const points = domain
+    .candidates(before)
+    .filter((x) => x.action_ref === "ACTION6");
+  const marks = cursorCandidates(before, b.frame, m),
+    potential = offerCursorTrial(m, before, b.frame, true, false),
+    strict = offerCursorTrial(m, before, b.frame, false, true);
+  const op =
+    c.id === 6 ? "ACTION6:" + c.data.x + "," + c.data.y : "ACTION" + c.id;
+  const next = await dispatchWord(env, op);
+  assert.equal(hash(next).slice(0, 16), c.to);
+  const after = await o(next, i + 2);
+  const trial =
+    c.cursorStage && potential?.command === op ? potential : undefined;
+  if (c.cursorStage) assert.ok(trial);
+  const record = {
+    decision: i + 1,
+    points: points.length,
+    motions: m.motions.length,
+    marked: marks.length,
+    possible: !!potential,
+    projected: !!strict,
+    chosen: c.cursorStage ?? null,
+    changedClick: c.id === 6 && c.from !== c.to,
+    actualFamily: c.family,
+  };
+  record.outcome =
+    recordCursorTrial(m, before, after, b.frame, next.frame, op, trial) ?? null;
+  record.pendingAfter = !!m.pending;
+  steps.push(record);
+  before = after;
+  b = next;
+}
+await writeFile(output, JSON.stringify(steps), { flag: "wx" });
+console.log(
+  JSON.stringify({
+    initial: steps[0],
+    withMarks: steps.filter((x) => x.marked).length,
+    possible: steps.filter((x) => x.possible).length,
+    chosen: steps.filter((x) => x.chosen).length,
+    changedClicks: steps
+      .filter((x) => x.changedClick)
+      .map((x) => [x.decision, x.motions, x.marked, x.pendingAfter]),
+  }),
+);

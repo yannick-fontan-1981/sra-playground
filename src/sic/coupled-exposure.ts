@@ -4,8 +4,8 @@ export type ExposureSite = { pos: NativePoint; color: number };
 export type ExposureDial = { point: NativePoint; vector: NativePoint; active: boolean };
 export type ExposureScene = { origin: NativePoint; size: NativePoint; pitch: number; actor: NativePoint; bodies: ExposureSite[];
   slots: ExposureSite[]; walls: NativePoint[]; dial: ExposureDial[]; layout: string; actor_color: number };
-export type ExposureColors = { linked: number; released: number; shadow: number; lit: number };
-export type CouplingColors = Pick<ExposureColors, 'linked' | 'released'>;
+export type CouplingColors = { linked: number; released: number };
+export type ExposureColors = { shadow: number; lit: number } & (CouplingColors | { linked: null; released: null });
 export type ExposureBoard = { width: number; height: number; walls: number[]; goals: { cell: number; color: number }[]; colors: ExposureColors };
 type Piece = { cell: number; color: number };
 export type ExposureState = { actor: number; facing: number; pieces: Piece[] };
@@ -19,19 +19,33 @@ const stateKey = ({ actor, facing, pieces }: ExposureState) => [actor, facing, .
 
 export function readExposureBoard(scene: ExposureScene, photo: Pick<ExposureColors, 'shadow' | 'lit'>,
   retained?: CouplingColors): [ExposureBoard, ExposureState] | null {
-  const { size: [width, height], slots, bodies, actor, dial, walls } = scene;
+  const { slots, bodies, dial } = scene;
   if (bodies.length < 3 || bodies.length > (retained ? 8 : 5) || slots.length !== bodies.length || dial.length !== exposureBearings.length) return null;
   const linked = retained ? [retained.linked] : [...new Set(bodies.filter(b => b.color !== photo.shadow).map(b => b.color))];
   const released = retained ? [retained.released] : [...new Set(slots.filter(slot => slot.color !== linked[0] && slot.color !== photo.shadow).map(slot => slot.color))];
   if (linked.length !== 1 || released.length !== 1 || !bodies.some(b => b.color === photo.shadow)
     || !slots.some(slot => slot.color === linked[0])) return null;
   const colors = { linked: linked[0]!, released: released[0]!, ...photo }, palette = new Set(Object.values(colors));
-  if (palette.size !== 4 || [...bodies, ...slots].some(piece => !palette.has(piece.color))) return null;
-  const facing = exposureBearing(dial.find(position => position.active)?.vector ?? [0, 0]);
-  if (facing < 0) return null;
+  if (palette.size !== 4) return null;
+  return exposureLayout(scene, colors);
+}
+
+export function exposureLayout(scene: ExposureScene, colors: ExposureColors): [ExposureBoard, ExposureState] | null {
+  const { size: [width, height], slots, bodies, dial, walls } = scene;
+  if (!bodies.length || bodies.length !== slots.length || bodies.length > 8 || dial.length !== exposureBearings.length) return null;
+  const palette = new Set(Object.values(colors));
+  if ([...bodies, ...slots].some(piece => !palette.has(piece.color))) return null;
+  const state = observedExposureState(scene);
+  if (state.facing < 0) return null;
   const board = { width, height, walls: walls.map(p => at(p, width)), goals: slots.map(s => ({ cell: at(s.pos, width), color: s.color })), colors };
+  return [board, state];
+}
+
+export function observedExposureState(scene: ExposureScene): ExposureState {
+  const { size: [width], bodies, actor, dial } = scene;
+  const facing = exposureBearing(dial.find(position => position.active)?.vector ?? [0, 0]);
   const sorted = [...bodies].sort((a, b) => at(a.pos, width) - at(b.pos, width));
-  return [board, { actor: at(actor, width), facing, pieces: sorted.map(b => ({ cell: at(b.pos, width), color: b.color })) }];
+  return { actor: at(actor, width), facing, pieces: sorted.map(b => ({ cell: at(b.pos, width), color: b.color })) };
 }
 
 export function exposureMatches(board: ExposureBoard, state: ExposureState, scene: ExposureScene) {
@@ -45,7 +59,7 @@ export function exposureMatches(board: ExposureBoard, state: ExposureState, scen
 
 export function readTrackedExposure(rows: NativeRows, scene: ExposureScene, board: ExposureBoard, dialInk: number): ExposureScene | null {
   const { width, height, colors } = board, { origin, pitch, actor_color } = scene, sides = pitch - 2;
-  const walls = new Set(board.walls), inks = Object.values(colors), bodies: ExposureSite[] = [], actors: NativePoint[] = [];
+  const walls = new Set(board.walls), inks = Object.values(colors).filter((c): c is number => c !== null), bodies: ExposureSite[] = [], actors: NativePoint[] = [];
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     if (walls.has(y * width + x)) continue;
     const l = origin[0] + x * pitch + 1, t = origin[1] + y * pitch + 1, hues = new Map<number, number>();
@@ -142,14 +156,14 @@ export function exposureRules(board: ExposureBoard) {
       if (piece.color === released || shield & (1 << i)) continue;
       const light = sight(actor, piece.cell), exposed = !!(light.mask & (1 << facing))
         && light.between.every(cell => occupant(pieces, cell) < 0);
-      if (piece.color === linked) { if (exposed) piece.color = released; }
+      if (piece.color === linked) { if (exposed && released !== null) piece.color = released; }
       else piece.color = exposed ? lit : shadow;
     }
     let contacts = 0;
     for (const [i, piece] of pieces.entries()) {
       if (piece.color === released && pieces.some(peer => peer.color === released && neighbors[piece.cell]!.includes(peer.cell))) contacts |= 1 << i;
     }
-    for (const [i, piece] of pieces.entries()) if (contacts & (1 << i)) piece.color = linked;
+    if (linked !== null) for (const [i, piece] of pieces.entries()) if (contacts & (1 << i)) piece.color = linked;
     return shield | contacts;
   }
   function project(current: ExposureState, action: number): ExposureState {

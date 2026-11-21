@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { measureAnimatedCells } from '../src/sic/observed-animation.ts';
+import { measureAnimatedCells, returningTranslation } from '../src/sic/observed-animation.ts';
 import { createSicAnimationContact, learnAnimationContactId } from '../src/sic/animation-contact.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 
@@ -8,6 +8,24 @@ const points = [[0, 0], [1, 0], [2, 0]] as const;
 const still = [[0, 0, 0]];
 const first = [[7, 0, 0]];
 const both = [[7, 7, 0]];
+
+test('SIC measures a translated silhouette that returns while its centre stays occupied', () => {
+  const start = [[0, 3, 3, 3, 0, 0]];
+  const moving = [[0, 0, 3, 3, 3, 0]];
+  const body = [[1, 0], [2, 0], [3, 0]] as const;
+  assert.deepEqual(measureAnimatedCells(start, start, [moving, start], [body[1]]), []);
+  assert.deepEqual(returningTranslation(start, start, [moving, start], body), [1, 0]);
+  assert.equal(returningTranslation(start, moving, [moving, moving], body), null);
+  assert.equal(returningTranslation(start, start, [[[0, 0, 3, 0, 0, 0]], start], body), null);
+});
+
+test('SIC requires a unique displacement of the specified component among equal copies', () => {
+  const start = [[0, 2, 0, 0, 2, 0, 0]];
+  const body = [[1, 0]] as const;
+  assert.deepEqual(returningTranslation(start, start, [[[0, 0, 2, 0, 2, 0, 0]], start], body), [1, 0]);
+  assert.equal(returningTranslation(start, start, [[[0, 2, 0, 0, 2, 0, 2]], start], body), null);
+  assert.equal(returningTranslation(start, start, [[[0, 0, 2, 0, 0, 0, 2]], start], body), null);
+});
 
 test('SIC measures cells activated only during a returned animation', () => {
   assert.deepEqual(measureAnimatedCells(still, still, [first, both, first, still], points), [0, 1]);

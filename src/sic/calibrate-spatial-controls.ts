@@ -18,7 +18,8 @@ export function spatialControls(
   read: string,
   failed: Record<string, number>,
   frame: string,
-  actor: string
+  actor: string,
+  compatiblePitch?: (length:number)=>boolean
 ): { pitch: XY; motors: Hypothesis[] } | null {
   const keys = [...available].filter((q) => q !== read && !q.startsWith('ACTION6') && q !== 'RESET'),
     all = m.displacements ?? m.axes,
@@ -28,8 +29,16 @@ export function spatialControls(
       if ((v.d[0] === 0) === (v.d[1] === 0)) continue;
       counts.set(size(v.d), (counts.get(size(v.d)) ?? 0) + Math.min(8, v.count));
     }
-  const best = [...counts].sort((a, b) => b[1] - a[1])[0];
-  if (!best || best[1] < 2) return null;
+  const best = [...counts].filter(([length])=>!compatiblePitch || compatiblePitch(length)).sort((a, b) => b[1] - a[1])[0];
+  if (!best || (!compatiblePitch && best[1] < 2)) return null;
+  if (compatiblePitch) {
+    // A turn can shift the bounding-box center of an asymmetric sprite within its cell.
+    const support=keys.flatMap(q=>Object.values(all[q]??{})).filter(v=>{
+      const dimensions=v.d.map(Math.abs).sort((a,b)=>b-a);
+      return dimensions[0]!>best[0]/2 && dimensions[0]!<1.5*best[0] && dimensions[1]!<best[0]/2;
+    }).reduce((n,v)=>n+v.count,0);
+    if(support<2)return null;
+  }
   const l = best[0],
     pitch: XY = [l, l],
     axes: XY[] = [

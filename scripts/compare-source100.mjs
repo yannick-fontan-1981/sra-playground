@@ -1,6 +1,8 @@
 import { createHash } from 'node:crypto';
 import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
+import { sourceInterface } from './sic-study-source-interface.mjs';
+import { fromSourceFork } from './sic-study-source-fork.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -19,6 +21,10 @@ const { BrowserV6Agent } = await load(solverRoot, 'src/runtime/v6-agent.ts');
 const { V6AgentService } = await load(solverRoot, 'src/runtime/v6-agent-service.ts');
 const { createNativeV6Runtime } = await load(solverRoot, 'src/logos-engine/v6-native-runtime.ts');
 const { defaultRecoveryPack } = await load(solverRoot, 'src/sic/active-recovery.ts');
+const packPath = process.env.SIC_STUDY_RECOVERY_PACK;
+const packRevision = packPath ? (await load(solverRoot,'src/sic/recovery-pack.ts')).readRecoveryRevision(
+  JSON.parse(await readFile(packPath,'utf8'))) : null;
+if (packRevision && packRevision.configuration.solver !== 'sic-fallback') throw Error('SIC Fallback pack required');
 const declarationsRoot = join(
   environment,
   'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6'
@@ -102,7 +108,33 @@ async function run(code, games) {
           levelCount: board.levelCount - start + 1,
           levelsCompleted: board.levelsCompleted - initialCompleted,
         };
-  const service = new V6AgentService(async(recovery) => {const backend=await createNativeV6Runtime(declarations,{recovery});return lesson?lesson.wrap(backend):backend;});
+  const cursorAudit = process.env.SIC_STUDY_CURSOR_OFFERS ? [] : null;
+  const boundaryAudit = process.env.SIC_STUDY_BOUNDARY_LAWS ? [] : null;
+  const service = new V6AgentService(async(recovery) => {
+    const backend=await createNativeV6Runtime(declarations,{recovery});
+    if (cursorAudit || boundaryAudit) {
+      const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
+      const original = family.proposeInGroup.bind(family);
+      family.proposeInGroup = async (...args) => {
+        const proposal = await original(...args);
+        const trial = proposal?.cursorSelectionForecast ?? proposal?.experiment?.cursorTrial;
+        cursorAudit?.push({decision:issued+1, group:args[0], offered:trial?.stage??null});
+        const epoch=args[1].level_epoch;
+        if(boundaryAudit && epoch>1 && !boundaryAudit.some(b=>b.epoch===epoch)){
+          const memory=family.state();
+          const laws=(memory.localCapacity?.laws??[]).map(law=>({actions:[law.a,law.b,law.c],
+            trainedEpoch:Number(law.ref.match(/:epoch:(\d+):/)?.[1]??0),signature:hash(law.key),
+            matchedInTraining:law.matchedInTraining}));
+          boundaryAudit.push({epoch,decision:issued+1,laws,terminalContacts:memory.previewLearning?.terminal?.length??0,
+            previewBindings:Object.keys(memory.previewLearning?.bindings??{}).length,
+            situatedPreparations:memory.previewLearning?.inheritedPreparations?.length??0,
+            producedCues:Object.values(memory.previewLearning?.bindings??{}).filter(binding=>binding.producer).length});
+        }
+        return proposal;
+      };
+    }
+    return lesson?lesson.wrap(backend):backend;
+  });
   const transport = { request: (operation) => service.handle(operation), reset() {}, dispose() {} };
   const trajectory = createHash('sha256'),
     levels = [],
@@ -119,7 +151,12 @@ async function run(code, games) {
   let levelCoverage;
   const replayCommands = process.env.SIC_STUDY_RECORD_COMMANDS === '1' ? [] : null;
   const preparation = new Map();
+  let withdrawal;
   const collectPreparation = (snapshot) => {
+    if(!withdrawal){
+      const event=snapshot.trace?.find(e=>e.kind==='sic_fallback_primary_withdrawn');
+      if(event)withdrawal={family:event.family,observation:event.observation_ref};
+    }
     const event = snapshot.trace?.findLast((e) => e.kind === 'sic_preparation_outcome');
     if (event && !preparation.has(event.revision))
       preparation.set(event.revision, { ...event, actionIndex: issued });
@@ -170,7 +207,7 @@ async function run(code, games) {
     targetLevels: finish - start + 1,
     actionsPerLevel: cap,
     parallelWorkers: Number(process.env.SIC_STUDY_WORKERS ?? 4),
-    recoveryConfiguration: () => ({ ...defaultRecoveryPack, solver: 'sic-fallback' }),
+    recoveryConfiguration: () => packRevision?.configuration ?? { ...defaultRecoveryPack, solver: 'sic-fallback' },
     canDispatch: () => true,
     onState: collectPreparation,
     getObservation: observation,
@@ -186,6 +223,9 @@ async function run(code, games) {
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
+      const localCapacity=plan?.localCapacityForecast?structuredClone(plan.localCapacityForecast):null;
+      const localSeal=localCapacity?hash(localCapacity):null;
+      const configuration=plan?.configurationForecast;
       const mobilitySeal=plan?.mobilityForecast?hash(plan.mobilityForecast):null;
       const mechanismSeal=plan?.mechanismForecast?hash(plan.mechanismForecast):null;
       const indicatorProbeSeal=plan?.indicatorProbeForecast?hash(plan.indicatorProbeForecast):null;
@@ -209,7 +249,16 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(localSeal?{localCapacity,localSeal}:{}), ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+          ...(plan?.compositionForecast?{composition:plan.compositionForecast}:{}),
+          ...(plan?.roleArrangementForecast?{roleArrangement:plan.roleArrangementForecast}:{}),
+          ...(plan?.reactiveContactForecast?{reactiveContact:plan.reactiveContactForecast}:{}),
+          ...(plan?.operandForecast?{operand:plan.operandForecast}:{}),
+          ...(plan?.fieldForecast?{field:plan.fieldForecast}:{}),
+          ...(plan?.terminalContactForecast?.witness?.basis==='unique_contact_hypothesis'?{contactHypothesis:{
+            actor:plan.terminalContactForecast.witness.actor,marker:plan.terminalContactForecast.witness.marker,
+            from:plan.terminalContactForecast.from,to:plan.terminalContactForecast.to,site:plan.terminalContactForecast.site,
+            distance:plan.terminalContactForecast.distance}}:{}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
@@ -225,6 +274,21 @@ async function run(code, games) {
       trajectory.update(
         JSON.stringify([action, board.frame, board.frames, board.level, board.levelsCompleted, board.state])
       );
+      if (configuration && replayCommands)
+        Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
+      if(plan?.cooperativeTransportForecast && replayCommands)Object.assign(replayCommands.at(-1),{cooperative:plan.cooperativeTransportForecast});
+      if(plan?.landmarkForecast && replayCommands)Object.assign(replayCommands.at(-1),{landmark:plan.landmarkForecast});
+      if(plan?.cursorSelectionForecast && replayCommands){
+        const cursor=plan.cursorSelectionForecast;
+        Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor),
+          observedSubjects:[cursor.source.box,cursor.target.box]});
+        if(cursor.decisionMode)Object.assign(replayCommands.at(-1),{decisionMode:cursor.decisionMode});
+        if(cursor.contrast)Object.assign(replayCommands.at(-1),{controlContrast:cursor.contrast});
+        if(cursor.repairOptions)Object.assign(replayCommands.at(-1),{repairOptions:cursor.repairOptions,triedMotors:cursor.triedMotors});
+        if(cursor.beyondReturn)Object.assign(replayCommands.at(-1),{beyondReturn:true});
+        if(cursor.projectedMove) Object.assign(replayCommands.at(-1),{cursorMotor:cursor.projectedMove.command,
+          cursorDelta:cursor.projectedMove.delta});
+      }
       if (source)
         steps.push({
           a: action.id,
@@ -295,6 +359,7 @@ async function run(code, games) {
       ...(process.env.SIC_STUDY_WORKERS ? {parallelWorkers:Number(process.env.SIC_STUDY_WORKERS)} : {}),
       initial,
       initialCompleted,
+      ...(withdrawal?{withdrawal}:{}),
       ...(prefixFile ? { sourcePrefixActions: entryActions } : {}),
       ...(lesson?{observedPriorLevelActions:lesson.length}:{}),
       levels,
@@ -320,7 +385,7 @@ async function run(code, games) {
           frame,
           activation,
           territorial,
-          terminalContact,mobilityProbe,mechanism,localRepeat,
+          terminalContact,mobilityProbe,mechanism,localRepeat,cueSearch,relativePlacement,
           unreadIndicator,
           witnessedPreview,
           occupancy,
@@ -376,6 +441,8 @@ async function run(code, games) {
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
           ...(terminalContact?{terminalContact}:{}), ...(mobilityProbe?{mobilityProbe}:{}), ...(mechanism?{mechanism}:{}), ...(localRepeat?{localRepeat}:{}),
+          ...(cueSearch?{cueSearch}:{}),
+          ...(relativePlacement?{relativePlacement}:{}),
           ...(unreadIndicator ? {unreadIndicator} : {}),
           ...(witnessedPreview ? {witnessedPreview} : {}),
           ...(occupancy ? {occupancy} : {}),
@@ -393,6 +460,9 @@ async function run(code, games) {
           ...(transfer ? {transfer} : {}),
         })
       ),
+      ...(cursorAudit ? {cursorAudit} : {}),
+      ...(boundaryAudit ? {boundaryAudit} : {}),
+      ...(packRevision ? {packDigest:packRevision.digest} : {}),
       ...(source ? { steps } : {}),
     };
   } finally {
@@ -407,21 +477,32 @@ if (source && (catalogue.length !== 100 || (cohort === 'source' && (start !== 1 
 const selected = cohort.startsWith('source:') ? cohort.slice(7).split(',') : catalogue;
 if (selected.some((code) => !catalogue.includes(code))) throw Error('Game outside cohort');
 const [index, shards] = shardArg.split('/').map(Number);
+const variation = process.env.SIC_STUDY_SOURCE_INTERFACE;
+if (variation && !source) throw Error('Interface variations apply only to the source cohort');
+const forkFile = process.env.SIC_STUDY_SOURCE_FORKS;
+if (forkFile && (!source || start !== finish || variation || process.env.SIC_STUDY_PUBLIC_PREFIX || process.env.SIC_STUDY_OBSERVED_LESSON))
+  throw Error('A source fork requires one direct-entry source level');
+const forks = forkFile ? JSON.parse(await readFile(forkFile, 'utf8')) : null;
 const games = source
-  ? await sourceBackend(environment)
+  ? sourceInterface(await sourceBackend(environment), variation)
   : (await load(environment, 'src/runtime/native-game-dispatcher.ts')).createGameDispatcher(() => {
       throw Error('Native evaluation unexpectedly requested a legacy game');
     });
-for (const code of selected.filter((_, i) => i % shards === index)) {
+const jobs = forks ? forks.filter(f => selected.includes(f.code) && f.level === start)
+  : selected.map(code => ({code}));
+for (const job of jobs.filter((_, i) => i % shards === index)) {
+  const {code} = job;
   try {
-    const result = await run(code, games);
+    const result = await run(code, forks ? fromSourceFork(games, job) : games);
+    if (forks) result.sourceFork = { id: job.id, prefix: job.prefix, arm: job.arm, initial: job.initial };
+    if (variation) result.sourceInterface = variation;
     await appendFile(output, JSON.stringify(result) + '\n');
     console.log(
       code,
       result.levels.map((level) => [level.won, level.actions])
     );
   } catch (error) {
-    await appendFile(output, JSON.stringify({ code, error: String(error) }) + '\n');
+    await appendFile(output, JSON.stringify({ code, ...(forks ? {sourceFork: job.id} : {}), error: String(error) }) + '\n');
     process.exitCode = 1;
   }
 }

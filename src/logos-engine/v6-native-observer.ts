@@ -26,6 +26,7 @@ export interface MeasuredObservation extends NativeObservation {
   unknowns: readonly string[]; provenance: 'public_frame_connected_components_only';
 }
 export interface ObserverPublicPacket {
+  readonly palette?: readonly string[];
   frame_rows: NativeRows; frame_hash: string; level: number;
   levels_completed: number; state: string; available_action_refs: readonly string[];
 }
@@ -227,6 +228,7 @@ export async function measureNativeObservation(publicPacket: ObserverPublicPacke
       identity_ambiguous: counts.get(signature)! > 1, identity_scope: 'monochrome_component_not_physical_object' };
   });
   return { revision, level_epoch: publicPacket.level, frame_hash: publicPacket.frame_hash,
+    ...(publicPacket.palette ? {palette:publicPacket.palette} : {}),
     observation_ref: `${scope}:epoch:${publicPacket.level}:revision:${revision}:frame:${publicPacket.frame_hash}`,
     coordinate_basis: 'screen', entities, available_action_refs: [...publicPacket.available_action_refs],
     state: publicPacket.state, levels_completed: publicPacket.levels_completed,

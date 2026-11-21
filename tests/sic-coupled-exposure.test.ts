@@ -2,6 +2,25 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativePoint } from '../src/logos-engine/v6-native-types.ts';
 import { exposureBearings, exposureRules, planExposure, readExposureBoard, type ExposureScene } from '../src/sic/coupled-exposure.ts';
+import { observeExposureConditions } from '../src/sic/observed-exposure-conditions.ts';
+
+test('two competing colour assignments are separated by a witnessed displacement and a change of orientation', () => {
+  const observe = (actor: NativePoint, piece: NativePoint, color: number, facing: number): ExposureScene => ({
+    origin: [0, 0], size: [7, 6], pitch: 4, actor, bodies: [{pos: piece, color}],
+    slots: [{pos: [5, 4], color: 3}], walls: [], actor_color: 8, layout: 'same board',
+    dial: exposureBearings.map((vector, i) => ({point: [4*i, 0], vector, active: i === facing})),
+  });
+  const start = observe([2, 2], [3, 2], 3, 0), moved = observe([2, 3], [3, 3], 3, 0);
+  const lit = observe([2, 3], [4, 3], 7, 2);
+  const move = {action_ref: 'ACTION2', data: {}}, orient = {action_ref: 'ACTION6', data: {x: 8, y: 0}};
+  const memory = observeExposureConditions(null, 1, start, moved, move, 'move');
+  assert.equal(memory?.calibrated, undefined);
+  const accepted = observeExposureConditions(memory, 1, moved, lit, orient, 'orientation');
+  assert.deepEqual(accepted?.calibrated, {shadow: 3, lit: 7, refs: ['move', 'orientation']});
+  const other = observeExposureConditions(null, 1, start, moved, move, 'move');
+  assert.equal(observeExposureConditions(other, 1, moved, observe([2, 3], [5, 3], 7, 2), orient, 'other')?.calibrated, undefined);
+  assert.equal(observeExposureConditions(accepted, 2, start, moved, move, 'new epoch')?.calibrated, undefined);
+});
 
 test('a retained coupling can propagate a push after contact creates a new linked pair', () => {
   const linked = 2, released = 6, shadow = 3, lit = 10;
