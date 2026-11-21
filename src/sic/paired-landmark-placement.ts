@@ -123,11 +123,13 @@ export function refreshedSelection(t:LandmarkTrial,l:VisualLayout):CursorTrial {
   return {...t.selection,source:{...t.selection.source,box:[box[0]!,box[1]!,box[2]!,box[3]!]},
     evidence:[...t.selection.evidence,t.pair.ref,t.firstRef]};
 }
-export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:VisualLayout,cursorResult:string|undefined,selection:CursorTrial|undefined,before:VisualLayout) {
+export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:VisualLayout,cursorResult:string|undefined,selection:CursorTrial|undefined,before:VisualLayout,pending?:CursorTrial) {
   if(t){
     m.active??={pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef};
     if(t.stage==='select_after_contact'){
-      if(cursorResult==='selection_changed_pending_motor'||cursorResult==='cursor_mark_transferred')m.handoff=true;
+      // A predicted change of the highlight can fail while the control test
+      // remains pending. The next motor determines whether the subject switched.
+      if(pending?.stage==='verify')m.handoff=true;
       else {m.tried.push(JSON.stringify([t.actor,t.peer,t.pair.role,t.home]));drop(m);}
       return m.lastResult=cursorResult;
     }

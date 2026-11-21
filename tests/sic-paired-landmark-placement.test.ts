@@ -30,7 +30,7 @@ test('two different placements separate an immediate switch from a prepared one'
   const clicked=refreshedSelection(select,parked);
   assert.deepEqual(clicked.source.box,parked.mover[0]!.box);
   const switched={inactive:[part(4,3,'inactive')],selected:[part(9,3,'selected')],mark:[right]};
-  observePlacement(m,select,switched,'selection_changed_pending_motor',clicked,parked);
+  observePlacement(m,select,switched,'cursor_mark_prediction_refuted',clicked,parked,{...clicked,stage:'verify'});
   assert.equal(proposeLandmark(m,switched,o,rows,movement,null,100),undefined);
   const verified={...switched,selected:[part(10,3,'selected')]};
   observePlacement(m,undefined,verified,'new_cursor_moved_while_previous_cursor_stayed',{...clicked,stage:'verify'},switched);
