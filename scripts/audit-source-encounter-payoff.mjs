@@ -5,8 +5,12 @@ import {getGameByCode} from '../src/games/catalog.ts';
 import {sourceBackend} from './sic-study-source-games.mjs';
 import {sourceReplay,hash,op} from './sic-study-source-replay.mjs';
 
-const [environment,evidence,output,...files] = process.argv.slice(2);
-const cases = JSON.parse(await readFile(evidence,'utf8')).continuations.unseenCases;
+const [environment,evidence,output,...args] = process.argv.slice(2);
+const raw=JSON.parse(await readFile(evidence,'utf8'));
+const files=args.filter(k=>k!=='--with-use');
+const cases = args.includes('--with-use')?raw.flatMap(r=>
+  [...new Set(r.tests.filter(t=>t.full.matched&&t.controlsAvailable&&!t.controlsMatched).map(t=>t.input))]
+    .map(d=>({...r,d}))):raw.continuations.unseenCases;
 const engine = await sourceBackend(resolve(environment)), results = [];
 const seen = new Set();
 for (const file of files) for (const line of (await readFile(file,'utf8')).trim().split(/\r?\n/)) {
@@ -16,12 +20,14 @@ for (const file of files) for (const line of (await readFile(file,'utf8')).trim(
   if (seen.has(id) || r.error || r.resets || r.sourcePrefixActions || r.observedPriorLevelActions || r.start !== r.finish) continue;
   seen.add(id);
   const rep = sourceReplay(engine,{},r);
-  for (const {prefix,a,b,c} of cases.filter(v => v.code === r.code && v.level === r.start)) {
+  for (const {prefix,a,b,c,d} of cases.filter(v => v.code === r.code && v.level === r.start)) {
     const origin = rep.restore(prefix);
+    const tail=d?[d]:[],full=[a,b,c,...tail];
     const equal = origin.availableActionIds.filter(n=>n>=1&&n<=4).map(n=>'ACTION'+n)
-      .filter(input=>input!==a).map(input=>[input,b,c]);
-    const arms = {full:[a,b,c],omitA:[b,c],omitB:[a,c],omitC:[a,b],useAlone:[c],none:[],
-      historical:r.steps.slice(prefix,prefix+3).map(op),...Object.fromEntries(equal.map((v,i)=>['rival'+i,v]))};
+      .filter(input=>input!==a).map(input=>[input,b,c,...tail]);
+    const arms = {full,omitA:[b,c,...tail],omitB:[a,c,...tail],omitC:[a,b,...tail],useAlone:[d??c],none:[],
+      ...(d?{omitD:[a,b,c]}:{}),historical:r.steps.slice(prefix,prefix+full.length).map(op),
+      ...Object.fromEntries(equal.map((v,i)=>['rival'+i,v]))};
     const play = word => {
       let board = rep.restore(prefix),used=0;
       for (const key of word) {
@@ -32,19 +38,19 @@ for (const file of files) for (const line of (await readFile(file,'utf8')).trim(
       }
       return {win:rep.win(board),used,final:hash(board)};
     };
-    for (const offset of [0,3]) {
-      const suffix = r.steps.slice(prefix+offset,prefix+offset+Math.max(0,r.cap-prefix-3)).map(op);
+    for (const offset of [0,full.length]) {
+      const suffix = r.steps.slice(prefix+offset,prefix+offset+Math.max(0,r.cap-prefix-full.length)).map(op);
       const cache = new Map(),outcomes = {};
       for (const [label,lead] of Object.entries(arms)) {
         const word = [...lead,...suffix], key = JSON.stringify(word);
         if (!cache.has(key)) cache.set(key,play(word));
         outcomes[label] = cache.get(key);
       }
-      if (offset === 3 && prefix+3+suffix.length === r.issued) {
+      if (offset === full.length && prefix+full.length+suffix.length === r.issued) {
         assert.equal(outcomes.historical.final.slice(0,16),r.steps.at(-1).to);
         assert.equal(outcomes.historical.win,r.levels[0].won);
       }
-      results.push({code:r.code,level:r.start,prefix,plan:[a,b,c],offset,suffixLength:suffix.length,outcomes});
+      results.push({code:r.code,level:r.start,prefix,plan:full,offset,suffixLength:suffix.length,outcomes});
     }
   }
 }

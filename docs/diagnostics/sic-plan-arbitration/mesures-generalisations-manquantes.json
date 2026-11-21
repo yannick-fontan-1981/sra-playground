@@ -13196,5 +13196,163 @@
         "reuse56-colm-upper.json": "7dd68fa2072cb3d93981aa5d8c503fdea3b336e6e5c27a76b8a2e626aa56b50f"
       }
     }
+  },
+  "sourceRelationalUseStudy": {
+    "copy": {
+      "configurations": 12,
+      "withForecast": 12,
+      "predictions": 49,
+      "matched": 25,
+      "isolated": 13,
+      "isolatedCases": 8,
+      "isolatedByGame": {
+        "COLM": 9,
+        "ESCT": 4
+      },
+      "isolatedAtNeighbour": 9,
+      "directWins": 0
+    },
+    "payoff": {
+      "identicalContinuations": 26,
+      "fullWins": 5,
+      "fullWinsWhenEmptyLoses": 0
+    },
+    "crossings": {
+      "levels": 148,
+      "trials": 374,
+      "apparent": 10,
+      "withBody": 9,
+      "openings": [
+        {
+          "game": "COLM",
+          "level": 1,
+          "prefix": 3,
+          "prepare": "ACTION7",
+          "traverse": "ACTION3",
+          "restoredSetup": true,
+          "previouslySeenOutcome": false
+        },
+        {
+          "game": "WA30",
+          "level": 1,
+          "prefix": 15,
+          "prepare": "ACTION5",
+          "traverse": "ACTION1",
+          "restoredSetup": false,
+          "previouslySeenOutcome": false
+        },
+        {
+          "game": "WA30",
+          "level": 1,
+          "prefix": 21,
+          "prepare": "ACTION5",
+          "traverse": "ACTION1",
+          "restoredSetup": false,
+          "previouslySeenOutcome": false
+        }
+      ],
+      "scoredOnlyAfterSetup": 0
+    },
+    "positionedUse": {
+      "levels": 148,
+      "positions": 159,
+      "pairs": 1000,
+      "orderEssential": [
+        {
+          "code": "CGWL",
+          "level": 1,
+          "prefix": 13,
+          "prepare": "ACTION4",
+          "use": "ACTION5",
+          "fixed": false,
+          "penultimate": true
+        },
+        {
+          "code": "WA30",
+          "level": 1,
+          "prefix": 24,
+          "prepare": "ACTION4",
+          "use": "ACTION5",
+          "fixed": false,
+          "penultimate": true
+        },
+        {
+          "code": "GABA",
+          "level": 1,
+          "prefix": 47,
+          "prepare": "ACTION2",
+          "use": "ACTION5",
+          "fixed": false,
+          "penultimate": true
+        },
+        {
+          "code": "SP80",
+          "level": 1,
+          "prefix": 6,
+          "prepare": "ACTION4",
+          "use": "ACTION5",
+          "fixed": false,
+          "penultimate": true
+        },
+        {
+          "code": "WA30",
+          "level": 2,
+          "prefix": 53,
+          "prepare": "ACTION1",
+          "use": "ACTION5",
+          "fixed": false,
+          "penultimate": true
+        }
+      ],
+      "chosenProperties": {
+        "across": 97,
+        "across/unique": 1,
+        "keeps/across": 1,
+        "ahead/unique": 1
+      },
+      "crossValidation": {
+        "fixedLower": {
+          "eligible": 44,
+          "ranked": 29,
+          "expectedSelected": 0,
+          "expectedUniform": 0
+        },
+        "terminalLower": {
+          "eligible": 27,
+          "ranked": 21,
+          "expectedSelected": 0.1667,
+          "expectedUniform": 0.375
+        },
+        "fixedUpper": {
+          "eligible": 67,
+          "ranked": 34,
+          "expectedSelected": 0,
+          "expectedUniform": 0
+        },
+        "terminalUpper": {
+          "eligible": 24,
+          "ranked": 15,
+          "expectedSelected": 0,
+          "expectedUniform": 0
+        }
+      }
+    },
+    "localEvidenceSHA256": {
+      "cross57-final-0.json": "8320a50f832ad34a1820d8d5d9f0b112a205a228937894c164548081a556a32b",
+      "cross57-final-1.json": "4711ed16b962d5d6731326dbd677725ac475d648326256f5ed951a392fbd6610",
+      "cross57-final-2.json": "81e607b32966ac71f342cb8026fd8d80dc08426085ec87b3ad139c638d87641a",
+      "cross57-final-3.json": "df871b694a9ea2c04bdce364013b04835d58f84cc102589ce3c903aa44875024",
+      "payrel57-0.json": "7e1187e0ffe332fc5952f31b3ae8891ede0d59c8fad0d517d9ad1edd502a47ab",
+      "payrel57-3.json": "e71cd3073160312ebf25c431ebb2f9be96ea7eadc0c2397b1ed75034a7dfcdc9",
+      "payrel57-colm-upper.json": "4403ffa53318029a2bbabd6bf5ce5f9b7c0223d8fed9a6010c0a02e07f836b04",
+      "position57-0.json": "6ef33465ecebc19ba46de8e1be88e40c90ab54efa59e27bbd5a81d1c2cbc55fe",
+      "position57-1.json": "e16a25eea6af922515e061aacb9e1c004e6e9f190d6d72d9b79a08896fd21297",
+      "position57-2.json": "e0965cbc69759e94a2f734abf2198fdbd7cf2d2eaaf366fca3884437dcccb20b",
+      "position57-3.json": "7529846943842ecd303a73cc47b37e5891d20f3d1d738e0f099193b09c9b994b",
+      "rel57-0.json": "78a29d4620dbf5c12dcebaba806c8170151c33c57570096af1449e3766f27722",
+      "rel57-3.json": "0f5af9628ce2c0d8cb29c3314dace6e8775104cde9c038c18d714e362fbdd225",
+      "rel57-colm-upper.json": "5d5842c364c181e26e5702c720abb90604a5133884892808b18db536e5cbd5e1"
+    },
+    "sourceOnly": true
   }
 }

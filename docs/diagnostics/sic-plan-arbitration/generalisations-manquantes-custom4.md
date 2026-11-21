@@ -277,6 +277,20 @@ Les contrôles de C repartent du même état. Ils la jouent seule, après A seul
 
 **Critère de progression.** Pour reconnaître un contexte malgré un changement d’apparence, apprendre quelle relation entre pièces est indispensable à D. Annoncer le sujet qui en bénéficiera et le lieu où l’utiliser avant de choisir le placement A. Depuis le même préfixe, comparer le plan complet à un placement de même durée qui conserve les autres acquis. Pour intégrer la règle, chercher d’abord une victoire source qui disparaît avec ce seul changement, puis figer le candidat pour le transfert Custom 4. SS09 L2 reste réservé à la confirmation.
 
+### Apprendre ce qui se transmet d’un endroit à un autre
+
+**Chantiers 2, 3, 5 et 11.** Le banc apprend désormais une relation dont les valeurs dépendent des pièces présentes. Une commande D peut copier l’aspect d’une case vers une voisine. La case créée par la préparation peut fournir la valeur ou la recevoir. Le banc mesure les pas du sujet, compare les motifs internes indépendamment de leur palette et utilise les valeurs de la disposition courante pour annoncer le résultat de D. Il conserve aussi les précédents où la commande a échoué. [Apprentissage des relations entre emplacements](../../../scripts/source-relational-use.mjs)
+
+Sur les douze préparations déjà isolées sur COLM et ESCT, l’ancienne comparaison d’images permettait deux prévisions dans une seule disposition. Le modèle relationnel émet 49 prévisions dans les douze dispositions. **25 se réalisent. Dans 13 cas répartis sur huit dispositions, l’effet disparaît dans tous les témoins évalués**, y compris D seule. Neuf de ces 13 changements ont lieu dans la case voisine. Ces essais portent sur des préparations sélectionnées pour leur effet connu. Le quatrième geste est annoncé après observation du résultat des trois premiers. [Essais physiques et retraits](../../../scripts/test-source-encounter-reuse.mjs)
+
+| Question posée au moteur | Observation |
+| --- | --- |
+| La quatrième commande gagne-t-elle grâce à la préparation ? | Aucun score immédiat. Les 26 comparaisons avec une continuation publique identique donnent cinq victoires de la branche préparée. Dans les cinq cas, omettre toute la préparation gagne aussi. |
+| Changer la disposition ouvre-t-il un passage au sujet ? | Sur 374 essais couvrant 148 niveaux, dix donnent l’impression d’un nouveau passage. Neuf conservent une pièce traçable. Dans trois essais, le déplacement direct laisse le sujet sur place et les commandes témoins de même longueur échouent à produire la même arrivée. Deux viennent de WA30 L1. Le troisième, sur COLM L1, passe par une disposition déjà observée. |
+| Faut-il d’abord atteindre le lieu puis déclencher la commande ? | Sur 1 000 couples essayés, cinq gagnent seulement dans cet ordre, en comptant les contrôles de geste seul et d’ordre inversé. Ils se trouvent sur CGWL, GABA, SP80 et WA30. La règle de classement apprise en excluant tous les niveaux du jeu évalué ne surpasse pas le choix uniforme sur les états examinés. |
+
+Les résultats distinguent trois capacités mesurables : produire un changement ailleurs, franchir un passage, et choisir la composition nécessaire au score. [Passages testés](../../../scripts/test-source-changed-crossings.mjs) · [Placements avant activation](../../../scripts/test-source-positioned-use.mjs) · [Calcul des résultats et validation croisée](../../../scripts/summarize-source-use-transfer.py)
+
 ### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |

@@ -6,8 +6,11 @@ import {sourceBackend} from './sic-study-source-games.mjs';
 import {sourceReplay,hash,op} from './sic-study-source-replay.mjs';
 import {footprints} from './source-contact-footprints.mjs';
 import {observeEncounterMotion,projectEncounters,preparationVisible} from './source-projected-encounters.mjs';
+import {relationalUses} from './source-relational-use.mjs';
 
-const [environment,evidence,output,...files] = process.argv.slice(2);
+const [environment,evidence,output,...args] = process.argv.slice(2);
+const relational=args.includes('--relational');
+const files=args.filter(v=>v!=='--relational');
 const cases = JSON.parse(await readFile(evidence,'utf8')).continuations.unseenCases;
 const engine = await sourceBackend(resolve(environment)), results=[], seen=new Set();
 const patch = (frame,x,y,w,h) => frame.slice(y,y+h).flatMap(row=>row.slice(x,x+w));
@@ -88,25 +91,40 @@ for (const file of files) for (const line of (await readFile(file,'utf8')).trim(
       if ([...omitted,...competitors].some(v=>!alive(v.after) ||
         !same(patch(v.before.frame,x,y,w,h),patch(v.after.frame,x,y,w,h)))) continue;
       coverage.isolatedSites++;
-      for (const f of priorUses(history,site,created.frame,created.availableActionIds,coverage)) {
-        forecasts.set(JSON.stringify([f.input,x,y,w,h,f.expected]),f);
+      const uses=relational?relationalUses(history,site,created.frame,created.availableActionIds,memory.get(site.shape)):
+        priorUses(history,site,created.frame,created.availableActionIds,coverage);
+      for (const f of uses) {
+        const key=JSON.stringify([f.input,f.tx,f.ty,w,h,f.expected]),old=forecasts.get(key);
+        // An output may be justified by several source sites or guards.
+        // Choose on observed evidence before ever trying the held-out action.
+        if (!relational || !old || (f.hits+1)/(f.hits+f.misses+2)>(old.hits+1)/(old.hits+old.misses+2)) forecasts.set(key,f);
       }
+    }
+    const outcomes=new Map();
+    function apply(preparation,input) {
+      let n=rep.restore(prefix);
+      for (const action of preparation) {
+        if (!alive(n) || !n.availableActionIds.includes(Number(action.slice(6)))) return null;
+        n=rep.act(action);
+      }
+      if (!alive(n) || !n.availableActionIds.includes(Number(input.split(':')[0].slice(6)))) return null;
+      return {n,end:rep.act(input)};
     }
     for (const f of forecasts.values()) {
       function test(preparation) {
-        let n=rep.restore(prefix);
-        for (const action of preparation) {
-          if (!alive(n) || !n.availableActionIds.includes(Number(action.slice(6)))) return null;
-          n=rep.act(action);
-        }
-        if (!alive(n) || !n.availableActionIds.includes(Number(f.input.split(':')[0].slice(6)))) return null;
-        const old=patch(n.frame,f.tx,f.ty,f.w,f.h),end=rep.act(f.input);
+        const key=JSON.stringify([preparation,f.input]);
+        if (!outcomes.has(key)) outcomes.set(key,apply(preparation,f.input));
+        const outcome=outcomes.get(key);
+        if (!outcome) return null;
+        const {n,end}=outcome,old=patch(n.frame,f.tx,f.ty,f.w,f.h);
         return {win:rep.win(end),matched:alive(end)&&!same(old,f.expected)&&same(patch(end.frame,f.tx,f.ty,f.w,f.h),f.expected)};
       }
-      const full=test([a,b,c]), omittedWords=[[a,b],[a,c],[b,c],[c]], omissions=omittedWords.map(test);
+      const full=test([a,b,c]), omittedWords=[[a,b],[a,c],[b,c],[c],...(relational?[[]]:[])], omissions=omittedWords.map(test);
       const rivalWords=board.availableActionIds.filter(n=>n>=1&&n<=4&&'ACTION'+n!==a).map(n=>['ACTION'+n,b,c]);
       const alternatives=rivalWords.map(test),rivals=alternatives.filter(Boolean);
-      tests.push({input:f.input,fromSites:f.sites,unchangedMatches:f.unchanged,full,controlsAvailable:omissions.every(Boolean)&&rivals.length>0,
+      tests.push({input:f.input,fromSites:f.sites,unchangedMatches:f.unchanged,
+        ...(relational?{guard:f.guard,hits:f.hits,misses:f.misses,sourceOffset:f.sourceOffset,destinationOffset:f.destinationOffset}:{}),
+        full,controlsAvailable:omissions.every(Boolean)&&rivals.length>0,
         matchingPreparations:[...omittedWords,...rivalWords].filter((_,i)=>[...omissions,...alternatives][i]?.matched),
         controlsMatched:[...omissions,...rivals].some(s=>s?.matched),controlsWon:[...omissions,...rivals].some(s=>s?.win)});
     }
