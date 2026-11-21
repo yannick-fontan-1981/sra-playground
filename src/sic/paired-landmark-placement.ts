@@ -16,6 +16,7 @@ export type LandmarkTrial = Assignment & {
 };
 export type LandmarkMemory = {
   pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string;
+  redrawn?:{parked:string;selected:string};
   blocked:string[]; tried:string[]; inconclusiveSelections?:string[]; handoff?:boolean; lastResult?:string;
 };
 
@@ -31,7 +32,7 @@ export function observeLandmarks(m:LandmarkMemory|undefined, before:VisualLayout
   return m;
 }
 function drop(m:LandmarkMemory) {
-  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;
+  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;
 }
 function bodyRole(layout:VisualLayout,box:NativeBox) {
   const matches=Object.entries(layout).filter(([,g])=>g.length===1 && g[0]!.box.every((v,i)=>v===box[i]));
@@ -46,6 +47,13 @@ function bodyRole(layout:VisualLayout,box:NativeBox) {
   return enclosed.length===1?enclosed[0]![0]:undefined;
 }
 function singleton(l:VisualLayout,role:string){const g=l[role];return g?.length===1?g[0]:undefined;}
+function redrawnRole(before:VisualLayout,after:VisualLayout,site:XY,pitch:XY) {
+  const changed=Object.keys(after).filter(role=>{
+    const body=singleton(after,role);
+    return body && cellMatches(body.at,site,pitch) && !before[role]?.some(p=>p.form===body.form && same(p.at,body.at));
+  });
+  return changed.length===1?changed[0]:undefined;
+}
 function covered(l:VisualLayout,a:Assignment,site:XY) {
   return !l[a.pair.role]?.some(p=>cellMatches(p.at,site,a.pitch));
 }
@@ -129,7 +137,11 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     if(t.stage==='select_after_contact'){
       // A predicted change of the highlight can fail while the control test
       // remains pending. The next motor determines whether the subject switched.
-      if(pending?.stage==='verify')m.handoff=true;
+      if(pending?.stage==='verify'){
+        m.handoff=true;
+        const parked=redrawnRole(before,l,t.home,t.pitch),selected=redrawnRole(before,l,t.guard,t.pitch);
+        if(parked && selected && parked!==selected)m.redrawn={parked,selected};
+      }
       else {m.tried.push(JSON.stringify([t.actor,t.peer,t.pair.role,t.home]));drop(m);}
       return m.lastResult=cursorResult;
     }
@@ -152,8 +164,11 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
   }
   if(!m.active||!m.handoff||!selection||selection.stage!=='verify')return;
   if(cursorResult==='new_cursor_moved_while_previous_cursor_stayed'){
-    const peer=bodyRole(before,selection.source.box),actor=bodyRole(before,selection.target.box);
-    if(peer&&actor&&singleton(l,peer)&&singleton(l,actor)){m.parkedRole=peer;m.secondRole=actor;return;}
+    const peer=m.redrawn?.parked??bodyRole(before,selection.source.box),actor=m.redrawn?.selected??bodyRole(before,selection.target.box);
+    const old=peer&&singleton(l,peer),previous=actor&&singleton(before,actor),moving=actor&&singleton(l,actor);
+    if(peer&&actor&&old&&previous&&moving&&cellMatches(old.at,m.active.home,m.active.pitch)&&!cellMatches(moving.at,previous.at,m.active.pitch)){
+      m.parkedRole=peer;m.secondRole=actor;return;
+    }
   }
   drop(m);
 }

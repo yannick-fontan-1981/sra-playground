@@ -33,7 +33,8 @@ test('two different placements separate an immediate switch from a prepared one'
   observePlacement(m,select,switched,'cursor_mark_prediction_refuted',clicked,parked,{...clicked,stage:'verify'});
   assert.equal(proposeLandmark(m,switched,o,rows,movement,null,100),undefined);
   const verified={...switched,selected:[part(10,3,'selected')]};
-  observePlacement(m,undefined,verified,'new_cursor_moved_while_previous_cursor_stayed',{...clicked,stage:'verify'},switched);
+  const partialBox:CursorTrial={...clicked,stage:'verify',source:{ink:2,box:[3,2,3,2]}};
+  observePlacement(m,undefined,verified,'new_cursor_moved_while_previous_cursor_stayed',partialBox,switched);
   const second=proposeLandmark(m,verified,o,rows,movement,null,100)!;
   assert.equal(second.stage,'approach_with_partner_parked');
   assert.deepEqual(second.expected,right.at);
