@@ -1721,5 +1721,706 @@
       "manifestHash": "77e05fbe9fc5348c7b86c8a24dbd6d04db89a3bba2a20413b639c77a832678ac"
     },
     "tests": 166
+  },
+  "generalCompositionStudy": {
+    "upper": [
+      {
+        "code": "KEYD",
+        "level": 2,
+        "baselineWon": true,
+        "baselineActions": 63,
+        "trials": [
+          {
+            "prefix": 56,
+            "word": [
+              "ACTION3",
+              "ACTION4",
+              "ACTION5"
+            ],
+            "origins": [
+              27,
+              19,
+              20
+            ],
+            "sizes": [
+              26,
+              19,
+              17
+            ],
+            "allPredictionsMatched": true,
+            "newScene": false,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          }
+        ]
+      },
+      {
+        "code": "KEYD",
+        "level": 3,
+        "baselineWon": false,
+        "baselineActions": 120,
+        "trials": [
+          {
+            "prefix": 28,
+            "word": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION4"
+            ],
+            "origins": [
+              16,
+              3,
+              4
+            ],
+            "sizes": [
+              19,
+              19,
+              19
+            ],
+            "allPredictionsMatched": true,
+            "newScene": false,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          }
+        ]
+      },
+      {
+        "code": "LOGI",
+        "level": 2,
+        "baselineWon": true,
+        "baselineActions": 53,
+        "trials": [
+          {
+            "prefix": 42,
+            "word": [
+              "ACTION6:5,50",
+              "ACTION6:18,50",
+              "ACTION6:3,50"
+            ],
+            "origins": [
+              37,
+              38,
+              41
+            ],
+            "sizes": [
+              36,
+              144,
+              36
+            ],
+            "allPredictionsMatched": true,
+            "newScene": false,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": true,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": false,
+              "bac": true,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            },
+            "scored": {
+              "abc": false,
+              "c": true,
+              "bac": false,
+              "bc": true,
+              "ac": true,
+              "dbc": true,
+              "adc": true
+            }
+          }
+        ]
+      },
+      {
+        "code": "LOGI",
+        "level": 3,
+        "baselineWon": false,
+        "baselineActions": 120,
+        "trials": []
+      },
+      {
+        "code": "SWCH",
+        "level": 2,
+        "baselineWon": false,
+        "baselineActions": 120,
+        "trials": [
+          {
+            "prefix": 55,
+            "word": [
+              "ACTION4",
+              "ACTION3",
+              "ACTION2"
+            ],
+            "origins": [
+              14,
+              36,
+              37
+            ],
+            "sizes": [
+              3,
+              53,
+              53
+            ],
+            "allPredictionsMatched": true,
+            "newScene": false,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          },
+          {
+            "prefix": 64,
+            "word": [
+              "ACTION1",
+              "ACTION2",
+              "ACTION4"
+            ],
+            "origins": [
+              23,
+              3,
+              4
+            ],
+            "sizes": [
+              3,
+              51,
+              51
+            ],
+            "allPredictionsMatched": true,
+            "newScene": false,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          },
+          {
+            "prefix": 84,
+            "word": [
+              "ACTION2",
+              "ACTION1",
+              "ACTION4"
+            ],
+            "origins": [
+              43,
+              23,
+              66
+            ],
+            "sizes": [
+              53,
+              3,
+              3
+            ],
+            "allPredictionsMatched": true,
+            "newScene": true,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": true,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": true
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": true,
+              "bac": true,
+              "bc": true,
+              "ac": true,
+              "dbc": true,
+              "adc": true
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 3,
+        "baselineWon": false,
+        "baselineActions": 120,
+        "trials": [
+          {
+            "prefix": 22,
+            "word": [
+              "ACTION4",
+              "ACTION2",
+              "ACTION1"
+            ],
+            "origins": [
+              7,
+              16,
+              1
+            ],
+            "sizes": [
+              3,
+              21,
+              3
+            ],
+            "allPredictionsMatched": false,
+            "newScene": true,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": true
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": true,
+              "bac": true,
+              "bc": true,
+              "ac": false,
+              "dbc": true,
+              "adc": true
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          },
+          {
+            "prefix": 23,
+            "word": [
+              "ACTION2",
+              "ACTION1",
+              "ACTION4"
+            ],
+            "origins": [
+              16,
+              1,
+              18
+            ],
+            "sizes": [
+              21,
+              3,
+              3
+            ],
+            "allPredictionsMatched": true,
+            "newScene": false,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": true,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": true
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": false,
+              "bac": true,
+              "bc": true,
+              "ac": true,
+              "dbc": true,
+              "adc": true
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          },
+          {
+            "prefix": 33,
+            "word": [
+              "ACTION4",
+              "ACTION3",
+              "ACTION2"
+            ],
+            "origins": [
+              18,
+              11,
+              12
+            ],
+            "sizes": [
+              3,
+              53,
+              53
+            ],
+            "allPredictionsMatched": true,
+            "newScene": false,
+            "baselineSuffixWon": false,
+            "landmarkAtPredictedSite": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "landmarkAtAnyTranslation": {
+              "abc": true,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": true,
+              "adc": false
+            },
+            "scored": {
+              "abc": false,
+              "c": false,
+              "bac": false,
+              "bc": false,
+              "ac": false,
+              "dbc": false,
+              "adc": false
+            }
+          }
+        ]
+      },
+      {
+        "code": "VOIS",
+        "level": 2,
+        "baselineWon": true,
+        "baselineActions": 31,
+        "trials": []
+      },
+      {
+        "code": "VOIS",
+        "level": 3,
+        "baselineWon": true,
+        "baselineActions": 50,
+        "trials": []
+      }
+    ],
+    "lower": [
+      {
+        "condition": "fragments3",
+        "game": "GRAV",
+        "level": 1,
+        "proposed": 1,
+        "matched": 1
+      },
+      {
+        "condition": "fragments3",
+        "game": "KEYD",
+        "level": 1,
+        "proposed": 3,
+        "matched": 0
+      },
+      {
+        "condition": "fragments3",
+        "game": "MOTO",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "fragments3",
+        "game": "SKBN",
+        "level": 1,
+        "proposed": 3,
+        "matched": 1
+      },
+      {
+        "condition": "fragments3",
+        "game": "VOIS",
+        "level": 1,
+        "proposed": 3,
+        "matched": 1
+      },
+      {
+        "condition": "fragments3",
+        "game": "LOGI",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "fragments3",
+        "game": "GABA",
+        "level": 1,
+        "proposed": 2,
+        "matched": 0
+      },
+      {
+        "condition": "fragments3",
+        "game": "SWCH",
+        "level": 1,
+        "proposed": 1,
+        "matched": 0
+      },
+      {
+        "condition": "guarded3",
+        "game": "GRAV",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded3",
+        "game": "KEYD",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded3",
+        "game": "MOTO",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded3",
+        "game": "SKBN",
+        "level": 1,
+        "proposed": 1,
+        "matched": 1
+      },
+      {
+        "condition": "guarded3",
+        "game": "VOIS",
+        "level": 1,
+        "proposed": 1,
+        "matched": 1
+      },
+      {
+        "condition": "guarded3",
+        "game": "LOGI",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded3",
+        "game": "GABA",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded3",
+        "game": "SWCH",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded4",
+        "game": "GRAV",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded4",
+        "game": "KEYD",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded4",
+        "game": "MOTO",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded4",
+        "game": "SKBN",
+        "level": 1,
+        "proposed": 1,
+        "matched": 1
+      },
+      {
+        "condition": "guarded4",
+        "game": "VOIS",
+        "level": 1,
+        "proposed": 1,
+        "matched": 1
+      },
+      {
+        "condition": "guarded4",
+        "game": "LOGI",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded4",
+        "game": "GABA",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      },
+      {
+        "condition": "guarded4",
+        "game": "SWCH",
+        "level": 1,
+        "proposed": 0,
+        "matched": 0
+      }
+    ],
+    "spatialAutonomous": [
+      {
+        "level": 2,
+        "oldActions": 47,
+        "oldWon": true,
+        "newWon": true,
+        "newActions": 47,
+        "trajectory": "4c02d02cb973d2c99dccc6deff7ff9c75088388aba0572f649e3e6494853ab44"
+      },
+      {
+        "level": 3,
+        "oldActions": 22,
+        "oldWon": true,
+        "newWon": true,
+        "newActions": 22,
+        "trajectory": "95b7d17e19c26c05de7bcaedb2e43df9e2292b7dd42b87a703a065097e93f5f9"
+      },
+      {
+        "level": 4,
+        "oldActions": 120,
+        "oldWon": false,
+        "newWon": true,
+        "newActions": 63,
+        "trajectory": "bc55d76b402e7de53eda3e6037fddc617b1622399d0f2682a45fce42d0e1d53b"
+      },
+      {
+        "level": 5,
+        "oldActions": 120,
+        "oldWon": false,
+        "newWon": true,
+        "newActions": 107,
+        "trajectory": "8520d7edc9a84e1cc4a4190db893e09538bfbdd46dc5d328596e1a43d10ec24d"
+      }
+    ]
   }
 }

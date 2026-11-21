@@ -23,6 +23,27 @@ Les chantiers 9 et 13 du programme portent sur l’information hors champ et les
 
 ## Registre des travaux
 
+### Élaborer une composition à partir des effets appris
+
+**Le manque transversal aux chantiers 2 à 5.** Une commande peu essayée après deux autres donne une idée d’expérience. Pour construire un plan, SIC doit aussi pouvoir dire quelle condition manque à la dernière opération, quelle première opération peut la produire, et ce qui doit survivre entre les deux. Une poussée est un exemple de cette opération générale. KEYD et SWCH permettent de tester le même raisonnement avec d’autres commandes.
+
+Le prototype apprend, pour chaque commande, les changements visibles et les conditions locales dans lesquelles ils ont été observés. Il peut assembler deux opérations quand la première produit une condition requise par la seconde, ou assembler deux effets indépendants pour satisfaire une demande conjointe. Une contradiction sur une même position élimine la suite. Le composeur accepte aussi un bloc de plusieurs opérations déjà vérifiées. Les tests couvrent une demande à quatre étapes, une paire de buts indépendants et une propriété qui doit rester vraie à chaque étape. Dans la politique expérimentale de SIC, une commande restée sans effet depuis la disposition présente devient un but à expérimenter. SIC contrôle le résultat après chaque commande. [Composeur et conditions](../../../src/sic/rewrite-composition.ts) · [Tests de composition et de conservation](../../../tests/sic-rewrite-composition.test.ts)
+
+**Expérience sur les sources.** À chaque préfixe, les opérateurs proviennent exclusivement des commandes déjà jouées. Le composeur annonce une suite absente de cet historique et son effet à chaque étape. Ensuite seulement, le banc exécute la suite, supprime chacune des préparations, inverse leur ordre et essaie des substitutions de même durée. Le choix est limité aux trois premières suites distinctes par épisode. Le témoin de score poursuit la partie avec les mêmes commandes restantes. [Banc des interventions](../../../scripts/measure-source-rewrite-compositions.mjs)
+
+| Sources à froid | Observation |
+| --- | --- |
+| KEYD L1 et SWCH L1 | Le premier prototype, fondé sur les fragments de couleur, propose quatre triplets et échoue dès le premier geste dans les quatre cas. Le modèle qui exige le changement complet et son contexte s’abstient sur ces deux parties. |
+| KEYD, SWCH, LOGI et VOIS, L2 et L3 | Sur huit épisodes, le banc propose neuf suites inédites. Huit réalisent les trois effets prévus. Une seule perd son effet final dans **tous** les contrôles d’ordre, d’omission et de substitution. Aucune défaite du témoin n’est convertie en victoire en conservant la suite historique. |
+| SWCH L2 après 64 coups | À partir des effets observés aux coups **23, 3 et 4**, le composeur choisit **ACTION1 → ACTION2 → ACTION4**. Le dernier changement se produit exactement où prévu. Dans les interventions témoins, ce changement disparaît même lorsqu’on le cherche ailleurs sur le plateau. Le plateau obtenu avait déjà été visité. Rendre un effet possible et atteindre une configuration utile au score sont deux mesures distinctes. |
+| SKBN et VOIS L1 | Le composeur à quatre étapes propose une suite sur chacun des deux jeux. Les huit effets intermédiaires ou finaux annoncés sont observés. Les témoins ne démontrent pas que l’ordre complet est nécessaire dans ces deux cas. |
+
+L’explication d’un échec peut maintenant être localisée : conditions initiales insuffisantes, liaison entre deux opérations réfutée, ou composition réalisée qui ramène dans une disposition connue. **Le prochain critère de transfert est un L2 gagné grâce au choix du but de la composition.** Le score de référence sur Custom 4 est celui de v44, deux jeux sur neuf à froid. SS09 L2 reste réservé. [Détail par branche et positions testées](mesures-generalisations-manquantes.json)
+
+La version expérimentale de la composition spatiale a aussi été exécutée depuis l’entrée ordinaire de SIC. Elle gagne à froid SKBN L4 en 63 coups et L5 en 107, là où le témoin échoue à 120. Ce sont deux nouveaux niveaux d’un même jeu source. Les résultats du banc précédent, 34 et 48, incluaient un préfixe emprunté. [Décisions de transport en partie autonome](../../../src/sic/transport-contact.ts)
+
+**Protocole de v46, fixé avant Custom 4.** Comparer le candidat `sic-source100-effect-composition-v46` au témoin figé v44. Il inclut le transport appris et le composeur d’effets. Contrôler les 100 L1 à 60 coups et les niveaux sources supérieurs à 120. Comparer les neuf L2 ouverts à froid, au plafond de 1 200, et SS01 après les 19 commandes du L1. Consigner séparément les programmes effectivement choisis, les premières divergences à longueur comparable et les scores rejoués. En cas de gain, utiliser `9de934838`, qui contient le transport seul, pour isoler l’apport du composeur. SS09 L2 reste la confirmation indépendante.
+
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |
 | --- | --- | --- | --- |
 | [Reprise après préparation, v34](qualification-reprise-v34.md) | 4 et 5 | Le rejeu confirme les 100 L1, KEYD L2 en 62 après le L1 et deux victoires sur neuf L2 à froid de Custom 4. | Obtenir une nouvelle continuation gagnante sur une cible. |

@@ -7,7 +7,9 @@ import type {
   NativeObservation,
   NativeProposal,
   NativeRecord,
+  NativeRows,
 } from '../logos-engine/v6-native-types.ts';
+import { composeRewrites, learnRewrites, observedRewrite, type Rewrite } from './rewrite-composition.ts';
 import { observedCommandKey } from './observed-command-frontier.ts';
 import { sicNeedId } from './need-identity.ts';
 import { actionRelation, type Step } from './composition-context.ts';
@@ -16,6 +18,8 @@ import learned from './source-composition-prior.json' with { type: 'json' };
 export const compositionFamily = 'sic_test_observed_compositions';
 export const cycleGroup = 'test_compositions_after_recurrent_returns';
 export const exhaustedGroup = 'test_compositions_after_existing_strategies';
+export const followCompositionGroup = 'continue_a_confirmed_composition_prefix';
+export const composeAtReturnGroup = 'compose_effects_at_a_revisited_state';
 export const compositionPrior: Readonly<Record<string, number>> = learned;
 type Motion = { actor: string; op: string; dx: number; dy: number; evidence: string };
 type Goal = { pair: string; actor: string; target: string; gap: number };
@@ -26,9 +30,15 @@ type State = {
   tests: Record<string, number>;
   active: Goal | null;
   trials: number;
+  rewrites?:Rewrite[]; verifiedPrograms?:Rewrite[][]; attempted?:{origin:string;word:string}[]; pendingProgram?:ProgramTrial;
 };
 const initial = (epoch = 0): State => ({ epoch, history: [], motions: [], tests: {}, active: null, trials: 0 });
-type Offer = NativeProposal & { goal: Goal | null; context: string; needId: string; trigger: string };
+type ProgramTrial = { steps:Rewrite[]; index:number; origin:string };
+type Offer = NativeProposal & { goal: Goal | null; context: string; needId: string; trigger: string; program?:ProgramTrial };
+function readyStep(step:Rewrite,rows:NativeRows) {
+  const width=rows[0]!.length,value=(p:number)=>rows[Math.floor(p/width)]?.[p%width];
+  return step.changes.every(([p,v])=>value(p)===v)&&(!step.guards||step.guards.every(([p,v])=>value(p)===v));
+}
 const gap = (a: NativeBox, b: NativeBox) =>
   Math.max(0, a[0] - b[2], b[0] - a[2]) + Math.max(0, a[1] - b[3], b[1] - a[3]);
 const at = (entity: NativeEntity) => entity.signature + '@' + entity.position.join(',');
@@ -143,10 +153,11 @@ function relationTrial(state: State, observation: NativeObservation, inputs: rea
 
 export function createCompositionTrials(): NativeFamily<Offer> {
   let state = initial();
-  const learn = (before: NativeObservation, after: NativeObservation, command: NativeCommand) => {
-    if (before.level_epoch !== after.level_epoch || before.state !== after.state) return;
+  const learn = (before: NativeObservation, after: NativeObservation, command: NativeCommand,first:NativeRows,second:NativeRows) => {
+    if (before.level_epoch !== after.level_epoch || before.state !== after.state || before.levels_completed!==after.levels_completed)return;
     if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
     recordCompositionStep(state, before, after, command);
+    if(before.frame_hash!==after.frame_hash)learnRewrites(state.rewrites??=[],first,second,observedCommandKey(command),state.history.length);
   };
   return {
     id: compositionFamily,
@@ -162,16 +173,38 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       const recent = history.slice(-8);
       const replaying = repeated.length >= 3 && recent.some((s) => s.repeated && s.effect !== 'unchanged');
       const revisiting = returns.length >= 6 && recent.filter((s) => s.effect === 'return').length >= 2;
+      const follow=group===followCompositionGroup;
+      const returning=group===composeAtReturnGroup;
+      if(follow&&!state.pendingProgram)return null;
+      if(returning && (!state.rewrites?.length || !history.slice(0,-1).some(s=>s.source===scene(observation))))return null;
       if (group === cycleGroup && !replaying && !revisiting) return null;
-      if (group !== cycleGroup && group !== exhaustedGroup) return null;
+      if (group !== cycleGroup && group !== exhaustedGroup && !follow && !returning) return null;
       const available = [...inputs];
       for (const op of observation.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
       const sequence = chooseSequence(history, scene(observation), available);
       if (!sequence) return null;
-      const relational = (state.active || state.trials % 2 === 1) && relationTrial(state, observation, available);
-      const command = relational ? relational.command : sequence,
+      let program=state.pendingProgram;
+      if(program&&!readyStep(program.steps[program.index]!,rows))program=undefined;
+      if(follow&&!program)return null;
+      if(!program&&state.rewrites?.length&&(returning||replaying||revisiting)){
+        const blocked=new Set((state.attempted??[]).filter(p=>p.origin===observation.frame_hash).map(p=>p.word));
+        const stalledInputs=new Set(history.filter(s=>s.source===scene(observation)&&s.effect==='unchanged').map(s=>s.key));
+        const depth=Math.min(remaining,state.verifiedPrograms?.length?4:3);
+        const proposed=composeRewrites(state.rewrites,rows,history.map(s=>s.key),observation.available_action_refs,blocked,
+          {length:depth,limit:700,verified:state.verifiedPrograms,blocked:stalledInputs});
+        if(proposed)program={steps:proposed.steps,index:0,origin:observation.frame_hash};
+      }
+      const needed=program?.steps[program.index]?.op;
+      let synthesized=needed?available.find(cmd=>observedCommandKey(cmd)===needed):undefined;
+      if(needed&&!synthesized&&needed.startsWith('ACTION6:')&&observation.available_action_refs.includes('ACTION6')){
+        const [x,y]=needed.slice(8).split(',').map(Number);
+        if(Number.isInteger(x)&&Number.isInteger(y)&&rows[y!]?.[x!]!==undefined)synthesized={action_ref:'ACTION6',data:{x:x!,y:y!}};
+      }
+      if(!synthesized){program=undefined;if(follow||returning)return null;}
+      const relational = !program && (state.active || state.trials % 2 === 1) && relationTrial(state, observation, available);
+      const command = synthesized ?? (relational ? relational.command : sequence),
         goal = relational ? relational.goal : null;
       const evidence = [
         ...new Set([
@@ -179,10 +212,12 @@ export function createCompositionTrials(): NativeFamily<Offer> {
           history.at(-1)!.evidence,
             ...(group === cycleGroup ? (replaying ? repeated.slice(-3) : returns.slice(-6)).map((s) => s.evidence) : []),
           ...(relational ? [relational.evidence] : []),
+          ...(program?program.steps.map(s=>history[s.ref-1]!.evidence):[]),
         ]),
       ];
       const context = actionRelation(history.at(-1)?.key, observedCommandKey(command), history.at(-2)?.key);
-      const label = goal
+      const label = program ? 'Test whether this measured change establishes the conditions of the next operation'
+        : goal
         ? 'Test whether an observed movement brings two visible components together'
         : 'Test an underexplored continuation of the observed action sequence';
       const parent = 'G_official_completion',
@@ -208,11 +243,13 @@ export function createCompositionTrials(): NativeFamily<Offer> {
         status: 'proposed',
         kind: compositionFamily,
         actions: [command],
+        ...(program?{program,compositionForecast:{word:program.steps.map(s=>s.op),sources:program.steps.map(s=>s.ref),
+          stage:program.index,origin:program.origin,changes:program.steps[program.index]!.changes.length}}:{}),
         goal,
         context,
         trigger: group,
         needId: need.id,
-        steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
+        steps: [{ action: command, expected_after: program?{observed_changes:program.steps[program.index]!.changes}:null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSituationCard: {
           strategy: 'test_composition',
@@ -246,12 +283,13 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       const admitted = i === 0 && p.binding?.observation_ref === o.observation_ref;
       return { admitted, reason: admitted ? 'current_composition_bound' : 'composition_scope_changed' };
     },
-    after(p, _i, b, a) {
+    after(p, _i, b, a,first,second) {
       const won = a.levels_completed > b.levels_completed;
       const actor = p.goal && a.entities.find((e) => !e.identity_ambiguous && e.signature === p.goal!.actor);
       const target = p.goal && a.entities.find((e) => at(e) === p.goal!.target);
       const matched = won
         ? true
+        : p.program ? observedRewrite(p.program.steps[p.program.index]!,first,second)
         : p.goal
           ? actor && target
             ? gap(actor.bbox, target.bbox) < p.goal.gap
@@ -262,24 +300,42 @@ export function createCompositionTrials(): NativeFamily<Offer> {
         seal_prefix: true,
         reason: won
           ? 'official_boundary'
-          : matched === true
+          : p.program ? (matched?'predicted_composition_effect':'composition_link_refuted') : matched === true
             ? 'objects_approached'
             : matched === false
               ? 'approach_refuted'
               : 'sequence_return_observed',
       };
     },
-    record(b, a, command, _first, _second, p) {
-      learn(b, a, command);
+    record(b, a, command, first, second, p) {
+      learn(b, a, command,first,second);
+      let outcome:string|undefined;
+      if(p.program){
+        const {steps,index,origin}=p.program,word=steps.map(r=>r.op).join('/');
+        if(!index)state.attempted=[...(state.attempted??[]).slice(-31),{origin,word}];
+        const matched=a.level_epoch===b.level_epoch&&a.levels_completed===b.levels_completed&&a.state===b.state
+          && observedRewrite(steps[index]!,first,second);
+        delete state.pendingProgram;
+        if(matched&&index+1<steps.length){state.pendingProgram={steps,index:index+1,origin};outcome='confirmed_prefix';}
+        else if(matched){
+          state.verifiedPrograms=[...(state.verifiedPrograms??[]).slice(-3),steps];
+          outcome='confirmed_program';
+        }else {
+          if(index>=2)state.verifiedPrograms=[...(state.verifiedPrograms??[]).slice(-3),steps.slice(0,index)];
+          outcome=a.levels_completed>b.levels_completed?'official_completion':'refuted_program';
+        }
+      }else delete state.pendingProgram;
       state.trials++;
       if (p.goal) state.tests[p.goal.pair] = (state.tests[p.goal.pair] ?? 0) + 1;
       state.active = p.goal;
       return {
-        events: [{ kind: 'sic_composition_trial', context: p.context, trigger: p.trigger, relation: !!p.goal }],
+        events: [{ kind: 'sic_composition_trial', context: p.context, trigger: p.trigger, relation: !!p.goal,
+          ...(outcome?{result:outcome}: {}) }],
       };
     },
-    observePublicOutcome(b, a, c) {
-      learn(b, a, c);
+    observePublicOutcome(b, a, c,first,second) {
+      learn(b, a, c,first,second);
+      delete state.pendingProgram;
       state.active = null;
     },
     state: () => state,
