@@ -1,0 +1,752 @@
+{
+  "spec": {
+    "id": "ss12-08",
+    "title": "La coda des deux reflets",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~.....~~~~~~~~~~~~~~",
+      "~W....~~~~~~~~~~~~~~",
+      "~.....~~~~~~~~~~~~~~",
+      "~.....~~~~~~~~~~~~~~",
+      "~.B...~~~~~~~~~~~~~~",
+      "~..o..~~~~~~~~~~~~~~",
+      "~.....~~~~~~~~~~~~~~",
+      "~~~.~~~~~~~~~~~~~~~~",
+      "~~~1.........~~~~~~~",
+      "~~~~......b..~~~m.m~",
+      "~~~~.........~~~g..~",
+      "~~~~.........~~...g~",
+      "~~~~........1~~~~~~~",
+      "~~~~.........~~~~~~~",
+      "~~~~.........~~~~~~~",
+      "~~~~.........~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "coda",
+        "buttons": [
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 9
+        },
+        "circuit": "coda",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 12
+        },
+        "circuit": "coda",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "XCDDRDXDRRRRCDDDDDRRDXDDDDDRRRRRRRRULUULLLULURRRRCXRUCRXRRR",
+  "actions": [
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 30
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Synthèse adaptée de Heroes and Mirrors 2 et Heroes and Water 28",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-2",
+    "puzzle": 2,
+    "secondaryUrl": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-28",
+    "image": "https://sinkingstarwalkthrough.com/img/crossovers/heroes-and-mirrors/puzzle-02.webp",
+    "objective": "Faire traverser la caisse et les deux héros, maintenir sa commande pendant le replacement forcé du Barde, puis libérer la dernière île."
+  },
+  "metrics": {
+    "actions": 59,
+    "selections": 4,
+    "warriorPushes": 6,
+    "bardSongs": 6,
+    "partnerSongs": 0,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 5,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 6,
+    "mirrorMoves": 1,
+    "reflections": 5,
+    "heroReflections": 4,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le premier miroir transfère la caisse sur la rive centrale.",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 18,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "coda": false
+      }
+    },
+    {
+      "label": "Le Barde traverse depuis un rayon plus court : la caisse se trouve maintenant à sa droite.",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 18,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "coda": false
+      }
+    },
+    {
+      "label": "Le chant ramène la caisse sur la commande : le premier axe se ferme et l’arrivée finale s’ouvre.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 18,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "coda": true
+      }
+    },
+    {
+      "label": "Le Guerrier rejoint le Barde ; le premier miroir reste utilisable à courte portée.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 18,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "coda": true
+      }
+    },
+    {
+      "label": "Le Guerrier remonte le second miroir, dont l’arrivée précédente donnait dans l’eau.",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 18,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "coda": true
+      }
+    },
+    {
+      "label": "Le Guerrier fait monter le Barde sans déplacer sa caisse.",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 18,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "coda": true
+      }
+    },
+    {
+      "label": "Le Barde est poussé sur le bon rayon, tandis que le poids maintient les deux portes.",
+      "turn": 49,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 16,
+          "y": 10
+        },
+        {
+          "x": 18,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "coda": true
+      }
+    },
+    {
+      "label": "Le dernier reflet dépose le Barde près des gardiens ; son chant rapproche un seul monstre et les deux s’éliminent.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "coda": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "two-source-mechanic-adaptation",
+    "preserved": [
+      "Heroes and Mirrors 2 : le reflet change le côté relatif du Barde et de sa caisse, puis il faut les réaligner.",
+      "Heroes and Water 28 : le Guerrier pousse le Barde pour éviter un déplacement parasite du cargo entraîné par le chant.",
+      "Deux héros et deux destinations demandent de finir la coopération avant de quitter la salle."
+    ],
+    "changed": [
+      "Trois îles originales remplacent les géométries sources.",
+      "Le même poids ferme le premier axe de miroir et ouvre l’arrivée du dernier reflet.",
+      "Le deuxième miroir doit être poussé à la bonne hauteur par le Guerrier.",
+      "La paire de monstres finale impose un chant sélectif à distance sûre.",
+      "La sortie par appui de Water 28 est transposée à une commande de portes ; aucune mécanique de pile ni double déplacement n’est ajoutée."
+    ],
+    "sourceReading": "Descriptions des énigmes Mirrors 2 et Water 28 consultées ; synthèse déclarée de leurs problèmes de position relative et de sortie sans chant, pas une reconstruction exacte.",
+    "authoredRoute": "Parcours manuel avec recherche de marches sans manipulation entre les postes.",
+    "resourceRoles": {
+      "cargo": "Change de rive, puis commande simultanément un obturateur et la porte d’arrivée.",
+      "firstMirror": "Fait passer la caisse puis les héros depuis des distances différentes.",
+      "shutter": "Coupe le premier rayon pour qu’il ne ramène pas le Guerrier lors du reflet final.",
+      "secondMirror": "Doit être décalé d’une case pour offrir une arrivée sûre sur l’île finale.",
+      "warrior": "Règle le second miroir et place le Barde sans retirer le poids de sa commande.",
+      "guards": "Bloquent les deux abords de la destination supérieure tant qu’ils restent vivants."
+    }
+  }
+}

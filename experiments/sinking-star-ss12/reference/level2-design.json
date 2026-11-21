@@ -1,0 +1,338 @@
+{
+  "spec": {
+    "id": "ss12-02",
+    "title": "Les deux rails et le convoi",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "##o.....############",
+      "#################.g#",
+      "#.B.......ooo~~~...#",
+      "#.###############.g#",
+      "#.o.....############",
+      "#.......############",
+      "#.W.....############",
+      "#.......############",
+      "#.......############",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "rails",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 3
+          },
+          {
+            "x": 5,
+            "y": 7
+          }
+        ],
+        "color": 0
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "circuit": "rails",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRRRCUULUURRRRRRRRRRRRRRRCURCDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes 3: Bard, Druid · énigme 14",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14",
+    "puzzle": 14,
+    "image": "https://sinkingstarwalkthrough.com/img/north/hauling-3/puzzle-14.webp",
+    "objective": "Poser les deux poids au milieu de leurs rails, puis faire avancer le Barde sans chant pour préserver l’ouverture et construire le pont."
+  },
+  "metrics": {
+    "actions": 31,
+    "selections": 4,
+    "warriorPushes": 12,
+    "bardSongs": 4,
+    "partnerSongs": 1,
+    "selectiveSongs": 1,
+    "forcedBardMoves": 12,
+    "supportMoves": 0,
+    "chainPushes": 5,
+    "stoneMoves": 15,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 3,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Deux caisses chantées sur leurs boutons, avec deux cases de rail encore libres à l’est",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true
+      }
+    },
+    {
+      "label": "Le Guerrier pousse le Barde sans entraîner les poids, puis la file de trois caisses : trois appuis permanents",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 16,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 15,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true
+      }
+    },
+    {
+      "label": "Le Barde quitte le pont, dont les appuis sont arrêtés par la rive",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 6
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 15,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rails": true
+      }
+    }
+  ],
+  "adaptation": "La contrainte de l’énigme 14 est reprise : deux poids chantés doivent rester sur leurs boutons pendant que le Guerrier déplace le Barde sans chant. Les deux monstres de la source deviennent des caisses dans des rails séparés. Les rails continuent deux cases après les boutons : depuis la position de commande, marcher volontairement vers l’est entraîne les poids et referme la porte. Le déplacement imposé par le Guerrier les conserve. La géométrie est reconstruite et prolongée par un convoi de trois caisses qui comblent trois cases d’eau. Une route valide de 31 actions démontre cette combinaison, sans affirmation d’unicité ou d’optimalité."
+}

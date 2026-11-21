@@ -1,0 +1,490 @@
+{
+  "spec": {
+    "id": "ss12-05",
+    "title": "Le poids reste, le chant s’en va",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~~",
+      "~.....~~~~~~~~~~~~~",
+      "~.....~~~3~~~~~~~~~",
+      "~.Bb..~~~~~~~.....~",
+      "~.o...~~~~~~~.g.g.~",
+      "~.....~~~~~~~.....~",
+      "~..~~~~~~~~~~.....~",
+      "~W.~~~~~~~~~##~###~",
+      "~~~~~~~~........~~~",
+      "~~~~~~~~........~~~",
+      "~~~~~~~~.....#.#~~~",
+      "~~~~~~~~........~~~",
+      "~~~~~~~~~~~~~#o#~~~",
+      "~~~~~~~~~~~~~~#~~~~",
+      "~~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "rose",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "color": 7
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 8
+        },
+        "circuit": "rose",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CURXRCUUUUURRXCDRRRRDUULLLCDDDRRRRUUUUUUURRCRRRUUDDRDLUUUUUCUUL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes and Mirrors · énigme 1",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1",
+    "puzzle": 1,
+    "image": "https://sinkingstarwalkthrough.com/img/crossovers/heroes-and-mirrors/puzzle-01.webp",
+    "objective": "Maintenir le bouton après avoir téléporté le Barde hors de portée de sa caisse, puis extraire un second poids pour bâtir la traversée finale."
+  },
+  "metrics": {
+    "actions": 63,
+    "selections": 6,
+    "warriorPushes": 3,
+    "bardSongs": 15,
+    "partnerSongs": 12,
+    "selectiveSongs": 6,
+    "forcedBardMoves": 0,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 7,
+    "mirrorMoves": 0,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Barde est réfléchi sur la seconde île ; la caisse reste sur le bouton de départ.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 14,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le Guerrier emprunte le miroir sans retirer le poids qui maintient son arrivée ouverte.",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 14,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le chant extrait la caisse de son cul-de-sac ; les murs du puits la retiennent pendant le départ du Barde.",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 14,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    },
+    {
+      "label": "Le Guerrier pousse la caisse dans le détroit et traverse sur l’appui.",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 4
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rose": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "mechanic-and-topology-adaptation",
+    "preserved": [
+      "Barde, caisse sur bouton, arrivée verrouillée et reflet utilisé pour rompre le chant.",
+      "Séparation entre le poids immobilisé et le héros qui rejoint la sortie."
+    ],
+    "changed": [
+      "Deux îles séparées et deux destinations pour le duo Guerrier–Barde.",
+      "Ajout d’un puits de caisse à extraire au chant et d’un détroit comblé par la poussée du Guerrier."
+    ],
+    "sourceReading": "Le guide a été lu ; adaptation des contraintes décrites, sans prétention de reproduction cellule par cellule.",
+    "authoredRoute": "Parcours manuel avec déplacements sans manipulation calculés localement.",
+    "resourceRoles": {
+      "departureCrate": "Maintient ouverte la case d’arrivée du miroir.",
+      "fixedMirror": "Seul lien entre les deux îles.",
+      "shaftCrate": "Seul appui disponible pour rejoindre les deux destinations.",
+      "shaftWalls": "Empêchent une poussée vers le haut depuis le fond et permettent au Barde de quitter la caisse."
+    }
+  }
+}

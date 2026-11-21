@@ -1,0 +1,530 @@
+{
+  "spec": {
+    "id": "ss12-06",
+    "title": "Les deux écluses de pierre",
+    "rows": [
+      "###################",
+      "###################",
+      "###################",
+      "########.#.########",
+      "########bb#########",
+      "########...########",
+      "######o~...########",
+      "######.#...########",
+      "######.#.....o#####",
+      "#####.4.#####~#####",
+      "#.......###.......#",
+      "#.......###.......#",
+      "#..b....###.......#",
+      "#.W...B.###.......#",
+      "#.......###...m.mg#",
+      "#.......###g......#",
+      "###################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "cyan",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 12
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "violet",
+        "buttons": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 8,
+            "y": 4
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 6
+        },
+        "circuit": "cyan",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 8
+        },
+        "circuit": "violet",
+        "direction": "S",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "URDUUURRURUUURRUURCUUUUUUURRUUCDDDDRRRRDDDDDLDDLCDDDDRRRRRDDLLDDRRDDRRRRCLLLL",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 51
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes and Light · énigme 1",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1",
+    "puzzle": 1,
+    "image": "https://sinkingstarwalkthrough.com/img/crossovers/heroes-and-light/puzzle-01.webp",
+    "objective": "Utiliser deux presses orientées différemment, puis se servir du chant à portée sélective pour déplacer un seul des deux gardiens."
+  },
+  "metrics": {
+    "actions": 77,
+    "selections": 4,
+    "warriorPushes": 1,
+    "bardSongs": 5,
+    "partnerSongs": 4,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 0,
+    "supportMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 2,
+    "mirrorMoves": 1,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 2,
+    "platformsCreated": 2,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La première presse envoie sa caisse à droite et l’on relâche le bouton pour emprunter son emplacement.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 15
+        },
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "cyan": false,
+        "violet": false
+      }
+    },
+    {
+      "label": "Les deux héros maintiennent ensemble les boutons violets et la seconde presse crée l’appui inférieur.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 15
+        },
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "cyan": false,
+        "violet": true
+      }
+    },
+    {
+      "label": "Le Barde rapproche le gardien gauche de celui de droite ; les deux frappent simultanément.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cyan": false,
+        "violet": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "mechanic-adaptation",
+    "preserved": [
+      "Les portes orientées poussent un poids à travers un côté inaccessible.",
+      "Activation puis libération d’une presse pour pouvoir emprunter la case qu’elle occupait.",
+      "Le dernier obstacle est un groupe de monstres à faire se rencontrer."
+    ],
+    "changed": [
+      "Deux îlots et deux traversées créées par les caisses dans l’eau.",
+      "Le Voleur de la source est remplacé par le duo Guerrier–Barde.",
+      "Deux boutons conjoints imposent une coordination avant la deuxième presse.",
+      "Un miroir bloque l’accès de l’écluse : seul le Guerrier peut le ranger dans son alcôve latérale."
+    ],
+    "sourceReading": "Adaptation des étapes et contraintes décrites dans le guide, sans reproduction exacte de la capture.",
+    "authoredRoute": "Parcours manuel, avec recherche limitée aux déplacements libres entre postes.",
+    "resourceRoles": {
+      "firstCrate": "Seul appui de la traversée vers la salle des deux boutons.",
+      "secondCrate": "Seul appui vers la cour des gardiens.",
+      "mirror": "Bloque le corridor ; le chant ne le déplace pas et le Guerrier doit le pousser de côté.",
+      "dualButtons": "Exigent la présence simultanée des deux héros.",
+      "guards": "Interdisent les abords de la destination droite avant leur déplacement ou leur élimination."
+    }
+  }
+}

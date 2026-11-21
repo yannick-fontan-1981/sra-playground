@@ -1,0 +1,205 @@
+{
+  "success": true,
+  "scope": "focused-ui-and-tutorial",
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Twelve compiled-HTML role fixtures: song radius, walls, blocked members, forced partner, chain, supports and simultaneous combat",
+    "Reflection keys, nearest source, equal-distance exchange and gray previews",
+    "Mirror diagonal and backing render above buttons throughout movement",
+    "Only blocking mirror backs blink red; input lock and mid-warning Undo preserve the exact state",
+    "Number, role button and public-pixel selection retain state; Shift+Tab exits and outside/selector input is ignored",
+    "Animation locks normal commands; Undo, Reset, Restart and level selection cancel stale frames; Reset clears lessons",
+    "Reduced motion presents the final state without timer waits",
+    "Defeat panel waits for the last combat frame; panel Undo restores the live room",
+    "Victory appears after the last frame, disables actions and supports Undo/Restart",
+    "Eight actual level selections display both heroes, two goals, source links and contextual mechanism help",
+    "The actual level 1 route earns all thirteen discoveries from the displayed public pixels"
+  ],
+  "bardCoverage": [
+    {
+      "case": "near crate follows one step",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "song crosses an intervening wall",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "diagonal corner is within radius two",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "blocked member stays while another follows",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "inactive Warrior joins without extra pushing",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "sunken support slides over water",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "sung crate becomes a support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "blocked Bard cancels the complete song",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "out of range crate does not follow",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Warrior pushes Bard without a song",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Warrior pushes a whole two-crate file",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    },
+    {
+      "case": "song brings monsters into reciprocal combat",
+      "frames": 8,
+      "exactPixelsAndTiming": true,
+      "publicLessons": true,
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noSong": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square outline",
+      "teleportFrames": 3,
+      "preview": true,
+      "noSong": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange both heroes",
+      "teleportFrames": 3,
+      "preview": true,
+      "noSong": true,
+      "exactUndo": true
+    }
+  ],
+  "mirrorButtonCoverage": {
+    "mirrorAboveButton": true,
+    "mirrorMotionLesson": true,
+    "gateLesson": true,
+    "frames": 4
+  },
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible destinations flash both mirrors",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "mirror hiding the only source flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "Undo during warning restores previous actual movement",
+      "midAnimationUndo": true,
+      "exactPreviousState": true,
+      "cancelledFramesCannotRepaint": true,
+      "noReflectionLesson": true
+    }
+  ],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 61,
+    "discoveries": [
+      "select",
+      "move",
+      "warrior-chain",
+      "bard-song",
+      "partner-song",
+      "selective-song",
+      "forced-bard",
+      "platform",
+      "support-slide",
+      "mirror-motion",
+      "mirror",
+      "gate",
+      "goals"
+    ]
+  }
+}

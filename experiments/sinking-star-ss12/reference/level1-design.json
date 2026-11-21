@@ -1,0 +1,823 @@
+{
+  "spec": {
+    "id": "ss12-01",
+    "title": "La répétition des deux rives",
+    "rows": [
+      "####################",
+      "#..........~~~~~~~~#",
+      "#..........~~~~~~~~#",
+      "#..........~~~#~~~~#",
+      "#.B........~~~o.g..#",
+      "#..........~.~~....#",
+      "#o.o.......#~~~....#",
+      "##.........~~~~..g.#",
+      "#~~~~~~~~~~~~~~....#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "##......############",
+      "##......############",
+      "##......############",
+      "##..o...############",
+      "##..o...############",
+      "##..W...############",
+      "##......############",
+      "##......############",
+      "####################"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 10,
+          "y": 6
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "rappel",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 6
+          }
+        ],
+        "color": 0
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 14,
+          "y": 4
+        },
+        "circuit": "rappel",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 5
+        },
+        "circuit": "rappel",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "UUUUUUCDDRCUUULCUDCUUUDDDRRRRRRRUCUURRRRRRRXRURCLUUUUURXRDDRR",
+  "actions": [
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 21
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Tutoriel original · Guerrier et Barde · règles du Nord et des zones mixtes",
+    "url": "https://sinkingstarwalkthrough.com/fr/north/",
+    "objective": "Réunir les deux ateliers par trois appuis, conserver le poids de la commande, régler le miroir puis rejoindre les deux destinations."
+  },
+  "metrics": {
+    "actions": 61,
+    "selections": 6,
+    "warriorPushes": 10,
+    "bardSongs": 5,
+    "partnerSongs": 2,
+    "selectiveSongs": 3,
+    "forcedBardMoves": 3,
+    "supportMoves": 1,
+    "chainPushes": 4,
+    "stoneMoves": 16,
+    "mirrorMoves": 1,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 4,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier pousse sa file de deux caisses et construit les deux premiers appuis du passage nord.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": false
+      }
+    },
+    {
+      "label": "Le Barde chante à travers sa cour : une caisse reste retenue, l’autre entre dans l’eau puis glisse à droite. Le poids libéré commande la presse et son obturateur.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    },
+    {
+      "label": "Le Guerrier traverse les trois appuis et rejoint la cour du Barde.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    },
+    {
+      "label": "Le chant entraîne aussi le Guerrier. Le poids quitte puis retrouve sa commande ; les pièces bloquées restent en place.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    },
+    {
+      "label": "Trois poussées replacent le Barde hors de portée du poids, sans déclencher son chant.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    },
+    {
+      "label": "Le Guerrier remonte le miroir : son bras blanc passe au-dessus du mur qui bloquait le reflet.",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    },
+    {
+      "label": "Le Barde prend le reflet vers l’appui créé par la presse distante.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    },
+    {
+      "label": "Le Barde quitte l’appui et prend la première destination.",
+      "turn": 47,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    },
+    {
+      "label": "Le Guerrier emprunte à son tour le miroir et occupe la seconde destination.",
+      "turn": 61,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rappel": true
+      }
+    }
+  ],
+  "adaptation": "Tutoriel original SS12. Le Guerrier démarre dans le chantier inférieur, le Barde dans une cour ouverte au nord. Les deux caisses de la file et la caisse chantée fournissent les trois appuis entre leurs rives. Une quatrième caisse, retenue au sud par un mur et inaccessible à une poussée depuis l’ouest, sert de poids durable. Elle ferme la presse isolée et ouvre l’obturateur optique. Le Barde doit apprendre à quitter sa commande sans déplacer le poids ; le Guerrier peut le replacer sans chant. Un miroir déplacé vers le nord contourne son mur de dos. La caisse de la presse forme la seule arrivée sûre à distance égale pour rejoindre l’île des deux destinations. Le pas du chant qui entraîne le partenaire est une découverte pédagogique, sans promesse d’unicité du parcours."
+}

@@ -1,0 +1,16 @@
+{
+  "status": "blocked",
+  "nativeBrowserVerified": false,
+  "scope": "Browser availability only; no successful browser rendering or full campaign claimed.",
+  "attempts": [
+    {
+      "surface": "Local Chromium launched by Playwright",
+      "result": "Process could not create a required socket: Operation not permitted."
+    },
+    {
+      "surface": "Managed cloud browser",
+      "result": "Navigation to local file denied by URL policy; only http and https are allowed. No workaround was attempted."
+    }
+  ],
+  "fallback": "Compiled HTML evaluated in Happy DOM with canvas pixel buffers and controlled timers; see ui-dom-report.json."
+}

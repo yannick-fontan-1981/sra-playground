@@ -1,0 +1,430 @@
+{
+  "spec": {
+    "id": "ss12-03",
+    "title": "Le quai ramené d’en bas",
+    "rows": [
+      "##################",
+      "##################",
+      "###o#########g..##",
+      "##..2.....~~~..g##",
+      "##.B#####~###...##",
+      "##..###.~.########",
+      "##W...#.~.########",
+      "##......~.########",
+      "##....#.~.########",
+      "##....#.~.########",
+      "##....#.~.########",
+      "##....#.~.########",
+      "##....#.s.########",
+      "##################",
+      "##################"
+    ],
+    "circuits": [
+      {
+        "id": "quai",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 3
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 7
+        },
+        "circuit": "quai",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDCUUUURRRRRCDDRRRRDDDDDUUUUURRXUCLLLLDDDDRRRRRRXRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes 3: Bard, Druid · énigme 19",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-19",
+    "puzzle": 19,
+    "image": "https://sinkingstarwalkthrough.com/img/north/hauling-3/puzzle-19.webp",
+    "objective": "Extraire la caisse, pousser avec elle le miroir, puis ramener l’appui du canal pour donner accès aux deux reflets."
+  },
+  "metrics": {
+    "actions": 51,
+    "selections": 4,
+    "warriorPushes": 5,
+    "bardSongs": 6,
+    "partnerSongs": 1,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 0,
+    "supportMoves": 5,
+    "chainPushes": 5,
+    "stoneMoves": 6,
+    "mirrorMoves": 5,
+    "reflections": 2,
+    "heroReflections": 2,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La caisse est extraite de sa niche, à travers le mur",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 5
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "quai": false
+      }
+    },
+    {
+      "label": "La poussée commune pose le poids et règle le miroir au bout du quai",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "quai": true
+      }
+    },
+    {
+      "label": "L’appui remonte depuis le cul-de-sac aquatique",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "quai": true
+      }
+    },
+    {
+      "label": "Le Barde franchit le quai puis prend le premier reflet",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "quai": true
+      }
+    }
+  ],
+  "adaptation": "La niche, le changement d’axe de la cargaison et le poids final de l’énigme 19 sont conservés comme structure causale. L’adaptation ajoute un miroir poussé dans la même file et un appui mobile à ramener depuis le fond du canal. Chaque héros doit prendre le reflet séparément."
+}
