@@ -14,9 +14,9 @@
 | Annulation du dernier coup de chaque salle | Vérifiée, y compris le changement de niveau. |
 | Source des cartes, crédits et témoins | Huit correspondances exactes avec les références d’auteur. |
 | Contrôles du HTML compilé | Réussis dans Happy DOM, pixels du canvas et temporisation contrôlée. |
-| Rendu dans un véritable navigateur | **Bloqué par l’environnement**, non validé. |
+| Rendu dans Chromium (Microsoft Edge 158.0.4370.33) | **Réussi** sur ordinateur et à 390 px. |
 
-Les résultats détaillés sont dans `validation/levels-report.json` et `validation/ui-dom-report.json`. Le statut navigateur est dans `validation/browser-availability.json`.
+Les résultats détaillés sont dans `validation/levels-report.json` et `validation/ui-dom-report.json`. Le rapport Chromium est dans `validation/browser-report.json`. `validation/browser-availability.json` conserve les tentatives historiques.
 
 ## Moteur et règles vérifiées
 
@@ -32,11 +32,11 @@ Les vérifications couvrent douze situations du duo, trois cas de reflets, le mi
 
 Cela vérifie les comportements DOM et les images calculées. Cela ne certifie pas la mise en page CSS, les périphériques tactiles ou la présentation dans chaque navigateur.
 
-## Limite de l’environnement navigateur
+## Rendu dans Chromium
 
-Le lancement local de Chromium a échoué sur une création de socket interdite. Le navigateur géré a ensuite refusé l’URL locale selon sa politique de protocoles. Aucun contournement n’a été essayé. La vérification visuelle des grilles publiques a été possible par rendu des matrices de pixels, mais pas celle de la page complète.
+Le 21 novembre 2026, Playwright a exécuté le HTML compilé dans Microsoft Edge 158.0.4370.33. Les huit parcours d’auteur ont été rejoués avec le clavier et des clics réels sur le canvas. Les pixels stabilisés correspondent au moteur après chacune des 526 entrées. Les treize découvertes ont été acquises et le panneau final est apparu.
 
-`scripts/verify-ui-browser.mjs` prépare le contrôle Chromium pour un environnement autorisant le navigateur. Il n’est pas compté comme réussi dans cette livraison.
+Le contrôle couvre aussi Annuler après la victoire, Repartir, l’animation normale et les sélecteurs de niveau et de héros sur mobile. À 390 px, la page ne déborde pas et le canvas fait 344 px de large. Le HTML autonome n’a déclenché aucune requête réseau ni erreur JavaScript.
 
 ## Reproduire
 
@@ -61,4 +61,4 @@ Le build ne lance aucun solveur. Une modification de carte se régénère depuis
 
 Les huit salles sont solubles avec les règles livrées. Les témoins gagnent sans refus ni mort et sont absents du bundle jouable. Leur longueur n’est pas une mesure d’optimalité ; leur réussite n’est pas une réussite de l’agent SRA. Aucune unicité des solutions ou nécessité globale de chaque mécanisme n’est affirmée.
 
-Aucun chemin du runtime SRA ou du catalogue natif n’est modifié dans cette étape. Il n’y a donc pas de comparaison de performance globale du Playground dans ce rapport. Elle devra être faite si l’intégration modifie des chemins partagés.
+La qualification de l’intégration native et la comparaison du coût du Playground sont suivies dans la documentation d’intégration.

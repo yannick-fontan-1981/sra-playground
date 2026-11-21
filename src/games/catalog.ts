@@ -1170,6 +1170,10 @@ records.push({code:'SS11',id:'ss11-c4000001',name:'La Forge des Reflets',group:'
   description:'Push chains with the Warrior, swap places with the Wizard, and route rays and reflections through mirrors.',
   sourcePath:'experiments/sinking-star-ss11/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS12',id:'ss12-c4000001',name:'La Colonne en Marche',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Push mixed chains with the Warrior and guide nearby allies, crates, monsters and supports with the Bard’s song.',
+  sourcePath:'experiments/sinking-star-ss12/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

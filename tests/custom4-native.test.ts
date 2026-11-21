@@ -54,13 +54,18 @@ import { DuoPuzzleSession as ForgeDuoSession } from '../experiments/sinking-star
 import { SS11_LEVELS } from '../experiments/sinking-star-ss11/src/levels.ts';
 import { heroSelection as forgeHeroSelection, lessonIds as forgeLessonIds, observeLesson as observeForgeLesson, TUTORIAL_LEVEL as SS11_TUTORIAL_LEVEL, visibleHeroes as visibleForgeHeroes, type TranspositionLesson as ForgeLesson } from '../experiments/sinking-star-ss11/src/tutorial.ts';
 import ss11Witnesses from '../experiments/sinking-star-ss11/tests/witnesses.json' with { type: 'json' };
+import { createSs12Backend } from '../src/games/sinking-star-ss12.ts';
+import { DuoPuzzleSession as ColumnDuoSession } from '../experiments/sinking-star-ss12/src/core.ts';
+import { SS12_LEVELS } from '../experiments/sinking-star-ss12/src/levels.ts';
+import { heroSelection as columnHeroSelection, lessonIds as columnLessonIds, observeLesson as observeColumnLesson, TUTORIAL_LEVEL as SS12_TUTORIAL_LEVEL, visibleHeroes as visibleColumnHeroes, type ChorusLesson as ColumnLesson } from '../experiments/sinking-star-ss12/src/tutorial.ts';
+import ss12Witnesses from '../experiments/sinking-star-ss12/tests/witnesses.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS11 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS12 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 111);
+  assert.equal(GAME_CATALOG.length, 112);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -248,7 +253,7 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
+  for (const code of ['CASC', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -1345,6 +1350,78 @@ test('SS11 rejects invalid loads and actions and preserves selection, Undo, Rese
   }
   assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS11 action/);
   const data = forgeHeroSelection(initial.frame, 'wizard')!;
+  assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
+  assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(backend.dispatch({ type: 'selectLevel', level: 8 }), reference.selectLevel(8));
+  assert.deepEqual(backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+test('SS12 preserves eight ordered levels, public observations, animations and thirteen tutorial discoveries', async () => {
+  const { getGameByCode } = await import('../src/games/catalog.ts');
+  const entry = getGameByCode(' ss12 ')!;
+  assert.deepEqual([entry.id, entry.name, entry.group, entry.family, entry.levels, entry.availability],
+    ['ss12-c4000001', 'La Colonne en Marche', 'custom_4', 'sinking_star_duo', 8, 'playable']);
+  assert.equal(entry.sourcePath, 'experiments/sinking-star-ss12/src/levels.ts');
+  assert.deepEqual(SS12_LEVELS.map(level => level.title), [
+    'La répétition des deux rives', 'Les deux rails et le convoi', 'Le quai ramené d’en bas', 'Les trois poids sous garde',
+    'Le poids reste, le chant s’en va', 'Les deux écluses de pierre', 'Le canal aux quatre coudes', 'La coda des deux reflets',
+  ]);
+  assert.equal(SS12_TUTORIAL_LEVEL, 1);
+  assert.deepEqual(SS12_LEVELS.map(level => level.id), Array.from({ length: 8 }, (_, i) => `ss12-0${i + 1}`));
+
+  const backend = createSs12Backend(), reference = new ColumnDuoSession(SS12_LEVELS);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const lessons = new Set<ColumnLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss12 ' });
+  assert.deepEqual(current, reference.observe());
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS12' }), current);
+  const publicKeys = Object.keys(current);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss12Witnesses) {
+    assert.equal(current.level, level);
+    assert.equal(current.palette?.length, 16);
+    assert.deepEqual(visibleColumnHeroes(current.frame).map(({ kind, selected }) => ({ kind, selected })).sort((a, b) => a.kind.localeCompare(b.kind)),
+      [{ kind: 'bard', selected: false }, { kind: 'warrior', selected: true }]);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const expected = reference.action(id, data);
+      const request = { type: 'action', actionId: id, data } as const;
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(backend.dispatch(request), expected);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleColumnHeroes(frame).map(({ kind, x, y }) => [kind, x, y]);
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      observeColumnLesson(lessons, before, current, id);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    assert.deepEqual(columnLessonIds.filter(id => lessons.has(id)), [...columnLessonIds]);
+  }
+  assert.equal(current.state, 'WIN');
+  assert.deepEqual([actions, selections, frames], [526, 38, 1548]);
+});
+
+test('SS12 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart', async () => {
+  const backend = createSs12Backend(), reference = new ColumnDuoSession(SS12_LEVELS);
+  const initial = reference.selectLevel(6);
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS12', level: 6 }), initial);
+  for (const level of [0, 9, 1.5, NaN]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS12', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: 1.5, y: 20 }, { x: -1, y: 0 }, { x: 0, y: 64 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS12 action/);
+  const data = columnHeroSelection(initial.frame, 'bard')!;
   assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
   assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
   assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());

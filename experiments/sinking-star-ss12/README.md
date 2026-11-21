@@ -43,4 +43,4 @@ Les contrôles complémentaires d’interface sont dans `scripts/verify-ui-dom.m
 
 ## Intégration
 
-Ce dossier constitue le laboratoire HTML. `docs/codex-integration-prompt.md` décrit le raccordement au catalogue natif, aux contrôles et à la publication du Playground. Aucun code du catalogue ou du runtime SRA n’est modifié par le laboratoire.
+Le Playground réutilise le moteur, les huit salles, les métadonnées et le suivi pédagogique de ce laboratoire. `docs/codex-integration-prompt.md` documente le raccordement natif et `docs/roadmap.md` suit sa qualification.

@@ -1,0 +1,77 @@
+{
+  "success": true,
+  "browser": "158.0.4370.33",
+  "htmlSha256": "9d0706f8a1c7ae8b8bbfeff2a6d93d5c0e2a6704a89d5259bf6ffc86095c4f67",
+  "checks": [
+    "All eight authored routes win through actual keyboard and canvas selection events, with matching visible pixels after every input.",
+    "All thirteen tutorial discoveries are acquired and the final VICTORY panel is visible.",
+    "Undo restores the winning action; Restart clears progress; normal animation advances and remains undoable.",
+    "390px mobile layout has no horizontal overflow and level/role controls work.",
+    "The entire browser run performs zero network requests and reports zero JavaScript errors."
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "title": "La répétition des deux rives",
+      "actions": 61,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 2,
+      "title": "Les deux rails et le convoi",
+      "actions": 31,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 3,
+      "title": "Le quai ramené d’en bas",
+      "actions": 51,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 4,
+      "title": "Les trois poids sous garde",
+      "actions": 51,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 5,
+      "title": "Le poids reste, le chant s’en va",
+      "actions": 63,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 6,
+      "title": "Les deux écluses de pierre",
+      "actions": 77,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 7,
+      "title": "Le canal aux quatre coudes",
+      "actions": 133,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    },
+    {
+      "level": 8,
+      "title": "La coda des deux reflets",
+      "actions": 59,
+      "publicInputReplay": true,
+      "allFinalPixelsMatch": true
+    }
+  ],
+  "mobile": {
+    "documentWidth": 390,
+    "viewport": 390,
+    "canvasWidth": 344,
+    "levelSelection": true,
+    "roleSelection": true
+  }
+}
