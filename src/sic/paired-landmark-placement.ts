@@ -5,14 +5,15 @@ import {cellMatches, spatialControls} from './calibrate-spatial-controls.ts';
 import type {CursorTrial} from './marked-cursor-selection.ts';
 import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
-import {chooseIndicatedAccess,learnIndicatedAccess,newIndicatedMemory,type AccessExperiment,type IndicatedMemory} from './seek-indicated-access.ts';
+import {chooseIndicatedAccess,learnIndicatedAccess,localAccessBody,newIndicatedMemory,type AccessExperiment,type IndicatedMemory} from './seek-indicated-access.ts';
 import {chooseMobileIndication,tileValues} from './plan-mobile-indication.ts';
 import {advancePartnerTest,nextPartnerTest,observedBodyClick,sitePatch,type PartnerTest,type PartnerOffer} from './test-partner-preparation.ts';
+import {measureDisplacedDestination,type DisplacedDestination} from './displaced-destination.ts';
 
 type Pair = {role:string; sites:XY[]; ref:string};
 type Assignment = {
   pair:Pair; home:XY; other:XY; actor:string; peer:string; selection:CursorTrial;
-  pitch:XY; firstRef:string; returnRef?:string;
+  pitch:XY; firstRef:string; returnRef?:string; displaced?:DisplacedDestination;
 };
 export type LandmarkTrial = Assignment & {
   stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked'|'test_partner_preparation';
@@ -25,6 +26,7 @@ export type LandmarkMemory = {
   planAfterSelection?:boolean;
   previousControl?:{parked:string;moving:string;at:XY;ref:string;motor?:{op:string;d:XY;ref:string}};
   testPartner?:boolean; probe?:PartnerTest; probedEdges?:string[];
+  reconsiderDestination?:boolean; redirect?:{assignment:Assignment;displaced:DisplacedDestination};
   releasedEdges?:{role:string;from:XY;command:string;partner:XY;destination:XY;ref:string}[];
   blocked:string[]; tried:string[]; inconclusiveSelections?:string[]; handoff?:boolean; lastResult?:string;
 };
@@ -41,7 +43,7 @@ export function observeLandmarks(m:LandmarkMemory|undefined, before:VisualLayout
   return m;
 }
 function drop(m:LandmarkMemory) {
-  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;delete m.access;delete m.probe;
+  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;delete m.access;delete m.probe;delete m.redirect;
 }
 function bodyRole(layout:VisualLayout,box:NativeBox) {
   const matches=Object.entries(layout).filter(([,g])=>g.length===1 && g[0]!.box.every((v,i)=>v===box[i]));
@@ -127,7 +129,8 @@ function nextStep(m:LandmarkMemory,a:Assignment,role:string,from:XY,goal:XY,guar
 }
 function accessContext(m:LandmarkMemory){
   const a=m.active;
-  return a&&m.secondRole&&m.parkedRole?{actor:m.secondRole,parked:m.parkedRole,home:a.home,goal:a.other,pitch:a.pitch}:undefined;
+  if(a&&m.secondRole&&m.parkedRole)return {actor:m.secondRole,parked:m.parkedRole,home:a.home,goal:a.other,pitch:a.pitch};
+  if(a?.displaced)return {actor:a.actor,parked:a.peer,home:a.displaced.partner,goal:a.home,pitch:a.pitch,displaced:a.displaced};
 }
 export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after:VisualLayout,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,op:string,t?:LandmarkTrial){
   if(m.probe && !t?.partnerTest && a.frame_hash!==b.frame_hash){drop(m);delete m.previousControl;}
@@ -153,7 +156,17 @@ export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after
   if(c)learnIndicatedAccess(m.access??=newIndicatedMemory(),c,b.frame_hash,a.frame_hash,before,after,op,a.observation_ref,t?.expected,t?.access);
 }
 export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,rows:NativeRows,motions:Record<string,PartMotion>,candidate:CursorTrial|null,limit:number,accessDepth?:number):LandmarkTrial|undefined {
-  const a=m.active??(candidate && nearestAssignment(m,l,o,candidate,motions));
+  let a=m.active??(candidate && nearestAssignment(m,l,o,candidate,motions));
+  if(!a&&m.redirect){
+    const {assignment:prior,displaced}=m.redirect,actor=singleton(l,prior.actor),peer=singleton(l,prior.peer);
+    if(!actor||!peer||!cellMatches(peer.at,displaced.partner,prior.pitch))return;
+    const command=observedBodyClick(l,prior.peer,o);if(!command)return;
+    const box=(v:readonly number[]):NativeBox=>[v[0]!,v[1]!,v[2]!,v[3]!];
+    const [x,y]=command.slice(8).split(',').map(Number);
+    const selection:CursorTrial={...prior.selection,command,point:[x!,y!],source:{...prior.selection.source,box:box(actor.box)},target:{...prior.selection.target,box:box(peer.box)}};
+    const alternative=nearestAssignment(m,l,o,selection,motions);
+    if(alternative)a={...alternative,displaced};
+  }
   if(!a||m.handoff&&!m.secondRole)return;
   if(m.probe){
     const step=nextPartnerTest(m.probe,l,o,rows,a.pitch);
@@ -181,7 +194,7 @@ export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservat
     const floor=Object.entries(motions[role]?.substrate??{}).sort((x,y)=>y[1]-x[1])[0];
     let plan=m.access.mobilePending;
     const pending=plan?.path[0];
-    if(plan&&pending && (!cellMatches(body.at,pending.from,c.pitch)||!cellMatches(singleton(l,plan.pivot)?.at??null,pending.centre,c.pitch)||
+    if(plan&&pending && (!cellMatches(body.at,pending.from,c.pitch)||!cellMatches(localAccessBody(l,plan.pivot,c)?.at??null,pending.centre,c.pitch)||
       pending.read&&!cellMatches(singleton(l,plan.cue)?.at??null,pending.expected,c.pitch)))plan=undefined;
     if(!plan&&controls&&m.access.repair)plan=chooseMobileIndication(m.access,c,o.frame_hash,rows,controls.motors,o.available_action_refs,accessDepth,limit,floor?Number(floor[0]):undefined);
     if(plan){
@@ -207,7 +220,17 @@ export function refreshedSelection(t:LandmarkTrial,l:VisualLayout):CursorTrial {
 export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:VisualLayout,cursorResult:string|undefined,selection:CursorTrial|undefined,before:VisualLayout,pending?:CursorTrial,observationRef?:string,rows?:NativeRows) {
   if(m.planAfterSelection && selection?.stage==='select')delete m.previousControl;
   if(t){
-    m.active??={pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef,...(t.returnRef?{returnRef:t.returnRef}:{})};
+    if(m.reconsiderDestination && t.stage==='place_before_selection' && observationRef){
+      const displaced=measureDisplacedDestination(before,l,t.pair.role,t.home,t.actor,t.peer,t.guard,t.pitch,observationRef);
+      if(displaced){
+        drop(m);
+        m.pairs=m.pairs.filter(p=>p.role!==t.pair.role);
+        m.redirect={assignment:{pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef},displaced};
+        return m.lastResult='destination_moved_with_subject';
+      }
+    }
+    m.active??={pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef,...(t.returnRef?{returnRef:t.returnRef}:{}),...(t.displaced?{displaced:t.displaced}:{})};
+    delete m.redirect;
     if(t.partnerTest && m.probe){
       const s=m.probe, result=advancePartnerTest(s,before,l,t.pitch);
       if(result==='lost'){drop(m);delete m.previousControl;return m.lastResult='partner_experiment_lost_subject';}
@@ -227,6 +250,7 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
       // remains pending. The next motor determines whether the subject switched.
       if(pending?.stage==='verify'){
         m.handoff=true;
+        if(m.active.displaced){delete m.active.displaced;delete m.access;}
         const parked=redrawnRole(before,l,t.home,t.pitch),selected=redrawnRole(before,l,t.guard,t.pitch);
         if(parked && selected && parked!==selected)m.redrawn={parked,selected};
       }
@@ -259,7 +283,7 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
       if(!sites.includes(key))sites.push(key);
     }
   }
-  if(m.planAfterSelection && !m.active && selection?.stage==='verify' &&
+  if(m.planAfterSelection && !m.active && selection?.stage==='verify' && selection.contrast?.motor===selection.command &&
     cursorResult==='new_cursor_moved_while_previous_cursor_stayed' && observationRef) {
     const parked=bodyRole(before,selection.source.box),moving=bodyRole(before,selection.target.box);
     const old=parked&&singleton(before,parked),still=parked&&singleton(l,parked);

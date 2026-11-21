@@ -98,7 +98,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const testPartner=comparePreparations && informationPreference?.strategy==='test_partner_preparation';
+  const reconsiderDestination=comparePreparations && informationPreference?.strategy==='reclassify_displaced_goal';
+  const testPartner=reconsiderDestination || comparePreparations && informationPreference?.strategy==='test_partner_preparation';
   const planAfterSelection=testPartner || comparePreparations && informationPreference?.strategy==='plan_after_selection';
   const seekAccess=planAfterSelection || comparePreparations && informationPreference?.strategy==='indicated_access';
   const prepareArrival=seekAccess || comparePreparations && informationPreference?.strategy==='paired_arrival';
@@ -133,6 +134,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           m.landmarkMemory=observeLandmarks(m.landmarkMemory,before,after,b.observation_ref);
           if(planAfterSelection)m.landmarkMemory.planAfterSelection=true;
           if(testPartner)m.landmarkMemory.testPartner=true;
+          if(reconsiderDestination)m.landmarkMemory.reconsiderDestination=true;
         }
         if(seekAccess&&m.landmarkMemory)observeLandmarkAccess(m.landmarkMemory,before,after,b,a,rows,next,key,x?.landmark);
         observeCueCondition(learning,b,a,before,after,key);
@@ -169,7 +171,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           placementSelection=measuredReturnSelection(m.cursorSelection,o,rows,actor[0]!.box,peer[0]!.box,previous.ref,informationPreference);
         }
       }
-      const landmark=prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && m.landmarkMemory.active || group===recurrentExperimentGroup && placementSelection?.stage==='select')
+      const landmark=prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
         ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
       const cursor=landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor;
       if (!landmark && !cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
@@ -311,7 +313,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         }:{})}} : {}),
         ...(landmark ? {landmarkForecast:{stage:landmark.stage,role:landmark.pair.role,home:landmark.home,other:landmark.other,
           from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,...(landmark.returnRef?{verifiedReturnSource:landmark.returnRef}:{}),
-          ...(landmark.partnerTest?{partnerTest:landmark.partnerTest}:{}),...(landmark.access?{access:landmark.access.mobile?{
+          ...(landmark.displaced?{displacedDestination:landmark.displaced}:{}),...(landmark.partnerTest?{partnerTest:landmark.partnerTest}:{}),...(landmark.access?{access:landmark.access.mobile?{
             purpose:landmark.access.purpose,cue:landmark.access.cue,pivot:landmark.access.mobile.pivot,motion:landmark.access.mobile.motion,
             first:landmark.access.mobile.path[0],length:landmark.access.mobile.path.length,reads:landmark.access.mobile.path.filter(s=>s.read).length,examined:landmark.access.mobile.examined
           }:landmark.access}:{}),

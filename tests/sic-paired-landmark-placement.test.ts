@@ -23,6 +23,9 @@ test('a verified switch without a prior plan retains the two roles for a later p
   m.planAfterSelection=true;
   const verify:CursorTrial={...trial,stage:'verify',command:'ACTION2'};
   const moved={...base,peer:[part(10,3,'remote')]};
+  const {contrast:unused,...uncalibrated}=verify;
+  observePlacement(m,undefined,moved,'new_cursor_moved_while_previous_cursor_stayed',uncalibrated,base,undefined,'no-prior-motor');
+  assert.equal(m.previousControl,undefined);
   observePlacement(m,undefined,moved,'cursor_control_unconfirmed',verify,base,undefined,'failed');
   assert.equal(m.previousControl,undefined);
   observePlacement(m,undefined,moved,'new_cursor_moved_while_previous_cursor_stayed',verify,base,undefined,'verified');

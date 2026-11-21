@@ -12,6 +12,7 @@ type Model={pivot:string;cue:string;push:boolean;pull:boolean;ref:string;example
 const gridPoint=(p:XY,c:AccessContext)=>aligned(p,c.goal,c.pitch);
 export function identifyMobileModels(m:IndicatedMemory,c:AccessContext):Model[]{
   const roles=new Map<string,{pull:boolean;push:boolean}>();
+  if(c.displaced)roles.set(c.displaced.role,{pull:false,push:true});
   for(const s of Object.values(m.scenes))for(const [op,h] of Object.entries(s.next)){
     const next=m.scenes[h];
     if(!/^ACTION[1-4]$/.test(op)||!next)continue;

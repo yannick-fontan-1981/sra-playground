@@ -5,7 +5,7 @@ import {cellMatches} from './calibrate-spatial-controls.ts';
 import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
 import {mobileRefutation,type MobilePlan} from './plan-mobile-indication.ts';
-export type AccessContext={actor:string;parked:string;home:XY;goal:XY;pitch:XY};
+export type AccessContext={actor:string;parked:string;home:XY;goal:XY;pitch:XY;displaced?:import('./displaced-destination.ts').DisplacedDestination};
 export type AccessScene={at:XY;form:string;visible:Record<string,XY>;next:Record<string,string>};
 type Context=AccessContext;
 type Production={cue:string;op:string;offset:XY;form:string;ref:string};
@@ -23,12 +23,21 @@ const directional=(op:string)=>/^ACTION[1-4]$/.test(op);
 const operation=(op:string)=>/^ACTION[57]$/.test(op);
 const cell=(p:XY,c:Context)=>aligned(p,c.goal,c.pitch);
 const hasSite=(m:IndicatedMemory,p:XY,c:Context)=>!!m.sites[cell(p,c).join()];
+export function localAccessBody(l:VisualLayout,k:string,c:AccessContext){
+  if(c.displaced?.role!==k)return single(l,k);
+  const parts=l[k],fixed=c.displaced.stationaryCopies;
+  if(!parts||!fixed.every(site=>parts.some(v=>cellMatches(v.at,site,c.pitch))))return;
+  const others=parts.filter(v=>!fixed.some(site=>cellMatches(v.at,site,c.pitch)));
+  return others.length===1?others[0]:undefined;
+}
 function scene(m:IndicatedMemory,hash:string,l:VisualLayout,c:Context){
   const body=single(l,c.actor),parked=single(l,c.parked);
   if(!body||!parked||!cellMatches(parked.at,c.home,c.pitch))return;
   m.sites[cell(body.at,c).join()]=true;
-  return m.scenes[hash]??={at:body.at,form:body.form,visible:Object.fromEntries(Object.entries(l)
-    .filter(([k,g])=>k!==c.actor&&k!==c.parked&&g.length===1).map(([k,g])=>[k,g[0]!.at])),next:{}};
+  return m.scenes[hash]??={at:body.at,form:body.form,visible:Object.fromEntries(Object.keys(l).flatMap(k=>{
+    if(k===c.actor||k===c.parked)return [];
+    const part=localAccessBody(l,k,c);return part?[[k,part.at]]:[];
+  })),next:{}};
 }
 export function learnIndicatedAccess(m:IndicatedMemory,c:Context,b:string,a:string,before:VisualLayout,after:VisualLayout,op:string,ref:string,
   expected?:XY,trial?:AccessExperiment){
