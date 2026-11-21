@@ -1,0 +1,567 @@
+{
+  "spec": {
+    "id": "ss11-02",
+    "title": "Le damier des cargaisons",
+    "rows": [
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~~.....~~~.g.g~",
+      "~~~~~o.o.o.~~....~",
+      "~~~~~.....~~~....~",
+      "~~~~~o.o.o~~~.o..~",
+      "~~~~~.....~~~....~",
+      "~~.~~o.o.o~~~....~",
+      "~~Z~~.....~~~....~",
+      "~~~~~.W...~~~~~~~~",
+      "~~~~~.....~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "rive",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 6
+          }
+        ],
+        "color": 14
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 2
+        },
+        "circuit": "rive",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CURDDDRRRRUURRRCUUUUURRURRLULLLDRRRRRRRURCUUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes of Hauling · énigme 11",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "objective": "Extraire le Magicien du bouton, traverser le damier par échanges et construire les deux appuis pour le Guerrier."
+  },
+  "metrics": {
+    "actions": 45,
+    "selections": 3,
+    "warriorPushes": 7,
+    "thiefPulls": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 11,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Une caisse prend la place du Magicien sur son îlot-bouton.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 15,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
+      }
+    },
+    {
+      "label": "Les échanges dans le damier donnent accès à la cible de l’autre rive.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
+      }
+    },
+    {
+      "label": "La rive ne contient qu’un occupant : un second héros doit venir par un vrai pont.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
+      }
+    },
+    {
+      "label": "Premier appui dans le chenal.",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
+      }
+    },
+    {
+      "label": "Le second appui permet une vraie traversée.",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
+      }
+    }
+  ],
+  "adaptation": {
+    "retained": "Grille de trois caisses par trois; bouton commandant la sortie; caisse de réception sur la rive opposée.",
+    "changed": "Le bouton devient un îlot isolé; deux héros et deux destinations. La rive d’arrivée ne contient qu’une caisse au départ : les échanges n’y amènent donc qu’un héros à la fois. Le Guerrier doit construire un vrai passage, avec deux appuis sur le trajet le plus court. Les caisses du damier gênent les lignes de visée et servent de réserves."
+  }
+}

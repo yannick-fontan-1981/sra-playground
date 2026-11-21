@@ -1,0 +1,64 @@
+{
+  "artifact": "dist/SS11-demo.html",
+  "htmlSha256": "251457eb2ec4e91733c28673ce693db87e54bcac544bfb57006130bd31d756f6",
+  "environment": "Happy DOM with a minimal Canvas 2D pixel-write recorder",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Standalone HTML and initial level",
+      "status": "passed"
+    },
+    {
+      "name": "Tutorial follows its room to level seven",
+      "status": "passed"
+    },
+    {
+      "name": "Role buttons select without counting an action",
+      "status": "passed"
+    },
+    {
+      "name": "Tab and numeric shortcuts select the heroes",
+      "status": "passed"
+    },
+    {
+      "name": "Directional movement starts an animation and locks action buttons",
+      "status": "passed"
+    },
+    {
+      "name": "Undo interrupts animation without a stale frame",
+      "status": "passed"
+    },
+    {
+      "name": "Reset interrupts animation and restores the tutorial",
+      "status": "passed"
+    },
+    {
+      "name": "Completed keyboard movement updates pixels and teaching feedback",
+      "status": "passed"
+    },
+    {
+      "name": "Undo button restores the last movement",
+      "status": "passed"
+    },
+    {
+      "name": "Level picker exposes all eight initialized rooms",
+      "status": "passed"
+    },
+    {
+      "name": "Restart returns to the new first room",
+      "status": "passed"
+    },
+    {
+      "name": "No JavaScript exceptions during the targeted checks",
+      "status": "passed"
+    }
+  ],
+  "paints": 42,
+  "errors": [],
+  "limitations": [
+    "DOM and JavaScript checks only; no real-browser layout, visual review, audio or GPU rendering.",
+    "Canvas records the actual pixel buffers written by the app, without reproducing its rendering logic.",
+    "The browser Option constructor is supplied as a minimal shim because this Happy DOM version omits it.",
+    "Only tutorial-room actions and level selection are exercised; no campaign solution, solver or uniqueness check."
+  ]
+}

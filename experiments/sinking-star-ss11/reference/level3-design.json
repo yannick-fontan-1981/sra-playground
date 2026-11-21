@@ -1,0 +1,429 @@
+{
+  "spec": {
+    "id": "ss11-03",
+    "title": "Le poids du danger",
+    "rows": [
+      "#############",
+      "#.....~##g###",
+      "#.....~.....#",
+      "#.....~.m...#",
+      "#.....~.....#",
+      "#.Z...~.....#",
+      "#.....~.....#",
+      "#.....~.....#",
+      "#.....~.o...#",
+      "#.W...~###.##",
+      "#.....~###g##",
+      "#############"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "gardien",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 3
+          }
+        ],
+        "color": 11
+      },
+      {
+        "id": "charge",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 8
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 2
+        },
+        "circuit": "gardien",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 9
+        },
+        "circuit": "charge",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CUURDCUCLCUUUULUURDDDDDCRCUUUUURUCRRDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes 2: Monsters · énigme 15",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-15",
+    "puzzle": 15,
+    "objective": "Employer le monstre comme premier poids, puis faire relayer la caisse et les héros pour tenir le second bouton."
+  },
+  "metrics": {
+    "actions": 38,
+    "selections": 7,
+    "warriorPushes": 5,
+    "thiefPulls": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 7,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le monstre devient le poids du premier bouton, à distance des héros.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "gardien": true,
+        "charge": false
+      }
+    },
+    {
+      "label": "La caisse est extraite vers le haut par échange.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "gardien": true,
+        "charge": false
+      }
+    },
+    {
+      "label": "L’échange des héros donne le chantier au Guerrier.",
+      "turn": 9,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "gardien": true,
+        "charge": true
+      }
+    },
+    {
+      "label": "La caisse rejoint la ligne du second bouton.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "gardien": true,
+        "charge": true
+      }
+    },
+    {
+      "label": "La caisse stabilise le second verrou.",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "gardien": true,
+        "charge": true
+      }
+    }
+  ],
+  "adaptation": {
+    "retained": "Le Magicien échange un monstre sur un bouton puis une caisse sur un autre pour ouvrir les sorties.",
+    "changed": "Le monstre reste immobile et attaque seulement à distance orthogonale d’une case, selon la série Sinking Star. Un chenal et une caisse unique imposent la coopération avec le Guerrier; deux portes gardent deux destinations."
+  }
+}
