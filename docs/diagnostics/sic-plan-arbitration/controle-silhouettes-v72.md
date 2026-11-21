@@ -35,3 +35,22 @@ V75 choisit de remonter au coup 11 puis de poursuivre au coup 12. Le rejeu mesur
 ## Correction issue du lot source avant le gel v76
 
 REWI L1 gagnait en cinq gestes. V72 l'épuise à 60. Au troisième geste, SIC clique alors que le dernier mouvement donne 58 associations entre trois origines et 30 cibles, avec deux échelles de déplacement incompatibles. V76 diffère ce test jusqu'à l'observation d'une échelle cohérente ou d'une stagnation. Le scénario unitaire vérifie que deux gestes bloqués rendent de nouveau l'expérience disponible. REWI L1 regagne en cinq gestes avant le premier essai de cette révision sur Custom 4. Critères de qualification : même préfixe que v75 jusqu'à la réutilisation, même budget contre le témoin, SS09 entier à part, cinq campagnes gagnantes et 100 L1 à 60 gestes. Le gain de score reste évalué indépendamment des étapes de raisonnement.
+
+## Les quatre décisions dans la partie officielle de v76
+
+| Étape | Ce que SIC choisit | Ce qui le vérifie |
+|---|---|---|
+| Formuler la capacité | Après avoir observé le premier mouvement, SIC envisage qu'une sélection permette de déplacer un autre sujet tout en gardant le premier à sa place. | La préférence active propose un clic au coup 2. Depuis la même image, la préférence témoin joue une direction. |
+| Distinguer les préparations | Le pilote choisit lui-même un sujet, un pixel qui lui appartient et la commande dont le mouvement a déjà été observé. | Les tests des coups 2 et 6 n'établissent aucun changement de contrôle. Le clic du coup 8 produit deux retours différents à la même commande. |
+| Expérimenter et vérifier | Au coup 9, le pilote joue la commande choisie avant le clic et reconnaît le nouvel acteur. | Sans sélection, le premier sujet avance de trois pixels. Avec le clic choisi, le second avance de trois pixels et le premier reste immobile. Cliquer sur le premier sujet puis jouer la commande reproduit le bras témoin. |
+| Réutiliser et se réajuster | Au coup 10, le mouvement répété se bloque. SIC choisit une autre direction au coup 11, reconnaît le site déjà visité, puis tente de le dépasser au coup 12. | Le moteur mesure deux déplacements de deux et trois pixels. Le premier sujet reste au même emplacement dans les deux cas. |
+
+Les deux réglages partagent le code, le moteur, les actions disponibles et les budgets. L'auteur déclare dans le pack une préférence pour une expérience de mouvement à deux issues. SIC déduit de l'image quels corps comparer, quelle commande réutiliser et s'il faut essayer une autre direction. À froid, la partie active perd en 51 gestes, le témoin en cinq. Le jeu réservé SS09 termine sans point dans les deux configurations. L'actif y joue 24 tests de mouvement à deux issues ; aucun ne confirme un transfert dans la comparaison depuis la même image.
+
+## Une capacité spatiale que le pilote ne vise pas encore
+
+Le banc repart de l'image publique suivant le dixième coup de v76. Il explore jusqu'à douze déplacements en gardant le premier sujet immobile et compare l'activation dans 160 images distinctes. Dans cette recherche dédupliquée par image, la première préparation qui produit un échange de positions a neuf gestes. À cette profondeur, huit autres images donnent une activation sans effet. Dans sa partie autonome, v76 n'a rencontré aucune image où une activation immédiate produisait cet échange.
+
+Depuis la préparation de neuf gestes, le banc compare l'activation et un clic témoin qui conserve l'image. Il explore trois commandes directionnelles de continuation dans chaque branche. Avec l'échange, au moins deux positions du sujet sont à un pas entier de toute position mesurée dans le témoin et à un pas entier l'une de l'autre. Le pas vérifié vaut trois pixels. Aucun des deux bras ne marque dans cet horizon. Cette mesure isole ce que la préparation rend possible : le nombre total de centres visibles est même plus faible après l'échange. [Comparaison reproductible des accès](../../../scripts/measure-operations-after-control.mjs)
+
+Le prochain test consiste à faire nommer par SIC un lieu encore inaccessible, puis à lui faire classer des préparations selon qu'elles rendent ce lieu atteignable en préservant le premier placement. Le banc fournit la vérification indépendante après la partie. La découverte de la cible, de la préparation et du moment d'activer reste à réaliser dans le pilote.

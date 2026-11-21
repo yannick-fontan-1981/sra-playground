@@ -150,7 +150,10 @@ for (const file of files) {
     const shamMoves=live(shamMotor)?departure(sham,shamMotor,source):[];
     record.placementComparison={ordinary,selected,shamMoves,
       selectedStayedWithoutClick:unchanged(old,direct,target),previousStayedAfterClick:unchanged(sel,acted,source),
-      controlClickNeutral:hash(shamRoot)===hash(sham)};
+      controlClickNeutral:hash(shamRoot)===hash(sham),selectedStayedAfterControlClick:live(shamMotor)&&unchanged(sham,shamMotor,target)};
+    const comparison=record.placementComparison;
+    comparison.redirected=selected.length>0 && ordinary.some(d=>shamMoves.some(q=>d[0]===q[0]&&d[1]===q[1]))
+      && comparison.previousStayedAfterClick&&comparison.selectedStayedWithoutClick&&comparison.controlClickNeutral&&comparison.selectedStayedAfterControlClick;
     const factual = motions(sel.frame, acted.frame),
       oldStable = stable(sel, acted),
       baseStable = stable(old, direct);
@@ -286,13 +289,7 @@ for (const file of files) {
 }
 await writeFile(output, JSON.stringify(results), { flag: "wx" });
 console.log(
-  results.map((x) => [
-    x.code,
-    x.actions,
-    x.tests.length,
-    x.tests.filter((t) => t.followed).length,
-    x.tests.filter((t) => t.differential).length,
-    x.recognized.length,
-    x.won,
-  ]),
+  results.map(x=>({game:x.code,actions:x.actions,tests:x.tests.length,followed:x.tests.filter(t=>t.followed).length,
+    matchedPlacementComparisons:x.tests.filter(t=>t.placementComparison?.redirected).length,
+    strictSilhouetteComparisons:x.tests.filter(t=>t.differential).length,recognized:x.recognized.length,won:x.won})),
 );
