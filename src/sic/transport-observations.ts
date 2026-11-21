@@ -13,7 +13,7 @@ export type TransportMemory={grid:Grid;inks:[number,number];active:TransportSide
 export type TransportState={subjects:[number,number];pieces:number[];supports:number[];active:TransportSide};
 export type TransportStep={state:TransportState;command:string;after:TransportState};
 export type TransportForecast={purpose:string;command:string;from:TransportState;expected:TransportState;target:number[];evidence:string[];open:string[];key:string;
-  coverage?:{controls:number[];gate:number;goals:number[];laws:{kind:string;radius:number}[];testPeerPush?:boolean;openBefore:boolean;openAfter:boolean}};
+  coverage?:{controls:number[];gate:number;goals:number[];laws:{kind:string;radius:number}[];contactPreparation?:{side:TransportSide;stand:number;command:string;departed:number[];arrivals:number[]};testPeerPush?:boolean;openBefore:boolean;openAfter:boolean}};
 export const sameSites=(a:number[],b:number[])=>a.length===b.length&&a.every((v,i)=>v===b[i]);
 export const poseId=(s:TransportState)=>[s.active,s.subjects.join(','),s.pieces.join(','),s.supports.join(',')].join('/');
 export const sitePoint=(g:Grid,n:number)=>[g.left+(n%g.columns)*g.pitch+Math.floor(g.pitch/2),g.top+Math.floor(n/g.columns)*g.pitch+Math.floor(g.pitch/2)];

@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { contactStanceCost } from '../src/sic/coverage-contact-stance.ts';
 import {
   registerCoverage,
   readCoverage,
@@ -118,4 +119,25 @@ test('joint movement binds a contact capability to the actual subject', () => {
   assert.equal(c.peerPush?.[0], 'joint');
   assert.equal(c.peerPush?.[1], undefined);
   assert.equal(c.discovery, undefined);
+});
+
+test('the first useful stance for a cornered piece belongs to a subject that can pull it', () => {
+  const cost = contactStanceCost(
+    {
+      grid: { left: 0, top: 0, pitch: 1, columns: 6, rows: 3 },
+      terrain: [1, 2, 3, 4, 5, 13, 14, 15],
+      controls: [3, 15],
+    },
+    ['push', 'pull'],
+  )!;
+  const layout = {
+    subjects: [13, 2] as [number, number],
+    pieces: [1, 15],
+    supports: [],
+  };
+  assert.ok(cost({ ...layout, active: 1 }) < cost({ ...layout, active: 0 }));
+  assert.ok(
+    cost({ ...layout, subjects: [13, 4], active: 1 }) >
+      cost({ ...layout, active: 1 }),
+  );
 });

@@ -46,6 +46,7 @@ export type Coverage = {
   denied: Record<string, true>;
   discovery?: string;
   testContacts?: boolean;
+  prepareStance?: boolean;
   pullCandidate?: TransportSide;
   peerPush?: Partial<Record<TransportSide, string>>;
   refusedPeerPush?: Partial<Record<TransportSide, string>>;

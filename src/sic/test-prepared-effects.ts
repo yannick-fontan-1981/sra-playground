@@ -104,7 +104,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const testBodyContact=comparePreparations && informationPreference?.strategy==='test_contact_on_another_subject';
+  const prepareStance=comparePreparations && informationPreference?.strategy==='prepare_a_contact_stance';
+  const testBodyContact=prepareStance || comparePreparations && informationPreference?.strategy==='test_contact_on_another_subject';
   const planCoverage=testBodyContact || comparePreparations && informationPreference?.strategy==='maintain_access_by_composing_piece_effects';
   const followMarkedPose=planCoverage || comparePreparations && informationPreference?.strategy==='follow_a_marked_displacement';
   const verifyPoseChange=followMarkedPose || comparePreparations && informationPreference?.strategy==='verify_control_across_pose_changes';
@@ -161,6 +162,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           }
           if(m.coverage){
             if(testBodyContact)m.coverage.testContacts=true;
+            if(prepareStance)m.coverage.prepareStance=true;
             const outcome=observeCoverage(m.coverage,rows,next,key,a.observation_ref,x?.cooperative?.coverage?x.cooperative:undefined);
             if(outcome)transportResult=outcome;
           }

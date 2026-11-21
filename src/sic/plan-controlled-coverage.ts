@@ -1,3 +1,4 @@
+import { contactStanceCost } from './coverage-contact-stance.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
 import {
   maintained,
@@ -124,6 +125,25 @@ export function proposeCoverage(
     ...Object.values(c.motors).map((o) => o.ref),
     ...(c.opening ? [c.opening] : []),
   ];
+  function workingPosition() {
+    if (!c.prepareStance) return;
+    const contact = c.plan?.find((step) =>
+      step.state.pieces.some((n) => !step.after.pieces.includes(n)),
+    );
+    if (!contact) return;
+    const side = contact.state.active;
+    return {
+      side,
+      stand: contact.state.subjects[side],
+      command: contact.command,
+      departed: contact.state.pieces.filter(
+        (n) => !contact.after.pieces.includes(n),
+      ),
+      arrivals: contact.after.pieces.filter(
+        (n) => !contact.state.pieces.includes(n),
+      ),
+    };
+  }
   const describe = (s: TransportStep, purpose: string): TransportForecast => ({
     purpose,
     from: s.state,
@@ -155,6 +175,9 @@ export function proposeCoverage(
       s.state.subjects[other(s.state.active)] !==
         s.after.subjects[other(s.state.active)]
         ? { testPeerPush: true }
+        : {}),
+      ...(c.prepareStance && c.plan?.length && workingPosition()
+        ? { contactPreparation: workingPosition() }
         : {}),
       openBefore: maintained(c, s.state),
       openAfter: maintained(c, s.after),
@@ -270,10 +293,17 @@ export function proposeCoverage(
       }
     }
   }
+  const stance = c.prepareStance
+    ? contactStanceCost(
+        c,
+        laws.map((l) => l.kind),
+      )
+    : undefined;
   const rank = (s: TransportState) => {
     const pieces = costToMarks(s.pieces, c.controls),
       arrivals = costToMarks(s.subjects, c.goals);
     if (pieces === 0) return arrivals;
+    if (stance) return c.terrain.length + stance(s);
     const free = s.pieces.filter((p) => !c.controls.includes(p));
     return (
       c.terrain.length +
