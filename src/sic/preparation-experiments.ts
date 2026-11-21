@@ -110,6 +110,7 @@ export type Experiment = {
     | 'selectMarkedCursor'
     | 'verifyMarkedCursor'
     | 'advanceSelectedCursor'
+    | 'repairSelectedCursor'
     | 'testConfiguration'
     | 'localCapacity'
     | 'seekTerminalContact'

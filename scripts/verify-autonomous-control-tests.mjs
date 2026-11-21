@@ -6,6 +6,8 @@ import { hash } from "./sic-study-source-replay.mjs";
 import { dispatchWord } from "./sic-study-source-fork.mjs";
 import { footprints } from "./source-contact-footprints.mjs";
 import { motions } from "./source-control-transfer.mjs";
+import { geometricComponents } from "../src/logos-engine/v6-native-observer.ts";
+import { poseFamilyKey } from "../src/sic/pose-families.ts";
 const unchanged = (before, after, [l, t, r, b]) =>
   before.frame
     .slice(t, b + 1)
@@ -37,6 +39,30 @@ function stable(before, after) {
   const a = outlines(before),
     b = outlines(after);
   return new Set([...a].filter((k) => b.has(k)));
+}
+// Compare the driver's declared source and target in each arm independently.
+// A turn can change the exact mask and the two subjects can have different strides.
+function departure(before,after,box){
+  const grouped=frame=>{
+    const groups=new Map();
+    for(const part of geometricComponents(frame)){
+      if(part.area<2 || part.area>frame.length*frame[0].length/12)continue;
+      const role=poseFamilyKey({...part,palette_value:part.color});
+      const batch=groups.get(role)??[];batch.push(part.bbox);groups.set(role,batch);
+    }
+    return groups;
+  };
+  const start=grouped(before.frame),end=grouped(after.frame),departures=[];
+  for(const [role,group] of start){
+    const pair=end.get(role);
+    if(group.length!==1 || pair?.length!==1)continue;
+    const b=group[0],q=pair[0];
+    const [x,y]=centre(b);
+    if(x<box[0]||x>box[2]||y<box[1]||y>box[3])continue;
+    const dx=q[0]+q[2]-b[0]-b[2],dy=q[1]+q[3]-b[1]-b[3];
+    if(Math.max(Math.abs(dx),Math.abs(dy))>=Math.max(2,b[2]-b[0]+1,b[3]-b[1]+1))departures.push([dx/2,dy/2]);
+  }
+  return departures;
 }
 const results = [];
 for (const file of files) {
@@ -116,6 +142,15 @@ for (const file of files) {
       continue;
     }
     if (!live(direct) || !live(sel)) continue;
+    const [source,target]=c.observedSubjects;
+    const ordinary=departure(old,direct,source),selected=departure(sel,acted,target);
+    const shamRoot=await restore(i);
+    const sham=await dispatchWord(game,"ACTION6:"+centre(source).join(","));
+    const shamMotor=live(sham)?await dispatchWord(game,record.motor):sham;
+    const shamMoves=live(shamMotor)?departure(sham,shamMotor,source):[];
+    record.placementComparison={ordinary,selected,shamMoves,
+      selectedStayedWithoutClick:unchanged(old,direct,target),previousStayedAfterClick:unchanged(sel,acted,source),
+      controlClickNeutral:hash(shamRoot)===hash(sham)};
     const factual = motions(sel.frame, acted.frame),
       oldStable = stable(sel, acted),
       baseStable = stable(old, direct);

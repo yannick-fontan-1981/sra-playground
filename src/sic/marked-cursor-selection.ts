@@ -12,10 +12,12 @@ type ControlContrast = {
   strategy: 'motion_contrast'; mode: 'exploration'; minimumOutcomes: number;
   motor: string; baselineDelta: NativePoint; evidence: string; outcomes: readonly ['previous_subject_moves', 'selected_subject_moves'];
 };
-export type CursorTrial = Mark & { stage:'select'|'verify'|'advance'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string };
+type RepairOption = {command:string; prediction:'new_placement'|'unknown'|'return_or_overlap'; ref?:string};
+export type CursorTrial = Mark & { stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[] };
 export type CursorMemory = {
   motions:Motion[]; oriented?:PoseMotion[]; tried:string[]; refuted?:string[]; established?:string[]; motorSites?:Record<string,true>; returns?:number; blocked?:string[];
   pending?:CursorTrial; verified?:{shape:string;mark?:number;refs:string[]};
+  bearings?:Record<string,{dx:number;dy:number;ref:string}>;
 };
 export const newCursorMemory=():CursorMemory=>({motions:[],tried:[]});
 const tag=(b:NativeBox)=>b.join(',');
@@ -266,6 +268,26 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
   }
   return null;
 }
+function repairBlockedStep(m:CursorMemory,t:CursorTrial,o:NativeObservation,rows:NativeRows,input:string){
+  const tried=[...(t.triedMotors??[]),input];
+  const options:RepairOption[]=o.available_action_refs.filter(q=>/^ACTION[1-4]$/.test(q)&&!tried.includes(q)).map(command=>{
+    const d=m.bearings?.[command];
+    if(!d)return {command,prediction:'unknown'};
+    const [l,u,r,b]=t.target.box;
+    const next:NativeBox=[l+d.dx,u+d.dy,r+d.dx,b+d.dy];
+    const returns=t.priorBox && tag(t.priorBox)===tag(next);
+    const bad=returns || !disjoint(t.source.box,next) || next[0]<0 || next[1]<0 || next[2]>=rows[0]!.length || next[3]>=rows.length;
+    return {command,prediction:bad?'return_or_overlap':'new_placement',ref:d.ref};
+  });
+  const order={new_placement:0,unknown:1,return_or_overlap:2};
+  options.sort((a,b)=>order[a.prediction]-order[b.prediction]);
+  const best=options[0];
+  if(!best)return;
+  const evidence=[...t.evidence,o.observation_ref,...(best.ref?[best.ref]:[])];
+  m.pending={...t,stage:'reroute',command:best.command,triedMotors:tried,repairOptions:options,evidence};
+  delete m.pending.contrast;
+  delete m.pending.projectedMove;
+}
 export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,
   input:string,trial?:CursorTrial) {
   if(b.level_epoch!==a.level_epoch || b.state!==a.state || b.levels_completed!==a.levels_completed){delete m.pending;return;}
@@ -292,6 +314,12 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       const blocked=m.blocked??=[];if(!blocked.includes(input))blocked.push(input);
     }
   }
+  if(/^ACTION[1-4]$/.test(input) && (moves.length || m.oriented?.length)){
+    const bodies=[...moves,...(m.oriented??[])].filter(v=>(v.dx===0)!==(v.dy===0) && a.entities.some(e=>e.signature===v.form && e.area>=2));
+    const step=bodies[0];
+    if(step && bodies.every(v=>v.dx===step.dx && v.dy===step.dy))
+      (m.bearings??={})[input]={dx:step.dx,dy:step.dy,ref:a.observation_ref};
+  }
   if(trial?.stage==='select'){
     m.tried.push(signature(trial));
     const {source,target,offsets,ink}=trial;
@@ -308,20 +336,21 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
         feedback:transfer,evidence:[...trial.evidence,a.observation_ref]};
     }
     if(!transfer&&!m.pending)refute(m,trial);
-    m.motions=[];m.blocked=[];m.returns=0;
+    m.motions=[];delete m.oriented;m.blocked=[];m.returns=0;
     if(b.frame_hash===a.frame_hash)return 'cursor_click_visually_unchanged';
     if(trial.basis)return m.pending?'selection_changed_pending_motor':'selection_bodies_unresolved';
     return transfer?'cursor_mark_transferred':'cursor_mark_prediction_refuted';
   }
-  if(trial?.stage==='verify'||trial?.stage==='advance'){
+  if(trial?.stage==='verify'||trial?.stage==='advance'||trial?.stage==='reroute'){
     delete m.pending;
     const oldStill=rows.slice(trial.source.box[1],trial.source.box[3]+1).every((row,i)=>
       row.slice(trial.source.box[0],trial.source.box[2]+1).every((v,j)=>next[trial.source.box[1]+i]?.[trial.source.box[0]+j]===v));
     const target=trial.target;
-    const rotated=trial.basis && trial.contrast?.motor===input ? m.oriented?.find(v=>tag(v.fromBox)===tag(target.box)
-      && Math.max(Math.abs(v.dx),Math.abs(v.dy))*2>=Math.max(...trial.contrast!.baselineDelta.map(Math.abs))):undefined;
+    const repairing=trial.stage==='reroute';
+    const rotated=(repairing||trial.basis && trial.contrast?.motor===input) ? m.oriented?.find(v=>tag(v.fromBox)===tag(target.box)
+      && (repairing||Math.max(Math.abs(v.dx),Math.abs(v.dy))*2>=Math.max(...trial.contrast!.baselineDelta.map(Math.abs)))):undefined;
     const moved=rotated??moves.find(v=>{
-      if(trial.contrast && (input!==trial.contrast.motor || (!trial.basis && (v.dx!==trial.contrast.baselineDelta[0] || v.dy!==trial.contrast.baselineDelta[1]))))return false;
+      if(!repairing && trial.contrast && (input!==trial.contrast.motor || (!trial.basis && (v.dx!==trial.contrast.baselineDelta[0] || v.dy!==trial.contrast.baselineDelta[1]))))return false;
       if(trial.basis && trial.contrast){
         const stride=Math.max(...trial.contrast.baselineDelta.map(Math.abs));
         if(Math.max(Math.abs(v.dx),Math.abs(v.dy))*2<stride)return false;
@@ -337,8 +366,18 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       return vacated && body>0;
     });
     m.motions=moves;
-    if(trial.stage==='advance')return oldStill&&moved
-      ? 'advanced_selected_subject_preserving_previous_placement':'protected_advance_unconfirmed';
+    if(trial.stage==='advance'||repairing){
+      if(oldStill&&moved){
+        if(!repairing)return 'advanced_selected_subject_preserving_previous_placement';
+        if(trial.priorBox && tag(moved.box)===tag(trial.priorBox))return 'alternative_returned_to_previous_placement';
+        return 'alternative_moved_selected_subject_preserving_previous_placement';
+      }
+      if(oldStill && b.frame_hash===a.frame_hash && m.verified){
+        repairBlockedStep(m,trial,a,next,input);
+        if(m.pending)return 'protected_advance_blocked_try_another_motor';
+      }
+      return 'protected_advance_unconfirmed';
+    }
     if(oldStill&&moved){
       m.verified={shape:trial.shape,...(trial.feedback?{mark:trial.ink}:{}),refs:[...trial.evidence,a.observation_ref]};
       const established=m.established??=[],binding=trial.binding??hypothesis(trial);
@@ -351,7 +390,7 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
         const now=rotated?.box??shift(target.box),destination=shift(now);
         if(disjoint(destination,trial.source.box)&&destination[0]>=0&&destination[1]>=0&&
           destination[2]<next[0]!.length&&destination[3]<next.length){
-          m.pending={...trial,stage:'advance',target:{...target,box:now},evidence:[...trial.evidence,a.observation_ref]};
+          m.pending={...trial,stage:'advance',priorBox:target.box,target:{...target,box:now},evidence:[...trial.evidence,a.observation_ref]};
         }
       }
       return 'new_cursor_moved_while_previous_cursor_stayed';

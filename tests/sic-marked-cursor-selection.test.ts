@@ -112,6 +112,36 @@ test('distinguishes a transported turn from turning in place during a control ex
   }
 });
 
+test('repairs a blocked protected step and checks both subjects again',async()=>{
+  const initial=board(),a=board(0,13,3,false,5),b=board(1,13,3,false,5),c=board(1,15,3,false,5);
+  // An unfamiliar entry surface calls for the declarative information preference.
+  for(const frame of [initial,a,b])frame[7]![19]=4;
+  const [oa,ob,oc,od]=await Promise.all([initial,a,b,c].map((v,i)=>observation(v,i)));
+  for(const parked of [true,false]){
+    const f=createPreparedEffects({mode:'active',strategy:'motion_contrast',minimumOutcomes:2});
+    await f.observePublicOutcome!(oa!,ob!,{action_ref:'ACTION4',data:{}},initial,a);
+    const choose=await f.proposeInGroup!(recurrentExperimentGroup,ob!,a,[],10,{});
+    await f.record!(ob!,oc!,choose.actions[0]!,a,b,choose);
+    const verify=await f.proposeInGroup!(evidencedPlanGroup,oc!,b,[],9,{});
+    await f.record!(oc!,od!,verify.actions[0]!,b,c,verify);
+    const advance=await f.proposeInGroup!(evidencedPlanGroup,od!,c,[],8,{});
+    const stuck=await f.record!(od!,od!,advance.actions[0]!,c,c,advance);
+    assert.equal(stuck.events[0].result,'protected_advance_blocked_try_another_motor');
+    const repair=await f.proposeInGroup!(evidencedPlanGroup,od!,c,[],7,{});
+    assert.equal(repair.cursorSelectionForecast.stage,'reroute');
+    assert.equal(repair.sicSituationCard.mode,'exploration');
+    assert.equal(repair.actions[0].action_ref,'ACTION1');
+    assert.deepEqual(repair.cursorSelectionForecast.triedMotors,['ACTION4']);
+    assert.ok(repair.cursorSelectionForecast.repairOptions.length);
+    const rows=c.map(r=>r.slice());
+    for(let y=4;y<=10;y++)for(let x=15;x<=19;x++)rows[y]![x]=y<=8?c[y+2]![x]!:0;
+    if(!parked)rows[6]![5]=0;
+    const receipt=await f.record!(od!,await observation(rows,4),repair.actions[0]!,c,rows,repair);
+    assert.equal(receipt.events[0].result,parked?'alternative_moved_selected_subject_preserving_previous_placement':'protected_advance_unconfirmed');
+    assert.equal(f.state!().cursorSelection.pending,undefined);
+  }
+});
+
 test('the exploration family proposes a matching piece, records the transferred mark and verifies the actual new mover',async()=>{
   const family=createPreparedEffects(),a=board(),b=board(1),c=board(1,15);
   const oa=await observation(a,0),ob=await observation(b,1),oc=await observation(c,2);

@@ -67,13 +67,33 @@ for(const file of files)for(const line of (await readFile(file,'utf8')).trim().s
       const directObservation=await observe(direct),preparedObservation=await observe(prepared),endObservation=await observe(next);
       const redirectedAcrossPoses=oldStayed&&engaged&&alive(rep,direct)&&alive(rep,next)&&leavesFootprint(o,directObservation,offer.source.box)
         && !leavesFootprint(o,directObservation,offer.target.box)&&leavesFootprint(preparedObservation,endObservation,offer.target.box);
+      let blockedAdvance;
+      if(process.env.SIC_STUDY_BLOCKED_ADVANCE==='1' && (redirected||redirectedAcrossPoses) && alive(rep,next) && i+4<=run.cap){
+        const nextSubjects=fromTarget.map(m=>m.to.bbox);
+        const preparedAgain=()=>{
+          rep.restore(i);rep.act(offer.command);const repeated=rep.act(motor);
+          assert.equal(hash(repeated),hash(next));return repeated;
+        };
+        const attempt=rep.act(motor);
+        if(alive(rep,attempt) && hash(attempt)===hash(next)){
+          const alternatives=[];
+          for(const action of next.availableActionIds.filter(a=>a>=1&&a<=4 && 'ACTION'+a!==motor)){
+            preparedAgain();const n=rep.act('ACTION'+action);
+            const parked=n.frame.slice(t,bottom+1).every((row,j)=>row.slice(l,r+1).every((value,k)=>value===next.frame[t+j][l+k]));
+            const travelled=alive(rep,n)&&nextSubjects.some(box=>moves(next,n).some(v=>contains(box,v.from.bbox)));
+            alternatives.push({motor:'ACTION'+action,parked,travelled,won:rep.win(n)});
+          }
+          blockedAdvance={alternatives};
+        }
+        preparedAgain();
+      }
       let end=next;
       for(const s of run.steps.slice(i+2)){
         if(!alive(rep,end)||!end.availableActionIds.includes(s.a))break;
         end=rep.act(op(s));
       }
       trials.push({at:i+1,click:offer.command,motor,basis:offer.basis??'mark',oriented:memory.oriented?.some(m=>contains(offer.source.box,m.box))??false,
-        projected:!!predicted,matched,redirected,redirectedAcrossPoses,won:rep.win(end)});
+        projected:!!predicted,matched,redirected,redirectedAcrossPoses,...(blockedAdvance?{blockedAdvance}:{}),won:rep.win(end)});
       rep.restore(i);
     }
     const n=rep.act(op(step));assert.equal(hash(n).slice(0,16),step.to);
