@@ -6645,5 +6645,3210 @@
         }
       }
     }
+  },
+  "sourceHistoryAndContact": {
+    "fuitReachedPoses": [
+      {
+        "code": "FUIT",
+        "level": 1,
+        "prefix": 20,
+        "ref": 17,
+        "word": [
+          "ACTION4",
+          "ACTION2",
+          "ACTION3",
+          "ACTION2"
+        ],
+        "input": "ACTION2",
+        "image": "bd14f5e584cd352ba0937dc2ac9b458bd0dd0c155a15eaacf048642e24706262",
+        "unchanged": true,
+        "roles": [
+          {
+            "role": "A",
+            "box": [
+              23,
+              22,
+              25,
+              24
+            ],
+            "delta": [
+              0,
+              5
+            ],
+            "sameAsWitness": false,
+            "previouslyTraversedSurface": false,
+            "actual": [
+              0,
+              0
+            ]
+          },
+          {
+            "role": "B",
+            "box": [
+              18,
+              17,
+              20,
+              19
+            ],
+            "delta": [
+              -5,
+              0
+            ],
+            "sameAsWitness": false,
+            "previouslyTraversedSurface": false,
+            "actual": [
+              0,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "code": "FUIT",
+        "level": 1,
+        "prefix": 20,
+        "ref": 17,
+        "word": [
+          "ACTION4",
+          "ACTION2",
+          "ACTION3",
+          "ACTION2",
+          "ACTION2"
+        ],
+        "input": "ACTION2",
+        "image": "bd14f5e584cd352ba0937dc2ac9b458bd0dd0c155a15eaacf048642e24706262",
+        "unchanged": true,
+        "roles": [
+          {
+            "role": "A",
+            "box": [
+              23,
+              22,
+              25,
+              24
+            ],
+            "delta": [
+              0,
+              5
+            ],
+            "sameAsWitness": false,
+            "previouslyTraversedSurface": false,
+            "actual": [
+              0,
+              0
+            ]
+          },
+          {
+            "role": "B",
+            "box": [
+              18,
+              17,
+              20,
+              19
+            ],
+            "delta": [
+              -5,
+              0
+            ],
+            "sameAsWitness": false,
+            "previouslyTraversedSurface": false,
+            "actual": [
+              0,
+              0
+            ]
+          }
+        ]
+      }
+    ],
+    "fullImageL1": {
+      "episodes": 100,
+      "episodesWithPairs": 24,
+      "pairs": 50,
+      "inputs": 234,
+      "different": 26,
+      "differentByCode": {
+        "CD82": 10,
+        "M0R0": 5,
+        "KATA": 6,
+        "SK48": 5
+      }
+    },
+    "fullImageUpper": {
+      "episodes": 27,
+      "episodesWithPairs": 24,
+      "pairs": 88,
+      "inputs": 519,
+      "different": 0,
+      "differentByCode": {}
+    },
+    "continuationsTested": 52,
+    "scoreDifferences": [
+      {
+        "code": "SK48",
+        "level": 1,
+        "image": "c40f87083cbf5fe8",
+        "entry": [
+          "ACTION1",
+          "ACTION3"
+        ],
+        "prefix": [
+          1,
+          3
+        ],
+        "trial": {
+          "at": 1,
+          "kind": "replaced_first",
+          "firstInput": "ACTION7",
+          "length": 18,
+          "first": {
+            "used": 18,
+            "won": false,
+            "state": "NOT_FINISHED",
+            "end": "2322926f58a2ccf0"
+          },
+          "second": {
+            "used": 18,
+            "won": true,
+            "state": "NOT_FINISHED",
+            "end": "907dc8d281fc2680"
+          },
+          "selectsWin": true
+        }
+      },
+      {
+        "code": "SK48",
+        "level": 1,
+        "image": "c40f87083cbf5fe8",
+        "entry": [
+          "ACTION1",
+          "ACTION3"
+        ],
+        "prefix": [
+          1,
+          3
+        ],
+        "trial": {
+          "at": 3,
+          "kind": "replaced_first",
+          "firstInput": "ACTION7",
+          "length": 16,
+          "first": {
+            "used": 16,
+            "won": true,
+            "state": "NOT_FINISHED",
+            "end": "907dc8d281fc2680"
+          },
+          "second": {
+            "used": 16,
+            "won": false,
+            "state": "NOT_FINISHED",
+            "end": "62bf6aaea87af29d"
+          },
+          "selectsWin": true
+        }
+      }
+    ],
+    "terminalContactContrasts": {
+      "episodes": 100,
+      "directionalFinalsTested": 38,
+      "measuredCommands": {
+        "hitWon": 8,
+        "hitLost": 4,
+        "missWon": 6,
+        "missLost": 39
+      },
+      "winningContacts": [
+        {
+          "code": "FUIT",
+          "level": 1,
+          "prefix": 47,
+          "prepare": "ACTION1",
+          "use": "ACTION1",
+          "controls": [
+            null,
+            "ACTION2",
+            "ACTION3",
+            "ACTION4",
+            "ACTION5",
+            "ACTION7"
+          ]
+        },
+        {
+          "code": "KEYD",
+          "level": 1,
+          "prefix": 33,
+          "prepare": "ACTION4",
+          "use": "ACTION4",
+          "controls": [
+            null,
+            "ACTION1",
+            "ACTION2",
+            "ACTION3",
+            "ACTION5",
+            "ACTION7"
+          ]
+        },
+        {
+          "code": "LS20",
+          "level": 1,
+          "prefix": 16,
+          "prepare": "ACTION3",
+          "use": "ACTION1",
+          "controls": [
+            "ACTION2"
+          ]
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "prefix": 20,
+          "prepare": "ACTION4",
+          "use": "ACTION4",
+          "controls": [
+            "ACTION2",
+            "ACTION7"
+          ]
+        },
+        {
+          "code": "G50T",
+          "level": 1,
+          "prefix": 25,
+          "prepare": "ACTION4",
+          "use": "ACTION4",
+          "controls": [
+            null,
+            "ACTION1",
+            "ACTION2",
+            "ACTION3",
+            "ACTION5"
+          ]
+        },
+        {
+          "code": "KLOT",
+          "level": 1,
+          "prefix": 28,
+          "prepare": "ACTION3",
+          "use": "ACTION2",
+          "controls": [
+            "ACTION1",
+            "ACTION5",
+            "ACTION7"
+          ]
+        },
+        {
+          "code": "DC22",
+          "level": 1,
+          "prefix": 22,
+          "prepare": "ACTION4",
+          "use": "ACTION4",
+          "controls": [
+            null,
+            "ACTION1",
+            "ACTION2",
+            "ACTION3"
+          ]
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "prefix": 15,
+          "prepare": "ACTION4",
+          "use": "ACTION4",
+          "controls": [
+            null,
+            "ACTION1",
+            "ACTION2",
+            "ACTION3",
+            "ACTION5",
+            "ACTION7"
+          ]
+        }
+      ]
+    },
+    "upperTerminalContactContrasts": {
+      "episodes": 27,
+      "directionalFinalsTested": 8,
+      "measuredCommands": {
+        "hitWon": 2,
+        "hitLost": 0,
+        "missWon": 0,
+        "missLost": 10
+      },
+      "winningContacts": [
+        {
+          "code": "SKBN",
+          "level": 2,
+          "prefix": 45,
+          "prepare": "ACTION4",
+          "use": "ACTION1",
+          "controls": [
+            null,
+            "ACTION2",
+            "ACTION3"
+          ]
+        },
+        {
+          "code": "SKBN",
+          "level": 3,
+          "prefix": 20,
+          "prepare": "ACTION3",
+          "use": "ACTION1",
+          "controls": [
+            null,
+            "ACTION1",
+            "ACTION2",
+            "ACTION4",
+            "ACTION7"
+          ]
+        }
+      ]
+    },
+    "earlySourceOpportunities": {
+      "episodes": 100,
+      "triggered": 22,
+      "trials": 105,
+      "matchedFirst": 86,
+      "scores": [
+        {
+          "code": "FUIT",
+          "level": 1,
+          "prefix": 47,
+          "word": [
+            "ACTION1",
+            "ACTION1"
+          ],
+          "controls": [
+            {
+              "first": null,
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION2",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION3",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION4",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION5",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION7",
+              "early": false,
+              "won": false
+            }
+          ],
+          "originalActions": 49
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "prefix": 48,
+          "word": [
+            "ACTION1"
+          ],
+          "controls": [],
+          "originalActions": 49
+        },
+        {
+          "code": "KEYD",
+          "level": 1,
+          "prefix": 34,
+          "word": [
+            "ACTION4"
+          ],
+          "controls": [],
+          "originalActions": 35
+        },
+        {
+          "code": "LS20",
+          "level": 1,
+          "prefix": 14,
+          "word": [
+            "ACTION1"
+          ],
+          "controls": [],
+          "originalActions": 18
+        },
+        {
+          "code": "PORT",
+          "level": 1,
+          "prefix": 16,
+          "word": [
+            "ACTION3"
+          ],
+          "controls": [],
+          "originalActions": 17
+        },
+        {
+          "code": "TU93",
+          "level": 1,
+          "prefix": 29,
+          "word": [
+            "ACTION2"
+          ],
+          "controls": [],
+          "originalActions": 30
+        },
+        {
+          "code": "G50T",
+          "level": 1,
+          "prefix": 25,
+          "word": [
+            "ACTION4",
+            "ACTION4"
+          ],
+          "controls": [
+            {
+              "first": null,
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION1",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION2",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION3",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION5",
+              "early": false,
+              "won": false
+            }
+          ],
+          "originalActions": 27
+        },
+        {
+          "code": "G50T",
+          "level": 1,
+          "prefix": 26,
+          "word": [
+            "ACTION4"
+          ],
+          "controls": [],
+          "originalActions": 27
+        },
+        {
+          "code": "KLOT",
+          "level": 1,
+          "prefix": 29,
+          "word": [
+            "ACTION2"
+          ],
+          "controls": [],
+          "originalActions": 30
+        },
+        {
+          "code": "DC22",
+          "level": 1,
+          "prefix": 23,
+          "word": [
+            "ACTION4"
+          ],
+          "controls": [],
+          "originalActions": 24
+        },
+        {
+          "code": "ESCT",
+          "level": 1,
+          "prefix": 15,
+          "word": [
+            "ACTION3"
+          ],
+          "controls": [],
+          "originalActions": 16
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "prefix": 14,
+          "word": [
+            "ACTION4",
+            "ACTION4"
+          ],
+          "controls": [
+            {
+              "first": null,
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION1",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION2",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION3",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION5",
+              "early": false,
+              "won": false
+            },
+            {
+              "first": "ACTION7",
+              "early": false,
+              "won": false
+            }
+          ],
+          "originalActions": 17
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "prefix": 16,
+          "word": [
+            "ACTION4"
+          ],
+          "controls": [],
+          "originalActions": 17
+        },
+        {
+          "code": "ETAG",
+          "level": 1,
+          "prefix": 6,
+          "word": [
+            "ACTION2"
+          ],
+          "controls": [],
+          "originalActions": 7
+        }
+      ]
+    },
+    "earlyUpperOpportunities": {
+      "episodes": 27,
+      "triggered": 11,
+      "trials": 99,
+      "matchedFirst": 70,
+      "scores": []
+    }
+  },
+  "sourceReactiveComposition": {
+    "freeze": {
+      "sha": "b2d6ede7c03c45e98c34df836af967d6a88b9025",
+      "files": 2556,
+      "manifestHash": "367868fd19d97baae519c25bde163948d3e90891a865d7f749cec0068783b87d"
+    },
+    "causalNative": [
+      {
+        "code": "FUIT",
+        "level": 2,
+        "initial": "55393c557a65840c7f81b45ff24231453dc8e9fd05e468f5bb45f3c371796db3",
+        "cap": 100,
+        "baselineWon": false,
+        "baselineActions": 100,
+        "baselineTape": "a6487a72ea85856d00cd2921ed6ff71a6ee7044d02441fca2111ef056a7a2bec",
+        "won": true,
+        "actions": 80,
+        "tape": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8",
+        "withdrawal": "sic_verify_coupled_route",
+        "finalFamily": "sic_verify_reactive_motion",
+        "blocks": [
+          {
+            "start": 35,
+            "end": 58,
+            "actorMatches": 24,
+            "peerMatches": 24,
+            "steps": 24,
+            "contacts": [
+              {
+                "step": 58,
+                "before": 2,
+                "after": 1,
+                "won": false
+              }
+            ],
+            "horizons": [
+              24,
+              23,
+              22,
+              21,
+              20,
+              19,
+              18,
+              17,
+              16,
+              15,
+              14,
+              13,
+              12,
+              11,
+              10,
+              9,
+              8,
+              7,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1
+            ],
+            "basis": [
+              "all_measured_escape_directions"
+            ],
+            "omitted": {
+              "won": false,
+              "used": 56,
+              "end": "051183a539ca29b6"
+            },
+            "replacedByBaseline": {
+              "won": false,
+              "used": 80,
+              "end": "051183a539ca29b6"
+            },
+            "constantControls": [
+              {
+                "input": "ACTION1",
+                "won": false,
+                "used": 80,
+                "end": "051183a539ca29b6"
+              },
+              {
+                "input": "ACTION2",
+                "won": false,
+                "used": 80,
+                "end": "3fbf7bf6e4143eb2"
+              },
+              {
+                "input": "ACTION3",
+                "won": false,
+                "used": 80,
+                "end": "051183a539ca29b6"
+              },
+              {
+                "input": "ACTION4",
+                "won": false,
+                "used": 80,
+                "end": "1fff0d07f973a08e"
+              },
+              {
+                "input": "ACTION5",
+                "won": false,
+                "used": 80,
+                "end": "051183a539ca29b6"
+              },
+              {
+                "input": "ACTION7",
+                "won": false,
+                "used": 80,
+                "end": "190082b3d8c47014"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "sourceBench": [
+      {
+        "code": "CWSE",
+        "level": 1,
+        "won": true,
+        "baseline": true,
+        "actions": 6,
+        "firstDifferent": null,
+        "useCount": 0
+      },
+      {
+        "code": "FUIT",
+        "level": 1,
+        "won": true,
+        "baseline": true,
+        "actions": 46,
+        "firstDifferent": 13,
+        "useCount": 23
+      },
+      {
+        "code": "FUIT",
+        "level": 2,
+        "won": true,
+        "baseline": false,
+        "actions": 82,
+        "firstDifferent": 35,
+        "useCount": 48
+      },
+      {
+        "code": "FUIT",
+        "level": 3,
+        "won": false,
+        "baseline": false,
+        "actions": 100,
+        "firstDifferent": null,
+        "useCount": 0
+      },
+      {
+        "code": "CWSE",
+        "level": 4,
+        "won": false,
+        "baseline": false,
+        "actions": 120,
+        "firstDifferent": null,
+        "useCount": 0
+      },
+      {
+        "code": "CWSE",
+        "level": 2,
+        "won": false,
+        "baseline": false,
+        "actions": 120,
+        "firstDifferent": null,
+        "useCount": 0
+      },
+      {
+        "code": "ESCT",
+        "level": 5,
+        "won": false,
+        "baseline": false,
+        "actions": 90,
+        "firstDifferent": null,
+        "useCount": 0
+      },
+      {
+        "code": "CWSE",
+        "level": 3,
+        "won": false,
+        "baseline": false,
+        "actions": 120,
+        "firstDifferent": 54,
+        "useCount": 67
+      }
+    ]
+  },
+  "frozenReactiveComparisons": {
+    "response50": {
+      "freeze": {
+        "sha": "b2d6ede7c03c45e98c34df836af967d6a88b9025",
+        "files": 2556,
+        "manifestHash": "367868fd19d97baae519c25bde163948d3e90891a865d7f749cec0068783b87d"
+      },
+      "control": "sic-source100-role-composition-v48",
+      "sources": {
+        "levels": 100,
+        "wins": 99,
+        "changedTapes": [
+          "GIGO"
+        ],
+        "guards": {
+          "KEYD": 35,
+          "SKBN": 22,
+          "GABA": 49,
+          "SWCH": 25
+        },
+        "lost": [
+          "GIGO"
+        ]
+      },
+      "cold": [
+        {
+          "code": "SS01",
+          "won": true,
+          "actions": 44,
+          "reason": "target_levels_completed",
+          "commonPrefixV48": 44,
+          "totalComparable": 44,
+          "comparedV48Actions": 44,
+          "tape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+          "eligibility": {
+            "code": "SS01",
+            "level": 2,
+            "actions": 44,
+            "pairs": 24,
+            "retreating": 4,
+            "multipleAt": 34,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS02",
+          "won": false,
+          "actions": 265,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 265,
+          "totalComparable": 265,
+          "comparedV48Actions": 305,
+          "tape": "efcaefe2fbc1bf37cfd8756ecd6eb272a9aea1ffc332ee19ff5ff591d7178a32",
+          "eligibility": {
+            "code": "SS02",
+            "level": 2,
+            "actions": 265,
+            "pairs": 3,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS03",
+          "won": false,
+          "actions": 244,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 244,
+          "totalComparable": 244,
+          "comparedV48Actions": 278,
+          "tape": "edd020fb22efc6cdc40a19744e0a26add3b6cbc9b30abccc93b3138b9e4b7bc4",
+          "eligibility": {
+            "code": "SS03",
+            "level": 2,
+            "actions": 244,
+            "pairs": 3,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS04",
+          "won": true,
+          "actions": 60,
+          "reason": "target_levels_completed",
+          "commonPrefixV48": 60,
+          "totalComparable": 60,
+          "comparedV48Actions": 60,
+          "tape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+          "eligibility": {
+            "code": "SS04",
+            "level": 2,
+            "actions": 60,
+            "pairs": 1,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS05",
+          "won": false,
+          "actions": 235,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 235,
+          "totalComparable": 235,
+          "comparedV48Actions": 260,
+          "tape": "85b78ca1216d3b7511fef0095f3d7e4fc2b929968a6e389f05ebf13d2643d089",
+          "eligibility": {
+            "code": "SS05",
+            "level": 2,
+            "actions": 235,
+            "pairs": 13,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS06",
+          "won": false,
+          "actions": 214,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 214,
+          "totalComparable": 214,
+          "comparedV48Actions": 243,
+          "tape": "0ff2a5ee04fa1f9196ca496e153f032831f239c92d47bbebca6618b8e275f2c8",
+          "eligibility": {
+            "code": "SS06",
+            "level": 2,
+            "actions": 214,
+            "pairs": 1,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS07",
+          "won": false,
+          "actions": 5,
+          "reason": "native_game_over",
+          "commonPrefixV48": 5,
+          "totalComparable": 5,
+          "comparedV48Actions": 5,
+          "tape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+          "eligibility": {
+            "code": "SS07",
+            "level": 2,
+            "actions": 5,
+            "pairs": 2,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS08",
+          "won": false,
+          "actions": 261,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 261,
+          "totalComparable": 261,
+          "comparedV48Actions": 303,
+          "tape": "b59ebecdb91a782dc5baced15dbbfdf66c65bca8a9fbb039e652f92ada6bc996",
+          "eligibility": {
+            "code": "SS08",
+            "level": 2,
+            "actions": 261,
+            "pairs": 2,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS10",
+          "won": false,
+          "actions": 252,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 252,
+          "totalComparable": 252,
+          "comparedV48Actions": 279,
+          "tape": "b021548a9b111abe8d9b8b5855f04a8277b3cb870fbff974b9e16424766833c7",
+          "eligibility": {
+            "code": "SS10",
+            "level": 2,
+            "actions": 252,
+            "pairs": 4,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        }
+      ],
+      "coldWins": 2,
+      "newColdGames": [],
+      "warmSS01": {
+        "l1Actions": 19,
+        "l2Actions": 32,
+        "won": true,
+        "sameActionsAsV48": true,
+        "tape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+      },
+      "sourceFUIT2": {
+        "cold": true,
+        "actions": 80,
+        "tape": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8",
+        "withdrawal": "sic_verify_coupled_route",
+        "between": [
+          35,
+          58
+        ],
+        "actorMatches": 24,
+        "peerMatches": 24,
+        "basis": [
+          "all_measured_escape_directions"
+        ],
+        "contacts": [
+          {
+            "step": 58,
+            "before": 2,
+            "after": 1,
+            "won": false
+          }
+        ],
+        "unchangedSuffixWinningControls": 0,
+        "testedControls": 8
+      },
+      "reserved": "SS09 L2",
+      "sicTests": {
+        "passed": 420,
+        "failed": 0
+      }
+    },
+    "response51": {
+      "freeze": {
+        "sha": "2f455d299c4a137eb916bfb0a74c9c6f6e0ab644",
+        "files": 2556,
+        "manifestHash": "f122321e2b1f15bb66967937d207f6b3c08a0b44e286507a39592517f76f0235"
+      },
+      "control": "sic-source100-role-composition-v48",
+      "sources": {
+        "levels": 100,
+        "wins": 100,
+        "changedTapes": [],
+        "guards": {
+          "KEYD": 35,
+          "SKBN": 22,
+          "GABA": 49,
+          "SWCH": 25
+        },
+        "lost": []
+      },
+      "cold": [
+        {
+          "code": "SS01",
+          "won": true,
+          "actions": 44,
+          "reason": "target_levels_completed",
+          "commonPrefixV48": 44,
+          "totalComparable": 44,
+          "comparedV48Actions": 44,
+          "tape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+          "eligibility": {
+            "code": "SS01",
+            "level": 2,
+            "actions": 44,
+            "pairs": 24,
+            "retreating": 4,
+            "multipleAt": 34,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS02",
+          "won": false,
+          "actions": 221,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 221,
+          "totalComparable": 221,
+          "comparedV48Actions": 305,
+          "tape": "a83772d36b2bee7cbb96410da6550b5920c3b50818c3b4b7cc5c7bc862d370db",
+          "eligibility": {
+            "code": "SS02",
+            "level": 2,
+            "actions": 221,
+            "pairs": 3,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS03",
+          "won": false,
+          "actions": 209,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 209,
+          "totalComparable": 209,
+          "comparedV48Actions": 278,
+          "tape": "c3665f0016806b16617f93d0a117c670ba7a64fb079f2112ded1d1ea5fb17247",
+          "eligibility": {
+            "code": "SS03",
+            "level": 2,
+            "actions": 209,
+            "pairs": 3,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS04",
+          "won": true,
+          "actions": 60,
+          "reason": "target_levels_completed",
+          "commonPrefixV48": 60,
+          "totalComparable": 60,
+          "comparedV48Actions": 60,
+          "tape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+          "eligibility": {
+            "code": "SS04",
+            "level": 2,
+            "actions": 60,
+            "pairs": 1,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS05",
+          "won": false,
+          "actions": 200,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 200,
+          "totalComparable": 200,
+          "comparedV48Actions": 260,
+          "tape": "43c496f2f907feeb569ae3036ae6c2122b2ef5d25d5a446293c3841934c259b0",
+          "eligibility": {
+            "code": "SS05",
+            "level": 2,
+            "actions": 200,
+            "pairs": 13,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS06",
+          "won": false,
+          "actions": 175,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 175,
+          "totalComparable": 175,
+          "comparedV48Actions": 243,
+          "tape": "f01f0d8140d36b1f27fc8962ebfc4289b309abcea804d8646c6993bffb5fc2ef",
+          "eligibility": {
+            "code": "SS06",
+            "level": 2,
+            "actions": 175,
+            "pairs": 1,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS07",
+          "won": false,
+          "actions": 5,
+          "reason": "native_game_over",
+          "commonPrefixV48": 5,
+          "totalComparable": 5,
+          "comparedV48Actions": 5,
+          "tape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+          "eligibility": {
+            "code": "SS07",
+            "level": 2,
+            "actions": 5,
+            "pairs": 2,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS08",
+          "won": false,
+          "actions": 217,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 217,
+          "totalComparable": 217,
+          "comparedV48Actions": 303,
+          "tape": "19cf4188f09f5ea8f5aacce654fd236c7d8756b4ec07e4176d8f1608999bd5f4",
+          "eligibility": {
+            "code": "SS08",
+            "level": 2,
+            "actions": 217,
+            "pairs": 2,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        },
+        {
+          "code": "SS10",
+          "won": false,
+          "actions": 218,
+          "reason": "level_active_time_budget",
+          "commonPrefixV48": 218,
+          "totalComparable": 218,
+          "comparedV48Actions": 279,
+          "tape": "c40d31c92ff6ad2c66776da0dd11f0d5b1256daf325569e72b5f433acada23f5",
+          "eligibility": {
+            "code": "SS10",
+            "level": 2,
+            "actions": 218,
+            "pairs": 4,
+            "retreating": 0,
+            "multipleAt": null,
+            "firstOffer": null,
+            "played": 0
+          }
+        }
+      ],
+      "coldWins": 2,
+      "newColdGames": [],
+      "warmSS01": {
+        "l1Actions": 19,
+        "l2Actions": 32,
+        "won": true,
+        "sameActionsAsV48": true,
+        "tape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+      },
+      "sourceFUIT2": {
+        "cold": true,
+        "actions": 80,
+        "tape": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8",
+        "withdrawal": "sic_verify_coupled_route",
+        "between": [
+          35,
+          58
+        ],
+        "actorMatches": 24,
+        "peerMatches": 24,
+        "basis": [
+          "all_measured_escape_directions"
+        ],
+        "contacts": [
+          {
+            "step": 58,
+            "before": 2,
+            "after": 1,
+            "won": false
+          }
+        ],
+        "unchangedSuffixWinningControls": 0,
+        "testedControls": 8
+      },
+      "reserved": "SS09 L2",
+      "sicTests": {
+        "passed": 420,
+        "failed": 0
+      },
+      "eligibilityOnFullReferenceTapes": [
+        {
+          "code": "SS02",
+          "level": 2,
+          "actions": 305,
+          "pairs": 3,
+          "retreating": 0,
+          "multipleAt": null,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS03",
+          "level": 2,
+          "actions": 278,
+          "pairs": 3,
+          "retreating": 0,
+          "multipleAt": null,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS05",
+          "level": 2,
+          "actions": 260,
+          "pairs": 14,
+          "retreating": 0,
+          "multipleAt": 237,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS06",
+          "level": 2,
+          "actions": 243,
+          "pairs": 1,
+          "retreating": 0,
+          "multipleAt": null,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS07",
+          "level": 2,
+          "actions": 5,
+          "pairs": 2,
+          "retreating": 0,
+          "multipleAt": null,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS01",
+          "level": 2,
+          "actions": 44,
+          "pairs": 24,
+          "retreating": 4,
+          "multipleAt": 34,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS04",
+          "level": 2,
+          "actions": 60,
+          "pairs": 1,
+          "retreating": 0,
+          "multipleAt": null,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS08",
+          "level": 2,
+          "actions": 303,
+          "pairs": 2,
+          "retreating": 0,
+          "multipleAt": null,
+          "firstOffer": null,
+          "played": 0
+        },
+        {
+          "code": "SS10",
+          "level": 2,
+          "actions": 279,
+          "pairs": 4,
+          "retreating": 0,
+          "multipleAt": null,
+          "firstOffer": null,
+          "played": 0
+        }
+      ]
+    }
+  },
+  "sourceObjectiveComposition": {
+    "kind": "source_lab_after_v51_freeze",
+    "sourceL1": {
+      "episodes": 100,
+      "earlyContacts": 49,
+      "persistentAfterLeaving": 13,
+      "proposals": 11,
+      "predictedReductions": 5,
+      "immediateOfficialWins": 2,
+      "recordedSuffixWins": 7,
+      "matchedWithoutFirst": [
+        {
+          "code": "VOIS",
+          "level": 1,
+          "prefix": 20,
+          "firstContact": 14,
+          "departure": 15,
+          "firstSite": [
+            31,
+            23
+          ],
+          "nextSite": [
+            27,
+            23
+          ],
+          "predicted": "ACTION4",
+          "observed": {
+            "input": "ACTION4",
+            "reduced": false,
+            "wonImmediately": true,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 9
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 9
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 9
+            }
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 1,
+          "prefix": 8,
+          "firstContact": 6,
+          "departure": 8,
+          "firstSite": [
+            32,
+            20
+          ],
+          "nextSite": [
+            26,
+            26
+          ],
+          "predicted": "ACTION1",
+          "observed": {
+            "input": "ACTION1",
+            "reduced": true,
+            "wonImmediately": false,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION3",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            }
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 1,
+          "prefix": 9,
+          "firstContact": 6,
+          "departure": 8,
+          "firstSite": [
+            32,
+            20
+          ],
+          "nextSite": [
+            32,
+            26
+          ],
+          "predicted": "ACTION1",
+          "observed": {
+            "input": "ACTION1",
+            "reduced": true,
+            "wonImmediately": false,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION3",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            }
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 1,
+          "prefix": 12,
+          "firstContact": 6,
+          "departure": 8,
+          "firstSite": [
+            32,
+            20
+          ],
+          "nextSite": [
+            26,
+            32
+          ],
+          "predicted": "ACTION1",
+          "observed": {
+            "input": "ACTION1",
+            "reduced": true,
+            "wonImmediately": false,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION3",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            }
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 1,
+          "prefix": 13,
+          "firstContact": 6,
+          "departure": 8,
+          "firstSite": [
+            32,
+            20
+          ],
+          "nextSite": [
+            32,
+            32
+          ],
+          "predicted": "ACTION1",
+          "observed": {
+            "input": "ACTION1",
+            "reduced": true,
+            "wonImmediately": false,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION3",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 19
+            }
+          ]
+        }
+      ]
+    },
+    "selectedL2L3": {
+      "episodes": 8,
+      "earlyContacts": 14,
+      "persistentAfterLeaving": 8,
+      "proposals": 19,
+      "predictedReductions": 7,
+      "immediateOfficialWins": 0,
+      "recordedSuffixWins": 3,
+      "matchedWithoutFirst": [
+        {
+          "code": "WEAV",
+          "level": 2,
+          "prefix": 40,
+          "firstContact": 35,
+          "departure": 40,
+          "firstSite": [
+            32,
+            20
+          ],
+          "nextSite": [
+            26,
+            26
+          ],
+          "predicted": "ACTION1",
+          "observed": {
+            "input": "ACTION1",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION3",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 15
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 15
+            }
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 2,
+          "prefix": 40,
+          "firstContact": 35,
+          "departure": 40,
+          "firstSite": [
+            32,
+            20
+          ],
+          "nextSite": [
+            20,
+            32
+          ],
+          "predicted": "ACTION3",
+          "observed": {
+            "input": "ACTION3",
+            "reduced": true,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION3",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 15
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 15
+            }
+          ]
+        },
+        {
+          "code": "WEAV",
+          "level": 2,
+          "prefix": 43,
+          "firstContact": 35,
+          "departure": 40,
+          "firstSite": [
+            32,
+            20
+          ],
+          "nextSite": [
+            26,
+            32
+          ],
+          "predicted": "ACTION1",
+          "observed": {
+            "input": "ACTION1",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION3",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 15
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 15
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 17,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            35,
+            27
+          ],
+          "predicted": "ACTION3",
+          "observed": {
+            "input": "ACTION3",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 9
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 9
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 24,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            27,
+            19
+          ],
+          "predicted": "ACTION4",
+          "observed": {
+            "input": "ACTION4",
+            "reduced": true,
+            "wonImmediately": false,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 27
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 25,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            27,
+            23
+          ],
+          "predicted": "ACTION2",
+          "observed": {
+            "input": "ACTION2",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 27
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 25,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            31,
+            19
+          ],
+          "predicted": "ACTION4",
+          "observed": {
+            "input": "ACTION4",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": true
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 27
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 26,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            31,
+            23
+          ],
+          "predicted": "ACTION2",
+          "observed": {
+            "input": "ACTION2",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 27
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 26,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            27,
+            19
+          ],
+          "predicted": "ACTION3",
+          "observed": {
+            "input": "ACTION3",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 27
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 26,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            35,
+            19
+          ],
+          "predicted": "ACTION4",
+          "observed": {
+            "input": "ACTION4",
+            "reduced": false,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 27
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": false,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            }
+          ]
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 28,
+          "firstContact": 15,
+          "departure": 16,
+          "firstSite": [
+            35,
+            23
+          ],
+          "nextSite": [
+            27,
+            27
+          ],
+          "predicted": "ACTION4",
+          "observed": {
+            "input": "ACTION4",
+            "reduced": true,
+            "wonImmediately": false,
+            "suffixWon": false
+          },
+          "preservedFirstComparisons": [
+            {
+              "replace": "ACTION1",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            },
+            {
+              "replace": "ACTION2",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 27
+            },
+            {
+              "replace": "ACTION4",
+              "reduced": true,
+              "wonImmediately": false,
+              "suffixWon": false,
+              "changedOutsideFirst": 18
+            }
+          ]
+        }
+      ]
+    },
+    "otherUpper": {
+      "episodes": 15,
+      "earlyContacts": 24,
+      "persistentAfterLeaving": 0,
+      "proposals": 0,
+      "predictedReductions": 0,
+      "immediateOfficialWins": 0,
+      "recordedSuffixWins": 0,
+      "matchedWithoutFirst": []
+    },
+    "eligibleFUIT3": {
+      "comparison": "2 separate inferred terrain components",
+      "initialAreas": [
+        27,
+        30
+      ],
+      "hypotheticalJoins": 5,
+      "objectAtJoins": 1,
+      "sourceTraces": [
+        {
+          "code": "FUIT",
+          "level": 3,
+          "prefix": 47,
+          "expanded": 48,
+          "nearest": 1,
+          "expected": [
+            "ACTION4",
+            "ACTION4",
+            "ACTION4"
+          ],
+          "actual": null,
+          "attempts": []
+        }
+      ]
+    },
+    "fixedScore": {
+      "proposals": 13,
+      "modelWins": [
+        {
+          "code": "VOIS",
+          "level": 1,
+          "prefix": 20,
+          "actionsBeforeScore": 1,
+          "planned": 3,
+          "alreadyWon": true
+        }
+      ],
+      "hypotheticalRoutes": 6,
+      "testedUnknownSteps": 0,
+      "firstBreaks": {
+        "actor_diverged": 10,
+        "score": 1,
+        "sibling_effect_missing": 2
+      }
+    },
+    "compound": {
+      "origins": 9,
+      "pairs": 813,
+      "realizedExpectedDisplacements": 0,
+      "scores": [
+        {
+          "code": "VOIS",
+          "level": 2,
+          "prefix": 28,
+          "stage": 2,
+          "result": {
+            "a": "ACTION1",
+            "b": "ACTION1",
+            "matched": false,
+            "scored": true,
+            "suffixWon": true,
+            "carried": 0,
+            "bothRequired": true,
+            "orderRequired": false,
+            "scoreControls": {
+              "chosen": {
+                "word": [
+                  "ACTION4",
+                  "ACTION1",
+                  "ACTION1"
+                ],
+                "won": true,
+                "used": 3
+              },
+              "recorded": {
+                "word": [
+                  "ACTION1",
+                  "ACTION1",
+                  "ACTION4"
+                ],
+                "won": true,
+                "used": 3
+              },
+              "omitted": [
+                {
+                  "word": [
+                    "ACTION1",
+                    "ACTION1"
+                  ],
+                  "won": false,
+                  "used": 2
+                },
+                {
+                  "word": [
+                    "ACTION4",
+                    "ACTION1"
+                  ],
+                  "won": false,
+                  "used": 2
+                },
+                {
+                  "word": [
+                    "ACTION4",
+                    "ACTION1"
+                  ],
+                  "won": false,
+                  "used": 2
+                }
+              ],
+              "permutations": [
+                {
+                  "word": [
+                    "ACTION1",
+                    "ACTION1",
+                    "ACTION4"
+                  ],
+                  "won": true,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION1",
+                    "ACTION4",
+                    "ACTION1"
+                  ],
+                  "won": true,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION4",
+                    "ACTION1",
+                    "ACTION1"
+                  ],
+                  "won": true,
+                  "used": 3
+                }
+              ],
+              "repeated": [
+                {
+                  "word": [
+                    "ACTION1",
+                    "ACTION1",
+                    "ACTION1"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION2",
+                    "ACTION2",
+                    "ACTION2"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION3",
+                    "ACTION3",
+                    "ACTION3"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION4",
+                    "ACTION4",
+                    "ACTION4"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION5",
+                    "ACTION5",
+                    "ACTION5"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION6:27,27",
+                    "ACTION6:27,27",
+                    "ACTION6:27,27"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION6:31,27",
+                    "ACTION6:31,27",
+                    "ACTION6:31,27"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION6:35,23",
+                    "ACTION6:35,23",
+                    "ACTION6:35,23"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION6:23,31",
+                    "ACTION6:23,31",
+                    "ACTION6:23,31"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION6:23,7",
+                    "ACTION6:23,7",
+                    "ACTION6:23,7"
+                  ],
+                  "won": false,
+                  "used": 3
+                },
+                {
+                  "word": [
+                    "ACTION7",
+                    "ACTION7",
+                    "ACTION7"
+                  ],
+                  "won": false,
+                  "used": 3
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "byLevel": [
+        {
+          "code": "SKBN",
+          "level": 1,
+          "origins": 2,
+          "pairs": 50,
+          "matched": 0,
+          "scored": 0
+        },
+        {
+          "code": "WEAV",
+          "level": 2,
+          "origins": 3,
+          "pairs": 300,
+          "matched": 0,
+          "scored": 0
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "origins": 3,
+          "pairs": 363,
+          "matched": 0,
+          "scored": 1
+        },
+        {
+          "code": "WEAV",
+          "level": 3,
+          "origins": 1,
+          "pairs": 100,
+          "matched": 0,
+          "scored": 0
+        }
+      ]
+    },
+    "orders": {
+      "lower100": {
+        "episodes": 100,
+        "terminalTriples": 83,
+        "orderResults": {
+          "order_matters": 57,
+          "all_orders": 26
+        },
+        "allOrdersAndExactCounts": [
+          {
+            "code": "DNOI",
+            "level": 1,
+            "prefix": 0,
+            "word": [
+              "ACTION6:25,5",
+              "ACTION6:49,11",
+              "ACTION6:31,35"
+            ],
+            "ordersTested": 6,
+            "shorter": 12,
+            "differentCounts": 21
+          },
+          {
+            "code": "PORT",
+            "level": 1,
+            "prefix": 14,
+            "word": [
+              "ACTION2",
+              "ACTION3",
+              "ACTION3"
+            ],
+            "ordersTested": 3,
+            "shorter": 6,
+            "differentCounts": 5
+          },
+          {
+            "code": "SYME",
+            "level": 1,
+            "prefix": 6,
+            "word": [
+              "ACTION6:43,41",
+              "ACTION6:49,29",
+              "ACTION6:55,29"
+            ],
+            "ordersTested": 6,
+            "shorter": 12,
+            "differentCounts": 21
+          },
+          {
+            "code": "CLRS",
+            "level": 1,
+            "prefix": 14,
+            "word": [
+              "ACTION3",
+              "ACTION3",
+              "ACTION5"
+            ],
+            "ordersTested": 3,
+            "shorter": 6,
+            "differentCounts": 5
+          },
+          {
+            "code": "DC22",
+            "level": 1,
+            "prefix": 21,
+            "word": [
+              "ACTION1",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "ordersTested": 3,
+            "shorter": 6,
+            "differentCounts": 5
+          },
+          {
+            "code": "PIPE",
+            "level": 1,
+            "prefix": 1,
+            "word": [
+              "ACTION6:48,28",
+              "ACTION6:16,44",
+              "ACTION6:48,44"
+            ],
+            "ordersTested": 6,
+            "shorter": 12,
+            "differentCounts": 21
+          },
+          {
+            "code": "TRCP",
+            "level": 1,
+            "prefix": 21,
+            "word": [
+              "ACTION6:19,16",
+              "ACTION6:27,16",
+              "ACTION6:31,20"
+            ],
+            "ordersTested": 6,
+            "shorter": 12,
+            "differentCounts": 21
+          },
+          {
+            "code": "FT09",
+            "level": 1,
+            "prefix": 22,
+            "word": [
+              "ACTION6:39,47",
+              "ACTION6:39,55",
+              "ACTION6:55,47"
+            ],
+            "ordersTested": 6,
+            "shorter": 12,
+            "differentCounts": 21
+          },
+          {
+            "code": "RE86",
+            "level": 1,
+            "prefix": 23,
+            "word": [
+              "ACTION1",
+              "ACTION1",
+              "ACTION3"
+            ],
+            "ordersTested": 3,
+            "shorter": 6,
+            "differentCounts": 5
+          },
+          {
+            "code": "TICT",
+            "level": 1,
+            "prefix": 2,
+            "word": [
+              "ACTION6:15,12",
+              "ACTION6:47,12",
+              "ACTION6:31,12"
+            ],
+            "ordersTested": 6,
+            "shorter": 12,
+            "differentCounts": 21
+          },
+          {
+            "code": "TRIA",
+            "level": 1,
+            "prefix": 23,
+            "word": [
+              "ACTION4",
+              "ACTION4",
+              "ACTION1"
+            ],
+            "ordersTested": 3,
+            "shorter": 6,
+            "differentCounts": 5
+          }
+        ],
+        "earlyPredictions": {
+          "unresolved/order_matters": 44,
+          "order_matters/order_matters": 7,
+          "unresolved/all_orders": 21,
+          "all_orders/order_matters": 6,
+          "order_matters/all_orders": 3,
+          "all_orders/all_orders": 2
+        },
+        "resolved": [
+          {
+            "code": "CD82",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION2",
+                "b": "ACTION4",
+                "same": 0,
+                "different": 1
+              },
+              {
+                "a": "ACTION2",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 0
+              },
+              {
+                "a": "ACTION4",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 1
+              }
+            ]
+          },
+          {
+            "code": "COLM",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION2",
+                "b": "ACTION3",
+                "same": 0,
+                "different": 1
+              }
+            ]
+          },
+          {
+            "code": "HPDL",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION3",
+                "b": "ACTION6:41,27",
+                "same": 0,
+                "different": 0
+              },
+              {
+                "a": "ACTION3",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 1
+              },
+              {
+                "a": "ACTION5",
+                "b": "ACTION6:41,27",
+                "same": 0,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "KEYD",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION4",
+                "same": 3,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "LKEY",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION2",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 1
+              },
+              {
+                "a": "ACTION2",
+                "b": "ACTION4",
+                "same": 0,
+                "different": 0
+              },
+              {
+                "a": "ACTION4",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "PORT",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "all_orders",
+            "earlier": [
+              {
+                "a": "ACTION2",
+                "b": "ACTION3",
+                "same": 0,
+                "different": 2
+              }
+            ]
+          },
+          {
+            "code": "M0R0",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION4",
+                "same": 2,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "TEQU",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION2",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 1
+              }
+            ]
+          },
+          {
+            "code": "TR87",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION2",
+                "b": "ACTION3",
+                "same": 0,
+                "different": 3
+              }
+            ]
+          },
+          {
+            "code": "WA30",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION4",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 1
+              }
+            ]
+          },
+          {
+            "code": "AS66",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "all_orders",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION3",
+                "same": 0,
+                "different": 2
+              },
+              {
+                "a": "ACTION1",
+                "b": "ACTION2",
+                "same": 0,
+                "different": 2
+              },
+              {
+                "a": "ACTION2",
+                "b": "ACTION3",
+                "same": 0,
+                "different": 1
+              }
+            ]
+          },
+          {
+            "code": "DC22",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "all_orders",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION4",
+                "same": 2,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "ESCT",
+            "level": 1,
+            "prediction": "order_matters",
+            "actual": "all_orders",
+            "earlier": [
+              {
+                "a": "ACTION4",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 3
+              }
+            ]
+          },
+          {
+            "code": "ETAG",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION2",
+                "b": "ACTION4",
+                "same": 1,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "RE86",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "all_orders",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION3",
+                "same": 3,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "SK48",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION3",
+                "b": "ACTION4",
+                "same": 3,
+                "different": 0
+              },
+              {
+                "a": "ACTION1",
+                "b": "ACTION3",
+                "same": 3,
+                "different": 0
+              },
+              {
+                "a": "ACTION1",
+                "b": "ACTION4",
+                "same": 3,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "SP80",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION4",
+                "b": "ACTION5",
+                "same": 1,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "SWCH",
+            "level": 1,
+            "prediction": "all_orders",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION4",
+                "same": 3,
+                "different": 0
+              }
+            ]
+          }
+        ]
+      },
+      "upper": {
+        "episodes": 25,
+        "terminalTriples": 11,
+        "orderResults": {
+          "order_matters": 9,
+          "all_orders": 2
+        },
+        "allOrdersAndExactCounts": [
+          {
+            "code": "VOIS",
+            "level": 2,
+            "prefix": 28,
+            "word": [
+              "ACTION1",
+              "ACTION1",
+              "ACTION4"
+            ],
+            "ordersTested": 3,
+            "shorter": 6,
+            "differentCounts": 5
+          },
+          {
+            "code": "VOIS",
+            "level": 3,
+            "prefix": 47,
+            "word": [
+              "ACTION1",
+              "ACTION3",
+              "ACTION3"
+            ],
+            "ordersTested": 3,
+            "shorter": 6,
+            "differentCounts": 5
+          }
+        ],
+        "earlyPredictions": {
+          "unresolved/order_matters": 6,
+          "order_matters/order_matters": 3,
+          "all_orders/all_orders": 2
+        },
+        "resolved": [
+          {
+            "code": "POLA",
+            "level": 2,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION3",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 1
+              }
+            ]
+          },
+          {
+            "code": "POLA",
+            "level": 3,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION3",
+                "b": "ACTION5",
+                "same": 0,
+                "different": 2
+              }
+            ]
+          },
+          {
+            "code": "WA30",
+            "level": 2,
+            "prediction": "order_matters",
+            "actual": "order_matters",
+            "earlier": [
+              {
+                "a": "ACTION4",
+                "b": "ACTION5",
+                "same": 3,
+                "different": 0
+              },
+              {
+                "a": "ACTION1",
+                "b": "ACTION4",
+                "same": 0,
+                "different": 3
+              },
+              {
+                "a": "ACTION1",
+                "b": "ACTION5",
+                "same": 3,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "VOIS",
+            "level": 2,
+            "prediction": "all_orders",
+            "actual": "all_orders",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION4",
+                "same": 1,
+                "different": 0
+              }
+            ]
+          },
+          {
+            "code": "VOIS",
+            "level": 3,
+            "prediction": "all_orders",
+            "actual": "all_orders",
+            "earlier": [
+              {
+                "a": "ACTION1",
+                "b": "ACTION3",
+                "same": 1,
+                "different": 0
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "additionalNativeSources": {
+      "control": [
+        {
+          "code": "G50T",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "15fb665da5304a0683cdfe235244a288d65413058403abdcd560b334528e6584",
+          "tape": "3867ff89f1240ca253acf00949abfa656f4a9c7e5265bcb26c6a7aebe6eca23a",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "ESCT",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "6b208a454f8ea965993a1309bccdca266b1bbc11e7dc97b32b10a17562a209cc",
+          "tape": "3f7786dceb0ad6f2ad149d3c91d329e0b90e871439acbd82f5a2cc9d68678f32",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "SNAR",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "5b2d01291adce99ab83697add33084f895132db7edfae61d501b860bbca2c1f6",
+          "tape": "35908a0566bbb3ad2ae745278e3e4624adb375f218d6b60b3143a0752b24fd1b",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "G50T",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "a911486f024e38ca4c33f3fb449eb6298142c0496613e7b233da7129039bbca0",
+          "tape": "54ac6c432dd24c0c04dd8ab698a312345394709125e2aa9ee623c574d22f66f3",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "ESCT",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "5dc2ed6823138ff0fcf4b27412fe00b21bcdf4639e066f957c313d5674a0cc8e",
+          "tape": "44fa1650a6bf60e1479c231fa61647b0d86c7665370d7075b5201e9afdd21924",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "SNAR",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "360b8475323dceaa53be66c30859d2f176f9edd5925516b1c522a551bf9e0c8c",
+          "tape": "e3981c9e3608ac7206c6df010445e8c51c52dd2959d1ff45a440f3c6be94bfa2",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "G50T",
+          "level": 4,
+          "actions": 100,
+          "won": false,
+          "end": "a5a1801db0faed0832ddea9d1526905b178c3e8a51d79ad9463fa1a31e86223c",
+          "tape": "2bfa8291f45a6e98adb18fa41dd38db3c547cf39369ef66b70377d225fc93776",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "ESCT",
+          "level": 4,
+          "actions": 100,
+          "won": false,
+          "end": "2dc07d40d47180b298c4af0fe40dfe2ad62133df0ee5f2f6a6a9a0a6109f62ca",
+          "tape": "3045304799f4e797aeb27e49f9beac14b5803e53f8f36f397e71f39cde93ddac",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "SNAR",
+          "level": 4,
+          "actions": 100,
+          "won": false,
+          "end": "6df03872aac216f6a76f701a207e5a539a9e56c72de0ba925623d64cf401151a",
+          "tape": "5738bd73156310baffbeb7d741a4ebe159a0348d60aeb82f55834d5537ed4e19",
+          "reason": "session_action_budget"
+        }
+      ],
+      "candidate": [
+        {
+          "code": "G50T",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "15fb665da5304a0683cdfe235244a288d65413058403abdcd560b334528e6584",
+          "tape": "3867ff89f1240ca253acf00949abfa656f4a9c7e5265bcb26c6a7aebe6eca23a",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": true
+        },
+        {
+          "code": "ESCT",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "6b208a454f8ea965993a1309bccdca266b1bbc11e7dc97b32b10a17562a209cc",
+          "tape": "3f7786dceb0ad6f2ad149d3c91d329e0b90e871439acbd82f5a2cc9d68678f32",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": true
+        },
+        {
+          "code": "SNAR",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "fe6a2837f8dd6e15b55d3614b0bcbf21d917b6b93d62aeb9a9cb351f15f21f65",
+          "tape": "390db0eefeb40f65c496a27840e666a8ef29976dda161176060f010b81cf1098",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": false
+        },
+        {
+          "code": "G50T",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "a911486f024e38ca4c33f3fb449eb6298142c0496613e7b233da7129039bbca0",
+          "tape": "54ac6c432dd24c0c04dd8ab698a312345394709125e2aa9ee623c574d22f66f3",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": true
+        },
+        {
+          "code": "ESCT",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "5dc2ed6823138ff0fcf4b27412fe00b21bcdf4639e066f957c313d5674a0cc8e",
+          "tape": "44fa1650a6bf60e1479c231fa61647b0d86c7665370d7075b5201e9afdd21924",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": true
+        },
+        {
+          "code": "SNAR",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "c2fdac7fa101b9f7cc53583cad05240624ccddf7a71ccb6c428c5d011faf6abe",
+          "tape": "108b9d3300799dc53f238fab772aec14e57c240ec6406ca2854cf322ffc8f284",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": false
+        },
+        {
+          "code": "G50T",
+          "level": 4,
+          "actions": 100,
+          "won": false,
+          "end": "a5a1801db0faed0832ddea9d1526905b178c3e8a51d79ad9463fa1a31e86223c",
+          "tape": "2bfa8291f45a6e98adb18fa41dd38db3c547cf39369ef66b70377d225fc93776",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": true
+        },
+        {
+          "code": "ESCT",
+          "level": 4,
+          "actions": 100,
+          "won": false,
+          "end": "2dc07d40d47180b298c4af0fe40dfe2ad62133df0ee5f2f6a6a9a0a6109f62ca",
+          "tape": "3045304799f4e797aeb27e49f9beac14b5803e53f8f36f397e71f39cde93ddac",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": true
+        },
+        {
+          "code": "SNAR",
+          "level": 4,
+          "actions": 100,
+          "won": false,
+          "end": "5191bb343cffabfa4e3feec887ed4048cd111181bf70e511cf30649033b79b3c",
+          "tape": "c7934e7f8ddb6995305c8b4f47cf97ea07ef9d1f31243638114c3465791d299f",
+          "reason": "session_action_budget",
+          "sameTapeAsControl": false
+        }
+      ],
+      "objectives": [
+        {
+          "code": "WEAV",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "03f9719f08a8757214ff98665fde44cc211f20a60bbc69f149819fb227683d30",
+          "tape": "41cb747be79881239a6fd7b43037415a8de35c600d7f1fcff2664458672c4af2",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "LS19",
+          "level": 2,
+          "actions": 100,
+          "won": false,
+          "end": "5d8e136298b9e926fbf6d6cf3f62b16e5288fa785df842ed8d8699fae2df27a9",
+          "tape": "c35e1921ec333235026e258ac15b4fc2508cda26c6310dde8593a19835160790",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "WEAV",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "302792489640c374367998c04a5db4602c1d76f03dbc56650627d44234106f6e",
+          "tape": "a49082d4789cc5959fe5373f54b9e2c6fee2080968f9cc171d8c81f3688f96d0",
+          "reason": "session_action_budget"
+        },
+        {
+          "code": "LS19",
+          "level": 3,
+          "actions": 69,
+          "won": false,
+          "end": "f0f6e16a3dd77126b0845b547754383c6bcbd85b801257ecc705d3fa599a4482",
+          "tape": "c24c2d2dd32a46273dc771cf058707a30fbd0ec9a51fa4583fbb6e781643491d",
+          "reason": "native_game_over"
+        },
+        {
+          "code": "WA30",
+          "level": 2,
+          "actions": 55,
+          "won": true,
+          "end": "23d1ea951799c615b54b875f112823529ca2041cc04495d3cb624cca08f3c3b4",
+          "tape": "01292713c7317db5f5b7ff4b045635e3833168c707b62dbcd6ee95736280d81f",
+          "reason": "target_levels_completed"
+        },
+        {
+          "code": "VOIS",
+          "level": 2,
+          "actions": 31,
+          "won": true,
+          "end": "b2a003412a98e0de36870c4b6bbb779e46ca8fc499015397d8cdd7cd15933623",
+          "tape": "26cb19603aaddcc00debbce65fe5dfc7b39a1aae81373d61bdffac5da5d11aa4",
+          "reason": "target_levels_completed"
+        },
+        {
+          "code": "WA30",
+          "level": 3,
+          "actions": 100,
+          "won": false,
+          "end": "71d7f902301caa313b46f40eb208d1aee18a65045aeb4e52824639c9d0089ef6",
+          "tape": "be226869b92d9c01f900f5c28ab9d9f2da0862082fc2765422106869d5e94197",
+          "reason": "native_game_over"
+        },
+        {
+          "code": "VOIS",
+          "level": 3,
+          "actions": 50,
+          "won": true,
+          "end": "f2d24e488d9132c3f2758284ea41575a0da85a5e026238f9229da63169d2e3f0",
+          "tape": "8852fdd8d729f24940d428d1e2da11a1fb9de1858db279c01c96195184f1452e",
+          "reason": "target_levels_completed"
+        }
+      ]
+    }
   }
 }
