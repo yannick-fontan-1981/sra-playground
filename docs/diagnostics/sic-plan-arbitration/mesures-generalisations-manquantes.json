@@ -5621,5 +5621,172 @@
         "observation": "9:frame:b548b4df9acc065a"
       }
     }
-  }
+  },
+  "sourceV48": {
+    "verified": 100,
+    "wins": 100,
+    "comparedTo": "v47",
+    "identicalTrajectories": 100,
+    "changedTrajectories": [],
+    "guards": {
+      "KEYD": 35,
+      "SKBN": 22,
+      "GABA": 49,
+      "SWCH": 25
+    },
+    "canonicalExport": {
+      "sha": "0c457b7d6e9707d2295a9e0a8a1df73518794898",
+      "files": 2555,
+      "manifestHash": "2f1bc78507371673ef564be666a4b10d050a0b635157b44c8cf2f83dab50eae8"
+    }
+  },
+  "warmV48": {
+    "code": "SS01",
+    "lesson": 19,
+    "levels": [
+      {
+        "level": 2,
+        "actions": 32,
+        "won": true
+      }
+    ],
+    "tapeDigest": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+  },
+  "coldV48": [
+    {
+      "code": "SS01",
+      "won": true,
+      "actions": 44,
+      "reason": "target_levels_completed",
+      "v47Actions": 44,
+      "commonPrefix": 44,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": null,
+      "withdrawalRevision": null,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS02",
+      "won": false,
+      "actions": 305,
+      "reason": "level_active_time_budget",
+      "v47Actions": 266,
+      "commonPrefix": 266,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": "sic_recheck_directional_controls",
+      "withdrawalRevision": 114,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "5796d8cc3e1626676e80cc64a65bea73396124df542aa67d0032393565cf4ba5"
+    },
+    {
+      "code": "SS03",
+      "won": false,
+      "actions": 278,
+      "reason": "level_active_time_budget",
+      "v47Actions": 248,
+      "commonPrefix": 248,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": "sic_recheck_directional_controls",
+      "withdrawalRevision": 123,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "3d3d1da308fbb49c5b1cf04ffbc3c5bcf04ab63075e5556168b3cfee0821307a"
+    },
+    {
+      "code": "SS04",
+      "won": true,
+      "actions": 60,
+      "reason": "target_levels_completed",
+      "v47Actions": 60,
+      "commonPrefix": 60,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": null,
+      "withdrawalRevision": null,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    },
+    {
+      "code": "SS05",
+      "won": false,
+      "actions": 260,
+      "reason": "level_active_time_budget",
+      "v47Actions": 234,
+      "commonPrefix": 234,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": null,
+      "withdrawalRevision": null,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "20047afb99bd4a102d6a56827f728fd91e2ca826e610359544d1d2748f59673e"
+    },
+    {
+      "code": "SS06",
+      "won": false,
+      "actions": 243,
+      "reason": "level_active_time_budget",
+      "v47Actions": 210,
+      "commonPrefix": 210,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": "sic_recheck_directional_controls",
+      "withdrawalRevision": 47,
+      "compositionPrograms": 2,
+      "fullyPredictedPrograms": 2,
+      "tapeDigest": "772af668f0ff535a3bf258dc9169df3c7b869c805f92630c50696d26dc45340b"
+    },
+    {
+      "code": "SS07",
+      "won": false,
+      "actions": 5,
+      "reason": "native_game_over",
+      "v47Actions": 5,
+      "commonPrefix": 5,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": "sic_cavity_access",
+      "withdrawalRevision": 1,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+    },
+    {
+      "code": "SS08",
+      "won": false,
+      "actions": 303,
+      "reason": "level_active_time_budget",
+      "v47Actions": 265,
+      "commonPrefix": 265,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": "sic_verify_marker_placement",
+      "withdrawalRevision": 1,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "c144c0cb76ba644fe01d8079cbcf502bc1e601a7b23a766dce18fe6055a1bbe8"
+    },
+    {
+      "code": "SS10",
+      "won": false,
+      "actions": 279,
+      "reason": "level_active_time_budget",
+      "v47Actions": 253,
+      "commonPrefix": 253,
+      "roleArrangementCommands": 0,
+      "referencePlacementCommands": 0,
+      "initialWithdrawal": "sic_verify_marker_placement",
+      "withdrawalRevision": 1,
+      "compositionPrograms": 0,
+      "fullyPredictedPrograms": 0,
+      "tapeDigest": "2c0d973635a7f09d05cd27af9cc443fdeb56725e4dac14d58db69f37db2ea0ee"
+    }
+  ]
 }

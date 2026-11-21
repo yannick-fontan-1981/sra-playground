@@ -2,7 +2,7 @@
 
 Le critère principal est le premier L2 gagné en partie autonome sur **un jeu supplémentaire**. Les neuf L2 ouverts donnent deux victoires à froid à v31 et à v34, SS01 et SS04. SS03 a déjà été gagné après le L1. Un premier succès à froid sur SS03 constitue donc un gain d’autonomie distinct. Les six occasions de gagner le L2 d’un autre jeu déjà ouvert sont SS02, SS05, SS06, SS07, SS08 et SS10. SS09 L2 reste la confirmation indépendante. [Bilan des parties complètes de v34](qualification-reprise-v34.md)
 
-**Dernier bilan vérifié.** V44, v46 et v47 gagnent **2 L2 sur 9 à froid sur Custom 4**. SS01 gagne en 44 coups à froid et en 32 après le L1. SS04 gagne en 60 à froid. Les neuf parties froides et le contrôle avec L1 de v47 ont été rejoués. [Scores, commandes et empreintes](mesures-generalisations-manquantes.json)
+**Dernier bilan vérifié.** Le candidat v48 gagne **2 L2 sur 9 à froid sur Custom 4**, comme v47. SS01 gagne en 44 coups à froid et en 32 après le L1. SS04 gagne en 60 à froid. Les neuf parties froides et le contrôle avec L1 ont été rejoués dans le moteur. Les 100 L1 sources restent gagnés avec les mêmes trajectoires que v47. [Scores, commandes et empreintes](mesures-generalisations-manquantes.json)
 
 **Ce que la composition a généralisé.** V46 a lancé 117 compositions sur six L2. Les 98 suites réalisées jusqu'au bout ont toutes rejoint une image déjà visitée. V47 choisit une composition pour l'action qu'elle ouvre ensuite. Sur les neuf L2, elle en lance une seule, sur SS06 au coup 200. Les quatre effets annoncés se réalisent et l'image finale est nouvelle. Enlever la dernière préparation ou lui substituer une autre commande de même durée fait disparaître l'effet de dix pixels attendu. **Aucun nouveau jeu gagné.** La liaison au but du niveau reste à démontrer. [Expériences et contrôles](#élaborer-une-composition-à-partir-des-effets-appris)
 
@@ -110,6 +110,19 @@ Les deux modes ont reçu les mêmes 14 épisodes, dont deux bandes différentes 
 Sur VOIS L4 à froid, le pilote gagne en 39 actions contre 107 pour v47. Des coups 12 à 15, SIC annonce une nouvelle disposition autour d’une pièce qui doit rester immobile. Au rejeu, elle garde sa position et passe de l’apparence 13 à 9. Le voisin se trouve du côté annoncé. Omettre ces quatre commandes fait perdre avec la même continuation. Chacune des quatre substitutions de même durée testées fait également perdre, y compris celle qui laisse l’image inchangée. Sur VOIS L5 et L6, le budget de 120 est atteint sans victoire. Sur L5, v47 et le pilote retirent tous deux la famille de placement dès qu’elle devient la première solution admissible. Le contrôle du retrait reste actif. [Rejeu avec omission et substitutions](../../../scripts/audit-source-role-arrangement.mjs)
 
 **Protocole de v48 fixé avant Custom 4.** Geler le candidat et son empreinte. Comparer v48 à v47 sur les 100 L1 au plafond de 60 actions, puis sur les neuf L2 ouverts de Custom 4 à froid au plafond de 1 200 et avec la même limite de temps actif. Rejouer le score et les commandes des quatre témoins historiques, de SS01 à froid et après sa leçon, et de SS04 à froid. Compter les expériences de disposition réellement engagées, la première divergence et les jeux gagnés en plus. SS09 L2 reste en réserve. Le gain de vitesse sur un niveau source déjà gagné et la prédiction d’un blocage ne remplissent pas le critère de victoire sur un autre jeu.
+
+**Transfert du candidat figé.** Le tag `sic-source100-role-composition-v48` désigne le commit `0c457b7d6`. La vérification des 100 L1 retrouve les 100 trajectoires de v47, dont SKBN en 22 coups, SWCH en 25, KEYD en 35 et GABA en 49. Les 416 tests SIC de l’export de qualification passent. [Relevé des vérifications](mesures-generalisations-manquantes.json)
+
+| L2 à froid | Issue v48 | Comparaison mécanique avec v47 |
+| --- | --- | --- |
+| SS01 et SS04 | Victoires en 44 et 60 coups | Trajectoires gagnantes identiques. SS01 gagne aussi en 32 après les 19 commandes publiques du L1. |
+| SS02, SS03, SS05 | Budget de temps actif atteint après 305, 278 et 260 coups | Même commande et même image à chaque pas sur les 266, 248 et 234 premiers coups comparables. |
+| SS06, SS08, SS10 | Budget de temps actif atteint après 243, 303 et 279 coups | Préfixes identiques sur 210, 265 et 253 coups. Sur SS06, les deux compositions déjà prises en charge par le système de prévision des effets atteignent leurs effets annoncés. |
+| SS07 | Fin de partie au cinquième coup | Les cinq commandes et leurs effets sont identiques. |
+
+La nouvelle expérience de disposition entre deux sujets a émis **zéro commande sur les neuf L2**. La stratégie qui la porte n’a pris la main sur aucun de ces niveaux. Dans v48, cette expérience se déclare dans une scène où SIC peut identifier une population de pièces et une disposition de référence, puis établir quel sujet répond. Le journal situe le blocage avant le premier plan de disposition. Il ne permet pas d’attribuer à chaque jeu une condition perceptive manquante précise. [Conditions de déclenchement](../../../src/sic/population-placement.ts) · [Comptes par jeu](mesures-generalisations-manquantes.json)
+
+### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |
 | --- | --- | --- | --- |
