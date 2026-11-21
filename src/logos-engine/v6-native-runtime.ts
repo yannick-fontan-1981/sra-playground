@@ -2795,7 +2795,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      ...(testCompositions ? [createCompositionTrials(), createPreparedEffects(recovery.informationPreference)] : []),
+      ...(testCompositions ? [createCompositionTrials(), createPreparedEffects(recovery.informationPreference,recovery)] : []),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),

@@ -4,6 +4,8 @@ import {newCursorMemory,recordCursorTrial,type CursorMemory,type CursorTrial} fr
 
 import { nextConfiguration, newConfigurationMemory, observeConfiguration, type ConfigurationMemory, type ConfigurationTrial } from './configuration-trials.ts';
 import {searchForMissingCue,type CueTest} from './seek-missing-preview.ts';
+import {equalPose,readGroup,type RelativeMemory} from './relative-motion-learning.ts';
+import type {RelativeTrial} from './relative-motion-plan.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
 import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
@@ -111,6 +113,7 @@ export type Experiment = {
     | 'testConfiguration'
     | 'localCapacity'
     | 'seekTerminalContact'
+    | 'useRelativePlacement'
     | 'seekMissingCue'
     | 'positionForOperation'
     | 'usePositionedOperation'
@@ -167,6 +170,7 @@ export type Experiment = {
   configurationTrial?: ConfigurationTrial;
   cursorTrial?: CursorTrial;
   cue?: CueTest;
+  relative?: RelativeTrial;
   delayed?: DelayedTrial;
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
@@ -223,6 +227,7 @@ export type Outcome = {
   territorial?:Record<string,unknown>;
   localRepeat?:ZoneRepeat;
   terminalContact?:Record<string,unknown>;
+  relativePlacement?:Record<string,unknown>;
   cueSearch?:Pick<CueTest,'binding'|'probe'|'target'|'routing'> & {visible:boolean};
   mobilityProbe?:Record<string,unknown>;
   mechanism?:Record<string,unknown>;
@@ -237,6 +242,7 @@ export type Outcome = {
 };
 export type Memory = {
   cursorSelection?: CursorMemory;
+  relativeMotion?: RelativeMemory;
   configurations?: ConfigurationMemory;
   configurationOpportunity?: boolean;
   localCapacity?: LocalMemory;
@@ -1077,6 +1083,12 @@ export function recordExperiment(
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
     return {...out,result,condition:detail};
+  }
+  if(x.relative && m.relativeMotion){
+    const plan=x.relative, actual=readGroup(m.relativeMotion.models[plan.model]!,visualLayout(a,next));
+    const won=a.levels_completed>b.levels_completed||a.state==='WIN';
+    const matched=!!actual && equalPose(actual,plan.next);
+    return {...out,result:won?'relative_placement_official':matched?'relative_placement_matched':'relative_placement_refuted',relativePlacement:{plan,actual:won?null:actual,matched,won}};
   }
   if(x.cue){
     const visible=!!visualLayout(a,next)[x.cue.indicator]?.length;

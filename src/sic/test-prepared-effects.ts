@@ -7,6 +7,8 @@ import {informationPriority, type InformationPreference} from './information-pre
 import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import {observeCueCondition} from './seek-missing-preview.ts';
+import {observeRelativeMotion} from './relative-motion-learning.ts';
+import {chooseRelativePlan} from './relative-motion-plan.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
   NativeFamily,
@@ -38,6 +40,7 @@ const labels: Record<Experiment['phase'], string> = {
   testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
+  useRelativePlacement:'Change the relative positions of jointly controlled pieces to open a route to a scoring contact',
   seekMissingCue:'Explore an untested movement to look for the mark that enabled a previous action',
   positionForOperation:'Reach the relative position where a previous operation changed a visible feature',
   usePositionedOperation:'Test the previous operation at the reached position and inspect the feature',
@@ -89,7 +92,7 @@ const labels: Record<Experiment['phase'], string> = {
 };
 import {completionContacts} from './terminal-contact.ts';
 import {exposedUnderParts} from './controlled-parts.ts';
-export function createPreparedEffects(informationPreference?:InformationPreference): NativeFamily<Offer> {
+export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
   let m = initialMemory(0);
@@ -117,7 +120,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(comparePreparations && /^ACTION[5-7]$/.test(key))
         retainSituatedOperations(learning,observedSituatedOperations(learning,b,a,before,after,key));
       observePreviewBindings(learning,b,a,before,after,key);
-      if(comparePreparations)observeCueCondition(learning,b,a,before,after,key);
+      if(comparePreparations){
+        observeCueCondition(learning,b,a,before,after,key);
+        if(limits && learning.terminal?.length)observeRelativeMotion(m.relativeMotion??={models:{}},learning.terminal,b,a,rows,before,after,key);
+      }
       exposedUnderParts(learning,b,a,rows,next,before,after);
     }
     if (!x && (b.level_epoch !== a.level_epoch || b.state !== a.state)) return null;
@@ -141,7 +147,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
       if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
-      if (!cursor && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      const relative=!cursor && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
+        ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits) : null;
+      if (!cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
@@ -158,7 +166,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
-      } : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
+      } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
       if(!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (!experiment || (!cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
@@ -175,6 +183,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ref,
         ...(cursor?.evidence??[]),
         ...(experiment.cue?.evidence??[]),
+        ...(relative?[relative.learned,relative.contrast,relative.contact]:[]),
         ...(experiment.configurationTrial?.evidence??[]),
         ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
         ...(experiment.localCapacity?.observedPrefix?Object.values(experiment.localCapacity.observedPrefix):[]),
@@ -203,6 +212,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(phase==='testScoringContact')question.satisfactionContract='check_the_predicted_approach_and_then_measure_official_progress_at_contact';
       if(phase==='positionForOperation'||phase==='usePositionedOperation')
         question.satisfactionContract='test_the_previous_level_operation_at_its_observed_relative_position';
+      if(relative){
+        question.subjects=[relative.actor,relative.partner,relative.op];
+        question.satisfactionContract='check_all_named_positions_then_replan_toward_the_scoring_contact';
+      }
       if(experiment.cue){
         question.subjects=[experiment.cue.actor,experiment.cue.indicator,experiment.cue.operation];
         question.satisfactionContract='inspect_whether_the_required_mark_appears_after_the_untested_movement';
@@ -261,6 +274,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast?{
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
+        ...(relative ? {relativePlacementForecast:relative} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
         ...(experiment.cue ? {cueSearchForecast:{...experiment.cue,decisionMode:'explore_competing_explanations',outcomes:['cue_becomes_visible','cue_remains_absent']}} : {}),
@@ -295,7 +309,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           strategy: phase,
           need: label,
           situation: label,
-          mode: cursor?.stage==='advance' ? 'solving' : 'exploration',
+          mode: cursor?.stage==='advance' || relative?.purpose==='reach_scoring_contact' ? 'solving' : 'exploration',
           evidence,
           agenda: [],
         },

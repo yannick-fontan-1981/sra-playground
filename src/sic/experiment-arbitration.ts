@@ -31,6 +31,7 @@ export function mayPursueWitnessedEffect(m: Memory): boolean {
 }
 
 export function witnessedObjective(x: Experiment): boolean {
+  if(x.relative)return true;
   if (x.cue) return x.cue.blocked.length>=2;
   if (x.localCapacity && x.localCapacity.stage!=='control')return true;
   if (x.terminalContact?.preparationKey) return !!x.terminalContact.blockedGoal;
