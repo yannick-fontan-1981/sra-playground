@@ -55,6 +55,7 @@ export function nativePlanReceipt(family: string, proposal: NativeProposal, obse
     ...(proposal.cursorSelectionForecast ? {cursorSelectionForecast:proposal.cursorSelectionForecast} : {}),
     ...(proposal.compositionForecast ? {compositionForecast:proposal.compositionForecast} : {}),
     ...(proposal.roleArrangementForecast ? {roleArrangementForecast:proposal.roleArrangementForecast} : {}),
+    ...(proposal.reactiveContactForecast ? {reactiveContactForecast:proposal.reactiveContactForecast} : {}),
     ...(proposal.mobilityForecast ? {mobilityForecast:proposal.mobilityForecast} : {}),
     ...(proposal.mechanismForecast ? {mechanismForecast:proposal.mechanismForecast} : {}),
     ...(proposal.indicatorProbeForecast ? {indicatorProbeForecast:proposal.indicatorProbeForecast} : {}),

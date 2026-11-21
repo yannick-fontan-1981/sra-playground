@@ -469,9 +469,6 @@ function selectEstablishedExperiment(
   const read=rows&&m.previewLearning&&!m.occupancy?.active?offerWitnessedPreview(m.previewLearning,o,visualLayout(o,rows),available):null;
   const priorRepeat=read?knownLocalRepeat(m,s,read.command):null;
   const stagnant=priorRepeat??(m.localProgress?.last?.returnScene===s?m.localProgress.last:null);
-  if(rows&&free&&m.recurrences>0&&!m.territory?.active&&!m.occupancy?.active&&!m.localProgress?.active){
-    const contact=offerTerminalContact(m,s,o,rows,available,true);if(contact)return contact;
-  }
   if(rows&&m.occupancy&&!m.occupancy.active&&!m.territory?.active){
     const goal=m.territory?.goal,actor=goal&&o.entities.find(e=>!e.identity_ambiguous&&e.signature===goal.actor);
     const frontier=actor&&goal?{role:poseRole(actor),homeSize:goal.homeSize,outsideSize:goal.outsideSize,contains:(at:[number,number])=>{

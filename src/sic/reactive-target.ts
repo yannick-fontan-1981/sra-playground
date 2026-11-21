@@ -1,4 +1,8 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
+import {newPreviewLearning,visualLayout} from './witnessed-preview-transfer.ts';
+import {rememberMotion} from './controlled-parts.ts';
+import {choosePursuit,observePursuit,type PursuitChoice,type PursuitMemory as ResponseMemory} from './pursuit-composition.ts';
+import type {NativeCommand,NativeObservation} from '../logos-engine/v6-native-types.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
@@ -33,9 +37,10 @@ type CrowdPlan = { local: PursuitMemory; current: PursuitState; move: PursuitMov
 type GripMemory = { epoch: number; terrain: GripTerrain; at?: GripState; heldInk?: number; refs: string[]; rejected: string[];
   plan: GripLeg[]; blocked: boolean };
 type GripPlan = { local: GripMemory; observed: GripState; legs: GripLeg[] };
-type Proposal = NativeProposal & ({ local: Memory; at: Pair; plan: Plan; needId: string; crowd?: never; grip?: never;
+type Proposal = NativeProposal & ({ local: Memory; at: Pair; plan: Plan; needId: string; crowd?: never; grip?: never; sampled?:never;
   walk?: { from: Pair; plan: Plan; predicted: PursuitState }[]; obstacle?: number }
-  | { crowd: CrowdPlan; needId: string; grip?: never } | { grip: GripPlan; needId: string; crowd?: never });
+  | { crowd: CrowdPlan; needId: string; grip?: never; sampled?:never } | { grip: GripPlan; needId: string; crowd?: never; sampled?:never }
+  | {sampled:PursuitChoice;needId:string;crowd?:never;grip?:never;walk?:never;obstacle?:never;local?:never;at?:never;plan?:never});
 const key = (p: NativePoint) => p.join(',');
 const same = (a: NativePoint, b: NativePoint) => a[0] === b[0] && a[1] === b[1];
 const point = ([x, y]: NativeBox): NativePoint => [x, y];
@@ -189,6 +194,23 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
   let memory: Memory | null = null;
   let calibration: Calibration | null = null, witness: PursuitWitness | null = null, pursuit: PursuitMemory | null = null;
   let grip: GripMemory | null = null;
+  const freshResponse=(epoch:number)=>({epoch,learn:newPreviewLearning(),response:{pairs:{}} as ResponseMemory,
+    attempts:{} as Record<string,number>,multiple:false});
+  let sampledResponse=freshResponse(-1);
+  const observeResponse=(b:NativeObservation,a:NativeObservation,cmd:NativeCommand,first:NativeRows,second:NativeRows)=>{
+    if(family!==learnReactiveMotionId||b.level_epoch!==a.level_epoch||b.levels_completed!==a.levels_completed||b.state!==a.state)return;
+    if(sampledResponse.epoch!==b.level_epoch)sampledResponse=freshResponse(b.level_epoch);
+    if(!/^ACTION[1-4]$/.test(cmd.action_ref))return;
+    const before=visualLayout(b,first),after=visualLayout(a,second);
+    observePursuit(sampledResponse.response,before,after,cmd.action_ref,a.observation_ref);
+    for(const [role,old] of Object.entries(before)){
+      const next=after[role];
+      if(old.length===1&&next?.length===1&&!same(old[0]!.at,next[0]!.at))
+        rememberMotion(sampledResponse.learn,role,old[0]!.at,next[0]!.at,cmd.action_ref,b,a);
+    }
+    if(!sampledResponse.multiple)sampledResponse.multiple=Object.values(sampledResponse.response.pairs)
+      .some(r=>r.away>=3&&r.responses.length>=2&&(after[r.peer]?.length??0)>1);
+  };
   let decide: NativeProgramHandle | undefined;
   return {
     id: family,
@@ -196,6 +218,35 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
     async proposeInGroup(group, observation, rows, available, remaining, execution) {
+      if(family===learnReactiveMotionId&&sampledResponse.epoch===observation.level_epoch&&sampledResponse.multiple&&remaining>0){
+        const trial=choosePursuit(sampledResponse.response,sampledResponse.learn,visualLayout(observation,rows),rows,
+          new Set(available.map(c=>c.action_ref)),sampledResponse.attempts);
+        if(trial){
+          const routeSupported=trial.basis!=='one_possible_response',mode=execution?.reasoningMode??'exploration';
+          const facts={routeSupported,eligibleProbe:!routeSupported,knownInteraction:false,mode};
+          const decision=await decide?.run({situation:facts},{signal:execution?.signal});
+          const strategy=routeSupported?'P07':'P05';
+          if(decision?.result===strategy){
+            const ref=observation.observation_ref,parent='G_official_completion',actions=[{action_ref:trial.input,data:{}}];
+            const evidence:[string,...string[]]=[ref,...trial.refs.filter(s=>s!==ref)];
+            const objective={kind:'compose_contact_with_a_reactive_population',scope:ref.split(':revision:',1)[0]!,
+              subjects:[trial.actor,trial.peer],parentObjective:parent,satisfactionContract:'verify_both_positions_then_measure_contact_or_official_progress'};
+            const need={...objective,id:sicNeedId(objective),status:'assigned',evidence},id=family+':'+need.id;
+            const situation='Choose an approach from the possible replies of the moving target';
+            return {status:'proposed',kind:family,sampled:trial,reactiveContactForecast:trial,needId:need.id,
+              binding:{observation_ref:ref,level_epoch:observation.level_epoch},actions,
+              steps:[{action:actions[0]!,expected_after:{actor:trial.to,peer_options:trial.peerOptions}}],
+              sicSrcDecision:{workflow:decision.receipt.workflow,hash:decision.receipt.src_hash,instructions:decision.receipt.instructions,
+                edited:'edited' in decision.receipt&&decision.receipt.edited===true,situation:facts},
+              sicSituationCard:{strategy,need:'Reach a target after its measured reaction',situation,evidence,agenda:[],mode,triggerCard:chooseLanding},
+              question:{reason:situation,hypothesis_refs:evidence},route_refs:evidence,
+              compositions:[{id,observed:false,open_question:situation,relations:['contributes_to:'+parent]}],
+              sicLocalDecision:{strategy,objective:{id,label:navigationPrimitives[strategy],parent},need},
+              bundle_template:{operation_key:'OP18',composition_ref:id,objective_ref:parent,purpose:situation,preconditions:{},preserve_refs:[],
+                evidence,actions,outcome_guard:{path:['value'],contains:id}}};
+          }
+        }
+      }
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, available, remaining, execution);
       if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed) return null;
       const proposal = await this.propose(observation, rows, available, remaining, execution);
@@ -397,6 +448,7 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       };
     },
     before(proposal, index, packet, observation) {
+      if(proposal.sampled)return {admitted:index===0&&proposal.binding?.observation_ref===observation.observation_ref,reason:'reactive_approach_bound'};
       if (proposal.grip && index > 0) {
         const { local, legs } = proposal.grip;
         const actual = readGripState(packet.frame_rows, local.terrain, grip?.heldInk ?? local.heldInk);
@@ -415,6 +467,15 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
     after(proposal, index, before, after, _first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
+      if(proposal.sampled){
+        const t=proposal.sampled,observed=visualLayout(after,second),old=visualLayout(before,_first);
+        const actor=observed[t.actor]?.some(p=>same(p.at,t.to))??false;
+        const captured=(observed[t.peer]?.length??0)<(old[t.peer]?.length??0)&&same(t.to,t.target);
+        const stationary=(old[t.peer]??[]).filter(p=>!same(p.at,t.target));
+        const peer=(observed[t.peer]??[]).some(p=>!stationary.some(q=>same(p.at,q.at))&&t.peerOptions.some(q=>same(p.at,q)));
+        return {matched:actor&&(captured||peer),seal_prefix:true,reason:captured?'reactive_contact_reduced_population':
+          actor&&peer?'actor_and_reactive_reply_observed':'reactive_reply_requires_replanning'};
+      }
       if (proposal.grip) {
         const { local, legs } = proposal.grip;
         const heldInk = index > 0 ? grip?.heldInk ?? local.heldInk : local.heldInk;
@@ -441,6 +502,11 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       return { matched, seal_prefix: true, reason: matched ? 'both_sprite_positions_confirmed' : 'sprite_response_diverged_replan' };
     },
     record(before, after, _action, first, second, proposal, index) {
+      observeResponse(before,after,_action,first,second);
+      if(proposal.sampled){
+        const t=proposal.sampled,k=[t.actor,t.peer,t.from,t.target,t.input].join('/');
+        sampledResponse.attempts[k]=(sampledResponse.attempts[k]??0)+1;return {events:[]};
+      }
       if (proposal.grip) {
         const { observed, legs } = proposal.grip, step = legs[index]!;
         const local = index > 0 && grip ? grip : proposal.grip.local;
@@ -495,13 +561,15 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
         edges: actual ? { ...local.edges, [k]: { ...actual, evidence: after.observation_ref } } : local.edges };
       return { events: [] };
     },
-    state: () => ({ memory, calibration, witness, pursuit, grip }),
+    observePublicOutcome:observeResponse,
+    state: () => ({ memory, calibration, witness, pursuit, grip,...(sampledResponse.epoch>=0?{sampledResponse}:{}) }),
     restore(value: NativeRecord) {
       memory = structuredClone(value.memory as Memory | null);
       calibration = structuredClone((value.calibration as Calibration | null | undefined) ?? null);
       witness = structuredClone((value.witness as PursuitWitness | null | undefined) ?? null);
       pursuit = structuredClone((value.pursuit as PursuitMemory | null | undefined) ?? null);
       grip = structuredClone((value.grip as GripMemory | null | undefined) ?? null);
+      sampledResponse=structuredClone(value.sampledResponse as typeof sampledResponse??freshResponse(-1));
     },
   };
 }
