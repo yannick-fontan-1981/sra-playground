@@ -11,6 +11,10 @@ const frozenDeliveryRoot = process.env.SIC_AUDIT_COLD_DELIVERY;
 const delivery = frozenDeliveryRoot
   ? await import(pathToFileURL(resolve(frozenDeliveryRoot, 'src/logos-engine/v6-oriented-coupling.ts')).href)
   : null;
+const receptionRoot = process.env.SIC_AUDIT_OBSERVED_RECEPTION;
+const reception = receptionRoot
+  ? await import(pathToFileURL(resolve(receptionRoot,'src/logos-engine/v6-exposed-reception-observation.ts')).href)
+  : null;
 const {createGameDispatcher}=await import(pathToFileURL(resolve(root,'src/runtime/native-game-dispatcher.ts')).href);
 const hash=f=>createHash('sha256').update(JSON.stringify(f)).digest('hex');
 const games=new Map(),unavailable=[];
@@ -37,6 +41,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   assert.equal(b.level,r.start);assert.equal(b.levelsCompleted,r.initialCompleted);assert.equal(hash(b.frame),r.initial);
   assert.equal(r.replayCommands.length,r.issued);assert.equal(r.sic,r.issued);
   const visits=new Map(),resets=[],tape=[];
+  const receptions = { decisions: 0, recognized: 0, recognizedWithClick: 0 };
   const entry = { decisions: 0, allowedCommands: 0, ordinaryGeometry: 0, inputsAndDirectionalGeometry: 0 };
   let previousDirectionalGeometry = false;
   if (delivery) assert.ok(!r.observedPriorLevelActions && r.start === r.finish, 'Cold single-level audit required');
@@ -50,6 +55,13 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
       previousDirectionalGeometry = false;
     }
     assert.equal(hash(b.frame).slice(0,16),c.from);
+    if (reception) {
+      receptions.decisions++;
+      if (reception.measureExposedReception(b.frame)) {
+        receptions.recognized++;
+        if (b.availableActionIds.includes(6)) receptions.recognizedWithClick++;
+      }
+    }
     if (delivery) {
       const allowed = [1, 2, 3, 4, 5].every(id => b.availableActionIds.includes(id)) && !b.availableActionIds.includes(6);
       const geometry = delivery.orientedCouplingInitial(b.frame);
@@ -75,6 +87,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   const result={code:r.code,start:r.start,finish:r.finish,lesson:r.observedPriorLevelActions??0,initial:r.initial,
     cap:r.cap,levels,resets,tapeDigest:hash(tape),final:hash(b.frame)};
   if (delivery) result.coldDeliveryEntry = entry;
+  if (reception) result.observedReceptions = receptions;
   if (transient) result.transientSubjects = transient.tally;
   if(games.has(key)) assert.deepEqual(games.get(key),result);
   games.set(key,result);

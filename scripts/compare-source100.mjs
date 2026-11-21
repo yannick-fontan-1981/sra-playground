@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
+import { sourceInterface } from './sic-study-source-interface.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -433,14 +434,17 @@ if (source && (catalogue.length !== 100 || (cohort === 'source' && (start !== 1 
 const selected = cohort.startsWith('source:') ? cohort.slice(7).split(',') : catalogue;
 if (selected.some((code) => !catalogue.includes(code))) throw Error('Game outside cohort');
 const [index, shards] = shardArg.split('/').map(Number);
+const variation = process.env.SIC_STUDY_SOURCE_INTERFACE;
+if (variation && !source) throw Error('Interface variations apply only to the source cohort');
 const games = source
-  ? await sourceBackend(environment)
+  ? sourceInterface(await sourceBackend(environment), variation)
   : (await load(environment, 'src/runtime/native-game-dispatcher.ts')).createGameDispatcher(() => {
       throw Error('Native evaluation unexpectedly requested a legacy game');
     });
 for (const code of selected.filter((_, i) => i % shards === index)) {
   try {
     const result = await run(code, games);
+    if (variation) result.sourceInterface = variation;
     await appendFile(output, JSON.stringify(result) + '\n');
     console.log(
       code,
