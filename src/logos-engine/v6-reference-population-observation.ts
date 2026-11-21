@@ -51,8 +51,12 @@ export function measureReferencePopulation(rows: NativeRows, retained: R | null 
         const value = values[dy * size + dx]!;
         if (value !== appearance) differences.push([dy, dx, value]);
       }
-      const marked = differences.length === 1 && (retained.observed_marker_overlays ?? [])
-        .some((overlay: number[]) => overlay.length === 3 && overlay.every((value, i) => value === differences[0]![i]));
+      const marked = differences.length === 1
+        ? (retained.observed_marker_overlays ?? []).some((overlay: number[]) =>
+          overlay.length === 3 && overlay.every((value, i) => value === differences[0]![i]))
+        : differences.length > 1 && (retained.observed_marker_patterns ?? []).some((pattern: number[][]) =>
+          pattern.length === differences.length && pattern.every((pixel, i) =>
+            pixel.length === 3 && pixel.every((value, j) => value === differences[i]![j])));
       if ((new Set(values).size === 1 || marked)
         && ![retained.background, retained.empty, retained.border].includes(appearance)) {
         bodies.push({ cell: [y, x], appearance });

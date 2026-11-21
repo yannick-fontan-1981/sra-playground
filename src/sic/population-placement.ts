@@ -22,7 +22,8 @@ export const populationPlacementStrategies = {
 type Cell = ReferencePopulationCell;
 type Scene = { q: number; offset: Cell; floor: Cell[]; zone_box: NativeBox; reference_box: NativeBox; reference_digest: string;
   target: [number, number, number][]; background: number; empty: number; border: number; population: number;
-  bodies: { cell: Cell; appearance: number }[]; observed_marker_overlays?: number[][]; comparisonCells?: Cell[] };
+  bodies: { cell: Cell; appearance: number }[]; observed_marker_overlays?: number[][];
+  observed_marker_patterns?: number[][][]; comparisonCells?: Cell[] };
 type Controls = Record<string, { delta: Cell }>;
 type Neighborhood = Partial<Record<number, { appearance: number | null; ref: string }>>;
 type Support = { cells: Cell[]; evidence: string[] };
@@ -80,10 +81,47 @@ function selectionScene(scene: Scene, cell: Cell, first: NativeRows, second: Nat
     const value = second[y]?.[x];
     if (value !== undefined && value !== first[y]?.[x]) changed.push([y - t, x - l, value]);
   }
-  if (changed.length !== 1) return null;
-  const overlays = [...(scene.observed_marker_overlays ?? []), changed[0]!];
-  const next = measureReferencePopulation(second, { ...scene, observed_marker_overlays: overlays }) as Scene | null;
+  if (!changed.length || changed.length * 2 >= (r - l + 1) * (b - t + 1)
+    || changed.some(pixel => pixel[2] !== changed[0]![2])) return null;
+  const single = changed.length === 1, pattern = single ? changed[0]! : changed;
+  const field = single ? 'observed_marker_overlays' : 'observed_marker_patterns';
+  const known = scene[field] ?? [];
+  const retained = known.some(item => JSON.stringify(item) === JSON.stringify(pattern))
+    ? scene : { ...scene, [field]: [...known, pattern] };
+  const next = measureReferencePopulation(second, retained) as Scene | null;
   return next && next.bodies.every((body, index) => key(body.cell) === key(scene.bodies[index]!.cell)) ? next : null;
+}
+
+/** Recover a population obscured by a selection mark using only the two sides of a public click. */
+export function measureTransferredPopulationSelection(first: NativeRows, second: NativeRows, point: NativePoint) {
+  if (first.length !== second.length || first.some((row, y) => row.length !== second[y]?.length)) return null;
+  const changes: { x: number; y: number; before: number; after: number }[] = [];
+  for (const [y, row] of first.entries()) for (const [x, before] of row.entries()) {
+    const after = second[y]![x]!;
+    if (before !== after) changes.push({ x, y, before, after });
+  }
+  if (!changes.length || changes.length % 2) return null;
+  const inside = (x: number, y: number, [l, t, r, b]: NativeBox) => l <= x && x <= r && t <= y && y <= b;
+  for (const ink of [changes[0]!.before, changes[0]!.after]) {
+    const gone = changes.filter(pixel => pixel.before === ink);
+    const added = changes.filter(pixel => pixel.after === ink);
+    if (gone.length * 2 !== changes.length || gone.length !== added.length) continue;
+    const dx = added[0]!.x - gone[0]!.x, dy = added[0]!.y - gone[0]!.y;
+    if (!gone.every((p, i) => p.x + dx === added[i]!.x && p.y + dy === added[i]!.y)) continue;
+    const plain = first.map(row => [...row]);
+    for (const p of gone) plain[p.y]![p.x] = p.after;
+    const layout = measureReferencePopulation(plain) as Scene | null;
+    if (!layout) continue;
+    const source = layout.bodies.find(body => inside(gone[0]!.x, gone[0]!.y, cellBox(layout, body.cell)));
+    const target = layout.bodies.find(body => inside(point[0], point[1], cellBox(layout, body.cell)));
+    if (!source || !target || source === target) continue;
+    const origin = cellBox(layout, source.cell), destination = cellBox(layout, target.cell);
+    if (destination[0] - origin[0] !== dx || destination[1] - origin[1] !== dy
+      || !gone.every(p => inside(p.x, p.y, origin))) continue;
+    const scene = selectionScene(layout, target.cell, plain, second);
+    if (scene) return { scene, selection: target.cell };
+  }
+  return null;
 }
 
 function orderReferencePlacements(scene: Scene, controls: Controls, deadline: number, positions?: Cell[]): Choice[] | null {
@@ -215,9 +253,9 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       if (prior?.stopped) return null;
       const recall = transferObservedPlacement && witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed;
       const click = learns && !prior && !recall ? await execution?.readPriorClickScene?.((first, _before, command) => {
-        const previous = measureReferencePopulation(first) as Scene | null;
-        if (!previous) return null;
         const { x, y } = command.data;
+        const previous = measureReferencePopulation(first) as Scene | null;
+        if (!previous) return measureTransferredPopulationSelection(first, rows, [x!, y!]);
         const piece = previous.bodies.find(({ cell }) => {
           const [l, t, r, b] = cellBox(previous, cell);
           return x! >= l && x! <= r && y! >= t && y! <= b;
