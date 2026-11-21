@@ -1,4 +1,5 @@
 import { maximumInjectiveMatching } from '../logos-engine/v5-reference-population-calculus.ts';
+import { composeVacancyMoves } from './vacancy-composition.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { measureReferencePopulation, referencePopulationCellKey, referencePopulationLocalRelations, referencePopulationNeighborhood,
@@ -31,9 +32,10 @@ type Assignment = { slot: Cell; previous: Cell; retained: boolean };
 type State = { epoch: number; scene: Scene; selection: Cell | null; active: boolean; controls: Controls;
   tried: string[]; evidence: string[]; frame: string; stopped: boolean; probes?: number; changedNeighbors?: Cell[];
   assignment?: Assignment | null; ordered?: Choice[]; neighborhood?: Neighborhood; neighborEffectRef?: string;
-  support?: Support | null; rejectedSupport?: string[] };
+  support?: Support | null; rejectedSupport?: string[]; awaitingMotor?: boolean };
 type PlacementWitness = { epoch: number; score: number; pitch: number; controls: Controls; evidence: string[]; neighborhood?: Neighborhood };
-type Choice = { command: NativeCommand; cell: Cell; expected: Cell | null; slot: Cell | null; retainsSlot?: boolean; ordered?: boolean };
+type Choice = { command: NativeCommand; cell: Cell; expected: Cell | null; slot: Cell | null; retainsSlot?: boolean; ordered?: boolean;
+  inquiry?: { stationary: Cell; mask: number } };
 type Proposal = NativeProposal & { local: State; choice: Choice; route?: Choice[]; strategy: keyof typeof populationPlacementStrategies; needId: string };
 const key = referencePopulationCellKey;
 const supportKey = (cells: readonly Cell[]) => cells.length === 1 ? key(cells[0]!)
@@ -125,8 +127,23 @@ export function measureTransferredPopulationSelection(first: NativeRows, second:
   return null;
 }
 
-function orderReferencePlacements(scene: Scene, controls: Controls, deadline: number, positions?: Cell[]): Choice[] | null {
+function orderReferencePlacements(scene: Scene, controls: Controls, deadline: number, positions?: Cell[], useVacancy=false): Choice[] | null {
   const targets = positions ?? scene.target.map(([row, col]): Cell => [row, col]);
+  if(useVacancy && positions){
+    const composed=composeVacancyMoves(scene.floor,scene.bodies.map(b=>b.cell),targets,controls,deadline);
+    if(composed?.length){
+      const plan:Choice[]=[];
+      for(let i=0;i<composed.length;){
+        const start=i++;
+        while(i<composed.length && !composed[i]!.select)i++;
+        const from=composed[start]!.from,slot=composed[i-1]!.to;
+        plan.push({cell:from,slot,expected:null,ordered:true,command:{action_ref:'ACTION6',data:referencePopulationPoint(scene,from)}});
+        for(const {input,from,to} of composed.slice(start,i))
+          plan.push({cell:from,slot,expected:to,ordered:true,command:{action_ref:input,data:{}}});
+      }
+      return plan;
+    }
+  }
   const targetKeys = new Set(targets.map(key)), floor = new Set(scene.floor.map(key));
   const openEdges = ([row, col]: Cell) => neighbors
     .map(([dy, dx]): Cell => [row + dy, col + dx]).filter(cell => floor.has(key(cell)));
@@ -187,7 +204,37 @@ export function assessPopulationSupport(scene: Pick<Scene, 'target'>, cells: rea
   return { evidence: [...refs], unknownMasks: [...unknown.keys()] };
 }
 
-function planSupport(local: State, controls: Controls, deadline: number): { support: Support; ordered: Choice[] } | null {
+// Build an arrangement that changes one stationary subject's neighborhood.
+// The route is measured. The stationary subject's response is the unknown.
+function planNeighborExperiment(local:State, controls:Controls, deadline:number):Choice[]|null {
+  const {scene}=local, occupied=new Set(scene.bodies.map(b=>key(b.cell)));
+  let best:Choice[]|null=null;
+  for(const {cell:from} of scene.bodies){
+    if(performance.now()>=deadline)break;
+    const paths=referencePopulationPaths(from,scene.floor,occupied,controls);
+    for(const {cell:stationary} of scene.bodies){
+      if(key(stationary)===key(from))continue;
+      const present=referencePopulationNeighborhood(stationary,occupied).local_direction_mask;
+      for(const [dy,dx] of neighbors){
+        const slot:Cell=[stationary[0]+dy,stationary[1]+dx], path=paths.get(key(slot));
+        if(!path?.[0].length)continue;
+        const end=new Set(occupied);end.delete(key(from));end.add(key(slot));
+        const mask=referencePopulationNeighborhood(stationary,end).local_direction_mask;
+        if(mask===present || local.neighborhood?.[mask])continue;
+        const inquiry={stationary,mask}, select=!local.selection||key(local.selection)!==key(from);
+        if(best && path[0].length+Number(select)>=best.length)continue;
+        const steps:Choice[]=select?[{cell:from,expected:null,slot,ordered:true,inquiry,
+          command:{action_ref:'ACTION6',data:referencePopulationPoint(scene,from)}}]:[];
+        for(const [i,action] of path[0].entries())steps.push({cell:path[1][i]!,expected:path[1][i+1]!,slot,ordered:true,inquiry,
+          command:{action_ref:action.action_ref,data:{}}});
+        best=steps;
+      }
+    }
+  }
+  return best;
+}
+
+function planSupport(local: State, controls: Controls, deadline: number, useVacancy=false): { support: Support; ordered: Choice[] } | null {
   const { scene, neighborhood } = local;
   if (!neighborhood) return null;
   const target = scene.target.map(([row, col]): Cell => [row, col]), surplus = scene.population - target.length;
@@ -223,7 +270,7 @@ function planSupport(local: State, controls: Controls, deadline: number): { supp
   let best: { support: Support & { unknownMasks: number[] }; ordered: Choice[] } | null = null;
   for (const { support } of options) {
     if (performance.now() >= deadline || (best && support.unknownMasks.length > best.support.unknownMasks.length)) break;
-    const plan = orderReferencePlacements(scene, controls, deadline, [...target, ...support.cells]);
+    const plan = orderReferencePlacements(scene, controls, deadline, [...target, ...support.cells], useVacancy);
     if (!plan?.length) continue;
     const ordered = local.selection && key(local.selection) === key(plan[0]!.cell) ? plan.slice(1) : plan;
     if (ordered.length && (!best || ordered.length < best.ordered.length)) best = { support, ordered };
@@ -231,12 +278,12 @@ function planSupport(local: State, controls: Controls, deadline: number): { supp
   return best;
 }
 
-function planInMeasuredZone(local: State, controls: Controls, zones: PopulationZone[], deadline: number) {
+function planInMeasuredZone(local: State, controls: Controls, zones: PopulationZone[], deadline: number, useVacancy=false) {
   let best: { scene: Scene; support: Support; ordered: Choice[] } | null = null;
   for (const { positions, zone } of populationZoneTargets(local.scene.target, zones)) {
     if (performance.now() >= deadline) break;
     const scene = { ...local.scene, target: positions, zone_box: zone.box, comparisonCells: zone.cells };
-    const plan = planSupport({ ...local, scene }, controls, deadline);
+    const plan = planSupport({ ...local, scene }, controls, deadline, useVacancy);
     if (plan && (!best || plan.ordered.length < best.ordered.length)) best = { ...plan, scene };
   }
   return best;
@@ -260,19 +307,20 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
         const result = measureTransferredPopulationSelection(first, second, [command.data.x!, command.data.y!]);
         if (!result) return;
         const carry = prior?.scene.reference_digest === result.scene.reference_digest ? prior : null;
-        // A switch by itself leaves the destinations of spare pieces unresolved.
-        if (result.scene.population !== result.scene.target.length && !carry?.support) return;
+        const unresolved = result.scene.population !== result.scene.target.length && !carry?.support;
+        if (unresolved && !transferObservedPlacement) return;
         state = { ...result, epoch: after.level_epoch, active: false, tried: [], controls: carry?.controls ?? {},
+          ...(unresolved ? { awaitingMotor: true } : {}),
           frame: after.frame_hash, stopped: false, evidence: [before.observation_ref, after.observation_ref],
           neighborhood: rememberNeighborhood(result.scene, carry?.neighborhood, after.observation_ref),
           ...(carry?.neighborEffectRef ? { neighborEffectRef: carry.neighborEffectRef } : {}) };
-      } else if (prior?.selection && (prior.scene.population === prior.scene.target.length || prior.support)
+      } else if (prior?.selection && (prior.scene.population === prior.scene.target.length || prior.support || transferObservedPlacement)
         && cardinal.includes(command.action_ref)) {
         const step = compareMovement(prior.scene, prior.selection, second);
         if (!step?.destination) return;
         const from = prior.selection, to = step.destination, delta: Cell = [to[0] - from[0], to[1] - from[1]];
         const neighbors = changedNeighbors(prior.scene, step.next, from, to);
-        state = { ...prior, scene: step.next, selection: to, active: true, frame: after.frame_hash,
+        state = { ...prior, scene: step.next, selection: to, active: true, awaitingMotor: false, frame: after.frame_hash,
           controls: { ...prior.controls, [command.action_ref]: { delta } }, ordered: [], assignment: null, support: null,
           evidence: [...prior.evidence.slice(-3), after.observation_ref], changedNeighbors: neighbors,
           neighborhood: rememberNeighborhood(step.next, prior.neighborhood, after.observation_ref),
@@ -294,7 +342,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       const available = cardinal.filter(action => observation.available_action_refs.includes(action));
       if (!available.length) return null;
       const prior = state?.epoch === observation.level_epoch && state.frame === observation.frame_hash ? state : null;
-      if (prior?.stopped) return null;
+      if (prior?.stopped || prior?.awaitingMotor) return null;
       const recall = transferObservedPlacement && witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed;
       const click = learns && !prior && !recall ? await execution?.readPriorClickScene?.((first, _before, command) => {
         const { x, y } = command.data;
@@ -327,10 +375,13 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
         const deadline = Math.min(execution?.deadlineMs ?? Infinity, performance.now() + 300);
         if (surplus > 0) {
           const zones = readPopulationZones(rows, scene);
-          const support = zones.length > 1 ? planInMeasuredZone(local, controls, zones, deadline) : planSupport(local, controls, deadline);
+          const support = zones.length > 1 ? planInMeasuredZone(local, controls, zones, deadline, transferObservedPlacement) : planSupport(local, controls, deadline, transferObservedPlacement);
           if (support) {
             local = { ...local, ...support };
             scene = local.scene;
+          } else if(transferObservedPlacement && local.active && local.neighborhood){
+            const inquiry=planNeighborExperiment(local,controls,deadline);
+            if(inquiry)local={...local,ordered:inquiry};
           }
         } else if (surplus === 0) {
           const plan = orderReferencePlacements(scene, controls, deadline);
@@ -344,7 +395,7 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       const occupied = new Set(scene.bodies.map(body => key(body.cell)));
       const unsettled = scene.bodies.map(body => body.cell).filter(cell => targets.every(target => key(target) !== key(cell)));
       const empty = targets.filter(cell => !occupied.has(key(cell)));
-      if ((!empty.length || unsettled.length !== empty.length) && !calibratingSurplus) return null;
+      if ((!empty.length || unsettled.length !== empty.length) && !calibratingSurplus && !local.ordered?.[0]?.inquiry) return null;
       const index = unsettled.findIndex(cell => local.selection && key(cell) === key(local.selection));
       let move: Choice | null = null, probe: Choice | null = null, pick: Choice | null = null;
       let route: Choice[] = [];
@@ -429,6 +480,8 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
       const binding = phase === 'select_unplaced_piece'
         ? await ObservedInputDomain.makeLocusWitness(observation, rows, point, { reason: label, evidence }) : undefined;
       return { status: 'proposed', kind: family, actions, local, choice, strategy: phase, needId: need.id,
+        ...(choice.inquiry?{roleArrangementForecast:{stationary:choice.inquiry.stationary,actor:choice.cell,
+          destination:choice.slot,expectedMask:choice.inquiry.mask,reference:scene.reference_digest}}:{}),
         ...(planned.length > 1 ? { route: planned } : {}),
         steps: planned.map(step => ({ action: step.command, expected_after: (step.ordered || planned.length > 1) && step.expected
           ? cellBox(scene, step.expected) : null, ...(binding ? { point_binding: binding } : {}) })),
@@ -437,7 +490,8 @@ export function createSicVerifyReferencePlacement(family = verifyReferencePlacem
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
           situation: facts },
         sicSituationCard: { strategy, need: 'Occupy the positions shown by the reference', mode,
-          situation: supportMove ? 'Place this piece beside the reference to reproduce the expected neighbor colors.'
+          situation: choice.inquiry ? 'Measure how the stationary piece responds to a new neighboring arrangement.'
+            : supportMove ? 'Place this piece beside the reference to reproduce the expected neighbor colors.'
             : local.support ? multipleSupports ? 'Fill the reference positions while keeping access to the positions that complete the colors.'
               : 'Fill the reference positions while keeping access to the neighbor that completes the colors.'
             : choice.ordered && local.changedNeighbors?.length

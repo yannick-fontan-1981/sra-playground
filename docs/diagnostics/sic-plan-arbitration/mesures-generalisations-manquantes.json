@@ -4975,5 +4975,651 @@
       "files": 2553,
       "manifestHash": "48c04240ba4704c6073fd6347fc2447f20fc4d1c8f05f5ab74560a9be3bd44ba"
     }
+  },
+  "roleCompositionStudy": {
+    "visible": [
+      {
+        "code": "VOIS",
+        "level": 2,
+        "baseline": true,
+        "started": 5,
+        "bothSelectionsConfirmed": 1,
+        "confirmedInteractionPrefixes": [
+          14
+        ],
+        "parkedShapeChangedBeforeClick": 1,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 3,
+        "baseline": true,
+        "started": 5,
+        "bothSelectionsConfirmed": 1,
+        "confirmedInteractionPrefixes": [
+          14
+        ],
+        "parkedShapeChangedBeforeClick": 1,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 4,
+        "baseline": true,
+        "started": 5,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 5,
+        "baseline": false,
+        "started": 5,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 6,
+        "baseline": false,
+        "started": 5,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "baseline": false,
+        "started": 5,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "MOTO",
+        "level": 2,
+        "baseline": false,
+        "started": 1,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "KLOT",
+        "level": 2,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "REWI",
+        "level": 2,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "baseline": true,
+        "started": 5,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "KLOT",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "SERI",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "TEQU",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "REWI",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      }
+    ],
+    "afterObservedSelection": [
+      {
+        "code": "VOIS",
+        "level": 2,
+        "baseline": true,
+        "started": 5,
+        "bothSelectionsConfirmed": 5,
+        "confirmedInteractionPrefixes": [
+          10,
+          12,
+          14,
+          16,
+          20
+        ],
+        "parkedShapeChangedBeforeClick": 5,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 3,
+        "baseline": true,
+        "started": 5,
+        "bothSelectionsConfirmed": 5,
+        "confirmedInteractionPrefixes": [
+          10,
+          12,
+          14,
+          16,
+          18
+        ],
+        "parkedShapeChangedBeforeClick": 5,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 4,
+        "baseline": true,
+        "started": 5,
+        "bothSelectionsConfirmed": 5,
+        "confirmedInteractionPrefixes": [
+          10,
+          12,
+          14,
+          16,
+          18
+        ],
+        "parkedShapeChangedBeforeClick": 5,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 5,
+        "baseline": false,
+        "started": 5,
+        "bothSelectionsConfirmed": 5,
+        "confirmedInteractionPrefixes": [
+          10,
+          12,
+          14,
+          16,
+          18
+        ],
+        "parkedShapeChangedBeforeClick": 5,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 6,
+        "baseline": false,
+        "started": 5,
+        "bothSelectionsConfirmed": 5,
+        "confirmedInteractionPrefixes": [
+          10,
+          12,
+          14,
+          16,
+          18
+        ],
+        "parkedShapeChangedBeforeClick": 5,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "baseline": false,
+        "started": 5,
+        "bothSelectionsConfirmed": 5,
+        "confirmedInteractionPrefixes": [
+          30,
+          32,
+          40,
+          42,
+          44
+        ],
+        "parkedShapeChangedBeforeClick": 5,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "MOTO",
+        "level": 2,
+        "baseline": false,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "KLOT",
+        "level": 2,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "REWI",
+        "level": 2,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "KLOT",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "SERI",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "TEQU",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      },
+      {
+        "code": "REWI",
+        "level": 1,
+        "baseline": true,
+        "started": 0,
+        "bothSelectionsConfirmed": 0,
+        "confirmedInteractionPrefixes": [],
+        "parkedShapeChangedBeforeClick": 0,
+        "convertedByFixedSuffix": 0
+      }
+    ],
+    "sourceAppearanceTests": [
+      {
+        "code": "VOIS",
+        "level": 2,
+        "stationaryChanges": 1,
+        "tests": [],
+        "degrees": {
+          "0": [
+            13
+          ],
+          "1": [
+            11,
+            9
+          ]
+        },
+        "masks": {
+          "0": [
+            13
+          ],
+          "1": [
+            9
+          ],
+          "2": [
+            11
+          ]
+        }
+      },
+      {
+        "code": "VOIS",
+        "level": 3,
+        "stationaryChanges": 8,
+        "tests": [
+          {
+            "step": 45,
+            "name": "degree",
+            "mask": 5,
+            "expected": 12,
+            "appearance": 12,
+            "sources": [
+              9,
+              10,
+              6
+            ]
+          },
+          {
+            "step": 45,
+            "name": "symmetry",
+            "mask": 5,
+            "expected": 12,
+            "appearance": 12,
+            "sources": [
+              9,
+              10,
+              6
+            ]
+          },
+          {
+            "step": 49,
+            "name": "degree",
+            "mask": 7,
+            "expected": 15,
+            "appearance": 15,
+            "sources": [
+              13,
+              14
+            ]
+          },
+          {
+            "step": 49,
+            "name": "symmetry",
+            "mask": 7,
+            "expected": 15,
+            "appearance": 15,
+            "sources": [
+              13,
+              14
+            ]
+          }
+        ],
+        "degrees": {
+          "0": [
+            13
+          ],
+          "1": [
+            11,
+            9,
+            14,
+            8
+          ],
+          "2": [
+            12
+          ],
+          "3": [
+            15
+          ]
+        },
+        "masks": {
+          "0": [
+            13
+          ],
+          "1": [
+            9
+          ],
+          "2": [
+            11
+          ],
+          "4": [
+            14
+          ],
+          "5": [
+            12
+          ],
+          "6": [
+            12
+          ],
+          "7": [
+            15
+          ],
+          "8": [
+            8
+          ],
+          "9": [
+            12
+          ],
+          "10": [
+            12
+          ],
+          "13": [
+            15
+          ],
+          "14": [
+            15
+          ]
+        }
+      },
+      {
+        "code": "VOIS",
+        "level": 4,
+        "stationaryChanges": 10,
+        "tests": [],
+        "degrees": {
+          "0": [
+            13
+          ],
+          "1": [
+            8,
+            14,
+            11
+          ],
+          "2": [
+            12
+          ]
+        },
+        "masks": {
+          "0": [
+            13
+          ],
+          "2": [
+            11
+          ],
+          "4": [
+            14
+          ],
+          "5": [
+            12
+          ],
+          "6": [
+            12
+          ],
+          "8": [
+            8
+          ],
+          "9": [
+            12
+          ],
+          "10": [
+            12
+          ]
+        }
+      },
+      {
+        "code": "VOIS",
+        "level": 5,
+        "stationaryChanges": 0,
+        "tests": [],
+        "degrees": {
+          "0": [
+            13
+          ]
+        },
+        "masks": {
+          "0": [
+            13
+          ]
+        }
+      },
+      {
+        "code": "VOIS",
+        "level": 6,
+        "stationaryChanges": 1,
+        "tests": [],
+        "degrees": {
+          "0": [
+            13
+          ],
+          "1": [
+            11,
+            9
+          ]
+        },
+        "masks": {
+          "0": [
+            13
+          ],
+          "1": [
+            9
+          ],
+          "2": [
+            11
+          ]
+        }
+      },
+      {
+        "code": "VOIS",
+        "level": 1,
+        "stationaryChanges": 0,
+        "tests": [],
+        "degrees": {
+          "0": [
+            13
+          ]
+        },
+        "masks": {
+          "0": [
+            13
+          ]
+        }
+      }
+    ],
+    "sourceWinningInterventions": [
+      {
+        "code": "VOIS",
+        "level": 4,
+        "actions": 39,
+        "won": true,
+        "blocks": [
+          {
+            "start": 12,
+            "end": 15,
+            "word": [
+              "ACTION2",
+              "ACTION2",
+              "ACTION4",
+              "ACTION4"
+            ],
+            "stationary": [
+              5,
+              11
+            ],
+            "destination": [
+              4,
+              11
+            ],
+            "expectedMask": 1,
+            "initialAppearance": 13,
+            "heldEveryStep": true,
+            "endAppearance": 9,
+            "observedMask": 1,
+            "omitted": {
+              "won": false,
+              "used": 35,
+              "unchanged": true
+            },
+            "substitutions": [
+              {
+                "input": "ACTION1",
+                "won": false,
+                "used": 39,
+                "unchanged": false
+              },
+              {
+                "input": "ACTION3",
+                "won": false,
+                "used": 39,
+                "unchanged": false
+              },
+              {
+                "input": "ACTION5",
+                "won": false,
+                "used": 39,
+                "unchanged": false
+              },
+              {
+                "input": "ACTION6:39,11",
+                "won": false,
+                "used": 39,
+                "unchanged": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "code": "SKBN",
+        "level": 4,
+        "actions": 63,
+        "won": true,
+        "blocks": []
+      }
+    ],
+    "withdrawalVOIS5": {
+      "baseline": {
+        "family": "sic_learn_reference_placement",
+        "observation": "33:frame:d664dbe3cbca86be"
+      },
+      "candidate": {
+        "family": "sic_learn_reference_placement",
+        "observation": "9:frame:b548b4df9acc065a"
+      }
+    }
   }
 }

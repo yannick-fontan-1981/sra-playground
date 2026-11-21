@@ -119,7 +119,12 @@ async function run(code, games) {
   let levelCoverage;
   const replayCommands = process.env.SIC_STUDY_RECORD_COMMANDS === '1' ? [] : null;
   const preparation = new Map();
+  let withdrawal;
   const collectPreparation = (snapshot) => {
+    if(!withdrawal){
+      const event=snapshot.trace?.find(e=>e.kind==='sic_fallback_primary_withdrawn');
+      if(event)withdrawal={family:event.family,observation:event.observation_ref};
+    }
     const event = snapshot.trace?.findLast((e) => e.kind === 'sic_preparation_outcome');
     if (event && !preparation.has(event.revision))
       preparation.set(event.revision, { ...event, actionIndex: issued });
@@ -214,6 +219,7 @@ async function run(code, games) {
       if (replayCommands)
         replayCommands.push({id:action.id, ...(localSeal?{localCapacity,localSeal}:{}), ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           ...(plan?.compositionForecast?{composition:plan.compositionForecast}:{}),
+          ...(plan?.roleArrangementForecast?{roleArrangement:plan.roleArrangementForecast}:{}),
           from:hash(previous.frame).slice(0,16), to:hash(board.frame).slice(0,16)});
       if (plan?.authority === 'sicOnly') sic++;
       const nextHash = hash(board.frame);
@@ -307,6 +313,7 @@ async function run(code, games) {
       ...(process.env.SIC_STUDY_WORKERS ? {parallelWorkers:Number(process.env.SIC_STUDY_WORKERS)} : {}),
       initial,
       initialCompleted,
+      ...(withdrawal?{withdrawal}:{}),
       ...(prefixFile ? { sourcePrefixActions: entryActions } : {}),
       ...(lesson?{observedPriorLevelActions:lesson.length}:{}),
       levels,

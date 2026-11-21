@@ -156,7 +156,7 @@ function sharedSurroundings(rows:NativeRows,m:Mark) {
   }
   return total?same/total:0;
 }
-function cursorCandidates(o:NativeObservation,rows:NativeRows,m:CursorMemory) {
+export function cursorCandidates(o:NativeObservation,rows:NativeRows,m:CursorMemory) {
   const marks=findMarks(o,rows,m);
   if(new Set(marks.map(v=>tag(v.source.box))).size!==1)return [];
   // A previously witnessed role or a matching body provides more evidence than
