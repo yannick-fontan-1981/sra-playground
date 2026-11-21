@@ -1,6 +1,7 @@
 import { assessLocal, canCompareAnotherPreparation, continuationAt, demonstratedLimit, hasLocalContrast, localCommand, newLocalMemory, observeLocal, proposeLocal, revisitedChoice, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
-import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
+import { hasExperimentOpportunity, recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
 import {newCursorMemory,recordCursorTrial,type CursorMemory,type CursorTrial} from './marked-cursor-selection.ts';
+
 import { nextConfiguration, newConfigurationMemory, observeConfiguration, type ConfigurationMemory, type ConfigurationTrial } from './configuration-trials.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
@@ -109,6 +110,8 @@ export type Experiment = {
     | 'testConfiguration'
     | 'localCapacity'
     | 'seekTerminalContact'
+    | 'positionForOperation'
+    | 'usePositionedOperation'
     | 'testScoringContact'
     | 'testMechanismMobility'
     | 'reconfigureMechanism'
@@ -457,16 +460,24 @@ function selectEstablishedExperiment(
   late: boolean,
   rows?: NativeRows
 ): Experiment | null {
-  const retained = Object.keys(m.previewLearning?.bindings ?? {}).length > 0 || !!m.previewLearning?.terminal?.length;
+  const retained = Object.keys(m.previewLearning?.bindings ?? {}).length > 0 || !!m.previewLearning?.terminal?.length || !!m.previewLearning?.inheritedPreparations?.length;
   const s = retained ? sceneIndex(m, o) : m.scenes.indexOf(sceneKey(o)),
     available = new Set(inputs.map(observedCommandKey));
   if (s < 0 || !available.size) return null;
+  if(rows && m.previewLearning?.blockedGoal && m.previewLearning.inheritedPreparations?.length){
+    const situated=offerTerminalContact(m,s,o,rows,available,'positioned');
+    if(situated)return situated;
+  }
   if(rows&&m.previewLearning?.terminal?.length){const goal=offerTerminalContact(m,s,o,rows,available);if(goal)return goal;}
   const frontier=m.frontier;
   frontier.choices[s]=[...available];
   const free = !m.frames?.active && !m.retained?.active && !m.instrument?.active && !m.contexts?.active &&
     !m.exchanges?.active && !m.transfers?.active && !m.condition && !m.pending && !m.projection.active &&
     !m.equations.active && !m.space.active && !frontier.follow && !frontier.question && !m.delayed.active;
+  if(rows && free && m.previewLearning?.inheritedPreparations?.length && !m.previewLearning.terminal?.length && hasExperimentOpportunity(m)){
+    const situated=offerTerminalContact(m,s,o,rows,available,'positioned');
+    if(situated)return situated;
+  }
   const read=rows&&m.previewLearning&&!m.occupancy?.active?offerWitnessedPreview(m.previewLearning,o,visualLayout(o,rows),available):null;
   const priorRepeat=read?knownLocalRepeat(m,s,read.command):null;
   const stagnant=priorRepeat??(m.localProgress?.last?.returnScene===s?m.localProgress.last:null);
@@ -1053,7 +1064,14 @@ export function recordExperiment(
     return {...out,result,condition:detail};
   }
   if(x.instrument){const {result,detail}=recordInstrument(m,x.instrument,b,a,edge,next,t);return {...out,result,instrument:detail};}
-  if(x.terminalContact&&m.previewLearning){const detail=measureTerminalContact(m.previewLearning,x.terminalContact,b,a,op,visualLayout(a,next));return {...out,result:detail.won?'terminal_contact_official':detail.matched?'terminal_contact_approach':'terminal_contact_refuted',terminalContact:detail};}
+  if(x.terminalContact&&m.previewLearning){
+    const detail=measureTerminalContact(m.previewLearning,x.terminalContact,b,a,op,visualLayout(a,next));
+    const result=detail.won?'terminal_contact_official':
+      x.phase==='usePositionedOperation'?(detail.matched?'positioned_effect_observed':'positioned_effect_refuted'):
+      x.phase==='positionForOperation'?(detail.matched?'preparatory_position_approach':'preparatory_position_refuted'):
+      detail.matched?'terminal_contact_approach':'terminal_contact_refuted';
+    return {...out,result,terminalContact:detail};
+  }
   if(x.mobilityProbe){const detail=measureMobility(x.mobilityProbe,b,a,next,op);return {...out,result:detail.won?'mobility_completion':detail.moved?'mobility_observed':'mobility_unconfirmed',mobilityProbe:detail};}
   if(x.mechanism){const detail=finishMechanism(m,x.mechanism,b,a,rows,next,op);return {...out,result:detail.won?'mechanism_completion':detail.matched?'mechanism_step_confirmed':'mechanism_step_refuted',mechanism:detail};}
   if(x.unreadIndicator){

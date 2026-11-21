@@ -24,6 +24,7 @@ test('an exploration preference can test two control hypotheses on unfamiliar gr
     const trial=plan?.cursorSelectionForecast;
     assert.equal(!!trial,shouldOffer);
     if(!trial)continue;
+    assert.equal(plan.sicSituationCard.mode,'exploration');
     assert.equal(trial.projectedMove,undefined);
     assert.equal(trial.contrast.motor,'ACTION4');
     assert.deepEqual(trial.contrast.outcomes,['previous_subject_moves','selected_subject_moves']);
@@ -34,6 +35,7 @@ test('an exploration preference can test two control hypotheses on unfamiliar gr
     assert.equal(receipt.events[0]?.result,'new_cursor_moved_while_previous_cursor_stayed');
     const advance=await family.proposeInGroup!(evidencedPlanGroup,d!,moved,[],18,{});
     assert.equal(advance.cursorSelectionForecast.stage,'advance');
+    assert.equal(advance.sicSituationCard.mode,'solving');
     assert.deepEqual(advance.cursorSelectionForecast.source.box,trial.source.box);
     const another=board(1,17,3,false,5),end=await observation(another,4);
     const applied=await family.record!(d!,end,advance.actions[0]!,moved,another,advance);

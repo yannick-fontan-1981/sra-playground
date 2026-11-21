@@ -64,7 +64,13 @@ export type ReadOffer = {
   calibration?: PredictiveEvidence;
 };
 import type { TerminalContact } from './terminal-contact.ts';
+import type { SituatedWitness } from './situated-preparation.ts';
 export type PreviewLearning = {
+  recentPreparations?: SituatedWitness[];
+  inheritedPreparations?: SituatedWitness[];
+  blockedGoal?: {before:string; after:string};
+  preparationAttempts?: Record<string,number>;
+  testedPreparations?: Record<string,number>;
   terminal?: TerminalContact[];
   goalAttempts?: Record<string, number>;
   visitedContacts?: Record<string, number>;
@@ -78,6 +84,7 @@ export type PreviewLearning = {
   motion: Record<string, Record<string, number>>;
 };
 export type PreviewCarry = {
+  preparations?: SituatedWitness[];
   terminal?: TerminalContact[];
   partMotion?: Record<string, PartMotion>;
   scope: string;
@@ -259,7 +266,7 @@ export function carryPreviewBindings(
   if (
     scope(a) !== scope(b) ||
     a.levels_completed !== b.levels_completed + 1 ||
-    (!Object.keys(learned.bindings).length && !learned.terminal?.length)
+    (!Object.keys(learned.bindings).length && !learned.terminal?.length && !learned.recentPreparations?.length)
   )
     return null;
   return {
@@ -267,13 +274,16 @@ export function carryPreviewBindings(
     fromEpoch: b.level_epoch,
     completed: a.levels_completed,
     bindings: structuredClone(learned.bindings),
+    ...(learned.recentPreparations?.length ? {
+      preparations: learned.recentPreparations.map(w => ({...structuredClone(w), completionRef: a.observation_ref})),
+    } : {}),
     ...(learned.terminal?.length ? { terminal: structuredClone(learned.terminal) } : {}),
     partMotion: Object.fromEntries(
       Object.entries(learned.partMotion ?? {})
         .filter(
           ([id]) =>
             Object.values(learned.bindings).some((x) => x.actor === id) ||
-            learned.terminal?.some((x) => x.actor === id)
+            learned.terminal?.some((x) => x.actor === id) || learned.recentPreparations?.some(w=>w.actor===id)
         )
         .map(([id, m]) => [
           id,
@@ -292,6 +302,7 @@ export function acceptPreviewCarry(c: PreviewCarry | null | undefined, o: Native
   if (c && scope(o) === c.scope && o.level_epoch === c.fromEpoch + 1 && o.levels_completed === c.completed) {
     learned.bindings = structuredClone(c.bindings);
     if (c.terminal?.length) learned.terminal = structuredClone(c.terminal);
+    if (c.preparations?.length) learned.inheritedPreparations=structuredClone(c.preparations);
     learned.partMotion = structuredClone(c.partMotion ?? {});
   }
   return learned;

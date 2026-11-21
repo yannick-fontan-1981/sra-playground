@@ -1,0 +1,11 @@
+# Tester la position qui permet une action
+
+## Protocole de gel
+
+Le témoin est `sic-source100-protected-control-v64`. Le candidat réutilise la préférence déclarée `motion_contrast` à deux issues. Les packs actif et témoin déclaratif ont les mêmes budgets. SS05 sert au diagnostic après un L1 gagné par SIC. SS02 entier est réservé pour vérifier le transfert après gel. Les résultats historiques de ces jeux sont connus. Les interventions et les coordonnées d’évaluation restent extérieures au pilote.
+
+Sur les 100 L1 sources, le banc cherche les gestes déjà reconnus nécessaires à une suite gagnante par omission et remplacement. Il déplace le geste dans une séquence de trois commandes. Un aller et un retour ont une image publique réversible et le même individu retrouve sa position dans chacune des trois permutations. Parmi 23 comparaisons, 20 attribuent la victoire des deux suites à l’activation depuis la position d’origine. Cela couvre CGWL, GABA, TEQU et WA30. Une observation visible candidate est présente dans 18 des 20 cas. Dans 9 cas, le déplacement laisse le repère en place et le geste depuis cette nouvelle position le laisse encore en place. Le pilote peut donc proposer cette relation comme une hypothèse vérifiable. Chacun de ces nombres compte des comparaisons, plusieurs pouvant provenir du même coup.
+
+En campagne, SIC conserve la relation entre un sujet précédemment mobile et un repère qui a changé pendant une opération. Un passage officiel de niveau transporte la relation. Si un contact attendu se bloque, le pilote peut chercher la disposition relative dans le nouveau tableau et y déclencher l’opération. Il choisit la commande, le sujet, le repère et le trajet depuis les observations. Le reçu distingue l’approche, le geste, son effet local et la victoire officielle. Un repère peut changer sans ouvrir le passage.
+
+La comparaison principale utilise le moteur Custom 4 `f0a1ff437`, une limite de 1 200 commandes par niveau et le même plafond de temps actif pour les deux packs. Les traces sont rejouées sur une instance neuve du moteur. Seront relevés les hypothèses à l’entrée du L2, les gestes choisis, les changements de repère, puis les scores officiels. Les préfixes de longueur commune permettent de distinguer un autre choix d’un simple écart de temps de calcul.

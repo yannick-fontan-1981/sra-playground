@@ -3,6 +3,9 @@ import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
+import {observedSituatedOperations,retainSituatedOperations} from '../src/sic/situated-preparation.ts';
+import {initialMemory} from '../src/sic/preparation-experiments.ts';
+import {offerTerminalContact,measureTerminalContact} from '../src/sic/terminal-contact.ts';
 import {
   acceptPreviewCarry,
   carryPreviewBindings,
@@ -45,6 +48,39 @@ async function scene(
   return { o, rows, layout: visualLayout(o, rows) };
 }
 const q: NativeCommand = { action_ref: 'ACTION5', data: {} };
+test('a winning boundary transfers the relative pose for an operation and tests the feature at a different site',async()=>{
+  const frames=await Promise.all([1,3,5].map((x,i)=>scene(1,i+1,[[x,4]],[8,4])));
+  const used=await scene(1,4,[[5,4]],null);
+  const learn=newPreviewLearning();
+  for(let i=1;i<frames.length;i++){
+    const u=frames[i-1]!,v=frames[i]!;
+    observePreviewBindings(learn,u.o,v.o,u.layout,v.layout,'ACTION2');
+  }
+  const at=frames[2]!;
+  const observed=observedSituatedOperations(learn,at.o,used.o,at.layout,used.layout,'ACTION5');
+  assert.ok(observed.length);
+  retainSituatedOperations(learn,observed);
+  const entered=await scene(2,5,[[9,7]],[14,7]),ready=await scene(2,6,[[11,7]],[14,7]),opened=await scene(2,7,[[11,7]],null);
+  const carry=carryPreviewBindings(learn,used.o,entered.o);
+  assert.ok(carry);
+  assert.equal(acceptPreviewCarry(carry,(await scene(2,5,[[9,7]],[14,7],'another-game')).o).inheritedPreparations,undefined);
+  const m=initialMemory(2),available=new Set(entered.o.available_action_refs);
+  m.previewLearning=acceptPreviewCarry(carry,entered.o);
+  const approach=offerTerminalContact(m,0,entered.o,entered.rows,available,'positioned')!;
+  assert.equal(approach.phase,'positionForOperation');
+  assert.equal(approach.a,'ACTION2');
+  const motion=measureTerminalContact(m.previewLearning,approach.terminalContact!,entered.o,ready.o,approach.a,ready.layout);
+  assert.equal(motion.matched,true);
+  const use=offerTerminalContact(m,1,ready.o,ready.rows,available,'positioned')!;
+  assert.equal(use.phase,'usePositionedOperation');
+  assert.equal(use.a,'ACTION5');
+  const noEffect=measureTerminalContact(structuredClone(m.previewLearning),use.terminalContact!,ready.o,ready.o,use.a,ready.layout);
+  assert.equal(noEffect.matched,false);
+  const result=measureTerminalContact(m.previewLearning,use.terminalContact!,ready.o,opened.o,use.a,opened.layout);
+  assert.equal(result.matched,true);
+  assert.equal(result.won,false);
+  assert.equal(offerTerminalContact(m,1,ready.o,ready.rows,available,'positioned'),null);
+});
 test('one measured arrival binds the moving individual despite a matching stationary peer', async () => {
   const before = await scene(
       1,

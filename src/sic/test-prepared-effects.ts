@@ -3,7 +3,8 @@ import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity,
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import {offerCursorTrial,newCursorMemory} from './marked-cursor-selection.ts';
-import type { InformationPreference } from './information-preference.ts';
+import {informationPriority, type InformationPreference} from './information-preference.ts';
+import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
@@ -36,6 +37,8 @@ const labels: Record<Experiment['phase'], string> = {
   testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
+  positionForOperation:'Reach the relative position where a previous operation changed a visible feature',
+  usePositionedOperation:'Test the previous operation at the reached position and inspect the feature',
   testScoringContact:'Test whether a measured move onto a single visible target completes the level',
   testMechanismMobility:'Test an untried control for moving a persistent part after a repeated return',
   reconfigureMechanism:'Test whether moving a mechanism opens access beyond a stagnant return',
@@ -85,6 +88,8 @@ const labels: Record<Experiment['phase'], string> = {
 import {completionContacts} from './terminal-contact.ts';
 import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference): NativeFamily<Offer> {
+  const comparePreparations=informationPreference?.mode==='active' &&
+    informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
@@ -106,6 +111,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
       const before=visualLayout(b,rows),after=visualLayout(a,next);
+      const key=observedCommandKey(cmd);
+      if(comparePreparations && /^ACTION[5-7]$/.test(key))
+        retainSituatedOperations(learning,observedSituatedOperations(learning,b,a,before,after,key));
       observePreviewBindings(learning,b,a,before,after,observedCommandKey(cmd));
       exposedUnderParts(learning,b,a,rows,next,before,after);
     }
@@ -157,7 +165,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const ref = o.observation_ref,
         label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
+      const positioned = experiment.terminalContact && 'operation' in experiment.terminalContact.witness
+        ? experiment.terminalContact.witness : undefined;
       const evidence = [
+        ...(positioned?.completionRef ? [positioned.completionRef] : []),
         ref,
         ...(cursor?.evidence??[]),
         ...(experiment.configurationTrial?.evidence??[]),
@@ -168,6 +179,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
         ...(experiment.mechanism?.plan.witnessRefs??[]),
         ...(experiment.terminalContact?[experiment.terminalContact.witness.before,experiment.terminalContact.witness.after]:[]),
+        ...(experiment.terminalContact?.blockedGoal ? [experiment.terminalContact.blockedGoal.before,experiment.terminalContact.blockedGoal.after] : []),
         ...experiment.refs.map(
           (r) =>
             ref.split(':revision:', 1)[0] +
@@ -185,6 +197,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
       if(phase==='testScoringContact')question.satisfactionContract='check_the_predicted_approach_and_then_measure_official_progress_at_contact';
+      if(phase==='positionForOperation'||phase==='usePositionedOperation')
+        question.satisfactionContract='test_the_previous_level_operation_at_its_observed_relative_position';
       if(cursor){
         question.subjects=[cursor.source.box.join(','),cursor.target.box.join(','),String(cursor.ink)];
         question.satisfactionContract=cursor.stage==='select'
@@ -242,7 +256,13 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
-        ...(experiment.terminalContact?{terminalContactForecast:experiment.terminalContact}:{}),
+        ...(experiment.terminalContact ? {terminalContactForecast: {
+          ...experiment.terminalContact,
+          ...(positioned ? {decisionMode:'explore_competing_explanations',
+            operation:positioned.operation,
+            alternatives:['named_feature_changes_at_site','named_feature_remains_at_site'],
+          } : {}),
+        }} : {}),
         ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),
         ...(experiment.mechanism ? {mechanismForecast:experiment.mechanism} : {}),
         ...(experiment.unreadIndicator ? {indicatorProbeForecast:experiment.unreadIndicator} : {}),
@@ -266,7 +286,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           strategy: phase,
           need: label,
           situation: label,
-          mode: 'exploration',
+          mode: cursor?.stage==='advance' ? 'solving' : 'exploration',
           evidence,
           agenda: [],
         },

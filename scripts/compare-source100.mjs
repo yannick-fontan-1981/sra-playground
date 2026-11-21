@@ -126,7 +126,8 @@ async function run(code, games) {
             trainedEpoch:Number(law.ref.match(/:epoch:(\d+):/)?.[1]??0),signature:hash(law.key),
             matchedInTraining:law.matchedInTraining}));
           boundaryAudit.push({epoch,decision:issued+1,laws,terminalContacts:memory.previewLearning?.terminal?.length??0,
-            previewBindings:Object.keys(memory.previewLearning?.bindings??{}).length});
+            previewBindings:Object.keys(memory.previewLearning?.bindings??{}).length,
+            situatedPreparations:memory.previewLearning?.inheritedPreparations?.length??0});
         }
         return proposal;
       };
