@@ -1178,6 +1178,10 @@ records.push({code:'SS13',id:'ss13-c4000001',name:'L’Ancre Verte',group:'custo
   description:'Pull single objects with the Thief and swap with the Wizard to preserve anchors, power circuits and cross the water.',
   sourcePath:'experiments/sinking-star-ss13/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS14',id:'ss14-c4000001',name:'La Traction Harmonique',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Pull one object with the Thief, move groups with the Bard’s song and keep the crossings open for both heroes.',
+  sourcePath:'experiments/sinking-star-ss14/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

@@ -29,6 +29,8 @@ import { DuoPuzzleSession as ColumnDuoSession } from '../experiments/sinking-sta
 import { SS12_LEVELS } from '../experiments/sinking-star-ss12/src/levels.ts';
 import { DuoPuzzleSession as AnchorDuoSession } from '../experiments/sinking-star-ss13/src/core.ts';
 import { SS13_LEVELS } from '../experiments/sinking-star-ss13/src/levels.ts';
+import { DuoPuzzleSession as HarmonyDuoSession } from '../experiments/sinking-star-ss14/src/core.ts';
+import { SS14_LEVELS } from '../experiments/sinking-star-ss14/src/levels.ts';
 
 function crc32(bytes) {
   let crc = 0xffffffff;
@@ -50,7 +52,7 @@ export async function makeNativeGalleryGroup(root) {
     new BardPuzzleSession(SS05_LEVELS), new DuoPuzzleSession(SS06_LEVELS),
     new ThiefDuoSession(SS07_LEVELS), new WizardDuoSession(SS08_LEVELS), new ChorusDuoSession(SS09_LEVELS),
     new WarehouseDuoSession(SS10_LEVELS), new ForgeDuoSession(SS11_LEVELS),
-    new ColumnDuoSession(SS12_LEVELS), new AnchorDuoSession(SS13_LEVELS),
+    new ColumnDuoSession(SS12_LEVELS), new AnchorDuoSession(SS13_LEVELS), new HarmonyDuoSession(SS14_LEVELS),
   ];
   const games = sessions.map((session, row) => {
     const { gameCode: code, levelCount } = session.observe();

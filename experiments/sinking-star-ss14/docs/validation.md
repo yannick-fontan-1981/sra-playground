@@ -55,7 +55,7 @@ Rapport : `validation/pixel-fix-report.json`. Les occupants et les aperçus de r
 
 Rapport final : `validation/ui-dom-report.json`, portée `focused-ui-and-full-campaign`. Les dix-sept découvertes y sont également vérifiées sur la vraie route du niveau 1.
 
-Les huit images initiales du moteur ont été rendues et inspectées visuellement. **Cette vérification de pixels et de DOM ne certifie pas le rendu CSS ni le comportement mobile d’un navigateur natif.** Aucun navigateur natif n’a été exécuté pour SS14 dans cet environnement ; voir `validation/browser-availability.json`. Le contrôle ordinateur/mobile du jeu intégré reste à faire avant publication du Site.
+Les huit images initiales du moteur ont été rendues et inspectées visuellement. Ces contrôles du laboratoire portent sur le DOM, les pixels calculés et les temporisations. Le contrôle natif a ensuite été effectué dans le Playground compilé avec Playwright et Microsoft Edge 158.0.4370.33, sur ordinateur et à 390 px.
 
 ## Revue des contraintes
 
@@ -89,4 +89,4 @@ Le HTML validé possède l’empreinte SHA-256 :
 
 Les rapports de campagne, d’interface et de correction des pixels portent la même empreinte. Le bundle est autonome : aucun script distant, témoin, solveur ou outil d’auteur n’est nécessaire pour jouer ou présent dans le code livré au joueur.
 
-Les témoins prouvent la solvabilité, pas l’unicité, l’optimalité ou une réussite autonome de SRA. Les sources sont des adaptations déclarées, pas des reconstructions certifiées. Le laboratoire n’a modifié aucun chemin partagé du runtime : la qualification de coût global et les non-régressions d’intégration concernent le prochain raccordement natif.
+Les témoins prouvent la solvabilité, pas l’unicité, l’optimalité ou une réussite autonome de SRA. Les sources sont des adaptations déclarées, pas des reconstructions certifiées. La feuille de route consigne les non-régressions et la comparaison du coût global de l’intégration native.

@@ -531,9 +531,9 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .duo-role-controls{flex-direction:row;flex-wrap:wrap;margin-top:10px}
 .duo-role-controls button[aria-pressed="true"]{outline:2px solid #ef4141;outline-offset:1px}
 .duo-role-controls button:is([data-ss06-hero="merchant"],[data-ss07-hero="merchant"],[data-ss08-hero="merchant"],[data-ss09-hero="merchant"])[aria-pressed="true"]{outline-color:#f59e29}
-.duo-role-controls button:is([data-ss07-hero="thief"],[data-ss10-hero="thief"],[data-ss13-hero="thief"])[aria-pressed="true"]{outline-color:#50b848}
+.duo-role-controls button:is([data-ss07-hero="thief"],[data-ss10-hero="thief"],[data-ss13-hero="thief"],[data-ss14-hero="thief"])[aria-pressed="true"]{outline-color:#50b848}
 .duo-role-controls button:is([data-ss08-hero="wizard"],[data-ss11-hero="wizard"],[data-ss13-hero="wizard"])[aria-pressed="true"]{outline-color:#9e6bdb}
-.duo-role-controls button:is([data-ss09-hero="bard"],[data-ss12-hero="bard"])[aria-pressed="true"]{outline-color:#e03bca}
+.duo-role-controls button:is([data-ss09-hero="bard"],[data-ss12-hero="bard"],[data-ss14-hero="bard"])[aria-pressed="true"]{outline-color:#e03bca}
 .duo-board-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem}
 .duo-board-legend>span:not([hidden]){display:inline-flex;align-items:center;gap:.375rem}
 .duo-board-legend svg,.duo-board-legend .swatch{width:.875rem;height:.875rem;flex:none}

@@ -35,3 +35,17 @@ Respecter : **tests → commit → push GitHub → intégration main → publica
 Relever la version publiée et son SHA source lorsqu’il est exposé, puis vérifier leur correspondance avec le commit GitHub durable. En cas de divergence, préserver les deux états et les réconcilier. Si le SHA source n’est pas exposé, préciser cette limite et consigner le commit utilisé pour publier.
 
 Mettre à jour la documentation et donner : résultat fonctionnel, tests, contrôle navigateur, branche, SHA local/poussé/intégré, URL du Site et lien SS14, version Site, SHA source disponible, état de synchronisation et éventuelles limites. Si une capacité manque réellement, conserver le travail sur GitHub et nommer le blocage exact.
+
+## Intégration vérifiée
+
+Le raccordement sur `codex/ss14-custom4` utilise la révision `421fbe54636d9d16d93fb34fc45d605a799f0b46` du laboratoire 0.1.1. Le moteur et les cartes restent identiques à cette révision. L’adaptateur valide le chargement avant de remplacer la session et contrôle les coordonnées entières de l’ACTION6.
+
+SS14 suit SS13 dans le catalogue Custom 4. Les huit cartes, les 17 découvertes, les aides contextuelles et les sources secondaires sont disponibles dans le Playground. La galerie comprend huit vignettes de SS14 issues du moteur. Le worker de SRA reçoit les observations publiques et les outils d’auteur restent dans le laboratoire et les tests.
+
+Le rejeu via le dispatcher et l’adaptateur vérifie les 1 028 entrées, dont 63 sélections, les 3 039 images et leurs durées. Les huit fins de niveau sont annulées puis rejouées. La suite Custom 4 compte 58 tests réussis, le laboratoire 33 tests moteur et 24 contrôles de conception. Le typage et le build de production réussissent.
+
+Chromium a rejoué la campagne dans le Playground et confirmé le tutoriel, les commandes, les interruptions, les panneaux terminaux, les liens directs et le format mobile. Le test lit les pixels du canvas sur le bouton bleu de L6, la presse de L6 fermée puis ouverte, et le bouton exposé de L8. Les régressions SS13, SS01, CASC et LS20 ont réussi.
+
+La feuille de route consigne la mesure de coût. Le compte rendu de livraison relève la version du Site, le SHA source et leur vérification avec `main`.
+
+[Jouer à SS14](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS14#playground)
