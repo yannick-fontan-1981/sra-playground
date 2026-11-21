@@ -235,6 +235,54 @@
       "preparatoryContact": 0,
       "accessOffers": 0,
       "scoreReplayed": true
+    },
+    {
+      "reserved": false,
+      "code": "SS06",
+      "entry": 2,
+      "actions": 369,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 369,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "resets": 0,
+      "digest": "c559a1f24adc5854f640b7d396c779c8d8ed7f2e5e62bcd7d949cdad20bd76d4",
+      "referenceActions": 296,
+      "commonActionsAndImages": 296,
+      "firstDivergence": null,
+      "verifications": 1,
+      "placementOffers": 0,
+      "preparatoryContact": 0,
+      "accessOffers": 0,
+      "scoreReplayed": true
+    },
+    {
+      "reserved": false,
+      "code": "SS08",
+      "entry": 2,
+      "actions": 340,
+      "levels": [
+        {
+          "level": 2,
+          "won": false,
+          "actions": 340,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "resets": 0,
+      "digest": "3e17051e202b9eeb3669865bd410cbe4b1187deb9f054f8052ce0a3be310d752",
+      "referenceActions": 262,
+      "commonActionsAndImages": 262,
+      "firstDivergence": null,
+      "verifications": 2,
+      "placementOffers": 10,
+      "preparatoryContact": 0,
+      "accessOffers": 0,
+      "scoreReplayed": true
     }
   ],
   "sourceEvidence": {
@@ -399,5 +447,115 @@
       "cap": 100,
       "identicalToV76": true
     }
-  ]
+  ],
+  "ss06MatchedPreparations": {
+    "code": "SS06",
+    "level": 2,
+    "commonPrefix": 1,
+    "attempted": 37,
+    "confirmed": 37,
+    "suffixes": 195,
+    "maxSuffix": 5,
+    "equalLengthPairs": 250,
+    "differentPairs": 75,
+    "byLength": {
+      "3": 75,
+      "4": 140
+    },
+    "outcomes": {
+      "different_official_state": 75,
+      "different_position": 140
+    },
+    "scores": 0,
+    "unresolved": 0,
+    "examples": {
+      "different_official_state": {
+        "preparations": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "suffix": [
+          1,
+          1,
+          5
+        ],
+        "results": [
+          "GAME_OVER",
+          "18,37"
+        ],
+        "beforeLast": [
+          {
+            "second": [
+              18,
+              37
+            ],
+            "first": [
+              78,
+              84
+            ],
+            "state": "NOT_FINISHED"
+          },
+          {
+            "second": [
+              18,
+              37
+            ],
+            "first": [
+              78,
+              96
+            ],
+            "state": "NOT_FINISHED"
+          }
+        ]
+      },
+      "different_position": {
+        "preparations": [
+          [
+            1
+          ],
+          [
+            2
+          ]
+        ],
+        "suffix": [
+          1,
+          1,
+          4,
+          4
+        ],
+        "results": [
+          "29,36",
+          "23,36"
+        ],
+        "beforeLast": [
+          {
+            "second": [
+              23,
+              36
+            ],
+            "first": [
+              78,
+              84
+            ],
+            "state": "NOT_FINISHED"
+          },
+          {
+            "second": [
+              23,
+              36
+            ],
+            "first": [
+              78,
+              96
+            ],
+            "state": "NOT_FINISHED"
+          }
+        ]
+      }
+    }
+  }
 }

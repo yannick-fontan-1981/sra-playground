@@ -50,6 +50,18 @@ Les 100 L1 sources gagnent à budget identique de 60 actions et reproduisent tou
 
 SS09 L2 termine sans victoire à la limite de temps actif, après 279 actions. Le même pack consulte les mêmes mécanismes que sur SS07. Il n’engage aucune expérience d’arrivée indiquée. Les 254 commandes et images du préfixe comparable à v81 sont identiques. Cette évaluation établit la limite actuelle de déclenchement. La présence d’un premier placement utile et d’un relais vérifié est encore une condition d’entrée.
 
+SS08 L2 termine à la même limite en 340 actions. SIC propose dix déplacements pour préparer un placement, mais aucun ne confirme le contact avec le repère. Il n’entre donc pas dans la phase d’exploitation de l’indication. Les 262 commandes et images comparables à v81 sont identiques. Les scores de SS06, SS08 et SS09 ont tous été rejoués indépendamment.
+
+## Quel placement chercher ensuite sur SS06 ?
+
+En autonomie sur SS06 L2, v86 choisit un clic et vérifie le changement de sujet au coup 3. Il joue 369 actions avant la limite de temps. Aucune proposition de placement préparé ni victoire. Les 296 premières commandes et images coïncident avec la partie v81.
+
+Le banc part d’un même état public juste avant le clic que SIC a choisi. Il varie les déplacements du premier sujet, vérifie 37 placements suivis du même relais, puis fait jouer au second les mêmes 195 suites, longues d’une à cinq actions. La comparaison porte sur 250 paires de préparations de durée égale. Un placement change au moins un retour dans 75 de ces paires. Les suites d’une ou deux commandes donnent toujours la même position ou le même état officiel. Au troisième geste, 75 comparaisons séparent une fin de partie d’une continuation. Au quatrième, 140 séparent deux positions du second sujet. Aucun de ces essais ne gagne le niveau. Les décomptes sont des comparaisons entre paires et suites, et plusieurs recouvrent un même phénomène. [Expérience reproductible](../../../scripts/compare-parked-control-capacities.mjs)
+
+Un exemple met en évidence deux effets opposés. Juste avant le geste décisif, le second sujet est à la même position dans les deux branches et la partie est encore en cours. Avec le premier placement, le second peut avancer d’une case, mais son activation depuis l’autre site testé termine la partie. Avec l’autre placement, cette même avance est bloquée et cette même activation laisse la partie en cours. Chaque paire utilise un préfixe et une commande finale identiques. Le choix du placement dépend donc de ce que SIC veut permettre ensuite.
+
+Quand deux placements paraissent équivalents à court terme, SIC doit pouvoir conserver un geste du second comme expérience, prolonger la préparation de ce geste et vérifier **quelle possibilité du second change**. Sur cette cible, arrêter l’expérience après deux gestes manquerait tous les contrastes mesurés.
+
 ## Comparaison au même budget
 
 Essais à froid sur le moteur `f0a1ff437`, avec un maximum de 1 200 actions et 514 286 ms de temps actif par niveau. Chaque révision est figée avant son essai. Le développement des révisions successives a été informé par SS07. SS09 entier est gardé à part pour la mesure du transfert.
