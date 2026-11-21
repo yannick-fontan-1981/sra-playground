@@ -93,8 +93,8 @@ export async function openNativeBrowser({ origin, game, live, successor = false 
         qa.paints?.push({ rgba: Array.from(image.data), defeatHidden, victoryHidden });
         const interruption = qa.interruption;
         if (!interruption || qa.latest.frames.length < (interruption.minFrames ?? 1) || ++interruption.paints !== interruption.at) return;
+        qa.agentStepDisabled = document.querySelector('#agent-step').disabled;
         if (interruption.fromAgent) {
-          qa.agentStepDisabled = document.querySelector('#agent-step').disabled;
           document.querySelector('#manual-tab').click();
         }
         const control = document.querySelector(interruption.selector);

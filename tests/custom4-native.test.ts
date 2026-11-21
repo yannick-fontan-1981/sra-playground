@@ -49,13 +49,18 @@ import { SS10_LEVELS } from '../experiments/sinking-star-ss10/src/levels.ts';
 import { heroSelection as warehouseHeroSelection, lessonIds as warehouseLessonIds, observeLesson as observeWarehouseLesson, visibleHeroes as visibleWarehouseHeroes, type WarehouseLesson } from '../experiments/sinking-star-ss10/src/tutorial.ts';
 import ss10Witnesses from '../experiments/sinking-star-ss10/tests/witnesses.json' with { type: 'json' };
 import ss10Failures from '../experiments/sinking-star-ss10/tests/failures.json' with { type: 'json' };
+import { createSs11Backend } from '../src/games/sinking-star-ss11.ts';
+import { DuoPuzzleSession as ForgeDuoSession } from '../experiments/sinking-star-ss11/src/core.ts';
+import { SS11_LEVELS } from '../experiments/sinking-star-ss11/src/levels.ts';
+import { heroSelection as forgeHeroSelection, lessonIds as forgeLessonIds, observeLesson as observeForgeLesson, TUTORIAL_LEVEL as SS11_TUTORIAL_LEVEL, visibleHeroes as visibleForgeHeroes, type TranspositionLesson as ForgeLesson } from '../experiments/sinking-star-ss11/src/tutorial.ts';
+import ss11Witnesses from '../experiments/sinking-star-ss11/tests/witnesses.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS10 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS11 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 110);
+  assert.equal(GAME_CATALOG.length, 111);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -243,7 +248,7 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
+  for (const code of ['CASC', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -1273,3 +1278,76 @@ for (const { level, actions } of ss10Failures) {
     assert.equal(restored.state, 'NOT_FINISHED');
   });
 }
+
+
+test('SS11 preserves eight ordered levels, public observations, animations and twelve tutorial discoveries', async () => {
+  const { getGameByCode } = await import('../src/games/catalog.ts');
+  const entry = getGameByCode(' ss11 ')!;
+  assert.deepEqual([entry.id, entry.name, entry.group, entry.family, entry.levels, entry.availability],
+    ['ss11-c4000001', 'La Forge des Reflets', 'custom_4', 'sinking_star_duo', 8, 'playable']);
+  assert.equal(entry.sourcePath, 'experiments/sinking-star-ss11/src/levels.ts');
+  assert.deepEqual(SS11_LEVELS.map(level => level.title), [
+    'La relève du gardien', 'Le damier des cargaisons', 'Le poids du danger', 'La passerelle à contre-sens',
+    'L’écluse des remplaçants', 'Le cristal derrière deux rives', 'La cour aux deux sorties', 'Les cinq îles — le vrai transfert',
+  ]);
+  assert.equal(SS11_TUTORIAL_LEVEL, 7);
+
+  const backend = createSs11Backend(), reference = new ForgeDuoSession(SS11_LEVELS);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const lessons = new Set<ForgeLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss11 ' });
+  assert.deepEqual(current, reference.observe());
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS11' }), current);
+  const publicKeys = Object.keys(current);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss11Witnesses) {
+    assert.equal(current.level, level);
+    assert.equal(current.palette?.length, 16);
+    assert.deepEqual(visibleForgeHeroes(current.frame).map(({ kind, selected }) => ({ kind, selected })).sort((a, b) => a.kind.localeCompare(b.kind)),
+      [{ kind: 'warrior', selected: true }, { kind: 'wizard', selected: false }]);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const expected = reference.action(id, data);
+      const request = { type: 'action', actionId: id, data } as const;
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(backend.dispatch(request), expected);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleForgeHeroes(frame).map(({ kind, x, y }) => [kind, x, y]);
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      observeForgeLesson(lessons, before, current, id);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    if (level < 7) assert.equal(lessons.size, 0);
+    else assert.deepEqual(forgeLessonIds.filter(id => lessons.has(id)), [...forgeLessonIds]);
+  }
+  assert.equal(current.state, 'WIN');
+  assert.deepEqual([actions, selections, frames], [464, 45, 1338]);
+});
+
+test('SS11 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart', async () => {
+  const backend = createSs11Backend(), reference = new ForgeDuoSession(SS11_LEVELS);
+  const initial = reference.selectLevel(7);
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS11', level: 7 }), initial);
+  for (const level of [0, 9, 1.5, NaN]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS11', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: 1.5, y: 20 }, { x: -1, y: 0 }, { x: 0, y: 64 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS11 action/);
+  const data = forgeHeroSelection(initial.frame, 'wizard')!;
+  assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
+  assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(backend.dispatch({ type: 'selectLevel', level: 8 }), reference.selectLevel(8));
+  assert.deepEqual(backend.dispatch({ type: 'restart' }), reference.restart());
+});

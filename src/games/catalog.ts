@@ -1166,6 +1166,10 @@ records.push({code:'SS10',id:'ss10-c4000001',name:'L’Entrepôt Réversible',gr
   description:'Push chains of crates with the Warrior, pull them with the Thief, and build crossings with permanent supports.',
   sourcePath:'experiments/sinking-star-ss10/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS11',id:'ss11-c4000001',name:'La Forge des Reflets',group:'custom_4',family:'sinking_star_duo',levels:8,
+  description:'Push chains with the Warrior, swap places with the Wizard, and route rays and reflections through mirrors.',
+  sourcePath:'experiments/sinking-star-ss11/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

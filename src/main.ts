@@ -36,12 +36,14 @@ import { actionFeedback as transpositionFeedback, lessonIds as transpositionLess
 import { LEVEL_INFO as SS09_LEVEL_INFO } from '../experiments/sinking-star-ss09/src/level-info.ts';
 import { actionFeedback as chorusFeedback, lessonIds as chorusLessonIds, lessonPrompt as chorusPrompt, observeLesson as observeChorusLesson, TUTORIAL_LEVEL as SS09_TUTORIAL_LEVEL, visibleHeroes as visibleChorusHeroes, type ChorusLesson } from '../experiments/sinking-star-ss09/src/tutorial.ts';
 import { LEVEL_INFO as SS10_LEVEL_INFO } from '../experiments/sinking-star-ss10/src/level-info.ts';
+import { LEVEL_INFO as SS11_LEVEL_INFO } from '../experiments/sinking-star-ss11/src/level-info.ts';
+import { actionFeedback as forgeFeedback, lessonIds as forgeLessonIds, lessonPrompt as forgePrompt, observeLesson as observeForgeLesson, TUTORIAL_LEVEL as SS11_TUTORIAL_LEVEL, visibleHeroes as visibleForgeHeroes, type TranspositionLesson as ForgeLesson } from '../experiments/sinking-star-ss11/src/tutorial.ts';
 import { actionFeedback as warehouseFeedback, lessonIds as warehouseLessonIds, lessonPrompt as warehousePrompt, observeLesson as observeWarehouseLesson, visibleHeroes as visibleWarehouseHeroes, type WarehouseLesson } from '../experiments/sinking-star-ss10/src/tutorial.ts';
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
-type DuoGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10';
-const isDuoNativeGame = (code: string): code is DuoGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10';
+type DuoGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11';
+const isDuoNativeGame = (code: string): code is DuoGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11';
 const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || isDuoNativeGame(code);
 const usesNativeManualControls = (code: string): boolean => usesReflectionShortcut(code) || isDirectionalNativeGame(code);
 const fallbackPalette = [
@@ -217,6 +219,10 @@ app.innerHTML = `
               <div id="ss10-role-controls" class="utility-controls duo-role-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
                 <button type="button" class="utility-button" data-duo-slot="1" data-ss10-hero="warrior" aria-pressed="false">Guerrier · 1</button>
                 <button type="button" class="utility-button" data-duo-slot="2" data-ss10-hero="thief" aria-pressed="false">Voleur · 2</button>
+              </div>
+              <div id="ss11-role-controls" class="utility-controls duo-role-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+                <button type="button" class="utility-button" data-duo-slot="1" data-ss11-hero="warrior" aria-pressed="false">Guerrier · 1</button>
+                <button type="button" class="utility-button" data-duo-slot="2" data-ss11-hero="wizard" aria-pressed="false">Magicien · 2</button>
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
               <p id="ss02-level-info" class="native-game-level-info" lang="fr" hidden></p>
@@ -575,6 +581,52 @@ app.innerHTML = `
                   </div>
                 </details>
               </div>
+              <div id="ss11-room-help" lang="fr" hidden>
+                <p id="ss11-objective" class="native-game-level-info"></p>
+                <p class="native-game-level-info"><span id="ss11-source-label"></span> <a id="ss11-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+                <details id="ss11-tutorial" class="native-game-tutorial" open hidden>
+                  <summary>Niveau 7 · La cour aux deux sorties</summary>
+                  <div class="native-game-tutorial-content">
+                    <p id="ss11-lesson-next" aria-live="polite"></p>
+                    <ul>
+                      <li data-ss11-lesson="move">Marcher avec le personnage sélectionné.</li>
+                      <li data-ss11-lesson="select">Choisir le Guerrier ou le Magicien.</li>
+                      <li data-ss11-lesson="warrior-push">Pousser une pièce avec le Guerrier.</li>
+                      <li data-ss11-lesson="chain">Déplacer plusieurs occupants en chaîne.</li>
+                      <li data-ss11-lesson="wizard-swap">Échanger le Magicien avec une cible.</li>
+                      <li data-ss11-lesson="wizard-partner">Échanger les places des deux héros.</li>
+                      <li data-ss11-lesson="wizard-bend">Dévier la visée avec un miroir.</li>
+                      <li data-ss11-lesson="mirror-motion">Déplacer un miroir pour changer ses axes.</li>
+                      <li data-ss11-lesson="platform">Créer un appui dans l’eau.</li>
+                      <li data-ss11-lesson="mirror">Déclencher un reflet avec Espace.</li>
+                      <li data-ss11-lesson="gate">Commander une porte ou une presse.</li>
+                      <li data-ss11-lesson="goals">Occuper les deux destinations ensemble.</li>
+                    </ul>
+                    <p id="ss11-lesson-progress"></p>
+                  </div>
+                </details>
+                <details class="native-game-tutorial" open>
+                  <summary>Poussées, transpositions et reflets</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Le Guerrier pousse toute la file devant lui si son extrémité est libre. Le Magicien vise avec les flèches et échange sa place avec la première cible rencontrée. Les faces blanches dévient la visée, les dos noirs la bloquent. Le Magicien déplacé de force ne lance aucun sort.</p>
+                    <p>Espace et X activent les reflets géométriques. Le candidat le plus proche est choisi avant de vérifier son arrivée. À distance égale, les deux occupants échangent leurs places. Un + gris clair annonce un héros et un contour carré gris clair annonce une caisse. Le socle noir d’un miroir bloquant clignote en rouge.</p>
+                    <p>Une caisse immergée devient un appui fixe marqué d’un X cyan. Les monstres frappent simultanément leurs voisins orthogonaux après une action effective.</p>
+                  </div>
+                </details>
+                <details id="ss11-piston-help" class="native-game-tutorial" open hidden>
+                  <summary>La porte qui pousse</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Les boutons reliés doivent être occupés ensemble. Une presse qui se ferme pousse dans le sens de son repère. Z annule toute la cascade.</p>
+                  </div>
+                </details>
+                <details id="ss11-platform-help" class="native-game-tutorial" open hidden>
+                  <summary>Les portes-plateformes dans l’eau</summary>
+                  <div class="native-game-tutorial-content">
+                    <p class="duo-platform-legend"><span><i aria-hidden="true"></i> Déployée</span><span><i class="is-retracted" aria-hidden="true"></i> Retirée</span></p>
+                    <p>Une plateforme qui se retire laisse les appuis permanents en place.</p>
+                  </div>
+                </details>
+              </div>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -827,6 +879,7 @@ const ss07Lessons = new Set<ThiefLesson>();
 const ss08Lessons = new Set<TranspositionLesson>();
 const ss09Lessons = new Set<ChorusLesson>();
 const ss10Lessons = new Set<WarehouseLesson>();
+const ss11Lessons = new Set<ForgeLesson>();
 const duoRoomHelp = {
   SS06: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'warrior', label: 'Guerrier' }], directions: 'Flèches pour marcher ou pousser.', rooms: SS06_LEVEL_INFO,
     heroes: visibleHeroes, lessons: ss06Lessons, total: duoLessonIds.length, prompt: () => duoPrompt(ss06Lessons), tutorialLevel: 1 },
@@ -842,6 +895,10 @@ const duoRoomHelp = {
     directions: 'Flèches pour marcher, pousser ou tirer.', rooms: SS10_LEVEL_INFO,
     heroes: visibleWarehouseHeroes, lessons: ss10Lessons, total: warehouseLessonIds.length,
     prompt: () => warehousePrompt(ss10Lessons), tutorialLevel: 1 },
+  SS11: { roles: [{ kind: 'warrior', label: 'Guerrier' }, { kind: 'wizard', label: 'Magicien' }],
+    directions: 'Flèches pour marcher, pousser ou transposer.', rooms: SS11_LEVEL_INFO,
+    heroes: visibleForgeHeroes, lessons: ss11Lessons, total: forgeLessonIds.length,
+    prompt: () => forgePrompt(ss11Lessons), tutorialLevel: SS11_TUTORIAL_LEVEL },
 } as const;
 let ss06Solo = false;
 let loading = false;
@@ -1201,7 +1258,7 @@ function updateDuoRoomHelp(game: DuoGameCode, current: GameObservation | null, c
   const objective = solo
     ? 'Amène le Guerrier rouge sur l’unique contour jaune.'
     : `Amène le ${first.label} et le ${second.label} sur les deux contours jaunes en même temps.`;
-  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10') && 'objective' in info ? info.objective : objective;
+  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11') && 'objective' in info ? info.objective : objective;
   if (game === 'SS06') element('#ss06-cooperation-help').hidden = solo;
   const selected = heroes(current.frame).find(hero => hero.selected)?.kind;
   const roleAttribute = `data-${id}-hero`;
@@ -1303,6 +1360,9 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   if (next.gameCode === 'SS08' && next.level === SS08_TUTORIAL_LEVEL && previous?.level !== next.level) {
     element<HTMLDetailsElement>('#ss08-tutorial').open = true;
   }
+  if (next.gameCode === 'SS11' && next.level === SS11_TUTORIAL_LEVEL && previous?.level !== next.level) {
+    element<HTMLDetailsElement>('#ss11-tutorial').open = true;
+  }
   observation = next;
   loading = false;
   failed = false;
@@ -1314,13 +1374,14 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   interruptibleAnimation = (manualAction || isDuoNativeGame(next.gameCode)) && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
+  const reducedMotion = next.gameCode === 'SS11' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
     const requestedDuration = next.frameDurationsMs?.[i];
     const duration = requestedDuration !== undefined && Number.isFinite(requestedDuration) && requestedDuration >= 0
       ? requestedDuration : frameDuration;
-    if (i < frames.length - 1) await new Promise<void>(resolve => window.setTimeout(resolve, duration));
+    if (i < frames.length - 1 && !reducedMotion) await new Promise<void>(resolve => window.setTimeout(resolve, duration));
   }
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);
@@ -1390,6 +1451,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
       if (action !== undefined) observeWarehouseLesson(ss10Lessons, before, next, action);
       if (control === 'restart') element<HTMLDetailsElement>('#ss10-tutorial').open = true;
     }
+    if (next.gameCode === 'SS11' && action !== undefined) observeForgeLesson(ss11Lessons, before, next, action);
     if (next.gameCode === 'SS08') {
       if (action !== undefined) observeTranspositionLesson(ss08Lessons, before, next, action);
       if (next.level === SS08_TUTORIAL_LEVEL && (control === 'selectLevel' || control === 'reset')) {
@@ -1409,6 +1471,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     else if (next.gameCode === 'SS08' && action !== undefined) element('#game-feedback').textContent = transpositionFeedback(before, next, action);
     else if (next.gameCode === 'SS09' && action !== undefined) element('#game-feedback').textContent = chorusFeedback(before, next, action);
     else if (next.gameCode === 'SS10' && action !== undefined) element('#game-feedback').textContent = warehouseFeedback(before, next, action);
+    else if (next.gameCode === 'SS11' && action !== undefined) element('#game-feedback').textContent = forgeFeedback(before, next, action);
     else if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
@@ -1449,6 +1512,12 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
+  if (mode !== next && observation?.gameCode === 'SS11' && interruptibleAnimation) {
+    presentationGeneration += 1;
+    interruptibleAnimation = false;
+    busy = false;
+    paint(observation.frame, observation.palette ?? fallbackPalette);
+  }
   if (mode !== next && next === 'manual') {
     agent.invalidate('Manual control. Start a fresh experiment when ready.');
     manualReturns = [];
@@ -1492,6 +1561,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   ss08Lessons.clear();
   ss09Lessons.clear();
   ss10Lessons.clear();
+  ss11Lessons.clear();
   ss06Solo = false;
   if (isDuoNativeGame(game.code)) element<HTMLDetailsElement>(`#${game.code.toLowerCase()}-tutorial`).open = true;
   if (game.code === 'SS03' || game.code === 'SS04' || bard) {
@@ -1503,7 +1573,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
     'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
     'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'ss06-room-help', 'ss06-role-controls',
     'ss07-room-help', 'ss07-role-controls', 'ss08-room-help', 'ss08-role-controls', 'ss09-room-help',
-    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
+    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
   const primaryAction = element<HTMLButtonElement>('#space-button');
   primaryAction.hidden = directional;
   primaryAction.title = reflection ? 'Reflet (Espace ou X)' : 'Space';
