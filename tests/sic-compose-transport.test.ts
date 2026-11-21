@@ -5,14 +5,14 @@ import {chooseTransport} from '../src/sic/compose-transport.ts';
 
 const columns=9,rows=7,pitch=3,floor=1,water=2,marker=8,inks=[7,9],token=4,marks=[1,10];
 const at=(x:number,y:number)=>y*columns+x;
-type Scene={a:number;b:number;active:0|1;pieces:number[];bridges?:number[]};
+type Scene={a:number;b:number;active:0|1;pieces:number[];bridges?:number[];extraFloor?:number[]};
 const land=new Set([1,10,19,28,37,12,13,14,15,16,21,22,23,24,25,34,43]);
 const point=(n:number)=>[n%columns*pitch+1,Math.floor(n/columns)*pitch+1];
 function draw(s:Scene){
   const a=Array.from({length:rows*pitch},()=>Array<number>(columns*pitch).fill(water));
   for(let n=0;n<columns*rows;n++){
     const [x,y]=point(n),owner=n===s.a?0:n===s.b?1:undefined;
-    const values=Array<number>(9).fill(land.has(n)?floor:water);
+    const values=Array<number>(9).fill(land.has(n)||s.extraFloor?.includes(n)?floor:water);
     if(marks.includes(n)){values.fill(5);values[4]=floor;}
     if(s.pieces.includes(n)){values.fill(token);values[4]=6;}
     if(s.bridges?.includes(n))for(let k=0;k<9;k++)values[k]=k%2?4:3;
@@ -22,6 +22,20 @@ function draw(s:Scene){
   return a;
 }
 const layout={goals:marks.map(n=>{const [x,y]=point(n) as [number,number];return {at:[2*x,2*y] as [number,number],box:[x-1,y-1,x+1,y+1],form:'ring'};})};
+test('a nearer region is a verifiable intermediate objective before the supporting piece is consumed',()=>{
+  const a=at(5,5),b=at(5,1),state:Scene={a,b,active:0,pieces:[at(3,1),at(7,2)],extraFloor:[a]};
+  const switched:Scene={...state,active:1};
+  const m=detectTransportSelection(layout,draw(state),draw(switched),point(b),'click')!;
+  const tile=(v:number,center:number)=>Array.from({length:9},(_,i)=>i===4?center:v).join(',');
+  m.swap={side:1,ref:'reciprocal-motion',floor:tile(floor,floor),piece:tile(token,6)};
+  m.verified=[true,true];
+  for(const [i,[dx,dy]] of [[0,-1],[0,1],[-1,0],[1,0]].entries())m.motors['ACTION'+(i+1)]={dx:dx!,dy:dy!,ref:'motor'};
+  const offer=chooseTransport(m,draw(switched),24,100,true)!;
+  assert.ok(offer);assert.equal(offer.purpose,'move_the_pushing_subject_to_a_nearer_region');
+  assert.ok(offer.open.includes('subject_can_use_the_changed_surface'));
+  assert.ok(m.plan!.at(-1)!.after.subjects[0]!==a);
+  assert.ok(m.plan!.at(-1)!.after.pieces.includes(at(3,1)));
+});
 test('the receipt separates a remote reciprocal exchange from the creation and use of a support',()=>{
   const initial:Scene={a:at(4,1),b:at(7,2),active:0,pieces:[at(3,2),at(7,1)]};
   const switched:Scene={...initial,active:1};

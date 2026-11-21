@@ -21,7 +21,7 @@ function marks(tiles:string[],floor:string){
   const pairs=[...groups.values()].filter(v=>v.length===2);
   return pairs.length===1?pairs[0]:undefined;
 }
-export function chooseTransport(m:TransportMemory,rows:NativeRows,depth:number,limit:number):TransportForecast|undefined{
+export function chooseTransport(m:TransportMemory,rows:NativeRows,depth:number,limit:number,stageRegions=true):TransportForecast|undefined{
   const swap=m.swap;if(!swap||!m.verified.every(Boolean)||Object.keys(m.motors).length!==4)return;
   if(m.push&&(swap.side===m.push.side||swap.piece!==m.push.piece))return;
   const view=readTransport(m,rows),initial=view&&transportState(m,view);if(!view||!initial||!initial.pieces.length)return;
@@ -46,18 +46,81 @@ export function chooseTransport(m:TransportMemory,rows:NativeRows,depth:number,l
     const piece=adjacent(hole,d),behind=piece>=0?adjacent(piece,d):-1;
     if(walk.has(piece)&&!core.has(piece)&&walk.has(behind))gaps.push({hole,piece,behind});
   }
+  const preparedGaps=gaps.filter(g=>initial.pieces.includes(g.piece));
+  const shoreGoals=stageRegions&&preparedGaps.length?preparedGaps:gaps;
   const shores=new Set(gaps.map(t=>t.hole)),materials=new Set(gaps.map(t=>view.tiles[t.hole]!));
   if(m.push?.material)materials.add(m.push.material);
   const swapper=swap.side,pusher=other(swapper),[left,right]=goals as [number,number];
   const initiallyConnected=initial.subjects.some(p=>core.has(p));
+  // Backward from the push site, price a handoff from each shore. A hypothetical
+  // walk can ignore movable pieces here; the forward search still checks every move.
+  const walks=new Map<number,Map<number,number>>();
+  function walking(from:number){
+    let known=walks.get(from);if(known)return known;
+    const sites=[from];known=new Map([[from,0]]);
+    for(const p of sites)for(const [,d] of motors){
+      const to=adjacent(p,d);if(!walk.has(to)||known.has(to))continue;
+      known.set(to,known.get(p)!+1);sites.push(to);
+    }
+    walks.set(from,known);return known;
+  }
+  const aligned=(a:number,b:number)=>a%grid.columns===b%grid.columns||Math.floor(a/grid.columns)===Math.floor(b/grid.columns);
+  const regions:Map<number,number>[]=[];
+  const regionOf=new Map<number,number>();
+  for(const p of walk)if(!regionOf.has(p)){
+    const sites=walking(p);for(const site of sites.keys())regionOf.set(site,regions.length);
+    regions.push(sites);
+  }
+  const regionDistance=new Map<number,number>(),nearer:number[]=[];
+  for(const g of shoreGoals){const id=regionOf.get(g.behind)!;if(!regionDistance.has(id)){regionDistance.set(id,0);nearer.push(id);}}
+  for(const id of nearer)for(const [j,region] of regions.entries()){
+    if(regionDistance.has(j))continue;
+    if([...region.keys()].some(a=>[...regions[id]!.keys()].some(b=>aligned(a,b)))){
+      regionDistance.set(j,regionDistance.get(id)!+1);nearer.push(j);
+    }
+  }
+  const separation=(p:number)=>regionDistance.get(regionOf.get(p)!)??Infinity;
+  const startSeparation=separation(initial.subjects[pusher]);
+  const staging=stageRegions&&!initiallyConnected&&Number.isFinite(startSeparation)&&startSeparation>0;
+  const nextRegions=nearer.filter(id=>regionDistance.get(id)===startSeparation-1);
+  function handoffCost(s:TransportState,goal:number){
+    const from=s.subjects[pusher],partner=s.subjects[swapper],local=walking(from);
+    if(local.has(goal))return local.get(goal)!;
+    const shore=walking(goal),otherWalk=walking(partner),landings=new Map<number,number>();
+    if(shore.has(partner))landings.set(partner,0);
+    else for(const token of s.pieces){
+      if(!shore.has(token))continue;
+      let least=Infinity;
+      for(const [launch,steps] of otherWalk)if(aligned(launch,token))least=Math.min(least,steps+1);
+      if(Number.isFinite(least))landings.set(token,least);
+    }
+    let cost=Infinity;
+    for(const [landing,access] of landings)for(const [opposite,finish] of shore){
+      const approach=walking(landing).get(opposite)!;
+      for(const [origin,steps] of local)if(aligned(origin,opposite))cost=Math.min(cost,access+approach+steps+1+finish);
+    }
+    return Number.isFinite(cost)?cost:4+distance(from,goal)+0.5*distance(partner,goal);
+  }
   function rank(s:TransportState){
     const [a,b]=s.subjects,targets=Math.min(distance(a,left)+distance(b,right),distance(a,right)+distance(b,left));
     if(!targets)return 0;
     if(!gaps.length||initiallyConnected||s.supports.some(p=>shores.has(p)))return 2+targets;
     if(!s.pieces.length)return Infinity;
-    let nearest=Infinity;for(const g of gaps)for(const p of s.pieces){
-      const h=3*distance(p,g.piece)+distance(s.subjects[pusher],g.behind)+0.16*distance(s.subjects[swapper],g.behind);
-      nearest=Math.min(nearest,h);
+    if(staging){
+      let approach=Infinity;
+      for(const region of nextRegions){
+        // Any landing on the nearer shore establishes the next capability.
+        const representative=regions[region]!.keys().next().value!;
+        approach=Math.min(approach,handoffCost(s,representative));
+      }
+      const lost=preparedGaps.length&&!preparedGaps.some(g=>s.pieces.includes(g.piece));
+      return 18+approach+Number(Boolean(lost))*walk.size;
+    }
+    let nearest=Infinity;
+    for(const g of shoreGoals){
+      const approach=stageRegions?handoffCost(s,g.behind):distance(s.subjects[pusher],g.behind);
+      const material=Math.min(...s.pieces.map(p=>distance(p,g.piece)));
+      nearest=Math.min(nearest,3*material+approach+0.16*distance(s.subjects[swapper],g.behind));
     }
     return 18+nearest+0.1*targets;
   }
@@ -69,7 +132,9 @@ export function chooseTransport(m:TransportMemory,rows:NativeRows,depth:number,l
     if(n.cost!==visited.get(poseId(s)))continue;
     const estimate=rank(s);
     if(estimate<bestEstimate){best=n;bestEstimate=estimate;}
-    if(!estimate)break;
+    const reachedShore=staging&&separation(s.subjects[pusher])<startSeparation&&
+      (!preparedGaps.length||preparedGaps.some(g=>s.pieces.includes(g.piece)));
+    if(!estimate||reachedShore||stageRegions&&!initiallyConnected&&s.supports.some(p=>shores.has(p))){best=n;bestEstimate=estimate;break;}
     if(n.cost>=depth)continue;
     const canStand=(p:number)=>walk.has(p)||s.supports.includes(p);
     for(const side of [pusher,swapper]){
@@ -110,6 +175,7 @@ export function chooseTransport(m:TransportMemory,rows:NativeRows,depth:number,l
     path.push({state:selected,command:n.op!,after:n.state});
     if(side!==before.active)path.push({state:before,command:click(before,side),after:selected});
   }
-  m.planReason=bestEstimate===0?'prepare_access_to_both_marks':'test_a_placement_that_opens_access';
+  m.planReason=bestEstimate===0?'prepare_access_to_both_marks':staging?'move_the_pushing_subject_to_a_nearer_region':
+    stageRegions&&best.state.supports.some(p=>shores.has(p))?'create_a_support_between_regions':'test_a_placement_that_opens_access';
   m.plan=path.reverse();return offer(m.plan[0]!);
 }

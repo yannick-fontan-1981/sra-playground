@@ -101,7 +101,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const composeTransport=comparePreparations && informationPreference?.strategy==='compose_observed_transports';
+  const stageRegions=comparePreparations && informationPreference?.strategy==='compose_transport_by_region';
+  const composeTransport=stageRegions || comparePreparations && informationPreference?.strategy==='compose_observed_transports';
   const transferFooting=composeTransport || comparePreparations && informationPreference?.strategy==='transfer_registered_footing';
   const prepareJoint=transferFooting || comparePreparations && informationPreference?.strategy==='prepare_joint_arrivals';
   const reconsiderDestination=prepareJoint || comparePreparations && informationPreference?.strategy==='reclassify_displaced_goal';
@@ -135,7 +136,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const key=observedCommandKey(cmd);
       if(composeTransport&&b.available_action_refs.includes('ACTION6')){
         if(!m.transportLearning&&cmd.action_ref==='ACTION6'&&cmd.data.x!==undefined&&cmd.data.y!==undefined){
-          m.transportLearning=detectTransportSelection(before,rows,next,[cmd.data.x,cmd.data.y],a.observation_ref);
+          const selected=detectTransportSelection(before,rows,next,[cmd.data.x,cmd.data.y],a.observation_ref);
+          if(selected)m.transportLearning=selected;
         }
         if(m.transportLearning)transportResult=observeTransport(m.transportLearning,rows,next,key,a.observation_ref,x?.cooperative);
       }
@@ -189,7 +191,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         }
       }
       const cooperative=composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
-        ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes):undefined;
+        ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined;
       const landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
         ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
       const cursor=cooperative?null:landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor;
