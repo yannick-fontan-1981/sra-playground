@@ -5,13 +5,17 @@ import { getGameByCode } from '../src/games/catalog.ts';
 import { geometricComponents } from '../src/logos-engine/v6-native-observer.ts';
 import { exemplarPlans } from '../src/sic/field-exemplars.ts';
 import { fieldObligationPlans, fulfillsSite } from '../src/sic/field-obligations.ts';
+import { partialFieldPlans } from './source-partial-field-relations.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { hash, sourceReplay } from './sic-study-source-replay.mjs';
 
 const [environment, output, ...inputs] = process.argv.slice(2);
 const prior = inputs.find(s => s.startsWith('--prior='));
 const rules = prior ? JSON.parse(await readFile(prior.slice(8),'utf8')).rules : null;
-const files = inputs.filter(s => s !== prior);
+const extend = inputs.includes('--extend');
+const partial = inputs.includes('--partial') || extend;
+if (partial && !rules) throw Error('A learned relation is required for a partial field');
+const files = inputs.filter(s => s !== prior && s !== '--partial' && s !== '--extend');
 const engine = await sourceBackend(resolve(environment));
 const results = [];
 const click = ([x,y,right,bottom]) => 'ACTION6:' + [Math.floor((x+right)/2), Math.floor((y+bottom)/2)].join(',');
@@ -65,7 +69,7 @@ function tryPlan(rep, run, prefix, plan) {
       replaced:fixed?replay([click(fixed.box),...commands.slice(1)]):null};
   }
   return {prefix, examples:plan.examples, agreements:plan.agreements, orientations:plan.orientations, relativeRules:plan.relativeRules,
-    ...(plan.obligations?{cues:plan.cues.length,distinctSites:plan.obligations.length}:{}),
+    ...(plan.obligations?{cues:plan.cues.length,distinctSites:plan.obligations.length}:{}),...(plan.nullSymbols?{nullSymbols:plan.nullSymbols,unbound:plan.unbound}:{}),
     wrongAtStart:initiallyWrong.length,
     predictions, commands, stop, won, controls};
 }
@@ -81,7 +85,8 @@ for (const file of files) {
       const board = rep.restore(prefix);
       if (!board.availableActionIds.includes(6)) break;
       const parts = geometricComponents(board.frame);
-      const plans = rules ? fieldObligationPlans(board.frame,parts,rules) : exemplarPlans(board.frame,parts);
+      const plans = partial ? partialFieldPlans(board.frame,parts,rules,extend) :
+        rules ? fieldObligationPlans(board.frame,parts,rules) : exemplarPlans(board.frame,parts);
       inspected.push({prefix, plans:plans.length});
       if (plans[0]) trials.push(tryPlan(rep,run,prefix,plans[0]));
     }

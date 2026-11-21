@@ -12507,5 +12507,197 @@
         "orders": null
       }
     ]
+  },
+  "sourceCoupledFieldStudy": {
+    "methodStatus": "source laboratory only",
+    "strictProjection": {
+      "levelsExamined": 146,
+      "levelsWithTrial": 1,
+      "gamesWithTrial": [
+        "TN36"
+      ],
+      "trials": 2,
+      "results": {
+        "all_predicted_sites_obtained": 2
+      },
+      "wins": 0
+    },
+    "partialProjection": {
+      "levelsExamined": 146,
+      "levelsWithTrial": 14,
+      "gamesWithTrial": [
+        "DNOI",
+        "FT09",
+        "SYME",
+        "TN36",
+        "TRCP",
+        "WEAV"
+      ],
+      "trials": 28,
+      "results": {
+        "all_predicted_sites_obtained": 17,
+        "public_prediction_refuted": 11
+      },
+      "wins": 0
+    },
+    "uniformGoal": {
+      "levelsExamined": 146,
+      "levelsWithTrial": 15,
+      "gamesWithTrial": [
+        "CATR",
+        "DNOI",
+        "FT09",
+        "GLOB",
+        "SC25",
+        "SYME",
+        "TN36",
+        "WEAV"
+      ],
+      "trials": 50,
+      "results": {
+        "all_observed_constraints_satisfied": 24,
+        "role_measurement_changed": 15,
+        "terminal": 4,
+        "effect_depends_on_context": 2,
+        "outside_span_of_observed_controls": 5
+      },
+      "wins": 0
+    },
+    "absentOperand": {
+      "levelsExamined": 149,
+      "levelsWithTrial": 1,
+      "gamesWithTrial": [
+        "FT09"
+      ],
+      "trials": 4,
+      "results": {
+        "predicted_configuration_reached": 4
+      },
+      "wins": 0
+    },
+    "decoratedRole": {
+      "levelsExamined": 149,
+      "levelsWithTrial": 1,
+      "gamesWithTrial": [
+        "FT09"
+      ],
+      "trials": 1,
+      "results": {
+        "official_completion": 1
+      },
+      "wins": 1
+    },
+    "ft09L5": {
+      "partial": {
+        "cues": 5,
+        "distinctSites": 22,
+        "wrongAtStart": 9,
+        "stop": "predicted_configuration_reached",
+        "won": false
+      },
+      "expanded": {
+        "cues": 8,
+        "distinctSites": 26,
+        "wrongAtStart": 9,
+        "unbound": [
+          "22,12",
+          "22,28",
+          "38,44"
+        ],
+        "stop": "predicted_configuration_reached",
+        "won": false
+      },
+      "probe": {
+        "won": true,
+        "stop": "official_completion",
+        "sites": 29,
+        "decoratedSites": 3,
+        "unresolved": 0,
+        "actions": 21,
+        "initialErrors": 12,
+        "stages": {
+          "probe": 21
+        },
+        "firstThreeEffectSizes": [
+          4,
+          3,
+          5
+        ],
+        "predictionsConfirmedBeforeBoundary": 0,
+        "interventions": {
+          "repeat": {
+            "won": true,
+            "used": 21,
+            "final": "f4ca1c017efff199"
+          },
+          "withoutDecorated": {
+            "won": false,
+            "used": 18,
+            "final": "438f185e50d05273"
+          },
+          "probesOnly": {
+            "won": true,
+            "used": 21,
+            "final": "f4ca1c017efff199"
+          }
+        }
+      },
+      "transferred": {
+        "won": true,
+        "stop": "official_completion",
+        "sites": 29,
+        "decoratedSites": 3,
+        "unresolved": 0,
+        "actions": 21,
+        "initialErrors": 12,
+        "stages": {
+          "probe": 5,
+          "transferred": 16
+        },
+        "firstThreeEffectSizes": [
+          4,
+          3,
+          5
+        ],
+        "predictionsConfirmedBeforeBoundary": 15,
+        "interventions": {
+          "repeat": {
+            "won": true,
+            "used": 21,
+            "final": "f4ca1c017efff199"
+          },
+          "withoutDecorated": {
+            "won": false,
+            "used": 18,
+            "final": "438f185e50d05273"
+          },
+          "probesOnly": {
+            "won": false,
+            "used": 5,
+            "final": "95005cd9f74b7665"
+          }
+        }
+      },
+      "withoutDecoratedControls": {
+        "won": false,
+        "stop": "outside_span_of_observed_controls",
+        "sites": 29,
+        "decoratedSites": 3,
+        "unresolved": 0,
+        "actions": 26,
+        "initialErrors": 12,
+        "stages": {
+          "probe": 26
+        },
+        "firstThreeEffectSizes": [
+          1,
+          1,
+          1
+        ],
+        "predictionsConfirmedBeforeBoundary": 24,
+        "interventions": null
+      },
+      "identicalChosenInputs": true
+    }
   }
 }
