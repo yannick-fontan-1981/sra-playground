@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { returningTranslation } from './observed-animation.ts';
 
 export const arrangeTurnPostsId = 'sic_arrange_turn_posts';
 export const learnTurnPostsId = 'sic_redirect_observed_autonomous_motion';
@@ -29,6 +30,13 @@ const maxTurnPosts = 6;
 const ordered = (q: number) => (q % 4 + 4) % 4;
 const rotate = ([x, y]: NativePoint, angle: number): NativePoint =>
   [Math.round(x * Math.cos(angle) - y * Math.sin(angle)), Math.round(x * Math.sin(angle) + y * Math.cos(angle))];
+
+function actorFootprint(scene: Scene): NativePoint[] {
+  return scene.actorMask.map(offset => {
+    const [dx, dy] = rotate(offset, scene.heading * Math.PI / 2);
+    return [scene.start[0] + dx, scene.start[1] + dy];
+  });
+}
 
 const selectionCorners = ([x, y]: NativePoint, reach: number): NativePoint[] =>
   [-reach, reach].flatMap(dx => [-reach, reach].map(dy => [x + dx, y + dy] as NativePoint));
@@ -210,16 +218,21 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
     },
     async proposeInGroup(group, observation, rows, inputs, remaining, execution) {
       if (group === observedMechanicsGroup) {
-        if (learns || known?.completed !== observation.levels_completed) return null;
-        const scene = state?.epoch === observation.level_epoch ? state.scene : measure(geometricComponents(rows), rows);
-        if (!scene || scene.posts.length < 4) return null;
+        const local = state?.epoch === observation.level_epoch ? state : null;
+        // A checked selection or placement has committed this layout. A contradicted
+        // placement clears it in record(), allowing other experiments to take over.
+        if (!(local?.observedLaunch && local.layout && local.selected !== null && local.refs.at(-1) === observation.observation_ref)) {
+          if (learns || known?.completed !== observation.levels_completed) return null;
+          const scene = local?.scene ?? measure(geometricComponents(rows), rows);
+          if (!scene || scene.posts.length < 4) return null;
+        }
       }
       return this.propose(observation, rows, inputs, remaining, execution);
     },
     async propose(observation, rows, _inputs, remaining, execution): Promise<Proposal | null> {
       if (remaining < 1 || !['ACTION5','ACTION6'].every(id => observation.available_action_refs.includes(id))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
-      if (learns && !prior && !known && !execution?.readAnimatedCells) return null;
+      if (learns && !prior && !known && !execution?.readAnimatedCells && !execution?.readReturningTranslation) return null;
       const parts = geometricComponents(rows);
       const scene = prior?.scene ?? measure(parts, rows);
       if (!scene || prior && !prior.observedLaunch) return null;
@@ -229,9 +242,12 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
       const reusable = known?.completed === observation.levels_completed && known.pitch === scene.pitch
         && known.actorMask.length === scene.actorMask.length && known.actorMask.every(pixel => scene.actorMask.some(point => same(point, pixel)))
         ? known : null;
-      const receipt = learns && !prior && !reusable ? execution?.readAnimatedCells?.([scene.start]) : null;
+      const needsEvidence = learns && !prior && !reusable;
+      const center = needsEvidence ? execution?.readAnimatedCells?.([scene.start]) : null;
+      const receipt = center ?? (needsEvidence
+        ? execution?.readReturningTranslation?.(activation.action_ref, actorFootprint(scene)) : null);
       const observedLaunch = !!reusable || (receipt?.afterRef === ref && receipt.levelEpoch === observation.level_epoch &&
-        receipt.action === activation.action_ref && receipt.cells.includes(0));
+        receipt.action === activation.action_ref && ('displacement' in receipt || receipt.cells.includes(0)));
       if (learns && !prior && !observedLaunch) return null;
       const local = prior ?? { epoch: observation.level_epoch, scene, refs: reusable ? [reusable.ref] : observedLaunch && receipt ? [receipt.beforeRef, ref] : [],
         observedLaunch, selected: null, layout: null, rejected: [] };
@@ -295,7 +311,8 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { local, choice } = proposal, confirmed = checked(proposal, first, second);
       const observedLaunch = local.observedLaunch || choice.kind === 'observe' && frames.length > 2
-        && frames.some(rows => rows[local.scene.start[1]]?.[local.scene.start[0]] !== first[local.scene.start[1]]?.[local.scene.start[0]]);
+        && (frames.some(rows => rows[local.scene.start[1]]?.[local.scene.start[0]] !== first[local.scene.start[1]]?.[local.scene.start[0]])
+          || !!returningTranslation(first, second, frames, actorFootprint(local.scene)));
       const failed = choice.kind !== 'observe' && !confirmed && choice.layout;
       const positions = confirmed && choice.kind === 'place' ? movedPostPositions(local, choice) : local.positions;
       state = { ...local, observedLaunch, refs: [...local.refs.slice(-4), after.observation_ref],

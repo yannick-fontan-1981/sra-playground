@@ -134,7 +134,7 @@ import { createSicVerifyCombinedMarks } from '../sic/staged-marks.ts';
 import { createSicMoveMaskedPieces, learnSelectedAccessId } from '../sic/move-masked-pieces.ts';
 import { createSicLinkOpenings, learnLinkOpeningsId } from '../sic/link-openings.ts';
 import { createSicReproduceCue, learnAnimatedCueId } from '../sic/reproduce-cue.ts';
-import { measureAnimatedCells, measureAnimatedContact, type AnimatedContactEvidence } from '../sic/observed-animation.ts';
+import { measureAnimatedCells, measureAnimatedContact, returningTranslation, type AnimatedContactEvidence } from '../sic/observed-animation.ts';
 import { regionChanged, singleChangedPoint, solidRegionValue, type ClickMarkerEvidence } from '../sic/observed-click-regions.ts';
 import { framedRows } from './v6-coupled-displays.ts';
 import { countChangesInside } from '../sic/workspace-click.ts';
@@ -431,6 +431,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private readClickMarker?: NativeExecution['readClickMarker'];
   private readWorkspaceClick?: NativeExecution['readWorkspaceClick'];
   private readAnimatedCells?: NativeExecution['readAnimatedCells'];
+  private readReturningTranslation?: NativeExecution['readReturningTranslation'];
   private readAnimatedContact?: NativeExecution['readAnimatedContact'];
   private latestInformationLevel: number | null = null;
   private planning: { execution: NativeExecution; inputs: readonly NativeCommand[];
@@ -826,6 +827,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(this.readClickMarker ? { readClickMarker: this.readClickMarker } : {}),
       ...(this.readWorkspaceClick ? { readWorkspaceClick: this.readWorkspaceClick } : {}),
       ...(this.readAnimatedCells ? { readAnimatedCells: this.readAnimatedCells } : {}),
+      ...(this.readReturningTranslation ? { readReturningTranslation: this.readReturningTranslation } : {}),
       ...(this.readAnimatedContact ? { readAnimatedContact: this.readAnimatedContact } : {}) },
       inputs, offers: new Map(), entryOffers: new Map(), sourceStops: new Map(), coordination: [], refusals: [], observedTrials: new Map() };
     try {
@@ -1536,6 +1538,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       this.readClickMarker = undefined;
       this.readWorkspaceClick = undefined;
       this.readAnimatedCells = undefined;
+      this.readReturningTranslation = undefined;
       this.readAnimatedContact = undefined;
       if (authority === 'sicOnly' && !publicBoundary && /^ACTION[1-4]$/.test(outcome.command.action_ref)) {
         const rows = this.current!.frame_rows;
@@ -1621,6 +1624,11 @@ export class NativeV6Runtime implements NativeV6Backend {
           if (this.observation?.observation_ref !== context.afterRef) return null;
           const cells = measureAnimatedCells(first.frame_rows, rows, frames, points);
           return cells.length ? freeze({ ...context, cells }) : null;
+        };
+        this.readReturningTranslation = (action, footprint) => {
+          if (action !== context.action || this.observation?.observation_ref !== context.afterRef) return null;
+          const displacement = returningTranslation(first.frame_rows, rows, frames, footprint);
+          return displacement ? freeze({ ...context, displacement }) : null;
         };
         if (outcome.command.action_ref === 'ACTION6' && frames.length >= 3) {
           const point = [outcome.command.data.x!, outcome.command.data.y!] as const;

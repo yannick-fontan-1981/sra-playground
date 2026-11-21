@@ -1,4 +1,5 @@
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
+import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import { orderedTransientComponentPathFacts } from '../logos-engine/v6-transient-measurements.ts';
 import type { NativeBox, NativeCommand, NativePoint, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 
@@ -10,6 +11,38 @@ export type AnimatedCellEvidence = {
   readonly levelEpoch: number;
   readonly cells: readonly number[];
 };
+
+export type TransientTranslationEvidence = Omit<AnimatedCellEvidence, 'cells'> & {
+  readonly displacement: NativePoint;
+};
+
+/** Identify the same public silhouette away from its origin and then back again. */
+export function returningTranslation(before: NativeRows, after: NativeRows, frames: readonly NativeRows[],
+  footprint: readonly NativePoint[]): NativePoint | null {
+  if (!footprint.length || frames.length < 2) return null;
+  const [x, y] = footprint[0]!, color = before[y]?.[x];
+  const left = Math.min(...footprint.map(p => p[0])), top = Math.min(...footprint.map(p => p[1]));
+  const origin = [left, top].join();
+  const mask = new Set(footprint.map(([u, v]) => [u - left, v - top].join()));
+  if (color === undefined || mask.size !== footprint.length) return null;
+  function locations(rows: NativeRows) {
+    return new Set(geometricComponents(rows).filter(p => p.color === color && p.area === mask.size
+      && p.mask.every(offset => mask.has(offset.join()))).map(p => [p.bbox[0], p.bbox[1]].join()));
+  }
+  const initial = locations(before);
+  if (!initial.has(origin)) return null;
+  const final = locations(after);
+  if (final.size !== initial.size || [...initial].some(p => !final.has(p))) return null;
+  for (const frame of frames) {
+    const sites = locations(frame);
+    if (sites.has(origin) || sites.size !== initial.size) continue;
+    const entered = [...sites].filter(p => !initial.has(p));
+    if (entered.length !== 1) continue;
+    const [u, v] = entered[0]!.split(',').map(Number);
+    return [u! - left, v! - top];
+  }
+  return null;
+}
 
 export type AnimatedContact = {
   readonly contact: NativePoint | null;
