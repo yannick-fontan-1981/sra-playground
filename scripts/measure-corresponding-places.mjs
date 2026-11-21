@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import {translations} from './sic-study-registered-landmarks.mjs';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {getGameByCode} from '../src/games/catalog.ts';
@@ -14,20 +15,7 @@ const [env,out,...paths]=process.argv.slice(2), engine=await sourceBackend(resol
 const episodes=[];
 const plus=(a,b)=>a.map((v,i)=>v+b[i]), minus=(a,b)=>a.map((v,i)=>v-b[i]);
 const span=p=>Math.max(...p.map(Math.abs));
-function translations(l) {
-  const offsets=new Map();
-  for(const g of Object.values(l)){
-    if(g.length!==2)continue;
-    for(const [a,b] of [[g[0],g[1]],[g[1],g[0]]]){
-      const d=minus(b.at,a.at);
-      if(span(d)<=2*Math.max(a.box[2]-a.box[0]+1,a.box[3]-a.box[1]+1))continue;
-      const key=d.join(),w=offsets.get(key)??{d,boxes:[]};
-      if(w.boxes.every(e=>[a.box,b.box].every(p=>p[0]>e[2]||e[0]>p[2]||p[1]>e[3]||e[1]>p[3])))w.boxes.push(a.box,b.box);
-      offsets.set(key,w);
-    }
-  }
-  return [...offsets.values()].filter(w=>w.boxes.length>=4);
-}
+
 function patchChanged(b,a,p,r){
   const x=Math.round(p[0]/2),y=Math.round(p[1]/2);
   if(x-r<0||y-r<0||x+r>=b[0].length||y+r>=b.length)return null;
