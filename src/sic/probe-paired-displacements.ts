@@ -40,6 +40,7 @@ export type PairInquiry = {
   active?: string;
   initialChecked?: boolean;
   lesson?: ReusableEffects;
+  rebindAttempt?: string;
 };
 export function inquiry(lesson?: ReusableEffects): PairInquiry {
   return { learning: fresh(), ...(lesson ? { lesson } : {}) };
@@ -64,6 +65,54 @@ export function carryPair(
       ? { mobileSupports: q.learning.mobileSupports }
       : {}),
   };
+}
+export function proposeLessonTest(
+  q: PairInquiry,
+  layout: VisualLayout,
+  rows: NativeRows,
+  ref: string,
+) {
+  const lesson = q.lesson;
+  if (
+    q.active ||
+    q.rebindAttempt ||
+    !lesson?.carry ||
+    (!lesson.projections?.length && !lesson.radius)
+  )
+    return;
+  const scene = pairedScene(layout, rows, undefined, lesson.bodies);
+  if (!scene) return;
+  const tiles = picture(scene.grid, rows),
+    v = readPair(scene, tiles);
+  if (!v) return;
+  const hypotheses = visibleImages(scene, v, tiles).filter((im) =>
+    lesson.projections?.some(
+      (r) =>
+        r.pivotForm === scene.initial[im.pivot] &&
+        ((r.from === im.dir && r.to === im.out) ||
+          (r.from === im.out && r.to === im.dir)),
+    ),
+  );
+  if (!hypotheses.length && !lesson.radius) return;
+  q.scene = scene;
+  const test = forecast(
+    scene,
+    q.learning,
+    v,
+    { ...v, active: v.active === 0 ? 1 : 0 },
+    'select',
+    hypotheses.length
+      ? 'reidentify_the_partner_of_a_previously_verified_projection'
+      : 'retest_the_scope_of_the_other_subject_in_a_new_room',
+    [
+      'the_other_registered_subject_acquires_control',
+      'the_displayed_landing_can_be_checked_next',
+    ],
+    ref,
+  );
+  test.evidence.push(lesson.carry);
+  test.paired!.lesson = lesson.carry;
+  return test;
 }
 export function seePair(
   q: PairInquiry,
@@ -103,6 +152,21 @@ export function seePair(
   q.reading = next;
   watchPassage(s, m, old, next, after, ref, op);
   const previous = q.active;
+  if (
+    f?.purpose ===
+      'reidentify_the_partner_of_a_previously_verified_projection' ||
+    f?.purpose === 'retest_the_scope_of_the_other_subject_in_a_new_room'
+  ) {
+    q.rebindAttempt = ref;
+    if (
+      f.purpose ===
+        'reidentify_the_partner_of_a_previously_verified_projection' &&
+      click &&
+      old.active !== next.active &&
+      old.subjects.every((p, i) => next.subjects[i] === p)
+    )
+      q.active = 'known_subjects_reidentified_after_room_change';
+  }
   if (
     click &&
     old.active !== next.active &&

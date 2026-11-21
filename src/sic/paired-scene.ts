@@ -73,6 +73,7 @@ export function pairedScene(
   layout: VisualLayout,
   rows: NativeRows,
   preferred?: number | readonly [number, number],
+  knownBodies?: readonly [number, number],
 ): Scene | undefined {
   const tried = new Set<string>();
   for (const parts of Object.values(layout).sort(
@@ -125,7 +126,9 @@ export function pairedScene(
         : Math.floor((preferred[0] - left) / p) +
           grid.columns * Math.floor((preferred[1] - top) / p);
     const eligible = pairs.filter(
-      (pair) => wanted === undefined || pair[1].sites[0] === wanted,
+      (pair) =>
+        (wanted === undefined || pair[1].sites[0] === wanted) &&
+        (!knownBodies || pair.every((f, i) => f.center === knownBodies[i])),
     );
     if (eligible.length !== 1) continue;
     const [actor, partner] = eligible[0]!,

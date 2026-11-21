@@ -101,7 +101,7 @@ const labels: Record<Experiment['phase'], string> = {
   carry: 'Move the changed object while preserving its measured state',
   carryB: 'Test the transported change against the control from this destination',
 };
-import {inquiry,seePair,pairProposal,carryPair} from './probe-paired-displacements.ts';
+import {inquiry,seePair,pairProposal,carryPair,proposeLessonTest} from './probe-paired-displacements.ts';
 import {completionContacts} from './terminal-contact.ts';
 import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
@@ -235,7 +235,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       enter(o);
       if(remaining<1)return null;
       const focused=group===coveragePlanGroup;
-      if(focused){if(!prioritizeCoverage||!m.coverage&&!m.crossing&&!m.pairInquiry?.active)return null;group=evidencedPlanGroup;}
+      const lessonTest=learnScope && m.pairInquiry?.lesson && !m.coverage && o.available_action_refs.includes('ACTION6') && (focused||group===evidencedPlanGroup)
+        ?proposeLessonTest(m.pairInquiry,visualLayout(o,rows),rows,o.observation_ref):undefined;
+      if(focused){if(!prioritizeCoverage||!m.coverage&&!m.crossing&&!m.pairInquiry?.active&&!lessonTest)return null;group=evidencedPlanGroup;}
       const motorCount=o.available_action_refs.filter(ref=>/^ACTION[1-4]$/.test(ref)).length;
       const opening = !m.turns || (m.cursorSelection?.returns??0)>=2*Math.max(2,motorCount) ||
         (m.cursorSelection?.blocked?.length??0)>=2;
@@ -257,7 +259,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ?proposeCoverage(m.coverage,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
       const crossing=bridgeSeries&&group===evidencedPlanGroup&&m.crossing&&m.transportLearning&&limits
         ?proposeCrossing(m.crossing,m.transportLearning,rows,limits.maxDepth,limits.maxNodes):undefined;
-      const paired=learnScope&&!m.coverage&&group===evidencedPlanGroup&&m.pairInquiry&&limits?pairProposal(m.pairInquiry,o.observation_ref,limits.maxDepth,limits.maxNodes):undefined;
+      const paired=lessonTest??(learnScope&&!m.coverage&&group===evidencedPlanGroup&&m.pairInquiry&&limits?pairProposal(m.pairInquiry,o.observation_ref,limits.maxDepth,limits.maxNodes):undefined);
       if(focused&&!coverage&&!crossing&&!paired)return null;
       const cooperative=paired??coverage??crossing??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
         ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);
