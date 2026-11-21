@@ -29,6 +29,9 @@ test('a displaced partner invalidates the experiment and adjacent disclosed subs
   const m=newIndicatedMemory();
   learnIndicatedAccess(m,c,'before','after',view(4),view(8,4),'ACTION1','e');
   assert.equal(m.productions.length,0);
+  m.repair=true;
+  const probe=chooseIndicatedAccess(m,c,'after',motors,ops,{maxDepth:6,maxNodes:8})!;
+  assert.deepEqual(probe,JSON.parse(JSON.stringify(probe)));
   const moved=view(12,20);moved.partner![0]!.at=[4,0];
   learnIndicatedAccess(m,c,'after','lost',view(8),moved,'ACTION1','f');
   assert.equal(m.scenes.lost,undefined);

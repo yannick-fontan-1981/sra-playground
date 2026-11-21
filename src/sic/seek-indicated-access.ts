@@ -67,7 +67,8 @@ export function chooseIndicatedAccess(m:IndicatedMemory,c:Context,root:string,mo
     if(best&&best.value>=value)return;
     const first=path.first;
     best={value,offer:{purpose:first?'approach_indication':operation(probe)?'test_indication':'seek_preparation',
-      command:first?.command??probe,expected:first?.expected??expected,origin:path.hash,probe,cue,destination,ref}};
+      command:first?.command??probe,expected:first?.expected??expected,origin:path.hash,probe,
+      ...(cue?{cue}:{}),...(destination?{destination}:{}),...(ref?{ref}:{})}};
   }
   for(let i=0;i<queue.length&&i<limits.maxNodes;i++){
     const path=queue[i]!,s=m.scenes[path.hash]!;
