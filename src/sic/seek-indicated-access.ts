@@ -11,6 +11,7 @@ type Context=AccessContext;
 type Production={cue:string;op:string;offset:XY;form:string;ref:string};
 export type AccessExperiment={purpose:'approach_indication'|'test_indication'|'seek_preparation'|'use_mobile_indication';command:string;expected:XY;
   mobile?:MobilePlan;
+  unresolvedSite?:{reason:'between_grid_cells';cue:string;operation:string;at:XY;gridOrigin:XY;pitch:XY;ref:string};
   cue?:string;destination?:XY;ref?:string;origin:string;probe:string};
 export type IndicatedMemory={scenes:Record<string,AccessScene>;sites:Record<string,true>;productions:Production[];
   mobilePending?:MobilePlan;mobileDenied?:Record<string,true>;
@@ -84,6 +85,7 @@ export function chooseIndicatedAccess(m:IndicatedMemory,c:Context,root:string,mo
   const gap=(a:XY,b:XY)=>size(diff(cell(a,c),cell(b,c)))/c.pitch[0];
   const cueNames=[...new Set(m.productions.map(p=>p.cue))];
   let best:{value:number;offer:AccessExperiment}|undefined;
+  let unresolvedSite:AccessExperiment['unresolvedSite'];
   function consider(path:Path,probe:string,expected:XY,rank:number,cue?:string,destination?:XY,ref?:string){
     const value=rank-path.depth;
     if(best&&best.value>=value)return;
@@ -103,8 +105,11 @@ export function chooseIndicatedAccess(m:IndicatedMemory,c:Context,root:string,mo
         if(scores&&!scores.hits&&scores.misses)continue;
         // A fresh destination hypothesis must identify one traversed cell.
         // At an exact half-step rounding alone can select either neighbour.
-        if(!scores?.hits&&!cellMatches(site,cell(site,c),c.pitch))continue;
         const witness=m.productions.find(p=>p.cue===cue)!;
+        if(!scores?.hits&&!cellMatches(site,cell(site,c),c.pitch)){
+          if(path.depth===0)unresolvedSite??={reason:'between_grid_cells',cue,operation:q,at:site,gridOrigin:c.goal,pitch:c.pitch,ref:witness.ref};
+          continue;
+        }
         consider(path,q,site,4*limits.maxDepth+Number(!!scores?.hits)*limits.maxDepth-gap(site,c.goal),cue,site,witness.ref);
       }
     }
@@ -133,5 +138,6 @@ export function chooseIndicatedAccess(m:IndicatedMemory,c:Context,root:string,mo
       seen.add(next);queue.push({hash:next,depth:path.depth+1,first:path.first??{command:q,expected:m.scenes[next]!.at}});
     }}
   }
-  return best?.offer;
+  const offer=best?.offer;
+  return offer && unresolvedSite && offer.purpose!=='test_indication'?{...offer,unresolvedSite}:offer;
 }

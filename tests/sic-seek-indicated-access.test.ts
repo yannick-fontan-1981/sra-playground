@@ -31,7 +31,10 @@ test('rounding a mark halfway between two cells cannot establish a specific reac
   learnIndicatedAccess(m,context,'start','ready',view(4),view(8,10),'ACTION1','mark');
   m.repair=true;
   const choose=()=>chooseIndicatedAccess(m,context,'ready',motors,ops,{maxDepth:5,maxNodes:8});
-  assert.notEqual(choose()?.purpose,'test_indication');
+  const alternative=choose();
+  assert.notEqual(alternative?.purpose,'test_indication');
+  assert.deepEqual(alternative?.unresolvedSite,{reason:'between_grid_cells',cue:'cue',operation:'ACTION5',
+    at:[10,0],gridOrigin:[32,0],pitch:[4,4],ref:'mark'});
   m.readings['ACTION5/cue']={hits:1,misses:0};
   assert.equal(choose()?.purpose,'test_indication');
 });
