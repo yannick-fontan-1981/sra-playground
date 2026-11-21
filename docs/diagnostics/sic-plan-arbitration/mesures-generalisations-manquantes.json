@@ -2421,6 +2421,1651 @@
         "newActions": 107,
         "trajectory": "8520d7edc9a84e1cc4a4190db893e09538bfbdd46dc5d328596e1a43d10ec24d"
       }
+    ],
+    "separateL1Families": {
+      "episodes": 66,
+      "families": 66,
+      "proposals": [
+        {
+          "code": "KLOT",
+          "trials": [
+            {
+              "prefix": 19,
+              "word": [
+                "ACTION5",
+                "ACTION6:32,14",
+                "ACTION6:31,26"
+              ],
+              "origins": [
+                5,
+                9,
+                14
+              ],
+              "matches": [
+                false,
+                false,
+                false
+              ],
+              "novelScene": true,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": true,
+              "allControlsExcludeLastAnywhere": true
+            },
+            {
+              "prefix": 20,
+              "word": [
+                "ACTION6:32,14",
+                "ACTION6:31,26",
+                "ACTION3"
+              ],
+              "origins": [
+                9,
+                14,
+                16
+              ],
+              "matches": [
+                false,
+                false,
+                false
+              ],
+              "novelScene": true,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": true,
+              "allControlsExcludeLastAnywhere": true
+            }
+          ]
+        },
+        {
+          "code": "UPST",
+          "trials": [
+            {
+              "prefix": 28,
+              "word": [
+                "ACTION6:21,11",
+                "ACTION6:42,11",
+                "ACTION6:8,31"
+              ],
+              "origins": [
+                15,
+                18,
+                27
+              ],
+              "matches": [
+                true,
+                false,
+                false
+              ],
+              "novelScene": true,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": true,
+              "allControlsExcludeLastAnywhere": true
+            },
+            {
+              "prefix": 37,
+              "word": [
+                "ACTION6:21,11",
+                "ACTION6:21,10",
+                "ACTION6:8,31"
+              ],
+              "origins": [
+                15,
+                16,
+                36
+              ],
+              "matches": [
+                true,
+                true,
+                false
+              ],
+              "novelScene": true,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": true,
+              "allControlsExcludeLastAnywhere": true
+            },
+            {
+              "prefix": 38,
+              "word": [
+                "ACTION6:21,11",
+                "ACTION6:42,14",
+                "ACTION6:8,31"
+              ],
+              "origins": [
+                33,
+                26,
+                27
+              ],
+              "matches": [
+                false,
+                false,
+                false
+              ],
+              "novelScene": false,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": true,
+              "allControlsExcludeLastAnywhere": true
+            }
+          ]
+        },
+        {
+          "code": "TRIA",
+          "trials": [
+            {
+              "prefix": 19,
+              "word": [
+                "ACTION4",
+                "ACTION2",
+                "ACTION1"
+              ],
+              "origins": [
+                18,
+                15,
+                14
+              ],
+              "matches": [
+                true,
+                true,
+                true
+              ],
+              "novelScene": false,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": false,
+              "allControlsExcludeLastAnywhere": false
+            }
+          ]
+        },
+        {
+          "code": "AS66",
+          "trials": [
+            {
+              "prefix": 5,
+              "word": [
+                "ACTION3",
+                "ACTION2",
+                "ACTION1"
+              ],
+              "origins": [
+                2,
+                3,
+                1
+              ],
+              "matches": [
+                true,
+                true,
+                true
+              ],
+              "novelScene": false,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": false,
+              "allControlsExcludeLastAnywhere": false
+            },
+            {
+              "prefix": 7,
+              "word": [
+                "ACTION4",
+                "ACTION1",
+                "ACTION3"
+              ],
+              "origins": [
+                4,
+                5,
+                2
+              ],
+              "matches": [
+                true,
+                true,
+                true
+              ],
+              "novelScene": false,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": false,
+              "allControlsExcludeLastAnywhere": false
+            }
+          ]
+        },
+        {
+          "code": "THER",
+          "trials": [
+            {
+              "prefix": 8,
+              "word": [
+                "ACTION1",
+                "ACTION2",
+                "ACTION4"
+              ],
+              "origins": [
+                1,
+                3,
+                4
+              ],
+              "matches": [
+                false,
+                false,
+                false
+              ],
+              "novelScene": true,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": false,
+              "allControlsExcludeLastAnywhere": false
+            },
+            {
+              "prefix": 13,
+              "word": [
+                "ACTION1",
+                "ACTION6:32,21",
+                "ACTION6:46,21"
+              ],
+              "origins": [
+                1,
+                8,
+                9
+              ],
+              "matches": [
+                true,
+                true,
+                true
+              ],
+              "novelScene": true,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": false,
+              "allControlsExcludeLastAnywhere": false
+            }
+          ]
+        },
+        {
+          "code": "FUIT",
+          "trials": [
+            {
+              "prefix": 26,
+              "word": [
+                "ACTION1",
+                "ACTION4",
+                "ACTION2"
+              ],
+              "origins": [
+                13,
+                14,
+                17
+              ],
+              "matches": [
+                true,
+                true,
+                true
+              ],
+              "novelScene": false,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": true,
+              "allControlsExcludeLastAnywhere": true
+            },
+            {
+              "prefix": 38,
+              "word": [
+                "ACTION1",
+                "ACTION3",
+                "ACTION4"
+              ],
+              "origins": [
+                13,
+                20,
+                33
+              ],
+              "matches": [
+                true,
+                true,
+                true
+              ],
+              "novelScene": true,
+              "immediateWin": false,
+              "allEqualLengthControlsAvailable": true,
+              "allControlsExcludeLastAtSite": false,
+              "allControlsExcludeLastAnywhere": false
+            }
+          ]
+        }
+      ],
+      "noProposals": [
+        "AMZE",
+        "DNOI",
+        "HPDL",
+        "SEQN",
+        "CGWL",
+        "FITE",
+        "SERI",
+        "CONN",
+        "MEMO",
+        "SNAR",
+        "WEAV",
+        "ETAG",
+        "KATA",
+        "POLA",
+        "CASC",
+        "EVAS",
+        "LKEY",
+        "SPOR",
+        "COMB",
+        "GLOB",
+        "ONDE",
+        "SMLP",
+        "ESCT",
+        "PIPE",
+        "CAVA",
+        "GARE",
+        "LIFE",
+        "RSWP",
+        "ZIPP",
+        "COLM",
+        "PORT",
+        "SYME",
+        "DAME",
+        "GRIL",
+        "PRTL",
+        "STCK",
+        "CATR",
+        "FOGW",
+        "REWI",
+        "TRCP",
+        "CRAF",
+        "GORI",
+        "LS19",
+        "SELE",
+        "CWSE",
+        "GIGO",
+        "RECR",
+        "CATL",
+        "ELAS",
+        "ISOS",
+        "REGN",
+        "TEQU",
+        "CLRS",
+        "GMAP",
+        "SIGN",
+        "VALV",
+        "DICO",
+        "HOLE",
+        "MIND",
+        "TICT"
+      ]
+    },
+    "fourthStepFromThree": [
+      {
+        "code": "KEYD",
+        "level": 2,
+        "trials": [
+          {
+            "prefix": 56,
+            "options": 0
+          }
+        ]
+      },
+      {
+        "code": "KEYD",
+        "level": 3,
+        "trials": [
+          {
+            "prefix": 28,
+            "options": 0
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 2,
+        "trials": [
+          {
+            "prefix": 55,
+            "options": 1,
+            "op": "ACTION4",
+            "source": 38,
+            "afterFull": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "413d5f1773aac7b8"
+            },
+            "beforeC": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "4c591adc85211565"
+            },
+            "beforeA": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "feefeac845f55338"
+            },
+            "reversed": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "413d5f1773aac7b8"
+            },
+            "equalLength": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "0fb5e369e86abbe1"
+            }
+          },
+          {
+            "prefix": 64,
+            "options": 1,
+            "op": "ACTION1",
+            "source": 47,
+            "afterFull": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "2ee8d74deab60c03"
+            },
+            "beforeC": {
+              "won": false,
+              "atSite": false,
+              "anywhere": true,
+              "end": "5bd9585ee58f8d72"
+            },
+            "beforeA": {
+              "won": false,
+              "atSite": false,
+              "anywhere": true,
+              "end": "a20a6ec855b4946b"
+            },
+            "reversed": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "2ee8d74deab60c03"
+            },
+            "equalLength": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "bb0f2bb08faadbff"
+            }
+          },
+          {
+            "prefix": 84,
+            "options": 1,
+            "op": "ACTION1",
+            "source": 67,
+            "afterFull": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "77794659b59ea3b6"
+            },
+            "beforeC": {
+              "won": false,
+              "atSite": false,
+              "anywhere": true,
+              "end": "7d7da586500c2e8a"
+            },
+            "beforeA": {
+              "won": false,
+              "atSite": false,
+              "anywhere": true,
+              "end": "cfee3c026adb8c4f"
+            },
+            "reversed": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "77794659b59ea3b6"
+            },
+            "equalLength": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "5bd9585ee58f8d72"
+            }
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 3,
+        "trials": [
+          {
+            "prefix": 22,
+            "options": 0
+          },
+          {
+            "prefix": 23,
+            "options": 1,
+            "op": "ACTION3",
+            "source": 11,
+            "afterFull": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "0e1fe960feed695c"
+            },
+            "beforeC": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "b29554ad2431b1e8"
+            },
+            "beforeA": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "95758c356c69501c"
+            },
+            "reversed": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "1a54ec2b7493e4d5"
+            }
+          },
+          {
+            "prefix": 33,
+            "options": 2,
+            "op": "ACTION4",
+            "source": 13,
+            "afterFull": {
+              "won": false,
+              "atSite": true,
+              "anywhere": true,
+              "end": "9976cd0745e9b408"
+            },
+            "beforeC": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "a1342ff0c5231625"
+            },
+            "beforeA": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "6336e4a26be4847d"
+            },
+            "reversed": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "9976cd0745e9b408"
+            },
+            "equalLength": {
+              "won": false,
+              "atSite": false,
+              "anywhere": false,
+              "end": "db3055e5e946fc13"
+            }
+          }
+        ]
+      },
+      {
+        "code": "LOGI",
+        "level": 2,
+        "trials": [
+          {
+            "prefix": 42,
+            "options": 0
+          }
+        ]
+      },
+      {
+        "code": "LOGI",
+        "level": 3,
+        "trials": []
+      },
+      {
+        "code": "VOIS",
+        "level": 2,
+        "trials": []
+      },
+      {
+        "code": "VOIS",
+        "level": 3,
+        "trials": []
+      }
+    ],
+    "frozenV46": {
+      "canonicalExport": {
+        "sha": "33446a5db8f78cdeb46fab821908e8c1d814ad47",
+        "files": 2553,
+        "manifestHash": "66cbf0fc432f99b1db63fae1bf7ca381d4fa95b9228840e9c72464738ed3ece6"
+      },
+      "tests": 200,
+      "projectionCounts": {
+        "started": 117,
+        "fullyPredicted": 98,
+        "newImages": 0,
+        "returnedToOrigin": 16,
+        "refuted": 0,
+        "interrupted": 19
+      }
+    },
+    "mechanicalComparisons": [
+      {
+        "code": "SWCH",
+        "level": 2,
+        "at": 55,
+        "word": [
+          "ACTION4",
+          "ACTION3",
+          "ACTION2"
+        ],
+        "measuredTranslations": 1,
+        "movers": [
+          {
+            "shapeHash": "cbce44b0ad2d179c",
+            "size": 24,
+            "dx": 0,
+            "dy": 5,
+            "origin": [
+              14,
+              12
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 2,
+        "at": 64,
+        "word": [
+          "ACTION1",
+          "ACTION2",
+          "ACTION4"
+        ],
+        "measuredTranslations": 1,
+        "movers": [
+          {
+            "shapeHash": "cbce44b0ad2d179c",
+            "size": 24,
+            "dx": 5,
+            "dy": 0,
+            "origin": [
+              14,
+              17
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 2,
+        "at": 84,
+        "word": [
+          "ACTION2",
+          "ACTION1",
+          "ACTION4"
+        ],
+        "measuredTranslations": 1,
+        "movers": [
+          {
+            "shapeHash": "cbce44b0ad2d179c",
+            "size": 24,
+            "dx": 5,
+            "dy": 0,
+            "origin": [
+              14,
+              12
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 3,
+        "at": 23,
+        "word": [
+          "ACTION2",
+          "ACTION1",
+          "ACTION4"
+        ],
+        "measuredTranslations": 1,
+        "movers": [
+          {
+            "shapeHash": "cbce44b0ad2d179c",
+            "size": 24,
+            "dx": 5,
+            "dy": 0,
+            "origin": [
+              14,
+              7
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": true,
+                "anywhere": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "SWCH",
+        "level": 3,
+        "at": 33,
+        "word": [
+          "ACTION4",
+          "ACTION3",
+          "ACTION2"
+        ],
+        "measuredTranslations": 1,
+        "movers": [
+          {
+            "shapeHash": "cbce44b0ad2d179c",
+            "size": 24,
+            "dx": 0,
+            "dy": 5,
+            "origin": [
+              14,
+              7
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "KEYD",
+        "level": 2,
+        "at": 56,
+        "word": [
+          "ACTION3",
+          "ACTION4",
+          "ACTION5"
+        ],
+        "measuredTranslations": 0,
+        "movers": []
+      },
+      {
+        "code": "KEYD",
+        "level": 3,
+        "at": 28,
+        "word": [
+          "ACTION1",
+          "ACTION2",
+          "ACTION4"
+        ],
+        "measuredTranslations": 2,
+        "movers": [
+          {
+            "shapeHash": "d364bbd7eb08fe5a",
+            "size": 9,
+            "dx": -5,
+            "dy": 0,
+            "origin": [
+              15,
+              47
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": false
+              }
+            }
+          },
+          {
+            "shapeHash": "2a59360022b4ade1",
+            "size": 8,
+            "dx": 5,
+            "dy": 0,
+            "origin": [
+              10,
+              47
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "LOGI",
+        "level": 2,
+        "at": 42,
+        "word": [
+          "ACTION6:5,50",
+          "ACTION6:18,50",
+          "ACTION6:3,50"
+        ],
+        "measuredTranslations": 0,
+        "movers": []
+      },
+      {
+        "code": "TRIA",
+        "level": 1,
+        "at": 19,
+        "word": [
+          "ACTION4",
+          "ACTION2",
+          "ACTION1"
+        ],
+        "measuredTranslations": 0,
+        "movers": []
+      },
+      {
+        "code": "AS66",
+        "level": 1,
+        "at": 5,
+        "word": [
+          "ACTION3",
+          "ACTION2",
+          "ACTION1"
+        ],
+        "measuredTranslations": 2,
+        "movers": []
+      },
+      {
+        "code": "AS66",
+        "level": 1,
+        "at": 7,
+        "word": [
+          "ACTION4",
+          "ACTION1",
+          "ACTION3"
+        ],
+        "measuredTranslations": 0,
+        "movers": []
+      },
+      {
+        "code": "THER",
+        "level": 1,
+        "at": 13,
+        "word": [
+          "ACTION1",
+          "ACTION6:32,21",
+          "ACTION6:46,21"
+        ],
+        "measuredTranslations": 6,
+        "movers": [
+          {
+            "shapeHash": "492420171f04309c",
+            "size": 3,
+            "dx": 14,
+            "dy": 0,
+            "origin": [
+              29,
+              15
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": false
+              }
+            }
+          },
+          {
+            "shapeHash": "f4b91e076726efa7",
+            "size": 3,
+            "dx": 14,
+            "dy": 0,
+            "origin": [
+              39,
+              15
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": false
+              }
+            }
+          },
+          {
+            "shapeHash": "c77c2ad4fd45131b",
+            "size": 3,
+            "dx": 14,
+            "dy": 0,
+            "origin": [
+              29,
+              25
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": false
+              }
+            }
+          },
+          {
+            "shapeHash": "cf66858ec3ce3242",
+            "size": 3,
+            "dx": 14,
+            "dy": 0,
+            "origin": [
+              39,
+              25
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": false
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "FUIT",
+        "level": 1,
+        "at": 26,
+        "word": [
+          "ACTION1",
+          "ACTION4",
+          "ACTION2"
+        ],
+        "measuredTranslations": 2,
+        "movers": [
+          {
+            "shapeHash": "9a899ad7ffd741b6",
+            "size": 9,
+            "dx": -5,
+            "dy": 0,
+            "origin": [
+              28,
+              12
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropA": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": false
+              }
+            }
+          },
+          {
+            "shapeHash": "969b0927330c3b17",
+            "size": 9,
+            "dx": 0,
+            "dy": 5,
+            "origin": [
+              33,
+              17
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "swap": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": true
+              }
+            }
+          }
+        ]
+      },
+      {
+        "code": "FUIT",
+        "level": 1,
+        "at": 38,
+        "word": [
+          "ACTION1",
+          "ACTION3",
+          "ACTION4"
+        ],
+        "measuredTranslations": 2,
+        "movers": [
+          {
+            "shapeHash": "969b0927330c3b17",
+            "size": 9,
+            "dx": 5,
+            "dy": 0,
+            "origin": [
+              23,
+              17
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "dropA": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": true
+              },
+              "swap": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "subB": {
+                "atSite": false,
+                "anywhere": true
+              }
+            }
+          },
+          {
+            "shapeHash": "9a899ad7ffd741b6",
+            "size": 9,
+            "dx": 0,
+            "dy": 5,
+            "origin": [
+              8,
+              32
+            ],
+            "alternatives": {
+              "bare": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropA": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "dropB": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "swap": {
+                "atSite": true,
+                "anywhere": true
+              },
+              "subA": {
+                "atSite": false,
+                "anywhere": false
+              },
+              "subB": {
+                "atSite": true,
+                "anywhere": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "autonomousUpperV46": [
+      {
+        "code": "KEYD",
+        "level": 2,
+        "won": false,
+        "actions": 120,
+        "started": 6,
+        "fullyMatched": 5
+      },
+      {
+        "code": "KEYD",
+        "level": 3,
+        "won": false,
+        "actions": 120,
+        "started": 3,
+        "fullyMatched": 3
+      },
+      {
+        "code": "LOGI",
+        "level": 2,
+        "won": false,
+        "actions": 120,
+        "started": 14,
+        "fullyMatched": 14
+      },
+      {
+        "code": "LOGI",
+        "level": 3,
+        "won": false,
+        "actions": 120,
+        "started": 1,
+        "fullyMatched": 1
+      },
+      {
+        "code": "SKBN",
+        "level": 4,
+        "won": false,
+        "actions": 120,
+        "started": 19,
+        "fullyMatched": 19
+      },
+      {
+        "code": "SKBN",
+        "level": 5,
+        "won": true,
+        "actions": 61,
+        "started": 6,
+        "fullyMatched": 6
+      },
+      {
+        "code": "SWCH",
+        "level": 2,
+        "won": false,
+        "actions": 120,
+        "started": 7,
+        "fullyMatched": 6
+      },
+      {
+        "code": "SWCH",
+        "level": 3,
+        "won": false,
+        "actions": 120,
+        "started": 18,
+        "fullyMatched": 14
+      },
+      {
+        "code": "VOIS",
+        "level": 4,
+        "won": false,
+        "actions": 120,
+        "started": 19,
+        "fullyMatched": 19
+      },
+      {
+        "code": "VOIS",
+        "level": 2,
+        "won": true,
+        "actions": 31,
+        "started": 0,
+        "fullyMatched": 0
+      }
     ]
+  },
+  "coldV46": [
+    {
+      "code": "SS02",
+      "won": false,
+      "actions": 206,
+      "reason": "level_active_time_budget",
+      "v44": 323,
+      "commonPrefix": 51,
+      "firstDivergence": 52,
+      "firstForecast": 51,
+      "compositionCommands": 95,
+      "started": 25,
+      "fullyPredicted": 23,
+      "newImages": 0,
+      "returnedToOrigin": 3,
+      "refuted": 0,
+      "interrupted": 2,
+      "tapeDigest": "0fd69efa80e34e4d0a56423dec0336ef0792cbe731f3442e5ff922fceca92464"
+    },
+    {
+      "code": "SS03",
+      "won": false,
+      "actions": 190,
+      "reason": "level_active_time_budget",
+      "v44": 295,
+      "commonPrefix": 106,
+      "firstDivergence": 107,
+      "firstForecast": 107,
+      "compositionCommands": 24,
+      "started": 7,
+      "fullyPredicted": 5,
+      "newImages": 0,
+      "returnedToOrigin": 2,
+      "refuted": 0,
+      "interrupted": 2,
+      "tapeDigest": "2c87d49d45f10e29fb8b43a7931063a93acea18a39bcb01dde79c76fc847ec9e"
+    },
+    {
+      "code": "SS05",
+      "won": false,
+      "actions": 198,
+      "reason": "level_active_time_budget",
+      "v44": 292,
+      "commonPrefix": 17,
+      "firstDivergence": 18,
+      "firstForecast": 18,
+      "compositionCommands": 119,
+      "started": 30,
+      "fullyPredicted": 30,
+      "newImages": 0,
+      "returnedToOrigin": 4,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "9099e3ed1edd1ac71040abf561929890453c06b0e2d57b550ec96408fb17eb61"
+    },
+    {
+      "code": "SS06",
+      "won": false,
+      "actions": 151,
+      "reason": "level_active_time_budget",
+      "v44": 245,
+      "commonPrefix": 71,
+      "firstDivergence": 72,
+      "firstForecast": 72,
+      "compositionCommands": 3,
+      "started": 1,
+      "fullyPredicted": 1,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "5fac995ac26aff908f9500193b97e0203cc290facf9914d89db1bc3d14a2fdc6"
+    },
+    {
+      "code": "SS07",
+      "won": false,
+      "actions": 5,
+      "reason": "native_game_over",
+      "v44": 5,
+      "commonPrefix": 5,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+    },
+    {
+      "code": "SS01",
+      "won": true,
+      "actions": 44,
+      "reason": "target_levels_completed",
+      "v44": 44,
+      "commonPrefix": 44,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS04",
+      "won": true,
+      "actions": 60,
+      "reason": "target_levels_completed",
+      "v44": 60,
+      "commonPrefix": 60,
+      "firstDivergence": null,
+      "firstForecast": null,
+      "compositionCommands": 0,
+      "started": 0,
+      "fullyPredicted": 0,
+      "newImages": 0,
+      "returnedToOrigin": 0,
+      "refuted": 0,
+      "interrupted": 0,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    },
+    {
+      "code": "SS08",
+      "won": false,
+      "actions": 206,
+      "reason": "level_active_time_budget",
+      "v44": 311,
+      "commonPrefix": 9,
+      "firstDivergence": 10,
+      "firstForecast": 10,
+      "compositionCommands": 102,
+      "started": 34,
+      "fullyPredicted": 22,
+      "newImages": 0,
+      "returnedToOrigin": 4,
+      "refuted": 0,
+      "interrupted": 12,
+      "tapeDigest": "aabe095adfa2ccee3d9cdb5dc6313b7482a333a1cf2b60fb1c2f105a47d3c84f"
+    },
+    {
+      "code": "SS10",
+      "won": false,
+      "actions": 197,
+      "reason": "level_active_time_budget",
+      "v44": 336,
+      "commonPrefix": 52,
+      "firstDivergence": 53,
+      "firstForecast": 53,
+      "compositionCommands": 71,
+      "started": 20,
+      "fullyPredicted": 17,
+      "newImages": 0,
+      "returnedToOrigin": 3,
+      "refuted": 0,
+      "interrupted": 3,
+      "tapeDigest": "9c03e107a237f5bbea445ac5302e3158f363d4edd95e7fdc9be7b106fea8d1a7"
+    }
+  ],
+  "warmV46": {
+    "code": "SS01",
+    "lesson": 19,
+    "levels": [
+      {
+        "level": 2,
+        "actions": 32,
+        "won": true
+      }
+    ],
+    "tapeDigest": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+  },
+  "sourceV46": {
+    "verified": 100,
+    "wins": 99,
+    "comparedTo": "v44",
+    "identicalTrajectories": 97,
+    "changedTrajectories": [
+      {
+        "code": "UPST",
+        "won": false,
+        "actions": 60,
+        "same": false,
+        "end": "d4def29a4c8e12fa"
+      },
+      {
+        "code": "AS66",
+        "won": true,
+        "actions": 16,
+        "same": false,
+        "end": "fb4c841eea2f859a"
+      },
+      {
+        "code": "TRIA",
+        "won": true,
+        "actions": 25,
+        "same": false,
+        "end": "b2385d220e60a9bb"
+      }
+    ],
+    "guards": {
+      "KEYD": 35,
+      "SKBN": 22,
+      "GABA": 49,
+      "SWCH": 25
+    },
+    "tests": 200,
+    "canonicalExport": {
+      "sha": "33446a5db8f78cdeb46fab821908e8c1d814ad47",
+      "files": 2553,
+      "manifestHash": "66cbf0fc432f99b1db63fae1bf7ca381d4fa95b9228840e9c72464738ed3ece6"
+    }
   }
 }
