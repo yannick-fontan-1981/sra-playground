@@ -28,6 +28,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
   testMechanismMobility:'Test an untried control for moving a persistent part after a repeated return',
@@ -118,23 +119,26 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
-      if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity) return null;
+      const configurationOpportunity=(group===recurrentExperimentGroup || group===exhaustedGroup) &&
+        (m.configurations?.factors.length??0)>=2;
+      if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows,localOpportunity);
-      if(localOpportunity&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity)return null;
+      const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows,localOpportunity,configurationOpportunity);
+      if(group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (!experiment || (group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const evidence = [
         ref,
+        ...(experiment.configurationTrial?.evidence??[]),
         ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
         ...(experiment.localCapacity?.observedPrefix?Object.values(experiment.localCapacity.observedPrefix):[]),
         ...(experiment.localCapacity?.analogousUseRef?[experiment.localCapacity.analogousUseRef]:[]),
@@ -203,6 +207,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         kind: preparedEffectsId,
         actions: [command],
         experiment,
+        ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),
         ...(experiment.terminalContact?{terminalContactForecast:experiment.terminalContact}:{}),

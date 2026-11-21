@@ -188,6 +188,7 @@ async function run(code, games) {
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
       const localCapacity=plan?.localCapacityForecast?structuredClone(plan.localCapacityForecast):null;
       const localSeal=localCapacity?hash(localCapacity):null;
+      const configuration=plan?.configurationForecast;
       const mobilitySeal=plan?.mobilityForecast?hash(plan.mobilityForecast):null;
       const mechanismSeal=plan?.mechanismForecast?hash(plan.mechanismForecast):null;
       const indicatorProbeSeal=plan?.indicatorProbeForecast?hash(plan.indicatorProbeForecast):null;
@@ -227,6 +228,8 @@ async function run(code, games) {
       trajectory.update(
         JSON.stringify([action, board.frame, board.frames, board.level, board.levelsCompleted, board.state])
       );
+      if (configuration && replayCommands)
+        Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
       if (source)
         steps.push({
           a: action.id,

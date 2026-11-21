@@ -1,5 +1,6 @@
 import { assessLocal, canCompareAnotherPreparation, continuationAt, demonstratedLimit, hasLocalContrast, localCommand, newLocalMemory, observeLocal, proposeLocal, revisitedChoice, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
 import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
+import { nextConfiguration, newConfigurationMemory, observeConfiguration, type ConfigurationMemory, type ConfigurationTrial } from './configuration-trials.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
 import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
@@ -101,6 +102,7 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'testConfiguration'
     | 'localCapacity'
     | 'seekTerminalContact'
     | 'testMechanismMobility'
@@ -152,6 +154,7 @@ export type Experiment = {
   purpose?: string;
   refs: number[];
   localCapacity?: LocalForecast;
+  configurationTrial?: ConfigurationTrial;
   delayed?: DelayedTrial;
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
@@ -220,6 +223,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  configurations?: ConfigurationMemory;
   localCapacity?: LocalMemory;
   localCarry?: LocalMemory;
   returnHistory?: ReturnHistory;
@@ -811,7 +815,7 @@ export function experimentCommand(x: Experiment) {
   return first.includes(x.phase) ? x.a : x.b;
 }
 export function selectExperiment(
-  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows, localOpportunity=false
+  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows, localOpportunity=false, configurationOpportunity=false
 ): Experiment | null {
   const local=m.localCapacity;
   function bindLocal(plan:LocalForecast):Experiment {
@@ -828,6 +832,13 @@ export function selectExperiment(
     if(revision?.revised)return bindLocal(revision);
   }
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
+  if (configurationOpportunity && rows && m.configurations && !m.pending && !m.space.active &&
+      !m.equations.active && !m.occupancy?.active && !m.territory?.active && !m.frames?.active &&
+      !established?.mechanism && !established?.witnessedPreview && !established?.terminalContact) {
+    const plan = nextConfiguration(m.configurations, rows, o.available_action_refs);
+    if (plan) return { phase:'testConfiguration', origin:m.scenes.indexOf(sceneKey(o)), a:plan.action, b:plan.action,
+      rule:'test_an_unseen_configuration_of_observed_controls', configurationTrial:plan, refs:[] };
+  }
   if(local && rows && localOpportunity
       && !established?.mechanism && !established?.terminalContact && !established?.witnessedPreview
       && !m.frames?.active && !m.occupancy?.active && !m.territory?.active && !m.pending
@@ -874,6 +885,8 @@ export function recordExperiment(
     op = observedCommandKey(cmd),
     effect = measureEffect(b, a, rows, next);
   const local=m.localCapacity??=newLocalMemory();
+  if (b.level_epoch===a.level_epoch && a.levels_completed===b.levels_completed && b.state===a.state)
+    observeConfiguration(m.configurations??=newConfigurationMemory(),rows,next,op,a.observation_ref,x?.configurationTrial);
   if(!x?.localCapacity){delete local.pending;delete local.expect;}
   observeLocal(local,b,a,rows,next,op);
   const previous = m.edges[m.previous];
@@ -1009,6 +1022,12 @@ export function recordExperiment(
   if(x.localCapacity) {
     const receipt=assessLocal(local,x.localCapacity,b,a,rows,next);
     return {...out,result:'local_capacity_'+receipt.stage+(receipt.matches?'_matched':'_refuted'),localCapacity:receipt};
+  }
+  if(x.configurationTrial) {
+    const trial=x.configurationTrial;
+    const failed=m.configurations?.failures.includes(trial.from+'/'+trial.action);
+    return {...out,result:a.levels_completed>b.levels_completed?'configuration_completed_level':
+      failed?'configuration_prediction_refuted':'configuration_observed'};
   }
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
