@@ -56,6 +56,12 @@ test('an inconclusive click or an incompatible landmark spacing cannot justify i
   const inconsistent={...motion,axes:{ACTION2:{x:{d:[5,0] as XY,count:7,first:'a',last:'b'}}}};
   assert.equal(proposeLandmark(fresh,base,o,rows,{mover:inconsistent},trial,100),undefined);
 });
+test('a highlight may enclose a unique subject, while two enclosed candidates leave its role unresolved',()=>{
+  const m=observeLandmarks(undefined,base,base,'first');
+  const halo:CursorTrial={...trial,source:{...trial.source,box:[2,2,4,4]}};
+  assert.equal(proposeLandmark(m,base,o,rows,{mover:motion},halo,100)?.actor,'mover');
+  assert.equal(proposeLandmark(m,{...base,debris:[part(2,3,'debris')]},o,rows,{mover:motion},halo,100),undefined);
+});
 test('the paired-arrival preference inherits motion contrasts and respects the declared minimum',()=>{
   const p={mode:'active',strategy:'paired_arrival',minimumOutcomes:2} as const;
   assert.equal(informationPriority({strategy:'motion_contrast',distinctOutcomes:2},p),1);

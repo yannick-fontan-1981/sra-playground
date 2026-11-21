@@ -35,7 +35,15 @@ function drop(m:LandmarkMemory) {
 }
 function bodyRole(layout:VisualLayout,box:NativeBox) {
   const matches=Object.entries(layout).filter(([,g])=>g.length===1 && g[0]!.box.every((v,i)=>v===box[i]));
-  return matches.length===1?matches[0]![0]:undefined;
+  if(matches.length===1)return matches[0]![0];
+  // A selection highlight can surround the measured body. Use an enclosed
+  // singleton only when the visual layout gives it an unambiguous identity.
+  const enclosed=Object.entries(layout).filter(([,g])=>{
+    if(g.length!==1)return false;
+    const b=g[0]!.box;
+    return b[0]!>=box[0] && b[1]!>=box[1] && b[2]!<=box[2] && b[3]!<=box[3];
+  });
+  return enclosed.length===1?enclosed[0]![0]:undefined;
 }
 function singleton(l:VisualLayout,role:string){const g=l[role];return g?.length===1?g[0]:undefined;}
 function covered(l:VisualLayout,a:Assignment,site:XY) {
