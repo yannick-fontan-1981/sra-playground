@@ -9,7 +9,7 @@ import type {
   NativeRecord,
   NativeRows,
 } from '../logos-engine/v6-native-types.ts';
-import { composeRewrites, learnRewrites, observedRewrite, type Rewrite } from './rewrite-composition.ts';
+import { composeRewrites, effectSite, learnRewrites, observedRewrite, recordCompositionCoverage, type CompositionCoverage, type Rewrite } from './rewrite-composition.ts';
 import { observedCommandKey } from './observed-command-frontier.ts';
 import { sicNeedId } from './need-identity.ts';
 import { actionRelation, type Step } from './composition-context.ts';
@@ -31,9 +31,10 @@ type State = {
   active: Goal | null;
   trials: number;
   rewrites?:Rewrite[]; verifiedPrograms?:Rewrite[][]; attempted?:{origin:string;word:string}[]; pendingProgram?:ProgramTrial;
+  coverage?:CompositionCoverage; completedGoals?:string[];
 };
 const initial = (epoch = 0): State => ({ epoch, history: [], motions: [], tests: {}, active: null, trials: 0 });
-type ProgramTrial = { steps:Rewrite[]; index:number; origin:string };
+type ProgramTrial = { steps:Rewrite[]; index:number; origin:string; nextEffect?:string };
 type Offer = NativeProposal & { goal: Goal | null; context: string; needId: string; trigger: string; program?:ProgramTrial };
 function readyStep(step:Rewrite,rows:NativeRows) {
   const width=rows[0]!.length,value=(p:number)=>rows[Math.floor(p/width)]?.[p%width];
@@ -157,6 +158,9 @@ export function createCompositionTrials(): NativeFamily<Offer> {
     if (before.level_epoch !== after.level_epoch || before.state !== after.state || before.levels_completed!==after.levels_completed)return;
     if (state.epoch !== before.level_epoch) state = initial(before.level_epoch);
     recordCompositionStep(state, before, after, command);
+    const coverage=state.coverage??={};
+    recordCompositionCoverage(coverage,first,observedCommandKey(command));
+    recordCompositionCoverage(coverage,second);
     if(before.frame_hash!==after.frame_hash)learnRewrites(state.rewrites??=[],first,second,observedCommandKey(command),state.history.length);
   };
   return {
@@ -191,10 +195,12 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       if(!program&&state.rewrites?.length&&(returning||replaying||revisiting)){
         const blocked=new Set((state.attempted??[]).filter(p=>p.origin===observation.frame_hash).map(p=>p.word));
         const stalledInputs=new Set(history.filter(s=>s.source===scene(observation)&&s.effect==='unchanged').map(s=>s.key));
-        const depth=Math.min(remaining,state.verifiedPrograms?.length?4:3);
+        const depth=Math.min(remaining-1,state.verifiedPrograms?.length?4:3);
         const proposed=composeRewrites(state.rewrites,rows,history.map(s=>s.key),observation.available_action_refs,blocked,
-          {length:depth,limit:700,verified:state.verifiedPrograms,blocked:stalledInputs});
-        if(proposed)program={steps:proposed.steps,index:0,origin:observation.frame_hash};
+          {length:depth,limit:700,verified:state.verifiedPrograms,blocked:stalledInputs,coverage:state.coverage,
+            requireContinuation:true,completed:new Set(state.completedGoals)});
+        if(proposed?.continuation)program={steps:[...proposed.steps,proposed.continuation],index:0,origin:observation.frame_hash,
+          nextEffect:effectSite(proposed.continuation)};
       }
       const needed=program?.steps[program.index]?.op;
       let synthesized=needed?available.find(cmd=>observedCommandKey(cmd)===needed):undefined;
@@ -312,13 +318,14 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       let outcome:string|undefined;
       if(p.program){
         const {steps,index,origin}=p.program,word=steps.map(r=>r.op).join('/');
-        if(!index)state.attempted=[...(state.attempted??[]).slice(-31),{origin,word}];
+        if(!index)state.attempted=[...(state.attempted??[]).slice(-31),{origin,word:p.program.nextEffect?steps.slice(0,-1).map(s=>s.op).join('/'):word}];
         const matched=a.level_epoch===b.level_epoch&&a.levels_completed===b.levels_completed&&a.state===b.state
           && observedRewrite(steps[index]!,first,second);
         delete state.pendingProgram;
-        if(matched&&index+1<steps.length){state.pendingProgram={steps,index:index+1,origin};outcome='confirmed_prefix';}
+        if(matched&&index+1<steps.length){state.pendingProgram={...p.program,index:index+1};outcome='confirmed_prefix';}
         else if(matched){
           state.verifiedPrograms=[...(state.verifiedPrograms??[]).slice(-3),steps];
+          if(p.program.nextEffect)state.completedGoals=[...new Set([...(state.completedGoals??[]).slice(-31),p.program.nextEffect])];
           outcome='confirmed_program';
         }else {
           if(index>=2)state.verifiedPrograms=[...(state.verifiedPrograms??[]).slice(-3),steps.slice(0,index)];

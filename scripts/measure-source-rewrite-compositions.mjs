@@ -2,7 +2,7 @@ import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import assert from 'node:assert/strict';
 import {GAME_CATALOG,getGameByCode} from '../src/games/catalog.ts';
-import {learnRewrites,composeRewrites,observedRewrite,translatedOutcome} from '../src/sic/rewrite-composition.ts';
+import {learnRewrites,composeRewrites,observedRewrite,translatedOutcome,recordCompositionCoverage} from '../src/sic/rewrite-composition.ts';
 import {sourceBackend} from './sic-study-source-games.mjs';
 import {sourceReplay,hash,op} from './sic-study-source-replay.mjs';
 
@@ -15,12 +15,14 @@ const reports=[];
 for(const file of files)for(const line of (await readFile(file,'utf8')).trim().split(/\r?\n/)){
   const run=JSON.parse(line),game=getGameByCode(run.code);assert.ok(game&&game.group!=='custom_4');
   if(run.error||held.has(game.family)||run.resets||run.observedPriorLevelActions||run.sourcePrefixActions||run.finish!==run.start)continue;
-  const rep=sourceReplay(engine,{},run),bank=[],history=[],tested=new Set(),trials=[];
+  const rep=sourceReplay(engine,{},run),bank=[],history=[],tested=new Set(),trials=[],coverage={};
   let board=rep.restore(0);
   const states=new Set([hash(board)]);
   for(const [i,s] of run.steps.entries()){
     const current=hash(board),available=board.availableActionIds.map(n=>'ACTION'+n);
-    const candidate=i+length<=run.cap&&i>=length&&trials.length<3?composeRewrites(bank,board.frame,history,available,tested,{length}):null;
+    recordCompositionCoverage(coverage,board.frame);
+    const candidate=i+length<=run.cap&&i>=length&&trials.length<3?composeRewrites(bank,board.frame,history,available,tested,
+      {length,...(args.includes('--frontier')?{coverage}:{})}):null;
     if(candidate){
       const [a,b]=candidate.steps,c=candidate.steps.at(-1),word=candidate.steps.map(r=>r.op),d=[...new Set(history)].find(k=>!word.includes(k)&&available.includes(k.split(':')[0]));
       tested.add(word.join('/'));
@@ -59,10 +61,12 @@ for(const file of files)for(const line of (await readFile(file,'utf8')).trim().s
         [arms.bc,arms.ac]=removed;
         if(d)[arms.dbc,arms.adc]=substituted;
       }
-      trials.push({at:i,word,refs:candidate.steps.map(r=>r.ref),changed:candidate.steps.map(r=>r.changes.length),kind:candidate.terminalKind,arms,removed,substituted,withSuffix});
+      trials.push({at:i,word,refs:candidate.steps.map(r=>r.ref),changed:candidate.steps.map(r=>r.changes.length),kind:candidate.terminalKind,
+        ...(candidate.continuation?{forecastNext:{op:candidate.continuation.op,source:candidate.continuation.ref}}:{}),arms,removed,substituted,withSuffix});
       board=rep.restore(i);
     }
     const key=op(s),next=rep.act(key);assert.equal(hash(next).slice(0,16),s.to);
+    recordCompositionCoverage(coverage,board.frame,key);
     if(next.state==='NOT_FINISHED'&&!rep.win(next))learnRewrites(bank,board.frame,next.frame,key,i+1,!args.includes('--fragments'));
     history.push(key);board=next;states.add(hash(board));
   }

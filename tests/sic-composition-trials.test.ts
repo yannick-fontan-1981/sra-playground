@@ -99,17 +99,19 @@ test('an addressed action distinguishes a new region from repeating the same com
 
 test('executes one inferred link at a time and retains a verified prefix on refutation',async()=>{
   const family=createCompositionTrials(),start=observation('start'),other=observation('elsewhere');
+  const initialRows=[[0,0]];
   for(let i=0;i<4;i++){
-    await family.observePublicOutcome!(start,other,control(4),frame,frame);
-    await family.observePublicOutcome!(other,start,control(3),frame,frame);
+    await family.observePublicOutcome!(start,other,control(4),initialRows,initialRows);
+    await family.observePublicOutcome!(other,start,control(3),initialRows,initialRows);
   }
   const steps=[
     {op:'ACTION1',ref:5,count:1,size:1,changes:[[0,0,1]]},
     {op:'ACTION2',ref:2,count:1,size:2,changes:[[0,1,0],[1,0,1]]},
     {op:'ACTION3',ref:7,count:1,size:1,changes:[[1,1,2]]},
+    {op:'ACTION4',ref:4,count:1,size:1,changes:[[1,2,3]]},
   ];
   family.restore({...family.state(),rewrites:steps});
-  let b=start,rows=[[0,0]],group=cycleGroup;
+  let b=start,rows=initialRows,group=cycleGroup;
   for(const [i,result] of [[[1,0]],[[0,1]],[[0,1]]].entries()){
     const proposal=await family.proposeInGroup!(group,b,rows,inputs,20);
     assert.ok(proposal?.program);

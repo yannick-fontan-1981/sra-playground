@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {composeRewrites,joinPrograms,primitiveProgram,type Rewrite} from '../src/sic/rewrite-composition.ts';
+import {composeRewrites,joinPrograms,primitiveProgram,recordCompositionCoverage,type CompositionCoverage,type Rewrite} from '../src/sic/rewrite-composition.ts';
 
 function rule(op:string,ref:number,changes:Rewrite['changes']):Rewrite {
   return {op,ref,changes,count:1,size:changes.length};
@@ -32,4 +32,19 @@ test('combines two independently reachable effects for a joint demand and can us
     {length:2,targets:[{site:0,value:1},{site:1,value:1}]})?.steps.map(s=>s.op),['Q','R']);
   const assembled=composeRewrites([move,use],rows,[],inputs,new Set(),{length:4,target:{site:3,value:1},verified:[[unlock,relay]]});
   assert.deepEqual(assembled?.steps.map(s=>s.op),inputs);
+});
+test('ranks a chain for the measured operation it opens and retires an already explored continuation',()=>{
+  const coverage:CompositionCoverage={};
+  recordCompositionCoverage(coverage,rows);
+  const pick=()=>composeRewrites(bank,rows,[],inputs,new Set(),{length:3,coverage,requireContinuation:true});
+  assert.equal(pick(),null);
+  recordCompositionCoverage(coverage,rows,'B');
+  assert.deepEqual(pick()?.steps.map(s=>s.op),['A','B','C']);
+  assert.equal(pick()?.continuation?.op,'D');
+  const knownResult:CompositionCoverage={};
+  recordCompositionCoverage(knownResult,rows,'B');
+  recordCompositionCoverage(knownResult,[[0,2,0,1]]);
+  assert.equal(composeRewrites(bank,rows,[],inputs,new Set(),{length:3,coverage:knownResult,requireContinuation:true}),null);
+  recordCompositionCoverage(coverage,[[0,2,1,0]],'D');
+  assert.equal(pick(),null);
 });

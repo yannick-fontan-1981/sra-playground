@@ -3849,7 +3849,189 @@
         "started": 0,
         "fullyMatched": 0
       }
-    ]
+    ],
+    "sourceSelectionPilots": {
+      "fourthOperation": [
+        {
+          "code": "KEYD",
+          "level": 2,
+          "won": true,
+          "actions": 63,
+          "started": 0,
+          "complete": 0
+        },
+        {
+          "code": "LOGI",
+          "level": 2,
+          "won": true,
+          "actions": 53,
+          "started": 0,
+          "complete": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 4,
+          "won": true,
+          "actions": 63,
+          "started": 0,
+          "complete": 0
+        },
+        {
+          "code": "SWCH",
+          "level": 2,
+          "won": false,
+          "actions": 120,
+          "started": 2,
+          "complete": 2
+        },
+        {
+          "code": "VOIS",
+          "level": 4,
+          "won": false,
+          "actions": 120,
+          "started": 4,
+          "complete": 4
+        }
+      ],
+      "fourthOperationWithUnvisitedDestination": [
+        {
+          "code": "KEYD",
+          "level": 2,
+          "won": true,
+          "actions": 63,
+          "started": 0,
+          "complete": 0
+        },
+        {
+          "code": "LOGI",
+          "level": 2,
+          "won": true,
+          "actions": 53,
+          "started": 0,
+          "complete": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 4,
+          "won": true,
+          "actions": 63,
+          "started": 0,
+          "complete": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 5,
+          "won": true,
+          "actions": 107,
+          "started": 0,
+          "complete": 0
+        },
+        {
+          "code": "SWCH",
+          "level": 2,
+          "won": false,
+          "actions": 120,
+          "started": 1,
+          "complete": 1
+        },
+        {
+          "code": "UPST",
+          "level": 1,
+          "won": true,
+          "actions": 57,
+          "started": 2,
+          "complete": 0
+        },
+        {
+          "code": "VOIS",
+          "level": 4,
+          "won": false,
+          "actions": 120,
+          "started": 6,
+          "complete": 6
+        }
+      ],
+      "UPST1Omissions": {
+        "groups": [
+          {
+            "start": 28,
+            "end": 29,
+            "plan": 4
+          },
+          {
+            "start": 41,
+            "end": 43,
+            "plan": 4
+          }
+        ],
+        "arms": [
+          {
+            "omitted": [],
+            "won": true,
+            "issued": 57
+          },
+          {
+            "omitted": [
+              29
+            ],
+            "won": true,
+            "issued": 55
+          },
+          {
+            "omitted": [
+              42
+            ],
+            "won": true,
+            "issued": 54
+          },
+          {
+            "omitted": [
+              29,
+              42
+            ],
+            "won": true,
+            "issued": 52
+          }
+        ]
+      },
+      "fourthOperationControls": [
+        {
+          "prefix": 64,
+          "op": "ACTION1",
+          "source": 47,
+          "afterFull": {
+            "won": false,
+            "atSite": true,
+            "anywhere": true,
+            "end": "2ee8d74deab60c03"
+          },
+          "beforeC": {
+            "won": false,
+            "atSite": false,
+            "anywhere": true,
+            "end": "5bd9585ee58f8d72"
+          },
+          "beforeA": {
+            "won": false,
+            "atSite": false,
+            "anywhere": true,
+            "end": "a20a6ec855b4946b"
+          },
+          "reversed": {
+            "won": false,
+            "atSite": true,
+            "anywhere": true,
+            "end": "2ee8d74deab60c03"
+          },
+          "equalLength": {
+            "won": false,
+            "atSite": true,
+            "anywhere": true,
+            "end": "bb0f2bb08faadbff"
+          }
+        }
+      ]
+    }
   },
   "coldV46": [
     {
