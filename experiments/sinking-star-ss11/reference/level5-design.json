@@ -1,111 +1,124 @@
 {
   "spec": {
     "id": "ss11-05",
-    "title": "La passerelle à contre-sens",
+    "title": "L’écluse des remplaçants",
     "rows": [
-      "~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~g~~~~~~~~~~~~",
-      "~~~~~~g~~~~~~~~~~~~",
-      "~~~~~~.#~~~~~~~~~~~",
-      "~~~~~~~o#~~~~~~~~~~",
-      "~~....~#~~~~~~~~~~~",
-      "~~Z....~~..~~~~~~~~",
-      "~~.W.#...........~~",
-      "~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~",
-      "~~~~~~~~~~~~~~~~~~~"
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~....~######~~~~~~~~",
+      "~..W.~#...o#~~~~~~~~",
+      "~....~######~~~~~~~~",
+      "~~~~Z~~~~.~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~",
+      "~~~~......~~~~~~~~~~",
+      "~~~~......~~~~~~~g.~",
+      "~~~~......~~~~~~~..~",
+      "~~~~~~~~~o~~~~o.~..~",
+      "~~~~~~~~~~~~~~.~~.g~",
+      "~~~~~~~~~......~~~~~",
+      "~~~~~~~~~......~~~~~",
+      "~~~~~~~~~......~~~~~",
+      "~~~~~~~~~~~~~~~~~~~~"
     ],
     "facing": "E",
     "mirrors": [
       {
         "at": {
-          "x": 10,
-          "y": 8
+          "x": 9,
+          "y": 4
         },
-        "facing": "NE"
+        "facing": "SW"
       }
     ],
     "circuits": [
       {
-        "id": "appui",
+        "id": "premier",
         "buttons": [
           {
-            "x": 3,
-            "y": 6
+            "x": 4,
+            "y": 4
           }
         ],
-        "color": 7
+        "color": 0
+      },
+      {
+        "id": "deuxieme",
+        "buttons": [
+          {
+            "x": 9,
+            "y": 9
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "troisieme",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 9
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 2
+          }
+        ],
+        "color": 14
       }
     ],
     "gates": [
       {
         "at": {
-          "x": 7,
-          "y": 5
+          "x": 10,
+          "y": 2
         },
-        "circuit": "appui",
+        "circuit": "premier",
         "direction": "W",
-        "closedWhen": "pressed"
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 2
+        },
+        "circuit": "deuxieme",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 2
+        },
+        "circuit": "troisieme",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 16,
+          "y": 9
+        },
+        "circuit": "sortie",
+        "activeWhen": "pressed"
       }
     ]
   },
-  "commands": "CURRDRRDRRRURXRRRRCURRRDRRRURXLLLLCLCLLLLLULCRRXUUUCDXUU",
+  "commands": "CRCDRDDDDDRRRRRCRCDDCRRRUUCDRRRRRUURRRDR",
   "actions": [
     {
       "id": 6,
       "data": {
-        "x": 9,
-        "y": 36
+        "x": 15,
+        "y": 21
       }
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 5
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
     },
     {
       "id": 4
@@ -114,20 +127,26 @@
       "id": 6,
       "data": {
         "x": 12,
-        "y": 39
+        "y": 15
       }
     },
     {
-      "id": 1
+      "id": 2
     },
     {
       "id": 4
     },
     {
-      "id": 4
+      "id": 2
     },
     {
-      "id": 4
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
     },
     {
       "id": 2
@@ -142,69 +161,39 @@
       "id": 4
     },
     {
-      "id": 1
+      "id": 4
     },
     {
       "id": 4
     },
     {
-      "id": 5
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
       "id": 6,
       "data": {
-        "x": 48,
-        "y": 39
+        "x": 30,
+        "y": 36
       }
     },
     {
-      "id": 3
+      "id": 4
     },
     {
       "id": 6,
       "data": {
-        "x": 48,
-        "y": 39
+        "x": 30,
+        "y": 33
       }
     },
     {
-      "id": 3
+      "id": 2
     },
     {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 3
+      "id": 2
     },
     {
       "id": 6,
       "data": {
-        "x": 24,
-        "y": 39
+        "x": 45,
+        "y": 36
       }
     },
     {
@@ -214,10 +203,7 @@
       "id": 4
     },
     {
-      "id": 5
-    },
-    {
-      "id": 1
+      "id": 4
     },
     {
       "id": 1
@@ -229,211 +215,285 @@
       "id": 6,
       "data": {
         "x": 30,
-        "y": 36
+        "y": 39
       }
     },
     {
       "id": 2
     },
     {
-      "id": 5
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 1
     },
     {
       "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
     }
   ],
   "source": {
     "piston": true,
-    "platform": false,
-    "label": "Heroes and Mirrors — énigme 21",
-    "puzzle": 21,
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-21",
-    "adaptation": true
+    "platform": true,
+    "puzzle": 4,
+    "label": "Adaptation de Heroes and Light · énigme 4 · remplacer les poids avant de relâcher les presses",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4",
+    "objective": "Remplacer les poids par échanges, construire deux appuis puis libérer les trois commandes dans l’ordre pour livrer la cargaison sur le bouton de sortie."
   },
   "metrics": {
-    "actions": 56,
+    "actions": 40,
     "selections": 6,
-    "warriorPushes": 4,
+    "warriorPushes": 2,
     "thiefPulls": 0,
     "partnerMoves": 0,
     "chainPushes": 0,
-    "stoneMoves": 1,
-    "mirrorMoves": 4,
-    "reflections": 4,
-    "heroReflections": 4,
-    "pistonPushes": 1,
-    "platformsCreated": 1,
+    "stoneMoves": 7,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 3,
+    "platformsCreated": 2,
     "monstersRemoved": 0,
     "blocked": 0,
     "deaths": 0
   },
   "stages": [
     {
-      "label": "La presse latérale crée l’appui de réception entre les deux rives.",
-      "turn": 3,
+      "label": "Le rayon dévié échange le Magicien et le premier poids ; les commandes restent occupées",
+      "turn": 2,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
             "x": 3,
-            "y": 12
+            "y": 4
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 3,
+            "x": 9,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "premier": true,
+        "deuxieme": true,
+        "troisieme": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le premier poids devient un appui ; le Guerrier remplace encore son poids sur le bouton",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "premier": true,
+        "deuxieme": true,
+        "troisieme": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Guerrier quitte la commande blanche : la première presse avance la cargaison",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "premier": false,
+        "deuxieme": true,
+        "troisieme": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Magicien remplace le deuxième poids ; la commande cyan reste tenue par la caisse",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
             "y": 10
           }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 6,
-          "y": 9
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 10,
-            "y": 12
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "appui": true
-      }
-    },
-    {
-      "label": "Le Magicien passe derrière le miroir par le petit palier nord.",
-      "turn": 18,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 3,
-            "y": 12
-          }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 15,
-            "y": 12
+            "x": 14,
+            "y": 11
           }
         }
       ],
-      "stones": [],
-      "supports": [
+      "stones": [
         {
-          "x": 6,
-          "y": 9
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 10,
-            "y": 12
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "appui": false
-      }
-    },
-    {
-      "label": "Le Guerrier rejoint son partenaire, puis recule le miroir jusqu’à la butée.",
-      "turn": 34,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 7,
-            "y": 12
-          }
+          "x": 9,
+          "y": 4
         },
         {
-          "kind": "wizard",
-          "at": {
-            "x": 15,
-            "y": 12
-          }
+          "x": 9,
+          "y": 11
         }
       ],
-      "stones": [],
       "supports": [
         {
-          "x": 6,
-          "y": 9
+          "x": 4,
+          "y": 7
         }
       ],
       "mirrors": [
         {
           "at": {
-            "x": 6,
-            "y": 12
+            "x": 9,
+            "y": 6
           },
-          "facing": "NE"
+          "facing": "SW"
         }
       ],
       "monsters": [],
       "circuits": {
-        "appui": false
+        "premier": false,
+        "deuxieme": true,
+        "troisieme": true,
+        "sortie": false
       }
     },
     {
-      "label": "L’échange entre partenaires remet le Magicien près du miroir sans pousser son compagnon.",
-      "turn": 36,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 15,
-            "y": 12
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 7,
-            "y": 12
-          }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 6,
-          "y": 9
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 6,
-            "y": 12
-          },
-          "facing": "NE"
-        }
-      ],
-      "monsters": [],
-      "circuits": {
-        "appui": false
-      }
-    },
-    {
-      "label": "Le Magicien se reflète sur l’appui fabriqué par la presse.",
-      "turn": 51,
+      "label": "La deuxième caisse construit le passage inférieur ; le Guerrier tient encore le bouton cyan",
+      "turn": 19,
       "heroes": [
         {
           "kind": "warrior",
@@ -445,38 +505,252 @@
         {
           "kind": "wizard",
           "at": {
-            "x": 6,
-            "y": 6
+            "x": 14,
+            "y": 11
           }
         }
       ],
-      "stones": [],
+      "stones": [
+        {
+          "x": 9,
+          "y": 4
+        }
+      ],
       "supports": [
         {
-          "x": 6,
-          "y": 9
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 12
         }
       ],
       "mirrors": [
         {
           "at": {
-            "x": 6,
-            "y": 12
+            "x": 9,
+            "y": 6
           },
-          "facing": "NE"
+          "facing": "SW"
         }
       ],
       "monsters": [],
       "circuits": {
-        "appui": false
+        "premier": false,
+        "deuxieme": true,
+        "troisieme": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "La commande cyan se libère et la deuxième presse avance la cargaison vers la dernière chambre",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "premier": false,
+        "deuxieme": false,
+        "troisieme": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Magicien quitte la commande violette : la troisième presse livre la cargaison sur le bouton vert",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "premier": false,
+        "deuxieme": false,
+        "troisieme": false,
+        "sortie": true
+      }
+    },
+    {
+      "label": "La plateforme de sortie est maintenant maintenue par la cargaison distante",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "premier": false,
+        "deuxieme": false,
+        "troisieme": false,
+        "sortie": true
+      }
+    },
+    {
+      "label": "Le Guerrier emprunte les deux appuis construits puis rejoint la deuxième destination",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "premier": false,
+        "deuxieme": false,
+        "troisieme": false,
+        "sortie": true
       }
     }
   ],
-  "adaptation": [
-    "Adaptation originale du passage sur une rangée : il faut atteindre l’autre côté du miroir, puis le pousser vers la gauche pour préparer le reflet de sortie.",
-    "La caisse de la presse est isolée par trois murs. Seule la poussée vers la gauche de la porte peut la déposer dans l’eau, sur la case de réception utile.",
-    "Un second trou reste volontairement ouvert devant l’appui : le bouton seul ne permet pas de traverser à pied, il faut aussi déplacer et utiliser le miroir.",
-    "Le petit palier nord et les deux positions de sortie permettent de régler l’ordre du duo. L’échange du Magicien est employé dans la route constructive, sans affirmation d’unicité de solution.",
-    "Route constructive enregistrée directement pendant la conception ; aucune recherche exhaustive ni vérification d’unicité."
-  ]
+  "adaptation": "Adaptation du principe de Heroes and Light 4 : trois poussées latérales dépendent du remplacement des occupants de commandes. Le dragon de la source est remplacé par une caisse sans feu, enfermée dans une écluse inaccessible aux héros. Les deux cristaux deviennent deux caisses échangeables ; après chaque remplacement, le Guerrier les pousse dans l’eau pour avancer et quitter le bouton. Le duo Guerrier–Magicien, le miroir de visée, les deux appuis et la plateforme finale sont spécifiques à cette adaptation ; la géométrie originale n’est pas reproduite."
 }

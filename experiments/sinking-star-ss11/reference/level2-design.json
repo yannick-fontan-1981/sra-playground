@@ -1,29 +1,29 @@
 {
   "spec": {
     "id": "ss11-02",
-    "title": "La relève du gardien",
+    "title": "Le damier des cargaisons",
     "rows": [
-      "#############",
-      "####.....####",
-      "####W....####",
-      "####.....####",
-      "####.....####",
-      "######.######",
-      "#...........#",
-      "#...........#",
-      "#..o..Z.....#",
-      "#...........#",
-      "#.g.......g.#",
-      "#############"
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~~.....~~~.g.g~",
+      "~~~~~o.o.o.~~....~",
+      "~~~~~.....~~~....~",
+      "~~~~~o.o.o~~~.o..~",
+      "~~~~~.....~~~....~",
+      "~~.~~o.o.o~~~....~",
+      "~~Z~~.....~~~....~",
+      "~~~~~.W...~~~~~~~~",
+      "~~~~~.....~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~",
+      "~~~~~~~~~~~~~~~~~~"
     ],
     "facing": "E",
     "circuits": [
       {
-        "id": "relais",
+        "id": "rive",
         "buttons": [
           {
-            "x": 6,
-            "y": 2
+            "x": 2,
+            "y": 6
           }
         ],
         "color": 14
@@ -32,18 +32,61 @@
     "gates": [
       {
         "at": {
-          "x": 6,
-          "y": 5
+          "x": 10,
+          "y": 2
         },
-        "circuit": "relais",
-        "direction": "S",
+        "circuit": "rive",
+        "direction": "E",
         "closedWhen": "released"
       }
     ]
   },
-  "commands": "RRCUCULLLLDRRRDRUUUUUDDRCDDDDDDDDLLLLCDDDDRRR",
+  "commands": "CURDDDRRRRUURRRCUUUUURRURRLULLLDRRRRRRRURCUUU",
   "actions": [
     {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
       "id": 4
     },
     {
@@ -52,7 +95,7 @@
     {
       "id": 6,
       "data": {
-        "x": 30,
+        "x": 24,
         "y": 39
       }
     },
@@ -60,298 +103,465 @@
       "id": 1
     },
     {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
       "id": 6,
       "data": {
-        "x": 30,
-        "y": 39
+        "x": 54,
+        "y": 27
       }
     },
     {
       "id": 1
     },
     {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
       "id": 1
     },
     {
       "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 30,
-        "y": 21
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 33,
-        "y": 33
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
     }
   ],
   "source": {
     "piston": true,
     "platform": false,
-    "label": "Adaptation de Heroes of Hauling · énigme 13",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13",
-    "puzzle": 13,
-    "objective": "Relever le gardien du bouton, puis y installer une caisse pour libérer les deux héros."
+    "label": "Adaptation de Heroes of Hauling · énigme 11",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "objective": "Extraire le Magicien du bouton, traverser le damier par échanges et construire les deux appuis pour le Guerrier."
   },
   "metrics": {
     "actions": 45,
-    "selections": 4,
-    "warriorPushes": 8,
+    "selections": 3,
+    "warriorPushes": 7,
     "thiefPulls": 0,
     "partnerMoves": 0,
     "chainPushes": 0,
-    "stoneMoves": 9,
+    "stoneMoves": 11,
     "mirrorMoves": 0,
     "reflections": 0,
     "heroReflections": 0,
     "pistonPushes": 0,
-    "platformsCreated": 0,
+    "platformsCreated": 2,
     "monstersRemoved": 0,
     "blocked": 0,
     "deaths": 0
   },
   "stages": [
     {
-      "label": "Le Guerrier ouvre le passage en tenant le bouton.",
-      "turn": 2,
+      "label": "Une caisse prend la place du Magicien sur son îlot-bouton.",
+      "turn": 3,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
-            "y": 6
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 9,
-            "y": 12
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 6,
-          "y": 12
-        }
-      ],
-      "supports": [],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {
-        "relais": true
-      }
-    },
-    {
-      "label": "Le Magicien prend sa place sans relâcher le bouton.",
-      "turn": 4,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 9,
+            "x": 7,
             "y": 12
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 9,
-            "y": 6
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 6,
-          "y": 12
-        }
-      ],
-      "supports": [],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {
-        "relais": true
-      }
-    },
-    {
-      "label": "Le Guerrier présente la caisse juste sous le Magicien.",
-      "turn": 24,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 10,
+            "x": 6,
             "y": 10
           }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 9,
-            "y": 6
-          }
         }
       ],
       "stones": [
         {
-          "x": 9,
-          "y": 7
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 15,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 10
         }
       ],
       "supports": [],
       "mirrors": [],
       "monsters": [],
       "circuits": {
-        "relais": true
+        "rive": true
       }
     },
     {
-      "label": "La caisse remplace le dernier gardien du bouton.",
+      "label": "Les échanges dans le damier donnent accès à la cible de l’autre rive.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
+      }
+    },
+    {
+      "label": "La rive ne contient qu’un occupant : un second héros doit venir par un vrai pont.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
+      }
+    },
+    {
+      "label": "Premier appui dans le chenal.",
       "turn": 26,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 10,
-            "y": 10
+            "x": 11,
+            "y": 6
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 9,
-            "y": 7
+            "x": 17,
+            "y": 8
           }
         }
       ],
       "stones": [
         {
-          "x": 9,
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
           "y": 6
         }
       ],
-      "supports": [],
       "mirrors": [],
       "monsters": [],
       "circuits": {
-        "relais": true
+        "rive": true
+      }
+    },
+    {
+      "label": "Le second appui permet une vraie traversée.",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "rive": true
       }
     }
   ],
   "adaptation": {
-    "retained": "Deux salles séparées par une porte; échange du Guerrier et du Magicien sur le bouton qui maintient le passage.",
-    "changed": "La salle basse reçoit une caisse à remonter. Un second échange permet de libérer le Magicien; deux destinations communes au sud remplacent les sorties séparées de la capture."
+    "retained": "Grille de trois caisses par trois; bouton commandant la sortie; caisse de réception sur la rive opposée.",
+    "changed": "Le bouton devient un îlot isolé; deux héros et deux destinations. La rive d’arrivée ne contient qu’une caisse au départ : les échanges n’y amènent donc qu’un héros à la fois. Le Guerrier doit construire un vrai passage, avec deux appuis sur le trajet le plus court. Les caisses du damier gênent les lignes de visée et servent de réserves."
   }
 }

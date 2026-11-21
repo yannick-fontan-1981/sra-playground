@@ -35,7 +35,7 @@ try{
   await window.happyDOM.waitUntilComplete();
   const document=window.document,$=id=>document.getElementById(id),canvas=$('board');
   const key=(value,options={})=>canvas.dispatchEvent(new window.KeyboardEvent('keydown',{key:value,bubbles:true,cancelable:true,...options}));
-  const initial=digest();
+  const levelOneInitial=digest();let initial=levelOneInitial;
   check('Standalone HTML and initial level',()=>{
     assert.match(document.title,/SS11.*La Forge des Reflets/);
     assert.equal(document.querySelectorAll('script[src],link[rel="stylesheet"]').length,0);
@@ -44,12 +44,15 @@ try{
     assert.equal(canvas.dataset.busy,'false');assert.equal($('level').options.length,8);
     assert.equal($('victory').hidden,true);assert.equal($('defeat').hidden,true);
     assert.equal(latestPixels.length,64*64*4);
+    assert.equal($('tutorial').hidden,true);
+    assert.equal($('level-title').textContent,'La relève du gardien');
   });
-  check('Tutorial contains twelve lessons at level one',()=>{
+  $('level').value='7';$('level').dispatchEvent(new window.Event('change'));initial=digest();
+  check('Tutorial follows its room to level seven',()=>{
     assert.equal($('tutorial').hidden,false);
     assert.equal(document.querySelectorAll('[data-lesson]').length,12);
     assert.equal($('lesson-progress').textContent,'0 / 12 découvertes');
-    assert.match($('tutorial-title').textContent,/^Niveau 1/);
+    assert.match($('tutorial-title').textContent,/^Niveau 7/);
   });
   check('Role buttons select without counting an action',()=>{
     assert.equal(canvas.dataset.selected,'warrior');
@@ -106,7 +109,7 @@ try{
       assert.equal(canvas.dataset.level,String(level));
       assert.equal(canvas.dataset.state,'NOT_FINISHED');
       assert.equal(canvas.dataset.selected,'warrior');
-      assert.equal($('tutorial').hidden,level!==1);
+      assert.equal($('tutorial').hidden,level!==7);
       assert.ok($('level-title').textContent.trim());
       assert.ok($('level-objective').textContent.trim());
       assert.ok($('source-label').textContent.trim());
@@ -114,9 +117,9 @@ try{
   });
   $('restart').click();
   await window.happyDOM.waitUntilComplete();
-  check('Restart returns to the initial tutorial',()=>{
-    assert.equal(canvas.dataset.level,'1');assert.equal(digest(),initial);
-    assert.equal($('moves').textContent,'0 actions');assert.equal($('tutorial').hidden,false);
+  check('Restart returns to the new first room',()=>{
+    assert.equal(canvas.dataset.level,'1');assert.equal(digest(),levelOneInitial);
+    assert.equal($('moves').textContent,'0 actions');assert.equal($('tutorial').hidden,true);
   });
   check('No JavaScript exceptions during the targeted checks',()=>assert.deepEqual(errors,[]));
 }catch(error){failure=String(error?.stack??error);}
@@ -129,7 +132,7 @@ finally{
       'DOM and JavaScript checks only; no real-browser layout, visual review, audio or GPU rendering.',
       'Canvas records the actual pixel buffers written by the app, without reproducing its rendering logic.',
       'The browser Option constructor is supplied as a minimal shim because this Happy DOM version omits it.',
-      'Only initial-room actions and level selection are exercised; no campaign solution, solver or uniqueness check.',
+      'Only tutorial-room actions and level selection are exercised; no campaign solution, solver or uniqueness check.',
     ],
   };
   await mkdir(new URL('validation/',root),{recursive:true});

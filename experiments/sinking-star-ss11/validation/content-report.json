@@ -1,5 +1,5 @@
 {
-  "version": "0.1.1",
+  "version": "0.1.2",
   "success": true,
   "scope": "Eight initial boards, source/reference parity and twelve public tutorial detections",
   "campaignSearch": false,
@@ -7,16 +7,6 @@
   "levels": [
     {
       "level": 1,
-      "title": "La cour aux deux sorties",
-      "dimensions": [
-        19,
-        19
-      ],
-      "source": "https://sinkingstarwalkthrough.com/fr/north/",
-      "initialFrameValid": true
-    },
-    {
-      "level": 2,
       "title": "La relève du gardien",
       "dimensions": [
         13,
@@ -26,7 +16,7 @@
       "initialFrameValid": true
     },
     {
-      "level": 3,
+      "level": 2,
       "title": "Le damier des cargaisons",
       "dimensions": [
         18,
@@ -36,7 +26,7 @@
       "initialFrameValid": true
     },
     {
-      "level": 4,
+      "level": 3,
       "title": "Le poids du danger",
       "dimensions": [
         13,
@@ -46,7 +36,7 @@
       "initialFrameValid": true
     },
     {
-      "level": 5,
+      "level": 4,
       "title": "La passerelle à contre-sens",
       "dimensions": [
         19,
@@ -56,7 +46,7 @@
       "initialFrameValid": true
     },
     {
-      "level": 6,
+      "level": 5,
       "title": "L’écluse des remplaçants",
       "dimensions": [
         20,
@@ -66,13 +56,23 @@
       "initialFrameValid": true
     },
     {
-      "level": 7,
+      "level": 6,
       "title": "Le cristal derrière deux rives",
       "dimensions": [
         20,
         16
       ],
       "source": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+      "initialFrameValid": true
+    },
+    {
+      "level": 7,
+      "title": "La cour aux deux sorties",
+      "dimensions": [
+        19,
+        19
+      ],
+      "source": "https://sinkingstarwalkthrough.com/fr/north/",
       "initialFrameValid": true
     },
     {

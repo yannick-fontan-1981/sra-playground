@@ -2,165 +2,6 @@
   {
     "level": 1,
     "id": "ss11-01",
-    "commands": "DDRRRRRRRRCRRDRCUURDCLCUUUUUUCRXRDULLULULLLU",
-    "actions": [
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 24,
-          "y": 24
-        }
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 30,
-          "y": 27
-        }
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 51,
-          "y": 27
-        }
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 33,
-          "y": 24
-        }
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 33,
-          "y": 48
-        }
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 5
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 1
-      }
-    ]
-  },
-  {
-    "level": 2,
-    "id": "ss11-02",
     "commands": "RRCUCULLLLDRRRDRUUUUUDDRCDDDDDDDDLLLLCDDDDRRR",
     "actions": [
       {
@@ -317,8 +158,8 @@
     ]
   },
   {
-    "level": 3,
-    "id": "ss11-03",
+    "level": 2,
+    "id": "ss11-02",
     "commands": "CURDDDRRRRUURRRCUUUUURRURRLULLLDRRRRRRRURCUUU",
     "actions": [
       {
@@ -471,8 +312,8 @@
     ]
   },
   {
-    "level": 4,
-    "id": "ss11-04",
+    "level": 3,
+    "id": "ss11-03",
     "commands": "CUURDCUCLCUUUULUURDDDDDCRCUUUUURUCRRDD",
     "actions": [
       {
@@ -620,8 +461,8 @@
     ]
   },
   {
-    "level": 5,
-    "id": "ss11-05",
+    "level": 4,
+    "id": "ss11-04",
     "commands": "CURRDRRDRRRURXRRRRCURRRDRRRURXLLLLCLCLLLLLULCRRXUUUCDXUU",
     "actions": [
       {
@@ -819,8 +660,8 @@
     ]
   },
   {
-    "level": 6,
-    "id": "ss11-06",
+    "level": 5,
+    "id": "ss11-05",
     "commands": "CRCDRDDDDDRRRRRCRCDDCRRRUUCDRRRRRUURRRDR",
     "actions": [
       {
@@ -970,8 +811,8 @@
     ]
   },
   {
-    "level": 7,
-    "id": "ss11-07",
+    "level": 6,
+    "id": "ss11-06",
     "commands": "UURRRRRRRUDLLLUUULCUUURRRULRCDLDCXLDDDDDRRRXCURDDDDCDCUURDDDULLDDRRRRRRDRRCDRRRRRUR",
     "actions": [
       {
@@ -1250,6 +1091,165 @@
       },
       {
         "id": 4
+      }
+    ]
+  },
+  {
+    "level": 7,
+    "id": "ss11-07",
+    "commands": "DDRRRRRRRRCRRDRCUURDCLCUUUUUUCRXRDULLULULLLU",
+    "actions": [
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 24,
+          "y": 24
+        }
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 30,
+          "y": 27
+        }
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 51,
+          "y": 27
+        }
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 33,
+          "y": 24
+        }
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 33,
+          "y": 48
+        }
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 5
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
       }
     ]
   },

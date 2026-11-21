@@ -1,22 +1,10 @@
 # SS11 — Conception des huit salles
 
-Cette campagne associe le Guerrier et le Magicien. Les cartes sont des adaptations documentées des références consultées dans les zones mixtes et le Nord. L1 est un tutoriel original. Les parcours enregistrés sont des routes de construction manuelles, sans recherche exhaustive, preuve d’unicité ou preuve globale de nécessité de chaque objet.
+Cette campagne associe le Guerrier et le Magicien. Les cartes sont des adaptations documentées des références consultées dans les zones mixtes et le Nord. L7 est un tutoriel original. La version 0.1.2 commence par La relève du gardien ; La cour aux deux sorties occupe la septième position. Les parcours enregistrés sont des routes de construction manuelles, sans recherche exhaustive, preuve d’unicité ou preuve globale de nécessité de chaque objet.
 
 Les commandes et positions intermédiaires restent dans les références d’auteur, hors du HTML jouable.
 
-## 1. La cour aux deux sorties
-
-Référence de règles : [Tutoriel original · Guerrier et Magicien · règles des Héros du Nord](https://sinkingstarwalkthrough.com/fr/north/).
-
-Construire le bras est, relayer les héros sur sa commande, libérer la sortie nord puis combiner le reflet du poids et une presse pour construire les deux appuis de la sortie ouest.
-
-Création pédagogique originale pour SS11, entièrement reconstruite autour d’une cour à trois branches et de deux destinations séparées. La commande est ouvre la sortie nord ainsi que l’obturateur optique ; l’atelier inférieur reste inaccessible à pied. Le rayon coudé échange des occupants à des distances différentes : six cases côté est, sept au sud. Un reflet prématuré du héros arriverait dans l’eau, à six cases au sud ; le vrai échange du Magicien est nécessaire pour atteindre le sol de l’atelier. Sa caisse sert successivement de cible de transposition, de poids sur la commande puis d’appui construit par Espace. Une seconde caisse, inaccessible depuis son côté droit, fournit l’appui latéral au moyen de la presse. Le Guerrier doit terminer sa branche avant que le Magicien ne réutilise le poids. Aucun reflet final de héros, aucune passerelle hydraulique et aucune reproduction exacte d’une énigme source.
-
-Cette carte remplace intégralement le tutoriel de la version 0.1.0, qui reprenait la géométrie de SS08 L4. La cour de départ comporte trois branches, avec un retour, deux destinations séparées et une commande à deux effets.
-
-Parcours d’auteur : 44 actions, dont 5 changements de sélection, 1 poussée de chaîne, 1 déplacement de miroir, 1 reflet de caisse, 1 poussée de presse et 4 appuis créés. Les douze leçons sont observables. Aucune mort ni action refusée ; aucune affirmation de minimalité ou d’unicité.
-
-## 2. La relève du gardien
+## 1. La relève du gardien
 
 Référence : [Adaptation de Heroes of Hauling · énigme 13](https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13).
 
@@ -28,7 +16,7 @@ Relever le gardien du bouton, puis y installer une caisse pour libérer les deux
 
 Parcours d’auteur : 45 actions, dont 4 changements de sélection, 8 poussées du Guerrier, 0 activations utiles de miroirs, 0 poussées de presses et 0 nouveaux appuis. Aucune mort ni action refusée dans ce parcours. Ces valeurs ne sont pas des minima.
 
-## 3. Le damier des cargaisons
+## 2. Le damier des cargaisons
 
 Référence : [Adaptation de Heroes of Hauling · énigme 11](https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11).
 
@@ -40,7 +28,7 @@ Extraire le Magicien du bouton, traverser le damier par échanges et construire 
 
 Parcours d’auteur : 45 actions, dont 3 changements de sélection, 7 poussées du Guerrier, 0 activations utiles de miroirs, 0 poussées de presses et 2 nouveaux appuis. Aucune mort ni action refusée dans ce parcours. Ces valeurs ne sont pas des minima.
 
-## 4. Le poids du danger
+## 3. Le poids du danger
 
 Référence : [Adaptation de Heroes 2: Monsters · énigme 15](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-15).
 
@@ -52,7 +40,7 @@ Employer le monstre comme premier poids, puis faire relayer la caisse et les hé
 
 Parcours d’auteur : 38 actions, dont 7 changements de sélection, 5 poussées du Guerrier, 0 activations utiles de miroirs, 0 poussées de presses et 0 nouveaux appuis. Aucune mort ni action refusée dans ce parcours. Ces valeurs ne sont pas des minima.
 
-## 5. La passerelle à contre-sens
+## 4. La passerelle à contre-sens
 
 Référence : [Heroes and Mirrors — énigme 21](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-21).
 
@@ -68,7 +56,7 @@ Référence : [Heroes and Mirrors — énigme 21](https://sinkingstarwalkthrough
 
 Parcours d’auteur : 56 actions, dont 6 changements de sélection, 4 poussées du Guerrier, 4 activations utiles de miroirs, 1 poussées de presses et 1 nouveaux appuis. Aucune mort ni action refusée dans ce parcours. Ces valeurs ne sont pas des minima.
 
-## 6. L’écluse des remplaçants
+## 5. L’écluse des remplaçants
 
 Référence : [Adaptation de Heroes and Light · énigme 4 · remplacer les poids avant de relâcher les presses](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4).
 
@@ -78,7 +66,7 @@ Adaptation du principe de Heroes and Light 4 : trois poussées latérales dépen
 
 Parcours d’auteur : 40 actions, dont 6 changements de sélection, 2 poussées du Guerrier, 0 activations utiles de miroirs, 3 poussées de presses et 2 nouveaux appuis. Aucune mort ni action refusée dans ce parcours. Ces valeurs ne sont pas des minima.
 
-## 7. Le cristal derrière deux rives
+## 6. Le cristal derrière deux rives
 
 Référence : [Heroes and Mirrors — énigme 30](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30).
 
@@ -91,6 +79,18 @@ Référence : [Heroes and Mirrors — énigme 30](https://sinkingstarwalkthrough
 - Route constructive enregistrée directement pendant la conception ; aucune recherche exhaustive ni vérification d’unicité.
 
 Parcours d’auteur : 83 actions, dont 7 changements de sélection, 10 poussées du Guerrier, 2 activations utiles de miroirs, 0 poussées de presses et 1 nouveaux appuis. Aucune mort ni action refusée dans ce parcours. Ces valeurs ne sont pas des minima.
+
+## 7. La cour aux deux sorties
+
+Référence de règles : [Tutoriel original · Guerrier et Magicien · règles des Héros du Nord](https://sinkingstarwalkthrough.com/fr/north/).
+
+Construire le bras est, relayer les héros sur sa commande, libérer la sortie nord puis combiner le reflet du poids et une presse pour construire les deux appuis de la sortie ouest.
+
+Création pédagogique originale pour SS11, entièrement reconstruite autour d’une cour à trois branches et de deux destinations séparées. La commande est ouvre la sortie nord ainsi que l’obturateur optique ; l’atelier inférieur reste inaccessible à pied. Le rayon coudé échange des occupants à des distances différentes : six cases côté est, sept au sud. Un reflet prématuré du héros arriverait dans l’eau, à six cases au sud ; le vrai échange du Magicien est nécessaire pour atteindre le sol de l’atelier. Sa caisse sert successivement de cible de transposition, de poids sur la commande puis d’appui construit par Espace. Une seconde caisse, inaccessible depuis son côté droit, fournit l’appui latéral au moyen de la presse. Le Guerrier doit terminer sa branche avant que le Magicien ne réutilise le poids. Aucun reflet final de héros, aucune passerelle hydraulique et aucune reproduction exacte d’une énigme source.
+
+Cette carte remplace intégralement le tutoriel de la version 0.1.0, qui reprenait la géométrie de SS08 L4. La cour de départ comporte trois branches, avec un retour, deux destinations séparées et une commande à deux effets.
+
+Parcours d’auteur : 44 actions, dont 5 changements de sélection, 1 poussée de chaîne, 1 déplacement de miroir, 1 reflet de caisse, 1 poussée de presse et 4 appuis créés. Les douze leçons sont observables. Aucune mort ni action refusée ; aucune affirmation de minimalité ou d’unicité.
 
 ## 8. Les cinq îles — le vrai transfert
 

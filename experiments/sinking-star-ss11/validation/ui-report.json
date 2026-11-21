@@ -1,6 +1,6 @@
 {
   "artifact": "dist/SS11-demo.html",
-  "htmlSha256": "92cd832b303165c22735f9510b6cdc02a30211a903e8ca37a1163225c32a92dc",
+  "htmlSha256": "251457eb2ec4e91733c28673ce693db87e54bcac544bfb57006130bd31d756f6",
   "environment": "Happy DOM with a minimal Canvas 2D pixel-write recorder",
   "status": "passed",
   "checks": [
@@ -9,7 +9,7 @@
       "status": "passed"
     },
     {
-      "name": "Tutorial contains twelve lessons at level one",
+      "name": "Tutorial follows its room to level seven",
       "status": "passed"
     },
     {
@@ -45,7 +45,7 @@
       "status": "passed"
     },
     {
-      "name": "Restart returns to the initial tutorial",
+      "name": "Restart returns to the new first room",
       "status": "passed"
     },
     {
@@ -53,12 +53,12 @@
       "status": "passed"
     }
   ],
-  "paints": 40,
+  "paints": 42,
   "errors": [],
   "limitations": [
     "DOM and JavaScript checks only; no real-browser layout, visual review, audio or GPU rendering.",
     "Canvas records the actual pixel buffers written by the app, without reproducing its rendering logic.",
     "The browser Option constructor is supplied as a minimal shim because this Happy DOM version omits it.",
-    "Only initial-room actions and level selection are exercised; no campaign solution, solver or uniqueness check."
+    "Only tutorial-room actions and level selection are exercised; no campaign solution, solver or uniqueness check."
   ]
 }

@@ -1,45 +1,42 @@
 import {Author,board} from './author.mjs';
 
-// Adapt the three successive weight replacements from Heroes and Light 4.
-// One cargo replaces the dragon; it is enclosed in a remote three-press lock.
-// The two movable weights must become bridges after the Wizard replaces them.
-const {put,fill,strings}=board(20,15,'~');
-fill(1,1,4,3);put(4,4,'Z');put(3,2,'W');
-fill(4,6,9,8);put(9,9,'o');
-fill(9,11,14,13);put(14,10);put(14,9,'o');put(15,9);
-fill(17,7,18,10);put(17,7,'g');put(18,10,'g');
-// The loading chamber has no walking entrance or external casting line.
-fill(6,1,11,3,'#');fill(7,2,10,2);put(10,2,'o');put(9,4);
+// Original layout: a two-stage extraction inspired by Heroes and Mirrors 30.
+// Water separates the left console, the workshop and the northern crystal.
+const b=board(20,16,'~');
+b.fill(2,3,4,5);                         // Left console: deliberately no access to row 2.
+b.fill(3,10,7,13);b.fill(8,7,12,13);     // Workshop and reflection runway.
+b.fill(11,6,12,6);                      // Reach the back of the extracted crate.
+b.fill(13,9,15,9);b.fill(15,7,15,8);     // The Warrior must raise the northern mirror.
+b.put(15,2,'o');                        // Only a bent Wizard ray can reach this crate safely.
+b.put(12,10,'o');                       // Reserve for the single water gap to the exit.
+b.fill(14,13,18,13);b.fill(16,12,18,14);
+b.put(17,12,'g');b.put(18,14,'g');
+b.put(8,11,'W');b.put(9,11,'Z');
 const spec={
-  id:'ss11-06',title:'L’écluse des remplaçants',rows:strings(),facing:'E',
-  mirrors:[{at:{x:9,y:4},facing:'SW'}],
-  circuits:[
-    {id:'premier',buttons:[{x:4,y:4}],color:0},
-    {id:'deuxieme',buttons:[{x:9,y:9}],color:10},
-    {id:'troisieme',buttons:[{x:14,y:9}],color:15},
-    {id:'sortie',buttons:[{x:7,y:2}],color:14},
-  ],
-  gates:[
-    {at:{x:10,y:2},circuit:'premier',direction:'W',closedWhen:'released'},
-    {at:{x:9,y:2},circuit:'deuxieme',direction:'W',closedWhen:'released'},
-    {at:{x:8,y:2},circuit:'troisieme',direction:'W',closedWhen:'released'},
-  ],
-  platforms:[{at:{x:16,y:9},circuit:'sortie',activeWhen:'pressed'}],
+  id:'ss11-06',title:'Le cristal derrière deux rives',rows:b.strings(),facing:'E',
+  mirrors:[{at:{x:3,y:12},facing:'NE'},{at:{x:15,y:8},facing:'NW'}],
+  circuits:[{id:'console',buttons:[{x:3,y:3}],color:14}],
+  gates:[{at:{x:14,y:13},circuit:'console',direction:'E',closedWhen:'released'}],
 };
 const a=new Author(spec);
-a.select('wizard').act('R').stage('Le rayon dévié échange le Magicien et le premier poids ; les commandes restent occupées');
-a.go(4,3,'warrior').act('D').stage('Le premier poids devient un appui ; le Guerrier remplace encore son poids sur le bouton');
-a.act('D').stage('Le Guerrier quitte la commande blanche : la première presse avance la cargaison');
-a.go(9,8).select('wizard').act('R').stage('Le Magicien remplace le deuxième poids ; la commande cyan reste tenue par la caisse');
-a.go(9,8,'warrior').act('D').stage('La deuxième caisse construit le passage inférieur ; le Guerrier tient encore le bouton cyan');
-a.act('D').stage('La commande cyan se libère et la deuxième presse avance la cargaison vers la dernière chambre');
-a.select('wizard').act('R').stage('Le Magicien quitte la commande violette : la troisième presse livre la cargaison sur le bouton vert');
-a.go(17,7).stage('La plateforme de sortie est maintenant maintenue par la cargaison distante');
-a.go(18,10,'warrior').stage('Le Guerrier emprunte les deux appuis construits puis rejoint la deuxième destination');
+a.go(15,9,'warrior').act('U').stage('Le Guerrier aligne le miroir sur le rayon du Magicien.');
+a.go(11,6,'warrior');
+a.go(11,7,'wizard').act('R').stage('Un rayon coudé extrait la caisse de son îlot isolé.');
+a.select('warrior').act('D').go(10,8).stage('La caisse et le Guerrier quittent la ligne du reflet de retour.');
+a.select('wizard').act('X').stage('Le Magicien revient dans l’atelier par le reflet.');
+a.go(12,12,'wizard').act('X').stage('Le second miroir envoie le Magicien sur la console gauche.');
+a.go(11,7,'warrior').act('DDDD').stage('Le Guerrier amène la caisse sur le second rayon.');
+a.select('wizard').act('D').stage('La caisse remplace le Magicien sur le bouton et maintient la porte ouverte.');
+a.go(12,9,'warrior').act('DDD').go(11,13).act('R').stage('La caisse restante devient l’appui qui manquait devant la porte.');
+a.go(18,14,'warrior');
+a.go(17,12,'wizard');
 a.save(new URL('../level6-design.json',import.meta.url),{
-  puzzle:4,
-  label:'Adaptation de Heroes and Light · énigme 4 · remplacer les poids avant de relâcher les presses',
-  url:'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4',
-  piston:true,platform:true,
-  objective:'Remplacer les poids par échanges, construire deux appuis puis libérer les trois commandes dans l’ordre pour livrer la cargaison sur le bouton de sortie.',
-},'Adaptation du principe de Heroes and Light 4 : trois poussées latérales dépendent du remplacement des occupants de commandes. Le dragon de la source est remplacé par une caisse sans feu, enfermée dans une écluse inaccessible aux héros. Les deux cristaux deviennent deux caisses échangeables ; après chaque remplacement, le Guerrier les pousse dans l’eau pour avancer et quitter le bouton. Le duo Guerrier–Magicien, le miroir de visée, les deux appuis et la plateforme finale sont spécifiques à cette adaptation ; la géométrie originale n’est pas reproduite.');
+  label:'Heroes and Mirrors — énigme 30',puzzle:30,
+  url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30',
+  adaptation:true,
+},[
+  'Adaptation originale, pas une reproduction cellule par cellule : la source associe les reflets et la ligne de vue coudée du Magicien pour extraire un cristal vers un bouton à gauche.',
+  'Le Guerrier prépare le miroir nord, dégage la ligne de retour puis place la caisse sur le rayon du second miroir ; le Magicien réalise deux échanges coudés et deux reflets.',
+  'Les deux caisses ont des rôles distincts : maintien permanent de la console et appui dans l’eau devant l’accès final. Deux sorties accueillent le duo.',
+  'Route constructive enregistrée directement pendant la conception ; aucune recherche exhaustive ni vérification d’unicité.'
+]);

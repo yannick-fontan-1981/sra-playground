@@ -2,13 +2,6 @@ export const LEVEL_INFO=[
   {
     "piston": true,
     "platform": false,
-    "label": "Tutoriel original · Guerrier et Magicien · règles des Héros du Nord",
-    "url": "https://sinkingstarwalkthrough.com/fr/north/",
-    "objective": "Construire le bras est, relayer les héros sur sa commande, libérer la sortie nord puis combiner le reflet du poids et une presse pour construire les deux appuis de la sortie ouest."
-  },
-  {
-    "piston": true,
-    "platform": false,
     "label": "Adaptation de Heroes of Hauling · énigme 13",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13",
     "puzzle": 13,
@@ -53,6 +46,13 @@ export const LEVEL_INFO=[
     "puzzle": 30,
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
     "adaptation": true
+  },
+  {
+    "piston": true,
+    "platform": false,
+    "label": "Tutoriel original · Guerrier et Magicien · règles des Héros du Nord",
+    "url": "https://sinkingstarwalkthrough.com/fr/north/",
+    "objective": "Construire le bras est, relayer les héros sur sa commande, libérer la sortie nord puis combiner le reflet du poids et une presse pour construire les deux appuis de la sortie ouest."
   },
   {
     "piston": false,

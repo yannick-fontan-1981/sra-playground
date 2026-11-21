@@ -2,92 +2,6 @@ import type {LevelSpec} from './core.js';
 export const SS11_LEVELS:readonly LevelSpec[]=[
   {
     "id": "ss11-01",
-    "title": "La cour aux deux sorties",
-    "rows": [
-      "###################",
-      "#########.g.#######",
-      "#########...#######",
-      "#########...#######",
-      "##########.########",
-      "#######.....#######",
-      "#######.W...##~~~~#",
-      "#######Z....##~~~~#",
-      "#######.....oo~~.~#",
-      "#######.....##~~~~#",
-      "#########~~~~~~~~~#",
-      "#########~.~~~#####",
-      "#####.g.##~~~~#####",
-      "#####...~o~~~~#####",
-      "#####...#.~##~#####",
-      "#####...#~o..~#####",
-      "#####...#~...~#####",
-      "###################",
-      "###################"
-    ],
-    "facing": "E",
-    "mirrors": [
-      {
-        "at": {
-          "x": 10,
-          "y": 7
-        },
-        "facing": "SE"
-      }
-    ],
-    "circuits": [
-      {
-        "id": "relais-est",
-        "buttons": [
-          {
-            "x": 16,
-            "y": 8
-          }
-        ],
-        "color": 0
-      },
-      {
-        "id": "presse-ouest",
-        "buttons": [
-          {
-            "x": 12,
-            "y": 16
-          }
-        ],
-        "color": 10
-      }
-    ],
-    "gates": [
-      {
-        "at": {
-          "x": 10,
-          "y": 4
-        },
-        "circuit": "relais-est",
-        "direction": "N",
-        "closedWhen": "released"
-      },
-      {
-        "at": {
-          "x": 10,
-          "y": 11
-        },
-        "circuit": "relais-est",
-        "direction": "S",
-        "closedWhen": "released"
-      },
-      {
-        "at": {
-          "x": 9,
-          "y": 13
-        },
-        "circuit": "presse-ouest",
-        "direction": "W",
-        "closedWhen": "pressed"
-      }
-    ]
-  },
-  {
-    "id": "ss11-02",
     "title": "La relève du gardien",
     "rows": [
       "#############",
@@ -129,7 +43,7 @@ export const SS11_LEVELS:readonly LevelSpec[]=[
     ]
   },
   {
-    "id": "ss11-03",
+    "id": "ss11-02",
     "title": "Le damier des cargaisons",
     "rows": [
       "~~~~~~~~~~~~~~~~~~",
@@ -171,7 +85,7 @@ export const SS11_LEVELS:readonly LevelSpec[]=[
     ]
   },
   {
-    "id": "ss11-04",
+    "id": "ss11-03",
     "title": "Le poids du danger",
     "rows": [
       "#############",
@@ -232,7 +146,7 @@ export const SS11_LEVELS:readonly LevelSpec[]=[
     ]
   },
   {
-    "id": "ss11-05",
+    "id": "ss11-04",
     "title": "La passerelle à contre-sens",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~",
@@ -283,7 +197,7 @@ export const SS11_LEVELS:readonly LevelSpec[]=[
     ]
   },
   {
-    "id": "ss11-06",
+    "id": "ss11-05",
     "title": "L’écluse des remplaçants",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~",
@@ -395,7 +309,7 @@ export const SS11_LEVELS:readonly LevelSpec[]=[
     ]
   },
   {
-    "id": "ss11-07",
+    "id": "ss11-06",
     "title": "Le cristal derrière deux rives",
     "rows": [
       "~~~~~~~~~~~~~~~~~~~~",
@@ -453,6 +367,92 @@ export const SS11_LEVELS:readonly LevelSpec[]=[
         "circuit": "console",
         "direction": "E",
         "closedWhen": "released"
+      }
+    ]
+  },
+  {
+    "id": "ss11-07",
+    "title": "La cour aux deux sorties",
+    "rows": [
+      "###################",
+      "#########.g.#######",
+      "#########...#######",
+      "#########...#######",
+      "##########.########",
+      "#######.....#######",
+      "#######.W...##~~~~#",
+      "#######Z....##~~~~#",
+      "#######.....oo~~.~#",
+      "#######.....##~~~~#",
+      "#########~~~~~~~~~#",
+      "#########~.~~~#####",
+      "#####.g.##~~~~#####",
+      "#####...~o~~~~#####",
+      "#####...#.~##~#####",
+      "#####...#~o..~#####",
+      "#####...#~...~#####",
+      "###################",
+      "###################"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 10,
+          "y": 7
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "relais-est",
+        "buttons": [
+          {
+            "x": 16,
+            "y": 8
+          }
+        ],
+        "color": 0
+      },
+      {
+        "id": "presse-ouest",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 16
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 4
+        },
+        "circuit": "relais-est",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 11
+        },
+        "circuit": "relais-est",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 13
+        },
+        "circuit": "presse-ouest",
+        "direction": "W",
+        "closedWhen": "pressed"
       }
     ]
   },

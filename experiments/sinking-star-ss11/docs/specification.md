@@ -1,4 +1,4 @@
-# SS11 — Contrat 0.1.1
+# SS11 — Contrat 0.1.2
 
 ## Duo et actions
 
@@ -26,6 +26,8 @@ Les actions ordinaires attendent la fin de l’animation. Undo/Reset/Restart/cha
 
 ## Pédagogie et interface publique
 
-Douze leçons au niveau1 : marche, sélection, poussée simple, chaîne, échange d’objet, échange entre héros, rayon dévié, miroir déplacé, appui construit, reflet, circuit et destinations. Elles sont détectées uniquement dans les pixels publics.
+La session commence au niveau 1, **La relève du gardien**. Le tutoriel **La cour aux deux sorties** occupe le niveau 7.
+
+Douze leçons au niveau 7 : marche, sélection, poussée simple, chaîne, échange d’objet, échange entre héros, rayon dévié, miroir déplacé, appui construit, reflet, circuit et destinations. Elles sont détectées uniquement dans les pixels publics.
 
 Le bundle contient seulement `core`, `levels`, `level-info`, `tutorial`, `browser`. Il expose les observations, frames/durées, actions disponibles, compteurs et états terminaux. Aucun solveur, parcours d’auteur ni état sémantique privé n’y est inclus.

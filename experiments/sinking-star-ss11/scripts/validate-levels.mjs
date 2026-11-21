@@ -5,7 +5,7 @@ import {compileLevel,initialState,renderWorld,DuoPuzzleSession,GRID,PALETTE} fro
 import {SS11_LEVELS} from '../dist/levels.js';
 import {LEVEL_INFO} from '../dist/level-info.js';
 import {lessonIds,observeLesson,TUTORIAL_LEVEL} from '../dist/tutorial.js';
-assert.equal(SS11_LEVELS.length,8);assert.equal(TUTORIAL_LEVEL,1);
+assert.equal(SS11_LEVELS.length,8);assert.equal(TUTORIAL_LEVEL,7);
 assert.equal(GRID.cellPx,3);assert.equal(PALETTE.length,16);
 const levels=SS11_LEVELS.map((spec,i)=>{
  const design=JSON.parse(readFileSync(new URL(`../reference/level${i+1}-design.json`,import.meta.url),'utf8'));
@@ -15,8 +15,8 @@ const levels=SS11_LEVELS.map((spec,i)=>{
  assert.equal(frame.length,64);for(const row of frame){assert.equal(row.length,64);for(const c of row)assert.ok(Number.isInteger(c)&&c>=0&&c<16);}
  return {level:i+1,title:spec.title,dimensions:[spec.rows[0].length,spec.rows.length],source:LEVEL_INFO[i].url,initialFrameValid:true};
 });
-const design=JSON.parse(readFileSync(new URL('../reference/level1-design.json',import.meta.url),'utf8'));
-const session=new DuoPuzzleSession(SS11_LEVELS),learned=new Set();let current=session.observe();
+const design=JSON.parse(readFileSync(new URL(`../reference/level${TUTORIAL_LEVEL}-design.json`,import.meta.url),'utf8'));
+const session=new DuoPuzzleSession(SS11_LEVELS),learned=new Set();let current=session.selectLevel(TUTORIAL_LEVEL);
 for(const a of design.actions){const before=current;current=session.action(a.id,a.data);observeLesson(learned,before,current,a.id);}
 assert.deepEqual(lessonIds.filter(id=>!learned.has(id)),[],'Every tutorial lesson must be observable');
 const html=readFileSync(new URL('../dist/SS11-demo.html',import.meta.url),'utf8');

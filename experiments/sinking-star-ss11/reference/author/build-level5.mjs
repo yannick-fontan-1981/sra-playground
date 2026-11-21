@@ -1,35 +1,45 @@
 import {Author,board} from './author.mjs';
 
-// A narrow runway and a sealed press chamber replace the source's crystal train.
-// The gap at (6,6) remains water: the press alone never makes a walking bridge.
-const b=board(19,12,'~');
-b.fill(2,6,5,8);b.put(5,8,'#');b.put(6,7);
-b.fill(6,8,16,8);b.fill(9,7,10,7);
-b.fill(6,2,6,4);b.put(6,2,'g');b.put(6,3,'g');
-b.put(7,5,'o');b.put(7,4,'#');b.put(7,6,'#');b.put(8,5,'#');
-b.put(3,8,'W');b.put(2,7,'Z');
+// Adapt the three successive weight replacements from Heroes and Light 4.
+// One cargo replaces the dragon; it is enclosed in a remote three-press lock.
+// The two movable weights must become bridges after the Wizard replaces them.
+const {put,fill,strings}=board(20,15,'~');
+fill(1,1,4,3);put(4,4,'Z');put(3,2,'W');
+fill(4,6,9,8);put(9,9,'o');
+fill(9,11,14,13);put(14,10);put(14,9,'o');put(15,9);
+fill(17,7,18,10);put(17,7,'g');put(18,10,'g');
+// The loading chamber has no walking entrance or external casting line.
+fill(6,1,11,3,'#');fill(7,2,10,2);put(10,2,'o');put(9,4);
 const spec={
-  id:'ss11-05',title:'La passerelle à contre-sens',rows:b.strings(),facing:'E',
-  mirrors:[{at:{x:10,y:8},facing:'NE'}],
-  circuits:[{id:'appui',buttons:[{x:3,y:6}],color:7}],
-  gates:[{at:{x:7,y:5},circuit:'appui',direction:'W',closedWhen:'pressed'}],
+  id:'ss11-05',title:'L’écluse des remplaçants',rows:strings(),facing:'E',
+  mirrors:[{at:{x:9,y:4},facing:'SW'}],
+  circuits:[
+    {id:'premier',buttons:[{x:4,y:4}],color:0},
+    {id:'deuxieme',buttons:[{x:9,y:9}],color:10},
+    {id:'troisieme',buttons:[{x:14,y:9}],color:15},
+    {id:'sortie',buttons:[{x:7,y:2}],color:14},
+  ],
+  gates:[
+    {at:{x:10,y:2},circuit:'premier',direction:'W',closedWhen:'released'},
+    {at:{x:9,y:2},circuit:'deuxieme',direction:'W',closedWhen:'released'},
+    {at:{x:8,y:2},circuit:'troisieme',direction:'W',closedWhen:'released'},
+  ],
+  platforms:[{at:{x:16,y:9},circuit:'sortie',activeWhen:'pressed'}],
 };
 const a=new Author(spec);
-a.select('wizard').act('UR').stage('La presse latérale crée l’appui de réception entre les deux rives.');
-a.go(10,7,'wizard').act('X').go(15,8).stage('Le Magicien passe derrière le miroir par le petit palier nord.');
-a.go(10,7,'warrior').act('XLLLL').stage('Le Guerrier rejoint son partenaire, puis recule le miroir jusqu’à la butée.');
-a.select('wizard').act('L').stage('L’échange entre partenaires remet le Magicien près du miroir sans pousser son compagnon.');
-a.go(9,7,'warrior');
-a.go(9,8,'wizard').act('X').go(6,2).stage('Le Magicien se reflète sur l’appui fabriqué par la presse.');
-a.go(9,8,'warrior').act('X').go(6,3);
+a.select('wizard').act('R').stage('Le rayon dévié échange le Magicien et le premier poids ; les commandes restent occupées');
+a.go(4,3,'warrior').act('D').stage('Le premier poids devient un appui ; le Guerrier remplace encore son poids sur le bouton');
+a.act('D').stage('Le Guerrier quitte la commande blanche : la première presse avance la cargaison');
+a.go(9,8).select('wizard').act('R').stage('Le Magicien remplace le deuxième poids ; la commande cyan reste tenue par la caisse');
+a.go(9,8,'warrior').act('D').stage('La deuxième caisse construit le passage inférieur ; le Guerrier tient encore le bouton cyan');
+a.act('D').stage('La commande cyan se libère et la deuxième presse avance la cargaison vers la dernière chambre');
+a.select('wizard').act('R').stage('Le Magicien quitte la commande violette : la troisième presse livre la cargaison sur le bouton vert');
+a.go(17,7).stage('La plateforme de sortie est maintenant maintenue par la cargaison distante');
+a.go(18,10,'warrior').stage('Le Guerrier emprunte les deux appuis construits puis rejoint la deuxième destination');
 a.save(new URL('../level5-design.json',import.meta.url),{
-  label:'Heroes and Mirrors — énigme 21',puzzle:21,
-  url:'https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-21',
-  adaptation:true,
-},[
-  'Adaptation originale du passage sur une rangée : il faut atteindre l’autre côté du miroir, puis le pousser vers la gauche pour préparer le reflet de sortie.',
-  'La caisse de la presse est isolée par trois murs. Seule la poussée vers la gauche de la porte peut la déposer dans l’eau, sur la case de réception utile.',
-  'Un second trou reste volontairement ouvert devant l’appui : le bouton seul ne permet pas de traverser à pied, il faut aussi déplacer et utiliser le miroir.',
-  'Le petit palier nord et les deux positions de sortie permettent de régler l’ordre du duo. L’échange du Magicien est employé dans la route constructive, sans affirmation d’unicité de solution.',
-  'Route constructive enregistrée directement pendant la conception ; aucune recherche exhaustive ni vérification d’unicité.'
-]);
+  puzzle:4,
+  label:'Adaptation de Heroes and Light · énigme 4 · remplacer les poids avant de relâcher les presses',
+  url:'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4',
+  piston:true,platform:true,
+  objective:'Remplacer les poids par échanges, construire deux appuis puis libérer les trois commandes dans l’ordre pour livrer la cargaison sur le bouton de sortie.',
+},'Adaptation du principe de Heroes and Light 4 : trois poussées latérales dépendent du remplacement des occupants de commandes. Le dragon de la source est remplacé par une caisse sans feu, enfermée dans une écluse inaccessible aux héros. Les deux cristaux deviennent deux caisses échangeables ; après chaque remplacement, le Guerrier les pousse dans l’eau pour avancer et quitter le bouton. Le duo Guerrier–Magicien, le miroir de visée, les deux appuis et la plateforme finale sont spécifiques à cette adaptation ; la géométrie originale n’est pas reproduite.');
