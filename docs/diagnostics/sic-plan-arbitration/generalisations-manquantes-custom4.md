@@ -122,6 +122,24 @@ Sur VOIS L4 à froid, le pilote gagne en 39 actions contre 107 pour v47. Des cou
 
 La nouvelle expérience de disposition entre deux sujets a émis **zéro commande sur les neuf L2**. La stratégie qui la porte n’a pris la main sur aucun de ces niveaux. Dans v48, cette expérience se déclare dans une scène où SIC peut identifier une population de pièces et une disposition de référence, puis établir quel sujet répond. Le journal situe le blocage avant le premier plan de disposition. Il ne permet pas d’attribuer à chaque jeu une condition perceptive manquante précise. [Conditions de déclenchement](../../../src/sic/population-placement.ts) · [Comptes par jeu](mesures-generalisations-manquantes.json)
 
+### Composer deux déplacements d’un autre sujet
+
+**Chantiers 2, 3 et 5, prolongement sur les sources après le gel de v48.** Le banc observe une commande qui déplace A et B ensemble, et la même commande employée ailleurs qui laisse B immobile. À partir de ces observations, il cherche où placer A pour reproduire l’effet sur B à un autre endroit. Il peut ensuite projeter les deux positions, choisir un second déplacement de B sur un autre axe et calculer d’avance le chemin de A pour le rendre possible. Chaque étape est testée depuis le même état en changeant seulement la dernière commande de préparation. Tous les déplacements, y compris les directions des deux effets, sont mesurés dans la partie source. Cette expérience est un banc de recherche distinct du candidat v48 qui a joué Custom 4. [Générateur et interventions](../../../scripts/measure-source-paired-contact.mjs) · [Mesures et exemple rejouable](mesures-generalisations-manquantes.json)
+
+Sur **SKBN L3**, après le coup 16, le banc utilise deux observations antérieures, aux coups 6 et 15. Il prévoit cinq commandes. A prend position, déplace B de huit pixels vers la droite, le contourne en deux commandes et le déplace de huit pixels vers le bas. Au rejeu, B passe de (33, 26) à (41, 26), puis à (41, 34). Une autre première préparation empêche le premier déplacement. Après la première réussite, changer le dernier geste du contournement empêche le second déplacement. Les deux commandes agissant sur B restent identiques entre chaque essai et son témoin.
+
+| Mesure sur les mêmes 37 épisodes sources, dont 27 au-dessus du L1 | Propositions | Premier déplacement confirmé avec son témoin | Deux déplacements confirmés, chacun avec son témoin |
+| --- | ---: | ---: | ---: |
+| Prévoir un seul déplacement à un autre endroit | 24 | 10 | Sans objet |
+| Choisir la composition réalisable en le moins de commandes selon le modèle | 20 | 9 | 3 |
+| Privilégier aussi les cases d’arrivée dont l’apparence a déjà permis le déplacement | 20 | 9 | 5 |
+
+Les cinq confirmations du dernier mode couvrent **trois trajets distincts** sur SKBN L1 et L3. Deux confirmations supplémentaires rejoignent une destination déjà vérifiée sur L3. Sur ces 37 épisodes, aucune intervention n’a transformé une partie source perdue en victoire en reprenant ses commandes restantes.
+
+Le banc a ensuite été figé au commit `bea9f3856` pour l’essai sur les **90 autres jeux sources au L1**. Il a observé un mouvement conjoint candidat dans 26 jeux. Seul FUIT a déclenché une proposition de composition, à trois reprises. Au préfixe de 20 coups, le premier déplacement de B se produit uniquement si A est en position. Dans les deux branches, la première commande du trajet suivant échoue à produire la disposition annoncée. **Aucune composition complète sur ces 90 jeux.**
+
+**Pourquoi la continuation échoue sur FUIT.** Depuis l’image obtenue après le premier effet, j’ai testé séparément les quatre commandes que SIC avait déjà vues déplacer A. Une conserve l’image. Chacune des trois autres déplace aussi B. L’une déplace A de cinq pixels vers la droite et B de cinq pixels vers le bas. L’hypothèse « replacer A pendant que B attend » bloque donc dès la première commande. J’ai ensuite autorisé B à bouger pendant la préparation et demandé qu’il retrouve sa position au moment du test. Sur 40 états explorés, deux préparations atteignent la disposition demandée. Dans les deux cas, la commande censée déplacer B le laisse immobile. Le prochain manque mesurable est de choisir, sur les traces sources, quelle conséquence du premier geste doit être conservée pour que le second reste possible. Les seules positions visibles de A et B ont laissé passer ici deux prévisions erronées. [Contre-expériences depuis le même état](../../../scripts/audit-source-second-placement.mjs)
+
 ### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |

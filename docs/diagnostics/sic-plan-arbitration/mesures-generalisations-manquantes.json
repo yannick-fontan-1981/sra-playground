@@ -5638,6 +5638,10 @@
       "sha": "0c457b7d6e9707d2295a9e0a8a1df73518794898",
       "files": 2555,
       "manifestHash": "2f1bc78507371673ef564be666a4b10d050a0b635157b44c8cf2f83dab50eae8"
+    },
+    "canonicalSicTests": {
+      "passed": 416,
+      "failed": 0
     }
   },
   "warmV48": {
@@ -5788,5 +5792,858 @@
       "fullyPredictedPrograms": 0,
       "tapeDigest": "2c0d973635a7f09d05cd27af9cc443fdeb56725e4dac14d58db69f37db2ea0ee"
     }
-  ]
+  ],
+  "pairedContactCompositionLab": {
+    "methodCommit": "bea9f3856",
+    "sourceInputs": [
+      {
+        "code": "CATR",
+        "level": 1,
+        "initial": "8c49c0659af32834cd35d79a00608588832424e35fc567bbd58a249652d28657",
+        "trajectory": "76cf26b6347cf72bc7ef34d416298a035313e2e0036c3c09de6777eabf264aa0",
+        "cap": 60
+      },
+      {
+        "code": "CATR",
+        "level": 3,
+        "initial": "db13de2cbb8835e9deb8d74e0efda15bdd1e9e5f8f727090d8fee0430beff324",
+        "trajectory": "be2b8ce896457306969f610f187b60e0a3ed54115ec28f6d788226fdcebd8c8f",
+        "cap": 100
+      },
+      {
+        "code": "CWSE",
+        "level": 1,
+        "initial": "14b234e86cb071c9873aa3c65eb8cc12680afca61839eb31eccd404d5671af8f",
+        "trajectory": "04ac98078024c8e331ffa240036253203a00dcc0c88893084ba6c928bf0d86fb",
+        "cap": 60
+      },
+      {
+        "code": "CWSE",
+        "level": 2,
+        "initial": "b45351fb835ead51df61a751f17a154dd3b484720e3ae0258bf8a2f0ba25930c",
+        "trajectory": "b0b5637ebfb8b9778c963b6d930762e536e30a8ce4971667cb034be744e9bb64",
+        "cap": 120
+      },
+      {
+        "code": "CWSE",
+        "level": 3,
+        "initial": "e1cb5c6500113998342bddb79c605b5f7ab6fdc0ac57d0b7e347ce8dcd5c0b9c",
+        "trajectory": "155e8b7021299610f989a07141a281d03609fffd7cf86ce8714dbd6221bf02f3",
+        "cap": 120
+      },
+      {
+        "code": "CWSE",
+        "level": 4,
+        "initial": "157d0c01061e879d1928a9438145ebfeeeda87dd8260686ea899d44712e0d6b2",
+        "trajectory": "f9f4dbae4ce09e86276c2ec317be6bf73605b827e6881aaba0c04f9911a8ef1c",
+        "cap": 120
+      },
+      {
+        "code": "ESCT",
+        "level": 1,
+        "initial": "cb790f27dc27d7dcc8a3d1628c47b76477a44340e54c5639fb6dee4e7c8b7bee",
+        "trajectory": "9861fc98ec4274351a8b2e035076a5356bd18a012440ce37a5933a6800e8357e",
+        "cap": 60
+      },
+      {
+        "code": "ESCT",
+        "level": 5,
+        "initial": "bcce0f6d0e10c91ab62c80ed46e369d0d3a7993eaf1b7517cab505ad11befe52",
+        "trajectory": "d567e6887bdd26d35de62c6f0592dd7fd083465f66ecd86f3c884e10806a7546",
+        "cap": 90
+      },
+      {
+        "code": "GABA",
+        "level": 1,
+        "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+        "trajectory": "4c0535fed4795be259cc0651ddc053e32eeabcd9d5fb0a69081d1d51e0170ee2",
+        "cap": 60
+      },
+      {
+        "code": "GABA",
+        "level": 5,
+        "initial": "686d32574e0d601a88c65867f77445702ef0b1cd8787436ac4d4cc6a0692cc98",
+        "trajectory": "ddecae4e40f28ca365581eff40d72a471f97c108a529c091a6fac6197dd10a43",
+        "cap": 90
+      },
+      {
+        "code": "GARE",
+        "level": 1,
+        "initial": "372d5629c8032c12bb6be9150b40108818a3af65d203882cf571cd065376ee8c",
+        "trajectory": "28d81d8f96440fafbc86e2b4a73fb46f276d39515d3ae78342aa10c0ec939f09",
+        "cap": 60
+      },
+      {
+        "code": "GARE",
+        "level": 2,
+        "initial": "c87e72bce526c6fe7af25084005bc6ecce41c25896824f00810267c418b05d82",
+        "trajectory": "851a6b841b6a025cd590612c0cb80d771a18cc2a1bca1fa3b867d0d65caf91c3",
+        "cap": 120
+      },
+      {
+        "code": "GARE",
+        "level": 3,
+        "initial": "a88fda3980a83ded6676f0849877da360916aae88373f5b27a8b86f1266d4bda",
+        "trajectory": "1c4f3bdadc07aafeaffbc76f01dc8dd8850ccae379ed243bafd99ef91f7a56d9",
+        "cap": 120
+      },
+      {
+        "code": "GIGO",
+        "level": 1,
+        "initial": "7e07e5696982516142d1fbbac0829a30743c0c3d9ee5364c4f90ec25d5f21519",
+        "trajectory": "48b27b2033f9321ea8a90d6eacd08c7b4e530231021287357bc0195e3ca92240",
+        "cap": 60
+      },
+      {
+        "code": "GIGO",
+        "level": 2,
+        "initial": "4efd450236b14467a56ec27214c23529f7bd981e935b590875ca4cad91962d8a",
+        "trajectory": "5bf74ad38757ffcee3808c30b07afead27fcf5267c389c7b4ae59194f68d777e",
+        "cap": 120
+      },
+      {
+        "code": "GIGO",
+        "level": 3,
+        "initial": "72379be916441ff8c164907be05fa231069d1390c220323d09fdd0ecad687a16",
+        "trajectory": "c312046a9541dab2edabb08058e8f34671bb035417e435b6b6572a84b22076d1",
+        "cap": 120
+      },
+      {
+        "code": "GIGO",
+        "level": 4,
+        "initial": "b203d5554e4b0e600aaf268d39c5d4ff05f51e29eb3a34e1ba76acc6b005389c",
+        "trajectory": "31cb819d52c93ff56e47a1fd3215f6e3a6f17dd8216ee6d56e37de92b0bac189",
+        "cap": 120
+      },
+      {
+        "code": "GIGO",
+        "level": 5,
+        "initial": "c604a060286c7e40b44997ae13b1073ded87415d0e588cee82a987c02ff1d979",
+        "trajectory": "10e7b92c30fdb716911ff6661ec59124a67f9a022f47ac03c94337b3d07aaff0",
+        "cap": 120
+      },
+      {
+        "code": "GRAV",
+        "level": 1,
+        "initial": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+        "trajectory": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa",
+        "cap": 60
+      },
+      {
+        "code": "GRAV",
+        "level": 2,
+        "initial": "35bbf85c6e247ff4dc855af310d24b9712eb7857b53cff5edae7da98848c954f",
+        "trajectory": "32b06aaa824a77881b5829c393a71ad721c55603642a46cef40e0b8b46cd30bd",
+        "cap": 120
+      },
+      {
+        "code": "GRAV",
+        "level": 3,
+        "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+        "trajectory": "deb4b53176b6d88d85970b1a5e9d1e5c19b8478fa449c1afc7359468f883d9f0",
+        "cap": 120
+      },
+      {
+        "code": "GRAV",
+        "level": 4,
+        "initial": "3ef9d5b1501678728b4e4f78fb5ac9153f4c912631c5f8581cd9ac0055ec2819",
+        "trajectory": "4df5a067c34d193c8f57d629d9d82fe0744cb2d451fa67575f34a5796b43d6e8",
+        "cap": 120
+      },
+      {
+        "code": "GRAV",
+        "level": 5,
+        "initial": "1569271335c09e35750e90a45210ccbc337e632d5af4a7f076701f5dd440c413",
+        "trajectory": "c499be0036ad7fff40864241e2ad81eb61815b6e311c997fbbd16091ebe12041",
+        "cap": 120
+      },
+      {
+        "code": "MOTO",
+        "level": 1,
+        "initial": "507788fb1b628579d36689d261d4816b083c40ce51b57a387e9fa6b1042ea817",
+        "trajectory": "e8153d97d0f118ee331d33902c4300e95cff809b813ee808b654c0887265e4af",
+        "cap": 60
+      },
+      {
+        "code": "MOTO",
+        "level": 2,
+        "initial": "89ffa8ba6c8b8193eef4b4352092b1773dd483a458fa05b293d205bb74ac97e8",
+        "trajectory": "e985788788f050333fcdd2995865763e455852f27e0bd7731a545711c4abd6f8",
+        "cap": 120
+      },
+      {
+        "code": "MOTO",
+        "level": 3,
+        "initial": "3ad80bf8b0892521e40b23b8409040752e81f0d6f699599242b7576e07ce315a",
+        "trajectory": "d9e1f5747b6aad0e6ff3ee130e739f3ff19380552941778ca5ea6a010e39e725",
+        "cap": 120
+      },
+      {
+        "code": "MOTO",
+        "level": 4,
+        "initial": "58e439490e00d84645d618ceffc420ec4254c186d5258e4891332075abd6bc90",
+        "trajectory": "d18771e5d0c127ae9a6d6f5c491640bb2d0e75940c6c6224898057a30652eca7",
+        "cap": 120
+      },
+      {
+        "code": "POLA",
+        "level": 1,
+        "initial": "c3a7becb1324bb0c32fd017492b17ca549984223997a3b0d9e9e90a4f81e9490",
+        "trajectory": "041f81f4d766b0aae65a8a56a2dc490a21affc0d9e28237a115e3e7cedb66cbf",
+        "cap": 60
+      },
+      {
+        "code": "POLA",
+        "level": 2,
+        "initial": "fc08036af2a997e029ac68b263097db35a85d40030a1be69058a278ac266cdcc",
+        "trajectory": "f8f0533726d19357d46a470bfae64a91c07cfcfd8a7a1f82cf559735ec37804e",
+        "cap": 120
+      },
+      {
+        "code": "POLA",
+        "level": 3,
+        "initial": "f8da2c32da27e3e317a6a2c6d98abcb1c0bc4594012dffe615021f663bf122a6",
+        "trajectory": "53e692dd64f75ed556984cd1889a4ee70b0a55707d5ae1b8ec98eef16ccb009b",
+        "cap": 120
+      },
+      {
+        "code": "POLA",
+        "level": 4,
+        "initial": "2442c7bd27e604ec8fad23e81be5cf0a3cd468543100016286655754fa003fc5",
+        "trajectory": "7b10ca13f467e81ec4d6144708742a526867dd648709e4bb0b35ccbd1c7c324c",
+        "cap": 120
+      },
+      {
+        "code": "POLA",
+        "level": 5,
+        "initial": "b593a73ddce4884f068c3f7f530b5945ca6ee2174b2c8ce6870dd4283d7fb4f0",
+        "trajectory": "0a089491083ff703d4fa08222520b4f7c510b575ccaa4234878945ce3c4b671d",
+        "cap": 120
+      },
+      {
+        "code": "SKBN",
+        "level": 1,
+        "initial": "397457b492afea44a57c288c30be2deca0273bea7b0e1478c8a0050994c69316",
+        "trajectory": "a1324d7a36761a108de431167b117c4134826347377f447efcdbfef65dafedc0",
+        "cap": 60
+      },
+      {
+        "code": "SKBN",
+        "level": 2,
+        "initial": "ba6eb233c02f5efba0eaf032ec5607180b36fff189f78d25737eb5f9a8f19215",
+        "trajectory": "4c02d02cb973d2c99dccc6deff7ff9c75088388aba0572f649e3e6494853ab44",
+        "cap": 120
+      },
+      {
+        "code": "SKBN",
+        "level": 3,
+        "initial": "ddce46acc75e783e1511a90547bdfab2f6d719bfc0624ef41f3c7415ca03cb09",
+        "trajectory": "95b7d17e19c26c05de7bcaedb2e43df9e2292b7dd42b87a703a065097e93f5f9",
+        "cap": 120
+      },
+      {
+        "code": "SKBN",
+        "level": 4,
+        "initial": "eeb29436df8f7decf28813be1dc777ceebc75c313c394fdf4b24ed6699e3c56b",
+        "trajectory": "ed2a497fa61da84cdd28c7c24e98c4982b393a51004d471e32aeb7a1810dc192",
+        "cap": 120
+      },
+      {
+        "code": "SKBN",
+        "level": 5,
+        "initial": "f2369b3c7f5376a158606b97d3f6dafc2ef35019ca8a2263ab306aea49781a64",
+        "trajectory": "0073ab4bdc2f47fd7cd4a2b98586447b86716836de4f25b390fd498bb2acac8f",
+        "cap": 120
+      }
+    ],
+    "oneEffect": {
+      "episodes": 37,
+      "episodesWithObservedJointMotion": 23,
+      "games": [
+        "CATR",
+        "CWSE",
+        "ESCT",
+        "GABA",
+        "GARE",
+        "GIGO",
+        "GRAV",
+        "MOTO",
+        "POLA",
+        "SKBN"
+      ],
+      "proposed": 24,
+      "firstEffectWithControl": 10,
+      "fullCompositionsWithBothControls": 0,
+      "distinctControlledRoutes": 0,
+      "distinctDestinations": 0,
+      "newWinsAgainstLostSourceTape": 0,
+      "byEpisode": [
+        {
+          "code": "SKBN",
+          "level": 2,
+          "proposed": 3,
+          "firstConfirmed": 1,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 3,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 4,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 5,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "MOTO",
+          "level": 4,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "MOTO",
+          "level": 3,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        }
+      ]
+    },
+    "twoEffectsByLength": {
+      "episodes": 37,
+      "episodesWithObservedJointMotion": 23,
+      "games": [
+        "CATR",
+        "CWSE",
+        "ESCT",
+        "GABA",
+        "GARE",
+        "GIGO",
+        "GRAV",
+        "MOTO",
+        "POLA",
+        "SKBN"
+      ],
+      "proposed": 20,
+      "firstEffectWithControl": 9,
+      "fullCompositionsWithBothControls": 3,
+      "distinctControlledRoutes": 3,
+      "distinctDestinations": 3,
+      "newWinsAgainstLostSourceTape": 0,
+      "byEpisode": [
+        {
+          "code": "SKBN",
+          "level": 2,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 3,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 1
+        },
+        {
+          "code": "SKBN",
+          "level": 4,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 5,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 2
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "MOTO",
+          "level": 3,
+          "proposed": 2,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        }
+      ]
+    },
+    "twoEffectsByLandingEvidence": {
+      "episodes": 37,
+      "episodesWithObservedJointMotion": 23,
+      "games": [
+        "CATR",
+        "CWSE",
+        "ESCT",
+        "GABA",
+        "GARE",
+        "GIGO",
+        "GRAV",
+        "MOTO",
+        "POLA",
+        "SKBN"
+      ],
+      "proposed": 20,
+      "firstEffectWithControl": 9,
+      "fullCompositionsWithBothControls": 5,
+      "distinctControlledRoutes": 3,
+      "distinctDestinations": 3,
+      "newWinsAgainstLostSourceTape": 0,
+      "byEpisode": [
+        {
+          "code": "SKBN",
+          "level": 2,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 3,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 3
+        },
+        {
+          "code": "SKBN",
+          "level": 4,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 5,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "proposed": 3,
+          "firstConfirmed": 3,
+          "turnsConfirmed": 2
+        },
+        {
+          "code": "GRAV",
+          "level": 5,
+          "proposed": 3,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        },
+        {
+          "code": "MOTO",
+          "level": 3,
+          "proposed": 2,
+          "firstConfirmed": 0,
+          "turnsConfirmed": 0
+        }
+      ]
+    },
+    "other90WithLandingEvidence": {
+      "episodes": 90,
+      "episodesWithObservedJointMotion": 26,
+      "games": [
+        "AMZE",
+        "AR25",
+        "AS66",
+        "BP35",
+        "CASC",
+        "CATL",
+        "CAVA",
+        "CD82",
+        "CGWL",
+        "CLRS",
+        "CN04",
+        "COLM",
+        "COMB",
+        "CONN",
+        "CRAF",
+        "DAME",
+        "DC22",
+        "DICO",
+        "DNOI",
+        "ELAS",
+        "ETAG",
+        "EVAS",
+        "FITE",
+        "FOGW",
+        "FT09",
+        "FUIT",
+        "G50T",
+        "GLOB",
+        "GMAP",
+        "GORI",
+        "GRIL",
+        "HANO",
+        "HOLE",
+        "HPDL",
+        "ISOS",
+        "KA59",
+        "KATA",
+        "KEYD",
+        "KLOT",
+        "LF52",
+        "LIFE",
+        "LKEY",
+        "LOGI",
+        "LP85",
+        "LS19",
+        "LS20",
+        "M0R0",
+        "MEMO",
+        "MIND",
+        "ONDE",
+        "PIPE",
+        "PORT",
+        "PRTL",
+        "R11L",
+        "RE86",
+        "RECR",
+        "REGN",
+        "REWI",
+        "RSWP",
+        "S5I5",
+        "SB26",
+        "SC25",
+        "SELE",
+        "SEQN",
+        "SERI",
+        "SIGN",
+        "SK48",
+        "SMLP",
+        "SNAR",
+        "SP80",
+        "SPOR",
+        "STCK",
+        "SU15",
+        "SWCH",
+        "SYME",
+        "TEQU",
+        "THER",
+        "TICT",
+        "TN36",
+        "TR87",
+        "TRCP",
+        "TRIA",
+        "TU93",
+        "UPST",
+        "VALV",
+        "VC33",
+        "VOIS",
+        "WA30",
+        "WEAV",
+        "ZIPP"
+      ],
+      "proposed": 3,
+      "firstEffectWithControl": 1,
+      "fullCompositionsWithBothControls": 0,
+      "distinctControlledRoutes": 0,
+      "distinctDestinations": 0,
+      "newWinsAgainstLostSourceTape": 0,
+      "byEpisode": [
+        {
+          "code": "FUIT",
+          "level": 1,
+          "proposed": 3,
+          "firstConfirmed": 1,
+          "turnsConfirmed": 0
+        }
+      ]
+    },
+    "example": {
+      "code": "SKBN",
+      "level": 3,
+      "prefix": 16,
+      "evidenceActions": [
+        6,
+        15
+      ],
+      "first": {
+        "prefix": 16,
+        "ref": 6,
+        "oldPeer": [
+          17,
+          26
+        ],
+        "newPeer": [
+          33,
+          26
+        ],
+        "requiredOffset": [
+          -7,
+          1
+        ],
+        "test": "ACTION4",
+        "peerDx": 8,
+        "peerDy": 0,
+        "present": [
+          "ACTION2"
+        ],
+        "absent": [
+          "ACTION4"
+        ],
+        "atCondition": {
+          "verified": 1,
+          "won": false,
+          "knownLanding": true,
+          "repeatForecast": false,
+          "peer": "predicted",
+          "suffixWon": false,
+          "issued": 24,
+          "repeatWon": false,
+          "repeatPeer": "predicted"
+        },
+        "away": {
+          "verified": 1,
+          "won": false,
+          "knownLanding": true,
+          "repeatForecast": false,
+          "peer": "stayed",
+          "suffixWon": false,
+          "issued": 24,
+          "repeatWon": false,
+          "repeatPeer": "stayed"
+        }
+      },
+      "second": {
+        "ref": 15,
+        "input": "ACTION2",
+        "oldPeer": [
+          25,
+          26
+        ],
+        "from": [
+          41,
+          26
+        ],
+        "to": [
+          41,
+          34
+        ],
+        "requiredOffset": [
+          1,
+          -7
+        ],
+        "present": [
+          "ACTION1",
+          "ACTION4"
+        ],
+        "absent": [
+          "ACTION1",
+          "ACTION3"
+        ],
+        "atCondition": {
+          "first": true,
+          "verified": 2,
+          "peer": "predicted",
+          "won": false,
+          "suffixWon": false
+        },
+        "away": {
+          "first": true,
+          "verified": 2,
+          "peer": "stayed",
+          "won": false,
+          "suffixWon": false
+        }
+      }
+    },
+    "secondPlacementReplays": {
+      "preservePeer": [
+        {
+          "code": "SKBN",
+          "level": 2,
+          "prefix": 8,
+          "expanded": 21,
+          "poses": 5,
+          "pairs": 13,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "SKBN",
+          "level": 2,
+          "prefix": 10,
+          "expanded": 21,
+          "poses": 5,
+          "pairs": 13,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "SKBN",
+          "level": 2,
+          "prefix": 12,
+          "expanded": 21,
+          "poses": 5,
+          "pairs": 13,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "prefix": 18,
+          "expanded": 19,
+          "poses": 4,
+          "pairs": 12,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "prefix": 20,
+          "expanded": 1,
+          "poses": 0,
+          "pairs": 0,
+          "effectReached": 0,
+          "found": null
+        }
+      ],
+      "allowTemporaryPeerMotion": [
+        {
+          "code": "SKBN",
+          "level": 2,
+          "prefix": 8,
+          "expanded": 37,
+          "poses": 5,
+          "pairs": 13,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "SKBN",
+          "level": 2,
+          "prefix": 10,
+          "expanded": 37,
+          "poses": 5,
+          "pairs": 13,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "SKBN",
+          "level": 2,
+          "prefix": 12,
+          "expanded": 37,
+          "poses": 5,
+          "pairs": 13,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "SKBN",
+          "level": 1,
+          "prefix": 18,
+          "expanded": 20,
+          "poses": 4,
+          "pairs": 12,
+          "effectReached": 0,
+          "found": null
+        },
+        {
+          "code": "FUIT",
+          "level": 1,
+          "prefix": 20,
+          "expanded": 40,
+          "poses": 2,
+          "pairs": 0,
+          "effectReached": 0,
+          "found": null
+        }
+      ],
+      "FUIT": {
+        "code": "FUIT",
+        "level": 1,
+        "prefix": 20,
+        "trajectory": "c19fd9b0b17cd3e930eac30e9f66b1038ef73c127f01069ec0a68e66806625cd",
+        "firstControls": {
+          "ACTION2": {
+            "outcome": "peer_moved",
+            "peer": [
+              0,
+              -5
+            ],
+            "actor": [
+              0,
+              5
+            ]
+          },
+          "ACTION4": {
+            "outcome": "peer_moved",
+            "peer": [
+              0,
+              5
+            ],
+            "actor": [
+              5,
+              0
+            ]
+          },
+          "ACTION1": "unchanged",
+          "ACTION3": {
+            "outcome": "peer_moved",
+            "peer": [
+              5,
+              0
+            ],
+            "actor": [
+              -5,
+              0
+            ]
+          }
+        },
+        "maxDepth": 6,
+        "expanded": 40,
+        "poses": 2,
+        "poseOutcomes": {
+          "stayed": 2
+        }
+      }
+    }
+  }
 }
