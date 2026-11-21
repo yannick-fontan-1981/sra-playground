@@ -1,4 +1,4 @@
-import {nextLocalLevel,stalledLocal} from './prospective-local-use.ts';
+import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
 import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
@@ -114,8 +114,10 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
       if (remaining < 1 || !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
-      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m,o.frame_hash)) return null;
-      const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity && stalledLocal(m.localCapacity,o.frame_hash);
+      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
+        (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
+          canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
       if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
@@ -135,6 +137,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         ref,
         ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
         ...(experiment.localCapacity?.observedPrefix?Object.values(experiment.localCapacity.observedPrefix):[]),
+        ...(experiment.localCapacity?.analogousUseRef?[experiment.localCapacity.analogousUseRef]:[]),
         ...(experiment.occupancy?.plan.preparedPreview?.priorRead?[experiment.occupancy.plan.preparedPreview.priorRead.before,experiment.occupancy.plan.preparedPreview.priorRead.after]:[]),
         ...(experiment.witnessedPreview?[experiment.witnessedPreview.witness.before,experiment.witnessedPreview.witness.after]:[]),
         ...(experiment.mechanism?.plan.witnessRefs??[]),

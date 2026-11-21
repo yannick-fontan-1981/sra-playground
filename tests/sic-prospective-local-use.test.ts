@@ -3,6 +3,7 @@ import test from 'node:test';
 import type { NativeObservation } from '../src/logos-engine/v6-native-types.ts';
 import {
   assessLocal,
+  canCompareAnotherPreparation,
   continuationAt,
   demonstratedLimit,
   stalledLocal,
@@ -69,6 +70,15 @@ test('a second disposition inherits A, B and the distinct next use from public t
     assessLocal(carried, carried.pending!, observation('enabled'), observation('used'), b.frame, c.frame)
       .matches
   );
+  assert.equal(carried.appliedEffects?.length,1);
+  const comparison = proposeLocal(carried,observation('another'),scene(15,0).frame,true,
+    offer => !!offer.analogousUseRef);
+  assert.equal(comparison?.stage,'control');
+  assert.equal(comparison.analogousUseRef,'obs/used');
+  assert.equal(canCompareAnotherPreparation(carried,'another'),false);
+  observeLocal(carried,observation('another'),observation('another'),scene(15,0).frame,scene(15,0).frame,ops[4]!);
+  assert.equal(canCompareAnotherPreparation(carried,'another'),true);
+  assert.equal(nextLocalLevel(carried).appliedEffects,undefined);
 });
 test('a publicly witnessed preparation can be resumed after a detour and consumed by any family', () => {
   const training = newLocalMemory();

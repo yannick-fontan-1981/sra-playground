@@ -50,6 +50,7 @@ export type LocalForecast = {
   revised: boolean;
   controlRef?: string;
   observedPrefix?: { first: string; second: string };
+  analogousUseRef?: string;
 };
 type Packed = { width: number; cells: string };
 export type LocalMemory = {
@@ -65,6 +66,7 @@ export type LocalMemory = {
   retained?: { plan: LocalForecast; state: string };
   suspended?: LocalForecast;
   continuations?: { frame: string; plan: LocalForecast }[];
+  appliedEffects?: { pattern: string; ref: string }[];
 };
 export const newLocalMemory = (): LocalMemory => ({
   pictures: {},
@@ -283,11 +285,38 @@ export function demonstratedLimit(m: LocalMemory, p: LocalForecast): boolean {
   }
   return true;
 }
+
+// A state was reached again after trying different controls there. B need
+// not freeze the whole board: its locally measured response can still rule
+// out the predicted effect at the proposed site.
+export function revisitedChoice(m: LocalMemory, here: string): boolean {
+  if (!m.laws.length || m.steps.at(-1)?.to !== here) return false;
+  const tried = new Set(m.steps.filter(s => s.from === here).map(s => s.op));
+  return tried.size >= 2;
+}
+
+export function hasLocalContrast(m: LocalMemory, p: LocalForecast): boolean {
+  if (p.stage !== 'prepare' || !p.siteC || !p.controlRef) return false;
+  const measured = direct(m,p.origin,p.b);
+  if (!measured || measured.ref !== p.controlRef) return false;
+  const result = read(m,measured.to);
+  const observed = localPatch(result,p.siteB);
+  return observed !== null && observed !== p.afterB;
+}
+
+const effectPattern = (p: LocalForecast) => JSON.stringify([
+  p.firstBefore, p.firstAfter, p.beforeB, p.afterB, p.beforeC, p.afterC,
+]);
+
+export function canCompareAnotherPreparation(m: LocalMemory, here: string): boolean {
+  return !!m.appliedEffects?.length && m.steps.at(-1)?.to === here && m.steps.some(s => s.from === here);
+}
 export function proposeLocal(
   m: LocalMemory,
   o: NativeObservation,
   rows: NativeRows,
-  allowNew: boolean
+  allowNew: boolean,
+  admit?: (p: LocalForecast) => boolean
 ): LocalForecast | null {
   const here = o.frame_hash,
     board = { frame: rows };
@@ -297,8 +326,10 @@ export function proposeLocal(
     const old = m.suspended,
       ctrl = direct(m, here, old.b),
       result = ctrl && read(m, ctrl.to);
-    if (ctrl && result && localPatch(result, old.siteB) !== old.afterB)
-      return { ...old, stage: 'prepare', controlRef: ctrl.ref };
+    if (ctrl && result && localPatch(result, old.siteB) !== old.afterB) {
+      const plan: LocalForecast = { ...old, stage: 'prepare', controlRef: ctrl.ref };
+      if (!admit || admit(plan)) return plan;
+    }
   }
   const kept = m.retained?.state === here ? m.retained.plan : null;
   const sites = locations(board),
@@ -356,7 +387,11 @@ export function proposeLocal(
         revised,
         ...(rival && ctrl ? { controlRef: ctrl.ref } : {}),
       };
-      if (!m.tried.includes(attemptKey(plan)))
+      if (plan.stage === 'control' && plan.siteC && m.appliedEffects?.length) {
+        const similar = m.appliedEffects.find(f => f.pattern === effectPattern(plan));
+        if (similar) plan.analogousUseRef = similar.ref;
+      }
+      if (!m.tried.includes(attemptKey(plan)) && (!admit || admit(plan)))
         candidates.push({
           p: plan,
           score:
@@ -419,6 +454,11 @@ export function assessLocal(
     m.pending = { ...p, stage: 'test' };
   if (matches && p.stage === 'test' && p.siteC && localPatch(after, p.siteC) === p.beforeC)
     m.pending = { ...p, stage: 'use' };
+  if (matches && p.stage === 'use' && p.controlRef) {
+    const effects = m.appliedEffects ??= [];
+    const pattern = effectPattern(p);
+    if (!effects.some(f => f.pattern === pattern)) bounded(effects,{pattern,ref:a.observation_ref},64);
+  }
   if (m.pending) m.expect = a.frame_hash;
   if (
     valid &&

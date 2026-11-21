@@ -1,4 +1,4 @@
-import { assessLocal, continuationAt, demonstratedLimit, localCommand, newLocalMemory, observeLocal, proposeLocal, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
+import { assessLocal, canCompareAnotherPreparation, continuationAt, demonstratedLimit, hasLocalContrast, localCommand, newLocalMemory, observeLocal, proposeLocal, revisitedChoice, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
 import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
@@ -819,7 +819,7 @@ export function selectExperiment(
       rule:'translated_public_effect',localCapacity:plan,refs:[]};
   }
   if(local && rows && local.pending && local.expect===o.frame_hash) return bindLocal(local.pending);
-  if(local && rows){
+  if(local && rows && (late || stalledLocal(local,o.frame_hash))){
     const continuation=continuationAt(local,o,rows);
     if(continuation)return bindLocal(continuation);
   }
@@ -828,12 +828,16 @@ export function selectExperiment(
     if(revision?.revised)return bindLocal(revision);
   }
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
-  if(local && rows && localOpportunity && stalledLocal(local,o.frame_hash)
+  if(local && rows && localOpportunity
       && !established?.mechanism && !established?.terminalContact && !established?.witnessedPreview
       && !m.frames?.active && !m.occupancy?.active && !m.territory?.active && !m.pending
       && !m.space.active && !m.equations.active && !m.condition && !m.projection.active && !m.delayed.active){
-    const plan=proposeLocal(local,o,rows,true);
-    if(plan && demonstratedLimit(local,plan))return bindLocal(plan);
+    const repeated=stalledLocal(local,o.frame_hash), revisited=revisitedChoice(local,o.frame_hash);
+    const analogous=canCompareAnotherPreparation(local,o.frame_hash);
+    const plan=proposeLocal(local,o,rows,true,p =>
+      (repeated && demonstratedLimit(local,p)) || (revisited && hasLocalContrast(local,p)) ||
+      (analogous && p.stage==='control' && !!p.analogousUseRef));
+    if(plan)return bindLocal(plan);
   }
   if (!rows || established?.frame || established?.territorial || established?.occupancy || established?.terminalContact || established?.mobilityProbe || established?.mechanism || established?.unreadIndicator || established?.witnessedPreview) return established;
   const scene=m.scenes.indexOf(sceneKey(o));if(scene<0)return established;
