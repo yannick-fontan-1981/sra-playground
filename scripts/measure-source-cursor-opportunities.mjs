@@ -8,6 +8,7 @@ import { measureComponentTranslations } from '../src/sic/observed-translation.ts
 import { poseFamilyKey } from '../src/sic/pose-families.ts';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { hash, op, sourceReplay } from './sic-study-source-replay.mjs';
+import { measureReturnedControl } from './measure-returned-control.mjs';
 
 // At each fresh offer the solver chooses both the click and the motor before we play either arm.
 const [env,solver,out,...files]=process.argv.slice(2);
@@ -91,13 +92,21 @@ for(const file of files)for(const line of (await readFile(file,'utf8')).trim().s
         }
         preparedAgain();
       }
+      let reverseSelection;
+      if(process.env.SIC_STUDY_RETURN_SELECTION==='1' && redirected && alive(rep,next) && fromTarget.length && i+4<=run.cap){
+        const selected=fromTarget.slice().sort((a,b)=>b.to.area-a.to.area)[0].to.bbox;
+        const reset=()=>{rep.restore(i);rep.act(offer.command);const b=rep.act(motor);assert.equal(hash(b),hash(next));return b;};
+        reverseSelection=measureReturnedControl({reset,rep,entities:endObservation.entities,previous:offer.source.box,
+          selected,motor,moves,live:b=>alive(rep,b)});
+      }
       let end=next;
       for(const s of run.steps.slice(i+2)){
         if(!alive(rep,end)||!end.availableActionIds.includes(s.a))break;
         end=rep.act(op(s));
       }
       trials.push({at:i+1,click:offer.command,motor,basis:offer.basis??'mark',oriented:memory.oriented?.some(m=>contains(offer.source.box,m.box))??false,
-        projected:!!predicted,matched,redirected,redirectedAcrossPoses,...(blockedAdvance?{blockedAdvance}:{}),won:rep.win(end)});
+        projected:!!predicted,matched,redirected,redirectedAcrossPoses,...(blockedAdvance?{blockedAdvance}:{}),
+        ...(reverseSelection?{reverseSelection}:{}),won:rep.win(end)});
       rep.restore(i);
     }
     const n=rep.act(op(step));assert.equal(hash(n).slice(0,16),step.to);
