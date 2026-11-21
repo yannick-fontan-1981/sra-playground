@@ -10881,5 +10881,425 @@
         "arrivals": []
       }
     ]
+  },
+  "frozenOperandComparison": {
+    "baseline": {
+      "sha": "2f455d299c4a137eb916bfb0a74c9c6f6e0ab644",
+      "files": 2556,
+      "manifestHash": "f122321e2b1f15bb66967937d207f6b3c08a0b44e286507a39592517f76f0235"
+    },
+    "candidate": {
+      "sha": "4c1113a401e3af93704aa72a5a8e0cbcb9b07c67",
+      "files": 2558,
+      "manifestHash": "4d7740d81d68fc79942f571c93948c8e2c566ba1f49f47e9d50e0c185b522726"
+    },
+    "canonicalTests": {
+      "pass": 423,
+      "fail": 0
+    },
+    "coldAndWarm": [
+      {
+        "code": "SS01",
+        "lesson": 0,
+        "startHash": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "v51": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "v53": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "v51Tape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "v53Tape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "commonPrefix": 44,
+        "firstDifference": null,
+        "reason": "target_levels_completed"
+      },
+      {
+        "code": "SS01",
+        "lesson": 19,
+        "startHash": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "v51": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "v53": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "v51Tape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "v53Tape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "commonPrefix": 32,
+        "firstDifference": null,
+        "reason": "target_levels_completed"
+      },
+      {
+        "code": "SS02",
+        "lesson": 0,
+        "startHash": "090e7ef6b25a52cfb02ea4a0c103e887c1d5167f8f32939ee5fe77b49e59c023",
+        "v51": {
+          "level": 2,
+          "actions": 221,
+          "won": false
+        },
+        "v53": {
+          "level": 2,
+          "actions": 275,
+          "won": false
+        },
+        "v51Tape": "a83772d36b2bee7cbb96410da6550b5920c3b50818c3b4b7cc5c7bc862d370db",
+        "v53Tape": "7770a5875d673c6b1c980479a4ebea4a022f6b9145723aac4e4d8bec2e06a7d9",
+        "commonPrefix": 221,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS03",
+        "lesson": 0,
+        "startHash": "a4e15a326a06d11b9baa11e7db6d3ae00b9938a8d564a2ce7775806f11d34b4a",
+        "v51": {
+          "level": 2,
+          "actions": 209,
+          "won": false
+        },
+        "v53": {
+          "level": 2,
+          "actions": 252,
+          "won": false
+        },
+        "v51Tape": "c3665f0016806b16617f93d0a117c670ba7a64fb079f2112ded1d1ea5fb17247",
+        "v53Tape": "908d698968695120a8dee3060ecec2fbb15e905cb2821ea1aecf6e8da6f680ae",
+        "commonPrefix": 209,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS04",
+        "lesson": 0,
+        "startHash": "bbd7f619447096344a27e6d3462f01ea361a2d023f056b9881ae25707810581f",
+        "v51": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "v53": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "v51Tape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "v53Tape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "commonPrefix": 60,
+        "firstDifference": null,
+        "reason": "target_levels_completed"
+      },
+      {
+        "code": "SS05",
+        "lesson": 0,
+        "startHash": "25fa7e75c56e03d9c2abf88c7c52ef9cf353b9d1a5e9ef93bd6feac7c5fa0336",
+        "v51": {
+          "level": 2,
+          "actions": 200,
+          "won": false
+        },
+        "v53": {
+          "level": 2,
+          "actions": 242,
+          "won": false
+        },
+        "v51Tape": "43c496f2f907feeb569ae3036ae6c2122b2ef5d25d5a446293c3841934c259b0",
+        "v53Tape": "b4035903337d3b1caba2f99b57d1a1f3c7403476974b6d8b98d2a40266f8da08",
+        "commonPrefix": 200,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS06",
+        "lesson": 0,
+        "startHash": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "v51": {
+          "level": 2,
+          "actions": 175,
+          "won": false
+        },
+        "v53": {
+          "level": 2,
+          "actions": 221,
+          "won": false
+        },
+        "v51Tape": "f01f0d8140d36b1f27fc8962ebfc4289b309abcea804d8646c6993bffb5fc2ef",
+        "v53Tape": "4af74c7ad1752f688850536b04304d73db1b106e793bb36d27c2af5523cdb0de",
+        "commonPrefix": 175,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS07",
+        "lesson": 0,
+        "startHash": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "v51": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "v53": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "v51Tape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "v53Tape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "commonPrefix": 5,
+        "firstDifference": null,
+        "reason": "native_game_over"
+      },
+      {
+        "code": "SS08",
+        "lesson": 0,
+        "startHash": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "v51": {
+          "level": 2,
+          "actions": 217,
+          "won": false
+        },
+        "v53": {
+          "level": 2,
+          "actions": 276,
+          "won": false
+        },
+        "v51Tape": "19cf4188f09f5ea8f5aacce654fd236c7d8756b4ec07e4176d8f1608999bd5f4",
+        "v53Tape": "695b50f211cabc42dbc03aac6aaac9497171190e614e3bad43d051945158e2a1",
+        "commonPrefix": 217,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS10",
+        "lesson": 0,
+        "startHash": "97b6b03984aedadd03896ea0ae756203cb6e17cf59f5e04769a0277a2675ff84",
+        "v51": {
+          "level": 2,
+          "actions": 218,
+          "won": false
+        },
+        "v53": {
+          "level": 2,
+          "actions": 260,
+          "won": false
+        },
+        "v51Tape": "c40d31c92ff6ad2c66776da0dd11f0d5b1256daf325569e72b5f433acada23f5",
+        "v53Tape": "7baa00d59c473fa89312843b88a6e945da879c5a51889f8b0b8c76cafb6f2843",
+        "commonPrefix": 218,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      }
+    ],
+    "sourceL1": {
+      "won": 100,
+      "total": 100,
+      "identicalToV51": 100,
+      "different": [],
+      "historic": {
+        "KEYD": 35,
+        "SKBN": 22,
+        "GABA": 49,
+        "SWCH": 25
+      },
+      "forecasts": {}
+    },
+    "sourceFuitL2": {
+      "won": true,
+      "actions": 80,
+      "sameVerifiedTapeAsV51": true,
+      "tape": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8",
+      "jointForecasts": [
+        [
+          24,
+          24,
+          24
+        ]
+      ]
+    },
+    "customColdForecasts": {},
+    "portableUpperSourcePilot": [
+      {
+        "code": "CATR",
+        "level": 2,
+        "won": false,
+        "actions": 100,
+        "forecasts": [
+          {
+            "step": 51,
+            "input": "ACTION6:42,55",
+            "scope": "effect",
+            "sites": 1,
+            "compared": false,
+            "won": false,
+            "kept": true,
+            "matched": true
+          }
+        ]
+      },
+      {
+        "code": "TRCP",
+        "level": 2,
+        "won": false,
+        "actions": 100,
+        "forecasts": [
+          {
+            "step": 28,
+            "input": "ACTION6:35,48",
+            "scope": "effect",
+            "sites": 1,
+            "compared": false,
+            "won": false,
+            "kept": true,
+            "matched": true
+          },
+          {
+            "step": 82,
+            "input": "ACTION6:16,25",
+            "scope": "effect",
+            "sites": 1,
+            "compared": true,
+            "won": false,
+            "kept": true,
+            "matched": false
+          },
+          {
+            "step": 85,
+            "input": "ACTION6:48,17",
+            "scope": "effect",
+            "sites": 2,
+            "compared": true,
+            "won": false,
+            "kept": false,
+            "matched": false
+          }
+        ]
+      }
+    ],
+    "reserved": "SS09 L2",
+    "recognitionAtEachColdDecision": [
+      {
+        "code": "SS02",
+        "level": 2,
+        "actions": 275,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS03",
+        "level": 2,
+        "actions": 252,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS05",
+        "level": 2,
+        "actions": 242,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS06",
+        "level": 2,
+        "actions": 221,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS07",
+        "level": 2,
+        "actions": 5,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS01",
+        "level": 2,
+        "actions": 44,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS04",
+        "level": 2,
+        "actions": 60,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS08",
+        "level": 2,
+        "actions": 276,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      },
+      {
+        "code": "SS10",
+        "level": 2,
+        "actions": 260,
+        "counts": {
+          "rule": 0,
+          "confirmedSite": 0,
+          "planIgnoringScheduling": 0,
+          "selected": 0
+        },
+        "first": {}
+      }
+    ],
+    "coldTotals": {
+      "games": 9,
+      "wins": 2,
+      "decisions": 1635,
+      "matchedPrefixPerGame": true
+    }
   }
 }
