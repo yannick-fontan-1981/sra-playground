@@ -164,6 +164,7 @@ import { createPreparedEffects, preparedEffectsId } from '../sic/test-prepared-e
 import { preparationReturns } from '../sic/preparation-experiments.ts';
 import { decidePlanContinuation, maximumCommittedActions } from '../sic/plan-step.ts';
 import { planningGroupsWithExperiments } from '../sic/experiment-selection-groups.ts';
+import { sourceFieldRelations } from '../sic/compose-field-relations.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
 import { selectStrategyFamily, type FamilyAgendaMode, type FamilyAgendaReceipt, type FamilyTrial } from '../sic/family-agenda.ts';
@@ -2781,8 +2782,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = testCompositions ? planningGroupsWithExperiments(standalonePlanningGroups) : standalonePlanningGroups;
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 189 : 183,
-      groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior, preparationReturns } : {}) };
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: testCompositions ? 190 : 183,
+      groups, symmetry, policy, sequence, support, recovery, ...(testCompositions ? { compositionPrior, preparationReturns, sourceFieldRelations } : {}) };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [

@@ -15,6 +15,7 @@ import { observedCommandKey } from './observed-command-frontier.ts';
 import { sicNeedId } from './need-identity.ts';
 import { actionRelation, type Step } from './composition-context.ts';
 import {learnOperands,newOperandMemory,operandMatches,operandPlan,type OperandMemory,type OperandPlan} from './operand-composition.ts';
+import {fieldGroup,fieldMatches,proposeFieldComposition,type FieldForecast} from './compose-field-relations.ts';
 import learned from './source-composition-prior.json' with { type: 'json' };
 
 export const compositionFamily = 'sic_test_observed_compositions';
@@ -35,10 +36,11 @@ type State = {
   rewrites?:Rewrite[]; verifiedPrograms?:Rewrite[][]; attempted?:{origin:string;word:string}[]; pendingProgram?:ProgramTrial;
   coverage?:CompositionCoverage; completedGoals?:string[];
   operands?:OperandMemory;
+  rejectedFields?:string[];
 };
 const initial = (epoch = 0): State => ({ epoch, history: [], motions: [], tests: {}, active: null, trials: 0 });
 type ProgramTrial = { steps:Rewrite[]; index:number; origin:string; nextEffect?:string };
-type Offer = NativeProposal & { goal: Goal | null; context: string; needId: string; trigger: string; program?:ProgramTrial; operand?:OperandPlan };
+type Offer = NativeProposal & { goal: Goal | null; context: string; needId: string; trigger: string; program?:ProgramTrial; operand?:OperandPlan; fieldForecast?:FieldForecast };
 function readyStep(step:Rewrite,rows:NativeRows) {
   const width=rows[0]!.length,value=(p:number)=>rows[Math.floor(p/width)]?.[p%width];
   return step.changes.every(([p,v])=>value(p)===v)&&(!step.guards||step.guards.every(([p,v])=>value(p)===v));
@@ -174,6 +176,8 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       return this.proposeInGroup!(entry, observation, rows, inputs, remaining, execution);
     },
     async proposeInGroup(group, observation, rows, inputs, remaining) {
+      if (group === fieldGroup && remaining > 0) return proposeFieldComposition(compositionFamily,observation,rows,
+        state.epoch === observation.level_epoch ? state.rejectedFields ?? [] : []);
       if (state.epoch !== observation.level_epoch || !state.history.length || remaining < 1) return null;
       const history = state.history;
       const repeated = history.filter((s) => s.repeated && s.effect !== 'unchanged');
@@ -315,6 +319,7 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       const target = p.goal && a.entities.find((e) => at(e) === p.goal!.target);
       const matched = won
         ? true
+        : p.fieldForecast ? fieldMatches(p.fieldForecast,first,second)
         : p.operand ? operandMatches(p.operand,a,second)
         : p.program ? observedRewrite(p.program.steps[p.program.index]!,first,second)
         : p.goal
@@ -327,6 +332,7 @@ export function createCompositionTrials(): NativeFamily<Offer> {
         seal_prefix: true,
         reason: won
           ? 'official_boundary'
+          : p.fieldForecast ? (matched?'joint_field_relations_confirmed':'joint_field_relations_refuted')
           : p.operand ? (matched?'operand_and_preserved_sites_confirmed':'operand_or_preserved_site_refuted')
           : p.program ? (matched?'predicted_composition_effect':'composition_link_refuted') : matched === true
             ? 'objects_approached'
@@ -338,6 +344,12 @@ export function createCompositionTrials(): NativeFamily<Offer> {
     record(b, a, command, first, second, p) {
       learn(b, a, command,first,second);
       let outcome:string|undefined;
+      if (p.fieldForecast) {
+        const won = a.levels_completed > b.levels_completed;
+        const confirmed = !won && a.level_epoch===b.level_epoch && a.state===b.state && fieldMatches(p.fieldForecast,first,second);
+        if (!won && !confirmed && state.epoch===b.level_epoch) state.rejectedFields=[...(state.rejectedFields??[]).slice(-63),p.fieldForecast.key];
+        outcome=won?'official_completion':confirmed?'joint_field_relations_confirmed':'joint_field_relations_refuted';
+      }
       if(state.operands){
         const operands=state.operands;
         delete operands.pending;delete operands.continueFrom;
