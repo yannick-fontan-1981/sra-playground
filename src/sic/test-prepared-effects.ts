@@ -6,6 +6,8 @@ import {offerCursorTrial,newCursorMemory,measuredReturnSelection} from './marked
 import {observeLandmarks,observeLandmarkAccess,proposeLandmark,refreshedSelection} from './paired-landmark-placement.ts';
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {detectTransportSelection,observeTransport} from './transport-observations.ts';
+import {registerCoverage,observeCoverage} from './controlled-coverage.ts';
+import {proposeCoverage} from './plan-controlled-coverage.ts';
 import {chooseTransport} from './compose-transport.ts';
 import {challengePlacement,recordPlacementVisit} from './recurrent-placement.ts';
 import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
@@ -102,7 +104,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const followMarkedPose=comparePreparations && informationPreference?.strategy==='follow_a_marked_displacement';
+  const planCoverage=comparePreparations && informationPreference?.strategy==='maintain_access_by_composing_piece_effects';
+  const followMarkedPose=planCoverage || comparePreparations && informationPreference?.strategy==='follow_a_marked_displacement';
   const verifyPoseChange=followMarkedPose || comparePreparations && informationPreference?.strategy==='verify_control_across_pose_changes';
   const retrySelection=verifyPoseChange || comparePreparations && informationPreference?.strategy==='challenge_recurrent_placements';
   const stageRegions=retrySelection || comparePreparations && informationPreference?.strategy==='compose_transport_by_region';
@@ -145,7 +148,17 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           const selected=detectTransportSelection(before,rows,next,[cmd.data.x,cmd.data.y],a.observation_ref);
           if(selected)m.transportLearning=selected;
         }
-        if(m.transportLearning)transportResult=observeTransport(m.transportLearning,rows,next,key,a.observation_ref,x?.cooperative);
+        if(m.transportLearning)transportResult=observeTransport(m.transportLearning,rows,next,key,a.observation_ref,x?.cooperative?.coverage?undefined:x?.cooperative);
+        if(planCoverage){
+          if(!m.coverage && x?.cursorTrial?.stage==='select' && cmd.action_ref==='ACTION6'){
+            const scene=registerCoverage(rows,next,x.cursorTrial.source.box,x.cursorTrial.target.box,a.observation_ref);
+            if(scene)m.coverage=scene;
+          }
+          if(m.coverage){
+            const outcome=observeCoverage(m.coverage,rows,next,key,a.observation_ref,x?.cooperative?.coverage?x.cooperative:undefined);
+            if(outcome)transportResult=outcome;
+          }
+        }
       }
       if(comparePreparations && /^ACTION[5-7]$/.test(key))
         retainSituatedOperations(learning,observedSituatedOperations(learning,b,a,before,after,key));
@@ -200,8 +213,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           placementSelection=measuredReturnSelection(m.cursorSelection,o,rows,actor[0]!.box,peer[0]!.box,previous.ref,informationPreference);
         }
       }
-      const cooperative=composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
-        ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined;
+      const coverage=planCoverage&&group===evidencedPlanGroup&&m.coverage&&limits
+        ?proposeCoverage(m.coverage,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
+      const cooperative=coverage??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
+        ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);
       let landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
         ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
       const challenge=landmark&&retrySelection&&m.placementVisits&&!m.cursorSelection?.pending

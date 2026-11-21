@@ -3,7 +3,8 @@ import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
 export type TransportSide=0|1;
 type Grid={pitch:number;left:number;top:number;columns:number;rows:number};
-type Reading={subject:[number,number];tiles:string[]};
+export type TransportReading={subject:[number,number];tiles:string[]};
+type Reading=TransportReading;
 type Push={side:TransportSide;piece:string;floor:string;ref:string;material?:string;support?:string};
 type Exchange={side:TransportSide;piece:string;floor:string;ref:string};
 export type TransportMemory={grid:Grid;inks:[number,number];active:TransportSide;selection:string;mark:number;
@@ -11,7 +12,8 @@ export type TransportMemory={grid:Grid;inks:[number,number];active:TransportSide
   supportRef?:string;partnerExchange?:string;supportSites?:number[];goals?:number[];denied:Record<string,true>;plan?:TransportStep[];planReason?:string;lastOffer?:string};
 export type TransportState={subjects:[number,number];pieces:number[];supports:number[];active:TransportSide};
 export type TransportStep={state:TransportState;command:string;after:TransportState};
-export type TransportForecast={purpose:string;command:string;from:TransportState;expected:TransportState;target:number[];evidence:string[];open:string[];key:string};
+export type TransportForecast={purpose:string;command:string;from:TransportState;expected:TransportState;target:number[];evidence:string[];open:string[];key:string;
+  coverage?:{controls:number[];gate:number;goals:number[];laws:{kind:string;radius:number}[];openBefore:boolean;openAfter:boolean}};
 export const sameSites=(a:number[],b:number[])=>a.length===b.length&&a.every((v,i)=>v===b[i]);
 export const poseId=(s:TransportState)=>[s.active,s.subjects.join(','),s.pieces.join(','),s.supports.join(',')].join('/');
 export const sitePoint=(g:Grid,n:number)=>[g.left+(n%g.columns)*g.pitch+Math.floor(g.pitch/2),g.top+Math.floor(n/g.columns)*g.pitch+Math.floor(g.pitch/2)];

@@ -249,6 +249,7 @@ export type Outcome = {
 export type Memory = {
   placementVisits?:import('./recurrent-placement.ts').PlacementVisits;
   transportLearning?: import('./transport-observations.ts').TransportMemory;
+  coverage?:import('./controlled-coverage.ts').Coverage;
   cursorSelection?: CursorMemory;
   landmarkMemory?: import('./paired-landmark-placement.ts').LandmarkMemory;
   relativeMotion?: RelativeMemory;

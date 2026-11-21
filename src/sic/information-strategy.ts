@@ -8,6 +8,7 @@ export const informationStrategies = {
   indicated_access: 'Seek an indication at a traversable site when ordinary movement fails to reach a destination',
   plan_after_selection: 'Use a verified change of control to plan a placement and test the return to the previous subject',
   test_partner_preparation: 'Retest a blocked movement after changing the other subject’s placement',
+  maintain_access_by_composing_piece_effects: 'Choose a subject and movement to maintain access with the displaced pieces',
   follow_a_marked_displacement: 'Verify a marked subject across a change of pose and surrounding objects',
   verify_control_across_pose_changes: 'Keep testing a transferred mark when the selected subject changes pose in place',
   challenge_recurrent_placements: 'Test control transfer when a placement repeatedly produces the same return',
