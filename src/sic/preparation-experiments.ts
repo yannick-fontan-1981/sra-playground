@@ -250,6 +250,8 @@ export type Memory = {
   placementVisits?:import('./recurrent-placement.ts').PlacementVisits;
   transportLearning?: import('./transport-observations.ts').TransportMemory;
   crossing?:import('./sustained-crossing.ts').Crossing;
+  pairInquiry?:import('./probe-paired-displacements.ts').PairInquiry;
+  pairLesson?:import('./probe-paired-displacements.ts').ReusableEffects;
   priorMotions?:import('./motion-before-selection.ts').PriorMotions;
   coverage?:import('./controlled-coverage.ts').Coverage;
   cursorSelection?: CursorMemory;
