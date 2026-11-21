@@ -92,3 +92,52 @@ test('a visible landing becomes a prediction at another distance only after disp
     17,
   ]);
 });
+import {
+  startPassage,
+  projectedPassage,
+  watchPassage,
+} from '../src/sic/prepare-projected-passage.ts';
+test('an imagined landing needs a visible indication on supported ground before the operation', () => {
+  const room: Scene = {
+    ...s,
+    ground: [0, 1, 2, 7, 8, 9, 16, 18, 19, 25, 26],
+    goals: [19, 26],
+    other: [16],
+    initial: Array(35).fill('2,2,2,2,2,2,2,2,2'),
+  };
+  room.initial[16] = 'pivot';
+  const m = fresh(),
+    v: Reading = {
+      subjects: [2, 7],
+      active: 0,
+      pieces: [],
+      supports: [],
+      opened: [],
+      anchor: -1,
+    };
+  m.motors['ACTION2'] = { dx: 0, dy: 1, ref: 'observed' };
+  m.passage = startPassage(room);
+  watchPassage(room, m, v, v, room.initial, 'observation', 'ACTION2');
+  assert.notEqual(
+    projectedPassage(room, m, v, 'observation', 20, 100)?.command,
+    'ACTION5',
+  );
+  const image = room.initial.slice();
+  image[18] = '2,4,2,4,4,4,2,4,2';
+  watchPassage(room, m, v, v, image, 'indication', 'ACTION2');
+  assert.equal(
+    projectedPassage(room, m, v, 'indication', 20, 100)?.command,
+    'ACTION5',
+  );
+  watchPassage(
+    room,
+    m,
+    v,
+    { ...v, subjects: [18, 7] },
+    room.initial,
+    'crossed',
+    'ACTION5',
+  );
+  assert.equal(m.passage?.evidence, 'crossed');
+  assert.deepEqual(m.passage?.orientation, [0, 3]);
+});

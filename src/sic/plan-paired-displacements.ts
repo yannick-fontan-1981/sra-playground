@@ -1,3 +1,4 @@
+import { startPassage, projectedPassage } from './prepare-projected-passage.ts';
 import {
   joinSeparatedOperators,
   delivery,
@@ -41,6 +42,10 @@ export function planDisplacements(
     ops = Object.keys(m.motors),
     world = v.subjects.join('/') + '|' + v.active;
   if (m.join?.water.every((p) => v.supports.includes(p))) {
+    if (!m.passage) {
+      const candidate = startPassage(s);
+      if (candidate) m.passage = candidate;
+    }
     delete m.join;
     delete m.plan;
   }
@@ -51,6 +56,8 @@ export function planDisplacements(
       delete m.plan;
     }
   }
+  const passage = projectedPassage(s, m, v, ref, depth, budget);
+  if (passage) return passage;
   const offer = (state: Reading, op: string, why: string, open: string[]) =>
     forecast(s, m, v, state, op, why, open, ref);
   // A single displacement can satisfy several occupied controls at once. Test

@@ -1,3 +1,4 @@
+import { watchPassage } from './prepare-projected-passage.ts';
 import {
   visibleImages,
   applyImages,
@@ -100,6 +101,7 @@ export function seePair(
   }
   const m = q.learning;
   q.reading = next;
+  watchPassage(s, m, old, next, after, ref, op);
   const previous = q.active;
   if (
     click &&

@@ -18,6 +18,7 @@ export const alternatives: Law[] = [
 ];
 export type Bearing = { dx: number; dy: number; ref: string };
 export type Learning = {
+  passage?: import('./prepare-projected-passage.ts').Passage;
   join?: import('./paired-crossing-preparation.ts').Link;
   motors: Record<string, Bearing>;
   evidence: [Partial<Record<Law, number>>, Partial<Record<Law, number>>];
