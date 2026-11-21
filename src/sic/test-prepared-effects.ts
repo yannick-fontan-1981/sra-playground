@@ -114,7 +114,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
       if (remaining < 1 || !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
-      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m,o.frame_hash)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
@@ -123,7 +123,8 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows,localOpportunity);
+      const testSourceContact=group===exhaustedGroup || group===recurrentExperimentGroup && hasExperimentOpportunity(m);
+      const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows,localOpportunity,testSourceContact);
       if(localOpportunity&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity)return null;
       if (!experiment || (group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
@@ -131,7 +132,8 @@ export function createPreparedEffects(): NativeFamily<Offer> {
       const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
-        label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
+        label = experiment.terminalContact?.witness.sourceDescriptor ? 'Test a visible contact associated with official completion across source families'
+          : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const evidence = [
         ref,

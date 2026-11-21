@@ -21,7 +21,8 @@ export function hasExperimentOpportunity(m: Memory): boolean {
     || (m.recurrences >= 6 && history.recent.filter(step => step.returned).length >= 2);
 }
 
-export function mayPursueWitnessedEffect(m: Memory): boolean {
+export function mayPursueWitnessedEffect(m: Memory, frame?: string): boolean {
+  if (frame && m.previewLearning?.pendingSourceContact?.frame===frame) return true;
   if(m.localCapacity?.pending||m.localCapacity?.retained)return true;
   // Give the current strategy a chance to continue after opening a new public state.
   if (m.turns && m.frontier.lastScene === m.turns && m.lastTrial !== m.turns) return false;

@@ -6,6 +6,7 @@ import { visualLayout, type PreviewLearning, type VisualLayout } from './witness
 import type { Memory, Experiment } from './preparation-experiments.ts';
 
 export type TerminalContact = {
+  sourceDescriptor?: string;
   actor: string;
   marker: string;
   offset: XY;
@@ -82,14 +83,16 @@ export function offerTerminalContact(
   scene: number,
   o: NativeObservation,
   rows: NativeRows,
-  available: Set<string>
+  available: Set<string>,
+  hypotheses?: readonly TerminalContact[]
 ): Experiment | null {
   const learn = m.previewLearning,
     layout = visualLayout(o, rows);
-  if (!learn?.terminal?.length) return null;
+  const choices=hypotheses??learn?.terminal;
+  if (!learn || !choices?.length) return null;
   let winner: { trial: TerminalTrial; score: number } | null = null;
   const attempts = learn.goalAttempts ?? {};
-  for (const w of learn.terminal) {
+  for (const w of choices) {
     const body = selectBody(layout, w.actor, learn.lastActor[w.actor]),
       motion = learn.partMotion?.[w.actor],
       markers = layout[w.marker];
@@ -107,6 +110,7 @@ export function offerTerminalContact(
     );
     const moves = model.motors.filter((z) => z.support > 0 || available.size >= 4);
     for (const part of markers) {
+      if (w.sourceDescriptor && !same(w.at,part.at)) continue;
       const goal = aligned(diff(part.at, w.offset), p, pitch);
       if (same(goal, p) || peers.some((z) => cellMatches(z, goal, pitch))) continue;
       if (learn.visitedContacts?.[JSON.stringify([w.actor, w.marker, part.at, peers])] !== undefined)
@@ -188,7 +192,8 @@ export function offerTerminalContact(
     origin: scene,
     a: trial.op,
     b: trial.op,
-    rule: 'approach_the_visible_contact_that_preceded_official_completion',
+    rule: trial.witness.sourceDescriptor ? 'test_a_contact_observed_at_completion_in_source_families'
+      : 'approach_the_visible_contact_that_preceded_official_completion',
     refs: [],
     terminalContact: trial,
   };
@@ -212,6 +217,10 @@ export function measureTerminalContact(
       : null;
   const live = b.observation_ref === trial.before && trial.op === op;
   const matched = live && (won || cellMatches(actual, trial.to, trial.pitch));
+  if (trial.witness.sourceDescriptor) {
+    if (matched && !won && trial.distance>1) learn.pendingSourceContact={frame:a.frame_hash,witness:trial.witness};
+    else delete learn.pendingSourceContact;
+  }
   (learn.goalAttempts ??= {})[trial.key] = a.revision;
   if (live && matched && !won && trial.distance === 1)
     (learn.visitedContacts ??= {})[

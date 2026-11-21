@@ -2,6 +2,7 @@ import { assessLocal, canCompareAnotherPreparation, continuationAt, demonstrated
 import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
+import {sourceContactHypotheses} from './source-contact-hypothesis.ts';
 import {proposeMobilityTest,measureMobility,type MobilityProbe} from './test-mechanism-mobility.ts';
 import {newLocalProgress,measureLocalRepeat,observeVacatedSites,knownLocalRepeat,repeatKey,type LocalProgress,type ZoneRepeat} from './local-progress.ts';
 import {offerMechanism,finishMechanism,type MechanismTrial} from './reconfigure-local-mechanism.ts';
@@ -811,7 +812,8 @@ export function experimentCommand(x: Experiment) {
   return first.includes(x.phase) ? x.a : x.b;
 }
 export function selectExperiment(
-  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows, localOpportunity=false
+  m: Memory, o: NativeObservation, inputs: readonly NativeCommand[], late: boolean, rows?: NativeRows, localOpportunity=false,
+  testSourceContact=false
 ): Experiment | null {
   const local=m.localCapacity;
   function bindLocal(plan:LocalForecast):Experiment {
@@ -828,6 +830,16 @@ export function selectExperiment(
     if(revision?.revised)return bindLocal(revision);
   }
   const established = selectEstablishedExperiment(m, o, inputs, late, rows);
+  const learning=m.previewLearning;
+  const pendingContact=learning?.pendingSourceContact?.frame===o.frame_hash ? learning.pendingSourceContact.witness : undefined;
+  if (rows && learning && !learning.terminal?.length && (pendingContact || testSourceContact) &&
+      (!established || ['explore','frontierProbe','probe','control','position'].includes(established.phase))) {
+    const hypotheses=pendingContact?[pendingContact]:sourceContactHypotheses(learning,o,rows);
+    if (hypotheses.length) {
+      const contact=offerTerminalContact(m,m.scenes.indexOf(sceneKey(o)),o,rows,new Set(o.available_action_refs),hypotheses);
+      if (contact)return contact;
+    }
+  }
   if(local && rows && localOpportunity
       && !established?.mechanism && !established?.terminalContact && !established?.witnessedPreview
       && !m.frames?.active && !m.occupancy?.active && !m.territory?.active && !m.pending

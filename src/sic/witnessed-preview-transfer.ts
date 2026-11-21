@@ -65,6 +65,7 @@ export type ReadOffer = {
 };
 import type { TerminalContact } from './terminal-contact.ts';
 export type PreviewLearning = {
+  pendingSourceContact?: { frame: string; witness: TerminalContact };
   terminal?: TerminalContact[];
   goalAttempts?: Record<string, number>;
   visitedContacts?: Record<string, number>;

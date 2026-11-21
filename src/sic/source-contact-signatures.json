@@ -1,0 +1,22 @@
+{
+  "[\"contact\",false,true,false,\"one\",true,false]": [
+    [
+      2,
+      1
+    ],
+    [
+      2,
+      0
+    ]
+  ],
+  "[\"relative-shape\",1,1,true,false,\"one\",true,false]": [
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      1
+    ]
+  ]
+}
