@@ -1,6 +1,12 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
-**SS09 L2 est ouvert au diagnostic et à la résolution, à froid et en campagne.** SIC confirme le changement de contrôle en quatre coups. Le banc gagne en 26 commandes après avoir choisi un sujet capable de déplacer deux caisses et un autre capable de finir un placement par contact. SIC v98 échoue à froid après 280 commandes. Les mentions historiques de la réserve correspondent aux versions précédentes. [Expérience, contre-épreuves et scores](selection-et-pose-ss09-v98.md)
+**SS09 L2 fait partie du lot ordinaire de diagnostic, d’expérimentation et de score**, au même titre que SS01 à SS11. SIC gagne SS09 à froid en 54 coups. Les mentions de réserve dans les protocoles historiques décrivent uniquement ces anciens gels. [Première divergence et victoire autonome sur SS09](placements-cooperatifs-v100.md)
+
+**Les trois nouveaux L2 gagnés à froid sont SS09 en 54, SS10 en 227 et SS11 en 35.** Sur SS09, SIC apprend à déplacer le partenaire une fois la porte ouverte. Sur SS10, il donne la priorité à une expérience de placement et apprend à tirer une caisse avant de pousser l’autre. Sur SS11, il retrouve les mouvements d’avant le clic, imagine deux appuis successifs et vérifie leur usage en traversant. [Chantiers, configurations et comparaisons causales](traversees-composees-v104.md)
+
+**Le candidat figé v104 gagne les onze L2 du catalogue, dont 8 à froid dans les essais consignés.** Les 100 victoires et trajectoires sources sont conservées. SS01 reste à 32 coups après le L1 et gagne également en 44 coups en entrée directe. [Score par condition et qualification](traversees-composees-v104.md#score-du-candidat-figé)
+
+## Résultats des versions antérieures
 
 **SS08 devient le huitième jeu Custom 4 dont SIC gagne le L2.** V95 gagne à froid en **70 actions autonomes**. Après un échange de positions observé, SIC amène le sujet qui pousse sur une rive utile, transforme une pièce en appui et utilise la case nouvellement praticable pour rejoindre les deux repères. Deux autres configurations à 70 commandes restent sans point. Le banc confirme qu’en ramenant les deux sujets aux mêmes positions par une autre préparation, la même traversée échoue. Les sept victoires précédentes et les 100 trajectoires sources sont préservées. Sur SS10, le prochain chantier associe la sortie d’une boucle d’approche à la recherche d’un placement qui maintient un passage ouvert. [Décisions, expérience comparée et certificats](transports-par-region-v95.md)
 
