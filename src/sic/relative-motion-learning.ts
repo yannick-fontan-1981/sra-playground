@@ -4,6 +4,8 @@ import type {
 } from "../logos-engine/v6-native-types.ts";
 import type { VisualLayout } from "./witnessed-preview-transfer.ts";
 import type { TerminalContact } from "./terminal-contact.ts";
+import type { PartMotion } from "./controlled-parts.ts";
+import { spatialControls } from "./calibrate-spatial-controls.ts";
 import type { XY } from "./access-terrain.ts";
 
 type Point = number;
@@ -15,6 +17,7 @@ type Sample = {
   destination: Point;
   moved: boolean;
   clear: boolean;
+  texture?: string;
 };
 type TerrainReturn = { open: boolean; texture: string };
 export type RelativeModel = {
@@ -26,6 +29,7 @@ export type RelativeModel = {
   height: number;
   goals: Record<string, Point[]>;
   moves: Record<string, number>;
+  inheritedMoves?: Record<string, string>;
   samples: Sample[];
   measured: Record<string, GroupPose>;
   playerTerrain: Record<number, TerrainReturn>;
@@ -37,6 +41,8 @@ export type RelativeModel = {
   first: string;
   differingRef?: string;
   blockedRef?: string;
+  occupiedFailures?: Record<number, string>;
+  obstruction?: string;
 };
 export type RelativeMemory = { models: Record<string, RelativeModel> };
 export const poseKey = (s: GroupPose) => [s.actor, ...s.pieces].join(",");
@@ -141,6 +147,7 @@ export function observeRelativeMotion(
   old: VisualLayout,
   next: VisualLayout,
   op: string,
+  previousMotion?: Record<string, PartMotion>,
 ) {
   if (
     !/^ACTION[1-4]$/.test(op) ||
@@ -179,6 +186,32 @@ export function observeRelativeMotion(
         )
           continue;
         m = newModel(w, partner, parts[0]!.at, rows, b.observation_ref);
+        const motion = previousMotion?.[w.actor];
+        const controls =
+          motion &&
+          spatialControls(
+            motion,
+            new Set(b.available_action_refs),
+            "",
+            {},
+            b.frame_hash,
+            w.actor,
+          );
+        if (controls?.pitch[0] === m.pitch) {
+          for (const motor of controls.motors.filter(
+            (v) =>
+              v.basis === "observed" &&
+              v.support > 0 &&
+              /^ACTION[1-4]$/.test(v.op),
+          )) {
+            const observed = Object.values(
+              motion!.displacements?.[motor.op] ?? motion!.axes[motor.op] ?? {},
+            ).find((v) => v.d[0] === motor.d[0] && v.d[1] === motor.d[1]);
+            if (!observed) continue;
+            m.moves[motor.op] = (motor.d[0] + motor.d[1] * m.width) / m.pitch;
+            (m.inheritedMoves ??= {})[motor.op] = observed.first;
+          }
+        }
       }
       const p = readGroup(m, old),
         q = readGroup(m, next);
@@ -202,7 +235,12 @@ export function observeRelativeMotion(
         if (mem.models[id]) m.invalid++;
         continue;
       }
-      if (step && m.moves[op] && m.moves[op] !== step) {
+      if (
+        step &&
+        m.moves[op] &&
+        m.moves[op] !== step &&
+        !m.inheritedMoves?.[op]
+      ) {
         m.invalid++;
         continue;
       }
@@ -219,7 +257,10 @@ export function observeRelativeMotion(
       if (!mem.models[id] && !shifted) continue;
       mem.models[id] = m;
       m.last = a.observation_ref;
-      if (step) m.moves[op] = step;
+      if (step) {
+        m.moves[op] = step;
+        if (m.inheritedMoves) delete m.inheritedMoves[op];
+      }
       m.measured[poseKey(p) + "/" + op] = q;
       const destination = p.actor + d,
         bare = !p.pieces.includes(destination);
@@ -228,6 +269,13 @@ export function observeRelativeMotion(
           open: !!step,
           texture: texture(m, rows, destination),
         };
+      if (!bare && !step)
+        (m.occupiedFailures ??= {})[destination] = a.observation_ref;
+      if (
+        m.occupiedFailures?.[destination] &&
+        m.playerTerrain[destination]?.open
+      )
+        m.obstruction = m.occupiedFailures[destination];
       if (!step) {
         m.blocked++;
         m.blockedRef = a.observation_ref;
@@ -247,6 +295,9 @@ export function observeRelativeMotion(
           destination: want,
           moved: to !== from,
           clear,
+          ...(clear && want !== p.actor
+            ? { texture: texture(m, rows, want) }
+            : {}),
         };
         if (
           !m.samples.some(
@@ -286,8 +337,22 @@ export function fitReach(m: RelativeModel): ReachLaw {
   const open = new Set(
     m.samples.filter((s) => s.moved).map((s) => s.destination),
   );
+  const positive = new Set(
+    m.samples.filter((s) => s.moved && s.texture).map((s) => s.texture),
+  );
+  const negative = new Set<string>();
+  for (const [cell, s] of Object.entries(m.playerTerrain)) {
+    if (s.open) {
+      open.add(Number(cell));
+      positive.add(s.texture);
+    } else negative.add(s.texture);
+  }
   const known = m.samples.filter(
-    (s) => s.moved || (s.clear && open.has(s.destination)),
+    (s) =>
+      s.moved ||
+      (s.clear &&
+        (open.has(s.destination) ||
+          (s.texture && positive.has(s.texture) && !negative.has(s.texture)))),
   );
   let best: ReachLaw = {
     metric: "global",

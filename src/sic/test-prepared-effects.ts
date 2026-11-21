@@ -122,7 +122,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       observePreviewBindings(learning,b,a,before,after,key);
       if(comparePreparations){
         observeCueCondition(learning,b,a,before,after,key);
-        if(limits && learning.terminal?.length)observeRelativeMotion(m.relativeMotion??={models:{}},learning.terminal,b,a,rows,before,after,key);
+        if(limits && learning.terminal?.length)observeRelativeMotion(m.relativeMotion??={models:{}},learning.terminal,b,a,rows,before,after,key,learning.partMotion);
       }
       exposedUnderParts(learning,b,a,rows,next,before,after);
     }
@@ -147,8 +147,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
       if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
-      const relative=!cursor && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
-        ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits) : null;
+      const missingCue=!!m.previewLearning?.cueSearch?.seeking;
+      const repair=missingCue || hasExperimentOpportunity(m);
+      const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
+        ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
       if (!cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
@@ -183,7 +185,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ref,
         ...(cursor?.evidence??[]),
         ...(experiment.cue?.evidence??[]),
-        ...(relative?[relative.learned,relative.contrast,relative.contact]:[]),
+        ...(relative?[relative.learned,relative.contrast,relative.contact,...(relative.motorEvidence?[relative.motorEvidence]:[])]:[]),
         ...(experiment.configurationTrial?.evidence??[]),
         ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
         ...(experiment.localCapacity?.observedPrefix?Object.values(experiment.localCapacity.observedPrefix):[]),

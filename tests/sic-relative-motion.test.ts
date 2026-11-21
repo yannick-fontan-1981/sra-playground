@@ -3,12 +3,68 @@ import test from "node:test";
 import type { NativeObservation } from "../src/logos-engine/v6-native-types.ts";
 import {
   destinations,
+  observeRelativeMotion,
   fitReach,
   poseKey,
   type RelativeModel,
   type GroupPose,
 } from "../src/sic/relative-motion-learning.ts";
 import { chooseRelativePlan } from "../src/sic/relative-motion-plan.ts";
+import type { TerminalContact } from "../src/sic/terminal-contact.ts";
+import type { PartMotion } from "../src/sic/controlled-parts.ts";
+import type { RelativeMemory } from "../src/sic/relative-motion-learning.ts";
+test("a verified motor from another room can be tried before the pair has used it in this one", () => {
+  const previous: PartMotion = {
+    sites: {},
+    substrate: {},
+    axes: {
+      ACTION1: {
+        "0,-2": { d: [0, -2], count: 3, first: "prior-up", last: "c" },
+      },
+      ACTION4: {
+        "2,0": { d: [2, 0], count: 3, first: "prior-right", last: "d" },
+      },
+    },
+  };
+  const rows = Array.from({ length: 7 }, () => Array(8).fill(0));
+  const part = (x: number, y: number) => ({
+    at: [2 * x, 2 * y] as [number, number],
+    box: [x, y, x, y],
+    form: "observed",
+  });
+  const observation = (ref: string) =>
+    ({
+      observation_ref: ref,
+      frame_hash: ref,
+      state: "NOT_FINISHED",
+      level_epoch: 2,
+      available_action_refs: ["ACTION1", "ACTION4"],
+    }) as NativeObservation;
+  const witnesses = [
+    {
+      actor: "actor",
+      marker: "marker",
+      pitch: [2, 2],
+      offset: [0, 0],
+    } as TerminalContact,
+  ];
+  const state: RelativeMemory = { models: {} };
+  observeRelativeMotion(
+    state,
+    witnesses,
+    observation("a"),
+    observation("b"),
+    rows,
+    { actor: [part(1, 3)], piece: [part(2, 4)], marker: [part(5, 4)] },
+    { actor: [part(2, 3)], piece: [part(3, 4)], marker: [part(5, 4)] },
+    "ACTION4",
+    { actor: previous },
+  );
+  const m = Object.values(state.models)[0]!;
+  assert.equal(m.moves.ACTION1, -m.width);
+  assert.equal(m.inheritedMoves?.ACTION1, "prior-up");
+  assert.equal(m.inheritedMoves?.ACTION4, undefined);
+});
 
 const model = (): RelativeModel => ({
   actor: "walker",
@@ -41,7 +97,12 @@ test("a formerly mobile destination separates range from a wall and estimates re
     [30, 42, 43, 0],
   ] as const)
     m.samples.push({ p, q, destination: d, moved: !!moved, clear: true });
-  assert.deepEqual(fitReach(m), {metric:'diamond',radius:3,disagreements:0,evidence:3});
+  assert.deepEqual(fitReach(m), {
+    metric: "diamond",
+    radius: 3,
+    disagreements: 0,
+    evidence: 3,
+  });
   // The remote, never entered destination does not supply a negative range example.
   assert.deepEqual(
     destinations([20, 21], [21, 22], 1),

@@ -42,6 +42,7 @@ export type RelativeTrial = {
   contact: string;
   before: string;
   model: string;
+  motorEvidence?: string;
   predictions: number;
   alternatives: number;
   usedMeasured: boolean;
@@ -319,10 +320,12 @@ export function chooseRelativePlan(
   rows: NativeRows,
   refs: Record<string, string>,
   limits: { maxNodes: number; maxDepth: number },
+  requireObstruction = false,
 ): RelativeTrial | null {
   const models = Object.entries(mem.models)
     .filter(
       ([, m]) =>
+        (!requireObstruction || !!m.obstruction) &&
         m.positive >= 2 &&
         m.contrasts > 0 &&
         !m.invalid &&
@@ -417,9 +420,10 @@ export function chooseRelativePlan(
         law,
         purpose: optimistic ? "test_unknown_route" : "reach_scoring_contact",
         learned: m.first,
-        contrast: m.differingRef!,
+        contrast: m.obstruction ?? m.differingRef!,
         contact: refs[marker]!,
         before: o.observation_ref,
+        motorEvidence: m.inheritedMoves?.[step.op],
         predictions: limits.maxNodes - remaining,
         alternatives: goals.size,
         usedMeasured: step.measured,
