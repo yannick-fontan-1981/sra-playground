@@ -1,25 +1,37 @@
 # Intégration native de SS12
 
-Travaille dans `yannick-fontan-1981/sra-playground`, depuis la branche canonique actuelle. Lis `AGENTS.md` et `docs/migration/git-site-sync-policy.md` avant modification.
+**SS12 — La Colonne en Marche** est le douzième jeu de Custom 4. Il réunit le Guerrier rouge et le Barde magenta. Le raccordement sur la branche `codex/ss12-custom4` reprend le laboratoire 0.1.0 intégré au commit `f0a1ff43799880f6fed476187200defb5de11925`.
 
-Intègre **SS12 — La Colonne en Marche**, duo **Guerrier rouge + Barde magenta**, au groupe Custom 4 en suivant le raccordement natif de SS11.
+## Raccordement
 
-## Source autoritative du laboratoire
+- L’adaptateur `src/games/sinking-star-ss12.ts` est chargé à la demande par le dispatcher natif. Il valide le niveau avant de remplacer sa session et contrôle les coordonnées pixel entières de l’ACTION6.
+- Le Playground utilise les huit niveaux `ss12-01` à `ss12-08` dans l’ordre du laboratoire et reprend les métadonnées, le tutoriel et la détection des treize découvertes à partir des pixels publics. Annuler conserve les découvertes. Recommencer, Repartir et changer de niveau les effacent.
+- Les contrôles partagés transmettent les six actions au moteur. La présentation conserve les images et les durées, respecte la préférence de réduction des animations et protège la nouvelle observation contre les images annulées. Les panneaux terminaux attendent la dernière image.
+- Les huit aperçus réels suivent SS11 dans la galerie. Le catalogue compte 112 jeux et la galerie 732 aperçus. Les crédits Steam et les deux références du niveau 8 sont accessibles.
+- L’agent SRA reçoit le contrat public du jeu. Les parcours d’auteur, les scripts de conception et les solveurs restent dans le laboratoire et les tests de validation.
 
-`experiments/sinking-star-ss12/`
+## Contrôles
 
-Lis `README.md`, `docs/specification.md`, `docs/level-design.md`, `docs/validation.md` et `docs/roadmap.md`. Les cartes finales sont dans `src/levels.ts`. Les huit références et parcours d’auteur sont dans `reference/levelN-design.json` et `tests/witnesses.json`.
+| Contrôle | Résultat |
+| --- | --- |
+| Laboratoire autonome | 25 tests moteur, huit parcours, 13 découvertes et contrôles Happy DOM réussis. Chromium a confirmé les pixels après 526 entrées ainsi que le rendu et les commandes à 390 px. |
+| Parité native | 53 tests Custom 4 réussis. Les 526 entrées, 38 sélections et 1 548 images de SS12 concordent entre le laboratoire, l’adaptateur et le dispatcher. Les huit parcours gagnent sans refus ni mort. |
+| Chromium dans le Playground | Huit parcours et 13 découvertes rejoués par l’interface réelle. Vérification des interruptions, du moment d’affichage de la victoire et de la défaite, des huit liens et vignettes et des commandes à 390 px. |
+| Régressions | SS11 et SS01 réussis dans Chromium. Les jeux historiques CASC et LS20 se chargent et répondent aux actions dans le runtime Python. |
+| TypeScript et production | `npm run typecheck`, `npm run build` et `git diff --check` réussis. |
 
-## Travail demandé
+Le test du mode agent vérifie la transmission d’une action publique, le verrouillage pendant l’animation et le retour aux commandes manuelles. Les huit victoires mesurées proviennent des parcours d’auteur.
 
-1. Ajouter l’adaptateur natif, l’entrée de catalogue, la vignette, le lien direct et la sélection de SS12, avec ses huit niveaux dans le même ordre. Le tutoriel reste en première position.
-2. Réutiliser le moteur déterministe du laboratoire. Préserver ACTION1–6, les images 64 × 64, la palette, les durées des animations, les deux héros et les deux destinations.
-3. Raccorder les contrôles manuels, la sélection par clic/Tab/1/2, les reflets, Annuler, Recommencer et Repartir. La victoire et la défaite attendent la dernière image d’animation.
-4. Préserver les explications, sources et treize découvertes du tutoriel. L’agent SRA n’a accès qu’au contrat public du jeu ; ni les références d’auteur ni les parcours témoins ne doivent entrer dans son observation ou sa décision.
-5. Vérifier les huit parcours dans l’adaptateur puis dans le navigateur, le changement de niveau, les images, les fins de niveau, les annulations et les contrôles au format mobile. Rejouer les contrôles de non-régression Custom 4 concernés.
-6. Si le raccordement modifie un chemin partagé du runtime, mesurer le coût global avant/après dans les mêmes conditions. Respecter la tolérance globale convenue de +10 % ; un dépassement de phase isolée est acceptable si le global reste dans cette limite.
-7. Commiter, pousser, intégrer sur la branche canonique puis publier le Site depuis cet état. Vérifier le lien entre commit GitHub et SHA source de la version Site. Conserver l’accès actuel au Site.
+## Coût du parcours partagé
 
-Les parcours d’auteur servent seulement à la validation du jeu. Leur réussite ne signifie pas que SRA a appris ou résolu SS12. Évaluer l’agent séparément sans lui donner les itinéraires.
+Sept paires, après une paire d’échauffement, ont comparé le build de référence `f0a1ff43` au build intégrant SS12 (`ed0da190`). Playwright a alterné l’ordre des builds dans Microsoft Edge 158.0.4370.33, avec des contextes neufs et la même fenêtre 1440 × 1000. Chaque parcours charge SS09 ou SS11 depuis le niveau 1, puis exécute quatre actions publiques de SRA avec leurs rendus. Les actions envoyées sont identiques dans chaque paire.
 
-Au compte rendu, préciser branche, commit local, commit poussé, commit intégré, version Site, SHA source, état de synchronisation et prochaine étape.
+La médiane des temps cumulés pour les deux jeux passe de **11 664,91 ms** à **12 160,69 ms**, soit **+4,25 %** pour un seuil de +10 %. Le fichier compilé du worker agent est identique dans les deux builds.
+
+Reproduction avec les deux prévisualisations locales : `node scripts/compare-custom4-browser-cost.mjs http://127.0.0.1:4175 http://127.0.0.1:4174 7`.
+
+## Publication
+
+L’adresse de production et l’audience d’origine sont conservées. La qualification de livraison compare le SHA source enregistré par Sites au SHA de `main`, puis vérifie les ressources servies et les chemins de jeu. Le compte rendu de livraison relève la version de production et le SHA observés.
+
+[Site SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site/) · [Jouer à SS12](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS12#playground)

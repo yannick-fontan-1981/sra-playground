@@ -1,24 +1,14 @@
 # SS12 — feuille de route
 
-## Périmètre de cette étape
+**La Colonne en Marche** est intégré comme douzième jeu de **Custom 4 · Sinking Star**. Les huit salles du laboratoire 0.1.0, leurs références et le tutoriel de niveau 1 sont conservés.
 
-Livrer le laboratoire autonome **La Colonne en Marche**, huit salles Guerrier–Barde, tutoriel dense et adaptations identifiées de North/Crossovers. Le raccordement au catalogue Playground est suivi séparément.
+| Étape | Résultat |
+| --- | --- |
+| Moteur et contenu | 25 tests moteur réussis. Huit parcours gagnants, 526 entrées, 38 sélections et 1 548 images. |
+| HTML autonome | Contrôles Happy DOM et Chromium réussis, y compris le sélecteur et les commandes à 390 px. |
+| Intégration native | Huit niveaux et aperçus. Les 53 tests Custom 4, le typage et le build réussissent. |
+| Interface intégrée | Chromium a vérifié les huit parcours, les interruptions, la victoire, la défaite, la galerie, le tutoriel et les commandes sur ordinateur et mobile. |
+| Coût partagé | **+4,25 %** sur le parcours global mesuré, pour une tolérance de +10 %. |
+| Livraison | Publication sur le Site existant depuis `main`. Le compte rendu indique la version et le SHA source vérifiés. |
 
-| Étape | État | Preuve ou suite |
-| --- | --- | --- |
-| Duo et moteur commun | **100 %** | 25 tests, règles de chant/poussée/reflets/circuits/eau/combat. |
-| Tutoriel de treize découvertes | **100 %** | Parcours L1, 13/13 découvertes depuis les pixels. |
-| Huit salles et références | **100 %** | Huit références d’auteur et métadonnées synchronisées. |
-| Solvabilité de la campagne | **100 %** | 526 entrées, zéro refus, zéro mort, état WIN. |
-| HTML autonome et comportements DOM | **100 %** | Build et rapport `ui-dom-report.json`. |
-| Contrôle visuel en navigateur | **Bloqué** | Politique de l’environnement ; voir `validation.md`. |
-| Intégration au catalogue natif | **À faire** | Prompt préparé dans `codex-integration-prompt.md`. |
-| Publication Site et vérification GitHub ↔ Site | **À faire après intégration** | Aucun déploiement du laboratoire seul. |
-
-Le contenu du laboratoire est terminé. Le blocage du contrôle navigateur reste explicite ; le taux de contenu ne vaut pas certification du rendu CSS ni résultat de SRA.
-
-## Prochaine étape
-
-Raccorder SS12 au catalogue Custom 4 depuis ces sources, puis vérifier le comportement et le rendu dans un navigateur autorisé. Conserver le tutoriel en niveau 1, les règles du duo, les durées et l’annulation des animations. Évaluer ensuite SRA séparément depuis les seules observations publiques.
-
-Appliquer la politique du dépôt pour cette intégration : tests → commit → push GitHub → intégration canonique → publication Site → vérification des SHA. Respecter la tolérance globale de +10 % si un chemin partagé de l’agent est modifié.
+Les preuves et la procédure de reproduction sont dans [la validation du laboratoire](validation.md) et [la documentation d’intégration](codex-integration-prompt.md). Les parcours d’auteur documentent la solvabilité des huit salles. Une évaluation de résolution par SRA reste distincte de ces parcours et du test du raccordement agent.
