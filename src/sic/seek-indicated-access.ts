@@ -15,6 +15,7 @@ export type AccessExperiment={purpose:'approach_indication'|'test_indication'|'s
 export type IndicatedMemory={scenes:Record<string,AccessScene>;sites:Record<string,true>;productions:Production[];
   mobilePending?:MobilePlan;mobileDenied?:Record<string,true>;
   preparedGround?:{at:XY;appearance:string;ref:string}[];
+  partnerSites?:Record<string,string>;
   readings:Record<string,{hits:number;misses:number}>;contradictions:Record<string,number>;repair:boolean};
 export const newIndicatedMemory=():IndicatedMemory=>({scenes:{},sites:{},productions:[],readings:{},contradictions:{},repair:false});
 const single=(l:VisualLayout,k:string)=>l[k]?.length===1?l[k]![0]:undefined;

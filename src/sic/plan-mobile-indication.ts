@@ -6,7 +6,7 @@ import type {NativeRows} from '../logos-engine/v6-native-types.ts';
 import type {AccessContext,AccessScene,IndicatedMemory} from './seek-indicated-access.ts';
 
 type Motor={op:string;d:XY};
-export type MobileStep={command:string;from:XY;centre:XY;expected:XY;placed:XY;read:boolean;inverseHypothesis?:true;preparedSurface?:true};
+export type MobileStep={command:string;from:XY;centre:XY;expected:XY;placed:XY;read:boolean;inverseHypothesis?:true;preparedSurface?:true;partnerVisit?:string};
 export type MobilePlan={pivot:string;cue:string;motion:'push'|'pull'|'both';ref:string;path:MobileStep[];examined:number};
 type Model={pivot:string;cue:string;push:boolean;pull:boolean;ref:string;examples:ProbePattern[]};
 const gridPoint=(p:XY,c:AccessContext)=>aligned(p,c.goal,c.pitch);
@@ -56,7 +56,7 @@ function dominant(values:number[]){
   const counts=new Map<number,number>();for(const v of values)counts.set(v,1+(counts.get(v)??0));
   return [...counts].sort((a,b)=>b[1]-a[1])[0]?.[0];
 }
-type Board={points:XY[];index:Map<string,number>;walk:number[][];goal:number;start:number;centre:number;prepared:Set<number>};
+type Board={points:XY[];index:Map<string,number>;walk:number[][];goal:number;start:number;centre:number;prepared:Set<number>;partnerVisits:Map<number,string>};
 function visibleBoard(m:IndicatedMemory,c:AccessContext,s:AccessScene,pivot:string,rows:NativeRows,motors:Motor[],learnedGround?:number):Board|undefined{
   const centre=s.visible[pivot];if(!centre)return;
   const ground=learnedGround??surfaceFromVisits(Object.fromEntries(Object.keys(m.sites).map(k=>[k,1])),rows,c.goal,c.pitch,
@@ -64,7 +64,7 @@ function visibleBoard(m:IndicatedMemory,c:AccessContext,s:AccessScene,pivot:stri
   if(ground==null)return;
   const documented=new Set(Object.keys(m.sites));
   for(const other of Object.values(m.scenes)){const p=other.visible[pivot];if(p)documented.add(gridPoint(p,c).join());}
-  const points:XY[]=[],index=new Map<string,number>(),prepared=new Set<number>();
+  const points:XY[]=[],index=new Map<string,number>(),prepared=new Set<number>(),partnerVisits=new Map<number,string>();
   const changed=new Map(m.preparedGround?.map(site=>[site.at.join(),site.appearance]));
   for(let y=c.goal[1]%c.pitch[1];y<=2*(rows.length-1);y+=c.pitch[1])
     for(let x=c.goal[0]%c.pitch[0];x<=2*(rows[0]!.length-1);x+=c.pitch[0]){
@@ -72,13 +72,18 @@ function visibleBoard(m:IndicatedMemory,c:AccessContext,s:AccessScene,pivot:stri
       if(same(p,c.home))continue;
       if(!same(p,c.goal)&&!documented.has(k)){
         const values=tileValues(rows,p,c.pitch);
-        if(dominant(values)!==ground){if(changed.get(k)!==values.join())continue;prepared.add(points.length);}
+        if(dominant(values)!==ground){
+          const visit=m.partnerSites?.[k];
+          if(visit)partnerVisits.set(points.length,visit);
+          else if(changed.get(k)===values.join())prepared.add(points.length);
+          else continue;
+        }
       }
       index.set(k,points.length);points.push(p);
     }
   const start=index.get(gridPoint(s.at,c).join()),anchor=index.get(gridPoint(centre,c).join()),goal=index.get(c.goal.join());
   if(start===undefined||anchor===undefined||goal===undefined)return;
-  return {points,index,start,centre:anchor,goal,prepared,walk:points.map(p=>motors.map(v=>index.get(add(p,v.d).join())??-1))};
+  return {points,index,start,centre:anchor,goal,prepared,partnerVisits,walk:points.map(p=>motors.map(v=>index.get(add(p,v.d).join())??-1))};
 }
 const edgeKey=(actor:XY,centre:XY,q:string)=>actor.join()+'/'+centre.join()+'/'+q;
 export function mobileRefutation(pivot:string,cue:string,p:XY,centre:XY,q:string){return pivot+'/'+cue+'/'+edgeKey(p,centre,q);}
@@ -127,7 +132,8 @@ function solve(model:Model,board:Board,c:AccessContext,m:IndicatedMemory,s:Acces
         const v=nodes[j]!,prev=nodes[v.parent]!,read=v.action===motors.length;
         path.push({from:points[prev.p]!,centre:points[prev.a]!,command:read?op:motors[v.action]!.op,expected:points[v.p]!,placed:points[v.a]!,read,
           ...(read&&conjectures.has(diff(points[prev.p]!,points[prev.a]!).join())?{inverseHypothesis:true as const}:{}),
-          ...(board.prepared.has(v.p)?{preparedSurface:true as const}:{})});
+          ...(board.prepared.has(v.p)?{preparedSurface:true as const}:{}),
+          ...(board.partnerVisits.has(v.p)?{partnerVisit:board.partnerVisits.get(v.p)!}:{})});
       }
       path.reverse();
       if(path.length)return {pivot:model.pivot,cue:model.cue,motion:model.push&&model.pull?'both':model.pull?'pull':'push',ref:model.ref,path,examined:examined+1};

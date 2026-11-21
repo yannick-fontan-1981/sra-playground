@@ -120,6 +120,14 @@ function accessContext(m:LandmarkMemory){
   return a&&m.secondRole&&m.parkedRole?{actor:m.secondRole,parked:m.parkedRole,home:a.home,goal:a.other,pitch:a.pitch}:undefined;
 }
 export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after:VisualLayout,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,op:string,t?:LandmarkTrial){
+  if(t?.stage==='place_before_selection'){
+    const start=singleton(before,t.actor),end=singleton(after,t.actor),still=singleton(after,t.peer);
+    if(start&&end&&still&&cellMatches(still.at,t.guard,t.pitch)&&!cellMatches(start.at,end.at,t.pitch)){
+      const sites=((m.access??=newIndicatedMemory()).partnerSites??={});
+      sites[aligned(start.at,t.other,t.pitch).join()]=b.observation_ref;
+      sites[aligned(end.at,t.other,t.pitch).join()]=a.observation_ref;
+    }
+  }
   if(t?.stage==='place_before_selection' && !covered(before,t,t.home) && covered(after,t,t.home) && cellMatches(singleton(after,t.actor)?.at??null,t.home,t.pitch)){
     const prepared:{at:XY;appearance:string;ref:string}[]=[];
     for(let y=t.home[1]%t.pitch[1];y<=2*(rows.length-1);y+=t.pitch[1])for(let x=t.home[0]%t.pitch[0];x<=2*(rows[0]!.length-1);x+=t.pitch[0]){

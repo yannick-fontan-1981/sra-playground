@@ -39,6 +39,8 @@ test('a remote changed surface is a conditional route only while its measured ap
   assert.ok(plan.path.some(s=>s.preparedSurface));assert.deepEqual(plan.path.at(-1)!.expected,late.goal);
   changed[6]![4]=0;
   assert.equal(chooseMobileIndication(m,late,'a',changed,motors,ops,24,600,1),undefined);
+  m.partnerSites={[xy(4,6).join()]:'earlier verified visit'};
+  assert.ok(chooseMobileIndication(m,late,'a',changed,motors,ops,24,600,1)?.path.some(s=>s.partnerVisit==='earlier verified visit'));
 });
 test('a moving indication alone does not establish mobility of its proposed pivot',()=>{
   const m=memory();delete m.scenes.a!.next.ACTION2;
