@@ -18,13 +18,20 @@ export const alternatives: Law[] = [
 ];
 export type Bearing = { dx: number; dy: number; ref: string };
 export type Learning = {
+  join?: import('./paired-crossing-preparation.ts').Link;
   motors: Record<string, Bearing>;
   evidence: [Partial<Record<Law, number>>, Partial<Record<Law, number>>];
   refs: string[];
   radius: number;
   scope?: string;
+  mobileSupports?: string;
+  fieldWitness?: string;
   projections?: Projection[];
   imageTrial?: Reading;
+  avoid?: number[];
+  mobileForms?: string[];
+  previewPose?: string;
+  visibleEffect?: Reading;
   denied: Record<string, number>;
   visits: Record<string, number>;
   special?: { mark: string; ref: string };
@@ -99,6 +106,7 @@ export function imagine(
   }
   if (op === 'ACTION5') {
     if (!m.projections?.length) return;
+    if (m.previewPose === key(v)) return m.visibleEffect;
     return applyImages(v, images(s, v, m.projections));
   }
   const motor = m.motors[op];
@@ -139,6 +147,9 @@ export function imagine(
           ),
         ) <= r;
       const movers = v.pieces.filter(near).map((p) => ({ p, kind: 'piece' }));
+      if (m.mobileSupports)
+        for (const p of v.supports.filter(near))
+          movers.push({ p, kind: 'support' });
       if (near(b)) movers.push({ p: b, kind: 'peer' });
       movers.push({ p: a, kind: 'actor' });
       movers.sort(
@@ -152,8 +163,17 @@ export function imagine(
         const to = at(p);
         if (kind === 'piece') {
           if (freePiece(to)) place(p, to);
+        } else if (kind === 'support') {
+          if (freePiece(to) && !n.supports.includes(to)) {
+            n.supports.splice(n.supports.indexOf(p), 1);
+            if (space.medium.has(to)) n.supports.push(to);
+            else n.pieces.push(to);
+          }
         } else if (
-          space.walk(v, to) &&
+          (m.mobileSupports
+            ? (space.ground.has(to) && space.open(n, to)) ||
+              n.supports.includes(to)
+            : space.walk(v, to)) &&
           !n.pieces.includes(to) &&
           !n.subjects.includes(to)
         )
@@ -208,11 +228,55 @@ export function localEffects(
       dy = Math.floor(to / w) - Math.floor(from / w);
     if ((dx === 0) !== (dy === 0))
       m.motors[op] = { dx: Math.sign(dx), dy: Math.sign(dy), ref };
+    if (m.scope && side === 1 && Math.abs(dx) + Math.abs(dy) === 1) {
+      const gained = [...a.pieces, ...a.supports],
+        before = [...b.pieces, ...b.supports],
+        w = s.grid.columns;
+      const discriminating = before.some((p) => {
+        const x = (p % w) - (from % w),
+          y = Math.floor(p / w) - Math.floor(from / w),
+          to = neighbor(s.grid, p, dx, dy);
+        return (
+          Math.max(Math.abs(x), Math.abs(y)) <= m.radius &&
+          x * dy !== y * dx &&
+          !gained.includes(p) &&
+          gained.includes(to) &&
+          !before.includes(to)
+        );
+      });
+      if (discriminating) {
+        m.fieldWitness = ref;
+        m.evidence[side].field = (m.evidence[side].field ?? 0) + 5;
+      }
+    }
+    if (m.scope && side === 1 && m.motors[op]) {
+      const dir = m.motors[op]!;
+      for (const old of b.supports) {
+        const target = neighbor(s.grid, old, dir.dx, dir.dy);
+        if (
+          !a.supports.includes(old) &&
+          !b.supports.includes(target) &&
+          a.supports.includes(target)
+        ) {
+          m.mobileSupports ??= ref;
+          break;
+        }
+      }
+    }
     const space = geometry(s),
       pred = alternatives.map((h) => {
         const next = imagine(s, space, b, op, m, h) ?? b;
         return poseId(next) === poseId(a);
       });
+    const distance = Math.abs(dx) + Math.abs(dy);
+    if (
+      distance > 1 &&
+      (dx === 0 || dy === 0) &&
+      (b.pieces.includes(to) || b.subjects[peer(side)] === to)
+    ) {
+      m.evidence[side].exchange = (m.evidence[side].exchange ?? 0) + 4;
+      m.refs = [...m.refs.slice(-5), ref];
+    }
     if (pred.some(Boolean) && !pred.every(Boolean)) {
       for (const [i, h] of alternatives.entries())
         m.evidence[side][h] = (m.evidence[side][h] ?? 0) + (pred[i] ? 1 : -1);

@@ -24,7 +24,13 @@ import type { TransportForecast } from './transport-observations.ts';
 
 export type ReusableEffects = Pick<
   Learning,
-  'motors' | 'evidence' | 'refs' | 'radius' | 'carry'
+  | 'motors'
+  | 'evidence'
+  | 'refs'
+  | 'radius'
+  | 'carry'
+  | 'projections'
+  | 'mobileSupports'
 > & { bodies: [number, number] };
 export type PairInquiry = {
   scene?: Scene;
@@ -50,6 +56,12 @@ export function carryPair(
     refs: [...refs],
     radius,
     carry: ref,
+    ...(q.learning.projections?.length
+      ? { projections: structuredClone(q.learning.projections) }
+      : {}),
+    ...(q.learning.mobileSupports
+      ? { mobileSupports: q.learning.mobileSupports }
+      : {}),
   };
 }
 export function seePair(
@@ -167,9 +179,62 @@ export function seePair(
     const lesson = q.lesson;
     m.evidence = structuredClone(lesson.evidence);
     m.motors = { ...lesson.motors, ...m.motors };
+    if (lesson.projections && !m.projections?.length) {
+      const visible = visibleImages(s, next, after);
+      const matched = lesson.projections.filter((r) =>
+        visible.some(
+          (im) =>
+            s.initial[im.pivot] === r.pivotForm &&
+            ((im.dir === r.from && im.out === r.to) ||
+              (im.dir === r.to && im.out === r.from)),
+        ),
+      );
+      if (matched.length) m.projections = structuredClone(matched);
+    }
+    if (lesson.mobileSupports && m.scope && m.radius === lesson.radius)
+      m.mobileSupports = lesson.mobileSupports;
     m.carry = lesson.carry;
     m.refs = [...lesson.refs.slice(-3), ...m.refs];
     delete q.lesson;
+  }
+  if (m.projections?.length) {
+    const shown = visibleImages(s, next, after).filter((im) =>
+      m.projections!.some(
+        (r) =>
+          r.pivotForm === s.initial[im.pivot] &&
+          ((r.from === im.dir && r.to === im.out) ||
+            (r.from === im.out && r.to === im.dir)),
+      ),
+    );
+    m.previewPose = key(next);
+    const actual = applyImages(next, shown);
+    if (actual) m.visibleEffect = actual;
+    else delete m.visibleEffect;
+    for (const im of shown)
+      for (const r of m.projections)
+        if (r.pivotForm === s.initial[im.pivot]) {
+          const w = s.grid.columns,
+            dist =
+              Math.abs((im.pivot % w) - (im.source % w)) +
+              Math.abs(Math.floor(im.pivot / w) - Math.floor(im.source / w));
+          r.witnessedReach = Math.max(r.witnessedReach ?? 0, dist);
+        }
+  }
+  if (q.active) {
+    const mobile = new Set(m.mobileForms ?? []);
+    for (const form of new Set(s.other.map((p) => s.initial[p]!))) {
+      if (
+        s.other.filter((p) => s.initial[p] === form).length < 2 ||
+        m.projections?.some((r) => r.pivotForm === form)
+      )
+        continue;
+      const prior = before.flatMap((k, i) => (k === form ? [i] : [])),
+        now = after.flatMap((k, i) => (k === form ? [i] : []));
+      if (prior.length === now.length && prior.some((p) => !now.includes(p)))
+        mobile.add(form);
+    }
+    m.mobileForms = [...mobile];
+    m.avoid = after.flatMap((k, i) => (mobile.has(k) ? [i] : []));
   }
   delete m.imageTrial;
   if (

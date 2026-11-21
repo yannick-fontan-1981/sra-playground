@@ -107,7 +107,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const learnScope=comparePreparations && informationPreference?.strategy==='learn_the_scope_of_a_control';
+  const retainScope=informationPreference?.strategy==='learn_the_scope_of_a_control';
+  const learnScope=comparePreparations && (retainScope || informationPreference?.strategy==='learn_control_within_one_room');
   const recallMotions=learnScope || comparePreparations && informationPreference?.strategy==='bind_earlier_motions_to_registered_subjects';
   const bridgeSeries=recallMotions || comparePreparations && informationPreference?.strategy==='compose_a_sustained_crossing';
   const prioritizeCoverage=bridgeSeries || comparePreparations && informationPreference?.strategy==='prefer_a_verified_coverage_experiment';
@@ -145,7 +146,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     const learning=m.previewLearning??=newPreviewLearning();
     if(a.levels_completed>b.levels_completed){const contacts=completionContacts(learning,b,a,visualLayout(b,rows),observedCommandKey(cmd));if(contacts.length)learning.terminal=contacts;}
     if(a.levels_completed>b.levels_completed&&m.localCapacity)m.localCarry=nextLocalLevel(m.localCapacity);
-    if(learnScope&&m.pairInquiry&&a.levels_completed>b.levels_completed){const lesson=carryPair(m.pairInquiry,a.observation_ref);if(lesson)m.pairLesson=lesson;}
+    if(retainScope&&m.pairInquiry&&a.levels_completed>b.levels_completed){const lesson=carryPair(m.pairInquiry,a.observation_ref);if(lesson)m.pairLesson=lesson;}
     const boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){

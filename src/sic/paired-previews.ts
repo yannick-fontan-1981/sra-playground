@@ -2,6 +2,7 @@ import { neighbor, type TransportSide } from './transport-observations.ts';
 import type { Scene, Reading } from './paired-scene.ts';
 export type Projection = {
   pivotForm: string;
+  witnessedReach?: number;
   from: number;
   to: number;
   ref: string;
@@ -73,7 +74,23 @@ export function images(s: Scene, v: Reading, rules?: Projection[]): Image[] {
           side: i < 2 ? (i as TransportSide) : -1,
         });
       }
-  return result;
+  if (!rules) return result;
+  const distance = (a: number, b: number) =>
+    Math.abs((a % s.grid.columns) - (b % s.grid.columns)) +
+    Math.abs(Math.floor(a / s.grid.columns) - Math.floor(b / s.grid.columns));
+  return result.filter(
+    (im) =>
+      rules.some(
+        (r) =>
+          matches(s, im.pivot, im.dir, im.out, r) &&
+          distance(im.pivot, im.source) <= (r.witnessedReach ?? Infinity),
+      ) &&
+      !result.some(
+        (peer) =>
+          peer.pivot === im.pivot &&
+          distance(im.pivot, peer.source) < distance(im.pivot, im.source),
+      ),
+  );
 }
 export function previewLooksLike(
   s: Scene,
@@ -84,7 +101,10 @@ export function previewLooksLike(
   const a = key.split(',').map(Number),
     mid = Math.floor(a.length / 2),
     h = Math.floor(s.grid.pitch / 2);
-  if (s.goals.includes(site) || s.doors.some((d) => d.controls.includes(site)))
+  if (
+    s.initial[site] === key &&
+    (s.goals.includes(site) || s.doors.some((d) => d.controls.includes(site)))
+  )
     return false;
   if (cargo)
     return (
@@ -145,6 +165,12 @@ export function recognizeProjection(
     )
     .map((t) => ({
       pivotForm: s.initial[t.pivot]!,
+      witnessedReach:
+        Math.abs((t.pivot % s.grid.columns) - (t.source % s.grid.columns)) +
+        Math.abs(
+          Math.floor(t.pivot / s.grid.columns) -
+            Math.floor(t.source / s.grid.columns),
+        ),
       from: t.dir,
       to: t.out,
       ref,

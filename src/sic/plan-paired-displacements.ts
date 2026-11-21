@@ -1,3 +1,7 @@
+import {
+  joinSeparatedOperators,
+  delivery,
+} from './paired-crossing-preparation.ts';
 import { shortcuts } from './paired-previews.ts';
 import { poseId, type TransportForecast } from './transport-observations.ts';
 import {
@@ -36,6 +40,17 @@ export function planDisplacements(
   const space = geometry(s),
     ops = Object.keys(m.motors),
     world = v.subjects.join('/') + '|' + v.active;
+  if (m.join?.water.every((p) => v.supports.includes(p))) {
+    delete m.join;
+    delete m.plan;
+  }
+  if (!m.join && m.scope && !m.projections?.length) {
+    const link = joinSeparatedOperators(s, v);
+    if (link) {
+      m.join = link;
+      delete m.plan;
+    }
+  }
   const offer = (state: Reading, op: string, why: string, open: string[]) =>
     forecast(s, m, v, state, op, why, open, ref);
   // A single displacement can satisfy several occupied controls at once. Test
@@ -91,7 +106,7 @@ export function planDisplacements(
     }
   }
   const candidates = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
-  if (sets.length)
+  if (sets.length || m.join)
     candidates.sort(
       (a, b) =>
         Number(m.checked.some((x) => x.endsWith(a))) -
@@ -211,6 +226,7 @@ export function planDisplacements(
     return total;
   }
   function score(n: Reading): number {
+    if (m.join) return delivery(s, m.join, n);
     const [a, b] = n.subjects,
       [u, w] = s.goals as [number, number];
     if ((a === u && b === w) || (a === w && b === u)) return 0;
@@ -310,6 +326,40 @@ export function planDisplacements(
       if (m.denied[key(n.s) + '|' + action]) continue;
       const t = imagine(s, space, n.s, op, m, laws[n.s.active]);
       if (!t) continue;
+      if (
+        m.avoid?.some((p) =>
+          t.subjects.some(
+            (a, i) => md(s, a, p) <= 1 && md(s, n.s.subjects[i]!, p) > 1,
+          ),
+        )
+      )
+        continue;
+      if (
+        m.avoid?.length &&
+        op !== 'select' &&
+        law(m, n.s.active) === 'exchange' &&
+        m.motors[op]
+      ) {
+        const v = m.motors[op]!,
+          a = n.s.subjects[n.s.active],
+          p = n.s.subjects[peer(n.s.active)];
+        let z = space.at(a, v.dx, v.dy);
+        while (
+          z >= 0 &&
+          !n.s.pieces.includes(z) &&
+          z !== p &&
+          !m.avoid.includes(z)
+        )
+          z = space.at(z, v.dx, v.dy);
+        if (m.avoid.includes(z)) continue;
+      }
+      if (
+        m.join &&
+        t.supports.some(
+          (p) => !n.s.supports.includes(p) && !m.join!.water.includes(p),
+        )
+      )
+        continue;
       const id = normalized(t),
         cost = n.g + 1;
       if ((seen.get(id) ?? Infinity) <= cost) continue;
