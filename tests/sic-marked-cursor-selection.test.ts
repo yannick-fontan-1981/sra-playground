@@ -168,6 +168,24 @@ test('follows the rotated body within a marked footprint and checks a step past 
   assert.equal(other.pending,undefined);
 });
 
+test('defers a click based on incompatible movement scales until the current exploration stalls',async()=>{
+  function scene(d:number){
+    const r=Array.from({length:24},()=>Array<number>(48).fill(0));
+    for(let y=3;y<7;y++)r[y]!.fill(1,2+4*d,6+4*d);
+    for(let y=12;y<15;y++)r[y]!.fill(2,6+2*d,9+2*d);
+    for(let y=8;y<12;y++)r[y]!.fill(5,30,34);
+    return r;
+  }
+  const first=scene(0),second=scene(1),a=await observation(first,0),b=await observation(second,1);
+  const memory=newCursorMemory(),preference={mode:'active',strategy:'motion_contrast',minimumOutcomes:2} as const;
+  recordCursorTrial(memory,a,b,first,second,'ACTION4');
+  assert.equal(offerCursorTrial(memory,b,second,false,true,preference),null);
+  recordCursorTrial(memory,b,b,second,second,'ACTION1');
+  assert.equal(offerCursorTrial(memory,b,second,false,true,preference),null);
+  recordCursorTrial(memory,b,b,second,second,'ACTION4');
+  assert.equal(offerCursorTrial(memory,b,second,false,true,preference)?.basis,'motor_scale');
+});
+
 test('the exploration family proposes a matching piece, records the transferred mark and verifies the actual new mover',async()=>{
   const family=createPreparedEffects(),a=board(),b=board(1),c=board(1,15);
   const oa=await observation(a,0),ob=await observation(b,1),oc=await observation(c,2);

@@ -218,7 +218,7 @@ function distinguishControl(m:CursorMemory, mark:Mark, o:NativeObservation, pref
 // A second subject may have another silhouette. An observed motor supplies a
 // spatial scale and a verification command even when the new response is unknown.
 export function motorScalePeers(o:NativeObservation,m:CursorMemory):Mark[] {
-  const ranked:{mark:Mark;cost:number}[]=[];
+  const ranked:{mark:Mark;cost:number}[]=[],scales=new Set<number>();
   const frequency=new Map<string,number>();
   for(const e of o.entities)frequency.set(e.signature,1+(frequency.get(e.signature)??0));
   const observed=[...m.motions,...(m.oriented??[])];
@@ -239,8 +239,15 @@ export function motorScalePeers(o:NativeObservation,m:CursorMemory):Mark[] {
         Math.log2(frequency.get(peer.signature)!)+grid;
       const mark:Mark={source:{box:move.box,ink:base.palette_value},target:{box:peer.bbox,ink:peer.palette_value},
         point:clickPoint(peer),offsets:[],ink:base.palette_value,shape:move.form+"/"+peer.signature,basis:"motor_scale"};
-      ranked.push({mark,cost});
+      ranked.push({mark,cost});scales.add(span);
     }
+  }
+  // When the whole view moves at different rates, this observation alone
+  // does not establish a body scale. A later isolated motion or a genuine
+  // stall can still make the comparison worth a click.
+  if(scales.size>1){
+    const motors=o.available_action_refs.filter(k=>/^ACTION[1-4]$/.test(k)).length;
+    if((m.returns??0)<2*Math.max(2,motors) && (m.blocked?.length??0)<2)return [];
   }
   return ranked.sort((a,b)=>a.cost-b.cost).map(v=>v.mark);
 }
