@@ -47,6 +47,7 @@ export type RelativeModel = {
   contact?: {
     first?: string;
     freeWalk?: string;
+    latestDisplacement?: string;
     longest: number;
     contradicted: boolean;
   };
@@ -55,6 +56,10 @@ export type RelativeMemory = {
   models: Record<string, RelativeModel>;
   active?: RelativeTrial;
   verifiedContact?: Record<string, string>;
+  quiet?: Record<
+    string,
+    { reference: string; destination: XY; texture: string }
+  >;
 };
 export const poseKey = (s: GroupPose) => [s.actor, ...s.pieces].join(",");
 export const equalPose = (p: GroupPose, q: GroupPose) =>
@@ -188,7 +193,35 @@ export function observeRelativeMotion(
         // Only instantiate roles whose translated sites can be explained by
         // the subject's displacement and include a separately located mover.
         const locations = new Set(next[partner]!.map((t) => t.at.join()));
-        if (parts.every((s) => locations.has(s.at.join()))) continue;
+        if (parts.every((s) => locations.has(s.at.join()))) {
+          if (
+            !mem.quiet?.[id] &&
+            !cellMatches(person[0]!.at, next[w.actor]![0]!.at, w.pitch)
+          ) {
+            const grid = newModel(
+              w,
+              partner,
+              parts[0]!.at,
+              rows,
+              b.observation_ref,
+            );
+            const p = readGroup(grid, old),
+              q = readGroup(grid, next);
+            if (
+              p &&
+              q &&
+              [1, -1, grid.width, -grid.width].includes(q.actor - p.actor) &&
+              !p.pieces.includes(q.actor)
+            ) {
+              (mem.quiet ??= {})[id] = {
+                reference: a.observation_ref,
+                destination: next[w.actor]![0]!.at,
+                texture: texture(grid, rows, q.actor),
+              };
+            }
+          }
+          continue;
+        }
         m = newModel(w, partner, parts[0]!.at, rows, b.observation_ref);
         if (parts.length > 8) {
           const from = readGroup(m, old),
@@ -200,6 +233,18 @@ export function observeRelativeMotion(
             from.actor === to.actor
           )
             continue;
+        }
+        const quiet = mem.quiet?.[id];
+        if (quiet) {
+          m.contact = {
+            freeWalk: quiet.reference,
+            longest: 0,
+            contradicted: false,
+          };
+          m.playerTerrain[relativeCell(m, quiet.destination)] = {
+            open: true,
+            texture: quiet.texture,
+          };
         }
         const motion = previousMotion?.[w.actor];
         const controls =
@@ -290,6 +335,7 @@ export function observeRelativeMotion(
             !q.pieces.includes(q.actor)
           ) {
             c.first ??= a.observation_ref;
+            c.latestDisplacement = a.observation_ref;
             c.longest = Math.max(c.longest, length);
           } else c.contradicted = true;
         }

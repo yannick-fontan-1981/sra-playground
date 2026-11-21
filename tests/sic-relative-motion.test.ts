@@ -70,6 +70,59 @@ test("a verified motor from another room can be tried before the pair has used i
   assert.equal(m.inheritedMoves?.ACTION4, undefined);
 });
 
+test("the first observed push can be contrasted immediately with an earlier walk past stationary pieces", () => {
+  const part = (x: number, y: number) => ({
+    at: [2 * x, 2 * y] as [number, number],
+    box: [x, y, x, y],
+    form: "piece",
+  });
+  const scene = (actor: number, boxes: number[]) => ({
+    actor: [part(actor, 1)],
+    boxes: boxes.map((x) => part(x, 1)),
+    exit: [part(7, 2)],
+  });
+  const state = (n: number) =>
+    ({
+      observation_ref: "state-" + n,
+      level_epoch: 2,
+      state: "NOT_FINISHED",
+      available_action_refs: ["ACTION4"],
+    }) as NativeObservation;
+  const rows = Array.from({ length: 4 }, () => Array(9).fill(2)),
+    witness = {
+      actor: "actor",
+      marker: "exit",
+      pitch: [2, 2],
+      offset: [0, 0],
+    } as TerminalContact;
+  const mem: RelativeMemory = { models: {} };
+  observeRelativeMotion(
+    mem,
+    [witness],
+    state(0),
+    state(1),
+    rows,
+    scene(1, [3, 4]),
+    scene(2, [3, 4]),
+    "ACTION4",
+  );
+  assert.equal(Object.keys(mem.models).length, 0);
+  observeRelativeMotion(
+    mem,
+    [witness],
+    state(1),
+    state(2),
+    rows,
+    scene(2, [3, 4]),
+    scene(3, [4, 5]),
+    "ACTION4",
+  );
+  const learned = mem.models["actor/boxes/2"]!;
+  assert.equal(learned.contact?.first, "state-2");
+  assert.equal(learned.contact?.freeWalk, "state-1");
+  assert.equal(learned.contact?.latestDisplacement, "state-2");
+  assert.equal(learned.contact?.longest, 2);
+});
 const model = (): RelativeModel => ({
   actor: "walker",
   partner: "stone",

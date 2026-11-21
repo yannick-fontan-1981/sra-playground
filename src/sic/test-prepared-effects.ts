@@ -149,7 +149,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
       if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const missingCue=!!m.previewLearning?.cueSearch?.seeking;
-      const repair=missingCue || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
+      const justMovedLine=Object.values(m.relativeMotion?.models??{}).some(v=>v.contact?.latestDisplacement===o.observation_ref && !!v.contact?.freeWalk && !v.contact.contradicted);
+      const repair=missingCue || justMovedLine || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
         ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
       if (!cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
