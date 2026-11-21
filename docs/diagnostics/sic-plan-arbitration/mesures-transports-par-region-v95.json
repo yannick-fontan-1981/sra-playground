@@ -1,0 +1,894 @@
+{
+  "tag": "sic-source100-staged-transport-v95",
+  "candidate": "fc763a5cb",
+  "engine": "f0a1ff437",
+  "sources": {
+    "games": 100,
+    "won": 100,
+    "identicalToV93": 100,
+    "upper": [
+      {
+        "game": "CWSE",
+        "level": 2,
+        "cap": 120,
+        "actions": 59,
+        "won": true,
+        "identical": true,
+        "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1"
+      },
+      {
+        "game": "KLOT",
+        "level": 4,
+        "cap": 100,
+        "actions": 37,
+        "won": true,
+        "identical": true,
+        "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c"
+      }
+    ],
+    "observations": {
+      "episodes": 103,
+      "actions": 838,
+      "swaps": 33,
+      "predictions": 18,
+      "confirmed": 16,
+      "rivalConfirmed": 14,
+      "competingTargets": 14,
+      "games": [
+        {
+          "code": "LKEY",
+          "level": 1,
+          "actions": 4,
+          "swaps": 1,
+          "predictions": 0,
+          "confirmed": 0,
+          "rivalConfirmed": 0,
+          "competingTargets": 0
+        },
+        {
+          "code": "TEQU",
+          "level": 1,
+          "actions": 1,
+          "swaps": 1,
+          "predictions": 0,
+          "confirmed": 0,
+          "rivalConfirmed": 0,
+          "competingTargets": 0
+        },
+        {
+          "code": "FOGW",
+          "level": 1,
+          "actions": 17,
+          "swaps": 17,
+          "predictions": 11,
+          "confirmed": 10,
+          "rivalConfirmed": 9,
+          "competingTargets": 9
+        },
+        {
+          "code": "REWI",
+          "level": 1,
+          "actions": 3,
+          "swaps": 3,
+          "predictions": 1,
+          "confirmed": 1,
+          "rivalConfirmed": 0,
+          "competingTargets": 1
+        },
+        {
+          "code": "SNAR",
+          "level": 1,
+          "actions": 10,
+          "swaps": 10,
+          "predictions": 6,
+          "confirmed": 5,
+          "rivalConfirmed": 5,
+          "competingTargets": 4
+        },
+        {
+          "code": "THER",
+          "level": 1,
+          "actions": 6,
+          "swaps": 1,
+          "predictions": 0,
+          "confirmed": 0,
+          "rivalConfirmed": 0,
+          "competingTargets": 0
+        }
+      ]
+    }
+  },
+  "controlledExchanges": {
+    "code": "SS08",
+    "pitch": 6,
+    "counts": {
+      "preparations": 29,
+      "training": 3,
+      "comparable": 104,
+      "piece": 42,
+      "pieceConfirmed": 42,
+      "peer": 7,
+      "peerConfirmed": 7,
+      "ordinary": 55,
+      "ordinaryConfirmed": 55,
+      "ordinaryWouldExplainExchange": 0,
+      "multipleTargets": 32,
+      "firstAmongMultiple": 32
+    },
+    "calibration": {
+      "pairedPreparations": [
+        [
+          1,
+          3
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "additionalGuardPreparation": [
+        1
+      ],
+      "motors": {
+        "1": [
+          0,
+          -1
+        ],
+        "2": [
+          0,
+          1
+        ],
+        "3": [
+          -1,
+          0
+        ],
+        "4": [
+          1,
+          0
+        ]
+      }
+    }
+  },
+  "controlledCrossing": {
+    "code": "SS08",
+    "fromDecision": 50,
+    "root": "9c74d908d7a9346e",
+    "motor": 3,
+    "source": [
+      39,
+      24
+    ],
+    "target": [
+      36,
+      24
+    ],
+    "partner": [
+      21,
+      18
+    ],
+    "positive": {
+      "word": [
+        3
+      ],
+      "before": "89157d255251119187aa8e61a5a4e2aa07d3ef19d7d60b83c201fd16cefd90ad",
+      "after": "092d16b8947238fe6685438f769c2d5e3c6f449f4abbc032ba1f8af5bfd5d518",
+      "from": 152,
+      "guard": 106,
+      "material": "10,13,10,13,10,13,10,13,10",
+      "landing": 151,
+      "guardAfter": 106,
+      "reached": true,
+      "state": "NOT_FINISHED"
+    },
+    "negative": {
+      "word": [
+        1,
+        3,
+        2
+      ],
+      "before": "1009f32a73ac786f81c38a851adfd1547e6f78cde82b93645cb870946a03f070",
+      "after": "035709d696c5e51cab2cfc7e5ea93529eec38e82ab6b120323fc62f8a83a4cf2",
+      "from": 152,
+      "guard": 106,
+      "material": "9,9,9,9,9,9,9,9,9",
+      "landing": 152,
+      "guardAfter": 106,
+      "reached": false,
+      "state": "NOT_FINISHED"
+    },
+    "alternatives": 18
+  },
+  "bench": {
+    "won": true,
+    "actions": 39,
+    "movements": 32,
+    "firstFailure": null,
+    "final": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c"
+  },
+  "qualification": {
+    "native": {
+      "code": "SS08",
+      "cap": 1200,
+      "issued": 70,
+      "sic": 70,
+      "resets": 0,
+      "trajectory": "1d19b2f7181ad13c4896f13e747352185166f64e2da485f3b0f54835705fd60d",
+      "pack": "e34fd9d46d90d33c1ae4cf303f53478185caeb3ca806898b262a8ae0835c2190",
+      "score": [
+        {
+          "level": 2,
+          "actions": 70,
+          "won": true,
+          "reason": "target_levels_completed"
+        }
+      ]
+    },
+    "matched70": {
+      "new": {
+        "code": "SS08",
+        "cap": 70,
+        "issued": 70,
+        "sic": 70,
+        "resets": 0,
+        "trajectory": "1d19b2f7181ad13c4896f13e747352185166f64e2da485f3b0f54835705fd60d",
+        "pack": "e34fd9d46d90d33c1ae4cf303f53478185caeb3ca806898b262a8ae0835c2190",
+        "score": [
+          {
+            "level": 2,
+            "actions": 70,
+            "won": true,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "sharedPrefix": 70,
+        "official": {
+          "code": "SS08",
+          "start": 2,
+          "finish": 2,
+          "lesson": 0,
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "cap": 70,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 70,
+              "won": true
+            }
+          ],
+          "resets": [],
+          "tapeDigest": "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5",
+          "final": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c"
+        }
+      },
+      "base": {
+        "code": "SS08",
+        "cap": 70,
+        "issued": 70,
+        "sic": 70,
+        "resets": 0,
+        "trajectory": "4af9dffab18674a2fafeed3341893d00602dddf4a45ec4f979fbee2422ad8942",
+        "pack": "da9dce573a5233073f1411a5c444a83025ccdc1617d3ee71cba006f3e372ffaf",
+        "score": [
+          {
+            "level": 2,
+            "actions": 70,
+            "won": false,
+            "reason": "session_action_budget"
+          }
+        ],
+        "sharedPrefix": 34,
+        "from": "85d4a54a3820b442",
+        "chosen": 2,
+        "official": {
+          "code": "SS08",
+          "start": 2,
+          "finish": 2,
+          "lesson": 0,
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "cap": 70,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 70,
+              "won": false
+            }
+          ],
+          "resets": [],
+          "tapeDigest": "8e9be82b01bc75d852aa7432415ceae2a84538fcf816cf6ae98fde88936bb833",
+          "final": "a7a81c62d6b98a12b333817d2c86980a410472d315bc96799f6831bdc41f9155"
+        }
+      },
+      "control": {
+        "code": "SS08",
+        "cap": 70,
+        "issued": 70,
+        "sic": 70,
+        "resets": 0,
+        "trajectory": "fb06d057905106f573c8c90415995bfa538ff8f3032b7ffd7a1f324c5c9f6ef2",
+        "pack": "24d46141a757f7d07d18372950957c771b01d510ffbc8c56f235626576fea4a9",
+        "score": [
+          {
+            "level": 2,
+            "actions": 70,
+            "won": false,
+            "reason": "session_action_budget"
+          }
+        ],
+        "sharedPrefix": 34,
+        "from": "85d4a54a3820b442",
+        "chosen": 6,
+        "official": {
+          "code": "SS08",
+          "start": 2,
+          "finish": 2,
+          "lesson": 0,
+          "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+          "cap": 70,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 70,
+              "won": false
+            }
+          ],
+          "resets": [],
+          "tapeDigest": "d1fc10cd170ebbcb7fa0e48a22c46772413b9fe7927299fd3d1419d9356b8a76",
+          "final": "7013d644b1f33b09aed6ab8221a6da7ac810e80f815160e59d68c61a515bde1c"
+        }
+      }
+    },
+    "flatFull": {
+      "code": "SS08",
+      "cap": 1200,
+      "issued": 322,
+      "sic": 322,
+      "resets": 0,
+      "trajectory": "c9a5f37f56c2aa25279d813525c0082f3c4c005d5d2f231b76e5b79745097688",
+      "pack": "24d46141a757f7d07d18372950957c771b01d510ffbc8c56f235626576fea4a9",
+      "score": [
+        {
+          "level": 2,
+          "actions": 322,
+          "won": false,
+          "reason": "level_active_time_budget"
+        }
+      ],
+      "official": {
+        "code": "SS08",
+        "start": 2,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 322,
+            "won": false
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "240b7137d38a1aeedb23db734624d6b1b2baf2148d9c876b85f146e6fcddfa69",
+        "final": "7013d644b1f33b09aed6ab8221a6da7ac810e80f815160e59d68c61a515bde1c"
+      }
+    },
+    "shortFlat": {
+      "actions": 95,
+      "verified": 38
+    },
+    "firstCandidateCommand": 3,
+    "initialHypotheses": [
+      "contact_can_displace_the_aligned_piece",
+      "piece_can_make_a_new_support",
+      "subject_can_use_the_changed_surface",
+      "other_subject_can_also_exchange"
+    ],
+    "stages": {
+      "move_the_pushing_subject_to_a_nearer_region": [
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "create_a_support_between_regions": [
+        47,
+        48,
+        49,
+        50
+      ],
+      "prepare_access_to_both_marks": [
+        51,
+        52,
+        53,
+        54,
+        55,
+        56,
+        57,
+        58,
+        59,
+        60,
+        61,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        69,
+        70
+      ]
+    },
+    "verifiedReturns": 35,
+    "terminal": "transport_official"
+  },
+  "officialCustom4": [
+    {
+      "code": "SS01",
+      "start": 1,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 36,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+      "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a"
+    },
+    {
+      "code": "SS02",
+      "start": 1,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 40,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 46,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7",
+      "final": "9469602325bfbd494dd48edb62a9abbb7c3684ed3b7a19f7be91a0ed57624e64"
+    },
+    {
+      "code": "SS03",
+      "start": 1,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "6f98abeead39c4e050e9d264a0f9eb988070c510dc803fa1b9f60e55c3b2bac8",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 47,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 97,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+      "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa"
+    },
+    {
+      "code": "SS04",
+      "start": 1,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "93e2bd8bd7b3b193d9c2842458b59942ca3728f390f62dcfdcc83e7e3cefd1d4",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 143,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+      "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f"
+    },
+    {
+      "code": "SS05",
+      "start": 1,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 44,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 73,
+          "won": true
+        }
+      ],
+      "resets": [
+        12
+      ],
+      "tapeDigest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+      "final": "bcc85ed983fd11ebe9ac9d5bc458cbfd238e5e00e1665606d014562c5b0555cb"
+    },
+    {
+      "code": "SS06",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 54,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867",
+      "final": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069"
+    },
+    {
+      "code": "SS07",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88",
+      "final": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a"
+    },
+    {
+      "code": "SS08",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 70,
+          "won": true
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5",
+      "final": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c"
+    },
+    {
+      "code": "SS09",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 183,
+          "won": false
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "b4a62791ec87273744aaa4a2a0137931d9fd35e4dbc194057fcdd218819f4313",
+      "final": "0b343a754360a628b4e23c32d9cb1c228210dd6152ddc65226e9f56c88935eea"
+    },
+    {
+      "code": "SS10",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "97b6b03984aedadd03896ea0ae756203cb6e17cf59f5e04769a0277a2675ff84",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 313,
+          "won": false
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "874a508c70d3638c73e9e99ee27c08cbdd6be8863c3a2a24e54c649c4e4cf97b",
+      "final": "96ece09fc2f6e7ac0fb3952cdbaffb36794d0cbde24532af4f89ef391ea2ca31"
+    },
+    {
+      "code": "SS11",
+      "start": 2,
+      "finish": 2,
+      "lesson": 0,
+      "initial": "cf27ccaa9a05e54d3ac2e3de7ad430d77768e89d255d782fc61a039dd7f50561",
+      "cap": 1200,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 256,
+          "won": false
+        }
+      ],
+      "resets": [],
+      "tapeDigest": "b1fb7c7a9c5472f53f3dd48d074fc9ad325c7941fd9f2bbb122513c6e939e61c",
+      "final": "7fc8e4282fd01ce0c5e70a97b5d69ab495bbd8bd8d9ad6fdac65c1fcdf036b9e"
+    }
+  ],
+  "checks": {
+    "tests": 516,
+    "typecheck": true
+  },
+  "next": {
+    "recurringPlacement": {
+      "code": "SS10",
+      "step": 138,
+      "again": 145,
+      "visits": 86,
+      "reverseVisits": 84,
+      "requested": 2,
+      "root": "54defce69c7beb93",
+      "actionResult": "96ece09fc2f6e7ac",
+      "clickTargets": 13,
+      "changed": [
+        {
+          "p": [
+            18,
+            24
+          ],
+          "selected": "092fc56fa099d6b7",
+          "verified": true,
+          "outcomes": [
+            {
+              "op": 1,
+              "withoutClick": [
+                false,
+                false
+              ],
+              "afterClick": [
+                false,
+                true
+              ],
+              "hash": "a0daffd51e1f9fa6"
+            },
+            {
+              "op": 2,
+              "withoutClick": [
+                true,
+                false
+              ],
+              "afterClick": [
+                false,
+                true
+              ],
+              "hash": "4e52e6a8725c5132"
+            },
+            {
+              "op": 3,
+              "withoutClick": [
+                true,
+                false
+              ],
+              "afterClick": [
+                false,
+                true
+              ],
+              "hash": "27f2ac2873d944d5"
+            },
+            {
+              "op": 4,
+              "withoutClick": [
+                true,
+                false
+              ],
+              "afterClick": [
+                false,
+                true
+              ],
+              "hash": "edc93d22de4b92c2"
+            }
+          ]
+        }
+      ],
+      "initialControls": {
+        "1": {
+          "hash": "54defce69c7beb93",
+          "novel": false,
+          "state": "NOT_FINISHED"
+        },
+        "2": {
+          "hash": "96ece09fc2f6e7ac",
+          "novel": true,
+          "state": "NOT_FINISHED"
+        },
+        "3": {
+          "hash": "2718e29d7a374cf5",
+          "novel": true,
+          "state": "NOT_FINISHED"
+        },
+        "4": {
+          "hash": "d96b71b395a5df56",
+          "novel": false,
+          "state": "NOT_FINISHED"
+        },
+        "5": {
+          "hash": "54defce69c7beb93",
+          "novel": false,
+          "state": "NOT_FINISHED"
+        }
+      }
+    },
+    "switchArms": [
+      {
+        "order": [
+          0,
+          1
+        ],
+        "reverse": false,
+        "initial": "7,7,7,7,5,7,7,7,7",
+        "results": [
+          {
+            "side": 0,
+            "matched": true,
+            "glyph": "7,7,7,7,5,7,7,7,7",
+            "subjects": [
+              243,
+              145
+            ],
+            "length": 3
+          },
+          {
+            "side": 1,
+            "matched": true,
+            "glyph": "7,3,7,3,3,3,7,3,7",
+            "subjects": [
+              243,
+              252
+            ],
+            "length": 15
+          }
+        ],
+        "activation": "7,3,7,3,3,3,7,3,7",
+        "steppedOff": "7,7,7,7,5,7,7,7,7"
+      },
+      {
+        "order": [
+          0,
+          1
+        ],
+        "reverse": true,
+        "initial": "7,7,7,7,5,7,7,7,7",
+        "results": [
+          {
+            "side": 0,
+            "matched": true,
+            "glyph": "7,7,7,7,5,7,7,7,7",
+            "subjects": [
+              252,
+              145
+            ],
+            "length": 12
+          },
+          {
+            "side": 1,
+            "matched": true,
+            "glyph": "7,3,7,3,3,3,7,3,7",
+            "subjects": [
+              252,
+              243
+            ],
+            "length": 19
+          }
+        ],
+        "activation": "7,3,7,3,3,3,7,3,7",
+        "steppedOff": "7,7,7,7,5,7,7,7,7"
+      },
+      {
+        "order": [
+          1,
+          0
+        ],
+        "reverse": false,
+        "initial": "7,7,7,7,5,7,7,7,7",
+        "results": [
+          {
+            "side": 1,
+            "matched": true,
+            "glyph": "7,7,7,7,5,7,7,7,7",
+            "subjects": [
+              225,
+              252
+            ],
+            "length": 12
+          },
+          {
+            "side": 0,
+            "matched": true,
+            "glyph": "7,3,7,3,3,3,7,3,7",
+            "subjects": [
+              243,
+              252
+            ],
+            "length": 15
+          }
+        ],
+        "activation": "7,3,7,3,3,3,7,3,7",
+        "steppedOff": "7,7,7,7,5,7,7,7,7"
+      },
+      {
+        "order": [
+          1,
+          0
+        ],
+        "reverse": true,
+        "initial": "7,7,7,7,5,7,7,7,7",
+        "results": [
+          {
+            "side": 1,
+            "matched": true,
+            "glyph": "7,7,7,7,5,7,7,7,7",
+            "subjects": [
+              225,
+              243
+            ],
+            "length": 7
+          },
+          {
+            "side": 0,
+            "matched": true,
+            "glyph": "7,3,7,3,3,3,7,3,7",
+            "subjects": [
+              252,
+              243
+            ],
+            "length": 19
+          }
+        ],
+        "activation": "7,3,7,3,3,3,7,3,7",
+        "steppedOff": "7,7,7,7,5,7,7,7,7"
+      }
+    ]
+  }
+}
