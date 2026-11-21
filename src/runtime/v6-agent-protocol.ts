@@ -13,6 +13,7 @@ export const V6_MAX_RUN_ACTIONS = 600;
 
 /** Only the witnessed public frames enter the solver worker. */
 export interface V6PublicObservation {
+  palette?: readonly string[];
   frame: readonly (readonly number[])[];
   frames: readonly (readonly (readonly number[])[])[];
   availableActionIds: readonly number[];
@@ -148,10 +149,13 @@ export function toV6PublicObservation(observation: GameObservation, stepIndex = 
     throw new V6AgentError('invalid', 'The public transport step index is invalid.');
   }
   const frame = publicFrame(observation.frame);
+  const palette = observation.palette?.slice(0,256).map(value =>
+    typeof value==='string' && /^#(?:[a-f\d]{3}|[a-f\d]{6})$/i.test(value) ? value.toUpperCase() : '');
   if (!Array.isArray(observation.frames)) throw new V6AgentError('invalid', 'The native game did not provide its public animation frames.');
   const frames = observation.frames.length ? observation.frames.map(publicFrame) : [frame];
   return Object.freeze({
     frame, frames: Object.freeze(frames), availableActionIds: Object.freeze([...observation.availableActionIds]),
+    ...(palette?.length ? { palette:Object.freeze(palette) } : {}),
     state: observation.state, level: observation.level, levelsCompleted: observation.levelsCompleted, stepIndex,
   });
 }
@@ -162,6 +166,7 @@ export function sameV6Observation(expected: V6PublicObservation, actual: GameObs
     const current = toV6PublicObservation(actual, expected.stepIndex);
     return current.stepIndex === expected.stepIndex && current.state === expected.state && current.level === expected.level
       && current.levelsCompleted === expected.levelsCompleted
+      && (current.palette?.join(',')??'') === (expected.palette?.join(',')??'')
       && current.availableActionIds.length === expected.availableActionIds.length
       && current.availableActionIds.every((id, i) => id === expected.availableActionIds[i])
       && current.frames.length === expected.frames.length
@@ -198,11 +203,18 @@ export async function v6FrameHash(frame: readonly (readonly number[])[]): Promis
 /** Recheck an RPC packet without admitting extra fields or shared mutable rows. */
 export function validateV6PublicObservation(value: V6PublicObservation): V6PublicObservation {
   const keys = ['frame', 'frames', 'availableActionIds', 'state', 'level', 'levelsCompleted', 'stepIndex'];
+  if(value && Object.hasOwn(value,'palette')) {
+    if(!Array.isArray(value.palette) || value.palette.length<1 || value.palette.length>256 ||
+        value.palette.some(color=>typeof color!=='string'||color!==''&&!/^#(?:[a-f\d]{3}|[a-f\d]{6})$/i.test(color)))
+      throw new V6AgentError('invalid','Malformed public display palette.');
+    keys.push('palette');
+  }
   if (!value || typeof value !== 'object' || Object.keys(value).length !== keys.length
     || keys.some(key => !Object.hasOwn(value, key))) throw new V6AgentError('invalid', 'Malformed V6 public observation.');
   if (!Array.isArray(value.frames) || value.frames.length < 1 || value.frames.length > 1024) throw new V6AgentError('invalid', 'Invalid public animation packet.');
   const normalized = toV6PublicObservation({
     gameCode: 'browser-public', frame: value.frame as number[][], frames: value.frames as number[][][],
+    ...(value.palette ? {palette:[...value.palette]} : {}),
     availableActionIds: value.availableActionIds as number[], state: value.state, level: value.level,
     levelsCompleted: value.levelsCompleted, levelCount: value.level,
     canUndo: false, canSelectLevel: false, defaultFps: 10,

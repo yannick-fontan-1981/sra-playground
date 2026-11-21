@@ -30,6 +30,7 @@ export interface SicActionCoverage {
 
 /** Public transport attributes retain the original V6 spelling and meaning. */
 export interface NativePublicObservation {
+  readonly palette?: readonly string[];
   readonly frame_rows: NativeRows;
   readonly frame_packet: readonly NativeRows[];
   readonly level: number;
@@ -55,6 +56,7 @@ export interface NativeEntity extends NativeRecord {
 }
 
 export interface NativeObservation extends NativeRecord {
+  readonly palette?: readonly string[];
   readonly revision: number;
   readonly level_epoch: number;
   readonly frame_hash: string;

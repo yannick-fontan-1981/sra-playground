@@ -2,6 +2,7 @@ import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal
 import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
+import {offerCursorTrial,newCursorMemory} from './marked-cursor-selection.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type {
@@ -28,6 +29,8 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  selectMarkedCursor:'Test whether clicking a matching piece transfers the distinctive cursor mark',
+  verifyMarkedCursor:'Measure whether the newly selected piece moves while the previous piece stays in place',
   testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
@@ -114,30 +117,38 @@ export function createPreparedEffects(): NativeFamily<Offer> {
     },
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
-      if (remaining < 1 || !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
-      if (group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      if(remaining<1)return null;
+      const opening = !m.turns || !!m.configurationOpportunity || hasExperimentOpportunity(m);
+      const cursor = group===recurrentExperimentGroup && (opening || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
+        ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity) : null;
+      if (!cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
+      if (!cursor && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
       const configurationOpportunity=(group===recurrentExperimentGroup || group===exhaustedGroup) &&
         !!m.configurationOpportunity && (m.configurations?.factors.length??0)>=2;
-      if (group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
+      if (!cursor && group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment = selectExperiment(m, o, available, group === exhaustedGroup, rows,localOpportunity,configurationOpportunity);
-      if(group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
-      if (!experiment || (group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
+      const experiment:Experiment|null = cursor ? {
+        phase:cursor.stage==='select'?'selectMarkedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
+        rule:'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
+      } : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
+      if(!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
+      if (!experiment || (!cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (cursor||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const evidence = [
         ref,
+        ...(cursor?.evidence??[]),
         ...(experiment.configurationTrial?.evidence??[]),
         ...(experiment.localCapacity?[experiment.localCapacity.ref,...(experiment.localCapacity.controlRef?[experiment.localCapacity.controlRef]:[])]:[]),
         ...(experiment.localCapacity?.observedPrefix?Object.values(experiment.localCapacity.observedPrefix):[]),
@@ -162,6 +173,12 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         parentObjective: parent,
         satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
+      if(cursor){
+        question.subjects=[cursor.source.box.join(','),cursor.target.box.join(','),String(cursor.ink)];
+        question.satisfactionContract=cursor.stage==='select'
+          ? 'test_whether_the_distinctive_mark_transfers_to_the_clicked_peer'
+          : 'test_whether_the_new_cursor_moves_while_the_previous_one_stays';
+      }
       const equation = experiment.equation?.claim;
       const capability = equation
         ? {
@@ -207,6 +224,7 @@ export function createPreparedEffects(): NativeFamily<Offer> {
         kind: preparedEffectsId,
         actions: [command],
         experiment,
+        ...(cursor ? {cursorSelectionForecast:cursor} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),

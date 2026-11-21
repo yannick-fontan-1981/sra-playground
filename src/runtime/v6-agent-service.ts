@@ -41,6 +41,7 @@ function budgets(value: V6Budgets): NativeBudgets {
 async function nativeObservation(packet: V6PublicObservation): Promise<NativePublicObservation> {
   return freeze({
     frame_rows: packet.frame, frame_packet: packet.frames, level: packet.level,
+    ...(packet.palette ? {palette:packet.palette} : {}),
     levels_completed: packet.levelsCompleted, state: packet.state, step_index: packet.stepIndex,
     available_action_refs: packet.availableActionIds.map(id => `ACTION${id}`), frame_hash: await v6FrameHash(packet.frame),
   });

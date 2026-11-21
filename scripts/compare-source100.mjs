@@ -230,6 +230,10 @@ async function run(code, games) {
       );
       if (configuration && replayCommands)
         Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
+      if(plan?.cursorSelectionForecast && replayCommands){
+        const cursor=plan.cursorSelectionForecast;
+        Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor)});
+      }
       if (source)
         steps.push({
           a: action.id,

@@ -1,5 +1,6 @@
 import { assessLocal, canCompareAnotherPreparation, continuationAt, demonstratedLimit, hasLocalContrast, localCommand, newLocalMemory, observeLocal, proposeLocal, revisitedChoice, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
 import { recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
+import {newCursorMemory,recordCursorTrial,type CursorMemory,type CursorTrial} from './marked-cursor-selection.ts';
 import { nextConfiguration, newConfigurationMemory, observeConfiguration, type ConfigurationMemory, type ConfigurationTrial } from './configuration-trials.ts';
 import {offerWitnessedPreview,visualLayout,checkWitnessedPreview,type PreviewLearning,type PreviewCarry,type ReadOffer} from './witnessed-preview-transfer.ts';
 import {offerTerminalContact,measureTerminalContact,type TerminalTrial} from './terminal-contact.ts';
@@ -102,6 +103,8 @@ type Rule = {
 };
 export type Experiment = {
   phase:
+    | 'selectMarkedCursor'
+    | 'verifyMarkedCursor'
     | 'testConfiguration'
     | 'localCapacity'
     | 'seekTerminalContact'
@@ -155,6 +158,7 @@ export type Experiment = {
   refs: number[];
   localCapacity?: LocalForecast;
   configurationTrial?: ConfigurationTrial;
+  cursorTrial?: CursorTrial;
   delayed?: DelayedTrial;
   frontier?: FrontierTrial;
   condition?: ConditionalTrial;
@@ -223,6 +227,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  cursorSelection?: CursorMemory;
   configurations?: ConfigurationMemory;
   configurationOpportunity?: boolean;
   localCapacity?: LocalMemory;
@@ -886,6 +891,8 @@ export function recordExperiment(
     op = observedCommandKey(cmd),
     effect = measureEffect(b, a, rows, next);
   const local=m.localCapacity??=newLocalMemory();
+  const cursorResult=b.available_action_refs.includes('ACTION6')
+    ? recordCursorTrial(m.cursorSelection??=newCursorMemory(),b,a,rows,next,op,x?.cursorTrial) : undefined;
   if (b.level_epoch===a.level_epoch && a.levels_completed===b.levels_completed && b.state===a.state) {
     const configurations=m.configurations??=newConfigurationMemory();
     const trial=x?.configurationTrial;
@@ -1038,6 +1045,7 @@ export function recordExperiment(
     return {...out,result:a.levels_completed>b.levels_completed?'configuration_completed_level':
       failed?'configuration_prediction_refuted':'configuration_observed'};
   }
+  if(x.cursorTrial)return {...out,result:cursorResult??'cursor_trial_ended_at_boundary'};
   if(x.condition) {
     const {result,detail}=placementReceipt(m,x.condition,edge.t,b,a);
     return {...out,result,condition:detail};
