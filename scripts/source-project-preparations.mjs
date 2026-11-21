@@ -17,7 +17,7 @@ function bodies(rows) {
   return roles;
 }
 
-function project(rows, step) {
+export function project(rows, step) {
   const next = rows.map((row) => row.slice());
   for (const [x, y, value, after] of step.changes) {
     if (rows[y]?.[x] !== value) return null;
@@ -156,5 +156,5 @@ export function preparationModel() {
     }
     return best ?? (first[0] && { kind: 'single', steps: [first[0]] });
   }
-  return { observe, choose, refute: (step) => contradicted.add(step.key) };
+  return { observe, choose, options, refute: (step) => contradicted.add(step.key) };
 }

@@ -415,6 +415,18 @@ Deux corrections ont été essayées sur les sources. Apprendre chez les autres 
 
 Les 32 tests ciblés de composition passent. La suite complète du checkout partiel compte 15 946 réussites et 135 échecs. Les 132 fichiers concernés ont été rejoués sur le témoin v58 avec les mêmes fichiers de production, de test et de référence vérifiés octet par octet. On y retrouve exactement les 135 mêmes échecs. Ce lot expérimental modifie le banc et le registre de mesures. Le dernier essai Custom 4 reste celui du pilote v58.
 
+### Apprendre les conditions d’un effet et composer un trajet jusqu’au but
+
+Le chantier porte sur une décision concrète. Si une pièce suit parfois le sujet et répond parfois à une orientation, SIC peut-il identifier quand chaque effet se produit, puis inventer une suite de déplacements et de changements d’orientation qui place la pièce sur un récepteur ?
+
+| Travail sur les sources | Observation | Portée |
+| --- | --- | --- |
+| Identifier une préparation nécessaire | Sur 146 niveaux du corpus source, 11 passages distincts dans sept jeux satisfont les contrôles. SIC revient au même lieu de départ et tente la même commande. Ôter la préparation empêche le passage et fait perdre la suite. Au moins une autre préparation de même durée, depuis laquelle le même départ est atteint, échoue également. Jeux concernés : KEYD, SKBN, WA30, GABA, DC22, BP35 et GIGO. | Ce banc repère des relations causales dans des trajectoires déjà enregistrées. Il fournit des exemples positifs et des préparations concurrentes à départ égal. |
+| Choisir la préparation | Sur 117 questions à un geste de préparation, 112 admettent une comparaison après observation des préparations. Avec le départ imposé, le classement obtient 91,5 % de passages en moyenne sur ses ex æquo. Un choix uniforme entre les préparations compatibles avec ce même départ obtient 90,67 %. | Le faible écart et les sept cas où la préparation est nécessaire à la victoire ne justifient pas d’utiliser ce classement comme politique générale. |
+| Élaborer et exécuter une composition | Sur CWSE L2, deux hypothèses concurrentes associent les apparences observées à deux effets. Dans le banc, au coup 52, une seule explique les 26 transitions retenues, dont 15 où les pièces changent. Elle permet de calculer six gestes puis deux autres après un changement de disposition. Dans une partie autonome distincte, le candidat retrouve le mécanisme et gagne en 63 gestes. Le témoin v58 échoue au plafond commun de 120. | Le solveur mesure les directions, apprend l’association en cours de partie, cherche une séquence vers les récepteurs, vérifie chaque état prévu et replanifie sur la disposition suivante. Il réutilise une famille connue de mécanismes à pièces, orientations et récepteurs. L’invention d’un modèle pour une morphologie inconnue reste ouverte. |
+
+**Protocole v60 fixé avant transfert.** Comparer le témoin `sic-source100-transient-composition-v58` et le candidat `sic-source100-confirmed-reception-v60` sur SS01 à SS08 et SS10 L2 à froid. Contrôler aussi SS01 après les 19 actions publiques de son L1, les 100 L1 du corpus et les victoires sources de niveaux supérieurs. Le succès primaire exige la victoire officielle à froid sur le L2 d’un jeu Custom 4 supplémentaire. SS09 L2 reste réservé pour confirmation. La règle en production ne reçoit ni identifiant de jeu, ni séquence source, ni association de couleurs prédéfinie pour la nouvelle hypothèse.
+
 ### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |
