@@ -2,7 +2,9 @@
 
 Le critère principal est le premier L2 gagné en partie autonome sur **un jeu Custom 4 supplémentaire**. Les deux conditions acceptées sont l’entrée directe au L2 et une campagne continue dans laquelle le même SIC gagne le L1 puis le L2. Le score du L2 est compté une fois par jeu, avec mention de la condition. **SS09 L2 fait désormais partie des cibles.** Le catalogue du moteur de référence `f0a1ff437` comprend SS01 à SS11. Sur le lot historique de neuf L2, SS01 et SS04 étaient gagnés à froid et SS03 avait déjà été gagné après le L1. [Bilan de référence](qualification-reprise-v34.md)
 
-**Dernier bilan sur Custom 4.** En campagne autonome, v62 gagne cinq L1 et trois L2 sur onze jeux. À froid, il gagne deux L2 sur onze. Ensemble, les deux conditions donnent trois jeux distincts déjà connus, SS01, SS03 et SS04. Le gain de KLOT L4 sur le corpus source reste à transférer. [Scores des onze jeux](#campagnes-continues-sur-les-onze-jeux-custom-4)
+**Dernier résultat de généralisation.** Sur SS06 L2, v64 choisit au deuxième coup un clic qui peut départager deux hypothèses. Au troisième, la même direction déplace le second sujet et laisse le premier immobile. Au quatrième, SIC utilise le contrôle découvert pour avancer une seconde fois en conservant le premier placement. Sur SS09 L2, le même pack se déclenche quatre fois sans confirmer de changement de sujet. Les deux parties se terminent sans victoire. [Modes, décisions, reçus et scores v64](decouverte-controle-v64.md)
+
+**Référence sur les onze jeux.** En campagne autonome, v62 gagne cinq L1 et trois L2. À froid, il gagne deux L2. Ensemble, les deux conditions donnent trois jeux distincts déjà connus, SS01, SS03 et SS04. [Scores des onze jeux](#campagnes-continues-sur-les-onze-jeux-custom-4)
 
 ## Campagnes continues sur les onze jeux Custom 4
 

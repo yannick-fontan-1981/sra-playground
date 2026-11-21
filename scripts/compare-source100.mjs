@@ -109,15 +109,25 @@ async function run(code, games) {
           levelsCompleted: board.levelsCompleted - initialCompleted,
         };
   const cursorAudit = process.env.SIC_STUDY_CURSOR_OFFERS ? [] : null;
+  const boundaryAudit = process.env.SIC_STUDY_BOUNDARY_LAWS ? [] : null;
   const service = new V6AgentService(async(recovery) => {
     const backend=await createNativeV6Runtime(declarations,{recovery});
-    if (cursorAudit) {
+    if (cursorAudit || boundaryAudit) {
       const family = backend.families.find(f => f.id === 'sic_test_prepared_effects');
       const original = family.proposeInGroup.bind(family);
       family.proposeInGroup = async (...args) => {
         const proposal = await original(...args);
         const trial = proposal?.cursorSelectionForecast ?? proposal?.experiment?.cursorTrial;
-        cursorAudit.push({decision:issued+1, group:args[0], offered:trial?.stage??null});
+        cursorAudit?.push({decision:issued+1, group:args[0], offered:trial?.stage??null});
+        const epoch=args[1].level_epoch;
+        if(boundaryAudit && epoch>1 && !boundaryAudit.some(b=>b.epoch===epoch)){
+          const memory=family.state();
+          const laws=(memory.localCapacity?.laws??[]).map(law=>({actions:[law.a,law.b,law.c],
+            trainedEpoch:Number(law.ref.match(/:epoch:(\d+):/)?.[1]??0),signature:hash(law.key),
+            matchedInTraining:law.matchedInTraining}));
+          boundaryAudit.push({epoch,decision:issued+1,laws,terminalContacts:memory.previewLearning?.terminal?.length??0,
+            previewBindings:Object.keys(memory.previewLearning?.bindings??{}).length});
+        }
         return proposal;
       };
     }
@@ -442,6 +452,7 @@ async function run(code, games) {
         })
       ),
       ...(cursorAudit ? {cursorAudit} : {}),
+      ...(boundaryAudit ? {boundaryAudit} : {}),
       ...(packRevision ? {packDigest:packRevision.digest} : {}),
       ...(source ? { steps } : {}),
     };

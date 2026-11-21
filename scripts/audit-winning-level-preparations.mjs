@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -167,7 +168,15 @@ for (const file of files)
         arms,
       });
     }
-    records.push({ code: run.code, actions: tape.length, trials });
+    const winningTapeDigest = createHash("sha256")
+      .update(JSON.stringify(tape.map((c) => [word(c), c.from, c.to])))
+      .digest("hex");
+    records.push({
+      code: run.code,
+      actions: tape.length,
+      winningTapeDigest,
+      trials,
+    });
   }
 await writeFile(output, JSON.stringify(records), { flag: "wx" });
 console.log(

@@ -17844,5 +17844,836 @@
         }
       ]
     }
+  },
+  "declarativeControlDiscoveryV64": {
+    "engine": {
+      "engine": "f0a1ff43799880f6fed476187200defb5de11925",
+      "files": 817,
+      "archiveSha256": "90228532c44d3756b483ab563f64b70cf12e87c59b597c1324003e65f473a4d3"
+    },
+    "frozen63": {
+      "solver": "497b0a5fe04f104e01667fa17f257a1f7c677c09",
+      "blobs": 2684,
+      "manifest": "26106cefc284a3e75bdaf1ed1a6c100b37503d9c84837b5e81db2acd376c9851"
+    },
+    "frozen64": {
+      "solver": "e537cc0f1e6952769fd4ee9d26484ecaea65e159",
+      "blobs": 2684,
+      "manifest": "b334fb3bd41afe1a8e759c44a507d04c16c394fb06b827c3e035b9e66cd33815"
+    },
+    "diagnosticCode": "SS06",
+    "heldOutForCandidates": "SS09",
+    "historicallyScoredHoldout": true,
+    "packPaths": [
+      "controle-v63-shadow.json",
+      "controle-v63-active.json"
+    ],
+    "official": {
+      "63": {
+        "active": [
+          {
+            "code": "SS06",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 234,
+                "won": false
+              }
+            ],
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "tape": "93b958c92b93019f3c498dce8576467914f10eb922dec90f6d02b6bc13ce6e1d",
+            "tested": 1,
+            "verifiedBySic": 1,
+            "matchedIntervention": 1,
+            "matchedReversible": 1,
+            "decisionIndices": [
+              2
+            ],
+            "testsFollowed": 1,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          },
+          {
+            "code": "SS09",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 162,
+                "won": false
+              }
+            ],
+            "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+            "tape": "e26a53ed05651a09f313c1861519f9b21281efb059f1db347d08b868562a727f",
+            "tested": 4,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [
+              6,
+              61,
+              71,
+              117
+            ],
+            "testsFollowed": 4,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          },
+          {
+            "code": "SS05",
+            "start": 1,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 1,
+                "actions": 44,
+                "won": true
+              },
+              {
+                "level": 2,
+                "actions": 164,
+                "won": false
+              }
+            ],
+            "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+            "tape": "6a0171c9ca7aa00ae2465ad2b153ec1699f1b3bb62276649747467653c7128dd"
+          },
+          {
+            "code": "SS01",
+            "start": 1,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 1,
+                "actions": 36,
+                "won": true
+              },
+              {
+                "level": 2,
+                "actions": 32,
+                "won": true
+              }
+            ],
+            "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+            "tape": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+          }
+        ],
+        "shadow": [
+          {
+            "code": "SS06",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 229,
+                "won": false
+              }
+            ],
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "tape": "9bb8963439e2913df1303d09bd2f7e1728435cd071a18203fd50e678930b3be4",
+            "tested": 0,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [],
+            "testsFollowed": 0,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          },
+          {
+            "code": "SS09",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 159,
+                "won": false
+              }
+            ],
+            "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+            "tape": "1aff9b585daf9b9c20c662f49ec42ac25dbbca783d395a83b75f4418f6e70b0e",
+            "tested": 0,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [],
+            "testsFollowed": 0,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          },
+          {
+            "code": "SS05",
+            "start": 1,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 1,
+                "actions": 44,
+                "won": true
+              },
+              {
+                "level": 2,
+                "actions": 164,
+                "won": false
+              }
+            ],
+            "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+            "tape": "6a0171c9ca7aa00ae2465ad2b153ec1699f1b3bb62276649747467653c7128dd"
+          }
+        ],
+        "base": [
+          {
+            "code": "SS06",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 229,
+                "won": false
+              }
+            ],
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "tape": "9bb8963439e2913df1303d09bd2f7e1728435cd071a18203fd50e678930b3be4",
+            "tested": 0,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [],
+            "testsFollowed": 0,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          },
+          {
+            "code": "SS09",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 159,
+                "won": false
+              }
+            ],
+            "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+            "tape": "1aff9b585daf9b9c20c662f49ec42ac25dbbca783d395a83b75f4418f6e70b0e",
+            "tested": 0,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [],
+            "testsFollowed": 0,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          }
+        ]
+      },
+      "64": {
+        "active": [
+          {
+            "code": "SS06",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 139,
+                "won": false
+              }
+            ],
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "tape": "97b975a51c7a3e54c76014938ca1ca9608396f10a68019a0bb4298b4432490d9",
+            "tested": 1,
+            "verifiedBySic": 1,
+            "matchedIntervention": 1,
+            "matchedReversible": 1,
+            "decisionIndices": [
+              2
+            ],
+            "testsFollowed": 1,
+            "deliberateProtectedUses": [
+              {
+                "decision": 4,
+                "result": "advanced_selected_subject_preserving_previous_placement"
+              }
+            ],
+            "observedFurtherMoves": [
+              {
+                "decision": 4,
+                "family": "sic_test_prepared_effects"
+              }
+            ]
+          },
+          {
+            "code": "SS09",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 134,
+                "won": false
+              }
+            ],
+            "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+            "tape": "357e0b819ada435d04808f702ace011ff21f177eef39ec1943a56ba87b452045",
+            "tested": 4,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [
+              6,
+              61,
+              71,
+              117
+            ],
+            "testsFollowed": 4,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          },
+          {
+            "code": "SS05",
+            "start": 1,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 1,
+                "actions": 44,
+                "won": true
+              },
+              {
+                "level": 2,
+                "actions": 174,
+                "won": false
+              }
+            ],
+            "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+            "tape": "ca02ccd60d17bfff0e40e322f11cb79879d0360bc74f723ed4976e478c0622af"
+          },
+          {
+            "code": "SS01",
+            "start": 1,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 1,
+                "actions": 36,
+                "won": true
+              },
+              {
+                "level": 2,
+                "actions": 32,
+                "won": true
+              }
+            ],
+            "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+            "tape": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+          }
+        ],
+        "shadow": [
+          {
+            "code": "SS06",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 132,
+                "won": false
+              }
+            ],
+            "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+            "tape": "c5a72d9bc9de8045e2fd2f9ba1a4efe7bb371d54c461d65ccc5382cadfa9d509",
+            "tested": 0,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [],
+            "testsFollowed": 0,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          },
+          {
+            "code": "SS09",
+            "start": 2,
+            "through": 2,
+            "cap": 1200,
+            "levels": [
+              {
+                "level": 2,
+                "actions": 129,
+                "won": false
+              }
+            ],
+            "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+            "tape": "e669b487ff3641fccf16a931b1618316f515ca9a0313c2bd863110c06ae15695",
+            "tested": 0,
+            "verifiedBySic": 0,
+            "matchedIntervention": 0,
+            "matchedReversible": 0,
+            "decisionIndices": [],
+            "testsFollowed": 0,
+            "deliberateProtectedUses": [],
+            "observedFurtherMoves": []
+          }
+        ]
+      }
+    },
+    "source": {
+      "63": {
+        "tested": 100,
+        "won": 100,
+        "unchangedTrajectories": 100,
+        "historicControls": {
+          "KEYD": [
+            35,
+            true
+          ],
+          "SKBN": [
+            22,
+            true
+          ],
+          "GABA": [
+            49,
+            true
+          ],
+          "SWCH": [
+            25,
+            true
+          ]
+        }
+      },
+      "64": {
+        "tested": 100,
+        "won": 100,
+        "unchangedTrajectories": 100,
+        "historicControls": {
+          "KEYD": [
+            35,
+            true
+          ],
+          "SKBN": [
+            22,
+            true
+          ],
+          "GABA": [
+            49,
+            true
+          ],
+          "SWCH": [
+            25,
+            true
+          ]
+        }
+      }
+    },
+    "shortSS06": {
+      "63": {
+        "active": {
+          "code": "SS06",
+          "cap": 40,
+          "issued": 40,
+          "pack": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "decisions": [
+            {
+              "decision": 2,
+              "stage": "select",
+              "action": 6,
+              "supervisoryMode": null,
+              "witnessedMotor": "ACTION1",
+              "threshold": 2,
+              "alternatives": [
+                "previous_subject_moves",
+                "selected_subject_moves"
+              ]
+            },
+            {
+              "decision": 3,
+              "stage": "verify",
+              "action": 1,
+              "supervisoryMode": null,
+              "witnessedMotor": "ACTION1",
+              "threshold": 2,
+              "alternatives": [
+                "previous_subject_moves",
+                "selected_subject_moves"
+              ]
+            }
+          ]
+        },
+        "shadow": {
+          "code": "SS06",
+          "cap": 40,
+          "issued": 40,
+          "pack": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "decisions": []
+        }
+      },
+      "64": {
+        "active": {
+          "code": "SS06",
+          "cap": 40,
+          "issued": 40,
+          "pack": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "decisions": [
+            {
+              "decision": 2,
+              "stage": "select",
+              "action": 6,
+              "supervisoryMode": "explore_competing_explanations",
+              "witnessedMotor": "ACTION1",
+              "threshold": 2,
+              "alternatives": [
+                "previous_subject_moves",
+                "selected_subject_moves"
+              ]
+            },
+            {
+              "decision": 3,
+              "stage": "verify",
+              "action": 1,
+              "supervisoryMode": "explore_competing_explanations",
+              "witnessedMotor": "ACTION1",
+              "threshold": 2,
+              "alternatives": [
+                "previous_subject_moves",
+                "selected_subject_moves"
+              ]
+            },
+            {
+              "decision": 4,
+              "stage": "advance",
+              "action": 1,
+              "supervisoryMode": "continue_verified_plan",
+              "witnessedMotor": "ACTION1",
+              "threshold": 2,
+              "alternatives": [
+                "previous_subject_moves",
+                "selected_subject_moves"
+              ]
+            }
+          ]
+        },
+        "shadow": {
+          "code": "SS06",
+          "cap": 40,
+          "issued": 40,
+          "pack": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "decisions": []
+        }
+      }
+    },
+    "matchedBaseline": {
+      "63": {
+        "SS06": {
+          "common": 229,
+          "compared": 229
+        },
+        "SS09": {
+          "common": 159,
+          "compared": 159
+        }
+      },
+      "64": {
+        "SS06": {
+          "common": 132,
+          "compared": 132
+        },
+        "SS09": {
+          "common": 129,
+          "compared": 129
+        }
+      }
+    },
+    "nativeCampaigns": {
+      "active": [
+        {
+          "code": "SS06",
+          "start": 1,
+          "finish": 2,
+          "lesson": 0,
+          "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 241,
+              "won": false
+            }
+          ],
+          "resets": [],
+          "tapeDigest": "b601206301ef43aab8a5049b06be6dddee29a281f94c527f1af3e882416b60a0",
+          "final": "ad4495a19213b2cebe4ff115f8469014881fb174a763f08d7d9e82714c1ad7ee"
+        },
+        {
+          "code": "SS09",
+          "start": 1,
+          "finish": 2,
+          "lesson": 0,
+          "initial": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a",
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 200,
+              "won": false
+            }
+          ],
+          "resets": [],
+          "tapeDigest": "61afd242dcfedd9bc5df77ab85b896023f3e3d7f8b21c629e5bdcf1b92e6aa36",
+          "final": "6b2af8b6196bbc07c2fbccea8ccc7d7ed5681da18ff4253d71ac1e7e80956549"
+        }
+      ],
+      "shadow": [
+        {
+          "code": "SS06",
+          "start": 1,
+          "finish": 2,
+          "lesson": 0,
+          "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 205,
+              "won": false
+            }
+          ],
+          "resets": [],
+          "tapeDigest": "a557b158cb2c38b77826223cd248f4a4fc4cc3cac18d564e2511d57d147fc43c",
+          "final": "3e59db7dd92d17caa2b4d5de0da833ca010137209e615bd14d9041d07bbab775"
+        },
+        {
+          "code": "SS09",
+          "start": 1,
+          "finish": 2,
+          "lesson": 0,
+          "initial": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a",
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 207,
+              "won": false
+            }
+          ],
+          "resets": [],
+          "tapeDigest": "9ed12c30517a929f433ca32770cb35a1847c3ecd0bfa6447fb3d35938b6e9b77",
+          "final": "c8756fe2bb785ec0018a43f82bb62b50b2c8e49249e46ffc58719fa624e674e7"
+        }
+      ]
+    },
+    "sourceUpper": [
+      {
+        "version": 63,
+        "code": "CWSE",
+        "level": 2,
+        "cap": 120,
+        "won": true,
+        "actions": 59,
+        "final": "aadf3039f6845922196730fe91fd4e5cee4a28e1e0188eb9568a889ba78ae2d6"
+      },
+      {
+        "version": 63,
+        "code": "KLOT",
+        "level": 4,
+        "cap": 100,
+        "won": true,
+        "actions": 37,
+        "final": "e2c8ddc1ddc2432dff39b9f7d053d5ee06ce41b87195ec7cb745544199405d16"
+      },
+      {
+        "version": 64,
+        "code": "CWSE",
+        "level": 2,
+        "cap": 120,
+        "won": true,
+        "actions": 59,
+        "final": "aadf3039f6845922196730fe91fd4e5cee4a28e1e0188eb9568a889ba78ae2d6"
+      },
+      {
+        "version": 64,
+        "code": "KLOT",
+        "level": 4,
+        "cap": 100,
+        "won": true,
+        "actions": 37,
+        "final": "e2c8ddc1ddc2432dff39b9f7d053d5ee06ce41b87195ec7cb745544199405d16"
+      }
+    ],
+    "typecheck": true,
+    "testsPassed": {
+      "63": 479,
+      "64": 479
+    },
+    "priorLevelCondition": {
+      "game": "SS05",
+      "boundaryDecision": 45,
+      "laws": 96,
+      "includingScalar": 18,
+      "scalarAsPreparation": 6,
+      "matchedInTrainingAsPreparation": 0,
+      "precedingLevelReceipts": [
+        {
+          "stage": "prepare",
+          "actions": [
+            "ACTION2",
+            "ACTION4",
+            "ACTION4"
+          ]
+        },
+        {
+          "stage": "test",
+          "actions": [
+            "ACTION2",
+            "ACTION4",
+            "ACTION4"
+          ]
+        },
+        {
+          "stage": "use",
+          "actions": [
+            "ACTION4",
+            "ACTION4",
+            "ACTION4"
+          ]
+        }
+      ],
+      "sameStateExperiments": {
+        "63": {
+          "tests": 12,
+          "comparableAfterPreparation": 12,
+          "openedAfterPreparation": 0,
+          "openedAfterRepeatedMotor": 0
+        },
+        "64": {
+          "tests": 13,
+          "comparableAfterPreparation": 13,
+          "openedAfterPreparation": 0,
+          "openedAfterRepeatedMotor": 0
+        }
+      }
+    },
+    "knownCampaigns": [
+      {
+        "code": "SS03",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "6f98abeead39c4e050e9d264a0f9eb988070c510dc803fa1b9f60e55c3b2bac8",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 47,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 97,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa"
+      },
+      {
+        "code": "SS04",
+        "start": 1,
+        "finish": 2,
+        "lesson": 0,
+        "initial": "93e2bd8bd7b3b193d9c2842458b59942ca3728f390f62dcfdcc83e7e3cefd1d4",
+        "cap": 1200,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 143,
+            "won": true
+          }
+        ],
+        "resets": [],
+        "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+        "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f"
+      }
+    ],
+    "sourceCampaigns": [
+      {
+        "code": "GABA",
+        "scores": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 60,
+            "won": false
+          }
+        ],
+        "priorLevelLawCount": 96
+      },
+      {
+        "code": "KEYD",
+        "scores": [
+          {
+            "level": 1,
+            "actions": 35,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 15,
+            "won": true
+          }
+        ],
+        "priorLevelLawCount": 84
+      },
+      {
+        "code": "SWCH",
+        "scores": [
+          {
+            "level": 1,
+            "actions": 25,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 20,
+            "won": true
+          }
+        ],
+        "priorLevelLawCount": 96
+      }
+    ]
   }
 }
