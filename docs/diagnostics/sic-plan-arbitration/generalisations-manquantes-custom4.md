@@ -332,6 +332,18 @@ Pour chaque dépôt, le moteur a rejoué le même préfixe, puis la suite d’or
 
 **Chantier engagé sur les rôles.** Un détecteur expérimental suit trois éléments à travers des mouvements observés. Il cherche un objet ayant suivi un premier sujet sur plusieurs positions, puis un second sujet sur d’autres positions, et prédit le prochain mouvement conjoint. Sur 149 niveaux issus des 100 jeux sources, il émet six hypothèses dans deux jeux. Sur WA30 L3, l’ancien porteur reste sur place au coup 74 et la prédiction est confirmée au coup 75. Sur COLM L3, cinq hypothèses se prêtent à deux confirmations au mouvement suivant, une réfutation et deux cas sans mouvement ultérieur exploitable. Plusieurs éléments d’un même ensemble peuvent se déplacer ensemble. Le déplacement conjoint justifie une expérience de séparation avant d’attribuer le rôle de porteur. [Extraction des positions](../../../scripts/export-source-pose-transfers.mjs) · [Détection et contrôle de la prédiction suivante](../../../scripts/study-source-transfer-between-subjects.py)
 
+**Quelle expérience distingue le relais d’un mouvement d’ensemble ?** À partir de chacun des quatre états sources où le détecteur propose une remise, le moteur a essayé séparément les cinq commandes disponibles. Certains états contiennent deux hypothèses de porteur. Cela donne 20 branches et 30 prédictions contrôlées.
+
+| Question posée au même état de départ | WA30 L3 | COLM L3 |
+| --- | ---: | ---: |
+| Le nouvel acteur et l’objet se déplacent ensemble pendant que l’ancien réagit autrement | 3 | 0 |
+| Le nouvel acteur et l’objet se déplacent ensemble, mais l’ancien devient impossible à suivre | 2 | 0 |
+| Les trois sont entraînés dans le même mouvement | 0 | 6 |
+| Le nouvel acteur et l’objet se séparent | 0 | 6 |
+| Les deux restent immobiles ou leur identité devient indécidable | 0 | 13 |
+
+Sur WA30 L3, trois commandes différentes permettent d’observer la relève en conservant les trois identités. Sur COLM L3, les deux confirmations observées sur la suite d’origine auraient pu conduire SIC à attribuer un rôle de porteur. Depuis le même état au coup 17, les commandes 2 et 4 entraînent les trois éléments ensemble, tandis que les commandes 1 et 5 séparent chaque paire proposée. Une bonne expérience pour élaborer une composition doit donc départager les rôles possibles avant d’engager les gestes du plan. Ce contrôle a été effectué au banc après le gel de v57. [Interventions sur la commande suivante](../../../scripts/probe-source-transfer-responses.mjs)
+
 L’étape à qualifier est de construire une composition avec ces rôles. À partir de l’effet souhaité, SIC doit prédire où placer l’objet, qui pourra alors agir dessus et quelle nouvelle action deviendra possible. Le test source consiste à atteindre la disposition annoncée, à essayer la même action avec et sans cette préparation, puis à exploiter le résultat au score. Il faut reproduire cette démarche dans une seconde famille visuelle avant de figer le prochain candidat pour Custom 4.
 
 ### Expériences de contrôle et de placement antérieures

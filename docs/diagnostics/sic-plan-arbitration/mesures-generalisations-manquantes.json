@@ -14180,5 +14180,125 @@
       "relay57-canonical-preserved-tests.log": "f2536a2ded212e8ae429a2117eeff869cefe5477cc427c06d0e87de175bda40a",
       "transfers57-coverage.json": "96ee4f0c49c7c4c07010f1698c53d7fe421128e89f5a95f13213a0ba214659be"
     }
+  },
+  "sourceRoleInterventions": {
+    "scope": "Source-only offline one-action branches from exactly the same observed prefix; recorded after v57 freeze.",
+    "levelsSearched": 149,
+    "sourceGames": 100,
+    "positions": 4,
+    "independentBranches": 20,
+    "hypotheses": 6,
+    "tests": 30,
+    "counts": {
+      "WA30": {
+        "togetherFormerUntracked": 2,
+        "selectiveJointMotion": 3
+      },
+      "COLM": {
+        "separated": 6,
+        "allTogether": 6,
+        "stationary": 11,
+        "untracked": 2
+      }
+    },
+    "hypothesesByCommand": [
+      {
+        "code": "WA30",
+        "level": 3,
+        "step": 74,
+        "cargo": 56,
+        "former": 248,
+        "newOwner": 51,
+        "responses": {
+          "ACTION1": "togetherFormerUntracked",
+          "ACTION2": "togetherFormerUntracked",
+          "ACTION3": "selectiveJointMotion",
+          "ACTION4": "selectiveJointMotion",
+          "ACTION5": "selectiveJointMotion"
+        },
+        "actualCommand": "ACTION4"
+      },
+      {
+        "code": "COLM",
+        "level": 3,
+        "step": 16,
+        "cargo": 45,
+        "former": 116,
+        "newOwner": 113,
+        "responses": {
+          "ACTION1": "separated",
+          "ACTION2": "allTogether",
+          "ACTION3": "stationary",
+          "ACTION4": "allTogether",
+          "ACTION5": "separated"
+        },
+        "actualCommand": "ACTION1"
+      },
+      {
+        "code": "COLM",
+        "level": 3,
+        "step": 17,
+        "cargo": 113,
+        "former": 45,
+        "newOwner": 116,
+        "responses": {
+          "ACTION1": "separated",
+          "ACTION2": "allTogether",
+          "ACTION3": "stationary",
+          "ACTION4": "allTogether",
+          "ACTION5": "separated"
+        },
+        "actualCommand": "ACTION3"
+      },
+      {
+        "code": "COLM",
+        "level": 3,
+        "step": 17,
+        "cargo": 116,
+        "former": 45,
+        "newOwner": 113,
+        "responses": {
+          "ACTION1": "separated",
+          "ACTION2": "allTogether",
+          "ACTION3": "stationary",
+          "ACTION4": "allTogether",
+          "ACTION5": "separated"
+        },
+        "actualCommand": "ACTION3"
+      },
+      {
+        "code": "COLM",
+        "level": 3,
+        "step": 35,
+        "cargo": 177,
+        "former": 176,
+        "newOwner": 178,
+        "responses": {
+          "ACTION1": "stationary",
+          "ACTION2": "untracked",
+          "ACTION3": "stationary",
+          "ACTION4": "stationary",
+          "ACTION5": "stationary"
+        },
+        "actualCommand": "ACTION1"
+      },
+      {
+        "code": "COLM",
+        "level": 3,
+        "step": 35,
+        "cargo": 178,
+        "former": 176,
+        "newOwner": 177,
+        "responses": {
+          "ACTION1": "stationary",
+          "ACTION2": "untracked",
+          "ACTION3": "stationary",
+          "ACTION4": "stationary",
+          "ACTION5": "stationary"
+        },
+        "actualCommand": "ACTION1"
+      }
+    ],
+    "sourceResultsSha256": "1d99cbbf91e15026097b72ad2e5fdef7a6dd002dc06280e2cdd22d1a2e88faf5"
   }
 }

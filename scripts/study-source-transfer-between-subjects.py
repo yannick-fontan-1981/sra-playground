@@ -12,7 +12,7 @@ def touching(a,b,stride):
             (dy>=a[6]+b[6] and dy<=1.5*stride and dx<a[5]+b[5]))
 
 
-def episode(run,role,local=False):
+def episode(run,role,local=False,observe_at=None):
     def group(rows):
         out=defaultdict(dict)
         for part in rows:
@@ -59,6 +59,21 @@ def episode(run,role,local=False):
         ids=following
         for cargo,e in list(proposals.items()):
             owner=e['newOwner']
+            if observe_at==i+1 and e['step']==i:
+                former=e['oldOwner']
+                if cargo not in vectors or owner not in vectors:
+                    answer='untracked'
+                elif vectors[cargo]!=vectors[owner]:
+                    answer='separated'
+                elif vectors[cargo]==(0,0):
+                    answer='stationary'
+                elif former not in vectors:
+                    answer='togetherFormerUntracked'
+                elif vectors[former]==vectors[cargo]:
+                    answer='allTogether'
+                else:
+                    answer='selectiveJointMotion'
+                e['intervention']=answer
             if cargo not in vectors or owner not in vectors:
                 del proposals[cargo]; continue
             if vectors[cargo]!=(0,0) or vectors[owner]!=(0,0):
@@ -91,12 +106,42 @@ def episode(run,role,local=False):
     return dict(code=run['code'],level=run['level'],matchedCopies=matched_copies,transfers=examples)
 
 
+def test_branches(cases, coverage):
+    def identity(event):
+        return event['cargo'],event['oldOwner'],event['newOwner']
+
+    results=[]
+    for case in cases:
+        code,level,at=case['code'],case['level'],case['at']
+        source=next(r for r in coverage if (r['code'],r['level'])==(code,level))
+        expected=[e for e in source['transfers'] if e['step']==at]
+        for last in case['branches']:
+            run={**case,'steps':[*case['steps'],last]}
+            events=[e for e in episode(run,0,True,at+1)['transfers'] if e['step']==at]
+            assert sorted(map(identity,events))==sorted(map(identity,expected)), 'Source prefix mismatch'
+            for event in events:
+                results.append(dict(code=code,level=level,step=at,cargo=event['cargo'],
+                                    former=event['oldOwner'],recipient=event['newOwner'],
+                                    command=last[1],recorded=last[1]==case['actual'],
+                                    response='terminal' if last[3] else event['intervention']))
+    return results
+
+
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('directory',type=Path);p.add_argument('output',type=Path)
     p.add_argument('--extra',type=Path,nargs='*',default=[])
+    p.add_argument('--interventions',type=Path,help='Public alternative next actions exported from the identified prefixes')
     args=p.parse_args()
     rows=[r for f in [*sorted(args.directory.glob('poses20-*.json')),*args.extra] for r in json.loads(f.read_bytes())]
     assert len({(r['code'],r['level']) for r in rows})==len(rows)
+    if args.interventions:
+        cases=json.loads(args.interventions.read_bytes())
+        levels={(case['code'],case['level']) for case in cases}
+        coverage=[episode(r,0,True) for r in rows if (r['code'],r['level']) in levels]
+        responses=test_branches(cases,coverage)
+        args.output.write_text(json.dumps(responses),encoding='utf8')
+        print('source prefixes',len(cases),'role predictions tested',len(responses))
+        return
     data={name:[episode(r,index,local) for r in rows] for name,index,local in
           [('exact',0,False),('shapeFamily',1,False),('localExact',0,True),('localFamily',1,True)]}
     args.output.write_text(json.dumps(data),encoding='utf8')
