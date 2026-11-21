@@ -13354,5 +13354,831 @@
       "rel57-colm-upper.json": "5d5842c364c181e26e5702c720abb90604a5133884892808b18db536e5cbd5e1"
     },
     "sourceOnly": true
+  },
+  "sourceObservedHandoffV57": {
+    "sourceCold": {
+      "code": "WA30",
+      "level": 3,
+      "actions": 80,
+      "official": true,
+      "trajectory": "786ab93d562dfc1955a2eb4a464a1c20ec16bebfb14d3a1c470ee6ef25056e46",
+      "crates": 5,
+      "places": 8,
+      "maxPlacedBeforeBoundary": 5,
+      "releases": 4,
+      "taken": [
+        {
+          "release": 7,
+          "pickup": 22,
+          "arrival": 26,
+          "controls": [
+            {
+              "replace": null,
+              "win": false,
+              "stepsUsed": 79
+            },
+            {
+              "replace": "ACTION1",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION2",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION3",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION4",
+              "win": false,
+              "stepsUsed": 80
+            }
+          ]
+        },
+        {
+          "release": 19,
+          "pickup": 37,
+          "arrival": 43,
+          "controls": [
+            {
+              "replace": null,
+              "win": false,
+              "stepsUsed": 79
+            },
+            {
+              "replace": "ACTION1",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION2",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION3",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION4",
+              "win": false,
+              "stepsUsed": 80
+            }
+          ]
+        },
+        {
+          "release": 35,
+          "pickup": 54,
+          "arrival": 61,
+          "controls": [
+            {
+              "replace": null,
+              "win": false,
+              "stepsUsed": 79
+            },
+            {
+              "replace": "ACTION1",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION2",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION3",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION4",
+              "win": false,
+              "stepsUsed": 80
+            }
+          ]
+        },
+        {
+          "release": 62,
+          "pickup": 73,
+          "arrival": 79,
+          "controls": [
+            {
+              "replace": null,
+              "win": false,
+              "stepsUsed": 79
+            },
+            {
+              "replace": "ACTION1",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION2",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION3",
+              "win": false,
+              "stepsUsed": 80
+            },
+            {
+              "replace": "ACTION4",
+              "win": false,
+              "stepsUsed": 80
+            }
+          ]
+        }
+      ]
+    },
+    "otherFrozenSourceChecks": [
+      {
+        "code": "FUIT",
+        "level": 2,
+        "baseline": [
+          true,
+          80
+        ],
+        "candidate": [
+          true,
+          80
+        ],
+        "identical": true,
+        "trajectory": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8"
+      },
+      {
+        "code": "FT09",
+        "level": 2,
+        "baseline": [
+          true,
+          7
+        ],
+        "candidate": [
+          true,
+          7
+        ],
+        "identical": true,
+        "trajectory": "3540463f11957520ca4f805b1c66be1712504ee8797d8f66b1af7d4ae36177be"
+      },
+      {
+        "code": "FT09",
+        "level": 3,
+        "baseline": [
+          true,
+          14
+        ],
+        "candidate": [
+          true,
+          14
+        ],
+        "identical": true,
+        "trajectory": "d01a5fc92f15c54b430a2cba8fa943c5698c29bc3675816df02d50f9342ff423"
+      },
+      {
+        "code": "FT09",
+        "level": 4,
+        "baseline": [
+          true,
+          16
+        ],
+        "candidate": [
+          true,
+          16
+        ],
+        "identical": true,
+        "trajectory": "7700b7a149b32c08f121e62f0bab095779adf021d8ce3aeb959c2e8b2ee63581"
+      },
+      {
+        "code": "WA30",
+        "level": 2,
+        "baseline": [
+          true,
+          55
+        ],
+        "candidate": [
+          true,
+          55
+        ],
+        "identical": true,
+        "trajectory": "01292713c7317db5f5b7ff4b045635e3833168c707b62dbcd6ee95736280d81f"
+      },
+      {
+        "code": "WA30",
+        "level": 3,
+        "baseline": [
+          false,
+          100
+        ],
+        "candidate": [
+          true,
+          80
+        ],
+        "identical": false,
+        "trajectory": "786ab93d562dfc1955a2eb4a464a1c20ec16bebfb14d3a1c470ee6ef25056e46"
+      }
+    ],
+    "controls100": {
+      "replayed": 100,
+      "won": 100,
+      "identicalTrajectories": 100,
+      "core": [
+        {
+          "code": "KEYD",
+          "actions": 35,
+          "won": true
+        },
+        {
+          "code": "SKBN",
+          "actions": 22,
+          "won": true
+        },
+        {
+          "code": "GABA",
+          "actions": 49,
+          "won": true
+        },
+        {
+          "code": "SWCH",
+          "actions": 25,
+          "won": true
+        }
+      ]
+    },
+    "baseline": {
+      "sha": "1d30a53278ee47039c72bfcf3e87b58171f4b6a8",
+      "files": 2562,
+      "manifestHash": "1e7798cc370bcd6cfe446ea9107a204bfb5e8cac967163d0ed0deee70e0785de"
+    },
+    "candidate": {
+      "sha": "f34e8bfc4744f192375ae742128e12facf3be9e3",
+      "files": 2562,
+      "manifestHash": "9b991ff6b8a2ca13fc24b338a5c7fa7376c2195d8952114150b48d2731357ce7"
+    },
+    "openCustom4": [
+      {
+        "code": "SS01",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "baselineTape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "candidateTape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "commonPrefix": 44,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "target_levels_completed",
+        "coldDeliveryEntry": {
+          "decisions": 44,
+          "allowedCommands": 44,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS01",
+        "lesson": 19,
+        "baseline": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "baselineTape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "candidateTape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "commonPrefix": 32,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "target_levels_completed"
+      },
+      {
+        "code": "SS02",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 241,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 312,
+          "won": false
+        },
+        "baselineTape": "101ad0e203e666f4dceaa11cfbeef81ef14c9df768f97d2a70a72a66972f7aad",
+        "candidateTape": "9fab8ea57d4748747ecd05c0db1498f825c599e873dabf1b3aa4a7d7928cb1cd",
+        "commonPrefix": 241,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "level_active_time_budget",
+        "coldDeliveryEntry": {
+          "decisions": 312,
+          "allowedCommands": 0,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS03",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 225,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 279,
+          "won": false
+        },
+        "baselineTape": "400e21f69c940530a523311b6fbf4bf6c7bbafbcd92a37b40d57cf05fe6010c8",
+        "candidateTape": "dc6881001de123d47501432d5c97c2654b150d8ae7f8b7c6935fa726ad6f74f8",
+        "commonPrefix": 225,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "level_active_time_budget",
+        "coldDeliveryEntry": {
+          "decisions": 279,
+          "allowedCommands": 0,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS04",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "baselineTape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "candidateTape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "commonPrefix": 60,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "target_levels_completed",
+        "coldDeliveryEntry": {
+          "decisions": 60,
+          "allowedCommands": 0,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS05",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 216,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 263,
+          "won": false
+        },
+        "baselineTape": "aea065026285fb9cf0b052f79942db022ceeb02195d110e386ee27e80753375f",
+        "candidateTape": "487a2d5f77d1bdf802869e004909f63ff4fe5dfaf5d57f9db87bca4fa0cb13d6",
+        "commonPrefix": 216,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "level_active_time_budget",
+        "coldDeliveryEntry": {
+          "decisions": 263,
+          "allowedCommands": 263,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS06",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 190,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 250,
+          "won": false
+        },
+        "baselineTape": "e1cda6a1acde6c1d0f74d46d0eaca8ef4ecbf902c1ea3da8e65a76ccb0bdac9f",
+        "candidateTape": "b424d28bc5e41a126a8df4040e256a7eea52a68e5696a13d0f2bded89c96e75e",
+        "commonPrefix": 190,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "level_active_time_budget",
+        "coldDeliveryEntry": {
+          "decisions": 250,
+          "allowedCommands": 0,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS07",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "baselineTape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "candidateTape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "commonPrefix": 5,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "native_game_over",
+        "coldDeliveryEntry": {
+          "decisions": 5,
+          "allowedCommands": 0,
+          "ordinaryGeometry": 5,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS08",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 238,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 308,
+          "won": false
+        },
+        "baselineTape": "ccea98a1d1690e6625e9d015b30eec751d007790b892351e2140f4b6389dcdad",
+        "candidateTape": "6a64af7f76ebed9a4a73ee3837b9c54d534753437e7ed806069fb8343893ed8a",
+        "commonPrefix": 238,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "level_active_time_budget",
+        "coldDeliveryEntry": {
+          "decisions": 308,
+          "allowedCommands": 0,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      },
+      {
+        "code": "SS10",
+        "lesson": 0,
+        "baseline": {
+          "level": 2,
+          "actions": 235,
+          "won": false
+        },
+        "candidate": {
+          "level": 2,
+          "actions": 282,
+          "won": false
+        },
+        "baselineTape": "fd4a74fe7212ac19e803ef20f2b7d6485a586691634a857a2551a31f055d5e0f",
+        "candidateTape": "357d5a4a05ca2222bff9e2eb96e1541e14e9f2e1bfe9df49c6750cc3e9f8fbc1",
+        "commonPrefix": 235,
+        "nativeHandoffFamilyInputs": 0,
+        "stop": "level_active_time_budget",
+        "coldDeliveryEntry": {
+          "decisions": 282,
+          "allowedCommands": 0,
+          "ordinaryGeometry": 0,
+          "inputsAndDirectionalGeometry": 0
+        }
+      }
+    ],
+    "sourcePoseTransfer": {
+      "exact": {
+        "levels": 149,
+        "events": 3,
+        "examples": [
+          {
+            "code": "COLM",
+            "level": 3,
+            "observations": [
+              {
+                "step": 16,
+                "command": "ACTION5",
+                "cargo": 118,
+                "oldOwner": 119,
+                "newOwner": 115,
+                "oldSites": 2,
+                "newSites": 2,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 17,
+                  "command": "ACTION1",
+                  "matched": false
+                }
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 115,
+                "oldOwner": 118,
+                "newOwner": 119,
+                "oldSites": 5,
+                "newSites": 3,
+                "oldStayed": false
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 119,
+                "oldOwner": 118,
+                "newOwner": 115,
+                "oldSites": 5,
+                "newSites": 2,
+                "oldStayed": false
+              }
+            ]
+          }
+        ]
+      },
+      "shapeFamily": {
+        "levels": 149,
+        "events": 3,
+        "examples": [
+          {
+            "code": "COLM",
+            "level": 3,
+            "observations": [
+              {
+                "step": 16,
+                "command": "ACTION5",
+                "cargo": 118,
+                "oldOwner": 119,
+                "newOwner": 115,
+                "oldSites": 2,
+                "newSites": 2,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 17,
+                  "command": "ACTION1",
+                  "matched": false
+                }
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 115,
+                "oldOwner": 118,
+                "newOwner": 119,
+                "oldSites": 5,
+                "newSites": 3,
+                "oldStayed": false
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 119,
+                "oldOwner": 118,
+                "newOwner": 115,
+                "oldSites": 5,
+                "newSites": 2,
+                "oldStayed": false
+              }
+            ]
+          }
+        ]
+      },
+      "localExact": {
+        "levels": 149,
+        "events": 6,
+        "examples": [
+          {
+            "code": "WA30",
+            "level": 3,
+            "observations": [
+              {
+                "step": 74,
+                "command": "ACTION4",
+                "cargo": 56,
+                "oldOwner": 248,
+                "newOwner": 51,
+                "oldSites": 5,
+                "newSites": 2,
+                "oldStayed": true,
+                "nextMovingResponse": {
+                  "step": 75,
+                  "command": "ACTION4",
+                  "matched": true
+                }
+              }
+            ]
+          },
+          {
+            "code": "COLM",
+            "level": 3,
+            "observations": [
+              {
+                "step": 16,
+                "command": "ACTION5",
+                "cargo": 45,
+                "oldOwner": 116,
+                "newOwner": 113,
+                "oldSites": 2,
+                "newSites": 2,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 17,
+                  "command": "ACTION1",
+                  "matched": false
+                }
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 113,
+                "oldOwner": 45,
+                "newOwner": 116,
+                "oldSites": 5,
+                "newSites": 3,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 19,
+                  "command": "ACTION2",
+                  "matched": true
+                }
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 116,
+                "oldOwner": 45,
+                "newOwner": 113,
+                "oldSites": 5,
+                "newSites": 2,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 19,
+                  "command": "ACTION2",
+                  "matched": true
+                }
+              },
+              {
+                "step": 35,
+                "command": "ACTION2",
+                "cargo": 177,
+                "oldOwner": 176,
+                "newOwner": 178,
+                "oldSites": 3,
+                "newSites": 3,
+                "oldStayed": false
+              },
+              {
+                "step": 35,
+                "command": "ACTION2",
+                "cargo": 178,
+                "oldOwner": 176,
+                "newOwner": 177,
+                "oldSites": 2,
+                "newSites": 2,
+                "oldStayed": false
+              }
+            ]
+          }
+        ]
+      },
+      "localFamily": {
+        "levels": 149,
+        "events": 6,
+        "examples": [
+          {
+            "code": "WA30",
+            "level": 3,
+            "observations": [
+              {
+                "step": 74,
+                "command": "ACTION4",
+                "cargo": 56,
+                "oldOwner": 249,
+                "newOwner": 51,
+                "oldSites": 5,
+                "newSites": 2,
+                "oldStayed": true,
+                "nextMovingResponse": {
+                  "step": 75,
+                  "command": "ACTION4",
+                  "matched": true
+                }
+              }
+            ]
+          },
+          {
+            "code": "COLM",
+            "level": 3,
+            "observations": [
+              {
+                "step": 16,
+                "command": "ACTION5",
+                "cargo": 45,
+                "oldOwner": 116,
+                "newOwner": 113,
+                "oldSites": 2,
+                "newSites": 2,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 17,
+                  "command": "ACTION1",
+                  "matched": false
+                }
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 113,
+                "oldOwner": 45,
+                "newOwner": 116,
+                "oldSites": 5,
+                "newSites": 3,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 19,
+                  "command": "ACTION2",
+                  "matched": true
+                }
+              },
+              {
+                "step": 17,
+                "command": "ACTION1",
+                "cargo": 116,
+                "oldOwner": 45,
+                "newOwner": 113,
+                "oldSites": 5,
+                "newSites": 2,
+                "oldStayed": false,
+                "nextMovingResponse": {
+                  "step": 19,
+                  "command": "ACTION2",
+                  "matched": true
+                }
+              },
+              {
+                "step": 35,
+                "command": "ACTION2",
+                "cargo": 177,
+                "oldOwner": 176,
+                "newOwner": 178,
+                "oldSites": 3,
+                "newSites": 3,
+                "oldStayed": false
+              },
+              {
+                "step": 35,
+                "command": "ACTION2",
+                "cargo": 178,
+                "oldOwner": 176,
+                "newOwner": 177,
+                "oldSites": 2,
+                "newSites": 2,
+                "oldStayed": false
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "reserved": "SS09 L2",
+    "canonicalPass": 429,
+    "baselineTag": "sic-source100-joint-field-v55",
+    "candidateTag": "sic-source100-observed-handoff-v57",
+    "commonColdActions": 1454,
+    "coldDeliveryEntryTotals": {
+      "decisions": 1803,
+      "allowedCommands": 307,
+      "ordinaryGeometry": 5,
+      "inputsAndDirectionalGeometry": 0
+    },
+    "newCustom4Games": 0,
+    "sourcePoseAnalysisScope": "Offline only. Same-displacement forecasts do not establish a causal transport role.",
+    "evidenceSha256": {
+      "relay57-entry-verified.json": "51d46dac5d6594ae8e38405420fdd02363defd45f007f201968c31019fac20d4",
+      "relay57-source-verified.json": "c84e395b6844298db8f3930cad9d2f3825aa42b993e8d841ae8cecb2632c9618",
+      "relay57-all-verified.json": "8a4f4ea67cb2dffc1eba5823f5d8334505c82a188a58fad62a8e9aa2db0e9a65",
+      "relay57-upper-verified.json": "4a7a2bec737bb9f0f67575ee42f7e8ef78e54d7c61a4ccebe859ee1f3923e05c",
+      "relay57-handoff-proof.json": "a88642717c0a7207abd521db70738709e25e171cb7d7bba5c6f5010cb500b54e",
+      "relay57-canonical-preserved-tests.log": "f2536a2ded212e8ae429a2117eeff869cefe5477cc427c06d0e87de175bda40a",
+      "transfers57-coverage.json": "96ee4f0c49c7c4c07010f1698c53d7fe421128e89f5a95f13213a0ba214659be"
+    }
   }
 }

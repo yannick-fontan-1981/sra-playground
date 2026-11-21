@@ -5,6 +5,11 @@ import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 
 const [root,output,...paths]=process.argv.slice(2);
+// Optional post-run measurement. Import the recognizer from the solver that produced the tape.
+const frozenDeliveryRoot = process.env.SIC_AUDIT_COLD_DELIVERY;
+const delivery = frozenDeliveryRoot
+  ? await import(pathToFileURL(resolve(frozenDeliveryRoot, 'src/logos-engine/v6-oriented-coupling.ts')).href)
+  : null;
 const {createGameDispatcher}=await import(pathToFileURL(resolve(root,'src/runtime/native-game-dispatcher.ts')).href);
 const hash=f=>createHash('sha256').update(JSON.stringify(f)).digest('hex');
 const games=new Map(),unavailable=[];
@@ -30,6 +35,9 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   assert.equal(b.level,r.start);assert.equal(b.levelsCompleted,r.initialCompleted);assert.equal(hash(b.frame),r.initial);
   assert.equal(r.replayCommands.length,r.issued);assert.equal(r.sic,r.issued);
   const visits=new Map(),resets=[],tape=[];
+  const entry = { decisions: 0, allowedCommands: 0, ordinaryGeometry: 0, inputsAndDirectionalGeometry: 0 };
+  let previousDirectionalGeometry = false;
+  if (delivery) assert.ok(!r.observedPriorLevelActions && r.start === r.finish, 'Cold single-level audit required');
   for(const [i,c] of r.replayCommands.entries()) {
     if(hash(b.frame).slice(0,16)!==c.from) {
       assert.ok(resets.length<r.resets,'Unexpected discontinuity at '+key+'/'+i);
@@ -37,8 +45,18 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
       b=await engine.dispatch({type:'reset'});
       assert.equal(b.levelsCompleted,score);assert.equal(b.level,level);
       resets.push(i);
+      previousDirectionalGeometry = false;
     }
     assert.equal(hash(b.frame).slice(0,16),c.from);
+    if (delivery) {
+      const allowed = [1, 2, 3, 4, 5].every(id => b.availableActionIds.includes(id)) && !b.availableActionIds.includes(6);
+      const geometry = delivery.orientedCouplingInitial(b.frame);
+      entry.decisions++;
+      entry.allowedCommands += Number(allowed);
+      entry.ordinaryGeometry += Number(Boolean(geometry));
+      entry.inputsAndDirectionalGeometry += Number(allowed && previousDirectionalGeometry);
+      previousDirectionalGeometry = Boolean(geometry) && c.id >= 1 && c.id <= 4;
+    }
     const {level,levelsCompleted}=b;
     b=await act(c);
     assert.equal(hash(b.frame).slice(0,16),c.to);
@@ -53,6 +71,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   assert.equal(b.levelsCompleted-r.initialCompleted,levels.filter(l=>l.won).length);
   const result={code:r.code,start:r.start,finish:r.finish,lesson:r.observedPriorLevelActions??0,initial:r.initial,
     cap:r.cap,levels,resets,tapeDigest:hash(tape),final:hash(b.frame)};
+  if (delivery) result.coldDeliveryEntry = entry;
   if(games.has(key)) assert.deepEqual(games.get(key),result);
   games.set(key,result);
 }
