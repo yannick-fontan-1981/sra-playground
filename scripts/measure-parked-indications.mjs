@@ -48,11 +48,17 @@ assert.equal(hash(root).slice(0,16),afterPush.at(-1).to);
 const scalars=root.availableActionIds.filter(id=>!directions.includes(id)&&id!==6);
 const queue=[[]],seen=new Set([hash(root)]),arrivals=[];
 const counts={unchanged:0,terminal:0,stationary:0,scores:0};
-let examined=0;
+const cells=new Set(),pivotSites=new Set(),fixedCopies=rootCommand.landmark.displacedDestination?.stationaryCopies??[];
+let examined=0,closest=Infinity;
 for(let i=0;i<queue.length&&i<cap;i++){
   const path=queue[i],b=await restore(path),prior=await view(b),actor=at(prior,moving);
   if(!actor||!near(at(prior,parked),held))continue;
   examined++;
+  const location=aligned(actor,origin,pitch);
+  cells.add(location.join());
+  closest=Math.min(closest,(Math.abs(location[0]-origin[0])+Math.abs(location[1]-origin[1]))/stride);
+  const local=(prior[pivot]??[]).filter(p=>!fixedCopies.some(site=>near(p.at,site)));
+  if(local.length===1)pivotSites.add(aligned(local[0].at,origin,pitch).join());
   for(const id of [...scalars,...directions]){
     await restore(path);
     const next=await act({id}),scalar=scalars.includes(id);
@@ -71,7 +77,8 @@ for(let i=0;i<queue.length&&i<cap;i++){
     arrivals.push({path,command:id,actor,landed,partnerHeld:near(at(post,parked),held),marks});
   }
 }
-const summary={cap,examined,states:seen.size,counts,scalarArrivals:arrivals.length,
+const summary={cap,examined,states:seen.size,cells:cells.size,pivotSites:pivotSites.size,closest,exhausted:queue.length<=cap,
+  counts,scalarArrivals:arrivals.length,
   arrivalsWithUniqueMarkerCell:arrivals.filter(a=>a.marks.some(m=>m.copies===1&&m.uniqueCell)).length,
   nominated:forecasts.length,ambiguous:forecasts.filter(f=>!f.uniqueCell).length};
 await writeFile(out,JSON.stringify({summary,forecasts,arrivals}));console.log(JSON.stringify(summary));
