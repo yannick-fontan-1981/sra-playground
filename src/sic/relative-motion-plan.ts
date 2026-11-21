@@ -17,6 +17,11 @@ import {
 } from "./relative-motion-learning.ts";
 import type { VisualLayout } from "./witnessed-preview-transfer.ts";
 import type { XY } from "./access-terrain.ts";
+import {
+  projectContactPreparation,
+  type ContactTest,
+  type ContactStep,
+} from "./contact-preparation.ts";
 
 export type RelativeTrial = {
   actor: string;
@@ -26,7 +31,9 @@ export type RelativeTrial = {
   next: GroupPose;
   goal: number;
   remaining: number;
-  route?: { op: string; next: GroupPose }[];
+  route?: ContactStep[];
+  capacity?: ContactTest;
+  checkingContact?: boolean;
   continuedAfter?: string;
   desired?: {
     initial: XY;
@@ -38,7 +45,7 @@ export type RelativeTrial = {
     barrier?: "measured_wall" | "occupied_site" | "predicted_wall";
   };
   purpose: "reach_scoring_contact" | "test_unknown_route";
-  law: ReachLaw;
+  law: ReachLaw | { metric: "directed_contact"; maxObservedLine: number };
   learned: string;
   contrast: string;
   contact: string;
@@ -69,10 +76,18 @@ export function continueRelativePlan(
   won: boolean,
 ) {
   delete mem.active;
+  if (matched && plan.checkingContact)
+    (mem.verifiedContact ??= {})[plan.model] = a.observation_ref;
   if (!matched || won || !plan.route?.length) return;
   const [step, ...tail] = plan.route;
+  const { capacity: previousTest, checkingContact, ...base } = plan;
+  const capacity = nextContactTest(
+    plan.route,
+    mem.verifiedContact?.[plan.model],
+  );
   mem.active = {
-    ...plan,
+    ...base,
+    ...(capacity ? { capacity, checkingContact: !!step!.test } : {}),
     op: step!.op,
     from: plan.next,
     next: step!.next,
@@ -83,6 +98,10 @@ export function continueRelativePlan(
     predictions: 0,
     usedMeasured: false,
   };
+}
+function nextContactTest(steps: ContactStep[], verified?: string) {
+  const test = steps.find((s) => s.test)?.test;
+  return test && { ...test, ...(verified ? { verifiedUse: verified } : {}) };
 }
 type Step = {
   op: string;
@@ -387,6 +406,90 @@ export function chooseRelativePlan(
     )
       return retained;
   }
+  const contactBudget = { remaining: limits.maxNodes };
+  for (const [key, model] of Object.entries(mem.models)) {
+    if (contactBudget.remaining <= 0) return null;
+    if (
+      model.invalid ||
+      !model.contact?.first ||
+      !model.contact.freeWalk ||
+      model.contact.contradicted
+    )
+      continue;
+    const current = readGroup(model, layout);
+    if (!current) continue;
+    const ops = Object.entries(model.moves).filter(([op]) =>
+      o.available_action_refs.includes(op),
+    );
+    const scored = Object.entries(model.goals).filter(
+      ([marker]) => refs[marker],
+    );
+    const counts = new Map<number, number>();
+    for (const [, sites] of scored)
+      for (const site of new Set(sites))
+        counts.set(site, 1 + (counts.get(site) ?? 0));
+    if (!counts.size) continue;
+    const most = Math.max(...counts.values());
+    const goals = new Set(
+      [...counts].filter(([, votes]) => votes === most).map(([p]) => p),
+    );
+    if (goals.has(current.actor)) continue;
+    const { cells } = board(model, rows, current, goals, fitReach(model));
+    const result = projectContactPreparation(
+      model,
+      current,
+      goals,
+      ops,
+      cells,
+      contactBudget,
+      limits.maxDepth,
+    );
+    if (!result) continue;
+    const { steps, goal, examined } = result,
+      step = steps[0]!,
+      final = steps.at(-1)!.next;
+    const test = nextContactTest(steps, mem.verifiedContact?.[key]);
+    if (!test) continue;
+    const marker = scored.find(([, sites]) => sites.includes(goal))![0];
+    return {
+      actor: model.actor,
+      partner: model.partner,
+      op: step.op,
+      from: current,
+      next: step.next,
+      model: key,
+      goal,
+      remaining: steps.length,
+      route: steps.slice(1),
+      capacity: test,
+      checkingContact: !!step.test,
+      law: {
+        metric: "directed_contact",
+        maxObservedLine: model.contact.longest,
+      },
+      purpose: "reach_scoring_contact",
+      learned: model.contact.first,
+      contrast: model.contact.freeWalk,
+      contact: refs[marker]!,
+      before: o.observation_ref,
+      predictions: examined,
+      alternatives: goals.size,
+      usedMeasured: !!model.measured[poseKey(current) + "/" + step.op],
+      objective: {
+        rigidRoute: goalArrangements(
+          model,
+          current,
+          new Set([goal]),
+          cells,
+          ops,
+          false,
+        ).reachable.has(goal),
+        alternatives: goals.size,
+        incompatible: [],
+        targetOffsets: final.pieces.map((p) => vector(model, goal, p)),
+      },
+    };
+  }
   const models = Object.entries(mem.models)
     .filter(
       ([, m]) =>
@@ -399,10 +502,10 @@ export function chooseRelativePlan(
     .sort(
       ([, a], [, b]) => b.contrasts - a.contrasts || b.positive - a.positive,
     );
-  let remaining = limits.maxNodes;
+  let remaining = contactBudget.remaining;
   for (const [key, m] of models) {
     const current = readGroup(m, layout);
-    if (!current) continue;
+    if (!current || current.pieces.length > 8) continue;
     const goals = new Set(
       Object.entries(m.goals)
         .filter(([k]) => refs[k])

@@ -9,11 +9,11 @@ import { visualLayout } from "../src/sic/witnessed-preview-transfer.ts";
 const [env, runfile, input, output, maxArg, graphOutput] =
     process.argv.slice(2),
   r = JSON.parse(await readFile(runfile, "utf8")),
-  c = JSON.parse(await readFile(input, "utf8")).cases[0],
+  c = input === "-" ? null : JSON.parse(await readFile(input, "utf8")).cases[0],
   max = Number(maxArg);
 assert.ok(
-  [5, 7].includes(c.op) && max > 0 && Number.isSafeInteger(max),
-  "A scalar operation and positive search budget are required",
+  (!c || [5, 7].includes(c.op)) && max > 0 && Number.isSafeInteger(max),
+  "Expected an optional scalar operation and a positive search budget",
 );
 const { createGameDispatcher } = await import(
   pathToFileURL(resolve(env, "src/runtime/native-game-dispatcher.ts")).href
@@ -44,6 +44,11 @@ const init = await restore([]),
     nativeActions: 0,
     maxFrontier: max,
   };
+const entryIndex = r.levels
+  .filter((level) => level.level < 2)
+  .reduce((n, level) => n + level.actions, 0);
+if (r.replayCommands?.[entryIndex])
+  assert.equal(hash(init).slice(0, 16), r.replayCommands[entryIndex].from);
 for (let i = 0; i < queue.length && i < max; i++) {
   const s = queue[i],
     b = await restore(s.path);
@@ -62,7 +67,7 @@ for (let i = 0; i < queue.length && i < max; i++) {
     "public-search",
   );
   const l = visualLayout(obs, b.frame),
-    hasCue = !!l[c.roles[0][1]]?.length;
+    hasCue = !!c && !!l[c.roles[0][1]]?.length;
   if (graphOutput)
     projections.set(
       s.h,
@@ -76,7 +81,7 @@ for (let i = 0; i < queue.length && i < max; i++) {
   tally.withCue += +hasCue;
   tally.states++;
   for (const id of [
-    c.op,
+    ...(c ? [c.op] : []),
     ...b.availableActionIds.filter((id) => id >= 1 && id <= 4),
   ]) {
     if (!b.availableActionIds.includes(id) || id === 6) continue;
@@ -85,7 +90,7 @@ for (let i = 0; i < queue.length && i < max; i++) {
     const z = await act(id);
     const h = hash(z),
       changed = h !== s.h,
-      used = s.used || (id === c.op && changed);
+      used = s.used || (id === c?.op && changed);
     if (graphOutput)
       edges.push({
         from: s.h,
@@ -94,7 +99,7 @@ for (let i = 0; i < queue.length && i < max; i++) {
         won: z.levelsCompleted > b.levelsCompleted || z.state === "WIN",
         live: z.state === "NOT_FINISHED",
       });
-    if (id === c.op && changed) {
+    if (id === c?.op && changed) {
       tally.changed++;
       tally.positiveWithCue += +hasCue;
       tally.firstEffectDepth ??= s.path.length;

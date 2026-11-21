@@ -44,10 +44,17 @@ export type RelativeModel = {
   blockedRef?: string;
   occupiedFailures?: Record<number, string>;
   obstruction?: string;
+  contact?: {
+    first?: string;
+    freeWalk?: string;
+    longest: number;
+    contradicted: boolean;
+  };
 };
 export type RelativeMemory = {
   models: Record<string, RelativeModel>;
   active?: RelativeTrial;
+  verifiedContact?: Record<string, string>;
 };
 export const poseKey = (s: GroupPose) => [s.actor, ...s.pieces].join(",");
 export const equalPose = (p: GroupPose, q: GroupPose) =>
@@ -172,7 +179,6 @@ export function observeRelativeMotion(
       if (
         partner === w.actor ||
         !parts.length ||
-        parts.length > 8 ||
         next[partner]?.length !== parts.length
       )
         continue;
@@ -181,15 +187,20 @@ export function observeRelativeMotion(
       if (!m) {
         // Only instantiate roles whose translated sites can be explained by
         // the subject's displacement and include a separately located mover.
-        if (
-          parts.every((s) =>
-            next[partner]!.some(
-              (t) => s.at[0] === t.at[0] && s.at[1] === t.at[1],
-            ),
-          )
-        )
-          continue;
+        const locations = new Set(next[partner]!.map((t) => t.at.join()));
+        if (parts.every((s) => locations.has(s.at.join()))) continue;
         m = newModel(w, partner, parts[0]!.at, rows, b.observation_ref);
+        if (parts.length > 8) {
+          const from = readGroup(m, old),
+            to = readGroup(m, next);
+          if (
+            !from ||
+            !to ||
+            !from.pieces.includes(to.actor) ||
+            from.actor === to.actor
+          )
+            continue;
+        }
         const motion = previousMotion?.[w.actor];
         const controls =
           motion &&
@@ -261,6 +272,28 @@ export function observeRelativeMotion(
         ? [...moved].filter(([from, to]) => from !== to).length
         : 0;
       if (!mem.models[id] && !shifted) continue;
+      if (step) {
+        const c = (m.contact ??= { longest: 0, contradicted: false });
+        if (!p.pieces.includes(q.actor)) {
+          if (shifted) c.contradicted = true;
+          else c.freeWalk ??= a.observation_ref;
+        } else {
+          let end = q.actor,
+            length = 0;
+          while (p.pieces.includes(end)) {
+            end += step;
+            length++;
+          }
+          if (
+            shifted === length &&
+            q.pieces.includes(end) &&
+            !q.pieces.includes(q.actor)
+          ) {
+            c.first ??= a.observation_ref;
+            c.longest = Math.max(c.longest, length);
+          } else c.contradicted = true;
+        }
+      }
       mem.models[id] = m;
       m.last = a.observation_ref;
       if (step) {

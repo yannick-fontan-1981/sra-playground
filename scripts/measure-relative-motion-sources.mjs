@@ -76,6 +76,7 @@ for (const path of runs)
         roles: [m.actor, m.partner],
         controls: Object.keys(m.moves).length,
         law: fitReach(m),
+        ...(m.contact ? { contact: m.contact } : {}),
       }));
     await appendFile(
       file,
