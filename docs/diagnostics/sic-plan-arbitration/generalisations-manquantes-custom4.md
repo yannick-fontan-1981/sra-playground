@@ -2,7 +2,9 @@
 
 Le critère principal est le premier L2 gagné en partie autonome sur **un jeu supplémentaire**. Les neuf L2 ouverts donnent deux victoires à froid à v31 et à v34, SS01 et SS04. SS03 a déjà été gagné après le L1. Un premier succès à froid sur SS03 constitue donc un gain d’autonomie distinct. Les six occasions de gagner le L2 d’un autre jeu déjà ouvert sont SS02, SS05, SS06, SS07, SS08 et SS10. SS09 L2 reste la confirmation indépendante. [Bilan des parties complètes de v34](qualification-reprise-v34.md)
 
-**Dernier bilan vérifié.** V43 conserve les 100 victoires sources L1 et gagne **2 L2 sur 9 à froid sur Custom 4**, comme v41. SS01 gagne en 44 coups à froid et en 32 après le L1. SS04 gagne en 60 à froid. Aucun des sept autres L2 ouverts ne gagne. Sur chacun des neuf, les deux versions émettent les mêmes commandes et obtiennent les mêmes images pendant toute la longueur comparable. La priorité pour SS06, SS08 et SS10 est donc de déclencher une première expérience de changement de sujet dans une scène où plusieurs pièces peuvent expliquer le mouvement. [Scores et préfixes comparés](mesures-generalisations-manquantes.json)
+**Dernier bilan vérifié.** V44 conserve les 100 victoires sources L1 et gagne **2 L2 sur 9 à froid sur Custom 4**, comme v41 et v43. SS01 gagne en 44 coups à froid et en 32 après le L1. SS04 gagne en 60 à froid. Aucun des sept autres L2 ouverts ne gagne. Sur chacun des neuf, v43 et v44 émettent les mêmes commandes et obtiennent les mêmes images pendant toute la longueur comparable. [Scores et préfixes comparés](mesures-generalisations-manquantes.json)
+
+**Deux travaux à pousser en premier.** Pour SS06, SS08 et SS10, il faut déclencher une première expérience de changement de sujet quand plusieurs pièces peuvent expliquer le mouvement. Les neuf parcours froids de v44 comptent zéro expérience de sélection par marque. Pour SS02, la piste la mieux étayée sur les sources est de choisir le déplacement d’un objet pour la disposition qu’il rend atteignable. Un pilote spatial a converti deux échecs de SKBN, aux niveaux 4 et 5. Il reste à intégrer ce choix à l’arbitrage de SIC et à mesurer s’il débouche sur une victoire dans un autre jeu.
 
 ## Capacités manquantes et travaux associés
 
@@ -91,9 +93,26 @@ Le témoin de transfert est v41. Figer v43 sous le tag `sic-source100-projected-
 
 **Travail rattaché aux capacités 1 et 2.** Une pièce déjà contrôlée peut redevenir intéressante à une autre position. Dans deux parties sources autonomes de VOIS L4, le pilote qui conserve cette possibilité gagne en 107 coups sur la même trajectoire. Les 36 premières commandes sont identiques à v43. Au coup 37, le pilote clique sur une pièce pour laquelle il prévoit un déplacement mesurable. V43 choisit une autre commande. VOIS L5 échoue encore au plafond de 120. Ce résultat établit une nouvelle victoire source sur un niveau supérieur. Son transfert vers un autre jeu reste à éprouver. [Règle de décision](../../../src/sic/marked-cursor-selection.ts) · [Test qui distingue un site nouveau d’un site déjà essayé](../../../tests/sic-marked-cursor-selection.test.ts)
 
+### Chantier spatial · choisir avant d’agir une poussée ou un déplacement libre
+
+**Capacités 3 et 4, cas source SKBN.** Après avoir vu une commande déplacer un sujet tandis qu’un autre restait immobile, le pilote repère un contact où les deux avancent ensemble. Il compare les suites possibles depuis la disposition présente. Il choisit d’abord un mouvement où le premier doit s’écarter et le second rester sur place, puis prévoit la position des deux après chaque commande jusqu’aux emplacements visés. Une position observée qui contredit la prédiction interrompt la suite. Aucun nom de jeu, couleur réservée ou commande gagnante ne sert à choisir le parcours. [Sélection de la première expérience](../../../scripts/source-contact-experiment.mjs) · [Vérification par le moteur source](../../../scripts/measure-source-contact-footprints.mjs)
+
+| Niveau source à froid | SIC v43 autonome | Premier plan choisi, préfixe compris | Même expérience avec seulement la disposition visible pour localiser les destinations |
+| --- | ---: | ---: | ---: |
+| SKBN L2 | Victoire en 47 | Victoire en 47 | Victoire en 49 |
+| SKBN L3 | Victoire en 22 | Victoire en 22 | Victoire en 22 |
+| SKBN L4 | Échec à 120 | **Victoire en 34** | Victoire en 63 |
+| SKBN L5 | Échec à 120 | **Victoire en 48** | Victoire en 48 |
+
+Sur L4, le pilote emprunte les 10 premières commandes de SIC, puis choisit une suite de 24. Le moteur confirme les 23 états intermédiaires et accorde la victoire au dernier coup. Sur L5, il emprunte 30 commandes, prévoit les 18 suivantes et gagne. Dans les deux cas, le choix précède l’exécution physique de la première branche. Mémoriser où le sol et les destinations étaient visibles avant d’être recouverts avance le déclenchement sur L4 de 46 à 10 coups. Sur les 74 L1 de développement, le pilote ne choisit un tel plan que sur SKBN, déjà gagné. Le prochain test est de faire choisir et interrompre ces plans par SIC dans son arbitrage ordinaire, puis de tester le transfert sur un mécanisme qui ouvre un passage. Les deux gains du banc concernent des niveaux du même jeu source. [Préfixes, commandes de séparation et score de chaque branche](mesures-generalisations-manquantes.json)
+
+**Point d’intégration mesuré.** Les huit branches gagnantes du tableau ont été reproduites depuis leur préfixe dans le moteur. En appliquant à leurs images le lecteur d’objets que SIC utilise déjà pour le transport, celui-ci retrouve correctement le sujet et les corps déplacés sur 23 des 23 états intermédiaires de SKBN L4 avec mémoire. Sur SKBN L5, il n’en retrouve que 7 sur 17. Le suivi par forme et déplacement du pilote valide les 17. La vérification à intégrer est donc précise : conserver l’identité d’une pièce lorsqu’elle recouvre une destination et arrêter le plan dès qu’une position prévue est contredite. [Mesures par lecteur et par branche](mesures-generalisations-manquantes.json)
+
 ### Prochaine expérience utile par cible
 
-Le candidat v44 isole le changement testé sur VOIS L4. Le témoin est v43. Figer la règle sous le tag `sic-source100-local-choice-v44`. Comparer les neuf L2 ouverts à froid, le contrôle SS01 avec le L1 et les 100 L1 sources dans les mêmes conditions que v43. Compter un transfert uniquement si le moteur accorde un nouveau score. Comparer ensuite la première divergence de trajectoire et reproduire toute nouvelle victoire.
+**Protocole fixé pour v44.** Le candidat isole le changement testé sur VOIS L4. Le témoin est v43. Figer la règle sous le tag `sic-source100-local-choice-v44`. Comparer les neuf L2 ouverts à froid, le contrôle SS01 avec le L1 et les 100 L1 sources dans les mêmes conditions que v43. Compter un transfert uniquement si le moteur accorde un nouveau score.
+
+**Résultat de v44.** Le candidat `34f17243f` a reproduit les 100 trajectoires L1 de v43 et passé les 166 tests ciblés. L’export figé gagne VOIS L4 à froid en 107 et échoue sur VOIS L5 à 120. Les deux scores ont été rejoués dans le moteur. Le rejeu indépendant des dix parties Custom 4 confirme SS01 à froid et après le L1 ainsi que SS04 à froid. Les six autres jeux candidats à un nouveau score restent ouverts, et SS03 attend toujours sa première victoire à froid. Le pilote spatial SKBN a été étudié séparément du candidat figé. [Coups, motifs d’arrêt et empreintes des parties](mesures-generalisations-manquantes.json)
 
 | L2 | Expérience à préparer sur les jeux sources | Décision que SIC doit ensuite prendre seul |
 | --- | --- | --- |

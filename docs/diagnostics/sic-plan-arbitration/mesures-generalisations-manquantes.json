@@ -1398,6 +1398,14 @@
         "won": true,
         "trajectory": "cd11525a7d33e3bbf5c864f1cff384e05fe98803a7e6e5833d4189fa66a83686",
         "cold": true
+      },
+      "v44Frozen": {
+        "actions": 107,
+        "won": true,
+        "trajectory": "cd11525a7d33e3bbf5c864f1cff384e05fe98803a7e6e5833d4189fa66a83686",
+        "cold": true,
+        "initial": "f2d24e488d9132c3f2758284ea41575a0da85a5e026238f9229da63169d2e3f0",
+        "cap": 120
       }
     },
     "5": {
@@ -1418,6 +1426,14 @@
         "won": false,
         "trajectory": "294bb2b2fdf265166ca0da5f831cbf6f0c3294717512f0baac11bbaa6caced0e",
         "cold": true
+      },
+      "v44Frozen": {
+        "actions": 120,
+        "won": false,
+        "trajectory": "294bb2b2fdf265166ca0da5f831cbf6f0c3294717512f0baac11bbaa6caced0e",
+        "cold": true,
+        "initial": "132633e3ef351f97ca69d9081a14361b9245edefdfff76073b2d505230ecb10c",
+        "cap": 120
       }
     }
   },
@@ -1430,5 +1446,280 @@
     "v43Command": 5,
     "v44Command": 6,
     "v44RepeatIdentical": true
+  },
+  "sourceContactPlans": {
+    "scope": "development only, one public branch per condition and level, after a prefix of frozen autonomous v43",
+    "developmentL1": {
+      "episodes": 74,
+      "selected": [
+        {
+          "code": "SKBN",
+          "level": 1,
+          "at": 5,
+          "control": "ACTION4",
+          "planned": 19,
+          "played": 19,
+          "matched": 18,
+          "won": true
+        }
+      ]
+    },
+    "upper": [
+      {
+        "code": "SKBN",
+        "level": 2,
+        "cap": 120,
+        "initial": "ba6eb233c02f5efba0eaf032ec5607180b36fff189f78d25737eb5f9a8f19215",
+        "frozenV43": {
+          "won": true,
+          "actions": 47,
+          "trajectory": "4c02d02cb973d2c99dccc6deff7ff9c75088388aba0572f649e3e6494853ab44"
+        },
+        "firstProspectiveChoice": {
+          "withMemory": {
+            "at": 38,
+            "control": "ACTION2",
+            "planned": 9,
+            "played": 9,
+            "matched": 8,
+            "won": true,
+            "digest": "cd0ebc9cb33deda9ea3d03394be94fafc6472f5d0b3add94dbf1652748dff8c2",
+            "appearanceMatches": 8
+          },
+          "currentBoardOnly": {
+            "at": 43,
+            "control": "ACTION1",
+            "planned": 6,
+            "played": 6,
+            "matched": 5,
+            "won": true,
+            "digest": "bad89ede615f00da024dafbd84040f7cc5bf179e15f81a36e06504c24d6e5824",
+            "appearanceMatches": 5
+          }
+        }
+      },
+      {
+        "code": "SKBN",
+        "level": 3,
+        "cap": 120,
+        "initial": "ddce46acc75e783e1511a90547bdfab2f6d719bfc0624ef41f3c7415ca03cb09",
+        "frozenV43": {
+          "won": true,
+          "actions": 22,
+          "trajectory": "95b7d17e19c26c05de7bcaedb2e43df9e2292b7dd42b87a703a065097e93f5f9"
+        },
+        "firstProspectiveChoice": {
+          "withMemory": {
+            "at": 6,
+            "control": "ACTION2",
+            "planned": 16,
+            "played": 16,
+            "matched": 15,
+            "won": true,
+            "digest": "f5a36253640c2fa07977781543226179a989d3838279bbfe5ee93cc8d3c94015",
+            "appearanceMatches": 7
+          },
+          "currentBoardOnly": {
+            "at": 6,
+            "control": "ACTION2",
+            "planned": 16,
+            "played": 16,
+            "matched": 15,
+            "won": true,
+            "digest": "f5a36253640c2fa07977781543226179a989d3838279bbfe5ee93cc8d3c94015",
+            "appearanceMatches": 7
+          }
+        }
+      },
+      {
+        "code": "SKBN",
+        "level": 4,
+        "cap": 120,
+        "initial": "eeb29436df8f7decf28813be1dc777ceebc75c313c394fdf4b24ed6699e3c56b",
+        "frozenV43": {
+          "won": false,
+          "actions": 120,
+          "trajectory": "ed2a497fa61da84cdd28c7c24e98c4982b393a51004d471e32aeb7a1810dc192"
+        },
+        "firstProspectiveChoice": {
+          "withMemory": {
+            "at": 10,
+            "control": "ACTION3",
+            "planned": 24,
+            "played": 24,
+            "matched": 23,
+            "won": true,
+            "digest": "d2a24332933deed25c19006214ebd0e441135fcfaf4de5db2eb916a42ac5aa4f",
+            "appearanceMatches": 23
+          },
+          "currentBoardOnly": {
+            "at": 46,
+            "control": "ACTION1",
+            "planned": 17,
+            "played": 17,
+            "matched": 16,
+            "won": true,
+            "digest": "ab2c3bde48e3ef1cc710e8faa459b774b36061dd8ed030c485ce131d9a07fbdd",
+            "appearanceMatches": 2
+          }
+        }
+      },
+      {
+        "code": "SKBN",
+        "level": 5,
+        "cap": 120,
+        "initial": "f2369b3c7f5376a158606b97d3f6dafc2ef35019ca8a2263ab306aea49781a64",
+        "frozenV43": {
+          "won": false,
+          "actions": 120,
+          "trajectory": "0073ab4bdc2f47fd7cd4a2b98586447b86716836de4f25b390fd498bb2acac8f"
+        },
+        "firstProspectiveChoice": {
+          "withMemory": {
+            "at": 30,
+            "control": "ACTION1",
+            "planned": 18,
+            "played": 18,
+            "matched": 17,
+            "won": true,
+            "digest": "e47cd655aa5f3a3ccabdf2f4fbe4a306730180740aba3be036528ea3691c2473",
+            "appearanceMatches": 7
+          },
+          "currentBoardOnly": {
+            "at": 30,
+            "control": "ACTION1",
+            "planned": 18,
+            "played": 18,
+            "matched": 17,
+            "won": true,
+            "digest": "e47cd655aa5f3a3ccabdf2f4fbe4a306730180740aba3be036528ea3691c2473",
+            "appearanceMatches": 7
+          }
+        }
+      }
+    ]
+  },
+  "coldV44": [
+    {
+      "code": "SS01",
+      "won": true,
+      "actions": 44,
+      "v43Actions": 44,
+      "reason": "target_levels_completed",
+      "commonPrefix": 44,
+      "selectionForecasts": 0,
+      "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS02",
+      "won": false,
+      "actions": 323,
+      "v43Actions": 269,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 269,
+      "selectionForecasts": 0,
+      "tapeDigest": "3e84c81590c866d9f5c9c6174b3d2596016cf2a9a7b638b8c45f0ea42185c969"
+    },
+    {
+      "code": "SS03",
+      "won": false,
+      "actions": 295,
+      "v43Actions": 253,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 253,
+      "selectionForecasts": 0,
+      "tapeDigest": "b8fd6cb1efe5fd83544fc0cfaa043593b707f248118ab5285af4c27ddcc755b8"
+    },
+    {
+      "code": "SS04",
+      "won": true,
+      "actions": 60,
+      "v43Actions": 60,
+      "reason": "target_levels_completed",
+      "commonPrefix": 60,
+      "selectionForecasts": 0,
+      "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    },
+    {
+      "code": "SS05",
+      "won": false,
+      "actions": 292,
+      "v43Actions": 245,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 245,
+      "selectionForecasts": 0,
+      "tapeDigest": "8232447fba5217aa53f837081c014002152130b5248fff8d1df92d5a0f208c03"
+    },
+    {
+      "code": "SS06",
+      "won": false,
+      "actions": 245,
+      "v43Actions": 206,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 206,
+      "selectionForecasts": 0,
+      "tapeDigest": "9639a3e023047520af7884b17e971f5ee96ed944f5734bb97f329a6169cfd72b"
+    },
+    {
+      "code": "SS07",
+      "won": false,
+      "actions": 5,
+      "v43Actions": 5,
+      "reason": "native_game_over",
+      "commonPrefix": 5,
+      "selectionForecasts": 0,
+      "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+    },
+    {
+      "code": "SS08",
+      "won": false,
+      "actions": 311,
+      "v43Actions": 260,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 260,
+      "selectionForecasts": 0,
+      "tapeDigest": "cde2dfe61fc5a57a370d2805d223869aa5418acbeeb80504dcd5d924ac753652"
+    },
+    {
+      "code": "SS10",
+      "won": false,
+      "actions": 336,
+      "v43Actions": 254,
+      "reason": "level_active_time_budget",
+      "commonPrefix": 254,
+      "selectionForecasts": 0,
+      "tapeDigest": "07f1300f58cd60b023e49007cf1e8d21b75b257f43991874da239ced9abbe8b1"
+    }
+  ],
+  "warmV44": {
+    "code": "SS01",
+    "lesson": 19,
+    "levels": [
+      {
+        "level": 2,
+        "actions": 32,
+        "won": true
+      }
+    ],
+    "tapeDigest": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8"
+  },
+  "sourceV44": {
+    "verified": 100,
+    "wins": 100,
+    "comparedTo": "v43",
+    "identicalTrajectories": 100,
+    "changedTrajectories": [],
+    "guards": {
+      "KEYD": 35,
+      "SKBN": 22,
+      "GABA": 49,
+      "SWCH": 25
+    },
+    "canonicalExport": {
+      "sha": "34f17243f919fb85c903dfd01db997b51c8a2bd2",
+      "files": 2551,
+      "manifestHash": "77e05fbe9fc5348c7b86c8a24dbd6d04db89a3bba2a20413b639c77a832678ac"
+    },
+    "tests": 166
   }
 }
