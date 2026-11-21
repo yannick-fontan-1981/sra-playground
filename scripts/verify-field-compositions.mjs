@@ -9,7 +9,15 @@ import { hash, sourceReplay } from './sic-study-source-replay.mjs';
 
 // Recompute each claimed relation from public pixels. The solver and its
 // proposal/matching functions are not called by this replay.
-const [mode,root,output,...files] = process.argv.slice(2);
+const [mode,root,output,...args] = process.argv.slice(2);
+const frozenArg=args.find(a=>a.startsWith('--measure='));
+const files=args.filter(a=>a!==frozenArg);
+const solver=frozenArg?.slice(10);
+const load=(base,file)=>import(pathToFileURL(resolve(base,file)).href);
+const reader=solver?await load(solver,'src/logos-engine/v6-native-observer.ts'):null;
+const local=solver?await load(solver,'src/sic/field-exemplars.ts'):null;
+const transferred=solver?await load(solver,'src/sic/field-obligations.ts'):null;
+const rules=solver?JSON.parse(await readFile(resolve(solver,'src/sic/source-field-relations.json'),'utf8')).rules:null;
 assert.ok(['source','native'].includes(mode));
 const engine = mode==='source' ? await sourceBackend(resolve(root)) :
   (await import(pathToFileURL(resolve(root,'src/runtime/native-game-dispatcher.ts')).href)).createGameDispatcher(()=>{throw Error('Unexpected backend');});
@@ -37,9 +45,28 @@ for (const file of files) {
     let board=await open();
     assert.equal(hash(board),run.initial);
     const forecasts=[];
+    const recognition={decisions:0,pointAvailable:0,currentExamples:0,sourceRelations:0};
+    const seen=new Map();
     for (const [i,c] of run.replayCommands.entries()) {
       const before=board,f=c.field;
       assert.equal(hash(before).slice(0,16),c.from);
+      if (reader) {
+        recognition.decisions++;
+        const available=before.availableActionIds.includes(6);
+        recognition.pointAvailable+=Number(available);
+        const key=hash(before);
+        let counts=seen.get(key);
+        if (!counts && available) {
+          const o=await reader.measureNativeObservation({frame_rows:before.frame,frame_hash:await reader.publicFrameHash(before.frame),
+            state:before.state,level:before.level,levels_completed:before.levelsCompleted,available_action_refs:before.availableActionIds.map(n=>'ACTION'+n)},i,'eligibility');
+          counts=[local.exemplarPlans(before.frame,o.entities).length,transferred.fieldObligationPlans(before.frame,o.entities,rules).length];
+          seen.set(key,counts);
+        }
+        if (available && counts) {
+          recognition.currentExamples+=Number(counts[0]>0);
+          recognition.sourceRelations+=Number(counts[1]>0);
+        }
+      }
       if (f) {
         assert.equal(c.id,6);
         const [l,t,r,b]=f.target.box;
@@ -78,7 +105,7 @@ for (const file of files) {
         replacement:replacement?await intervene(tape.with(index,replacement)):null};
     }
     results.push({code:run.code,level:run.start,actions:run.issued,won:run.levels[0].won,tape:digest(tape),
-      initial:run.initial,final,forecasts,...(controls?{controls}:{})});
+      initial:run.initial,final,forecasts,...(reader?{recognition}:{}),...(controls?{controls}:{})});
   }
 }
 await writeFile(output,JSON.stringify(results));

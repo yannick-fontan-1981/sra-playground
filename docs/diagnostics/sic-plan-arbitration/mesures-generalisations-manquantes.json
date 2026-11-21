@@ -11849,5 +11849,663 @@
         }
       ]
     }
+  },
+  "frozenFieldComparison": {
+    "baseline": {
+      "sha": "4c1113a401e3af93704aa72a5a8e0cbcb9b07c67",
+      "files": 2558,
+      "manifestHash": "4d7740d81d68fc79942f571c93948c8e2c566ba1f49f47e9d50e0c185b522726"
+    },
+    "candidate": {
+      "sha": "1d30a53278ee47039c72bfcf3e87b58171f4b6a8",
+      "files": 2562,
+      "manifestHash": "1e7798cc370bcd6cfe446ea9107a204bfb5e8cac967163d0ed0deee70e0785de"
+    },
+    "canonicalTests": {
+      "pass": 428,
+      "fail": 0
+    },
+    "coldAndWarm": [
+      {
+        "code": "SS01",
+        "lesson": 0,
+        "startHash": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "v53": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "v55": {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        },
+        "v53Tape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "v55Tape": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8",
+        "commonPrefix": 44,
+        "firstDifference": null,
+        "reason": "target_levels_completed"
+      },
+      {
+        "code": "SS01",
+        "lesson": 19,
+        "startHash": "b03a285600cc3e335682f8290105059edf1684de4d90d8c464afe5a4b587b503",
+        "v53": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "v55": {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        },
+        "v53Tape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "v55Tape": "77811bb1cf286ff068555f9b205c63765c7593c6c9fa62bfa6005f43a95de5e8",
+        "commonPrefix": 32,
+        "firstDifference": null,
+        "reason": "target_levels_completed"
+      },
+      {
+        "code": "SS02",
+        "lesson": 0,
+        "startHash": "090e7ef6b25a52cfb02ea4a0c103e887c1d5167f8f32939ee5fe77b49e59c023",
+        "v53": {
+          "level": 2,
+          "actions": 275,
+          "won": false
+        },
+        "v55": {
+          "level": 2,
+          "actions": 241,
+          "won": false
+        },
+        "v53Tape": "7770a5875d673c6b1c980479a4ebea4a022f6b9145723aac4e4d8bec2e06a7d9",
+        "v55Tape": "101ad0e203e666f4dceaa11cfbeef81ef14c9df768f97d2a70a72a66972f7aad",
+        "commonPrefix": 241,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS03",
+        "lesson": 0,
+        "startHash": "a4e15a326a06d11b9baa11e7db6d3ae00b9938a8d564a2ce7775806f11d34b4a",
+        "v53": {
+          "level": 2,
+          "actions": 252,
+          "won": false
+        },
+        "v55": {
+          "level": 2,
+          "actions": 225,
+          "won": false
+        },
+        "v53Tape": "908d698968695120a8dee3060ecec2fbb15e905cb2821ea1aecf6e8da6f680ae",
+        "v55Tape": "400e21f69c940530a523311b6fbf4bf6c7bbafbcd92a37b40d57cf05fe6010c8",
+        "commonPrefix": 225,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS04",
+        "lesson": 0,
+        "startHash": "bbd7f619447096344a27e6d3462f01ea361a2d023f056b9881ae25707810581f",
+        "v53": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "v55": {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        },
+        "v53Tape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "v55Tape": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "commonPrefix": 60,
+        "firstDifference": null,
+        "reason": "target_levels_completed"
+      },
+      {
+        "code": "SS05",
+        "lesson": 0,
+        "startHash": "25fa7e75c56e03d9c2abf88c7c52ef9cf353b9d1a5e9ef93bd6feac7c5fa0336",
+        "v53": {
+          "level": 2,
+          "actions": 242,
+          "won": false
+        },
+        "v55": {
+          "level": 2,
+          "actions": 216,
+          "won": false
+        },
+        "v53Tape": "b4035903337d3b1caba2f99b57d1a1f3c7403476974b6d8b98d2a40266f8da08",
+        "v55Tape": "aea065026285fb9cf0b052f79942db022ceeb02195d110e386ee27e80753375f",
+        "commonPrefix": 216,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS06",
+        "lesson": 0,
+        "startHash": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+        "v53": {
+          "level": 2,
+          "actions": 221,
+          "won": false
+        },
+        "v55": {
+          "level": 2,
+          "actions": 190,
+          "won": false
+        },
+        "v53Tape": "4af74c7ad1752f688850536b04304d73db1b106e793bb36d27c2af5523cdb0de",
+        "v55Tape": "e1cda6a1acde6c1d0f74d46d0eaca8ef4ecbf902c1ea3da8e65a76ccb0bdac9f",
+        "commonPrefix": 190,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS07",
+        "lesson": 0,
+        "startHash": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+        "v53": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "v55": {
+          "level": 2,
+          "actions": 5,
+          "won": false
+        },
+        "v53Tape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "v55Tape": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197",
+        "commonPrefix": 5,
+        "firstDifference": null,
+        "reason": "native_game_over"
+      },
+      {
+        "code": "SS08",
+        "lesson": 0,
+        "startHash": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+        "v53": {
+          "level": 2,
+          "actions": 276,
+          "won": false
+        },
+        "v55": {
+          "level": 2,
+          "actions": 238,
+          "won": false
+        },
+        "v53Tape": "695b50f211cabc42dbc03aac6aaac9497171190e614e3bad43d051945158e2a1",
+        "v55Tape": "ccea98a1d1690e6625e9d015b30eec751d007790b892351e2140f4b6389dcdad",
+        "commonPrefix": 238,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      },
+      {
+        "code": "SS10",
+        "lesson": 0,
+        "startHash": "97b6b03984aedadd03896ea0ae756203cb6e17cf59f5e04769a0277a2675ff84",
+        "v53": {
+          "level": 2,
+          "actions": 260,
+          "won": false
+        },
+        "v55": {
+          "level": 2,
+          "actions": 235,
+          "won": false
+        },
+        "v53Tape": "7baa00d59c473fa89312843b88a6e945da879c5a51889f8b0b8c76cafb6f2843",
+        "v55Tape": "fd4a74fe7212ac19e803ef20f2b7d6485a586691634a857a2551a31f055d5e0f",
+        "commonPrefix": 235,
+        "firstDifference": null,
+        "reason": "level_active_time_budget"
+      }
+    ],
+    "sourceL1": {
+      "won": 100,
+      "total": 100,
+      "identicalToV53": 99,
+      "different": [
+        {
+          "code": "FT09",
+          "won": true,
+          "actions": 4,
+          "same": false,
+          "end": "0de356a6d88c25ea"
+        }
+      ],
+      "historic": {
+        "KEYD": 35,
+        "SKBN": 22,
+        "GABA": 49,
+        "SWCH": 25
+      },
+      "forecastSummary": {
+        "FT09": {
+          "executed": 4,
+          "origins": [
+            "current_examples"
+          ],
+          "confirmedBeforeBoundary": 3,
+          "refuted": 0,
+          "onWinningInput": 1,
+          "initialCues": 1,
+          "initialSites": 8,
+          "initialUnsatisfied": 4
+        }
+      }
+    },
+    "sourceFuitL2": {
+      "won": true,
+      "actions": 80,
+      "sameVerifiedTapeAsV53": true,
+      "tape": "37ca520a603e85edee5c386021955c5c79b42ea94dee4daf4fca33489c90e4a8",
+      "jointForecasts": [
+        [
+          24,
+          24,
+          24
+        ]
+      ]
+    },
+    "customColdForecasts": {},
+    "reserved": "SS09 L2",
+    "coldRecognition": [
+      {
+        "code": "SS02",
+        "decisions": 241,
+        "pointAvailable": 0,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS03",
+        "decisions": 225,
+        "pointAvailable": 0,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS05",
+        "decisions": 216,
+        "pointAvailable": 0,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS06",
+        "decisions": 190,
+        "pointAvailable": 190,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS07",
+        "decisions": 5,
+        "pointAvailable": 5,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS01",
+        "decisions": 44,
+        "pointAvailable": 0,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS04",
+        "decisions": 60,
+        "pointAvailable": 0,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS08",
+        "decisions": 238,
+        "pointAvailable": 238,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      },
+      {
+        "code": "SS10",
+        "decisions": 235,
+        "pointAvailable": 235,
+        "currentExamples": 0,
+        "sourceRelations": 0
+      }
+    ],
+    "scope": {
+      "coldSourceLevelsSampledAtFourPrefixes": 146,
+      "trainingL1Games": 100,
+      "trainingFamiliesWithAcceptedRule": [
+        "FT09"
+      ],
+      "compiledRules": [
+        {
+          "columns": 3,
+          "rows": 3,
+          "cueIndex": 4,
+          "orientation": 0,
+          "sameAsCue": [
+            0
+          ],
+          "differentFromCue": [
+            2
+          ]
+        }
+      ],
+      "extraSourceLevelsDeclaredBeforeOpening": [
+        4,
+        5,
+        6
+      ]
+    },
+    "sourceFT09": [
+      {
+        "level": 1,
+        "initial": "b537cde839031c143072b1b1fd7612179a55b4a8ff85a1c485e3be3fd3b33211",
+        "control": {
+          "won": true,
+          "actions": 25,
+          "tape": "1e674afdfacddaa681b06fe7447dcf3d171a09658183f1d06090751b1656295f"
+        },
+        "candidate": {
+          "won": true,
+          "actions": 4,
+          "tape": "e42fd6fd7f40a2ee4441a9d4466388f20c39432615ae9d92cbdd78c4921c0331"
+        },
+        "forecasts": {
+          "executed": 4,
+          "origins": [
+            "current_examples"
+          ],
+          "confirmedBeforeBoundary": 3,
+          "refuted": 0,
+          "onWinningInput": 1,
+          "initialCues": 1,
+          "initialSites": 8,
+          "initialUnsatisfied": 4
+        },
+        "interventions": {
+          "repeat": {
+            "won": true,
+            "used": 4,
+            "final": "0de356a6d88c25ea"
+          },
+          "omission": {
+            "won": false,
+            "used": 3,
+            "final": "a7987605928ffac0"
+          },
+          "replacement": {
+            "won": false,
+            "used": 4,
+            "final": "0ce169c2d620eb39"
+          }
+        },
+        "orders": {
+          "code": "FT09",
+          "level": 1,
+          "actions": 4,
+          "distinctCommands": 4,
+          "omissionTests": 4,
+          "stillWonWhenOmitted": [],
+          "adjacentSwaps": 3,
+          "winningAdjacentSwaps": 3,
+          "reversed": {
+            "won": true,
+            "used": 4,
+            "final": "0de356a6d88c25ea"
+          },
+          "distinctCommandPairs": 6,
+          "sameBoardAfterEitherOrder": 6,
+          "sameScoreAfterEitherOrder": 6
+        }
+      },
+      {
+        "level": 2,
+        "initial": "0de356a6d88c25ea9fa45eaef4f517dca5d6037912fef83889cfa89e52839bf1",
+        "control": {
+          "won": false,
+          "actions": 41,
+          "tape": "a82ccb4e278454f67a4fd921b860863306b87b16be03d9edfe4a8542ef331eef"
+        },
+        "candidate": {
+          "won": true,
+          "actions": 7,
+          "tape": "409abc397f88bc32a563118c714e9fa7be781845e0df3ed629dce24fa84365bd"
+        },
+        "forecasts": {
+          "executed": 7,
+          "origins": [
+            "learned_relative_layout"
+          ],
+          "confirmedBeforeBoundary": 6,
+          "refuted": 0,
+          "onWinningInput": 1,
+          "initialCues": 2,
+          "initialSites": 13,
+          "initialUnsatisfied": 7
+        },
+        "interventions": {
+          "repeat": {
+            "won": true,
+            "used": 7,
+            "final": "12b42753f4af6b72"
+          },
+          "omission": {
+            "won": false,
+            "used": 6,
+            "final": "2682d33223e41281"
+          },
+          "replacement": {
+            "won": false,
+            "used": 7,
+            "final": "0770b57d47bf612e"
+          }
+        },
+        "orders": {
+          "code": "FT09",
+          "level": 2,
+          "actions": 7,
+          "distinctCommands": 7,
+          "omissionTests": 7,
+          "stillWonWhenOmitted": [],
+          "adjacentSwaps": 6,
+          "winningAdjacentSwaps": 6,
+          "reversed": {
+            "won": true,
+            "used": 7,
+            "final": "12b42753f4af6b72"
+          },
+          "distinctCommandPairs": 21,
+          "sameBoardAfterEitherOrder": 21,
+          "sameScoreAfterEitherOrder": 21
+        }
+      },
+      {
+        "level": 3,
+        "initial": "12b42753f4af6b72d9c9a52328e95a0763295ab1ae414c9039266e3edfb00608",
+        "control": {
+          "won": false,
+          "actions": 100,
+          "tape": "4e0f02616d471204ba27a70804a432c5134ea74dc7eab4308c8051480385f737"
+        },
+        "candidate": {
+          "won": true,
+          "actions": 14,
+          "tape": "a542590e80afd9f968bbea94abaac61a45a1c9d6e9504b3f1f8db1823177b71e"
+        },
+        "forecasts": {
+          "executed": 14,
+          "origins": [
+            "learned_relative_layout"
+          ],
+          "confirmedBeforeBoundary": 13,
+          "refuted": 0,
+          "onWinningInput": 1,
+          "initialCues": 4,
+          "initialSites": 23,
+          "initialUnsatisfied": 14
+        },
+        "interventions": {
+          "repeat": {
+            "won": true,
+            "used": 14,
+            "final": "eedafefca71b9ed5"
+          },
+          "omission": {
+            "won": false,
+            "used": 13,
+            "final": "833fb830a2bbfb46"
+          },
+          "replacement": {
+            "won": false,
+            "used": 14,
+            "final": "f971544e20e9f718"
+          }
+        },
+        "orders": {
+          "code": "FT09",
+          "level": 3,
+          "actions": 14,
+          "distinctCommands": 14,
+          "omissionTests": 14,
+          "stillWonWhenOmitted": [],
+          "adjacentSwaps": 13,
+          "winningAdjacentSwaps": 13,
+          "reversed": {
+            "won": true,
+            "used": 14,
+            "final": "eedafefca71b9ed5"
+          },
+          "distinctCommandPairs": 91,
+          "sameBoardAfterEitherOrder": 91,
+          "sameScoreAfterEitherOrder": 91
+        }
+      },
+      {
+        "level": 4,
+        "initial": "eedafefca71b9ed5041b4ded5d7b9e9805eb5f495d747823d49957bced6f52bb",
+        "control": {
+          "won": false,
+          "actions": 100,
+          "tape": "b34ba69ccc571d65303c7a97eb5da90712d78861882b7efbefebe79f38230551"
+        },
+        "candidate": {
+          "won": true,
+          "actions": 16,
+          "tape": "03385cce519686bdf5f8e8142cb8bd966822cc259c24edcc6a5b35644614927e"
+        },
+        "forecasts": {
+          "executed": 16,
+          "origins": [
+            "learned_relative_layout"
+          ],
+          "confirmedBeforeBoundary": 10,
+          "refuted": 5,
+          "onWinningInput": 1,
+          "initialCues": 3,
+          "initialSites": 18,
+          "initialUnsatisfied": 11
+        },
+        "interventions": {
+          "repeat": {
+            "won": true,
+            "used": 16,
+            "final": "77716da8d4ce63eb"
+          },
+          "omission": {
+            "won": false,
+            "used": 15,
+            "final": "9126153c50574ec8"
+          },
+          "replacement": {
+            "won": false,
+            "used": 16,
+            "final": "b8c2c22655ac1f34"
+          }
+        },
+        "orders": {
+          "code": "FT09",
+          "level": 4,
+          "actions": 16,
+          "distinctCommands": 11,
+          "omissionTests": 16,
+          "stillWonWhenOmitted": [],
+          "adjacentSwaps": 15,
+          "winningAdjacentSwaps": 15,
+          "reversed": {
+            "won": true,
+            "used": 16,
+            "final": "77716da8d4ce63eb"
+          },
+          "distinctCommandPairs": 115,
+          "sameBoardAfterEitherOrder": 115,
+          "sameScoreAfterEitherOrder": 115
+        }
+      },
+      {
+        "level": 5,
+        "initial": "77716da8d4ce63eb642933c41a18902e2ef9987300d9b07f859e3b13e4a459fe",
+        "control": {
+          "won": false,
+          "actions": 100,
+          "tape": "fda350ac3919c17cccfec87c2709110a31641946805c8faa2889590fda9759d4"
+        },
+        "candidate": {
+          "won": false,
+          "actions": 100,
+          "tape": "0f91c6701f281bdea8d09dd1f9cebd255775126a98c66ef95de6fd8f08b09783"
+        },
+        "forecasts": {
+          "executed": 27,
+          "origins": [
+            "learned_relative_layout"
+          ],
+          "confirmedBeforeBoundary": 27,
+          "refuted": 0,
+          "onWinningInput": 0,
+          "initialCues": 1,
+          "initialSites": 8,
+          "initialUnsatisfied": 4
+        },
+        "interventions": null,
+        "orders": null
+      },
+      {
+        "level": 6,
+        "initial": "f4ca1c017efff199815c35190e1178877a5bb682545fe8fd689e879a5887290f",
+        "control": {
+          "won": false,
+          "actions": 100,
+          "tape": "cc1c94686326ffd4bf9b33c2cd2e69b1a137235677c42712993cdc25c1901d4b"
+        },
+        "candidate": {
+          "won": false,
+          "actions": 100,
+          "tape": "cc1c94686326ffd4bf9b33c2cd2e69b1a137235677c42712993cdc25c1901d4b"
+        },
+        "forecasts": {
+          "executed": 0,
+          "origins": [],
+          "confirmedBeforeBoundary": 0,
+          "refuted": 0,
+          "onWinningInput": 0,
+          "initialCues": 0,
+          "initialSites": 0,
+          "initialUnsatisfied": 0
+        },
+        "interventions": null,
+        "orders": null
+      }
+    ]
   }
 }
