@@ -1,0 +1,1264 @@
+{
+  "engine": "f0a1ff437",
+  "registeredCustom4": 11,
+  "v64": {
+    "commit": "e537cc0f1e6952769fd4ee9d26484ecaea65e159",
+    "fullFrozenActiveScreen": {
+      "SS01": {
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 44,
+              "won": true
+            }
+          ],
+          "tapeDigest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+        },
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 36,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 32,
+              "won": true
+            }
+          ],
+          "tapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+        }
+      },
+      "SS02": {
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 40,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 311,
+              "won": false
+            }
+          ],
+          "tapeDigest": "34d7606a13953afe7993ebb94cb1b985863ad5c44a03d8b790cf928c5d25da4f"
+        },
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 243,
+              "won": false
+            }
+          ],
+          "tapeDigest": "cc3f4e289b40dd93dc63b15a82672f00ab7dca0d28a3d06b52cfb8093ddf4381"
+        }
+      },
+      "SS03": {
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 227,
+              "won": false
+            }
+          ],
+          "tapeDigest": "e1b0c69088cd12d46a4fdb8925d00e3cf46e8775e6be34fe296b7ac45b4cad34"
+        },
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 47,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 97,
+              "won": true
+            }
+          ],
+          "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17"
+        }
+      },
+      "SS04": {
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 60,
+              "won": true
+            }
+          ],
+          "tapeDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+        },
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 49,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 143,
+              "won": true
+            }
+          ],
+          "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f"
+        }
+      },
+      "SS05": {
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 219,
+              "won": false
+            }
+          ],
+          "tapeDigest": "ba3a93c57cb3614dfcaeed0523d67ea45cef6e088fc8bb11a4e0e7b93d4640f4"
+        },
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 44,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 174,
+              "won": false
+            }
+          ],
+          "tapeDigest": "ca02ccd60d17bfff0e40e322f11cb79879d0360bc74f723ed4976e478c0622af"
+        }
+      },
+      "SS06": {
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 241,
+              "won": false
+            }
+          ],
+          "tapeDigest": "b601206301ef43aab8a5049b06be6dddee29a281f94c527f1af3e882416b60a0"
+        },
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 139,
+              "won": false
+            }
+          ],
+          "tapeDigest": "97b975a51c7a3e54c76014938ca1ca9608396f10a68019a0bb4298b4432490d9"
+        }
+      },
+      "SS07": {
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 195,
+              "won": false
+            }
+          ],
+          "tapeDigest": "89af3f7a54241952d9c34a0230877641f0c131c63b777d2c3c3b7d2c68431945"
+        },
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 5,
+              "won": false
+            }
+          ],
+          "tapeDigest": "6b7315a0677cb2e7d9dd8e31e35d080d19afedced13bc189699d227959dce197"
+        }
+      },
+      "SS08": {
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 188,
+              "won": false
+            }
+          ],
+          "tapeDigest": "86e160403e378ca4f15de116a503c2f7a7eb3647c8a6f5406b5fb251e7c5b408"
+        },
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 204,
+              "won": false
+            }
+          ],
+          "tapeDigest": "9e165f8a4d5a2cd2f86483f2d5d8912511b83424a42117f2c494e8c31d85de44"
+        }
+      },
+      "SS09": {
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 200,
+              "won": false
+            }
+          ],
+          "tapeDigest": "61afd242dcfedd9bc5df77ab85b896023f3e3d7f8b21c629e5bdcf1b92e6aa36"
+        },
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 134,
+              "won": false
+            }
+          ],
+          "tapeDigest": "357e0b819ada435d04808f702ace011ff21f177eef39ec1943a56ba87b452045"
+        }
+      },
+      "SS10": {
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 198,
+              "won": false
+            }
+          ],
+          "tapeDigest": "6851878f66ae2ba1c37c1dbfc6a579bc4c6b56a3c78b9cb82f92d72ade4e5501"
+        },
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 227,
+              "won": false
+            }
+          ],
+          "tapeDigest": "ea8306f699af685c87e5450568db6136f06dfb6591307ca6c31c4d7f4b3377be"
+        }
+      },
+      "SS11": {
+        "campaign": {
+          "levels": [
+            {
+              "level": 1,
+              "actions": 184,
+              "won": false
+            }
+          ],
+          "tapeDigest": "dabd3bd45c98f33e155785f326baa6ead67c9d30e99d0c3661362251f5fcbdeb"
+        },
+        "cold": {
+          "levels": [
+            {
+              "level": 2,
+              "actions": 173,
+              "won": false
+            }
+          ],
+          "tapeDigest": "072aa3826e900766a78d7fc179a5cdec90c6e4f11a8cbb8acec7ef42a4b3309d"
+        }
+      }
+    }
+  },
+  "v65": {
+    "commit": "cbd067877c743e3978cc107c9094abb8e1e2d889",
+    "sourcePositionInterventions": {
+      "total": {
+        "compared": 23,
+        "positionSelective": 20,
+        "witnessOnSelective": 18,
+        "visibleContrastOnSelective": 9,
+        "bestOnSelective": 8,
+        "visibleContrastOnNonselective": 0
+      },
+      "games": {
+        "CGWL": {
+          "compared": 3,
+          "positionSelective": 1,
+          "witnessOnSelective": 1,
+          "visibleContrastOnSelective": 1,
+          "bestOnSelective": 0,
+          "visibleContrastOnNonselective": 0
+        },
+        "TEQU": {
+          "compared": 3,
+          "positionSelective": 2,
+          "witnessOnSelective": 0,
+          "visibleContrastOnSelective": 0,
+          "bestOnSelective": 0,
+          "visibleContrastOnNonselective": 0
+        },
+        "WA30": {
+          "compared": 2,
+          "positionSelective": 2,
+          "witnessOnSelective": 2,
+          "visibleContrastOnSelective": 0,
+          "bestOnSelective": 0,
+          "visibleContrastOnNonselective": 0
+        },
+        "GABA": {
+          "compared": 15,
+          "positionSelective": 15,
+          "witnessOnSelective": 15,
+          "visibleContrastOnSelective": 8,
+          "bestOnSelective": 8,
+          "visibleContrastOnNonselective": 0
+        }
+      }
+    },
+    "source100": {
+      "wins": 100,
+      "sameAsV64": 100
+    },
+    "independentUpperScores": [
+      {
+        "run": "pos65-active-GABA-rep",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 50,
+            "won": true
+          }
+        ],
+        "trajectory": "640938ef0cbcf6e905f4b57182c0db704cab2b77ebb101c0bb9d224427f8e744"
+      },
+      {
+        "run": "pos65-shadow-GABA-rep",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "trajectory": "5b0c4d20ca02bd6b5255a0ca2558f3bcd353c784e364192f39e4bd11dae8472d"
+      },
+      {
+        "run": "pos65-source-CWSE2",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 59,
+            "won": true
+          }
+        ],
+        "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1"
+      },
+      {
+        "run": "pos65-source-KLOT4",
+        "levels": [
+          {
+            "level": 4,
+            "actions": 37,
+            "won": true
+          }
+        ],
+        "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c"
+      },
+      {
+        "run": "pos65-source-warm-control64-frozen-3",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "trajectory": "5b0c4d20ca02bd6b5255a0ca2558f3bcd353c784e364192f39e4bd11dae8472d"
+      }
+    ],
+    "gabaFirstDifference": {
+      "common": 65,
+      "firstDifference": {
+        "allActions": 66,
+        "sameImage": true,
+        "before": 7,
+        "after": 5
+      }
+    },
+    "autonomousControl40": [
+      {
+        "code": "SS06",
+        "pack": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+        "level": 2,
+        "actions": 40,
+        "won": false,
+        "proposals": null,
+        "tests": [
+          {
+            "decision": 2,
+            "select": "ACTION6:9,24",
+            "motor": "ACTION1",
+            "outcomes": [
+              "previous_subject_moves",
+              "selected_subject_moves"
+            ],
+            "followed": true,
+            "cueChanged": true,
+            "scoreAtTest": false,
+            "differential": true,
+            "reciprocal": true,
+            "declaredSite": true,
+            "subsequentMoves": [
+              {
+                "decision": 4,
+                "family": "sic_test_prepared_effects"
+              }
+            ]
+          }
+        ],
+        "recognized": [
+          3
+        ]
+      },
+      {
+        "code": "SS06",
+        "pack": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31",
+        "level": 2,
+        "actions": 40,
+        "won": false,
+        "proposals": null,
+        "tests": [],
+        "recognized": []
+      }
+    ],
+    "qualification": {
+      "active": [
+        {
+          "code": "SS01",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 36,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 32,
+              "won": true
+            }
+          ],
+          "tapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+          "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+          "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a"
+        },
+        {
+          "code": "SS02",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 40,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 422,
+              "won": false
+            }
+          ],
+          "tapeDigest": "2ecf317474ca54bb2a036010d66672efd57fde8c2e5ed7e554f22aa5fd6ca5d6",
+          "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+          "final": "9fc8ddf03300fa64fe0aa7b0790601f13aaa980b4ed74c8b8795179076b8ebb6"
+        },
+        {
+          "code": "SS03",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 47,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 97,
+              "won": true
+            }
+          ],
+          "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+          "initial": "6f98abeead39c4e050e9d264a0f9eb988070c510dc803fa1b9f60e55c3b2bac8",
+          "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa"
+        },
+        {
+          "code": "SS04",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 49,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 143,
+              "won": true
+            }
+          ],
+          "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+          "initial": "93e2bd8bd7b3b193d9c2842458b59942ca3728f390f62dcfdcc83e7e3cefd1d4",
+          "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f"
+        },
+        {
+          "code": "SS05",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 44,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 314,
+              "won": false
+            }
+          ],
+          "tapeDigest": "20c95529558e652579510656b47df6ea4450ad45ef0118b00511d99a6ea0b55c",
+          "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+          "final": "d2c2a6fbe5a181afa0fce44d44ca530a00fda8188d1fc7fb171b1cfb82a55c3d"
+        },
+        {
+          "code": "SS06",
+          "start": 2,
+          "cap": 40,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 40,
+              "won": false
+            }
+          ],
+          "tapeDigest": "38f47e97bf08aaad6bf4cc480a0f778c977a5738af1ef47c73ef5e3e4c2df9b3",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "final": "59bd61cee1aea3ef9e5f03d6ee5708f4081145b1b7d44604f8b3903996de6e64"
+        }
+      ],
+      "shadow": [
+        {
+          "code": "SS02",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 40,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 420,
+              "won": false
+            }
+          ],
+          "tapeDigest": "2c6732b2ea4559d1e1ac0623726bf4dd6a4f326cb39137f371a2de3b9217d09d",
+          "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+          "final": "d3f3f1db384eb28b7a89fd7a663d57f7c1288e18756f6d639a0670c8e6bfb501"
+        },
+        {
+          "code": "SS05",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 44,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 316,
+              "won": false
+            }
+          ],
+          "tapeDigest": "fe0fc16981d6f667fe380e1fc050df30189d9385c24208bdd98c884ecc36b952",
+          "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+          "final": "9379a538d82aaa826de56c223cefd179c54baf83cc9fb2151a900d0efa272470"
+        },
+        {
+          "code": "SS06",
+          "start": 2,
+          "cap": 40,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 40,
+              "won": false
+            }
+          ],
+          "tapeDigest": "92277f6fa81e17cf5a0297e5649e20ec8256f10d2fc957e8725a747aef0dd5a7",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "final": "de64d668e970a66a4b0bb7b85d66936cca5d89809216a840e894e5612a03b6d2"
+        }
+      ]
+    },
+    "tests": 480
+  },
+  "ss05Offline": {
+    "contextOperation": {
+      "counts": {
+        "1/1,0/same": 40,
+        "1/1,1/changed": 2,
+        "2/1,0/same": 46
+      },
+      "distinctOffsets": 2,
+      "positiveOffsets": [
+        [
+          "1/true/19,18",
+          1
+        ],
+        [
+          "1/true/-17,-18",
+          1
+        ]
+      ],
+      "frequentNegativeOffsets": []
+    },
+    "independentPublicSearch": {
+      "states": 1661,
+      "changed": 0,
+      "withCue": 0,
+      "positiveWithCue": 0,
+      "firstEffectDepth": null,
+      "winDepth": 59,
+      "winUsedGesture": false,
+      "maxFrontier": 2500,
+      "queued": 1688,
+      "exhausted": false
+    },
+    "pilotReceivedSearchPath": false
+  },
+  "v66": {
+    "commit": "6f49591a80c41b8e5d288794071363091b90e0cb",
+    "source100": {
+      "wins": 100,
+      "sameAsV65": 100
+    },
+    "sourceEnablingCues": {
+      "COLM": [
+        {
+          "id": 4,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 1,
+          "arrived": 1,
+          "absent": 19,
+          "unchanged": 5
+        },
+        {
+          "id": 4,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 1,
+          "arrived": 1,
+          "absent": 19,
+          "unchanged": 5
+        }
+      ],
+      "GIGO": [
+        {
+          "id": 4,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 1,
+          "arrived": 1,
+          "absent": 3,
+          "unchanged": 3
+        }
+      ],
+      "SKBN": [
+        {
+          "id": 2,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 6,
+          "arrived": 1,
+          "absent": 16,
+          "unchanged": 3
+        },
+        {
+          "id": 1,
+          "n": 2,
+          "exposedByPrecedingMove": 1,
+          "visible": 6,
+          "arrived": 2,
+          "absent": 16,
+          "unchanged": 5
+        },
+        {
+          "id": 1,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 8,
+          "arrived": 2,
+          "absent": 14,
+          "unchanged": 5
+        }
+      ],
+      "KLOT": [
+        {
+          "id": 2,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 3,
+          "arrived": 2,
+          "absent": 19,
+          "unchanged": 0
+        },
+        {
+          "id": 2,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 3,
+          "arrived": 1,
+          "absent": 26,
+          "unchanged": 0
+        }
+      ],
+      "DC22": [
+        {
+          "id": 2,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 2,
+          "arrived": 2,
+          "absent": 22,
+          "unchanged": 0
+        }
+      ],
+      "ESCT": [
+        {
+          "id": 3,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 3,
+          "arrived": 3,
+          "absent": 11,
+          "unchanged": 0
+        },
+        {
+          "id": 3,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 7,
+          "arrived": 6,
+          "absent": 9,
+          "unchanged": 0
+        },
+        {
+          "id": 3,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 7,
+          "arrived": 6,
+          "absent": 9,
+          "unchanged": 0
+        },
+        {
+          "id": 5,
+          "n": 2,
+          "exposedByPrecedingMove": 2,
+          "visible": 7,
+          "arrived": 6,
+          "absent": 9,
+          "unchanged": 0
+        },
+        {
+          "id": 5,
+          "n": 2,
+          "exposedByPrecedingMove": 2,
+          "visible": 7,
+          "arrived": 6,
+          "absent": 9,
+          "unchanged": 0
+        },
+        {
+          "id": 4,
+          "n": 2,
+          "exposedByPrecedingMove": 1,
+          "visible": 3,
+          "arrived": 3,
+          "absent": 11,
+          "unchanged": 0
+        },
+        {
+          "id": 4,
+          "n": 3,
+          "exposedByPrecedingMove": 3,
+          "visible": 7,
+          "arrived": 6,
+          "absent": 9,
+          "unchanged": 0
+        },
+        {
+          "id": 4,
+          "n": 3,
+          "exposedByPrecedingMove": 3,
+          "visible": 7,
+          "arrived": 6,
+          "absent": 9,
+          "unchanged": 0
+        }
+      ],
+      "REWI": [
+        {
+          "id": 4,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 1,
+          "arrived": 1,
+          "absent": 1,
+          "unchanged": 1
+        },
+        {
+          "id": 4,
+          "n": 1,
+          "exposedByPrecedingMove": 1,
+          "visible": 1,
+          "arrived": 1,
+          "absent": 1,
+          "unchanged": 1
+        }
+      ]
+    },
+    "sourceObservedGames": 100,
+    "qualification": {
+      "active": [
+        {
+          "code": "SS01",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 36,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 32,
+              "won": true
+            }
+          ],
+          "tapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+          "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+          "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a"
+        },
+        {
+          "code": "SS02",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 40,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 237,
+              "won": false
+            }
+          ],
+          "tapeDigest": "bea1689c54ffd769fe6c11715f438788ae36022b6d3779726a85d02f48cce592",
+          "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+          "final": "ed77d0a5b74f622575e84fab367fc571fcf41cff9ad02efe8f39858d1c5b5ec2"
+        },
+        {
+          "code": "SS03",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 47,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 97,
+              "won": true
+            }
+          ],
+          "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+          "initial": "6f98abeead39c4e050e9d264a0f9eb988070c510dc803fa1b9f60e55c3b2bac8",
+          "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa"
+        },
+        {
+          "code": "SS04",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 49,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 143,
+              "won": true
+            }
+          ],
+          "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+          "initial": "93e2bd8bd7b3b193d9c2842458b59942ca3728f390f62dcfdcc83e7e3cefd1d4",
+          "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f"
+        },
+        {
+          "code": "SS05",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 44,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 203,
+              "won": false
+            }
+          ],
+          "tapeDigest": "0e62f098e55d5bb4468f7ec30ed76e630e06886a8a8ffb1b8c1288645a1d5fca",
+          "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+          "final": "45c2fb17b5ea249a2a916ab46dc2c10da6dd5c82034d3aecd4f9558d6823f2f3"
+        },
+        {
+          "code": "SS06",
+          "start": 2,
+          "cap": 40,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 40,
+              "won": false
+            }
+          ],
+          "tapeDigest": "38f47e97bf08aaad6bf4cc480a0f778c977a5738af1ef47c73ef5e3e4c2df9b3",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "final": "59bd61cee1aea3ef9e5f03d6ee5708f4081145b1b7d44604f8b3903996de6e64"
+        },
+        {
+          "code": "SS09",
+          "start": 2,
+          "cap": 40,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 40,
+              "won": false
+            }
+          ],
+          "tapeDigest": "7143bf824d3c68aa0620c50e3ad4120e644a8d450dca95820c97988e7857ef72",
+          "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+          "final": "c0d2c622bf3beb192879af179eb7f75649034f3a3dd3515664a512fe7f8b0003"
+        }
+      ],
+      "shadow": [
+        {
+          "code": "SS02",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 40,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 237,
+              "won": false
+            }
+          ],
+          "tapeDigest": "2e773662c322621a3f456086b71b3b3d66e04c56daba2a40c6223a70f0ef9339",
+          "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+          "final": "a609ad8e8cee5cae34f8e69405f46f60d959b5d27cfa333819cfb9e19ecd12f7"
+        },
+        {
+          "code": "SS05",
+          "start": 1,
+          "cap": 1200,
+          "levels": [
+            {
+              "level": 1,
+              "actions": 44,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 191,
+              "won": false
+            }
+          ],
+          "tapeDigest": "a35f2c17ca4610e1e9a22073f8e9fec2378b0607ef0f6a2c513adc2e86913df1",
+          "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+          "final": "c3b5eb65ad0467b316e301bc3eab7aa243a881a9c8edc4331d0db408d8cd9af4"
+        },
+        {
+          "code": "SS06",
+          "start": 2,
+          "cap": 40,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 40,
+              "won": false
+            }
+          ],
+          "tapeDigest": "92277f6fa81e17cf5a0297e5649e20ec8256f10d2fc957e8725a747aef0dd5a7",
+          "initial": "33c4f8773cc36f4515dc45accbf852482c91f0f4e640c7bde22c5305fe821898",
+          "final": "de64d668e970a66a4b0bb7b85d66936cca5d89809216a840e894e5612a03b6d2"
+        },
+        {
+          "code": "SS09",
+          "start": 2,
+          "cap": 40,
+          "levels": [
+            {
+              "level": 2,
+              "actions": 40,
+              "won": false
+            }
+          ],
+          "tapeDigest": "883bab0a95a101e1a14fb706d2f0a0e9f8389f8dba779edff62b7703130216fe",
+          "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+          "final": "8051aee7a13ea14526fdd829b13b913f6b067899cf6c50bc9f158f0e06b0df71"
+        }
+      ]
+    },
+    "matched90": {
+      "active": {
+        "code": "SS05",
+        "start": 1,
+        "cap": 90,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 90,
+            "won": false
+          }
+        ],
+        "tapeDigest": "32e4d971d1cd59b5d152dbb310f7e2ec4b03a53ae681311269dd9204f940b2e5",
+        "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+        "final": "114041c3938e3b36ea2eac0fd76cecc3988d76d188d4062f79e282ff3bf045be"
+      },
+      "shadow": {
+        "code": "SS05",
+        "start": 1,
+        "cap": 90,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 44,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 90,
+            "won": false
+          }
+        ],
+        "tapeDigest": "9a5518f6dfd50658de7327407524ff1c2a29be0cab9b082ff1b84c32ca93a206",
+        "initial": "4b530cd04298862a01a714ba300bef7d3a11561f1bb11323dfb62673a1675979",
+        "final": "714abaf3e25784874f9c0279a841fa74a3a16b942772f4a32c37cf8a34e16c9b"
+      }
+    },
+    "autonomousControl40": [
+      {
+        "code": "SS06",
+        "pack": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+        "level": 2,
+        "actions": 40,
+        "won": false,
+        "proposals": null,
+        "tests": [
+          {
+            "decision": 2,
+            "select": "ACTION6:9,24",
+            "motor": "ACTION1",
+            "outcomes": [
+              "previous_subject_moves",
+              "selected_subject_moves"
+            ],
+            "followed": true,
+            "cueChanged": true,
+            "scoreAtTest": false,
+            "differential": true,
+            "reciprocal": true,
+            "declaredSite": true,
+            "subsequentMoves": [
+              {
+                "decision": 4,
+                "family": "sic_test_prepared_effects"
+              }
+            ]
+          }
+        ],
+        "recognized": [
+          3
+        ]
+      },
+      {
+        "code": "SS06",
+        "pack": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31",
+        "level": 2,
+        "actions": 40,
+        "won": false,
+        "proposals": null,
+        "tests": [],
+        "recognized": []
+      },
+      {
+        "code": "SS09",
+        "pack": "9a487dbec76efeaf846e413dd6a2afd436c13f073341139561b465d03bd93398",
+        "level": 2,
+        "actions": 40,
+        "won": false,
+        "proposals": null,
+        "tests": [
+          {
+            "decision": 6,
+            "select": "ACTION6:20,39",
+            "motor": "ACTION3",
+            "outcomes": [
+              "previous_subject_moves",
+              "selected_subject_moves"
+            ],
+            "followed": true,
+            "cueChanged": false,
+            "scoreAtTest": false,
+            "differential": false,
+            "reciprocal": false,
+            "declaredSite": false,
+            "subsequentMoves": []
+          }
+        ],
+        "recognized": []
+      },
+      {
+        "code": "SS09",
+        "pack": "9d1ef75e0d0ae78ee16bac46999e7b6ba3c83b00bd3ba59b510e3cd181b71d31",
+        "level": 2,
+        "actions": 40,
+        "won": false,
+        "proposals": null,
+        "tests": [],
+        "recognized": []
+      }
+    ],
+    "campaigns": {
+      "SS05": {
+        "active": {
+          "cuesAtLevel2": 1,
+          "receipts": {
+            "cue_remains_absent": 161,
+            "returned_toward_untested_movement": 26
+          },
+          "first": 53,
+          "recoveries": 0
+        },
+        "shadow": {
+          "cuesAtLevel2": 0,
+          "receipts": {},
+          "first": null,
+          "recoveries": 0
+        },
+        "packDifference": {
+          "common": 53,
+          "firstDifference": {
+            "allActions": 54,
+            "sameImage": true,
+            "before": 1,
+            "after": 4
+          }
+        },
+        "frozenDifference": {
+          "common": 53,
+          "firstDifference": {
+            "allActions": 54,
+            "sameImage": true,
+            "before": 1,
+            "after": 4
+          }
+        }
+      },
+      "SS02": {
+        "active": {
+          "cuesAtLevel2": 1,
+          "receipts": {
+            "cue_remains_absent": 5,
+            "returned_toward_untested_movement": 1
+          },
+          "first": 272,
+          "recoveries": 0
+        },
+        "shadow": {
+          "cuesAtLevel2": 0,
+          "receipts": {},
+          "first": null,
+          "recoveries": 0
+        },
+        "packDifference": {
+          "common": 271,
+          "firstDifference": {
+            "allActions": 272,
+            "sameImage": true,
+            "before": 2,
+            "after": 4
+          }
+        },
+        "frozenDifference": {
+          "common": 271,
+          "firstDifference": {
+            "allActions": 272,
+            "sameImage": true,
+            "before": 2,
+            "after": 4
+          }
+        }
+      }
+    },
+    "tests": 481
+  }
+}

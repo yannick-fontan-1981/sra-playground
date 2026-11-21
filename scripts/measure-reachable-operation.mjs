@@ -6,7 +6,8 @@ import { hash } from "./sic-study-source-replay.mjs";
 import { measureNativeObservation } from "../src/logos-engine/v6-native-observer.ts";
 import { visualLayout } from "../src/sic/witnessed-preview-transfer.ts";
 // Offline intervention only. Restore a public prefix for each arm. Record aggregate depths and outcomes.
-const [env, runfile, input, output, maxArg] = process.argv.slice(2),
+const [env, runfile, input, output, maxArg, graphOutput] =
+    process.argv.slice(2),
   r = JSON.parse(await readFile(runfile, "utf8")),
   c = JSON.parse(await readFile(input, "utf8")).cases[0],
   max = Number(maxArg);
@@ -27,6 +28,8 @@ async function restore(path) {
   for (const id of path) b = await act(id);
   return b;
 }
+const projections = new Map(),
+  edges = [];
 const init = await restore([]),
   queue = [{ path: [], h: hash(init), used: false }],
   seen = new Set([hash(init)]),
@@ -60,6 +63,16 @@ for (let i = 0; i < queue.length && i < max; i++) {
   );
   const l = visualLayout(obs, b.frame),
     hasCue = !!l[c.roles[0][1]]?.length;
+  if (graphOutput)
+    projections.set(
+      s.h,
+      Object.fromEntries(
+        Object.entries(l).map(([role, parts]) => [
+          role,
+          parts.map((p) => p.at),
+        ]),
+      ),
+    );
   tally.withCue += +hasCue;
   tally.states++;
   for (const id of [
@@ -73,6 +86,14 @@ for (let i = 0; i < queue.length && i < max; i++) {
     const h = hash(z),
       changed = h !== s.h,
       used = s.used || (id === c.op && changed);
+    if (graphOutput)
+      edges.push({
+        from: s.h,
+        id,
+        to: h,
+        won: z.levelsCompleted > b.levelsCompleted || z.state === "WIN",
+        live: z.state === "NOT_FINISHED",
+      });
     if (id === c.op && changed) {
       tally.changed++;
       tally.positiveWithCue += +hasCue;
@@ -89,6 +110,15 @@ for (let i = 0; i < queue.length && i < max; i++) {
   }
   if (tally.winDepth) break;
 }
+if (graphOutput)
+  await writeFile(
+    graphOutput,
+    JSON.stringify({
+      initial: hash(init),
+      projections: Object.fromEntries(projections),
+      edges,
+    }),
+  );
 await writeFile(
   output,
   JSON.stringify({
