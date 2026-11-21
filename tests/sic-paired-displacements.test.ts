@@ -1,3 +1,8 @@
+import {
+  recognizeProjection,
+  images,
+  applyImages,
+} from '../src/sic/paired-previews.ts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
@@ -50,4 +55,40 @@ test('a common displacement discriminates a field from direct contact and carrie
   assert.deepEqual(carry.evidence, m.evidence);
   assert.equal('pieces' in carry, false);
   assert.equal('plan' in carry, false);
+});
+
+test('a visible landing becomes a prediction at another distance only after displacement', () => {
+  const room: Scene = {
+    ...s,
+    other: [16],
+    initial: Array(35).fill('4,4,4,4,4,4,4,4,4'),
+    goals: [5, 6],
+  };
+  room.initial[16] = 'pivot';
+  const before: Reading = {
+    subjects: [0, 1],
+    active: 0,
+    pieces: [30],
+    supports: [],
+    opened: [],
+    anchor: -1,
+  };
+  const tiles = [...room.initial];
+  tiles[18] = '9,9,9,9,2,9,9,9,9';
+  assert.deepEqual(
+    recognizeProjection(room, before, before, tiles, 'no motion'),
+    [],
+  );
+  const rules = recognizeProjection(
+    room,
+    before,
+    { ...before, pieces: [18] },
+    tiles,
+    'observed',
+  );
+  assert.equal(rules.length, 1);
+  const later = { ...before, pieces: [23] };
+  assert.deepEqual(applyImages(later, images(room, later, rules))?.pieces, [
+    17,
+  ]);
 });

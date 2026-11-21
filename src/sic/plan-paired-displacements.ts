@@ -1,3 +1,4 @@
+import { shortcuts } from './paired-previews.ts';
 import { poseId, type TransportForecast } from './transport-observations.ts';
 import {
   surrounding,
@@ -37,7 +38,66 @@ export function planDisplacements(
     world = v.subjects.join('/') + '|' + v.active;
   const offer = (state: Reading, op: string, why: string, open: string[]) =>
     forecast(s, m, v, state, op, why, open, ref);
-  const untried = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'].find(
+  // A single displacement can satisfy several occupied controls at once. Test
+  // that prediction while the material still has the required relative shape.
+  const commonVector = (state: Reading, targets: number[]) => {
+    if (targets.length < 2 || state.pieces.length < targets.length)
+      return Infinity;
+    const w = s.grid.columns,
+      base = targets[0]!;
+    let best = Infinity;
+    for (const piece of state.pieces) {
+      const dx = (base % w) - (piece % w),
+        dy = Math.floor(base / w) - Math.floor(piece / w);
+      const related = targets.every((t) => {
+        const x = (t % w) - dx,
+          y = Math.floor(t / w) - dy;
+        return (
+          x >= 0 &&
+          x < w &&
+          y >= 0 &&
+          y < s.grid.rows &&
+          state.pieces.includes(y * w + x)
+        );
+      });
+      if (related) best = Math.min(best, Math.abs(dx) + Math.abs(dy));
+    }
+    return best;
+  };
+  const sets = m.scope
+    ? s.doors.filter(
+        (d) =>
+          !d.controls.every((p) => v.pieces.includes(p)) &&
+          Number.isFinite(commonVector(v, d.controls)),
+      )
+    : [];
+  for (const door of sets) {
+    const distance = commonVector(v, door.controls);
+    for (const op of ops) {
+      const next = imagine(s, space, v, op, m, law(m, v.active));
+      if (
+        next &&
+        commonVector(next, door.controls) < distance &&
+        !m.denied[key(v) + '|' + op]
+      ) {
+        delete m.plan;
+        return offer(
+          next,
+          op,
+          'transport_a_matching_arrangement_onto_multiple_controls',
+          ['each_object_advances_by_the_same_vector'],
+        );
+      }
+    }
+  }
+  const candidates = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
+  if (sets.length)
+    candidates.sort(
+      (a, b) =>
+        Number(m.checked.some((x) => x.endsWith(a))) -
+        Number(m.checked.some((x) => x.endsWith(b))),
+    );
+  const untried = candidates.find(
     (op) => !m.motors[op] && !m.checked.includes(world + op),
   );
   if (untried) {
@@ -67,11 +127,30 @@ export function planDisplacements(
   const adjacent = Array.from({ length: s.initial.length }, (_, p) =>
     surrounding(s.grid, p),
   );
+  const jumps = m.projections?.length
+    ? s.initial.map((_, p) => shortcuts(s, p, m.projections!))
+    : undefined;
   type Routes = { distance: number[]; toward: number[] };
   const paths = new Map<string, Routes>();
-  function routes(n: Reading, goal: number): Routes {
+  const independent = (n: Reading, site: number, walker: number) => {
+    const door = space.doors.get(site);
+    return (
+      !door ||
+      door.controls.every(
+        (p) =>
+          n.pieces.includes(p) ||
+          n.subjects.some((q, i) => i !== walker && q === p),
+      )
+    );
+  };
+  const heldAtStart = s.doors.filter(
+    (d) =>
+      d.controls.length > 1 && d.controls.every((p) => v.pieces.includes(p)),
+  );
+
+  function routes(n: Reading, goal: number, walker: number): Routes {
     const doorFlags = s.doors
-      .map((d) => Number(space.open(n, d.site)))
+      .map((d) => Number(independent(n, d.site, walker)))
       .join('');
     const k = [goal, n.supports.join('.'), doorFlags].join('/');
     const old = paths.get(k);
@@ -86,14 +165,17 @@ export function planDisplacements(
       const [cost, p] = q.pop()! as [number, number];
       if (done.has(p)) continue;
       done.add(p);
-      const step = space.walk(n, p)
-        ? 1
-        : space.medium.has(p)
-          ? 16
-          : space.doors.has(p)
-            ? 12
-            : Infinity;
-      for (const next of adjacent[p]!) {
+      const step =
+        space.walk(n, p) && independent(n, p, walker)
+          ? 1
+          : space.medium.has(p)
+            ? 16
+            : space.doors.has(p)
+              ? 12
+              : Infinity;
+      for (const next of jumps
+        ? [...adjacent[p]!, ...jumps[p]!]
+        : adjacent[p]!) {
         if (!space.ground.has(next) && !space.medium.has(next)) continue;
         if (cost + step < distance[next]!) {
           distance[next] = cost + step;
@@ -132,11 +214,13 @@ export function planDisplacements(
     const [a, b] = n.subjects,
       [u, w] = s.goals as [number, number];
     if ((a === u && b === w) || (a === w && b === u)) return 0;
-    const x = routes(n, u),
-      y = routes(n, w);
+    const x = routes(n, u, 0),
+      y = routes(n, w, 1),
+      xx = routes(n, u, 1),
+      yy = routes(n, w, 0);
     const d = (r: Routes, p: number, goal: number) =>
       Number.isFinite(r.distance[p]) ? r.distance[p]! : 100 + md(s, p, goal);
-    const norm = d(x, a, u) + d(y, b, w) <= d(x, b, u) + d(y, a, w);
+    const norm = d(x, a, u) + d(y, b, w) <= d(xx, b, u) + d(yy, a, w);
     let total = 0;
     for (const [p, g, r] of (norm
       ? [
@@ -144,8 +228,8 @@ export function planDisplacements(
           [b, w, y],
         ]
       : [
-          [a, w, y],
-          [b, u, x],
+          [a, w, yy],
+          [b, u, xx],
         ]) as [number, number, Routes][]) {
       total += d(r, p, g);
       let t = p;
@@ -154,7 +238,7 @@ export function planDisplacements(
         seen.add(t);
         t = r.toward[t]!;
         const door = space.doors.get(t);
-        if (door && !space.open(n, t)) {
+        if (door && !independent(n, t, p === a ? 0 : 1)) {
           total += 3 * pressure(n, door.controls);
           break;
         }
@@ -174,6 +258,8 @@ export function planDisplacements(
         }
       }
     }
+    for (const door of heldAtStart)
+      if (!door.controls.every((p) => n.pieces.includes(p))) total += 35;
     return total;
   }
   const root: Node = { s: v, g: 0, f: 0, score: score(v) },
@@ -215,7 +301,11 @@ export function planDisplacements(
       break;
     }
     if (n.g >= depth) continue;
-    for (const op of [...ops, 'select', ...(m.special ? ['ACTION5'] : [])]) {
+    for (const op of [
+      ...ops,
+      'select',
+      ...(m.projections?.length ? ['ACTION5'] : []),
+    ]) {
       const action = command(n.s, op);
       if (m.denied[key(n.s) + '|' + action]) continue;
       const t = imagine(s, space, n.s, op, m, laws[n.s.active]);

@@ -1,3 +1,4 @@
+import { applyImages, images, type Projection } from './paired-previews.ts';
 import {
   neighbor,
   poseId,
@@ -22,6 +23,8 @@ export type Learning = {
   refs: string[];
   radius: number;
   scope?: string;
+  projections?: Projection[];
+  imageTrial?: Reading;
   denied: Record<string, number>;
   visits: Record<string, number>;
   special?: { mark: string; ref: string };
@@ -44,7 +47,7 @@ export const peer = (s: TransportSide): TransportSide => (s === 0 ? 1 : 0);
 export const md = (s: Scene, a: number, b: number) =>
   Math.abs((a % s.grid.columns) - (b % s.grid.columns)) +
   Math.abs(Math.floor(a / s.grid.columns) - Math.floor(b / s.grid.columns));
-export const key = (v: Reading) => poseId(v) + '/' + v.anchor;
+export const key = (v: Reading) => poseId(v);
 export function law(m: Learning, side: TransportSide): Law {
   const defaults: Law[] =
     side === 1 && m.scope
@@ -95,19 +98,8 @@ export function imagine(
     return n;
   }
   if (op === 'ACTION5') {
-    if (v.anchor < 0 || !m.special) return;
-    const options = [...v.pieces, ...v.subjects]
-      .filter((x) => x !== v.anchor)
-      .sort((p, q) => md(s, p, v.anchor) - md(s, q, v.anchor));
-    if (!options.length) return;
-    const t = options[0]!,
-      idx = n.pieces.indexOf(t),
-      si = n.subjects.indexOf(t);
-    if (idx >= 0) n.pieces[idx] = v.anchor;
-    else if (si >= 0) n.subjects[si] = v.anchor;
-    n.anchor = t;
-    n.pieces.sort((a, b) => a - b);
-    return n;
+    if (!m.projections?.length) return;
+    return applyImages(v, images(s, v, m.projections));
   }
   const motor = m.motors[op];
   if (!motor) return;
@@ -258,8 +250,8 @@ export function forecast(
     paired: {
       laws: [law(m, 0), law(m, 1)],
       radius: m.radius,
-      ...(m.scope ? {scope:m.scope} : {}),
-      ...(m.carry ? {lesson:m.carry} : {}),
+      ...(m.scope ? { scope: m.scope } : {}),
+      ...(m.carry ? { lesson: m.carry } : {}),
     },
     command,
     from: v,

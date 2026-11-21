@@ -1,3 +1,9 @@
+import {
+  visibleImages,
+  applyImages,
+  recognizeProjection,
+} from './paired-previews.ts';
+import { forecast } from './paired-displacements.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { VisualLayout } from './witnessed-preview-transfer.ts';
 import {
@@ -29,7 +35,7 @@ export type PairInquiry = {
   lesson?: ReusableEffects;
 };
 export function inquiry(lesson?: ReusableEffects): PairInquiry {
-  return { learning: fresh(), ...(lesson ? {lesson} : {}) };
+  return { learning: fresh(), ...(lesson ? { lesson } : {}) };
 }
 export function carryPair(
   q: PairInquiry,
@@ -131,6 +137,22 @@ export function seePair(
       }
     }
   }
+  if (op === 'ACTION5' && !explainedByPlacement) {
+    const learned = recognizeProjection(s, old, next, before, ref);
+    for (const r of learned) {
+      const registered = (m.projections ??= []);
+      if (
+        !registered.some(
+          (k) =>
+            k.pivotForm === r.pivotForm &&
+            ((k.from === r.from && k.to === r.to) ||
+              (k.from === r.to && k.to === r.from)),
+        )
+      )
+        registered.push(r);
+      q.active ??= 'an_operation_realizes_a_projected_displacement';
+    }
+  }
   if (m.special) {
     old.anchor = before.indexOf(m.special.mark);
     next.anchor = after.indexOf(m.special.mark);
@@ -149,6 +171,22 @@ export function seePair(
     m.refs = [...lesson.refs.slice(-3), ...m.refs];
     delete q.lesson;
   }
+  delete m.imageTrial;
+  if (
+    q.active ||
+    (click && old.active !== next.active && !explainedByPlacement)
+  ) {
+    const candidates = visibleImages(s, next, after);
+    const trial = applyImages(next, candidates);
+    if (
+      trial &&
+      !m.projections?.length &&
+      !m.checked.includes('preview/' + key(next))
+    ) {
+      q.active ??= 'compare_an_indicated_landing_to_an_actual_operation';
+      m.imageTrial = trial;
+    }
+  }
   if (q.active) m.visits[key(next)] = (m.visits[key(next)] ?? 0) + 1;
   return localEffects(s, m, old, next, op, ref, f);
 }
@@ -159,5 +197,21 @@ export function pairProposal(
   budget: number,
 ) {
   if (!q.active || !q.scene || !q.reading) return;
+  if (
+    q.learning.imageTrial &&
+    !q.learning.checked.includes('preview/' + key(q.reading))
+  ) {
+    q.learning.checked.push('preview/' + key(q.reading));
+    return forecast(
+      q.scene,
+      q.learning,
+      q.reading,
+      q.learning.imageTrial,
+      'ACTION5',
+      'test_whether_a_public_image_predicts_the_landing',
+      ['the_named_body_arrives_at_the_visible_image'],
+      ref,
+    );
+  }
   return planDisplacements(q.scene, q.learning, q.reading, ref, depth, budget);
 }

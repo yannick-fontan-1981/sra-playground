@@ -78,7 +78,6 @@ export function pairedScene(
   for (const parts of Object.values(layout).sort(
     (a, b) => b.length - a.length,
   )) {
-    if (parts.length < 2) continue;
     const b = parts[0]!.box,
       p = b[2]! - b[0]! + 1;
     if (p < 3 || p % 2 === 0 || b[3]! - b[1]! + 1 !== p) continue;
