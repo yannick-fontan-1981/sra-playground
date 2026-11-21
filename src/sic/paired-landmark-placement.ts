@@ -6,6 +6,7 @@ import type {CursorTrial} from './marked-cursor-selection.ts';
 import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
 import {chooseIndicatedAccess,learnIndicatedAccess,newIndicatedMemory,type AccessExperiment,type IndicatedMemory} from './seek-indicated-access.ts';
+import {chooseMobileIndication} from './plan-mobile-indication.ts';
 
 type Pair = {role:string; sites:XY[]; ref:string};
 type Assignment = {
@@ -133,6 +134,20 @@ export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservat
     return {...a,stage:'select_after_contact',command:a.selection.command,from:body.at,expected:body.at,guard:parked.at,basis:'observed_contact'};
   }
   const c=accessContext(m);
+  if(c&&accessDepth&&m.access){
+    const controls=movement(motions,role,o,a.pair)??movement(motions,a.actor,o,a.pair);
+    const floor=Object.entries(motions[role]?.substrate??{}).sort((x,y)=>y[1]-x[1])[0];
+    let plan=m.access.mobilePending;
+    const pending=plan?.path[0];
+    if(plan&&pending && (!cellMatches(body.at,pending.from,c.pitch)||!cellMatches(singleton(l,plan.pivot)?.at??null,pending.centre,c.pitch)||
+      pending.read&&!cellMatches(singleton(l,plan.cue)?.at??null,pending.expected,c.pitch)))plan=undefined;
+    if(!plan&&controls&&m.access.repair)plan=chooseMobileIndication(m.access,c,o.frame_hash,rows,controls.motors,o.available_action_refs,accessDepth,limit,floor?Number(floor[0]):undefined);
+    if(plan){
+      const step=plan.path[0]!,access:AccessExperiment={purpose:'use_mobile_indication',command:step.command,expected:step.expected,
+        cue:plan.cue,origin:o.frame_hash,probe:step.command,ref:plan.ref,mobile:plan};
+      return {...a,stage:'approach_with_partner_parked',command:step.command,from:body.at,expected:step.expected,guard:parked.at,basis:access.purpose,access};
+    }
+  }
   if(c&&accessDepth&&m.access?.repair && size(diff(aligned(body.at,c.goal,c.pitch),goal))>c.pitch[0]){
     const controls=movement(motions,role,o,a.pair)??movement(motions,a.actor,o,a.pair);
     const access=controls&&chooseIndicatedAccess(m.access,c,o.frame_hash,controls.motors,o.available_action_refs,{maxNodes:limit,maxDepth:accessDepth});

@@ -295,7 +295,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
         ...(landmark ? {landmarkForecast:{stage:landmark.stage,role:landmark.pair.role,home:landmark.home,other:landmark.other,
-          from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,...(landmark.access?{access:landmark.access}:{}),
+          from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,...(landmark.access?{access:landmark.access.mobile?{
+            purpose:landmark.access.purpose,cue:landmark.access.cue,pivot:landmark.access.mobile.pivot,motion:landmark.access.mobile.motion,
+            first:landmark.access.mobile.path[0],length:landmark.access.mobile.path.length,reads:landmark.access.mobile.path.filter(s=>s.read).length,examined:landmark.access.mobile.examined
+          }:landmark.access}:{}),
           alternatives:['subject_approaches_with_partner_parked','approach_or_preservation_fails']}} : {}),
         ...(relative ? {relativePlacementForecast:relativeReceipt(relative)} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),

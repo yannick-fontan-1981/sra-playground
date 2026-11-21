@@ -4,12 +4,16 @@ import {aligned} from './controlled-parts.ts';
 import {cellMatches} from './calibrate-spatial-controls.ts';
 import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
-type Context={actor:string;parked:string;home:XY;goal:XY;pitch:XY};
-type Scene={at:XY;form:string;visible:Record<string,XY>;next:Record<string,string>};
+import {mobileRefutation,type MobilePlan} from './plan-mobile-indication.ts';
+export type AccessContext={actor:string;parked:string;home:XY;goal:XY;pitch:XY};
+export type AccessScene={at:XY;form:string;visible:Record<string,XY>;next:Record<string,string>};
+type Context=AccessContext;
 type Production={cue:string;op:string;offset:XY;form:string;ref:string};
-export type AccessExperiment={purpose:'approach_indication'|'test_indication'|'seek_preparation';command:string;expected:XY;
+export type AccessExperiment={purpose:'approach_indication'|'test_indication'|'seek_preparation'|'use_mobile_indication';command:string;expected:XY;
+  mobile?:MobilePlan;
   cue?:string;destination?:XY;ref?:string;origin:string;probe:string};
-export type IndicatedMemory={scenes:Record<string,Scene>;sites:Record<string,true>;productions:Production[];
+export type IndicatedMemory={scenes:Record<string,AccessScene>;sites:Record<string,true>;productions:Production[];
+  mobilePending?:MobilePlan;mobileDenied?:Record<string,true>;
   readings:Record<string,{hits:number;misses:number}>;contradictions:Record<string,number>;repair:boolean};
 export const newIndicatedMemory=():IndicatedMemory=>({scenes:{},sites:{},productions:[],readings:{},contradictions:{},repair:false});
 const single=(l:VisualLayout,k:string)=>l[k]?.length===1?l[k]![0]:undefined;
@@ -29,6 +33,13 @@ export function learnIndicatedAccess(m:IndicatedMemory,c:Context,b:string,a:stri
   const old=scene(m,b,before,c),now=scene(m,a,after,c);
   if(!old||!now)return;
   if(directional(op)||operation(op))old.next[op]=a;
+  delete m.mobilePending;
+  if(trial?.mobile){
+    const plan=trial.mobile,step=plan.path[0]!;
+    if(step.command===op && cellMatches(now.at,step.expected,c.pitch) && cellMatches(now.visible[plan.pivot]??null,step.placed,c.pitch)){
+      if(plan.path.length>1)m.mobilePending={...plan,path:plan.path.slice(1)};
+    }else (m.mobileDenied??={})[mobileRefutation(plan.pivot,plan.cue,step.from,step.centre,op)]=true;
+  }
   if(expected&&directional(op)&&!cellMatches(now.at,expected,c.pitch))m.repair=true;
   if(directional(op)){
     for(const [cue,at] of Object.entries(now.visible)){
