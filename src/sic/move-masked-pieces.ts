@@ -223,7 +223,9 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
       const poses = selectedRigidPoses(scene), stationary = samePoses(poses, selectedRigidPoses(local.scene));
       let models = choice.kind === 'select' ? local.models : choice.variants.filter(v => samePoses(v.poses, poses)).map(v => v.model);
       let active: number | null = choice.index;
-      if (local.scene.receptacle.access && !models.length && choice.kind !== 'select') {
+      // If every learned mapping predicted motion and nothing moved, reselect before revising the mappings.
+      if (local.scene.receptacle.access && !models.length && choice.kind !== 'select'
+          && (id !== learnSelectedAccessId || !stationary)) {
         const input = inputs.findIndex(candidate => candidate === action.action_ref);
         if (input >= 0) models = controlModels.filter(model => samePoses(poses,
           selectedRigidMoved(local.scene, selectedRigidPoses(local.scene), choice.index, model[input]!)));

@@ -456,6 +456,14 @@ Les nombres indiquent les actions exécutées. Chaque paire dispose du même pla
 
 **Prochain critère de généralisation.** Associer une hypothèse de capacité à un sujet par les effets de ses actions, puis choisir une expérience qui tranche entre deux explications du blocage. Dans un autre jeu source, demander au pilote de choisir seul le départ, la préparation, la commande utile et la suite après le passage. Compter séparément les prédictions vérifiées, les lieux effectivement atteints et les victoires officielles. C’est cette dernière mesure qui décidera d’un gain sur Custom 4.
 
+### Reprendre le contrôle du bon sujet pour poursuivre une composition
+
+Dans KLOT L4, une route géométrique promet un déplacement, mais la pièce reste sur place pour toutes les commandes encore compatibles avec les mesures. V60 réintroduit alors des correspondances de commandes qu’il avait écartées. Le pilote a essayé 100 gestes et visité seulement deux dispositions des pièces. Le candidat v62 conserve les correspondances apprises, remet en question la sélection courante et recalcule la suite. Cette règle s’applique au planificateur qui apprend à déplacer des pièces sélectionnables par leurs contours.
+
+Le témoin et le candidat jouent les mêmes 21 premiers gestes. Au coup 22, v62 sélectionne de nouveau la pièce déjà visée au coup 19. La partie à froid gagne au coup **37**. Depuis le même état au coup 21, la suite perd si on omet la nouvelle sélection, si on la remplace par le geste du témoin, si on répète le geste précédent, ou si on clique sur la pièce sélectionnée plus tôt au coup 14. Ces quatre interventions conservent la suite choisie par SIC. Sur KLOT L5, les deux versions échouent à 100. [Arbitrage et vérification des déplacements](../../../src/sic/move-masked-pieces.ts) · [Test d’une sélection contredite](../../../tests/v6-selected-rigid-native.test.ts)
+
+**Protocole v62 fixé avant Custom 4.** Geler `sic-source100-rebind-control-v62` et le comparer à `sic-source100-confirmed-reception-v60` sur SS01 à SS08 et SS10 L2 à froid avec les mêmes budgets. Vérifier SS01 après les 19 gestes publics de son L1, les 100 L1 sources et les victoires supérieures du témoin. Le nouveau gain source à reproduire est KLOT L4 au score officiel. Le critère principal reste un L2 gagné sur un jeu Custom 4 supplémentaire. SS09 L2 est réservé à la confirmation.
+
 ### Expériences de contrôle et de placement antérieures
 
 | Travail | Capacités ci-dessus | Résultat disponible | Ce qui reste à prouver |
