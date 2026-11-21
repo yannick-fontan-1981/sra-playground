@@ -275,6 +275,21 @@ export function offerCursorTrial(m:CursorMemory|undefined,o:NativeObservation,ro
   }
   return null;
 }
+// A verified switch nominates just one former subject for a possible return.
+export function measuredReturnSelection(m:CursorMemory,o:NativeObservation,rows:NativeRows,
+  source:NativeBox,target:NativeBox,previousRef:string,preference:InformationPreference):CursorTrial|null {
+  if(m.pending || !m.verified || !o.available_action_refs.includes('ACTION6'))return null;
+  const marks=[...cursorCandidates(o,rows,m),...motorScalePeers(o,m)];
+  for(const mark of marks){
+    if(!inside(source,mark.source.box)||!inside(target,mark.target.box))continue;
+    const contrast=distinguishControl(m,mark,o,preference);
+    if(!contrast)continue;
+    const [x,y]=mark.point;
+    return {...mark,stage:'select',command:'ACTION6:'+x+','+y,contrast,evidence:[previousRef,contrast.evidence]};
+  }
+  return null;
+}
+
 function controlledFootprint(o:NativeObservation,target:Part):NativeBox|undefined {
   const visible=o.entities.filter(e=>e.palette_value===target.ink && e.area>=2 && inside(e.bbox,target.box)).sort((a,b)=>b.area-a.area);
   const first=visible[0];

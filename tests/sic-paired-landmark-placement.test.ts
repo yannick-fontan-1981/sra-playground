@@ -18,6 +18,22 @@ const trial:CursorTrial={stage:'select',source:{box:[3,3,3,3],ink:2},target:{box
   contrast:{strategy:'motion_contrast',mode:'exploration',minimumOutcomes:2,motor:'ACTION2',baselineDelta:[1,0],
     evidence:'motor',outcomes:['previous_subject_moves','selected_subject_moves']}};
 
+test('a verified switch without a prior plan retains the two roles for a later placement',()=>{
+  const m=observeLandmarks(undefined,base,base,'initial');
+  m.planAfterSelection=true;
+  const verify:CursorTrial={...trial,stage:'verify',command:'ACTION2'};
+  const moved={...base,peer:[part(10,3,'remote')]};
+  observePlacement(m,undefined,moved,'cursor_control_unconfirmed',verify,base,undefined,'failed');
+  assert.equal(m.previousControl,undefined);
+  observePlacement(m,undefined,moved,'new_cursor_moved_while_previous_cursor_stayed',verify,base,undefined,'verified');
+  assert.deepEqual(m.previousControl,{parked:'mover',moving:'peer',at:base.mover![0]!.at,ref:'verified'});
+  const reverse:CursorTrial={...trial,source:{...trial.target,box:[10,3,10,3]},target:trial.source,point:[3,3],command:'ACTION6:3,3'};
+  const offer=proposeLandmark(m,moved,o,rows,{peer:motion},reverse,100);
+  assert.equal(offer?.stage,'place_before_selection');
+  assert.equal(offer?.returnRef,'verified');
+  observePlacement(m,undefined,base,'cursor_click_visually_unchanged',trial,moved);
+  assert.equal(m.previousControl,undefined);
+});
 test('two different placements separate an immediate switch from a prepared one',()=>{
   const m=observeLandmarks(undefined,base,base,'first');
   const movement={mover:motion,selected:motion};

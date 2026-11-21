@@ -11,7 +11,7 @@ import {chooseMobileIndication,tileValues} from './plan-mobile-indication.ts';
 type Pair = {role:string; sites:XY[]; ref:string};
 type Assignment = {
   pair:Pair; home:XY; other:XY; actor:string; peer:string; selection:CursorTrial;
-  pitch:XY; firstRef:string;
+  pitch:XY; firstRef:string; returnRef?:string;
 };
 export type LandmarkTrial = Assignment & {
   stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked';
@@ -20,6 +20,8 @@ export type LandmarkTrial = Assignment & {
 export type LandmarkMemory = {
   pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string; access?:IndicatedMemory;
   redrawn?:{parked:string;selected:string};
+  planAfterSelection?:boolean;
+  previousControl?:{parked:string;moving:string;at:XY;ref:string};
   blocked:string[]; tried:string[]; inconclusiveSelections?:string[]; handoff?:boolean; lastResult?:string;
 };
 
@@ -81,7 +83,9 @@ function nearestAssignment(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,s
     for(const [i,home] of pair.sites.entries()){
       const other=pair.sites[1-i]!,first=size(diff(home,from)),second=size(diff(other,retained));
       if(first>second || m.tried.includes(JSON.stringify([actor,peer,pair.role,home])))continue;
-      options.push({a:{actor,peer,home,other,selection,pitch:control.pitch,pair,firstRef:o.observation_ref},cost:first+second,first});
+      const rebound=m.previousControl;
+      const returnRef=rebound?.moving===actor&&rebound.parked===peer?rebound.ref:undefined;
+      options.push({a:{actor,peer,home,other,selection,pitch:control.pitch,pair,firstRef:o.observation_ref,...(returnRef?{returnRef}:{})},cost:first+second,first});
     }
   }
   options.sort((a,b)=>a.cost-b.cost||a.first-b.first);
@@ -180,9 +184,10 @@ export function refreshedSelection(t:LandmarkTrial,l:VisualLayout):CursorTrial {
   return {...t.selection,source:{...t.selection.source,box:[box[0]!,box[1]!,box[2]!,box[3]!]},
     evidence:[...t.selection.evidence,t.pair.ref,t.firstRef]};
 }
-export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:VisualLayout,cursorResult:string|undefined,selection:CursorTrial|undefined,before:VisualLayout,pending?:CursorTrial) {
+export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:VisualLayout,cursorResult:string|undefined,selection:CursorTrial|undefined,before:VisualLayout,pending?:CursorTrial,observationRef?:string) {
+  if(m.planAfterSelection && selection?.stage==='select')delete m.previousControl;
   if(t){
-    m.active??={pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef};
+    m.active??={pair:t.pair,home:t.home,other:t.other,actor:t.actor,peer:t.peer,selection:t.selection,pitch:t.pitch,firstRef:t.firstRef,...(t.returnRef?{returnRef:t.returnRef}:{})};
     if(t.stage==='select_after_contact'){
       // A predicted change of the highlight can fail while the control test
       // remains pending. The next motor determines whether the subject switched.
@@ -210,6 +215,15 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     if(peer){
       const key=JSON.stringify([peer,before[peer]![0]!.at]), sites=m.inconclusiveSelections??=[];
       if(!sites.includes(key))sites.push(key);
+    }
+  }
+  if(m.planAfterSelection && !m.active && selection?.stage==='verify' &&
+    cursorResult==='new_cursor_moved_while_previous_cursor_stayed' && observationRef) {
+    const parked=bodyRole(before,selection.source.box),moving=bodyRole(before,selection.target.box);
+    const old=parked&&singleton(before,parked),still=parked&&singleton(l,parked);
+    const from=moving&&singleton(before,moving),to=moving&&singleton(l,moving);
+    if(parked && moving && parked!==moving && old && still && same(old.at,still.at) && from && to && !same(from.at,to.at)){
+      m.previousControl={parked,moving,at:still.at,ref:observationRef};
     }
   }
   if(!m.active||!m.handoff||!selection||selection.stage!=='verify')return;

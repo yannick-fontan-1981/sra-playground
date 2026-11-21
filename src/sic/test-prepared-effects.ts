@@ -2,7 +2,7 @@ import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal
 import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
-import {offerCursorTrial,newCursorMemory} from './marked-cursor-selection.ts';
+import {offerCursorTrial,newCursorMemory,measuredReturnSelection} from './marked-cursor-selection.ts';
 import {observeLandmarks,observeLandmarkAccess,proposeLandmark,refreshedSelection} from './paired-landmark-placement.ts';
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
@@ -98,7 +98,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const seekAccess=comparePreparations && informationPreference?.strategy==='indicated_access';
+  const planAfterSelection=comparePreparations && informationPreference?.strategy==='plan_after_selection';
+  const seekAccess=planAfterSelection || comparePreparations && informationPreference?.strategy==='indicated_access';
   const prepareArrival=seekAccess || comparePreparations && informationPreference?.strategy==='paired_arrival';
   let m = initialMemory(0);
   function enter(o:NativeObservation){
@@ -127,7 +128,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         retainSituatedOperations(learning,observedSituatedOperations(learning,b,a,before,after,key));
       observePreviewBindings(learning,b,a,before,after,key);
       if(comparePreparations){
-        if(prepareArrival && b.available_action_refs.includes('ACTION6'))m.landmarkMemory=observeLandmarks(m.landmarkMemory,before,after,b.observation_ref);
+        if(prepareArrival && b.available_action_refs.includes('ACTION6')){
+          m.landmarkMemory=observeLandmarks(m.landmarkMemory,before,after,b.observation_ref);
+          if(planAfterSelection)m.landmarkMemory.planAfterSelection=true;
+        }
         if(seekAccess&&m.landmarkMemory)observeLandmarkAccess(m.landmarkMemory,before,after,b,a,rows,next,key,x?.landmark);
         observeCueCondition(learning,b,a,before,after,key);
         if(limits && learning.terminal?.length)observeRelativeMotion(m.relativeMotion??={models:{}},learning.terminal,b,a,rows,before,after,key,learning.partMotion);
@@ -154,8 +158,17 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const offeredCursor = group===recurrentExperimentGroup && (opening || again || m.cursorSelection?.pending) || group===evidencedPlanGroup && m.cursorSelection?.pending
         ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
-      const landmark=prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && m.landmarkMemory.active || group===recurrentExperimentGroup && offeredCursor?.stage==='select')
-        ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},offeredCursor,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
+      let placementSelection=offeredCursor;
+      const previous=m.landmarkMemory?.previousControl;
+      if(previous && !m.landmarkMemory?.active && !offeredCursor && !m.cursorSelection?.pending &&
+        group===recurrentExperimentGroup && m.cursorSelection && informationPreference){
+        const l=visualLayout(o,rows),actor=l[previous.moving],peer=l[previous.parked];
+        if(actor?.length===1 && peer?.length===1 && peer[0]!.at.every((v,i)=>v===previous.at[i])){
+          placementSelection=measuredReturnSelection(m.cursorSelection,o,rows,actor[0]!.box,peer[0]!.box,previous.ref,informationPreference);
+        }
+      }
+      const landmark=prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && m.landmarkMemory.active || group===recurrentExperimentGroup && placementSelection?.stage==='select')
+        ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
       const cursor=landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor;
       if (!landmark && !cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const missingCue=!!m.previewLearning?.cueSearch?.seeking;
@@ -295,7 +308,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
         ...(landmark ? {landmarkForecast:{stage:landmark.stage,role:landmark.pair.role,home:landmark.home,other:landmark.other,
-          from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,...(landmark.access?{access:landmark.access.mobile?{
+          from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,...(landmark.returnRef?{verifiedReturnSource:landmark.returnRef}:{}),...(landmark.access?{access:landmark.access.mobile?{
             purpose:landmark.access.purpose,cue:landmark.access.cue,pivot:landmark.access.mobile.pivot,motion:landmark.access.mobile.motion,
             first:landmark.access.mobile.path[0],length:landmark.access.mobile.path.length,reads:landmark.access.mobile.path.filter(s=>s.read).length,examined:landmark.access.mobile.examined
           }:landmark.access}:{}),
