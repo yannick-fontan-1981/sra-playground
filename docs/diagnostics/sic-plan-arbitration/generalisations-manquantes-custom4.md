@@ -10,6 +10,8 @@ Le critère principal est le premier L2 gagné en partie autonome sur **un jeu C
 
 Le même agent SIC Fallback v62 joue depuis la première observation du L1. Chaque victoire est confirmée par un second passage dans le moteur public, commande par commande. Une partie arrêtée au L1 laisse le résultat du L2 indéterminé dans cette condition. Les colonnes indiquent des coups du niveau concerné.
 
+**Diagnostic v63 et protocole v64.** Au coup 2 de SS06 L2, v62 possède un candidat morphologique. Le groupe d’exploration est consulté mais refuse de proposer le clic parce que la surface d’arrivée du second sujet ne correspond pas à celle du premier. Sur 218 décisions, 45 permettraient une proposition sans cette exigence, aucune ne dispose de la projection demandée. À 40 coups, v63 en mode actif choisit le clic au coup 2 et vérifie le transfert au coup 3. Le témoin déclaratif poursuit son exploration ordinaire. Depuis le même état natif, cliquer sur le premier sujet conserve son mouvement. Après déplacement du second, on peut rendre le contrôle au premier ou le laisser au second. Le plan de v63 ne contient ensuite aucune étape pour maintenir le premier placement. V64 ajoute une seule réutilisation du déplacement vérifié, sous contrôle de la position du premier sujet. Les deux déclarations restent identiques à celles de v63. Comparer à nouveau à budgets égaux, vérifier SS09 avec les mêmes packs après le gel et mesurer séparément SS05 après le L1. Aucune observation de SS09 issue des essais v63 n’a servi à élaborer v64.
+
 | Jeu | Campagne L1 | Campagne L2 | L2 à froid |
 | --- | ---: | ---: | ---: |
 | SS01 | gagné en 36 | gagné en 32 | gagné en 44 |

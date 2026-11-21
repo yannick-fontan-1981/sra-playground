@@ -105,6 +105,7 @@ export type Experiment = {
   phase:
     | 'selectMarkedCursor'
     | 'verifyMarkedCursor'
+    | 'advanceSelectedCursor'
     | 'testConfiguration'
     | 'localCapacity'
     | 'seekTerminalContact'

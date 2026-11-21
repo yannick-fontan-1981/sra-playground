@@ -32,6 +32,13 @@ test('an exploration preference can test two control hypotheses on unfamiliar gr
     assert.equal(follow.actions[0]?.action_ref,'ACTION4');
     const receipt=await family.record!(c!,d!,follow.actions[0]!,selected,moved,follow);
     assert.equal(receipt.events[0]?.result,'new_cursor_moved_while_previous_cursor_stayed');
+    const advance=await family.proposeInGroup!(evidencedPlanGroup,d!,moved,[],18,{});
+    assert.equal(advance.cursorSelectionForecast.stage,'advance');
+    assert.deepEqual(advance.cursorSelectionForecast.source.box,trial.source.box);
+    const another=board(1,17,3,false,5),end=await observation(another,4);
+    const applied=await family.record!(d!,end,advance.actions[0]!,moved,another,advance);
+    assert.equal(applied.events[0]?.result,'advanced_selected_subject_preserving_previous_placement');
+    assert.equal(family.state!().cursorSelection.pending,undefined);
   }
 });
 function board(active=0,right=13,mark=3,edge=false,first=3) {

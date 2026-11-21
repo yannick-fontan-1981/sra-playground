@@ -32,6 +32,7 @@ type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
   selectMarkedCursor:'Test whether clicking a matching piece transfers the distinctive cursor mark',
   verifyMarkedCursor:'Measure whether the newly selected piece moves while the previous piece stays in place',
+  advanceSelectedCursor:'Use the verified control to advance the selected subject while preserving the other placement',
   testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
@@ -141,8 +142,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
       const experiment:Experiment|null = cursor ? {
-        phase:cursor.stage==='select'?'selectMarkedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
-        rule:cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
+        phase:cursor.stage==='select'?'selectMarkedCursor':cursor.stage==='advance'?'advanceSelectedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
+        rule:cursor.stage==='advance'?'reuse_measured_control_preserving_the_parked_subject':
+          cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
@@ -187,7 +189,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         question.subjects=[cursor.source.box.join(','),cursor.target.box.join(','),String(cursor.ink)];
         question.satisfactionContract=cursor.stage==='select'
           ? cursor.contrast?'choose_between_previous_and_selected_subject_by_repeating_the_witnessed_command':'test_whether_the_distinctive_mark_transfers_to_the_clicked_peer'
-          : 'test_whether_the_new_cursor_moves_while_the_previous_one_stays';
+          : cursor.stage==='advance'?'verify_the_next_displacement_and_the_preserved_placement':'test_whether_the_new_cursor_moves_while_the_previous_one_stays';
       }
       const equation = experiment.equation?.claim;
       const capability = equation
@@ -234,7 +236,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         kind: preparedEffectsId,
         actions: [command],
         experiment,
-        ...(cursor ? {cursorSelectionForecast:cursor} : {}),
+        ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast?{
+          decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
+        }:{})}} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),
         ...(experiment.localCapacity ? {localCapacityForecast:experiment.localCapacity} : {}),
         ...(experiment.instrument ? { instrumentForecast: experiment.instrument.plan, instrumentPosition: experiment.instrument.predicted } : {}),

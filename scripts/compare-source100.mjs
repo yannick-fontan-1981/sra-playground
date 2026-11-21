@@ -267,7 +267,7 @@ async function run(code, games) {
       if(plan?.cursorSelectionForecast && replayCommands){
         const cursor=plan.cursorSelectionForecast;
         Object.assign(replayCommands.at(-1),{cursorStage:cursor.stage,cursorEvidence:hash(cursor)});
-        if(cursor.contrast) Object.assign(replayCommands.at(-1),{controlContrast:cursor.contrast,
+        if(cursor.contrast) Object.assign(replayCommands.at(-1),{controlContrast:cursor.contrast,decisionMode:cursor.decisionMode,
           observedSubjects:[cursor.source.box,cursor.target.box]});
         if(cursor.projectedMove) Object.assign(replayCommands.at(-1),{cursorMotor:cursor.projectedMove.command,
           cursorDelta:cursor.projectedMove.delta});
