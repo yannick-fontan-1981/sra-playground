@@ -3,7 +3,7 @@ import { evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity,
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import {offerCursorTrial,newCursorMemory} from './marked-cursor-selection.ts';
-import {observeLandmarks,proposeLandmark,refreshedSelection} from './paired-landmark-placement.ts';
+import {observeLandmarks,observeLandmarkAccess,proposeLandmark,refreshedSelection} from './paired-landmark-placement.ts';
 import {informationPriority, type InformationPreference} from './information-preference.ts';
 import {observedSituatedOperations,retainSituatedOperations} from './situated-preparation.ts';
 import { newDelayedMemory } from './distinguishing-suffix.ts';
@@ -98,7 +98,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const prepareArrival=comparePreparations && informationPreference?.strategy==='paired_arrival';
+  const seekAccess=comparePreparations && informationPreference?.strategy==='indicated_access';
+  const prepareArrival=seekAccess || comparePreparations && informationPreference?.strategy==='paired_arrival';
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
@@ -127,6 +128,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       observePreviewBindings(learning,b,a,before,after,key);
       if(comparePreparations){
         if(prepareArrival && b.available_action_refs.includes('ACTION6'))m.landmarkMemory=observeLandmarks(m.landmarkMemory,before,after,b.observation_ref);
+        if(seekAccess&&m.landmarkMemory)observeLandmarkAccess(m.landmarkMemory,before,after,b,a,key,x?.landmark);
         observeCueCondition(learning,b,a,before,after,key);
         if(limits && learning.terminal?.length)observeRelativeMotion(m.relativeMotion??={models:{}},learning.terminal,b,a,rows,before,after,key,learning.partMotion);
       }
@@ -153,7 +155,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ? offerCursorTrial(m.cursorSelection??=newCursorMemory(),o,rows,!m.turns||!!m.configurationOpportunity,!opening,
           group===recurrentExperimentGroup ? informationPreference : undefined) : null;
       const landmark=prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && m.landmarkMemory.active || group===recurrentExperimentGroup && offeredCursor?.stage==='select')
-        ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},offeredCursor,limits.maxNodes):undefined;
+        ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},offeredCursor,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
       const cursor=landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor;
       if (!landmark && !cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const missingCue=!!m.previewLearning?.cueSearch?.seeking;
@@ -195,7 +197,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(positioned?.completionRef ? [positioned.completionRef] : []),
         ref,
         ...(cursor?.evidence??[]),
-        ...(landmark?[landmark.pair.ref,landmark.firstRef,...landmark.selection.evidence]:[]),
+        ...(landmark?[landmark.pair.ref,landmark.firstRef,...landmark.selection.evidence,...(landmark.access?.ref?[landmark.access.ref]:[])]:[]),
         ...(experiment.cue?.evidence??[]),
         ...(relative?[relative.learned,relative.contrast,relative.contact,...(relative.motorEvidence?[relative.motorEvidence]:[])]:[]),
         ...(experiment.configurationTrial?.evidence??[]),
@@ -293,7 +295,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
         ...(landmark ? {landmarkForecast:{stage:landmark.stage,role:landmark.pair.role,home:landmark.home,other:landmark.other,
-          from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,
+          from:landmark.from,expected:landmark.expected,guard:landmark.guard,basis:landmark.basis,...(landmark.access?{access:landmark.access}:{}),
           alternatives:['subject_approaches_with_partner_parked','approach_or_preservation_fails']}} : {}),
         ...(relative ? {relativePlacementForecast:relativeReceipt(relative)} : {}),
         ...(experiment.configurationTrial ? {configurationForecast:experiment.configurationTrial} : {}),

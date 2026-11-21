@@ -5,6 +5,8 @@ import {cellMatches, spatialControls} from './calibrate-spatial-controls.ts';
 import type {CursorTrial} from './marked-cursor-selection.ts';
 import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
+import {chooseIndicatedAccess,learnIndicatedAccess,newIndicatedMemory,type AccessExperiment,type IndicatedMemory} from './seek-indicated-access.ts';
+
 type Pair = {role:string; sites:XY[]; ref:string};
 type Assignment = {
   pair:Pair; home:XY; other:XY; actor:string; peer:string; selection:CursorTrial;
@@ -12,10 +14,10 @@ type Assignment = {
 };
 export type LandmarkTrial = Assignment & {
   stage:'place_before_selection'|'select_after_contact'|'approach_with_partner_parked';
-  command:string; from:XY; expected:XY; guard:XY; basis:string;
+  command:string; from:XY; expected:XY; guard:XY; basis:string; access?:AccessExperiment;
 };
 export type LandmarkMemory = {
-  pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string;
+  pairs:Pair[]; active?:Assignment; parkedRole?:string; secondRole?:string; access?:IndicatedMemory;
   redrawn?:{parked:string;selected:string};
   blocked:string[]; tried:string[]; inconclusiveSelections?:string[]; handoff?:boolean; lastResult?:string;
 };
@@ -32,7 +34,7 @@ export function observeLandmarks(m:LandmarkMemory|undefined, before:VisualLayout
   return m;
 }
 function drop(m:LandmarkMemory) {
-  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;
+  delete m.active;delete m.handoff;delete m.parkedRole;delete m.secondRole;delete m.redrawn;delete m.access;
 }
 function bodyRole(layout:VisualLayout,box:NativeBox) {
   const matches=Object.entries(layout).filter(([,g])=>g.length===1 && g[0]!.box.every((v,i)=>v===box[i]));
@@ -112,7 +114,15 @@ function nextStep(m:LandmarkMemory,a:Assignment,role:string,from:XY,goal:XY,guar
     }
   }
 }
-export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,rows:NativeRows,motions:Record<string,PartMotion>,candidate:CursorTrial|null,limit:number):LandmarkTrial|undefined {
+function accessContext(m:LandmarkMemory){
+  const a=m.active;
+  return a&&m.secondRole&&m.parkedRole?{actor:m.secondRole,parked:m.parkedRole,home:a.home,goal:a.other,pitch:a.pitch}:undefined;
+}
+export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after:VisualLayout,b:NativeObservation,a:NativeObservation,op:string,t?:LandmarkTrial){
+  const c=accessContext(m);
+  if(c)learnIndicatedAccess(m.access??=newIndicatedMemory(),c,b.frame_hash,a.frame_hash,before,after,op,a.observation_ref,t?.expected,t?.access);
+}
+export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservation,rows:NativeRows,motions:Record<string,PartMotion>,candidate:CursorTrial|null,limit:number,accessDepth?:number):LandmarkTrial|undefined {
   const a=m.active??(candidate && nearestAssignment(m,l,o,candidate,motions));
   if(!a||m.handoff&&!m.secondRole)return;
   const role=m.secondRole??a.actor,peer=m.parkedRole??a.peer,body=singleton(l,role),parked=singleton(l,peer);
@@ -121,6 +131,12 @@ export function proposeLandmark(m:LandmarkMemory,l:VisualLayout,o:NativeObservat
   if(cellMatches(body.at,goal,a.pitch)){
     if(m.secondRole||!covered(l,a,goal))return;
     return {...a,stage:'select_after_contact',command:a.selection.command,from:body.at,expected:body.at,guard:parked.at,basis:'observed_contact'};
+  }
+  const c=accessContext(m);
+  if(c&&accessDepth&&m.access?.repair && size(diff(aligned(body.at,c.goal,c.pitch),goal))>c.pitch[0]){
+    const controls=movement(motions,role,o,a.pair)??movement(motions,a.actor,o,a.pair);
+    const access=controls&&chooseIndicatedAccess(m.access,c,o.frame_hash,controls.motors,o.available_action_refs,{maxNodes:limit,maxDepth:accessDepth});
+    if(access)return {...a,stage:'approach_with_partner_parked',command:access.command,from:body.at,expected:access.expected,guard:parked.at,basis:access.purpose,access};
   }
   const step=nextStep(m,a,role,body.at,goal,parked.at,o,rows,motions,limit);
   if(step)return {...a,stage:m.secondRole?'approach_with_partner_parked':'place_before_selection',command:step.op,
@@ -148,6 +164,7 @@ export function observePlacement(m:LandmarkMemory,t:LandmarkTrial|undefined,l:Vi
     const role=m.secondRole??t.actor,peer=m.parkedRole??t.peer;
     const body=singleton(l,role),parked=singleton(l,peer),goal=m.secondRole?t.other:t.home;
     if(!parked||!cellMatches(parked.at,t.guard,t.pitch)||!body){drop(m);return m.lastResult='subject_or_parked_position_lost';}
+    if(t.access?.purpose==='test_indication')return m.lastResult=cellMatches(body.at,t.expected,t.pitch)?'indicated_arrival_with_partner_parked':'indicated_arrival_refuted';
     if(cellMatches(body.at,t.expected,t.pitch)){
       return m.lastResult=cellMatches(body.at,goal,t.pitch)&&covered(l,t,goal)?'subject_covers_named_landmark':'approach_matched_with_partner_parked';
     }

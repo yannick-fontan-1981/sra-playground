@@ -5,6 +5,7 @@ export const informationStrategies = {
   coupled_displays: 'Measure which displays respond together',
   motion_contrast: 'Test competing predictions for a movement',
   paired_arrival: 'Compare selection before and after a subject reaches a repeated landmark',
+  indicated_access: 'Seek an indication at a traversable site when ordinary movement fails to reach a destination',
 } as const;
 
 export type InformationStrategy = keyof typeof informationStrategies;
