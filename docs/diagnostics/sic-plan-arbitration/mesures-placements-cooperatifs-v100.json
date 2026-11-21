@@ -1,0 +1,331 @@
+{
+  "engine": "f0a1ff43799880f6fed476187200defb5de11925",
+  "candidate": "d9a69a9677bffa24d8910ee4947556dbb72d8515",
+  "control": "d7cb9d35f17d1cec856647416056c40c593e5560",
+  "sourceEffects": {
+    "games": 100,
+    "episodes": 103,
+    "counts": {
+      "pull": {
+        "observed": 25,
+        "tested": 20,
+        "matched": 18,
+        "rivalMatched": 3
+      },
+      "push": {
+        "observed": 30,
+        "tested": 22,
+        "matched": 20,
+        "rivalMatched": 3
+      }
+    }
+  },
+  "sourceRegression": {
+    "games": 100,
+    "verifiedWins": 100,
+    "identicalTrajectoriesToV98": 100,
+    "actionCap": 60,
+    "orderedTrajectoryDigest": "11a6c6e6b5ee184bd5ea918ac6fb64caad280bc86da1642911479f7bb333c176"
+  },
+  "upperSource": [
+    {
+      "game": "CWSE",
+      "level": 2,
+      "cap": 120,
+      "actions": 59,
+      "won": true,
+      "identical": true,
+      "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1"
+    },
+    {
+      "game": "KLOT",
+      "level": 4,
+      "cap": 120,
+      "actions": 37,
+      "won": true,
+      "identical": true,
+      "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c"
+    }
+  ],
+  "sameBinaryMatchedBudget": [
+    {
+      "game": "SS09",
+      "fromLevel": 2,
+      "level": 2,
+      "won": false,
+      "actions": 70,
+      "reason": "session_action_budget",
+      "issued": 70,
+      "selectedBySic": 70,
+      "resets": 0,
+      "cap": 70,
+      "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+      "trajectory": "fe15a9f207a59af8d21be1dafc309979950c9507c62265893ea063ddf95c3cb9",
+      "packDigest": "82fad4c63956d5ffbeb60e6df5a011358a4ae83c386c16d6d392e38212cd3ab0"
+    },
+    {
+      "game": "SS09",
+      "fromLevel": 2,
+      "level": 2,
+      "won": true,
+      "actions": 54,
+      "reason": "target_levels_completed",
+      "issued": 54,
+      "selectedBySic": 54,
+      "resets": 0,
+      "cap": 70,
+      "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+      "trajectory": "855d3d4b8ef45ba566e0166138803242fef01ad03dee0aecb420e842c1e4b5c6",
+      "packDigest": "2c4c23e305f6dc1d47909b54309e981d52999046331161b0d37fae00f91904e9"
+    }
+  ],
+  "firstDecision": {
+    "action": 47,
+    "identicalCommandsAndFrames": 46,
+    "fromFrame": "0d1f0d14bb4e5305",
+    "control": {
+      "command": 1,
+      "family": "sic_public_input_exploration",
+      "changed": true
+    },
+    "candidate": {
+      "command": 4,
+      "family": "sic_test_prepared_effects",
+      "changed": true,
+      "purpose": "compose_subject_and_piece_placements"
+    }
+  },
+  "autonomous": {
+    "game": "SS09",
+    "fromLevel": 2,
+    "level": 2,
+    "won": true,
+    "actions": 54,
+    "reason": "target_levels_completed",
+    "issued": 54,
+    "selectedBySic": 54,
+    "resets": 0,
+    "cap": 1200,
+    "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+    "trajectory": "855d3d4b8ef45ba566e0166138803242fef01ad03dee0aecb420e842c1e4b5c6",
+    "packDigest": "2c4c23e305f6dc1d47909b54309e981d52999046331161b0d37fae00f91904e9"
+  },
+  "physicalCheck": {
+    "code": "SS09",
+    "start": 2,
+    "actions": 54,
+    "firstVerified": 21,
+    "tested": 29,
+    "matched": 28,
+    "rejected": [
+      17
+    ],
+    "observedPieceMoves": 2,
+    "milestones": [
+      {
+        "step": 38,
+        "effect": "pieces_occupy_controls"
+      },
+      {
+        "step": 38,
+        "effect": "remote_gate_changes"
+      },
+      {
+        "step": 47,
+        "effect": "contact_displaces_partner",
+        "bothMoved": true
+      }
+    ],
+    "won": true,
+    "final": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a"
+  },
+  "sameStateAlternatives": [
+    {
+      "step": 38,
+      "purpose": "maintain_all_controls",
+      "choice": 4,
+      "commonFrame": "90503c946cbcdb6a",
+      "reference": {
+        "won": true,
+        "length": 54,
+        "outcome": "bc00177d9d237ec1"
+      },
+      "alternatives": [
+        {
+          "id": 1,
+          "won": false,
+          "length": 54,
+          "outcome": "f6eab3b5254b9aa3"
+        },
+        {
+          "id": 2,
+          "won": false,
+          "length": 54,
+          "outcome": "b1242f1c6e949bc3"
+        },
+        {
+          "id": 3,
+          "won": false,
+          "length": 54,
+          "outcome": "b05bc362529dabbb"
+        }
+      ]
+    },
+    {
+      "step": 47,
+      "purpose": "displace_the_parked_partner",
+      "choice": 4,
+      "commonFrame": "0d1f0d14bb4e5305",
+      "reference": {
+        "won": true,
+        "length": 54,
+        "outcome": "f58c0dbfa306cb9b"
+      },
+      "alternatives": [
+        {
+          "id": 1,
+          "won": false,
+          "length": 54,
+          "outcome": "04ab4b6f29a24ca8"
+        },
+        {
+          "id": 2,
+          "won": false,
+          "length": 54,
+          "outcome": "ff369fbce8b631a6"
+        },
+        {
+          "id": 3,
+          "won": false,
+          "length": 54,
+          "outcome": "d9f41231efd587de"
+        }
+      ]
+    }
+  ],
+  "withdrawPlan": {
+    "code": "SS09",
+    "level": 2,
+    "cut": 47,
+    "prefixChoices": 43,
+    "discarded": 7,
+    "starting": {
+      "subjects": [
+        208,
+        209
+      ],
+      "active": 0,
+      "pieces": [
+        168,
+        248
+      ],
+      "supports": []
+    },
+    "replanned": [
+      {
+        "command": "ACTION4",
+        "result": "coverage_prediction_verified"
+      },
+      {
+        "command": "ACTION4",
+        "result": "coverage_prediction_verified"
+      },
+      {
+        "command": "ACTION4",
+        "result": "coverage_prediction_verified"
+      },
+      {
+        "command": "ACTION4",
+        "result": "coverage_prediction_verified"
+      },
+      {
+        "command": "ACTION4",
+        "result": "coverage_prediction_verified"
+      },
+      {
+        "command": "ACTION4",
+        "result": "coverage_prediction_verified"
+      },
+      {
+        "command": "ACTION4",
+        "result": "official"
+      }
+    ],
+    "won": true,
+    "final": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a"
+  },
+  "official": [
+    {
+      "game": "SS01",
+      "entry": 1,
+      "actions": 32,
+      "won": true,
+      "tapeDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+      "final": "772e2a88d111ccdb8d896d76c2ce2ec71490d411ace284fc8c0b9493f267d63a"
+    },
+    {
+      "game": "SS02",
+      "entry": 1,
+      "actions": 46,
+      "won": true,
+      "tapeDigest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7",
+      "final": "9469602325bfbd494dd48edb62a9abbb7c3684ed3b7a19f7be91a0ed57624e64"
+    },
+    {
+      "game": "SS03",
+      "entry": 1,
+      "actions": 97,
+      "won": true,
+      "tapeDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+      "final": "22fc8f77891d855610de146903eee172021fdc9cba07def802d982bb1cadfcfa"
+    },
+    {
+      "game": "SS04",
+      "entry": 1,
+      "actions": 143,
+      "won": true,
+      "tapeDigest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f",
+      "final": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f"
+    },
+    {
+      "game": "SS05",
+      "entry": 1,
+      "actions": 73,
+      "won": true,
+      "tapeDigest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+      "final": "bcc85ed983fd11ebe9ac9d5bc458cbfd238e5e00e1665606d014562c5b0555cb"
+    },
+    {
+      "game": "SS06",
+      "entry": 2,
+      "actions": 54,
+      "won": true,
+      "tapeDigest": "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867",
+      "final": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069"
+    },
+    {
+      "game": "SS07",
+      "entry": 2,
+      "actions": 117,
+      "won": true,
+      "tapeDigest": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88",
+      "final": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a"
+    },
+    {
+      "game": "SS08",
+      "entry": 2,
+      "actions": 70,
+      "won": true,
+      "tapeDigest": "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5",
+      "final": "7fc96b754c7aeda073c77c892ab5a9ab855e424e2988275c44ec36b7e47d1f2c"
+    },
+    {
+      "game": "SS09",
+      "entry": 2,
+      "actions": 54,
+      "won": true,
+      "tapeDigest": "ed31545661974f783bee0caa881aef07f49abe5dc35b880110006c3d448354c2",
+      "final": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a"
+    }
+  ]
+}
