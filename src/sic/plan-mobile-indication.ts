@@ -6,7 +6,7 @@ import type {NativeRows} from '../logos-engine/v6-native-types.ts';
 import type {AccessContext,AccessScene,IndicatedMemory} from './seek-indicated-access.ts';
 
 type Motor={op:string;d:XY};
-export type MobileStep={command:string;from:XY;centre:XY;expected:XY;placed:XY;read:boolean};
+export type MobileStep={command:string;from:XY;centre:XY;expected:XY;placed:XY;read:boolean;inverseHypothesis?:true;preparedSurface?:true};
 export type MobilePlan={pivot:string;cue:string;motion:'push'|'pull'|'both';ref:string;path:MobileStep[];examined:number};
 type Model={pivot:string;cue:string;push:boolean;pull:boolean;ref:string;examples:ProbePattern[]};
 const gridPoint=(p:XY,c:AccessContext)=>aligned(p,c.goal,c.pitch);
@@ -44,15 +44,19 @@ export function identifyMobileModels(m:IndicatedMemory,c:AccessContext):Model[]{
   }
   return models.sort((a,b)=>b.examples.length-a.examples.length);
 }
-function dominant(rows:NativeRows,p:XY,pitch:XY){
-  const counts=new Map<number,number>();
+export function tileValues(rows:NativeRows,p:XY,pitch:XY){
+  const values:number[]=[];
   for(let y=Math.ceil((p[1]-pitch[1]/2)/2);y<(p[1]+pitch[1]/2)/2;y++)
     for(let x=Math.ceil((p[0]-pitch[0]/2)/2);x<(p[0]+pitch[0]/2)/2;x++){
-      const v=rows[y]?.[x];if(v!==undefined)counts.set(v,1+(counts.get(v)??0));
+      const v=rows[y]?.[x];if(v!==undefined)values.push(v);
     }
+  return values;
+}
+function dominant(values:number[]){
+  const counts=new Map<number,number>();for(const v of values)counts.set(v,1+(counts.get(v)??0));
   return [...counts].sort((a,b)=>b[1]-a[1])[0]?.[0];
 }
-type Board={points:XY[];index:Map<string,number>;walk:number[][];goal:number;start:number;centre:number};
+type Board={points:XY[];index:Map<string,number>;walk:number[][];goal:number;start:number;centre:number;prepared:Set<number>};
 function visibleBoard(m:IndicatedMemory,c:AccessContext,s:AccessScene,pivot:string,rows:NativeRows,motors:Motor[],learnedGround?:number):Board|undefined{
   const centre=s.visible[pivot];if(!centre)return;
   const ground=learnedGround??surfaceFromVisits(Object.fromEntries(Object.keys(m.sites).map(k=>[k,1])),rows,c.goal,c.pitch,
@@ -60,26 +64,34 @@ function visibleBoard(m:IndicatedMemory,c:AccessContext,s:AccessScene,pivot:stri
   if(ground==null)return;
   const documented=new Set(Object.keys(m.sites));
   for(const other of Object.values(m.scenes)){const p=other.visible[pivot];if(p)documented.add(gridPoint(p,c).join());}
-  const points:XY[]=[],index=new Map<string,number>();
+  const points:XY[]=[],index=new Map<string,number>(),prepared=new Set<number>();
+  const changed=new Map(m.preparedGround?.map(site=>[site.at.join(),site.appearance]));
   for(let y=c.goal[1]%c.pitch[1];y<=2*(rows.length-1);y+=c.pitch[1])
     for(let x=c.goal[0]%c.pitch[0];x<=2*(rows[0]!.length-1);x+=c.pitch[0]){
       const p:XY=[x,y],k=p.join();
-      if(same(p,c.home)||(!same(p,c.goal)&&!documented.has(k)&&dominant(rows,p,c.pitch)!==ground))continue;
+      if(same(p,c.home))continue;
+      if(!same(p,c.goal)&&!documented.has(k)){
+        const values=tileValues(rows,p,c.pitch);
+        if(dominant(values)!==ground){if(changed.get(k)!==values.join())continue;prepared.add(points.length);}
+      }
       index.set(k,points.length);points.push(p);
     }
   const start=index.get(gridPoint(s.at,c).join()),anchor=index.get(gridPoint(centre,c).join()),goal=index.get(c.goal.join());
   if(start===undefined||anchor===undefined||goal===undefined)return;
-  return {points,index,start,centre:anchor,goal,walk:points.map(p=>motors.map(v=>index.get(add(p,v.d).join())??-1))};
+  return {points,index,start,centre:anchor,goal,prepared,walk:points.map(p=>motors.map(v=>index.get(add(p,v.d).join())??-1))};
 }
 const edgeKey=(actor:XY,centre:XY,q:string)=>actor.join()+'/'+centre.join()+'/'+q;
 export function mobileRefutation(pivot:string,cue:string,p:XY,centre:XY,q:string){return pivot+'/'+cue+'/'+edgeKey(p,centre,q);}
 function solve(model:Model,board:Board,c:AccessContext,m:IndicatedMemory,s:AccessScene,motors:Motor[],op:string,depth:number,limit:number):MobilePlan|undefined {
   const {points,walk,start,centre,goal}=board,n=points.length,predict=previewLaw(model.examples,true);
-  const offsets=new Map<string,XY|null>();
+  const reversed=previewLaw(model.examples.map(e=>({...e,actor:e.indicator,indicator:e.actor})),true);
+  const offsets=new Map<string,XY|null>(),conjectures=new Set<string>();
   function projected(p:number,a:number){
     const relative=diff(points[p]!,points[a]!),key=relative.join();
     if(!offsets.has(key)){
-      const predictions=predict(relative,[0,0]);
+      const forward=predict(relative,[0,0]);
+      const predictions=forward.length?forward:reversed(relative,[0,0]);
+      if(!forward.length&&predictions.length===1)conjectures.add(key);
       offsets.set(key,predictions.length===1?predictions[0]!.at:null);
     }
     const offset=offsets.get(key);
@@ -113,7 +125,9 @@ function solve(model:Model,board:Board,c:AccessContext,m:IndicatedMemory,s:Acces
       const path:MobileStep[]=[];
       for(let j=i;nodes[j]!.parent>=0;j=nodes[j]!.parent){
         const v=nodes[j]!,prev=nodes[v.parent]!,read=v.action===motors.length;
-        path.push({from:points[prev.p]!,centre:points[prev.a]!,command:read?op:motors[v.action]!.op,expected:points[v.p]!,placed:points[v.a]!,read});
+        path.push({from:points[prev.p]!,centre:points[prev.a]!,command:read?op:motors[v.action]!.op,expected:points[v.p]!,placed:points[v.a]!,read,
+          ...(read&&conjectures.has(diff(points[prev.p]!,points[prev.a]!).join())?{inverseHypothesis:true as const}:{}),
+          ...(board.prepared.has(v.p)?{preparedSurface:true as const}:{})});
       }
       path.reverse();
       if(path.length)return {pivot:model.pivot,cue:model.cue,motion:model.push&&model.pull?'both':model.pull?'pull':'push',ref:model.ref,path,examined:examined+1};

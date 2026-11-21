@@ -29,6 +29,17 @@ test('pulling a measured pivot can enable a new projected arrival across an impa
   assert.ok(plan.path.some(s=>s.command==='ACTION7'));assert.deepEqual(plan.path.at(-1)!.expected,ctx.goal);
   assert.equal(chooseMobileIndication(m,ctx,'a',rows,motors,ops,2,200,1),undefined);
 });
+test('a remote changed surface is a conditional route only while its measured appearance persists',()=>{
+  const m=memory(),late={...ctx,goal:xy(4,7)};
+  const changed=rows.map(r=>r.slice());
+  changed[5]![4]=0;changed[6]![4]=8;changed[7]![4]=1;
+  assert.equal(chooseMobileIndication(m,late,'a',changed,motors,ops,24,600,1),undefined);
+  m.preparedGround=[{at:xy(4,6),appearance:'8',ref:'first contact'}];
+  const plan=chooseMobileIndication(m,late,'a',changed,motors,ops,24,600,1)!;
+  assert.ok(plan.path.some(s=>s.preparedSurface));assert.deepEqual(plan.path.at(-1)!.expected,late.goal);
+  changed[6]![4]=0;
+  assert.equal(chooseMobileIndication(m,late,'a',changed,motors,ops,24,600,1),undefined);
+});
 test('a moving indication alone does not establish mobility of its proposed pivot',()=>{
   const m=memory();delete m.scenes.a!.next.ACTION2;
   assert.equal(chooseMobileIndication(m,ctx,'a',rows,motors,ops,24,200,1),undefined);

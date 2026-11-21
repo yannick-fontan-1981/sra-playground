@@ -128,7 +128,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       observePreviewBindings(learning,b,a,before,after,key);
       if(comparePreparations){
         if(prepareArrival && b.available_action_refs.includes('ACTION6'))m.landmarkMemory=observeLandmarks(m.landmarkMemory,before,after,b.observation_ref);
-        if(seekAccess&&m.landmarkMemory)observeLandmarkAccess(m.landmarkMemory,before,after,b,a,key,x?.landmark);
+        if(seekAccess&&m.landmarkMemory)observeLandmarkAccess(m.landmarkMemory,before,after,b,a,rows,next,key,x?.landmark);
         observeCueCondition(learning,b,a,before,after,key);
         if(limits && learning.terminal?.length)observeRelativeMotion(m.relativeMotion??={models:{}},learning.terminal,b,a,rows,before,after,key,learning.partMotion);
       }

@@ -6,7 +6,7 @@ import type {CursorTrial} from './marked-cursor-selection.ts';
 import type {VisualLayout} from './witnessed-preview-transfer.ts';
 
 import {chooseIndicatedAccess,learnIndicatedAccess,newIndicatedMemory,type AccessExperiment,type IndicatedMemory} from './seek-indicated-access.ts';
-import {chooseMobileIndication} from './plan-mobile-indication.ts';
+import {chooseMobileIndication,tileValues} from './plan-mobile-indication.ts';
 
 type Pair = {role:string; sites:XY[]; ref:string};
 type Assignment = {
@@ -119,7 +119,17 @@ function accessContext(m:LandmarkMemory){
   const a=m.active;
   return a&&m.secondRole&&m.parkedRole?{actor:m.secondRole,parked:m.parkedRole,home:a.home,goal:a.other,pitch:a.pitch}:undefined;
 }
-export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after:VisualLayout,b:NativeObservation,a:NativeObservation,op:string,t?:LandmarkTrial){
+export function observeLandmarkAccess(m:LandmarkMemory,before:VisualLayout,after:VisualLayout,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,op:string,t?:LandmarkTrial){
+  if(t?.stage==='place_before_selection' && !covered(before,t,t.home) && covered(after,t,t.home) && cellMatches(singleton(after,t.actor)?.at??null,t.home,t.pitch)){
+    const prepared:{at:XY;appearance:string;ref:string}[]=[];
+    for(let y=t.home[1]%t.pitch[1];y<=2*(rows.length-1);y+=t.pitch[1])for(let x=t.home[0]%t.pitch[0];x<=2*(rows[0]!.length-1);x+=t.pitch[0]){
+      const at:XY=[x,y];if([t.home,t.guard,t.from].some(site=>cellMatches(at,site,t.pitch)))continue;
+      const initial=tileValues(rows,at,t.pitch),later=tileValues(next,at,t.pitch);
+      if(initial.length===later.length&&later.filter((v,i)=>v!==initial[i]).length*2>later.length)
+        prepared.push({at,appearance:later.join(),ref:a.observation_ref});
+    }
+    (m.access??=newIndicatedMemory()).preparedGround=prepared;
+  }
   const c=accessContext(m);
   if(c)learnIndicatedAccess(m.access??=newIndicatedMemory(),c,b.frame_hash,a.frame_hash,before,after,op,a.observation_ref,t?.expected,t?.access);
 }
