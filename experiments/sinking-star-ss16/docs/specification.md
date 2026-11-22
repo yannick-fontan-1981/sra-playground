@@ -1,6 +1,6 @@
 # SS16 — contrat du trio
 
-Version du laboratoire : **0.1.0**. Grille logique jusqu’à 20 × 20 cellules ; une cellule occupe 3 × 3 pixels dans une image de 64 × 64, origine `(2,2)`. Une carte plus petite est centrée. La palette est celle des jeux précédents.
+Version du laboratoire : **0.2.0**. Grille logique jusqu’à 20 × 20 cellules ; une cellule occupe 3 × 3 pixels dans une image de 64 × 64, origine `(2,2)`. Une carte plus petite est centrée. La palette est celle des jeux précédents.
 
 ## Personnages et objectifs
 
@@ -30,7 +30,7 @@ ACTION5 active tous les miroirs. Chaque miroir a deux axes sur sa face blanche. 
 
 Héros, caisses et monstres sont des cibles. Miroirs et appuis ne le sont pas. Les murs, portes fermées et autres miroirs arrêtent les trajets ; l’eau ne les arrête pas. Les propositions des miroirs se résolvent simultanément et refusent les collisions ou destinations incompatibles. Il n’existe ni duplication ni fusion.
 
-Un plus gris clair annonce l’arrivée d’un héros et un contour carré gris clair celle d’une caisse. Ces indications sont dessinées sous les occupants. Le dos d’un miroir qui bloque peut clignoter deux fois en rouge sans faire avancer le monde ni ajouter une annulation. La diagonale blanche reste visible.
+Un plus gris clair annonce l’arrivée d’un héros et un contour carré gris clair celle d’une caisse. Ces indications sont dessinées sous les occupants. Lorsqu’un trajet de réflexion est bloqué par un mur, une porte, une presse, une autre pièce ou un conflit de transferts, les dos des miroirs concernés clignotent deux fois en rouge : rouge, normal, rouge, normal, avec des durées de 110, 70, 110 et 0 ms. La diagonale blanche reste visible. Les miroirs non concernés gardent leur aspect normal. Ce refus ne déplace aucune pièce, ne fait pas avancer le monde et n’ajoute pas d’entrée d’annulation ; la préférence de réduction des animations reste respectée.
 
 ## Commandes et portes-presses
 

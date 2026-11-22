@@ -64,13 +64,16 @@ const finalDesign=json('reference/levels5-8-review.json');
 assert.equal(finalDesign.success,true);for(const n of [5,6,7,8])assert.equal(finalDesign.specHashes[n],hash(designs[n-1].spec),'Fresh designer review for L'+n);
 const independent=json('reference/finals-independent-review.json');
 assert.equal(independent.success,true);for(const n of [7,8])assert.equal(independent.specHashes[n],hash(designs[n-1].spec),'Fresh independent review for L'+n);
+const level5Author=json('reference/level5-review.json'),level5Independent=json('reference/level5-independent-review.json');
+for(const review of [level5Author,level5Independent]){assert.equal(review.success,true);assert.equal(review.specSha256,hash(designs[4].spec),'Fresh revised level 5 review');}
 
 const report={game:'SS16',version:json('package.json').version,success:true,specHashes:Object.fromEntries(designs.map((d,i)=>[i+1,hash(d.spec)])),
  scope:'Initial fixed-circuit walking topology, exact local counter-branches, reproduced historical bypasses and explicitly bounded independent reviews.',
  initialTopology:topology,localLevels2to4:local,
+ revisedLevel5:{success:true,specSha256:level5Independent.specSha256,authorChecks:level5Author.localChecks.length,independentChecks:level5Independent.localChecks.length,historicalBypassesCorrected:level5Independent.historicalRepairs.length,restrictedSearch:level5Independent.restrictedSearch},
  workshop:{historicalWinningBypassesCorrected:workshop.repairs.length,restrictedSearches:workshop.restrictedProbes.count,states:workshop.restrictedProbes.states,transitions:workshop.restrictedProbes.transitions,allQueuesExhausted:workshop.restrictedProbes.allQueuesExhausted},
  finalDesigner:{success:finalDesign.success,checks:finalDesign.checks,specHashes:finalDesign.specHashes},
  independentFinals:{success:independent.success,status:independent.status,specHashes:independent.specHashes},
  limitations:['Initial flood-fill holds circuits fixed and ignores actor obstacles; it is not a search over actions.','Local counter-branches establish their stated effects only.','Restricted searches freeze the resources and inactive heroes listed in the underlying report.','Alternative advanced solutions are allowed; no global minimum, uniqueness or mandatory reference-route resource count is claimed.']};
 writeFileSync(new URL('validation/design-report.json',root),JSON.stringify(report,null,2)+'\n');
-console.log(JSON.stringify({success:true,levels:topology.length,localChecks:local.length,workshopSearches:report.workshop.restrictedSearches,finalDesignerChecks:finalDesign.checks,independentFinals:independent.status}));
+console.log(JSON.stringify({success:true,levels:topology.length,localChecks:local.length,workshopSearches:report.workshop.restrictedSearches,level5AuthorChecks:report.revisedLevel5.authorChecks,level5IndependentChecks:report.revisedLevel5.independentChecks,finalDesignerChecks:finalDesign.checks,independentFinals:independent.status}));

@@ -15,5 +15,8 @@
       "result": "Local file URL blocked by browser security policy; no workaround attempted."
     }
   ],
-  "fallback": "Compiled HTML DOM/input/canvas/timing verification with Happy DOM and direct deterministic render inspection. Neither is reported as a native browser visual test."
+  "fallback": "Version 0.2.0: complete compiled-HTML DOM/input/canvas/timing validation with Happy DOM, actual level 8 blocked-mirror frames and direct deterministic render inspection. Previous native-browser limitations remain; no native visual success is claimed.",
+  "attemptsRecordedDuringVersion": "0.1.0",
+  "currentVersion": "0.2.0",
+  "nativeReviewRepeated": false
 }

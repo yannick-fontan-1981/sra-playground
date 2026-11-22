@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {Author} from './author.mjs';
+import {report as level5AuthorReview} from './review-level5.mjs';
+import {report as level5IndependentReview} from './review-level5-independent.mjs';
 import {replay,decodeCommand} from '../../scripts/solver.mjs';
 import {compileLevel,initialState,stepDetailed,circuitPressed,gateClosed,doorsOpen,supported,terrainAt} from '../../dist/core.js';
 const designs=[5,6,7,8].map(n=>JSON.parse(readFileSync(new URL(`../level${n}-design.json`,import.meta.url))));
@@ -15,12 +17,11 @@ function authorAt(d,stage){const a=new Author(d.spec);if(stage>=0)a.act(d.comman
 function staticReach(w,s,starts){const key=p=>`${p.x},${p.y}`,queue=[...starts],seen=new Set(queue.map(key));for(let i=0;i<queue.length;i++)for(const [dx,dy]of [[0,-1],[0,1],[-1,0],[1,0]]){const p={x:queue[i].x+dx,y:queue[i].y+dy};if(seen.has(key(p))||terrainAt(w,p)==='#'||!supported(w,s,p)||w.gates.some((g,j)=>eq(g.at,p)&&gateClosed(w,s,j))||(w.doors.some(d=>eq(d,p))&&!doorsOpen(w,s)))continue;seen.add(key(p));queue.push(p);}return{cells:queue,keys:seen};}
 const baseline=designs.map(d=>{const r=replay(d.spec,d.commands);assert(r.state.complete&&!r.state.dead);assert.equal(r.metrics.blocked,0);const w=compileLevel(d.spec),s=initialState(w),reach=staticReach(w,s,s.heroes.map(h=>h.at));assert(w.goals.every(g=>!reach.keys.has(`${g.x},${g.y}`)));assert.equal(w.heroes.length,3);assert.equal(w.goals.length,3);assert(w.gates.every(g=>!w.buttons.some(b=>eq(b,g.at))));return{level:+d.spec.id.slice(-2),title:d.spec.title,winningRoute:r.metrics,initialFixedGeometry:{reachableCellsIgnoringActors:reach.cells.length,reachableGoals:0,closedGateCount:w.gates.filter((_,i)=>gateClosed(w,s,i)).length,scope:'Flood-fill with initial circuits fixed, ignoring actor obstacles. Establishes no initial walking access; not a search over button changes or reflections.'},purePresses:true};});
 {
- const d=designs[0];
- const a=authorAt(d,-1);a.select('warrior').act('R').select('thief').act('DDDR').go(13,6);
- caseAt(d,'L5 — la porte ouverte ne suffit pas tant que les gardiens restent vivants',a.commands+'D',r=>{assert(r.state.dead);assert(r.state.heroes.find(h=>h.kind==='thief').dead);assert.equal(r.state.monsters.length,2);},'Exact local branch with both final weights in place, before firing the distant loaded press.');
- const noCargo=structuredClone(d.spec);noCargo.rows[8]=noCargo.rows[8].slice(0,10)+'.'+noCargo.rows[8].slice(11);const r=replay(noCargo,'L');assert.equal(r.state.monsters.length,2);assert.equal(r.metrics.pistonPushes,0);summaries.push({level:5,label:'L5 — une presse vide ne déplace pas son voisin',observed:snapshot(r),scope:'Local initial cargo ablation, one command only; not a global impossibility claim.'});
- const after=authorAt(d,2);after.go(15,5,'thief');
- caseAt(d,'L5 — reprendre le lest nord referme la porte',after.commands+'D',r=>{assert(!circuitPressed(r.world,r.state,'deux-poids'));assert(gateClosed(r.world,r.state,1));assert(!r.state.dead);},'Exact branch after the two final weights have been installed.');
+ const specSha256=createHash('sha256').update(JSON.stringify(designs[0].spec)).digest('hex');
+ for(const [review,report] of [['author',level5AuthorReview],['independent',level5IndependentReview]]){
+  assert.equal(report.success,true);assert.equal(report.specSha256,specSha256,'Fresh level 5 '+review+' review');
+  for(const check of report.localChecks)summaries.push({level:5,review,...check});
+ }
 }
 {
  const d=designs[1];
@@ -55,6 +56,6 @@ const baseline=designs.map(d=>{const r=replay(d.spec,d.commands);assert(r.state.
  caseAt(d,'L8 — le dépôt distant ne remplace pas le lest auxiliaire',e.commands+'X',r=>{assert(has(r.state.stones,12,13));assert(!has(r.state.stones,14,9));assert(!circuitPressed(r.world,r.state,'deux-caisses'));assert(gateClosed(r.world,r.state,3));},'Exact branch before the Thief separates the auxiliary crate from the final file.');
  caseAt(d,'L8 — trois lests conservés, rayon isolé et marée basse ouvrent les trois sas',d.commands.slice(0,d.stages[10].turn),r=>{assert(has(r.state.mirrors.map(m=>m.at),8,11));assert(has(r.state.stones,12,13)&&has(r.state.stones,14,9));assert(circuitPressed(r.world,r.state,'depot-miroir'));assert(circuitPressed(r.world,r.state,'deux-caisses'));assert([2,3,5].every(i=>!gateClosed(r.world,r.state,i)));assert(gateClosed(r.world,r.state,4));assert.equal(r.state.supports.length,2);assert.equal(r.state.monsters.length,1);},'Reference-route accounting of four original crates: two supports and two dry final weights, plus the first mirror as third weight. An independently verified advanced solution uses one support and extra hero reflections; two supports are not claimed as a global minimum.');
 }
-const report={version:'SS16 0.1.0',status:'pass',success:true,specHashes:Object.fromEntries(designs.map(d=>[+d.spec.id.slice(-2),createHash('sha256').update(JSON.stringify(d.spec)).digest('hex')])),scope:'Deterministic winning-route replays, initial fixed-circuit geometry checks and local counter-branches. These checks establish the listed effects only; they are not a proof of unique solutions, shortest paths or global impossibility after mistakes.',baseline,checks:summaries.length,localChecks:summaries};
+const report={version:'SS16 '+JSON.parse(readFileSync(new URL('../../package.json',import.meta.url),'utf8')).version,status:'pass',success:true,specHashes:Object.fromEntries(designs.map(d=>[+d.spec.id.slice(-2),createHash('sha256').update(JSON.stringify(d.spec)).digest('hex')])),scope:'Deterministic winning-route replays, initial fixed-circuit geometry checks and local counter-branches. These checks establish the listed effects only; they are not a proof of unique solutions, shortest paths or global impossibility after mistakes.',baseline,checks:summaries.length,localChecks:summaries};
 writeFileSync(new URL('../levels5-8-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:report.status,levels:baseline.map(x=>({level:x.level,actions:x.winningRoute.actions,initialReachableGoals:x.initialFixedGeometry.reachableGoals})),localChecks:summaries.length}));

@@ -4,6 +4,12 @@ Laboratoire autonome de la série Sinking Star pour **SRA Playground / ARC-3-AGE
 
 Le problème central est de choisir quand une caisse doit rester mobile et quand elle peut devenir un appui définitif. Les trois rôles préparent des positions différentes : le Marchand pousse une pièce, le Guerrier une file, le Voleur tire la pièce située derrière lui. Les miroirs, les commandes à plusieurs poids, les presses et les plateformes changent ensuite l’ordre des opérations.
 
+## Révision 0.2.0
+
+Le niveau 5 **La relève du gardien** demande désormais de charger la presse, récupérer sa charge, ouvrir une réserve sous clef, extraire puis réorienter ses deux caisses et préparer les poids finaux. Le parcours de référence réutilise la clef et la charge de relève après leur premier emploi ; le dernier sas combine les deux lests avec le retrait des plateformes.
+
+Les réflexions bloquées, notamment dans la vraie salle 8, signalent aussi les murs, portes, presses et occupants incompatibles : les miroirs concernés clignotent deux fois en rouge puis retrouvent leur aspect normal. Les règles de transfert, les positions, les commandes et l’historique d’annulation sont conservés lors du refus.
+
 ## Jouer et reconstruire
 
 ```sh

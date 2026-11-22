@@ -200,7 +200,7 @@ export function actionFeedback(before:LessonObservation,next:LessonObservation&{
   :next.levelsCompleted>before.levelsCompleted?'Les trois destinations sont occupées. Salle terminée !'
   :action===6?'Personnage sélectionné. Le décor et les monstres n’avancent pas.'
   :reflected(before,next,action)?'Reflet effectué : priorité au plus proche, échange à distance égale. Aucune capacité ne se déclenche pendant ce transfert.'
-  :action===5?'Reflet bloqué ou aucune cible accessible devant les faces blanches. Un miroir qui gêne le trajet peut clignoter en rouge.'
+  :action===5?'Reflet bloqué ou aucune cible accessible devant les faces blanches. Les miroirs impliqués dans un trajet bloqué clignotent en rouge.'
   :pulled(before,next,action)?'Une pièce tirée dans la case quittée par le Voleur. Un pas de côté permet de la lâcher.'
   :pushed>1?'Toute la file avance d’une case sous la poussée du Guerrier.'
   :pushed===1?selected?.kind==='merchant'?'Le Marchand pousse une seule pièce.':'Une pièce poussée par le Guerrier.'

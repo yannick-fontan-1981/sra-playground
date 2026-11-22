@@ -12,6 +12,13 @@ Développer **Les Ponts Engloutis**, premier trio de la série : Marchand, Guerr
 - Sources précises et différences de règles documentées.
 - Vérifications moteur, campagne et HTML compilé ; audit de raccourcis sur les cartes structurantes.
 
+## Révision 0.2.0 — niveau 5 et miroirs
+
+- Niveau 5 : charge de relève à charger puis récupérer, réserve sous clef, extraction et changement d’axe des deux charges, réemploi de la clef et de la charge de relève, sas à deux poids avec plateformes retirées.
+- Le contournement de la réserve par son flanc nord a été reproduit puis fermé ; les revues d’auteur et indépendante conservent leurs témoins et précisent la portée des contre-branches.
+- Miroirs : les refus dus aux murs, portes, presses, occupants et conflits signalent les miroirs concernés en rouge/normal/rouge/normal, sans déplacement ni nouvelle annulation. La vraie salle 8 fait partie des scénarios HTML.
+- Le moteur, les huit parcours, les vingt découvertes, le HTML et les audits sont requalifiés pour le fichier livré ; les résultats définitifs sont dans `docs/validation.md`.
+
 ## État de qualification
 
 Les comptes définitifs et la portée des audits sont centralisés dans `docs/validation.md` et les rapports JSON de `validation/`. Une seule valeur de version décrit la livraison : `package.json` fait autorité. Les outils d’auteur et rapports ne sont jamais intégrés au HTML.
@@ -20,7 +27,9 @@ La revue des premières cartes a reproduit puis corrigé deux solutions qui réd
 
 ## GitHub et Site
 
-Branche de travail : `feat/sinking-star-ss16-20261122`. Base de développement : `2e7a392ec6723353f095f906b537071ae86bddcd`. Les changements concurrents de l’intégration native SS15 jusqu’à `82f17f3981fcbb785ee5fd15c660e75ebc4d7466` ont été récupérés et conservés. Le point de sauvegarde candidat est `e022d35852031150ee3ef66fedcd8c262af5cafa` ; il précède les corrections définitives des finales.
+Branche de la révision : `fix/ss16-level5-mirror-alert-20261122`, depuis la livraison intégrée `bfa3ff3246f88b7b88127858bb73c02561dc8858`. Branche du premier lot : `feat/sinking-star-ss16-20261122`. Base de développement : `2e7a392ec6723353f095f906b537071ae86bddcd`. Les changements concurrents de l’intégration native SS15 jusqu’à `82f17f3981fcbb785ee5fd15c660e75ebc4d7466` ont été récupérés et conservés. Le point de sauvegarde candidat est `e022d35852031150ee3ef66fedcd8c262af5cafa` ; il précède les corrections définitives des finales.
+
+La mise à jour concurrente du planificateur SIC `3403bc11b0cd1f60517ea52bfc3579be2bc99f54` est conservée lors de l’intégration de cette révision ; les corrections SS16 restent dans leur laboratoire.
 
 GitHub reste la source canonique. Les points de sauvegarde sont poussés sur la branche de travail ; la livraison qualifiée est intégrée sur le `main` courant en préservant les changements parallèles. Les SHA réels sont donnés dans le compte rendu de livraison et vérifiables dans l’historique Git.
 

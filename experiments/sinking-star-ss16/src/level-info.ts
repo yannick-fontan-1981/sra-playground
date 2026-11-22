@@ -54,7 +54,7 @@ export const LEVEL_INFO=[
     "label": "Adaptation de Heroes and Light · énigme 4 · remplacement des gardiens et presses",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4",
     "puzzle": 4,
-    "objective": "Remplacer un gardien vivant par une caisse pendant une poussée latérale, puis maintenir deux commandes lointaines sans immobiliser un héros."
+    "objective": "Préparer la charge de relève, extraire une réserve sous clef, convertir deux charges en pont permanent et réutiliser la charge de relève ainsi que la clef comme lests finaux."
   },
   {
     "piston": true,

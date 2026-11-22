@@ -4,24 +4,24 @@
     "title": "La relève du gardien",
     "rows": [
       "####################",
-      "#......####....o...#",
-      "#......####....T...#",
-      "#...M..####........#",
-      "#......~~~~........#",
-      "#......####........#",
-      "####~######........#",
-      "####~########.######",
-      "#......###om.m######",
-      "#......######.######",
-      "#......####........#",
-      "#......####........#",
-      "#......####........#",
-      "#......####........#",
-      "#..Woo.####........#",
-      "#......####........#",
-      "#......####.g..g.g.#",
-      "###########........#",
-      "####################",
+      "#....o...###..o.o..#",
+      "#....T...###.......#",
+      "#.M.........#......#",
+      "#......#.m.m.......#",
+      "#.......o.##.......#",
+      "#.......W.##########",
+      "#.........##########",
+      "#.........##########",
+      "#.........##########",
+      "#.........#........#",
+      "#.........#........#",
+      "#........~~........#",
+      "#.........#........#",
+      "#........##........#",
+      "#........##........#",
+      "#........####.######",
+      "#############.######",
+      "############..g.g.g#",
       "####################"
     ],
     "circuits": [
@@ -29,7 +29,7 @@
         "id": "impulsion",
         "buttons": [
           {
-            "x": 4,
+            "x": 2,
             "y": 3
           }
         ],
@@ -39,22 +39,32 @@
         "id": "passerelles",
         "buttons": [
           {
-            "x": 11,
-            "y": 8
+            "x": 9,
+            "y": 4
           }
         ],
         "color": 10
       },
       {
+        "id": "reserve",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 4
+          }
+        ],
+        "color": 14
+      },
+      {
         "id": "deux-poids",
         "buttons": [
           {
-            "x": 6,
+            "x": 5,
             "y": 14
           },
           {
             "x": 15,
-            "y": 4
+            "y": 12
           }
         ],
         "color": 15
@@ -63,8 +73,8 @@
     "gates": [
       {
         "at": {
-          "x": 10,
-          "y": 8
+          "x": 8,
+          "y": 4
         },
         "circuit": "impulsion",
         "direction": "E",
@@ -72,8 +82,26 @@
       },
       {
         "at": {
+          "x": 12,
+          "y": 4
+        },
+        "circuit": "reserve",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
           "x": 13,
-          "y": 9
+          "y": 16
+        },
+        "circuit": "passerelles",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 17
         },
         "circuit": "deux-poids",
         "direction": "N",
@@ -83,24 +111,8 @@
     "platforms": [
       {
         "at": {
-          "x": 7,
-          "y": 4
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 8,
-          "y": 4
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
           "x": 9,
-          "y": 4
+          "y": 12
         },
         "circuit": "passerelles",
         "activeWhen": "pressed"
@@ -108,48 +120,26 @@
       {
         "at": {
           "x": 10,
-          "y": 4
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 4,
-          "y": 6
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 4,
-          "y": 7
+          "y": 12
         },
         "circuit": "passerelles",
         "activeWhen": "pressed"
       }
     ]
   },
-  "commands": "LCRCDDDRCDRRRRRRRRDDRRDDDDDDDDDDLCUUUUUUUUUURRRRRRRDDRRDDDDDDDDDDRRCDLLLDDDDDDDDDRRRRD",
+  "commands": "CCDDDRCCULCCLCCDRRRUDDLULLDRRRUUURRRRUURDDDRUUURDDDRLLLLLULLLDLCCLUURRRDRRRDRRRRRULLLLLLCRDDDDDDLCCULLDDDDDDDDUUUUUUUURRDLCUUUUUURDDDDDDLCCLDDDDDDDULLDDRRUUUUUUULLDDDDDDCCDDDDDDDDDRRRRRRRRRRRRRUCCUUUUUULLLDDDDDDDDDDRCDDDDLDDDRRRRRCDRRRRDDDRRDDDRRRCUUURRRRRDDDRRDDDR",
   "actions": [
-    {
-      "id": 3
-    },
     {
       "id": 6,
       "data": {
-        "x": 12,
-        "y": 45
+        "x": 27,
+        "y": 21
       }
     },
     {
-      "id": 4
-    },
-    {
       "id": 6,
       "data": {
-        "x": 48,
+        "x": 18,
         "y": 9
       }
     },
@@ -168,78 +158,19 @@
     {
       "id": 6,
       "data": {
-        "x": 12,
+        "x": 9,
         "y": 12
       }
     },
     {
-      "id": 2
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
     },
     {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
+      "id": 1
     },
     {
       "id": 3
@@ -247,113 +178,31 @@
     {
       "id": 6,
       "data": {
-        "x": 15,
-        "y": 45
+        "x": 21,
+        "y": 18
       }
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
     },
     {
       "id": 6,
       "data": {
-        "x": 51,
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
         "y": 18
       }
     },
@@ -361,6 +210,612 @@
       "id": 2
     },
     {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 15
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 15
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
       "id": 3
     },
     {
@@ -397,6 +852,68 @@
       "id": 2
     },
     {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
       "id": 4
     },
     {
@@ -410,6 +927,94 @@
     },
     {
       "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
     }
   ],
   "source": {
@@ -418,228 +1023,195 @@
     "label": "Adaptation de Heroes and Light · énigme 4 · remplacement des gardiens et presses",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4",
     "puzzle": 4,
-    "objective": "Remplacer un gardien vivant par une caisse pendant une poussée latérale, puis maintenir deux commandes lointaines sans immobiliser un héros."
+    "objective": "Préparer la charge de relève, extraire une réserve sous clef, convertir deux charges en pont permanent et réutiliser la charge de relève ainsi que la clef comme lests finaux."
   },
   "metrics": {
-    "actions": 86,
-    "selections": 5,
-    "merchantPushes": 0,
-    "warriorPushes": 1,
-    "thiefPulls": 3,
+    "actions": 265,
+    "selections": 23,
+    "merchantPushes": 8,
+    "warriorPushes": 19,
+    "thiefPulls": 35,
     "partnerMoves": 0,
-    "chainPushes": 1,
-    "stoneMoves": 6,
+    "chainPushes": 5,
+    "stoneMoves": 68,
     "mirrorMoves": 0,
     "reflections": 0,
     "heroReflections": 0,
     "pistonPushes": 1,
-    "platformsCreated": 0,
+    "platformsCreated": 2,
     "monstersRemoved": 2,
     "blocked": 0,
     "deaths": 0
   },
   "stages": [
     {
-      "label": "Le Marchand libère la commande : la presse remplace le monstre par la caisse, sans interrompre les passerelles, puis les deux monstres s’éliminent.",
-      "turn": 1,
+      "label": "Le Voleur extrait la clef contre le mur nord et la laisse sur la commande verte : la réserve reste ouverte sans retenir un héros.",
+      "turn": 6,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 3,
+            "x": 2,
             "y": 3
           }
         },
         {
           "kind": "warrior",
           "at": {
-            "x": 3,
-            "y": 14
+            "x": 8,
+            "y": 6
           }
         },
         {
           "kind": "thief",
           "at": {
-            "x": 15,
-            "y": 2
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 15,
-          "y": 1
-        },
-        {
-          "x": 11,
-          "y": 8
-        },
-        {
-          "x": 4,
-          "y": 14
-        },
-        {
-          "x": 5,
-          "y": 14
-        }
-      ],
-      "supports": [],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {
-        "impulsion": false,
-        "passerelles": true,
-        "deux-poids": false
-      }
-    },
-    {
-      "label": "Le Guerrier déplace la file de deux caisses et cale la première charge contre le mur sur le bouton violet.",
-      "turn": 3,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 3,
-            "y": 3
-          }
-        },
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 4,
-            "y": 14
-          }
-        },
-        {
-          "kind": "thief",
-          "at": {
-            "x": 15,
-            "y": 2
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 15,
-          "y": 1
-        },
-        {
-          "x": 11,
-          "y": 8
-        },
-        {
-          "x": 5,
-          "y": 14
-        },
-        {
-          "x": 6,
-          "y": 14
-        }
-      ],
-      "supports": [],
-      "mirrors": [],
-      "monsters": [],
-      "circuits": {
-        "impulsion": false,
-        "passerelles": true,
-        "deux-poids": false
-      }
-    },
-    {
-      "label": "Le Voleur extrait la caisse du mur nord puis la laisse sur le second bouton : personne ne doit rester gardien.",
-      "turn": 8,
-      "heroes": [
-        {
-          "kind": "merchant",
-          "at": {
-            "x": 3,
-            "y": 3
-          }
-        },
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 4,
-            "y": 14
-          }
-        },
-        {
-          "kind": "thief",
-          "at": {
-            "x": 16,
+            "x": 6,
             "y": 5
           }
         }
       ],
       "stones": [
         {
-          "x": 15,
+          "x": 5,
           "y": 4
         },
         {
-          "x": 11,
-          "y": 8
+          "x": 14,
+          "y": 1
         },
         {
-          "x": 5,
-          "y": 14
+          "x": 16,
+          "y": 1
         },
         {
-          "x": 6,
-          "y": 14
+          "x": 8,
+          "y": 5
         }
       ],
       "supports": [],
       "mirrors": [],
-      "monsters": [],
+      "monsters": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 4
+        }
+      ],
       "circuits": {
-        "impulsion": false,
+        "impulsion": true,
         "passerelles": true,
-        "deux-poids": true
+        "reserve": true,
+        "deux-poids": false
       }
     },
     {
-      "label": "Le trio rejoint les trois sorties derrière le passage jadis gardé et la porte à deux poids.",
-      "turn": 86,
+      "label": "Le Guerrier charge la presse par le sud. Le mur à l’ouest interdit de remplacer cette impulsion par une simple poussée horizontale de cette charge.",
+      "turn": 10,
       "heroes": [
         {
           "kind": "merchant",
           "at": {
-            "x": 12,
-            "y": 16
+            "x": 2,
+            "y": 3
           }
         },
         {
           "kind": "warrior",
           "at": {
-            "x": 15,
-            "y": 16
+            "x": 7,
+            "y": 5
           }
         },
         {
           "kind": "thief",
           "at": {
-            "x": 17,
-            "y": 16
+            "x": 6,
+            "y": 5
           }
         }
       ],
       "stones": [
         {
-          "x": 15,
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 16,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 4
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 9,
           "y": 4
         },
         {
           "x": 11,
-          "y": 8
+          "y": 4
+        }
+      ],
+      "circuits": {
+        "impulsion": true,
+        "passerelles": true,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Marchand libère la commande orange : la charge remplace le gardien et la translation rapproche les deux monstres, qui s’éliminent.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
         },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
         {
           "x": 5,
-          "y": 14
+          "y": 4
         },
         {
-          "x": 6,
-          "y": 14
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 16,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 4
         }
       ],
       "supports": [],
@@ -648,6 +1220,553 @@
       "circuits": {
         "impulsion": false,
         "passerelles": true,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Voleur récupère la charge de relève et la gare dans l’atelier : le corridor se libère et les plateformes se retirent. Cette caisse sera le lest distant.",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 16,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Deux charges coincées contre le mur sont extraites, alignées dans la réserve, puis le Voleur regagne le côté de réception. La clef doit encore rester en place.",
+      "turn": 63,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Guerrier rassemble les deux charges en file et les livre au coude gardé : il reste à changer leur axe, une charge après l’autre.",
+      "turn": 88,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": true,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Voleur tire la première charge jusqu’au bord de l’eau puis la lâche latéralement : il ne peut pas poursuivre sa traction sur l’eau sans appui.",
+      "turn": 97,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Guerrier reprend la charge depuis sa face nord et la transforme en premier appui permanent.",
+      "turn": 110,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "La seconde charge passe par le même coude, reste mobile sur le premier appui, puis est poussée de côté dans la seconde case d’eau. Le pont permanent est complet.",
+      "turn": 154,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "La charge de relève, conservée mobile depuis le combat, est descendue au niveau du pont.",
+      "turn": 169,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Marchand transporte la charge de relève sur les deux appuis puis la laisse sur le lest violet de la rive opposée.",
+      "turn": 194,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 15,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "La réserve vidée, le Voleur récupère enfin sa clef et la transforme en second lest violet. La réserve se referme ; le sas final exige aussi le retrait des plateformes.",
+      "turn": 216,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 14
+        },
+        {
+          "x": 15,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": false,
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Les trois héros traversent le pont permanent et le sas : deux poids restent à distance et l’ancien poste du gardien demeure libéré.",
+      "turn": 265,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 18,
+            "y": 18
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 16,
+            "y": 18
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 14
+        },
+        {
+          "x": 15,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": false,
+        "reserve": false,
         "deux-poids": true
       }
     }
@@ -659,10 +1778,12 @@
       "Des poids durables doivent prendre le relais des héros avant le départ collectif."
     ],
     "changed": [
-      "La presse pousse une caisse et un monstre en chaîne ; le second monstre permet leur élimination simultanée.",
-      "Le poids remplacé commande six plateformes entre les trois secteurs ; deux caisses sèches sont nécessaires à la porte finale.",
-      "Les dragons, pouvoirs lumineux et carte exacte du guide sont remplacés par le trio SS16, des plateformes et une porte-presse à centre distinct du bouton."
+      "La charge de relève n’est plus préchargée : elle rejoint la presse par le sud, avant le combat simultané des deux monstres.",
+      "Dans le parcours de référence, les quatre caisses finissent en deux appuis permanents et deux lests distants. La charge de relève et la clef de réserve sont récupérées après leur premier usage.",
+      "La réserve livre deux caisses extraites par le Voleur, regroupées par le Guerrier, puis transférées perpendiculairement au coude de réception.",
+      "Le sas final combine deux lests et la libération de l’ancien poste du gardien : les plateformes temporaires doivent être retirées.",
+      "Les dragons, pouvoirs lumineux et carte exacte du guide sont remplacés par le trio SS16, des plateformes et des portes-presses distinctes de leurs boutons."
     ],
-    "sourceReading": "Composition originale à partir du principe de relève des boutons de Light 4. Le monstre éliminé attaque encore lors de sa vague de combat ; la commande distante préserve les trois héros."
+    "sourceReading": "Composition originale à partir du principe de relève des boutons de Light 4. La révision renforce les dépendances entre clef, réserve, pont et lests ; elle ne revendique ni unicité de route ni nécessité globale d’un ordre entièrement figé."
   }
 }

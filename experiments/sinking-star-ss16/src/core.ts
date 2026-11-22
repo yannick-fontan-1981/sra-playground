@@ -138,7 +138,7 @@ interface ReflectionAttempt {readonly plan:ReflectionPlan|null;readonly blockedM
 function reflectionAttempt(w:World,s:State):ReflectionAttempt {
   const refusal=(indices:readonly number[]=[]):ReflectionAttempt=>({plan:null,blockedMirrorIndices:[...new Set(indices)].sort((a,b)=>a-b)});
   if(s.complete||s.dead)return refusal();
-  const moves:Motion[]=[],paths:Point[][]=[],mirrorIndices:number[]=[],owners:number[][]=[];
+  const moves:Motion[]=[],paths:Point[][]=[],pathOwners:number[]=[],mirrorIndices:number[]=[],owners:number[][]=[],blockedMirrors:number[]=[];
   for(let mi=0;mi<s.mirrors.length;mi++){
     const mirror=s.mirrors[mi]!,arms=mirrorArms[mirror.facing];
     const candidates:{actor:Motion['actor'];from:Point;toDir:Direction;distance:number;path:Point[]}[]=[];
@@ -156,18 +156,27 @@ function reflectionAttempt(w:World,s:State):ReflectionAttempt {
     const nearest=Math.min(...candidates.map(c=>c.distance));
     for(const {actor,from,toDir,distance,path} of candidates){
       if(distance!==nearest)continue;
-      let to=mirror.at;const destinationPath:Point[]=[];
+      let to=mirror.at,obstructed=false;const destinationPath:Point[]=[];
       for(let d=0;d<distance;d++){
         to=offset(to,toDir);
-        if(rayBlocked(w,s,to)){const obstruction=s.mirrors.findIndex(m=>equal(m.at,to));return refusal(obstruction<0?[]:[obstruction]);}
+        if(rayBlocked(w,s,to)){
+          const obstruction=s.mirrors.findIndex(m=>equal(m.at,to));
+          // A wall or closed door/press blocks the projecting mirror. A second
+          // mirror retains the established warning on its obstructing back.
+          blockedMirrors.push(obstruction<0?mi:obstruction);obstructed=true;break;
+        }
         destinationPath.push(to);
       }
+      if(obstructed)continue;
       const previousIndex=moves.findIndex(m=>m.actor===actor&&equal(m.from,from)),previous=moves[previousIndex];
-      if(previous&&!equal(previous.to,to))return refusal([...owners[previousIndex]!,mi]);
+      if(previous&&!equal(previous.to,to)){blockedMirrors.push(...owners[previousIndex]!,mi);continue;}
       if(!previous){moves.push({actor,from,to});owners.push([mi]);}else owners[previousIndex]!.push(mi);
-      paths.push([...path].reverse().concat(destinationPath));if(!mirrorIndices.includes(mi))mirrorIndices.push(mi);
+      paths.push([...path].reverse().concat(destinationPath));pathOwners.push(mi);if(!mirrorIndices.includes(mi))mirrorIndices.push(mi);
     }
   }
+  // Diagnose every independently blocked ray before refusing the global action.
+  // The valid transfers collected above are never applied after any refusal.
+  if(blockedMirrors.length)return refusal(blockedMirrors);
   if(!moves.length){
     // An intervening mirror can hide the only source. Diagnose it only after
     // the real planner found no transfer; it must never veto a valid nearer one.
@@ -191,10 +200,10 @@ function reflectionAttempt(w:World,s:State):ReflectionAttempt {
   const destinations=new Map<string,number>();
   for(const [index,move] of moves.entries()){
     const other=destinations.get(keyOf(move.to));if(other!==undefined)return refusal([...owners[other]!,...owners[index]!]);destinations.set(keyOf(move.to),index);
-    const occupant=actorAt(s,move.to);if(occupant&&!moves.some(m=>m.actor===occupant&&equal(m.from,move.to)))return refusal();
+    const occupant=actorAt(s,move.to);if(occupant&&!moves.some(m=>m.actor===occupant&&equal(m.from,move.to)))return refusal(owners[index]);
   }
-  for(const path of paths)for(const p of path){
-    const occupant=actorAt(s,p);if(occupant&&occupant!=='mirror'&&!moves.some(m=>m.actor===occupant&&equal(m.from,p)))return refusal();
+  for(const [index,path] of paths.entries())for(const p of path){
+    const occupant=actorAt(s,p);if(occupant&&occupant!=='mirror'&&!moves.some(m=>m.actor===occupant&&equal(m.from,p)))return refusal([pathOwners[index]!]);
   }
   return {plan:{moves,paths,mirrorIndices},blockedMirrorIndices:[]};
 }
@@ -290,9 +299,10 @@ export function stepDetailed(w:World,s:State,actionId:number,data?:Point):Detail
   if(actionId===6){const p=pixelToCell(data!.x,data!.y),active=p?s.heroes.findIndex(h=>!h.dead&&equal(h.at,p)):-1;return {state:active<0||active===s.active?s:{...s,active,failed:false},phases:[]};}
   const hero=s.heroes[s.active]!,direction=actionId===5?hero.facing:directionIds[actionId]!;
   const faced:State={...s,heroes:s.heroes.map((h,i)=>i===s.active?{...h,facing:direction}:h),failed:false};
-  const refusal=():DetailedStep=>({state:{...faced,failed:true},phases:[]});
+  let reflectingMirrors:readonly number[]=[];
+  const refusal=():DetailedStep=>({state:{...faced,failed:true},phases:[],...(reflectingMirrors.length?{blockedMirrorIndices:reflectingMirrors}:{})});
   let next:State,first:MotionPhase;
-  if(actionId===5){const {plan,blockedMirrorIndices}=reflectionAttempt(w,s);if(!plan)return {...refusal(),...(blockedMirrorIndices.length?{blockedMirrorIndices}:{})};next=applyMotions(w,faced,plan.moves);first={kind:'reflect',before:s,after:next,moves:plan.moves,paths:plan.paths};}
+  if(actionId===5){const {plan,blockedMirrorIndices}=reflectionAttempt(w,s);if(!plan)return {...refusal(),...(blockedMirrorIndices.length?{blockedMirrorIndices}:{})};reflectingMirrors=plan.mirrorIndices;next=applyMotions(w,faced,plan.moves);first={kind:'reflect',before:s,after:next,moves:plan.moves,paths:plan.paths};}
   else {const result=moveStep(w,faced,direction);if(!result)return refusal();next=result.state;first={kind:result.moves.length>1?(hero.kind==='thief'?'pull':'push'):'walk',before:s,after:next,moves:result.moves};}
   if(!safeDoors(w,next))return refusal();
   const phases:MotionPhase[]=[first];

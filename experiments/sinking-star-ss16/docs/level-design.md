@@ -157,7 +157,7 @@ Parcours de référence : 64 entrées, dont 11 sélections ; 0 refus et 0 perte.
 
 ## 5. La relève du gardien
 
-Remplacer un gardien vivant par une caisse pendant une poussée latérale, puis maintenir deux commandes lointaines sans immobiliser un héros.
+Préparer la charge de relève, extraire une réserve sous clef, convertir deux charges en pont permanent et réutiliser la charge de relève ainsi que la clef comme lests finaux.
 
 Référence : [Adaptation de Heroes and Light · énigme 4 · remplacement des gardiens et presses](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4).
 
@@ -168,18 +168,29 @@ Référence : [Adaptation de Heroes and Light · énigme 4 · remplacement des g
 
 ### Construction SS16
 
-- La presse pousse une caisse et un monstre en chaîne ; le second monstre permet leur élimination simultanée.
-- Le poids remplacé commande six plateformes entre les trois secteurs ; deux caisses sèches sont nécessaires à la porte finale.
-- Les dragons, pouvoirs lumineux et carte exacte du guide sont remplacés par le trio SS16, des plateformes et une porte-presse à centre distinct du bouton.
+- La charge de relève n’est plus préchargée : elle rejoint la presse par le sud, avant le combat simultané des deux monstres.
+- Dans le parcours de référence, les quatre caisses finissent en deux appuis permanents et deux lests distants. La charge de relève et la clef de réserve sont récupérées après leur premier usage.
+- La réserve livre deux caisses extraites par le Voleur, regroupées par le Guerrier, puis transférées perpendiculairement au coude de réception.
+- Le sas final combine deux lests et la libération de l’ancien poste du gardien : les plateformes temporaires doivent être retirées.
+- Les dragons, pouvoirs lumineux et carte exacte du guide sont remplacés par le trio SS16, des plateformes et des portes-presses distinctes de leurs boutons.
 
 ### Parcours explicatif
 
-1. Le Marchand libère la commande : la presse remplace le monstre par la caisse, sans interrompre les passerelles, puis les deux monstres s’éliminent.
-2. Le Guerrier déplace la file de deux caisses et cale la première charge contre le mur sur le bouton violet.
-3. Le Voleur extrait la caisse du mur nord puis la laisse sur le second bouton : personne ne doit rester gardien.
-4. Le trio rejoint les trois sorties derrière le passage jadis gardé et la porte à deux poids.
+1. Le Voleur extrait la clef contre le mur nord et la laisse sur la commande verte : la réserve reste ouverte sans retenir un héros.
+2. Le Guerrier charge la presse par le sud. Le mur à l’ouest interdit de remplacer cette impulsion par une simple poussée horizontale de cette charge.
+3. Le Marchand libère la commande orange : la charge remplace le gardien et la translation rapproche les deux monstres, qui s’éliminent.
+4. Le Voleur récupère la charge de relève et la gare dans l’atelier : le corridor se libère et les plateformes se retirent. Cette caisse sera le lest distant.
+5. Deux charges coincées contre le mur sont extraites, alignées dans la réserve, puis le Voleur regagne le côté de réception. La clef doit encore rester en place.
+6. Le Guerrier rassemble les deux charges en file et les livre au coude gardé : il reste à changer leur axe, une charge après l’autre.
+7. Le Voleur tire la première charge jusqu’au bord de l’eau puis la lâche latéralement : il ne peut pas poursuivre sa traction sur l’eau sans appui.
+8. Le Guerrier reprend la charge depuis sa face nord et la transforme en premier appui permanent.
+9. La seconde charge passe par le même coude, reste mobile sur le premier appui, puis est poussée de côté dans la seconde case d’eau. Le pont permanent est complet.
+10. La charge de relève, conservée mobile depuis le combat, est descendue au niveau du pont.
+11. Le Marchand transporte la charge de relève sur les deux appuis puis la laisse sur le lest violet de la rive opposée.
+12. La réserve vidée, le Voleur récupère enfin sa clef et la transforme en second lest violet. La réserve se referme ; le sas final exige aussi le retrait des plateformes.
+13. Les trois héros traversent le pont permanent et le sas : deux poids restent à distance et l’ancien poste du gardien demeure libéré.
 
-Parcours de référence : 86 entrées, dont 5 sélections ; 0 refus et 0 perte. Ces comptes ne sont pas des minimums.
+Parcours de référence : 265 entrées, dont 23 sélections ; 0 refus et 0 perte. Ces comptes ne sont pas des minimums.
 
 ## 6. Le chantier avant la marée basse
 

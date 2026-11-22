@@ -319,24 +319,24 @@ export const SS16_LEVELS:readonly LevelSpec[]=[
     "title": "La relève du gardien",
     "rows": [
       "####################",
-      "#......####....o...#",
-      "#......####....T...#",
-      "#...M..####........#",
-      "#......~~~~........#",
-      "#......####........#",
-      "####~######........#",
-      "####~########.######",
-      "#......###om.m######",
-      "#......######.######",
-      "#......####........#",
-      "#......####........#",
-      "#......####........#",
-      "#......####........#",
-      "#..Woo.####........#",
-      "#......####........#",
-      "#......####.g..g.g.#",
-      "###########........#",
-      "####################",
+      "#....o...###..o.o..#",
+      "#....T...###.......#",
+      "#.M.........#......#",
+      "#......#.m.m.......#",
+      "#.......o.##.......#",
+      "#.......W.##########",
+      "#.........##########",
+      "#.........##########",
+      "#.........##########",
+      "#.........#........#",
+      "#.........#........#",
+      "#........~~........#",
+      "#.........#........#",
+      "#........##........#",
+      "#........##........#",
+      "#........####.######",
+      "#############.######",
+      "############..g.g.g#",
       "####################"
     ],
     "circuits": [
@@ -344,7 +344,7 @@ export const SS16_LEVELS:readonly LevelSpec[]=[
         "id": "impulsion",
         "buttons": [
           {
-            "x": 4,
+            "x": 2,
             "y": 3
           }
         ],
@@ -354,22 +354,32 @@ export const SS16_LEVELS:readonly LevelSpec[]=[
         "id": "passerelles",
         "buttons": [
           {
-            "x": 11,
-            "y": 8
+            "x": 9,
+            "y": 4
           }
         ],
         "color": 10
       },
       {
+        "id": "reserve",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 4
+          }
+        ],
+        "color": 14
+      },
+      {
         "id": "deux-poids",
         "buttons": [
           {
-            "x": 6,
+            "x": 5,
             "y": 14
           },
           {
             "x": 15,
-            "y": 4
+            "y": 12
           }
         ],
         "color": 15
@@ -378,8 +388,8 @@ export const SS16_LEVELS:readonly LevelSpec[]=[
     "gates": [
       {
         "at": {
-          "x": 10,
-          "y": 8
+          "x": 8,
+          "y": 4
         },
         "circuit": "impulsion",
         "direction": "E",
@@ -387,8 +397,26 @@ export const SS16_LEVELS:readonly LevelSpec[]=[
       },
       {
         "at": {
+          "x": 12,
+          "y": 4
+        },
+        "circuit": "reserve",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
           "x": 13,
-          "y": 9
+          "y": 16
+        },
+        "circuit": "passerelles",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 17
         },
         "circuit": "deux-poids",
         "direction": "N",
@@ -398,24 +426,8 @@ export const SS16_LEVELS:readonly LevelSpec[]=[
     "platforms": [
       {
         "at": {
-          "x": 7,
-          "y": 4
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 8,
-          "y": 4
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
           "x": 9,
-          "y": 4
+          "y": 12
         },
         "circuit": "passerelles",
         "activeWhen": "pressed"
@@ -423,23 +435,7 @@ export const SS16_LEVELS:readonly LevelSpec[]=[
       {
         "at": {
           "x": 10,
-          "y": 4
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 4,
-          "y": 6
-        },
-        "circuit": "passerelles",
-        "activeWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 4,
-          "y": 7
+          "y": 12
         },
         "circuit": "passerelles",
         "activeWhen": "pressed"

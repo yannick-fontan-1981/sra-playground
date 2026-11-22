@@ -138,9 +138,15 @@ const checkDeviceGlyphs=async()=>{
 };
 const checkMirrorInterference=async()=>{
  const result=[];
- const cases=[{name:'blocking mirror alone flashes',M:[6,4],mirrors:[[6,6,'NE'],[7,6,'SE'],[16,1,'NE']],red:[1]},{name:'incompatible mirror destinations both flash',M:[6,4],mirrors:[[6,6,'NE'],[4,4,'SE'],[16,1,'NE']],red:[0,1]}];
+ const cases=[
+  {name:'blocking mirror alone flashes',M:[6,4],mirrors:[[6,6,'NE'],[7,6,'SE'],[16,1,'NE']],red:[1]},
+  {name:'incompatible mirror destinations both flash',M:[6,4],mirrors:[[6,6,'NE'],[4,4,'SE'],[16,1,'NE']],red:[0,1]},
+  {name:'wall-blocked reflection flashes its source mirror',M:[6,4],placements:[[8,6,'#']],mirrors:[[6,6,'NE'],[16,1,'NE']],red:[0]},
+  {name:'closed-press reflection flashes its source mirror',M:[6,4],options:{circuits:[{id:'closed',buttons:[{x:14,y:14}],color:15}],gates:[{at:{x:8,y:6},circuit:'closed',direction:'E',closedWhen:'released'}]},mirrors:[[6,6,'NE'],[16,1,'NE']],red:[0]},
+  {name:'independent blocked mirrors flash together without a partial valid transfer',M:[4,3],placements:[[12,3,'W'],[8,12,'T'],[6,5,'#'],[14,5,'#']],mirrors:[[4,5,'NE'],[12,5,'NE'],[8,14,'NE']],red:[0,1]},
+ ];
  for(const f of cases){
-  const spec=makeArena(f.name,[[...f.M,'M']],{mirrors:f.mirrors.map(([x,y,facing])=>({at:{x,y},facing}))}),h=createHarness(spec);
+  const spec=makeArena(f.name,[[...f.M,'M'],...(f.placements??[])],{...f.options,mirrors:f.mirrors.map(([x,y,facing])=>({at:{x,y},facing}))}),h=createHarness(spec);
   try{
    const before=h.ref.observe(),start=h.captures.length,wait=h.waits.length;h.key(' ');const next=h.ref.action(5),count=h.$('moves').textContent;
    assert.equal(h.board.dataset.busy,'true');assert.equal(next.frames.length,4);
@@ -152,6 +158,23 @@ const checkMirrorInterference=async()=>{
    result.push({case:f.name,redMirrorIndices:f.red,frames:4,exactPixelsAndTiming:true,unrelatedMirrorsUnchanged:true,controlsLocked:true,noUndoEntry:true});
   }finally{await h.close();}
  }
+ const spec=SS16_LEVELS[7],h=createHarness();
+ try{
+  await h.choose(8);const before=h.ref.observe(),warning=await h.action(5);
+  assert.equal(h.board.dataset.level,'8');assert.deepEqual(warning.frameDurationsMs,[110,70,110,0]);assert.equal(warning.canUndo,false);assert.deepEqual(warning.frame,before.frame);
+  for(const [i,{at:{x,y}}] of spec.mirrors.entries()){
+   const normal=tile(before.frame,spec,x,y),red=normal.map(row=>row.map(c=>c===5?8:c));
+   assert.deepEqual(warning.frames.map(frame=>tile(frame,spec,x,y)),i===0?[red,normal,red,normal]:[normal,normal,normal,normal]);
+  }
+  assert.deepEqual(await h.action(5),warning);await h.reset('reset');h.equal(before);assert.deepEqual(h.errors,[]);
+  result.push({case:'actual level 8 initial reflection blocked by the west wall',level:8,redMirrorIndices:[0],frames:4,exactPixelsAndTiming:true,unrelatedMirrorsUnchanged:true,noUndoEntry:true,resetClearsWarning:true});
+ }finally{await h.close();}
+ const reduced=createHarness(undefined,{reducedMotion:true});
+ try{
+  await reduced.choose(8);const before=reduced.ref.observe(),start=reduced.captures.length;reduced.key('x');const warning=reduced.ref.action(5);reduced.equal(warning);
+  assert.equal(warning.frames.length,4);assert.deepEqual(reduced.captures.slice(start,start+4),warning.frames.map(rgba));assert.equal(reduced.board.dataset.busy,'false');assert.equal(reduced.waits.length,0);assert.equal(reduced.timers.length,0);assert.deepEqual(warning.frame,before.frame);assert.deepEqual(reduced.errors,[]);
+  result.push({case:'actual level 8 warning respects reduced motion',level:8,frames:4,noTimerWaits:true,normalRestingFrame:true});
+ }finally{await reduced.close();}
  return result;
 };
 let h;

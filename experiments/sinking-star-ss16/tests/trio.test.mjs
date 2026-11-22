@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {compileLevel,initialState,stepWorld,stepDetailed,renderWorld,transitionFrames,TrioPuzzleSession,planReflection,cellToPixel,PALETTE,GRID,circuitPressed} from '../dist/core.js';
 import {decodeCommand,replay} from '../scripts/solver.mjs';
 import {Author} from '../reference/author/author.mjs';
+import {SS16_LEVELS} from '../dist/levels.js';
 
 const p=(x,y)=>({x,y}),eq=(a,b)=>a.x===b.x&&a.y===b.y;
 const role=(s,kind)=>s.heroes.find(h=>h.kind===kind);
@@ -176,6 +177,43 @@ test('walk and pull move one, two, then three pixels and finish on the exact ren
 });
 test('blocking mirror backs flash red twice without a world tick or new Undo entry',()=>{
  const f=fixture({M:[6,4],monsters:[[3,10]],mirrors:[[6,6,'NE'],[7,6,'SE']]}),s=new TrioPuzzleSession([f.spec]),initial=s.observe(),o=s.action(5),px=cellToPixel(p(7,6));assert.equal(o.state,'NOT_FINISHED');assert.equal(o.canUndo,false);assert.deepEqual(o.frameDurationsMs,[110,70,110,0]);assert.deepEqual(o.frames.map(frame=>frame[px.y][px.x]),[8,5,8,5]);assert.deepEqual(o.frames.map(frame=>frame[px.y+1][px.x+1]),[0,0,0,0]);assert.deepEqual(o.frame,initial.frame);assert.deepEqual(s.action(5),o);
+});
+test('walls, closed doors and closed presses warn on the projecting mirror without moving the world',()=>{
+ for(const obstacle of [
+  {walls:[[8,6]]},
+  {buttons:[[14,14]],doors:[[8,6]]},
+  {circuits:[{id:'closed',buttons:[p(14,14)],color:15}],gates:[{at:p(8,6),circuit:'closed',direction:'E',closedWhen:'released'}]},
+ ]){
+  const f=fixture({M:[6,4],mirrors:[[6,6,'NE'],[16,1,'NE']],...obstacle}),detail=stepDetailed(f.world,f.state,5);
+  assert.equal(planReflection(f.world,f.state),null);assert.deepEqual(detail.blockedMirrorIndices,[0]);assert.deepEqual(detail.phases,[]);assert.deepEqual(detail.state,{...f.state,failed:true});
+  const session=new TrioPuzzleSession([f.spec]),before=session.observe(),warning=session.action(5),at=cellToPixel(p(6,6)),other=cellToPixel(p(16,1));
+  assert.deepEqual(warning.frameDurationsMs,[110,70,110,0]);assert.deepEqual(warning.frames.map(frame=>frame[at.y+2][at.x]),[8,5,8,5]);assert.deepEqual(warning.frames.map(frame=>frame[at.y+1][at.x+1]),[0,0,0,0]);assert.deepEqual(warning.frames.map(frame=>frame[other.y+2][other.x]),[5,5,5,5]);
+  assert.deepEqual(warning.frame,before.frame);assert.equal(warning.canUndo,false);assert.deepEqual(session.action(5),warning);assert.deepEqual(session.undo(),before);
+ }
+});
+test('every independently blocked mirror flashes while a global refusal applies no partial transfer',()=>{
+ const f=fixture({M:[4,3],W:[12,3],T:[8,12],walls:[[6,5],[14,5]],mirrors:[[4,5,'NE'],[12,5,'NE'],[8,14,'NE']]}),detail=stepDetailed(f.world,f.state,5);
+ assert.deepEqual(detail.blockedMirrorIndices,[0,1]);assert.deepEqual(detail.state,{...f.state,failed:true});assert.deepEqual(detail.phases,[]);
+ const before=renderWorld(f.world,f.state),session=new TrioPuzzleSession([f.spec]),warning=session.action(5);
+ for(const [i,mirror] of f.state.mirrors.entries()){
+  const at=cellToPixel(mirror.at);assert.deepEqual(warning.frames.map(frame=>frame[at.y+2][at.x]),i<2?[8,5,8,5]:[5,5,5,5]);
+ }
+ assert.deepEqual(warning.frame,before);assert.equal(warning.canUndo,false);
+});
+test('reflection refused by a subsequent door closure warns on its active mirror and leaves the occupied door safe',()=>{
+ const f=fixture({M:[5,4],stones:[[6,4]],circuits:[{id:'door',buttons:[p(6,4)]}],doors:[[5,5]],mirrors:[[6,6,'NE']]}),occupied=stepWorld(f.world,f.state,2),plan=planReflection(f.world,occupied),detail=stepDetailed(f.world,occupied,5);
+ assert.equal(plan.moves.length,1);assert.deepEqual(detail.blockedMirrorIndices,[0]);assert.deepEqual(detail.state,{...occupied,failed:true});assert.deepEqual(detail.phases,[]);
+ const session=new TrioPuzzleSession([f.spec]),initial=session.observe(),before=session.action(2),warning=session.action(5),at=cellToPixel(p(6,6));
+ assert.deepEqual(warning.frames.map(frame=>frame[at.y+2][at.x]),[8,5,8,5]);assert.deepEqual(warning.frame,before.frame);assert.equal(warning.state,'NOT_FINISHED');assert.equal(warning.canUndo,true);assert.deepEqual(session.undo().frame,initial.frame);
+});
+test('the real level 8 blocked initial reflection flashes its first mirror and preserves the guardian and circuits',()=>{
+ const spec=SS16_LEVELS[7],world=compileLevel(spec),state=initialState(world),detail=stepDetailed(world,state,5),session=new TrioPuzzleSession(SS16_LEVELS),before=session.selectLevel(8),warning=session.action(5);
+ assert.equal(spec.id,'ss16-08');assert.deepEqual(detail.blockedMirrorIndices,[0]);assert.deepEqual(detail.state,{...state,failed:true});assert.deepEqual(detail.phases,[]);assert.equal(planReflection(world,state),null);
+ for(const [i,mirror] of state.mirrors.entries()){
+  const at=cellToPixel(mirror.at),tile=frame=>frame.slice(at.y,at.y+3).map(row=>row.slice(at.x,at.x+3)),normal=tile(before.frame),red=normal.map(row=>row.map(color=>color===5?8:color));
+  assert.deepEqual(warning.frames.map(tile),i===0?[red,normal,red,normal]:[normal,normal,normal,normal]);
+ }
+ assert.deepEqual(warning.frameDurationsMs,[110,70,110,0]);assert.deepEqual(warning.frame,before.frame);assert.equal(warning.canUndo,false);assert.deepEqual(session.action(5),warning);assert.deepEqual(session.reset().frame,before.frame);
 });
 test('all three destinations must be occupied at the same time before level completion',()=>{
  const f=goalFixture('goals'),s=new TrioPuzzleSession([f.spec]);s.action(4);s.nextHero();s.action(4);assert.equal(s.observe().state,'NOT_FINISHED');assert.equal(s.observe().levelsCompleted,0);s.nextHero();assert.equal(s.action(4).state,'WIN');assert.equal(s.observe().levelsCompleted,1);assert.equal(s.undo().state,'NOT_FINISHED');assert.equal(s.observe().levelsCompleted,0);

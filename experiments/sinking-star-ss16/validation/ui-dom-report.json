@@ -1,6 +1,6 @@
 {
   "success": true,
-  "htmlSha256": "ba288a63c7c0ac0b92613e6a95b23395bbcb0c2f255b6e1cd12260dddc3b6c39",
+  "htmlSha256": "fefe441bd01602e4b9e3069a17b41687350cba3d68fe86b537ef3a62361d8c09",
   "scope": "focused-ui-and-full-campaign",
   "tutorialLevel": 1,
   "pedagogicalFixtureLevel": 1,
@@ -216,6 +216,59 @@
       "unrelatedMirrorsUnchanged": true,
       "controlsLocked": true,
       "noUndoEntry": true
+    },
+    {
+      "case": "wall-blocked reflection flashes its source mirror",
+      "redMirrorIndices": [
+        0
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "closed-press reflection flashes its source mirror",
+      "redMirrorIndices": [
+        0
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "independent blocked mirrors flash together without a partial valid transfer",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "actual level 8 initial reflection blocked by the west wall",
+      "level": 8,
+      "redMirrorIndices": [
+        0
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "noUndoEntry": true,
+      "resetClearsWarning": true
+    },
+    {
+      "case": "actual level 8 warning respects reduced motion",
+      "level": 8,
+      "frames": 4,
+      "noTimerWaits": true,
+      "normalRestingFrame": true
     }
   ],
   "campaignCoverage": [
@@ -250,7 +303,7 @@
     {
       "level": 5,
       "title": "La relève du gardien",
-      "actions": 86,
+      "actions": 265,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },

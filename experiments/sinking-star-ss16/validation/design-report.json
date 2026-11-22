@@ -1,13 +1,13 @@
 {
   "game": "SS16",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "success": true,
   "specHashes": {
     "1": "2c49c4c12091c0d1554dfd2648ceca47ec9db8bff9056cac68034937761ae03e",
     "2": "b1f06a0b9b6f44d54919f3905ea0ee755a08954ea116e4f74ab6c79343384407",
     "3": "4cf35d4e1f66d292c15e09106faefee4b4c650f9fb5665f5bf984374bb3edb94",
     "4": "473bfea0d7404347647624165ba7a0eb3e2c1b1d1725a17f3e19e11cc91e1018",
-    "5": "423d22b240dfd239d5c944ee71205adff408b8603e565e92e9c912c4a92598a1",
+    "5": "9b22d1407e991589ebd55eb0fcd3ba49adb8236cc501f1de2dc0ccd7a0c0a9d6",
     "6": "50429b2008c6cf5e6b5e843ded686500f3527d56a8a1cf3e9878d232093f728d",
     "7": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
     "8": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986"
@@ -44,9 +44,9 @@
     },
     {
       "level": 5,
-      "specSha256": "423d22b240dfd239d5c944ee71205adff408b8603e565e92e9c912c4a92598a1",
+      "specSha256": "9b22d1407e991589ebd55eb0fcd3ba49adb8236cc501f1de2dc0ccd7a0c0a9d6",
       "initialReachableGoals": 0,
-      "floorCellsReached": 143,
+      "floorCellsReached": 191,
       "purePresses": true
     },
     {
@@ -182,6 +182,56 @@
       }
     }
   ],
+  "revisedLevel5": {
+    "success": true,
+    "specSha256": "9b22d1407e991589ebd55eb0fcd3ba49adb8236cc501f1de2dc0ccd7a0c0a9d6",
+    "authorChecks": 15,
+    "independentChecks": 8,
+    "historicalBypassesCorrected": 1,
+    "restrictedSearch": {
+      "status": "exhausted",
+      "states": 136,
+      "transitions": 544,
+      "goal": "Thief enters a reserve cell with x >= 12 and y <= 5",
+      "activeHero": "thief",
+      "fixedHeroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        }
+      ],
+      "fixedStones": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 16,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "fixedSupports": [],
+      "fixedMonsters": []
+    }
+  },
   "workshop": {
     "historicalWinningBypassesCorrected": 2,
     "restrictedSearches": 96,
@@ -191,9 +241,9 @@
   },
   "finalDesigner": {
     "success": true,
-    "checks": 20,
+    "checks": 40,
     "specHashes": {
-      "5": "423d22b240dfd239d5c944ee71205adff408b8603e565e92e9c912c4a92598a1",
+      "5": "9b22d1407e991589ebd55eb0fcd3ba49adb8236cc501f1de2dc0ccd7a0c0a9d6",
       "6": "50429b2008c6cf5e6b5e843ded686500f3527d56a8a1cf3e9878d232093f728d",
       "7": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
       "8": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986"

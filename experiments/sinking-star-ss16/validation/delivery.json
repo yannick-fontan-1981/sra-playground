@@ -1,10 +1,10 @@
 {
   "game": "SS16",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "buildPath": "dist/SS16-demo.html",
-  "deliveryFilename": "SS16-demo-v1.html",
-  "bytes": 123971,
-  "sha256": "ba288a63c7c0ac0b92613e6a95b23395bbcb0c2f255b6e1cd12260dddc3b6c39",
+  "deliveryFilename": "SS16-demo-v2.html",
+  "bytes": 124799,
+  "sha256": "fefe441bd01602e4b9e3069a17b41687350cba3d68fe86b537ef3a62361d8c09",
   "networkIndependent": true,
   "nativeSiteIntegrationIncluded": false,
   "nativeBrowserVisualReviewCompleted": false
