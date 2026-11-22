@@ -6,7 +6,7 @@ Intègre nativement **SS17 — La Forteresse Rose**, trio **Guerrier rouge 8 + V
 
 ## Source canonique
 
-Le laboratoire de référence est `experiments/sinking-star-ss17/`, version **0.1.0**. Prends la révision qualifiée courante de `main`, avec les cartes et les audits qualifiés ; ne récupère pas un ancien point de sauvegarde de la branche. Lis le README, `docs/specification.md`, `docs/level-design.md`, `docs/source-audit.md`, `docs/validation.md` et `docs/roadmap.md`.
+Le laboratoire de référence est `experiments/sinking-star-ss17/`, version **0.1.0**, qualifiée et intégrée par le commit `b456cce34adfddebff4f28bab6d79f4fbd487ca3`. Pars du `main` distant courant, vérifie qu’il contient cette révision et préserve ses évolutions ultérieures ; ne récupère pas un ancien point de sauvegarde de la branche. Lis le README, `docs/specification.md`, `docs/level-design.md`, `docs/source-audit.md`, `docs/validation.md` et `docs/roadmap.md`.
 
 Réutilise `src/core.ts`, les huit cartes de `src/levels.ts`, les crédits de `src/level-info.ts` et le tutoriel de `src/tutorial.ts`. Inspecte le raccordement natif des SS précédents, le catalogue, le dispatcher et Custom 4 pour adapter le branchement à la structure réelle du dépôt. Les outils de `reference/`, les témoins et le solveur sont réservés à l’auteur et aux tests.
 
@@ -23,6 +23,15 @@ SS17 conserve les corrections visuelles et les alertes rouges de SS16, mais remp
 7. Respecter les corrections visuelles : **bouton opaque gris avec plus rose et pixel de circuit au centre** ; **presse pure au centre noir fermé / gris ouvert**. Les presses des cartes ne sont pas aussi des boutons. Aucun pixel bleu parasite ne doit traverser leur fond. La diagonale blanche et le dos noir d’un miroir restent au-dessus des marques de bouton.
 8. Raccorder clavier, clic, boutons tactiles, **1 / 2 / 3 et Tab**, reflets, Annuler, Recommencer et Repartir. Garder le blocage des commandes pendant l’animation, l’invalidation des callbacks après interruption, la réduction des animations et les panneaux terminaux après la dernière image. Sur mobile, placer les commandes de rôle et de mouvement près du plateau.
 9. Conserver les **23 découvertes déduites uniquement des pixels publics**, les aides détaillées et les références principales et secondaires de chaque salle. Aucune coche ne participe à la victoire. Ne transmettre à SRA ni état privé, ni route, ni plan de réflexion, ni résultat du solveur ; ne créer aucun traitement spécifique qui résout SS17 à sa place.
+
+## Verrous des cartes finales
+
+Conserver et vérifier explicitement les deux corrections de conception suivantes :
+
+- **Niveau 6 :** porte `(18,14)`, circuit `retenue`, direction `S`, `closedWhen: 'pressed'`. La destination haute reste inaccessible tant que la commande hydraulique est maintenue. L’ancien parcours de 170 entrées conservant les plateformes actives doit toujours échouer ; le témoin qualifié de 170 entrées reste gagnant.
+- **Niveau 8 :** circuit cyan `prison-clef`, bouton `(17,15)`, porte `(14,18)`, direction `N`, `closedWhen: 'pressed'`. L’alcôve doit être libérée : retirer la clef puis laisser un héros à sa place ne suffit pas. L’ancien parcours de 156 entrées ignorant cette alcôve doit toujours échouer ; le témoin qualifié de 205 entrées reste gagnant.
+
+Ces conditions restent des circuits visibles de la carte. Préserver les variantes gagnantes archivées et la victoire fondée sur les trois destinations simultanées.
 
 ## Qualification
 
