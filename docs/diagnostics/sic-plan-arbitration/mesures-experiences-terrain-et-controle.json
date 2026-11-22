@@ -515,6 +515,1238 @@
       "tape": [
         "274d7d5d6ba57273dc6cf30858232f3ad422dbdbd7136a124b643def591855be"
       ]
+    },
+    "registration-source-GRAV-3-3-v141/GRAV": {
+      "game": "GRAV",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "69c21f1f7d2d1c65b6cedbb51e6bb63f802b3c93e32f81a7b560b5aa89d71af7"
+      ],
+      "motorBaselineTests": []
+    },
+    "positional-source-GRAV-3-3-v141/GRAV": {
+      "game": "GRAV",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "5a6526fa551b5ca26a3faf7aeae54bc2548dc1d233032c4ad8d9defbe516b4f5"
+      ],
+      "motorBaselineTests": [
+        {
+          "action": 2,
+          "command": 1,
+          "fromImage": "0558c76dbed93aa9",
+          "returnedImage": "d4234f6d0fdec929",
+          "reason": "previous_stride_leaves_peer_out_of_view",
+          "actor": "1dbcdaae2aa3a86685260e3fde8dfbcb93b63e27f99dcde46ac3e57b7d239cb6",
+          "delta": [
+            0,
+            -4
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 57,
+          "command": 2,
+          "fromImage": "082ed0c1cfbdcb65",
+          "returnedImage": "d54d5c7c942d2362",
+          "reason": "different_entry_surface",
+          "actor": "c1740bd6b3fb45160029885afa4cf10f7fa16167bb73f04ebd2db0020c50697e",
+          "delta": [
+            0,
+            8
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 100,
+          "command": 3,
+          "fromImage": "4007718d418bf42f",
+          "returnedImage": "89a60ac2b185f604",
+          "reason": "different_entry_surface",
+          "actor": "c1740bd6b3fb45160029885afa4cf10f7fa16167bb73f04ebd2db0020c50697e",
+          "delta": [
+            -4,
+            0
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 105,
+          "command": 1,
+          "fromImage": "88559eebda5b0220",
+          "returnedImage": "cd0b81003827daf8",
+          "reason": "different_entry_surface",
+          "actor": "3d16c313ed875e95e6671e4a33417b1070d72c70646674b8b6936e3707fe31f4",
+          "delta": [
+            0,
+            -4
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "different_displacement"
+        }
+      ]
+    },
+    "registration-source-FITE-3-3-v141/FITE": {
+      "game": "FITE",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "b366d11ab5d04bd530c75bfacbbd4ded5ad13e1589076e99230dcfc41536660a",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "9d80668ae763d3a8a4d7b57fd6d9baa7819622dd68f3b1b5b28cfd4fa1c78df6"
+      ],
+      "motorBaselineTests": []
+    },
+    "positional-source-FITE-3-3-v141/FITE": {
+      "game": "FITE",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "b366d11ab5d04bd530c75bfacbbd4ded5ad13e1589076e99230dcfc41536660a",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 73,
+          "won": true
+        }
+      ],
+      "tape": [
+        "8c3faa9d5691ea38278782576420492a39c1e83c4fab0efd8700ed711d6c09da"
+      ],
+      "motorBaselineTests": [
+        {
+          "action": 44,
+          "command": 4,
+          "fromImage": "285725296c6c7c40",
+          "returnedImage": "b366d11ab5d04bd5",
+          "reason": "different_entry_surface",
+          "actor": "f0108d2038d22bd6d31f2034b1a094f87c360543db65f4c59209cb7454cc60b5",
+          "delta": [
+            5,
+            0
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "different_displacement"
+        }
+      ]
+    },
+    "registration-source-PORT-2-2-v141/PORT": {
+      "game": "PORT",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "cdc82b6baa28c0a55fe3832c2c722d976293ba2a2ae2c47879214291c000dd22"
+      ],
+      "motorBaselineTests": []
+    },
+    "positional-source-PORT-2-2-v141/PORT": {
+      "game": "PORT",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 81,
+          "won": true
+        }
+      ],
+      "tape": [
+        "0774d72737052f173399f831d4f790d2841bd4cd11828cb74c6e6b5a8a88cb00"
+      ],
+      "motorBaselineTests": [
+        {
+          "action": 4,
+          "command": 2,
+          "fromImage": "d4c51e1b1047bbe4",
+          "returnedImage": "d4c51e1b1047bbe4",
+          "reason": "different_entry_surface",
+          "actor": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+          "delta": [
+            0,
+            4
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 12,
+          "command": 4,
+          "fromImage": "7a5ec53be4e86e07",
+          "returnedImage": "7a5ec53be4e86e07",
+          "reason": "different_entry_surface",
+          "actor": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+          "delta": [
+            4,
+            0
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 15,
+          "command": 3,
+          "fromImage": "d9470268b4c4f335",
+          "returnedImage": "d9470268b4c4f335",
+          "reason": "different_entry_surface",
+          "actor": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+          "delta": [
+            -4,
+            0
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 35,
+          "command": 4,
+          "fromImage": "521302c4c4408e01",
+          "returnedImage": "cbb6004b2ceab8b5",
+          "reason": "different_entry_surface",
+          "actor": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+          "delta": [
+            4,
+            0
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "different_displacement"
+        },
+        {
+          "action": 54,
+          "command": 1,
+          "fromImage": "c898fe9130321c30",
+          "returnedImage": "c898fe9130321c30",
+          "reason": "different_entry_surface",
+          "actor": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+          "delta": [
+            0,
+            -4
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 76,
+          "command": 2,
+          "fromImage": "46b1ca887cec1600",
+          "returnedImage": "0a7c34e6b8f6a560",
+          "reason": "different_entry_surface",
+          "actor": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+          "delta": [
+            0,
+            4
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "different_displacement"
+        }
+      ]
+    },
+    "registration-custom-SS08-2-2-v141/SS08": {
+      "game": "SS08",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 70,
+          "won": true
+        }
+      ],
+      "tape": [
+        "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5"
+      ],
+      "motorBaselineTests": []
+    },
+    "positional-custom-SS08-2-2-v141/SS08": {
+      "game": "SS08",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "405964ac6bcc028fc776e80b71d456bcdaa75d6bf7d2b17046255c3ce959e1c1",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 70,
+          "won": true
+        }
+      ],
+      "tape": [
+        "47ce315c20759572e9202019ab564a0674694cfa890bb3888fcf5f5fe0955f65"
+      ],
+      "motorBaselineTests": [
+        {
+          "action": 7,
+          "command": 1,
+          "fromImage": "aa9a0eed7c759e26",
+          "returnedImage": "f6a93c17e7db00c9",
+          "reason": "different_entry_surface",
+          "actor": "f565fabf0486696f618384b29e7cca3444f5a02b6043e63e990588ffe34e2ad3",
+          "delta": [
+            0,
+            3
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        },
+        {
+          "action": 28,
+          "command": 1,
+          "fromImage": "b2c41178303e302a",
+          "returnedImage": "b2c41178303e302a",
+          "reason": "different_entry_surface",
+          "actor": "f565fabf0486696f618384b29e7cca3444f5a02b6043e63e990588ffe34e2ad3",
+          "delta": [
+            0,
+            3
+          ],
+          "predictions": [
+            "same_subject_repeats_displacement",
+            "same_subject_stays"
+          ],
+          "result": "same_subject_stays"
+        }
+      ]
+    },
+    "positional-custom-SS07-1-1-v141/SS07": {
+      "game": "SS07",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": true
+        }
+      ],
+      "tape": [
+        "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+      ],
+      "motorBaselineTests": []
+    },
+    "registration-source-PORT-LF52-2-2-v140/PORT": {
+      "game": "PORT",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "cdc82b6baa28c0a55fe3832c2c722d976293ba2a2ae2c47879214291c000dd22"
+      ]
+    },
+    "registration-source-PORT-LF52-2-2-v140/LF52": {
+      "game": "LF52",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "940ff33fd4d60dad65fa39496cc2def4d599b3bb7aed8f8054e1e47d1e395750",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "dce556db9c9f8aa4438fcfb325c346aa0ee458fc4132b89734337768beed3cb0"
+      ]
+    },
+    "registration-source-PORT-LS19-TRCP-3-3-v140/PORT": {
+      "game": "PORT",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "010027d9f888ce69c302485bddd6af3c566a55503c2093a7fac332f85aa97dde",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "b8bfb08df644e862d9aca6fa3aba17e621c58ffc337491fb28b831270013247a"
+      ]
+    },
+    "registration-source-PORT-LS19-TRCP-3-3-v140/LS19": {
+      "game": "LS19",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "256aae5161410120a1f4132a24cf798559e0ba668d184b82c44c442dfae6b60b",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 69,
+          "won": false
+        }
+      ],
+      "tape": [
+        "c49ff12c6030d5ab801c1261ef6d4ac9cf62d6919f07ca83a8e1e30053ca417f"
+      ]
+    },
+    "registration-source-PORT-LS19-TRCP-3-3-v140/TRCP": {
+      "game": "TRCP",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "c9d3d1b5693690645b41a7f991c79cd6824680acd379524931896a6eb0e162b8",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "9182a6796eecabf822106368bd0122d2222f26c99274caaa0964b3bb9ee3f90b"
+      ]
+    },
+    "registration-source-KLOT-SKBN-3-3-v140/KLOT": {
+      "game": "KLOT",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "e84161e732cc912edebe84ff10bf91cc52b638f66affc999dea437890d0c504d",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 33,
+          "won": true
+        }
+      ],
+      "tape": [
+        "6897dd87d1722b343a3314c83208c166aae89d66434957b16bbf4f9a9ceb2278"
+      ]
+    },
+    "registration-source-KLOT-SKBN-3-3-v140/SKBN": {
+      "game": "SKBN",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "ddce46acc75e783e1511a90547bdfab2f6d719bfc0624ef41f3c7415ca03cb09",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 22,
+          "won": true
+        }
+      ],
+      "tape": [
+        "d7c88babf5a8bc054fe736ab55b0c880aa471918ec595c41e31e87d1d62e8f8b"
+      ]
+    },
+    "reconsider-source-ZIPP-2-2-v139/ZIPP": {
+      "game": "ZIPP",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v139",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "049e65c86edef5faaa65f9c149d820d502c77b7c6092850a1eab9fdf54632fd8",
+      "budget": 90,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 15,
+          "won": true
+        }
+      ],
+      "tape": [
+        "6c3f0bcc268e034c469a3d1d96cbef104167c97c141a3c4cfb5d3b698e51df0f"
+      ]
+    },
+    "reconsider-custom-SS09-1-1-v139/SS09": {
+      "game": "SS09",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v139",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 157,
+          "won": true
+        }
+      ],
+      "tape": [
+        "9a6d17b5103f7a4a52c264aed2594f6c9a8864680029f030946fd1d55fa0f891"
+      ]
+    },
+    "reconsider-custom-SS07-1-3-v139/SS07": {
+      "game": "SS07",
+      "entry": [
+        1,
+        3
+      ],
+      "version": "v139",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "tape": [
+        "62866f5f4454eec45c9ea380cc8f03227ff309b980c4d80644a976292453e7ce"
+      ]
+    },
+    "reconsider-custom-SS01-SS07-2-2-v139/SS07": {
+      "game": "SS07",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v139",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "1841a8aba97fa17eaf744ef80bb3de1231a2215d4700e9a80514aec104c00708",
+      "budget": 150,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "tape": [
+        "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+      ]
+    },
+    "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/GRAV": {
+      "game": "GRAV",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 11,
+          "won": true
+        }
+      ],
+      "tape": [
+        "7a92c4071668c495aff1b5b84960b49123cb34557c6d278c19e29c1d3d164a66"
+      ],
+      "matchedControls": []
+    },
+    "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/GRAV": {
+      "game": "GRAV",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+      "initial": "864f1740139121cfca5655e1c6162fb94eddf1032b314ff1e81a6b30606b8193",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 5,
+          "won": true
+        }
+      ],
+      "tape": [
+        "e62941bc96e055b385bc19acab69fd69868c19ae45a1448f1698492a25d6d833"
+      ],
+      "matchedControls": [
+        {
+          "action": 5,
+          "prepare": "ACTION4",
+          "probe": "ACTION1",
+          "earlierRevisions": [
+            5,
+            2
+          ],
+          "before": "f952c91d7ce904e0",
+          "publicReturn": "b4a6e958d17e1fcb",
+          "bareEffect": "move:3d16c313ed875e95e6671e4a33417b1070d72c70646674b8b6936e3707fe31f4/0/-32",
+          "actual": "completion",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        }
+      ]
+    },
+    "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/SELE": {
+      "game": "SELE",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "tape": [
+        "59163494d7e4636827a34030bc9ef4eefe5ff92b88ca1255b526a3a2e1513009"
+      ],
+      "matchedControls": []
+    },
+    "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/SELE": {
+      "game": "SELE",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+      "initial": "e0cab414a9ad4004ac9d3b63fd660f69e8e03d9d8e5112bb7c3be11dce00f1bf",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 39,
+          "won": true
+        }
+      ],
+      "tape": [
+        "aea90155cd5ae7e8779ecd051498f103a1079f7ab327756e28c1a719592f5154"
+      ],
+      "matchedControls": [
+        {
+          "action": 11,
+          "prepare": "ACTION6:32,52",
+          "probe": "ACTION6:4,61",
+          "earlierRevisions": [
+            11,
+            2
+          ],
+          "before": "bdcd7d02ac5d497a",
+          "publicReturn": "bdcd7d02ac5d497a",
+          "bareEffect": "still",
+          "actual": "still",
+          "result": "no_differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": false
+        },
+        {
+          "action": 22,
+          "prepare": "ACTION3",
+          "probe": "ACTION6:4,61",
+          "earlierRevisions": [
+            22,
+            12
+          ],
+          "before": "d056c2a1b630ccd2",
+          "publicReturn": "d056c2a1b630ccd2",
+          "bareEffect": "still",
+          "actual": "still",
+          "result": "no_differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": false
+        },
+        {
+          "action": 26,
+          "prepare": "ACTION4",
+          "probe": "ACTION6:32,52",
+          "earlierRevisions": [
+            26,
+            25
+          ],
+          "before": "bdcd7d02ac5d497a",
+          "publicReturn": "bdcd7d02ac5d497a",
+          "bareEffect": "still",
+          "actual": "still",
+          "result": "no_differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": false
+        },
+        {
+          "action": 34,
+          "prepare": "ACTION4",
+          "probe": "ACTION6:4,61",
+          "earlierRevisions": [
+            34,
+            12
+          ],
+          "before": "b41406c96950ead3",
+          "publicReturn": "b41406c96950ead3",
+          "bareEffect": "still",
+          "actual": "still",
+          "result": "no_differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": false
+        }
+      ]
+    },
+    "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/G50T": {
+      "game": "G50T",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 27,
+          "won": true
+        }
+      ],
+      "tape": [
+        "0d1094dd9b8312208e7a305c5def7e3d84d354422ed44f59f8647fb25e4b181b"
+      ],
+      "matchedControls": []
+    },
+    "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/G50T": {
+      "game": "G50T",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+      "initial": "f79ab0e9d856fdf82c39b63b513bc997ebe8313394732f8318bd2815d639e586",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 27,
+          "won": true
+        }
+      ],
+      "tape": [
+        "0d1094dd9b8312208e7a305c5def7e3d84d354422ed44f59f8647fb25e4b181b"
+      ],
+      "matchedControls": []
+    },
+    "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/FUIT": {
+      "game": "FUIT",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        }
+      ],
+      "tape": [
+        "e9db7647425cfdf1d276b4dc6c3b6219d328ce433617fcf7c30dbcc9af2f459c"
+      ],
+      "matchedControls": []
+    },
+    "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/FUIT": {
+      "game": "FUIT",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v142",
+      "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+      "initial": "17c5c4147e1623328f2b519b60befd3f96eb71e4902ae84a542f25b597f261ed",
+      "budget": 60,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        }
+      ],
+      "tape": [
+        "e9db7647425cfdf1d276b4dc6c3b6219d328ce433617fcf7c30dbcc9af2f459c"
+      ],
+      "matchedControls": []
+    },
+    "registration-custom-SS04-3-3-v142/SS04": {
+      "game": "SS04",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v142",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "0639bfe351030b8107ada5857b26d0155a69162bf2d6b9a9c03f38e46d34c293"
+      ],
+      "matchedControls": []
+    },
+    "matched-custom-SS04-3-3-v142/SS04": {
+      "game": "SS04",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v142",
+      "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+      "initial": "90f710ffa48ee952347cab4c7ed57effe78fb6f570ac9b02cadd7a58bf94739f",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "91f623896c9e280b92d2bd200a060640d5463555ae286b7b0772ba489a137920"
+      ],
+      "matchedControls": [
+        {
+          "action": 3,
+          "prepare": "ACTION2",
+          "probe": "ACTION1",
+          "earlierRevisions": [
+            3,
+            2
+          ],
+          "before": "c8a474f8fad7d300",
+          "publicReturn": "90f710ffa48ee952",
+          "bareEffect": "still",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/0/-5",
+          "result": "differential",
+          "sameAsBeforePreparation": true,
+          "freshReturn": false
+        },
+        {
+          "action": 5,
+          "prepare": "ACTION3",
+          "probe": "ACTION1",
+          "earlierRevisions": [
+            5,
+            2
+          ],
+          "before": "6797a2dbea097279",
+          "publicReturn": "e632001c2f5d2dce",
+          "bareEffect": "still",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/1/-1",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        },
+        {
+          "action": 12,
+          "prepare": "ACTION4",
+          "probe": "ACTION1",
+          "earlierRevisions": [
+            12,
+            2
+          ],
+          "before": "d5b878bb5cd87e05",
+          "publicReturn": "481839dbcc46bcdf",
+          "bareEffect": "still",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/-1/-1",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        },
+        {
+          "action": 25,
+          "prepare": "ACTION1",
+          "probe": "ACTION3",
+          "earlierRevisions": [
+            25,
+            23
+          ],
+          "before": "5606f255f64562c9",
+          "publicReturn": "38a27ea40e9c14f4",
+          "bareEffect": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/-8/0",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/-4/1",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        },
+        {
+          "action": 31,
+          "prepare": "ACTION2",
+          "probe": "ACTION1",
+          "earlierRevisions": [
+            31,
+            29
+          ],
+          "before": "7c440ca96eb68f49",
+          "publicReturn": "104f8f73769fc475",
+          "bareEffect": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/0/-5",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/0/-8",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        },
+        {
+          "action": 36,
+          "prepare": "ACTION3",
+          "probe": "ACTION1",
+          "earlierRevisions": [
+            36,
+            32
+          ],
+          "before": "e193bc209ce367ab",
+          "publicReturn": "b11a95c56e5d1d55",
+          "bareEffect": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/0/-8",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/1/-7",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        },
+        {
+          "action": 51,
+          "prepare": "ACTION2",
+          "probe": "ACTION3",
+          "earlierRevisions": [
+            51,
+            49
+          ],
+          "before": "8bb446e1b8f9b116",
+          "publicReturn": "fce88dd3fe171f22",
+          "bareEffect": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/-17/0",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/-7/-1",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        },
+        {
+          "action": 75,
+          "prepare": "ACTION3",
+          "probe": "ACTION1",
+          "earlierRevisions": [
+            75,
+            69
+          ],
+          "before": "9fbabed0edcad81e",
+          "publicReturn": "b3026574ba933fa1",
+          "bareEffect": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/1/-10",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/1/-4",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        },
+        {
+          "action": 114,
+          "prepare": "ACTION3",
+          "probe": "ACTION2",
+          "earlierRevisions": [
+            114,
+            112
+          ],
+          "before": "d51987bf50873c02",
+          "publicReturn": "edfc1b0f64ba7731",
+          "bareEffect": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/0/17",
+          "actual": "move:6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/1/7",
+          "result": "differential",
+          "sameAsBeforePreparation": false,
+          "freshReturn": true
+        }
+      ]
+    },
+    "mechanism-source-PIPE-REWI-VOIS-2-2-v137/PIPE": {
+      "game": "PIPE",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "aecfb6e872430d2684f24ecc464bf8b049f9ea1a130e3b2244fc65b1c50cf31d",
+      "budget": 90,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 8,
+          "won": true
+        }
+      ],
+      "tape": [
+        "e64960c40ae9c756399546f1e3be68c6d4722b3065aca2a0089a3b49e5719b5a"
+      ]
+    },
+    "mechanism-source-PIPE-REWI-VOIS-2-2-v137/REWI": {
+      "game": "REWI",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "7bf7af563e8dcf7fc1339dd8419e376e217b305bc72aa224a314544cd4d01fdf",
+      "budget": 90,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 90,
+          "won": false
+        }
+      ],
+      "tape": [
+        "725073cee5cc09d523d12087cbe79c7b127645f4942a140f9315b1c6ab9cf83b"
+      ]
+    },
+    "mechanism-source-PIPE-REWI-VOIS-2-2-v137/VOIS": {
+      "game": "VOIS",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "96f2c80ac547316aa363b0ef44029561cb7845c410c1b393f174dcd999e5f2f4",
+      "budget": 90,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 31,
+          "won": true
+        }
+      ],
+      "tape": [
+        "886f10cd6e4bf94fb84c957304be66f4716b8428b60961d3b03ad3fd763ed2af"
+      ]
+    },
+    "mechanism-source-SYME-TN36-WA30-2-2-v137/SYME": {
+      "game": "SYME",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "e302d748a528559b47eb5d7b33341bf5f9a6d203b3a401476cb211df4b9642c5",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 12,
+          "won": true
+        }
+      ],
+      "tape": [
+        "56a6b7dd083199cbbefee56b334a071abdeef9db231ea35e1ab3d9638846d9eb"
+      ]
+    },
+    "mechanism-source-SYME-TN36-WA30-2-2-v137/TN36": {
+      "game": "TN36",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "b13e4faa55ea51bff9a37a4949731c944bbf4f6ca456aabe8b477fc6694963bf",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 54,
+          "won": true
+        }
+      ],
+      "tape": [
+        "eb1231297b95110f673536ba27bd7ef232471f7b0789d1a5cd06c401066b6e03"
+      ]
+    },
+    "mechanism-source-SYME-TN36-WA30-2-2-v137/WA30": {
+      "game": "WA30",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "0ec875e8c09076ddd6782f4fcd43f074205e228c9afa8bae11e34b79d4aac6de",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 55,
+          "won": true
+        }
+      ],
+      "tape": [
+        "15b9265b735781907c144cc17287aecd7df6c616cb2f506832971f7b40d7847d"
+      ]
     }
   },
   "comparisons": [
@@ -557,6 +1789,7 @@
       "witness": "reconsider-source-GABA-2-2-v140/GABA",
       "candidate": "registration-source-GABA-2-2-v140/GABA",
       "equalCommandsAndImages": 1,
+      "firstDifferentRationale": 2,
       "firstDecision": {
         "action": 2,
         "image": "e00a597947e2bc6f",
@@ -582,6 +1815,7 @@
       "witness": "release-source-COMB-2-2-v139/COMB",
       "candidate": "reconsider-source-COMB-2-2-v139/COMB",
       "equalCommandsAndImages": 50,
+      "firstDifferentRationale": 53,
       "firstDecision": {
         "action": 51,
         "image": "280f5c95910c9353",
@@ -597,11 +1831,150 @@
       "witness": "v109/SS11",
       "candidate": "mechanism-custom-SS06-SS10-SS11-1-1-v137/SS11",
       "equalCommandsAndImages": 8,
+      "firstDifferentRationale": 9,
       "firstDecision": {
         "action": 9,
         "image": "099212a2132b3c0d",
         "witness": 2,
         "candidate": 3,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-source-GRAV-3-3-v141/GRAV",
+      "candidate": "positional-source-GRAV-3-3-v141/GRAV",
+      "equalCommandsAndImages": 1,
+      "firstDifferentRationale": 2,
+      "firstDecision": {
+        "action": 2,
+        "image": "0558c76dbed93aa9",
+        "witness": 6,
+        "candidate": 1,
+        "families": [
+          "sic_test_prepared_effects",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-source-FITE-3-3-v141/FITE",
+      "candidate": "positional-source-FITE-3-3-v141/FITE",
+      "equalCommandsAndImages": 43,
+      "firstDifferentRationale": 44,
+      "firstDecision": {
+        "action": 44,
+        "image": "285725296c6c7c40",
+        "witness": 2,
+        "candidate": 4,
+        "families": [
+          "sic_test_observed_compositions",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-source-PORT-2-2-v141/PORT",
+      "candidate": "positional-source-PORT-2-2-v141/PORT",
+      "equalCommandsAndImages": 3,
+      "firstDifferentRationale": 4,
+      "firstDecision": {
+        "action": 4,
+        "image": "d4c51e1b1047bbe4",
+        "witness": 4,
+        "candidate": 2,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-custom-SS08-2-2-v141/SS08",
+      "candidate": "positional-custom-SS08-2-2-v141/SS08",
+      "equalCommandsAndImages": 6,
+      "firstDifferentRationale": 7,
+      "firstDecision": {
+        "action": 7,
+        "image": "aa9a0eed7c759e26",
+        "witness": 3,
+        "candidate": 1,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "earlier-view/SS09",
+      "candidate": "reconsider-custom-SS09-1-1-v139/SS09",
+      "equalCommandsAndImages": 17,
+      "firstDifferentRationale": 17,
+      "firstDecision": {
+        "action": 18,
+        "image": "07ea214271227ca2",
+        "witness": 4,
+        "candidate": 3,
+        "families": [
+          "sic_test_prepared_effects",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/GRAV",
+      "candidate": "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/GRAV",
+      "equalCommandsAndImages": 4,
+      "firstDifferentRationale": 5,
+      "firstDecision": {
+        "action": 5,
+        "image": "f952c91d7ce904e0",
+        "witness": 6,
+        "candidate": 1,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/SELE",
+      "candidate": "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/SELE",
+      "equalCommandsAndImages": 10,
+      "firstDifferentRationale": 11,
+      "firstDecision": {
+        "action": 11,
+        "image": "bdcd7d02ac5d497a",
+        "witness": 6,
+        "candidate": 6,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/G50T",
+      "candidate": "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/G50T",
+      "equalCommandsAndImages": 27
+    },
+    {
+      "witness": "registration-source-GRAV-SELE-G50T-FUIT-1-1-v142/FUIT",
+      "candidate": "matched-source-GRAV-SELE-G50T-FUIT-1-1-v142/FUIT",
+      "equalCommandsAndImages": 49
+    },
+    {
+      "witness": "registration-custom-SS04-3-3-v142/SS04",
+      "candidate": "matched-custom-SS04-3-3-v142/SS04",
+      "equalCommandsAndImages": 2,
+      "firstDifferentRationale": 3,
+      "firstDecision": {
+        "action": 3,
+        "image": "c8a474f8fad7d300",
+        "witness": 3,
+        "candidate": 1,
         "families": [
           "sic_public_input_exploration",
           "sic_test_prepared_effects"
@@ -1096,5 +2469,1347 @@
       ]
     }
   },
+  "source100EarlierControls": {
+    "version": "v130",
+    "scope": "100 verified direct-entry source L1 tapes; initial directional action from public input exploration; only earlier observations used to nominate follow-up questions; frame change is a visual outcome, not action attribution",
+    "games": 100,
+    "repeat": {
+      "gamesWithAnOpportunity": 37,
+      "choices": 125,
+      "chosen": 31,
+      "gamesTakingAnOpportunity": 10,
+      "observedTrue": 29,
+      "observedFalse": 2
+    },
+    "paired": {
+      "gamesWithAnOpportunity": 12,
+      "choices": 16,
+      "chosen": 1,
+      "gamesTakingAnOpportunity": 1,
+      "observedTrue": 1,
+      "observedFalse": 0
+    },
+    "pairedChoices": [
+      {
+        "game": "AS66",
+        "action": 7,
+        "preparingAction": 4,
+        "eligibleControls": [
+          3
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 2,
+        "family": "sic_public_input_exploration",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "AS66",
+        "action": 9,
+        "preparingAction": 3,
+        "eligibleControls": [
+          4
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 1,
+        "family": "sic_public_input_exploration",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "FITE",
+        "action": 5,
+        "preparingAction": 4,
+        "eligibleControls": [
+          1,
+          2,
+          3
+        ],
+        "alternatives": 3,
+        "selected": false,
+        "actual": 4,
+        "family": "sic_learn_corridor_advance",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "FITE",
+        "action": 11,
+        "preparingAction": 2,
+        "eligibleControls": [
+          1
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 3,
+        "family": "sic_public_input_exploration",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "FUIT",
+        "action": 3,
+        "preparingAction": 2,
+        "eligibleControls": [
+          1
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 2,
+        "family": "sic_learn_reactive_motion",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "G50T",
+        "action": 3,
+        "preparingAction": 2,
+        "eligibleControls": [
+          1
+        ],
+        "alternatives": 1,
+        "selected": true,
+        "actual": 1,
+        "family": "sic_learn_remote_replay",
+        "differentVisibleResponse": true
+      },
+      {
+        "game": "GIGO",
+        "action": 3,
+        "preparingAction": 2,
+        "eligibleControls": [
+          1
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 2,
+        "family": "sic_connect_openings_after_observed_motion",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "GRAV",
+        "action": 5,
+        "preparingAction": 4,
+        "eligibleControls": [
+          1
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 6,
+        "family": "sic_public_input_exploration",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "M0R0",
+        "action": 24,
+        "preparingAction": 1,
+        "eligibleControls": [
+          3
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 1,
+        "family": "sic_cavity_access",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "REWI",
+        "action": 5,
+        "preparingAction": 3,
+        "eligibleControls": [
+          4
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 6,
+        "family": "sic_public_input_exploration",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "SELE",
+        "action": 32,
+        "preparingAction": 4,
+        "eligibleControls": [
+          3,
+          5
+        ],
+        "alternatives": 2,
+        "selected": false,
+        "actual": 6,
+        "family": "sic_public_input_exploration",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "SIGN",
+        "action": 3,
+        "preparingAction": 2,
+        "eligibleControls": [
+          1
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 4,
+        "family": "sic_learn_marked_lattice",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "THER",
+        "action": 4,
+        "preparingAction": 2,
+        "eligibleControls": [
+          3
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 4,
+        "family": "sic_public_input_exploration",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "TRIA",
+        "action": 20,
+        "preparingAction": 3,
+        "eligibleControls": [
+          2
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 1,
+        "family": "sic_cavity_access",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "TRIA",
+        "action": 22,
+        "preparingAction": 2,
+        "eligibleControls": [
+          4,
+          1
+        ],
+        "alternatives": 2,
+        "selected": false,
+        "actual": 2,
+        "family": "sic_cavity_access",
+        "differentVisibleResponse": null
+      },
+      {
+        "game": "TRIA",
+        "action": 25,
+        "preparingAction": 4,
+        "eligibleControls": [
+          3
+        ],
+        "alternatives": 1,
+        "selected": false,
+        "actual": 4,
+        "family": "sic_cavity_access",
+        "differentVisibleResponse": null
+      }
+    ],
+    "contrasts": [
+      {
+        "game": "G50T",
+        "action": 3
+      }
+    ]
+  },
+  "checkedSource100EarlierControls": [
+    {
+      "game": "AS66",
+      "action": 7,
+      "preparation": "ACTION4",
+      "test": "ACTION3",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "AS66",
+      "action": 9,
+      "preparation": "ACTION3",
+      "test": "ACTION4",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 1,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "FITE",
+      "action": 5,
+      "preparation": "ACTION4",
+      "test": "ACTION1",
+      "chosen": false,
+      "family": "sic_learn_corridor_advance",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "FITE",
+      "action": 5,
+      "preparation": "ACTION4",
+      "test": "ACTION2",
+      "chosen": false,
+      "family": "sic_learn_corridor_advance",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "FITE",
+      "action": 5,
+      "preparation": "ACTION4",
+      "test": "ACTION3",
+      "chosen": false,
+      "family": "sic_learn_corridor_advance",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "FITE",
+      "action": 11,
+      "preparation": "ACTION2",
+      "test": "ACTION1",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "FUIT",
+      "action": 3,
+      "preparation": "ACTION2",
+      "test": "ACTION1",
+      "chosen": false,
+      "family": "sic_learn_reactive_motion",
+      "namedRolesWhoseMovementChanges": 2,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "G50T",
+      "action": 3,
+      "preparation": "ACTION2",
+      "test": "ACTION1",
+      "chosen": true,
+      "family": "sic_learn_remote_replay",
+      "namedRolesWhoseMovementChanges": 1,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "GIGO",
+      "action": 3,
+      "preparation": "ACTION2",
+      "test": "ACTION1",
+      "chosen": false,
+      "family": "sic_connect_openings_after_observed_motion",
+      "namedRolesWhoseMovementChanges": 7,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "GRAV",
+      "action": 5,
+      "preparation": "ACTION4",
+      "test": "ACTION1",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        true
+      ]
+    },
+    {
+      "game": "M0R0",
+      "action": 24,
+      "preparation": "ACTION1",
+      "test": "ACTION3",
+      "chosen": false,
+      "family": "sic_cavity_access",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "REWI",
+      "action": 5,
+      "preparation": "ACTION3",
+      "test": "ACTION4",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "SELE",
+      "action": 32,
+      "preparation": "ACTION4",
+      "test": "ACTION3",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "SELE",
+      "action": 32,
+      "preparation": "ACTION4",
+      "test": "ACTION5",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        true
+      ]
+    },
+    {
+      "game": "SIGN",
+      "action": 3,
+      "preparation": "ACTION2",
+      "test": "ACTION1",
+      "chosen": false,
+      "family": "sic_learn_marked_lattice",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "THER",
+      "action": 4,
+      "preparation": "ACTION2",
+      "test": "ACTION3",
+      "chosen": false,
+      "family": "sic_public_input_exploration",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "TRIA",
+      "action": 20,
+      "preparation": "ACTION3",
+      "test": "ACTION2",
+      "chosen": false,
+      "family": "sic_cavity_access",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "TRIA",
+      "action": 22,
+      "preparation": "ACTION2",
+      "test": "ACTION4",
+      "chosen": false,
+      "family": "sic_cavity_access",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "TRIA",
+      "action": 22,
+      "preparation": "ACTION2",
+      "test": "ACTION1",
+      "chosen": false,
+      "family": "sic_cavity_access",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    },
+    {
+      "game": "TRIA",
+      "action": 25,
+      "preparation": "ACTION4",
+      "test": "ACTION3",
+      "chosen": false,
+      "family": "sic_cavity_access",
+      "namedRolesWhoseMovementChanges": 0,
+      "changesOfficialCredit": [
+        false,
+        false
+      ]
+    }
+  ],
+  "checkedEarlySS06Controls": [
+    {
+      "action": 7,
+      "A": 1,
+      "B": 5,
+      "actual": 3,
+      "differentRoles": 0,
+      "scores": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 10,
+      "A": 4,
+      "B": 2,
+      "actual": 3,
+      "differentRoles": 0,
+      "scores": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 10,
+      "A": 4,
+      "B": 3,
+      "actual": 3,
+      "differentRoles": 0,
+      "scores": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 11,
+      "A": 3,
+      "B": 1,
+      "actual": 2,
+      "differentRoles": 0,
+      "scores": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 12,
+      "A": 2,
+      "B": 3,
+      "actual": 3,
+      "differentRoles": 0,
+      "scores": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 13,
+      "A": 3,
+      "B": 4,
+      "actual": 3,
+      "differentRoles": 0,
+      "scores": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 91,
+      "A": 4,
+      "B": 2,
+      "actual": 4,
+      "differentRoles": 0,
+      "scores": [
+        0,
+        0
+      ]
+    }
+  ],
+  "ss09DiscriminatingExperiments": [
+    {
+      "action": 17,
+      "command": 4,
+      "priorImage": "144a4d1907b9a1cc",
+      "publicReturn": "07ea214271227ca2",
+      "hypotheses": [
+        "walk",
+        "push",
+        "pull",
+        "field",
+        "exchange"
+      ],
+      "matched": [
+        "walk",
+        "push",
+        "pull"
+      ],
+      "next": "identify_a_motion_effect_needed_to_plan"
+    },
+    {
+      "action": 18,
+      "command": 3,
+      "priorImage": "07ea214271227ca2",
+      "publicReturn": "18889f864aba7412",
+      "hypotheses": [
+        "walk",
+        "push",
+        "pull"
+      ],
+      "matched": [
+        "walk",
+        "push"
+      ],
+      "next": "prepare_a_configuration_that_opens_a_route_for_both_subjects"
+    },
+    {
+      "action": 21,
+      "command": 4,
+      "priorImage": "5ab15a98c4ea0946",
+      "publicReturn": "d27e20e168d9e89e",
+      "hypotheses": [
+        "walk",
+        "push"
+      ],
+      "matched": [
+        "push"
+      ],
+      "next": "prepare_a_configuration_that_opens_a_route_for_both_subjects"
+    }
+  ],
+  "ss09EarlierIndicativeRun": {
+    "parallelWorkers": 4,
+    "actions": 186,
+    "stop": "level_active_time_budget",
+    "cap": 350,
+    "won": false
+  },
+  "ss07CarryComparison": {
+    "sameInitialImage": "1841a8aba97fa17e",
+    "warmBudget": 350,
+    "coldBudget": 150,
+    "coldFirstCommand": 1,
+    "warmFirstCommand": 6,
+    "warmPurposes": {
+      "retest_a_witnessed_selection_before_using_the_new_subject": 1,
+      "measure_a_direction_for_the_two_registered_subjects": 6,
+      "prepare_a_configuration_that_opens_a_route_for_both_subjects": 208,
+      "continue_a_verified_change_of_relative_positions": 134,
+      "identify_a_motion_effect_needed_to_plan": 1
+    },
+    "warmOutcomes": {
+      "relative_displacement_verified": 342,
+      "registered_direction_observed": 4,
+      "registered_direction_blocked": 2,
+      "motion_test_discriminated_public_effects": 1,
+      "relative_displacement_refuted": 1
+    },
+    "mostFrequentMaterial": 340,
+    "distinctPublicImages": 304,
+    "distinctOpenings": 1
+  },
+  "sameSourcePrefixes": {
+    "packs": [
+      "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c"
+    ],
+    "source": "recorded public prefixes from v130; only the existing preparation family is queried; scores from independent paired experiments",
+    "results": [
+      {
+        "game": "AS66",
+        "action": 7,
+        "publicImage": "1b4d552a29ec264d",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION3",
+            "question": "1|ACTION4|ACTION3",
+            "matched": {
+              "bareEffect": "edit:1>14x50,14>1x48",
+              "alternatives": 1,
+              "preparedScene": "1b4d552a29ec264dc8569f7b89ec5f67a44f1f3c60d0b5ae146bafbf4cf6851c",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION4",
+              "probe": "ACTION3",
+              "evidence": [
+                7,
+                3
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "AS66",
+        "action": 9,
+        "publicImage": "e4b0b8525e93aa84",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION4",
+            "question": "3|ACTION3|ACTION4",
+            "matched": {
+              "bareEffect": "edit:1>14x50,14>1x48",
+              "alternatives": 1,
+              "preparedScene": "e4b0b8525e93aa842bbbd5518ec4ab702a55a05fce3df417b5c6a9cb9d545561",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION3",
+              "probe": "ACTION4",
+              "evidence": [
+                9,
+                5
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 1
+          }
+        ]
+      },
+      {
+        "game": "FITE",
+        "action": 5,
+        "publicImage": "025a7ed1b1cbe8df",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION1",
+            "question": "0|ACTION4|ACTION1",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 3,
+              "preparedScene": "025a7ed1b1cbe8dfb2fd2822a116a3fcf7647829fd3d907bc82687a24a26b5cc",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION4",
+              "probe": "ACTION1",
+              "evidence": [
+                5,
+                2
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "FITE",
+        "action": 11,
+        "publicImage": "fbd1fc6cc4c24c87",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION1",
+            "question": "4|ACTION2|ACTION1",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 1,
+              "preparedScene": "fbd1fc6cc4c24c87808df19e4af7cbd5e36223ea0811dae0aa94f82c361a9d58",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION2",
+              "probe": "ACTION1",
+              "evidence": [
+                11,
+                10
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "FUIT",
+        "action": 3,
+        "publicImage": "32a95e1f7c2c5e88",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION1",
+            "question": "0|ACTION2|ACTION1",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 1,
+              "preparedScene": "32a95e1f7c2c5e888a24ccd5d4cd73b65e9677d90b47f725c0d9f8e4e4f3b3e8",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION2",
+              "probe": "ACTION1",
+              "evidence": [
+                3,
+                2
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 2
+          }
+        ]
+      },
+      {
+        "game": "G50T",
+        "action": 3,
+        "publicImage": "c9321e6cf1e0bb6d",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION1",
+            "question": "0|ACTION2|ACTION1",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 1,
+              "preparedScene": "c9321e6cf1e0bb6d78d61488ddd377ab7acd4017a3957ce53b9d9311bd8a77b8",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION2",
+              "probe": "ACTION1",
+              "evidence": [
+                3,
+                2
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 1
+          }
+        ]
+      },
+      {
+        "game": "GIGO",
+        "action": 3,
+        "publicImage": "6ba3a3fc3c164e10",
+        "choices": [
+          {
+            "command": "ACTION6",
+            "question": "compare_which_subject_responds_to_a_witnessed_motor_after_selection",
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION6",
+            "question": "compare_which_subject_responds_to_a_witnessed_motor_after_selection",
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          }
+        ]
+      },
+      {
+        "game": "GRAV",
+        "action": 5,
+        "publicImage": "f952c91d7ce904e0",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION1",
+            "question": "0|ACTION4|ACTION1",
+            "matched": {
+              "bareEffect": "move:3d16c313ed875e95e6671e4a33417b1070d72c70646674b8b6936e3707fe31f4/0/-32",
+              "alternatives": 1,
+              "preparedScene": "f952c91d7ce904e0efaaea514380423d11c19f9e5829dd6811beaf22b9ed6903",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION4",
+              "probe": "ACTION1",
+              "evidence": [
+                5,
+                2
+              ]
+            },
+            "preparedWins": true,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "M0R0",
+        "action": 24,
+        "publicImage": "e0da9079f9690a37",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION3",
+            "question": "19|ACTION1|ACTION3",
+            "matched": {
+              "bareEffect": "edit:10>5x50,5>10x50",
+              "alternatives": 1,
+              "preparedScene": "e0da9079f9690a3781b6ea177e36d55c117b88a1dce0f30ddaad3a1db867cd5b",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION1",
+              "probe": "ACTION3",
+              "evidence": [
+                24,
+                22
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "REWI",
+        "action": 5,
+        "publicImage": "6ef02f22141cc32f",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION4",
+            "question": "1|ACTION3|ACTION4",
+            "matched": {
+              "bareEffect": "move:55d56413724957917b29196d05f6f8ec6af6fc913c12a0ad0940b977ace4e1c9/-6/0|570a83717841a38f13afa6783db18305994ccc0669924717d9d55b472d3d1f69/57/0|5c83a002a448cab5372159891b44b0959ab160833aa0053c729392072a79b3b9/19/0|714b7307a80f66bc8f4c54985369fd83340615b4c85e351077d637385d1722f1/4/0|d2b8deb4055448e830b78b1fb5e3e44fbba3a07444de6a548ac386a9049bd100/-1/0|df1400c48ebcfc9af1386da4827e3df33ce4aa5dc9ce0371d077b844d99d379b/-6/0",
+              "alternatives": 1,
+              "preparedScene": "6ef02f22141cc32f56c430bc6aa6ded2010afe32298adcecf79a4f21675cc9bd",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION3",
+              "probe": "ACTION4",
+              "evidence": [
+                5,
+                3
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "SELE",
+        "action": 32,
+        "publicImage": "b41406c96950ead3",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION5",
+            "question": "1|ACTION4|ACTION5",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 2,
+              "preparedScene": "b41406c96950ead3b3c0e5dbc1fc39359ff1be7f99bdc96a397c55a336e96048",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION4",
+              "probe": "ACTION5",
+              "evidence": [
+                32,
+                25
+              ]
+            },
+            "preparedWins": true,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "SIGN",
+        "action": 3,
+        "publicImage": "3df1ff35ee921ccc",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION1",
+            "question": "0|ACTION2|ACTION1",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 1,
+              "preparedScene": "3df1ff35ee921ccc6b235cb1ba16ea5cf2e02ae6b7751cee1c723f643738f99d",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION2",
+              "probe": "ACTION1",
+              "evidence": [
+                3,
+                2
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "THER",
+        "action": 4,
+        "publicImage": "844b6d47023965a6",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION3",
+            "question": "1|ACTION2|ACTION3",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 1,
+              "preparedScene": "844b6d47023965a6214defe7a41133cdb906b4c4a843b8ce676ef0d9a64359ab",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION2",
+              "probe": "ACTION3",
+              "evidence": [
+                4,
+                3
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "TRIA",
+        "action": 20,
+        "publicImage": "2df157542a4102ab",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION2",
+            "question": "2|ACTION3|ACTION2",
+            "matched": {
+              "bareEffect": "edit:0>4x2,1>0x1,1>9x8,4>0x1,4>9x8,9>4x16",
+              "alternatives": 1,
+              "preparedScene": "2df157542a4102ab0c031492f35a46446259d56b9d3dc26c880cfa1cbfb975fb",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION3",
+              "probe": "ACTION2",
+              "evidence": [
+                18,
+                16
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "TRIA",
+        "action": 22,
+        "publicImage": "3ee959e6c5864950",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION1",
+            "question": "3|ACTION2|ACTION1",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 2,
+              "preparedScene": "3ee959e6c5864950c6cebca46ee7f6d5b82bcdb6d54789fe9161ea34b605ec0c",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION2",
+              "probe": "ACTION1",
+              "evidence": [
+                22,
+                21
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      },
+      {
+        "game": "TRIA",
+        "action": 25,
+        "publicImage": "f3f1f539d9c0c82c",
+        "choices": [
+          {
+            "command": null,
+            "question": null,
+            "matched": null,
+            "preparedWins": null,
+            "bareWins": null,
+            "conditionalRoles": null
+          },
+          {
+            "command": "ACTION3",
+            "question": "5|ACTION4|ACTION3",
+            "matched": {
+              "bareEffect": "still",
+              "alternatives": 1,
+              "preparedScene": "f3f1f539d9c0c82c7af5953a2948a60d13e6e1f4f277d24ca6d1e7f1f0553ca1",
+              "outcomes": [
+                "same_public_effect",
+                "different_public_effect"
+              ],
+              "prepare": "ACTION4",
+              "probe": "ACTION3",
+              "evidence": [
+                25,
+                24
+              ]
+            },
+            "preparedWins": false,
+            "bareWins": false,
+            "conditionalRoles": 0
+          }
+        ]
+      }
+    ]
+  },
+  "ss07AlternativeDuringPartialRoute": [
+    {
+      "action": 47,
+      "a": 6,
+      "b": 1,
+      "played": 1,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 75,
+      "a": 2,
+      "b": 4,
+      "played": 6,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 93,
+      "a": 6,
+      "b": 1,
+      "played": 2,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 156,
+      "a": 6,
+      "b": 3,
+      "played": 1,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 171,
+      "a": 2,
+      "b": 1,
+      "played": 6,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 174,
+      "a": 4,
+      "b": 2,
+      "played": 4,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 241,
+      "a": 1,
+      "b": 2,
+      "played": 6,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    },
+    {
+      "action": 242,
+      "a": 6,
+      "b": 3,
+      "played": 4,
+      "changedRoles": 0,
+      "score": [
+        0,
+        0
+      ]
+    }
+  ],
+  "matchedCandidate": "0553723cc03e6db8886efd02a6d59294e1d26048",
   "positionalCandidate": "fb47de01b5746b518dad1451aff89d0408b70a87"
 }
