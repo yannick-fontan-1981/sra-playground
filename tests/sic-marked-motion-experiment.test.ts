@@ -4,6 +4,7 @@ import { measureNativeObservation } from '../src/logos-engine/v6-native-observer
 import { assessMarkedMotion, proposeMarkedMotion } from '../src/sic/marked-motion-experiment.ts';
 import { initialMemory, measureEffect, type Edge } from '../src/sic/preparation-experiments.ts';
 import { observedEdit } from '../src/sic/relative-edits.ts';
+import { nativePlanReceipt } from '../src/sic/native-plan-receipt.ts';
 
 test('a witnessed motor separates a fixed change from one transported by the same subject',async()=>{
   const board=(bodyX:number,partX:number,ink:number)=>{
@@ -30,6 +31,10 @@ test('a witnessed motor separates a fixed change from one transported by the sam
   assert.deepEqual(proposal.refs,[1,2]);
   const trial=proposal.markedMotion!;
   assert.equal(trial.distinguishingPixels,2);
+  const forecast={...trial,outcomes:['mark_stays_fixed','mark_follows_measured_subject']};
+  const receipt=nativePlanReceipt('sic_test_prepared_effects',{kind:'sic_test_prepared_effects',status:'proposed',
+    actions:[{action_ref:proposal.b,data:{}}],markedMotionForecast:forecast},at,0);
+  assert.deepEqual(receipt.markedMotionForecast,forecast);
   for(const [after,expected] of [[fixed,'mark_stayed_at_its_previous_position'],
     [transported,'mark_followed_the_measured_motion'],[marked,'comparison_movement_unconfirmed']] as const){
     assert.equal(assessMarkedMotion(m,trial,marked,after,measureEffect(at,await view(after),marked,after)),expected);
