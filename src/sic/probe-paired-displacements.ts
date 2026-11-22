@@ -406,6 +406,7 @@ export function pairProposal(
   ref: string,
   depth: number,
   budget: number,
+  minimumProbeOutcomes?: number,
 ) {
   if (!q.active || !q.scene || !q.reading) return;
   if (
@@ -424,5 +425,5 @@ export function pairProposal(
       ref,
     );
   }
-  return planDisplacements(q.scene, q.learning, q.reading, ref, depth, budget);
+  return planDisplacements(q.scene, q.learning, q.reading, ref, depth, budget, minimumProbeOutcomes);
 }

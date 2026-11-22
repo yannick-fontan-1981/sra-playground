@@ -14,6 +14,7 @@ export type TransportState={subjects:[number,number];pieces:number[];supports:nu
 export type TransportStep={state:TransportState;command:string;after:TransportState};
 export type TransportForecast={purpose:string;command:string;from:TransportState;expected:TransportState;target:number[];evidence:string[];open:string[];key:string;
   projectedSetup?:{operator:TransportSide;pivot:number;launch:number;landing:number;firstCommand:string};
+  motionTest?:{predictions:{law:string;pose:string}[];maximumRemaining:number};
   paired?:{laws:string[];radius:number;lesson?:string;scope?:string};
   crossing?:{gate:number;control:number;material:number[];missing:number[];pusher:TransportSide;swapper:TransportSide;heldAfter:boolean};
   coverage?:{controls:number[];gate:number;goals:number[];laws:{kind:string;radius:number}[];contactPreparation?:{side:TransportSide;stand:number;command:string;departed:number[];arrivals:number[]};testPeerPush?:boolean;openBefore:boolean;openAfter:boolean}};

@@ -15,6 +15,7 @@ import {
 } from '../src/sic/paired-displacements.ts';
 import type { Scene, Reading } from '../src/sic/paired-scene.ts';
 import { carryPair, inquiry } from '../src/sic/probe-paired-displacements.ts';
+import { planDisplacements } from '../src/sic/plan-paired-displacements.ts';
 const s: Scene = {
   grid: { pitch: 3, left: 0, top: 0, columns: 7, rows: 5 },
   floor: 2,
@@ -30,6 +31,22 @@ const s: Scene = {
   features: [],
   initial: Array(35).fill(''),
 };
+test('an incomplete route yields to an untried comparison, while a scoring route is played', () => {
+  const room: Scene = { ...s, ground: [0, 1, 2, 3, 7, 8, 9, 10, 33, 34], goals: [33, 34] };
+  const v: Reading = { subjects: [0, 7], active: 0, pieces: [1], supports: [], opened: [], anchor: -1 };
+  const m = fresh();
+  for (const [i, [dx, dy]] of [[0, -1], [0, 1], [-1, 0], [1, 0]].entries())
+    m.motors['ACTION' + (i + 1)] = { dx: dx!, dy: dy!, ref: 'directions measured' };
+  const test = planDisplacements(room, m, v, 'now', 5, 20, 2)!;
+  assert.ok(test.motionTest);
+  assert.ok(new Set(test.motionTest.predictions.map(p => p.pose)).size >= 2);
+  const arrived = imagine(room, geometry(room), v, test.command, m, 'push') ?? v;
+  assert.equal(localEffects(room, m, v, arrived, test.command, 'observed', test), 'motion_test_discriminated_public_effects');
+  assert.ok(m.checked.includes('test-motion/' + test.key));
+  const finish = planDisplacements({ ...room, goals: [7, 1] }, m, v, 'now', 5, 20, 2)!;
+  assert.equal(finish.command, 'ACTION4');
+  assert.equal(finish.motionTest, undefined);
+});
 test('a common displacement discriminates a field from direct contact and carries only witnessed effects', () => {
   const m = fresh();
   m.motors['ACTION4'] = { dx: 1, dy: 0, ref: 'earlier move' };

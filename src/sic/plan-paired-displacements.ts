@@ -20,6 +20,7 @@ import {
   key,
   md,
   forecast,
+  unresolvedMotionTest,
 } from './paired-displacements.ts';
 
 type Node = {
@@ -37,6 +38,7 @@ export function planDisplacements(
   ref: string,
   depth: number,
   budget: number,
+  minimumProbeOutcomes?: number,
 ): TransportForecast | undefined {
   const space = geometry(s),
     ops = Object.keys(m.motors),
@@ -135,6 +137,10 @@ export function planDisplacements(
   const laws = [law(m, 0), law(m, 1)] as const;
   const saved = m.plan?.[0];
   if (saved?.from === key(v) && !m.denied[key(v) + '|' + saved.command]) {
+    if (m.planSolves === false && minimumProbeOutcomes && !m.join) {
+      const test = unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
+      if (test) return test;
+    }
     return offer(
       saved.expected,
       saved.command,
@@ -386,11 +392,16 @@ export function planDisplacements(
       push(next);
     }
   }
+  if (best.score !== 0 && minimumProbeOutcomes && !m.join) {
+    const test = unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
+    if (test) return test;
+  }
   if (!best.parent) return;
   const plan = [];
   for (let n: Node = best; n.parent; n = n.parent)
     plan.push({ from: key(n.parent.s), command: n.op!, expected: n.s });
   m.plan = plan.reverse();
+  m.planSolves = best.score === 0;
   const step = m.plan[0]!;
   return offer(
     step.expected,

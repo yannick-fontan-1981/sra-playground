@@ -1,4 +1,5 @@
 import { applyImages, images, type Projection } from './paired-previews.ts';
+import { chooseEffectExperiment } from './discriminating-experiment.ts';
 import {
   neighbor,
   poseId,
@@ -39,6 +40,7 @@ export type Learning = {
   checked: string[];
   carry?: string;
   plan?: { from: string; command: string; expected: Reading }[];
+  planSolves?: boolean;
 };
 export function fresh(): Learning {
   return {
@@ -285,6 +287,13 @@ export function localEffects(
     }
   }
   if (f) {
+    if (f.motionTest) {
+      const trial = 'test-motion/' + f.key;
+      if (!m.checked.includes(trial)) m.checked.push(trial);
+      delete m.plan;
+      const matching = f.motionTest.predictions.filter(p => p.pose === key(a));
+      return matching.length ? 'motion_test_discriminated_public_effects' : 'motion_test_found_an_unmodeled_effect';
+    }
     if (f.purpose === 'measure_a_direction_for_the_two_registered_subjects')
       return m.motors[op]
         ? 'registered_direction_observed'
@@ -297,6 +306,26 @@ export function localEffects(
     if (m.plan?.[0]?.command === f.command) m.plan.shift();
     return 'relative_displacement_verified';
   }
+}
+
+export function unresolvedMotionTest(s: Scene, m: Learning, v: Reading, ref: string, minimumOutcomes: number) {
+  const evidence = m.evidence[v.active];
+  const strongest = Math.max(...alternatives.map(h => evidence[h] ?? 0));
+  const rivals = alternatives.filter(h => (evidence[h] ?? 0) === strongest);
+  if (rivals.length < minimumOutcomes) return;
+  const space = geometry(s), pose = key(v);
+  const trials = Object.keys(m.motors).flatMap(command => {
+    if (m.checked.includes('test-motion/' + pose + '|' + command) || m.denied[pose + '|' + command]) return [];
+    const predictions = rivals.map(h => ({ law: h, pose: key(imagine(s, space, v, command, m, h) ?? v) }));
+    return [{ action: { command, predictions }, predictions: predictions.map(p => p.pose) }];
+  });
+  const test = chooseEffectExperiment(trials, minimumOutcomes);
+  if (!test) return;
+  const { command, predictions } = test.action;
+  const offer = forecast(s, m, v, imagine(s, space, v, command, m, law(m, v.active)) ?? v,
+    command, 'identify_a_motion_effect_needed_to_plan', ['compare_the_positions_of_both_subjects_and_the_objects'], ref);
+  offer.motionTest = { predictions, maximumRemaining: test.partition.remaining };
+  return offer;
 }
 export function forecast(
   s: Scene,
