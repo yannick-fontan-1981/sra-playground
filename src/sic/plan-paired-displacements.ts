@@ -21,7 +21,9 @@ import {
   md,
   forecast,
   unresolvedMotionTest,
+  viableMotionLaws,
 } from './paired-displacements.ts';
+import { chooseEffectExperiment } from './discriminating-experiment.ts';
 
 type Node = {
   s: Reading;
@@ -321,10 +323,15 @@ export function planDisplacements(
     }
     return n;
   }
+  // Reuse states explored by the goal search. A setup is allowed only when all
+  // still-viable laws predict the same public result for every preparatory move.
+  const reached = minimumProbeOutcomes && !m.join &&
+    viableMotionLaws(m, v.active).length >= minimumProbeOutcomes ? [] as Node[] : undefined;
   let best = root,
     bestProgress = Infinity;
   for (let i = 0; heap.length && i < budget; i++) {
     const n = pop();
+    if (n.parent) reached?.push(n);
     if (n.score === 0) {
       best = n;
       break;
@@ -395,6 +402,10 @@ export function planDisplacements(
   if (best.score !== 0 && minimumProbeOutcomes && !m.join) {
     const test = unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
     if (test) return test;
+    if (reached?.length) {
+      const preparation = prepareMotionTest(s, m, root, reached, ref, minimumProbeOutcomes);
+      if (preparation) return preparation;
+    }
   }
   if (!best.parent) return;
   const plan = [];
@@ -409,4 +420,33 @@ export function planDisplacements(
     'prepare_a_configuration_that_opens_a_route_for_both_subjects',
     ['compare_predicted_and_observed_displacement'],
   );
+}
+
+function prepareMotionTest(s: Scene, m: Learning, root: Node, reached: Node[], ref: string, minimum: number) {
+  const shared = new Map<Node, Node>([[root, root]]);
+  const rivals = viableMotionLaws(m, root.s.active), space = geometry(s);
+  const trials: { action: { first: Node; at: Node; test: TransportForecast }; predictions: string[] }[] = [];
+  let shortest = Infinity;
+  for (const node of reached.sort((a, b) => a.g - b.g)) {
+    if (node.g > shortest) break;
+    const parent = node.parent!, op = node.op!;
+    const previous = shared.get(parent);
+    if (!previous || !m.motors[op]) continue;
+    const expected = key(node.s);
+    if (!rivals.every(h => key(imagine(s, space, parent.s, op, m, h) ?? parent.s) === expected)) continue;
+    const first = previous === root ? node : previous;
+    shared.set(node, first);
+    const test = unresolvedMotionTest(s, m, node.s, ref, minimum);
+    if (!test?.motionTest) continue;
+    shortest = node.g;
+    trials.push({ action: { first, at: node, test }, predictions: test.motionTest.predictions.map(p => p.pose) });
+  }
+  const chosen = chooseEffectExperiment(trials, minimum)?.action;
+  if (!chosen) return;
+  const { first, at, test } = chosen;
+  const proposal = forecast(s, m, root.s, first.s, first.op!,
+    'prepare_a_position_where_the_unknown_effects_disagree',
+    ['all_competing_laws_predict_the_same_preparation', 'verify_each_step_before_testing'], ref);
+  proposal.motionPreparation = { steps: at.g, at: key(at.s), test: test.command, predictions: test.motionTest!.predictions };
+  return proposal;
 }

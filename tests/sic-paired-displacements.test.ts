@@ -75,6 +75,26 @@ test('a common displacement discriminates a field from direct contact and carrie
   assert.equal('plan' in carry, false);
 });
 
+test('an agreed preparatory movement can make two previously identical predictions diverge', () => {
+  const room = { ...s, ground: [0, 1, 2, 3, 4, 32, 33, 34], goals: [32, 33] };
+  const v: Reading = { subjects: [0, 34], active: 0, pieces: [2], supports: [], opened: [], anchor: -1 };
+  const m = fresh();
+  m.evidence[0] = { push: 1, walk: 1 };
+  for (const [i, [dx, dy]] of [[0, -1], [0, 1], [-1, 0], [1, 0]].entries())
+    m.motors['ACTION' + (i + 1)] = { dx: dx!, dy: dy!, ref: 'observed' };
+  const approach = planDisplacements(room, m, v, 'before', 6, 100, 2)!;
+  assert.equal(approach.command, 'ACTION4');
+  assert.equal(approach.motionPreparation?.steps, 1);
+  assert.equal(approach.motionPreparation?.test, 'ACTION4');
+  assert.equal(approach.motionTest, undefined);
+  const near = imagine(room, geometry(room), v, approach.command, m, 'walk')!;
+  assert.deepEqual(near, imagine(room, geometry(room), v, approach.command, m, 'push'));
+  localEffects(room, m, v, near, approach.command, 'approach verified', approach);
+  const probe = planDisplacements(room, m, near, 'now', 6, 100, 2)!;
+  assert.equal(probe.command, 'ACTION4');
+  assert.deepEqual(probe.motionTest?.predictions, approach.motionPreparation?.predictions);
+});
+
 test('a visible landing becomes a prediction at another distance only after displacement', () => {
   const room: Scene = {
     ...s,

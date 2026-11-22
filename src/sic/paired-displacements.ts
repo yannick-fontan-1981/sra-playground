@@ -308,10 +308,14 @@ export function localEffects(
   }
 }
 
-export function unresolvedMotionTest(s: Scene, m: Learning, v: Reading, ref: string, minimumOutcomes: number) {
-  const evidence = m.evidence[v.active];
+export function viableMotionLaws(m: Learning, side: TransportSide) {
+  const evidence = m.evidence[side];
   const strongest = Math.max(...alternatives.map(h => evidence[h] ?? 0));
-  const rivals = alternatives.filter(h => (evidence[h] ?? 0) === strongest);
+  return alternatives.filter(h => (evidence[h] ?? 0) === strongest);
+}
+
+export function unresolvedMotionTest(s: Scene, m: Learning, v: Reading, ref: string, minimumOutcomes: number) {
+  const rivals = viableMotionLaws(m, v.active);
   if (rivals.length < minimumOutcomes) return;
   const space = geometry(s), pose = key(v);
   const trials = Object.keys(m.motors).flatMap(command => {
