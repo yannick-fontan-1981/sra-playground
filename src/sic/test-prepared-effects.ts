@@ -1,4 +1,5 @@
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
+import { newContactMemory, proposeFrontierContact, recordFrontierContact, observeRegionArrival } from './contact-frontier.ts';
 import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
@@ -42,6 +43,7 @@ import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
 type Offer = NativeProposal & { experiment: Experiment };
 const labels: Record<Experiment['phase'], string> = {
+  investigateContactFrontier: 'Test a contact that could change access to a visible destination',
   composeObservedTransport:'Test whether repositioning a piece makes both marked sites reachable',
   testLandmarkPlacement:'Test whether placing one subject first enables a second arrival while it stays there',
   selectMarkedCursor:'Test whether clicking a matching piece transfers the distinctive cursor mark',
@@ -216,7 +218,11 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const cursor=m.cursorSelection??=newCursorMemory();cursor.verifyPoseChange=true;
       if(followMarkedPose)cursor.followMarkedPose=true;
     }
+    const frontierResult=x?.contactProject ? recordFrontierContact(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next,x.contactProject) : undefined;
+    if(!x?.contactProject && b.level_epoch===a.level_epoch && learning.partMotion)
+      observeRegionArrival(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next);
     const result=recordExperiment(m, b, a, cmd, rows, next, x);
+    if(frontierResult && result)return {...result,result:frontierResult};
     if(x?.cooperative&&result)return {...result,result:a.levels_completed>b.levels_completed?'transport_official':transportResult??'transport_unresolved'};
     return result;
   }
@@ -268,7 +274,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const repair=missingCue || justMovedLine || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
         ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
-      if (!cooperative && !landmark && !cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
+      const contactProject=!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
+        ? proposeFrontierContact(m.contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null;
+      if (!contactProject && !cooperative && !landmark && !cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
@@ -279,7 +287,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment:Experiment|null = cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
+      const experiment:Experiment|null = contactProject ? {phase:'investigateContactFrontier',origin:-1,a:contactProject.step.op,b:contactProject.step.op,refs:[],rule:contactProject.project.purpose,contactProject} : cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
         refs:[],rule:cooperative.purpose,cooperative} : landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
         rule:landmark.joint?'prepare_every_indicated_arrival_before_the_common_operation':landmark.partnerTest?'retry_a_blocked_movement_after_changing_the_partner_placement':'compare_two_arrivals_with_a_preserved_first_contact',landmark,...(cursor?{cursorTrial:cursor}:{})} : cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':cursor.stage==='advance'?'advanceSelectedCursor':cursor.stage==='reroute'?'repairSelectedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
@@ -289,19 +297,24 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
       if(!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
-      if (!experiment || (!cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
+      if (!experiment || (!contactProject && !cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (contactProject||cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
-        label = cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
+        label = contactProject ? (contactProject.acquired ? 'Enter the changed site to verify that it now supports movement'
+          : contactProject.previousEntry ? 'Reuse the observed support change to connect another region'
+          : contactProject.project.purpose==='reach_goal' ? 'Use the observed change in access to reach the witnessed destination'
+          : contactProject.project.purpose==='test_contact' ? 'Approach the untested object in the newly reached region and measure its displacement'
+          : 'Move an object to a boundary between regions and test whether crossing becomes possible') : cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const positioned = experiment.terminalContact && 'operation' in experiment.terminalContact.witness
         ? experiment.terminalContact.witness : undefined;
       const evidence = [
         ...(positioned?.completionRef ? [positioned.completionRef] : []),
         ref,
+        ...(contactProject?[contactProject.ref,...(contactProject.previousEntry?[contactProject.previousEntry]:[])]:[]),
         ...(cooperative?.evidence??[]),
         ...(cursor?.evidence??[]),
         ...(landmark?[landmark.pair.ref,landmark.firstRef,...landmark.selection.evidence,...(landmark.access?.ref?[landmark.access.ref]:[])]:[]),
@@ -328,9 +341,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const question = {
         kind: 'test_prepared_effect',
         scope: ref.split(':revision:', 1)[0]!,
-        subjects: experiment.terminalContact?[experiment.terminalContact.witness.actor,experiment.terminalContact.witness.marker,experiment.terminalContact.op]:experiment.mobilityProbe ? [experiment.mobilityProbe.actor,...experiment.mobilityProbe.sites.map(s=>s.role),b] : experiment.mechanism ? [experiment.mechanism.plan.p,experiment.mechanism.plan.c,b] : experiment.unreadIndicator ? [experiment.unreadIndicator.cue.p,experiment.unreadIndicator.cue.r,b] : experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
+        subjects: contactProject?[contactProject.actor,contactProject.project.role??contactProject.role,contactProject.step.op]:experiment.terminalContact?[experiment.terminalContact.witness.actor,experiment.terminalContact.witness.marker,experiment.terminalContact.op]:experiment.mobilityProbe ? [experiment.mobilityProbe.actor,...experiment.mobilityProbe.sites.map(s=>s.role),b] : experiment.mechanism ? [experiment.mechanism.plan.p,experiment.mechanism.plan.c,b] : experiment.unreadIndicator ? [experiment.unreadIndicator.cue.p,experiment.unreadIndicator.cue.r,b] : experiment.witnessedPreview ? [experiment.witnessedPreview.actor,experiment.witnessedPreview.indicator,b] : experiment.occupancy?.preview ? [experiment.occupancy.preview.indicator.role,...experiment.occupancy.preview.layout.map(v=>v.subject),b] : [a, b, experiment.rule, phase],
         parentObjective: parent,
-        satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
+        satisfactionContract: contactProject ? (contactProject.acquired?'can_enter_changed_site_or_remains_blocked':'compare_observed_subject_part_and_access_after_contact') : experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
       if(phase==='testScoringContact')question.satisfactionContract='check_the_predicted_approach_and_then_measure_official_progress_at_contact';
       if(phase==='positionForOperation'||phase==='usePositionedOperation')
@@ -425,6 +438,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
             alternatives:['named_feature_changes_at_site','named_feature_remains_at_site'],
           } : {}),
         }} : {}),
+        ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
+          site:contactProject.project.site,from:contactProject.step.from,to:contactProject.step.to,
+          next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,
+          width:contactProject.width,part:contactProject.step.role??null,
+          alternatives:contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
+            contactProject.step.role?['part_moves','part_changes_at_boundary','contact_is_blocked']:['subject_reaches_stance','predicted_access_is_blocked']}}:{}),
         ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),
         ...(experiment.mechanism ? {mechanismForecast:experiment.mechanism} : {}),
         ...(experiment.unreadIndicator ? {indicatorProbeForecast:experiment.unreadIndicator} : {}),
@@ -448,7 +467,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           strategy: phase,
           need: label,
           situation: label,
-          mode: cooperative?.open.length===0 || cursor?.stage==='advance' || relative?.purpose==='reach_scoring_contact' ? 'solving' : 'exploration',
+          mode: contactProject?.project.purpose==='reach_goal' || cooperative?.open.length===0 || cursor?.stage==='advance' || relative?.purpose==='reach_scoring_contact' ? 'solving' : 'exploration',
           evidence,
           agenda: [],
         },
