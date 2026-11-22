@@ -36,6 +36,12 @@ Les commits doivent rester petits et cohérents, avec des pushes réguliers.
 
 ## Publication
 
+### Pendant le test d’un jeu précis
+
+Chaque modification destinée au prochain essai de Yannick inclut la relivraison du site, sauf s’il demande explicitement de différer. Après intégration sur `main`, publier la version avec les accès existants et mettre à jour l’adresse de test qu’il utilise déjà, y compris son port local. Reprendre cette adresse dans la session en cours.
+
+Avant d’annoncer une victoire, la reproduire par les commandes de l’interface livrée avec le mode et le parcours demandés. Préciser le niveau de départ, le résultat officiel et les coups par niveau. Dans le compte rendu, donner le lien rejouable, la version déployée et le SHA vérifié. Si la livraison ou la reproduction échoue, le signaler et poursuivre le diagnostic.
+
 Le Site est un déploiement du code, pas une archive source.
 
 Ne jamais considérer une version Site comme suffisamment sauvegardée tant que le code correspondant n'est pas durablement présent sur GitHub.
