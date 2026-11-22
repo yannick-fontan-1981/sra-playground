@@ -1,0 +1,509 @@
+{
+  "policy": "37cb7aea7db63e7a47dbc9faa4ee846a3b6d9e24",
+  "tag": "sic-cost-of-discriminating-experiments-v135",
+  "workers": 1,
+  "engine": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "packs": {
+    "ordinary": "apprendre-la-portee-du-controle-v105.json",
+    "prospective": "tester-une-commande-inerte-apres-preparation-v134.json"
+  },
+  "qualification": [
+    {
+      "backend": "source",
+      "game": "FUIT",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "candidate": {
+        "issued": 80,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 80
+          }
+        ],
+        "independentReplay": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "questions": []
+      },
+      "previousPolicyWithSamePack": {
+        "issued": 80,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 80
+          }
+        ],
+        "independentReplay": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "questions": [],
+        "commonCommandAndImagePrefix": 80,
+        "identicalCommandsAndImages": true
+      }
+    },
+    {
+      "backend": "source",
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "candidate": {
+        "issued": 120,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 120
+          }
+        ],
+        "independentReplay": "c98a4734b36a2862ac7f39d675e5231730d572e78e1cb4dc939aefacb8b2a47e",
+        "questions": [
+          {
+            "action": 38,
+            "phase": "prepare",
+            "preparation": "ACTION1",
+            "probe": "ACTION5",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 3,
+            "returns": 2,
+            "evidence": [
+              6,
+              9,
+              7
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 39,
+            "phase": "probe",
+            "preparation": "ACTION1",
+            "probe": "ACTION5",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 3,
+            "returns": 2,
+            "evidence": [
+              6,
+              9,
+              7
+            ],
+            "outcome": "previously_silent_input_changed_the_arrangement"
+          }
+        ]
+      },
+      "previousPolicyWithSamePack": {
+        "issued": 120,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 120
+          }
+        ],
+        "independentReplay": "c98a4734b36a2862ac7f39d675e5231730d572e78e1cb4dc939aefacb8b2a47e",
+        "questions": [
+          {
+            "action": 38,
+            "phase": "prepare",
+            "preparation": "ACTION1",
+            "probe": "ACTION5",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 3,
+            "returns": 2,
+            "evidence": [
+              6,
+              9,
+              7
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 39,
+            "phase": "probe",
+            "preparation": "ACTION1",
+            "probe": "ACTION5",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 3,
+            "returns": 2,
+            "evidence": [
+              6,
+              9,
+              7
+            ],
+            "outcome": "previously_silent_input_changed_the_arrangement"
+          }
+        ],
+        "commonCommandAndImagePrefix": 120,
+        "identicalCommandsAndImages": true
+      }
+    },
+    {
+      "backend": "source",
+      "game": "LKEY",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "candidate": {
+        "issued": 113,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 113
+          }
+        ],
+        "independentReplay": "68af14b61848ed68ee9a7481a7a6cf0d9e4f32beb2f2ef9306586e3c324f3606",
+        "questions": [
+          {
+            "action": 50,
+            "phase": "prepare",
+            "preparation": "ACTION1",
+            "probe": "ACTION3",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 2,
+            "evidence": [
+              50,
+              4,
+              46
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 51,
+            "phase": "probe",
+            "preparation": "ACTION1",
+            "probe": "ACTION3",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 2,
+            "evidence": [
+              50,
+              4,
+              46
+            ],
+            "outcome": "previously_silent_input_changed_the_arrangement"
+          },
+          {
+            "action": 90,
+            "phase": "prepare",
+            "preparation": "ACTION1",
+            "probe": "ACTION6:20,19",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 3,
+            "evidence": [
+              86,
+              33,
+              81
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 91,
+            "phase": "probe",
+            "preparation": "ACTION1",
+            "probe": "ACTION6:20,19",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 3,
+            "evidence": [
+              86,
+              33,
+              81
+            ],
+            "outcome": "input_remained_silent_after_preparation"
+          }
+        ]
+      },
+      "previousPolicyWithSamePack": {
+        "issued": 104,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 104
+          }
+        ],
+        "independentReplay": "a5eeb975f583e4704058fedc2229a304917cc2659a61d5a5b70d2d32834747a7",
+        "questions": [
+          {
+            "action": 50,
+            "phase": "prepare",
+            "preparation": "ACTION1",
+            "probe": "ACTION3",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 2,
+            "evidence": [
+              50,
+              4,
+              46
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 51,
+            "phase": "probe",
+            "preparation": "ACTION1",
+            "probe": "ACTION3",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 2,
+            "evidence": [
+              50,
+              4,
+              46
+            ],
+            "outcome": "previously_silent_input_changed_the_arrangement"
+          },
+          {
+            "action": 87,
+            "phase": "prepare",
+            "preparation": "ACTION1",
+            "probe": "ACTION6:20,19",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 2,
+            "evidence": [
+              86,
+              33,
+              81
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 88,
+            "phase": "probe",
+            "preparation": "ACTION1",
+            "probe": "ACTION6:20,19",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 2,
+            "evidence": [
+              86,
+              33,
+              81
+            ],
+            "outcome": "input_remained_silent_after_preparation"
+          }
+        ],
+        "commonCommandAndImagePrefix": 87,
+        "identicalCommandsAndImages": false
+      }
+    },
+    {
+      "backend": "source",
+      "game": "UPST",
+      "entry": [
+        1,
+        1
+      ],
+      "cap": 60,
+      "candidate": {
+        "issued": 57,
+        "levels": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 57
+          }
+        ],
+        "independentReplay": "3e4de56240497728f95b11154ef4f6f9b40c02a871fa59b0282afe881ab784b8",
+        "questions": []
+      },
+      "samePolicyWithOrdinaryPack": {
+        "issued": 57,
+        "levels": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 57
+          }
+        ],
+        "independentReplay": "3e4de56240497728f95b11154ef4f6f9b40c02a871fa59b0282afe881ab784b8",
+        "questions": [],
+        "commonCommandAndImagePrefix": 57,
+        "identicalCommandsAndImages": true
+      },
+      "previousPolicyWithSamePack": {
+        "issued": 60,
+        "levels": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 60
+          }
+        ],
+        "independentReplay": "3b5fdfab98fef82e23819fafb44503f59ded08920ae0dc7dbe410a30d5837c91",
+        "questions": [
+          {
+            "action": 48,
+            "phase": "prepare",
+            "preparation": "ACTION6:21,10",
+            "probe": "ACTION6:52,45",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 2,
+            "evidence": [
+              48,
+              5,
+              17
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 53,
+            "phase": "prepare",
+            "preparation": "ACTION6:21,10",
+            "probe": "ACTION6:52,45",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 2,
+            "returns": 3,
+            "evidence": [
+              48,
+              5,
+              17
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          },
+          {
+            "action": 55,
+            "phase": "prepare",
+            "preparation": "ACTION6:42,11",
+            "probe": "ACTION6:52,45",
+            "prediction": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "controls": 3,
+            "returns": 2,
+            "evidence": [
+              55,
+              5,
+              45
+            ],
+            "outcome": "preparation_verified_test_the_silent_input"
+          }
+        ],
+        "commonCommandAndImagePrefix": 47,
+        "identicalCommandsAndImages": false
+      },
+      "directConfigurationTests": [
+        {
+          "action": 48,
+          "origin": "1000",
+          "expected": "1100",
+          "target": "1100"
+        },
+        {
+          "action": 49,
+          "origin": "1100",
+          "expected": "1110",
+          "target": "1110"
+        },
+        {
+          "action": 50,
+          "origin": "1110",
+          "expected": "1010",
+          "target": "1010"
+        },
+        {
+          "action": 51,
+          "origin": "1010",
+          "expected": "0010",
+          "target": "0010"
+        },
+        {
+          "action": 52,
+          "origin": "0010",
+          "expected": "0011",
+          "target": "0011"
+        },
+        {
+          "action": 53,
+          "origin": "0011",
+          "expected": "1011",
+          "target": "1011"
+        },
+        {
+          "action": 54,
+          "origin": "1011",
+          "expected": "1111",
+          "target": "1111"
+        },
+        {
+          "action": 55,
+          "origin": "1111",
+          "expected": "1101",
+          "target": "1101"
+        },
+        {
+          "action": 56,
+          "origin": "1101",
+          "expected": "0101",
+          "target": "0101"
+        },
+        {
+          "action": 57,
+          "origin": "0101",
+          "expected": "0001",
+          "target": "0001"
+        }
+      ]
+    }
+  ]
+}

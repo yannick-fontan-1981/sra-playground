@@ -455,7 +455,562 @@
       },
       "exposed": 55,
       "method": "Replay public observations into the frozen preparation family, without injecting experiment proposals. Inspect the stable direct edge, preparation edge, prepared effect and recorded ordered chain."
-    }
+    },
+    "nextInputComparedWithBothControls": [
+      {
+        "game": "LKEY",
+        "level": 2,
+        "slot": 50,
+        "originalResponse": true,
+        "commands": [
+          {
+            "command": "ACTION1",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "a74f827102c9152c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "a74f827102c9152c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "a3b40d0e526ce025",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION2",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "25c72ab81f3d5cb9",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "25c72ab81f3d5cb9",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "c298ded565205430",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION3",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "25c72ab81f3d5cb9",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "a3b40d0e526ce025",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "a74f827102c9152c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": true
+          },
+          {
+            "command": "ACTION4",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "554286374b778da7",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "1645a678962ba43c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "22e711ea9454c548",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION5",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "883b3ffb8f3c9cef",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "5b131f8a6e1b5533",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "35345f3d3382ed46",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION7",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "19282a216c5ee777",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "19282a216c5ee777",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "19282a216c5ee777",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION6:52,30",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "25c72ab81f3d5cb9",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "a74f827102c9152c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "a3b40d0e526ce025",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION6:44,43",
+            "origin": {
+              "from": "25c72ab81f3d5cb9",
+              "to": "554286374b778da7",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "a74f827102c9152c",
+              "to": "a74f827102c9152c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a3b40d0e526ce025",
+              "to": "a3b40d0e526ce025",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          }
+        ],
+        "newlyEnabled": [],
+        "official": [],
+        "hiddenResponseAfterUnchangedImage": []
+      },
+      {
+        "game": "FUIT",
+        "level": 2,
+        "slot": 36,
+        "originalResponse": false,
+        "commands": [
+          {
+            "command": "ACTION1",
+            "origin": {
+              "from": "bddab0712682a6ec",
+              "to": "eff46b77b44afc93",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "eff46b77b44afc93",
+              "to": "eff46b77b44afc93",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "eff46b77b44afc93",
+              "to": "eff46b77b44afc93",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": true
+          },
+          {
+            "command": "ACTION2",
+            "origin": {
+              "from": "bddab0712682a6ec",
+              "to": "051183a539ca29b6",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "eff46b77b44afc93",
+              "to": "bddab0712682a6ec",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "eff46b77b44afc93",
+              "to": "bddab0712682a6ec",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": true
+          },
+          {
+            "command": "ACTION3",
+            "origin": {
+              "from": "bddab0712682a6ec",
+              "to": "bddab0712682a6ec",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "eff46b77b44afc93",
+              "to": "eff46b77b44afc93",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "eff46b77b44afc93",
+              "to": "eff46b77b44afc93",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": true
+          },
+          {
+            "command": "ACTION4",
+            "origin": {
+              "from": "bddab0712682a6ec",
+              "to": "bddab0712682a6ec",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "eff46b77b44afc93",
+              "to": "69fcf34a5df927dc",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "eff46b77b44afc93",
+              "to": "69fcf34a5df927dc",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION5",
+            "origin": {
+              "from": "bddab0712682a6ec",
+              "to": "bddab0712682a6ec",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "eff46b77b44afc93",
+              "to": "eff46b77b44afc93",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "eff46b77b44afc93",
+              "to": "eff46b77b44afc93",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": true
+          },
+          {
+            "command": "ACTION7",
+            "origin": {
+              "from": "bddab0712682a6ec",
+              "to": "55393c557a65840c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "eff46b77b44afc93",
+              "to": "55393c557a65840c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "eff46b77b44afc93",
+              "to": "55393c557a65840c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          }
+        ],
+        "newlyEnabled": [],
+        "official": [],
+        "hiddenResponseAfterUnchangedImage": []
+      },
+      {
+        "game": "GABA",
+        "level": 2,
+        "slot": 38,
+        "originalResponse": true,
+        "commands": [
+          {
+            "command": "ACTION1",
+            "origin": {
+              "from": "6543884a3ec5cd01",
+              "to": "dfcecdc1a88c96f7",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "dfcecdc1a88c96f7",
+              "to": "3dd226aedcea2c9a",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a7ac7a92b8b72dbd",
+              "to": "dc43999dd6a864a8",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION2",
+            "origin": {
+              "from": "6543884a3ec5cd01",
+              "to": "6543884a3ec5cd01",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "dfcecdc1a88c96f7",
+              "to": "6543884a3ec5cd01",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a7ac7a92b8b72dbd",
+              "to": "cebc29abdda18f7c",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION3",
+            "origin": {
+              "from": "6543884a3ec5cd01",
+              "to": "afc5f02bf10369ab",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "dfcecdc1a88c96f7",
+              "to": "e00a597947e2bc6f",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a7ac7a92b8b72dbd",
+              "to": "d40f0d23623866af",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION4",
+            "origin": {
+              "from": "6543884a3ec5cd01",
+              "to": "af28fe46513590c9",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "dfcecdc1a88c96f7",
+              "to": "dfcecdc1a88c96f7",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a7ac7a92b8b72dbd",
+              "to": "a7ac7a92b8b72dbd",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION5",
+            "origin": {
+              "from": "6543884a3ec5cd01",
+              "to": "6543884a3ec5cd01",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "dfcecdc1a88c96f7",
+              "to": "a7ac7a92b8b72dbd",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a7ac7a92b8b72dbd",
+              "to": "a7ac7a92b8b72dbd",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          },
+          {
+            "command": "ACTION7",
+            "origin": {
+              "from": "6543884a3ec5cd01",
+              "to": "afc5f02bf10369ab",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "prepared": {
+              "from": "dfcecdc1a88c96f7",
+              "to": "afc5f02bf10369ab",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "afterTest": {
+              "from": "a7ac7a92b8b72dbd",
+              "to": "afc5f02bf10369ab",
+              "credit": false,
+              "lost": false,
+              "available": true
+            },
+            "enabledOnlyAfterTest": false,
+            "returnsToOldArrangement": false
+          }
+        ],
+        "newlyEnabled": [],
+        "official": [],
+        "hiddenResponseAfterUnchangedImage": []
+      }
+    ]
   },
   "native": [
     {
@@ -747,6 +1302,132 @@
           }
         ]
       }
+    },
+    {
+      "game": "UPST",
+      "entry": [
+        1,
+        1
+      ],
+      "budget": 60,
+      "matchingPrefix": 47,
+      "identical": false,
+      "firstDifferentCommandOrImage": {
+        "action": 48,
+        "publicOrigin": "28dbfb60e730bebb",
+        "ordinary": 6,
+        "prospective": 6,
+        "ordinaryPoint": {
+          "x": 42,
+          "y": 11
+        },
+        "prospectivePoint": {
+          "x": 21,
+          "y": 10
+        },
+        "previousFamily": "sic_test_prepared_effects",
+        "candidateFamily": "sic_test_prepared_effects"
+      },
+      "ordinary": {
+        "levels": [
+          {
+            "level": 1,
+            "actions": 57,
+            "won": true
+          }
+        ],
+        "publicImages": 31,
+        "issued": 57,
+        "reason": "target_levels_completed",
+        "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+        "replay": "3e4de56240497728f95b11154ef4f6f9b40c02a871fa59b0282afe881ab784b8",
+        "questions": []
+      },
+      "prospective": {
+        "levels": [
+          {
+            "level": 1,
+            "actions": 60,
+            "won": false
+          }
+        ],
+        "publicImages": 25,
+        "issued": 60,
+        "reason": "session_action_budget",
+        "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+        "replay": "3b5fdfab98fef82e23819fafb44503f59ded08920ae0dc7dbe410a30d5837c91",
+        "questions": [
+          {
+            "action": 48,
+            "publicOrigin": "28dbfb60e730bebb",
+            "returned": "9c48ba297c9e3a04",
+            "input": 6,
+            "phase": "prepare",
+            "prepare": "ACTION6:21,10",
+            "probe": "ACTION6:52,45",
+            "evidence": [
+              48,
+              5,
+              17
+            ],
+            "distinctSilentOrigins": 2,
+            "observedPreparationReturns": 2,
+            "observedInverse": false,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "preparation_verified_test_the_silent_input",
+            "returnedEffect": "edit:1>2x1,4>13x4,4>7x1"
+          },
+          {
+            "action": 53,
+            "publicOrigin": "28dbfb60e730bebb",
+            "returned": "9c48ba297c9e3a04",
+            "input": 6,
+            "phase": "prepare",
+            "prepare": "ACTION6:21,10",
+            "probe": "ACTION6:52,45",
+            "evidence": [
+              48,
+              5,
+              17
+            ],
+            "distinctSilentOrigins": 2,
+            "observedPreparationReturns": 3,
+            "observedInverse": false,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "preparation_verified_test_the_silent_input",
+            "returnedEffect": "edit:1>2x1,4>13x4,4>7x1"
+          },
+          {
+            "action": 55,
+            "publicOrigin": "9c48ba297c9e3a04",
+            "returned": "46d1a1274782d027",
+            "input": 6,
+            "phase": "prepare",
+            "prepare": "ACTION6:42,11",
+            "probe": "ACTION6:52,45",
+            "evidence": [
+              55,
+              5,
+              45
+            ],
+            "distinctSilentOrigins": 3,
+            "observedPreparationReturns": 2,
+            "observedInverse": false,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "preparation_verified_test_the_silent_input",
+            "returnedEffect": "edit:0>1x2,0>4x4,1>0x2,1>2x1,11>4x2,12>4x1,13>4x4,14>4x1,4>0x4,4>8x4,4>9x1,7>4x1"
+          }
+        ]
+      }
     }
   ],
   "reproduction": {
@@ -756,5 +1437,28 @@
     "nativeRunner": "scripts/compare-source100.mjs",
     "sourceReplay": "scripts/verify-sic-source-levels.mjs",
     "customReplay": "scripts/verify-frozen-level-scores.mjs"
-  }
+  },
+  "historicalWinsWithTheExperimentalPack": [
+    {
+      "backend": "source",
+      "game": "UPST",
+      "entry": [
+        1,
+        1
+      ],
+      "cap": 60,
+      "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": false
+        }
+      ],
+      "allCommandsAndImagesMatchReference": false,
+      "matchingPrefix": 47,
+      "newTests": 0,
+      "digest": "3b5fdfab98fef82e23819fafb44503f59ded08920ae0dc7dbe410a30d5837c91"
+    }
+  ]
 }
