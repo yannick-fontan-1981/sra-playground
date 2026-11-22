@@ -1,5 +1,26 @@
 # Actions continues de SIC sur les 100 premiers niveaux
 
+## Contrat de continuité en développement
+
+Le moteur sait engager jusqu’à 16 commandes, contrôler le retour immédiat de chacune et acquérir les transitions au moment où il clôt la série. Une décision reste identifiée par la même révision pendant cette exécution. Une nouvelle stratégie peut pourtant contourner cette capacité en ne proposant que le premier geste d’un trajet. C’est ce qui est arrivé à la famille d’expérimentation introduite en `2c823c51`, puis réutilisée par les plans de résolution. À la révision 203, SS01 gagnait ses huit niveaux en 445 commandes mais n’exécutait aucune deuxième commande sous la même décision.
+
+La révision 205 transmet les approches libres déjà calculées par l’exploration et par les plans de préparation. Les préconditions et les cellules d’arrivée sont liées avant l’exécution. SIC interrompt la série si le sujet n’arrive pas, si une autre région change, si le prochain terrain ne correspond plus, ou à une frontière officielle. Une manipulation, un changement de contrôle ou une expérience à résultat inconnu rend la main au raisonnement. Les transitions réellement exécutées alimentent les mémoires dans leur ordre à la clôture.
+
+| Niveau SS01 | Coups | Séries exécutées | Coups sans nouvelle décision | Plus longue série |
+|---|---:|---:|---:|---:|
+| L1 | 36 | 4 | 17 | 8 |
+| L2 | 32 | 2 | 5 | 4 |
+| L3 | 42 | 4 | 8 | 4 |
+| L4 | 79 | 10 | 17 | 6 |
+| L5 | 62 | 3 | 4 | 3 |
+| L6 | 116 | 10 | 21 | 6 |
+| L7 | 37 | 5 | 9 | 4 |
+| L8 | 41 | 6 | 13 | 6 |
+
+Sur le site local, les commandes, coordonnées et empreintes des observations avant chaque action correspondent aux 445 tickets du témoin. Le jeu rapporte WIN et huit crédits. Le délai médian entre deux autorisations d’une même série était de 17 ms sur cette exécution. Le temps global dépend aussi des recherches, des animations et de la charge de la machine.
+
+Le contrôle local `npm run test:sic-continuity` examine les tickets confirmés par le moteur après la commande. Il vérifie les victoires, la proportion de gestes enchaînés **à chaque niveau**, la limite de 16, la continuité des indices et une seule clôture couvrant exactement les gestes exécutés. Trois témoins sources exercent le déplacement (AR25), le clic (HANO) et un trajet mixte (DC22). Les tests négatifs font échouer une victoire dégradée en décisions unitaires, une réconciliation anticipée, une clôture incomplète et un dépassement de la borne. Le workflow `SIC continuity` exécute le contrat sur les pull requests, la file de fusion et les mises à jour de `main`.
+
 ## Couverture après extension des trajets
 
 Les **100 niveaux 1** sont gagnés en SIC seul. Les **1 248 commandes** et les retours comparés sont identiques au parcours de référence. L’empreinte couvre les commandes, les images finales et intermédiaires, le niveau, le score et l’état du jeu. Les reprises de décision passent de **1 105 à 1 026**.

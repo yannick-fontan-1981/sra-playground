@@ -1,0 +1,27 @@
+name: SIC continuity
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: sic-continuity-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+jobs:
+  executed-series:
+    name: Executed series and final reconciliation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: node --test tests/sic-continuity-contract.test.mjs tests/sic-verified-walking-series.test.ts tests/v6-branch-routing-kernel.test.ts
+      - run: npm run test:sic-continuity

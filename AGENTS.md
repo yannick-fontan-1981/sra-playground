@@ -34,6 +34,12 @@ Aucun lot ne doit attendre une publication d'un autre lot uniquement pour sauveg
 
 Les commits doivent rester petits et cohérents, avec des pushes réguliers.
 
+## Actions continues de SIC
+
+Lorsqu’un plan contient plusieurs gestes déjà justifiés, exposer son préfixe au moteur natif. Une décision engage au plus 16 commandes, dans le budget restant. Entre les commandes, vérifier uniquement les prémisses et le retour observé. En cas de contradiction, de changement de niveau ou de limite, clore la série. Réconcilier une seule fois les gestes réellement exécutés, dans l’ordre, puis rendre la main au raisonnement. Une expérience dont la suite dépend d’une découverte peut rester unitaire.
+
+Avant d’intégrer un changement de SIC, du pack, de l’arbitrage ou du moteur, exécuter `npm run test:sic-continuity`. Une victoire et un plan annoncé de plusieurs actions ne prouvent pas la continuité. Le contrôle examine les tickets exécutés et les clôtures natives sur chaque niveau protégé, avec des témoins de déplacements, de clics et de séries mixtes. Ajouter au contrat tout nouveau niveau dont on qualifie la continuité. Pour changer un seuil, documenter la raison et comparer le parcours antérieur dans la même modification.
+
 ## Publication
 
 ### Pendant le test d’un jeu précis

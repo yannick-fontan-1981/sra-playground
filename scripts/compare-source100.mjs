@@ -137,7 +137,22 @@ async function run(code, games) {
     }
     return lesson?lesson.wrap(backend):backend;
   });
-  const transport = { request: (operation) => service.handle(operation), reset() {}, dispose() {} };
+  // Count only commands acknowledged by the native service after dispatch.
+  const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
+  let pendingTicket;
+  const transport = { async request(operation) {
+    const result = await service.handle(operation);
+    if (executedTickets) {
+      if (operation.type === 'advance') {
+        if (!pendingTicket || operation.ticketId !== pendingTicket.id) throw Error('Continuity ticket mismatch');
+        const {level,decisionRevision,actionIndex,actionRef} = pendingTicket;
+        const seal = result.snapshot.trace.findLast(e => e.kind === 'sealed_prefix' && e.revision === decisionRevision);
+        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,sealed:seal?.acquired_actions ?? null});
+      }
+      pendingTicket = result.ticket;
+    }
+    return result;
+  }, reset() {}, dispose() {} };
   const trajectory = createHash('sha256'),
     levels = [],
     steps = [];
@@ -362,6 +377,7 @@ async function run(code, games) {
       ...(process.env.SIC_STUDY_WORKERS ? {parallelWorkers:Number(process.env.SIC_STUDY_WORKERS)} : {}),
       initial,
       initialCompleted,
+      ...(executedTickets ? {executedTickets} : {}),
       ...(withdrawal?{withdrawal}:{}),
       ...(prefixFile ? { sourcePrefixActions: entryActions } : {}),
       ...(lesson?{observedPriorLevelActions:lesson.length}:{}),

@@ -80,6 +80,12 @@ function named(o: NativeObservation, rows: NativeRows, p: MechanismPlan) {
 function atCurrent(s: LayoutStep, loc: ReturnType<typeof named>, pitch?: XY) {
   return !!(loc.site && cellMatches(loc.actor, s.p, pitch) && cellMatches(loc.site, s.c, pitch));
 }
+export function mechanismWalkStance(t:MechanismTrial,index:number,o:NativeObservation,rows:NativeRows,arrived:boolean){
+  const s=t.plan.steps[t.index+index];
+  if(!s || s.stage!=='move')return false;
+  const body=named(o,rows,t.plan);
+  return cellMatches(body.actor,arrived?s.to:s.p,t.plan.pitch) && cellMatches(body.site,arrived?s.placed:s.c,t.plan.pitch);
+}
 function offer(
   t: MechanismTrial,
   s: number,

@@ -1,3 +1,5 @@
+import {preparedWalk,preparedStance,preparedExperimentAt} from './prepared-walking-series.ts';
+import {walkingPremise,walkingReturn,type BoundWalkingStep} from './verified-walking-series.ts';
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
 import { sicObservedTransportDeadlock } from '../logos-engine/v6-native-types.ts';
 import {rememberRelayControl} from './relay-control.ts';
@@ -43,7 +45,7 @@ import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
 import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
-type Offer = NativeProposal & { experiment: Experiment };
+type Offer = NativeProposal & { experiment: Experiment; walkingSeries?:BoundWalkingStep[] };
 const labels: Record<Experiment['phase'], string> = {
   investigateContactFrontier: 'Test a contact that could change access to a visible destination',
   composeObservedTransport:'Test whether repositioning a piece makes both marked sites reachable',
@@ -437,10 +439,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
               evidence,
             })
           : null;
+      const series=preparedWalk(experiment,o,rows,remaining);
+      const actions=series?.map(step=>step.command)??[command];
       return {
         status: 'proposed',
         kind: preparedEffectsId,
-        actions: [command],
+        actions, ...(series?{walkingSeries:series}:{}),
         experiment,
         ...(cooperative?{cooperativeTransportForecast:cooperative}:{}),
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'||cursor.beyondReturn?{
@@ -496,7 +500,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(experiment.frontier ? { reachable_experiment: experiment.frontier } : {}),
         ...(experiment.condition ? { conditional_placement: experiment.condition } : {}),
         ...(capability ? { capability_equation: capability } : {}),
-        steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
+        steps: series ? series.map(step=>({action:step.command,expected_after:step.to})) : [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: o.level_epoch },
         sicSituationCard: {
           strategy: phase,
@@ -525,16 +529,27 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           evidence,
           preconditions: {},
           preserve_refs: [],
-          actions: [command],
+          actions,
           outcome_guard: { path: ['value'], contains: need.id },
         },
       };
     },
-    before(p, i, _packet, o) {
+    before(p, i, packet, o) {
+      const step=p.walkingSeries?.[i];
+      if(step){
+        const admitted=(i>0 || p.binding?.observation_ref===o.observation_ref) && walkingPremise(step,packet.frame_rows) && preparedStance(p.experiment,i,o,packet.frame_rows,false);
+        return {admitted,reason:admitted?'observed_walk_still_available':'walk_premise_changed'};
+      }
       const admitted = i === 0 && p.binding?.observation_ref === o.observation_ref;
       return { admitted, reason: admitted ? 'matched_preparation_bound' : 'stale_preparation' };
     },
-    after(_p, _i, b, a) {
+    after(p, i, b, a, first, next) {
+      const step=p.walkingSeries?.[i];
+      if(step){
+        const boundary=b.level_epoch!==a.level_epoch || a.levels_completed>b.levels_completed;
+        const matched=walkingReturn(step,first,next,preparedStance(p.experiment,i,a,next,true));
+        return {matched:boundary||matched,seal_prefix:boundary||!matched,reason:boundary?'official_boundary':matched?'walk_confirmed':'walk_observation_changed'};
+      }
       const won = a.levels_completed > b.levels_completed;
       return {
         matched: won ? true : null,
@@ -545,8 +560,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     observePublicOutcome(b, a, c, r, n) {
       acquire(b, a, c, r, n);
     },
-    record(b, a, c, r, n, p) {
-      const outcome = acquire(b, a, c, r, n, p.experiment);
+    record(b, a, c, r, n, p, index) {
+      const trial=p.walkingSeries?preparedExperimentAt(p.experiment,index,b):p.experiment;
+      const outcome = acquire(b, a, c, r, n, trial);
       const proof = m.contactFrontier?.deadlock;
       return {
         events: [
