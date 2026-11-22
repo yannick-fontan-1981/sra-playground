@@ -1,0 +1,608 @@
+{
+  "spec": {
+    "id": "ss18-07",
+    "title": "La navette des alcôves",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "########..~#########",
+      "########..~.M.######",
+      "########B.~s########",
+      "########..~..g######",
+      "########..~~########",
+      "########..~.o.######",
+      "########..~~########",
+      "########..~.og~#####",
+      "########..~~########",
+      "####......~#########",
+      "####.g..Z.##########",
+      "####......##########",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "vue",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 8
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 10
+        },
+        "circuit": "vue",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "LDDRRCCRLDDRCLLDDRCCLDDRCLDDRRCUUURCCDDDLLLCCLUUURRRRR",
+  "actions": [
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 21
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 27,
+    "label": "Adaptation de Heroes and Water · énigme 27 · recaler un appui grâce aux butées",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+    "objective": "Acheminer un appui par un chenal latéral, garer le passager hors du chant, dégager une visée de relève puis changer l’axe de la dernière traversée.",
+    "secondary": {
+      "label": "Heroes and Light · énigme 40 · faire contourner l’obstacle à la charge",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 54,
+    "selections": 11,
+    "merchantPushes": 3,
+    "songs": 12,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 12,
+    "swaps": 1,
+    "partnerSwaps": 1,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 3,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand traverse le premier appui et se range au fond de l’alcôve : ce recul le met hors de portée du chant suivant.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "vue": false
+      }
+    },
+    {
+      "label": "L’appui quitte son poste latéral, contourne la terre sèche par le chenal et vient desservir la deuxième traversée.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "vue": false
+      }
+    },
+    {
+      "label": "Le Marchand pousse la réserve au fond de l’alcôve. Cette charge ouvre la fenêtre du dernier débarcadère et doit y rester pendant les traversées suivantes.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "vue": true
+      }
+    },
+    {
+      "label": "Au dernier débarcadère, le Marchand pousse l’obstacle jusqu’à l’eau. La ligne de relève est enfin dégagée et la caisse de l’alcôve précédente maintient sa fenêtre ouverte.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "vue": true
+      }
+    },
+    {
+      "label": "Le Magicien rejoint l’alcôve terminale par échange ; le Marchand récupéré sur le quai peut rejoindre la destination ouest.",
+      "turn": 35,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "vue": true
+      }
+    },
+    {
+      "label": "Le Barde ramène la navette par le chenal. La berge la retient lors du changement d’axe ; son arrivée ancre l’appui sous ses pieds, puis il gagne l’alcôve centrale.",
+      "turn": 54,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "vue": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Water 27 : le trajet de l’appui et celui du Barde diffèrent ; les butées modifient leur écart avant un nouveau passage.",
+      "Light 40 : une charge doit contourner le passage que le chant ne peut lui faire traverser directement."
+    ],
+    "changed": [
+      "Quatre alcôves en peigne remplacent les quatre rives de SS15 ; une charge laissée dans l’avant-dernière alcôve ouvre la fenêtre de relève finale.",
+      "Le passager doit se garer au fond des alcôves avant le déplacement de la navette ; rester au bord perturbe le chant.",
+      "Le Marchand réserve un poids pour la fenêtre de relève, convertit l’obstacle terminal en appui, puis le Magicien le relève à distance.",
+      "Le dernier trajet du Barde utilise l’appui transversalement, et non dans l’axe des traversées précédentes.",
+      "Il n’existe ni empilement ni déplacement double : les appuis mobiles et leurs ancrages suivent le contrat SS18."
+    ],
+    "sourceReading": "Le principe du recalage par butées est repris, mais la géométrie en peigne, la relève par échange et les destinations dispersées sont une composition originale.",
+    "proofScope": "Parcours légal et effets locaux du chant ; aucune unicité ni optimalité revendiquée."
+  }
+}
