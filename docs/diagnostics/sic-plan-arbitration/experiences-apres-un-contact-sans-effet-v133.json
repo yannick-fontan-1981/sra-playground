@@ -1,0 +1,1022 @@
+{
+  "baseline": "d8fa28915c28f26fe13047499c39409f0ff02fdb",
+  "candidate": "db21110b6258ee57fc6399cab628f5be9d979cb9",
+  "sameBudget": 120,
+  "workers": 1,
+  "engine": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "sourceDiagnosis": {
+    "version": "v109",
+    "game": "LKEY",
+    "issued": 120,
+    "won": false,
+    "trigger": true,
+    "cycle": [
+      "25c72ab81f3d5cb9",
+      "a74f827102c9152c"
+    ],
+    "results": [
+      {
+        "forecast": {
+          "basis": "all_measured_escape_directions",
+          "horizon": 1,
+          "predictsContact": true,
+          "targetCountBefore": 4,
+          "targetCountAfter": 4,
+          "actorAtPredictedPosition": true,
+          "publicImageChanged": true
+        },
+        "action": 49,
+        "from": "25c72ab81f3d5cb9",
+        "selected": 1,
+        "preparationTrials": 12,
+        "preparationScope": "Up to four distinct safe images. Test up to three previously ineffective non-click inputs and one previously ineffective click after preparation.",
+        "scope": "All legal non-click inputs plus every distinct click already attempted before this action",
+        "alternatives": [
+          {
+            "action": "ACTION1",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION2",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION3",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION4",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION5",
+            "to": "883b3ffb8f3c9cef",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION7",
+            "to": "19282a216c5ee777",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:52,30",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:31,61",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:31,0",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:51,21",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:51,49",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:51,38",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:14,29",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:41,29",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,18",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,46",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:2,16",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:6,14",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,12",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,40",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:50,47",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,18",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:6,18",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,47",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:44,14",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:4,61",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:10,61",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:16,61",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:22,61",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,61",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:34,61",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:50,14",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:20,19",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,15",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:47,18",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:50,44",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,43",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:20,47",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,46",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,19",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:44,43",
+            "to": "554286374b778da7",
+            "over": false,
+            "credit": false
+          }
+        ],
+        "exits": 11,
+        "unlockedActionPairs": [
+          {
+            "prepare": "ACTION1",
+            "probe": "ACTION3",
+            "credit": false,
+            "afterPreparation": "a74f827102c9152c",
+            "afterProbe": "a3b40d0e526ce025"
+          },
+          {
+            "prepare": "ACTION7",
+            "probe": "ACTION2",
+            "credit": false,
+            "afterPreparation": "19282a216c5ee777",
+            "afterProbe": "883b3ffb8f3c9cef"
+          }
+        ]
+      },
+      {
+        "forecast": {
+          "basis": "all_measured_escape_directions",
+          "horizon": 1,
+          "predictsContact": true,
+          "targetCountBefore": 4,
+          "targetCountAfter": 4,
+          "actorAtPredictedPosition": true,
+          "publicImageChanged": true
+        },
+        "action": 50,
+        "from": "a74f827102c9152c",
+        "selected": 2,
+        "preparationTrials": 8,
+        "preparationScope": "Up to four distinct safe images. Test up to three previously ineffective non-click inputs and one previously ineffective click after preparation.",
+        "scope": "All legal non-click inputs plus every distinct click already attempted before this action",
+        "alternatives": [
+          {
+            "action": "ACTION1",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION2",
+            "to": "25c72ab81f3d5cb9",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION3",
+            "to": "a3b40d0e526ce025",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION4",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION5",
+            "to": "5b131f8a6e1b5533",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION7",
+            "to": "19282a216c5ee777",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:52,30",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:31,61",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:31,0",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:51,21",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:51,49",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:51,38",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:14,29",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:41,29",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,18",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,46",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:2,16",
+            "to": "a3b40d0e526ce025",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:6,14",
+            "to": "a3b40d0e526ce025",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,12",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,40",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:50,47",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,18",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:6,18",
+            "to": "a3b40d0e526ce025",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,47",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:44,14",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:4,61",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:10,61",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:16,61",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:22,61",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,61",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:34,61",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:50,14",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:20,19",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,15",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:47,18",
+            "to": "1645a678962ba43c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:50,44",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:55,43",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:20,47",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,46",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:28,19",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          },
+          {
+            "action": "ACTION6:44,43",
+            "to": "a74f827102c9152c",
+            "over": false,
+            "credit": false
+          }
+        ],
+        "exits": 14,
+        "unlockedActionPairs": []
+      }
+    ]
+  },
+  "comparisons": [
+    {
+      "game": "FUIT",
+      "level": 2,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "55393c557a65840c7f81b45ff24231453dc8e9fd05e468f5bb45f3c371796db3",
+      "before": {
+        "issued": 80,
+        "officialCredit": true,
+        "reason": "target_levels_completed",
+        "distinctPublicImages": 55,
+        "previouslySeenReturnsAtEnd": 0,
+        "differentOriginsDuringRepeatedSuffix": 0,
+        "reactiveApproaches": 24
+      },
+      "after": {
+        "issued": 80,
+        "officialCredit": true,
+        "reason": "target_levels_completed",
+        "distinctPublicImages": 55,
+        "previouslySeenReturnsAtEnd": 0,
+        "differentOriginsDuringRepeatedSuffix": 0,
+        "reactiveApproaches": 24
+      },
+      "matchingCommandAndImagePrefix": 80,
+      "sameAllCommandsAndImages": true,
+      "firstDifferentFamily": null,
+      "firstDifferentCommandOrImage": null,
+      "officialReplay": [
+        "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00"
+      ]
+    },
+    {
+      "game": "LKEY",
+      "level": 2,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "19282a216c5ee7770e7ace8b9fe85fc4d51b9081de95b904c564654fe95994f4",
+      "before": {
+        "issued": 120,
+        "officialCredit": false,
+        "reason": "session_action_budget",
+        "distinctPublicImages": 5,
+        "previouslySeenReturnsAtEnd": 75,
+        "differentOriginsDuringRepeatedSuffix": 2,
+        "reactiveApproaches": 76
+      },
+      "after": {
+        "issued": 108,
+        "officialCredit": true,
+        "reason": "target_levels_completed",
+        "distinctPublicImages": 24,
+        "previouslySeenReturnsAtEnd": 0,
+        "differentOriginsDuringRepeatedSuffix": 0,
+        "reactiveApproaches": 27
+      },
+      "matchingCommandAndImagePrefix": 48,
+      "sameAllCommandsAndImages": false,
+      "firstDifferentFamily": 49,
+      "firstDifferentCommandOrImage": {
+        "action": 49,
+        "publicOrigin": "25c72ab81f3d5cb9",
+        "previousChoice": [
+          "ACTION1",
+          "sic_learn_reactive_motion"
+        ],
+        "candidateChoice": [
+          "ACTION3",
+          "sic_test_prepared_effects"
+        ],
+        "newPublicImage": false,
+        "question": [
+          {
+            "phase": "testLandmarkPlacement",
+            "hypothesis": "compare_two_arrivals_with_a_preserved_first_contact",
+            "result": "approach_refuted_replan"
+          }
+        ]
+      },
+      "officialReplay": [
+        "b38d4ebf8977e342e2ac9788a4a645404ab99d7fbab347e7eaf860c3ef892b05",
+        "9621ee4101e93912aa98312f2b5fe1e76ab2d1b7085abb5b37be45add265f5f9"
+      ],
+      "outsideCycleSinceDivergence": 55,
+      "newImagesSinceDivergence": 19,
+      "matchedPreparedTestsDiscoveredByPilot": [
+        {
+          "firstAction": 52,
+          "preparation": "ACTION1",
+          "probe": "ACTION3",
+          "credit": false
+        }
+      ],
+      "preparationReceiptsSinceDivergence": [
+        {
+          "actionIndex": 49,
+          "phase": "testLandmarkPlacement",
+          "hypothesis": "compare_two_arrivals_with_a_preserved_first_contact",
+          "result": "approach_refuted_replan"
+        },
+        {
+          "actionIndex": 50,
+          "phase": "selectMarkedCursor",
+          "hypothesis": "compare_which_subject_responds_to_a_witnessed_motor_after_selection",
+          "result": "cursor_click_visually_unchanged"
+        },
+        {
+          "actionIndex": 51,
+          "phase": "verifyMarkedCursor",
+          "hypothesis": "test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays",
+          "result": "cursor_control_unconfirmed"
+        },
+        {
+          "actionIndex": 52,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_realized"
+        },
+        {
+          "actionIndex": 53,
+          "phase": "testLandmarkPlacement",
+          "hypothesis": "compare_two_arrivals_with_a_preserved_first_contact",
+          "result": "approach_refuted_replan"
+        },
+        {
+          "actionIndex": 58,
+          "phase": "testMechanismMobility",
+          "hypothesis": "test_which_persistent_part_can_be_moved_from_this_repeated_configuration",
+          "result": "mobility_unconfirmed"
+        },
+        {
+          "actionIndex": 59,
+          "phase": "testMechanismMobility",
+          "hypothesis": "test_which_persistent_part_can_be_moved_from_this_repeated_configuration",
+          "result": "mobility_unconfirmed"
+        },
+        {
+          "actionIndex": 64,
+          "phase": "reconfigureMechanism",
+          "hypothesis": "test_moving_a_mechanism_to_expand_access_after_a_stagnant_return",
+          "result": "mechanism_step_refuted"
+        },
+        {
+          "actionIndex": 65,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 66,
+          "phase": "testConfiguration",
+          "hypothesis": "test_an_unseen_configuration_of_observed_controls",
+          "result": "configuration_prediction_refuted"
+        },
+        {
+          "actionIndex": 67,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 68,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 69,
+          "phase": "testConfiguration",
+          "hypothesis": "test_an_unseen_configuration_of_observed_controls",
+          "result": "configuration_observed"
+        },
+        {
+          "actionIndex": 74,
+          "phase": "reconfigureMechanism",
+          "hypothesis": "test_moving_a_mechanism_to_expand_access_after_a_stagnant_return",
+          "result": "mechanism_step_refuted"
+        },
+        {
+          "actionIndex": 75,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 76,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 77,
+          "phase": "testConfiguration",
+          "hypothesis": "test_an_unseen_configuration_of_observed_controls",
+          "result": "configuration_prediction_refuted"
+        },
+        {
+          "actionIndex": 78,
+          "phase": "testMechanismMobility",
+          "hypothesis": "test_which_persistent_part_can_be_moved_from_this_repeated_configuration",
+          "result": "mobility_unconfirmed"
+        },
+        {
+          "actionIndex": 79,
+          "phase": "testMechanismMobility",
+          "hypothesis": "test_which_persistent_part_can_be_moved_from_this_repeated_configuration",
+          "result": "mobility_unconfirmed"
+        },
+        {
+          "actionIndex": 81,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 82,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 83,
+          "phase": "testMechanismMobility",
+          "hypothesis": "test_which_persistent_part_can_be_moved_from_this_repeated_configuration",
+          "result": "mobility_unconfirmed"
+        },
+        {
+          "actionIndex": 84,
+          "phase": "testMechanismMobility",
+          "hypothesis": "test_which_persistent_part_can_be_moved_from_this_repeated_configuration",
+          "result": "mobility_unconfirmed"
+        },
+        {
+          "actionIndex": 89,
+          "phase": "reconfigureMechanism",
+          "hypothesis": "test_moving_a_mechanism_to_expand_access_after_a_stagnant_return",
+          "result": "mechanism_step_refuted"
+        },
+        {
+          "actionIndex": 91,
+          "phase": "reconfigureMechanism",
+          "hypothesis": "test_moving_a_mechanism_to_expand_access_after_a_stagnant_return",
+          "result": "mechanism_step_refuted"
+        },
+        {
+          "actionIndex": 93,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 94,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 95,
+          "phase": "testMechanismMobility",
+          "hypothesis": "test_which_persistent_part_can_be_moved_from_this_repeated_configuration",
+          "result": "mobility_unconfirmed"
+        },
+        {
+          "actionIndex": 100,
+          "phase": "reconfigureMechanism",
+          "hypothesis": "test_moving_a_mechanism_to_expand_access_after_a_stagnant_return",
+          "result": "mechanism_step_refuted"
+        },
+        {
+          "actionIndex": 102,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 103,
+          "phase": "witnessedPreview",
+          "hypothesis": "subject_reaches_visible_indicator",
+          "result": "preview_contradicted"
+        },
+        {
+          "actionIndex": 104,
+          "phase": "reconfigureMechanism",
+          "hypothesis": "test_moving_a_mechanism_to_expand_access_after_a_stagnant_return",
+          "result": "mechanism_step_refuted"
+        }
+      ]
+    },
+    {
+      "game": "SKBN",
+      "level": 2,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "ba6eb233c02f5efba0eaf032ec5607180b36fff189f78d25737eb5f9a8f19215",
+      "before": {
+        "issued": 47,
+        "officialCredit": true,
+        "reason": "target_levels_completed",
+        "distinctPublicImages": 28,
+        "previouslySeenReturnsAtEnd": 0,
+        "differentOriginsDuringRepeatedSuffix": 0,
+        "reactiveApproaches": 0
+      },
+      "after": {
+        "issued": 47,
+        "officialCredit": true,
+        "reason": "target_levels_completed",
+        "distinctPublicImages": 28,
+        "previouslySeenReturnsAtEnd": 0,
+        "differentOriginsDuringRepeatedSuffix": 0,
+        "reactiveApproaches": 0
+      },
+      "matchingCommandAndImagePrefix": 47,
+      "sameAllCommandsAndImages": true,
+      "firstDifferentFamily": null,
+      "firstDifferentCommandOrImage": null,
+      "officialReplay": [
+        "9bb07577a4aeb5f9e01139523a57eb1097ac957226930616a274df7135f2529a",
+        "9bb07577a4aeb5f9e01139523a57eb1097ac957226930616a274df7135f2529a"
+      ]
+    },
+    {
+      "game": "GABA",
+      "level": 2,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "before": {
+        "issued": 120,
+        "officialCredit": false,
+        "reason": "session_action_budget",
+        "distinctPublicImages": 16,
+        "previouslySeenReturnsAtEnd": 6,
+        "differentOriginsDuringRepeatedSuffix": 2,
+        "reactiveApproaches": 2
+      },
+      "after": {
+        "issued": 120,
+        "officialCredit": false,
+        "reason": "session_action_budget",
+        "distinctPublicImages": 16,
+        "previouslySeenReturnsAtEnd": 6,
+        "differentOriginsDuringRepeatedSuffix": 2,
+        "reactiveApproaches": 2
+      },
+      "matchingCommandAndImagePrefix": 120,
+      "sameAllCommandsAndImages": true,
+      "firstDifferentFamily": null,
+      "firstDifferentCommandOrImage": null,
+      "officialReplay": [
+        "1c4d01f4c1c4f446b8e784e777f1cd236726941924b017968703f7ca33b69646",
+        "1c4d01f4c1c4f446b8e784e777f1cd236726941924b017968703f7ca33b69646"
+      ]
+    }
+  ],
+  "diagnosticCommand": [
+    "scripts/audit-repeated-contact-experiments.mjs",
+    "<source-engine>",
+    "<output.json>",
+    "<direct-frozen-tape.jsonl>"
+  ],
+  "reproducedExperimentSets": [
+    {
+      "game": "FUIT",
+      "level": 2,
+      "initial": "55393c557a65840c7f81b45ff24231453dc8e9fd05e468f5bb45f3c371796db3",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 120,
+      "recordedScore": true,
+      "firstRepeatedApproach": null,
+      "observedContrasts": []
+    },
+    {
+      "game": "LKEY",
+      "level": 2,
+      "initial": "19282a216c5ee7770e7ace8b9fe85fc4d51b9081de95b904c564654fe95994f4",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 120,
+      "recordedScore": false,
+      "firstRepeatedApproach": 49,
+      "observedContrasts": [
+        {
+          "action": 49,
+          "safeExits": 11,
+          "pairsTried": 12,
+          "contrasts": [
+            {
+              "preparation": "ACTION1",
+              "probe": "ACTION3",
+              "alone": "25c72ab81f3d5cb9",
+              "preparedImage": "a74f827102c9152c",
+              "final": "a3b40d0e526ce025",
+              "credit": false
+            },
+            {
+              "preparation": "ACTION7",
+              "probe": "ACTION2",
+              "alone": "25c72ab81f3d5cb9",
+              "preparedImage": "19282a216c5ee777",
+              "final": "883b3ffb8f3c9cef",
+              "credit": false
+            }
+          ],
+          "targetsBefore": 4,
+          "targetsAfter": 4,
+          "arrivalObserved": true
+        },
+        {
+          "action": 50,
+          "safeExits": 14,
+          "pairsTried": 8,
+          "contrasts": [],
+          "targetsBefore": 4,
+          "targetsAfter": 4,
+          "arrivalObserved": true
+        }
+      ]
+    },
+    {
+      "game": "LKEY",
+      "level": 2,
+      "initial": "19282a216c5ee7770e7ace8b9fe85fc4d51b9081de95b904c564654fe95994f4",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 120,
+      "recordedScore": true,
+      "firstRepeatedApproach": null,
+      "observedContrasts": []
+    },
+    {
+      "game": "FUIT",
+      "level": 2,
+      "initial": "55393c557a65840c7f81b45ff24231453dc8e9fd05e468f5bb45f3c371796db3",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 120,
+      "recordedScore": true,
+      "firstRepeatedApproach": null,
+      "observedContrasts": []
+    },
+    {
+      "game": "GABA",
+      "level": 2,
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 120,
+      "recordedScore": false,
+      "firstRepeatedApproach": null,
+      "observedContrasts": []
+    }
+  ]
+}

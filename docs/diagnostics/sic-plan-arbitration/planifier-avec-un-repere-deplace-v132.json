@@ -39,6 +39,32 @@
     "firstDifferentCommandOrImage": 40,
     "lastState": "target_levels_completed",
     "publicTraceDigest": "660fef590e8bc5741f4185c8aaf07fe3434dbb28c5007b8cbfb6e7567bb7798d",
+    "candidateExperiments": [
+      {
+        "level": 3,
+        "selectionComparisons": 1,
+        "controlTransfersVerified": 1,
+        "motionComparisons": 1,
+        "motionComparisonsDistinguished": 1,
+        "entryIntoTestedSiteObserved": 0,
+        "passageComparisons": 1,
+        "passageComparisonsConfirmedOpen": 1,
+        "landmarkApproachesExplicitlyTested": 0
+      }
+    ],
+    "baselineExperiments": [
+      {
+        "level": 3,
+        "selectionComparisons": 1,
+        "controlTransfersVerified": 1,
+        "motionComparisons": 1,
+        "motionComparisonsDistinguished": 1,
+        "entryIntoTestedSiteObserved": 0,
+        "passageComparisons": 0,
+        "passageComparisonsConfirmedOpen": 0,
+        "landmarkApproachesExplicitlyTested": 0
+      }
+    ],
     "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
     "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
     "earnedTransitions": []
@@ -219,6 +245,32 @@
       "firstDifferentCommandOrImage": 40,
       "lastState": "native_game_over",
       "publicTraceDigest": "508c5e7fb33277fcbfd1ccb466cc60b5d3e2f077e6d62a9d6674c14a02f8f177",
+      "candidateExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 1,
+          "motionComparisonsDistinguished": 1,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 1,
+          "motionComparisonsDistinguished": 1,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 1,
+          "passageComparisonsConfirmedOpen": 1,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
       "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "earnedTransitions": []
@@ -252,6 +304,32 @@
       "firstDifferentCommandOrImage": 42,
       "lastState": "session_action_budget",
       "publicTraceDigest": "a50e36bdb940c2aa749dd2f59615fd351585e59841d67747ecf477710800e24b",
+      "candidateExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 4,
+          "motionComparisonsDistinguished": 3,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 1,
+          "passageComparisonsConfirmedOpen": 1,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 1,
+          "motionComparisonsDistinguished": 1,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 1,
+          "passageComparisonsConfirmedOpen": 1,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
       "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "earnedTransitions": []
@@ -347,6 +425,32 @@
     "firstDifferentCommandOrImage": 2,
     "lastState": "native_game_over",
     "publicTraceDigest": "4c9113b0718f118a5bdf24e92a8fb372abe5a144e59053c189c281d1f8059c35",
+    "candidateExperiments": [
+      {
+        "level": 3,
+        "selectionComparisons": 0,
+        "controlTransfersVerified": 0,
+        "motionComparisons": 0,
+        "motionComparisonsDistinguished": 0,
+        "entryIntoTestedSiteObserved": 0,
+        "passageComparisons": 0,
+        "passageComparisonsConfirmedOpen": 0,
+        "landmarkApproachesExplicitlyTested": 0
+      }
+    ],
+    "baselineExperiments": [
+      {
+        "level": 3,
+        "selectionComparisons": 1,
+        "controlTransfersVerified": 1,
+        "motionComparisons": 1,
+        "motionComparisonsDistinguished": 1,
+        "entryIntoTestedSiteObserved": 0,
+        "passageComparisons": 1,
+        "passageComparisonsConfirmedOpen": 1,
+        "landmarkApproachesExplicitlyTested": 0
+      }
+    ],
     "pack": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d",
     "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
     "earnedTransitions": [],
@@ -433,6 +537,32 @@
       "firstDifferentCommandOrImage": null,
       "lastState": "target_levels_completed",
       "publicTraceDigest": "948ef82959d0b7af6cc413a06944f6d0a014d9c2fe3720246eaef71db73bf11e",
+      "candidateExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 3,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 3,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
       "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "earnedTransitions": []
@@ -466,6 +596,32 @@
       "firstDifferentCommandOrImage": null,
       "lastState": "target_levels_completed",
       "publicTraceDigest": "477583113dc2460a64d6f8caa8984825cb98fb5b688a5771d7558ac54a319260",
+      "candidateExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 1,
+          "entryIntoTestedSiteObserved": 2,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 1,
+          "entryIntoTestedSiteObserved": 2,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
       "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "earnedTransitions": []
@@ -478,7 +634,1433 @@
     "sameCommandsAndImages": 0,
     "games": []
   },
-  "customL2Protection": [],
+  "customL2Protection": [
+    {
+      "game": "SS12",
+      "entry": [
+        1,
+        2
+      ],
+      "budget": 350,
+      "baseline": "early-lessons-v130",
+      "candidate": "early-lessons-v132",
+      "before": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "initial": "949785e8ef6a84f31b92fb415ade9cdfd0f758bd8faaf80214b77b6ea564bffb",
+      "matchingPrefix": 94,
+      "identicalTrajectory": true,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "target_levels_completed",
+      "publicTraceDigest": "000a537b05110fe12bdc70cf528172f76039ffac94f32c0b832bb365bd3f17db",
+      "candidateExperiments": [
+        {
+          "level": 1,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 2,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 1,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 2,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
+    },
+    {
+      "game": "SS13",
+      "entry": [
+        1,
+        2
+      ],
+      "budget": 350,
+      "baseline": "early-lessons-v130",
+      "candidate": "early-lessons-v132",
+      "before": [
+        {
+          "level": 1,
+          "actions": 300,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 1,
+          "actions": 300,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "initial": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360",
+      "matchingPrefix": 336,
+      "identicalTrajectory": true,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "target_levels_completed",
+      "publicTraceDigest": "50b139646337329b0a1ad4458f4474b1d063747291ee70f7cde283c606b03151",
+      "candidateExperiments": [
+        {
+          "level": 1,
+          "selectionComparisons": 3,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 3,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 2,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 1,
+          "selectionComparisons": 3,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 3,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 2,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
+    },
+    {
+      "game": "SS14",
+      "entry": [
+        1,
+        2
+      ],
+      "budget": 350,
+      "baseline": "early-lessons-v130",
+      "candidate": "early-lessons-v132",
+      "before": [
+        {
+          "level": 1,
+          "actions": 31,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 52,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 1,
+          "actions": 31,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 52,
+          "won": true
+        }
+      ],
+      "initial": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+      "matchingPrefix": 83,
+      "identicalTrajectory": true,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "target_levels_completed",
+      "publicTraceDigest": "0eab526fd215fbecc949bb7afdbf1696fd859b039a081644ed87d7d74612253c",
+      "candidateExperiments": [
+        {
+          "level": 1,
+          "selectionComparisons": 3,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 2,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 1,
+          "selectionComparisons": 3,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 2,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
+    }
+  ],
+  "sourceL2Protection": [
+    {
+      "game": "FUIT",
+      "level": 2,
+      "won": true,
+      "actions": 80,
+      "commands": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00"
+    },
+    {
+      "game": "SKBN",
+      "level": 2,
+      "won": true,
+      "actions": 47,
+      "commands": "9bb07577a4aeb5f9e01139523a57eb1097ac957226930616a274df7135f2529a"
+    }
+  ],
+  "sourcePursuitDiagnostic": [
+    {
+      "game": "LKEY",
+      "level": 2,
+      "won": false,
+      "actions": 120,
+      "commands": "b38d4ebf8977e342e2ac9788a4a645404ab99d7fbab347e7eaf860c3ef892b05"
+    }
+  ],
+  "experimentsFromRepeatedSourceStates": [
+    {
+      "version": "v109",
+      "game": "LKEY",
+      "issued": 120,
+      "won": false,
+      "trigger": true,
+      "cycle": [
+        "25c72ab81f3d5cb9",
+        "a74f827102c9152c"
+      ],
+      "results": [
+        {
+          "forecast": {
+            "basis": "all_measured_escape_directions",
+            "horizon": 1,
+            "predictsContact": true,
+            "targetCountBefore": 4,
+            "targetCountAfter": 4,
+            "actorAtPredictedPosition": true,
+            "publicImageChanged": true
+          },
+          "action": 49,
+          "from": "25c72ab81f3d5cb9",
+          "selected": 1,
+          "preparationTrials": 12,
+          "preparationScope": "Up to four distinct safe images. Test up to three previously ineffective non-click inputs and one previously ineffective click after preparation.",
+          "scope": "All legal non-click inputs plus every distinct click already attempted before this action",
+          "alternatives": [
+            {
+              "action": "ACTION1",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION2",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION3",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION4",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION5",
+              "to": "883b3ffb8f3c9cef",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION7",
+              "to": "19282a216c5ee777",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:52,30",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,0",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,21",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,49",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,38",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:14,29",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:41,29",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,46",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:2,16",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,14",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,12",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,40",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,47",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,47",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,14",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:4,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:10,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:16,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:22,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:34,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,14",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,19",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,15",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:47,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,44",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,43",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,47",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,46",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,19",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,43",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            }
+          ],
+          "exits": 11,
+          "unlockedActionPairs": [
+            {
+              "prepare": "ACTION1",
+              "probe": "ACTION3",
+              "credit": false,
+              "afterPreparation": "a74f827102c9152c",
+              "afterProbe": "a3b40d0e526ce025"
+            },
+            {
+              "prepare": "ACTION7",
+              "probe": "ACTION2",
+              "credit": false,
+              "afterPreparation": "19282a216c5ee777",
+              "afterProbe": "883b3ffb8f3c9cef"
+            }
+          ]
+        },
+        {
+          "forecast": {
+            "basis": "all_measured_escape_directions",
+            "horizon": 1,
+            "predictsContact": true,
+            "targetCountBefore": 4,
+            "targetCountAfter": 4,
+            "actorAtPredictedPosition": true,
+            "publicImageChanged": true
+          },
+          "action": 50,
+          "from": "a74f827102c9152c",
+          "selected": 2,
+          "preparationTrials": 8,
+          "preparationScope": "Up to four distinct safe images. Test up to three previously ineffective non-click inputs and one previously ineffective click after preparation.",
+          "scope": "All legal non-click inputs plus every distinct click already attempted before this action",
+          "alternatives": [
+            {
+              "action": "ACTION1",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION2",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION3",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION4",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION5",
+              "to": "5b131f8a6e1b5533",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION7",
+              "to": "19282a216c5ee777",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:52,30",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,0",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,21",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,49",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,38",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:14,29",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:41,29",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,18",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,46",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:2,16",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,14",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,12",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,40",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,47",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,18",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,18",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,47",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,14",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:4,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:10,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:16,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:22,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:34,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,14",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,19",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,15",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:47,18",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,44",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,43",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,47",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,46",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,19",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,43",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            }
+          ],
+          "exits": 14,
+          "unlockedActionPairs": []
+        }
+      ]
+    },
+    {
+      "version": "v132",
+      "game": "LKEY",
+      "issued": 120,
+      "won": false,
+      "trigger": true,
+      "cycle": [
+        "25c72ab81f3d5cb9",
+        "a74f827102c9152c"
+      ],
+      "results": [
+        {
+          "forecast": {
+            "basis": "all_measured_escape_directions",
+            "horizon": 1,
+            "predictsContact": true,
+            "targetCountBefore": 4,
+            "targetCountAfter": 4,
+            "actorAtPredictedPosition": true,
+            "publicImageChanged": true
+          },
+          "action": 49,
+          "from": "25c72ab81f3d5cb9",
+          "selected": 1,
+          "preparationTrials": 12,
+          "preparationScope": "Up to four distinct safe images. Test up to three previously ineffective non-click inputs and one previously ineffective click after preparation.",
+          "scope": "All legal non-click inputs plus every distinct click already attempted before this action",
+          "alternatives": [
+            {
+              "action": "ACTION1",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION2",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION3",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION4",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION5",
+              "to": "883b3ffb8f3c9cef",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION7",
+              "to": "19282a216c5ee777",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:52,30",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,0",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,21",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,49",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,38",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:14,29",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:41,29",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,46",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:2,16",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,14",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,12",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,40",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,47",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,47",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,14",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:4,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:10,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:16,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:22,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:34,61",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,14",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,19",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,15",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:47,18",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,44",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,43",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,47",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,46",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,19",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,43",
+              "to": "554286374b778da7",
+              "over": false,
+              "credit": false
+            }
+          ],
+          "exits": 11,
+          "unlockedActionPairs": [
+            {
+              "prepare": "ACTION1",
+              "probe": "ACTION3",
+              "credit": false,
+              "afterPreparation": "a74f827102c9152c",
+              "afterProbe": "a3b40d0e526ce025"
+            },
+            {
+              "prepare": "ACTION7",
+              "probe": "ACTION2",
+              "credit": false,
+              "afterPreparation": "19282a216c5ee777",
+              "afterProbe": "883b3ffb8f3c9cef"
+            }
+          ]
+        },
+        {
+          "forecast": {
+            "basis": "all_measured_escape_directions",
+            "horizon": 1,
+            "predictsContact": true,
+            "targetCountBefore": 4,
+            "targetCountAfter": 4,
+            "actorAtPredictedPosition": true,
+            "publicImageChanged": true
+          },
+          "action": 50,
+          "from": "a74f827102c9152c",
+          "selected": 2,
+          "preparationTrials": 8,
+          "preparationScope": "Up to four distinct safe images. Test up to three previously ineffective non-click inputs and one previously ineffective click after preparation.",
+          "scope": "All legal non-click inputs plus every distinct click already attempted before this action",
+          "alternatives": [
+            {
+              "action": "ACTION1",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION2",
+              "to": "25c72ab81f3d5cb9",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION3",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION4",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION5",
+              "to": "5b131f8a6e1b5533",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION7",
+              "to": "19282a216c5ee777",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:52,30",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:31,0",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,21",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,49",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:51,38",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:14,29",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:41,29",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,18",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,46",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:2,16",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,14",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,12",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,40",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,47",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,18",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:6,18",
+              "to": "a3b40d0e526ce025",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,47",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,14",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:4,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:10,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:16,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:22,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:34,61",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,14",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,19",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,15",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:47,18",
+              "to": "1645a678962ba43c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:50,44",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:55,43",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:20,47",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,46",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:28,19",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            },
+            {
+              "action": "ACTION6:44,43",
+              "to": "a74f827102c9152c",
+              "over": false,
+              "credit": false
+            }
+          ],
+          "exits": 14,
+          "unlockedActionPairs": []
+        }
+      ],
+      "sameNativeCommandPrefixAndForecastAs": "v109"
+    }
+  ],
   "reproduction": {
     "runtime": "Node.js 24",
     "policy": "sic-plan-with-exchanged-landmarks-v132",
