@@ -1,6 +1,7 @@
 import type { NativeObservation, NativeRows, NativeEntity } from '../logos-engine/v6-native-types.ts';
 import { add, diff, same, size, type XY } from './access-terrain.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
+import { followingPart, placePeers } from './actor-relative-parts.ts';
 import { poseRole, type OccupancyMemory } from './occupancy-programs.ts';
 import { motorsFor, zoneFloor, type ZoneRepeat, type MechanismReason } from './local-progress.ts';
 import {
@@ -17,6 +18,7 @@ export type MechanismPlan = {
   pitch?: XY;
   controlEvidence?: { op: string; d: XY; basis: string; support: number }[];
   actorPeers?: XY[];
+  followingPeer?: { offset: XY; witnesses: string[] };
   indicatorOffset?: XY;
   witnessRefs?: string[];
   p: string;
@@ -61,21 +63,14 @@ const k = (p: XY) => p.join();
 function named(o: NativeObservation, rows: NativeRows, p: MechanismPlan) {
   const v = visualLayout(o, rows),
     actors = v[p.p] ?? [],
-    parts = v[p.c] ?? [],
-    rest = parts.filter((b) => !p.fixed.some((x) => same(x, b.at)));
-  return {
-    actor:
-      actors.length === (p.actorPeers?.length ?? 0) + 1 &&
-      (p.actorPeers ?? []).every((v) => actors.some((z) => same(z.at, v)))
-        ? (actors.find((z) => !(p.actorPeers ?? []).some((v) => same(z.at, v)))?.at ?? null)
-        : null,
-    site:
-      parts.length === p.fixed.length + 1 &&
-      p.fixed.every((x) => parts.some((e) => same(x, e.at))) &&
-      rest.length === 1
-        ? rest[0]!.at
-        : null,
-  };
+    parts = v[p.c] ?? [];
+  const peers = p.actorPeers ?? [];
+  const actor = actors.length === peers.length + 1 && peers.every(x => actors.some(z => same(z.at, x)))
+    ? actors.find(z => !peers.some(x => same(z.at, x)))?.at ?? null : null;
+  const fixed = actor ? placePeers(p.fixed, p.start, actor, p.followingPeer?.offset) : p.fixed;
+  const rest = parts.filter(b => !fixed.some(x => same(x, b.at)));
+  return { actor, site: parts.length === fixed.length + 1 && rest.length === 1 &&
+    fixed.every(x => parts.some(e => same(x, e.at))) ? rest[0]!.at : null };
 }
 function atCurrent(s: LayoutStep, loc: ReturnType<typeof named>, pitch?: XY) {
   return !!(loc.site && cellMatches(loc.actor, s.p, pitch) && cellMatches(loc.site, s.c, pitch));
@@ -139,7 +134,7 @@ function priorSite(m: Memory, scene: number, c: NativeEntity, fixed: XY[]): XY |
   if (!fixed.every((p) => positions.some((x) => same(p, x)))) return null;
   return positions.find((p) => !fixed.some((x) => same(p, x))) ?? null;
 }
-function references(m: Memory, p: string, c: NativeEntity, fixed: XY[], allowed: Set<string>) {
+function references(m: Memory, p: string, c: NativeEntity, locate: (scene: number) => XY | null, allowed: Set<string>) {
   const occ = m.occupancy!,
     groups = new Map<string, { r: string; q: string; examples: ProbePattern[] }>();
   for (const pair of Object.values(occ.pairs)) {
@@ -149,7 +144,7 @@ function references(m: Memory, p: string, c: NativeEntity, fixed: XY[], allowed:
       const examples: ProbePattern[] = [];
       for (const h of hits) {
         const layout = occ.layouts[h.s]!,
-          centre = priorSite(m, h.s, c, fixed);
+          centre = locate(h.s);
         if (centre && layout[p] && layout[pair.r])
           examples.push({ actor: layout[p]!, centre, indicator: layout[pair.r]!, ref: h.ref });
       }
@@ -235,14 +230,21 @@ export function offerMechanism(
       others = layout[role];
     if (role === p || !others || others.length > 12 || same(from, at)) continue;
     const fixed = others.filter((b) => !same(b.at, at)).map((b) => b.at),
-      blocked = new Set(fixed.map(k));
+      follower = followingPart(m.previewLearning?.partMotion?.[p], role, from, fixed),
+      carried = follower && add(from, follower.offset),
+      blocked = new Set(fixed.filter(v => !carried || !same(v, carried)).map(k));
+    const locate = (scene: number) => {
+      const actor = occ.layouts[scene]?.[p];
+      if (follower && !actor) return null;
+      return priorSite(m, scene, c, actor ? placePeers(fixed, from, actor, follower?.offset) : fixed);
+    };
     const open = (v: XY) => !blocked.has(k(v)) && (same(v, at) || floor.open(v));
     const near = motors.length >= 2 && motors.some((v) => floor.component.has(k(diff(at, v.d))));
     const candidates = near ? pathToContact(from, at, motors, open) : [];
-    const groups = references(m, p, c, fixed, available);
+    const groups = references(m, p, c, locate, available);
     const witnessedMove = occ.edges.find((e) => {
-      const a = priorSite(m, e.s, c, fixed),
-        b = priorSite(m, e.t, c, fixed);
+      const a = locate(e.s),
+        b = locate(e.t);
       return !e.unstable && a && b && !same(a, b);
     });
     const indicator = Object.values(m.previewLearning?.bindings ?? {}).some(
@@ -267,8 +269,8 @@ export function offerMechanism(
     if (
       attachment.length >= 2 &&
       attachment.every((e) => {
-        const a = priorSite(m, e.s, c, fixed),
-          z = priorSite(m, e.t, c, fixed);
+        const a = locate(e.s),
+          z = locate(e.t);
         return a && z && same(diff(z, a), diff(occ.layouts[e.t]![p]!, occ.layouts[e.s]![p]!));
       })
     )
@@ -322,6 +324,7 @@ export function offerMechanism(
           p,
           c: role,
           fixed,
+          ...(follower ? { followingPeer: follower } : {}),
           start: from!,
           initialC: at,
           placed,
@@ -356,8 +359,8 @@ export function offerMechanism(
         occ.observed[s + '/' + e.op] !== undefined
       )
         continue;
-      const old = priorSite(m, e.s, c, fixed),
-        next = priorSite(m, e.t, c, fixed),
+      const old = locate(e.s),
+        next = locate(e.t),
         u = occ.layouts[e.s]?.[p],
         z = occ.layouts[e.t]?.[p];
       if (!old || !next || same(old, next) || !u || !z || !same(u, z)) continue;
@@ -388,8 +391,8 @@ export function offerMechanism(
       const a = occ.layouts[e.s]?.[p],
         b = occ.layouts[e.t]?.[p];
       if (!a || !b || !same(a, b)) continue;
-      const before = priorSite(m, e.s, c, fixed),
-        after = priorSite(m, e.t, c, fixed);
+      const before = locate(e.s),
+        after = locate(e.t);
       if (!before || !after) continue;
       const offset = diff(after, before),
         law = remote.get(e.op);
@@ -412,7 +415,7 @@ export function offerMechanism(
         continue;
       const seen = occ.edges.some((e) => {
         const a = occ.layouts[e.s]?.[p],
-          z = priorSite(m, e.s, c, fixed);
+          z = locate(e.s);
         return a && z && same(a, from) && same(z, placed);
       });
       if (seen) continue;
@@ -475,7 +478,7 @@ export function offerMechanism(
       const first = v.path.at(-1)!,
         e = occ.observed[s + '/' + first.op];
       if (v.path.length === 1 && e !== undefined) {
-        const end = priorSite(m, e, c, fixed);
+        const end = locate(e);
         if (!end || !same(end, first.placed)) continue;
       }
       const score =

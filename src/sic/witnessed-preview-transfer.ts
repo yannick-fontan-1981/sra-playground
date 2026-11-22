@@ -1,3 +1,4 @@
+import { observeRelativeParts } from './actor-relative-parts.ts';
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { same, diff, type XY } from './access-terrain.ts';
 import { poseRole } from './occupancy-programs.ts';
@@ -194,11 +195,14 @@ export function observePreviewBindings(
   learned.last = event;
   rememberVisibleGeometry(learned, b, before);
   calibrateVisibleReadings(learned, b, a, before, after, command);
-  for (const [actor, parts] of Object.entries(before)) {
-    const motion = moved(parts, after[actor] ?? []);
-    if (!motion) continue;
+  const changes = new Map(Object.entries(before).flatMap(([role, parts]) => {
+    const motion = moved(parts, after[role] ?? []);
+    return motion ? [[role, motion] as const] : [];
+  }));
+  for (const [actor, motion] of changes) {
     learned.lastActor[actor] = motion.to.at;
     rememberMotion(learned, actor, motion.from.at, motion.to.at, command, b, a);
+    observeRelativeParts(learned.partMotion![actor]!, actor, motion, changes, before, after, a.observation_ref);
     const vector = diff(motion.to.at, motion.from.at),
       motors = (learned.motion[actor] ??= {});
     const z = JSON.stringify([command, vector]);

@@ -5,6 +5,7 @@ import type { Motor } from './local-progress.ts';
 
 type Stroke = { d: XY; count: number; last: string; first: string };
 export type PartMotion = {
+  followers?: Record<string, import('./actor-relative-parts.ts').RelativePart>;
   axes: Record<string, Record<string, Stroke>>;
   displacements?: Record<string, Record<string, Stroke>>;
   sites: Record<string, number>;
