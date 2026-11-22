@@ -116,5 +116,89 @@
       "questionOrPlan": "continue_a_verified_change_of_relative_positions",
       "observed": "transport_official"
     }
-  ]
+  ],
+  "sameFrozenCandidateGuards": {
+    "SS12": [
+      {
+        "level": 1,
+        "actions": 64,
+        "won": true
+      },
+      {
+        "level": 2,
+        "actions": 30,
+        "won": true
+      }
+    ],
+    "SS13": [
+      {
+        "level": 1,
+        "actions": 300,
+        "won": true
+      },
+      {
+        "level": 2,
+        "actions": 36,
+        "won": true
+      }
+    ],
+    "SS14": [
+      {
+        "level": 1,
+        "actions": 31,
+        "won": true
+      },
+      {
+        "level": 2,
+        "actions": 52,
+        "won": true
+      }
+    ],
+    "LP85": [
+      {
+        "level": 2,
+        "won": true,
+        "actions": 25,
+        "campaignStartedAt": 2
+      },
+      {
+        "level": 3,
+        "won": true,
+        "actions": 18,
+        "campaignStartedAt": 2
+      }
+    ]
+  },
+  "samePublicCheckpointTwoPolicies": {
+    "at": 139,
+    "image": "c8016398d5233974",
+    "reports": [
+      {
+        "minimum": 2,
+        "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+        "command": "ACTION2",
+        "purpose": "prepare_material_to_relieve_a_subject_holding_a_route_open",
+        "predictions": [
+          "the_gate_stays_open_with_the_controls_held_by_material_or_it_closes",
+          "both_subjects_can_reach_the_objective_region"
+        ],
+        "opening": {
+          "gate": 96,
+          "controls": [
+            113
+          ],
+          "remaining": 16
+        },
+        "witnesses": 8
+      },
+      {
+        "minimum": 3,
+        "pack": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d",
+        "command": "ACTION4",
+        "purpose": "continue_a_verified_change_of_relative_positions",
+        "predictions": [],
+        "witnesses": 7
+      }
+    ]
+  }
 }
