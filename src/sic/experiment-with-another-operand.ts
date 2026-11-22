@@ -1,6 +1,6 @@
 import type { Reading, Scene } from './paired-scene.ts';
 import { pointCommand } from './paired-scene.ts';
-import { exchangeTarget, forecast, geometry, imagine, key, law, md, peer, type Learning } from './paired-displacements.ts';
+import { exchangeTarget, forecast, geometry, imagine, key, law, operandSetupCost, peer, type Learning } from './paired-displacements.ts';
 import { walkingRegion } from './unknown-region-entry.ts';
 import type { TransportSide } from './transport-observations.ts';
 
@@ -27,7 +27,7 @@ export function anotherOperandTest(s: Scene, m: Learning, v: Reading, ref: strin
   }
   if (!sites.size) return;
   const score = (p: Reading) => Math.min(...p.pieces.map(part =>
-    Math.min(...Array.from(sites, site => md(s, site, part))) * 3 + md(s, p.subjects[mobile], part)));
+    Math.min(...Array.from(sites, site => operandSetupCost(s, part, site, [p.subjects[mobile]])))));
   const root: Step = { pose: v, depth: 0, rank: score(v) };
   const queue = [root], seen = new Map([[key(v), 0]]);
   const parked = s.goals.includes(v.subjects[mobile]);

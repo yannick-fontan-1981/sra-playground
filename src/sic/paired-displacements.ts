@@ -1,3 +1,4 @@
+import { observeRequiredOpening, type OpeningEvidence } from './test-a-persistent-opening.ts';
 import { applyImages, images, type Projection } from './paired-previews.ts';
 import { chooseEffectExperiment } from './discriminating-experiment.ts';
 import {
@@ -36,6 +37,7 @@ export type Learning = {
   visibleEffect?: Reading;
   visibleFeatures?: number[];
   witnessedOperandReturns?: Record<string, { after: Reading; ref: string }>;
+  openings?: OpeningEvidence;
   strandedPartner?: import('./experiment-with-another-operand.ts').StrandedPartner;
   witnessedEntries?: { side: TransportSide; source: number; site: number; ref: string }[];
   denied: Record<string, number>;
@@ -61,6 +63,8 @@ export const peer = (s: TransportSide): TransportSide => (s === 0 ? 1 : 0);
 export const md = (s: Scene, a: number, b: number) =>
   Math.abs((a % s.grid.columns) - (b % s.grid.columns)) +
   Math.abs(Math.floor(a / s.grid.columns) - Math.floor(b / s.grid.columns));
+export const operandSetupCost = (s: Scene, part: number, site: number, handlers: readonly number[]) =>
+  3 * md(s, part, site) + Math.min(...handlers.map(handler => md(s, handler, part)));
 export const key = (v: Reading) => poseId(v);
 const operandContext = (v: Reading, op: string) => [key(v), v.anchor, v.opened.join(','), op].join('|');
 export function law(m: Learning, side: TransportSide): Law {
@@ -247,6 +251,7 @@ export function localEffects(
     from = b.subjects[side],
     to = a.subjects[side],
     w = s.grid.columns;
+  observeRequiredOpening(s, m, b, a, ref);
   const previousReturn = m.witnessedOperandReturns?.[operandContext(b, op)];
   if (previousReturn && operandContext(previousReturn.after, op) !== operandContext(a, op))
     delete m.witnessedOperandReturns![operandContext(b, op)];
@@ -313,6 +318,21 @@ export function localEffects(
     }
   }
   if (f) {
+    if (f.openingTest) {
+      delete m.plan;
+      const {gate, controls, remaining} = f.openingTest;
+      if (remaining === 1 && controls.every(p => a.pieces.includes(p)) && !a.subjects.includes(gate) && !a.pieces.includes(gate)) {
+        m.checked.push('material-opening/' + gate);
+        if (m.openings) delete m.openings.need;
+        m.refs = [...m.refs.slice(-5),ref];
+        return a.opened.includes(gate) ? 'material_holds_the_route_open_without_either_subject' : 'material_did_not_keep_the_gate_open';
+      }
+      if (key(a) !== poseId(f.expected)) {
+        if (!m.checked.includes('opening/' + f.key)) m.checked.push('opening/' + f.key);
+        return 'the_replacement_preparation_was_refuted';
+      }
+      return 'the_replacement_preparation_matched';
+    }
     if (f.operandTest) {
       delete m.plan;
       const release = f.operandTest;
