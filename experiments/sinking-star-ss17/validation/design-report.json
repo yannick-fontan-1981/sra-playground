@@ -1,0 +1,793 @@
+{
+  "game": "SS17",
+  "success": true,
+  "scope": "Frozen initial geometry, author-local counter-branches and separately reported bounded reviews",
+  "levels": [
+    {
+      "level": 1,
+      "title": "Les trois cours de la forteresse",
+      "mapSha256": "c88a29d1296c979b5924fcc2deb26887f207a31fff2bda12f5720d298ff914f8",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 112,
+          "transitions": 448,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 112,
+          "transitions": 448,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 14,
+          "transitions": 56,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": []
+    },
+    {
+      "level": 2,
+      "title": "Les cellules de relève",
+      "mapSha256": "3a0e06acb54a1c0b28d4f9877391a8ec45db83d9f58a93f09faa9f5999175393",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 2,
+          "transitions": 8,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 1,
+          "transitions": 4,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 63,
+          "transitions": 252,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": [
+        {
+          "name": "Relève avant chargement de la presse",
+          "observed": "Poussée de la charge refusée devant la presse fermée ; le chargement doit précéder cette relève dans le parcours.",
+          "scope": "Branche locale, pas preuve de nécessité globale.",
+          "actions": 24,
+          "blocked": 1,
+          "deaths": 0,
+          "complete": false,
+          "finalStateSha256": "c64e39bf6f48ba0d3ade2fee96deffd79f021139e72e2676b19a17b3798c13c2"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "Le compte des îles",
+      "mapSha256": "c45566e10102133208490fcd981242643a6dad3e29fc492c24a898f483ce1856",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 100,
+          "transitions": 400,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 100,
+          "transitions": 400,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 73,
+          "transitions": 292,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": [
+        {
+          "name": "Retour sans dégager la première cible",
+          "observed": "Le rayon échange le bloc en (13,5), et laisse le Guerrier en (14,5) ; le nombre d’occupants orientaux reste identique.",
+          "scope": "Contre-branche locale et invariant sur cet échange, pas preuve de minimum global.",
+          "actions": 28,
+          "blocked": 0,
+          "deaths": 0,
+          "complete": false,
+          "finalStateSha256": "fae5b1b3d51704eab5a06d9ab9e179f6912113d27b459d4e933a8f17fd31abef"
+        },
+        {
+          "name": "Demi-pont",
+          "observed": "Un seul appui en (10,10) ; la case occidentale (9,10) demeure de l’eau. Le témoin attend la seconde charge avant toute traversée.",
+          "scope": "Contrôle structurel du témoin.",
+          "actions": 16,
+          "blocked": 0,
+          "deaths": 0,
+          "complete": false,
+          "finalStateSha256": "c110d8f066dfcbe7a3dd5cd3e44f174c3f41e15047697d7ca935a26376c69d58"
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Le miroir, puis le lest",
+      "mapSha256": "1e528a4f44a1f42be73fd8941d8ccb1fe7d3525dd1d2026b9436117c5ff2ae50",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 83,
+          "transitions": 332,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 83,
+          "transitions": 332,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 6,
+          "transitions": 24,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": [
+        {
+          "name": "Le tireur masque le coude",
+          "observed": "Le Magicien échange avec le Voleur resté en (9,9) ; le bloc oriental demeure en (14,10). Quitter la ligne est donc une étape du témoin.",
+          "scope": "Contre-branche locale, pas impossibilité globale.",
+          "actions": 5,
+          "blocked": 0,
+          "deaths": 0,
+          "complete": false,
+          "finalStateSha256": "215466c561d20ad9902be0f80ef893663b92b38f98b47b80f3607f2a5f0542ab"
+        },
+        {
+          "name": "Confondre visée magique et reflet global",
+          "observed": "Après l’échange, le reflet global prend le Magicien à distance cinq et le dépose en (9,5), dans l’eau ; cette branche meurt.",
+          "scope": "Contre-branche locale vérifiée.",
+          "actions": 7,
+          "blocked": 0,
+          "deaths": 1,
+          "complete": false,
+          "finalStateSha256": "b210274b695e9d8403f1574d2832639864a717ede0419dbd4c88a49a9f744b06"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "title": "La relève à angle droit",
+      "mapSha256": "aeccc16d19d9b88495a7e08f5e897c5d02663bb7fd7d8f3a0ca2f4eee6272e67",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 23,
+          "transitions": 92,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 182,
+          "transitions": 728,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 182,
+          "transitions": 728,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": []
+    },
+    {
+      "level": 6,
+      "title": "Les deux emplois des miroirs",
+      "mapSha256": "362859dd57fc9611f28499c10d33799fe3f0a9f31c04eeab8531867a284e892e",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 109,
+          "transitions": 436,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 109,
+          "transitions": 436,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 109,
+          "transitions": 436,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": []
+    },
+    {
+      "level": 7,
+      "title": "Les trois vies de la clef",
+      "mapSha256": "34f1daeae0dda21d080ebfaacc9959aecc51c9870c94810fb9535c88132ceb7f",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 211,
+          "transitions": 844,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 211,
+          "transitions": 844,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 211,
+          "transitions": 844,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": []
+    },
+    {
+      "level": 8,
+      "title": "La forteresse aux deux visées",
+      "mapSha256": "e8b8bb52cef73dd53f5005900c2471553919fe4ce8ed8f4067079db5d9fec20b",
+      "noInitialGoalsByFrozenWalking": true,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 71,
+          "transitions": 284,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 71,
+          "transitions": 284,
+          "goalsReached": 0,
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 71,
+          "transitions": 284,
+          "goalsReached": 0,
+          "exhausted": true
+        }
+      ],
+      "buttonsAndPressesSeparate": true,
+      "localChecks": []
+    }
+  ],
+  "reviews": [
+    {
+      "script": "reference/author/review-level1.mjs",
+      "success": true,
+      "result": {
+        "level": "ss17-01",
+        "referenceActions": 120,
+        "lessons": 23,
+        "alternativeActions": 130,
+        "walking": [
+          {
+            "hero": "warrior",
+            "states": 111,
+            "reachesAnyGoal": false
+          },
+          {
+            "hero": "thief",
+            "states": 111,
+            "reachesAnyGoal": false
+          },
+          {
+            "hero": "wizard",
+            "states": 14,
+            "reachesAnyGoal": false
+          }
+        ]
+      },
+      "sha256": "4f864952239444cbacef6a5e8f7320b0d9350ce47e25a30c4d6c7f122086612d"
+    },
+    {
+      "script": "reference/author/review-final-levels.mjs",
+      "success": true,
+      "result": {
+        "levels": [
+          {
+            "level": 5,
+            "actions": 241,
+            "result": "WIN",
+            "stages": 10,
+            "alternatives": [
+              {
+                "file": "level5-ferry-alternative.json",
+                "actions": 257,
+                "supports": 0
+              },
+              {
+                "file": "level5-chain-alternative.json",
+                "actions": 215,
+                "supports": 2
+              }
+            ]
+          },
+          {
+            "level": 6,
+            "actions": 170,
+            "result": "WIN",
+            "stages": 9,
+            "alternatives": []
+          },
+          {
+            "level": 7,
+            "actions": 410,
+            "result": "WIN",
+            "stages": 13,
+            "alternatives": [
+              {
+                "file": "level7-two-roles-alternative.json",
+                "actions": 366,
+                "supports": 3
+              }
+            ]
+          },
+          {
+            "level": 8,
+            "actions": 205,
+            "result": "WIN",
+            "stages": 15,
+            "alternatives": []
+          }
+        ],
+        "localBranches": 5,
+        "blockedMirrorFeedback": "L8 verified red/normal/red/normal + white face + undo"
+      },
+      "sha256": "559539a9de0ef2a27c9d3d7a35124cfe7f2cb5e863486a53c8dfe875d2cfbd90"
+    },
+    {
+      "script": "reference/author/audit-level5.mjs",
+      "success": true,
+      "result": {
+        "level": 5,
+        "claim": "Trois témoins gagnants distincts ; aucun minimum ni besoin universel de pont établi.",
+        "results": [
+          {
+            "name": "principal",
+            "result": "WIN",
+            "metrics": {
+              "actions": 241,
+              "selections": 16,
+              "warriorPushes": 52,
+              "thiefPulls": 9,
+              "swaps": 1,
+              "partnerSwaps": 0,
+              "stoneSwaps": 0,
+              "monsterSwaps": 1,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 1,
+              "swapLoops": 0,
+              "partnerMoves": 2,
+              "chainPushes": 3,
+              "stoneMoves": 60,
+              "mirrorMoves": 2,
+              "reflections": 0,
+              "heroReflections": 0,
+              "pistonPushes": 1,
+              "platformsCreated": 2,
+              "monstersRemoved": 1,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "chaîne",
+            "result": "WIN",
+            "metrics": {
+              "actions": 215,
+              "selections": 16,
+              "warriorPushes": 48,
+              "thiefPulls": 5,
+              "swaps": 1,
+              "partnerSwaps": 0,
+              "stoneSwaps": 0,
+              "monsterSwaps": 1,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 1,
+              "swapLoops": 0,
+              "partnerMoves": 2,
+              "chainPushes": 3,
+              "stoneMoves": 52,
+              "mirrorMoves": 2,
+              "reflections": 0,
+              "heroReflections": 0,
+              "pistonPushes": 1,
+              "platformsCreated": 2,
+              "monstersRemoved": 1,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "navette",
+            "result": "WIN",
+            "metrics": {
+              "actions": 257,
+              "selections": 22,
+              "warriorPushes": 32,
+              "thiefPulls": 10,
+              "swaps": 8,
+              "partnerSwaps": 1,
+              "stoneSwaps": 6,
+              "monsterSwaps": 1,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 1,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "chainPushes": 1,
+              "stoneMoves": 49,
+              "mirrorMoves": 2,
+              "reflections": 3,
+              "heroReflections": 1,
+              "pistonPushes": 1,
+              "platformsCreated": 0,
+              "monstersRemoved": 1,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "Libérer la commande orange avant la relève du Magicien",
+            "commands": "CL",
+            "result": "GAME_OVER",
+            "scope": "Branche locale vérifiée."
+          },
+          {
+            "name": "Confondre le premier sort avec un reflet global",
+            "commands": "CCX",
+            "result": "GAME_OVER",
+            "scope": "Branche locale vérifiée."
+          },
+          {
+            "name": "Navette : refléter avant de dégager le Guerrier",
+            "commands": "CCUCCLURRRDDLDRDDDLLLDDRUURDDRUUUUUULLCCUURRDRRUUUURUULLDRRURDLDRLLDDLLDRDRUUUURUULLDRCURLLCCURRDRDX",
+            "result": "GAME_OVER",
+            "scope": "Le Guerrier à distance deux est prioritaire sur le bloc à distance trois."
+          }
+        ]
+      },
+      "sha256": "7a2be70ceb8b0e64966e953fa3ce0099597e40fdc3a5ffe7648e1a2711256b72"
+    },
+    {
+      "script": "reference/author/audit-level6.mjs",
+      "success": true,
+      "result": {
+        "level": "ss17-06",
+        "referenceActions": 170,
+        "historicalAlternative": 170,
+        "oldCounterexampleBlockedAt": 133,
+        "correctedAlternative": 214,
+        "finalThiefPress": true,
+        "walking": [
+          {
+            "hero": "warrior",
+            "states": 106,
+            "reachesAnyGoal": false,
+            "exhaustive": true,
+            "otherActors": "fixed"
+          },
+          {
+            "hero": "thief",
+            "states": 106,
+            "reachesAnyGoal": false,
+            "exhaustive": true,
+            "otherActors": "fixed"
+          },
+          {
+            "hero": "wizard",
+            "states": 38,
+            "reachesAnyGoal": false,
+            "exhaustive": true,
+            "otherActors": "fixed"
+          }
+        ],
+        "mirrorUses": [
+          {
+            "index": 0,
+            "initial": {
+              "at": {
+                "x": 8,
+                "y": 5
+              },
+              "facing": "SW"
+            },
+            "final": {
+              "at": {
+                "x": 6,
+                "y": 5
+              },
+              "facing": "SW"
+            },
+            "swapRayVisits": 1,
+            "reflectionPaths": 3,
+            "motionSteps": 2,
+            "holdsFinalExitButton": true
+          },
+          {
+            "index": 1,
+            "initial": {
+              "at": {
+                "x": 8,
+                "y": 13
+              },
+              "facing": "NE"
+            },
+            "final": {
+              "at": {
+                "x": 12,
+                "y": 13
+              },
+              "facing": "NE"
+            },
+            "swapRayVisits": 1,
+            "reflectionPaths": 2,
+            "motionSteps": 4,
+            "holdsFinalExitButton": true
+          }
+        ]
+      },
+      "sha256": "7d74696384ee293ff8c36afd96fbc3d908e13e254fddeb6352503fd6206cd302"
+    },
+    {
+      "script": "reference/author/audit-level7.mjs",
+      "success": true,
+      "result": {
+        "level": 7,
+        "claim": "Les trois emplois de la clef appartiennent au témoin principal ; une réaffectation plus courte est également gagnante.",
+        "results": [
+          {
+            "name": "principal",
+            "result": "WIN",
+            "metrics": {
+              "actions": 410,
+              "selections": 31,
+              "warriorPushes": 87,
+              "thiefPulls": 26,
+              "swaps": 2,
+              "partnerSwaps": 1,
+              "stoneSwaps": 1,
+              "monsterSwaps": 0,
+              "bentSwaps": 2,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 2,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "chainPushes": 8,
+              "stoneMoves": 130,
+              "mirrorMoves": 1,
+              "reflections": 0,
+              "heroReflections": 0,
+              "pistonPushes": 1,
+              "platformsCreated": 3,
+              "monstersRemoved": 2,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "clef-directement-lest",
+            "result": "WIN",
+            "metrics": {
+              "actions": 366,
+              "selections": 28,
+              "warriorPushes": 71,
+              "thiefPulls": 26,
+              "swaps": 1,
+              "partnerSwaps": 1,
+              "stoneSwaps": 0,
+              "monsterSwaps": 0,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 1,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "chainPushes": 8,
+              "stoneMoves": 113,
+              "mirrorMoves": 1,
+              "reflections": 0,
+              "heroReflections": 0,
+              "pistonPushes": 1,
+              "platformsCreated": 3,
+              "monstersRemoved": 2,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "Approcher le gardien par la colonne 13",
+            "commands": "CCUCCUULLUDDLCCURRRRRRUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRCUUUUUULLUUURRRRUUDDDLCCLLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRCUUUUUULLUUURRRRUUUDDDDLCCLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRRRURRRRDLLLLRUUU",
+            "result": "GAME_OVER",
+            "scope": "Branche locale après livraison des trois charges."
+          },
+          {
+            "name": "Quitter vers le sud avant le combat",
+            "commands": "CCUCCUULLUDDLCCURRRRRRUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRCUUUUUULLUUURRRRUUDDDLCCLLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRCUUUUUULLUUURRRRUUUDDDDLCCLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRRRURRRRDLLLLCCD",
+            "result": "Échange avec le monstre ; commande cyan encore occupée.",
+            "scope": "La variante gagne avec un pas sud seulement après disparition des monstres."
+          }
+        ]
+      },
+      "sha256": "23aebf02283986ab800f75bd923a8d60ab21591ea21cbb5c6079804260a02028"
+    },
+    {
+      "script": "reference/author/audit-level8.mjs",
+      "success": true,
+      "result": {
+        "level": 8,
+        "claim": "La correction exige que l’alcôve soit libérée, sans imposer un trajet unique ni un nombre universel d’appuis.",
+        "results": [
+          {
+            "name": "Carte historique / raccourci",
+            "result": "WIN",
+            "metrics": {
+              "actions": 156,
+              "selections": 21,
+              "warriorPushes": 12,
+              "thiefPulls": 11,
+              "swaps": 3,
+              "partnerSwaps": 1,
+              "stoneSwaps": 1,
+              "monsterSwaps": 1,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 1,
+              "swapReflections": 2,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "chainPushes": 0,
+              "stoneMoves": 18,
+              "mirrorMoves": 6,
+              "reflections": 1,
+              "heroReflections": 1,
+              "pistonPushes": 1,
+              "platformsCreated": 0,
+              "monstersRemoved": 1,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "Carte corrigée / ancien raccourci",
+            "result": "NON_WIN",
+            "metrics": {
+              "actions": 156,
+              "selections": 21,
+              "warriorPushes": 12,
+              "thiefPulls": 11,
+              "swaps": 3,
+              "partnerSwaps": 1,
+              "stoneSwaps": 1,
+              "monsterSwaps": 1,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 1,
+              "swapReflections": 2,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "chainPushes": 0,
+              "stoneMoves": 18,
+              "mirrorMoves": 6,
+              "reflections": 1,
+              "heroReflections": 1,
+              "pistonPushes": 1,
+              "platformsCreated": 0,
+              "monstersRemoved": 1,
+              "blocked": 12,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "Carte corrigée / référence",
+            "result": "WIN",
+            "metrics": {
+              "actions": 205,
+              "selections": 27,
+              "warriorPushes": 13,
+              "thiefPulls": 19,
+              "swaps": 4,
+              "partnerSwaps": 2,
+              "stoneSwaps": 1,
+              "monsterSwaps": 1,
+              "bentSwaps": 3,
+              "multiMirrorSwaps": 3,
+              "swapReflections": 6,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "chainPushes": 0,
+              "stoneMoves": 20,
+              "mirrorMoves": 16,
+              "reflections": 3,
+              "heroReflections": 1,
+              "pistonPushes": 1,
+              "platformsCreated": 4,
+              "monstersRemoved": 1,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "name": "Relâcher la réception avant la relève du Magicien",
+            "commands": "L",
+            "result": "GAME_OVER",
+            "scope": "Contre-branche locale."
+          },
+          {
+            "name": "Lancer un reflet global à la place du premier sort",
+            "commands": "CDDDDRCX",
+            "result": "GAME_OVER",
+            "scope": "Contre-branche locale."
+          },
+          {
+            "name": "Entrer dans l’alcôve avant de construire son appui",
+            "commands": "CDDDDRCRUCLCUUUULLLLLDDDDRXUUUUDDDDLXCCDRRRDRCCDLCLLULULDRXCCULUCCUURRRRRDRRDCCLLLLLDRRURDDUURRRCCULLLRU",
+            "result": "Pas nord refusé ; Magicien dans l’alcôve, dernier sas fermé.",
+            "scope": "Contre-branche locale ; une autre méthode de récupération reste autorisée."
+          }
+        ]
+      },
+      "sha256": "970f21ba55d1b9c6c1b8f7cfbcd56dbb2056cf7677a1b5c9f5d05885f6c31d88"
+    }
+  ],
+  "limitations": [
+    "A winning witness proves solvability, not an optimal or unique route.",
+    "Frozen geometry holds resources, other heroes and circuit states fixed; it does not model joint puzzle solving.",
+    "Local counter-branches establish their observed outcomes, not permanent global impossibility after a mistake.",
+    "A search stopped by its state or time budget remains inconclusive."
+  ]
+}

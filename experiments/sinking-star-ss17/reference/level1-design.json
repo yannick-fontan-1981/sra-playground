@@ -1,0 +1,2018 @@
+{
+  "spec": {
+    "id": "ss17-01",
+    "title": "Les trois cours de la forteresse",
+    "rows": [
+      "####################",
+      "#........##...######",
+      "#........##.Z.######",
+      "#........##...######",
+      "#..Woo...~~...######",
+      "#........##...######",
+      "#........###.~..o..#",
+      "#........#####.....#",
+      "###.##########.....#",
+      "###....#######.....#",
+      "##.......#####m.m..#",
+      "##.......#####.....#",
+      "##.......#####.....#",
+      "##.......#####.....#",
+      "##ooT....#####.....#",
+      "##.......#######.###",
+      "##.......#####.....#",
+      "##.......#####g.g.g#",
+      "##############.....#",
+      "####################"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 12,
+          "y": 5
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "violet",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 5,
+            "y": 10
+          },
+          {
+            "x": 16,
+            "y": 6
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 14,
+          "y": 10
+        },
+        "circuit": "violet",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 15
+        },
+        "circuit": "violet",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRRRRRRRUCRRULUUUULLUUUUURRRRRRRRRCCDCRUCLDDRUCRDCCLDRCLCCDXCURXDDXCDLXRCDXCCRRDCCDRDDDDDRDDDLLCDDDDDDDLDDDRRCDDDDDDDDDD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 9
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 12
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation pédagogique · Heroes and Water 10–11, Hauling 13 et Heroes and Mirrors 30–31",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "secondary": {
+      "label": "Heroes and Mirrors · énigmes 30–31 · visée et déplacement du miroir",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+      "puzzle": 30
+    },
+    "objective": "Organiser les trois cours, régler le miroir et relever les boutons pour réunir le trio dans la chambre des destinations."
+  },
+  "metrics": {
+    "actions": 120,
+    "selections": 20,
+    "warriorPushes": 7,
+    "thiefPulls": 9,
+    "swaps": 2,
+    "partnerSwaps": 1,
+    "stoneSwaps": 1,
+    "monsterSwaps": 0,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 1,
+    "chainPushes": 4,
+    "stoneMoves": 24,
+    "mirrorMoves": 1,
+    "reflections": 5,
+    "heroReflections": 2,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier pousse la file : deux caisses deviennent deux appuis permanents.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 3,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "violet": false
+      }
+    },
+    {
+      "label": "Le Guerrier traverse les appuis et libère le passage vers la deuxième cour.",
+      "turn": 9,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 3,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "violet": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait seulement la caisse voisine ; la réserve reste contre le mur. Un départ latéral lâche la charge.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "violet": false
+      }
+    },
+    {
+      "label": "La caisse remplace un héros sur la plaque occidentale : la presse rapproche les deux gardiens, qui s’éliminent.",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le Voleur utilise le pont déjà construit pour rejoindre le relais optique.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le Voleur tire son compagnon d’une case et le laisse en position de relais, sans provoquer sa poussée.",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le Magicien échange avec le Guerrier ; chacun conserve son identité et son pouvoir.",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Sans cible sur son axe, une flèche du Magicien produit un simple pas.",
+      "turn": 46,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le Guerrier descend le miroir pour aligner sa face avec la caisse de la troisième cour.",
+      "turn": 49,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "La visée du Magicien tourne sur la face blanche : il prend la place de la caisse sur la plaque distante. Les deux poids restent présents.",
+      "turn": 59,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le reflet global livre la caisse à la troisième cour, à distance égale sur l’autre bras du miroir.",
+      "turn": 60,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "À distances égales, le Guerrier et la caisse s’échangent. Le Guerrier dégage ensuite la ligne.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le reflet ramène le matériel dans la cour après le passage du Guerrier.",
+      "turn": 67,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le Voleur traverse à son tour puis se place du bon côté pour reprendre la caisse.",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Le Magicien quitte la plaque : la porte se referme. Il faut une relève permanente avant les trois sorties.",
+      "turn": 74,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": false
+      }
+    },
+    {
+      "label": "La caisse revient devant le Voleur. Le reflet ne confère aucun pouvoir aux pièces transportées.",
+      "turn": 75,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": false
+      }
+    },
+    {
+      "label": "Deux tractions ramènent la caisse sur la plaque distante ; le Voleur part de côté et laisse les deux boutons maintenus.",
+      "turn": 80,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    },
+    {
+      "label": "Les trois héros atteignent ensemble les destinations derrière la porte, après deux investissements dans le pont et deux relèves de plaques.",
+      "turn": 120,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 17
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "violet": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un échange conserve le nombre d’occupants de chaque île ; la construction du pont permet un vrai transfert supplémentaire.",
+      "La première cible alignée détermine l’échange du Magicien, y compris lorsque la face blanche dévie sa visée.",
+      "Un échange entre deux cases occupées conserve les poids des plaques ; quitter ensuite une plaque exige une relève.",
+      "Déplacer physiquement le miroir change les cases reliées par sa diagonale."
+    ],
+    "changed": [
+      "Carte originale de trois cours, avec un trio Guerrier/Voleur/Magicien et trois destinations simultanées.",
+      "Le Guerrier et le Voleur déplacent le miroir SS17 ; il ne peut pas être une cible de transposition.",
+      "La double tranchée consomme deux caisses. La traction unique, la traction d’un partenaire et le départ latéral sont montrés avant la visée coudée.",
+      "La même paire de boutons commande une presse latérale contre les deux gardiens et la porte de la chambre finale.",
+      "Le reflet global et la visée du Magicien restent deux actions distinctes, sans duplication de héros ni pouvoirs déclenchés par un déplacement forcé."
+    ],
+    "sourceReading": "Water 10–11 inspire la priorité de la première cible et la conservation d’occupation ; Hauling 13 inspire la relève de plaque par échange ; Mirrors 30–31 inspire la visée coudée puis le déplacement du miroir pour régler les correspondances. Géométrie, circuit, destinations et route sont originaux.",
+    "references": [
+      {
+        "label": "Heroes and Water · énigme 10",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-10"
+      },
+      {
+        "label": "The Hearty Heroes of Hauling · énigme 13",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13"
+      },
+      {
+        "label": "Heroes and Mirrors · énigme 31",
+        "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-31"
+      }
+    ],
+    "checkpoints": [
+      {
+        "label": "Première ouverture et disparition simultanée des gardiens",
+        "turn": 19,
+        "heroes": [
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 11,
+              "y": 3
+            },
+            "facing": "N",
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 4,
+              "y": 9
+            },
+            "facing": "W",
+            "dead": false
+          },
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 12,
+              "y": 2
+            },
+            "facing": "E",
+            "dead": false
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 10,
+            "y": 4
+          }
+        ],
+        "stones": [
+          {
+            "x": 16,
+            "y": 6
+          },
+          {
+            "x": 2,
+            "y": 14
+          },
+          {
+            "x": 5,
+            "y": 10
+          }
+        ],
+        "monsters": [],
+        "gateClosed": [
+          true,
+          false
+        ]
+      },
+      {
+        "label": "Échange coudé conservant les deux poids",
+        "turn": 59,
+        "heroes": [
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 11,
+              "y": 5
+            },
+            "facing": "W",
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 13,
+              "y": 3
+            },
+            "facing": "N",
+            "dead": false
+          },
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 16,
+              "y": 6
+            },
+            "facing": "S",
+            "dead": false
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 10,
+            "y": 4
+          }
+        ],
+        "stones": [
+          {
+            "x": 12,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 14
+          },
+          {
+            "x": 5,
+            "y": 10
+          }
+        ],
+        "monsters": [],
+        "gateClosed": [
+          true,
+          false
+        ]
+      },
+      {
+        "label": "Plaque libérée et porte fermée",
+        "turn": 74,
+        "heroes": [
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 14,
+              "y": 8
+            },
+            "facing": "S",
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 6
+            },
+            "facing": "E",
+            "dead": false
+          },
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 16,
+              "y": 7
+            },
+            "facing": "S",
+            "dead": false
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 10,
+            "y": 4
+          }
+        ],
+        "stones": [
+          {
+            "x": 12,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 14
+          },
+          {
+            "x": 5,
+            "y": 10
+          }
+        ],
+        "monsters": [],
+        "gateClosed": [
+          false,
+          true
+        ]
+      },
+      {
+        "label": "Deux caisses maintiennent la porte finale",
+        "turn": 80,
+        "heroes": [
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 14,
+              "y": 8
+            },
+            "facing": "S",
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 17,
+              "y": 7
+            },
+            "facing": "S",
+            "dead": false
+          },
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 16,
+              "y": 7
+            },
+            "facing": "S",
+            "dead": false
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 10,
+            "y": 4
+          }
+        ],
+        "stones": [
+          {
+            "x": 16,
+            "y": 6
+          },
+          {
+            "x": 2,
+            "y": 14
+          },
+          {
+            "x": 5,
+            "y": 10
+          }
+        ],
+        "monsters": [],
+        "gateClosed": [
+          true,
+          false
+        ]
+      }
+    ],
+    "checkScope": "Témoin gagnant intégralement rejoué sans refus ni mort. Cette route pédagogique n’est pas annoncée comme minimale. La nécessité d’une interaction avant les sorties est contrôlée séparément."
+  }
+}

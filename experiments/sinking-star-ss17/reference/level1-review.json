@@ -1,0 +1,246 @@
+{
+  "level": "ss17-01",
+  "reference": {
+    "actions": 120,
+    "complete": true,
+    "metrics": {
+      "actions": 120,
+      "selections": 20,
+      "warriorPushes": 7,
+      "thiefPulls": 9,
+      "swaps": 2,
+      "partnerSwaps": 1,
+      "stoneSwaps": 1,
+      "monsterSwaps": 0,
+      "bentSwaps": 1,
+      "multiMirrorSwaps": 0,
+      "swapReflections": 1,
+      "swapLoops": 0,
+      "partnerMoves": 1,
+      "chainPushes": 4,
+      "stoneMoves": 24,
+      "mirrorMoves": 1,
+      "reflections": 5,
+      "heroReflections": 2,
+      "pistonPushes": 1,
+      "platformsCreated": 2,
+      "monstersRemoved": 2,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "lessons": 23,
+    "expectedLessons": 23,
+    "missing": [],
+    "firstDiscoveries": [
+      {
+        "turn": 1,
+        "command": "R",
+        "id": "move"
+      },
+      {
+        "turn": 1,
+        "command": "R",
+        "id": "warrior-push"
+      },
+      {
+        "turn": 1,
+        "command": "R",
+        "id": "chain"
+      },
+      {
+        "turn": 4,
+        "command": "R",
+        "id": "water-support"
+      },
+      {
+        "turn": 7,
+        "command": "R",
+        "id": "cross-support"
+      },
+      {
+        "turn": 10,
+        "command": "C",
+        "id": "select"
+      },
+      {
+        "turn": 11,
+        "command": "R",
+        "id": "thief-pull"
+      },
+      {
+        "turn": 11,
+        "command": "R",
+        "id": "single-pull"
+      },
+      {
+        "turn": 13,
+        "command": "U",
+        "id": "release"
+      },
+      {
+        "turn": 17,
+        "command": "U",
+        "id": "button"
+      },
+      {
+        "turn": 17,
+        "command": "U",
+        "id": "gate"
+      },
+      {
+        "turn": 17,
+        "command": "U",
+        "id": "press"
+      },
+      {
+        "turn": 17,
+        "command": "U",
+        "id": "monster"
+      },
+      {
+        "turn": 39,
+        "command": "R",
+        "id": "partner-pull"
+      },
+      {
+        "turn": 42,
+        "command": "L",
+        "id": "wizard-walk"
+      },
+      {
+        "turn": 45,
+        "command": "R",
+        "id": "wizard-swap"
+      },
+      {
+        "turn": 45,
+        "command": "R",
+        "id": "wizard-partner"
+      },
+      {
+        "turn": 49,
+        "command": "D",
+        "id": "mirror-motion"
+      },
+      {
+        "turn": 59,
+        "command": "D",
+        "id": "wizard-bend"
+      },
+      {
+        "turn": 60,
+        "command": "X",
+        "id": "mirror"
+      },
+      {
+        "turn": 60,
+        "command": "X",
+        "id": "crate-reflection"
+      },
+      {
+        "turn": 64,
+        "command": "X",
+        "id": "hero-reflection"
+      },
+      {
+        "turn": 120,
+        "command": "D",
+        "id": "goals"
+      }
+    ]
+  },
+  "alternative": {
+    "file": "reference/level1-alternative.json",
+    "actions": 130,
+    "complete": true,
+    "metrics": {
+      "actions": 130,
+      "selections": 20,
+      "warriorPushes": 3,
+      "thiefPulls": 7,
+      "swaps": 7,
+      "partnerSwaps": 2,
+      "stoneSwaps": 1,
+      "monsterSwaps": 4,
+      "bentSwaps": 1,
+      "multiMirrorSwaps": 0,
+      "swapReflections": 1,
+      "swapLoops": 0,
+      "partnerMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 11,
+      "mirrorMoves": 1,
+      "reflections": 7,
+      "heroReflections": 4,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    }
+  },
+  "initialWalking": {
+    "perHero": [
+      {
+        "hero": "warrior",
+        "states": 111,
+        "reachesAnyGoal": false,
+        "exhaustive": true,
+        "otherActors": "fixed"
+      },
+      {
+        "hero": "thief",
+        "states": 111,
+        "reachesAnyGoal": false,
+        "exhaustive": true,
+        "otherActors": "fixed"
+      },
+      {
+        "hero": "wizard",
+        "states": 14,
+        "reachesAnyGoal": false,
+        "exhaustive": true,
+        "otherActors": "fixed"
+      }
+    ],
+    "generousGraph": [
+      {
+        "hero": "warrior",
+        "cells": 117,
+        "reachesAnyGoal": false,
+        "exhaustive": true
+      },
+      {
+        "hero": "thief",
+        "cells": 117,
+        "reachesAnyGoal": false,
+        "exhaustive": true
+      },
+      {
+        "hero": "wizard",
+        "cells": 16,
+        "reachesAnyGoal": false,
+        "exhaustive": true
+      }
+    ],
+    "model": "Initial terrain and supports; every door or press treated as open; other occupants and mirrors ignored. This overapproximation still contains no reachable goal."
+  },
+  "initialGlobalReflection": {
+    "refused": true,
+    "blockedMirrorIndices": [
+      0
+    ],
+    "worldMoved": false
+  },
+  "conclusions": [
+    "Les 23 découvertes se déclenchent depuis les images publiques du témoin pédagogique de 120 actions.",
+    "Aucune destination n’est accessible depuis les positions initiales par marche seule, même en ouvrant toutes les portes et en ignorant les autres occupants.",
+    "Une variante gagnante de 130 actions évite les appuis, les chaînes et la presse en exploitant quatre échanges de monstres.",
+    "Les objectifs exigent de réorganiser les trois cours et de maintenir les boutons ; le tutoriel ne verrouille aucune stratégie autorisée par le moteur."
+  ],
+  "limits": [
+    "Aucune preuve de longueur minimale ni recherche exhaustive sur l’ensemble des actions de la carte.",
+    "L’exhaustivité concerne uniquement les graphes de marche initiale explicitement décrits.",
+    "Les interactions présentes dans un témoin ne sont pas automatiquement nécessaires dans toutes les solutions."
+  ]
+}

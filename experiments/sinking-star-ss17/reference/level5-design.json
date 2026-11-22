@@ -1,0 +1,1559 @@
+{
+  "spec": {
+    "id": "ss17-05",
+    "title": "La relève à angle droit",
+    "rows": [
+      "####################",
+      "#....o...##........#",
+      "#........##........#",
+      "#..T.....##........#",
+      "#.......2~~.m......#",
+      "#........##........#",
+      "#####....##........#",
+      "#.o.o.#.Z~#........#",
+      "#.....#.###........#",
+      "#.....#..##........#",
+      "#.....#..##........#",
+      "#W....#..##........#",
+      "######...~~........#",
+      "######...##........#",
+      "#######..##........#",
+      "#######..##........#",
+      "#######..####.######",
+      "#############.######",
+      "#############.g.g.g#",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "expulsion",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "color": 12
+      },
+      {
+        "id": "reserve",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 3
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "ecluse",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 4
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "lest",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 4
+          },
+          {
+            "x": 15,
+            "y": 12
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 7
+        },
+        "circuit": "expulsion",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 6
+        },
+        "circuit": "reserve",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 16
+        },
+        "circuit": "ecluse",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 17
+        },
+        "circuit": "lest",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 12
+        },
+        "circuit": "ecluse",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 12
+        },
+        "circuit": "ecluse",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CCUCCLURRRDDLDRDDDLLLDDRUURDDRUUUUUULLCCUURRDRRUUUURUULLDRRURDDDDDDDRDDLLURRRLUUULUUULLDDLLDRDRUUUURUULLDRRURDDDDDDDRDDLLURRCCUCCRRRRLLDRCCUUULUUUUUULLDLDRRLUURRDDDDDDDDRDDLLURRRRRRRRUCCDDDDDDDDDDDDRDDDRRRRRCDDDDLDDDRRRCDLDDDDDDRRRRDDDRRDDDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation de Heroes and Water · Métamonde 4 et énigme 12",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+    "puzzle": "Métamonde 4 / 12",
+    "objective": "Remplacer un gardien sur son bouton sans rompre le soutien, préparer sa cellule de réception, convertir une réserve en pont et réemployer le miroir et la clef comme lests finaux."
+  },
+  "metrics": {
+    "actions": 241,
+    "selections": 16,
+    "warriorPushes": 52,
+    "thiefPulls": 9,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "stoneSwaps": 0,
+    "monsterSwaps": 1,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 2,
+    "chainPushes": 3,
+    "stoneMoves": 60,
+    "mirrorMoves": 2,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 1,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le rayon remonte jusqu’à la face blanche du miroir, tourne à droite et échange le Magicien avec le gardien. La commande cyan reste occupée, mais le monstre attend maintenant dans la presse.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 8,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "expulsion": true,
+        "reserve": false,
+        "ecluse": true,
+        "lest": false
+      }
+    },
+    {
+      "label": "Le Voleur quitte la commande orange : la presse latérale expulse le gardien dans l’eau. La case de destination du rayon avait été préparée avant la relève.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": false,
+        "ecluse": true,
+        "lest": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la clef du mur nord et la dépose sur la commande verte. La réserve s’ouvre sans immobiliser un héros.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 7
+        },
+        {
+          "x": 4,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": true,
+        "ecluse": true,
+        "lest": false
+      }
+    },
+    {
+      "label": "Les deux charges de pont sont sorties de leurs alcôves : elles doivent encore franchir le même sas et changer d’axe.",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 9
+        },
+        {
+          "x": 4,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": true,
+        "ecluse": true,
+        "lest": false
+      }
+    },
+    {
+      "label": "Le Guerrier réunit les charges, fait passer la première par le sas, change deux fois son axe et la pose sur la plateforme éloignée.",
+      "turn": 77,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": true,
+        "ecluse": true,
+        "lest": false
+      }
+    },
+    {
+      "label": "La seconde charge emprunte le sas puis rejoint la plateforme proche. Aucun héros ne doit rester sur les deux cases au retrait.",
+      "turn": 124,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": true,
+        "ecluse": true,
+        "lest": false
+      }
+    },
+    {
+      "label": "Le Magicien libère l’ancienne commande du gardien : les deux caisses deviennent des appuis fixes et le premier verrou final s’ouvre.",
+      "turn": 127,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": true,
+        "ecluse": false,
+        "lest": false
+      }
+    },
+    {
+      "label": "Le miroir est tiré sur le premier bouton violet, puis la clef verte est extraite : la réserve vide se referme. Le miroir a changé de fonction.",
+      "turn": 137,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": false,
+        "ecluse": false,
+        "lest": false
+      }
+    },
+    {
+      "label": "La clef de réserve devient le second lest, sur l’autre rive. Les deux commandes violettes sont occupées et l’écluse doit rester libérée.",
+      "turn": 184,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": false,
+        "ecluse": false,
+        "lest": true
+      }
+    },
+    {
+      "label": "Les trois héros rejoignent les destinations après avoir changé un monstre en cible, deux caisses en pont, un miroir et une clef en lests.",
+      "turn": 241,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 16,
+            "y": 18
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 18
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 4
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "expulsion": false,
+        "reserve": false,
+        "ecluse": false,
+        "lest": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "La relève par échange maintient le poids sur une commande éloignée.",
+      "Le retrait d’un soutien hydraulique convertit les blocs restés dessus en appuis de traversée.",
+      "Un échange seul conserve le nombre d’occupants de chaque rive ; un transfert supplémentaire est nécessaire. Le témoin utilise un pont, une variante utilise des reflets."
+    ],
+    "changed": [
+      "Le dragon est remplacé par un monstre vulnérable à une presse latérale qui le pousse dans l’eau.",
+      "Le rayon du Magicien est dévié par un miroir mobile, récupéré ensuite en lest.",
+      "Une clef extraite ouvre la réserve de deux charges puis devient le lest de la rive opposée.",
+      "La sortie exige simultanément deux poids et le retrait des plateformes ; coordonnées et topologie entièrement nouvelles."
+    ],
+    "sourceReading": "Composition originale de principes de Water Métamonde 4 (échanges avec gardiens de boutons), Water 12 (retrait hydraulique) et Water 11 (conservation des occupants). Le témoin illustre une chaîne de dépendances ; aucun minimum ni ordre unique n’est revendiqué."
+  }
+}

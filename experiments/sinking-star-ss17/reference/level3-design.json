@@ -1,0 +1,899 @@
+{
+  "spec": {
+    "id": "ss17-03",
+    "title": "Le compte des îles",
+    "rows": [
+      "####################",
+      "####################",
+      "##.......~~.....####",
+      "##.......~~.....####",
+      "##.......~~.....####",
+      "##......W~~Z.o..####",
+      "##.......~~.....####",
+      "##.......~~.....####",
+      "##.......~~.....#..#",
+      "##.#.....~~.....#g.#",
+      "###oT....~~..o....g#",
+      "##.#.....~~.....#g.#",
+      "##.......~~.....#..#",
+      "##.......~~.....####",
+      "##.......~~.....####",
+      "##.......~~.....####",
+      "##.......~~.....####",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "ancrage-ouest",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 14
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 16,
+          "y": 10
+        },
+        "circuit": "ancrage-ouest",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCLCDDDDRRRDLLLLRUUUUUURRDRCCRCCRRRDDCCDDDDLLLDRRRRRRUUUUURRDDDDDDDDRDLLUURRCCLDDDDDLLLLLDDDDRCUURRRUCUURRRRRRRRRRRDLCUUUURRRRRRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Water · énigmes 10 et 11",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "objective": "Distinguer l’échange d’occupants d’un véritable transfert entre îles, et préserver une ligne de récupération.",
+    "secondary": {
+      "label": "Énigme 10 · garder libre l’axe du retour",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-10"
+    }
+  },
+  "metrics": {
+    "actions": 129,
+    "selections": 14,
+    "warriorPushes": 17,
+    "thiefPulls": 3,
+    "swaps": 3,
+    "partnerSwaps": 2,
+    "stoneSwaps": 1,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 21,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "L’échange envoie le Guerrier à l’est, sans ajouter un occupant à cette rive.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ancrage-ouest": false
+      }
+    },
+    {
+      "label": "Le Guerrier immerge la charge orientale : seule la moitié est du pont est permanente.",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ancrage-ouest": false
+      }
+    },
+    {
+      "label": "La clé écartée de la visée permet l’échange de retour avec le Guerrier.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ancrage-ouest": false
+      }
+    },
+    {
+      "label": "Le Voleur sort la charge occidentale de son renfoncement.",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 6,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ancrage-ouest": false
+      }
+    },
+    {
+      "label": "Le second appui réunit les rives ; un passage à pied peut enfin changer leur occupation.",
+      "turn": 50,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 6
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ancrage-ouest": false
+      }
+    },
+    {
+      "label": "Le dernier bloc reste mobile jusqu’à sa relève sur le bouton occidental.",
+      "turn": 94,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ancrage-ouest": true
+      }
+    },
+    {
+      "label": "Le pont porte le trio ; la rive ouest conserve uniquement la clé de sortie.",
+      "turn": 129,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ancrage-ouest": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Les échanges conservent le nombre d’occupants de chaque rive ; les appuis permettent ensuite un vrai passage.",
+      "Une charge trop proche masque la cible utile sur l’axe de retour.",
+      "Un bloc doit rester récupérable au lieu d’être consommé pour le pont."
+    ],
+    "changed": [
+      "Carte originale à deux rives et pont de deux cases, plutôt que cinq îles.",
+      "Le Voleur extrait la réserve occidentale, et le Guerrier construit depuis les deux côtés.",
+      "Le troisième bloc devient un poids distant maintenant une porte-poussoir ; aucun Clerc, dragon ou flottement."
+    ],
+    "sourceReading": "La contrainte de comptage vient de l’énigme 11 ; la réservation de l’axe de récupération vient de l’énigme 10. Les coordonnées, passages et rôles du trio sont nouveaux.",
+    "localChecks": [
+      {
+        "name": "Retour sans dégager la première cible",
+        "commands": "CCLCDDDDRRRDLLLLRUUUURRRUCCR",
+        "observed": "Le rayon échange le bloc en (13,5), et laisse le Guerrier en (14,5) ; le nombre d’occupants orientaux reste identique.",
+        "scope": "Contre-branche locale et invariant sur cet échange, pas preuve de minimum global."
+      },
+      {
+        "name": "Demi-pont",
+        "atStage": 2,
+        "observed": "Un seul appui en (10,10) ; la case occidentale (9,10) demeure de l’eau. Le témoin attend la seconde charge avant toute traversée.",
+        "scope": "Contrôle structurel du témoin."
+      }
+    ]
+  }
+}

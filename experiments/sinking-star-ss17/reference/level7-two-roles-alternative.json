@@ -1,0 +1,166 @@
+{
+  "label": "Solution alternative vérifiée : la clef devient directement le lest occidental",
+  "scope": "Les trois vies de la clef décrivent le parcours de référence. Le deuxième sort ne constitue pas une nécessité universelle.",
+  "explanation": [
+    "Le début conserve les trois charges, le sas, le convoi poussé par le Guerrier et la neutralisation des deux monstres.",
+    "Le Voleur réaffecte directement la clef orange au lest occidental, puis gare le miroir et quitte la réserve.",
+    "Le Magicien libère ensuite la commande cyan par un pas ordinaire.",
+    "La charge de combat est réaffectée au lest oriental, et les trois appuis restent utilisés."
+  ],
+  "spec": {
+    "id": "ss17-07",
+    "title": "Les trois vies de la clef",
+    "rows": [
+      "####################",
+      "#.....o#####.......#",
+      "#..#..o#####.......#",
+      "#.#o#.o#####.......#",
+      "#....#..2~~~...T...#",
+      "#........###.......#",
+      "#........###.......#",
+      "##.#####Z###.......#",
+      "#.........##.......#",
+      "#.W.......##.m.m...#",
+      "#.......####o......#",
+      "#........###.......#",
+      "#........###.......#",
+      "#........~~~.......#",
+      "#........###.......#",
+      "#........###.......#",
+      "#........####.######",
+      "#############.######",
+      "#############.g.g.g#",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "prison",
+        "buttons": [
+          {
+            "x": 15,
+            "y": 4
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "chasse",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "color": 12
+      },
+      {
+        "id": "trois-lests",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 13
+          },
+          {
+            "x": 15,
+            "y": 12
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 2,
+          "y": 7
+        },
+        "circuit": "prison",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 9
+        },
+        "circuit": "chasse",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 16
+        },
+        "circuit": "prison",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 17
+        },
+        "circuit": "trois-lests",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 13
+        },
+        "circuit": "prison",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 13
+        },
+        "circuit": "prison",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 13
+        },
+        "circuit": "prison",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CCUCCUULLUDDLCCURRRRRRUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRCUUUUUULLUUURRRRUUDDDLCCLLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRCUUUUUULLUUURRRRUUUDDDDLCCLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRRRURRRRDLLLLUUUDCUUUUUULLUUUURDDLULDRDDDRURRDLDDDDDRUUUUUURRRUUULULDDLLLLDDCDCURRUULDDDLDRRUCCLLDDDDDDDDDDDDDRRRRRCDDDDLDDDRRRCDDDDRRRRDRRRRRRDDRDDDR",
+  "metrics": {
+    "actions": 366,
+    "selections": 28,
+    "warriorPushes": 71,
+    "thiefPulls": 26,
+    "swaps": 1,
+    "partnerSwaps": 1,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 8,
+    "stoneMoves": 113,
+    "mirrorMoves": 1,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 3,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  }
+}

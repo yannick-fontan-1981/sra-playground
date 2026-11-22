@@ -1,0 +1,2160 @@
+{
+  "level": "ss17-06",
+  "review": "Independent of the level author; canonical route, concrete substitutions, final press, and initial walking.",
+  "historical": {
+    "sha256": "82881db31d0fb3d4c05e090122820c53491af9caed1cc7352b79184442f138e1",
+    "spec": {
+      "id": "ss17-06",
+      "title": "Les deux emplois des miroirs",
+      "rows": [
+        "####################",
+        "#.o....o############",
+        "#.T..#..############",
+        "#...#o#.############",
+        "#.......############",
+        "#..Z....3###########",
+        "#W.......###########",
+        "#........###########",
+        "########~###########",
+        "########~###########",
+        "########~###########",
+        "######...........###",
+        "######...........#g#",
+        "######..1.....o..#.#",
+        "######..........m~.#",
+        "######............g#",
+        "######...........#.#",
+        "##################.#",
+        "##################g#",
+        "####################"
+      ],
+      "circuits": [
+        {
+          "id": "retenue",
+          "buttons": [
+            {
+              "x": 5,
+              "y": 3
+            }
+          ],
+          "color": 10
+        },
+        {
+          "id": "trois-lests",
+          "buttons": [
+            {
+              "x": 6,
+              "y": 5
+            },
+            {
+              "x": 12,
+              "y": 13
+            },
+            {
+              "x": 15,
+              "y": 15
+            }
+          ],
+          "color": 15
+        }
+      ],
+      "gates": [
+        {
+          "at": {
+            "x": 16,
+            "y": 14
+          },
+          "circuit": "retenue",
+          "direction": "E",
+          "closedWhen": "released"
+        },
+        {
+          "at": {
+            "x": 17,
+            "y": 15
+          },
+          "circuit": "trois-lests",
+          "direction": "E",
+          "closedWhen": "released"
+        }
+      ],
+      "platforms": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "circuit": "retenue",
+          "activeWhen": "pressed"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 9
+          },
+          "circuit": "retenue",
+          "activeWhen": "pressed"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "circuit": "retenue",
+          "activeWhen": "pressed"
+        }
+      ]
+    },
+    "referenceCommands": "CCRDXCCDDDDRCCLURRDXCRUUURRRUUDDDDLULLDXUURDDRCCDRRRRRDDDDDLDRRRRULCCUUCULLUUUUULUULLDDLDRRRURDDDDDDDLDRRRRRRRURDLCURLLDCLDDDDRRRURRUUUCDDRRURRDDDCDRRRDDDDDDDDDRRRRRRRRUR",
+    "reference": {
+      "complete": true,
+      "metrics": {
+        "actions": 170,
+        "selections": 16,
+        "warriorPushes": 27,
+        "thiefPulls": 16,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 1,
+        "swapReflections": 2,
+        "swapLoops": 0,
+        "partnerMoves": 2,
+        "chainPushes": 0,
+        "stoneMoves": 41,
+        "mirrorMoves": 6,
+        "reflections": 3,
+        "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 3,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 18
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 15
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 12
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "monsters": [],
+      "stones": [
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "gateClosed": [
+        true,
+        true
+      ],
+      "platformActive": [
+        false,
+        false,
+        false
+      ]
+    },
+    "counterexample": {
+      "kind": "simple-crate-substitution",
+      "commands": "DRRRRRRRDDDDDRRRRRRDDLDRUUURRCCDDRRRRRDDDDRDDRRRRRDRDCCDDDLRRRURRRUUDDDDLULDCCULLLLLLLLUUUUULUULLLLULDDDLDRRRRRRURDDDDDLDRRRRURDCCRRUUUCRRRDRDDRRDDDCDRRRDDDDDRRRRRRRDRDDR",
+      "actions": [
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 18
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 51,
+            "y": 39
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 51,
+            "y": 48
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 51,
+            "y": 39
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 21
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 51,
+            "y": 48
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 39,
+            "y": 39
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 21
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        }
+      ],
+      "complete": true,
+      "metrics": {
+        "actions": 170,
+        "selections": 10,
+        "warriorPushes": 22,
+        "thiefPulls": 9,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 1,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 31,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 18
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 15
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 12
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "supports": [],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 14
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 13
+        },
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "gateClosed": [
+        false,
+        true
+      ],
+      "platformActive": [
+        true,
+        true,
+        true
+      ]
+    }
+  },
+  "correction": {
+    "addedGate": {
+      "at": {
+        "x": 18,
+        "y": 14
+      },
+      "circuit": "retenue",
+      "direction": "S",
+      "closedWhen": "pressed"
+    },
+    "sha256": "362859dd57fc9611f28499c10d33799fe3f0a9f31c04eeab8531867a284e892e",
+    "spec": {
+      "id": "ss17-06",
+      "title": "Les deux emplois des miroirs",
+      "rows": [
+        "####################",
+        "#.o....o############",
+        "#.T..#..############",
+        "#...#o#.############",
+        "#.......############",
+        "#..Z....3###########",
+        "#W.......###########",
+        "#........###########",
+        "########~###########",
+        "########~###########",
+        "########~###########",
+        "######...........###",
+        "######...........#g#",
+        "######..1.....o..#.#",
+        "######..........m~.#",
+        "######............g#",
+        "######...........#.#",
+        "##################.#",
+        "##################g#",
+        "####################"
+      ],
+      "circuits": [
+        {
+          "id": "retenue",
+          "buttons": [
+            {
+              "x": 5,
+              "y": 3
+            }
+          ],
+          "color": 10
+        },
+        {
+          "id": "trois-lests",
+          "buttons": [
+            {
+              "x": 6,
+              "y": 5
+            },
+            {
+              "x": 12,
+              "y": 13
+            },
+            {
+              "x": 15,
+              "y": 15
+            }
+          ],
+          "color": 15
+        }
+      ],
+      "gates": [
+        {
+          "at": {
+            "x": 16,
+            "y": 14
+          },
+          "circuit": "retenue",
+          "direction": "E",
+          "closedWhen": "released"
+        },
+        {
+          "at": {
+            "x": 17,
+            "y": 15
+          },
+          "circuit": "trois-lests",
+          "direction": "E",
+          "closedWhen": "released"
+        },
+        {
+          "at": {
+            "x": 18,
+            "y": 14
+          },
+          "circuit": "retenue",
+          "direction": "S",
+          "closedWhen": "pressed"
+        }
+      ],
+      "platforms": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "circuit": "retenue",
+          "activeWhen": "pressed"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 9
+          },
+          "circuit": "retenue",
+          "activeWhen": "pressed"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "circuit": "retenue",
+          "activeWhen": "pressed"
+        }
+      ]
+    },
+    "referenceCommands": "CCRDXCCDDDDRCCLURRDXCRUUURRRUUDDDDLULLDXUURDDRCCDRRRRRDDDDDLDRRRRULCCUUCULLUUUUULUULLDDLDRRRURDDDDDDDLDRRRRRRRURDLCURLLDCLDDDDRRRURRUUUCDDRRURRDDDCDRRRDDDDDDDDDRRRRRRRRUR",
+    "reference": {
+      "complete": true,
+      "metrics": {
+        "actions": 170,
+        "selections": 16,
+        "warriorPushes": 27,
+        "thiefPulls": 16,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 1,
+        "swapReflections": 2,
+        "swapLoops": 0,
+        "partnerMoves": 2,
+        "chainPushes": 0,
+        "stoneMoves": 41,
+        "mirrorMoves": 6,
+        "reflections": 3,
+        "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 3,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 18
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 15
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 12
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "monsters": [],
+      "stones": [
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "gateClosed": [
+        true,
+        true,
+        false
+      ],
+      "platformActive": [
+        false,
+        false,
+        false
+      ]
+    },
+    "referenceUnchanged": true,
+    "oldCounterexample": {
+      "complete": false,
+      "metrics": {
+        "actions": 170,
+        "selections": 10,
+        "warriorPushes": 22,
+        "thiefPulls": 8,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 1,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 30,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 8,
+        "deaths": 0
+      },
+      "firstInvalidTurn": 133,
+      "firstInvalidCommand": "U",
+      "hero": {
+        "x": 18,
+        "y": 15
+      },
+      "reason": "La retenue hydraulique laisse la nouvelle presse fermée en (18,14) ; le Magicien ne peut pas rejoindre la destination supérieure."
+    }
+  },
+  "finalThiefPress": {
+    "turn": 170,
+    "command": "R",
+    "before": {
+      "thief": {
+        "x": 16,
+        "y": 15
+      },
+      "stone": [
+        {
+          "x": 15,
+          "y": 15
+        }
+      ],
+      "exitCircuitPressed": true
+    },
+    "phases": [
+      {
+        "kind": "pull",
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 16,
+              "y": 15
+            },
+            "to": {
+              "x": 17,
+              "y": 15
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 15,
+              "y": 15
+            },
+            "to": {
+              "x": 16,
+              "y": 15
+            }
+          }
+        ]
+      },
+      {
+        "kind": "piston",
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 17,
+              "y": 15
+            },
+            "to": {
+              "x": 18,
+              "y": 15
+            }
+          }
+        ],
+        "gateIndex": 1
+      }
+    ],
+    "after": {
+      "thief": {
+        "x": 18,
+        "y": 15
+      },
+      "stone": [
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "exitCircuitPressed": false,
+      "exitPressClosed": true,
+      "complete": true
+    },
+    "frameDurationsMs": [
+      60,
+      80,
+      40,
+      60,
+      80,
+      0
+    ],
+    "undoRestoresWholeFinalTurn": true,
+    "forcedPressTriggersNoAdditionalPull": true
+  },
+  "canonicalMirrorUses": [
+    {
+      "index": 0,
+      "initial": {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "facing": "SW"
+      },
+      "final": {
+        "at": {
+          "x": 6,
+          "y": 5
+        },
+        "facing": "SW"
+      },
+      "swapRayVisits": 1,
+      "reflectionPaths": 3,
+      "motionSteps": 2,
+      "holdsFinalExitButton": true
+    },
+    {
+      "index": 1,
+      "initial": {
+        "at": {
+          "x": 8,
+          "y": 13
+        },
+        "facing": "NE"
+      },
+      "final": {
+        "at": {
+          "x": 12,
+          "y": 13
+        },
+        "facing": "NE"
+      },
+      "swapRayVisits": 1,
+      "reflectionPaths": 2,
+      "motionSteps": 4,
+      "holdsFinalExitButton": true
+    }
+  ],
+  "initialWalking": {
+    "perHero": [
+      {
+        "hero": "warrior",
+        "states": 106,
+        "reachesAnyGoal": false,
+        "exhaustive": true,
+        "otherActors": "fixed"
+      },
+      {
+        "hero": "thief",
+        "states": 106,
+        "reachesAnyGoal": false,
+        "exhaustive": true,
+        "otherActors": "fixed"
+      },
+      {
+        "hero": "wizard",
+        "states": 38,
+        "reachesAnyGoal": false,
+        "exhaustive": true,
+        "otherActors": "fixed"
+      }
+    ],
+    "structuralCertificate": {
+      "exitButtonsInitiallyEmpty": true,
+      "distances": [
+        {
+          "button": {
+            "x": 6,
+            "y": 5
+          },
+          "manhattanToEntrance": 21
+        },
+        {
+          "button": {
+            "x": 12,
+            "y": 13
+          },
+          "manhattanToEntrance": 7
+        },
+        {
+          "button": {
+            "x": 15,
+            "y": 15
+          },
+          "manhattanToEntrance": 2
+        }
+      ],
+      "uniqueSupportedEntrance": {
+        "x": 17,
+        "y": 15
+      },
+      "noGoalReachableWithEntranceRemoved": true,
+      "reachableCellsWithoutEntrance": 118,
+      "reason": "Sans déplacer les objets, les trois héros doivent occuper les trois plaques pour ouvrir le sas. Aucun ne peut atteindre la case de presse en un pas depuis sa plaque. Le premier départ referme donc un sas encore vide."
+    }
+  },
+  "advancedAlternative": {
+    "kind": "guardian-weight-and-straight-ferry",
+    "commands": "DRRRRRRRDDDDDRRRRRRDDLDRUUUULCCDDRRRRRDDDDDRDDDDRRRRRRRULLDDLLRUUULLLLDCCDDDLRRRURRRUUDDDDLULDCCLLLLLUUUUULUULLLLULDDDLDRRRRRRURDDDDDRDDDDRRRRDRRRCUUDDRRDRCLUULUUULLUCCRCDCURRDDDCCRDDDDRRRRRRRURRUUUCCDDDDDRRRRRRRUR",
+    "actions": [
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 9,
+          "y": 9
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 12,
+          "y": 18
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 42,
+          "y": 36
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 9,
+          "y": 9
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 39,
+          "y": 51
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 42,
+          "y": 36
+        }
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 18,
+          "y": 21
+        }
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 39,
+          "y": 51
+        }
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 51,
+          "y": 51
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 27,
+          "y": 36
+        }
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 27,
+          "y": 24
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 51,
+          "y": 51
+        }
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 30,
+          "y": 36
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 27,
+          "y": 39
+        }
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 57,
+          "y": 57
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 30,
+          "y": 36
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      }
+    ],
+    "complete": true,
+    "metrics": {
+      "actions": 214,
+      "selections": 16,
+      "warriorPushes": 17,
+      "thiefPulls": 11,
+      "swaps": 5,
+      "partnerSwaps": 1,
+      "stoneSwaps": 1,
+      "monsterSwaps": 3,
+      "bentSwaps": 0,
+      "multiMirrorSwaps": 0,
+      "swapReflections": 0,
+      "swapLoops": 0,
+      "partnerMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 29,
+      "mirrorMoves": 0,
+      "reflections": 0,
+      "heroReflections": 0,
+      "pistonPushes": 1,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "heroes": [
+      {
+        "kind": "warrior",
+        "at": {
+          "x": 18,
+          "y": 18
+        },
+        "facing": "S",
+        "dead": false
+      },
+      {
+        "kind": "thief",
+        "at": {
+          "x": 18,
+          "y": 15
+        },
+        "facing": "E",
+        "dead": false
+      },
+      {
+        "kind": "wizard",
+        "at": {
+          "x": 18,
+          "y": 12
+        },
+        "facing": "N",
+        "dead": false
+      }
+    ],
+    "supports": [],
+    "monsters": [
+      {
+        "x": 12,
+        "y": 13
+      }
+    ],
+    "stones": [
+      {
+        "x": 8,
+        "y": 7
+      },
+      {
+        "x": 6,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 16,
+        "y": 15
+      }
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "facing": "SW"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 13
+        },
+        "facing": "NE"
+      }
+    ],
+    "gateClosed": [
+      true,
+      true,
+      false
+    ],
+    "platformActive": [
+      false,
+      false,
+      false
+    ],
+    "explanation": "Trois transpositions placent le gardien sur le lest (12,13). Une caisse reste sur le bouton nord et une autre sur le bouton proche du sas. Après retrait de la clef, le Magicien échange le Voleur par-dessus les trois cases d’eau puis revient grâce à une caisse préparée avant le miroir inférieur. Le détour exige 214 actions, dont cinq échanges, sans déplacer ni utiliser les miroirs."
+  },
+  "conclusions": [
+    "Le témoin de 170 actions reste gagnant après ajout de la presse supérieure, avec exactement les mêmes mouvements et métriques.",
+    "La dernière action du Voleur comporte une traction volontaire puis une projection forcée par la presse ; la caisse reste en (16,15), et Undo rétablit tout le tour.",
+    "La substitution directe de 170 actions contournait les deux miroirs sur la carte historique. Elle échoue au tour 133 sur la carte corrigée.",
+    "Une stratégie plus élaborée de 214 actions conserve néanmoins une solution sans miroirs, grâce au gardien-poids et à un ferry de transpositions droites.",
+    "Aucune sortie initiale gratuite à pied ; aucune nécessité globale des miroirs, des appuis ou de la disparition du gardien n’est revendiquée."
+  ],
+  "limits": [
+    "Aucune recherche exhaustive de toutes les solutions, aucun minimum global et aucune preuve que 214 actions soit le meilleur contournement restant.",
+    "La recherche supplémentaire vise uniquement la construction du ferry concret identifié ; elle ne couvre pas toutes les substitutions possibles.",
+    "Les graphes exhaustifs de marche fixent les autres acteurs ; le cas de plusieurs marcheurs est couvert séparément par le certificat de sas et des trois plaques.",
+    "Les fonctions des deux miroirs sont garanties dans le témoin pédagogique, pas imposées artificiellement à toute stratégie valide."
+  ]
+}

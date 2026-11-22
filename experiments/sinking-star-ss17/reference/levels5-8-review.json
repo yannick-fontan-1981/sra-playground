@@ -1,0 +1,201 @@
+{
+  "schema": 1,
+  "scope": "Revue déterministe des quatre témoins et de cinq contresens locaux. Les variantes connues restent légitimes ; aucune exploration exhaustive ni borne minimale n’est revendiquée.",
+  "levels": [
+    {
+      "level": 5,
+      "specSha256": "aeccc16d19d9b88495a7e08f5e897c5d02663bb7fd7d8f3a0ca2f4eee6272e67",
+      "result": "WIN",
+      "metrics": {
+        "actions": 241,
+        "selections": 16,
+        "warriorPushes": 52,
+        "thiefPulls": 9,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 1,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 1,
+        "swapLoops": 0,
+        "partnerMoves": 2,
+        "chainPushes": 3,
+        "stoneMoves": 60,
+        "mirrorMoves": 2,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 2,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "stages": 10,
+      "alternatives": [
+        {
+          "file": "level5-ferry-alternative.json",
+          "actions": 257,
+          "supports": 0
+        },
+        {
+          "file": "level5-chain-alternative.json",
+          "actions": 215,
+          "supports": 2
+        }
+      ],
+      "scope": "Le témoin prouve cette solution, sans prouver un minimum, une unicité ou la nécessité globale de chaque mécanique."
+    },
+    {
+      "level": 6,
+      "specSha256": "362859dd57fc9611f28499c10d33799fe3f0a9f31c04eeab8531867a284e892e",
+      "result": "WIN",
+      "metrics": {
+        "actions": 170,
+        "selections": 16,
+        "warriorPushes": 27,
+        "thiefPulls": 16,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 1,
+        "swapReflections": 2,
+        "swapLoops": 0,
+        "partnerMoves": 2,
+        "chainPushes": 0,
+        "stoneMoves": 41,
+        "mirrorMoves": 6,
+        "reflections": 3,
+        "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 3,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "stages": 9,
+      "alternatives": [],
+      "scope": "Le témoin prouve cette solution, sans prouver un minimum, une unicité ou la nécessité globale de chaque mécanique."
+    },
+    {
+      "level": 7,
+      "specSha256": "34f1daeae0dda21d080ebfaacc9959aecc51c9870c94810fb9535c88132ceb7f",
+      "result": "WIN",
+      "metrics": {
+        "actions": 410,
+        "selections": 31,
+        "warriorPushes": 87,
+        "thiefPulls": 26,
+        "swaps": 2,
+        "partnerSwaps": 1,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 2,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 2,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 8,
+        "stoneMoves": 130,
+        "mirrorMoves": 1,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 3,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "stages": 13,
+      "alternatives": [
+        {
+          "file": "level7-two-roles-alternative.json",
+          "actions": 366,
+          "supports": 3
+        }
+      ],
+      "scope": "Le témoin prouve cette solution, sans prouver un minimum, une unicité ou la nécessité globale de chaque mécanique."
+    },
+    {
+      "level": 8,
+      "specSha256": "e8b8bb52cef73dd53f5005900c2471553919fe4ce8ed8f4067079db5d9fec20b",
+      "result": "WIN",
+      "metrics": {
+        "actions": 205,
+        "selections": 27,
+        "warriorPushes": 13,
+        "thiefPulls": 19,
+        "swaps": 4,
+        "partnerSwaps": 2,
+        "stoneSwaps": 1,
+        "monsterSwaps": 1,
+        "bentSwaps": 3,
+        "multiMirrorSwaps": 3,
+        "swapReflections": 6,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 20,
+        "mirrorMoves": 16,
+        "reflections": 3,
+        "heroReflections": 1,
+        "pistonPushes": 1,
+        "platformsCreated": 4,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "stages": 15,
+      "alternatives": [],
+      "scope": "Le témoin prouve cette solution, sans prouver un minimum, une unicité ou la nécessité globale de chaque mécanique."
+    }
+  ],
+  "mistakes": [
+    {
+      "level": 5,
+      "label": "Libérer la presse avant de remplacer le Magicien",
+      "commands": "CL",
+      "result": "GAME_OVER",
+      "evidence": "La presse expulse le Magicien dans l’eau ; préparer la réception précède sa libération dans le témoin."
+    },
+    {
+      "level": 6,
+      "label": "Ranger le miroir avant le premier échange",
+      "commands": "CRDDRRRDRLLDLCR",
+      "result": "Marche simple ; charge distante inchangée",
+      "evidence": "Le miroir déplacé coupe la liaison avec le relais inférieur. Ce constat local ne rend pas la carte globalement insoluble."
+    },
+    {
+      "level": 7,
+      "label": "Viser la clef avant que le Voleur quitte le rayon",
+      "commands": "CCUCCUULLUDDLCCURRRRRRUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRCUUUUUULLUUURRRRUUDDDLCCLLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRCUUUUUULLUUURRRRUUUDDDDLCCLUULUUURUUULLLLLULDDDDDDDDCLLLDDDDDRDDRDCCDRRRRRRRRRRURRRRDLLLLUUUDCUUUUUULLUUUURDDLULDRDDDRURRRRRRDLLLULLLLUURRRRRRDUCL",
+      "result": "Échange avec le Voleur ; clef restée dans l’atelier",
+      "evidence": "Le premier occupant masque la clef. Le bouton cyan reste occupé par un héros, et non par la clef prévue."
+    },
+    {
+      "level": 8,
+      "label": "Échanger la clef avant de préparer son appui de secours",
+      "commands": "CDDDDRCRUCLCUUUULLLLLDDDDRXUUUUDDDDLXCCDRRRDRCCDLCLLULULDRXCCULUCCUURRRRRDRRDCCLLLLLDRRURDDUURRRCCULLLRU",
+      "result": "Sortie vers le nord refusée sur l’eau",
+      "evidence": "Le Magicien est arrivé dans l’alcôve mais ne peut pas en sortir à pied. Le problème est réparable ; aucun softlock global n’est affirmé."
+    },
+    {
+      "level": 8,
+      "label": "Projeter depuis l’alcôve après rangement du miroir inférieur",
+      "commands": "CDDDDRCRUCLCUUUULLLLLDDDDRXUUUUDDDDLXCCDRRRDRCCDLCLLULULDRXCCULUCCUURRRRRDRRDCCLLLLLDRRURDDUURRRRRRURDDLCCULLLRUULCCUULLLLLLLULCCULLDDLLLLLLDRRUCCRDDX",
+      "result": "Refus optique, rouge → normal → rouge → normal",
+      "evidence": "Le miroir en (12,15) tente une arrivée dans le mur (12,10). Seul son dos noir devient rouge, sa diagonale reste blanche, les entités ne bougent pas et les deux avertissements ne créent pas de nouvelle entrée Annuler.",
+      "blockedMirrorIndices": [
+        1
+      ],
+      "durationsMs": [
+        110,
+        70,
+        110,
+        0
+      ]
+    }
+  ]
+}

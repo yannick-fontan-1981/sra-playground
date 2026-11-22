@@ -1,0 +1,179 @@
+{
+  "label": "Contre-exemple historique : la clef isolée était ignorée",
+  "status": "Gagnant uniquement sur la carte historique ; bloqué par le circuit visible de prison dans la carte actuelle.",
+  "explanation": [
+    "La navette transférait le Guerrier directement depuis (1,5), sans créer le pont.",
+    "Les autres charges et le premier miroir suffisaient à fournir les poids ; un échange et une cible de retour rapatriaient le Voleur et le Magicien.",
+    "La clef en (17,15) restait en place ; la seconde visée et l’appui de l’alcôve n’avaient aucune fonction dans cette solution.",
+    "Le circuit cyan de prison ajoute une porte en (14,18), fermée tant que l’alcôve reste occupée. Il laisse libres les différentes méthodes de libération."
+  ],
+  "historical": {
+    "spec": {
+      "id": "ss17-08",
+      "title": "La forteresse aux deux visées",
+      "rows": [
+        "####################",
+        "#...oo..3...########",
+        "#.......T...########",
+        "#.W.........########",
+        "#...........########",
+        "#.~Z........########",
+        "#...........########",
+        "#...........########",
+        "########~#~#########",
+        "########~#~#########",
+        "########~#~#########",
+        "######............##",
+        "######......o.o...##",
+        "######..1......m..##",
+        "######..........#~##",
+        "######..........~o##",
+        "##############.#####",
+        "##############.#####",
+        "###########.g..g..g#",
+        "####################"
+      ],
+      "circuits": [
+        {
+          "id": "reception",
+          "buttons": [
+            {
+              "x": 2,
+              "y": 3
+            }
+          ],
+          "color": 12
+        },
+        {
+          "id": "deux-miroirs",
+          "buttons": [
+            {
+              "x": 6,
+              "y": 5
+            },
+            {
+              "x": 12,
+              "y": 15
+            }
+          ],
+          "color": 15
+        },
+        {
+          "id": "clef",
+          "buttons": [
+            {
+              "x": 4,
+              "y": 4
+            }
+          ],
+          "color": 14
+        }
+      ],
+      "gates": [
+        {
+          "at": {
+            "x": 3,
+            "y": 5
+          },
+          "circuit": "reception",
+          "direction": "W",
+          "closedWhen": "released"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 16
+          },
+          "circuit": "deux-miroirs",
+          "direction": "N",
+          "closedWhen": "released"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 17
+          },
+          "circuit": "clef",
+          "direction": "N",
+          "closedWhen": "released"
+        }
+      ]
+    },
+    "commands": "CDDDDRCRUCLCUUUULLLLLDDRRCCURRRRDLLCUULDDDRDCCRRRDLULLDLLDXURRRRDDDCCDLLCRRURULLLLLLDDRRRRCURLLDRRRUCUULLLLLUCCLCDRDRRRRRDDDDDRRRRCCDRRRDRRRRDDDDDLLCCDRDDDR",
+    "metrics": {
+      "actions": 156,
+      "selections": 21,
+      "warriorPushes": 12,
+      "thiefPulls": 11,
+      "swaps": 3,
+      "partnerSwaps": 1,
+      "stoneSwaps": 1,
+      "monsterSwaps": 1,
+      "bentSwaps": 1,
+      "multiMirrorSwaps": 1,
+      "swapReflections": 2,
+      "swapLoops": 0,
+      "partnerMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 18,
+      "mirrorMoves": 6,
+      "reflections": 1,
+      "heroReflections": 1,
+      "pistonPushes": 1,
+      "platformsCreated": 0,
+      "monstersRemoved": 1,
+      "blocked": 0,
+      "deaths": 0
+    }
+  },
+  "correction": {
+    "circuit": {
+      "id": "prison-clef",
+      "buttons": [
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "color": 10
+    },
+    "gate": {
+      "at": {
+        "x": 14,
+        "y": 18
+      },
+      "circuit": "prison-clef",
+      "direction": "N",
+      "closedWhen": "pressed"
+    }
+  },
+  "corrected": {
+    "complete": false,
+    "metrics": {
+      "actions": 156,
+      "selections": 21,
+      "warriorPushes": 12,
+      "thiefPulls": 11,
+      "swaps": 3,
+      "partnerSwaps": 1,
+      "stoneSwaps": 1,
+      "monsterSwaps": 1,
+      "bentSwaps": 1,
+      "multiMirrorSwaps": 1,
+      "swapReflections": 2,
+      "swapLoops": 0,
+      "partnerMoves": 0,
+      "chainPushes": 0,
+      "stoneMoves": 18,
+      "mirrorMoves": 6,
+      "reflections": 1,
+      "heroReflections": 1,
+      "pistonPushes": 1,
+      "platformsCreated": 0,
+      "monstersRemoved": 1,
+      "blocked": 12,
+      "deaths": 0
+    },
+    "firstRefusalIndex": 125
+  }
+}

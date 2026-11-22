@@ -1,0 +1,11 @@
+{
+  "game": "SS17",
+  "version": "0.1.0",
+  "filename": "SS17-demo.html",
+  "bytes": 132606,
+  "sha256": "c4a64aa85609c6a37683f5a74d8bb56a044f08bfd56f8ace6aad698da5975311",
+  "sourceDirectory": "experiments/sinking-star-ss17",
+  "networkIndependent": true,
+  "containsWitnesses": false,
+  "nativeSitePublished": false
+}
