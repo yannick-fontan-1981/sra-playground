@@ -1,5 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { createNativeV6Runtime, NATIVE_V6_REFERENCE_COMMIT } from '../src/logos-engine/v6-native-runtime.ts';
+import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
+import { recoveryRevision, readRecoveryRevision } from '../src/sic/recovery-pack.ts';
 import { hasExperimentOpportunity, recordReturn, mayPursueWitnessedEffect } from '../src/sic/experiment-arbitration.ts';
 import { initialMemory } from '../src/sic/preparation-experiments.ts';
 import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
@@ -55,4 +59,28 @@ test('a pack can place a grounded coverage forecast ahead of independent project
   assert.equal(candidate[0]!.entryPoints![0],'test_or_continue_a_grounded_coverage_plan');
   assert.deepEqual(candidate[0]!.families.slice(1),base[0]!.families);
   assert.deepEqual(candidate.slice(1),base.slice(1));
+});
+
+test('both planning modes dispatch the same experimental capabilities and accept the same preferences', async () => {
+  const root = new URL(`../reference/v6/${NATIVE_V6_REFERENCE_COMMIT}/source/agents/yf_arc3_v6/`, import.meta.url);
+  const load = async (path: string) => JSON.parse(await readFile(new URL(path, root), 'utf8'));
+  const declarations = { common: await load('laya_proto/common_frontier_policy.drm.json'), strategy: await load('morphology_policy/strategy.drm') };
+  const preference = { strategy: 'prefer_a_verified_coverage_experiment', mode: 'active', minimumOutcomes: 2 } as const;
+  async function coverage(solver: 'sic' | 'sic-fallback') {
+    const pack = recoveryRevision({ ...defaultRecoveryPack, solver, informationPreference: preference });
+    const recovery = readRecoveryRevision(JSON.parse(JSON.stringify(pack))).configuration;
+    assert.deepEqual(recovery.informationPreference, preference);
+    const result = (await createNativeV6Runtime(declarations, { recovery })).snapshot().coverage;
+    assert.ok(result && Array.isArray(result.registeredFamilies));
+    return { registeredFamilies: result.registeredFamilies, sourceGroups: result.sourceGroups };
+  }
+  const full = await coverage('sic');
+  const fallback = await coverage('sic-fallback');
+  assert.deepEqual(full.registeredFamilies, fallback.registeredFamilies);
+  for (const id of [preparedEffectsId, compositionFamily]) assert.ok(full.registeredFamilies.includes(id));
+  const byId = (groups: typeof full.sourceGroups) => Object.fromEntries(groups.map(group => [group.id, group]));
+  assert.deepEqual(byId(full.sourceGroups), byId(fallback.sourceGroups));
+  const projected = fallback.sourceGroups[0]!;
+  assert.equal(projected.entryPoints?.[0], 'test_or_continue_a_grounded_coverage_plan');
+  assert.ok(full.sourceGroups.findIndex(group => group.id === projected.id) > 0);
 });

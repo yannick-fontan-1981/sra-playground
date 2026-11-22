@@ -87,8 +87,8 @@ const defaultGameCode = 'CASC';
 const defaultGame = getGameByCode(defaultGameCode);
 if (!defaultGame) throw new Error(`The ${defaultGameCode} catalogue entry is missing.`);
 let selectedGame: GameCatalogEntry = getGameByCode(new URL(window.location.href).searchParams.get('game') ?? defaultGameCode) ?? defaultGame;
-function requestedLevel(url: URL, game: GameCatalogEntry): number | undefined {
-  const value = url.searchParams.get('level');
+function requestedLevel(url: URL, game: GameCatalogEntry, parameter = 'level'): number | undefined {
+  const value = url.searchParams.get(parameter);
   if (!value || !/^\d+$/.test(value)) return undefined;
   const level = Number(value);
   return Number.isSafeInteger(level) && level >= 1 && level <= (game.levels ?? 1) ? level : undefined;
@@ -1422,7 +1422,7 @@ const agent = new BrowserV6Agent({
     const { maxDepth, maxNodes, informationPreference } = recoveryConfiguration();
     const solver = element<HTMLSelectElement>('#agent-planning').value === 'sic-fallback' ? 'sic-fallback' : 'sic';
     return { ...defaultRecoveryPack, maxDepth, maxNodes, solver,
-      ...(solver === 'sic-fallback' && informationPreference ? { informationPreference } : {}) };
+      ...(informationPreference ? { informationPreference } : {}) };
   },
   dispatch: async action => {
     if (!canDispatchAgentAction() || !observation?.availableActionIds.includes(action.id)) {
@@ -2235,4 +2235,23 @@ window.addEventListener('pagehide', event => {
   agent.pause();
   if (!event.persisted) { agent.dispose(); runtime.dispose(); }
 });
-void selectGame(selectedGame.code, 'replace', requestedLevel(new URL(window.location.href), selectedGame));
+async function openInitialGame() {
+  const url = new URL(window.location.href);
+  const through = requestedLevel(url, selectedGame, 'runThrough');
+  if (url.searchParams.has('runThrough')) {
+    url.searchParams.delete('runThrough');
+    window.history.replaceState(null, '', url);
+  }
+  const loadingGame = selectGame(selectedGame.code, 'replace', through ? 1 : requestedLevel(url, selectedGame));
+  const generation = selectionGeneration;
+  await loadingGame;
+  if (!through || generation !== selectionGeneration || !ready()) return;
+  setMode('agent');
+  // Use the regular Run control's budget and continue only after a credited victory.
+  while (generation === selectionGeneration && agent.snapshot.canRun && observation && observation.levelsCompleted < through) {
+    const completed = observation.levelsCompleted;
+    await agent.run(600);
+    if (!observation || observation.levelsCompleted <= completed || agent.snapshot.status !== 'paused') break;
+  }
+}
+void openInitialGame();

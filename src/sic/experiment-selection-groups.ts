@@ -5,13 +5,13 @@ import { compositionFamily, cycleGroup, exhaustedGroup, followCompositionGroup, 
 import { preparedEffectsId } from './test-prepared-effects.ts';
 import {fieldGroup} from './compose-field-relations.ts';
 
-export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[],prioritizeCoverage=false): NativeSelectionGroup[] {
+export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[], prioritizeCoverage = false, withdrawPrimaryFamily = true): NativeSelectionGroup[] {
   const projected = { id: projectedPublicEffectsGroup, families: [compositionFamily,publicInputExplorationId], entryPoints:[fieldGroup,null] };
   if(prioritizeCoverage){
     projected.families.unshift(preparedEffectsId);
     projected.entryPoints.unshift(coveragePlanGroup);
   }
-  return [projected, ...groups.map(group => {
+  const shared = groups.map(group => {
     if (group.id !== observedPressureRecoveryGroup && group.id !== 'explore_available_inputs') return group;
     const entries = group.families.map((id, i) => ({ id, entry: group.entryPoints?.[i] ?? null }));
     if (group.id === observedPressureRecoveryGroup) {
@@ -27,5 +27,9 @@ export function planningGroupsWithExperiments(groups: readonly NativeSelectionGr
       entries.push({ id: preparedEffectsId, entry: exhaustedGroup }, { id: compositionFamily, entry: exhaustedGroup });
     }
     return { ...group, families: entries.map(x => x.id), entryPoints: entries.map(x => x.entry) };
-  })];
+  });
+  // Full SIC tries its specialist groups before the independent exploration probes.
+  const slot = withdrawPrimaryFamily ? 0 : shared.findIndex(group => group.id === 'explore_available_inputs');
+  shared.splice(slot < 0 ? shared.length : slot, 0, projected);
+  return shared;
 }

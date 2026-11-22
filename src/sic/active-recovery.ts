@@ -52,8 +52,7 @@ export function compileRecoveryPack(input: unknown = defaultRecoveryPack): Recov
   }
   if (Object.hasOwn(pack, 'solver')) {
     if ((pack.solver !== 'sic' && pack.solver !== 'sic-fallback') || pack.mode !== 'active'
-      || fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'solver'].includes(field)
-        && !(pack.solver === 'sic-fallback' && field === 'informationPreference'))) {
+      || fields.some(field => !['version', 'mode', 'maxDepth', 'maxNodes', 'solver', 'informationPreference'].includes(field))) {
       throw new TypeError('SIC-only resolution requires an active standalone pack.');
     }
     const preference = Object.hasOwn(pack, 'informationPreference') ? compileInformationPreference(pack.informationPreference) : undefined;
