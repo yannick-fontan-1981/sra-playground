@@ -35,6 +35,7 @@ export type Learning = {
   previewPose?: string;
   visibleEffect?: Reading;
   visibleFeatures?: number[];
+  strandedPartner?: import('./experiment-with-another-operand.ts').StrandedPartner;
   witnessedEntries?: { side: TransportSide; source: number; site: number; ref: string }[];
   denied: Record<string, number>;
   visits: Record<string, number>;
@@ -305,6 +306,18 @@ export function localEffects(
     }
   }
   if (f) {
+    if (f.operandTest) {
+      delete m.plan;
+      if (key(a) !== poseId(f.expected)) {
+        if (!m.checked.includes('operand/' + f.key)) m.checked.push('operand/' + f.key);
+        if (!f.operandTest.steps && key(a) === f.operandTest.stayed) return 'the_alternative_operand_left_the_subject_confined';
+        return f.operandTest.steps ? 'the_alternative_operand_preparation_was_refuted' : 'the_alternative_operand_had_a_different_effect';
+      }
+      if (f.operandTest.steps > 0) return 'the_alternative_operand_preparation_matched';
+      delete m.strandedPartner;
+      m.refs = [...m.refs.slice(-5), ref];
+      return 'an_alternative_operand_released_the_subject_and_preserved_its_partner';
+    }
     if (f.releasedAccess) {
       delete m.plan;
       return;

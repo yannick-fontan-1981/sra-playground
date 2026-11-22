@@ -67,6 +67,7 @@ export function recordReleaseTest(m: Learning, access: ReleasedSubject, v: Readi
     return 'selected_the_released_subject_without_moving_either';
   if (phase === 'test' && next.active === access.side && next.subjects[access.side] !== access.site && next.subjects[peer(access.side)] === access.held) {
     m.checked.push(access.ticket);
+    m.strandedPartner = { side: peer(access.side), site: access.held, witness: ref };
     m.refs = [...m.refs.slice(-5), ref];
     return 'independent_motion_in_the_new_region_verified';
   }

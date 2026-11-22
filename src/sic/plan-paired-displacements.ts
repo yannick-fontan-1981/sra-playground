@@ -1,3 +1,4 @@
+import { anotherOperandTest } from './experiment-with-another-operand.ts';
 import { startPassage, projectedPassage } from './prepare-projected-passage.ts';
 import {
   joinSeparatedOperators,
@@ -140,8 +141,15 @@ export function planDisplacements(
   if (!ops.length) return;
   const laws = [law(m, 0), law(m, 1)] as const;
   const saved = m.plan?.[0];
+  const budgetForOperand = minimumProbeOutcomes === 2 && v.pieces.length && m.strandedPartner &&
+    m.evidence[m.strandedPartner.side].clear_path_exchange !== undefined &&
+    v.subjects[m.strandedPartner.side] === m.strandedPartner.site ? Math.floor(budget / 2) : 0;
   if (saved?.from === key(v) && !m.denied[key(v) + '|' + saved.command]) {
     if (m.planSolves === false && minimumProbeOutcomes && !m.join) {
+      if (budgetForOperand) {
+        const alternative = anotherOperandTest(s, m, v, ref, depth, budgetForOperand);
+        if (alternative) return alternative;
+      }
       const nearUnknown = minimumProbeOutcomes === 2 && s.other.some(p => md(s, p, v.subjects[v.active]) === 1);
       const entry = nearUnknown ? regionEntryTest(s, m, v, regionEntries(s, m, v), ref, minimumProbeOutcomes) : undefined;
       const test = entry ?? unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
@@ -335,7 +343,7 @@ export function planDisplacements(
       (minimumProbeOutcomes === 2 && s.other.length > 0)) ? [] as Node[] : undefined;
   let best = root,
     bestProgress = Infinity;
-  for (let i = 0; heap.length && i < budget; i++) {
+  for (let i = 0; heap.length && i < budget - budgetForOperand; i++) {
     const n = pop();
     if (n.parent) reached?.push(n);
     if (n.score === 0) {
@@ -391,6 +399,10 @@ export function planDisplacements(
     }
   }
   if (best.score !== 0 && minimumProbeOutcomes && !m.join) {
+    if (budgetForOperand) {
+      const alternative = anotherOperandTest(s, m, v, ref, depth, budgetForOperand);
+      if (alternative) return alternative;
+    }
     const entries = minimumProbeOutcomes === 2 ? regionEntries(s, m, v) : new Map();
     const test = regionEntryTest(s, m, v, entries, ref, minimumProbeOutcomes) ?? unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
     if (test) return test;
