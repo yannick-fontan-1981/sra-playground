@@ -1,0 +1,158 @@
+{
+  "label": "Solution alternative vérifiée : extraction des charges par poussée en chaîne",
+  "scope": "Les tractions des deux charges de réserve appartiennent au témoin principal ; elles ne sont pas obligatoires.",
+  "spec": {
+    "id": "ss17-05",
+    "title": "La relève à angle droit",
+    "rows": [
+      "####################",
+      "#....o...##........#",
+      "#........##........#",
+      "#..T.....##........#",
+      "#.......2~~.m......#",
+      "#........##........#",
+      "#####....##........#",
+      "#.o.o.#.Z~#........#",
+      "#.....#.###........#",
+      "#.....#..##........#",
+      "#.....#..##........#",
+      "#W....#..##........#",
+      "######...~~........#",
+      "######...##........#",
+      "#######..##........#",
+      "#######..##........#",
+      "#######..####.######",
+      "#############.######",
+      "#############.g.g.g#",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "expulsion",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 3
+          }
+        ],
+        "color": 12
+      },
+      {
+        "id": "reserve",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 3
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "ecluse",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 4
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "lest",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 4
+          },
+          {
+            "x": 15,
+            "y": 12
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 7
+        },
+        "circuit": "expulsion",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 6
+        },
+        "circuit": "reserve",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 16
+        },
+        "circuit": "ecluse",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 17
+        },
+        "circuit": "lest",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 12
+        },
+        "circuit": "ecluse",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 12
+        },
+        "circuit": "ecluse",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CCUCCLURRRDDLLCCUUUURRDRRUURUULLDRRURDDDDDDDRDDLLURRRLUUULUUULLDDLLURDRUURUULLDRRURDDDDDDDRDDLLURRCCUCCRRRRLLDRCCUUULUUUUUULLDLDRRLUURRDDDDDDDDRDDLLURRRRRRRRUCCDDDDDDDDDDDDRDDDRRRRRCDDDDLDDDRRRCDLDDDDDDRRRRDDDRRDDDR",
+  "metrics": {
+    "actions": 215,
+    "selections": 16,
+    "warriorPushes": 48,
+    "thiefPulls": 5,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "stoneSwaps": 0,
+    "monsterSwaps": 1,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 2,
+    "chainPushes": 3,
+    "stoneMoves": 52,
+    "mirrorMoves": 2,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 1,
+    "blocked": 0,
+    "deaths": 0
+  }
+}

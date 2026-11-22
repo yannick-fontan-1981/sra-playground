@@ -1,0 +1,11 @@
+{
+  "game": "SS17",
+  "version": "0.1.0",
+  "nativeBrowserReviewed": false,
+  "currentTaskBrowserAttempts": 0,
+  "reason": "Native browser preview was previously unavailable in this workspace; no denied surface was retried or bypassed.",
+  "compiledHtmlUiValidated": true,
+  "uiReport": "validation/ui-dom-report.json",
+  "deterministicBoardReview": "Initial boards and optical warning phases are inspected separately from native CSS.",
+  "remaining": "Native desktop/mobile review after integration in the authorized SRA Playground environment."
+}

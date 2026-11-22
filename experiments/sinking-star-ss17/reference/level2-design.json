@@ -1,0 +1,866 @@
+{
+  "spec": {
+    "id": "ss17-02",
+    "title": "Les cellules de relève",
+    "rows": [
+      "####################",
+      "####################",
+      "######....##########",
+      "######....o#########",
+      "##W~~~Z.o..#########",
+      "##.###.....#########",
+      "#####...#..#########",
+      "#####.o....#########",
+      "######.#.#.#########",
+      "######..#..###.....#",
+      "######.....###..g..#",
+      "######...........g.#",
+      "##T~~~..o..###..g..#",
+      "######.....###.....#",
+      "######.....#########",
+      "######.....#########",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "cellule-ouest",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 4
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "liberte",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 12
+          },
+          {
+            "x": 8,
+            "y": 8
+          },
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 7
+        },
+        "circuit": "cellule-ouest",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 11
+        },
+        "circuit": "liberte",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCLDCDDLDRRUURRULLCCURDDDDDDDDLCCDDRCCDDDLDDDDRRRDLLCCRUURCCURUURUURUUUUUDDDDDDDLCCRRRURRRRURRCRRRRRDRRCDRRRRRRRRRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 15
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes of Hauling · énigmes 13 et 19",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-19",
+    "puzzle": 19,
+    "objective": "Libérer deux captifs par substitution et préserver les poids qui commandent la sortie.",
+    "secondary": {
+      "label": "Énigme 13 · relève sur une plaque par échange",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13"
+    }
+  },
+  "metrics": {
+    "actions": 115,
+    "selections": 17,
+    "warriorPushes": 6,
+    "thiefPulls": 7,
+    "swaps": 4,
+    "partnerSwaps": 2,
+    "stoneSwaps": 2,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 16,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier quitte sa cellule ; le Magicien libère la plaque en restant captif.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cellule-ouest": false,
+        "liberte": false
+      }
+    },
+    {
+      "label": "La charge attend sur la presse ouverte, sans accès de poussée au nord.",
+      "turn": 11,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cellule-ouest": false,
+        "liberte": false
+      }
+    },
+    {
+      "label": "Le Magicien referme la presse puis le bloc le relève dans la cellule.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cellule-ouest": true,
+        "liberte": false
+      }
+    },
+    {
+      "label": "Le Voleur libéré doit encore être remplacé par un poids dans sa cellule.",
+      "turn": 31,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cellule-ouest": true,
+        "liberte": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la clé du renfoncement et la conserve comme troisième poids.",
+      "turn": 80,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 2,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cellule-ouest": true,
+        "liberte": true
+      }
+    },
+    {
+      "label": "Les trois cellules de commande restent lestées pendant la sortie du trio.",
+      "turn": 115,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 16,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 2,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cellule-ouest": true,
+        "liberte": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Les héros enfermés sont remplacés par des blocs, puis réunis dans la zone commune.",
+      "Un échange peut transférer le rôle de poids sans abandonner la cellule de commande."
+    ],
+    "changed": [
+      "Carte originale de deux cellules séparées par de l’eau, trois héros W/T/Z et trois sorties.",
+      "Une fermeture latérale dépose une charge dans un logement sans accès de poussée au nord.",
+      "Un quatrième bloc doit être extrait d’un renfoncement puis conservé comme poids final."
+    ],
+    "sourceReading": "Les énigmes 13 et 19 fournissent la substitution des occupants. La presse et le logement sud sont une construction SS17 ; aucune carte ni sprite du jeu commercial ne sont repris.",
+    "localChecks": [
+      {
+        "name": "Relève avant chargement de la presse",
+        "commands": "CCLDCURRRDLLCCURCDDLLDRR",
+        "observed": "Poussée de la charge refusée devant la presse fermée ; le chargement doit précéder cette relève dans le parcours.",
+        "scope": "Branche locale, pas preuve de nécessité globale."
+      }
+    ]
+  }
+}

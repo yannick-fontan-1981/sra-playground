@@ -1,0 +1,2012 @@
+{
+  "spec": {
+    "id": "ss17-08",
+    "title": "La forteresse aux deux visées",
+    "rows": [
+      "####################",
+      "#...oo..3...########",
+      "#.......T...########",
+      "#.W.........########",
+      "#...........########",
+      "#.~Z........########",
+      "#...........########",
+      "#...........########",
+      "########~#~#########",
+      "########~#~#########",
+      "########~#~#########",
+      "######............##",
+      "######......o.o...##",
+      "######..1......m..##",
+      "######..........#~##",
+      "######..........~o##",
+      "##############.#####",
+      "##############.#####",
+      "###########.g..g..g#",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "reception",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 3
+          }
+        ],
+        "color": 12
+      },
+      {
+        "id": "deux-miroirs",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 5
+          },
+          {
+            "x": 12,
+            "y": 15
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "clef",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 4
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "prison-clef",
+        "buttons": [
+          {
+            "x": 17,
+            "y": 15
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 3,
+          "y": 5
+        },
+        "circuit": "reception",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 16
+        },
+        "circuit": "deux-miroirs",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 17
+        },
+        "circuit": "clef",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 18
+        },
+        "circuit": "prison-clef",
+        "direction": "N",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CDDDDRCRUCLCUUUULLLLLDDDDRXUUUUDDDDLXCCDRRRDRCCDLCLLULULDRXCCULUCCUURRRRRDRRDCCLLLLLDRRURDDUURRRRRRURDDLCCULLLRUULCCUULLLLLLLULCCULLDDLLLLLLDRRUCRRDDRRRRLLLLDCLDDLDDDRRRRCCDRRRDDDDDDRRRRRDRDDDDLLCCRRDRDDDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 57
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes and Mirrors · énigmes 31–32 ; Heroes of Hauling · énigme 19",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-31",
+    "puzzle": "31–32",
+    "objective": "Préparer une réception de monstre, régler les distances de trois projections, échanger les rôles, reconstruire une visée à deux miroirs et libérer la clef isolée avant de ranger les miroirs sur leurs poids finaux.",
+    "secondary": {
+      "label": "Heroes of Hauling · énigme 19 · libérer un captif par substitution",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-19"
+    }
+  },
+  "metrics": {
+    "actions": 205,
+    "selections": 27,
+    "warriorPushes": 13,
+    "thiefPulls": 19,
+    "swaps": 4,
+    "partnerSwaps": 2,
+    "stoneSwaps": 1,
+    "monsterSwaps": 1,
+    "bentSwaps": 3,
+    "multiMirrorSwaps": 3,
+    "swapReflections": 6,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 20,
+    "mirrorMoves": 16,
+    "reflections": 3,
+    "heroReflections": 1,
+    "pistonPushes": 1,
+    "platformsCreated": 4,
+    "monstersRemoved": 1,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur descend le miroir enfermé contre le mur et le place à la première station. La visée à deux miroirs du témoin n’est pas encore alignée.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 15,
+          "y": 13
+        }
+      ],
+      "circuits": {
+        "reception": true,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "Le Magicien échange sa place avec le gardien à travers les deux miroirs. Le monstre arrive dans la cellule de réception ; le Magicien quitte le bras inférieur avant la prochaine réflexion globale.",
+      "turn": 9,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "reception": true,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "Le Guerrier libère la commande orange. La presse expulse le gardien vers l’ouest, dans la seule case d’eau de l’atelier.",
+      "turn": 11,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 1
+        },
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "La première charge, extraite au nord, est réfléchie à quatre cases : elle devient l’appui du milieu. Les deux miroirs sont concernés par la même action globale.",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 1
+        },
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "La seconde charge est réglée à trois cases du premier miroir : elle devient l’appui proche. Les appuis immergés ne sont plus des cibles optiques.",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "Le Magicien reprend la visée inverse pour échanger les rôles : le Guerrier rejoint la salle inférieure et le Magicien prend sa place sur le bras du premier miroir.",
+      "turn": 49,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 12
+        },
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "Le Guerrier règle la charge du sud à trois cases du second miroir. Une seule réflexion globale achève le pont au sud et transporte simultanément le Magicien sur le premier appui.",
+      "turn": 59,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "Le Voleur décale le miroir supérieur de deux cases. La première liaison est rompue : le nouveau rayon doit emprunter l’autre colonne d’eau.",
+      "turn": 77,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "Le Guerrier déplace le miroir inférieur vers l’est puis vers le sud, et sort de son bras nord. Les deux miroirs sont maintenant accordés sur une seconde visée.",
+      "turn": 96,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "La dernière charge libre est changée d’axe puis sacrifiée dans l’eau au nord de l’alcôve. Cet appui de secours doit exister avant de téléporter un héros dans la prison de la clef.",
+      "turn": 104,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": true
+      }
+    },
+    {
+      "label": "Le Magicien suit la nouvelle visée à deux coudes et échange sa place avec la clef isolée. Il ressort par l’appui préparé, sans renvoyer la clef dans sa prison.",
+      "turn": 114,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": false,
+        "prison-clef": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la clef de la ligne de visée et la pose sur sa commande verte. La clef ouvre le second sas sans retenir un héros.",
+      "turn": 127,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": true,
+        "prison-clef": false
+      }
+    },
+    {
+      "label": "Le miroir inférieur est poussé une seconde fois : après deux stations de visée et une projection de charge, il devient le lest violet de la cour.",
+      "turn": 144,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": false,
+        "clef": true,
+        "prison-clef": false
+      }
+    },
+    {
+      "label": "Le miroir supérieur est récupéré vers l’ouest et garé sur le second bouton violet. La commande ET n’ouvre le premier sas qu’une fois les deux instruments devenus des poids.",
+      "turn": 158,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": true,
+        "clef": true,
+        "prison-clef": false
+      }
+    },
+    {
+      "label": "Le trio franchit les trois sas : les deux miroirs sont lestés, la clef verte est posée et son ancienne prison est vide. Les trois charges de pont, l’appui de la prison, les deux miroirs et la clef ont chacun trouvé leur dernier usage.",
+      "turn": 205,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 18
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 18
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 17,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 5
+          },
+          "facing": "SW"
+        },
+        {
+          "at": {
+            "x": 12,
+            "y": 15
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reception": false,
+        "deux-miroirs": true,
+        "clef": true,
+        "prison-clef": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Le déplacement du miroir modifie les accès et les diagonales disponibles.",
+      "Il faut terminer la dernière opération optique avant de garer les miroirs.",
+      "Un prisonnier échangé exige un accès de secours ou une ressource de remplacement.",
+      "Les échanges seuls ne constituent pas un passage collectif."
+    ],
+    "changed": [
+      "Deux stations successives coordonnent deux miroirs mobiles ; le deuxième rayon suit une autre colonne d’eau.",
+      "Une réflexion globale transporte simultanément un héros et la troisième charge, sans réactiver la capacité du héros déplacé.",
+      "Le gardien est échangé vers une presse latérale puis noyé.",
+      "La clef est isolée sur une petite île : le quatrième bloc est réservé à son appui de secours.",
+      "Les deux miroirs et la clef deviennent les trois poids de deux sas. Un troisième sas reste fermé tant que la prison cyan est occupée : il faut aussi faire ressortir le héros qui remplace la clef.",
+      "Cette commande de prison empêche de terminer en ignorant la clef isolée ; elle n’impose pas une solution unique. Coordonnées et disposition originales."
+    ],
+    "sourceReading": "Composition originale des idées de Mirrors 31–32 (déplacer les miroirs sans perdre le dernier accès), Hauling 19 (substituer un occupant prisonnier) et Water 11 (raisonner sur les rives). Le témoin met en scène ces dépendances ; il ne revendique ni unicité de solution ni nécessité globale de chacun de ses trajets."
+  }
+}

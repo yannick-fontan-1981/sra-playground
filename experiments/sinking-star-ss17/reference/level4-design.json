@@ -1,0 +1,670 @@
+{
+  "spec": {
+    "id": "ss17-04",
+    "title": "Le miroir, puis le lest",
+    "rows": [
+      "####################",
+      "####################",
+      "########...#########",
+      "########.Z.#####...#",
+      "#########~######ggg#",
+      "#########~######...#",
+      "#########~#######.##",
+      "#########~#######.##",
+      "##........##.......#",
+      "##....W...~~.......#",
+      "##........~~..o....#",
+      "########.T##.......#",
+      "#########1##.......#",
+      "############.......#",
+      "############.......#",
+      "############.......#",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "releve-du-mage",
+        "buttons": [
+          {
+            "x": 9,
+            "y": 3
+          }
+        ],
+        "color": 11
+      },
+      {
+        "id": "miroir-lest",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 14
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 17,
+          "y": 7
+        },
+        "circuit": "releve-du-mage",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 6
+        },
+        "circuit": "miroir-lest",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 10,
+          "y": 9
+        },
+        "circuit": "releve-du-mage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 9
+        },
+        "circuit": "releve-du-mage",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CUULCDDRCCRRCCDRRDRUCRRRRRDLDDDDDCCURRRURRRRRUUUULCRUUURUUUURUUURUCUUURRUUUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation · Heroes and Mirrors · énigmes 30 et 31",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-30",
+    "puzzle": 30,
+    "objective": "Placer physiquement le miroir pour une visée coudée, puis réutiliser cet outil comme poids.",
+    "secondary": {
+      "label": "Énigme 31 · repositionner le miroir avant la sortie",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-31"
+    }
+  },
+  "metrics": {
+    "actions": 76,
+    "selections": 11,
+    "warriorPushes": 1,
+    "thiefPulls": 12,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "stoneSwaps": 1,
+    "monsterSwaps": 0,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 1,
+    "mirrorMoves": 13,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur extrait le miroir, l’aligne puis quitte le faisceau nord.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve-du-mage": true,
+        "miroir-lest": false
+      }
+    },
+    {
+      "label": "La visée coudée remplace le Magicien par le bloc sans relâcher le pont.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve-du-mage": true,
+        "miroir-lest": false
+      }
+    },
+    {
+      "label": "Le miroir quitte sa fonction optique et rejoint la voie du pont.",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve-du-mage": true,
+        "miroir-lest": false
+      }
+    },
+    {
+      "label": "Le Voleur transporte le même miroir jusqu’au second verrou.",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve-du-mage": true,
+        "miroir-lest": true
+      }
+    },
+    {
+      "label": "Le bloc reste sur l’île du Magicien, et le miroir maintient le verrou intérieur.",
+      "turn": 76,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 16,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 14
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve-du-mage": true,
+        "miroir-lest": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "La ligne de vue du Magicien peut tourner autour d’un angle pour échanger un bloc.",
+      "Le miroir doit atteindre une position précise avant que la visée utile existe."
+    ],
+    "changed": [
+      "Carte originale : île de commande du Magicien, pont hydraulique, renfoncement à miroir et double verrou.",
+      "Le Voleur extrait et transporte le miroir ; le Guerrier le pousse sur la voie, puis le même miroir devient un poids final.",
+      "Le miroir spécial échangeable de la source 31 est remplacé par un miroir ordinaire déplacé physiquement. Aucun miroir n’est cible de magie, ni dupliqué.",
+      "Un échange conserve la charge du bouton distant ; les sorties dépendent de deux circuits distincts."
+    ],
+    "sourceReading": "La visée déviée vient de l’énigme 30, le placement préparatoire du miroir de l’énigme 31. Le réemploi comme lest et le pont commandé sont une composition SS17, sans reproduction de carte.",
+    "localChecks": [
+      {
+        "name": "Le tireur masque le coude",
+        "commands": "CUUCD",
+        "observed": "Le Magicien échange avec le Voleur resté en (9,9) ; le bloc oriental demeure en (14,10). Quitter la ligne est donc une étape du témoin.",
+        "scope": "Contre-branche locale, pas impossibilité globale."
+      },
+      {
+        "name": "Confondre visée magique et reflet global",
+        "commands": "CUULCDX",
+        "observed": "Après l’échange, le reflet global prend le Magicien à distance cinq et le dépose en (9,5), dans l’eau ; cette branche meurt.",
+        "scope": "Contre-branche locale vérifiée."
+      }
+    ]
+  }
+}
