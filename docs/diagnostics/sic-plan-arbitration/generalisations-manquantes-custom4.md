@@ -1,6 +1,6 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
-**Le catalogue étendu compte désormais quatorze L2 gagnés sur quatorze en réunissant les conditions mesurées.** Le candidat v109 gagne aussi les trois nouvelles campagnes de bout en bout. Sur SS12, il construit un passage, déplace un mécanisme puis libère la trajectoire du second sujet. Sur SS13 et SS14, les effets appris au L1 changent les décisions du L2. Le témoin v104 est intégré à `main`. [Scores à froid, transmission désactivée et non-régression](lecons-autonomes-v109.md)
+**Sur le périmètre SS01 à SS14, les quatorze L2 sont gagnés en réunissant les conditions mesurées.** Le candidat v109 gagne aussi les trois nouvelles campagnes de bout en bout. Sur SS12, il construit un passage, déplace un mécanisme puis libère la trajectoire du second sujet. Sur SS13 et SS14, les effets appris au L1 changent les décisions du L2. Le témoin v104 est intégré à `main`. [Scores à froid, transmission désactivée et non-régression](lecons-autonomes-v109.md)
 
 **SS09 L2 fait partie du lot ordinaire de diagnostic, d’expérimentation et de score**, au même titre que SS01 à SS11. SIC gagne SS09 à froid en 54 coups. Les mentions de réserve dans les protocoles historiques décrivent uniquement ces anciens gels. [Première divergence et victoire autonome sur SS09](placements-cooperatifs-v100.md)
 

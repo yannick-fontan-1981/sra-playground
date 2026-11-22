@@ -2,6 +2,8 @@
 
 v104 a été intégré à `main` au commit `7b6859dd2`. Les expériences suivantes sont sur `codex/sic-autonomous-lessons`. Le candidat v109 est figé au commit `642f6cbfa`, tag `sic-autonomous-room-lessons-v109`.
 
+Le périmètre mesuré couvre SS01 à SS14. Pendant la qualification, le laboratoire SS15 a rejoint `main` au commit `a14bd33e3`, descendant du merge de v104.
+
 ## Scores officiels
 
 | Jeu | v104 au L1 | v104 au L2 à froid | v109 au L1 | v109 au L2 après L1 | v109 au L2 à froid |
