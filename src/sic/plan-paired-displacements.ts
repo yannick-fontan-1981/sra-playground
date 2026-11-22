@@ -15,6 +15,7 @@ import {
   type Learning,
   imagine,
   geometry,
+  exchangeTarget,
   law,
   peer,
   key,
@@ -354,24 +355,9 @@ export function planDisplacements(
         )
       )
         continue;
-      if (
-        m.avoid?.length &&
-        op !== 'select' &&
-        law(m, n.s.active) === 'exchange' &&
-        m.motors[op]
-      ) {
-        const v = m.motors[op]!,
-          a = n.s.subjects[n.s.active],
-          p = n.s.subjects[peer(n.s.active)];
-        let z = space.at(a, v.dx, v.dy);
-        while (
-          z >= 0 &&
-          !n.s.pieces.includes(z) &&
-          z !== p &&
-          !m.avoid.includes(z)
-        )
-          z = space.at(z, v.dx, v.dy);
-        if (m.avoid.includes(z)) continue;
+      if (m.avoid?.length && m.motors[op]) {
+        const target = exchangeTarget(space, n.s, m.motors[op]!, law(m, n.s.active), m.avoid);
+        if (m.avoid.includes(target)) continue;
       }
       if (
         m.join &&

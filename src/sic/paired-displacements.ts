@@ -9,7 +9,7 @@ import {
   type TransportForecast,
 } from './transport-observations.ts';
 import { pointCommand, type Scene, type Reading } from './paired-scene.ts';
-export type Law = 'walk' | 'push' | 'pull' | 'field' | 'exchange';
+export type Law = 'walk' | 'push' | 'pull' | 'field' | 'exchange' | 'clear_path_exchange';
 export const alternatives: Law[] = [
   'walk',
   'push',
@@ -63,6 +63,7 @@ export function law(m: Learning, side: TransportSide): Law {
     side === 1 && m.scope
       ? ['field', 'exchange', 'walk', 'push', 'pull']
       : ['push', 'pull', 'exchange', 'walk', 'field'];
+  if (m.evidence[side].clear_path_exchange !== undefined) defaults.push('clear_path_exchange');
   return defaults.reduce((a, b) =>
     (m.evidence[side][b] ?? 0) > (m.evidence[side][a] ?? 0) ? b : a,
   );
@@ -84,6 +85,19 @@ export function geometry(s: Scene) {
   return { ground, medium, doors, at, open, walk };
 }
 type Space = ReturnType<typeof geometry>;
+
+export function exchangeTarget(space: Space, v: Reading, motor: Bearing, model: Law, otherTargets: readonly number[] = []) {
+  if (model !== 'exchange' && model !== 'clear_path_exchange') return -1;
+  const other = v.subjects[peer(v.active)];
+  let site = space.at(v.subjects[v.active], motor.dx, motor.dy);
+  while (site >= 0) {
+    if (site === other || v.pieces.includes(site) || otherTargets.includes(site)) return site;
+    if (model === 'clear_path_exchange' && !space.walk(v, site) && !space.medium.has(site)) break;
+    site = space.at(site, motor.dx, motor.dy);
+  }
+  return -1;
+}
+
 export function imagine(
   s: Scene,
   space: Space,
@@ -130,10 +144,9 @@ export function imagine(
     (space.walk(v, to) || space.medium.has(to)) &&
     !n.pieces.includes(to) &&
     !n.subjects.includes(to);
-  if (h === 'exchange') {
-    let z = target;
-    while (z >= 0 && !v.pieces.includes(z) && z !== b) z = at(z);
-    if (z >= 0 && (v.pieces.includes(z) || z === b)) {
+  if (h === 'exchange' || h === 'clear_path_exchange') {
+    const z = exchangeTarget(space, v, motor, h);
+    if (z >= 0) {
       if (z === b) n.subjects[other] = a;
       else n.pieces[n.pieces.indexOf(z)] = a;
       n.subjects[side] = z;
@@ -266,23 +279,25 @@ export function localEffects(
         }
       }
     }
-    const space = geometry(s),
-      pred = alternatives.map((h) => {
-        const next = imagine(s, space, b, op, m, h) ?? b;
-        return poseId(next) === poseId(a);
-      });
-    const distance = Math.abs(dx) + Math.abs(dy);
-    if (
-      distance > 1 &&
-      (dx === 0 || dy === 0) &&
-      (b.pieces.includes(to) || b.subjects[peer(side)] === to)
-    ) {
-      m.evidence[side].exchange = (m.evidence[side].exchange ?? 0) + 4;
+    const space = geometry(s);
+    const exchanged = Math.abs(dx) + Math.abs(dy) > 1 && (dx === 0 || dy === 0) &&
+      ((b.pieces.includes(to) && a.pieces.includes(from)) ||
+        (b.subjects[peer(side)] === to && a.subjects[peer(side)] === from));
+    const strength = m.evidence[side];
+    if (exchanged && strength.clear_path_exchange === undefined)
+      strength.clear_path_exchange = strength.exchange ?? 0;
+    const rivals = movementModels(m, side);
+    const pred = rivals.map(h => poseId(imagine(s, space, b, op, m, h) ?? b) === poseId(a));
+    if (exchanged) {
+      for (const [i, h] of rivals.entries()) {
+        if ((h === 'exchange' || h === 'clear_path_exchange') && pred[i])
+          strength[h] = (strength[h] ?? 0) + 4;
+      }
       m.refs = [...m.refs.slice(-5), ref];
     }
     if (pred.some(Boolean) && !pred.every(Boolean)) {
-      for (const [i, h] of alternatives.entries())
-        m.evidence[side][h] = (m.evidence[side][h] ?? 0) + (pred[i] ? 1 : -1);
+      for (const [i, h] of rivals.entries())
+        strength[h] = (strength[h] ?? 0) + (pred[i] ? 1 : -1);
       if (!m.refs.includes(ref)) m.refs = [...m.refs.slice(-5), ref];
     }
   }
@@ -308,10 +323,16 @@ export function localEffects(
   }
 }
 
+const conditionalModels: readonly Law[] = [...alternatives, 'clear_path_exchange'];
+function movementModels(m: Learning, side: TransportSide) {
+  return m.evidence[side].clear_path_exchange === undefined ? alternatives : conditionalModels;
+}
+
 export function viableMotionLaws(m: Learning, side: TransportSide) {
   const evidence = m.evidence[side];
-  const strongest = Math.max(...alternatives.map(h => evidence[h] ?? 0));
-  return alternatives.filter(h => (evidence[h] ?? 0) === strongest);
+  const rivals = movementModels(m, side);
+  const strongest = Math.max(...rivals.map(h => evidence[h] ?? 0));
+  return rivals.filter(h => (evidence[h] ?? 0) === strongest);
 }
 
 export function unresolvedMotionTest(s: Scene, m: Learning, v: Reading, ref: string, minimumOutcomes: number) {

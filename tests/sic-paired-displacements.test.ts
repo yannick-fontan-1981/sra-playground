@@ -11,6 +11,8 @@ import {
   geometry,
   imagine,
   localEffects,
+  unresolvedMotionTest,
+  viableMotionLaws,
   law,
 } from '../src/sic/paired-displacements.ts';
 import type { Scene, Reading } from '../src/sic/paired-scene.ts';
@@ -93,6 +95,27 @@ test('an agreed preparatory movement can make two previously identical predictio
   const probe = planDisplacements(room, m, near, 'now', 6, 100, 2)!;
   assert.equal(probe.command, 'ACTION4');
   assert.deepEqual(probe.motionTest?.predictions, approach.motionPreparation?.predictions);
+});
+
+test('an observed exchange opens a test of whether intervening terrain matters', () => {
+  const room = { ...s, ground: s.ground.filter(site => site !== 16) };
+  const origin: Reading = { subjects: [7, 34], active: 0, pieces: [9, 23], supports: [], opened: [], anchor: -1 };
+  const after: Reading = { ...origin, subjects: [9, 34], pieces: [7, 23] };
+  for (const requiresClearPath of [true, false]) {
+    const m = fresh();
+    m.motors.ACTION2 = { dx: 0, dy: 1, ref: 'direction measured' };
+    localEffects(room, m, origin, after, 'ACTION4', 'exchange across open ground');
+    assert.deepEqual(viableMotionLaws(m, 0), ['exchange', 'clear_path_exchange']);
+    const test = unresolvedMotionTest(room, m, after, 'before barrier test', 2)!;
+    assert.equal(test.command, 'ACTION2');
+    const passed: Reading = { ...after, subjects: [23, 34], pieces: [7, 9] };
+    assert.deepEqual(test.motionTest!.predictions.map(p => p.pose), [key(passed), key(after)]);
+    assert.equal(unresolvedMotionTest(room, m, after, 'higher threshold', 3), undefined);
+    const observed = requiresClearPath ? after : passed;
+    localEffects(room, m, after, observed, test.command, 'measured across terrain', test);
+    assert.equal(law(m, 0), requiresClearPath ? 'clear_path_exchange' : 'exchange');
+    assert.equal(key(imagine(room, geometry(room), after, test.command, m, law(m, 0)) ?? after), key(observed));
+  }
 });
 
 test('a visible landing becomes a prediction at another distance only after displacement', () => {
