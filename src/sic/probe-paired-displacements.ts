@@ -203,6 +203,7 @@ export function seePair(
   }
   const m = q.learning;
   q.reading = next;
+  if (s.other.length) m.visibleFeatures = s.other.filter(site => after[site] === s.initial[site]);
   watchPassage(s, m, old, next, after, ref, op);
   const previous = q.active;
   if (

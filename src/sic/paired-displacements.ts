@@ -34,6 +34,8 @@ export type Learning = {
   mobileForms?: string[];
   previewPose?: string;
   visibleEffect?: Reading;
+  visibleFeatures?: number[];
+  witnessedEntries?: { side: TransportSide; source: number; site: number; ref: string }[];
   denied: Record<string, number>;
   visits: Record<string, number>;
   special?: { mark: string; ref: string };
@@ -139,6 +141,8 @@ export function imagine(
       n.supports.push(to);
     } else n.pieces[i] = to;
   }
+  const witnessedEntry = (who: TransportSide, from: number, to: number) =>
+    m.witnessedEntries?.some(e => e.side === who && e.source === from && e.site === to);
   const freePiece = (to: number) =>
     to >= 0 &&
     (space.walk(v, to) || space.medium.has(to)) &&
@@ -186,17 +190,16 @@ export function imagine(
             else n.pieces.push(to);
           }
         } else if (
-          (m.mobileSupports
-            ? (space.ground.has(to) && space.open(n, to)) ||
-              n.supports.includes(to)
-            : space.walk(v, to)) &&
+          ((m.mobileSupports
+            ? (space.ground.has(to) && space.open(n, to)) || n.supports.includes(to)
+            : space.walk(v, to)) || witnessedEntry(kind === 'actor' ? side : other, p, to)) &&
           !n.pieces.includes(to) &&
           !n.subjects.includes(to)
         )
           n.subjects[kind === 'actor' ? side : other] = to;
       }
     } else {
-      if (!space.walk(v, target)) return;
+      if (!space.walk(v, target) && !witnessedEntry(side, a, target)) return;
       if (h === 'push' && (v.pieces.includes(target) || target === b)) {
         let last = target;
         const line: number[] = [];
@@ -207,7 +210,7 @@ export function imagine(
         if (!freePiece(last)) return;
         for (const p of line.reverse()) {
           if (p === b) {
-            if (!space.walk(v, at(p))) return;
+            if (!space.walk(v, at(p)) && !witnessedEntry(other, p, at(p))) return;
             n.subjects[other] = at(p);
           } else place(p, at(p));
         }
@@ -302,6 +305,20 @@ export function localEffects(
     }
   }
   if (f) {
+    if (f.regionEntry) {
+      const { site, source, ticket } = f.regionEntry;
+      const mark = 'entry/' + ticket;
+      if (!m.checked.includes(mark)) m.checked.push(mark);
+      delete m.plan;
+      if (a.subjects[side] === site) {
+        m.witnessedEntries ??= [];
+        if (!m.witnessedEntries.some(e => e.side === side && e.source === source && e.site === site))
+          m.witnessedEntries.push({ side, source, site, ref });
+        m.refs = [...m.refs.slice(-5), ref];
+        return 'entered_the_tested_boundary_site';
+      }
+      return poseId(a) === poseId(f.expected) ? 'observed_ordinary_motion_at_the_boundary' : 'observed_a_different_boundary_effect';
+    }
     if (f.motionTest) {
       const trial = 'test-motion/' + f.key;
       if (!m.checked.includes(trial)) m.checked.push(trial);
@@ -314,6 +331,10 @@ export function localEffects(
         ? 'registered_direction_observed'
         : 'registered_direction_blocked';
     if (poseId(f.expected) !== poseId(a)) {
+      if (m.witnessedEntries && f.expected.subjects[side] !== a.subjects[side]) {
+        m.witnessedEntries = m.witnessedEntries.filter(e =>
+          e.side !== side || e.source !== from || e.site !== f.expected.subjects[side]);
+      }
       m.denied[key(b) + '|' + f.command] = 1;
       delete m.plan;
       return 'relative_displacement_refuted';

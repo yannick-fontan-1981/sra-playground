@@ -97,6 +97,39 @@ test('an agreed preparatory movement can make two previously identical predictio
   assert.deepEqual(probe.motionTest?.predictions, approach.motionPreparation?.predictions);
 });
 
+test('test an unclassified tile only when it can open access to an objective, then reuse the observed entry', () => {
+  const room = { ...s, ground: [7, 8, 10, 11, 34], other: [9, 15], goals: [11, 34] };
+  const v: Reading = { subjects: [7, 34], active: 0, pieces: [], supports: [], opened: [], anchor: -1 };
+  const learn = () => {
+    const m = fresh();
+    m.evidence[0].walk = 1;
+    for (const [i, [dx, dy]] of [[0, -1], [0, 1], [-1, 0], [1, 0]].entries())
+      m.motors['ACTION' + (i + 1)] = { dx: dx!, dy: dy!, ref: 'direction measured' };
+    return m;
+  };
+  const m = learn();
+  const approach = planDisplacements(room, m, v, 'initial', 7, 100, 2)!;
+  assert.equal(approach.motionPreparation?.steps, 1);
+  assert.deepEqual(approach.target, [11]);
+  const near: Reading = { ...v, subjects: [8, 34] };
+  const boundary = planDisplacements(room, m, near, 'adjacent', 7, 100, 2)!;
+  assert.equal(boundary.regionEntry?.site, 9);
+  assert.deepEqual(boundary.regionEntry?.objectives, [11]);
+  assert.equal(boundary.command, 'ACTION4');
+  assert.equal(planDisplacements(room, learn(), near, 'stricter', 7, 100, 3)?.regionEntry, undefined);
+  const blocked = learn();
+  assert.equal(localEffects(room, blocked, near, near, boundary.command, 'closed', boundary), 'observed_ordinary_motion_at_the_boundary');
+  assert.equal(planDisplacements(room, blocked, near, 'after failure', 7, 100, 2)?.regionEntry, undefined);
+  const entered: Reading = { ...v, subjects: [9, 34] };
+  assert.equal(localEffects(room, m, near, entered, boundary.command, 'open', boundary), 'entered_the_tested_boundary_site');
+  const reused = planDisplacements(room, m, near, 'same shore', 7, 100, 2)!;
+  assert.equal(m.planSolves, true);
+  assert.equal(reused.expected.subjects[0], 9);
+  assert.equal(reused.regionEntry, undefined);
+  const decoy = { ...room, goals: [7, 34] };
+  assert.equal(planDisplacements(decoy, learn(), near, 'empty region beyond', 7, 100, 2)?.regionEntry, undefined);
+});
+
 test('an observed exchange opens a test of whether intervening terrain matters', () => {
   const room = { ...s, ground: s.ground.filter(site => site !== 16) };
   const origin: Reading = { subjects: [7, 34], active: 0, pieces: [9, 23], supports: [], opened: [], anchor: -1 };

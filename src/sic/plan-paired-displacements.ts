@@ -24,6 +24,7 @@ import {
   unresolvedMotionTest,
   viableMotionLaws,
 } from './paired-displacements.ts';
+import { regionEntries, regionEntryTest, type RegionEntries } from './unknown-region-entry.ts';
 import { chooseEffectExperiment } from './discriminating-experiment.ts';
 
 type Node = {
@@ -141,7 +142,9 @@ export function planDisplacements(
   const saved = m.plan?.[0];
   if (saved?.from === key(v) && !m.denied[key(v) + '|' + saved.command]) {
     if (m.planSolves === false && minimumProbeOutcomes && !m.join) {
-      const test = unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
+      const nearUnknown = minimumProbeOutcomes === 2 && s.other.some(p => md(s, p, v.subjects[v.active]) === 1);
+      const entry = nearUnknown ? regionEntryTest(s, m, v, regionEntries(s, m, v), ref, minimumProbeOutcomes) : undefined;
+      const test = entry ?? unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
       if (test) return test;
     }
     return offer(
@@ -183,9 +186,10 @@ export function planDisplacements(
     const doorFlags = s.doors
       .map((d) => Number(independent(n, d.site, walker)))
       .join('');
-    const k = [goal, n.supports.join('.'), doorFlags].join('/');
+    const k = [goal, m.witnessedEntries?.length ? walker : '', n.supports.join('.'), doorFlags].join('/');
     const old = paths.get(k);
     if (old) return old;
+    const entered = new Set(m.witnessedEntries?.filter(e => e.side === walker).map(e => e.site));
     const distance = s.initial.map(() => Infinity),
       toward = s.initial.map(() => -1),
       q = [[0, goal]];
@@ -197,7 +201,7 @@ export function planDisplacements(
       if (done.has(p)) continue;
       done.add(p);
       const step =
-        space.walk(n, p) && independent(n, p, walker)
+        (space.walk(n, p) || entered.has(p)) && independent(n, p, walker)
           ? 1
           : space.medium.has(p)
             ? 16
@@ -207,7 +211,7 @@ export function planDisplacements(
       for (const next of jumps
         ? [...adjacent[p]!, ...jumps[p]!]
         : adjacent[p]!) {
-        if (!space.ground.has(next) && !space.medium.has(next)) continue;
+        if (!space.ground.has(next) && !space.medium.has(next) && !entered.has(next)) continue;
         if (cost + step < distance[next]!) {
           distance[next] = cost + step;
           toward[next] = p;
@@ -327,7 +331,8 @@ export function planDisplacements(
   // Reuse states explored by the goal search. A setup is allowed only when all
   // still-viable laws predict the same public result for every preparatory move.
   const reached = minimumProbeOutcomes && !m.join &&
-    viableMotionLaws(m, v.active).length >= minimumProbeOutcomes ? [] as Node[] : undefined;
+    (viableMotionLaws(m, v.active).length >= minimumProbeOutcomes ||
+      (minimumProbeOutcomes === 2 && s.other.length > 0)) ? [] as Node[] : undefined;
   let best = root,
     bestProgress = Infinity;
   for (let i = 0; heap.length && i < budget; i++) {
@@ -386,10 +391,11 @@ export function planDisplacements(
     }
   }
   if (best.score !== 0 && minimumProbeOutcomes && !m.join) {
-    const test = unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
+    const entries = minimumProbeOutcomes === 2 ? regionEntries(s, m, v) : new Map();
+    const test = regionEntryTest(s, m, v, entries, ref, minimumProbeOutcomes) ?? unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
     if (test) return test;
     if (reached?.length) {
-      const preparation = prepareMotionTest(s, m, root, reached, ref, minimumProbeOutcomes);
+      const preparation = prepareMotionTest(s, m, root, reached, ref, minimumProbeOutcomes, entries);
       if (preparation) return preparation;
     }
   }
@@ -408,7 +414,7 @@ export function planDisplacements(
   );
 }
 
-function prepareMotionTest(s: Scene, m: Learning, root: Node, reached: Node[], ref: string, minimum: number) {
+function prepareMotionTest(s: Scene, m: Learning, root: Node, reached: Node[], ref: string, minimum: number, entries: RegionEntries) {
   const shared = new Map<Node, Node>([[root, root]]);
   const rivals = viableMotionLaws(m, root.s.active), space = geometry(s);
   const trials: { action: { first: Node; at: Node; test: TransportForecast }; predictions: string[] }[] = [];
@@ -422,17 +428,22 @@ function prepareMotionTest(s: Scene, m: Learning, root: Node, reached: Node[], r
     if (!rivals.every(h => key(imagine(s, space, parent.s, op, m, h) ?? parent.s) === expected)) continue;
     const first = previous === root ? node : previous;
     shared.set(node, first);
-    const test = unresolvedMotionTest(s, m, node.s, ref, minimum);
+    const sameTerrain = node.s.opened.join() === root.s.opened.join() && node.s.supports.join() === root.s.supports.join();
+    const options = !sameTerrain && minimum === 2 && s.other.some(p => md(s, p, node.s.subjects[node.s.active]) === 1)
+      ? regionEntries(s, m, node.s) : entries;
+    const test = regionEntryTest(s, m, node.s, options, ref, minimum) ?? unresolvedMotionTest(s, m, node.s, ref, minimum);
     if (!test?.motionTest) continue;
     shortest = node.g;
     trials.push({ action: { first, at: node, test }, predictions: test.motionTest.predictions.map(p => p.pose) });
   }
-  const chosen = chooseEffectExperiment(trials, minimum)?.action;
+  const accessTrials = trials.filter(t => t.action.test.regionEntry);
+  const chosen = chooseEffectExperiment(accessTrials.length ? accessTrials : trials, minimum)?.action;
   if (!chosen) return;
   const { first, at, test } = chosen;
   const proposal = forecast(s, m, root.s, first.s, first.op!,
     'prepare_a_position_where_the_unknown_effects_disagree',
     ['all_competing_laws_predict_the_same_preparation', 'verify_each_step_before_testing'], ref);
+  if (test.regionEntry) proposal.target = test.regionEntry.objectives;
   proposal.motionPreparation = { steps: at.g, at: key(at.s), test: test.command, predictions: test.motionTest!.predictions };
   return proposal;
 }
