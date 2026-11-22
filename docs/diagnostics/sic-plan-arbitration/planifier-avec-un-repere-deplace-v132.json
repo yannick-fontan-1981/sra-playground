@@ -1,0 +1,176 @@
+{
+  "tag": "sic-plan-with-exchanged-landmarks-v132",
+  "commit": "d8fa28915c28f26fe13047499c39409f0ff02fdb",
+  "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+  "parallelWorkers": 1,
+  "engine": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "coldWin": {
+    "game": "SS11",
+    "entry": [
+      3,
+      3
+    ],
+    "budget": 350,
+    "baseline": "held-open-compound-S11-v131",
+    "candidate": "exchanged-landmark-S11-v132",
+    "before": [
+      {
+        "level": 3,
+        "actions": 41,
+        "won": false
+      }
+    ],
+    "after": [
+      {
+        "level": 3,
+        "actions": 77,
+        "won": true
+      }
+    ],
+    "initial": "7f6fde6adab470b27f71780b8e5793d8e6b680212e915ccaae652c15bee27a23",
+    "matchingPrefix": 39,
+    "identicalTrajectory": false,
+    "firstDifferentCommandOrImage": 40,
+    "lastState": "target_levels_completed",
+    "publicTraceDigest": "660fef590e8bc5741f4185c8aaf07fe3434dbb28c5007b8cbfb6e7567bb7798d",
+    "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+    "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+    "earnedTransitions": []
+  },
+  "predictedExchanges": [
+    {
+      "action": 46,
+      "command": 3,
+      "publicBefore": "42289648cd2526e8",
+      "publicAfter": "641bd4b0df7655e9",
+      "returnReceipt": "relative_displacement_verified",
+      "from": 144,
+      "to": 147,
+      "ref": "sra-v6-eb5042b2-8f93-4cb8-b871-babe7fc4cef7:epoch:1:revision:37:frame:dbbc8e4cf2ada683"
+    },
+    {
+      "action": 53,
+      "command": 4,
+      "publicBefore": "287a2f01763b4c23",
+      "publicAfter": "3af8e77f7c1255c3",
+      "returnReceipt": "relative_displacement_refuted",
+      "from": 147,
+      "to": 145,
+      "ref": "sra-v6-eb5042b2-8f93-4cb8-b871-babe7fc4cef7:epoch:1:revision:37:frame:dbbc8e4cf2ada683"
+    }
+  ],
+  "explicitAdjacentContactProbes": 0,
+  "ablationDefinitions": [
+    {
+      "arm": "v132-model-only",
+      "source": "src/sic/plan-paired-displacements.ts",
+      "before": "15c748376deee1899c628de28fd161f3e604977a52f23e6392533343af53e588",
+      "after": "74c9c1640feca4f971a9ccfa636ac93a60ea4a358d16deb2ea984396732e55a7",
+      "old": "const guarded = minimumProbeOutcomes === 2 && !!m.exchangedLandmarks?.length;",
+      "new": "const guarded = false;"
+    },
+    {
+      "arm": "v132-no-simulated-landmark-swap",
+      "source": "src/sic/paired-displacements.ts",
+      "before": "16e922799caa8a300407e33c2eab74f69e3e2db976e4eaa19acd7e5ada73086c",
+      "after": "817dcc34384584c2d156310d840ee994a59f8697e86dd35304a97f187410f886",
+      "old": "if (!m.exchangedLandmarks?.[landmark]?.exchanges[side]) return;",
+      "new": "return;"
+    }
+  ],
+  "independentDiagnosis": "effets-composes-et-selection-v131.json",
+  "transitionToSolving": {
+    "game": "SS11",
+    "issued": 77,
+    "registrations": [
+      {
+        "action": 36,
+        "from": "a46fabf5afbf2828",
+        "to": "dbbc8e4cf2ada683",
+        "actors": {
+          "1": "replay-36"
+        }
+      }
+    ],
+    "earlierPartialPlans": [],
+    "firstPredictedFinish": {
+      "action": 63,
+      "commands": 15,
+      "publicImage": "e0e5bbcb69ee89a7",
+      "terminalSubjects": [
+        112,
+        293
+      ],
+      "observedGoals": [
+        112,
+        293
+      ],
+      "exactlyFollowedToCredit": true
+    },
+    "firstFollowedExactlyToTheWin": {
+      "action": 63,
+      "commands": 15,
+      "publicImage": "e0e5bbcb69ee89a7",
+      "terminalSubjects": [
+        112,
+        293
+      ],
+      "observedGoals": [
+        112,
+        293
+      ],
+      "exactlyFollowedToCredit": true
+    },
+    "scoredPlanDecisions": 15
+  },
+  "ablations": [
+    {
+      "game": "SS11",
+      "entry": [
+        3,
+        3
+      ],
+      "budget": 350,
+      "baseline": "exchanged-landmark-S11-v132",
+      "candidate": "SS11-model-without-approach-preference",
+      "before": [
+        {
+          "level": 3,
+          "actions": 77,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 3,
+          "actions": 41,
+          "won": false
+        }
+      ],
+      "initial": "7f6fde6adab470b27f71780b8e5793d8e6b680212e915ccaae652c15bee27a23",
+      "matchingPrefix": 39,
+      "identicalTrajectory": false,
+      "firstDifferentCommandOrImage": 40,
+      "lastState": "native_game_over",
+      "publicTraceDigest": "508c5e7fb33277fcbfd1ccb466cc60b5d3e2f077e6d62a9d6674c14a02f8f177",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
+    }
+  ],
+  "otherThirdLevels": [],
+  "warmL2ToL3": [],
+  "sourceL1": {
+    "evaluated": 0,
+    "won": 0,
+    "sameCommandsAndImages": 0,
+    "games": []
+  },
+  "customL2Protection": []
+}

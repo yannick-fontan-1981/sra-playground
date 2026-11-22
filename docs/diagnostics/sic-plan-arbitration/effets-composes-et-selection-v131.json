@@ -43,6 +43,7 @@
       "baselineStop": "target_levels_completed",
       "candidateStop": "target_levels_completed",
       "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 94,
       "identicalTrajectory": true,
       "firstDifferentGatePrediction": 69,
       "baselineCommandDigest": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f",
@@ -82,6 +83,7 @@
       "baselineStop": "target_levels_completed",
       "candidateStop": "target_levels_completed",
       "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 336,
       "identicalTrajectory": true,
       "firstDifferentGatePrediction": 306,
       "baselineCommandDigest": "4a47c7a078c18adcb0fa91a18fc8f287c2f13d343d99e9231ace210f2db938e0",
@@ -121,6 +123,7 @@
       "baselineStop": "target_levels_completed",
       "candidateStop": "target_levels_completed",
       "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 83,
       "identicalTrajectory": true,
       "firstDifferentGatePrediction": 36,
       "baselineCommandDigest": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3",
@@ -150,6 +153,7 @@
       "baselineStop": "target_levels_completed",
       "candidateStop": "target_levels_completed",
       "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 176,
       "identicalTrajectory": true,
       "firstDifferentGatePrediction": 62,
       "baselineCommandDigest": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363",
@@ -179,6 +183,7 @@
       "baselineStop": "native_game_over",
       "candidateStop": "native_game_over",
       "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 41,
       "identicalTrajectory": true,
       "firstDifferentGatePrediction": null,
       "baselineCommandDigest": "03e00403d09c16e7f17bf2ba5b4f2f64afece00150309a2edb182fed43660eb0",
@@ -208,15 +213,107 @@
       "baselineStop": "target_levels_completed",
       "candidateStop": "target_levels_completed",
       "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 81,
       "identicalTrajectory": true,
       "firstDifferentGatePrediction": null,
       "baselineCommandDigest": "915f2c498b3a233decfced4f4467b337608df8ae067c5ab90140c358bb7bb8c4",
       "candidateCommandDigest": "915f2c498b3a233decfced4f4467b337608df8ae067c5ab90140c358bb7bb8c4",
       "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    },
+    {
+      "game": "SS07",
+      "start": 3,
+      "end": 3,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 3,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 3,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "baselineStop": "session_action_budget",
+      "candidateStop": "session_action_budget",
+      "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 350,
+      "identicalTrajectory": true,
+      "firstDifferentGatePrediction": 28,
+      "baselineCommandDigest": "c4a6866ae87493989a93d5e688f543ead50da5668a1eff0123236627c57f2867",
+      "candidateCommandDigest": "c4a6866ae87493989a93d5e688f543ead50da5668a1eff0123236627c57f2867",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    },
+    {
+      "game": "SS09",
+      "start": 3,
+      "end": 3,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 3,
+          "actions": 322,
+          "won": false
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 3,
+          "actions": 317,
+          "won": false
+        }
+      ],
+      "baselineStop": "level_active_time_budget",
+      "candidateStop": "level_active_time_budget",
+      "firstDifferentCommandOrFrame": null,
+      "identicalPrefix": 317,
+      "identicalTrajectory": false,
+      "firstDifferentGatePrediction": null,
+      "baselineCommandDigest": "fa040dd64b9d62964e11360ebfb455b089c62f7148070749c44a1046a235ea73",
+      "candidateCommandDigest": "0475456882bc08338decb9e75c5be0e5ecfffc1e90b58571fa9a9210a0eefaf0",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
     }
   ],
-  "nativeTwoConfigurations": [],
+  "nativeTwoConfigurations": [
+    {
+      "game": "SS07",
+      "start": 3,
+      "end": 3,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 3,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 3,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "baselineStop": "session_action_budget",
+      "candidateStop": "session_action_budget",
+      "firstDifferentCommandOrFrame": 15,
+      "identicalPrefix": 14,
+      "identicalTrajectory": false,
+      "firstDifferentGatePrediction": 14,
+      "baselineCommandDigest": "c4a6866ae87493989a93d5e688f543ead50da5668a1eff0123236627c57f2867",
+      "candidateCommandDigest": "720cb917a70af715796f51b3c5bf99193ecab0f06f9193cf2eb4506ec1485807",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d"
+    }
+  ],
   "gateForecastAudit": [
     {
       "tape": "serial-early-lessons-v130.jsonl",
@@ -438,6 +535,54 @@
       "unavailableNextReadings": 0,
       "mismatchedPositions": 0,
       "unchangedPlacements": 10,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-new-upper-custom-v131.jsonl",
+      "game": "SS07",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 350,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 143,
+      "unavailableNextReadings": 1,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 142,
+      "wrongGateForecasts": 8,
+      "wrongUncoveredGateForecasts": 8,
+      "tests": []
+    },
+    {
+      "tape": "serial-new-upper-custom-v131.jsonl",
+      "game": "SS09",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 317,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 95,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 95,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-compare-gate-selection-three-v131.jsonl",
+      "game": "SS07",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 350,
+      "pack": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d",
+      "clicksWithForecast": 0,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 0,
       "wrongGateForecasts": 0,
       "wrongUncoveredGateForecasts": 0,
       "tests": []
@@ -1220,6 +1365,207 @@
         ]
       ],
       "firstSelection": 46
+    }
+  ],
+  "prospectiveNeighborhoodProbe": [
+    {
+      "level": 3,
+      "canTrack": true,
+      "initialRole": "unclassified feature",
+      "expanded": 220,
+      "previouslyUntestedDirectionReturns": 651,
+      "tally": [
+        {
+          "actor": 0,
+          "safeFar": 172,
+          "safeNear": 0,
+          "lossFar": 0,
+          "lossNear": 0,
+          "independentLossOrigins": 0
+        },
+        {
+          "actor": 1,
+          "safeFar": 475,
+          "safeNear": 0,
+          "lossFar": 0,
+          "lossNear": 4,
+          "independentLossOrigins": 2
+        }
+      ],
+      "safeExchanges": 54,
+      "matchedWithOtherBodiesAndGatesFixed": [
+        {
+          "near": {
+            "from": "77aad6e4f6a13fdf",
+            "op": 2,
+            "actor": 1,
+            "source": 125,
+            "dest": 145,
+            "other": 131,
+            "material": [
+              251
+            ],
+            "opened": [],
+            "marker": 144,
+            "near": true,
+            "fromDistance": 2,
+            "over": true
+          },
+          "far": {
+            "from": "f628f47f19f91595",
+            "op": 2,
+            "actor": 1,
+            "source": 125,
+            "dest": 145,
+            "other": 131,
+            "material": [
+              251
+            ],
+            "opened": [],
+            "marker": 104,
+            "near": false,
+            "fromDistance": 2,
+            "over": false
+          }
+        },
+        {
+          "near": {
+            "from": "f628f47f19f91595",
+            "op": 1,
+            "actor": 1,
+            "source": 125,
+            "dest": 105,
+            "other": 131,
+            "material": [
+              251
+            ],
+            "opened": [],
+            "marker": 104,
+            "near": true,
+            "fromDistance": 2,
+            "over": true
+          },
+          "far": {
+            "from": "77aad6e4f6a13fdf",
+            "op": 1,
+            "actor": 1,
+            "source": 125,
+            "dest": 105,
+            "other": 131,
+            "material": [
+              251
+            ],
+            "opened": [],
+            "marker": 144,
+            "near": false,
+            "fromDistance": 2,
+            "over": false
+          }
+        }
+      ],
+      "examples": [
+        {
+          "from": "77aad6e4f6a13fdf",
+          "op": 2,
+          "actor": 1,
+          "source": 125,
+          "dest": 145,
+          "other": 131,
+          "material": [
+            251
+          ],
+          "opened": [],
+          "marker": 144,
+          "near": true,
+          "fromDistance": 2,
+          "over": true
+        },
+        {
+          "from": "77aad6e4f6a13fdf",
+          "op": 3,
+          "actor": 1,
+          "source": 125,
+          "dest": 124,
+          "other": 131,
+          "material": [
+            251
+          ],
+          "opened": [],
+          "marker": 144,
+          "near": true,
+          "fromDistance": 2,
+          "over": true
+        },
+        {
+          "from": "f628f47f19f91595",
+          "op": 1,
+          "actor": 1,
+          "source": 125,
+          "dest": 105,
+          "other": 131,
+          "material": [
+            251
+          ],
+          "opened": [],
+          "marker": 104,
+          "near": true,
+          "fromDistance": 2,
+          "over": true
+        },
+        {
+          "from": "f628f47f19f91595",
+          "op": 3,
+          "actor": 1,
+          "source": 125,
+          "dest": 124,
+          "other": 131,
+          "material": [
+            251
+          ],
+          "opened": [],
+          "marker": 104,
+          "near": true,
+          "fromDistance": 2,
+          "over": true
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "canTrack": false
+    },
+    {
+      "level": 1,
+      "canTrack": false
+    }
+  ],
+  "discoveryNeighborhoodCounts": {
+    "glyphDigest": "d80ddcff",
+    "safeFar": 261,
+    "safeNear": 0,
+    "lossFar": 0,
+    "lossNear": 2,
+    "initialInstances": 1,
+    "originOfBothLosses": "one public image"
+  },
+  "directCampaignBenchFixtures": [
+    {
+      "game": "SS11",
+      "engineAfterScoring": 1,
+      "earnedLevel": 3,
+      "priorActions": 35,
+      "creditAfterSelection": 1,
+      "forgedTransitionRejected": true,
+      "fixtureOnly": true
+    },
+    {
+      "game": "SS10",
+      "engineAfterScoring": 1,
+      "earnedLevel": 3,
+      "priorActions": 227,
+      "creditAfterSelection": 1,
+      "forgedTransitionRejected": true,
+      "fixtureOnly": true
     }
   ],
   "reproduceForecastMeasurement": "node scripts/audit-paired-selection-forecasts.mjs output.json <public native command tapes>"
