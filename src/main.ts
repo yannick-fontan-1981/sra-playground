@@ -41,6 +41,8 @@ import { LEVEL_INFO as SS11_LEVEL_INFO } from '../experiments/sinking-star-ss11/
 import { LEVEL_INFO as SS12_LEVEL_INFO } from '../experiments/sinking-star-ss12/src/level-info.ts';
 import { LEVEL_INFO as SS13_LEVEL_INFO } from '../experiments/sinking-star-ss13/src/level-info.ts';
 import { LEVEL_INFO as SS14_LEVEL_INFO } from '../experiments/sinking-star-ss14/src/level-info.ts';
+import { LEVEL_INFO as SS15_LEVEL_INFO } from '../experiments/sinking-star-ss15/src/level-info.ts';
+import { actionFeedback as accordFeedback, lessonIds as accordLessonIds, lessonPrompt as accordPrompt, observeLesson as observeAccordLesson, TUTORIAL_LEVEL as SS15_TUTORIAL_LEVEL, visibleHeroes as visibleAccordHeroes, type HarmonyLesson as AccordLesson } from '../experiments/sinking-star-ss15/src/tutorial.ts';
 import { actionFeedback as harmonyFeedback, lessonIds as harmonyLessonIds, lessonPrompt as harmonyPrompt, observeLesson as observeHarmonyLesson, TUTORIAL_LEVEL as SS14_TUTORIAL_LEVEL, visibleHeroes as visibleHarmonyHeroes, type HarmonyLesson } from '../experiments/sinking-star-ss14/src/tutorial.ts';
 import { actionFeedback as anchorFeedback, lessonIds as anchorLessonIds, lessonPrompt as anchorPrompt, observeLesson as observeAnchorLesson, TUTORIAL_LEVEL as SS13_TUTORIAL_LEVEL, visibleHeroes as visibleAnchorHeroes, type TranspositionLesson as AnchorLesson } from '../experiments/sinking-star-ss13/src/tutorial.ts';
 import { actionFeedback as columnFeedback, lessonIds as columnLessonIds, lessonPrompt as columnPrompt, observeLesson as observeColumnLesson, TUTORIAL_LEVEL as SS12_TUTORIAL_LEVEL, visibleHeroes as visibleColumnHeroes, type ChorusLesson as ColumnLesson } from '../experiments/sinking-star-ss12/src/tutorial.ts';
@@ -49,8 +51,8 @@ import { actionFeedback as warehouseFeedback, lessonIds as warehouseLessonIds, l
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
-type DuoGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14';
-const isDuoNativeGame = (code: string): code is DuoGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14';
+type DuoGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14' | 'SS15';
+const isDuoNativeGame = (code: string): code is DuoGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14' || code === 'SS15';
 const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || isDuoNativeGame(code);
 const usesNativeManualControls = (code: string): boolean => usesReflectionShortcut(code) || isDirectionalNativeGame(code);
 const icon = (name: string, cls = ''): string => {
@@ -237,6 +239,10 @@ app.innerHTML = `
               <div id="ss14-role-controls" class="utility-controls duo-role-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
                 <button type="button" class="utility-button" data-duo-slot="1" data-ss14-hero="thief" aria-pressed="false">Voleur · 1</button>
                 <button type="button" class="utility-button" data-duo-slot="2" data-ss14-hero="bard" aria-pressed="false">Barde · 2</button>
+              </div>
+              <div id="ss15-role-controls" class="utility-controls duo-role-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+                <button type="button" class="utility-button" data-duo-slot="1" data-ss15-hero="wizard" aria-pressed="false">Magicien · 1</button>
+                <button type="button" class="utility-button" data-duo-slot="2" data-ss15-hero="bard" aria-pressed="false">Barde · 2</button>
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
               <p id="ss02-level-info" class="native-game-level-info" lang="fr" hidden></p>
@@ -932,6 +938,116 @@ app.innerHTML = `
                   </div>
                 </details>
               </div>
+              <div id="ss15-room-help" lang="fr" hidden>
+                <p id="ss15-objective" class="native-game-level-info"></p>
+                <p class="native-game-level-info"><span id="ss15-source-label"></span> <a id="ss15-source-link" target="_blank" rel="noopener noreferrer" hidden></a> <a id="ss15-secondary-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+                <details class="native-game-tutorial">
+                  <summary>Légende du plateau</summary>
+                  <div id="ss15-legend" class="native-game-tutorial-content duo-board-legend">
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#9e6bdb" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Magicien violet · couleur 15</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#e03bca" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Barde magenta · couleur 6</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#8b5a2b" d="M0 0h3v1H0z"/><path fill="#000" d="M1 1h1v1H1z"/></svg>Caisse mobile</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#8b5a2b" d="M0 0h3v1H0z"/><path fill="#43d9eb" d="M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2z"/></svg>Appui dans l’eau · mobile au chant</span>
+                    <span><i class="swatch" style="--c:#2765d3"></i>Eau</span>
+                    <span><i class="swatch" style="--c:#777777"></i>Sol gris</span>
+                    <span><i class="swatch" style="--c:#333333"></i>Mur gris foncé</span>
+                    <span><i class="swatch goal"></i>Destination · deux à occuper</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Bouton de pression</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M0 0h3v1H0z"/><path fill="#000" d="M1 1h1v1H1z"/></svg>Porte / presse latérale</span>
+                    <span id="ss15-platform-legend-active" hidden><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M0 0h3v1H0z"/><path fill="#fff" d="M1 1h1v1H1z"/></svg>Porte-plateforme · déployée</span>
+                    <span id="ss15-platform-legend-inactive" hidden><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#2765d3" d="M0 0h3v1H0z"/><path fill="#f5a9c8" d="M0 0h1v1H0zM2 0h1v1H2zM0 2h1v1H0zM2 2h1v1H2z"/><path fill="#fff" d="M1 1h1v1H1z"/></svg>Porte-plateforme · retirée</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#777" d="M0 0h3v1H0z"/><path fill="#000" d="M0 0h2v1H0zM0 1h1v1H0z"/><path fill="#fff" d="M2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0z"/></svg>Miroir mobile · dos noir</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#000" d="M0 0h3v1H0z"/><path fill="#ef4141" d="M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2z"/></svg>Monstre</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#ccc" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Arrivée d’un héros par reflet</span>
+                    <span><i class="swatch" style="background:transparent;border:1px solid #ccc"></i>Arrivée d’une caisse par reflet</span>
+                  </div>
+                </details>
+                <details id="ss15-tutorial" class="native-game-tutorial" open hidden>
+                  <summary>Niveau 4 · L’atelier des passages croisés</summary>
+                  <div class="native-game-tutorial-content">
+                    <p id="ss15-lesson-next" aria-live="polite"></p>
+                    <ul>
+                      <li data-ss15-lesson="select">Changer de personnage sans faire avancer le monde.</li>
+                      <li data-ss15-lesson="move">Marcher avec le personnage sélectionné.</li>
+                      <li data-ss15-lesson="wizard-swap">Échanger avec la première cible du rayon.</li>
+                      <li data-ss15-lesson="wizard-partner">Transposer les deux héros sans chant.</li>
+                      <li data-ss15-lesson="wizard-bend">Dévier un rayon sur la face blanche d’un miroir.</li>
+                      <li data-ss15-lesson="relay-weight">Remplacer un poids sans relâcher sa commande.</li>
+                      <li data-ss15-lesson="bard-song">Déplacer une pièce par le chant du Barde.</li>
+                      <li data-ss15-lesson="partner-song">Déplacer le Magicien par chant, sans sort.</li>
+                      <li data-ss15-lesson="selective-song">Corriger un écart en retenant une partie du groupe.</li>
+                      <li data-ss15-lesson="diagonal-song">Atteindre une pièce dans un coin du carré de portée.</li>
+                      <li data-ss15-lesson="wall-song">Entraîner une pièce derrière une cloison.</li>
+                      <li data-ss15-lesson="release-by-swap">Extraire le Barde en laissant son cortège en place.</li>
+                      <li data-ss15-lesson="platform">Transformer une caisse en appui dans l’eau.</li>
+                      <li data-ss15-lesson="support-slide">Faire glisser un appui sur l’eau.</li>
+                      <li data-ss15-lesson="support-anchor">Conserver un appui occupé pendant le chant.</li>
+                      <li data-ss15-lesson="mirror">Activer un reflet sans chant ni sort.</li>
+                      <li data-ss15-lesson="gate">Commander une porte avec un poids.</li>
+                      <li data-ss15-lesson="press">Déposer une charge par une presse latérale.</li>
+                      <li data-ss15-lesson="monster">Observer un combat simultané ou une noyade.</li>
+                      <li data-ss15-lesson="goals">Occuper les deux destinations ensemble.</li>
+                    </ul>
+                    <p id="ss15-lesson-progress"></p>
+                    <p>Annuler conserve les découvertes. Recommencer, repartir ou choisir un autre niveau remet le suivi à zéro.</p>
+                  </div>
+                </details>
+                <details id="ss15-wizard-help" class="native-game-tutorial" open>
+                  <summary>Le Magicien · viser et remplacer</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>La première cible dans la direction.</strong> Une flèche vise une caisse, un monstre ou le Barde. Le Magicien échange sa place avec cette première cible ; il ne peut pas la sauter pour en choisir une plus loin. Sans cible, il essaie de marcher.</p>
+                    <p><strong>L’eau laisse passer la visée.</strong> Les murs et les portes fermées l’arrêtent. Les appuis immergés ne sont plus des caisses : ils ne se transposent pas. Les miroirs ne sont pas des cibles ; leurs faces blanches dévient le rayon et leurs dos noirs le bloquent.</p>
+                    <p><strong>Un échange ne chante pas.</strong> Le Barde transposé laisse les objets qui l’entouraient à leur place. Les deux cases échangées gardent un occupant : un bouton peut ainsi rester maintenu pendant une relève.</p>
+                    <p><strong>Changer les places ne change pas les quantités.</strong> Un échange entre deux îles remplace un occupant par un autre de chaque côté. Pour rassembler davantage de ressources sur une rive, prépare aussi un transport par le chant, un passage ou un reflet.</p>
+                    <p>Un rayon qui revient sur le Magicien montre son trajet puis le fait clignoter sur place. Le monde ne bouge pas ; choisis un autre axe ou prépare une autre cible.</p>
+                  </div>
+                </details>
+                <details id="ss15-song-help" class="native-game-tutorial" open>
+                  <summary>Le Barde · la portée et les obstacles</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Un carré de 5 × 5 avant le pas.</strong> Le chant prend les occupants à deux cases au plus horizontalement et verticalement, diagonales comprises. Le périmètre magenta montre cette portée quand le Barde est sélectionné. Les murs ne coupent pas le chant.</p>
+                    <p><strong>Tous tentent le même pas.</strong> Le Magicien, les caisses, les monstres et les appuis essaient de suivre le Barde. Un membre bloqué reste en place et peut retenir les autres derrière lui. Ces butées permettent de modifier les écarts.</p>
+                    <p><strong>Le Barde doit avancer.</strong> Il n’existe pas de chant sur place. Si son pas est bloqué, envoie un héros dans l’eau sans soutien ou enlève le soutien d’un miroir, toute l’action est refusée. Les pièces hors de la portée ne suivent pas.</p>
+                    <p><strong>Les miroirs ne suivent jamais le chant.</strong> Ils ne se transposent pas non plus. Une presse peut les déplacer sans changer leur orientation. Le Barde déplacé par une transposition, un reflet ou une presse ne chante pas.</p>
+                    <p>Un appui glisse d’une case d’eau vers une autre ; il ne remonte pas sur le sol. L’appui sous un héros et celui où le Barde va marcher restent ancrés pendant ce pas.</p>
+                  </div>
+                </details>
+                <details id="ss15-mirror-help" class="native-game-tutorial" open>
+                  <summary>Deux façons d’utiliser les miroirs</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Avec une flèche du Magicien :</strong> la face blanche dévie son rayon à angle droit, le dos noir le bloque. Le rayon peut emprunter plusieurs miroirs avant sa première cible.</p>
+                    <p><strong>Avec Espace / X :</strong> tous les miroirs s’activent ensemble. Sur les deux axes d’un miroir, le candidat le plus proche passe à distance égale sur l’autre axe. À la même distance, les deux occupants échangent leurs places.</p>
+                    <p>Le <strong>plus gris clair</strong> indique l’arrivée d’un héros ; le <strong>contour carré gris clair</strong> celle d’une caisse. Une arrivée bloquée pour le candidat plus éloigné n’empêche pas le plus proche de passer.</p>
+                    <p>Les héros, caisses et monstres se reflètent. Les appuis et les miroirs ne sont pas des cibles. Un mur, une porte fermée ou un autre miroir peut bloquer un reflet. Le dos des miroirs responsables clignote alors en rouge, tandis que la diagonale reste blanche.</p>
+                  </div>
+                </details>
+                <details id="ss15-piston-help" class="native-game-tutorial" open hidden>
+                  <summary>La porte qui pousse</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Le <strong>plus rose est un bouton</strong>, avec le repère du circuit au centre. Héros, caisse, monstre ou miroir peuvent l’occuper. Tous les boutons d’un même circuit doivent être maintenus ensemble.</p>
+                    <p>La presse a un <strong>centre noir lorsqu’elle est fermée, gris lorsqu’elle est ouverte</strong>. Les trois marques colorées montrent le circuit et la direction de poussée. Selon le circuit, elle se ferme à l’appui ou au relâchement.</p>
+                    <p>À la fermeture, elle pousse l’occupant de sa case et une éventuelle file dans sa direction. Elle peut créer un appui dans l’eau ou déplacer un miroir. Une file bloquée peut faire écraser l’occupant de la presse.</p>
+                    <p>Les héros poussés ne déclenchent pas leur pouvoir. Observe toute la cascade ; Z annule l’action entière.</p>
+                  </div>
+                </details>
+                <details id="ss15-platform-help" class="native-game-tutorial" open hidden>
+                  <summary>Les plateformes dans l’eau</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Une <strong>plateforme déployée porte les héros et les objets</strong>. Retirée, elle laisse de nouveau l’eau. Son repère coloré renvoie à la commande.</p>
+                    <p>Quitte la plateforme avant de libérer son poids, et vérifie la case du partenaire. Une caisse abandonnée sur une plateforme qui se retire peut devenir un appui permanent. Cet appui reste en place lorsqu’on redéploie la plateforme.</p>
+                    <p>Les changements de circuits et de plateformes se stabilisent pendant la cascade. Les arrivées volontaires dans une eau actuellement sans soutien sont refusées.</p>
+                  </div>
+                </details>
+                <details id="ss15-monster-help" class="native-game-tutorial" hidden>
+                  <summary>Monstres · distance et rencontre</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Les monstres peuvent être transposés, entraînés par le chant, reflétés et poussés par une presse. Ils peuvent aussi maintenir un bouton : les éliminer n’est pas toujours utile.</p>
+                    <p>Après une action effective, ils frappent leurs voisins orthogonaux. <strong>Une diagonale n’est pas un contact.</strong> Vérifie les deux héros, y compris celui que tu ne contrôles pas.</p>
+                    <p>Deux monstres adjacents <strong>s’éliminent simultanément</strong>. Chacun frappe encore dans cette même vague : garde les héros à distance. Un monstre sans soutien dans l’eau disparaît.</p>
+                    <p>L’animation montre préparation, avancée, impact, désagrégation et résultat. Annuler reste disponible pendant la séquence.</p>
+                  </div>
+                </details>
+              </div>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -1188,6 +1304,7 @@ const ss11Lessons = new Set<ForgeLesson>();
 const ss12Lessons = new Set<ColumnLesson>();
 const ss13Lessons = new Set<AnchorLesson>();
 const ss14Lessons = new Set<HarmonyLesson>();
+const ss15Lessons = new Set<AccordLesson>();
 const duoRoomHelp = {
   SS06: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'warrior', label: 'Guerrier' }], directions: 'Flèches pour marcher ou pousser.', rooms: SS06_LEVEL_INFO,
     heroes: visibleHeroes, lessons: ss06Lessons, total: duoLessonIds.length, prompt: () => duoPrompt(ss06Lessons), tutorialLevel: 1 },
@@ -1219,6 +1336,10 @@ const duoRoomHelp = {
     directions: 'Flèches pour marcher, tirer ou chanter.', rooms: SS14_LEVEL_INFO,
     heroes: visibleHarmonyHeroes, lessons: ss14Lessons, total: harmonyLessonIds.length,
     prompt: () => harmonyPrompt(ss14Lessons), tutorialLevel: SS14_TUTORIAL_LEVEL },
+  SS15: { roles: [{ kind: 'wizard', label: 'Magicien' }, { kind: 'bard', label: 'Barde' }],
+    directions: 'Flèches pour marcher, échanger ou chanter.', rooms: SS15_LEVEL_INFO,
+    heroes: visibleAccordHeroes, lessons: ss15Lessons, total: accordLessonIds.length,
+    prompt: () => accordPrompt(ss15Lessons), tutorialLevel: SS15_TUTORIAL_LEVEL },
 } as const;
 let ss06Solo = false;
 let loading = false;
@@ -1579,7 +1700,7 @@ function updateDuoRoomHelp(game: DuoGameCode, current: GameObservation | null, c
   const objective = solo
     ? 'Amène le Guerrier rouge sur l’unique contour jaune.'
     : `Amène le ${first.label} et le ${second.label} sur les deux contours jaunes en même temps.`;
-  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14') && 'objective' in info ? info.objective : objective;
+  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15') && 'objective' in info ? info.objective : objective;
   if (game === 'SS06') element('#ss06-cooperation-help').hidden = solo;
   const selected = heroes(current.frame).find(hero => hero.selected)?.kind;
   const roleAttribute = `data-${id}-hero`;
@@ -1600,7 +1721,7 @@ function updateDuoRoomHelp(game: DuoGameCode, current: GameObservation | null, c
   element(`#${id}-piston-help`).hidden = !info.piston;
   const hasPlatform = 'platform' in info && info.platform;
   element(`#${id}-platform-help`).hidden = !hasPlatform;
-  if (game === 'SS12' || game === 'SS13' || game === 'SS14') {
+  if (game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15') {
     const secondary = element<HTMLAnchorElement>(`#${id}-secondary-source-link`);
     const reference = 'secondary' in info ? info.secondary : undefined;
     const secondaryUrl = reference?.url ?? ('secondaryUrl' in info ? info.secondaryUrl : undefined);
@@ -1614,7 +1735,7 @@ function updateDuoRoomHelp(game: DuoGameCode, current: GameObservation | null, c
       monsterHelp.dataset.level = String(current.level);
       const hasMonsters = current.frame.some((row, y) => y % 3 === 0 && y > 0 && row.some((pixel, x) =>
         x % 3 === 0 && x > 0 && pixel === 8 && row[x - 1] === 5 && row[x + 1] === 5));
-      if (game === 'SS13' || game === 'SS14') monsterHelp.hidden = !hasMonsters;
+      if (game !== 'SS12') monsterHelp.hidden = !hasMonsters;
       monsterHelp.open = hasMonsters;
     }
   }
@@ -1703,6 +1824,9 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   if (next.gameCode === 'SS11' && next.level === SS11_TUTORIAL_LEVEL && previous?.level !== next.level) {
     element<HTMLDetailsElement>('#ss11-tutorial').open = true;
   }
+  if (next.gameCode === 'SS15' && next.level === SS15_TUTORIAL_LEVEL && previous?.level !== next.level) {
+    element<HTMLDetailsElement>('#ss15-tutorial').open = true;
+  }
   observation = next;
   loading = false;
   failed = false;
@@ -1714,7 +1838,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   interruptibleAnimation = (manualAction || isDuoNativeGame(next.gameCode)) && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
-  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
@@ -1795,6 +1919,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS12' && action !== undefined) observeColumnLesson(ss12Lessons, before, next, action);
     if (next.gameCode === 'SS13' && action !== undefined) observeAnchorLesson(ss13Lessons, before, next, action);
     if (next.gameCode === 'SS14' && action !== undefined) observeHarmonyLesson(ss14Lessons, before, next, action);
+    if (next.gameCode === 'SS15' && action !== undefined) observeAccordLesson(ss15Lessons, before, next, action);
     if (next.gameCode === 'SS08') {
       if (action !== undefined) observeTranspositionLesson(ss08Lessons, before, next, action);
       if (next.level === SS08_TUTORIAL_LEVEL && (control === 'selectLevel' || control === 'reset')) {
@@ -1818,6 +1943,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     else if (next.gameCode === 'SS12' && action !== undefined) element('#game-feedback').textContent = columnFeedback(before, next, action);
     else if (next.gameCode === 'SS13' && action !== undefined) element('#game-feedback').textContent = anchorFeedback(before, next, action);
     else if (next.gameCode === 'SS14' && action !== undefined) element('#game-feedback').textContent = harmonyFeedback(before, next, action);
+    else if (next.gameCode === 'SS15' && action !== undefined) element('#game-feedback').textContent = accordFeedback(before, next, action);
     else if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
@@ -1858,7 +1984,7 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
-  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14') && interruptibleAnimation) {
+  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14' || observation?.gameCode === 'SS15') && interruptibleAnimation) {
     presentationGeneration += 1;
     interruptibleAnimation = false;
     busy = false;
@@ -1911,9 +2037,11 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   ss12Lessons.clear();
   ss13Lessons.clear();
   ss14Lessons.clear();
+  ss15Lessons.clear();
   delete element('#ss12-monster-help').dataset.level;
   delete element('#ss13-monster-help').dataset.level;
   delete element('#ss14-monster-help').dataset.level;
+  delete element('#ss15-monster-help').dataset.level;
   ss06Solo = false;
   if (isDuoNativeGame(game.code)) element<HTMLDetailsElement>(`#${game.code.toLowerCase()}-tutorial`).open = true;
   if (game.code === 'SS03' || game.code === 'SS04' || bard) {
@@ -1925,8 +2053,8 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
     'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
     'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'ss06-room-help', 'ss06-role-controls',
     'ss07-room-help', 'ss07-role-controls', 'ss08-room-help', 'ss08-role-controls', 'ss09-room-help',
-    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
-  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14';
+    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'ss15-room-help', 'ss15-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
+  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14' || game.code === 'SS15';
   for (const [id, french, english] of [
     ['undo-button', 'Annuler', 'Undo'],
     ['reset-button', 'Recommencer', 'Reset'],

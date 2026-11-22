@@ -53,7 +53,9 @@ Le tutoriel acquiert ses vingt découvertes au cours des 142 entrées de L4. Les
 
 Le bouton exposé attendu est gris 3 avec plus rose 7 et centre de circuit. Une presse simple présente un centre 5 fermé et 3 ouvert. Les vérifications incluent le cas d’un bouton explicitement superposé dans une situation de test ; les huit cartes distribuées n’utilisent aucune superposition bouton/presse. Une inspection des rendus initiaux des huit salles et d’états intermédiaires de L6–L8 complète la lecture des pixels.
 
-**Portée visuelle :** Happy DOM vérifie les événements, les pixels et l’ordonnancement des animations. Il ne certifie pas le rendu CSS d’un navigateur natif ni la disposition sur un vrai écran mobile. Ce contrôle reste prévu lors de l’intégration Custom 4 ; aucune session de navigateur natif n’est revendiquée pour ce laboratoire.
+Happy DOM vérifie les événements, les pixels et l’ordonnancement des animations du HTML autonome. Le contrôle dans un navigateur a été mené séparément sur le Playground compilé, avec Playwright et Microsoft Edge 158.0.4370.33.
+
+Chromium a rejoué les huit salles ordonnées et contrôlé les commandes, les interruptions, les panneaux terminaux, les vignettes et les liens à 1440 et 390 px. Les vingt découvertes sont obtenues dans le nouvel atelier en L4. Annuler conserve les découvertes et Repartir retourne en L1 avec le panneau caché. Les pixels du bouton violet et les états fermé et ouvert de la presse de dépôt ont été lus dans le canvas.
 
 ## Revue indépendante des finales
 

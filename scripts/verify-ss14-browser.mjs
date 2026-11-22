@@ -173,7 +173,7 @@ try {
   assert.equal(await tutorial.isVisible(), true);
   assert.equal(await progress.textContent(), '0 / 17 découvertes');
 
-  if (!live) {
+  if (!live && !process.argv.includes('--smoke')) {
     const first = witnesses[0].actions[0];
     await capture();
     const move = ref.action(first.id, first.data);

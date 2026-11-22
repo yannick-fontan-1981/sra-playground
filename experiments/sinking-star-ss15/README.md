@@ -72,4 +72,4 @@ Pour régénérer les données publiques après une modification volontaire des 
 - `tests/`, `reference/`, `scripts/solver.mjs` : outils d’auteur et validation, exclus des observations de SRA.
 - `validation/` : résultats reproductibles ; [validation.md](docs/validation.md) en précise la portée.
 
-Le laboratoire ne raccorde pas encore SS15 au catalogue natif Custom 4. Le [prompt d’intégration et de publication](docs/codex-integration-prompt.md) prépare cette étape, avec préservation des animations, des aides et de la frontière publique. La [feuille de route](docs/roadmap.md) sépare le laboratoire livré et cette intégration à venir.
+Le Playground reprend le moteur, les huit salles et le tutoriel en L4 de ce laboratoire. La [feuille de route](docs/roadmap.md) consigne l’intégration native, les validations et la livraison depuis GitHub.
