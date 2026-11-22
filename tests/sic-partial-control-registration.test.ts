@@ -40,6 +40,19 @@ function frame(active: number, indicator: boolean) {
     ),
   );
 }
+test('a planned control comparison keeps its verification turn when the selection mark moves', () => {
+  const before = frame(1,false), after = frame(7,false);
+  const scene = pairedScene(layout,before)!;
+  const q = inquiry();
+  seePair(q,layout,before,after,pointCommand(scene.grid,7),'choice being tested',undefined,false,true);
+  assert.equal(q.reading?.active,1);
+  assert.equal(q.selectionWitness,'choice being tested');
+  assert.equal(q.active,undefined);
+  // An independent selection still activates the general paired inquiry.
+  seePair(q,layout,after,before,pointCommand(scene.grid,1),'independent selection');
+  assert.equal(q.active,'selection_moves_a_distinctive_mark_between_stationary_subjects');
+});
+
 test('selection is measurable on a decorated substrate without any cargo', () => {
   const before = frame(1, false),
     after = frame(7, false);

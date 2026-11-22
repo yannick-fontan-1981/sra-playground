@@ -152,7 +152,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
       const before=visualLayout(b,rows),after=visualLayout(a,next);
       const key=observedCommandKey(cmd);
-      if(learnScope)transportResult=seePair(m.pairInquiry??=inquiry(),before,rows,next,key,a.observation_ref,x?.cooperative?.paired?x.cooperative:undefined,!!x?.landmark);
+      if(learnScope)transportResult=seePair(m.pairInquiry??=inquiry(),before,rows,next,key,a.observation_ref,x?.cooperative?.paired?x.cooperative:undefined,!!x?.landmark,x?.cursorTrial?.stage==='select');
       if(retrySelection&&x?.landmark)recordPlacementVisit(m.placementVisits??={edges:{},tested:{}},x.landmark,b.frame_hash,a.frame_hash,a.observation_ref);
       if(x?.cursorTrial?.recurrentPlacement&&m.placementVisits)m.placementVisits.tested[x.cursorTrial.recurrentPlacement.key]=true;
       if(composeTransport&&b.available_action_refs.includes('ACTION6')){

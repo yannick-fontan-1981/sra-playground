@@ -130,6 +130,7 @@ export function seePair(
   ref: string,
   f?: TransportForecast,
   explainedByPlacement = false,
+  selectionHasPendingMotorTest = false,
 ) {
   const click = op.startsWith('ACTION6:'),
     point = click
@@ -263,6 +264,7 @@ export function seePair(
   if (
     click &&
     s.partialContext &&
+    !selectionHasPendingMotorTest &&
     !explainedByPlacement &&
     old.active !== next.active &&
     old.subjects.every((site, i) => next.subjects[i] === site)
