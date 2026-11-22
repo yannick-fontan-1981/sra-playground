@@ -549,6 +549,108 @@
       ]
     },
     {
+      "version": "v137",
+      "comparisons": {
+        "v135": {
+          "commonPrefix": 39,
+          "identical": false,
+          "previousScore": false,
+          "previousActions": 120
+        },
+        "v136": {
+          "commonPrefix": 39,
+          "identical": false,
+          "previousScore": false,
+          "previousActions": 120
+        }
+      },
+      "backend": "source",
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "digests": [
+        "d9c5d2c7e1ec8aa40d606735228c0589a79674eb4edb6be639514a17ccc49aa4"
+      ],
+      "questions": [
+        {
+          "action": 38,
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "phase": "prepare",
+          "result": "preparation_verified_test_the_silent_input"
+        },
+        {
+          "action": 39,
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "phase": "probe",
+          "result": "previously_silent_input_changed_the_arrangement"
+        }
+      ],
+      "tests": [
+        {
+          "action": 40,
+          "forecast": {
+            "edit": 26,
+            "motor": 6,
+            "actor": "894cb2a9120f333b3ba16a4563ac8a62c76d6d7b28c83bfe05b9f04ebbc1566a",
+            "from": "12,46",
+            "dx": -5,
+            "dy": 0,
+            "distinguishingPixels": 144,
+            "count": 72,
+            "outcomes": [
+              "mark_stays_fixed",
+              "mark_follows_measured_subject"
+            ]
+          },
+          "hypothesis": "compare_a_fixed_mark_with_a_mark_that_follows_a_measured_movement",
+          "observedReferences": [
+            40,
+            8
+          ],
+          "command": 3,
+          "result": "mark_followed_the_measured_motion"
+        },
+        {
+          "action": 45,
+          "forecast": {
+            "edit": 26,
+            "motor": 25,
+            "actor": "894cb2a9120f333b3ba16a4563ac8a62c76d6d7b28c83bfe05b9f04ebbc1566a",
+            "from": "12,46",
+            "dx": 0,
+            "dy": -5,
+            "distinguishingPixels": 48,
+            "count": 72,
+            "outcomes": [
+              "mark_stays_fixed",
+              "mark_follows_measured_subject"
+            ]
+          },
+          "hypothesis": "compare_a_fixed_mark_with_a_mark_that_follows_a_measured_movement",
+          "observedReferences": [
+            40,
+            36
+          ],
+          "command": 1,
+          "result": "mark_followed_the_measured_motion"
+        }
+      ]
+    },
+    {
       "version": "v136",
       "comparisons": {
         "v135": {
