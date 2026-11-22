@@ -367,5 +367,76 @@
       "nonterminal": 4,
       "chosenEndedTheGame": true
     }
-  ]
+  ],
+  "firstPredictedGateChangeOnIndependentGame": {
+    "game": "SS11",
+    "level": 3,
+    "version": "v128",
+    "action": 41,
+    "publicImage": "066237a9d9206d40",
+    "receipt": "continue_a_verified_change_of_relative_positions",
+    "observedOpenGatesBefore": 0,
+    "predictedOpenGatesAfter": 1,
+    "actualResult": "native_game_over",
+    "otherDirectionalInputsThatChangeImageAndKeepGameOpen": [
+      1,
+      4
+    ]
+  },
+  "gatePredictionInIndependentTraces": {
+    "sourceL1v127": {
+      "runs": 100,
+      "gamesReportingPredictedOpening": []
+    },
+    "historicalCustomv127": {
+      "runs": 14,
+      "gamesReportingPredictedOpening": [
+        {
+          "game": "SS12",
+          "entry": [
+            1,
+            2
+          ],
+          "firstActionOfRun": 68,
+          "predictions": 1,
+          "confirmedInNextReading": 1
+        },
+        {
+          "game": "SS13",
+          "entry": [
+            1,
+            2
+          ],
+          "firstActionOfRun": 305,
+          "predictions": 2,
+          "confirmedInNextReading": 2
+        },
+        {
+          "game": "SS14",
+          "entry": [
+            1,
+            2
+          ],
+          "firstActionOfRun": 35,
+          "predictions": 2,
+          "confirmedInNextReading": 2
+        }
+      ]
+    },
+    "winningCustomL3v130": {
+      "runs": 2,
+      "gamesReportingPredictedOpening": [
+        {
+          "game": "SS13",
+          "entry": [
+            3,
+            3
+          ],
+          "firstActionOfRun": 61,
+          "predictions": 13,
+          "confirmedInNextReading": 13
+        }
+      ]
+    }
+  }
 }
