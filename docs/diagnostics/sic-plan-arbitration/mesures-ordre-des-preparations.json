@@ -1,0 +1,1257 @@
+{
+  "solver": "5619e167647afe609ec52743f5cb0cedc70830f8",
+  "pack": "0e262e0eaf693a6c959d33669b2aa8d4ca700ee36f43605e0c5f98dea13a639b",
+  "witness": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+  "workers": 1,
+  "source100OrderForks": {
+    "scope": "Both orders played twice from the most recent identical public origin; continuations use all non-pointed inputs available in both arms.",
+    "results": [
+      {
+        "game": "AS66",
+        "decision": 6,
+        "cost": 2,
+        "origin": "f7b0a6951802004b",
+        "A": 3,
+        "B": 2,
+        "otherArm": 2,
+        "otherEnd": "cd1e856c72fef26f",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": false,
+        "family": "sic_public_input_exploration",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "cd1e856c72fef26f",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "e4b0b8525e93aa84",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": [
+              {
+                "sig": "f87789a0a57dd5784bd004f19dbe844843f19fa56d5906f7a65fa5455ed17bfa",
+                "forward": [
+                  0,
+                  -12
+                ],
+                "reversed": [
+                  0,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              true
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": [
+              {
+                "sig": "f87789a0a57dd5784bd004f19dbe844843f19fa56d5906f7a65fa5455ed17bfa",
+                "forward": [
+                  -16,
+                  0
+                ],
+                "reversed": [
+                  0,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "score": [
+              false,
+              false
+            ],
+            "switched": [
+              {
+                "sig": "f87789a0a57dd5784bd004f19dbe844843f19fa56d5906f7a65fa5455ed17bfa",
+                "forward": [
+                  0,
+                  0
+                ],
+                "reversed": [
+                  16,
+                  0
+                ]
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      },
+      {
+        "game": "AS66",
+        "decision": 8,
+        "cost": 2,
+        "origin": "cd1e856c72fef26f",
+        "A": 4,
+        "B": 1,
+        "otherArm": 4,
+        "otherEnd": "f7b0a6951802004b",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": false,
+        "family": "sic_public_input_exploration",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "f7b0a6951802004b",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "1b4d552a29ec264d",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 4,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      },
+      {
+        "game": "FUIT",
+        "decision": 27,
+        "cost": 2,
+        "origin": "b3f0c3f2facfaee5",
+        "A": 1,
+        "B": 4,
+        "otherArm": 13,
+        "otherEnd": "ac7c5e85719714f7",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": true,
+        "family": "sic_learn_reactive_motion",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "ac7c5e85719714f7",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "bc5b1e8beda54ba2",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 4,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 5,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      },
+      {
+        "game": "FUIT",
+        "decision": 28,
+        "cost": 1,
+        "origin": "b3f0c3f2facfaee5",
+        "A": 1,
+        "B": 4,
+        "otherArm": 13,
+        "otherEnd": "ac7c5e85719714f7",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": true,
+        "family": "sic_learn_reactive_motion",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "ac7c5e85719714f7",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "bc5b1e8beda54ba2",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 4,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 5,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      },
+      {
+        "game": "GRAV",
+        "decision": 4,
+        "cost": 2,
+        "origin": "864f1740139121cf",
+        "A": 1,
+        "B": 3,
+        "otherArm": 1,
+        "otherEnd": "eb50e02fff40fdd5",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": false,
+        "family": "sic_public_input_exploration",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "eb50e02fff40fdd5",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "fb9e946022758247",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 4,
+            "score": [
+              true,
+              true
+            ],
+            "switched": []
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      },
+      {
+        "game": "KLOT",
+        "decision": 20,
+        "cost": 2,
+        "origin": "b70f41cc40f08e72",
+        "A": 1,
+        "B": 3,
+        "otherArm": 1,
+        "otherEnd": "80a9484c44691241",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": false,
+        "family": "sic_learn_selected_access",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "80a9484c44691241",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "80a9484c44691241",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 4,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 5,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      },
+      {
+        "game": "SWCH",
+        "decision": 14,
+        "cost": 2,
+        "origin": "2a01379c598b3d70",
+        "A": 1,
+        "B": 4,
+        "otherArm": 1,
+        "otherEnd": "a4edbca74594b619",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": true,
+        "family": "sic_learn_frame_access",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "a4edbca74594b619",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "a4edbca74594b619",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 4,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      },
+      {
+        "game": "SWCH",
+        "decision": 15,
+        "cost": 1,
+        "origin": "2a01379c598b3d70",
+        "A": 1,
+        "B": 4,
+        "otherArm": 1,
+        "otherEnd": "a4edbca74594b619",
+        "firstChanged": true,
+        "secondChanged": true,
+        "chosen": false,
+        "family": "sic_learn_frame_access",
+        "forwardMatchesArchive": true,
+        "arms": [
+          {
+            "frame": "a4edbca74594b619",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          },
+          {
+            "frame": "a4edbca74594b619",
+            "level": 1,
+            "completed": 0,
+            "state": "NOT_FINISHED",
+            "score": false,
+            "used": 2
+          }
+        ],
+        "controls": [
+          {
+            "id": 1,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 2,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 3,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 4,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          },
+          {
+            "id": 7,
+            "score": [
+              false,
+              false
+            ],
+            "switched": []
+          }
+        ]
+      }
+    ]
+  },
+  "upperEligibility": {
+    "sampleRule": "Longest declared budget per game and level, then first audited filename alphabetically; only direct chronological source runs",
+    "episodes": 39,
+    "opportunities": 208,
+    "gamesAndLevels": 15,
+    "precommitted": [
+      {
+        "game": "COMB",
+        "level": 2,
+        "decision": 24,
+        "cost": 1,
+        "A": 7,
+        "B": 1,
+        "family": "sic_test_prepared_effects"
+      },
+      {
+        "game": "ESCT",
+        "level": 3,
+        "decision": 34,
+        "cost": 2,
+        "A": 1,
+        "B": 3,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "FITE",
+        "level": 3,
+        "decision": 7,
+        "cost": 2,
+        "A": 2,
+        "B": 3,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "FUIT",
+        "level": 2,
+        "decision": 30,
+        "cost": 1,
+        "A": 5,
+        "B": 1,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "GABA",
+        "level": 2,
+        "decision": 4,
+        "cost": 2,
+        "A": 1,
+        "B": 3,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "GABA",
+        "level": 3,
+        "decision": 10,
+        "cost": 1,
+        "A": 2,
+        "B": 4,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "GRAV",
+        "level": 3,
+        "decision": 39,
+        "cost": 2,
+        "A": 2,
+        "B": 3,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "KLOT",
+        "level": 3,
+        "decision": 20,
+        "cost": 2,
+        "A": 1,
+        "B": 3,
+        "family": "sic_learn_selected_access"
+      },
+      {
+        "game": "POLA",
+        "level": 2,
+        "decision": 65,
+        "cost": 1,
+        "A": 4,
+        "B": 5,
+        "family": "sic_test_prepared_effects"
+      },
+      {
+        "game": "POLA",
+        "level": 3,
+        "decision": 49,
+        "cost": 1,
+        "A": 4,
+        "B": 5,
+        "family": "sic_test_prepared_effects"
+      },
+      {
+        "game": "PORT",
+        "level": 2,
+        "decision": 9,
+        "cost": 2,
+        "A": 4,
+        "B": 1,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "PORT",
+        "level": 3,
+        "decision": 17,
+        "cost": 2,
+        "A": 2,
+        "B": 3,
+        "family": "sic_public_input_exploration"
+      },
+      {
+        "game": "REWI",
+        "level": 2,
+        "decision": 90,
+        "cost": 1,
+        "A": 4,
+        "B": 7,
+        "family": "sic_learn_reactive_motion"
+      },
+      {
+        "game": "SKBN",
+        "level": 2,
+        "decision": 41,
+        "cost": 1,
+        "A": 1,
+        "B": 3,
+        "family": "sic_learn_transport_access"
+      },
+      {
+        "game": "SWCH",
+        "level": 2,
+        "decision": 47,
+        "cost": 1,
+        "A": 2,
+        "B": 4,
+        "family": "sic_public_input_exploration"
+      }
+    ]
+  },
+  "ablationAgainstCompetingSelection": [
+    {
+      "variant": {
+        "parent": "00a8d779490eb3bcd72740ad3207882332536a88",
+        "path": "src\\sic\\test-prepared-effects.ts",
+        "original": "4d09dce04efba91c95a414e3767df5e6cd0f6d0d590cd3edb9fcb8f1a2785595",
+        "variant": "9fb7ca3186a410a09195b21e9fa0f2a2184adbd22ccf5e3d0e9e1ca834d4e1ba",
+        "change": "Do not displace a currently proposed cursor selection to measure the motor. Leave ordinary exploration and all other priorities intact."
+      },
+      "original": {
+        "game": "SS14",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "v143",
+        "cap": 100,
+        "initial": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 100,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "686b18a4ec95144d4fa5e4dd9f00d2187a66f1d1604aaf7db5e863886d2efa79"
+        ],
+        "tests": []
+      },
+      "ablated": {
+        "game": "SS14",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "ablate-v143-competing-selection",
+        "cap": 100,
+        "initial": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 100,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "9737a2be6c2f8265ef5c440a703d89dbd621ce23841dfa9ada2f128a54520b47"
+        ],
+        "tests": []
+      },
+      "equalPrefix": 1,
+      "nextCommands": [
+        1,
+        6
+      ]
+    },
+    {
+      "variant": {
+        "parent": "00a8d779490eb3bcd72740ad3207882332536a88",
+        "path": "src\\sic\\test-prepared-effects.ts",
+        "original": "4d09dce04efba91c95a414e3767df5e6cd0f6d0d590cd3edb9fcb8f1a2785595",
+        "variant": "9fb7ca3186a410a09195b21e9fa0f2a2184adbd22ccf5e3d0e9e1ca834d4e1ba",
+        "change": "Do not displace a currently proposed cursor selection to measure the motor. Leave ordinary exploration and all other priorities intact."
+      },
+      "original": {
+        "game": "SS13",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "v143",
+        "cap": 350,
+        "initial": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 98,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 36,
+            "won": true
+          }
+        ],
+        "certifiedTape": [
+          "9da0a37f394044b4677b0a520c2c4835c8b63405d45070a3eb224414161d0ced"
+        ],
+        "tests": []
+      },
+      "ablated": {
+        "game": "SS13",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "ablate-v143-competing-selection",
+        "cap": 350,
+        "initial": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360",
+        "levels": [
+          {
+            "level": 1,
+            "actions": 300,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 36,
+            "won": true
+          }
+        ],
+        "certifiedTape": [
+          "4a47c7a078c18adcb0fa91a18fc8f287c2f13d343d99e9231ace210f2db938e0"
+        ],
+        "tests": []
+      },
+      "equalPrefix": 6,
+      "nextCommands": [
+        2,
+        6
+      ]
+    }
+  ],
+  "autonomousRuns": [
+    {
+      "game": "PRTL",
+      "entry": [
+        2,
+        2
+      ],
+      "witness": {
+        "game": "PRTL",
+        "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+        "version": "v143",
+        "cap": 120,
+        "initial": "486da49e69a50992fb7f94524e55683663ac30e568f3888e9c86046baf0d0773",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "62f5f7bf83ae92e873789d4cc313da00a4aab920d361e0fd383148b5f9704362"
+        ],
+        "tests": []
+      },
+      "candidate": {
+        "game": "PRTL",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "v143",
+        "cap": 120,
+        "initial": "486da49e69a50992fb7f94524e55683663ac30e568f3888e9c86046baf0d0773",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "62f5f7bf83ae92e873789d4cc313da00a4aab920d361e0fd383148b5f9704362"
+        ],
+        "tests": []
+      },
+      "equalCommandsAndImages": 120
+    },
+    {
+      "game": "FOGW",
+      "entry": [
+        2,
+        2
+      ],
+      "witness": {
+        "game": "FOGW",
+        "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+        "version": "v143",
+        "cap": 120,
+        "initial": "38e108c1df1b50268a10427a7abfa718fc452c5fb3d967a645c38c6249bc659f",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 14,
+            "won": true
+          }
+        ],
+        "certifiedTape": [
+          "d16e7a6750ed9a03cc0574464c50ec71ff4f905cca1b6a85efdcf8181fb501bc"
+        ],
+        "tests": []
+      },
+      "candidate": {
+        "game": "FOGW",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "v143",
+        "cap": 120,
+        "initial": "38e108c1df1b50268a10427a7abfa718fc452c5fb3d967a645c38c6249bc659f",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 14,
+            "won": true
+          }
+        ],
+        "certifiedTape": [
+          "d16e7a6750ed9a03cc0574464c50ec71ff4f905cca1b6a85efdcf8181fb501bc"
+        ],
+        "tests": []
+      },
+      "equalCommandsAndImages": 14
+    },
+    {
+      "game": "PRTL",
+      "entry": [
+        3,
+        3
+      ],
+      "witness": {
+        "game": "PRTL",
+        "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+        "version": "v143",
+        "cap": 120,
+        "initial": "95455d86035a4adb6954de917fdc6387f58da3814e5488e96f243ec5c9ba35fb",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "ac9fee1d789eb58c80007462e0834e36aa80a9b6f84f4955af00ae2307143d63"
+        ],
+        "tests": []
+      },
+      "candidate": {
+        "game": "PRTL",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "v143",
+        "cap": 120,
+        "initial": "95455d86035a4adb6954de917fdc6387f58da3814e5488e96f243ec5c9ba35fb",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "ac9fee1d789eb58c80007462e0834e36aa80a9b6f84f4955af00ae2307143d63"
+        ],
+        "tests": []
+      },
+      "equalCommandsAndImages": 120
+    },
+    {
+      "game": "FOGW",
+      "entry": [
+        3,
+        3
+      ],
+      "witness": {
+        "game": "FOGW",
+        "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+        "version": "v143",
+        "cap": 120,
+        "initial": "f5ad78c3623d4d8a899105518044e022a65c9e3ae310517dcd9490779a6880da",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 25,
+            "won": true
+          }
+        ],
+        "certifiedTape": [
+          "d70bbe6527840051a4a7c701b40eaea64177e8894605368d0ad278dc8ee005d9"
+        ],
+        "tests": []
+      },
+      "candidate": {
+        "game": "FOGW",
+        "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+        "version": "v143",
+        "cap": 120,
+        "initial": "f5ad78c3623d4d8a899105518044e022a65c9e3ae310517dcd9490779a6880da",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 25,
+            "won": true
+          }
+        ],
+        "certifiedTape": [
+          "d70bbe6527840051a4a7c701b40eaea64177e8894605368d0ad278dc8ee005d9"
+        ],
+        "tests": []
+      },
+      "equalCommandsAndImages": 25
+    },
+    {
+      "game": "SELE",
+      "entry": [
+        2,
+        2
+      ],
+      "witness": {
+        "game": "SELE",
+        "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+        "version": "v142",
+        "cap": 120,
+        "initial": "83779572eb33f8049e3788b63d9765eaefb07e2289be0fed3058ea30f58cbc65",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "ac7162ce1402be0ed11b148414609a0dc13068b6a861be80a9e7cd30b636af42"
+        ],
+        "tests": []
+      },
+      "candidate": {
+        "game": "SELE",
+        "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+        "version": "v142",
+        "cap": 120,
+        "initial": "83779572eb33f8049e3788b63d9765eaefb07e2289be0fed3058ea30f58cbc65",
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "2b6ebf80b8ff8e664e354bb2df13947fae7002047e75506152214dfc126381b9"
+        ],
+        "tests": []
+      },
+      "equalCommandsAndImages": 10,
+      "firstDifference": {
+        "decision": 11,
+        "witness": 6,
+        "candidate": 6,
+        "witnessFamily": "sic_public_input_exploration",
+        "candidateFamily": "sic_test_prepared_effects"
+      }
+    },
+    {
+      "game": "SELE",
+      "entry": [
+        3,
+        3
+      ],
+      "witness": {
+        "game": "SELE",
+        "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+        "version": "v142",
+        "cap": 120,
+        "initial": "ccc87483faa220d3eecedb2f828c0023312a7052f9686a0fd636479c39a4cb35",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "ee9b37a5f6edd82a2f6af0149e9ff4246554235a9cd6d76958ab4b7ad1736bf1"
+        ],
+        "tests": []
+      },
+      "candidate": {
+        "game": "SELE",
+        "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+        "version": "v142",
+        "cap": 120,
+        "initial": "ccc87483faa220d3eecedb2f828c0023312a7052f9686a0fd636479c39a4cb35",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "897a661e8829e55b940a9cf12be9cac1b2b11abb9ba5c0d43c08c8f34bc37f1d"
+        ],
+        "tests": []
+      },
+      "equalCommandsAndImages": 10,
+      "firstDifference": {
+        "decision": 11,
+        "witness": 6,
+        "candidate": 6,
+        "witnessFamily": "sic_public_input_exploration",
+        "candidateFamily": "sic_test_prepared_effects"
+      }
+    },
+    {
+      "game": "FUIT",
+      "entry": [
+        3,
+        3
+      ],
+      "witness": {
+        "game": "FUIT",
+        "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+        "version": "v142",
+        "cap": 120,
+        "initial": "6d27bf3b8689cf425e9a6fe7b710f082f30de75ab33096ee109cc750a905c949",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "901b9d082a765a7720e7d297cb0c9931467d340f88e62f8e0676ea52106f094c"
+        ],
+        "tests": []
+      },
+      "candidate": {
+        "game": "FUIT",
+        "pack": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c",
+        "version": "v142",
+        "cap": 120,
+        "initial": "6d27bf3b8689cf425e9a6fe7b710f082f30de75ab33096ee109cc750a905c949",
+        "levels": [
+          {
+            "level": 3,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "certifiedTape": [
+          "1a7effb9e5a6632e963cd1befc70222c93e2361aa70f45f5956a18b14621cd81"
+        ],
+        "tests": []
+      },
+      "equalCommandsAndImages": 2,
+      "firstDifference": {
+        "decision": 3,
+        "witness": 3,
+        "candidate": 1,
+        "witnessFamily": "sic_public_input_exploration",
+        "candidateFamily": "sic_test_prepared_effects"
+      }
+    }
+  ]
+}
