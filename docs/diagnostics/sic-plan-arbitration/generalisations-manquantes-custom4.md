@@ -96,6 +96,8 @@ Les constats sur cible indiquent où chercher. Les expériences de conception em
 
 Les chantiers 9 et 13 du programme portent sur l’information hors champ et les relations abstraites. Aucun des blocages ci-dessus n’établit encore qu’une de ces capacités suffirait à le lever. Les promouvoir si une paire de situations de même apparence produit des réponses différentes à cause de l’histoire, ou si une relation permet de prédire un résultat malgré un changement d’apparence. [Programme des quatorze chantiers](chantiers-de-generalisation.md)
 
+Les chantiers 3 (disposition), 5 (stagnation) et 6 (effet irréversible) ont aussi été éprouvés sur SS01 L3. SIC gagne en campagne en 42 coups après un premier essai de poussée au coup 6. [Expérience, reçus et comparaison au coup 118](./ss01-l3-experience-apres-franchissement.md)
+
 ## Registre des travaux
 
 ### Élaborer une composition à partir des effets appris
