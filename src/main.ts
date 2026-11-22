@@ -1089,6 +1089,8 @@ app.innerHTML = `
                     <summary>Information experiment priority</summary>
                     <label>Preferred strategy <select name="informationStrategy"></select></label>
                     <label>Minimum distinct predicted returns <input name="informationOutcomes" type="number" min="2" max="64" value="2"></label>
+                    <label>Identical mechanism refutations before replanning <input name="mechanismRefutationLimit" type="number" min="1" max="64" placeholder="Unlimited"></label>
+                    <label><input name="testFieldFragments" type="checkbox"> Test aligned terrain fragments after observed movement</label>
                     <label>Priority mode <select name="informationMode"><option value="native">Keep the current order</option><option value="shadow">Preview on new decisions</option><option value="active">Apply in new sessions</option></select></label>
                     <p>Compares experiments that already satisfy the current preservation and action limits.</p>
                   </details>

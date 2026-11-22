@@ -32,6 +32,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const openingCuriosity = form.elements.namedItem('openingCuriosity') as HTMLSelectElement;
   const informationStrategy = form.elements.namedItem('informationStrategy') as HTMLSelectElement;
   const informationOutcomes = form.elements.namedItem('informationOutcomes') as HTMLInputElement;
+  const mechanismRefutationLimit = form.elements.namedItem('mechanismRefutationLimit') as HTMLInputElement;
+  const testFieldFragments = form.elements.namedItem('testFieldFragments') as HTMLInputElement;
   const informationMode = form.elements.namedItem('informationMode') as HTMLSelectElement;
   informationStrategy.replaceChildren(...Object.entries(informationStrategies).map(([id, title]) => new Option(title, id)));
   const ruleTitle = form.elements.namedItem('localRuleTitle') as HTMLInputElement;
@@ -127,6 +129,8 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     openingCuriosity.value = pack.openingCuriosity ?? 'native';
     informationStrategy.value = pack.informationPreference?.strategy ?? 'point_contrast';
     informationOutcomes.value = String(pack.informationPreference?.minimumOutcomes ?? 2);
+    mechanismRefutationLimit.value = String(pack.informationPreference?.mechanismRefutationLimit ?? '');
+    testFieldFragments.checked = pack.informationPreference?.fieldRegistration === 'test_aligned_fragments_after_motion';
     informationMode.value = pack.informationPreference?.mode ?? 'native';
     const rule: FrontierLocalRule | undefined = pack.frontier?.localRule;
     ruleTitle.value = rule?.title ?? '';
@@ -159,7 +163,9 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       ...(adaptiveReasoning.checked ? { reasoningMode: 'adaptive' } : {}),
       ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
       ...(informationMode.value !== 'native' ? { informationPreference: { strategy: informationStrategy.value,
-        mode: informationMode.value, minimumOutcomes: informationOutcomes.valueAsNumber } } : {}),
+        mode: informationMode.value, minimumOutcomes: informationOutcomes.valueAsNumber,
+        ...(mechanismRefutationLimit.value ? {mechanismRefutationLimit:mechanismRefutationLimit.valueAsNumber} : {}),
+        ...(testFieldFragments.checked ? {fieldRegistration:'test_aligned_fragments_after_motion'} : {}) } } : {}),
       frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } }));
   }
   showDraft(saved.current.configuration);
@@ -245,7 +251,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
         current.reasoningMode === draft.configuration.reasoningMode ? null : `reasoning modes → ${draft.configuration.reasoningMode ?? 'standard'}`,
         JSON.stringify(current.informationPreference) === JSON.stringify(draft.configuration.informationPreference) ? null
           : `information priority → ${draft.configuration.informationPreference
-            ? `${informationStrategies[draft.configuration.informationPreference.strategy]} (≥ ${draft.configuration.informationPreference.minimumOutcomes} returns, ${draft.configuration.informationPreference.mode}${draft.configuration.informationPreference.mechanismRefutationLimit ? `, reconsider after ${draft.configuration.informationPreference.mechanismRefutationLimit} identical mechanism refutations` : ''})`
+            ? `${informationStrategies[draft.configuration.informationPreference.strategy]} (≥ ${draft.configuration.informationPreference.minimumOutcomes} returns, ${draft.configuration.informationPreference.mode}${draft.configuration.informationPreference.mechanismRefutationLimit ? `, reconsider after ${draft.configuration.informationPreference.mechanismRefutationLimit} identical mechanism refutations` : ''}${draft.configuration.informationPreference.fieldRegistration ? ', test fragment alignment after movement' : ''})`
             : 'current order'}`,
         current.maxDepth === draft.configuration.maxDepth ? null : `depth ${current.maxDepth} → ${draft.configuration.maxDepth}`,
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,

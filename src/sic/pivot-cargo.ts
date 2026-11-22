@@ -14,7 +14,9 @@ type Layout = { origin: NativePoint; pitch: number; floor: string[]; destination
 type Position = { actor: NativePoint; cargo: NativePoint[][]; held: number; delivered: number };
 type Intent = 'move' | 'attach' | 'turn' | 'drop';
 type Move = { input: string; intent: Intent; next: Position; subject: number };
-type Memory = { epoch: number; layout: Layout; at: Position; steps: Move[]; refs: string[]; moves: boolean; interactions: Intent[]; failed: boolean };
+type FieldRegistration = { before: string; after: string; command: string; pitch: number; from: NativePoint; to: NativePoint;
+  interpretations: number; consistentWithMotion: number; withDeliveryPlan: number };
+type Memory = { fieldRegistration?: FieldRegistration; epoch: number; layout: Layout; at: Position; steps: Move[]; refs: string[]; moves: boolean; interactions: Intent[]; failed: boolean };
 type Landing = { point: NativePoint; pixels: number[] };
 type Proposal = NativeProposal & { local: Memory; move: Move; needId: string; landings?: Landing[][] };
 type ReceiverBinding = { cargo: number; receiver: number };
@@ -73,8 +75,7 @@ function splitFields(parts: Component[], rows: NativeRows): Field[] {
   return [...found.values()];
 }
 
-function measure(rows: NativeRows, reassemble = false, receivers?: ReceiverBinding[]): Layout[] {
-  const parts = geometricComponents(rows);
+function measure(rows: NativeRows, reassemble = false, receivers?: ReceiverBinding[], parts = geometricComponents(rows)): Layout[] {
   const results: Layout[] = [];
   const fields = reassemble ? splitFields(parts, rows)
     : parts.filter(p => width(p.bbox) === height(p.bbox) && width(p.bbox) >= 30 && p.area > width(p.bbox) * 4);
@@ -336,25 +337,38 @@ function initial(rows: NativeRows, epoch: number, witness: CargoWitness | null):
   return { epoch, layout, steps, at: layout.initial, refs: prior?.refs ?? [], moves: !!prior, interactions: prior?.interactions ?? [], failed: false };
 }
 
-function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined): Memory | null {
-  const receipt = execution?.readPriorDirectionalScene?.(rows => measure(rows));
+function acquireMotion(rows: NativeRows, ref: string, epoch: number, execution: NativeExecution | undefined, testFragments: boolean): Memory | null {
+  const receipt = execution?.readPriorDirectionalScene?.(prior => {
+    const parts = geometricComponents(prior);
+    const layouts = measure(prior, false, undefined, parts);
+    if (layouts.length || !testFragments) return {layouts, reassembled:false};
+    return {layouts:measure(prior, true, undefined, parts), reassembled:true};
+  });
   if (!receipt || receipt.afterRef !== ref || receipt.levelEpoch !== epoch) return null;
   const direction = directions.find(([input]) => input === receipt.command);
   if (!direction) return null;
   const [input, dx, dy] = direction;
-  const options = receipt.scene.flatMap(layout => {
+  const compatible = receipt.scene.layouts.flatMap(layout => {
     const at = layout.initial, actor = shift(at.actor, dx, dy);
     if (!layout.floor.includes(key(actor)) || at.cargo.some(group => group.some(point => same(point, actor)))) return [];
     const next = { ...at, actor };
     if (!witnessed(rows, layout, at, { input, intent: 'move', next, subject: -1 })) return [];
-    const steps = search(layout, next);
-    return steps?.length ? [{ layout, at: next, steps }] : [];
+    return [{layout, at:next}];
+  });
+  const options = compatible.flatMap(candidate => {
+    const steps = search(candidate.layout, candidate.at);
+    return steps?.length ? [{...candidate, steps}] : [];
   });
   if (options.length !== 1) return null;
-  return { ...options[0]!, epoch, moves: true, interactions: [], failed: false, refs: [receipt.beforeRef, ref] };
+  const choice = options[0]!;
+  const fieldRegistration: FieldRegistration | undefined = receipt.scene.reassembled ? {
+    before:receipt.beforeRef, after:ref, command:input, pitch:choice.layout.pitch, from:choice.layout.initial.actor, to:choice.at.actor,
+    interpretations:receipt.scene.layouts.length, consistentWithMotion:compatible.length, withDeliveryPlan:options.length,
+  } : undefined;
+  return {...choice, ...(fieldRegistration ? {fieldRegistration} : {}), epoch, moves:true, interactions:[], failed:false, refs:[receipt.beforeRef, ref]};
 }
 
-export function createSicPivotCargo(family = pivotCargoId, transferObservedMotion = false): NativeFamily<Proposal> {
+export function createSicPivotCargo(family = pivotCargoId, transferObservedMotion = false, testFragments = false): NativeFamily<Proposal> {
   const learns = family === learnPivotCargoId;
   let state: Memory | null = null;
   let witness: CargoWitness | null = null;
@@ -375,7 +389,7 @@ export function createSicPivotCargo(family = pivotCargoId, transferObservedMotio
       const trained = witness?.epoch === observation.level_epoch && witness.score === observation.levels_completed ? witness : null;
       const local = state?.epoch === observation.level_epoch ? state
         : learns ? (transferObservedMotion && trained ? initial(rows, observation.level_epoch, trained) : null)
-          ?? acquireMotion(rows, ref, observation.level_epoch, execution) : initial(rows, observation.level_epoch, trained);
+          ?? acquireMotion(rows, ref, observation.level_epoch, execution, testFragments) : initial(rows, observation.level_epoch, trained);
       const move = local?.steps[0];
       if (!local || local.failed || !move) return null;
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(r => r !== ref)];
@@ -405,6 +419,10 @@ export function createSicPivotCargo(family = pivotCargoId, transferObservedMotio
       const tile = (p: string) => tileBox(layout, p.split(',').map(Number) as [number, number]);
       return {
         status: 'proposed', kind: family, local, move, needId: need.id,
+        ...(local.fieldRegistration?.after === ref ? {fieldRegistrationForecast:{
+          basis:'aligned_terrain_fragments_after_observed_motion', ...local.fieldRegistration,
+          nextAction:move.input, nextIntent:move.intent, expectedCarrier:move.next.actor,
+        }} : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
         steps: series.map((step, index) => ({ action: actions[index], expected_after: step.next.actor })),
         ...(series.length > 1 ? { landings } : {}),

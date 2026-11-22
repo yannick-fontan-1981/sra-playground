@@ -5,14 +5,15 @@ export interface InformationPreference {
   readonly strategy: InformationStrategy;
   readonly minimumOutcomes: number;
   readonly mechanismRefutationLimit?: number;
+  readonly fieldRegistration?: 'test_aligned_fragments_after_motion';
 }
 
 export function compileInformationPreference(input: unknown): InformationPreference {
   if (!input || typeof input !== 'object' || Array.isArray(input)
-    || Object.keys(input).some(key => !['minimumOutcomes','mode','strategy','mechanismRefutationLimit'].includes(key))) {
+    || Object.keys(input).some(key => !['minimumOutcomes','mode','strategy','mechanismRefutationLimit','fieldRegistration'].includes(key))) {
     throw new TypeError('The information preference requires a strategy, a mode and a minimum number of predicted outcomes.');
   }
-  const { mode, strategy, minimumOutcomes, mechanismRefutationLimit } = input as Record<string, unknown>;
+  const { mode, strategy, minimumOutcomes, mechanismRefutationLimit, fieldRegistration } = input as Record<string, unknown>;
   if ((mode !== 'shadow' && mode !== 'active') || !isInformationStrategy(strategy)
     || typeof minimumOutcomes !== 'number' || !Number.isSafeInteger(minimumOutcomes) || minimumOutcomes < 2 || minimumOutcomes > 64) {
     throw new TypeError('Select a registered information strategy, an execution mode and 2–64 distinct predicted outcomes.');
@@ -21,7 +22,10 @@ export function compileInformationPreference(input: unknown): InformationPrefere
       !Number.isSafeInteger(mechanismRefutationLimit) || mechanismRefutationLimit < 1 || mechanismRefutationLimit > 64)) {
     throw new TypeError('The number of identical conflicting mechanism returns must be between 1 and 64.');
   }
-  return Object.freeze({ mode, strategy, minimumOutcomes, ...(mechanismRefutationLimit === undefined ? {} : {mechanismRefutationLimit}) });
+  if (fieldRegistration !== undefined && fieldRegistration !== 'test_aligned_fragments_after_motion')
+    throw new TypeError('Unrecognized field registration hypothesis.');
+  return Object.freeze({ mode, strategy, minimumOutcomes, ...(mechanismRefutationLimit === undefined ? {} : {mechanismRefutationLimit}),
+    ...(fieldRegistration === undefined ? {} : {fieldRegistration}) });
 }
 
 export interface InformationOfferSummary {
