@@ -98,6 +98,8 @@ Les chantiers 9 et 13 du programme portent sur l’information hors champ et les
 
 Les chantiers 3 (disposition), 5 (stagnation) et 6 (effet irréversible) ont aussi été éprouvés sur SS01 L3. SIC gagne en campagne en 42 coups après un premier essai de poussée au coup 6. [Expérience, reçus et comparaison au coup 118](./ss01-l3-experience-apres-franchissement.md)
 
+Au L4 de SS01, SIC associe ces chantiers pour planifier plusieurs transformations avant la première dépense de caisse et récupérer après un déplacement bloquant du mécanisme. [Campagne sur le site local, reçus et test de reset](./ss01-l4-composition-et-reprise.md)
+
 ## Registre des travaux
 
 ### Élaborer une composition à partir des effets appris
