@@ -27,6 +27,20 @@ function workshop(): Board {
   };
 }
 const limits = { maxDepth: 50, maxNodes: 500 };
+test('a stationary control is insufficient evidence of deadlock when it can still deliver a support', () => {
+  const board: Board = {
+    width:9, height:4, floor:new Set([0,11,12,13,15,34]), actor:11, goals:[15],
+    parts:[0,34], roles:['load','exchanger'], pivotIndex:1,
+    motors:[{op:'east',delta:1},{op:'west',delta:-1},{op:'north',delta:-9},{op:'south',delta:9}],
+    transport:{op:'exchange',land:from => from === 0 ? 12 : from === 12 ? 0 : null},
+  };
+  // The isolated load can be delivered to 12, then pushed into the gap at 14.
+  assert.ok(closedSupportRegion(board, 100)! > 0);
+  assert.equal(closedSupportRegion(board, 100, new Set(['load'])), null);
+  const cut = {...board, transport:{op:'exchange',land:() => null}};
+  assert.ok(closedSupportRegion(cut, 100, new Set(['load']))! > 0);
+  assert.equal(closedSupportRegion(board, 1, new Set(['load'])), null);
+});
 test('projects a second consumable and its pushing stance before spending the first on a two-cell gap', () => {
   const board = workshop(),
     allow = (role: string) => role === 'slab';

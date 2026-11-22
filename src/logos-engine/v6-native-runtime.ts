@@ -2794,7 +2794,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 196 : 197,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 198 : 199,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

@@ -137,9 +137,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     m.localCapacity = nextLocalLevel(localCarry);
     m.previewLearning = acceptPreviewCarry(previewCarry, o);
     m.contactFrontier = inheritFrontierContacts(contactFrontier?.contactEvidence, m.previewLearning, lessons);
+    if (m.previewLearning.terminal?.length && contactFrontier?.passengerWitnesses)
+      m.contactFrontier.inheritedPassengers = {...contactFrontier.passengerWitnesses};
     if (transportRetry?.epoch === o.level_epoch) {
       m.transportRetry = transportRetry;
       m.contactFrontier.recoveredEdges = transportRetry.edges;
+      m.contactFrontier.repair = transportRetry.repair;
     }
   }
   function acquire(
@@ -231,8 +234,13 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(followMarkedPose)cursor.followMarkedPose=true;
     }
     const frontierResult=x?.contactProject ? recordFrontierContact(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next,x.contactProject) : undefined;
-    if(limits && m.contactFrontier?.inheritedSupports?.length && (!x?.contactProject || frontierResult==='movement_refuted' || frontierResult==='contact_effect_refuted'))
-      observeStrandedTransport(m.contactFrontier,learning,b,a,rows,next,observedCommandKey(cmd),limits);
+    if(limits && m.contactFrontier?.inheritedSupports?.length) {
+      const trial=x?.contactProject;
+      if(!trial || frontierResult==='movement_refuted' || frontierResult==='contact_effect_refuted')
+        observeStrandedTransport(m.contactFrontier,learning,b,a,rows,next,observedCommandKey(cmd),limits);
+      else if(frontierResult==='object_displaced' && trial.project.purpose!=='reach_goal')
+        observeStrandedTransport(m.contactFrontier,learning,b,a,rows,next,observedCommandKey(cmd),limits,trial);
+    }
     if(!x?.contactProject && b.level_epoch===a.level_epoch && learning.partMotion)
       observeRegionArrival(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next);
     const result=recordExperiment(m, b, a, cmd, rows, next, x);
@@ -454,6 +462,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           } : {}),
         }} : {}),
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
+          ...(m.contactFrontier?.repair ? {afterReset:{checkpoint:m.contactFrontier.repair.frame,
+            excludedPush:m.contactFrontier.repair.edge, alternativeLength:m.contactFrontier.repair.project.steps.length}} : {}),
           ...(contactProject.project.passenger?{passenger:contactProject.project.passenger}:{}),
           site:contactProject.project.site,...(contactProject.project.preparations?{preparations:contactProject.project.preparations}:{}),from:contactProject.step.from,to:contactProject.step.to,
           next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,priorContact:contactProject.priorContact,
@@ -529,8 +539,15 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     },
     record(b, a, c, r, n, p) {
       const outcome = acquire(b, a, c, r, n, p.experiment);
+      const proof = m.contactFrontier?.deadlock;
       return {
-        events: outcome ? [{ kind: 'sic_preparation_outcome', epoch: b.level_epoch, ...outcome }] : [],
+        events: [
+          ...(outcome ? [{ kind: 'sic_preparation_outcome', epoch: b.level_epoch, ...outcome }] : []),
+          ...(proof?.ref === a.observation_ref && proof.repair ? [{kind:'sic_control_mobility_lost',
+            before:proof.previous, after:proof.ref, excludedPush:proof.edge, configurations:proof.configurations,
+            priorPushes:proof.repair.priorPushes, remainingPushes:proof.repair.remainingPushes,
+            alternativeLength:proof.repair.project.steps.length, restoreFrame:proof.repair.frame}] : []),
+        ],
       };
     },
     requestedStopReason(o) {
@@ -545,8 +562,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if (!proof || !entry) return;
       const edges = [...new Set([...(m.contactFrontier?.recoveredEdges ?? []), proof.edge])];
       const restored = structuredClone(entry) as typeof m;
-      restored.transportRetry = { epoch: o.level_epoch, edges };
-      if (restored.epoch === o.level_epoch) (restored.contactFrontier ??= newContactMemory()).recoveredEdges = edges;
+      restored.transportRetry = { epoch: o.level_epoch, edges, ...(proof.repair ? {repair:proof.repair} : {}) };
+      if (restored.epoch === o.level_epoch) {
+        const frontier = restored.contactFrontier ??= newContactMemory();
+        frontier.recoveredEdges = edges;
+        if (proof.repair) frontier.repair = proof.repair;
+      }
       return restored;
     },
     state: () => m,

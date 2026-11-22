@@ -31,10 +31,12 @@ export type SupportLaw = {
 };
 export type ContactMemory = {
   passengerWitnesses?: Record<string, string>;
+  inheritedPassengers?: Record<string, string>;
   inheritedSupports?: SupportLaw[];
   supportLessons?: SupportLaw[];
   pendingEntries?: Record<number, SupportLaw>;
-  deadlock?: { ref: string; previous: string; edge: string; configurations: number };
+  deadlock?: { ref: string; previous: string; edge: string; configurations: number; repair?: ContactRepair };
+  repair?: ContactRepair;
   recoveredEdges?: string[];
   inheritedContact?: Record<string, string>;
   contactEvidence?: Record<string, { sites: string[]; ref: string }>;
@@ -50,6 +52,14 @@ export type ContactMemory = {
   active?: Project;
   arrival?: boolean;
   explorer?: { actor: string; origin: XY };
+};
+export type ContactRepair = {
+  frame: string;
+  edge: string;
+  project: Project;
+  passenger?: { role: string; witness: string };
+  priorPushes: string[];
+  remainingPushes: string[];
 };
 export const newContactMemory = (): ContactMemory => ({ denied: [], displaced: [], supported: [] });
 
@@ -175,6 +185,28 @@ function appearanceVariant(template: string | undefined, appearance: string) {
 }
 function passengerBinding(b: Board, actor: string, role: string) {
   return JSON.stringify([actor, role, b.roles[b.pivotIndex], b.transport?.op]);
+}
+function calibratedBoard(
+  fit: NonNullable<ReturnType<typeof contactBoard>>, l: PreviewLearning, o: NativeObservation, rows: NativeRows
+) {
+  const b = fit.board;
+  if (!b.transport || b.pivotIndex < 0) return null;
+  const local = fittedTransport(l, fit.g.actor, visualLayout(o, rows), fit.g, new Set(b.motors.map(m => m.op)),
+    new Set(o.available_action_refs), { epoch: o.level_epoch, pivot: b.roles[b.pivotIndex]! });
+  return local ? { ...b, transport: local } : null;
+}
+
+function repairWithPassenger(b: Board, role: string, witness: string, allowed: (at: number) => boolean,
+  denied: Set<string>, limits: {maxNodes:number;maxDepth:number}) {
+  const i = b.roles.indexOf(role);
+  if (i < 0 || i === b.pivotIndex) return null;
+  const project = passengerProject(b, i, witness, allowed, denied, limits);
+  if (project?.purpose !== 'reach_goal') return null;
+  const transfer = project.steps.find(s => s.passenger);
+  if (transfer) project.passenger = {
+    role, witness, source: transfer.passenger!.source, destination: transfer.placed!, pushes: transfer.passenger!.pushes,
+  };
+  return project;
 }
 function fittedTransport(
   learning: PreviewLearning,
@@ -379,6 +411,8 @@ export function proposeFrontierContact(
       };
   }
   const verifyEntry = !!project;
+  if (!project && m.repair?.frame === o.frame_hash && m.repair.project.steps[0]?.from === board.actor)
+    project = m.repair.project;
   const local = m.arrival ? new Set(fit.roles.filter((r) => !m.displaced.includes(r))) : new Set<string>();
   const nextStep = m.active?.steps[0];
   if (!project && (!local.size || m.active?.preparations || m.active?.passenger) && nextStep?.from === board.actor && m.active) {
@@ -400,15 +434,16 @@ export function proposeFrontierContact(
     const inherited = m.inheritedSupports?.filter((v) => v.actor === g.actor);
     if (inherited?.length && board.goals.length) {
       const terrains = new Map<number, number | null>();
-      project = composeSupportPlan(
-        board,
-        (role, id) => {
-          if (!terrains.has(id)) terrains.set(id, terrainAt(id));
-          return inherited.some((law) => law.role === role && law.terrain === terrains.get(id));
-        },
-        deny,
-        limits
-      );
+      const permits = (role: string, id: number) => {
+        if (!terrains.has(id)) terrains.set(id, terrainAt(id));
+        return inherited.some((law) => law.role === role && law.terrain === terrains.get(id));
+      };
+      const passenger = m.repair?.passenger;
+      if (passenger) {
+        const b = calibratedBoard(fit, l, o, rows);
+        if (b) project = repairWithPassenger(b, passenger.role, passenger.witness, at => permits(passenger.role, at), deny, limits);
+      }
+      project ??= composeSupportPlan(board, permits, deny, limits);
       if (!project && board.transport && board.pivotIndex >= 0) {
         for (const [i, part] of board.parts.entries()) {
           if (i === board.pivotIndex) continue;
@@ -624,7 +659,8 @@ export function observeStrandedTransport(
   rows: NativeRows,
   next: NativeRows,
   op: string,
-  limits: { maxNodes: number; maxDepth: number }
+  limits: { maxNodes: number; maxDepth: number },
+  experiment?: FrontierContact
 ) {
   if (!m.inheritedSupports?.length || b.level_epoch !== a.level_epoch || b.levels_completed !== a.levels_completed)
     return;
@@ -647,6 +683,47 @@ export function observeStrandedTransport(
   if (!single(g.actor, pivot) || !single(board.roles[board.pivotIndex]!, dest)) return;
   const parts = board.parts.slice();
   parts[board.pivotIndex] = dest;
+  if (experiment) {
+    // A successful experimental push can still destroy a necessary capability.
+    // Evaluate the outcome against the locally witnessed geometry. A useful
+    // final placement or a search stopped by its budget is not a reset proof.
+    const pushes = (p: number) => board.motors.filter(motor =>
+      board.floor.has(stepCell(board, p, motor.delta)) && board.floor.has(stepCell(board, p, -motor.delta))
+    ).map(motor => motor.op);
+    const priorPushes = pushes(pivot), remainingPushes = pushes(dest);
+    if (!priorPushes.length || remainingPushes.length || experiment.project.purpose === 'reach_goal') return;
+    const local = calibratedBoard(fit, learning, b, rows);
+    if (!local) return;
+    const edge = edgeKey(board.actor, op, board.parts);
+    const denied = new Set([...m.denied, ...(m.recoveredEdges ?? []), edge]);
+    const roles = new Set(board.roles.filter((_,i) => i !== board.pivotIndex));
+    const configurations = closedSupportRegion({...local, actor:pivot, parts}, limits.maxNodes, roles);
+    if (configurations === null) return;
+    const terrains = new Map<number, number | undefined>();
+    const allowed = (role: string, id: number) => {
+      if (!terrains.has(id)) terrains.set(id, dominantColor(rows,
+        [g.origin[0] + (id % g.width) * g.pitch[0], g.origin[1] + Math.floor(id / g.width) * g.pitch[1]], g.pitch));
+      return m.inheritedSupports?.some(law => law.actor === g.actor && law.role === role && law.terrain === terrains.get(id)) ?? false;
+    };
+    let project: Project | null = null;
+    let passenger: ContactRepair['passenger'];
+    for (const role of roles) {
+      const binding = passengerBinding(board, g.actor, role);
+      const witness = m.passengerWitnesses?.[binding] ?? m.inheritedPassengers?.[binding];
+      if (!witness) continue;
+      project = repairWithPassenger(local, role, witness, site => allowed(role, site), denied, limits);
+      if (project) {
+        passenger = {role, witness};
+        break;
+      }
+    }
+    project ??= composeSupportPlan(local, allowed, denied, limits);
+    if (project) {
+      const repair = {frame:b.frame_hash, edge, project, priorPushes, remainingPushes, ...(passenger ? {passenger} : {})};
+      m.deadlock = {ref:a.observation_ref, previous:b.observation_ref, edge, configurations, repair};
+    }
+    return;
+  }
   const states = closedSupportRegion({ ...board, parts, actor: pivot }, limits.maxNodes);
   if (states === null) return;
   const prior = proposeFrontierContact({ ...m, active: undefined, verify: undefined }, learning, b, rows, limits);

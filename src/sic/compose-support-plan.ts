@@ -264,7 +264,7 @@ export function composeSupportPlan(
 
 // Exhaust the public push/transport model without the corridor or depth
 // pruning used for finding plans. An interrupted search is inconclusive.
-export function closedSupportRegion(b: Board, maxNodes: number): number | null {
+export function closedSupportRegion(b: Board, maxNodes: number, transportedRoles?: ReadonlySet<string>): number | null {
   const queue = [{ actor: b.actor, parts: b.parts, added: [] as number[] }],
     seen = new Set<string>();
   for (const n of queue) {
@@ -277,6 +277,17 @@ export function closedSupportRegion(b: Board, maxNodes: number): number | null {
     seen.add(key);
     for (const [i, p] of n.parts.entries()) {
       if (p < 0) continue;
+      // Relaxation for a closure proof: permit a witnessed passenger to move
+      // independently of the subject, even without a clear launch stance.
+      // Ordinary walking already grants the converse independent movement.
+      if (i !== b.pivotIndex && transportedRoles?.has(b.roles[i]!) && b.transport) {
+        const dest = b.transport.land(p, n.parts[b.pivotIndex]!);
+        if (dest !== null && dest >= 0 && dest < b.width * b.height && !n.parts.includes(dest)) {
+          const parts = n.parts.slice(), boundary = !floor.has(dest);
+          parts[i] = boundary ? -1 : dest;
+          queue.push({ actor: n.actor, parts, added: boundary ? [...n.added, dest].sort(ascending) : n.added });
+        }
+      }
       for (const motor of b.motors) {
         const dest = stepCell(b, p, motor.delta);
         if (dest < 0 || n.parts.includes(dest) || !paths.has(stepCell(b, p, -motor.delta))) continue;
