@@ -1,0 +1,216 @@
+{
+  "game": "SS16",
+  "version": "0.1.0",
+  "success": true,
+  "specHashes": {
+    "1": "2c49c4c12091c0d1554dfd2648ceca47ec9db8bff9056cac68034937761ae03e",
+    "2": "b1f06a0b9b6f44d54919f3905ea0ee755a08954ea116e4f74ab6c79343384407",
+    "3": "4cf35d4e1f66d292c15e09106faefee4b4c650f9fb5665f5bf984374bb3edb94",
+    "4": "473bfea0d7404347647624165ba7a0eb3e2c1b1d1725a17f3e19e11cc91e1018",
+    "5": "423d22b240dfd239d5c944ee71205adff408b8603e565e92e9c912c4a92598a1",
+    "6": "50429b2008c6cf5e6b5e843ded686500f3527d56a8a1cf3e9878d232093f728d",
+    "7": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
+    "8": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986"
+  },
+  "scope": "Initial fixed-circuit walking topology, exact local counter-branches, reproduced historical bypasses and explicitly bounded independent reviews.",
+  "initialTopology": [
+    {
+      "level": 1,
+      "specSha256": "2c49c4c12091c0d1554dfd2648ceca47ec9db8bff9056cac68034937761ae03e",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 102,
+      "purePresses": true
+    },
+    {
+      "level": 2,
+      "specSha256": "b1f06a0b9b6f44d54919f3905ea0ee755a08954ea116e4f74ab6c79343384407",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 124,
+      "purePresses": true
+    },
+    {
+      "level": 3,
+      "specSha256": "4cf35d4e1f66d292c15e09106faefee4b4c650f9fb5665f5bf984374bb3edb94",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 27,
+      "purePresses": true
+    },
+    {
+      "level": 4,
+      "specSha256": "473bfea0d7404347647624165ba7a0eb3e2c1b1d1725a17f3e19e11cc91e1018",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 37,
+      "purePresses": true
+    },
+    {
+      "level": 5,
+      "specSha256": "423d22b240dfd239d5c944ee71205adff408b8603e565e92e9c912c4a92598a1",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 143,
+      "purePresses": true
+    },
+    {
+      "level": 6,
+      "specSha256": "50429b2008c6cf5e6b5e843ded686500f3527d56a8a1cf3e9878d232093f728d",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 189,
+      "purePresses": true
+    },
+    {
+      "level": 7,
+      "specSha256": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 96,
+      "purePresses": true
+    },
+    {
+      "level": 8,
+      "specSha256": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986",
+      "initialReachableGoals": 0,
+      "floorCellsReached": 103,
+      "purePresses": true
+    }
+  ],
+  "localLevels2to4": [
+    {
+      "level": 2,
+      "turn": 9,
+      "alternative": "R",
+      "effect": "Le Marchand ne peut pas lancer la file de deux blocs avant le retour du Voleur.",
+      "observed": {
+        "refusals": 1,
+        "dead": false,
+        "stones": 5
+      }
+    },
+    {
+      "level": 3,
+      "turn": 4,
+      "alternative": "U",
+      "effect": "Monter avant d’avoir laissé le miroir sur le bouton retire la plateforme sous le Voleur.",
+      "observed": {
+        "dead": true,
+        "deadHeroes": [
+          "thief"
+        ],
+        "platformActive": [
+          false,
+          false,
+          false
+        ]
+      }
+    },
+    {
+      "level": 3,
+      "turn": 5,
+      "alternative": "R",
+      "effect": "Marcher vers l’est au lieu de refléter tire le miroir hors de son bouton et enferme le Voleur au bout de l’alcôve.",
+      "observed": {
+        "refusals": 0,
+        "dead": false,
+        "mirror": {
+          "at": {
+            "x": 6,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        "nextThiefActions": {
+          "U": {
+            "failed": true,
+            "dead": false
+          },
+          "D": {
+            "failed": true,
+            "dead": false
+          },
+          "L": {
+            "failed": true,
+            "dead": false
+          },
+          "R": {
+            "failed": true,
+            "dead": false
+          },
+          "X": {
+            "failed": true,
+            "dead": false
+          }
+        }
+      }
+    },
+    {
+      "level": 4,
+      "turn": 5,
+      "alternative": "CCUCCL",
+      "effect": "Si le Marchand quitte sa commande avant la sortie du Voleur, la première presse libère celui-ci mais la presse de dépôt ne produit aucun appui.",
+      "observed": {
+        "supports": [],
+        "dead": false,
+        "failed": false,
+        "secondCircuit": false
+      }
+    },
+    {
+      "level": 4,
+      "turn": 7,
+      "alternative": "",
+      "effect": "Après la première impulsion, le Voleur a été déplacé sans reprendre le bloc de la porte, et un seul appui existe.",
+      "observed": {
+        "supports": [
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "stones": [
+          {
+            "x": 6,
+            "y": 7
+          },
+          {
+            "x": 9,
+            "y": 9
+          }
+        ],
+        "thief": {
+          "x": 4,
+          "y": 7
+        },
+        "pressure": true,
+        "pistonPushes": 2
+      }
+    }
+  ],
+  "workshop": {
+    "historicalWinningBypassesCorrected": 2,
+    "restrictedSearches": 96,
+    "states": 9576,
+    "transitions": 47880,
+    "allQueuesExhausted": true
+  },
+  "finalDesigner": {
+    "success": true,
+    "checks": 20,
+    "specHashes": {
+      "5": "423d22b240dfd239d5c944ee71205adff408b8603e565e92e9c912c4a92598a1",
+      "6": "50429b2008c6cf5e6b5e843ded686500f3527d56a8a1cf3e9878d232093f728d",
+      "7": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
+      "8": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986"
+    }
+  },
+  "independentFinals": {
+    "success": true,
+    "status": "targeted-review-passed",
+    "specHashes": {
+      "7": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
+      "8": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986"
+    }
+  },
+  "limitations": [
+    "Initial flood-fill holds circuits fixed and ignores actor obstacles; it is not a search over actions.",
+    "Local counter-branches establish their stated effects only.",
+    "Restricted searches freeze the resources and inactive heroes listed in the underlying report.",
+    "Alternative advanced solutions are allowed; no global minimum, uniqueness or mandatory reference-route resource count is claimed."
+  ]
+}

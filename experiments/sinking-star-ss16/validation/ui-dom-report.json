@@ -1,0 +1,306 @@
+{
+  "success": true,
+  "htmlSha256": "ba288a63c7c0ac0b92613e6a95b23395bbcb0c2f255b6e1cd12260dddc3b6c39",
+  "scope": "focused-ui-and-full-campaign",
+  "tutorialLevel": 1,
+  "pedagogicalFixtureLevel": 1,
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Seventeen compiled-HTML role fixtures cover single pushes, mixed chains, rear pulls, fixed supports, remote presses, hydraulics and combat.",
+    "Global reflection uses nearest-source priority, exchanges equally distant actors and draws shape-specific previews.",
+    "Gray-backed buttons and black/gray press centers have the exact expected pixels.",
+    "Mirror warnings flash only involved backs, preserve diagonals and lock ordinary controls.",
+    "Keys 1/2/3, repeated Tab, all three role buttons and image clicks select correctly without advancing the world; Shift+Tab and off-canvas clicks are respected.",
+    "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries and Restart opens the actual tutorial.",
+    "Reduced-motion mode paints the final result without timer waits.",
+    "Defeat appears only after the combat animation and its Undo restores the three living heroes.",
+    "Victory waits for all three heroes and the last frame, disables ordinary controls, and can be undone or restarted.",
+    "All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; only level 1 shows the tutorial.",
+    "The actual workshop route earns every discovery from displayed public pixels; later rooms add none.",
+    "The compiled HTML completes all eight real rooms with every frame and duration checked, including Undo and replay of each completion."
+  ],
+  "roleCoverage": [
+    {
+      "case": "Merchant moves one crate",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant refuses a file",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Warrior translates both companions and a crate as one file",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "blocked file leaves every participant in place",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls one rear crate without the next",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief sideways departure releases the rear crate",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief cannot push a front crate",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief can recover the Merchant without recursive pushing",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief recovers the mirror and preserves its face",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "sunken supports are fixed and can be crossed",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant crate becomes a water support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Warrior file builds one permanent support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "voluntary water landing refuses every actor in the file",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "press moves Thief without rear traction",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "press builds a remote water support",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "a forced landing waits for the hydraulic bridge",
+      "frames": 9,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "two pressed monsters fight simultaneously away from the trio",
+      "frames": 11,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square preview",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange two roles without passive abilities",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    }
+  ],
+  "deviceGlyphCoverage": [
+    {
+      "sharedPlate": false,
+      "openPixels": [
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          3,
+          15
+        ],
+        [
+          7,
+          15,
+          7
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    },
+    {
+      "sharedPlate": true,
+      "openPixels": [
+        [
+          3,
+          7,
+          3
+        ],
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          7,
+          3
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    }
+  ],
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible mirror destinations both flash",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    }
+  ],
+  "campaignCoverage": [
+    {
+      "level": 1,
+      "title": "L’atelier des trois passeurs",
+      "actions": 158,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 2,
+      "title": "Récupérer avant de combler",
+      "actions": 214,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 3,
+      "title": "Lâcher le miroir, garder son poids",
+      "actions": 160,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 4,
+      "title": "Le quai des deux impulsions",
+      "actions": 64,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 5,
+      "title": "La relève du gardien",
+      "actions": 86,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 6,
+      "title": "Le chantier avant la marée basse",
+      "actions": 82,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 7,
+      "title": "Les deux postes du miroir",
+      "actions": 120,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 8,
+      "title": "Le gardien et les trois lests",
+      "actions": 180,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    }
+  ],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 158,
+    "discoveries": [
+      "select",
+      "move",
+      "merchant-push",
+      "warrior-push",
+      "chain",
+      "thief-pull",
+      "single-pull",
+      "release",
+      "mirror-motion",
+      "water-support",
+      "cross-support",
+      "hydraulic",
+      "mirror",
+      "hero-reflection",
+      "crate-reflection",
+      "button",
+      "gate",
+      "press",
+      "monster",
+      "goals"
+    ],
+    "onlyTutorialRoomAwardsDiscoveries": true
+  }
+}

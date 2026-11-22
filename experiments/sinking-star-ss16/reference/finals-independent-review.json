@@ -1,0 +1,812 @@
+{
+  "success": true,
+  "status": "targeted-review-passed",
+  "specHashes": {
+    "7": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
+    "8": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986"
+  },
+  "method": "Contre-exemples gagnants construits indépendamment et archivés avec leur ancienne carte ; nouvelles tentatives sur les cartes courantes, alternative avancée réellement rejouée et contrôles géométriques bornés.",
+  "scope": "Aucune preuve d’unicité, d’optimalité, de minimum d’appuis global ou d’absence de tout autre contournement. Les cartes historiques ci-dessous ne sont pas les niveaux livrés.",
+  "baselineCounterexamples": {
+    "ss16_08": {
+      "fixture": "reference/history/finals-known-bypasses.json",
+      "specSha256": "27f35bafbfd8e7bedb5a59be7135db89d5d741f8b33847690dc98315df381913",
+      "metrics": {
+        "actions": 161,
+        "selections": 11,
+        "merchantPushes": 0,
+        "warriorPushes": 9,
+        "thiefPulls": 5,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 14,
+        "mirrorMoves": 4,
+        "reflections": 4,
+        "heroReflections": 3,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "description": "Aucun appui permanent, réserve nord inutilisée, trois transports de héros par le premier miroir."
+    },
+    "ss16_07": {
+      "fixture": "reference/history/finals-known-bypasses.json",
+      "specSha256": "162e4204675d5ee6db7f886587644b5d46a14612a8a69b51c0868fa5854520ae",
+      "metrics": {
+        "actions": 105,
+        "selections": 11,
+        "merchantPushes": 4,
+        "warriorPushes": 11,
+        "thiefPulls": 3,
+        "partnerMoves": 3,
+        "chainPushes": 4,
+        "stoneMoves": 16,
+        "mirrorMoves": 2,
+        "reflections": 3,
+        "heroReflections": 3,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "description": "Aucun des deux appuis du pont central ; une caisse remplace le miroir final ; trois transports de héros par le miroir."
+    },
+    "ss16_08_active_hydraulics": {
+      "fixture": "reference/history/finals-known-bypasses.json",
+      "specSha256": "9a7d0bc648f678ed9ea8dabcfd2f0df2bb5c18b73bd7c0b2f0548586722f12c9",
+      "metrics": {
+        "actions": 141,
+        "selections": 8,
+        "merchantPushes": 3,
+        "warriorPushes": 2,
+        "thiefPulls": 12,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 12,
+        "mirrorMoves": 8,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "description": "Contre-exemple indépendant moteur : plateformes maintenues par une caisse, miroir auxiliaire comme lest, aucune construction permanente ni récupération de réserve."
+    }
+  },
+  "checks": [
+    {
+      "name": "ancien-ferry-ss16-07",
+      "level": "ss16-07",
+      "specSha256": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
+      "referenceMetrics": {
+        "actions": 120,
+        "selections": 10,
+        "merchantPushes": 4,
+        "warriorPushes": 6,
+        "thiefPulls": 6,
+        "partnerMoves": 0,
+        "chainPushes": 1,
+        "stoneMoves": 14,
+        "mirrorMoves": 4,
+        "reflections": 2,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 3,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "status": "known-bypass-blocked",
+      "blockedAt": "{\"error\":\"Invalid author action\",\"command\":\"D\",\"previous\":\"DLLCCD\",\"hero\":{\"kind\":\"thief\",\"at\":{\"x\":10,\"y\":4},\"facing\":\"S\",\"dead\":false},\"phases\":[],\"failed\":true,\"dead\":false}",
+      "acceptedPrefix": "DLLCCD",
+      "stages": []
+    },
+    {
+      "name": "ancien-ferry-ss16-08",
+      "level": "ss16-08",
+      "specSha256": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986",
+      "referenceMetrics": {
+        "actions": 180,
+        "selections": 17,
+        "merchantPushes": 3,
+        "warriorPushes": 4,
+        "thiefPulls": 10,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 21,
+        "mirrorMoves": 3,
+        "reflections": 3,
+        "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 2,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "status": "known-bypass-blocked",
+      "blockedAt": "{\"error\":\"No walking route\",\"target\":{\"x\":9,\"y\":8},\"kind\":\"warrior\",\"hero\":{\"x\":13,\"y\":6},\"commands\":\"CCDDRCCR\",\"states\":86}",
+      "acceptedPrefix": "CCDDRCCR",
+      "stages": [
+        {
+          "label": "Charger la caisse initiale sans la refléter",
+          "turn": 5,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 12,
+                "y": 6
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 10,
+              "y": 1
+            },
+            {
+              "x": 9,
+              "y": 6
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": true,
+            "reserve": false,
+            "depot-miroir": false,
+            "deux-caisses": false
+          }
+        },
+        {
+          "label": "La presse donne la caisse au Guerrier",
+          "turn": 8,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 13,
+                "y": 6
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 10,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 6
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": false,
+            "reserve": false,
+            "depot-miroir": false,
+            "deux-caisses": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "ancien-pont-hydraulique-permanent-141",
+      "level": "ss16-08",
+      "specSha256": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986",
+      "status": "known-bypass-blocked",
+      "originalMetrics": {
+        "actions": 141,
+        "selections": 8,
+        "merchantPushes": 3,
+        "warriorPushes": 2,
+        "thiefPulls": 12,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 12,
+        "mirrorMoves": 8,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "observedMetrics": {
+        "actions": 141,
+        "selections": 8,
+        "merchantPushes": 3,
+        "warriorPushes": 2,
+        "thiefPulls": 12,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 12,
+        "mirrorMoves": 8,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 35,
+        "deaths": 0
+      },
+      "firstRefusal": 77,
+      "blockedAction": "D",
+      "blockedHero": {
+        "kind": "merchant",
+        "at": {
+          "x": 3,
+          "y": 9
+        },
+        "facing": "W",
+        "dead": false
+      },
+      "gateClosed": [
+        true,
+        true,
+        false,
+        false,
+        true,
+        true
+      ],
+      "complete": false
+    }
+  ],
+  "acceptedAdvancedAlternative": {
+    "level": "ss16-08",
+    "specSha256": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986",
+    "accepted": true,
+    "success": true,
+    "metrics": {
+      "actions": 224,
+      "selections": 29,
+      "merchantPushes": 0,
+      "warriorPushes": 12,
+      "thiefPulls": 15,
+      "partnerMoves": 0,
+      "chainPushes": 2,
+      "stoneMoves": 26,
+      "mirrorMoves": 8,
+      "reflections": 5,
+      "heroReflections": 3,
+      "pistonPushes": 2,
+      "platformsCreated": 1,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "commands": "CCDDRCCRXCLLLLURCCLCRURUUURDDDDDLULURCCRDLLLLLULXCCRCDRRRDDLLUUUCCDDLLLLLCCDDLLRRUCCDDDDRCLDRCCURUUUULLDDURRDDRRRRRRRRDDLLCRDDRRRRULCCRRUUUUULLLLLLLLLLXDLLDDDDDDDDDLLCDDRRDDUULLCULLLLXDLLDDDDDDDDDCCUUUUULLLLLXDLLDDDDDDDDRRDR",
+    "stages": [
+      {
+        "label": "Un seul appui est créé : la caisse-clef reste sèche",
+        "turn": 52,
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 17,
+              "y": 4
+            }
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 7,
+              "y": 6
+            }
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 5
+            }
+          }
+        ],
+        "stones": [
+          {
+            "x": 6,
+            "y": 7
+          },
+          {
+            "x": 16,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": false,
+          "reserve": true,
+          "depot-miroir": false,
+          "deux-caisses": false
+        }
+      },
+      {
+        "label": "Le premier miroir est garé en amont",
+        "turn": 64,
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 17,
+              "y": 4
+            }
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 8,
+              "y": 6
+            }
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 5
+            }
+          }
+        ],
+        "stones": [
+          {
+            "x": 6,
+            "y": 7
+          },
+          {
+            "x": 16,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 5
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": false,
+          "reserve": true,
+          "depot-miroir": false,
+          "deux-caisses": false
+        }
+      },
+      {
+        "label": "La caisse-clef, au lieu du miroir, maintient le bouton final",
+        "turn": 89,
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 12,
+              "y": 6
+            }
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 9,
+              "y": 10
+            }
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 6
+            }
+          }
+        ],
+        "stones": [
+          {
+            "x": 8,
+            "y": 11
+          },
+          {
+            "x": 16,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 5
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": true,
+          "reserve": false,
+          "depot-miroir": true,
+          "deux-caisses": false
+        }
+      },
+      {
+        "label": "Le premier reflet transporte un héros sur le seul appui et livre le lest isolé",
+        "turn": 166,
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 12,
+              "y": 6
+            }
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 1,
+              "y": 18
+            }
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 13,
+              "y": 8
+            }
+          }
+        ],
+        "stones": [
+          {
+            "x": 8,
+            "y": 11
+          },
+          {
+            "x": 14,
+            "y": 9
+          },
+          {
+            "x": 12,
+            "y": 13
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": true,
+          "reserve": false,
+          "depot-miroir": true,
+          "deux-caisses": true
+        }
+      },
+      {
+        "label": "Le second miroir est retiré pour conserver son dépôt",
+        "turn": 177,
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 12,
+              "y": 6
+            }
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 1,
+              "y": 18
+            }
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 13,
+              "y": 10
+            }
+          }
+        ],
+        "stones": [
+          {
+            "x": 8,
+            "y": 11
+          },
+          {
+            "x": 14,
+            "y": 9
+          },
+          {
+            "x": 12,
+            "y": 13
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 11
+            },
+            "facing": "NW"
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": true,
+          "reserve": false,
+          "depot-miroir": true,
+          "deux-caisses": true
+        }
+      }
+    ],
+    "scope": "Cette solution conserve la récupération de la réserve, les deux chargements, la conversion d’une caisse en appui, les trois lests et le retrait de la marée. Elle ne prouve aucun minimum global. Deux appuis et le miroir comme lest appartiennent au parcours de référence, pas à une obligation universelle."
+  },
+  "probes": [
+    {
+      "name": "L8-miroir-decale-vers-la-plateforme",
+      "success": true,
+      "acceptedPrefix": "CDDDLLLLUDRRUULLLULDXDCCR",
+      "observed": {
+        "farLandingBlocked": true,
+        "shiftedMirrorLost": true,
+        "heroDead": false,
+        "permanentSupports": 0,
+        "remainingMirrors": [
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ]
+      },
+      "scope": "Le miroir peut être transporté sur la plateforme proche et déplacer un héros tant que la marée est maintenue. Le mur bloque le reflet plus long vers la rive sèche ; le retrait de la marée détruit ce miroir non soutenu. Comparaison locale, pas exploration globale."
+    },
+    {
+      "name": "L8-ancienne-source-du-ferry",
+      "success": true,
+      "observed": "{\"error\":\"No walking route\",\"target\":{\"x\":8,\"y\":1},\"kind\":\"merchant\",\"hero\":{\"x\":16,\"y\":4},\"commands\":\"\",\"states\":93}",
+      "scope": "Recherche de marche avec positions des autres ressources initiales ; ne prouve pas une inaccessibilité dans tous les états."
+    },
+    {
+      "name": "L7-visées-apres-les-lests-avec-un-seul-appui",
+      "success": true,
+      "cases": [
+        {
+          "support": {
+            "x": 4,
+            "y": 8
+          },
+          "mirrorPositionSuperset": 91,
+          "goalSide": 19,
+          "possibleCrossings": []
+        },
+        {
+          "support": {
+            "x": 5,
+            "y": 8
+          },
+          "mirrorPositionSuperset": 92,
+          "goalSide": 18,
+          "possibleCrossings": []
+        }
+      ],
+      "scope": "Géométrie seulement : boutons finaux supposés occupés, réserve relâchée, un seul des deux appuis du pont. On surestime les positions possibles du miroir par toute la composante praticable orientale, sans contraintes de poussée ni obstacles mobiles. Aucun rayon géométrique de cette surapproximation n’atteint la composante des destinations. Cela ne prouve pas une impossibilité globale avec un autre ordre des opérations."
+    }
+  ]
+}

@@ -1,0 +1,1146 @@
+{
+  "spec": {
+    "id": "ss16-07",
+    "title": "Les deux postes du miroir",
+    "rows": [
+      "####################",
+      "######o##....#######",
+      "######.#~....#.....#",
+      "######..~.T..#.....#",
+      "######..~....#..M..#",
+      "######...oW..~o....#",
+      "#g..##.......#.....#",
+      "#...##.......#######",
+      "#g.#~~...#...#######",
+      "#....###.#...#######",
+      "#...###......#######",
+      "#g..###......#######",
+      "###########o########",
+      "###########m########",
+      "###########.########",
+      "###########m########",
+      "###########.########",
+      "###########.########",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 8
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "clef-du-nord",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 12
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "dernier-bail",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 10
+          },
+          {
+            "x": 11,
+            "y": 17
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 3
+        },
+        "circuit": "clef-du-nord",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 9
+        },
+        "circuit": "dernier-bail",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 6
+        },
+        "circuit": "dernier-bail",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 6
+        },
+        "circuit": "dernier-bail",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 6
+        },
+        "circuit": "dernier-bail",
+        "direction": "N",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "DLLCLXCDDDLLLUUULUDDDDRURDRLDLDLURRXRCCDRDDDDDRDDDDDCCLLDLLLLDLLDRURDDULLLLDLLUUULCCLDLLLLDLDDLLCCUUUUUUUUULLLDLLLLDLLUL",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes and Mirrors · Métamonde 2 · déplacer puis retirer le miroir",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#m%C3%A9tamonde-%C3%A9nigme-2",
+    "puzzle": "Métamonde 2",
+    "objective": "Conserver la caisse-clef jusqu’à l’extraction de la réserve, déplacer le miroir entre deux postes de dépôt, puis réemployer la clef comme bouclier et lest final.",
+    "secondary": {
+      "label": "Heroes and Water · Métamonde 3 · réutiliser la caisse auxiliaire avant la poussée des monstres",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#m%C3%A9tamonde-%C3%A9nigme-3"
+    }
+  },
+  "metrics": {
+    "actions": 120,
+    "selections": 10,
+    "merchantPushes": 4,
+    "warriorPushes": 6,
+    "thiefPulls": 6,
+    "partnerMoves": 0,
+    "chainPushes": 1,
+    "stoneMoves": 14,
+    "mirrorMoves": 4,
+    "reflections": 2,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 3,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand investit sa caisse dans le seul passage hors de son île.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "clef-du-nord": true,
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le Guerrier place la première charge dans la visée ; le premier poste du miroir crée l’appui de droite.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "clef-du-nord": true,
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la réserve ouverte par la caisse du sud, puis change son axe pour la placer devant le second poste du miroir.",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "clef-du-nord": true,
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le Voleur tire le miroir d’une case à gauche et s’écarte de sa face : ce second poste atteint l’appui éloigné, derrière la butée du rayon.",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "clef-du-nord": true,
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "La caisse qui gardait la réserve quitte enfin son bouton : elle sert maintenant de bouclier de distance pour faire se rencontrer les deux monstres.",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "clef-du-nord": true,
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "La même caisse poursuit sa course dans le corridor libéré et devient le premier poids de la porte finale.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "clef-du-nord": false,
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le Marchand remet le miroir dans son rail ; le Voleur ne pourrait pas le tirer à droite, car son recul est fermé par le mur.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "clef-du-nord": false,
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le miroir descend sur le second lest : la porte s’ouvre, tandis que les trois presses au nord ferment les visées longues.",
+      "turn": 70,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "clef-du-nord": false,
+        "dernier-bail": true
+      }
+    },
+    {
+      "label": "Le trio traverse les deux appuis, contourne la butée et passe la porte ; chaque caisse a terminé sa fonction sans laisser de gardien.",
+      "turn": 120,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 6
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 1,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "clef-du-nord": false,
+        "dernier-bail": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Le même miroir est repositionné pour déposer deux charges dans l’eau puis devient un poids durable.",
+      "Une caisse auxiliaire est réemployée entre préparation et poussée des monstres.",
+      "La traction doit récupérer les ressources avant leur conversion irréversible en appuis."
+    ],
+    "changed": [
+      "La caisse du corridor sud ouvre d’abord la réserve nord, protège ensuite la poussée des deux monstres et termine sur le bouton de sortie.",
+      "Le premier poste du miroir vise l’appui droit ; le second poste, atteint par une traction du Voleur, vise l’appui gauche. Le Marchand le remet ensuite dans son rail avant son retrait.",
+      "Le Marchand commence sur une troisième île, dont la sortie consomme une ressource distincte.",
+      "La porte finale ouverte ferme aussi trois presses au nord : les longues visées de transport cessent d’être disponibles. Une butée et une entrée coudée imposent de rejoindre la porte depuis les appuis.",
+      "Les pièces et la géométrie sont originales ; il n’y a ni duplication par miroir ni niveau auxiliaire caché."
+    ],
+    "sourceReading": "La séquence repositionnement, deux immersions puis ballast du miroir vient de Mirrors Métamonde 2. Water Métamonde 3 fournit le réemploi d’une caisse auxiliaire avec des alternances de traction et de poussée pour dégager des gobelins. La clef du nord, les deux postes, le rail et les visées fermées à la sortie sont propres à SS16."
+  }
+}

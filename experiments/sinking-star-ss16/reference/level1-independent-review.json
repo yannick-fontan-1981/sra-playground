@@ -1,0 +1,2199 @@
+{
+  "game": "SS16",
+  "level": 1,
+  "success": true,
+  "mapSha256": "2c49c4c12091c0d1554dfd2648ceca47ec9db8bff9056cac68034937761ae03e",
+  "reviewer": "Independent engine review",
+  "scope": "Two reproduced historical winning shortcuts, corrected winning replay, public tutorial coverage, dry-topology checks and 96 fixed-resource single-hero searches",
+  "repairs": [
+    {
+      "id": "mirror-pulled-to-eight",
+      "description": "Le miroir ramené à8,6 transportait depuis le seul appui8,13 vers15,6.",
+      "oldMapSha256": "e8cca94332fd4f315ff82ae08e7f77f4198ab8455ebe44738a3f20f617a56580",
+      "oldCommands": "RRRRRDDDDLDUDDLLDLDLURURRCCURRRUUUUURURLDDDDDDDLLLLRRRUCCDDDDDRRRRRXDRCCDDDLDRRRXUCCDRRXRXRDCCLURCRDLCCDRURUUUULLCCDRXRRRUUUUCCUURUUULU",
+      "oldActions": 135,
+      "oldWinning": true,
+      "oldRefusals": 0,
+      "oldDeaths": 0,
+      "oldPermanentSupports": [
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 13
+        }
+      ],
+      "fixedFirstFailure": {
+        "turn": 68,
+        "command": "X",
+        "selectedHero": {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "E",
+          "dead": false
+        },
+        "failed": true,
+        "dead": false,
+        "phases": []
+      },
+      "fixedShortcutCompletes": false
+    },
+    {
+      "id": "two-support-lower-route",
+      "description": "Le sol10,14 autorisait seulement deux appuis8/9,14, puis une traction verticale remontait le cargo.",
+      "oldMapSha256": "f666d6bb051f0ace59ab966dd8e19a5c11ec252bf2062b5f155ec711a29204b9",
+      "oldCommands": "RRRRRDDDDLDUDDLLDLDLURURRCURRRRURRRLLLDDLLLLCRRRULLDDDRUDRCCDDDDDDRRRRRRRRUURCURRRRRUCDDDDULCDDLLLLLULLLDRRRRRRCUXDLCCRRUULXDDLCCXDDRRRRRRRUUXDDRCCRULDCCRUURUUUULLCCUUUUUUCCURRUUULU",
+      "oldActions": 181,
+      "oldWinning": true,
+      "oldRefusals": 0,
+      "oldDeaths": 0,
+      "oldPermanentSupports": [
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 14
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "fixedFirstFailure": {
+        "turn": 73,
+        "command": "R",
+        "selectedHero": {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 14
+          },
+          "facing": "E",
+          "dead": false
+        },
+        "failed": true,
+        "dead": false,
+        "phases": []
+      },
+      "fixedShortcutCompletes": false
+    }
+  ],
+  "currentWinningRoute": {
+    "actions": 158,
+    "selections": 17,
+    "merchantPushes": 7,
+    "warriorPushes": 17,
+    "thiefPulls": 9,
+    "partnerMoves": 0,
+    "chainPushes": 5,
+    "stoneMoves": 41,
+    "mirrorMoves": 2,
+    "reflections": 4,
+    "heroReflections": 3,
+    "pistonPushes": 2,
+    "platformsCreated": 5,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0,
+    "complete": true,
+    "lessons": 20,
+    "lessonIds": [
+      "select",
+      "move",
+      "merchant-push",
+      "warrior-push",
+      "chain",
+      "thief-pull",
+      "single-pull",
+      "release",
+      "mirror-motion",
+      "water-support",
+      "cross-support",
+      "hydraulic",
+      "mirror",
+      "hero-reflection",
+      "crate-reflection",
+      "button",
+      "gate",
+      "press",
+      "monster",
+      "goals"
+    ]
+  },
+  "geometry": {
+    "merchantDockFloorCells": 20,
+    "merchantDockOnlyWaterExit": [
+      {
+        "x": 6,
+        "y": 3
+      }
+    ],
+    "goalChamberFloorCells": 12,
+    "uniqueDryGoalEntrance": [
+      {
+        "x": 18,
+        "y": 4
+      }
+    ],
+    "adjacentGoalWater": [
+      {
+        "x": 14,
+        "y": 3
+      }
+    ],
+    "exitInitiallyClosed": true,
+    "blockedSouthArms": [
+      [
+        8,
+        7
+      ],
+      [
+        9,
+        7
+      ],
+      [
+        10,
+        7
+      ]
+    ],
+    "lowerShortcutCellNowWater": [
+      10,
+      14
+    ]
+  },
+  "restrictedProbes": {
+    "count": 96,
+    "allQueuesExhausted": true,
+    "states": 9576,
+    "transitions": 47880,
+    "cases": [
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 0,
+        "mainSupports": [],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 1,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 2,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 101,
+        "transitions": 505,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 101,
+        "transitions": 505,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 3,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 101,
+        "transitions": 505,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 4,
+        "mainSupports": [
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 5,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 100,
+        "transitions": 500,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 96,
+        "transitions": 480,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 97,
+        "transitions": 485,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 98,
+        "transitions": 490,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 6,
+        "mainSupports": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 99,
+        "transitions": 495,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 105,
+        "transitions": 525,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 105,
+        "transitions": 525,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          8,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 105,
+        "transitions": 525,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 106,
+        "transitions": 530,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 106,
+        "transitions": 530,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          9,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 106,
+        "transitions": 530,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 107,
+        "transitions": 535,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 107,
+        "transitions": 535,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          10,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 107,
+        "transitions": 535,
+        "exhausted": true,
+        "courtReachable": false,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "merchant",
+        "states": 128,
+        "transitions": 640,
+        "exhausted": true,
+        "courtReachable": true,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "warrior",
+        "states": 128,
+        "transitions": 640,
+        "exhausted": true,
+        "courtReachable": true,
+        "goalReachable": false
+      },
+      {
+        "supportMask": 7,
+        "mainSupports": [
+          {
+            "x": 8,
+            "y": 13
+          },
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 10,
+            "y": 13
+          }
+        ],
+        "mirror": [
+          11,
+          6
+        ],
+        "activeRole": "thief",
+        "states": 128,
+        "transitions": 640,
+        "exhausted": true,
+        "courtReachable": true,
+        "goalReachable": false
+      }
+    ]
+  },
+  "limitations": [
+    "The old winning routes establish two concrete bypasses; their first failures verify those routes were eliminated.",
+    "Each of96 searches moves one hero while both other heroes and all resources stay fixed; three exact bridge cells and four fixed mirror positions vary between searches. Several cooperating heroes or rearranged resources are outside this search.",
+    "The full three-cell bridge with mirror11,6 reaches the right court in this restricted model; partial versions do not. This does not prove every winning solution uses those exact three cells.",
+    "The chamber has one dry gate entrance and also a water boundary at14,3. No claim of an entirely wall-sealed enclosure or global impossibility of resource-dependent bypasses is made.",
+    "The witnessed press provides the hydraulic support and clears both monsters. Mirror access is not claimed to require that particular support-creation method: another crate could in principle be immersed at8,6.",
+    "No minimum-length, uniqueness, exhaustive resource-arrangement search or autonomous SRA success is claimed."
+  ]
+}

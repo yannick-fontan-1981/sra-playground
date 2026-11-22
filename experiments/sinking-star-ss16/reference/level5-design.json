@@ -1,0 +1,668 @@
+{
+  "spec": {
+    "id": "ss16-05",
+    "title": "La relève du gardien",
+    "rows": [
+      "####################",
+      "#......####....o...#",
+      "#......####....T...#",
+      "#...M..####........#",
+      "#......~~~~........#",
+      "#......####........#",
+      "####~######........#",
+      "####~########.######",
+      "#......###om.m######",
+      "#......######.######",
+      "#......####........#",
+      "#......####........#",
+      "#......####........#",
+      "#......####........#",
+      "#..Woo.####........#",
+      "#......####........#",
+      "#......####.g..g.g.#",
+      "###########........#",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "impulsion",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 3
+          }
+        ],
+        "color": 12
+      },
+      {
+        "id": "passerelles",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 8
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "deux-poids",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 14
+          },
+          {
+            "x": 15,
+            "y": 4
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "circuit": "impulsion",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 9
+        },
+        "circuit": "deux-poids",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 7,
+          "y": 4
+        },
+        "circuit": "passerelles",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 4
+        },
+        "circuit": "passerelles",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 4
+        },
+        "circuit": "passerelles",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 4
+        },
+        "circuit": "passerelles",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 6
+        },
+        "circuit": "passerelles",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 7
+        },
+        "circuit": "passerelles",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "LCRCDDDRCDRRRRRRRRDDRRDDDDDDDDDDLCUUUUUUUUUURRRRRRRDDRRDDDDDDDDDDRRCDLLLDDDDDDDDDRRRRD",
+  "actions": [
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation de Heroes and Light · énigme 4 · remplacement des gardiens et presses",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4",
+    "puzzle": 4,
+    "objective": "Remplacer un gardien vivant par une caisse pendant une poussée latérale, puis maintenir deux commandes lointaines sans immobiliser un héros."
+  },
+  "metrics": {
+    "actions": 86,
+    "selections": 5,
+    "merchantPushes": 0,
+    "warriorPushes": 1,
+    "thiefPulls": 3,
+    "partnerMoves": 0,
+    "chainPushes": 1,
+    "stoneMoves": 6,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 0,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand libère la commande : la presse remplace le monstre par la caisse, sans interrompre les passerelles, puis les deux monstres s’éliminent.",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 14
+        },
+        {
+          "x": 5,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Guerrier déplace la file de deux caisses et cale la première charge contre le mur sur le bouton violet.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 1
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 14
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": true,
+        "deux-poids": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la caisse du mur nord puis la laisse sur le second bouton : personne ne doit rester gardien.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 14
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": true,
+        "deux-poids": true
+      }
+    },
+    {
+      "label": "Le trio rejoint les trois sorties derrière le passage jadis gardé et la porte à deux poids.",
+      "turn": 86,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 16
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 14
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "impulsion": false,
+        "passerelles": true,
+        "deux-poids": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Une ressource remplace l’occupant d’une commande pendant la translation latérale.",
+      "Des poids durables doivent prendre le relais des héros avant le départ collectif."
+    ],
+    "changed": [
+      "La presse pousse une caisse et un monstre en chaîne ; le second monstre permet leur élimination simultanée.",
+      "Le poids remplacé commande six plateformes entre les trois secteurs ; deux caisses sèches sont nécessaires à la porte finale.",
+      "Les dragons, pouvoirs lumineux et carte exacte du guide sont remplacés par le trio SS16, des plateformes et une porte-presse à centre distinct du bouton."
+    ],
+    "sourceReading": "Composition originale à partir du principe de relève des boutons de Light 4. Le monstre éliminé attaque encore lors de sa vague de combat ; la commande distante préserve les trois héros."
+  }
+}

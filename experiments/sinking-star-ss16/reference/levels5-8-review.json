@@ -1,0 +1,2232 @@
+{
+  "version": "SS16 0.1.0",
+  "status": "pass",
+  "success": true,
+  "specHashes": {
+    "5": "423d22b240dfd239d5c944ee71205adff408b8603e565e92e9c912c4a92598a1",
+    "6": "50429b2008c6cf5e6b5e843ded686500f3527d56a8a1cf3e9878d232093f728d",
+    "7": "21d5b236a9dcebb240f727015e3fdb4b236eed858c7a9d824869dbb86586cee3",
+    "8": "b708fc07d2469a49491e9265adaa47b5f7971332a8892bf6490f211ce72e8986"
+  },
+  "scope": "Deterministic winning-route replays, initial fixed-circuit geometry checks and local counter-branches. These checks establish the listed effects only; they are not a proof of unique solutions, shortest paths or global impossibility after mistakes.",
+  "baseline": [
+    {
+      "level": 5,
+      "title": "La relève du gardien",
+      "winningRoute": {
+        "actions": 86,
+        "selections": 5,
+        "merchantPushes": 0,
+        "warriorPushes": 1,
+        "thiefPulls": 3,
+        "partnerMoves": 0,
+        "chainPushes": 1,
+        "stoneMoves": 6,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "initialFixedGeometry": {
+        "reachableCellsIgnoringActors": 143,
+        "reachableGoals": 0,
+        "closedGateCount": 1,
+        "scope": "Flood-fill with initial circuits fixed, ignoring actor obstacles. Establishes no initial walking access; not a search over button changes or reflections."
+      },
+      "purePresses": true
+    },
+    {
+      "level": 6,
+      "title": "Le chantier avant la marée basse",
+      "winningRoute": {
+        "actions": 82,
+        "selections": 11,
+        "merchantPushes": 0,
+        "warriorPushes": 4,
+        "thiefPulls": 3,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 2,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "initialFixedGeometry": {
+        "reachableCellsIgnoringActors": 189,
+        "reachableGoals": 0,
+        "closedGateCount": 2,
+        "scope": "Flood-fill with initial circuits fixed, ignoring actor obstacles. Establishes no initial walking access; not a search over button changes or reflections."
+      },
+      "purePresses": true
+    },
+    {
+      "level": 7,
+      "title": "Les deux postes du miroir",
+      "winningRoute": {
+        "actions": 120,
+        "selections": 10,
+        "merchantPushes": 4,
+        "warriorPushes": 6,
+        "thiefPulls": 6,
+        "partnerMoves": 0,
+        "chainPushes": 1,
+        "stoneMoves": 14,
+        "mirrorMoves": 4,
+        "reflections": 2,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 3,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "initialFixedGeometry": {
+        "reachableCellsIgnoringActors": 96,
+        "reachableGoals": 0,
+        "closedGateCount": 1,
+        "scope": "Flood-fill with initial circuits fixed, ignoring actor obstacles. Establishes no initial walking access; not a search over button changes or reflections."
+      },
+      "purePresses": true
+    },
+    {
+      "level": 8,
+      "title": "Le gardien et les trois lests",
+      "winningRoute": {
+        "actions": 180,
+        "selections": 17,
+        "merchantPushes": 3,
+        "warriorPushes": 4,
+        "thiefPulls": 10,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 21,
+        "mirrorMoves": 3,
+        "reflections": 3,
+        "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 2,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "initialFixedGeometry": {
+        "reachableCellsIgnoringActors": 103,
+        "reachableGoals": 0,
+        "closedGateCount": 4,
+        "scope": "Flood-fill with initial circuits fixed, ignoring actor obstacles. Establishes no initial walking access; not a search over button changes or reflections."
+      },
+      "purePresses": true
+    }
+  ],
+  "checks": 20,
+  "localChecks": [
+    {
+      "level": 5,
+      "label": "L5 — la porte ouverte ne suffit pas tant que les gardiens restent vivants",
+      "description": "L5 — la porte ouverte ne suffit pas tant que les gardiens restent vivants",
+      "commands": "CRCDDDRDLLLD",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 4,
+              "y": 3
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 4,
+              "y": 14
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 13,
+              "y": 7
+            },
+            "dead": true
+          }
+        ],
+        "stones": [
+          {
+            "x": 15,
+            "y": 4
+          },
+          {
+            "x": 10,
+            "y": 8
+          },
+          {
+            "x": 5,
+            "y": 14
+          },
+          {
+            "x": 6,
+            "y": 14
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 8
+          },
+          {
+            "x": 13,
+            "y": 8
+          }
+        ],
+        "mirrors": [],
+        "dead": true,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          false,
+          false
+        ],
+        "platformActive": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "circuits": {
+          "impulsion": true,
+          "passerelles": true,
+          "deux-poids": true
+        },
+        "metrics": {
+          "actions": 12,
+          "selections": 2,
+          "merchantPushes": 0,
+          "warriorPushes": 1,
+          "thiefPulls": 3,
+          "partnerMoves": 0,
+          "chainPushes": 1,
+          "stoneMoves": 5,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 1
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact local branch with both final weights in place, before firing the distant loaded press."
+    },
+    {
+      "level": 5,
+      "label": "L5 — une presse vide ne déplace pas son voisin",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 3,
+              "y": 3
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 3,
+              "y": 14
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 2
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 15,
+            "y": 1
+          },
+          {
+            "x": 4,
+            "y": 14
+          },
+          {
+            "x": 5,
+            "y": 14
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 8
+          },
+          {
+            "x": 13,
+            "y": 8
+          }
+        ],
+        "mirrors": [],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true
+        ],
+        "platformActive": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "circuits": {
+          "impulsion": false,
+          "passerelles": true,
+          "deux-poids": false
+        },
+        "metrics": {
+          "actions": 1,
+          "selections": 0,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "thiefPulls": 0,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 0,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "scope": "Local initial cargo ablation, one command only; not a global impossibility claim."
+    },
+    {
+      "level": 5,
+      "label": "L5 — reprendre le lest nord referme la porte",
+      "description": "L5 — reprendre le lest nord referme la porte",
+      "commands": "LCRCDDDRLD",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 3,
+              "y": 3
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 4,
+              "y": 14
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 6
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 15,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 8
+          },
+          {
+            "x": 5,
+            "y": 14
+          },
+          {
+            "x": 6,
+            "y": 14
+          }
+        ],
+        "supports": [],
+        "monsters": [],
+        "mirrors": [],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true
+        ],
+        "platformActive": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "circuits": {
+          "impulsion": false,
+          "passerelles": true,
+          "deux-poids": false
+        },
+        "metrics": {
+          "actions": 10,
+          "selections": 2,
+          "merchantPushes": 0,
+          "warriorPushes": 1,
+          "thiefPulls": 4,
+          "partnerMoves": 0,
+          "chainPushes": 1,
+          "stoneMoves": 7,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 0,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact branch after the two final weights have been installed."
+    },
+    {
+      "level": 6,
+      "label": "L6 — retirer le chantier avant de changer l’axe gaspille les deux charges",
+      "description": "L6 — retirer le chantier avant de changer l’axe gaspille les deux charges",
+      "commands": "CCDDDRCCRRCCR",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 4,
+              "y": 8
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 8,
+              "y": 10
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 7
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 6
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 10
+          },
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "monsters": [],
+        "mirrors": [],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          false,
+          false
+        ],
+        "platformActive": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "circuits": {
+          "maree": false,
+          "ecluse": true
+        },
+        "metrics": {
+          "actions": 13,
+          "selections": 6,
+          "merchantPushes": 0,
+          "warriorPushes": 2,
+          "thiefPulls": 3,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 7,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "The two crates are irreversibly fixed in the south work row; the current static passage from the west is still broken. No claim of exhaustive global unsolvability."
+    },
+    {
+      "level": 6,
+      "label": "L6 — le gardien attend que le Guerrier quitte le chantier",
+      "description": "L6 — le gardien attend que le Guerrier quitte le chantier",
+      "commands": "CCDDDRCCRRDRUCCR",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 4,
+              "y": 8
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 9,
+              "y": 10
+            },
+            "dead": true
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 7
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 6
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 9
+          },
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "monsters": [],
+        "mirrors": [],
+        "dead": true,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          false,
+          false
+        ],
+        "platformActive": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "circuits": {
+          "maree": false,
+          "ecluse": true
+        },
+        "metrics": {
+          "actions": 16,
+          "selections": 6,
+          "merchantPushes": 0,
+          "warriorPushes": 3,
+          "thiefPulls": 3,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 8,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 1
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact interruption while the Warrior stands on the vacated south platform."
+    },
+    {
+      "level": 6,
+      "label": "L6 — marée haute : les charges restent mobiles mais la dernière porte est fermée",
+      "description": "L6 — marée haute : les charges restent mobiles mais la dernière porte est fermée",
+      "commands": "CCDDDRCCRRDRUDRUD",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 3,
+              "y": 8
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 10,
+              "y": 11
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 7
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 6
+          },
+          {
+            "x": 9,
+            "y": 9
+          },
+          {
+            "x": 10,
+            "y": 9
+          }
+        ],
+        "supports": [],
+        "monsters": [],
+        "mirrors": [],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          false,
+          true
+        ],
+        "platformActive": [
+          true,
+          true,
+          true,
+          true
+        ],
+        "circuits": {
+          "maree": true,
+          "ecluse": true
+        },
+        "metrics": {
+          "actions": 17,
+          "selections": 4,
+          "merchantPushes": 0,
+          "warriorPushes": 4,
+          "thiefPulls": 3,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 9,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Correct route state immediately before the keeper leaves the control."
+    },
+    {
+      "level": 6,
+      "label": "L6 — marée basse : deux appuis au bon rang et porte finale ouverte",
+      "description": "L6 — marée basse : deux appuis au bon rang et porte finale ouverte",
+      "commands": "CCDDDRCCRRDRUDRUDCCR",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 4,
+              "y": 8
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 10,
+              "y": 11
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 15,
+              "y": 7
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 6
+          }
+        ],
+        "supports": [
+          {
+            "x": 9,
+            "y": 9
+          },
+          {
+            "x": 10,
+            "y": 9
+          }
+        ],
+        "monsters": [],
+        "mirrors": [],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          false,
+          false
+        ],
+        "platformActive": [
+          false,
+          false,
+          false,
+          false
+        ],
+        "circuits": {
+          "maree": false,
+          "ecluse": true
+        },
+        "metrics": {
+          "actions": 20,
+          "selections": 6,
+          "merchantPushes": 0,
+          "warriorPushes": 4,
+          "thiefPulls": 3,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 9,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Correct local transition, no shortest-route claim."
+    },
+    {
+      "level": 7,
+      "label": "L7 — aucun reflet initial ne donne accès aux sorties",
+      "description": "L7 — aucun reflet initial ne donne accès aux sorties",
+      "commands": "X",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 16,
+              "y": 4
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 10,
+              "y": 5
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 10,
+              "y": 3
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 6,
+            "y": 1
+          },
+          {
+            "x": 9,
+            "y": 5
+          },
+          {
+            "x": 14,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 12
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 13
+          },
+          {
+            "x": 11,
+            "y": 15
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": true,
+        "complete": false,
+        "gateClosed": [
+          false,
+          true,
+          false,
+          false,
+          false
+        ],
+        "platformActive": [],
+        "circuits": {
+          "clef-du-nord": true,
+          "dernier-bail": false
+        },
+        "metrics": {
+          "actions": 1,
+          "selections": 0,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "thiefPulls": 0,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 0,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 1,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "One initial mirror action with the current geometry; not a global search."
+    },
+    {
+      "level": 7,
+      "label": "L7 — employer la caisse-clef trop tôt ferme la réserve avant extraction",
+      "description": "L7 — employer la caisse-clef trop tôt ferme la réserve avant extraction",
+      "commands": "DLLCLXDDRDDDDRDDDDDCDDLLLULU",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 11,
+              "y": 16
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 6,
+              "y": 4
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 6,
+            "y": 1
+          },
+          {
+            "x": 11,
+            "y": 17
+          }
+        ],
+        "supports": [
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "monsters": [],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": true,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true,
+          false,
+          false,
+          false
+        ],
+        "platformActive": [],
+        "circuits": {
+          "clef-du-nord": false,
+          "dernier-bail": false
+        },
+        "metrics": {
+          "actions": 28,
+          "selections": 2,
+          "merchantPushes": 1,
+          "warriorPushes": 6,
+          "thiefPulls": 0,
+          "partnerMoves": 0,
+          "chainPushes": 1,
+          "stoneMoves": 8,
+          "mirrorMoves": 0,
+          "reflections": 1,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 2,
+          "monstersRemoved": 2,
+          "blocked": 1,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact wrong-order branch: the first northward step at the reserve door is refused. Returning the key remains outside this local check."
+    },
+    {
+      "level": 7,
+      "label": "L7 — le second chargement ne correspond pas à la première position du miroir",
+      "description": "L7 — le second chargement ne correspond pas à la première position du miroir",
+      "commands": "DLLCLXCDDDLLLUUULUDDDDRURDRX",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 9,
+              "y": 5
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 7,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 12
+          }
+        ],
+        "supports": [
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 13
+          },
+          {
+            "x": 11,
+            "y": 15
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": true,
+        "complete": false,
+        "gateClosed": [
+          false,
+          true,
+          false,
+          false,
+          false
+        ],
+        "platformActive": [],
+        "circuits": {
+          "clef-du-nord": true,
+          "dernier-bail": false
+        },
+        "metrics": {
+          "actions": 28,
+          "selections": 2,
+          "merchantPushes": 1,
+          "warriorPushes": 1,
+          "thiefPulls": 5,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 8,
+          "mirrorMoves": 0,
+          "reflections": 1,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 1,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact state after extracting and turning the reserve crate, before moving the mirror west."
+    },
+    {
+      "level": 7,
+      "label": "L7 — la traction du miroir exige ensuite de quitter sa face",
+      "description": "L7 — la traction du miroir exige ensuite de quitter sa face",
+      "commands": "DLLCLXCDDDLLLUUULUDDDDRURDRLDLDLX",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 9,
+              "y": 5
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 7,
+              "y": 7
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 7,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 12
+          }
+        ],
+        "supports": [
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 13
+          },
+          {
+            "x": 11,
+            "y": 15
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 7,
+              "y": 8
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          false,
+          true,
+          false,
+          false,
+          false
+        ],
+        "platformActive": [],
+        "circuits": {
+          "clef-du-nord": true,
+          "dernier-bail": false
+        },
+        "metrics": {
+          "actions": 33,
+          "selections": 2,
+          "merchantPushes": 1,
+          "warriorPushes": 1,
+          "thiefPulls": 6,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 8,
+          "mirrorMoves": 1,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 0,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "The nearer Thief is reflected instead of the farther cargo. This establishes local distance priority only."
+    },
+    {
+      "level": 7,
+      "label": "L7 — la caisse-clef sert aussi de distance de sécurité au combat",
+      "description": "Without the initial corridor crate the direct southward approach is fatal.",
+      "commands": "CDDDDDDRD",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 16,
+              "y": 4
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 11,
+              "y": 12
+            },
+            "dead": true
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 10,
+              "y": 3
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 6,
+            "y": 1
+          },
+          {
+            "x": 9,
+            "y": 5
+          },
+          {
+            "x": 14,
+            "y": 5
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 11,
+            "y": 13
+          },
+          {
+            "x": 11,
+            "y": 15
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": true,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          false,
+          true,
+          false,
+          false,
+          false
+        ],
+        "platformActive": [],
+        "circuits": {
+          "clef-du-nord": false,
+          "dernier-bail": false
+        },
+        "metrics": {
+          "actions": 9,
+          "selections": 1,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "thiefPulls": 0,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 0,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 1
+        }
+      },
+      "assertion": "The Warrior dies next to the still-present monster.",
+      "scope": "One-crate local ablation at the guarded corridor; not an all-objects global search."
+    },
+    {
+      "level": 7,
+      "label": "L7 — le retrait du miroir et le dernier lest ferment les visées longues",
+      "description": "L7 — le retrait du miroir et le dernier lest ferment les visées longues",
+      "commands": "DLLCLXCDDDLLLUUULUDDDDRURDRLDLDLURRXRCCDRDDDDDRDDDDDCCLLDLLLLDLLDRURDD",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 8,
+              "y": 9
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 11,
+              "y": 16
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 7
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 11,
+            "y": 17
+          }
+        ],
+        "supports": [
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 8
+          },
+          {
+            "x": 4,
+            "y": 8
+          }
+        ],
+        "monsters": [],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 10
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          false,
+          true,
+          true,
+          true
+        ],
+        "platformActive": [],
+        "circuits": {
+          "clef-du-nord": false,
+          "dernier-bail": true
+        },
+        "metrics": {
+          "actions": 70,
+          "selections": 6,
+          "merchantPushes": 4,
+          "warriorPushes": 6,
+          "thiefPulls": 6,
+          "partnerMoves": 0,
+          "chainPushes": 1,
+          "stoneMoves": 14,
+          "mirrorMoves": 4,
+          "reflections": 2,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 3,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Reference-route resource account: three permanent supports, one remaining crate and one mirror weight, with three northern ray stops closed. Not a minimum-resource proof."
+    },
+    {
+      "level": 8,
+      "label": "L8 — immerger la première caisse trop tôt supprime sa fonction de clef",
+      "description": "L8 — immerger la première caisse trop tôt supprime sa fonction de clef",
+      "commands": "CCDDRCCRXCCRCCLLLLU",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 17,
+              "y": 4
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 13,
+              "y": 6
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 6,
+              "y": 6
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 10,
+            "y": 1
+          },
+          {
+            "x": 16,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ],
+        "supports": [
+          {
+            "x": 6,
+            "y": 8
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false
+        ],
+        "platformActive": [
+          false,
+          false
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": false,
+          "reserve": false,
+          "depot-miroir": false,
+          "deux-caisses": false
+        },
+        "metrics": {
+          "actions": 19,
+          "selections": 8,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "thiefPulls": 2,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 4,
+          "mirrorMoves": 0,
+          "reflections": 1,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact local premature withdrawal; other unsearched reorganizations are outside this check."
+    },
+    {
+      "level": 8,
+      "label": "L8 — deux distances de dépôt pendant que le gardien conserve son poids",
+      "description": "L8 — deux distances de dépôt pendant que le gardien conserve son poids",
+      "commands": "CCDDRCCRXCLLLLURCCLCRURUUURDDDDDLULURCCRDLLLLLULX",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 16,
+              "y": 4
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 7,
+              "y": 6
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 5
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 5,
+            "y": 8
+          },
+          {
+            "x": 6,
+            "y": 7
+          },
+          {
+            "x": 16,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          false,
+          true,
+          true,
+          false,
+          true
+        ],
+        "platformActive": [
+          true,
+          true
+        ],
+        "circuits": {
+          "maree-gardee": true,
+          "chargeur": false,
+          "reserve": true,
+          "depot-miroir": false,
+          "deux-caisses": false
+        },
+        "metrics": {
+          "actions": 49,
+          "selections": 10,
+          "merchantPushes": 0,
+          "warriorPushes": 1,
+          "thiefPulls": 9,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 14,
+          "mirrorMoves": 0,
+          "reflections": 2,
+          "heroReflections": 0,
+          "pistonPushes": 2,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Correct route after the second reflection. The new final sluice is still closed while the hydraulic command is held."
+    },
+    {
+      "level": 8,
+      "label": "L8 — un reflet sans chargement est arrêté par la butée",
+      "description": "L8 — un reflet sans chargement est arrêté par la butée",
+      "commands": "X",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 16,
+              "y": 4
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 12,
+              "y": 6
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 5
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 10,
+            "y": 1
+          },
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 16,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": true,
+        "complete": false,
+        "gateClosed": [
+          false,
+          true,
+          true,
+          true,
+          false,
+          true
+        ],
+        "platformActive": [
+          true,
+          true
+        ],
+        "circuits": {
+          "maree-gardee": true,
+          "chargeur": true,
+          "reserve": false,
+          "depot-miroir": false,
+          "deux-caisses": false
+        },
+        "metrics": {
+          "actions": 1,
+          "selections": 0,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "thiefPulls": 0,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 0,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 1,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "One initial global reflection. The distant keeper does not cross the ray stop."
+    },
+    {
+      "level": 8,
+      "label": "L8 — le premier miroir doit être isolé avant le dépôt du second",
+      "description": "L8 — le premier miroir doit être isolé avant le dépôt du second",
+      "commands": "CCDDRCCRXCLLLLURCCLCRURUUURDDDDDLULURCCRDLLLLLULXLDRCCRCRRRDRRRRRRRRDDLLCRDDDDRRRRULX",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 17,
+              "y": 4
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 16,
+              "y": 10
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 13,
+              "y": 8
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 9
+          },
+          {
+            "x": 15,
+            "y": 10
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          },
+          {
+            "x": 6,
+            "y": 8
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": true,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false
+        ],
+        "platformActive": [
+          false,
+          false
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": false,
+          "reserve": false,
+          "depot-miroir": false,
+          "deux-caisses": false
+        },
+        "metrics": {
+          "actions": 85,
+          "selections": 14,
+          "merchantPushes": 0,
+          "warriorPushes": 4,
+          "thiefPulls": 10,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 20,
+          "mirrorMoves": 0,
+          "reflections": 2,
+          "heroReflections": 0,
+          "pistonPushes": 2,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 1,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact branch with the last two crates prepared but the first mirror not retired. Its incompatible old ray blocks the global reflection."
+    },
+    {
+      "level": 8,
+      "label": "L8 — le sas final impose la marée basse",
+      "description": "L8 — le sas final impose la marée basse",
+      "commands": "CCDDRCCRXCLLLLURCCLCRURUUURDDDDDLULURCCRDLLLLLULXLDRCCR",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 17,
+              "y": 4
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 7,
+              "y": 7
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 5
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 16,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 10
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          },
+          {
+            "x": 6,
+            "y": 8
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false
+        ],
+        "platformActive": [
+          false,
+          false
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": false,
+          "reserve": false,
+          "depot-miroir": false,
+          "deux-caisses": false
+        },
+        "metrics": {
+          "actions": 55,
+          "selections": 12,
+          "merchantPushes": 0,
+          "warriorPushes": 2,
+          "thiefPulls": 9,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 15,
+          "mirrorMoves": 0,
+          "reflections": 2,
+          "heroReflections": 0,
+          "pistonPushes": 2,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Reference transition opens the third sluice only after withdrawing the hydraulic command. The independent review also replays the former zero-support active-bridge shortcut."
+    },
+    {
+      "level": 8,
+      "label": "L8 — le dépôt distant ne remplace pas le lest auxiliaire",
+      "description": "L8 — le dépôt distant ne remplace pas le lest auxiliaire",
+      "commands": "CCDDRCCRXCLLLLURCCLCRURUUURDDDDDLULURCCRDLLLLLULXLDRCCRDDDLLLLLLLLLDDDRCRRRDRRRRRRRRDDLLX",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 9,
+              "y": 10
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 16,
+              "y": 10
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 9,
+              "y": 5
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 10
+          },
+          {
+            "x": 12,
+            "y": 13
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          },
+          {
+            "x": 6,
+            "y": 8
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 11
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true,
+          false,
+          true,
+          true,
+          false
+        ],
+        "platformActive": [
+          false,
+          false
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": false,
+          "reserve": false,
+          "depot-miroir": true,
+          "deux-caisses": false
+        },
+        "metrics": {
+          "actions": 89,
+          "selections": 13,
+          "merchantPushes": 3,
+          "warriorPushes": 4,
+          "thiefPulls": 9,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 20,
+          "mirrorMoves": 3,
+          "reflections": 3,
+          "heroReflections": 0,
+          "pistonPushes": 2,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Exact branch before the Thief separates the auxiliary crate from the final file."
+    },
+    {
+      "level": 8,
+      "label": "L8 — trois lests conservés, rayon isolé et marée basse ouvrent les trois sas",
+      "description": "L8 — trois lests conservés, rayon isolé et marée basse ouvrent les trois sas",
+      "commands": "CCDDRCCRXCLLLLURCCLCRURUUURDDDDDLULURCCRDLLLLLULXLDRCCRDDDLLLLLLLLLDDDRCRRRDRRRRRRRRDDLLCRDDDDRRRRULX",
+      "observed": {
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 9,
+              "y": 10
+            },
+            "dead": false
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 16,
+              "y": 10
+            },
+            "dead": false
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 13,
+              "y": 8
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 14,
+            "y": 9
+          },
+          {
+            "x": 12,
+            "y": 13
+          }
+        ],
+        "supports": [
+          {
+            "x": 5,
+            "y": 8
+          },
+          {
+            "x": 6,
+            "y": 8
+          }
+        ],
+        "monsters": [
+          {
+            "x": 8,
+            "y": 1
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 11
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "dead": false,
+        "failed": false,
+        "complete": false,
+        "gateClosed": [
+          true,
+          true,
+          false,
+          false,
+          true,
+          false
+        ],
+        "platformActive": [
+          false,
+          false
+        ],
+        "circuits": {
+          "maree-gardee": false,
+          "chargeur": false,
+          "reserve": false,
+          "depot-miroir": true,
+          "deux-caisses": true
+        },
+        "metrics": {
+          "actions": 101,
+          "selections": 14,
+          "merchantPushes": 3,
+          "warriorPushes": 4,
+          "thiefPulls": 10,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 21,
+          "mirrorMoves": 3,
+          "reflections": 3,
+          "heroReflections": 0,
+          "pistonPushes": 2,
+          "platformsCreated": 2,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "assertion": "All assertions in this named local check passed.",
+      "scope": "Reference-route accounting of four original crates: two supports and two dry final weights, plus the first mirror as third weight. An independently verified advanced solution uses one support and extra hero reflections; two supports are not claimed as a global minimum."
+    }
+  ]
+}

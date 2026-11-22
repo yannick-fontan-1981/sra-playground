@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "command": "npm test",
+  "workingDirectory": "experiments/sinking-star-ss16",
+  "buildIncluded": true,
+  "scope": "Strict TypeScript build, standalone HTML build and trio mechanics regression tests",
+  "tests": 36,
+  "suites": 0,
+  "pass": 36,
+  "fail": 0,
+  "cancelled": 0,
+  "skipped": 0,
+  "todo": 0
+}

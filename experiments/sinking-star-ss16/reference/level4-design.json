@@ -1,0 +1,819 @@
+{
+  "spec": {
+    "id": "ss16-04",
+    "title": "Le quai des deux impulsions",
+    "rows": [
+      "##################",
+      "##################",
+      "##################",
+      "##################",
+      "##################",
+      "##################",
+      "###..To###########",
+      "###.##############",
+      "##....oo..########",
+      "##......#~########",
+      "##M..W..#~########",
+      "##......#.########",
+      "##......#......###",
+      "#########......###",
+      "#########.g.g.g###",
+      "#########......###",
+      "##################",
+      "##################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "poids-conserve",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 6
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "depart-force",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 6
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "depot-a-deux",
+        "buttons": [
+          {
+            "x": 2,
+            "y": 10
+          },
+          {
+            "x": 3,
+            "y": 6
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 4,
+          "y": 6
+        },
+        "circuit": "depart-force",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 8
+        },
+        "circuit": "depot-a-deux",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 11
+        },
+        "circuit": "poids-conserve",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CUURRCLDCCRCUDCCRDDDDDDRCCUURRRRRRRDDDDDRRDRCCDRRRRRRDDDDDRRRRRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 1,
+    "label": "Adaptation de Heroes and Light · énigme 1 · la presse remplace le côté inaccessible",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1",
+    "objective": "Précharger la file, libérer le Voleur par une poussée forcée, puis déposer deux blocs avec deux impulsions coordonnées.",
+    "secondary": {
+      "label": "Heroes and Water · énigme 3 · le premier appui prépare le suivant",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-3"
+    }
+  },
+  "metrics": {
+    "actions": 64,
+    "selections": 11,
+    "merchantPushes": 0,
+    "warriorPushes": 4,
+    "thiefPulls": 1,
+    "partnerMoves": 0,
+    "chainPushes": 2,
+    "stoneMoves": 9,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 3,
+    "platformsCreated": 2,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier charge la presse avec une file de deux blocs ; le Marchand garde une des deux commandes",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": true,
+        "depot-a-deux": false
+      }
+    },
+    {
+      "label": "La traction libère la première commande : le Voleur est poussé sur la seconde et la presse latérale dépose le premier appui",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": false,
+        "depot-a-deux": true
+      }
+    },
+    {
+      "label": "Le Voleur relâche la commande pour rouvrir la presse de chargement",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": false,
+        "depot-a-deux": false
+      }
+    },
+    {
+      "label": "Le second bloc prend place sur la presse désormais ouverte",
+      "turn": 11,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": false,
+        "depot-a-deux": false
+      }
+    },
+    {
+      "label": "Le second appui nécessite une autre impulsion : le bloc arrive au-dessus du premier support",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": false,
+        "depot-a-deux": true
+      }
+    },
+    {
+      "label": "La presse doit de nouveau s’ouvrir avant de laisser passer le Guerrier",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": false,
+        "depot-a-deux": false
+      }
+    },
+    {
+      "label": "Le Guerrier prolonge le pont : il pousse le bloc depuis le premier support jusque dans la seconde case d’eau",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": false,
+        "depot-a-deux": false
+      }
+    },
+    {
+      "label": "Les trois héros empruntent les deux appuis ; le bloc quitté par le Voleur maintient toujours la porte",
+      "turn": 64,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true,
+        "depart-force": false,
+        "depot-a-deux": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "La face d’une presse impose une poussée vers un emplacement que le héros ne peut pas atteindre depuis le bon côté.",
+      "Un déplacement forcé du Voleur interrompt la traction : le bloc garde sa place sur le bouton.",
+      "La première case de passage permet de construire la suivante."
+    ],
+    "changed": [
+      "Une presse libère le Voleur, dont l’arrivée commande une autre presse avec le Marchand.",
+      "Le Guerrier charge deux blocs et doit rouvrir la presse entre les deux dépôts.",
+      "Les deux cases d’eau, les trois personnages et la porte tenue par le bloc abandonné sont une composition originale SS16.",
+      "Le niveau utilise trois presses pures, chacune sans bouton superposé ; aucun faisceau de pouvoir ni dragon."
+    ],
+    "sourceReading": "Light 1 utilise la direction des presses pour déposer des pièces et dégager le Voleur ; Water 3 construit les positions de poussée avec les appuis déjà posés. Le déclenchement en deux presses, les deux commandes et le chargement successif sont une composition SS16.",
+    "localChecks": [
+      {
+        "turn": 5,
+        "alternative": "CCUCCL",
+        "effect": "Si le Marchand quitte sa commande avant la sortie du Voleur, la première presse libère celui-ci mais la presse de dépôt ne produit aucun appui.",
+        "observed": {
+          "supports": [],
+          "dead": false,
+          "failed": false,
+          "secondCircuit": false
+        }
+      },
+      {
+        "turn": 7,
+        "effect": "Après la première impulsion, le Voleur a été déplacé sans reprendre le bloc de la porte, et un seul appui existe.",
+        "observed": {
+          "supports": [
+            {
+              "x": 10,
+              "y": 10
+            }
+          ],
+          "stones": [
+            {
+              "x": 6,
+              "y": 7
+            },
+            {
+              "x": 9,
+              "y": 9
+            }
+          ],
+          "thief": {
+            "x": 4,
+            "y": 7
+          },
+          "pressure": true,
+          "pistonPushes": 2
+        }
+      }
+    ],
+    "checkScope": "Parcours gagnant et deux contrôles locaux. La commande prématurée reste réparable ; ce test montre la dépendance de la presse au second poids, pas une impasse globale."
+  }
+}
