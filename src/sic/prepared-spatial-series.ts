@@ -2,6 +2,7 @@ import type { NativeCommand, NativeObservation, NativeRows } from '../logos-engi
 import type { Experiment } from './preparation-experiments.ts';
 import type { FrontierContact, ContactMemory } from './contact-frontier.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
+import { cellMatches } from './calibrate-spatial-controls.ts';
 import { mechanismStance } from './reconfigure-local-mechanism.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 
@@ -45,7 +46,7 @@ export function preparedSpatialSeries(x: Experiment, o: NativeObservation, rows:
         (p.controlEvidence?.some(c => c.op === s.op && c.basis === 'untested') &&
           !measured.some(previous => previous.op === s.op && previous.stage === s.stage))) break;
       const push = s.stage === 'write';
-      if (push && (!same(s.to, s.c) || same(s.c, s.placed))) break;
+      if (push && (!cellMatches(s.to, s.c, p.pitch) || cellMatches(s.c, s.placed, p.pitch))) break;
       path.push({ kind: push ? 'push' : 'approach', command: command(s.op), to: s.to });
     }
   } else {

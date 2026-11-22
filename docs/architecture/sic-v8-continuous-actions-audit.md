@@ -1,6 +1,6 @@
 # Actions continues de SIC sur les 100 premiers niveaux
 
-## Poussées et approche d’un transfert dans SIC r207
+## Poussées et approche d’un transfert dans SIC r209
 
 Le préfixe de marche précédent s’arrêtait au premier contact. Le déplacement de l’indicateur d’arrivée pouvait aussi invalider un trajet libre. Un projet spatial retenu peut maintenant engager ses gestes de placement, jusqu’à 16 commandes. Le reçu conserve la destination attendue de chaque geste. Avant et après le geste, SIC vérifie la position du sujet et des participants liés. Pour une poussée, il vérifie aussi la nouvelle position de la pièce. Une première calibration non mesurée, une conversion de terrain ou l’activation du transfert rend la main au décideur. Après un retour contradictoire, le moteur réconcilie uniquement le préfixe exécuté.
 

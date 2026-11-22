@@ -18,6 +18,12 @@ const campaign = [
   [37, 9],
   [41, 13],
 ];
+const requiredPhysical = {
+  2: ['mirror', 'position'],
+  4: ['crate', 'mirror', 'position'],
+  5: ['crate', 'mirror'],
+  8: ['crate', 'mirror', 'position'],
+};
 const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed' };
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
@@ -72,8 +78,7 @@ export function checkRun(run) {
       );
     } else assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
     const physical = reference ? measureManipulation(row.level, issued) : [];
-    const required = row.level === 2 ? ['mirror', 'position'] : row.level === 8 ? ['crate', 'mirror', 'position'] : [];
-    if (reference) requireManipulation(physical, required, row.level);
+    if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
       level: row.level,
