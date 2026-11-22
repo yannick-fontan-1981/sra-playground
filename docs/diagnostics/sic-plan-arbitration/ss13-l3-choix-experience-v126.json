@@ -258,6 +258,191 @@
       }
     },
     "ss13CommandAndImageSequenceIdenticalToV126": true,
-    "ss06CommandAndImageSequenceIdenticalToV109": true
+    "ss06CommandAndImageSequenceIdenticalToV109": true,
+    "samePublicCheckpointTwoPolicies": {
+      "at": 139,
+      "image": "c8016398d5233974",
+      "reports": [
+        {
+          "minimum": 2,
+          "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+          "command": "ACTION2",
+          "purpose": "prepare_material_to_relieve_a_subject_holding_a_route_open",
+          "predictions": [
+            "the_gate_stays_open_with_the_controls_held_by_material_or_it_closes",
+            "both_subjects_can_reach_the_objective_region"
+          ],
+          "opening": {
+            "gate": 96,
+            "controls": [
+              113
+            ],
+            "remaining": 16
+          },
+          "witnesses": 8
+        },
+        {
+          "minimum": 3,
+          "pack": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d",
+          "command": "ACTION4",
+          "purpose": "continue_a_verified_change_of_relative_positions",
+          "predictions": [],
+          "witnesses": 7
+        }
+      ]
+    },
+    "otherGuards": {
+      "SS12": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "SS13": [
+        {
+          "level": 1,
+          "actions": 300,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "SS14": [
+        {
+          "level": 1,
+          "actions": 31,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 52,
+          "won": true
+        }
+      ],
+      "LP85": [
+        {
+          "level": 2,
+          "actions": 25,
+          "won": true,
+          "campaignStartedAt": 2
+        },
+        {
+          "level": 3,
+          "actions": 18,
+          "won": true,
+          "campaignStartedAt": 2
+        }
+      ]
+    },
+    "historicalCustomL2": {
+      "SS01": {
+        "entry": "campaign",
+        "budget": 100,
+        "actions": 32,
+        "won": true,
+        "digest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+        "identicalToV109": true
+      },
+      "SS02": {
+        "entry": "campaign",
+        "budget": 100,
+        "actions": 46,
+        "won": true,
+        "digest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7",
+        "identicalToV109": true
+      },
+      "SS03": {
+        "entry": "campaign",
+        "budget": 250,
+        "actions": 97,
+        "won": true,
+        "digest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+        "identicalToV109": true
+      },
+      "SS04": {
+        "entry": "direct",
+        "budget": 250,
+        "actions": 60,
+        "won": true,
+        "digest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+        "identicalToV109": true
+      },
+      "SS05": {
+        "entry": "campaign",
+        "budget": 170,
+        "actions": 73,
+        "won": true,
+        "digest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+        "identicalToV109": true
+      },
+      "SS06": {
+        "entry": "direct",
+        "budget": 54,
+        "actions": 54,
+        "won": true,
+        "digest": "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867",
+        "identicalToV109": true
+      },
+      "SS07": {
+        "entry": "direct",
+        "budget": 117,
+        "actions": 117,
+        "won": true,
+        "digest": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88",
+        "identicalToV109": true
+      },
+      "SS08": {
+        "entry": "direct",
+        "budget": 70,
+        "actions": 70,
+        "won": true,
+        "digest": "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5",
+        "identicalToV109": true
+      },
+      "SS09": {
+        "entry": "direct",
+        "budget": 100,
+        "actions": 54,
+        "won": true,
+        "digest": "ed31545661974f783bee0caa881aef07f49abe5dc35b880110006c3d448354c2",
+        "identicalToV109": true
+      },
+      "SS10": {
+        "entry": "direct",
+        "budget": 290,
+        "actions": 227,
+        "won": true,
+        "digest": "5870e0610e90418a0c9427a051ceb2688dca13119cc0f084be8bfba4fa7bec52",
+        "identicalToV109": true
+      },
+      "SS11": {
+        "entry": "direct",
+        "budget": 80,
+        "actions": 35,
+        "won": true,
+        "digest": "9d7480f53b585f6249ef83a07c186cb68651f04d915aaa04c7b5d7f838bc6604",
+        "identicalToV109": true
+      }
+    },
+    "sourceL1": {
+      "won": 100,
+      "played": 100,
+      "entry": "direct",
+      "budgetPerGame": 60,
+      "workers": 1,
+      "trajectoriesIdenticalToV109": 100,
+      "differingTrajectories": [],
+      "pairedPlannerGames": [],
+      "substitutionExperimentGames": []
+    }
   }
 }
