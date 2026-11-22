@@ -44,6 +44,8 @@ import { LEVEL_INFO as SS14_LEVEL_INFO } from '../experiments/sinking-star-ss14/
 import { LEVEL_INFO as SS15_LEVEL_INFO } from '../experiments/sinking-star-ss15/src/level-info.ts';
 import { LEVEL_INFO as SS16_LEVEL_INFO } from '../experiments/sinking-star-ss16/src/level-info.ts';
 import { actionFeedback as bridgesFeedback, lessonIds as bridgesLessonIds, lessonPrompt as bridgesPrompt, observeLesson as observeBridgesLesson, TUTORIAL_LEVEL as SS16_TUTORIAL_LEVEL, visibleHeroes as visibleBridgesHeroes, type BridgesLesson } from '../experiments/sinking-star-ss16/src/tutorial.ts';
+import { LEVEL_INFO as SS17_LEVEL_INFO } from '../experiments/sinking-star-ss17/src/level-info.ts';
+import { actionFeedback as fortressFeedback, lessonIds as fortressLessonIds, lessonPrompt as fortressPrompt, observeLesson as observeFortressLesson, TUTORIAL_LEVEL as SS17_TUTORIAL_LEVEL, visibleHeroes as visibleFortressHeroes, type FortressLesson } from '../experiments/sinking-star-ss17/src/tutorial.ts';
 import { actionFeedback as accordFeedback, lessonIds as accordLessonIds, lessonPrompt as accordPrompt, observeLesson as observeAccordLesson, TUTORIAL_LEVEL as SS15_TUTORIAL_LEVEL, visibleHeroes as visibleAccordHeroes, type HarmonyLesson as AccordLesson } from '../experiments/sinking-star-ss15/src/tutorial.ts';
 import { actionFeedback as harmonyFeedback, lessonIds as harmonyLessonIds, lessonPrompt as harmonyPrompt, observeLesson as observeHarmonyLesson, TUTORIAL_LEVEL as SS14_TUTORIAL_LEVEL, visibleHeroes as visibleHarmonyHeroes, type HarmonyLesson } from '../experiments/sinking-star-ss14/src/tutorial.ts';
 import { actionFeedback as anchorFeedback, lessonIds as anchorLessonIds, lessonPrompt as anchorPrompt, observeLesson as observeAnchorLesson, TUTORIAL_LEVEL as SS13_TUTORIAL_LEVEL, visibleHeroes as visibleAnchorHeroes, type TranspositionLesson as AnchorLesson } from '../experiments/sinking-star-ss13/src/tutorial.ts';
@@ -53,8 +55,8 @@ import { actionFeedback as warehouseFeedback, lessonIds as warehouseLessonIds, l
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
-type MultiHeroGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14' | 'SS15' | 'SS16';
-const isMultiHeroNativeGame = (code: string): code is MultiHeroGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14' || code === 'SS15' || code === 'SS16';
+type MultiHeroGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14' | 'SS15' | 'SS16' | 'SS17';
+const isMultiHeroNativeGame = (code: string): code is MultiHeroGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14' || code === 'SS15' || code === 'SS16' || code === 'SS17';
 const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || isMultiHeroNativeGame(code);
 const usesNativeManualControls = (code: string): boolean => usesReflectionShortcut(code) || isDirectionalNativeGame(code);
 const icon = (name: string, cls = ''): string => {
@@ -250,6 +252,11 @@ app.innerHTML = `
                 <button type="button" class="utility-button" data-hero-slot="1" data-ss16-hero="merchant" aria-pressed="false">Marchand · 1</button>
                 <button type="button" class="utility-button" data-hero-slot="2" data-ss16-hero="warrior" aria-pressed="false">Guerrier · 2</button>
                 <button type="button" class="utility-button" data-hero-slot="3" data-ss16-hero="thief" aria-pressed="false">Voleur · 3</button>
+              </div>
+              <div id="ss17-role-controls" class="utility-controls native-hero-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+                <button type="button" class="utility-button" data-hero-slot="1" data-ss17-hero="warrior" aria-pressed="false">Guerrier · 1</button>
+                <button type="button" class="utility-button" data-hero-slot="2" data-ss17-hero="thief" aria-pressed="false">Voleur · 2</button>
+                <button type="button" class="utility-button" data-hero-slot="3" data-ss17-hero="wizard" aria-pressed="false">Magicien · 3</button>
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
               <p id="ss02-level-info" class="native-game-level-info" lang="fr" hidden></p>
@@ -1160,6 +1167,128 @@ app.innerHTML = `
                   </div>
                 </details>
               </div>
+              <div id="ss17-room-help" lang="fr" hidden>
+                <p id="ss17-objective" class="native-game-level-info"></p>
+                <p class="native-game-level-info"><span id="ss17-source-label"></span> <a id="ss17-source-link" target="_blank" rel="noopener noreferrer" hidden></a> <a id="ss17-secondary-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+                <details class="native-game-tutorial">
+                  <summary>Légende du plateau</summary>
+                  <div id="ss17-legend" class="native-game-tutorial-content duo-board-legend">
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#ef4141" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Guerrier rouge · couleur 8</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#50b848" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Voleur vert · couleur 14</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#9e6bdb" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Magicien violet · couleur 15</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#8b5a2b" d="M0 0h3v1H0z"/><path fill="#000" d="M1 1h1v1H1z"/></svg>Caisse mobile</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#8b5a2b" d="M0 0h3v1H0z"/><path fill="#43d9eb" d="M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2z"/></svg>Appui dans l’eau · fixe</span>
+                    <span><i class="swatch" style="--c:#2765d3"></i>Eau</span>
+                    <span><i class="swatch" style="--c:#777777"></i>Sol gris</span>
+                    <span><i class="swatch" style="--c:#333333"></i>Mur gris foncé</span>
+                    <span><i class="swatch goal"></i>Destination · trois à occuper</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Bouton de pression</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M0 0h3v1H0z"/><path fill="#000" d="M1 1h1v1H1z"/></svg>Porte / presse latérale</span>
+                    <span id="ss17-platform-legend-active" hidden><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M0 0h3v1H0z"/><path fill="#fff" d="M1 1h1v1H1z"/></svg>Porte-plateforme · déployée</span>
+                    <span id="ss17-platform-legend-inactive" hidden><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#2765d3" d="M0 0h3v1H0z"/><path fill="#f5a9c8" d="M0 0h1v1H0zM2 0h1v1H2zM0 2h1v1H0zM2 2h1v1H2z"/><path fill="#fff" d="M1 1h1v1H1z"/></svg>Porte-plateforme · retirée</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#777" d="M0 0h3v1H0z"/><path fill="#000" d="M0 0h2v1H0zM0 1h1v1H0z"/><path fill="#fff" d="M2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0z"/></svg>Miroir mobile · dos noir</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#000" d="M0 0h3v1H0z"/><path fill="#ef4141" d="M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2z"/></svg>Monstre</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#ccc" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Arrivée d’un héros par reflet</span>
+                    <span><i class="swatch" style="background:transparent;border:1px solid #ccc"></i>Arrivée d’une caisse par reflet</span>
+                  </div>
+                </details>
+                <details id="ss17-tutorial" class="native-game-tutorial" open hidden>
+                  <summary>Niveau 1 · L’atelier de la forteresse</summary>
+                  <div class="native-game-tutorial-content">
+                    <p id="ss17-lesson-next" aria-live="polite"></p>
+                    <ul>
+                      <li data-ss17-lesson="select">Changer de héros sans faire avancer le monde.</li>
+                      <li data-ss17-lesson="move">Marcher avec le personnage sélectionné.</li>
+                      <li data-ss17-lesson="warrior-push">Prendre le bon côté avec le Guerrier.</li>
+                      <li data-ss17-lesson="chain">Pousser toute une file et prévoir son extrémité.</li>
+                      <li data-ss17-lesson="thief-pull">Tirer la pièce derrière le Voleur.</li>
+                      <li data-ss17-lesson="single-pull">Séparer une caisse de sa voisine.</li>
+                      <li data-ss17-lesson="partner-pull">Tirer un partenaire sans déclencher sa capacité.</li>
+                      <li data-ss17-lesson="release">Lâcher la charge par un pas de côté.</li>
+                      <li data-ss17-lesson="mirror-motion">Déplacer un miroir et changer ses arrivées.</li>
+                      <li data-ss17-lesson="water-support">Investir une caisse dans un appui définitif.</li>
+                      <li data-ss17-lesson="cross-support">Traverser un appui sans le déplacer.</li>
+                      <li data-ss17-lesson="wizard-swap">Échanger le Magicien avec une caisse visible.</li>
+                      <li data-ss17-lesson="wizard-partner">Relever un partenaire par transposition.</li>
+                      <li data-ss17-lesson="wizard-bend">Viser une cible derrière un coude de miroir.</li>
+                      <li data-ss17-lesson="wizard-walk">Faire marcher le Magicien quand sa visée est vide.</li>
+                      <li data-ss17-lesson="mirror">Activer tous les miroirs avec Espace.</li>
+                      <li data-ss17-lesson="hero-reflection">Faire passer un héros par reflet, sans sa capacité.</li>
+                      <li data-ss17-lesson="crate-reflection">Transporter une caisse vers l’autre rive.</li>
+                      <li data-ss17-lesson="button">Maintenir un bouton avec un poids.</li>
+                      <li data-ss17-lesson="gate">Observer une porte changer d’état.</li>
+                      <li data-ss17-lesson="press">Déplacer un occupant avec une presse latérale.</li>
+                      <li data-ss17-lesson="monster">Faire se rencontrer deux monstres à distance sûre.</li>
+                      <li data-ss17-lesson="goals">Réunir le trio sur les trois destinations.</li>
+                    </ul>
+                    <p id="ss17-lesson-progress"></p>
+                    <p>Un échange garde un occupant à chaque extrémité. Un appui consomme une caisse. Une poussée déplace toute la file. Combine ces règles pour réunir le trio.</p>
+                    <p>Annuler conserve les découvertes. Recommencer, repartir ou choisir un autre niveau remet le suivi à zéro.</p>
+                  </div>
+                </details>
+                <details id="ss17-roles-help" class="native-game-tutorial" open>
+                  <summary>Les trois héros et leurs pouvoirs</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Guerrier (1).</strong> Pousse toute une file si son extrémité est libre.</p>
+                    <p><strong>Voleur (2).</strong> En allant vers une case libre, tire une seule pièce directement derrière lui.</p>
+                    <p><strong>Magicien (3).</strong> Échange sa place avec la première caisse, le premier monstre ou le premier partenaire atteint par son rayon. Sans cible, il tente de marcher.</p>
+                    <p>Un héros déjà sur une destination reste sélectionnable. Les trois héros doivent survivre et occuper ensemble les trois destinations.</p>
+                    <p>Une caisse reste mobile sur le sol. Dans l’eau sans soutien, elle devient un appui permanent marqué d’un X cyan. Tu peux le traverser, mais plus le déplacer.</p>
+                  </div>
+                </details>
+                <details id="ss17-cargo-help" class="native-game-tutorial" open>
+                  <summary>Pousser, tirer, puis lâcher</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>La bonne case pour agir.</strong> Une caisse contre un mur peut être impossible à pousser et pourtant facile à récupérer avec le Voleur. Inversement, tirer jusqu’au fond d’un couloir peut enfermer le Voleur derrière sa charge.</p>
+                    <p><strong>Une file se prépare.</strong> Le Guerrier pousse toutes les pièces consécutives, y compris les héros et les miroirs. Le Magicien peut échanger sa place avec le premier occupant de sa visée. Le Voleur extrait seulement la plus proche. Utilise ces différences pour séparer, aligner puis transporter les ressources.</p>
+                    <p><strong>Le départ compte.</strong> Le Voleur tire seulement lors de son propre pas. Un départ latéral, une transposition, un reflet ou une poussée par un partenaire peut donc le dégager en laissant la charge utile en place.</p>
+                  </div>
+                </details>
+                <details id="ss17-mirror-help" class="native-game-tutorial" open>
+                  <summary>Le miroir · préparer les deux axes</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Distance conservée.</strong> Espace / X active tous les miroirs ensemble. Chaque miroir relie les deux axes de sa face blanche à angle droit. Sur ces axes, le candidat le plus proche passe ; à distance égale, les deux occupants échangent leurs places.</p>
+                    <p>Le <strong>plus gris clair</strong> annonce l’arrivée d’un héros, le <strong>contour carré gris clair</strong> celle d’une caisse. Une arrivée bloquée pour le candidat plus éloigné n’empêche pas le plus proche de passer.</p>
+                    <p>Les héros, caisses et monstres se reflètent. Les appuis et les miroirs ne se transportent pas par reflet. Pour déplacer un miroir, pousse-le, tire-le ou utilise une presse ; son orientation reste la même.</p>
+                    <p>Un mur, une porte fermée ou un autre miroir peut bloquer le trajet. Les miroirs responsables peuvent signaler ce blocage en rouge, en conservant leur diagonale blanche. L’eau laisse passer les trajets, mais une arrivée dans l’eau sans soutien peut être fatale.</p>
+                  </div>
+                </details>
+                <details id="ss17-wizard-help" class="native-game-tutorial" open>
+                  <summary>Magicien · visée et conservation des places</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Flèche : échange ou marche.</strong> Le rayon cherche la première caisse, le premier partenaire ou le premier monstre. Il traverse l’eau, mais s’arrête aux murs, aux portes fermées et aux dos des miroirs. Les appuis immergés restent fixes et ne sont pas des cibles.</p>
+                    <p><strong>Face blanche : virage.</strong> La visée peut traverser plusieurs miroirs avant de trouver sa cible. Si elle revient au Magicien, le trajet s’éclaire puis le Magicien clignote : aucune pièce ne bouge. Déplace un miroir ou change l’angle d’entrée.</p>
+                    <p><strong>Un échange conserve les occupants.</strong> Tu peux remplacer le héros qui maintient un bouton sans interrompre le circuit, mais tu ne peux pas peupler une île vide par échange. Une poussée, un pont ou un reflet doit d’abord y apporter une pièce.</p>
+                    <p><strong>Espace : autre mécanisme.</strong> Le reflet global utilise la distance au miroir et peut déplacer plusieurs pièces. Les flèches du Magicien échangent seulement le lanceur et la première cible du rayon.</p>
+                  </div>
+                </details>
+                <details id="ss17-piston-help" class="native-game-tutorial" open hidden>
+                  <summary>Bouton, porte et presse latérale</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Le <strong>plus rose sur fond gris est un bouton</strong>. Son centre donne la couleur du circuit. Héros, caisse, monstre et miroir peuvent servir de poids. Tous les boutons du même circuit doivent être occupés ensemble.</p>
+                    <p>La presse a un <strong>centre noir fermé, gris ouvert</strong>. Ses marques colorées montrent le circuit et le sens de poussée. Selon la commande, elle se ferme à l’appui ou au relâchement.</p>
+                    <p>Quand elle se ferme, elle pousse l’occupant de sa propre case et la file éventuelle devant lui. Une fermeture sur une case vide ne pousse pas une pièce voisine. Si la file est bloquée, l’occupant pris dans la presse peut être écrasé.</p>
+                    <p>Une presse peut déposer une caisse dans un renfoncement, déplacer un miroir ou rapprocher des monstres. Les héros déplacés ne déclenchent pas leur pouvoir. Z annule la cascade entière.</p>
+                  </div>
+                </details>
+                <details id="ss17-platform-help" class="native-game-tutorial" open hidden>
+                  <summary>La plateforme et sa charge</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Une <strong>plateforme déployée porte les héros et les objets</strong>. Retirée, elle laisse l’eau visible. Son repère coloré renvoie au bouton de commande.</p>
+                    <p>Quitte la plateforme avant de retirer son poids et vérifie les deux partenaires. Une caisse restée dessus devient un appui lorsque la plateforme disparaît. Dans SS17, cet appui permanent reste utilisable même si la plateforme est redéployée.</p>
+                    <p>Les commandes se règlent pendant la même cascade. Un reflet ou une presse peut préparer un passage et sa charge ensemble ; le déplacement volontaire dans une eau déjà sans soutien est refusé.</p>
+                  </div>
+                </details>
+                <details id="ss17-monster-help" class="native-game-tutorial" hidden>
+                  <summary>Monstres · menace et contrepoids</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Un monstre peut être déplacé par poussée, traction, transposition, reflet ou presse. Il peut maintenir un bouton : <strong>prépare son remplaçant avant de l’éliminer</strong>.</p>
+                    <p>Après une action effective, les monstres frappent leurs voisins orthogonaux. <strong>Une diagonale n’est pas un contact.</strong> Surveille les trois héros, y compris ceux que tu ne contrôles pas.</p>
+                    <p>Deux monstres adjacents s’éliminent simultanément et frappent encore durant cette vague. Garde le trio à distance. Un monstre tombé dans l’eau sans soutien disparaît.</p>
+                    <p>L’animation montre les étapes jusqu’au résultat. La sélection et les déplacements refusés ne déclenchent pas de combat ; Annuler reste disponible pendant la séquence.</p>
+                  </div>
+                </details>
+              </div>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -1418,6 +1547,7 @@ const ss13Lessons = new Set<AnchorLesson>();
 const ss14Lessons = new Set<HarmonyLesson>();
 const ss15Lessons = new Set<AccordLesson>();
 const ss16Lessons = new Set<BridgesLesson>();
+const ss17Lessons = new Set<FortressLesson>();
 const multiHeroRoomHelp = {
   SS06: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'warrior', label: 'Guerrier' }], directions: 'Flèches pour marcher ou pousser.', rooms: SS06_LEVEL_INFO,
     heroes: visibleHeroes, lessons: ss06Lessons, total: duoLessonIds.length, prompt: () => duoPrompt(ss06Lessons), tutorialLevel: 1 },
@@ -1457,6 +1587,10 @@ const multiHeroRoomHelp = {
     directions: 'Flèches pour marcher, pousser ou tirer.', rooms: SS16_LEVEL_INFO,
     heroes: visibleBridgesHeroes, lessons: ss16Lessons, total: bridgesLessonIds.length,
     prompt: () => bridgesPrompt(ss16Lessons), tutorialLevel: SS16_TUTORIAL_LEVEL },
+  SS17: { roles: [{ kind: 'warrior', label: 'Guerrier' }, { kind: 'thief', label: 'Voleur' }, { kind: 'wizard', label: 'Magicien' }],
+    directions: 'Flèches pour marcher, pousser, tirer ou échanger.', rooms: SS17_LEVEL_INFO,
+    heroes: visibleFortressHeroes, lessons: ss17Lessons, total: fortressLessonIds.length,
+    prompt: () => fortressPrompt(ss17Lessons), tutorialLevel: SS17_TUTORIAL_LEVEL },
 } as const;
 let ss06Solo = false;
 let loading = false;
@@ -1816,9 +1950,9 @@ function updateMultiHeroRoomHelp(game: MultiHeroGameCode, current: GameObservati
   if (!info || !current) return;
   const objective = solo
     ? 'Amène le Guerrier rouge sur l’unique contour jaune.'
-    : third ? 'Amène le Marchand, le Guerrier et le Voleur sur les trois contours jaunes en même temps.'
+    : third ? `Amène le ${first.label}, le ${second.label} et le ${third.label} sur les trois contours jaunes en même temps.`
     : `Amène le ${first.label} et le ${second.label} sur les deux contours jaunes en même temps.`;
-  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16') && 'objective' in info ? info.objective : objective;
+  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17') && 'objective' in info ? info.objective : objective;
   if (game === 'SS06') element('#ss06-cooperation-help').hidden = solo;
   const selected = heroes(current.frame).find(hero => hero.selected)?.kind;
   const roleAttribute = `data-${id}-hero`;
@@ -1840,7 +1974,7 @@ function updateMultiHeroRoomHelp(game: MultiHeroGameCode, current: GameObservati
   element(`#${id}-piston-help`).hidden = !info.piston;
   const hasPlatform = 'platform' in info && info.platform;
   element(`#${id}-platform-help`).hidden = !hasPlatform;
-  if (game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16') {
+  if (game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17') {
     const secondary = element<HTMLAnchorElement>(`#${id}-secondary-source-link`);
     const reference = 'secondary' in info ? info.secondary : undefined;
     const secondaryUrl = reference?.url ?? ('secondaryUrl' in info ? info.secondaryUrl : undefined);
@@ -1903,10 +2037,11 @@ function updateInterface(): void {
   const nextLevel = Boolean(observation && hasNextLevel(observation));
   const victory = complete && !nextLevel;
   element('#win-overlay').hidden = !ready() || !complete || (mode === 'agent' && !victory);
-  const multiHero = isMultiHeroNativeGame(selectedGame.code);
+  const gameCode = selectedGame.code;
+  const multiHero = isMultiHeroNativeGame(gameCode);
   const solo = selectedGame.code === 'SS06' && ss06Solo;
   element('#win-title').textContent = multiHero
-    ? solo ? 'Le Guerrier a atteint sa destination' : selectedGame.code === 'SS16' ? 'Les trois destinations sont occupées' : 'Les deux destinations sont occupées'
+    ? solo ? 'Le Guerrier a atteint sa destination' : multiHeroRoomHelp[gameCode].roles.length === 3 ? 'Les trois destinations sont occupées' : 'Les deux destinations sont occupées'
     : victory ? 'VICTORY' : 'Level complete';
   element('#win-continue-label').textContent = nextLevel ? 'Next level' : 'Restart from level 1';
   element<HTMLButtonElement>('#win-continue').disabled = !ready() || Boolean(agentState?.busy);
@@ -1957,7 +2092,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   interruptibleAnimation = (manualAction || isMultiHeroNativeGame(next.gameCode)) && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
-  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15' || next.gameCode === 'SS16') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15' || next.gameCode === 'SS16' || next.gameCode === 'SS17') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
@@ -1980,7 +2115,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
     if (next.state === 'GAME_OVER') element('#game-feedback').textContent =
       `${soloBefore ? 'Le Guerrier' : 'Un personnage'} a été perdu. Annule ou recommence le niveau.`;
     else if (previous && next.levelsCompleted > previous.levelsCompleted) element('#game-feedback').textContent =
-      soloBefore ? 'La destination est atteinte.' : next.gameCode === 'SS16' ? 'Les trois destinations sont occupées.' : 'Les deux destinations sont occupées.';
+      soloBefore ? 'La destination est atteinte.' : multiHeroRoomHelp[next.gameCode].roles.length === 3 ? 'Les trois destinations sont occupées.' : 'Les deux destinations sont occupées.';
     else if (next.state === 'NOT_FINISHED') element('#game-feedback').textContent = '';
   } else if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent =
     hasNextLevel(next) ? `Level ${next.level} complete.` : 'VICTORY';
@@ -2040,6 +2175,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS14' && action !== undefined) observeHarmonyLesson(ss14Lessons, before, next, action);
     if (next.gameCode === 'SS15' && action !== undefined) observeAccordLesson(ss15Lessons, before, next, action);
     if (next.gameCode === 'SS16' && action !== undefined) observeBridgesLesson(ss16Lessons, before, next, action);
+    if (next.gameCode === 'SS17' && action !== undefined) observeFortressLesson(ss17Lessons, before, next, action);
     if (next.gameCode === 'SS08') {
       if (action !== undefined) observeTranspositionLesson(ss08Lessons, before, next, action);
       if (next.level === SS08_TUTORIAL_LEVEL && (control === 'selectLevel' || control === 'reset')) {
@@ -2065,6 +2201,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     else if (next.gameCode === 'SS14' && action !== undefined) element('#game-feedback').textContent = harmonyFeedback(before, next, action);
     else if (next.gameCode === 'SS15' && action !== undefined) element('#game-feedback').textContent = accordFeedback(before, next, action);
     else if (next.gameCode === 'SS16' && action !== undefined) element('#game-feedback').textContent = bridgesFeedback(before, next, action);
+    else if (next.gameCode === 'SS17' && action !== undefined) element('#game-feedback').textContent = fortressFeedback(before, next, action);
     else if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
@@ -2108,7 +2245,7 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
-  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14' || observation?.gameCode === 'SS15' || observation?.gameCode === 'SS16') && interruptibleAnimation) {
+  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14' || observation?.gameCode === 'SS15' || observation?.gameCode === 'SS16' || observation?.gameCode === 'SS17') && interruptibleAnimation) {
     presentationGeneration += 1;
     interruptibleAnimation = false;
     busy = false;
@@ -2163,11 +2300,13 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   ss14Lessons.clear();
   ss15Lessons.clear();
   ss16Lessons.clear();
+  ss17Lessons.clear();
   delete element('#ss12-monster-help').dataset.level;
   delete element('#ss13-monster-help').dataset.level;
   delete element('#ss14-monster-help').dataset.level;
   delete element('#ss15-monster-help').dataset.level;
   delete element('#ss16-monster-help').dataset.level;
+  delete element('#ss17-monster-help').dataset.level;
   ss06Solo = false;
   if (isMultiHeroNativeGame(game.code)) element<HTMLDetailsElement>(`#${game.code.toLowerCase()}-tutorial`).open = true;
   if (game.code === 'SS03' || game.code === 'SS04' || bard) {
@@ -2179,8 +2318,8 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
     'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
     'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'ss06-room-help', 'ss06-role-controls',
     'ss07-room-help', 'ss07-role-controls', 'ss08-room-help', 'ss08-role-controls', 'ss09-room-help',
-    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'ss15-room-help', 'ss15-role-controls', 'ss16-room-help', 'ss16-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
-  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14' || game.code === 'SS15' || game.code === 'SS16';
+    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'ss15-room-help', 'ss15-role-controls', 'ss16-room-help', 'ss16-role-controls', 'ss17-room-help', 'ss17-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
+  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14' || game.code === 'SS15' || game.code === 'SS16' || game.code === 'SS17';
   for (const [id, french, english] of [
     ['undo-button', 'Annuler', 'Undo'],
     ['reset-button', 'Recommencer', 'Reset'],

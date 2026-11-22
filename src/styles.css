@@ -529,11 +529,11 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .native-game-tutorial-content li::before{content:'○';position:absolute;left:0}
 .native-game-tutorial-content li.done::before{content:'✓';color:#83cdae}
 .native-hero-controls{flex-direction:row;flex-wrap:wrap;margin-top:10px}
-#ss16-role-controls .utility-button{min-height:44px;flex:1 1 auto}
+#ss16-role-controls .utility-button,#ss17-role-controls .utility-button{min-height:44px;flex:1 1 auto}
 .native-hero-controls button[aria-pressed="true"]{outline:2px solid #ef4141;outline-offset:1px}
 .native-hero-controls button:is([data-ss06-hero="merchant"],[data-ss07-hero="merchant"],[data-ss08-hero="merchant"],[data-ss09-hero="merchant"],[data-ss16-hero="merchant"])[aria-pressed="true"]{outline-color:#f59e29}
-.native-hero-controls button:is([data-ss07-hero="thief"],[data-ss10-hero="thief"],[data-ss13-hero="thief"],[data-ss14-hero="thief"],[data-ss16-hero="thief"])[aria-pressed="true"]{outline-color:#50b848}
-.native-hero-controls button:is([data-ss08-hero="wizard"],[data-ss11-hero="wizard"],[data-ss13-hero="wizard"],[data-ss15-hero="wizard"])[aria-pressed="true"]{outline-color:#9e6bdb}
+.native-hero-controls button:is([data-ss07-hero="thief"],[data-ss10-hero="thief"],[data-ss13-hero="thief"],[data-ss14-hero="thief"],[data-ss16-hero="thief"],[data-ss17-hero="thief"])[aria-pressed="true"]{outline-color:#50b848}
+.native-hero-controls button:is([data-ss08-hero="wizard"],[data-ss11-hero="wizard"],[data-ss13-hero="wizard"],[data-ss15-hero="wizard"],[data-ss17-hero="wizard"])[aria-pressed="true"]{outline-color:#9e6bdb}
 .native-hero-controls button:is([data-ss09-hero="bard"],[data-ss12-hero="bard"],[data-ss14-hero="bard"],[data-ss15-hero="bard"])[aria-pressed="true"]{outline-color:#e03bca}
 .duo-board-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem}
 .duo-board-legend>span:not([hidden]){display:inline-flex;align-items:center;gap:.375rem}
@@ -689,6 +689,14 @@ button:disabled{opacity:.32}
   .minimal-play-area #fullscreen-button{top:9px;right:9px;width:24px;height:24px}
   .minimal-control-column{padding:18px 20px;border-left:0;border-top:1px solid #304763}
   .minimal-control-column .compact-controller{gap:27px}
+  .minimal-play-area:has(#ss17-role-controls:not([hidden])) .board-source-credit{margin-top:14px;font-size:14px}
+  .minimal-control-column #manual-panel:has(#ss17-role-controls:not([hidden])){display:flex;flex-direction:column;gap:12px}
+  #ss17-role-controls{order:-2;margin-top:0}
+  #manual-panel:has(#ss17-role-controls:not([hidden])) .compact-controller{order:-1;gap:12px;flex-wrap:wrap}
+  #manual-panel:has(#ss17-role-controls:not([hidden])) .level-controls{width:100%;margin-bottom:0}
+  #manual-panel:has(#ss17-role-controls:not([hidden])) .input-pad{width:138px}
+  #manual-panel:has(#ss17-role-controls:not([hidden])) .d-pad{grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px)}
+  #manual-panel:has(#ss17-role-controls:not([hidden])) .space-action{height:44px}
   .minimal-level-explorer{padding:11px 15px}
   .about-section{gap:23px;padding-block:35px}
   .about-heading h2{font-size:28px}
