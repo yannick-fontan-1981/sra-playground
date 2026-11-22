@@ -107,8 +107,8 @@ async function run(code, games) {
           ...board,
           // A direct-entry engine may display an earlier unfinished level after a win.
           // The native test campaign has still advanced one ordinal on that scored action.
-          level: finish === start && board.levelsCompleted > initialCompleted
-            ? 2
+          level: board.levelsCompleted - initialCompleted === finish - start + 1
+            ? finish - start + 2
             : board.level - start + 1,
           levelCount: board.levelCount - start + 1,
           levelsCompleted: board.levelsCompleted - initialCompleted,
@@ -222,7 +222,7 @@ async function run(code, games) {
       return observation();
     },
     dispatch: async (action) => {
-      if (board.level > finish || (finish === start && board.levelsCompleted > initialCompleted))
+      if (board.level > finish || board.levelsCompleted - initialCompleted >= finish - start + 1)
         throw Error('Action after target level');
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
@@ -304,6 +304,20 @@ async function run(code, games) {
           patch: clickPatch(previous.frame, action.data),
           ...changeSummary(previous.frame, board.frame, action.data),
         });
+      // Some direct-entry engines return to the earliest uncompleted level after scoring.
+      // Select the earned successor through the public menu, preserving the real credit.
+      if (start > 1 && previous.level < finish && board.level < start &&
+          board.levelsCompleted === previous.levelsCompleted + 1 && board.state !== 'WIN') {
+        if (!board.canSelectLevel) throw Error('The scored direct-entry campaign has no public level selector.');
+        const level = previous.level + 1, credit = board.levelsCompleted;
+        const selected = await games.dispatch({ type: 'selectLevel', level });
+        if (selected.level !== level || selected.levelsCompleted !== credit)
+          throw Error('Selecting the earned successor did not preserve its level and official credit.');
+        const entry = { level, frame: hash(selected.frame) };
+        if (replayCommands) replayCommands.at(-1).nextLevelEntry = entry;
+        if (source) steps.at(-1).nextLevelEntry = entry;
+        board = selected;
+      }
       return { observation: observation(), executionMs };
     },
   });

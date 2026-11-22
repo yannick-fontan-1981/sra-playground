@@ -65,6 +65,15 @@ function verify(run) {
       const command = op(step);
       b = replay.act(command);
       assert.equal(hash(b).slice(0, 16), step.to, where);
+      if (step.nextLevelEntry) {
+        assert.ok(run.start > 1 && level < run.finish && b.level < run.start && b.canSelectLevel && b.state !== 'WIN', where);
+        assert.equal(b.levelsCompleted, previousScore + 1, where);
+        assert.equal(step.nextLevelEntry.level, level + 1, where);
+        b = backend.dispatch({ type: 'selectLevel', level: level + 1 });
+        assert.equal(b.level, level + 1, where);
+        assert.equal(b.levelsCompleted, previousScore + 1, where);
+        assert.equal(hash(b), step.nextLevelEntry.frame, where);
+      }
       commands.update(command + '\n');
     }
     const credit = b.levelsCompleted - previousScore;

@@ -40,7 +40,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   } else if(b.level!==r.start && b.canSelectLevel) b=await engine.dispatch({type:'selectLevel',level:r.start});
   assert.equal(b.level,r.start);assert.equal(b.levelsCompleted,r.initialCompleted);assert.equal(hash(b.frame),r.initial);
   assert.equal(r.replayCommands.length,r.issued);assert.equal(r.sic,r.issued);
-  const visits=new Map(),resets=[],tape=[];
+  const visits=new Map(),resets=[],tape=[],levelSelections=[];
   const receptions = { decisions: 0, recognized: 0, recognizedWithClick: 0 };
   const entry = { decisions: 0, allowedCommands: 0, ordinaryGeometry: 0, inputsAndDirectionalGeometry: 0 };
   let previousDirectionalGeometry = false;
@@ -78,6 +78,17 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
     const record=visits.get(level)??{level,actions:0,won:false};
     record.actions++;record.won ||= b.levelsCompleted>levelsCompleted || b.state==='WIN';
     visits.set(level,record);
+    if (c.nextLevelEntry) {
+      assert.ok(r.start > 1 && level < r.finish && b.level < r.start && b.canSelectLevel && b.state !== 'WIN');
+      assert.equal(b.levelsCompleted, levelsCompleted + 1);
+      assert.equal(c.nextLevelEntry.level, level + 1);
+      const credit = b.levelsCompleted;
+      b = await engine.dispatch({ type: 'selectLevel', level: level + 1 });
+      assert.equal(b.level, level + 1);
+      assert.equal(b.levelsCompleted, credit);
+      assert.equal(hash(b.frame), c.nextLevelEntry.frame);
+      levelSelections.push({ afterAction: i + 1, ...c.nextLevelEntry });
+    }
     tape.push(c.id===6?[c.id,c.data.x,c.data.y]:c.id);
   }
   assert.equal(resets.length,r.resets,'Unlocated reset: '+key);
@@ -88,6 +99,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
     ...(r.parallelWorkers === undefined ? {} : {parallelWorkers:r.parallelWorkers}),
     cap:r.cap,levels,resets,tapeDigest:hash(tape),final:hash(b.frame)};
   if (delivery) result.coldDeliveryEntry = entry;
+  if (levelSelections.length) result.scoredLevelSelections = levelSelections;
   if (reception) result.observedReceptions = receptions;
   if (transient) result.transientSubjects = transient.tally;
   if(games.has(key)) assert.deepEqual(games.get(key),result);
