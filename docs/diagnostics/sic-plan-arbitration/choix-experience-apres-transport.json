@@ -729,6 +729,757 @@
         "maximumRemaining": 1
       }
     ],
-    "officialReceipt": "transport_official"
+    "observedAfterTests": [
+      {
+        "action": 11,
+        "controlledSubject": 1,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull",
+          "exchange"
+        ],
+        "compatibleOnNextObservedPose": [
+          "pull"
+        ],
+        "otherSubjectStayed": false,
+        "returned": "c9bfbcffc974c783"
+      },
+      {
+        "action": 19,
+        "controlledSubject": 0,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull",
+          "field",
+          "exchange"
+        ],
+        "compatibleOnNextObservedPose": [
+          "walk",
+          "push",
+          "pull",
+          "field"
+        ],
+        "otherSubjectStayed": true,
+        "returned": "a179cef9821b4ef2"
+      },
+      {
+        "action": 21,
+        "controlledSubject": 0,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull",
+          "field"
+        ],
+        "compatibleOnNextObservedPose": [
+          "walk",
+          "push",
+          "pull"
+        ],
+        "otherSubjectStayed": true,
+        "returned": "938b013002487ae1"
+      },
+      {
+        "action": 24,
+        "controlledSubject": 0,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull"
+        ],
+        "compatibleOnNextObservedPose": [
+          "walk",
+          "push"
+        ],
+        "otherSubjectStayed": true,
+        "returned": "3ae06443ae320a18"
+      },
+      {
+        "action": 31,
+        "controlledSubject": 0,
+        "hypotheses": [
+          "walk",
+          "push"
+        ],
+        "compatibleOnNextObservedPose": [
+          "push"
+        ],
+        "otherSubjectStayed": true,
+        "returned": "0d0b14e8d17914e1"
+      }
+    ],
+    "officialReceipt": "transport_official",
+    "frozenVersions": [
+      {
+        "game": "SS07",
+        "policy": "v137",
+        "arm": "mechanism",
+        "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+        "budget": 350,
+        "entry": [
+          1,
+          1
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "actions": 60,
+            "won": true
+          }
+        ],
+        "commands": [
+          "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+        ],
+        "trials": []
+      },
+      {
+        "game": "SS07",
+        "policy": "v139",
+        "arm": "reconsider",
+        "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+        "budget": 350,
+        "entry": [
+          1,
+          1
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "actions": 60,
+            "won": true
+          }
+        ],
+        "commands": [
+          "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+        ],
+        "trials": []
+      }
+    ],
+    "frozenComparisons": [
+      {
+        "versions": [
+          "v137",
+          "v139"
+        ],
+        "identicalPrefix": 60,
+        "firstDifference": null
+      }
+    ]
+  },
+  "refutationPolicy": {
+    "commit": "ed66bc5d4ffb2dac456ee774c58b0a2b0cbb4ded",
+    "thresholdOnFixedTape": [
+      {
+        "limit": 1,
+        "deferred": 29,
+        "first": {
+          "action": 52,
+          "command": "ACTION1",
+          "originalWitnesses": [
+            51
+          ]
+        }
+      },
+      {
+        "limit": 2,
+        "deferred": 27,
+        "first": {
+          "action": 54,
+          "command": "ACTION1",
+          "originalWitnesses": [
+            51,
+            53
+          ]
+        }
+      },
+      {
+        "limit": 3,
+        "deferred": 25,
+        "first": {
+          "action": 56,
+          "command": "ACTION1",
+          "originalWitnesses": [
+            51,
+            53,
+            55
+          ]
+        }
+      }
+    ],
+    "sourceArchiveSurvey": {
+      "testedEpisodesWithRefutation": 224,
+      "gamesWithRefutation": [
+        "AR25",
+        "AS66",
+        "CASC",
+        "CGWL",
+        "CLRS",
+        "COLM",
+        "COMB",
+        "ESCT",
+        "ETAG",
+        "FITE",
+        "GABA",
+        "GIGO",
+        "GRAV",
+        "KEYD",
+        "KLOT",
+        "LKEY",
+        "MOTO",
+        "POLA",
+        "REWI",
+        "SKBN",
+        "SNAR",
+        "SWCH",
+        "VOIS"
+      ],
+      "gamesWithRepeatedConflicts": {
+        "COMB": {
+          "episodes": 3,
+          "examples": [
+            {
+              "tape": "baseline-source-v109-filtered.jsonl",
+              "level": 2,
+              "winners": [
+                [
+                  2,
+                  false
+                ]
+              ],
+              "identicalTrials": 5
+            },
+            {
+              "tape": "source-checkpoint01.jsonl",
+              "level": 2,
+              "winners": [
+                [
+                  2,
+                  false
+                ]
+              ],
+              "identicalTrials": 5
+            }
+          ]
+        },
+        "ESCT": {
+          "episodes": 4,
+          "examples": [
+            {
+              "tape": "access57-baseline-4.jsonl",
+              "level": 4,
+              "winners": [
+                [
+                  4,
+                  false
+                ]
+              ],
+              "identicalTrials": 6
+            },
+            {
+              "tape": "equation58-witness-ESCT-4.jsonl",
+              "level": 4,
+              "winners": [
+                [
+                  4,
+                  false
+                ]
+              ],
+              "identicalTrials": 6
+            }
+          ]
+        },
+        "FITE": {
+          "episodes": 2,
+          "examples": [
+            {
+              "tape": "serial-unmeasured-source-l3-v109.jsonl",
+              "level": 3,
+              "winners": [
+                [
+                  3,
+                  true
+                ]
+              ],
+              "identicalTrials": 4
+            },
+            {
+              "tape": "serial-valid-unmeasured-source-l3-v109.jsonl",
+              "level": 3,
+              "winners": [
+                [
+                  3,
+                  true
+                ]
+              ],
+              "identicalTrials": 4
+            }
+          ]
+        },
+        "GABA": {
+          "episodes": 26,
+          "examples": [
+            {
+              "tape": "serial-silent-input-prospective-source-GABA-2-2-v136.jsonl",
+              "level": 2,
+              "winners": [
+                [
+                  2,
+                  false
+                ]
+              ],
+              "identicalTrials": 25
+            },
+            {
+              "tape": "serial-silent-input-prospective-source-GABA-2-2-v137.jsonl",
+              "level": 2,
+              "winners": [
+                [
+                  2,
+                  false
+                ]
+              ],
+              "identicalTrials": 25
+            }
+          ]
+        },
+        "SKBN": {
+          "episodes": 6,
+          "examples": [
+            {
+              "tape": "compose47-destination-SKBN5.jsonl",
+              "level": 5,
+              "winners": [
+                [
+                  5,
+                  true
+                ]
+              ],
+              "identicalTrials": 3
+            },
+            {
+              "tape": "contact44-baseline-skbn-upper.jsonl",
+              "level": 5,
+              "winners": [
+                [
+                  5,
+                  false
+                ]
+              ],
+              "identicalTrials": 3
+            }
+          ]
+        },
+        "VOIS": {
+          "episodes": 4,
+          "examples": [
+            {
+              "tape": "control38-VOIS2.jsonl",
+              "level": 2,
+              "winners": [
+                [
+                  2,
+                  false
+                ]
+              ],
+              "identicalTrials": 3
+            },
+            {
+              "tape": "cursor40-certified-VOIS2.jsonl",
+              "level": 2,
+              "winners": [
+                [
+                  2,
+                  false
+                ]
+              ],
+              "identicalTrials": 3
+            }
+          ]
+        }
+      },
+      "variableReturnEpisodes": 0
+    },
+    "trials": [
+      {
+        "game": "GABA",
+        "policy": "v139",
+        "arm": "release",
+        "pack": "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d",
+        "budget": 120,
+        "entry": [
+          2,
+          2
+        ],
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "commands": [
+          "bab9729c895388666162eb6e08db2e94c9a3213186fe16598b7b05de9bbd7dd5"
+        ],
+        "trials": [
+          {
+            "action": 41,
+            "command": 5,
+            "stage": "control",
+            "priorRevisions": [
+              40,
+              8,
+              41
+            ],
+            "outcomes": [
+              "mark_remains_at_the_landing",
+              "original_appearance_restored_at_the_landing"
+            ],
+            "distinguishingPixels": 72,
+            "origin": "d40f0d23623866af",
+            "returned": "d40f0d23623866af",
+            "observation": "mark_remains_at_the_landing"
+          },
+          {
+            "action": 47,
+            "command": 5,
+            "stage": "control",
+            "priorRevisions": [
+              40,
+              36,
+              47
+            ],
+            "outcomes": [
+              "mark_remains_at_the_landing",
+              "original_appearance_restored_at_the_landing"
+            ],
+            "distinguishingPixels": 72,
+            "origin": "dc43999dd6a864a8",
+            "returned": "dc43999dd6a864a8",
+            "observation": "mark_remains_at_the_landing"
+          }
+        ],
+        "distinctPublicImages": 14,
+        "deferred": 0,
+        "firstDeferred": [],
+        "refutedMechanismMoves": 38
+      },
+      {
+        "game": "GABA",
+        "policy": "v139",
+        "arm": "reconsider",
+        "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+        "budget": 120,
+        "entry": [
+          2,
+          2
+        ],
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "commands": [
+          "ac1f5eac4df7f6b9614d8b245e186d90203dc38f662d0a98d77951455e613232"
+        ],
+        "trials": [
+          {
+            "action": 41,
+            "command": 5,
+            "stage": "control",
+            "priorRevisions": [
+              40,
+              8,
+              41
+            ],
+            "outcomes": [
+              "mark_remains_at_the_landing",
+              "original_appearance_restored_at_the_landing"
+            ],
+            "distinguishingPixels": 72,
+            "origin": "d40f0d23623866af",
+            "returned": "d40f0d23623866af",
+            "observation": "mark_remains_at_the_landing"
+          },
+          {
+            "action": 47,
+            "command": 5,
+            "stage": "control",
+            "priorRevisions": [
+              40,
+              36,
+              47
+            ],
+            "outcomes": [
+              "mark_remains_at_the_landing",
+              "original_appearance_restored_at_the_landing"
+            ],
+            "distinguishingPixels": 72,
+            "origin": "dc43999dd6a864a8",
+            "returned": "dc43999dd6a864a8",
+            "observation": "mark_remains_at_the_landing"
+          }
+        ],
+        "distinctPublicImages": 17,
+        "deferred": 12,
+        "firstDeferred": [
+          {
+            "action": 54,
+            "declined": "ACTION1",
+            "chosen": 2,
+            "witnesses": [
+              51,
+              53
+            ],
+            "chosenPurpose": "witnessedPreview",
+            "chosenResult": "preview_contradicted",
+            "expectedPart": [
+              38,
+              86
+            ],
+            "expectedActor": [
+              28,
+              86
+            ],
+            "source": "a7ac7a92b8b72dbd",
+            "return": "cebc29abdda18f7c"
+          },
+          {
+            "action": 56,
+            "declined": "ACTION1",
+            "chosen": 2,
+            "witnesses": [
+              51,
+              53
+            ],
+            "chosenPurpose": "witnessedPreview",
+            "chosenResult": "preview_unobserved",
+            "expectedPart": [
+              38,
+              86
+            ],
+            "expectedActor": [
+              28,
+              86
+            ],
+            "source": "a7ac7a92b8b72dbd",
+            "return": "cebc29abdda18f7c"
+          }
+        ],
+        "refutedMechanismMoves": 16
+      },
+      {
+        "game": "SS01",
+        "policy": "v139",
+        "arm": "release",
+        "pack": "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d",
+        "budget": 150,
+        "entry": [
+          2,
+          2
+        ],
+        "levels": [
+          {
+            "level": 2,
+            "actions": 44,
+            "won": true
+          }
+        ],
+        "commands": [
+          "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+        ],
+        "trials": [],
+        "distinctPublicImages": 44,
+        "deferred": 0,
+        "firstDeferred": [],
+        "refutedMechanismMoves": 0
+      },
+      {
+        "game": "SS01",
+        "policy": "v139",
+        "arm": "reconsider",
+        "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+        "budget": 150,
+        "entry": [
+          2,
+          2
+        ],
+        "levels": [
+          {
+            "level": 2,
+            "actions": 44,
+            "won": true
+          }
+        ],
+        "commands": [
+          "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+        ],
+        "trials": [],
+        "distinctPublicImages": 44,
+        "deferred": 0,
+        "firstDeferred": [],
+        "refutedMechanismMoves": 0
+      },
+      {
+        "game": "SS07",
+        "policy": "v139",
+        "arm": "release",
+        "pack": "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d",
+        "budget": 150,
+        "entry": [
+          2,
+          2
+        ],
+        "levels": [
+          {
+            "level": 2,
+            "actions": 117,
+            "won": true
+          }
+        ],
+        "commands": [
+          "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+        ],
+        "trials": [],
+        "distinctPublicImages": 93,
+        "deferred": 0,
+        "firstDeferred": [],
+        "refutedMechanismMoves": 0
+      },
+      {
+        "game": "SS07",
+        "policy": "v139",
+        "arm": "reconsider",
+        "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+        "budget": 150,
+        "entry": [
+          2,
+          2
+        ],
+        "levels": [
+          {
+            "level": 2,
+            "actions": 117,
+            "won": true
+          }
+        ],
+        "commands": [
+          "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+        ],
+        "trials": [],
+        "distinctPublicImages": 93,
+        "deferred": 0,
+        "firstDeferred": [],
+        "refutedMechanismMoves": 0
+      },
+      {
+        "game": "SS07",
+        "policy": "v139",
+        "arm": "reconsider",
+        "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+        "budget": 350,
+        "entry": [
+          1,
+          1
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "actions": 60,
+            "won": true
+          }
+        ],
+        "commands": [
+          "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+        ],
+        "trials": [],
+        "distinctPublicImages": 57,
+        "deferred": 0,
+        "firstDeferred": [],
+        "refutedMechanismMoves": 0
+      }
+    ],
+    "paired": [
+      {
+        "game": "GABA",
+        "entry": [
+          2,
+          2
+        ],
+        "identicalPrefix": 53,
+        "firstDifference": {
+          "action": 54,
+          "reference": [
+            1,
+            null,
+            "a7ac7a92b8b72dbd",
+            "dc43999dd6a864a8"
+          ],
+          "candidate": [
+            2,
+            null,
+            "a7ac7a92b8b72dbd",
+            "cebc29abdda18f7c"
+          ]
+        },
+        "novelty": [
+          {
+            "arm": "release",
+            "distinctStateCommands": 40,
+            "newStateCommandsAfterCommonPrefix": 4
+          },
+          {
+            "arm": "reconsider",
+            "distinctStateCommands": 52,
+            "newStateCommandsAfterCommonPrefix": 16
+          }
+        ]
+      },
+      {
+        "game": "SS01",
+        "entry": [
+          2,
+          2
+        ],
+        "identicalPrefix": 44,
+        "firstDifference": null,
+        "novelty": [
+          {
+            "arm": "release",
+            "distinctStateCommands": 44,
+            "newStateCommandsAfterCommonPrefix": 0
+          },
+          {
+            "arm": "reconsider",
+            "distinctStateCommands": 44,
+            "newStateCommandsAfterCommonPrefix": 0
+          }
+        ]
+      },
+      {
+        "game": "SS07",
+        "entry": [
+          2,
+          2
+        ],
+        "identicalPrefix": 117,
+        "firstDifference": null,
+        "novelty": [
+          {
+            "arm": "release",
+            "distinctStateCommands": 113,
+            "newStateCommandsAfterCommonPrefix": 0
+          },
+          {
+            "arm": "reconsider",
+            "distinctStateCommands": 113,
+            "newStateCommandsAfterCommonPrefix": 0
+          }
+        ]
+      }
+    ]
   }
 }

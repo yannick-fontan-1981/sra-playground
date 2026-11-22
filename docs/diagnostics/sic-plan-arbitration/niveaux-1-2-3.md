@@ -398,8 +398,26 @@ Un auteur choisit la stratégie `retest_a_conditional_control_after_transport` e
 
 ### Une expérience de mouvement débloque SS07 L1
 
-Le témoin v109 et le candidat figé v137 ont le même état d’entrée à froid et 350 coups disponibles sur SS07 L1. Le témoin perd après 250 coups. Le candidat gagne en **60**, sans réinitialisation ni leçon. La première divergence est le **coup 11**. SIC confronte quatre lois de mouvement qui prédisent des positions différentes pour les deux sujets. L’issue la moins informative laisse deux lois en lice. Il mesure à nouveau le comportement aux coups 19, 21, 24 et 31. Le dernier test distingue les deux lois restantes. Les déplacements composés fournissent 50 des 60 commandes. La dernière obtient le crédit officiel. Le témoin v109 et le candidat v137 diffèrent sur plusieurs évolutions du pilote. Cette comparaison situe la décision décisive dans la partie et laisse ouverte l’attribution à une révision particulière.
+Le témoin v109 et le candidat figé v137 ont le même état d’entrée à froid et 350 coups disponibles sur SS07 L1. Le témoin perd après 250 coups. Le candidat gagne en **60**, sans réinitialisation ni leçon. La première divergence est le **coup 11**. SIC confronte quatre lois de mouvement qui prédisent des positions différentes pour les deux sujets. L’issue la moins informative laisse deux lois en lice. La position publique enregistrée juste après le coup 11 correspond à la seule hypothèse de traction pour le sujet alors contrôlé. Une fois l’autre sujet sélectionné, les coups 19, 21, 24 puis 31 réduisent ses hypothèses compatibles de cinq à quatre, puis trois, deux et une. La dernière est la poussée. Lors de ces quatre essais, le premier sujet garde sa position. Le pack v139 reproduit les 60 mêmes commandes et images. Les déplacements composés fournissent 50 des 60 commandes. La dernière obtient le crédit officiel. Le témoin v109 et le candidat v137 diffèrent sur plusieurs évolutions du pilote. Cette comparaison situe la décision décisive dans la partie et laisse ouverte l’attribution à une révision particulière.
 
 Parmi les indices retrouvés dans les anciennes bandes sources, le pilote v137 retrouve **SKBN L3 en 22**, **MOTO L3 en 15** et **SWCH L2 en 20** après son L1 en 25. **GRAV L3** échoue à froid au plafond de 120. Ces réussites figurent maintenant dans le registre de la série v109 et suivantes. Les anciens résultats n’y ont pas été ajoutés sans vérification.
 
 Sur les archives sources exploitables du chantier, 224 épisodes de 23 jeux contiennent au moins un retour qui contredit une prédiction concernant un mécanisme. Sur six jeux, la même préparation a été contredite trois fois ou plus avec la même image de départ et d’arrivée, la même commande, les mêmes rôles et la même prédiction. Il s’agit de GABA, COMB, ESCT, FITE, SKBN et VOIS. Les épisodes de FITE et SKBN incluent des victoires. Ces observations motivent un essai de transfert du réglage v139 sur COMB L2. Elles ne prédisent pas son score.
+
+### Changer d’expérience quand plusieurs plans échouent sur la même étape
+
+Sur GABA L2 à froid, les deux packs du pilote v139 diffèrent par un seul champ déclaratif. Le témoin conserve la stratégie de v138. Le candidat fixe à deux le nombre de retours identiques qui contredisent une même étape de préparation. Le moteur, l’image initiale et le budget de 120 actions sont identiques. Le calcul effectué à l’avance sur la bande du témoin situait la première décision à réexaminer au coup 54. En partie autonome, les deux pilotes produisent les mêmes 53 commandes et images. Au **coup 54**, le témoin monte. Le candidat descend pour tester une autre prévision. Son reçu cite les observations résultant des coups 50 et 52, la pièce suivie et les positions qui avaient été prédites. La nouvelle prévision est à son tour contredite.
+
+| GABA L2 à froid | Témoin | Seuil de deux réfutations |
+| --- | ---: | ---: |
+| Images publiques distinctes sur la partie | 14 | 17 |
+| Couples image de départ–commande jamais essayés, du coup 54 à la fin | 4 | 16 |
+| Étapes de reconfiguration du mécanisme contredites sur la partie | 38 | 16 |
+| Décisions dont le reçu indique une préparation écartée | 0 | 12 |
+| Victoire officielle en 120 actions | Non | Non |
+
+À budget égal, SIC a effectivement essayé 12 couples image–commande supplémentaires après la première divergence. La capacité encore ouverte consiste à choisir parmi elles une préparation qui change effectivement le résultat d’une interaction. Sur les images où les rôles restent ambigus, une prévision de position peut encore prendre le relais et se tromper à plusieurs reprises.
+
+Sur le pilote v139 figé, les deux packs gagnent SS01 L2 à froid en **44** et SS07 L2 à froid en **117**, avec exactement les mêmes commandes et retours dans chaque jeu. Aucun reçu de ces quatre victoires ne signale une préparation écartée par le nouveau seuil.
+
+La vérification TypeScript passe. Les 72 tests ciblés passent avec les trois fichiers Python de référence lus aux fins de ligne du dépôt Git. Sur le checkout Windows, leur conversion LF–CRLF fait échouer le test d’empreinte octet par octet.
