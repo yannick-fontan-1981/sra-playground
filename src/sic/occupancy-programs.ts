@@ -42,6 +42,7 @@ export type OccupancyProgram = {
 };
 export type OccupancyTrial = { plan: OccupancyProgram; index: number; preview?: MorphologicalPreview };
 export type OccupancyMemory = {
+  mechanismRefutations?: import('./refuted-mechanism-steps.ts').MechanismRefutations;
   exposedSubstrate?:Record<string,Record<string,{count:number;ref:number}>>;
   layouts: Record<number, PoseView>;
   forms?: Record<number, Record<string, string>>;

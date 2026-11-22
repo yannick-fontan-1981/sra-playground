@@ -251,6 +251,11 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     },
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
+      if (m.occupancy) {
+        const limit = informationPreference?.mode === 'active' && informationPreference.mechanismRefutationLimit;
+        if (limit) (m.occupancy.mechanismRefutations ??= {limit, returns:{}}).limit = limit;
+        else if (m.occupancy.mechanismRefutations) delete m.occupancy.mechanismRefutations;
+      }
       if(remaining<1)return null;
       const silentGroup=group===startSilentTest || group===finishSilentTest;
       const silent=silentGroup && testSilent && comparePreparations
@@ -454,6 +459,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         kind: preparedEffectsId,
         actions: [command],
         experiment,
+        ...(m.occupancy?.mechanismRefutations?.deferred?.observation === o.observation_ref ?
+          {deferredMechanismForecast:m.occupancy.mechanismRefutations.deferred} : {}),
         ...(experiment.transportControl ? {transportControlForecast: {...experiment.transportControl,
           outcomes: transportControlOutcomes[experiment.transportControl.stage], evidence: experiment.refs}} : {}),
         ...(experiment.markedMotion ? {markedMotionForecast:{...experiment.markedMotion,

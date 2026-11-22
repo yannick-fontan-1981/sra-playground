@@ -191,3 +191,35 @@ test('when the displacement is unknown an untried control can test the mobility 
   const gone = await scene(o.revision + 1, [6, 5]);
   assert.equal(measureMobility(test, o, gone.o, gone.rows, test.op).moved, 0);
 });
+
+test('an approach refuted twice is deferred across new destinations until its measurable prediction changes', async () => {
+  const {observeStepReturn,deferRefutedStep} = await import('../src/sic/refuted-mechanism-steps.ts');
+  const {compileInformationPreference} = await import('../src/sic/information-preference.ts');
+  const preference={strategy:'motion_contrast',mode:'active',minimumOutcomes:2,mechanismRefutationLimit:2};
+  const limit=compileInformationPreference(preference).mechanismRefutationLimit!;
+  assert.throws(()=>compileInformationPreference({...preference,mechanismRefutationLimit:0}));
+  assert.throws(()=>compileInformationPreference({...preference,unrecognized:true}));
+  const memory:import('../src/sic/refuted-mechanism-steps.ts').MechanismRefutations={limit,returns:{}};
+  const step:import('../src/sic/reachable-preview-configurations.ts').LayoutStep={
+    stage:'move',op:'ACTION4',p:[8,10],to:[10,10],c:[14,10],placed:[14,10]};
+  const plan:import('../src/sic/reconfigure-local-mechanism.ts').MechanismPlan={
+    p:'carrier',c:'part',fixed:[],start:step.p,initialC:step.c,placed:step.placed,launch:null,arrival:null,use:null,
+    indicator:null,steps:[step],key:'reach-mark',basis:'test_displacement',support:[],home:1,otherSetups:1,opensCells:1,recoverable:true};
+  const before=(await scene(1,[4,5])).o, first=(await scene(2,[5,5],[8,5])).o;
+  const again={...first,revision:4};
+  observeStepReturn(memory,before,first,plan,step,false);
+  observeStepReturn(memory,before,first,plan,step,false);
+  assert.equal(deferRefutedStep(memory,before,plan,step,false),false);
+  observeStepReturn(memory,before,again,plan,step,false);
+  const alternateGoal={...plan,arrival:[9,11] as Point,key:'reach-another-mark'};
+  assert.equal(deferRefutedStep(memory,before,alternateGoal,step,false),true);
+  assert.deepEqual(memory.deferred?.refutations,[first.revision,again.revision]);
+  assert.equal(deferRefutedStep(memory,before,plan,{...step,placed:[16,10]},false),false);
+  assert.equal(deferRefutedStep(memory,before,plan,step,true),false);
+  assert.equal(deferRefutedStep(memory,(await scene(5,[4,5],[9,5])).o,plan,step,false),false);
+  assert.equal(deferRefutedStep(memory,before,{...plan,c:'second-part'},step,false),false);
+  observeStepReturn(memory,before,{...first,revision:6,frame_hash:'different-return'},plan,step,false);
+  assert.equal(deferRefutedStep(memory,before,plan,step,false),false);
+  observeStepReturn(memory,before,first,plan,step,true);
+  assert.equal(Object.keys(memory.returns).length,0);
+});

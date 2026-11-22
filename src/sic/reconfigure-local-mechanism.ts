@@ -13,6 +13,7 @@ import { contactEvidence } from './contact-aspirations.ts';
 import type { Experiment, Memory } from './preparation-experiments.ts';
 import { pathToContact } from './mechanism-contact-routes.ts';
 import { plansForWitnessedSubjects } from './plan-witnessed-mechanism.ts';
+import { deferRefutedStep, observeStepReturn } from './refuted-mechanism-steps.ts';
 import { cellMatches } from './calibrate-spatial-controls.ts';
 export type MechanismPlan = {
   pitch?: XY;
@@ -85,6 +86,8 @@ function offer(
 ): Experiment | null {
   const step = t.plan.steps[t.index];
   if (!step || !available.has(step.op) || !atCurrent(step, named(o, rows, t.plan), t.plan.pitch)) return null;
+  if (occupancy.mechanismRefutations && deferRefutedStep(occupancy.mechanismRefutations, o, t.plan, step,
+      occupancy.edges.some(e => e.s === s && e.op === step.op && e.unstable))) return null;
   const destination = occupancy.observed[s + '/' + step.op];
   const measured = destination !== undefined && destination >= 0 ? occupancy.layouts[destination] : undefined;
   if (measured) {
@@ -594,6 +597,9 @@ export function finishMechanism(
       step.stage === 'use' ||
       (actual.site && cellMatches(actual.site, step.placed, t.plan.pitch)))
   );
+  const refutations = m.occupancy?.mechanismRefutations;
+  if (refutations && live && !won && op === step.op && atCurrent(step, before, t.plan.pitch))
+    observeStepReturn(refutations, b, a, t.plan, step, matched);
   state.attempts[t.plan.key] = a.revision;
   const control = t.plan.controlEvidence?.find((z) => z.op === op);
   if (live && !won && control?.basis === 'untested' && step.stage !== 'read' && step.stage !== 'use')

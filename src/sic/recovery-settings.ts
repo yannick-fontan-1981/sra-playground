@@ -245,7 +245,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
         current.reasoningMode === draft.configuration.reasoningMode ? null : `reasoning modes → ${draft.configuration.reasoningMode ?? 'standard'}`,
         JSON.stringify(current.informationPreference) === JSON.stringify(draft.configuration.informationPreference) ? null
           : `information priority → ${draft.configuration.informationPreference
-            ? `${informationStrategies[draft.configuration.informationPreference.strategy]} (≥ ${draft.configuration.informationPreference.minimumOutcomes} returns, ${draft.configuration.informationPreference.mode})`
+            ? `${informationStrategies[draft.configuration.informationPreference.strategy]} (≥ ${draft.configuration.informationPreference.minimumOutcomes} returns, ${draft.configuration.informationPreference.mode}${draft.configuration.informationPreference.mechanismRefutationLimit ? `, reconsider after ${draft.configuration.informationPreference.mechanismRefutationLimit} identical mechanism refutations` : ''})`
             : 'current order'}`,
         current.maxDepth === draft.configuration.maxDepth ? null : `depth ${current.maxDepth} → ${draft.configuration.maxDepth}`,
         current.maxNodes === draft.configuration.maxNodes ? null : `states ${current.maxNodes} → ${draft.configuration.maxNodes}`,

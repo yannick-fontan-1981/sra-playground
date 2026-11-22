@@ -1,0 +1,18 @@
+{
+  "id": "sic.native-strategies",
+  "schemaVersion": 6,
+  "configuration": {
+    "version": 1,
+    "mode": "active",
+    "maxDepth": 88,
+    "maxNodes": 1000,
+    "solver": "sic-fallback",
+    "informationPreference": {
+      "mode": "active",
+      "strategy": "retest_a_conditional_control_after_transport",
+      "minimumOutcomes": 2,
+      "mechanismRefutationLimit": 2
+    }
+  },
+  "digest": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85"
+}
