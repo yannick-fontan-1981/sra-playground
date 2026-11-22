@@ -25,6 +25,7 @@ import {
 import { regionEntries, regionEntryTest } from './unknown-region-entry.ts';
 import { planDisplacements } from './plan-paired-displacements.ts';
 import { testSelectionWhileHolding } from './test-selection-while-holding.ts';
+import { readExchangedLandmarks } from './exchanged-landmarks.ts';
 import type { TransportForecast } from './transport-observations.ts';
 
 export type ReusableEffects = Pick<
@@ -212,6 +213,7 @@ export function seePair(
     return;
   }
   const m = q.learning;
+  readExchangedLandmarks(s, m, old, next, before, after, op, ref);
   q.reading = next;
   if (s.other.length) m.visibleFeatures = s.other.filter(site => after[site] === s.initial[site]);
   watchPassage(s, m, old, next, after, ref, op);

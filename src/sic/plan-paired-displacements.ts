@@ -1,4 +1,5 @@
 import { persistentOpeningTest } from './test-a-persistent-opening.ts';
+import { firstUnmeasuredApproach } from './exchanged-landmarks.ts';
 import { anotherOperandTest } from './experiment-with-another-operand.ts';
 import { startPassage, projectedPassage } from './prepare-projected-passage.ts';
 import {
@@ -49,6 +50,9 @@ export function planDisplacements(
   const space = geometry(s),
     ops = Object.keys(m.motors),
     world = v.subjects.join('/') + '|' + v.active;
+  const guarded = minimumProbeOutcomes === 2 && !!m.exchangedLandmarks?.length;
+  const settled = (f: TransportForecast | undefined) => f && (!guarded ||
+    !firstUnmeasuredApproach(s, m, v, f.expected as Reading));
   if (m.join?.water.every((p) => v.supports.includes(p))) {
     if (!m.passage) {
       const candidate = startPassage(s);
@@ -148,14 +152,15 @@ export function planDisplacements(
   const budgetForOpening = !budgetForOperand && minimumProbeOutcomes === 2 && m.openings?.need ? Math.floor(budget / 2) : 0;
   const substitution = () => budgetForOperand ? anotherOperandTest(s,m,v,ref,depth,budgetForOperand) :
     budgetForOpening ? persistentOpeningTest(s,m,v,ref,depth,budgetForOpening) : undefined;
-  if (saved?.from === key(v) && !m.denied[key(v) + '|' + saved.command]) {
+  if (saved?.from === key(v) && !m.denied[key(v) + '|' + saved.command] &&
+      !(guarded && firstUnmeasuredApproach(s, m, v, saved.expected))) {
     if (m.planSolves === false && minimumProbeOutcomes && !m.join) {
       const alternative = substitution();
       if (alternative) return alternative;
       const nearUnknown = minimumProbeOutcomes === 2 && s.other.some(p => md(s, p, v.subjects[v.active]) === 1);
       const entry = nearUnknown ? regionEntryTest(s, m, v, regionEntries(s, m, v), ref, minimumProbeOutcomes) : undefined;
       const test = entry ?? unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
-      if (test) return test;
+      if (settled(test)) return test;
     }
     return offer(
       saved.expected,
@@ -345,6 +350,8 @@ export function planDisplacements(
       (minimumProbeOutcomes === 2 && s.other.length > 0)) ? [] as Node[] : undefined;
   let best = root,
     bestProgress = Infinity;
+  let approach: TransportForecast | undefined;
+  let hasUnvisitedAlternative = false;
   for (let i = 0; heap.length && i < budget - budgetForOperand - budgetForOpening; i++) {
     const n = pop();
     if (n.parent) reached?.push(n);
@@ -362,6 +369,16 @@ export function planDisplacements(
       if (m.denied[key(n.s) + '|' + action]) continue;
       const t = imagine(s, space, n.s, op, m, laws[n.s.active]);
       if (!t) continue;
+      const unknown = guarded && firstUnmeasuredApproach(s, m, n.s, t);
+      if (unknown) {
+        if (n === root && !approach) {
+          approach = offer(t, op, 'test_access_next_to_an_object_that_can_be_exchanged',
+            ['the_subject_reaches_the_adjacent_site_and_remains_registered','the_arrival_or_the_subject_registration_changes']);
+          approach.landmarkApproach = unknown;
+          approach.evidence = [...new Set([...approach.evidence, unknown.exchange])];
+        }
+        continue;
+      }
       if (
         m.avoid?.some((p) =>
           t.subjects.some(
@@ -385,6 +402,7 @@ export function planDisplacements(
         cost = n.g + 1;
       if ((seen.get(id) ?? Infinity) <= cost) continue;
       seen.set(id, cost);
+      if (n === root && !m.visits[id]) hasUnvisitedAlternative = true;
       const rank = score(t),
         f = rank + 0.7 * cost + Math.min(15, (m.visits[id] ?? 0) * 3);
       const next = { s: t, g: cost, f, score: rank, parent: n, op: action };
@@ -405,12 +423,14 @@ export function planDisplacements(
     if (alternative) return alternative;
     const entries = minimumProbeOutcomes === 2 ? regionEntries(s, m, v) : new Map();
     const test = regionEntryTest(s, m, v, entries, ref, minimumProbeOutcomes) ?? unresolvedMotionTest(s, m, v, ref, minimumProbeOutcomes);
-    if (test) return test;
+    if (settled(test)) return test;
     if (reached?.length) {
       const preparation = prepareMotionTest(s, m, root, reached, ref, minimumProbeOutcomes, entries);
-      if (preparation) return preparation;
+      if (settled(preparation)) return preparation;
     }
   }
+  if (approach && (!best.parent || (best.score >= root.score && !hasUnvisitedAlternative &&
+      (m.visits[key(v)] ?? 0) > 1))) return approach;
   if (!best.parent) return;
   const plan = [];
   for (let n: Node = best; n.parent; n = n.parent)
@@ -418,12 +438,17 @@ export function planDisplacements(
   m.plan = plan.reverse();
   m.planSolves = best.score === 0;
   const step = m.plan[0]!;
-  return offer(
+  const choice = offer(
     step.expected,
     step.command,
     'prepare_a_configuration_that_opens_a_route_for_both_subjects',
     ['compare_predicted_and_observed_displacement'],
   );
+  if (approach?.landmarkApproach && approach.command !== choice.command) {
+    choice.deferredApproach = { command: approach.command, ...approach.landmarkApproach };
+    choice.evidence = [...new Set([...choice.evidence, approach.landmarkApproach.exchange])];
+  }
+  return choice;
 }
 
 function prepareMotionTest(s: Scene, m: Learning, root: Node, reached: Node[], ref: string, minimum: number, entries: RegionEntries) {

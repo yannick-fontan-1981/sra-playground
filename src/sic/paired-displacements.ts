@@ -1,4 +1,5 @@
 import { observeRequiredOpening, type OpeningEvidence } from './test-a-persistent-opening.ts';
+import type { ExchangedLandmark } from './exchanged-landmarks.ts';
 import { observeSelection, openingsAfterSelection, selectionEvidence, selectionRefutedOpening, type SelectionReturn } from './test-selection-while-holding.ts';
 import { applyImages, images, type Projection } from './paired-previews.ts';
 import { chooseEffectExperiment } from './discriminating-experiment.ts';
@@ -34,6 +35,7 @@ export type Learning = {
   imageTrial?: Reading;
   avoid?: number[];
   mobileForms?: string[];
+  exchangedLandmarks?: ExchangedLandmark[];
   previewPose?: string;
   visibleEffect?: Reading;
   visibleFeatures?: number[];
@@ -159,14 +161,20 @@ export function imagine(
     !n.pieces.includes(to) &&
     !n.subjects.includes(to);
   if (h === 'exchange' || h === 'clear_path_exchange') {
-    const z = exchangeTarget(space, v, motor, h);
+    const z = exchangeTarget(space, v, motor, h, v.landmarks);
     if (z >= 0) {
-      if (z === b) n.subjects[other] = a;
+      const landmark = v.landmarks?.indexOf(z) ?? -1;
+      if (landmark >= 0) {
+        if (!m.exchangedLandmarks?.[landmark]?.exchanges[side]) return;
+        n.landmarks = [...v.landmarks!];
+        n.landmarks[landmark] = a;
+      } else if (z === b) n.subjects[other] = a;
       else n.pieces[n.pieces.indexOf(z)] = a;
       n.subjects[side] = z;
     }
   }
   if (n.subjects[side] === a) {
+    if (v.landmarks?.includes(target)) return;
     if (h === 'field') {
       const r = m.radius || 1;
       const near = (p: number) =>
@@ -302,7 +310,7 @@ export function localEffects(
     }
     const space = geometry(s);
     const exchanged = Math.abs(dx) + Math.abs(dy) > 1 && (dx === 0 || dy === 0) &&
-      ((b.pieces.includes(to) && a.pieces.includes(from)) ||
+      ((b.pieces.includes(to) && a.pieces.includes(from)) || b.landmarks?.some((p,i) => p === to && a.landmarks?.[i] === from) ||
         (b.subjects[peer(side)] === to && a.subjects[peer(side)] === from));
     const strength = m.evidence[side];
     if (exchanged && strength.clear_path_exchange === undefined)
@@ -323,6 +331,12 @@ export function localEffects(
     }
   }
   if (f) {
+    if (f.landmarkApproach) {
+      const {site,side} = f.landmarkApproach;
+      delete m.plan;
+      return a.subjects[side] === f.expected.subjects[side] && a.landmarks?.includes(site) &&
+        md(s, a.subjects[side], site) === 1 ? 'the_subject_can_approach_the_stationary_operand' : 'the_approach_did_not_have_the_predicted_arrival';
+    }
     if (f.gateSelectionTest) {
       const {context, ticket} = f.gateSelectionTest;
       if (!m.checked.includes(ticket)) m.checked.push(ticket);
@@ -457,6 +471,8 @@ export function forecast(
   const command =
     op === 'select' ? pointCommand(s.grid, v.subjects[peer(v.active)]) : op;
   const measuredReturn = m.witnessedOperandReturns?.[operandContext(v, command)];
+  const operand = v.landmarks?.findIndex((p,i) => p === next.subjects[v.active] && next.landmarks?.[i] === v.subjects[v.active]);
+  const exchange = operand !== undefined && operand >= 0 ? m.exchangedLandmarks?.[operand]?.exchanges[v.active] : undefined;
   return {
     purpose: why,
     paired: {
@@ -468,12 +484,14 @@ export function forecast(
     command,
     from: v,
     expected: next,
+    ...(exchange ? { landmarkExchange: { from:next.subjects[v.active], to:v.subjects[v.active], ref:exchange } } : {}),
     target: s.goals,
     evidence: [
       ...new Set([
         ref,
         ...m.refs,
         ...(measuredReturn ? [measuredReturn.ref] : []),
+        ...(exchange ? [exchange] : []),
         ...(op === 'select' ? selectionEvidence(s, m, v) : []),
         ...(m.scope ? [m.scope] : []),
         ...(m.carry ? [m.carry] : []),

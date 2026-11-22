@@ -16,6 +16,7 @@ import {
   law,
 } from '../src/sic/paired-displacements.ts';
 import type { Scene, Reading } from '../src/sic/paired-scene.ts';
+import { firstUnmeasuredApproach, readExchangedLandmarks } from '../src/sic/exchanged-landmarks.ts';
 import { observeRelease, recordReleaseTest } from '../src/sic/test-released-subject.ts';
 import { carryPair, compareAfterControl, inquiry, pairProposal } from '../src/sic/probe-paired-displacements.ts';
 import { planDisplacements } from '../src/sic/plan-paired-displacements.ts';
@@ -34,6 +35,46 @@ const s: Scene = {
   features: [],
   initial: Array(35).fill(''),
 };
+test('track an exchanged singleton by its two observed endpoints and test the scope of approach per subject', () => {
+  const initial = Array(35).fill('floor'); initial[12] = 'unclassified';
+  const room: Scene = { ...s, initial, other: [12] };
+  const b: Reading = { subjects: [8,28], active: 0, pieces: [], supports: [], opened: [], anchor: -1 };
+  const a: Reading = { ...b, subjects: [12,28] };
+  const before = [...initial], after = [...initial];
+  before[8]='actor'; after[12]='actor'; after[8]='unclassified';
+  const m = fresh();
+  const unrelated = [...after]; unrelated[8]='floor';
+  readExchangedLandmarks(room,m,b,a,before,unrelated,'ACTION4','only a body moved');
+  assert.equal(m.exchangedLandmarks,undefined);
+  readExchangedLandmarks(room,m,b,a,before,after,'ACTION4','the body and mark swapped');
+  assert.deepEqual(b.landmarks,[12]); assert.deepEqual(a.landmarks,[8]);
+  localEffects(room,m,b,a,'ACTION4','the body and mark swapped');
+  assert.deepEqual(imagine(room,geometry(room),b,'ACTION4',m,'exchange')?.landmarks,[8]);
+  assert.notEqual(key(b),key({...b,landmarks:[27]}));
+  const approach: Reading = {...a,subjects:[10,28]}, arrival: Reading = {...a,subjects:[9,28]};
+  assert.equal(firstUnmeasuredApproach(room,m,approach,arrival)?.side,0);
+  readExchangedLandmarks(room,m,approach,arrival,after,after,'ACTION3','the body remained visible');
+  assert.equal(firstUnmeasuredApproach(room,m,approach,arrival),undefined);
+  assert.equal(firstUnmeasuredApproach(room,m,{...a,subjects:[12,10]},{...a,subjects:[12,9]})?.side,1);
+});
+test('a measured alternative route takes precedence over a first approach to a displaced feature', () => {
+  const room = { ...s, goals: [16,28] };
+  const v: Reading = { active: 0, subjects: [10,28], pieces: [], supports: [], opened: [], anchor: -1, landmarks: [8] };
+  const make = () => {
+    const m = fresh();
+    for (const [i, [dx,dy]] of [[0,-1],[0,1],[-1,0],[1,0]].entries())
+      m.motors['ACTION'+(i+1)] = { dx: dx!, dy: dy!, ref:'measured motor' };
+    m.exchangedLandmarks = [{ form:'previously displaced', exchanges:{1:'witnessed'}, approaches:{} }];
+    m.planSolves = true;
+    m.plan = [{ from:key(v),command:'ACTION3',expected:{...v,subjects:[9,28]} }];
+    return m;
+  };
+  assert.equal(planDisplacements(room,make(),v,'now',6,120,2)?.command,'ACTION2');
+  assert.equal(planDisplacements(room,make(),v,'now',6,120,3)?.command,'ACTION3');
+  const measured = make();
+  measured.exchangedLandmarks![0]!.approaches[0] = 'the same subject reached adjacent ground';
+  assert.equal(planDisplacements(room,measured,v,'now',6,120,2)?.command,'ACTION3');
+});
 test('test a held passage with a stationary change of control, then use the observed outcome', () => {
   const room: Scene = { ...s, doors: [{ site: 10, controls: [0], closed: 'shut' }] };
   const at: Reading = { subjects: [0, 23], active: 0, pieces: [], supports: [], opened: [10], anchor: -1 };
