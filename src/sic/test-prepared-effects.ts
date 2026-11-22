@@ -473,7 +473,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           } : {}),
         }} : {}),
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
-          ...(m.contactFrontier?.repair ? {afterReset:{checkpoint:m.contactFrontier.repair.frame,
+          ...(m.contactFrontier?.repair ? {[m.contactFrontier.repair.control==='UNDO'?'afterUndo':'afterReset']:{checkpoint:m.contactFrontier.repair.frame,
             excludedPush:m.contactFrontier.repair.edge, alternativeLength:m.contactFrontier.repair.project.steps.length}} : {}),
           ...(contactProject.relay?{relay:{...contactProject.relay.plan.design,control:contactProject.priorContact,
             cargo:contactProject.relay.witness,peerFrom:contactProject.relay.plan.steps[0]?.peerFrom,peerTo:contactProject.relay.plan.steps[0]?.peerTo}}:{}),
@@ -595,16 +595,21 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ? 'sic_transport_deadlock_already_recovered'
         : sicObservedTransportDeadlock;
     },
-    stateAfterLevelReset(o, _rows, entry) {
+    undoTarget(o) {
+      const proof = m.contactFrontier?.deadlock;
+      return proof?.repair && proof.ref === o.observation_ref ? proof.previous : undefined;
+    },
+    stateAfterLevelReset(o, _rows, entry, control) {
       const proof = m.contactFrontier?.deadlock;
       if (!proof || !entry) return;
       const edges = [...new Set([...(m.contactFrontier?.recoveredEdges ?? []), proof.edge])];
       const restored = structuredClone(entry) as typeof m;
-      restored.transportRetry = { epoch: o.level_epoch, edges, ...(proof.repair ? {repair:proof.repair} : {}) };
+      const repair = proof.repair && { ...proof.repair, control };
+      restored.transportRetry = { epoch: o.level_epoch, edges, ...(repair ? {repair} : {}) };
       if (restored.epoch === o.level_epoch) {
         const frontier = restored.contactFrontier ??= newContactMemory();
         frontier.recoveredEdges = edges;
-        if (proof.repair) frontier.repair = proof.repair;
+        if (repair) frontier.repair = repair;
       }
       return restored;
     },

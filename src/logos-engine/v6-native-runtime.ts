@@ -386,7 +386,8 @@ export class NativeV6Runtime implements NativeV6Backend {
   private omittedClickReturns = 0;
   private prefix: Prefix | null = null;
   private actions = 0;
-  private resetCount = 0;
+  private recoveryCount = 0;
+  private undoCheckpoint: { packet: NativePublicObservation; families: readonly KnowledgeNode[] } | null = null;
   private levelStart: { level: number; families: readonly KnowledgeNode[] } | null = null;
   private sicFamilyActions = 0;
   private readonly sicActionCoverage: Record<Exclude<keyof SicActionCoverage, 'sicOnly'>, number> & { sicOnly?: number } = {
@@ -1512,7 +1513,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.familyAgendaReceipt?.mode === 'active') this.sicFamilyActions += 1;
     this.actions += 1; this.levelActions.set(first.level, (this.levelActions.get(first.level) ?? 0) + 1); this.current = freeze(structuredClone(outcome.observation));
     await this.timed(first.level, async () => {
-      this.observation = freeze(await measureNativeObservation(this.current!, this.actions + this.resetCount + 1, this.sessionId));
+      this.observation = freeze(await measureNativeObservation(this.current!, this.actions + this.recoveryCount + 1, this.sessionId));
       const after = this.observation;
       let result = await prefix.family.after(prefix.proposal, prefix.index, before, after,
         first.frame_rows, this.current!.frame_rows, this.current!.frame_packet);
@@ -1788,6 +1789,15 @@ export class NativeV6Runtime implements NativeV6Backend {
       ? `composition_dependency_${parent.binding.suspension_reason}` : null;
     const incompleteStop = nativeAcquisitionsIncomplete.length ? 'native_acquisition_incomplete' : null;
     const stopReason = officialStop ? this.budgetReason() : sourceStop ?? incompleteStop ?? parentStop ?? this.budgetReason();
+    this.undoCheckpoint = null;
+    // At seal the persisted family roots still precede the acquired prefix.
+    // A one-step undo can use these roots only for a single physical return.
+    const last = prefix.witnessed.at(-1)!;
+    if (!this.caller && !officialStop && sourceStop && isSicLevelRecovery(sourceStop) && prefix.witnessed.length === 1
+      && last.first.level === last.second.level && last.first.frame_hash !== last.second.frame_hash
+      && this.families.some(f => f.requestedStopReason?.(last.after) === sourceStop && f.undoTarget?.(last.after) === last.before.observation_ref)) {
+      this.undoCheckpoint = { packet: last.first, families: this.families.map(f => this.knowledge!.node(`family_state:${f.id}`)) };
+    }
     let transfer: R | null = null;
     if (this.caller) {
       this.callerAcquisitions += prefix.witnessed.length;
@@ -2231,40 +2241,56 @@ export class NativeV6Runtime implements NativeV6Backend {
   /** RESET is a host control at an acquired boundary. It retains the physical
    * return and restores planning state from the entry of this same level. */
   async resetLevel(packet: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield> {
+    return this.restoreAfterControl(packet, execution, 'RESET');
+  }
+
+  async undoAction(packet: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield> {
+    return this.restoreAfterControl(packet, execution, 'UNDO');
+  }
+
+  private async restoreAfterControl(packet: NativePublicObservation, execution: NativeExecution, control: 'RESET' | 'UNDO'): Promise<NativeRuntimeYield> {
     this.check(execution);
     const before = this.observation, current = this.current, knowledge = this.knowledge;
     if (!this.canResetCurrentLevel() || !before || !current || !knowledge
       || packet.level !== current.level || packet.levels_completed !== current.levels_completed
       || packet.step_index !== current.step_index || packet.state !== 'NOT_FINISHED' || !packet.available_action_refs.length) {
-      throw new Error('RESET must return the same unfinished level at the current acquired boundary');
+      throw new Error(control + ' must return the same unfinished level at the current acquired boundary');
     }
     this.rememberLevelStart();
+    const undo = this.undoCheckpoint;
+    if (control === 'UNDO' && (!undo || !isSicLevelRecovery(this.reason) || this.kind !== 'stopped'
+      || packet.frame_hash !== undo.packet.frame_hash || v6Canonical(packet.frame_rows) !== v6Canonical(undo.packet.frame_rows)
+      || v6Canonical(packet.available_action_refs) !== v6Canonical(undo.packet.available_action_refs))) {
+      throw new Error('UNDO did not restore the witnessed pre-action position');
+    }
+    const checkpoint = control === 'UNDO' ? undo!.families : this.levelStart!.families;
     const next = freeze(structuredClone(packet));
-    const measured = freeze(await measureNativeObservation(next, this.actions + this.resetCount + 2, this.sessionId));
+    const measured = freeze(await measureNativeObservation(next, this.actions + this.recoveryCount + 2, this.sessionId));
     const recovery = isSicLevelRecovery(this.reason) ? this.reason : undefined;
     const retained = new Map<string, NativeRecord>();
     if (recovery) for (const family of this.families) {
       if (family.requestedStopReason?.(before) !== recovery) continue;
-      const entry = this.levelStart!.families.find(node => node.family === family.id);
+      const entry = checkpoint.find(node => node.family === family.id);
       const learned = family.stateAfterLevelReset?.(measured, next.frame_rows, entry
-        ? hydrateNativeState(entry.value, id => knowledge.memory.nodes[id]?.value) as NativeRecord : undefined);
+        ? hydrateNativeState(entry.value, id => knowledge.memory.nodes[id]?.value) as NativeRecord : undefined, control);
       if (learned) retained.set(family.id, learned);
     }
-    const writes: NativeStoreWrite[] = this.levelStart!.families.map(node => ({
+    const writes: NativeStoreWrite[] = checkpoint.map(node => ({
       id: node.id, kind: 'family_state', family: node.family as string,
       value: retained.get(node.family as string) ?? hydrateNativeState(node.value, id => knowledge.memory.nodes[id]?.value),
     }));
     const receipt = { observation_ref: measured.observation_ref, before_observation_ref: before.observation_ref,
-      level: next.level, levels_completed: next.levels_completed, action_ref: 'RESET', after_packet: next,
+      level: next.level, levels_completed: next.levels_completed, action_ref: control, after_packet: next,
       ...(recovery ? { cause: recovery } : {}) };
-    writes.push({ id: `reasoning:level-reset:${measured.revision}`, kind: 'component_state', component: 'public_level_reset',
+    const event = control === 'UNDO' ? 'action_undo' : 'level_reset';
+    writes.push({ id: `reasoning:${control === 'UNDO' ? 'action-undo' : 'level-reset'}:${measured.revision}`, kind: 'component_state', component: 'public_' + event,
       status: 'observed', value: receipt, evidence: [before.observation_ref, measured.observation_ref] });
     this.check(execution);
-    await knowledge.commit(writes, { workflow: SELECTION_PROGRAM, step: 'recovery', statement: 'official_level_reset' });
-    this.current = next; this.observation = measured; this.resetCount++;
+    await knowledge.commit(writes, { workflow: SELECTION_PROGRAM, step: 'recovery', statement: 'official_' + event });
+    this.current = next; this.observation = measured; this.recoveryCount++; this.undoCheckpoint = null;
     this.prefix = null; this.kind = 'boundary'; this.reason = null;
     this.latestReasoningReturn = null; this.observedQueue = undefined; this.lastClickReturn = null;
-    this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref,
+    this.note({ kind: event, restored_frame: next.frame_hash, level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref,
       ...(recovery ? { cause: recovery } : {}) });
     return this.output();
   }
@@ -2378,6 +2404,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       activeSeconds: (this.elapsedMs + this.runningMs()) / 1000, lastDecision: this.lastFamily, trace: this.trace.slice(), reason: this.reason,
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       canResetLevel: this.canResetCurrentLevel(),
+      ...(this.kind === 'stopped' && this.undoCheckpoint && isSicLevelRecovery(this.reason)
+        ? { undoFrameHash: this.undoCheckpoint.packet.frame_hash } : {}),
       ...(this.lastClickReturn ? { lastClickReturn: this.lastClickReturn } : {}),
       ...(reviews.length ? { victoryReviews: reviews } : {}),
       ...(this.clickReturns.length ? { clickReturns: this.clickReturns, omittedClickReturns: this.omittedClickReturns } : {}),
@@ -2794,7 +2822,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 214 : 215,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 216 : 217,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

@@ -279,6 +279,42 @@ test('SIC Fallback withdraws the admitted family before any of its commands is r
   assert.equal(second.ticket?.actionIndex, 1);
 });
 
+test('undo restores the immediate predecessor, preserves the failed trial and spends no new action ticket', async () => {
+  let count = 0, previous = '', avoid = false;
+  const family: NativeFamily = {
+    id: 'undo-test',
+    propose: () => ({ status: 'proposed', kind: 'undo-test', actions: [{ action_ref: avoid ? 'ACTION2' : 'ACTION1', data: {} }], steps: [{}] }),
+    before: () => ({ admitted: true, reason: 'current' }), after: () => ({ matched: true, seal_prefix: true, reason: 'measured' }),
+    record(b) { count++; previous = b.observation_ref; return {events: []}; },
+    requestedStopReason: () => count === 2 ? 'sic_observed_transport_deadlock' : null,
+    undoTarget: () => previous,
+    stateAfterLevelReset: (_o, _rows, entry, control) => ({ ...entry, avoid: control === 'UNDO' }),
+    state: () => ({ count, previous, avoid }),
+    restore(s) { count = Number(s.count); previous = String(s.previous); avoid = !!s.avoid; },
+  };
+  const backend = new NativeV6Runtime({ families: [family], maxPointOccurrences: 250, sourceDigest: 'undo-test' });
+  const service = new V6AgentService(() => backend);
+  const position = (pixel: number) => ({ ...board(pixel), availableActionIds: [1,2] });
+  const initial = await service.handle({ ...init(), observation: toV6PublicObservation(position(0), 0) }), sessionId = initial.sessionId;
+  await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: initial.ticket!.id,
+    observation: toV6PublicObservation(position(1), 1), executionMs: 1 });
+  const next = await service.handle({ type: 'resume', sessionId, sequence: 1 });
+  const trapped = await service.handle({ type: 'advance', sessionId, sequence: 2, ticketId: next.ticket!.id,
+    observation: toV6PublicObservation(position(2), 2), executionMs: 1 });
+  assert.equal(trapped.snapshot.undoFrameHash, await v6FrameHash(board(1).frame));
+  const undo = (pixel: number) => service.handle({ type: 'undo_action', sessionId, sequence: 2, observation: toV6PublicObservation(position(pixel), 2) });
+  await assert.rejects(undo(0), /different public frame/);
+  const restored = await undo(1);
+  assert.equal(restored.kind, 'boundary');
+  assert.equal(restored.snapshot.actions, 2);
+  assert.equal(restored.snapshot.undoFrameHash, undefined);
+  assert.ok(restored.snapshot.trace.some((e: any) => e.kind === 'action_undo'));
+  await assert.rejects(undo(1), /authorized boundary/);
+  const alternate = await service.handle({ type: 'resume', sessionId, sequence: 2 });
+  assert.equal(alternate.command?.actionRef, 'ACTION2');
+  assert.equal(count, 1);
+});
+
 test('an acquired loss can RESET the current level, retain evidence and replan from its entry', async () => {
   let state = 0;
   const family: NativeFamily = {

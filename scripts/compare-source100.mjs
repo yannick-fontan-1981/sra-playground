@@ -147,7 +147,7 @@ async function run(code, games) {
         if (!pendingTicket || operation.ticketId !== pendingTicket.id) throw Error('Continuity ticket mismatch');
         const {level,decisionRevision,actionIndex,actionRef} = pendingTicket;
         const seal = result.snapshot.trace.findLast(e => e.kind === 'sealed_prefix' && e.revision === decisionRevision);
-        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,sealed:seal?.acquired_actions ?? null});
+        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,frameHash:pendingTicket.frameHash,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,undos,sealed:seal?.acquired_actions ?? null});
       }
       pendingTicket = result.ticket;
     }
@@ -157,7 +157,7 @@ async function run(code, games) {
     levels = [],
     steps = [];
   let issued = 0,
-    resets = 0,
+    resets = 0, undos = 0,
     sic = 0,
     trials = 0,
     changes = 0,
@@ -228,6 +228,11 @@ async function run(code, games) {
     canDispatch: () => true,
     onState: collectPreparation,
     getObservation: observation,
+    ...(process.env.SIC_STUDY_RESET_ONLY !== '1' ? { undoAction: async () => {
+      board = await games.dispatch({ type: 'undo' });
+      undos++;
+      return observation();
+    } } : {}),
     resetLevel: async () => {
       resets++;
       board = await games.dispatch({ type: 'reset' });
@@ -384,7 +389,7 @@ async function run(code, games) {
       levels,
       issued,
       sic,
-      resets,
+      resets, undos,
       trials,
       changes,
       newScenes,

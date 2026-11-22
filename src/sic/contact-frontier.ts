@@ -63,6 +63,7 @@ export type ContactMemory = RelayControlMemory & {
   explorer?: { actor: string; origin: XY };
 };
 export type ContactRepair = {
+  control?: 'UNDO' | 'RESET';
   frame: string;
   edge: string;
   project: Project;
