@@ -198,3 +198,5 @@ Les six résultats de SS12, SS13 et SS14 L1–L2 et la campagne LP85 L2–L3 res
 
 
 **Non-régression source de v127.** Les 100 L1 sources gagnent à froid au budget historique de 60 actions par jeu. Le rejeu indépendant confirme les 100 crédits et les 100 empreintes de trajectoire correspondent à v109. Aucune des 100 trajectoires n’active le planificateur à deux sujets. Les onze L2 historiques Custom 4 reproduisent aussi les commandes et images du témoin v109 dans leurs conditions d’origine. Ces mesures portent sur le solveur figé qui gagne SS13 L3 en 176.
+
+Le contrôle final sur SS10 L3 a également été exécuté avec **v127**. Pour chacun des deux réglages, les 350 commandes et images reproduisent la trajectoire correspondante de v126. La première divergence entre réglages reste la commande 94. Les deux échecs sont certifiés et aucune des deux parties ne propose la substitution de rôles.

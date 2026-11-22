@@ -443,6 +443,27 @@
       "differingTrajectories": [],
       "pairedPlannerGames": [],
       "substitutionExperimentGames": []
+    },
+    "transferSS10L3": {
+      "firstDifferentCommand": 94,
+      "arms": {
+        "two": {
+          "budget": 350,
+          "actions": 350,
+          "won": false,
+          "replayedCommandDigest": "58b79bd9ebb0e97224c015ce26b4de1788310716eb5802ac1cece3109de9d05a",
+          "identicalToV126": true,
+          "pairedForecasts": 0
+        },
+        "three": {
+          "budget": 350,
+          "actions": 350,
+          "won": false,
+          "replayedCommandDigest": "f46515f66265f64c8f2067a9b20195cdf4c3243c30d93691f4b1542ac417f835",
+          "identicalToV126": true,
+          "pairedForecasts": 0
+        }
+      }
     }
   }
 }
