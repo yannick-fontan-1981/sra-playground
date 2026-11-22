@@ -1,0 +1,1653 @@
+{
+  "spec": {
+    "id": "ss15-01",
+    "title": "L’atelier des passages croisés",
+    "rows": [
+      "####################",
+      "#..................#",
+      "#.Z...o............#",
+      "#..................#",
+      "#................o.#",
+      "#.o#B..............#",
+      "#...#..............#",
+      "#...o.o........~...#",
+      "#..............~...#",
+      "#..............~...#",
+      "#..............~...#",
+      "#.............o~...#",
+      "#...o..........~...#",
+      "#.~~~~~~~......~...#",
+      "#..............~...#",
+      "#..............~...#",
+      "#..............~.gg#",
+      "#..........m..m~...#",
+      "#..............~...#",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 14,
+          "y": 4
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "releve",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 5
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "depot",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 10
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 5
+        },
+        "circuit": "releve",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 11
+        },
+        "circuit": "depot",
+        "direction": "E",
+        "closedWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "RULDDLDUCRCDRUUURRRRRRRRDXRCDRRRRRDDDDDDDLLLLLDRCDDLLLLLDDDDDLLLLLLLLDLDCUCUUURRRRRRRRDCURDDRRDDRDRRCRDRRRDDDDDRRCUUUURRRRRRDDDDDLCRUU",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 57
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Atelier original · Magicien, Barde et passages croisés",
+    "url": "https://sinkingstarwalkthrough.com/fr/north/",
+    "objective": "Explore les vingt découvertes, puis fais arriver les deux héros sur les contours jaunes.",
+    "secondary": {
+      "label": "Zones mixtes · eau, miroirs et dépôts latéraux",
+      "url": "https://sinkingstarwalkthrough.com/fr/crossovers/"
+    }
+  },
+  "metrics": {
+    "actions": 134,
+    "selections": 10,
+    "swaps": 5,
+    "partnerSwaps": 3,
+    "bouncedSwaps": 1,
+    "bardSongs": 10,
+    "partnerSongs": 5,
+    "selectiveSongs": 1,
+    "forcedBardMoves": 3,
+    "supportMoves": 1,
+    "stoneMoves": 8,
+    "monsterMoves": 2,
+    "mirrorMoves": 0,
+    "reflections": 1,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le premier échange remplace la caisse par le Magicien",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "depot": false
+      }
+    },
+    {
+      "label": "La transposition des héros conserve le poids de la commande",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le Barde retrouve sa commande sans chanter",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 7
+        },
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le chant traverse la cloison, atteint son coin et laisse la pièce retenue en place",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le Magicien extrait le Barde sans emporter son cortège",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le rayon dévié échange le Magicien avec la caisse à droite du miroir",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 14,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le reflet transporte la caisse la plus proche sur l’autre axe",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le Magicien quitte la zone de réflexion",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Une caisse devient un appui, puis le chant le fait glisser sur l’eau",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le Magicien ancre l’appui pendant que le chant le ramène sur la rive",
+      "turn": 74,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "La presse latérale dépose une caisse dans le bras d’eau oriental",
+      "turn": 87,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 17
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "circuits": {
+        "releve": false,
+        "depot": true
+      }
+    },
+    {
+      "label": "Le chant rapproche les deux monstres sans exposer les héros",
+      "turn": 100,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve": false,
+        "depot": true
+      }
+    },
+    {
+      "label": "Le Magicien rejoint la première destination par le passage créé",
+      "turn": 113,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le Barde rejoint sa destination et laisse le Magicien reprendre sa place",
+      "turn": 130,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Les deux destinations sont occupées simultanément",
+      "turn": 134,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 2,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 4,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 4
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "releve": false,
+        "depot": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "original-tutorial",
+    "preserved": [
+      "Le Magicien remplace une cible par échange ; le Barde transporte les ressources.",
+      "Les départs forcés évitent le chant et conservent les poids."
+    ],
+    "changed": [
+      "Atelier ouvert composé pour les vingt découvertes publiques de SS15.",
+      "Chant carré, butées, appui mobile et presse issus du contrat de la série SS."
+    ],
+    "sourceReading": "Les modules sont une composition pédagogique originale nourrie du monde Nord et des zones mixtes ; ils ne reproduisent aucune salle commerciale.",
+    "checkScope": "Le parcours démontre les découvertes ; les explorations et autres solutions restent libres."
+  }
+}

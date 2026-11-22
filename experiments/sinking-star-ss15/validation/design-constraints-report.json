@@ -1,0 +1,6947 @@
+{
+  "success": true,
+  "scope": "Independent execution of two final-room witnesses, local counterfactuals, bank counts and bounded direct-access families",
+  "levels": [
+    {
+      "level": 7,
+      "title": "Le relais des trois rives",
+      "mapSha256": "e4eb46b5e867dc37eebd790885a732b19ace889aafea233738e7ac7f96e305f6",
+      "witnessSha256": "1af058e86ede667441ea0e278730ee12e32d54f5361a8da8b904c67871a05127",
+      "witnessActions": 162,
+      "constraints": [
+        {
+          "id": "one-support-reused",
+          "result": "verified-on-witness",
+          "evidence": [
+            {
+              "turn": 0,
+              "supports": [
+                {
+                  "x": 5,
+                  "y": 10
+                }
+              ]
+            },
+            {
+              "turn": 28,
+              "supports": [
+                {
+                  "x": 5,
+                  "y": 10
+                }
+              ]
+            },
+            {
+              "turn": 38,
+              "supports": [
+                {
+                  "x": 10,
+                  "y": 8
+                }
+              ]
+            },
+            {
+              "turn": 59,
+              "supports": [
+                {
+                  "x": 10,
+                  "y": 8
+                }
+              ]
+            },
+            {
+              "turn": 84,
+              "supports": [
+                {
+                  "x": 10,
+                  "y": 5
+                }
+              ]
+            },
+            {
+              "turn": 85,
+              "supports": [
+                {
+                  "x": 10,
+                  "y": 5
+                }
+              ]
+            },
+            {
+              "turn": 118,
+              "supports": [
+                {
+                  "x": 12,
+                  "y": 10
+                }
+              ]
+            },
+            {
+              "turn": 126,
+              "supports": [
+                {
+                  "x": 12,
+                  "y": 10
+                }
+              ]
+            },
+            {
+              "turn": 143,
+              "supports": [
+                {
+                  "x": 12,
+                  "y": 10
+                }
+              ]
+            },
+            {
+              "turn": 162,
+              "supports": [
+                {
+                  "x": 12,
+                  "y": 10
+                }
+              ]
+            }
+          ],
+          "interpretation": "One permanent support is reused along the three recorded water arms; no extra crate is sunk by this witness. The west-bank import alternative shows that the order of every crossing is not mandatory."
+        },
+        {
+          "id": "rescue-needs-a-prepared-line",
+          "result": "verified-locally",
+          "branches": [
+            "rescue-before-its-command",
+            "reverse-the-extraction"
+          ],
+          "interpretation": "ACTION5 is refused before its command is weighted; reversing the extraction remains legal and restores the original reserve."
+        },
+        {
+          "id": "double-reflection-then-mirror-press",
+          "result": "verified-on-witness",
+          "turn": 85,
+          "phases": [
+            {
+              "kind": "reflect",
+              "moves": [
+                {
+                  "actor": "stone",
+                  "from": {
+                    "x": 2,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 2
+                  }
+                },
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 15,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 13,
+                    "y": 7
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "piston",
+              "moves": [
+                {
+                  "actor": "mirror",
+                  "from": {
+                    "x": 5,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 6
+                  }
+                }
+              ]
+            },
+            {
+              "kind": "gate",
+              "moves": []
+            }
+          ],
+          "branches": [
+            "press-before-the-double-reflection",
+            "leave-the-yellow-command-along-its-wall"
+          ]
+        },
+        {
+          "id": "dry-crate-and-mirror-stay-as-final-weights",
+          "result": "verified-on-witness-and-branches",
+          "retainedFromTurn": 85,
+          "finalState": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 17,
+                  "y": 14
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 17,
+                  "y": 17
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 5,
+                "y": 2
+              }
+            ],
+            "supports": [
+              {
+                "x": 12,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 6
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": false
+              }
+            ],
+            "complete": true,
+            "refused": false,
+            "dead": false
+          },
+          "branches": [
+            "ordinary-departure-loses-the-only-dry-weight",
+            "shift-the-ferry-before-the-wizard",
+            "correct-the-legal-alternate-goal-order"
+          ]
+        },
+        {
+          "id": "final-room-direct-access",
+          "result": "no-entry-in-tested-local-families",
+          "geometry": {
+            "floorCells": 18,
+            "goals": [
+              {
+                "x": 17,
+                "y": 14
+              },
+              {
+                "x": 17,
+                "y": 17
+              }
+            ],
+            "entrance": {
+              "x": 15,
+              "y": 16
+            },
+            "initialMobileOccupants": 0,
+            "initialMirrors": 0,
+            "walkingFrontier": [
+              {
+                "x": 15,
+                "y": 16
+              }
+            ],
+            "scope": "Static floor connectivity with this entrance closed; teleportation is tested separately."
+          },
+          "checks": [
+            {
+              "afterTurn": 0,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 17,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 172,
+                  "expanded": 172
+                },
+                {
+                  "hero": "bard",
+                  "states": 164,
+                  "expanded": 164
+                }
+              ],
+              "probes": {
+                "legal": 1159,
+                "refused": 517,
+                "dead": 4,
+                "won": 0
+              },
+              "examples": {
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "U",
+                  "phases": [
+                    "walk"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 16
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 3,
+                          "y": 14
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 15,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 5,
+                        "y": 10
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "X",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 17
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 3,
+                          "y": 14
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 15,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 5,
+                        "y": 10
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "wizard",
+                  "commands": "UUUUUUUUUUULULX",
+                  "phases": [
+                    "reflect"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 3
+                        },
+                        "dead": true
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 3,
+                          "y": 14
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 15,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 5,
+                        "y": 10
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            },
+            {
+              "afterTurn": 28,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 8,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 91,
+                  "expanded": 91
+                },
+                {
+                  "hero": "bard",
+                  "states": 170,
+                  "expanded": 170
+                }
+              ],
+              "probes": {
+                "legal": 890,
+                "refused": 413,
+                "dead": 2,
+                "won": 0
+              },
+              "examples": {
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "U",
+                  "phases": [
+                    "walk"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 0,
+                          "y": 6
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 9
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 15,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 5,
+                        "y": 10
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "L",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 0,
+                          "y": 7
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 9
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 15,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 5,
+                        "y": 10
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "wizard",
+                  "commands": "UURX",
+                  "phases": [
+                    "reflect"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 1
+                        },
+                        "dead": true
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 9
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 15,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 5,
+                        "y": 10
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            },
+            {
+              "afterTurn": 59,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 4,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 1,
+                  "expanded": 1
+                },
+                {
+                  "hero": "bard",
+                  "states": 148,
+                  "expanded": 148
+                }
+              ],
+              "probes": {
+                "legal": 482,
+                "refused": 261,
+                "dead": 2,
+                "won": 0
+              },
+              "examples": {
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "U",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 15,
+                          "y": 5
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 8,
+                          "y": 7
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 13,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 10,
+                        "y": 8
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "L",
+                  "phases": [
+                    "swap"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 13,
+                          "y": 5
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 8,
+                          "y": 7
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 15,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 10,
+                        "y": 8
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "bard",
+                  "commands": "CLULLLULX",
+                  "phases": [
+                    "reflect"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 15,
+                          "y": 5
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 3
+                        },
+                        "dead": true
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 13,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 10,
+                        "y": 8
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": false,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            },
+            {
+              "afterTurn": 84,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 6,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 2,
+                  "expanded": 2
+                },
+                {
+                  "hero": "bard",
+                  "states": 153,
+                  "expanded": 153
+                }
+              ],
+              "probes": {
+                "legal": 647,
+                "refused": 126,
+                "dead": 2,
+                "won": 0
+              },
+              "examples": {
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "CU",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 15,
+                          "y": 5
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 0,
+                          "y": 5
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 2,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 10,
+                        "y": 5
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": true,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "CD",
+                  "phases": [
+                    "walk"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 0,
+                          "y": 5
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 2,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 10,
+                        "y": 5
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": true,
+                      "depot-miroir": false,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "bard",
+                  "commands": "UUURRRDDDX",
+                  "phases": [
+                    "reflect",
+                    "piston"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 13,
+                          "y": 7
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 3
+                        },
+                        "dead": true
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 2,
+                        "y": 5
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 10,
+                        "y": 5
+                      }
+                    ],
+                    "monsters": [],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 6
+                        },
+                        "facing": "NW"
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 7
+                        },
+                        "facing": "NW"
+                      }
+                    ],
+                    "circuits": {
+                      "relais": true,
+                      "depot-miroir": true,
+                      "deux-poids": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 6
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 16
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            }
+          ]
+        }
+      ],
+      "branches": [
+        {
+          "label": "rescue-before-its-command",
+          "afterTurn": 59,
+          "commands": "X",
+          "executedCommands": "X",
+          "meaning": "Avant le dépôt sur la commande jaune, la porte coupe le rayon de secours ; le reflet est refusé et le Magicien reste sur son îlot.",
+          "outcome": "refused",
+          "refusedTurns": [
+            1
+          ],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "X",
+              "outcome": "refused",
+              "phases": []
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 15,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 8,
+                  "y": 7
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 13,
+                "y": 5
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 8
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": true,
+            "dead": false
+          }
+        },
+        {
+          "label": "ordinary-departure-loses-the-only-dry-weight",
+          "afterTurn": 84,
+          "commands": "RX",
+          "executedCommands": "RX",
+          "meaning": "Un pas volontaire du Barde retire la caisse de la commande et change sa distance de reflet. Le reflet suivant la fait couler à côté de l’île et ne sauve pas le Magicien.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "song",
+                "gate"
+              ]
+            },
+            {
+              "turn": 2,
+              "command": "X",
+              "outcome": "legal",
+              "phases": [
+                "reflect"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 15,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 1,
+                  "y": 5
+                },
+                "dead": false
+              }
+            ],
+            "stones": [],
+            "supports": [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 5,
+                "y": 3
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "press-before-the-double-reflection",
+          "afterTurn": 59,
+          "commands": "CLDRRRRRRUX",
+          "executedCommands": "CLDRRRRRRUX",
+          "meaning": "Atteindre prématurément la commande de presse déplace le miroir avant le dépôt sur l’île. Cette tentative de reflet ne remplit aucune des deux commandes finales.",
+          "outcome": "refused",
+          "refusedTurns": [
+            11
+          ],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 2,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 10,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk",
+                "piston"
+              ]
+            },
+            {
+              "turn": 11,
+              "command": "X",
+              "outcome": "refused",
+              "phases": []
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 15,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 13,
+                  "y": 7
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 13,
+                "y": 5
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 8
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 6
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": true,
+              "deux-poids": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": true,
+            "dead": false
+          }
+        },
+        {
+          "label": "shift-the-ferry-before-the-wizard",
+          "afterTurn": 118,
+          "commands": "RCDLLLLDDDDDDLD",
+          "executedCommands": "RCDLLLLDDDDDDLD",
+          "meaning": "Un décalage supplémentaire du chant éloigne l’appui du passage choisi par le Magicien ; son pas direct vers l’eau est refusé.",
+          "outcome": "refused",
+          "refusedTurns": [
+            15
+          ],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 2,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 3,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 10,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 11,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk",
+                "gate"
+              ]
+            },
+            {
+              "turn": 12,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk",
+                "gate"
+              ]
+            },
+            {
+              "turn": 13,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 14,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 15,
+              "command": "D",
+              "outcome": "refused",
+              "phases": []
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 12,
+                  "y": 9
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 15,
+                  "y": 9
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 5,
+                "y": 2
+              }
+            ],
+            "supports": [
+              {
+                "x": 13,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 6
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": true,
+            "dead": false
+          }
+        },
+        {
+          "label": "bard-arrival-moves-the-wizard-off-his-goal",
+          "afterTurn": 143,
+          "commands": "CDDDRRRRUURCDDDDDRRRRDR",
+          "executedCommands": "CDDDRRRRUURCDDDDDRRRRDR",
+          "meaning": "Cette variante est légale mais ne termine pas la salle : en arrivant après son partenaire, le Barde le déplace hors de sa destination. Le Magicien reste jouable pour corriger sa place.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 2,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 10,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 11,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 12,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 13,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 14,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 15,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 16,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 17,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 18,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 19,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 20,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 21,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 22,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 23,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 18,
+                  "y": 15
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 17,
+                  "y": 17
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 5,
+                "y": 2
+              }
+            ],
+            "supports": [
+              {
+                "x": 12,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 6
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "west-bank-import-before-moving-the-support",
+          "afterTurn": 28,
+          "commands": "RRRURRRUR",
+          "executedCommands": "RRRURRRUR",
+          "meaning": "Legal local alternative: extract the crate from the western bank before moving the support toward the eastern bank. It does not by itself rescue the Wizard or fill the final commands.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 2,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "swap"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 15,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 5,
+                  "y": 9
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 6,
+                "y": 5
+              }
+            ],
+            "supports": [
+              {
+                "x": 5,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "reverse-the-extraction",
+          "afterTurn": 59,
+          "commands": "L",
+          "executedCommands": "L",
+          "meaning": "The trapped Wizard can reverse his own substitution. This returns the dry crate to its reserve; it is a legal retreat, not a successful rescue retaining the extracted crate.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "swap"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 13,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 8,
+                  "y": 7
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 15,
+                "y": 5
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 8
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "leave-the-yellow-command-along-its-wall",
+          "afterTurn": 84,
+          "commands": "UX",
+          "executedCommands": "UX",
+          "meaning": "A northward Bard step is legal: the wall holds the crate on the command, and the subsequent double reflection still succeeds.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 2,
+              "command": "X",
+              "outcome": "legal",
+              "phases": [
+                "reflect",
+                "piston",
+                "gate"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 13,
+                  "y": 7
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 0,
+                  "y": 4
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 5,
+                "y": 2
+              }
+            ],
+            "supports": [
+              {
+                "x": 10,
+                "y": 5
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 6
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": true,
+              "deux-poids": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "correct-the-legal-alternate-goal-order",
+          "afterTurn": 143,
+          "commands": "CDDDRRRRUURCDDDDDRRRRDRCUL",
+          "executedCommands": "CDDDRRRRUURCDDDDDRRRRDRCUL",
+          "meaning": "The alternate goal order is not a dead end: selecting the Wizard and walking up/left repairs the displacement and wins.",
+          "outcome": "won",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 2,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 10,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 11,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 12,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 13,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 14,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 15,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 16,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 17,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 18,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 19,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 20,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 21,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 22,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 23,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 24,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 25,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 26,
+              "command": "L",
+              "outcome": "won",
+              "phases": [
+                "walk"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 17,
+                  "y": 14
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 17,
+                  "y": 17
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 5,
+                "y": 2
+              }
+            ],
+            "supports": [
+              {
+                "x": 12,
+                "y": 10
+              }
+            ],
+            "monsters": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 6
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 7
+                },
+                "facing": "NW"
+              }
+            ],
+            "circuits": {
+              "relais": false,
+              "depot-miroir": false,
+              "deux-poids": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 15,
+                  "y": 6
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 16
+                },
+                "closed": false
+              }
+            ],
+            "complete": true,
+            "refused": false,
+            "dead": false
+          }
+        }
+      ],
+      "legalAlternatives": [
+        "Western extraction before moving the support",
+        "Reverse the extraction to recover the original position",
+        "Northward Bard departure held by the wall before the double reflection",
+        "Alternate goal order followed by a three-input repair"
+      ]
+    },
+    {
+      "level": 8,
+      "title": "Le compte des deux rives",
+      "mapSha256": "1a5a7bcdd8437d817421054fdcf9b8b481d0d2f9141f0711776f064a878c7a84",
+      "witnessSha256": "ea41c850324b74d3894833f546274c046c8711f5ca09161b41997306b73153e1",
+      "witnessActions": 181,
+      "constraints": [
+        {
+          "id": "substitutions-preserve-bank-counts",
+          "result": "verified-on-all-witness-swaps",
+          "definition": "Living heroes, dry crates and monsters; west x≤8, river x9–10, east x≥11. Supports and fixed mirrors excluded.",
+          "initial": {
+            "west": 5,
+            "river": 0,
+            "east": 1
+          },
+          "final": {
+            "west": 2,
+            "river": 0,
+            "east": 3
+          },
+          "swaps": [
+            {
+              "turn": 5,
+              "before": {
+                "west": 5,
+                "river": 0,
+                "east": 1
+              },
+              "after": {
+                "west": 5,
+                "river": 0,
+                "east": 1
+              },
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 10
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 5
+                  }
+                },
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 10
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 45,
+              "before": {
+                "west": 4,
+                "river": 0,
+                "east": 2
+              },
+              "after": {
+                "west": 4,
+                "river": 0,
+                "east": 2
+              },
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 10
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 12
+                  }
+                },
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 12
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 10
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 116,
+              "before": {
+                "west": 3,
+                "river": 0,
+                "east": 2
+              },
+              "after": {
+                "west": 3,
+                "river": 0,
+                "east": 2
+              },
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 5
+                  },
+                  "to": {
+                    "x": 12,
+                    "y": 4
+                  }
+                },
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 12,
+                    "y": 4
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 5
+                  }
+                }
+              ]
+            },
+            {
+              "turn": 130,
+              "before": {
+                "west": 3,
+                "river": 0,
+                "east": 2
+              },
+              "after": {
+                "west": 3,
+                "river": 0,
+                "east": 2
+              },
+              "moves": [
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 11,
+                    "y": 12
+                  },
+                  "to": {
+                    "x": 5,
+                    "y": 7
+                  }
+                },
+                {
+                  "actor": "hero",
+                  "from": {
+                    "x": 5,
+                    "y": 7
+                  },
+                  "to": {
+                    "x": 11,
+                    "y": 12
+                  }
+                }
+              ]
+            }
+          ],
+          "physicalTransfers": [
+            {
+              "turn": 12,
+              "phase": "walk",
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 8
+              },
+              "to": {
+                "x": 9,
+                "y": 8
+              }
+            },
+            {
+              "turn": 14,
+              "phase": "walk",
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 8
+              },
+              "to": {
+                "x": 11,
+                "y": 8
+              }
+            },
+            {
+              "turn": 63,
+              "phase": "piston",
+              "actor": "stone",
+              "from": {
+                "x": 11,
+                "y": 14
+              },
+              "to": {
+                "x": 10,
+                "y": 14
+              }
+            },
+            {
+              "turn": 66,
+              "phase": "song",
+              "actor": "stone",
+              "from": {
+                "x": 8,
+                "y": 14
+              },
+              "to": {
+                "x": 9,
+                "y": 14
+              }
+            },
+            {
+              "turn": 69,
+              "phase": "song",
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 13
+              },
+              "to": {
+                "x": 9,
+                "y": 13
+              }
+            },
+            {
+              "turn": 69,
+              "phase": "song",
+              "actor": "stone",
+              "from": {
+                "x": 10,
+                "y": 13
+              },
+              "to": {
+                "x": 11,
+                "y": 13
+              }
+            },
+            {
+              "turn": 71,
+              "phase": "song",
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 13
+              },
+              "to": {
+                "x": 11,
+                "y": 13
+              }
+            },
+            {
+              "turn": 95,
+              "phase": "walk",
+              "actor": "hero",
+              "from": {
+                "x": 11,
+                "y": 8
+              },
+              "to": {
+                "x": 10,
+                "y": 8
+              }
+            },
+            {
+              "turn": 97,
+              "phase": "walk",
+              "actor": "hero",
+              "from": {
+                "x": 9,
+                "y": 8
+              },
+              "to": {
+                "x": 8,
+                "y": 8
+              }
+            },
+            {
+              "turn": 162,
+              "phase": "walk",
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 13
+              },
+              "to": {
+                "x": 9,
+                "y": 13
+              }
+            },
+            {
+              "turn": 164,
+              "phase": "walk",
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 13
+              },
+              "to": {
+                "x": 11,
+                "y": 13
+              }
+            }
+          ],
+          "immersions": [
+            {
+              "turn": 63,
+              "phase": "piston",
+              "removedDryCrates": 1,
+              "createdSupports": 1
+            }
+          ],
+          "interpretation": "Every executed substitution preserves the count in each region. Walking/song changes these counts, and the deliberate immersion removes one dry occupant."
+        },
+        {
+          "id": "loaded-press-creates-the-second-support",
+          "result": "verified-on-witness-and-local-branches",
+          "turn": 63,
+          "createdSupports": [
+            {
+              "x": 9,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 14
+            }
+          ],
+          "branches": [
+            "ordinary-loading-exit-moves-cargo-and-support",
+            "unload-the-command-before-loading-the-press"
+          ],
+          "interpretation": "Closing the prepared press sinks its loaded crate. Closing it empty is legal and creates no support."
+        },
+        {
+          "id": "dry-cargo-crosses-while-return-supports-are-preserved",
+          "result": "verified-on-witness-and-local-branch",
+          "cargoImports": [
+            {
+              "turn": 69,
+              "phase": "song",
+              "actor": "stone",
+              "from": {
+                "x": 10,
+                "y": 13
+              },
+              "to": {
+                "x": 11,
+                "y": 13
+              }
+            }
+          ],
+          "supportsAtDelivery": [
+            {
+              "x": 9,
+              "y": 13
+            },
+            {
+              "x": 10,
+              "y": 13
+            }
+          ],
+          "branches": [
+            "straight-delivery-carries-away-the-return-support",
+            "wrong-final-exit-realigns-the-bridge-with-the-closed-press"
+          ]
+        },
+        {
+          "id": "living-weights-and-dry-cargo-retained",
+          "result": "verified-on-witness-and-local-branches",
+          "openFromTurn": 119,
+          "twoBendSwapTurn": 116,
+          "twoBendMoves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 5,
+                "y": 5
+              },
+              "to": {
+                "x": 12,
+                "y": 4
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 12,
+                "y": 4
+              },
+              "to": {
+                "x": 5,
+                "y": 5
+              }
+            }
+          ],
+          "finalState": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 17,
+                  "y": 2
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 17,
+                  "y": 4
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 14,
+                "y": 4
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 13
+              },
+              {
+                "x": 10,
+                "y": 13
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 7
+              },
+              {
+                "x": 7,
+                "y": 7
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": false,
+              "charge-conservee": false,
+              "accord-final": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": false
+              }
+            ],
+            "complete": true,
+            "refused": false,
+            "dead": false
+          },
+          "branches": [
+            "walking-away-withdraws-the-first-bridge",
+            "global-reflection-is-not-the-two-bend-spell",
+            "ordinary-final-exit-removes-the-living-weights",
+            "straight-ray-selects-the-guard-before-the-bard",
+            "repair-the-voluntary-final-choir-departure"
+          ]
+        },
+        {
+          "id": "final-room-direct-access",
+          "result": "no-entry-in-tested-local-families",
+          "geometry": {
+            "floorCells": 15,
+            "goals": [
+              {
+                "x": 17,
+                "y": 2
+              },
+              {
+                "x": 17,
+                "y": 4
+              }
+            ],
+            "entrance": {
+              "x": 15,
+              "y": 3
+            },
+            "initialMobileOccupants": 0,
+            "initialMirrors": 0,
+            "walkingFrontier": [
+              {
+                "x": 15,
+                "y": 3
+              }
+            ],
+            "scope": "Static floor connectivity with this entrance closed; teleportation is tested separately."
+          },
+          "checks": [
+            {
+              "afterTurn": 0,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 8,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 121,
+                  "expanded": 121
+                },
+                {
+                  "hero": "bard",
+                  "states": 1,
+                  "expanded": 1
+                }
+              ],
+              "probes": {
+                "legal": 415,
+                "refused": 181,
+                "dead": 14,
+                "won": 0
+              },
+              "examples": {
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "U",
+                  "phases": [
+                    "swap"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 3
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 10
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 13,
+                        "y": 16
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 3
+                      },
+                      {
+                        "x": 7,
+                        "y": 3
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": false,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": false
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "DD",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 11
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 3
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 13,
+                        "y": 16
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 3
+                      },
+                      {
+                        "x": 7,
+                        "y": 3
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": false,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": false
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "wizard",
+                  "commands": "LURX",
+                  "phases": [
+                    "reflect"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 8,
+                          "y": 12
+                        },
+                        "dead": true
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 6,
+                          "y": 2
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 13,
+                        "y": 16
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 3
+                      },
+                      {
+                        "x": 7,
+                        "y": 3
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": false,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": false
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            },
+            {
+              "afterTurn": 3,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 15,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 243,
+                  "expanded": 243
+                },
+                {
+                  "hero": "bard",
+                  "states": 1,
+                  "expanded": 1
+                }
+              ],
+              "probes": {
+                "legal": 853,
+                "refused": 356,
+                "dead": 11,
+                "won": 0
+              },
+              "examples": {
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "CU",
+                  "phases": [
+                    "swap"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 10
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 13,
+                        "y": 16
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "CDD",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 11
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 13,
+                        "y": 16
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "wizard",
+                  "commands": "CLURX",
+                  "phases": [
+                    "reflect"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 8,
+                          "y": 12
+                        },
+                        "dead": true
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 8,
+                          "y": 2
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 13,
+                        "y": 16
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            },
+            {
+              "afterTurn": 26,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 15,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 243,
+                  "expanded": 243
+                },
+                {
+                  "hero": "bard",
+                  "states": 1,
+                  "expanded": 1
+                }
+              ],
+              "probes": {
+                "legal": 1069,
+                "refused": 141,
+                "dead": 10,
+                "won": 0
+              },
+              "examples": {
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "CU",
+                  "phases": [
+                    "walk"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 4
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 11,
+                          "y": 12
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 11,
+                        "y": 14
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "CL",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 11,
+                          "y": 12
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 11,
+                        "y": 14
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "wizard",
+                  "commands": "CUULLLDD",
+                  "phases": [
+                    "walk",
+                    "combat"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 2,
+                          "y": 5
+                        },
+                        "dead": true
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 11,
+                          "y": 12
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 6,
+                        "y": 15
+                      },
+                      {
+                        "x": 11,
+                        "y": 14
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 14
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": true,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": false
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            },
+            {
+              "afterTurn": 85,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 13,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 246,
+                  "expanded": 246
+                },
+                {
+                  "hero": "bard",
+                  "states": 2,
+                  "expanded": 2
+                }
+              ],
+              "probes": {
+                "legal": 856,
+                "refused": 143,
+                "dead": 241,
+                "won": 0
+              },
+              "examples": {
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "CU",
+                  "phases": [
+                    "walk"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 17,
+                          "y": 9
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 12,
+                          "y": 4
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 14,
+                        "y": 4
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 13
+                      },
+                      {
+                        "x": 10,
+                        "y": 13
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": false,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "wizard",
+                  "commands": "CX",
+                  "phases": [
+                    "reflect"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 17,
+                          "y": 10
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 10,
+                          "y": 2
+                        },
+                        "dead": true
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 14,
+                        "y": 4
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 13
+                      },
+                      {
+                        "x": 10,
+                        "y": 13
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": false,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                },
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "CRR",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 18,
+                          "y": 10
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 12,
+                          "y": 4
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 14,
+                        "y": 4
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 13
+                      },
+                      {
+                        "x": 10,
+                        "y": 13
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": false,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            },
+            {
+              "afterTurn": 116,
+              "status": "local-family-exhausted",
+              "maxMs": 3000,
+              "maxStates": 1500,
+              "elapsedMs": 12,
+              "approaches": [
+                {
+                  "hero": "wizard",
+                  "states": 244,
+                  "expanded": 244
+                },
+                {
+                  "hero": "bard",
+                  "states": 1,
+                  "expanded": 1
+                }
+              ],
+              "probes": {
+                "legal": 855,
+                "refused": 359,
+                "dead": 11,
+                "won": 0
+              },
+              "examples": {
+                "legal": {
+                  "selected": "wizard",
+                  "commands": "U",
+                  "phases": [
+                    "swap"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 12,
+                          "y": 4
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 14,
+                        "y": 4
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 13
+                      },
+                      {
+                        "x": 10,
+                        "y": 13
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": false,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": false
+                  }
+                },
+                "refused": {
+                  "selected": "wizard",
+                  "commands": "X",
+                  "phases": [],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 12,
+                          "y": 4
+                        },
+                        "dead": false
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 14,
+                        "y": 4
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 13
+                      },
+                      {
+                        "x": 10,
+                        "y": 13
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": false,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": true,
+                    "dead": false
+                  }
+                },
+                "dead": {
+                  "selected": "wizard",
+                  "commands": "DDDDLLLLUUU",
+                  "phases": [
+                    "walk",
+                    "combat"
+                  ],
+                  "state": {
+                    "heroes": [
+                      {
+                        "kind": "wizard",
+                        "at": {
+                          "x": 8,
+                          "y": 5
+                        },
+                        "dead": true
+                      },
+                      {
+                        "kind": "bard",
+                        "at": {
+                          "x": 5,
+                          "y": 5
+                        },
+                        "dead": false
+                      }
+                    ],
+                    "stones": [
+                      {
+                        "x": 14,
+                        "y": 4
+                      }
+                    ],
+                    "supports": [
+                      {
+                        "x": 9,
+                        "y": 13
+                      },
+                      {
+                        "x": 10,
+                        "y": 13
+                      }
+                    ],
+                    "monsters": [
+                      {
+                        "x": 3,
+                        "y": 5
+                      },
+                      {
+                        "x": 7,
+                        "y": 5
+                      }
+                    ],
+                    "mirrors": [
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 2
+                        },
+                        "facing": "SE"
+                      },
+                      {
+                        "at": {
+                          "x": 12,
+                          "y": 2
+                        },
+                        "facing": "SW"
+                      },
+                      {
+                        "at": {
+                          "x": 5,
+                          "y": 12
+                        },
+                        "facing": "NE"
+                      }
+                    ],
+                    "circuits": {
+                      "premier-choeur": true,
+                      "charge-conservee": false,
+                      "accord-final": false
+                    },
+                    "gates": [
+                      {
+                        "at": {
+                          "x": 11,
+                          "y": 14
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 15,
+                          "y": 3
+                        },
+                        "closed": true
+                      },
+                      {
+                        "at": {
+                          "x": 16,
+                          "y": 3
+                        },
+                        "closed": true
+                      }
+                    ],
+                    "complete": false,
+                    "refused": false,
+                    "dead": true
+                  }
+                }
+              },
+              "entries": [],
+              "interpretation": "No entry found in this explicitly restricted family of direct approaches; this is not a global necessity proof."
+            }
+          ]
+        }
+      ],
+      "branches": [
+        {
+          "label": "walking-away-withdraws-the-first-bridge",
+          "afterTurn": 3,
+          "commands": "D",
+          "executedCommands": "D",
+          "meaning": "Le départ volontaire du Barde entraîne les gardiens et retire les deux cases du pont provisoire.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "song",
+                "gate",
+                "platform"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 5,
+                  "y": 10
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 5,
+                  "y": 6
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 6,
+                "y": 15
+              },
+              {
+                "x": 13,
+                "y": 16
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 6
+              },
+              {
+                "x": 7,
+                "y": 6
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": false,
+              "charge-conservee": true,
+              "accord-final": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "ordinary-loading-exit-moves-cargo-and-support",
+          "afterTurn": 26,
+          "commands": "D",
+          "executedCommands": "D",
+          "meaning": "Le départ sud est légal mais déplace la caisse hors de la presse et décale aussi le premier appui. La préparation n’est plus celle du dépôt latéral.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 13
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 6,
+                "y": 15
+              },
+              {
+                "x": 11,
+                "y": 15
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 15
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": true,
+              "charge-conservee": true,
+              "accord-final": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "unload-the-command-before-loading-the-press",
+          "afterTurn": 5,
+          "commands": "CDLDLDDDRU",
+          "executedCommands": "CDLDLDDDRU",
+          "meaning": "Retirer la caisse occidentale avant le chargement ferme une presse vide : aucun second appui n’est créé. Une nouvelle préparation reste possible.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 2,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 10,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song",
+                "gate"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 4,
+                  "y": 14
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 6,
+                "y": 14
+              },
+              {
+                "x": 13,
+                "y": 16
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": true,
+              "charge-conservee": false,
+              "accord-final": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "straight-delivery-carries-away-the-return-support",
+          "afterTurn": 72,
+          "commands": "UUUUUUUUU",
+          "executedCommands": "UUUUUUUUU",
+          "meaning": "La livraison directe place bien la caisse mais emporte un appui jusqu’au nord. Le détour latéral du parcours conserve les deux cases du passage de retour.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 2,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 17,
+                  "y": 10
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 12,
+                  "y": 4
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 14,
+                "y": 4
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 13
+              },
+              {
+                "x": 10,
+                "y": 4
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": true,
+              "charge-conservee": false,
+              "accord-final": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "global-reflection-is-not-the-two-bend-spell",
+          "afterTurn": 85,
+          "commands": "CUULLLLLLLLLULLLLLLULUUURRRRDDX",
+          "executedCommands": "CUULLLLLLLLLULLLLLLULUUURRRRDDX",
+          "meaning": "L’activation globale des miroirs est refusée ici. La flèche du Magicien suit les deux faces et échange les héros ; ACTION5 ne relaie pas les reflets entre miroirs.",
+          "outcome": "refused",
+          "refusedTurns": [
+            31
+          ],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 2,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 10,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 11,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 12,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 13,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 14,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 15,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 16,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 17,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 18,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 19,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 20,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 21,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 22,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 23,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 24,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 25,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 26,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 27,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 28,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 29,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 30,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 31,
+              "command": "X",
+              "outcome": "refused",
+              "phases": []
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 5,
+                  "y": 5
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 12,
+                  "y": 4
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 14,
+                "y": 4
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 13
+              },
+              {
+                "x": 10,
+                "y": 13
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 7,
+                "y": 5
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": true,
+              "charge-conservee": false,
+              "accord-final": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": true
+              }
+            ],
+            "complete": false,
+            "refused": true,
+            "dead": false
+          }
+        },
+        {
+          "label": "ordinary-final-exit-removes-the-living-weights",
+          "afterTurn": 119,
+          "commands": "D",
+          "executedCommands": "D",
+          "meaning": "Un dernier pas chanté retire les deux gardiens de leurs commandes finales et referme la chambre.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "song",
+                "gate"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 12,
+                  "y": 4
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 5,
+                  "y": 8
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 14,
+                "y": 4
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 13
+              },
+              {
+                "x": 10,
+                "y": 13
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 8
+              },
+              {
+                "x": 7,
+                "y": 8
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": false,
+              "charge-conservee": false,
+              "accord-final": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "straight-ray-selects-the-guard-before-the-bard",
+          "afterTurn": 119,
+          "commands": "CDDDLU",
+          "executedCommands": "CDDDLU",
+          "meaning": "La visée horizontale atteint d’abord le gardien droit. Le Magicien le remplace momentanément, puis son départ libère la commande ; le rayon coudé par l’atelier évite cette cible intermédiaire.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 2,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 4,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "L",
+              "outcome": "legal",
+              "phases": [
+                "swap"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "walk",
+                "gate"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 7,
+                  "y": 6
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 5,
+                  "y": 7
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 14,
+                "y": 4
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 13
+              },
+              {
+                "x": 10,
+                "y": 13
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 7
+              },
+              {
+                "x": 12,
+                "y": 7
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": false,
+              "charge-conservee": false,
+              "accord-final": false
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        },
+        {
+          "label": "wrong-final-exit-realigns-the-bridge-with-the-closed-press",
+          "afterTurn": 130,
+          "commands": "CDCDDDDRDDDRRRRR",
+          "executedCommands": "CDCDDDDRDDDRRRRR",
+          "meaning": "Un départ sud du Barde ramène les appuis devant la presse fermée. Le Magicien franchit l’eau, mais son pas vers la rive orientale est alors refusé.",
+          "outcome": "refused",
+          "refusedTurns": [
+            16
+          ],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 2,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "song"
+              ]
+            },
+            {
+              "turn": 3,
+              "command": "C",
+              "outcome": "legal",
+              "phases": []
+            },
+            {
+              "turn": 4,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 5,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 6,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 7,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 8,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 9,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 10,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 11,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 12,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 13,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 14,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 15,
+              "command": "R",
+              "outcome": "legal",
+              "phases": [
+                "walk"
+              ]
+            },
+            {
+              "turn": 16,
+              "command": "R",
+              "outcome": "refused",
+              "phases": []
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 10,
+                  "y": 14
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 11,
+                  "y": 13
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 14,
+                "y": 4
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 14
+              },
+              {
+                "x": 10,
+                "y": 14
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 7
+              },
+              {
+                "x": 7,
+                "y": 7
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": false,
+              "charge-conservee": false,
+              "accord-final": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": true,
+            "dead": false
+          }
+        },
+        {
+          "label": "repair-the-voluntary-final-choir-departure",
+          "afterTurn": 119,
+          "commands": "DU",
+          "executedCommands": "DU",
+          "meaning": "The southward departure closes the chamber but remains reversible: the next northward song restores both living weights and reopens it.",
+          "outcome": "legal",
+          "refusedTurns": [],
+          "deadTurns": [],
+          "steps": [
+            {
+              "turn": 1,
+              "command": "D",
+              "outcome": "legal",
+              "phases": [
+                "song",
+                "gate"
+              ]
+            },
+            {
+              "turn": 2,
+              "command": "U",
+              "outcome": "legal",
+              "phases": [
+                "song",
+                "gate"
+              ]
+            }
+          ],
+          "state": {
+            "heroes": [
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 12,
+                  "y": 4
+                },
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 5,
+                  "y": 7
+                },
+                "dead": false
+              }
+            ],
+            "stones": [
+              {
+                "x": 14,
+                "y": 4
+              }
+            ],
+            "supports": [
+              {
+                "x": 9,
+                "y": 13
+              },
+              {
+                "x": 10,
+                "y": 13
+              }
+            ],
+            "monsters": [
+              {
+                "x": 3,
+                "y": 7
+              },
+              {
+                "x": 7,
+                "y": 7
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 5,
+                  "y": 2
+                },
+                "facing": "SE"
+              },
+              {
+                "at": {
+                  "x": 12,
+                  "y": 2
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 5,
+                  "y": 12
+                },
+                "facing": "NE"
+              }
+            ],
+            "circuits": {
+              "premier-choeur": false,
+              "charge-conservee": false,
+              "accord-final": true
+            },
+            "gates": [
+              {
+                "at": {
+                  "x": 11,
+                  "y": 14
+                },
+                "closed": true
+              },
+              {
+                "at": {
+                  "x": 15,
+                  "y": 3
+                },
+                "closed": false
+              },
+              {
+                "at": {
+                  "x": 16,
+                  "y": 3
+                },
+                "closed": false
+              }
+            ],
+            "complete": false,
+            "refused": false,
+            "dead": false
+          }
+        }
+      ],
+      "legalAlternatives": [
+        "An early empty-press closure can be prepared again",
+        "Direct cargo delivery is legal but moves a return support",
+        "A voluntary departure from the final choir can be reversed with an opposite step"
+      ]
+    }
+  ],
+  "limits": [
+    "Five constraints per finale are reviewed. Witness execution is evidence of one route, not minimum length, uniqueness or global ability necessity.",
+    "Branch outcomes distinguish legal moves, refused inputs and hero deaths. A legal non-winning branch is not declared a dead end.",
+    "Each direct-access case has a 3000 ms and 1500-state limit. A limit is explicitly inconclusive.",
+    "Direct-access enumeration fixes cargo, supports, mirrors and the partner during the approach, then executes one real ray, reflection or step. Exhaustion applies only to this stated local family.",
+    "No game rule, map, witness, UI or core is modified by this review."
+  ],
+  "totals": {
+    "constraints": 10,
+    "branches": 18,
+    "branchOutcomes": {
+      "legal": 12,
+      "refused": 5,
+      "dead": 0,
+      "won": 1
+    },
+    "directAccessCases": 9,
+    "limitedDirectAccessCases": 0,
+    "directProbes": {
+      "legal": 7226,
+      "refused": 2497,
+      "dead": 297,
+      "won": 0
+    },
+    "directChamberEntries": 0
+  }
+}

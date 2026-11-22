@@ -1,0 +1,526 @@
+{
+  "spec": {
+    "id": "ss15-04",
+    "title": "L’appui des deux traversées",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "##Z.....~......#####",
+      "##......~......#####",
+      "##......~......#####",
+      "##...B.o~......#####",
+      "##......~......#####",
+      "##......~......#####",
+      "########~......#####",
+      "########~......#####",
+      "##......~......#####",
+      "##......~......#####",
+      "##..g...#......#####",
+      "##..g...############",
+      "##......############",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ]
+  },
+  "commands": "CRRRRCDDRRRRRDRCRRCUUURCDDDDDDLLDDLLLCDDDDDDDDDLLLLLDLLL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "puzzle": 27,
+    "label": "Adaptation de Heroes and Water · énigme 27 · appui déplacé dans l’eau",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27",
+    "objective": "Transformer la caisse en appui, faire traverser le duo puis réemployer ce même appui devant la rive du bas.",
+    "secondary": {
+      "label": "Heroes and Water · énigme 28 · départ forcé et traversée du partenaire",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-28"
+    }
+  },
+  "metrics": {
+    "actions": 56,
+    "selections": 6,
+    "swaps": 1,
+    "partnerSwaps": 1,
+    "bouncedSwaps": 0,
+    "bardSongs": 9,
+    "partnerSongs": 2,
+    "selectiveSongs": 1,
+    "forcedBardMoves": 1,
+    "supportMoves": 6,
+    "stoneMoves": 1,
+    "monsterMoves": 0,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La caisse entre dans l’eau et devient l’unique appui de la salle",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Barde monte sur l’appui : celui-ci reste ancré sous ses pieds",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien rejoint la rive orientale en échangeant avec le Barde",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Barde traverse à nouveau, avec le Magicien entraîné sur le sol",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le même appui descend jusqu’à l’ouverture de la rive inférieure",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Barde revient par l’appui et rejoint la destination du bas",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien suit le passage conservé et les deux héros terminent ensemble",
+      "turn": 56,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Une caisse immergée devient une ressource de traversée déplacée par le chant.",
+      "Il faut modifier la position de l’appui pour desservir des ouvertures différentes.",
+      "Les deux héros doivent rejoindre les destinations après le transport de la ressource."
+    ],
+    "changed": [
+      "Le Magicien remplace le Guerrier et assure une relève par échange.",
+      "SS15 ancre les appuis sous les héros et sous la prochaine arrivée du Barde.",
+      "Une seule caisse dessert deux traversées ; le chant carré remplace le chant en ligne. Aucun empilement ni déplacement double du guide n’est repris."
+    ],
+    "sourceReading": "Heroes and Water 27 guide un cristal dans l’eau entre plusieurs passages ; l’énigme 28 distingue les mouvements volontaires et forcés du Barde. La carte SS15 utilise une rive centrale et un retour vers une rive inférieure séparée.",
+    "localChecks": [
+      {
+        "turn": 4,
+        "alternative": "U",
+        "effect": "Un appui sous le Barde reste ancré : tenter de remonter sur l’eau vide est refusé, au lieu de déplacer son propre sol.",
+        "observed": {
+          "refusals": 1,
+          "dead": false,
+          "supports": [
+            {
+              "x": 8,
+              "y": 6
+            }
+          ],
+          "bard": {
+            "x": 8,
+            "y": 6
+          },
+          "stones": []
+        }
+      },
+      {
+        "turn": 28,
+        "alternative": "LL",
+        "effect": "Traverser trop haut atteint l’appui mais la rive occidentale est encore un mur ; il faut rejoindre une ouverture réelle.",
+        "observed": {
+          "refusals": 1,
+          "dead": false,
+          "supports": [
+            {
+              "x": 8,
+              "y": 10
+            }
+          ],
+          "bard": {
+            "x": 8,
+            "y": 10
+          },
+          "stones": []
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales exécutées ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}

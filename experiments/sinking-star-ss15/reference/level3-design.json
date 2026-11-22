@@ -1,0 +1,675 @@
+{
+  "spec": {
+    "id": "ss15-03",
+    "title": "Le remplaçant derrière le reflet",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "#######B~~o......###",
+      "#######~##.......###",
+      "##.....~##.......###",
+      "##.Z....##.#########",
+      "##.....###.#########",
+      "##................##",
+      "##.....#####......##",
+      "##..o..#####......##",
+      "##.....#####....g.##",
+      "##.....#####....g.##",
+      "############......##",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 7,
+          "y": 6
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "cellule",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 3
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "entree-finale",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 11
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "circuit": "cellule",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 8
+        },
+        "circuit": "entree-finale",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRCDRDRDCDDDDDLLLLUULDCRDDRRRRRRDDDRRRRCUURRRRRRDDDDRRRR",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 19,
+    "label": "Adaptation de Heroes of Hauling · énigme 19 · libération par substitution",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-19",
+    "objective": "Libérer le partenaire par une visée déviée, remplacer les héros par des poids et conserver les deux passages.",
+    "secondary": {
+      "label": "Heroes and Mirrors · énigme 1 · laisser le poids en place",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1"
+    }
+  },
+  "metrics": {
+    "actions": 56,
+    "selections": 4,
+    "swaps": 3,
+    "partnerSwaps": 2,
+    "bouncedSwaps": 1,
+    "bardSongs": 4,
+    "partnerSongs": 2,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 2,
+    "supportMoves": 0,
+    "stoneMoves": 3,
+    "monsterMoves": 0,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La visée déviée libère le Barde et place le Magicien dans sa cellule",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": true,
+        "entree-finale": false
+      }
+    },
+    {
+      "label": "La caisse remplace le Magicien dans la cellule et maintient le passage",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": true,
+        "entree-finale": false
+      }
+    },
+    {
+      "label": "Le Barde amène le second poids sur la commande de la dernière salle",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": true,
+        "entree-finale": true
+      }
+    },
+    {
+      "label": "Un second échange retire le Barde sans reprendre son poids",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": true,
+        "entree-finale": true
+      }
+    },
+    {
+      "label": "Le Barde emprunte les deux passages maintenus par les caisses",
+      "turn": 39,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": true,
+        "entree-finale": true
+      }
+    },
+    {
+      "label": "Les deux partenaires sont libres ; les deux remplaçants restent à leur poste",
+      "turn": 56,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": true,
+        "entree-finale": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un échange libère le héros enfermé et une caisse prend finalement sa place.",
+      "Le Barde doit quitter un poids sans l’entraîner hors de sa commande."
+    ],
+    "changed": [
+      "La visée du Magicien emprunte un miroir fixe avant d’atteindre la cellule.",
+      "Deux caisses maintiennent deux passages distincts et deux héros doivent atteindre l’arrivée.",
+      "Le chant carré, la cellule isolée par l’eau et l’ordre des postes sont une composition SS15."
+    ],
+    "sourceReading": "Heroes of Hauling 19 remplace des héros emprisonnés par des cristaux ; Heroes and Mirrors 1 laisse un cristal sur un bouton pendant un déplacement forcé du Barde. Les cartes et la visée déviée sont réagencées pour SS15.",
+    "localChecks": [
+      {
+        "turn": 0,
+        "alternative": "R",
+        "effect": "Le premier échange suit la face blanche du miroir et traverse le coude au-dessus de l’eau.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "wizard": {
+            "x": 7,
+            "y": 3
+          },
+          "bard": {
+            "x": 3,
+            "y": 6
+          },
+          "stones": [
+            {
+              "x": 10,
+              "y": 3
+            },
+            {
+              "x": 4,
+              "y": 10
+            }
+          ],
+          "bouncedSwaps": 1,
+          "pressed": false
+        }
+      },
+      {
+        "turn": 8,
+        "alternative": "D",
+        "effect": "Si le Barde descend encore à pied, le deuxième poids quitte sa commande et la salle finale se referme.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "wizard": {
+            "x": 10,
+            "y": 3
+          },
+          "bard": {
+            "x": 5,
+            "y": 10
+          },
+          "stones": [
+            {
+              "x": 7,
+              "y": 3
+            },
+            {
+              "x": 5,
+              "y": 12
+            }
+          ],
+          "bouncedSwaps": 1,
+          "pressed": false
+        }
+      },
+      {
+        "turn": 21,
+        "alternative": "D",
+        "effect": "L’échange retire le Barde du voisinage de la caisse sans déclencher le chant.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "wizard": {
+            "x": 5,
+            "y": 9
+          },
+          "bard": {
+            "x": 5,
+            "y": 6
+          },
+          "stones": [
+            {
+              "x": 7,
+              "y": 3
+            },
+            {
+              "x": 5,
+              "y": 11
+            }
+          ],
+          "bouncedSwaps": 1,
+          "pressed": true
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales exécutées ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}

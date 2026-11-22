@@ -1,0 +1,437 @@
+{
+  "spec": {
+    "id": "ss15-02",
+    "title": "Le départ qui garde le poids",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "##Z.......#......###",
+      "##............g..###",
+      "##........#...g..###",
+      "##..o.....#......###",
+      "##........#......###",
+      "##..B.....#......###",
+      "##........##########",
+      "##........##########",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "poids-conserve",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 6
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 4
+        },
+        "circuit": "poids-conserve",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRRCDDDDDRRUUUURRRRDDDDCUUUUURRRRRRRDRRRRRCUUURRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 1,
+    "label": "Adaptation de Heroes and Mirrors · énigme 1 · départ sans déplacer le poids",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-1",
+    "objective": "Poser la caisse sur la commande, sortir le Barde de son chant et faire passer les deux partenaires.",
+    "secondary": {
+      "label": "Heroes of Hauling · énigme 13 · relève par échange",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-13"
+    }
+  },
+  "metrics": {
+    "actions": 49,
+    "selections": 4,
+    "swaps": 1,
+    "partnerSwaps": 1,
+    "bouncedSwaps": 0,
+    "bardSongs": 2,
+    "partnerSongs": 0,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 1,
+    "supportMoves": 0,
+    "stoneMoves": 2,
+    "monsterMoves": 0,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le chant pose la caisse sur la commande qui ouvre le passage",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true
+      }
+    },
+    {
+      "label": "Le Magicien échange avec le Barde : la caisse reste sur la commande",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true
+      }
+    },
+    {
+      "label": "Le Barde contourne sa caisse à distance et rejoint la première destination",
+      "turn": 42,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true
+      }
+    },
+    {
+      "label": "Le Magicien rejoint le Barde sans reprendre la caisse",
+      "turn": 49,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "poids-conserve": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un poids doit rester sur sa commande pendant le départ du Barde.",
+      "Un déplacement forcé du partenaire permet de changer de position sans entraîner la charge."
+    ],
+    "changed": [
+      "Le départ par miroir du guide devient ici un échange frontal du Magicien.",
+      "Le chant carré de 5 × 5 remplace le chant en ligne et impose un détour hors de portée.",
+      "La salle, ses distances et ses deux destinations sont originales."
+    ],
+    "sourceReading": "Heroes and Mirrors 1 conserve un cristal sur son bouton pendant un reflet de la Barde ; Heroes of Hauling 13 montre une relève de héros par échange. SS15 combine ces contraintes avec ses deux pouvoirs.",
+    "localChecks": [
+      {
+        "turn": 3,
+        "alternative": "D",
+        "effect": "Un départ volontaire vers le bas entraîne encore la caisse et referme le passage.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "pressed": false,
+          "stones": [
+            {
+              "x": 6,
+              "y": 7
+            }
+          ],
+          "bard": {
+            "x": 6,
+            "y": 9
+          }
+        }
+      },
+      {
+        "turn": 9,
+        "alternative": "R",
+        "effect": "L’échange déplace le Barde sans chant : son poids reste exactement sur la commande.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "pressed": true,
+          "stones": [
+            {
+              "x": 6,
+              "y": 6
+            }
+          ],
+          "bard": {
+            "x": 2,
+            "y": 8
+          }
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales exécutées ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}

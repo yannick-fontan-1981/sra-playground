@@ -1,0 +1,496 @@
+{
+  "success": true,
+  "htmlSha256": "ae6663a8cd8e0ca0a0580f8bf948eb02f72b37b3206eec8e3b6454030a426e7c",
+  "scope": "focused-ui-and-full-campaign",
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Twenty-six compiled-HTML role fixtures cover reciprocal swaps, bent rays, silent substitution, square-range song, supports, presses, hydraulics and simultaneous combat.",
+    "Reflection keys, nearest source, equal-distance exchange and gray previews.",
+    "Exposed buttons have a gray background, pink plus and circuit center; pure presses have gray/open and black/closed centers.",
+    "Blocking backs alone blink red; ordinary inputs lock and mid-warning Undo restores the preceding state.",
+    "A returning Wizard ray displays its circuit, reports the loop and awards no false lesson.",
+    "Keys 1/2, Tab, both role buttons and public-pixel clicks select the intended hero without a world tick; Shift+Tab exits and outside input is ignored.",
+    "Undo, Reset, Restart and level selection interrupt animations without stale frames; Reset clears discoveries.",
+    "Reduced motion uses no timer waits.",
+    "Defeat waits for the final combat frame and its Undo restores the live room.",
+    "VICTORY appears after the final frame and allows Undo or Restart.",
+    "All 8 compiled rooms expose two heroes, two goals, both source links and contextual help.",
+    "The authored level1 route earns all twenty discoveries from displayed public pixels.",
+    "All eight actual rooms, including the rebuilt finals, win through compiled HTML inputs with every frame and duration checked; each completion is undone and replayed."
+  ],
+  "roleCoverage": [
+    {
+      "case": "Wizard exchanges the first crate only",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard exchanges the partner without singing",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "wizard-partner"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard ray bends at a white mirror face",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "wizard-bend"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard cannot push a black mirror back",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "substitution releases the Bard without moving nearby cargo",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "wizard-partner",
+        "release-by-swap"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a crate replaces the Wizard on a command without a hydraulic pulse",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "relay-weight"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "swapped monsters fight without a false press lesson",
+      "frames": 8,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "wizard-swap",
+        "monster"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "near crate follows one Bard step",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "song crosses an intervening wall",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "wall-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "diagonal corner belongs to the radius-two square",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "diagonal-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "one blocked choir member stays while a free member follows",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "selective-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "simultaneous same-colour dependencies advance the whole nearby row",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "an outside-aura crate holds the inner row and blocks the Bard",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "a sung Wizard never casts and leaves the mirror still",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "partner-song"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "song never pushes a mirror in front of the Bard",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "sunken support slides from water to water",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "support-slide"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a support cannot climb onto dry floor",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "the Bard destination support stays anchored",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "support-anchor"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "sung crate becomes a permanent water support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "platform"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "unsafe sung partner landing refuses every movement",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [],
+      "exactUndo": true
+    },
+    {
+      "case": "remote press carries Wizard without casting",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "remote press carries Bard without singing cargo",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "press sends a crate into water",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press",
+        "platform"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "hydraulics settle before checking a pressed Bard over water",
+      "frames": 9,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "sung monsters attack one another simultaneously",
+      "frames": 8,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "bard-song",
+        "monster"
+      ],
+      "exactUndo": true
+    },
+    {
+      "case": "a pressed mirror stays legible over its destination button",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "publicLessons": [
+        "move",
+        "gate",
+        "press"
+      ],
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square outline",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange both heroes",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    }
+  ],
+  "deviceGlyphCoverage": [
+    {
+      "sharedPlate": false,
+      "openPixels": [
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          3,
+          15
+        ],
+        [
+          7,
+          15,
+          7
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    },
+    {
+      "sharedPlate": true,
+      "openPixels": [
+        [
+          3,
+          7,
+          3
+        ],
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          7,
+          3
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    }
+  ],
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible destinations flash both mirrors",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "mirror hiding the only source flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "unchangedFinalFrame": true,
+      "repeatedWarning": true,
+      "controlsLocked": true,
+      "noReflectionLesson": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "Undo during warning restores previous actual movement",
+      "midAnimationUndo": true,
+      "exactPreviousState": true,
+      "cancelledFramesCannotRepaint": true,
+      "noReflectionLesson": true
+    }
+  ],
+  "rayLoopCoverage": {
+    "frames": 9,
+    "exactPixelsAndTiming": true,
+    "unchangedPositions": true,
+    "noSpuriousLessons": true,
+    "repeatedLoop": true,
+    "undo": true
+  },
+  "campaignCoverage": [
+    {
+      "level": 1,
+      "title": "L’atelier des passages croisés",
+      "actions": 134,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 2,
+      "title": "Le départ qui garde le poids",
+      "actions": 49,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 3,
+      "title": "Le remplaçant derrière le reflet",
+      "actions": 56,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 4,
+      "title": "L’appui des deux traversées",
+      "actions": 56,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 5,
+      "title": "Les gardiens qu’il faut garder",
+      "actions": 39,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 6,
+      "title": "La visée et le dernier appui",
+      "actions": 47,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 7,
+      "title": "Le relais des trois rives",
+      "actions": 162,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 8,
+      "title": "Le compte des deux rives",
+      "actions": 181,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    }
+  ],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 134,
+    "discoveries": [
+      "select",
+      "move",
+      "wizard-swap",
+      "wizard-partner",
+      "wizard-bend",
+      "relay-weight",
+      "bard-song",
+      "partner-song",
+      "selective-song",
+      "diagonal-song",
+      "wall-song",
+      "release-by-swap",
+      "platform",
+      "support-slide",
+      "support-anchor",
+      "mirror",
+      "gate",
+      "press",
+      "monster",
+      "goals"
+    ]
+  }
+}

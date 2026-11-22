@@ -1,0 +1,848 @@
+{
+  "spec": {
+    "id": "ss15-06",
+    "title": "La visée et le dernier appui",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "#########o##########",
+      "##Z######~##########",
+      "##.....##~.......###",
+      "##....~..........###",
+      "##.....###.......###",
+      "##..B..~.........###",
+      "##......#........###",
+      "##......#........###",
+      "#########........###",
+      "############.#######",
+      "############.....###",
+      "############.gg..###",
+      "############.....###",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 6
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "relais-du-nord",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 9
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "depot-lateral",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 10
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 6
+        },
+        "circuit": "relais-du-nord",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 8
+        },
+        "circuit": "depot-lateral",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 12
+        },
+        "circuit": "relais-du-nord",
+        "direction": "S",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 4
+        },
+        "circuit": "relais-du-nord",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 5
+        },
+        "circuit": "relais-du-nord",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CDUCDRDRCDCDDRCDRRRUURRDDDRRRDDDRCDDDDDDRRDDRRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "puzzle": 1,
+    "label": "Adaptation de Heroes and Light · énigme 1 · deux dépôts par presses orientées",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1",
+    "objective": "Déplacer le miroir, récupérer la caisse sèche par échange, assurer le retour hydraulique puis créer le dernier appui par la presse latérale.",
+    "secondary": {
+      "label": "Heroes and Light · énigme 4 · relais des commandes et dépôts successifs",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-4"
+    }
+  },
+  "metrics": {
+    "actions": 47,
+    "selections": 6,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "bouncedSwaps": 1,
+    "bardSongs": 5,
+    "partnerSongs": 0,
+    "selectiveSongs": 0,
+    "forcedBardMoves": 0,
+    "supportMoves": 0,
+    "stoneMoves": 7,
+    "monsterMoves": 0,
+    "mirrorMoves": 1,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 2,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La première presse décale le miroir et aligne sa face sur la caisse isolée",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": true,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "Le Barde relâche la commande : la presse rouverte laisse passer la visée du Magicien",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": false,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "L’échange dévié ramène la caisse sèche et envoie le Magicien sur l’île du nord",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": false,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "Le Barde dégage la caisse de la ligne du miroir et maintient les deux plateformes pour le retour",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": true,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "Le Magicien quitte les plateformes et rejoint le sol de la rive orientale",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": true,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "Le Barde retire le pont provisoire et ouvre l’accès final, puis prépare la caisse pour la seconde presse",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": false,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "Le chant charge la presse latérale au moment où le Barde atteint sa commande : la caisse devient l’appui de la seconde traversée",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": false,
+        "depot-lateral": true
+      }
+    },
+    {
+      "label": "La seconde presse est rouverte avant la traversée",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": false,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "Le Barde emprunte l’appui permanent et rejoint l’arrivée libérée par le retrait du relais",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": false,
+        "depot-lateral": false
+      }
+    },
+    {
+      "label": "Le Magicien rejoint la seconde destination ; le miroir et l’appui ont rempli des rôles distincts",
+      "turn": 47,
+      "heroes": [
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 6
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "relais-du-nord": false,
+        "depot-lateral": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Une presse dépose une ressource dans une direction qui n’est pas obtenue par une traction directe.",
+      "La commande doit être activée puis relâchée pour réutiliser le passage.",
+      "Les héros se relaient pendant les phases de chargement et de traversée."
+    ],
+    "changed": [
+      "La première presse déplace un miroir pour construire une visée du Magicien.",
+      "Une commande du Barde crée deux plateformes temporaires et ferme simultanément l’accès final.",
+      "La caisse récupérée doit rester sèche jusqu’au second dépôt, qui en fait l’appui permanent du Barde.",
+      "Le chant carré, l’échange dévié et les deux destinations sont propres à SS15 ; aucun faisceau de pouvoir, empilement ou dragon du guide n’est repris."
+    ],
+    "sourceReading": "Heroes and Light 1 utilise les presses pour atteindre des emplacements inaccessibles aux mouvements directs ; Light 4 répartit les remplaçants sur des commandes afin de produire des poussées successives. La chaîne miroir, caisse sèche, retour hydraulique et dernier appui est une composition originale SS15.",
+    "localChecks": [
+      {
+        "turn": 2,
+        "alternative": "CDDRR",
+        "effect": "Tant que la première presse reste fermée, elle interrompt le rayon : la commande droite fait marcher le Magicien au lieu d’échanger avec la caisse.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "deadHeroes": [],
+          "wizard": {
+            "x": 4,
+            "y": 6
+          },
+          "stones": [
+            {
+              "x": 9,
+              "y": 3
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 9,
+                "y": 6
+              },
+              "facing": "NW"
+            }
+          ],
+          "swaps": 0,
+          "platformActive": [
+            true,
+            true
+          ],
+          "relais": true
+        }
+      },
+      {
+        "turn": 3,
+        "alternative": "X",
+        "effect": "Un reflet global prématuré immerge l’unique caisse dans la case d’eau isolée du couloir ; cette caisse sèche n’est alors plus disponible pour charger la seconde presse.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "deadHeroes": [],
+          "wizard": {
+            "x": 2,
+            "y": 4
+          },
+          "stones": [],
+          "supports": [
+            {
+              "x": 6,
+              "y": 6
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 9,
+                "y": 6
+              },
+              "facing": "NW"
+            }
+          ],
+          "swaps": 0,
+          "platformActive": [
+            false,
+            false
+          ],
+          "relais": false
+        }
+      },
+      {
+        "turn": 12,
+        "alternative": "CU",
+        "effect": "Si le Barde quitte sa commande pendant le retour du Magicien, les plateformes disparaissent sous celui-ci et il se noie.",
+        "observed": {
+          "refusals": 0,
+          "dead": true,
+          "deadHeroes": [
+            "wizard"
+          ],
+          "wizard": {
+            "x": 9,
+            "y": 4
+          },
+          "stones": [
+            {
+              "x": 3,
+              "y": 6
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 9,
+                "y": 6
+              },
+              "facing": "NW"
+            }
+          ],
+          "swaps": 1,
+          "platformActive": [
+            false,
+            false
+          ],
+          "relais": false
+        }
+      }
+    ],
+    "checkScope": "Comparaisons locales du parcours auteur ; aucune preuve d’optimalité ou d’unicité globale."
+  }
+}
