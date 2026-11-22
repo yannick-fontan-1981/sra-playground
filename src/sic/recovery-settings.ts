@@ -24,6 +24,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const status = form.querySelector<HTMLElement>('[data-sic-recovery-status]')!;
   const revision = form.querySelector<HTMLElement>('[data-sic-recovery-revision]')!;
   const rollback = form.querySelector<HTMLButtonElement>('[data-sic-recovery-rollback]')!;
+  const solver = form.elements.namedItem('recoverySolver') as HTMLSelectElement;
   const mode = form.elements.namedItem('mode') as HTMLSelectElement;
   const priority = form.elements.namedItem('priority') as HTMLSelectElement;
   const inputOrder = form.elements.namedItem('frontierInputOrder') as HTMLSelectElement;
@@ -118,7 +119,17 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   } catch {
     status.textContent = 'Using defaults because the saved SIC settings could not be read.';
   }
+  function showSolverControls() {
+    const standalone = solver.value !== 'combined';
+    if (standalone) mode.value = 'active';
+    for (const control of [mode,priority,inputOrder,familyAgenda,adaptiveReasoning,openingCuriosity,ruleTitle,ruleCommands,
+        ruleGap,rulePreference,ruleMode]) control.disabled = standalone;
+    for (const control of [informationMode,informationStrategy,informationOutcomes,mechanismRefutationLimit,testFieldFragments])
+      control.disabled = solver.value === 'sic';
+  }
+  solver.addEventListener('change', showSolverControls);
   function showDraft(pack: RecoveryPack) {
+    solver.value = pack.solver ?? 'combined';
     mode.value = pack.mode;
     depth.value = String(pack.maxDepth);
     nodes.value = String(pack.maxNodes);
@@ -138,6 +149,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     ruleGap.value = String(rule?.minimumUsageGap ?? 1);
     rulePreference.value = rule?.prefer ?? 'command_order';
     ruleMode.value = rule?.mode ?? 'shadow';
+    showSolverControls();
     renderPriorityPreview();
     renderRulePreview();
     showFallback();
@@ -156,17 +168,20 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     showSaved();
   }
   function readForm() {
+    const common = {version:1, mode:mode.value, maxDepth:depth.valueAsNumber, maxNodes:nodes.valueAsNumber};
+    const information = informationMode.value === 'native' || solver.value === 'sic' ? {} : {
+      informationPreference: {strategy:informationStrategy.value, mode:informationMode.value,
+        minimumOutcomes:informationOutcomes.valueAsNumber,
+        ...(mechanismRefutationLimit.value ? {mechanismRefutationLimit:mechanismRefutationLimit.valueAsNumber} : {}),
+        ...(testFieldFragments.checked ? {fieldRegistration:'test_aligned_fragments_after_motion'} : {})},
+    };
+    if (solver.value !== 'combined') return recoveryRevision(compileRecoveryPack({...common,solver:solver.value,...information}));
     const strategyOrder = [priority.value, ...contactRecoveryOrder.filter(id => id !== priority.value)];
     const localRule = readLocalRule();
-    return recoveryRevision(compileRecoveryPack({ version: 1, mode: mode.value, maxDepth: depth.valueAsNumber, maxNodes: nodes.valueAsNumber,
-      strategyOrder, familyAgenda: familyAgenda.value,
-      ...(adaptiveReasoning.checked ? { reasoningMode: 'adaptive' } : {}),
-      ...(openingCuriosity.value !== 'native' ? { openingCuriosity: openingCuriosity.value } : {}),
-      ...(informationMode.value !== 'native' ? { informationPreference: { strategy: informationStrategy.value,
-        mode: informationMode.value, minimumOutcomes: informationOutcomes.valueAsNumber,
-        ...(mechanismRefutationLimit.value ? {mechanismRefutationLimit:mechanismRefutationLimit.valueAsNumber} : {}),
-        ...(testFieldFragments.checked ? {fieldRegistration:'test_aligned_fragments_after_motion'} : {}) } } : {}),
-      frontier: { inputOrder: inputOrder.value, ...(localRule ? { localRule } : {}) } }));
+    return recoveryRevision(compileRecoveryPack({...common, ...information, strategyOrder, familyAgenda:familyAgenda.value,
+      ...(adaptiveReasoning.checked ? {reasoningMode:'adaptive'} : {}),
+      ...(openingCuriosity.value !== 'native' ? {openingCuriosity:openingCuriosity.value} : {}),
+      frontier:{inputOrder:inputOrder.value, ...(localRule ? {localRule} : {})}}));
   }
   showDraft(saved.current.configuration);
   showSaved();

@@ -1070,6 +1070,7 @@ app.innerHTML = `
                 <summary>Active SIC settings</summary>
                 <form data-sic-recovery-settings>
                   <p>Changes apply to new agent sessions. Contact recovery in shadow stops at its counterexample.</p>
+                  <label>Solver <select name="recoverySolver"><option value="combined">Combined recovery strategies</option><option value="sic">SIC</option><option value="sic-fallback">SIC Fallback</option></select></label>
                   <label for="sic-recovery-mode">Recovery mode</label>
                   <select id="sic-recovery-mode" name="mode"><option value="active">Active</option><option value="shadow">Shadow</option></select>
                   <label for="sic-recovery-priority">First contact-recovery strategy</label>
