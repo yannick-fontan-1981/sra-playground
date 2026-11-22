@@ -40,6 +40,8 @@ Lorsqu’un plan contient plusieurs gestes déjà justifiés, exposer son préfi
 
 Avant d’intégrer un changement de SIC, du pack, de l’arbitrage ou du moteur, exécuter `npm run test:sic-continuity`. Une victoire et un plan annoncé de plusieurs actions ne prouvent pas la continuité. Le contrôle examine les tickets exécutés et les clôtures natives sur chaque niveau protégé, avec des témoins de déplacements, de clics et de séries mixtes. Ajouter au contrat tout nouveau niveau dont on qualifie la continuité. Pour changer un seuil, documenter la raison et comparer le parcours antérieur dans la même modification.
 
+Le contrôle doit aussi vérifier les effets physiques de la campagne depuis le L1. Compter séparément les poussées successives de la même caisse, du même miroir et le positionnement continu juste avant un transfert réussi. Une hausse des séries de marche ailleurs ne compense pas leur disparition.
+
 ## Publication
 
 ### Pendant le test d’un jeu précis

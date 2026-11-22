@@ -1,5 +1,11 @@
 # Actions continues de SIC sur les 100 premiers niveaux
 
+## Poussées et approche d’un transfert dans SIC r207
+
+Le préfixe de marche précédent s’arrêtait au premier contact. Le déplacement de l’indicateur d’arrivée pouvait aussi invalider un trajet libre. Un projet spatial retenu peut maintenant engager ses gestes de placement, jusqu’à 16 commandes. Le reçu conserve la destination attendue de chaque geste. Avant et après le geste, SIC vérifie la position du sujet et des participants liés. Pour une poussée, il vérifie aussi la nouvelle position de la pièce. Une première calibration non mesurée, une conversion de terrain ou l’activation du transfert rend la main au décideur. Après un retour contradictoire, le moteur réconcilie uniquement le préfixe exécuté.
+
+Le contrôle de fusion rejoue les tickets exécutés dans les règles officielles de SS01. Il identifie séparément deux poussées successives du même objet et la marche continue qui précède immédiatement un transfert effectif du sujet. L’observateur de test dispose des positions physiques, le pilote utilise uniquement ses observations publiques et son projet. Une suppression des poussées peut ainsi faire échouer le contrôle même si le niveau reste gagné.
+
 ## Contrat de continuité en développement
 
 Le moteur sait engager jusqu’à 16 commandes, contrôler le retour immédiat de chacune et acquérir les transitions au moment où il clôt la série. Une décision reste identifiée par la même révision pendant cette exécution. Une nouvelle stratégie peut pourtant contourner cette capacité en ne proposant que le premier geste d’un trajet. C’est ce qui est arrivé à la famille d’expérimentation introduite en `2c823c51`, puis réutilisée par les plans de résolution. À la révision 203, SS01 gagnait ses huit niveaux en 445 commandes mais n’exécutait aucune deuxième commande sous la même décision.

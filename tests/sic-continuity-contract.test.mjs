@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { requireManipulation } from '../scripts/measure-ss01-manipulation.mjs';
 import { checkRun } from '../scripts/verify-sic-continuity.mjs';
 
 function sample(series) {
@@ -36,4 +37,11 @@ test('refuses early or incomplete reconciliation, a skipped ticket and an oversi
   gap.executedTickets[1].actionIndex = 2;
   assert.throws(() => checkRun(gap), /Unexpected step/);
   assert.throws(() => checkRun(sample([17])), /More than 16/);
+});
+
+test('walking continuity alone cannot satisfy an object or launch-positioning requirement', () => {
+  for (const missing of ['crate', 'mirror', 'position']) {
+    const retained = ['crate', 'mirror', 'position'].filter(k => k !== missing).map(kind => ({ kind, first: 1, last: 2 }));
+    assert.throws(() => requireManipulation(retained, [missing], 8), /lost consecutive/);
+  }
 });

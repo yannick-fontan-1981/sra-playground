@@ -1,7 +1,7 @@
 import type { NativeBox, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import type { Experiment } from './preparation-experiments.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
-import { mechanismWalkStance } from './reconfigure-local-mechanism.ts';
+import { mechanismStance } from './reconfigure-local-mechanism.ts';
 import { bindWalkingSeries, type WalkingStep } from './verified-walking-series.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 
@@ -68,7 +68,7 @@ export function preparedStance(
   arrived: boolean,
 ) {
   const m = x.mechanism;
-  if (m) return mechanismWalkStance(m, index, o, rows, arrived);
+  if (m) return mechanismStance(m, index, o, rows, arrived);
   const t = x.contactProject,
     s = t?.project.steps[index];
   if (!t || !s) return false;
@@ -96,6 +96,11 @@ export function preparedExperimentAt(x: Experiment, index: number, b: NativeObse
   const t = x.contactProject!,
     steps = t.project.steps.slice(index),
     step = steps[0]!;
+  const parts = [...t.parts];
+  for (const s of t.project.steps.slice(0, index)) {
+    const at = parts.indexOf(s.to);
+    if (s.role && s.placed !== undefined && at >= 0) parts[at] = s.placed;
+  }
   const relay = t.relay
     ? {
         ...t.relay,
@@ -111,6 +116,7 @@ export function preparedExperimentAt(x: Experiment, index: number, b: NativeObse
       ...t,
       ref: b.observation_ref,
       step,
+      parts,
       project: { ...t.project, steps },
       ...(relay ? { relay } : {}),
     },

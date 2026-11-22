@@ -1,3 +1,4 @@
+import {preparedSpatialSeries,spatialStance,type SpatialStep} from './prepared-spatial-series.ts';
 import {preparedWalk,preparedStance,preparedExperimentAt} from './prepared-walking-series.ts';
 import {walkingPremise,walkingReturn,type BoundWalkingStep} from './verified-walking-series.ts';
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
@@ -45,7 +46,7 @@ import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
 import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
-type Offer = NativeProposal & { experiment: Experiment; walkingSeries?:BoundWalkingStep[] };
+type Offer = NativeProposal & { experiment: Experiment; walkingSeries?:BoundWalkingStep[]; spatialSeries?:SpatialStep[] };
 const labels: Record<Experiment['phase'], string> = {
   investigateContactFrontier: 'Test a contact that could change access to a visible destination',
   composeObservedTransport:'Test whether repositioning a piece makes both marked sites reachable',
@@ -439,12 +440,14 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
               evidence,
             })
           : null;
-      const series=preparedWalk(experiment,o,rows,remaining);
+      const spatial=preparedSpatialSeries(experiment,o,rows,remaining,m.contactFrontier);
+      const walking=spatial?undefined:preparedWalk(experiment,o,rows,remaining);
+      const series=spatial??walking;
       const actions=series?.map(step=>step.command)??[command];
       return {
         status: 'proposed',
         kind: preparedEffectsId,
-        actions, ...(series?{walkingSeries:series}:{}),
+        actions, ...(spatial?{spatialSeries:spatial}:walking?{walkingSeries:walking}:{}),
         experiment,
         ...(cooperative?{cooperativeTransportForecast:cooperative}:{}),
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'||cursor.beyondReturn?{
@@ -535,6 +538,11 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       };
     },
     before(p, i, packet, o) {
+      const spatial=p.spatialSeries?.[i];
+      if(spatial){
+        const admitted=(i>0 || p.binding?.observation_ref===o.observation_ref) && spatialStance(p.experiment,spatial,i,o,packet.frame_rows,false);
+        return {admitted,reason:admitted?'spatial_premise_confirmed':'participant_pose_changed'};
+      }
       const step=p.walkingSeries?.[i];
       if(step){
         const admitted=(i>0 || p.binding?.observation_ref===o.observation_ref) && walkingPremise(step,packet.frame_rows) && preparedStance(p.experiment,i,o,packet.frame_rows,false);
@@ -544,6 +552,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       return { admitted, reason: admitted ? 'matched_preparation_bound' : 'stale_preparation' };
     },
     after(p, i, b, a, first, next) {
+      const spatial=p.spatialSeries?.[i];
+      if(spatial){
+        const boundary=b.level_epoch!==a.level_epoch || a.levels_completed>b.levels_completed;
+        const matched=spatialStance(p.experiment,spatial,i,a,next,true);
+        return {matched:boundary||matched,seal_prefix:boundary||!matched,reason:boundary?'official_boundary':matched?spatial.kind+'_pose_confirmed':'participant_pose_changed'};
+      }
       const step=p.walkingSeries?.[i];
       if(step){
         const boundary=b.level_epoch!==a.level_epoch || a.levels_completed>b.levels_completed;
@@ -561,7 +575,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       acquire(b, a, c, r, n);
     },
     record(b, a, c, r, n, p, index) {
-      const trial=p.walkingSeries?preparedExperimentAt(p.experiment,index,b):p.experiment;
+      const trial=p.walkingSeries||p.spatialSeries?preparedExperimentAt(p.experiment,index,b):p.experiment;
       const outcome = acquire(b, a, c, r, n, trial);
       const proof = m.contactFrontier?.deadlock;
       return {

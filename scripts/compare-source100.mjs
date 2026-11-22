@@ -147,7 +147,7 @@ async function run(code, games) {
         if (!pendingTicket || operation.ticketId !== pendingTicket.id) throw Error('Continuity ticket mismatch');
         const {level,decisionRevision,actionIndex,actionRef} = pendingTicket;
         const seal = result.snapshot.trace.findLast(e => e.kind === 'sealed_prefix' && e.revision === decisionRevision);
-        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,sealed:seal?.acquired_actions ?? null});
+        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,sealed:seal?.acquired_actions ?? null});
       }
       pendingTicket = result.ticket;
     }

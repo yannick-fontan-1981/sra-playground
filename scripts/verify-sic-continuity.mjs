@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -70,11 +71,15 @@ export function checkRun(run) {
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
     } else assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
+    const physical = reference ? measureManipulation(row.level, issued) : [];
+    const required = row.level === 2 ? ['mirror', 'position'] : row.level === 8 ? ['crate', 'mirror', 'position'] : [];
+    if (reference) requireManipulation(physical, required, row.level);
     result.push({
       game: code,
       level: row.level,
       commands: issued.length,
       continued,
+      physical: physical.map(r => r.kind + ' ' + r.first + '-' + r.last).join(', '),
       series: lengths.length,
       longest: Math.max(1, ...lengths),
     });
