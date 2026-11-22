@@ -135,6 +135,51 @@ export function seePair(
     if (scene) q.scene = scene;
     q.initialChecked = true;
   }
+  if (point && q.scene) {
+    const g = q.scene.grid,
+      col = Math.floor((point[0] - g.left) / g.pitch),
+      row = Math.floor((point[1] - g.top) / g.pitch);
+    const selected = row * g.columns + col;
+    const x = g.left + col * g.pitch,
+      y = g.top + row * g.pitch;
+    const changed =
+      col >= 0 &&
+      col < g.columns &&
+      row >= 0 &&
+      row < g.rows &&
+      b
+        .slice(y, y + g.pitch)
+        .some((line, j) =>
+          line
+            .slice(x, x + g.pitch)
+            .some((ink, i) => a[y + j]?.[x + i] !== ink),
+        );
+    const proposed =
+      changed && !q.reading?.subjects.includes(selected)
+        ? pairedScene(layout, b, point)
+        : undefined;
+    if (
+      proposed &&
+      !proposed.bodies.every((ink) => q.scene!.bodies.includes(ink))
+    ) {
+      const old = readPair(proposed, picture(proposed.grid, b));
+      const next = old && readPair(proposed, picture(proposed.grid, a), old);
+      if (
+        old &&
+        next &&
+        old.active === 0 &&
+        next.active === 1 &&
+        old.subjects.every((p, i) => next.subjects[i] === p)
+      ) {
+        // A confirmed transfer of the mark disambiguates a subject from an
+        // equally shaped indicator. Old physical effects refer to other bodies.
+        q.scene = proposed;
+        q.learning = fresh();
+        delete q.reading;
+        delete q.active;
+      }
+    }
+  }
   if (!q.scene) return;
   const s = q.scene,
     before = picture(s.grid, b),
@@ -197,6 +242,17 @@ export function seePair(
       m.scope = ref;
       m.radius = radius;
     }
+  }
+  if (
+    click &&
+    s.partialContext &&
+    !explainedByPlacement &&
+    old.active !== next.active &&
+    old.subjects.every((site, i) => next.subjects[i] === site)
+  ) {
+    q.active ??=
+      'selection_moves_a_distinctive_mark_between_stationary_subjects';
+    if (!m.refs.includes(ref)) m.refs = [...m.refs.slice(-5), ref];
   }
   if (op === 'ACTION5' && !explainedByPlacement) {
     const changes = before.flatMap((z, i) => (z !== after[i] ? [i] : []));

@@ -13,8 +13,9 @@ export type Scene = {
   grid: Grid;
   floor: number;
   bodies: [number, number];
+  partialContext?: true;
   accent: number;
-  cargo: string;
+  cargo?: string;
   ground: number[];
   medium: number[];
   goals: number[];
@@ -105,21 +106,36 @@ export function pairedScene(
       sites,
       ...shape(key, p),
     }));
-    const pairs = forms.flatMap((a) =>
-      !a.cross || a.sites.length !== 1 || a.marks.length !== 1
-        ? []
-        : forms
-            .filter(
-              (b) =>
-                b.cross &&
-                b.sites.length === 1 &&
-                !b.marks.length &&
-                b.field === a.field &&
-                a.center !== b.center &&
-                forms.some((f) => f.uniform && f.center === a.field),
-            )
-            .map((b) => [a, b] as const),
-    );
+    // The substrate can show through the corners without changing the foreground.
+    // A marked subject has exactly one different arm. Its peer has the same
+    // outline with all arms in the central ink. At least one body must expose
+    // a uniform background that independently occurs as floor in this scene.
+    const pairs = forms.flatMap((a) => {
+      if (
+        a.sites.length !== 1 ||
+        a.ring ||
+        a.arms.filter((ink) => ink !== a.center).length !== 1
+      )
+        return [];
+      return forms
+        .filter((b) => {
+          if (
+            b.sites.length !== 1 ||
+            b.ring ||
+            b.uniform ||
+            b.center === a.center ||
+            !b.arms.every((ink) => ink === b.center)
+          )
+            return false;
+          const floor = a.cross ? a.field : b.cross ? b.field : undefined;
+          return (
+            floor !== undefined &&
+            (!a.cross || !b.cross || a.field === b.field) &&
+            forms.some((f) => f.uniform && f.center === floor)
+          );
+        })
+        .map((b) => [a, b] as const);
+    });
     const wanted =
       typeof preferred === 'number' || preferred === undefined
         ? preferred
@@ -132,7 +148,7 @@ export function pairedScene(
     );
     if (eligible.length !== 1) continue;
     const [actor, partner] = eligible[0]!,
-      floor = actor.field!,
+      floor = (actor.cross ? actor.field : partner.field)!,
       origin: [number, number] = [actor.sites[0]!, partner.sites[0]!];
     const goals = forms.filter(
       (f) => f.ring && f.center === floor && f.sites.length === 2,
@@ -140,14 +156,12 @@ export function pairedScene(
     const cargos = forms
       .filter((f) => f.ring && f.center !== floor && f.sites.length >= 1)
       .sort((a, b) => b.sites.length - a.sites.length);
-    if (
-      goals.length !== 1 ||
-      !cargos.length ||
-      cargos[0]!.sites.length === cargos[1]?.sites.length
-    )
-      continue;
-    const cargo = cargos[0]!,
-      goal = goals[0]!;
+    if (goals.length !== 1) continue;
+    const cargo =
+      cargos[0] && cargos[0].sites.length !== cargos[1]?.sites.length
+        ? cargos[0]
+        : undefined;
+    const goal = goals[0]!;
     const switches = forms.filter(
       (f) =>
         f.cross &&
@@ -214,8 +228,11 @@ export function pairedScene(
       grid,
       floor,
       bodies: [actor.center, partner.center],
-      accent: actor.marks[0]!,
-      cargo: cargo.key,
+      ...(!actor.cross || !partner.cross || !cargo
+        ? { partialContext: true as const }
+        : {}),
+      accent: actor.arms.find((ink) => ink !== actor.center)!,
+      ...(cargo ? { cargo: cargo.key } : {}),
       ground,
       medium,
       goals: goal.sites,
@@ -263,13 +280,15 @@ export function readPair(
   );
   if (marked.length !== 1) return;
   const controls = new Set(s.doors.flatMap((d) => d.controls)),
-    cargoCenter = inks(s.cargo)[middle];
+    cargoInks = s.cargo ? inks(s.cargo) : [],
+    cargoCenter = cargoInks[middle];
   const pieces = tiles.flatMap((k, i) =>
     k === s.cargo ||
-    (controls.has(i) &&
+    (cargoCenter !== undefined &&
+      controls.has(i) &&
       !sites.includes(i) &&
       glyph(k).center === cargoCenter &&
-      glyph(k).colors.includes(inks(s.cargo)[0]!))
+      glyph(k).colors.includes(cargoInks[0]!))
       ? [i]
       : [],
   );
