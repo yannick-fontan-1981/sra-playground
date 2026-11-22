@@ -118,7 +118,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
   const earlyControl = informationPreference?.mode==='active' && informationPreference.earlyControl==='complete_an_observed_pair' && informationPreference.minimumOutcomes===2;
-  const testMotor = informationPreference?.mode==='active' && informationPreference.motorExperiment==='measure_positional_baseline' && informationPreference.minimumOutcomes===2;
+  const compareStrides = informationPreference?.motorExperiment==='distinguish_observed_displacements';
+  const testMotor = informationPreference?.mode==='active' && !!informationPreference.motorExperiment && informationPreference.minimumOutcomes===2;
   const testTransport=informationPreference?.strategy===transportControlStrategy;
   const traceMark=testTransport || informationPreference?.strategy===markedMotionStrategy;
   const testSilent=traceMark || informationPreference?.strategy===silentInputStrategy;
@@ -236,7 +237,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const cursor=m.cursorSelection??=newCursorMemory();cursor.verifyPoseChange=true;
       if(followMarkedPose)cursor.followMarkedPose=true;
     }
-    const motorResult = testMotor ? recordMotorContext(m.motorStudy??=motorStudy(),b,a,observedCommandKey(cmd),rows,next,x?.motorTest) : undefined;
+    const motorResult = testMotor ? recordMotorContext(m.motorStudy??=motorStudy(),b,a,observedCommandKey(cmd),rows,next,x?.motorTest,compareStrides) : undefined;
     const result=recordExperiment(m, b, a, cmd, rows, next, x);
     if(traceMark && result?.result==='previously_silent_input_changed_the_arrangement' && m.markedMotion?.edit!==m.previous)
       m.markedMotion={edit:m.previous,results:[]};
@@ -246,7 +247,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         pair.learning.motors[cmd.action_ref]?.ref === a.observation_ref) {
       pair.controlProof = { selection: pair.selectionWitness, motion: a.observation_ref };
     }
-    if(x?.motorTest && result)return {...result,result:motorResult??'subject_unresolved'};
+    if(x?.motorTest && result)return {...result,...motorResult,result:motorResult?.result??'subject_unresolved'};
     if(x?.cooperative&&result)return {...result,result:a.levels_completed>b.levels_completed?'transport_official':transportResult??'transport_unresolved'};
     return result;
   }
@@ -340,7 +341,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         !m.relativeMotion?.active ? probeFromKnownControl(m,m.scenes.indexOf(sceneKey(o)),new Set(available.map(observedCommandKey)),true) : null;
       if (ordinaryExploration && !immediate) return null;
       const experiment:Experiment|null = silent ?? mark ?? transport ?? immediate ?? (motor ? {
-        phase:'measureMotorBaseline',origin:-1,a:motor.command,b:motor.command,rule:'test_if_the_last_displacement_depends_on_the_current_position',refs:[],motorTest:motor,
+        phase:'measureMotorBaseline',origin:-1,a:motor.command,b:motor.command,rule:motor.basis==='two_observed_displacements'?'distinguish_the_two_observed_displacements':'test_if_the_last_displacement_depends_on_the_current_position',refs:[],motorTest:motor,
       } : cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
         refs:[],rule:cooperative.purpose,cooperative} : landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
         rule:landmark.joint?'prepare_every_indicated_arrival_before_the_common_operation':landmark.partnerTest?'retry_a_blocked_movement_after_changing_the_partner_placement':'compare_two_arrivals_with_a_preserved_first_contact',landmark,...(cursor?{cursorTrial:cursor}:{})} : cursor ? {
@@ -357,7 +358,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.silentInput||experiment.markedMotion||experiment.transportControl||cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
-        label = silent ? (phase==='prepare' ? 'Reproduce an arrangement to test an input that previously had no effect' : 'Measure whether the same input now changes the arrangement') : cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
+        label = motor?.basis==='two_observed_displacements' ? 'Repeat the command to distinguish the two observed displacements' : silent ? (phase==='prepare' ? 'Reproduce an arrangement to test an input that previously had no effect' : 'Measure whether the same input now changes the arrangement') : cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const positioned = experiment.terminalContact && 'operation' in experiment.terminalContact.witness
         ? experiment.terminalContact.witness : undefined;
@@ -401,7 +402,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       }
       if(motor){
         question.subjects=[motor.actor,motor.command];
-        question.satisfactionContract='compare_the_named_subject_at_its_expected_and_previous_positions';
+        question.satisfactionContract=motor.basis==='two_observed_displacements'?'identify_which_observed_displacement_the_same_command_repeats':'compare_the_named_subject_at_its_expected_and_previous_positions';
       }
       if(experiment.silentInput){
         question.subjects=[a,b];

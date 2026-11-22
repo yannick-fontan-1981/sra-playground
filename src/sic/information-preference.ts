@@ -6,7 +6,7 @@ export interface InformationPreference {
   readonly minimumOutcomes: number;
   readonly mechanismRefutationLimit?: number;
   readonly earlyControl?: 'complete_an_observed_pair';
-  readonly motorExperiment?: 'measure_positional_baseline';
+  readonly motorExperiment?: 'measure_positional_baseline' | 'distinguish_observed_displacements';
   readonly fieldRegistration?: 'test_aligned_fragments_after_motion';
 }
 
@@ -26,7 +26,7 @@ export function compileInformationPreference(input: unknown): InformationPrefere
   }
   if (earlyControl !== undefined && earlyControl !== 'complete_an_observed_pair')
     throw new TypeError('Unrecognized controlled experiment.');
-  if (motorExperiment !== undefined && motorExperiment !== 'measure_positional_baseline')
+  if (motorExperiment !== undefined && motorExperiment !== 'measure_positional_baseline' && motorExperiment !== 'distinguish_observed_displacements')
     throw new TypeError('Unrecognized motor experiment.');
   if (fieldRegistration !== undefined && fieldRegistration !== 'test_aligned_fragments_after_motion')
     throw new TypeError('Unrecognized field registration hypothesis.');

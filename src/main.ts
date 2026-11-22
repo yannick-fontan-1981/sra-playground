@@ -1092,7 +1092,7 @@ app.innerHTML = `
                     <label>Minimum distinct predicted returns <input name="informationOutcomes" type="number" min="2" max="64" value="2"></label>
                     <label>Identical mechanism refutations before replanning <input name="mechanismRefutationLimit" type="number" min="1" max="64" placeholder="Unlimited"></label>
                     <label><input name="testEarlyControl" type="checkbox"> Compare a known input immediately after a change</label>
-                    <label><input name="testMotorBaseline" type="checkbox"> Measure a movement again when its spatial context changes</label>
+                    <label>Movement experiments<select name="testMotorBaseline"><option value="">Default</option><option value="measure_positional_baseline">Measure movement after a spatial change</option><option value="distinguish_observed_displacements">Also distinguish two observed displacements</option></select></label>
                     <label><input name="testFieldFragments" type="checkbox"> Test aligned terrain fragments after observed movement</label>
                     <label>Priority mode <select name="informationMode"><option value="native">Keep the current order</option><option value="shadow">Preview on new decisions</option><option value="active">Apply in new sessions</option></select></label>
                     <p>Compares experiments that already satisfy the current preservation and action limits.</p>

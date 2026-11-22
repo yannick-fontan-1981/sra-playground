@@ -35,7 +35,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const informationOutcomes = form.elements.namedItem('informationOutcomes') as HTMLInputElement;
   const mechanismRefutationLimit = form.elements.namedItem('mechanismRefutationLimit') as HTMLInputElement;
   const earlyControl = form.elements.namedItem('testEarlyControl') as HTMLInputElement;
-  const testMotor = form.elements.namedItem('testMotorBaseline') as HTMLInputElement;
+  const testMotor = form.elements.namedItem('testMotorBaseline') as HTMLSelectElement;
   const testFieldFragments = form.elements.namedItem('testFieldFragments') as HTMLInputElement;
   const informationMode = form.elements.namedItem('informationMode') as HTMLSelectElement;
   informationStrategy.replaceChildren(...Object.entries(informationStrategies).map(([id, title]) => new Option(title, id)));
@@ -144,7 +144,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     informationOutcomes.value = String(pack.informationPreference?.minimumOutcomes ?? 2);
     mechanismRefutationLimit.value = String(pack.informationPreference?.mechanismRefutationLimit ?? '');
     earlyControl.checked = pack.informationPreference?.earlyControl === 'complete_an_observed_pair';
-    testMotor.checked = pack.informationPreference?.motorExperiment === 'measure_positional_baseline';
+    testMotor.value = pack.informationPreference?.motorExperiment ?? '';
     testFieldFragments.checked = pack.informationPreference?.fieldRegistration === 'test_aligned_fragments_after_motion';
     informationMode.value = pack.informationPreference?.mode ?? 'native';
     const rule: FrontierLocalRule | undefined = pack.frontier?.localRule;
@@ -178,7 +178,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
         minimumOutcomes:informationOutcomes.valueAsNumber,
         ...(mechanismRefutationLimit.value ? {mechanismRefutationLimit:mechanismRefutationLimit.valueAsNumber} : {}),
         ...(earlyControl.checked ? {earlyControl:'complete_an_observed_pair'} : {}),
-        ...(testMotor.checked ? {motorExperiment:'measure_positional_baseline'} : {}),
+        ...(testMotor.value ? {motorExperiment:testMotor.value} : {}),
         ...(testFieldFragments.checked ? {fieldRegistration:'test_aligned_fragments_after_motion'} : {})},
     };
     if (solver.value !== 'combined') return recoveryRevision(compileRecoveryPack({...common,solver:solver.value,...information}));

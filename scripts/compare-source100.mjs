@@ -449,6 +449,7 @@ async function run(code, games) {
           precondition,
           capability,
           predictedGap,
+          motorDelta,
         }) => ({
           level: (epoch ?? 1) + start - 1,
           phase,
@@ -472,6 +473,7 @@ async function run(code, games) {
           precondition,
           capability,
           predictedGap,
+          ...(motorDelta ? {motorDelta} : {}),
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
           ...(terminalContact?{terminalContact}:{}), ...(mobilityProbe?{mobilityProbe}:{}), ...(mechanism?{mechanism}:{}), ...(localRepeat?{localRepeat}:{}),

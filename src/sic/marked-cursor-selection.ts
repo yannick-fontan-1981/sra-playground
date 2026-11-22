@@ -9,10 +9,14 @@ type Motion = {box:NativeBox; form:string; command:string; ref:string; dx:number
 type PoseMotion = Motion & { fromBox:NativeBox };
 type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[]; ink:number; shape:string; basis?:'motor_scale'};
 type ProjectedMove = {command:string; delta:NativePoint; evidence:string};
+export type MeasuredControl = {
+  result:'same_subject_repeats_displacement'|'same_subject_stays'|'different_displacement';
+  observation:string; delta?:NativePoint; actor?:string;
+};
 type ControlContrast = {
   strategy: 'motion_contrast'; mode: 'exploration'; minimumOutcomes: number;
   motor: string; baselineDelta: NativePoint; evidence: string; outcomes: readonly ['previous_subject_moves' | 'both_subjects_stay', 'selected_subject_moves'];
-  measuredWithoutSelection?: {result:'same_subject_repeats_displacement'|'same_subject_stays';observation:string};
+  measuredWithoutSelection?: MeasuredControl;
 };
 type RepairOption = {command:string; prediction:'new_placement'|'unknown'|'return_or_overlap'; ref?:string};
 export type CursorTrial = Mark & { recurrentPlacement?:{key:string;verifiedReturns:number;alternative:string;returnedFrame:string};stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[]; beyondReturn?:boolean };
