@@ -1,0 +1,432 @@
+{
+  "success": true,
+  "levels": [
+    {
+      "level": 5,
+      "title": "Les gardiens de l’arène",
+      "reference": {
+        "entries": 93,
+        "selections": 10,
+        "nonSelectionActions": 83,
+        "result": "WIN",
+        "metrics": {
+          "actions": 93,
+          "selections": 10,
+          "merchantPushes": 1,
+          "songs": 9,
+          "groupSongs": 1,
+          "songHeroMoves": 6,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 4,
+          "supportMoves": 0,
+          "swaps": 1,
+          "partnerSwaps": 0,
+          "stoneSwaps": 0,
+          "monsterSwaps": 1,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 6,
+          "stoneMoves": 1,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "initialWalking": [
+        {
+          "role": "merchant",
+          "states": 200,
+          "reachableGoals": []
+        },
+        {
+          "role": "wizard",
+          "states": 198,
+          "reachableGoals": []
+        },
+        {
+          "role": "bard",
+          "states": 3,
+          "reachableGoals": []
+        }
+      ],
+      "goals": [
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 13
+        },
+        {
+          "x": 3,
+          "y": 17
+        }
+      ],
+      "exactTerrainDuplicatesAfterRotationOrReflection": []
+    },
+    {
+      "level": 6,
+      "title": "Le miroir en tournée",
+      "reference": {
+        "entries": 58,
+        "selections": 12,
+        "nonSelectionActions": 46,
+        "result": "WIN",
+        "metrics": {
+          "actions": 58,
+          "selections": 12,
+          "merchantPushes": 6,
+          "songs": 0,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "swaps": 0,
+          "partnerSwaps": 0,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 0,
+          "mirrorMoves": 7,
+          "reflections": 3,
+          "heroReflections": 3,
+          "pistonPushes": 1,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "initialWalking": [
+        {
+          "role": "merchant",
+          "states": 83,
+          "reachableGoals": []
+        },
+        {
+          "role": "wizard",
+          "states": 47,
+          "reachableGoals": []
+        },
+        {
+          "role": "bard",
+          "states": 39,
+          "reachableGoals": []
+        }
+      ],
+      "goals": [
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 17,
+          "y": 11
+        },
+        {
+          "x": 2,
+          "y": 15
+        }
+      ],
+      "exactTerrainDuplicatesAfterRotationOrReflection": []
+    },
+    {
+      "level": 7,
+      "title": "La navette des alcôves",
+      "reference": {
+        "entries": 54,
+        "selections": 11,
+        "nonSelectionActions": 43,
+        "result": "WIN",
+        "metrics": {
+          "actions": 54,
+          "selections": 11,
+          "merchantPushes": 3,
+          "songs": 12,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 0,
+          "supportMoves": 12,
+          "swaps": 1,
+          "partnerSwaps": 1,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 3,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "initialWalking": [
+        {
+          "role": "merchant",
+          "states": 7,
+          "reachableGoals": [
+            {
+              "x": 13,
+              "y": 6
+            }
+          ]
+        },
+        {
+          "role": "wizard",
+          "states": 35,
+          "reachableGoals": [
+            {
+              "x": 5,
+              "y": 13
+            }
+          ]
+        },
+        {
+          "role": "bard",
+          "states": 18,
+          "reachableGoals": []
+        }
+      ],
+      "goals": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 10
+        },
+        {
+          "x": 5,
+          "y": 13
+        }
+      ],
+      "exactTerrainDuplicatesAfterRotationOrReflection": []
+    },
+    {
+      "level": 8,
+      "title": "La cour au cœur du lac",
+      "reference": {
+        "entries": 145,
+        "selections": 10,
+        "nonSelectionActions": 135,
+        "result": "WIN",
+        "metrics": {
+          "actions": 145,
+          "selections": 10,
+          "merchantPushes": 8,
+          "songs": 13,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 9,
+          "songMonsterMoves": 0,
+          "supportMoves": 4,
+          "swaps": 2,
+          "partnerSwaps": 1,
+          "stoneSwaps": 1,
+          "monsterSwaps": 0,
+          "bentSwaps": 1,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 1,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 17,
+          "mirrorMoves": 1,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        }
+      },
+      "initialWalking": [
+        {
+          "role": "merchant",
+          "states": 250,
+          "reachableGoals": []
+        },
+        {
+          "role": "wizard",
+          "states": 249,
+          "reachableGoals": []
+        },
+        {
+          "role": "bard",
+          "states": 1,
+          "reachableGoals": []
+        }
+      ],
+      "goals": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "exactTerrainDuplicatesAfterRotationOrReflection": []
+    }
+  ],
+  "checks": [
+    {
+      "level": 5,
+      "name": "Deux adversaires combattus, deux gardiens conservés",
+      "passed": true,
+      "observed": "Le témoin élimine exactement deux monstres ; les deux survivants maintiennent les commandes à la victoire."
+    },
+    {
+      "level": 5,
+      "name": "Échange depuis le mauvais côté",
+      "passed": true,
+      "observed": "Le gardien est bien déplacé, mais sur une case ordinaire ; cette commande reste vide.",
+      "commands": "CCRRRULLLLLLLLLLDDDDDRRRRRRCCU",
+      "scope": "Contre-branche locale réparable."
+    },
+    {
+      "level": 6,
+      "name": "Retrait du miroir devenu obstacle",
+      "passed": true,
+      "observed": "Sans déplacer le miroir après le départ est, le reflet final est refusé globalement et le miroir concerné est identifié.",
+      "commands": "XRRRCRLCCRDDCCUUCCRCCLDDRRRCDLLULLUURUUUUUXCCLLLUULLLX",
+      "blockedMirrorIndices": [
+        0
+      ]
+    },
+    {
+      "level": 7,
+      "name": "Fenêtre de relève initialement fermée",
+      "passed": true,
+      "observed": "La visée ne peut pas prendre directement la caisse terminale avant le dépôt dans l’alcôve précédente."
+    },
+    {
+      "level": 8,
+      "name": "Budget géométrique des ressources",
+      "passed": true,
+      "observed": "Avec un seul appui neuf, l’entrée doit emprunter la porte accord. Un passage qui évite cette porte exige au moins deux cases d’eau comblées. Le témoin conserve deux poids secs et un seul appui immergé.",
+      "minimumNewWaterCellsWithAccordClosed": 2,
+      "minimumNewWaterCellsWithAccordOpen": 1,
+      "scope": "Borne géométrique des chemins à pied. Les pouvoirs peuvent changer la répartition des héros ; aucune impossibilité globale de solution alternative n’est déduite."
+    },
+    {
+      "level": 8,
+      "name": "Marchand dans la première cible",
+      "passed": true,
+      "observed": "Le Magicien échange avec le Marchand resté devant le miroir ; la réserve demeure dans l’alcôve.",
+      "commands": "DCR"
+    },
+    {
+      "level": 8,
+      "name": "Retour avant dégagement du rayon",
+      "passed": true,
+      "observed": "Le retour immédiat du Magicien replace la caisse dans son alcôve.",
+      "commands": "DRCRD"
+    },
+    {
+      "level": 8,
+      "name": "Commande hydraulique retirée trop tôt",
+      "passed": true,
+      "observed": "La tentative de retour par le sud est refusée après fermeture du passage et disparition de la plateforme.",
+      "commands": "DRCRCCUULLLUUULDLCD"
+    },
+    {
+      "level": 8,
+      "name": "Séparation locale du chant",
+      "passed": true,
+      "observed": "Le départ nord du Barde est fermé ; partir vers l’est retire le poids. L’échange du témoin laisse sa commande occupée.",
+      "scope": "Constat local ; une autre réorganisation plus longue reste permise."
+    },
+    {
+      "level": 8,
+      "name": "Virage prématuré dans la cour",
+      "passed": true,
+      "observed": "Monter dès la première case intérieure déplace l’appui vers le nord et refuse le passage suivant du Marchand.",
+      "commands": "DRCRCDDDDDDDLLCCDDDDLDDDDDDRRLDRUUUUUUUCCUULLLUUULDDRDDDDDDDDDDDDLLLLLLDLUUULLUUUUULLCCDDDDDLLLLLLLLLLLLLUUUUUURDURUURRRUCDRRRRR"
+    }
+  ],
+  "acceptedAlternatives": [
+    {
+      "level": 7,
+      "commands": "LDDRRCCRLDDRCLLDDRCUUURRCCLUURRCCLDDDDDDLLL",
+      "metrics": {
+        "actions": 43,
+        "selections": 8,
+        "merchantPushes": 1,
+        "songs": 13,
+        "groupSongs": 4,
+        "songHeroMoves": 0,
+        "songStoneMoves": 7,
+        "songMonsterMoves": 0,
+        "supportMoves": 10,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "result": "WIN",
+      "observed": "Échanger la caisse terminale après le dépôt de la réserve évite la troisième traversée et l’immersion terminale. Les deux premières traversées, le poids persistant et dix déplacements d’appui restent exercés.",
+      "decision": "Alternative conservée ; ne pas présenter les étapes évitées comme nécessaires dans toutes les solutions."
+    }
+  ],
+  "variety": {
+    "comparedEpisodes": [
+      14,
+      15,
+      16,
+      17
+    ],
+    "comparedMaps": 32,
+    "exactTerrainDuplicates": 0,
+    "observations": [
+      "N5 est une arène : deux dangers sont rapprochés tandis que deux autres deviennent des contrepoids. Les sorties sont réparties autour de la salle.",
+      "N6 fait voyager le même miroir entre deux postes, puis le retire de l’axe optique. Le rythme est celui d’un équipement réaffecté, sans caisse de pont.",
+      "N7 adopte un peigne d’alcôves et un chenal parallèle, avec des postes de stationnement hors du chant. La première destination accessible sert de parking utile.",
+      "N8 vise une cour centrale entourée d’eau ; la préparation se déroule dans une galerie périphérique et trois ressources changent de rôle.",
+      "L’absence de doublon exact de terrain complète la lecture des problèmes ; elle ne constitue pas, à elle seule, une mesure de variété ou de difficulté."
+    ]
+  },
+  "remainingCorrections": [],
+  "scope": "Lecture indépendante des cartes, rejeux complets, petits graphes de marche initiale, contre-branches locales, variante constructive N7 et borne géométrique N8. Aucune recherche exhaustive à trois héros, unicité, nécessité universelle des pouvoirs ou optimalité des parcours n’est revendiquée. Les maps et builders N5–8 restent en lecture seule."
+}

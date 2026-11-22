@@ -1,0 +1,18 @@
+{
+  "game": "SS18",
+  "nativeBrowserReviewed": false,
+  "nativeDispatcherReviewed": false,
+  "sitePublishedForSS18": false,
+  "htmlInteractionReview": {
+    "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+    "success": true,
+    "campaignLevels": 8,
+    "publicPixelsAndTiming": true,
+    "htmlSha256": "bad6cb6b6ae58b4aebaca1bb5205f9e229b3b6817fb5665e5f2eb10d79522f33"
+  },
+  "rasterReview": {
+    "scope": "Exact initial and completed 64×64 engine boards for all eight rooms",
+    "reviewed": true
+  },
+  "remaining": "Review desktop/mobile CSS, native dispatcher, direct link and deployed Site in an authorized browser during native integration. No native browser or autonomous SRA success is claimed."
+}

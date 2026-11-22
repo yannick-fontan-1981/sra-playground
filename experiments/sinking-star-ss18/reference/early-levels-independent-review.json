@@ -1,0 +1,275 @@
+{
+  "success": true,
+  "review": "Independent early-level review",
+  "levels": [
+    {
+      "level": 2,
+      "title": "Le carrefour à contretemps",
+      "reference": {
+        "entries": 87,
+        "moves": 82,
+        "selections": 5,
+        "result": "WIN",
+        "blocked": 0,
+        "deaths": 0
+      },
+      "initialUnassistedWalking": [
+        {
+          "role": "merchant",
+          "positions": 1,
+          "transitions": 4,
+          "reachableGoals": []
+        },
+        {
+          "role": "wizard",
+          "positions": 139,
+          "transitions": 556,
+          "reachableGoals": []
+        },
+        {
+          "role": "bard",
+          "positions": 1,
+          "transitions": 4,
+          "reachableGoals": []
+        }
+      ],
+      "layout": {
+        "goals": [
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 18,
+            "y": 7
+          },
+          {
+            "x": 11,
+            "y": 17
+          }
+        ],
+        "pressesAreSeparateFromButtons": true,
+        "exactTerrainDuplicatesAfterRotationOrReflection": []
+      },
+      "observations": [
+        {
+          "name": "Sas de polarités opposées",
+          "result": "confirmed",
+          "entry": 68,
+          "directions": [
+            "E",
+            "E"
+          ],
+          "polarities": [
+            "released",
+            "pressed"
+          ],
+          "description": "Le changement de phase transporte réellement le Magicien de la première presse vers la case libérée par la seconde."
+        },
+        {
+          "name": "Rythme et géométrie",
+          "result": "qualitative-review",
+          "description": "La cour autour du bassin sert à recaler une commande distante puis à choisir la phase de trois branches séparées. Le cœur du niveau est la bascule et le transfert du sas, pas la fabrication répétée de ponts ou le rangement de lests finaux."
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "Les trois pièces du chœur",
+      "reference": {
+        "entries": 66,
+        "moves": 56,
+        "selections": 10,
+        "result": "WIN",
+        "blocked": 0,
+        "deaths": 0
+      },
+      "initialUnassistedWalking": [
+        {
+          "role": "merchant",
+          "positions": 11,
+          "transitions": 44,
+          "reachableGoals": []
+        },
+        {
+          "role": "wizard",
+          "positions": 9,
+          "transitions": 36,
+          "reachableGoals": []
+        },
+        {
+          "role": "bard",
+          "positions": 1,
+          "transitions": 4,
+          "reachableGoals": []
+        }
+      ],
+      "layout": {
+        "goals": [
+          {
+            "x": 6,
+            "y": 2
+          },
+          {
+            "x": 17,
+            "y": 10
+          },
+          {
+            "x": 6,
+            "y": 17
+          }
+        ],
+        "pressesAreSeparateFromButtons": true,
+        "exactTerrainDuplicatesAfterRotationOrReflection": []
+      },
+      "observations": [
+        {
+          "name": "Tri matériel et départ sans chant",
+          "result": "confirmed",
+          "entry": 29,
+          "description": "Le départ volontaire est permis mais rebouche les deux accès verticaux. La poussée du Marchand conserve exactement la disposition des caisses. Aucune commande cachée ni porte de sortie ne fabrique cette contrainte."
+        },
+        {
+          "name": "Rythme et géométrie",
+          "result": "qualitative-review",
+          "description": "Un petit espace de tri à butées dessert trois longues alcôves. L’absence complète d’eau, de boutons, de portes et de miroirs distingue nettement ce niveau des ateliers et chantiers à circuits des épisodes précédents."
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Personne ne part le premier",
+      "reference": {
+        "entries": 86,
+        "moves": 78,
+        "selections": 8,
+        "result": "WIN",
+        "blocked": 0,
+        "deaths": 0
+      },
+      "initialUnassistedWalking": [
+        {
+          "role": "merchant",
+          "positions": 1,
+          "transitions": 4,
+          "reachableGoals": []
+        },
+        {
+          "role": "wizard",
+          "positions": 82,
+          "transitions": 328,
+          "reachableGoals": []
+        },
+        {
+          "role": "bard",
+          "positions": 74,
+          "transitions": 296,
+          "reachableGoals": []
+        }
+      ],
+      "layout": {
+        "goals": [
+          {
+            "x": 9,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 10
+          },
+          {
+            "x": 17,
+            "y": 11
+          }
+        ],
+        "pressesAreSeparateFromButtons": true,
+        "exactTerrainDuplicatesAfterRotationOrReflection": []
+      },
+      "observations": [
+        {
+          "name": "Alternative initiale conservée",
+          "result": "accepted-alternative",
+          "description": "X dès le départ transporte le Marchand hors de l’îlot. L’échange initial du Magicien appartient au témoin pédagogique et ne constitue pas une nécessité globale."
+        },
+        {
+          "name": "Trois départs croisés",
+          "result": "confirmed",
+          "description": "Avant le dernier reflet les trois commandes sont occupées ; après le transport simultané les trois héros sont sur leurs destinations et les commandes sont relâchées."
+        },
+        {
+          "name": "Rythme et géométrie",
+          "result": "qualitative-review",
+          "description": "La cour annulaire, les trois commandes croisées et les sorties dans trois secteurs organisent un départ collectif. Le thème du départ par reflet existait déjà dans SS14, mais ici aucun stock de caisses, aucune immersion et aucun miroir transformé en lest final ne prolongent le dispositif."
+        }
+      ]
+    }
+  ],
+  "alternative": {
+    "level": 4,
+    "commands": "XUUUUUUULLLRDDLLLLDDDDDLLUDRRDRRRRRRRUCLDLLLLCCLUUUUUUULCCRRRRRURUUUURRX",
+    "entries": 72,
+    "moves": 67,
+    "selections": 5,
+    "metrics": {
+      "actions": 72,
+      "selections": 5,
+      "merchantPushes": 3,
+      "songs": 0,
+      "groupSongs": 0,
+      "songHeroMoves": 0,
+      "songStoneMoves": 0,
+      "songMonsterMoves": 0,
+      "supportMoves": 0,
+      "swaps": 0,
+      "partnerSwaps": 0,
+      "stoneSwaps": 0,
+      "monsterSwaps": 0,
+      "bentSwaps": 0,
+      "multiMirrorSwaps": 0,
+      "swapReflections": 0,
+      "swapLoops": 0,
+      "partnerMoves": 0,
+      "stoneMoves": 0,
+      "mirrorMoves": 3,
+      "reflections": 2,
+      "heroReflections": 4,
+      "pistonPushes": 0,
+      "platformsCreated": 0,
+      "monstersRemoved": 0,
+      "blocked": 0,
+      "deaths": 0
+    },
+    "result": "WIN",
+    "scope": "Alternative constructive, sans recherche de minimum. Le reflet initial libère le Marchand directement ; les trois réglages de miroir et le départ collectif restent présents."
+  },
+  "descriptionCorrections": [
+    {
+      "level": 2,
+      "status": "applied",
+      "correction": "Dire presses de polarités opposées : les deux directions sont E."
+    },
+    {
+      "level": 4,
+      "status": "applied",
+      "correction": "L’objectif général parle de l’occupant de l’îlot ; le Magicien reste le rôle utilisé par le témoin."
+    }
+  ],
+  "variety": {
+    "comparedEpisodes": [
+      14,
+      15,
+      16,
+      17
+    ],
+    "comparedMaps": 32,
+    "method": "Comparaison exacte du terrain recadré, y compris eau, sous les huit rotations/réflexions, complétée par une lecture des objectifs et des ressources.",
+    "findings": [
+      "Aucune des trois cartes n’est un doublon géométrique des 32 cartes comparées, même après rotation ou réflexion.",
+      "N2 et N4 partagent un plan général de cour avec trois branches : ce point commun est assumé, leurs interactions et leur rythme diffèrent.",
+      "N3 offre la rupture la plus nette : tri de cargaisons sur sol sec, sans aucun dispositif de circuit ou miroir.",
+      "SS14 utilisait déjà des destinations séparées et des départs par reflet ; la revue ne prétend pas que chacun de ces ingrédients apparaît pour la première fois.",
+      "Les contrôles n’ont trouvé aucune sortie accessible par la seule marche initiale d’un héros pendant que ses partenaires et les ressources restent fixes."
+    ]
+  },
+  "scope": "Rejeux complets, petits graphes de marche initiale à un seul héros, contre-branche locale et alternative construite. Aucune recherche exhaustive des états à trois héros, aucune preuve de nécessité globale de chaque mécanique, aucun minimum de coups ni résultat autonome SRA ne sont revendiqués. Les builders des niveaux 2–4 restent en lecture seule."
+}

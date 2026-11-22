@@ -1,0 +1,707 @@
+{
+  "spec": {
+    "id": "ss18-06",
+    "title": "Le miroir en tournée",
+    "rows": [
+      "####################",
+      "#~~~~~~~g~~~~~~~~~~#",
+      "#~~~~~~~.~~~~~~~~~~#",
+      "#~~~~~~~.~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~..........~~~~#",
+      "#~~~~..........~~~~#",
+      "#~~~~..........~~~~#",
+      "#~~~~..M.....B.~~~~#",
+      "#~~~~######.###~~~~#",
+      "#~~~~..........~~~~#",
+      "#~~~~.......~~~~~g~#",
+      "#~~~~........Z.~~~~#",
+      "#~~~~..........~~~~#",
+      "#~~~~..........~~~~#",
+      "#~g~~~~.~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "####################"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 8
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 15
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "presse",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 12
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "station",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 11
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "departs",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 1
+          },
+          {
+            "x": 17,
+            "y": 11
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 8
+        },
+        "circuit": "presse",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 7
+        },
+        "circuit": "station",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 2
+        },
+        "circuit": "station",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 14
+        },
+        "circuit": "departs",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "XRRRCRLCCRDDCCUUCCRCCLDDRRRCDLLULLUURUUUUUXCCLLLUURDULLLLX",
+  "actions": [
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 6
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 6
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 18,
+    "label": "Adaptation de Heroes and Mirrors · énigme 18 · préparer un retour puis dégager le miroir devenu obstacle",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+    "objective": "Faire voyager un miroir entre deux postes, utiliser la presse pour franchir la butée, puis retirer ce miroir du circuit avant le dernier départ.",
+    "secondary": {
+      "label": "Heroes and Light · énigme 1 · transporter une pièce par une presse latérale",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 58,
+    "selections": 12,
+    "merchantPushes": 6,
+    "songs": 0,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 0,
+    "partnerSwaps": 0,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 7,
+    "reflections": 3,
+    "heroReflections": 3,
+    "pistonPushes": 1,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le premier poste envoie le Barde dans la branche nord ; sa destination reste fermée tant que le miroir n’atteint pas son second poste.",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": true,
+        "station": false,
+        "departs": false
+      }
+    },
+    {
+      "label": "Le Marchand charge la presse. Le Magicien relâche puis reprend sa commande, déposant le miroir dans la seule descente praticable.",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 9
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": true,
+        "station": false,
+        "departs": false
+      }
+    },
+    {
+      "label": "Le miroir atteint la station basse : il ouvre la sortie nord et la fenêtre de visée qui le dessert.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": true,
+        "station": true,
+        "departs": false
+      }
+    },
+    {
+      "label": "Le Marchand maintient la fenêtre de presse ouverte pendant que le second poste envoie le Magicien sur la branche est.",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": true,
+        "station": true,
+        "departs": true
+      }
+    },
+    {
+      "label": "Le miroir utilisé doit quitter son axe : laissé en place, il rappellerait le Magicien ou bloquerait le prochain reflet.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": false,
+        "station": true,
+        "departs": true
+      }
+    },
+    {
+      "label": "Les deux destinations déjà occupées libèrent le dernier miroir ; le Marchand rejoint seul la branche ouest.",
+      "turn": 58,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "presse": false,
+        "station": false,
+        "departs": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Mirrors 18 : préparer les déplacements futurs d’un miroir avant de quitter une région, puis dégager celui qui gêne le reflet final.",
+      "Light 1 : une presse peut déplacer une pièce dans une direction inaccessible à une poussée ordinaire."
+    ],
+    "changed": [
+      "Le miroir voyage dans un atelier à trois branches, et sa présence sur une commande ouvre sa fenêtre optique et une destination.",
+      "La presse dépose le miroir sans le détruire ; le Marchand le pousse ensuite hors de l’axe devenu dangereux.",
+      "Les trois destinations sont séparées au nord, à l’est et à l’ouest ; deux arrivées ouvrent le dernier rayon."
+    ],
+    "sourceReading": "Les deux contraintes sont adaptées sans duplication de héros ni destruction obligatoire du miroir. Les deux postes, la presse de transfert et les trois branches forment une carte originale.",
+    "proofScope": "Parcours légal et dépendances du plan auteur ; aucune unicité ni optimalité revendiquée."
+  }
+}

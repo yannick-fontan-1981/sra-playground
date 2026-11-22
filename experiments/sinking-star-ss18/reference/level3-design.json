@@ -1,0 +1,645 @@
+{
+  "spec": {
+    "id": "ss18-03",
+    "title": "Les trois pièces du chœur",
+    "rows": [
+      "####################",
+      "####################",
+      "#####.g.############",
+      "#####...############",
+      "#####...############",
+      "#####...############",
+      "######.#############",
+      "######.#############",
+      "#####.o#############",
+      "#####M..######....##",
+      "###...B.o........g##",
+      "####.Z..######....##",
+      "#####.o#############",
+      "######.#############",
+      "######.#############",
+      "#####....###########",
+      "#####....###########",
+      "#####.g..###########",
+      "####################",
+      "####################"
+    ]
+  },
+  "commands": "CCLLLCCRRULLCCRRDDLURULDDLLURDRRUULUUUUUUUCCDDDDDDDCCRRRRRRRRRRRRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation · Heroes 3: Bard, Druid · énigme 12",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-12",
+    "puzzle": 12,
+    "objective": "Trier trois pièces qui répondent au même chant, utiliser les butées pour les séparer, puis libérer le Barde et le Magicien sans reboucher les trois accès."
+  },
+  "metrics": {
+    "actions": 66,
+    "selections": 10,
+    "merchantPushes": 3,
+    "songs": 5,
+    "groupSongs": 3,
+    "songHeroMoves": 1,
+    "songStoneMoves": 9,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 3,
+    "partnerSwaps": 1,
+    "stoneSwaps": 2,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 2,
+    "stoneMoves": 13,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Les trois cargaisons quittent ensemble leurs accès ; les butées retiennent les pièces du haut et du bas.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien reprend la pièce centrale puis échange avec le Barde : il accepte de rester dans le renfoncement.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Deux poussées isolées rangent la pièce centrale sous celle du haut, sans remuer les autres.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand pousse le Barde hors du renfoncement ; un pas volontaire aurait replacé deux caisses dans les accès.",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand se gare au nord avant le dernier réarrangement collectif.",
+      "turn": 42,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Deux pas de chant rangent les trois caisses dans la colonne latérale ; sa butée laisse le Barde descendre seul vers le sud.",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 10
+        },
+        {
+          "x": 5,
+          "y": 11
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La caisse qui ferme encore le renfoncement devient la cible de sortie du Magicien ; il rejoint l’alcôve est.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 5,
+          "y": 11
+        },
+        {
+          "x": 5,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Le chant déplace plusieurs caisses qu’il faut réorganiser pour dégager le chemin."
+    ],
+    "changed": [
+      "Une chambre de tri compacte dessert trois alcôves orientées nord, est et sud.",
+      "Aucun bouton, aucune porte, aucun miroir et aucun pont : les caisses elles-mêmes ferment les passages.",
+      "Les butées filtrent le groupe ; le Marchand corrige une seule pièce, puis transporte le Barde sans chant.",
+      "Le Magicien prend temporairement la place du Barde dans un renfoncement et s’en libère par un dernier échange.",
+      "Le chant couvre un carré 5×5 et peut déplacer les partenaires, conformément au contrat de la série SS."
+    ],
+    "sourceReading": "Bard12 fournit le réarrangement collectif de trois cristaux. Les alcôves, les butées, les échanges et les trois destinations sont originaux ; cette adaptation ne reprend pas la transformation du Druide ni une carte commerciale.",
+    "localChecks": [
+      {
+        "name": "Sortie volontaire du Barde avant son extraction",
+        "commands": "CCLLLCCRRULLCCRRDDLURULDDLLUCCR",
+        "observed": "Le pas vers l’est est légal, mais le chant ramène une caisse dans chaque accès vertical. La poussée du Marchand conserve au contraire leur dégagement.",
+        "scope": "Contre-branche locale rejouée ; elle n’interdit pas de réorganiser ensuite autrement."
+      }
+    ]
+  }
+}

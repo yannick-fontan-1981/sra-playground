@@ -1,0 +1,40 @@
+{
+  "game": "SS18",
+  "title": "La Galerie Résonante",
+  "version": "0.1.0",
+  "qualificationDate": "2026-11-22",
+  "artifact": "SS18-demo.html",
+  "bytes": 141684,
+  "sha256": "bad6cb6b6ae58b4aebaca1bb5205f9e229b3b6817fb5665e5f2eb10d79522f33",
+  "sourceBranch": "feat/sinking-star-ss18-20261122",
+  "sourceRepository": "yannick-fontan-1981/sra-playground",
+  "laboratory": "experiments/sinking-star-ss18",
+  "heroes": [
+    "merchant",
+    "wizard",
+    "bard"
+  ],
+  "initialHero": "merchant",
+  "levels": 8,
+  "tutorialDiscoveries": 27,
+  "unitTests": 56,
+  "witnessInputs": 700,
+  "selectionInputs": 83,
+  "movesWithoutSelection": 617,
+  "publicFrames": 1988,
+  "designReviewScripts": 5,
+  "nativeIntegration": "pending",
+  "sitePublication": "pending",
+  "qualificationReports": [
+    "levels-report.json",
+    "ui-dom-report.json",
+    "design-report.json",
+    "unit-report.json",
+    "browser-review-status.json"
+  ],
+  "limits": [
+    "Witnesses prove solvability, not optimality or uniqueness.",
+    "Interface review uses Happy DOM and exact raster pixels; native browser review remains separate.",
+    "No autonomous SRA success is claimed."
+  ]
+}

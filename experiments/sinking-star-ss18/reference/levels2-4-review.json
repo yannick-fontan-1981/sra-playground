@@ -1,0 +1,203 @@
+{
+  "success": true,
+  "scope": "Rejeux et contre-branches locales des niveaux 2 à 4 ; aucune optimalité ou unicité revendiquée.",
+  "levels": [
+    {
+      "level": 2,
+      "title": "Le carrefour à contretemps",
+      "actions": 87,
+      "moves": 82,
+      "metrics": {
+        "actions": 87,
+        "selections": 5,
+        "merchantPushes": 2,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 0,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 7,
+        "mirrorMoves": 1,
+        "reflections": 5,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "goals": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 18,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 17
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "Les trois pièces du chœur",
+      "actions": 66,
+      "moves": 56,
+      "metrics": {
+        "actions": 66,
+        "selections": 10,
+        "merchantPushes": 3,
+        "songs": 5,
+        "groupSongs": 3,
+        "songHeroMoves": 1,
+        "songStoneMoves": 9,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 3,
+        "partnerSwaps": 1,
+        "stoneSwaps": 2,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 13,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "goals": [
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 17
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Personne ne part le premier",
+      "actions": 86,
+      "moves": 78,
+      "metrics": {
+        "actions": 86,
+        "selections": 8,
+        "merchantPushes": 3,
+        "songs": 0,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 1,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 0,
+        "mirrorMoves": 3,
+        "reflections": 2,
+        "heroReflections": 4,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "goals": [
+        {
+          "x": 9,
+          "y": 2
+        },
+        {
+          "x": 2,
+          "y": 10
+        },
+        {
+          "x": 17,
+          "y": 11
+        }
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "level": 2,
+      "name": "Cellule initiale du Marchand",
+      "passed": true,
+      "observed": "Les quatre déplacements sont refusés avant le premier chargement distant."
+    },
+    {
+      "level": 2,
+      "name": "Basculer avant d’entrer dans le sas est",
+      "passed": true,
+      "commands": "CCDXUURRCLUULXUUULLDLLURRRRDLDDRXUUUUULLLLLLLLUUCRURRRRRRUUUUURRRRXR",
+      "observed": "La première presse se ferme avant le passage ; le pas vers l’est est refusé."
+    },
+    {
+      "level": 2,
+      "name": "Bascule avec le Magicien dans le sas",
+      "passed": true,
+      "turn": 68,
+      "observed": "Une presse se ferme et transporte le Magicien dans la case libérée par l’autre."
+    },
+    {
+      "level": 3,
+      "name": "Départ volontaire du Barde",
+      "passed": true,
+      "commands": "CCLLLCCRRULLCCRRDDLURULDDLLUCCR",
+      "observed": "Les deux accès verticaux se remplissent de caisses ; aucun verrou ajouté ne produit cette contrainte."
+    },
+    {
+      "level": 3,
+      "name": "Extraction par poussée du Marchand",
+      "passed": true,
+      "turn": 29,
+      "observed": "Le Barde se déplace sans chant et les deux accès restent dégagés."
+    },
+    {
+      "level": 4,
+      "name": "Troisième commande libre",
+      "passed": true,
+      "commands": "CDCCRULDDLLLDDDDDLLUDRRDRRRRRRRUDLLLLLLLXCUUUUULLLLLLLLCCUUUUUUURRRURRCCRRRRRURUUURRX",
+      "observed": "Le reflet prématuré est refusé sans déplacer aucun héros."
+    },
+    {
+      "level": 4,
+      "name": "Départ collectif vers trois secteurs",
+      "passed": true,
+      "turn": 86,
+      "observed": "Les trois héros gagnent simultanément trois destinations de lignes et colonnes différentes."
+    }
+  ]
+}
