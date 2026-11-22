@@ -9,7 +9,7 @@ export type MarkedMotionTrial = {
 };
 export type MarkedMotionMemory = { edit: number; results: { trial: MarkedMotionTrial; result: string; ref: number }[] };
 
-function mask(edit: Edit) {
+export function uniformMark(edit: Edit) {
   if (!edit.count) return null;
   const [, , old, ink] = edit.runs[0]!;
   const sites: number[] = [];
@@ -21,7 +21,7 @@ function mask(edit: Edit) {
 }
 
 function discriminators(edit: Edit, marked: NativeRows, control: NativeRows, dx: number, dy: number) {
-  const pattern=mask(edit);
+  const pattern=uniformMark(edit);
   if (!pattern) return null;
   const {sites,ink,old}=pattern, {width,height}=edit;
   const read=(rows:NativeRows,i:number)=>rows[Math.floor(i/width)]![i%width];
@@ -43,7 +43,7 @@ export function proposeMarkedMotion(m:Memory, site:number, o:NativeObservation, 
   if (!inquiry || m.pending || m.pendingSilentInput || m.cursorSelection?.pending ||
       (m.pairInquiry?.learning.planSolves && m.pairInquiry.learning.plan?.length)) return null;
   const activated=m.edges[inquiry.edit], edit=activated?.manipulation?.edit;
-  if (!activated?.stable || !edit || activated.t!==site || !mask(edit)) return null;
+  if (!activated?.stable || !edit || activated.t!==site || !uniformMark(edit)) return null;
   const bare=projectEdit(rows,edit,{reverse:true,strict:true})?.board;
   if (!bare) return null;
   let best:MarkedMotionTrial|undefined;

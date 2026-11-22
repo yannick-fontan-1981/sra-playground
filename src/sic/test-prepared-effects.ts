@@ -1,4 +1,5 @@
 import {finishSilentTest, proposeSilentInput, silentInputStrategy, startSilentTest} from './silent-input-experiment.ts';
+import { proposeTransportControl, transportControlOutcomes, transportControlStrategy } from './retest-transported-mark.ts';
 import {markedMotionStrategy, proposeMarkedMotion} from './marked-motion-experiment.ts';
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
 import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
@@ -52,6 +53,8 @@ const labels: Record<Experiment['phase'], string> = {
   advanceSelectedCursor:'Use the verified control to advance the selected subject while preserving the other placement',
   repairSelectedCursor:'Try another movement while the previously placed subject remains fixed',
   testConfiguration:'Combine two or more observed controls to test a configuration still unexplored',
+  testTransportControl:'Retest the changing control at the measured landing of the marked part',
+  testReleasedMotion:'Move the carrier to check whether the restored part stays at the release site',
   testMarkedMotion:'Test whether the newly marked part stays in place or follows the moving subject',
   localCapacity:'Test a local change that should enable a new response at another site',
   seekTerminalContact:'Reach a visible contact observed immediately before an official completion',
@@ -111,7 +114,8 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const traceMark=informationPreference?.strategy===markedMotionStrategy;
+  const testTransport=informationPreference?.strategy===transportControlStrategy;
+  const traceMark=testTransport || informationPreference?.strategy===markedMotionStrategy;
   const testSilent=traceMark || informationPreference?.strategy===silentInputStrategy;
   const retainScope=testSilent || informationPreference?.strategy==='learn_the_scope_of_a_control';
   const learnScope=comparePreparations && (retainScope || informationPreference?.strategy==='learn_control_within_one_room');
@@ -253,7 +257,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ? proposeSilentInput(m,m.scenes.indexOf(sceneKey(o)),o.available_action_refs,remaining,informationPreference.minimumOutcomes,group===finishSilentTest,rows) : null;
       const mark=traceMark && comparePreparations && !silent && group===finishSilentTest && informationPreference.minimumOutcomes<=2
         ? proposeMarkedMotion(m,m.scenes.indexOf(sceneKey(o)),o,rows) : null;
-      if(silentGroup && !silent && !mark)return null;
+      const transport = testTransport && comparePreparations && group===finishSilentTest && !silent && !mark &&
+        informationPreference.minimumOutcomes<=2 ? proposeTransportControl(m,m.scenes.indexOf(sceneKey(o)),o,rows) : null;
+      if(silentGroup && !silent && !mark && !transport)return null;
       const focused=group===coveragePlanGroup;
       const lessonTest=learnScope && m.pairInquiry?.lesson && !m.coverage && o.available_action_refs.includes('ACTION6') && (focused||group===evidencedPlanGroup)
         ?proposeLessonTest(m.pairInquiry,visualLayout(o,rows),rows,o.observation_ref):undefined;
@@ -311,7 +317,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment:Experiment|null = silent ?? mark ?? (cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
+      const experiment:Experiment|null = silent ?? mark ?? transport ?? (cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
         refs:[],rule:cooperative.purpose,cooperative} : landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
         rule:landmark.joint?'prepare_every_indicated_arrival_before_the_common_operation':landmark.partnerTest?'retry_a_blocked_movement_after_changing_the_partner_placement':'compare_two_arrivals_with_a_preserved_first_contact',landmark,...(cursor?{cursorTrial:cursor}:{})} : cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':cursor.stage==='advance'?'advanceSelectedCursor':cursor.stage==='reroute'?'repairSelectedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
@@ -324,7 +330,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if (!experiment || (!cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.silentInput||experiment.markedMotion||cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.silentInput||experiment.markedMotion||experiment.transportControl||cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
         label = silent ? (phase==='prepare' ? 'Reproduce an arrangement to test an input that previously had no effect' : 'Measure whether the same input now changes the arrangement') : cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
@@ -367,6 +373,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(experiment.silentInput){
         question.subjects=[a,b];
         question.satisfactionContract='check_if_the_same_input_stays_silent_or_changes_the_public_arrangement_after_preparation';
+      }
+      if (experiment.transportControl) {
+        question.subjects=[experiment.transportControl.motion.actor,a,b];
+        question.satisfactionContract=experiment.transportControl.stage==='control'
+          ? 'check_if_the_mark_is_restored_at_the_translated_position'
+          : 'compare_the_part_at_its_resting_and_translated_positions_after_the_carrier_moves';
       }
       if(experiment.markedMotion){
         question.subjects=[experiment.markedMotion.actor,a,b];
@@ -442,6 +454,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         kind: preparedEffectsId,
         actions: [command],
         experiment,
+        ...(experiment.transportControl ? {transportControlForecast: {...experiment.transportControl,
+          outcomes: transportControlOutcomes[experiment.transportControl.stage], evidence: experiment.refs}} : {}),
         ...(experiment.markedMotion ? {markedMotionForecast:{...experiment.markedMotion,
           outcomes:['mark_stays_fixed','mark_follows_measured_subject']}} : {}),
         ...(cooperative?{cooperativeTransportForecast:cooperative}:{}),

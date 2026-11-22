@@ -27,6 +27,6 @@ export interface InformationOfferSummary {
 export function informationPriority(offer: InformationOfferSummary, preference: InformationPreference) {
   const prepared=['paired_arrival','indicated_access','plan_after_selection','test_partner_preparation','reclassify_displaced_goal','prepare_joint_arrivals','transfer_registered_footing','compose_observed_transports','compose_transport_by_region','challenge_recurrent_placements','verify_control_across_pose_changes','follow_a_marked_displacement','maintain_access_by_composing_piece_effects','test_contact_on_another_subject','prepare_a_contact_stance','prefer_a_verified_coverage_experiment','compose_a_sustained_crossing','bind_earlier_motions_to_registered_subjects','learn_the_scope_of_a_control','test_an_unresponsive_input_after_preparation','learn_control_within_one_room'].includes(preference.strategy);
   const matches=offer.strategy===preference.strategy ||
-    ((prepared || preference.strategy==='test_what_moves_after_a_conditional_change') && offer.strategy==='motion_contrast');
+    ((prepared || preference.strategy==='test_what_moves_after_a_conditional_change' || preference.strategy==='retest_a_conditional_control_after_transport') && offer.strategy==='motion_contrast');
   return matches && offer.distinctOutcomes >= preference.minimumOutcomes ? 1 : 0;
 }
