@@ -1,5 +1,6 @@
 import { assessLocal, canCompareAnotherPreparation, continuationAt, demonstratedLimit, hasLocalContrast, localCommand, newLocalMemory, observeLocal, proposeLocal, revisitedChoice, stalledLocal, type LocalForecast, type LocalMemory } from './prospective-local-use.ts';
 import { hasExperimentOpportunity, recordReturn, type ReturnHistory } from './experiment-arbitration.ts';
+import type {MotorStudy, MotorTest} from './positional-motor-test.ts';
 import {newCursorMemory,recordCursorTrial,type CursorMemory,type CursorTrial} from './marked-cursor-selection.ts';
 
 import { nextConfiguration, newConfigurationMemory, observeConfiguration, type ConfigurationMemory, type ConfigurationTrial } from './configuration-trials.ts';
@@ -121,6 +122,7 @@ export type Experiment = {
     | 'advanceSelectedCursor'
     | 'repairSelectedCursor'
     | 'testConfiguration'
+    | 'measureMotorBaseline'
     | 'localCapacity'
     | 'seekTerminalContact'
     | 'useRelativePlacement'
@@ -182,6 +184,7 @@ export type Experiment = {
   silentInput?: SilentInputQuestion;
   transportControl?: TransportControlTrial;
   markedMotion?: MarkedMotionTrial;
+  motorTest?: MotorTest;
   cursorTrial?: CursorTrial;
   landmark?: import('./paired-landmark-placement.ts').LandmarkTrial;
   cue?: CueTest;
@@ -257,6 +260,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  motorStudy?: MotorStudy;
   transportControls?: TransportControlResult[];
   markedMotion?: MarkedMotionMemory;
   pendingSilentInput?: SilentInputQuestion;
@@ -1100,7 +1104,7 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
-  if(x.cooperative)return out;
+  if(x.cooperative || x.motorTest)return out;
   if (x.transportControl) {
     const result = assessTransportControl(m, x.transportControl, rows, next, effect);
     (m.transportControls ??= []).push({trial: x.transportControl, result, site: t, ref: a.revision});

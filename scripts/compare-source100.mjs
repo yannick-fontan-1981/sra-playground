@@ -155,6 +155,7 @@ async function run(code, games) {
     seen = new Set([initial]);
   let levelCoverage;
   const replayCommands = process.env.SIC_STUDY_RECORD_COMMANDS === '1' ? [] : null;
+  const recordedFieldRegistrations = new Set();
   const preparation = new Map();
   let withdrawal;
   const collectPreparation = (snapshot) => {
@@ -283,7 +284,15 @@ async function run(code, games) {
         Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
       if(plan?.cooperativeTransportForecast && replayCommands)Object.assign(replayCommands.at(-1),{cooperative:plan.cooperativeTransportForecast});
       if(plan?.silentInputForecast && replayCommands)Object.assign(replayCommands.at(-1),{silentInput:plan.silentInputForecast});
-      if(plan?.fieldRegistrationForecast && replayCommands)Object.assign(replayCommands.at(-1),{fieldRegistration:plan.fieldRegistrationForecast});
+      if (plan?.motorBaselineForecast && replayCommands) replayCommands.at(-1).motorBaseline = plan.motorBaselineForecast;
+      const registration = plan?.fieldRegistrationForecast;
+      if (registration && replayCommands && !recordedFieldRegistrations.has(registration.after)) {
+        const command = replayCommands.at(-1);
+        if (!registration.after.endsWith(':frame:' + command.from) || registration.nextAction !== 'ACTION' + action.id)
+          throw Error('Field registration does not describe the first action of this plan');
+        command.fieldRegistration = registration;
+        recordedFieldRegistrations.add(registration.after);
+      }
       if(plan?.deferredMechanismForecast && replayCommands)Object.assign(replayCommands.at(-1),{deferredMechanism:plan.deferredMechanismForecast});
       if(plan?.transportControlForecast && replayCommands)Object.assign(replayCommands.at(-1),{transportControl:plan.transportControlForecast});
       if(plan?.markedMotionForecast && replayCommands)Object.assign(replayCommands.at(-1),{markedMotion:plan.markedMotionForecast});

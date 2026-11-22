@@ -11,7 +11,8 @@ type Mark = {source:Part; target:Part; point:NativePoint; offsets:NativePoint[];
 type ProjectedMove = {command:string; delta:NativePoint; evidence:string};
 type ControlContrast = {
   strategy: 'motion_contrast'; mode: 'exploration'; minimumOutcomes: number;
-  motor: string; baselineDelta: NativePoint; evidence: string; outcomes: readonly ['previous_subject_moves', 'selected_subject_moves'];
+  motor: string; baselineDelta: NativePoint; evidence: string; outcomes: readonly ['previous_subject_moves' | 'both_subjects_stay', 'selected_subject_moves'];
+  measuredWithoutSelection?: {result:'same_subject_repeats_displacement'|'same_subject_stays';observation:string};
 };
 type RepairOption = {command:string; prediction:'new_placement'|'unknown'|'return_or_overlap'; ref?:string};
 export type CursorTrial = Mark & { recurrentPlacement?:{key:string;verifiedReturns:number;alternative:string;returnedFrame:string};stage:'select'|'verify'|'advance'|'reroute'; command:string; evidence:string[]; feedback?:boolean; triedMotors?:string[]; passive?:boolean; projectedMove?:ProjectedMove; contrast?:ControlContrast; binding?:string; priorBox?:NativeBox; repairOptions?:RepairOption[]; beyondReturn?:boolean };
@@ -466,6 +467,10 @@ export function recordCursorTrial(m:CursorMemory,b:NativeObservation,a:NativeObs
       m.pending={...trial,command:alternative,triedMotors,evidence:[...trial.evidence,a.observation_ref]};
       return 'cursor_move_blocked_try_another_direction';
     }
+    if(oldStill && trial.contrast?.measuredWithoutSelection?.result==='same_subject_stays' &&
+      rows.slice(target.box[1],target.box[3]+1).every((row,i)=>
+        row.slice(target.box[0],target.box[2]+1).every((value,j)=>next[target.box[1]+i]?.[target.box[0]+j]===value)))
+      return 'both_subjects_stayed_under_the_matched_motor';
     if(!trial.feedback && moves.length)refute(m,trial);
 
     return 'cursor_control_unconfirmed';
