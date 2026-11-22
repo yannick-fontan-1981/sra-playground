@@ -1,0 +1,760 @@
+{
+  "frozenPolicy": "9a56dbfd8afaf5bee8698e45b1607ef927e6185e",
+  "engine": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "parallelWorkers": 1,
+  "qualification": {
+    "prospectiveSelectionHash": "c91ce58a71cd2ed1546b3713db4600813de49836a19f311deec99e08698f0706",
+    "sourceFirstLevels": 100,
+    "otherGameLevelEpisodes": 129,
+    "otherGames": 109,
+    "offersRequiringAlternation": 1,
+    "offersWithoutRequiringAlternation": 5,
+    "budgetPerComparison": 2,
+    "developmentCase": {
+      "game": "LKEY",
+      "level": 2,
+      "backend": "source",
+      "file": "serial-repeated-contact-v133.jsonl",
+      "slot": 50,
+      "initial": "19282a216c5ee7770e7ace8b9fe85fc4d51b9081de95b904c564654fe95994f4",
+      "question": {
+        "origin": "25c72ab81f3d5cb9",
+        "afterPreparation": "a74f827102c9152c",
+        "prepare": "ACTION1",
+        "probe": "ACTION3",
+        "preparationSeen": [
+          45,
+          47
+        ],
+        "inactiveHere": [
+          49
+        ],
+        "inactiveElsewhere": 3,
+        "knownOneStepReturn": true,
+        "alternating": true,
+        "alternativeQuestions": 1
+      },
+      "laterMatchingProbe": [
+        [
+          53,
+          "a3b40d0e526ce025"
+        ]
+      ],
+      "laterMatchingPreparationAndProbe": [
+        52
+      ]
+    },
+    "independentTestRule": "Take at most the first three distinct eligible games per backend, ordered by game code and level, without consulting the future response.",
+    "matchedFromIdenticalState": [
+      {
+        "game": "LKEY",
+        "level": 2,
+        "slot": 50,
+        "frozenSelection": "c91ce58a71cd2ed1546b3713db4600813de49836a19f311deec99e08698f0706",
+        "priorEvidence": {
+          "origin": "25c72ab81f3d5cb9",
+          "afterPreparation": "a74f827102c9152c",
+          "prepare": "ACTION1",
+          "probe": "ACTION3",
+          "preparationSeen": [
+            45,
+            47
+          ],
+          "inactiveHere": [
+            49
+          ],
+          "inactiveElsewhere": 3,
+          "knownOneStepReturn": true,
+          "alternating": true,
+          "alternativeQuestions": 1
+        },
+        "outcomes": {
+          "direct": {
+            "images": [
+              "25c72ab81f3d5cb9"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepare": {
+            "images": [
+              "a74f827102c9152c"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepared": {
+            "images": [
+              "a74f827102c9152c",
+              "a3b40d0e526ce025"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "repeatPrepared": {
+            "images": [
+              "a74f827102c9152c",
+              "a3b40d0e526ce025"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "undoPreparation": {
+            "images": [
+              "a74f827102c9152c",
+              "25c72ab81f3d5cb9"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          }
+        },
+        "directlyChanged": false,
+        "changedAfterPreparation": true,
+        "identifiedNewResponse": true
+      },
+      {
+        "game": "SS06",
+        "level": 3,
+        "slot": 114,
+        "frozenSelection": "c91ce58a71cd2ed1546b3713db4600813de49836a19f311deec99e08698f0706",
+        "priorEvidence": {
+          "origin": "3a5a0390581291a0",
+          "afterPreparation": "792e77d3f6eded7f",
+          "prepare": "ACTION3",
+          "probe": "ACTION6:10,21",
+          "preparationSeen": [
+            109,
+            111
+          ],
+          "inactiveHere": [
+            107,
+            108
+          ],
+          "inactiveElsewhere": 13,
+          "knownOneStepReturn": true,
+          "alternating": true,
+          "alternativeQuestions": 1
+        },
+        "outcomes": {
+          "direct": {
+            "images": [
+              "3a5a0390581291a0"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepare": {
+            "images": [
+              "792e77d3f6eded7f"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepared": {
+            "images": [
+              "792e77d3f6eded7f",
+              "792e77d3f6eded7f"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "repeatPrepared": {
+            "images": [
+              "792e77d3f6eded7f",
+              "792e77d3f6eded7f"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "undoPreparation": {
+            "images": [
+              "792e77d3f6eded7f",
+              "3a5a0390581291a0"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          }
+        },
+        "directlyChanged": false,
+        "changedAfterPreparation": false,
+        "identifiedNewResponse": false
+      },
+      {
+        "game": "FUIT",
+        "level": 2,
+        "slot": 36,
+        "frozenSelection": "c91ce58a71cd2ed1546b3713db4600813de49836a19f311deec99e08698f0706",
+        "priorEvidence": {
+          "origin": "bddab0712682a6ec",
+          "afterPreparation": "eff46b77b44afc93",
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "preparationSeen": [
+            21,
+            29
+          ],
+          "inactiveHere": [
+            20
+          ],
+          "inactiveElsewhere": 31,
+          "knownOneStepReturn": true,
+          "alternating": false,
+          "alternativeQuestions": 1
+        },
+        "outcomes": {
+          "direct": {
+            "images": [
+              "bddab0712682a6ec"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepare": {
+            "images": [
+              "eff46b77b44afc93"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepared": {
+            "images": [
+              "eff46b77b44afc93",
+              "eff46b77b44afc93"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "repeatPrepared": {
+            "images": [
+              "eff46b77b44afc93",
+              "eff46b77b44afc93"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "undoPreparation": {
+            "images": [
+              "eff46b77b44afc93",
+              "bddab0712682a6ec"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          }
+        },
+        "directlyChanged": false,
+        "changedAfterPreparation": false,
+        "identifiedNewResponse": false
+      },
+      {
+        "game": "GABA",
+        "level": 2,
+        "slot": 38,
+        "frozenSelection": "c91ce58a71cd2ed1546b3713db4600813de49836a19f311deec99e08698f0706",
+        "priorEvidence": {
+          "origin": "6543884a3ec5cd01",
+          "afterPreparation": "dfcecdc1a88c96f7",
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "preparationSeen": [
+            6,
+            34
+          ],
+          "inactiveHere": [
+            5
+          ],
+          "inactiveElsewhere": 13,
+          "knownOneStepReturn": true,
+          "alternating": false,
+          "alternativeQuestions": 1
+        },
+        "outcomes": {
+          "direct": {
+            "images": [
+              "6543884a3ec5cd01"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepare": {
+            "images": [
+              "dfcecdc1a88c96f7"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepared": {
+            "images": [
+              "dfcecdc1a88c96f7",
+              "a7ac7a92b8b72dbd"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "repeatPrepared": {
+            "images": [
+              "dfcecdc1a88c96f7",
+              "a7ac7a92b8b72dbd"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "undoPreparation": {
+            "images": [
+              "dfcecdc1a88c96f7",
+              "6543884a3ec5cd01"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          }
+        },
+        "directlyChanged": false,
+        "changedAfterPreparation": true,
+        "identifiedNewResponse": true
+      },
+      {
+        "game": "UPST",
+        "level": 1,
+        "slot": 48,
+        "frozenSelection": "c91ce58a71cd2ed1546b3713db4600813de49836a19f311deec99e08698f0706",
+        "priorEvidence": {
+          "origin": "28dbfb60e730bebb",
+          "afterPreparation": "9c48ba297c9e3a04",
+          "prepare": "ACTION6:21,10",
+          "probe": "ACTION6:52,45",
+          "preparationSeen": [
+            16,
+            43
+          ],
+          "inactiveHere": [
+            47
+          ],
+          "inactiveElsewhere": 4,
+          "knownOneStepReturn": false,
+          "alternating": false,
+          "alternativeQuestions": 1
+        },
+        "outcomes": {
+          "direct": {
+            "images": [
+              "28dbfb60e730bebb"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepare": {
+            "images": [
+              "9c48ba297c9e3a04"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepared": {
+            "images": [
+              "9c48ba297c9e3a04",
+              "9c48ba297c9e3a04"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "repeatPrepared": {
+            "images": [
+              "9c48ba297c9e3a04",
+              "9c48ba297c9e3a04"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          }
+        },
+        "directlyChanged": false,
+        "changedAfterPreparation": false,
+        "identifiedNewResponse": false
+      },
+      {
+        "game": "SS11",
+        "level": 1,
+        "slot": 64,
+        "frozenSelection": "c91ce58a71cd2ed1546b3713db4600813de49836a19f311deec99e08698f0706",
+        "priorEvidence": {
+          "origin": "b66702ed06a93c0d",
+          "afterPreparation": "a5ea4773946b52b1",
+          "prepare": "ACTION4",
+          "probe": "ACTION5",
+          "preparationSeen": [
+            25,
+            50
+          ],
+          "inactiveHere": [
+            47
+          ],
+          "inactiveElsewhere": 27,
+          "knownOneStepReturn": false,
+          "alternating": false,
+          "alternativeQuestions": 4
+        },
+        "outcomes": {
+          "direct": {
+            "images": [
+              "b66702ed06a93c0d"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepare": {
+            "images": [
+              "a5ea4773946b52b1"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "prepared": {
+            "images": [
+              "a5ea4773946b52b1",
+              "a5ea4773946b52b1"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          },
+          "repeatPrepared": {
+            "images": [
+              "a5ea4773946b52b1",
+              "a5ea4773946b52b1"
+            ],
+            "credit": false,
+            "state": "NOT_FINISHED"
+          }
+        },
+        "directlyChanged": false,
+        "changedAfterPreparation": false,
+        "identifiedNewResponse": false
+      }
+    ],
+    "passivePreparationMemory": {
+      "game": "LKEY",
+      "level": 2,
+      "first": {
+        "action": 53,
+        "controlRef": 49,
+        "preparationRef": 45,
+        "preparedRef": 53,
+        "preparedEffect": "edit",
+        "trackedMoves": 0
+      },
+      "last": {
+        "action": 107,
+        "controlRef": 49,
+        "preparationRef": 45,
+        "preparedRef": 53,
+        "preparedEffect": "edit",
+        "trackedMoves": 0
+      },
+      "exposed": 55,
+      "method": "Replay public observations into the frozen preparation family, without injecting experiment proposals. Inspect the stable direct edge, preparation edge, prepared effect and recorded ordered chain."
+    }
+  },
+  "native": [
+    {
+      "game": "FUIT",
+      "entry": [
+        2,
+        2
+      ],
+      "budget": 120,
+      "matchingPrefix": 80,
+      "identical": true,
+      "firstDifferentCommandOrImage": null,
+      "ordinary": {
+        "levels": [
+          {
+            "level": 2,
+            "actions": 80,
+            "won": true
+          }
+        ],
+        "publicImages": 55,
+        "issued": 80,
+        "reason": "target_levels_completed",
+        "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+        "replay": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "questions": []
+      },
+      "prospective": {
+        "levels": [
+          {
+            "level": 2,
+            "actions": 80,
+            "won": true
+          }
+        ],
+        "publicImages": 55,
+        "issued": 80,
+        "reason": "target_levels_completed",
+        "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+        "replay": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "questions": []
+      }
+    },
+    {
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "budget": 120,
+      "matchingPrefix": 37,
+      "identical": false,
+      "firstDifferentCommandOrImage": {
+        "action": 38,
+        "publicOrigin": "6543884a3ec5cd01",
+        "ordinary": 4,
+        "prospective": 1,
+        "ordinaryPoint": null,
+        "prospectivePoint": null,
+        "previousFamily": "sic_test_prepared_effects",
+        "candidateFamily": "sic_test_prepared_effects"
+      },
+      "ordinary": {
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "publicImages": 16,
+        "issued": 120,
+        "reason": "session_action_budget",
+        "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+        "replay": "1c4d01f4c1c4f446b8e784e777f1cd236726941924b017968703f7ca33b69646",
+        "questions": []
+      },
+      "prospective": {
+        "levels": [
+          {
+            "level": 2,
+            "actions": 120,
+            "won": false
+          }
+        ],
+        "publicImages": 14,
+        "issued": 120,
+        "reason": "session_action_budget",
+        "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+        "replay": "c98a4734b36a2862ac7f39d675e5231730d572e78e1cb4dc939aefacb8b2a47e",
+        "questions": [
+          {
+            "action": 38,
+            "publicOrigin": "6543884a3ec5cd01",
+            "returned": "dfcecdc1a88c96f7",
+            "input": 1,
+            "phase": "prepare",
+            "prepare": "ACTION1",
+            "probe": "ACTION5",
+            "evidence": [
+              6,
+              9,
+              7
+            ],
+            "distinctSilentOrigins": 3,
+            "observedPreparationReturns": 2,
+            "observedInverse": true,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "preparation_verified_test_the_silent_input",
+            "returnedEffect": "move:894cb2a9120f333b3ba16a4563ac8a62c76d6d7b28c83bfe05b9f04ebbc1566a/0/-5"
+          },
+          {
+            "action": 39,
+            "publicOrigin": "dfcecdc1a88c96f7",
+            "returned": "a7ac7a92b8b72dbd",
+            "input": 5,
+            "phase": "probe",
+            "prepare": "ACTION1",
+            "probe": "ACTION5",
+            "evidence": [
+              6,
+              9,
+              7
+            ],
+            "distinctSilentOrigins": 3,
+            "observedPreparationReturns": 2,
+            "observedInverse": true,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "previously_silent_input_changed_the_arrangement",
+            "returnedEffect": "edit:11>12x72",
+            "laterVisitsToSamePreparedImage": 0,
+            "laterSameInputAtSameImage": []
+          }
+        ]
+      }
+    },
+    {
+      "game": "LKEY",
+      "entry": [
+        2,
+        2
+      ],
+      "budget": 120,
+      "matchingPrefix": 49,
+      "identical": false,
+      "firstDifferentCommandOrImage": {
+        "action": 50,
+        "publicOrigin": "25c72ab81f3d5cb9",
+        "ordinary": 6,
+        "prospective": 1,
+        "ordinaryPoint": {
+          "x": 20,
+          "y": 19
+        },
+        "prospectivePoint": null,
+        "previousFamily": "sic_test_prepared_effects",
+        "candidateFamily": "sic_test_prepared_effects"
+      },
+      "ordinary": {
+        "levels": [
+          {
+            "level": 2,
+            "actions": 108,
+            "won": true
+          }
+        ],
+        "publicImages": 24,
+        "issued": 108,
+        "reason": "target_levels_completed",
+        "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+        "replay": "9621ee4101e93912aa98312f2b5fe1e76ab2d1b7085abb5b37be45add265f5f9",
+        "questions": []
+      },
+      "prospective": {
+        "levels": [
+          {
+            "level": 2,
+            "actions": 104,
+            "won": true
+          }
+        ],
+        "publicImages": 22,
+        "issued": 104,
+        "reason": "target_levels_completed",
+        "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+        "replay": "a5eeb975f583e4704058fedc2229a304917cc2659a61d5a5b70d2d32834747a7",
+        "questions": [
+          {
+            "action": 50,
+            "publicOrigin": "25c72ab81f3d5cb9",
+            "returned": "a74f827102c9152c",
+            "input": 1,
+            "phase": "prepare",
+            "prepare": "ACTION1",
+            "probe": "ACTION3",
+            "evidence": [
+              50,
+              4,
+              46
+            ],
+            "distinctSilentOrigins": 2,
+            "observedPreparationReturns": 2,
+            "observedInverse": true,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "preparation_verified_test_the_silent_input",
+            "returnedEffect": "move:0c291d8f5e6f5cf3e0a4d764a8a4078dd82efbe65e56cf7e6358c4cf645613d3/0/-28|213c433854b8a222772dee87266a34f502463375507184c63e38a8c0a50142ed/0/-28|3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93/0/-28|483e52d5bdead03584248849de9c08ec2b913a65bd432b6516973d39bb75fb48/0/-28|58192dc08daf6c45c7f1c57da6a623953d51976ce1027596f0e6b9ff816278b5/0/-28|6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/0/-28|8129192abfa4e18271e8d05ab1f2a7f69c0e6975b94532e932a302808d42d689/0/28|910c24577b7676a2ffed27c4657141b6636cd146d5352fabf147a1263121c6e0/0/-28|95d5c3f98acc6fc35d809504bd2459ef7cd7bbc37e7f1ab785a946f4f62d6682/0/-28|9b4894542e8c34432d88f16ac04bf4c0c4db91f10333dbbacf3376b3800fceb1/0/-28|c798e059e1f37cf6cd1f52c304b914812fef7dd03cf60ec6891247f337b0640f/0/28|ecdbc27b27fcf19c5ac26d12a9c073a3607dd087eb441ea017efca7380072c9b/0/28"
+          },
+          {
+            "action": 51,
+            "publicOrigin": "a74f827102c9152c",
+            "returned": "a3b40d0e526ce025",
+            "input": 3,
+            "phase": "probe",
+            "prepare": "ACTION1",
+            "probe": "ACTION3",
+            "evidence": [
+              50,
+              4,
+              46
+            ],
+            "distinctSilentOrigins": 2,
+            "observedPreparationReturns": 2,
+            "observedInverse": true,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "previously_silent_input_changed_the_arrangement",
+            "returnedEffect": "edit:11>5x2,5>11x2",
+            "laterVisitsToSamePreparedImage": 1,
+            "laterSameInputAtSameImage": []
+          },
+          {
+            "action": 87,
+            "publicOrigin": "4af9dab7599eb6fb",
+            "returned": "a42b7ed4d90cf1cc",
+            "input": 1,
+            "phase": "prepare",
+            "prepare": "ACTION1",
+            "probe": "ACTION6:20,19",
+            "evidence": [
+              86,
+              33,
+              81
+            ],
+            "distinctSilentOrigins": 2,
+            "observedPreparationReturns": 2,
+            "observedInverse": true,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "preparation_verified_test_the_silent_input",
+            "returnedEffect": "move:0c291d8f5e6f5cf3e0a4d764a8a4078dd82efbe65e56cf7e6358c4cf645613d3/0/-28|213c433854b8a222772dee87266a34f502463375507184c63e38a8c0a50142ed/0/28|3ca430e161f419cebbecdb4d2935d1811f32b039f752dddc19908c2f89f42e93/0/-28|483e52d5bdead03584248849de9c08ec2b913a65bd432b6516973d39bb75fb48/0/-28|58192dc08daf6c45c7f1c57da6a623953d51976ce1027596f0e6b9ff816278b5/0/-28|6661afe7e976a28e5ca9c7283584e7a9501a494318d9354e874d08649a4d8a53/0/-28|8129192abfa4e18271e8d05ab1f2a7f69c0e6975b94532e932a302808d42d689/0/-28|910c24577b7676a2ffed27c4657141b6636cd146d5352fabf147a1263121c6e0/0/28|95d5c3f98acc6fc35d809504bd2459ef7cd7bbc37e7f1ab785a946f4f62d6682/0/28|9b4894542e8c34432d88f16ac04bf4c0c4db91f10333dbbacf3376b3800fceb1/0/-28|c798e059e1f37cf6cd1f52c304b914812fef7dd03cf60ec6891247f337b0640f/0/28|ecdbc27b27fcf19c5ac26d12a9c073a3607dd087eb441ea017efca7380072c9b/0/-28"
+          },
+          {
+            "action": 88,
+            "publicOrigin": "a42b7ed4d90cf1cc",
+            "returned": "a42b7ed4d90cf1cc",
+            "input": 6,
+            "phase": "probe",
+            "prepare": "ACTION1",
+            "probe": "ACTION6:20,19",
+            "evidence": [
+              86,
+              33,
+              81
+            ],
+            "distinctSilentOrigins": 2,
+            "observedPreparationReturns": 2,
+            "observedInverse": true,
+            "predicted": [
+              "the_input_still_has_no_public_effect",
+              "the_input_changes_the_prepared_arrangement"
+            ],
+            "receipt": "input_remained_silent_after_preparation",
+            "returnedEffect": "still",
+            "laterVisitsToSamePreparedImage": 3,
+            "laterSameInputAtSameImage": []
+          }
+        ]
+      }
+    }
+  ],
+  "reproduction": {
+    "solverTag": "sic-test-silent-inputs-after-preparation-v134",
+    "witnessPack": "apprendre-la-portee-du-controle-v105.json",
+    "experimentalPack": "tester-une-commande-inerte-apres-preparation-v134.json",
+    "nativeRunner": "scripts/compare-source100.mjs",
+    "sourceReplay": "scripts/verify-sic-source-levels.mjs",
+    "customReplay": "scripts/verify-frozen-level-scores.mjs"
+  }
+}

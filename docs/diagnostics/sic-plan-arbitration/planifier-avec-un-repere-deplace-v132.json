@@ -625,14 +625,389 @@
       "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "earnedTransitions": []
+    },
+    {
+      "game": "SS14",
+      "entry": [
+        3,
+        3
+      ],
+      "budget": 350,
+      "baseline": "unseen-different-physics-v131",
+      "candidate": "unseen-different-physics-v132",
+      "before": [
+        {
+          "level": 3,
+          "actions": 305,
+          "won": false
+        }
+      ],
+      "after": [
+        {
+          "level": 3,
+          "actions": 306,
+          "won": false
+        }
+      ],
+      "initial": "297687195c2909d31769261008dbc138b4051070894d5542016c74a4b3a83280",
+      "matchingPrefix": 305,
+      "identicalTrajectory": false,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "level_active_time_budget",
+      "publicTraceDigest": "da116067e4237351a95afbbf5ca02eec3af3ca21f9e6fbafba8ce8f818303cdb",
+      "candidateExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 3,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 3,
+          "selectionComparisons": 0,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 3,
+          "motionComparisonsDistinguished": 3,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
     }
   ],
-  "warmL2ToL3": [],
+  "warmL2ToL3": [
+    {
+      "game": "SS10",
+      "entry": [
+        2,
+        3
+      ],
+      "budget": 350,
+      "baseline": "scored-entry-L2-to-L3-v130",
+      "candidate": "scored-entry-L2-to-L3-v132",
+      "before": [
+        {
+          "level": 2,
+          "actions": 227,
+          "won": true
+        },
+        {
+          "level": 3,
+          "actions": 184,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 2,
+          "actions": 227,
+          "won": true
+        },
+        {
+          "level": 3,
+          "actions": 184,
+          "won": true
+        }
+      ],
+      "initial": "97b6b03984aedadd03896ea0ae756203cb6e17cf59f5e04769a0277a2675ff84",
+      "matchingPrefix": 411,
+      "identicalTrajectory": true,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "target_levels_completed",
+      "publicTraceDigest": "80b5f0daf233364384713dd6f7a867df674d67427038cee9fc80159bd4070c92",
+      "candidateExperiments": [
+        {
+          "level": 2,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 3,
+          "selectionComparisons": 4,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 1,
+          "motionComparisonsDistinguished": 1,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 2,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 3,
+          "selectionComparisons": 4,
+          "controlTransfersVerified": 1,
+          "motionComparisons": 1,
+          "motionComparisonsDistinguished": 1,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": [
+        {
+          "afterAction": 227,
+          "level": 3,
+          "frame": "af1ecd112ba1854e0c9f56ad6815a078065ba1a5abef179b9f6427ab0f92f081"
+        }
+      ]
+    },
+    {
+      "game": "SS11",
+      "entry": [
+        2,
+        3
+      ],
+      "budget": 350,
+      "baseline": "scored-entry-L2-to-L3-v130",
+      "candidate": "scored-entry-L2-to-L3-v132",
+      "before": [
+        {
+          "level": 2,
+          "actions": 35,
+          "won": true
+        },
+        {
+          "level": 3,
+          "actions": 40,
+          "won": false
+        }
+      ],
+      "after": [
+        {
+          "level": 2,
+          "actions": 35,
+          "won": true
+        },
+        {
+          "level": 3,
+          "actions": 40,
+          "won": false
+        }
+      ],
+      "initial": "cf27ccaa9a05e54d3ac2e3de7ad430d77768e89d255d782fc61a039dd7f50561",
+      "matchingPrefix": 75,
+      "identicalTrajectory": true,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "native_game_over",
+      "publicTraceDigest": "3b9cc81238eba37d0182072c1d463600e6e78e1fefa1d689e2cc58a22671c280",
+      "candidateExperiments": [
+        {
+          "level": 2,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 3,
+          "selectionComparisons": 3,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "baselineExperiments": [
+        {
+          "level": 2,
+          "selectionComparisons": 1,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        },
+        {
+          "level": 3,
+          "selectionComparisons": 3,
+          "controlTransfersVerified": 0,
+          "motionComparisons": 0,
+          "motionComparisonsDistinguished": 0,
+          "entryIntoTestedSiteObserved": 0,
+          "passageComparisons": 0,
+          "passageComparisonsConfirmedOpen": 0,
+          "landmarkApproachesExplicitlyTested": 0
+        }
+      ],
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": [
+        {
+          "afterAction": 35,
+          "level": 3,
+          "frame": "7f6fde6adab470b27f71780b8e5793d8e6b680212e915ccaae652c15bee27a23"
+        }
+      ]
+    }
+  ],
+  "sameImageWithPreviousLevelMemory": {
+    "game": "SS11",
+    "level": 3,
+    "publicStart": "7f6fde6adab470b2",
+    "coldFirstInput": 1,
+    "campaignFirstInput": 4,
+    "campaignFirstFiveReceipts": [
+      "preview_contradicted",
+      "preview_contradicted",
+      "preview_contradicted",
+      "preview_contradicted",
+      "preview_contradicted"
+    ],
+    "campaignPreviewContradicted": 15,
+    "campaignPreviewRealized": 1,
+    "campaignControlVerifications": [
+      {
+        "action": 7,
+        "result": "cursor_control_unconfirmed"
+      },
+      {
+        "action": 13,
+        "result": "cursor_control_unconfirmed"
+      },
+      {
+        "action": 30,
+        "result": "cursor_control_unconfirmed"
+      }
+    ]
+  },
   "sourceL1": {
-    "evaluated": 0,
-    "won": 0,
-    "sameCommandsAndImages": 0,
-    "games": []
+    "evaluated": 10,
+    "won": 10,
+    "sameCommandsAndImages": 10,
+    "games": [
+      {
+        "game": "GABA",
+        "won": true,
+        "actions": 49,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "ecd2721b134556c14056722430a27e57be64d40fd791807b5e157c3e5629e158"
+      },
+      {
+        "game": "GARE",
+        "won": true,
+        "actions": 11,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "41d94e17f9f0ce56fd8897d3383caaae45d74c070a8c11f52bbf2e6714f9d23c"
+      },
+      {
+        "game": "GIGO",
+        "won": true,
+        "actions": 7,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "d13db3d8b7ec2f872cb00001c6c0ec0ad9298e22662ac19a6da8d9e068ce0ce3"
+      },
+      {
+        "game": "GLOB",
+        "won": true,
+        "actions": 10,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "54e988e4f1c42bb34567e14b71b444c71b011b16c8a2852ba2ff4227350371f5"
+      },
+      {
+        "game": "GMAP",
+        "won": true,
+        "actions": 5,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "e5692ce5a3c356218b9e04bd36bda987bde719bfff6d425fe4a089d209e954f4"
+      },
+      {
+        "game": "GORI",
+        "won": true,
+        "actions": 15,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "f8364449237487f04286281fa873f15fc83ba266864c788e904f6294f7cdc543"
+      },
+      {
+        "game": "GRAV",
+        "won": true,
+        "actions": 11,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "237f59b2f3294f24c255563f28f140b3a3c6978b40a5a9b202d974b7f232b092"
+      },
+      {
+        "game": "GRIL",
+        "won": true,
+        "actions": 5,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "7438b0774ac4f4bda8a05a8bfc4955f523a011eea2858349ff949458e47cc2c2"
+      },
+      {
+        "game": "HANO",
+        "won": true,
+        "actions": 6,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "75c170f79eb9a1800a089cf11e00acaf310f2f5864d2459c197132e5cbf4bd3d"
+      },
+      {
+        "game": "HOLE",
+        "won": true,
+        "actions": 5,
+        "pairedForecasts": 0,
+        "forecastsWithRegisteredLandmark": 0,
+        "sameCommandsAndImages": true,
+        "publicTraceDigest": "73237a161b59003534c34c4e131276dc5f01c3f3c6866df3c5a760d3f626e1d0"
+      }
+    ]
   },
   "customL2Protection": [
     {

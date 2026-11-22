@@ -1018,5 +1018,268 @@
       "firstRepeatedApproach": null,
       "observedContrasts": []
     }
-  ]
+  ],
+  "qualificationAgainstPreviouslyCertifiedWins": {
+    "sourceL1": [
+      {
+        "game": "GABA",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 49,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 49,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a"
+      },
+      {
+        "game": "GARE",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 11,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 11,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "47946f5f8c86d88f3eab1ab05c409012382d7ee92612516b9d0516ee07fad873"
+      },
+      {
+        "game": "GIGO",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 7,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 7,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "9a9ecf97d2d4433f4b53c052c64dde1d1b06edba4f513bacb42f0f3fe6fb22b3"
+      },
+      {
+        "game": "GLOB",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 10,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 10,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "9ce62b7fe708bd967432e661e1b87d81e0693a84c220ef5061487bd295b4a1b2"
+      },
+      {
+        "game": "GMAP",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 5,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 5,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "416a002af5d0c812812e60204c1b4a5d9bde92d17215a268ef18865d36654442"
+      },
+      {
+        "game": "GORI",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 15,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 15,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "26f1c585a73a545aef0a9d8b1731374402410da1e1c1addb8f41727ceef5b475"
+      },
+      {
+        "game": "GRAV",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 11,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 11,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "7a92c4071668c495aff1b5b84960b49123cb34557c6d278c19e29c1d3d164a66"
+      },
+      {
+        "game": "GRIL",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 5,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 5,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "222f28cedca116415fdc897f4a4c3f672a67c61aa26d6c9338f9842fa2a1088e"
+      },
+      {
+        "game": "HANO",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 6,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 6,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "5353edd1e0216ee18b13da3fea0bf339c2895fbe6d4e8cbd10369d7e8aa24e9a"
+      },
+      {
+        "game": "HOLE",
+        "budget": 60,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 5,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 5,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "a95f7f1f9e3ccb70320e7a593a5003ea3d08c1ce5b95bb660f302feeaab9441e"
+      }
+    ],
+    "customCampaignsAndDirectL2": [
+      {
+        "game": "SS12",
+        "budget": 350,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 64,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 30,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 94,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f"
+      },
+      {
+        "game": "SS13",
+        "budget": 350,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 300,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 36,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 336,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "4a47c7a078c18adcb0fa91a18fc8f287c2f13d343d99e9231ace210f2db938e0"
+      },
+      {
+        "game": "SS14",
+        "budget": 350,
+        "levels": [
+          {
+            "level": 1,
+            "actions": 31,
+            "won": true
+          },
+          {
+            "level": 2,
+            "actions": 52,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 83,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3"
+      }
+    ],
+    "directL3": [
+      {
+        "game": "SS10",
+        "budget": 350,
+        "levels": [
+          {
+            "level": 3,
+            "actions": 81,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 81,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "915f2c498b3a233decfced4f4467b337608df8ae067c5ab90140c358bb7bb8c4"
+      },
+      {
+        "game": "SS13",
+        "budget": 350,
+        "levels": [
+          {
+            "level": 3,
+            "actions": 176,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 176,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363"
+      },
+      {
+        "game": "SS11",
+        "budget": 350,
+        "levels": [
+          {
+            "level": 3,
+            "actions": 77,
+            "won": true
+          }
+        ],
+        "identicalCommandsAndImages": true,
+        "matchingPrefix": 77,
+        "baselineOfferedReactiveContact": 0,
+        "replay": "72d4b58e0bb173b8fa744eebb2b119cecd8279969f34244b651aa7084d9d3dcf"
+      }
+    ]
+  }
 }
