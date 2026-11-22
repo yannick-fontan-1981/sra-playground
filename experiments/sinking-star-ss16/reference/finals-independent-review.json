@@ -1,0 +1,1158 @@
+{
+  "status": "bypass-found",
+  "method": "Construction indépendante de parcours gagnants complets, puis nouvelle tentative des mêmes stratégies sur la géométrie courante.",
+  "scope": "Ces vérifications invalident ou confirment des contre-exemples concrets. Elles ne prouvent ni unicité, ni optimalité, ni absence de tout autre contournement.",
+  "baselineCounterexamples": {
+    "ss16_08": {
+      "spec": {
+        "id": "ss16-08",
+        "title": "Le dernier reflet du gardien",
+        "rows": [
+          "####################",
+          "########mo##########",
+          "########...........#",
+          "########...........#",
+          "#######..o......M..#",
+          "#######..T.........#",
+          "######......W......#",
+          "######.............#",
+          "m....~~............#",
+          "#.######........##.#",
+          "#......#........oo.#",
+          "#......#.######.####",
+          "#......########.####",
+          "#......#####.~~.####",
+          "#......#############",
+          "#......#############",
+          "#......#############",
+          "#......#############",
+          "#g.g..g#############",
+          "####################"
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 13
+            },
+            "facing": "NW"
+          }
+        ],
+        "circuits": [
+          {
+            "id": "maree-gardee",
+            "buttons": [
+              {
+                "x": 16,
+                "y": 4
+              },
+              {
+                "x": 8,
+                "y": 1
+              }
+            ],
+            "color": 10
+          },
+          {
+            "id": "chargeur",
+            "buttons": [
+              {
+                "x": 12,
+                "y": 6
+              }
+            ],
+            "color": 12
+          },
+          {
+            "id": "reserve",
+            "buttons": [
+              {
+                "x": 6,
+                "y": 7
+              }
+            ],
+            "color": 14
+          },
+          {
+            "id": "trois-lests",
+            "buttons": [
+              {
+                "x": 8,
+                "y": 11
+              },
+              {
+                "x": 12,
+                "y": 13
+              },
+              {
+                "x": 14,
+                "y": 9
+              }
+            ],
+            "color": 15
+          }
+        ],
+        "gates": [
+          {
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "circuit": "chargeur",
+            "direction": "W",
+            "closedWhen": "released"
+          },
+          {
+            "at": {
+              "x": 9,
+              "y": 2
+            },
+            "circuit": "reserve",
+            "direction": "N",
+            "closedWhen": "released"
+          },
+          {
+            "at": {
+              "x": 1,
+              "y": 9
+            },
+            "circuit": "trois-lests",
+            "direction": "N",
+            "closedWhen": "released"
+          }
+        ],
+        "platforms": [
+          {
+            "at": {
+              "x": 5,
+              "y": 8
+            },
+            "circuit": "maree-gardee",
+            "activeWhen": "pressed"
+          },
+          {
+            "at": {
+              "x": 6,
+              "y": 8
+            },
+            "circuit": "maree-gardee",
+            "activeWhen": "pressed"
+          }
+        ]
+      },
+      "commands": "CCDDRCCRDDLLLLLULUURDDDDDUUULLDRURRDRRRRRRRRRDDLLCDDRRRRULXCCRRUUCDDRRDDUULLCULLLLLLLLUUXDDDDDDDDDDCUUUUULLLLLLLLLLUUXDDDDDDDDDRDRCUUUUUUULLLLLUUXDDDDDDDDDRRRRDR",
+      "metrics": {
+        "actions": 161,
+        "selections": 11,
+        "merchantPushes": 0,
+        "warriorPushes": 9,
+        "thiefPulls": 5,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 14,
+        "mirrorMoves": 4,
+        "reflections": 4,
+        "heroReflections": 3,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "description": "Aucun appui permanent, réserve nord inutilisée, trois transports de héros par le premier miroir."
+    },
+    "ss16_07": {
+      "spec": {
+        "id": "ss16-07",
+        "title": "Le miroir paie le dernier passage",
+        "rows": [
+          "####################",
+          "#######.o....#######",
+          "#######.o....#.....#",
+          "#######.T....#.....#",
+          "#######......#..M..#",
+          "#######......~o....#",
+          "#g..###......#.....#",
+          "#...###......#######",
+          "#g..~~.....W.#######",
+          "#...###......#######",
+          "#...###......#######",
+          "#g..###......#######",
+          "###########o########",
+          "###########m########",
+          "###########.########",
+          "###########m########",
+          "###########.########",
+          "###########.########",
+          "####################",
+          "####################"
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 8,
+              "y": 8
+            },
+            "facing": "NW"
+          }
+        ],
+        "circuits": [
+          {
+            "id": "dernier-bail",
+            "buttons": [
+              {
+                "x": 8,
+                "y": 10
+              },
+              {
+                "x": 11,
+                "y": 17
+              }
+            ],
+            "color": 15
+          }
+        ],
+        "gates": [
+          {
+            "at": {
+              "x": 3,
+              "y": 8
+            },
+            "circuit": "dernier-bail",
+            "direction": "E",
+            "closedWhen": "released"
+          }
+        ]
+      },
+      "commands": "DLLCCDDRUUULDRCLLDDLLLLLDRCUUULLLLUURDDDDDDCCRUURULUUUULULURCRDDRRDDDDDCCUXUUCUUUUUUUUUUUUUUULLLXDDDCLUUX",
+      "metrics": {
+        "actions": 105,
+        "selections": 11,
+        "merchantPushes": 4,
+        "warriorPushes": 11,
+        "thiefPulls": 3,
+        "partnerMoves": 3,
+        "chainPushes": 4,
+        "stoneMoves": 16,
+        "mirrorMoves": 2,
+        "reflections": 3,
+        "heroReflections": 3,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "description": "Aucun des deux appuis du pont central ; une caisse remplace le miroir final ; trois transports de héros par le miroir."
+    }
+  },
+  "checks": [
+    {
+      "level": "ss16-07",
+      "specSha256": "162e4204675d5ee6db7f886587644b5d46a14612a8a69b51c0868fa5854520ae",
+      "referenceMetrics": {
+        "actions": 105,
+        "selections": 8,
+        "merchantPushes": 3,
+        "warriorPushes": 8,
+        "thiefPulls": 3,
+        "partnerMoves": 1,
+        "chainPushes": 2,
+        "stoneMoves": 14,
+        "mirrorMoves": 2,
+        "reflections": 2,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 3,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "status": "bypass-found",
+      "metrics": {
+        "actions": 105,
+        "selections": 11,
+        "merchantPushes": 4,
+        "warriorPushes": 11,
+        "thiefPulls": 3,
+        "partnerMoves": 3,
+        "chainPushes": 4,
+        "stoneMoves": 16,
+        "mirrorMoves": 2,
+        "reflections": 3,
+        "heroReflections": 3,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "commands": "DLLCCDDRUUULDRCLLDDLLLLLDRCUUULLLLUURDDDDDDCCRUURULUUUULULURCRDDRRDDDDDCCUXUUCUUUUUUUUUUUUUUULLLXDDDCLUUX",
+      "stages": []
+    },
+    {
+      "level": "ss16-08",
+      "specSha256": "27f35bafbfd8e7bedb5a59be7135db89d5d741f8b33847690dc98315df381913",
+      "referenceMetrics": {
+        "actions": 179,
+        "selections": 17,
+        "merchantPushes": 3,
+        "warriorPushes": 4,
+        "thiefPulls": 9,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 20,
+        "mirrorMoves": 3,
+        "reflections": 4,
+        "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 2,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "status": "bypass-found",
+      "metrics": {
+        "actions": 161,
+        "selections": 11,
+        "merchantPushes": 0,
+        "warriorPushes": 9,
+        "thiefPulls": 5,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 14,
+        "mirrorMoves": 4,
+        "reflections": 4,
+        "heroReflections": 3,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "commands": "CCDDRCCRDDLLLLLULUURDDDDDUUULLDRURRDRRRRRRRRRDDLLCDDRRRRULXCCRRUUCDDRRDDUULLCULLLLLLLLUUXDDDDDDDDDDCUUUUULLLLLLLLLLUUXDDDDDDDDDRDRCUUUUUUULLLLLUUXDDDDDDDDDRRRRDR",
+      "stages": [
+        {
+          "label": "Charger la caisse initiale sans la refléter",
+          "turn": 5,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 12,
+                "y": 6
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 9,
+              "y": 6
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            },
+            {
+              "x": 0,
+              "y": 8
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": true,
+            "reserve": false,
+            "trois-lests": false
+          }
+        },
+        {
+          "label": "La presse donne la caisse au Guerrier",
+          "turn": 8,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 13,
+                "y": 6
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 6
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            },
+            {
+              "x": 0,
+              "y": 8
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": false
+          }
+        },
+        {
+          "label": "Écarter le premier miroir temporairement",
+          "turn": 15,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 8,
+                "y": 8
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 6
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 7,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            },
+            {
+              "x": 0,
+              "y": 8
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": false
+          }
+        },
+        {
+          "label": "La caisse initiale remplace le premier miroir sur son bouton final",
+          "turn": 25,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 8,
+                "y": 10
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 7,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            },
+            {
+              "x": 0,
+              "y": 8
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": false
+          }
+        },
+        {
+          "label": "Rétablir le miroir pendant que le Marchand et le gardien maintiennent les plateformes",
+          "turn": 36,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 9,
+                "y": 8
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 16,
+              "y": 10
+            },
+            {
+              "x": 17,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            },
+            {
+              "x": 0,
+              "y": 8
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": false
+          }
+        },
+        {
+          "label": "Déposer le deuxième lest avec une charge de la file",
+          "turn": 58,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 16,
+                "y": 10
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 13,
+                "y": 8
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 15,
+              "y": 10
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [
+            {
+              "x": 8,
+              "y": 1
+            },
+            {
+              "x": 0,
+              "y": 8
+            }
+          ],
+          "circuits": {
+            "maree-gardee": true,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": false
+          }
+        },
+        {
+          "label": "Le premier miroir élimine les gardiens ; le second livre le troisième lest",
+          "turn": 59,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 16,
+                "y": 10
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 13,
+                "y": 8
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 12,
+              "y": 13
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 13
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [],
+          "circuits": {
+            "maree-gardee": false,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": true
+          }
+        },
+        {
+          "label": "Débrancher le deuxième miroir par traction, en conservant son dépôt sur le bouton isolé",
+          "turn": 76,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 16,
+                "y": 4
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 18,
+                "y": 8
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 13,
+                "y": 10
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 12,
+              "y": 13
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [],
+          "circuits": {
+            "maree-gardee": false,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": true
+          }
+        },
+        {
+          "label": "Le Marchand franchit toute l’eau par reflet",
+          "turn": 99,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 1,
+                "y": 18
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 18,
+                "y": 8
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 13,
+                "y": 10
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 12,
+              "y": 13
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [],
+          "circuits": {
+            "maree-gardee": false,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": true
+          }
+        },
+        {
+          "label": "Le Guerrier franchit toute l’eau par reflet",
+          "turn": 130,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 1,
+                "y": 18
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 3,
+                "y": 18
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 13,
+                "y": 10
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 12,
+              "y": 13
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [],
+          "circuits": {
+            "maree-gardee": false,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": true
+          }
+        },
+        {
+          "label": "Le Voleur franchit toute l’eau par reflet",
+          "turn": 161,
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 1,
+                "y": 18
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 3,
+                "y": 18
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 6,
+                "y": 18
+              }
+            }
+          ],
+          "stones": [
+            {
+              "x": 9,
+              "y": 1
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 12,
+              "y": 13
+            }
+          ],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 15,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "monsters": [],
+          "circuits": {
+            "maree-gardee": false,
+            "chargeur": false,
+            "reserve": false,
+            "trois-lests": true
+          }
+        }
+      ]
+    }
+  ]
+}

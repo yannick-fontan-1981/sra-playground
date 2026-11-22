@@ -1,0 +1,19 @@
+{
+  "completed": false,
+  "scope": "Native browser visual review",
+  "attempts": [
+    {
+      "surface": "Chromium CLI",
+      "result": "Blocked before page load: process socket() failed, Operation not permitted."
+    },
+    {
+      "surface": "Native desktop Chromium",
+      "result": "Browser launched; native input unavailable because no AT-SPI provider was connected."
+    },
+    {
+      "surface": "Provided cloud browser",
+      "result": "Local file URL blocked by browser security policy; no workaround attempted."
+    }
+  ],
+  "fallback": "Compiled HTML DOM/input/canvas/timing verification with Happy DOM and direct deterministic render inspection. Neither is reported as a native browser visual test."
+}

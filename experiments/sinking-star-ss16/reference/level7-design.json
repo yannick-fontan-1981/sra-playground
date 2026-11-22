@@ -1,0 +1,1046 @@
+{
+  "spec": {
+    "id": "ss16-07",
+    "title": "Le miroir paie le dernier passage",
+    "rows": [
+      "####################",
+      "#######.o....#######",
+      "#######.o....#.....#",
+      "#######.T....#.....#",
+      "#######......#..M..#",
+      "#######......~o....#",
+      "#g..###......#.....#",
+      "#...###......#######",
+      "#g..~~.....W.#######",
+      "#...###......#######",
+      "#...###......#######",
+      "#g..###......#######",
+      "###########o########",
+      "###########m########",
+      "###########.########",
+      "###########m########",
+      "###########.########",
+      "###########.########",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 8
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "dernier-bail",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 10
+          },
+          {
+            "x": 11,
+            "y": 17
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 3,
+          "y": 8
+        },
+        "circuit": "dernier-bail",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "DLLCCDDRUUULDRCCUUUUUUULLLDDRXXDDDDDDDDRRDDDDDCCLLDDLLLLDDULLLLLUULLCUUUUUUUULLLLLLLLLLCDDDDDLLLLLLLDDDLL",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes and Mirrors · Métamonde 2 · le miroir devient le lest",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#m%C3%A9tamonde-%C3%A9nigme-2",
+    "puzzle": "Métamonde 2",
+    "objective": "Extraire les deux charges dans le bon ordre, régler leurs distances de reflet, conserver une caisse pour neutraliser les gardiens puis retirer le miroir sur sa commande finale.",
+    "secondary": {
+      "label": "Heroes and Water · Métamonde 3 · la caisse auxiliaire et la poussée sûre des monstres",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#m%C3%A9tamonde-%C3%A9nigme-3"
+    }
+  },
+  "metrics": {
+    "actions": 105,
+    "selections": 8,
+    "merchantPushes": 3,
+    "warriorPushes": 8,
+    "thiefPulls": 3,
+    "partnerMoves": 1,
+    "chainPushes": 2,
+    "stoneMoves": 14,
+    "mirrorMoves": 2,
+    "reflections": 2,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 3,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand investit sa caisse dans le seul passage hors de son île.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la caisse basse de la réserve puis la quitte par le côté.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 1
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Il récupère ensuite la caisse haute sans emmener la première.",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 2
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le Guerrier pousse enfin les deux charges en file jusqu’aux deux distances de reflet.",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Deux reflets successifs construisent les deux appuis éloignés ; le miroir a terminé son travail de transport.",
+      "turn": 31,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 13
+        },
+        {
+          "x": 11,
+          "y": 15
+        }
+      ],
+      "circuits": {
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "La dernière caisse sert de bouclier de distance : la poussée fait se rencontrer les deux monstres sans exposer le Guerrier.",
+      "turn": 42,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "La même caisse poursuit sa course dans le corridor libéré et devient le premier poids de la porte finale.",
+      "turn": 46,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "dernier-bail": false
+      }
+    },
+    {
+      "label": "Le Marchand déplace le miroir devenu inutile jusque sur le second bouton : le transporteur devient lui-même le dernier lest.",
+      "turn": 58,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "dernier-bail": true
+      }
+    },
+    {
+      "label": "Les trois héros traversent les deux appuis irréversibles puis occupent les trois destinations.",
+      "turn": 105,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 6
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 1,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 17
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 10
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "dernier-bail": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Le même miroir dépose deux charges dans l’eau puis devient un poids durable.",
+      "Une caisse intermédiaire permet de déplacer un monstre tout en restant hors de sa portée.",
+      "La traction doit récupérer les ressources avant leur conversion irréversible en appuis."
+    ],
+    "changed": [
+      "Deux charges contiguës au nord obligent à combiner les extractions séparées du Voleur et la poussée en file du Guerrier.",
+      "Le Marchand commence sur une troisième île, dont la sortie consomme une ressource distincte.",
+      "Le corridor sud convertit la caisse de protection en poids ; un circuit à deux boutons interdit la chambre finale tant que miroir et caisse ne sont pas conservés.",
+      "Les pièces et la géométrie sont originales ; il n’y a ni duplication par miroir ni niveau auxiliaire caché."
+    ],
+    "sourceReading": "La séquence transport puis ballast du miroir vient de Mirrors Métamonde 2. Le principe de caisse auxiliaire protégeant la poussée vers les gobelins est adapté de Water Métamonde 3. La chaîne extraction, réglage de distance, deux immersions et deux lests est une composition SS16."
+  }
+}

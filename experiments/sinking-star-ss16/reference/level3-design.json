@@ -1,0 +1,1412 @@
+{
+  "spec": {
+    "id": "ss16-03",
+    "title": "Lâcher le miroir, garder son poids",
+    "rows": [
+      "####################",
+      "####################",
+      "###......#.......###",
+      "###..............###",
+      "###......#.......###",
+      "###~~~####.......###",
+      "##1T....##.......###",
+      "##.#######.......###",
+      "##.oo.#######~######",
+      "##....######.....###",
+      "##....######g...g###",
+      "##.M.W######..g..###",
+      "##....######.....###",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "double-lest",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 3,
+            "y": 11
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 3
+        },
+        "circuit": "double-lest",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 3,
+          "y": 5
+        },
+        "circuit": "double-lest",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 5
+        },
+        "circuit": "double-lest",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 5
+        },
+        "circuit": "double-lest",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CCRRRXLLDLDDDRDRCCDLLLUUUURDDURRDDCCRCCUDRLLLUUUURCCUULLDLUUUDCRUCCUURLDDCUUURCCUURUUURRRRRRRRRURDDDDDDDDDRCCUUUULLUURUUURRRRRRRDDDDRRRDDDLCCDRRRRRDDDDRRRDDRDRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "puzzle": 4,
+    "label": "Adaptation de Heroes and Mirrors · énigme 4 · le reflet coupe la traction",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-4",
+    "objective": "Extraire et laisser le miroir sur son bouton, puis faire tourner le dernier bloc par plusieurs relais pousse–tire.",
+    "secondary": {
+      "label": "Heroes and Mirrors · Métamonde 2 · le miroir devient un lest",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#m%C3%A9tamonde-%C3%A9nigme-2"
+    }
+  },
+  "metrics": {
+    "actions": 160,
+    "selections": 20,
+    "merchantPushes": 0,
+    "warriorPushes": 22,
+    "thiefPulls": 9,
+    "partnerMoves": 1,
+    "chainPushes": 1,
+    "stoneMoves": 28,
+    "mirrorMoves": 3,
+    "reflections": 1,
+    "heroReflections": 1,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur tire le miroir jusqu’à son bouton, au fond du couloir",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le reflet évacue le Voleur par le haut sans reprendre le miroir derrière lui",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Voleur extrait la première réserve puis quitte le bouton de côté",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Guerrier remplace le Marchand par le bloc sans relâcher le bouton ni les plateformes",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Marchand dégage le couloir pour le dernier bloc, réservé au pont",
+      "turn": 37,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "La seconde réserve descend du mur ; elle ne doit pas remplacer le miroir",
+      "turn": 42,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 4,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Voleur attend au-dessus du coude avant que le bloc coupe le passage",
+      "turn": 50,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 4,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Guerrier ramène le bloc jusqu’au coude inférieur sans le coincer contre le miroir",
+      "turn": 62,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 2,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Voleur dégage le bloc de la paroi latérale pour préparer sa rotation",
+      "turn": 65,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 3,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Une poussée unique place le bloc sous le passage vertical",
+      "turn": 73,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 4,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Voleur remonte le bloc jusqu’à la rangée de la porte ouverte",
+      "turn": 78,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        },
+        {
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Le Guerrier fait franchir la porte au bloc, puis le convertit en dernier appui",
+      "turn": 102,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    },
+    {
+      "label": "Les trois héros traversent ; les deux lests restent derrière eux",
+      "turn": 160,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "double-lest": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Le Voleur déplace le miroir par traction.",
+      "Un déplacement par reflet permet de quitter une position sans entraîner le miroir.",
+      "Le miroir conserve un rôle de poids après avoir servi au transport."
+    ],
+    "changed": [
+      "La géométrie utilise une alcôve latérale et un passage supérieur, au lieu de reproduire les cases de la référence.",
+      "Le Marchand maintient le second bouton pendant la sortie du Voleur ; il est ensuite remplacé par un bloc.",
+      "Trois plateformes temporaires ne restent levées que tant que les deux boutons sont occupés.",
+      "Le second bouton et l’unique bloc destiné à l’eau obligent à conserver le miroir comme lest.",
+      "Deux réserves et trois destinations font intervenir le Marchand et le Guerrier dans les rotations du transport.",
+      "Ni duplication, ni fusion, ni dragon, ni mouvement en temps réel du guide ne sont implémentés."
+    ],
+    "sourceReading": "Mirrors 4 enseigne le départ par reflet pour éviter de reprendre un miroir ; Mirrors Métamonde 2 conserve le miroir comme poids. Les plateformes d’échappée, le relais du Marchand et le trajet coudé de la dernière caisse sont nouveaux.",
+    "localChecks": [
+      {
+        "turn": 4,
+        "alternative": "U",
+        "effect": "Monter avant d’avoir laissé le miroir sur le bouton retire la plateforme sous le Voleur.",
+        "observed": {
+          "dead": true,
+          "deadHeroes": [
+            "thief"
+          ],
+          "platformActive": [
+            false,
+            false,
+            false
+          ]
+        }
+      },
+      {
+        "turn": 5,
+        "alternative": "R",
+        "effect": "Marcher vers l’est au lieu de refléter tire le miroir hors de son bouton et enferme le Voleur au bout de l’alcôve.",
+        "observed": {
+          "refusals": 0,
+          "dead": false,
+          "mirror": {
+            "at": {
+              "x": 6,
+              "y": 8
+            },
+            "facing": "NE"
+          },
+          "nextThiefActions": {
+            "U": {
+              "failed": true,
+              "dead": false
+            },
+            "D": {
+              "failed": true,
+              "dead": false
+            },
+            "L": {
+              "failed": true,
+              "dead": false
+            },
+            "R": {
+              "failed": true,
+              "dead": false
+            },
+            "X": {
+              "failed": true,
+              "dead": false
+            }
+          }
+        }
+      }
+    ],
+    "checkScope": "Parcours gagnant et contre-branche locale vérifiés. La contre-branche teste les cinq actions du Voleur depuis l’alcôve ; elle ne prétend pas énumérer tous les états globaux."
+  }
+}
