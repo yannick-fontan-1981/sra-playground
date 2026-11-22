@@ -1,0 +1,120 @@
+{
+  "game": "SS13",
+  "level": 3,
+  "entry": "direct",
+  "arms": {
+    "v125": {
+      "tag": "sic-verify-the-chosen-capacity-v125",
+      "commit": "3217cdc98203c006f805b832f2b853b3ab44ee07",
+      "packDigest": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "entryFrame": "067812d339b78a00caaad721975ef2aa30ba0295778fea2f12412e3d9fa3c4c3",
+      "budget": 350,
+      "workerCount": 1,
+      "commands": 350,
+      "commandsChosenBySic": 350,
+      "resets": 0,
+      "official": {
+        "level": 3,
+        "actions": 350,
+        "won": false
+      },
+      "replayedCommandDigest": "b7f74f275a35241a7b0979e453ace47a01120308b3541e2c0a6f9f2ee18da7a0",
+      "replayedFinalFrame": "abf3ead1b5ac11f7083d0bb6dbab8a3667f4e5cf7568a7616eff7ed61bc79c14"
+    },
+    "v126": {
+      "tag": "sic-test-a-persistent-opening-v126",
+      "commit": "a7b5f42fb114995e6bcc104428c5b615a4684a90",
+      "packDigest": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "entryFrame": "067812d339b78a00caaad721975ef2aa30ba0295778fea2f12412e3d9fa3c4c3",
+      "budget": 350,
+      "workerCount": 1,
+      "commands": 176,
+      "commandsChosenBySic": 176,
+      "resets": 0,
+      "official": {
+        "level": 3,
+        "actions": 176,
+        "won": true
+      },
+      "replayedCommandDigest": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363",
+      "replayedFinalFrame": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360"
+    }
+  },
+  "identicalCommandsAndFramesBeforeDivergence": 138,
+  "firstDifferentCommand": 139,
+  "sameImageAtDivergence": "c8016398d5233974",
+  "controlAction": 4,
+  "candidateAction": 2,
+  "experimentalPreparationActions": [
+    139,
+    140,
+    141,
+    142,
+    143,
+    144,
+    145,
+    146
+  ],
+  "selectedReceipts": [
+    {
+      "action": 17,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "select_the_subject_that_just_gained_access",
+      "observed": "selected_the_released_subject_without_moving_either"
+    },
+    {
+      "action": 18,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "test_the_newly_released_subject_while_holding_its_partner",
+      "observed": "independent_motion_in_the_new_region_verified"
+    },
+    {
+      "action": 29,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "prepare_an_alternative_operand_for_a_stranded_subject",
+      "observed": "the_alternative_operand_preparation_was_refuted"
+    },
+    {
+      "action": 40,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "test_if_another_operand_releases_the_subject",
+      "observed": "independent_release_verified_with_a_different_material_return"
+    },
+    {
+      "action": 41,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "test_the_newly_released_subject_while_holding_its_partner",
+      "observed": "independent_motion_in_the_new_region_verified"
+    },
+    {
+      "action": 139,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "prepare_material_to_relieve_a_subject_holding_a_route_open",
+      "observed": "the_replacement_preparation_matched"
+    },
+    {
+      "action": 146,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "prepare_material_to_relieve_a_subject_holding_a_route_open",
+      "observed": "the_replacement_preparation_matched"
+    },
+    {
+      "action": 147,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "prepare_a_configuration_that_opens_a_route_for_both_subjects",
+      "observed": "relative_displacement_verified"
+    },
+    {
+      "action": 160,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "continue_a_verified_change_of_relative_positions",
+      "observed": "relative_displacement_verified"
+    },
+    {
+      "action": 176,
+      "family": "sic_test_prepared_effects",
+      "questionOrPlan": "continue_a_verified_change_of_relative_positions",
+      "observed": "transport_official"
+    }
+  ]
+}
