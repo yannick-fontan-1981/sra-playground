@@ -155,6 +155,7 @@ export function recallProjectedPassage(
   // A repeated pose supplies the reason to look for another crossing. The
   // predicted transform, not the number of other fixtures, identifies its pivot.
   for (const rule of m.projections) {
+    if (!rule.subjectWitness) continue;
     const sites = tiles.flatMap((tile, site) => (tile === rule.pivotForm ? [site] : []));
     if (sites.length !== 1 || !s.other.some(site => s.initial[site] === rule.pivotForm)) continue;
     return {
@@ -164,7 +165,7 @@ export function recallProjectedPassage(
       rejected: [],
       blocked: [],
       orientation: [rule.from, rule.to],
-      evidence: rule.ref,
+      evidence: rule.subjectWitness,
     };
   }
 }

@@ -6,6 +6,7 @@ export type Projection = {
   from: number;
   to: number;
   ref: string;
+  subjectWitness?: string;
 };
 type Image = {
   source: number;
@@ -174,6 +175,7 @@ export function recognizeProjection(
       from: t.dir,
       to: t.out,
       ref,
+      ...(t.side >= 0 ? { subjectWitness: ref } : {}),
     }));
 }
 export function shortcuts(s: Scene, site: number, rules: Projection[]) {

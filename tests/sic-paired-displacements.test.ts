@@ -125,6 +125,7 @@ test('a visible landing becomes a prediction at another distance only after disp
     'observed',
   );
   assert.equal(rules.length, 1);
+  assert.equal(rules[0]?.subjectWitness, undefined);
   const later = { ...before, pieces: [23] };
   assert.deepEqual(applyImages(later, images(room, later, rules))?.pieces, [
     17,
@@ -201,6 +202,8 @@ test('switching the operator requires a reachable arrangement while the first su
   m.projections = [{ pivotForm: 'striped fixture', from: 2, to: 1, ref: 'crossing observed' }];
   assert.equal(recallProjectedPassage(room, m, v, room.initial), undefined);
   m.visits[key(v)] = 2;
+  assert.equal(recallProjectedPassage(room, m, v, room.initial), undefined);
+  m.projections[0]!.subjectWitness = 'subject crossed';
   m.passage = recallProjectedPassage(room, m, v, room.initial);
   assert.equal(m.passage?.pivot, 9);
   const firstContact: Reading = { ...v, subjects: [8, 34] };
@@ -208,7 +211,7 @@ test('switching the operator requires a reachable arrangement while the first su
   const action = projectedPassage(room, m, v, 'seen', 8, 40);
   assert.deepEqual(action?.expected.subjects, v.subjects);
   assert.equal(action?.expected.active, 1);
-  assert.ok(action?.evidence.includes('crossing observed'));
+  assert.ok(action?.evidence.includes('subject crossed'));
   assert.deepEqual(action?.projectedSetup, {
     operator: 1, pivot: 10, launch: 8, landing: 24, firstCommand: 'ACTION4',
   });

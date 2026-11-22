@@ -289,15 +289,10 @@ export function seePair(
     const learned = recognizeProjection(s, old, next, before, ref);
     for (const r of learned) {
       const registered = (m.projections ??= []);
-      if (
-        !registered.some(
-          (k) =>
-            k.pivotForm === r.pivotForm &&
-            ((k.from === r.from && k.to === r.to) ||
-              (k.from === r.to && k.to === r.from)),
-        )
-      )
-        registered.push(r);
+      const prior = registered.find(k => k.pivotForm === r.pivotForm &&
+        ((k.from === r.from && k.to === r.to) || (k.from === r.to && k.to === r.from)));
+      if (!prior) registered.push(r);
+      else if (r.subjectWitness) prior.subjectWitness ??= r.subjectWitness;
       q.active ??= 'an_operation_realizes_a_projected_displacement';
     }
   }
@@ -383,9 +378,12 @@ export function seePair(
   ) {
     const candidates = visibleImages(s, next, after);
     const trial = applyImages(next, candidates);
+    const unverifiedSubject = !m.planSolves && candidates.some(im => im.side >= 0 &&
+      m.projections?.some(r => !r.subjectWitness && r.pivotForm === s.initial[im.pivot] &&
+        ((r.from === im.dir && r.to === im.out) || (r.from === im.out && r.to === im.dir))));
     if (
       trial &&
-      !m.projections?.length &&
+      (!m.projections?.length || unverifiedSubject) &&
       !m.checked.includes('preview/' + key(next))
     ) {
       q.active ??= 'compare_an_indicated_landing_to_an_actual_operation';
