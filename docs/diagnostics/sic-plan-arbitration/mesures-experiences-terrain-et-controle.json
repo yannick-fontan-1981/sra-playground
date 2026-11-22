@@ -1,0 +1,1100 @@
+{
+  "workers": 1,
+  "candidateCommit": "0bef5be3fa87a2b125e49edd5a08848e14f008ab",
+  "engines": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "runs": {
+    "mechanism-source-GABA-2-2-v137/GABA": {
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "d9c5d2c7e1ec8aa40d606735228c0589a79674eb4edb6be639514a17ccc49aa4"
+      ]
+    },
+    "mechanism-source-GABA-2-2-ablate-v137-reassemble-after-motion/GABA": {
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "ablate-v137-reassemble-after-motion",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 39,
+          "won": true
+        }
+      ],
+      "tape": [
+        "03b4eb8a84c97556188a4b1b2df4071e6fd30f821e358be6e4cd2a3935316e22"
+      ]
+    },
+    "mechanism-source-GABA-1-2-v137/GABA": {
+      "game": "GABA",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        }
+      ],
+      "tape": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4"
+      ]
+    },
+    "mechanism-source-GABA-1-2-ablate-v137-field-reassembly/GABA": {
+      "game": "GABA",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "ablate-v137-field-reassembly",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "a0d277b1364e54ea48f4f6f8984fbcbca3246f67438f5365e90a38bc5c977e21"
+      ]
+    },
+    "mechanism-source-GABA-1-2-ablate-v137-receiver-memory/GABA": {
+      "game": "GABA",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "ablate-v137-receiver-memory",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        }
+      ],
+      "tape": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4"
+      ]
+    },
+    "reconsider-source-GABA-2-2-v140/GABA": {
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v140",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "ac1f5eac4df7f6b9614d8b245e186d90203dc38f662d0a98d77951455e613232"
+      ]
+    },
+    "registration-source-GABA-2-2-v140/GABA": {
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 39,
+          "won": true
+        }
+      ],
+      "tape": [
+        "03b4eb8a84c97556188a4b1b2df4071e6fd30f821e358be6e4cd2a3935316e22"
+      ],
+      "preActionReceipts": [
+        {
+          "action": 2,
+          "basis": "aligned_terrain_fragments_after_observed_motion",
+          "before": "sra-v6-a425ad07-4b3a-4c6a-9812-4c5d7b1a17e0:epoch:1:revision:1:frame:afc5f02bf10369ab",
+          "after": "sra-v6-a425ad07-4b3a-4c6a-9812-4c5d7b1a17e0:epoch:1:revision:2:frame:e00a597947e2bc6f",
+          "command": "ACTION1",
+          "pitch": 5,
+          "from": [
+            0,
+            9
+          ],
+          "to": [
+            0,
+            8
+          ],
+          "interpretations": 2,
+          "consistentWithMotion": 2,
+          "withDeliveryPlan": 1,
+          "nextAction": "ACTION2",
+          "nextIntent": "move",
+          "expectedCarrier": [
+            0,
+            9
+          ]
+        }
+      ]
+    },
+    "reconsider-source-GABA-3-3-v140/GABA": {
+      "game": "GABA",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v140",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "5afd237cf3699637b01810a6d334fd6e8ff377008f2058818a45acb8499315e0",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "cf96b05dd02e34ecb488346b686e9cc8d326ce3f1d5f23e3637c6149ae4287f5"
+      ]
+    },
+    "registration-source-GABA-3-3-v140/GABA": {
+      "game": "GABA",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "5afd237cf3699637b01810a6d334fd6e8ff377008f2058818a45acb8499315e0",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "cf96b05dd02e34ecb488346b686e9cc8d326ce3f1d5f23e3637c6149ae4287f5"
+      ]
+    },
+    "registration-source-GABA-1-3-v140/GABA": {
+      "game": "GABA",
+      "entry": [
+        1,
+        3
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "dad2631650c921872de1c150ac09acb85d27679acb68414d4b8b77670559c0d6",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        },
+        {
+          "level": 3,
+          "actions": 85,
+          "won": true
+        }
+      ],
+      "tape": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4",
+        "f1cd0685ece175fa3f220a80a21ace573eb6fecfdc2de86ebcf87d2ea7b923e5"
+      ]
+    },
+    "reconsider-custom-SS07-1-1-v140/SS07": {
+      "game": "SS07",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v140",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": true
+        }
+      ],
+      "tape": [
+        "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+      ]
+    },
+    "registration-custom-SS07-1-1-v140/SS07": {
+      "game": "SS07",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": true
+        }
+      ],
+      "tape": [
+        "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+      ]
+    },
+    "registration-custom-SS01-1-2-v140/SS01": {
+      "game": "SS01",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v140",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 36,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        }
+      ],
+      "tape": [
+        "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+      ]
+    },
+    "mechanism-custom-SS06-SS10-SS11-1-1-v137/SS06": {
+      "game": "SS06",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "4414bbe75f878963fb7e03e2d370ef697b70d13d38a1f077fe3af0130d4d7069",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "tape": [
+        "d4050e023da25839cd192b2bd108e1c5d1b9f5cd00e0a1b897de45a3c78b01b0"
+      ]
+    },
+    "mechanism-custom-SS06-SS10-SS11-1-1-v137/SS10": {
+      "game": "SS10",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "658f1e0737f5548040927e642e6387f1da887bdb558378a290033dfebdb0c164",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "tape": [
+        "86eeef6a987d0b0ab8b651bcff6d75979aab48a32fe549eda666079d9335ec67"
+      ]
+    },
+    "mechanism-custom-SS06-SS10-SS11-1-1-v137/SS11": {
+      "game": "SS11",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "846a64c7027d7796bb5dc64004b76f60b3e463cabbc8aaea5a1834d8ce4387fb",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 79,
+          "won": true
+        }
+      ],
+      "tape": [
+        "6b744233608d44abe6070ea2ee81d1abf13bda5fe47b6923c2d3f7609201f6ac"
+      ]
+    },
+    "mechanism-custom-SS09-2-2-v137/SS09": {
+      "game": "SS09",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v137",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "initial": "2cd1a2a6876490f6d9d70d75ea2a59edbd035ef1489a13b2430b7df0e6b70d3c",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 54,
+          "won": true
+        }
+      ],
+      "tape": [
+        "ed31545661974f783bee0caa881aef07f49abe5dc35b880110006c3d448354c2"
+      ]
+    },
+    "release-source-COMB-2-2-v139/COMB": {
+      "game": "COMB",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v139",
+      "pack": "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d",
+      "initial": "83e45baf852970cabc901769a61c03a9798fd8133a88a8c3e7005d8896fe9dd7",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 87,
+          "won": false
+        }
+      ],
+      "tape": [
+        "6a551e4848221c0103378ef20256c54592fa3e433b676041fcbf9ee1f96ba684"
+      ]
+    },
+    "reconsider-source-COMB-2-2-v139/COMB": {
+      "game": "COMB",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v139",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "83e45baf852970cabc901769a61c03a9798fd8133a88a8c3e7005d8896fe9dd7",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 60,
+          "won": false
+        }
+      ],
+      "tape": [
+        "55b5e548c1675a8faabb15f658be10f74d60b3ec2047b7513faeaa124c963fc4"
+      ]
+    },
+    "reconsider-custom-SS01-1-2-v139/SS01": {
+      "game": "SS01",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v139",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 36,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        }
+      ],
+      "tape": [
+        "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+      ]
+    },
+    "v109/SS11": {
+      "game": "SS11",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v109",
+      "initial": "846a64c7027d7796bb5dc64004b76f60b3e463cabbc8aaea5a1834d8ce4387fb",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "tape": [
+        "274d7d5d6ba57273dc6cf30858232f3ad422dbdbd7136a124b643def591855be"
+      ]
+    }
+  },
+  "comparisons": [
+    {
+      "witness": "mechanism-source-GABA-2-2-v137/GABA",
+      "candidate": "mechanism-source-GABA-2-2-ablate-v137-reassemble-after-motion/GABA",
+      "equalCommandsAndImages": 1,
+      "firstDecision": {
+        "action": 2,
+        "image": "e00a597947e2bc6f",
+        "witness": 3,
+        "candidate": 2,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_deliver_cargo_after_observed_motion"
+        ]
+      }
+    },
+    {
+      "witness": "mechanism-source-GABA-1-2-v137/GABA",
+      "candidate": "mechanism-source-GABA-1-2-ablate-v137-field-reassembly/GABA",
+      "equalCommandsAndImages": 62,
+      "firstDecision": {
+        "action": 63,
+        "image": "afc5f02bf10369ab",
+        "witness": 4,
+        "candidate": 1,
+        "families": [
+          "sic_deliver_cargo_after_observed_motion",
+          "sic_public_input_exploration"
+        ]
+      }
+    },
+    {
+      "witness": "mechanism-source-GABA-1-2-v137/GABA",
+      "candidate": "mechanism-source-GABA-1-2-ablate-v137-receiver-memory/GABA",
+      "equalCommandsAndImages": 99
+    },
+    {
+      "witness": "reconsider-source-GABA-2-2-v140/GABA",
+      "candidate": "registration-source-GABA-2-2-v140/GABA",
+      "equalCommandsAndImages": 1,
+      "firstDecision": {
+        "action": 2,
+        "image": "e00a597947e2bc6f",
+        "witness": 3,
+        "candidate": 2,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_deliver_cargo_after_observed_motion"
+        ]
+      }
+    },
+    {
+      "witness": "reconsider-source-GABA-3-3-v140/GABA",
+      "candidate": "registration-source-GABA-3-3-v140/GABA",
+      "equalCommandsAndImages": 120
+    },
+    {
+      "witness": "reconsider-custom-SS07-1-1-v140/SS07",
+      "candidate": "registration-custom-SS07-1-1-v140/SS07",
+      "equalCommandsAndImages": 60
+    },
+    {
+      "witness": "release-source-COMB-2-2-v139/COMB",
+      "candidate": "reconsider-source-COMB-2-2-v139/COMB",
+      "equalCommandsAndImages": 50,
+      "firstDecision": {
+        "action": 51,
+        "image": "280f5c95910c9353",
+        "witness": 7,
+        "candidate": 1,
+        "families": [
+          "sic_test_prepared_effects",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "v109/SS11",
+      "candidate": "mechanism-custom-SS06-SS10-SS11-1-1-v137/SS11",
+      "equalCommandsAndImages": 8,
+      "firstDecision": {
+        "action": 9,
+        "image": "099212a2132b3c0d",
+        "witness": 2,
+        "candidate": 3,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    }
+  ],
+  "ablation": {
+    "field-reassembly": {
+      "original": "2ae046676c170572401e85bbb4bd4c36fcbaee40",
+      "change": "withhold geometric field reassembly on campaign admission; retain receiver bindings and all other witnesses",
+      "before": "4b80e104d10c2f1652935678afe71c56b52d3de67b4e8c389208daec89769d14",
+      "after": "8b68af97e1e38ffe2dd84e4a4906d8d0f20eaf7695fe0c6a1c2d522933d280e0"
+    },
+    "receiver-memory": {
+      "original": "2ae046676c170572401e85bbb4bd4c36fcbaee40",
+      "change": "mask receiver bindings at initialization; retain carrier shape, pitch, core, interaction history and evidence",
+      "before": "4b80e104d10c2f1652935678afe71c56b52d3de67b4e8c389208daec89769d14",
+      "after": "205b5e5e9c9a44fcee896b77d7515169f84a0dd80d0d75082bd9433cc66c5ce0"
+    },
+    "reassemble-after-motion": {
+      "original": "2ae046676c170572401e85bbb4bd4c36fcbaee40",
+      "change": "test aligned disconnected components as a possible field after an observed movement; preserve all existing motion and plan checks",
+      "before": "4b80e104d10c2f1652935678afe71c56b52d3de67b4e8c389208daec89769d14",
+      "after": "ef102020072b2739a498e484c937dbd2acd67486095c1ea8bfe5e8eeedbc3bfa"
+    }
+  },
+  "initialFields": {
+    "inspected": 300,
+    "unavailable": [],
+    "aligned": 17,
+    "additionalCargoReadings": [
+      {
+        "game": "GABA",
+        "level": 2,
+        "visibleFragmentedFields": 2,
+        "ordinaryCargoReadings": 0,
+        "additionalCargoReadings": 2
+      },
+      {
+        "game": "GABA",
+        "level": 3,
+        "visibleFragmentedFields": 2,
+        "ordinaryCargoReadings": 0,
+        "additionalCargoReadings": 1
+      }
+    ]
+  },
+  "pairedTerrainTests": [
+    {
+      "game": "SKBN",
+      "level": 1,
+      "comparisons": 4,
+      "restored": 1
+    },
+    {
+      "game": "PORT",
+      "level": 1,
+      "comparisons": 1,
+      "restored": 0
+    },
+    {
+      "game": "PORT",
+      "level": 2,
+      "comparisons": 2,
+      "restored": 0
+    },
+    {
+      "game": "LS19",
+      "level": 3,
+      "comparisons": 6,
+      "restored": 0
+    },
+    {
+      "game": "FITE",
+      "level": 3,
+      "comparisons": 17,
+      "restored": 4
+    },
+    {
+      "game": "AS66",
+      "level": 2,
+      "comparisons": 4,
+      "restored": 0
+    },
+    {
+      "game": "AS66",
+      "level": 3,
+      "comparisons": 2,
+      "restored": 0
+    }
+  ],
+  "firstDelivery": {
+    "entry": [
+      {
+        "subjectTiles": 1,
+        "firstDelivery": null,
+        "expanded": 25,
+        "matched": 0,
+        "unexpected": null,
+        "official": false
+      },
+      {
+        "subjectTiles": 3,
+        "firstDelivery": null,
+        "expanded": 89,
+        "matched": 0,
+        "unexpected": null,
+        "official": false
+      },
+      {
+        "subjectTiles": 1,
+        "firstDelivery": 8,
+        "expanded": 37,
+        "matched": 8,
+        "unexpected": null,
+        "official": false
+      },
+      {
+        "subjectTiles": 1,
+        "firstDelivery": null,
+        "expanded": 25,
+        "matched": 0,
+        "unexpected": null,
+        "official": false
+      },
+      {
+        "subjectTiles": 3,
+        "firstDelivery": null,
+        "expanded": 89,
+        "matched": 0,
+        "unexpected": null,
+        "official": false
+      },
+      {
+        "subjectTiles": 1,
+        "firstDelivery": 8,
+        "expanded": 37,
+        "matched": 8,
+        "unexpected": null,
+        "official": false
+      }
+    ],
+    "afterTransport": [
+      {
+        "reachable": 11,
+        "contexts": 3,
+        "changedPixelsAfterPreparation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "reachable": 11,
+        "contexts": 3,
+        "changedPixelsAfterPreparation": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  },
+  "firstDeliveryL3": {
+    "game": "GABA",
+    "level": 3,
+    "afterObservedAction": 1,
+    "direct": 0,
+    "regrouped": 1,
+    "calculations": [
+      {
+        "checked": true,
+        "gridPitch": 5,
+        "cargoGroups": [
+          1,
+          1,
+          3
+        ],
+        "full": 66,
+        "fullExpanded": 4204,
+        "viaDeliveries": null,
+        "parts": [
+          {
+            "j": 0,
+            "tiles": 1,
+            "route": 14,
+            "explored": 88,
+            "trial": {
+              "matched": 14,
+              "last": "release_appearance_confirmed",
+              "heldBeforeDelivery": "d3a13005f8b5d586",
+              "final": "5efce4c6f90026c2",
+              "control": {
+                "changes": false,
+                "official": false
+              },
+              "official": false
+            }
+          },
+          {
+            "j": 1,
+            "tiles": 1,
+            "route": 28,
+            "explored": 209,
+            "trial": {
+              "matched": 28,
+              "last": "release_appearance_confirmed",
+              "heldBeforeDelivery": "15fc7be7457a5d46",
+              "final": "a527fc02a3384a24",
+              "control": {
+                "changes": false,
+                "official": false
+              },
+              "official": false
+            }
+          },
+          {
+            "j": 2,
+            "tiles": 3,
+            "route": 21,
+            "explored": 191,
+            "trial": {
+              "matched": 21,
+              "last": "release_appearance_confirmed",
+              "heldBeforeDelivery": "ad30c3fffaec4be9",
+              "final": "2726953fc10bec03",
+              "control": {
+                "changes": false,
+                "official": false
+              },
+              "official": false
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "gravControl": {
+    "firstDecision": 2,
+    "initial": "0558c76dbed93aa9",
+    "archivedWin": {
+      "actions": 39,
+      "official": true,
+      "image": "a6c2bb824b70ba4b"
+    },
+    "measurements": [
+      {
+        "probe": "ACTION1",
+        "arms": [
+          {
+            "A": null,
+            "input": "ACTION1",
+            "from": "0558c76dbed93aa9",
+            "to": "d4234f6d0fdec929",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 0
+          },
+          {
+            "A": "ACTION3",
+            "input": "ACTION1",
+            "from": "638947127ad26584",
+            "to": "e971aab22aa7945b",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 2
+          },
+          {
+            "A": "ACTION6:30,2",
+            "input": "ACTION1",
+            "from": "d4234f6d0fdec929",
+            "to": "9728556b708f71b8",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 0
+          }
+        ],
+        "conditionalRoles": 2
+      },
+      {
+        "probe": "ACTION2",
+        "arms": [
+          {
+            "A": null,
+            "input": "ACTION2",
+            "from": "0558c76dbed93aa9",
+            "to": "3d4b766129860b78",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 4
+          },
+          {
+            "A": "ACTION3",
+            "input": "ACTION2",
+            "from": "638947127ad26584",
+            "to": "cc66ca69903488a8",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 3
+          },
+          {
+            "A": "ACTION6:30,2",
+            "input": "ACTION2",
+            "from": "d4234f6d0fdec929",
+            "to": "000fe57c208aa10f",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 4
+          }
+        ],
+        "conditionalRoles": 0
+      },
+      {
+        "probe": "ACTION3",
+        "arms": [
+          {
+            "A": null,
+            "input": "ACTION3",
+            "from": "0558c76dbed93aa9",
+            "to": "638947127ad26584",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 3
+          },
+          {
+            "A": "ACTION3",
+            "input": "ACTION3",
+            "from": "638947127ad26584",
+            "to": "4007718d418bf42f",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 0
+          },
+          {
+            "A": "ACTION6:30,2",
+            "input": "ACTION3",
+            "from": "d4234f6d0fdec929",
+            "to": "4007718d418bf42f",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 3
+          }
+        ],
+        "conditionalRoles": 3
+      },
+      {
+        "probe": "ACTION4",
+        "arms": [
+          {
+            "A": null,
+            "input": "ACTION4",
+            "from": "0558c76dbed93aa9",
+            "to": "dd5da089bb4939ce",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 3
+          },
+          {
+            "A": "ACTION3",
+            "input": "ACTION4",
+            "from": "638947127ad26584",
+            "to": "fa4ec5eb3325f45f",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 3
+          },
+          {
+            "A": "ACTION6:30,2",
+            "input": "ACTION4",
+            "from": "d4234f6d0fdec929",
+            "to": "fa4ec5eb3325f45f",
+            "state": "NOT_FINISHED",
+            "win": false,
+            "still": false,
+            "measuredMoves": 3
+          }
+        ],
+        "conditionalRoles": 0
+      }
+    ]
+  },
+  "ss11DiscriminatingExperiments": [
+    {
+      "action": 9,
+      "command": 3,
+      "priorImage": "099212a2132b3c0d",
+      "publicReturn": "c311437219bd2eb9",
+      "hypotheses": [
+        "walk",
+        "push",
+        "pull",
+        "field",
+        "exchange"
+      ],
+      "matched": [
+        "exchange"
+      ],
+      "next": "prepare_a_configuration_that_opens_a_route_for_both_subjects"
+    },
+    {
+      "action": 27,
+      "command": 2,
+      "priorImage": "444f3f9b2f1beb71",
+      "publicReturn": "49be96965be43a51",
+      "hypotheses": [
+        "walk",
+        "push",
+        "pull",
+        "field",
+        "exchange"
+      ],
+      "matched": [
+        "walk",
+        "push",
+        "pull",
+        "field"
+      ],
+      "next": "prepare_a_configuration_that_opens_a_route_for_both_subjects"
+    }
+  ],
+  "combPositionalControl": {
+    "firstDecision": 51,
+    "before": "280f5c95910c9353",
+    "preparations": [
+      "ACTION7",
+      "ACTION1"
+    ],
+    "differentMotion": {
+      "B": "ACTION7",
+      "arms": [
+        {
+          "A": null,
+          "input": "ACTION7",
+          "from": "280f5c95910c9353",
+          "to": "83e45baf852970ca",
+          "state": "NOT_FINISHED",
+          "win": false,
+          "still": false,
+          "measuredMoves": 0
+        },
+        {
+          "A": "ACTION7",
+          "input": "ACTION7",
+          "from": "83e45baf852970ca",
+          "to": "83e45baf852970ca",
+          "state": "NOT_FINISHED",
+          "win": false,
+          "still": true,
+          "measuredMoves": 0
+        },
+        {
+          "A": "ACTION1",
+          "input": "ACTION7",
+          "from": "8f1c7922f35ede80",
+          "to": "83e45baf852970ca",
+          "state": "NOT_FINISHED",
+          "win": false,
+          "still": false,
+          "measuredMoves": 1
+        }
+      ],
+      "movingOnlyWithOnePreparation": [
+        {
+          "role": "a7db01d3d6ce4ec13a699375cb9e48cb2e33683f049f5e3f8ba7438db0b9f511",
+          "control": [
+            0,
+            0
+          ],
+          "preparations": [
+            [
+              0,
+              0
+            ],
+            [
+              -10,
+              0
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "positionalCandidate": "fb47de01b5746b518dad1451aff89d0408b70a87"
+}

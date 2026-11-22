@@ -1,5 +1,7 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
+**Choix de l’expérience en l’absence de plan.** Sur SS11 L1 à froid, SIC v137 distingue l’échange de quatre lois concurrentes au coup 9, exploite cette mesure au coup 10 et gagne en 79. Sur GRAV L3, un clic suivi du dernier mouvement observé reste indécidable, car répéter ce mouvement sans clic ne produit déjà plus de déplacement identifiable. Le chantier v141 consiste à mesurer la réponse du premier sujet à sa position courante et à réutiliser cette mesure lorsqu’une autre préparation devient disponible. Le pack v140 fournit en parallèle une victoire GABA L2 à froid en 39 et conserve SS01 L2 en 32 après L1. [Protocoles, limites et scores](niveaux-1-2-3.md#choisir-une-expérience-quand-sic-ne-dispose-pas-de-plan)
+
 Le suivi des L1, L2 et L3 réunit les 100 sources, SS01 à SS14 et le laboratoire SS15. BP35 L3 gagne après apprentissage de la réversibilité d’un support. Le pack v109 gagne SS15 L2 à froid. [Mesures par niveau et hypothèses de transfert](niveaux-1-2-3.md)
 
 **Sur le périmètre SS01 à SS14, les quatorze L2 sont gagnés en réunissant les conditions mesurées.** Le candidat v109 gagne aussi les trois nouvelles campagnes de bout en bout. Sur SS12, il construit un passage, déplace un mécanisme puis libère la trajectoire du second sujet. Sur SS13 et SS14, les effets appris au L1 changent les décisions du L2. Le témoin v104 est intégré à `main`. [Scores à froid, transmission désactivée et non-régression](lecons-autonomes-v109.md)
