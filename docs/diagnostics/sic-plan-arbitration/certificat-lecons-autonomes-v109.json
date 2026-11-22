@@ -1,0 +1,747 @@
+{
+  "mergedV104": "7b6859dd2308fecf2ec49d53299b68ac77977c58",
+  "candidate": "642f6cbfa01ac84009de2d4a11aa754180faee5c",
+  "nativeEngine": "7b6859dd2308fecf2ec49d53299b68ac77977c58",
+  "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+  "resetPack": "6fe067119466eb6f7b03140f8ccd07f9885b44d0c9c05728be84df2f780968c7",
+  "targetCapPerLevel": 350,
+  "workers": 4,
+  "targets": {
+    "SS12": {
+      "campaign": {
+        "v104": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 335,
+            "reason": "level_active_time_budget"
+          }
+        ],
+        "v109": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 64,
+            "reason": null
+          },
+          {
+            "level": 2,
+            "won": true,
+            "actions": 30,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "firstDivergence": {
+          "action": 3,
+          "fromHash": "57e62a732fff0385",
+          "baseline": {
+            "command": 1,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 2,
+            "family": "sic_test_prepared_effects",
+            "purpose": "measure_a_direction_for_the_two_registered_subjects"
+          }
+        },
+        "initial": "949785e8ef6a84f31b92fb415ade9cdfd0f758bd8faaf80214b77b6ea564bffb",
+        "final": "71767159b665043a65b637db8cffc1b6ba05b03cd5039fc24946aa4ac24e0491",
+        "commandDigest": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f",
+        "v104Digest": "9d5b22d946c3198d858aefed3667223ebe24bf2961d04c561380b544fbe69528",
+        "events": {
+          "1": {
+            "firstByPurpose": {
+              "measure_a_direction_for_the_two_registered_subjects": 3,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 6,
+              "continue_a_verified_change_of_relative_positions": 7,
+              "arrange_a_landmark_and_a_launch_site_for_an_unreached_region": 16,
+              "test_a_visible_projection_into_the_unreached_region": 40,
+              "preserve_the_crossing_by_vacating_the_landing": 41,
+              "use_the_verified_passage_for_the_remaining_subject": 43,
+              "clear_a_nearer_projected_object_before_retesting_the_subject": 55
+            },
+            "firstWithPriorLevelEvidence": null
+          },
+          "2": {
+            "firstByPurpose": {
+              "retest_the_scope_of_the_other_subject_in_a_new_room": 1,
+              "transport_a_matching_arrangement_onto_multiple_controls": 2,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 5,
+              "continue_a_verified_change_of_relative_positions": 6
+            },
+            "firstWithPriorLevelEvidence": {
+              "action": 1,
+              "ref": "sra-v6-d164f873-287a-42dc-b33d-60b85f359cac:epoch:2:revision:65:frame:743935001945e5ee",
+              "purpose": "retest_the_scope_of_the_other_subject_in_a_new_room"
+            }
+          }
+        }
+      },
+      "cold": {
+        "v104": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 272,
+            "reason": "level_active_time_budget"
+          }
+        ],
+        "v109": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 40,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "firstDivergence": {
+          "action": 6,
+          "fromHash": "000f8268b957d276",
+          "baseline": {
+            "command": 3,
+            "family": "sic_public_input_exploration"
+          },
+          "candidate": {
+            "command": 2,
+            "family": "sic_test_prepared_effects",
+            "purpose": "measure_a_direction_for_the_two_registered_subjects"
+          }
+        },
+        "initial": "743935001945e5ee0ae4e4b7daddfc9751d59032fe9b19835c149187ac422969",
+        "final": "949785e8ef6a84f31b92fb415ade9cdfd0f758bd8faaf80214b77b6ea564bffb",
+        "commandDigest": "de3d676721d193b66de2129ea37b4d5abf3f6c95dfa7e0177c7e38470b4c6b2a",
+        "v104Digest": "e5ae909cb12dc2c2138ba69d176704e9addffebbcecc73d0c5042e9a708ffdb4",
+        "events": {
+          "2": {
+            "firstByPurpose": {
+              "measure_a_direction_for_the_two_registered_subjects": 2,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 9,
+              "continue_a_verified_change_of_relative_positions": 10
+            },
+            "firstWithPriorLevelEvidence": null
+          }
+        }
+      },
+      "coldAndCampaignL2StartWithSamePublicImage": true,
+      "secondL2Decision": {
+        "purpose": "transport_a_matching_arrangement_onto_multiple_controls",
+        "priorLevelObservationRevisions": [
+          60,
+          61,
+          64
+        ]
+      },
+      "disableRoomLesson": {
+        "sameFirstLevelActionsAndFrames": true,
+        "scores": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 64,
+            "reason": null
+          },
+          {
+            "level": 2,
+            "won": false,
+            "actions": 350,
+            "reason": "level_action_budget"
+          }
+        ],
+        "commandDigest": "4730e04df7773d02de8fcce80beeb1411571f1d0caded499d5d2ca3fb69749de",
+        "firstDivergenceL2": {
+          "action": 1,
+          "fromHash": "743935001945e5ee",
+          "baseline": {
+            "command": 1,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 6,
+            "point": {
+              "x": 9,
+              "y": 27
+            },
+            "family": "sic_test_prepared_effects",
+            "purpose": "retest_the_scope_of_the_other_subject_in_a_new_room"
+          }
+        },
+        "commonL2Initial": "743935001945e5ee",
+        "candidateFirstL2LessonRef": {
+          "action": 1,
+          "ref": "sra-v6-d164f873-287a-42dc-b33d-60b85f359cac:epoch:2:revision:65:frame:743935001945e5ee",
+          "purpose": "retest_the_scope_of_the_other_subject_in_a_new_room"
+        }
+      }
+    },
+    "SS13": {
+      "campaign": {
+        "v104": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 245,
+            "reason": "native_game_over"
+          }
+        ],
+        "v109": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 143,
+            "reason": null
+          },
+          {
+            "level": 2,
+            "won": true,
+            "actions": 36,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "firstDivergence": {
+          "action": 8,
+          "fromHash": "ce622fa1f3f7d511",
+          "baseline": {
+            "command": 2,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 5,
+            "family": "sic_test_prepared_effects",
+            "purpose": "test_whether_a_public_image_predicts_the_landing"
+          }
+        },
+        "initial": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360",
+        "final": "067812d339b78a00caaad721975ef2aa30ba0295778fea2f12412e3d9fa3c4c3",
+        "commandDigest": "690f060a6199e9602e9e619073a59da4cd27011ff1df29595843a0f5ec77982c",
+        "v104Digest": "2f034b96881e51cc6051f104513c8fc73be349cb835da7f49267f01fc0815244",
+        "events": {
+          "1": {
+            "firstByPurpose": {
+              "test_whether_a_public_image_predicts_the_landing": 8,
+              "measure_a_direction_for_the_two_registered_subjects": 9,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 12,
+              "continue_a_verified_change_of_relative_positions": 13
+            },
+            "firstWithPriorLevelEvidence": null
+          },
+          "2": {
+            "firstByPurpose": {
+              "reidentify_the_partner_of_a_previously_verified_projection": 1,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 2,
+              "continue_a_verified_change_of_relative_positions": 3
+            },
+            "firstWithPriorLevelEvidence": {
+              "action": 1,
+              "ref": "sra-v6-f4abc304-c136-434f-895d-d56827032d7c:epoch:2:revision:144:frame:30ee2eda47dd3bc4",
+              "purpose": "reidentify_the_partner_of_a_previously_verified_projection"
+            }
+          }
+        }
+      },
+      "cold": {
+        "v104": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 117,
+            "reason": "native_game_over"
+          }
+        ],
+        "v109": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 61,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "firstDivergence": {
+          "action": 2,
+          "fromHash": "c24608de5ce9b253",
+          "baseline": {
+            "command": 1,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 5,
+            "family": "sic_test_prepared_effects",
+            "purpose": "test_whether_a_public_image_predicts_the_landing"
+          }
+        },
+        "initial": "30ee2eda47dd3bc4abd0d90256dca3c7674d870bef28397243cff4132c05431c",
+        "final": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360",
+        "commandDigest": "631ceaaf7fe0a6d9a818bb1207bcb87eb1577a54e7f4f82f02cf6e1b23c36a17",
+        "v104Digest": "d40fc849e55abfcaf7f32531f0fd7c09c86fc8a520f201d74f4b9b32c537c744",
+        "events": {
+          "2": {
+            "firstByPurpose": {
+              "test_whether_a_public_image_predicts_the_landing": 2,
+              "measure_a_direction_for_the_two_registered_subjects": 3,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 7,
+              "continue_a_verified_change_of_relative_positions": 8
+            },
+            "firstWithPriorLevelEvidence": null
+          }
+        }
+      },
+      "coldAndCampaignL2StartWithSamePublicImage": true,
+      "secondL2Decision": {
+        "purpose": "prepare_a_configuration_that_opens_a_route_for_both_subjects",
+        "priorLevelObservationRevisions": [
+          141,
+          142,
+          143
+        ]
+      },
+      "disableRoomLesson": {
+        "sameFirstLevelActionsAndFrames": true,
+        "scores": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 143,
+            "reason": null
+          },
+          {
+            "level": 2,
+            "won": false,
+            "actions": 99,
+            "reason": "native_game_over"
+          }
+        ],
+        "commandDigest": "48b538af212371805346dc2f336b48b2156c98ac7f1af33b26f8456112c3671d",
+        "firstDivergenceL2": {
+          "action": 1,
+          "fromHash": "30ee2eda47dd3bc4",
+          "baseline": {
+            "command": 2,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 6,
+            "point": {
+              "x": 21,
+              "y": 30
+            },
+            "family": "sic_test_prepared_effects",
+            "purpose": "reidentify_the_partner_of_a_previously_verified_projection"
+          }
+        },
+        "commonL2Initial": "30ee2eda47dd3bc4",
+        "candidateFirstL2LessonRef": {
+          "action": 1,
+          "ref": "sra-v6-f4abc304-c136-434f-895d-d56827032d7c:epoch:2:revision:144:frame:30ee2eda47dd3bc4",
+          "purpose": "reidentify_the_partner_of_a_previously_verified_projection"
+        }
+      }
+    },
+    "SS14": {
+      "campaign": {
+        "v104": [
+          {
+            "level": 1,
+            "won": false,
+            "actions": 30,
+            "reason": "native_game_over"
+          }
+        ],
+        "v109": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 31,
+            "reason": null
+          },
+          {
+            "level": 2,
+            "won": true,
+            "actions": 52,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "firstDivergence": {
+          "action": 14,
+          "fromHash": "f2386451955cf911",
+          "baseline": {
+            "command": 4,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 2,
+            "family": "sic_test_prepared_effects",
+            "purpose": "measure_a_direction_for_the_two_registered_subjects"
+          }
+        },
+        "initial": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+        "final": "297687195c2909d31769261008dbc138b4051070894d5542016c74a4b3a83280",
+        "commandDigest": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3",
+        "v104Digest": "02b27afa3b8b53b6ff5df9ca89e1aeaca3bd360906ffd2d903a89ff83571a21a",
+        "events": {
+          "1": {
+            "firstByPurpose": {
+              "measure_a_direction_for_the_two_registered_subjects": 14,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 15,
+              "continue_a_verified_change_of_relative_positions": 16,
+              "test_whether_a_public_image_predicts_the_landing": 17
+            },
+            "firstWithPriorLevelEvidence": null
+          },
+          "2": {
+            "firstByPurpose": {
+              "retest_the_scope_of_the_other_subject_in_a_new_room": 1,
+              "transport_a_matching_arrangement_onto_multiple_controls": 2,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 5,
+              "continue_a_verified_change_of_relative_positions": 6
+            },
+            "firstWithPriorLevelEvidence": {
+              "action": 1,
+              "ref": "sra-v6-453eafd0-cbdb-4338-a6b4-84b14711b601:epoch:2:revision:32:frame:a2391a1a358795c6",
+              "purpose": "retest_the_scope_of_the_other_subject_in_a_new_room"
+            }
+          }
+        }
+      },
+      "cold": {
+        "v104": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 350,
+            "reason": "session_action_budget"
+          }
+        ],
+        "v109": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 97,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "firstDivergence": {
+          "action": 3,
+          "fromHash": "90a2db6200c8ca8e",
+          "baseline": {
+            "command": 1,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 2,
+            "family": "sic_test_prepared_effects",
+            "purpose": "measure_a_direction_for_the_two_registered_subjects"
+          }
+        },
+        "initial": "a2391a1a358795c6b182ec9cb5117c9ab118c3f97d72de009093cf989c4daaff",
+        "final": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+        "commandDigest": "6b534339670c12027454d17f9ffb4c20db21aff3538be343f0e2a51d1b3acd04",
+        "v104Digest": "68c7b11bda2e154fddb9c91c7b64ebde38440a099290ff325db8fb952d573547",
+        "events": {
+          "2": {
+            "firstByPurpose": {
+              "measure_a_direction_for_the_two_registered_subjects": 3,
+              "transport_a_matching_arrangement_onto_multiple_controls": 6,
+              "prepare_a_configuration_that_opens_a_route_for_both_subjects": 10,
+              "continue_a_verified_change_of_relative_positions": 13
+            },
+            "firstWithPriorLevelEvidence": null
+          }
+        }
+      },
+      "coldAndCampaignL2StartWithSamePublicImage": true,
+      "secondL2Decision": {
+        "purpose": "transport_a_matching_arrangement_onto_multiple_controls",
+        "priorLevelObservationRevisions": [
+          24,
+          25,
+          31
+        ]
+      },
+      "disableRoomLesson": {
+        "sameFirstLevelActionsAndFrames": true,
+        "scores": [
+          {
+            "level": 1,
+            "won": true,
+            "actions": 31,
+            "reason": null
+          },
+          {
+            "level": 2,
+            "won": true,
+            "actions": 99,
+            "reason": "target_levels_completed"
+          }
+        ],
+        "commandDigest": "dd5acb4cc6e94b7b8ca855031a14c65d206a91dc22176af7836aacd2a91a2ad1",
+        "firstDivergenceL2": {
+          "action": 1,
+          "fromHash": "a2391a1a358795c6",
+          "baseline": {
+            "command": 2,
+            "family": "sic_test_prepared_effects"
+          },
+          "candidate": {
+            "command": 6,
+            "point": {
+              "x": 9,
+              "y": 27
+            },
+            "family": "sic_test_prepared_effects",
+            "purpose": "retest_the_scope_of_the_other_subject_in_a_new_room"
+          }
+        },
+        "commonL2Initial": "a2391a1a358795c6",
+        "candidateFirstL2LessonRef": {
+          "action": 1,
+          "ref": "sra-v6-453eafd0-cbdb-4338-a6b4-84b14711b601:epoch:2:revision:32:frame:a2391a1a358795c6",
+          "purpose": "retest_the_scope_of_the_other_subject_in_a_new_room"
+        }
+      }
+    }
+  },
+  "guards": [
+    {
+      "game": "SS01",
+      "start": 1,
+      "cap": 100,
+      "score": [
+        {
+          "level": 1,
+          "actions": 36,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+    },
+    {
+      "game": "SS02",
+      "start": 1,
+      "cap": 100,
+      "score": [
+        {
+          "level": 1,
+          "actions": 40,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 46,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7"
+    },
+    {
+      "game": "SS03",
+      "start": 1,
+      "cap": 250,
+      "score": [
+        {
+          "level": 1,
+          "actions": 47,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 97,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17"
+    },
+    {
+      "game": "SS04",
+      "start": 1,
+      "cap": 300,
+      "score": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 143,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f"
+    },
+    {
+      "game": "SS05",
+      "start": 1,
+      "cap": 170,
+      "score": [
+        {
+          "level": 1,
+          "actions": 44,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 73,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57"
+    },
+    {
+      "game": "SS06",
+      "start": 2,
+      "cap": 54,
+      "score": [
+        {
+          "level": 2,
+          "actions": 54,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867"
+    },
+    {
+      "game": "SS07",
+      "start": 2,
+      "cap": 117,
+      "score": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+    },
+    {
+      "game": "SS08",
+      "start": 2,
+      "cap": 70,
+      "score": [
+        {
+          "level": 2,
+          "actions": 70,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5"
+    },
+    {
+      "game": "SS09",
+      "start": 2,
+      "cap": 100,
+      "score": [
+        {
+          "level": 2,
+          "actions": 54,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "ed31545661974f783bee0caa881aef07f49abe5dc35b880110006c3d448354c2"
+    },
+    {
+      "game": "SS10",
+      "start": 2,
+      "cap": 290,
+      "score": [
+        {
+          "level": 2,
+          "actions": 227,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "5870e0610e90418a0c9427a051ceb2688dca13119cc0f084be8bfba4fa7bec52"
+    },
+    {
+      "game": "SS11",
+      "start": 2,
+      "cap": 80,
+      "score": [
+        {
+          "level": 2,
+          "actions": 35,
+          "won": true
+        }
+      ],
+      "identicalCommands": true,
+      "identicalFinal": true,
+      "digest": "9d7480f53b585f6249ef83a07c186cb68651f04d915aaa04c7b5d7f838bc6604"
+    }
+  ],
+  "additionalHistoricalColdWins": [
+    {
+      "code": "SS01",
+      "score": [
+        {
+          "level": 2,
+          "actions": 44,
+          "won": true
+        }
+      ],
+      "cap": 250,
+      "identicalCommands": true,
+      "digest": "f035bc6d4a3771e4fc13ad6fea261ba29bc8b50f6232fe35c8292e5666d238b8"
+    },
+    {
+      "code": "SS04",
+      "score": [
+        {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        }
+      ],
+      "cap": 250,
+      "identicalCommands": true,
+      "digest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705"
+    }
+  ],
+  "upperSources": [
+    {
+      "code": "CWSE",
+      "level": 2,
+      "cap": 120,
+      "actions": 59,
+      "trajectory": "770f97af2383d04f84df78c66d022f6c54364dacbd6f9d4df190e3281f91c4c1"
+    },
+    {
+      "code": "KLOT",
+      "level": 4,
+      "cap": 120,
+      "actions": 37,
+      "trajectory": "8423439c3e1ca032ab7b5290696e17d4245a53f259eec5f493ebba9c6714848c"
+    }
+  ],
+  "sources": {
+    "count": 100,
+    "won": 100,
+    "identicalTrajectories": 100,
+    "changed": [],
+    "v104Aggregate": "11a6c6e6b5ee184bd5ea918ac6fb64caad280bc86da1642911479f7bb333c176",
+    "v109Aggregate": "11a6c6e6b5ee184bd5ea918ac6fb64caad280bc86da1642911479f7bb333c176",
+    "actions": 1550
+  }
+}
