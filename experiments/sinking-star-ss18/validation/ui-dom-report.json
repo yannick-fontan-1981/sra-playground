@@ -1,9 +1,9 @@
 {
   "success": true,
-  "htmlSha256": "bad6cb6b6ae58b4aebaca1bb5205f9e229b3b6817fb5665e5f2eb10d79522f33",
+  "htmlSha256": "22f05c589dbca0bb2292afd59b3f0d76a92b3c85547c544fee100e8982984f27",
   "scope": "focused-ui-and-full-campaign",
-  "tutorialLevel": 1,
-  "pedagogicalFixtureLevel": 1,
+  "tutorialLevel": 3,
+  "pedagogicalFixtureLevel": 3,
   "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
   "visualBrowserTest": false,
   "checks": [
@@ -13,12 +13,12 @@
     "Gray-backed buttons and black/gray press centers have the exact expected pixels.",
     "Mirror warnings flash only involved backs, preserve diagonals and lock ordinary controls.",
     "Keys 1/2/3, repeated Tab, all three role buttons and image clicks select correctly without advancing the world; Shift+Tab and off-canvas clicks are respected.",
-    "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries and Restart opens the actual tutorial.",
+    "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries in the current room; Restart returns to level 1 with its tutorial hidden.",
     "Reduced-motion mode paints the final result without timer waits.",
     "Defeat appears only after the combat animation and its Undo restores the three living heroes.",
     "Victory waits for all three heroes and the last frame, disables ordinary controls, and can be undone or restarted.",
-    "All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; only level 1 shows the tutorial.",
-    "The actual workshop route earns every discovery from displayed public pixels; later rooms add none.",
+    "All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; the choir opens at level 1 and only the garden at level 3 shows the tutorial.",
+    "The actual garden route at level 3 earns all 27 discoveries from displayed public pixels; other rooms add none.",
     "The compiled HTML completes all eight real rooms with every frame and duration checked, including Undo and replay of each completion."
   ],
   "roleCoverage": [
@@ -338,8 +338,8 @@
   "campaignCoverage": [
     {
       "level": 1,
-      "title": "Le jardin des trois issues",
-      "actions": 111,
+      "title": "Les trois pièces du chœur",
+      "actions": 66,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
@@ -352,8 +352,8 @@
     },
     {
       "level": 3,
-      "title": "Les trois pièces du chœur",
-      "actions": 66,
+      "title": "Le jardin des trois issues",
+      "actions": 111,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
@@ -394,7 +394,7 @@
     }
   ],
   "tutorialCoverage": {
-    "level": 1,
+    "level": 3,
     "actions": 111,
     "discoveries": [
       "select",

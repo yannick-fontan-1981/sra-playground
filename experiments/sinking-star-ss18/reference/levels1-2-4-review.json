@@ -1,7 +1,56 @@
 {
   "success": true,
-  "scope": "Rejeux et contre-branches locales des niveaux 2 à 4 ; aucune optimalité ou unicité revendiquée.",
+  "scope": "Rejeux et contre-branches locales des niveaux 1, 2 et 4 ; aucune optimalité ou unicité revendiquée.",
   "levels": [
+    {
+      "level": 1,
+      "title": "Les trois pièces du chœur",
+      "actions": 66,
+      "moves": 56,
+      "metrics": {
+        "actions": 66,
+        "selections": 10,
+        "merchantPushes": 3,
+        "songs": 5,
+        "groupSongs": 3,
+        "songHeroMoves": 1,
+        "songStoneMoves": 9,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 3,
+        "partnerSwaps": 1,
+        "stoneSwaps": 2,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 13,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "goals": [
+        {
+          "x": 6,
+          "y": 2
+        },
+        {
+          "x": 17,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 17
+        }
+      ]
+    },
     {
       "level": 2,
       "title": "Le carrefour à contretemps",
@@ -47,55 +96,6 @@
         },
         {
           "x": 11,
-          "y": 17
-        }
-      ]
-    },
-    {
-      "level": 3,
-      "title": "Les trois pièces du chœur",
-      "actions": 66,
-      "moves": 56,
-      "metrics": {
-        "actions": 66,
-        "selections": 10,
-        "merchantPushes": 3,
-        "songs": 5,
-        "groupSongs": 3,
-        "songHeroMoves": 1,
-        "songStoneMoves": 9,
-        "songMonsterMoves": 0,
-        "supportMoves": 0,
-        "swaps": 3,
-        "partnerSwaps": 1,
-        "stoneSwaps": 2,
-        "monsterSwaps": 0,
-        "bentSwaps": 0,
-        "multiMirrorSwaps": 0,
-        "swapReflections": 0,
-        "swapLoops": 0,
-        "partnerMoves": 2,
-        "stoneMoves": 13,
-        "mirrorMoves": 0,
-        "reflections": 0,
-        "heroReflections": 0,
-        "pistonPushes": 0,
-        "platformsCreated": 0,
-        "monstersRemoved": 0,
-        "blocked": 0,
-        "deaths": 0
-      },
-      "goals": [
-        {
-          "x": 6,
-          "y": 2
-        },
-        {
-          "x": 17,
-          "y": 10
-        },
-        {
-          "x": 6,
           "y": 17
         }
       ]
@@ -172,14 +172,14 @@
       "observed": "Une presse se ferme et transporte le Magicien dans la case libérée par l’autre."
     },
     {
-      "level": 3,
+      "level": 1,
       "name": "Départ volontaire du Barde",
       "passed": true,
       "commands": "CCLLLCCRRULLCCRRDDLURULDDLLUCCR",
       "observed": "Les deux accès verticaux se remplissent de caisses ; aucun verrou ajouté ne produit cette contrainte."
     },
     {
-      "level": 3,
+      "level": 1,
       "name": "Extraction par poussée du Marchand",
       "passed": true,
       "turn": 29,

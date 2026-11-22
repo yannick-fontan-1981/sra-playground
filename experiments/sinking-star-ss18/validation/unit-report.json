@@ -9,5 +9,7 @@
   "tutorialRegressions": 6,
   "node": "24.22.3",
   "typescript": "5.9.3",
-  "happyDom": "21.0.4"
+  "happyDom": "21.0.4",
+  "version": "0.1.1",
+  "qualificationDate": "2026-11-22"
 }

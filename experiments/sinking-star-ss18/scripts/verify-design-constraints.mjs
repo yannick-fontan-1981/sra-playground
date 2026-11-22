@@ -84,7 +84,7 @@ try{
   }
   report.levels.push({level:index+1,title:spec.title,mapSha256:hash(spec),terrainSha256:terrainHash,goals:world.goals,landCells:world.terrain.filter(c=>c==='.').length,waterCells:world.terrain.filter(c=>c==='~').length,walking,generousWalking,maximumFrozenWalkingGoalAssignment:matching,buttonsAndPressesSeparate:true,exactHistoricalTerrainRepeats:repeats,localChecks:local});
  }
- for(const script of ['review-level1.mjs','review-levels2-4.mjs','review-final-levels.mjs','audit-early-levels.mjs','audit-final-levels.mjs']){
+ for(const script of ['review-level3.mjs','review-levels1-2-4.mjs','review-final-levels.mjs','audit-early-levels.mjs','audit-final-levels.mjs']){
   const path=new URL('../reference/author/'+script,import.meta.url);assert.ok(existsSync(path),'Missing required review: '+script);
   const output=execFileSync(process.execPath,[fileURLToPath(path)],{encoding:'utf8',maxBuffer:4*1024*1024});
   const result=JSON.parse(output);assert.ok(result.success!==false,script+': failed review');

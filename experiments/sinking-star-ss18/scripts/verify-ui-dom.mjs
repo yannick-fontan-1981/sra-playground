@@ -221,7 +221,7 @@ const checkMirrorInterference=async()=>{
 };
 let h;
 try{
- assert.equal(TUTORIAL_LEVEL,1);assert.ok(lessonIds.length>=18);assert.equal(new Set(lessonIds).size,lessonIds.length);
+ assert.equal(TUTORIAL_LEVEL,3);assert.equal(lessonIds.length,27);assert.equal(new Set(lessonIds).size,lessonIds.length);
  assert.match(html,/SS18.*La Galerie Résonante/);assert.ok(!/Guerrier|warrior|Voleur|thief|Forteresse Rose/.test(html.split('<script>')[0]));
  assert.equal((html.match(/data-lesson=/g)??[]).length,lessonIds.length);assert.equal(/<script[^>]+src=/.test(html),false);
  for(const role of Object.keys(roleColors))assert.equal((html.match(new RegExp(`data-hero="${role}"`,'g'))??[]).length,1);
@@ -240,29 +240,29 @@ try{
   assert.equal(h.$('moves').textContent,moves);assert.equal(h.key('Tab',{shiftKey:true}),true);h.click({x:-1,y:10});h.click({x:64,y:10});h.equal(h.ref.observe());
   h.$('level').dispatchEvent(new h.window.KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));h.equal(h.ref.observe());
   report.checks.push('Keys 1/2/3, repeated Tab, all three role buttons and image clicks select correctly without advancing the world; Shift+Tab and off-canvas clicks are respected.');
-  await h.reset('restart');h.key('ArrowRight');const moving=h.ref.action(4),count=h.$('moves').textContent;assert.equal(h.board.dataset.busy,'true');h.key('ArrowDown');h.key('Tab');h.key('3');h.key(' ');assert.equal(h.$('moves').textContent,count);await h.settled(moving);
+  await h.reset('reset');h.key('ArrowRight');const moving=h.ref.action(4),count=h.$('moves').textContent;assert.equal(h.board.dataset.busy,'true');h.key('ArrowDown');h.key('Tab');h.key('3');h.key(' ');assert.equal(h.$('moves').textContent,count);await h.settled(moving);
   const discoveries=h.learned();await h.reset('undo');assert.deepEqual(h.learned(),discoveries,'Undo retains learned observations');
   h.key('ArrowRight');h.ref.action(4);h.$('undo').click();const undone=h.ref.undo(),stopped=h.captures.length;await h.settled(undone);assert.equal(h.captures.length,stopped,'Cancelled animation cannot repaint old pixels');
-  h.key('ArrowRight');h.ref.action(4);await h.reset('reset');assert.equal(h.$('moves').textContent,'0 actions');assert.ok(Object.values(h.learned()).every(v=>!v));assert.equal(h.board.dataset.level,'1');
-  h.key('ArrowRight');h.ref.action(4);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,false);
-  h.key('ArrowRight');h.ref.action(4);await h.choose(SS18_LEVELS.length);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,false);
-  h.window.document.querySelector('[data-action="4"]').click();await h.settled(h.ref.action(4));
-  report.checks.push('Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries and Restart opens the actual tutorial.');
+  h.key('ArrowRight');h.ref.action(4);await h.reset('reset');assert.equal(h.$('moves').textContent,'0 actions');assert.ok(Object.values(h.learned()).every(v=>!v));assert.equal(h.board.dataset.level,String(TUTORIAL_LEVEL));assert.equal(h.$('tutorial').hidden,false);
+  h.key('ArrowRight');h.ref.action(4);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);
+  await h.choose(TUTORIAL_LEVEL);h.key('ArrowRight');h.ref.action(4);await h.choose(SS18_LEVELS.length);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);
+  await h.choose(TUTORIAL_LEVEL);h.window.document.querySelector('[data-action="4"]').click();await h.settled(h.ref.action(4));
+  report.checks.push('Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries in the current room; Restart returns to level 1 with its tutorial hidden.');
   await h.close();h=undefined;
   const reduced=createHarness(spec,{reducedMotion:true});try{reduced.key('ArrowRight');const next=reduced.ref.action(4);reduced.equal(next);assert.equal(reduced.board.dataset.busy,'false');assert.equal(reduced.waits.length,0);report.checks.push('Reduced-motion mode paints the final result without timer waits.');}finally{await reduced.close();}
   const fatal=makeArena('terminal combat',[[6,4,'M'],[6,6,'m'],[7,6,'m']]);h=createHarness(fatal);h.key('ArrowDown');const dead=h.ref.action(2);assert.equal(dead.state,'GAME_OVER');assert.equal(h.$('defeat').hidden,true);await h.advance();assert.equal(h.$('defeat').hidden,true);await h.settled(dead);assert.equal(h.$('defeat').hidden,false);h.$('undo-defeat').click();await h.settled(h.ref.undo());assert.equal(h.$('defeat').hidden,true);report.checks.push('Defeat appears only after the combat animation and its Undo restores the three living heroes.');await h.close();h=undefined;
   const win=makeArena('terminal victory',[],{goals:[[3,2],[3,6],[3,10]]});h=createHarness(win,{single:true});assert.equal(h.ref.observe().levelCount,1);await h.action(4);await h.action({id:6,data:heroData(h.ref.observe(),'bard')});await h.action(4);await h.action({id:6,data:heroData(h.ref.observe(),'wizard')});h.key('ArrowRight');const won=h.ref.action(4);assert.equal(won.state,'WIN');assert.equal(h.$('victory').hidden,true);await h.settled(won);assert.equal(h.$('victory').hidden,false);assert.ok([...h.window.document.querySelectorAll('[data-action],[data-hero]')].every(e=>e.disabled));await h.reset('undo');assert.equal(h.$('victory').hidden,true);await h.reset('restart');report.checks.push('Victory waits for all three heroes and the last frame, disables ordinary controls, and can be undone or restarted.');await h.close();h=undefined;
  }
  if(!fixturesOnly){
-  assert.equal(SS18_LEVELS.length,8);h=createHarness();assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,false);
+  assert.equal(SS18_LEVELS.length,8);assert.equal(SS18_LEVELS[0].title,'Les trois pièces du chœur');assert.equal(SS18_LEVELS[TUTORIAL_LEVEL-1].title,'Le jardin des trois issues');h=createHarness();assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);
   for(let level=1;level<=SS18_LEVELS.length;level++){
    await h.choose(level);const initial=h.ref.observe();assert.deepEqual(heroes(initial.frame).map(p=>p.color).sort((a,b)=>a-b),[6,12,15]);assert.equal(goalCount(initial.frame),3);assert.equal(h.$('tutorial').hidden,level!==TUTORIAL_LEVEL);assert.equal(h.$('piston-help').hidden,!LEVEL_INFO[level-1].piston);assert.equal(h.$('level-title').textContent,SS18_LEVELS[level-1].title);assert.equal(h.$('source-label').textContent,LEVEL_INFO[level-1].label);assert.equal(h.$('level-objective').textContent,LEVEL_INFO[level-1].objective);
    assert.equal(h.$('source-link').hidden,!LEVEL_INFO[level-1].url);if(LEVEL_INFO[level-1].url)assert.equal(h.$('source-link').href,new URL(LEVEL_INFO[level-1].url).href);assert.equal(h.$('source-link-secondary').hidden,!LEVEL_INFO[level-1].secondary);if(LEVEL_INFO[level-1].secondary)assert.equal(h.$('source-link-secondary').href,new URL(LEVEL_INFO[level-1].secondary.url).href);
    const platforms=!!SS18_LEVELS[level-1].platforms?.length;for(const id of ['platform-help','platform-legend-active','platform-legend-inactive'])assert.equal(h.$(id).hidden,!platforms);
    if(SS18_LEVELS[level-1].rows.some(r=>r.includes('m'))){assert.equal(h.$('monster-help').hidden,false);assert.equal(h.$('monster-help').open,true);h.$('monster-help').open=false;await h.action({id:6,data:heroData(initial,'bard')});assert.equal(h.$('monster-help').open,false,'Help respects a manual collapse in the current room');}
   }
-  assert.deepEqual(h.errors,[]);report.checks.push('All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; only level 1 shows the tutorial.');await h.close();h=undefined;
-  h=createHarness();report.campaignCoverage=[];const replayLevels=tutorialOnly?[TUTORIAL_LEVEL]:Array.from({length:SS18_LEVELS.length},(_,i)=>i+1);
+  assert.deepEqual(h.errors,[]);report.checks.push('All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; the choir opens at level 1 and only the garden at level 3 shows the tutorial.');await h.close();h=undefined;
+  h=createHarness();report.campaignCoverage=[];const replayLevels=tutorialOnly?[TUTORIAL_LEVEL]:Array.from({length:SS18_LEVELS.length},(_,i)=>i+1);if(tutorialOnly)await h.choose(TUTORIAL_LEVEL);
   for(const level of replayLevels){
    const path=resolve(root,`reference/level${level}-design.json`);assert.ok(existsSync(path));const design=JSON.parse(readFileSync(path,'utf8'));assert.deepEqual(design.spec,SS18_LEVELS[level-1]);assert.equal(h.ref.observe().level,level);const completedBefore=h.ref.observe().levelsCompleted;let beforeLast;
    for(const action of design.actions){beforeLast=h.ref.observe();const discoveries=h.learned();await h.action(action);assert.equal(h.$('tutorial').hidden,h.ref.observe().level!==TUTORIAL_LEVEL);if(level!==TUTORIAL_LEVEL)assert.deepEqual(h.learned(),discoveries,'Only the actual tutorial awards discoveries');}
@@ -270,7 +270,7 @@ try{
    if(level===TUTORIAL_LEVEL){for(const id of lessonIds)assert.equal(h.learned()[id],true,'Real tutorial acquisition: '+id);report.tutorialCoverage={level:TUTORIAL_LEVEL,actions:design.actions.length,discoveries:[...lessonIds],onlyTutorialRoomAwardsDiscoveries:true};}
    const completed=h.ref.observe();await h.reset('undo');h.equal(beforeLast);assert.equal(h.$('victory').hidden,true);assert.equal(h.$('tutorial').hidden,level!==TUTORIAL_LEVEL);await h.action(design.actions.at(-1));assert.deepEqual(h.ref.observe(),completed);assert.deepEqual(h.errors,[]);report.campaignCoverage.push({level,title:design.spec.title,actions:design.actions.length,exactPixelsAndTiming:true,completionUndo:true});
   }
-  report.checks.push('The actual workshop route earns every discovery from displayed public pixels; later rooms add none.');if(!tutorialOnly){assert.equal(h.ref.observe().state,'WIN');assert.equal(h.$('victory').hidden,false);report.checks.push('The compiled HTML completes all eight real rooms with every frame and duration checked, including Undo and replay of each completion.');}
+  report.checks.push('The actual garden route at level 3 earns all 27 discoveries from displayed public pixels; other rooms add none.');if(!tutorialOnly){assert.equal(h.ref.observe().state,'WIN');assert.equal(h.$('victory').hidden,false);report.checks.push('The compiled HTML completes all eight real rooms with every frame and duration checked, including Undo and replay of each completion.');}
  }
  report.success=true;
 }catch(error){report.error=error.stack;process.exitCode=1;}

@@ -1,12 +1,12 @@
 {
   "game": "SS18",
   "title": "La Galerie Résonante",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "qualificationDate": "2026-11-22",
   "artifact": "SS18-demo.html",
-  "bytes": 141684,
-  "sha256": "bad6cb6b6ae58b4aebaca1bb5205f9e229b3b6817fb5665e5f2eb10d79522f33",
-  "sourceBranch": "feat/sinking-star-ss18-20261122",
+  "bytes": 141691,
+  "sha256": "22f05c589dbca0bb2292afd59b3f0d76a92b3c85547c544fee100e8982984f27",
+  "sourceBranch": "fix/sinking-star-ss18-level-order-20261122",
   "sourceRepository": "yannick-fontan-1981/sra-playground",
   "laboratory": "experiments/sinking-star-ss18",
   "heroes": [
@@ -36,5 +36,17 @@
     "Witnesses prove solvability, not optimality or uniqueness.",
     "Interface review uses Happy DOM and exact raster pixels; native browser review remains separate.",
     "No autonomous SRA success is claimed."
+  ],
+  "tutorialLevel": 3,
+  "changeSummary": "Permutation des niveaux 1 et 3 ; tutoriel au niveau 3.",
+  "previousLevelOrder": [
+    3,
+    2,
+    1,
+    4,
+    5,
+    6,
+    7,
+    8
   ]
 }

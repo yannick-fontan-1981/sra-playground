@@ -1,4 +1,4 @@
-# Qualification de SS18 0.1.0
+# Qualification de SS18 0.1.1
 
 La qualification porte sur le laboratoire autonome et son HTML compilé. Elle utilise les parcours d’auteur, les observations publiques, les interactions DOM et des contre-branches locales. Elle ne certifie ni une solution minimale, ni l’unicité, ni une réussite autonome de SRA.
 
@@ -10,7 +10,7 @@ La qualification porte sur le laboratoire autonome et son HTML compilé. Elle ut
 | Tests du moteur et de la session | 50 réussis |
 | Régressions du suivi pédagogique public | 6 réussies |
 | Campagne | 8 témoins gagnants, aucun refus, aucune mort |
-| Tutoriel N1 | 27 découvertes sur 27, démontrées dans les images publiques |
+| Tutoriel N3 | 27 découvertes sur 27, démontrées dans les images publiques |
 | Interface livrée | Huit témoins rejoués dans le HTML compilé par clavier et commandes |
 | Images et temps | 1 988 images de campagne, comparaison exacte des pixels et durées |
 | Undo | Fin de chacune des huit salles annulée puis rejouée |
@@ -20,7 +20,7 @@ La qualification porte sur le laboratoire autonome et son HTML compilé. Elle ut
 
 Empreinte SHA-256 du HTML qualifié :
 
-`bad6cb6b6ae58b4aebaca1bb5205f9e229b3b6817fb5665e5f2eb10d79522f33`
+`22f05c589dbca0bb2292afd59b3f0d76a92b3c85547c544fee100e8982984f27`
 
 Le rapport `validation/delivery.json` associe cette empreinte au fichier livré. `dist/` est un résultat de construction ignoré par Git ; le code nécessaire à sa reproduction est conservé dans le dépôt.
 
@@ -30,9 +30,9 @@ Le départ est le niveau 1, mode trio Marchand / Magicien / Barde. Les entrées 
 
 | Niveau | Entrées | Sélections | Coups | Images |
 | --- | ---: | ---: | ---: | ---: |
-| 1 | 111 | 17 | 94 | 315 |
+| 1 | 66 | 10 | 56 | 179 |
 | 2 | 87 | 5 | 82 | 259 |
-| 3 | 66 | 10 | 56 | 179 |
+| 3 | 111 | 17 | 94 | 315 |
 | 4 | 86 | 8 | 78 | 247 |
 | 5 | 93 | 10 | 83 | 266 |
 | 6 | 58 | 12 | 46 | 161 |
@@ -48,7 +48,7 @@ Les parcours réalisent notamment 31 poussées du Marchand, 44 pas de chant, 11 
 
 `npm test` compile puis exécute les 56 tests. Les cas du moteur couvrent poussée unique, refus de file, partenaires sans activation passive, groupe du Barde, diagonales et cloisons, ancrages des appuis, visées coudées et boucles, première cible, conflits atomiques, commandes à plusieurs poids, hydraulique, presses, combat et sélection des trois identités.
 
-Les six régressions pédagogiques vérifient notamment qu’un échange du Marchand ne compte pas comme extraction du Barde, qu’un appui glissant n’est pas considéré comme nouvellement créé, qu’un Barde bloqué n’enseigne pas un chant, qu’une poussée du Barde n’invente pas une capacité passive et qu’aucune découverte n’est accordée hors du niveau 1.
+Les six régressions pédagogiques vérifient notamment qu’un échange du Marchand ne compte pas comme extraction du Barde, qu’un appui glissant n’est pas considéré comme nouvellement créé, qu’un Barde bloqué n’enseigne pas un chant, qu’une poussée du Barde n’invente pas une capacité passive et qu’aucune découverte n’est accordée hors du niveau 3.
 
 ### Campagne et contrat public
 
@@ -72,10 +72,10 @@ Cette qualification ne calcule pas la mise en page CSS comme un navigateur natif
 
 Il exécute les cinq scripts :
 
-- `review-level1.mjs` : couverture des 27 découvertes et six expériences locales.
-- `review-levels2-4.mjs` : sept vérifications des commandes, du tri et des départs croisés.
+- `review-level3.mjs` : couverture des 27 découvertes et six expériences locales.
+- `review-levels1-2-4.mjs` : sept vérifications des commandes, du tri et des départs croisés.
 - `review-final-levels.mjs` : treize contre-branches de N5–N8 et variante N7 conservée.
-- `audit-early-levels.mjs` : relecture indépendante de N2–N4, géométrie et autre victoire de N4.
+- `audit-early-levels.mjs` : relecture indépendante de N1, N2 et N4, géométrie et autre victoire de N4.
 - `audit-final-levels.mjs` : relecture indépendante de N5–N8, ressources, risques de raccourcis et variété.
 
 Les variantes N4 en 72 entrées et N7 en 43 entrées restent gagnantes. Aucun verrou invisible n’a été ajouté pour forcer un témoin. Les corrections de N8 sont des cases visibles de la carte. Les graphes figent les ressources et les états de circuit : ils ne constituent pas une recherche exhaustive de toutes les actions conjointes. Les contre-branches prouvent seulement leurs effets dans les positions indiquées.

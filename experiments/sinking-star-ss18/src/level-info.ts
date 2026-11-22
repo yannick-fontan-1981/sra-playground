@@ -1,15 +1,11 @@
 export const LEVEL_INFO=[
   {
-    "piston": true,
+    "piston": false,
     "platform": false,
-    "label": "Adaptation de Heroes 3: Bard, Druid · énigmes 12–13",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/",
-    "puzzle": "12–13",
-    "objective": "Apprendre poussée unique, chant sélectif, échanges et reflets dans une cour à trois issues séparées ; construire, déplacer et ancrer un appui, puis maintenir une relève.",
-    "secondary": {
-      "label": "Heroes and Mirrors · énigmes 1 et 30 · départ sans chant et visée déviée",
-      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/"
-    }
+    "label": "Adaptation · Heroes 3: Bard, Druid · énigme 12",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-12",
+    "puzzle": 12,
+    "objective": "Trier trois pièces qui répondent au même chant, utiliser les butées pour les séparer, puis libérer le Barde et le Magicien sans reboucher les trois accès."
   },
   {
     "piston": true,
@@ -24,12 +20,16 @@ export const LEVEL_INFO=[
     }
   },
   {
-    "piston": false,
+    "piston": true,
     "platform": false,
-    "label": "Adaptation · Heroes 3: Bard, Druid · énigme 12",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-12",
-    "puzzle": 12,
-    "objective": "Trier trois pièces qui répondent au même chant, utiliser les butées pour les séparer, puis libérer le Barde et le Magicien sans reboucher les trois accès."
+    "label": "Adaptation de Heroes 3: Bard, Druid · énigmes 12–13",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/",
+    "puzzle": "12–13",
+    "objective": "Apprendre poussée unique, chant sélectif, échanges et reflets dans une cour à trois issues séparées ; construire, déplacer et ancrer un appui, puis maintenir une relève.",
+    "secondary": {
+      "label": "Heroes and Mirrors · énigmes 1 et 30 · départ sans chant et visée déviée",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/"
+    }
   },
   {
     "piston": true,

@@ -4,28 +4,26 @@
 
 Le trio Marchand / Magicien / Barde possède trois façons différentes de réorganiser une situation : pousser une pièce, échanger deux places, déplacer un voisinage. La campagne ne demande pas d’employer systématiquement les trois capacités dans chaque salle. Certaines salles confient un rôle de poids ou de passager à un partenaire ; d’autres demandent une coordination active des trois pouvoirs.
 
-Les cartes sont originales. Elles adaptent des principes repérés dans les guides du Nord et des zones mixtes, avec les règles déclarées du laboratoire. `source-audit.md` distingue ce que le guide documente de ce que SS18 invente. Une longueur de témoin n’est pas un score de difficulté : le niveau 1 prend le temps de démontrer les leçons, et les autres témoins illustrent des plans légaux sans chercher le minimum.
+Les cartes sont originales. Elles adaptent des principes repérés dans les guides du Nord et des zones mixtes, avec les règles déclarées du laboratoire. `source-audit.md` distingue ce que le guide documente de ce que SS18 invente. Une longueur de témoin n’est pas un score de difficulté : le niveau 3 prend le temps de démontrer les leçons, et les autres témoins illustrent des plans légaux sans chercher le minimum.
 
 | Niveau | Structure | Problème principal |
 | --- | --- | --- |
-| 1 · Le jardin des trois issues | Cour octogonale, piliers et balcons ; sorties nord-ouest, nord-est et sud | Découvrir les trois capacités et les effets forcés en préparant plusieurs accès |
+| 1 · Les trois pièces du chœur | Chambre de tri compacte et trois longues alcôves | Réorganiser des caisses qui constituent elles-mêmes les obstacles |
 | 2 · Le carrefour à contretemps | Cour autour d’un bassin ; sas à l’est | Recaler un contrôleur à distance et utiliser deux presses de polarités opposées |
-| 3 · Les trois pièces du chœur | Chambre de tri compacte et trois longues alcôves | Réorganiser des caisses qui constituent elles-mêmes les obstacles |
+| 3 · Le jardin des trois issues | Cour octogonale, piliers et balcons ; sorties nord-ouest, nord-est et sud | Découvrir les trois capacités et les effets forcés en préparant plusieurs accès |
 | 4 · Personne ne part le premier | Anneau autour d’un îlot captif ; trois postes de départ | Maintenir les accès croisés, puis partir simultanément |
 | 5 · Les gardiens de l’arène | Arène irrégulière, loges et destinations dispersées | Éliminer une paire de monstres tout en conservant deux contrepoids |
 | 6 · Le miroir en tournée | Atelier dans l’eau et trois branches éloignées | Transporter un miroir entre postes puis le retirer de son ancien axe |
 | 7 · La navette des alcôves | Quai latéral, chenal et quatre débarcadères en peigne | Recaler un appui mobile, garer le passager et changer l’axe de la traversée |
 | 8 · La cour au cœur du lac | Grande galerie périphérique, alcôve hydraulique et destinations centrales | Réaffecter trois ressources sans perdre le retour ni le passage final |
 
-Les niveaux 2 et 4 gardent un principe de cour à branches, mais leurs raisonnements diffèrent : alternance d’un sas dans le premier, simultanéité de trois départs dans le second. Le niveau 3 n’a ni bouton, ni porte, ni miroir, ni eau. Le niveau 7 privilégie une géométrie compacte, tandis que le niveau 8 ramène les héros vers le centre. La comparaison géométrique automatisée avec les 32 terrains de SS14–17 détecte les copies exactes après recadrage, rotation ou réflexion ; les relectures indépendantes complètent ce contrôle sans prétendre mesurer toute ressemblance possible.
+Les niveaux 2 et 4 gardent un principe de cour à branches, mais leurs raisonnements diffèrent : alternance d’un sas dans le premier, simultanéité de trois départs dans le second. Le niveau 1 n’a ni bouton, ni porte, ni miroir, ni eau. Le niveau 7 privilégie une géométrie compacte, tandis que le niveau 8 ramène les héros vers le centre. La comparaison géométrique automatisée avec les 32 terrains de SS14–17 détecte les copies exactes après recadrage, rotation ou réflexion ; les relectures indépendantes complètent ce contrôle sans prétendre mesurer toute ressemblance possible.
 
-## 1 — Le jardin des trois issues
+## 1 — Les trois pièces du chœur
 
-La cour expose plusieurs outils dès le départ, mais aucune destination n’est accessible par simple marche dans la géométrie initiale. Trois accès séparés évitent une fin réduite à aligner tout le monde au bas du plateau. Le parcours pédagogique montre 27 découvertes, dont les deux partenaires déplacés sans leur capacité, les visées coudées, les butées de chant, l’appui glissant et son ancrage.
+Trois caisses bouchent trois accès. Le chant les réorganise, mais les butées retiennent certains membres du groupe. Le Marchand corrige une seule pièce puis peut pousser le Barde pour préserver la configuration obtenue. Le Magicien accepte temporairement une position dans un renfoncement et se libère grâce à une cible conservée.
 
-Une commande demande deux poids. Une paire de presses fournit un dépôt distant et envoie un monstre à l’eau dans la même cascade. Une autre issue dépend du dégagement d’un poids optique. Les découvertes restent indépendantes de la victoire : un joueur peut trouver un chemin qui enseigne moins de choses, tandis que le témoin auteur sert à qualifier la couverture pédagogique complète.
-
-Les expériences de `review-level1.mjs` vérifient notamment la poussée refusée d’une file, le refus du chant bloqué, le passage abandonné par un appui déplacé, la fermeture après départ d’un relais et l’effet des deux presses.
+Le contre-essai central est un départ volontaire du Barde : il est légal mais ramène des caisses dans deux accès. Cette observation justifie l’intérêt d’un déplacement forcé, sans affirmer qu’aucune réorganisation alternative ne permet de réparer la situation. Les trois alcôves dessinent une salle plus dépouillée que les chantiers à circuits des autres niveaux.
 
 ## 2 — Le carrefour à contretemps
 
@@ -33,11 +31,13 @@ Le contrôleur réfléchi sert d’abord à libérer le Marchand, puis change d�
 
 Le principe vient de la commande à distance de Mirrors 16. La géométrie autour du bassin, les trois héros et le sas sont une construction SS18. La revue rejoue les bascules et l’arrivée forcée à travers l’interface logique.
 
-## 3 — Les trois pièces du chœur
+## 3 — Le jardin des trois issues
 
-Trois caisses bouchent trois accès. Le chant les réorganise, mais les butées retiennent certains membres du groupe. Le Marchand corrige une seule pièce puis peut pousser le Barde pour préserver la configuration obtenue. Le Magicien accepte temporairement une position dans un renfoncement et se libère grâce à une cible conservée.
+La cour expose plusieurs outils dès le départ, mais aucune destination n’est accessible par simple marche dans la géométrie initiale. Trois accès séparés évitent une fin réduite à aligner tout le monde au bas du plateau. Le parcours pédagogique montre 27 découvertes, dont les deux partenaires déplacés sans leur capacité, les visées coudées, les butées de chant, l’appui glissant et son ancrage.
 
-Le contre-essai central est un départ volontaire du Barde : il est légal mais ramène des caisses dans deux accès. Cette observation justifie l’intérêt d’un déplacement forcé, sans affirmer qu’aucune réorganisation alternative ne permet de réparer la situation. Les trois alcôves dessinent une salle plus dépouillée que les chantiers à circuits des autres niveaux.
+Une commande demande deux poids. Une paire de presses fournit un dépôt distant et envoie un monstre à l’eau dans la même cascade. Une autre issue dépend du dégagement d’un poids optique. Les découvertes restent indépendantes de la victoire : un joueur peut trouver un chemin qui enseigne moins de choses, tandis que le témoin auteur sert à qualifier la couverture pédagogique complète.
+
+Les expériences de `review-level3.mjs` vérifient notamment la poussée refusée d’une file, le refus du chant bloqué, le passage abandonné par un appui déplacé, la fermeture après départ d’un relais et l’effet des deux presses.
 
 ## 4 — Personne ne part le premier
 

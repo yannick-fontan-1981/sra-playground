@@ -7,7 +7,7 @@ import {Author} from './author.mjs';
 // Independent review: read the builders and their saved designs without executing
 // or editing the builders. Only this review JSON is written by this script.
 const load=n=>JSON.parse(readFileSync(new URL(`../level${n}-design.json`,import.meta.url),'utf8'));
-const designs=[2,3,4].map(load);
+const reviewedLevels=[1,2,4],designs=reviewedLevels.map(load);
 const eq=(a,b)=>a.x===b.x&&a.y===b.y;
 const pick=(world,state,role)=>stepDetailed(world,state,6,cellToPixel(state.heroes.find(h=>h.kind===role).at)).state;
 
@@ -55,7 +55,7 @@ for(const episode of [14,15,16,17]){
 
 const levels=[];
 for(const [index,design]of designs.entries()){
- const level=index+2,world=compileLevel(design.spec),initial=initialState(world),reference=replay(design.spec,design.commands);
+ const level=reviewedLevels[index],world=compileLevel(design.spec),initial=initialState(world),reference=replay(design.spec,design.commands);
  assert.equal(reference.state.complete,true);assert.equal(reference.metrics.blocked,0);assert.equal(reference.metrics.deaths,0);
  assert.equal(world.goals.length,3);assert.ok(world.gates.every(g=>!world.buttons.some(b=>eq(g.at,b))));
  const walking=world.heroes.map(h=>unassistedWalk(world,initial,h.kind));
@@ -68,20 +68,20 @@ for(const [index,design]of designs.entries()){
 // L2: the east branch is a real two-phase transfer. Both presses point east;
 // their activation polarities, rather than their directions, are opposite.
 {
- const design=designs[0],r=replay(design.spec,design.commands),world=r.world;
+ const design=designs[1],r=replay(design.spec,design.commands),world=r.world;
  const east=world.gates.filter(g=>g.at.y===7&&g.at.x>=16);
  assert.equal(east.length,2);assert.ok(east.every(g=>g.direction==='E'));
  assert.deepEqual(east.map(g=>g.closedWhen).sort(),['pressed','released']);
  const transfer=r.trace.find(t=>t.phases.some(p=>p.kind==='piston'&&p.moves.some(m=>m.actor==='hero'&&eq(m.from,{x:16,y:7})&&eq(m.to,{x:17,y:7}))));
  assert.ok(transfer);assert.equal(transfer.after.dead,false);
- levels[0].observations.push({name:'Sas de polarités opposées',result:'confirmed',entry:r.trace.indexOf(transfer)+1,directions:east.map(g=>g.direction),polarities:east.map(g=>g.closedWhen),description:'Le changement de phase transporte réellement le Magicien de la première presse vers la case libérée par la seconde.'});
- levels[0].observations.push({name:'Rythme et géométrie',result:'qualitative-review',description:'La cour autour du bassin sert à recaler une commande distante puis à choisir la phase de trois branches séparées. Le cœur du niveau est la bascule et le transfert du sas, pas la fabrication répétée de ponts ou le rangement de lests finaux.'});
+ levels[1].observations.push({name:'Sas de polarités opposées',result:'confirmed',entry:r.trace.indexOf(transfer)+1,directions:east.map(g=>g.direction),polarities:east.map(g=>g.closedWhen),description:'Le changement de phase transporte réellement le Magicien de la première presse vers la case libérée par la seconde.'});
+ levels[1].observations.push({name:'Rythme et géométrie',result:'qualitative-review',description:'La cour autour du bassin sert à recaler une commande distante puis à choisir la phase de trois branches séparées. Le cœur du niveau est la bascule et le transfert du sas, pas la fabrication répétée de ponts ou le rangement de lests finaux.'});
 }
 
-// L3: compare a voluntary Bard step with the actual Merchant extraction from
+// L1: compare a voluntary Bard step with the actual Merchant extraction from
 // the same reached state. This counter-branch is legal; it is not a dead-end proof.
 {
- const design=designs[1],r=replay(design.spec,design.commands),world=r.world;
+ const design=designs[0],r=replay(design.spec,design.commands),world=r.world;
  assert.equal(world.buttons.length+world.doors.length+world.gates.length+world.mirrors.length+world.platforms.length,0);
  assert.equal(world.terrain.filter(t=>t==='~').length,0);
  const extraction=r.trace.find(t=>t.phases.some(p=>p.kind==='push'&&p.moves.some(m=>m.actor==='hero'&&eq(m.from,{x:5,y:10})&&eq(m.to,{x:6,y:10}))));
@@ -89,8 +89,8 @@ for(const [index,design]of designs.entries()){
  const voluntary=stepDetailed(world,pick(world,extraction.before,'bard'),4);
  assert.equal(voluntary.state.failed,false);assert.equal(voluntary.state.dead,false);
  assert.ok(contains(voluntary.state.stones,{x:6,y:8})&&contains(voluntary.state.stones,{x:6,y:12}));
- levels[1].observations.push({name:'Tri matériel et départ sans chant',result:'confirmed',entry:r.trace.indexOf(extraction)+1,description:'Le départ volontaire est permis mais rebouche les deux accès verticaux. La poussée du Marchand conserve exactement la disposition des caisses. Aucune commande cachée ni porte de sortie ne fabrique cette contrainte.'});
- levels[1].observations.push({name:'Rythme et géométrie',result:'qualitative-review',description:'Un petit espace de tri à butées dessert trois longues alcôves. L’absence complète d’eau, de boutons, de portes et de miroirs distingue nettement ce niveau des ateliers et chantiers à circuits des épisodes précédents.'});
+ levels[0].observations.push({name:'Tri matériel et départ sans chant',result:'confirmed',entry:r.trace.indexOf(extraction)+1,description:'Le départ volontaire est permis mais rebouche les deux accès verticaux. La poussée du Marchand conserve exactement la disposition des caisses. Aucune commande cachée ni porte de sortie ne fabrique cette contrainte.'});
+ levels[0].observations.push({name:'Rythme et géométrie',result:'qualitative-review',description:'Un petit espace de tri à butées dessert trois longues alcôves. L’absence complète d’eau, de boutons, de portes et de miroirs distingue nettement ce niveau des ateliers et chantiers à circuits des épisodes précédents.'});
 }
 
 // L4: keep an interesting alternative instead of manufacturing an obligation
@@ -112,14 +112,14 @@ let alternative;
 }
 
 const report={success:true,review:'Independent early-level review',levels,alternative,descriptionCorrections:[
- {level:2,status:designs[0].source.objective.includes('polarités opposées')?'applied':'reported-to-author',correction:'Dire presses de polarités opposées : les deux directions sont E.'},
+ {level:2,status:designs[1].source.objective.includes('polarités opposées')?'applied':'reported-to-author',correction:'Dire presses de polarités opposées : les deux directions sont E.'},
  {level:4,status:designs[2].source.objective.includes('occupant')?'applied':'reported-to-author',correction:'L’objectif général parle de l’occupant de l’îlot ; le Magicien reste le rôle utilisé par le témoin.'}
  ],variety:{comparedEpisodes:[14,15,16,17],comparedMaps:previous.length,method:'Comparaison exacte du terrain recadré, y compris eau, sous les huit rotations/réflexions, complétée par une lecture des objectifs et des ressources.',findings:[
  'Aucune des trois cartes n’est un doublon géométrique des 32 cartes comparées, même après rotation ou réflexion.',
  'N2 et N4 partagent un plan général de cour avec trois branches : ce point commun est assumé, leurs interactions et leur rythme diffèrent.',
- 'N3 offre la rupture la plus nette : tri de cargaisons sur sol sec, sans aucun dispositif de circuit ou miroir.',
+ 'N1 offre la rupture la plus nette : tri de cargaisons sur sol sec, sans aucun dispositif de circuit ou miroir.',
  'SS14 utilisait déjà des destinations séparées et des départs par reflet ; la revue ne prétend pas que chacun de ces ingrédients apparaît pour la première fois.',
  'Les contrôles n’ont trouvé aucune sortie accessible par la seule marche initiale d’un héros pendant que ses partenaires et les ressources restent fixes.'
- ]},scope:'Rejeux complets, petits graphes de marche initiale à un seul héros, contre-branche locale et alternative construite. Aucune recherche exhaustive des états à trois héros, aucune preuve de nécessité globale de chaque mécanique, aucun minimum de coups ni résultat autonome SRA ne sont revendiqués. Les builders des niveaux 2–4 restent en lecture seule.'};
+ ]},scope:'Rejeux complets, petits graphes de marche initiale à un seul héros, contre-branche locale et alternative construite. Aucune recherche exhaustive des états à trois héros, aucune preuve de nécessité globale de chaque mécanique, aucun minimum de coups ni résultat autonome SRA ne sont revendiqués. Les builders des niveaux 1, 2 et 4 restent en lecture seule.'};
 writeFileSync(new URL('../early-levels-independent-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({success:report.success,levels:levels.map(l=>({level:l.level,reference:l.reference,walking:l.initialUnassistedWalking})),alternative:{level:4,entries:alternative.entries,moves:alternative.moves},descriptionCorrections:report.descriptionCorrections,comparedMaps:previous.length}));

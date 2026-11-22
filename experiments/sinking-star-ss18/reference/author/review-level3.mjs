@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {compileLevel,initialState,stepDetailed,TrioPuzzleSession,cellToPixel,gateClosed,platformActive,terrainAt,circuitPressed} from '../../dist/core.js';
-import {lessonIds,observeLesson} from '../../dist/tutorial.js';
+import {lessonIds,observeLesson,TUTORIAL_LEVEL} from '../../dist/tutorial.js';
 import {replay} from '../../scripts/solver.mjs';
 import {Author} from './author.mjs';
+import {SS18_LEVELS} from '../../dist/levels.js';
 
-const design=JSON.parse(readFileSync(new URL('../level1-design.json',import.meta.url),'utf8'));
+const design=JSON.parse(readFileSync(new URL('../level3-design.json',import.meta.url),'utf8'));
 const world=compileLevel(design.spec),start=initialState(world),reference=replay(design.spec,design.commands);
 const eq=(a,b)=>a.x===b.x&&a.y===b.y,key=p=>`${p.x},${p.y}`;
 const spatial=s=>({heroes:s.heroes.map(h=>({kind:h.kind,at:h.at,dead:!!h.dead})),stones:s.stones,monsters:s.monsters,supports:s.supports,mirrors:s.mirrors,gateClosed:s.gateClosed,platformActive:s.platformActive});
@@ -36,7 +37,13 @@ assert.ok(initialGeometry.every(r=>r.reachableGoals.length===0));
 const opticalOverapproximation=world.heroes.map(h=>({role:h.kind,...reach(h.at,{ignoreOccupants:true,onlyOpticalGate:true,waterPassable:true})}));
 assert.ok(opticalOverapproximation.every(r=>!r.reachableGoals.some(g=>eq(g,{x:16,y:3}))));
 
-const session=new TrioPuzzleSession([design.spec]),learned=new Set(),discoveryEvents=[];
+const session=new TrioPuzzleSession(SS18_LEVELS.slice(0,TUTORIAL_LEVEL)),learned=new Set(),discoveryEvents=[];
+// Reach the real tutorial index through the two preceding rooms.
+for(let level=1;level<TUTORIAL_LEVEL;level++){
+ const earlier=JSON.parse(readFileSync(new URL(`../level${level}-design.json`,import.meta.url),'utf8'));
+ for(const action of earlier.actions){const before=session.observe(),after=session.action(action.id,action.data);observeLesson(learned,before,after,action.id);}
+}
+assert.equal(session.observe().level,TUTORIAL_LEVEL);assert.equal(learned.size,0);
 let frameCount=0;
 for(const [i,action] of design.actions.entries()){
  const before=session.observe(),old=new Set(learned),after=session.action(action.id,action.data);frameCount+=after.frames.length;observeLesson(learned,before,after,action.id);
@@ -72,6 +79,6 @@ const firstDeposit=reference.trace[0].after;assert.equal(circuitPressed(world,fi
 const press=reference.trace[pressStage.turn-1];assert.equal(press.phases.filter(p=>p.kind==='piston').length,2);assert.equal(press.after.monsters.length,0);assert.equal(circuitPressed(world,press.after,'atelier'),true);assert.equal(gateClosed(world,press.after,0),false);
 cases.push({label:'The southern exit needs both cyan weights; the paired press supplies the second one',result:'two-weights-and-two-presses',entry:pressStage.turn});
 
-const report={success:true,level:1,title:design.spec.title,reference:{entries:reference.metrics.actions,selections:reference.metrics.selections,moves:reference.metrics.actions-reference.metrics.selections,frames:frameCount,result:session.observe().state,blocked:reference.metrics.blocked,deaths:reference.metrics.deaths},discoveries:{count:learned.size,ids:[...lessonIds],events:discoveryEvents},layout:{exits:world.goals,nonCollinear:true,pressesAreSeparateFromButtons:true},initialGeometry,opticalOverapproximation,cases,scope:'The geometry checks freeze devices and resources; the second graph deliberately opens other gates and ignores water/occupants. Counter-branches are local legal experiments, not proofs of a unique solution or global necessity for every tutorial demonstration. No shortest route or autonomous SRA result is claimed.'};
-writeFileSync(new URL('../level1-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
+const report={success:true,level:TUTORIAL_LEVEL,title:design.spec.title,reference:{entries:reference.metrics.actions,selections:reference.metrics.selections,moves:reference.metrics.actions-reference.metrics.selections,frames:frameCount,result:session.observe().state,blocked:reference.metrics.blocked,deaths:reference.metrics.deaths},discoveries:{count:learned.size,ids:[...lessonIds],events:discoveryEvents},layout:{exits:world.goals,nonCollinear:true,pressesAreSeparateFromButtons:true},initialGeometry,opticalOverapproximation,cases,scope:'The geometry checks freeze devices and resources; the second graph deliberately opens other gates and ignores water/occupants. Counter-branches are local legal experiments, not proofs of a unique solution or global necessity for every tutorial demonstration. No shortest route or autonomous SRA result is claimed.'};
+writeFileSync(new URL('../level3-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report));
