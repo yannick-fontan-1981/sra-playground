@@ -184,6 +184,7 @@ export type Experiment = {
   silentInput?: SilentInputQuestion;
   transportControl?: TransportControlTrial;
   markedMotion?: MarkedMotionTrial;
+  measuredControl?: {bareEffect:string; alternatives:number; preparedScene:string; outcomes:readonly ['same_public_effect','different_public_effect']};
   motorTest?: MotorTest;
   cursorTrial?: CursorTrial;
   landmark?: import('./paired-landmark-placement.ts').LandmarkTrial;
@@ -408,6 +409,22 @@ export function measureEffect(
   };
 }
 const idOf = (s: number, a: string, b: string) => [s, a, b].join('|');
+// A is already paid for. A single B completes a comparison from the same public origin.
+export function probeFromKnownControl(m: Memory, site: number, available: ReadonlySet<string>, explain=false): Experiment | null {
+  const prep=m.edges[m.previous];
+  if (!prep?.stable || prep.t!==site || prep.s===site) return null;
+  const tried=new Set(m.edges.filter(edge=>edge.s===site && (explain || edge.stable)).map(edge=>edge.cmd));
+  const controls=m.edges.filter(edge=>edge.stable && edge.s===prep.s && edge.cmd!==prep.cmd &&
+    available.has(edge.cmd) && !tried.has(edge.cmd));
+  // A silent control makes a newly enabled response directly observable. Keep
+  // the recorded order among equally informative one-command comparisons.
+  const control=controls.find(edge=>edge.effect.key==='still') ?? controls[0];
+  if (!control) return null;
+  return {phase:'probe', origin:prep.s, a:prep.cmd, b:control.cmd, rule:idOf(prep.s,prep.cmd,control.cmd), refs:[prep.ref,control.ref],
+    ...(explain ? {measuredControl:{bareEffect:control.effect.key,alternatives:controls.length,preparedScene:m.scenes[site]!.split('|')[0]!,
+      outcomes:['same_public_effect','different_public_effect'] as const}} : {})};
+}
+
 function stableIndex(m: Memory) {
   const index = new Map<string, Edge>();
   for (const e of m.edges) if (e.stable) index.set(e.s + '|' + e.cmd, e);
@@ -655,8 +672,7 @@ function selectEstablishedExperiment(
   if (!reuseReady && !late && !m.placement && (m.recurrences < 3 || (m.turns - m.lastTrial === 1 && m.turns % 4 === 0)))
     return null;
   const outgoing = m.edges.filter((e) => e.s === s && e.stable);
-  const prev = m.edges[m.previous],
-    options = [...available];
+  const options = [...available];
   const mk = (
     phase: Experiment['phase'],
     origin: number,
@@ -827,23 +843,8 @@ function selectEstablishedExperiment(
     )
       return mk('control', s, a.cmd, b.cmd, [a.ref, b.ref], idOf(s, a.cmd, b.cmd));
   }
-  // Real A just ran. Complete the second arm using a previously measured B alone.
-  if (prev && prev.t === s && prev.s !== s && prev.stable) {
-    const controls = m.edges.filter(
-      (e) =>
-        e.stable &&
-        e.s === prev.s &&
-        e.cmd !== prev.cmd &&
-        available.has(e.cmd) &&
-        !outgoing.some((h) => h.cmd === e.cmd)
-    );
-    if (controls.length) {
-      const d = controls.sort(
-        (x, y) => Number(y.effect.key === 'still') - Number(x.effect.key === 'still')
-      )[0]!;
-      return mk('probe', prev.s, prev.cmd, d.cmd, [prev.ref, d.ref], idOf(prev.s, prev.cmd, d.cmd));
-    }
-  }
+  const counterpart=probeFromKnownControl(m,s,available);
+  if (counterpart) return counterpart;
   // Ask a controlled question at an origin whose B baseline is already known.
   const tries: { a: string; b: Edge; score: number }[] = [];
   for (const b of outgoing) {
@@ -1310,6 +1311,11 @@ export function recordExperiment(
   } else if (x.phase === 'probe' || x.phase === 'control') {
     const p = pairs(m).find((p) => p.id === x.rule);
     out.result = p ? 'differential' : 'no_differential';
+    if (x.measuredControl) {
+      out.bareEffect=x.measuredControl.bareEffect;
+      out.actual=effect.key;
+      if (!edge.stable) out.result='prepared_return_unstable';
+    }
   }
   return out;
 }

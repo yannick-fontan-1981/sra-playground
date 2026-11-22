@@ -284,6 +284,7 @@ async function run(code, games) {
         Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
       if(plan?.cooperativeTransportForecast && replayCommands)Object.assign(replayCommands.at(-1),{cooperative:plan.cooperativeTransportForecast});
       if(plan?.silentInputForecast && replayCommands)Object.assign(replayCommands.at(-1),{silentInput:plan.silentInputForecast});
+      if (plan?.matchedControlForecast && replayCommands) replayCommands.at(-1).matchedControl = plan.matchedControlForecast;
       if (plan?.motorBaselineForecast && replayCommands) replayCommands.at(-1).motorBaseline = plan.motorBaselineForecast;
       const registration = plan?.fieldRegistrationForecast;
       if (registration && replayCommands && !recordedFieldRegistrations.has(registration.after)) {

@@ -34,6 +34,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   const informationStrategy = form.elements.namedItem('informationStrategy') as HTMLSelectElement;
   const informationOutcomes = form.elements.namedItem('informationOutcomes') as HTMLInputElement;
   const mechanismRefutationLimit = form.elements.namedItem('mechanismRefutationLimit') as HTMLInputElement;
+  const earlyControl = form.elements.namedItem('testEarlyControl') as HTMLInputElement;
   const testMotor = form.elements.namedItem('testMotorBaseline') as HTMLInputElement;
   const testFieldFragments = form.elements.namedItem('testFieldFragments') as HTMLInputElement;
   const informationMode = form.elements.namedItem('informationMode') as HTMLSelectElement;
@@ -125,7 +126,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     if (standalone) mode.value = 'active';
     for (const control of [mode,priority,inputOrder,familyAgenda,adaptiveReasoning,openingCuriosity,ruleTitle,ruleCommands,
         ruleGap,rulePreference,ruleMode]) control.disabled = standalone;
-    for (const control of [informationMode,informationStrategy,informationOutcomes,mechanismRefutationLimit,testFieldFragments,testMotor])
+    for (const control of [informationMode,informationStrategy,informationOutcomes,mechanismRefutationLimit,testFieldFragments,testMotor,earlyControl])
       control.disabled = solver.value === 'sic';
   }
   solver.addEventListener('change', showSolverControls);
@@ -142,6 +143,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
     informationStrategy.value = pack.informationPreference?.strategy ?? 'point_contrast';
     informationOutcomes.value = String(pack.informationPreference?.minimumOutcomes ?? 2);
     mechanismRefutationLimit.value = String(pack.informationPreference?.mechanismRefutationLimit ?? '');
+    earlyControl.checked = pack.informationPreference?.earlyControl === 'complete_an_observed_pair';
     testMotor.checked = pack.informationPreference?.motorExperiment === 'measure_positional_baseline';
     testFieldFragments.checked = pack.informationPreference?.fieldRegistration === 'test_aligned_fragments_after_motion';
     informationMode.value = pack.informationPreference?.mode ?? 'native';
@@ -175,6 +177,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
       informationPreference: {strategy:informationStrategy.value, mode:informationMode.value,
         minimumOutcomes:informationOutcomes.valueAsNumber,
         ...(mechanismRefutationLimit.value ? {mechanismRefutationLimit:mechanismRefutationLimit.valueAsNumber} : {}),
+        ...(earlyControl.checked ? {earlyControl:'complete_an_observed_pair'} : {}),
         ...(testMotor.checked ? {motorExperiment:'measure_positional_baseline'} : {}),
         ...(testFieldFragments.checked ? {fieldRegistration:'test_aligned_fragments_after_motion'} : {})},
     };

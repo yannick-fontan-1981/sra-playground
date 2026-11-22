@@ -34,6 +34,7 @@ import {
   initialMemory,
   experimentCommand,
   selectExperiment,
+  probeFromKnownControl,
   recordExperiment,
   sceneKey,
   type Experiment,
@@ -116,6 +117,7 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
+  const earlyControl = informationPreference?.mode==='active' && informationPreference.earlyControl==='complete_an_observed_pair' && informationPreference.minimumOutcomes===2;
   const testMotor = informationPreference?.mode==='active' && informationPreference.motorExperiment==='measure_positional_baseline' && informationPreference.minimumOutcomes===2;
   const testTransport=informationPreference?.strategy===transportControlStrategy;
   const traceMark=testTransport || informationPreference?.strategy===markedMotionStrategy;
@@ -327,12 +329,17 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
       const configurationOpportunity=(group===recurrentExperimentGroup || group===exhaustedGroup) &&
         !!m.configurationOpportunity && (m.configurations?.factors.length??0)>=2;
-      if (!cooperative && !landmark && !cursor && group === recurrentExperimentGroup && !motor && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
+
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment:Experiment|null = silent ?? mark ?? transport ?? (motor ? {
+      const ordinaryExploration = !cooperative && !landmark && !cursor && !motor && group===recurrentExperimentGroup &&
+        !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity;
+      const immediate = earlyControl && ordinaryExploration && !m.pending && !m.cursorSelection?.pending && !m.localCapacity?.pending &&
+        !m.relativeMotion?.active ? probeFromKnownControl(m,m.scenes.indexOf(sceneKey(o)),new Set(available.map(observedCommandKey)),true) : null;
+      if (ordinaryExploration && !immediate) return null;
+      const experiment:Experiment|null = silent ?? mark ?? transport ?? immediate ?? (motor ? {
         phase:'measureMotorBaseline',origin:-1,a:motor.command,b:motor.command,rule:'test_if_the_last_displacement_depends_on_the_current_position',refs:[],motorTest:motor,
       } : cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
         refs:[],rule:cooperative.purpose,cooperative} : landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
@@ -343,7 +350,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity));
-      if(!cooperative&&!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!motor&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
+      if(!cooperative&&!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!motor&&!immediate&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (!experiment || (!cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
@@ -388,6 +395,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         parentObjective: parent,
         satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
+      if(immediate){
+        question.subjects=[a,b];
+        question.satisfactionContract='compare_the_observed_effect_of_the_same_input_with_and_without_the_preparation';
+      }
       if(motor){
         question.subjects=[motor.actor,motor.command];
         question.satisfactionContract='compare_the_named_subject_at_its_expected_and_previous_positions';
@@ -478,6 +489,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         experiment,
         ...(m.occupancy?.mechanismRefutations?.deferred?.observation === o.observation_ref ?
           {deferredMechanismForecast:m.occupancy.mechanismRefutations.deferred} : {}),
+        ...(experiment.measuredControl ? {matchedControlForecast:{...experiment.measuredControl,prepare:a,probe:b,evidence:experiment.refs}} : {}),
         ...(motor ? {motorBaselineForecast:motor} : {}),
         ...(experiment.transportControl ? {transportControlForecast: {...experiment.transportControl,
           outcomes: transportControlOutcomes[experiment.transportControl.stage], evidence: experiment.refs}} : {}),

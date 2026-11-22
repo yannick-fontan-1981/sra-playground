@@ -59,3 +59,27 @@ test('the declared experiment asks if motion repeats on changed terrain, with or
 test('an unrecognized positional experiment cannot be imported',()=>{
   assert.throws(()=>compileInformationPreference({...choice,motorExperiment:'guess'}),/motor experiment/);
 });
+
+test('one remaining command completes a measured comparison at a newly reached arrangement',async()=>{
+  const base=scene(2), prepared=scene(5), moved=scene(5,true,20);
+  const [a,b,c,d]=await Promise.all([base,base,prepared,moved].map((r,i)=>observe(r,i+1,false)));
+  for (const enabled of [false,true]) {
+    const pack=compileInformationPreference({...choice,...(enabled?{earlyControl:'complete_an_observed_pair'}:{})});
+    const family=createPreparedEffects(pack);
+    await family.observePublicOutcome!(a!,b!,{action_ref:'ACTION3',data:{}},base,base);
+    await family.observePublicOutcome!(b!,c!,{action_ref:'ACTION4',data:{}},base,prepared);
+    const plan=await family.proposeInGroup!(recurrentExperimentGroup,c!,prepared,[],1,{});
+    if (!enabled) {assert.ok(!plan?.matchedControlForecast);continue;}
+    assert.equal(plan.actions[0].action_ref,'ACTION3');
+    assert.deepEqual(plan.matchedControlForecast.evidence,[c!.revision,b!.revision]);
+    assert.equal(plan.matchedControlForecast.bareEffect,'still');
+    assert.equal(plan.matchedControlForecast.preparedScene,c!.frame_hash);
+    assert.equal(plan.sicSituationCard.mode,'exploration');
+    const tested=await family.record!(c!,d!,plan.actions[0],prepared,moved,plan);
+    assert.equal(tested.events[0].result,'differential');
+    assert.equal(tested.events[0].bareEffect,'still');
+    assert.notEqual(tested.events[0].actual,'still');
+    assert.ok(!(await family.proposeInGroup!(recurrentExperimentGroup,d!,moved,[],0,{}))?.matchedControlForecast);
+  }
+  assert.throws(()=>compileInformationPreference({...choice,earlyControl:'always_replay'}),/controlled experiment/);
+});

@@ -1,0 +1,20 @@
+{
+  "id": "sic.native-strategies",
+  "schemaVersion": 6,
+  "configuration": {
+    "version": 1,
+    "mode": "active",
+    "maxDepth": 88,
+    "maxNodes": 1000,
+    "solver": "sic-fallback",
+    "informationPreference": {
+      "mode": "active",
+      "strategy": "retest_a_conditional_control_after_transport",
+      "minimumOutcomes": 2,
+      "mechanismRefutationLimit": 2,
+      "earlyControl": "complete_an_observed_pair",
+      "fieldRegistration": "test_aligned_fragments_after_motion"
+    }
+  },
+  "digest": "b1038002d2ba408bac9da41eeb5bcc51709d9acd886442527494f4950efe322c"
+}
