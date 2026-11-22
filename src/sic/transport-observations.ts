@@ -15,6 +15,7 @@ export type TransportStep={state:TransportState;command:string;after:TransportSt
 export type TransportForecast={purpose:string;command:string;from:TransportState;expected:TransportState;target:number[];evidence:string[];open:string[];key:string;
   projectedSetup?:{operator:TransportSide;pivot:number;launch:number;landing:number;firstCommand:string};
   openingTest?:{gate:number;controls:number[];remaining:number};
+  gateSelectionTest?:{gate:number;context:string;ticket:string};
   operandTest?:{side:TransportSide;operand:number;command:string;steps:number;stayed:string;transferred:string};
   releasedAccess?:{phase:'select'|'test';side:TransportSide;held:number;before:number;after:number;ticket:string};
   regionEntry?:{site:number;source:number;objectives:number[];ticket:string};

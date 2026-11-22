@@ -24,6 +24,7 @@ import {
 } from './paired-displacements.ts';
 import { regionEntries, regionEntryTest } from './unknown-region-entry.ts';
 import { planDisplacements } from './plan-paired-displacements.ts';
+import { testSelectionWhileHolding } from './test-selection-while-holding.ts';
 import type { TransportForecast } from './transport-observations.ts';
 
 export type ReusableEffects = Pick<
@@ -203,6 +204,8 @@ export function seePair(
     next = readPair(s, after, old);
   if (!old || !next) {
     if (f) {
+      if (f.gateSelectionTest && old && !q.learning.checked.includes(f.gateSelectionTest.ticket))
+        q.learning.checked.push(f.gateSelectionTest.ticket);
       delete q.learning.plan;
       return 'subject_registration_ambiguous';
     }
@@ -471,5 +474,13 @@ export function pairProposal(
       ref,
     );
   }
-  return planDisplacements(q.scene, q.learning, q.reading, ref, depth, budget, minimumProbeOutcomes);
+  const route = planDisplacements(q.scene, q.learning, q.reading, ref, depth, budget, minimumProbeOutcomes);
+  const partial = route?.purpose === 'prepare_a_configuration_that_opens_a_route_for_both_subjects' ||
+    route?.purpose === 'continue_a_verified_change_of_relative_positions';
+  if (minimumProbeOutcomes === 2 && q.selectionWitness && available.includes('ACTION6') &&
+      (!route || (partial && !q.learning.planSolves))) {
+    const test = testSelectionWhileHolding(q.scene, q.learning, q.reading, ref, q.selectionWitness);
+    if (test) return test;
+  }
+  return route;
 }

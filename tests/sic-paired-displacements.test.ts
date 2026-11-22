@@ -34,6 +34,47 @@ const s: Scene = {
   features: [],
   initial: Array(35).fill(''),
 };
+test('test a held passage with a stationary change of control, then use the observed outcome', () => {
+  const room: Scene = { ...s, doors: [{ site: 10, controls: [0], closed: 'shut' }] };
+  const at: Reading = { subjects: [0, 23], active: 0, pieces: [], supports: [], opened: [10], anchor: -1 };
+  const make = (solves = false) => {
+    const q = inquiry();
+    q.scene = room;
+    q.reading = at;
+    q.active = 'known joint movement';
+    q.selectionWitness = 'registered selection';
+    const m = q.learning;
+    for (const [i, [dx, dy]] of [[0,-1],[0,1],[-1,0],[1,0]].entries())
+      m.motors['ACTION'+(i+1)] = { dx: dx!, dy: dy!, ref: 'measured motor' };
+    m.openings = { bySubject: { 10: 'holder opened the passage' } };
+    m.planSolves = solves;
+    m.plan = [{ from: key(at), command: 'ACTION2', expected: { ...at, subjects: [7,23] } },
+      { from: 'later', command: 'ACTION4', expected: { ...at, subjects: [0,10] } }];
+    return q;
+  };
+  const available = ['ACTION1','ACTION2','ACTION3','ACTION4','ACTION6'];
+  for (const open of [true, false]) {
+    const q = make(), m = q.learning;
+    const trial = pairProposal(q, 'before', 4, 60, 2, available)!;
+    assert.equal(trial.gateSelectionTest?.gate, 10);
+    assert.equal(trial.open.length, 2);
+    assert.ok(trial.evidence.includes('holder opened the passage'));
+    const next: Reading = { ...at, active: 1, opened: open ? [10] : [] };
+    assert.equal(localEffects(room, m, at, next, trial.command, 'return', trial), open
+      ? 'the_unselected_holder_kept_the_passage_open' : 'the_passage_closed_when_control_left_the_stationary_holder');
+    const elsewhere: Reading = { ...at, subjects: [0,20] };
+    assert.deepEqual(imagine(room, geometry(room), elsewhere, 'select', m, 'walk')!.opened, next.opened);
+    assert.equal(at.opened.length, 1);
+  }
+  for (const [q,min,keys] of [[make(true),2,available],[make(),3,available],[make(),2,available.slice(0,4)]] as const) {
+    assert.equal(pairProposal(q,'before',4,60,min,keys)?.command,'ACTION2');
+  }
+  const q = make();
+  const trial = pairProposal(q,'before',4,60,2,available)!;
+  const moved: Reading = { ...at, active: 1, subjects: [0,10], opened: [] };
+  assert.equal(localEffects(room,q.learning,at,moved,trial.command,'ambiguous',trial),'selection_did_not_isolate_the_passage_effect');
+  assert.equal(q.learning.selectionReturns,undefined);
+});
 test('an incomplete route yields to an untried comparison, while a scoring route is played', () => {
   const room: Scene = { ...s, ground: [0, 1, 2, 3, 7, 8, 9, 10, 33, 34], goals: [33, 34] };
   const v: Reading = { subjects: [0, 7], active: 0, pieces: [1], supports: [], opened: [], anchor: -1 };

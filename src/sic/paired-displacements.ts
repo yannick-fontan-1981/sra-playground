@@ -1,4 +1,5 @@
 import { observeRequiredOpening, type OpeningEvidence } from './test-a-persistent-opening.ts';
+import { observeSelection, openingsAfterSelection, selectionEvidence, selectionRefutedOpening, type SelectionReturn } from './test-selection-while-holding.ts';
 import { applyImages, images, type Projection } from './paired-previews.ts';
 import { chooseEffectExperiment } from './discriminating-experiment.ts';
 import {
@@ -38,6 +39,7 @@ export type Learning = {
   visibleFeatures?: number[];
   witnessedOperandReturns?: Record<string, { after: Reading; ref: string }>;
   openings?: OpeningEvidence;
+  selectionReturns?: Record<string, SelectionReturn>;
   strandedPartner?: import('./experiment-with-another-operand.ts').StrandedPartner;
   witnessedEntries?: { side: TransportSide; source: number; site: number; ref: string }[];
   denied: Record<string, number>;
@@ -128,6 +130,7 @@ export function imagine(
   };
   if (op === 'select') {
     n.active = other;
+    n.opened = openingsAfterSelection(s, m, v);
     return n;
   }
   if (op === 'ACTION5') {
@@ -252,6 +255,8 @@ export function localEffects(
     to = a.subjects[side],
     w = s.grid.columns;
   observeRequiredOpening(s, m, b, a, ref);
+  if (op.startsWith('ACTION6:') && op === pointCommand(s.grid, b.subjects[peer(b.active)]))
+    observeSelection(s, m, b, a, ref);
   const previousReturn = m.witnessedOperandReturns?.[operandContext(b, op)];
   if (previousReturn && operandContext(previousReturn.after, op) !== operandContext(a, op))
     delete m.witnessedOperandReturns![operandContext(b, op)];
@@ -318,6 +323,15 @@ export function localEffects(
     }
   }
   if (f) {
+    if (f.gateSelectionTest) {
+      const {context, ticket} = f.gateSelectionTest;
+      if (!m.checked.includes(ticket)) m.checked.push(ticket);
+      delete m.plan;
+      const result = m.selectionReturns?.[context];
+      if (!result || !('open' in result) || result.ref !== ref) return 'selection_did_not_isolate_the_passage_effect';
+      m.refs = [...new Set([...m.refs.slice(-5), ref])];
+      return result.open ? 'the_unselected_holder_kept_the_passage_open' : 'the_passage_closed_when_control_left_the_stationary_holder';
+    }
     if (f.openingTest) {
       delete m.plan;
       const {gate, controls, remaining} = f.openingTest;
@@ -391,6 +405,11 @@ export function localEffects(
       delete m.plan;
       return 'relative_displacement_refuted';
     }
+    if (op.startsWith('ACTION6:') && b.active !== a.active && 'opened' in f.expected &&
+        Array.isArray(f.expected.opened) && selectionRefutedOpening(s, b, a, f.expected.opened)) {
+      delete m.plan;
+      return 'selection_preserved_positions_but_refuted_a_passage_prediction';
+    }
     if (m.plan?.[0]?.command === f.command) m.plan.shift();
     return 'relative_displacement_verified';
   }
@@ -455,6 +474,7 @@ export function forecast(
         ref,
         ...m.refs,
         ...(measuredReturn ? [measuredReturn.ref] : []),
+        ...(op === 'select' ? selectionEvidence(s, m, v) : []),
         ...(m.scope ? [m.scope] : []),
         ...(m.carry ? [m.carry] : []),
       ]),
