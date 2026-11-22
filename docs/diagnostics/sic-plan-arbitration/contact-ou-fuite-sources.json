@@ -1,0 +1,305 @@
+{
+  "entry": "cold",
+  "officialActionBudget": 120,
+  "workers": 1,
+  "versions": {
+    "v128": {
+      "SKBN": {
+        "actions": 120,
+        "won": false,
+        "views": 11,
+        "pursuit": 104,
+        "noVisiblePursuitReturn": 102,
+        "experiments": 0,
+        "officialDigest": "a7e93402915f68b374281e6e17a9ef67f86fb95f3e711813a0715e06e2276b12",
+        "firstDifferentCommandFromV128": null
+      },
+      "FUIT": {
+        "actions": 80,
+        "won": true,
+        "views": 54,
+        "pursuit": 24,
+        "noVisiblePursuitReturn": 0,
+        "experiments": 0,
+        "officialDigest": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "firstDifferentCommandFromV128": null
+      }
+    },
+    "v129": {
+      "SKBN": {
+        "actions": 120,
+        "won": false,
+        "views": 13,
+        "pursuit": 104,
+        "noVisiblePursuitReturn": 1,
+        "experiments": 0,
+        "officialDigest": "d5fdde6f7b8df42f0593b26477d3e195f6a91b816ba3d413923e41b5b6fdedf8",
+        "firstDifferentCommandFromV128": 20,
+        "firstAlternative": {
+          "from": "5e39f91c453e1835",
+          "family": "sic_learn_reactive_motion",
+          "id": 2,
+          "to": "50f143babb00d070"
+        }
+      },
+      "FUIT": {
+        "actions": 80,
+        "won": true,
+        "views": 54,
+        "pursuit": 24,
+        "noVisiblePursuitReturn": 0,
+        "experiments": 0,
+        "officialDigest": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "firstDifferentCommandFromV128": null
+      }
+    },
+    "v130": {
+      "SKBN": {
+        "actions": 47,
+        "won": true,
+        "views": 27,
+        "pursuit": 0,
+        "noVisiblePursuitReturn": 0,
+        "experiments": 2,
+        "officialDigest": "9bb07577a4aeb5f9e01139523a57eb1097ac957226930616a274df7135f2529a",
+        "firstDifferentCommandFromV128": 17,
+        "firstAlternative": {
+          "from": "bcdf91dd98cd60e4",
+          "family": "sic_cavity_access",
+          "id": 2,
+          "to": "4efe4e5c6c66e2f7"
+        }
+      },
+      "FUIT": {
+        "actions": 80,
+        "won": true,
+        "views": 54,
+        "pursuit": 24,
+        "noVisiblePursuitReturn": 0,
+        "experiments": 0,
+        "officialDigest": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "firstDifferentCommandFromV128": null
+      }
+    }
+  },
+  "independentPublicObservation": [
+    {
+      "file": "serial-scope-pressure-source-second-v127",
+      "cognitiveReceipts": [
+        {
+          "beforeAction": 17,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 3,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 13
+          }
+        },
+        {
+          "beforeAction": 18,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 4,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 14
+          }
+        },
+        {
+          "beforeAction": 19,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 5,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 15
+          }
+        },
+        {
+          "beforeAction": 20,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 5,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 15
+          }
+        }
+      ],
+      "final": {
+        "movingInContact": 5,
+        "movingWithoutContact": 0,
+        "stillInContact": 0,
+        "stillWithoutContact": 15
+      }
+    },
+    {
+      "file": "serial-unchanged-contact-v129",
+      "cognitiveReceipts": [
+        {
+          "beforeAction": 17,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 3,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 13
+          }
+        },
+        {
+          "beforeAction": 18,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 4,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 14
+          }
+        },
+        {
+          "beforeAction": 19,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 5,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 15
+          }
+        },
+        {
+          "beforeAction": 20,
+          "pitch": 16,
+          "returns": {
+            "movingInContact": 5,
+            "movingWithoutContact": 0,
+            "stillInContact": 0,
+            "stillWithoutContact": 15
+          }
+        }
+      ],
+      "final": {
+        "movingInContact": 5,
+        "movingWithoutContact": 0,
+        "stillInContact": 0,
+        "stillWithoutContact": 19
+      }
+    },
+    {
+      "file": "../response51-source-upper-FUIT2",
+      "cognitiveReceipts": [
+        {
+          "beforeAction": 35,
+          "pitch": 10,
+          "returns": {
+            "movingInContact": 0,
+            "movingWithoutContact": 8,
+            "stillInContact": 0,
+            "stillWithoutContact": 8
+          }
+        },
+        {
+          "beforeAction": 36,
+          "pitch": 10,
+          "returns": {
+            "movingInContact": 0,
+            "movingWithoutContact": 8,
+            "stillInContact": 0,
+            "stillWithoutContact": 8
+          }
+        },
+        {
+          "beforeAction": 37,
+          "pitch": 10,
+          "returns": {
+            "movingInContact": 0,
+            "movingWithoutContact": 8,
+            "stillInContact": 0,
+            "stillWithoutContact": 8
+          }
+        },
+        {
+          "beforeAction": 38,
+          "pitch": 10,
+          "returns": {
+            "movingInContact": 0,
+            "movingWithoutContact": 8,
+            "stillInContact": 0,
+            "stillWithoutContact": 10
+          }
+        }
+      ],
+      "final": {
+        "movingInContact": 0,
+        "movingWithoutContact": 19,
+        "stillInContact": 0,
+        "stillWithoutContact": 54
+      }
+    }
+  ],
+  "matchedPreparations": [
+    {
+      "code": "SKBN",
+      "level": 2,
+      "sourceAction": 17,
+      "origin": "bcdf91dd98cd60e4",
+      "trials": 20,
+      "contrasts": 2,
+      "examples": [
+        {
+          "test": 4,
+          "prep": 2,
+          "without": {
+            "identified": true,
+            "actorMoved": true,
+            "peersMoved": 1,
+            "loss": 0,
+            "contactAtDeparture": true,
+            "carriedAlongMotor": true
+          },
+          "with": {
+            "identified": true,
+            "actorMoved": true,
+            "peersMoved": 0,
+            "loss": 0,
+            "contactAtDeparture": false,
+            "carriedAlongMotor": false
+          }
+        },
+        {
+          "test": 4,
+          "prep": 3,
+          "without": {
+            "identified": true,
+            "actorMoved": true,
+            "peersMoved": 1,
+            "loss": 0,
+            "contactAtDeparture": true,
+            "carriedAlongMotor": true
+          },
+          "with": {
+            "identified": true,
+            "actorMoved": true,
+            "peersMoved": 0,
+            "loss": 0,
+            "contactAtDeparture": false,
+            "carriedAlongMotor": false
+          }
+        }
+      ],
+      "noncontactMovements": 0,
+      "alongTheMotor": 3
+    },
+    {
+      "code": "FUIT",
+      "level": 2,
+      "sourceAction": 35,
+      "origin": "eff46b77b44afc93",
+      "trials": 20,
+      "contrasts": 0,
+      "examples": [],
+      "noncontactMovements": 0,
+      "alongTheMotor": 0
+    }
+  ]
+}

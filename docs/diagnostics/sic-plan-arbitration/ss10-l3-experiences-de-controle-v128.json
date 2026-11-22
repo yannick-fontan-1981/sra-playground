@@ -230,6 +230,33 @@
   ],
   "transferOutsideDevelopment": [
     {
+      "version": "v127",
+      "game": "SS11",
+      "cap": 350,
+      "result": {
+        "level": 3,
+        "actions": 335,
+        "won": false
+      },
+      "digest": "8db46464758775f47046557e4efa4fa95e2be2f4a50492940be1205eccdbb3a7",
+      "stop": "level_active_time_budget",
+      "selectionTests": [
+        {
+          "i": 2,
+          "stage": "select"
+        },
+        {
+          "i": 3,
+          "stage": "verify"
+        },
+        {
+          "i": 4,
+          "stage": "advance"
+        }
+      ],
+      "comparisons": []
+    },
+    {
       "version": "v128",
       "game": "SS11",
       "cap": 350,
@@ -309,6 +336,36 @@
         }
       ],
       "digest": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363"
+    }
+  ],
+  "postTestAlternatives": [
+    {
+      "action": 38,
+      "samePublicOrigin": "2de66dd27a84e578",
+      "tested": 6,
+      "nonterminal": 6,
+      "chosenEndedTheGame": false
+    },
+    {
+      "action": 39,
+      "samePublicOrigin": "b7625317b2aaa21e",
+      "tested": 6,
+      "nonterminal": 6,
+      "chosenEndedTheGame": false
+    },
+    {
+      "action": 40,
+      "samePublicOrigin": "2de66dd27a84e578",
+      "tested": 6,
+      "nonterminal": 6,
+      "chosenEndedTheGame": false
+    },
+    {
+      "action": 41,
+      "samePublicOrigin": "066237a9d9206d40",
+      "tested": 6,
+      "nonterminal": 4,
+      "chosenEndedTheGame": true
     }
   ]
 }

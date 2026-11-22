@@ -2,7 +2,7 @@
 
 Le catalogue figé contient 100 jeux sources et 14 jeux Custom 4, chacun avec au moins trois niveaux. Le laboratoire SS15 expose également huit niveaux via sa session publique. Le registre suit les **345 couples jeu–niveau**, y compris les cases encore sans mesure. Chaque essai indique le solveur, le mode d’entrée, le budget, les commandes jouées, le crédit officiel et l’empreinte de la suite. Les colonnes de synthèse comptent chaque couple une seule fois, même s’il est gagné dans plusieurs conditions. [Registre des résultats vérifiés](couverture-sic-niveaux-1-2-3.json)
 
-Au point de mesure du 22 novembre, **185 couples jeu–niveau** ont au moins une victoire rejouée dans le moteur. Les sources comptent 100/100 L1, 38 victoires parmi 55 L2 évalués et 20 parmi 31 L3. Sur Custom 4, 9 des 14 L1, les 14 L2 et 2 des 12 L3 évalués ont une victoire. SS13 L3 gagne à froid en 176 actions avec v126 et v127. SS10 L3 gagne à froid en 81 actions avec v128. Le laboratoire ajoute SS15 L1 et L2. Ces chiffres réunissent les versions et conditions d’entrée consignées. Sur CGWL, le témoin interrompait la campagne en sérialisant une condition facultative sans valeur. Le test reproduit la panne. v114 omet cette condition en l’absence d’observation et la campagne gagne les trois niveaux en 15, 33 et 36 actions. Chaque crédit est reproduit indépendamment.
+Au point de mesure du 22 novembre, **186 couples jeu–niveau** ont au moins une victoire rejouée dans le moteur. Les sources comptent 100/100 L1, 39 victoires parmi 55 L2 évalués et 20 parmi 31 L3. Sur Custom 4, 9 des 14 L1, les 14 L2 et 2 des 12 L3 évalués ont une victoire. SS13 L3 gagne à froid en 176 actions avec v126 et v127. SS10 L3 gagne à froid en 81 actions avec v128. Le laboratoire ajoute SS15 L1 et L2. Ces chiffres réunissent les versions et conditions d’entrée consignées. Sur CGWL, le témoin interrompait la campagne en sérialisant une condition facultative sans valeur. Le test reproduit la panne. v114 omet cette condition en l’absence d’observation et la campagne gagne les trois niveaux en 15, 33 et 36 actions. Chaque crédit est reproduit indépendamment.
 
 ## Une leçon du L1 peut changer le résultat du L3
 
@@ -223,6 +223,8 @@ Les essais de couverture apportent également quatre victoires nouvellement mesu
 
 ### Quel choix change quand on règle le nombre d’issues ?
 
+Le répertoire de SIC fournit les hypothèses de marche, poussée, traction et échange. La découverte autonome porte sur le sujet auquel chacune s’applique et sur la disposition qui permet de les départager. Le raccord ajouté dans v128 réutilise le langage de configuration existant. Ajouter une autre loi physique au répertoire demande encore un modèle capable de prédire son effet observable.
+
 Avec le même budget de 350 actions, v128 gagne SS10 L3 en 81 au seuil de deux et échoue à 350 au seuil de trois. Les cinq premières commandes ont exactement les mêmes effets. Au sixième coup, depuis la même image, le premier pack joue `ACTION1` pour tester le contact et le second joue `ACTION5` en exploration ordinaire. Le pack strict reproduit les 350 commandes et images de v127.
 
 Le seuil agit à deux endroits. Il conditionne déjà l’usage de la preuve binaire de changement de sujet, puis la sélection d’un test dans le modèle de déplacement. Pour isoler ces décisions, le diagnostic restitue la même mémoire publique avant les coups 6 et 11. Au coup 6, les deux réglages acceptent la même comparaison à trois issues dès qu’ils disposent de la preuve du contrôle. Au coup 11, le seuil de deux sélectionne la comparaison entre marche et traction. Le seuil de trois choisit la même commande pour préparer une position, avec un autre reçu et sans prédiction opposant les deux lois. Un changement d’intention peut donc survenir même lorsque la touche choisie reste identique. [Reçus des deux réglages depuis la même mémoire](ss10-l3-experiences-de-controle-v128.json)
@@ -231,4 +233,24 @@ Le seuil agit à deux endroits. Il conditionne déjà l’usage de la preuve bin
 
 Sur **SS11 L3 à froid**, le candidat figé sélectionne l’autre sujet au coup 2 et vérifie son mouvement au coup 3. Au coup 38, le même pack demande si un échange exige un trajet dégagé. Les deux lois prédisent des positions différentes. Le sujet rejoint la position prévue par l’échange sans cette contrainte. Le moteur met fin à la partie au coup 41. Le test s’est déclenché sur un deuxième jeu et sur un autre effet physique. Le crédit officiel de ce L3 reste nul. SS11 L2 faisait partie de la qualification historique.
 
+Le témoin v127 atteint sa limite de temps actif après 335 actions, toujours en jeu, au même plafond de 350. Ses 37 premières commandes et images sont identiques à celles de v128. Au coup 38, il choisit la commande 4. v128 choisit la commande 2 et vérifie l’échange. Le diagnostic a ensuite recréé séparément les états précédant les coups 38 à 41. Il a essayé les commandes ordinaires et le clic déjà observé. Les six alternatives testées au coup 38 laissent la partie ouverte. Au coup 41, quatre des six laissent la partie ouverte, les deux autres la terminent, dont la commande choisie par SIC. La difficulté restante se situe dans la continuation du plan après la vérification de l’effet. Ces bifurcations hors ligne n’octroient aucun crédit au pilote.
+
 Deux régressions possibles ont été contrôlées en rejouant le solveur complet. **v128 conserve SS06 L2 en 54 et SS13 L3 en 176**, avec les mêmes commandes et images que v127 dans les deux cas. Sur les 1 550 actions des 100 L1 sources témoins, seul VOIS fournit le type de reçu requis pour que la nouvelle comparaison puisse intervenir. Cela permet de prioriser le contrôle de VOIS dans la série de qualification.
+
+
+## Un déplacement au contact suffit-il à prédire une fuite ?
+
+**SKBN L2 gagne à froid en 47 actions avec v130. FUIT L2 conserve les 80 actions gagnantes du témoin.** Les parties des trois versions démarrent directement au L2, au même budget de 120 actions par jeu et avec un seul worker. Le moteur source a reproduit chaque commande et le crédit officiel. [Chiffres, bifurcations et empreintes des deux jeux](contact-ou-fuite-sources.json)
+
+| Source L2 | v128 | v129, abandon d’un pas réfuté sur la même image | v130, vérification de l’effet du contact |
+|---|---|---|---|
+| SKBN | Échec à 120, 11 images distinctes | Échec à 120, 13 images distinctes | **Victoire en 47**, 27 images distinctes |
+| FUIT | Victoire en 80 | Victoire en 80 | **Victoire en 80**, trajectoire identique |
+
+Sur SKBN, le témoin prédit une capture immédiate. Entre les coups 19 et 120, il répète **102 fois la même commande depuis la même image**, sans déplacement. v129 enregistre la contradiction dans cette disposition. Au coup 20 il choisit un autre geste, mais il finit par osciller sans gagner.
+
+La première erreur de raisonnement se trouve en réalité **avant le coup 17**. Les trois déplacements de pièce déjà observés au moment de décider s’étaient tous produits quand le sujet entrait sur la case de la pièce. Treize observations à distance laissaient une pièce immobile. Sur FUIT, avant la première proposition comparable, huit déplacements s’étaient produits à distance. Cette différence est accessible sur les images publiques.
+
+Dans le diagnostic SKBN, la même commande jouée depuis la disposition du coup 17 a deux retours mesurés. Sans préparation, le sujet avance et décale la pièce dans sa direction. Après un pas latéral, il avance encore et la pièce reste en place. Le banc a comparé les quatre commandes disponibles directement et après une des quatre préparations, soit 20 essais par jeu. Sur FUIT, le premier point sondé ne fournit aucun contraste supplémentaire sur le nombre de pièces déplacées. L’historique de la partie gagnante contient en revanche 19 déplacements à distance.
+
+v130 écarte la poursuite quand les déplacements observés sur au moins deux sites distincts ont tous eu lieu au contact et qu’une pièce observée à distance est restée fixe. Une observation de déplacement à distance permet de réexaminer cette hypothèse. Les seize premières actions de SKBN L2 restent identiques. Au coup 17, SIC reprend l’exploration de l’espace avec la commande 2. Son module de transport choisit les onze dernières commandes jusqu’à la victoire. La comparaison du banc explique le changement de règle. La partie officielle a ses propres décisions et peut prendre une autre suite. [Sélection du modèle de poursuite](../../../src/sic/pursuit-composition.ts)
