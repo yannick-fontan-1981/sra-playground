@@ -125,6 +125,28 @@ test('a failed displacement ends the plan and the same failed contact is not pro
     x.mechanism.plan.key
   );
 });
+test('reuse a measured return when evaluating a new plan from the same public scene', async () => {
+  const { m, move, here } = await expose();
+  await move('ACTION5', [6, 5]);
+  await move('ACTION5', [4, 5]);
+  await move('ACTION5', [6, 5]);
+  const { o, rows } = here(), tag = m.localProgress!.last!, origin = tag.returnScene;
+  const propose = () => offerMechanism(m, origin, o, rows, new Set(commands), tag)?.mechanism;
+  const trial = propose()!, step = trial.plan.steps[0]!, occupancy = m.occupancy!;
+  const retry = () => { m.localProgress!.active = trial; return propose(); };
+  const edge = origin + '/' + step.op;
+  assert.equal(step.stage, 'write');
+  const other = 1000;
+  occupancy.observed[edge] = other;
+  occupancy.layouts[other] = { [trial.plan.p]: step.to, [trial.plan.c]: step.placed };
+  assert.equal(retry()?.plan.key, trial.plan.key);
+  occupancy.observed[edge] = origin;
+  assert.notEqual(retry()?.plan.key, trial.plan.key);
+  occupancy.observed[edge] = -1;
+  assert.equal(retry()?.plan.key, trial.plan.key);
+  delete occupancy.observed[edge];
+  assert.equal(retry()?.plan.key, trial.plan.key);
+});
 test('reopening access beyond a previously traversed zone is useful even when the resulting image is familiar', async () => {
   const { m, move } = await expose(true);
   let b = await move('ACTION2', [4, 5], [7, 4]);

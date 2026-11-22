@@ -1,7 +1,7 @@
 import type { NativeObservation, NativeRows, NativeEntity } from '../logos-engine/v6-native-types.ts';
 import { add, diff, same, size, type XY } from './access-terrain.ts';
 import { visualLayout } from './witnessed-preview-transfer.ts';
-import { poseRole } from './occupancy-programs.ts';
+import { poseRole, type OccupancyMemory } from './occupancy-programs.ts';
 import { motorsFor, zoneFloor, type ZoneRepeat, type MechanismReason } from './local-progress.ts';
 import {
   reachablePreviewConfigurations,
@@ -85,10 +85,19 @@ function offer(
   s: number,
   available: Set<string>,
   o: NativeObservation,
-  rows: NativeRows
+  rows: NativeRows,
+  occupancy: OccupancyMemory
 ): Experiment | null {
   const step = t.plan.steps[t.index];
   if (!step || !available.has(step.op) || !atCurrent(step, named(o, rows, t.plan), t.plan.pitch)) return null;
+  const destination = occupancy.observed[s + '/' + step.op];
+  const measured = destination !== undefined && destination >= 0 ? occupancy.layouts[destination] : undefined;
+  if (measured) {
+    const actor = measured[t.plan.p], part = measured[t.plan.c];
+    if (!t.plan.actorPeers?.length && actor && !cellMatches(actor, step.to, t.plan.pitch)) return null;
+    if (!t.plan.fixed.length && part && step.stage !== 'read' && step.stage !== 'use' &&
+        !cellMatches(part, step.placed, t.plan.pitch)) return null;
+  }
   if (
     step.stage === 'read' &&
     t.plan.indicator &&
@@ -160,7 +169,7 @@ export function offerMechanism(
   const memory = m.localProgress;
   if (!memory || !m.occupancy) return null;
   if (memory.active) {
-    const next = offer(memory.active, s, available, o, rows);
+    const next = offer(memory.active, s, available, o, rows, m.occupancy);
     if (next) return next;
     memory.active = null;
   }
@@ -171,7 +180,7 @@ export function offerMechanism(
       ({ plan }) => plan.p === calibrating.actor && plan.c === calibrating.part
     );
     if (next.length) {
-      const proposal = choose(next, calibrating.cause, s, available, o, rows);
+      const proposal = choose(next, calibrating.cause, s, available, o, rows, m.occupancy);
       if (proposal) return proposal;
     }
   }
@@ -188,37 +197,27 @@ export function offerMechanism(
       ({ plan }) => plan.arrival && plan.home > 1
     );
     if (!opening.length) return null;
-    const best = opening.reduce((a, b) => (a.rank >= b.rank ? a : b)).plan;
-    const command = best.steps.find((z) => z.stage === 'read')!.op;
-    const reason: MechanismReason = {
+    return choose(opening, (plan) => ({
       tag: 'projected_access_limit',
       frame: o.frame_hash,
       revision: o.revision,
-      op: command,
-      actor: best.p,
-      from: best.start,
-      reachable: best.home,
-      arrival: best.arrival!,
-    };
-    return choose(
-      opening.filter((z) => z.plan === best),
-      reason,
-      s,
-      available,
-      o,
-      rows
-    );
+      op: plan.steps.find(z => z.stage === 'read')!.op,
+      actor: plan.p,
+      from: plan.start,
+      reachable: plan.home,
+      arrival: plan.arrival!,
+    }), s, available, o, rows, m.occupancy);
   }
   if (!cause && follow) {
     const access = plansForWitnessedSubjects(m, o, rows, available).filter(
       ({ plan }) => plan.p === follow.actor && plan.c === follow.part && plan.arrival
     );
-    return access.length ? choose(access, follow.cause, s, available, o, rows) : null;
+    return access.length ? choose(access, follow.cause, s, available, o, rows, m.occupancy) : null;
   }
   if (!cause) return null;
   const grounded = plansForWitnessedSubjects(m, o, rows, available);
   if (grounded.length) {
-    const choice = choose(grounded, cause, s, available, o, rows);
+    const choice = choose(grounded, cause, s, available, o, rows, m.occupancy);
     if (choice) return choice;
   }
   const occ = m.occupancy,
@@ -534,22 +533,23 @@ export function offerMechanism(
         );
     }
   }
-  return choose(options, cause, s, available, o, rows);
+  return choose(options, cause, s, available, o, rows, m.occupancy);
 }
 function choose(
   options: { plan: MechanismPlan; rank: number }[],
-  cause: MechanismReason,
+  cause: MechanismReason | ((plan: MechanismPlan) => MechanismReason),
   s: number,
   available: Set<string>,
   o: NativeObservation,
-  rows: NativeRows
+  rows: NativeRows,
+  occupancy: OccupancyMemory
 ) {
   options.sort((a, b) => b.rank - a.rank);
   for (const { plan } of options) {
     const trial = {
       plan,
       index: 0,
-      cause,
+      cause: typeof cause === 'function' ? cause(plan) : cause,
       options: options.slice(0, 12).map(({ plan: v }) => ({
         site: v.c,
         initial: v.initialC,
@@ -561,7 +561,7 @@ function choose(
         recoverable: v.recoverable,
       })),
     };
-    const x = offer(trial, s, available, o, rows);
+    const x = offer(trial, s, available, o, rows, occupancy);
     if (x) return x;
   }
   return null;
