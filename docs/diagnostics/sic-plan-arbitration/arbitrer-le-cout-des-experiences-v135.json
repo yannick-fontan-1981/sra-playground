@@ -15,6 +15,76 @@
   },
   "qualification": [
     {
+      "backend": "custom",
+      "game": "SS06",
+      "entry": [
+        3,
+        3
+      ],
+      "cap": 350,
+      "candidate": {
+        "issued": 141,
+        "levels": [
+          {
+            "level": 3,
+            "won": true,
+            "actions": 141
+          }
+        ],
+        "independentReplay": "7d5447e25c66d3d9216b14ab455992c977e701db863811cd767ff95324e9d9f8",
+        "questions": []
+      },
+      "samePolicyWithOrdinaryPack": {
+        "issued": 141,
+        "levels": [
+          {
+            "level": 3,
+            "won": true,
+            "actions": 141
+          }
+        ],
+        "independentReplay": "7d5447e25c66d3d9216b14ab455992c977e701db863811cd767ff95324e9d9f8",
+        "questions": [],
+        "commonCommandAndImagePrefix": 141,
+        "identicalCommandsAndImages": true
+      }
+    },
+    {
+      "backend": "custom",
+      "game": "SS07",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 117,
+      "candidate": {
+        "issued": 117,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 117
+          }
+        ],
+        "independentReplay": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88",
+        "questions": []
+      },
+      "samePolicyWithOrdinaryPack": {
+        "issued": 117,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 117
+          }
+        ],
+        "independentReplay": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88",
+        "questions": [],
+        "commonCommandAndImagePrefix": 117,
+        "identicalCommandsAndImages": true
+      }
+    },
+    {
       "backend": "source",
       "game": "FUIT",
       "entry": [
@@ -33,6 +103,20 @@
         ],
         "independentReplay": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
         "questions": []
+      },
+      "samePolicyWithOrdinaryPack": {
+        "issued": 80,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 80
+          }
+        ],
+        "independentReplay": "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00",
+        "questions": [],
+        "commonCommandAndImagePrefix": 80,
+        "identicalCommandsAndImages": true
       },
       "previousPolicyWithSamePack": {
         "issued": 80,
@@ -105,6 +189,20 @@
             "outcome": "previously_silent_input_changed_the_arrangement"
           }
         ]
+      },
+      "samePolicyWithOrdinaryPack": {
+        "issued": 120,
+        "levels": [
+          {
+            "level": 2,
+            "won": false,
+            "actions": 120
+          }
+        ],
+        "independentReplay": "1c4d01f4c1c4f446b8e784e777f1cd236726941924b017968703f7ca33b69646",
+        "questions": [],
+        "commonCommandAndImagePrefix": 37,
+        "identicalCommandsAndImages": false
       },
       "previousPolicyWithSamePack": {
         "issued": 120,
@@ -250,6 +348,20 @@
             "outcome": "input_remained_silent_after_preparation"
           }
         ]
+      },
+      "samePolicyWithOrdinaryPack": {
+        "issued": 108,
+        "levels": [
+          {
+            "level": 2,
+            "won": true,
+            "actions": 108
+          }
+        ],
+        "independentReplay": "9621ee4101e93912aa98312f2b5fe1e76ab2d1b7085abb5b37be45add265f5f9",
+        "questions": [],
+        "commonCommandAndImagePrefix": 49,
+        "identicalCommandsAndImages": false
       },
       "previousPolicyWithSamePack": {
         "issued": 104,

@@ -1,0 +1,478 @@
+{
+  "engines": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "parallelWorkers": 1,
+  "custom": [
+    {
+      "game": "SS06",
+      "level": 3,
+      "policy": "v127",
+      "commit": "d859c8f48ed673cc86e9179e7673dc18fd7380b9",
+      "arm": "ordinary",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 279,
+          "won": false
+        }
+      ],
+      "digest": "0483c9419e3ce809038ff6930456f8c85d23e27778a67f810980c5bd35edd0e7",
+      "matchingPrefixWithV127": 279,
+      "firstDifferentFamily": null,
+      "tests": [],
+      "confirmedBoundaryEntries": 0,
+      "silentInputTests": 0,
+      "finalResult": null
+    },
+    {
+      "game": "SS06",
+      "level": 3,
+      "policy": "v135",
+      "commit": "37cb7aea7db63e7a47dbc9faa4ee846a3b6d9e24",
+      "arm": "ordinary",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 141,
+          "won": true
+        }
+      ],
+      "digest": "7d5447e25c66d3d9216b14ab455992c977e701db863811cd767ff95324e9d9f8",
+      "matchingPrefixWithV127": 81,
+      "firstDifferentFamily": "sic_test_prepared_effects",
+      "tests": [
+        {
+          "action": 82,
+          "command": 3,
+          "before": "13c2f5ef6dfa9dfd",
+          "after": "792e77d3f6eded7f",
+          "alternatives": [
+            [
+              "walk",
+              "push",
+              "pull"
+            ],
+            [
+              "field"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 84,
+          "command": 3,
+          "before": "2459182bc67f9ef7",
+          "after": "5bbdbed97cce2b0d",
+          "alternatives": [
+            [
+              "walk",
+              "push"
+            ],
+            [
+              "pull"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 96,
+          "command": 4,
+          "before": "7e3311b78b68c491",
+          "after": "7e3311b78b68c491",
+          "alternatives": [
+            [
+              "walk"
+            ],
+            [
+              "push"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        }
+      ],
+      "confirmedBoundaryEntries": 10,
+      "silentInputTests": 0,
+      "finalResult": "transport_official"
+    },
+    {
+      "game": "SS06",
+      "level": 3,
+      "policy": "v135",
+      "commit": "37cb7aea7db63e7a47dbc9faa4ee846a3b6d9e24",
+      "arm": "prospective",
+      "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 141,
+          "won": true
+        }
+      ],
+      "digest": "7d5447e25c66d3d9216b14ab455992c977e701db863811cd767ff95324e9d9f8",
+      "matchingPrefixWithV127": 81,
+      "firstDifferentFamily": "sic_test_prepared_effects",
+      "tests": [
+        {
+          "action": 82,
+          "command": 3,
+          "before": "13c2f5ef6dfa9dfd",
+          "after": "792e77d3f6eded7f",
+          "alternatives": [
+            [
+              "walk",
+              "push",
+              "pull"
+            ],
+            [
+              "field"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 84,
+          "command": 3,
+          "before": "2459182bc67f9ef7",
+          "after": "5bbdbed97cce2b0d",
+          "alternatives": [
+            [
+              "walk",
+              "push"
+            ],
+            [
+              "pull"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 96,
+          "command": 4,
+          "before": "7e3311b78b68c491",
+          "after": "7e3311b78b68c491",
+          "alternatives": [
+            [
+              "walk"
+            ],
+            [
+              "push"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        }
+      ],
+      "confirmedBoundaryEntries": 10,
+      "silentInputTests": 0,
+      "finalResult": "transport_official"
+    }
+  ],
+  "conditionalMotion": [],
+  "spatialBench": [
+    {
+      "game": "LKEY",
+      "level": 2,
+      "action": 51,
+      "preparation": "ACTION1",
+      "probe": "ACTION3",
+      "prepared": "a74f827102c9152c",
+      "marked": "a3b40d0e526ce025",
+      "chosen": null,
+      "result": "no_discriminating_motor",
+      "trials": [
+        {
+          "motor": "ACTION2",
+          "control": "25c72ab81f3d5cb9",
+          "afterTest": "c298ded565205430",
+          "tests": [
+            {
+              "ink": 11,
+              "mark": 5,
+              "size": 2,
+              "dx": 0,
+              "dy": 28,
+              "originalInkStayedInControl": false,
+              "visibleEntry": 0,
+              "appears": 0,
+              "visibleExit": 2,
+              "disappears": 0,
+              "translated": false,
+              "stationary": false
+            },
+            {
+              "ink": 5,
+              "mark": 11,
+              "size": 2,
+              "dx": 0,
+              "dy": 28,
+              "originalInkStayedInControl": false,
+              "visibleEntry": 0,
+              "appears": 0,
+              "visibleExit": 2,
+              "disappears": 0,
+              "translated": false,
+              "stationary": false
+            },
+            {
+              "ink": 11,
+              "mark": 5,
+              "size": 2,
+              "dx": 0,
+              "dy": -28,
+              "originalInkStayedInControl": false,
+              "visibleEntry": 2,
+              "appears": 0,
+              "visibleExit": 2,
+              "disappears": 0,
+              "translated": false,
+              "stationary": false
+            },
+            {
+              "ink": 5,
+              "mark": 11,
+              "size": 2,
+              "dx": 0,
+              "dy": -28,
+              "originalInkStayedInControl": false,
+              "visibleEntry": 2,
+              "appears": 0,
+              "visibleExit": 2,
+              "disappears": 0,
+              "translated": false,
+              "stationary": false
+            }
+          ],
+          "official": {
+            "control": false,
+            "afterTest": false
+          }
+        },
+        {
+          "motor": "ACTION1",
+          "control": "a74f827102c9152c",
+          "afterTest": "a3b40d0e526ce025",
+          "tests": [],
+          "official": {
+            "control": false,
+            "afterTest": false
+          }
+        }
+      ]
+    },
+    {
+      "game": "GABA",
+      "level": 2,
+      "action": 39,
+      "preparation": "ACTION1",
+      "probe": "ACTION5",
+      "prepared": "dfcecdc1a88c96f7",
+      "marked": "a7ac7a92b8b72dbd",
+      "chosen": {
+        "motor": "ACTION3",
+        "ink": 11,
+        "mark": 12,
+        "dx": -5,
+        "dy": 0,
+        "support": 7,
+        "distinguishingPixels": 144
+      },
+      "result": "mark_followed_the_movement",
+      "trials": [
+        {
+          "motor": "ACTION1",
+          "control": "3dd226aedcea2c9a",
+          "afterTest": "dc43999dd6a864a8",
+          "tests": [
+            {
+              "ink": 11,
+              "mark": 12,
+              "size": 72,
+              "dx": 0,
+              "dy": -5,
+              "originalInkStayedInControl": true,
+              "visibleEntry": 24,
+              "appears": 24,
+              "visibleExit": 24,
+              "disappears": 24,
+              "translated": true,
+              "stationary": false
+            }
+          ],
+          "official": {
+            "control": false,
+            "afterTest": false
+          }
+        },
+        {
+          "motor": "ACTION2",
+          "control": "6543884a3ec5cd01",
+          "afterTest": "cebc29abdda18f7c",
+          "tests": [
+            {
+              "ink": 11,
+              "mark": 12,
+              "size": 72,
+              "dx": 0,
+              "dy": 5,
+              "originalInkStayedInControl": true,
+              "visibleEntry": 24,
+              "appears": 24,
+              "visibleExit": 24,
+              "disappears": 24,
+              "translated": true,
+              "stationary": false
+            }
+          ],
+          "official": {
+            "control": false,
+            "afterTest": false
+          }
+        },
+        {
+          "motor": "ACTION4",
+          "control": "dfcecdc1a88c96f7",
+          "afterTest": "a7ac7a92b8b72dbd",
+          "tests": [],
+          "official": {
+            "control": false,
+            "afterTest": false
+          }
+        },
+        {
+          "motor": "ACTION3",
+          "control": "e00a597947e2bc6f",
+          "afterTest": "d40f0d23623866af",
+          "tests": [
+            {
+              "ink": 11,
+              "mark": 12,
+              "size": 72,
+              "dx": -5,
+              "dy": 0,
+              "originalInkStayedInControl": true,
+              "visibleEntry": 72,
+              "appears": 72,
+              "visibleExit": 72,
+              "disappears": 72,
+              "translated": true,
+              "stationary": false
+            }
+          ],
+          "official": {
+            "control": false,
+            "afterTest": false
+          }
+        },
+        {
+          "motor": "ACTION7",
+          "control": "afc5f02bf10369ab",
+          "afterTest": "afc5f02bf10369ab",
+          "tests": [
+            {
+              "ink": 11,
+              "mark": 12,
+              "size": 72,
+              "dx": -5,
+              "dy": 5,
+              "originalInkStayedInControl": true,
+              "visibleEntry": 72,
+              "appears": 0,
+              "visibleExit": 72,
+              "disappears": 72,
+              "translated": false,
+              "stationary": false
+            }
+          ],
+          "official": {
+            "control": false,
+            "afterTest": false
+          }
+        }
+      ]
+    }
+  ],
+  "confirmedSecondUseFromTheSameState": {
+    "rule": "2a6c207257249b19591f0ca7465565651ab33ba0f7982149037566bf1c0363c8",
+    "episodes": 100,
+    "training": {
+      "produces_a_third_image": {
+        "times": 360,
+        "games": 54
+      },
+      "stays_at_new_image": {
+        "times": 2,
+        "games": 1
+      }
+    },
+    "tests": [
+      {
+        "game": "POLA",
+        "level": 1,
+        "slot": 5,
+        "op": "ACTION3",
+        "origin": "69059be2a23300fd",
+        "afterFirst": "9b0807ab222368bf",
+        "afterRepeat": {
+          "image": "29d9fceeffff96ef",
+          "won": false,
+          "state": "NOT_FINISHED"
+        },
+        "spontaneous": "produces_a_third_image",
+        "identified": "produces_a_third_image",
+        "repetitions": 2
+      },
+      {
+        "game": "SELE",
+        "level": 1,
+        "slot": 20,
+        "op": "ACTION3",
+        "origin": "bdcd7d02ac5d497a",
+        "afterFirst": "d056c2a1b630ccd2",
+        "afterRepeat": {
+          "image": "869f9dd9245bb56f",
+          "won": false,
+          "state": "NOT_FINISHED"
+        },
+        "spontaneous": "not_tested",
+        "identified": "produces_a_third_image",
+        "repetitions": 2
+      },
+      {
+        "game": "VOIS",
+        "level": 1,
+        "slot": 6,
+        "op": "ACTION1",
+        "origin": "b0190b2e218a3de5",
+        "afterFirst": "c778aa74399a47f0",
+        "afterRepeat": {
+          "image": "3af172e9f20a686c",
+          "won": false,
+          "state": "NOT_FINISHED"
+        },
+        "spontaneous": "not_tested",
+        "identified": "produces_a_third_image",
+        "repetitions": 2
+      }
+    ]
+  },
+  "necessaryOpportunityOnSourcePaths": {
+    "sourceVersion": "v130",
+    "games": 100,
+    "withOpportunity": [
+      {
+        "game": "UPST",
+        "first": 48
+      }
+    ],
+    "withoutOpportunity": 99
+  }
+}
