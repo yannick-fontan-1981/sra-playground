@@ -10,6 +10,7 @@ export const informationStrategies = {
   test_partner_preparation: 'Retest a blocked movement after changing the other subject’s placement',
   learn_control_within_one_room: 'Measure the selected subject and relearn its scope on each room',
   learn_the_scope_of_a_control: 'Measure the scope of a selected subject and test which displacements persist across rooms',
+  test_an_unresponsive_input_after_preparation: 'Test a previously silent command after a reproducible change of arrangement',
   bind_earlier_motions_to_registered_subjects: 'Recover witnessed movements after subject registration and reuse them to plan a continuous crossing',
   compose_a_sustained_crossing: 'Compose a maintained opening, chained displacements and successive changes in traversable terrain',
   prefer_a_verified_coverage_experiment: 'Give a grounded placement experiment or its verified continuation priority over independent exploration',
