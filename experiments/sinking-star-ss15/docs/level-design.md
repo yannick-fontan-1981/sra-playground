@@ -8,10 +8,10 @@ Les huit cartes ajoutent des dépendances, sans allongement systématique. Voir 
 
 | Niveau | Salle | Problème travaillé | Entrées du témoin, sélections incluses |
 | --- | --- | --- | ---: |
-| 1 | L’atelier des passages croisés | Découvrir vingt interactions et rejoindre les deux destinations. | 134 |
+| 1 | L’appui des deux traversées | Immerger une caisse puis réemployer son appui devant une autre rive. | 56 |
 | 2 | Le départ qui garde le poids | Poser une caisse, sortir du chant, conserver le passage. | 49 |
 | 3 | Le remplaçant derrière le reflet | Libérer une cellule par visée déviée et remplacer les héros par deux poids. | 56 |
-| 4 | L’appui des deux traversées | Immerger une caisse puis réemployer son appui devant une autre rive. | 56 |
+| 4 | L’atelier des passages croisés | Préparer les ressources et les passages d’un atelier de vingt découvertes. | 142 |
 | 5 | Les gardiens qu’il faut garder | Recaler deux monstres, les conserver vivants et compléter le troisième poids. | 39 |
 | 6 | La visée et le dernier appui | Ordonner déplacement de miroir, échange, relais hydraulique et dépôt latéral. | 47 |
 | 7 | Le relais des trois rives | Réemployer un appui et une caisse tout en préparant le sauvetage du Magicien. | 162 |
@@ -19,21 +19,23 @@ Les huit cartes ajoutent des dépendances, sans allongement systématique. Voir 
 
 Ces nombres décrivent les parcours exécutés. Ils ne mesurent pas la difficulté et ne constituent pas des bornes minimales.
 
-## L1 — un atelier dense et ouvert
-
-Les vingt découvertes couvrent sélection et déplacement, échange simple, échange du partenaire, visée déviée, relève d’un poids, chant et transport du partenaire, immobilisation sélective, portée diagonale, chant à travers une cloison, départ par échange, immersion, glissement et ancrage d’appui, reflet, porte, presse, combat et arrivée simultanée.
-
-Une caisse présente échange et reflet, une autre devient appui ; une presse prépare une traversée. Deux monstres montrent le combat après transport. Les découvertes proviennent des images publiques, sans séquence imposée.
-
-## L2 à L5 — conserver ce que l’on prépare
+## L1, L2, L3 et L5 — conserver ce que l’on prépare
 
 L2 isole le départ sans chant : caisse sur commande, extraction du Barde par échange, détour hors de portée. Un départ volontaire testé retire le poids.
 
 L3 libère une cellule par visée déviée : le Magicien remplace le Barde, puis une caisse remplace le Magicien. Le Barde prépare un deuxième poids avant son extraction. Les deux caisses maintiennent les passages.
 
-L4 transforme la caisse en appui, utilisé pour une traversée puis déplacé vers la rive inférieure. Sous le Barde, il reste ancré : le pas vers l’eau vide est refusé. Une traversée trop haute bute contre le mur opposé.
+L1 transforme la caisse en appui, utilisé pour une traversée puis déplacé vers la rive inférieure. Sous le Barde, il reste ancré : le pas vers l’eau vide est refusé. Une traversée trop haute bute contre le mur opposé.
 
 L5 conserve deux monstres vivants. Une butée recale leur écart ; ils ouvrent l’accès à la caisse et restent nécessaires à une porte finale. Deux échanges libèrent successivement le Barde des gardiens puis de la caisse.
+
+## L4 — un atelier dense à passages conditionnés
+
+Cet atelier remplace la première salle ouverte de la version 0.1.0. Il passe en quatrième position, après « L’appui des deux traversées », « Le départ qui garde le poids » et « Le remplaçant derrière le reflet ». Ses vingt découvertes restent observées dans les images publiques ; elles ne constituent jamais une condition artificielle de victoire.
+
+Les deux sorties sont réunies dans une chambre vide fermée par un seuil. Son circuit exige trois poids conservés : une caisse de l’atelier, une caisse préparée près du miroir et un miroir poussé vers son poste par une presse. Aucun héros, monstre ou objet ne commence dans la chambre finale pour servir de cible d’échange. Un bras d’eau devant l’entrée demande également un appui.
+
+La préparation du chant, l’extraction du Barde, le déplacement de l’appui et le dépôt par presse font désormais partie d’une route qui ouvre effectivement la sortie. Les monstres doivent être traités avant l’approche finale. La route et ses branches locales sont enregistrées dans `reference/level4-design.json` ; la revue indépendante se trouve dans `validation/workshop-constraints-report.json`.
 
 ## L6 — préparer un accès puis le retirer
 

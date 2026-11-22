@@ -1,18 +1,18 @@
 # Intégrer SS15 dans SRA Playground et publier le Site
 
-Travaille dans **`yannick-fontan-1981/sra-playground`**, depuis le `main` distant à jour. Lis `AGENTS.md`, `docs/migration/git-site-sync-policy.md` et les instructions applicables. Crée une branche ou un worktree dédié et préserve les travaux concurrents.
+Travaille dans **`yannick-fontan-1981/sra-playground`**, depuis le `main` distant à jour. Prendre la révision 0.2.0 au minimum : l’ordre des salles et l’atelier ont été corrigés après la première livraison. Lis `AGENTS.md`, `docs/migration/git-site-sync-policy.md` et les instructions applicables. Crée une branche ou un worktree dédié et préserve les travaux concurrents.
 
 Intègre nativement **SS15 — Les Accords Transposés**, duo **Magicien violet 15 + Barde magenta 6**, dans **Custom 4**, puis publie le **Site SRA Playground existant** depuis le code testé, poussé et intégré sur `main`. Conserve les paramètres d’accès actuels du Site.
 
 ## Source à intégrer
 
-Le laboratoire de référence est `experiments/sinking-star-ss15/`, version **0.1.0**. Lis son README et les dossiers `docs/specification.md`, `docs/level-design.md`, `docs/source-audit.md`, `docs/validation.md` et `docs/roadmap.md`.
+Le laboratoire de référence est `experiments/sinking-star-ss15/`, version **0.2.0**. Lis son README et les dossiers `docs/specification.md`, `docs/level-design.md`, `docs/source-audit.md`, `docs/validation.md` et `docs/roadmap.md`.
 
 Réutilise le moteur `src/core.ts`, les huit cartes `src/levels.ts`, les crédits `src/level-info.ts` et le tutoriel `src/tutorial.ts`. Inspecte le raccordement natif actuel de SS13 et SS14 ainsi que le catalogue, le dispatcher et l’interface Custom 4. Adapte le branchement à la structure réelle du dépôt. Les outils de `reference/`, les témoins et les solveurs sont réservés à l’auteur et aux tests.
 
 ## Résultat fonctionnel attendu
 
-1. Ajouter l’adaptateur SS15, son entrée Custom 4 après SS14, la vignette et les éléments de galerie habituels, le sélecteur et le lien direct. Conserver les huit salles dans leur ordre, avec l’atelier de vingt découvertes en premier. Le Magicien est sélectionné au début de chaque salle.
+1. Ajouter l’adaptateur SS15, son entrée Custom 4 après SS14, la vignette et les éléments de galerie habituels, le sélecteur et le lien direct. Conserver les huit salles dans leur ordre, avec « L’appui des deux traversées » en premier et l’atelier renforcé de vingt découvertes en quatrième position. Le Magicien est sélectionné au début de chaque salle.
 2. Préserver le contrat ACTION1–6, les images 64 × 64 à seize couleurs, les deux destinations simultanées, toutes les images d’animation et leurs durées. ACTION6 prend des coordonnées pixel entières 0–63 et ne fait pas avancer le monde. Valider toute campagne et toutes ses positions initiales avant de remplacer une session existante.
 3. Conserver l’échange avec la première cible du rayon : caisse, monstre ou Barde. L’eau ne bloque pas la visée, les faces blanches dévient le rayon, les dos noirs et portes fermées l’arrêtent. Les appuis et miroirs ne sont pas des cibles. Un rayon bouclé montre son trajet et le clignotement sans changer les positions. Sans cible, le Magicien essaie de marcher.
 4. Conserver le chant carré de 5 × 5 mesuré avant le pas, diagonales et portée à travers les murs comprises. Résoudre simultanément les dépendances entre membres ; un membre bloqué reste, tandis que les autres peuvent bouger. Le Barde doit avancer pour chanter. Un déplacement forcé ne déclenche aucun pouvoir ; les miroirs ne suivent jamais le chant.
@@ -32,9 +32,10 @@ npm test
 npm run validate
 npm run validate:ui
 npm run validate:design
+npm run validate:workshop
 ```
 
-La référence qualifiée comporte **38 tests moteur**, **8 routes gagnantes**, **724 entrées dont 58 sélections**, **2 123 images**, **20 découvertes acquises** et aucun refus ni décès sur ces routes. Les vérifications Happy DOM portent sur le HTML compilé, ses événements, les pixels du canvas et les durées. Les dix contrôles de conception indépendants concernent les deux finales ; leurs recherches restent locales.
+La référence qualifiée comporte **38 tests moteur**, **8 routes gagnantes**, **732 entrées dont 56 sélections**, **2 153 images**, **20 découvertes acquises** et aucun refus ni décès sur ces routes. Les vérifications Happy DOM portent sur le HTML compilé, ses événements, les pixels du canvas et les durées. Les dix contrôles de conception indépendants concernent les deux finales. Un contrôle distinct vérifie le nouvel atelier L4 : chambre murée, six contre-branches et recherches directes restreintes. Les vingt découvertes sont acquises au niveau 4 en 142 entrées. Ces recherches restent locales.
 
 Rejouer les huit témoins à travers l’adaptateur natif et le dispatcher. Comparer chaque observation, chaque image et chaque durée au laboratoire. Vérifier l’annulation de chaque fin de salle, les erreurs de chargement et d’ACTION6 sans mutation, la reprise et la victoire finale. Les témoins prouvent la solvabilité ; ils ne prouvent ni minimum de coups, ni solution unique, ni réussite autonome de SRA.
 

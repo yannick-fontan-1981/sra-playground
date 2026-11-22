@@ -1,7 +1,9 @@
 {
   "success": true,
-  "htmlSha256": "ae6663a8cd8e0ca0a0580f8bf948eb02f72b37b3206eec8e3b6454030a426e7c",
+  "htmlSha256": "b270c49f53e169cb80e5840b4e3f57705a57110bec632af2f8f8dd04bd7d551f",
   "scope": "focused-ui-and-full-campaign",
+  "tutorialLevel": 4,
+  "pedagogicalFixtureLevel": 4,
   "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
   "visualBrowserTest": false,
   "checks": [
@@ -11,12 +13,12 @@
     "Blocking backs alone blink red; ordinary inputs lock and mid-warning Undo restores the preceding state.",
     "A returning Wizard ray displays its circuit, reports the loop and awards no false lesson.",
     "Keys 1/2, Tab, both role buttons and public-pixel clicks select the intended hero without a world tick; Shift+Tab exits and outside input is ignored.",
-    "Undo, Reset, Restart and level selection interrupt animations without stale frames; Reset clears discoveries.",
+    "Undo, Reset, Restart and level selection interrupt animations without stale frames; Reset clears discoveries in room 4 and Restart returns to room 1 with its tutorial panel hidden.",
     "Reduced motion uses no timer waits.",
     "Defeat waits for the final combat frame and its Undo restores the live room.",
-    "VICTORY appears after the final frame and allows Undo or Restart.",
-    "All 8 compiled rooms expose two heroes, two goals, both source links and contextual help.",
-    "The authored level1 route earns all twenty discoveries from displayed public pixels.",
+    "VICTORY appears after the final frame and allows Undo or Restart; the one-room terminal fixture never pretends to be tutorial room 4.",
+    "All 8 compiled rooms expose their correct title, objective, two heroes, two goals, both source links and contextual help; only room 4 shows the tutorial.",
+    "The authored level4 route earns all twenty discoveries from displayed public pixels; earlier rooms award none and later rooms add none.",
     "All eight actual rooms, including the rebuilt finals, win through compiled HTML inputs with every frame and duration checked; each completion is undone and replayed."
   ],
   "roleCoverage": [
@@ -412,8 +414,8 @@
   "campaignCoverage": [
     {
       "level": 1,
-      "title": "L’atelier des passages croisés",
-      "actions": 134,
+      "title": "L’appui des deux traversées",
+      "actions": 56,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
@@ -433,8 +435,8 @@
     },
     {
       "level": 4,
-      "title": "L’appui des deux traversées",
-      "actions": 56,
+      "title": "L’atelier des passages croisés",
+      "actions": 142,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
@@ -468,8 +470,8 @@
     }
   ],
   "tutorialCoverage": {
-    "level": 1,
-    "actions": 134,
+    "level": 4,
+    "actions": 142,
     "discoveries": [
       "select",
       "move",
@@ -491,6 +493,7 @@
       "press",
       "monster",
       "goals"
-    ]
+    ],
+    "onlyTutorialRoomAwardsDiscoveries": true
   }
 }

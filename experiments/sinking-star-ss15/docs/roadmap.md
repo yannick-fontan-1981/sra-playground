@@ -1,17 +1,20 @@
 # SS15 — Feuille de route
 
-## Laboratoire 0.1.0
+## Laboratoire 0.2.0
 
 - [x] Magicien violet + Barde magenta, échange dirigé et chant carré.
 - [x] Rayon dévié, relais de miroirs et retour en boucle animé.
 - [x] Reflets globaux, commandes, presses, plateformes et combat simultané.
 - [x] Appuis immergés mobiles et ancrage sous les héros.
-- [x] Atelier de vingt découvertes fondées sur les pixels publics.
+- [x] Ancien niveau 4 déplacé en première position.
+- [x] Atelier de vingt découvertes déplacé en quatrième position, avec passages conditionnés.
 - [x] Huit salles originales ou adaptées, avec sources et changements déclarés.
 - [x] Finales avec ressources réemployées et contre-exemples locaux exécutés.
 - [x] HTML autonome, contrôles complets et interruptions d’animation.
 - [x] 38 tests moteur, huit routes gagnantes et rejeu du HTML compilé.
 - [x] Revue indépendante des deux finales et des textes publics.
+- [x] Atelier L4 : 142 entrées, vingt découvertes, six contre-branches et accès directs contrôlés.
+- [x] Campagne réordonnée : 732 entrées, 2 153 images, aucun refus ni décès.
 - [x] Documentation de règles, conception, sources, validation et intégration.
 
 Les métriques et l’empreinte exacte de la construction qualifiée se trouvent dans `docs/validation.md` et `validation/`. Le code de ce lot est isolé sous `experiments/sinking-star-ss15/`.
@@ -34,11 +37,11 @@ Le prompt exécutable de cette étape est `docs/codex-integration-prompt.md`. Le
 | Élément | Référence |
 | --- | --- |
 | Dépôt canonique | `yannick-fontan-1981/sra-playground` |
-| Branche de travail | `feat/ss15-wizard-bard-20261121` |
-| Base main vérifiée au démarrage | `7b6859dd2308fecf2ec49d53299b68ac77977c58` |
+| Branche de travail | `fix/ss15-workshop-order-20261122` |
+| Base main vérifiée au démarrage | `a14bd33e34c187c0c4fee2039676bfca43760465` |
 | Révision locale / distante du laboratoire | Commit contenant ce dossier, relevé dans le compte rendu de livraison et par `git log -1 -- experiments/sinking-star-ss15` |
 | Branche canonique visée pour le laboratoire | `main`, avec contrôle du parent et du même arbre avant mise à jour |
-| Version du laboratoire | `0.1.0` |
+| Version du laboratoire | `0.2.0` |
 | Version Site SS15 / SHA Site SS15 | Non applicables avant l’intégration native et la publication |
 | Statut de synchronisation du Site pour SS15 | Non évalué par ce lot |
 

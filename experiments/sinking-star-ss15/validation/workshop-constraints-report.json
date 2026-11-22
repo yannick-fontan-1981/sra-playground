@@ -1,0 +1,1297 @@
+{
+  "success": true,
+  "partial": false,
+  "level": 4,
+  "scope": "Independent replay, final-region geometry, local counter-branches and explicitly restricted direct-access searches",
+  "limitations": [
+    "A winning authored route demonstrates solvability, not minimum length or a unique solution.",
+    "The geometry audit includes water and treats the listed presses as barriers; it does not prescribe how their commands must eventually be prepared.",
+    "Local direct probes allow only one spell or reflection after a fixed-resource walking approach. Their exhaustion is not a global shortcut proof.",
+    "The two-hero search freezes all nonhero resources. It can refute an effortless completion but cannot establish the necessity of every authored mechanic.",
+    "Any state or time limit is reported as inconclusive. A legal branch that has not won is not automatically a dead end.",
+    "This verifier does not change the map, engine, tutorial, saved route or playable rules."
+  ],
+  "title": "L’atelier des passages croisés",
+  "mapSha256": "6a62d8818276e5d5a4b598163a7abe51cb2938876a1daa7d0cce0ae971485161",
+  "witnessSha256": "5572c218afcb0ea06ef9e3ba187a9803a565aa34c2be2bb87935ab31f9c3e500",
+  "witness": {
+    "actions": 142,
+    "refusals": 0,
+    "deaths": 0,
+    "complete": true,
+    "stages": 11,
+    "metrics": {
+      "actions": 142,
+      "selections": 8,
+      "swaps": 5,
+      "partnerSwaps": 3,
+      "bouncedSwaps": 1,
+      "bardSongs": 28,
+      "partnerSongs": 7,
+      "selectiveSongs": 6,
+      "forcedBardMoves": 3,
+      "supportMoves": 13,
+      "stoneMoves": 17,
+      "monsterMoves": 2,
+      "mirrorMoves": 1,
+      "reflections": 1,
+      "heroReflections": 0,
+      "pistonPushes": 1,
+      "platformsCreated": 1,
+      "monstersRemoved": 2,
+      "blocked": 0,
+      "deaths": 0
+    }
+  },
+  "geometry": {
+    "cells": 15,
+    "floorCells": 15,
+    "waterCells": 0,
+    "goals": [
+      {
+        "x": 17,
+        "y": 17
+      },
+      {
+        "x": 18,
+        "y": 17
+      }
+    ],
+    "entrances": [
+      {
+        "index": 2,
+        "at": {
+          "x": 15,
+          "y": 16
+        },
+        "circuit": "trois-postes",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ],
+    "initialMobileOccupants": 0,
+    "initialMirrors": 0,
+    "interpretation": "Non-wall connectivity with presses blocked, including water because rays cross it. This is a geometry check, not a proof that every future entrance must use the authored route."
+  },
+  "branches": [
+    {
+      "label": "ordinary-departure-releases-the-relay",
+      "afterTurn": 13,
+      "commands": "R",
+      "meaning": "Un départ volontaire du Barde retire la caisse de la commande de relève et referme la porte. L’extraction par échange du parcours auteur conserve ce poste ; un autre placement reste possible.",
+      "outcome": "legal",
+      "steps": [
+        {
+          "turn": 1,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "song",
+            "gate"
+          ]
+        }
+      ],
+      "state": {
+        "heroes": [
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 5,
+              "y": 1
+            },
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 5,
+              "y": 3
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 3,
+            "y": 2
+          },
+          {
+            "x": 17,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 5
+          },
+          {
+            "x": 5,
+            "y": 5
+          },
+          {
+            "x": 7,
+            "y": 5
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 10,
+            "y": 16
+          },
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "facing": "NE"
+          }
+        ],
+        "circuits": {
+          "releve": false,
+          "depot-miroir": false,
+          "trois-postes": false
+        },
+        "gates": [
+          {
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "closed": true
+          },
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 16
+            },
+            "closed": true
+          }
+        ],
+        "complete": false,
+        "refused": false,
+        "dead": false
+      }
+    },
+    {
+      "label": "press-before-the-crate-reflection",
+      "afterTurn": 39,
+      "commands": "DDDDLLLLLDX",
+      "meaning": "Déplacer le miroir avant le reflet laisse la caisse sur l’axe nord. Le reflet tenté après cette fermeture est refusé ; il ne remplit pas la commande orientale.",
+      "outcome": "refused",
+      "steps": [
+        {
+          "turn": 1,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 2,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 3,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 4,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 5,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 6,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 7,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 8,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 9,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 10,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk",
+            "piston"
+          ]
+        },
+        {
+          "turn": 11,
+          "command": "X",
+          "outcome": "refused",
+          "phases": []
+        }
+      ],
+      "state": {
+        "heroes": [
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 12,
+              "y": 9
+            },
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 6,
+              "y": 3
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 14,
+            "y": 2
+          },
+          {
+            "x": 2,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 6,
+            "y": 5
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 10,
+            "y": 16
+          },
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "facing": "NE"
+          }
+        ],
+        "circuits": {
+          "releve": true,
+          "depot-miroir": true,
+          "trois-postes": false
+        },
+        "gates": [
+          {
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "closed": true
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 16
+            },
+            "closed": true
+          }
+        ],
+        "complete": false,
+        "refused": true,
+        "dead": false
+      }
+    },
+    {
+      "label": "open-door-is-not-a-water-passage",
+      "afterTurn": 50,
+      "commands": "D",
+      "meaning": "Les trois commandes ouvrent la chambre, mais elles ne soutiennent pas l’eau : le pas direct du Magicien vers le bras horizontal est refusé.",
+      "outcome": "refused",
+      "steps": [
+        {
+          "turn": 1,
+          "command": "D",
+          "outcome": "refused",
+          "phases": []
+        }
+      ],
+      "state": {
+        "heroes": [
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 12,
+              "y": 9
+            },
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 6,
+              "y": 3
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 16,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 5
+          },
+          {
+            "x": 6,
+            "y": 5
+          }
+        ],
+        "supports": [],
+        "monsters": [
+          {
+            "x": 10,
+            "y": 16
+          },
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "facing": "NE"
+          }
+        ],
+        "circuits": {
+          "releve": true,
+          "depot-miroir": true,
+          "trois-postes": true
+        },
+        "gates": [
+          {
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "closed": true
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 16
+            },
+            "closed": false
+          }
+        ],
+        "complete": false,
+        "refused": true,
+        "dead": false
+      }
+    },
+    {
+      "label": "wrong-song-while-the-wizard-anchors",
+      "afterTurn": 62,
+      "commands": "CUULLDDDLDCR",
+      "meaning": "Le Magicien ancre l’appui. Un chant vers la droite tenterait de l’envoyer dans une case d’eau voisine sans soutien ; toute l’action est refusée. Le chant vers la rive fait traverser le duo.",
+      "outcome": "refused",
+      "steps": [
+        {
+          "turn": 1,
+          "command": "C",
+          "outcome": "legal",
+          "phases": []
+        },
+        {
+          "turn": 2,
+          "command": "U",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 3,
+          "command": "U",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 4,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 5,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 6,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 7,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 8,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 9,
+          "command": "L",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 10,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 11,
+          "command": "C",
+          "outcome": "legal",
+          "phases": []
+        },
+        {
+          "turn": 12,
+          "command": "R",
+          "outcome": "refused",
+          "phases": []
+        }
+      ],
+      "state": {
+        "heroes": [
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 7,
+              "y": 10
+            },
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 7,
+              "y": 8
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 16,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 5
+          }
+        ],
+        "supports": [
+          {
+            "x": 7,
+            "y": 10
+          }
+        ],
+        "monsters": [
+          {
+            "x": 10,
+            "y": 16
+          },
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "facing": "NE"
+          }
+        ],
+        "circuits": {
+          "releve": true,
+          "depot-miroir": false,
+          "trois-postes": true
+        },
+        "gates": [
+          {
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 16
+            },
+            "closed": false
+          }
+        ],
+        "complete": false,
+        "refused": true,
+        "dead": false
+      }
+    },
+    {
+      "label": "ignore-the-guardian-at-the-last-bank",
+      "afterTurn": 76,
+      "commands": "CDRRRRDD",
+      "meaning": "Approcher le dernier bras sans écarter les gardiens expose le Magicien à un voisin orthogonal. Le combat du parcours auteur libère cette approche.",
+      "outcome": "dead",
+      "steps": [
+        {
+          "turn": 1,
+          "command": "C",
+          "outcome": "legal",
+          "phases": []
+        },
+        {
+          "turn": 2,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 3,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 4,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 5,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 6,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 7,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 8,
+          "command": "D",
+          "outcome": "dead",
+          "phases": [
+            "walk",
+            "combat"
+          ]
+        }
+      ],
+      "state": {
+        "heroes": [
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 11,
+              "y": 16
+            },
+            "dead": true
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 7,
+              "y": 11
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 16,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 5
+          }
+        ],
+        "supports": [
+          {
+            "x": 7,
+            "y": 10
+          }
+        ],
+        "monsters": [
+          {
+            "x": 10,
+            "y": 16
+          },
+          {
+            "x": 13,
+            "y": 16
+          }
+        ],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "facing": "NE"
+          }
+        ],
+        "circuits": {
+          "releve": true,
+          "depot-miroir": false,
+          "trois-postes": true
+        },
+        "gates": [
+          {
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 16
+            },
+            "closed": false
+          }
+        ],
+        "complete": false,
+        "refused": false,
+        "dead": true
+      }
+    },
+    {
+      "label": "approach-lifts-the-final-support",
+      "afterTurn": 114,
+      "commands": "UCRRRRRRRRRRRDR",
+      "meaning": "Remonter immédiatement avec le Barde emporte l’appui au-dessus du seuil. Le pas suivant du Magicien vers le passage prévu est refusé ; le Barde doit contourner pour conserver l’alignement.",
+      "outcome": "refused",
+      "steps": [
+        {
+          "turn": 1,
+          "command": "U",
+          "outcome": "legal",
+          "phases": [
+            "song"
+          ]
+        },
+        {
+          "turn": 2,
+          "command": "C",
+          "outcome": "legal",
+          "phases": []
+        },
+        {
+          "turn": 3,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 4,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 5,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 6,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 7,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 8,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 9,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 10,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 11,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 12,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 13,
+          "command": "R",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 14,
+          "command": "D",
+          "outcome": "legal",
+          "phases": [
+            "walk"
+          ]
+        },
+        {
+          "turn": 15,
+          "command": "R",
+          "outcome": "refused",
+          "phases": []
+        }
+      ],
+      "state": {
+        "heroes": [
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 13,
+              "y": 16
+            },
+            "dead": false
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 12,
+              "y": 16
+            },
+            "dead": false
+          }
+        ],
+        "stones": [
+          {
+            "x": 2,
+            "y": 2
+          },
+          {
+            "x": 16,
+            "y": 4
+          },
+          {
+            "x": 2,
+            "y": 5
+          },
+          {
+            "x": 4,
+            "y": 5
+          }
+        ],
+        "supports": [
+          {
+            "x": 14,
+            "y": 15
+          }
+        ],
+        "monsters": [],
+        "mirrors": [
+          {
+            "at": {
+              "x": 14,
+              "y": 5
+            },
+            "facing": "NE"
+          }
+        ],
+        "circuits": {
+          "releve": true,
+          "depot-miroir": false,
+          "trois-postes": true
+        },
+        "gates": [
+          {
+            "at": {
+              "x": 9,
+              "y": 6
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 14,
+              "y": 4
+            },
+            "closed": false
+          },
+          {
+            "at": {
+              "x": 15,
+              "y": 16
+            },
+            "closed": false
+          }
+        ],
+        "complete": false,
+        "refused": true,
+        "dead": false
+      }
+    }
+  ],
+  "directAccess": [
+    {
+      "afterTurn": 0,
+      "status": "local-family-exhausted",
+      "maxStates": 2000,
+      "maxMs": 4000,
+      "elapsedMs": 11,
+      "approaches": [
+        {
+          "hero": "wizard",
+          "states": 65,
+          "expanded": 65
+        },
+        {
+          "hero": "bard",
+          "states": 1,
+          "expanded": 1
+        }
+      ],
+      "probes": {
+        "legal": 290,
+        "refused": 40,
+        "dead": 0,
+        "won": 0
+      },
+      "totalEntries": 0,
+      "entryExamples": [],
+      "scope": "Fixed cargo, supports, monsters, mirrors and partner during a one-hero walking approach; one subsequent real step, directional spell or global reflection. Exhaustion applies only to this family."
+    },
+    {
+      "afterTurn": 13,
+      "status": "local-family-exhausted",
+      "maxStates": 2000,
+      "maxMs": 4000,
+      "elapsedMs": 13,
+      "approaches": [
+        {
+          "hero": "wizard",
+          "states": 140,
+          "expanded": 140
+        },
+        {
+          "hero": "bard",
+          "states": 1,
+          "expanded": 1
+        }
+      ],
+      "probes": {
+        "legal": 622,
+        "refused": 83,
+        "dead": 0,
+        "won": 0
+      },
+      "totalEntries": 0,
+      "entryExamples": [],
+      "scope": "Fixed cargo, supports, monsters, mirrors and partner during a one-hero walking approach; one subsequent real step, directional spell or global reflection. Exhaustion applies only to this family."
+    },
+    {
+      "afterTurn": 19,
+      "status": "local-family-exhausted",
+      "maxStates": 2000,
+      "maxMs": 4000,
+      "elapsedMs": 6,
+      "approaches": [
+        {
+          "hero": "wizard",
+          "states": 140,
+          "expanded": 140
+        },
+        {
+          "hero": "bard",
+          "states": 1,
+          "expanded": 1
+        }
+      ],
+      "probes": {
+        "legal": 622,
+        "refused": 83,
+        "dead": 0,
+        "won": 0
+      },
+      "totalEntries": 0,
+      "entryExamples": [],
+      "scope": "Fixed cargo, supports, monsters, mirrors and partner during a one-hero walking approach; one subsequent real step, directional spell or global reflection. Exhaustion applies only to this family."
+    },
+    {
+      "afterTurn": 39,
+      "status": "local-family-exhausted",
+      "maxStates": 2000,
+      "maxMs": 4000,
+      "elapsedMs": 5,
+      "approaches": [
+        {
+          "hero": "wizard",
+          "states": 140,
+          "expanded": 140
+        },
+        {
+          "hero": "bard",
+          "states": 1,
+          "expanded": 1
+        }
+      ],
+      "probes": {
+        "legal": 622,
+        "refused": 83,
+        "dead": 0,
+        "won": 0
+      },
+      "totalEntries": 0,
+      "entryExamples": [],
+      "scope": "Fixed cargo, supports, monsters, mirrors and partner during a one-hero walking approach; one subsequent real step, directional spell or global reflection. Exhaustion applies only to this family."
+    },
+    {
+      "afterTurn": 40,
+      "status": "local-family-exhausted",
+      "maxStates": 2000,
+      "maxMs": 4000,
+      "elapsedMs": 5,
+      "approaches": [
+        {
+          "hero": "wizard",
+          "states": 140,
+          "expanded": 140
+        },
+        {
+          "hero": "bard",
+          "states": 1,
+          "expanded": 1
+        }
+      ],
+      "probes": {
+        "legal": 622,
+        "refused": 83,
+        "dead": 0,
+        "won": 0
+      },
+      "totalEntries": 0,
+      "entryExamples": [],
+      "scope": "Fixed cargo, supports, monsters, mirrors and partner during a one-hero walking approach; one subsequent real step, directional spell or global reflection. Exhaustion applies only to this family."
+    },
+    {
+      "afterTurn": 50,
+      "status": "local-family-exhausted",
+      "maxStates": 2000,
+      "maxMs": 4000,
+      "elapsedMs": 5,
+      "approaches": [
+        {
+          "hero": "wizard",
+          "states": 142,
+          "expanded": 142
+        },
+        {
+          "hero": "bard",
+          "states": 1,
+          "expanded": 1
+        }
+      ],
+      "probes": {
+        "legal": 489,
+        "refused": 226,
+        "dead": 0,
+        "won": 0
+      },
+      "totalEntries": 0,
+      "entryExamples": [],
+      "scope": "Fixed cargo, supports, monsters, mirrors and partner during a one-hero walking approach; one subsequent real step, directional spell or global reflection. Exhaustion applies only to this family."
+    },
+    {
+      "afterTurn": 62,
+      "status": "local-family-exhausted",
+      "maxStates": 2000,
+      "maxMs": 4000,
+      "elapsedMs": 12,
+      "approaches": [
+        {
+          "hero": "wizard",
+          "states": 239,
+          "expanded": 239
+        },
+        {
+          "hero": "bard",
+          "states": 135,
+          "expanded": 135
+        }
+      ],
+      "probes": {
+        "legal": 1305,
+        "refused": 553,
+        "dead": 12,
+        "won": 0
+      },
+      "totalEntries": 0,
+      "entryExamples": [],
+      "scope": "Fixed cargo, supports, monsters, mirrors and partner during a one-hero walking approach; one subsequent real step, directional spell or global reflection. Exhaustion applies only to this family."
+    }
+  ],
+  "withoutResourceTransport": [
+    {
+      "afterTurn": 0,
+      "status": "restricted-family-exhausted",
+      "maxStates": 180000,
+      "maxMs": 14000,
+      "states": 8580,
+      "expanded": 8580,
+      "probes": 51480,
+      "elapsedMs": 321,
+      "scope": "Both heroes may walk, select, exchange with one another, reflect, be pushed by presses and move together through a hero-only song. Circuits and hydraulic platforms may change. No crate, monster, permanent support or mirror may move or disappear. This is not a search over all legal puzzle strategies."
+    },
+    {
+      "afterTurn": 13,
+      "status": "restricted-family-exhausted",
+      "maxStates": 180000,
+      "maxMs": 14000,
+      "states": 39480,
+      "expanded": 39480,
+      "probes": 236880,
+      "elapsedMs": 1424,
+      "scope": "Both heroes may walk, select, exchange with one another, reflect, be pushed by presses and move together through a hero-only song. Circuits and hydraulic platforms may change. No crate, monster, permanent support or mirror may move or disappear. This is not a search over all legal puzzle strategies."
+    },
+    {
+      "afterTurn": 62,
+      "status": "restricted-family-exhausted",
+      "maxStates": 180000,
+      "maxMs": 14000,
+      "states": 114716,
+      "expanded": 114716,
+      "probes": 688296,
+      "elapsedMs": 3104,
+      "scope": "Both heroes may walk, select, exchange with one another, reflect, be pushed by presses and move together through a hero-only song. Circuits and hydraulic platforms may change. No crate, monster, permanent support or mirror may move or disappear. This is not a search over all legal puzzle strategies."
+    }
+  ],
+  "totals": {
+    "localBranches": 6,
+    "directFamilies": 7,
+    "directProbes": 5735,
+    "directEntries": 0,
+    "limitedDirectFamilies": 0,
+    "jointSearchCases": 3,
+    "limitedJointCases": 0
+  }
+}

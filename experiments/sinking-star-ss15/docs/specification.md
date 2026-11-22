@@ -1,4 +1,4 @@
-# SS15 — Contrat du laboratoire 0.1.0
+# SS15 — Contrat du laboratoire 0.2.0
 
 ## Monde et objectif
 
@@ -87,6 +87,6 @@ L’interface bloque les commandes de jeu pendant une animation, mais Annuler, R
 
 Les identifiants des vingt découvertes sont : `select`, `move`, `wizard-swap`, `wizard-partner`, `wizard-bend`, `relay-weight`, `bard-song`, `partner-song`, `selective-song`, `diagonal-song`, `wall-song`, `release-by-swap`, `platform`, `support-slide`, `support-anchor`, `mirror`, `gate`, `press`, `monster`, `goals`.
 
-Le suivi utilise seulement la salle affichée, les images successives et le compteur public de salles terminées. Il distingue la troisième image du mouvement volontaire des cascades qui suivent ; il ne doit pas attribuer un chant à un déplacement forcé ou une presse à un combat. Une découverte reste acquise après Annuler, mais Recommencer et Repartir réinitialisent le suivi de l’atelier.
+L’atelier et son panneau de vingt découvertes se trouvent au niveau 4 (`TUTORIAL_LEVEL = 4`). Le niveau 1 est « L’appui des deux traversées », ancien niveau 4. Le suivi utilise seulement la salle affichée, les images successives et le compteur public de salles terminées. Il distingue la troisième image du mouvement volontaire des cascades qui suivent ; il ne doit pas attribuer un chant à un déplacement forcé ou une presse à un combat. Une découverte reste acquise après Annuler, mais Recommencer et Repartir réinitialisent le suivi de l’atelier.
 
 L’observation publique contient uniquement : `gameCode`, `frame`, `frames`, `frameDurationsMs` lorsqu’il existe, `state`, `availableActionIds`, `canUndo`, `canSelectLevel`, `level`, `levelCount`, `levelsCompleted`, `defaultFps` et `palette`. Aucun état sémantique interne, objet de planification, circuit caché, témoin, commande d’auteur ou résultat du solveur n’est transmis à SRA. Les outils de validation privés ne démontrent pas une réussite autonome de l’agent.

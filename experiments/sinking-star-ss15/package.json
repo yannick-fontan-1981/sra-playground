@@ -1,6 +1,6 @@
 {
   "name": "sra-sinking-star-ss15-lab",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -8,7 +8,8 @@
     "test": "npm run build && node --test tests/*.test.mjs",
     "validate": "npm run build && node scripts/validate-levels.mjs",
     "validate:ui": "node scripts/verify-ui-dom.mjs",
-    "validate:design": "node scripts/verify-design-constraints.mjs"
+    "validate:design": "node scripts/verify-design-constraints.mjs",
+    "validate:workshop": "node scripts/verify-workshop-constraints.mjs"
   },
   "devDependencies": {
     "happy-dom": "21.0.4",

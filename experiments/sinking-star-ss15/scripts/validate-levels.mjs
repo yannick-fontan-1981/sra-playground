@@ -22,7 +22,16 @@ assert.equal(LEVEL_INFO.length,8,'Each level needs public source metadata');
 const worlds=SS15_LEVELS.map(compileLevel),starts=worlds.map(initialState);
 const session=new DuoPuzzleSession(SS15_LEVELS),learned=new Set();
 const report={game:'SS15',version,campaignSearch:false,scope:'Eight authored routes, public observations, animation contracts and tutorial coverage',levels:[],totals:{},success:false};
-assert.equal(TUTORIAL_LEVEL,1);assert.equal(lessonIds.length,20);
+assert.equal(TUTORIAL_LEVEL,4);assert.equal(lessonIds.length,20);
+// Migration regression: the original fourth room becomes the opening room.
+// This fingerprint excludes id/title and is independent of the new atelier.
+const {id:firstId,title:firstTitle,...firstGeometry}=SS15_LEVELS[0];
+assert.equal(firstId,'ss15-01');assert.equal(firstTitle,'L’appui des deux traversées');
+assert.equal(hash(firstGeometry),'fb1a99bf14e6f0ae729d7c697cb62d0643c171e0ee5b9fa89a09a72d09c4ad1f','The former level 4 geometry is preserved as level 1');
+assert.equal(LEVEL_INFO[0].puzzle,27);
+assert.equal(LEVEL_INFO[0].url,'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27');
+assert.equal(LEVEL_INFO[0].secondary?.url,'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-28');
+report.ordering={firstLevel:firstId,firstTitle,formerFourthRoomPreserved:true,tutorialLevel:TUTORIAL_LEVEL};
 assert.equal(new Set(SS15_LEVELS.map(({id,title,...map})=>hash(map))).size,8,'The eight rooms must have distinct maps');
 
 function checkFrame(frame,label){
@@ -158,7 +167,8 @@ for(const [index,spec] of SS15_LEVELS.entries()){
   checkActors(world,state,at);checkPhases(world,detail,at);
   if(action.id===6)checkSelection(before,state,detail,at);
   beforeLast=session.observe();const observation=session.action(action.id,action.data);finalObservation=observation;
-  observeLesson(learned,beforeLast,observation,action.id);
+  const previousLessons=[...learned];observeLesson(learned,beforeLast,observation,action.id);
+  if(level!==TUTORIAL_LEVEL)assert.deepEqual([...learned],previousLessons,at+': discoveries only belong to the actual tutorial room');
   checkObservation(observation,at);digest.update(JSON.stringify(observation));
   const levelTransition=state.complete&&index<7;
   const expectedFrames=(detail.phases.length?detail.phases.reduce((n,p)=>n+(p.kind==='swap-loop'?loopFrameCount(p):p.kind==='combat'?5:animated.has(p.kind)?3:1),0):1)+(levelTransition?1:0);
@@ -179,6 +189,8 @@ for(const [index,spec] of SS15_LEVELS.entries()){
  }
  assert.ok(state.complete&&result.state.complete,label+': solved by its author witness');
  assert.equal(result.metrics.blocked,0);assert.equal(result.metrics.deaths,0);
+ if(level<TUTORIAL_LEVEL)assert.equal(learned.size,0,label+': no discovery before the tutorial');
+ if(level===TUTORIAL_LEVEL)assert.deepEqual([...learned].sort(),[...lessonIds].sort(),'The level 4 witness demonstrates all twenty lessons before leaving its room');
  const recordedStages=checkStages(design,result,label);
  assert.deepEqual(session.undo(),beforeLast,label+': Undo restores the last action including level progression');
  const last=witness.actions.at(-1);assert.deepEqual(session.action(last.id,last.data),finalObservation,label+': redoing the completion is deterministic');
@@ -195,8 +207,8 @@ for(const [index,spec] of SS15_LEVELS.entries()){
 
 assert.equal(session.observe().state,'WIN');assert.equal(session.observe().levelsCompleted,8);
 report.campaignChecks={levels:8,finalState:'WIN',allCompletionUndosVerified:true,allShippedMapsMatchAuthorReferences:true,allWitnessesCompleteWithoutRefusalOrDeath:true};
-assert.deepEqual([...learned].sort(),[...lessonIds].sort(),'The level 1 author route demonstrates all twenty public-pixel lessons');
-report.tutorial={level:TUTORIAL_LEVEL,lessons:[...lessonIds],acquired:learned.size,publicPixelsOnly:true};
+assert.deepEqual([...learned].sort(),[...lessonIds].sort(),'The level 4 author route demonstrates all twenty public-pixel lessons');
+report.tutorial={level:TUTORIAL_LEVEL,actions:witnesses[TUTORIAL_LEVEL-1].actions.length,lessons:[...lessonIds],acquired:learned.size,publicPixelsOnly:true,onlyTutorialRoomAwardsDiscoveries:true};
 report.mechanismCoverage=report.levels.map(level=>Object.fromEntries(['level','swaps','partnerSwaps','bouncedSwaps','bardSongs','partnerSongs','selectiveSongs','supportMoves','platformsCreated','mirrorMoves','reflections','pistonPushes','combatWaves','hydraulicChanges'].map(key=>[key,level[key]])));
 
 const restarted=session.restart();assert.equal(restarted.level,1);assert.equal(restarted.levelsCompleted,0);assert.equal(restarted.canUndo,false);

@@ -1,13 +1,14 @@
 export const LEVEL_INFO=[
   {
-    "piston": true,
+    "piston": false,
     "platform": false,
-    "label": "Atelier original · Magicien, Barde et passages croisés",
-    "url": "https://sinkingstarwalkthrough.com/fr/north/",
-    "objective": "Explore les vingt découvertes, puis fais arriver les deux héros sur les contours jaunes.",
+    "puzzle": 27,
+    "label": "Adaptation de Heroes and Water · énigme 27 · appui déplacé dans l’eau",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27",
+    "objective": "Transformer la caisse en appui, faire traverser le duo puis réemployer ce même appui devant la rive du bas.",
     "secondary": {
-      "label": "Zones mixtes · eau, miroirs et dépôts latéraux",
-      "url": "https://sinkingstarwalkthrough.com/fr/crossovers/"
+      "label": "Heroes and Water · énigme 28 · départ forcé et traversée du partenaire",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-28"
     }
   },
   {
@@ -35,15 +36,14 @@ export const LEVEL_INFO=[
     }
   },
   {
-    "piston": false,
+    "piston": true,
     "platform": false,
-    "puzzle": 27,
-    "label": "Adaptation de Heroes and Water · énigme 27 · appui déplacé dans l’eau",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27",
-    "objective": "Transformer la caisse en appui, faire traverser le duo puis réemployer ce même appui devant la rive du bas.",
+    "label": "Atelier original renforcé · Magicien, Barde et passages croisés",
+    "url": "https://sinkingstarwalkthrough.com/fr/north/",
+    "objective": "Préparer les trois poids de la chambre, fabriquer l’appui puis le réemployer entre les deux bras d’eau pour faire arriver le duo.",
     "secondary": {
-      "label": "Heroes and Water · énigme 28 · départ forcé et traversée du partenaire",
-      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-28"
+      "label": "Zones mixtes · eau, miroirs et dépôts latéraux",
+      "url": "https://sinkingstarwalkthrough.com/fr/crossovers/"
     }
   },
   {

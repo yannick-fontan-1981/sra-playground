@@ -1,35 +1,33 @@
 import {Author,board} from './author.mjs';
+import {replay} from '../../scripts/solver.mjs';
 const b=board(20,20);
-b.fill(1,1,18,18);
-b.put(3,5,'#');b.put(4,6,'#');
-b.fill(2,13,8,13,'~');b.fill(15,7,15,18,'~');
-b.put(2,2,'Z');b.put(4,5,'B');
-for(const [x,y] of [[6,2],[2,5],[4,7],[6,7],[4,12],[17,4],[14,11]])b.put(x,y,'o');
-b.put(11,17,'m');b.put(14,17,'m');b.put(17,16,'g');b.put(18,16,'g');
-const spec={id:'ss15-01',title:'L’atelier des passages croisés',rows:b.strings(),
- mirrors:[{at:{x:14,y:4},facing:'NE'}],
- circuits:[{id:'releve',buttons:[{x:4,y:5}],color:10},{id:'depot',buttons:[{x:12,y:10}],color:15}],
- gates:[{at:{x:9,y:5},circuit:'releve',direction:'E',closedWhen:'released'},{at:{x:14,y:11},circuit:'depot',direction:'E',closedWhen:'pressed'}]};
+b.fill(2,3,7,8);b.fill(2,11,7,15);b.fill(8,3,8,12,'~');b.fill(9,3,14,13);
+b.put(2,3,'Z');b.put(5,6,'B');b.put(7,6,'o');b.put(4,13,'g');b.put(4,14,'g');
+const spec={id:'ss15-01',title:'L’appui des deux traversées',rows:b.strings()};
 const a=new Author(spec);
-a.act('R').stage('Le premier échange remplace la caisse par le Magicien');
-a.go(4,3).act('D').stage('La transposition des héros conserve le poids de la commande');
-a.act('U').stage('Le Barde retrouve sa commande sans chanter');
-a.select('bard').act('R').stage('Le chant traverse la cloison, atteint son coin et laisse la pièce retenue en place');
-a.select('wizard').act('D').stage('Le Magicien extrait le Barde sans emporter son cortège');
-a.go(14,2).act('D').stage('Le rayon dévié échange le Magicien avec la caisse à droite du miroir');
-a.act('X').stage('Le reflet transporte la caisse la plus proche sur l’autre axe');
-a.go(18,4).stage('Le Magicien quitte la zone de réflexion');
-a.go(6,11,'bard').act('LDR').stage('Une caisse devient un appui, puis le chant le fait glisser sur l’eau');
-a.go(4,12,'wizard').act('D');
-a.select('bard').act('U').stage('Le Magicien ancre l’appui pendant que le chant le ramène sur la rive');
-a.go(12,9,'wizard').act('D').stage('La presse latérale dépose une caisse dans le bras d’eau oriental');
-a.go(10,15,'bard').act('RR').stage('Le chant rapproche les deux monstres sans exposer les héros');
-a.go(18,16,'wizard').stage('Le Magicien rejoint la première destination par le passage créé');
-a.go(17,16,'bard').stage('Le Barde rejoint sa destination et laisse le Magicien reprendre sa place');
-if(!a.state.complete)a.go(18,16,'wizard');
-a.stage('Les deux destinations sont occupées simultanément');
+a.select('bard').act('R').stage('La caisse entre dans l’eau et devient l’unique appui de la salle');
+a.act('RR').stage('Le Barde monte sur l’appui : celui-ci reste ancré sous ses pieds');
+const onSupport=a.commands.length;
+a.act('R');
+a.go(7,6,'wizard').act('R').stage('Le Magicien rejoint la rive orientale en échangeant avec le Barde');
+a.select('bard').act('RR').stage('Le Barde traverse à nouveau, avec le Magicien entraîné sur le sol');
+a.go(12,3,'wizard');
+a.select('bard').act('DDDD');const upperReturn=a.commands.length;
+a.act('DD').stage('Le même appui descend jusqu’à l’ouverture de la rive inférieure');
+a.act('LL').go(4,14).stage('Le Barde revient par l’appui et rejoint la destination du bas');
+a.go(4,13,'wizard').stage('Le Magicien suit le passage conservé et les deux héros terminent ensemble');
+function check(turn,alternative,expected,effect){
+ const r=replay(spec,a.commands.slice(0,turn)+alternative);
+ const observed={refusals:r.metrics.blocked,dead:r.state.dead,supports:r.state.supports,bard:r.state.heroes.find(h=>h.kind==='bard').at,stones:r.state.stones};
+ for(const [k,v]of Object.entries(expected))if(JSON.stringify(observed[k])!==JSON.stringify(v))throw Error('L1 local check '+k);
+ return{turn,alternative,effect,observed};
+}
+const localChecks=[
+ check(onSupport,'U',{refusals:1,dead:false,supports:[{x:8,y:6}],bard:{x:8,y:6},stones:[]},'Un appui sous le Barde reste ancré : tenter de remonter sur l’eau vide est refusé, au lieu de déplacer son propre sol.'),
+ check(upperReturn,'LL',{refusals:1,dead:false,supports:[{x:8,y:10}],bard:{x:8,y:10}},'Traverser trop haut atteint l’appui mais la rive occidentale est encore un mur ; il faut rejoindre une ouverture réelle.')
+];
 a.save(new URL('../level1-design.json',import.meta.url),{
- label:'Atelier original · Magicien, Barde et passages croisés',url:'https://sinkingstarwalkthrough.com/fr/north/',
- secondaryLabel:'Zones mixtes · eau, miroirs et dépôts latéraux',secondaryUrl:'https://sinkingstarwalkthrough.com/fr/crossovers/',
- objective:'Explore les vingt découvertes, puis fais arriver les deux héros sur les contours jaunes.'
-},{kind:'original-tutorial',preserved:['Le Magicien remplace une cible par échange ; le Barde transporte les ressources.','Les départs forcés évitent le chant et conservent les poids.'],changed:['Atelier ouvert composé pour les vingt découvertes publiques de SS15.','Chant carré, butées, appui mobile et presse issus du contrat de la série SS.'],sourceReading:'Les modules sont une composition pédagogique originale nourrie du monde Nord et des zones mixtes ; ils ne reproduisent aucune salle commerciale.',checkScope:'Le parcours démontre les découvertes ; les explorations et autres solutions restent libres.'});
+ puzzle:27,label:'Adaptation de Heroes and Water · énigme 27 · appui déplacé dans l’eau',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-27',
+ secondaryLabel:'Heroes and Water · énigme 28 · départ forcé et traversée du partenaire',secondaryUrl:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-28',
+ objective:'Transformer la caisse en appui, faire traverser le duo puis réemployer ce même appui devant la rive du bas.'
+},{kind:'adaptation',preserved:['Une caisse immergée devient une ressource de traversée déplacée par le chant.','Il faut modifier la position de l’appui pour desservir des ouvertures différentes.','Les deux héros doivent rejoindre les destinations après le transport de la ressource.'],changed:['Le Magicien remplace le Guerrier et assure une relève par échange.','SS15 ancre les appuis sous les héros et sous la prochaine arrivée du Barde.','Une seule caisse dessert deux traversées ; le chant carré remplace le chant en ligne. Aucun empilement ni déplacement double du guide n’est repris.'],sourceReading:'Heroes and Water 27 guide un cristal dans l’eau entre plusieurs passages ; l’énigme 28 distingue les mouvements volontaires et forcés du Barde. La carte SS15 utilise une rive centrale et un retour vers une rive inférieure séparée.',localChecks,checkScope:'Comparaisons locales exécutées ; aucune preuve d’optimalité ou d’unicité globale.'});

@@ -1,12 +1,12 @@
 # SS15 — Les Accords Transposés
 
-Laboratoire autonome **0.1.0**, quinzième jeu de la série Sinking Star du projet ARC-3-AGENT / SRA Playground. Le duo associe le **Magicien violet (15)** et le **Barde magenta (6)** dans huit salles. Le Magicien commence sélectionné.
+Laboratoire autonome **0.2.0**, quinzième jeu de la série Sinking Star du projet ARC-3-AGENT / SRA Playground. Le duo associe le **Magicien violet (15)** et le **Barde magenta (6)** dans huit salles. Le Magicien commence sélectionné.
 
 Le Magicien échange sa place avec la première caisse, le premier monstre ou son partenaire rencontré par son rayon. Le Barde transporte les occupants de son voisinage lorsqu’il marche. Cette différence permet de conserver un poids en place, libérer le Barde de son propre chant et transférer des ressources entre des rives que les seuls échanges ne suffisent pas à réunir.
 
 ## Jouer
 
-La construction produit **`dist/SS15-demo.html`**, un fichier autonome contenant le moteur, les huit salles, l’interface et leurs aides. Il fonctionne sans dépendance réseau à l’exécution. Le livrable destiné au joueur est nommé **SS15-demo-v1.html**.
+La construction produit **`dist/SS15-demo.html`**, un fichier autonome contenant le moteur, les huit salles, l’interface et leurs aides. Il fonctionne sans dépendance réseau à l’exécution. Le livrable destiné au joueur est nommé **SS15-demo-v2.html**.
 
 | Commande | Action |
 | --- | --- |
@@ -22,24 +22,24 @@ Les deux héros doivent occuper simultanément les deux destinations jaunes. La 
 
 ## Un tutoriel de vingt découvertes
 
-La première salle propose un atelier ouvert : sélection, marche, échange avec une caisse, échange de partenaires, rayon dévié, relève sur une commande, chant de groupe, transport du Magicien, membres retenus par une butée, portée diagonale, chant à travers un mur, extraction du Barde sans chant, création d’un appui dans l’eau, déplacement de cet appui, ancrage sous un héros, reflet global, commande de porte, dépôt par presse et combat des monstres. L’arrivée commune complète la découverte des destinations.
+La quatrième salle propose un atelier contraint, après trois salles d’introduction : sélection, marche, échange avec une caisse, échange de partenaires, rayon dévié, relève sur une commande, chant de groupe, transport du Magicien, membres retenus par une butée, portée diagonale, chant à travers un mur, extraction du Barde sans chant, création d’un appui dans l’eau, déplacement de cet appui, ancrage sous un héros, reflet global, commande de porte, dépôt par presse et combat des monstres. L’arrivée commune complète la découverte des destinations.
 
-Les vingt cases de progression sont déduites des images publiques. Elles expliquent ce qui vient de se produire ; elles ne lisent ni solution, ni état caché. La route d’auteur réalise les vingt découvertes en 134 entrées. Le joueur reste libre d’explorer et de terminer sans cocher toute la liste.
+Les vingt cases de progression sont déduites des images publiques. Elles expliquent ce qui vient de se produire ; elles ne lisent ni solution, ni état caché. Les sorties de cet atelier dépendent désormais de passages et de ressources à préparer. Les vingt découvertes restent observées à partir des pixels ; elles ne servent pas de serrure artificielle. Le joueur peut trouver une autre route légale.
 
 ## Progression
 
 | Salle | Problème principal | Entrées du témoin |
 | --- | --- | ---: |
-| 1 — L’atelier des passages croisés | Vingt découvertes autour des deux capacités et des dispositifs | 134 |
+| 1 — L’appui des deux traversées | Réemployer le même bloc immergé pour deux traversées | 56 |
 | 2 — Le départ qui garde le poids | Extraire le Barde en laissant sa caisse sur la commande | 49 |
 | 3 — Le remplaçant derrière le reflet | Libérer un partenaire enfermé et maintenir deux passages | 56 |
-| 4 — L’appui des deux traversées | Réemployer le même bloc immergé pour deux traversées | 56 |
+| 4 — L’atelier des passages croisés | Vingt découvertes dans un atelier à passages conditionnés | 142 |
 | 5 — Les gardiens qu’il faut garder | Conserver deux monstres comme poids et ajouter une caisse | 39 |
 | 6 — La visée et le dernier appui | Déplacer un miroir par presse, récupérer une caisse sèche et préparer le dernier passage | 47 |
 | 7 — Le relais des trois rives | Un appui pour trois bras, une caisse pour plusieurs fonctions et un sauvetage par double reflet | 162 |
 | 8 — Le compte des deux rives | Pont provisoire puis durable, caisse transportée entre rives et gardiens réaffectés | 181 |
 
-Les 724 entrées comprennent 58 sélections. Ce sont des parcours gagnants reproductibles, pas des minima ni des mesures automatiques de difficulté. Les finales exigent surtout de conserver, déplacer puis réaffecter les mêmes ressources. Leurs branches alternatives sont décrites dans les références d’auteur et les rapports.
+Les 732 entrées comprennent 56 sélections. Ce sont des parcours gagnants reproductibles, pas des minima ni des mesures automatiques de difficulté. Les finales exigent surtout de conserver, déplacer puis réaffecter les mêmes ressources. Leurs branches alternatives sont décrites dans les références d’auteur et les rapports.
 
 ## Sources et adaptations
 
@@ -57,9 +57,10 @@ npm test
 npm run validate
 npm run validate:ui
 npm run validate:design
+npm run validate:workshop
 ```
 
-`npm test` construit le moteur et le HTML puis exécute les tests moteur. `validate` rejoue les huit routes et contrôle les observations, images, durées et vingt découvertes. `validate:ui` exerce les vrais événements du HTML compilé dans Happy DOM et compare le tampon canvas ; `HAPPY_DOM_MODULE` peut désigner une installation externe de Happy DOM. `validate:design` exécute les contrôles locaux indépendants des finales.
+`npm test` construit le moteur et le HTML puis exécute les tests moteur. `validate` rejoue les huit routes et contrôle les observations, images, durées et vingt découvertes. `validate:ui` exerce les vrais événements du HTML compilé dans Happy DOM et compare le tampon canvas ; `HAPPY_DOM_MODULE` peut désigner une installation externe de Happy DOM. `validate:design` exécute les contrôles locaux indépendants des finales ; `validate:workshop` contrôle les contraintes du nouvel atelier L4.
 
 Pour régénérer les données publiques après une modification volontaire des références : `node scripts/sync-levels.mjs`. Les cartes de `src/levels.ts`, les crédits de `src/level-info.ts` et `tests/witnesses.json` proviennent des huit JSON de `reference/`. Les constructeurs de `reference/author/` reproduisent les parcours documentés.
 

@@ -1,4 +1,4 @@
-# SS15 — Validation du laboratoire 0.1.0
+# SS15 — Validation du laboratoire 0.2.0
 
 ## Résultat qualifié
 
@@ -9,9 +9,9 @@
 | Compilation TypeScript stricte et construction autonome | Réussite |
 | Tests moteur | 38 / 38 |
 | Routes d’auteur | 8 victoires |
-| Entrées de la campagne | 724, dont 58 sélections |
+| Entrées de la campagne | 732, dont 56 sélections |
 | Refus et décès sur ces routes | 0 / 0 |
-| Images de la campagne | 2 123 images 64 × 64, indices 0–15 |
+| Images de la campagne | 2 153 images 64 × 64, indices 0–15 |
 | Tutoriel | 20 / 20 découvertes, issues des pixels |
 | HTML compilé | Parité de toutes les images et durées des huit routes |
 | Fin de chaque salle | Annulée puis rejouée avec succès |
@@ -20,24 +20,24 @@
 Le fichier autonome qualifié, `dist/SS15-demo.html`, possède l’empreinte SHA-256 :
 
 ```text
-ae6663a8cd8e0ca0a0580f8bf948eb02f72b37b3206eec8e3b6454030a426e7c
+b270c49f53e169cb80e5840b4e3f57705a57110bec632af2f8f8dd04bd7d551f
 ```
 
-La copie de livraison `SS15-demo-v1.html` doit conserver exactement ces octets. Cette empreinte figure également dans `validation/levels-report.json` et `validation/ui-dom-report.json`.
+La copie de livraison `SS15-demo-v2.html` doit conserver exactement ces octets. Cette empreinte figure également dans `validation/levels-report.json` et `validation/ui-dom-report.json`.
 
 ## Parcours de référence
 
 | Niveau | Entrées | Sélections | Images | Échanges | Chants | Déplacements d’appui | Poussées par presse |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 | 134 | 10 | 393 | 5 | 10 | 1 | 1 |
+| 1 | 56 | 6 | 157 | 1 | 9 | 6 | 0 |
 | 2 | 49 | 4 | 141 | 1 | 2 | 0 | 0 |
 | 3 | 56 | 4 | 162 | 3 | 4 | 0 | 0 |
-| 4 | 56 | 6 | 157 | 1 | 9 | 6 | 0 |
+| 4 | 142 | 8 | 423 | 5 | 28 | 13 | 1 |
 | 5 | 39 | 6 | 108 | 2 | 5 | 0 | 0 |
 | 6 | 47 | 6 | 152 | 1 | 5 | 0 | 2 |
 | 7 | 162 | 12 | 475 | 3 | 42 | 17 | 1 |
 | 8 | 181 | 10 | 535 | 4 | 31 | 2 | 1 |
-| **Total** | **724** | **58** | **2 123** | **20** | **108** | **26** | **5** |
+| **Total** | **732** | **56** | **2153** | **20** | **126** | **38** | **5** |
 
 Les métriques de chants comptent les phases où un autre membre suit effectivement le Barde. Une marche solitaire du Barde n’incrémente pas ce compteur. Le nombre d’entrées comprend les sélections et n’est pas une longueur minimale de solution.
 
@@ -49,7 +49,7 @@ Les tests moteur couvrent l’échange réciproque et la conservation des poids,
 
 La vérification du **HTML réellement compilé** comprend 26 situations ciblées de rôles et dispositifs. Elle exerce aussi les prévisions de reflet, les conflits entre miroirs, le rayon en boucle, les glyphes des boutons et presses, les touches 1/2 et Tab, les boutons de rôle, les clics en coordonnées publiques, le verrouillage pendant animation, l’annulation et les changements de salle en cours d’animation, la réduction des animations et les panneaux terminaux différés. Elle rejoue ensuite les huit salles complètes, sans remplacer leur logique.
 
-Le tutoriel acquiert ses vingt découvertes au cours des 134 entrées de L1. Les contrôles ciblés vérifient notamment qu’un échange ne produit pas une fausse leçon de chant, qu’un combat ne devient pas une presse et qu’un rayon bouclé ne donne pas une découverte de transfert.
+Le tutoriel acquiert ses vingt découvertes au cours des 142 entrées de L4. Les contrôles ciblés vérifient notamment qu’un échange ne produit pas une fausse leçon de chant, qu’un combat ne devient pas une presse et qu’un rayon bouclé ne donne pas une découverte de transfert.
 
 Le bouton exposé attendu est gris 3 avec plus rose 7 et centre de circuit. Une presse simple présente un centre 5 fermé et 3 ouvert. Les vérifications incluent le cas d’un bouton explicitement superposé dans une situation de test ; les huit cartes distribuées n’utilisent aucune superposition bouton/presse. Une inspection des rendus initiaux des huit salles et d’états intermédiaires de L6–L8 complète la lecture des pixels.
 
@@ -65,6 +65,16 @@ Neuf familles d’accès direct sont explorées sans atteindre leur limite : **1
 
 L8 vérifie spécifiquement que les quatre échanges aux entrées 5, 45, 116 et 130 conservent les comptes par rive, tandis que le chant à l’entrée 69 transporte la caisse de la rivière vers la rive orientale. L’immersion par presse transforme une autre caisse en appui. Les deux monstres et la caisse sèche conservent les trois commandes jusqu’au gain.
 
+## Révision de l’atelier et permutation des niveaux
+
+La version 0.2.0 place l’ancien niveau 4 en première position, avec sa géométrie et son témoin conservés. Le validateur contrôle cette permutation par empreinte de carte et vérifie ses références Water 27/28. Le tutoriel complet est déplacé en quatrième position : le panneau reste caché en L1–L3 et les découvertes ne sont attribuées que pendant la vraie salle L4. Repartir retourne à L1 ; Recommencer conserve la salle courante.
+
+L’ancien atelier permettait au Magicien d’atteindre directement une sortie en marchant. Le nouveau L4 possède une chambre finale murée de 15 cases, vide au départ, avec un unique seuil orienté vers l’extérieur. Trois poids et un passage sur l’eau doivent être préparés. Son parcours vérifié compte 142 entrées, onze étapes et vingt découvertes, sans refus ni décès.
+
+`validation/workshop-constraints-report.json` consigne six contre-branches exécutées : une variante légale, quatre refus finaux et une mort au contact d’un gardien. Leurs préparations ne masquent aucun refus ni décès. Les sept familles d’approche produisent 5 735 tentatives de pas, rayon ou reflet, sans entrée dans la chambre.
+
+Trois recherches conjointes des deux héros, en conservant immobiles les ressources non humaines, épuisent respectivement 8 580, 39 480 et 114 716 états depuis le départ et deux étapes intermédiaires. Le total est de 162 776 états et 976 656 transitions ; aucune entrée ni victoire n’est obtenue et aucune limite n’est atteinte. Le rapport indique `success: true`, `partial: false`. L’épuisement concerne ces familles restreintes : il ne prouve pas une stratégie unique, une longueur minimale ni la nécessité globale de chaque geste du témoin.
+
 ## Reproduction et limites
 
 ```sh
@@ -73,6 +83,7 @@ npm test
 npm run validate
 npm run validate:ui
 npm run validate:design
+npm run validate:workshop
 ```
 
 Node 22 ou ultérieur ; versions fixées dans `package-lock.json` : TypeScript 5.9.3 et Happy DOM 21.0.4. La qualification a été exécutée avec Node 24.22.3. `HAPPY_DOM_MODULE` peut désigner une installation externe du même module.

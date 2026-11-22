@@ -27,7 +27,10 @@ const tile=(frame,spec,x,y)=>{const p=dataAt(spec,x,y);return frame.slice(p.y-1,
 const colorCount=(frame,c)=>frame.reduce((n,row)=>n+row.filter(v=>v===c).length,0);
 const makeArena=(name,placements,options={})=>{const cells=Array.from({length:9},(_,y)=>Array.from({length:9},(_,x)=>x===0||y===0||x===8||y===8?'#':'.'));cells[7][1]='g';cells[7][2]='g';for(const [x,y,c] of placements)cells[y][x]=c;return{id:'ss15-ui-'+name,title:name,rows:cells.map(r=>r.join('')),...options};};
 const createHarness=(spec,{reducedMotion=false,single=false}={})=>{
- const levels=spec?(single?[spec]:[spec,...SS15_LEVELS.slice(1)]):SS15_LEVELS;
+ // Pedagogical fixtures occupy the real tutorial index; the compiled tutorial
+ // constant is never rewritten. A single-room terminal fixture still starts at 1.
+ const levels=spec?(single?[spec]:SS15_LEVELS.map((level,index)=>index===TUTORIAL_LEVEL-1?spec:level)):SS15_LEVELS;
+ const startLevel=spec&&!single?TUTORIAL_LEVEL:1;
  const window=new Window({settings:{enableJavaScriptEvaluation:true,suppressInsecureJavaScriptEnvironmentWarning:true}});
  window.matchMedia=query=>({matches:reducedMotion&&query==='(prefers-reduced-motion: reduce)',media:query,addEventListener(){},removeEventListener(){}});
  window.Option=function(text,value){const option=window.document.createElement('option');option.textContent=text;option.value=value;return option;};
@@ -40,8 +43,10 @@ const createHarness=(spec,{reducedMotion=false,single=false}={})=>{
  const advance=async()=>{await Promise.resolve();assert.ok(timers.length,'Expected intermediate timer');const t=timers.shift();t.callback(...t.args);await Promise.resolve();};
  const flush=async()=>{for(let i=0;i<500;i++){await Promise.resolve();if(!timers.length){await Promise.resolve();if(!timers.length)return;}const t=timers.shift();t.callback(...t.args);}throw new Error('Animation did not settle');};
  window.document.write(html.replace(/<script>[\s\S]*?<\/script>/g,''));
- window.eval(spec?scripts[0].replace(entry,`const session = new DuoPuzzleSession(${single?JSON.stringify([spec]):`[${JSON.stringify(spec)}, ...SS15_LEVELS.slice(1)]`});`):scripts[0]);
+ const fixtureLevels=single?JSON.stringify([spec]):`[...SS15_LEVELS.slice(0, TUTORIAL_LEVEL - 1), ${JSON.stringify(spec)}, ...SS15_LEVELS.slice(TUTORIAL_LEVEL)]`;
+ window.eval(spec?scripts[0].replace(entry,`const session = new DuoPuzzleSession(${fixtureLevels});${single?'':' session.selectLevel(TUTORIAL_LEVEL);'}`):scripts[0]);
  const ref=new DuoPuzzleSession(levels),$=id=>window.document.getElementById(id),board=$('board');
+ if(startLevel!==1)ref.selectLevel(startLevel);
  const key=(key,extra={})=>board.dispatchEvent(new window.KeyboardEvent('keydown',{key,bubbles:true,cancelable:true,...extra}));
  const click=data=>board.dispatchEvent(new window.MouseEvent('click',{clientX:(data.x+.25)*8,clientY:(data.y+.25)*8,bubbles:true,cancelable:true}));
  const dispatch=a=>{const {id,data}=normal(a);if(id===6)click(data);else key(keys[id]);};
@@ -52,9 +57,10 @@ const createHarness=(spec,{reducedMotion=false,single=false}={})=>{
  const reset=async kind=>{$(kind).click();await settled(ref[kind]());};
  const learned=()=>Object.fromEntries(lessonIds.map(id=>[id,window.document.querySelector('[data-lesson="'+id+'"]').classList.contains('done')]));
  equal(ref.observe());
+ assert.equal(board.dataset.level,String(startLevel));assert.equal($('tutorial').hidden,startLevel!==TUTORIAL_LEVEL);
  return{window,errors,ref,$,board,key,click,dispatch,equal,settled,action,choose,reset,learned,advance,flush,captures,timers,waits,get pixels(){return pixels;},close:()=>window.happyDOM.close()};
 };
-const report={success:false,htmlSha256:createHash('sha256').update(html).digest('hex'),scope:fixturesOnly?'fixtures-only':tutorialOnly?'tutorial-only':'focused-ui-and-full-campaign',environment:'Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue',visualBrowserTest:false,checks:[]};
+const report={success:false,htmlSha256:createHash('sha256').update(html).digest('hex'),scope:fixturesOnly?'fixtures-only':tutorialOnly?'tutorial-only':'focused-ui-and-full-campaign',tutorialLevel:TUTORIAL_LEVEL,pedagogicalFixtureLevel:TUTORIAL_LEVEL,environment:'Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue',visualBrowserTest:false,checks:[]};
 const checkReflectionFixtures=async()=>{
  const result=[];
  for(const f of [{name:'near hero ignores farther blocked arrival',farBlocked:true},{name:'near crate has a square outline',crate:true},{name:'equal distances exchange both heroes',tie:true}]){
@@ -197,6 +203,7 @@ const checkRayLoop=async()=>{
 };
 let h;
 try{
+ assert.equal(TUTORIAL_LEVEL,4,'The compiled tutorial belongs to the fourth room');
  assert.deepEqual([...lessonIds],['select','move','wizard-swap','wizard-partner','wizard-bend','relay-weight','bard-song','partner-song','selective-song','diagonal-song','wall-song','release-by-swap','platform','support-slide','support-anchor','mirror','gate','press','monster','goals']);
  assert.match(html,/SS15.*Les Accords Transposés/);assert.ok(!/Guerrier|warrior|Voleur|thief|La Forge des Reflets/.test(html.split('<script>')[0]));
  assert.equal((html.match(/data-lesson=/g)??[]).length,20);assert.equal(/<script[^>]+src=/.test(html),false);
@@ -219,46 +226,53 @@ try{
   h.click({x:-1,y:10});h.click({x:64,y:10});h.equal(h.ref.observe());
   h.$('level').dispatchEvent(new h.window.KeyboardEvent('keydown',{key:'ArrowDown',bubbles:true,cancelable:true}));h.equal(h.ref.observe());
   report.checks.push('Keys 1/2, Tab, both role buttons and public-pixel clicks select the intended hero without a world tick; Shift+Tab exits and outside input is ignored.');
-  await h.reset('restart');h.key('ArrowRight');const moving=h.ref.action(4),count=h.$('moves').textContent;
+  await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);await h.choose(TUTORIAL_LEVEL);
+  h.key('ArrowRight');const moving=h.ref.action(4),count=h.$('moves').textContent;
   assert.equal(h.board.dataset.busy,'true');h.key('ArrowDown');h.key('Tab');h.key('2');h.key(' ');assert.equal(h.$('moves').textContent,count);await h.settled(moving);
   assert.equal(h.learned()['wizard-swap'],true);await h.reset('undo');assert.equal(h.learned()['wizard-swap'],true,'Undo retains discoveries');
   h.key('ArrowRight');h.ref.action(4);h.$('undo').click();const undone=h.ref.undo(),stopped=h.captures.length;await h.settled(undone);assert.equal(h.captures.length,stopped);
-  h.key('ArrowRight');h.ref.action(4);await h.reset('reset');assert.equal(h.$('moves').textContent,'0 actions');assert.ok(Object.values(h.learned()).every(v=>!v));
-  h.key('ArrowRight');h.ref.action(4);await h.choose(SS15_LEVELS.length);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,false);
-  report.checks.push('Undo, Reset, Restart and level selection interrupt animations without stale frames; Reset clears discoveries.');
+  h.key('ArrowRight');h.ref.action(4);await h.reset('reset');assert.equal(h.$('moves').textContent,'0 actions');assert.ok(Object.values(h.learned()).every(v=>!v));assert.equal(h.board.dataset.level,String(TUTORIAL_LEVEL));assert.equal(h.$('tutorial').hidden,false);
+  h.key('ArrowRight');h.ref.action(4);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);
+  await h.choose(TUTORIAL_LEVEL);h.key('ArrowRight');h.ref.action(4);await h.choose(SS15_LEVELS.length);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);
+  report.checks.push('Undo, Reset, Restart and level selection interrupt animations without stale frames; Reset clears discoveries in room 4 and Restart returns to room 1 with its tutorial panel hidden.');
   await h.close();h=undefined;
   const reduced=createHarness(spec,{reducedMotion:true});try{reduced.key('ArrowRight');const next=reduced.ref.action(4);reduced.equal(next);assert.equal(reduced.board.dataset.busy,'false');assert.equal(reduced.waits.length,0);report.checks.push('Reduced motion uses no timer waits.');}finally{await reduced.close();}
   const fatal=makeArena('terminal combat',[[2,4,'Z'],[7,7,'B'],[6,4,'m'],[6,3,'m']]);h=createHarness(fatal);
   h.key('ArrowRight');const dead=h.ref.action(4);assert.equal(dead.state,'GAME_OVER');assert.equal(h.$('defeat').hidden,true);await h.advance();assert.equal(h.$('defeat').hidden,true);await h.settled(dead);assert.equal(h.$('defeat').hidden,false);
   h.$('undo-defeat').click();await h.settled(h.ref.undo());assert.equal(h.$('defeat').hidden,true);report.checks.push('Defeat waits for the final combat frame and its Undo restores the live room.');await h.close();h=undefined;
-  const win=makeArena('terminal victory',[[1,7,'.'],[2,7,'.'],[1,2,'Z'],[2,2,'g'],[6,6,'B'],[7,6,'g']]);h=createHarness(win,{single:true});await h.action(4);await h.action({id:6,data:heroes(h.ref.observe().frame).find(p=>p.color===6).data});
+  const win=makeArena('terminal victory',[[1,7,'.'],[2,7,'.'],[1,2,'Z'],[2,2,'g'],[6,6,'B'],[7,6,'g']]);h=createHarness(win,{single:true});assert.equal(h.ref.observe().levelCount,1);assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);await h.action(4);await h.action({id:6,data:heroes(h.ref.observe().frame).find(p=>p.color===6).data});
   h.key('ArrowRight');const won=h.ref.action(4);assert.equal(won.state,'WIN');assert.equal(h.$('victory').hidden,true);await h.settled(won);assert.equal(h.$('victory').hidden,false);
-  assert.ok([...h.window.document.querySelectorAll('[data-action],[data-hero]')].every(e=>e.disabled));await h.reset('undo');assert.equal(h.$('victory').hidden,true);await h.reset('restart');report.checks.push('VICTORY appears after the final frame and allows Undo or Restart.');await h.close();h=undefined;
+  assert.ok([...h.window.document.querySelectorAll('[data-action],[data-hero]')].every(e=>e.disabled));assert.ok(Object.values(h.learned()).every(v=>!v),'The single-room fixture does not impersonate the tutorial');await h.reset('undo');assert.equal(h.$('victory').hidden,true);await h.reset('restart');report.checks.push('VICTORY appears after the final frame and allows Undo or Restart; the one-room terminal fixture never pretends to be tutorial room 4.');await h.close();h=undefined;
  }
  if(!fixturesOnly){
   if(!tutorialOnly)assert.equal(SS15_LEVELS.length,8);h=createHarness();
+  assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);assert.equal(h.$('level-title').textContent,'L’appui des deux traversées');
   for(let level=1;level<=SS15_LEVELS.length;level++){
    await h.choose(level);const initial=h.ref.observe();assert.deepEqual(heroes(initial.frame).map(p=>p.color).sort((a,b)=>a-b),[6,15]);assert.equal(goalCount(initial.frame),2);
    assert.equal(h.$('tutorial').hidden,level!==TUTORIAL_LEVEL);assert.equal(h.$('piston-help').hidden,!LEVEL_INFO[level-1].piston);
+   assert.equal(h.$('level-title').textContent,SS15_LEVELS[level-1].title);assert.equal(h.$('source-label').textContent,LEVEL_INFO[level-1].label);assert.equal(h.$('level-objective').textContent,LEVEL_INFO[level-1].objective);
    assert.equal(h.$('source-link').hidden,!LEVEL_INFO[level-1].url);if(LEVEL_INFO[level-1].url)assert.equal(h.$('source-link').href,new URL(LEVEL_INFO[level-1].url).href);
    assert.equal(h.$('source-link-secondary').hidden,!LEVEL_INFO[level-1].secondary);if(LEVEL_INFO[level-1].secondary)assert.equal(h.$('source-link-secondary').href,new URL(LEVEL_INFO[level-1].secondary.url).href);
    const platforms=!!SS15_LEVELS[level-1].platforms?.length;for(const id of ['platform-help','platform-legend-active','platform-legend-inactive'])assert.equal(h.$(id).hidden,!platforms);
    if(SS15_LEVELS[level-1].rows.some(r=>r.includes('m'))){assert.equal(h.$('monster-help').hidden,false);assert.equal(h.$('monster-help').open,true);h.$('monster-help').open=false;const other=heroes(initial.frame).find(p=>p.color===6);await h.action({id:6,data:other.data});assert.equal(h.$('monster-help').open,false,'Help respects manual collapse during a room');}
   }
-  assert.deepEqual(h.errors,[]);report.checks.push(`All ${SS15_LEVELS.length} compiled rooms expose two heroes, two goals, both source links and contextual help.`);await h.reset('restart');await h.close();h=undefined;
+  assert.deepEqual(h.errors,[]);report.checks.push(`All ${SS15_LEVELS.length} compiled rooms expose their correct title, objective, two heroes, two goals, both source links and contextual help; only room 4 shows the tutorial.`);await h.reset('restart');assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,true);await h.close();h=undefined;
   h=createHarness();report.campaignCoverage=[];
-  for(let level=1;level<=(tutorialOnly?1:8);level++){
+  const replayLevels=tutorialOnly?[TUTORIAL_LEVEL]:Array.from({length:SS15_LEVELS.length},(_,index)=>index+1);
+  if(tutorialOnly)await h.choose(TUTORIAL_LEVEL);
+  for(const level of replayLevels){
    const path=resolve(root,`reference/level${level}-design.json`);assert.ok(existsSync(path),'The authored room must exist');const design=JSON.parse(readFileSync(path,'utf8'));
    assert.deepEqual(design.spec,SS15_LEVELS[level-1],'Built room must match its authored reference');
-   assert.equal(h.ref.observe().level,level);assert.equal(h.board.dataset.level,String(level));let beforeLast;
-   for(const action of design.actions){beforeLast=h.ref.observe();await h.action(action);}
-   assert.equal(h.ref.observe().levelsCompleted,level);
-   if(level===1){for(const id of lessonIds)assert.equal(h.learned()[id],true,'Real tutorial acquisition: '+id);report.tutorialCoverage={level:1,actions:design.actions.length,discoveries:[...lessonIds]};}
-   const completed=h.ref.observe();await h.reset('undo');h.equal(beforeLast);assert.equal(h.$('victory').hidden,true);
+   assert.equal(h.ref.observe().level,level);assert.equal(h.board.dataset.level,String(level));assert.equal(h.$('tutorial').hidden,level!==TUTORIAL_LEVEL);const completedBefore=h.ref.observe().levelsCompleted;let beforeLast;
+   for(const action of design.actions){beforeLast=h.ref.observe();const discoveries=h.learned();await h.action(action);assert.equal(h.$('tutorial').hidden,h.ref.observe().level!==TUTORIAL_LEVEL);if(level!==TUTORIAL_LEVEL)assert.deepEqual(h.learned(),discoveries,'Only actual room 4 can award a discovery');}
+   assert.equal(h.ref.observe().levelsCompleted,completedBefore+1);
+   if(level<TUTORIAL_LEVEL)assert.ok(Object.values(h.learned()).every(v=>!v),'No discovery before the actual tutorial');
+   if(level===TUTORIAL_LEVEL){for(const id of lessonIds)assert.equal(h.learned()[id],true,'Real room 4 tutorial acquisition: '+id);report.tutorialCoverage={level:TUTORIAL_LEVEL,actions:design.actions.length,discoveries:[...lessonIds],onlyTutorialRoomAwardsDiscoveries:true};}
+   const completed=h.ref.observe();await h.reset('undo');h.equal(beforeLast);assert.equal(h.$('victory').hidden,true);assert.equal(h.$('tutorial').hidden,level!==TUTORIAL_LEVEL);
    await h.action(design.actions.at(-1));assert.deepEqual(h.ref.observe(),completed);assert.deepEqual(h.errors,[]);
    report.campaignCoverage.push({level,title:design.spec.title,actions:design.actions.length,exactPixelsAndTiming:true,completionUndo:true});
   }
-  report.checks.push('The authored level1 route earns all twenty discoveries from displayed public pixels.');
+  report.checks.push(tutorialOnly?'The authored level4 route earns all twenty discoveries from displayed public pixels after direct selection of the actual tutorial room.':'The authored level4 route earns all twenty discoveries from displayed public pixels; earlier rooms award none and later rooms add none.');
   if(!tutorialOnly){assert.equal(h.ref.observe().state,'WIN');assert.equal(h.$('victory').hidden,false);report.checks.push('All eight actual rooms, including the rebuilt finals, win through compiled HTML inputs with every frame and duration checked; each completion is undone and replayed.');}
  }
  report.success=true;
