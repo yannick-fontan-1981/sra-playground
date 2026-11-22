@@ -22,7 +22,8 @@ const load=async p=>JSON.parse(await readFile(p,'utf8'));
 for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().split(/\r?\n/)) {
   const r=JSON.parse(line);
   if(r.error) {unavailable.push(r.code);continue;}
-  const key=[r.code,r.start,r.finish,r.observedPriorLevelActions??0].join('/');
+  const key=[r.code,r.start,r.finish,r.observedPriorLevelActions??0,r.parallelWorkers??'unspecified'].join('/');
+  if (r.parallelWorkers !== undefined) assert.ok(Number.isSafeInteger(r.parallelWorkers) && r.parallelWorkers >= 1,key);
   const engine=createGameDispatcher(()=>{throw Error('Unexpected engine')});
   const transient = process.env.SIC_AUDIT_TRANSIENT_SUBJECTS ? await transientSubjectAudit(process.env.SIC_AUDIT_TRANSIENT_SUBJECTS) : null;
   const act=c=>engine.dispatch({type:'action',actionId:c.id,...(c.id===6?{data:c.data}:{})});
@@ -84,6 +85,7 @@ for(const path of paths) for(const line of (await readFile(path,'utf8')).trim().
   assert.deepEqual(levels,r.levels.map(({level,actions,won})=>({level,actions,won})));
   assert.equal(b.levelsCompleted-r.initialCompleted,levels.filter(l=>l.won).length);
   const result={code:r.code,start:r.start,finish:r.finish,lesson:r.observedPriorLevelActions??0,initial:r.initial,
+    ...(r.parallelWorkers === undefined ? {} : {parallelWorkers:r.parallelWorkers}),
     cap:r.cap,levels,resets,tapeDigest:hash(tape),final:hash(b.frame)};
   if (delivery) result.coldDeliveryEntry = entry;
   if (reception) result.observedReceptions = receptions;

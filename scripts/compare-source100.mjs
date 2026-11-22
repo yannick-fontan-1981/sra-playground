@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto';
+import { existsSync } from 'node:fs';
 import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceInterface } from './sic-study-source-interface.mjs';
@@ -10,12 +11,16 @@ import { pathToFileURL } from 'node:url';
 // Use the same public game backend and assets for both solvers. Each run creates a new agent.
 const [solverArg, environmentArg, output, cohort, startArg, finishArg, capArg, shardArg = '0/1'] =
   process.argv.slice(2);
+// A supervisor may yield this tape at the next game boundary and resume later.
+const pauseFile = output + '.pause';
+if (existsSync(pauseFile)) process.exit(0);
 const solverRoot = resolve(solverArg),
   environment = resolve(environmentArg);
 const start = Number(startArg),
   finish = Number(finishArg),
   cap = Number(capArg);
 const source = cohort === 'source' || cohort.startsWith('source:');
+const parallelWorkers = Number(process.env.SIC_STUDY_WORKERS ?? 1);
 const load = (root, file) => import(pathToFileURL(join(root, file)).href);
 const { BrowserV6Agent } = await load(solverRoot, 'src/runtime/v6-agent.ts');
 const { V6AgentService } = await load(solverRoot, 'src/runtime/v6-agent-service.ts');
@@ -206,7 +211,7 @@ async function run(code, games) {
     transport,
     targetLevels: finish - start + 1,
     actionsPerLevel: cap,
-    parallelWorkers: Number(process.env.SIC_STUDY_WORKERS ?? 4),
+    parallelWorkers,
     recoveryConfiguration: () => packRevision?.configuration ?? { ...defaultRecoveryPack, solver: 'sic-fallback' },
     canDispatch: () => true,
     onState: collectPreparation,
@@ -356,7 +361,7 @@ async function run(code, games) {
       start,
       finish,
       cap,
-      ...(process.env.SIC_STUDY_WORKERS ? {parallelWorkers:Number(process.env.SIC_STUDY_WORKERS)} : {}),
+      parallelWorkers,
       initial,
       initialCompleted,
       ...(withdrawal?{withdrawal}:{}),
@@ -491,6 +496,7 @@ const games = source
 const jobs = forks ? forks.filter(f => selected.includes(f.code) && f.level === start)
   : selected.map(code => ({code}));
 for (const job of jobs.filter((_, i) => i % shards === index)) {
+  if (existsSync(pauseFile)) break;
   const {code} = job;
   try {
     const result = await run(code, forks ? fromSourceFork(games, job) : games);

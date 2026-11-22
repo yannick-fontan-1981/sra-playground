@@ -17,7 +17,8 @@ const entries = [];
 const seen = new Set();
 
 function verify(run) {
-  const id = [run.code, run.start, run.finish, run.sourceInterface ?? 'original'].join('/');
+  const id = [run.code, run.start, run.finish, run.sourceInterface ?? 'original', run.parallelWorkers ?? 'unspecified'].join('/');
+  if (run.parallelWorkers !== undefined) assert.ok(Number.isSafeInteger(run.parallelWorkers) && run.parallelWorkers >= 1, id);
   assert.ok(!run.error, run.code + ': ' + run.error);
   const game = catalog.get(run.code);
   assert.ok(game && Number.isSafeInteger(run.start) && run.start >= 1, id);
@@ -72,6 +73,7 @@ function verify(run) {
     assert.equal(report.won, won, id);
     assert.ok(won || offset === run.levels.length - 1, 'Unscored campaign boundary: ' + id);
     entries.push({ game: run.code, level, start: run.start, finish: run.finish,
+      ...(run.parallelWorkers === undefined ? {} : {parallelWorkers: run.parallelWorkers}),
       ...(run.sourceInterface ? { interface: run.sourceInterface } : {}), cap: run.cap, actions: report.actions,
       resets: resets - previousResets, won, credit, reason: report.reason, initial, final: hash(b), commands: commands.digest('hex') });
   }
