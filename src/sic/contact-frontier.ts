@@ -1,6 +1,8 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { composeSupportPlan, closedSupportRegion } from './compose-support-plan.ts';
 import { passengerProject } from './passenger-transport.ts';
+import { relayTransportPlan, type RelayPlan, type RelayStep } from './relay-transport-plan.ts';
+import type { RelayControlMemory } from './relay-control.ts';
 import { transportLandingPlan } from './transport-landing-plan.ts';
 import { spatialControls, surfaceFromVisits } from './calibrate-spatial-controls.ts';
 import type { XY } from './access-terrain.ts';
@@ -9,7 +11,9 @@ import { previewLaw, transform, type ProbePattern } from './reachable-preview-co
 import { contactProject, edgeKey, stepCell, type Board, type Project, type Step } from './contact-frontier-search.ts';
 
 type Ground = { role: string; actor: string; origin: XY; pitch: XY; width: number };
+type RelayRun = { ground:Ground; plan:RelayPlan; pivotRole:string; cargoRole:string; transfer:string; witness:string; expected:string };
 export type FrontierContact = Ground & {
+  relay?:RelayRun;
   step: Step;
   project: Project;
   parts: number[];
@@ -30,7 +34,9 @@ export type SupportLaw = {
   entry: string;
   displacement: string;
 };
-export type ContactMemory = {
+export type ContactMemory = RelayControlMemory & {
+  relayRun?:RelayRun;
+  refusedRelay?:string[];
   passengerWitnesses?: Record<string, string>;
   partialSubject?: { actor: string; at: XY; frame: string; pigment: number };
   inheritedPassengers?: Record<string, string>;
@@ -273,7 +279,7 @@ function fittedTransport(
   }
   return null;
 }
-function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation, rows: NativeRows) {
+function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation, rows: NativeRows, paired = false) {
   const layout = visualLayout(o, rows),
     available = new Set(o.available_action_refs);
   const targets: { actor: string; marker: string; offset?: XY }[] = [...(l.terminal ?? [])];
@@ -283,7 +289,7 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
     const bodies = layout[goal.actor] ?? (partial?.actor === goal.actor && partial.frame === o.frame_hash ? [partial] : undefined),
       markers = goal.marker ? layout[goal.marker] : [],
       motion = l.partMotion?.[goal.actor];
-    if (bodies?.length !== 1 || !markers || (goal.marker && markers.length !== 1) || !motion) continue;
+    if (bodies?.length !== 1 || !markers || (goal.marker && markers.length !== (paired ? 2 : 1)) || !motion) continue;
     const controls = spatialControls(motion, available, '', {}, o.frame_hash, goal.actor);
     if (!controls || controls.motors.length < 2 || controls.motors.some((m) => !m.support)) continue;
     const pitch = controls.pitch;
@@ -307,6 +313,7 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
       Number(Object.entries(motion.substrate).sort((a, b) => b[1] - a[1])[0]?.[0]);
     if (!Number.isFinite(floor)) continue;
     const fixed = new Set([actor, ...goals, ...(warp ? [warp.pivot] : [])]);
+    if (paired && m.relayControl) for (const v of layout[m.relayControl.peer] ?? []) fixed.add(cell(v.at,g));
     const signals = new Set(
       Object.values(l.bindings)
         .filter((b) => b.actor === goal.actor)
@@ -398,6 +405,68 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
   }
   return null;
 }
+export function proposeRelayContact(m:ContactMemory,l:PreviewLearning,o:NativeObservation,rows:NativeRows,limits:{maxDepth:number;maxNodes:number}):FrontierContact|null {
+  const control=m.relayControl;
+  if(!control || !o.available_action_refs.includes(control.op))return null;
+  let run=m.relayRun;
+  if(run && run.expected!==o.frame_hash){delete m.relayRun;run=undefined;}
+  if(!run){
+    if(m.refusedRelay?.includes(o.frame_hash)||!m.inheritedSupports?.length || !Object.keys(m.inheritedPassengers??{}).length)return null;
+    const fit=contactBoard(m,l,o,rows,true);if(!fit)return null;
+    const {board:b,g}=fit;
+    if(g.actor!==control.actor||!b.transport||b.pivotIndex<0)return null;
+    const layout=visualLayout(o,rows),peer=layout[control.peer],pivot=b.roles[b.pivotIndex]!;
+    if(peer?.length!==1)return null;
+    const cargoes=b.parts.map((_,i)=>i).filter(i=>i!==b.pivotIndex && m.inheritedPassengers?.[passengerBinding(b,g.actor,b.roles[i]!)]);
+    if(cargoes.length!==1)return null;
+    const cargo=cargoes[0]!,role=b.roles[cargo]!,witness=m.inheritedPassengers?.[passengerBinding(b,g.actor,role)];
+    const mask=o.entities.find(e=>e.signature===layout[pivot]?.[0]?.form&&e.area<=16)?.mask.map(([x,y]):XY=>[x,y]);
+    if(!witness||!mask)return null;
+    const transport=fittedTransport(l,g.actor,layout,g,new Set(b.motors.map(v=>v.op)),new Set(o.available_action_refs),{pivot,mask});
+    if(!transport)return null;
+    const allows=(at:number)=>m.inheritedSupports!.some(law=>law.actor===g.actor&&law.role===role&&
+      law.terrain===dominantColor(rows,[g.origin[0]+at%g.width*g.pitch[0],g.origin[1]+Math.floor(at/g.width)*g.pitch[1]],g.pitch));
+    const select=(at:number)=>control.op+':'+Math.round((g.origin[0]+at%g.width*g.pitch[0])/2)+','+Math.round((g.origin[1]+Math.floor(at/g.width)*g.pitch[1])/2);
+    const pivotAt=b.parts[b.pivotIndex]!,cargoAt=b.parts[cargo]!;
+    // A projected landing can itself be segmented as a separate visible part.
+    // Discard only an unbound occurrence at this independently predicted site.
+    const preview=transport.land(cargoAt,pivotAt);
+    const indicators=new Set(Object.values(l.bindings).filter(binding=>binding.actor===role && binding.gesture.op===transport.op).map(binding=>binding.indicator));
+    if(b.parts.some((at,i)=>i!==cargo && i!==b.pivotIndex && (at!==preview || !indicators.has(b.roles[i]!))))return null;
+    const scene={...b,parts:[cargoAt,pivotAt],roles:[role,pivot],pivotIndex:1,transport};
+    const plan=relayTransportPlan(scene,cell(peer[0]!.at,g),0,allows,select,limits);
+    if(!plan)return null;
+    run={ground:g,plan,pivotRole:pivot,cargoRole:role,transfer:transport.op,witness,expected:o.frame_hash};
+  }
+  const step=run.plan.steps[0];if(!step)return null;
+  return {...run.ground,step,relay:run,project:{purpose:'reach_goal',steps:run.plan.steps,site:run.plan.design.remote,
+    role:run.cargoRole,preparations:[{at:run.plan.design.landing,role:run.cargoRole,enables:['park_subject','reconfigure_with_other_subject']}]},
+    parts:[],acquired:false,ref:o.observation_ref,transform:run.transfer,terrain:null,previousEntry:null,priorContact:control.verification};
+}
+
+function recordRelay(m:ContactMemory,b:NativeObservation,a:NativeObservation,rows:NativeRows,next:NativeRows,run:RelayRun) {
+  const s=run.plan.steps[0]!,g=run.ground,control=m.relayControl!;
+  const layout=visualLayout(a,next);
+  const has=(role:string,at:number)=>layout[role]?.some(v=>cell(v.at,g)===at)??false;
+  const ink=(image:NativeRows,at:number)=>cellAppearance(image,at,g).split(',').includes(String(control.ink));
+  const fail=()=>{(m.refusedRelay??=[]).push(b.frame_hash);delete m.relayRun;return 'relay_prediction_refuted';};
+  if(s.select){
+    if(!has(control.actor,s.to)||!has(control.peer,s.peerTo))return fail();
+  }else{
+    if(!ink(next,s.to)||!ink(next,s.peerTo))return fail();
+    if(s.from!==s.to && s.from!==s.peerTo && ink(next,s.from))return fail();
+    if(s.peerFrom!==s.peerTo && s.peerFrom!==s.to && ink(next,s.peerFrom))return fail();
+    if(s.role && s.placed!==undefined){
+      if(s.boundary && s.passenger){
+        if(has(s.role,s.passenger.source)||has(s.role,s.placed)||cellAppearance(rows,s.placed,g)===cellAppearance(next,s.placed,g))return fail();
+      }else if(!has(s.role,s.placed))return fail();
+    }
+  }
+  const steps=run.plan.steps.slice(1);
+  m.relayRun=steps.length?{...run,expected:a.frame_hash,plan:{...run.plan,steps}}:undefined;
+  return s.select?'relay_control_exchanged':s.boundary?'relay_deposit_observed':s.peerFrom!==s.peerTo?'parked_subject_transferred':'relay_placement_observed';
+}
+
 export function proposeFrontierContact(
   m: ContactMemory,
   l: PreviewLearning,
@@ -560,6 +629,7 @@ export function recordFrontierContact(
   trial: FrontierContact
 ) {
   if (b.level_epoch !== a.level_epoch || a.levels_completed > b.levels_completed) return 'official_progress';
+  if(trial.relay)return recordRelay(m,b,a,rows,next,trial.relay);
   const before = contactBoard(m, l, b, rows),
     after = visualLayout(a, next);
   if (!before) return 'unresolved_subject';

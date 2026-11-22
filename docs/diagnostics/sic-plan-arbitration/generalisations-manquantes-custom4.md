@@ -1,5 +1,7 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
+**Conserver un sujet en position pendant qu’un autre reconfigure le transport.** SIC 203 remonte depuis la sortie isolée, choisit un support commun à deux réglages successifs et réutilise un changement de contrôle vérifié. La campagne locale gagne SS01 L8 en 41 coups et atteint huit crédits. [Oracle, première divergence et vérification du relais](./ss01-l8-relais-et-oracle.md)
+
 **Créer un support pour un mécanisme, puis un support de réception pour son utilisateur.** Sur SS01 L7, SIC révision 201 remonte depuis la rive de sortie, choisit deux transformations du terrain et vérifie leur usage. Il gagne en 37 coups après le L6 sur le site local. La première décision diffère déjà par les préparations annoncées. [Oracle, attribution et résultat de campagne](./ss01-l7-oracle-et-composition.md)
 
 **Reprise après une expérience qui ferme une voie.** Sur SS01 L6, la révision 199 compare les possibilités de poussée avant et après le déplacement observé, trouve une autre suite depuis la disposition précédente et conserve cette alternative pendant le reset. La campagne gagne le L6 en 116 coups. [Point de blocage, contre-épreuve et campagne](./ss01-l6-reprise-apres-poussee.md)

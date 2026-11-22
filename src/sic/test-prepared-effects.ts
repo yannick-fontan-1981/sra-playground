@@ -1,6 +1,7 @@
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
 import { sicObservedTransportDeadlock } from '../logos-engine/v6-native-types.ts';
-import { observeStrandedTransport, newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
+import {rememberRelayControl} from './relay-control.ts';
+import { proposeRelayContact, observeStrandedTransport, newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
 import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
@@ -137,6 +138,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     m.localCapacity = nextLocalLevel(localCarry);
     m.previewLearning = acceptPreviewCarry(previewCarry, o);
     m.contactFrontier = inheritFrontierContacts(contactFrontier?.contactEvidence, m.previewLearning, lessons);
+    if (Object.keys(m.previewLearning.bindings).length && contactFrontier?.relayControl) m.contactFrontier.relayControl=contactFrontier.relayControl;
     if (m.previewLearning.terminal?.length && contactFrontier?.passengerWitnesses)
       m.contactFrontier.inheritedPassengers = {...contactFrontier.passengerWitnesses};
     if (transportRetry?.epoch === o.level_epoch) {
@@ -162,6 +164,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     const boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
+      if(cmd.data.x!==undefined || m.contactFrontier?.pendingControl)rememberRelayControl(m.contactFrontier??=newContactMemory(),b,a,cmd.action_ref,cmd.data);
       const before=visualLayout(b,rows),after=visualLayout(a,next);
       const key=observedCommandKey(cmd);
       if(retrySelection&&x?.landmark)recordPlacementVisit(m.placementVisits??={edges:{},tested:{}},x.landmark,b.frame_hash,a.frame_hash,a.observation_ref);
@@ -296,8 +299,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const repair=missingCue || justMovedLine || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
         ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
-      const contactProject=!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
-        ? proposeFrontierContact(m.contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null;
+      const relay=!focused && group===evidencedPlanGroup && limits && m.previewLearning && m.contactFrontier?.relayControl ? proposeRelayContact(m.contactFrontier,m.previewLearning,o,rows,limits):null;
+      const contactProject=relay??(!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
+        ? proposeFrontierContact(m.contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null);
       if (!contactProject && !cooperative && !landmark && !cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
@@ -464,6 +468,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
           ...(m.contactFrontier?.repair ? {afterReset:{checkpoint:m.contactFrontier.repair.frame,
             excludedPush:m.contactFrontier.repair.edge, alternativeLength:m.contactFrontier.repair.project.steps.length}} : {}),
+          ...(contactProject.relay?{relay:{...contactProject.relay.plan.design,control:contactProject.priorContact,
+            cargo:contactProject.relay.witness,peerFrom:contactProject.relay.plan.steps[0]?.peerFrom,peerTo:contactProject.relay.plan.steps[0]?.peerTo}}:{}),
           ...(contactProject.project.landing?{landing:contactProject.project.landing}:{}),
           ...(contactProject.project.passenger?{passenger:contactProject.project.passenger}:{}),
           site:contactProject.project.site,...(contactProject.project.preparations?{preparations:contactProject.project.preparations}:{}),from:contactProject.step.from,to:contactProject.step.to,
