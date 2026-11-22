@@ -1,4 +1,6 @@
 import type { Edge, Experiment, Memory } from './preparation-experiments.ts';
+import type { NativeRows } from '../logos-engine/v6-native-types.ts';
+import { nextConfiguration } from './configuration-trials.ts';
 
 export const silentInputStrategy = 'test_an_unresponsive_input_after_preparation';
 export const startSilentTest = 'compare_a_silent_input_across_two_preparations';
@@ -23,7 +25,7 @@ function experiment(question: SilentInputQuestion, phase: 'prepare' | 'probe'): 
 }
 
 export function proposeSilentInput(m: Memory, site: number, available: readonly string[], budget: number,
-  minimumOutcomes: number, continuation: boolean): Experiment | null {
+  minimumOutcomes: number, continuation: boolean, rows: NativeRows): Experiment | null {
   if (minimumOutcomes > 2 || budget < 1 || site < 0) return null;
   if (continuation) {
     const q = m.pendingSilentInput;
@@ -64,7 +66,14 @@ export function proposeSilentInput(m: Memory, site: number, available: readonly 
         preparationReturns: times, inactiveOrigins: controls.length, refs: [direct.ref, other.ref, prep.ref] } };
     }
   }
-  return best ? experiment(best.question, 'prepare') : null;
+  if (!best) return null;
+  // A single witnessed control can sometimes test a new configuration now.
+  // Returning to a familiar arrangement to ask a two-action question costs more.
+  if (m.configurationOpportunity && m.configurations) {
+    const direct = nextConfiguration(m.configurations, rows, available);
+    if (direct && direct.expected === direct.target) return null;
+  }
+  return experiment(best.question, 'prepare');
 }
 
 export function assessSilentInput(m: Memory, x: Experiment, from: number, to: number, command: string, effect: string) {

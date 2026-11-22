@@ -25,6 +25,7 @@ export function planningGroupsWithExperiments(groups: readonly NativeSelectionGr
       const exploration = entries.findIndex(family => family.id === publicInputExplorationId);
       if (exploration < 0) throw Error('Missing public input exploration entry');
       entries.splice(exploration, 0,
+        ...(testSilentInputs ? [{ id: preparedEffectsId, entry: finishSilentTest }] : []),
         { id: compositionFamily, entry: fieldGroup },
         ...(testSilentInputs ? [{ id: preparedEffectsId, entry: startSilentTest }] : []),
         { id: preparedEffectsId, entry: recurrentExperimentGroup },

@@ -21,17 +21,25 @@ test('a reproducible arrangement can test a command that has never done anything
   add(0,0,'ACTION6:8,9',3);
   add(2,2,'ACTION6:8,9',4);
   m.delayed.history=[0,1,2,3,0,1];
-  const propose=(minimum=2,budget=2)=>proposeSilentInput(m,0,available,budget,minimum,false);
+  const rows=[[0,1]];
+  const propose=(minimum=2,budget=2)=>proposeSilentInput(m,0,available,budget,minimum,false,rows);
   assert.equal(propose(3),null);
   assert.equal(propose(2,1),null);
+  m.configurations={factors:[
+    {action:'ACTION2',site:[0,0],values:[0,1],forward:'left-out',reverse:'left-back'},
+    {action:'ACTION4',site:[1,0],values:[0,1],forward:'right-out',reverse:'right-back'},
+  ],visited:['00','10','01'],failures:[]};
+  m.configurationOpportunity=true;
+  assert.equal(propose(),null);
+  m.configurations.visited.push('11');
   const setup=propose()!;
   assert.equal(setup.a,'ACTION2');
   assert.equal(setup.b,'ACTION6:8,9');
   assert.equal(setup.silentInput?.inactiveOrigins,2);
   assert.equal(assessSilentInput(m,setup,0,1,setup.a,'edit'),'preparation_verified_test_the_silent_input');
-  assert.equal(proposeSilentInput(m,0,available,1,2,true),null);
-  assert.equal(proposeSilentInput(m,1,['ACTION2'],1,2,true),null);
-  const probe=proposeSilentInput(m,1,available,1,2,true)!;
+  assert.equal(proposeSilentInput(m,0,available,1,2,true,rows),null);
+  assert.equal(proposeSilentInput(m,1,['ACTION2'],1,2,true,rows),null);
+  const probe=proposeSilentInput(m,1,available,1,2,true,rows)!;
   assert.equal(probe.phase,'probe');
   assert.equal(assessSilentInput(m,probe,1,2,probe.b,'edit'),'previously_silent_input_changed_the_arrangement');
   assert.equal(assessSilentInput(m,probe,1,1,probe.b,'still'),'input_remained_silent_after_preparation');
@@ -43,7 +51,8 @@ test('a reproducible arrangement can test a command that has never done anything
   const configured=planningGroupsWithExperiments(standalonePlanningGroups,true,true);
   assert.ok(!normal.some(group=>group.entryPoints?.includes(startSilentTest)));
   assert.equal(configured[0]!.entryPoints![1],finishSilentTest);
-  assert.ok(configured.find(g=>g.id==='explore_available_inputs')!.entryPoints!.includes(startSilentTest));
+  const fallback=configured.find(g=>g.id==='explore_available_inputs')!.entryPoints!;
+  assert.ok(fallback.includes(finishSilentTest) && fallback.indexOf(finishSilentTest)<fallback.indexOf(startSilentTest));
 });
 
 test('return history expires and fresh progress immediately restores precedence', () => {

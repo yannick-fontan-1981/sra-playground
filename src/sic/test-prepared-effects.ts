@@ -245,7 +245,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(remaining<1)return null;
       const silentGroup=group===startSilentTest || group===finishSilentTest;
       const silent=silentGroup && testSilent && comparePreparations
-        ? proposeSilentInput(m,m.scenes.indexOf(sceneKey(o)),o.available_action_refs,remaining,informationPreference.minimumOutcomes,group===finishSilentTest) : null;
+        ? proposeSilentInput(m,m.scenes.indexOf(sceneKey(o)),o.available_action_refs,remaining,informationPreference.minimumOutcomes,group===finishSilentTest,rows) : null;
       if(silentGroup && !silent)return null;
       const focused=group===coveragePlanGroup;
       const lessonTest=learnScope && m.pairInquiry?.lesson && !m.coverage && o.available_action_refs.includes('ACTION6') && (focused||group===evidencedPlanGroup)
