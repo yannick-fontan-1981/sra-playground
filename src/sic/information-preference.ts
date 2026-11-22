@@ -5,7 +5,7 @@ export interface InformationPreference {
   readonly strategy: InformationStrategy;
   readonly minimumOutcomes: number;
   readonly mechanismRefutationLimit?: number;
-  readonly earlyControl?: 'complete_an_observed_pair';
+  readonly earlyControl?: 'complete_an_observed_pair' | 'compare_preparation_orders';
   readonly motorExperiment?: 'measure_positional_baseline' | 'distinguish_observed_displacements';
   readonly fieldRegistration?: 'test_aligned_fragments_after_motion';
 }
@@ -24,7 +24,7 @@ export function compileInformationPreference(input: unknown): InformationPrefere
       !Number.isSafeInteger(mechanismRefutationLimit) || mechanismRefutationLimit < 1 || mechanismRefutationLimit > 64)) {
     throw new TypeError('The number of identical conflicting mechanism returns must be between 1 and 64.');
   }
-  if (earlyControl !== undefined && earlyControl !== 'complete_an_observed_pair')
+  if (earlyControl !== undefined && earlyControl !== 'complete_an_observed_pair' && earlyControl !== 'compare_preparation_orders')
     throw new TypeError('Unrecognized controlled experiment.');
   if (motorExperiment !== undefined && motorExperiment !== 'measure_positional_baseline' && motorExperiment !== 'distinguish_observed_displacements')
     throw new TypeError('Unrecognized motor experiment.');

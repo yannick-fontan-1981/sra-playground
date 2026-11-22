@@ -5,6 +5,7 @@ import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal
 import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
+import {chooseOrderTrial,orderCommand} from './compare-preparation-orders.ts';
 import {motorStudy, proposeMotorTest, recordMotorContext, useMeasuredControl} from './positional-motor-test.ts';
 import {offerCursorTrial,newCursorMemory,measuredReturnSelection} from './marked-cursor-selection.ts';
 import {observeLandmarks,observeLandmarkAccess,proposeLandmark,refreshedSelection} from './paired-landmark-placement.ts';
@@ -117,6 +118,7 @@ import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
+  const compareOrders = informationPreference?.mode==='active' && informationPreference.earlyControl==='compare_preparation_orders' && informationPreference.minimumOutcomes===2;
   const earlyControl = informationPreference?.mode==='active' && informationPreference.earlyControl==='complete_an_observed_pair' && informationPreference.minimumOutcomes===2;
   const compareStrides = informationPreference?.motorExperiment==='distinguish_observed_displacements';
   const testMotor = informationPreference?.mode==='active' && !!informationPreference.motorExperiment && informationPreference.minimumOutcomes===2;
@@ -339,8 +341,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity;
       const immediate = earlyControl && ordinaryExploration && !m.pending && !m.cursorSelection?.pending && !m.localCapacity?.pending &&
         !m.relativeMotion?.active ? probeFromKnownControl(m,m.scenes.indexOf(sceneKey(o)),new Set(available.map(observedCommandKey)),true) : null;
-      if (ordinaryExploration && !immediate) return null;
-      const experiment:Experiment|null = silent ?? mark ?? transport ?? immediate ?? (motor ? {
+      const canTestOrder=group===recurrentExperimentGroup && !cooperative && !landmark && !cursor && !motor &&
+        !m.pending && !m.cursorSelection?.pending && !m.localCapacity?.pending && !m.relativeMotion?.active;
+      const order=compareOrders && canTestOrder
+        ? chooseOrderTrial(m,o,m.scenes.indexOf(sceneKey(o)),remaining) : undefined;
+      if (ordinaryExploration && !immediate && !order) return null;
+      const experiment:Experiment|null = silent ?? mark ?? transport ?? immediate ?? (order ? {phase:'probe',origin:order.origin,a:order.forward[0],b:orderCommand(order),rule:'compare_a_measured_probe_after_both_preparation_orders',refs:[...order.refs,...order.prefixRefs,...(order.relatedEvidence?[order.relatedEvidence]:[])],orderTrial:order} : motor ? {
         phase:'measureMotorBaseline',origin:-1,a:motor.command,b:motor.command,rule:motor.basis==='two_observed_displacements'?'distinguish_the_two_observed_displacements':'test_if_the_last_displacement_depends_on_the_current_position',refs:[],motorTest:motor,
       } : cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
         refs:[],rule:cooperative.purpose,cooperative} : landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
@@ -351,14 +357,14 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity));
-      if(!cooperative&&!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!motor&&!immediate&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
+      if(!cooperative&&!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!motor&&!immediate&&!order&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (!experiment || (!cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
       const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.silentInput||experiment.markedMotion||experiment.transportControl||cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
-        label = motor?.basis==='two_observed_displacements' ? 'Repeat the command to distinguish the two observed displacements' : silent ? (phase==='prepare' ? 'Reproduce an arrangement to test an input that previously had no effect' : 'Measure whether the same input now changes the arrangement') : cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
+        label = order ? 'Compare the same input after reversing two witnessed preparations' : motor?.basis==='two_observed_displacements' ? 'Repeat the command to distinguish the two observed displacements' : silent ? (phase==='prepare' ? 'Reproduce an arrangement to test an input that previously had no effect' : 'Measure whether the same input now changes the arrangement') : cursor?.basis && cursor.stage==='select' ? 'Test a second subject at the scale of the observed movement' : experiment.frame?.plan.basis==='observed_preparation' ? 'Measure the response after a witnessed change of reference' : experiment.occupancy?.plan.preparedPreview ? 'Move the indicator to redirect the same action and measure the access it opens' : labels[phase],
         parent = 'G_official_completion';
       const positioned = experiment.terminalContact && 'operation' in experiment.terminalContact.witness
         ? experiment.terminalContact.witness : undefined;
@@ -396,6 +402,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         parentObjective: parent,
         satisfactionContract: experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
+      if(order){
+        question.subjects=[...order.forward,order.probe];
+        question.satisfactionContract='compare_which_identifiable_subjects_can_move_under_the_same_input_after_each_order';
+      }
       if(immediate){
         question.subjects=[a,b];
         question.satisfactionContract='compare_the_observed_effect_of_the_same_input_with_and_without_the_preparation';
@@ -491,6 +501,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(m.occupancy?.mechanismRefutations?.deferred?.observation === o.observation_ref ?
           {deferredMechanismForecast:m.occupancy.mechanismRefutations.deferred} : {}),
         ...(experiment.measuredControl ? {matchedControlForecast:{...experiment.measuredControl,prepare:a,probe:b,evidence:experiment.refs}} : {}),
+        ...(order ? {preparationOrderForecast:{forward:order.forward,probe:order.probe,baseline:order.controlEffect,
+          origin:m.scenes[order.origin]!.split('|')[0],step:order.index+1,evidence:order.refs,reversePrefix:order.prefixRefs,...(order.relatedEvidence?{relatedEvidence:order.relatedEvidence}:{}),
+          outcomes:['probe_motion_preserved','probe_motion_changed']}} : {}),
         ...(motor ? {motorBaselineForecast:motor} : {}),
         ...(experiment.transportControl ? {transportControlForecast: {...experiment.transportControl,
           outcomes: transportControlOutcomes[experiment.transportControl.stage], evidence: experiment.refs}} : {}),

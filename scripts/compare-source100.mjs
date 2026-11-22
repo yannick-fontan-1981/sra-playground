@@ -285,6 +285,7 @@ async function run(code, games) {
       if(plan?.cooperativeTransportForecast && replayCommands)Object.assign(replayCommands.at(-1),{cooperative:plan.cooperativeTransportForecast});
       if(plan?.silentInputForecast && replayCommands)Object.assign(replayCommands.at(-1),{silentInput:plan.silentInputForecast});
       if (plan?.matchedControlForecast && replayCommands) replayCommands.at(-1).matchedControl = plan.matchedControlForecast;
+      if (plan?.preparationOrderForecast && replayCommands) replayCommands.at(-1).preparationOrder = plan.preparationOrderForecast;
       if (plan?.motorBaselineForecast && replayCommands) replayCommands.at(-1).motorBaseline = plan.motorBaselineForecast;
       const registration = plan?.fieldRegistrationForecast;
       if (registration && replayCommands && !recordedFieldRegistrations.has(registration.after)) {
@@ -450,6 +451,7 @@ async function run(code, games) {
           capability,
           predictedGap,
           motorDelta,
+          orderMeasurement,
         }) => ({
           level: (epoch ?? 1) + start - 1,
           phase,
@@ -474,6 +476,7 @@ async function run(code, games) {
           capability,
           predictedGap,
           ...(motorDelta ? {motorDelta} : {}),
+          ...(orderMeasurement ? {orderMeasurement} : {}),
           ...(access ? {access} : {}),
           ...(equation ? {equation} : {}),
           ...(terminalContact?{terminalContact}:{}), ...(mobilityProbe?{mobilityProbe}:{}), ...(mechanism?{mechanism}:{}), ...(localRepeat?{localRepeat}:{}),

@@ -110,6 +110,7 @@ type Rule = {
   verifiedAt?: number;
 };
 import {observePlacement} from './paired-landmark-placement.ts';
+import {newOrderStudy,orderCommand,recordOrderTrial,type OrderStudy,type OrderTrial} from './compare-preparation-orders.ts';
 export type Experiment = {
   phase:
     | 'testTransportControl'
@@ -184,6 +185,7 @@ export type Experiment = {
   silentInput?: SilentInputQuestion;
   transportControl?: TransportControlTrial;
   markedMotion?: MarkedMotionTrial;
+  orderTrial?:OrderTrial;
   measuredControl?: {bareEffect:string; alternatives:number; preparedScene:string; outcomes:readonly ['same_public_effect','different_public_effect']};
   motorTest?: MotorTest;
   cursorTrial?: CursorTrial;
@@ -261,6 +263,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  orderStudy?:OrderStudy;
   motorStudy?: MotorStudy;
   transportControls?: TransportControlResult[];
   markedMotion?: MarkedMotionMemory;
@@ -972,6 +975,7 @@ export function recordExperiment(
       ? !configurations.failures.includes(trial.from+'/'+trial.action)
       : b.frame_hash===a.frame_hash;
   } else m.configurationOpportunity=false;
+  if(m.orderStudy) delete m.orderStudy.pending;
   if(!x?.localCapacity){delete local.pending;delete local.expect;}
   observeLocal(local,b,a,rows,next,op);
   const previous = m.edges[m.previous];
@@ -1105,6 +1109,8 @@ export function recordExperiment(
     revision: a.revision,
     refs: x.refs,
   };
+  if (x.orderTrial) return op===orderCommand(x.orderTrial)
+    ? {...out,...recordOrderTrial(m.orderStudy??=newOrderStudy(),x.orderTrial,b,a)} : {...out,result:'order_trial_interrupted'};
   if(x.cooperative || x.motorTest)return out;
   if (x.transportControl) {
     const result = assessTransportControl(m, x.transportControl, rows, next, effect);
