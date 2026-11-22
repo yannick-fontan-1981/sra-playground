@@ -5,6 +5,8 @@ import { contactProject, type Board } from '../src/sic/contact-frontier-search.t
 import {
   newContactMemory,
   observeRegionArrival,
+  observeContactDisplacement,
+  inheritFrontierContacts,
   proposeFrontierContact,
   recordFrontierContact,
 } from '../src/sic/contact-frontier.ts';
@@ -169,6 +171,27 @@ test('only actual entry confirms a terrain change and supplies evidence for a se
       peers: 0,
     },
   ];
+  assert.equal(proposeFrontierContact(m, learning, start.observation, start.pixels, limits), null);
+  async function contact(from: number, to: number, old: number, moved: number) {
+    const b = await channel(from, [old], 4),
+      a = await channel(to, [moved], 5);
+    observeContactDisplacement(
+      m,
+      learning,
+      b.observation,
+      a.observation,
+      visualLayout(b.observation, b.pixels),
+      visualLayout(a.observation, a.pixels),
+      'east'
+    );
+  }
+  await contact(2, 3, 1, 2);
+  assert.equal(m.contactEvidence?.[actor], undefined);
+  await contact(1, 2, 2, 3);
+  await contact(2, 3, 3, 4);
+  assert.equal(m.contactEvidence?.[actor]?.sites.length, 2);
+  assert.equal(proposeFrontierContact(m, learning, start.observation, start.pixels, limits), null);
+  Object.assign(m, inheritFrontierContacts(m.contactEvidence, learning));
   const first = proposeFrontierContact(m, learning, start.observation, start.pixels, limits)!;
   assert.equal(first.step.boundary, true);
   const changed = await channel(2, [5], 2);

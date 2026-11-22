@@ -1,5 +1,5 @@
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
-import { newContactMemory, proposeFrontierContact, recordFrontierContact, observeRegionArrival } from './contact-frontier.ts';
+import { newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
 import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
@@ -129,7 +129,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
-    const carry=m.previewCarry,local=m.localCarry;m=initialMemory(o.level_epoch);m.localCapacity=nextLocalLevel(local);m.previewLearning=acceptPreviewCarry(carry,o);
+    const carry=m.previewCarry,local=m.localCarry,contactEvidence=m.contactFrontier?.contactEvidence;m=initialMemory(o.level_epoch);m.localCapacity=nextLocalLevel(local);m.previewLearning=acceptPreviewCarry(carry,o);
+    m.contactFrontier=inheritFrontierContacts(contactEvidence,m.previewLearning);
   }
   function acquire(
     b: NativeObservation,
@@ -197,6 +198,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       }
       if(comparePreparations && /^ACTION[5-7]$/.test(key))
         retainSituatedOperations(learning,observedSituatedOperations(learning,b,a,before,after,key));
+      if(learning.terminal?.length)observeContactDisplacement(m.contactFrontier??=newContactMemory(),learning,b,a,before,after,key);
       observePreviewBindings(learning,b,a,before,after,key);
       if(comparePreparations){
         if(prepareArrival && b.available_action_refs.includes('ACTION6')){
@@ -314,7 +316,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const evidence = [
         ...(positioned?.completionRef ? [positioned.completionRef] : []),
         ref,
-        ...(contactProject?[contactProject.ref,...(contactProject.previousEntry?[contactProject.previousEntry]:[])]:[]),
+        ...(contactProject?[contactProject.ref,...(contactProject.priorContact?[contactProject.priorContact]:[]),...(contactProject.previousEntry?[contactProject.previousEntry]:[])]:[]),
         ...(cooperative?.evidence??[]),
         ...(cursor?.evidence??[]),
         ...(landmark?[landmark.pair.ref,landmark.firstRef,...landmark.selection.evidence,...(landmark.access?.ref?[landmark.access.ref]:[])]:[]),
@@ -440,7 +442,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         }} : {}),
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
           site:contactProject.project.site,from:contactProject.step.from,to:contactProject.step.to,
-          next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,
+          next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,priorContact:contactProject.priorContact,
           width:contactProject.width,part:contactProject.step.role??null,
           alternatives:contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
             contactProject.step.role?['part_moves','part_changes_at_boundary','contact_is_blocked']:['subject_reaches_stance','predicted_access_is_blocked']}}:{}),

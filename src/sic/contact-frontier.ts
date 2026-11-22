@@ -15,8 +15,11 @@ export type FrontierContact = Ground & {
   transform: string | null;
   terrain: number | null;
   previousEntry: string | null;
+  priorContact: string | null;
 };
 export type ContactMemory = {
+  inheritedContact?: Record<string, string>;
+  contactEvidence?: Record<string, { sites: string[]; ref: string }>;
   roles?: string[];
   floor?: number;
   denied: string[];
@@ -31,6 +34,72 @@ export type ContactMemory = {
   explorer?: { actor: string; origin: XY };
 };
 export const newContactMemory = (): ContactMemory => ({ denied: [], displaced: [], supported: [] });
+
+export function inheritFrontierContacts(
+  evidence: ContactMemory['contactEvidence'],
+  learning: PreviewLearning | undefined
+): ContactMemory {
+  const next = newContactMemory();
+  if (!evidence || !learning?.terminal?.length) return next;
+  const actors = new Set(learning.terminal.map((w) => w.actor));
+  next.contactEvidence = Object.fromEntries(Object.entries(evidence).filter(([actor]) => actors.has(actor)));
+  next.inheritedContact = Object.fromEntries(
+    Object.entries(next.contactEvidence)
+      .filter(([, model]) => model.sites.length >= 2)
+      .map(([actor, model]) => [actor, model.ref])
+  );
+  return next;
+}
+
+// The subject enters the old position of a different visible part while that
+// part moves ahead by the same measured stroke. A follower moving behind the
+// subject and a changing indicator do not establish this contact affordance.
+export function observeContactDisplacement(
+  m: ContactMemory,
+  learning: PreviewLearning,
+  b: NativeObservation,
+  a: NativeObservation,
+  before: VisualLayout,
+  after: VisualLayout,
+  op: string
+) {
+  for (const actor of new Set(learning.terminal?.map((w) => w.actor) ?? [])) {
+    const p = before[actor],
+      q = after[actor],
+      motion = learning.partMotion?.[actor];
+    if (!motion || p?.length !== 1 || q?.length !== 1 || m.contactEvidence?.[actor]?.sites.length === 2) continue;
+    const controls = spatialControls(motion, new Set(b.available_action_refs), '', {}, b.frame_hash, actor);
+    const motor = controls?.motors.find((s) => s.op === op && s.support > 0);
+    if (!controls || !motor) continue;
+    const pitch = controls.pitch;
+    const offset = (at: XY): XY => [
+      Math.round((at[0] - p[0]!.at[0]) / pitch[0]),
+      Math.round((at[1] - p[0]!.at[1]) / pitch[1]),
+    ];
+    const d = offset(q[0]!.at);
+    if (d[0] !== Math.round(motor.d[0] / pitch[0]) || d[1] !== Math.round(motor.d[1] / pitch[1])) continue;
+    for (const [role, parts] of Object.entries(before)) {
+      if (role === actor || after[role]?.length !== parts.length) continue;
+      const compact = (v: (typeof parts)[number]) =>
+        2 * (v.box[2]! - v.box[0]! + 1) <= pitch[0] && 2 * (v.box[3]! - v.box[1]! + 1) <= pitch[1];
+      const at = (v: (typeof parts)[number], k: number) => compact(v) && offset(v.at).every((n, i) => n === k * d[i]!);
+      if (
+        !parts.some((v) => at(v, 1)) ||
+        parts.some((v) => at(v, 2)) ||
+        after[role]!.some((v) => at(v, 1)) ||
+        !after[role]!.some((v) => at(v, 2))
+      )
+        continue;
+      const evidence = ((m.contactEvidence ??= {})[actor] ??= { sites: [], ref: a.observation_ref });
+      const site = [role, ...p[0]!.at].join('/');
+      if (!evidence.sites.includes(site)) {
+        evidence.sites.push(site);
+        evidence.ref = a.observation_ref;
+      }
+      break;
+    }
+  }
+}
 function cell(at: XY, g: Ground) {
   return Math.round((at[0] - g.origin[0]) / g.pitch[0]) + g.width * Math.round((at[1] - g.origin[1]) / g.pitch[1]);
 }
@@ -232,6 +301,8 @@ export function proposeFrontierContact(
   rows: NativeRows,
   limits: { maxNodes: number; maxDepth: number }
 ): FrontierContact | null {
+  const prior = Object.keys(m.inheritedContact ?? {}).length > 0;
+  if (!prior && !m.arrival && !m.active && !m.displaced.length && !m.verify && !m.supported.length) return null;
   const fit = contactBoard(m, l, o, rows);
   if (!fit) return null;
   const { board, g } = fit;
@@ -266,8 +337,9 @@ export function proposeFrontierContact(
     ) ?? null;
   if (!project) {
     if (!board.goals.length && !local.size) return null;
+    const canProject = m.displaced.length > 0 || m.supported.length > 0 || !!m.inheritedContact?.[g.actor];
     project = contactProject(
-      board,
+      canProject ? board : { ...board, goals: [] },
       deny,
       limits,
       local,
@@ -289,6 +361,7 @@ export function proposeFrontierContact(
     ref: o.observation_ref,
     terrain,
     previousEntry: law?.entry ?? null,
+    priorContact: m.inheritedContact?.[g.actor] ?? null,
   };
 }
 export function recordFrontierContact(
