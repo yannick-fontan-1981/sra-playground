@@ -1,5 +1,49 @@
 # Actions continues de SIC sur les 100 premiers niveaux
 
+## Poussées et approche d’un transfert dans SIC r211
+
+Le préfixe de marche précédent s’arrêtait au premier contact. Le déplacement de l’indicateur d’arrivée pouvait aussi invalider un trajet libre. Un projet spatial retenu peut maintenant engager ses gestes de placement, jusqu’à 16 commandes. Le reçu conserve la destination attendue de chaque geste. Avant et après le geste, SIC vérifie la position du sujet et des participants liés. Pour une poussée, il vérifie aussi la nouvelle position de la pièce. Une première calibration non mesurée, une conversion de terrain ou l’activation du transfert rend la main au décideur. Après un retour contradictoire, le moteur réconcilie uniquement le préfixe exécuté.
+
+La préparation d’une expérience de support bénéficie aussi des poussées continues dès que SIC a observé le déplacement de cette pièce. Une poussée expérimentale du mécanisme de contrôle lui-même conserve son point de vérification de mobilité.
+
+Le contrôle de fusion rejoue les tickets exécutés dans les règles officielles de SS01. Il identifie séparément deux poussées successives du même objet et la marche continue qui précède immédiatement un transfert effectif du sujet. L’observateur de test dispose des positions physiques, le pilote utilise uniquement ses observations publiques et son projet. Une suppression des poussées peut ainsi faire échouer le contrôle même si le niveau reste gagné.
+
+Sur le site local, en mode SIC depuis le L1, les huit niveaux affichent WIN en 445 commandes. Les commandes, coordonnées et empreintes avant chaque coup correspondent au témoin r203. La version r205 exécutait 94 gestes sans nouvelle décision. La version r211 en exécute 243 dans 48 séries, soit 202 décisions pour la campagne. L’intervalle médian mesuré entre tickets d’une même série est de 18 ms sur cet essai.
+
+| Niveau | Coups | Coups sans nouvelle décision | Plus longue série | Effets continus vérifiés et protégés |
+|---|---:|---:|---:|---|
+| L1 | 36 | 17 | 8 | Marche |
+| L2 | 32 | 22 | 15 | Miroir, marche avant transfert |
+| L3 | 42 | 20 | 11 | Caisse, marche avant transfert |
+| L4 | 79 | 58 | 16 | Caisse, miroir, marche avant transfert |
+| L5 | 62 | 14 | 8 | Caisse, miroir |
+| L6 | 116 | 59 | 10 | Caisse, miroir, marche avant transfert |
+| L7 | 37 | 23 | 8 | Caisse, marche avant transfert |
+| L8 | 41 | 30 | 16 | Caisse, miroir, marche avant transfert |
+
+Au L8, les coups 5 à 9 déplacent la même caisse et les coups 35 à 37 le même miroir. Les sept pas 23 à 29 précèdent la téléportation effective du coup 30. Le premier essai d’une interaction encore inconnue peut rester unitaire.
+
+## Contrat de continuité en développement
+
+Le moteur sait engager jusqu’à 16 commandes, contrôler le retour immédiat de chacune et acquérir les transitions au moment où il clôt la série. Une décision reste identifiée par la même révision pendant cette exécution. Une nouvelle stratégie peut pourtant contourner cette capacité en ne proposant que le premier geste d’un trajet. C’est ce qui est arrivé à la famille d’expérimentation introduite en `2c823c51`, puis réutilisée par les plans de résolution. À la révision 203, SS01 gagnait ses huit niveaux en 445 commandes mais n’exécutait aucune deuxième commande sous la même décision.
+
+La révision 205 transmet les approches libres déjà calculées par l’exploration et par les plans de préparation. Les préconditions et les cellules d’arrivée sont liées avant l’exécution. SIC interrompt la série si le sujet n’arrive pas, si une autre région change, si le prochain terrain ne correspond plus, ou à une frontière officielle. Une manipulation, un changement de contrôle ou une expérience à résultat inconnu rend la main au raisonnement. Les transitions réellement exécutées alimentent les mémoires dans leur ordre à la clôture.
+
+| Niveau SS01 | Coups | Séries exécutées | Coups sans nouvelle décision | Plus longue série |
+|---|---:|---:|---:|---:|
+| L1 | 36 | 4 | 17 | 8 |
+| L2 | 32 | 2 | 5 | 4 |
+| L3 | 42 | 4 | 8 | 4 |
+| L4 | 79 | 10 | 17 | 6 |
+| L5 | 62 | 3 | 4 | 3 |
+| L6 | 116 | 10 | 21 | 6 |
+| L7 | 37 | 5 | 9 | 4 |
+| L8 | 41 | 6 | 13 | 6 |
+
+Sur le site local, les commandes, coordonnées et empreintes des observations avant chaque action correspondent aux 445 tickets du témoin. Le jeu rapporte WIN et huit crédits. Le délai médian entre deux autorisations d’une même série était de 17 ms sur cette exécution. Le temps global dépend aussi des recherches, des animations et de la charge de la machine.
+
+Le contrôle local `npm run test:sic-continuity` examine les tickets confirmés par le moteur après la commande. Il vérifie les victoires, la proportion de gestes enchaînés **à chaque niveau**, la limite de 16, la continuité des indices et une seule clôture couvrant exactement les gestes exécutés. Trois témoins sources exercent le déplacement (AR25), le clic (HANO) et un trajet mixte (DC22). Les tests négatifs font échouer une victoire dégradée en décisions unitaires, une réconciliation anticipée, une clôture incomplète et un dépassement de la borne. Le workflow `SIC continuity` exécute le contrat sur les pull requests, la file de fusion et les mises à jour de `main`.
+
 ## Couverture après extension des trajets
 
 Les **100 niveaux 1** sont gagnés en SIC seul. Les **1 248 commandes** et les retours comparés sont identiques au parcours de référence. L’empreinte couvre les commandes, les images finales et intermédiaires, le niveau, le score et l’état du jeu. Les reprises de décision passent de **1 105 à 1 026**.

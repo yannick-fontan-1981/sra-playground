@@ -187,8 +187,9 @@ export interface NativeProgramRegistry {
  */
 export const sicObservedCoverageDeadlock = 'sic_observed_coverage_deadlock';
 export const sicObservedWeightShortage = 'sic_observed_weight_shortage';
+export const sicObservedTransportDeadlock = 'sic_observed_transport_deadlock';
 export const isSicLevelRecovery = (reason: string | null) =>
-  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage;
+  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage || reason === sicObservedTransportDeadlock;
 
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;
@@ -224,7 +225,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
   /** Transfer measured rules and recovery exclusions to an actual reset of this level. */
-  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows): NativeRecord | undefined;
+  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord): NativeRecord | undefined;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;

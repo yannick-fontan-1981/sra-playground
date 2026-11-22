@@ -246,7 +246,7 @@ export function observePreviewBindings(
         indicatorForm: r.form,
         subjectForm: motion.to.form,
         indicatorChanged: !member(after[indicator] ?? [], r.at),
-        geometry: { pivots: stationaryPivots(actor, indicator, motion.from.at, motion.to.at, before, after) },
+        geometry: { pivots: stationaryPivots(actor, indicator, motion.from.at, motion.to.at, before, after, b) },
       };
       binding.witnesses.push(witness);
       // Keep a bounded, diverse set. Preserve the first observation from each still represented epoch when possible.
