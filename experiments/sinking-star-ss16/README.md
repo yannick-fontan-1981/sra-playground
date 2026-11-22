@@ -55,7 +55,7 @@ npm run validate:design
 
 Les tests de mécanique sont séparés des huit témoins de solvabilité. `validate:ui` exécute le vrai HTML compilé dans Happy DOM, contrôle les commandes, les pixels, les durées et les transitions. Les recherches et contre-branches de conception sont des outils d’auteur dont la portée est explicitée. Un parcours gagnant n’est pas une preuve d’optimalité, d’unicité ou de résolution autonome par SRA.
 
-Les résultats et limites de la livraison sont consignés dans [validation](docs/validation.md). La revue native du fichier local a été bloquée dans l’environnement de travail ; elle n’est pas annoncée comme réussie.
+Les résultats et limites de la livraison sont consignés dans [validation](docs/validation.md). Le Playground compilé a ensuite été contrôlé dans Chromium, sur ordinateur et à 390 px.
 
 ## Structure et intégration
 
@@ -66,4 +66,4 @@ Les résultats et limites de la livraison sont consignés dans [validation](docs
 - `tests/`, `scripts/solver.mjs`, `reference/` : témoins, audits et outils d’auteur, exclus du HTML.
 - `docs/codex-integration-prompt.md` : consigne de raccordement natif et publication ultérieure.
 
-Les changements de ce laboratoire ne modifient pas le dispatcher, le catalogue ou le runtime partagé de SRA Playground. L’étape native devra reprendre le contrat à trois héros, les animations, les crédits et les commandes. La chaîne de publication reste **tests → commit → push → main → publication → vérification du SHA**.
+Le Playground reprend le moteur, les huit salles et le tutoriel de ce laboratoire via son adaptateur TypeScript natif. La [feuille de route](docs/roadmap.md) consigne la validation, le coût du runtime et la livraison depuis le dépôt canonique.

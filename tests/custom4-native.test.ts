@@ -74,13 +74,18 @@ import { DuoPuzzleSession as AccordDuoSession, compileLevel as compileAccordLeve
 import { SS15_LEVELS } from '../experiments/sinking-star-ss15/src/levels.ts';
 import { heroSelection as accordHeroSelection, lessonIds as accordLessonIds, observeLesson as observeAccordLesson, TUTORIAL_LEVEL as SS15_TUTORIAL_LEVEL, visibleHeroes as visibleAccordHeroes, type HarmonyLesson as AccordLesson } from '../experiments/sinking-star-ss15/src/tutorial.ts';
 import ss15Witnesses from '../experiments/sinking-star-ss15/tests/witnesses.json' with { type: 'json' };
+import { createSs16Backend } from '../src/games/sinking-star-ss16.ts';
+import { TrioPuzzleSession, compileLevel as compileBridgesLevel } from '../experiments/sinking-star-ss16/src/core.ts';
+import { SS16_LEVELS } from '../experiments/sinking-star-ss16/src/levels.ts';
+import { heroSelection as bridgesHeroSelection, lessonIds as bridgesLessonIds, observeLesson as observeBridgesLesson, TUTORIAL_LEVEL as SS16_TUTORIAL_LEVEL, visibleHeroes as visibleBridgesHeroes, type BridgesLesson } from '../experiments/sinking-star-ss16/src/tutorial.ts';
+import ss16Witnesses from '../experiments/sinking-star-ss16/tests/witnesses.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS15 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS16 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 115);
+  assert.equal(GAME_CATALOG.length, 116);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15','SS16']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -268,7 +273,7 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
+  for (const code of ['CASC', 'SS16', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -1749,4 +1754,143 @@ test('SS15 keeps each press distinct from buttons and the workshop final circuit
       assert.ok(!press.flat().includes(9));
     }
   }
+});
+
+test('SS16 preserves all three heroes across eight levels, animations and twenty tutorial discoveries', async () => {
+  const { getGameByCode } = await import('../src/games/catalog.ts');
+  const entry = getGameByCode(' ss16 ')!;
+  assert.deepEqual([entry.id, entry.name, entry.group, entry.family, entry.levels, entry.availability],
+    ['ss16-c4000001', 'Les Ponts Engloutis', 'custom_4', 'sinking_star_trio', 8, 'playable']);
+  assert.equal(entry.sourcePath, 'experiments/sinking-star-ss16/src/levels.ts');
+  assert.deepEqual(SS16_LEVELS.map(level => level.title), [
+    'L’atelier des trois passeurs', 'Récupérer avant de combler', 'Lâcher le miroir, garder son poids', 'Le quai des deux impulsions',
+    'La relève du gardien', 'Le chantier avant la marée basse', 'Les deux postes du miroir', 'Le gardien et les trois lests',
+  ]);
+  assert.equal(SS16_TUTORIAL_LEVEL, 1);
+  assert.deepEqual(ss16Witnesses.map(({ actions }) => actions.length), [158, 214, 160, 64, 265, 82, 120, 180]);
+  assert.deepEqual(SS16_LEVELS.map(level => level.id), Array.from({ length: 8 }, (_, i) => `ss16-0${i + 1}`));
+
+  const backend = createSs16Backend(), reference = new TrioPuzzleSession(SS16_LEVELS);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const lessons = new Set<BridgesLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss16 ' });
+  assert.deepEqual(current, reference.observe());
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS16' }), current);
+  const publicKeys = Object.keys(current);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss16Witnesses) {
+    assert.equal(current.level, level);
+    assert.equal(current.palette?.length, 16);
+    assert.deepEqual(visibleBridgesHeroes(current.frame).map(({ kind, selected }) => ({ kind, selected })).sort((a, b) => a.kind.localeCompare(b.kind)),
+      [{ kind: 'merchant', selected: true }, { kind: 'thief', selected: false }, { kind: 'warrior', selected: false }]);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const expected = reference.action(id, data);
+      const request = { type: 'action', actionId: id, data } as const;
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(backend.dispatch(request), expected);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleBridgesHeroes(frame).map(({ kind, x, y }) => [kind, x, y]);
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      const priorDiscoveries = lessons.size;
+      observeBridgesLesson(lessons, before, current, id);
+      if (level !== SS16_TUTORIAL_LEVEL) assert.equal(lessons.size, priorDiscoveries);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    const victory = current;
+    const undo = reference.undo();
+    assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), undo);
+    assert.deepEqual(backend.dispatch({ type: 'undo' }), undo);
+    assert.equal(undo.level, level);
+    assert.equal(undo.levelsCompleted, level - 1);
+    const last = route.at(-1)! as DuoAction;
+    const request = { type: 'action', actionId: last.id, data: last.data } as const;
+    assert.deepEqual(reference.action(last.id, last.data), victory);
+    current = await dispatcher.dispatch(request);
+    assert.deepEqual(current, victory);
+    assert.deepEqual(backend.dispatch(request), victory);
+    assert.deepEqual(bridgesLessonIds.filter(id => lessons.has(id)), [...bridgesLessonIds]);
+  }
+  assert.equal(current.state, 'WIN');
+  assert.deepEqual([actions, selections, frames], [1243, 126, 3655]);
+});
+
+test('SS16 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart', async () => {
+  const backend = createSs16Backend(), reference = new TrioPuzzleSession(SS16_LEVELS);
+  const initial = reference.selectLevel(4);
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS16', level: 4 }), initial);
+  for (const level of [0, 9, 1.5, NaN]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS16', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: 1.5, y: 20 }, { x: -1, y: 0 }, { x: 0, y: 64 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS16 action/);
+  assert.throws(() => backend.dispatch({ type: 'selectLevel', level: 0 }), /Invalid level/);
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  assert.deepEqual(await routed.dispatch({ type: 'load', code: 'SS16', level: 4 }), initial);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: 6, data: { x: 64, y: 1 } })), /pixel coordinates/);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: -1 })), /Invalid SS16 action/);
+  assert.deepEqual(await routed.dispatch({ type: 'undo' }), initial);
+  const data = bridgesHeroSelection(initial.frame, 'thief')!;
+  assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
+  assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(backend.dispatch({ type: 'selectLevel', level: 8 }), reference.selectLevel(8));
+  assert.deepEqual(backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+test('SS16 level 8 flashes only the refused mirror and leaves the undo history and world unchanged', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const initial = await dispatcher.dispatch({ type: 'load', code: 'SS16', level: 8 });
+  const warning = await dispatcher.dispatch({ type: 'action', actionId: 5 });
+  assert.deepEqual(warning.frameDurationsMs, [110, 70, 110, 0]);
+  assert.deepEqual(warning.frame, initial.frame);
+  assert.equal(warning.canUndo, false);
+  const tile = (frame: number[][], x: number, y: number) =>
+    frame.slice(2 + 3 * y, 5 + 3 * y).map(row => row.slice(2 + 3 * x, 5 + 3 * x));
+  const mirrors = compileBridgesLevel(SS16_LEVELS[7]!).mirrors;
+  for (const [index, { at: { x, y } }] of mirrors.entries()) {
+    const normal = tile(initial.frame, x, y);
+    const red = normal.map(row => row.map(color => color === 5 ? 8 : color));
+    assert.deepEqual(warning.frames.map(frame => tile(frame, x, y)), index === 0
+      ? [red, normal, red, normal] : [normal, normal, normal, normal]);
+  }
+  assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), warning);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), initial);
+});
+
+test('SS16 keeps the reinforced level 5, three goals and manual out-of-order progress', async () => {
+  for (const spec of SS16_LEVELS) {
+    const world = compileBridgesLevel(spec);
+    assert.equal(world.goals.length, 3);
+    const buttons = [...world.buttons, ...world.circuits.flatMap(circuit => circuit.buttons)];
+    assert.ok(world.gates.every(({ at }) => !buttons.some(button => button.x === at.x && button.y === at.y)));
+  }
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const ref = new TrioPuzzleSession(SS16_LEVELS);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'load', code: 'SS16', level: 5 }), ref.selectLevel(5));
+  const route = ss16Witnesses[4]!.actions as DuoAction[];
+  assert.equal(route.length, 265);
+  for (const { id, data } of route) {
+    const result = await dispatcher.dispatch({ type: 'action', actionId: id, data });
+    assert.deepEqual(result, ref.action(id, data));
+  }
+  assert.equal(ref.observe().level, 1);
+  assert.equal(ref.observe().levelsCompleted, 1);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'selectLevel', level: 8 }), ref.selectLevel(8));
+  assert.deepEqual(await dispatcher.dispatch({ type: 'reset' }), ref.reset());
+  assert.equal(ref.observe().levelsCompleted, 1);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'restart' }), ref.restart());
+  assert.equal(ref.observe().level, 1);
+  assert.equal(ref.observe().levelsCompleted, 0);
 });

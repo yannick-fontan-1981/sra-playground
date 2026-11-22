@@ -1186,6 +1186,10 @@ records.push({code:'SS15',id:'ss15-c4000001',name:'Les Accords Transposés',grou
   description:'Swap places with the Wizard and move groups with the Bard’s song to keep both heroes’ crossings open.',
   sourcePath:'experiments/sinking-star-ss15/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS16',id:'ss16-c4000001',name:'Les Ponts Engloutis',group:'custom_4',family:'sinking_star_trio',levels:8,
+  description:'Push one object with the Merchant, a chain with the Warrior, or pull with the Thief to build crossings for all three heroes.',
+  sourcePath:'experiments/sinking-star-ss16/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

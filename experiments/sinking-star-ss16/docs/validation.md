@@ -75,3 +75,14 @@ La chambre finale du tutoriel a une entrée sèche par la porte `(18,4)` et une 
 Les tests Happy DOM vérifient le vrai HTML et ses interactions, ses pixels et ses durées ; ils ne valident pas le rendu CSS réel d’un navigateur. La prévisualisation native avait été bloquée pendant la version 0.1.0 et n’a pas été reprise pour cette révision. `validation/browser-review-status.json` distingue ces anciennes tentatives et la qualification 0.2.0. Les rendus déterministes des plateaux et des phases rouge/normale ont été inspectés directement.
 
 Le laboratoire ne modifie pas le runtime partagé de SRA Playground et ne fournit aucune mesure de résolution autonome par SRA. Le raccordement natif, le contrôle ordinateur/mobile et la publication du Site restent l’étape d’intégration suivante.
+
+
+## Qualification du Playground
+
+Le raccordement en TypeScript reprend la révision 0.2.0, commit `dd7922c3e96e42eb4fa85e3973d4b4589cfce266`. Le moteur, les cartes et les témoins sont identiques. Le HTML reconstruit dans le clone Windows correspond à l’empreinte de référence après normalisation des fins de ligne en LF.
+
+Les cinq commandes du laboratoire ont réussi. La suite native du Playground compte 65 tests réussis. La parité couvre les 1 243 entrées, les 126 sélections, les 3 655 images et leurs durées. Les tests annulent puis rejouent chaque fin de salle, vérifient les entrées invalides, le Reset et le Restart, et terminent le niveau 5 depuis un accès direct.
+
+Microsoft Edge 158.0.4370.33 avec Playwright a exercé les trois sélections, Tab et 1/2/3, les boutons tactiles, les huit parcours et la victoire dans le Playground compilé. La séquence de L8 est contrôlée à chaque image peinte, avec les attentes 110/70/110 ms, puis avec la réduction d’animation. Le plateau stabilisé et l’historique Undo sont conservés. La salle 5 est rejouée en 265 entrées à partir de son lien direct, avec lecture des pixels du bouton et des deux états de la presse.
+
+Les régressions SS15, SS01, CASC et LS20 ont réussi. La feuille de route consigne la comparaison du coût du runtime partagé.
