@@ -19,8 +19,10 @@ import {
   fresh,
   key,
   localEffects,
+  unresolvedMotionTest,
   type Learning,
 } from './paired-displacements.ts';
+import { regionEntries, regionEntryTest } from './unknown-region-entry.ts';
 import { planDisplacements } from './plan-paired-displacements.ts';
 import type { TransportForecast } from './transport-observations.ts';
 
@@ -36,6 +38,7 @@ export type ReusableEffects = Pick<
 > & { bodies: [number, number]; selectionWitness?: string };
 export type PairInquiry = {
   released?: ReleasedSubject;
+  controlProof?: { selection: string; motion: string };
   scene?: Scene;
   reading?: Reading;
   learning: Learning;
@@ -188,6 +191,7 @@ export function seePair(
         delete q.reading;
         delete q.active;
         delete q.selectionWitness;
+        delete q.controlProof;
       }
     }
   }
@@ -403,6 +407,11 @@ export function seePair(
     watchPassage(s, m, old, next, after, ref, op);
   }
   const outcome = localEffects(s, m, old, next, op, ref, f);
+  if (f?.controlComparison && f.controlComparison.motion === q.controlProof?.motion &&
+      f.motionTest?.predictions.some(p => p.pose === key(next))) {
+    q.active ??= 'controlled_subject_test_distinguished_observable_effects';
+    if (!m.refs.includes(ref)) m.refs = [...m.refs.slice(-5), ref];
+  }
   if (f?.releasedAccess && q.released) return recordReleaseTest(m, q.released, old, next, f, ref);
   if (!click && q.selectionWitness) {
     const operand = f?.operandTest;
@@ -414,6 +423,22 @@ export function seePair(
     if (access) q.released = access;
   }
   return outcome;
+}
+/** A verified handoff can fund a single comparison even before a joint plan exists. */
+export function compareAfterControl(
+  q: PairInquiry, ref: string, minimum: number, available: readonly string[],
+) {
+  if (q.active || !q.controlProof || !q.scene || !q.reading) return;
+  const { scene, learning, reading } = q;
+  const motors = Object.fromEntries(Object.entries(learning.motors).filter(([op]) => available.includes(op)));
+  if (!Object.keys(motors).length) return;
+  const usable = { ...learning, motors };
+  const test = regionEntryTest(scene, usable, reading, regionEntries(scene, usable, reading), ref, minimum)
+    ?? unresolvedMotionTest(scene, usable, reading, ref, minimum);
+  if (!test) return;
+  test.controlComparison = q.controlProof;
+  test.evidence = [...new Set([...test.evidence, q.controlProof.selection, q.controlProof.motion])];
+  return test;
 }
 export function pairProposal(
   q: PairInquiry,

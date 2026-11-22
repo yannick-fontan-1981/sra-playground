@@ -18,6 +18,7 @@ export type TransportForecast={purpose:string;command:string;from:TransportState
   operandTest?:{side:TransportSide;operand:number;command:string;steps:number;stayed:string;transferred:string};
   releasedAccess?:{phase:'select'|'test';side:TransportSide;held:number;before:number;after:number;ticket:string};
   regionEntry?:{site:number;source:number;objectives:number[];ticket:string};
+  controlComparison?:{selection:string;motion:string};
   motionTest?:{predictions:{law:string;pose:string}[];maximumRemaining:number};
   motionPreparation?:{steps:number;at:string;test:string;predictions:{law:string;pose:string}[]};
   paired?:{laws:string[];radius:number;lesson?:string;scope?:string};

@@ -17,7 +17,7 @@ import {
 } from '../src/sic/paired-displacements.ts';
 import type { Scene, Reading } from '../src/sic/paired-scene.ts';
 import { observeRelease, recordReleaseTest } from '../src/sic/test-released-subject.ts';
-import { carryPair, inquiry, pairProposal } from '../src/sic/probe-paired-displacements.ts';
+import { carryPair, compareAfterControl, inquiry, pairProposal } from '../src/sic/probe-paired-displacements.ts';
 import { planDisplacements } from '../src/sic/plan-paired-displacements.ts';
 const s: Scene = {
   grid: { pitch: 3, left: 0, top: 0, columns: 7, rows: 5 },
@@ -129,6 +129,27 @@ test('test an unclassified tile only when it can open access to an objective, th
   assert.equal(reused.regionEntry, undefined);
   const decoy = { ...room, goals: [7, 34] };
   assert.equal(planDisplacements(decoy, learn(), near, 'empty region beyond', 7, 100, 2)?.regionEntry, undefined);
+});
+
+test('a verified selection enables a discriminating experiment before a paired model takes control', () => {
+  const q = inquiry();
+  q.scene = { ...s, ground: [7, 8, 10, 11, 34], other: [9], goals: [11, 34] };
+  q.reading = { subjects: [8, 34], active: 0, pieces: [], supports: [], opened: [], anchor: -1 };
+  q.learning.motors.ACTION4 = { dx: 1, dy: 0, ref: 'observed direction' };
+  const controls = ['ACTION4'];
+  assert.equal(compareAfterControl(q, 'now', 2, controls), undefined);
+  q.controlProof = { selection: 'mark transferred', motion: 'selected body moved' };
+  assert.equal(compareAfterControl(q, 'now', 3, controls), undefined);
+  assert.equal(compareAfterControl(q, 'now', 2, ['ACTION2']), undefined);
+  const test = compareAfterControl(q, 'now', 2, controls)!;
+  assert.equal(test.command, 'ACTION4');
+  assert.deepEqual(test.regionEntry?.objectives, [11]);
+  assert.deepEqual(test.controlComparison, q.controlProof);
+  assert.ok(test.evidence.includes(q.controlProof.selection) && test.evidence.includes(q.controlProof.motion));
+  assert.equal(new Set(test.motionTest?.predictions.map(p => p.pose)).size, 2);
+  assert.equal(q.active, undefined);
+  q.active = 'existing inquiry';
+  assert.equal(compareAfterControl(q, 'now', 2, controls), undefined);
 });
 
 test('an observed exchange opens a test of whether intervening terrain matters', () => {
