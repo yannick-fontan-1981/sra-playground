@@ -200,5 +200,64 @@
         "witnesses": 7
       }
     ]
+  },
+  "transferSS10L3": {
+    "two": {
+      "level": 3,
+      "budget": 350,
+      "won": false,
+      "actions": 350,
+      "imageAt94": "19f02688ca2fc948",
+      "commandAt94": 4,
+      "familyAt94": "sic_test_observed_compositions",
+      "nativeDigest": "58b79bd9ebb0e97224c015ce26b4de1788310716eb5802ac1cece3109de9d05a",
+      "pairedForecasts": 0
+    },
+    "three": {
+      "level": 3,
+      "budget": 350,
+      "won": false,
+      "actions": 350,
+      "imageAt94": "19f02688ca2fc948",
+      "commandAt94": 6,
+      "familyAt94": "sic_test_prepared_effects",
+      "nativeDigest": "f46515f66265f64c8f2067a9b20195cdf4c3243c30d93691f4b1542ac417f835",
+      "pairedForecasts": 0
+    }
+  },
+  "preservationCandidate": {
+    "tag": "sic-finish-the-chosen-experiment-v127",
+    "nativeResults": {
+      "SS13": {
+        "start": 3,
+        "cap": 350,
+        "levels": [
+          {
+            "level": 3,
+            "actions": 176,
+            "won": true
+          }
+        ],
+        "parallelWorkers": 1,
+        "digest": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363",
+        "resets": 0
+      },
+      "SS06": {
+        "start": 2,
+        "cap": 54,
+        "levels": [
+          {
+            "level": 2,
+            "actions": 54,
+            "won": true
+          }
+        ],
+        "parallelWorkers": 1,
+        "digest": "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867",
+        "resets": 0
+      }
+    },
+    "ss13CommandAndImageSequenceIdenticalToV126": true,
+    "ss06CommandAndImageSequenceIdenticalToV109": true
   }
 }
