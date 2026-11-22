@@ -679,3 +679,16 @@ La qualification complète de v127 préserve les **100 L1 sources** et les **11 
 **Choisir une expérience qui départage des effets inconnus.** Sur SS10 L3, v128 convertit une preuve de changement de contrôle en une comparaison entre la marche, la poussée, la traction et l’échange. Une première commande réduit les explications à deux. Trois déplacements choisis par SIC les rendent distinguables. Le second essai identifie la traction du partenaire et SIC gagne à froid en 81 commandes, pour un témoin en échec à 350. Le transfert à d’autres mécanismes dépend de la capacité de perception à identifier les entités dont les retours seront comparés. [Décisions et score de SS10 L3](niveaux-1-2-3.md#identifier-une-physique-inconnue-après-avoir-vérifié-le-contrôle)
 
 **Distinguer une poussée d’une fuite avant de poursuivre un objet.** Sur la source SKBN L2, les déplacements observés exclusivement au contact invalident l’usage prioritaire d’un plan de capture. Au coup 17, v130 rend la main à l’exploration puis son module de transport termine le niveau en 47 coups. FUIT L2, où l’effet se manifeste à distance, conserve sa victoire en 80 coups. [Comparaison entre trois candidats et deux mécanismes](niveaux-1-2-3.md#un-déplacement-au-contact-suffit-il-à-prédire-une-fuite)
+
+
+**Séparer l’effet de la commande de celui du temps écoulé.** Les traces des sources révèlent un troisième cas où le choix de l’expérience change ce qu’on peut apprendre. Il concerne des jeux qui ramènent plusieurs fois SIC à la même image initiale, après des commandes différentes. Trois intervalles réguliers suggèrent soit une échéance, soit des retours volontaires ou locaux. Le banc a recréé les mêmes préfixes publics pour essayer chaque commande un coup avant le retour et au moment du retour. Il a aussi changé l’avant-dernière commande puis essayé la même dernière commande depuis ces dispositions différentes. [Mesures complètes des bifurcations sur SWCH, ESCT et FITE](retours-periodiques-commandes-comparees.json)
+
+| Source et points vérifiés | Commandes ramenant au départ un coup avant | Au coup prévu | Retours après deux commandes, trois échéances réunies |
+|---|---|---|---|
+| SWCH L2, coups 21, 42 et 63 | 1 sur 5 à chaque fois | 5 sur 5 à chaque fois | 60 sur 60 |
+| ESCT L3, coups 33, 66 et 99 | 1 sur 6 à chaque fois | 6 sur 6 à chaque fois | 90 sur 90 |
+| FITE L3, coups 45, 49 et 53 | 1 sur 5 à chaque fois | 4 sur 5, puis 1 sur 5 et 1 sur 5 | 21 sur 60 |
+
+Chaque essai à deux commandes compte une préparation puis un geste. Les préparations qui ont déjà ramené l’image au départ sont exclues de cette mesure. Les retours sont comparés à l’empreinte exacte de l’image initiale. Sur FITE L3, le témoin gagne la partie en 109 actions malgré les retours réguliers. C’est un contre-exemple à la déduction automatique d’une échéance à partir de la seule périodicité.
+
+Ces observations définissent le prochain test pour le pilote. Lorsqu’il soupçonne une échéance, il peut choisir une commande qui produit normalement un mouvement et mesurer si son effet change à cette phase. Une fois ce changement confirmé, il pourrait préparer l’expérience suivante assez tôt pour l’achever avant le retour. À ce stade, les chiffres du tableau qualifient le diagnostic hors ligne. Les victoires autonomes de v130 sont mesurées séparément.

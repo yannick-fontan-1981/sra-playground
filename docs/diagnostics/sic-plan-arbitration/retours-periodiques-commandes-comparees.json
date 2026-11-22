@@ -1,0 +1,698 @@
+{
+  "method": "Independent replay of each public prefix, then one alternative action, or a preparation followed by a common action. The game and score are read only through the public source session. No decision was supplied to SIC.",
+  "cases": [
+    {
+      "game": "SWCH",
+      "level": 2,
+      "frozenTrace": "serial-scope-pressure-source-second-v127.jsonl",
+      "regularSpacing": 21,
+      "lastInputs": [
+        1,
+        4,
+        1
+      ],
+      "oneStep": [
+        {
+          "action": 20,
+          "fromPublicFrame": "32c46fca59481552",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 4
+        },
+        {
+          "action": 21,
+          "fromPublicFrame": "96eca4cde16794ea",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 5,
+          "distinctFinalFrames": 1
+        },
+        {
+          "action": 41,
+          "fromPublicFrame": "2c1f487238d08275",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 5
+        },
+        {
+          "action": 42,
+          "fromPublicFrame": "22989c236feb2f8d",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 5,
+          "distinctFinalFrames": 1
+        },
+        {
+          "action": 62,
+          "fromPublicFrame": "3948cf26509be441",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 5
+        },
+        {
+          "action": 63,
+          "fromPublicFrame": "f49c6bf0ce9da6de",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 5,
+          "distinctFinalFrames": 1
+        }
+      ],
+      "prepared": [
+        {
+          "at": 21,
+          "sourceImage": "32c46fca59481552",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            }
+          ]
+        },
+        {
+          "at": 42,
+          "sourceImage": "2c1f487238d08275",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            }
+          ]
+        },
+        {
+          "at": 63,
+          "sourceImage": "3948cf26509be441",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 4,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": "ESCT",
+      "level": 3,
+      "frozenTrace": "serial-unmeasured-source-l3-v109.jsonl",
+      "regularSpacing": 33,
+      "lastInputs": [
+        2,
+        1,
+        2
+      ],
+      "oneStep": [
+        {
+          "action": 32,
+          "fromPublicFrame": "217c11e6595438d3",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "tested": 6,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 6
+        },
+        {
+          "action": 33,
+          "fromPublicFrame": "06f99be0db8d0b53",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "tested": 6,
+          "returnedToEntry": 6,
+          "distinctFinalFrames": 1
+        },
+        {
+          "action": 65,
+          "fromPublicFrame": "0ce80dd20e5d2220",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "tested": 6,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 6
+        },
+        {
+          "action": 66,
+          "fromPublicFrame": "c8fd785c6087ff72",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "tested": 6,
+          "returnedToEntry": 6,
+          "distinctFinalFrames": 1
+        },
+        {
+          "action": 98,
+          "fromPublicFrame": "94715a4a5908dc86",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "tested": 6,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 6
+        },
+        {
+          "action": 99,
+          "fromPublicFrame": "9d2b6769c536e7a4",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            7
+          ],
+          "tested": 6,
+          "returnedToEntry": 6,
+          "distinctFinalFrames": 1
+        }
+      ],
+      "prepared": [
+        {
+          "at": 33,
+          "sourceImage": "217c11e6595438d3",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION5",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            }
+          ]
+        },
+        {
+          "at": 66,
+          "sourceImage": "0ce80dd20e5d2220",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION5",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            }
+          ]
+        },
+        {
+          "at": 99,
+          "sourceImage": "94715a4a5908dc86",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION5",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 5,
+              "checked": 5,
+              "returned": 5,
+              "credits": 0
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "game": "FITE",
+      "level": 3,
+      "frozenTrace": "serial-unmeasured-source-l3-v109.jsonl",
+      "regularSpacing": 4,
+      "lastInputs": [
+        2,
+        7,
+        7
+      ],
+      "oneStep": [
+        {
+          "action": 44,
+          "fromPublicFrame": "9eeac0777b85e206",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 4
+        },
+        {
+          "action": 45,
+          "fromPublicFrame": "aafd165686f89e7b",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 4,
+          "distinctFinalFrames": 2
+        },
+        {
+          "action": 48,
+          "fromPublicFrame": "18ee448f5bd259e5",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 2
+        },
+        {
+          "action": 49,
+          "fromPublicFrame": "18ee448f5bd259e5",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 2
+        },
+        {
+          "action": 52,
+          "fromPublicFrame": "18ee448f5bd259e5",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 2
+        },
+        {
+          "action": 53,
+          "fromPublicFrame": "18ee448f5bd259e5",
+          "available": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "tested": 5,
+          "returnedToEntry": 1,
+          "distinctFinalFrames": 2
+        }
+      ],
+      "prepared": [
+        {
+          "at": 45,
+          "sourceImage": "9eeac0777b85e206",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 3,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 3,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 3,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 3,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            }
+          ]
+        },
+        {
+          "at": 49,
+          "sourceImage": "18ee448f5bd259e5",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            }
+          ]
+        },
+        {
+          "at": 53,
+          "sourceImage": "18ee448f5bd259e5",
+          "byProbe": [
+            {
+              "probe": "ACTION1",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION2",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION3",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION4",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 0,
+              "credits": 0
+            },
+            {
+              "probe": "ACTION7",
+              "distinctPreparations": 1,
+              "checked": 4,
+              "returned": 4,
+              "credits": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
