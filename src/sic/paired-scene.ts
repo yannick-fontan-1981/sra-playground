@@ -173,7 +173,7 @@ export function pairedScene(
     );
     const structures = forms.filter(
       (f) =>
-        !f.cross && !f.ring && !f.uniform && f.field !== floor && f !== cargo,
+        !f.cross && !f.ring && !f.uniform && f.field !== floor && f !== cargo && f !== actor && f !== partner,
     );
     const doors: Door[] = structures.flatMap((f) => {
       const match = switches.filter(

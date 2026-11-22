@@ -1,4 +1,4 @@
-import { watchPassage } from './prepare-projected-passage.ts';
+import { watchPassage, recallProjectedPassage } from './prepare-projected-passage.ts';
 import {
   visibleImages,
   applyImages,
@@ -375,6 +375,12 @@ export function seePair(
     }
   }
   if (q.active) m.visits[key(next)] = (m.visits[key(next)] ?? 0) + 1;
+  const recalled = recallProjectedPassage(s, m, next, after);
+  if (recalled) {
+    m.passage = recalled;
+    delete m.plan;
+    watchPassage(s, m, old, next, after, ref, op);
+  }
   return localEffects(s, m, old, next, op, ref, f);
 }
 export function pairProposal(

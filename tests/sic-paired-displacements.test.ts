@@ -7,6 +7,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {
   fresh,
+  key,
   geometry,
   imagine,
   localEffects,
@@ -94,6 +95,7 @@ test('a visible landing becomes a prediction at another distance only after disp
 });
 import {
   startPassage,
+  recallProjectedPassage,
   projectedPassage,
   watchPassage,
 } from '../src/sic/prepare-projected-passage.ts';
@@ -140,4 +142,41 @@ test('an imagined landing needs a visible indication on supported ground before 
   );
   assert.equal(m.passage?.evidence, 'crossed');
   assert.deepEqual(m.passage?.orientation, [0, 3]);
+});
+
+test('switching the operator requires a reachable arrangement while the first subject stays put', () => {
+  const room: Scene = {
+    ...s,
+    ground: [8, 10, 24, 34],
+    goals: [24],
+    other: [9, 20],
+    initial: Array(35).fill('floor'),
+  };
+  room.initial[9] = 'striped fixture';
+  room.initial[20] = 'round fixture';
+  const v: Reading = {
+    subjects: [34, 8], active: 0, pieces: [], supports: [], opened: [], anchor: -1,
+  };
+  const m = fresh();
+  m.evidence = [{ walk: 2 }, { push: 2 }];
+  m.motors.ACTION3 = { dx: -1, dy: 0, ref: 'walked left' };
+  m.motors.ACTION4 = { dx: 1, dy: 0, ref: 'walked right' };
+  m.projections = [{ pivotForm: 'striped fixture', from: 2, to: 1, ref: 'crossing observed' }];
+  assert.equal(recallProjectedPassage(room, m, v, room.initial), undefined);
+  m.visits[key(v)] = 2;
+  m.passage = recallProjectedPassage(room, m, v, room.initial);
+  assert.equal(m.passage?.pivot, 9);
+  const firstContact: Reading = { ...v, subjects: [8, 34] };
+  watchPassage(room, m, firstContact, firstContact, room.initial, 'first subject blocked', 'ACTION4');
+  const action = projectedPassage(room, m, v, 'seen', 8, 40);
+  assert.deepEqual(action?.expected.subjects, v.subjects);
+  assert.equal(action?.expected.active, 1);
+  assert.ok(action?.evidence.includes('crossing observed'));
+  assert.deepEqual(action?.projectedSetup, {
+    operator: 1, pivot: 10, launch: 8, landing: 24, firstCommand: 'ACTION4',
+  });
+  const selected = { ...v, active: 1 as const };
+  assert.equal(projectedPassage(room, m, selected, 'selection confirmed', 8, 40)?.command, 'ACTION4');
+  watchPassage(room, m, selected, selected, room.initial, 'second subject also blocked', 'ACTION4');
+  assert.equal(projectedPassage(room, m, v, 'same room, contact refuted', 8, 40), undefined);
 });

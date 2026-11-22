@@ -86,7 +86,7 @@ export function watchPassage(
     oldSite === now.subjects[old.active] &&
     p.pivot === marks[0]
   ) {
-    const denial = [p.pivot, oldSite, op].join('/');
+    const denial = [old.active, p.pivot, oldSite, op].join('/');
     if (!p.blocked.includes(denial)) p.blocked.push(denial);
   }
   p.pivot = marks[0]!;
@@ -138,6 +138,36 @@ export function startPassage(s: Scene): Passage | undefined {
       signs: [],
     };
 }
+export function recallProjectedPassage(
+  s: Scene,
+  m: Learning,
+  v: Reading,
+  tiles: string[],
+): Passage | undefined {
+  const pose = key(v);
+  const next = m.plan?.[0];
+  if (m.passage || m.join || !m.projections?.length || (m.visits[pose] ?? 0) < 2) return;
+  if (next?.from === pose && !m.denied[pose + '|' + next.command]) return;
+  const closed = new Set(s.doors.filter(d => !v.opened.includes(d.site)).map(d => d.site));
+  const land = s.ground.filter(site => !closed.has(site)).concat(v.supports);
+  const destination = component(s, land, s.goals);
+  if (v.subjects.every(site => destination.has(site))) return;
+  // A repeated pose supplies the reason to look for another crossing. The
+  // predicted transform, not the number of other fixtures, identifies its pivot.
+  for (const rule of m.projections) {
+    const sites = tiles.flatMap((tile, site) => (tile === rule.pivotForm ? [site] : []));
+    if (sites.length !== 1 || !s.other.some(site => s.initial[site] === rule.pivotForm)) continue;
+    return {
+      form: rule.pivotForm,
+      pivot: sites[0]!,
+      signs: [],
+      rejected: [],
+      blocked: [],
+      orientation: [rule.from, rule.to],
+      evidence: rule.ref,
+    };
+  }
+}
 export function projectedPassage(
   s: Scene,
   m: Learning,
@@ -150,7 +180,7 @@ export function projectedPassage(
   if (!p) return;
   const space = geometry(s),
     ops = Object.entries(m.motors),
-    dry = [...s.ground, ...v.supports],
+    dry = [...s.ground, ...v.supports].filter(site => space.open(v, site) || v.opened.includes(site)),
     destinations = component(s, dry, s.goals);
   const inRoom = v.subjects.map((n) => destinations.has(n));
   if (inRoom.every(Boolean) || !ops.length) return;
@@ -254,13 +284,12 @@ export function projectedPassage(
       if (!p.rejected.includes(k)) p.rejected.push(k);
     }
   }
-  const passable = new Set(dry.filter((n) => space.open(v, n)));
+  const passable = new Set(dry);
   // Occupied ground becomes walkable in the hypothesis where the landmark has moved.
   passable.add(p.pivot);
   const distance = (a: number, b: number) =>
     Math.abs((a % s.grid.columns) - (b % s.grid.columns)) +
     Math.abs(Math.floor(a / s.grid.columns) - Math.floor(b / s.grid.columns));
-  const canPush = law(m, side) === 'push';
   type Node = {
     site: number;
     pivot: number;
@@ -269,85 +298,109 @@ export function projectedPassage(
     first: string;
     moveTo: number;
   };
-  const q: Node[] = [
-      {
-        site: source,
-        pivot: p.pivot,
-        cost: 0,
-        pushes: 0,
-        first: '',
-        moveTo: -1,
-      },
-    ],
-    seen = new Set([source + '/' + p.pivot]);
-  let best: Node | undefined,
-    score = Infinity;
-  for (let i = 0; i < q.length && i < budget; i++) {
-    const n = q[i]!;
-    if (n.cost > depth || n.cost > score + 1) continue;
-    if (n.first)
-      for (const c of castingSites(s, n.site, n.pivot)) {
-        if (
-          !orient(c.dir, c.out) ||
-          !destinations.has(c.landing) ||
-          v.subjects.includes(c.landing) ||
-          p.rejected.includes(code(n.pivot, n.site, c.landing))
-        )
-          continue;
-        const penalty =
-          n.cost +
-          0.65 * n.pushes +
-          (v.supports.includes(c.landing) ? 3 : 0) +
-          0.035 * distance(n.site, n.pivot);
-        if (penalty < score) {
-          score = penalty;
-          best = n;
+  let remaining = budget;
+  const arrangement = (operator: TransportSide) => {
+    const source = v.subjects[operator],
+      peerSite = v.subjects[peer(operator)],
+      canPush = law(m, operator) === 'push',
+      pose = key({ ...v, active: operator });
+    const q: Node[] = [
+        {
+          site: source,
+          pivot: p.pivot,
+          cost: 0,
+          pushes: 0,
+          first: '',
+          moveTo: -1,
+        },
+      ],
+      seen = new Set([source + '/' + p.pivot]);
+    let best: (Node & { landing: number }) | undefined,
+      score = Infinity;
+    for (let i = 0; i < q.length && remaining > 0; i++) {
+      remaining--;
+      const n = q[i]!;
+      if (n.cost > depth || n.cost > score + 1) continue;
+      if (n.first)
+        for (const c of castingSites(s, n.site, n.pivot)) {
+          if (
+            !orient(c.dir, c.out) ||
+            !destinations.has(c.landing) ||
+            c.landing === peerSite ||
+            v.pieces.includes(c.landing) ||
+            p.rejected.includes(code(n.pivot, n.site, c.landing))
+          )
+            continue;
+          const penalty =
+            n.cost +
+            0.65 * n.pushes +
+            (v.supports.includes(c.landing) ? 3 : 0) +
+            0.035 * distance(n.site, n.pivot);
+          if (penalty < score) {
+            score = penalty;
+            best = { ...n, landing: c.landing };
+          }
         }
-      }
-    for (const [op, { dx, dy }] of ops) {
-      const z = neighbor(s.grid, n.site, dx, dy),
-        hit = z === n.pivot;
-      if (
-        !passable.has(z) ||
-        z === peerSite ||
-        v.pieces.includes(z) ||
-        (!n.first && m.denied[key(v) + '|' + op])
-      )
-        continue;
-      let pivot = n.pivot;
-      if (hit) {
-        pivot = neighbor(s.grid, z, dx, dy);
+      for (const [op, { dx, dy }] of ops) {
+        const z = neighbor(s.grid, n.site, dx, dy),
+          hit = z === n.pivot;
         if (
-          !canPush ||
-          !passable.has(pivot) ||
-          v.supports.includes(pivot) ||
-          pivot === peerSite ||
-          v.pieces.includes(pivot) ||
-          p.blocked.includes([n.pivot, n.site, op].join('/'))
+          !passable.has(z) ||
+          z === peerSite ||
+          v.pieces.includes(z) ||
+          (!n.first && m.denied[pose + '|' + op])
         )
           continue;
+        let pivot = n.pivot;
+        if (hit) {
+          pivot = neighbor(s.grid, z, dx, dy);
+          if (
+            !canPush ||
+            !passable.has(pivot) ||
+            v.supports.includes(pivot) ||
+            pivot === peerSite ||
+            v.pieces.includes(pivot) ||
+            p.blocked.includes([operator, n.pivot, n.site, op].join('/'))
+          )
+            continue;
+        }
+        const k = z + '/' + pivot;
+        if (seen.has(k)) continue;
+        seen.add(k);
+        q.push({
+          site: z,
+          pivot,
+          cost: n.cost + 1,
+          pushes: n.pushes + (hit ? 1 : 0),
+          first: n.first || op,
+          moveTo: n.first ? n.moveTo : z,
+        });
       }
-      const k = z + '/' + pivot;
-      if (seen.has(k)) continue;
-      seen.add(k);
-      q.push({
-        site: z,
-        pivot,
-        cost: n.cost + 1,
-        pushes: n.pushes + (hit ? 1 : 0),
-        first: n.first || op,
-        moveTo: n.first ? n.moveTo : z,
-      });
     }
-  }
+    return best;
+  };
+  const best = arrangement(side);
   if (!best) {
-    if (!canPush && !inRoom[other] && law(m, other) === 'push')
-      return offer(
-        'select',
-        { ...v, active: other },
-        'test_whether_the_other_subject_can_relocate_the_landmark',
-        ['the_other_subject_has_a_different_contact_effect'],
-      );
+    if (law(m, side) !== 'push' && !inRoom[other] && law(m, other) === 'push') {
+      const alternative = arrangement(other);
+      if (alternative) {
+        const choice = offer(
+          'select',
+          { ...v, active: other },
+          'select_the_subject_with_a_reachable_launch_configuration',
+          [
+            'preserve_the_other_subject_position',
+            'test_the_projected_landing_from_the_prepared_configuration',
+          ],
+        );
+        if (p.evidence && !choice.evidence.includes(p.evidence)) choice.evidence.push(p.evidence);
+        choice.projectedSetup = {
+          operator: other, pivot: alternative.pivot, launch: alternative.site,
+          landing: alternative.landing, firstCommand: alternative.first,
+        };
+        return choice;
+      }
+    }
     return;
   }
   const next =
