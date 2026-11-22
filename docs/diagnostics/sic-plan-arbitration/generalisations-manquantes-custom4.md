@@ -662,3 +662,6 @@ SS01 et SS04 assurent le contrôle des acquis. SS09 L2 participe aux diagnostics
 5. **Attribuer les victoires.** Rejouer dans le moteur chaque nouvelle victoire, retirer la capacité et répéter l’essai. Pour SS09 L2, documenter explicitement les observations qui ont orienté chaque candidat.
 
 [Rejeux SS02, SS03, SS05 et SS10](autres-l2.md) · [Mesures sur SS06, SS07 et SS08](bilan-trois-chantiers.md) · [Expérience de configuration v38](gel-configurations-v38.md) · [Interventions sur les mouvements relatifs](score-configurations-v38.json)
+
+
+Le chantier de choix de l’expérience dispose maintenant d’une comparaison au premier point de divergence sur LP85 L2, de deux victoires à froid, d’une mesure de transfert entre salles sur SS15 et d’un test autonome qui identifie un échange de positions sur SS13 L3. Sur ce dernier niveau, les 26 réfutations ultérieures localisent une condition d’application encore inconnue. [Résultats et limites sur les niveaux 1 à 3](niveaux-1-2-3.md#apprendre-un-effet-quand-les-effets-connus-ne-donnent-aucun-plan-gagnant)

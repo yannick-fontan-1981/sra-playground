@@ -1,0 +1,17 @@
+{
+  "id": "sic.native-strategies",
+  "schemaVersion": 6,
+  "configuration": {
+    "version": 1,
+    "mode": "active",
+    "maxDepth": 88,
+    "maxNodes": 1000,
+    "solver": "sic-fallback",
+    "informationPreference": {
+      "mode": "active",
+      "strategy": "learn_the_scope_of_a_control",
+      "minimumOutcomes": 3
+    }
+  },
+  "digest": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d"
+}
