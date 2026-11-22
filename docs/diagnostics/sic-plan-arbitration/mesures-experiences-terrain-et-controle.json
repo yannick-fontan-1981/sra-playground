@@ -2464,6 +2464,806 @@
       ],
       "reusedControlDuringSelection": []
     },
+    "positional-source-GRAV-3-3-v143/GRAV": {
+      "game": "GRAV",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v143",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "5a6526fa551b5ca26a3faf7aeae54bc2548dc1d233032c4ad8d9defbe516b4f5"
+      ],
+      "motorTests": [
+        {
+          "decision": 2,
+          "command": 1,
+          "basis": "previous_stride_leaves_peer_out_of_view",
+          "delta": [
+            0,
+            -4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 57,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            8
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 100,
+          "command": 3,
+          "basis": "different_entry_surface",
+          "delta": [
+            -4,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 105,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "different_displacement"
+        }
+      ],
+      "reusedControlDuringSelection": [
+        {
+          "decision": 89,
+          "command": 6,
+          "result": "same_subject_stays",
+          "delta": null
+        },
+        {
+          "decision": 90,
+          "command": 1,
+          "result": "same_subject_stays",
+          "delta": null
+        },
+        {
+          "decision": 97,
+          "command": 6,
+          "result": "same_subject_stays",
+          "delta": null
+        },
+        {
+          "decision": 98,
+          "command": 1,
+          "result": "same_subject_stays",
+          "delta": null
+        }
+      ]
+    },
+    "stride-source-GRAV-3-3-v143/GRAV": {
+      "game": "GRAV",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "cd0b81003827daf8e57d982353aac01a0c7d74f0b3b657872b8cfde90194b2ea",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "5a6526fa551b5ca26a3faf7aeae54bc2548dc1d233032c4ad8d9defbe516b4f5"
+      ],
+      "motorTests": [
+        {
+          "decision": 2,
+          "command": 1,
+          "basis": "previous_stride_leaves_peer_out_of_view",
+          "delta": [
+            0,
+            -4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 57,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            8
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 100,
+          "command": 3,
+          "basis": "different_entry_surface",
+          "delta": [
+            -4,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 105,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -4
+          ],
+          "rival": null,
+          "observed": [
+            20,
+            20
+          ],
+          "result": "different_displacement"
+        }
+      ],
+      "reusedControlDuringSelection": [
+        {
+          "decision": 89,
+          "command": 6,
+          "result": "same_subject_stays",
+          "delta": null
+        },
+        {
+          "decision": 90,
+          "command": 1,
+          "result": "same_subject_stays",
+          "delta": null
+        },
+        {
+          "decision": 97,
+          "command": 6,
+          "result": "same_subject_stays",
+          "delta": null
+        },
+        {
+          "decision": 98,
+          "command": 1,
+          "result": "same_subject_stays",
+          "delta": null
+        }
+      ]
+    },
+    "positional-custom-SS02-1-3-v143/SS02": {
+      "game": "SS02",
+      "entry": [
+        1,
+        3
+      ],
+      "version": "v143",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 71,
+          "won": false
+        }
+      ],
+      "tape": [
+        "f594601b4e20098316609f7d711e7280b5b7f25289fbe233e916fee4b7cbd69c"
+      ],
+      "motorTests": [
+        {
+          "decision": 33,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "subject_unresolved"
+        },
+        {
+          "decision": 34,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 35,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 41,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 68,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "subject_unresolved"
+        },
+        {
+          "decision": 69,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 70,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "stride-custom-SS02-1-3-v143/SS02": {
+      "game": "SS02",
+      "entry": [
+        1,
+        3
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "a5a8ccd4cef68201953079e9a842fd99d08b83d65df81239f63ae8b6bfe6064a",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 71,
+          "won": false
+        }
+      ],
+      "tape": [
+        "f594601b4e20098316609f7d711e7280b5b7f25289fbe233e916fee4b7cbd69c"
+      ],
+      "motorTests": [
+        {
+          "decision": 33,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "subject_unresolved"
+        },
+        {
+          "decision": 34,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 35,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 41,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 68,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "subject_unresolved"
+        },
+        {
+          "decision": 69,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 70,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "positional-custom-SS02-2-2-v143/SS02": {
+      "game": "SS02",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v143",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "090e7ef6b25a52cfb02ea4a0c103e887c1d5167f8f32939ee5fe77b49e59c023",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "cc4dda5bd1a06f3128fbe3323c01d63462804b3d558882d76835ef57b3f92eb7"
+      ],
+      "motorTests": [
+        {
+          "decision": 10,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 16,
+          "command": 3,
+          "basis": "different_entry_surface",
+          "delta": [
+            -3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 19,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 22,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 38,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "stride-custom-SS02-2-2-v143/SS02": {
+      "game": "SS02",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "090e7ef6b25a52cfb02ea4a0c103e887c1d5167f8f32939ee5fe77b49e59c023",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "cc4dda5bd1a06f3128fbe3323c01d63462804b3d558882d76835ef57b3f92eb7"
+      ],
+      "motorTests": [
+        {
+          "decision": 10,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_repeats_displacement"
+        },
+        {
+          "decision": 16,
+          "command": 3,
+          "basis": "different_entry_surface",
+          "delta": [
+            -3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 19,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 22,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 38,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "positional-custom-SS02-3-3-v143/SS02": {
+      "game": "SS02",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v143",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "9469602325bfbd494dd48edb62a9abbb7c3684ed3b7a19f7be91a0ed57624e64",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "74064f5d9e8318db60d32cc9f9c32443af1a3d12c16c909276d1c6e85c3a2831"
+      ],
+      "motorTests": [
+        {
+          "decision": 29,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 50,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 55,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "stride-custom-SS02-3-3-v143/SS02": {
+      "game": "SS02",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "9469602325bfbd494dd48edb62a9abbb7c3684ed3b7a19f7be91a0ed57624e64",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "tape": [
+        "74064f5d9e8318db60d32cc9f9c32443af1a3d12c16c909276d1c6e85c3a2831"
+      ],
+      "motorTests": [
+        {
+          "decision": 29,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 50,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            3,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 55,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -3
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "stride-custom-SS12-SS14-1-2-v143/SS12": {
+      "game": "SS12",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "949785e8ef6a84f31b92fb415ade9cdfd0f758bd8faaf80214b77b6ea564bffb",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "tape": [
+        "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f"
+      ]
+    },
+    "stride-custom-SS12-SS14-1-2-v143/SS14": {
+      "game": "SS14",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 100,
+          "won": false
+        }
+      ],
+      "tape": [
+        "686b18a4ec95144d4fa5e4dd9f00d2187a66f1d1604aaf7db5e863886d2efa79"
+      ]
+    },
+    "stride-custom-SS13-1-2-v143/SS13": {
+      "game": "SS13",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 98,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "tape": [
+        "9da0a37f394044b4677b0a520c2c4835c8b63405d45070a3eb224414161d0ced"
+      ]
+    },
+    "stride-custom-SS01-1-2-v143/SS01": {
+      "game": "SS01",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 59,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 35,
+          "won": true
+        }
+      ],
+      "tape": [
+        "59048ee37b3d295d175924d149c608d99aae0a2a39aee115cca8371ec839d28a"
+      ]
+    },
     "reconsider-custom-SS07-1-3-ablate-v139-transfer-paired-law/SS07": {
       "game": "SS07",
       "entry": [
@@ -2805,6 +3605,26 @@
       "witness": "positional-source-PORT-2-2-v143/PORT",
       "candidate": "stride-source-PORT-2-2-v143/PORT",
       "equalCommandsAndImages": 81
+    },
+    {
+      "witness": "positional-source-GRAV-3-3-v143/GRAV",
+      "candidate": "stride-source-GRAV-3-3-v143/GRAV",
+      "equalCommandsAndImages": 120
+    },
+    {
+      "witness": "positional-custom-SS02-1-3-v143/SS02",
+      "candidate": "stride-custom-SS02-1-3-v143/SS02",
+      "equalCommandsAndImages": 71
+    },
+    {
+      "witness": "positional-custom-SS02-2-2-v143/SS02",
+      "candidate": "stride-custom-SS02-2-2-v143/SS02",
+      "equalCommandsAndImages": 120
+    },
+    {
+      "witness": "positional-custom-SS02-3-3-v143/SS02",
+      "candidate": "stride-custom-SS02-3-3-v143/SS02",
+      "equalCommandsAndImages": 120
     },
     {
       "witness": "reconsider-custom-SS07-1-3-v139/SS07",
@@ -4709,6 +5529,984 @@
       "chosen": 11,
       "gain": 0
     }
+  },
+  "sameOriginInterventionOnStride": {
+    "scope": "all available non-pointed commands from the same restored origin, twice; same recorded continuation in games won by v143",
+    "cases": [
+      {
+        "game": "FITE",
+        "level": 3,
+        "decision": 44,
+        "purpose": "different_entry_surface",
+        "chosen": 4,
+        "origin": "285725296c6c7c40",
+        "role": "f0108d2038d22bd6d31f2034b1a094f87c360543db65f4c59209cb7454cc60b5",
+        "actions": [
+          {
+            "id": 1,
+            "publicAfter": "b366d11ab5d04bd5",
+            "delta": [
+              -5,
+              -5
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 18,
+              "official": true
+            }
+          },
+          {
+            "id": 2,
+            "publicAfter": "b366d11ab5d04bd5",
+            "delta": [
+              -5,
+              -5
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 18,
+              "official": true
+            }
+          },
+          {
+            "id": 3,
+            "publicAfter": "285725296c6c7c40",
+            "delta": [
+              0,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 18,
+              "official": true
+            }
+          },
+          {
+            "id": 4,
+            "publicAfter": "b366d11ab5d04bd5",
+            "delta": [
+              -5,
+              -5
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 18,
+              "official": true
+            }
+          },
+          {
+            "id": 7,
+            "publicAfter": "b366d11ab5d04bd5",
+            "delta": [
+              -5,
+              -5
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 18,
+              "official": true
+            }
+          }
+        ],
+        "distinguishingRoles": [
+          {
+            "role": "f0108d2038d22bd6d31f2034b1a094f87c360543db65f4c59209cb7454cc60b5",
+            "returns": [
+              [
+                1,
+                [
+                  -5,
+                  -5
+                ]
+              ],
+              [
+                2,
+                [
+                  -5,
+                  -5
+                ]
+              ],
+              [
+                3,
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  -5,
+                  -5
+                ]
+              ],
+              [
+                7,
+                [
+                  -5,
+                  -5
+                ]
+              ]
+            ]
+          },
+          {
+            "role": "d8ddbafdba820c381180e5f379738cb03d00ad2494ce0e4349b0edc372bbb8b1",
+            "returns": [
+              [
+                1,
+                [
+                  5,
+                  0
+                ]
+              ],
+              [
+                2,
+                [
+                  5,
+                  0
+                ]
+              ],
+              [
+                3,
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  5,
+                  0
+                ]
+              ],
+              [
+                7,
+                [
+                  5,
+                  0
+                ]
+              ]
+            ]
+          },
+          {
+            "role": "d44b4fd637e6df4989e2dbec933d6318625ac72239b045b991487442050fa2e5",
+            "returns": [
+              [
+                1,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                2,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                3,
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                7,
+                [
+                  -5,
+                  0
+                ]
+              ]
+            ]
+          },
+          {
+            "role": "b91edf83babea9fa576bbcc725befa4f9f59447f9417db717152cf69a0cc45b0",
+            "returns": [
+              [
+                1,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                2,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                3,
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                7,
+                [
+                  -5,
+                  0
+                ]
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "game": "FITE",
+        "level": 3,
+        "decision": 45,
+        "purpose": "two_observed_displacements",
+        "chosen": 4,
+        "origin": "b366d11ab5d04bd5",
+        "role": "f0108d2038d22bd6d31f2034b1a094f87c360543db65f4c59209cb7454cc60b5",
+        "actions": [
+          {
+            "id": 1,
+            "publicAfter": "b366d11ab5d04bd5",
+            "delta": [
+              0,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 17,
+              "official": true
+            }
+          },
+          {
+            "id": 2,
+            "publicAfter": "84199427b94019ee",
+            "delta": [
+              -5,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 17,
+              "official": true
+            }
+          },
+          {
+            "id": 3,
+            "publicAfter": "6ad50a3d99d952dc",
+            "delta": [
+              -5,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 17,
+              "official": true
+            }
+          },
+          {
+            "id": 4,
+            "publicAfter": "9eeac0777b85e206",
+            "delta": [
+              0,
+              5
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 17,
+              "official": true
+            }
+          },
+          {
+            "id": 7,
+            "publicAfter": "b366d11ab5d04bd5",
+            "delta": [
+              0,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 17,
+              "official": true
+            }
+          }
+        ],
+        "distinguishingRoles": [
+          {
+            "role": "f0108d2038d22bd6d31f2034b1a094f87c360543db65f4c59209cb7454cc60b5",
+            "returns": [
+              [
+                1,
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                2,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                3,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  0,
+                  5
+                ]
+              ],
+              [
+                7,
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          {
+            "role": "d8ddbafdba820c381180e5f379738cb03d00ad2494ce0e4349b0edc372bbb8b1",
+            "returns": [
+              [
+                1,
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                2,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                3,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  -5,
+                  0
+                ]
+              ],
+              [
+                7,
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          },
+          {
+            "role": "d44b4fd637e6df4989e2dbec933d6318625ac72239b045b991487442050fa2e5",
+            "returns": [
+              [
+                1,
+                [
+                  0,
+                  0
+                ]
+              ],
+              [
+                2,
+                [
+                  0,
+                  5
+                ]
+              ],
+              [
+                3,
+                [
+                  -10,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  5,
+                  0
+                ]
+              ],
+              [
+                7,
+                [
+                  0,
+                  0
+                ]
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "game": "PORT",
+        "level": 2,
+        "decision": 35,
+        "purpose": "different_entry_surface",
+        "chosen": 4,
+        "origin": "521302c4c4408e01",
+        "role": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+        "actions": [
+          {
+            "id": 1,
+            "publicAfter": "22861fb7d0f5b46a",
+            "delta": [
+              0,
+              -4
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 46,
+              "official": false
+            }
+          },
+          {
+            "id": 2,
+            "publicAfter": "7b018ea844f4aefb",
+            "delta": [
+              0,
+              4
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 46,
+              "official": true
+            }
+          },
+          {
+            "id": 3,
+            "publicAfter": "922e72ad7d7bf106",
+            "delta": [
+              -4,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 46,
+              "official": false
+            }
+          },
+          {
+            "id": 4,
+            "publicAfter": "cbb6004b2ceab8b5",
+            "delta": [
+              24,
+              12
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 46,
+              "official": true
+            }
+          }
+        ],
+        "distinguishingRoles": [
+          {
+            "role": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+            "returns": [
+              [
+                1,
+                [
+                  0,
+                  -4
+                ]
+              ],
+              [
+                2,
+                [
+                  0,
+                  4
+                ]
+              ],
+              [
+                3,
+                [
+                  -4,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  24,
+                  12
+                ]
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "game": "PORT",
+        "level": 2,
+        "decision": 76,
+        "purpose": "different_entry_surface",
+        "chosen": 2,
+        "origin": "46b1ca887cec1600",
+        "role": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+        "actions": [
+          {
+            "id": 1,
+            "publicAfter": "b5ff37ccd6a20ed3",
+            "delta": [
+              0,
+              -4
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 5,
+              "official": false
+            }
+          },
+          {
+            "id": 2,
+            "publicAfter": "0a7c34e6b8f6a560",
+            "delta": [
+              20,
+              12
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 5,
+              "official": true
+            }
+          },
+          {
+            "id": 3,
+            "publicAfter": "ebb76af69bf126b3",
+            "delta": [
+              -4,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 5,
+              "official": false
+            }
+          },
+          {
+            "id": 4,
+            "publicAfter": "5cd4fe8bff0ee8fa",
+            "delta": [
+              4,
+              0
+            ],
+            "immediate": false,
+            "tail": {
+              "used": 5,
+              "official": false
+            }
+          }
+        ],
+        "distinguishingRoles": [
+          {
+            "role": "77280afef30b336535f0a7454d7c08de856a411b0efdb22efe22acc95e53ff62",
+            "returns": [
+              [
+                1,
+                [
+                  0,
+                  -4
+                ]
+              ],
+              [
+                2,
+                [
+                  20,
+                  12
+                ]
+              ],
+              [
+                3,
+                [
+                  -4,
+                  0
+                ]
+              ],
+              [
+                4,
+                [
+                  4,
+                  0
+                ]
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "game": "GRAV",
+        "level": 3,
+        "decision": 105,
+        "purpose": "different_entry_surface",
+        "chosen": 1,
+        "origin": "88559eebda5b0220",
+        "role": "3d16c313ed875e95e6671e4a33417b1070d72c70646674b8b6936e3707fe31f4",
+        "actions": [
+          {
+            "id": 1,
+            "publicAfter": "cd0b81003827daf8",
+            "delta": [
+              20,
+              20
+            ],
+            "immediate": false,
+            "tail": null
+          },
+          {
+            "id": 2,
+            "publicAfter": "cd0b81003827daf8",
+            "delta": [
+              20,
+              20
+            ],
+            "immediate": false,
+            "tail": null
+          },
+          {
+            "id": 3,
+            "publicAfter": "cd0b81003827daf8",
+            "delta": [
+              20,
+              20
+            ],
+            "immediate": false,
+            "tail": null
+          },
+          {
+            "id": 4,
+            "publicAfter": "cd0b81003827daf8",
+            "delta": [
+              20,
+              20
+            ],
+            "immediate": false,
+            "tail": null
+          },
+          {
+            "id": 7,
+            "publicAfter": "cd0b81003827daf8",
+            "delta": [
+              20,
+              20
+            ],
+            "immediate": false,
+            "tail": null
+          }
+        ],
+        "distinguishingRoles": []
+      }
+    ]
+  },
+  "source100StrideObservations": {
+    "scope": "observation-only at each historical decision before its input; excludes an unplayed experiment from future evidence; family availability and arbitration not reconstructed",
+    "games": 100,
+    "actions": 1550,
+    "offers": 91,
+    "matches": 32,
+    "unexpected": [
+      {
+        "game": "FOGW",
+        "decision": 5,
+        "command": "ACTION4",
+        "forecast": [
+          4,
+          0
+        ],
+        "actual": [
+          -16,
+          0
+        ],
+        "publicBefore": "eea80bfb52627fe6",
+        "publicAfter": "11d75f265a96fcfe"
+      },
+      {
+        "game": "PRTL",
+        "decision": 5,
+        "command": "ACTION3",
+        "forecast": [
+          -5,
+          0
+        ],
+        "actual": [
+          50,
+          0
+        ],
+        "publicBefore": "fff8f2591ac63d87",
+        "publicAfter": "82afd4940d5c438a"
+      }
+    ],
+    "comparisons": []
+  },
+  "movingUnderMultipleCommands": {
+    "seenPairs": 0,
+    "games": 0,
+    "restored": [],
+    "sharedMotionConfirmed": 0,
+    "anotherRoleVaries": 0
+  },
+  "source100LandingDepartures": {
+    "scope": "entire identified set of source100 L1 unexpected displacements; every legal non-pointed continuation from the landing twice",
+    "cases": [
+      {
+        "game": "FOGW",
+        "decision": 6,
+        "role": "e88d43b70a4112ee76211e4b3770d338cbfa7abe207f534fbdd2abd860f6ec7a",
+        "command": "ACTION4",
+        "earlierDelta": [
+          4,
+          0
+        ],
+        "latestDelta": [
+          -16,
+          0
+        ],
+        "earlierInside": true,
+        "latestInside": false,
+        "archivedCommand": 4,
+        "arms": [
+          {
+            "id": 1,
+            "official": false,
+            "frame": "417349c544bd1688",
+            "observed": [
+              4,
+              0
+            ]
+          },
+          {
+            "id": 2,
+            "official": false,
+            "frame": "7047f74225a61367",
+            "observed": [
+              4,
+              0
+            ]
+          },
+          {
+            "id": 3,
+            "official": false,
+            "frame": "2ff03d4d22bff6e4",
+            "observed": [
+              4,
+              0
+            ]
+          },
+          {
+            "id": 4,
+            "official": false,
+            "frame": "e973d638f564c789",
+            "observed": [
+              4,
+              0
+            ]
+          }
+        ]
+      },
+      {
+        "game": "PRTL",
+        "decision": 6,
+        "role": "1408b81c579a363e6849c7cd8f20048093a91b9c1ee42c5638e28a5c2235dbc7",
+        "command": "ACTION3",
+        "earlierDelta": [
+          -5,
+          0
+        ],
+        "latestDelta": [
+          50,
+          0
+        ],
+        "earlierInside": true,
+        "latestInside": false,
+        "archivedCommand": 3,
+        "arms": [
+          {
+            "id": 1,
+            "official": false,
+            "frame": "988ab07967d997aa",
+            "observed": [
+              -5,
+              -13
+            ]
+          },
+          {
+            "id": 2,
+            "official": false,
+            "frame": "82afd4940d5c438a",
+            "observed": [
+              0,
+              0
+            ]
+          },
+          {
+            "id": 3,
+            "official": true,
+            "frame": "69fd7709c6d4e5a2",
+            "observed": null
+          },
+          {
+            "id": 4,
+            "official": false,
+            "frame": "691ea6eda54a01aa",
+            "observed": [
+              -50,
+              0
+            ]
+          },
+          {
+            "id": 5,
+            "official": false,
+            "frame": "39c1d26cb95d9c72",
+            "observed": [
+              0,
+              0
+            ]
+          },
+          {
+            "id": 7,
+            "official": false,
+            "frame": "6ef4fd56acd3239f",
+            "observed": [
+              -45,
+              0
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "continuationAfterBothPreparations": {
+    "order": [
+      "C",
+      "A,C",
+      "B,C",
+      "A,B,C"
+    ],
+    "scope": "available non-coordinate controls; named subject moves only after both preparations or official score only after both; every arm repeated",
+    "cases": [
+      {
+        "game": "AS66",
+        "decision": 9,
+        "controls": 5,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "FUIT",
+        "decision": 3,
+        "controls": 6,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "G50T",
+        "decision": 3,
+        "controls": 5,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "GIGO",
+        "decision": 3,
+        "controls": 6,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 3,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 5,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 12,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 25,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 31,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 36,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 51,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 75,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      },
+      {
+        "game": "SS04",
+        "decision": 114,
+        "controls": 4,
+        "closed": false,
+        "gains": []
+      }
+    ]
   },
   "ablationOfCarriedPairLesson": {
     "reconsider-custom-SS07-1-3-v139/SS07": "level_action_budget",
