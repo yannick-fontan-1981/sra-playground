@@ -34,6 +34,78 @@
     {
       "game": "SS06",
       "level": 3,
+      "policy": "v128",
+      "commit": "6ad8e1d89f813b942a12ab2725f4f36c8833842e",
+      "arm": "ordinary",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 141,
+          "won": true
+        }
+      ],
+      "digest": "7d5447e25c66d3d9216b14ab455992c977e701db863811cd767ff95324e9d9f8",
+      "matchingPrefixWithV127": 81,
+      "firstDifferentFamily": "sic_test_prepared_effects",
+      "tests": [
+        {
+          "action": 82,
+          "command": 3,
+          "before": "13c2f5ef6dfa9dfd",
+          "after": "792e77d3f6eded7f",
+          "alternatives": [
+            [
+              "walk",
+              "push",
+              "pull"
+            ],
+            [
+              "field"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 84,
+          "command": 3,
+          "before": "2459182bc67f9ef7",
+          "after": "5bbdbed97cce2b0d",
+          "alternatives": [
+            [
+              "walk",
+              "push"
+            ],
+            [
+              "pull"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 96,
+          "command": 4,
+          "before": "7e3311b78b68c491",
+          "after": "7e3311b78b68c491",
+          "alternatives": [
+            [
+              "walk"
+            ],
+            [
+              "push"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        }
+      ],
+      "confirmedBoundaryEntries": 10,
+      "silentInputTests": 0,
+      "finalResult": "transport_official"
+    },
+    {
+      "game": "SS06",
+      "level": 3,
       "policy": "v135",
       "commit": "37cb7aea7db63e7a47dbc9faa4ee846a3b6d9e24",
       "arm": "ordinary",
@@ -174,9 +246,232 @@
       "confirmedBoundaryEntries": 10,
       "silentInputTests": 0,
       "finalResult": "transport_official"
+    },
+    {
+      "game": "SS06",
+      "level": 3,
+      "policy": "v136",
+      "commit": "ecdf0a23274a34b3e1a42d561f6bf32b42f7a826",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 141,
+          "won": true
+        }
+      ],
+      "digest": "7d5447e25c66d3d9216b14ab455992c977e701db863811cd767ff95324e9d9f8",
+      "matchingPrefixWithV127": 81,
+      "firstDifferentFamily": "sic_test_prepared_effects",
+      "tests": [
+        {
+          "action": 82,
+          "command": 3,
+          "before": "13c2f5ef6dfa9dfd",
+          "after": "792e77d3f6eded7f",
+          "alternatives": [
+            [
+              "walk",
+              "push",
+              "pull"
+            ],
+            [
+              "field"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 84,
+          "command": 3,
+          "before": "2459182bc67f9ef7",
+          "after": "5bbdbed97cce2b0d",
+          "alternatives": [
+            [
+              "walk",
+              "push"
+            ],
+            [
+              "pull"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        },
+        {
+          "action": 96,
+          "command": 4,
+          "before": "7e3311b78b68c491",
+          "after": "7e3311b78b68c491",
+          "alternatives": [
+            [
+              "walk"
+            ],
+            [
+              "push"
+            ]
+          ],
+          "result": "motion_test_discriminated_public_effects"
+        }
+      ],
+      "confirmedBoundaryEntries": 10,
+      "silentInputTests": 0,
+      "finalResult": "transport_official"
     }
   ],
   "conditionalMotion": [
+    {
+      "version": "v136",
+      "comparisons": {},
+      "backend": "custom",
+      "game": "SS06",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 54,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 54,
+          "won": true
+        }
+      ],
+      "digests": [
+        "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867"
+      ],
+      "questions": [],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {
+        "v135": {
+          "commonPrefix": 141,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 141
+        }
+      },
+      "backend": "custom",
+      "game": "SS06",
+      "entry": [
+        3,
+        3
+      ],
+      "cap": 350,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 3,
+          "actions": 141,
+          "won": true
+        }
+      ],
+      "digests": [
+        "7d5447e25c66d3d9216b14ab455992c977e701db863811cd767ff95324e9d9f8"
+      ],
+      "questions": [],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {
+        "v135": {
+          "commonPrefix": 117,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 117
+        },
+        "v136": {
+          "commonPrefix": 117,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 117
+        }
+      },
+      "backend": "custom",
+      "game": "SS07",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 117,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "digests": [
+        "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+      ],
+      "questions": [],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {},
+      "backend": "custom",
+      "game": "SS07",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 117,
+      "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+      "arm": "prospective",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "digests": [
+        "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+      ],
+      "questions": [],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {},
+      "backend": "source",
+      "game": "GABA",
+      "entry": [
+        1,
+        2
+      ],
+      "cap": 120,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        }
+      ],
+      "digests": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4"
+      ],
+      "questions": [],
+      "tests": []
+    },
     {
       "version": "v136",
       "comparisons": {
@@ -261,6 +556,12 @@
           "identical": true,
           "previousScore": true,
           "previousActions": 80
+        },
+        "v136": {
+          "commonPrefix": 80,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 80
         }
       },
       "backend": "source",
@@ -289,6 +590,12 @@
       "version": "v136",
       "comparisons": {
         "v135": {
+          "commonPrefix": 113,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 113
+        },
+        "v136": {
           "commonPrefix": 113,
           "identical": true,
           "previousScore": true,
@@ -348,6 +655,38 @@
     },
     {
       "version": "v136",
+      "comparisons": {
+        "v135": {
+          "commonPrefix": 57,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 57
+        }
+      },
+      "backend": "source",
+      "game": "UPST",
+      "entry": [
+        1,
+        1
+      ],
+      "cap": 60,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 1,
+          "actions": 57,
+          "won": true
+        }
+      ],
+      "digests": [
+        "3e4de56240497728f95b11154ef4f6f9b40c02a871fa59b0282afe881ab784b8"
+      ],
+      "questions": [],
+      "tests": []
+    },
+    {
+      "version": "v136",
       "comparisons": {},
       "backend": "source",
       "game": "GABA",
@@ -382,6 +721,85 @@
           "probe": "ACTION5",
           "phase": "probe",
           "result": "previously_silent_input_changed_the_arrangement"
+        }
+      ],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {},
+      "backend": "source",
+      "game": "FUIT",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+      "arm": "prospective",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 80,
+          "won": true
+        }
+      ],
+      "digests": [
+        "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00"
+      ],
+      "questions": [],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {},
+      "backend": "source",
+      "game": "LKEY",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+      "arm": "prospective",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 113,
+          "won": true
+        }
+      ],
+      "digests": [
+        "68af14b61848ed68ee9a7481a7a6cf0d9e4f32beb2f2ef9306586e3c324f3606"
+      ],
+      "questions": [
+        {
+          "action": 50,
+          "prepare": "ACTION1",
+          "probe": "ACTION3",
+          "phase": "prepare",
+          "result": "preparation_verified_test_the_silent_input"
+        },
+        {
+          "action": 51,
+          "prepare": "ACTION1",
+          "probe": "ACTION3",
+          "phase": "probe",
+          "result": "previously_silent_input_changed_the_arrangement"
+        },
+        {
+          "action": 90,
+          "prepare": "ACTION1",
+          "probe": "ACTION6:20,19",
+          "phase": "prepare",
+          "result": "preparation_verified_test_the_silent_input"
+        },
+        {
+          "action": 91,
+          "prepare": "ACTION1",
+          "probe": "ACTION6:20,19",
+          "phase": "probe",
+          "result": "input_remained_silent_after_preparation"
         }
       ],
       "tests": []
