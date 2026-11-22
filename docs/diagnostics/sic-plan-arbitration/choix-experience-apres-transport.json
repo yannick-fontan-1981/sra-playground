@@ -1,0 +1,734 @@
+{
+  "workers": 1,
+  "engines": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "v138": "4d09dbf2546f9949bdedc57b6e5dfc7fe5a95ccd",
+  "diagnostic": {
+    "source": "GABA",
+    "action": 40,
+    "layoutFactors": [
+      {
+        "name": "entry",
+        "action": 1,
+        "variants": [
+          {
+            "split": false,
+            "wider": false,
+            "interpretations": 0,
+            "factors": []
+          },
+          {
+            "split": false,
+            "wider": true,
+            "interpretations": 0,
+            "factors": []
+          },
+          {
+            "split": true,
+            "wider": false,
+            "interpretations": 2,
+            "factors": [
+              {
+                "pitch": 5,
+                "cargoSizes": [
+                  1,
+                  4
+                ],
+                "regionSizes": [
+                  1,
+                  4,
+                  1
+                ],
+                "components": [
+                  1,
+                  3,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "split": true,
+            "wider": true,
+            "interpretations": 2,
+            "factors": [
+              {
+                "pitch": 5,
+                "cargoSizes": [
+                  1,
+                  4
+                ],
+                "regionSizes": [
+                  1,
+                  4,
+                  1
+                ],
+                "components": [
+                  1,
+                  3,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "before_conditional_change",
+        "action": 39,
+        "variants": [
+          {
+            "split": false,
+            "wider": false,
+            "interpretations": 0,
+            "factors": []
+          },
+          {
+            "split": false,
+            "wider": true,
+            "interpretations": 0,
+            "factors": []
+          },
+          {
+            "split": true,
+            "wider": false,
+            "interpretations": 2,
+            "factors": [
+              {
+                "pitch": 5,
+                "cargoSizes": [
+                  1,
+                  4
+                ],
+                "regionSizes": [
+                  1,
+                  4,
+                  1
+                ],
+                "components": [
+                  1,
+                  3,
+                  1
+                ]
+              }
+            ]
+          },
+          {
+            "split": true,
+            "wider": true,
+            "interpretations": 2,
+            "factors": [
+              {
+                "pitch": 5,
+                "cargoSizes": [
+                  1,
+                  4
+                ],
+                "regionSizes": [
+                  1,
+                  4,
+                  1
+                ],
+                "components": [
+                  1,
+                  3,
+                  1
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "routesForFirstAttachedPart": [
+      {
+        "i": 0,
+        "split": false,
+        "subjects": 3,
+        "movedTiles": 3,
+        "receiptSites": 4,
+        "path": null,
+        "turns": null
+      },
+      {
+        "i": 1,
+        "split": false,
+        "subjects": 3,
+        "movedTiles": 3,
+        "receiptSites": 4,
+        "path": null,
+        "turns": null
+      }
+    ],
+    "offlineExperiments": 0
+  },
+  "native": [
+    {
+      "game": "GABA",
+      "policy": "v138",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 120,
+      "entry": [
+        2,
+        2
+      ],
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "commands": [
+        "d9c5d2c7e1ec8aa40d606735228c0589a79674eb4edb6be639514a17ccc49aa4"
+      ],
+      "trials": []
+    },
+    {
+      "game": "GABA",
+      "policy": "v138",
+      "arm": "release",
+      "pack": "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d",
+      "budget": 120,
+      "entry": [
+        2,
+        2
+      ],
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "commands": [
+        "bab9729c895388666162eb6e08db2e94c9a3213186fe16598b7b05de9bbd7dd5"
+      ],
+      "trials": [
+        {
+          "action": 41,
+          "command": 5,
+          "stage": "control",
+          "priorRevisions": [
+            40,
+            8,
+            41
+          ],
+          "outcomes": [
+            "mark_remains_at_the_landing",
+            "original_appearance_restored_at_the_landing"
+          ],
+          "distinguishingPixels": 72,
+          "origin": "d40f0d23623866af",
+          "returned": "d40f0d23623866af",
+          "observation": "mark_remains_at_the_landing"
+        },
+        {
+          "action": 47,
+          "command": 5,
+          "stage": "control",
+          "priorRevisions": [
+            40,
+            36,
+            47
+          ],
+          "outcomes": [
+            "mark_remains_at_the_landing",
+            "original_appearance_restored_at_the_landing"
+          ],
+          "distinguishingPixels": 72,
+          "origin": "dc43999dd6a864a8",
+          "returned": "dc43999dd6a864a8",
+          "observation": "mark_remains_at_the_landing"
+        }
+      ]
+    },
+    {
+      "game": "SS07",
+      "policy": "v138",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 117,
+      "entry": [
+        2,
+        2
+      ],
+      "levels": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "commands": [
+        "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+      ],
+      "trials": []
+    },
+    {
+      "game": "SS07",
+      "policy": "v138",
+      "arm": "release",
+      "pack": "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d",
+      "budget": 117,
+      "entry": [
+        2,
+        2
+      ],
+      "levels": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "commands": [
+        "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88"
+      ],
+      "trials": []
+    },
+    {
+      "game": "GABA",
+      "policy": "v138",
+      "arm": "release",
+      "pack": "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d",
+      "budget": 120,
+      "entry": [
+        1,
+        2
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        }
+      ],
+      "commands": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4"
+      ],
+      "trials": []
+    },
+    {
+      "game": "GABA",
+      "policy": "v137",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 120,
+      "entry": [
+        1,
+        3
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        },
+        {
+          "level": 3,
+          "actions": 85,
+          "won": true
+        }
+      ],
+      "commands": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4",
+        "f1cd0685ece175fa3f220a80a21ace573eb6fecfdc2de86ebcf87d2ea7b923e5"
+      ],
+      "trials": []
+    },
+    {
+      "game": "SS12",
+      "policy": "v137",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 350,
+      "entry": [
+        1,
+        2
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "commands": [
+        "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f"
+      ],
+      "trials": []
+    },
+    {
+      "game": "SS12",
+      "policy": "v137",
+      "arm": "prospective",
+      "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+      "budget": 350,
+      "entry": [
+        1,
+        2
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "commands": [
+        "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f"
+      ],
+      "trials": []
+    },
+    {
+      "game": "SS13",
+      "policy": "v137",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 350,
+      "entry": [
+        1,
+        2
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 300,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "commands": [
+        "4a47c7a078c18adcb0fa91a18fc8f287c2f13d343d99e9231ace210f2db938e0"
+      ],
+      "trials": []
+    },
+    {
+      "game": "SS14",
+      "policy": "v137",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 350,
+      "entry": [
+        1,
+        2
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 31,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 52,
+          "won": true
+        }
+      ],
+      "commands": [
+        "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3"
+      ],
+      "trials": []
+    }
+  ],
+  "comparisons": [
+    {
+      "game": "GABA",
+      "policy": "v138",
+      "budget": 120,
+      "packs": [
+        "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+        "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d"
+      ],
+      "identicalPrefix": 40,
+      "firstDifference": {
+        "action": 41,
+        "reference": [
+          1,
+          null,
+          "d40f0d23623866af",
+          "a4e83f542df952bd"
+        ],
+        "candidate": [
+          5,
+          null,
+          "d40f0d23623866af",
+          "d40f0d23623866af"
+        ]
+      }
+    },
+    {
+      "game": "SS07",
+      "policy": "v138",
+      "budget": 117,
+      "packs": [
+        "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+        "5cdc1112d574c9dc4db7d40f93190f9ba6567ccbcd571dc896c4fc837d54b85d"
+      ],
+      "identicalPrefix": 117,
+      "firstDifference": null
+    },
+    {
+      "game": "SS12",
+      "policy": "v137",
+      "budget": 350,
+      "packs": [
+        "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+        "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac"
+      ],
+      "identicalPrefix": 94,
+      "firstDifference": null
+    }
+  ],
+  "receiverMemoryAblation": {
+    "source": {
+      "original": "2ae046676c170572401e85bbb4bd4c36fcbaee40",
+      "change": "mask receiver bindings at initialization; retain carrier shape, pitch, core, interaction history and evidence",
+      "before": "4b80e104d10c2f1652935678afe71c56b52d3de67b4e8c389208daec89769d14",
+      "after": "205b5e5e9c9a44fcee896b77d7515169f84a0dd80d0d75082bd9433cc66c5ce0"
+    },
+    "control": {
+      "game": "GABA",
+      "policy": "v137",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 120,
+      "entry": [
+        1,
+        2
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        }
+      ],
+      "commands": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4"
+      ],
+      "trials": []
+    },
+    "ablation": {
+      "game": "GABA",
+      "policy": "ablate-v137-receiver-memory",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 120,
+      "entry": [
+        1,
+        2
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 49,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 50,
+          "won": true
+        }
+      ],
+      "commands": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4"
+      ],
+      "trials": []
+    },
+    "comparison": {
+      "identicalPrefix": 99,
+      "firstDifference": null
+    }
+  },
+  "repeatedPreparations": {
+    "identicalOriginCommandNamedRolesPredictionAndReturnedImage": [
+      [
+        50,
+        52,
+        54,
+        56,
+        58,
+        60,
+        62,
+        64,
+        66,
+        68,
+        70,
+        72,
+        74,
+        76,
+        78,
+        80,
+        82,
+        84,
+        88,
+        92,
+        96,
+        100,
+        102,
+        105,
+        118
+      ],
+      [
+        87,
+        91,
+        95,
+        99,
+        109,
+        111
+      ]
+    ]
+  },
+  "transferToSS07Level1": {
+    "candidate": {
+      "game": "SS07",
+      "policy": "v137",
+      "arm": "mechanism",
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "budget": 350,
+      "entry": [
+        1,
+        1
+      ],
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": true
+        }
+      ],
+      "commands": [
+        "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+      ],
+      "trials": []
+    },
+    "oldResult": [
+      {
+        "level": 1,
+        "actions": 250,
+        "won": false
+      }
+    ],
+    "oldSolver": "v109",
+    "comparison": {
+      "identicalPrefix": 10,
+      "firstDifference": {
+        "action": 11,
+        "reference": [
+          2,
+          null,
+          "fb9d5d1233672879",
+          "45bd5846e907778b"
+        ],
+        "candidate": [
+          4,
+          null,
+          "fb9d5d1233672879",
+          "c9bfbcffc974c783"
+        ]
+      }
+    },
+    "tests": [
+      {
+        "action": 11,
+        "control": 4,
+        "outcomes": 3,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull",
+          "exchange"
+        ],
+        "maximumRemaining": 2
+      },
+      {
+        "action": 19,
+        "control": 4,
+        "outcomes": 2,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull",
+          "field",
+          "exchange"
+        ],
+        "maximumRemaining": 4
+      },
+      {
+        "action": 21,
+        "control": 2,
+        "outcomes": 2,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull",
+          "field"
+        ],
+        "maximumRemaining": 3
+      },
+      {
+        "action": 24,
+        "control": 2,
+        "outcomes": 2,
+        "hypotheses": [
+          "walk",
+          "push",
+          "pull"
+        ],
+        "maximumRemaining": 2
+      },
+      {
+        "action": 31,
+        "control": 4,
+        "outcomes": 2,
+        "hypotheses": [
+          "walk",
+          "push"
+        ],
+        "maximumRemaining": 1
+      }
+    ],
+    "officialReceipt": "transport_official"
+  }
+}
