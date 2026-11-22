@@ -8,11 +8,14 @@
     "success": true,
     "campaignLevels": 8,
     "publicPixelsAndTiming": true,
-    "htmlSha256": "bad6cb6b6ae58b4aebaca1bb5205f9e229b3b6817fb5665e5f2eb10d79522f33"
+    "htmlSha256": "22f05c589dbca0bb2292afd59b3f0d76a92b3c85547c544fee100e8982984f27",
+    "tutorialLevel": 3
   },
   "rasterReview": {
     "scope": "Exact initial and completed 64×64 engine boards for all eight rooms",
-    "reviewed": true
+    "reviewed": true,
+    "permutationCheck": "The eight maps are identical to the qualified 0.1.0 maps; their exact order is now 3,2,1,4,5,6,7,8."
   },
-  "remaining": "Review desktop/mobile CSS, native dispatcher, direct link and deployed Site in an authorized browser during native integration. No native browser or autonomous SRA success is claimed."
+  "remaining": "Review desktop/mobile CSS, native dispatcher, direct link and deployed Site in an authorized browser during native integration. No native browser or autonomous SRA success is claimed.",
+  "version": "0.1.1"
 }

@@ -5,44 +5,44 @@
   "levels": [
     {
       "level": 1,
-      "title": "Le jardin des trois issues",
-      "mapSha256": "1f0233e1dc3965863d63eeb3b52a7627b16ceb18e69477c8fe9eb4ccf21054d4",
-      "terrainSha256": "c280e963b4e5a31b2549731142cee086b90969a3aee6884583ce0575539c17d4",
+      "title": "Les trois pièces du chœur",
+      "mapSha256": "c03116d0ad9c617d0ae9cb6d9717b7769a0b1082b661ab1dedd91c2d2baf21de",
+      "terrainSha256": "5cb332bc2fa2dae0e90cd123fb72a0242ad99de32d7fdf11311427631d20a330",
       "goals": [
         {
-          "x": 3,
-          "y": 3
+          "x": 6,
+          "y": 2
         },
         {
-          "x": 16,
-          "y": 3
+          "x": 17,
+          "y": 10
         },
         {
-          "x": 10,
+          "x": 6,
           "y": 17
         }
       ],
-      "landCells": 168,
-      "waterCells": 4,
+      "landCells": 62,
+      "waterCells": 0,
       "walking": [
         {
           "role": "merchant",
-          "states": 153,
-          "transitions": 612,
+          "states": 11,
+          "transitions": 44,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 153,
-          "transitions": 612,
+          "states": 11,
+          "transitions": 44,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 153,
-          "transitions": 612,
+          "states": 10,
+          "transitions": 40,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -50,22 +50,22 @@
       "generousWalking": [
         {
           "role": "merchant",
-          "states": 155,
-          "transitions": 620,
+          "states": 14,
+          "transitions": 56,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 155,
-          "transitions": 620,
+          "states": 14,
+          "transitions": 56,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 155,
-          "transitions": 620,
+          "states": 14,
+          "transitions": 56,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -73,7 +73,18 @@
       "maximumFrozenWalkingGoalAssignment": 0,
       "buttonsAndPressesSeparate": true,
       "exactHistoricalTerrainRepeats": [],
-      "localChecks": []
+      "localChecks": [
+        {
+          "name": "Sortie volontaire du Barde avant son extraction",
+          "observed": "Le pas vers l’est est légal, mais le chant ramène une caisse dans chaque accès vertical. La poussée du Marchand conserve au contraire leur dégagement.",
+          "scope": "Contre-branche locale rejouée ; elle n’interdit pas de réorganiser ensuite autrement.",
+          "actions": 31,
+          "blocked": 0,
+          "deaths": 0,
+          "complete": false,
+          "finalStateSha256": "a7b75a69421c52bc0e80e4240c5fb665f793e5ff166053e3546ebe39dae7bb09"
+        }
+      ]
     },
     {
       "level": 2,
@@ -156,44 +167,44 @@
     },
     {
       "level": 3,
-      "title": "Les trois pièces du chœur",
-      "mapSha256": "85aeaee4f7fdc862675738c89571866cc8784ebcbf6995113f85989a88404673",
-      "terrainSha256": "5cb332bc2fa2dae0e90cd123fb72a0242ad99de32d7fdf11311427631d20a330",
+      "title": "Le jardin des trois issues",
+      "mapSha256": "113a7a6c27a8c19a1ada24465ac1c40a2e5007b754e14db242ea9ada32c7b68a",
+      "terrainSha256": "c280e963b4e5a31b2549731142cee086b90969a3aee6884583ce0575539c17d4",
       "goals": [
         {
-          "x": 6,
-          "y": 2
+          "x": 3,
+          "y": 3
         },
         {
-          "x": 17,
-          "y": 10
+          "x": 16,
+          "y": 3
         },
         {
-          "x": 6,
+          "x": 10,
           "y": 17
         }
       ],
-      "landCells": 62,
-      "waterCells": 0,
+      "landCells": 168,
+      "waterCells": 4,
       "walking": [
         {
           "role": "merchant",
-          "states": 11,
-          "transitions": 44,
+          "states": 153,
+          "transitions": 612,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 11,
-          "transitions": 44,
+          "states": 153,
+          "transitions": 612,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 10,
-          "transitions": 40,
+          "states": 153,
+          "transitions": 612,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -201,22 +212,22 @@
       "generousWalking": [
         {
           "role": "merchant",
-          "states": 14,
-          "transitions": 56,
+          "states": 155,
+          "transitions": 620,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 14,
-          "transitions": 56,
+          "states": 155,
+          "transitions": 620,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 14,
-          "transitions": 56,
+          "states": 155,
+          "transitions": 620,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -224,18 +235,7 @@
       "maximumFrozenWalkingGoalAssignment": 0,
       "buttonsAndPressesSeparate": true,
       "exactHistoricalTerrainRepeats": [],
-      "localChecks": [
-        {
-          "name": "Sortie volontaire du Barde avant son extraction",
-          "observed": "Le pas vers l’est est légal, mais le chant ramène une caisse dans chaque accès vertical. La poussée du Marchand conserve au contraire leur dégagement.",
-          "scope": "Contre-branche locale rejouée ; elle n’interdit pas de réorganiser ensuite autrement.",
-          "actions": 31,
-          "blocked": 0,
-          "deaths": 0,
-          "complete": false,
-          "finalStateSha256": "a7b75a69421c52bc0e80e4240c5fb665f793e5ff166053e3546ebe39dae7bb09"
-        }
-      ]
+      "localChecks": []
     },
     {
       "level": 4,
@@ -641,11 +641,11 @@
   ],
   "reviews": [
     {
-      "script": "reference/author/review-level1.mjs",
+      "script": "reference/author/review-level3.mjs",
       "success": true,
       "result": {
         "success": true,
-        "level": 1,
+        "level": 3,
         "title": "Le jardin des trois issues",
         "reference": {
           "entries": 111,
@@ -909,15 +909,64 @@
         ],
         "scope": "The geometry checks freeze devices and resources; the second graph deliberately opens other gates and ignores water/occupants. Counter-branches are local legal experiments, not proofs of a unique solution or global necessity for every tutorial demonstration. No shortest route or autonomous SRA result is claimed."
       },
-      "sha256": "cb8b4f5371ed2b5f890b3039f4541a094b3855d69e7f2cbfdc1236aa4b081e85"
+      "sha256": "220c878f602aa7a58d49a81ea656c8ff87a881758eaaca0b69bafef567a1f5fd"
     },
     {
-      "script": "reference/author/review-levels2-4.mjs",
+      "script": "reference/author/review-levels1-2-4.mjs",
       "success": true,
       "result": {
         "success": true,
-        "scope": "Rejeux et contre-branches locales des niveaux 2 à 4 ; aucune optimalité ou unicité revendiquée.",
+        "scope": "Rejeux et contre-branches locales des niveaux 1, 2 et 4 ; aucune optimalité ou unicité revendiquée.",
         "levels": [
+          {
+            "level": 1,
+            "title": "Les trois pièces du chœur",
+            "actions": 66,
+            "moves": 56,
+            "metrics": {
+              "actions": 66,
+              "selections": 10,
+              "merchantPushes": 3,
+              "songs": 5,
+              "groupSongs": 3,
+              "songHeroMoves": 1,
+              "songStoneMoves": 9,
+              "songMonsterMoves": 0,
+              "supportMoves": 0,
+              "swaps": 3,
+              "partnerSwaps": 1,
+              "stoneSwaps": 2,
+              "monsterSwaps": 0,
+              "bentSwaps": 0,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 0,
+              "swapLoops": 0,
+              "partnerMoves": 2,
+              "stoneMoves": 13,
+              "mirrorMoves": 0,
+              "reflections": 0,
+              "heroReflections": 0,
+              "pistonPushes": 0,
+              "platformsCreated": 0,
+              "monstersRemoved": 0,
+              "blocked": 0,
+              "deaths": 0
+            },
+            "goals": [
+              {
+                "x": 6,
+                "y": 2
+              },
+              {
+                "x": 17,
+                "y": 10
+              },
+              {
+                "x": 6,
+                "y": 17
+              }
+            ]
+          },
           {
             "level": 2,
             "title": "Le carrefour à contretemps",
@@ -963,55 +1012,6 @@
               },
               {
                 "x": 11,
-                "y": 17
-              }
-            ]
-          },
-          {
-            "level": 3,
-            "title": "Les trois pièces du chœur",
-            "actions": 66,
-            "moves": 56,
-            "metrics": {
-              "actions": 66,
-              "selections": 10,
-              "merchantPushes": 3,
-              "songs": 5,
-              "groupSongs": 3,
-              "songHeroMoves": 1,
-              "songStoneMoves": 9,
-              "songMonsterMoves": 0,
-              "supportMoves": 0,
-              "swaps": 3,
-              "partnerSwaps": 1,
-              "stoneSwaps": 2,
-              "monsterSwaps": 0,
-              "bentSwaps": 0,
-              "multiMirrorSwaps": 0,
-              "swapReflections": 0,
-              "swapLoops": 0,
-              "partnerMoves": 2,
-              "stoneMoves": 13,
-              "mirrorMoves": 0,
-              "reflections": 0,
-              "heroReflections": 0,
-              "pistonPushes": 0,
-              "platformsCreated": 0,
-              "monstersRemoved": 0,
-              "blocked": 0,
-              "deaths": 0
-            },
-            "goals": [
-              {
-                "x": 6,
-                "y": 2
-              },
-              {
-                "x": 17,
-                "y": 10
-              },
-              {
-                "x": 6,
                 "y": 17
               }
             ]
@@ -1088,14 +1088,14 @@
             "observed": "Une presse se ferme et transporte le Magicien dans la case libérée par l’autre."
           },
           {
-            "level": 3,
+            "level": 1,
             "name": "Départ volontaire du Barde",
             "passed": true,
             "commands": "CCLLLCCRRULLCCRRDDLURULDDLLUCCR",
             "observed": "Les deux accès verticaux se remplissent de caisses ; aucun verrou ajouté ne produit cette contrainte."
           },
           {
-            "level": 3,
+            "level": 1,
             "name": "Extraction par poussée du Marchand",
             "passed": true,
             "turn": 29,
@@ -1117,7 +1117,7 @@
           }
         ]
       },
-      "sha256": "72966cf00ecc15d79c46de93866542c04c51bc3f014cf26e1487c90b402f3190"
+      "sha256": "5266c16f1f1fb80109656efda80784f848a2e8e6553918b5220437c5c7326109"
     },
     {
       "script": "reference/author/review-final-levels.mjs",
@@ -1143,6 +1143,37 @@
         "success": true,
         "levels": [
           {
+            "level": 1,
+            "reference": {
+              "entries": 66,
+              "moves": 56,
+              "selections": 10,
+              "result": "WIN",
+              "blocked": 0,
+              "deaths": 0
+            },
+            "walking": [
+              {
+                "role": "merchant",
+                "positions": 11,
+                "transitions": 44,
+                "reachableGoals": []
+              },
+              {
+                "role": "wizard",
+                "positions": 9,
+                "transitions": 36,
+                "reachableGoals": []
+              },
+              {
+                "role": "bard",
+                "positions": 1,
+                "transitions": 4,
+                "reachableGoals": []
+              }
+            ]
+          },
+          {
             "level": 2,
             "reference": {
               "entries": 87,
@@ -1163,37 +1194,6 @@
                 "role": "wizard",
                 "positions": 139,
                 "transitions": 556,
-                "reachableGoals": []
-              },
-              {
-                "role": "bard",
-                "positions": 1,
-                "transitions": 4,
-                "reachableGoals": []
-              }
-            ]
-          },
-          {
-            "level": 3,
-            "reference": {
-              "entries": 66,
-              "moves": 56,
-              "selections": 10,
-              "result": "WIN",
-              "blocked": 0,
-              "deaths": 0
-            },
-            "walking": [
-              {
-                "role": "merchant",
-                "positions": 11,
-                "transitions": 44,
-                "reachableGoals": []
-              },
-              {
-                "role": "wizard",
-                "positions": 9,
-                "transitions": 36,
                 "reachableGoals": []
               },
               {
@@ -1255,7 +1255,7 @@
         ],
         "comparedMaps": 32
       },
-      "sha256": "ae5b910989b74b0aa2ccdeeee2d83f50717801ba64663eb6f772e08bfbc5c2ad"
+      "sha256": "61b21bac1a5b8daef089f7e4161086359c111adc50dd966911c2d810eecb4f7b"
     },
     {
       "script": "reference/author/audit-final-levels.mjs",

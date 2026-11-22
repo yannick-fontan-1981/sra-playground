@@ -2,7 +2,7 @@
 
 ## Identité et périmètre
 
-SS18 est le laboratoire autonome du trio **Marchand / Magicien / Barde**, dans cet ordre. Le Marchand est sélectionné au début de chaque salle. La campagne comporte huit cartes originales et un tutoriel de 27 découvertes au niveau 1. Les sources précises et les écarts d’adaptation figurent dans `source-audit.md` et dans les huit fichiers `reference/levelN-design.json`.
+SS18 est le laboratoire autonome du trio **Marchand / Magicien / Barde**, dans cet ordre. Le Marchand est sélectionné au début de chaque salle. La campagne comporte huit cartes originales et un tutoriel de 27 découvertes au niveau 3. Les sources précises et les écarts d’adaptation figurent dans `source-audit.md` et dans les huit fichiers `reference/levelN-design.json`.
 
 Le plateau logique fait 20 × 20 cases. Chaque case est dessinée sur 3 × 3 pixels, avec une origine `(2,2)` dans une image 64 × 64 à seize couleurs. Les commandes et les règles sont déterministes. La victoire exige trois héros vivants sur les trois destinations au même instant ; les découvertes pédagogiques n’ajoutent aucune condition de victoire.
 
@@ -77,6 +77,6 @@ L’état auteur, les coordonnées sémantiques, les plans de reflet, les témoi
 
 Clavier : flèches ; Espace ou X pour les reflets ; 1 / 2 / 3 ou Tab pour Marchand / Magicien / Barde ; Z pour Annuler ; R pour Recommencer. Clic sur le héros et boutons tactiles disponibles. Maj+Tab conserve la navigation hors de la grille. Les contrôles ordinaires sont bloqués pendant une animation ; Undo, Reset, Restart et le changement de niveau invalident les animations en cours.
 
-Le tutoriel observe uniquement les images publiques et compte 27 découvertes. Elles restent acquises après Undo ; Reset, Restart ou changement de salle réinitialisent le suivi. Le niveau 1 peut être terminé sans avoir coché toutes les découvertes. Son parcours de qualification démontre les 27, avec de vraies interactions visibles. Les aides expliquent aussi les refus, les effets forcés, les ancrages et les différences entre échange et reflet.
+Le tutoriel observe uniquement les images publiques et compte 27 découvertes. Elles restent acquises après Undo ; Reset, Restart ou changement de salle réinitialisent le suivi. Le niveau 3 peut être terminé sans avoir coché toutes les découvertes. Son parcours de qualification démontre les 27, avec de vraies interactions visibles. Les aides expliquent aussi les refus, les effets forcés, les ancrages et les différences entre échange et reflet.
 
 La qualification DOM et pixel est documentée dans `validation.md`. La revue CSS dans un navigateur natif et la vérification du dispatcher SRA appartiennent à l’intégration native, encore distincte de cette livraison autonome.

@@ -1,12 +1,14 @@
 # État de SS18
 
-**SS18 — La Galerie Résonante** utilise le trio Marchand / Magicien / Barde et succède au laboratoire SS17. Le dossier de référence est `experiments/sinking-star-ss18`.
+**SS18 — La Galerie Résonante**, version **0.1.1**, utilise le trio Marchand / Magicien / Barde et succède au laboratoire SS17. Le dossier de référence est `experiments/sinking-star-ss18`.
 
 ## Livraison autonome
 
-Le périmètre de ce lot est la campagne de huit salles, le moteur du trio, le tutoriel au niveau 1, les témoins et audits de conception, l’interface autonome et ses rapports de qualification. Les sources sont conservées sur GitHub. Le fichier jouable est généré par `npm run build` dans `dist/SS18-demo.html`.
+La révision 0.1.1 échange les anciennes salles 1 et 3 : « Les trois pièces du chœur » ouvre la campagne, et « Le jardin des trois issues » occupe la troisième place avec son tutoriel de 27 découvertes. Les cartes et leurs mécanismes restent identiques.
 
-La demande de variété guide la conception : cour octogonale, contrôleur à distance autour d’un bassin, tri de caisses sans dispositifs, départs croisés, arène de contrepoids, miroir itinérant, navette à alcôves et synthèse à destinations centrales. Les géométries sont comparées à SS14–17 pour détecter les répétitions exactes, en complément des relectures de mécanismes.
+Le périmètre de ce lot est la campagne de huit salles, le moteur du trio, le tutoriel au niveau 3, les témoins et audits de conception, l’interface autonome et ses rapports de qualification. Les sources sont conservées sur GitHub. Le fichier jouable est généré par `npm run build` dans `dist/SS18-demo.html`.
+
+La demande de variété guide la conception : tri de caisses sans dispositifs, contrôleur à distance autour d’un bassin, cour octogonale, départs croisés, arène de contrepoids, miroir itinérant, navette à alcôves et synthèse à destinations centrales. Les géométries sont comparées à SS14–17 pour détecter les répétitions exactes, en complément des relectures de mécanismes.
 
 ## Étape suivante : intégration native
 

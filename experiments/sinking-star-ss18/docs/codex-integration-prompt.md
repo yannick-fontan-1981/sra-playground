@@ -1,6 +1,6 @@
 # Prompt Codex — intégrer SS18 et publier SRA Playground
 
-Intègre **SS18 — La Galerie Résonante**, trio **Marchand / Magicien / Barde**, dans le SRA Playground natif, puis publie le Site SRA Playground existant.
+Intègre **SS18 — La Galerie Résonante (0.1.1)**, trio **Marchand / Magicien / Barde**, dans le SRA Playground natif, puis publie le Site SRA Playground existant.
 
 Le dépôt canonique est `yannick-fontan-1981/sra-playground`. Pars du `main` distant courant, préserve ses évolutions concurrentes et lis ses instructions `AGENTS.md` ainsi que la politique de synchronisation GitHub/Site. Le laboratoire qualifié se trouve dans `experiments/sinking-star-ss18`. Lis son README et les documents `specification.md`, `level-design.md`, `source-audit.md`, `validation.md` et `roadmap.md`. `validation/delivery.json` et les rapports de validation identifient le HTML de référence et son empreinte SHA-256 ; reconstruis-le pour vérifier que tu pars de la version qualifiée.
 
@@ -8,7 +8,7 @@ Réutilise `src/core.ts`, les huit cartes de `src/levels.ts`, les crédits de `s
 
 ## Résultat attendu
 
-1. Ajouter l’adaptateur natif, l’entrée de catalogue/Custom 4, la vignette, les éléments de galerie, le sélecteur et le lien direct selon les conventions actuelles. Conserver les huit salles dans l’ordre livré et le tutoriel de **27 découvertes au niveau 1**. Le **Marchand** est sélectionné à chaque départ de salle.
+1. Ajouter l’adaptateur natif, l’entrée de catalogue/Custom 4, la vignette, les éléments de galerie, le sélecteur et le lien direct selon les conventions actuelles. Conserver les huit salles dans l’ordre livré et le tutoriel de **27 découvertes au niveau 3**. Le **Marchand** est sélectionné à chaque départ de salle.
 2. Raccorder **`TrioPuzzleSession`** avec trois héros distincts, trois destinations simultanées et les trois héros exposés aux pertes. Un héros sur une destination reste sélectionnable. La fin d’une salle ouvre la première salle encore inachevée ; `WIN` exige les huit salles réussies, y compris avec un ordre de visite choisi dans le sélecteur.
 3. Conserver ACTION1–6, les observations publiques 64 × 64 à seize couleurs, toutes les images d’animation et leurs durées. ACTION6 reçoit des coordonnées pixel entières 0–63 et sélectionne sans faire avancer le monde. Une sélection réellement différente participe à Undo. Les commandes malformées, les coordonnées invalides et les campagnes invalides ne doivent pas muter une session existante.
 4. **Marchand :** pousser une seule pièce devant lui, sans traction et sans poussée de file. **Magicien :** échanger sa place avec la première caisse, le premier monstre ou le premier partenaire atteint par la visée ; sans cible, tenter la marche. Les faces blanches dévient le rayon, les dos noirs le bloquent ; les appuis et les miroirs ne sont pas des cibles. Conserver les boucles de visée animées sans déplacement ni combat.
@@ -21,7 +21,9 @@ Réutilise `src/core.ts`, les huit cartes de `src/levels.ts`, les crédits de `s
 
 ## Préserver la variété et les corrections des cartes
 
-Les huit problèmes sont distincts : jardin pédagogique ; contrôleur à distance et sas ; tri de caisses sans dispositifs ; départ croisé des trois héros ; arène de monstres/contrepoids ; miroir itinérant ; navette à alcôves ; réaffectation de ressources autour de destinations centrales. Conserver ces cartes, leurs silhouettes et la répartition des destinations.
+L’ordre 0.1.1 place **Les trois pièces du chœur au niveau 1** et **Le jardin des trois issues au niveau 3**, avec son tutoriel. Cette permutation doit aussi s’appliquer aux crédits, témoins, sélecteur et commandes de reprise. Repartir commence toujours au niveau 1 ; les découvertes ne sont suivies qu’au niveau 3.
+
+Les huit problèmes sont distincts : tri de caisses sans dispositifs ; contrôleur à distance et sas ; jardin pédagogique ; départ croisé des trois héros ; arène de monstres/contrepoids ; miroir itinérant ; navette à alcôves ; réaffectation de ressources autour de destinations centrales. Conserver ces cartes, leurs silhouettes et la répartition des destinations.
 
 Préserver les alternatives élaborées archivées dans les audits. En particulier, N4 possède une victoire sans échange et N7 une variante de 43 entrées ; elles restent valides. L’utilisation d’un pouvoir dans un témoin ne prouve pas que toutes les solutions doivent l’utiliser. Aucun compteur caché, ordre imposé par script ou découverte obligatoire ne doit remplacer les contraintes visibles.
 
@@ -39,7 +41,7 @@ npm run validate:ui
 npm run validate:design
 ```
 
-L’état qualifié comporte **56 tests réussis**, huit témoins gagnants sans refus ni mort, 27 découvertes au niveau 1 et cinq scripts de revue de conception. Les huit témoins totalisent **700 entrées : 617 actions hors sélection et 83 sélections**, avec **1 988 images publiques**. Les rapports et documents du laboratoire donnent le détail par salle et l’empreinte exacte du HTML.
+L’état qualifié comporte **56 tests réussis**, huit témoins gagnants sans refus ni mort, 27 découvertes au niveau 3 et cinq scripts de revue de conception. Les huit témoins totalisent **700 entrées : 617 actions hors sélection et 83 sélections**, avec **1 988 images publiques**. Les rapports et documents du laboratoire donnent le détail par salle et l’empreinte exacte du HTML.
 
 Rejouer les huit témoins à travers l’adaptateur et le dispatcher natifs, puis comparer chaque observation, chaque image et chaque durée au laboratoire. Vérifier Undo après chaque victoire, Reset/Restart, ordre arbitraire de visite, sélection des trois rôles, erreurs atomiques, défaite et victoire finale. La qualification des témoins ne vaut pas réussite autonome SRA et n’établit ni optimum ni solution unique.
 

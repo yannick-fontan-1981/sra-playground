@@ -1,7 +1,7 @@
 import type { HeroKind, Observation, Point } from './core.js';
 
 type LessonObservation = Pick<Observation, 'level' | 'frame' | 'frames' | 'levelsCompleted'>;
-export const TUTORIAL_LEVEL = 1;
+export const TUTORIAL_LEVEL = 3;
 export const lessonIds = ['select','move','merchant-push','partner-push','mirror-motion','wizard-swap','wizard-partner','wizard-bend','relay-weight','bard-song','partner-song','selective-song','diagonal-song','wall-song','release-by-swap','water-support','support-slide','support-anchor','cross-support','mirror','hero-reflection','crate-reflection','button','gate','press','monster','goals'] as const;
 export type GalleryLesson = typeof lessonIds[number];
 
