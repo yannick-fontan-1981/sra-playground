@@ -6,7 +6,7 @@ import {
   readPair,
   pointCommand,
 } from '../src/sic/paired-scene.ts';
-import { inquiry, seePair } from '../src/sic/probe-paired-displacements.ts';
+import { carryPair, inquiry, proposeLessonTest, seePair } from '../src/sic/probe-paired-displacements.ts';
 import type { VisualLayout } from '../src/sic/witnessed-preview-transfer.ts';
 
 const layout: VisualLayout = {
@@ -82,4 +82,27 @@ test('a verified transfer can replace a look-alike while preserving the distinct
   assert.deepEqual(q.scene.bodies, [8, 5]);
   assert.equal(q.reading?.active, 1);
   assert.notEqual(q.learning.evidence[1].push, 9);
+});
+
+test('a selection witness can be retested without a carried field or projection', () => {
+  const before = frame(1, false), after = frame(7, false);
+  const known = inquiry();
+  const scene = pairedScene(layout, before)!;
+  const click = pointCommand(scene.grid, 7);
+  seePair(known, layout, before, after, click, 'mark moved to the clicked subject');
+  known.learning.motors.ACTION1 = { dx: 0, dy: -1, ref: 'old movement' };
+  const lesson = carryPair(known, 'completed the room')!;
+  assert.equal(lesson.radius, 0);
+  assert.equal(lesson.projections, undefined);
+  assert.equal(proposeLessonTest(inquiry({ ...lesson, selectionWitness: undefined }), layout, before, 'new room'), undefined);
+  for (const changed of [false, true]) {
+    const q = inquiry(lesson);
+    const proposal = proposeLessonTest(q, layout, before, 'new room')!;
+    assert.equal(proposal.command, click);
+    assert.ok(proposal.evidence.includes('mark moved to the clicked subject'));
+    seePair(q, layout, before, changed ? after : before, click, 'selection tested', proposal);
+    assert.equal(Boolean(q.active), changed);
+    assert.deepEqual(q.learning.motors, {});
+    assert.equal(proposeLessonTest(q, layout, before, 'later'), undefined);
+  }
 });

@@ -32,7 +32,7 @@ export type ReusableEffects = Pick<
   | 'carry'
   | 'projections'
   | 'mobileSupports'
-> & { bodies: [number, number] };
+> & { bodies: [number, number]; selectionWitness?: string };
 export type PairInquiry = {
   scene?: Scene;
   reading?: Reading;
@@ -41,6 +41,7 @@ export type PairInquiry = {
   initialChecked?: boolean;
   lesson?: ReusableEffects;
   rebindAttempt?: string;
+  selectionWitness?: string;
 };
 export function inquiry(lesson?: ReusableEffects): PairInquiry {
   return { learning: fresh(), ...(lesson ? { lesson } : {}) };
@@ -58,6 +59,7 @@ export function carryPair(
     refs: [...refs],
     radius,
     carry: ref,
+    ...(q.selectionWitness ? { selectionWitness: q.selectionWitness } : {}),
     ...(q.learning.projections?.length
       ? { projections: structuredClone(q.learning.projections) }
       : {}),
@@ -77,7 +79,7 @@ export function proposeLessonTest(
     q.active ||
     q.rebindAttempt ||
     !lesson?.carry ||
-    (!lesson.projections?.length && !lesson.radius)
+    (!lesson.projections?.length && !lesson.radius && !lesson.selectionWitness)
   )
     return;
   const scene = pairedScene(layout, rows, undefined, lesson.bodies);
@@ -93,7 +95,7 @@ export function proposeLessonTest(
           (r.from === im.out && r.to === im.dir)),
     ),
   );
-  if (!hypotheses.length && !lesson.radius) return;
+  if (!hypotheses.length && !lesson.radius && !lesson.selectionWitness) return;
   q.scene = scene;
   const test = forecast(
     scene,
@@ -103,7 +105,9 @@ export function proposeLessonTest(
     'select',
     hypotheses.length
       ? 'reidentify_the_partner_of_a_previously_verified_projection'
-      : 'retest_the_scope_of_the_other_subject_in_a_new_room',
+      : lesson.radius
+        ? 'retest_the_scope_of_the_other_subject_in_a_new_room'
+        : 'retest_a_witnessed_selection_before_using_the_new_subject',
     [
       'the_other_registered_subject_acquires_control',
       'the_displayed_landing_can_be_checked_next',
@@ -111,6 +115,7 @@ export function proposeLessonTest(
     ref,
   );
   test.evidence.push(lesson.carry);
+  if (lesson.selectionWitness) test.evidence.push(lesson.selectionWitness);
   test.paired!.lesson = lesson.carry;
   return test;
 }
@@ -128,6 +133,8 @@ export function seePair(
     point = click
       ? (op.slice(8).split(',').map(Number) as [number, number])
       : undefined;
+  if (click && q.lesson?.carry && f?.paired?.lesson === q.lesson.carry)
+    q.rebindAttempt = ref;
   if (!q.scene && (!q.initialChecked || point)) {
     const scene =
       pairedScene(layout, b, point) ??
@@ -177,6 +184,7 @@ export function seePair(
         q.learning = fresh();
         delete q.reading;
         delete q.active;
+        delete q.selectionWitness;
       }
     }
   }
@@ -200,12 +208,13 @@ export function seePair(
   if (
     f?.purpose ===
       'reidentify_the_partner_of_a_previously_verified_projection' ||
-    f?.purpose === 'retest_the_scope_of_the_other_subject_in_a_new_room'
+    f?.purpose === 'retest_the_scope_of_the_other_subject_in_a_new_room' ||
+    f?.purpose === 'retest_a_witnessed_selection_before_using_the_new_subject'
   ) {
     q.rebindAttempt = ref;
     if (
-      f.purpose ===
-        'reidentify_the_partner_of_a_previously_verified_projection' &&
+      (f.purpose === 'reidentify_the_partner_of_a_previously_verified_projection' ||
+        f.purpose === 'retest_a_witnessed_selection_before_using_the_new_subject') &&
       click &&
       old.active !== next.active &&
       old.subjects.every((p, i) => next.subjects[i] === p)
@@ -219,6 +228,11 @@ export function seePair(
   ) {
     const target = next.subjects[next.active],
       w = s.grid.columns;
+    if (!explainedByPlacement && point &&
+        Math.floor((point[0] - s.grid.left) / s.grid.pitch) === target % w &&
+        Math.floor((point[1] - s.grid.top) / s.grid.pitch) === Math.floor(target / w)) {
+      q.selectionWitness = ref;
+    }
     const changes = before.flatMap((z, i) =>
       z !== after[i] && !old.subjects.includes(i) ? [i] : [],
     );
@@ -299,8 +313,12 @@ export function seePair(
     q.lesson?.bodies.every((ink, i) => ink === s.bodies[i])
   ) {
     const lesson = q.lesson;
-    m.evidence = structuredClone(lesson.evidence);
-    m.motors = { ...lesson.motors, ...m.motors };
+    // Reacquiring a stationary subject certifies selection only. The command
+    // axes and contact laws still need their own local tests in the new room.
+    if (f?.purpose !== 'retest_a_witnessed_selection_before_using_the_new_subject') {
+      m.evidence = structuredClone(lesson.evidence);
+      m.motors = { ...lesson.motors, ...m.motors };
+    }
     if (lesson.projections && !m.projections?.length) {
       const visible = visibleImages(s, next, after);
       const matched = lesson.projections.filter((r) =>
