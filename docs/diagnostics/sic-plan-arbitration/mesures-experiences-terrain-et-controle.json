@@ -516,6 +516,79 @@
         "274d7d5d6ba57273dc6cf30858232f3ad422dbdbd7136a124b643def591855be"
       ]
     },
+    "ordinary-custom-SS11-1-1-v127/SS11": {
+      "game": "SS11",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v127",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "846a64c7027d7796bb5dc64004b76f60b3e463cabbc8aaea5a1834d8ce4387fb",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "tape": [
+        "85ba7eb8fbc413218df166852b6e44da0489b7985eb4bdeccd2e3bdc8f71aab8"
+      ]
+    },
+    "ordinary-custom-SS11-1-1-v128/SS11": {
+      "game": "SS11",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v128",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "846a64c7027d7796bb5dc64004b76f60b3e463cabbc8aaea5a1834d8ce4387fb",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 79,
+          "won": true
+        }
+      ],
+      "tape": [
+        "6b744233608d44abe6070ea2ee81d1abf13bda5fe47b6923c2d3f7609201f6ac"
+      ],
+      "testsWithReadableNextPose": [
+        {
+          "decision": 9,
+          "offered": [
+            "walk",
+            "push",
+            "pull",
+            "field",
+            "exchange"
+          ],
+          "compatible": [
+            "exchange"
+          ]
+        },
+        {
+          "decision": 27,
+          "offered": [
+            "walk",
+            "push",
+            "pull",
+            "field",
+            "exchange"
+          ],
+          "compatible": [
+            "walk",
+            "push",
+            "pull",
+            "field"
+          ]
+        }
+      ]
+    },
     "registration-source-GRAV-3-3-v141/GRAV": {
       "game": "GRAV",
       "entry": [
@@ -917,6 +990,28 @@
         }
       ]
     },
+    "registration-custom-SS07-1-1-v141/SS07": {
+      "game": "SS07",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": true
+        }
+      ],
+      "tape": [
+        "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+      ],
+      "motorBaselineTests": []
+    },
     "positional-custom-SS07-1-1-v141/SS07": {
       "game": "SS07",
       "entry": [
@@ -936,6 +1031,104 @@
       ],
       "tape": [
         "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+      ],
+      "motorBaselineTests": []
+    },
+    "registration-source-GABA-2-2-v141/GABA": {
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 39,
+          "won": true
+        }
+      ],
+      "tape": [
+        "03b4eb8a84c97556188a4b1b2df4071e6fd30f821e358be6e4cd2a3935316e22"
+      ],
+      "preActionReceipts": [
+        {
+          "action": 2,
+          "basis": "aligned_terrain_fragments_after_observed_motion",
+          "before": "sra-v6-b5b570ac-1949-4a8b-b4c9-ae4688dca2fc:epoch:1:revision:1:frame:afc5f02bf10369ab",
+          "after": "sra-v6-b5b570ac-1949-4a8b-b4c9-ae4688dca2fc:epoch:1:revision:2:frame:e00a597947e2bc6f",
+          "command": "ACTION1",
+          "pitch": 5,
+          "from": [
+            0,
+            9
+          ],
+          "to": [
+            0,
+            8
+          ],
+          "interpretations": 2,
+          "consistentWithMotion": 2,
+          "withDeliveryPlan": 1,
+          "nextAction": "ACTION2",
+          "nextIntent": "move",
+          "expectedCarrier": [
+            0,
+            9
+          ]
+        }
+      ],
+      "motorBaselineTests": []
+    },
+    "positional-source-GABA-2-2-v141/GABA": {
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "afc5f02bf10369abed77e80bb53ac1151c213e2008435cfd05def55efc03c0fc",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 39,
+          "won": true
+        }
+      ],
+      "tape": [
+        "03b4eb8a84c97556188a4b1b2df4071e6fd30f821e358be6e4cd2a3935316e22"
+      ],
+      "preActionReceipts": [
+        {
+          "action": 2,
+          "basis": "aligned_terrain_fragments_after_observed_motion",
+          "before": "sra-v6-b5743603-6ac6-4fa7-aa7e-639781ac072b:epoch:1:revision:1:frame:afc5f02bf10369ab",
+          "after": "sra-v6-b5743603-6ac6-4fa7-aa7e-639781ac072b:epoch:1:revision:2:frame:e00a597947e2bc6f",
+          "command": "ACTION1",
+          "pitch": 5,
+          "from": [
+            0,
+            9
+          ],
+          "to": [
+            0,
+            8
+          ],
+          "interpretations": 2,
+          "consistentWithMotion": 2,
+          "withDeliveryPlan": 1,
+          "nextAction": "ACTION2",
+          "nextIntent": "move",
+          "expectedCarrier": [
+            0,
+            9
+          ]
+        }
       ],
       "motorBaselineTests": []
     },
@@ -1747,6 +1940,555 @@
       "tape": [
         "15b9265b735781907c144cc17287aecd7df6c616cb2f506832971f7b40d7847d"
       ]
+    },
+    "ordinary-custom-SS09-1-1-v127/SS09": {
+      "game": "SS09",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v127",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 157,
+          "won": true
+        }
+      ],
+      "tape": [
+        "9a6d17b5103f7a4a52c264aed2594f6c9a8864680029f030946fd1d55fa0f891"
+      ]
+    },
+    "ordinary-custom-SS09-1-1-v128/SS09": {
+      "game": "SS09",
+      "entry": [
+        1,
+        1
+      ],
+      "version": "v128",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "fd4ab1bdeb7f3700089393bfc95c2ce1fd7de18cd96b701d7950d80666db467a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 157,
+          "won": true
+        }
+      ],
+      "tape": [
+        "9a6d17b5103f7a4a52c264aed2594f6c9a8864680029f030946fd1d55fa0f891"
+      ],
+      "testsWithReadableNextPose": [
+        {
+          "decision": 17,
+          "offered": [
+            "walk",
+            "push",
+            "pull",
+            "field",
+            "exchange"
+          ],
+          "compatible": [
+            "walk",
+            "push",
+            "pull"
+          ]
+        },
+        {
+          "decision": 18,
+          "offered": [
+            "walk",
+            "push",
+            "pull"
+          ],
+          "compatible": [
+            "walk",
+            "push"
+          ]
+        },
+        {
+          "decision": 21,
+          "offered": [
+            "walk",
+            "push"
+          ],
+          "compatible": [
+            "push"
+          ]
+        }
+      ]
+    },
+    "registration-custom-SS14-1-2-v141/SS14": {
+      "game": "SS14",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 31,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 52,
+          "won": true
+        }
+      ],
+      "tape": [
+        "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3"
+      ]
+    },
+    "positional-custom-SS12-SS14-1-2-v141/SS14": {
+      "game": "SS14",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "1539cb57c93ca51c227aa6d3ca693553eb7c54274659723a9ca13c79af51fd64",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 100,
+          "won": false
+        }
+      ],
+      "tape": [
+        "686b18a4ec95144d4fa5e4dd9f00d2187a66f1d1604aaf7db5e863886d2efa79"
+      ]
+    },
+    "registration-custom-SS01-1-2-v141/SS01": {
+      "game": "SS01",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v141",
+      "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 36,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 32,
+          "won": true
+        }
+      ],
+      "tape": [
+        "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+      ]
+    },
+    "positional-custom-SS01-1-2-v141/SS01": {
+      "game": "SS01",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "c62141ed0108269b7e12bef32062b9a3bc8db229e8db0c5952f00ae5f111602e",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 59,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 35,
+          "won": true
+        }
+      ],
+      "tape": [
+        "59048ee37b3d295d175924d149c608d99aae0a2a39aee115cca8371ec839d28a"
+      ]
+    },
+    "positional-custom-SS13-1-2-v141/SS13": {
+      "game": "SS13",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "32aade3ff7cdb87bf292b58b9488e9e98b2d0c24eb46568cc193ecd0361c7360",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 98,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "tape": [
+        "9da0a37f394044b4677b0a520c2c4835c8b63405d45070a3eb224414161d0ced"
+      ]
+    },
+    "positional-custom-SS12-SS14-1-2-v141/SS12": {
+      "game": "SS12",
+      "entry": [
+        1,
+        2
+      ],
+      "version": "v141",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "949785e8ef6a84f31b92fb415ade9cdfd0f758bd8faaf80214b77b6ea564bffb",
+      "budget": 100,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "tape": [
+        "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f"
+      ]
+    },
+    "positional-source-FITE-3-3-v143/FITE": {
+      "game": "FITE",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v143",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "b366d11ab5d04bd530c75bfacbbd4ded5ad13e1589076e99230dcfc41536660a",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 73,
+          "won": true
+        }
+      ],
+      "tape": [
+        "8c3faa9d5691ea38278782576420492a39c1e83c4fab0efd8700ed711d6c09da"
+      ],
+      "motorTests": [
+        {
+          "decision": 44,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            5,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "different_displacement"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "stride-source-FITE-3-3-v143/FITE": {
+      "game": "FITE",
+      "entry": [
+        3,
+        3
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "b366d11ab5d04bd530c75bfacbbd4ded5ad13e1589076e99230dcfc41536660a",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 3,
+          "actions": 62,
+          "won": true
+        }
+      ],
+      "tape": [
+        "b2460d851f5cc35de88e86784c6b3c37f3c73b9ef3dc7404c6eb71b56320c909"
+      ],
+      "motorTests": [
+        {
+          "decision": 44,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            5,
+            0
+          ],
+          "rival": null,
+          "observed": [
+            -5,
+            -5
+          ],
+          "result": "different_displacement"
+        },
+        {
+          "decision": 45,
+          "command": 4,
+          "basis": "two_observed_displacements",
+          "delta": [
+            -5,
+            -5
+          ],
+          "rival": [
+            5,
+            0
+          ],
+          "observed": [
+            0,
+            5
+          ],
+          "result": "neither_observed_displacement"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "positional-source-PORT-2-2-v143/PORT": {
+      "game": "PORT",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v143",
+      "pack": "b7e2a58459f13463bba2e1d069c11d02f205045b8d927701307369d2cd024dd1",
+      "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 81,
+          "won": true
+        }
+      ],
+      "tape": [
+        "0774d72737052f173399f831d4f790d2841bd4cd11828cb74c6e6b5a8a88cb00"
+      ],
+      "motorTests": [
+        {
+          "decision": 4,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 12,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            4,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 15,
+          "command": 3,
+          "basis": "different_entry_surface",
+          "delta": [
+            -4,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 35,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            4,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "different_displacement"
+        },
+        {
+          "decision": 54,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 76,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "different_displacement"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "stride-source-PORT-2-2-v143/PORT": {
+      "game": "PORT",
+      "entry": [
+        2,
+        2
+      ],
+      "version": "v143",
+      "pack": "819ebdde08374a73a436d8225bb1f9a8e14da9cf4f72603590b84d8d39fad4a5",
+      "initial": "fb79504ac5acb83154482fd5a7d816d6d2f7ce7e1c126b7f0acbdc7fd3e70f92",
+      "budget": 120,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 81,
+          "won": true
+        }
+      ],
+      "tape": [
+        "0774d72737052f173399f831d4f790d2841bd4cd11828cb74c6e6b5a8a88cb00"
+      ],
+      "motorTests": [
+        {
+          "decision": 4,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 12,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            4,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 15,
+          "command": 3,
+          "basis": "different_entry_surface",
+          "delta": [
+            -4,
+            0
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 35,
+          "command": 4,
+          "basis": "different_entry_surface",
+          "delta": [
+            4,
+            0
+          ],
+          "rival": null,
+          "observed": [
+            24,
+            12
+          ],
+          "result": "different_displacement"
+        },
+        {
+          "decision": 54,
+          "command": 1,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            -4
+          ],
+          "rival": null,
+          "observed": null,
+          "result": "same_subject_stays"
+        },
+        {
+          "decision": 76,
+          "command": 2,
+          "basis": "different_entry_surface",
+          "delta": [
+            0,
+            4
+          ],
+          "rival": null,
+          "observed": [
+            20,
+            12
+          ],
+          "result": "different_displacement"
+        }
+      ],
+      "reusedControlDuringSelection": []
+    },
+    "reconsider-custom-SS07-1-3-ablate-v139-transfer-paired-law/SS07": {
+      "game": "SS07",
+      "entry": [
+        1,
+        3
+      ],
+      "version": "ablate-v139-transfer-paired-law",
+      "pack": "794e4c6662154f40c9fafd10ae38e66ae033cf48ea7f85fe1d95692695ea8e85",
+      "initial": "cf6c8e96a81a6cc263ea67a1481f411a403275e2063833f0ffde0892b133906a",
+      "budget": 350,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 60,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 8,
+          "won": false
+        }
+      ],
+      "tape": [
+        "669a315d6bed4b627c6cc5fde8cb8c4f4f2374dbec356a6420b7115a14f2ee57"
+      ]
     }
   },
   "comparisons": [
@@ -1908,6 +2650,16 @@
       }
     },
     {
+      "witness": "registration-custom-SS07-1-1-v141/SS07",
+      "candidate": "positional-custom-SS07-1-1-v141/SS07",
+      "equalCommandsAndImages": 60
+    },
+    {
+      "witness": "registration-source-GABA-2-2-v141/GABA",
+      "candidate": "positional-source-GABA-2-2-v141/GABA",
+      "equalCommandsAndImages": 39
+    },
+    {
       "witness": "earlier-view/SS09",
       "candidate": "reconsider-custom-SS09-1-1-v139/SS09",
       "equalCommandsAndImages": 17,
@@ -1977,6 +2729,94 @@
         "candidate": 1,
         "families": [
           "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "ordinary-custom-SS11-1-1-v127/SS11",
+      "candidate": "ordinary-custom-SS11-1-1-v128/SS11",
+      "equalCommandsAndImages": 8,
+      "firstDecision": {
+        "action": 9,
+        "image": "099212a2132b3c0d",
+        "witness": 2,
+        "candidate": 3,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "ordinary-custom-SS09-1-1-v127/SS09",
+      "candidate": "ordinary-custom-SS09-1-1-v128/SS09",
+      "equalCommandsAndImages": 157
+    },
+    {
+      "witness": "registration-custom-SS14-1-2-v141/SS14",
+      "candidate": "positional-custom-SS12-SS14-1-2-v141/SS14",
+      "equalCommandsAndImages": 1,
+      "firstDifferentRationale": 2,
+      "firstDecision": {
+        "action": 2,
+        "image": "33a7af05d406a553",
+        "witness": 6,
+        "candidate": 1,
+        "families": [
+          "sic_test_prepared_effects",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "registration-custom-SS01-1-2-v141/SS01",
+      "candidate": "positional-custom-SS01-1-2-v141/SS01",
+      "equalCommandsAndImages": 10,
+      "firstDifferentRationale": 11,
+      "firstDecision": {
+        "action": 11,
+        "image": "cc86e27b8638adf9",
+        "witness": 4,
+        "candidate": 1,
+        "families": [
+          "sic_public_input_exploration",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "positional-source-FITE-3-3-v143/FITE",
+      "candidate": "stride-source-FITE-3-3-v143/FITE",
+      "equalCommandsAndImages": 44,
+      "firstDifferentRationale": 45,
+      "firstDecision": {
+        "action": 45,
+        "image": "b366d11ab5d04bd5",
+        "witness": 2,
+        "candidate": 4,
+        "families": [
+          "sic_test_prepared_effects",
+          "sic_test_prepared_effects"
+        ]
+      }
+    },
+    {
+      "witness": "positional-source-PORT-2-2-v143/PORT",
+      "candidate": "stride-source-PORT-2-2-v143/PORT",
+      "equalCommandsAndImages": 81
+    },
+    {
+      "witness": "reconsider-custom-SS07-1-3-v139/SS07",
+      "candidate": "reconsider-custom-SS07-1-3-ablate-v139-transfer-paired-law/SS07",
+      "equalCommandsAndImages": 60,
+      "firstDecision": {
+        "action": 61,
+        "image": "1841a8aba97fa17e",
+        "witness": 6,
+        "candidate": 4,
+        "families": [
+          "sic_test_prepared_effects",
           "sic_test_prepared_effects"
         ]
       }
@@ -3720,6 +4560,43 @@
       }
     ]
   },
+  "fiteMatchedTail": {
+    "game": "FITE",
+    "level": 3,
+    "decision": 44,
+    "forecastDelta": [
+      5,
+      0
+    ],
+    "arms": [
+      {
+        "command": 2,
+        "before": "285725296c6c7c40",
+        "after": "b366d11ab5d04bd5",
+        "actor": "f0108d2038d22bd6d31f2034b1a094f87c360543db65f4c59209cb7454cc60b5",
+        "delta": [
+          -5,
+          -5
+        ],
+        "tailActions": 29,
+        "officialWithSameTail": true,
+        "firstDifferentImage": null
+      },
+      {
+        "command": 4,
+        "before": "285725296c6c7c40",
+        "after": "b366d11ab5d04bd5",
+        "actor": "f0108d2038d22bd6d31f2034b1a094f87c360543db65f4c59209cb7454cc60b5",
+        "delta": [
+          -5,
+          -5
+        ],
+        "tailActions": 29,
+        "officialWithSameTail": true,
+        "firstDifferentImage": null
+      }
+    ]
+  },
   "ss07AlternativeDuringPartialRoute": [
     {
       "action": 47,
@@ -3811,5 +4688,30 @@
     }
   ],
   "matchedCandidate": "0553723cc03e6db8886efd02a6d59294e1d26048",
-  "positionalCandidate": "fb47de01b5746b518dad1451aff89d0408b70a87"
+  "positionalCandidate": "fb47de01b5746b518dad1451aff89d0408b70a87",
+  "strideCandidate": "00a8d779490eb3bcd72740ad3207882332536a88",
+  "fourDistinctPreparationImages": {
+    "source100": {
+      "episodes": 100,
+      "skippedDiscontinuous": 0,
+      "gamesLevels": 100,
+      "options": 0,
+      "allThreeSilent": 0,
+      "chosen": 0,
+      "gain": 0
+    },
+    "upper": {
+      "episodes": 39,
+      "skippedDiscontinuous": 0,
+      "gamesLevels": 28,
+      "options": 48,
+      "allThreeSilent": 1,
+      "chosen": 11,
+      "gain": 0
+    }
+  },
+  "ablationOfCarriedPairLesson": {
+    "reconsider-custom-SS07-1-3-v139/SS07": "level_action_budget",
+    "reconsider-custom-SS07-1-3-ablate-v139-transfer-paired-law/SS07": "native_game_over"
+  }
 }
