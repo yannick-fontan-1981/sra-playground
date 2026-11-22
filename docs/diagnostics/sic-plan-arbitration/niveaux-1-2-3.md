@@ -2,7 +2,7 @@
 
 Le catalogue figé contient 100 jeux sources et 14 jeux Custom 4, chacun avec au moins trois niveaux. Le laboratoire SS15 expose également huit niveaux via sa session publique. Le registre suit les **345 couples jeu–niveau**, y compris les cases encore sans mesure. Chaque essai indique le solveur, le mode d’entrée, le budget, les commandes jouées, le crédit officiel et l’empreinte de la suite. Les colonnes de synthèse comptent chaque couple une seule fois, même s’il est gagné dans plusieurs conditions. [Registre des résultats vérifiés](couverture-sic-niveaux-1-2-3.json)
 
-Au point de mesure du 22 novembre, **180 couples jeu–niveau** ont au moins une victoire rejouée dans le moteur. Les sources comptent 100/100 L1, 36 victoires parmi 51 L2 évalués et 18 parmi 28 L3. Sur Custom 4, 9 des 14 L1 évalués et les 14 L2 ont une victoire. SS13 est le premier des 10 L3 évalués à obtenir une victoire, en 176 actions à froid avec v126. Le laboratoire ajoute SS15 L1 et L2. Ces chiffres réunissent les versions et conditions d’entrée consignées. Sur CGWL, le témoin interrompait la campagne en sérialisant une condition facultative sans valeur. Le test reproduit la panne. v114 omet cette condition en l’absence d’observation et la campagne gagne les trois niveaux en 15, 33 et 36 actions. Chaque crédit est reproduit indépendamment.
+Au point de mesure du 22 novembre, **185 couples jeu–niveau** ont au moins une victoire rejouée dans le moteur. Les sources comptent 100/100 L1, 38 victoires parmi 55 L2 évalués et 20 parmi 31 L3. Sur Custom 4, 9 des 14 L1, les 14 L2 et 2 des 11 L3 évalués ont une victoire. SS13 L3 gagne à froid en 176 actions avec v126 et v127. SS10 L3 gagne à froid en 81 actions avec v128. Le laboratoire ajoute SS15 L1 et L2. Ces chiffres réunissent les versions et conditions d’entrée consignées. Sur CGWL, le témoin interrompait la campagne en sérialisant une condition facultative sans valeur. Le test reproduit la panne. v114 omet cette condition en l’absence d’observation et la campagne gagne les trois niveaux en 15, 33 et 36 actions. Chaque crédit est reproduit indépendamment.
 
 ## Une leçon du L1 peut changer le résultat du L3
 
@@ -200,3 +200,23 @@ Les six résultats de SS12, SS13 et SS14 L1–L2 et la campagne LP85 L2–L3 res
 **Non-régression source de v127.** Les 100 L1 sources gagnent à froid au budget historique de 60 actions par jeu. Le rejeu indépendant confirme les 100 crédits et les 100 empreintes de trajectoire correspondent à v109. Aucune des 100 trajectoires n’active le planificateur à deux sujets. Les onze L2 historiques Custom 4 reproduisent aussi les commandes et images du témoin v109 dans leurs conditions d’origine. Ces mesures portent sur le solveur figé qui gagne SS13 L3 en 176.
 
 Le contrôle final sur SS10 L3 a également été exécuté avec **v127**. Pour chacun des deux réglages, les 350 commandes et images reproduisent la trajectoire correspondante de v126. La première divergence entre réglages reste la commande 94. Les deux échecs sont certifiés et aucune des deux parties ne propose la substitution de rôles.
+
+
+## Identifier une physique inconnue après avoir vérifié le contrôle
+
+**SS10 L3 gagne à froid en 81 actions autonomes avec v128.** Le témoin v127 atteignait le plafond de 350. Les deux solveurs utilisent le même moteur, la même image initiale, le même pack et un seul worker. Le score est reproduit par un rejeu indépendant des commandes choisies par SIC. [Certificat, réglages et reçus des expériences](ss10-l3-experiences-de-controle-v128.json)
+
+Sur le témoin, SIC transfère le contrôle au premier geste et vérifie au deuxième que le nouveau sujet bouge pendant que le premier reste en place. Le module de déplacement suit les deux sujets sur les 350 images de décision. Il conserve la preuve du clic. La comparaison des lois de mouvement demeure pourtant inaccessible à l’arbitrage. Au coup 6, trois retours publics distincts sont déjà prévisibles pour une seule commande. Le témoin choisit une action d’exploration ordinaire. Le rejeu diagnostique retrouve 25 positions de décision où une comparaison immédiate était possible.
+
+| Action de v128 | Ce que SIC peut décider ou vérifier |
+|---|---|
+| 1–5 | Mêmes commandes et mêmes images que v127. Le contrôle est vérifié au coup 2. |
+| 6 | SIC teste un mouvement au contact d’une pièce. Quatre hypothèses donnent trois issues. La disposition reste fixe. La poussée et l’échange sont écartés dans cette situation. La marche ordinaire et la traction restent compatibles. |
+| 8–10 | SIC choisit trois déplacements pour obtenir une disposition où marche et traction prédisent des résultats différents. Après chaque mouvement, le coût restant de préparation passe de trois à deux puis à un. |
+| 11 | SIC joue la commande retenue. Le sujet actif avance et son partenaire prend la place qu’il vient de quitter. Seule la traction prédisait ces deux positions. |
+| 14 | Après avoir changé de sujet, SIC éprouve l’hypothèse d’un effet à distance de cet autre sujet. L’expérience écarte cette explication dans la disposition testée. |
+| 81 | Le moteur crédite le niveau. Le dernier reçu porte le résultat `transport_official`. |
+
+L’auteur du pack déclare la préférence pour l’information et le nombre minimal d’issues. Le pilote choisit la commande et les positions depuis les déplacements publics. Il rapproche la preuve du clic et celle du mouvement, calcule les configurations prévues par les lois encore compatibles, puis soumet un test à l’arbitrage d’exploration. Une prédiction confirmée permet de réutiliser le modèle de déplacement. La nouvelle branche s’applique aux scènes dans lesquelles le percepteur enregistre deux sujets. Le scénario synthétique teste aussi l’entrée sur une frontière vers un objectif inaccessible. [Sélection du test](../../../src/sic/probe-paired-displacements.ts) · [Test de configuration et de disponibilité des commandes](../../../tests/sic-paired-displacements.test.ts)
+
+Les essais de couverture apportent également quatre victoires nouvellement mesurées. Sur les sources, v109 gagne FITE L3 en 109 actions et FT09 L3 en 14. v127 gagne MOTO L2 en 13 et POLA L2 en 86. ESCT L3, SKBN L2 et SWCH L2 épuisent les 120 actions allouées. Sur SS06 L3 à froid, le moteur met fin à la partie de v127 après 279 actions, pour un plafond de 350.

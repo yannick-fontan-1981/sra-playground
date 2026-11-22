@@ -1,0 +1,174 @@
+{
+  "version": "v128",
+  "tag": "sic-compare-effects-after-verified-control-v128",
+  "commit": "6ad8e1d89f813b942a12ab2725f4f36c8833842e",
+  "baseline": "d859c8f48ed673cc86e9179e7673dc18fd7380b9",
+  "engine": "public native game dispatcher with frozen score replay",
+  "game": "SS10",
+  "level": 3,
+  "entry": "direct",
+  "arms": [
+    {
+      "version": "v127",
+      "minimum": 2,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "af1ecd112ba1854e0c9f56ad6815a078065ba1a5abef179b9f6427ab0f92f081",
+      "cap": 350,
+      "workers": 1,
+      "autonomousActions": 350,
+      "official": false,
+      "stop": "session_action_budget",
+      "commandDigest": "58b79bd9ebb0e97224c015ce26b4de1788310716eb5802ac1cece3109de9d05a"
+    },
+    {
+      "version": "v127",
+      "minimum": 3,
+      "pack": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d",
+      "initial": "af1ecd112ba1854e0c9f56ad6815a078065ba1a5abef179b9f6427ab0f92f081",
+      "cap": 350,
+      "workers": 1,
+      "autonomousActions": 350,
+      "official": false,
+      "stop": "session_action_budget",
+      "commandDigest": "f46515f66265f64c8f2067a9b20195cdf4c3243c30d93691f4b1542ac417f835"
+    },
+    {
+      "version": "v128",
+      "minimum": 2,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "initial": "af1ecd112ba1854e0c9f56ad6815a078065ba1a5abef179b9f6427ab0f92f081",
+      "cap": 350,
+      "workers": 1,
+      "autonomousActions": 81,
+      "official": true,
+      "stop": "target_levels_completed",
+      "commandDigest": "915f2c498b3a233decfced4f4467b337608df8ae067c5ab90140c358bb7bb8c4"
+    }
+  ],
+  "firstDifferentCommand": 6,
+  "autonomousExperiments": [
+    {
+      "action": 6,
+      "publicFrame": "09d7d7a4a14194fc",
+      "command": "ACTION1",
+      "opposingPredictions": [
+        [
+          "walk",
+          "pull"
+        ],
+        [
+          "push"
+        ],
+        [
+          "exchange"
+        ]
+      ],
+      "maximumRemaining": 2,
+      "matchingLaws": [
+        "walk",
+        "pull"
+      ],
+      "experimentReceipt": "motion_test_discriminated_public_effects",
+      "differentSubjectsMoved": 0,
+      "selectionAndMotionProof": {
+        "motion": "sra-v6-a2098196-fb77-48ba-82d8-ac1726af8169:epoch:1:revision:3:frame:b131f6db3e9f88ea",
+        "selection": "sra-v6-a2098196-fb77-48ba-82d8-ac1726af8169:epoch:1:revision:2:frame:8c638591e239a8c1"
+      }
+    },
+    {
+      "action": 11,
+      "publicFrame": "8733ae3e477c7a0b",
+      "command": "ACTION1",
+      "opposingPredictions": [
+        [
+          "walk"
+        ],
+        [
+          "pull"
+        ]
+      ],
+      "maximumRemaining": 1,
+      "matchingLaws": [
+        "pull"
+      ],
+      "experimentReceipt": "motion_test_discriminated_public_effects",
+      "differentSubjectsMoved": 2,
+      "selectionAndMotionProof": null
+    },
+    {
+      "action": 14,
+      "publicFrame": "ff3d91632839ca28",
+      "command": "ACTION1",
+      "opposingPredictions": [
+        [
+          "walk",
+          "push",
+          "pull",
+          "exchange"
+        ],
+        [
+          "field"
+        ]
+      ],
+      "maximumRemaining": 4,
+      "matchingLaws": [
+        "walk",
+        "push",
+        "pull",
+        "exchange"
+      ],
+      "experimentReceipt": "motion_test_discriminated_public_effects",
+      "differentSubjectsMoved": 1,
+      "selectionAndMotionProof": null
+    }
+  ],
+  "preparedTrial": [
+    {
+      "action": 8,
+      "remaining": 3,
+      "test": "ACTION1"
+    },
+    {
+      "action": 9,
+      "remaining": 2,
+      "test": "ACTION1"
+    },
+    {
+      "action": 10,
+      "remaining": 1,
+      "test": "ACTION1"
+    }
+  ],
+  "lastReceipt": "transport_official",
+  "sameBudgetPrefix": [
+    {
+      "minimum": 2,
+      "budget": 12,
+      "action6": 1,
+      "frame": "09d7d7a4a14194fc"
+    },
+    {
+      "minimum": 3,
+      "budget": 12,
+      "action6": 5,
+      "frame": "09d7d7a4a14194fc"
+    }
+  ],
+  "passiveOpportunities": [
+    {
+      "trace": "serial-transfer-threshold-two-v127",
+      "stepsWithAnImmediateComparison": 25,
+      "first": 6
+    },
+    {
+      "trace": "serial-preserve-custom-04-v127",
+      "stepsWithAnImmediateComparison": 0,
+      "first": null
+    },
+    {
+      "trace": "serial-preserve-custom-08-v127",
+      "stepsWithAnImmediateComparison": 0,
+      "first": null
+    }
+  ]
+}
