@@ -259,7 +259,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ?proposeCoverage(m.coverage,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
       const crossing=bridgeSeries&&group===evidencedPlanGroup&&m.crossing&&m.transportLearning&&limits
         ?proposeCrossing(m.crossing,m.transportLearning,rows,limits.maxDepth,limits.maxNodes):undefined;
-      const paired=lessonTest??(learnScope&&!m.coverage&&group===evidencedPlanGroup&&m.pairInquiry&&limits?pairProposal(m.pairInquiry,o.observation_ref,limits.maxDepth,limits.maxNodes,informationPreference?.mode === 'active' ? informationPreference.minimumOutcomes : undefined):undefined);
+      const paired=lessonTest??(learnScope&&!m.coverage&&group===evidencedPlanGroup&&m.pairInquiry&&limits?pairProposal(m.pairInquiry,o.observation_ref,limits.maxDepth,limits.maxNodes,informationPreference?.mode === 'active' ? informationPreference.minimumOutcomes : undefined, o.available_action_refs):undefined);
       if(focused&&!coverage&&!crossing&&!paired)return null;
       const cooperative=paired??coverage??crossing??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
         ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);

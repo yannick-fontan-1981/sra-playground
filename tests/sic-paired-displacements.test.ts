@@ -16,7 +16,8 @@ import {
   law,
 } from '../src/sic/paired-displacements.ts';
 import type { Scene, Reading } from '../src/sic/paired-scene.ts';
-import { carryPair, inquiry } from '../src/sic/probe-paired-displacements.ts';
+import { observeRelease, recordReleaseTest } from '../src/sic/test-released-subject.ts';
+import { carryPair, inquiry, pairProposal } from '../src/sic/probe-paired-displacements.ts';
 import { planDisplacements } from '../src/sic/plan-paired-displacements.ts';
 const s: Scene = {
   grid: { pitch: 3, left: 0, top: 0, columns: 7, rows: 5 },
@@ -151,6 +152,34 @@ test('an observed exchange opens a test of whether intervening terrain matters',
   }
 });
 
+test('experiment on a previously confined partner without undoing the access that was just gained', () => {
+  const room = { ...s, ground: [0, 14, 15, 16, 17, 18, 19, 20], goals: [6, 34] };
+  const before: Reading = { subjects: [0, 14], active: 1, pieces: [], supports: [], opened: [], anchor: -1 };
+  const exchanged: Reading = { ...before, subjects: [14, 0] };
+  const available = ['ACTION1', 'ACTION4', 'ACTION6'];
+  const q = inquiry();
+  q.scene = room; q.active = 'two subjects registered'; q.reading = exchanged;
+  q.selectionWitness = 'selection measured';
+  const m = q.learning;
+  m.motors.ACTION4 = { dx: 1, dy: 0, ref: 'east' };
+  q.released = observeRelease(room, m, before, exchanged, 'exchanged');
+  assert.equal(q.released?.before, 1);
+  assert.equal(q.released?.after, 7);
+  const selected = pairProposal(q, 'now', 6, 50, 2, available)!;
+  assert.equal(selected.releasedAccess?.phase, 'select');
+  assert.deepEqual(selected.expected.subjects, exchanged.subjects);
+  const handoff: Reading = { ...exchanged, active: 0 };
+  assert.equal(recordReleaseTest(m, q.released!, exchanged, handoff, selected, 'selection'), 'selected_the_released_subject_without_moving_either');
+  q.reading = handoff;
+  const test = pairProposal(q, 'selected', 6, 50, 2, available)!;
+  assert.equal(test.command, 'ACTION4');
+  const result: Reading = { ...handoff, subjects: [15, 0] };
+  localEffects(room, m, handoff, result, test.command, 'result', test);
+  assert.equal(recordReleaseTest(m, q.released!, handoff, result, test, 'result'), 'independent_motion_in_the_new_region_verified');
+  assert.equal(m.denied[test.key], undefined);
+  assert.equal(observeRelease(room, m, before, exchanged, 'same opportunity'), undefined);
+  assert.equal(observeRelease(room, fresh(), handoff, result, 'same region'), undefined);
+});
 test('a visible landing becomes a prediction at another distance only after displacement', () => {
   const room: Scene = {
     ...s,

@@ -1,3 +1,4 @@
+import { observeRelease, releasedSubjectTest, recordReleaseTest, type ReleasedSubject } from './test-released-subject.ts';
 import { watchPassage, recallProjectedPassage } from './prepare-projected-passage.ts';
 import {
   visibleImages,
@@ -34,6 +35,7 @@ export type ReusableEffects = Pick<
   | 'mobileSupports'
 > & { bodies: [number, number]; selectionWitness?: string };
 export type PairInquiry = {
+  released?: ReleasedSubject;
   scene?: Scene;
   reading?: Reading;
   learning: Learning;
@@ -398,7 +400,13 @@ export function seePair(
     delete m.plan;
     watchPassage(s, m, old, next, after, ref, op);
   }
-  return localEffects(s, m, old, next, op, ref, f);
+  const outcome = localEffects(s, m, old, next, op, ref, f);
+  if (f?.releasedAccess && q.released) return recordReleaseTest(m, q.released, old, next, f, ref);
+  if (!click && q.selectionWitness) {
+    const access = observeRelease(s, m, old, next, ref);
+    if (access) q.released = access;
+  }
+  return outcome;
 }
 export function pairProposal(
   q: PairInquiry,
@@ -406,8 +414,15 @@ export function pairProposal(
   depth: number,
   budget: number,
   minimumProbeOutcomes?: number,
+  available: readonly string[] = [],
 ) {
   if (!q.active || !q.scene || !q.reading) return;
+  const solved = q.learning.planSolves && q.learning.plan?.[0]?.from === key(q.reading);
+  if (!solved && minimumProbeOutcomes === 2 && q.released && q.selectionWitness) {
+    const test = releasedSubjectTest(q.scene, q.learning, q.reading, q.released, ref, q.selectionWitness, available);
+    if (test) return test;
+    delete q.released;
+  }
   if (
     q.learning.imageTrial &&
     !q.learning.checked.includes('preview/' + key(q.reading))

@@ -5,6 +5,17 @@ import { forecast, geometry, imagine, key, law, type Learning } from './paired-d
 type Entry = { site: number; objectives: number[] };
 export type RegionEntries = Map<number, Entry[]>;
 
+export function walkingRegion(s: Scene, v: Reading, origin: number, space = geometry(s)) {
+  const sites = new Set([origin]), queue = [origin];
+  for (const p of queue) for (const n of surrounding(s.grid, p)) {
+    if (!sites.has(n) && space.walk(v, n)) {
+      sites.add(n);
+      queue.push(n);
+    }
+  }
+  return sites;
+}
+
 /** Locate an unclassified feature for which entering from one shore would give
  * access to an observed objective or its control on a different shore. */
 export function regionEntries(s: Scene, m: Learning, v: Reading): RegionEntries {
@@ -13,14 +24,7 @@ export function regionEntries(s: Scene, m: Learning, v: Reading): RegionEntries 
   const space = geometry(s), region = new Map<number, number>();
   for (const origin of [...s.ground, ...v.supports]) {
     if (region.has(origin) || !space.walk(v, origin)) continue;
-    const queue = [origin];
-    region.set(origin, origin);
-    for (const p of queue) for (const n of surrounding(s.grid, p)) {
-      if (!region.has(n) && space.walk(v, n)) {
-        region.set(n, origin);
-        queue.push(n);
-      }
-    }
+    for (const site of walkingRegion(s, v, origin, space)) region.set(site, origin);
   }
   const objectives = [...new Set([...s.goals, ...s.doors.flatMap(d => d.controls)])];
   for (const site of s.other) {

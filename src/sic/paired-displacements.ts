@@ -305,6 +305,10 @@ export function localEffects(
     }
   }
   if (f) {
+    if (f.releasedAccess) {
+      delete m.plan;
+      return;
+    }
     if (f.regionEntry) {
       const { site, source, ticket } = f.regionEntry;
       const mark = 'entry/' + ticket;
