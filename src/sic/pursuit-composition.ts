@@ -142,6 +142,12 @@ export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:Vi
   for(const r of Object.values(memory.pairs)){
     const subject=view[r.actor],targets=view[r.peer],motion=learn.partMotion?.[r.actor];
     if(!motion||subject?.length!==1||!targets?.length||r.away<3||r.away<4*r.toward||r.responses.length<2)continue;
+    // A push can look like escape. Give the experiment selector the turn when
+    // all observed displacements required contact and separated copies stayed put.
+    const shifts=r.samples.filter(s=>!same(s.peer,s.next));
+    const atContact=(s:Sample)=>distance(s.actor,s.peer)<r.pitch/2;
+    if(new Set(shifts.map(s=>s.peer.join())).size>=2 && shifts.every(atContact) &&
+        r.samples.some(s=>!atContact(s)&&same(s.peer,s.next)))continue;
     const a=subject[0]!.at,pitch=r.pitch,step:XY=[pitch,pitch],motors=Object.entries(motion.displacements??motion.axes).flatMap(([op,options])=>{
       const values=Object.values(options);return available.has(op)&&/^ACTION[1-4]$/.test(op)&&values.length===1&&size(values[0]!.d)===pitch?[{op,d:values[0]!.d}]:[];
     });

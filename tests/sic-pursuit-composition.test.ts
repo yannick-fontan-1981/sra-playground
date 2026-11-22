@@ -39,4 +39,11 @@ test('a contradicted immediate contact yields to another approach from the same 
   assert.ok(alternative.refs.includes('unmoved after contact'));
   assert.equal(choose({ACTION3:'left blocked',ACTION4:'right blocked'}),null);
   assert.equal(choose()?.input,'ACTION4');
+
+  const observations=memory.pairs.sample!.samples;
+  observations.push({actor:[2,0],peer:[2,0],next:[4,0]},
+    {actor:[4,0],peer:[4,0],next:[6,0]},{actor:[4,0],peer:[8,0],next:[8,0]});
+  assert.equal(choose(),null);
+  observations.push({actor:[2,0],peer:[6,0],next:[8,0]});
+  assert.equal(choose()?.input,'ACTION4');
 });
