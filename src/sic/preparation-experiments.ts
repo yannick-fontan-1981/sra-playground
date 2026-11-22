@@ -74,6 +74,7 @@ import {witnessedSites} from './site-operations.ts';
 import {newFrontierMemory,selectFrontier,recordFrontier,type FrontierMemory,type FrontierTrial} from './experimental-frontier.ts';
 import {conditionalPlacements,placementOffer,placementReceipt,type ConditionalTrial,type LearnedPlacement,type ReconsiderPlacement} from './conditional-placements.ts';
 import { assessSilentInput, type SilentInputQuestion } from './silent-input-experiment.ts';
+import { assessMarkedMotion, type MarkedMotionTrial, type MarkedMotionMemory } from './marked-motion-experiment.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -109,6 +110,7 @@ type Rule = {
 import {observePlacement} from './paired-landmark-placement.ts';
 export type Experiment = {
   phase:
+    | 'testMarkedMotion'
     | 'composeObservedTransport'
     | 'testLandmarkPlacement'
     | 'selectMarkedCursor'
@@ -175,6 +177,7 @@ export type Experiment = {
   configurationTrial?: ConfigurationTrial;
   cooperative?: import('./transport-observations.ts').TransportForecast;
   silentInput?: SilentInputQuestion;
+  markedMotion?: MarkedMotionTrial;
   cursorTrial?: CursorTrial;
   landmark?: import('./paired-landmark-placement.ts').LandmarkTrial;
   cue?: CueTest;
@@ -250,6 +253,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  markedMotion?: MarkedMotionMemory;
   pendingSilentInput?: SilentInputQuestion;
   placementVisits?:import('./recurrent-placement.ts').PlacementVisits;
   transportLearning?: import('./transport-observations.ts').TransportMemory;
@@ -1092,6 +1096,11 @@ export function recordExperiment(
     refs: x.refs,
   };
   if(x.cooperative)return out;
+  if(x.markedMotion){
+    const result=assessMarkedMotion(m,x.markedMotion,rows,next,effect);
+    m.markedMotion?.results.push({trial:x.markedMotion,result,ref:a.revision});
+    return {...out,result};
+  }
   if(x.silentInput) return { ...out, silentInput:x.silentInput, bareEffect:'still', actual:effect.key,
     result:assessSilentInput(m,x,s,t,op,effect.key) };
   if(x.localCapacity) {

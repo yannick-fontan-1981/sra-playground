@@ -283,6 +283,7 @@ async function run(code, games) {
         Object.assign(replayCommands.at(-1), {configuration, configurationSeal:hash(configuration)});
       if(plan?.cooperativeTransportForecast && replayCommands)Object.assign(replayCommands.at(-1),{cooperative:plan.cooperativeTransportForecast});
       if(plan?.silentInputForecast && replayCommands)Object.assign(replayCommands.at(-1),{silentInput:plan.silentInputForecast});
+      if(plan?.markedMotionForecast && replayCommands)Object.assign(replayCommands.at(-1),{markedMotion:plan.markedMotionForecast});
       if(plan?.landmarkForecast && replayCommands)Object.assign(replayCommands.at(-1),{landmark:plan.landmarkForecast});
       if(plan?.cursorSelectionForecast && replayCommands){
         const cursor=plan.cursorSelectionForecast;

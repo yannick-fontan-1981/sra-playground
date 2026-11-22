@@ -2788,7 +2788,8 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const now = options.now ?? (() => performance.now());
     const testCompositions = recovery.solver === 'sic-fallback';
     const information = recovery.informationPreference;
-    const testSilent = information?.mode === 'active' && information.strategy === 'test_an_unresponsive_input_after_preparation';
+    const testSilent = information?.mode === 'active' && (information.strategy === 'test_an_unresponsive_input_after_preparation' ||
+      information.strategy === 'test_what_moves_after_a_conditional_change');
     const prioritizeCoverage = testSilent || information?.mode === 'active' && ['prefer_a_verified_coverage_experiment',
       'compose_a_sustained_crossing','bind_earlier_motions_to_registered_subjects','learn_the_scope_of_a_control'].includes(information.strategy);
     const groups = testCompositions ? planningGroupsWithExperiments(standalonePlanningGroups, prioritizeCoverage, testSilent) : standalonePlanningGroups;
