@@ -19,20 +19,28 @@
 
 Les métriques et l’empreinte exacte de la construction qualifiée se trouvent dans `docs/validation.md` et `validation/`. Le code de ce lot est isolé sous `experiments/sinking-star-ss15/`.
 
-## Prochaine étape : Custom 4 et Site
+## Intégration native et livraison
 
-- [ ] Adaptateur natif SS15 et ajout au catalogue Custom 4.
-- [ ] Galerie, accès direct, interface et aides du Playground.
-- [ ] Parité des huit témoins dans l’adaptateur et le dispatcher.
-- [ ] Vérification visuelle en navigateur sur ordinateur et mobile.
-- [ ] Non-régressions du runtime partagé et du catalogue.
-- [ ] Commit et push de l’intégration, intégration dans le `main` courant.
-- [ ] Publication du Site existant depuis ce commit durable.
-- [ ] Vérification du Site, de sa version et de son SHA source.
+- [x] Adaptateur et dispatcher natifs. SS15 suit SS14 dans Custom 4 et dispose de huit liens directs et vignettes.
+- [x] Campagne 0.2.0 dans l’ordre corrigé. L1 est « L’appui des deux traversées » et l’atelier renforcé est en L4.
+- [x] Parité des huit témoins entre laboratoire, adaptateur et dispatcher. 732 entrées, 56 sélections et 2 153 images avec leurs durées. Annulation et reprise de chaque fin de salle.
+- [x] `npm ci`, tests et quatre validations du laboratoire. 38 tests moteur et les contrôles de l’atelier et des finales ont réussi.
+- [x] 61 tests Custom 4, 55 contrôles SIC/attention, typage et build réussis. Chromium a vérifié SS14, SS01, CASC et LS20.
+- [x] Chromium sur ordinateur et à 390 px. Vingt découvertes en L4, Repartir vers L1, commandes, interruptions, victoire, défaite et pixels du bouton et de la presse de l’atelier vérifiés.
 
-Le prompt exécutable de cette étape est `docs/codex-integration-prompt.md`. Le présent lot fournit le laboratoire et la démo autonome ; aucune version Site SS15 n’est associée à ce lot.
+Le coût global mesuré sur SS09 et SS12 augmente de **1,74 %**, pour une tolérance de +10 %. La médiane des temps cumulés passe de **7 775,68 ms** (`2e7a392e`) à **7 911,14 ms** (`e4d42920`). Playwright alterne les deux builds dans Microsoft Edge 158.0.4370.33, avec cinq paires après échauffement, des contextes neufs et la même fenêtre. La mesure couvre le chargement et quatre actions SRA rendues à l’écran par jeu. Les actions publiques et le fichier compilé du worker agent sont identiques.
 
-## Identité du lot
+Reproduction avec les deux prévisualisations en cours et `CUSTOM4_BENCH_GAMES=SS09,SS12` : `node scripts/compare-custom4-browser-cost.mjs http://127.0.0.1:4175 http://127.0.0.1:4174 5`.
+
+La publication utilise le Site existant et son audience. Le compte rendu de livraison donne la version publiée, le SHA source et sa correspondance avec `main` après vérification du jeu déployé.
+
+[Jouer à SS15](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS15#playground) · [Ouvrir l’atelier de L4](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS15&level=4#playground)
+
+## Suite
+
+Évaluer séparément la résolution autonome de SS15 par SRA depuis les observations publiques. Les victoires de validation proviennent des parcours d’auteur.
+
+## Identité du laboratoire
 
 | Élément | Référence |
 | --- | --- |
@@ -42,7 +50,5 @@ Le prompt exécutable de cette étape est `docs/codex-integration-prompt.md`. Le
 | Révision locale / distante du laboratoire | Commit contenant ce dossier, relevé dans le compte rendu de livraison et par `git log -1 -- experiments/sinking-star-ss15` |
 | Branche canonique visée pour le laboratoire | `main`, avec contrôle du parent et du même arbre avant mise à jour |
 | Version du laboratoire | `0.2.0` |
-| Version Site SS15 / SHA Site SS15 | Non applicables avant l’intégration native et la publication |
-| Statut de synchronisation du Site pour SS15 | Non évalué par ce lot |
 
 Conformément à `AGENTS.md`, le laboratoire doit être poussé sur GitHub avant la livraison. Le compte rendu fournit les SHA effectivement vérifiés ; la version du Site ne doit jamais servir d’archive unique du code.
