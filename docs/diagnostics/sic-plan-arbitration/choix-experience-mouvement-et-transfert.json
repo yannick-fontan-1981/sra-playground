@@ -176,7 +176,217 @@
       "finalResult": "transport_official"
     }
   ],
-  "conditionalMotion": [],
+  "conditionalMotion": [
+    {
+      "version": "v136",
+      "comparisons": {
+        "v135": {
+          "commonPrefix": 39,
+          "identical": false,
+          "previousScore": false,
+          "previousActions": 120
+        },
+        "v136": {
+          "commonPrefix": 39,
+          "identical": false,
+          "previousScore": false,
+          "previousActions": 120
+        }
+      },
+      "backend": "source",
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "digests": [
+        "d9c5d2c7e1ec8aa40d606735228c0589a79674eb4edb6be639514a17ccc49aa4"
+      ],
+      "questions": [
+        {
+          "action": 38,
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "phase": "prepare",
+          "result": "preparation_verified_test_the_silent_input"
+        },
+        {
+          "action": 39,
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "phase": "probe",
+          "result": "previously_silent_input_changed_the_arrangement"
+        }
+      ],
+      "tests": [
+        {
+          "action": 40,
+          "forecast": null,
+          "hypothesis": "compare_a_fixed_mark_with_a_mark_that_follows_a_measured_movement",
+          "observedReferences": [
+            40,
+            8
+          ],
+          "command": 3,
+          "result": "mark_followed_the_measured_motion"
+        },
+        {
+          "action": 45,
+          "forecast": null,
+          "hypothesis": "compare_a_fixed_mark_with_a_mark_that_follows_a_measured_movement",
+          "observedReferences": [
+            40,
+            36
+          ],
+          "command": 1,
+          "result": "mark_followed_the_measured_motion"
+        }
+      ]
+    },
+    {
+      "version": "v136",
+      "comparisons": {
+        "v135": {
+          "commonPrefix": 80,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 80
+        }
+      },
+      "backend": "source",
+      "game": "FUIT",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 80,
+          "won": true
+        }
+      ],
+      "digests": [
+        "6fdf5a24cf405ae0238f4bfa1c999f8fbf1dedf0e5e63e311f3a5b00051c1c00"
+      ],
+      "questions": [],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {
+        "v135": {
+          "commonPrefix": 113,
+          "identical": true,
+          "previousScore": true,
+          "previousActions": 113
+        }
+      },
+      "backend": "source",
+      "game": "LKEY",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
+      "arm": "mechanism",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 113,
+          "won": true
+        }
+      ],
+      "digests": [
+        "68af14b61848ed68ee9a7481a7a6cf0d9e4f32beb2f2ef9306586e3c324f3606"
+      ],
+      "questions": [
+        {
+          "action": 50,
+          "prepare": "ACTION1",
+          "probe": "ACTION3",
+          "phase": "prepare",
+          "result": "preparation_verified_test_the_silent_input"
+        },
+        {
+          "action": 51,
+          "prepare": "ACTION1",
+          "probe": "ACTION3",
+          "phase": "probe",
+          "result": "previously_silent_input_changed_the_arrangement"
+        },
+        {
+          "action": 90,
+          "prepare": "ACTION1",
+          "probe": "ACTION6:20,19",
+          "phase": "prepare",
+          "result": "preparation_verified_test_the_silent_input"
+        },
+        {
+          "action": 91,
+          "prepare": "ACTION1",
+          "probe": "ACTION6:20,19",
+          "phase": "probe",
+          "result": "input_remained_silent_after_preparation"
+        }
+      ],
+      "tests": []
+    },
+    {
+      "version": "v136",
+      "comparisons": {},
+      "backend": "source",
+      "game": "GABA",
+      "entry": [
+        2,
+        2
+      ],
+      "cap": 120,
+      "pack": "b089c012a9895bc6b26444cc515582271373bcd8d8327f551bf8c3743808d4ac",
+      "arm": "prospective",
+      "levels": [
+        {
+          "level": 2,
+          "actions": 120,
+          "won": false
+        }
+      ],
+      "digests": [
+        "c98a4734b36a2862ac7f39d675e5231730d572e78e1cb4dc939aefacb8b2a47e"
+      ],
+      "questions": [
+        {
+          "action": 38,
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "phase": "prepare",
+          "result": "preparation_verified_test_the_silent_input"
+        },
+        {
+          "action": 39,
+          "prepare": "ACTION1",
+          "probe": "ACTION5",
+          "phase": "probe",
+          "result": "previously_silent_input_changed_the_arrangement"
+        }
+      ],
+      "tests": []
+    }
+  ],
   "spatialBench": [
     {
       "game": "LKEY",
