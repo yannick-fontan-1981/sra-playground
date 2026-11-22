@@ -27,7 +27,6 @@ export type ContactMemory = {
   verified?: Record<string, { displacement: string; entry: string }>;
   visited?: number[];
   active?: Project;
-  expectedParts?: string;
   arrival?: boolean;
   explorer?: { actor: string; origin: XY };
 };
@@ -251,8 +250,14 @@ export function proposeFrontierContact(
   }
   const verifyEntry = !!project;
   const local = m.arrival ? new Set(fit.roles.filter((r) => !m.displaced.includes(r))) : new Set<string>();
-  if (!project && !local.size && m.active?.steps[0]?.from === board.actor && m.expectedParts === board.parts.join(','))
-    project = m.active;
+  const nextStep = m.active?.steps[0];
+  if (!project && !local.size && nextStep?.from === board.actor && m.active) {
+    // Occlusion elsewhere is not evidence that this stance was lost. Check the
+    // participant required by this step, then acquire the actual public return.
+    const occupant = board.parts.indexOf(nextStep.to);
+    const contradiction = occupant >= 0 && board.roles[occupant] !== nextStep.role;
+    if (!contradiction) project = m.active;
+  }
   const terrainAt = (id: number) =>
     dominantColor(
       rows,
@@ -348,13 +353,6 @@ export function recordFrontierContact(
   }
   if (trial.project.steps.length > 1) {
     m.active = { ...trial.project, steps: trial.project.steps.slice(1) };
-    const updated = trial.parts.map((at, i) => ({
-      at: at === s.to && s.placed !== undefined ? s.placed : at,
-      role: before.board.roles[i]!,
-      pivot: i === before.board.pivotIndex,
-    }));
-    updated.sort((a, b) => Number(a.pivot) - Number(b.pivot) || a.role.localeCompare(b.role) || a.at - b.at);
-    m.expectedParts = updated.map((v) => v.at).join(',');
   }
   return s.role ? 'object_displaced' : m.arrival ? 'arrived_to_investigate' : 'approach_verified';
 }

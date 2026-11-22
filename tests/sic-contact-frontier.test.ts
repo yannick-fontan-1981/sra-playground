@@ -209,4 +209,10 @@ test('only actual entry confirms a terrain change and supplies evidence for a se
   const repeat = proposeFrontierContact(m, learning, entered.observation, entered.pixels, limits)!;
   assert.equal(repeat.previousEntry, entered.observation.observation_ref);
   assert.notEqual(repeat.project.site, first.project.site);
+  // A remote object may merge with a public overlay while the current walking
+  // stance remains unobstructed. Recheck the object at its contact step.
+  m.active = repeat.project;
+  const obscured = await channel(3, [], 4);
+  const continuing = proposeFrontierContact(m, learning, obscured.observation, obscured.pixels, limits);
+  assert.deepEqual(continuing?.step, repeat.step);
 });
