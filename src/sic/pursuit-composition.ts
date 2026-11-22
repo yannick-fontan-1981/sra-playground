@@ -8,6 +8,31 @@ type Response={actor:string;peer:string;pitch:number;away:number;toward:number;r
 export type PursuitMemory={pairs:Record<string,Response>};
 export type PursuitChoice={actor:string;peer:string;from:XY;to:XY;target:XY;input:string;horizon:number;
   peerOptions:XY[];refs:string[];basis:'all_measured_escape_directions'|'calibrated_response'|'one_possible_response'};
+type ContactReturn = { actor:string; peer:string; target:XY; returnedFrame:string; evidence:string; repeated:boolean };
+export type ContactReturns = Record<string,Record<string,ContactReturn>>;
+
+export function repeatedContactMiss(history:ContactReturns | undefined, frame:string, trial:PursuitChoice) {
+  const miss = history?.[frame]?.[trial.input];
+  return !!miss?.repeated && miss.actor===trial.actor && miss.peer===trial.peer && same(miss.target,trial.target)
+    && same(trial.to,trial.target);
+}
+
+export function recordContactMiss(history:ContactReturns, frame:string, trial:PursuitChoice, returnedFrame:string, evidence:string) {
+  const actions = history[frame] ??= {};
+  const previous = actions[trial.input];
+  const repeated = !!previous && previous.returnedFrame===returnedFrame && previous.actor===trial.actor
+    && previous.peer===trial.peer && same(previous.target,trial.target) && (previous.repeated || previous.evidence!==evidence);
+  actions[trial.input]={actor:trial.actor,peer:trial.peer,target:trial.target,returnedFrame,evidence,repeated};
+  return repeated;
+}
+
+export function reconsiderContact(history:ContactReturns | undefined, frame:string, input:string, returnedFrame:string) {
+  if (!history) return;
+  const actions = history[frame];
+  if (!actions?.[input] || actions[input].returnedFrame===returnedFrame) return;
+  delete actions[input];
+  if (!Object.keys(actions).length) delete history[frame];
+}
 const cardinals=(pitch:number):XY[]=>[[pitch,0],[-pitch,0],[0,pitch],[0,-pitch]];
 const distance=(a:XY,b:XY)=>size(diff(a,b));
 

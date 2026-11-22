@@ -1,8 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {captureRanks,choosePursuit,observePursuit,type PursuitMemory} from '../src/sic/pursuit-composition.ts';
+import {captureRanks,choosePursuit,observePursuit,reconsiderContact,recordContactMiss,repeatedContactMiss,
+  type ContactReturns,type PursuitChoice,type PursuitMemory} from '../src/sic/pursuit-composition.ts';
 import {newPreviewLearning,type VisualLayout} from '../src/sic/witnessed-preview-transfer.ts';
 import type {XY} from '../src/sic/access-terrain.ts';
+
+test('a reproducible arrival without the expected capture releases the turn in just that preparation',()=>{
+  const history:ContactReturns={};
+  const trial:PursuitChoice={actor:'moving form',peer:'repeatable form',from:[2,0],to:[4,0],target:[4,0],
+    input:'RIGHT',horizon:1,peerOptions:[],refs:[],basis:'all_measured_escape_directions'};
+  assert.equal(recordContactMiss(history,'start',trial,'different image','first return'),false);
+  assert.equal(recordContactMiss(history,'start',trial,'different image','first return'),false);
+  assert.equal(repeatedContactMiss(history,'start',trial),false);
+  assert.equal(recordContactMiss(history,'start',trial,'different image','second return'),true);
+  assert.equal(repeatedContactMiss(history,'start',trial),true);
+  assert.equal(repeatedContactMiss(history,'another preparation',trial),false);
+  assert.equal(repeatedContactMiss(history,'start',{...trial,peer:'other form'}),false);
+  assert.equal(repeatedContactMiss(history,'start',{...trial,target:[6,0]}),false);
+  reconsiderContact(history,'start','LEFT','new image');
+  reconsiderContact(history,'start','RIGHT','different image');
+  assert.equal(repeatedContactMiss(history,'start',trial),true);
+  reconsiderContact(history,'start','RIGHT','unexpected return');
+  assert.deepEqual(history,{});
+});
 
 test('works backwards through every escape in a corridor and distinguishes a loop in which only some replies permit contact',()=>{
   const line:XY[]=[[0,0],[1,0],[2,0],[3,0],[4,0]];
