@@ -31,6 +31,9 @@
   "customL3": [
     {
       "game": "SS10",
+      "startLevel": 3,
+      "endLevel": 3,
+      "priorLessonActions": 0,
       "cap": 350,
       "levels": [
         {
@@ -39,10 +42,15 @@
           "won": true
         }
       ],
+      "commandDigest": "915f2c498b3a233decfced4f4467b337608df8ae067c5ab90140c358bb7bb8c4",
+      "publicTraceDigest": "106ebd300a0e9d1d7e5efbe07b02a4312588e0be2fa0670b80dd274f52970e21",
       "equalTrajectory": true
     },
     {
       "game": "SS13",
+      "startLevel": 3,
+      "endLevel": 3,
+      "priorLessonActions": 0,
       "cap": 350,
       "levels": [
         {
@@ -51,19 +59,727 @@
           "won": true
         }
       ],
+      "commandDigest": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363",
+      "publicTraceDigest": "4bd07404b4aa891f90e90c8f12947aa930ec5bf509c2bac91f45b1c1184f65ed",
       "equalTrajectory": true
     }
   ],
   "crossLawIndependent": [],
+  "ledger": "couverture-sic-niveaux-1-2-3.json",
   "sourceL1": {
-    "evaluated": 0,
-    "won": 0,
-    "identicalToV127": 0,
-    "exceptions": []
+    "evaluated": 100,
+    "won": 100,
+    "identicalToV127": 100,
+    "exceptions": [],
+    "entries": [
+      {
+        "game": "AMZE",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "647edad30935a642e44c91ba38375d5ccbb1825cb9420f556cf2bf33b72d7505",
+        "equalTrajectory": true
+      },
+      {
+        "game": "AR25",
+        "actions": 17,
+        "won": true,
+        "publicTraceDigest": "71e5791c5be51a3c2cd0e8488216d018ebef9f485c7c4fc6f44e48bcbfb1d340",
+        "equalTrajectory": true
+      },
+      {
+        "game": "AS66",
+        "actions": 11,
+        "won": true,
+        "publicTraceDigest": "d63a4e68c51967162c3d682adec08ec14fe04bcaef4d0e642f868f1a7a416e79",
+        "equalTrajectory": true
+      },
+      {
+        "game": "BP35",
+        "actions": 18,
+        "won": true,
+        "publicTraceDigest": "4f6b361ba5474ee47787195658f9a68f0d263e23fef9b3bd19d0c603b20867da",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CASC",
+        "actions": 6,
+        "won": true,
+        "publicTraceDigest": "00d280c99f24750f74763098dd7808c0eb527b30e6712311bc04d45c76ad5b7e",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CATL",
+        "actions": 8,
+        "won": true,
+        "publicTraceDigest": "5306e767a148d625d76f103890d3b9411c687e75b60941f670f0ba0e3e087f3f",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CATR",
+        "actions": 32,
+        "won": true,
+        "publicTraceDigest": "fa306943d194ede79c9d5bd46ce2cf0b7cd77611cd32be2ff55d8297edfce8dc",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CAVA",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "e340b68ca672be383743f0975b388f10897776d68701acbe62d723bc630bdac0",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CD82",
+        "actions": 9,
+        "won": true,
+        "publicTraceDigest": "6e9d064c62031ff58f5d7b1b2b52548146b0ba240be94c7eee9458dfeda11605",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CGWL",
+        "actions": 15,
+        "won": true,
+        "publicTraceDigest": "b5f5ccd971c45d54030df28434daf0a59829a66e499ac64fe230f649797e2b3c",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CLRS",
+        "actions": 17,
+        "won": true,
+        "publicTraceDigest": "2ba714e6040c74cc71dc20478079fc63d0b7fcdf79b96729d5d8ebc586ddee07",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CN04",
+        "actions": 18,
+        "won": true,
+        "publicTraceDigest": "b72737b7738e864d14e294fb1d16d38dcb28e7f23933642e358990cc65dd66b9",
+        "equalTrajectory": true
+      },
+      {
+        "game": "COLM",
+        "actions": 20,
+        "won": true,
+        "publicTraceDigest": "78f81c61a0afcea1d583434001042989eed18b46ec2b7be7bbcd54fd0c77e6eb",
+        "equalTrajectory": true
+      },
+      {
+        "game": "COMB",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "eb72dacfb6d8bd0c32489c8002ad73adeee4767e347d5d5ffb076ed3a439b143",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CONN",
+        "actions": 29,
+        "won": true,
+        "publicTraceDigest": "3095161751eca233e3c465111dd26e3d6ee40e72b239f5c1268701a984f3a285",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CRAF",
+        "actions": 12,
+        "won": true,
+        "publicTraceDigest": "4899794e96846eb1682d4cd8598412d27cdeb42bbaad0915e00c78320324e0e0",
+        "equalTrajectory": true
+      },
+      {
+        "game": "CWSE",
+        "actions": 6,
+        "won": true,
+        "publicTraceDigest": "a15712483fbd69501df0330babc067e5a5c332f8d1d426b609ccbec22686cb0f",
+        "equalTrajectory": true
+      },
+      {
+        "game": "DAME",
+        "actions": 29,
+        "won": true,
+        "publicTraceDigest": "19d27265c0c21fb7b82b29e90ac0bae3140693a7d83541f77aff941811922836",
+        "equalTrajectory": true
+      },
+      {
+        "game": "DC22",
+        "actions": 24,
+        "won": true,
+        "publicTraceDigest": "d4d464121b2336f8c2b8aa9c136e6fcb920a0d859c6091f0d3d5861445fd3b54",
+        "equalTrajectory": true
+      },
+      {
+        "game": "DICO",
+        "actions": 5,
+        "won": true,
+        "publicTraceDigest": "21e6c77f8578507c035a8d30677f19ece224aab4ae25d1c4fc96a04be4c21438",
+        "equalTrajectory": true
+      },
+      {
+        "game": "DNOI",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "2ba9b94a78c9e9098d98ceed44e9dccf01dd33263b9f3b0a30438c5fcb604e4d",
+        "equalTrajectory": true
+      },
+      {
+        "game": "ELAS",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "1da454b685766b0d190637aae5116180074074d269ea32d99c9db8ed32578655",
+        "equalTrajectory": true
+      },
+      {
+        "game": "ESCT",
+        "actions": 16,
+        "won": true,
+        "publicTraceDigest": "988f443b0e502a9744859ff8e596a6db88d34a1b10b092aed783d7b68f74360a",
+        "equalTrajectory": true
+      },
+      {
+        "game": "ETAG",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "533b6fca62d34e6273d81ded9b6771ffed8e47e277d9676312eda2894d6acd04",
+        "equalTrajectory": true
+      },
+      {
+        "game": "EVAS",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "c9e6a6e907f6a3ae8bf4e2da8d38ad3ad5c090a1d449a41ffe4c51082d8bcbb9",
+        "equalTrajectory": true
+      },
+      {
+        "game": "FITE",
+        "actions": 12,
+        "won": true,
+        "publicTraceDigest": "ef697ea45ea6080c059abe24ca01dcad72b6e0d494aae53c7da2bd1b12d4a9a6",
+        "equalTrajectory": true
+      },
+      {
+        "game": "FOGW",
+        "actions": 18,
+        "won": true,
+        "publicTraceDigest": "760cf3434dfcde563d1f028a7f78de73d12ebba449b9be268688a0648711dbbe",
+        "equalTrajectory": true
+      },
+      {
+        "game": "FT09",
+        "actions": 4,
+        "won": true,
+        "publicTraceDigest": "b46b342641a75b286820d38590529b4e304fdf8d010ed4b8f291077e8524dc0f",
+        "equalTrajectory": true
+      },
+      {
+        "game": "FUIT",
+        "actions": 49,
+        "won": true,
+        "publicTraceDigest": "af806f3b432c41e3aaffea3dbddfbe3eb888cde5c1c7ab5496ebd8a7cf62ecba",
+        "equalTrajectory": true
+      },
+      {
+        "game": "G50T",
+        "actions": 27,
+        "won": true,
+        "publicTraceDigest": "7b78efa1d78d239ee234389e3d299f889cd7e7ef94bf90a08ba49c4b544f9e33",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GABA",
+        "actions": 49,
+        "won": true,
+        "publicTraceDigest": "918c486b5a47b635d5f1cbfec39219c3e83586f1e4c977d6f38eed2b28a51bce",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GARE",
+        "actions": 11,
+        "won": true,
+        "publicTraceDigest": "cade53fce22d79df29529c22f046d40f0bb5d10753c32951c2db5dbbc68d9b1e",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GIGO",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "e95843c4826569781ade3056713dd719f1277e53d46ed4e6747e123394e6f81c",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GLOB",
+        "actions": 10,
+        "won": true,
+        "publicTraceDigest": "94cb67a6d1dacaca9cd287080768a4ccff399678fcf8155f69e36f343983f4a8",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GMAP",
+        "actions": 5,
+        "won": true,
+        "publicTraceDigest": "3ca3ba64054042a29362417742ae49e006ae7c25bbd3fa52427517c8f7aa017c",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GORI",
+        "actions": 15,
+        "won": true,
+        "publicTraceDigest": "9220737f80ad4535b9a97094c5b5bccf48400f343b8a1a4d7afc7c48334ac073",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GRAV",
+        "actions": 11,
+        "won": true,
+        "publicTraceDigest": "a972333bf09d4d60a548299871c44a4fafd22058fbbdba864b25d15ef4a343ee",
+        "equalTrajectory": true
+      },
+      {
+        "game": "GRIL",
+        "actions": 5,
+        "won": true,
+        "publicTraceDigest": "69f64551e45c2be654377b3f2ead9ddf9ab441c153ce8247caea37c748e8bdce",
+        "equalTrajectory": true
+      },
+      {
+        "game": "HANO",
+        "actions": 6,
+        "won": true,
+        "publicTraceDigest": "2d2e46906f4722871a0f83205a50c02f3dff1e8bd0eae2e88394a1cab2b1135d",
+        "equalTrajectory": true
+      },
+      {
+        "game": "HOLE",
+        "actions": 5,
+        "won": true,
+        "publicTraceDigest": "abdc823b0a5a99fcfe808a7f229cc1d75295c2fa192608c0393d4ca8f03c049f",
+        "equalTrajectory": true
+      },
+      {
+        "game": "HPDL",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "1a47daae7c7ceb97a6eb23a4db1e15fff7b30c26bdf087c8f42f06bf1a83a9ef",
+        "equalTrajectory": true
+      },
+      {
+        "game": "ISOS",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "58811fd7ce5b6ebea5c7e77df0540456ad6202658a506e3a82ef44d03c2c66a7",
+        "equalTrajectory": true
+      },
+      {
+        "game": "KA59",
+        "actions": 15,
+        "won": true,
+        "publicTraceDigest": "ab8c746dca6db8ca8d1dd3c103cd5e5096e2ef05f8ada49c5a69d549ce336723",
+        "equalTrajectory": true
+      },
+      {
+        "game": "KATA",
+        "actions": 15,
+        "won": true,
+        "publicTraceDigest": "9de708a6283ea994ed36a42f0ec862b16eee02057a3c4797ea63ce4794d36736",
+        "equalTrajectory": true
+      },
+      {
+        "game": "KEYD",
+        "actions": 35,
+        "won": true,
+        "publicTraceDigest": "e1fda62ffd1cb56d83ae84be00030f8736bc4871c94cee247ca8721da3c86fdb",
+        "equalTrajectory": true
+      },
+      {
+        "game": "KLOT",
+        "actions": 30,
+        "won": true,
+        "publicTraceDigest": "279ff33838151dfdaefcfefbb002df80992f2cfa55526a80c0534b155f79c6c6",
+        "equalTrajectory": true
+      },
+      {
+        "game": "LF52",
+        "actions": 16,
+        "won": true,
+        "publicTraceDigest": "d5e8292fde1be26f48b894319cd5bddb4ed7bf5a6ad4b904c8d4909dc4cef023",
+        "equalTrajectory": true
+      },
+      {
+        "game": "LIFE",
+        "actions": 26,
+        "won": true,
+        "publicTraceDigest": "73520b3a54b3cf1688dd212ceed49f028d9da14955d740febe085ae7d8a0a811",
+        "equalTrajectory": true
+      },
+      {
+        "game": "LKEY",
+        "actions": 8,
+        "won": true,
+        "publicTraceDigest": "d9bd67619c8af551f26a717e0061d945d5006507a220600e5f789c5270830b22",
+        "equalTrajectory": true
+      },
+      {
+        "game": "LOGI",
+        "actions": 16,
+        "won": true,
+        "publicTraceDigest": "9b9d22534b5c4018d128d52bafb4a95aa002b3ef59c1ccfb1621d5618bc53675",
+        "equalTrajectory": true
+      },
+      {
+        "game": "LP85",
+        "actions": 8,
+        "won": true,
+        "publicTraceDigest": "d6215b524831bd9a1c56262655e9650085c796e42994c8915ea97f8ce0412b0d",
+        "equalTrajectory": true
+      },
+      {
+        "game": "LS19",
+        "actions": 5,
+        "won": true,
+        "publicTraceDigest": "5e878b1c25ff6821d48357716fb7dc50f10d41f4cc9c94e3d738f20bfc086f32",
+        "equalTrajectory": true
+      },
+      {
+        "game": "LS20",
+        "actions": 18,
+        "won": true,
+        "publicTraceDigest": "17fb8b2a05e057861a217d84358cba3ca2001dd729472a1ffe41bceb88e5259e",
+        "equalTrajectory": true
+      },
+      {
+        "game": "M0R0",
+        "actions": 25,
+        "won": true,
+        "publicTraceDigest": "a20038d12ca3d7c78a73ffb7219a94ccb3fb6f7bcfdf7f0762ace59cbb440b98",
+        "equalTrajectory": true
+      },
+      {
+        "game": "MEMO",
+        "actions": 10,
+        "won": true,
+        "publicTraceDigest": "8a054bf397a8b404bd118a3971e0731b43bae55581bd7ccc24b6b007b7f91fdd",
+        "equalTrajectory": true
+      },
+      {
+        "game": "MIND",
+        "actions": 8,
+        "won": true,
+        "publicTraceDigest": "b4c24cdf77ad6beac6d27805d52391e1c5812a87d7218173991ebc9bf4e8534f",
+        "equalTrajectory": true
+      },
+      {
+        "game": "MOTO",
+        "actions": 11,
+        "won": true,
+        "publicTraceDigest": "754efdc34ed51350a70ea42eb162a54c8e73e4ab1886ac35caa86b4a6955e71b",
+        "equalTrajectory": true
+      },
+      {
+        "game": "ONDE",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "631b0638661357dbc7f2e21e7df8f5bdfcaa232a018421b7aff13f268cb09bfe",
+        "equalTrajectory": true
+      },
+      {
+        "game": "PIPE",
+        "actions": 4,
+        "won": true,
+        "publicTraceDigest": "949c4ba9ff6c88dd192f3680757b946b32c66bc32427ce9ba392a311ec4c9d51",
+        "equalTrajectory": true
+      },
+      {
+        "game": "POLA",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "fb29376c1de9f0951cd79464823fd85e434ead50b88ebd00a88104b2150d5793",
+        "equalTrajectory": true
+      },
+      {
+        "game": "PORT",
+        "actions": 17,
+        "won": true,
+        "publicTraceDigest": "abf0292f70fc14a89763431e071c8e8134ddeb65c229b773c0a8842997410e6e",
+        "equalTrajectory": true
+      },
+      {
+        "game": "PRTL",
+        "actions": 6,
+        "won": true,
+        "publicTraceDigest": "74fac246cfb689e2d3d5b87bf6743da370a8004667cd93ea36e61faa7836deb5",
+        "equalTrajectory": true
+      },
+      {
+        "game": "R11L",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "446c52a2eea321a506e79611e0e53144ad9ad3e89e7541b2307a106afa285563",
+        "equalTrajectory": true
+      },
+      {
+        "game": "RE86",
+        "actions": 26,
+        "won": true,
+        "publicTraceDigest": "563333c4605f8a73e1e16acd1758a063844be4b96d536dd73b24ac91b0a267e1",
+        "equalTrajectory": true
+      },
+      {
+        "game": "RECR",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "8d17cd4daf391e4e618374257f2155a8ca8bc02dd92d6ad0aff6c8c0bc6e227b",
+        "equalTrajectory": true
+      },
+      {
+        "game": "REGN",
+        "actions": 2,
+        "won": true,
+        "publicTraceDigest": "a4ab14a671385c36f553b6021aefcec46f022f9db049ce49a6771d9b8851bd80",
+        "equalTrajectory": true
+      },
+      {
+        "game": "REWI",
+        "actions": 5,
+        "won": true,
+        "publicTraceDigest": "e6a1c89e2132666fc0df1ae95e22e999b3acd4efae66a4697439343e112dd1d2",
+        "equalTrajectory": true
+      },
+      {
+        "game": "RSWP",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "4da3f5819288a6ce2c644f8965df563962fff4b2dab25b8a10bc7022bfe066f4",
+        "equalTrajectory": true
+      },
+      {
+        "game": "S5I5",
+        "actions": 25,
+        "won": true,
+        "publicTraceDigest": "bb51a835208924a49536d4c91bd59649a54a771214d159a70b40d65f15aee704",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SB26",
+        "actions": 9,
+        "won": true,
+        "publicTraceDigest": "000dbd782153c19904cf12bdfe1828109b1e3d39319c1c8175ec19798844b006",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SC25",
+        "actions": 17,
+        "won": true,
+        "publicTraceDigest": "24fa618d07b4b1b04a71fbf4e9f6e1d898e461810622ee3640a5f14201d444c6",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SELE",
+        "actions": 36,
+        "won": true,
+        "publicTraceDigest": "a490f0f3a1b2a1ac0f55d0a46d383ed253eca387582a88bbadb56b0902ae70a1",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SEQN",
+        "actions": 4,
+        "won": true,
+        "publicTraceDigest": "3268304bf2fb98187b7083e4363e56802ebd86d7c5348d4b56b33105aabe62fb",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SERI",
+        "actions": 4,
+        "won": true,
+        "publicTraceDigest": "c59f5d4ee8e3ddd54754093c5f353c05371b22ea8ffa28aa5f162a25b8dfff91",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SIGN",
+        "actions": 16,
+        "won": true,
+        "publicTraceDigest": "98fda9a2b9e628584e43c277843578d39295753041f1d6130902dbd86d990e53",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SK48",
+        "actions": 19,
+        "won": true,
+        "publicTraceDigest": "27a430f819232ee87f171cd56c0aa9f12461428ed2f2bb20d7be42091eba113a",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SKBN",
+        "actions": 22,
+        "won": true,
+        "publicTraceDigest": "95057a87a627f842ccbadf5f6acdb7668c96ede1eb7119749cdd3965d4c5f1b8",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SMLP",
+        "actions": 47,
+        "won": true,
+        "publicTraceDigest": "78027b4a16d454ad9103191ca2aed9b61e83f7b9851f87262b5e85e207aa2f68",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SNAR",
+        "actions": 17,
+        "won": true,
+        "publicTraceDigest": "ad1678eb400ffa720bc6ea0b2336c2980f982d1dcfae7018a1deee915bd326fd",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SP80",
+        "actions": 8,
+        "won": true,
+        "publicTraceDigest": "817dcf34d9d3c0de1a10c6c9b68d4da0ee2ed9aeeab25a371dc215b62449387b",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SPOR",
+        "actions": 14,
+        "won": true,
+        "publicTraceDigest": "bbd96dc4339e5a385ed47490d9e8854a8ab07fc42a9b52bac9c681d26f135e95",
+        "equalTrajectory": true
+      },
+      {
+        "game": "STCK",
+        "actions": 3,
+        "won": true,
+        "publicTraceDigest": "1fb37a5d2d18e124e4478916abc54b218c31b56758ab2f6dc00711e268da7b3d",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SU15",
+        "actions": 7,
+        "won": true,
+        "publicTraceDigest": "cb2225afb0a00d803e1bb656b3fdef56eb48203429497ab30afebd95373035fe",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SWCH",
+        "actions": 25,
+        "won": true,
+        "publicTraceDigest": "60eda46dc278a4764b5b3cb2d38b1338244d46c2a9b589a60597f6c864e91114",
+        "equalTrajectory": true
+      },
+      {
+        "game": "SYME",
+        "actions": 9,
+        "won": true,
+        "publicTraceDigest": "4bfe4c54f5afca7ada5422cd1a0f6397097437aaac603a392c378b51d4300373",
+        "equalTrajectory": true
+      },
+      {
+        "game": "TEQU",
+        "actions": 8,
+        "won": true,
+        "publicTraceDigest": "95403705ef29492cf1b2110b11664f18cf7f683d5704d973fd2e7227e1fbbedd",
+        "equalTrajectory": true
+      },
+      {
+        "game": "THER",
+        "actions": 27,
+        "won": true,
+        "publicTraceDigest": "e2210e921b8102217a89b5c85bcf7055bbda1443093515ae92be6ae65c5b6f80",
+        "equalTrajectory": true
+      },
+      {
+        "game": "TICT",
+        "actions": 5,
+        "won": true,
+        "publicTraceDigest": "fae3b90a9fcd76e987ff66950fb0fbdb6b92900612e86814bda550d60beb38b5",
+        "equalTrajectory": true
+      },
+      {
+        "game": "TN36",
+        "actions": 53,
+        "won": true,
+        "publicTraceDigest": "7a1d792a8665222cd1f10113566cc232ee3234c32240861ce9c1f0f7034ef073",
+        "equalTrajectory": true
+      },
+      {
+        "game": "TR87",
+        "actions": 22,
+        "won": true,
+        "publicTraceDigest": "09814b7f16a637b4220a9dc9b5b5c4c960911ae543c9dec0778267f4a0a8e9b4",
+        "equalTrajectory": true
+      },
+      {
+        "game": "TRCP",
+        "actions": 24,
+        "won": true,
+        "publicTraceDigest": "1cce22ee186258e2247cd30edcfdb5544005c31797159be912345f44f4389776",
+        "equalTrajectory": true
+      },
+      {
+        "game": "TRIA",
+        "actions": 26,
+        "won": true,
+        "publicTraceDigest": "4412f7e2a7e91cb8eab9f50b3a3487612b9b53f2707ae023c3da459197308abf",
+        "equalTrajectory": true
+      },
+      {
+        "game": "TU93",
+        "actions": 30,
+        "won": true,
+        "publicTraceDigest": "c2006302c5485c0f7b597e21eff4264966652d0bd2b18777d199f4a6683aad17",
+        "equalTrajectory": true
+      },
+      {
+        "game": "UPST",
+        "actions": 57,
+        "won": true,
+        "publicTraceDigest": "423f926b50fb21652992cd94ae033c989be66bf782f393019e43185e9ef7652c",
+        "equalTrajectory": true
+      },
+      {
+        "game": "VALV",
+        "actions": 25,
+        "won": true,
+        "publicTraceDigest": "d3ef9fc506f93bc0b5fedb76e3928509ae484f60947546de8a6db8038dc9b343",
+        "equalTrajectory": true
+      },
+      {
+        "game": "VC33",
+        "actions": 12,
+        "won": true,
+        "publicTraceDigest": "e9e242d13eee14ce41c9a97ed18803d29c8ae492143b2fabda2191fc56c57ba9",
+        "equalTrajectory": true
+      },
+      {
+        "game": "VOIS",
+        "actions": 21,
+        "won": true,
+        "publicTraceDigest": "0842d1e2987123bf3e41330096d4b568a5712b3d4c2df740389d3ecb4fc6dab8",
+        "equalTrajectory": true
+      },
+      {
+        "game": "WA30",
+        "actions": 26,
+        "won": true,
+        "publicTraceDigest": "05b68f006535e8016ce35b48ef159d8e59ec9f32db011955d22efefba5d7b82c",
+        "equalTrajectory": true
+      },
+      {
+        "game": "WEAV",
+        "actions": 26,
+        "won": true,
+        "publicTraceDigest": "00b2de9b0d66ffa2dc8c294394e63d2c696a41763194ba12e5ec80c9e2cd07aa",
+        "equalTrajectory": true
+      },
+      {
+        "game": "ZIPP",
+        "actions": 8,
+        "won": true,
+        "publicTraceDigest": "c92c1a6fc48c2f76c80fa85266c3b57b7654c7371e4bcd0bce51a5eca867e440",
+        "equalTrajectory": true
+      }
+    ]
   },
   "historicalCustom": [
     {
       "game": "SS01",
+      "startLevel": 1,
+      "endLevel": 2,
+      "priorLessonActions": 0,
       "cap": 100,
       "levels": [
         {
@@ -77,10 +793,15 @@
           "won": true
         }
       ],
+      "commandDigest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee",
+      "publicTraceDigest": "40e23ffbd78383537ae413ca8aa30fb0f13c38ab93d1cbf3064e72081f2705d1",
       "equalTrajectory": true
     },
     {
       "game": "SS02",
+      "startLevel": 1,
+      "endLevel": 2,
+      "priorLessonActions": 0,
       "cap": 100,
       "levels": [
         {
@@ -94,10 +815,76 @@
           "won": true
         }
       ],
+      "commandDigest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7",
+      "publicTraceDigest": "8c23b576b1d0df4036a10105d5b913bf9d7ccd396e818ed21b61a5841c360141",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS03",
+      "startLevel": 1,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 250,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 47,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 97,
+          "won": true
+        }
+      ],
+      "commandDigest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17",
+      "publicTraceDigest": "181498a55159a85746f25867f079fe85e4dc842691b7637520b93d0ead8f7ac2",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS04",
+      "startLevel": 2,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 250,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 60,
+          "won": true
+        }
+      ],
+      "commandDigest": "f5e39a5e2fc16e729e1fb4ca404938611c90db826d5a2b5783ad33c70d3b1705",
+      "publicTraceDigest": "b4a177fbe31224cf322044f88c9a79a3274f0953aae2436294c7c291fcc6b47d",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS05",
+      "startLevel": 1,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 170,
+      "levels": [
+        {
+          "level": 1,
+          "actions": 44,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 73,
+          "won": true
+        }
+      ],
+      "commandDigest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57",
+      "publicTraceDigest": "da0a12ea10f02874789d9bbba850e195f383b0011e0e35d31fa01ee4d74d9a2e",
       "equalTrajectory": true
     },
     {
       "game": "SS06",
+      "startLevel": 2,
+      "endLevel": 2,
+      "priorLessonActions": 0,
       "cap": 54,
       "levels": [
         {
@@ -106,10 +893,100 @@
           "won": true
         }
       ],
+      "commandDigest": "f071e1285c945acf891c83770fbe9caa1cb712d31fa6c2e78e16d93543e6d867",
+      "publicTraceDigest": "2018dbdf65f31e5eac34d8bddcd902dfd62e3e6090126fc803a03697db0be798",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS07",
+      "startLevel": 2,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 117,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 117,
+          "won": true
+        }
+      ],
+      "commandDigest": "1dae89217c5c68f7c407b378acb58a031967916e52c0f64f3459eee546119d88",
+      "publicTraceDigest": "fc172cc0600e7335934c9103f1c58af8998ba980fa6ec331c4c98392fc95d412",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS08",
+      "startLevel": 2,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 70,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 70,
+          "won": true
+        }
+      ],
+      "commandDigest": "de0fbc82ba201e11b32b430d868f70586f11996630916d3922a6c2d70eda1cd5",
+      "publicTraceDigest": "b8a63d37f477503a7ca85370178a3ec8cb45bbac5073ebcd22cbd0af67c8be5e",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS09",
+      "startLevel": 2,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 100,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 54,
+          "won": true
+        }
+      ],
+      "commandDigest": "ed31545661974f783bee0caa881aef07f49abe5dc35b880110006c3d448354c2",
+      "publicTraceDigest": "c83e8fda6dc89bfe9f8155206df8257d35440c1aca70556fb0a74330cc51f42e",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS10",
+      "startLevel": 2,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 290,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 227,
+          "won": true
+        }
+      ],
+      "commandDigest": "5870e0610e90418a0c9427a051ceb2688dca13119cc0f084be8bfba4fa7bec52",
+      "publicTraceDigest": "5dca40ad9da3b1bc34e07a2a876dcd6d499f37dedf9b0b712d41a1e3aa1b2f25",
+      "equalTrajectory": true
+    },
+    {
+      "game": "SS11",
+      "startLevel": 2,
+      "endLevel": 2,
+      "priorLessonActions": 0,
+      "cap": 80,
+      "levels": [
+        {
+          "level": 2,
+          "actions": 35,
+          "won": true
+        }
+      ],
+      "commandDigest": "9d7480f53b585f6249ef83a07c186cb68651f04d915aaa04c7b5d7f838bc6604",
+      "publicTraceDigest": "6cb4ff3716410c3dc5da0039409593a89c62a436c2e83622e69a280e82eb0a80",
       "equalTrajectory": true
     },
     {
       "game": "SS12",
+      "startLevel": 1,
+      "endLevel": 2,
+      "priorLessonActions": 0,
       "cap": 350,
       "levels": [
         {
@@ -123,10 +1000,15 @@
           "won": true
         }
       ],
+      "commandDigest": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f",
+      "publicTraceDigest": "5666ca27a570766245836e6f0e55b384edac774db466b3188b6fea713ba20a70",
       "equalTrajectory": true
     },
     {
       "game": "SS13",
+      "startLevel": 1,
+      "endLevel": 2,
+      "priorLessonActions": 0,
       "cap": 350,
       "levels": [
         {
@@ -140,10 +1022,15 @@
           "won": true
         }
       ],
+      "commandDigest": "4a47c7a078c18adcb0fa91a18fc8f287c2f13d343d99e9231ace210f2db938e0",
+      "publicTraceDigest": "961c3e75e7684b62136fc6296a00289823a3d7a9eb51242cc88eba5efb1f27bd",
       "equalTrajectory": true
     },
     {
       "game": "SS14",
+      "startLevel": 1,
+      "endLevel": 2,
+      "priorLessonActions": 0,
       "cap": 350,
       "levels": [
         {
@@ -157,6 +1044,8 @@
           "won": true
         }
       ],
+      "commandDigest": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3",
+      "publicTraceDigest": "cc55fdf330ea0abf528961f045e8828e347d746503cb1099cdfd613464c31a7a",
       "equalTrajectory": true
     }
   ],
@@ -204,5 +1093,56 @@
       "<source-certificate.json>",
       "<fresh-source-tape.jsonl>"
     ]
+  },
+  "publicTraceDigest": "SHA-256 of the sequence of (action id, action data, public frame hash before, public frame hash after). Both ends of every native step are compared.",
+  "SS10SolvingTransition": {
+    "game": "SS10",
+    "issued": 81,
+    "earlierPartialPlans": [
+      {
+        "action": 12,
+        "commands": 58,
+        "solves": false
+      },
+      {
+        "action": 13,
+        "commands": 57,
+        "solves": false
+      },
+      {
+        "action": 14,
+        "commands": 56,
+        "solves": false
+      }
+    ],
+    "firstPredictedFinish": {
+      "action": 15,
+      "commands": 67,
+      "publicImage": "5ce6963941e1e0fb",
+      "terminalSubjects": [
+        272,
+        271
+      ],
+      "observedGoals": [
+        271,
+        272
+      ],
+      "exactlyFollowedToCredit": true
+    },
+    "firstFollowedExactlyToTheWin": {
+      "action": 15,
+      "commands": 67,
+      "publicImage": "5ce6963941e1e0fb",
+      "terminalSubjects": [
+        272,
+        271
+      ],
+      "observedGoals": [
+        271,
+        272
+      ],
+      "exactlyFollowedToCredit": true
+    },
+    "scoredPlanDecisions": 67
   }
 }
