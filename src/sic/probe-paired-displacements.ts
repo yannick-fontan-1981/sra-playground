@@ -403,7 +403,12 @@ export function seePair(
   const outcome = localEffects(s, m, old, next, op, ref, f);
   if (f?.releasedAccess && q.released) return recordReleaseTest(m, q.released, old, next, f, ref);
   if (!click && q.selectionWitness) {
-    const access = observeRelease(s, m, old, next, ref);
+    const operand = f?.operandTest;
+    const observedRelease = outcome === 'independent_release_verified_with_a_different_material_return' ||
+      outcome === 'an_alternative_operand_released_the_subject_and_preserved_its_partner';
+    const access = operand && observedRelease
+      ? observeRelease(s, m, old, next, ref, operand.side, op)
+      : observeRelease(s, m, old, next, ref);
     if (access) q.released = access;
   }
   return outcome;

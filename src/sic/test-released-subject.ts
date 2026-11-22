@@ -6,11 +6,10 @@ import type { TransportForecast, TransportSide } from './transport-observations.
 
 export type ReleasedSubject = {
   side: TransportSide; site: number; held: number; before: number; after: number;
-  ticket: string; witness: string; attempted: string[];
+  ticket: string; witness: string; attempted: string[]; reverse?: string; former?: number[];
 };
 
-export function observeRelease(s: Scene, m: Learning, before: Reading, after: Reading, ref: string) {
-  const side = peer(before.active);
+export function observeRelease(s: Scene, m: Learning, before: Reading, after: Reading, ref: string, side = peer(before.active), cause?: string) {
   if (after.active !== before.active || before.subjects[side] === after.subjects[side]) return;
   const prior = walkingRegion(s, before, before.subjects[side]);
   if (prior.has(after.subjects[side])) return;
@@ -18,8 +17,10 @@ export function observeRelease(s: Scene, m: Learning, before: Reading, after: Re
   if (next.size <= prior.size || next.size < 2) return;
   const ticket = ['role-access', side, Math.min(...prior), Math.min(...next)].join('/');
   if (m.checked.includes(ticket)) return;
-  return { side, site: after.subjects[side], held: after.subjects[after.active], before: prior.size, after: next.size,
-    ticket, witness: ref, attempted: [] } satisfies ReleasedSubject;
+  const direction = cause && m.motors[cause];
+  const reverse = direction && Object.keys(m.motors).find(k => m.motors[k]!.dx === -direction.dx && m.motors[k]!.dy === -direction.dy);
+  return { side, site: after.subjects[side], held: after.subjects[peer(side)], before: prior.size, after: next.size,
+    ticket, witness: ref, attempted: [], ...(cause ? { former: [...prior] } : {}), ...(reverse ? {reverse} : {}) } satisfies ReleasedSubject;
 }
 
 export function releasedSubjectTest(s: Scene, m: Learning, v: Reading, access: ReleasedSubject, ref: string,
@@ -37,12 +38,12 @@ export function releasedSubjectTest(s: Scene, m: Learning, v: Reading, access: R
     // A probe with a measured direction is safe to try when all live models leave
     // the other subject in place. Otherwise calibrate a fresh public direction.
     const space = geometry(s), rivals = viableMotionLaws(m, side);
-    const directions = available.filter(op => /^ACTION[1-4]$/.test(op) && !access.attempted.includes(op));
+    const directions = available.filter(op => /^ACTION[1-4]$/.test(op) && op !== access.reverse && !access.attempted.includes(op));
     const trials = directions.flatMap(op => {
       if (!m.motors[op]) return [];
       const outcomes = rivals.map(h => imagine(s, space, v, op, m, h) ?? v);
       const moved = outcomes.find(a => a.subjects[side] !== site);
-      if (!moved || outcomes.some(a => a.subjects[peer(side)] !== held)) return [];
+      if (!moved || outcomes.some(a => a.subjects[peer(side)] !== held || access.former?.includes(a.subjects[side]))) return [];
       return [{ action: { op, moved }, predictions: [key(v), ...outcomes.map(key)] }];
     });
     const measured = chooseEffectExperiment(trials, 2);
@@ -65,9 +66,9 @@ export function recordReleaseTest(m: Learning, access: ReleasedSubject, v: Readi
   access.attempted.push(phase === 'select' ? 'select' : f.command);
   if (phase === 'select' && next.active === access.side && next.subjects.every((p, i) => p === v.subjects[i]))
     return 'selected_the_released_subject_without_moving_either';
-  if (phase === 'test' && next.active === access.side && next.subjects[access.side] !== access.site && next.subjects[peer(access.side)] === access.held) {
+  if (phase === 'test' && next.active === access.side && next.subjects[access.side] !== access.site && !access.former?.includes(next.subjects[access.side]) && next.subjects[peer(access.side)] === access.held) {
     m.checked.push(access.ticket);
-    m.strandedPartner = { side: peer(access.side), site: access.held, witness: ref };
+    if (!access.former) m.strandedPartner = { side: peer(access.side), site: access.held, witness: ref };
     m.refs = [...m.refs.slice(-5), ref];
     return 'independent_motion_in_the_new_region_verified';
   }

@@ -2,7 +2,8 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { anotherOperandTest } from '../src/sic/experiment-with-another-operand.ts';
 import { planDisplacements } from '../src/sic/plan-paired-displacements.ts';
-import { fresh, localEffects } from '../src/sic/paired-displacements.ts';
+import { observeRelease, releasedSubjectTest } from '../src/sic/test-released-subject.ts';
+import { fresh, localEffects, imagine, geometry } from '../src/sic/paired-displacements.ts';
 import type { Reading, Scene } from '../src/sic/paired-scene.ts';
 
 const room: Scene = {
@@ -41,6 +42,17 @@ test('a different movable operand can release a stranded subject while keeping t
   assert.ok(inert.checked.includes('operand/' + effect.key));
   assert.equal(anotherOperandTest(room,inert,selected,'after refusal',2,20), undefined);
   const released={...selected,subjects:[15,14],pieces:[0]} satisfies Reading;
+  const partial = structuredClone(m), observed = {...released,pieces:[]};
+  assert.equal(localEffects(room,partial,selected,observed,effect.command,'subject and peer witnessed',effect),
+    'independent_release_verified_with_a_different_material_return');
+  assert.equal(partial.strandedPartner,undefined);
+  assert.deepEqual(imagine(room,geometry(room),selected,effect.command,partial,'exchange')?.pieces,[]);
+  const nextTest = observeRelease(room,partial,selected,observed,'verified',1,effect.command)!;
+  assert.equal(nextTest.held,observed.subjects[0]);
+  assert.equal(nextTest.reverse,'ACTION1');
+  assert.equal(releasedSubjectTest(room,partial,observed,nextTest,'now','witness',['ACTION1']),undefined);
+  localEffects(room,partial,selected,released,effect.command,'now the part is visible');
+  assert.deepEqual(imagine(room,geometry(room),selected,effect.command,partial,'exchange')?.pieces,[0]);
   assert.equal(localEffects(room,m,selected,released,effect.command,'release',effect),'an_alternative_operand_released_the_subject_and_preserved_its_partner');
   assert.equal(m.strandedPartner,undefined);
 });

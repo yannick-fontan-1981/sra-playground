@@ -35,6 +35,7 @@ export type Learning = {
   previewPose?: string;
   visibleEffect?: Reading;
   visibleFeatures?: number[];
+  witnessedOperandReturns?: Record<string, { after: Reading; ref: string }>;
   strandedPartner?: import('./experiment-with-another-operand.ts').StrandedPartner;
   witnessedEntries?: { side: TransportSide; source: number; site: number; ref: string }[];
   denied: Record<string, number>;
@@ -61,6 +62,7 @@ export const md = (s: Scene, a: number, b: number) =>
   Math.abs((a % s.grid.columns) - (b % s.grid.columns)) +
   Math.abs(Math.floor(a / s.grid.columns) - Math.floor(b / s.grid.columns));
 export const key = (v: Reading) => poseId(v);
+const operandContext = (v: Reading, op: string) => [key(v), v.anchor, v.opened.join(','), op].join('|');
 export function law(m: Learning, side: TransportSide): Law {
   const defaults: Law[] =
     side === 1 && m.scope
@@ -228,6 +230,8 @@ export function imagine(
   n.pieces.sort((u, w) => u - w);
   n.supports.sort((u, w) => u - w);
   n.opened = s.doors.filter((d) => space.open(n, d.site)).map((d) => d.site);
+  const observed = m.witnessedOperandReturns?.[operandContext(v, op)];
+  if (observed && observed.after.subjects.every((p, i) => p === n.subjects[i])) return observed.after;
   return key(n) === key(v) ? undefined : n;
 }
 export function localEffects(
@@ -243,6 +247,9 @@ export function localEffects(
     from = b.subjects[side],
     to = a.subjects[side],
     w = s.grid.columns;
+  const previousReturn = m.witnessedOperandReturns?.[operandContext(b, op)];
+  if (previousReturn && operandContext(previousReturn.after, op) !== operandContext(a, op))
+    delete m.witnessedOperandReturns![operandContext(b, op)];
   if (/^ACTION[1-4]$/.test(op)) {
     const dx = (to % w) - (from % w),
       dy = Math.floor(to / w) - Math.floor(from / w);
@@ -308,15 +315,23 @@ export function localEffects(
   if (f) {
     if (f.operandTest) {
       delete m.plan;
+      const release = f.operandTest;
+      if (release.steps === 0 && a.active === release.side && a.subjects[release.side] === release.operand &&
+          a.subjects[peer(release.side)] === b.subjects[peer(release.side)]) {
+        delete m.strandedPartner;
+        m.refs = [...m.refs.slice(-5), ref];
+        if (key(a) !== poseId(f.expected)) {
+          (m.witnessedOperandReturns ??= {})[operandContext(b, op)] = { after: a, ref };
+          return 'independent_release_verified_with_a_different_material_return';
+        }
+        return 'an_alternative_operand_released_the_subject_and_preserved_its_partner';
+      }
       if (key(a) !== poseId(f.expected)) {
         if (!m.checked.includes('operand/' + f.key)) m.checked.push('operand/' + f.key);
         if (!f.operandTest.steps && key(a) === f.operandTest.stayed) return 'the_alternative_operand_left_the_subject_confined';
         return f.operandTest.steps ? 'the_alternative_operand_preparation_was_refuted' : 'the_alternative_operand_had_a_different_effect';
       }
-      if (f.operandTest.steps > 0) return 'the_alternative_operand_preparation_matched';
-      delete m.strandedPartner;
-      m.refs = [...m.refs.slice(-5), ref];
-      return 'an_alternative_operand_released_the_subject_and_preserved_its_partner';
+      return 'the_alternative_operand_preparation_matched';
     }
     if (f.releasedAccess) {
       delete m.plan;
@@ -402,6 +417,7 @@ export function forecast(
 ): TransportForecast {
   const command =
     op === 'select' ? pointCommand(s.grid, v.subjects[peer(v.active)]) : op;
+  const measuredReturn = m.witnessedOperandReturns?.[operandContext(v, command)];
   return {
     purpose: why,
     paired: {
@@ -418,6 +434,7 @@ export function forecast(
       ...new Set([
         ref,
         ...m.refs,
+        ...(measuredReturn ? [measuredReturn.ref] : []),
         ...(m.scope ? [m.scope] : []),
         ...(m.carry ? [m.carry] : []),
       ]),
