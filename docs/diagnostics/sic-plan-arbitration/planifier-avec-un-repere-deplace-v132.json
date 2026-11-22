@@ -85,6 +85,66 @@
     }
   ],
   "independentDiagnosis": "effets-composes-et-selection-v131.json",
+  "selfSelectedExperimentsAndReuse": [
+    {
+      "action": 2,
+      "publicBefore": "85db8bba53361e51",
+      "publicAfter": "4e8f0440a85b4a37",
+      "input": 6,
+      "question": "compare_which_subject_responds_to_a_witnessed_motor_after_selection",
+      "observedResult": "selection_changed_pending_motor"
+    },
+    {
+      "action": 3,
+      "publicBefore": "4e8f0440a85b4a37",
+      "publicAfter": "a200ff88e777ddf3",
+      "input": 1,
+      "question": "test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays",
+      "observedResult": "new_cursor_moved_while_previous_cursor_stayed"
+    },
+    {
+      "action": 4,
+      "publicBefore": "a200ff88e777ddf3",
+      "publicAfter": "475dc8f99db50bcf",
+      "input": 1,
+      "question": "reuse_measured_control_preserving_the_parked_subject",
+      "observedResult": "advanced_selected_subject_preserving_previous_placement"
+    },
+    {
+      "action": 38,
+      "publicBefore": "2de66dd27a84e578",
+      "publicAfter": "b7625317b2aaa21e",
+      "input": 2,
+      "question": "identify_a_motion_effect_needed_to_plan",
+      "observedResult": "motion_test_discriminated_public_effects",
+      "competingPredictions": [
+        {
+          "law": "exchange",
+          "pose": "1/125,251/131//144"
+        },
+        {
+          "law": "clear_path_exchange",
+          "pose": "1/125,131/251//144"
+        }
+      ]
+    },
+    {
+      "action": 50,
+      "publicBefore": "cf9b40d8e7fbb349",
+      "publicAfter": "86782b308330ab7e",
+      "input": 6,
+      "question": "test_whether_a_passage_requires_the_holder_to_remain_selected",
+      "observedResult": "the_unselected_holder_kept_the_passage_open",
+      "competingPredictions": [
+        "same_positions_and_the_passage_stays_open",
+        "same_positions_and_the_passage_closes"
+      ],
+      "changeOfControlledSubject": true,
+      "stationaryBodiesAndMaterial": true,
+      "passageObservedOpenBeforeAndAfter": true,
+      "passageUncovered": true
+    }
+  ],
   "transitionToSolving": {
     "game": "SS11",
     "issued": 77,
@@ -162,9 +222,255 @@
       "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
       "earnedTransitions": []
+    },
+    {
+      "game": "SS11",
+      "entry": [
+        3,
+        3
+      ],
+      "budget": 350,
+      "baseline": "exchanged-landmark-S11-v132",
+      "candidate": "SS11-without-simulated-landmark-exchange",
+      "before": [
+        {
+          "level": 3,
+          "actions": 77,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 3,
+          "actions": 350,
+          "won": false
+        }
+      ],
+      "initial": "7f6fde6adab470b27f71780b8e5793d8e6b680212e915ccaae652c15bee27a23",
+      "matchingPrefix": 41,
+      "identicalTrajectory": false,
+      "firstDifferentCommandOrImage": 42,
+      "lastState": "session_action_budget",
+      "publicTraceDigest": "a50e36bdb940c2aa749dd2f59615fd351585e59841d67747ecf477710800e24b",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
     }
   ],
-  "otherThirdLevels": [],
+  "exchangedShapeVisibility": {
+    "exchanges": [
+      {
+        "action": 46,
+        "actualCommand": 3,
+        "origin": "42289648cd2526e8",
+        "expectedDestination": 147,
+        "unchangedCopies": 1,
+        "destinationMatchesMark": true,
+        "destinationMatchesInitialForm": false,
+        "knownUncoveredDestination": true,
+        "destinationMatchesKnownUncovered": false,
+        "destinationIsADeclaredControl": false,
+        "destinationForm": "d80ddcff6633",
+        "differentPixels": 0,
+        "perInk": [
+          {
+            "pixels": 5,
+            "preserved": 5,
+            "alsoInKnownSubstrate": 0
+          },
+          {
+            "pixels": 4,
+            "preserved": 4,
+            "alsoInKnownSubstrate": 0
+          }
+        ]
+      },
+      {
+        "action": 53,
+        "actualCommand": 4,
+        "origin": "287a2f01763b4c23",
+        "expectedDestination": 145,
+        "unchangedCopies": 0,
+        "destinationMatchesMark": false,
+        "destinationMatchesInitialForm": false,
+        "knownUncoveredDestination": true,
+        "destinationMatchesKnownUncovered": false,
+        "destinationIsADeclaredControl": true,
+        "destinationForm": "07b111318615",
+        "differentPixels": 4,
+        "perInk": [
+          {
+            "pixels": 5,
+            "preserved": 1,
+            "alsoInKnownSubstrate": 0
+          },
+          {
+            "pixels": 4,
+            "preserved": 4,
+            "alsoInKnownSubstrate": 0
+          }
+        ]
+      }
+    ],
+    "lastAppearance": {
+      "action": 52,
+      "occurrences": 1
+    },
+    "zeroAfterSecond": 25
+  },
+  "declarativeComparison": {
+    "game": "SS11",
+    "entry": [
+      3,
+      3
+    ],
+    "budget": 350,
+    "baseline": "exchanged-landmark-S11-v132",
+    "candidate": "compare-landmark-three-v132",
+    "before": [
+      {
+        "level": 3,
+        "actions": 77,
+        "won": true
+      }
+    ],
+    "after": [
+      {
+        "level": 3,
+        "actions": 349,
+        "won": false
+      }
+    ],
+    "initial": "7f6fde6adab470b27f71780b8e5793d8e6b680212e915ccaae652c15bee27a23",
+    "matchingPrefix": 1,
+    "identicalTrajectory": false,
+    "firstDifferentCommandOrImage": 2,
+    "lastState": "native_game_over",
+    "publicTraceDigest": "4c9113b0718f118a5bdf24e92a8fb372abe5a144e59053c189c281d1f8059c35",
+    "pack": "535e3d2add3261bb4fca20014ae802773553ef8a05c266208e9c571b5c12292d",
+    "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+    "earnedTransitions": [],
+    "minimumOutcomes": [
+      2,
+      3
+    ],
+    "twoOutcomes": {
+      "action": 6,
+      "family": "sic_test_prepared_effects",
+      "reason": null,
+      "fields": [],
+      "phase": "selectMarkedCursor",
+      "return": "selection_changed_pending_motor",
+      "question": "compare_which_subject_responds_to_a_witnessed_motor_after_selection",
+      "controlTests": [
+        {
+          "action": 2,
+          "phase": "selectMarkedCursor",
+          "result": "selection_changed_pending_motor"
+        },
+        {
+          "action": 3,
+          "phase": "verifyMarkedCursor",
+          "result": "new_cursor_moved_while_previous_cursor_stayed"
+        }
+      ],
+      "registeredMotionTests": 1,
+      "registeredPassageSelectionTests": 1,
+      "terminalReason": "target_levels_completed"
+    },
+    "threeOutcomes": {
+      "action": 3,
+      "family": "sic_public_input_exploration",
+      "reason": null,
+      "fields": [],
+      "phase": null,
+      "return": null,
+      "question": null,
+      "controlTests": [
+        {
+          "action": 250,
+          "phase": "selectMarkedCursor",
+          "result": "cursor_mark_prediction_refuted"
+        },
+        {
+          "action": 251,
+          "phase": "verifyMarkedCursor",
+          "result": "cursor_control_unconfirmed"
+        }
+      ],
+      "registeredMotionTests": 0,
+      "registeredPassageSelectionTests": 0,
+      "terminalReason": "native_game_over"
+    }
+  },
+  "otherThirdLevels": [
+    {
+      "game": "SS10",
+      "entry": [
+        3,
+        3
+      ],
+      "budget": 350,
+      "baseline": "joint-physics-S10-v130",
+      "candidate": "joint-upper-v132",
+      "before": [
+        {
+          "level": 3,
+          "actions": 81,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 3,
+          "actions": 81,
+          "won": true
+        }
+      ],
+      "initial": "af1ecd112ba1854e0c9f56ad6815a078065ba1a5abef179b9f6427ab0f92f081",
+      "matchingPrefix": 81,
+      "identicalTrajectory": true,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "target_levels_completed",
+      "publicTraceDigest": "948ef82959d0b7af6cc413a06944f6d0a014d9c2fe3720246eaef71db73bf11e",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
+    },
+    {
+      "game": "SS13",
+      "entry": [
+        3,
+        3
+      ],
+      "budget": 350,
+      "baseline": "joint-physics-S13-v130",
+      "candidate": "joint-upper-v132",
+      "before": [
+        {
+          "level": 3,
+          "actions": 176,
+          "won": true
+        }
+      ],
+      "after": [
+        {
+          "level": 3,
+          "actions": 176,
+          "won": true
+        }
+      ],
+      "initial": "067812d339b78a00caaad721975ef2aa30ba0295778fea2f12412e3d9fa3c4c3",
+      "matchingPrefix": 176,
+      "identicalTrajectory": true,
+      "firstDifferentCommandOrImage": null,
+      "lastState": "target_levels_completed",
+      "publicTraceDigest": "477583113dc2460a64d6f8caa8984825cb98fb5b688a5771d7558ac54a319260",
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "earnedTransitions": []
+    }
+  ],
   "warmL2ToL3": [],
   "sourceL1": {
     "evaluated": 0,
@@ -172,5 +478,33 @@
     "sameCommandsAndImages": 0,
     "games": []
   },
-  "customL2Protection": []
+  "customL2Protection": [],
+  "reproduction": {
+    "runtime": "Node.js 24",
+    "policy": "sic-plan-with-exchanged-landmarks-v132",
+    "controlPolicy": "sic-test-selection-while-holding-v131",
+    "environment": {
+      "SIC_STUDY_WORKERS": "1",
+      "SIC_STUDY_RECORD_COMMANDS": "1",
+      "SIC_STUDY_RECOVERY_PACK": "docs/diagnostics/sic-plan-arbitration/apprendre-la-portee-du-controle-v105.json"
+    },
+    "nativeRun": [
+      "scripts/compare-source100.mjs",
+      "<policy-checkout>",
+      "<same-engine-checkout>",
+      "<fresh-tape.jsonl>",
+      "SS11",
+      "3",
+      "3",
+      "350",
+      "0/1"
+    ],
+    "officialReplay": [
+      "scripts/verify-frozen-level-scores.mjs",
+      "<same-engine-checkout>",
+      "<certificate.json>",
+      "<fresh-tape.jsonl>"
+    ],
+    "ablationProtocol": "Start from the tagged policy; apply exactly the recorded single substitution per arm before evaluating. The official replay uses the same untouched engine."
+  }
 }
