@@ -1,0 +1,255 @@
+{
+  "protocol": "SIC Fallback, credit earned in a continuous autonomous campaign starting at L1, prior levels won in the same certified tape; best per game and level across historically qualified packs",
+  "denominator": 42,
+  "wonByLevel": {
+    "1": [
+      "SS01",
+      "SS02",
+      "SS03",
+      "SS04",
+      "SS05",
+      "SS07",
+      "SS12",
+      "SS13",
+      "SS14"
+    ],
+    "2": [
+      "SS01",
+      "SS02",
+      "SS03",
+      "SS04",
+      "SS05",
+      "SS12",
+      "SS13",
+      "SS14"
+    ],
+    "3": []
+  },
+  "reachedByLevel": {
+    "1": [
+      "SS01",
+      "SS02",
+      "SS03",
+      "SS04",
+      "SS05",
+      "SS07",
+      "SS12",
+      "SS13",
+      "SS14"
+    ],
+    "2": [
+      "SS01",
+      "SS02",
+      "SS03",
+      "SS04",
+      "SS05",
+      "SS07",
+      "SS12",
+      "SS13",
+      "SS14"
+    ],
+    "3": [
+      "SS01",
+      "SS13",
+      "SS14"
+    ]
+  },
+  "evidence": {
+    "SS01": {
+      "1": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 36,
+        "won": true,
+        "digest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+      },
+      "2": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 32,
+        "won": true,
+        "digest": "92e81b3f686650eab5631b1d67f05760851d2f09781888d6e8024463532963ee"
+      },
+      "3": {
+        "certificate": "serial-audit-custom-silent-input-ordering-custom-SS01-1-3-v144.json",
+        "solver": "v144",
+        "actions": 100,
+        "won": false,
+        "digest": "0f685298b567522915ff9ced7eb1cebc31daf82e0202c6346b17826f64933cf3"
+      }
+    },
+    "SS02": {
+      "1": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 40,
+        "won": true,
+        "digest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7"
+      },
+      "2": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 46,
+        "won": true,
+        "digest": "75dbd44bb2e3fcd2bc9d5de29c2f5e00796e40c4327915854750e123a7c4bbc7"
+      },
+      "3": null
+    },
+    "SS03": {
+      "1": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 47,
+        "won": true,
+        "digest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17"
+      },
+      "2": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 97,
+        "won": true,
+        "digest": "86bc96aa890147e1c90d9558994f554f397856deb0c72c05760c072330f18b17"
+      },
+      "3": null
+    },
+    "SS04": {
+      "1": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 49,
+        "won": true,
+        "digest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f"
+      },
+      "2": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 143,
+        "won": true,
+        "digest": "e14d2644894f404b025bf341f6e32c85a2daf5a56001e141641da18f9c2b563f"
+      },
+      "3": null
+    },
+    "SS05": {
+      "1": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 44,
+        "won": true,
+        "digest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57"
+      },
+      "2": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 73,
+        "won": true,
+        "digest": "7e3fc299dc0394e9d448ffd5e805257eb2c1a1a8f092bfd3788c9b54931f9e57"
+      },
+      "3": null
+    },
+    "SS06": {
+      "1": null,
+      "2": null,
+      "3": null
+    },
+    "SS07": {
+      "1": {
+        "certificate": "serial-audit-custom-silent-input-reconsider-custom-SS07-1-3-v139.json",
+        "solver": "v139",
+        "actions": 60,
+        "won": true,
+        "digest": "62866f5f4454eec45c9ea380cc8f03227ff309b980c4d80644a976292453e7ce"
+      },
+      "2": {
+        "certificate": "serial-audit-custom-silent-input-reconsider-custom-SS07-1-3-v139.json",
+        "solver": "v139",
+        "actions": 350,
+        "won": false,
+        "digest": "62866f5f4454eec45c9ea380cc8f03227ff309b980c4d80644a976292453e7ce"
+      },
+      "3": null
+    },
+    "SS08": {
+      "1": null,
+      "2": null,
+      "3": null
+    },
+    "SS09": {
+      "1": null,
+      "2": null,
+      "3": null
+    },
+    "SS10": {
+      "1": null,
+      "2": null,
+      "3": null
+    },
+    "SS11": {
+      "1": null,
+      "2": null,
+      "3": null
+    },
+    "SS12": {
+      "1": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 64,
+        "won": true,
+        "digest": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f"
+      },
+      "2": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 30,
+        "won": true,
+        "digest": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f"
+      },
+      "3": null
+    },
+    "SS13": {
+      "1": {
+        "certificate": "serial-audit-custom-silent-input-positional-custom-SS13-1-2-v141.json",
+        "solver": "v141",
+        "actions": 98,
+        "won": true,
+        "digest": "9da0a37f394044b4677b0a520c2c4835c8b63405d45070a3eb224414161d0ced"
+      },
+      "2": {
+        "certificate": "baseline-certified-custom-v109.json",
+        "solver": "v109",
+        "actions": 36,
+        "won": true,
+        "digest": "1bd5970de81c24a9edac4618ca0c999cccc5b9214c16bed7ac5b8f49d0637a64"
+      },
+      "3": {
+        "certificate": "baseline-certified-custom-v109.json",
+        "solver": "v109",
+        "actions": 277,
+        "won": false,
+        "digest": "1bd5970de81c24a9edac4618ca0c999cccc5b9214c16bed7ac5b8f49d0637a64"
+      }
+    },
+    "SS14": {
+      "1": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 31,
+        "won": true,
+        "digest": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3"
+      },
+      "2": {
+        "certificate": "lesson109-certified.json",
+        "solver": "v109",
+        "actions": 52,
+        "won": true,
+        "digest": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3"
+      },
+      "3": {
+        "certificate": "serial-audit-custom-silent-input-ordering-custom-SS14-1-3-v144.json",
+        "solver": "v144",
+        "actions": 100,
+        "won": false,
+        "digest": "9246e0787d64c09ebf1976c93c5ecd16e23d2b9868e0d9ac8311064945ef54ca"
+      }
+    }
+  }
+}

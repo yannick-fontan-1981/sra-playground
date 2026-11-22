@@ -1,0 +1,258 @@
+{
+  "solver": "sic-fallback",
+  "candidateCommit": "5619e167647afe609ec52743f5cb0cedc70830f8",
+  "workers": 1,
+  "campaignStartsAt": 1,
+  "availableLevels": [
+    1,
+    2,
+    3
+  ],
+  "sourceGames": 100,
+  "customGames": 15,
+  "reservedCustom": "SS10",
+  "pairs": [
+    {
+      "game": "AS66",
+      "backend": "source",
+      "budget": 60,
+      "arms": {
+        "ordering": {
+          "pack": "0e262e0eaf693a6c959d33669b2aa8d4ca700ee36f43605e0c5f98dea13a639b",
+          "actionsBySIC": 79,
+          "certificate": "serial-audit-source-silent-input-ordering-source-AS66-1-3-v144.json",
+          "certificateDigests": [
+            "dcd520d2c2f3e7871669c883596bd6c6f21c206d518f68d7e6a19357e6d61aa4",
+            "3a74954ceaa0ce6a6ac11982eb1fb7cff9214672efc36350977bcd2ed3f59c60"
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "actions": 19,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 60,
+              "won": false
+            }
+          ],
+          "measuredProbes": 14,
+          "changedMotion": 6,
+          "testsCitingPreviousDiscovery": 0,
+          "firstMeasurement": {
+            "decision": 8,
+            "sameOrigin": "f7b0a6951802004b",
+            "observedOrder": [
+              "ACTION3",
+              "ACTION2"
+            ],
+            "probe": "ACTION4",
+            "paidActions": [
+              2,
+              3,
+              4
+            ],
+            "changes": [
+              {
+                "role": "f87789a0a57dd5784bd004f19dbe844843f19fa56d5906f7a65fa5455ed17bfa",
+                "original": [
+                  0,
+                  0
+                ],
+                "reversed": [
+                  16,
+                  0
+                ]
+              }
+            ]
+          }
+        },
+        "registration": {
+          "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+          "actionsBySIC": 94,
+          "certificate": "serial-audit-source-silent-input-registration-source-AS66-1-3-v144.json",
+          "certificateDigests": [
+            "3863a9f4ec32ebda6c0ff77005672d5e46fb0230538a9f4fb2b0a33087a59cd0",
+            "5d03e39e614757745d63756ef2e7d77c41614e5543da7b45e9235d428ec50136",
+            "8003ba2fb5385cc168ea1ae3057c36395d7af5331606a3a09bf44e2c44a5b99f"
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "actions": 11,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 23,
+              "won": true
+            },
+            {
+              "level": 3,
+              "actions": 60,
+              "won": false
+            }
+          ],
+          "measuredProbes": 0,
+          "changedMotion": 0,
+          "testsCitingPreviousDiscovery": 0
+        }
+      },
+      "commonPrefix": 5,
+      "firstDivergence": {
+        "decision": 6,
+        "witness": 4,
+        "candidate": 2
+      }
+    },
+    {
+      "game": "SS01",
+      "backend": "custom",
+      "budget": 100,
+      "arms": {
+        "ordering": {
+          "pack": "0e262e0eaf693a6c959d33669b2aa8d4ca700ee36f43605e0c5f98dea13a639b",
+          "actionsBySIC": 194,
+          "certificate": "serial-audit-custom-silent-input-ordering-custom-SS01-1-3-v144.json",
+          "certificateDigests": [
+            "0f685298b567522915ff9ced7eb1cebc31daf82e0202c6346b17826f64933cf3"
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "actions": 62,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 32,
+              "won": true
+            },
+            {
+              "level": 3,
+              "actions": 100,
+              "won": false
+            }
+          ],
+          "measuredProbes": 18,
+          "changedMotion": 0,
+          "testsCitingPreviousDiscovery": 0,
+          "firstMeasurement": {
+            "decision": 11,
+            "sameOrigin": "d0d1fa9cf52da959",
+            "observedOrder": [
+              "ACTION3",
+              "ACTION2"
+            ],
+            "probe": "ACTION4",
+            "paidActions": [
+              2,
+              3,
+              4
+            ],
+            "changes": []
+          }
+        },
+        "registration": {
+          "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+          "actionsBySIC": 168,
+          "certificate": "serial-audit-custom-silent-input-registration-custom-SS01-1-3-v144.json",
+          "certificateDigests": [
+            "d31603b0880620caea67e9c38bf7da8cefafff57a097b35f5b007e5d08013476"
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "actions": 36,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 32,
+              "won": true
+            },
+            {
+              "level": 3,
+              "actions": 100,
+              "won": false
+            }
+          ],
+          "measuredProbes": 0,
+          "changedMotion": 0,
+          "testsCitingPreviousDiscovery": 0
+        }
+      },
+      "commonPrefix": 8,
+      "firstDivergence": {
+        "decision": 9,
+        "witness": 1,
+        "candidate": 2
+      }
+    },
+    {
+      "game": "SS14",
+      "backend": "custom",
+      "budget": 100,
+      "arms": {
+        "ordering": {
+          "pack": "0e262e0eaf693a6c959d33669b2aa8d4ca700ee36f43605e0c5f98dea13a639b",
+          "actionsBySIC": 183,
+          "certificate": "serial-audit-custom-silent-input-ordering-custom-SS14-1-3-v144.json",
+          "certificateDigests": [
+            "9246e0787d64c09ebf1976c93c5ecd16e23d2b9868e0d9ac8311064945ef54ca"
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "actions": 31,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 52,
+              "won": true
+            },
+            {
+              "level": 3,
+              "actions": 100,
+              "won": false
+            }
+          ],
+          "measuredProbes": 0,
+          "changedMotion": 0,
+          "testsCitingPreviousDiscovery": 0
+        },
+        "registration": {
+          "pack": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+          "actionsBySIC": 183,
+          "certificate": "serial-audit-custom-silent-input-registration-custom-SS14-1-3-v144.json",
+          "certificateDigests": [
+            "9246e0787d64c09ebf1976c93c5ecd16e23d2b9868e0d9ac8311064945ef54ca"
+          ],
+          "levels": [
+            {
+              "level": 1,
+              "actions": 31,
+              "won": true
+            },
+            {
+              "level": 2,
+              "actions": 52,
+              "won": true
+            },
+            {
+              "level": 3,
+              "actions": 100,
+              "won": false
+            }
+          ],
+          "measuredProbes": 0,
+          "changedMotion": 0,
+          "testsCitingPreviousDiscovery": 0
+        }
+      },
+      "commonPrefix": 183
+    }
+  ]
+}

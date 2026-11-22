@@ -1,0 +1,125 @@
+{
+  "criterion": "Official source credits for L1 then L2 then L3 in the same SIC Fallback campaign starting at L1. Direct entry, archived lessons and palette transformations excluded.",
+  "denominator": 100,
+  "reachedGames": [
+    "AMZE",
+    "AS66",
+    "CASC",
+    "CATL",
+    "CATR",
+    "CAVA",
+    "CGWL",
+    "CLRS",
+    "COLM",
+    "GABA"
+  ],
+  "winningGames": [
+    "AMZE",
+    "CATL",
+    "CATR",
+    "CAVA",
+    "CGWL",
+    "CLRS",
+    "GABA"
+  ],
+  "evidence": {
+    "AMZE": {
+      "certificate": "baseline-certified-source-v109.json",
+      "actions": [
+        3,
+        5,
+        6
+      ],
+      "cap": 120,
+      "commandDigests": [
+        "78eec88a9eb86337f0aa1639482f5d39b2b74d3d75f9e99ad0f499ce8ba51ad5",
+        "6fed65230ee7a0623c8e8bd35474af3ce810dc09f7adc80fa26a58ba92b5fba9",
+        "484091625a4252c283d72bc417ab857d5698865032ec16eb465c6915342b3bfe"
+      ]
+    },
+    "CATL": {
+      "certificate": "baseline-certified-source-v109.json",
+      "actions": [
+        8,
+        8,
+        8
+      ],
+      "cap": 120,
+      "commandDigests": [
+        "8a51a548dca646abe543c0acdb45e8949307dea60e559072d3d8e5732743f02f",
+        "78ea859ff2e56316acb0c8901d3001ecf63592b18b6ce820040801e2cbde6337",
+        "8d6913afb3e5e9cfd5e84f5dc759a31c2858a00da7865e40357d8d7b8945ebb8"
+      ]
+    },
+    "CATR": {
+      "certificate": "baseline-certified-source-v109.json",
+      "actions": [
+        32,
+        4,
+        5
+      ],
+      "cap": 120,
+      "commandDigests": [
+        "463f0b518f9e71b1dbed69fb23f4185974d4223bfb4d7259632be64f8a348140",
+        "b47c82067d70dfce1e3aa91e55ac60dfcb13cb46c71df9ceda0d6b0e139dcfe2",
+        "936d363cb7170dc418c2cab5d397135e5347f3503ace72548da6638e70431086"
+      ]
+    },
+    "CAVA": {
+      "certificate": "baseline-certified-source-v109.json",
+      "actions": [
+        7,
+        12,
+        19
+      ],
+      "cap": 120,
+      "commandDigests": [
+        "36a61b1fad53afeb6cfcaa2c4ed775330f38591478dfe38e44d5aecb5546fe19",
+        "bf65d40ff95c38af9bb317a087fe87adb99c91578a05739189234ccbfd3d78b1",
+        "ea8395d05f2b882215aee9f1305e02729d426c91f5e02461dba6e9394bfee6db"
+      ]
+    },
+    "CGWL": {
+      "certificate": "serial-audit-source-source-contact-v114.json",
+      "actions": [
+        15,
+        33,
+        36
+      ],
+      "cap": 120,
+      "commandDigests": [
+        "726beffe364e1c2a7b90f271308909d867f9aa57d93b1db9d1c55faf001858c8",
+        "e07d0b6d1545b14a5d40fb8789454019cca58815fca7e3e82bc14e59f6005530",
+        "dff74dbcdc68a91987a1126e51798d9eb6ec3558641639dad36045b987fc559c"
+      ]
+    },
+    "CLRS": {
+      "certificate": "baseline-certified-source-v109.json",
+      "actions": [
+        17,
+        10,
+        13
+      ],
+      "cap": 120,
+      "commandDigests": [
+        "7ef8e4c1d4ab24ac7b9c31167125cdf9cbe49f061c225fbca8ede238bd946eb5",
+        "6747dd446e130236638559b5842f7833384472b4abb78d451996706e5677a1f3",
+        "830358bf9e7d6fbb27bc3413536df228113b4e8eb5a85308cd439989932fa138"
+      ]
+    },
+    "GABA": {
+      "certificate": "serial-audit-source-silent-input-mechanism-source-GABA-1-3-v137.json",
+      "actions": [
+        49,
+        50,
+        85
+      ],
+      "cap": 120,
+      "commandDigests": [
+        "79961319a87ec4b2d761c22eb5d44df148b81a22882ba18e08ab0604903d8e4a",
+        "9b1ed34d8b32edc71088ce8fb52c59bcba090066724ec728fa61aeaff189bca4",
+        "f1cd0685ece175fa3f220a80a21ace573eb6fecfdc2de86ebcf87d2ea7b923e5"
+      ]
+    }
+  }
+}

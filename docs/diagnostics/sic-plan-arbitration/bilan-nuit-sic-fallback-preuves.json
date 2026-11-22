@@ -1,0 +1,240 @@
+{
+  "period": [
+    "2026-11-21T20:00:00-03:00",
+    "2026-11-22T08:00:00-03:00"
+  ],
+  "firstParentCommits": 76,
+  "commits": [
+    "191697e43 2026-11-22 07:57:47 -0300 Preserve the selected SIC solver when editing an experiment pack",
+    "0bef5be3f 2026-11-22 07:50:51 -0300 Test aligned terrain fragments against a witnessed movement before planning",
+    "aaa3e8296 2026-11-22 07:42:00 -0300 Isolate the SS07 win to the experiment chosen by v128 at move eleven",
+    "54185363a 2026-11-22 07:36:35 -0300 Measure the new experiment selected after the second conflicting public return",
+    "47121f32f 2026-11-22 07:23:59 -0300 Verify autonomous SS07 L1 and GABA L3 wins and isolate uninformative preparations",
+    "ed66bc5d4 2026-11-22 07:19:17 -0300 Change a mechanism experiment after repeated identical conflicting returns",
+    "4d09dbf25 2026-11-22 07:09:11 -0300 Test what the same control does after a witnessed transport",
+    "33b5644d3 2026-11-22 06:52:15 -0300 Verify both pre-action motion predictions on the identical official trajectory",
+    "9d3e275ba 2026-11-22 06:50:50 -0300 Locate the SS06 gain in v128 and certify the GABA campaign",
+    "390c4fa09 2026-11-22 06:40:17 -0300 Record two autonomous experiments confirming conditional transport on separate axes",
+    "2ae046676 2026-11-22 06:36:52 -0300 Expose both motion predictions in the public release receipt",
+    "41ea6fd44 2026-11-22 06:34:05 -0300 Verify the first SS06 L3 victory and isolate the motion question at action 82",
+    "ecdf0a232 2026-11-22 06:30:03 -0300 Choose a witnessed movement that distinguishes a fixed mark from a transported part",
+    "45803a32c 2026-11-22 06:24:39 -0300 Document native outcomes and the first arbitration divergence on UPST",
+    "37cb7aea7 2026-11-22 06:13:34 -0300 Prefer a one-step unseen configuration to repeating an experimental setup",
+    "6ed4c5c87 2026-11-22 06:05:49 -0300 Qualify autonomous hypothesis selection on two source games with matched controls and native scores",
+    "9a56dbfd8 2026-11-22 05:50:19 -0300 Let the pack ask whether a silent input becomes effective after a witnessed preparation",
+    "0944a9e3f 2026-11-22 05:28:29 -0300 Replay a source win after a failed contact and compare public preparations against their controls",
+    "db21110b6 2026-11-22 05:16:47 -0300 Release a repeated approach when arriving twice fails to remove its target",
+    "228520dd8 2026-11-22 05:03:11 -0300 Measure three self-chosen experiments before a complete plan and isolate the evidence threshold",
+    "0d646a156 2026-11-22 04:48:59 -0300 Certify autonomous SS11 L3 and isolate the change of spatial access",
+    "d8fa28915 2026-11-22 04:39:06 -0300 Plan with an unclassified landmark after witnessing it trade places with a subject",
+    "5d3c6098c 2026-11-22 04:36:22 -0300 Compare component forecasts with public returns and replay the failing arrival",
+    "5ddd0d5b9 2026-11-22 04:36:21 -0300 Carry SIC across earned levels in direct-entry study campaigns",
+    "7ee319d69 2026-11-22 04:18:18 -0300 Separate control transfer from the persistence of a held passage",
+    "bd028f498 2026-11-22 04:05:00 -0300 Qualify all 114 preserved wins and the handoff to autonomous solving",
+    "074ab8162 2026-11-22 03:46:05 -0300 Isolate the first unverified gate forecast on the independent level",
+    "5b14d9d64 2026-11-22 03:34:33 -0300 Isolate command-independent returns with a winning source counterexample",
+    "c645627be 2026-11-22 03:30:22 -0300 Verify both Custom third levels on the source-contact candidate",
+    "eaffa7cc6 2026-11-22 03:11:16 -0300 Certify the SKBN source win against a genuinely reacting target",
+    "51b63fdd7 2026-11-22 03:06:53 -0300 Let contact-only displacement reopen the mechanism inquiry",
+    "46ab763b5 2026-11-22 03:01:58 -0300 Qualify the experiment across two thresholds and a different physical law",
+    "8e652d1f2 2026-11-22 02:54:51 -0300 Yield when the same public position refutes immediate contact",
+    "62a0a834e 2026-11-22 02:51:28 -0300 Certify the cold SS10 third level and isolate the two causal trials",
+    "6ad8e1d89 2026-11-22 02:44:08 -0300 Compare unknown effects after independently verifying who responds",
+    "8085c6a5a 2026-11-22 02:34:29 -0300 Confirm the configured transfer limit on the final frozen candidate",
+    "9168f1900 2026-11-22 02:23:40 -0300 Certify 100 source L1 and all 14 Custom 4 L2 on the SS13 L3 winner",
+    "28c12feae 2026-11-22 01:41:35 -0300 Verify the preserved selection experiment and the level 3 win on one frozen solver",
+    "d859c8f48 2026-11-22 01:36:43 -0300 Finish the chosen control experiment before a marker change starts another inquiry",
+    "64d20ef20 2026-11-22 01:17:46 -0300 Compare declarative choices on the decisive public frame and verify six campaign wins",
+    "b634d2516 2026-11-22 01:14:11 -0300 Check the opening experiment in an independent push-only room",
+    "04b4b8d46 2026-11-22 01:11:09 -0300 Certify the first autonomous Custom 4 level 3 win after the controller-chosen experiment",
+    "a7b5f42fb 2026-11-22 01:06:57 -0300 Test whether material can maintain access while both subjects pursue their goals",
+    "3217cdc98 2026-11-22 01:00:34 -0300 Verify the capacity being tested independently of an unexplained material return",
+    "f0c780c69 2026-11-22 00:56:33 -0300 Measure which unknown effects SIC actually tests before it has a solution",
+    "c2d0bb398 2026-11-22 00:50:33 -0300 Choose a movable substitute to test a stranded subject's observed capacity",
+    "cc1f3c990 2026-11-22 00:35:46 -0300 Learn which repeated landmark moves with the controlled subject",
+    "25c724ebe 2026-11-22 00:27:46 -0300 Test the independent moves of a subject released into a new region before undoing the displacement",
+    "7ce8babed 2026-11-22 00:23:14 -0300 Consult measured public returns before trying another proposed spatial program",
+    "5be12f529 2026-11-22 00:14:09 -0300 Choose contact experiments by the inaccessible objectives an unclassified boundary could open",
+    "4238d3b8c 2026-11-22 00:02:37 -0300 Qualify conditional experiments against full official control and follow-up observations",
+    "4390c75fb 2026-11-21 23:46:58 -0300 Separate native choice, transfer scores and the measured scope of a physical effect",
+    "4556832d5 2026-11-21 23:44:15 -0300 Test whether intervening terrain limits a witnessed ranged exchange",
+    "47adc53ad 2026-11-21 23:35:56 -0300 Record official outcomes and configurable experiment choices across distinct SIC mechanisms",
+    "94be7d3a5 2026-11-21 23:27:48 -0300 Test the affected role before planning a subject crossing from cargo evidence",
+    "b607ca226 2026-11-21 23:25:18 -0300 Reuse searched preparations to expose a discriminating spatial experiment",
+    "190e3eb0f 2026-11-21 23:16:43 -0300 Distinguish competing spatial effects before following an incomplete paired route",
+    "f94b3e4b6 2026-11-21 23:11:38 -0300 Choose an informative control when measured rearrangements cannot finish the level",
+    "a205e4968 2026-11-21 23:05:38 -0300 Keep an unobserved blocked goal out of serialized contact proposals",
+    "3d86a9783 2026-11-21 22:54:31 -0300 Retest witnessed control before carrying physical effects into another room",
+    "32ac269a7 2026-11-21 22:52:09 -0300 Record serial control and measured transfer divergence at the next room",
+    "df74a8ecc 2026-11-21 22:48:51 -0300 Choose a second operator from a reachable projected setup",
+    "d46fdcab2 2026-11-21 22:48:51 -0300 Run SIC studies with one declared worker and retain the budget in replays",
+    "ea33f6b29 2026-11-21 22:38:15 -0300 Use a single serial SIC evaluation worker for the continuing level sweep",
+    "594446c5f 2026-11-21 22:31:59 -0300 Identify selectable subjects over patterned terrain and retest ambiguous control",
+    "7da645c99 2026-11-21 22:27:29 -0300 Track all L1-L3 slots and certify source campaign transfer and the new BP35 score",
+    "79b4fd98c 2026-11-21 22:12:57 -0300 Test entry through a changed material and restore footing along a projected route",
+    "9ff2d5e96 2026-11-21 21:08:23 -0300 Identify the measured Custom 4 cohort and the integrated main revision",
+    "184787557 2026-11-21 21:07:45 -0300 Certify six autonomous level wins and measure the effect of lesson transfer",
+    "642f6cbfa 2026-11-21 20:52:11 -0300 Reidentify the operators of a learned effect at the next room boundary",
+    "9237f2322 2026-11-21 20:47:58 -0300 Derive a supported landing from alternative landmark placements after a crossing",
+    "a67cf68e7 2026-11-21 20:42:39 -0300 Test the reach of a projected action and plan a crossing from both banks",
+    "03a6ec63b 2026-11-21 20:31:04 -0300 Project matched displacements and plan gates that stay open for the traveler",
+    "bd0519128 2026-11-21 20:17:46 -0300 Keep optional experiment evidence serializable across native decisions",
+    "7444d5436 2026-11-21 20:16:47 -0300 Learn spatial control scope and compare transported subjects and pieces",
+    "7b6859dd2 2026-11-21 20:00:38 -0300 Merge qualified SIC Fallback v104 and its reproducible evaluation"
+  ],
+  "localCertificateCounting": "Unique code, entry range and command-tape digest for Custom L3 in native certificate files whose last-write timestamp lies in the period. A rewritten certificate can fall outside it.",
+  "certificateFiles": 119,
+  "level3Trajectories": {
+    "otherEntry": 38,
+    "sinceL1": 1
+  },
+  "level3GamesByEntry": {
+    "sinceL1": [
+      "SS13"
+    ],
+    "otherEntry": [
+      "SS01",
+      "SS02",
+      "SS03",
+      "SS04",
+      "SS05",
+      "SS06",
+      "SS07",
+      "SS09",
+      "SS10",
+      "SS11",
+      "SS12",
+      "SS13",
+      "SS14",
+      "SS15"
+    ]
+  },
+  "ss15PublishedGameMatch": {
+    "src/games/sinking-star-ss15.ts": {
+      "same": true,
+      "digest": "efef316b3f2e04c7768cc1794d1d11963b9b76b600525bf1c4dcb1cd14df25d8"
+    },
+    "experiments/sinking-star-ss15/src/core.ts": {
+      "same": true,
+      "digest": "0583a6562ea4e0794cfc0ecdc2e1d9836c49c32cbb493d2ecb7835b5149b39ce"
+    },
+    "experiments/sinking-star-ss15/src/levels.ts": {
+      "same": false,
+      "digest": "d71666c2fe4ed7bbb0df7415f77296f576e8c19317e64621358d3795e88af5cd"
+    }
+  },
+  "ss15Campaign": {
+    "code": "SS15",
+    "start": 1,
+    "finish": 3,
+    "cap": 350,
+    "levels": [
+      {
+        "level": 1,
+        "actions": 91,
+        "won": true
+      },
+      {
+        "level": 2,
+        "actions": 350,
+        "won": false
+      }
+    ],
+    "tapeDigest": "f4875ac58a9dd1efa821dd30f55e391aa44e8da681c9eebdfd3edd0d73946b13"
+  },
+  "publishedCatalog": {
+    "commit": "bfa3ff3246f88b7b88127858bb73c02561dc8858",
+    "registeredCustomGames": 15,
+    "frozenCustomGames": 14,
+    "SS15LevelSpecDiff": {
+      "1": [
+        "title",
+        "rows"
+      ],
+      "2": [],
+      "3": []
+    },
+    "SS16": "standalone experiment; absent from src/games/catalog.ts at this commit"
+  },
+  "diagnosedL3": {
+    "custom-campaign-123.jsonl": {
+      "game": "SS13",
+      "packDigest": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "actions": 277,
+      "won": false,
+      "reason": "level_active_time_budget",
+      "uniqueImages": 25,
+      "returns": 166,
+      "replayed": 145,
+      "compositionTrials": 0,
+      "families": {
+        "sic_test_prepared_effects": 239,
+        "sic_public_input_exploration": 38
+      },
+      "orderCommands": 0
+    },
+    "serial-silent-input-ordering-custom-SS01-1-3-v144.jsonl": {
+      "game": "SS01",
+      "packDigest": "0e262e0eaf693a6c959d33669b2aa8d4ca700ee36f43605e0c5f98dea13a639b",
+      "actions": 100,
+      "won": false,
+      "reason": "level_action_budget",
+      "uniqueImages": 25,
+      "returns": 64,
+      "replayed": 26,
+      "compositionTrials": 0,
+      "families": {
+        "sic_test_prepared_effects": 94,
+        "sic_public_input_exploration": 6
+      },
+      "orderCommands": 33
+    },
+    "serial-silent-input-ordering-custom-SS14-1-3-v144.jsonl": {
+      "game": "SS14",
+      "packDigest": "0e262e0eaf693a6c959d33669b2aa8d4ca700ee36f43605e0c5f98dea13a639b",
+      "actions": 100,
+      "won": false,
+      "reason": "level_action_budget",
+      "uniqueImages": 100,
+      "returns": 0,
+      "replayed": 0,
+      "compositionTrials": 0,
+      "families": {
+        "sic_test_prepared_effects": 100
+      },
+      "orderCommands": 0
+    },
+    "serial-silent-input-registration-custom-SS01-1-3-v144.jsonl": {
+      "game": "SS01",
+      "packDigest": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "actions": 100,
+      "won": false,
+      "reason": "level_action_budget",
+      "uniqueImages": 53,
+      "returns": 40,
+      "replayed": 22,
+      "compositionTrials": 5,
+      "families": {
+        "sic_test_prepared_effects": 84,
+        "sic_public_input_exploration": 11,
+        "sic_test_observed_compositions": 5
+      },
+      "orderCommands": 0
+    },
+    "serial-silent-input-registration-custom-SS14-1-3-v144.jsonl": {
+      "game": "SS14",
+      "packDigest": "11a56319e0e477d9b12a0c17b893a1bfa53353cdb0b5a4a384b6ddf194f6846c",
+      "actions": 100,
+      "won": false,
+      "reason": "level_action_budget",
+      "uniqueImages": 100,
+      "returns": 0,
+      "replayed": 0,
+      "compositionTrials": 0,
+      "families": {
+        "sic_test_prepared_effects": 100
+      },
+      "orderCommands": 0
+    }
+  }
+}
