@@ -21,10 +21,12 @@ const { BrowserV6Agent } = await load(solverRoot, 'src/runtime/v6-agent.ts');
 const { V6AgentService } = await load(solverRoot, 'src/runtime/v6-agent-service.ts');
 const { createNativeV6Runtime } = await load(solverRoot, 'src/logos-engine/v6-native-runtime.ts');
 const { defaultRecoveryPack } = await load(solverRoot, 'src/sic/active-recovery.ts');
+const solver = process.env.SIC_STUDY_SOLVER ?? 'sic-fallback';
+if (!['sic', 'sic-fallback'].includes(solver)) throw Error('SIC_STUDY_SOLVER must be sic or sic-fallback');
 const packPath = process.env.SIC_STUDY_RECOVERY_PACK;
 const packRevision = packPath ? (await load(solverRoot,'src/sic/recovery-pack.ts')).readRecoveryRevision(
   JSON.parse(await readFile(packPath,'utf8'))) : null;
-if (packRevision && packRevision.configuration.solver !== 'sic-fallback') throw Error('SIC Fallback pack required');
+if (packRevision && packRevision.configuration.solver !== solver) throw Error('Pack and study solver do not match');
 const declarationsRoot = join(
   environment,
   'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6'
@@ -207,7 +209,7 @@ async function run(code, games) {
     targetLevels: finish - start + 1,
     actionsPerLevel: cap,
     parallelWorkers: Number(process.env.SIC_STUDY_WORKERS ?? 4),
-    recoveryConfiguration: () => packRevision?.configuration ?? { ...defaultRecoveryPack, solver: 'sic-fallback' },
+    recoveryConfiguration: () => packRevision?.configuration ?? { ...defaultRecoveryPack, solver },
     canDispatch: () => true,
     onState: collectPreparation,
     getObservation: observation,
@@ -249,7 +251,7 @@ async function run(code, games) {
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
       if (replayCommands)
-        replayCommands.push({id:action.id, ...(localSeal?{localCapacity,localSeal}:{}), ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
+        replayCommands.push({id:action.id, ...(plan?.contactFrontierForecast ? {contactFrontier:plan.contactFrontierForecast} : {}), ...(localSeal?{localCapacity,localSeal}:{}), ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           ...(plan?.compositionForecast?{composition:plan.compositionForecast}:{}),
           ...(plan?.roleArrangementForecast?{roleArrangement:plan.roleArrangementForecast}:{}),
           ...(plan?.reactiveContactForecast?{reactiveContact:plan.reactiveContactForecast}:{}),
@@ -353,6 +355,7 @@ async function run(code, games) {
     if (issued !== sic) throw Error('Incomplete SIC authority: ' + sic + '/' + issued);
     return {
       code,
+      solver,
       start,
       finish,
       cap,

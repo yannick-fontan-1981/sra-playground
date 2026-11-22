@@ -107,7 +107,9 @@ type Rule = {
 };
 import {observePlacement} from './paired-landmark-placement.ts';
 export type Experiment = {
+  contactProject?: import('./contact-frontier.ts').FrontierContact;
   phase:
+    | 'investigateContactFrontier'
     | 'composeObservedTransport'
     | 'testLandmarkPlacement'
     | 'selectMarkedCursor'
@@ -247,6 +249,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  contactFrontier?: import('./contact-frontier.ts').ContactMemory;
   placementVisits?:import('./recurrent-placement.ts').PlacementVisits;
   transportLearning?: import('./transport-observations.ts').TransportMemory;
   crossing?:import('./sustained-crossing.ts').Crossing;
