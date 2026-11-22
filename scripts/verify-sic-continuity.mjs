@@ -10,19 +10,21 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 // Reference pairs are [commands, commands executed after index zero].
 const campaign = [
   [36, 17],
-  [32, 5],
-  [42, 8],
-  [79, 17],
-  [62, 4],
-  [116, 21],
-  [37, 9],
-  [41, 13],
+  [32, 22],
+  [42, 20],
+  [79, 58],
+  [62, 14],
+  [116, 59],
+  [37, 23],
+  [41, 30],
 ];
 const requiredPhysical = {
   2: ['mirror', 'position'],
-  3: ['crate'],
+  3: ['crate', 'position'],
   4: ['crate', 'mirror', 'position'],
   5: ['crate', 'mirror'],
+  6: ['crate', 'mirror', 'position'],
+  7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
 const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed' };

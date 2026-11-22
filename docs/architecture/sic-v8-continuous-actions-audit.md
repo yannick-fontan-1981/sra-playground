@@ -8,6 +8,21 @@ La préparation d’une expérience de support bénéficie aussi des poussées c
 
 Le contrôle de fusion rejoue les tickets exécutés dans les règles officielles de SS01. Il identifie séparément deux poussées successives du même objet et la marche continue qui précède immédiatement un transfert effectif du sujet. L’observateur de test dispose des positions physiques, le pilote utilise uniquement ses observations publiques et son projet. Une suppression des poussées peut ainsi faire échouer le contrôle même si le niveau reste gagné.
 
+Sur le site local, en mode SIC depuis le L1, les huit niveaux affichent WIN en 445 commandes. Les commandes, coordonnées et empreintes avant chaque coup correspondent au témoin r203. La version r205 exécutait 94 gestes sans nouvelle décision. La version r211 en exécute 243 dans 48 séries, soit 202 décisions pour la campagne. L’intervalle médian mesuré entre tickets d’une même série est de 18 ms sur cet essai.
+
+| Niveau | Coups | Coups sans nouvelle décision | Plus longue série | Effets continus vérifiés et protégés |
+|---|---:|---:|---:|---|
+| L1 | 36 | 17 | 8 | Marche |
+| L2 | 32 | 22 | 15 | Miroir, marche avant transfert |
+| L3 | 42 | 20 | 11 | Caisse, marche avant transfert |
+| L4 | 79 | 58 | 16 | Caisse, miroir, marche avant transfert |
+| L5 | 62 | 14 | 8 | Caisse, miroir |
+| L6 | 116 | 59 | 10 | Caisse, miroir, marche avant transfert |
+| L7 | 37 | 23 | 8 | Caisse, marche avant transfert |
+| L8 | 41 | 30 | 16 | Caisse, miroir, marche avant transfert |
+
+Au L8, les coups 5 à 9 déplacent la même caisse et les coups 35 à 37 le même miroir. Les sept pas 23 à 29 précèdent la téléportation effective du coup 30. Le premier essai d’une interaction encore inconnue peut rester unitaire.
+
 ## Contrat de continuité en développement
 
 Le moteur sait engager jusqu’à 16 commandes, contrôler le retour immédiat de chacune et acquérir les transitions au moment où il clôt la série. Une décision reste identifiée par la même révision pendant cette exécution. Une nouvelle stratégie peut pourtant contourner cette capacité en ne proposant que le premier geste d’un trajet. C’est ce qui est arrivé à la famille d’expérimentation introduite en `2c823c51`, puis réutilisée par les plans de résolution. À la révision 203, SS01 gagnait ses huit niveaux en 445 commandes mais n’exécutait aucune deuxième commande sous la même décision.
