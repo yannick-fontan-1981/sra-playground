@@ -1,10 +1,11 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { composeSupportPlan, closedSupportRegion } from './compose-support-plan.ts';
 import { passengerProject } from './passenger-transport.ts';
+import { transportLandingPlan } from './transport-landing-plan.ts';
 import { spatialControls, surfaceFromVisits } from './calibrate-spatial-controls.ts';
 import type { XY } from './access-terrain.ts';
 import { visualLayout, type PreviewLearning, type VisualLayout } from './witnessed-preview-transfer.ts';
-import { previewLaw, type ProbePattern } from './reachable-preview-configurations.ts';
+import { previewLaw, transform, type ProbePattern } from './reachable-preview-configurations.ts';
 import { contactProject, edgeKey, stepCell, type Board, type Project, type Step } from './contact-frontier-search.ts';
 
 type Ground = { role: string; actor: string; origin: XY; pitch: XY; width: number };
@@ -31,6 +32,7 @@ export type SupportLaw = {
 };
 export type ContactMemory = {
   passengerWitnesses?: Record<string, string>;
+  partialSubject?: { actor: string; at: XY; frame: string; pigment: number };
   inheritedPassengers?: Record<string, string>;
   inheritedSupports?: SupportLaw[];
   supportLessons?: SupportLaw[];
@@ -208,6 +210,15 @@ function repairWithPassenger(b: Board, role: string, witness: string, allowed: (
   };
   return project;
 }
+function matchingOrientations(previous: readonly XY[] | undefined, current: readonly XY[]) {
+  if (!previous?.length || previous.length !== current.length) return [];
+  const key = (points: readonly XY[]) => {
+    const left = Math.min(...points.map(p => p[0])), top = Math.min(...points.map(p => p[1]));
+    return points.map(([x,y]) => [x-left,y-top].join(',')).sort().join('/');
+  };
+  const target = key(current);
+  return Array.from({length:8}, (_,i) => i).filter(i => key(previous.map(p => transform(p,i))) === target);
+}
 function fittedTransport(
   learning: PreviewLearning,
   actor: string,
@@ -215,7 +226,7 @@ function fittedTransport(
   g: Ground,
   motors: Set<string>,
   available: Set<string>,
-  local?: { epoch: number; pivot: string }
+  local?: { epoch?: number; pivot: string; mask?: readonly XY[] }
 ) {
   for (const binding of Object.values(learning.bindings)) {
     if (
@@ -231,17 +242,18 @@ function fittedTransport(
       if (layout[role]?.length !== 1) continue;
       const examples: ProbePattern[] = [];
       for (const w of binding.witnesses) {
-        if (local && w.epoch !== local.epoch) continue;
+        if (local?.epoch !== undefined && w.epoch !== local.epoch) continue;
         const matches = w.geometry?.pivots.filter((p) => p.role === role);
         if (matches?.length !== 1) continue;
         const relative = (p: XY): XY => [
           Math.round((p[0] - matches[0]!.at[0]) / g.pitch[0]),
           Math.round((p[1] - matches[0]!.at[1]) / g.pitch[1]),
         ];
-        examples.push({
-          actor: relative(w.from),
+        const orientations = local?.mask ? matchingOrientations(matches[0]!.mask, local.mask) : [0];
+        for (const orientation of orientations) examples.push({
+          actor: transform(relative(w.from),orientation),
           centre: [0, 0],
-          indicator: relative(w.arrived),
+          indicator: transform(relative(w.arrived),orientation),
           ref: examples.length,
         });
       }
@@ -267,7 +279,8 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
   const targets: { actor: string; marker: string; offset?: XY }[] = [...(l.terminal ?? [])];
   if (m.explorer) targets.push({ actor: m.explorer.actor, marker: '' });
   for (const goal of targets) {
-    const bodies = layout[goal.actor],
+    const partial = m.partialSubject;
+    const bodies = layout[goal.actor] ?? (partial?.actor === goal.actor && partial.frame === o.frame_hash ? [partial] : undefined),
       markers = goal.marker ? layout[goal.marker] : [],
       motion = l.partMotion?.[goal.actor];
     if (bodies?.length !== 1 || !markers || (goal.marker && markers.length !== 1) || !motion) continue;
@@ -342,7 +355,7 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
     const objects = roles
       .flatMap((role) => [...observed.get(role)!].map((at) => ({ at, role })))
       .sort((a, b) => a.role.localeCompare(b.role) || a.at - b.at);
-    if (!objects.length && !m.supported.length && !m.verify) continue;
+    if (!objects.length && !m.supported.length && !m.verify && !Object.keys(m.pendingEntries ?? {}).length) continue;
     const walkable = new Set([
       ...fixed,
       ...objects.map((v) => v.at),
@@ -443,6 +456,29 @@ export function proposeFrontierContact(
         const b = calibratedBoard(fit, l, o, rows);
         if (b) project = repairWithPassenger(b, passenger.role, passenger.witness, at => permits(passenger.role, at), deny, limits);
       }
+      if (!project && board.transport && board.pivotIndex >= 0) {
+        const witnesses = new Map<string,string>();
+        for (const role of board.roles) {
+          const key = passengerBinding(board, g.actor, role);
+          const witness = m.passengerWitnesses?.[key] ?? m.inheritedPassengers?.[key];
+          if (witness) witnesses.set(role,witness);
+        }
+        if (witnesses.size) {
+          const layout = visualLayout(o,rows), pivot = board.roles[board.pivotIndex]!;
+          const form = layout[pivot]?.[0]?.form;
+          const mask = o.entities.find(e => e.signature === form && e.area <= 16)?.mask.map(([x,y]): XY => [x,y]);
+          const oriented = mask && fittedTransport(l,g.actor,layout,g,new Set(board.motors.map(v => v.op)),
+            new Set(o.available_action_refs),{pivot,mask});
+          const transport = oriented ?? calibratedBoard(fit,l,o,rows)?.transport;
+          if (transport) {
+            project = transportLandingPlan({...board,transport},witnesses,permits,deny,limits);
+            for (const site of project?.preparations ?? []) {
+              const terrain = terrainAt(site.at);
+              if (terrain !== null) Object.assign(site,{terrain,observation:o.observation_ref});
+            }
+          }
+        }
+      }
       project ??= composeSupportPlan(board, permits, deny, limits);
       if (!project && board.transport && board.pivotIndex >= 0) {
         for (const [i, part] of board.parts.entries()) {
@@ -481,7 +517,8 @@ export function proposeFrontierContact(
   const planned = project.preparations?.find((v) => project.steps.some((s) => s.boundary && s.placed === v.at));
   const terrain = verifyEntry
     ? m.verify!.terrain
-    : terrainAt(step.boundary ? step.placed! : (planned?.at ?? project.site));
+    : step.boundary ? (project.preparations?.find(v => v.at === step.placed)?.terrain ?? terrainAt(step.placed!))
+    : terrainAt(planned?.at ?? project.site);
   const law = m.verified?.[JSON.stringify([project.role, terrain])];
   return {
     ...g,
@@ -500,6 +537,18 @@ export function proposeFrontierContact(
     priorContact: m.inheritedContact?.[g.actor] ?? null,
     ...(step.passenger && step.role ? { passengerBinding: passengerBinding(board, g.actor, step.role) } : {}),
   };
+}
+// An overlay can hide the silhouette. Use its pigment only if all its public
+// pixels belonged to the subject's previous cell and still occupy one cell.
+function pigmentSite(rows: NativeRows, pigment: number, g: Ground): XY | null {
+  let site = -1;
+  for (const [y,row] of rows.entries()) for (const [x,value] of row.entries()) {
+    if (value !== pigment) continue;
+    const at = cell([2*x,2*y],g);
+    if (site !== -1 && at !== site) return null;
+    site = at;
+  }
+  return site < 0 ? null : [g.origin[0]+(site%g.width)*g.pitch[0],g.origin[1]+Math.floor(site/g.width)*g.pitch[1]];
 }
 export function recordFrontierContact(
   m: ContactMemory,
@@ -525,7 +574,19 @@ export function recordFrontierContact(
   }
   const s = trial.step,
     body = after[trial.actor],
-    at = body?.length === 1 ? cell(body[0]!.at, trial) : null;
+    oldBody = visualLayout(b,rows)[trial.actor];
+  let at = body?.length === 1 ? cell(body[0]!.at,trial) : null;
+  if (trial.project.landing && !body?.length) {
+    const pigment = oldBody?.length === 1 ? b.entities.find(e => e.signature === oldBody[0]!.form)?.palette_value :
+      (m.partialSubject?.frame === b.frame_hash ? m.partialSubject.pigment : undefined);
+    if (pigment !== undefined) {
+      const first = pigmentSite(rows,pigment,trial), second = pigmentSite(next,pigment,trial);
+      if (first && second && cell(first,trial) === s.from) {
+        at = cell(second,trial);
+        m.partialSubject = {actor:trial.actor,frame:a.frame_hash,pigment,at:second};
+      }
+    }
+  }
   const pending = m.verify;
   const tail = trial.project.steps.slice(1);
   delete m.active;
@@ -556,11 +617,14 @@ export function recordFrontierContact(
         (!!appearance && cellAppearance(next, p, trial) === appearance);
       const atSource = before.board.parts.some((p, i) => p === s.passenger!.source && before.board.roles[i] === s.role);
       const alreadyAtDestination = before.board.parts.includes(s.placed);
-      if (!trial.passengerBinding || !atSource || alreadyAtDestination || at !== s.from || present(s.passenger.source) || !present(s.placed)) {
+      const arrivalObserved = s.boundary
+        ? !present(s.placed) && cellAppearance(rows,s.placed,trial) !== cellAppearance(next,s.placed,trial)
+        : present(s.placed);
+      if (!trial.passengerBinding || !atSource || alreadyAtDestination || at !== s.from || present(s.passenger.source) || !arrivalObserved) {
         m.denied.push(edgeKey(s.from, s.op, trial.parts));
         return 'passenger_transfer_refuted';
       }
-      (m.passengerWitnesses ??= {})[trial.passengerBinding] = a.observation_ref;
+      if (!s.boundary) (m.passengerWitnesses ??= {})[trial.passengerBinding] = a.observation_ref;
     }
     if (
       parts.some((v) => cell(v.at, trial) === s.placed) ||

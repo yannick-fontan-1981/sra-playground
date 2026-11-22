@@ -10,7 +10,7 @@ export type PartMotion = {
   sites: Record<string, number>;
   substrate: Record<string, number>;
 };
-export type Pivot = { role: string; at: XY };
+export type Pivot = { role: string; at: XY; mask?: readonly XY[] };
 export type WitnessGeometry = { pivots: Pivot[] };
 export function rememberMotion(
   learning: PreviewLearning,
@@ -99,7 +99,8 @@ export function stationaryPivots(
   from: XY,
   to: XY,
   b: VisualLayout,
-  a: VisualLayout
+  a: VisualLayout,
+  observed?: NativeObservation
 ): Pivot[] {
   const result: Pivot[] = [];
   for (const [role, group] of Object.entries(b)) {
@@ -111,7 +112,10 @@ export function stationaryPivots(
         v = diff(to, site.at),
         gap = Math.abs(Math.hypot(...u) - Math.hypot(...v));
       const tolerance = Math.max(1, site.box[2]! - site.box[0]!, site.box[3]! - site.box[1]!);
-      if (gap <= tolerance) result.push({ role, at: site.at });
+      if (gap <= tolerance) {
+        const part = observed?.entities.find(e => e.signature === site.form && e.area <= 16);
+        result.push({ role, at: site.at, ...(part ? {mask:part.mask.map(([x,y]): XY => [x,y])} : {}) });
+      }
     }
   }
   return result;

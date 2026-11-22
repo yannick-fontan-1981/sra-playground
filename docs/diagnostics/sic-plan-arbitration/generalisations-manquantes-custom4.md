@@ -1,5 +1,7 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
+**Créer un support pour un mécanisme, puis un support de réception pour son utilisateur.** Sur SS01 L7, SIC révision 201 remonte depuis la rive de sortie, choisit deux transformations du terrain et vérifie leur usage. Il gagne en 37 coups après le L6 sur le site local. La première décision diffère déjà par les préparations annoncées. [Oracle, attribution et résultat de campagne](./ss01-l7-oracle-et-composition.md)
+
 **Reprise après une expérience qui ferme une voie.** Sur SS01 L6, la révision 199 compare les possibilités de poussée avant et après le déplacement observé, trouve une autre suite depuis la disposition précédente et conserve cette alternative pendant le reset. La campagne gagne le L6 en 116 coups. [Point de blocage, contre-épreuve et campagne](./ss01-l6-reprise-apres-poussee.md)
 
 **Suite du chantier sur la composition spatiale.** En campagne sur SS01 L5, la révision 197 teste si une pièce passive peut subir le transport connu du marchand. Elle choisit une réception selon les poussées qu’elle rend accessibles, vérifie le déplacement indépendant de la pièce et réutilise l’effet pour gagner en 62 coups. Cette qualification porte sur le L5. [Campagne depuis le L1 et vérification des reçus](./ss01-l5-transfert-passif.md)

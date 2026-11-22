@@ -464,11 +464,13 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
           ...(m.contactFrontier?.repair ? {afterReset:{checkpoint:m.contactFrontier.repair.frame,
             excludedPush:m.contactFrontier.repair.edge, alternativeLength:m.contactFrontier.repair.project.steps.length}} : {}),
+          ...(contactProject.project.landing?{landing:contactProject.project.landing}:{}),
           ...(contactProject.project.passenger?{passenger:contactProject.project.passenger}:{}),
           site:contactProject.project.site,...(contactProject.project.preparations?{preparations:contactProject.project.preparations}:{}),from:contactProject.step.from,to:contactProject.step.to,
           next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,priorContact:contactProject.priorContact,
           width:contactProject.width,part:contactProject.step.role??null,
-          alternatives:contactProject.step.passenger?['passive_part_transfers_alone','part_stays_at_source']:
+          alternatives:contactProject.step.passenger && contactProject.step.boundary?['remote_deposit_changes_support','arrival_stays_blocked']:
+            contactProject.step.passenger?['passive_part_transfers_alone','part_stays_at_source']:
             contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
             contactProject.step.role?['part_moves','part_changes_at_boundary','contact_is_blocked']:['subject_reaches_stance','predicted_access_is_blocked']}}:{}),
         ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),

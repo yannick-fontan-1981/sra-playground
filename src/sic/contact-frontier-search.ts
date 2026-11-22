@@ -21,7 +21,8 @@ export type Project = {
   site: number;
   role?: string;
   passenger?: { role: string; source: number; destination: number; pushes: string[]; witness?: string };
-  preparations?: { at: number; role: string; enables: string[] }[];
+  landing?: { pivot: number; launch: number; arrival: number; witness: string };
+  preparations?: { at: number; role: string; terrain?: number; observation?: string; enables: string[] }[];
 };
 export const edgeKey = (from: number, op: string, parts: readonly number[]) => [from, op, ...parts].join('/');
 const distance = (a: number, b: number, w: number) =>
