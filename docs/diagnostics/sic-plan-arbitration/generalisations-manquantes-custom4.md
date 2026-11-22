@@ -1,5 +1,13 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
+**Conserver un sujet en position pendant qu’un autre reconfigure le transport.** SIC 203 remonte depuis la sortie isolée, choisit un support commun à deux réglages successifs et réutilise un changement de contrôle vérifié. La campagne locale gagne SS01 L8 en 41 coups et atteint huit crédits. [Oracle, première divergence et vérification du relais](./ss01-l8-relais-et-oracle.md)
+
+**Créer un support pour un mécanisme, puis un support de réception pour son utilisateur.** Sur SS01 L7, SIC révision 201 remonte depuis la rive de sortie, choisit deux transformations du terrain et vérifie leur usage. Il gagne en 37 coups après le L6 sur le site local. La première décision diffère déjà par les préparations annoncées. [Oracle, attribution et résultat de campagne](./ss01-l7-oracle-et-composition.md)
+
+**Reprise après une expérience qui ferme une voie.** Sur SS01 L6, la révision 199 compare les possibilités de poussée avant et après le déplacement observé, trouve une autre suite depuis la disposition précédente et conserve cette alternative pendant le reset. La campagne gagne le L6 en 116 coups. [Point de blocage, contre-épreuve et campagne](./ss01-l6-reprise-apres-poussee.md)
+
+**Suite du chantier sur la composition spatiale.** En campagne sur SS01 L5, la révision 197 teste si une pièce passive peut subir le transport connu du marchand. Elle choisit une réception selon les poussées qu’elle rend accessibles, vérifie le déplacement indépendant de la pièce et réutilise l’effet pour gagner en 62 coups. Cette qualification porte sur le L5. [Campagne depuis le L1 et vérification des reçus](./ss01-l5-transfert-passif.md)
+
 **SS09 L2 fait partie du lot ordinaire de diagnostic, d’expérimentation et de score**, au même titre que SS01 à SS11. SIC gagne SS09 à froid en 54 coups. Les mentions de réserve dans les protocoles historiques décrivent uniquement ces anciens gels. [Première divergence et victoire autonome sur SS09](placements-cooperatifs-v100.md)
 
 **Les trois nouveaux L2 gagnés à froid sont SS09 en 54, SS10 en 227 et SS11 en 35.** Sur SS09, SIC apprend à déplacer le partenaire une fois la porte ouverte. Sur SS10, il donne la priorité à une expérience de placement et apprend à tirer une caisse avant de pousser l’autre. Sur SS11, il retrouve les mouvements d’avant le clic, imagine deux appuis successifs et vérifie leur usage en traversant. [Chantiers, configurations et comparaisons causales](traversees-composees-v104.md)
@@ -97,6 +105,8 @@ Les constats sur cible indiquent où chercher. Les expériences de conception em
 Les chantiers 9 et 13 du programme portent sur l’information hors champ et les relations abstraites. Aucun des blocages ci-dessus n’établit encore qu’une de ces capacités suffirait à le lever. Les promouvoir si une paire de situations de même apparence produit des réponses différentes à cause de l’histoire, ou si une relation permet de prédire un résultat malgré un changement d’apparence. [Programme des quatorze chantiers](chantiers-de-generalisation.md)
 
 Les chantiers 3 (disposition), 5 (stagnation) et 6 (effet irréversible) ont aussi été éprouvés sur SS01 L3. SIC gagne en campagne en 42 coups après un premier essai de poussée au coup 6. [Expérience, reçus et comparaison au coup 118](./ss01-l3-experience-apres-franchissement.md)
+
+Au L4 de SS01, SIC associe ces chantiers pour planifier plusieurs transformations avant la première dépense de caisse et récupérer après un déplacement bloquant du mécanisme. [Campagne sur le site local, reçus et test de reset](./ss01-l4-composition-et-reprise.md)
 
 ## Registre des travaux
 

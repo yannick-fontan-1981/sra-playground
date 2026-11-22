@@ -37,7 +37,7 @@ type Input = {
   stateLimit: number;
   attempted?: (s: LayoutStep) => boolean;
 };
-function transform(p: XY, i: number): XY {
+export function transform(p: XY, i: number): XY {
   const [x, y] = p;
   const values: XY[] = [
     [x, y],

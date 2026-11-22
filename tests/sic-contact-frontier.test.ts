@@ -229,6 +229,20 @@ test('only actual entry confirms a terrain change and supplies evidence for a se
     ),
     'new_support_entered'
   );
+  const cueLearning = structuredClone(learning);
+  cueLearning.bindings.dualRole = {
+    relation: 'indicator_marks_subject_arrival_after_action',
+    actor,
+    indicator: first.project.role!,
+    gesture: { op: 'east' },
+    witnesses: [],
+  };
+  const contactOnly = inheritFrontierContacts(m.contactEvidence, cueLearning);
+  assert.equal(proposeFrontierContact(contactOnly, cueLearning, start.observation, start.pixels, limits), null);
+  const transferred = inheritFrontierContacts(m.contactEvidence, cueLearning, m.supportLessons);
+  assert.ok(proposeFrontierContact(transferred, cueLearning, start.observation, start.pixels, limits));
+  assert.equal(transferred.inheritedSupports?.[0]?.entry, entered.observation.observation_ref);
+  assert.deepEqual(transferred.supported, []);
   const repeat = proposeFrontierContact(m, learning, entered.observation, entered.pixels, limits)!;
   assert.equal(repeat.previousEntry, entered.observation.observation_ref);
   assert.notEqual(repeat.project.site, first.project.site);

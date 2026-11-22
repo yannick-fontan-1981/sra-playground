@@ -1,5 +1,10 @@
+import {preparedSpatialSeries,spatialStance,type SpatialStep} from './prepared-spatial-series.ts';
+import {preparedWalk,preparedStance,preparedExperimentAt} from './prepared-walking-series.ts';
+import {walkingPremise,walkingReturn,type BoundWalkingStep} from './verified-walking-series.ts';
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
-import { newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
+import { sicObservedTransportDeadlock } from '../logos-engine/v6-native-types.ts';
+import {rememberRelayControl} from './relay-control.ts';
+import { proposeRelayContact, observeStrandedTransport, newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
 import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
@@ -41,7 +46,7 @@ import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
 import {newFrontierMemory} from './experimental-frontier.ts';
 import { newProjectionMemory } from './projected-affordances.ts';
-type Offer = NativeProposal & { experiment: Experiment };
+type Offer = NativeProposal & { experiment: Experiment; walkingSeries?:BoundWalkingStep[]; spatialSeries?:SpatialStep[] };
 const labels: Record<Experiment['phase'], string> = {
   investigateContactFrontier: 'Test a contact that could change access to a visible destination',
   composeObservedTransport:'Test whether repositioning a piece makes both marked sites reachable',
@@ -129,8 +134,21 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
-    const carry=m.previewCarry,local=m.localCarry,contactEvidence=m.contactFrontier?.contactEvidence;m=initialMemory(o.level_epoch);m.localCapacity=nextLocalLevel(local);m.previewLearning=acceptPreviewCarry(carry,o);
-    m.contactFrontier=inheritFrontierContacts(contactEvidence,m.previewLearning);
+    const { previewCarry, localCarry, contactFrontier, transportRetry } = m;
+    const lessons = [...(contactFrontier?.inheritedSupports ?? []), ...(contactFrontier?.supportLessons ?? [])]
+      .map(law => ({...law, appearance:law.appearance ?? contactFrontier?.appearances?.[law.role]}));
+    m = initialMemory(o.level_epoch);
+    m.localCapacity = nextLocalLevel(localCarry);
+    m.previewLearning = acceptPreviewCarry(previewCarry, o);
+    m.contactFrontier = inheritFrontierContacts(contactFrontier?.contactEvidence, m.previewLearning, lessons);
+    if (Object.keys(m.previewLearning.bindings).length && contactFrontier?.relayControl) m.contactFrontier.relayControl=contactFrontier.relayControl;
+    if (m.previewLearning.terminal?.length && contactFrontier?.passengerWitnesses)
+      m.contactFrontier.inheritedPassengers = {...contactFrontier.passengerWitnesses};
+    if (transportRetry?.epoch === o.level_epoch) {
+      m.transportRetry = transportRetry;
+      m.contactFrontier.recoveredEdges = transportRetry.edges;
+      m.contactFrontier.repair = transportRetry.repair;
+    }
   }
   function acquire(
     b: NativeObservation,
@@ -149,6 +167,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     const boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
+      if(cmd.data.x!==undefined || m.contactFrontier?.pendingControl)rememberRelayControl(m.contactFrontier??=newContactMemory(),b,a,cmd.action_ref,cmd.data);
       const before=visualLayout(b,rows),after=visualLayout(a,next);
       const key=observedCommandKey(cmd);
       if(retrySelection&&x?.landmark)recordPlacementVisit(m.placementVisits??={edges:{},tested:{}},x.landmark,b.frame_hash,a.frame_hash,a.observation_ref);
@@ -221,6 +240,13 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(followMarkedPose)cursor.followMarkedPose=true;
     }
     const frontierResult=x?.contactProject ? recordFrontierContact(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next,x.contactProject) : undefined;
+    if(limits && m.contactFrontier?.inheritedSupports?.length) {
+      const trial=x?.contactProject;
+      if(!trial || frontierResult==='movement_refuted' || frontierResult==='contact_effect_refuted')
+        observeStrandedTransport(m.contactFrontier,learning,b,a,rows,next,observedCommandKey(cmd),limits);
+      else if(frontierResult==='object_displaced' && trial.project.purpose!=='reach_goal')
+        observeStrandedTransport(m.contactFrontier,learning,b,a,rows,next,observedCommandKey(cmd),limits,trial);
+    }
     if(!x?.contactProject && b.level_epoch===a.level_epoch && learning.partMotion)
       observeRegionArrival(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next);
     const result=recordExperiment(m, b, a, cmd, rows, next, x);
@@ -276,8 +302,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const repair=missingCue || justMovedLine || !!m.relativeMotion?.active || hasExperimentOpportunity(m);
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
         ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
-      const contactProject=!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
-        ? proposeFrontierContact(m.contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null;
+      const relay=!focused && group===evidencedPlanGroup && limits && m.previewLearning && m.contactFrontier?.relayControl ? proposeRelayContact(m.contactFrontier,m.previewLearning,o,rows,limits):null;
+      const contactProject=relay??(!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
+        ? proposeFrontierContact(m.contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null);
       if (!contactProject && !cooperative && !landmark && !cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
@@ -306,6 +333,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if (!command) return null;
       const ref = o.observation_ref,
         label = contactProject ? (contactProject.acquired ? 'Enter the changed site to verify that it now supports movement'
+          : contactProject.project.preparations?.length ? 'Prepare the required footholds in order so the subject and the movable parts can reach their next positions'
           : contactProject.previousEntry ? 'Reuse the observed support change to connect another region'
           : contactProject.project.purpose==='reach_goal' ? 'Use the observed change in access to reach the witnessed destination'
           : contactProject.project.purpose==='test_contact' ? 'Approach the untested object in the newly reached region and measure its displacement'
@@ -412,10 +440,14 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
               evidence,
             })
           : null;
+      const spatial=preparedSpatialSeries(experiment,o,rows,remaining,m.contactFrontier);
+      const walking=spatial?undefined:preparedWalk(experiment,o,rows,remaining);
+      const series=spatial??walking;
+      const actions=series?.map(step=>step.command)??[command];
       return {
         status: 'proposed',
         kind: preparedEffectsId,
-        actions: [command],
+        actions, ...(spatial?{spatialSeries:spatial}:walking?{walkingSeries:walking}:{}),
         experiment,
         ...(cooperative?{cooperativeTransportForecast:cooperative}:{}),
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'||cursor.beyondReturn?{
@@ -441,10 +473,18 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           } : {}),
         }} : {}),
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
-          site:contactProject.project.site,from:contactProject.step.from,to:contactProject.step.to,
+          ...(m.contactFrontier?.repair ? {afterReset:{checkpoint:m.contactFrontier.repair.frame,
+            excludedPush:m.contactFrontier.repair.edge, alternativeLength:m.contactFrontier.repair.project.steps.length}} : {}),
+          ...(contactProject.relay?{relay:{...contactProject.relay.plan.design,control:contactProject.priorContact,
+            cargo:contactProject.relay.witness,peerFrom:contactProject.relay.plan.steps[0]?.peerFrom,peerTo:contactProject.relay.plan.steps[0]?.peerTo}}:{}),
+          ...(contactProject.project.landing?{landing:contactProject.project.landing}:{}),
+          ...(contactProject.project.passenger?{passenger:contactProject.project.passenger}:{}),
+          site:contactProject.project.site,...(contactProject.project.preparations?{preparations:contactProject.project.preparations}:{}),from:contactProject.step.from,to:contactProject.step.to,
           next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,priorContact:contactProject.priorContact,
           width:contactProject.width,part:contactProject.step.role??null,
-          alternatives:contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
+          alternatives:contactProject.step.passenger && contactProject.step.boundary?['remote_deposit_changes_support','arrival_stays_blocked']:
+            contactProject.step.passenger?['passive_part_transfers_alone','part_stays_at_source']:
+            contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
             contactProject.step.role?['part_moves','part_changes_at_boundary','contact_is_blocked']:['subject_reaches_stance','predicted_access_is_blocked']}}:{}),
         ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),
         ...(experiment.mechanism ? {mechanismForecast:experiment.mechanism} : {}),
@@ -463,7 +503,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ...(experiment.frontier ? { reachable_experiment: experiment.frontier } : {}),
         ...(experiment.condition ? { conditional_placement: experiment.condition } : {}),
         ...(capability ? { capability_equation: capability } : {}),
-        steps: [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
+        steps: series ? series.map(step=>({action:step.command,expected_after:step.to})) : [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: o.level_epoch },
         sicSituationCard: {
           strategy: phase,
@@ -492,16 +532,38 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           evidence,
           preconditions: {},
           preserve_refs: [],
-          actions: [command],
+          actions,
           outcome_guard: { path: ['value'], contains: need.id },
         },
       };
     },
-    before(p, i, _packet, o) {
+    before(p, i, packet, o) {
+      const spatial=p.spatialSeries?.[i];
+      if(spatial){
+        const admitted=(i>0 || p.binding?.observation_ref===o.observation_ref) && spatialStance(p.experiment,spatial,i,o,packet.frame_rows,false);
+        return {admitted,reason:admitted?'spatial_premise_confirmed':'participant_pose_changed'};
+      }
+      const step=p.walkingSeries?.[i];
+      if(step){
+        const admitted=(i>0 || p.binding?.observation_ref===o.observation_ref) && walkingPremise(step,packet.frame_rows) && preparedStance(p.experiment,i,o,packet.frame_rows,false);
+        return {admitted,reason:admitted?'observed_walk_still_available':'walk_premise_changed'};
+      }
       const admitted = i === 0 && p.binding?.observation_ref === o.observation_ref;
       return { admitted, reason: admitted ? 'matched_preparation_bound' : 'stale_preparation' };
     },
-    after(_p, _i, b, a) {
+    after(p, i, b, a, first, next) {
+      const spatial=p.spatialSeries?.[i];
+      if(spatial){
+        const boundary=b.level_epoch!==a.level_epoch || a.levels_completed>b.levels_completed;
+        const matched=spatialStance(p.experiment,spatial,i,a,next,true);
+        return {matched:boundary||matched,seal_prefix:boundary||!matched,reason:boundary?'official_boundary':matched?spatial.kind+'_pose_confirmed':'participant_pose_changed'};
+      }
+      const step=p.walkingSeries?.[i];
+      if(step){
+        const boundary=b.level_epoch!==a.level_epoch || a.levels_completed>b.levels_completed;
+        const matched=walkingReturn(step,first,next,preparedStance(p.experiment,i,a,next,true));
+        return {matched:boundary||matched,seal_prefix:boundary||!matched,reason:boundary?'official_boundary':matched?'walk_confirmed':'walk_observation_changed'};
+      }
       const won = a.levels_completed > b.levels_completed;
       return {
         matched: won ? true : null,
@@ -512,11 +574,39 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     observePublicOutcome(b, a, c, r, n) {
       acquire(b, a, c, r, n);
     },
-    record(b, a, c, r, n, p) {
-      const outcome = acquire(b, a, c, r, n, p.experiment);
+    record(b, a, c, r, n, p, index) {
+      const trial=p.walkingSeries||p.spatialSeries?preparedExperimentAt(p.experiment,index,b):p.experiment;
+      const outcome = acquire(b, a, c, r, n, trial);
+      const proof = m.contactFrontier?.deadlock;
       return {
-        events: outcome ? [{ kind: 'sic_preparation_outcome', epoch: b.level_epoch, ...outcome }] : [],
+        events: [
+          ...(outcome ? [{ kind: 'sic_preparation_outcome', epoch: b.level_epoch, ...outcome }] : []),
+          ...(proof?.ref === a.observation_ref && proof.repair ? [{kind:'sic_control_mobility_lost',
+            before:proof.previous, after:proof.ref, excludedPush:proof.edge, configurations:proof.configurations,
+            priorPushes:proof.repair.priorPushes, remainingPushes:proof.repair.remainingPushes,
+            alternativeLength:proof.repair.project.steps.length, restoreFrame:proof.repair.frame}] : []),
+        ],
       };
+    },
+    requestedStopReason(o) {
+      const proof = m.contactFrontier?.deadlock;
+      if (!proof || proof.ref !== o.observation_ref) return null;
+      return m.contactFrontier?.recoveredEdges?.includes(proof.edge)
+        ? 'sic_transport_deadlock_already_recovered'
+        : sicObservedTransportDeadlock;
+    },
+    stateAfterLevelReset(o, _rows, entry) {
+      const proof = m.contactFrontier?.deadlock;
+      if (!proof || !entry) return;
+      const edges = [...new Set([...(m.contactFrontier?.recoveredEdges ?? []), proof.edge])];
+      const restored = structuredClone(entry) as typeof m;
+      restored.transportRetry = { epoch: o.level_epoch, edges, ...(proof.repair ? {repair:proof.repair} : {}) };
+      if (restored.epoch === o.level_epoch) {
+        const frontier = restored.contactFrontier ??= newContactMemory();
+        frontier.recoveredEdges = edges;
+        if (proof.repair) frontier.repair = proof.repair;
+      }
+      return restored;
     },
     state: () => m,
     restore(value) {

@@ -1,3 +1,5 @@
+import type {NativeBox} from '../logos-engine/v6-native-types.ts';
+import type {WalkingStep} from './verified-walking-series.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { observedCommandKey } from './observed-command-frontier.ts';
@@ -10,7 +12,7 @@ type Calibration = { grid: Grid; previous: string[]; next: string[]; destination
 export type ObservedTravel = { grid: Grid; actor: string | null; supports: string[]; visited: string[];
   moves: Record<string, Move>; tested: Record<string, number>; altered: string[]; controls: string[];
   completed: string[]; switches: Record<string, string | null>; pendingSelection?: string; refs: string[]; stalled: number };
-export type TravelTrial = { command: NativeCommand; target: NativePoint; evidence: string[];
+export type TravelTrial = { approach?: WalkingStep[]; command: NativeCommand; target: NativePoint; evidence: string[];
   purpose: 'approach' | 'contact' | 'switch' | 'select' | 'approach_object' | 'separate_object'; experiment?: string };
 export type MarkContact = { command: NativeCommand; target: string; expected: string; evidence: string[] };
 
@@ -332,23 +334,23 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
     return new Set(pixels).size > 1 && (grid.signature || !pixels.includes(grid.ink))
       && (pixels.includes(grid.floor) || altered.has(cell)) ? 4 : Infinity;
   };
-  type Path = { at: string; first: NativeCommand | null; cost: number };
+  type Path = { at: string; first: NativeCommand | null; cost: number; parent?:Path; via?:NativeCommand };
   const visited = new Set(state.visited);
   const canTestSwitch = (cell: string) => !!switchCommand && altered.has(cell) && !(cell in switches);
   function route(origin: string) {
     const open: Path[] = [{ at: origin, first: null, cost: 0 }];
     const costs = new Map([[origin, 0]]);
-    let best: { first: NativeCommand; cell: string; score: number; goal: boolean } | undefined;
-    const offer = (first: NativeCommand, cell: string, cost: number, goal: boolean) => {
+    let best: { first: NativeCommand; cell: string; score: number; goal: boolean; path?:Path } | undefined;
+    const offer = (first: NativeCommand, cell: string, cost: number, goal: boolean, path?:Path) => {
       const near = Math.min(...goals.map(target => distance(point(cell), point(target)))) / grid.pitch;
       const score = cost + 4 * near - (canTestSwitch(cell) ? 4 : 0);
-      if (!best || goal && !best.goal || goal === best.goal && score < best.score) best = { first, cell, score, goal };
+      if (!best || goal && !best.goal || goal === best.goal && score < best.score) best = { first, cell, score, goal, path };
     };
     for (let i = 0; i < open.length; i++) {
       const node = open[i]!;
       if (node.cost !== costs.get(node.at)) continue;
       if (node.first && (!visited.has(node.at) || canTestSwitch(node.at) || goals.includes(node.at) || untriedAt(node.at))) {
-        offer(node.first, node.at, node.cost, goals.includes(node.at));
+        offer(node.first, node.at, node.cost, goals.includes(node.at),node);
       }
       for (const move of moves) {
         const destination = add(point(node.at), move.delta), cell = key(destination);
@@ -366,12 +368,12 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
         }
         if (cost >= (costs.get(cell) ?? Infinity)) continue;
         costs.set(cell, cost);
-        open.push({ at: cell, first: node.first ?? move.command, cost });
+        open.push({ at: cell, first: node.first ?? move.command, cost, parent:node, via:move.command });
       }
       const landing = switches[node.at];
       if (switchCommand && landing && !pieces.includes(landing) && node.cost + 2 < (costs.get(landing) ?? Infinity)) {
         costs.set(landing, node.cost + 2);
-        open.push({ at: landing, first: node.first ?? switchCommand, cost: node.cost + 2 });
+        open.push({ at: landing, first: node.first ?? switchCommand, cost: node.cost + 2, parent:node, via:switchCommand });
       }
     }
     return best;
@@ -389,6 +391,18 @@ export function chooseTravelTrial(state: ObservedTravel | undefined, rows: Nativ
       return { command, target: at, purpose: 'select', evidence };
     }
   }
-  if (active) return { command: active.first, target: point(active.cell),
+  if (active) {
+    const approach:WalkingStep[]=[];
+    const bounds=(at:string):NativeBox=>{const [x,y]=point(at);return [x,y,x+grid.pitch-1,y+grid.pitch-1];};
+    if(active.goal && !unmeasured.length){
+      for(let step=active.path;step?.parent&&step.via;step=step.parent)
+        approach.unshift({from:bounds(step.parent.at),to:bounds(step.at),command:step.via});
+      const frontier=approach.findIndex(step=>canTestSwitch(key([step.from[0],step.from[1]])));
+      if(frontier>=0)approach.splice(frontier);
+    }
+    return { approach, command: active.first, target: point(active.cell),
     purpose: active.first === switchCommand ? 'switch' : active.goal ? 'approach' : 'contact', evidence };
+  }
 }
+
+export function travelOccupies(travel:ObservedTravel,rows:NativeRows,box:NativeBox){return read(rows,travel.grid).pieces.includes(key([box[0],box[1]]));}
