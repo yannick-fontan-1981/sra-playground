@@ -136,7 +136,8 @@ function fitResponse(g:Graph,r:Response,origin:XY):Fitted|undefined{
 export type PursuitTerrain={actor:string;peer:string;from:XY;targets:XY[];pitch:number;floor:number;known:Set<string>;
   reachable:XY[];motors:{op:string;d:XY}[]};
 export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:VisualLayout,rows:NativeRows,available:Set<string>,
-  attempts:Record<string,number>={},inspect?:(terrain:PursuitTerrain)=>void):PursuitChoice|null {
+  attempts:Record<string,number>={},inspect?:(terrain:PursuitTerrain)=>void,
+  refutedHere:Readonly<Record<string,string>>={}):PursuitChoice|null {
   let best:{score:number;choice:PursuitChoice}|undefined;
   for(const r of Object.values(memory.pairs)){
     const subject=view[r.actor],targets=view[r.peer],motion=learn.partMotion?.[r.actor];
@@ -164,6 +165,7 @@ export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:Vi
     for(const target of targets){
       const b=aligned(target.at,a,step),bi=g.indices.get(b.join());if(bi===undefined||ai===bi)continue;
       for(const motor of motors){
+        if(refutedHere[motor.op])continue;
         const to=add(a,motor.d),di=g.indices.get(to.join());if(di===undefined)continue;
         const replies=[bi,...g.peerEdges[bi]!.filter(q=>distance(to,g.cells[q]!)>distance(to,b))];
         const worst=replies.map(q=>g.worst[di*n+q]!);
@@ -183,7 +185,7 @@ export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:Vi
         const count=attempts[[r.actor,r.peer,a,b,motor.op].join('/')]??0;
         const score=(basis==='one_possible_response'?70:basis==='calibrated_response'?2:0)+horizon+Math.min(8,count)*(basis==='one_possible_response'?6:0.1);
         if(!best||score<best.score)best={score,choice:{actor:r.actor,peer:r.peer,from:a,to,target:b,input:motor.op,horizon,
-          peerOptions:di===bi?[]:chosenReplies.map(q=>g.cells[q]!),refs:r.refs,basis}};
+          peerOptions:di===bi?[]:chosenReplies.map(q=>g.cells[q]!),refs:[...r.refs,...Object.values(refutedHere)],basis}};
       }
     }
   }

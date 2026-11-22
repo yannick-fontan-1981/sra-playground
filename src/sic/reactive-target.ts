@@ -196,11 +196,17 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
   let grip: GripMemory | null = null;
   const freshResponse=(epoch:number)=>({epoch,learn:newPreviewLearning(),response:{pairs:{}} as ResponseMemory,
     attempts:{} as Record<string,number>,multiple:false});
-  let sampledResponse=freshResponse(-1);
+  let sampledResponse: ReturnType<typeof freshResponse> & {refutedSteps?:Record<string,Record<string,string>>}=freshResponse(-1);
   const observeResponse=(b:NativeObservation,a:NativeObservation,cmd:NativeCommand,first:NativeRows,second:NativeRows)=>{
     if(family!==learnReactiveMotionId||b.level_epoch!==a.level_epoch||b.levels_completed!==a.levels_completed||b.state!==a.state)return;
     if(sampledResponse.epoch!==b.level_epoch)sampledResponse=freshResponse(b.level_epoch);
     if(!/^ACTION[1-4]$/.test(cmd.action_ref))return;
+    const refuted = sampledResponse.refutedSteps?.[b.frame_hash];
+    if(refuted && b.frame_hash!==a.frame_hash){
+      delete refuted[cmd.action_ref];
+      if(!Object.keys(refuted).length)delete sampledResponse.refutedSteps![b.frame_hash];
+      if(!Object.keys(sampledResponse.refutedSteps!).length)delete sampledResponse.refutedSteps;
+    }
     const before=visualLayout(b,first),after=visualLayout(a,second);
     observePursuit(sampledResponse.response,before,after,cmd.action_ref,a.observation_ref);
     for(const [role,old] of Object.entries(before)){
@@ -220,7 +226,7 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
     async proposeInGroup(group, observation, rows, available, remaining, execution) {
       if(family===learnReactiveMotionId&&sampledResponse.epoch===observation.level_epoch&&sampledResponse.multiple&&remaining>0){
         const trial=choosePursuit(sampledResponse.response,sampledResponse.learn,visualLayout(observation,rows),rows,
-          new Set(available.map(c=>c.action_ref)),sampledResponse.attempts);
+          new Set(available.map(c=>c.action_ref)),sampledResponse.attempts,undefined,sampledResponse.refutedSteps?.[observation.frame_hash]);
         if(trial&&trial.basis!=='one_possible_response'){
           const mode=execution?.reasoningMode??'exploration';
           const facts={routeSupported:true,eligibleProbe:false,knownInteraction:false,mode};
@@ -505,7 +511,15 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       observeResponse(before,after,_action,first,second);
       if(proposal.sampled){
         const t=proposal.sampled,k=[t.actor,t.peer,t.from,t.target,t.input].join('/');
-        sampledResponse.attempts[k]=(sampledResponse.attempts[k]??0)+1;return {events:[]};
+        sampledResponse.attempts[k]=(sampledResponse.attempts[k]??0)+1;
+        if(before.level_epoch===after.level_epoch && before.levels_completed===after.levels_completed &&
+            before.state===after.state && before.frame_hash===after.frame_hash && !same(t.from,t.to)){
+          const byFrame=sampledResponse.refutedSteps??={};
+          const refuted=byFrame[before.frame_hash]??={};
+          refuted[t.input]=after.observation_ref;
+          return {events:[],reviewEvidence:'The image stayed unchanged after a predicted displacement. Reconsider other controls or another preparation.'};
+        }
+        return {events:[]};
       }
       if (proposal.grip) {
         const { observed, legs } = proposal.grip, step = legs[index]!;
