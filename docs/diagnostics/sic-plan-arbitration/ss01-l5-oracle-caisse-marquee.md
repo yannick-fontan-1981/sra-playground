@@ -1,5 +1,7 @@
 # SS01 L5 · À qui le miroir peut-il appliquer son effet ?
 
+Le diagnostic ci-dessous concerne la révision 195. La révision 197 obtient depuis une victoire autonome en 62 coups depuis l’entrée de campagne. [Mesure du candidat et preuves du transfert](./ss01-l5-transfert-passif.md)
+
 **L’oracle gagne en 38 coups, le minimum.** Sur le site local, SIC a gagné les quatre premiers niveaux en 36, 32, 42 et 79 coups. À l’entrée du L5, j’ai passé la main en mode manuel. Les 38 commandes ci-dessous ont ouvert le L6. Dans une campagne autonome distincte, SIC a atteint le L5 avec le même préfixe, puis a épuisé ses 120 coups de diagnostic. Version locale testée sur le port 64925, pilote SIC révision 195, commit de code `4a2b4bbc`, paquet `index-CzM2sZRq.js`. [Campagne depuis le L1](http://127.0.0.1:64925/?game=SS01&runThrough=4#playground) · [Entrée directe au L5](http://127.0.0.1:64925/?game=SS01&level=5#playground)
 
 ## Oracle jouable

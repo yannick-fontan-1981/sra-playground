@@ -13,12 +13,14 @@ export type Board = {
   motors: Motor[];
   transport?: { op: string; land: (actor: number, pivot: number) => number | null };
 };
-export type Step = { op: string; from: number; to: number; role?: string; placed?: number; boundary?: boolean };
+export type Step = { op: string; from: number; to: number; role?: string; placed?: number; boundary?: boolean;
+  passenger?: { source: number; pushes: string[] } };
 export type Project = {
   steps: Step[];
-  purpose: 'test_support' | 'reach_goal' | 'test_contact';
+  purpose: 'test_support' | 'reach_goal' | 'test_contact' | 'test_passenger';
   site: number;
   role?: string;
+  passenger?: { role: string; source: number; destination: number; pushes: string[]; witness?: string };
   preparations?: { at: number; role: string; enables: string[] }[];
 };
 export const edgeKey = (from: number, op: string, parts: readonly number[]) => [from, op, ...parts].join('/');
@@ -45,7 +47,7 @@ export function components(b: Board) {
   }
   return component;
 }
-function connectingSites(b: Board) {
+export function connectingSites(b: Board) {
   const regions = components(b),
     sites = new Set<number>();
   for (const p of b.floor)

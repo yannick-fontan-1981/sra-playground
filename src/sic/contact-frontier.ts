@@ -1,5 +1,6 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { composeSupportPlan, closedSupportRegion } from './compose-support-plan.ts';
+import { passengerProject } from './passenger-transport.ts';
 import { spatialControls, surfaceFromVisits } from './calibrate-spatial-controls.ts';
 import type { XY } from './access-terrain.ts';
 import { visualLayout, type PreviewLearning, type VisualLayout } from './witnessed-preview-transfer.ts';
@@ -17,8 +18,10 @@ export type FrontierContact = Ground & {
   terrain: number | null;
   previousEntry: string | null;
   priorContact: string | null;
+  passengerBinding?: string;
 };
 export type SupportLaw = {
+  appearance?: string;
   floor?: number;
   actor: string;
   role: string;
@@ -27,6 +30,7 @@ export type SupportLaw = {
   displacement: string;
 };
 export type ContactMemory = {
+  passengerWitnesses?: Record<string, string>;
   inheritedSupports?: SupportLaw[];
   supportLessons?: SupportLaw[];
   pendingEntries?: Record<number, SupportLaw>;
@@ -160,13 +164,26 @@ function cellAppearance(rows: NativeRows, id: number, g: Ground) {
     g.pitch
   ).join(',');
 }
+// A small change to an otherwise familiar piece motivates a comparison. Only a
+// before/after displacement can license the new role in a solving plan.
+function appearanceVariant(template: string | undefined, appearance: string) {
+  if (!template) return false;
+  const previous = template.split(','), current = appearance.split(',');
+  if (previous.length !== current.length) return false;
+  const changed = previous.filter((value, i) => value !== current[i]).length;
+  return changed > 0 && changed * 4 <= current.length;
+}
+function passengerBinding(b: Board, actor: string, role: string) {
+  return JSON.stringify([actor, role, b.roles[b.pivotIndex], b.transport?.op]);
+}
 function fittedTransport(
   learning: PreviewLearning,
   actor: string,
   layout: VisualLayout,
   g: Ground,
   motors: Set<string>,
-  available: Set<string>
+  available: Set<string>,
+  local?: { epoch: number; pivot: string }
 ) {
   for (const binding of Object.values(learning.bindings)) {
     if (
@@ -178,9 +195,11 @@ function fittedTransport(
       continue;
     const roles = new Set(binding.witnesses.flatMap((w) => w.geometry?.pivots.map((p) => p.role) ?? []));
     for (const role of roles) {
+      if (local && role !== local.pivot) continue;
       if (layout[role]?.length !== 1) continue;
       const examples: ProbePattern[] = [];
       for (const w of binding.witnesses) {
+        if (local && w.epoch !== local.epoch) continue;
         const matches = w.geometry?.pivots.filter((p) => p.role === role);
         if (matches?.length !== 1) continue;
         const relative = (p: XY): XY => [
@@ -362,7 +381,7 @@ export function proposeFrontierContact(
   const verifyEntry = !!project;
   const local = m.arrival ? new Set(fit.roles.filter((r) => !m.displaced.includes(r))) : new Set<string>();
   const nextStep = m.active?.steps[0];
-  if (!project && (!local.size || m.active?.preparations) && nextStep?.from === board.actor && m.active) {
+  if (!project && (!local.size || m.active?.preparations || m.active?.passenger) && nextStep?.from === board.actor && m.active) {
     // Occlusion elsewhere is not evidence that this stance was lost. Check the
     // participant required by this step, then acquire the actual public return.
     const occupant = board.parts.indexOf(nextStep.to);
@@ -390,6 +409,28 @@ export function proposeFrontierContact(
         deny,
         limits
       );
+      if (!project && board.transport && board.pivotIndex >= 0) {
+        for (const [i, part] of board.parts.entries()) {
+          if (i === board.pivotIndex) continue;
+          const role = board.roles[i]!, witness = m.passengerWitnesses?.[passengerBinding(board, g.actor, role)];
+          const appearance = m.appearances?.[role] ?? cellAppearance(rows, part, g);
+          const related = inherited.filter(law => appearanceVariant(law.appearance, appearance));
+          if (!related.length) continue;
+          const transform = fittedTransport(l, g.actor, visualLayout(o, rows), g, new Set(board.motors.map(v => v.op)),
+            new Set(o.available_action_refs), { epoch: o.level_epoch, pivot: board.roles[board.pivotIndex]! });
+          if (!transform) continue;
+          project = passengerProject({ ...board, transport: transform }, i, witness,
+            at => related.some(law => law.terrain === terrainAt(at)), deny, limits);
+          if (project) {
+            if (witness) {
+              const transfer = project.steps.find(s => s.passenger);
+              if (transfer) project.passenger = { role, source: transfer.passenger!.source, destination: transfer.placed!,
+                pushes: transfer.passenger!.pushes, witness };
+            }
+            break;
+          }
+        }
+      }
     }
     project ??= contactProject(
       canProject ? board : { ...board, goals: [] },
@@ -422,6 +463,7 @@ export function proposeFrontierContact(
         ?.entry ??
       null,
     priorContact: m.inheritedContact?.[g.actor] ?? null,
+    ...(step.passenger && step.role ? { passengerBinding: passengerBinding(board, g.actor, step.role) } : {}),
   };
 }
 export function recordFrontierContact(
@@ -473,6 +515,18 @@ export function recordFrontierContact(
   }
   if (s.role && s.placed !== undefined) {
     const parts = after[s.role] ?? [];
+    if (s.passenger) {
+      const appearance = m.appearances[s.role];
+      const present = (p: number) => parts.some(v => cell(v.at, trial) === p) ||
+        (!!appearance && cellAppearance(next, p, trial) === appearance);
+      const atSource = before.board.parts.some((p, i) => p === s.passenger!.source && before.board.roles[i] === s.role);
+      const alreadyAtDestination = before.board.parts.includes(s.placed);
+      if (!trial.passengerBinding || !atSource || alreadyAtDestination || at !== s.from || present(s.passenger.source) || !present(s.placed)) {
+        m.denied.push(edgeKey(s.from, s.op, trial.parts));
+        return 'passenger_transfer_refuted';
+      }
+      (m.passengerWitnesses ??= {})[trial.passengerBinding] = a.observation_ref;
+    }
     if (
       parts.some((v) => cell(v.at, trial) === s.placed) ||
       m.appearances[s.role] === cellAppearance(next, s.placed, trial)
@@ -522,7 +576,7 @@ export function recordFrontierContact(
   if (trial.project.steps.length > 1) {
     m.active = { ...trial.project, steps: trial.project.steps.slice(1) };
   }
-  return s.role ? 'object_displaced' : m.arrival ? 'arrived_to_investigate' : 'approach_verified';
+  return s.passenger ? 'passenger_transfer_observed' : s.role ? 'object_displaced' : m.arrival ? 'arrived_to_investigate' : 'approach_verified';
 }
 
 export function observeRegionArrival(

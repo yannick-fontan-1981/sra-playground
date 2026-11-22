@@ -1,5 +1,7 @@
 # Quelles généralisations peuvent débloquer d’autres L2 de Custom 4 ?
 
+**Suite du chantier sur la composition spatiale.** En campagne sur SS01 L5, la révision 197 teste si une pièce passive peut subir le transport connu du marchand. Elle choisit une réception selon les poussées qu’elle rend accessibles, vérifie le déplacement indépendant de la pièce et réutilise l’effet pour gagner en 62 coups. Cette qualification porte sur le L5. [Campagne depuis le L1 et vérification des reçus](./ss01-l5-transfert-passif.md)
+
 **SS09 L2 fait partie du lot ordinaire de diagnostic, d’expérimentation et de score**, au même titre que SS01 à SS11. SIC gagne SS09 à froid en 54 coups. Les mentions de réserve dans les protocoles historiques décrivent uniquement ces anciens gels. [Première divergence et victoire autonome sur SS09](placements-cooperatifs-v100.md)
 
 **Les trois nouveaux L2 gagnés à froid sont SS09 en 54, SS10 en 227 et SS11 en 35.** Sur SS09, SIC apprend à déplacer le partenaire une fois la porte ouverte. Sur SS10, il donne la priorité à une expérience de placement et apprend à tirer une caisse avant de pousser l’autre. Sur SS11, il retrouve les mouvements d’avant le clic, imagine deux appuis successifs et vérifie leur usage en traversant. [Chantiers, configurations et comparaisons causales](traversees-composees-v104.md)

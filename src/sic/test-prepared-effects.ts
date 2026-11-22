@@ -131,7 +131,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
     const { previewCarry, localCarry, contactFrontier, transportRetry } = m;
-    const lessons = [...(contactFrontier?.inheritedSupports ?? []), ...(contactFrontier?.supportLessons ?? [])];
+    const lessons = [...(contactFrontier?.inheritedSupports ?? []), ...(contactFrontier?.supportLessons ?? [])]
+      .map(law => ({...law, appearance:law.appearance ?? contactFrontier?.appearances?.[law.role]}));
     m = initialMemory(o.level_epoch);
     m.localCapacity = nextLocalLevel(localCarry);
     m.previewLearning = acceptPreviewCarry(previewCarry, o);
@@ -453,10 +454,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           } : {}),
         }} : {}),
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
+          ...(contactProject.project.passenger?{passenger:contactProject.project.passenger}:{}),
           site:contactProject.project.site,...(contactProject.project.preparations?{preparations:contactProject.project.preparations}:{}),from:contactProject.step.from,to:contactProject.step.to,
           next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,priorContact:contactProject.priorContact,
           width:contactProject.width,part:contactProject.step.role??null,
-          alternatives:contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
+          alternatives:contactProject.step.passenger?['passive_part_transfers_alone','part_stays_at_source']:
+            contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
             contactProject.step.role?['part_moves','part_changes_at_boundary','contact_is_blocked']:['subject_reaches_stance','predicted_access_is_blocked']}}:{}),
         ...(experiment.mobilityProbe ? {mobilityForecast:experiment.mobilityProbe} : {}),
         ...(experiment.mechanism ? {mechanismForecast:experiment.mechanism} : {}),

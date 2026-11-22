@@ -162,7 +162,7 @@ function designs(b: Board, allowed: Permission, maxNodes: number) {
 }
 
 type Position = { actor: number; parts: number[]; missing: number[]; steps: Step[]; priority: number };
-function contactRayClear(b: Board, from: number, to: number, pivot: number, parts: number[]) {
+export function contactRayClear(b: Board, from: number, to: number, pivot: number, parts: number[]) {
   for (const endpoint of [from, to]) {
     const dx = (endpoint % b.width) - (pivot % b.width),
       dy = Math.floor(endpoint / b.width) - Math.floor(pivot / b.width);
