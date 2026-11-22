@@ -39,6 +39,11 @@ test('two retained pushes check the moving subject, displaced part and stationar
     assert.equal(spatialStance(x, series[0]!, 0, bad.o, bad.rows, true), false);
   assert.deepEqual(preparedExperimentAt(x, 1, ok.o).contactProject?.parts, [4, 8]);
   assert.equal(preparedSpatialSeries(x, start.o, start.rows, 1, memory), undefined);
+  const support: Experiment = { ...x, contactProject: { ...t, project: { ...t.project, purpose: 'test_support' } } };
+  assert.equal(preparedSpatialSeries(support, start.o, start.rows, 16, memory)?.length, 2);
+  assert.equal(preparedSpatialSeries(support, start.o, start.rows, 16, newContactMemory()), undefined);
+  const control = { ...support, contactProject: { ...support.contactProject!, controlRole: role } };
+  assert.equal(preparedSpatialSeries(control, start.o, start.rows, 16, memory), undefined);
   const boundary = { ...x, contactProject: { ...t, project: { ...t.project, steps: [steps[0]!, { ...steps[1]!, boundary: true }] } } };
   assert.equal(preparedSpatialSeries(boundary, start.o, start.rows, 16, memory), undefined);
 });

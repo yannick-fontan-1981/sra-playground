@@ -51,7 +51,9 @@ export function preparedSpatialSeries(x: Experiment, o: NativeObservation, rows:
     }
   } else {
     const t = x.contactProject;
-    if (!t || t.acquired || t.project.purpose !== 'reach_goal') return;
+    if (!t || t.acquired) return;
+    const preparingSupport = t.project.purpose === 'test_support';
+    if (!preparingSupport && t.project.purpose !== 'reach_goal') return;
     const roles = new Set([t.actor]);
     for (const s of t.project.steps) if (s.role) roles.add(s.role);
     if (t.relay && memory?.relayControl) {
@@ -64,6 +66,9 @@ export function preparedSpatialSeries(x: Experiment, o: NativeObservation, rows:
         !same(pose[t.actor]!, [s.from])) break;
       const next = { ...pose, [t.actor]: [s.to] };
       if (s.role) {
+        // During a support experiment, the first contact and any movement of
+        // its control require acquisition (including possible loss of mobility).
+        if (preparingSupport && (!memory?.displaced.includes(s.role) || s.role === t.controlRole)) break;
         const parts = pose[s.role]!, placed = s.placed;
         if (placed === undefined || !parts.includes(s.to) || parts.includes(placed) ||
           placed - s.to !== s.to - s.from || (!t.relay && !memory?.displaced.includes(s.role) && !t.priorContact)) break;

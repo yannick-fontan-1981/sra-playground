@@ -1,8 +1,10 @@
 # Actions continues de SIC sur les 100 premiers niveaux
 
-## Poussées et approche d’un transfert dans SIC r209
+## Poussées et approche d’un transfert dans SIC r211
 
 Le préfixe de marche précédent s’arrêtait au premier contact. Le déplacement de l’indicateur d’arrivée pouvait aussi invalider un trajet libre. Un projet spatial retenu peut maintenant engager ses gestes de placement, jusqu’à 16 commandes. Le reçu conserve la destination attendue de chaque geste. Avant et après le geste, SIC vérifie la position du sujet et des participants liés. Pour une poussée, il vérifie aussi la nouvelle position de la pièce. Une première calibration non mesurée, une conversion de terrain ou l’activation du transfert rend la main au décideur. Après un retour contradictoire, le moteur réconcilie uniquement le préfixe exécuté.
+
+La préparation d’une expérience de support bénéficie aussi des poussées continues dès que SIC a observé le déplacement de cette pièce. Une poussée expérimentale du mécanisme de contrôle lui-même conserve son point de vérification de mobilité.
 
 Le contrôle de fusion rejoue les tickets exécutés dans les règles officielles de SS01. Il identifie séparément deux poussées successives du même objet et la marche continue qui précède immédiatement un transfert effectif du sujet. L’observateur de test dispose des positions physiques, le pilote utilise uniquement ses observations publiques et son projet. Une suppression des poussées peut ainsi faire échouer le contrôle même si le niveau reste gagné.
 

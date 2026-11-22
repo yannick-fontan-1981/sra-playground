@@ -20,6 +20,7 @@ const campaign = [
 ];
 const requiredPhysical = {
   2: ['mirror', 'position'],
+  3: ['crate'],
   4: ['crate', 'mirror', 'position'],
   5: ['crate', 'mirror'],
   8: ['crate', 'mirror', 'position'],

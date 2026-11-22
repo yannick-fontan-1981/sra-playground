@@ -13,6 +13,7 @@ import { contactProject, edgeKey, stepCell, type Board, type Project, type Step 
 type Ground = { role: string; actor: string; origin: XY; pitch: XY; width: number };
 type RelayRun = { ground:Ground; plan:RelayPlan; pivotRole:string; cargoRole:string; transfer:string; witness:string; expected:string };
 export type FrontierContact = Ground & {
+  controlRole?: string;
   relay?:RelayRun;
   step: Step;
   project: Project;
@@ -594,6 +595,7 @@ export function proposeFrontierContact(
     step,
     project,
     parts: board.parts,
+    controlRole: board.roles[board.pivotIndex],
     acquired: verifyEntry,
     transform: board.transport?.op ?? null,
     ref: o.observation_ref,
