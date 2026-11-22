@@ -213,7 +213,8 @@ export function offerTerminalContact(
           score,
           trial: {
             witness: w,
-            ...(preparationKey?{preparationKey,blockedGoal:learn.blockedGoal}:{}),
+            ...(preparationKey ? { preparationKey } : {}),
+            ...(preparationKey && learn.blockedGoal ? { blockedGoal: learn.blockedGoal } : {}),
             from: p,
             to: route.to,
             goal,
