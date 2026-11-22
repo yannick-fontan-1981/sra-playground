@@ -38,7 +38,7 @@ Les commits doivent rester petits et cohérents, avec des pushes réguliers.
 
 ### Pendant le test d’un jeu précis
 
-Chaque modification destinée au prochain essai de Yannick inclut la relivraison du site, sauf s’il demande explicitement de différer. Après intégration sur `main`, publier la version avec les accès existants et mettre à jour l’adresse de test qu’il utilise déjà, y compris son port local. Reprendre cette adresse dans la session en cours.
+Chaque modification destinée au prochain essai de Yannick inclut la relivraison du site, sauf s’il demande explicitement de différer. Retrouver son adresse de test dans la session. Si elle est locale, y servir la version dès qu’elle est prête et donner le lien sans attendre GitHub ni Sites. Quand Yannick demande un essai uniquement local, réserver la publication hébergée à une demande ultérieure. Pour une livraison hébergée, intégrer sur `main`, puis publier avec les accès existants.
 
 Avant d’annoncer une victoire, la reproduire par les commandes de l’interface livrée avec le mode et le parcours demandés. Préciser le niveau de départ, le résultat officiel et les coups par niveau. Dans le compte rendu, donner le lien rejouable, la version déployée et le SHA vérifié. Si la livraison ou la reproduction échoue, le signaler et poursuivre le diagnostic.
 
