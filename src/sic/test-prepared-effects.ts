@@ -1,5 +1,6 @@
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
-import { newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
+import { sicObservedTransportDeadlock } from '../logos-engine/v6-native-types.ts';
+import { observeStrandedTransport, newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
 import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
@@ -129,8 +130,16 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
-    const carry=m.previewCarry,local=m.localCarry,contactEvidence=m.contactFrontier?.contactEvidence;m=initialMemory(o.level_epoch);m.localCapacity=nextLocalLevel(local);m.previewLearning=acceptPreviewCarry(carry,o);
-    m.contactFrontier=inheritFrontierContacts(contactEvidence,m.previewLearning);
+    const { previewCarry, localCarry, contactFrontier, transportRetry } = m;
+    const lessons = [...(contactFrontier?.inheritedSupports ?? []), ...(contactFrontier?.supportLessons ?? [])];
+    m = initialMemory(o.level_epoch);
+    m.localCapacity = nextLocalLevel(localCarry);
+    m.previewLearning = acceptPreviewCarry(previewCarry, o);
+    m.contactFrontier = inheritFrontierContacts(contactFrontier?.contactEvidence, m.previewLearning, lessons);
+    if (transportRetry?.epoch === o.level_epoch) {
+      m.transportRetry = transportRetry;
+      m.contactFrontier.recoveredEdges = transportRetry.edges;
+    }
   }
   function acquire(
     b: NativeObservation,
@@ -221,6 +230,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if(followMarkedPose)cursor.followMarkedPose=true;
     }
     const frontierResult=x?.contactProject ? recordFrontierContact(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next,x.contactProject) : undefined;
+    if(limits && m.contactFrontier?.inheritedSupports?.length && (!x?.contactProject || frontierResult==='movement_refuted' || frontierResult==='contact_effect_refuted'))
+      observeStrandedTransport(m.contactFrontier,learning,b,a,rows,next,observedCommandKey(cmd),limits);
     if(!x?.contactProject && b.level_epoch===a.level_epoch && learning.partMotion)
       observeRegionArrival(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next);
     const result=recordExperiment(m, b, a, cmd, rows, next, x);
@@ -306,6 +317,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       if (!command) return null;
       const ref = o.observation_ref,
         label = contactProject ? (contactProject.acquired ? 'Enter the changed site to verify that it now supports movement'
+          : contactProject.project.preparations?.length ? 'Prepare the required footholds in order so the subject and the movable parts can reach their next positions'
           : contactProject.previousEntry ? 'Reuse the observed support change to connect another region'
           : contactProject.project.purpose==='reach_goal' ? 'Use the observed change in access to reach the witnessed destination'
           : contactProject.project.purpose==='test_contact' ? 'Approach the untested object in the newly reached region and measure its displacement'
@@ -441,7 +453,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           } : {}),
         }} : {}),
         ...(contactProject ? {contactFrontierForecast:{purpose:contactProject.project.purpose,role:contactProject.project.role??null,
-          site:contactProject.project.site,from:contactProject.step.from,to:contactProject.step.to,
+          site:contactProject.project.site,...(contactProject.project.preparations?{preparations:contactProject.project.preparations}:{}),from:contactProject.step.from,to:contactProject.step.to,
           next:contactProject.step.op,remaining:contactProject.project.steps.length,verifyEntry:contactProject.acquired,previousEntry:contactProject.previousEntry,priorContact:contactProject.priorContact,
           width:contactProject.width,part:contactProject.step.role??null,
           alternatives:contactProject.acquired?['subject_enters_changed_cell','entry_remains_blocked']:
@@ -517,6 +529,22 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       return {
         events: outcome ? [{ kind: 'sic_preparation_outcome', epoch: b.level_epoch, ...outcome }] : [],
       };
+    },
+    requestedStopReason(o) {
+      const proof = m.contactFrontier?.deadlock;
+      if (!proof || proof.ref !== o.observation_ref) return null;
+      return m.contactFrontier?.recoveredEdges?.includes(proof.edge)
+        ? 'sic_transport_deadlock_already_recovered'
+        : sicObservedTransportDeadlock;
+    },
+    stateAfterLevelReset(o, _rows, entry) {
+      const proof = m.contactFrontier?.deadlock;
+      if (!proof || !entry) return;
+      const edges = [...new Set([...(m.contactFrontier?.recoveredEdges ?? []), proof.edge])];
+      const restored = structuredClone(entry) as typeof m;
+      restored.transportRetry = { epoch: o.level_epoch, edges };
+      if (restored.epoch === o.level_epoch) (restored.contactFrontier ??= newContactMemory()).recoveredEdges = edges;
+      return restored;
     },
     state: () => m,
     restore(value) {

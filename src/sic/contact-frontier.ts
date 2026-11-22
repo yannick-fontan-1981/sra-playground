@@ -1,9 +1,10 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { composeSupportPlan, closedSupportRegion } from './compose-support-plan.ts';
 import { spatialControls, surfaceFromVisits } from './calibrate-spatial-controls.ts';
 import type { XY } from './access-terrain.ts';
 import { visualLayout, type PreviewLearning, type VisualLayout } from './witnessed-preview-transfer.ts';
 import { previewLaw, type ProbePattern } from './reachable-preview-configurations.ts';
-import { contactProject, edgeKey, type Board, type Project, type Step } from './contact-frontier-search.ts';
+import { contactProject, edgeKey, stepCell, type Board, type Project, type Step } from './contact-frontier-search.ts';
 
 type Ground = { role: string; actor: string; origin: XY; pitch: XY; width: number };
 export type FrontierContact = Ground & {
@@ -17,7 +18,20 @@ export type FrontierContact = Ground & {
   previousEntry: string | null;
   priorContact: string | null;
 };
+export type SupportLaw = {
+  floor?: number;
+  actor: string;
+  role: string;
+  terrain: number;
+  entry: string;
+  displacement: string;
+};
 export type ContactMemory = {
+  inheritedSupports?: SupportLaw[];
+  supportLessons?: SupportLaw[];
+  pendingEntries?: Record<number, SupportLaw>;
+  deadlock?: { ref: string; previous: string; edge: string; configurations: number };
+  recoveredEdges?: string[];
   inheritedContact?: Record<string, string>;
   contactEvidence?: Record<string, { sites: string[]; ref: string }>;
   roles?: string[];
@@ -37,12 +51,18 @@ export const newContactMemory = (): ContactMemory => ({ denied: [], displaced: [
 
 export function inheritFrontierContacts(
   evidence: ContactMemory['contactEvidence'],
-  learning: PreviewLearning | undefined
+  learning: PreviewLearning | undefined,
+  lessons: SupportLaw[] = []
 ): ContactMemory {
   const next = newContactMemory();
-  if (!evidence || !learning?.terminal?.length) return next;
+  if (!learning?.terminal?.length) return next;
   const actors = new Set(learning.terminal.map((w) => w.actor));
-  next.contactEvidence = Object.fromEntries(Object.entries(evidence).filter(([actor]) => actors.has(actor)));
+  const supports = new Map<string, SupportLaw>();
+  for (const law of lessons) {
+    if (actors.has(law.actor)) supports.set(JSON.stringify([law.actor, law.role, law.terrain]), law);
+  }
+  next.inheritedSupports = [...supports.values()];
+  next.contactEvidence = Object.fromEntries(Object.entries(evidence ?? {}).filter(([actor]) => actors.has(actor)));
   next.inheritedContact = Object.fromEntries(
     Object.entries(next.contactEvidence)
       .filter(([, model]) => model.sites.length >= 2)
@@ -218,6 +238,7 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
     const warp = fittedTransport(l, goal.actor, layout, g, new Set(motors.map((m) => m.op)), available);
     const floor =
       m.floor ??
+      m.inheritedSupports?.find((law) => law.actor === goal.actor)?.floor ??
       surfaceFromVisits(motion.sites, rows, bodies[0]!.at, pitch, [bodies[0]!.at]) ??
       Number(Object.entries(motion.substrate).sort((a, b) => b[1] - a[1])[0]?.[0]);
     if (!Number.isFinite(floor)) continue;
@@ -237,7 +258,7 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
     const visibleRoles = () =>
       Object.keys(layout).filter(
         (role) =>
-          !signals.has(role) &&
+          (!signals.has(role) || m.inheritedSupports?.some((law) => law.role === role && law.actor === g.actor)) &&
           layout[role]!.every((v) => {
             const w = v.box[2]! - v.box[0]! + 1,
               h = v.box[3]! - v.box[1]! + 1;
@@ -271,11 +292,30 @@ function contactBoard(m: ContactMemory, l: PreviewLearning, o: NativeObservation
       .flatMap((role) => [...observed.get(role)!].map((at) => ({ at, role })))
       .sort((a, b) => a.role.localeCompare(b.role) || a.at - b.at);
     if (!objects.length && !m.supported.length && !m.verify) continue;
-    const walkable = new Set([...fixed, ...objects.map((v) => v.at), ...m.supported]);
+    const walkable = new Set([
+      ...fixed,
+      ...objects.map((v) => v.at),
+      ...m.supported,
+      ...Object.keys(m.pendingEntries ?? {}).map(Number),
+    ]);
     for (let y = 0; y < height; y++)
-      for (let x = 0; x < width; x++)
-        if (dominantColor(rows, [origin[0] + x * pitch[0], origin[1] + y * pitch[1]], pitch) === floor)
+      for (let x = 0; x < width; x++) {
+        const at: XY = [origin[0] + x * pitch[0], origin[1] + y * pitch[1]];
+        if (dominantColor(rows, at, pitch) === floor) {
           walkable.add(x + y * width);
+          continue;
+        }
+        if (m.inheritedSupports?.length) {
+          const patch = cellPixels(rows, at, pitch),
+            span = Math.round(pitch[0] / 2);
+          if (
+            patch.length === span * Math.round(pitch[1] / 2) &&
+            span > 1 &&
+            [patch[0], patch[span - 1], patch.at(-span), patch.at(-1)].every((colour) => colour === floor)
+          )
+            walkable.add(x + y * width);
+        }
+      }
     const pivotIndex = warp ? objects.length : -1;
     if (warp) objects.push({ at: warp.pivot, role: warp.role });
     const board: Board = {
@@ -301,12 +341,12 @@ export function proposeFrontierContact(
   rows: NativeRows,
   limits: { maxNodes: number; maxDepth: number }
 ): FrontierContact | null {
-  const prior = Object.keys(m.inheritedContact ?? {}).length > 0;
+  const prior = !!m.inheritedSupports?.length || Object.keys(m.inheritedContact ?? {}).length > 0;
   if (!prior && !m.arrival && !m.active && !m.displaced.length && !m.verify && !m.supported.length) return null;
   const fit = contactBoard(m, l, o, rows);
   if (!fit) return null;
   const { board, g } = fit;
-  const deny = new Set(m.denied);
+  const deny = new Set([...m.denied, ...(m.recoveredEdges ?? [])]);
   let project: Project | null = null;
   if (m.verify) {
     const at = m.verify.at,
@@ -322,7 +362,7 @@ export function proposeFrontierContact(
   const verifyEntry = !!project;
   const local = m.arrival ? new Set(fit.roles.filter((r) => !m.displaced.includes(r))) : new Set<string>();
   const nextStep = m.active?.steps[0];
-  if (!project && !local.size && nextStep?.from === board.actor && m.active) {
+  if (!project && (!local.size || m.active?.preparations) && nextStep?.from === board.actor && m.active) {
     // Occlusion elsewhere is not evidence that this stance was lost. Check the
     // participant required by this step, then acquire the actual public return.
     const occupant = board.parts.indexOf(nextStep.to);
@@ -338,7 +378,20 @@ export function proposeFrontierContact(
   if (!project) {
     if (!board.goals.length && !local.size) return null;
     const canProject = m.displaced.length > 0 || m.supported.length > 0 || !!m.inheritedContact?.[g.actor];
-    project = contactProject(
+    const inherited = m.inheritedSupports?.filter((v) => v.actor === g.actor);
+    if (inherited?.length && board.goals.length) {
+      const terrains = new Map<number, number | null>();
+      project = composeSupportPlan(
+        board,
+        (role, id) => {
+          if (!terrains.has(id)) terrains.set(id, terrainAt(id));
+          return inherited.some((law) => law.role === role && law.terrain === terrains.get(id));
+        },
+        deny,
+        limits
+      );
+    }
+    project ??= contactProject(
       canProject ? board : { ...board, goals: [] },
       deny,
       limits,
@@ -349,7 +402,10 @@ export function proposeFrontierContact(
   const step = project?.steps[0];
   if (!step || !project || deny.has(edgeKey(step.from, step.op, board.parts))) return null;
   if (!m.roles && project.purpose === 'reach_goal' && !project.steps.some((s) => s.role)) return null;
-  const terrain = verifyEntry ? m.verify!.terrain : terrainAt(project.site);
+  const planned = project.preparations?.find((v) => project.steps.some((s) => s.boundary && s.placed === v.at));
+  const terrain = verifyEntry
+    ? m.verify!.terrain
+    : terrainAt(step.boundary ? step.placed! : (planned?.at ?? project.site));
   const law = m.verified?.[JSON.stringify([project.role, terrain])];
   return {
     ...g,
@@ -360,7 +416,11 @@ export function proposeFrontierContact(
     transform: board.transport?.op ?? null,
     ref: o.observation_ref,
     terrain,
-    previousEntry: law?.entry ?? null,
+    previousEntry:
+      law?.entry ??
+      m.inheritedSupports?.find((v) => v.actor === g.actor && v.role === planned?.role && v.terrain === terrain)
+        ?.entry ??
+      null,
     priorContact: m.inheritedContact?.[g.actor] ?? null,
   };
 }
@@ -390,16 +450,27 @@ export function recordFrontierContact(
     body = after[trial.actor],
     at = body?.length === 1 ? cell(body[0]!.at, trial) : null;
   const pending = m.verify;
+  const tail = trial.project.steps.slice(1);
   delete m.active;
   delete m.verify;
   if (at !== s.to) {
     m.denied.push(edgeKey(s.from, s.op, trial.parts));
+    if (m.pendingEntries) delete m.pendingEntries[s.to];
     m.arrival = false;
     return 'movement_refuted';
   }
   m.arrival = s.op === trial.transform && crossesIntoUnseenRegion(before.board, s.from, s.to, m.visited ?? []);
   const visited = (m.visited ??= []);
   if (!visited.includes(s.from)) visited.push(s.from);
+  const entered = m.pendingEntries?.[s.to];
+  if (entered) {
+    if (!m.supported.includes(s.to)) m.supported.push(s.to);
+    (m.verified ??= {})[JSON.stringify([entered.role, entered.terrain])] = {
+      displacement: entered.displacement,
+      entry: a.observation_ref,
+    };
+    delete m.pendingEntries![s.to];
+  }
   if (s.role && s.placed !== undefined) {
     const parts = after[s.role] ?? [];
     if (
@@ -408,6 +479,14 @@ export function recordFrontierContact(
     ) {
       if (!m.displaced.includes(s.role)) m.displaced.push(s.role);
     } else if (s.boundary && parts.length === before.board.roles.filter((r) => r === s.role).length - 1) {
+      const law = m.inheritedSupports?.find(
+        (v) => v.actor === trial.actor && v.role === s.role && v.terrain === trial.terrain
+      );
+      if (trial.project.preparations && law && tail.length) {
+        (m.pendingEntries ??= {})[s.placed] = { ...law, displacement: a.observation_ref };
+        m.active = { ...trial.project, steps: tail };
+        return 'observed_conversion_continue_conditional_plan';
+      }
       m.verify = { at: s.placed, role: s.role, terrain: trial.terrain, displacement: a.observation_ref };
       return 'object_changed_at_frontier_test_entry';
     } else {
@@ -421,6 +500,22 @@ export function recordFrontierContact(
       displacement: pending.displacement,
       entry: a.observation_ref,
     };
+    if (pending.terrain !== null) {
+      const law = {
+        floor: before.floor,
+        actor: trial.actor,
+        role: pending.role,
+        terrain: pending.terrain,
+        entry: a.observation_ref,
+        displacement: pending.displacement,
+      };
+      m.supportLessons = [
+        ...(m.supportLessons ?? []).filter(
+          (v) => v.actor !== law.actor || v.role !== law.role || v.terrain !== law.terrain
+        ),
+        law,
+      ];
+    }
     m.denied = [];
     return 'new_support_entered';
   }
@@ -465,4 +560,47 @@ export function observeRegionArrival(
       break;
     }
   }
+}
+
+export function observeStrandedTransport(
+  m: ContactMemory,
+  learning: PreviewLearning,
+  b: NativeObservation,
+  a: NativeObservation,
+  rows: NativeRows,
+  next: NativeRows,
+  op: string,
+  limits: { maxNodes: number; maxDepth: number }
+) {
+  if (!m.inheritedSupports?.length || b.level_epoch !== a.level_epoch || b.levels_completed !== a.levels_completed)
+    return;
+  const fit = contactBoard(m, learning, b, rows);
+  if (!fit?.board.transport) return;
+  const { board, g } = fit,
+    motor = board.motors.find((v) => v.op === op);
+  if (
+    !motor ||
+    b.available_action_refs.some(
+      (action) => action !== board.transport?.op && !board.motors.some((v) => v.op === action)
+    )
+  )
+    return;
+  const pivot = board.parts[board.pivotIndex]!;
+  if (stepCell(board, board.actor, motor.delta) !== pivot) return;
+  const dest = stepCell(board, pivot, motor.delta),
+    layout = visualLayout(a, next);
+  const single = (role: string, p: number) => layout[role]?.length === 1 && cell(layout[role]![0]!.at, g) === p;
+  if (!single(g.actor, pivot) || !single(board.roles[board.pivotIndex]!, dest)) return;
+  const parts = board.parts.slice();
+  parts[board.pivotIndex] = dest;
+  const states = closedSupportRegion({ ...board, parts, actor: pivot }, limits.maxNodes);
+  if (states === null) return;
+  const prior = proposeFrontierContact({ ...m, active: undefined, verify: undefined }, learning, b, rows, limits);
+  if (!prior?.project.preparations) return;
+  m.deadlock = {
+    ref: a.observation_ref,
+    previous: b.observation_ref,
+    edge: edgeKey(board.actor, op, board.parts),
+    configurations: states,
+  };
 }

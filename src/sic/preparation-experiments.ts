@@ -249,6 +249,7 @@ export type Outcome = {
   transfer?: Record<string, unknown>;
 };
 export type Memory = {
+  transportRetry?:{epoch:number;edges:string[]};
   contactFrontier?: import('./contact-frontier.ts').ContactMemory;
   placementVisits?:import('./recurrent-placement.ts').PlacementVisits;
   transportLearning?: import('./transport-observations.ts').TransportMemory;

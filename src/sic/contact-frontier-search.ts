@@ -19,15 +19,16 @@ export type Project = {
   purpose: 'test_support' | 'reach_goal' | 'test_contact';
   site: number;
   role?: string;
+  preparations?: { at: number; role: string; enables: string[] }[];
 };
 export const edgeKey = (from: number, op: string, parts: readonly number[]) => [from, op, ...parts].join('/');
 const distance = (a: number, b: number, w: number) =>
   Math.abs((a % w) - (b % w)) + Math.abs(Math.floor(a / w) - Math.floor(b / w));
-function stepCell(b: Board, a: number, d: number) {
+export function stepCell(b: Board, a: number, d: number) {
   const v = a + d;
   return v >= 0 && v < b.width * b.height && distance(a, v, b.width) === 1 ? v : -1;
 }
-function components(b: Board) {
+export function components(b: Board) {
   const component = new Map<number, number>();
   for (const seed of b.floor) {
     if (component.has(seed)) continue;
@@ -61,7 +62,7 @@ function connectingSites(b: Board) {
     }
   return sites;
 }
-function walking(b: Board, actor: number, parts: number[], denied: Set<string>) {
+export function walking(b: Board, actor: number, parts: number[], denied: Set<string>) {
   const occupied = new Set(parts),
     path = new Map<number, Step[]>();
   path.set(actor, []);
