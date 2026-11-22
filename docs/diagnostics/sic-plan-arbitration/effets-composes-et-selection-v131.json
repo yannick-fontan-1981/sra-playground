@@ -1,0 +1,1226 @@
+{
+  "baseline": "v130",
+  "frozenCandidate": "sic-test-selection-while-holding-v131",
+  "commit": "7ee319d69da18dba9d56777de43f0a3bb59d6446",
+  "engine": {
+    "src/games": "cf1115989479463724489ea1c65c956922c4503f",
+    "src/runtime": "7e2b1f0e537e6ca445c956045381c58d9e7fdcf9",
+    "public": "017ba5d5df2dbcc48e34a2e1f1539e836f37d5a3",
+    "sourcePythonTree": "a5ff8c0ba6a25478a74d09b937697e624e40073f",
+    "sourcePyodideAssetsSHA256": "57aaf9ced3160b473b35639607bf6b5eefc0dcb821f5d4ac8a684e52193c0285"
+  },
+  "workers": 1,
+  "nativeComparison": [
+    {
+      "game": "SS12",
+      "start": 1,
+      "end": 2,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 1,
+          "actions": 64,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 30,
+          "won": true
+        }
+      ],
+      "baselineStop": "target_levels_completed",
+      "candidateStop": "target_levels_completed",
+      "firstDifferentCommandOrFrame": null,
+      "identicalTrajectory": true,
+      "firstDifferentGatePrediction": 69,
+      "baselineCommandDigest": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f",
+      "candidateCommandDigest": "d2c494ebf16f8712d694a877d405c8a8bb54365434ee2e1965384c6c4c7aeb7f",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    },
+    {
+      "game": "SS13",
+      "start": 1,
+      "end": 2,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 1,
+          "actions": 300,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 1,
+          "actions": 300,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 36,
+          "won": true
+        }
+      ],
+      "baselineStop": "target_levels_completed",
+      "candidateStop": "target_levels_completed",
+      "firstDifferentCommandOrFrame": null,
+      "identicalTrajectory": true,
+      "firstDifferentGatePrediction": 306,
+      "baselineCommandDigest": "4a47c7a078c18adcb0fa91a18fc8f287c2f13d343d99e9231ace210f2db938e0",
+      "candidateCommandDigest": "4a47c7a078c18adcb0fa91a18fc8f287c2f13d343d99e9231ace210f2db938e0",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    },
+    {
+      "game": "SS14",
+      "start": 1,
+      "end": 2,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 1,
+          "actions": 31,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 52,
+          "won": true
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 1,
+          "actions": 31,
+          "won": true
+        },
+        {
+          "level": 2,
+          "actions": 52,
+          "won": true
+        }
+      ],
+      "baselineStop": "target_levels_completed",
+      "candidateStop": "target_levels_completed",
+      "firstDifferentCommandOrFrame": null,
+      "identicalTrajectory": true,
+      "firstDifferentGatePrediction": 36,
+      "baselineCommandDigest": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3",
+      "candidateCommandDigest": "ba02b1b53d76e6e9d494f3cf4570d26e4332bd6701e82593d26b37b1433336e3",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    },
+    {
+      "game": "SS13",
+      "start": 3,
+      "end": 3,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 3,
+          "actions": 176,
+          "won": true
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 3,
+          "actions": 176,
+          "won": true
+        }
+      ],
+      "baselineStop": "target_levels_completed",
+      "candidateStop": "target_levels_completed",
+      "firstDifferentCommandOrFrame": null,
+      "identicalTrajectory": true,
+      "firstDifferentGatePrediction": 62,
+      "baselineCommandDigest": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363",
+      "candidateCommandDigest": "8d1926e791211fb80fd646f1957684639ee7ea2ba83aaf32cacf76355869b363",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    },
+    {
+      "game": "SS11",
+      "start": 3,
+      "end": 3,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 3,
+          "actions": 41,
+          "won": false
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 3,
+          "actions": 41,
+          "won": false
+        }
+      ],
+      "baselineStop": "native_game_over",
+      "candidateStop": "native_game_over",
+      "firstDifferentCommandOrFrame": null,
+      "identicalTrajectory": true,
+      "firstDifferentGatePrediction": null,
+      "baselineCommandDigest": "03e00403d09c16e7f17bf2ba5b4f2f64afece00150309a2edb182fed43660eb0",
+      "candidateCommandDigest": "03e00403d09c16e7f17bf2ba5b4f2f64afece00150309a2edb182fed43660eb0",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    },
+    {
+      "game": "SS10",
+      "start": 3,
+      "end": 3,
+      "budget": 350,
+      "baselineOfficial": [
+        {
+          "level": 3,
+          "actions": 81,
+          "won": true
+        }
+      ],
+      "candidateOfficial": [
+        {
+          "level": 3,
+          "actions": 81,
+          "won": true
+        }
+      ],
+      "baselineStop": "target_levels_completed",
+      "candidateStop": "target_levels_completed",
+      "firstDifferentCommandOrFrame": null,
+      "identicalTrajectory": true,
+      "firstDifferentGatePrediction": null,
+      "baselineCommandDigest": "915f2c498b3a233decfced4f4467b337608df8ae067c5ab90140c358bb7bb8c4",
+      "candidateCommandDigest": "915f2c498b3a233decfced4f4467b337608df8ae067c5ab90140c358bb7bb8c4",
+      "baselinePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "candidatePack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc"
+    }
+  ],
+  "nativeTwoConfigurations": [],
+  "gateForecastAudit": [
+    {
+      "tape": "serial-early-lessons-v130.jsonl",
+      "game": "SS12",
+      "start": 1,
+      "finish": 2,
+      "budget": 350,
+      "issued": 94,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 6,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 6,
+      "wrongGateForecasts": 1,
+      "wrongUncoveredGateForecasts": 1,
+      "tests": []
+    },
+    {
+      "tape": "serial-early-lessons-v130.jsonl",
+      "game": "SS13",
+      "start": 1,
+      "finish": 2,
+      "budget": 350,
+      "issued": 336,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 101,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 101,
+      "wrongGateForecasts": 3,
+      "wrongUncoveredGateForecasts": 3,
+      "tests": []
+    },
+    {
+      "tape": "serial-early-lessons-v130.jsonl",
+      "game": "SS14",
+      "start": 1,
+      "finish": 2,
+      "budget": 350,
+      "issued": 83,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 5,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 5,
+      "wrongGateForecasts": 3,
+      "wrongUncoveredGateForecasts": 3,
+      "tests": []
+    },
+    {
+      "tape": "serial-joint-physics-S13-v130.jsonl",
+      "game": "SS13",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 176,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 25,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 25,
+      "wrongGateForecasts": 22,
+      "wrongUncoveredGateForecasts": 14,
+      "tests": []
+    },
+    {
+      "tape": "serial-independent-room-v128.jsonl",
+      "game": "SS11",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 41,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 0,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 0,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-joint-physics-S10-v130.jsonl",
+      "game": "SS10",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 81,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 10,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 10,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-unseen-upper-custom-v130.jsonl",
+      "game": "SS07",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 350,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 143,
+      "unavailableNextReadings": 1,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 142,
+      "wrongGateForecasts": 28,
+      "wrongUncoveredGateForecasts": 28,
+      "tests": []
+    },
+    {
+      "tape": "serial-unseen-upper-custom-v130.jsonl",
+      "game": "SS09",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 322,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 97,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 97,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-early-lessons-v131.jsonl",
+      "game": "SS12",
+      "start": 1,
+      "finish": 2,
+      "budget": 350,
+      "issued": 94,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 6,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 6,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-early-lessons-v131.jsonl",
+      "game": "SS13",
+      "start": 1,
+      "finish": 2,
+      "budget": 350,
+      "issued": 336,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 101,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 101,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-early-lessons-v131.jsonl",
+      "game": "SS14",
+      "start": 1,
+      "finish": 2,
+      "budget": 350,
+      "issued": 83,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 5,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 5,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-held-open-compound-S13-v131.jsonl",
+      "game": "SS13",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 176,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 25,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 25,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-held-open-compound-S11-v131.jsonl",
+      "game": "SS11",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 41,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 0,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 0,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    },
+    {
+      "tape": "serial-held-open-compound-S10-v131.jsonl",
+      "game": "SS10",
+      "start": 3,
+      "finish": 3,
+      "budget": 350,
+      "issued": 81,
+      "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+      "clicksWithForecast": 10,
+      "unavailableNextReadings": 0,
+      "mismatchedPositions": 0,
+      "unchangedPlacements": 10,
+      "wrongGateForecasts": 0,
+      "wrongUncoveredGateForecasts": 0,
+      "tests": []
+    }
+  ],
+  "firstPredictedOpenings": [
+    {
+      "game": "SS11",
+      "level": 3,
+      "action": 41,
+      "publicImage": "066237a9d9206d40",
+      "publicControls": 1,
+      "initialFrames": 41,
+      "visibleClosedBefore": 34,
+      "visibleOpenWithControls": 7,
+      "visibleOpenWithoutControls": 0,
+      "chosen": 2,
+      "originRole": "ground",
+      "predictedArrivalRole": "control",
+      "previousVisitsOfSameSubject": 2,
+      "played": {
+        "op": 2,
+        "over": true,
+        "changed": true,
+        "gateChanged": true,
+        "gateCovered": false,
+        "actorReadable": false,
+        "allControlsOccupied": null,
+        "role": null
+      },
+      "branches": [
+        {
+          "op": 1,
+          "over": false,
+          "changed": true,
+          "gateChanged": false,
+          "gateCovered": false,
+          "actorReadable": true,
+          "allControlsOccupied": false,
+          "role": "ground"
+        },
+        {
+          "op": 2,
+          "over": true,
+          "changed": true,
+          "gateChanged": true,
+          "gateCovered": false,
+          "actorReadable": false,
+          "allControlsOccupied": null,
+          "role": null
+        },
+        {
+          "op": 3,
+          "over": true,
+          "changed": true,
+          "gateChanged": false,
+          "gateCovered": false,
+          "actorReadable": false,
+          "allControlsOccupied": null,
+          "role": null
+        },
+        {
+          "op": 4,
+          "over": false,
+          "changed": true,
+          "gateChanged": false,
+          "gateCovered": false,
+          "actorReadable": true,
+          "allControlsOccupied": false,
+          "role": "ground"
+        },
+        {
+          "op": 5,
+          "over": false,
+          "changed": false,
+          "gateChanged": false,
+          "gateCovered": false,
+          "actorReadable": true,
+          "allControlsOccupied": false,
+          "role": "ground"
+        },
+        {
+          "op": 6,
+          "over": false,
+          "changed": false,
+          "gateChanged": false,
+          "gateCovered": false,
+          "actorReadable": true,
+          "allControlsOccupied": false,
+          "role": "ground"
+        }
+      ],
+      "sameCommandAfterPreparation": [
+        {
+          "preparation": 1,
+          "observation": {
+            "op": 2,
+            "over": false,
+            "changed": true,
+            "gateChanged": false,
+            "gateCovered": false,
+            "actorReadable": true,
+            "allControlsOccupied": false,
+            "role": "ground"
+          }
+        },
+        {
+          "preparation": 4,
+          "observation": {
+            "op": 2,
+            "over": false,
+            "changed": true,
+            "gateChanged": false,
+            "gateCovered": false,
+            "actorReadable": true,
+            "allControlsOccupied": false,
+            "role": "ground"
+          }
+        },
+        {
+          "preparation": 5,
+          "observation": {
+            "op": 2,
+            "over": true,
+            "changed": true,
+            "gateChanged": true,
+            "gateCovered": false,
+            "actorReadable": false,
+            "allControlsOccupied": null,
+            "role": null
+          }
+        },
+        {
+          "preparation": 6,
+          "observation": {
+            "op": 2,
+            "over": true,
+            "changed": true,
+            "gateChanged": true,
+            "gateCovered": false,
+            "actorReadable": false,
+            "allControlsOccupied": null,
+            "role": null
+          }
+        }
+      ]
+    },
+    {
+      "game": "SS12",
+      "level": 2,
+      "action": 68,
+      "publicImage": "dd4293a13c3ee765",
+      "publicControls": 2,
+      "initialFrames": 4,
+      "visibleClosedBefore": 4,
+      "visibleOpenWithControls": 0,
+      "visibleOpenWithoutControls": 0,
+      "chosen": 4,
+      "originRole": "ground",
+      "predictedArrivalRole": "ground",
+      "previousVisitsOfSameSubject": 0,
+      "played": {
+        "op": 4,
+        "over": false,
+        "changed": true,
+        "gateChanged": true,
+        "gateCovered": false,
+        "actorReadable": true,
+        "allControlsOccupied": true,
+        "role": "ground"
+      }
+    },
+    {
+      "game": "SS13",
+      "level": 2,
+      "action": 305,
+      "publicImage": "4238e16f732b18ec",
+      "publicControls": 1,
+      "initialFrames": 5,
+      "visibleClosedBefore": 5,
+      "visibleOpenWithControls": 0,
+      "visibleOpenWithoutControls": 0,
+      "chosen": 4,
+      "originRole": "ground",
+      "predictedArrivalRole": "control",
+      "previousVisitsOfSameSubject": 0,
+      "played": {
+        "op": 4,
+        "over": false,
+        "changed": true,
+        "gateChanged": true,
+        "gateCovered": false,
+        "actorReadable": true,
+        "allControlsOccupied": true,
+        "role": "control"
+      }
+    },
+    {
+      "game": "SS14",
+      "level": 2,
+      "action": 35,
+      "publicImage": "b9dab8a3e8020cc8",
+      "publicControls": 2,
+      "initialFrames": 4,
+      "visibleClosedBefore": 4,
+      "visibleOpenWithControls": 0,
+      "visibleOpenWithoutControls": 0,
+      "chosen": 4,
+      "originRole": "ground",
+      "predictedArrivalRole": "ground",
+      "previousVisitsOfSameSubject": 0,
+      "played": {
+        "op": 4,
+        "over": false,
+        "changed": true,
+        "gateChanged": true,
+        "gateCovered": false,
+        "actorReadable": true,
+        "allControlsOccupied": true,
+        "role": "ground"
+      }
+    },
+    {
+      "game": "SS13",
+      "level": 3,
+      "action": 61,
+      "publicImage": "aeea2df07533fc85",
+      "publicControls": 1,
+      "initialFrames": 61,
+      "visibleClosedBefore": 61,
+      "visibleOpenWithControls": 0,
+      "visibleOpenWithoutControls": 0,
+      "chosen": 1,
+      "originRole": "ground",
+      "predictedArrivalRole": "control",
+      "previousVisitsOfSameSubject": 0,
+      "played": {
+        "op": 1,
+        "over": false,
+        "changed": true,
+        "gateChanged": true,
+        "gateCovered": false,
+        "actorReadable": true,
+        "allControlsOccupied": true,
+        "role": "control"
+      }
+    }
+  ],
+  "sameDecisionAfterDifferentHistories": {
+    "game": "SS11",
+    "level": 3,
+    "junction": [
+      38,
+      40
+    ],
+    "critical": 41,
+    "reference": "066237a9d9206d40",
+    "noop": 5,
+    "tested": 45,
+    "numberOfStartingImages": 1,
+    "byCommand": [
+      {
+        "id": 1,
+        "finalImages": 1,
+        "losses": 0,
+        "trials": 9
+      },
+      {
+        "id": 2,
+        "finalImages": 1,
+        "losses": 9,
+        "trials": 9
+      },
+      {
+        "id": 3,
+        "finalImages": 1,
+        "losses": 9,
+        "trials": 9
+      },
+      {
+        "id": 4,
+        "finalImages": 1,
+        "losses": 0,
+        "trials": 9
+      },
+      {
+        "id": 5,
+        "finalImages": 1,
+        "losses": 0,
+        "trials": 9
+      }
+    ]
+  },
+  "sameCommandAndSameArrival": {
+    "game": "SS11",
+    "level": 3,
+    "uniqueImages": 194,
+    "tested": 312,
+    "terminal": 2,
+    "terminalLocated": 2,
+    "matchedPairs": 4,
+    "sameOriginPairs": 4,
+    "criticalOrigin": [
+      {
+        "version": "v128",
+        "step": 12,
+        "hash": "deb5c1a066f6b81c",
+        "actor": 1,
+        "origin": 125,
+        "other": 265,
+        "otherRole": "ground",
+        "id": 2,
+        "dest": 265,
+        "role": "ground",
+        "visits": 2,
+        "over": false,
+        "goals": [
+          112,
+          293
+        ],
+        "opened": [],
+        "pieces": [
+          251
+        ],
+        "supports": [],
+        "occupiedControls": [
+          0,
+          0
+        ]
+      },
+      {
+        "version": "v128",
+        "step": 41,
+        "hash": "066237a9d9206d40",
+        "actor": 1,
+        "origin": 125,
+        "other": 131,
+        "otherRole": "ground",
+        "id": 2,
+        "dest": 145,
+        "role": "control",
+        "visits": 2,
+        "over": true,
+        "goals": [
+          112,
+          293
+        ],
+        "opened": [],
+        "pieces": [
+          251
+        ],
+        "supports": [],
+        "occupiedControls": [
+          0,
+          0
+        ]
+      },
+      {
+        "version": "v127",
+        "step": 210,
+        "hash": "7adb10768ff883e2",
+        "actor": 1,
+        "origin": 125,
+        "other": 245,
+        "otherRole": "control",
+        "id": 2,
+        "dest": 245,
+        "role": "control",
+        "visits": 2,
+        "over": false,
+        "goals": [
+          112,
+          293
+        ],
+        "opened": [
+          273
+        ],
+        "pieces": [
+          131
+        ],
+        "supports": [],
+        "occupiedControls": [
+          0,
+          1
+        ]
+      },
+      {
+        "version": "v127",
+        "step": 297,
+        "hash": "f41f6a4bd3e9f24a",
+        "actor": 1,
+        "origin": 125,
+        "other": 107,
+        "otherRole": "ground",
+        "id": 2,
+        "dest": 145,
+        "role": "control",
+        "visits": 3,
+        "over": false,
+        "goals": [
+          112,
+          293
+        ],
+        "opened": [],
+        "pieces": [
+          131
+        ],
+        "supports": [],
+        "occupiedControls": [
+          0,
+          0
+        ]
+      }
+    ],
+    "examples": [
+      {
+        "sameOrigin": true,
+        "changedTiles": 5,
+        "changedSites": [
+          125,
+          131,
+          144,
+          151,
+          265
+        ],
+        "loss": {
+          "version": "v128",
+          "step": 41,
+          "hash": "066237a9d9206d40",
+          "actor": 1,
+          "origin": 125,
+          "other": 131,
+          "otherRole": "ground",
+          "id": 3,
+          "dest": 124,
+          "role": "ground",
+          "visits": 1,
+          "over": true,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [],
+          "pieces": [
+            251
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            0
+          ]
+        },
+        "good": {
+          "version": "v128",
+          "step": 12,
+          "hash": "deb5c1a066f6b81c",
+          "actor": 1,
+          "origin": 125,
+          "other": 265,
+          "otherRole": "ground",
+          "id": 3,
+          "dest": 124,
+          "role": "ground",
+          "visits": 0,
+          "over": false,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [],
+          "pieces": [
+            251
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "sameOrigin": true,
+        "changedTiles": 6,
+        "changedSites": [
+          107,
+          125,
+          131,
+          144,
+          153,
+          251
+        ],
+        "loss": {
+          "version": "v128",
+          "step": 41,
+          "hash": "066237a9d9206d40",
+          "actor": 1,
+          "origin": 125,
+          "other": 131,
+          "otherRole": "ground",
+          "id": 2,
+          "dest": 145,
+          "role": "control",
+          "visits": 2,
+          "over": true,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [],
+          "pieces": [
+            251
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            0
+          ]
+        },
+        "good": {
+          "version": "v127",
+          "step": 297,
+          "hash": "f41f6a4bd3e9f24a",
+          "actor": 1,
+          "origin": 125,
+          "other": 107,
+          "otherRole": "ground",
+          "id": 2,
+          "dest": 145,
+          "role": "control",
+          "visits": 3,
+          "over": false,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [],
+          "pieces": [
+            131
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "sameOrigin": true,
+        "changedTiles": 6,
+        "changedSites": [
+          107,
+          125,
+          131,
+          144,
+          153,
+          251
+        ],
+        "loss": {
+          "version": "v128",
+          "step": 41,
+          "hash": "066237a9d9206d40",
+          "actor": 1,
+          "origin": 125,
+          "other": 131,
+          "otherRole": "ground",
+          "id": 3,
+          "dest": 124,
+          "role": "ground",
+          "visits": 1,
+          "over": true,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [],
+          "pieces": [
+            251
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            0
+          ]
+        },
+        "good": {
+          "version": "v127",
+          "step": 297,
+          "hash": "f41f6a4bd3e9f24a",
+          "actor": 1,
+          "origin": 125,
+          "other": 107,
+          "otherRole": "ground",
+          "id": 3,
+          "dest": 124,
+          "role": "ground",
+          "visits": 6,
+          "over": false,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [],
+          "pieces": [
+            131
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            0
+          ]
+        }
+      },
+      {
+        "sameOrigin": true,
+        "changedTiles": 7,
+        "changedSites": [
+          125,
+          131,
+          144,
+          153,
+          245,
+          251,
+          273
+        ],
+        "loss": {
+          "version": "v128",
+          "step": 41,
+          "hash": "066237a9d9206d40",
+          "actor": 1,
+          "origin": 125,
+          "other": 131,
+          "otherRole": "ground",
+          "id": 3,
+          "dest": 124,
+          "role": "ground",
+          "visits": 1,
+          "over": true,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [],
+          "pieces": [
+            251
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            0
+          ]
+        },
+        "good": {
+          "version": "v127",
+          "step": 210,
+          "hash": "7adb10768ff883e2",
+          "actor": 1,
+          "origin": 125,
+          "other": 245,
+          "otherRole": "control",
+          "id": 3,
+          "dest": 124,
+          "role": "ground",
+          "visits": 2,
+          "over": false,
+          "goals": [
+            112,
+            293
+          ],
+          "opened": [
+            273
+          ],
+          "pieces": [
+            131
+          ],
+          "supports": [],
+          "occupiedControls": [
+            0,
+            1
+          ]
+        }
+      }
+    ],
+    "scope": "Public forks near the previously failing destination, from the frozen v127 and v128 cold trajectories. First occurrence of each distinct public image. This is a diagnostic, not a policy win."
+  },
+  "upperLevelsV130": [
+    {
+      "game": "SS07",
+      "start": 3,
+      "budget": 350,
+      "summary": {
+        "won": false,
+        "actions": 350,
+        "reason": "session_action_budget",
+        "uniqueImages": 140,
+        "returns": 163
+      },
+      "families": {
+        "sic_public_input_exploration": 13,
+        "sic_test_prepared_effects": 337
+      },
+      "selectionStages": {},
+      "jointForecasts": 337,
+      "effectReceipts": [
+        [
+          "relative_displacement_verified",
+          287
+        ],
+        [
+          "relative_displacement_refuted",
+          40
+        ],
+        [
+          "motion_test_discriminated_public_effects",
+          5
+        ],
+        [
+          "selected_the_released_subject_without_moving_either",
+          2
+        ],
+        [
+          "motion_test_found_an_unmodeled_effect",
+          2
+        ],
+        [
+          "independent_motion_in_the_new_region_verified",
+          1
+        ]
+      ],
+      "firstSelection": null
+    },
+    {
+      "game": "SS09",
+      "start": 3,
+      "budget": 350,
+      "summary": {
+        "won": false,
+        "actions": 322,
+        "reason": "level_active_time_budget",
+        "uniqueImages": 250,
+        "returns": 36
+      },
+      "families": {
+        "sic_public_input_exploration": 40,
+        "sic_recheck_directional_controls": 3,
+        "sic_test_prepared_effects": 279
+      },
+      "selectionStages": {
+        "select": 3,
+        "verify": 2
+      },
+      "jointForecasts": 271,
+      "effectReceipts": [
+        [
+          "relative_displacement_verified",
+          256
+        ],
+        [
+          "relative_displacement_refuted",
+          10
+        ],
+        [
+          "motion_test_discriminated_public_effects",
+          5
+        ],
+        [
+          "observed",
+          2
+        ],
+        [
+          "cursor_click_visually_unchanged",
+          2
+        ],
+        [
+          "cursor_control_unconfirmed",
+          2
+        ],
+        [
+          "no_differential",
+          1
+        ]
+      ],
+      "firstSelection": 46
+    }
+  ],
+  "reproduceForecastMeasurement": "node scripts/audit-paired-selection-forecasts.mjs output.json <public native command tapes>"
+}
