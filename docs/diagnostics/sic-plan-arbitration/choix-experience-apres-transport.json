@@ -814,6 +814,50 @@
     "frozenVersions": [
       {
         "game": "SS07",
+        "policy": "v127",
+        "arm": "ordinary",
+        "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+        "budget": 350,
+        "entry": [
+          1,
+          1
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "actions": 350,
+            "won": false
+          }
+        ],
+        "commands": [
+          "97f6c97de32423020d368f6ed17a7e2cc5006fc7e6b89fbe033e333247260f15"
+        ],
+        "trials": []
+      },
+      {
+        "game": "SS07",
+        "policy": "v128",
+        "arm": "ordinary",
+        "pack": "db10ddd974b6c89a44cfa25bd1f793a4960f4a22235c02317b64329be398cccc",
+        "budget": 350,
+        "entry": [
+          1,
+          1
+        ],
+        "levels": [
+          {
+            "level": 1,
+            "actions": 60,
+            "won": true
+          }
+        ],
+        "commands": [
+          "68c95c6c6be81653215cd2fa6c32188a287c92a13a6270b45df00e24aedcd357"
+        ],
+        "trials": []
+      },
+      {
+        "game": "SS07",
         "policy": "v137",
         "arm": "mechanism",
         "pack": "1530eb3e8cb1ecb34c6bf591c28f16db2be4cdb5a72ceb1ef9061c48e9934447",
@@ -858,6 +902,36 @@
       }
     ],
     "frozenComparisons": [
+      {
+        "versions": [
+          "v127",
+          "v128"
+        ],
+        "identicalPrefix": 10,
+        "firstDifference": {
+          "action": 11,
+          "reference": [
+            2,
+            null,
+            "fb9d5d1233672879",
+            "45bd5846e907778b"
+          ],
+          "candidate": [
+            4,
+            null,
+            "fb9d5d1233672879",
+            "c9bfbcffc974c783"
+          ]
+        }
+      },
+      {
+        "versions": [
+          "v128",
+          "v137"
+        ],
+        "identicalPrefix": 60,
+        "firstDifference": null
+      },
       {
         "versions": [
           "v137",
