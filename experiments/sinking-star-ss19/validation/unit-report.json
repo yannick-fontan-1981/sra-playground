@@ -1,0 +1,22 @@
+{
+  "game": "SS19",
+  "version": "0.1.0",
+  "date": "2026-11-23",
+  "command": "npm test",
+  "tests": 75,
+  "passed": 75,
+  "failed": 0,
+  "scope": {
+    "engineAndSession": 50,
+    "hunt": 14,
+    "publicPixelTutorial": 11
+  },
+  "sourceSha256": {
+    "src/core.ts": "2cadf5abb1e5defa4740ea411d75fe33de832a27b3aab1b95c2448e7cf03f6b4",
+    "src/tutorial.ts": "2ed6c34260e225fd0b2c8e7e36f952b2c04399de51649fe18adaed399e6270d0",
+    "tests/trio.test.mjs": "6b51034207c6c677944efb9f28a84b636e86823df5d7b6d48d0dd537c697b408",
+    "tests/hunt.test.mjs": "90fea0a21d63de4ea44ce256592bb796f112047fd388bfae72cb6c1c154fbb95",
+    "tests/tutorial.test.mjs": "54f485fdf05ace674cf8b170388b79f6d2d741349796757ff902e73282cc6986"
+  },
+  "success": true
+}

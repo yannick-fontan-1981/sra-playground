@@ -49,7 +49,7 @@ a.go(1,16,'bard').stage('Le Barde gagne la galerie basse sans déplacer le poids
 a.save(new URL('../level1-design.json',import.meta.url),{
  label:'Adaptation de Heroes 2: Monsters · énigmes 1 et 14',
  url:'https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/',puzzle:'1, 14',
- secondaryLabel:'Heroes and Water · 27–28 ; Heroes and Mirrors · 1 et 30',
+ secondaryLabel:'Heroes and Water · 27–28 · appuis et départ sans chant',
  secondaryUrl:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/',
  objective:'Apprendre les trois pouvoirs et le rythme de chasse, puis résoudre trois verrous distincts dans des galeries décalées.',
  },{

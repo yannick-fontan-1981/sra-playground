@@ -1,0 +1,704 @@
+{
+  "spec": {
+    "id": "ss19-06",
+    "title": "La seconde image",
+    "rows": [
+      "####################",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~...g~~~~~~~~#",
+      "#~~~~~~....~~~~~~~~#",
+      "#~~~~~~....~~~~~~~~#",
+      "#~~~~~~~~~~B~~~~~~~#",
+      "#~~~.~~~~~~.~o~~~~~#",
+      "#~~~.~~~~~~.~.~~~~~#",
+      "#~~~.~~~.~..~.~~~~~#",
+      "#~~~.~~~~~.~~.~~~~~#",
+      "#~.....~~~..~~~~~~~#",
+      "#~.....~~~..~~~~~~~#",
+      "#~.W...~~~..~o~~~~~#",
+      "#~.....~~~..~~~~~~~#",
+      "#~.........~..~~~~~#",
+      "#~.Z.......#.~~~~~~#",
+      "#~.....~~~~~.....~~#",
+      "#~~~~~~~~~~~..g.g~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "####################"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 8
+        },
+        "facing": "NW"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 14
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "retard",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 14
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 4
+        },
+        "circuit": "retard",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 2
+        },
+        "circuit": "retard",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 16
+        },
+        "circuit": "retard",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCDDDCCRRRRRRRUUUUUUURCCUURUUXURXURCUUUCDDDRDDDRDDDRRCCDDDLDDDDDDRRDDRRRDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": 19,
+    "label": "Adaptation de Heroes and Mirrors · énigme 19 · une commande à retardement",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+    "objective": "Préparer la charge derrière un bloqueur, synchroniser deux reflets, quitter le débarcadère avant sa fermeture puis franchir le pont créé au premier passage.",
+    "secondary": {
+      "label": "Heroes and Water · énigme 11 · un échange conserve le nombre d’occupants",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 74,
+    "selections": 10,
+    "warriorPushes": 0,
+    "trainPushes": 0,
+    "huntSteps": 0,
+    "monsterHuntMoves": 0,
+    "songs": 3,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 3,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 1,
+    "partnerSwaps": 1,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 5,
+    "mirrorMoves": 0,
+    "reflections": 2,
+    "heroReflections": 1,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le chant descend la charge lointaine au fond de sa glissière, derrière la caisse proche du miroir.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 15
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 9
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": false
+      }
+    },
+    {
+      "label": "Le Magicien retire le Barde sans emporter la charge hors de sa glissière.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 9
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": false
+      }
+    },
+    {
+      "label": "Le premier reflet dépose le Guerrier sur le débarcadère nord et coule seulement la caisse proche : la commande reste relâchée.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": false
+      }
+    },
+    {
+      "label": "Le second reflet atteint enfin la charge lointaine. Elle ferme le débarcadère derrière le Guerrier, ouvre sa destination et le passage sud-est.",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": true
+      }
+    },
+    {
+      "label": "Le pont fabriqué au premier reflet assure l’arrivée des deux autres héros ; la charge du second doit rester sèche sur sa commande.",
+      "turn": 74,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 17
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "retard": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Mirrors 19 : le bloqueur le plus proche part à l’eau au premier reflet, et la véritable charge ne rejoint sa commande qu’au second.",
+      "Water 11 : la transposition ne transporte pas à elle seule les trois héros sur une région isolée."
+    ],
+    "changed": [
+      "Deux miroirs fixes synchronisent une arrivée au nord et une livraison au sud. Le premier appui est lui-même nécessaire aux traversées finales.",
+      "Le Barde prépare la charge dans une glissière éloignée ; le Magicien le relève sans chant.",
+      "Un seul appui immergé remplace les empilements de la source. Le Guerrier quitte une case qui devient une presse lorsque la commande s’active."
+    ],
+    "sourceReading": "Reprise du retard optique de Mirrors 19 dans une géométrie originale à trois régions ; aucun empilement, duplicateur ou autre règle du jeu source n’est ajouté.",
+    "proofScope": "Dans le parcours de référence, une caisse forme le passage sud-est et l’autre conserve la commande nord. La préparation de la charge peut aussi être effectuée après les deux premiers reflets, au prix de manœuvres supplémentaires. La mobilité de miroirs obtenue en fabriquant d’autres appuis n’est pas exclue par une preuve exhaustive ; aucune unicité ni optimalité n’est revendiquée."
+  }
+}

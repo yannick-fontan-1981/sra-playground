@@ -1,0 +1,134 @@
+{
+  "schemaVersion": 1,
+  "game": "SS19",
+  "title": "La Chasse Noire",
+  "version": "0.1.0",
+  "qualifiedAtUtc": "2026-11-23T14:42:59.771208+00:00",
+  "sourceBranch": "feat/sinking-star-ss19-20261123",
+  "baseMainCommit": "7bef4bd69c47ea077c872eab176399e7ea27fe38",
+  "latestObservedMainCommit": "b93a4fcd09a054d9a87042fc0ad4160b5c16be5f",
+  "artifact": {
+    "path": "dist/SS19-demo.html",
+    "filename": "SS19-demo.html",
+    "sha256": "7636d82f48aa154fe1da46adc5c29306739194698b4681c673b62ae463014825",
+    "bytes": 152449,
+    "selfContained": true
+  },
+  "qualification": {
+    "unitTests": 75,
+    "uiMechanicsFixtures": 28,
+    "designReviewScripts": 4,
+    "localReviewChecks": 67,
+    "historicalMapsCompared": 40,
+    "tutorialLevel": 1,
+    "tutorialDiscoveries": 31,
+    "startLevel": 1,
+    "officialFinalState": "WIN",
+    "levelsCompleted": 8,
+    "inputs": 934,
+    "selections": 98,
+    "nonSelectionActions": 836,
+    "campaignFrames": 2749,
+    "refusedActions": 0,
+    "heroDeaths": 0
+  },
+  "campaign": [
+    {
+      "level": 1,
+      "title": "Les galeries de la première chasse",
+      "inputs": 201,
+      "selections": 17,
+      "nonSelectionActions": 184,
+      "frames": 591
+    },
+    {
+      "level": 2,
+      "title": "Le gardien du seuil",
+      "inputs": 56,
+      "selections": 8,
+      "nonSelectionActions": 48,
+      "frames": 166
+    },
+    {
+      "level": 3,
+      "title": "L’interrupteur hors d’atteinte",
+      "inputs": 150,
+      "selections": 18,
+      "nonSelectionActions": 132,
+      "frames": 423
+    },
+    {
+      "level": 4,
+      "title": "Le gardien de la vanne",
+      "inputs": 143,
+      "selections": 9,
+      "nonSelectionActions": 134,
+      "frames": 425
+    },
+    {
+      "level": 5,
+      "title": "Le troisième doit rester vivant",
+      "inputs": 143,
+      "selections": 15,
+      "nonSelectionActions": 128,
+      "frames": 434
+    },
+    {
+      "level": 6,
+      "title": "La seconde image",
+      "inputs": 74,
+      "selections": 10,
+      "nonSelectionActions": 64,
+      "frames": 204
+    },
+    {
+      "level": 7,
+      "title": "Le relais condamné",
+      "inputs": 52,
+      "selections": 9,
+      "nonSelectionActions": 43,
+      "frames": 142
+    },
+    {
+      "level": 8,
+      "title": "Les deux gardiens vivants",
+      "inputs": 115,
+      "selections": 12,
+      "nonSelectionActions": 103,
+      "frames": 364
+    }
+  ],
+  "sourceSha256": {
+    "scripts/build-demo.mjs": "aaec073a41ece1fd01a788f0f971db83dd92f83ac48619654583ecdd7114ff8e",
+    "scripts/solver.mjs": "441c6dcabdecf119c1c92187de269eb69dc4efb540d549fca98c321867dc3ae6",
+    "scripts/sync-levels.mjs": "571b869ec3b2baf75a2ad76fed248830840dd0675c9f7fe995dab95f716da242",
+    "scripts/validate-levels.mjs": "9ad61b473060185f2f5a4284bcdbf7a973305765deea0dd17a3beca5d4041fe3",
+    "scripts/verify-design-constraints.mjs": "452c3e08e3041746a62c27b4ae4bab73c867ad0ce87b715538427baa850fe6c6",
+    "scripts/verify-ui-dom.mjs": "efefe9f7761b407823006acc2c3455c582008d1f968f357c430c7fdf047f84ed",
+    "src/browser.ts": "14e9a99493e6fcabac7564d82ef30475ca80dc0edbb99b5a6718d7dedbcbcc3f",
+    "src/core.ts": "2cadf5abb1e5defa4740ea411d75fe33de832a27b3aab1b95c2448e7cf03f6b4",
+    "src/level-info.ts": "b33b9414a953203d88a43ce08efa7d673971241c473dcfe7add0f6d439c0fcd4",
+    "src/levels.ts": "180c42bc63c58a12970aa95f9b77e91d09827be2c4113e0564770a3790f46f83",
+    "src/tutorial.ts": "2ed6c34260e225fd0b2c8e7e36f952b2c04399de51649fe18adaed399e6270d0",
+    "tests/hunt.test.mjs": "90fea0a21d63de4ea44ce256592bb796f112047fd388bfae72cb6c1c154fbb95",
+    "tests/trio.test.mjs": "6b51034207c6c677944efb9f28a84b636e86823df5d7b6d48d0dd537c697b408",
+    "tests/tutorial.test.mjs": "54f485fdf05ace674cf8b170388b79f6d2d741349796757ff902e73282cc6986",
+    "tests/witnesses.json": "094046bab0b83c05f88dba2f02f837d5c4af858fa89e57168afe6757b6faaecf",
+    "index.template.html": "7c94e9c18ef9b4d0e40d49d800ccde6d84fa595f295974573dd0c0a637f23232",
+    "package.json": "6829a421a5249e1f543bfd6b9f852588c4fdd22f1d2aaf13b99e33967d2fd1a9",
+    "package-lock.json": "d8eaea9c0ebf46ef269fbf9dc5b8cbae55485baba359aee3684ced9ab2fe781e",
+    "tsconfig.json": "5dd2083c554cb1b4095fe21191a260ad65d47ac82401250cadfcdf0a587e9c74"
+  },
+  "reportSha256": {
+    "validation/unit-report.json": "4daec7f871721e3cf8fde1a6d0ca31fb2e133ac1797eec3a4bc38f08501f3916",
+    "validation/levels-report.json": "049cb3c753b1ba52f3ebe07c215b0bedc8aab093cea610a46794858fe615449e",
+    "validation/ui-dom-report.json": "93ca7822a5a3ac0c455357bc4e3a2e5c529a74d7792b492d85565d82037875b4",
+    "validation/design-report.json": "1d57fd6cf86e147f64e4e9ec7033fc04f7195ddfdba3eb06ed50a0846c2fc110",
+    "validation/browser-review-status.json": "55ffd01344c34d8c8d60c824b1683014cbaf84002c55a8da1fc206102b898e5d"
+  },
+  "limits": [
+    "Author witness and legal variant replay; no shortest-path or uniqueness claim.",
+    "Exact compiled HTML input and public canvas checks in Happy DOM; native CSS/responsive browser review not run.",
+    "Standalone lab only; native SRA integration, autonomous SRA solve and hosted Site publication not claimed."
+  ]
+}

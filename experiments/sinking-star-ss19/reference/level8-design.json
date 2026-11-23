@@ -1,0 +1,1116 @@
+{
+  "spec": {
+    "id": "ss19-08",
+    "title": "Les deux gardiens vivants",
+    "rows": [
+      "####################",
+      "#....###############",
+      "#....###############",
+      "#.W..#....m#########",
+      "#....#.#############",
+      "#...Z#.##########o##",
+      "##.###.##########~##",
+      "##.#########...m#~##",
+      "##.#########.####~##",
+      "#............####~##",
+      "#.......B....####~##",
+      "#............~~~~.##",
+      "#...........########",
+      "#...........########",
+      "#...........########",
+      "#.......g...########",
+      "#............#...###",
+      "#............~g..###",
+      "#.........g..#...###",
+      "####################"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 17,
+          "y": 11
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "reserve",
+        "buttons": [
+          {
+            "x": 17,
+            "y": 5
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "lacher",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 16
+          }
+        ],
+        "color": 7
+      },
+      {
+        "id": "gardien-ouest",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 6
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "gardien-est",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 11
+          }
+        ],
+        "color": 12
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 11
+        },
+        "circuit": "reserve",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 4
+        },
+        "circuit": "lacher",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 8
+        },
+        "circuit": "lacher",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 8,
+          "y": 15
+        },
+        "circuit": "gardien-ouest",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 18
+        },
+        "circuit": "gardien-est",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLCCDDDDDCCDDDDDRRRRRCCDRRRRRRRRRRR",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 18
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 9
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 51
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": "15 / 22 / 29",
+    "label": "Adaptation de Heroes 2: Monsters · énigmes 15, 22 et 29 · conserver des monstres comme poids",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/",
+    "objective": "Récupérer la caisse unique avant d’ouvrir les enclos, préparer le pont, changer de cible pour garer les deux chasseurs vivants, puis maintenir leurs positions pendant les trois arrivées.",
+    "secondary": {
+      "label": "Heroes and Water · énigme 11 · un échange conserve le nombre d’occupants",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 115,
+    "selections": 12,
+    "warriorPushes": 9,
+    "trainPushes": 0,
+    "huntSteps": 12,
+    "monsterHuntMoves": 18,
+    "songs": 1,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 1,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "stoneSwaps": 1,
+    "monsterSwaps": 0,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 11,
+    "mirrorMoves": 0,
+    "reflections": 1,
+    "heroReflections": 1,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier attire les chasseurs vers les angles de leurs enclos. Les deux retenues fermées empêchent encore leur descente.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "reserve": true,
+        "lacher": false,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "Le Magicien vise par le coude du miroir et remplace la réserve sur sa commande : le sas reste ouvert pendant l’extraction de la caisse unique.",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "reserve": true,
+        "lacher": false,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "Le Barde décale la caisse hors du rayon de retour. Les chasseurs restent séparés derrière leurs retenues.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "reserve": true,
+        "lacher": false,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "Le reflet ramène le Magicien dans le sas ; la commande vide referme aussitôt la presse, qui le dépose au sud et rebouche le côté du futur gardien est.",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 7,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "reserve": false,
+        "lacher": false,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "Après la visée lointaine, le Guerrier rappelle le chasseur occidental dans son angle avant de descendre à son tour.",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 1
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "reserve": false,
+        "lacher": false,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "La seule caisse mobile descend dans l’atelier puis traverse le quai. Elle devient l’unique appui qui permet d’augmenter le nombre d’occupants de l’île finale.",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 17
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 13,
+          "y": 17
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "reserve": false,
+        "lacher": false,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "Le Guerrier ouvre les deux retenues. Depuis cette commande éloignée, il ne peut pas attirer seul le chasseur est jusqu’à sa plaque.",
+      "turn": 82,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 13,
+          "y": 17
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 12,
+          "y": 8
+        }
+      ],
+      "circuits": {
+        "reserve": false,
+        "lacher": true,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "Le Barde devient la cible : sa colonne équilibre les distances et entraîne les chasseurs jusqu’aux deux boutons. Il prend sa destination après leur stabilisation.",
+      "turn": 89,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 13,
+          "y": 17
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 12,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "reserve": false,
+        "lacher": true,
+        "gardien-ouest": true,
+        "gardien-est": true
+      }
+    },
+    {
+      "label": "Les trois arrivées gardent les chasseurs tournés vers leurs butées. Les deux monstres restent vivants et maintiennent les presses-buts ; le Guerrier traverse le seul appui jusqu’à l’île.",
+      "turn": 115,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 17
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 13,
+          "y": 17
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 12,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "reserve": false,
+        "lacher": false,
+        "gardien-ouest": true,
+        "gardien-est": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Heroes 2 15/22 : des monstres occupent des commandes utiles et doivent être conservés.",
+      "Heroes 2 29 : préparer les poids avant de libérer les héros vers les destinations.",
+      "Water 11 : la transposition conserve les effectifs ; une traversée physique est nécessaire pour remplir l’île vide."
+    ],
+    "changed": [
+      "Les chasseurs suivent la règle déterministe SS19 : un pas vers le héros actif, sur l’axe le plus long, vertical en cas d’égalité. Les retenues et les deux enclos en L rendent leur position contrôlable.",
+      "Une réserve éloignée sert d’abord à conserver le sas optique ouvert, puis devient le seul appui du dernier passage. La fermeture du sas dépose le Magicien et forme ensuite la butée ouest d’un chasseur.",
+      "Le Guerrier tient la commande de libération tandis que le Barde attire les ennemis depuis une autre colonne. Quitter trop tôt la commande renvoie les chasseurs vers le haut.",
+      "Aucun compteur d’élimination ni condition cachée : deux destinations sont des presses commandées par les deux plaques visibles."
+    ],
+    "sourceReading": "Les monstres-poids et la relève des commandes viennent des guides ; la poursuite, les enclos en L, le sas de retour et la géométrie du passage final sont propres à SS19.",
+    "proofScope": "À WIN, les trois héros occupent les buts. La caisse unique a dû devenir appui pour atteindre l’île vide, et le miroir ne peut quitter son socle. Les seuls poids disponibles pour les deux presses-buts sont donc les deux monstres vivants. Éliminer l’un d’eux rend la victoire impossible sans annuler ou recommencer. Aucun parcours unique ni optimal n’est revendiqué."
+  }
+}

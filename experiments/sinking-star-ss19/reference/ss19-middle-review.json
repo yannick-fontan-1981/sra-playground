@@ -1,0 +1,144 @@
+{
+  "gameCode": "SS19",
+  "scope": "Niveaux 3–5 : témoins et contre-branches locales, sans preuve de solution unique.",
+  "levels": [
+    {
+      "id": "ss19-03",
+      "sha256": "9a95661e8522fb514ac031a9546bbf7a4e10e12723190f1a11384b864c188d19"
+    },
+    {
+      "id": "ss19-04",
+      "sha256": "8e78943a7082e2dd7902e1915aa1de30e7ecf2599c11cce2fc688b5db88cd88f"
+    },
+    {
+      "id": "ss19-05",
+      "sha256": "c62a43996b4be2182292604b49ecf051fbed2693cb6919770643afc7b10f294a"
+    }
+  ],
+  "checks": [
+    {
+      "name": "ss19-03: témoin complet",
+      "status": "passed",
+      "actions": 150,
+      "selections": 18,
+      "monstersRemaining": 0
+    },
+    {
+      "name": "ss19-04: témoin complet",
+      "status": "passed",
+      "actions": 143,
+      "selections": 9,
+      "monstersRemaining": 0
+    },
+    {
+      "name": "ss19-05: témoin complet",
+      "status": "passed",
+      "actions": 143,
+      "selections": 15,
+      "monstersRemaining": 1
+    },
+    {
+      "name": "N3 : les commandes inoccupées refusent la sortie occidentale",
+      "status": "passed",
+      "commands": "DRD",
+      "observed": "La porte en 9,16 reste fermée tant que les deux réserves ne sont pas posées."
+    },
+    {
+      "name": "N3 : retirer le lest bas expulse le héros déjà arrivé",
+      "status": "passed",
+      "commands": "RRRRRRDRDDLUURULLLLLLDLUUUCDDLLLLLLCCXRUUUUUUUURRRRRDDDDRCCUUUURRRRRRRRDLLCCUUUUUUUUUURDCCUUUULLLCDDRRRCCULLLDDLCCDDDRCXCCDDDDDDDRRDDRRCXDDDDDDR",
+      "observed": "La caisse quitte 8,11 et la porte-poussoir de la destination 17,7 en retire le Magicien."
+    },
+    {
+      "name": "N4 : éteindre le soutien avant l’appât laisse le gardien sur la commande",
+      "status": "passed",
+      "commands": "RRRRRCDCCDDDDDDRRR",
+      "observed": "La chasse refuse l’eau nue : le gardien ne descend pas et sa porte reste fermée.",
+      "scope": "Erreur locale récupérable en réarmant la trappe."
+    },
+    {
+      "name": "N4 : la trappe retire réellement son occupant",
+      "status": "passed",
+      "commands": "RRRRRDDDDDDRRRCU",
+      "phases": [
+        "walk",
+        "platform"
+      ]
+    },
+    {
+      "name": "N4 : deux réserves deviennent deux appuis, plus l’appui déplacé",
+      "status": "passed",
+      "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRR",
+      "bridge": [
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "scope": "État démontré du chantier ; les autres calendriers restent possibles."
+    },
+    {
+      "name": "N4 : quitter le pont vers le nord avec la Barde est refusé",
+      "status": "passed",
+      "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCCU",
+      "observed": "Le chant imposerait un déplacement dangereux du compagnon ; il est refusé. Les échanges du témoin permettent la relève."
+    },
+    {
+      "name": "N5 : charger avant de placer le captif échoue",
+      "status": "passed",
+      "commands": "D",
+      "observed": "La porte 10,4 interdit la poussée de la réserve tant que le gardien n’occupe pas 5,8."
+    },
+    {
+      "name": "N5 : quitter le pupitre à pied déverrouille le captif",
+      "status": "passed",
+      "commands": "CDDDDDLLLLLLRRRRRRUCUUUD",
+      "observed": "Le chant du départ emporte ensemble le gardien et son verrou ; la sortie et le chargement referment."
+    },
+    {
+      "name": "N5 : la seconde presse seule ne décharge pas la réserve",
+      "status": "passed",
+      "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCUURRRRRRU",
+      "observed": "L’impulsion sud est vide tant que le transfert occidental n’a pas eu lieu."
+    },
+    {
+      "name": "N5 : l’ancien accès de chant sous le moulin est désormais bloqué",
+      "status": "passed",
+      "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCCUURRRRUUUUURRRRRUL",
+      "observed": "Le pas vers 11,8 est un mur ; il ne déplace pas la caisse par chant à travers le sol.",
+      "scope": "Régression du contre-parcours local trouvé pendant la conception, pas preuve exhaustive de toutes les routes."
+    },
+    {
+      "name": "N5 : les deux impulsions livrent une caisse dans le bon ordre",
+      "status": "passed",
+      "pistonLandings": [
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 7
+        }
+      ],
+      "captive": {
+        "x": 5,
+        "y": 8
+      },
+      "latch": {
+        "x": 5,
+        "y": 9
+      }
+    }
+  ],
+  "passed": 14,
+  "failed": 0
+}

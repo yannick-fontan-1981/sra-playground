@@ -1,0 +1,446 @@
+{
+  "gameCode": "SS19",
+  "status": "passed",
+  "levels": [
+    {
+      "level": 1,
+      "title": "Les galeries de la première chasse",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "Parcours pédagogique intégral",
+          "observed": "201 entrées, 17 sélections ; WIN sans refus ni perte.",
+          "scope": "Rejeu indépendant du témoin actuel ; les interactions facultatives ne sont pas déclarées nécessaires."
+        },
+        {
+          "name": "Aucune sortie directement accessible",
+          "observed": "Même en ignorant les autres occupants, le réseau de marche initial ne contient aucune des trois destinations. Chaque alcôve est derrière une presse fermée.",
+          "scope": "Parcours exhaustif du graphe de sol initial ; aucune capacité ni modification de circuit n’est simulée par ce contrôle."
+        },
+        {
+          "name": "Marcher seulement ne peut terminer la salle",
+          "observed": "La caisse déjà posée sur la commande optique maintient la seule entrée de l’alcôve est fermée. Une suite qui ne déplace aucune pièce ne peut libérer cette destination.",
+          "scope": "Argument géométrique et de conservation du poids ; le changement de héros seul ne modifie pas cet obstacle."
+        },
+        {
+          "name": "Entrée ouest refusée concrètement",
+          "observed": "Depuis le départ, L approche la presse ; le second L est refusé sans déplacement du gardien ni perte de héros.",
+          "scope": "Contre-parcours réel LL ; il est délibérément distinct du témoin sans refus."
+        },
+        {
+          "name": "Apprentissage de la chasse protégé",
+          "observed": "Le gardien ne peut marcher que sur les trois cases du rail. Il reste dans ce rail pendant le témoin, puis une fermeture de presse le pousse dans l’eau.",
+          "scope": "Composante de terrain et revue de toutes les phases du témoin ; la noyade est une interaction enseignée, sans prétention de nécessité universelle."
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "L’interrupteur hors d’atteinte",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "Parcours des sas alternés",
+          "observed": "150 entrées, 18 sélections, 3 reflets ; victoire sans refus ni perte.",
+          "scope": "Rejeu indépendant du témoin actuel, sans minimum de reflets annoncé."
+        },
+        {
+          "name": "Les deux réserves sèches restent nécessaires",
+          "observed": "À la victoire, les trois héros sont sur les destinations et ne pèsent plus sur les deux commandes charges. Le poids optique isolé assure alternance ; les deux autres caisses assurent charges.",
+          "scope": "Comptage de trois commandes finales disjointes et de trois caisses ; une seule perte de poids empêche l’accord final."
+        },
+        {
+          "name": "Le contrôleur résiste au chant depuis le bord",
+          "observed": "Après X, le Barde en (8,6) atteint la caisse de (6,6) par sa portée, mais son pas gauche est interdit par le mur en (7,6). Les autres directions laissent également la caisse en place.",
+          "scope": "Quatre essais concrets : le pas refusé annule toute la chanson, et les autres destinations de la caisse sont murées."
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Le gardien de la vanne",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "Témoin de construction complet",
+          "observed": "143 entrées et 9 sélections ; les deux réserves construisent le pont continu du témoin, sans refus ni perte.",
+          "scope": "Description du témoin uniquement ; la variante ci-dessous montre que les deux immersions ne sont pas obligatoires."
+        },
+        {
+          "name": "La plateforme active ne donne pas une traversée directe",
+          "observed": "La plateforme hydraulique est déjà active au départ, mais le graphe de marche des deux héros de gauche reste séparé de la rive droite. Les murs (13,5) et (13,6) ferment la sortie directe de la trappe.",
+          "scope": "Inspection du terrain initial avec la plateforme active, pas une preuve contre tous les usages ultérieurs d’appuis mobiles."
+        },
+        {
+          "name": "Le pont partiel ne suffit pas à marcher droit",
+          "observed": "Après la première livraison, le Guerrier peut avancer jusqu’en (12,11), mais son pas suivant vers (13,11) est refusé par l’eau nue.",
+          "scope": "Contre-parcours concret ; des transports plus élaborés restent autorisés."
+        },
+        {
+          "name": "Variante valide : une caisse voyage sur son propre appui",
+          "observed": "138 entrées, 16 sélections, 3 déplacements d’appui, 2 échanges et 1 monstre retiré. Les deux caisses sont employées mais une seule est immergée ; l’autre reste sèche en (9,11).",
+          "scope": "Le Barde entraîne ensemble caisse et appui jusqu’à la rive ; le Magicien utilise ensuite la caisse comme cible. Réfute la nécessité d’un pont continu ou de deux immersions."
+        },
+        {
+          "name": "Variante valide : noyade après le chantier",
+          "observed": "141 entrées et 9 sélections. Le Magicien maintient la trappe pendant la construction ; son départ tardif noie ensuite le gardien. Les deux réserves sont toujours utilisées.",
+          "scope": "Le calendrier de la noyade est une option de la solution, sans condition cachée imposant son ordre."
+        }
+      ],
+      "alternatives": [
+        {
+          "label": "Caisse transportée sur son appui puis échangée",
+          "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUUCCDDDDDDDDDLCCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRCCUULLLRRCLUCLUURCCDDDDDLLLLLCCDDDDCCUURRRR",
+          "metrics": {
+            "actions": 138,
+            "selections": 16,
+            "warriorPushes": 28,
+            "trainPushes": 5,
+            "huntSteps": 1,
+            "monsterHuntMoves": 1,
+            "songs": 8,
+            "groupSongs": 1,
+            "songHeroMoves": 4,
+            "songStoneMoves": 2,
+            "songMonsterMoves": 0,
+            "supportMoves": 3,
+            "swaps": 2,
+            "partnerSwaps": 1,
+            "stoneSwaps": 1,
+            "monsterSwaps": 0,
+            "bentSwaps": 0,
+            "multiMirrorSwaps": 0,
+            "swapReflections": 0,
+            "swapLoops": 0,
+            "partnerMoves": 4,
+            "stoneMoves": 36,
+            "mirrorMoves": 0,
+            "reflections": 0,
+            "heroReflections": 0,
+            "pistonPushes": 0,
+            "platformsCreated": 1,
+            "monstersRemoved": 1,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "final": {
+            "stones": [
+              {
+                "x": 9,
+                "y": 11
+              }
+            ],
+            "supports": [
+              {
+                "x": 11,
+                "y": 11
+              },
+              {
+                "x": 13,
+                "y": 11
+              }
+            ],
+            "monsters": []
+          }
+        },
+        {
+          "label": "Noyade différée après construction",
+          "commands": "RRRRRDDDDDDRRRCCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
+          "metrics": {
+            "actions": 141,
+            "selections": 9,
+            "warriorPushes": 34,
+            "trainPushes": 5,
+            "huntSteps": 5,
+            "monsterHuntMoves": 5,
+            "songs": 2,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 0,
+            "songMonsterMoves": 0,
+            "supportMoves": 2,
+            "swaps": 2,
+            "partnerSwaps": 2,
+            "stoneSwaps": 0,
+            "monsterSwaps": 0,
+            "bentSwaps": 0,
+            "multiMirrorSwaps": 0,
+            "swapReflections": 0,
+            "swapLoops": 0,
+            "partnerMoves": 5,
+            "stoneMoves": 34,
+            "mirrorMoves": 0,
+            "reflections": 0,
+            "heroReflections": 0,
+            "pistonPushes": 0,
+            "platformsCreated": 2,
+            "monstersRemoved": 1,
+            "blocked": 0,
+            "deaths": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "title": "Le troisième doit rester vivant",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "Contraste éliminer et conserver",
+          "observed": "143 entrées et 15 sélections. La paire de chasseurs est éliminée, le troisième reste sur sa commande et la caisse haute rejoint le bouton cyan.",
+          "scope": "Rejeu du témoin complet ; aucune victoire par l’élimination de tous les monstres."
+        },
+        {
+          "name": "Un pas chanté défait réellement le verrou du captif",
+          "observed": "Après l’installation du gardien, un D du Barde déplace le monstre en (5,9) et la caisse en (5,10). La sortie orientale et le chargement haut se referment.",
+          "scope": "Contre-parcours concret sans perte ; l’extraction par échange évite cet effet."
+        },
+        {
+          "name": "Le remplacement direct de la première presse est bloqué",
+          "observed": "Une Barde amenée en (9,8) ne peut chanter à gauche : son propre pas aboutit au nouveau mur (8,8), et la caisse reste sur la première presse.",
+          "scope": "Essai concret sur la géométrie durcie ; ne prouve pas l’unicité de la paire de presses."
+        },
+        {
+          "name": "Variante valide : échange et relâchement temporaire remplacent la deuxième presse",
+          "observed": "181 entrées et 22 sélections. Après la première presse, un chant relâche le captif ; le Magicien extrait la charge, puis un autre chant reverrouille la prison et plusieurs relèves libèrent les héros.",
+          "scope": "Variante plus longue, rejouée sans refus ni perte. Elle conserve la caisse haute et le gardien, mais réfute une obligation universelle d’employer la seconde presse."
+        }
+      ],
+      "alternatives": [
+        {
+          "label": "Seconde presse remplacée par relâchement et échanges",
+          "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDUCUUUUUURRRRRRUCUURRRRUUUUUUDCCDDLLLLLLLUCUCCRUCCLDDDDDUCDDDLDLDDDDDLUCLLLLDCDDDDDRDDDDRRRRRRRCDRRUUURUUUR",
+          "metrics": {
+            "actions": 181,
+            "selections": 22,
+            "warriorPushes": 6,
+            "trainPushes": 0,
+            "huntSteps": 5,
+            "monsterHuntMoves": 5,
+            "songs": 5,
+            "groupSongs": 4,
+            "songHeroMoves": 1,
+            "songStoneMoves": 7,
+            "songMonsterMoves": 4,
+            "supportMoves": 0,
+            "swaps": 5,
+            "partnerSwaps": 4,
+            "stoneSwaps": 1,
+            "monsterSwaps": 0,
+            "bentSwaps": 0,
+            "multiMirrorSwaps": 0,
+            "swapReflections": 0,
+            "swapLoops": 0,
+            "partnerMoves": 1,
+            "stoneMoves": 15,
+            "mirrorMoves": 0,
+            "reflections": 0,
+            "heroReflections": 0,
+            "pistonPushes": 2,
+            "platformsCreated": 0,
+            "monstersRemoved": 2,
+            "blocked": 0,
+            "deaths": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "title": "La seconde image",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "Deux livraisons différentes",
+          "observed": "74 entrées : premier reflet vers l’appui (11,14), second vers le poids sec (8,14), victoire sans refus ni perte.",
+          "scope": "Rejeu des deux fonctions finales des caisses ; aucun caractère unique du témoin n’est affirmé."
+        },
+        {
+          "name": "Répéter X sans quitter le débarcadère échoue",
+          "observed": "Un deuxième X immédiat renvoie le Guerrier sur le quai de départ et active le poids. Un troisième X est alors refusé par le débarcadère fermé.",
+          "scope": "Contre-parcours concret ; il est réparable par d’autres manœuvres ou Undo, et n’est pas annoncé irréversible."
+        },
+        {
+          "name": "Variante valide : préparer la charge après les reflets",
+          "observed": "95 entrées. Le second reflet livre d’abord la caisse en (5,14), puis le chant et deux échanges la placent sur sa commande. Les deux ressources et les deux reflets restent employés.",
+          "scope": "Variante gagnante rejouée, plus longue que le témoin ; la préparation préalable n’est donc pas déclarée universellement nécessaire."
+        }
+      ],
+      "alternatives": [
+        {
+          "label": "Charge préparée après les reflets",
+          "commands": "UURUUXUULXCCDDDLDDDDDDLLLRRRCCRRRRRRRUUUUDLURRUUUULUURUUUCCRRRCCRDDDRDDDRRCCDDDLDDDDDDRRDDRRRDR",
+          "metrics": {
+            "actions": 95,
+            "selections": 10,
+            "warriorPushes": 0,
+            "trainPushes": 0,
+            "huntSteps": 0,
+            "monsterHuntMoves": 0,
+            "songs": 3,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 3,
+            "songMonsterMoves": 0,
+            "supportMoves": 0,
+            "swaps": 2,
+            "partnerSwaps": 2,
+            "stoneSwaps": 0,
+            "monsterSwaps": 0,
+            "bentSwaps": 0,
+            "multiMirrorSwaps": 0,
+            "swapReflections": 0,
+            "swapLoops": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 5,
+            "mirrorMoves": 0,
+            "reflections": 2,
+            "heroReflections": 1,
+            "pistonPushes": 0,
+            "platformsCreated": 1,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "title": "Le relais condamné",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "Relais supprimé et passage rouvert",
+          "observed": "52 entrées ; la charge ferme puis rouvre la presse, un miroir disparaît et les trois destinations sont occupées.",
+          "scope": "Rejeu du témoin ; destruction et réouverture sont deux états distincts."
+        },
+        {
+          "name": "Détruire sans rouvrir ne suffit pas",
+          "observed": "Une route différente retire le Barde en conservant la charge sur le bouton. Le relais est détruit, mais la presse restée fermée bloque le reflet final entier, avec le signal rouge attendu.",
+          "scope": "Contre-parcours concret ; le transfert du Magicien pourtant valide n’est pas appliqué partiellement."
+        },
+        {
+          "name": "Variante valide : garder le gardien vivant",
+          "observed": "50 entrées. Une seule poussée de file conserve le monstre sur (16,12) et la caisse écran sur (15,12). Le recalage, la destruction du relais et la réouverture restent présents.",
+          "scope": "Variante gagnante rejouée ; éliminer le monstre n’est pas nécessaire."
+        }
+      ],
+      "alternatives": [
+        {
+          "label": "Gardien conservé comme poids",
+          "commands": "DDLUUURRUUUXUURRRDLCLLCDDDDUCCURRRURCUXUULCCLCCULX",
+          "metrics": {
+            "actions": 50,
+            "selections": 9,
+            "warriorPushes": 2,
+            "trainPushes": 1,
+            "huntSteps": 0,
+            "monsterHuntMoves": 0,
+            "songs": 5,
+            "groupSongs": 0,
+            "songHeroMoves": 1,
+            "songStoneMoves": 4,
+            "songMonsterMoves": 0,
+            "supportMoves": 0,
+            "swaps": 1,
+            "partnerSwaps": 1,
+            "stoneSwaps": 0,
+            "monsterSwaps": 0,
+            "bentSwaps": 0,
+            "multiMirrorSwaps": 0,
+            "swapReflections": 0,
+            "swapLoops": 0,
+            "partnerMoves": 1,
+            "stoneMoves": 5,
+            "mirrorMoves": 1,
+            "reflections": 3,
+            "heroReflections": 4,
+            "pistonPushes": 0,
+            "platformsCreated": 0,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          }
+        }
+      ]
+    },
+    {
+      "level": 8,
+      "title": "Les deux gardiens vivants",
+      "status": "passed",
+      "checks": [
+        {
+          "name": "Les deux gardiens arrivent vivants",
+          "observed": "115 entrées, 12 phases de chasse et 18 pas de monstres ; les deux gardiens terminent sur leurs plaques.",
+          "scope": "Rejeu indépendant du témoin complet, sans suppression d’une contrainte de ressource."
+        },
+        {
+          "name": "Quitter trop tôt la libération fait reculer le chasseur est",
+          "observed": "Après un seul pas du Barde, le Guerrier quitte sa commande : la retenue renvoie le chasseur est en (12,7), et sa destination reste fermée.",
+          "scope": "Contre-parcours concret sans mort ; la retenue ne peut pas être ouverte puis oubliée immédiatement."
+        },
+        {
+          "name": "Le miroir ne peut remplacer un gardien",
+          "observed": "Pour chacune des quatre directions de poussée du miroir (17,11), le départ du pousseur ou la destination du miroir est un mur. Aucun chant, échange ou reflet ne déplace un miroir.",
+          "scope": "Vérification géométrique exhaustive des quatre lignes de poussée ; aucune réserve ne permet de lever cette obstruction."
+        },
+        {
+          "name": "L’île vide impose la caisse du nord-est",
+          "observed": "L’île des neuf cases est vide au départ et hors des deux axes du miroir. Son seul voisin aquatique est (13,17). Aucun échange ne peut augmenter le nombre d’occupants d’une île encore vide ; il faut donc fabriquer ce passage avec la caisse unique.",
+          "scope": "Invariant d’effectif et inspection de toute la frontière de l’île ; ne repose pas sur une recherche limitée."
+        },
+        {
+          "name": "Aucun gardien ne peut être sacrifié à la victoire",
+          "observed": "La caisse doit devenir appui et le miroir est fixe. Les trois héros occupent les trois destinations, distinctes des deux plaques. Les deux monstres sont donc les deux seuls poids encore disponibles pour tenir les presses-buts.",
+          "scope": "Preuve de conservation des poids ; les appuis immergés ne comptent pas comme poids."
+        },
+        {
+          "name": "Variante valide : reflet immédiat de la réserve",
+          "observed": "98 entrées. X dès le départ livre la caisse sous la presse ; le Barde l’en extrait. Le pont et les deux gardiens restent indispensables, mais la visée coudée est évitée.",
+          "scope": "Variante gagnante rejouée ; le sort coudé est illustré par le témoin et n’est pas annoncé comme obligatoire."
+        }
+      ],
+      "alternatives": [
+        {
+          "label": "Réserve extraite par X initial",
+          "commands": "XDDRLUUURCCRLCDDDLDDDDDDRRRRRRRRDDDDDLDRRRULLLLLLLLLCCDDDDDCCLLDDDDDDDDDDDDDRRRRRRRRCCDRRRRRRRRRRR",
+          "metrics": {
+            "actions": 98,
+            "selections": 9,
+            "warriorPushes": 8,
+            "trainPushes": 0,
+            "huntSteps": 9,
+            "monsterHuntMoves": 14,
+            "songs": 1,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 1,
+            "songMonsterMoves": 0,
+            "supportMoves": 0,
+            "swaps": 0,
+            "partnerSwaps": 0,
+            "stoneSwaps": 0,
+            "monsterSwaps": 0,
+            "bentSwaps": 0,
+            "multiMirrorSwaps": 0,
+            "swapReflections": 0,
+            "swapLoops": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 11,
+            "mirrorMoves": 0,
+            "reflections": 1,
+            "heroReflections": 0,
+            "pistonPushes": 1,
+            "platformsCreated": 1,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          }
+        }
+      ]
+    }
+  ],
+  "scope": "Revue indépendante de L1 et L3–L8. L2 a été conçu par ce relecteur et possède un rapport séparé, sans label de revue indépendante. Contrôles ciblés et preuves géométriques ; aucune recherche bornée n’est présentée comme une impossibilité universelle."
+}

@@ -1,0 +1,1056 @@
+{
+  "spec": {
+    "id": "ss19-04",
+    "title": "Le gardien de la vanne",
+    "rows": [
+      "####################",
+      "####################",
+      "##....#....~~~.....#",
+      "##Woo......~~~.....#",
+      "##....#....~~~.....#",
+      "#######....~m#...Z.#",
+      "#######.B..~~#.....#",
+      "#######....~~~.....#",
+      "#######....~~~.....#",
+      "#######....~~~.....#",
+      "#######....~~~.....#",
+      "#######....~~~.....#",
+      "#######....~~~.....#",
+      "#######....s~~....g#",
+      "#####......~~~.....#",
+      "#####g.....~~~..g..#",
+      "#######....~~~.....#",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "gardien",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 5
+          }
+        ],
+        "color": 12
+      },
+      {
+        "id": "trappe",
+        "buttons": [
+          {
+            "x": 17,
+            "y": 5
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 3
+        },
+        "circuit": "gardien",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 15
+        },
+        "circuit": "gardien",
+        "direction": "N",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 12,
+          "y": 6
+        },
+        "circuit": "trappe",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCDDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 18
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation · Heroes and Water · énigmes 12 et 28",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-12",
+    "puzzle": 12,
+    "objective": "Sortir les réserves avant la chasse, attirer le gardien sur un soutien escamotable, puis reconstruire une traversée sans que le chant retire ses appuis.",
+    "secondary": {
+      "label": "Heroes 2 · attirer le monstre sur une ligne préparée",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-14"
+    }
+  },
+  "metrics": {
+    "actions": 143,
+    "selections": 9,
+    "warriorPushes": 34,
+    "trainPushes": 5,
+    "huntSteps": 1,
+    "monsterHuntMoves": 1,
+    "songs": 2,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 2,
+    "swaps": 2,
+    "partnerSwaps": 2,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 5,
+    "stoneMoves": 34,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 2,
+    "monstersRemoved": 1,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Les deux charges quittent ensemble la réserve, pendant que le gardien tient encore son bouton.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 13
+        }
+      ],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 12,
+          "y": 5
+        }
+      ],
+      "circuits": {
+        "gardien": true,
+        "trappe": true
+      }
+    },
+    {
+      "label": "Le Guerrier descend assez bas pour attirer le gardien sur la trappe maintenue par le Magicien.",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 13
+        }
+      ],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 12,
+          "y": 6
+        }
+      ],
+      "circuits": {
+        "gardien": false,
+        "trappe": true
+      }
+    },
+    {
+      "label": "Le Magicien quitte la commande : le soutien disparaît avant le prochain pas de chasse.",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 13
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "gardien": false,
+        "trappe": false
+      }
+    },
+    {
+      "label": "La Barde remonte l’appui immergé jusqu’à la rangée du futur pont.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "gardien": false,
+        "trappe": false
+      }
+    },
+    {
+      "label": "La première caisse traverse l’appui préparé et devient le deuxième pilier.",
+      "turn": 63,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "gardien": false,
+        "trappe": false
+      }
+    },
+    {
+      "label": "La deuxième caisse franchit les deux premiers appuis avant de combler le dernier intervalle.",
+      "turn": 88,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "gardien": false,
+        "trappe": false
+      }
+    },
+    {
+      "label": "Le Guerrier pousse la Barde jusqu’à la rive : aucun chant ne déplace le pont sous leur passage.",
+      "turn": 108,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "gardien": false,
+        "trappe": false
+      }
+    },
+    {
+      "label": "Deux échanges successifs extraient la Barde, puis font passer le Guerrier pendant que le Magicien récupère le pont.",
+      "turn": 118,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "gardien": false,
+        "trappe": false
+      }
+    },
+    {
+      "label": "Le dernier héros rejoint la troisième destination ; le chantier a consommé exactement les deux réserves.",
+      "turn": 143,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 18,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 15
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "gardien": false,
+        "trappe": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un ennemi déplacé sur un soutien temporaire tombe lorsque la commande est relâchée (Water 12).",
+      "Un déplacement imposé permet à la Barde de franchir une arrivée sans déplacer l’appui qu’elle contrôlerait en marchant (Water 28).",
+      "Le placement du héros attire un monstre vers la position préparée (Heroes 2, 14)."
+    ],
+    "changed": [
+      "Le gardien est un chasseur SS19 ; son axe dominant et la priorité verticale sont les règles explicites de cet épisode.",
+      "Le monstre ouvre d’abord une réserve à deux caisses ; le détour de chasse condamne cette réserve avant le chantier.",
+      "Un appui persistant est déplacé par chant, puis deux caisses construisent les deux autres cellules du pont.",
+      "Trois destinations réparties sur les deux rives exigent un transfert net de héros. Aucun dragon, feu ou protection du Clerc n’est repris."
+    ],
+    "sourceReading": "Le plan du bassin, le calendrier de la réserve et les positions des trois héros sont originaux. La noyade est démontrée dans le témoin ; les limites des audits de variantes sont précisées séparément."
+  }
+}
