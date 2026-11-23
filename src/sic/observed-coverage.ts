@@ -1,6 +1,7 @@
-import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 export { sicObservedCoverageDeadlock as observedCoverageDeadlock } from '../logos-engine/v6-native-types.ts';
 import { readTravelCell, readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
+import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
 
 type Cells = ReturnType<typeof readTravelGrid>['cells'];
 type Move = { input: string; delta: NativePoint };
@@ -15,7 +16,17 @@ export type CoverageLearning = {
   refs: string[]; deadlock?: { ref: string; key: string; bodies: string[] }; recovered: string[];
 };
 export type CoveragePlan = { command: NativeCommand; motion: Motion; marks: string[]; exit: string; evidence: string[];
-  covered: boolean; verifyBarrier?: true; pullRoute?: readonly PullStep[] };
+  covered: boolean; verifyBarrier?: true; pullRoute?: readonly PullStep[]; pushSeries?: readonly CoveragePushStep[] };
+
+type PushPose = { actor: string; arrangement: string };
+export type CoveragePushStep = {
+  command: NativeCommand;
+  before: PushPose;
+  after: PushPose;
+  landing: string;
+  substrate: string;
+  changed: NativeBox[];
+};
 
 const at = (value: string): NativePoint => value.split(',').map(Number) as [number, number];
 const tag = (p: NativePoint) => p.join(',');
@@ -253,25 +264,30 @@ function measureBarrier(local: CoverageLearning, layout: Layout, cells: Cells, g
   }
 }
 
-type Position = { actor: string; bodies: Set<string>; supports: Set<string>; first?: string };
+type Position = { actor: string; bodies: Set<string>; supports: Set<string> };
+type PushPath = { state: Position; step?: { input: string; landing: string; previous: PushPath } };
 
-function firstPath(start: Position, layout: Layout, ground: ReadonlySet<string>, water: ReadonlySet<string>, moves: readonly Move[]) {
+function pushPath(start: Position, layout: Layout, ground: ReadonlySet<string>, water: ReadonlySet<string>, moves: readonly Move[]) {
   const key = (state: Position) => JSON.stringify([state.actor, [...state.bodies].sort(), [...state.supports].sort()]);
-  const queue = [start], seen = new Set([key(start)]), relaxed = new Set([...ground, ...water, ...layout.gate]);
+  const queue: PushPath[] = [{ state: start }];
+  const seen = new Set([key(start)]), relaxed = new Set([...ground, ...water, ...layout.gate]);
   const reverse = layout.marks.map(mark => reversePush(mark, relaxed, moves));
   for (let i = 0; i < queue.length && i < 6000; i++) {
-    const state = queue[i]!;
+    const path = queue[i]!, { state } = path;
     const covered = layout.marks.every(mark => state.bodies.has(mark));
     const canStand = (cell: string) => ground.has(cell) || state.supports.has(cell) || covered && layout.gate.includes(cell);
-    const reachable = new Map<string, string | undefined>([[state.actor, state.first]]);
-    for (const [cell, first] of reachable) for (const move of moves) {
+    const reachable = new Map<string, PushPath>([[state.actor, path]]);
+    for (const [cell, previous] of reachable) for (const move of moves) {
       const target = next(cell, move.delta);
-      if (!reachable.has(target) && !state.bodies.has(target) && canStand(target)) reachable.set(target, first ?? move.input);
+      if (!reachable.has(target) && !state.bodies.has(target) && canStand(target)) {
+        reachable.set(target, { state: { ...state, actor: target }, step: { input: move.input, landing: target, previous } });
+      }
     }
     if (covered && reachable.has(layout.exit)) return reachable.get(layout.exit);
     for (const piece of state.bodies) for (const move of moves) {
       const behind = next(piece, move.delta, -1);
-      if (!reachable.has(behind)) continue;
+      const previous = reachable.get(behind);
+      if (!previous) continue;
       let end = next(piece, move.delta);
       while (state.bodies.has(end)) end = next(end, move.delta);
       const sink = water.has(end) && !state.supports.has(end);
@@ -281,11 +297,66 @@ function firstPath(start: Position, layout: Layout, ground: ReadonlySet<string>,
       if (sink) supports.add(end);
       else bodies.add(end);
       if (!matchesAssignment([...bodies], reverse)) continue;
-      const candidate = { actor: piece, bodies, supports, first: reachable.get(behind) ?? move.input };
+      const candidate = { actor: piece, bodies, supports };
       const signature = key(candidate);
-      if (!seen.has(signature)) { seen.add(signature); queue.push(candidate); }
+      if (!seen.has(signature)) {
+        seen.add(signature);
+        queue.push({ state: candidate, step: { input: move.input, landing: end, previous } });
+      }
     }
   }
+}
+
+function pushSteps(path: PushPath | undefined) {
+  const steps: { input: string; landing: string; from: Position; to: Position }[] = [];
+  for (let cursor = path; cursor?.step; cursor = cursor.step.previous) {
+    const { input, landing, previous } = cursor.step;
+    steps.push({ input, landing, from: previous.state, to: cursor.state });
+  }
+  return steps.reverse();
+}
+
+function bindPushSeries(route: ReturnType<typeof pushSteps>, initial: Position, cells: Cells, layout: Layout, pitch: number, remaining: number) {
+  const series: CoveragePushStep[] = [];
+  const covered = (pose: Position) => layout.marks.every(mark => pose.bodies.has(mark));
+  let pushDirection: string | undefined;
+  for (const { input, landing, from, to } of route.slice(0, Math.min(remaining, maximumCommittedActions))) {
+    // A new bridge, a gate change or a landing hidden in the initial view needs a fresh decision.
+    if (from.supports.size !== to.supports.size || covered(from) !== covered(to)
+      || initial.actor === landing || initial.bodies.has(landing)) break;
+    const substrate = stamp(cells.get(landing));
+    if (!substrate) break;
+    const shifted = [...from.bodies].filter(cell => !to.bodies.has(cell))
+      .concat([...to.bodies].filter(cell => !from.bodies.has(cell)));
+    // Reassess the layout after completing a push before changing stance or direction.
+    if (pushDirection && (!shifted.length || pushDirection !== input)) break;
+    if (shifted.length) pushDirection = input;
+    const changed = [from.actor, to.actor, ...shifted].map((cell): NativeBox => {
+      const [x, y] = at(cell);
+      return [x, y, x + pitch - 1, y + pitch - 1];
+    });
+    series.push({
+      command: { action_ref: input, data: {} },
+      before: { actor: from.actor, arrangement: arrangementOf(from.bodies) },
+      after: { actor: to.actor, arrangement: arrangementOf(to.bodies) },
+      landing, substrate, changed,
+    });
+  }
+  return series.length > 1 ? series : undefined;
+}
+
+function matchesPushPose(local: CoverageLearning, board: ReturnType<typeof readTravelGrid>, pose: PushPose) {
+  return !!local.body && board.pieces.length === 1 && board.pieces[0] === pose.actor
+    && arrangementOf(bodiesAt(board.cells, local.body, local.layout)) === pose.arrangement;
+}
+
+export function coveragePushPremise(local: CoverageLearning, travel: ObservedTravel, rows: NativeRows, step: CoveragePushStep) {
+  const board = readTravelGrid(rows, travel.grid);
+  return matchesPushPose(local, board, step.before) && stamp(board.cells.get(step.landing)) === step.substrate;
+}
+
+export function coveragePushReturn(local: CoverageLearning, travel: ObservedTravel, before: NativeRows, after: NativeRows, step: CoveragePushStep) {
+  return matchesPushPose(local, readTravelGrid(after, travel.grid), step.after) && unchangedOutside(before, after, step.changed);
 }
 
 function pullPath(actor: string, pieces: Set<string>, layout: Layout, ground: ReadonlySet<string>, moves: readonly Move[],
@@ -358,9 +429,10 @@ function pullPath(actor: string, pieces: Set<string>, layout: Layout, ground: Re
   }
 }
 
-export function chooseCoverage(local: CoverageLearning | undefined, travel: ObservedTravel | undefined, rows: NativeRows): CoveragePlan | undefined {
+export function chooseCoverage(local: CoverageLearning | undefined, travel: ObservedTravel | undefined, rows: NativeRows,
+  remaining = maximumCommittedActions): CoveragePlan | undefined {
   if (!local?.layout || !local.body || !travel?.actor || local.deadlock) return;
-  const cells = readTravelGrid(rows, travel.grid).cells, moves = namedMoves(travel);
+  const { cells, pieces } = readTravelGrid(rows, travel.grid), moves = namedMoves(travel);
   if (!coversFourDirections(moves)) return;
   const layout = local.layout, motion = local.motion ?? 'push', bodies = new Set(bodiesAt(cells, local.body, layout));
   if (bodies.size < layout.marks.length || bodies.size > layout.marks.length + (local.water ? 1 : 0)) return;
@@ -372,14 +444,16 @@ export function chooseCoverage(local: CoverageLearning | undefined, travel: Obse
   const route = motion === 'pull'
     ? retained?.length ? retained : pullPath(travel.actor, bodies, layout, ground, moves, local.pullRefusals ?? [])
     : undefined;
-  const input = motion === 'pull' ? route?.[0]?.input
-    : firstPath({ actor: travel.actor, bodies, supports: new Set(local.supports) },
-      layout, ground, new Set(local.water ? bySignature(cells, local.water) : []), moves);
+  const start = { actor: travel.actor, bodies, supports: new Set(local.supports) };
+  const pushed = motion === 'push' ? pushSteps(pushPath(start, layout, ground, new Set(local.water ? bySignature(cells, local.water) : []), moves)) : [];
+  const input = route?.[0]?.input ?? pushed[0]?.input;
+  const pushSeries = pieces.length === 1 && pieces[0] === start.actor
+    ? bindPushSeries(pushed, start, cells, layout, travel.grid.pitch, remaining) : undefined;
   const verify = input || motion === 'pull' ? undefined : measureBarrier(local, layout, cells, ground, travel.actor, bodies, moves, travel.grid.floor);
   return input || verify ? { command: { action_ref: (input ?? verify)!, data: {} }, motion, marks: layout.marks, exit: layout.exit,
     evidence: [...new Set([...local.refs, ...moves.map(move => travel.moves[move.input]!.ref)])],
     covered: layout.marks.every(mark => bodies.has(mark)), ...(verify ? { verifyBarrier: true } : {}),
-    ...(route?.length ? { pullRoute: route } : {}) } : undefined;
+    ...(route?.length ? { pullRoute: route } : {}), ...(pushSeries ? { pushSeries } : {}) } : undefined;
 }
 
 export function retainCoverageAfterReset(local: CoverageLearning): CoverageLearning {

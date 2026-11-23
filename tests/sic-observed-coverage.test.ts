@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
-import { chooseCoverage, hasObservedCoverage, observeCoverage, retainCoverageAfterReset,
+import { chooseCoverage, coveragePushPremise, coveragePushReturn, hasObservedCoverage, observeCoverage, retainCoverageAfterReset,
   type CoverageLearning, type PullStep } from '../src/sic/observed-coverage.ts';
 import { chooseTravelTrial, observeTravel, readTravelGrid, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
@@ -45,16 +45,30 @@ test('placement observes a pair of targets, verifies an irreversible corner and 
   const player = readTravelGrid(board.frame, travel.grid).pieces[0]!;
   travel = { ...travel, actor: player, visited: [player], tested: {}, stalled: 0 };
 
-  let covered = false;
+  let covered = false, checkedPrefix = false;
   for (let i = 0; i < 45 && !board.levelsCompleted; i++) {
     const plan = chooseCoverage(knowledge, travel, board.frame);
     const input = plan?.command ?? chooseTravelTrial(travel, board.frame, board.availableActionIds.map(command), false)?.command;
     assert.ok(input && !plan?.verifyBarrier);
     covered ||= plan?.covered === true;
+    const prefix = plan?.pushSeries;
+    if (!checkedPrefix && prefix && knowledge && travel) {
+      const first = prefix[0]!, before = board.frame, measured = knowledge, traveller = travel;
+      assert.ok(coveragePushPremise(measured, traveller, before, first));
+      const changed = before.map(row => [...row]), [x, y] = first.landing.split(',').map(Number) as [number, number];
+      changed[y]![x] = (changed[y]![x]! + 1) % 16;
+      assert.equal(coveragePushPremise(measured, traveller, changed, first), false);
+      await learn(input);
+      assert.ok(coveragePushReturn(measured, traveller, before, board.frame, first));
+      assert.equal(coveragePushReturn(measured, traveller, before, before, first), false);
+      checkedPrefix = true;
+      continue;
+    }
     await learn(input);
     assert.equal(knowledge?.deadlock, undefined);
   }
   assert.ok(covered);
+  assert.ok(checkedPrefix);
   assert.equal(board.levelsCompleted, 1);
 });
 
