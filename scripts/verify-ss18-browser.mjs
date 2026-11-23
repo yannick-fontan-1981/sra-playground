@@ -136,7 +136,7 @@ try {
   assert.deepEqual(await canvas.evaluate(node => [node.width, node.height, node.getContext('2d').imageSmoothingEnabled]), [64, 64, false]);
   assert.match(await canvas.evaluate(node => getComputedStyle(node).imageRendering), /^(pixelated|crisp-edges)$/);
   assert.deepEqual(await levels.locator('option').evaluateAll(items => items.map(item => item.value)), eight);
-  assert.deepEqual(await levels.locator('option').allTextContents(), SS18_LEVELS.map(({ title }) => title));
+  assert.deepEqual(await levels.locator('option').allTextContents(), eight.map(level => 'Level ' + level));
   await select('wizard', clickPixel);
   assert.equal(await wizard.getAttribute('aria-pressed'), 'true');
   const selection = await page.evaluate(() => window.qa.requests.at(-1));
