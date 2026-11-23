@@ -133,6 +133,7 @@ export interface NativeExecution {
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
+  readonly retainedCursorRoles?: ReturnType<typeof import('../sic/cursor-role-memory.ts').currentCursorRoles>;
   readonly panelFrontier?: import('../sic/public-input-exploration.ts').PanelFrontier;
   readonly observedQueue?: ReturnType<typeof import('./v6-queued-field-models.ts').acquireQueuedField>;
   readonly readEncounterTransition?: () => { readonly beforeRef: string; readonly afterRef: string } | null;

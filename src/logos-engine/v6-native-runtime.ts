@@ -42,6 +42,7 @@ import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects, learnVisibleGroupEffectsId } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
 import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, projectedPublicEffectsGroup, publicInputExplorationId } from '../sic/public-input-exploration.ts';
+import { createCursorRoleMemory, currentCursorRoles, cursorRoleMemoryId } from '../sic/cursor-role-memory.ts';
 import { createSicRecheckDirectionalControls } from '../sic/recheck-directional-controls.ts';
 import { createSicTrialRepeatedLinearControls } from '../sic/trial-repeated-linear-controls.ts';
 import { acquireQueuedField } from './v6-queued-field-models.ts';
@@ -807,9 +808,13 @@ export class NativeV6Runtime implements NativeV6Backend {
     const motion = exploration ? currentControlledMotion(exploration, this.observation) : undefined;
     const panelFrontier = exploration && currentPanelFrontier(exploration, this.observation);
     const observation = this.observation, rows = this.current.frame_rows;
+    const cursorState = this.knowledge?.memory.nodes[`family_state:${cursorRoleMemoryId}`];
+    const roleMemory = cursorState ? this.knowledge!.value(cursorState.id) as Parameters<typeof currentCursorRoles>[0] : undefined;
+    const retainedCursorRoles = roleMemory && currentCursorRoles(roleMemory, observation);
     let controlledClickRegions: readonly NativeBox[] | undefined;
     this.planning = { execution: { ...this.currentExecution(execution), ...(reasoning ? { reasoningMode: reasoning.mode } : {}),
       ...(motion ? { observedControlledMotion: motion } : {}),
+      ...(retainedCursorRoles?.length ? { retainedCursorRoles } : {}),
       ...(panelFrontier ? { panelFrontier } : {}),
       ...(this.readDirectionalMotion ? { readDirectionalMotion: this.readDirectionalMotion } : {}),
       ...(this.observedQueue?.ref === this.observation?.observation_ref ? { observedQueue: this.observedQueue.model } : {}),
@@ -2794,12 +2799,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 210 : 211,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 212 : 213,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery),
+      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),

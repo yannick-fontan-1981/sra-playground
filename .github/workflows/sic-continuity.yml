@@ -24,4 +24,5 @@ jobs:
       - run: npm ci
       - run: npm run typecheck
       - run: node --test tests/sic-continuity-contract.test.mjs tests/sic-verified-walking-series.test.ts tests/sic-spatial-series.test.ts tests/v6-branch-routing-kernel.test.ts
+      - run: node --test tests/sic-cursor-role-memory.test.ts
       - run: npm run test:sic-continuity
