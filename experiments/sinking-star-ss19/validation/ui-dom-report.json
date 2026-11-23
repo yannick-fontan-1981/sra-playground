@@ -1,13 +1,13 @@
 {
   "success": true,
-  "htmlSha256": "7636d82f48aa154fe1da46adc5c29306739194698b4681c673b62ae463014825",
+  "htmlSha256": "11c3ad41fa297d12e668bdfac3870921ff1fb7340a551173b548272854ec06e6",
   "scope": "focused-ui-and-full-campaign",
   "tutorialLevel": 1,
   "pedagogicalFixtureLevel": 1,
   "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
   "visualBrowserTest": false,
   "checks": [
-    "Compiled-HTML role fixtures cover train pushes and autonomous hunt, songs with two partners, moving and anchored supports, first-target swaps, bent rays, presses, hydraulics and combat.",
+    "Compiled-HTML role fixtures cover train pushes, stable guards and their explicitly caused transport, songs with two partners, moving and anchored supports, first-target swaps, bent rays, presses, hydraulics and combat.",
     "Global reflection uses nearest-source priority, exchanges equally distant actors and draws shape-specific previews.",
     "A four-mirror returning ray illuminates its path and blinks the Wizard without moving occupants or awarding a false discovery.",
     "Gray-backed buttons and black/gray press centers have the exact expected pixels.",
@@ -24,13 +24,13 @@
   ],
   "roleCoverage": [
     {
-      "case": "Chase follows a successful walk in its own animated phase",
-      "frames": 6,
+      "case": "A guard stays still during unrelated walking",
+      "frames": 3,
       "exactPixelsAndTiming": true,
       "exactUndo": true
     },
     {
-      "case": "A wall stops the chosen chase axis without a fallback move",
+      "case": "Bard song moves a guard exactly once",
       "frames": 3,
       "exactPixelsAndTiming": true,
       "exactUndo": true
@@ -163,6 +163,12 @@
     },
     {
       "case": "Wizard swaps a monster while partners remain safe",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A press visibly delivers a guard without a second movement",
       "frames": 6,
       "exactPixelsAndTiming": true,
       "exactUndo": true
@@ -335,8 +341,8 @@
     },
     {
       "case": "actual campaign blocked mirrors",
-      "level": 7,
-      "prefixActions": 15,
+      "level": 8,
+      "prefixActions": 7,
       "redMirrorIndices": [
         0
       ],
@@ -355,7 +361,7 @@
       "y": 15
     },
     "requiredWeights": 2,
-    "openingInput": 4,
+    "openingInput": 6,
     "closedPixels": [
       [
         11,
@@ -397,15 +403,15 @@
   "campaignCoverage": [
     {
       "level": 1,
-      "title": "Les galeries de la première chasse",
-      "actions": 201,
+      "title": "Les galeries des gardiens",
+      "actions": 208,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
     {
       "level": 2,
       "title": "Le gardien du seuil",
-      "actions": 56,
+      "actions": 62,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
@@ -419,14 +425,14 @@
     {
       "level": 4,
       "title": "Le gardien de la vanne",
-      "actions": 143,
+      "actions": 135,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
     {
       "level": 5,
       "title": "Le troisième doit rester vivant",
-      "actions": 143,
+      "actions": 134,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
@@ -447,22 +453,20 @@
     {
       "level": 8,
       "title": "Les deux gardiens vivants",
-      "actions": 115,
+      "actions": 97,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     }
   ],
   "tutorialCoverage": {
     "level": 1,
-    "actions": 201,
+    "actions": 208,
     "discoveries": [
       "select",
       "move",
       "warrior-push",
       "train-push",
-      "hunt",
-      "hunt-block",
-      "hunt-target",
+      "monster-still",
       "partner-push",
       "mirror-motion",
       "wizard-swap",
@@ -474,6 +478,7 @@
       "selective-song",
       "diagonal-song",
       "wall-song",
+      "monster-song",
       "release-by-swap",
       "water-support",
       "support-slide",
@@ -485,6 +490,7 @@
       "button",
       "gate",
       "press",
+      "monster-press",
       "monster",
       "goals"
     ],

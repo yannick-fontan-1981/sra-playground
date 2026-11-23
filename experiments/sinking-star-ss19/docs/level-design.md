@@ -1,135 +1,176 @@
-# SS19 — conception des huit salles
+# SS19 — Les Gardiens Noirs : conception des huit salles
 
-Version du laboratoire : **0.1.0**. SS19, **La Chasse Noire**, associe le Guerrier, le Magicien et le Barde. Les cartes sont des géométries originales inspirées de problèmes repérés dans les guides du [Nord](https://sinkingstarwalkthrough.com/fr/north/) et des [zones mixtes](https://sinkingstarwalkthrough.com/fr/crossovers/). Elles adaptent des contraintes de placement et de calendrier ; elles ne reproduisent pas les grilles ni toutes les règles du jeu source. Le détail des emprunts et des différences figure dans [l’audit des sources](source-audit.md).
+Version du laboratoire : **0.2.0**. La campagne associe le **Guerrier rouge (`W`)**, le **Magicien violet (`Z`)** et le **Barde magenta (`B`)**. Ses huit géométries sont originales ; elles adaptent des problèmes de placement et de transport repérés dans les guides du [Nord](https://sinkingstarwalkthrough.com/fr/north/) et des [zones mixtes](https://sinkingstarwalkthrough.com/fr/crossovers/). Les emprunts et leurs limites sont détaillés dans [l’audit des sources](source-audit.md).
 
-## Une campagne qui change de problème
+## Progression et diversité des problèmes
 
-Le Guerrier pousse une file entière, le Magicien échange deux occupants et le Barde déplace son voisinage. La poursuite ajoute une question commune : **quel héros doit être actif au prochain geste pour que les monstres prennent la bonne direction ?** La sélection seule ne fait pas avancer le monde. Les salles alternent ensuite ce raisonnement avec des problèmes sans monstre, afin que la chasse ne remplace pas toute la logistique.
+La difficulté vient de la préparation des emplacements, du partage des ressources et des départs qui doivent préserver les poids déjà posés. **Tous les monstres restent immobiles tant qu’un pouvoir, un reflet ou une presse ne les transporte pas.** Aucun pas supplémentaire ne dépend du héros sélectionné, de sa distance ou d’un calcul de direction invisible.
 
-| Niveau | Structure et contrainte dominante | Entrées du témoin | Dont sélections |
+| Niveau | Structure et raisonnement dominant | Entrées du témoin | Dont sélections |
 | --- | --- | ---: | ---: |
-| 1 · Les galeries de la première chasse | Trois galeries décalées ; découverte des pouvoirs et trois accès verrouillés différemment | 201 | 17 |
-| 2 · Le gardien du seuil | Rail séparé, commande intérieure et îlot de relève ; conserver la bonne cible | 56 | 8 |
+| 1 · Les galeries des gardiens | Trois galeries décalées ; 31 découvertes et trois accès verrouillés différemment | 208 | 20 |
+| 2 · Le gardien du seuil | Rail de trois presses et îlot de relève ; livrer deux poids permanents | 62 | 8 |
 | 3 · L’interrupteur hors d’atteinte | Machine optique isolée et deux sas opposés ; extraire les réserves dans les bons états | 150 | 18 |
-| 4 · Le gardien de la vanne | Deux rives et une réserve temporaire ; chasser, retirer un soutien puis construire le passage | 143 | 9 |
-| 5 · Le troisième doit rester vivant | Prison étroite et moulin de presses ; éliminer une paire tout en conservant un gardien | 143 | 15 |
-| 6 · La seconde image | Régions séparées et deux reflets couplés ; retarder une commande grâce à la première cible | 74 | 10 |
-| 7 · Le relais condamné | Îlots et relais optique consommable ; préparer un miroir, en supprimer un autre et rouvrir son axe | 52 | 9 |
-| 8 · Les deux gardiens vivants | Deux enclos en L, sas optique et île vide ; conserver deux chasseurs et affecter l’unique caisse au pont | 115 | 12 |
-| **Total** | **Huit parcours gagnants sans refus ni perte de héros** | **934** | **98** |
+| 4 · Le gardien de la vanne | Réserve temporaire, trappe et bassin ; coordonner le retrait du gardien et le chantier | 135 | 12 |
+| 5 · Le troisième doit rester vivant | Chambre scellée, rencontre provoquée et moulin de presses ; conserver trois poids distincts | 134 | 13 |
+| 6 · La seconde image | Régions séparées et reflets couplés ; différer une livraison grâce au premier obstacle | 74 | 10 |
+| 7 · Le relais condamné | Îlots et relais optique consommable ; préparer, détruire puis rouvrir | 52 | 9 |
+| 8 · Les deux gardiens vivants | Deux transports de monstres, réserve optique et île vide ; répartir exactement les ressources finales | 97 | 15 |
+| **Total des huit témoins** | **Victoire sans refus ni perte dans chaque salle** | **912** | **105** |
 
-Une entrée désigne ici une commande envoyée au moteur, sélection comprise. Ces nombres documentent les parcours qualifiés ; **ils ne mesurent ni la difficulté ni un minimum de coups**. Le témoin du niveau 1 montre volontairement de nombreuses interactions. Un niveau plus court peut exiger une décision plus difficile sur l’ordre des opérations. La campagne ne demande pas non plus d’utiliser chaque pouvoir dans chaque salle.
+Ces comptes décrivent des parcours complets vérifiés. Ils ne mesurent pas la difficulté et ne constituent pas des minimums. Le témoin du niveau 1 comprend volontairement des démonstrations facultatives. Les variantes qualifiées sont indiquées plus bas ; le jeu accepte toute solution conforme aux mêmes règles physiques.
 
-Les cartes, étapes, commandes complètes et métriques sont conservées dans les huit fichiers `reference/levelN-design.json`. Le fichier [des témoins de campagne](../tests/witnesses.json) rassemble les commandes à rejouer. Ces données appartiennent aux outils d’auteur ; elles ne sont pas fournies au joueur ni à l’agent SRA.
+Les niveaux 3 et 6 ne contiennent pas de monstre : leurs cartes et leurs témoins sont conservés. Le niveau 7 conserve également sa carte et son témoin, dont les déplacements du monstre étaient déjà provoqués par des poussées. Les niveaux 1, 2, 4, 5 et 8 organisent désormais leurs gardiens autour de commandes explicites. La règle d’immobilité s’applique à tous les monstres de la campagne, sans catégorie particulière.
 
-## 1 — Les galeries de la première chasse
+## Ce que le plateau permet de comprendre
 
-**Références principales :** Heroes 2: Monsters, énigmes 1 et 14 ; Heroes and Water, 27–28 ; Heroes and Mirrors, 1 et 30. [Carte, étapes et témoin](../reference/level1-design.json).
+Le Guerrier pousse une file contiguë entière. Le Magicien échange sa place avec la première cible de sa visée, éventuellement déviée par un miroir. Le Barde entraîne les occupants de son carré de 5 × 5, calculé avant son pas ; les murs ne coupent pas cette portée. Un déplacement imposé à un partenaire ne déclenche pas sa capacité. Le [contrat des règles](specification.md) précise les ancrages, les cascades et les cas de refus.
 
-Trois galeries décalées exposent les capacités par petits ensembles. Le chasseur circule dans un rail séparé : ses deux premiers déplacements permettent de voir le rythme de la poursuite, puis sa butée rend les manipulations suivantes plus faciles à observer. La salle enseigne la poussée en file, le déplacement imposé d’un partenaire, le réglage d’un miroir, la première cible d’une visée, les échanges et les reflets. Le chantier du Barde montre ensuite la portée diagonale, le chant à travers une cloison, les butées qui retiennent certaines pièces, l’immersion d’une caisse, le déplacement d’un appui et son ancrage.
+Chaque transport de monstre possède une cause observable. Le chant suit un pas accepté du Barde ; une presse agit à sa fermeture sur l’occupant de sa propre case ; un reflet part des axes visibles ; une poussée conserve la file. Ouvrir une porte vide ou sélectionner un héros ne fait venir aucun gardien. Le contact par un côté reste dangereux pour tous les héros, même inactifs ; deux monstres voisins s’éliminent simultanément.
 
-Les trois destinations ont des accès distincts. La commande cyan exige deux charges ; l’issue optique demande de libérer un bouton initialement occupé ; l’accès inférieur dépend des poids disposés par le chant. Dans l’état initial, même un parcours qui ignore les autres occupants n’atteint aucune destination par la marche seule. Une suite de marches et de sélections qui ne déplace aucune pièce ne peut pas libérer l’issue optique.
+Les boutons et les presses occupent des cases distinctes. Un bouton montre un plus rose sur fond gris et la couleur de son circuit au centre. Une presse montre son orientation et un centre noir lorsqu’elle est fermée, gris lorsqu’elle est ouverte. Les couleurs relient les commandes aux dispositifs ; leur polarité se vérifie par le changement d’état. Un trajet de reflet incompatible est refusé en entier et les miroirs concernés signalent le blocage en rouge.
 
-Le tutoriel comporte **31 découvertes lues dans les images publiques**. Son parcours est pédagogique : les déplacements de partenaires, les allers-retours optiques, les relèves de commandes et la noyade du chasseur par presse donnent des exemples concrets des règles. **Ces interactions ne sont pas toutes imposées pour gagner.** Les coches n’interviennent jamais dans la victoire ; une solution peut montrer moins de choses que le témoin. La noyade enseignée ne devient pas un objectif caché d’élimination.
+Les sorties restent soumises aux circuits après l’arrivée d’un premier héros. **La victoire exige seulement trois héros vivants sur les trois destinations simultanément.** Aucun quota de combat, nombre de reflets, usage obligatoire d’un pouvoir ou découverte pédagogique n’est ajouté à cette condition. Les nécessités mentionnées dans ce guide proviennent de la géométrie et des occupants disponibles.
 
-La [revue indépendante](../reference/independent-review-ss19.json) vérifie les sorties initialement inaccessibles, un refus concret devant la presse occidentale et le confinement du chasseur pendant le parcours pédagogique.
+## 1 · Les galeries des gardiens
 
-## 2 — Le gardien du seuil
+Les trois alcôves sont fermées au départ. La commande cyan demande deux poids, la commande optique doit être libérée et la galerie basse dépend de l’accord du chœur. Une simple marche ne résout donc pas la salle : la caisse déjà posée sur le bouton optique maintient notamment l’alcôve est fermée tant qu’elle n’est pas déplacée.
 
-**Références principales :** Heroes 2: Monsters, énigmes 15 et 22. [Carte, étapes et témoin](../reference/level2-design.json).
+Le parcours pédagogique fait découvrir la poussée en file, le déplacement d’un partenaire sans son pouvoir, le recalage d’un miroir, la visée coudée, la priorité de la première cible et la relève d’un poids par échange. Le Barde travaille ensuite derrière une cloison : les butées retiennent une partie du groupe, une caisse devient appui et un héros protège cet appui pendant le déplacement du suivant. Le Magicien permet de quitter ces postes sans reprendre les charges par le chant.
 
-Le bouton du gardien est situé **à l’intérieur de son rail**, et non à son extrémité. Quatre gestes l’amènent à la bonne colonne ; un geste supplémentaire depuis une mauvaise cible peut le faire repartir. Changer de héros déplace la cible au sud : le mur bloque alors l’axe choisi par la poursuite et le gardien reste sur sa commande. Le rail est suffisamment séparé pour que le chant, les poussées et les visées des héros ne remplacent pas ce raisonnement.
+La livraison du gardien est une démonstration en deux temps. Il reste en **(16,9)** pendant les préparatifs. Un pas du Barde vers la gauche le dépose sur la presse verte ouverte en **(15,9)**. Après l’extraction du Barde, la commande verte ferme cette presse et pousse le monstre vers l’eau en **(15,10)**. Un pas bloqué du Barde ne chante pas ; une fermeture de presse vide ne transporte rien à distance.
 
-Pendant que le gardien est immobilisé, le Barde retire la caisse d’un coude aveugle. Le Guerrier l’aligne avec le Magicien sur son îlot. L’échange laisse la caisse sur la commande et libère le Magicien, sans interrompre son occupation. Les trois destinations sont elles-mêmes des presses commandées par l’accord des deux poids : pénétrer derrière une porte puis laisser l’accord se défaire ne suffit donc pas.
+Les **31 découvertes** couvrent sept familles :
 
-La nécessité des ressources vient du nombre d’occupants. À la victoire, les trois héros sont sur les trois buts, distincts des commandes. La caisse unique et le gardien unique sont les deux seuls poids restants pour les deux boutons. La [revue du niveau 2](../reference/level2-review.json) rejoue notamment une immersion qui perd la caisse : aucun héros ne meurt immédiatement, mais l’accord final devient impossible sans annuler ou recommencer.
+| Famille | Nombre | Enseignements observés |
+| --- | ---: | --- |
+| Lecture et issue | 5 | Sélection, déplacement, immobilité des monstres, danger du contact et destinations communes |
+| Guerrier | 4 | Poussée, file, partenaire déplacé sans pouvoir et miroir mobile |
+| Magicien | 4 | Première cible, échange de partenaire, visée coudée et relève d’un poids |
+| Barde | 7 | Groupe, partenaires, butées, diagonales, portée à travers les murs, monstre chanté et départ par échange |
+| Eau | 4 | Création d’appui, glissement, ancrage et traversée |
+| Reflets | 3 | Activation globale, transport d’un héros et transport d’une caisse |
+| Circuits | 4 | Bouton, porte, presse et monstre poussé par presse |
 
-## 3 — L’interrupteur hors d’atteinte
+Le témoin de 208 entrées démontre ces interactions ; il n’est pas nécessaire de cocher les 31 découvertes pour gagner. En particulier, la noyade enseignée n’est pas déclarée indispensable à toutes les solutions. Les extractions sans chant et les trois verrouillages donnent au tutoriel une résolution matérielle propre, au-delà de ses démonstrations.
 
-**Références principales :** Heroes and Mirrors, énigme 16 ; Heroes 3: Bard, Druid, énigme 19. [Carte, étapes et témoin](../reference/level3-design.json).
+**Références adaptées :** [Heroes 2, 14–15](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour la préparation et les poids ; [Water, 27–28](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/) pour les appuis et les départs imposés ; [Mirrors, 1 et 30](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/) pour le transport et la visée. La baie de livraison, les galeries et les trois verrous sont propres à SS19. [Témoin et étapes du niveau 1](../reference/level1-design.json).
 
-Cette salle sans monstre est un problème de configuration à distance. Une caisse isolée change de bras par reflet et bascule une commande inaccessible. Celle-ci ouvre le sas supérieur en fermant le sas inférieur, puis inverse ces passages. Le joueur doit sortir les deux réserves de leurs chambres, les conserver au sec et choisir les moments où les partenaires franchissent les sas.
+## 2 · Le gardien du seuil
 
-Une réserve est coincée dans un cul-de-sac sans position de poussée arrière. Le Barde la dégage, puis le Magicien l’extrait de son poste pour éviter qu’un départ chanté reprenne la caisse. Les deux charges rejoignent leurs commandes séparées ; le poids optique conserve sa fonction de contrôleur. Le dernier changement de configuration ouvre la destination occidentale sans déplacer ces lests.
+Le rail du gardien est séparé du sol des héros par deux rangées murées. Les trois commandes **jaune, verte et orange**, alignées en **(10,6), (11,6), (12,6)**, actionnent trois presses orientées vers l’ouest. Leurs fermetures livrent successivement le monstre de **(14,3)** à **(13,3)**, puis **(12,3)**, puis au bouton violet distinct en **(11,3)**. Le joueur peut suivre chaque impulsion et son résultat sur le rail.
 
-La machine optique reste isolée des lignes de visée des héros. La revue indépendante vérifie aussi le cas où le Barde atteint sa caisse par la portée du chant : le mur bloque le pas qui la déplacerait, et les autres directions ne la dégagent pas. Le témoin utilise trois reflets ; ce nombre n’est pas annoncé comme un minimum. La contrainte porte sur les configurations accessibles et sur les trois caisses conservées pour les trois commandes finales, pas sur un compteur de reflets.
+Revenir sur une commande déjà employée ne remplace pas l’impulsion suivante : sa presse est alors vide. La portée du chant, les visées et l’absence de miroir rendent les presses nécessaires à cette livraison. Une fois arrivé, le gardien conserve sa place jusqu’à un nouveau transport imposé.
 
-## 4 — Le gardien de la vanne
+Le second poids demande une autre logistique. Le Barde extrait la caisse de son coude aveugle ; le Guerrier l’aligne devant l’eau ; le Magicien échange sa place avec elle pour la laisser sur la commande de son îlot. L’accord des deux boutons violets ouvre les trois destinations.
 
-**Références principales :** Heroes and Water, énigmes 12 et 28 ; Heroes 2: Monsters, énigme 14. [Carte, étapes et témoin](../reference/level4-design.json).
+La nécessité des deux ressources est un comptage final : les trois héros occupent les trois destinations, distinctes des commandes. La caisse et le monstre sont les seuls poids restants pour les deux boutons. Leurs rôles ne sont pas imposés par un compteur invisible.
 
-Le gardien remplit d’abord une fonction utile : sa position maintient ouverte la réserve contenant deux caisses. Le témoin commence donc par faire sortir les deux charges en file. Le Guerrier attire ensuite le chasseur sur le soutien temporaire maintenu par le Magicien. Quand celui-ci quitte sa commande, la plateforme disparaît et le monstre tombe à l’eau.
+**Références adaptées :** [Heroes 2, 15 et 22](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour les poids et leur relève ; [Light, 1](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/) pour les poussées depuis un côté inaccessible. Le rail à trois couleurs et l’îlot sont originaux. [Témoin et étapes du niveau 2](../reference/level2-design.json).
 
-Dans le témoin de référence, la seconde moitié de la salle transforme les ressources extraites en passage. Le Barde recale un appui déjà immergé ; les deux caisses construisent les deux cellules manquantes. Il faut préparer leur ordre de livraison, car une caisse immergée devient un appui et cesse d’être une charge mobile. Le témoin fait ensuite pousser le Barde par le Guerrier pour démontrer une traversée sans chant. Deux échanges assurent la relève des partenaires.
+## 3 · L’interrupteur hors d’atteinte
 
-La salle oppose ainsi trois calendriers : sortir les réserves tant que le gardien les autorise, retirer le soutien au bon moment et conserver les appuis pendant les passages. Les destinations réparties sur les deux rives demandent un transfert net d’occupants. Le calendrier de noyade et les deux immersions appartiennent à ce parcours de référence, sans constituer des obligations universelles.
+Cette salle conserve son problème sans monstre. Un poids commandé par reflet change de bras dans une machine isolée. Il ouvre un sas pendant qu’il ferme l’autre. Les deux réserves doivent franchir leurs passages dans des configurations différentes avant d’occuper les deux boutons du circuit de charges.
 
-Deux variantes gagnantes sont conservées dans la [revue indépendante](../reference/independent-review-ss19.json). La première, de **141 entrées dont 9 sélections**, construit le passage pendant que le gardien vit encore, puis le noie au départ du Magicien. La seconde, de **138 entrées dont 16 sélections**, ne transforme qu’une des deux caisses en appui : l’autre caisse et un appui se déplacent ensemble, puis un échange du Magicien assure la relève. Son état final conserve les appuis en `(11,11)` et `(13,11)` et une caisse sèche en `(9,11)`. Les deux réserves sont toujours utilisées ; cela ne prouve pas que chacune doive être immergée. Les deux variantes terminent sans refus ni perte de héros.
+Le Barde extrait une réserve d’un cul-de-sac où le Guerrier manque de place derrière la caisse. Le Magicien le relève sans reprendre cette charge. Le dernier état de l’interrupteur autorise les arrivées tout en laissant les deux lests en place. Les trois reflets du témoin décrivent ce calendrier ; leur nombre n’est pas annoncé comme minimal.
 
-Le Barde peut aussi traverser le pont achevé par cinq pas chantés : les appuis sont retenus par les autres appuis et la rive. La poussée du Guerrier enseigne donc un départ imposé, sans être une nécessité universelle de cette carte.
+Le contrôle depuis le bord ne donne pas un déplacement gratuit de la machine : même lorsque la caisse entre dans la portée du Barde, le pas susceptible de l’extraire est bloqué par un mur. Les autres directions la retiennent contre ses butées. Un retrait du lest bas après une première arrivée referme réellement une presse de destination et en expulse son occupant.
 
-Une variante indépendante retarde la sortie du Magicien de sa commande jusqu’après la construction et le transfert du Barde. Elle termine en **141 entrées, dont 9 sélections**, et conserve les deux caisses ainsi que l’appui déplacé. La noyade avant le chantier n’est donc pas un ordre obligatoire ; le témoin principal de 143 entrées reste un parcours pédagogique valide.
+À l’état final, le poids de l’interrupteur et les deux réserves assurent trois commandes distinctes, tandis que les héros occupent les buts. Cette conservation explique le rôle des trois caisses. La salle apporte une alternance optique à la campagne sans modifier sa géométrie pour y ajouter des monstres.
 
-## 5 — Le troisième doit rester vivant
+**Références adaptées :** [Mirrors, 16](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/) pour l’interrupteur distant ; [Heroes 3, 19](https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/) pour l’extraction par chant. Les chambres, les deux sas et les destinations sont originaux. [Témoin et étapes du niveau 3](../reference/level3-design.json).
 
-**Références principales :** Heroes 3: Bard, Druid, énigmes 13–14 ; Heroes and Light, énigme 1. [Carte, étapes et témoin](../reference/level5-design.json).
+## 4 · Le gardien de la vanne
 
-Cette carte sèche n’utilise aucun miroir. Le Magicien attire d’abord les deux chasseurs extérieurs dans une rangée commune, puis vers la droite : une butée retient le premier et leur rapprochement déclenche le combat. Ce travail précède le verrouillage du moulin. Le Barde fait ensuite monter le captif dans sa colonne jusqu’au bouton et amène la caisse derrière lui. Cette commande ouvre le passage de chargement du Guerrier, placé au-dessus de la réserve, mais ferme les côtés de manœuvre.
+Le gardien tient initialement la commande orange de la réserve. Il faut en sortir les deux caisses avant de le déplacer : son départ referme le chargement et ouvre la destination orange. Le Barde le dépose par **un chant vers le bas**, de **(12,5)** sur la trappe en **(12,6)**. Le Magicien maintient le bouton violet qui soutient cette case, puis le quitte ; le monstre tombe sur place lorsque la plateforme disparaît.
 
-Le Barde agit depuis un pupitre étroit. En sortir volontairement risquerait de reprendre les pièces qui constituent la prison ; le Magicien l’en extrait par échange. La caisse de la chambre haute traverse alors le moulin : la première presse la dépose vers l’ouest, la seconde transforme ce transfert en livraison vers le sud. Le Guerrier récupère la charge et la conduit à la commande de la chambre haute. Les côtés condamnés et les murs inférieurs empêchent la séquence de quatre chants qui, dans une version de travail, remplaçait directement ces deux livraisons.
+La difficulté suivante est un chantier. Le Barde recale l’appui initial dans la rangée du passage. Les caisses empruntent la même colonne de descente et, dans le témoin, complètent successivement le pont en **(11,11), (12,11), (13,11)**. Les héros doivent ensuite traverser sans que le chant retire un appui utile : la poussée d’un partenaire et deux échanges fournissent les relèves du parcours.
 
-La nécessité du captif a une raison géométrique. Sa colonne fermée, de `(5,8)` à `(5,12)`, contient un monstre initialement au-dessus d’une caisse. Les deux pièces ne peuvent ni se croiser ni quitter cette colonne ; aucune ligne de visée, aucun miroir et aucun accès latéral ne permettent d’inverser leur ordre. Seul le monstre peut donc occuper le bouton du haut, qui maintient une destination ouverte. La caisse sert à le retenir à cet endroit pendant les départs.
+Les contrôles distinguent les contraintes. Chanter trop tôt ferme effectivement la réserve, mais cette erreur locale n’est pas annoncée irréversible. La plateforme levée de la trappe ne relie pas à elle seule les deux rives. Après la première immersion, une traversée droite rencontre encore une case d’eau nue. Enfin, un transfert net de héros entre les rives reste nécessaire : les échanges seuls en conservent les effectifs.
 
-Le problème porte sur la différence entre une paire à rapprocher et un gardien à maintenir sur place, puis sur les côtés de poussée qui restent accessibles après le changement de circuit. Aucun compteur « tuer deux monstres » n’est ajouté à la victoire : les effets utiles sont la libération de l’arène, le chargement du moulin et les boutons occupés.
+Le témoin de **135 entrées / 12 sélections** utilise les deux réserves et les transforme en deux appuis. Cette observation ne prouve pas que toute solution doive faire deux immersions ou utiliser exactement les mêmes relèves. Deux variantes de cette version ont également été rejouées sans refus ni perte :
 
-Une **variante gagnante de 181 entrées, dont 22 sélections**, utilise la première presse puis remplace la seconde par un déverrouillage temporaire du captif, une extraction par échange du Magicien et un nouveau verrouillage. Elle conserve le gardien utile et demande davantage de coordination que le témoin de 143 entrées. La fermeture des côtés a supprimé le contournement direct en quatre chants ; elle ne prouve pas que les deux presses soient obligatoires dans toute solution. Cette variante légale est conservée dans la [revue indépendante](../reference/independent-review-ss19.json).
+- **135 entrées / 12 sélections : retirer la trappe avant le chant.** Le Magicien relâche d’abord sa commande. Le chant envoie ensuite le gardien dans l’eau nue et le chantier peut se poursuivre. Le séjour sur la plateforme illustre donc un mécanisme, sans constituer une étape obligatoire.
+- **138 entrées / 15 sélections : traverser par chant.** Cinq pas du Barde font passer le duo sur le pont préparé, dont les appuis sont retenus par la rive et les héros. La poussée du Barde du témoin est une relève utile, pas l’unique traversée légale.
 
-## 6 — La seconde image
+**Références adaptées :** [Water, 12 et 28](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/) pour le retrait d’un soutien et le passage imposé du Barde ; [Heroes 3, 14](https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/) pour le transport des gardiens par chant. Le bassin, la réserve et leur coordination sont propres à SS19. [Témoin et étapes du niveau 4](../reference/level4-design.json).
 
-**Références principales :** Heroes and Mirrors, énigme 19 ; Heroes and Water, énigme 11. [Carte, étapes et témoin](../reference/level6-design.json).
+## 5 · Le troisième doit rester vivant
 
-Deux systèmes optiques partagent la même commande de reflet. Dans le plan de référence, le Barde prépare une charge éloignée derrière une caisse plus proche du miroir. Le Magicien le relève sans reprendre cette charge. Le premier reflet transporte le Guerrier vers le débarcadère nord et envoie seulement le bloqueur proche dans l’eau : il devient l’appui du passage sud-est. Le second atteint la charge lointaine et l’envoie sur le bouton.
+Trois postes donnent des fonctions différentes aux monstres et aux caisses. Dans une chambre scellée, trois chants placent le captif sur le bouton orange **(5,8)** et sa caisse sur le bouton vert **(5,9)**. La butée supérieure retient le gardien pendant que la caisse termine son approche. Le Magicien extrait ensuite le Barde : un départ à pied risquerait de reprendre les deux poids.
 
-Cette commande ferme le débarcadère emprunté par le Guerrier et ouvre d’autres accès. Le joueur doit donc déplacer le Guerrier hors de son axe avant de poursuivre. Répéter immédiatement le reflet le ramène au départ ; une troisième activation est ensuite refusée par le débarcadère fermé. Le rapport décrit ce résultat comme une erreur réparable, sans prétendre qu’elle rend toute la salle définitivement insoluble.
+Dans le couloir central, un autre chant rapproche la paire de monstres jusqu’au contact. Leur disparition vient de cette translation visible et de la règle de combat. Le captif reste séparé. Aucun quota d’élimination ne participe à la victoire.
 
-Une **variante gagnante de 95 entrées, dont 10 sélections**, laisse la charge en haut avant les deux premiers reflets. Elle la récupère plus loin sur le quai, la replace au chant et utilise deux échanges pour extraire le Barde. La préparation avant les reflets n’est donc pas une nécessité universelle. Le parcours de référence, de 74 entrées, conserve un appui et un poids sec ; cela ne constitue pas une preuve exhaustive contre toute autre utilisation de deux appuis ou déplacement ultérieur d’un miroir. Les deux parcours figurent dans la [revue finale](../reference/final-ss19-review.json).
+Le Guerrier charge alors la caisse supérieure sur la presse violette en **(10,4)**. Une première impulsion l’envoie à l’ouest en **(9,4)** ; la presse rose la dépose au sud en **(9,5)**. Le même circuit rose ouvre le volet en **(9,6)** : le Magicien doit maintenir sa commande pendant la sortie de la charge. Sept pas chantés l’amènent au bouton cyan **(9,12)**, puis un second échange libère le Barde sans retirer le poids.
 
-## 7 — Le relais condamné
+Les trois poids finaux ont des fonctions lisibles. Le gardien orange commande une destination, la caisse verte en commande une autre et la caisse cyan ouvre le but supérieur. La chambre scellée conserve son gardien et sa caisse sans accès de remplacement pour les héros. Dans la région ouverte, un monstre ne peut remplacer la caisse cyan : il tuerait le héros nécessaire sur la destination orange voisine **(9,13)**. La dernière livraison ne peut donc être supprimée en laissant simplement un monstre sur ce bouton.
 
-**Références principales :** Heroes and Mirrors, énigme 18 ; Heroes 2: Monsters, énigmes 10 et 14. [Carte, étapes et témoin](../reference/level7-design.json).
+L’ordre des presses produit aussi une conséquence matérielle : fermer d’abord la presse rose en **(9,4)**, puis envoyer la caisse contre elle avec la presse violette, écrase cette dernière réserve. Relâcher trop tôt la commande rose après une livraison correcte referme simplement le volet ; la caisse reste retenue et le transport peut reprendre après réouverture.
 
-Le Guerrier prépare d’abord le petit miroir pour les arrivées nord-ouest, avant de quitter l’atelier. Un autre miroir sert de relais vers le quai droit, mais occupe l’axe du dernier reflet. Il faudra le supprimer après son utilisation. Le chasseur du quai se trouve derrière une caisse écran ; le témoin pousse la file deux fois, ce qui envoie le monstre à l’eau et laisse la caisse sur une commande.
+Le témoin réalise deux impulsions de presse et deux échanges. Cela démontre une combinaison de moyens de transport, sans transformer chaque emploi de pouvoir en obligation universelle. Les anciennes variantes de la carte précédente ne sont pas des solutions qualifiées de cette géométrie.
 
-Dans l’atelier, le Barde descend une charge dans sa glissière jusqu’au bouton de destruction. La presse écrase le relais contre une butée. **Le miroir disparu laisse cependant une presse fermée dans le même axe** : il faut remonter la charge d’une case pour rouvrir le rayon. Les deux contre-essais — relais intact, puis relais détruit mais presse encore fermée — produisent bien un refus de reflet.
+**Références adaptées :** [Heroes 3, 13–14](https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/) pour le contraste entre rencontre provoquée et gardien conservé ; [Light, 1](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/) pour les presses qui changent l’axe de livraison. La chambre à deux poids, le volet et les trois postes sont originaux. [Témoin et étapes du niveau 5](../reference/level5-design.json).
 
-Le Magicien extrait ensuite le Barde de la glissière. Le premier départ par le petit miroir place le Barde hors de l’axe ; le dernier reflet transporte ensemble les deux autres héros vers les destinations restantes.
+## 6 · La seconde image
 
-Une **variante gagnante de 50 entrées, dont 9 sélections**, utilise une seule poussée de la file. Elle garde le monstre vivant en `(16,12)` et sa caisse écran en `(15,12)`. Les changements de cible suivants restent bloqués par l’écran. Le réglage du petit miroir, la destruction du relais, la réouverture de sa presse et les départs sont conservés. **Tuer ce chasseur n’est donc pas obligatoire.** Le témoin principal compte 52 entrées ; les deux solutions sont rejouées dans la [revue finale](../reference/final-ss19-review.json).
+Deux reflets couplent le départ du Guerrier et la livraison de deux caisses. La première cible, plus proche du miroir, part à l’eau et devient l’appui **(11,14)** ; elle cesse alors d’être une cible de reflet. La charge plus éloignée peut rejoindre au second passage le bouton **(8,14)**. Cette commande ferme le débarcadère derrière le Guerrier tout en ouvrant sa destination et le passage sud-est.
 
-## 8 — Les deux gardiens vivants
+La préparation enseignée place la charge dans sa glissière avec le Barde, puis l’extrait par échange sans reprendre la caisse. Entre les deux reflets, le Guerrier quitte sa case d’arrivée. Répéter immédiatement le reflet le renvoie au départ ; la commande se ferme ensuite et un nouveau transfert se heurte au débarcadère fermé. Le refus n’est pas décrit comme une impasse définitive.
 
-**Références principales :** Heroes 2: Monsters, énigmes 15, 22 et 29 ; Heroes and Water, énigme 11. [Carte, étapes et témoin](../reference/level8-design.json).
+**Variante vérifiée : 95 entrées / 10 sélections.** La charge peut rester plus haute lors des deux premiers reflets, arriver en **(5,14)** puis être amenée au bouton par chant et deux échanges. La préparation préalable est donc un calendrier commode, pas une nécessité universelle. Les deux variantes emploient une caisse comme appui et l’autre comme poids sec.
 
-Les chasseurs occupent deux enclos en L. Les premières actions les amènent vers leurs angles, mais des retenues empêchent encore leur descente. Une caisse unique se trouve sur la commande d’une réserve éloignée. Le témoin l’extrait par une visée coudée : le Magicien remplace la caisse et conserve le sas ouvert. Le Barde dégage la caisse du rayon, puis un reflet ramène le Magicien. La réserve maintenant vide ferme la presse du sas, le dépose au sud et crée une butée qui servira à garder le chasseur oriental en place.
+Aucune preuve exhaustive n’exclut tous les réaménagements de miroirs obtenus en fabriquant d’autres appuis. Le guide ne déduit ni unicité ni optimalité de la réussite du témoin de 74 entrées. La carte et ses commandes sont conservées.
 
-La caisse descend ensuite dans l’atelier, change d’axe sur le quai et devient l’appui d’entrée de l’île finale. Le Guerrier tient la commande de libération des enclos. Depuis cette position éloignée, sa cible ne suffit pas à conduire le chasseur oriental jusqu’au bouton : le Barde devient actif et descend dans une autre colonne. La priorité d’axe fait alors progresser les deux monstres jusqu’à leurs commandes. Les positions des trois arrivées et les butées maintiennent les gardiens en place pendant la fin du parcours.
+**Références adaptées :** [Mirrors, 19](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/) pour la livraison retardée par un premier obstacle ; [Water, 11](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/) pour la conservation des occupants lors des échanges. SS19 utilise un appui permanent et n’importe aucun empilement. [Témoin et étapes du niveau 6](../reference/level6-design.json).
 
-### Pourquoi la caisse et les deux chasseurs sont nécessaires
+## 7 · Le relais condamné
 
-L’île finale, en `x14..16, y16..18`, est bordée de murs sauf à son entrée d’eau **`(13,17)`**. Elle ne contient initialement aucun occupant. Aucun axe du miroir n’y arrive. Un échange ne peut pas y envoyer le premier occupant sans cible ; le chant ne fait pas traverser un héros sur de l’eau nue. **La caisse unique doit donc fournir l’appui de cette entrée.**
+Le Guerrier recale d’abord le petit miroir de **(3,14)** vers **(2,14)**. Le relais central lui permet ensuite de rejoindre le quai droit. Une caisse interposée sert d’écran pendant la poussée du monstre ; le témoin effectue deux poussées de file, noie le monstre et laisse la caisse sur le bouton du quai en **(16,12)**.
 
-Le miroir en `(17,11)` ne peut pas être déplacé : chaque direction de poussée rencontre un mur du côté de l’arrivée ou du pousseur, notamment en `(18,11)` et `(17,12)`. Il ne peut pas devenir un poids de remplacement.
+Le Barde descend l’autre charge dans sa glissière jusqu’en **(9,18)**. La commande ferme la presse sur le relais **(11,8)** et l’écrase contre sa butée. Il faut ensuite remonter la charge d’une case pour rouvrir cette presse vide. Le retrait de l’obstacle et l’ouverture du passage sont deux opérations distinctes, que le plateau montre séparément.
 
-Deux autres destinations sont des presses liées aux boutons **`(6,6)`** et **`(12,11)`**, distincts des buts. Dans l’état final, les trois héros occupent leurs destinations, la seule caisse est immergée et le miroir reste sur son socle. Les deux monstres vivants sont alors les seuls poids disponibles pour les deux commandes. Perdre l’un d’eux empêche l’accord final sans annuler ou recommencer. Cet argument repose sur la géométrie et les occupants visibles ; il ne repose pas sur l’échec d’une recherche bornée.
+Le Magicien extrait le Barde. Un premier départ place celui-ci hors de l’axe, puis le dernier reflet envoie ensemble les deux autres héros vers leurs destinations. La contre-branche qui détruit le relais tout en laissant la presse fermée refuse ce dernier reflet en entier et déclenche le signal rouge attendu.
 
-Deux contrebranches illustrent ces contraintes. Relâcher la commande dès que les gardiens entrent dans les retenues les renvoie vers le haut. Couler la caisse dans le bras optique en `(13,11)` crée un appui séparé de `(13,17)` par du sol et des murs : un appui ne se déplaçant qu’entre cases d’eau, aucun chant ne peut réparer cette immersion.
+**Variante vérifiée : 50 entrées / 9 sélections.** Une seule poussée conserve le monstre sur **(16,12)** et la caisse écran sur **(15,12)**. Le monstre reste naturellement sur sa commande. Le recalage, la destruction du relais et la réouverture restent présents ; l’élimination n’est pas nécessaire. Le témoin de 52 entrées et la géométrie sont conservés.
 
-### Une extraction alternative acceptée
+**Références adaptées :** [Mirrors, 18](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/) pour le miroir utile devenu obstacle ; [Heroes 2, 10 et 14](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour la préparation d’une ligne face au monstre. La caisse SS19 sert d’écran et de poids, sans devenir un cristal offensif. [Témoin et étapes du niveau 7](../reference/level7-design.json).
 
-Une **variante gagnante de 98 entrées, dont 9 sélections**, commence par un reflet qui extrait directement la caisse. Elle n’utilise pas la visée coudée du témoin de 115 entrées. Elle construit néanmoins l’appui en `(13,17)` et maintient les deux gardiens vivants sur leurs boutons. L’échange coudé et l’ordre exact de récupération sont donc des possibilités enseignées, sans être annoncés comme des obligations universelles. Le parcours complet, ses métriques et les contrebranches figurent dans la [revue finale](../reference/final-ss19-review.json) et la [revue indépendante](../reference/independent-review-ss19.json).
+## 8 · Les deux gardiens vivants
 
-## Ce qui décide réellement de la victoire
+La finale combine deux dispositifs de livraison avec une réserve unique. Elle n’ajoute aucune règle de poursuite : chaque étape change un objet ou un circuit visible.
 
-Chaque salle exige toujours les trois héros vivants sur les trois destinations, après la stabilisation des presses, de l’eau et des contacts. Les dispositifs qui rendent certains objets nécessaires sont sur la carte : boutons occupés, portes ouvertes, appuis présents et passages accessibles. Il n’existe aucun contrôle caché de l’ordre des actions, du nombre de reflets, des découvertes du tutoriel ou du recours à un pouvoir.
+| Ressource | Transport du témoin | Fonction conservée à la fin |
+| --- | --- | --- |
+| Gardien occidental | Sept pas chantés le font suivre un rail, puis descendre derrière une cloison | Bouton violet **(6,6)** ; une porte distincte en **(6,7)** se ferme derrière lui et permet au Barde de se dégager |
+| Gardien oriental | Un reflet le dépose sur la presse **(13,11)** ; la commande verte **(3,16)** le pousse au sud | Bouton orange **(13,12)**, hors du rayon optique |
+| Caisse du nord-est | Visée coudée du Magicien, écart par chant puis transport par le Guerrier | Appui **(13,17)** donnant accès à l’île initialement vide |
 
-Les témoins prouvent des victoires légales. Les variantes constructives établissent d’autres victoires précises. Les contrebranches décrivent leur effet à partir d’une position donnée ; seules les preuves de géométrie ou de conservation explicitement exposées étendent une conclusion à toutes les routes. La qualification technique et ses limites sont consignées séparément dans [validation.md](validation.md).
+Le gardien oriental est la première cible du miroir ; la caisse plus éloignée reste sur sa commande de réserve. Répéter le reflet sans dégager ce gardien le renvoie, au lieu de récupérer la caisse. Fermer la presse verte avant la livraison bloque également le reflet : une presse vide ne fait pas venir son futur occupant. Après la livraison, il faut relâcher la commande pour rouvrir le trajet optique.
+
+Dans le témoin, le Magicien échange sa place avec la caisse par le miroir et maintient ainsi la commande de réserve. Le Barde écarte la caisse du rayon de retour. Le reflet ramène le Magicien ; la commande désormais vide referme le sas et sa presse le dépose au sud. Le Guerrier peut alors descendre la caisse dans l’atelier, changer son axe sur le quai et construire l’entrée de l’île. Les gardiens restent sur leurs boutons pendant les trois arrivées.
+
+### Pourquoi les trois ressources sont nécessaires
+
+L’île finale, composée des neuf cases **x = 14 à 16, y = 16 à 18**, est vide au départ. Toute sa frontière est murée, sauf l’eau en **(13,17)**. Elle est hors des deux axes du miroir en **(17,11)**. Un échange ne crée pas un premier occupant sur une île vide ; un transport dans l’eau nue ne livre pas un héros vivant. Il faut donc fabriquer l’appui d’entrée avec la caisse unique.
+
+Le miroir ne fournit pas un poids de remplacement. Pour chacune de ses quatre directions de poussée, la case nécessaire au pousseur ou celle d’arrivée du miroir est murée. Le chant, l’échange et le reflet ne déplacent pas les miroirs. Fabriquer un autre appui ne retire aucun de ces murs.
+
+À la victoire, les trois héros occupent les trois destinations, toutes distinctes des boutons des gardiens. La caisse est devenue un appui, qui ne pèse pas ; le miroir demeure immobilisé. **Les deux monstres vivants sont donc les deux seuls poids disponibles pour maintenir les deux presses de destination ouvertes.** Cette nécessité repose sur la frontière de l’île et le décompte des pièces, pas sur l’échec d’une recherche limitée.
+
+La contre-branche qui immerge la caisse trop tôt en **(12,11)** crée bien un appui, mais dans une composante d’eau isolée par les deux sols voisins et deux murs. Le Barde ne peut pas le faire glisser jusqu’en **(13,17)**. Sans annulation ou recommencement, cette dépense retire la ressource du dernier passage.
+
+### Deux variantes légitimes
+
+**75 entrées / 9 sélections : réserve par reflet.** Après la livraison des gardiens, un second reflet transporte directement la caisse. La presse du sas la dépose au sud et le Barde l’écarte avant le chantier. Aucun échange du Magicien n’est nécessaire dans cette solution ; les deux gardiens, les presses utilisées pour cette route et l’appui final restent effectifs.
+
+**93 entrées / 15 sélections : livraison orientale par chant.** Après le reflet initial, le Barde atteint **(11,9)**, chante vers le bas pour déposer le gardien en **(13,12)**, puis vers la gauche pour se dégager. Cette route remplace la presse verte de livraison tout en conservant les deux gardiens et la caisse. Le témoin de 97 entrées montre la coopération de la visée coudée et des presses ; leur emploi complet n’est pas une condition universelle.
+
+**Références adaptées :** [Heroes 2, 15, 22 et 29](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour les monstres conservés comme poids ; [Water, 11](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/) pour le transfert vers une île vide. La galerie de chant, le sas réutilisé et la preuve des ressources appartiennent à cette géométrie SS19. [Témoin et étapes du niveau 8](../reference/level8-design.json).
+
+## Portée des vérifications et parcours complets
+
+Les fichiers de conception liés dans chaque section contiennent la carte, les commandes complètes, les métriques et les états intermédiaires. Les longues chaînes de commandes ne sont pas recopiées ici afin de conserver une seule référence rejouable.
+
+La [revue indépendante 0.2.0](../reference/independent-review-ss19.json) inspecte les huit témoins, les causes de transport et les contraintes géométriques : **37 contrôles réussis**. La [revue des niveaux 6 à 8](../reference/final-ss19-review.json), **21 contrôles réussis**, conserve notamment les variantes **95/10**, **50/9**, **75/9** et **93/15**, ainsi que les refus locaux qui expliquent les obstacles. La [revue du niveau 2](../reference/level2-review.json) contient **10 contrôles** et la [revue des niveaux 3 à 5](../reference/ss19-middle-review.json), **20 contrôles réussis**, contient les deux variantes actuelles du niveau 4. Ces rapports portent sur les cartes de la version 0.2.0. La [validation du laboratoire](validation.md) consigne l’état de la qualification générale.
+
+Un témoin gagnant établit la résolubilité. Une contre-branche établit l’effet exact de cette tentative. Une nécessité générale demande en plus un invariant de ressources, une frontière géométrique ou un examen exhaustif du cas annoncé. La campagne conserve les solutions alternatives qui satisfont ses règles visibles ; elle ne les remplace pas par des conditions cachées destinées à imposer le parcours d’auteur.

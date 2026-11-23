@@ -7,10 +7,10 @@
       "####################",
       "##....#....~~~.....#",
       "##Woo......~~~.....#",
-      "##....#....~~~.....#",
-      "#######....~m#...Z.#",
-      "#######.B..~~#.....#",
-      "#######....~~~.....#",
+      "##....#.##.~~~.....#",
+      "#######...B~m#...Z.#",
+      "#######....#~#.....#",
+      "#######....~#~.....#",
       "#######....~~~.....#",
       "#######....~~~.....#",
       "#######....~~~.....#",
@@ -77,40 +77,13 @@
       }
     ]
   },
-  "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCDDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
+  "commands": "RRRRRCCDCCUCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRRCCUUUURRCLLULLDRRRRRCDDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
   "actions": [
     {
       "id": 4
     },
     {
       "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
     },
     {
       "id": 4
@@ -129,99 +102,80 @@
       }
     },
     {
-      "id": 1
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
     },
     {
       "id": 6,
       "data": {
-        "x": 27,
-        "y": 21
+        "x": 24,
+        "y": 12
       }
     },
     {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 18
+      }
     },
     {
       "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
     },
     {
       "id": 6,
       "data": {
         "x": 33,
-        "y": 30
+        "y": 21
       }
     },
     {
-      "id": 1
+      "id": 2
     },
     {
-      "id": 1
+      "id": 2
     },
     {
-      "id": 1
+      "id": 2
     },
     {
-      "id": 1
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 1
@@ -237,6 +191,34 @@
     },
     {
       "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 12
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 2
@@ -275,12 +257,6 @@
       "id": 4
     },
     {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
       "id": 3
     },
     {
@@ -314,6 +290,21 @@
       "id": 3
     },
     {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
       "id": 2
     },
     {
@@ -342,9 +333,6 @@
     },
     {
       "id": 2
-    },
-    {
-      "id": 4
     },
     {
       "id": 4
@@ -551,24 +539,24 @@
     "label": "Adaptation · Heroes and Water · énigmes 12 et 28",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-12",
     "puzzle": 12,
-    "objective": "Sortir les réserves avant la chasse, attirer le gardien sur un soutien escamotable, puis reconstruire une traversée sans que le chant retire ses appuis.",
+    "objective": "Sortir les réserves, déposer le gardien sur une trappe par le chant, retirer son soutien puis construire une traversée à trois appuis.",
     "secondary": {
-      "label": "Heroes 2 · attirer le monstre sur une ligne préparée",
-      "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-14"
+      "label": "Heroes 3 · déplacer les gardiens par le chant",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14"
     }
   },
   "metrics": {
-    "actions": 143,
-    "selections": 9,
-    "warriorPushes": 34,
-    "trainPushes": 5,
-    "huntSteps": 1,
-    "monsterHuntMoves": 1,
-    "songs": 2,
+    "actions": 135,
+    "selections": 12,
+    "warriorPushes": 33,
+    "trainPushes": 6,
+    "huntSteps": 0,
+    "monsterHuntMoves": 0,
+    "songs": 3,
     "groupSongs": 0,
     "songHeroMoves": 0,
     "songStoneMoves": 0,
-    "songMonsterMoves": 0,
+    "songMonsterMoves": 1,
     "supportMoves": 2,
     "swaps": 2,
     "partnerSwaps": 2,
@@ -611,8 +599,8 @@
         {
           "kind": "bard",
           "at": {
-            "x": 8,
-            "y": 6
+            "x": 10,
+            "y": 5
           }
         }
       ],
@@ -645,14 +633,14 @@
       }
     },
     {
-      "label": "Le Guerrier descend assez bas pour attirer le gardien sur la trappe maintenue par le Magicien.",
-      "turn": 14,
+      "label": "Le chant du Barde pousse le gardien vers le sud sur la trappe maintenue par le Magicien.",
+      "turn": 8,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 10,
-            "y": 9
+            "x": 7,
+            "y": 3
           }
         },
         {
@@ -665,7 +653,7 @@
         {
           "kind": "bard",
           "at": {
-            "x": 8,
+            "x": 10,
             "y": 6
           }
         }
@@ -699,14 +687,14 @@
       }
     },
     {
-      "label": "Le Magicien quitte la commande : le soutien disparaît avant le prochain pas de chasse.",
-      "turn": 16,
+      "label": "Le Magicien quitte la commande violette : la trappe disparaît et le gardien tombe sur place.",
+      "turn": 11,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 10,
-            "y": 9
+            "x": 7,
+            "y": 3
           }
         },
         {
@@ -719,7 +707,7 @@
         {
           "kind": "bard",
           "at": {
-            "x": 8,
+            "x": 10,
             "y": 6
           }
         }
@@ -749,13 +737,13 @@
     },
     {
       "label": "La Barde remonte l’appui immergé jusqu’à la rangée du futur pont.",
-      "turn": 34,
+      "turn": 29,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 10,
-            "y": 9
+            "x": 7,
+            "y": 3
           }
         },
         {
@@ -798,7 +786,7 @@
     },
     {
       "label": "La première caisse traverse l’appui préparé et devient le deuxième pilier.",
-      "turn": 63,
+      "turn": 51,
       "heroes": [
         {
           "kind": "warrior",
@@ -847,7 +835,7 @@
     },
     {
       "label": "La deuxième caisse franchit les deux premiers appuis avant de combler le dernier intervalle.",
-      "turn": 88,
+      "turn": 80,
       "heroes": [
         {
           "kind": "warrior",
@@ -895,7 +883,7 @@
     },
     {
       "label": "Le Guerrier pousse la Barde jusqu’à la rive : aucun chant ne déplace le pont sous leur passage.",
-      "turn": 108,
+      "turn": 100,
       "heroes": [
         {
           "kind": "warrior",
@@ -943,7 +931,7 @@
     },
     {
       "label": "Deux échanges successifs extraient la Barde, puis font passer le Guerrier pendant que le Magicien récupère le pont.",
-      "turn": 118,
+      "turn": 110,
       "heroes": [
         {
           "kind": "warrior",
@@ -991,7 +979,7 @@
     },
     {
       "label": "Le dernier héros rejoint la troisième destination ; le chantier a consommé exactement les deux réserves.",
-      "turn": 143,
+      "turn": 135,
       "heroes": [
         {
           "kind": "warrior",
@@ -1043,14 +1031,14 @@
     "preserved": [
       "Un ennemi déplacé sur un soutien temporaire tombe lorsque la commande est relâchée (Water 12).",
       "Un déplacement imposé permet à la Barde de franchir une arrivée sans déplacer l’appui qu’elle contrôlerait en marchant (Water 28).",
-      "Le placement du héros attire un monstre vers la position préparée (Heroes 2, 14)."
+      "Le chant déplace les monstres depuis une case voisine sans exiger un contact dangereux (Heroes 3, 14)."
     ],
     "changed": [
-      "Le gardien est un chasseur SS19 ; son axe dominant et la priorité verticale sont les règles explicites de cet épisode.",
-      "Le monstre ouvre d’abord une réserve à deux caisses ; le détour de chasse condamne cette réserve avant le chantier.",
-      "Un appui persistant est déplacé par chant, puis deux caisses construisent les deux autres cellules du pont.",
+      "Le gardien ne se déplace que sous une force visible : le chant le fait descendre sur la trappe, puis le retrait du soutien le noie.",
+      "Le monstre ouvre d’abord une réserve à deux caisses ; son déplacement ferme la réserve et libère la destination orange. Le bouton orange occupé maintient cette destination fermée, tandis que le bouton violet occupé maintient la trappe.",
+      "Les butées de la réserve imposent un transfert de chaque caisse vers la colonne de descente ; un appui persistant est déplacé par chant, puis les deux caisses complètent le pont.",
       "Trois destinations réparties sur les deux rives exigent un transfert net de héros. Aucun dragon, feu ou protection du Clerc n’est repris."
     ],
-    "sourceReading": "Le plan du bassin, le calendrier de la réserve et les positions des trois héros sont originaux. La noyade est démontrée dans le témoin ; les limites des audits de variantes sont précisées séparément."
+    "sourceReading": "Le plan du bassin, le calendrier de la réserve et les positions des trois héros sont originaux. Le témoin dépose le gardien sur la trappe puis retire son soutien ; relâcher la trappe avant le chant permet aussi une noyade directe. Une traversée chantée du pont a également été rejouée jusqu’à la victoire. La poussée du Barde est un enseignement démontré, sans revendication de nécessité absolue."
   }
 }

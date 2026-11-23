@@ -1,4 +1,4 @@
-# SS19 — La Chasse Noire
+# SS19 — Les Gardiens Noirs · 0.2.0
 
 ## Identité et périmètre
 
@@ -54,26 +54,25 @@ Les conflits sont atomiques : une destination incompatible ou un trajet bloqué 
 
 Les prévisions d’arrivée utilisent un plus gris clair pour un héros et un contour carré gris clair pour une caisse. La capacité d’un héros n’est pas exécutée lorsqu’il est transporté par reflet.
 
-## Monstres : poursuite déterministe
+## Monstres : des déplacements provoqués
 
-Tous les monstres `m` de SS19 sont des chasseurs. Leur motif noir et rouge reste distinct de la croix rouge du Guerrier. Un monstre apparemment immobile est retenu par la géométrie ou un occupant, sans catégorie secrète de garde fixe.
+Tous les monstres de SS19 suivent la même règle : **ils restent sur leur case jusqu’à ce qu’un pouvoir, un reflet ou une presse les déplace**. Marcher dans une autre région, changer de héros, ouvrir une porte ou simplement attendre ne provoque aucun déplacement autonome. Il n’existe ni cible secrète, ni rayon de chasse, ni calcul d’axe dominant, ni catégorie cachée de garde mobile.
 
-Chaque action effective suit cet ordre :
+Le motif noir et rouge reste distinct de la croix rouge du Guerrier. Les monstres peuvent être entraînés par le chant, échangés par le Magicien, reflétés ou poussés par une file et une presse. Chaque mouvement imposé suit les mêmes règles d’arrivée que les autres pièces : murs, portes fermées et occupants peuvent le bloquer. Une ouverture de porte ne transporte pas un monstre voisin ; une fermeture de presse agit sur un occupant de sa propre case et pousse dans la direction indiquée.
 
-1. Exécuter le geste du héros, ou le reflet global.
-2. Stabiliser les circuits, presses, plateformes, arrivées dans l’eau et contacts orthogonaux immédiats.
-3. Si un héros est mort, arrêter la tentative. Sinon chaque monstre survivant propose **un seul pas** vers le héros sélectionné, à sa position après ces effets.
-4. Comparer les distances horizontale et verticale. Choisir la plus grande ; en cas d’égalité, choisir la verticale. Si cet axe est bloqué, rester sur place : aucun détour ni recherche de chemin.
-5. Valider les propositions depuis la même photographie du plateau. Murs, portes fermées, eau sans soutien et tous les occupants solides les bloquent. Plusieurs propositions vers la même case libre s’annulent toutes. Une case libérée par un autre monstre pendant ce pas n’est pas libre au départ.
-6. Animer ensemble les déplacements acceptés, puis stabiliser à nouveau les circuits, l’eau et les contacts. Évaluer les destinations en dernier.
+L’ordre d’une action est :
 
-Un monstre déplacé par chant, échange, poussée ou reflet peut donc effectuer son pas de chasse après ce déplacement imposé. Les cascades de portes n’ajoutent pas de pas de chasse supplémentaires. Une sélection, un geste refusé, un reflet sans transfert et une boucle de visée ne font avancer ni la poursuite ni le combat.
+1. Exécuter le geste du héros ou le reflet global.
+2. Stabiliser les circuits, presses, plateformes, arrivées dans l’eau et contacts orthogonaux.
+3. Évaluer les destinations après ces effets. Aucun pas de monstre supplémentaire n’est ajouté.
 
-Les contacts orthogonaux sont simultanés. Deux monstres voisins s’éliminent et frappent encore leurs voisins pendant cette vague : leur disparition ne protège pas un héros adjacent. Le danger concerne aussi les héros inactifs. Une diagonale n’est pas un contact immédiat, mais peut le devenir après la chasse. Les caisses ordinaires ne sont pas des armes d’écrasement : cette mécanique de certaines sources n’a pas été ajoutée.
+Un monstre déposé sur un bouton reste donc un poids stable tant qu’aucun mécanisme ne le déplace. Les héros, caisses et miroirs restent eux aussi des poids possibles ; un appui immergé ne compte pas comme poids. Les conditions matérielles finales de certaines cartes rendent leurs gardiens nécessaires, sans condition de victoire cachée.
 
-Les monstres peuvent marcher sur un appui ou une plateforme active, peser sur un bouton et quitter ce bouton pendant leur chasse. Les retirer d’une commande peut donc refermer une presse. L’eau nue, le combat et l’écrasement par une presse peuvent les éliminer. La chasse n’ajoute aucun objectif caché d’extermination : certaines salles exigent au contraire de les conserver vivants.
+Le contact orthogonal reste dangereux : un monstre tue un héros voisin par un côté, y compris un héros inactif. Deux monstres voisins s’éliminent simultanément et frappent encore leurs voisins pendant cette vague ; leur disparition ne protège pas un héros adjacent. Une diagonale seule ne provoque pas ce contact. Une poussée directe du Guerrier peut le laisser au contact : il faut préparer un transport sûr, par exemple avec une caisse interposée, un pouvoir à distance ou une presse.
 
-La phase publique de poursuite contient trois images de déplacement. Les contacts utilisent cinq images. Un seul Undo restaure le geste entier, ses déplacements de chasse, ses cascades et une éventuelle transition de salle.
+L’eau sans soutien et l’écrasement par une presse peuvent également éliminer un monstre. Les caisses ordinaires ne deviennent pas des armes d’écrasement. Un monstre peut occuper un appui ou une plateforme active, puis tomber si cette plateforme est retirée. Les conséquences forcées sont résolues avant la victoire.
+
+Les déplacements imposés conservent leurs animations. Une presse qui agit après un geste possède sa propre séquence visible ; les contacts utilisent cinq images. Un seul Undo restaure le geste entier, ses effets et une éventuelle transition de salle.
 
 ## Issue de la salle
 

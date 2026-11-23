@@ -1,25 +1,24 @@
-# SS19 — état du laboratoire
+# SS19 — feuille de route
 
-## Version autonome 0.1.0
+## Laboratoire 0.2.0 — Les Gardiens Noirs
 
-- [x] La Chasse Noire : Guerrier / Magicien / Barde.
-- [x] Poursuite déterministe des monstres, animation et annulation du tour complet.
-- [x] Huit cartes originales, références numérotées et variantes documentées.
-- [x] Tutoriel de 31 découvertes au niveau 1, suivi depuis les pixels publics.
-- [x] Témoins gagnants sans refus ni perte ; revues d’auteur et revue indépendante.
-- [x] Contrôle du HTML compilé, commandes, pixels et durées.
-- [x] Comparaison des terrains avec SS14–SS18.
-- [x] Prompt d’intégration native préparé.
+La version 0.1.0 introduisait une poursuite vers le héros sélectionné. Le retour de jeu a montré que ses frontières de distance et ses blocages derrière les murs étaient trop difficiles à lire. La version 0.2.0 remplace cette règle dans toute la campagne par des transports imposés visibles.
 
-Les preuves de qualification et leur empreinte de livraison sont conservées dans `validation/`. Le compte rendu de session identifie le commit source poussé et son éventuel commit d’intégration.
+- [x] Retirer la poursuite autonome pour tous les monstres, avec une seule règle commune.
+- [x] Conserver poussées, chant, échanges, reflets, presses, danger de contact et poids stables.
+- [x] Adapter le tutoriel et ses 31 découvertes depuis les pixels publics.
+- [x] Reprendre les transports des niveaux 2, 4, 5 et 8 ; requalifier le niveau 7.
+- [x] Conserver les cartes et témoins des niveaux 3 et 6.
+- [x] Actualiser les aides et le feedback qui désigne le mécanisme responsable.
+- [x] Finaliser les huit replays, les revues et le manifeste de livraison 0.2.0.
+La livraison 0.2.0 est qualifiée. Les identifiants de sa sauvegarde GitHub, de son intégration sur `main` et du HTML remis sont consignés dans le compte rendu de livraison.
 
 ## Intégration native et publication
 
-- [ ] Raccorder SS19 au catalogue, Custom 4, dispatcher, galerie et lien direct du SRA Playground actuel.
-- [ ] Comparer l’adaptateur natif au laboratoire sur les huit parcours et toutes les observations.
-- [ ] Contrôler l’interface dans un navigateur autorisé, sur ordinateur et mobile.
-- [ ] Mesurer les essais autonomes de SRA sans lui transmettre les données d’auteur.
-- [ ] Exécuter les contrôles du dépôt, dont la continuité SIC, puis pousser et intégrer les changements natifs.
-- [ ] Publier le Site existant depuis le SHA GitHub vérifié et contrôler sa version, son lien et son SHA source.
+- [ ] Raccorder le moteur SS19 0.2.0 au catalogue et au dispatcher natif SRA.
+- [ ] Reporter les aides et le tutoriel au bon niveau.
+- [ ] Rejouer les huit routes par les contrôles natifs et vérifier les animations, Undo et le résultat officiel.
+- [ ] Exécuter les contrôles du dépôt, dont test:sic-continuity, puis la revue navigateur ordinateur/mobile.
+- [ ] Commit, push, intégration sur main, publication du Site existant avec les accès actuels, puis vérification du SHA source.
 
-Le laboratoire ne modifie pas le Site natif. La consigne complète de l’étape suivante est `docs/codex-integration-prompt.md`.
+Le prompt correspondant est dans [codex-integration-prompt.md](codex-integration-prompt.md). La livraison autonome ne prétend pas avoir raccordé ou publié le jeu dans le Site natif.

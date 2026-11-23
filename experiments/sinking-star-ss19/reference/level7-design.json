@@ -292,9 +292,9 @@
     "puzzle": 18,
     "label": "Adaptation de Heroes and Mirrors · énigme 18 · supprimer un miroir qui barre le dernier reflet",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
-    "objective": "Utiliser le relais pour entrer, manœuvrer le chasseur derrière son écran, faire écraser le miroir devenu obstacle puis organiser les deux derniers reflets ensemble.",
+    "objective": "Utiliser le relais pour entrer, manœuvrer le monstre derrière son écran, faire écraser le miroir devenu obstacle puis organiser les deux derniers reflets ensemble.",
     "secondary": {
-      "label": "Heroes 2: Monsters · énigmes 10 et 14 · préparer une ligne face au chasseur",
+      "label": "Heroes 2: Monsters · énigmes 10 et 14 · préparer une ligne face au monstre",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/"
     }
   },
@@ -474,7 +474,7 @@
       }
     },
     {
-      "label": "La poussée en file utilise la caisse comme écran. Deux poussées envoient le chasseur dans l’eau et laissent la caisse sur la commande du quai.",
+      "label": "La poussée en file utilise la caisse comme écran. Deux poussées envoient le monstre dans l’eau et laissent la caisse sur la commande du quai.",
       "turn": 18,
       "heroes": [
         {
@@ -783,11 +783,11 @@
       "Heroes 2 10/14 : préparer une ligne sûre avec une charge entre le héros et le monstre."
     ],
     "changed": [
-      "Le monstre suit la règle de poursuite SS19. La caisse sert d’écran puis de poids ; elle ne possède pas le pouvoir d’écrasement des cristaux de la source.",
+      "Le monstre ne se déplace que par un transport imposé visible. La poussée en file entraîne la caisse et le monstre ; la caisse sert ensuite de poids, sans pouvoir d’écrasement des cristaux de la source.",
       "La charge du Barde provoque la destruction et laisse une presse fermée : la charge doit remonter d’une case avant le dernier rayon.",
       "Trois régions séparées imposent un premier départ puis un départ conjoint ; les personnages conservés sur leurs destinations ne sont pas effacés."
     ],
     "sourceReading": "Géométrie et commande de relève originales ; adaptation de la suppression d’un relais et de la préparation d’une ligne de poussée.",
-    "proofScope": "Parcours légal vérifié. Supprimer le relais ne suffit pas : sa presse doit être ouverte et la commande du quai maintenue. Le chasseur peut aussi être conservé derrière un écran ; aucune élimination obligatoire n’est prétendue."
+    "proofScope": "Parcours légal vérifié. Supprimer le relais ne suffit pas : sa presse doit être ouverte et la commande du quai maintenue. Le monstre peut aussi être conservé derrière un écran ; aucune élimination obligatoire n’est prétendue."
   }
 }

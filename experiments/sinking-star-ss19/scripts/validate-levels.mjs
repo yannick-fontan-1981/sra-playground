@@ -12,7 +12,7 @@ import {lessonIds,observeLesson,TUTORIAL_LEVEL} from '../dist/tutorial.js';
 const json=async p=>JSON.parse(await readFile(new URL(p,import.meta.url),'utf8'));
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const publicKeys=new Set(['gameCode','frame','frames','frameDurationsMs','state','availableActionIds','canUndo','canSelectLevel','level','levelCount','levelsCompleted','defaultFps','palette']);
-const animated=new Set(['walk','push','song','swap','reflect','piston','platform','hunt']);
+const animated=new Set(['walk','push','song','swap','reflect','piston','platform']);
 const witnessKeys=['actions','selections','swaps','partnerSwaps','stoneSwaps','monsterSwaps','bentSwaps','multiMirrorSwaps','swapReflections','swapLoops','warriorPushes','trainPushes','huntSteps','monsterHuntMoves','songs','groupSongs','songHeroMoves','songStoneMoves','songMonsterMoves','supportMoves','partnerMoves','stoneMoves','mirrorMoves','reflections','heroReflections','pistonPushes','platformsCreated','monstersRemoved','blocked','deaths'];
 const witnesses=await json('../tests/witnesses.json');
 const {version}=await json('../package.json');
@@ -57,6 +57,10 @@ function checkActors(world,state,label){
 }
 function checkPhases(world,detail,label){
  for(const phase of detail.phases){
+  assert.notEqual(phase.kind,'hunt',label+': no autonomous monster phase');
+  const monsterMoves=phase.moves.filter(move=>move.actor==='monster');
+  if(monsterMoves.length)assert.ok(['push','song','swap','reflect','piston'].includes(phase.kind),label+': every monster transport has a physical cause');
+  for(const p of phase.after.monsters)if(!phase.before.monsters.some(q=>q.x===p.x&&q.y===p.y))assert.ok(monsterMoves.some(move=>move.to.x===p.x&&move.to.y===p.y),label+': each new monster position is explained by an explicit transport');
   checkActors(world,phase.before,label+' before '+phase.kind);checkActors(world,phase.after,label+' after '+phase.kind);
   if(phase.kind==='push'){
    const active=phase.before.heroes[phase.before.active];
@@ -210,7 +214,7 @@ const restarted=session.restart();assert.equal(restarted.level,1);assert.equal(r
 assert.deepEqual(restarted.frame,renderWorld(worlds[0],starts[0]));
 for(const key of [...witnessKeys,'combatWaves','mirrorsDestroyed','cratesCrushed','simultaneousHeroReflections','hydraulicChanges','frames'])report.totals[key]=report.levels.reduce((n,l)=>n+l[key],0);
 const html=await readFile(new URL('../dist/SS19-demo.html',import.meta.url),'utf8');
-assert.ok(html.includes('La Chasse Noire')&&html.includes('SS19'));
+assert.ok(html.includes('Les Gardiens Noirs')&&html.includes('SS19'));
 assert.ok(!html.includes('tests/witnesses')&&!html.includes('function solve(')&&!html.includes('reference/level')&&!html.includes('reference/author')&&!html.includes('function replay('),'The playable HTML excludes author witnesses, replay helpers and search tools');
 assert.equal((html.match(/<script>/g)??[]).length,1,'The standalone game has one local bundle');
 assert.ok(!/<script[^>]+src=/i.test(html),'No remote script is needed to play');

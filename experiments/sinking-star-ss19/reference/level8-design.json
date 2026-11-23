@@ -4,18 +4,18 @@
     "title": "Les deux gardiens vivants",
     "rows": [
       "####################",
-      "#....###############",
-      "#....###############",
-      "#.W..#....m#########",
-      "#....#.#############",
-      "#...Z#.##########o##",
-      "##.###.##########~##",
-      "##.#########...m#~##",
-      "##.#########.####~##",
-      "#............####~##",
-      "#.......B....####~##",
-      "#............~~~~.##",
-      "#...........########",
+      "####################",
+      "####################",
+      "######....m#########",
+      "######.#############",
+      "####....B########o##",
+      "####.#.##########~##",
+      "####.#.##########m##",
+      "####.....########~##",
+      "#...........#####~##",
+      "#...........#####~##",
+      "#...........~.~~~.##",
+      "#.Z..W......#.######",
       "#...........########",
       "#...........########",
       "#.......g...########",
@@ -46,14 +46,14 @@
         "color": 10
       },
       {
-        "id": "lacher",
+        "id": "livraison",
         "buttons": [
           {
             "x": 3,
             "y": 16
           }
         ],
-        "color": 7
+        "color": 14
       },
       {
         "id": "gardien-ouest",
@@ -69,8 +69,8 @@
         "id": "gardien-est",
         "buttons": [
           {
-            "x": 12,
-            "y": 11
+            "x": 13,
+            "y": 12
           }
         ],
         "color": 12
@@ -88,21 +88,21 @@
       },
       {
         "at": {
-          "x": 6,
-          "y": 4
+          "x": 13,
+          "y": 11
         },
-        "circuit": "lacher",
-        "direction": "N",
-        "closedWhen": "released"
+        "circuit": "livraison",
+        "direction": "S",
+        "closedWhen": "pressed"
       },
       {
         "at": {
-          "x": 12,
-          "y": 8
+          "x": 6,
+          "y": 7
         },
-        "circuit": "lacher",
-        "direction": "N",
-        "closedWhen": "released"
+        "circuit": "gardien-ouest",
+        "direction": "S",
+        "closedWhen": "pressed"
       },
       {
         "at": {
@@ -124,25 +124,107 @@
       }
     ]
   },
-  "commands": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLCCDDDDDCCDDDDDRRRRRCCDRRRRRRRRRRR",
+  "commands": "XDDDDLLRCCLLLLDDDCCRRRRRRRRRURCDDRRRRRLCCXDLLLLLLCCUUUUURRRRRURDDDDDDLDRRRCCDDDDDCCDDDDDRRRRRCCRR",
   "actions": [
     {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
       "id": 2
     },
     {
       "id": 2
     },
     {
-      "id": 4
+      "id": 2
     },
     {
       "id": 3
     },
     {
-      "id": 1
+      "id": 3
     },
     {
-      "id": 1
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 1
@@ -154,22 +236,10 @@
       "id": 6,
       "data": {
         "x": 15,
-        "y": 18
+        "y": 27
       }
     },
     {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
       "id": 2
     },
     {
@@ -186,37 +256,6 @@
     },
     {
       "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 27,
-        "y": 33
-      }
     },
     {
       "id": 4
@@ -227,8 +266,8 @@
     {
       "id": 6,
       "data": {
-        "x": 12,
-        "y": 9
+        "x": 15,
+        "y": 51
       }
     },
     {
@@ -272,90 +311,30 @@
     {
       "id": 6,
       "data": {
-        "x": 12,
-        "y": 9
+        "x": 15,
+        "y": 51
       }
     },
     {
       "id": 1
     },
     {
-      "id": 2
+      "id": 1
     },
     {
-      "id": 2
+      "id": 1
     },
     {
-      "id": 2
+      "id": 1
     },
     {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
+      "id": 1
     },
     {
       "id": 4
     },
     {
       "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
     },
     {
       "id": 4
@@ -370,31 +349,40 @@
       "id": 1
     },
     {
-      "id": 3
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
     },
     {
       "id": 3
     },
     {
-      "id": 3
+      "id": 2
     },
     {
-      "id": 3
+      "id": 4
     },
     {
-      "id": 3
+      "id": 4
     },
     {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
+      "id": 4
     },
     {
       "id": 6,
@@ -428,8 +416,8 @@
     {
       "id": 6,
       "data": {
-        "x": 12,
-        "y": 51
+        "x": 39,
+        "y": 54
       }
     },
     {
@@ -479,39 +467,9 @@
     {
       "id": 6,
       "data": {
-        "x": 12,
-        "y": 51
+        "x": 39,
+        "y": 54
       }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
     },
     {
       "id": 4
@@ -526,24 +484,24 @@
     "puzzle": "15 / 22 / 29",
     "label": "Adaptation de Heroes 2: Monsters · énigmes 15, 22 et 29 · conserver des monstres comme poids",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/",
-    "objective": "Récupérer la caisse unique avant d’ouvrir les enclos, préparer le pont, changer de cible pour garer les deux chasseurs vivants, puis maintenir leurs positions pendant les trois arrivées.",
+    "objective": "Conduire un gardien par le chant, livrer l’autre par reflet puis presse, rouvrir le trajet pour récupérer la caisse unique et construire l’entrée de l’île vide.",
     "secondary": {
       "label": "Heroes and Water · énigme 11 · un échange conserve le nombre d’occupants",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/"
     }
   },
   "metrics": {
-    "actions": 115,
-    "selections": 12,
+    "actions": 97,
+    "selections": 15,
     "warriorPushes": 9,
     "trainPushes": 0,
-    "huntSteps": 12,
-    "monsterHuntMoves": 18,
-    "songs": 1,
+    "huntSteps": 0,
+    "monsterHuntMoves": 0,
+    "songs": 8,
     "groupSongs": 0,
     "songHeroMoves": 0,
     "songStoneMoves": 1,
-    "songMonsterMoves": 0,
+    "songMonsterMoves": 7,
     "supportMoves": 0,
     "swaps": 1,
     "partnerSwaps": 0,
@@ -556,9 +514,9 @@
     "partnerMoves": 0,
     "stoneMoves": 11,
     "mirrorMoves": 0,
-    "reflections": 1,
+    "reflections": 2,
     "heroReflections": 1,
-    "pistonPushes": 1,
+    "pistonPushes": 2,
     "platformsCreated": 1,
     "monstersRemoved": 0,
     "blocked": 0,
@@ -566,28 +524,205 @@
   },
   "stages": [
     {
-      "label": "Le Guerrier attire les chasseurs vers les angles de leurs enclos. Les deux retenues fermées empêchent encore leur descente.",
-      "turn": 8,
+      "label": "Le reflet prend le monstre le plus proche et le dépose sur la presse optique. La caisse plus lointaine reste sur la commande de réserve.",
+      "turn": 1,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 3,
-            "y": 2
+            "x": 5,
+            "y": 12
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 4,
-            "y": 5
+            "x": 2,
+            "y": 12
           }
         },
         {
           "kind": "bard",
           "at": {
             "x": 8,
-            "y": 10
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "reserve": true,
+        "livraison": false,
+        "gardien-ouest": false,
+        "gardien-est": false
+      }
+    },
+    {
+      "label": "La commande verte ferme la presse : le gardien oriental descend visiblement sur son bouton orange, hors du rayon.",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "reserve": true,
+        "livraison": true,
+        "gardien-ouest": false,
+        "gardien-est": true
+      }
+    },
+    {
+      "label": "Le Guerrier relâche la commande pour rouvrir la presse vide ; un monstre déplacé ne dégage pas à lui seul un rayon encore barré.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 10,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "reserve": true,
+        "livraison": false,
+        "gardien-ouest": false,
+        "gardien-est": true
+      }
+    },
+    {
+      "label": "Le chant fait suivre au gardien ouest son rail puis sa descente, à travers la cloison. Son bouton violet ferme la porte derrière lui et ouvre la destination occidentale.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 8
           }
         }
       ],
@@ -610,29 +745,29 @@
       "monsters": [
         {
           "x": 6,
-          "y": 3
+          "y": 6
         },
         {
-          "x": 12,
-          "y": 7
+          "x": 13,
+          "y": 12
         }
       ],
       "circuits": {
         "reserve": true,
-        "lacher": false,
-        "gardien-ouest": false,
-        "gardien-est": false
+        "livraison": false,
+        "gardien-ouest": true,
+        "gardien-est": true
       }
     },
     {
-      "label": "Le Magicien vise par le coude du miroir et remplace la réserve sur sa commande : le sas reste ouvert pendant l’extraction de la caisse unique.",
-      "turn": 27,
+      "label": "Le rayon coudé atteint maintenant la caisse unique. Le Magicien remplace la réserve sur sa commande pendant que la caisse arrive dans le sas.",
+      "turn": 30,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 3,
-            "y": 2
+            "x": 4,
+            "y": 16
           }
         },
         {
@@ -645,8 +780,8 @@
         {
           "kind": "bard",
           "at": {
-            "x": 8,
-            "y": 10
+            "x": 4,
+            "y": 8
           }
         }
       ],
@@ -668,30 +803,30 @@
       ],
       "monsters": [
         {
-          "x": 7,
-          "y": 3
+          "x": 6,
+          "y": 6
         },
         {
           "x": 13,
-          "y": 7
+          "y": 12
         }
       ],
       "circuits": {
         "reserve": true,
-        "lacher": false,
-        "gardien-ouest": false,
-        "gardien-est": false
+        "livraison": false,
+        "gardien-ouest": true,
+        "gardien-est": true
       }
     },
     {
-      "label": "Le Barde décale la caisse hors du rayon de retour. Les chasseurs restent séparés derrière leurs retenues.",
-      "turn": 30,
+      "label": "Le Barde écarte la caisse du rayon de retour, sans déplacer les deux gardiens hors de leurs commandes.",
+      "turn": 39,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 3,
-            "y": 2
+            "x": 4,
+            "y": 16
           }
         },
         {
@@ -727,30 +862,30 @@
       ],
       "monsters": [
         {
-          "x": 7,
-          "y": 3
+          "x": 6,
+          "y": 6
         },
         {
-          "x": 12,
-          "y": 7
+          "x": 13,
+          "y": 12
         }
       ],
       "circuits": {
         "reserve": true,
-        "lacher": false,
-        "gardien-ouest": false,
-        "gardien-est": false
+        "livraison": false,
+        "gardien-ouest": true,
+        "gardien-est": true
       }
     },
     {
-      "label": "Le reflet ramène le Magicien dans le sas ; la commande vide referme aussitôt la presse, qui le dépose au sud et rebouche le côté du futur gardien est.",
-      "turn": 33,
+      "label": "Le reflet ramène le Magicien ; la commande de réserve vide referme le sas et la presse le dépose au sud.",
+      "turn": 42,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 3,
-            "y": 2
+            "x": 4,
+            "y": 16
           }
         },
         {
@@ -786,83 +921,24 @@
       ],
       "monsters": [
         {
-          "x": 7,
-          "y": 3
-        },
-        {
-          "x": 12,
-          "y": 7
-        }
-      ],
-      "circuits": {
-        "reserve": false,
-        "lacher": false,
-        "gardien-ouest": false,
-        "gardien-est": false
-      }
-    },
-    {
-      "label": "Après la visée lointaine, le Guerrier rappelle le chasseur occidental dans son angle avant de descendre à son tour.",
-      "turn": 43,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 3,
-            "y": 1
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 5,
-            "y": 13
-          }
-        },
-        {
-          "kind": "bard",
-          "at": {
-            "x": 8,
-            "y": 10
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 10,
-          "y": 11
-        }
-      ],
-      "supports": [],
-      "mirrors": [
-        {
-          "at": {
-            "x": 17,
-            "y": 11
-          },
-          "facing": "NW"
-        }
-      ],
-      "monsters": [
-        {
           "x": 6,
-          "y": 3
+          "y": 6
         },
         {
-          "x": 12,
-          "y": 7
+          "x": 13,
+          "y": 12
         }
       ],
       "circuits": {
         "reserve": false,
-        "lacher": false,
-        "gardien-ouest": false,
-        "gardien-est": false
+        "livraison": false,
+        "gardien-ouest": true,
+        "gardien-est": true
       }
     },
     {
-      "label": "La seule caisse mobile descend dans l’atelier puis traverse le quai. Elle devient l’unique appui qui permet d’augmenter le nombre d’occupants de l’île finale.",
-      "turn": 72,
+      "label": "La caisse descend dans l’atelier, change d’axe sur le quai et devient l’unique appui d’entrée de l’île encore vide.",
+      "turn": 74,
       "heroes": [
         {
           "kind": "warrior",
@@ -905,141 +981,23 @@
       "monsters": [
         {
           "x": 6,
-          "y": 3
-        },
-        {
-          "x": 12,
-          "y": 7
-        }
-      ],
-      "circuits": {
-        "reserve": false,
-        "lacher": false,
-        "gardien-ouest": false,
-        "gardien-est": false
-      }
-    },
-    {
-      "label": "Le Guerrier ouvre les deux retenues. Depuis cette commande éloignée, il ne peut pas attirer seul le chasseur est jusqu’à sa plaque.",
-      "turn": 82,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 3,
-            "y": 16
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 5,
-            "y": 13
-          }
-        },
-        {
-          "kind": "bard",
-          "at": {
-            "x": 8,
-            "y": 10
-          }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 13,
-          "y": 17
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 17,
-            "y": 11
-          },
-          "facing": "NW"
-        }
-      ],
-      "monsters": [
-        {
-          "x": 6,
-          "y": 4
-        },
-        {
-          "x": 12,
-          "y": 8
-        }
-      ],
-      "circuits": {
-        "reserve": false,
-        "lacher": true,
-        "gardien-ouest": false,
-        "gardien-est": false
-      }
-    },
-    {
-      "label": "Le Barde devient la cible : sa colonne équilibre les distances et entraîne les chasseurs jusqu’aux deux boutons. Il prend sa destination après leur stabilisation.",
-      "turn": 89,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 3,
-            "y": 16
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 5,
-            "y": 13
-          }
-        },
-        {
-          "kind": "bard",
-          "at": {
-            "x": 8,
-            "y": 15
-          }
-        }
-      ],
-      "stones": [],
-      "supports": [
-        {
-          "x": 13,
-          "y": 17
-        }
-      ],
-      "mirrors": [
-        {
-          "at": {
-            "x": 17,
-            "y": 11
-          },
-          "facing": "NW"
-        }
-      ],
-      "monsters": [
-        {
-          "x": 6,
           "y": 6
         },
         {
-          "x": 12,
-          "y": 11
+          "x": 13,
+          "y": 12
         }
       ],
       "circuits": {
         "reserve": false,
-        "lacher": true,
+        "livraison": false,
         "gardien-ouest": true,
         "gardien-est": true
       }
     },
     {
-      "label": "Les trois arrivées gardent les chasseurs tournés vers leurs butées. Les deux monstres restent vivants et maintiennent les presses-buts ; le Guerrier traverse le seul appui jusqu’à l’île.",
-      "turn": 115,
+      "label": "Les deux monstres, transportés par des dispositifs différents, gardent leurs boutons. Les trois héros occupent les trois destinations, dont l’île rejointe par le seul appui.",
+      "turn": 97,
       "heroes": [
         {
           "kind": "warrior",
@@ -1085,13 +1043,13 @@
           "y": 6
         },
         {
-          "x": 12,
-          "y": 11
+          "x": 13,
+          "y": 12
         }
       ],
       "circuits": {
         "reserve": false,
-        "lacher": false,
+        "livraison": false,
         "gardien-ouest": true,
         "gardien-est": true
       }
@@ -1105,12 +1063,12 @@
       "Water 11 : la transposition conserve les effectifs ; une traversée physique est nécessaire pour remplir l’île vide."
     ],
     "changed": [
-      "Les chasseurs suivent la règle déterministe SS19 : un pas vers le héros actif, sur l’axe le plus long, vertical en cas d’égalité. Les retenues et les deux enclos en L rendent leur position contrôlable.",
-      "Une réserve éloignée sert d’abord à conserver le sas optique ouvert, puis devient le seul appui du dernier passage. La fermeture du sas dépose le Magicien et forme ensuite la butée ouest d’un chasseur.",
-      "Le Guerrier tient la commande de libération tandis que le Barde attire les ennemis depuis une autre colonne. Quitter trop tôt la commande renvoie les chasseurs vers le haut.",
-      "Aucun compteur d’élimination ni condition cachée : deux destinations sont des presses commandées par les deux plaques visibles."
+      "Les monstres restent sur leur case tant qu’une poussée, un chant, un échange, un reflet ou une presse ne les transporte pas. Aucun déplacement autonome, aucune cible liée au héros actif.",
+      "Le gardien ouest suit un rail commandé par le chant à travers une cloison ; sa commande ferme une porte distincte qui permet au Barde de se dégager sans le reprendre.",
+      "Le gardien est masque la réserve sur le rayon. Un reflet le livre à une presse ; une commande verte le dépose ensuite sur son bouton orange. Il faut relâcher cette commande pour rouvrir le trajet optique.",
+      "La caisse unique occupe d’abord la commande de réserve, puis devient le seul appui du dernier passage. Les deux autres buts sont des presses reliées aux boutons visibles des gardiens."
     ],
-    "sourceReading": "Les monstres-poids et la relève des commandes viennent des guides ; la poursuite, les enclos en L, le sas de retour et la géométrie du passage final sont propres à SS19.",
-    "proofScope": "À WIN, les trois héros occupent les buts. La caisse unique a dû devenir appui pour atteindre l’île vide, et le miroir ne peut quitter son socle. Les seuls poids disponibles pour les deux presses-buts sont donc les deux monstres vivants. Éliminer l’un d’eux rend la victoire impossible sans annuler ou recommencer. Aucun parcours unique ni optimal n’est revendiqué."
+    "sourceReading": "Les monstres-poids et les relèves de commandes viennent des guides. La galerie de chant, la livraison en deux temps, le réemploi du rayon et la géométrie du passage final sont propres à SS19 ; aucune poursuite autonome n’est reprise.",
+    "proofScope": "À WIN, les trois héros occupent les buts. La caisse unique a dû devenir appui pour atteindre l’île initialement vide, hors des axes du miroir ; ce miroir est immobilisé par les murs de son socle. Les seuls poids disponibles pour les deux presses-buts sont donc les deux monstres vivants. Aucun compteur caché, parcours unique ni minimum de coups n’est imposé."
   }
 }

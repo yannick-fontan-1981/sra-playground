@@ -1,15 +1,186 @@
 {
   "gameCode": "SS19",
+  "version": "0.2.0",
+  "title": "Les Gardiens Noirs",
   "status": "passed",
   "levels": [
     {
       "level": 1,
-      "title": "Les galeries de la première chasse",
+      "title": "Les galeries des gardiens",
       "status": "passed",
+      "mapSha256": "7fa1651341e3c06382685602517c9eda62f01c02fdf05ad5754b50cfc8a41f67",
+      "witness": {
+        "metrics": {
+          "actions": 208,
+          "selections": 20,
+          "warriorPushes": 8,
+          "trainPushes": 1,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 4,
+          "groupSongs": 3,
+          "songHeroMoves": 1,
+          "songStoneMoves": 7,
+          "songMonsterMoves": 1,
+          "supportMoves": 1,
+          "swaps": 6,
+          "partnerSwaps": 4,
+          "stoneSwaps": 2,
+          "monsterSwaps": 0,
+          "bentSwaps": 2,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 2,
+          "swapLoops": 0,
+          "partnerMoves": 3,
+          "stoneMoves": 16,
+          "mirrorMoves": 1,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 1,
+          "platformsCreated": 1,
+          "monstersRemoved": 1,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 1,
+                "y": 4
+              },
+              "facing": "W",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 18,
+                "y": 4
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 1,
+                "y": 16
+              },
+              "facing": "W",
+              "dead": false
+            }
+          ],
+          "active": 2,
+          "stones": [
+            {
+              "x": 12,
+              "y": 4
+            },
+            {
+              "x": 4,
+              "y": 1
+            },
+            {
+              "x": 4,
+              "y": 2
+            },
+            {
+              "x": 4,
+              "y": 9
+            },
+            {
+              "x": 9,
+              "y": 9
+            },
+            {
+              "x": 11,
+              "y": 9
+            },
+            {
+              "x": 16,
+              "y": 16
+            }
+          ],
+          "monsters": [],
+          "supports": [
+            {
+              "x": 8,
+              "y": 12
+            },
+            {
+              "x": 7,
+              "y": 12
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 14,
+                "y": 3
+              },
+              "facing": "NW"
+            }
+          ],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "monsterEvents": [
+          {
+            "entry": 114,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 16,
+                  "y": 9
+                },
+                "to": {
+                  "x": 15,
+                  "y": 9
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 15,
+                "y": 9
+              }
+            ]
+          },
+          {
+            "entry": 118,
+            "phase": "piston",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 15,
+                  "y": 9
+                },
+                "to": {
+                  "x": 15,
+                  "y": 10
+                }
+              }
+            ],
+            "remaining": []
+          }
+        ]
+      },
       "checks": [
         {
           "name": "Parcours pédagogique intégral",
-          "observed": "201 entrées, 17 sélections ; WIN sans refus ni perte.",
+          "observed": "208 entrées, 20 sélections ; WIN sans refus ni perte.",
           "scope": "Rejeu indépendant du témoin actuel ; les interactions facultatives ne sont pas déclarées nécessaires."
         },
         {
@@ -28,9 +199,204 @@
           "scope": "Contre-parcours réel LL ; il est délibérément distinct du témoin sans refus."
         },
         {
-          "name": "Apprentissage de la chasse protégé",
-          "observed": "Le gardien ne peut marcher que sur les trois cases du rail. Il reste dans ce rail pendant le témoin, puis une fermeture de presse le pousse dans l’eau.",
-          "scope": "Composante de terrain et revue de toutes les phases du témoin ; la noyade est une interaction enseignée, sans prétention de nécessité universelle."
+          "name": "Deux déplacements physiques, chacun visible",
+          "observed": "Le gardien reste en (16,9) jusqu’au chant, qui le place sur la presse ouverte (15,9). Une fermeture ultérieure le pousse dans l’eau (15,10). Aucun pas de héros ou changement de sélection ne le déplace seul.",
+          "scope": "Revue de toutes les phases du témoin ; la noyade est une interaction enseignée, sans prétention de nécessité universelle."
+        },
+        {
+          "name": "Le chant exige un vrai pas de la Barde",
+          "observed": "Au poste de livraison, son pas vers le haut est refusé par le mur : le gardien reste immobile. Le pas vers la gauche du témoin est accepté et lui seul transporte le monstre sur la presse.",
+          "scope": "Deux gestes locaux comparables ; aucune attraction à travers les murs n’est simulée."
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Le gardien du seuil",
+      "status": "passed",
+      "mapSha256": "63b744d425757e89737a59137481faf4356e2f6cd0cc862ed6eda6c459d8097c",
+      "witness": {
+        "metrics": {
+          "actions": 62,
+          "selections": 8,
+          "warriorPushes": 6,
+          "trainPushes": 0,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 4,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 4,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "swaps": 1,
+          "partnerSwaps": 0,
+          "stoneSwaps": 1,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 11,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 3,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 9,
+                "y": 15
+              },
+              "facing": "S",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 17,
+                "y": 10
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 15,
+                "y": 15
+              },
+              "facing": "S",
+              "dead": false
+            }
+          ],
+          "active": 2,
+          "stones": [
+            {
+              "x": 3,
+              "y": 10
+            }
+          ],
+          "monsters": [
+            {
+              "x": 11,
+              "y": 3
+            }
+          ],
+          "supports": [],
+          "mirrors": [],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "monsterEvents": [
+          {
+            "entry": 4,
+            "phase": "piston",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 14,
+                  "y": 3
+                },
+                "to": {
+                  "x": 13,
+                  "y": 3
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 13,
+                "y": 3
+              }
+            ]
+          },
+          {
+            "entry": 5,
+            "phase": "piston",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 13,
+                  "y": 3
+                },
+                "to": {
+                  "x": 12,
+                  "y": 3
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 12,
+                "y": 3
+              }
+            ]
+          },
+          {
+            "entry": 6,
+            "phase": "piston",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 12,
+                  "y": 3
+                },
+                "to": {
+                  "x": 11,
+                  "y": 3
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 11,
+                "y": 3
+              }
+            ]
+          }
+        ]
+      },
+      "checks": [
+        {
+          "name": "Trois fermetures distinctes livrent le gardien",
+          "observed": "62 entrées et 8 sélections, sans refus ni perte. Le gardien avance exactement de (14,3) vers (13,3), puis (12,3), puis le bouton séparé (11,3).",
+          "scope": "Les trois transports sont des phases de presse observées ; aucune porte ouverte ne déplace un occupant à distance."
+        },
+        {
+          "name": "Un pas qui abandonne la séquence ne termine pas le transport",
+          "observed": "Après deux fermetures, revenir vers la commande jaune laisse le gardien en (12,3). La fermeture jaune est alors vide : elle ne le pousse pas et les trois destinations restent fermées.",
+          "scope": "Contre-parcours RRRRRL, sans refus ni perte ; le troisième déplacement exige une nouvelle cause physique."
+        },
+        {
+          "name": "Le rail ne répond pas au placement des héros",
+          "observed": "Le rail est séparé du sol des héros par deux rangées murées. La portée de deux cases du chant ne l’atteint pas, les visées verticales rencontrent les murs et aucun miroir ne dessert ces cases.",
+          "scope": "Inspection géométrique : les presses sont les seuls dispositifs capables de faire sortir le gardien de sa case initiale et de le livrer sur le bouton."
+        },
+        {
+          "name": "La caisse et le monstre sont deux poids nécessaires",
+          "observed": "Les trois héros doivent occuper les trois destinations, toutes soumises au même accord. Les deux boutons violets, hors destinations et hors presses, ne peuvent alors être tenus que par la caisse et le monstre.",
+          "scope": "Comptage exhaustif des occupants disponibles ; perdre l’une des deux pièces interdit cet accord final."
         }
       ]
     },
@@ -38,6 +404,109 @@
       "level": 3,
       "title": "L’interrupteur hors d’atteinte",
       "status": "passed",
+      "mapSha256": "9a95661e8522fb514ac031a9546bbf7a4e10e12723190f1a11384b864c188d19",
+      "witness": {
+        "metrics": {
+          "actions": 150,
+          "selections": 18,
+          "warriorPushes": 14,
+          "trainPushes": 2,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 3,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 3,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "swaps": 2,
+          "partnerSwaps": 1,
+          "stoneSwaps": 1,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 3,
+          "stoneMoves": 20,
+          "mirrorMoves": 0,
+          "reflections": 3,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 9,
+                "y": 17
+              },
+              "facing": "S",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 17,
+                "y": 7
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 16,
+                "y": 16
+              },
+              "facing": "E",
+              "dead": false
+            }
+          ],
+          "active": 0,
+          "stones": [
+            {
+              "x": 6,
+              "y": 6
+            },
+            {
+              "x": 10,
+              "y": 4
+            },
+            {
+              "x": 8,
+              "y": 11
+            }
+          ],
+          "monsters": [],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 2,
+                "y": 6
+              },
+              "facing": "NE"
+            }
+          ],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            false,
+            true,
+            false,
+            false,
+            false
+          ]
+        },
+        "monsterEvents": []
+      },
       "checks": [
         {
           "name": "Parcours des sas alternés",
@@ -60,124 +529,156 @@
       "level": 4,
       "title": "Le gardien de la vanne",
       "status": "passed",
+      "mapSha256": "00232d97835d46b6b4b67eb81dc398850c2f49fb76fe9c6e75c64d0ea5e51fed",
+      "witness": {
+        "metrics": {
+          "actions": 135,
+          "selections": 12,
+          "warriorPushes": 33,
+          "trainPushes": 6,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 3,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 1,
+          "supportMoves": 2,
+          "swaps": 2,
+          "partnerSwaps": 2,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 5,
+          "stoneMoves": 34,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 2,
+          "monstersRemoved": 1,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 18,
+                "y": 13
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 5,
+                "y": 15
+              },
+              "facing": "W",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 16,
+                "y": 15
+              },
+              "facing": "W",
+              "dead": false
+            }
+          ],
+          "active": 0,
+          "stones": [],
+          "monsters": [],
+          "supports": [
+            {
+              "x": 11,
+              "y": 11
+            },
+            {
+              "x": 12,
+              "y": 11
+            },
+            {
+              "x": 13,
+              "y": 11
+            }
+          ],
+          "mirrors": [],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            true,
+            false
+          ],
+          "platformActive": [
+            false
+          ]
+        },
+        "monsterEvents": [
+          {
+            "entry": 8,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 12,
+                  "y": 5
+                },
+                "to": {
+                  "x": 12,
+                  "y": 6
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 12,
+                "y": 6
+              }
+            ]
+          },
+          {
+            "entry": 11,
+            "phase": "platform",
+            "moves": [],
+            "remaining": []
+          }
+        ]
+      },
       "checks": [
         {
-          "name": "Témoin de construction complet",
-          "observed": "143 entrées et 9 sélections ; les deux réserves construisent le pont continu du témoin, sans refus ni perte.",
-          "scope": "Description du témoin uniquement ; la variante ci-dessous montre que les deux immersions ne sont pas obligatoires."
+          "name": "Le chant déplace, la trappe retire le soutien",
+          "observed": "135 entrées et 12 sélections, sans refus ni perte. Un unique chant dépose le gardien de (12,5) en (12,6) ; le départ du Magicien retire ensuite la plateforme et le gardien disparaît sur place.",
+          "scope": "Les deux événements sont distincts et tous les autres pas laissent le monstre immobile. La noyade n’est pas présentée comme une condition cachée de victoire."
         },
         {
-          "name": "La plateforme active ne donne pas une traversée directe",
-          "observed": "La plateforme hydraulique est déjà active au départ, mais le graphe de marche des deux héros de gauche reste séparé de la rive droite. Les murs (13,5) et (13,6) ferment la sortie directe de la trappe.",
-          "scope": "Inspection du terrain initial avec la plateforme active, pas une preuve contre tous les usages ultérieurs d’appuis mobiles."
+          "name": "La plateforme levée ne court-circuite pas le bassin",
+          "observed": "La trappe active est isolée par trois murs et la case du gardien. Elle n’offre aucun chemin de marche entre les deux rives ; la rive gauche reste coupée de la rive droite.",
+          "scope": "Inspection exhaustive du graphe de terrain initial avec la plateforme levée, sans prétendre exclure les transports élaborés d’appuis ailleurs dans le bassin."
         },
         {
-          "name": "Le pont partiel ne suffit pas à marcher droit",
-          "observed": "Après la première livraison, le Guerrier peut avancer jusqu’en (12,11), mais son pas suivant vers (13,11) est refusé par l’eau nue.",
-          "scope": "Contre-parcours concret ; des transports plus élaborés restent autorisés."
+          "name": "Déplacer le gardien ferme réellement la réserve",
+          "observed": "Si la Barde chante avant la sortie des caisses, la réserve se ferme : après une poussée dans la pièce, la suivante rencontre la presse fermée et est refusée. La destination orange s’ouvre au même moment.",
+          "scope": "Contre-parcours CCDCRR ; l’erreur reste réparable tant que le gardien peut revenir sur son bouton, et Undo reste disponible."
         },
         {
-          "name": "Variante valide : une caisse voyage sur son propre appui",
-          "observed": "138 entrées, 16 sélections, 3 déplacements d’appui, 2 échanges et 1 monstre retiré. Les deux caisses sont employées mais une seule est immergée ; l’autre reste sèche en (9,11).",
-          "scope": "Le Barde entraîne ensemble caisse et appui jusqu’à la rive ; le Magicien utilise ensuite la caisse comme cible. Réfute la nécessité d’un pont continu ou de deux immersions."
+          "name": "Le pont partiel ne suffit pas à une traversée droite",
+          "observed": "Après la première immersion du témoin, le Guerrier atteint (12,11), mais son pas vers (13,11) est refusé par l’eau nue. La seconde livraison construit ce dernier appui dans le parcours enseigné.",
+          "scope": "Contre-parcours concret ; deux immersions ne sont pas annoncées comme nécessaires à toutes les solutions possibles."
         },
         {
-          "name": "Variante valide : noyade après le chantier",
-          "observed": "141 entrées et 9 sélections. Le Magicien maintient la trappe pendant la construction ; son départ tardif noie ensuite le gardien. Les deux réserves sont toujours utilisées.",
-          "scope": "Le calendrier de la noyade est une option de la solution, sans condition cachée imposant son ordre."
-        }
-      ],
-      "alternatives": [
-        {
-          "label": "Caisse transportée sur son appui puis échangée",
-          "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUUCCDDDDDDDDDLCCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRCCUULLLRRCLUCLUURCCDDDDDLLLLLCCDDDDCCUURRRR",
-          "metrics": {
-            "actions": 138,
-            "selections": 16,
-            "warriorPushes": 28,
-            "trainPushes": 5,
-            "huntSteps": 1,
-            "monsterHuntMoves": 1,
-            "songs": 8,
-            "groupSongs": 1,
-            "songHeroMoves": 4,
-            "songStoneMoves": 2,
-            "songMonsterMoves": 0,
-            "supportMoves": 3,
-            "swaps": 2,
-            "partnerSwaps": 1,
-            "stoneSwaps": 1,
-            "monsterSwaps": 0,
-            "bentSwaps": 0,
-            "multiMirrorSwaps": 0,
-            "swapReflections": 0,
-            "swapLoops": 0,
-            "partnerMoves": 4,
-            "stoneMoves": 36,
-            "mirrorMoves": 0,
-            "reflections": 0,
-            "heroReflections": 0,
-            "pistonPushes": 0,
-            "platformsCreated": 1,
-            "monstersRemoved": 1,
-            "blocked": 0,
-            "deaths": 0
-          },
-          "final": {
-            "stones": [
-              {
-                "x": 9,
-                "y": 11
-              }
-            ],
-            "supports": [
-              {
-                "x": 11,
-                "y": 11
-              },
-              {
-                "x": 13,
-                "y": 11
-              }
-            ],
-            "monsters": []
-          }
-        },
-        {
-          "label": "Noyade différée après construction",
-          "commands": "RRRRRDDDDDDRRRCCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
-          "metrics": {
-            "actions": 141,
-            "selections": 9,
-            "warriorPushes": 34,
-            "trainPushes": 5,
-            "huntSteps": 5,
-            "monsterHuntMoves": 5,
-            "songs": 2,
-            "groupSongs": 0,
-            "songHeroMoves": 0,
-            "songStoneMoves": 0,
-            "songMonsterMoves": 0,
-            "supportMoves": 2,
-            "swaps": 2,
-            "partnerSwaps": 2,
-            "stoneSwaps": 0,
-            "monsterSwaps": 0,
-            "bentSwaps": 0,
-            "multiMirrorSwaps": 0,
-            "swapReflections": 0,
-            "swapLoops": 0,
-            "partnerMoves": 5,
-            "stoneMoves": 34,
-            "mirrorMoves": 0,
-            "reflections": 0,
-            "heroReflections": 0,
-            "pistonPushes": 0,
-            "platformsCreated": 2,
-            "monstersRemoved": 1,
-            "blocked": 0,
-            "deaths": 0
-          }
+          "name": "Le chantier réalise un transfert net de héros",
+          "observed": "Le témoin utilise l’appui initial et les deux caisses, puis termine avec deux héros sur la rive droite et un sur la rive gauche. Des échanges entre héros seuls ne changent pas cette répartition ; une autre traversée ou une livraison de cible reste nécessaire.",
+          "scope": "Comptage des occupants et observation du témoin. Une cible livrée pourrait ensuite être échangée avec un héros ; l’ordre des livraisons et le pont continu ne sont pas déclarés universels."
         }
       ]
     },
@@ -185,64 +686,244 @@
       "level": 5,
       "title": "Le troisième doit rester vivant",
       "status": "passed",
+      "mapSha256": "c7c7c4a26452b921e80d3bb744d6b46427c9a383c65b16766a23360b543d83f0",
+      "witness": {
+        "metrics": {
+          "actions": 134,
+          "selections": 13,
+          "warriorPushes": 2,
+          "trainPushes": 0,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 11,
+          "groupSongs": 2,
+          "songHeroMoves": 0,
+          "songStoneMoves": 10,
+          "songMonsterMoves": 3,
+          "supportMoves": 0,
+          "swaps": 2,
+          "partnerSwaps": 2,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 14,
+          "mirrorMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 2,
+          "platformsCreated": 0,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 11,
+                "y": 2
+              },
+              "facing": "S",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 9,
+                "y": 13
+              },
+              "facing": "W",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 3,
+                "y": 16
+              },
+              "facing": "S",
+              "dead": false
+            }
+          ],
+          "active": 1,
+          "stones": [
+            {
+              "x": 9,
+              "y": 12
+            },
+            {
+              "x": 5,
+              "y": 9
+            }
+          ],
+          "monsters": [
+            {
+              "x": 5,
+              "y": 8
+            }
+          ],
+          "supports": [],
+          "mirrors": [],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            true,
+            false
+          ]
+        },
+        "monsterEvents": [
+          {
+            "entry": 3,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 5,
+                  "y": 10
+                },
+                "to": {
+                  "x": 5,
+                  "y": 9
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 9,
+                "y": 7
+              },
+              {
+                "x": 9,
+                "y": 9
+              },
+              {
+                "x": 5,
+                "y": 9
+              }
+            ]
+          },
+          {
+            "entry": 4,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 5,
+                  "y": 9
+                },
+                "to": {
+                  "x": 5,
+                  "y": 8
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 9,
+                "y": 7
+              },
+              {
+                "x": 9,
+                "y": 9
+              },
+              {
+                "x": 5,
+                "y": 8
+              }
+            ]
+          },
+          {
+            "entry": 36,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 9,
+                  "y": 9
+                },
+                "to": {
+                  "x": 9,
+                  "y": 8
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 9,
+                "y": 7
+              },
+              {
+                "x": 9,
+                "y": 8
+              },
+              {
+                "x": 5,
+                "y": 8
+              }
+            ]
+          },
+          {
+            "entry": 36,
+            "phase": "combat",
+            "moves": [],
+            "remaining": [
+              {
+                "x": 5,
+                "y": 8
+              }
+            ]
+          }
+        ]
+      },
       "checks": [
         {
-          "name": "Contraste éliminer et conserver",
-          "observed": "143 entrées et 15 sélections. La paire de chasseurs est éliminée, le troisième reste sur sa commande et la caisse haute rejoint le bouton cyan.",
-          "scope": "Rejeu du témoin complet ; aucune victoire par l’élimination de tous les monstres."
+          "name": "Le chant conserve un gardien et provoque le combat des deux autres",
+          "observed": "134 entrées et 13 sélections, sans refus ni perte. Les trois premiers chants installent le captif et sa caisse ; un autre chant pousse (9,9) vers (9,8), au contact de (9,7). Les deux disparaissent ensemble et le captif reste sur son bouton.",
+          "scope": "Observation des déplacements effectifs : le captif monte de deux cases puis reste contre son mur pendant le troisième chant qui termine la livraison de sa caisse."
         },
         {
-          "name": "Un pas chanté défait réellement le verrou du captif",
-          "observed": "Après l’installation du gardien, un D du Barde déplace le monstre en (5,9) et la caisse en (5,10). La sortie orientale et le chargement haut se referment.",
-          "scope": "Contre-parcours concret sans perte ; l’extraction par échange évite cet effet."
+          "name": "Quitter le pupitre par chant déplace vraiment les deux poids",
+          "observed": "Un D après leur installation descend le gardien en (5,9) et la caisse en (5,10). Le chargement et la destination orange se ferment ; la commande verte reste occupée par le monstre qui vient remplacer la caisse.",
+          "scope": "Contre-parcours réel ; ce maintien du bouton vert est conservé et aucune règle cachée ne distingue les deux poids."
         },
         {
-          "name": "Le remplacement direct de la première presse est bloqué",
-          "observed": "Une Barde amenée en (9,8) ne peut chanter à gauche : son propre pas aboutit au nouveau mur (8,8), et la caisse reste sur la première presse.",
-          "scope": "Essai concret sur la géométrie durcie ; ne prouve pas l’unicité de la paire de presses."
+          "name": "Les deux poids de la chambre scellée ne remplacent pas la caisse haute",
+          "observed": "Le monstre et sa caisse restent enfermés dans les cinq cases verticales (5,8) à (5,12), entourées de murs. Aucun miroir ni presse ne les en extrait, et toutes les visées extérieures vers eux sont murées.",
+          "scope": "Inspection de toute la frontière de la chambre. Ces deux ressources assurent les boutons orange et vert ; elles ne peuvent servir au bouton cyan extérieur."
         },
         {
-          "name": "Variante valide : échange et relâchement temporaire remplacent la deuxième presse",
-          "observed": "181 entrées et 22 sélections. Après la première presse, un chant relâche le captif ; le Magicien extrait la charge, puis un autre chant reverrouille la prison et plusieurs relèves libèrent les héros.",
-          "scope": "Variante plus longue, rejouée sans refus ni perte. Elle conserve la caisse haute et le gardien, mais réfute une obligation universelle d’employer la seconde presse."
-        }
-      ],
-      "alternatives": [
-        {
-          "label": "Seconde presse remplacée par relâchement et échanges",
-          "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDUCUUUUUURRRRRRUCUURRRRUUUUUUDCCDDLLLLLLLUCUCCRUCCLDDDDDUCDDDLDLDDDDDLUCLLLLDCDDDDDRDDDDRRRRRRRCDRRUUURUUUR",
-          "metrics": {
-            "actions": 181,
-            "selections": 22,
-            "warriorPushes": 6,
-            "trainPushes": 0,
-            "huntSteps": 5,
-            "monsterHuntMoves": 5,
-            "songs": 5,
-            "groupSongs": 4,
-            "songHeroMoves": 1,
-            "songStoneMoves": 7,
-            "songMonsterMoves": 4,
-            "supportMoves": 0,
-            "swaps": 5,
-            "partnerSwaps": 4,
-            "stoneSwaps": 1,
-            "monsterSwaps": 0,
-            "bentSwaps": 0,
-            "multiMirrorSwaps": 0,
-            "swapReflections": 0,
-            "swapLoops": 0,
-            "partnerMoves": 1,
-            "stoneMoves": 15,
-            "mirrorMoves": 0,
-            "reflections": 0,
-            "heroReflections": 0,
-            "pistonPushes": 2,
-            "platformsCreated": 0,
-            "monstersRemoved": 2,
-            "blocked": 0,
-            "deaths": 0
+          "name": "Un monstre comme poids cyan tue le héros de la destination voisine",
+          "observed": "Un échange réel dépose le monstre (9,9) sur le bouton cyan (9,12). Le Magicien peut alors approcher de (10,13), mais son pas vers la destination (9,13) le tue par contact. La caisse haute est donc le seul poids extérieur compatible avec la victoire.",
+          "scope": "Contre-parcours réel de placement et d’approche, complété par le comptage des ressources ; la paire de monstres n’est soumise à aucun quota de destruction.",
+          "counterBranch": {
+            "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRRRUCCDDDDDDRRRRUURRURDRRDDDLLL",
+            "dead": true,
+            "complete": false
           }
+        },
+        {
+          "name": "Relâcher la commande rose referme la sortie de la caisse",
+          "observed": "Après la seconde presse, le départ du Magicien referme le volet (9,6). La Barde peut faire son pas vers le bas, mais son chant laisse la caisse en (9,5), arrêtée par ce volet.",
+          "scope": "Contre-parcours sans perte ; rouvrir le volet permet de reprendre le transport. L’ouverture seule ne déplace pas la caisse."
+        },
+        {
+          "name": "Une presse fermée au mauvais bout écrase la livraison",
+          "observed": "La Barde maintient d’abord la commande rose, ce qui ferme la presse (9,4). Fermer ensuite la presse violette contre elle écrase la caisse haute au lieu de la livrer.",
+          "scope": "Contre-parcours réel sans mort de héros. La caisse perdue est la seule réserve extérieure sûre pour le cyan ; Undo peut restaurer le geste. Aucune obligation d’utiliser exactement le témoin n’est imposée."
         }
       ]
     },
@@ -250,6 +931,111 @@
       "level": 6,
       "title": "La seconde image",
       "status": "passed",
+      "mapSha256": "65272bfc132727ab80f25b90916543217253bdb63473756af2ca14898a15cd54",
+      "witness": {
+        "metrics": {
+          "actions": 74,
+          "selections": 10,
+          "warriorPushes": 0,
+          "trainPushes": 0,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 3,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 3,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "swaps": 1,
+          "partnerSwaps": 1,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 5,
+          "mirrorMoves": 0,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 10,
+                "y": 2
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 16,
+                "y": 17
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 14,
+                "y": 17
+              },
+              "facing": "E",
+              "dead": false
+            }
+          ],
+          "active": 1,
+          "stones": [
+            {
+              "x": 8,
+              "y": 14
+            }
+          ],
+          "monsters": [],
+          "supports": [
+            {
+              "x": 11,
+              "y": 14
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "NW"
+            },
+            {
+              "at": {
+                "x": 13,
+                "y": 14
+              },
+              "facing": "NW"
+            }
+          ],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            true,
+            false,
+            false
+          ]
+        },
+        "monsterEvents": []
+      },
       "checks": [
         {
           "name": "Deux livraisons différentes",
@@ -302,6 +1088,75 @@
             "monstersRemoved": 0,
             "blocked": 0,
             "deaths": 0
+          },
+          "final": {
+            "heroes": [
+              {
+                "kind": "warrior",
+                "at": {
+                  "x": 10,
+                  "y": 2
+                },
+                "facing": "E",
+                "dead": false
+              },
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 16,
+                  "y": 17
+                },
+                "facing": "E",
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 14,
+                  "y": 17
+                },
+                "facing": "E",
+                "dead": false
+              }
+            ],
+            "active": 1,
+            "stones": [
+              {
+                "x": 8,
+                "y": 14
+              }
+            ],
+            "monsters": [],
+            "supports": [
+              {
+                "x": 11,
+                "y": 14
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 8,
+                  "y": 8
+                },
+                "facing": "NW"
+              },
+              {
+                "at": {
+                  "x": 13,
+                  "y": 14
+                },
+                "facing": "NW"
+              }
+            ],
+            "complete": true,
+            "failed": false,
+            "dead": false,
+            "gateClosed": [
+              true,
+              false,
+              false
+            ]
           }
         }
       ]
@@ -310,20 +1165,170 @@
       "level": 7,
       "title": "Le relais condamné",
       "status": "passed",
+      "mapSha256": "7120f0770569fd8401320c74f4550b99b260983a031b6aef75511505a443f533",
+      "witness": {
+        "metrics": {
+          "actions": 52,
+          "selections": 9,
+          "warriorPushes": 3,
+          "trainPushes": 2,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 5,
+          "groupSongs": 0,
+          "songHeroMoves": 1,
+          "songStoneMoves": 4,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "swaps": 1,
+          "partnerSwaps": 1,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 6,
+          "mirrorMoves": 1,
+          "reflections": 3,
+          "heroReflections": 4,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 1,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 8,
+                "y": 8
+              },
+              "facing": "W",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 2,
+                "y": 10
+              },
+              "facing": "W",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 1,
+                "y": 8
+              },
+              "facing": "W",
+              "dead": false
+            }
+          ],
+          "active": 0,
+          "stones": [
+            {
+              "x": 16,
+              "y": 12
+            },
+            {
+              "x": 9,
+              "y": 17
+            }
+          ],
+          "monsters": [],
+          "supports": [],
+          "mirrors": [
+            {
+              "at": {
+                "x": 12,
+                "y": 8
+              },
+              "facing": "SW"
+            },
+            {
+              "at": {
+                "x": 2,
+                "y": 14
+              },
+              "facing": "NE"
+            }
+          ],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            false,
+            false
+          ]
+        },
+        "monsterEvents": [
+          {
+            "entry": 17,
+            "phase": "push",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 15,
+                  "y": 12
+                },
+                "to": {
+                  "x": 16,
+                  "y": 12
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 16,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 18,
+            "phase": "push",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 16,
+                  "y": 12
+                },
+                "to": {
+                  "x": 17,
+                  "y": 12
+                }
+              }
+            ],
+            "remaining": []
+          }
+        ]
+      },
       "checks": [
         {
           "name": "Relais supprimé et passage rouvert",
-          "observed": "52 entrées ; la charge ferme puis rouvre la presse, un miroir disparaît et les trois destinations sont occupées.",
+          "observed": "52 entrées et 9 sélections ; la charge ferme puis rouvre la presse, un miroir disparaît et les trois destinations sont occupées.",
           "scope": "Rejeu du témoin ; destruction et réouverture sont deux états distincts."
         },
         {
+          "name": "La caisse forme un écran pendant la poussée",
+          "observed": "Les seuls mouvements du monstre sont les deux poussées du Guerrier derrière la caisse. Les pas de préparation le laissent immobile et la seconde poussée le fait tomber dans l’eau.",
+          "scope": "Toutes les phases physiques du parcours ont été inspectées ; cette noyade appartient au témoin, pas à la condition de victoire."
+        },
+        {
           "name": "Détruire sans rouvrir ne suffit pas",
-          "observed": "Une route différente retire le Barde en conservant la charge sur le bouton. Le relais est détruit, mais la presse restée fermée bloque le reflet final entier, avec le signal rouge attendu.",
+          "observed": "Une route différente retire la Barde en conservant la charge sur le bouton. Le relais est détruit, mais la presse restée fermée bloque le reflet final entier, avec le signal rouge attendu.",
           "scope": "Contre-parcours concret ; le transfert du Magicien pourtant valide n’est pas appliqué partiellement."
         },
         {
           "name": "Variante valide : garder le gardien vivant",
-          "observed": "50 entrées. Une seule poussée de file conserve le monstre sur (16,12) et la caisse écran sur (15,12). Le recalage, la destruction du relais et la réouverture restent présents.",
+          "observed": "50 entrées et 9 sélections. Une seule poussée de file conserve le monstre sur (16,12) et la caisse écran sur (15,12). Le recalage, la destruction du relais et la réouverture restent présents.",
           "scope": "Variante gagnante rejouée ; éliminer le monstre n’est pas nécessaire."
         }
       ],
@@ -362,6 +1367,78 @@
             "monstersRemoved": 0,
             "blocked": 0,
             "deaths": 0
+          },
+          "final": {
+            "heroes": [
+              {
+                "kind": "warrior",
+                "at": {
+                  "x": 8,
+                  "y": 8
+                },
+                "facing": "W",
+                "dead": false
+              },
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 2,
+                  "y": 10
+                },
+                "facing": "W",
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 1,
+                  "y": 8
+                },
+                "facing": "W",
+                "dead": false
+              }
+            ],
+            "active": 0,
+            "stones": [
+              {
+                "x": 15,
+                "y": 12
+              },
+              {
+                "x": 9,
+                "y": 17
+              }
+            ],
+            "monsters": [
+              {
+                "x": 16,
+                "y": 12
+              }
+            ],
+            "supports": [],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 12,
+                  "y": 8
+                },
+                "facing": "SW"
+              },
+              {
+                "at": {
+                  "x": 2,
+                  "y": 14
+                },
+                "facing": "NE"
+              }
+            ],
+            "complete": true,
+            "failed": false,
+            "dead": false,
+            "gateClosed": [
+              false,
+              false
+            ]
           }
         }
       ]
@@ -370,77 +1447,493 @@
       "level": 8,
       "title": "Les deux gardiens vivants",
       "status": "passed",
+      "mapSha256": "f46b6402f2edbef164bec5b19bb8861a0d30fd673be05d7e9d3b9cd646b511cf",
+      "witness": {
+        "metrics": {
+          "actions": 97,
+          "selections": 15,
+          "warriorPushes": 9,
+          "trainPushes": 0,
+          "huntSteps": 0,
+          "monsterHuntMoves": 0,
+          "songs": 8,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 1,
+          "songMonsterMoves": 7,
+          "supportMoves": 0,
+          "swaps": 1,
+          "partnerSwaps": 0,
+          "stoneSwaps": 1,
+          "monsterSwaps": 0,
+          "bentSwaps": 1,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 1,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 11,
+          "mirrorMoves": 0,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 2,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "final": {
+          "heroes": [
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 14,
+                "y": 17
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 10,
+                "y": 18
+              },
+              "facing": "E",
+              "dead": false
+            },
+            {
+              "kind": "bard",
+              "at": {
+                "x": 8,
+                "y": 15
+              },
+              "facing": "S",
+              "dead": false
+            }
+          ],
+          "active": 0,
+          "stones": [],
+          "monsters": [
+            {
+              "x": 6,
+              "y": 6
+            },
+            {
+              "x": 13,
+              "y": 12
+            }
+          ],
+          "supports": [
+            {
+              "x": 13,
+              "y": 17
+            }
+          ],
+          "mirrors": [
+            {
+              "at": {
+                "x": 17,
+                "y": 11
+              },
+              "facing": "NW"
+            }
+          ],
+          "complete": true,
+          "failed": false,
+          "dead": false,
+          "gateClosed": [
+            true,
+            false,
+            true,
+            false,
+            false
+          ]
+        },
+        "monsterEvents": [
+          {
+            "entry": 1,
+            "phase": "reflect",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 17,
+                  "y": 7
+                },
+                "to": {
+                  "x": 13,
+                  "y": 11
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 10,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 11
+              }
+            ]
+          },
+          {
+            "entry": 7,
+            "phase": "piston",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 13,
+                  "y": 11
+                },
+                "to": {
+                  "x": 13,
+                  "y": 12
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 10,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 11,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 10,
+                  "y": 3
+                },
+                "to": {
+                  "x": 9,
+                  "y": 3
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 9,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 12,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 9,
+                  "y": 3
+                },
+                "to": {
+                  "x": 8,
+                  "y": 3
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 8,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 13,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 8,
+                  "y": 3
+                },
+                "to": {
+                  "x": 7,
+                  "y": 3
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 7,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 14,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 7,
+                  "y": 3
+                },
+                "to": {
+                  "x": 6,
+                  "y": 3
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 6,
+                "y": 3
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 15,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 6,
+                  "y": 3
+                },
+                "to": {
+                  "x": 6,
+                  "y": 4
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 6,
+                "y": 4
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 16,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 6,
+                  "y": 4
+                },
+                "to": {
+                  "x": 6,
+                  "y": 5
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 6,
+                "y": 5
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          },
+          {
+            "entry": 17,
+            "phase": "song",
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 6,
+                  "y": 5
+                },
+                "to": {
+                  "x": 6,
+                  "y": 6
+                }
+              }
+            ],
+            "remaining": [
+              {
+                "x": 6,
+                "y": 6
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ]
+          }
+        ]
+      },
       "checks": [
         {
-          "name": "Les deux gardiens arrivent vivants",
-          "observed": "115 entrées, 12 phases de chasse et 18 pas de monstres ; les deux gardiens terminent sur leurs plaques.",
-          "scope": "Rejeu indépendant du témoin complet, sans suppression d’une contrainte de ressource."
+          "name": "Les deux gardiens arrivent par des causes physiques",
+          "observed": "97 entrées et 15 sélections. Le gardien ouest reçoit sept pas de chant ; le gardien est reçoit un reflet puis une poussée de presse. Les deux restent sur leurs boutons jusqu’à la victoire.",
+          "scope": "Rejeu indépendant de toutes les phases ; aucun changement de cible, d’axe ou de distance ne commande un monstre."
         },
         {
-          "name": "Quitter trop tôt la libération fait reculer le chasseur est",
-          "observed": "Après un seul pas du Barde, le Guerrier quitte sa commande : la retenue renvoie le chasseur est en (12,7), et sa destination reste fermée.",
-          "scope": "Contre-parcours concret sans mort ; la retenue ne peut pas être ouverte puis oubliée immédiatement."
+          "name": "Fermer la presse vide ne fait pas venir le monstre",
+          "observed": "Si la commande verte est actionnée avant X, aucun monstre ne bouge et la presse fermée interdit le reflet. Relâcher la commande rouvre la destination, puis X peut y livrer le gardien.",
+          "scope": "Contre-parcours réel, sans attraction ni transport lors de l’ouverture ; une presse agit seulement sur l’occupant de sa propre case au moment de sa fermeture."
         },
         {
           "name": "Le miroir ne peut remplacer un gardien",
           "observed": "Pour chacune des quatre directions de poussée du miroir (17,11), le départ du pousseur ou la destination du miroir est un mur. Aucun chant, échange ou reflet ne déplace un miroir.",
-          "scope": "Vérification géométrique exhaustive des quatre lignes de poussée ; aucune réserve ne permet de lever cette obstruction."
+          "scope": "Vérification géométrique exhaustive des quatre lignes de poussée ; fabriquer un appui ne retire aucun mur."
         },
         {
           "name": "L’île vide impose la caisse du nord-est",
-          "observed": "L’île des neuf cases est vide au départ et hors des deux axes du miroir. Son seul voisin aquatique est (13,17). Aucun échange ne peut augmenter le nombre d’occupants d’une île encore vide ; il faut donc fabriquer ce passage avec la caisse unique.",
+          "observed": "L’île des neuf cases est vide au départ et hors des deux axes du miroir. Son seul voisin aquatique est (13,17). Un échange ne peut ajouter un premier occupant à une île vide ; il faut donc fabriquer ce passage avec la caisse unique.",
           "scope": "Invariant d’effectif et inspection de toute la frontière de l’île ; ne repose pas sur une recherche limitée."
         },
         {
           "name": "Aucun gardien ne peut être sacrifié à la victoire",
-          "observed": "La caisse doit devenir appui et le miroir est fixe. Les trois héros occupent les trois destinations, distinctes des deux plaques. Les deux monstres sont donc les deux seuls poids encore disponibles pour tenir les presses-buts.",
-          "scope": "Preuve de conservation des poids ; les appuis immergés ne comptent pas comme poids."
+          "observed": "La caisse doit devenir appui et le miroir est fixe. Les trois héros occupent les trois destinations, distinctes des deux plaques. Les deux monstres sont donc les seuls poids encore disponibles pour tenir les presses-buts.",
+          "scope": "Preuve de conservation des poids ; les appuis immergés ne comptent pas comme poids et les boutons ne sont pas des cases de presse."
         },
         {
-          "name": "Variante valide : reflet immédiat de la réserve",
-          "observed": "98 entrées. X dès le départ livre la caisse sous la presse ; le Barde l’en extrait. Le pont et les deux gardiens restent indispensables, mais la visée coudée est évitée.",
-          "scope": "Variante gagnante rejouée ; le sort coudé est illustré par le témoin et n’est pas annoncé comme obligatoire."
+          "name": "Variante valide : le chant remplace la presse de livraison",
+          "observed": "93 entrées et 15 sélections. Après le reflet initial, la Barde atteint (11,9), chante vers le bas pour livrer le gardien est, puis vers la gauche pour se dégager. Les deux gardiens et la caisse sont toujours employés.",
+          "scope": "Variante gagnante rejouée ; la commande verte illustre une solution physique lisible mais son emploi n’est pas universellement obligatoire."
         }
       ],
       "alternatives": [
         {
-          "label": "Réserve extraite par X initial",
-          "commands": "XDDRLUUURCCRLCDDDLDDDDDDRRRRRRRRDDDDDLDRRRULLLLLLLLLCCDDDDDCCLLDDDDDDDDDDDDDRRRRRRRRCCDRRRRRRRRRRR",
+          "label": "Livraison est remplacée par un chant",
+          "commands": "XCCLLLLDDDDRRRRRRRDLCCDRRRRURRRRRURCLCCXDLLLLLLCCUUURRRRRDDDDDDDLDRRRCCDDDDDLCCDDDDDRRRRRCCRR",
           "metrics": {
-            "actions": 98,
-            "selections": 9,
-            "warriorPushes": 8,
+            "actions": 93,
+            "selections": 15,
+            "warriorPushes": 9,
             "trainPushes": 0,
-            "huntSteps": 9,
-            "monsterHuntMoves": 14,
-            "songs": 1,
+            "huntSteps": 0,
+            "monsterHuntMoves": 0,
+            "songs": 9,
             "groupSongs": 0,
             "songHeroMoves": 0,
             "songStoneMoves": 1,
-            "songMonsterMoves": 0,
+            "songMonsterMoves": 8,
             "supportMoves": 0,
-            "swaps": 0,
+            "swaps": 1,
             "partnerSwaps": 0,
-            "stoneSwaps": 0,
+            "stoneSwaps": 1,
             "monsterSwaps": 0,
-            "bentSwaps": 0,
+            "bentSwaps": 1,
             "multiMirrorSwaps": 0,
-            "swapReflections": 0,
+            "swapReflections": 1,
             "swapLoops": 0,
             "partnerMoves": 0,
             "stoneMoves": 11,
             "mirrorMoves": 0,
-            "reflections": 1,
-            "heroReflections": 0,
+            "reflections": 2,
+            "heroReflections": 1,
             "pistonPushes": 1,
             "platformsCreated": 1,
             "monstersRemoved": 0,
             "blocked": 0,
             "deaths": 0
+          },
+          "final": {
+            "heroes": [
+              {
+                "kind": "warrior",
+                "at": {
+                  "x": 14,
+                  "y": 17
+                },
+                "facing": "E",
+                "dead": false
+              },
+              {
+                "kind": "wizard",
+                "at": {
+                  "x": 10,
+                  "y": 18
+                },
+                "facing": "E",
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 8,
+                  "y": 15
+                },
+                "facing": "W",
+                "dead": false
+              }
+            ],
+            "active": 0,
+            "stones": [],
+            "monsters": [
+              {
+                "x": 6,
+                "y": 6
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ],
+            "supports": [
+              {
+                "x": 13,
+                "y": 17
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 17,
+                  "y": 11
+                },
+                "facing": "NW"
+              }
+            ],
+            "complete": true,
+            "failed": false,
+            "dead": false,
+            "gateClosed": [
+              true,
+              false,
+              true,
+              false,
+              false
+            ]
           }
         }
       ]
     }
   ],
-  "scope": "Revue indépendante de L1 et L3–L8. L2 a été conçu par ce relecteur et possède un rapport séparé, sans label de revue indépendante. Contrôles ciblés et preuves géométriques ; aucune recherche bornée n’est présentée comme une impossibilité universelle."
+  "scope": "Relecture des huit salles 0.2.0 et de leurs causes physiques. Le nouveau rail de N2 a été rédigé par un autre auteur, sur une géométrie 0.1.0 initialement conçue par ce relecteur ; les autres salles sont relues indépendamment de leurs auteurs. Contrôles ciblés, variantes rejouées et preuves géométriques ; aucune recherche bornée n’est présentée comme une impossibilité universelle."
 }

@@ -1,8 +1,8 @@
 {
   "game": "SS19",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "passed",
-  "scope": "Revue des niveaux6–8 par rejeux et variantes constructives, avec preuves géométriques spécifiques au dernier niveau. Aucune unicité ou optimalité des solutions n’est annoncée.",
+  "scope": "Revue des niveaux6–8 sans poursuite autonome : rejeux, variantes constructives, causes physiques visibles et preuves géométriques spécifiques au dernier niveau. N6 conserve absolument sa carte et sa route. Aucune unicité ou optimalité des solutions n’est annoncée.",
   "checks": [
     {
       "id": "level6-witness",
@@ -86,17 +86,17 @@
       "status": "passed",
       "level": 8,
       "metrics": {
-        "actions": 115,
-        "selections": 12,
+        "actions": 97,
+        "selections": 15,
         "warriorPushes": 9,
         "trainPushes": 0,
-        "huntSteps": 12,
-        "monsterHuntMoves": 18,
-        "songs": 1,
+        "huntSteps": 0,
+        "monsterHuntMoves": 0,
+        "songs": 8,
         "groupSongs": 0,
         "songHeroMoves": 0,
         "songStoneMoves": 1,
-        "songMonsterMoves": 0,
+        "songMonsterMoves": 7,
         "supportMoves": 0,
         "swaps": 1,
         "partnerSwaps": 0,
@@ -109,9 +109,9 @@
         "partnerMoves": 0,
         "stoneMoves": 11,
         "mirrorMoves": 0,
-        "reflections": 1,
+        "reflections": 2,
         "heroReflections": 1,
-        "pistonPushes": 1,
+        "pistonPushes": 2,
         "platformsCreated": 1,
         "monstersRemoved": 0,
         "blocked": 0,
@@ -200,8 +200,8 @@
       "pressClosed": true
     },
     {
-      "id": "level7-hunter-can-live",
-      "label": "Une poussée de moins conserve le chasseur derrière son écran et termine aussi",
+      "id": "level7-monster-can-live",
+      "label": "Une poussée de moins conserve le monstre derrière son écran et termine aussi",
       "status": "passed",
       "commands": "DDLUUURRUUUXUURRRDLCLLCDDDDUCCURRRURCUXUULCCLCCULX",
       "metrics": {
@@ -236,7 +236,7 @@
         "blocked": 0,
         "deaths": 0
       },
-      "scope": "Le déplacement du miroir, la destruction du relais, sa réouverture et les arrivées restent nécessaires au parcours ; tuer ce chasseur ne l’est pas."
+      "scope": "Le déplacement du miroir, la destruction du relais, sa réouverture et les arrivées restent nécessaires au parcours ; tuer ce monstre ne l’est pas."
     },
     {
       "id": "level8-resource-geometry",
@@ -252,75 +252,128 @@
         "x": 17,
         "y": 11
       },
-      "proof": "Les murs bordent l’île, sauf la case d’eau13,17. Aucun acteur n’y est initialement présent et aucun axe de miroir n’y arrive. La marche sur un appui est donc la première entrée possible. Le miroir ne peut être poussé sur aucun axe : chaque poussée rencontre un mur d’appui ou un mur d’arrivée."
+      "proof": "Les murs bordent l’île, sauf la case d’eau13,17. Aucun acteur n’y est initialement présent et aucun axe de miroir n’y arrive. Un échange ne peut y créer un premier occupant. Le miroir ne peut être poussé sur aucun axe : chaque poussée rencontre un mur d’appui ou un mur d’arrivée."
     },
     {
       "id": "level8-two-living-weights",
       "label": "Les deux presses-buts exigent les deux monstres dans l’état final",
       "status": "passed",
-      "liveHunters": 2,
+      "liveMonsters": 2,
       "dryCrates": 0,
       "proof": "Les héros sont tous sur les buts, l’unique caisse est immergée et le miroir est immobile. Les deux boutons distincts ne peuvent donc être maintenus que par les deux monstres vivants."
     },
     {
-      "id": "level8-release-too-early",
-      "label": "Relâcher trop tôt la commande renvoie les deux gardiens au-dessus des retenues",
+      "id": "level8-no-autonomous-motion",
+      "label": "Marcher et changer de héros ne provoquent aucun déplacement de monstre",
       "status": "passed",
-      "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLR",
-      "returnedHunters": [
+      "branch": "UDRLCCC",
+      "monsters": [
         {
-          "x": 6,
+          "x": 10,
           "y": 3
         },
         {
-          "x": 12,
+          "x": 17,
           "y": 7
         }
-      ],
-      "remainingHeroAlive": true
+      ]
     },
     {
-      "id": "level8-target-switch",
-      "label": "Changer de sélection ne fait pas marcher les chasseurs ; les pas du Barde les conduisent ensuite aux plaques",
+      "id": "level8-visible-causes",
+      "label": "Chaque déplacement des monstres du témoin appartient à un chant, un reflet ou une presse",
       "status": "passed",
-      "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLCCDDDD",
-      "selectionWithoutTick": true,
-      "arrivalAfterBardSteps": 4
+      "causes": {
+        "song": 7,
+        "reflect": 1,
+        "piston": 1
+      },
+      "scope": "Les mouvements visibles sont ceux des effets physiques exécutés ; aucun pas supplémentaire n’est ajouté entre les phases."
     },
     {
-      "id": "level8-wrong-immersion",
-      "label": "Couler la réserve dans le bras optique perd le seul matériau du pont final",
+      "id": "level8-nearest-monster",
+      "label": "Le premier reflet déplace le monstre proche, sans toucher la réserve lointaine",
       "status": "passed",
-      "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCCDDDLDDDDDDRRRRRRRRRR",
-      "misplacedSupport": {
+      "branch": "X",
+      "arrival": {
         "x": 13,
         "y": 11
       },
-      "waterComponent": [
-        "13,11",
-        "14,11",
-        "15,11",
-        "16,11"
-      ],
-      "proof": "Un appui se déplace uniquement entre cases d’eau. Ce bras est séparé de l’entrée13,17 par du sol ou des murs, donc aucun chant ne peut réparer cette immersion."
+      "reserve": {
+        "x": 17,
+        "y": 5
+      }
     },
     {
-      "id": "level8-direct-reflection-variant",
-      "label": "L’extraction par un reflet initial conserve toutes les contraintes de ressources",
+      "id": "level8-repeat-reflection",
+      "label": "Un reflet répété avant la livraison renvoie le monstre sur son socle",
       "status": "passed",
-      "commands": "XDDRLUUURCCRLCDDDLDDDDDDRRRRRRRRDDDDDLDRRRULLLLLLLLLCCDDDDDCCLLDDDDDDDDDDDDDRRRRRRRRCCDRRRRRRRRRRR",
+      "branch": "XX",
+      "scope": "Le monstre reste la première cible ; deux reflets ne remplacent pas sa mise hors de l’axe."
+    },
+    {
+      "id": "level8-press-before-delivery",
+      "label": "Fermer la presse avant le premier reflet bloque la livraison et allume l’avertissement",
+      "status": "passed",
+      "branch": "DDDDLLX",
+      "redMirrorIndices": [
+        0
+      ],
+      "lastActionRefused": true
+    },
+    {
+      "id": "level8-reopen-empty-press",
+      "label": "Après la livraison, la presse encore fermée continue à bloquer la réserve",
+      "status": "passed",
+      "branch": "XDDDDLLX",
+      "lastActionRefused": true,
+      "scope": "Le monstre est déjà hors du rayon, mais la fermeture matérielle doit encore être supprimée."
+    },
+    {
+      "id": "level8-song-lock",
+      "label": "La porte distincte retient le gardien ouest lorsque le Barde quitte son poste",
+      "status": "passed",
+      "branch": "XDDDDLLRCCLLLLDDDD",
+      "monster": {
+        "x": 6,
+        "y": 6
+      },
+      "blockingDoor": {
+        "x": 6,
+        "y": 7
+      },
+      "scope": "Le bouton et la porte sont deux cases différentes. Le prochain chant est retenu par la porte fermée."
+    },
+    {
+      "id": "level8-wrong-immersion",
+      "label": "Couler la réserve à côté du sas perd le seul matériau du pont final",
+      "status": "passed",
+      "branch": "XDDDDLLRCCLLLLDDDCCRRRRRRRRRURCCUUUUURRRRRRR",
+      "misplacedSupport": {
+        "x": 12,
+        "y": 11
+      },
+      "waterComponent": [
+        "12,11"
+      ],
+      "proof": "Un appui ne glisse qu’entre cases d’eau. Cette case est séparée de l’entrée13,17 par du sol et des murs ; le chant ne peut donc réparer cette immersion."
+    },
+    {
+      "id": "level8-reflected-reserve-variant",
+      "label": "Un second reflet peut extraire la réserve sans utiliser de transposition",
+      "status": "passed",
+      "commands": "XDDDDLLRCCLLLLDDDXDRDDDRRRRLCUUUUURRRRRRDDDDDLDRRRCCDDDCCDDDDDDRRRRRRRRCCRR",
       "metrics": {
-        "actions": 98,
+        "actions": 75,
         "selections": 9,
         "warriorPushes": 8,
         "trainPushes": 0,
-        "huntSteps": 9,
-        "monsterHuntMoves": 14,
-        "songs": 1,
+        "huntSteps": 0,
+        "monsterHuntMoves": 0,
+        "songs": 8,
         "groupSongs": 0,
         "songHeroMoves": 0,
         "songStoneMoves": 1,
-        "songMonsterMoves": 0,
+        "songMonsterMoves": 7,
         "supportMoves": 0,
         "swaps": 0,
         "partnerSwaps": 0,
@@ -333,19 +386,58 @@
         "partnerMoves": 0,
         "stoneMoves": 11,
         "mirrorMoves": 0,
-        "reflections": 1,
+        "reflections": 2,
         "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Les deux dispositifs de gardiens, la livraison de réserve et le pont sont conservés ; la visée coudée du témoin est une possibilité et non une obligation."
+    },
+    {
+      "id": "level8-sung-delivery-variant",
+      "label": "Le chant peut aussi déposer le gardien oriental hors du rayon",
+      "status": "passed",
+      "commands": "XCCLLLLDDDDRRRRRRRDLCCDRRRRURRRRRURCLCCXDLLLLLLCCUUURRRRRDDDDDDDLDRRRCCDDDDDLCCDDDDDRRRRRCCRR",
+      "metrics": {
+        "actions": 93,
+        "selections": 15,
+        "warriorPushes": 9,
+        "trainPushes": 0,
+        "huntSteps": 0,
+        "monsterHuntMoves": 0,
+        "songs": 9,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 8,
+        "supportMoves": 0,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 1,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "reflections": 2,
+        "heroReflections": 1,
         "pistonPushes": 1,
         "platformsCreated": 1,
         "monstersRemoved": 0,
         "blocked": 0,
         "deaths": 0
       },
-      "scope": "La visée coudée et l’ordre de récupération sont illustrés par le témoin mais ne sont pas revendiqués comme des obligations universelles."
+      "scope": "La presse verte reste une solution visible, sans être imposée : un chant depuis11,9 puis un dégagement latéral remplacent sa livraison. Les deux gardiens vivants et la caisse immergée restent utilisés."
     }
   ],
   "totals": {
-    "checks": 15,
-    "passed": 15
+    "checks": 21,
+    "passed": 21
   }
 }

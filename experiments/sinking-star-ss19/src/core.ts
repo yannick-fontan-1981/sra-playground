@@ -123,7 +123,7 @@ export function initialState(w:World):State {
 }
 export interface Motion {readonly actor:'hero'|'stone'|'monster'|'mirror'|'support';readonly from:Point;readonly to:Point}
 export interface MotionPhase {
-  readonly kind:'walk'|'push'|'swap'|'song'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat'|'hunt'|'swap-loop';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
+  readonly kind:'walk'|'push'|'swap'|'song'|'reflect'|'piston'|'crush'|'gate'|'platform'|'combat'|'swap-loop';readonly before:State;readonly after:State;readonly moves:readonly Motion[];
   readonly gateIndex?:number;readonly paths?:readonly (readonly Point[])[];
 }
 export interface DetailedStep {
@@ -359,28 +359,6 @@ function resolveCombat(w:World,s:State):State {
   if(heroes.every((h,i)=>!!h.dead===!!s.heroes[i]!.dead)&&monsters.length===s.monsters.length)return s;
   return {...s,heroes,dead:heroes.some(h=>h.dead),monsters,complete:false};
 }
-/** One simultaneous pursuit step, after the player's contacts have resolved.
- * The largest coordinate difference selects the axis; vertical wins ties.
- * There is no path finding and no second-axis fallback. Occupancy is sampled
- * before all moves; hunters never push, follow a vacated cell or enter bare
- * water. If several hunters request one free destination, they all stay put.
- */
-function huntStep(w:World,s:State):{state:State;moves:Motion[]} {
-  if(s.dead)return {state:s,moves:[]};
-  const target=s.heroes[s.active]!.at,proposals:Motion[]=[];
-  for(const from of s.monsters){
-    const dx=target.x-from.x,dy=target.y-from.y;
-    if(!dx&&!dy)continue;
-    const direction:Direction=Math.abs(dy)>=Math.abs(dx)?(dy<0?'N':'S'):(dx<0?'W':'E');
-    const to=offset(from,direction);
-    if(blocked(w,s,to)||!supported(w,s,to)||actorAt(s,to))continue;
-    proposals.push({actor:'monster',from,to});
-  }
-  const counts=new Map<string,number>();
-  for(const m of proposals)counts.set(keyOf(m.to),(counts.get(keyOf(m.to))??0)+1);
-  const moves=proposals.filter(m=>counts.get(keyOf(m.to))===1);
-  return {state:moves.length?applyMotions(w,s,moves):s,moves};
-}
 /** Settle switches, water and simultaneous contact combat to a fixed point.
  * Every monster can disappear once, so the contact-wave bound is finite.
  */
@@ -423,14 +401,10 @@ export function stepDetailed(w:World,s:State,actionId:number,data?:Point):Detail
   }
   if(!safeDoors(w,next))return refusal();
   const phases:MotionPhase[]=[first];
-  // Contacts caused by the player's move happen before pursuit: a monster
-  // cannot escape an already adjacent opponent, nor spare an adjacent hero.
-  const immediate=settleContacts(w,next,phases);if(!immediate.stable)return refusal();next=immediate.state;
-  const hunt=huntStep(w,next);
-  if(hunt.moves.length){
-    phases.push({kind:'hunt',before:next,after:hunt.state,moves:hunt.moves});next=hunt.state;
-    const pursued=settleContacts(w,next,phases);if(!pursued.stable)return refusal();next=pursued.state;
-  }
+  // Only the player's powers and circuit presses transport monsters. After
+  // those physical movements, settle water and simultaneous contact combat
+  // before checking goals; no autonomous movement follows the action.
+  const settled=settleContacts(w,next,phases);if(!settled.stable)return refusal();next=settled.state;
   if(!safeDoors(w,next))return refusal();next={...next,complete:completed(w,next)};
   const last=phases.at(-1)!;phases[phases.length-1]={...last,after:next};return {state:next,phases};
 }
@@ -560,7 +534,7 @@ function phaseFrames(w:World,phase:MotionPhase):number[][][] {
     for(const m of phase.moves){const h=before.heroes.find(h=>equal(h.at,m.from)),c=m.actor==='hero'&&h?heroColor(h):m.actor==='stone'?13:8;stamp(flash,m.from,m.actor==='hero'?cross(0):square(c,0));stamp(transfer,m.to,m.actor==='hero'?cross(1):square(1,m.actor==='stone'?13:8));}
     return [flash,transfer,renderWorld(w,phase.after)];
   }
-  if(!['walk','push','song','piston','hunt'].includes(phase.kind))return [renderWorld(w,phase.after)];
+  if(!['walk','push','song','piston'].includes(phase.kind))return [renderWorld(w,phase.after)];
   const frames=[1,2].map(pixels=>{
     const stationarySupports=before.supports.filter(p=>!phase.moves.some(m=>m.actor==='support'&&equal(m.from,p)));
     const bard=before.heroes.find(h=>h.kind==='bard'),bardMove=bard?phase.moves.find(m=>m.actor==='hero'&&equal(m.from,bard.at)):undefined;
