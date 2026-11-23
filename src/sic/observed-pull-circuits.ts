@@ -66,9 +66,9 @@ function readField(roles: PullKnowledge, route: CoverageTransfer, rows: NativeRo
   const gates: Control[] = [];
   if (latch && latches.length) {
     const controls = Object.keys(marks);
-    if (shutters.length || latches.length !== 1 || !latches[0]!.closed || !controls.length
+    if (shutters.length || latches.some(gate => !gate.closed) || !controls.length
       || controls.some(cell => marks[cell] !== latch.mark)) return;
-    gates.push({ at: latches[0]!.at, marks: controls, pattern: latch });
+    gates.push(...latches.map(({ at }) => ({ at, marks: controls, pattern: latch })));
   } else if (!shutters.length || marked.size !== shutters.length || new Set(shutters.map(gate => gate.accent)).size !== shutters.length) return;
   for (const { at, rim, accent, back, closed } of shutters) {
     const controls = marked.get(accent);
@@ -82,6 +82,16 @@ function readField(roles: PullKnowledge, route: CoverageTransfer, rows: NativeRo
 }
 
 const occupied = (pose: Pose, cell: Cell) => pose.actor === cell || pose.bodies.includes(cell);
+const maximumRouteStates = 70_000;
+
+function fitsExactPressureSearch({ field, pose }: PullCircuitBinding): boolean {
+  const cells = field.floor.length, movable = pose.bodies.length;
+  const placements = Math.min(movable, cells - movable);
+  // The gates are determined by occupancy. Count only distinct crate arrangements and actor positions.
+  let states = cells - movable;
+  for (let i = 1; i <= placements && states <= maximumRouteStates; i++) states = states * (cells - i + 1) / i;
+  return states <= maximumRouteStates;
+}
 
 function findRoute(field: Field, start: Pose, moves: readonly { action: NativeCommand; delta: NativePoint }[], remaining: number) {
   const floor = new Set(field.floor);
@@ -94,7 +104,7 @@ function findRoute(field: Field, start: Pose, moves: readonly { action: NativeCo
   type Node = { pose: Pose; distance: number; previous?: Node; action?: NativeCommand };
   const queue: Node[] = [{ pose: start, distance: 0 }];
   const seen = new Set([JSON.stringify(start)]);
-  for (let index = 0; index < queue.length && index < 70_000; index++) {
+  for (let index = 0; index < queue.length && index < maximumRouteStates; index++) {
     const current = queue[index]!, { pose, distance } = current;
     if (pose.actor === field.goal) {
       const route: Step[] = [];
@@ -183,7 +193,8 @@ export function planPullCircuit(roles: PullKnowledge, transfer: CoverageTransfer
   const moves = inputs.flatMap(action => roles.moves[action.action_ref] ? [{ action, delta: roles.moves[action.action_ref]!.delta }] : []);
   if (moves.length !== inputs.length) return;
   const latch = scene.field.gates.find(gate => 'pattern' in gate);
-  const path = latch ? pressureRoute(scene, moves, latch, remaining).steps : findRoute(scene.field, scene.pose, moves, remaining);
+  const path = latch && !fitsExactPressureSearch(scene)
+    ? pressureRoute(scene, moves, latch, remaining).steps : findRoute(scene.field, scene.pose, moves, remaining);
   if (!path?.length) return;
   const change = path.findIndex(step => step.after.closed.some((closed, index) => closed !== scene.pose.closed[index]));
   const steps = path.slice(0, Math.min(maximumCommittedActions, change < 0 ? path.length : change + 1));
@@ -212,7 +223,7 @@ export function observePullPressureBinding(roles: PullKnowledge, transfer: Cover
   }
   if (actors.length !== 1 || bodies.length !== previous.pose.bodies.length) return;
   const actor = actors[0]!;
-  const pose = { actor, bodies: bodies.sort(), closed: [!gate.marks.every(mark => mark === actor || bodies.includes(mark))] };
+  const pose = pressurePose(field, gate.marks, actor, bodies.sort());
   return matchesPullCircuit(roles, field, pose, rows) ? { field, pose } : undefined;
 }
 
@@ -227,12 +238,16 @@ export function provesPullPressureDeadlock(roles: PullKnowledge, start: Pose, cu
 function pressureRoute(scene: PullCircuitBinding, moves: readonly { action: NativeCommand; delta: NativePoint }[],
   latch: PressureGate, remaining: number) {
   const { field, pose } = scene;
-  const search = searchPullCoverage(pose.actor, new Set(pose.bodies), { exit: field.goal, marks: latch.marks, gate: [latch.at] },
+  const search = searchPullCoverage(pose.actor, new Set(pose.bodies), { exit: field.goal, marks: latch.marks, gate: field.gates.map(gate => gate.at) },
     new Set(field.floor), moves.map(({ action, delta }) => ({ input: action.action_ref, delta })), [], remaining);
-  const steps = search.route?.map(({ input, actor, arrangement }): Step => {
-    const bodies = arrangement.split(';');
-    return { action: moves.find(move => move.action.action_ref === input)!.action,
-      after: { actor, bodies, closed: [!latch.marks.every(mark => mark === actor || bodies.includes(mark))] } };
-  });
+  const steps = search.route?.map(({ input, actor, arrangement }): Step => ({
+    action: moves.find(move => move.action.action_ref === input)!.action,
+    after: pressurePose(field, latch.marks, actor, arrangement.split(';')),
+  }));
   return { steps, exhausted: search.exhausted };
+}
+
+function pressurePose(field: Field, marks: readonly Cell[], actor: Cell, bodies: Cell[]): Pose {
+  const held = marks.every(mark => mark === actor || bodies.includes(mark));
+  return { actor, bodies, closed: field.gates.map(() => !held) };
 }

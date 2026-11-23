@@ -263,4 +263,43 @@ for (const mirrored of [false, true]) test(`pull and exit roles transfer to guar
   }
   assert.equal(board.levelsCompleted, 3);
   assert.ok(turns <= 75 && decisions <= 8);
+
+  const fourthTransfer = { ...transfer, epoch: 3, ref: 'fourth-level-entry' };
+  const fourthRows = recolor(board.frame);
+  const shared = planPullCircuit(roles, fourthTransfer, fourthRows, inputs, 40);
+  assert.ok(shared);
+  assert.equal(shared.field.gates.length, 2);
+  const [relay, otherRelay] = shared.field.gates;
+  assert.ok(relay && otherRelay && 'pattern' in relay && 'pattern' in otherRelay);
+  assert.equal(relay.marks.length, 2);
+  assert.deepEqual(relay.marks, otherRelay.marks);
+  const partial = fourthRows.map(row => [...row]);
+  const [dx, dy] = otherRelay.at.split(',').map(Number) as [number, number];
+  for (const [i, ink] of otherRelay.pattern.open.split(',').map(Number).entries()) {
+    partial[dy + Math.floor(i / 3)]![dx + i % 3] = ink;
+  }
+  assert.equal(matchesPullCircuit(roles, shared.field, shared.start, partial), false);
+  assert.equal(planPullCircuit(roles, fourthTransfer, partial, inputs, 40), undefined);
+
+  binding = undefined;
+  turns = 0;
+  decisions = 0;
+  let observedBothOpen = false;
+  while (board.levelsCompleted === 3 && turns < 40) {
+    const plan = planPullCircuit(roles, fourthTransfer, recolor(board.frame), inputs, 40 - turns, binding);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16);
+    decisions++;
+    for (const step of plan.steps) {
+      board = await game.dispatch({ type: 'action', actionId: actionIds.get(step.action.action_ref)! });
+      turns++;
+      if (board.levelsCompleted > 3) break;
+      assert.ok(matchesPullCircuit(roles, plan.field, step.after, recolor(board.frame)));
+      observedBothOpen ||= step.after.closed.every(closed => !closed);
+      binding = { field: plan.field, pose: step.after };
+    }
+  }
+  assert.ok(observedBothOpen);
+  assert.equal(board.levelsCompleted, 4);
+  assert.equal(turns, 40);
+  assert.ok(decisions <= 6);
 });
