@@ -182,7 +182,7 @@ test('Wizard substitution preserves both weights of an AND circuit without a hyd
 
 test('Wizard swaps a monster into simultaneous combat while remaining safe',()=>{
  const f=fixture({Z:[3,7],monsters:[[10,7],[3,6]]}),d=act(f,'wizard',4);assert.equal(d.state.dead,false);assert.deepEqual(hero(d.state,'wizard').at,p(10,7));assert.deepEqual(d.state.monsters,[]);assert.deepEqual(d.phases.map(p=>p.kind),['swap','combat']);
- const weight=fixture({Z:[3,7],monsters:[[10,7]],walls:[[4,7]],circuits:[{id:'a',buttons:[p(3,7)]}],gates:[{at:p(14,7),circuit:'a',direction:'E',closedWhen:'released'}]}),held=act(weight,'wizard',4);assert.equal(held.state.dead,false);assert.equal(held.state.monsters.length,1);assert.equal(circuitPressed(weight.world,held.state,'a'),true);assert.deepEqual(held.state.gateClosed,[false]);
+ const weight=fixture({Z:[3,7],monsters:[[10,7]],circuits:[{id:'a',buttons:[p(3,7)]}],gates:[{at:p(14,7),circuit:'a',direction:'E',closedWhen:'released'}]}),held=act(weight,'wizard',4);assert.equal(held.state.dead,false);assert.deepEqual(held.state.monsters,[p(3,7)]);assert.equal(circuitPressed(weight.world,held.state,'a'),true);assert.deepEqual(held.state.gateClosed,[false]);
 });
 
 test('global reflection chooses the nearest actor in every quadrant independently of the selected role',()=>{
