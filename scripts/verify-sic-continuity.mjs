@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
 import { compileLevel, equal, initialState, stepWorld } from '../experiments/sinking-star-ss02/src/core.ts';
 import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
+import { compileLevel as compilePullLevel, initialState as initialPullState, stepDetailed as stepPullWorld } from '../experiments/sinking-star-ss03/src/core.ts';
+import { SS03_LEVELS } from '../experiments/sinking-star-ss03/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -29,7 +31,7 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move' };
 
 function consecutiveStonePushes(level, tickets) {
   const world = compileLevel(SS02_LEVELS[level - 1]);
@@ -72,6 +74,27 @@ function consecutiveStonePushes(level, tickets) {
   return pairs;
 }
 
+function consecutiveStonePulls(level, tickets) {
+  const world = compilePullLevel(SS03_LEVELS[level - 1]);
+  let state = initialPullState(world), previous;
+  const pairs = [];
+  for (const [index, ticket] of tickets.entries()) {
+    if (ticket.resets !== previous?.resets) state = initialPullState(world);
+    const detail = stepPullWorld(world, state, Number(ticket.action.slice(6)));
+    const phase = detail.phases[0];
+    const pull = detail.phases.length === 1 && phase?.kind === 'pull' ? phase.moves.find(move => move.actor === 'stone') : undefined;
+    if (pull && previous?.pull && equal(previous.pull.to, pull.from)
+      && ticket.actionIndex > 0 && ticket.decisionRevision === previous.revision && ticket.resets === previous.resets) {
+      pairs.push({ kind: 'pull', first: index, last: index + 1 });
+    }
+    previous = { revision: ticket.decisionRevision, resets: ticket.resets, pull };
+    state = detail.state;
+  }
+  assert.equal(state.complete, true, 'Executed SS03 L' + level + ' tickets do not reproduce the official goal');
+  assert.ok(pairs.length, 'SS03 L' + level + ' lost consecutive pulls of the same stone');
+  return pairs;
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -80,7 +103,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 2 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -131,7 +154,7 @@ export function checkRun(run) {
       );
     } else assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
     const physical = reference ? measureManipulation(row.level, issued)
-      : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : [];
+      : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -161,6 +184,7 @@ function main() {
     for (const [name, cohort, end, cap] of [
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
+      ['la-ruse-verte', 'SS03', '2', '120'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -174,7 +198,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

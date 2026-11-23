@@ -16,17 +16,19 @@ export type CoverageLearning = {
   refs: string[]; deadlock?: { ref: string; key: string; bodies: string[] }; recovered: string[];
 };
 export type CoveragePlan = { command: NativeCommand; motion: Motion; marks: string[]; exit: string; evidence: string[];
-  covered: boolean; verifyBarrier?: true; pullRoute?: readonly PullStep[]; pushSeries?: readonly CoveragePushStep[] };
+  covered: boolean; verifyBarrier?: true; pullRoute?: readonly PullStep[]; pushSeries?: readonly CoverageMovementStep[];
+  pullSeries?: CoveragePullSeries };
 
-type PushPose = { actor: string; arrangement: string };
-export type CoveragePushStep = {
+type CoveragePose = { actor: string; arrangement: string };
+export type CoverageMovementStep = {
   command: NativeCommand;
-  before: PushPose;
-  after: PushPose;
+  before: CoveragePose;
+  after: CoveragePose;
   landing: string;
   substrate: string;
   changed: NativeBox[];
 };
+export type CoveragePullSeries = { steps: CoverageMovementStep[]; gates: { cell: string; pixels: string }[] };
 
 const at = (value: string): NativePoint => value.split(',').map(Number) as [number, number];
 const tag = (p: NativePoint) => p.join(',');
@@ -175,7 +177,7 @@ function seenPull(local: CoverageLearning, from: string, delta: NativePoint, fir
 
 export function observeCoverage(previous: CoverageLearning | undefined, travel: ObservedTravel | undefined,
   returned: ObservedTravel | undefined, before: NativeRows, after: NativeRows, command: NativeCommand, ref: string,
-  pullRoute?: readonly PullStep[]): CoverageLearning | undefined {
+  pullRoute?: readonly PullStep[], retainedPullPremises = true): CoverageLearning | undefined {
   if (!travel?.actor || !returned?.actor || travel.grid.ink !== returned.grid.ink) return previous;
   const displacement = returned.moves[command.action_ref]?.delta;
   if (!displacement) return previous;
@@ -216,10 +218,14 @@ export function observeCoverage(previous: CoverageLearning | undefined, travel: 
   }
   if (changed.motion === 'pull' && changed.layout && changed.body && pullRoute?.length) {
     const predicted = pullRoute[0]!;
+    const layout = changed.layout;
     const cells = returnedCells ?? readTravelGrid(after, travel.grid).cells;
-    const arrangement = arrangementOf(bodiesAt(cells, changed.body, changed.layout));
+    const arrangement = arrangementOf(bodiesAt(cells, changed.body, layout));
     if (command.action_ref === predicted.input && returned.actor === predicted.actor && predicted.arrangement === arrangement) {
-      changed = { ...changed, pullRoute: { anchor: pullAnchor(predicted.actor, arrangement, changed.layout, cells), steps: pullRoute.slice(1) } };
+      changed = { ...changed };
+      if (retainedPullPremises) {
+        changed.pullRoute = { anchor: pullAnchor(predicted.actor, arrangement, layout, cells), steps: pullRoute.slice(1) };
+      } else delete changed.pullRoute;
     } else {
       const start = arrangementOf(bodiesAt(readTravelGrid(before, travel.grid).cells, changed.body, changed.layout));
       const refusal = refusalKey(from, start, command.action_ref);
@@ -348,7 +354,7 @@ function pushSteps(path: PushPath | undefined) {
 }
 
 function bindPushSeries(route: ReturnType<typeof pushSteps>, initial: Position, cells: Cells, layout: Layout, pitch: number, remaining: number) {
-  const series: CoveragePushStep[] = [];
+  const series: CoverageMovementStep[] = [];
   const covered = (pose: Position) => layout.marks.every(mark => pose.bodies.has(mark));
   let pushDirection: string | undefined;
   for (const { input, landing, from, to } of route.slice(0, Math.min(remaining, maximumCommittedActions))) {
@@ -376,18 +382,57 @@ function bindPushSeries(route: ReturnType<typeof pushSteps>, initial: Position, 
   return series.length > 1 ? series : undefined;
 }
 
-function matchesPushPose(local: CoverageLearning, board: ReturnType<typeof readTravelGrid>, pose: PushPose) {
+function matchesCoveragePose(local: CoverageLearning, board: ReturnType<typeof readTravelGrid>, pose: CoveragePose) {
   return !!local.body && board.pieces.length === 1 && board.pieces[0] === pose.actor
     && arrangementOf(bodiesAt(board.cells, local.body, local.layout)) === pose.arrangement;
 }
 
-export function coveragePushPremise(local: CoverageLearning, travel: ObservedTravel, rows: NativeRows, step: CoveragePushStep) {
+export function coveragePushPremise(local: CoverageLearning, travel: ObservedTravel, rows: NativeRows, step: CoverageMovementStep) {
   const board = readTravelGrid(rows, travel.grid);
-  return matchesPushPose(local, board, step.before) && stamp(board.cells.get(step.landing)) === step.substrate;
+  return matchesCoveragePose(local, board, step.before) && stamp(board.cells.get(step.landing)) === step.substrate;
 }
 
-export function coveragePushReturn(local: CoverageLearning, travel: ObservedTravel, before: NativeRows, after: NativeRows, step: CoveragePushStep) {
-  return matchesPushPose(local, readTravelGrid(after, travel.grid), step.after) && unchangedOutside(before, after, step.changed);
+export function coveragePushReturn(local: CoverageLearning, travel: ObservedTravel, before: NativeRows, after: NativeRows, step: CoverageMovementStep) {
+  return matchesCoveragePose(local, readTravelGrid(after, travel.grid), step.after) && unchangedOutside(before, after, step.changed);
+}
+
+export function bindPullSeries(route: readonly PullStep[], actor: string, bodies: Set<string>, cells: Cells, layout: Pick<Layout, 'marks' | 'gate'>,
+  pitch: number, remaining: number): CoveragePullSeries | undefined {
+  const initial = new Set([actor, ...bodies]);
+  const gates = layout.gate.map(cell => ({ cell, pixels: stamp(cells.get(cell)) }));
+  if (gates.some(gate => !gate.pixels || initial.has(gate.cell))) return;
+  const gateCells = new Set(layout.gate), steps: CoverageMovementStep[] = [];
+  let before = { actor, arrangement: arrangementOf(bodies) };
+  const covered = (pose: CoveragePose) => layout.marks.every(mark => pose.arrangement.split(';').includes(mark));
+  for (const { input, actor: landing, arrangement } of route.slice(0, Math.min(remaining, maximumCommittedActions))) {
+    const after = { actor: landing, arrangement };
+    const oldBodies = new Set(before.arrangement.split(';')), newBodies = new Set(arrangement.split(';'));
+    const changedCells = [before.actor, landing, ...[...oldBodies].filter(cell => !newBodies.has(cell)),
+      ...[...newBodies].filter(cell => !oldBodies.has(cell))];
+    // A gate transition or a hidden landing needs a fresh observation before further commands.
+    const substrate = stamp(cells.get(landing));
+    if (!substrate || initial.has(landing) || changedCells.some(cell => gateCells.has(cell)) || covered(before) !== covered(after)) break;
+    const changed = changedCells.map((cell): NativeBox => {
+      const [x, y] = at(cell);
+      return [x, y, x + pitch - 1, y + pitch - 1];
+    });
+    steps.push({ command: { action_ref: input, data: {} }, before, after, landing, substrate, changed });
+    before = after;
+  }
+  return steps.length > 1 ? { steps, gates } : undefined;
+}
+
+export function matchesPullGates(series: CoveragePullSeries, travel: ObservedTravel, rows: NativeRows) {
+  return series.gates.every(({ cell, pixels }) => stamp(readTravelCell(rows, travel.grid, at(cell))) === pixels);
+}
+
+export function coveragePullPremise(local: CoverageLearning, travel: ObservedTravel, rows: NativeRows, series: CoveragePullSeries, index: number) {
+  return matchesPullGates(series, travel, rows) && coveragePushPremise(local, travel, rows, series.steps[index]!);
+}
+
+export function coveragePullReturn(local: CoverageLearning, travel: ObservedTravel, before: NativeRows, after: NativeRows,
+  series: CoveragePullSeries, index: number) {
+  return matchesPullGates(series, travel, after) && coveragePushReturn(local, travel, before, after, series.steps[index]!);
 }
 
 function pullPath(actor: string, pieces: Set<string>, layout: Layout, ground: ReadonlySet<string>, moves: readonly Move[],
@@ -480,11 +525,13 @@ export function chooseCoverage(local: CoverageLearning | undefined, travel: Obse
   const input = route?.[0]?.input ?? pushed[0]?.input;
   const pushSeries = pieces.length === 1 && pieces[0] === start.actor
     ? bindPushSeries(pushed, start, cells, layout, travel.grid.pitch, remaining) : undefined;
+  const pullSeries = route && pieces.length === 1 && pieces[0] === start.actor
+    ? bindPullSeries(route, start.actor, bodies, cells, layout, travel.grid.pitch, remaining) : undefined;
   const verify = input || motion === 'pull' ? undefined : measureBarrier(local, layout, cells, ground, travel.actor, bodies, moves, travel.grid.floor);
   return input || verify ? { command: { action_ref: (input ?? verify)!, data: {} }, motion, marks: layout.marks, exit: layout.exit,
     evidence: [...new Set([...local.refs, ...moves.map(move => travel.moves[move.input]!.ref)])],
     covered: layout.marks.every(mark => bodies.has(mark)), ...(verify ? { verifyBarrier: true } : {}),
-    ...(route?.length ? { pullRoute: route } : {}), ...(pushSeries ? { pushSeries } : {}) } : undefined;
+    ...(route?.length ? { pullRoute: route } : {}), ...(pushSeries ? { pushSeries } : {}), ...(pullSeries ? { pullSeries } : {}) } : undefined;
 }
 
 export function retainCoverageAfterReset(local: CoverageLearning): CoverageLearning {

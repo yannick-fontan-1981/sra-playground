@@ -27,12 +27,14 @@ import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } f
 import { repeatedInputTargets } from './repeated-input-targets.ts';
 import { annotateTravelMarks, chooseAnnotatedMarkContact, chooseSeparationTrial, chooseTravelTrial, travelOccupies, observedTravelActor, observeTravel,
   readTravelGrid, type MarkContact, type ObservedTravel } from './observed-travel-frontier.ts';
-import { chooseCoverage, coveragePushPremise, coveragePushReturn, hasObservedCoverage, observeCoverage, observedCoverageDeadlock,
-  rememberCoverageWin, retainCoverageAfterReset, type CoverageLearning, type CoveragePushStep, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
+import { chooseCoverage, coveragePullPremise, coveragePullReturn, coveragePushPremise, coveragePushReturn, hasObservedCoverage,
+  observeCoverage, observedCoverageDeadlock, rememberCoverageWin, retainCoverageAfterReset,
+  type CoverageLearning, type CoverageMovementStep, type CoveragePullSeries, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
 import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindingAfter, pushAccessBox, rebindPushAccess, rememberPushAccess,
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
-import { checkContactPrediction, chooseContactExperiment, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
+import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
+  contactPullReturn, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
 import { assessPressurePlan, choosePressureReserve, observePressureReserve, retainPressureReserve,
   type PressurePlan, type PressureReserve } from './observed-pressure-reserve.ts';
 import { sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
@@ -180,7 +182,9 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   slotTransfer?: { layout: VisibleSlotLayout; ref: string };
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
-  coveragePushSeries?: readonly CoveragePushStep[];
+  coveragePushSeries?: readonly CoverageMovementStep[];
+  coveragePullSeries?: CoveragePullSeries;
+  contactPullSeries?: CoveragePullSeries;
   pushAccessPlan?: PushAccessPlan & { travel: ObservedTravel; roles: PushAccessKnowledge };
   coveragePlacement?: true;
   separationTest?: string;
@@ -1054,9 +1058,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const series=!walk && frontier===travelFrontier && travel && 'approach' in travel && Array.isArray(travel.approach)
         ? bindWalkingSeries(travel.approach,rows,remaining):undefined;
       const pushSeries = !walk && !series && frontier === coverageFrontier ? coverage?.pushSeries : undefined;
+      const pullSeries = !walk && !series && frontier === coverageFrontier ? coverage?.pullSeries : undefined;
+      const contactSeries = !walk && !series && !pushSeries && !pullSeries && selectedExperiment && local.travel && local.contactMemory && local.coverage
+        ? bindContactPullSeries(selectedExperiment, local.travel, local.contactMemory, local.coverage, rows, remaining) : undefined;
       const steps = series ? series.map(step => ({ action: step.command, expected_after: step.to }))
         : walk ? walk.route.map(step => ({ action: step.command, expected_after: step.to }))
-        : pushSeries?.map(step => ({ action: step.command, expected_after: visibleCellBox(step.after.actor) }));
+        : (pushSeries ?? pullSeries?.steps ?? contactSeries?.steps)?.map(step => ({ action: step.command, expected_after: visibleCellBox(step.after.actor) }));
       const id = `public-input:${need.id}`, actions = steps?.map(step => step.action) ?? [command];
       const witness = command.action_ref === 'ACTION6'
         ? await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence: proof })
@@ -1064,6 +1071,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       return {
         status: 'proposed', kind: publicInputExplorationId, actions, ...(series?{walkingSeries:series}:{}), source, candidates: keys, needId: need.id,
         ...(pushSeries ? { coveragePushSeries: pushSeries } : {}),
+        ...(pullSeries ? { coveragePullSeries: pullSeries } : {}),
+        ...(contactSeries ? { contactPullSeries: contactSeries } : {}),
         ...(selectedFallback ? { fallbackProjection: selectedFallback } : {}),
         ...(slotLayout && slotMove && selectedProjection === slot ? { slotPlan: { layout: slotLayout, move: slotMove } } : {}),
         ...(selectedEntry ? { entryPlan: selectedEntry } : {}),
@@ -1194,6 +1203,18 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         return { admitted, reason: admitted ? 'push_access_premise_witnessed' : 'push_access_premise_changed' };
       }
       const push = proposal.coveragePushSeries?.[index];
+      const contact = proposal.contactPullSeries;
+      if (contact) {
+        const admitted = !!state.coverage && !!state.travel && (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
+          && contactPullPremise(contact, index, state.travel, state.coverage, packet.frame_rows);
+        return { admitted, reason: admitted ? 'contact_pull_step_bound' : 'contact_pull_premise_changed' };
+      }
+      const pull = proposal.coveragePullSeries;
+      if (pull) {
+        const admitted = !!state.coverage && !!state.travel && (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
+          && coveragePullPremise(state.coverage, state.travel, packet.frame_rows, pull, index);
+        return { admitted, reason: admitted ? 'coverage_pull_step_bound' : 'coverage_pull_premise_changed' };
+      }
       if (push) {
         const admitted = !!state.coverage && !!state.travel && (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
           && coveragePushPremise(state.coverage, state.travel, packet.frame_rows, push);
@@ -1231,6 +1252,20 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
       }
       const push = proposal.coveragePushSeries?.[index];
+      const contact = proposal.contactPullSeries;
+      if (contact) {
+        const matched = !!state.coverage && !!state.travel && contactPullReturn(contact, index, state.travel, state.coverage, rows, afterRows);
+        return { matched: scored || matched, seal_prefix: scored || !matched,
+          reason: scored ? 'official_boundary' : matched ? 'contact_pull_confirmed' : 'contact_pull_contradicted',
+          ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
+      }
+      const pull = proposal.coveragePullSeries;
+      if (pull) {
+        const matched = !!state.coverage && !!state.travel && coveragePullReturn(state.coverage, state.travel, rows, afterRows, pull, index);
+        return { matched: scored || matched, seal_prefix: scored || !matched,
+          reason: scored ? 'official_boundary' : matched ? 'coverage_pull_confirmed' : 'coverage_pull_contradicted',
+          ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
+      }
       if (push) {
         const matched = !!state.coverage && !!state.travel && coveragePushReturn(state.coverage, state.travel, rows, afterRows, push);
         return { matched: scored || matched, seal_prefix: scored || !matched,
@@ -1450,13 +1485,17 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           const exchange = observeExchange(state.exchange, previous, travel, rows, afterRows, command,
             after.observation_ref, frames, proposal.exchangePlan?.prediction);
           if (exchange) state.exchange = exchange;
-          const coverage = observeCoverage(state.coverage, previous, travel, rows, afterRows, command, after.observation_ref, proposal.pullRoute);
+          const pull = proposal.coveragePullSeries;
+          const retainedPullPremises = !pull || !!state.coverage && !!previous && coveragePullReturn(state.coverage, previous, rows, afterRows, pull, index);
+          const coverage = observeCoverage(state.coverage, previous, travel, rows, afterRows, command, after.observation_ref,
+            proposal.pullRoute?.slice(index), retainedPullPremises);
           if (coverage) state.coverage = coverage;
           const acquired = observePushAccess(state.pushAccess, previous, travel, rows, afterRows, command, after.observation_ref, coverage);
           if (acquired) state.pushAccess = acquired;
           if (fallback && previous && travel && coverage?.motion && state.coverageTransfer?.epoch === before.level_epoch - 1) {
+            const experiment = proposal.contactExperiment;
             const contactMemory = observeContactExperiment(state.contactMemory, state.coverageTransfer, coverage, previous, travel,
-              rows, afterRows, command, after.observation_ref, proposal.contactExperiment);
+              rows, afterRows, command, after.observation_ref, experiment && contactExperimentAt(experiment, index));
             if (contactMemory) state.contactMemory = contactMemory;
           }
         }

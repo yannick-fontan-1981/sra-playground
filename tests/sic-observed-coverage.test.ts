@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
-import { chooseCoverage, coveragePushPremise, coveragePushReturn, hasObservedCoverage, observeCoverage, retainCoverageAfterReset,
+import { chooseCoverage, coveragePullPremise, coveragePullReturn, coveragePushPremise, coveragePushReturn,
+  hasObservedCoverage, observeCoverage, retainCoverageAfterReset,
   type CoverageLearning, type PullStep } from '../src/sic/observed-coverage.ts';
 import { chooseTravelTrial, observeTravel, readTravelGrid, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
@@ -72,19 +73,21 @@ test('placement observes a pair of targets, verifies an irreversible corner and 
   assert.equal(board.levelsCompleted, 1);
 });
 
-test('a measured pull leads to simultaneous coverage and exit with a different palette', async () => {
+for (const mirrored of [false, true]) test(`a measured pull binds guarded series with a different palette${mirrored ? ' and mirrored geometry' : ''}`, async () => {
   const game = createGameDispatcher(async () => { throw new Error('Expected a native game'); });
   let board = await game.dispatch({ type: 'load', code: 'SS03', level: 1 });
   let travel: ObservedTravel | undefined, knowledge: CoverageLearning | undefined, step = 0;
-  const recolor = (rows: typeof board.frame) => rows.map(row => row.map(ink => (ink + 5) % 16));
-  async function learn(actionId: number, route?: readonly PullStep[]) {
+  const recolor = (rows: typeof board.frame) => rows.map(row => (mirrored ? [...row].reverse() : row).map(ink => (ink + 5) % 16));
+  async function learn(actionId: number, route?: readonly PullStep[], acceptReturn = (_before: number[][], _after: number[][]) => true) {
     const before = recolor(board.frame), prior = travel, ref = `return:${++step}`;
     const command = { action_ref: `ACTION${actionId}`, data: {} };
     board = await game.dispatch({ type: 'action', actionId });
-    if (board.levelsCompleted) return;
+    if (board.levelsCompleted) return true;
     const after = recolor(board.frame);
+    const matched = acceptReturn(before, after);
     travel = observeTravel(prior, before, after, command, ref);
-    knowledge = observeCoverage(knowledge, prior, travel, before, after, command, ref, route);
+    knowledge = observeCoverage(knowledge, prior, travel, before, after, command, ref, route, matched);
+    return matched;
   }
   const beforeFirstPull = [
     1, 3, 2, 4, 1, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 1, 2, 2, 1, 3, 2, 1, 3, 2, 2, 4,
@@ -99,16 +102,57 @@ test('a measured pull leads to simultaneous coverage and exit with a different p
   assert.equal(knowledge?.lastPull?.ref, 'return:55');
   assert.equal(knowledge?.layout?.marks.length, 3);
   assert.equal(hasObservedCoverage(knowledge, travel, recolor(board.frame)), false);
-  let covered = false;
+  let covered = false, checkedGate = false, checkedPulls = false;
   for (let i = 0; i < 65 && !board.levelsCompleted; i++) {
-    const route = chooseCoverage(knowledge, travel, recolor(board.frame));
+    const rows = recolor(board.frame);
+    const route = chooseCoverage(knowledge, travel, rows);
     assert.ok(route?.motion === 'pull' && route.pullRoute?.length);
     if (route.covered) {
       covered = true;
       assert.ok(hasObservedCoverage(knowledge, travel, recolor(board.frame)));
     }
-    await learn(Number(route.command.action_ref.slice(6)), route.pullRoute);
+    const bound = route.pullSeries;
+    if (!bound) {
+      await learn(Number(route.command.action_ref.slice(6)), route.pullRoute);
+      continue;
+    }
+    const measuredCoverage = knowledge!, measuredTravel = travel!;
+    let changedGate: ((frame: number[][]) => number[][]) | undefined;
+    if (!checkedGate) {
+      const [x, y] = bound.gates[0]!.cell.split(',').map(Number) as [number, number];
+      changedGate = frame => frame.map((row, j) => j !== y ? row : row.map((ink, k) => k === x ? (ink + 1) % 16 : ink));
+      assert.equal(coveragePullPremise(measuredCoverage, measuredTravel, changedGate(rows), bound, 0), false);
+      const first = bound.steps[0]!;
+      const [bx, by] = first.before.arrangement.split(';')[0]!.split(',').map(Number) as [number, number];
+      const changedBody = rows.map((row, j) => j !== by ? row : row.map((ink, k) => k === bx ? (ink + 1) % 16 : ink));
+      assert.equal(coveragePullPremise(measuredCoverage, measuredTravel, changedBody, bound, 0), false);
+    }
+    let previousPull = false;
+    for (const [index, movement] of bound.steps.entries()) {
+      assert.ok(coveragePullPremise(measuredCoverage, measuredTravel, recolor(board.frame), bound, index));
+      const matched = await learn(Number(movement.command.action_ref.slice(6)), route.pullRoute.slice(index),
+        (before, after) => {
+          const match = coveragePullReturn(measuredCoverage, measuredTravel, before, after, bound, index);
+          if (match && changedGate && !checkedGate) {
+            const altered = changedGate(after);
+            assert.equal(coveragePullReturn(measuredCoverage, measuredTravel, before, altered, bound, index), false);
+            const command = movement.command, observed = observeTravel(measuredTravel, before, altered, command, 'changed-gate');
+            const acquired = observeCoverage(measuredCoverage, measuredTravel, observed, before, altered, command, 'changed-gate',
+              route.pullRoute.slice(index), false);
+            assert.equal(acquired?.pullRoute, undefined);
+            assert.deepEqual(acquired?.pullRefusals, measuredCoverage.pullRefusals);
+            checkedGate = true;
+          }
+          return match;
+        });
+      if (!matched || board.levelsCompleted) break;
+      const pulled = movement.before.arrangement !== movement.after.arrangement;
+      checkedPulls ||= previousPull && pulled;
+      previousPull = pulled;
+    }
   }
   assert.ok(covered);
+  assert.ok(checkedGate);
+  assert.ok(checkedPulls);
   assert.equal(board.levelsCompleted, 1);
 });

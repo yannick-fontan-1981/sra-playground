@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
-import { checkContactPrediction, observeContactExperiment, type ContactMemory } from '../src/sic/contact-transfer.ts';
+import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
+  contactPullReturn, observeContactExperiment, type ContactMemory } from '../src/sic/contact-transfer.ts';
 import { observeCoverage, type CoverageLearning } from '../src/sic/observed-coverage.ts';
 import { chooseSeparationTrial, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 import { createSicPublicInputExploration } from '../src/sic/public-input-exploration.ts';
@@ -59,6 +60,28 @@ test('remote transport requires an observed control and tracks a piece through a
   const prediction = { command, purpose: 'couple_effect' as const, experiment: 'test', actor: '3,6', bodies: ['12,3','15,9'], final:true, evidence:[] };
   assert.ok(checkContactPrediction(prediction, oldTravel, pulled, after));
   assert.equal(checkContactPrediction({...prediction,bodies:['9,3','15,9']}, oldTravel, pulled, after), false);
+});
+
+test('a route toward a patterned destination verifies consecutive pulls, stationary boxes and gate pixels', () => {
+  const cursor = travel('9,3', [-3,0]);
+  cursor.moves.ACTION2 = { delta: [3,0], ref: 'inverse' };
+  const scenery = {'0,3': target, '9,6': control, '15,9': body};
+  const first = scene({...scenery, '9,3': actor, '12,3': body});
+  const second = scene({...scenery, '6,3': actor, '9,3': body});
+  const third = scene({...scenery, '3,3': actor, '6,3': body});
+  const memory: ContactMemory = { exit: '0,3', bodies: ['12,3', '15,9'], features: {}, blocked: {}, effects: [], tested: [], ref: 'gate-observed' };
+  const plan = chooseContactExperiment(memory, transfer, pulled, cursor, first);
+  assert.ok(plan);
+  const bound = bindContactPullSeries(plan, cursor, memory, pulled, first, 16);
+  assert.equal(bound?.steps.length, 2);
+  assert.ok(contactPullPremise(bound, 0, cursor, pulled, first));
+  assert.ok(contactPullReturn(bound, 0, cursor, pulled, first, second));
+  assert.ok(contactPullPremise(bound, 1, cursor, pulled, second));
+  assert.ok(contactPullReturn(bound, 1, cursor, pulled, second, third));
+  assert.equal(contactPullReturn(bound, 1, cursor, pulled, second, scene({...scenery, '3,3': actor, '6,3': body, '9,6': target})), false);
+  assert.equal(contactPullPremise(bound, 1, cursor, pulled, scene({...scenery, '6,3': actor, '9,3': body, '15,9': target})), false);
+  assert.equal(contactExperimentAt(plan, 1).final, false);
+  assert.equal(contactExperimentAt(plan, 2).final, true);
 });
 
 test('recording travel after a push transfer keeps the native checkpoint valid without contact evidence', async () => {
