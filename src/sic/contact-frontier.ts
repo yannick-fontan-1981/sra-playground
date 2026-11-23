@@ -590,12 +590,13 @@ export function proposeFrontierContact(
     : step.boundary ? (project.preparations?.find(v => v.at === step.placed)?.terrain ?? terrainAt(step.placed!))
     : terrainAt(planned?.at ?? project.site);
   const law = m.verified?.[JSON.stringify([project.role, terrain])];
+  const controlRole = board.roles[board.pivotIndex];
   return {
     ...g,
     step,
     project,
     parts: board.parts,
-    controlRole: board.roles[board.pivotIndex],
+    ...(controlRole === undefined ? {} : { controlRole }),
     acquired: verifyEntry,
     transform: board.transport?.op ?? null,
     ref: o.observation_ref,

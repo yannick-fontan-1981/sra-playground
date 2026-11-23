@@ -1453,8 +1453,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           const acquired = observePushAccess(state.pushAccess, previous, travel, rows, afterRows, command, after.observation_ref, coverage);
           if (acquired) state.pushAccess = acquired;
           if (fallback && previous && travel && coverage?.motion && state.coverageTransfer?.epoch === before.level_epoch - 1) {
-            state.contactMemory = observeContactExperiment(state.contactMemory, state.coverageTransfer, coverage, previous, travel,
+            const contactMemory = observeContactExperiment(state.contactMemory, state.coverageTransfer, coverage, previous, travel,
               rows, afterRows, command, after.observation_ref, proposal.contactExperiment);
+            if (contactMemory) state.contactMemory = contactMemory;
           }
         }
       }

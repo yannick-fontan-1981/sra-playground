@@ -1,8 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
 import { checkContactPrediction, observeContactExperiment, type ContactMemory } from '../src/sic/contact-transfer.ts';
 import { observeCoverage, type CoverageLearning } from '../src/sic/observed-coverage.ts';
 import { chooseSeparationTrial, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
+import { createSicPublicInputExploration } from '../src/sic/public-input-exploration.ts';
 
 const body = [8,8,8,8,2,8,8,8,8];
 const actor = [0,6,0,6,6,6,0,6,0];
@@ -56,4 +59,26 @@ test('remote transport requires an observed control and tracks a piece through a
   const prediction = { command, purpose: 'couple_effect' as const, experiment: 'test', actor: '3,6', bodies: ['12,3','15,9'], final:true, evidence:[] };
   assert.ok(checkContactPrediction(prediction, oldTravel, pulled, after));
   assert.equal(checkContactPrediction({...prediction,bodies:['9,3','15,9']}, oldTravel, pulled, after), false);
+});
+
+test('recording travel after a push transfer keeps the native checkpoint valid without contact evidence', async () => {
+  const beforeRows = scene({'6,3': actor, '9,3': body, '18,6': target});
+  const afterRows = scene({'3,3': actor, '9,3': body, '18,6': target});
+  const inputs = ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'];
+  const observe = (rows: number[][], revision: number) => measureNativeObservation({
+    frame_rows: rows, frame_hash: `board-${revision}`, level: 3, levels_completed: 2,
+    available_action_refs: inputs, state: 'NOT_FINISHED',
+  }, revision);
+  const before = await observe(beforeRows, 1), after = await observe(afterRows, 2);
+  const family = createSicPublicInputExploration(true);
+  family.restore({ epoch: 3, experiments: 0, transitions: {}, options: {}, lastChange: null, recheck: null,
+    travel: travel('6,3', [-3,0]), coverage: { ...pulled, motion: 'push' }, coverageTransfer: { ...transfer, motion: 'push' } });
+
+  await family.record(before, after, command, beforeRows, afterRows, {
+    status: 'proposed', kind: family.id, actions: [command], source: 'entry', candidates: inputs, needId: 'observe-travel',
+  }, 0);
+  const checkpoint = retainNativeJson(family.state());
+  assert.equal(Object.hasOwn(checkpoint, 'contactMemory'), false);
+  assert.equal(checkpoint.travel?.actor, '3,3');
+  assert.equal(checkpoint.coverageTransfer?.motion, 'push');
 });
