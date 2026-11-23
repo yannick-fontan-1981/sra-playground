@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativeCommand, NativeRows } from '../src/logos-engine/v6-native-types.ts';
 import { observeCoverage, rememberCoverageWin, type CoverageLearning, type CoverageTransfer } from '../src/sic/observed-coverage.ts';
-import { choosePushAccess, matchesPushAccess, observePushAccess, rebindPushAccess, rememberPushAccess,
+import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindingAfter, rebindPushAccess, rememberPushAccess,
   type PushAccessBinding, type PushAccessKnowledge } from '../src/sic/observed-push-access.ts';
 import { observeTravel, readTravelGrid, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
@@ -81,23 +81,30 @@ for (const mirrored of [false, true]) {
   });
 }
 
-test('witnessed directions, immersion and pressure survive changes of layout and target count', async () => {
+const supportVariants: { name: string; levels: number[]; observe: (rows: NativeRows) => NativeRows }[] = [
+  { name: 'survives changes of layout and target count', levels: [2, 3, 4, 5], observe: rows => rows },
+  { name: 'survives mirroring and palette changes', levels: [5],
+    observe: rows => rows.map(row => [...row].reverse().map(ink => (ink + 5) % 16)) },
+  { name: 'survives swapped axes and a different palette', levels: [5],
+    observe: rows => rows[0]!.map((_, x) => rows.map(row => 15 - row[x]!)) },
+];
+for (const { name, levels, observe } of supportVariants) test(`support planning ${name}`, async () => {
   const game = createGameDispatcher(async () => { throw new Error('Expected the native game'); });
   let board = await game.dispatch({ type: 'load', code: 'SS02' });
   let travel: ObservedTravel | undefined, coverage: CoverageLearning | undefined, knowledge: PushAccessKnowledge | undefined;
-  let transfer: CoverageTransfer | undefined, evidence = 0, witnessRows = board.frame;
+  let transfer: CoverageTransfer | undefined, evidence = 0, witnessRows = observe(board.frame);
   // Public returns from the completed tutorial include a sink, a later crossing and a gate opening.
   const tutorial = [1, 3, 2, 4, 2, 1, 4, 3, 4, 4, 4, 4, 4, 4, 2, 4, 4, 1, 1, 1,
     3, 1, 4, 2, 2, 3, 2, 2, 2, 3, 2, 4, 4, 1, 1, 1, 4, 4, 4, 4];
   for (const actionId of tutorial) {
-    const before = board.frame, command = input(actionId), ref = `tutorial:${++evidence}`;
+    const before = observe(board.frame), command = input(actionId), ref = `tutorial:${++evidence}`;
     board = await game.dispatch({ type: 'action', actionId });
     if (board.levelsCompleted > 0) {
       transfer = rememberCoverageWin(coverage, travel, before, command, 1, ref);
       witnessRows = before;
       break;
     }
-    const after = board.frame, returned = observeTravel(travel, before, after, command, ref);
+    const after = observe(board.frame), returned = observeTravel(travel, before, after, command, ref);
     coverage = observeCoverage(coverage, travel, returned, before, after, command, ref);
     knowledge = observePushAccess(knowledge, travel, returned, before, after, command, ref, coverage);
     travel = returned;
@@ -106,33 +113,42 @@ test('witnessed directions, immersion and pressure survive changes of layout and
   assert.ok(transfer && memory?.roles.conversion?.crossingRef && memory.roles.pressure);
   assert.equal(Object.keys(memory.controls.moves).length, 4);
 
-  for (const level of [2, 3, 4]) {
+  for (const level of levels) {
     board = await game.dispatch({ type: 'selectLevel', level });
-    let binding: PushAccessBinding | undefined, turns = 0, witnessedSupport = false;
+    const cap = level === 5 ? 160 : 120;
+    let binding: PushAccessBinding | undefined, turns = 0, supports = 0, marksHeld = 0, retainedRoute = false;
     const initialCompleted = board.levelsCompleted;
-    while (board.level === level && turns < 120) {
-      const rebound = rebindPushAccess(memory, board.frame, board.availableActionIds.map(id => input(id).action_ref));
+    while (board.level === level && turns < cap) {
+      const rows = observe(board.frame);
+      const rebound = rebindPushAccess(memory, rows, board.availableActionIds.map(id => input(id).action_ref));
       assert.ok(rebound);
-      const plan = choosePushAccess(rebound.roles, transfer, rebound.travel, board.frame, inputs, 120 - turns, binding);
+      const plan = choosePushAccess(rebound.roles, transfer, rebound.travel, rows, inputs, cap - turns, binding);
       assert.ok(plan);
       if (turns === 0) {
         assert.ok(plan.steps.length > 1);
         if (level >= 3) {
           assert.ok(plan.plannedSupport);
-          assert.equal(plan.field.marks.length, level - 2);
+          assert.equal(plan.field.marks.length, level === 3 ? 1 : 2);
         }
       }
-      for (const step of plan.steps) {
+      for (const [index, step] of plan.steps.entries()) {
         board = await game.dispatch({ type: 'action', actionId: Number(step.command.action_ref.slice(6)) });
         turns++;
-        witnessedSupport ||= step.after.supports.length > 0;
-        if (board.level === level) assert.ok(matchesPushAccess(rebound.roles, rebound.travel, board.frame, plan, step.after));
+        supports = step.after.supports.length;
+        marksHeld = plan.field.marks.filter(mark => step.after.bodies.includes(mark)).length;
+        if (board.level === level) assert.ok(matchesPushAccess(rebound.roles, rebound.travel, observe(board.frame), plan, step.after));
         // The persisted checkpoint orders keys independently of the field reader.
         const { gates, goal, ground, marks, water } = plan.field;
-        binding = { field: { gates, goal, ground, marks, water }, supports: step.after.supports };
+        binding = { ...pushAccessBindingAfter(plan, index), field: { gates, goal, ground, marks, water } };
+        retainedRoute ||= !!binding.continuation;
       }
     }
     assert.equal(board.levelsCompleted, initialCompleted + 1);
-    if (level >= 3) assert.ok(witnessedSupport);
+    if (level >= 3) assert.ok(supports > 0);
+    if (level === 5) {
+      assert.equal(supports, 3);
+      assert.equal(marksHeld, 2);
+      assert.ok(retainedRoute);
+    }
   }
 });

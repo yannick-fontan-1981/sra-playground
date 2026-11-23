@@ -36,6 +36,8 @@ function consecutiveStonePushes(level, tickets) {
   let state = initialState(world), previous;
   const pairs = [];
   const crossed = new Set();
+  const pushingFootings = new Set();
+  let exitFooting;
   for (const [index, ticket] of tickets.entries()) {
     if (ticket.resets !== previous?.resets) state = initialState(world);
     const next = stepWorld(world, state, Number(ticket.action.slice(6)));
@@ -43,6 +45,11 @@ function consecutiveStonePushes(level, tickets) {
     // The engine preserves stone order unless a stone is converted into a bridge.
     const moved = state.stones.length === next.stones.length
       ? state.stones.flatMap((stone, i) => equal(stone, next.stones[i]) ? [] : [i]) : [];
+    if (state.supports.some(support => equal(support, state.hero))) {
+      const footing = `${state.hero.x},${state.hero.y}`;
+      if (moved.length || next.stones.length < state.stones.length) pushingFootings.add(footing);
+      if (world.doors.some(door => equal(door, next.hero))) exitFooting = footing;
+    }
     if (ticket.actionIndex > 0 && ticket.decisionRevision === previous?.revision
       && ticket.resets === previous.resets && moved.some(i => previous.moved.includes(i))) {
       pairs.push({ kind: 'stone', first: index, last: index + 1 });
@@ -58,6 +65,10 @@ function consecutiveStonePushes(level, tickets) {
     assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))),
       'SS02 L' + level + ' did not leave a stone holding each pressure mark');
   }
+  if (level === 5) {
+    assert.ok(pushingFootings.size >= 2, 'SS02 L5 did not use separate supports as pushing stances');
+    assert.ok(exitFooting && !pushingFootings.has(exitFooting), 'SS02 L5 did not cross a separate support into the exit gate');
+  }
   return pairs;
 }
 
@@ -69,7 +80,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 4 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 5 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -146,14 +157,14 @@ function main() {
   if (!files.length) {
     execute(['scripts/prepare-python.mjs']);
     files = [];
-    for (const [name, cohort, end] of [
-      ['mirror-isles', 'SS01', '8'],
-      ['la-force-rouge', 'SS02', '4'],
-      ['native-sources', 'source:AR25,HANO,DC22', '1'],
+    for (const [name, cohort, end, cap] of [
+      ['mirror-isles', 'SS01', '8', '120'],
+      ['la-force-rouge', 'SS02', '5', '160'],
+      ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
       files.push(output);
-      execute(['scripts/compare-source100.mjs', '.', '.', output, cohort, '1', end, '120']);
+      execute(['scripts/compare-source100.mjs', '.', '.', output, cohort, '1', end, cap]);
     }
   }
   const runs = files.flatMap((file) =>

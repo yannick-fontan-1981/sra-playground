@@ -9,7 +9,7 @@ type Pose = { actor: Cell; bodies: Cell[]; supports: Cell[] };
 type Step = { command: NativeCommand; after: Pose; pushed: boolean };
 type GateProof = { passage: Cell; blockedBy: NativeCommand; stance: Cell };
 type Field = { goal: Cell; ground: Cell[]; water: Cell[]; marks: Cell[]; gates: Cell[] };
-export type PushAccessBinding = { field: Field; supports: Cell[] };
+export type PushAccessBinding = { field: Field; supports: Cell[]; continuation?: { from: Pose; steps: Step[] } };
 
 export type PushAccessKnowledge = {
   wall?: { ink: number; ref: string };
@@ -34,6 +34,7 @@ export type PushAccessPlan = {
   evidence: string[];
   plannedSupport?: Cell;
   blocked?: GateProof;
+  guidedRoute?: Step[];
 };
 
 const point = (cell: Cell) => cell.split(',').map(Number) as [number, number];
@@ -236,7 +237,96 @@ function distances(graph: Graph, goal: Cell) {
   return distance;
 }
 
-function search(model: Model, start: Pose, goal: Cell, limit: number, actionLimit: number) {
+function weightedDistances(graph: Graph, goal: Cell, cost: (from: Cell, to: Cell, backward: NativePoint) => number) {
+  const distance = new Map<Cell, number>([[goal, 0]]);
+  const nextStep = new Map<Cell, { to: Cell; stance: Cell }>();
+  const buckets: Cell[][] = [[goal]];
+  for (let rank = 0; rank < buckets.length; rank++) for (const to of buckets[rank] ?? []) {
+    if (distance.get(to) !== rank) continue;
+    for (const { cell: from, delta } of graph.get(to) ?? []) {
+      const next = rank + cost(from, to, delta);
+      if (next >= (distance.get(from) ?? Infinity)) continue;
+      distance.set(from, next);
+      nextStep.set(from, { to, stance: plus(from, delta) });
+      (buckets[next] ??= []).push(from);
+    }
+  }
+  return { distance, nextStep };
+}
+
+function pressureAssignment(distances: ReadonlyMap<Cell, number>[], bodies: Cell[]) {
+  const options = distances.map(distance => bodies.flatMap(body => {
+    const cost = distance.get(body);
+    return cost === undefined ? [] : [{ body, cost }];
+  }).sort((a, b) => a.cost - b.cost));
+  const owners = new Map<Cell, number>();
+  function assign(mark: number, visited: Set<Cell>): boolean {
+    for (const { body } of options[mark]!) {
+      if (visited.has(body)) continue;
+      visited.add(body);
+      const owner = owners.get(body);
+      if (owner !== undefined && !assign(owner, visited)) continue;
+      owners.set(body, mark);
+      return true;
+    }
+    return false;
+  }
+  const targets = options.map((_, index) => index).sort((a, b) => options[a]!.length - options[b]!.length);
+  return targets.every(mark => assign(mark, new Set())) ? owners : null;
+}
+
+function supportGuidance(model: Model, goal: Cell) {
+  type CostTable = ReturnType<typeof weightedDistances>;
+  const tables = new Map<string, { pressure: CostTable[]; exit: CostTable; supplies: Map<Cell, CostTable> }>();
+  return (pose: Pose) => {
+    const key = pose.supports.join(';');
+    const supports = new Set(pose.supports);
+    const missing = (cell: Cell) => Number(model.water.has(cell) && !supports.has(cell));
+    let table = tables.get(key);
+    if (!table) {
+      const pressure = model.marks.map(mark => weightedDistances(model.graph, mark, (from, to, backward) => {
+        const stance = plus(from, backward);
+        return model.graph.has(stance) ? 1 + 12 * (missing(stance) + missing(to)) : Infinity;
+      }));
+      const exit = weightedDistances(model.graph, goal, (_, to) => 1 + 12 * missing(to));
+      table = { pressure, exit, supplies: new Map() };
+      if (tables.size >= 256) tables.delete(tables.keys().next().value!);
+      tables.set(key, table);
+    }
+    const uncovered = model.marks.filter(mark => !pose.bodies.includes(mark)).length;
+    const assignment = pressureAssignment(table.pressure.map(path => path.distance), pose.bodies);
+    if (!assignment) return Infinity;
+    const demands = new Set<Cell>();
+    function trace(path: CostTable, origin: Cell, pushing: boolean) {
+      for (let step = path.nextStep.get(origin); step; step = path.nextStep.get(step.to)) {
+        if (missing(step.to)) demands.add(step.to);
+        if (pushing && missing(step.stance)) demands.add(step.stance);
+      }
+      return path.distance.get(origin) ?? Infinity;
+    }
+    const exit = trace(table.exit, pose.actor, false);
+    let pressure = 0;
+    for (const [body, mark] of assignment) pressure += trace(table.pressure[mark]!, body, true);
+    const supplyDistances = [...demands].map(target => {
+      let supply = table.supplies.get(target);
+      if (!supply) {
+        supply = weightedDistances(model.graph, target, (from, to, backward) => {
+          const stance = plus(from, backward);
+          return model.graph.has(stance) ? 1 + 12 * (missing(stance) + (to === target ? 0 : missing(to))) : Infinity;
+        });
+        table.supplies.set(target, supply);
+      }
+      return supply.distance;
+    });
+    const spare = pose.bodies.filter(body => !assignment.has(body));
+    const delivery = pressureAssignment(supplyDistances, spare);
+    const deliveryCost = delivery ? [...delivery].reduce((cost, [body, target]) => cost + supplyDistances[target]!.get(body)!, 0)
+      : 80 + 20 * demands.size;
+    return 4 * pressure + 8 * deliveryCost + 15 * demands.size + 10 * uncovered + (uncovered ? 1 : 4) * exit;
+  };
+}
+
+function search(model: Model, start: Pose, goal: Cell, limit: number, actionLimit: number, guidance?: (pose: Pose) => number) {
   const distance = distances(model.graph, goal);
   const pressure = model.marks.map(mark => ({ mark, distance: distances(model.graph, mark) }));
   type Candidate = { pose: Pose; route: Step[] };
@@ -245,10 +335,11 @@ function search(model: Model, start: Pose, goal: Cell, limit: number, actionLimi
     const estimate = distance.get(pose.actor);
     if (estimate === undefined || route.length + estimate > actionLimit) return;
     const uncovered = pressure.filter(({ mark }) => !pose.bodies.includes(mark));
-    const rank = route.length + (uncovered.length
+    const rank = route.length + (guidance ? guidance(pose) : uncovered.length
       ? 15 * uncovered.length + 5 * uncovered.reduce((sum, mark) =>
           sum + Math.min(20, ...pose.bodies.map(body => mark.distance.get(body) ?? 20)), 0) - 4 * pose.supports.length
       : 3 * estimate);
+    if (!Number.isFinite(rank)) return;
     const bucket = queue.get(rank);
     if (bucket) bucket.push({ pose, route });
     else queue.set(rank, [{ pose, route }]);
@@ -297,7 +388,12 @@ export function choosePushAccess(knowledge: PushAccessKnowledge | undefined, tra
     return floor.has(neighbor) ? [{ command, cell: neighbor, delta }] : [];
   })]));
   const model: Model = { graph, water: new Set(field.water), gates: new Set(field.gates), marks: field.marks, chain: knowledge.push.chain };
-  const route = search(model, pose, goal, field.water.length ? 8000 : 3000, remaining).route;
+  const continuation = binding?.continuation;
+  const resumed = continuation && continuation.steps.length <= remaining && samePose(continuation.from, pose);
+  const standard = resumed ? undefined : search(model, pose, goal, field.water.length ? 8000 : 3000, remaining);
+  const guidedRoute = resumed ? continuation.steps : standard && !standard.route && !standard.exhausted && field.water.length
+    ? search(model, pose, goal, 8000, remaining, supportGuidance(model, goal)).route : undefined;
+  const route = standard?.route ?? guidedRoute;
   if (!route?.length) return;
   let blocked: GateProof | undefined;
   if (!field.water.length && !field.gates.length) {
@@ -319,13 +415,25 @@ export function choosePushAccess(knowledge: PushAccessKnowledge | undefined, tra
     ?.after.supports.find(cell => !pose.supports.includes(cell));
   return { start: pose, steps, goal, template: transfer.exitPattern, field, ...(blocked ? { blocked } : {}),
     ...(plannedSupport ? { plannedSupport } : {}),
+    ...(guidedRoute ? { guidedRoute } : {}),
     evidence: [transfer.ref, knowledge.push.ref, knowledge.wall.ref, ...moves.map(move => travel.moves[move.command.action_ref]!.ref),
       ...(field.water.length && knowledge.conversion?.crossingRef ? [knowledge.conversion.ref, knowledge.conversion.crossingRef] : []),
       ...(field.gates.length && knowledge.pressure ? [knowledge.pressure.ref] : [])] };
 }
 
+function samePose(actual: Pose, expected: Pose) {
+  return actual.actor === expected.actor && actual.bodies.join(';') === expected.bodies.join(';')
+    && actual.supports.join(';') === expected.supports.join(';');
+}
+
+/** Keep a projected suffix only from a step whose return has matched the public board. */
+export function pushAccessBindingAfter(plan: PushAccessPlan, index: number): PushAccessBinding {
+  const from = plan.steps[index]!.after;
+  const steps = plan.guidedRoute?.slice(index + 1);
+  return { field: plan.field, supports: from.supports, ...(steps?.length ? { continuation: { from, steps } } : {}) };
+}
+
 export function matchesPushAccess(knowledge: PushAccessKnowledge, travel: ObservedTravel, rows: NativeRows, plan: PushAccessPlan, expected: Pose) {
   const scene = readScene(knowledge, travel, rows, plan.template, { field: plan.field, supports: expected.supports });
-  return scene?.pose.actor === expected.actor && scene.pose.bodies.join(';') === expected.bodies.join(';')
-    && scene.pose.supports.join(';') === expected.supports.join(';');
+  return !!scene && samePose(scene.pose, expected);
 }

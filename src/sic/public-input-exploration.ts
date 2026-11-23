@@ -29,7 +29,7 @@ import { annotateTravelMarks, chooseAnnotatedMarkContact, chooseSeparationTrial,
   readTravelGrid, type MarkContact, type ObservedTravel } from './observed-travel-frontier.ts';
 import { chooseCoverage, coveragePushPremise, coveragePushReturn, hasObservedCoverage, observeCoverage, observedCoverageDeadlock,
   rememberCoverageWin, retainCoverageAfterReset, type CoverageLearning, type CoveragePushStep, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
-import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBox, rebindPushAccess, rememberPushAccess,
+import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindingAfter, pushAccessBox, rebindPushAccess, rememberPushAccess,
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
 import { checkContactPrediction, chooseContactExperiment, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
@@ -619,11 +619,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const pitch = travel.grid.pitch;
     const blocked = plan.blocked && pushAccessBox(plan.blocked.passage, pitch);
     const target = pushAccessBox(plan.goal, pitch);
+    const uncovered = plan.field.marks.some(mark => !plan.start.bodies.includes(mark));
     const label = blocked
       ? 'Move a body aside from a reachable stance to preserve the only passage to the observed destination'
-      : plan.plannedSupport && plan.field.marks.length
-        ? 'Build a foothold using the observed conversion, then reach a pushing stance for the pressure mark'
-        : plan.field.marks.some(mark => !plan.start.bodies.includes(mark))
+      : plan.plannedSupport
+        ? uncovered ? 'Plan footholds, pushing stances and distinct weights for the pressure marks'
+          : 'Build a foothold on the route to the observed destination'
+        : uncovered
           ? 'Reach a pushing stance and hold the pressure mark to open access to the observed destination'
           : 'Reach the observed destination by combining verified walks and pushes';
     const evidence: [string, ...string[]] = [ref, ...new Set(plan.evidence.filter(item => item !== ref))];
@@ -1379,7 +1381,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         if (matchesPushAccess(access.roles, access.travel, afterRows, access, expected)) {
           state.travel ??= access.travel;
           state.pushAccess = access.roles;
-          state.pushAccessBinding = { field: access.field, supports: expected.supports };
+          state.pushAccessBinding = pushAccessBindingAfter(access, index);
         } else {
           state.pushAccess = { ...access.roles, contradicted: true };
           delete state.pushAccessBinding;
