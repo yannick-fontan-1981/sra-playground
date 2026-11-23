@@ -15,7 +15,7 @@ Les cartes sont originales. Elles adaptent des principes repérés dans les guid
 | 5 · Les gardiens de l’arène | Arène irrégulière, loges et destinations dispersées | Éliminer une paire de monstres tout en conservant deux contrepoids |
 | 6 · Le miroir en tournée | Atelier dans l’eau et trois branches éloignées | Transporter un miroir entre postes puis le retirer de son ancien axe |
 | 7 · La navette des alcôves | Quai latéral, chenal et quatre débarcadères en peigne | Recaler un appui mobile, garer le passager et changer l’axe de la traversée |
-| 8 · La cour au cœur du lac | Grande galerie périphérique, alcôve hydraulique et destinations centrales | Réaffecter trois ressources sans perdre le retour ni le passage final |
+| 8 · La cour au cœur du lac | Grande galerie périphérique, alcôve hydraulique et destinations centrales | Préserver trois caisses, recycler le miroir en quatrième poids et acheminer un appui indépendant |
 
 Les niveaux 2 et 4 gardent un principe de cour à branches, mais leurs raisonnements diffèrent : alternance d’un sas dans le premier, simultanéité de trois départs dans le second. Le niveau 1 n’a ni bouton, ni porte, ni miroir, ni eau. Le niveau 7 privilégie une géométrie compacte, tandis que le niveau 8 ramène les héros vers le centre. La comparaison géométrique automatisée avec les 32 terrains de SS14–17 détecte les copies exactes après recadrage, rotation ou réflexion ; les relectures indépendantes complètent ce contrôle sans prétendre mesurer toute ressemblance possible.
 
@@ -67,11 +67,25 @@ L’audit conserve une variante de **43 entrées**, utilisant un échange de cai
 
 ## 8 — La cour au cœur du lac
 
-Les destinations sont au centre, à l’intérieur d’un lac. Une caisse de réserve doit quitter l’alcôve hydraulique ; le poids initial de cette alcôve doit ensuite être réaffecté à une commande finale ; la troisième caisse devient l’appui du passage central. Ce sont des ressources réutilisées, pas trois portes indépendantes résolues dans le même ordre.
+La révision 0.1.2 garde les trois destinations au centre du lac, l’alcôve hydraulique et le retour du Magicien. Elle sépare désormais les ressources du franchissement et celles de l’accord final : **les trois caisses restent des poids mobiles**, le miroir devient un quatrième poids après son usage optique, et **un appui immergé présent dès le départ** sert au passage central.
 
-La visée coudée doit être dégagée de ses cibles parasites. Extraire la réserve laisse le Magicien dans son alcôve ; déplacer trop tôt le poids hydraulique coupe son retour. Le Barde transporte la charge jusqu’à sa commande, puis un échange permet de le sortir sans reprendre la charge. L’appui final contourne une langue de terre et doit rester en place pour les deux héros suivants.
+Le parcours de référence coordonne plusieurs usages successifs. Le Marchand règle le miroir et dégage la visée ; l’échange extrait la réserve et laisse le Magicien dans l’alcôve. Le Barde éloigne la caisse de la visée et la livre à sa commande. Un échange permet ensuite de libérer le Barde sans déplacer sa charge. Le poids hydraulique peut être réaffecté après le retour du Magicien. La caisse du bas se trouve désormais dans une glissière fermée sur les côtés et par-dessous : le Marchand ne peut plus simplement se placer derrière elle pour la pousser. Le témoin la remonte par deux chants jusqu’à sa commande, puis libère une seconde fois le Barde par échange pour conserver ce poids. Le miroir quitte ensuite son poste optique et rejoint la quatrième commande. L’appui indépendant contourne la langue de terre ; le dernier trajet doit préserver son accès pour les autres héros.
 
-L’accès central n’a qu’une approche courte par la porte visible. Les deux cases d’eau `(7,9)` et `(7,11)` empêchent de contourner immédiatement cette entrée en posant l’appui juste au-dessus ou au-dessous. La victoire demeure exactement l’occupation simultanée des trois destinations, sans compteur caché ni obligation d’avoir exécuté le témoin.
+Les quatre boutons de l’accord occupent `(13,5)`, `(3,15)`, `(9,14)` et `(15,11)`. La presse du but `(10,11)` pousse vers le nord quand l’accord est relâché. L’appui initial est en `(7,13)`. Le témoin prépare le miroir en `(16,8)` pour la visée, puis le déplace vers sa commande `(15,11)` ; conserver son rôle optique jusqu’au bon moment évite de compromettre l’extraction et le retour.
+
+### Pourquoi la réserve nord-est devient nécessaire
+
+Le circuit `accord` possède **quatre boutons distincts**, tous situés hors des trois destinations. Il commande l’entrée centrale et une **presse placée sur une destination**, fermée au relâchement. Cette presse doit donc rester ouverte pour que les trois héros puissent occuper simultanément les trois buts dans un état stable.
+
+À la victoire, aucun héros n’est disponible pour tenir un bouton. La salle ne contient aucun monstre et offre exactement quatre autres poids : **trois caisses et un miroir**. Un objet ne peut occuper qu’un bouton à la fois ; un appui immergé n’est pas un poids. Les quatre objets doivent donc être conservés et affectés aux quatre boutons. La caisse de l’alcôve nord-est doit quitter sa réserve. Convertir une caisse en appui ou détruire un poids laisse trop peu d’objets pour maintenir l’accord final.
+
+Ce raisonnement découle des objets, de leur nombre et des dispositifs visibles. La condition de victoire reste l’occupation simultanée des trois destinations : aucun compteur de pouvoirs, ordre d’actions imposé ou contrôle caché de la caisse nord-est n’est ajouté. La preuve ne fixe ni une route unique, ni un minimum de coups, ni la nécessité universelle de chacun des pouvoirs utilisés par le témoin.
+
+### Raccourcis corrigés
+
+Deux victoires sur la version 0.1.1 ont confirmé le problème signalé : utiliser le miroir comme poids permettait de laisser la réserve nord-est intacte ; convertir les deux caisses accessibles en appuis permettait de contourner l’entrée par le sud, sans jamais activer le circuit `accord`.
+
+Dans la nouvelle carte, le miroir fait déjà partie des quatre poids nécessaires : il ne remplace plus une réserve facultative. Créer des appuis supplémentaires à partir des caisses retire des poids indispensables. Même un autre accès à la cour ne dispense pas de maintenir les quatre boutons, puisque l’une des destinations porte la presse commandée par cet accord. Les anciens parcours sont conservés dans la revue indépendante pour comparer leur résultat avec la nouvelle carte.
 
 ## Portée de la qualification
 

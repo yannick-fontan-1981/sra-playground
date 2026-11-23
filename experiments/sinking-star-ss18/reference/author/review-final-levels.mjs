@@ -87,9 +87,19 @@ branch(8,'ordinary-east-exit-withdraws-the-weight',2,a=>a.select('bard'),'R',
 branch(8,'withdraw-hydraulics-before-the-wizard-returns',1,a=>a.go(13,2,'merchant').act('DL').select('wizard'),'D',
  s=>s.failed&&!s.dead&&at(hero(s,'wizard').at,16,3)&&s.platformActive.every(v=>!v),
  'Le retrait prématuré du poids ferme le passage et désactive la plateforme. La tentative de retour du Magicien vers l’eau est refusée.');
-branch(8,'turning-too-early-withdraws-the-last-support',6,a=>a.select('bard').act('RRRU').go(7,10,'merchant'),'R',
+branch(8,'turning-too-early-withdraws-the-last-support',8,a=>a.select('bard').act('RRRU').go(7,10,'merchant'),'R',
  s=>s.failed&&!s.dead&&has(s.supports,8,9)&&!has(s.supports,8,10),
  'Tourner vers le nord dès l’entrée de la cour déplace l’appui hors du passage. Le Marchand ne peut plus franchir le même accès.');
+
+branch(8,'south-crate-cannot-be-pushed-through-its-stop',-1,a=>a.go(9,15,'merchant'),'D',
+ s=>s.failed&&!s.dead&&has(s.stones,9,16),
+ 'La caisse sud est retenue par la butée arrière : le Marchand ne peut pas la dégager en poussant depuis le haut.');
+branch(8,'ordinary-second-choir-exit-sinks-a-required-weight',6,a=>a.select('bard'),'U',
+ (s,p,w)=>!s.failed&&!s.dead&&s.stones.length===2&&has(s.supports,9,13)&&!circuitPressed(w,s,'accord'),
+ 'Monter directement après le dépôt sud entraîne la caisse dans le lac. Elle devient un appui et ne peut plus fournir le quatrième poids requis par la presse-but.');
+branch(8,'mirror-withdrawal-relocks-the-destination',7,a=>a.go(16,11,'merchant'),'LR',
+ (s,p,w)=>!s.failed&&!s.dead&&s.mirrors.some(m=>at(m.at,14,11))&&!circuitPressed(w,s,'accord')&&s.gateClosed[2],
+ 'Le miroir est un quatrième poids à conserver. Le retirer puis quitter sa commande referme aussi la destination basse, même si le passage dans le lac a été préparé.');
 
 const report={success:true,scope:'Rejeu des quatre témoins, contre-branches locales et variante gagnante ; aucune preuve de solution unique ni de difficulté minimale.',
  references:designs.map((d,i)=>({level:i+5,title:d.spec.title,actions:d.metrics.actions,selections:d.metrics.selections,stages:d.stages.length,metrics:d.metrics})),

@@ -1,4 +1,4 @@
-# Qualification de SS18 0.1.1
+# Qualification de SS18 0.1.2
 
 La qualification porte sur le laboratoire autonome et son HTML compilé. Elle utilise les parcours d’auteur, les observations publiques, les interactions DOM et des contre-branches locales. Elle ne certifie ni une solution minimale, ni l’unicité, ni une réussite autonome de SRA.
 
@@ -12,7 +12,7 @@ La qualification porte sur le laboratoire autonome et son HTML compilé. Elle ut
 | Campagne | 8 témoins gagnants, aucun refus, aucune mort |
 | Tutoriel N3 | 27 découvertes sur 27, démontrées dans les images publiques |
 | Interface livrée | Huit témoins rejoués dans le HTML compilé par clavier et commandes |
-| Images et temps | 1 988 images de campagne, comparaison exacte des pixels et durées |
+| Images et temps | 2 096 images de campagne, comparaison exacte des pixels et durées |
 | Undo | Fin de chacune des huit salles annulée puis rejouée |
 | Revues de conception | Cinq scripts reproductibles, avec contre-branches et variantes |
 | Répétitions exactes | Aucun doublon de terrain parmi les huit cartes ni avec les 32 terrains SS14–17, sous les huit symétries et après recadrage |
@@ -20,7 +20,7 @@ La qualification porte sur le laboratoire autonome et son HTML compilé. Elle ut
 
 Empreinte SHA-256 du HTML qualifié :
 
-`22f05c589dbca0bb2292afd59b3f0d76a92b3c85547c544fee100e8982984f27`
+`6fa0427f4d0a3eb71e9d258552bc6924156dbbae3ce9fd91d265c3364a2c0ed3`
 
 Le rapport `validation/delivery.json` associe cette empreinte au fichier livré. `dist/` est un résultat de construction ignoré par Git ; le code nécessaire à sa reproduction est conservé dans le dépôt.
 
@@ -37,10 +37,10 @@ Le départ est le niveau 1, mode trio Marchand / Magicien / Barde. Les entrées 
 | 5 | 93 | 10 | 83 | 266 |
 | 6 | 58 | 12 | 46 | 161 |
 | 7 | 54 | 11 | 43 | 142 |
-| 8 | 145 | 10 | 135 | 419 |
-| **Total** | **700** | **83** | **617** | **1 988** |
+| 8 | 184 | 16 | 168 | 527 |
+| **Total** | **739** | **89** | **650** | **2 096** |
 
-Les parcours réalisent notamment 31 poussées du Marchand, 44 pas de chant, 11 échanges dont 3 coudés, 19 déplacements d’appui, 13 mouvements de miroir et 12 actions de reflet. Ils couvrent quatre poussées de presse, une vague de combat et un changement hydraulique. Ces comptes décrivent les témoins, sans imposer ces événements à toutes les solutions.
+Les parcours réalisent notamment 30 poussées du Marchand, 46 pas de chant, 12 échanges dont 3 coudés, 19 déplacements d’appui, 17 mouvements de miroir et 12 actions de reflet. Ils couvrent quatre poussées de presse, une vague de combat et un changement hydraulique. Ces comptes décrivent les témoins, sans imposer ces événements à toutes les solutions.
 
 ## Ce que vérifie chaque couche
 
@@ -64,6 +64,8 @@ Les contrôles de sélection, Tab, 1/2/3, clic, boutons, interruptions par Undo/
 
 Sur la **vraie carte N8**, après un préfixe de 38 entrées, un reflet bloqué fait clignoter le dos du miroir concerné : quatre images, trois pixels noirs devenant rouges, diagonale intacte. Le test vérifie les durées 110/70/110/0 ms, l’absence d’Undo supplémentaire pour les avertissements répétés et la remise à zéro par Reset.
 
+La presse placée sur la destination basse de N8 est également contrôlée dans le HTML : quatre coins jaunes et centre noir lorsqu’elle est fermée, cadre jaune et centre gris lorsqu’elle s’ouvre, aucun bleu parasite. Son ouverture par quatre poids, puis Annuler et le rejeu, conservent les pixels et les durées attendus.
+
 Cette qualification ne calcule pas la mise en page CSS comme un navigateur natif. Les grilles initiales et des résultats sont en outre inspectées sous forme d’images raster exactes du moteur. La revue ordinateur/mobile dans un navigateur natif et la vérification du site déployé restent à faire dans l’environnement autorisé d’intégration.
 
 ### Conception et raccourcis
@@ -74,11 +76,15 @@ Il exécute les cinq scripts :
 
 - `review-level3.mjs` : couverture des 27 découvertes et six expériences locales.
 - `review-levels1-2-4.mjs` : sept vérifications des commandes, du tri et des départs croisés.
-- `review-final-levels.mjs` : treize contre-branches de N5–N8 et variante N7 conservée.
+- `review-final-levels.mjs` : seize contre-branches de N5–N8 et variante N7 conservée.
 - `audit-early-levels.mjs` : relecture indépendante de N1, N2 et N4, géométrie et autre victoire de N4.
-- `audit-final-levels.mjs` : relecture indépendante de N5–N8, ressources, risques de raccourcis et variété.
+- `audit-final-levels.mjs` : relecture indépendante de N5–N8, ressources, risques de raccourcis et variété ; pour N8, certificat des quatre poids, conservation du bilan, anciens contournements et fermeture de la presse de destination.
 
-Les variantes N4 en 72 entrées et N7 en 43 entrées restent gagnantes. Aucun verrou invisible n’a été ajouté pour forcer un témoin. Les corrections de N8 sont des cases visibles de la carte. Les graphes figent les ressources et les états de circuit : ils ne constituent pas une recherche exhaustive de toutes les actions conjointes. Les contre-branches prouvent seulement leurs effets dans les positions indiquées.
+Les variantes N4 en 72 entrées et N7 en 43 entrées restent gagnantes. Les anciens contournements de N8 sont documentés sur la baseline 0.1.1 : victoire avec le miroir en poids de remplacement, et victoire par deux appuis au sud sans jamais activer l’accord ; dans les deux cas, la réserve nord-est reste immobile. Leur rejeu sur 0.1.2 complète les contrôles de la nouvelle carte.
+
+La nécessité de la réserve ne repose pas sur l’échec d’une recherche bornée. Quatre boutons hors des buts doivent rester occupés pour ouvrir la presse d’une destination. À la victoire, les trois héros sont sur leurs trois buts et ne peuvent fournir aucun de ces poids. Les trois caisses et le miroir constituent exactement les quatre objets disponibles ; l’appui initial n’est pas un poids. Une réserve laissée en place, une caisse convertie en appui ou un poids détruit empêche donc de satisfaire cet accord final. La revue contrôle également une fermeture réelle après retrait d’un poids : le héros quitte le but par l’effet de la presse, et les repères visuels du but restent lisibles.
+
+Aucun verrou invisible n’a été ajouté pour forcer un témoin. Cette preuve de conservation ne certifie ni une solution unique, ni un minimum de coups, ni l’emploi obligatoire de chaque capacité. Les graphes de marche figent les ressources et les circuits ; ils ne constituent pas une recherche exhaustive de toutes les actions conjointes. Les autres contre-branches prouvent leurs effets dans les positions indiquées.
 
 ## Reproduction et intégration
 

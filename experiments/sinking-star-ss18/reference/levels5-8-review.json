@@ -113,21 +113,21 @@
     {
       "level": 8,
       "title": "La cour au cœur du lac",
-      "actions": 145,
-      "selections": 10,
-      "stages": 9,
+      "actions": 184,
+      "selections": 16,
+      "stages": 11,
       "metrics": {
-        "actions": 145,
-        "selections": 10,
-        "merchantPushes": 8,
-        "songs": 13,
+        "actions": 184,
+        "selections": 16,
+        "merchantPushes": 7,
+        "songs": 15,
         "groupSongs": 0,
         "songHeroMoves": 0,
-        "songStoneMoves": 9,
+        "songStoneMoves": 11,
         "songMonsterMoves": 0,
         "supportMoves": 4,
-        "swaps": 2,
-        "partnerSwaps": 1,
+        "swaps": 3,
+        "partnerSwaps": 2,
         "stoneSwaps": 1,
         "monsterSwaps": 0,
         "bentSwaps": 1,
@@ -135,12 +135,12 @@
         "swapReflections": 1,
         "swapLoops": 0,
         "partnerMoves": 0,
-        "stoneMoves": 17,
-        "mirrorMoves": 1,
+        "stoneMoves": 14,
+        "mirrorMoves": 5,
         "reflections": 0,
         "heroReflections": 0,
         "pistonPushes": 0,
-        "platformsCreated": 1,
+        "platformsCreated": 0,
         "monstersRemoved": 0,
         "blocked": 0,
         "deaths": 0
@@ -635,7 +635,12 @@
           "y": 16
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
       "mirrors": [
         {
           "at": {
@@ -706,7 +711,12 @@
           "y": 16
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
       "mirrors": [
         {
           "at": {
@@ -775,7 +785,12 @@
           "y": 16
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
       "mirrors": [
         {
           "at": {
@@ -846,7 +861,12 @@
           "y": 16
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
       "mirrors": [
         {
           "at": {
@@ -915,7 +935,12 @@
           "y": 16
         }
       ],
-      "supports": [],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
       "mirrors": [
         {
           "at": {
@@ -933,7 +958,7 @@
     {
       "level": 8,
       "label": "turning-too-early-withdraws-the-last-support",
-      "afterReferenceTurn": 117,
+      "afterReferenceTurn": 156,
       "branchCommands": "RRRUCDRRRRR",
       "meaning": "Tourner vers le nord dès l’entrée de la cour déplace l’appui hors du passage. Le Marchand ne peut plus franchir le même accès.",
       "failed": true,
@@ -957,7 +982,7 @@
             "x": 2,
             "y": 7
           },
-          "facing": "N",
+          "facing": "W",
           "dead": false
         },
         {
@@ -978,6 +1003,10 @@
         {
           "x": 3,
           "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
         }
       ],
       "supports": [
@@ -989,8 +1018,8 @@
       "mirrors": [
         {
           "at": {
-            "x": 16,
-            "y": 8
+            "x": 15,
+            "y": 11
           },
           "facing": "NW"
         }
@@ -998,6 +1027,235 @@
       "circuits": {
         "hydraulique": false,
         "accord": true
+      }
+    },
+    {
+      "level": 8,
+      "label": "south-crate-cannot-be-pushed-through-its-stop",
+      "afterReferenceTurn": 0,
+      "branchCommands": "LDDDDDDDDLLLLLLDD",
+      "meaning": "La caisse sud est retenue par la butée arrière : le Marchand ne peut pas la dégager en poussant depuis le haut.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 15
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "ordinary-second-choir-exit-sinks-a-required-weight",
+      "afterReferenceTurn": 104,
+      "branchCommands": "U",
+      "meaning": "Monter directement après le dépôt sud entraîne la caisse dans le lac. Elle devient un appui et ne peut plus fournir le quatrième poids requis par la presse-but.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "song",
+        "gate"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "W",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": false,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "mirror-withdrawal-relocks-the-destination",
+      "afterReferenceTurn": 123,
+      "branchCommands": "CCUUUUURRRRRRRRRRRDDDDDDRRDLR",
+      "meaning": "Le miroir est un quatrième poids à conserver. Le retirer puis quitter sa commande referme aussi la destination basse, même si le passage dans le lac a été préparé.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "push",
+        "walk",
+        "gate"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 11
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 16
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 18
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": false,
+        "accord": false
       }
     }
   ],

@@ -81,7 +81,7 @@ export const LEVEL_INFO=[
     "puzzle": "37 / 40 / 41",
     "label": "Adaptation de Heroes and Light · énigmes 37, 40 et 41 · préserver un accès, détourner puis lâcher une charge",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/",
-    "objective": "Extraire une réserve par visée, libérer le Barde sans retirer son poids, réaffecter la commande hydraulique puis acheminer l’appui jusqu’aux destinations centrales.",
+    "objective": "Conserver les trois caisses sèches, recycler le miroir comme quatrième poids, libérer deux fois le Barde sans retirer ses charges puis guider l’appui jusqu’à la cour : la destination basse est elle-même une presse commandée.",
     "secondary": {
       "label": "Heroes and Mirrors · énigme 30 · une visée déviée conserve sa première cible",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/"
