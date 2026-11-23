@@ -4,12 +4,39 @@ import type { NativeCommand, NativeRows } from '../src/logos-engine/v6-native-ty
 import { observeCoverage, rememberCoverageWin, type CoverageLearning, type CoverageTransfer } from '../src/sic/observed-coverage.ts';
 import { choosePushAccess, matchesPushAccess, observePushAccess, rebindPushAccess, rememberPushAccess,
   type PushAccessBinding, type PushAccessKnowledge } from '../src/sic/observed-push-access.ts';
-import { observeTravel, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
+import { observeTravel, readTravelGrid, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
 
 const input = (id: number): NativeCommand => ({ action_ref: `ACTION${id}`, data: {} });
 const inputs = [1, 2, 3, 4].map(input);
 const prefix = [2, 2, 4, 2, 1, 3, 2, 4, 1, 4, 3, 2, 2, 4, 1, 1, 3, 3, 4, 4, 2, 4, 4];
+
+for (const [pitch, floor, ink, surface, side] of [[3, 1, 6, 10, 1], [5, 12, 3, 4, 0]] as const) {
+  test(`rebinds the cursor on a witnessed ${pitch}-pixel footing and rejects ambiguous returns`, () => {
+    const area = pitch * pitch;
+    const shape = new Set([Math.floor(area / 2), Math.floor(area / 2) + 1, Math.floor(area / 2) - pitch]);
+    const footing = Array.from({ length: area }, (_, i) => i % 2 ? surface : surface + 1);
+    const signature = footing.map((_, i) => shape.has(i) ? ink : floor).sort((a, b) => a - b).join(',');
+    const commands = side ? ['ACTION1', 'ACTION2', 'ACTION3', 'ACTION4'] : ['ACTION4', 'ACTION3', 'ACTION2', 'ACTION1'];
+    const grid = { pitch, phase: [0, 0] as const, floor, ink, signature };
+    const moves = Object.fromEntries(commands.map((command, i) => [command, { delta: [[pitch, 0], [0, pitch], [-pitch, 0], [0, -pitch]][i] as [number, number], ref: 'walk' }]));
+    const conversion = { water: Array(area).fill(surface).join(','), support: footing.join(','), ref: 'formed', crossingRef: 'crossed' };
+    const controls = { grid, moves };
+    const rows = Array.from({ length: pitch }, (_, y) => Array.from({ length: 2 * pitch }, (_, x) => {
+      if (Math.floor(x / pitch) !== side) return floor;
+      const i = y * pitch + x % pitch;
+      return shape.has(i) ? ink : footing[i]!;
+    }));
+    const memory = { controls, roles: { conversion } };
+    const rebound = rebindPushAccess(memory, rows, commands);
+    const position = `${side * pitch},0`;
+    assert.equal(rebound?.travel.actor, position);
+    assert.deepEqual([...readTravelGrid(rows, rebound!.travel.grid).onFooting], [position]);
+    assert.equal(rebindPushAccess({ controls, roles: {} }, rows, commands), undefined);
+    const duplicated = rows.map(row => [...row.slice(side * pitch, (side + 1) * pitch), ...row.slice(side * pitch, (side + 1) * pitch)]);
+    assert.equal(rebindPushAccess(memory, duplicated, commands), undefined);
+  });
+}
 
 for (const mirrored of [false, true]) {
   test(`learned pushing preserves access to the marked destination${mirrored ? ' after mirroring and recoloring' : ''}`, async () => {
@@ -79,20 +106,20 @@ test('witnessed directions, immersion and pressure survive changes of layout and
   assert.ok(transfer && memory?.roles.conversion?.crossingRef && memory.roles.pressure);
   assert.equal(Object.keys(memory.controls.moves).length, 4);
 
-  for (const level of [2, 3]) {
+  for (const level of [2, 3, 4]) {
     board = await game.dispatch({ type: 'selectLevel', level });
     let binding: PushAccessBinding | undefined, turns = 0, witnessedSupport = false;
     const initialCompleted = board.levelsCompleted;
-    while (board.level === level && turns < 90) {
+    while (board.level === level && turns < 120) {
       const rebound = rebindPushAccess(memory, board.frame, board.availableActionIds.map(id => input(id).action_ref));
       assert.ok(rebound);
       const plan = choosePushAccess(rebound.roles, transfer, rebound.travel, board.frame, inputs, 120 - turns, binding);
       assert.ok(plan);
       if (turns === 0) {
         assert.ok(plan.steps.length > 1);
-        if (level === 3) {
+        if (level >= 3) {
           assert.ok(plan.plannedSupport);
-          assert.equal(plan.field.marks.length, 1);
+          assert.equal(plan.field.marks.length, level - 2);
         }
       }
       for (const step of plan.steps) {
@@ -106,6 +133,6 @@ test('witnessed directions, immersion and pressure survive changes of layout and
       }
     }
     assert.equal(board.levelsCompleted, initialCompleted + 1);
-    if (level === 3) assert.ok(witnessedSupport);
+    if (level >= 3) assert.ok(witnessedSupport);
   }
 });

@@ -608,11 +608,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
 
   function proposePushAccess(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
     const current = state.epoch === observation.level_epoch;
-    if (current && (state.coverage?.layout || state.pushAccess?.contradicted) || state.coverageTransfer?.epoch !== observation.level_epoch - 1
+    if (current && state.pushAccess?.contradicted || state.coverageTransfer?.epoch !== observation.level_epoch - 1
       || observation.available_action_refs.length !== 4 || !observation.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))) return null;
     const retained = rebindPushAccess(state.pushAccessMemory, rows, observation.available_action_refs);
-    const travel = current && state.travel || retained?.travel;
-    const roles = current && state.pushAccess || retained?.roles;
+    const travel = retained?.travel ?? (current ? state.travel : undefined);
+    const roles = retained?.roles ?? (current ? state.pushAccess : undefined);
     const plan = choosePushAccess(roles, state.coverageTransfer, travel, rows, inputs, remaining, current ? state.pushAccessBinding : undefined);
     if (!plan || !travel || !roles) return null;
     const ref = observation.observation_ref;

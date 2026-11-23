@@ -52,10 +52,11 @@ function consecutiveStonePushes(level, tickets) {
   }
   assert.equal(state.complete, true, 'Executed SS02 L' + level + ' tickets do not reproduce the official goal');
   assert.ok(pairs.length, 'SS02 L' + level + ' lost consecutive pushes of the same stone');
-  if (level === 3) {
-    assert.ok(crossed.size > 0, 'SS02 L3 did not build and traverse an immersed support');
+  if (level >= 3) {
+    assert.ok(crossed.size > 0 && state.supports.length > world.supports.length,
+      'SS02 L' + level + ' did not build and traverse an immersed support');
     assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))),
-      'SS02 L3 did not leave a stone holding the pressure mark');
+      'SS02 L' + level + ' did not leave a stone holding each pressure mark');
   }
   return pairs;
 }
@@ -68,7 +69,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 3 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 4 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -147,7 +148,7 @@ function main() {
     files = [];
     for (const [name, cohort, end] of [
       ['mirror-isles', 'SS01', '8'],
-      ['la-force-rouge', 'SS02', '3'],
+      ['la-force-rouge', 'SS02', '4'],
       ['native-sources', 'source:AR25,HANO,DC22', '1'],
     ]) {
       const output = join(temp, name + '.jsonl');

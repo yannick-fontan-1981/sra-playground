@@ -109,19 +109,23 @@ export function rememberPushAccess(knowledge: PushAccessKnowledge | undefined, t
   const wall = sample && enclosedBoundary(travel, sample.rows, sample.ref) || knowledge.wall;
   if (!wall || knowledge.conversion?.water.split(',').every(ink => Number(ink) === wall.ink)) return;
   // Store only the interface and reusable roles. Every new scene binds its own positions.
-  const { annotatedMarks: _marks, ...grid } = travel.grid;
+  const { annotatedMarks: _marks, actorFooting: _footing, ...grid } = travel.grid;
   const { supportSites: _sites, ...roles } = knowledge;
   return { controls: { grid, moves: travel.moves }, roles: { ...roles, wall } };
 }
 
 export function rebindPushAccess(memory: PushAccessMemory | undefined, rows: NativeRows, inputs: readonly string[]) {
-  const travel = memory && rebindTravelControls(memory.controls, rows, inputs);
-  return travel && memory ? { travel, roles: memory.roles } : undefined;
+  if (!memory) return;
+  const { roles, controls } = memory;
+  const actorFooting = roles.conversion?.crossingRef ? roles.conversion.support.split(',').map(Number) : undefined;
+  const grid = actorFooting ? { ...controls.grid, actorFooting } : controls.grid;
+  const travel = rebindTravelControls({ ...controls, grid }, rows, inputs);
+  return travel ? { travel, roles } : undefined;
 }
 
 function readScene(knowledge: PushAccessKnowledge, travel: ObservedTravel, rows: NativeRows,
   template: string, binding?: PushAccessBinding) {
-  const { cells, pieces } = readTravelGrid(rows, travel.grid);
+  const { cells, pieces, onFooting } = readTravelGrid(rows, travel.grid);
   const actor = pieces.length === 1 ? pieces[0] : undefined;
   if (!actor || !knowledge.push || !knowledge.wall) return;
   let goal = binding?.field.goal;
@@ -146,10 +150,10 @@ function readScene(knowledge: PushAccessKnowledge, travel: ObservedTravel, rows:
       || !!pressure && !!binding?.field.marks.includes(cell) && overlay(pixels, pressure.mark);
     const occupied = cell === actor || body;
     if (body) bodies.push(cell);
-    if (conversion && (signature === conversion.water || signature === conversion.support
+    if (conversion && (signature === conversion.water || signature === conversion.support || onFooting.has(cell)
       || occupied && binding?.field.water.includes(cell))) {
       water.push(cell);
-      if (signature === conversion.support || occupied && binding?.supports.includes(cell)) supports.push(cell);
+      if (signature === conversion.support || onFooting.has(cell) || occupied && binding?.supports.includes(cell)) supports.push(cell);
     } else if (pressure && (signature === pressure.mark || occupied && binding?.field.marks.includes(cell))) {
       marks.push(cell);
     } else if (pressure && (signature === pressure.closed || signature === pressure.open || occupied && binding?.field.gates.includes(cell))) {
