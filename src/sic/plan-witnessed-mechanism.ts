@@ -1,3 +1,4 @@
+import { followingPart } from './actor-relative-parts.ts';
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { add, diff, same, size, type XY } from './access-terrain.ts';
 import { spatialControls, surfaceFromVisits } from './calibrate-spatial-controls.ts';
@@ -146,7 +147,9 @@ export function plansForWitnessedSubjects(
           .slice()
           .reverse()
           .find((w) => w.geometry?.pivots.some((z) => z.role === role))!;
+        const follower = followingPart(stats, role, p, fixed);
         const common = {
+          ...(follower ? { followingPeer: follower } : {}),
           pitch,
           ...(calibrated
             ? {

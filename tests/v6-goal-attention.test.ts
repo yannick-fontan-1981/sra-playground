@@ -7,7 +7,7 @@ import { AttentionMemory } from '../src/logos-engine/v6-attention-memory.ts';
 import { NativeReasoningMemory } from '../src/logos-engine/v6-reasoning-memory.ts';
 import { pointGoal, electInformationGoals, reconcileInformationGoal } from '../src/logos-engine/v6-information-goals.ts';
 import { compileInformationPreference } from '../src/sic/information-preference.ts';
-import { assessHypothesisPartition, compareSeparation } from '../src/sic/discriminating-experiment.ts';
+import { assessHypothesisPartition, compareSeparation, chooseEffectExperiment } from '../src/sic/discriminating-experiment.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { readRecoveryRevision, recoveryRevision } from '../src/sic/recovery-pack.ts';
 
@@ -17,6 +17,19 @@ test('experiment discrimination ranks the worst remaining group and reports an e
   assert.equal(assessHypothesisPartition([]), null);
   assert.equal(compareSeparation(assessHypothesisPartition([2, 1, 1])!.eliminatedShare,
     assessHypothesisPartition([3, 1])!.eliminatedShare), 1);
+});
+
+test('an effect experiment is selected by distinguishable public outcomes at the configured threshold', () => {
+  const trials = [
+    { action: 'approach', predictions: ['still', 'still', 'still', 'moved'] },
+    { action: 'contact', predictions: ['still', 'still', 'moved', 'moved'] },
+    { action: 'wait', predictions: ['still', 'still'] },
+  ];
+  const selected = chooseEffectExperiment(trials, 2);
+  assert.equal(selected?.action, 'contact');
+  assert.equal(selected?.partition.remaining, 2);
+  assert.deepEqual(selected?.outcomes, ['still', 'moved']);
+  assert.equal(chooseEffectExperiment(trials, 3), undefined);
 });
 
 test('opening curiosity ranks richer compositions first within the admitted safety tier', () => {

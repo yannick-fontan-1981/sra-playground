@@ -6,6 +6,7 @@ import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
 import {observedSituatedOperations,retainSituatedOperations} from '../src/sic/situated-preparation.ts';
 import {initialMemory} from '../src/sic/preparation-experiments.ts';
 import {offerTerminalContact,measureTerminalContact} from '../src/sic/terminal-contact.ts';
+import {splitNativeState} from '../src/logos-engine/v6-native-state-graph.ts';
 import {
   acceptPreviewCarry,
   carryPreviewBindings,
@@ -92,6 +93,7 @@ test('a winning boundary transfers the relative pose for an operation and tests 
   const m=initialMemory(2),available=new Set(entered.o.available_action_refs);
   m.previewLearning=acceptPreviewCarry(carry,entered.o);
   const approach=offerTerminalContact(m,0,entered.o,entered.rows,available,'positioned')!;
+  assert.doesNotThrow(() => splitNativeState(approach, 'preparation'));
   assert.equal(approach.phase,'positionForOperation');
   assert.equal(approach.a,'ACTION2');
   const motion=measureTerminalContact(m.previewLearning,approach.terminalContact!,entered.o,ready.o,approach.a,ready.layout);

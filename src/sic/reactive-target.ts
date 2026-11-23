@@ -1,7 +1,8 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import {newPreviewLearning,visualLayout} from './witnessed-preview-transfer.ts';
 import {rememberMotion} from './controlled-parts.ts';
-import {choosePursuit,observePursuit,type PursuitChoice,type PursuitMemory as ResponseMemory} from './pursuit-composition.ts';
+import {choosePursuit,observePursuit,reconsiderContact,recordContactMiss,repeatedContactMiss,
+  type ContactReturns,type PursuitChoice,type PursuitMemory as ResponseMemory} from './pursuit-composition.ts';
 import type {NativeCommand,NativeObservation} from '../logos-engine/v6-native-types.ts';
 import type { NativeBox, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
@@ -196,11 +197,20 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
   let grip: GripMemory | null = null;
   const freshResponse=(epoch:number)=>({epoch,learn:newPreviewLearning(),response:{pairs:{}} as ResponseMemory,
     attempts:{} as Record<string,number>,multiple:false});
-  let sampledResponse=freshResponse(-1);
+  let sampledResponse: ReturnType<typeof freshResponse> & {
+    refutedSteps?:Record<string,Record<string,string>>; contactMisses?:ContactReturns
+  }=freshResponse(-1);
   const observeResponse=(b:NativeObservation,a:NativeObservation,cmd:NativeCommand,first:NativeRows,second:NativeRows)=>{
     if(family!==learnReactiveMotionId||b.level_epoch!==a.level_epoch||b.levels_completed!==a.levels_completed||b.state!==a.state)return;
     if(sampledResponse.epoch!==b.level_epoch)sampledResponse=freshResponse(b.level_epoch);
     if(!/^ACTION[1-4]$/.test(cmd.action_ref))return;
+    reconsiderContact(sampledResponse.contactMisses,b.frame_hash,cmd.action_ref,a.frame_hash);
+    const refuted = sampledResponse.refutedSteps?.[b.frame_hash];
+    if(refuted && b.frame_hash!==a.frame_hash){
+      delete refuted[cmd.action_ref];
+      if(!Object.keys(refuted).length)delete sampledResponse.refutedSteps![b.frame_hash];
+      if(!Object.keys(sampledResponse.refutedSteps!).length)delete sampledResponse.refutedSteps;
+    }
     const before=visualLayout(b,first),after=visualLayout(a,second);
     observePursuit(sampledResponse.response,before,after,cmd.action_ref,a.observation_ref);
     for(const [role,old] of Object.entries(before)){
@@ -220,8 +230,8 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
     async proposeInGroup(group, observation, rows, available, remaining, execution) {
       if(family===learnReactiveMotionId&&sampledResponse.epoch===observation.level_epoch&&sampledResponse.multiple&&remaining>0){
         const trial=choosePursuit(sampledResponse.response,sampledResponse.learn,visualLayout(observation,rows),rows,
-          new Set(available.map(c=>c.action_ref)),sampledResponse.attempts);
-        if(trial&&trial.basis!=='one_possible_response'){
+          new Set(available.map(c=>c.action_ref)),sampledResponse.attempts,undefined,sampledResponse.refutedSteps?.[observation.frame_hash]);
+        if(trial&&trial.basis!=='one_possible_response'&&!repeatedContactMiss(sampledResponse.contactMisses,observation.frame_hash,trial)){
           const mode=execution?.reasoningMode??'exploration';
           const facts={routeSupported:true,eligibleProbe:false,knownInteraction:false,mode};
           const decision=await decide?.run({situation:facts},{signal:execution?.signal});
@@ -505,7 +515,26 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       observeResponse(before,after,_action,first,second);
       if(proposal.sampled){
         const t=proposal.sampled,k=[t.actor,t.peer,t.from,t.target,t.input].join('/');
-        sampledResponse.attempts[k]=(sampledResponse.attempts[k]??0)+1;return {events:[]};
+        sampledResponse.attempts[k]=(sampledResponse.attempts[k]??0)+1;
+        if(before.level_epoch===after.level_epoch && before.levels_completed===after.levels_completed &&
+            before.state===after.state && before.frame_hash===after.frame_hash && !same(t.from,t.to)){
+          const byFrame=sampledResponse.refutedSteps??={};
+          const refuted=byFrame[before.frame_hash]??={};
+          refuted[t.input]=after.observation_ref;
+          return {events:[],reviewEvidence:'The image stayed unchanged after a predicted displacement. Reconsider other controls or another preparation.'};
+        }
+        if(before.level_epoch===after.level_epoch && before.levels_completed===after.levels_completed && before.state===after.state
+            && same(t.to,t.target) && before.frame_hash!==after.frame_hash){
+          const old=visualLayout(before,first),seen=visualLayout(after,second);
+          const targetsBefore=old[t.peer]?.length??0;
+          if(targetsBefore>0 && seen[t.peer]?.length===targetsBefore && seen[t.actor]?.some(p=>same(p.at,t.to))){
+            const repeated=recordContactMiss(sampledResponse.contactMisses??={},before.frame_hash,t,after.frame_hash,after.observation_ref);
+            return {events:[],reviewEvidence:repeated
+              ? 'The same arrival left the target population intact twice. Yield this approach to another experiment from this image.'
+              : 'The subject arrived, but the predicted target removal was not observed.'};
+          }
+        }
+        return {events:[]};
       }
       if (proposal.grip) {
         const { observed, legs } = proposal.grip, step = legs[index]!;

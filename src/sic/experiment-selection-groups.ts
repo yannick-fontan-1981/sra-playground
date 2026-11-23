@@ -4,9 +4,14 @@ import { observedPressureRecoveryGroup, projectedPublicEffectsGroup, publicInput
 import { compositionFamily, cycleGroup, exhaustedGroup, followCompositionGroup, composeAtReturnGroup } from './test-observed-compositions.ts';
 import { preparedEffectsId } from './test-prepared-effects.ts';
 import {fieldGroup} from './compose-field-relations.ts';
+import {finishSilentTest, startSilentTest} from './silent-input-experiment.ts';
 
-export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[], prioritizeCoverage = false, withdrawPrimaryFamily = true): NativeSelectionGroup[] {
+export function planningGroupsWithExperiments(groups: readonly NativeSelectionGroup[], prioritizeCoverage = false, withdrawPrimaryFamily = true, testSilentInputs = false): NativeSelectionGroup[] {
   const projected = { id: projectedPublicEffectsGroup, families: [compositionFamily,publicInputExplorationId], entryPoints:[fieldGroup,null] };
+  if(testSilentInputs){
+    projected.families.unshift(preparedEffectsId);
+    projected.entryPoints.unshift(finishSilentTest);
+  }
   if(prioritizeCoverage){
     projected.families.unshift(preparedEffectsId);
     projected.entryPoints.unshift(coveragePlanGroup);
@@ -20,7 +25,9 @@ export function planningGroupsWithExperiments(groups: readonly NativeSelectionGr
       const exploration = entries.findIndex(family => family.id === publicInputExplorationId);
       if (exploration < 0) throw Error('Missing public input exploration entry');
       entries.splice(exploration, 0,
+        ...(testSilentInputs ? [{ id: preparedEffectsId, entry: finishSilentTest }] : []),
         { id: compositionFamily, entry: fieldGroup },
+        ...(testSilentInputs ? [{ id: preparedEffectsId, entry: startSilentTest }] : []),
         { id: preparedEffectsId, entry: recurrentExperimentGroup },
         { id: compositionFamily, entry: composeAtReturnGroup },
         { id: compositionFamily, entry: cycleGroup });

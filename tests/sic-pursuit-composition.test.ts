@@ -1,8 +1,28 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {captureRanks,observePursuit,type PursuitMemory} from '../src/sic/pursuit-composition.ts';
-import type {VisualLayout} from '../src/sic/witnessed-preview-transfer.ts';
+import {captureRanks,choosePursuit,observePursuit,reconsiderContact,recordContactMiss,repeatedContactMiss,
+  type ContactReturns,type PursuitChoice,type PursuitMemory} from '../src/sic/pursuit-composition.ts';
+import {newPreviewLearning,type VisualLayout} from '../src/sic/witnessed-preview-transfer.ts';
 import type {XY} from '../src/sic/access-terrain.ts';
+
+test('a reproducible arrival without the expected capture releases the turn in just that preparation',()=>{
+  const history:ContactReturns={};
+  const trial:PursuitChoice={actor:'moving form',peer:'repeatable form',from:[2,0],to:[4,0],target:[4,0],
+    input:'RIGHT',horizon:1,peerOptions:[],refs:[],basis:'all_measured_escape_directions'};
+  assert.equal(recordContactMiss(history,'start',trial,'different image','first return'),false);
+  assert.equal(recordContactMiss(history,'start',trial,'different image','first return'),false);
+  assert.equal(repeatedContactMiss(history,'start',trial),false);
+  assert.equal(recordContactMiss(history,'start',trial,'different image','second return'),true);
+  assert.equal(repeatedContactMiss(history,'start',trial),true);
+  assert.equal(repeatedContactMiss(history,'another preparation',trial),false);
+  assert.equal(repeatedContactMiss(history,'start',{...trial,peer:'other form'}),false);
+  assert.equal(repeatedContactMiss(history,'start',{...trial,target:[6,0]}),false);
+  reconsiderContact(history,'start','LEFT','new image');
+  reconsiderContact(history,'start','RIGHT','different image');
+  assert.equal(repeatedContactMiss(history,'start',trial),true);
+  reconsiderContact(history,'start','RIGHT','unexpected return');
+  assert.deepEqual(history,{});
+});
 
 test('works backwards through every escape in a corridor and distinguishes a loop in which only some replies permit contact',()=>{
   const line:XY[]=[[0,0],[1,0],[2,0],[3,0],[4,0]];
@@ -21,4 +41,29 @@ test('tracks the identifiable response of one copy without treating the stationa
   observePursuit(m,layout([0,0],[[4,0],[4,4]]),layout([2,0],[[6,0],[4,4]]),'ACTION4','r1');
   const r=m.pairs['a/b/2']!;assert.equal(r.away,1);assert.equal(r.toward,0);
   assert.equal(r.samples.length,2);assert.deepEqual(r.responses,['2,0']);
+});
+
+test('a contradicted immediate contact yields to another approach from the same image',()=>{
+  const part=(at:XY,form:string)=>({at,box:[at[0],at[1],at[0],at[1]],form});
+  const view:VisualLayout={actor:[part([4,0],'actor')],target:[part([6,0],'target'),part([0,0],'target')]};
+  const memory:PursuitMemory={pairs:{sample:{actor:'actor',peer:'target',pitch:2,away:3,toward:0,
+    responses:['2,0','-2,0'],sites:['0,0','2,0','4,0','6,0','8,0'],refs:['motion'],samples:[]}}};
+  const learned=newPreviewLearning();
+  const stroke=(d:XY)=>({d,count:1,last:'after',first:'before'});
+  learned.partMotion={actor:{axes:{ACTION3:{left:stroke([-2,0])},ACTION4:{right:stroke([2,0])}},sites:{'2,0':1},substrate:{}}};
+  const available=new Set(['ACTION3','ACTION4']),pixels=[[0,0,0,0,0]];
+  const choose=(refutations?:Record<string,string>)=>choosePursuit(memory,learned,view,pixels,available,{},undefined,refutations);
+  assert.equal(choose()?.input,'ACTION4');
+  const alternative=choose({ACTION4:'unmoved after contact'});
+  assert.equal(alternative?.input,'ACTION3');
+  assert.ok(alternative.refs.includes('unmoved after contact'));
+  assert.equal(choose({ACTION3:'left blocked',ACTION4:'right blocked'}),null);
+  assert.equal(choose()?.input,'ACTION4');
+
+  const observations=memory.pairs.sample!.samples;
+  observations.push({actor:[2,0],peer:[2,0],next:[4,0]},
+    {actor:[4,0],peer:[4,0],next:[6,0]},{actor:[4,0],peer:[8,0],next:[8,0]});
+  assert.equal(choose(),null);
+  observations.push({actor:[2,0],peer:[6,0],next:[8,0]});
+  assert.equal(choose()?.input,'ACTION4');
 });

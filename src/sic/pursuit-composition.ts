@@ -8,6 +8,31 @@ type Response={actor:string;peer:string;pitch:number;away:number;toward:number;r
 export type PursuitMemory={pairs:Record<string,Response>};
 export type PursuitChoice={actor:string;peer:string;from:XY;to:XY;target:XY;input:string;horizon:number;
   peerOptions:XY[];refs:string[];basis:'all_measured_escape_directions'|'calibrated_response'|'one_possible_response'};
+type ContactReturn = { actor:string; peer:string; target:XY; returnedFrame:string; evidence:string; repeated:boolean };
+export type ContactReturns = Record<string,Record<string,ContactReturn>>;
+
+export function repeatedContactMiss(history:ContactReturns | undefined, frame:string, trial:PursuitChoice) {
+  const miss = history?.[frame]?.[trial.input];
+  return !!miss?.repeated && miss.actor===trial.actor && miss.peer===trial.peer && same(miss.target,trial.target)
+    && same(trial.to,trial.target);
+}
+
+export function recordContactMiss(history:ContactReturns, frame:string, trial:PursuitChoice, returnedFrame:string, evidence:string) {
+  const actions = history[frame] ??= {};
+  const previous = actions[trial.input];
+  const repeated = !!previous && previous.returnedFrame===returnedFrame && previous.actor===trial.actor
+    && previous.peer===trial.peer && same(previous.target,trial.target) && (previous.repeated || previous.evidence!==evidence);
+  actions[trial.input]={actor:trial.actor,peer:trial.peer,target:trial.target,returnedFrame,evidence,repeated};
+  return repeated;
+}
+
+export function reconsiderContact(history:ContactReturns | undefined, frame:string, input:string, returnedFrame:string) {
+  if (!history) return;
+  const actions = history[frame];
+  if (!actions?.[input] || actions[input].returnedFrame===returnedFrame) return;
+  delete actions[input];
+  if (!Object.keys(actions).length) delete history[frame];
+}
 const cardinals=(pitch:number):XY[]=>[[pitch,0],[-pitch,0],[0,pitch],[0,-pitch]];
 const distance=(a:XY,b:XY)=>size(diff(a,b));
 
@@ -136,11 +161,18 @@ function fitResponse(g:Graph,r:Response,origin:XY):Fitted|undefined{
 export type PursuitTerrain={actor:string;peer:string;from:XY;targets:XY[];pitch:number;floor:number;known:Set<string>;
   reachable:XY[];motors:{op:string;d:XY}[]};
 export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:VisualLayout,rows:NativeRows,available:Set<string>,
-  attempts:Record<string,number>={},inspect?:(terrain:PursuitTerrain)=>void):PursuitChoice|null {
+  attempts:Record<string,number>={},inspect?:(terrain:PursuitTerrain)=>void,
+  refutedHere:Readonly<Record<string,string>>={}):PursuitChoice|null {
   let best:{score:number;choice:PursuitChoice}|undefined;
   for(const r of Object.values(memory.pairs)){
     const subject=view[r.actor],targets=view[r.peer],motion=learn.partMotion?.[r.actor];
     if(!motion||subject?.length!==1||!targets?.length||r.away<3||r.away<4*r.toward||r.responses.length<2)continue;
+    // A push can look like escape. Give the experiment selector the turn when
+    // all observed displacements required contact and separated copies stayed put.
+    const shifts=r.samples.filter(s=>!same(s.peer,s.next));
+    const atContact=(s:Sample)=>distance(s.actor,s.peer)<r.pitch/2;
+    if(new Set(shifts.map(s=>s.peer.join())).size>=2 && shifts.every(atContact) &&
+        r.samples.some(s=>!atContact(s)&&same(s.peer,s.next)))continue;
     const a=subject[0]!.at,pitch=r.pitch,step:XY=[pitch,pitch],motors=Object.entries(motion.displacements??motion.axes).flatMap(([op,options])=>{
       const values=Object.values(options);return available.has(op)&&/^ACTION[1-4]$/.test(op)&&values.length===1&&size(values[0]!.d)===pitch?[{op,d:values[0]!.d}]:[];
     });
@@ -164,6 +196,7 @@ export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:Vi
     for(const target of targets){
       const b=aligned(target.at,a,step),bi=g.indices.get(b.join());if(bi===undefined||ai===bi)continue;
       for(const motor of motors){
+        if(refutedHere[motor.op])continue;
         const to=add(a,motor.d),di=g.indices.get(to.join());if(di===undefined)continue;
         const replies=[bi,...g.peerEdges[bi]!.filter(q=>distance(to,g.cells[q]!)>distance(to,b))];
         const worst=replies.map(q=>g.worst[di*n+q]!);
@@ -183,7 +216,7 @@ export function choosePursuit(memory:PursuitMemory,learn:PreviewLearning,view:Vi
         const count=attempts[[r.actor,r.peer,a,b,motor.op].join('/')]??0;
         const score=(basis==='one_possible_response'?70:basis==='calibrated_response'?2:0)+horizon+Math.min(8,count)*(basis==='one_possible_response'?6:0.1);
         if(!best||score<best.score)best={score,choice:{actor:r.actor,peer:r.peer,from:a,to,target:b,input:motor.op,horizon,
-          peerOptions:di===bi?[]:chosenReplies.map(q=>g.cells[q]!),refs:r.refs,basis}};
+          peerOptions:di===bi?[]:chosenReplies.map(q=>g.cells[q]!),refs:[...r.refs,...Object.values(refutedHere)],basis}};
       }
     }
   }

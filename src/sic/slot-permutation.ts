@@ -4,6 +4,9 @@ import type { NativeCommand, NativeFamily, NativeObservation, NativePoint, Nativ
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
+import { chooseEffectExperiment } from './discriminating-experiment.ts';
+import { informationPriority, type InformationPreference } from './information-preference.ts';
+import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import { diagonalSlotContours, fitDisjointSlotCycles, measureBentSlotCycles, projectionWithinLimit, radialSlotPermutations } from './slot-field-transforms.ts';
 
 export const slotPermutationId = 'sic_slot_permutation';
@@ -21,7 +24,7 @@ type Board = { positions: NativePoint[]; size: number; targetSlots: number[] };
 type Track = { across: 0 | 1; lanes: number[]; indices: number[]; alternating: number[] };
 type Geometry = { layout: string; tracks: Track[]; rings?: number[][]; radial?: number[][]; bent?: number[][]; diagonals?: number[][] };
 type SlotLeg = { control: NativePoint; values: number[]; prediction: number[] | null };
-type Proposal = NativeProposal & { local: State; board: Board; route: SlotLeg[]; needId: string };
+type Proposal = NativeProposal & { local: State; board: Board; route: SlotLeg[]; needId: string; predictedReturns?: string[] };
 const key = (value: unknown) => JSON.stringify(value);
 const sortedControls = (scene: OrbitField) => [...scene.controls.values()].sort((a, b) => a.key[0] - b.key[0] || a.key[1] - b.key[1]);
 const layoutKey = (epoch: number, scene: OrbitField) =>
@@ -133,8 +136,11 @@ function prioritizeTrials(tracks: readonly Track[], size: number, controls: Retu
   return novel ?? unmeasured[0];
 }
 
-export function createSicVerifySlotPermutation(family = verifySlotPermutationId, transferObservedPermutation = false): NativeFamily<Proposal> {
+export function createSicVerifySlotPermutation(family = verifySlotPermutationId, transferObservedPermutation = false, preference?: InformationPreference): NativeFamily<Proposal> {
   const learns = family === learnSlotPermutationId;
+  const minimumProbeOutcomes = preference?.mode === 'active' &&
+    informationPriority({ strategy: 'motion_contrast', distinctOutcomes: preference.minimumOutcomes }, preference)
+    ? preference.minimumOutcomes : undefined;
   let state: State | null = null;
   let decide: NativeProgramHandle | undefined;
   let geometry: Geometry | null = null;
@@ -182,17 +188,25 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId,
       const path = !extended || projectionWithinLimit(targets, operators.values(), maxProjectedStates)
         ? orbitRoute(values, targets, operators, Math.min(remaining, 32 - local.count)) : null;
       const next = path?.length ? scene.controls.get(key(path[0])) : null;
-      if (learns && !recalled && !next) return null;
       const unmeasured = prioritizeTrials(tracks, size, controls, local.models);
       const arrangement = key(values);
-      const ambiguous = controls.find(control => {
+      const ambiguous = controls.filter(control => {
         const model = local.models[key(control.key)];
         return model && model.permutations.length > 1 && !model.tried.includes(arrangement)
           && new Set(model.permutations.map(permutation => key(predict(permutation, values)))).size > 1;
       });
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...(recalled?.refs ?? []), ...Object.values(local.models).map(model => model.evidence)])];
-      const trial = unmeasured ?? ambiguous;
+      // One measured effect may be insufficient to reach all target values.
+      // Ask which further control behaves like a known operator, does nothing,
+      // or separates the remaining models. Record its actual effect afterwards.
+      const inquire = learns && !next && minimumProbeOutcomes !== undefined && operators.size > 0;
+      const discriminating = inquire ? chooseEffectExperiment([
+        ...ambiguous.map(control => ({ action: control, predictions: local.models[key(control.key)]!.permutations.map(p => key(predict(p, values))) })),
+        ...(unmeasured ? [{ action: unmeasured, predictions: [arrangement, ...new Set([...operators.values()].map(m => key(predict(m.permutation, values))))] }] : []),
+      ], minimumProbeOutcomes) : undefined;
+      if (learns && !recalled && !next && !discriminating) return null;
+      const trial = discriminating?.action ?? unmeasured ?? ambiguous[0];
       const mode = execution?.reasoningMode ?? (next ? 'solving' : 'exploration');
       const facts = { routeSupported: !!next, eligibleProbe: !!trial, knownInteraction: false, mode };
       const decision = await decide?.run({ situation: facts }, { signal: execution?.signal });
@@ -200,7 +214,7 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId,
       if (!decision || (strategy !== 'P07' && strategy !== 'P05')) return null;
       const control = strategy === 'P07' ? next : trial;
       if (!control) return null;
-      const phase = strategy === 'P07' ? 'apply_slot_permutation' : unmeasured ? 'test_slot_permutation' : 'distinguish_slot_permutations';
+      const phase = strategy === 'P07' ? 'apply_slot_permutation' : trial === unmeasured ? 'test_slot_permutation' : 'distinguish_slot_permutations';
       const label = slotPermutationStrategies[phase], parent = 'G_official_completion';
       const goal = { kind: 'match_visible_marked_slots', scope: ref.split(':revision:', 1)[0]!, subjects: ['marked_slot_field'],
         parentObjective: parent, satisfactionContract: 'observe_official_progress_after_matching_marked_slots' };
@@ -233,9 +247,11 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId,
         return values[from] !== values[to] && targetColors.has(values[from]!) ? [{ source: slot(from), destination: slot(to) }] : [];
       }).slice(0, 3) : [];
       const situation = distributed && next ? `This control rearranges ${moving.length} slots across ${distributed.lanes.length} lines. ${path!.length} moves remain.`
-        : strategy === 'P07' ? `The measured rearrangements give a route in ${path!.length} moves.` : label;
+        : strategy === 'P07' ? `The measured rearrangements give a route in ${path!.length} moves.`
+        : discriminating ? `No measured route. This test predicts ${discriminating.partition.outcomes} distinct arrangements across ${discriminating.hypotheses} hypotheses.` : label;
       return { status: 'proposed', kind: family, actions, local, route,
         board: { positions, size, targetSlots }, needId: need.id, steps,
+        ...(discriminating ? { predictedReturns: discriminating.outcomes.map(outcome => symbolicDigest(outcome)) } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -292,6 +308,12 @@ export function createSicVerifySlotPermutation(family = verifySlotPermutationId,
       }
       const model = { key: control, permutations, evidence: after.observation_ref, tried: [...(prior?.tried ?? []), key(values)] };
       state = { ...local, models: { ...local.models, [key(control)]: model }, count: local.count + 1 };
+      if (proposal.predictedReturns) {
+        const result = symbolicDigest(key(actual));
+        return { events: [{ kind: 'sic_measured_control_effect', result,
+          anticipated: proposal.predictedReturns.includes(result), consistentPermutations: permutations.length,
+          observation: after.observation_ref }] };
+      }
       return { events: [] };
     },
     state: () => ({ state, ...(retained ? { retained } : {}) }),

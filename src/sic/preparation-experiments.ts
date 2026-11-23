@@ -73,6 +73,7 @@ import {chooseTransfer,newTransferMemory,recordTransfer,type TransferTrial,type 
 import {witnessedSites} from './site-operations.ts';
 import {newFrontierMemory,selectFrontier,recordFrontier,type FrontierMemory,type FrontierTrial} from './experimental-frontier.ts';
 import {conditionalPlacements,placementOffer,placementReceipt,type ConditionalTrial,type LearnedPlacement,type ReconsiderPlacement} from './conditional-placements.ts';
+import { assessSilentInput, type SilentInputQuestion } from './silent-input-experiment.ts';
 export type Move = { actor: string; from: string; to: string; dx: number; dy: number };
 export type Effect = { key: string; moves: Move[] };
 export type Edge = {
@@ -175,6 +176,7 @@ export type Experiment = {
   localCapacity?: LocalForecast;
   configurationTrial?: ConfigurationTrial;
   cooperative?: import('./transport-observations.ts').TransportForecast;
+  silentInput?: SilentInputQuestion;
   cursorTrial?: CursorTrial;
   landmark?: import('./paired-landmark-placement.ts').LandmarkTrial;
   cue?: CueTest;
@@ -203,6 +205,7 @@ export type Experiment = {
   access?: { card: AccessCard; step: number; alternatives: Record<string, unknown>[] };
 };
 export type Outcome = {
+  silentInput?: SilentInputQuestion;
   localCapacity?: ReturnType<typeof assessLocal>;
   precondition?: string;
   predictedGap?: boolean;
@@ -251,9 +254,12 @@ export type Outcome = {
 export type Memory = {
   transportRetry?:{epoch:number;edges:string[];repair?:import('./contact-frontier.ts').ContactRepair};
   contactFrontier?: import('./contact-frontier.ts').ContactMemory;
+  pendingSilentInput?: SilentInputQuestion;
   placementVisits?:import('./recurrent-placement.ts').PlacementVisits;
   transportLearning?: import('./transport-observations.ts').TransportMemory;
   crossing?:import('./sustained-crossing.ts').Crossing;
+  pairInquiry?:import('./probe-paired-displacements.ts').PairInquiry;
+  pairLesson?:import('./probe-paired-displacements.ts').ReusableEffects;
   priorMotions?:import('./motion-before-selection.ts').PriorMotions;
   coverage?:import('./controlled-coverage.ts').Coverage;
   cursorSelection?: CursorMemory;
@@ -1072,6 +1078,7 @@ export function recordExperiment(
   if (!x?.delayed) m.delayed.active = null;
   m.previous = index;
   m.pending = null;
+  if (m.pendingSilentInput) delete m.pendingSilentInput;
   if (!x) return null;
   m.lastTrial = m.turns;
   const out: Outcome = {
@@ -1089,6 +1096,8 @@ export function recordExperiment(
     refs: x.refs,
   };
   if(x.cooperative)return out;
+  if(x.silentInput) return { ...out, silentInput:x.silentInput, bareEffect:'still', actual:effect.key,
+    result:assessSilentInput(m,x,s,t,op,effect.key) };
   if(x.localCapacity) {
     const receipt=assessLocal(local,x.localCapacity,b,a,rows,next);
     return {...out,result:'local_capacity_'+receipt.stage+(receipt.matches?'_matched':'_refuted'),localCapacity:receipt};

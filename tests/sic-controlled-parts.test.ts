@@ -1,3 +1,4 @@
+import { followingPart, placePeers } from '../src/sic/actor-relative-parts.ts';
 import test from 'node:test';
 import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
 import { spatialControls, cellMatches } from '../src/sic/calibrate-spatial-controls.ts';
@@ -199,4 +200,34 @@ test('a visible terminal contact is carried across an official level change and 
     [2, 1]
   );
   assert.equal(plans[0].witness.after, entry.o.observation_ref);
+});
+
+
+test('a marker moving inside a subject is bound relative to it while matching landmarks stay fixed', async () => {
+  const learned = newPreviewLearning();
+  async function view(x: number, marker: number, revision: number) {
+    const rows = Array.from({ length: 14 }, () => Array<number>(22).fill(0));
+    for (let y = 4; y <= 6; y++) for (let z = x - 1; z <= x + 1; z++) {
+      if (y !== 5 || z !== x) rows[y]![z] = 7;
+    }
+    for (const z of [marker, 15, 18]) rows[5]![z] = 2;
+    const o = await measureNativeObservation({ frame_rows: rows, frame_hash: await publicFrameHash(rows),
+      level: 1, levels_completed: 0, state: 'NOT_FINISHED', available_action_refs: controls }, revision, 'motion-study');
+    return { o, layout: visualLayout(o, rows) };
+  }
+  const a = await view(3, 3, 0), b = await view(6, 6, 1), c = await view(9, 9, 2), detached = await view(12, 9, 3);
+  const actor = Object.keys(a.layout).find(k => a.layout[k]!.length === 1 && a.layout[k]![0]!.at[0] === 6)!;
+  const group = Object.keys(a.layout).find(k => a.layout[k]!.length === 3)!;
+  assert.ok(actor && group);
+  observePreviewBindings(learned, a.o, b.o, a.layout, b.layout, 'MOVE_A');
+  const stats = learned.partMotion![actor]!;
+  assert.equal(followingPart(stats, group, [12, 10], [[12, 10]]), undefined);
+  observePreviewBindings(learned, b.o, c.o, b.layout, c.layout, 'MOVE_A');
+  const fixed: XY[] = [[18, 10], [30, 10]];
+  const proof = followingPart(stats, group, [18, 10], fixed)!;
+  assert.deepEqual(proof.witnesses, [b.o.observation_ref, c.o.observation_ref]);
+  assert.deepEqual(placePeers(fixed, [18, 10], [24, 10], proof.offset), [[24, 10], [30, 10]]);
+  assert.equal(followingPart(stats, group, [18, 10], [[30, 10]]), undefined);
+  observePreviewBindings(learned, c.o, detached.o, c.layout, detached.layout, 'MOVE_A');
+  assert.equal(followingPart(stats, group, [24, 10], [[24, 10]]), undefined);
 });

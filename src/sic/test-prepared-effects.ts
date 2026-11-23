@@ -1,6 +1,7 @@
 import {preparedSpatialSeries,spatialStance,type SpatialStep} from './prepared-spatial-series.ts';
 import {preparedWalk,preparedStance,preparedExperimentAt} from './prepared-walking-series.ts';
 import {walkingPremise,walkingReturn,type BoundWalkingStep} from './verified-walking-series.ts';
+import {finishSilentTest, proposeSilentInput, silentInputStrategy, startSilentTest} from './silent-input-experiment.ts';
 import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal} from './prospective-local-use.ts';
 import { sicObservedTransportDeadlock } from '../logos-engine/v6-native-types.ts';
 import {rememberRelayControl} from './relay-control.ts';
@@ -37,6 +38,7 @@ import {
   experimentCommand,
   selectExperiment,
   recordExperiment,
+  sceneKey,
   type Experiment,
 } from './preparation-experiments.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -108,12 +110,16 @@ const labels: Record<Experiment['phase'], string> = {
   carry: 'Move the changed object while preserving its measured state',
   carryB: 'Test the transported change against the control from this destination',
 };
+import {inquiry,seePair,pairProposal,carryPair,proposeLessonTest,compareAfterControl} from './probe-paired-displacements.ts';
 import {completionContacts} from './terminal-contact.ts';
 import {exposedUnderParts} from './controlled-parts.ts';
 export function createPreparedEffects(informationPreference?:InformationPreference,limits?:{maxDepth:number;maxNodes:number}): NativeFamily<Offer> {
   const comparePreparations=informationPreference?.mode==='active' &&
     informationPriority({strategy:'motion_contrast',distinctOutcomes:2},informationPreference)>0;
-  const recallMotions=comparePreparations && informationPreference?.strategy==='bind_earlier_motions_to_registered_subjects';
+  const testSilent=informationPreference?.strategy===silentInputStrategy;
+  const retainScope=testSilent || informationPreference?.strategy==='learn_the_scope_of_a_control';
+  const learnScope=comparePreparations && (retainScope || informationPreference?.strategy==='learn_control_within_one_room');
+  const recallMotions=learnScope || comparePreparations && informationPreference?.strategy==='bind_earlier_motions_to_registered_subjects';
   const bridgeSeries=recallMotions || comparePreparations && informationPreference?.strategy==='compose_a_sustained_crossing';
   const prioritizeCoverage=bridgeSeries || comparePreparations && informationPreference?.strategy==='prefer_a_verified_coverage_experiment';
   const prepareStance=prioritizeCoverage || comparePreparations && informationPreference?.strategy==='prepare_a_contact_stance';
@@ -134,10 +140,11 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   let m = initialMemory(0);
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
-    const { previewCarry, localCarry, contactFrontier, transportRetry } = m;
+    const { previewCarry, localCarry, contactFrontier, transportRetry, pairLesson } = m;
     const lessons = [...(contactFrontier?.inheritedSupports ?? []), ...(contactFrontier?.supportLessons ?? [])]
       .map(law => ({...law, appearance:law.appearance ?? contactFrontier?.appearances?.[law.role]}));
     m = initialMemory(o.level_epoch);
+    if (learnScope) m.pairInquiry=inquiry(pairLesson);
     m.localCapacity = nextLocalLevel(localCarry);
     m.previewLearning = acceptPreviewCarry(previewCarry, o);
     m.contactFrontier = inheritFrontierContacts(contactFrontier?.contactEvidence, m.previewLearning, lessons);
@@ -164,12 +171,14 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     const learning=m.previewLearning??=newPreviewLearning();
     if(a.levels_completed>b.levels_completed){const contacts=completionContacts(learning,b,a,visualLayout(b,rows),observedCommandKey(cmd));if(contacts.length)learning.terminal=contacts;}
     if(a.levels_completed>b.levels_completed&&m.localCapacity)m.localCarry=nextLocalLevel(m.localCapacity);
+    if(retainScope&&m.pairInquiry&&a.levels_completed>b.levels_completed){const lesson=carryPair(m.pairInquiry,a.observation_ref);if(lesson)m.pairLesson=lesson;}
     const boundary=carryPreviewBindings(learning,b,a);
     if(boundary)m.previewCarry=boundary;
     if(b.level_epoch===a.level_epoch&&b.state===a.state&&b.levels_completed===a.levels_completed){
       if(cmd.data.x!==undefined || m.contactFrontier?.pendingControl)rememberRelayControl(m.contactFrontier??=newContactMemory(),b,a,cmd.action_ref,cmd.data);
       const before=visualLayout(b,rows),after=visualLayout(a,next);
       const key=observedCommandKey(cmd);
+      if(learnScope)transportResult=seePair(m.pairInquiry??=inquiry(),before,rows,next,key,a.observation_ref,x?.cooperative?.paired?x.cooperative:undefined,!!x?.landmark,x?.cursorTrial?.stage==='select');
       if(retrySelection&&x?.landmark)recordPlacementVisit(m.placementVisits??={edges:{},tested:{}},x.landmark,b.frame_hash,a.frame_hash,a.observation_ref);
       if(x?.cursorTrial?.recurrentPlacement&&m.placementVisits)m.placementVisits.tested[x.cursorTrial.recurrentPlacement.key]=true;
       if(composeTransport&&b.available_action_refs.includes('ACTION6')){
@@ -179,7 +188,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           const selected=detectTransportSelection(before,rows,next,[cmd.data.x,cmd.data.y],a.observation_ref);
           if(selected)m.transportLearning=selected;
         }
-        if(m.transportLearning)transportResult=observeTransport(m.transportLearning,rows,next,key,a.observation_ref,x?.cooperative?.coverage||x?.cooperative?.crossing?undefined:x?.cooperative);
+        if(m.transportLearning&& !x?.cooperative?.paired)transportResult=observeTransport(m.transportLearning,rows,next,key,a.observation_ref,x?.cooperative?.coverage||x?.cooperative?.crossing?undefined:x?.cooperative);
         if(planCoverage){
           if(!m.coverage && x?.cursorTrial?.stage==='select' && cmd.action_ref==='ACTION6'){
             const scene=registerCoverage(rows,next,x.cursorTrial.source.box,x.cursorTrial.target.box,a.observation_ref);
@@ -250,6 +259,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     if(!x?.contactProject && b.level_epoch===a.level_epoch && learning.partMotion)
       observeRegionArrival(m.contactFrontier??=newContactMemory(),learning,b,a,rows,next);
     const result=recordExperiment(m, b, a, cmd, rows, next, x);
+    const pair = m.pairInquiry;
+    if (result?.result === 'new_cursor_moved_while_previous_cursor_stayed' &&
+        pair?.selectionWitness && x?.cursorTrial?.evidence.includes(pair.selectionWitness) &&
+        pair.learning.motors[cmd.action_ref]?.ref === a.observation_ref) {
+      pair.controlProof = { selection: pair.selectionWitness, motion: a.observation_ref };
+    }
     if(frontierResult && result)return {...result,result:frontierResult};
     if(x?.cooperative&&result)return {...result,result:a.levels_completed>b.levels_completed?'transport_official':transportResult??'transport_unresolved'};
     return result;
@@ -263,8 +278,14 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     async proposeInGroup(group, o, rows, inputs, remaining) {
       enter(o);
       if(remaining<1)return null;
+      const silentGroup=group===startSilentTest || group===finishSilentTest;
+      const silent=silentGroup && testSilent && comparePreparations
+        ? proposeSilentInput(m,m.scenes.indexOf(sceneKey(o)),o.available_action_refs,remaining,informationPreference.minimumOutcomes,group===finishSilentTest,rows) : null;
+      if(silentGroup && !silent)return null;
       const focused=group===coveragePlanGroup;
-      if(focused){if(!prioritizeCoverage||!m.coverage&&!m.crossing)return null;group=evidencedPlanGroup;}
+      const lessonTest=learnScope && m.pairInquiry?.lesson && !m.coverage && o.available_action_refs.includes('ACTION6') && (focused||group===evidencedPlanGroup)
+        ?proposeLessonTest(m.pairInquiry,visualLayout(o,rows),rows,o.observation_ref):undefined;
+      if(focused){if(!prioritizeCoverage||!m.coverage&&!m.crossing&&!m.pairInquiry?.active&&!lessonTest)return null;group=evidencedPlanGroup;}
       const motorCount=o.available_action_refs.filter(ref=>/^ACTION[1-4]$/.test(ref)).length;
       const opening = !m.turns || (m.cursorSelection?.returns??0)>=2*Math.max(2,motorCount) ||
         (m.cursorSelection?.blocked?.length??0)>=2;
@@ -286,8 +307,9 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         ?proposeCoverage(m.coverage,rows,o.available_action_refs,limits.maxDepth,limits.maxNodes):undefined;
       const crossing=bridgeSeries&&group===evidencedPlanGroup&&m.crossing&&m.transportLearning&&limits
         ?proposeCrossing(m.crossing,m.transportLearning,rows,limits.maxDepth,limits.maxNodes):undefined;
-      if(focused&&!coverage&&!crossing)return null;
-      const cooperative=coverage??crossing??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
+      const paired=lessonTest??(learnScope&&!m.coverage&&group===evidencedPlanGroup&&m.pairInquiry&&limits?pairProposal(m.pairInquiry,o.observation_ref,limits.maxDepth,limits.maxNodes,informationPreference?.mode === 'active' ? informationPreference.minimumOutcomes : undefined, o.available_action_refs):undefined);
+      if(focused&&!coverage&&!crossing&&!paired)return null;
+      let cooperative=paired??coverage??crossing??(composeTransport&&group===evidencedPlanGroup&&m.transportLearning&&limits
         ? chooseTransport(m.transportLearning,rows,limits.maxDepth,limits.maxNodes,stageRegions):undefined);
       let landmark=!cooperative && prepareArrival && limits && m.landmarkMemory && (group===evidencedPlanGroup && (m.landmarkMemory.active||m.landmarkMemory.redirect) || group===recurrentExperimentGroup && placementSelection?.stage==='select')
         ? proposeLandmark(m.landmarkMemory,visualLayout(o,rows),o,rows,m.previewLearning?.partMotion??{},placementSelection,limits.maxNodes,seekAccess?limits.maxDepth:undefined):undefined;
@@ -296,6 +318,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const verifyChallenge=retrySelection&&m.cursorSelection?.pending?.recurrentPlacement&&offeredCursor;
       if(challenge||verifyChallenge)landmark=undefined;
       const cursor=cooperative?null:challenge??(landmark?.stage==='select_after_contact'?refreshedSelection(landmark,visualLayout(o,rows)):landmark?null:offeredCursor);
+      if (group === recurrentExperimentGroup && !cooperative && !cursor && !landmark && !m.cursorSelection?.pending &&
+          m.pairInquiry?.controlProof && informationPreference?.mode === 'active') {
+        cooperative = compareAfterControl(m.pairInquiry, o.observation_ref, informationPreference.minimumOutcomes, o.available_action_refs);
+      }
       if (!cooperative && !landmark && !cursor && !m.turns&&!m.localCapacity?.laws.length&&!Object.keys(m.previewLearning?.bindings??{}).length&&!m.previewLearning?.terminal?.length) return null;
       const missingCue=!!m.previewLearning?.cueSearch?.seeking;
       const justMovedLine=Object.values(m.relativeMotion?.models??{}).some(v=>v.contact?.latestDisplacement===o.observation_ref && !!v.contact?.freeWalk && !v.contact.contradicted);
@@ -311,12 +337,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           canCompareAnotherPreparation(m.localCapacity,o.frame_hash));
       const configurationOpportunity=(group===recurrentExperimentGroup || group===exhaustedGroup) &&
         !!m.configurationOpportunity && (m.configurations?.factors.length??0)>=2;
-      if (!landmark && !cursor && group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
+      if (!cooperative && !landmark && !cursor && group === recurrentExperimentGroup && !hasExperimentOpportunity(m) && !localOpportunity && !configurationOpportunity) return null;
       const available = [...inputs];
       for (const op of o.available_action_refs)
         if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
           available.push({ action_ref: op, data: {} });
-      const experiment:Experiment|null = contactProject ? {phase:'investigateContactFrontier',origin:-1,a:contactProject.step.op,b:contactProject.step.op,refs:[],rule:contactProject.project.purpose,contactProject} : cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
+      const experiment:Experiment|null = silent ?? (contactProject ? {phase:'investigateContactFrontier',origin:-1,a:contactProject.step.op,b:contactProject.step.op,refs:[],rule:contactProject.project.purpose,contactProject} : cooperative ? {phase:'composeObservedTransport',origin:-1,a:cooperative.command,b:cooperative.command,
         refs:[],rule:cooperative.purpose,cooperative} : landmark ? {phase:'testLandmarkPlacement',origin:-1,a:landmark.command,b:landmark.command,refs:[],
         rule:landmark.joint?'prepare_every_indicated_arrival_before_the_common_operation':landmark.partnerTest?'retry_a_blocked_movement_after_changing_the_partner_placement':'compare_two_arrivals_with_a_preserved_first_contact',landmark,...(cursor?{cursorTrial:cursor}:{})} : cursor ? {
         phase:cursor.stage==='select'?'selectMarkedCursor':cursor.stage==='advance'?'advanceSelectedCursor':cursor.stage==='reroute'?'repairSelectedCursor':'verifyMarkedCursor',origin:-1,a:cursor.command,b:cursor.command,
@@ -324,15 +350,15 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           cursor.stage==='verify'?'test_whether_the_same_input_moves_the_clicked_body_while_the_old_body_stays':
           cursor.contrast?'compare_which_subject_responds_to_a_witnessed_motor_after_selection':
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
-      } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
+      } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity));
       if(!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
       if (!experiment || (!contactProject && !cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);
-      const command = available.find((c) => observedCommandKey(c) === key) ?? (contactProject||cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
+      const command = available.find((c) => observedCommandKey(c) === key) ?? (experiment.silentInput||contactProject||cooperative||cursor||landmark?.partnerTest||landmark?.joint||experiment.configurationTrial||experiment.localCapacity||experiment.frame||experiment.activation||experiment.territorial||experiment.occupancy||experiment.mechanism||experiment.unreadIndicator||experiment.witnessedPreview ? repeatedFrameCommand(key,o,rows) : null);
       if (!command) return null;
       const ref = o.observation_ref,
-        label = contactProject ? (contactProject.acquired ? 'Enter the changed site to verify that it now supports movement'
+        label = silent ? (phase==='prepare' ? 'Reproduce an arrangement to test an input that previously had no effect' : 'Measure whether the same input now changes the arrangement') : contactProject ? (contactProject.acquired ? 'Enter the changed site to verify that it now supports movement'
           : contactProject.project.preparations?.length ? 'Prepare the required footholds in order so the subject and the movable parts can reach their next positions'
           : contactProject.previousEntry ? 'Reuse the observed support change to connect another region'
           : contactProject.project.purpose==='reach_goal' ? 'Use the observed change in access to reach the witnessed destination'
@@ -375,6 +401,10 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         parentObjective: parent,
         satisfactionContract: contactProject ? (contactProject.acquired?'can_enter_changed_site_or_remains_blocked':'compare_observed_subject_part_and_access_after_contact') : experiment.mobilityProbe ? 'compare_each_named_part_before_and_after_the_untried_control' : experiment.mechanism ? 'verify_the_displacement_of_the_named_mechanism_and_the_access_it_opens' : experiment.unreadIndicator||experiment.witnessedPreview||experiment.occupancy?.preview ? 'verify_the_future_layout_of_the_named_subjects_after_the_selected_action' : 'compare_the_public_effect_of_B_after_each_preparation',
       };
+      if(experiment.silentInput){
+        question.subjects=[a,b];
+        question.satisfactionContract='check_if_the_same_input_stays_silent_or_changes_the_public_arrangement_after_preparation';
+      }
       if(phase==='testScoringContact')question.satisfactionContract='check_the_predicted_approach_and_then_measure_official_progress_at_contact';
       if(phase==='positionForOperation'||phase==='usePositionedOperation')
         question.satisfactionContract='test_the_previous_level_operation_at_its_observed_relative_position';
@@ -450,6 +480,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         actions, ...(spatial?{spatialSeries:spatial}:walking?{walkingSeries:walking}:{}),
         experiment,
         ...(cooperative?{cooperativeTransportForecast:cooperative}:{}),
+        ...(experiment.silentInput ? {silentInputForecast:{...experiment.silentInput,phase,
+          outcomes:['the_input_still_has_no_public_effect','the_input_changes_the_prepared_arrangement']}} : {}),
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'||cursor.beyondReturn?{
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',
         }:{})}} : {}),
