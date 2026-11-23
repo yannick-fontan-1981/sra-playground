@@ -329,8 +329,13 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       const relative=!cursor && repair && limits && group===evidencedPlanGroup && m.relativeMotion && m.previewLearning?.terminal?.length
         ? chooseRelativePlan(m.relativeMotion,visualLayout(o,rows),o,rows,Object.fromEntries(m.previewLearning.terminal.map(w=>[w.marker,w.after])),limits,!missingCue) : null;
       const relay=!focused && group===evidencedPlanGroup && limits && m.previewLearning && m.contactFrontier?.relayControl ? proposeRelayContact(m.contactFrontier,m.previewLearning,o,rows,limits):null;
-      const contactProject=relay??(!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
+      const proposedContact=relay??(!focused && !cooperative && !landmark && !cursor && limits && group===evidencedPlanGroup && m.previewLearning && (m.previewLearning.terminal?.length || m.contactFrontier?.arrival || m.contactFrontier?.active)
         ? proposeFrontierContact(m.contactFrontier??=newContactMemory(),m.previewLearning,o,rows,limits):null);
+      // A declared inquiry with an observed control handoff already has subjects to test.
+      // Keep its exploration open until the contact planner predicts a route to the goal.
+      const reservedForControl = learnScope && m.pairInquiry?.controlProof && m.pairInquiry.scene;
+      const contactProject = reservedForControl && proposedContact?.project.purpose !== 'reach_goal'
+        ? null : proposedContact;
       if (!contactProject && !cooperative && !landmark && !cursor && !relative && group === evidencedPlanGroup && !mayPursueWitnessedEffect(m)) return null;
       const localOpportunity=group===recurrentExperimentGroup && !!m.localCapacity &&
         (stalledLocal(m.localCapacity,o.frame_hash) || revisitedChoice(m.localCapacity,o.frame_hash) ||
