@@ -3,8 +3,9 @@ import test from 'node:test';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
 import { chooseCoverage, coveragePullPremise, coveragePullReturn, coveragePushPremise, coveragePushReturn,
-  hasObservedCoverage, observeCoverage, retainCoverageAfterReset,
-  type CoverageLearning, type PullStep } from '../src/sic/observed-coverage.ts';
+  hasObservedCoverage, observeCoverage, rememberCoverageWin, retainCoverageAfterReset,
+  type CoverageLearning, type CoverageTransfer, type PullStep } from '../src/sic/observed-coverage.ts';
+import { matchesPullCircuit, planPullCircuit, type PullCircuitBinding, type PullKnowledge } from '../src/sic/observed-pull-circuits.ts';
 import { chooseTravelTrial, observeTravel, readTravelGrid, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
 test('placement observes a pair of targets, verifies an irreversible corner and reuses evidence after RESET', async () => {
@@ -73,16 +74,21 @@ test('placement observes a pair of targets, verifies an irreversible corner and 
   assert.equal(board.levelsCompleted, 1);
 });
 
-for (const mirrored of [false, true]) test(`a measured pull binds guarded series with a different palette${mirrored ? ' and mirrored geometry' : ''}`, async () => {
+for (const mirrored of [false, true]) test(`pull and exit roles transfer to guarded circuits with a different palette${mirrored ? ' and mirrored geometry' : ''}`, async () => {
   const game = createGameDispatcher(async () => { throw new Error('Expected a native game'); });
   let board = await game.dispatch({ type: 'load', code: 'SS03', level: 1 });
   let travel: ObservedTravel | undefined, knowledge: CoverageLearning | undefined, step = 0;
-  const recolor = (rows: typeof board.frame) => rows.map(row => (mirrored ? [...row].reverse() : row).map(ink => (ink + 5) % 16));
+  let transfer: CoverageTransfer | undefined, actorInkCount: number | undefined;
+  const recolor = (rows: typeof board.frame) => rows.map(row => (mirrored ? [...row].reverse() : row).map(ink => (ink + (mirrored ? 9 : 5)) % 16));
   async function learn(actionId: number, route?: readonly PullStep[], acceptReturn = (_before: number[][], _after: number[][]) => true) {
     const before = recolor(board.frame), prior = travel, ref = `return:${++step}`;
     const command = { action_ref: `ACTION${actionId}`, data: {} };
     board = await game.dispatch({ type: 'action', actionId });
-    if (board.levelsCompleted) return true;
+    if (board.levelsCompleted) {
+      transfer = rememberCoverageWin(knowledge, prior, before, command, 1, ref);
+      if (prior?.actor) actorInkCount = readTravelGrid(before, prior.grid).cells.get(prior.actor)?.filter(ink => ink === prior.grid.ink).length;
+      return true;
+    }
     const after = recolor(board.frame);
     const matched = acceptReturn(before, after);
     travel = observeTravel(prior, before, after, command, ref);
@@ -155,4 +161,48 @@ for (const mirrored of [false, true]) test(`a measured pull binds guarded series
   assert.ok(checkedGate);
   assert.ok(checkedPulls);
   assert.equal(board.levelsCompleted, 1);
+  assert.ok(transfer && travel && actorInkCount && knowledge?.body && knowledge.lastPull);
+  const actionIds = new Map(board.availableActionIds.map((id, index) => [`ACTION${index + (mirrored ? 21 : 11)}`, id]));
+  const inputs = [...actionIds.keys()].map(action_ref => ({ action_ref, data: {} }));
+  const roles: PullKnowledge = { grid: travel.grid, actorInkCount, body: knowledge.body, ref: knowledge.lastPull.ref,
+    moves: Object.fromEntries([...actionIds].map(([alias, id]) => [alias, travel!.moves[`ACTION${id}`]!])) };
+  const start = recolor(board.frame), first = planPullCircuit(roles, transfer, start, inputs, 35);
+  assert.ok(first?.evidence.includes(roles.ref));
+  const [gate, otherGate] = first.field.gates;
+  assert.ok(gate && otherGate);
+  const [gx, gy] = gate.at.split(',').map(Number) as [number, number];
+  const [bx, by] = first.start.bodies[0]!.split(',').map(Number) as [number, number];
+  const contradicted = start.map(row => [...row]);
+  contradicted[gy + 1]![gx + 1] = gate.closesOnContact ? (roles.grid.floor + 1) % 16 : roles.grid.floor;
+  assert.equal(matchesPullCircuit(roles, first.field, first.start, contradicted), false);
+  contradicted[gy + 1]![gx + 1] = start[gy + 1]![gx + 1]!;
+  contradicted[by + 1]![bx + 1] = (start[by + 1]![bx + 1]! + 1) % 16;
+  assert.equal(matchesPullCircuit(roles, first.field, first.start, contradicted), false);
+  const ambiguous = start.map(row => [...row]);
+  for (const arm of [1, 3, 5, 7]) {
+    if (arm !== gate.back) ambiguous[gy + Math.floor(arm / 3)]![gx + arm % 3] = otherGate.accent;
+  }
+  for (const mark of gate.marks) {
+    const [x, y] = mark.split(',').map(Number) as [number, number];
+    ambiguous[y + 1]![x + 1] = otherGate.accent;
+  }
+  assert.equal(planPullCircuit(roles, transfer, ambiguous, inputs, 35), undefined);
+
+  let binding: PullCircuitBinding | undefined, turns = 0, decisions = 0;
+  while (board.levelsCompleted === 1 && turns < 35) {
+    const plan = planPullCircuit(roles, transfer, recolor(board.frame), inputs, 35 - turns, binding);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16);
+    decisions++;
+    for (const step of plan.steps) {
+      const actionId = actionIds.get(step.action.action_ref);
+      assert.ok(actionId);
+      board = await game.dispatch({ type: 'action', actionId });
+      turns++;
+      if (board.levelsCompleted > 1) break;
+      assert.ok(matchesPullCircuit(roles, plan.field, step.after, recolor(board.frame)));
+      binding = { field: plan.field, pose: step.after };
+    }
+  }
+  assert.equal(board.levelsCompleted, 2);
+  assert.ok(turns <= 35 && decisions <= 10);
 });

@@ -153,6 +153,11 @@ export function checkRun(run) {
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
     } else assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
+    if (code === 'SS03' && row.level === 2) {
+      // The exploratory route needed 111 commands and 95 decisions; the composed route needs 27 and 7.
+      assert.ok(issued.length <= 35 && groups.size <= 10, 'SS03 L2 lost the direct pull and gate route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L2 reset during the direct route');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);

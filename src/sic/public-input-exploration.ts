@@ -32,6 +32,7 @@ import { chooseCoverage, coveragePullPremise, coveragePullReturn, coveragePushPr
   type CoverageLearning, type CoverageMovementStep, type CoveragePullSeries, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
 import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindingAfter, pushAccessBox, rebindPushAccess, rememberPushAccess,
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
+import { matchesPullCircuit, planPullCircuit, type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
 import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
 import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
   contactPullReturn, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
@@ -152,6 +153,9 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   pushAccessMemory?: PushAccessMemory;
   pushAccessBinding?: PushAccessBinding;
   contactMemory?: ContactMemory;
+  pullKnowledge?: PullKnowledge;
+  pullCircuit?: PullCircuitBinding;
+  pullCircuitRefuted?: true;
   exchange?: ObservedExchange;
   pressureReserve?: PressureReserve;
   fallbackProjection?: FallbackProjectionMemory;
@@ -185,6 +189,7 @@ type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: st
   coveragePushSeries?: readonly CoverageMovementStep[];
   coveragePullSeries?: CoveragePullSeries;
   contactPullSeries?: CoveragePullSeries;
+  pullCircuitPlan?: PullCircuitPlan;
   pushAccessPlan?: PushAccessPlan & { travel: ObservedTravel; roles: PushAccessKnowledge };
   coveragePlacement?: true;
   separationTest?: string;
@@ -550,6 +555,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer, panelServiceTransfer, symbolTransfer, programWitness, outletWitness, instructionTransfer } = state;
     state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
       ...(state.coverageTransfer?.epoch === epoch - 1 ? { coverageTransfer: state.coverageTransfer } : {}),
+      ...(state.pullKnowledge ? { pullKnowledge: state.pullKnowledge } : {}),
       ...(state.pushAccessMemory ? { pushAccessMemory: state.pushAccessMemory } : {}),
       ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
       ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
@@ -564,6 +570,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const win = rememberCoverageWin(state.coverage, state.travel, rows, command, before.level_epoch, after.observation_ref);
     if (win) {
       state.coverageTransfer = win;
+      if (win.motion === 'pull' && state.travel?.actor && state.coverage?.body) {
+        const { grid, moves } = state.travel;
+        const actorInkCount = readTravelGrid(rows, grid).cells.get(state.travel.actor)?.filter(ink => ink === grid.ink).length;
+        if (actorInkCount) state.pullKnowledge = { grid, moves, actorInkCount, body: state.coverage.body, ref: state.coverage.lastPull?.ref ?? win.ref };
+      }
       const memory = rememberPushAccess(state.pushAccess, state.travel, { rows, ref: before.observation_ref });
       if (memory) state.pushAccessMemory = memory;
     }
@@ -657,6 +668,33 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     };
   }
 
+  function proposePullCircuit(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
+    const { coverageTransfer, pullKnowledge } = state;
+    const current = state.epoch === observation.level_epoch;
+    if (!pullKnowledge || coverageTransfer?.epoch !== observation.level_epoch - 1 || current && state.pullCircuitRefuted) return null;
+    const plan = planPullCircuit(pullKnowledge, coverageTransfer, rows, inputs, remaining, current ? state.pullCircuit : undefined);
+    if (!plan) return null;
+    const ref = observation.observation_ref;
+    const evidence: [string, ...string[]] = [ref, ...new Set(plan.evidence)];
+    const target = pushAccessBox(plan.field.goal, pullKnowledge.grid.pitch);
+    const actions = plan.steps.map(step => step.action);
+    const label = 'Match the marked controls to the gates, then combine pulling and gate movement to reach the exit';
+    const goal = { kind: 'compose_matched_pull_circuits', scope: ref.split(':revision:', 1)[0]!,
+      subjects: [plan.field.goal, ...plan.field.gates.flatMap(gate => [gate.at, ...gate.marks])],
+      parentObjective: completion, satisfactionContract: 'verify_each_gate_and_body_effect_then_reach_exit' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
+    const id = `pull-circuit:${need.id}`;
+    return { status: 'proposed', kind: publicInputExplorationId, actions, pullCircuitPlan: plan,
+      source: explorationKey(observation, rows), candidates: inputs.map(commandKey), needId: need.id,
+      steps: plan.steps.map(step => ({ action: step.action, expected_after: pushAccessBox(step.after.actor, pullKnowledge.grid.pitch) })),
+      binding: { observation_ref: ref, level_epoch: observation.level_epoch }, question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${completion}`] }],
+      sicSituationCard: { strategy: goal.kind, mode: 'solving', need: label, situation: label, target, evidence },
+      sicLocalDecision: { strategy: goal.kind, objective: { id, label, parent: completion }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: completion, purpose: label,
+        evidence, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
+
   const family = {
     id: publicInputExplorationId,
     async attachPrograms(registry) {
@@ -670,6 +708,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       if (group !== observedPressureRecoveryGroup) return family.propose(observation, rows, inputs, remaining, execution);
       const access = proposePushAccess(observation, rows, inputs, remaining);
       if (access) return access;
+      const circuit = proposePullCircuit(observation, rows, inputs, remaining);
+      if (circuit) return circuit;
       if (state.epoch !== observation.level_epoch || !state.pressureReserve?.gate || !state.pressureReserve.bridge) return null;
       const proposed = await family.propose(observation, rows, inputs, remaining, execution);
       return proposed?.pressurePlan ? proposed : null;
@@ -1195,6 +1235,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
     },
     before(proposal, index, packet, observation) {
+      const circuit = proposal.pullCircuitPlan;
+      if (circuit) {
+        const pose = index === 0 ? circuit.start : circuit.steps[index - 1]!.after;
+        const admitted = (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
+          && matchesPullCircuit(circuit.roles, circuit.field, pose, packet.frame_rows);
+        return { admitted, reason: admitted ? 'pull_circuit_premise_witnessed' : 'pull_circuit_premise_changed' };
+      }
       const access = proposal.pushAccessPlan;
       if (access) {
         const pose = index === 0 ? access.start : access.steps[index - 1]!.after;
@@ -1244,6 +1291,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     async after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      const circuit = proposal.pullCircuitPlan;
+      if (circuit) {
+        const matched = matchesPullCircuit(circuit.roles, circuit.field, circuit.steps[index]!.after, afterRows);
+        return { matched: scored || matched, seal_prefix: scored || !matched,
+          reason: scored ? 'official_boundary' : matched ? 'pull_circuit_step_confirmed' : 'pull_circuit_prediction_refuted' };
+      }
       const access = proposal.pushAccessPlan;
       if (access) {
         const matched = matchesPushAccess(access.roles, access.travel, afterRows, access, access.steps[index]!.after);
@@ -1380,6 +1433,20 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     async record(before, after, command, rows, afterRows, proposal, index, frames) {
+      const circuit = proposal.pullCircuitPlan;
+      if (circuit) {
+        enterEpoch(before.level_epoch);
+        const pose = circuit.steps[index]!.after;
+        if (after.levels_completed > before.levels_completed) {
+          state.coverageTransfer = { epoch: before.level_epoch, motion: 'pull', exitPattern: circuit.field.goalPixels, ref: after.observation_ref };
+        } else if (matchesPullCircuit(circuit.roles, circuit.field, pose, afterRows)) {
+          state.pullCircuit = { field: circuit.field, pose };
+        } else {
+          delete state.pullCircuit;
+          state.pullCircuitRefuted = true;
+        }
+        return { events: [] };
+      }
       acquireCoverageTransfer(before, after, command, rows);
       const access = proposal.pushAccessPlan;
       if (access && after.levels_completed > before.levels_completed && access.steps[index]!.after.actor === access.goal) {
