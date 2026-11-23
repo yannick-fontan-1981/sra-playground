@@ -228,22 +228,22 @@
       "level": 8,
       "title": "La cour au cœur du lac",
       "reference": {
-        "entries": 145,
-        "selections": 10,
-        "nonSelectionActions": 135,
+        "entries": 184,
+        "selections": 16,
+        "nonSelectionActions": 168,
         "result": "WIN",
         "metrics": {
-          "actions": 145,
-          "selections": 10,
-          "merchantPushes": 8,
-          "songs": 13,
+          "actions": 184,
+          "selections": 16,
+          "merchantPushes": 7,
+          "songs": 15,
           "groupSongs": 0,
           "songHeroMoves": 0,
-          "songStoneMoves": 9,
+          "songStoneMoves": 11,
           "songMonsterMoves": 0,
           "supportMoves": 4,
-          "swaps": 2,
-          "partnerSwaps": 1,
+          "swaps": 3,
+          "partnerSwaps": 2,
           "stoneSwaps": 1,
           "monsterSwaps": 0,
           "bentSwaps": 1,
@@ -251,12 +251,12 @@
           "swapReflections": 1,
           "swapLoops": 0,
           "partnerMoves": 0,
-          "stoneMoves": 17,
-          "mirrorMoves": 1,
+          "stoneMoves": 14,
+          "mirrorMoves": 5,
           "reflections": 0,
           "heroReflections": 0,
           "pistonPushes": 0,
-          "platformsCreated": 1,
+          "platformsCreated": 0,
           "monstersRemoved": 0,
           "blocked": 0,
           "deaths": 0
@@ -265,12 +265,12 @@
       "initialWalking": [
         {
           "role": "merchant",
-          "states": 250,
+          "states": 246,
           "reachableGoals": []
         },
         {
           "role": "wizard",
-          "states": 249,
+          "states": 244,
           "reachableGoals": []
         },
         {
@@ -329,12 +329,121 @@
     },
     {
       "level": 8,
-      "name": "Budget géométrique des ressources",
+      "name": "Certificat matériel : quatre poids pour quatre commandes",
       "passed": true,
-      "observed": "Avec un seul appui neuf, l’entrée doit emprunter la porte accord. Un passage qui évite cette porte exige au moins deux cases d’eau comblées. Le témoin conserve deux poids secs et un seul appui immergé.",
-      "minimumNewWaterCellsWithAccordClosed": 2,
-      "minimumNewWaterCellsWithAccordOpen": 1,
-      "scope": "Borne géométrique des chemins à pied. Les pouvoirs peuvent changer la répartition des héros ; aucune impossibilité globale de solution alternative n’est déduite."
+      "observed": "Toute victoire exige les trois caisses sèches et le miroir sur les quatre boutons. La réserve nord-est ne peut rester dans son alcôve ; immerger ou perdre une caisse ou perdre le miroir retire un poids indispensable.",
+      "certificate": {
+        "type": "Resource-counting invariant under the unchanged engine rules",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 3,
+            "y": 15
+          },
+          {
+            "x": 9,
+            "y": 14
+          },
+          {
+            "x": 15,
+            "y": 11
+          }
+        ],
+        "guardedGoals": [
+          {
+            "at": {
+              "x": 10,
+              "y": 11
+            },
+            "direction": "N"
+          }
+        ],
+        "initialNonHeroWeights": {
+          "crates": 3,
+          "mirrors": 1,
+          "monsters": 0,
+          "total": 4
+        },
+        "initialSupports": 1,
+        "reserve": {
+          "initial": {
+            "x": 16,
+            "y": 3
+          },
+          "final": {
+            "x": 3,
+            "y": 15
+          },
+          "firstMovedAtEntry": 4
+        },
+        "finalWeights": [
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 3,
+            "y": 15
+          },
+          {
+            "x": 9,
+            "y": 14
+          },
+          {
+            "x": 15,
+            "y": 11
+          }
+        ],
+        "referenceConservesEveryWeight": true,
+        "mirrorMovesAfterExtraction": 4,
+        "argument": [
+          "A live hero cannot remain in a closed press: entry is blocked and closure expels or crushes its occupant. The guarded destination therefore requires accord to be pressed at a legal WIN.",
+          "The three living heroes occupy the three distinct goals at WIN. None of the four distinct accord buttons overlaps a goal or a press, so neither a hero nor a closed press can supply a final weight.",
+          "The level starts with exactly three crates, one mirror and no monsters. Moves, songs, swaps and reflections relocate those objects; buoyancy or crushing can remove a weight but no rule creates or duplicates one.",
+          "A submerged support is not a weight, cannot return to dry crate form and remains on water. The initial reusable support and any extra support cannot replace a missing final weight.",
+          "Four nonhero weights are consequently required and exactly four exist. Every original crate, including the reserve initially outside all final buttons, and the original mirror must survive and occupy those buttons."
+        ],
+        "scope": "Necessity of the four physical weights in every reachable winning state under these rules. This is not an exhaustive state-space search, a unique solution, a mandatory order or a minimum-action proof."
+      }
+    },
+    {
+      "level": 8,
+      "name": "Ancien contournement fermé : mirror-weight-shortcut",
+      "passed": true,
+      "observed": "Le miroir remplaçant une caisse ne suffit plus à alimenter les quatre commandes ; la réserve reste inutilisée et la campagne ne gagne pas.",
+      "baselineVersion": "0.1.1",
+      "commands": "LDDRUURULLLCUUUUURCLUUUUURDDDDDDDDDDDDLLCCUURRRRRDDDDDDDDDDDLDLDRUUUUUUUCCDDDDDDDDDDDLLLLLLDLUUULLUUUUULLCCDDDDDLLLLLLLLLLLLLUUUUUURDURUURRRRRUCDRRRRRRUCDDDRRRRRRRDR",
+      "baselineResult": "WIN",
+      "baselineEntries": 165,
+      "revisedResult": "NOT_FINISHED",
+      "revisedBlockedEntries": 27,
+      "revisedDeaths": 0,
+      "reserveUnchanged": true,
+      "accordEverPressed": false,
+      "finalAttempt": "Wizard east",
+      "finalAttemptRefused": true,
+      "scope": "Concrete replay regression. The resource certificate, rather than these two routes alone, establishes the general necessity of the reserve."
+    },
+    {
+      "level": 8,
+      "name": "Ancien contournement fermé : two-supports-shortcut",
+      "passed": true,
+      "observed": "Les deux appuis conduisent encore le Magicien dans la cour, mais la destination sous presse reste fermée : le pas depuis (9,11) vers (10,11) est refusé.",
+      "baselineVersion": "0.1.1",
+      "commands": "LDDDDDDDDDDLLLLLLLDLUUURRRRRRRUUUUUUUUUUUUURRRCUUUUUURRRRRUCDDDDDDDRRULUUUUUUUUUUULCCDDLLLLLRCDDDDDDDDDCCDDLLLLLLLLLDDDDDRLCRRLUCCDDRRULUUUULLCRRRRRUUCLLLDDDDLLLLLLLLLDDDDDDRRRRRUULCDDDDDDRRRRRRR",
+      "baselineResult": "WIN",
+      "baselineEntries": 195,
+      "revisedResult": "NOT_FINISHED",
+      "revisedBlockedEntries": 28,
+      "revisedDeaths": 0,
+      "reserveUnchanged": true,
+      "accordEverPressed": false,
+      "finalAttempt": "Wizard east",
+      "finalAttemptRefused": true,
+      "scope": "Concrete replay regression. The resource certificate, rather than these two routes alone, establishes the general necessity of the reserve."
     },
     {
       "level": 8,
@@ -369,7 +478,67 @@
       "name": "Virage prématuré dans la cour",
       "passed": true,
       "observed": "Monter dès la première case intérieure déplace l’appui vers le nord et refuse le passage suivant du Marchand.",
-      "commands": "DRCRCDDDDDDDLLCCDDDDLDDDDDDRRLDRUUUUUUUCCUULLLUUULDDRDDDDDDDDDDDDLLLLLLDLUUULLUUUUULLCCDDDDDLLLLLLLLLLLLLUUUUUURDURUURRRUCDRRRRR"
+      "commands": "DRCRCDDDDDDDLLCCDDDDLDDDDDDRRLDRUUUUUUUCCUULLLUUULDDRDDDRRDDDRDLDDDLLLLLLLLLLLUUUUULLCCDDDDDLLLLLLLLLLUUCCDDDDDDDDDDDRRRRRUCCCUULLUUUUUUULLLCLLLUUUUUURDURUURRRUCDRRRRR"
+    },
+    {
+      "level": 8,
+      "name": "Un héros ne peut remplacer durablement un poids perdu",
+      "passed": true,
+      "observed": "Après immersion de la caisse du bouton (13,5), le Marchand maintient encore le circuit en restant sur son bouton. Dès qu’il remonte, la presse de la destination expulse réellement le Magicien vers (10,10). Tous vivent, mais seuls trois poids non héros subsistent pour quatre commandes.",
+      "commands": "DRCRCDDDDDDDLLCCDDDDLDDDDDDRRLDRUUUUUUUCCUULLLUUULDDRDDDRRDDDRDLDDDLLLLLLLLLLLUUUUULLCCDDDDDLLLLLLLLLLUUCCDDDDDDDDDDDRRRRRUCCCUULLUUUUUUULLLCLLLUUUUUURDURUURRRRRUCDRRRRRRUCDDDRRRRRRRRCCDLLLULUUUUURRRRRRRRCDCCDU",
+      "entries": 210,
+      "blocked": 0,
+      "deaths": 0,
+      "remainingNonHeroWeights": 3,
+      "requiredFinalWeights": 4,
+      "submergedSupports": 2,
+      "temporaryHeroRelay": true,
+      "goalPressExpelledHero": true,
+      "goalAfterRelease": {
+        "x": 10,
+        "y": 10
+      },
+      "scope": "A reachable counter-branch demonstrates the physical release. The resource invariant makes the lost-weight state unwinnable without Undo or Reset."
+    },
+    {
+      "level": 8,
+      "name": "Destination sous presse lisible",
+      "passed": true,
+      "observed": "Les quatre coins jaunes du but restent visibles, le centre est noir fermé puis gris ouvert, sans pixel bleu parasite.",
+      "closedPixels": [
+        [
+          11,
+          15,
+          11
+        ],
+        [
+          15,
+          5,
+          15
+        ],
+        [
+          11,
+          7,
+          11
+        ]
+      ],
+      "openPixels": [
+        [
+          11,
+          11,
+          11
+        ],
+        [
+          11,
+          3,
+          11
+        ],
+        [
+          11,
+          11,
+          11
+        ]
+      ]
     }
   ],
   "acceptedAlternatives": [
@@ -423,10 +592,10 @@
       "N5 est une arène : deux dangers sont rapprochés tandis que deux autres deviennent des contrepoids. Les sorties sont réparties autour de la salle.",
       "N6 fait voyager le même miroir entre deux postes, puis le retire de l’axe optique. Le rythme est celui d’un équipement réaffecté, sans caisse de pont.",
       "N7 adopte un peigne d’alcôves et un chenal parallèle, avec des postes de stationnement hors du chant. La première destination accessible sert de parking utile.",
-      "N8 vise une cour centrale entourée d’eau ; la préparation se déroule dans une galerie périphérique et trois ressources changent de rôle.",
+      "N8 vise une cour centrale entourée d’eau ; trois caisses et un miroir réaffecté doivent alimenter quatre commandes, tandis qu’un appui immergé initial prépare le passage.",
       "L’absence de doublon exact de terrain complète la lecture des problèmes ; elle ne constitue pas, à elle seule, une mesure de variété ou de difficulté."
     ]
   },
   "remainingCorrections": [],
-  "scope": "Lecture indépendante des cartes, rejeux complets, petits graphes de marche initiale, contre-branches locales, variante constructive N7 et borne géométrique N8. Aucune recherche exhaustive à trois héros, unicité, nécessité universelle des pouvoirs ou optimalité des parcours n’est revendiquée. Les maps et builders N5–8 restent en lecture seule."
+  "scope": "Lecture indépendante des cartes, rejeux complets, petits graphes de marche initiale, contre-branches locales, variante constructive N7, certificat matériel N8, anciens contournements rejoués et expulsion atteinte depuis la carte initiale. La nécessité des quatre poids de N8 est établie par décompte ; aucune recherche exhaustive à trois héros, unicité, nécessité universelle des pouvoirs ou optimalité des parcours n’est revendiquée. Les maps et builders N5–8 restent en lecture seule."
 }

@@ -56,6 +56,14 @@ Après une action effective et la stabilisation des dispositifs, le contact orth
 
 La défaite et la victoire apparaissent après la dernière image de leur animation. Une salle réussie ouvre la première salle encore inachevée ; la campagne affiche `WIN` lorsque les huit salles sont terminées. Undo peut annuler la transition de salle ou la victoire finale.
 
+## Contrainte matérielle du niveau 8 en 0.1.2
+
+Le niveau 8 possède quatre boutons distincts du circuit `accord`, en `(13,5)`, `(3,15)`, `(9,14)` et `(15,11)`, séparés des trois destinations. Ce circuit maintient ouverte la presse du but `(10,11)`, qui pousse vers le nord au relâchement. Un état de victoire stable exige donc quatre boutons occupés alors que les trois héros sont tous sur les buts. Les seuls poids non héros sont les trois caisses et le miroir ; chacun doit participer à l’accord. L’appui immergé initial en `(7,13)` n’est pas un poids et sert au franchissement du lac.
+
+La caisse nord-est doit être extraite de sa réserve. Une caisse convertie en appui ou un poids détruit rend le bilan final insuffisant. Poser une caisse sur un appui ou une plateforme active la conserve en tant que caisse ; la contrainte porte sur la préservation de sa fonction de poids, et non sur un historique d’actions interdites.
+
+Cette nécessité résulte des règles générales et de la carte. Le moteur conserve la même condition de victoire, sans vérifier une séquence particulière, une découverte pédagogique ou un nombre de capacités utilisées. La révision conserve l’ordre des salles, le tutoriel N3 et les cartes N1–N7.
+
 ## Contrat public
 
 | Action | Effet |

@@ -188,6 +188,38 @@ const checkActualLevel8Warning=async()=>{
   return{case:'actual level 8 blocked mirrors',level:8,prefixActions:turn,redMirrorIndices:stepDetailed(route.world,route.trace[turn].before,5).blockedMirrorIndices,frames:4,redPixels:changed,onlyBlackBacksChanged:true,exactPixelsAndTiming:true,repeatedWarningAddsNoUndo:true,resetClearsWarning:true};
  }finally{await h.close();}
 };
+// The final destination is a visible press, so bypassing the lake cannot
+// bypass the four-weight condition. Exercise its actual shipped pixels and Undo.
+const checkActualLevel8GoalGate=async()=>{
+ const design=JSON.parse(readFileSync(resolve(root,'reference/level8-design.json'),'utf8'));
+ assert.deepEqual(design.spec,SS18_LEVELS[7]);
+ const route=replay(design.spec,design.commands),same=(a,b)=>a.x===b.x&&a.y===b.y;
+ const index=route.world.gates.findIndex(g=>route.world.goals.some(goal=>same(goal,g.at)));
+ assert.ok(index>=0,'Level 8 physically guards a destination');
+ const gate=route.world.gates[index],circuit=route.world.circuits.find(c=>c.id===gate.circuit);
+ assert.equal(gate.closedWhen,'released');assert.equal(circuit.buttons.length,4);
+ const turn=route.trace.findIndex(t=>t.before.gateClosed[index]&&!t.after.gateClosed[index]);
+ assert.ok(turn>=0,'The reference route opens the final goal press');
+ const h=createHarness();
+ try{
+  await h.choose(8);
+  const closed=tile(h.ref.observe().frame,design.spec,gate.at.x,gate.at.y);
+  for(const[x,y]of[[0,0],[2,0],[0,2],[2,2]])assert.equal(closed[y][x],11,'Locked destination retains yellow corners');
+  assert.equal(closed[1][1],5,'Closed goal press has a black centre');assert.ok(!closed.flat().includes(9));
+  assert.equal(goalCount(h.ref.observe().frame),3);
+  let before;
+  for(const action of design.actions.slice(0,turn+1)){before=h.ref.observe();await h.action(action);}
+  const opened=h.ref.observe(),open=tile(opened.frame,design.spec,gate.at.x,gate.at.y);
+  assert.equal(open[1][1],3,'Opened goal press has a gray centre');
+  for(let y=0;y<3;y++)for(let x=0;x<3;x++)if(x!==1||y!==1)assert.equal(open[y][x],11,'Open destination has its full yellow frame');
+  assert.ok(!open.flat().includes(9));assert.equal(opened.state,'NOT_FINISHED');
+  await h.reset('undo');assert.deepEqual(h.ref.observe().frame,before.frame);
+  assert.equal(tile(h.ref.observe().frame,design.spec,gate.at.x,gate.at.y)[1][1],5);
+  await h.action(design.actions[turn]);assert.deepEqual(h.ref.observe(),opened);
+  assert.deepEqual(h.errors,[]);
+  return{level:8,goal:gate.at,requiredWeights:circuit.buttons.length,openingInput:turn+1,closedPixels:closed,openPixels:open,threeVisibleGoals:true,exactPixelsAndTiming:true,openingUndoAndReplay:true};
+ }finally{await h.close();}
+};
 const checkMirrorInterference=async()=>{
  const result=[];
  const cases=[
@@ -230,6 +262,7 @@ try{
  report.wizardLoopCoverage=await checkWizardLoop();report.checks.push('A four-mirror returning ray illuminates its path and blinks the Wizard without moving occupants or awarding a false discovery.');
  report.deviceGlyphCoverage=await checkDeviceGlyphs();report.checks.push('Gray-backed buttons and black/gray press centers have the exact expected pixels.');
  report.mirrorInterferenceCoverage=await checkMirrorInterference();if(!fixturesOnly)report.mirrorInterferenceCoverage.push(await checkActualLevel8Warning());report.checks.push('Mirror warnings flash only involved backs, preserve diagonals and lock ordinary controls.');
+ if(!fixturesOnly){report.level8GoalGateCoverage=await checkActualLevel8GoalGate();report.checks.push('The actual level 8 destination retains yellow corners while locked, opens only with four weights, and preserves black/gray centres through Undo and replay.');}
  if(!tutorialOnly){
   const spec=makeArena('interruptible trio action',[[3,2,'o']]);h=createHarness(spec);
   assert.equal(h.board.dataset.selected,'merchant');assert.equal(h.$('tutorial').hidden,false);assert.equal(h.$('lesson-progress').textContent,`0 / ${lessonIds.length} découvertes`);const moves=h.$('moves').textContent;

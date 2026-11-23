@@ -1,6 +1,6 @@
 # SS18 — La Galerie Résonante
 
-Laboratoire autonome **0.1.1**, avec huit salles qualifiées et le trio fixé par la feuille de route : **Marchand orange 12, Magicien violet 15, Barde magenta 6**. Le Marchand est sélectionné au départ. Les trois héros doivent occuper les trois destinations simultanément.
+Laboratoire autonome **0.1.2**, avec huit salles qualifiées et le trio fixé par la feuille de route : **Marchand orange 12, Magicien violet 15, Barde magenta 6**. Le Marchand est sélectionné au départ. Les trois héros doivent occuper les trois destinations simultanément.
 
 ## Jouer et reconstruire
 
@@ -24,9 +24,11 @@ Flèches : capacité ou marche du rôle actif. Espace/X : reflets. 1 / 2 / 3 et 
 | 5 | Les gardiens de l’arène | Combattre une paire de monstres et conserver deux contrepoids | 83 |
 | 6 | Le miroir en tournée | Faire voyager un miroir puis dégager son ancien axe | 46 |
 | 7 | La navette des alcôves | Recaler un appui et ses passagers dans un canal en peigne | 43 |
-| 8 | La cour au cœur du lac | Réaffecter trois ressources pour atteindre les destinations centrales | 135 |
+| 8 | La cour au cœur du lac | Conserver trois caisses et recycler le miroir pour maintenir quatre poids autour de la cour | 168 |
 
 Les témoins démontrent une solution, pas un minimum. Les variantes intéressantes sont conservées : notamment un départ sans échange dans N4 et une autre navette dans N7. Le niveau 3 privilégie la richesse pédagogique ; toutes ses découvertes sont démontrées, sans devenir obligatoires pour gagner.
+
+La révision 0.1.2 renforce le niveau 8 : quatre boutons doivent rester occupés par les trois caisses et le miroir, tandis qu’un appui immergé initial assure le passage. Une presse sur une destination rend cet accord nécessaire jusqu’à la victoire. La caisse nord-est est ainsi indispensable ; la convertir en appui ou perdre un autre poids empêche de terminer. L’ordre des niveaux et le tutoriel au niveau 3 sont conservés.
 
 Les références viennent des [zones mixtes](https://sinkingstarwalkthrough.com/fr/crossovers/) et du [Nord](https://sinkingstarwalkthrough.com/fr/north/), puis des énigmes précisément identifiées dans [l’audit des sources](docs/source-audit.md). Les cartes, le chant carré et les règles du trio sont adaptés au contrat de la série SS. Les silhouettes et problèmes sont détaillés dans [la conception des salles](docs/level-design.md).
 
@@ -39,7 +41,7 @@ npm run validate:ui
 npm run validate:design
 ```
 
-Résultat qualifié : **56 tests réussis**, huit témoins gagnants sans refus ni mort, **700 entrées** dont 83 sélections, **1 988 images publiques** et **27/27 découvertes** dans le tutoriel. Le HTML compilé est également rejoué dans Happy DOM par ses commandes, avec comparaison des pixels, durées et annulations. Les avertissements rouges sont contrôlés sur des cas ciblés et sur la vraie carte N8.
+Résultat qualifié : **56 tests réussis**, huit témoins gagnants sans refus ni mort, **739 entrées** dont 89 sélections, **2 096 images publiques** et **27/27 découvertes** dans le tutoriel. Le HTML compilé est également rejoué dans Happy DOM par ses commandes, avec comparaison des pixels, durées et annulations. Les avertissements rouges sont contrôlés sur des cas ciblés et sur la vraie carte N8.
 
 Les cinq scripts de revue vérifient les contre-branches locales et les variantes conservées. La comparaison avec les 32 terrains de SS14–17 ne trouve aucun doublon exact après translation, rotation ou réflexion. Elle complète une relecture des mécanismes et ne constitue pas une mesure générale d’originalité.
 

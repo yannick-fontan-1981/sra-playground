@@ -1,6 +1,6 @@
 {
   "success": true,
-  "htmlSha256": "22f05c589dbca0bb2292afd59b3f0d76a92b3c85547c544fee100e8982984f27",
+  "htmlSha256": "6fa0427f4d0a3eb71e9d258552bc6924156dbbae3ce9fd91d265c3364a2c0ed3",
   "scope": "focused-ui-and-full-campaign",
   "tutorialLevel": 3,
   "pedagogicalFixtureLevel": 3,
@@ -12,6 +12,7 @@
     "A four-mirror returning ray illuminates its path and blinks the Wizard without moving occupants or awarding a false discovery.",
     "Gray-backed buttons and black/gray press centers have the exact expected pixels.",
     "Mirror warnings flash only involved backs, preserve diagonals and lock ordinary controls.",
+    "The actual level 8 destination retains yellow corners while locked, opens only with four weights, and preserves black/gray centres through Undo and replay.",
     "Keys 1/2/3, repeated Tab, all three role buttons and image clicks select correctly without advancing the world; Shift+Tab and off-canvas clicks are respected.",
     "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries in the current room; Restart returns to level 1 with its tutorial hidden.",
     "Reduced-motion mode paints the final result without timer waits.",
@@ -335,6 +336,52 @@
       "resetClearsWarning": true
     }
   ],
+  "level8GoalGateCoverage": {
+    "level": 8,
+    "goal": {
+      "x": 10,
+      "y": 11
+    },
+    "requiredWeights": 4,
+    "openingInput": 74,
+    "closedPixels": [
+      [
+        11,
+        15,
+        11
+      ],
+      [
+        15,
+        5,
+        15
+      ],
+      [
+        11,
+        7,
+        11
+      ]
+    ],
+    "openPixels": [
+      [
+        11,
+        11,
+        11
+      ],
+      [
+        11,
+        3,
+        11
+      ],
+      [
+        11,
+        11,
+        11
+      ]
+    ],
+    "threeVisibleGoals": true,
+    "exactPixelsAndTiming": true,
+    "openingUndoAndReplay": true
+  },
   "campaignCoverage": [
     {
       "level": 1,
@@ -388,7 +435,7 @@
     {
       "level": 8,
       "title": "La cour au cœur du lac",
-      "actions": 145,
+      "actions": 184,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     }

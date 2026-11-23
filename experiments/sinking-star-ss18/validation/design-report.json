@@ -569,8 +569,8 @@
     {
       "level": 8,
       "title": "La cour au cœur du lac",
-      "mapSha256": "16a65371b672df8b07576d4ba24a988dcc66f1eb5bb587a4ea7592a0b334d2ce",
-      "terrainSha256": "2602cde60a85178de7e26bdf7f8c1bd6a087af03d109abeed0361ad94b502921",
+      "mapSha256": "93f1a4585865f1a40ad1b4e62f16bbcf0587676ce53ec7031a5bf4f2b8b23a17",
+      "terrainSha256": "36b033e345e88c1c75f9038bc6ec307a1e0035c17cf6776062079bc12f9c3f73",
       "goals": [
         {
           "x": 9,
@@ -585,27 +585,27 @@
           "y": 11
         }
       ],
-      "landCells": 264,
+      "landCells": 259,
       "waterCells": 58,
       "walking": [
         {
           "role": "merchant",
-          "states": 250,
-          "transitions": 1000,
+          "states": 246,
+          "transitions": 984,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 250,
-          "transitions": 1000,
+          "states": 246,
+          "transitions": 984,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 250,
-          "transitions": 1000,
+          "states": 246,
+          "transitions": 984,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -613,22 +613,22 @@
       "generousWalking": [
         {
           "role": "merchant",
-          "states": 252,
-          "transitions": 1008,
+          "states": 248,
+          "transitions": 992,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 252,
-          "transitions": 1008,
+          "states": 248,
+          "transitions": 992,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 252,
-          "transitions": 1008,
+          "states": 248,
+          "transitions": 992,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -1125,16 +1125,16 @@
       "result": {
         "success": true,
         "levels": 4,
-        "localChecks": 13,
+        "localChecks": 16,
         "acceptedAlternatives": 1,
         "actions": [
           93,
           58,
           54,
-          145
+          184
         ]
       },
-      "sha256": "25825edd76a28dd9ab0a9dc0fb72295b6695cdb9993a8bb89e320e5d4be00a42"
+      "sha256": "b644ccf6313ec72faf86a81f9e8f7b8616f528c0a49305c0103317213b00c643"
     },
     {
       "script": "reference/author/audit-early-levels.mjs",
@@ -1341,17 +1341,17 @@
           },
           {
             "level": 8,
-            "entries": 145,
-            "nonSelectionActions": 135,
+            "entries": 184,
+            "nonSelectionActions": 168,
             "walking": [
               {
                 "role": "merchant",
-                "states": 250,
+                "states": 246,
                 "reachableGoals": []
               },
               {
                 "role": "wizard",
-                "states": 249,
+                "states": 244,
                 "reachableGoals": []
               },
               {
@@ -1362,12 +1362,12 @@
             ]
           }
         ],
-        "checks": 10,
+        "checks": 14,
         "acceptedAlternatives": 1,
         "comparedMaps": 32,
         "remainingCorrections": 0
       },
-      "sha256": "2bff26845523a027cc8808393ce6c2d53a02d779e805b81b90df46a782cfd4eb"
+      "sha256": "dcfe5518c25823e358642affdb936b9a3fca273ff0818f508993f9e47dedfffd"
     }
   ],
   "limitations": [
