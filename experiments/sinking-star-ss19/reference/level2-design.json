@@ -1,0 +1,663 @@
+{
+  "spec": {
+    "id": "ss19-02",
+    "title": "Le gardien du seuil",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "#####..........m####",
+      "####################",
+      "####################",
+      "######W.......######",
+      "########.#####.o####",
+      "########.......#.###",
+      "##..####.....B...###",
+      "##.Z~~~~.........g##",
+      "##..####.........###",
+      "########.........###",
+      "########.........###",
+      "########.........###",
+      "#########g#####g####",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "seuil",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 3
+          },
+          {
+            "x": 3,
+            "y": 10
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 15
+        },
+        "circuit": "seuil",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 15
+        },
+        "circuit": "seuil",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 10
+        },
+        "circuit": "seuil",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RLRRCCLDDDCDDDRRRRRRRDLLLLLLCRURRDRRRRRRRCCDDDDDCCDDRRRD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes 2: Monsters · énigmes 15 et 22",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-15",
+    "puzzle": 15,
+    "objective": "Conserver un monstre comme poids, changer sa cible pour le bloquer, puis remplacer le Magicien par une caisse sur un îlot de commande.",
+    "secondary": {
+      "label": "Heroes 2: Monsters · énigme 22 · conserver les monstres sur des commandes",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-22"
+    }
+  },
+  "metrics": {
+    "actions": 56,
+    "selections": 8,
+    "warriorPushes": 6,
+    "trainPushes": 0,
+    "huntSteps": 4,
+    "monsterHuntMoves": 4,
+    "songs": 4,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 4,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "stoneSwaps": 1,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 11,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Quatre pas dans la galerie attirent le gardien sur la commande intermédiaire.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "seuil": true
+      }
+    },
+    {
+      "label": "Changer de héros fixe la cible au sud : le mur bloque la chasse. Le chant retire la réserve du coude aveugle.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "seuil": true
+      }
+    },
+    {
+      "label": "Le Guerrier amène la caisse dans la visée du Magicien, sans quitter le cône qui immobilise le gardien.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "seuil": true
+      }
+    },
+    {
+      "label": "La caisse remplace le Magicien sur la commande de l’îlot ; sa nouvelle position garde le monstre immobile.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "seuil": true
+      }
+    },
+    {
+      "label": "Le Magicien occupe la sortie est.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "seuil": true
+      }
+    },
+    {
+      "label": "Le Guerrier rejoint la sortie sud-ouest.",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "seuil": true
+      }
+    },
+    {
+      "label": "Le Barde ferme la marche : les deux poids restent en place pendant les trois arrivées.",
+      "turn": 56,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "seuil": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un monstre et une caisse servent de poids pour libérer les sorties.",
+      "La transposition dépose une pièce sur une commande sans laisser la case vide."
+    ],
+    "changed": [
+      "Le gardien est isolé dans un rail horizontal, derrière deux rangées de murs qui interdisent le chant et les visées.",
+      "La poursuite déterministe de SS19 dépend du héros sélectionné, de sa position après l’action et de l’axe dominant ; ces détails ne sont pas attribués au guide.",
+      "La réserve sort d’un coude aveugle par le chant, puis le Guerrier l’aligne avec le Magicien.",
+      "Les trois destinations sont sur des presses liées au même accord de deux commandes.",
+      "La carte, les coordonnées, le rail, l’îlot et le trajet sont propres à SS19."
+    ],
+    "sourceReading": "Heroes2 15 associe la transposition d’un monstre puis d’un cristal aux plaques. Heroes2 22 utilise les monstres comme poids à conserver. SS19 adapte cette logique avec un seul gardien mobile, une caisse unique, un relais de sélection et un îlot de commande.",
+    "localChecks": [
+      {
+        "name": "Caisse indispensable",
+        "observed": "À la victoire, les trois héros occupent les trois destinations, distinctes des commandes. Il ne reste que la caisse et le gardien pour les deux commandes. Immerger ou perdre la caisse rend cet accord final impossible.",
+        "scope": "Argument de conservation des occupants, indépendant du témoin."
+      },
+      {
+        "name": "Gardien sur une commande intérieure du rail",
+        "observed": "La commande x11 ne se trouve ni à x5 ni à x15, les deux extrémités. Les murs verticaux n’arrêtent le gardien que si le héros actif est dans le cône vertical.",
+        "scope": "Géométrie du rail et règle de poursuite du moteur."
+      },
+      {
+        "name": "Aucune sortie accessible sans accord",
+        "observed": "Chaque destination est la case d’une presse fermée tant que l’une des deux commandes est libre ; les héros ne peuvent pas contourner la condition en restant derrière une porte.",
+        "scope": "Condition de victoire spatiale, sans verrou caché."
+      }
+    ]
+  }
+}

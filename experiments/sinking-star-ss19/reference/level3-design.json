@@ -1,0 +1,1255 @@
+{
+  "spec": {
+    "id": "ss19-03",
+    "title": "L’interrupteur hors d’atteinte",
+    "rows": [
+      "####################",
+      "####################",
+      "##o#####.....#..#..#",
+      "##~#####.....#.#o#.#",
+      "##~#####.........#.#",
+      "##~#####..#..#...#.#",
+      "##.~~~.#.....#..#..#",
+      "########.....#...g##",
+      "########B....#...#.#",
+      "########.....#######",
+      "########.....#######",
+      "########.....#.....#",
+      "########.....#....Z#",
+      "########.....#.....#",
+      "########W..........#",
+      "########.....#.....#",
+      "########.....#o.g..#",
+      "#########g#..#.....#",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 2,
+          "y": 6
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "alternance",
+        "buttons": [
+          {
+            "x": 6,
+            "y": 6
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "charges",
+        "buttons": [
+          {
+            "x": 10,
+            "y": 4
+          },
+          {
+            "x": 8,
+            "y": 11
+          }
+        ],
+        "color": 12
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 13,
+          "y": 4
+        },
+        "circuit": "alternance",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 14
+        },
+        "circuit": "alternance",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 17
+        },
+        "circuit": "alternance",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 16
+        },
+        "circuit": "charges",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 7
+        },
+        "circuit": "charges",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRRRRRDRDDLUURULLLLLLDLUUUCDDLLLLLLCCXRUUUUUUUURRRRRDDDDRCCUUUURRRRRRRRDLLCCUUUUUUUUUURDCCUUUULLLCDDRRRCCULLLDDLCCDDDRCXCCDDDDDDDRRDDRRCXDDDDDRDDDDDDD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Mirrors · énigme 16",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-16",
+    "puzzle": 16,
+    "objective": "Extraire les deux réserves par des sas alternés et piloter à distance la configuration finale des trois sorties.",
+    "secondary": {
+      "label": "Heroes 3 · extraction d’un cristal par le chant",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-19"
+    }
+  },
+  "metrics": {
+    "actions": 150,
+    "selections": 18,
+    "warriorPushes": 14,
+    "trainPushes": 2,
+    "huntSteps": 0,
+    "monsterHuntMoves": 0,
+    "songs": 3,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 3,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 2,
+    "partnerSwaps": 1,
+    "stoneSwaps": 1,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 3,
+    "stoneMoves": 20,
+    "mirrorMoves": 0,
+    "reflections": 3,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La caisse de la chambre basse monte jusqu’au sas ouvert.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 14,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": false,
+        "charges": false
+      }
+    },
+    {
+      "label": "La première réserve traverse le sas avant son inversion.",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": false,
+        "charges": false
+      }
+    },
+    {
+      "label": "Le premier lest occupe la commande basse.",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": false,
+        "charges": false
+      }
+    },
+    {
+      "label": "Le poids isolé change de bras : le sas inférieur ferme, le supérieur ouvre.",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": true,
+        "charges": false
+      }
+    },
+    {
+      "label": "Le chant sort la seconde caisse de son cul-de-sac sans position de poussée arrière.",
+      "turn": 74,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": true,
+        "charges": false
+      }
+    },
+    {
+      "label": "Le Magicien extrait la Barde de son poste sans reprendre la caisse avec le chant.",
+      "turn": 88,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": true,
+        "charges": false
+      }
+    },
+    {
+      "label": "La caisse supérieure franchit le sas puis remplace tout gardien sur la commande haute.",
+      "turn": 97,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": true,
+        "charges": true
+      }
+    },
+    {
+      "label": "Le sas bas rouvre pour faire entrer la Barde dans la dernière chambre.",
+      "turn": 120,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 2
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": false,
+        "charges": true
+      }
+    },
+    {
+      "label": "La dernière inversion ouvre la destination occidentale sans déplacer les deux lests.",
+      "turn": 137,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": true,
+        "charges": true
+      }
+    },
+    {
+      "label": "Les trois sorties séparées restent occupées ensemble.",
+      "turn": 150,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 17
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 2,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "alternance": true,
+        "charges": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un cristal change de côté par reflet et commande une plaque inaccessible.",
+      "Le même interrupteur ouvre un passage et ferme l’autre."
+    ],
+    "changed": [
+      "Trois pièces de jeu distinctes et trois destinations séparées remplacent le parcours du guide.",
+      "Une réserve sèche est coincée dans un cul-de-sac : la Barde doit la sortir avant que le Guerrier la transfère.",
+      "La machine optique est isolée de toutes les lignes de visée des héros ; le reflet global reste sa commande.",
+      "Cette salle sans monstre alterne la réflexion et la logistique après l’introduction de la chasse."
+    ],
+    "sourceReading": "Mirrors 16 fournit le poids télécommandé par reflet. Le plan, les deux sas et le partage des réserves sont originaux ; le nombre de reflets du témoin n’est pas un minimum démontré."
+  }
+}

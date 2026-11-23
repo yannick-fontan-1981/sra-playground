@@ -1,0 +1,37 @@
+import assert from 'node:assert/strict';
+import {readFileSync,writeFileSync} from 'node:fs';
+import {compileLevel,initialState,circuitPressed,terrainAt} from '../../dist/core.js';
+import {replay} from '../../scripts/solver.mjs';
+
+const design=JSON.parse(readFileSync(new URL('../level2-design.json',import.meta.url),'utf8'));
+const {spec,commands,stages}=design,w=compileLevel(spec),initial=initialState(w),checks=[];
+const pos=points=>points.map(p=>`${p.x},${p.y}`).sort();
+const check=(name,observed,scope)=>checks.push({name,observed,scope});
+const full=replay(spec,commands);assert.equal(full.state.complete,true);assert.equal(full.metrics.blocked,0);assert.equal(full.metrics.deaths,0);
+check('Témoin complet',`${full.metrics.actions} entrées, ${full.metrics.selections} sélections, ${full.metrics.huntSteps} phases de chasse ; victoire sans refus ni perte.`,'Rejeu concret, sans revendication d’optimalité.');
+assert.deepEqual(initial.gateClosed,[true,true,true]);
+for(const goal of w.goals)assert.ok(w.gates.some(g=>g.at.x===goal.x&&g.at.y===goal.y&&g.closedWhen==='released'&&g.circuit==='seuil'));
+assert.equal(w.buttons.some(b=>w.goals.some(g=>b.x===g.x&&b.y===g.y)),false);
+check('Sorties gardées jusqu’à la victoire','Les trois destinations sont les trois presses du circuit seuil ; elles sont toutes fermées initialement et sont distinctes des deux commandes.','La fermeture expulse l’occupant avant l’évaluation de la victoire.');
+const loaded=replay(spec,'RLRR');assert.deepEqual(pos(loaded.state.monsters),['11,3']);assert.equal(circuitPressed(w,loaded.state,'seuil'),true);
+const over=replay(spec,'RLRRL');assert.deepEqual(pos(over.state.monsters),['10,3']);assert.equal(circuitPressed(w,over.state,'seuil'),false);assert.deepEqual(over.state.gateClosed,[true,true,true]);assert.equal(over.state.dead,false);
+check('Un pas de trop déplace le gardien','RLRR ouvre l’accord ; ajouter L fait quitter x11 au gardien et referme les trois destinations.','Contre-parcours concret qui montre que la commande n’est pas un simple terminus.');
+const selected=replay(spec,'RLRRC');assert.deepEqual(pos(selected.state.monsters),['11,3']);assert.equal(circuitPressed(w,selected.state,'seuil'),true);
+const drift=replay(spec,'RLRRCU');assert.deepEqual(pos(drift.state.monsters),['10,3']);assert.equal(circuitPressed(w,drift.state,'seuil'),false);assert.equal(drift.metrics.deaths,0);
+check('Sélection et temps de chasse','Sélectionner le Magicien laisse le gardien immobile ; son pas vers le haut depuis l’îlot fait ensuite dériver le gardien vers x10.','Deux préfixes concrets, sélection seule puis action effective.');
+const choir=replay(spec,commands.slice(0,stages[1].turn));assert.deepEqual(pos(choir.state.monsters),['11,3']);assert.equal(choir.metrics.huntSteps,4);assert.equal(choir.metrics.songStoneMoves,4);
+check('Le Barde fixe la cible au sud','Les quatre déplacements chantés extraient la caisse tandis que le gardien reste sur x11, bloqué verticalement par son mur.','Rejeu de la phase de chant, sans pas de chasse supplémentaire.');
+const aimedPrefix=commands.slice(0,stages[2].turn),aimed=replay(spec,aimedPrefix);assert.deepEqual(pos(aimed.state.stones),['8,10']);
+const sunk=replay(spec,aimedPrefix+'L');assert.deepEqual(sunk.state.stones,[]);assert.deepEqual(pos(sunk.state.supports),['7,10']);assert.equal(sunk.state.dead,false);assert.equal(sunk.metrics.blocked,0);
+check('Immerger la réserve est une impasse réelle','Depuis l’alignement, une poussée supplémentaire à gauche immerge la caisse en (7,10) sans tuer de héros. Il reste un seul poids non héroïque pour deux commandes.','Contre-parcours concret ; l’impossibilité finale découle ensuite du comptage des poids. Undo permet de revenir.');
+const swapped=replay(spec,commands.slice(0,stages[3].turn));assert.deepEqual(pos(swapped.state.stones),['3,10']);assert.deepEqual(pos(swapped.state.monsters),['11,3']);assert.equal(circuitPressed(w,swapped.state,'seuil'),true);assert.equal(swapped.metrics.huntSteps,4);
+check('La cible est la position après le sort','Le Magicien quitte (3,10) pour (8,10), remplacé par la caisse ; le gardien reste sur sa commande, car la poursuite vise la nouvelle position.','Rejeu du relais de commande, sans phase de chasse pendant la transposition.');
+const rail=[];for(let x=5;x<=15;x++){rail.push({x,y:3});assert.equal(terrainAt(w,{x,y:3}),'.');assert.equal(terrainAt(w,{x,y:2}),'#');assert.equal(terrainAt(w,{x,y:4}),'#');assert.equal(terrainAt(w,{x,y:5}),'#');}
+assert.equal(terrainAt(w,{x:4,y:3}),'#');assert.equal(terrainAt(w,{x:16,y:3}),'#');
+const outside=[];for(let y=0;y<20;y++)for(let x=0;x<20;x++)if(terrainAt(w,{x,y})==='.'&&!rail.some(p=>p.x===x&&p.y===y))outside.push({x,y});
+assert.ok(rail.every(p=>outside.every(q=>Math.max(Math.abs(q.x-p.x),Math.abs(q.y-p.y))>=3)));
+assert.equal(w.mirrors.length,0);assert.equal(w.stones.length,1);assert.equal(w.monsters.length,1);assert.equal(w.buttons.length,2);
+check('Gardien inaccessible aux autres transports','Le rail est fermé aux deux extrémités et séparé de tout sol accessible par plus de deux cases de portée ; aucun miroir n’existe. La commande x11 est intérieure au rail x5–15.','Vérification géométrique : ni poussée, ni chant, ni visée du Magicien ne permettent de remplacer la poursuite.');
+check('Deux ressources indispensables','À la victoire, trois héros occupent trois destinations hors commandes. La caisse unique et le gardien unique sont les deux seuls poids restants ; les appuis ne pèsent pas.','Preuve de conservation des occupants, valable pour toutes les routes respectant les règles, et non issue d’une recherche bornée.');
+const report={gameCode:'SS19',level:2,title:spec.title,status:'passed',checks,scope:'Rejeux contradictoires ciblés et arguments géométriques ; pas de preuve de route minimale ni d’unicité de solution.'};
+writeFileSync(new URL('../level2-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({level:2,checks:checks.length,status:'passed'}));

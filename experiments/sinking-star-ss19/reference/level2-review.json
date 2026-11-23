@@ -1,0 +1,54 @@
+{
+  "gameCode": "SS19",
+  "level": 2,
+  "title": "Le gardien du seuil",
+  "status": "passed",
+  "checks": [
+    {
+      "name": "Témoin complet",
+      "observed": "56 entrées, 8 sélections, 4 phases de chasse ; victoire sans refus ni perte.",
+      "scope": "Rejeu concret, sans revendication d’optimalité."
+    },
+    {
+      "name": "Sorties gardées jusqu’à la victoire",
+      "observed": "Les trois destinations sont les trois presses du circuit seuil ; elles sont toutes fermées initialement et sont distinctes des deux commandes.",
+      "scope": "La fermeture expulse l’occupant avant l’évaluation de la victoire."
+    },
+    {
+      "name": "Un pas de trop déplace le gardien",
+      "observed": "RLRR ouvre l’accord ; ajouter L fait quitter x11 au gardien et referme les trois destinations.",
+      "scope": "Contre-parcours concret qui montre que la commande n’est pas un simple terminus."
+    },
+    {
+      "name": "Sélection et temps de chasse",
+      "observed": "Sélectionner le Magicien laisse le gardien immobile ; son pas vers le haut depuis l’îlot fait ensuite dériver le gardien vers x10.",
+      "scope": "Deux préfixes concrets, sélection seule puis action effective."
+    },
+    {
+      "name": "Le Barde fixe la cible au sud",
+      "observed": "Les quatre déplacements chantés extraient la caisse tandis que le gardien reste sur x11, bloqué verticalement par son mur.",
+      "scope": "Rejeu de la phase de chant, sans pas de chasse supplémentaire."
+    },
+    {
+      "name": "Immerger la réserve est une impasse réelle",
+      "observed": "Depuis l’alignement, une poussée supplémentaire à gauche immerge la caisse en (7,10) sans tuer de héros. Il reste un seul poids non héroïque pour deux commandes.",
+      "scope": "Contre-parcours concret ; l’impossibilité finale découle ensuite du comptage des poids. Undo permet de revenir."
+    },
+    {
+      "name": "La cible est la position après le sort",
+      "observed": "Le Magicien quitte (3,10) pour (8,10), remplacé par la caisse ; le gardien reste sur sa commande, car la poursuite vise la nouvelle position.",
+      "scope": "Rejeu du relais de commande, sans phase de chasse pendant la transposition."
+    },
+    {
+      "name": "Gardien inaccessible aux autres transports",
+      "observed": "Le rail est fermé aux deux extrémités et séparé de tout sol accessible par plus de deux cases de portée ; aucun miroir n’existe. La commande x11 est intérieure au rail x5–15.",
+      "scope": "Vérification géométrique : ni poussée, ni chant, ni visée du Magicien ne permettent de remplacer la poursuite."
+    },
+    {
+      "name": "Deux ressources indispensables",
+      "observed": "À la victoire, trois héros occupent trois destinations hors commandes. La caisse unique et le gardien unique sont les deux seuls poids restants ; les appuis ne pèsent pas.",
+      "scope": "Preuve de conservation des occupants, valable pour toutes les routes respectant les règles, et non issue d’une recherche bornée."
+    }
+  ],
+  "scope": "Rejeux contradictoires ciblés et arguments géométriques ; pas de preuve de route minimale ni d’unicité de solution."
+}

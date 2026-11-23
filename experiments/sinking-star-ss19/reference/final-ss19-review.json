@@ -1,0 +1,351 @@
+{
+  "game": "SS19",
+  "version": "0.1.0",
+  "status": "passed",
+  "scope": "Revue des niveaux6–8 par rejeux et variantes constructives, avec preuves géométriques spécifiques au dernier niveau. Aucune unicité ou optimalité des solutions n’est annoncée.",
+  "checks": [
+    {
+      "id": "level6-witness",
+      "label": "Le parcours auteur termine sans refus ni perte",
+      "status": "passed",
+      "level": 6,
+      "metrics": {
+        "actions": 74,
+        "selections": 10,
+        "warriorPushes": 0,
+        "trainPushes": 0,
+        "huntSteps": 0,
+        "monsterHuntMoves": 0,
+        "songs": 3,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 3,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 1,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 5,
+        "mirrorMoves": 0,
+        "reflections": 2,
+        "heroReflections": 1,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level7-witness",
+      "label": "Le parcours auteur termine sans refus ni perte",
+      "status": "passed",
+      "level": 7,
+      "metrics": {
+        "actions": 52,
+        "selections": 9,
+        "warriorPushes": 3,
+        "trainPushes": 2,
+        "huntSteps": 0,
+        "monsterHuntMoves": 0,
+        "songs": 5,
+        "groupSongs": 0,
+        "songHeroMoves": 1,
+        "songStoneMoves": 4,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 1,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 6,
+        "mirrorMoves": 1,
+        "reflections": 3,
+        "heroReflections": 4,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level8-witness",
+      "label": "Le parcours auteur termine sans refus ni perte",
+      "status": "passed",
+      "level": 8,
+      "metrics": {
+        "actions": 115,
+        "selections": 12,
+        "warriorPushes": 9,
+        "trainPushes": 0,
+        "huntSteps": 12,
+        "monsterHuntMoves": 18,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 1,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "reflections": 1,
+        "heroReflections": 1,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level6-nearest-blocker",
+      "label": "Le premier reflet crée l’appui sans activer la commande retardée",
+      "status": "passed",
+      "prefix": 30,
+      "commandPressed": false,
+      "support": {
+        "x": 11,
+        "y": 14
+      }
+    },
+    {
+      "id": "level6-premature-return",
+      "label": "Répéter immédiatement le reflet ramène le Guerrier et ferme son débarcadère",
+      "status": "passed",
+      "branch": "CCDDDCCRRRRRRRUUUUUUURCCUURUUXXX",
+      "lastActionRefused": true,
+      "warrior": {
+        "x": 4,
+        "y": 8
+      },
+      "reason": "La destination nord du miroir est désormais une presse fermée."
+    },
+    {
+      "id": "level6-alternative-calendar",
+      "label": "Préparer la charge après les deux reflets reste une variante légale plus longue",
+      "status": "passed",
+      "commands": "UURUUXUULXCCDDDLDDDDDDLLLRRRCCRRRRRRRUUUUDLURRUUUULUURUUUCCRRRCCRDDDRDDDRRCCDDDLDDDDDDRRDDRRRDR",
+      "metrics": {
+        "actions": 95,
+        "selections": 10,
+        "warriorPushes": 0,
+        "trainPushes": 0,
+        "huntSteps": 0,
+        "monsterHuntMoves": 0,
+        "songs": 3,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 3,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 2,
+        "partnerSwaps": 2,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 5,
+        "mirrorMoves": 0,
+        "reflections": 2,
+        "heroReflections": 1,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La préparation avant les reflets n’est pas une nécessité universelle."
+    },
+    {
+      "id": "level7-relay-blocks",
+      "label": "Le relais intact bloque réellement le reflet final",
+      "status": "passed",
+      "branch": "DDLUUURRUUUXUURRRRLLLX",
+      "lastActionRefused": true,
+      "redMirrorIndices": [
+        0
+      ]
+    },
+    {
+      "id": "level7-destruction-not-enough",
+      "label": "Détruire le miroir sans rouvrir sa presse laisse le rayon bloqué",
+      "status": "passed",
+      "branch": "DDLUUURRUUUXUURRRRDLLCLLCDDDDCULX",
+      "lastActionRefused": true,
+      "remainingMirrors": 2,
+      "pressClosed": true
+    },
+    {
+      "id": "level7-hunter-can-live",
+      "label": "Une poussée de moins conserve le chasseur derrière son écran et termine aussi",
+      "status": "passed",
+      "commands": "DDLUUURRUUUXUURRRDLCLLCDDDDUCCURRRURCUXUULCCLCCULX",
+      "metrics": {
+        "actions": 50,
+        "selections": 9,
+        "warriorPushes": 2,
+        "trainPushes": 1,
+        "huntSteps": 0,
+        "monsterHuntMoves": 0,
+        "songs": 5,
+        "groupSongs": 0,
+        "songHeroMoves": 1,
+        "songStoneMoves": 4,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 1,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 5,
+        "mirrorMoves": 1,
+        "reflections": 3,
+        "heroReflections": 4,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Le déplacement du miroir, la destruction du relais, sa réouverture et les arrivées restent nécessaires au parcours ; tuer ce chasseur ne l’est pas."
+    },
+    {
+      "id": "level8-resource-geometry",
+      "label": "La seule caisse doit former l’entrée de l’île vide, hors des axes du miroir",
+      "status": "passed",
+      "initialCrates": 1,
+      "initialSupports": 0,
+      "requiredBridge": {
+        "x": 13,
+        "y": 17
+      },
+      "fixedMirror": {
+        "x": 17,
+        "y": 11
+      },
+      "proof": "Les murs bordent l’île, sauf la case d’eau13,17. Aucun acteur n’y est initialement présent et aucun axe de miroir n’y arrive. La marche sur un appui est donc la première entrée possible. Le miroir ne peut être poussé sur aucun axe : chaque poussée rencontre un mur d’appui ou un mur d’arrivée."
+    },
+    {
+      "id": "level8-two-living-weights",
+      "label": "Les deux presses-buts exigent les deux monstres dans l’état final",
+      "status": "passed",
+      "liveHunters": 2,
+      "dryCrates": 0,
+      "proof": "Les héros sont tous sur les buts, l’unique caisse est immergée et le miroir est immobile. Les deux boutons distincts ne peuvent donc être maintenus que par les deux monstres vivants."
+    },
+    {
+      "id": "level8-release-too-early",
+      "label": "Relâcher trop tôt la commande renvoie les deux gardiens au-dessus des retenues",
+      "status": "passed",
+      "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLR",
+      "returnedHunters": [
+        {
+          "x": 6,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 7
+        }
+      ],
+      "remainingHeroAlive": true
+    },
+    {
+      "id": "level8-target-switch",
+      "label": "Changer de sélection ne fait pas marcher les chasseurs ; les pas du Barde les conduisent ensuite aux plaques",
+      "status": "passed",
+      "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLCCDDDD",
+      "selectionWithoutTick": true,
+      "arrivalAfterBardSteps": 4
+    },
+    {
+      "id": "level8-wrong-immersion",
+      "label": "Couler la réserve dans le bras optique perd le seul matériau du pont final",
+      "status": "passed",
+      "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCCDDDLDDDDDDRRRRRRRRRR",
+      "misplacedSupport": {
+        "x": 13,
+        "y": 11
+      },
+      "waterComponent": [
+        "13,11",
+        "14,11",
+        "15,11",
+        "16,11"
+      ],
+      "proof": "Un appui se déplace uniquement entre cases d’eau. Ce bras est séparé de l’entrée13,17 par du sol ou des murs, donc aucun chant ne peut réparer cette immersion."
+    },
+    {
+      "id": "level8-direct-reflection-variant",
+      "label": "L’extraction par un reflet initial conserve toutes les contraintes de ressources",
+      "status": "passed",
+      "commands": "XDDRLUUURCCRLCDDDLDDDDDDRRRRRRRRDDDDDLDRRRULLLLLLLLLCCDDDDDCCLLDDDDDDDDDDDDDRRRRRRRRCCDRRRRRRRRRRR",
+      "metrics": {
+        "actions": 98,
+        "selections": 9,
+        "warriorPushes": 8,
+        "trainPushes": 0,
+        "huntSteps": 9,
+        "monsterHuntMoves": 14,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 0,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La visée coudée et l’ordre de récupération sont illustrés par le témoin mais ne sont pas revendiqués comme des obligations universelles."
+    }
+  ],
+  "totals": {
+    "checks": 15,
+    "passed": 15
+  }
+}

@@ -1,0 +1,1476 @@
+{
+  "game": "SS19",
+  "success": true,
+  "scope": "Initial frozen geometry, exact layout comparison with SS14–18 and reproducible local counter-branches",
+  "levels": [
+    {
+      "level": 1,
+      "title": "Les galeries de la première chasse",
+      "mapSha256": "3afb60a2c9af4bc8caf8034aced191d07a820cebe6a004d7a8aa45bfed1d863c",
+      "terrainSha256": "4a509f9bffd52c41dc7c5d98e8bb4298564ab4d37f64d63ac6050e240842fbc6",
+      "goals": [
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 16
+        }
+      ],
+      "landCells": 213,
+      "waterCells": 4,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 193,
+          "transitions": 772,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 193,
+          "transitions": 772,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 193,
+          "transitions": 772,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 195,
+          "transitions": 780,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 195,
+          "transitions": 780,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 195,
+          "transitions": 780,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 2,
+      "title": "Le gardien du seuil",
+      "mapSha256": "032ab33c96bb19906bcc2b5ee5f255a320e5dbf0e95df476301f1cf68003f92a",
+      "terrainSha256": "c1343c84eba51546eafd32e167398ee2e5435250a539bb5dbbba2ec724d08849",
+      "goals": [
+        {
+          "x": 17,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 15
+        },
+        {
+          "x": 15,
+          "y": 15
+        }
+      ],
+      "landCells": 93,
+      "waterCells": 4,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 71,
+          "transitions": 284,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 6,
+          "transitions": 24,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 71,
+          "transitions": 284,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 72,
+          "transitions": 288,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 6,
+          "transitions": 24,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 72,
+          "transitions": 288,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": [
+        {
+          "name": "Caisse indispensable",
+          "observed": "À la victoire, les trois héros occupent les trois destinations, distinctes des commandes. Il ne reste que la caisse et le gardien pour les deux commandes. Immerger ou perdre la caisse rend cet accord final impossible.",
+          "scope": "Argument de conservation des occupants, indépendant du témoin.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Gardien sur une commande intérieure du rail",
+          "observed": "La commande x11 ne se trouve ni à x5 ni à x15, les deux extrémités. Les murs verticaux n’arrêtent le gardien que si le héros actif est dans le cône vertical.",
+          "scope": "Géométrie du rail et règle de poursuite du moteur.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Aucune sortie accessible sans accord",
+          "observed": "Chaque destination est la case d’une presse fermée tant que l’une des deux commandes est libre ; les héros ne peuvent pas contourner la condition en restant derrière une porte.",
+          "scope": "Condition de victoire spatiale, sans verrou caché.",
+          "verification": "Reviewed by the dedicated author script"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "L’interrupteur hors d’atteinte",
+      "mapSha256": "9a95661e8522fb514ac031a9546bbf7a4e10e12723190f1a11384b864c188d19",
+      "terrainSha256": "179e33411758c3d468af5d7c2a2f4744fc8b28717f0d9392103c32f441850df8",
+      "goals": [
+        {
+          "x": 17,
+          "y": 7
+        },
+        {
+          "x": 16,
+          "y": 16
+        },
+        {
+          "x": 9,
+          "y": 17
+        }
+      ],
+      "landCells": 144,
+      "waterCells": 6,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 108,
+          "transitions": 432,
+          "reachableGoals": [
+            {
+              "x": 16,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 108,
+          "transitions": 432,
+          "reachableGoals": [
+            {
+              "x": 16,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 108,
+          "transitions": 432,
+          "reachableGoals": [
+            {
+              "x": 16,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 110,
+          "transitions": 440,
+          "reachableGoals": [
+            {
+              "x": 16,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 110,
+          "transitions": 440,
+          "reachableGoals": [
+            {
+              "x": 16,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 110,
+          "transitions": 440,
+          "reachableGoals": [
+            {
+              "x": 16,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 1,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 4,
+      "title": "Le gardien de la vanne",
+      "mapSha256": "8e78943a7082e2dd7902e1915aa1de30e7ecf2599c11cce2fc688b5db88cd88f",
+      "terrainSha256": "bb3a3ba4aaada42c395870383a2ef443b088decf9925adecc865ae6b7aebae20",
+      "goals": [
+        {
+          "x": 18,
+          "y": 13
+        },
+        {
+          "x": 5,
+          "y": 15
+        },
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "landCells": 153,
+      "waterCells": 42,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 75,
+          "transitions": 300,
+          "reachableGoals": [
+            {
+              "x": 5,
+              "y": 15
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 74,
+          "transitions": 296,
+          "reachableGoals": [
+            {
+              "x": 18,
+              "y": 13
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 75,
+          "transitions": 300,
+          "reachableGoals": [
+            {
+              "x": 5,
+              "y": 15
+            }
+          ],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 76,
+          "transitions": 304,
+          "reachableGoals": [
+            {
+              "x": 5,
+              "y": 15
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 74,
+          "transitions": 296,
+          "reachableGoals": [
+            {
+              "x": 18,
+              "y": 13
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 76,
+          "transitions": 304,
+          "reachableGoals": [
+            {
+              "x": 5,
+              "y": 15
+            }
+          ],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 2,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 5,
+      "title": "Le troisième doit rester vivant",
+      "mapSha256": "c62a43996b4be2182292604b49ecf051fbed2693cb6919770643afc7b10f294a",
+      "terrainSha256": "bb30ac13710a1462fd1ec34c63fb60c14d37875211caaedd3ecb8e6add39ef9e",
+      "goals": [
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 17,
+          "y": 15
+        },
+        {
+          "x": 3,
+          "y": 16
+        }
+      ],
+      "landCells": 148,
+      "waterCells": 0,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 5,
+          "transitions": 20,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 125,
+          "transitions": 500,
+          "reachableGoals": [
+            {
+              "x": 3,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 129,
+          "transitions": 516,
+          "reachableGoals": [
+            {
+              "x": 3,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 5,
+          "transitions": 20,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 131,
+          "transitions": 524,
+          "reachableGoals": [
+            {
+              "x": 3,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 131,
+          "transitions": 524,
+          "reachableGoals": [
+            {
+              "x": 3,
+              "y": 16
+            }
+          ],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 1,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 6,
+      "title": "La seconde image",
+      "mapSha256": "65272bfc132727ab80f25b90916543217253bdb63473756af2ca14898a15cd54",
+      "terrainSha256": "0d048c78d1f174103375800cfdcc02bcbf7f13650ae9e0f460ac6e320e62e23a",
+      "goals": [
+        {
+          "x": 10,
+          "y": 2
+        },
+        {
+          "x": 14,
+          "y": 17
+        },
+        {
+          "x": 16,
+          "y": 17
+        }
+      ],
+      "landCells": 92,
+      "waterCells": 231,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 59,
+          "transitions": 236,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 59,
+          "transitions": 236,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 59,
+          "transitions": 236,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 61,
+          "transitions": 244,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 61,
+          "transitions": 244,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 61,
+          "transitions": 244,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 7,
+      "title": "Le relais condamné",
+      "mapSha256": "7120f0770569fd8401320c74f4550b99b260983a031b6aef75511505a443f533",
+      "terrainSha256": "f74487d959468a7a1a2687c59190a7c3d5a6dcc913b7e998568deeb59c6845f3",
+      "goals": [
+        {
+          "x": 1,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 2,
+          "y": 10
+        }
+      ],
+      "landCells": 94,
+      "waterCells": 228,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 46,
+          "transitions": 184,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 46,
+          "transitions": 184,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 46,
+          "transitions": 184,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 48,
+          "transitions": 192,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 48,
+          "transitions": 192,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 48,
+          "transitions": 192,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 8,
+      "title": "Les deux gardiens vivants",
+      "mapSha256": "e79fd1d20f27f0cfe0ae72c10eaaf686a4dd9b5546bb51d9cdb42e57d319fbdf",
+      "terrainSha256": "4a0bf507316b04d340a2215cc925b99031819140ad5ddc7ad8bfc5c266da1b31",
+      "goals": [
+        {
+          "x": 8,
+          "y": 15
+        },
+        {
+          "x": 14,
+          "y": 17
+        },
+        {
+          "x": 10,
+          "y": 18
+        }
+      ],
+      "landCells": 163,
+      "waterCells": 10,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 135,
+          "transitions": 540,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 135,
+          "transitions": 540,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 135,
+          "transitions": 540,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 137,
+          "transitions": 548,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 137,
+          "transitions": 548,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 137,
+          "transitions": 548,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    }
+  ],
+  "reviews": [
+    {
+      "script": "reference/author/review-level2-ss19.mjs",
+      "success": true,
+      "result": {
+        "level": 2,
+        "checks": 9,
+        "status": "passed"
+      },
+      "sha256": "7994bb9e32d5b3d91bee4e63de51c523a7f477dabb2d1c94371735d448110ca3"
+    },
+    {
+      "script": "reference/author/review-ss19-middle.mjs",
+      "success": true,
+      "result": {
+        "gameCode": "SS19",
+        "scope": "Niveaux 3–5 : témoins et contre-branches locales, sans preuve de solution unique.",
+        "levels": [
+          {
+            "id": "ss19-03",
+            "sha256": "9a95661e8522fb514ac031a9546bbf7a4e10e12723190f1a11384b864c188d19"
+          },
+          {
+            "id": "ss19-04",
+            "sha256": "8e78943a7082e2dd7902e1915aa1de30e7ecf2599c11cce2fc688b5db88cd88f"
+          },
+          {
+            "id": "ss19-05",
+            "sha256": "c62a43996b4be2182292604b49ecf051fbed2693cb6919770643afc7b10f294a"
+          }
+        ],
+        "checks": [
+          {
+            "name": "ss19-03: témoin complet",
+            "status": "passed",
+            "actions": 150,
+            "selections": 18,
+            "monstersRemaining": 0
+          },
+          {
+            "name": "ss19-04: témoin complet",
+            "status": "passed",
+            "actions": 143,
+            "selections": 9,
+            "monstersRemaining": 0
+          },
+          {
+            "name": "ss19-05: témoin complet",
+            "status": "passed",
+            "actions": 143,
+            "selections": 15,
+            "monstersRemaining": 1
+          },
+          {
+            "name": "N3 : les commandes inoccupées refusent la sortie occidentale",
+            "status": "passed",
+            "commands": "DRD",
+            "observed": "La porte en 9,16 reste fermée tant que les deux réserves ne sont pas posées."
+          },
+          {
+            "name": "N3 : retirer le lest bas expulse le héros déjà arrivé",
+            "status": "passed",
+            "commands": "RRRRRRDRDDLUURULLLLLLDLUUUCDDLLLLLLCCXRUUUUUUUURRRRRDDDDRCCUUUURRRRRRRRDLLCCUUUUUUUUUURDCCUUUULLLCDDRRRCCULLLDDLCCDDDRCXCCDDDDDDDRRDDRRCXDDDDDDR",
+            "observed": "La caisse quitte 8,11 et la porte-poussoir de la destination 17,7 en retire le Magicien."
+          },
+          {
+            "name": "N4 : éteindre le soutien avant l’appât laisse le gardien sur la commande",
+            "status": "passed",
+            "commands": "RRRRRCDCCDDDDDDRRR",
+            "observed": "La chasse refuse l’eau nue : le gardien ne descend pas et sa porte reste fermée.",
+            "scope": "Erreur locale récupérable en réarmant la trappe."
+          },
+          {
+            "name": "N4 : la trappe retire réellement son occupant",
+            "status": "passed",
+            "commands": "RRRRRDDDDDDRRRCU",
+            "phases": [
+              "walk",
+              "platform"
+            ]
+          },
+          {
+            "name": "N4 : deux réserves deviennent deux appuis, plus l’appui déplacé",
+            "status": "passed",
+            "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRR",
+            "bridge": [
+              {
+                "x": 11,
+                "y": 11
+              },
+              {
+                "x": 12,
+                "y": 11
+              },
+              {
+                "x": 13,
+                "y": 11
+              }
+            ],
+            "scope": "État démontré du chantier ; les autres calendriers restent possibles."
+          },
+          {
+            "name": "N4 : quitter le pont vers le nord avec la Barde est refusé",
+            "status": "passed",
+            "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCCU",
+            "observed": "Le chant imposerait un déplacement dangereux du compagnon ; il est refusé. Les échanges du témoin permettent la relève."
+          },
+          {
+            "name": "N5 : charger avant de placer le captif échoue",
+            "status": "passed",
+            "commands": "D",
+            "observed": "La porte 10,4 interdit la poussée de la réserve tant que le gardien n’occupe pas 5,8."
+          },
+          {
+            "name": "N5 : quitter le pupitre à pied déverrouille le captif",
+            "status": "passed",
+            "commands": "CDDDDDLLLLLLRRRRRRUCUUUD",
+            "observed": "Le chant du départ emporte ensemble le gardien et son verrou ; la sortie et le chargement referment."
+          },
+          {
+            "name": "N5 : la seconde presse seule ne décharge pas la réserve",
+            "status": "passed",
+            "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCUURRRRRRU",
+            "observed": "L’impulsion sud est vide tant que le transfert occidental n’a pas eu lieu."
+          },
+          {
+            "name": "N5 : l’ancien accès de chant sous le moulin est désormais bloqué",
+            "status": "passed",
+            "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCCUURRRRUUUUURRRRRUL",
+            "observed": "Le pas vers 11,8 est un mur ; il ne déplace pas la caisse par chant à travers le sol.",
+            "scope": "Régression du contre-parcours local trouvé pendant la conception, pas preuve exhaustive de toutes les routes."
+          },
+          {
+            "name": "N5 : les deux impulsions livrent une caisse dans le bon ordre",
+            "status": "passed",
+            "pistonLandings": [
+              {
+                "x": 9,
+                "y": 6
+              },
+              {
+                "x": 9,
+                "y": 7
+              }
+            ],
+            "captive": {
+              "x": 5,
+              "y": 8
+            },
+            "latch": {
+              "x": 5,
+              "y": 9
+            }
+          }
+        ],
+        "passed": 14,
+        "failed": 0
+      },
+      "sha256": "820589d93f3ffc4001e697fee30e694b0bb70379442c83125e88b5968652cedb"
+    },
+    {
+      "script": "reference/author/review-final-ss19.mjs",
+      "success": true,
+      "result": {
+        "game": "SS19",
+        "version": "0.1.0",
+        "status": "passed",
+        "scope": "Revue des niveaux6–8 par rejeux et variantes constructives, avec preuves géométriques spécifiques au dernier niveau. Aucune unicité ou optimalité des solutions n’est annoncée.",
+        "checks": [
+          {
+            "id": "level6-witness",
+            "label": "Le parcours auteur termine sans refus ni perte",
+            "status": "passed",
+            "level": 6,
+            "metrics": {
+              "actions": 74,
+              "selections": 10,
+              "warriorPushes": 0,
+              "trainPushes": 0,
+              "huntSteps": 0,
+              "monsterHuntMoves": 0,
+              "songs": 3,
+              "groupSongs": 0,
+              "songHeroMoves": 0,
+              "songStoneMoves": 3,
+              "songMonsterMoves": 0,
+              "supportMoves": 0,
+              "swaps": 1,
+              "partnerSwaps": 1,
+              "stoneSwaps": 0,
+              "monsterSwaps": 0,
+              "bentSwaps": 0,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 0,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "stoneMoves": 5,
+              "mirrorMoves": 0,
+              "reflections": 2,
+              "heroReflections": 1,
+              "pistonPushes": 0,
+              "platformsCreated": 1,
+              "monstersRemoved": 0,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "id": "level7-witness",
+            "label": "Le parcours auteur termine sans refus ni perte",
+            "status": "passed",
+            "level": 7,
+            "metrics": {
+              "actions": 52,
+              "selections": 9,
+              "warriorPushes": 3,
+              "trainPushes": 2,
+              "huntSteps": 0,
+              "monsterHuntMoves": 0,
+              "songs": 5,
+              "groupSongs": 0,
+              "songHeroMoves": 1,
+              "songStoneMoves": 4,
+              "songMonsterMoves": 0,
+              "supportMoves": 0,
+              "swaps": 1,
+              "partnerSwaps": 1,
+              "stoneSwaps": 0,
+              "monsterSwaps": 0,
+              "bentSwaps": 0,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 0,
+              "swapLoops": 0,
+              "partnerMoves": 1,
+              "stoneMoves": 6,
+              "mirrorMoves": 1,
+              "reflections": 3,
+              "heroReflections": 4,
+              "pistonPushes": 0,
+              "platformsCreated": 0,
+              "monstersRemoved": 1,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "id": "level8-witness",
+            "label": "Le parcours auteur termine sans refus ni perte",
+            "status": "passed",
+            "level": 8,
+            "metrics": {
+              "actions": 115,
+              "selections": 12,
+              "warriorPushes": 9,
+              "trainPushes": 0,
+              "huntSteps": 12,
+              "monsterHuntMoves": 18,
+              "songs": 1,
+              "groupSongs": 0,
+              "songHeroMoves": 0,
+              "songStoneMoves": 1,
+              "songMonsterMoves": 0,
+              "supportMoves": 0,
+              "swaps": 1,
+              "partnerSwaps": 0,
+              "stoneSwaps": 1,
+              "monsterSwaps": 0,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 1,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "stoneMoves": 11,
+              "mirrorMoves": 0,
+              "reflections": 1,
+              "heroReflections": 1,
+              "pistonPushes": 1,
+              "platformsCreated": 1,
+              "monstersRemoved": 0,
+              "blocked": 0,
+              "deaths": 0
+            }
+          },
+          {
+            "id": "level6-nearest-blocker",
+            "label": "Le premier reflet crée l’appui sans activer la commande retardée",
+            "status": "passed",
+            "prefix": 30,
+            "commandPressed": false,
+            "support": {
+              "x": 11,
+              "y": 14
+            }
+          },
+          {
+            "id": "level6-premature-return",
+            "label": "Répéter immédiatement le reflet ramène le Guerrier et ferme son débarcadère",
+            "status": "passed",
+            "branch": "CCDDDCCRRRRRRRUUUUUUURCCUURUUXXX",
+            "lastActionRefused": true,
+            "warrior": {
+              "x": 4,
+              "y": 8
+            },
+            "reason": "La destination nord du miroir est désormais une presse fermée."
+          },
+          {
+            "id": "level6-alternative-calendar",
+            "label": "Préparer la charge après les deux reflets reste une variante légale plus longue",
+            "status": "passed",
+            "commands": "UURUUXUULXCCDDDLDDDDDDLLLRRRCCRRRRRRRUUUUDLURRUUUULUURUUUCCRRRCCRDDDRDDDRRCCDDDLDDDDDDRRDDRRRDR",
+            "metrics": {
+              "actions": 95,
+              "selections": 10,
+              "warriorPushes": 0,
+              "trainPushes": 0,
+              "huntSteps": 0,
+              "monsterHuntMoves": 0,
+              "songs": 3,
+              "groupSongs": 0,
+              "songHeroMoves": 0,
+              "songStoneMoves": 3,
+              "songMonsterMoves": 0,
+              "supportMoves": 0,
+              "swaps": 2,
+              "partnerSwaps": 2,
+              "stoneSwaps": 0,
+              "monsterSwaps": 0,
+              "bentSwaps": 0,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 0,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "stoneMoves": 5,
+              "mirrorMoves": 0,
+              "reflections": 2,
+              "heroReflections": 1,
+              "pistonPushes": 0,
+              "platformsCreated": 1,
+              "monstersRemoved": 0,
+              "blocked": 0,
+              "deaths": 0
+            },
+            "scope": "La préparation avant les reflets n’est pas une nécessité universelle."
+          },
+          {
+            "id": "level7-relay-blocks",
+            "label": "Le relais intact bloque réellement le reflet final",
+            "status": "passed",
+            "branch": "DDLUUURRUUUXUURRRRLLLX",
+            "lastActionRefused": true,
+            "redMirrorIndices": [
+              0
+            ]
+          },
+          {
+            "id": "level7-destruction-not-enough",
+            "label": "Détruire le miroir sans rouvrir sa presse laisse le rayon bloqué",
+            "status": "passed",
+            "branch": "DDLUUURRUUUXUURRRRDLLCLLCDDDDCULX",
+            "lastActionRefused": true,
+            "remainingMirrors": 2,
+            "pressClosed": true
+          },
+          {
+            "id": "level7-hunter-can-live",
+            "label": "Une poussée de moins conserve le chasseur derrière son écran et termine aussi",
+            "status": "passed",
+            "commands": "DDLUUURRUUUXUURRRDLCLLCDDDDUCCURRRURCUXUULCCLCCULX",
+            "metrics": {
+              "actions": 50,
+              "selections": 9,
+              "warriorPushes": 2,
+              "trainPushes": 1,
+              "huntSteps": 0,
+              "monsterHuntMoves": 0,
+              "songs": 5,
+              "groupSongs": 0,
+              "songHeroMoves": 1,
+              "songStoneMoves": 4,
+              "songMonsterMoves": 0,
+              "supportMoves": 0,
+              "swaps": 1,
+              "partnerSwaps": 1,
+              "stoneSwaps": 0,
+              "monsterSwaps": 0,
+              "bentSwaps": 0,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 0,
+              "swapLoops": 0,
+              "partnerMoves": 1,
+              "stoneMoves": 5,
+              "mirrorMoves": 1,
+              "reflections": 3,
+              "heroReflections": 4,
+              "pistonPushes": 0,
+              "platformsCreated": 0,
+              "monstersRemoved": 0,
+              "blocked": 0,
+              "deaths": 0
+            },
+            "scope": "Le déplacement du miroir, la destruction du relais, sa réouverture et les arrivées restent nécessaires au parcours ; tuer ce chasseur ne l’est pas."
+          },
+          {
+            "id": "level8-resource-geometry",
+            "label": "La seule caisse doit former l’entrée de l’île vide, hors des axes du miroir",
+            "status": "passed",
+            "initialCrates": 1,
+            "initialSupports": 0,
+            "requiredBridge": {
+              "x": 13,
+              "y": 17
+            },
+            "fixedMirror": {
+              "x": 17,
+              "y": 11
+            },
+            "proof": "Les murs bordent l’île, sauf la case d’eau13,17. Aucun acteur n’y est initialement présent et aucun axe de miroir n’y arrive. La marche sur un appui est donc la première entrée possible. Le miroir ne peut être poussé sur aucun axe : chaque poussée rencontre un mur d’appui ou un mur d’arrivée."
+          },
+          {
+            "id": "level8-two-living-weights",
+            "label": "Les deux presses-buts exigent les deux monstres dans l’état final",
+            "status": "passed",
+            "liveHunters": 2,
+            "dryCrates": 0,
+            "proof": "Les héros sont tous sur les buts, l’unique caisse est immergée et le miroir est immobile. Les deux boutons distincts ne peuvent donc être maintenus que par les deux monstres vivants."
+          },
+          {
+            "id": "level8-release-too-early",
+            "label": "Relâcher trop tôt la commande renvoie les deux gardiens au-dessus des retenues",
+            "status": "passed",
+            "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLR",
+            "returnedHunters": [
+              {
+                "x": 6,
+                "y": 3
+              },
+              {
+                "x": 12,
+                "y": 7
+              }
+            ],
+            "remainingHeroAlive": true
+          },
+          {
+            "id": "level8-target-switch",
+            "label": "Changer de sélection ne fait pas marcher les chasseurs ; les pas du Barde les conduisent ensuite aux plaques",
+            "status": "passed",
+            "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLCCDDDD",
+            "selectionWithoutTick": true,
+            "arrivalAfterBardSteps": 4
+          },
+          {
+            "id": "level8-wrong-immersion",
+            "label": "Couler la réserve dans le bras optique perd le seul matériau du pont final",
+            "status": "passed",
+            "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCCDDDLDDDDDDRRRRRRRRRR",
+            "misplacedSupport": {
+              "x": 13,
+              "y": 11
+            },
+            "waterComponent": [
+              "13,11",
+              "14,11",
+              "15,11",
+              "16,11"
+            ],
+            "proof": "Un appui se déplace uniquement entre cases d’eau. Ce bras est séparé de l’entrée13,17 par du sol ou des murs, donc aucun chant ne peut réparer cette immersion."
+          },
+          {
+            "id": "level8-direct-reflection-variant",
+            "label": "L’extraction par un reflet initial conserve toutes les contraintes de ressources",
+            "status": "passed",
+            "commands": "XDDRLUUURCCRLCDDDLDDDDDDRRRRRRRRDDDDDLDRRRULLLLLLLLLCCDDDDDCCLLDDDDDDDDDDDDDRRRRRRRRCCDRRRRRRRRRRR",
+            "metrics": {
+              "actions": 98,
+              "selections": 9,
+              "warriorPushes": 8,
+              "trainPushes": 0,
+              "huntSteps": 9,
+              "monsterHuntMoves": 14,
+              "songs": 1,
+              "groupSongs": 0,
+              "songHeroMoves": 0,
+              "songStoneMoves": 1,
+              "songMonsterMoves": 0,
+              "supportMoves": 0,
+              "swaps": 0,
+              "partnerSwaps": 0,
+              "stoneSwaps": 0,
+              "monsterSwaps": 0,
+              "bentSwaps": 0,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 0,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "stoneMoves": 11,
+              "mirrorMoves": 0,
+              "reflections": 1,
+              "heroReflections": 0,
+              "pistonPushes": 1,
+              "platformsCreated": 1,
+              "monstersRemoved": 0,
+              "blocked": 0,
+              "deaths": 0
+            },
+            "scope": "La visée coudée et l’ordre de récupération sont illustrés par le témoin mais ne sont pas revendiqués comme des obligations universelles."
+          }
+        ],
+        "totals": {
+          "checks": 15,
+          "passed": 15
+        }
+      },
+      "sha256": "f0e9ca583635f8ba86b2180e7332ec2d1c6c7746233ba9d26403c6f4320a6288"
+    },
+    {
+      "script": "reference/author/independent-review-ss19.mjs",
+      "success": true,
+      "result": {
+        "status": "passed",
+        "levels": [
+          1,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "checks": 29
+      },
+      "sha256": "613f6896f8ef63e1f7a727513aa4a89f6c6538940e013da99103f32e4469afdd"
+    }
+  ],
+  "limitations": [
+    "A winning witness proves solvability, not an optimal or unique route.",
+    "The walking graphs freeze resources and circuit states and suppress automatic abilities. They do not model joint puzzle solving.",
+    "A geometric comparison detects exact repeats under rotations, reflections and translations; it does not measure subjective originality or difficulty.",
+    "Local counter-branches establish their observed outcomes, not permanent global impossibility after a mistake."
+  ],
+  "layoutComparison": {
+    "previousGames": [
+      "SS14",
+      "SS15",
+      "SS16",
+      "SS17",
+      "SS18"
+    ],
+    "previousLevels": 40,
+    "method": "Trim wall padding, normalize pieces to land, keep water, canonicalize all eight planar symmetries",
+    "historical": [
+      {
+        "series": "SS14",
+        "id": "ss14-01",
+        "title": "L’atelier des deux voix",
+        "terrainSha256": "f1d9242a1ce7f12b6fd2867c1c47979b3173989b38e7682574cae079b2327d73"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-02",
+        "title": "La relève silencieuse",
+        "terrainSha256": "9bfea64db67c82cc9549169500789c4efe5700e150a1482593af048ca086f346"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-03",
+        "title": "L’appui sous le partenaire",
+        "terrainSha256": "803591953efd9a9b5ab2385f96fc84549df48b27d69b3facc9632c7934365662"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-04",
+        "title": "Les deux départs sans geste",
+        "terrainSha256": "3d288afb120a955e1fe4b6845b17c3046eb525690fc253611bcca799edd75b5f"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-05",
+        "title": "Les gardiens et le poids retiré",
+        "terrainSha256": "50e1633da252c5133264d477f6a0e0adf516facb2927d212c2bf0ceb43f45159"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-06",
+        "title": "Le passage des deux presses",
+        "terrainSha256": "d96edf05056821d8090a448acaf2700e67a144aac7e2593ba69c0869e45ca35a"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-07",
+        "title": "La pierre des trois traversées",
+        "terrainSha256": "b6fbc9fb37085852e973dbfa09290bfa952c59d52f27e63055b3f9ef8813f2be"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-08",
+        "title": "Le dernier accord des deux rives",
+        "terrainSha256": "3546284170c4668c8fc08d95c10f958ae1c43f3575c2a7a1e81a49439b3f089e"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-01",
+        "title": "L’appui des deux traversées",
+        "terrainSha256": "2336b7e1ccba8c813532589455edc13c3eaab93cd7d8512e58d51d52e52dc222"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-02",
+        "title": "Le départ qui garde le poids",
+        "terrainSha256": "897756cfe79a3015e3b6f3eaf62a85ffd5af2c0fc8f06e0741f860301255aecc"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-03",
+        "title": "Le remplaçant derrière le reflet",
+        "terrainSha256": "c93154863618943b93743549e2b2fb928d15c0035b829d8796c0bb85561da37c"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-04",
+        "title": "L’atelier des passages croisés",
+        "terrainSha256": "2fb37a1ff049d8c4b32d65d5e315b1d5c5af64255bc62eff38ea2e14c8861754"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-05",
+        "title": "Les gardiens qu’il faut garder",
+        "terrainSha256": "d54e9eea562ccb4d60b13f48c1bc88bfc0158c53ac9984ebd8ee7ad4fa4abf3e"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-06",
+        "title": "La visée et le dernier appui",
+        "terrainSha256": "6aba34c09ad655d974b18773686abce0d9af917a7db1dcfc8cec72c76540a9d7"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-07",
+        "title": "Le relais des trois rives",
+        "terrainSha256": "bd768566712c79402b06c8e7ae1a940dddbe8e2962667fefa3b10fb0dbae4f26"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-08",
+        "title": "Le compte des deux rives",
+        "terrainSha256": "b506f6dc77d18d9a0431aaf5abfe0602983361d79a9c6acfa3274abb8e200557"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-01",
+        "title": "L’atelier des trois passeurs",
+        "terrainSha256": "b7187c36198b3b0bcc57be05e7f54f70a51684258befa0675014e143c5280ac1"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-02",
+        "title": "Récupérer avant de combler",
+        "terrainSha256": "6197b8b2673b5762bec8d7e5a28b8969794face96fde37cbeb4fb665faf3ae16"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-03",
+        "title": "Lâcher le miroir, garder son poids",
+        "terrainSha256": "d41f25e5a6204273ddf01b53363ecb865d4ecee8d783e887263c49ed4d403f1c"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-04",
+        "title": "Le quai des deux impulsions",
+        "terrainSha256": "b31e7cdbbf07585cdbc9c1a8b02a07d80a7ff11f8ebddc6c08df18fc49e898d2"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-05",
+        "title": "La relève du gardien",
+        "terrainSha256": "30d121ccf71b1b00e4e683e70946a8d6cd3a6ee96ead2d57ea2706c3f0d31ae9"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-06",
+        "title": "Le chantier avant la marée basse",
+        "terrainSha256": "ca2b78fd0645fbab66f9164367d7df8e07da0d22c2fbee54563ba3bb6354bf18"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-07",
+        "title": "Les deux postes du miroir",
+        "terrainSha256": "767769e25e8c877197b3afa43b3df75d7962f085f2f7fdc1fdf92e3e4edefcbf"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-08",
+        "title": "Le gardien et les trois lests",
+        "terrainSha256": "223b37f375a0c53701f9188e3afcfd1228c09020bd8d1d25f763ae616ce4001a"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-01",
+        "title": "Les trois cours de la forteresse",
+        "terrainSha256": "2d757c681af6b21162fb658b28a459c449713cab3c0862264d45bd1f9c808e79"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-02",
+        "title": "Les cellules de relève",
+        "terrainSha256": "17ad5afdae4292deaf18e2adf6f785c1e281e0e73b12df01f61ab798344b3558"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-03",
+        "title": "Le compte des îles",
+        "terrainSha256": "fb2550373346d6aa9ff0bafe07f503de0063f8ff98e76125463113f34f491c52"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-04",
+        "title": "Le miroir, puis le lest",
+        "terrainSha256": "83495fcb9a40ab975141aa2916aa6af79c184bf9fd262a35e28112ad5a3adede"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-05",
+        "title": "La relève à angle droit",
+        "terrainSha256": "33b8df750a6c98524177b080964733a94458bd43da155d2e4a440f5cbf2881d1"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-06",
+        "title": "Les deux emplois des miroirs",
+        "terrainSha256": "930c1426b53f1db38d115ef11581f0ee7b4f923d9b14b94060dc0f3c30ece922"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-07",
+        "title": "Les trois vies de la clef",
+        "terrainSha256": "975c27ac89d303ee8664f13191fe986c5fc8790cccef2b860b69e81e2fe9cf46"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-08",
+        "title": "La forteresse aux deux visées",
+        "terrainSha256": "6c9b1674677154f87bd0949c89f3d60a45ab82e47037688a29471373c6a9ff93"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-01",
+        "title": "Les trois pièces du chœur",
+        "terrainSha256": "5cb332bc2fa2dae0e90cd123fb72a0242ad99de32d7fdf11311427631d20a330"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-02",
+        "title": "Le carrefour à contretemps",
+        "terrainSha256": "1ced03fa502b826d375bd309251dae49050f49825a99626e5535403779d398b7"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-03",
+        "title": "Le jardin des trois issues",
+        "terrainSha256": "c280e963b4e5a31b2549731142cee086b90969a3aee6884583ce0575539c17d4"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-04",
+        "title": "Personne ne part le premier",
+        "terrainSha256": "b6077799d27ae4fb85dc2ae3990765345becd7260f23ef62215fe1a7673c62dd"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-05",
+        "title": "Les gardiens de l’arène",
+        "terrainSha256": "107999e5af1d1045d6ce5a4546a0913c0fd4612205e9bc49d8b04b6914bcd4de"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-06",
+        "title": "Le miroir en tournée",
+        "terrainSha256": "dd73762ce025eaa913a1f77f121bc3c51b25d4cc3e0b95e3ee780895b1eeea83"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-07",
+        "title": "La navette des alcôves",
+        "terrainSha256": "13b251b4be85f3d55b2936179be3a77ed7f025c0a8313f6347df590ead9f1698"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-08",
+        "title": "La cour au cœur du lac",
+        "terrainSha256": "36b033e345e88c1c75f9038bc6ec307a1e0035c17cf6776062079bc12f9c3f73"
+      }
+    ]
+  }
+}

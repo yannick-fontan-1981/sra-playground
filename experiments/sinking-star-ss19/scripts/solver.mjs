@@ -1,0 +1,65 @@
+/** Author tools only; no search, solution or state metadata is imported by the game. */
+import {compileLevel,initialState,stepDetailed} from '../dist/core.js';
+const cell=p=>p.y*20+p.x;
+const positions=ps=>ps.map(cell).sort((a,b)=>a-b).join(',');
+export const stateKey=s=>`${s.heroes.map(h=>`${h.kind}:${cell(h.at)}:${+!!h.dead}`).join(';')}|${s.active}|${positions(s.stones)}|${positions(s.monsters)}|${positions(s.supports)}|${s.mirrors.map(m=>`${cell(m.at)}:${m.facing}`).sort().join(',')}|${(s.gateClosed??[]).map(Number).join('')}|${(s.platformActive??[]).map(Number).join('')}`;
+export function decodeCommand(c,state){
+ if(c==='C'){const h=state.heroes[(state.active+1)%state.heroes.length];return {id:6,data:{x:3+h.at.x*3,y:3+h.at.y*3}};}
+ const id={U:1,D:2,L:3,R:4,X:5}[c];if(!id)throw new Error(`Unknown command ${c}`);return {id};
+}
+const eq=(a,b)=>a.x===b.x&&a.y===b.y;
+export function replay(spec,commands){
+ const world=compileLevel(spec);let state=initialState(world);
+ const text=typeof commands==='string'?commands.replace(/\s/g,''):commands;
+ const actions=[],trace=[],metrics={actions:0,selections:0,warriorPushes:0,trainPushes:0,huntSteps:0,monsterHuntMoves:0,songs:0,groupSongs:0,songHeroMoves:0,songStoneMoves:0,songMonsterMoves:0,supportMoves:0,swaps:0,partnerSwaps:0,stoneSwaps:0,monsterSwaps:0,bentSwaps:0,multiMirrorSwaps:0,swapReflections:0,swapLoops:0,partnerMoves:0,stoneMoves:0,mirrorMoves:0,reflections:0,heroReflections:0,pistonPushes:0,platformsCreated:0,monstersRemoved:0,blocked:0,deaths:0};
+ for(const c of text){
+  const action=typeof c==='string'?decodeCommand(c,state):c,before=state,detail=stepDetailed(world,state,action.id,action.data);state=detail.state;actions.push(action);metrics.actions++;
+  metrics.selections+=+(before.active!==state.active);metrics.blocked+=+state.failed;metrics.deaths+=+(!before.dead&&state.dead);
+  metrics.platformsCreated+=Math.max(0,state.supports.length-before.supports.length);metrics.monstersRemoved+=before.monsters.length-state.monsters.length;
+  for(const phase of detail.phases){
+   if(phase.kind==='push'){metrics.warriorPushes++;metrics.trainPushes+=+(phase.moves.length>2);}
+   if(phase.kind==='hunt'){metrics.huntSteps++;metrics.monsterHuntMoves+=phase.moves.length;}
+   if(phase.kind==='song'){metrics.songs++;metrics.groupSongs+=+(phase.moves.length>=3);metrics.songHeroMoves+=phase.moves.filter(m=>m.actor==='hero'&&!eq(m.from,phase.before.heroes[phase.before.active].at)).length;metrics.songStoneMoves+=phase.moves.filter(m=>m.actor==='stone').length;metrics.songMonsterMoves+=phase.moves.filter(m=>m.actor==='monster').length;}
+   if(phase.kind==='swap'){
+    metrics.swaps++;metrics.partnerSwaps+=+phase.moves.every(m=>m.actor==='hero');
+    metrics.stoneSwaps+=+phase.moves.some(m=>m.actor==='stone');metrics.monsterSwaps+=+phase.moves.some(m=>m.actor==='monster');
+    const turns=(phase.paths?.[0]??[]).filter(p=>phase.before.mirrors.some(m=>eq(m.at,p))).length;
+    metrics.bentSwaps+=+(turns>0);metrics.multiMirrorSwaps+=+(turns>1);metrics.swapReflections+=turns;
+   }
+   if(phase.kind==='swap-loop')metrics.swapLoops++;
+   if(['push','song'].includes(phase.kind))metrics.partnerMoves+=phase.moves.filter(m=>m.actor==='hero'&&phase.before.heroes.some((h,i)=>i!==phase.before.active&&eq(h.at,m.from))).length;
+   if(phase.kind==='reflect'){metrics.reflections++;metrics.heroReflections+=phase.moves.filter(m=>m.actor==='hero').length;}
+   if(phase.kind==='piston')metrics.pistonPushes++;
+   for(const move of phase.moves){metrics.stoneMoves+=+(move.actor==='stone');metrics.mirrorMoves+=+(move.actor==='mirror');metrics.supportMoves+=+(move.actor==='support');}
+  }
+  trace.push({command:typeof c==='string'?c:action.id,action,before,after:state,phases:detail.phases});
+ }
+ return {world,state,actions,trace,metrics};
+}
+/** Queue exhaustion proves impossibility; time/state limits remain inconclusive. */
+export function solve(spec,{maxStates=100000,maxMs=10000,start,goal,disableReflections=false,disablePistons=false,disablePlatforms=false,disablePush=false,disableWarriorPushes=false,disableSong=false,disableSongs=false,disableSupportMotion=false,disableHeroReflections=false,disableMirrorMotion=false,disableSelection=false,disableSwaps=false,disablePartnerSwaps=false,disableStoneSwaps=false,disableMonsterSwaps=false,disableBentSwaps=false,disableMultiMirrorSwaps=false}={}){
+ const world=compileLevel(spec),initial=start??initialState(world),began=performance.now(),nodes=[{state:initial,parent:-1,command:''}],seen=new Set([stateKey(initial)]);let expanded=0;
+ const result=status=>({status,states:seen.size,expanded,ms:Math.round(performance.now()-began)});
+ const route=i=>{let commands='';while(nodes[i].parent>=0){commands=nodes[i].command+commands;i=nodes[i].parent;}return commands;};
+ for(let head=0;head<nodes.length;head++){
+  if(performance.now()-began>=maxMs)return result('limit');const node=nodes[head];expanded++;
+  if(goal?goal(node.state,world):node.state.complete)return {...result('solved'),commands:route(head),state:node.state};
+  if(node.state.dead)continue;
+  for(const command of 'UDLRXC'){
+   if((command==='X'&&disableReflections)||(command==='C'&&disableSelection))continue;
+   const a=decodeCommand(command,node.state),detail=stepDetailed(world,node.state,a.id,a.data),next=detail.state;
+   if(next.failed||next.dead)continue;
+   if(disablePistons&&detail.phases.some(p=>p.kind==='piston'||p.kind==='crush'))continue;
+   if(disablePlatforms&&next.supports.length>node.state.supports.length)continue;
+   if((disablePush||disableWarriorPushes)&&detail.phases.some(p=>p.kind==='push'))continue;
+   if((disableSong||disableSongs)&&detail.phases.some(p=>p.kind==='song'))continue;
+   if(disableSupportMotion&&detail.phases.some(p=>p.moves.some(m=>m.actor==='support')))continue;
+   if(detail.phases.some(p=>p.kind==='swap'&&(disableSwaps||(disablePartnerSwaps&&p.moves.every(m=>m.actor==='hero'))||(disableStoneSwaps&&p.moves.some(m=>m.actor==='stone'))||(disableMonsterSwaps&&p.moves.some(m=>m.actor==='monster'))||((disableBentSwaps||disableMultiMirrorSwaps)&&(p.paths?.[0]??[]).filter(q=>p.before.mirrors.some(m=>eq(m.at,q))).length>=(disableBentSwaps?1:2)))))continue;
+   if(disableHeroReflections&&detail.phases.some(p=>p.kind==='reflect'&&p.moves.some(m=>m.actor==='hero')))continue;
+   if(disableMirrorMotion&&detail.phases.some(p=>p.moves.some(m=>m.actor==='mirror')))continue;
+   const key=stateKey(next);if(seen.has(key))continue;if(seen.size>=maxStates)return result('limit');
+   seen.add(key);nodes.push({state:next,parent:head,command});
+  }
+ }
+ return result('unsolvable');
+}
