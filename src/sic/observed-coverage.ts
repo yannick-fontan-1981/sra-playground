@@ -135,9 +135,31 @@ export function observedPushBody(body: string | undefined, travel: ObservedTrave
   if (!from) return;
   const pushed = seenPush(body, undefined, from, delta,
     readTravelGrid(before, travel.grid).cells, readTravelGrid(after, travel.grid).cells);
-  if (pushed && !pushed.sunk) {
-    return { body: pushed.candidate, chain: pushed.original.includes(next(from, delta, 2)) };
+  if (pushed) {
+    return { body: pushed.candidate, chain: pushed.original.includes(next(from, delta, 2)),
+      ...(pushed.sunk ? { conversion: { site: pushed.sunk, water: pushed.water!,
+        support: stamp(readTravelCell(after, travel.grid, at(pushed.sunk))) } } : {}) };
   }
+}
+
+export function observedPushGate(local: CoverageLearning | undefined, travel: ObservedTravel,
+  before: NativeRows, after: NativeRows) {
+  if (local?.motion !== 'push' || !local.layout || !local.body) return;
+  const { layout, body } = local;
+  const half = Math.floor(travel.grid.pitch / 2), center = half * travel.grid.pitch + half;
+  const gates = layout.gate.map(cell => ({ closed: readTravelCell(before, travel.grid, at(cell)),
+    open: readTravelCell(after, travel.grid, at(cell)) }));
+  const prototype = gates[0];
+  if (!prototype || prototype.open[center] !== travel.grid.floor || prototype.closed[center] === travel.grid.floor
+    || !gates.every(pair => stamp(pair.closed) === stamp(prototype.closed) && stamp(pair.open) === stamp(prototype.open))) return;
+  const first = readTravelGrid(before, travel.grid).cells, returned = readTravelGrid(after, travel.grid).cells;
+  const covered = (cells: Cells) => new Set(bodiesAt(cells, body, layout));
+  const beforeBodies = covered(first), afterBodies = covered(returned);
+  if (layout.marks.every(mark => beforeBodies.has(mark)) || !layout.marks.every(mark => afterBodies.has(mark))) return;
+  const mark = layout.marks.map(cell => first.get(cell)).find(pixels => pixels?.every((ink, i) =>
+    ink === (i % travel.grid.pitch === half || Math.floor(i / travel.grid.pitch) === half ? layout.markInk : travel.grid.floor)));
+  if (!mark) return;
+  return { mark: stamp(mark), closed: stamp(prototype.closed), open: stamp(prototype.open) };
 }
 
 function seenPull(local: CoverageLearning, from: string, delta: NativePoint, first: Cells, after: Cells) {

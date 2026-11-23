@@ -72,6 +72,17 @@ function read(rows: NativeRows, grid: Grid) {
 
 export { read as readTravelGrid, tile as readTravelCell };
 
+export function rebindTravelControls(previous: Pick<ObservedTravel, 'grid' | 'moves'>, rows: NativeRows,
+  inputs: readonly string[]): ObservedTravel | undefined {
+  const { grid, moves } = previous;
+  if (inputs.length !== 4 || Object.keys(moves).length !== inputs.length || !inputs.every(input => moves[input])) return;
+  const { pieces } = read(rows, grid);
+  if (pieces.length !== 1) return;
+  const actor = pieces[0]!;
+  return { grid, moves, actor, visited: [actor], supports: [], tested: {}, altered: [], controls: [],
+    completed: [], switches: {}, refs: Object.values(moves).map(move => move.ref), stalled: 0 };
+}
+
 export function annotateTravelMarks(travel: ObservedTravel | undefined, rows: NativeRows): ObservedTravel | undefined {
   if (!travel?.grid.signature || travel.grid.annotatedMarks || travel.grid.pitch % 2 !== 1) return travel;
   const { pitch, floor, ink } = travel.grid, half = Math.floor(pitch / 2), center = half * pitch + half;

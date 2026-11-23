@@ -35,9 +35,11 @@ function consecutiveStonePushes(level, tickets) {
   const world = compileLevel(SS02_LEVELS[level - 1]);
   let state = initialState(world), previous;
   const pairs = [];
+  const crossed = new Set();
   for (const [index, ticket] of tickets.entries()) {
     if (ticket.resets !== previous?.resets) state = initialState(world);
     const next = stepWorld(world, state, Number(ticket.action.slice(6)));
+    if (next.supports.some(support => equal(support, next.hero))) crossed.add(`${next.hero.x},${next.hero.y}`);
     // The engine preserves stone order unless a stone is converted into a bridge.
     const moved = state.stones.length === next.stones.length
       ? state.stones.flatMap((stone, i) => equal(stone, next.stones[i]) ? [] : [i]) : [];
@@ -50,6 +52,11 @@ function consecutiveStonePushes(level, tickets) {
   }
   assert.equal(state.complete, true, 'Executed SS02 L' + level + ' tickets do not reproduce the official goal');
   assert.ok(pairs.length, 'SS02 L' + level + ' lost consecutive pushes of the same stone');
+  if (level === 3) {
+    assert.ok(crossed.size > 0, 'SS02 L3 did not build and traverse an immersed support');
+    assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))),
+      'SS02 L3 did not leave a stone holding the pressure mark');
+  }
   return pairs;
 }
 
@@ -61,7 +68,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 2 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 3 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -72,8 +79,10 @@ export function checkRun(run) {
     assert.equal(row.won, true, code + ' L' + row.level + ' failed to win');
     const issued = tickets.filter((t) => t.level === row.level);
     assert.equal(issued.length, row.actions);
-    if (code === 'SS02' && row.level === 2) {
-      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS02 L2 must preserve access without recovering from a reset');
+    if (code === 'SS02' && row.level > 1) {
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS02 must preserve learned access without resetting');
+      assert.equal(issued[1]?.decisionRevision, issued[0]?.decisionRevision,
+        'SS02 L' + row.level + ' must begin with a plan from the learned controls');
     }
     const groups = new Map();
     let last;
@@ -138,7 +147,7 @@ function main() {
     files = [];
     for (const [name, cohort, end] of [
       ['mirror-isles', 'SS01', '8'],
-      ['la-force-rouge', 'SS02', '2'],
+      ['la-force-rouge', 'SS02', '3'],
       ['native-sources', 'source:AR25,HANO,DC22', '1'],
     ]) {
       const output = join(temp, name + '.jsonl');

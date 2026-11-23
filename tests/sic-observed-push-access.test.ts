@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { NativeCommand, NativeRows } from '../src/logos-engine/v6-native-types.ts';
-import type { CoverageTransfer } from '../src/sic/observed-coverage.ts';
-import { choosePushAccess, matchesPushAccess, observePushAccess, type PushAccessKnowledge } from '../src/sic/observed-push-access.ts';
+import { observeCoverage, rememberCoverageWin, type CoverageLearning, type CoverageTransfer } from '../src/sic/observed-coverage.ts';
+import { choosePushAccess, matchesPushAccess, observePushAccess, rebindPushAccess, rememberPushAccess,
+  type PushAccessBinding, type PushAccessKnowledge } from '../src/sic/observed-push-access.ts';
 import { observeTravel, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
 
@@ -41,7 +42,8 @@ for (const mirrored of [false, true]) {
     assert.equal(choosePushAccess(knowledge, transfer, travel, observed(board.frame), inputs, 1), undefined);
 
     while (board.level === 2 && actions < 65) {
-      const plan = choosePushAccess(knowledge, transfer, travel, observed(board.frame), inputs, 120 - actions, first.goal);
+      const plan = choosePushAccess(knowledge, transfer, travel, observed(board.frame), inputs, 120 - actions,
+        { field: first.field, supports: [] });
       assert.ok(plan);
       for (const step of plan.steps) {
         await act(step.command);
@@ -51,3 +53,59 @@ for (const mirrored of [false, true]) {
     assert.equal(board.levelsCompleted, 1);
   });
 }
+
+test('witnessed directions, immersion and pressure survive changes of layout and target count', async () => {
+  const game = createGameDispatcher(async () => { throw new Error('Expected the native game'); });
+  let board = await game.dispatch({ type: 'load', code: 'SS02' });
+  let travel: ObservedTravel | undefined, coverage: CoverageLearning | undefined, knowledge: PushAccessKnowledge | undefined;
+  let transfer: CoverageTransfer | undefined, evidence = 0, witnessRows = board.frame;
+  // Public returns from the completed tutorial include a sink, a later crossing and a gate opening.
+  const tutorial = [1, 3, 2, 4, 2, 1, 4, 3, 4, 4, 4, 4, 4, 4, 2, 4, 4, 1, 1, 1,
+    3, 1, 4, 2, 2, 3, 2, 2, 2, 3, 2, 4, 4, 1, 1, 1, 4, 4, 4, 4];
+  for (const actionId of tutorial) {
+    const before = board.frame, command = input(actionId), ref = `tutorial:${++evidence}`;
+    board = await game.dispatch({ type: 'action', actionId });
+    if (board.levelsCompleted > 0) {
+      transfer = rememberCoverageWin(coverage, travel, before, command, 1, ref);
+      witnessRows = before;
+      break;
+    }
+    const after = board.frame, returned = observeTravel(travel, before, after, command, ref);
+    coverage = observeCoverage(coverage, travel, returned, before, after, command, ref);
+    knowledge = observePushAccess(knowledge, travel, returned, before, after, command, ref, coverage);
+    travel = returned;
+  }
+  const memory = rememberPushAccess(knowledge, travel, { rows: witnessRows, ref: 'tutorial:boundary' });
+  assert.ok(transfer && memory?.roles.conversion?.crossingRef && memory.roles.pressure);
+  assert.equal(Object.keys(memory.controls.moves).length, 4);
+
+  for (const level of [2, 3]) {
+    board = await game.dispatch({ type: 'selectLevel', level });
+    let binding: PushAccessBinding | undefined, turns = 0, witnessedSupport = false;
+    const initialCompleted = board.levelsCompleted;
+    while (board.level === level && turns < 90) {
+      const rebound = rebindPushAccess(memory, board.frame, board.availableActionIds.map(id => input(id).action_ref));
+      assert.ok(rebound);
+      const plan = choosePushAccess(rebound.roles, transfer, rebound.travel, board.frame, inputs, 120 - turns, binding);
+      assert.ok(plan);
+      if (turns === 0) {
+        assert.ok(plan.steps.length > 1);
+        if (level === 3) {
+          assert.ok(plan.plannedSupport);
+          assert.equal(plan.field.marks.length, 1);
+        }
+      }
+      for (const step of plan.steps) {
+        board = await game.dispatch({ type: 'action', actionId: Number(step.command.action_ref.slice(6)) });
+        turns++;
+        witnessedSupport ||= step.after.supports.length > 0;
+        if (board.level === level) assert.ok(matchesPushAccess(rebound.roles, rebound.travel, board.frame, plan, step.after));
+        // The persisted checkpoint orders keys independently of the field reader.
+        const { gates, goal, ground, marks, water } = plan.field;
+        binding = { field: { gates, goal, ground, marks, water }, supports: step.after.supports };
+      }
+    }
+    assert.equal(board.levelsCompleted, initialCompleted + 1);
+    if (level === 3) assert.ok(witnessedSupport);
+  }
+});

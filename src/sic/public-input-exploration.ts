@@ -29,7 +29,8 @@ import { annotateTravelMarks, chooseAnnotatedMarkContact, chooseSeparationTrial,
   readTravelGrid, type MarkContact, type ObservedTravel } from './observed-travel-frontier.ts';
 import { chooseCoverage, coveragePushPremise, coveragePushReturn, hasObservedCoverage, observeCoverage, observedCoverageDeadlock,
   rememberCoverageWin, retainCoverageAfterReset, type CoverageLearning, type CoveragePushStep, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
-import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBox, type PushAccessKnowledge, type PushAccessPlan } from './observed-push-access.ts';
+import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBox, rebindPushAccess, rememberPushAccess,
+  type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
 import { checkContactPrediction, chooseContactExperiment, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
 import { assessPressurePlan, choosePressureReserve, observePressureReserve, retainPressureReserve,
@@ -146,7 +147,8 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   separationTests?: string[];
   coverageTransfer?: CoverageTransfer;
   pushAccess?: PushAccessKnowledge;
-  pushAccessGoal?: string;
+  pushAccessMemory?: PushAccessMemory;
+  pushAccessBinding?: PushAccessBinding;
   contactMemory?: ContactMemory;
   exchange?: ObservedExchange;
   pressureReserve?: PressureReserve;
@@ -179,7 +181,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
   coveragePushSeries?: readonly CoveragePushStep[];
-  pushAccessPlan?: PushAccessPlan;
+  pushAccessPlan?: PushAccessPlan & { travel: ObservedTravel; roles: PushAccessKnowledge };
   coveragePlacement?: true;
   separationTest?: string;
   contactExperiment?: ContactExperiment;
@@ -544,6 +546,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer, panelServiceTransfer, symbolTransfer, programWitness, outletWitness, instructionTransfer } = state;
     state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
       ...(state.coverageTransfer?.epoch === epoch - 1 ? { coverageTransfer: state.coverageTransfer } : {}),
+      ...(state.pushAccessMemory ? { pushAccessMemory: state.pushAccessMemory } : {}),
       ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
       ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
       ...(relayTransfer?.witness ? { relayTransfer } : {}), ...(navigationTransfer?.won ? { navigationTransfer } : {}),
@@ -555,7 +558,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   function acquireCoverageTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows) {
     if (state.epoch !== before.level_epoch || after.levels_completed <= before.levels_completed) return;
     const win = rememberCoverageWin(state.coverage, state.travel, rows, command, before.level_epoch, after.observation_ref);
-    if (win) state.coverageTransfer = win;
+    if (win) {
+      state.coverageTransfer = win;
+      const memory = rememberPushAccess(state.pushAccess, state.travel, { rows, ref: before.observation_ref });
+      if (memory) state.pushAccessMemory = memory;
+    }
   }
 
   async function acquireTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows, frames: readonly NativeRows[]) {
@@ -600,33 +607,42 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   const projectionReturns = new WeakMap<FallbackProjection, ReturnType<typeof assessFallbackProjection>>();
 
   function proposePushAccess(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
-    if (state.epoch !== observation.level_epoch || state.coverage?.layout || state.coverageTransfer?.epoch !== observation.level_epoch - 1
+    const current = state.epoch === observation.level_epoch;
+    if (current && (state.coverage?.layout || state.pushAccess?.contradicted) || state.coverageTransfer?.epoch !== observation.level_epoch - 1
       || observation.available_action_refs.length !== 4 || !observation.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))) return null;
-    const travel = state.travel;
-    const plan = choosePushAccess(state.pushAccess, state.coverageTransfer, travel, rows, inputs, remaining, state.pushAccessGoal);
-    if (!plan || !travel) return null;
+    const retained = rebindPushAccess(state.pushAccessMemory, rows, observation.available_action_refs);
+    const travel = current && state.travel || retained?.travel;
+    const roles = current && state.pushAccess || retained?.roles;
+    const plan = choosePushAccess(roles, state.coverageTransfer, travel, rows, inputs, remaining, current ? state.pushAccessBinding : undefined);
+    if (!plan || !travel || !roles) return null;
     const ref = observation.observation_ref;
     const pitch = travel.grid.pitch;
     const blocked = plan.blocked && pushAccessBox(plan.blocked.passage, pitch);
     const target = pushAccessBox(plan.goal, pitch);
     const label = blocked
       ? 'Move a body aside from a reachable stance to preserve the only passage to the observed destination'
-      : 'Reach the observed destination by combining verified walks and pushes';
+      : plan.plannedSupport && plan.field.marks.length
+        ? 'Build a foothold using the observed conversion, then reach a pushing stance for the pressure mark'
+        : plan.field.marks.some(mark => !plan.start.bodies.includes(mark))
+          ? 'Reach a pushing stance and hold the pressure mark to open access to the observed destination'
+          : 'Reach the observed destination by combining verified walks and pushes';
     const evidence: [string, ...string[]] = [ref, ...new Set(plan.evidence.filter(item => item !== ref))];
-    const goal = { kind: blocked ? 'preserve_push_passage' : 'reach_observed_push_destination',
+    const goal = { kind: blocked ? 'preserve_push_passage' : plan.plannedSupport ? 'construct_observed_support' : 'reach_observed_push_destination',
       scope: ref.split(':revision:', 1)[0]!, subjects: [`visible_target:${plan.goal}`, ...(plan.blocked ? [`passage:${plan.blocked.passage}`] : [])],
       parentObjective: completion, satisfactionContract: 'observe_official_progress_after_preserving_access' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
     const id = `push-access:${need.id}`;
     const actions = plan.steps.map(step => step.command);
     return {
-      status: 'proposed', kind: publicInputExplorationId, actions, pushAccessPlan: plan,
+      status: 'proposed', kind: publicInputExplorationId, actions, pushAccessPlan: { ...plan, travel, roles },
       source: explorationKey(observation, rows), candidates: inputs.map(commandKey), needId: need.id,
       steps: plan.steps.map(step => ({ action: step.command, expected_after: pushAccessBox(step.after.actor, pitch) })),
       binding: { observation_ref: ref, level_epoch: observation.level_epoch },
       question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
       compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${completion}`] }],
       sicSituationCard: { strategy: goal.kind, mode: 'solving', need: label, situation: label, evidence, target,
+        ...(retained ? { priorLevelMechanism: 'Reuse the witnessed direction commands and compatible object roles' } : {}),
+        ...(plan.plannedSupport ? { affectedSupport: pushAccessBox(plan.plannedSupport, pitch) } : {}),
         ...(blocked ? { blockedPassage: blocked, unsafePush: plan.blocked!.blockedBy.action_ref,
           unsafeStance: pushAccessBox(plan.blocked!.stance, pitch) } : {}) },
       sicLocalDecision: { strategy: goal.kind, objective: { id, label, parent: completion }, need },
@@ -1171,8 +1187,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const access = proposal.pushAccessPlan;
       if (access) {
         const pose = index === 0 ? access.start : access.steps[index - 1]!.after;
-        const admitted = !!state.pushAccess && !!state.travel && (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
-          && matchesPushAccess(state.pushAccess, state.travel, packet.frame_rows, access, pose);
+        const admitted = (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
+          && matchesPushAccess(access.roles, access.travel, packet.frame_rows, access, pose);
         return { admitted, reason: admitted ? 'push_access_premise_witnessed' : 'push_access_premise_changed' };
       }
       const push = proposal.coveragePushSeries?.[index];
@@ -1207,7 +1223,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const scored = after.levels_completed > before.levels_completed;
       const access = proposal.pushAccessPlan;
       if (access) {
-        const matched = !!state.pushAccess && !!state.travel && matchesPushAccess(state.pushAccess, state.travel, afterRows, access, access.steps[index]!.after);
+        const matched = matchesPushAccess(access.roles, access.travel, afterRows, access, access.steps[index]!.after);
         return { matched: scored || matched, seal_prefix: scored || !matched,
           reason: scored ? 'official_boundary' : matched ? 'push_access_step_confirmed' : 'push_access_model_contradicted',
           ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
@@ -1331,6 +1347,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const access = proposal.pushAccessPlan;
       if (access && after.levels_completed > before.levels_completed && access.steps[index]!.after.actor === access.goal) {
         state.coverageTransfer = { epoch: before.level_epoch, motion: 'push', exitPattern: access.template, ref: after.observation_ref };
+        const memory = rememberPushAccess(access.roles, access.travel);
+        if (memory) state.pushAccessMemory = memory;
       }
       if (fallback) {
         enterEpoch(before.level_epoch);
@@ -1356,10 +1374,16 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       enterEpoch(before.level_epoch);
-      if (access && state.pushAccess && state.travel) {
-        state.pushAccessGoal = access.goal;
-        if (!matchesPushAccess(state.pushAccess, state.travel, afterRows, access, access.steps[index]!.after)) {
-          state.pushAccess = { ...state.pushAccess, contradicted: true };
+      if (access) {
+        const expected = access.steps[index]!.after;
+        if (matchesPushAccess(access.roles, access.travel, afterRows, access, expected)) {
+          state.travel ??= access.travel;
+          state.pushAccess = access.roles;
+          state.pushAccessBinding = { field: access.field, supports: expected.supports };
+        } else {
+          state.pushAccess = { ...access.roles, contradicted: true };
+          delete state.pushAccessBinding;
+          delete state.travel;
         }
       }
       state.experiments++;
@@ -1426,10 +1450,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
           if (exchange) state.exchange = exchange;
           const coverage = observeCoverage(state.coverage, previous, travel, rows, afterRows, command, after.observation_ref, proposal.pullRoute);
           if (coverage) state.coverage = coverage;
-          if (state.coverageTransfer?.epoch === before.level_epoch - 1 && state.coverageTransfer.motion === 'push') {
-            const acquired = observePushAccess(state.pushAccess, previous, travel, rows, afterRows, command, after.observation_ref);
-            if (acquired) state.pushAccess = acquired;
-          }
+          const acquired = observePushAccess(state.pushAccess, previous, travel, rows, afterRows, command, after.observation_ref, coverage);
+          if (acquired) state.pushAccess = acquired;
           if (fallback && previous && travel && coverage?.motion && state.coverageTransfer?.epoch === before.level_epoch - 1) {
             state.contactMemory = observeContactExperiment(state.contactMemory, state.coverageTransfer, coverage, previous, travel,
               rows, afterRows, command, after.observation_ref, proposal.contactExperiment);
