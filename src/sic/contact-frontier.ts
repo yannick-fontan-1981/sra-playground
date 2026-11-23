@@ -607,7 +607,7 @@ export function proposeFrontierContact(
     step,
     project,
     parts: board.parts,
-    controlRole: board.roles[board.pivotIndex],
+    ...(board.pivotIndex >= 0 ? { controlRole: board.roles[board.pivotIndex] } : {}),
     acquired: verifyEntry,
     transform: board.transport?.op ?? null,
     ref: o.observation_ref,
