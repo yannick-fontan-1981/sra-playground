@@ -103,7 +103,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 2 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 3 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -158,6 +158,11 @@ export function checkRun(run) {
       assert.ok(issued.length <= 35 && groups.size <= 10, 'SS03 L2 lost the direct pull and gate route');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L2 reset during the direct route');
     }
+    if (code === 'SS03' && row.level === 3) {
+      // The exploratory route stalled at 220 commands and 199 decisions. The composed route completes in 63 and 5.
+      assert.ok(issued.length <= 75 && groups.size <= 8, 'SS03 L3 lost the direct pressure route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L3 entered a trap on the direct route');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
@@ -189,7 +194,7 @@ function main() {
     for (const [name, cohort, end, cap] of [
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
-      ['la-ruse-verte', 'SS03', '2', '120'],
+      ['la-ruse-verte', 'SS03', '3', '120'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

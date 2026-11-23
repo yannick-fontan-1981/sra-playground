@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeObservation } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
 import { chooseCoverage, coveragePullPremise, coveragePullReturn, coveragePushPremise, coveragePushReturn,
-  hasObservedCoverage, observeCoverage, rememberCoverageWin, retainCoverageAfterReset,
+  hasObservedCoverage, observeCoverage, observedCoverageDeadlock, rememberCoverageWin, retainCoverageAfterReset,
   type CoverageLearning, type CoverageTransfer, type PullStep } from '../src/sic/observed-coverage.ts';
 import { matchesPullCircuit, planPullCircuit, type PullCircuitBinding, type PullKnowledge } from '../src/sic/observed-pull-circuits.ts';
+import { createSicPublicInputExploration, observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
 import { chooseTravelTrial, observeTravel, readTravelGrid, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
 test('placement observes a pair of targets, verifies an irreversible corner and reuses evidence after RESET', async () => {
@@ -169,7 +170,7 @@ for (const mirrored of [false, true]) test(`pull and exit roles transfer to guar
   const start = recolor(board.frame), first = planPullCircuit(roles, transfer, start, inputs, 35);
   assert.ok(first?.evidence.includes(roles.ref));
   const [gate, otherGate] = first.field.gates;
-  assert.ok(gate && otherGate);
+  assert.ok(gate && otherGate && !('pattern' in gate) && !('pattern' in otherGate));
   const [gx, gy] = gate.at.split(',').map(Number) as [number, number];
   const [bx, by] = first.start.bodies[0]!.split(',').map(Number) as [number, number];
   const contradicted = start.map(row => [...row]);
@@ -205,4 +206,61 @@ for (const mirrored of [false, true]) test(`pull and exit roles transfer to guar
   }
   assert.equal(board.levelsCompleted, 2);
   assert.ok(turns <= 35 && decisions <= 10);
+
+  const family = createSicPublicInputExploration();
+  assert.ok(transfer.pressureLatch, 'The earlier physical pressure return must be retained');
+  const observation = (revision: number): NativeObservation => ({
+    revision, level_epoch: 3, frame_hash: String(revision), observation_ref: `transfer:revision:${revision}`,
+    coordinate_basis: 'screen', entities: [], available_action_refs: [...actionIds.keys()], state: 'NOT_FINISHED',
+    levels_completed: 2, unknowns: [], provenance: 'test',
+  });
+  const firstObservation = observation(1);
+  const thirdTransfer = { ...transfer, epoch: 2, ref: firstObservation.observation_ref };
+  family.restore({ ...family.state(), epoch: 2, pullKnowledge: roles, coverageTransfer: thirdTransfer });
+  const thirdRows = recolor(board.frame);
+  const direct = await family.proposeInGroup!(observedPressureRecoveryGroup, firstObservation, thirdRows, inputs, 75);
+  assert.ok(direct?.pullCircuitPlan);
+  assert.ok(direct.pullCircuitPlan.evidence.includes(transfer.pressureLatch.ref));
+  assert.ok(direct.pullCircuitPlan.start.bodies.length > Object.keys(direct.pullCircuitPlan.field.marks).length);
+  assert.ok(direct.actions.length > 1);
+
+  // A reduced replay of the old exploratory route. The final traction leaves
+  // moves available, but every reachable arrangement misses the exit.
+  const trapped = '443314424424114213224444222';
+  let before = firstObservation;
+  for (const [index, digit] of [...trapped].entries()) {
+    const rows = recolor(board.frame);
+    const action = inputs.find(input => actionIds.get(input.action_ref) === Number(digit))!;
+    board = await game.dispatch({ type: 'action', actionId: Number(digit) });
+    const after = observation(index + 2);
+    await family.observePublicOutcome!(before, after, action, rows, recolor(board.frame));
+    assert.equal(family.requestedStopReason!(after), index === trapped.length - 1 ? observedCoverageDeadlock : null);
+    before = after;
+  }
+  assert.equal(await family.proposeInGroup!(observedPressureRecoveryGroup, before, recolor(board.frame), inputs, 75), null);
+  board = await game.dispatch({ type: 'reset' });
+  const restarted = observation(trapped.length + 2);
+  const restored = family.stateAfterLevelReset!(restarted, recolor(board.frame));
+  assert.ok(restored && restored.pullCircuitRecovered);
+  family.restore(restored);
+  assert.equal(family.requestedStopReason!(restarted), null);
+  assert.ok((await family.proposeInGroup!(observedPressureRecoveryGroup, restarted, recolor(board.frame), inputs, 75))?.pullCircuitPlan);
+
+  binding = undefined;
+  turns = 0;
+  decisions = 0;
+  while (board.levelsCompleted === 2 && turns < 75) {
+    const plan = planPullCircuit(roles, thirdTransfer, recolor(board.frame), inputs, 75 - turns, binding);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16);
+    decisions++;
+    for (const step of plan.steps) {
+      board = await game.dispatch({ type: 'action', actionId: actionIds.get(step.action.action_ref)! });
+      turns++;
+      if (board.levelsCompleted > 2) break;
+      assert.ok(matchesPullCircuit(roles, plan.field, step.after, recolor(board.frame)));
+      binding = { field: plan.field, pose: step.after };
+    }
+  }
+  assert.equal(board.levelsCompleted, 3);
+  assert.ok(turns <= 75 && decisions <= 8);
 });

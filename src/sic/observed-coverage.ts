@@ -7,12 +7,14 @@ type Cells = ReturnType<typeof readTravelGrid>['cells'];
 type Move = { input: string; delta: NativePoint };
 type Motion = 'push' | 'pull';
 type Layout = { marks: string[]; markInk: number; exit: string; gate: string[] };
-export type CoverageTransfer = { epoch: number; motion: Motion; exitPattern: string; ref: string };
+export type ObservedPressureLatch = { mark: string; closed: string; open: string; ref: string };
+export type CoverageTransfer = { epoch: number; motion: Motion; exitPattern: string; ref: string; pressureLatch?: ObservedPressureLatch };
 export type PullStep = { input: string; actor: string; arrangement: string };
 export type CoverageLearning = {
   body?: string; motion?: Motion; layout?: Layout; supports: string[]; water?: string; walls: Record<string, string[]>;
   pullRoute?: { anchor: string; steps: readonly PullStep[] }; pullRefusals?: string[];
   lastPull?: { ref: string; from: string; to: string; actor: string };
+  pressureLatch?: ObservedPressureLatch;
   refs: string[]; deadlock?: { ref: string; key: string; bodies: string[] }; recovered: string[];
 };
 export type CoveragePlan = { command: NativeCommand; motion: Motion; marks: string[]; exit: string; evidence: string[];
@@ -69,7 +71,26 @@ export function rememberCoverageWin(local: CoverageLearning | undefined, travel:
   if (!travel?.actor || !delta || !local?.layout || !local.motion || next(travel.actor, delta) !== local.layout.exit
     || !hasObservedCoverage(local, travel, rows)) return;
   const exitPattern = stamp(readTravelCell(rows, travel.grid, at(local.layout.exit)));
-  return { epoch, motion: local.motion, exitPattern, ref };
+  return { epoch, motion: local.motion, exitPattern, ref, ...(local.pressureLatch ? { pressureLatch: local.pressureLatch } : {}) };
+}
+
+function observePressureLatch(local: CoverageLearning, travel: ObservedTravel, returned: ObservedTravel,
+  before: Cells, after: Cells, ref: string): ObservedPressureLatch | undefined {
+  const { body, layout } = local;
+  if (local.motion !== 'pull' || !body || !layout) return;
+  const occupied = (cells: Cells, actor: ObservedTravel['actor']) => {
+    const bodies = bodiesAt(cells, body, layout);
+    return layout.marks.every(mark => mark === actor || bodies.includes(mark));
+  };
+  if (occupied(before, travel.actor) || !occupied(after, returned.actor)) return;
+  const mark = layout.marks.map(cell => before.get(cell))
+    .find(pixels => pixels?.filter(ink => ink === layout.markInk).length === 2 * travel.grid.pitch - 1
+      && pixels.every(ink => ink === layout.markInk || ink === travel.grid.floor));
+  const [gate] = layout.gate;
+  if (!mark || !gate || layout.gate.length !== 1) return;
+  const closed = before.get(gate), open = after.get(gate);
+  if (!closed || !open || stamp(closed) === stamp(open) || !open.every(ink => ink === layout.markInk || ink === travel.grid.floor)) return;
+  return { mark: stamp(mark), closed: stamp(closed), open: stamp(open), ref };
 }
 
 function measureLayout(cells: Cells, pitch: number, floor: number, bodies: number, motion: Motion): Layout | undefined {
@@ -206,6 +227,10 @@ export function observeCoverage(previous: CoverageLearning | undefined, travel: 
           ?? measureLayout(returnedCells, travel.grid.pitch, travel.grid.floor, count, 'pull');
         if (layout) changed = { ...changed, layout };
       }
+    }
+    if (!changed.pressureLatch) {
+      const pressureLatch = observePressureLatch(changed, travel, returned, first, returnedCells, ref);
+      if (pressureLatch) changed = { ...changed, pressureLatch };
     }
   } else if (returned.actor === from && !travel.grid.signature) {
     const ink = firstTile[0], signature = stamp(firstTile);
@@ -435,8 +460,9 @@ export function coveragePullReturn(local: CoverageLearning, travel: ObservedTrav
   return matchesPullGates(series, travel, after) && coveragePushReturn(local, travel, before, after, series.steps[index]!);
 }
 
-function pullPath(actor: string, pieces: Set<string>, layout: Layout, ground: ReadonlySet<string>, moves: readonly Move[],
-  refusals: readonly string[]) {
+export function searchPullCoverage(actor: string, pieces: Set<string>, layout: Pick<Layout, 'marks' | 'gate' | 'exit'>,
+  ground: ReadonlySet<string>, moves: readonly Move[], refusals: readonly string[], pressureBudget?: number):
+  { route?: PullStep[]; exhausted: boolean } {
   const gates = new Set(layout.gate), open = new Set([...ground, ...gates]);
   const rejected = new Set(refusals);
   const neighbors = new Map([...open].map(cell => [cell, moves.flatMap(({ delta, input }) => {
@@ -462,6 +488,11 @@ function pullPath(actor: string, pieces: Set<string>, layout: Layout, ground: Re
   type PullPosition = { actor: string; pieces: Set<string>; path?: Path };
   const queue = new Map<number, PullPosition[]>(), seen = new Map<string, number>();
   const estimates = new Map<string, number>();
+  const held = (pieces: Set<string>, at?: string) => layout.marks.every(mark => pieces.has(mark) || mark === at);
+  const safe = (pieces: Set<string>, at: string) => held(pieces, at)
+    || !gates.has(at) && !layout.gate.some(gate => pieces.has(gate));
+  const pressure = pressureBudget !== undefined;
+  let truncated = false;
   let best = Infinity;
   function enqueue(state: PullPosition) {
     const arrangement = arrangementOf(state.pieces), key = `${state.actor}|${arrangement}`;
@@ -470,39 +501,47 @@ function pullPath(actor: string, pieces: Set<string>, layout: Layout, ground: Re
     seen.set(key, distance);
     let estimate = estimates.get(arrangement);
     if (estimate === undefined) { estimate = remaining([...state.pieces]); estimates.set(arrangement, estimate); }
-    if (!Number.isFinite(estimate)) return;
+    if (!Number.isFinite(estimate)) {
+      if (!pressure) return;
+      estimate = 0;
+    }
     const priority = distance + 2 * estimate, bucket = queue.get(priority) ?? [];
     bucket.push(state); queue.set(priority, bucket); best = Math.min(best, priority);
   }
   enqueue({ actor, pieces });
-  for (let i = 0; queue.size && i < 6000; i++) {
+  for (let i = 0; queue.size && i < (pressure ? 24_000 : 6_000); i++) {
     const bucket = queue.get(best)!;
     const state = bucket.pop()!;
     if (!bucket.length) { queue.delete(best); best = Math.min(...queue.keys()); }
     const arrangement = arrangementOf(state.pieces);
-    const covered = layout.marks.every(mark => state.pieces.has(mark));
+    const covered = held(state.pieces);
     const walk = new Map<string, Path | undefined>([[state.actor, state.path]]);
     for (const [cell, previous] of walk) {
-      if (covered && cell === layout.exit) {
+      if ((pressure || covered) && cell === layout.exit) {
         const route: PullStep[] = [];
         for (let step = previous; step; step = step.previous) {
           route.push({ input: step.input, actor: step.actor, arrangement: step.arrangement });
         }
-        return route.reverse();
+        return { route: route.reverse(), exhausted: false };
       }
       const distance = (previous?.distance ?? 0) + 1;
       for (const { target, tail, input } of neighbors.get(cell) ?? []) {
-        if (state.pieces.has(target) || !covered && gates.has(target) || rejected.has(refusalKey(cell, arrangement, input))) continue;
+        if (state.pieces.has(target) || !(pressure ? held(state.pieces, cell) : covered) && gates.has(target)
+          || rejected.has(refusalKey(cell, arrangement, input))) continue;
+        if (pressure && distance > pressureBudget) { truncated = true; continue; }
         if (state.pieces.has(tail)) {
           const bodies = new Set(state.pieces);
           bodies.delete(tail); bodies.add(cell);
-          if ((gates.has(cell) || gates.has(target)) && !layout.marks.every(mark => bodies.has(mark))) continue;
+          if (pressure ? !safe(bodies, target) : (gates.has(cell) || gates.has(target)) && !held(bodies)) continue;
           enqueue({ actor: target, pieces: bodies,
             path: { input, actor: target, arrangement: arrangementOf(bodies), previous, distance } });
-        } else if (!walk.has(target)) walk.set(target, { input, actor: target, arrangement, previous, distance });
+        } else if (!walk.has(target) && (!pressure || safe(state.pieces, target))) {
+          walk.set(target, { input, actor: target, arrangement, previous, distance });
+        }
       }
     }
   }
+  return { exhausted: !queue.size && !truncated };
 }
 
 export function chooseCoverage(local: CoverageLearning | undefined, travel: ObservedTravel | undefined, rows: NativeRows,
@@ -518,7 +557,7 @@ export function chooseCoverage(local: CoverageLearning | undefined, travel: Obse
   const retained = local.pullRoute?.anchor === pullAnchor(travel.actor, arrangementOf(bodies), layout, cells)
     ? local.pullRoute.steps : undefined;
   const route = motion === 'pull'
-    ? retained?.length ? retained : pullPath(travel.actor, bodies, layout, ground, moves, local.pullRefusals ?? [])
+    ? retained?.length ? retained : searchPullCoverage(travel.actor, bodies, layout, ground, moves, local.pullRefusals ?? []).route
     : undefined;
   const start = { actor: travel.actor, bodies, supports: new Set(local.supports) };
   const pushed = motion === 'push' ? pushSteps(pushPath(start, layout, ground, new Set(local.water ? bySignature(cells, local.water) : []), moves)) : [];

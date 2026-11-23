@@ -32,7 +32,8 @@ import { chooseCoverage, coveragePullPremise, coveragePullReturn, coveragePushPr
   type CoverageLearning, type CoverageMovementStep, type CoveragePullSeries, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
 import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindingAfter, pushAccessBox, rebindPushAccess, rememberPushAccess,
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
-import { matchesPullCircuit, planPullCircuit, type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
+import { matchesPullCircuit, observePullPressureBinding, planPullCircuit, provesPullPressureDeadlock,
+  type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
 import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
 import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
   contactPullReturn, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
@@ -155,6 +156,9 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   contactMemory?: ContactMemory;
   pullKnowledge?: PullKnowledge;
   pullCircuit?: PullCircuitBinding;
+  pullCircuitStart?: PullCircuitBinding['pose'];
+  pullCircuitDeadlock?: { ref: string };
+  pullCircuitRecovered?: true;
   pullCircuitRefuted?: true;
   exchange?: ObservedExchange;
   pressureReserve?: PressureReserve;
@@ -678,8 +682,10 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const evidence: [string, ...string[]] = [ref, ...new Set(plan.evidence)];
     const target = pushAccessBox(plan.field.goal, pullKnowledge.grid.pitch);
     const actions = plan.steps.map(step => step.action);
-    const label = 'Match the marked controls to the gates, then combine pulling and gate movement to reach the exit';
-    const goal = { kind: 'compose_matched_pull_circuits', scope: ref.split(':revision:', 1)[0]!,
+    const pressure = plan.field.gates.some(gate => 'pattern' in gate);
+    const label = pressure ? 'Free the passages and hold the matched pressure control to reach the exit'
+      : 'Match the marked controls to the gates, then combine pulling and gate movement to reach the exit';
+    const goal = { kind: pressure ? 'compose_pull_pressure_access' : 'compose_matched_pull_circuits', scope: ref.split(':revision:', 1)[0]!,
       subjects: [plan.field.goal, ...plan.field.gates.flatMap(gate => [gate.at, ...gate.marks])],
       parentObjective: completion, satisfactionContract: 'verify_each_gate_and_body_effect_then_reach_exit' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
@@ -693,6 +699,29 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       sicLocalDecision: { strategy: goal.kind, objective: { id, label, parent: completion }, need },
       bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: completion, purpose: label,
         evidence, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
+  }
+
+  function acquirePullPressureOutcome(before: NativeObservation, after: NativeObservation, rows: NativeRows, afterRows: NativeRows) {
+    const { pullKnowledge: roles, coverageTransfer: transfer } = state;
+    if (!roles || !transfer?.pressureLatch || transfer.epoch !== before.level_epoch - 1
+      || before.level_epoch !== after.level_epoch || after.state !== 'NOT_FINISHED') return;
+    const retained = state.epoch === before.level_epoch ? state.pullCircuit : undefined;
+    if (!retained && before.observation_ref !== transfer.ref) return;
+    const prior = retained
+      ? observePullPressureBinding(roles, transfer, rows, retained)
+      : observePullPressureBinding(roles, transfer, rows);
+    if (!prior) return;
+    const current = observePullPressureBinding(roles, transfer, afterRows, prior);
+    if (!current) return;
+    enterEpoch(before.level_epoch);
+    if (before.observation_ref === transfer.ref) state.pullCircuitStart = prior.pose;
+    state.pullCircuit = current;
+    const start = state.pullCircuitStart;
+    const samePose = JSON.stringify(prior.pose) === JSON.stringify(current.pose);
+    if (state.pullCircuitDeadlock?.ref === before.observation_ref && samePose
+      || !state.pullCircuitRecovered && start && !samePose && provesPullPressureDeadlock(roles, start, current, after.available_action_refs)) {
+      state.pullCircuitDeadlock = { ref: after.observation_ref };
+    }
   }
 
   const family = {
@@ -1194,6 +1223,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     async observePublicOutcome(before, after, command, rows, afterRows, frames) {
       acquireCoverageTransfer(before, after, command, rows);
+      acquirePullPressureOutcome(before, after, rows, afterRows);
       if (fallback) {
         enterEpoch(before.level_epoch);
         await acquireTransfer(before, after, command, rows, afterRows, frames ?? []);
@@ -1436,18 +1466,26 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const circuit = proposal.pullCircuitPlan;
       if (circuit) {
         enterEpoch(before.level_epoch);
+        if (before.observation_ref === state.coverageTransfer?.ref && circuit.field.gates.some(gate => 'pattern' in gate)) {
+          state.pullCircuitStart = circuit.start;
+        }
         const pose = circuit.steps[index]!.after;
         if (after.levels_completed > before.levels_completed) {
-          state.coverageTransfer = { epoch: before.level_epoch, motion: 'pull', exitPattern: circuit.field.goalPixels, ref: after.observation_ref };
+          const pressureLatch = state.coverageTransfer?.pressureLatch;
+          state.coverageTransfer = { epoch: before.level_epoch, motion: 'pull', exitPattern: circuit.field.goalPixels,
+            ref: after.observation_ref, ...(pressureLatch ? { pressureLatch } : {}) };
         } else if (matchesPullCircuit(circuit.roles, circuit.field, pose, afterRows)) {
           state.pullCircuit = { field: circuit.field, pose };
         } else {
-          delete state.pullCircuit;
+          state.pullCircuit = { field: circuit.field, pose: index === 0 ? circuit.start : circuit.steps[index - 1]!.after };
+          acquirePullPressureOutcome(before, after, rows, afterRows);
+          if (!state.pullCircuitDeadlock) delete state.pullCircuit;
           state.pullCircuitRefuted = true;
         }
         return { events: [] };
       }
       acquireCoverageTransfer(before, after, command, rows);
+      acquirePullPressureOutcome(before, after, rows, afterRows);
       const access = proposal.pushAccessPlan;
       if (access && after.levels_completed > before.levels_completed && access.steps[index]!.after.actor === access.goal) {
         state.coverageTransfer = { epoch: before.level_epoch, motion: 'push', exitPattern: access.template, ref: after.observation_ref };
@@ -1794,11 +1832,18 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     requestedStopReason(observation) {
       if (state.pressureReserve?.shortage === observation.observation_ref) return sicObservedWeightShortage;
+      if (state.pullCircuitDeadlock?.ref === observation.observation_ref) return observedCoverageDeadlock;
       const coverage = state.coverage, proof = coverage?.deadlock;
       if (!coverage || !proof || proof.ref !== observation.observation_ref) return null;
       return coverage.recovered.includes(proof.key) ? 'sic_coverage_deadlock_already_recovered' : observedCoverageDeadlock;
     },
     stateAfterLevelReset(observation, rows) {
+      const { pullCircuit, pullCircuitStart, pullKnowledge, coverageTransfer } = state;
+      if (state.pullCircuitDeadlock && pullCircuit && pullCircuitStart && pullKnowledge && coverageTransfer
+        && matchesPullCircuit(pullKnowledge, pullCircuit.field, pullCircuitStart, rows)) {
+        return { ...initial(observation.level_epoch), pullKnowledge, coverageTransfer, pullCircuitStart,
+          pullCircuit: { field: pullCircuit.field, pose: pullCircuitStart }, pullCircuitRecovered: true };
+      }
       if (!state.travel || !state.coverage?.deadlock && !state.pressureReserve?.shortage) return;
       const { grid, moves, refs } = state.travel;
       const pieces = readTravelGrid(rows, grid).pieces;
