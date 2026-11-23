@@ -54,11 +54,11 @@ async function liveHeaders({ origin, game, successor }) {
   return headers;
 }
 
-export async function openNativeBrowser({ origin, game, live, successor = false }) {
+export async function openNativeBrowser({ origin, game, live, successor = false, hasTouch = false }) {
   const { chromium } = await import(process.env.PLAYWRIGHT_MODULE ? pathToFileURL(process.env.PLAYWRIGHT_MODULE).href : 'playwright');
   const headers = live ? await liveHeaders({ origin, game, successor }) : {};
   const browser = await chromium.launch({ headless: true });
-  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, serviceWorkers: 'block' });
+  const context = await browser.newContext({ viewport: { width: 1440, height: 1000 }, hasTouch, serviceWorkers: 'block' });
   try {
     if (live) await context.route(url => url.origin === origin, async route => {
       try { await route.fulfill({ response: await route.fetch({ headers: { ...route.request().headers(), ...headers }, maxRedirects: 0 }) }); }

@@ -79,13 +79,25 @@ import { TrioPuzzleSession, compileLevel as compileBridgesLevel } from '../exper
 import { SS16_LEVELS } from '../experiments/sinking-star-ss16/src/levels.ts';
 import { heroSelection as bridgesHeroSelection, lessonIds as bridgesLessonIds, observeLesson as observeBridgesLesson, TUTORIAL_LEVEL as SS16_TUTORIAL_LEVEL, visibleHeroes as visibleBridgesHeroes, type BridgesLesson } from '../experiments/sinking-star-ss16/src/tutorial.ts';
 import ss16Witnesses from '../experiments/sinking-star-ss16/tests/witnesses.json' with { type: 'json' };
+
+import { createSs17Backend } from '../src/games/sinking-star-ss17.ts';
+import { TrioPuzzleSession as FortressSession, compileLevel as compileFortressLevel } from '../experiments/sinking-star-ss17/src/core.ts';
+import { SS17_LEVELS } from '../experiments/sinking-star-ss17/src/levels.ts';
+import { heroSelection as fortressHeroSelection, lessonIds as fortressLessonIds, observeLesson as observeFortressLesson, TUTORIAL_LEVEL as SS17_TUTORIAL_LEVEL, visibleHeroes as visibleFortressHeroes, type FortressLesson } from '../experiments/sinking-star-ss17/src/tutorial.ts';
+import ss17Witnesses from '../experiments/sinking-star-ss17/tests/witnesses.json' with { type: 'json' };
+import fortressLevel1Variant from '../experiments/sinking-star-ss17/reference/level1-alternative.json' with { type: 'json' };
+import fortressLevel5Chain from '../experiments/sinking-star-ss17/reference/level5-chain-alternative.json' with { type: 'json' };
+import fortressLevel5Ferry from '../experiments/sinking-star-ss17/reference/level5-ferry-alternative.json' with { type: 'json' };
+import fortressLevel6Review from '../experiments/sinking-star-ss17/reference/level6-independent-review.json' with { type: 'json' };
+import fortressLevel7Variant from '../experiments/sinking-star-ss17/reference/level7-two-roles-alternative.json' with { type: 'json' };
+import fortressLevel8Shortcut from '../experiments/sinking-star-ss17/reference/level8-rejected-shortcut.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS16 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS17 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 116);
+  assert.equal(GAME_CATALOG.length, 117);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15','SS16']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15','SS16','SS17']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -273,7 +285,7 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS16', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
+  for (const code of ['CASC', 'SS17', 'SS16', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -1893,4 +1905,171 @@ test('SS16 keeps the reinforced level 5, three goals and manual out-of-order pro
   assert.deepEqual(await dispatcher.dispatch({ type: 'restart' }), ref.restart());
   assert.equal(ref.observe().level, 1);
   assert.equal(ref.observe().levelsCompleted, 0);
+});
+
+test('SS17 preserves all three heroes across eight levels, animations and twenty-three tutorial discoveries', async () => {
+  const { getGameByCode } = await import('../src/games/catalog.ts');
+  const entry = getGameByCode(' ss17 ')!;
+  assert.deepEqual([entry.id, entry.name, entry.group, entry.family, entry.levels, entry.availability],
+    ['ss17-c4000001', 'La Forteresse Rose', 'custom_4', 'sinking_star_trio', 8, 'playable']);
+  assert.equal(entry.sourcePath, 'experiments/sinking-star-ss17/src/levels.ts');
+  assert.deepEqual(SS17_LEVELS.map(level => level.title), [
+    'Les trois cours de la forteresse', 'Les cellules de relève', 'Le compte des îles', 'Le miroir, puis le lest',
+    'La relève à angle droit', 'Les deux emplois des miroirs', 'Les trois vies de la clef', 'La forteresse aux deux visées',
+  ]);
+  assert.equal(SS17_TUTORIAL_LEVEL, 1);
+  assert.deepEqual(ss17Witnesses.map(({ actions }) => actions.length), [120, 115, 129, 76, 241, 170, 410, 205]);
+  assert.deepEqual(SS17_LEVELS.map(level => level.id), Array.from({ length: 8 }, (_, i) => `ss17-0${i + 1}`));
+
+  const backend = createSs17Backend(), reference = new FortressSession(SS17_LEVELS);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const lessons = new Set<FortressLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss17 ' });
+  assert.deepEqual(current, reference.observe());
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS17' }), current);
+  const publicKeys = Object.keys(current);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss17Witnesses) {
+    assert.equal(current.level, level);
+    assert.equal(current.palette?.length, 16);
+    assert.deepEqual(visibleFortressHeroes(current.frame).map(({ kind, selected }) => ({ kind, selected })).sort((a, b) => a.kind.localeCompare(b.kind)),
+      [{ kind: 'thief', selected: false }, { kind: 'warrior', selected: true }, { kind: 'wizard', selected: false }]);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const expected = reference.action(id, data);
+      const request = { type: 'action', actionId: id, data } as const;
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(backend.dispatch(request), expected);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleFortressHeroes(frame).map(({ kind, x, y }) => [kind, x, y]);
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      const priorDiscoveries = lessons.size;
+      observeFortressLesson(lessons, before, current, id);
+      if (level !== SS17_TUTORIAL_LEVEL) assert.equal(lessons.size, priorDiscoveries);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    const victory = current;
+    const undo = reference.undo();
+    assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), undo);
+    assert.deepEqual(backend.dispatch({ type: 'undo' }), undo);
+    assert.equal(undo.level, level);
+    assert.equal(undo.levelsCompleted, level - 1);
+    const last = route.at(-1)! as DuoAction;
+    const request = { type: 'action', actionId: last.id, data: last.data } as const;
+    assert.deepEqual(reference.action(last.id, last.data), victory);
+    current = await dispatcher.dispatch(request);
+    assert.deepEqual(current, victory);
+    assert.deepEqual(backend.dispatch(request), victory);
+    assert.deepEqual(fortressLessonIds.filter(id => lessons.has(id)), [...fortressLessonIds]);
+  }
+  assert.equal(current.state, 'WIN');
+  assert.deepEqual([actions, selections, frames], [1466, 152, 4179]);
+});
+
+test('SS17 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart', async () => {
+  const backend = createSs17Backend(), reference = new FortressSession(SS17_LEVELS);
+  const initial = reference.selectLevel(4);
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS17', level: 4 }), initial);
+  for (const level of [0, 9, 1.5, NaN]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS17', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: 1.5, y: 20 }, { x: -1, y: 0 }, { x: 0, y: 64 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS17 action/);
+  assert.throws(() => backend.dispatch({ type: 'selectLevel', level: 0 }), /Invalid level/);
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  assert.deepEqual(await routed.dispatch({ type: 'load', code: 'SS17', level: 4 }), initial);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: 6, data: { x: 64, y: 1 } })), /pixel coordinates/);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: -1 })), /Invalid SS17 action/);
+  assert.deepEqual(await routed.dispatch({ type: 'undo' }), initial);
+  for (const level of [8, 3, 7, 2, 5, 1, 6, 4]) {
+    assert.deepEqual(await routed.dispatch({ type: 'selectLevel', level }), reference.selectLevel(level));
+  }
+  const data = fortressHeroSelection(initial.frame, 'thief')!;
+  assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
+  assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(backend.dispatch({ type: 'selectLevel', level: 8 }), reference.selectLevel(8));
+  assert.deepEqual(backend.dispatch({ type: 'restart' }), reference.restart());
+});
+
+
+test('SS17 preserves the reachable two-mirror warning without an Undo entry', async () => {
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const ref = new FortressSession(SS17_LEVELS);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'load', code: 'SS17', level: 8 }), ref.selectLevel(8));
+  let beforeWarning = ref.observe();
+  for (const { id, data } of ss17Witnesses[7]!.actions.slice(0, 5) as DuoAction[]) {
+    beforeWarning = await dispatcher.dispatch({ type: 'action', actionId: id, data });
+    assert.deepEqual(beforeWarning, ref.action(id, data));
+  }
+  const warning = await dispatcher.dispatch({ type: 'action', actionId: 5 });
+  assert.deepEqual(warning, ref.action(5));
+  assert.deepEqual(warning.frameDurationsMs, [110, 70, 110, 0]);
+  assert.deepEqual(warning.frames, [warning.frames[0], beforeWarning.frame, warning.frames[0], beforeWarning.frame]);
+  const normal = beforeWarning.frame.flat();
+  const red = warning.frames[0]!.flat();
+  const changed = normal.flatMap((color, i) => color === red[i] ? [] : [[color, red[i]]]);
+  assert.deepEqual(changed, Array.from({ length: 6 }, () => [5, 8]));
+  assert.deepEqual(await dispatcher.dispatch({ type: 'action', actionId: 5 }), warning);
+  assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), ref.undo());
+});
+
+test('SS17 keeps the physical locks, rejects the two shortcuts and accepts five archived variants', async () => {
+  for (const spec of SS17_LEVELS) {
+    const world = compileFortressLevel(spec);
+    assert.equal(world.goals.length, 3);
+    assert.ok(world.gates.every(({ at }) => !world.buttons.some(button => button.x === at.x && button.y === at.y)));
+  }
+  assert.ok(SS17_LEVELS[5]!.gates?.some(gate => gate.at.x === 18 && gate.at.y === 14 &&
+    gate.circuit === 'retenue' && gate.closedWhen === 'pressed' && gate.direction === 'S'));
+  assert.ok(SS17_LEVELS[7]!.gates?.some(gate => gate.at.x === 14 && gate.at.y === 18 &&
+    gate.circuit === 'prison-clef' && gate.closedWhen === 'pressed' && gate.direction === 'N'));
+  const cyan = SS17_LEVELS[7]!.circuits?.find(circuit => circuit.id === 'prison-clef');
+  assert.deepEqual(cyan?.buttons, [{ x: 17, y: 15 }]);
+  assert.equal(cyan?.color, 10);
+
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const ref = new FortressSession(SS17_LEVELS);
+  const directions = { U: 1, D: 2, L: 3, R: 4, X: 5 } as const;
+  const roles = ['warrior', 'thief', 'wizard'] as const;
+  const routes = [
+    { level: 1, commands: fortressLevel1Variant.commands, length: 130, completed: true },
+    { level: 5, commands: fortressLevel5Chain.commands, length: 215, completed: true },
+    { level: 5, commands: fortressLevel5Ferry.commands, length: 257, completed: true },
+    { level: 6, commands: fortressLevel6Review.historical.counterexample.commands, length: 170, completed: false },
+    { level: 6, commands: fortressLevel6Review.advancedAlternative.commands, length: 214, completed: true },
+    { level: 7, commands: fortressLevel7Variant.commands, length: 366, completed: true },
+    { level: 8, commands: fortressLevel8Shortcut.historical.commands, length: 156, completed: false },
+    { level: 8, commands: 'CDDDDRCX', length: 8, completed: false, dead: true },
+  ];
+  for (const { level, commands, length, completed, dead } of routes) {
+    assert.equal(commands.length, length);
+    ref.restart();
+    let result = await dispatcher.dispatch({ type: 'load', code: 'SS17', level });
+    assert.deepEqual(result, ref.selectLevel(level));
+    for (const command of commands) {
+      const actionId = command === 'C' ? 6 : directions[command as keyof typeof directions];
+      assert.ok(actionId);
+      const selected = visibleFortressHeroes(result.frame).find(hero => hero.selected)?.kind;
+      const nextRole = roles[(roles.findIndex(role => role === selected) + 1) % roles.length]!;
+      const data = actionId === 6 ? fortressHeroSelection(result.frame, nextRole) ?? undefined : undefined;
+      result = await dispatcher.dispatch({ type: 'action', actionId, data });
+      assert.deepEqual(result, ref.action(actionId, data));
+    }
+    assert.equal(result.levelsCompleted, Number(completed));
+    assert.equal(result.level, completed ? (level === 1 ? 2 : 1) : level);
+    assert.equal(result.state, dead ? 'GAME_OVER' : 'NOT_FINISHED');
+    if (dead) assert.equal((await dispatcher.dispatch({ type: 'undo' })).state, 'NOT_FINISHED');
+  }
 });

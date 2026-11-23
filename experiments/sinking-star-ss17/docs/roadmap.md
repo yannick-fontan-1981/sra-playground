@@ -13,11 +13,18 @@
 
 ## Intégration à SRA Playground
 
-- [ ] Raccorder SS17 au catalogue, à Custom 4, au dispatcher et à la galerie, après SS16.
-- [ ] Comparer l’adaptateur natif au laboratoire pour chaque observation, image et durée.
-- [ ] Contrôler les commandes dans un navigateur autorisé, sur ordinateur et mobile.
-- [ ] Exécuter les essais SRA sans transmettre les témoins ni l’état privé au runtime.
-- [ ] Tester, pousser et intégrer les changements natifs sur main.
-- [ ] Publier le Site existant depuis le SHA GitHub vérifié, puis contrôler version, SHA source et lien direct.
+- [x] SS17 suit SS16 dans Custom 4. Le sélecteur et la galerie proposent les huit salles du laboratoire 0.1.0 avec leurs références.
+- [x] L’adaptateur et le dispatcher natifs correspondent au laboratoire sur 1 466 entrées, dont 152 sélections, et 4 179 images avec leurs durées.
+- [x] Les deux anciens raccourcis échouent sur les cartes corrigées. Les parcours qualifiés et les cinq variantes archivées restent valides.
+- [x] Edge confirme les 23 découvertes, la victoire en mode manuel depuis le niveau 1, les contrôles tactiles, les liens directs et les huit images de galerie.
+- [x] Le passage entre jeu manuel et SRA pendant une animation conserve la dernière observation publique. Les témoins d’auteur restent réservés aux tests.
 
-Cette livraison est le laboratoire autonome. Elle ne crée pas encore une entrée SS17 dans le Site natif. Le guide complet de l’étape suivante est `docs/codex-integration-prompt.md` ; le statut Git précis de la livraison est donné dans le compte rendu de session.
+Le parcours de référence gagne après 1 314 actions de jeu. Les huit salles demandent respectivement 100, 98, 115, 65, 225, 154, 379 et 178 coups sur ce parcours. Les essais SRA couvrent l’interface et les observations publiques. Les parcours manuels établissent la solvabilité de la campagne.
+
+Sur cinq paires de parcours SS09 et SS12 dans Edge, le temps médian cumulé est passé de 18,93 à 19,47 s, soit +2,84 % pour une tolérance de +10 %. Les quatre actions SRA par jeu sont identiques dans chaque paire.
+
+## Publication
+
+La branche de travail est `codex/ss17-custom4`. L’intégration sur `main` précède la publication du Site existant avec ses accès privés. Le compte rendu de livraison consigne la version Site, le SHA source et leur vérification avec GitHub.
+
+[Ouvrir SS17 dans SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS17#playground)

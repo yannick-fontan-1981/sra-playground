@@ -1190,6 +1190,10 @@ records.push({code:'SS16',id:'ss16-c4000001',name:'Les Ponts Engloutis',group:'c
   description:'Push one object with the Merchant, a chain with the Warrior, or pull with the Thief to build crossings for all three heroes.',
   sourcePath:'experiments/sinking-star-ss16/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS17',id:'ss17-c4000001',name:'La Forteresse Rose',group:'custom_4',family:'sinking_star_trio',levels:8,
+  description:'Push chains with the Warrior, pull with the Thief and aim through mirrors with the Wizard to bring all three heroes to safety.',
+  sourcePath:'experiments/sinking-star-ss17/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'
