@@ -1194,6 +1194,10 @@ records.push({code:'SS17',id:'ss17-c4000001',name:'La Forteresse Rose',group:'cu
   description:'Push chains with the Warrior, pull with the Thief and aim through mirrors with the Wizard to bring all three heroes to safety.',
   sourcePath:'experiments/sinking-star-ss17/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS18',id:'ss18-c4000001',name:'La Galerie Résonante',group:'custom_4',family:'sinking_star_trio',levels:8,
+  description:'Push with the Merchant, swap places with the Wizard, and move groups with the Bard to reach all three destinations together.',
+  sourcePath:'experiments/sinking-star-ss18/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

@@ -14,14 +14,21 @@ Le périmètre de ce lot est la campagne de huit salles, le moteur du trio, le t
 
 La demande de variété guide la conception : tri de caisses sans dispositifs, contrôleur à distance autour d’un bassin, cour octogonale, départs croisés, arène de contrepoids, miroir itinérant, navette à alcôves et synthèse à destinations centrales. Les géométries sont comparées à SS14–17 pour détecter les répétitions exactes, en complément des relectures de mécanismes.
 
-## Étape suivante : intégration native
+## Intégration native
 
-Le laboratoire ne vaut pas inscription au catalogue natif, essai autonome SRA ou publication du Site. L’intégration doit réutiliser les cartes et le contrat qualifiés, ajouter le raccordement réel du jeu, préserver les animations et le tutoriel, puis passer par la chaîne :
+- [x] SS18 suit SS17 dans Custom 4. Le sélecteur, les liens directs et la galerie reprennent les huit salles de la version 0.1.2.
+- [x] L’adaptateur et le dispatcher correspondent au laboratoire sur 739 entrées, dont 89 sélections, et 2 096 images avec leurs durées. Chaque fin de salle et la victoire finale sont annulables.
+- [x] Les deux anciens raccourcis du niveau 8 sont bloqués par l’accord à quatre poids. Une contre-branche montre la presse expulser le Magicien du but quand le Marchand quitte le bouton après la perte d’une caisse. La variante archivée du niveau 7 reste gagnante.
+- [x] Edge confirme la victoire manuelle depuis le niveau 1, les 27 découvertes du niveau 3, les huit vignettes, les commandes tactiles et les interruptions en mode manuel et en mode agent.
 
-**travail → tests → commit → push GitHub → intégration main → publication Site → vérification GitHub/Site**.
+Le parcours de référence compte 650 coups hors sélection. Les huit salles en demandent respectivement 56, 82, 94, 78, 83, 46, 43 et 168. La qualification du mode agent couvre le pas à pas et le retour au mode manuel.
 
-La publication se fait sur le Site SRA Playground existant. Le prompt de `codex-integration-prompt.md` décrit le travail attendu, les précautions de compatibilité et le compte rendu vérifiable. Il faut partir du `main` distant courant et préserver les avancées concurrentes.
+## Publication
+
+La publication se fait sur le Site SRA Playground existant, depuis la branche canonique intégrée. Le compte rendu de livraison consigne la version Site, le SHA source et leur correspondance avec GitHub.
+
+[Ouvrir SS18 dans SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS18#playground)
 
 ## Limites explicites
 
-Les témoins démontrent huit victoires reproductibles. Ils n’établissent ni minimum de coups, ni unicité, ni nécessité globale de chaque capacité montrée. Les variantes élaborées restent légitimes. En N8, la nécessité des trois caisses et du miroir découle du nombre de poids requis à la victoire ; elle ne démontre pas que tous les détails du témoin sont obligatoires. Les découvertes pédagogiques ne constituent pas des verrous cachés. La qualification Happy DOM n’est pas une revue CSS dans un navigateur natif ; ce dernier contrôle reste à effectuer dans l’environnement autorisé d’intégration.
+Les témoins démontrent huit victoires reproductibles. Ils n’établissent ni minimum de coups, ni unicité, ni nécessité globale de chaque capacité montrée. Les variantes élaborées restent légitimes. En N8, la nécessité des trois caisses et du miroir découle du nombre de poids requis à la victoire ; elle ne démontre pas que tous les détails du témoin sont obligatoires. Les découvertes pédagogiques ne constituent pas des verrous cachés. La qualification du laboratoire couvre Happy DOM et la revue de l’intégration couvre Edge sur ordinateur et sur un écran tactile de 390 px.
