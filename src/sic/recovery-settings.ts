@@ -19,7 +19,7 @@ type SavedRevisions = ReturnType<typeof nextRecoveryRevision> & {
   readonly previousProvenance?: PackProvenance;
 };
 
-export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
+export function bindRecoverySettings(panel: HTMLElement, initialPack?: RecoveryPack): () => RecoveryPack {
   const form = panel.querySelector<HTMLFormElement>('[data-sic-recovery-settings]')!;
   const status = form.querySelector<HTMLElement>('[data-sic-recovery-status]')!;
   const revision = form.querySelector<HTMLElement>('[data-sic-recovery-revision]')!;
@@ -116,6 +116,7 @@ export function bindRecoverySettings(panel: HTMLElement): () => RecoveryPack {
   } catch {
     status.textContent = 'Using defaults because the saved SIC settings could not be read.';
   }
+  if (initialPack) saved = { current: recoveryRevision(initialPack), previous: null };
   function showDraft(pack: RecoveryPack) {
     mode.value = pack.mode;
     depth.value = String(pack.maxDepth);

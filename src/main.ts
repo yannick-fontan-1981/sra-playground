@@ -1470,7 +1470,13 @@ let agentState: V6AgentSnapshot | null = null;
 let contradictionReview: ContradictionReview | null = null;
 const sicPanel = element<HTMLElement>('#sic-panel');
 bindSicPerspectives(sicPanel);
-const recoveryConfiguration = bindRecoverySettings(sicPanel);
+const scopeProfile = new URLSearchParams(location.search).get('sicProfile') === 'control-scope';
+if (scopeProfile) element<HTMLSelectElement>('#agent-planning').value = 'sic-fallback';
+const recoveryConfiguration = bindRecoverySettings(sicPanel, scopeProfile ? {
+  ...defaultRecoveryPack,
+  solver: 'sic-fallback',
+  informationPreference: { mode: 'active', strategy: 'learn_the_scope_of_a_control', minimumOutcomes: 2 },
+} : undefined);
 const sicActionCoverage = sicPanel.querySelector<HTMLElement>('[data-sic-action-coverage]')!;
 const sicModeLabel = sicPanel.querySelector<HTMLElement>('[data-sic-mode]')!;
 let sicRenderPending = false;
