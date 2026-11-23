@@ -1,0 +1,52 @@
+{
+  "game": "SS18",
+  "title": "La Galerie Résonante",
+  "version": "0.1.2",
+  "qualificationDate": "2026-11-22",
+  "artifact": "SS18-demo.html",
+  "bytes": 142213,
+  "sha256": "6fa0427f4d0a3eb71e9d258552bc6924156dbbae3ce9fd91d265c3364a2c0ed3",
+  "sourceBranch": "fix/sinking-star-ss18-harder-level8-20261123",
+  "sourceRepository": "yannick-fontan-1981/sra-playground",
+  "laboratory": "experiments/sinking-star-ss18",
+  "heroes": [
+    "merchant",
+    "wizard",
+    "bard"
+  ],
+  "initialHero": "merchant",
+  "levels": 8,
+  "tutorialDiscoveries": 27,
+  "unitTests": 56,
+  "witnessInputs": 739,
+  "selectionInputs": 89,
+  "movesWithoutSelection": 650,
+  "publicFrames": 2096,
+  "designReviewScripts": 5,
+  "nativeIntegration": "pending",
+  "sitePublication": "pending",
+  "qualificationReports": [
+    "levels-report.json",
+    "ui-dom-report.json",
+    "design-report.json",
+    "unit-report.json",
+    "browser-review-status.json"
+  ],
+  "limits": [
+    "Witnesses prove solvability, not optimality or uniqueness.",
+    "Interface review uses Happy DOM and exact raster pixels; native browser review remains separate.",
+    "No autonomous SRA success is claimed."
+  ],
+  "tutorialLevel": 3,
+  "changeSummary": "Niveau 8 renforcé : quatre poids obligatoires, réserve nord-est nécessaire, miroir réaffecté, glissière sud et appui initial indépendant.",
+  "levelOrderMatchesVersion": "0.1.1",
+  "level8": {
+    "witnessInputs": 184,
+    "selectionInputs": 16,
+    "movesWithoutSelection": 168,
+    "publicFrames": 527,
+    "requiredFinalNonHeroWeights": 4,
+    "reserveNecessary": true,
+    "oldBypassesReproducedAndClosed": 2
+  }
+}

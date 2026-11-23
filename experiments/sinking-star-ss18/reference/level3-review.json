@@ -1,0 +1,266 @@
+{
+  "success": true,
+  "level": 3,
+  "title": "Le jardin des trois issues",
+  "reference": {
+    "entries": 111,
+    "selections": 17,
+    "moves": 94,
+    "frames": 314,
+    "result": "WIN",
+    "blocked": 0,
+    "deaths": 0
+  },
+  "discoveries": {
+    "count": 27,
+    "ids": [
+      "select",
+      "move",
+      "merchant-push",
+      "partner-push",
+      "mirror-motion",
+      "wizard-swap",
+      "wizard-partner",
+      "wizard-bend",
+      "relay-weight",
+      "bard-song",
+      "partner-song",
+      "selective-song",
+      "diagonal-song",
+      "wall-song",
+      "release-by-swap",
+      "water-support",
+      "support-slide",
+      "support-anchor",
+      "cross-support",
+      "mirror",
+      "hero-reflection",
+      "crate-reflection",
+      "button",
+      "gate",
+      "press",
+      "monster",
+      "goals"
+    ],
+    "events": [
+      {
+        "entry": 1,
+        "discoveries": [
+          "move",
+          "merchant-push",
+          "button"
+        ]
+      },
+      {
+        "entry": 4,
+        "discoveries": [
+          "partner-push"
+        ]
+      },
+      {
+        "entry": 9,
+        "discoveries": [
+          "mirror-motion"
+        ]
+      },
+      {
+        "entry": 11,
+        "discoveries": [
+          "select"
+        ]
+      },
+      {
+        "entry": 13,
+        "discoveries": [
+          "wizard-swap",
+          "wizard-bend",
+          "relay-weight"
+        ]
+      },
+      {
+        "entry": 14,
+        "discoveries": [
+          "gate",
+          "mirror",
+          "hero-reflection"
+        ]
+      },
+      {
+        "entry": 27,
+        "discoveries": [
+          "crate-reflection"
+        ]
+      },
+      {
+        "entry": 33,
+        "discoveries": [
+          "bard-song",
+          "selective-song",
+          "diagonal-song",
+          "wall-song",
+          "water-support"
+        ]
+      },
+      {
+        "entry": 34,
+        "discoveries": [
+          "support-slide"
+        ]
+      },
+      {
+        "entry": 42,
+        "discoveries": [
+          "cross-support"
+        ]
+      },
+      {
+        "entry": 56,
+        "discoveries": [
+          "partner-song",
+          "support-anchor"
+        ]
+      },
+      {
+        "entry": 64,
+        "discoveries": [
+          "wizard-partner",
+          "release-by-swap"
+        ]
+      },
+      {
+        "entry": 95,
+        "discoveries": [
+          "press",
+          "monster"
+        ]
+      },
+      {
+        "entry": 111,
+        "discoveries": [
+          "goals"
+        ]
+      }
+    ]
+  },
+  "layout": {
+    "exits": [
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 16,
+        "y": 3
+      },
+      {
+        "x": 10,
+        "y": 17
+      }
+    ],
+    "nonCollinear": true,
+    "pressesAreSeparateFromButtons": true
+  },
+  "initialGeometry": [
+    {
+      "role": "merchant",
+      "positions": 153,
+      "transitions": 612,
+      "reachableGoals": []
+    },
+    {
+      "role": "wizard",
+      "positions": 153,
+      "transitions": 612,
+      "reachableGoals": []
+    },
+    {
+      "role": "bard",
+      "positions": 153,
+      "transitions": 612,
+      "reachableGoals": []
+    }
+  ],
+  "opticalOverapproximation": [
+    {
+      "role": "merchant",
+      "positions": 170,
+      "transitions": 680,
+      "reachableGoals": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 17
+        }
+      ]
+    },
+    {
+      "role": "wizard",
+      "positions": 170,
+      "transitions": 680,
+      "reachableGoals": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 17
+        }
+      ]
+    },
+    {
+      "role": "bard",
+      "positions": 170,
+      "transitions": 680,
+      "reachableGoals": [
+        {
+          "x": 3,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 17
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "label": "A blocked Bard cannot sing through the wall in front of his own step",
+      "result": "refused-atomically",
+      "action": 1
+    },
+    {
+      "label": "An unprepared initial reflection does not send its distant crate through the boundary",
+      "result": "refused-atomically",
+      "action": 5
+    },
+    {
+      "label": "The Merchant cannot move the two crates retained in a file by the Bard exercise",
+      "result": "refused-atomically",
+      "action": 4,
+      "legalPrefix": "UDRRURRRRDCURXDCCUULLLLDRRXCURRCRRCDDLLLLD"
+    },
+    {
+      "label": "The Merchant must follow the shifted support rather than enter its former water cell",
+      "result": "refused-atomically",
+      "action": 2,
+      "legalPrefix": "UDRRURRRRDCURXDCCUULLLLDRRXCURRCRRCDDDDDDL"
+    },
+    {
+      "label": "Walking away from the relay releases its gate before the Merchant has entered",
+      "result": "gate-closes",
+      "legalPrefix": "UDRRURRRRDCURXDCCUULLLLDRRXCURRCRRCDDDDDDDCDDDLDDDDDLUCRCRCCLCCL",
+      "action": 4
+    },
+    {
+      "label": "The southern exit needs both cyan weights; the paired press supplies the second one",
+      "result": "two-weights-and-two-presses",
+      "entry": 95
+    }
+  ],
+  "scope": "The geometry checks freeze devices and resources; the second graph deliberately opens other gates and ignores water/occupants. Counter-branches are local legal experiments, not proofs of a unique solution or global necessity for every tutorial demonstration. No shortest route or autonomous SRA result is claimed."
+}

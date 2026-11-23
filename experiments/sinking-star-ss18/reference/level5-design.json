@@ -1,0 +1,684 @@
+{
+  "spec": {
+    "id": "ss18-05",
+    "title": "Les gardiens de l’arène",
+    "rows": [
+      "####################",
+      "####............####",
+      "####....g.......####",
+      "#..................#",
+      "#..................#",
+      "########.###########",
+      "#....m...m#........#",
+      "...................#",
+      ".......B...........#",
+      "....#..............#",
+      "...m.#.............#",
+      "...................#",
+      ".................#.#",
+      ".............m...g##",
+      "..M..............#.#",
+      "#..o...............#",
+      "#..~.........Z.....#",
+      "###g#...........####",
+      "####............####",
+      "####################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "gardiens",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 10
+          },
+          {
+            "x": 13,
+            "y": 11
+          }
+        ],
+        "color": 11
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 5
+        },
+        "circuit": "gardiens",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 13
+        },
+        "circuit": "gardiens",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCRRRULLLLLLLLLLDDDDDRRRRRRCCLLUUUUURRDCCLLLLLDURRRRRRRRRRRURRRCCRDDDDLLLLDCCLULUUUUULLULUUUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 51
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 45
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "puzzle": "13–14",
+    "label": "Adaptation de Heroes 3 · énigmes 13–14 · combattre une paire, conserver les contrepoids",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/",
+    "objective": "Distinguer les monstres à réunir de ceux à conserver, puis partager les trois accès sans déplacer leurs contrepoids.",
+    "secondary": {
+      "label": "Heroes and Light · énigme 4 · un monstre tient lieu de poids",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 93,
+    "selections": 10,
+    "merchantPushes": 1,
+    "songs": 9,
+    "groupSongs": 1,
+    "songHeroMoves": 6,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 4,
+    "supportMoves": 0,
+    "swaps": 1,
+    "partnerSwaps": 0,
+    "stoneSwaps": 0,
+    "monsterSwaps": 1,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 6,
+    "stoneMoves": 1,
+    "mirrorMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La butée retient le monstre de droite ; le chant rapproche seulement son adversaire jusqu’au combat, sans toucher aux deux futurs contrepoids.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 3,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 13
+        }
+      ],
+      "circuits": {
+        "gardiens": false
+      }
+    },
+    {
+      "label": "Le premier gardien entre dans sa loge. La butée latérale le retient pendant que le Barde et le Marchand s’éloignent.",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 13
+        }
+      ],
+      "circuits": {
+        "gardiens": false
+      }
+    },
+    {
+      "label": "Le Magicien relève le second gardien sur la commande : le poids reste présent pendant l’échange, et les accès nord et est s’ouvrent ensemble.",
+      "turn": 39,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "gardiens": true
+      }
+    },
+    {
+      "label": "Le Marchand transforme la seule caisse en appui pour la destination sud-ouest.",
+      "turn": 47,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 3,
+          "y": 16
+        }
+      ],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "gardiens": true
+      }
+    },
+    {
+      "label": "Les trois héros atteignent des destinations séparées ; les deux gardiens conservés maintiennent leurs commandes.",
+      "turn": 93,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 3,
+          "y": 16
+        }
+      ],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 4,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 11
+        }
+      ],
+      "circuits": {
+        "gardiens": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Bard 13 : guider deux monstres jusqu’à leur rencontre pour dégager le passage.",
+      "Bard 14 : des monstres conservés occupent simultanément les commandes nécessaires au départ."
+    ],
+    "changed": [
+      "Quatre monstres occupent une arène à sorties dispersées, avec une paire combattante, une butée de combat et deux contrepoids.",
+      "Le Magicien assure la relève sur une commande, tandis que le Marchand prépare un appui distinct.",
+      "La portée carrée du chant et le combat orthogonal suivent le contrat SS18 ; la carte et les déplacements sont originaux."
+    ],
+    "sourceReading": "Les deux idées du guide sont composées dans une arène ouverte avec une seule butée de combat et deux loges distinctes. Les positions précises et le partage des trois sorties sont originaux.",
+    "proofScope": "Parcours de référence légal, sans revendication de minimum ni d’unicité."
+  }
+}

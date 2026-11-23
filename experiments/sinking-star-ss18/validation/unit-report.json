@@ -1,0 +1,15 @@
+{
+  "game": "SS18",
+  "success": true,
+  "command": "npm test",
+  "tests": 56,
+  "passed": 56,
+  "failed": 0,
+  "engineAndSession": 50,
+  "tutorialRegressions": 6,
+  "node": "24.22.3",
+  "typescript": "5.9.3",
+  "happyDom": "21.0.4",
+  "version": "0.1.2",
+  "qualificationDate": "2026-11-22"
+}

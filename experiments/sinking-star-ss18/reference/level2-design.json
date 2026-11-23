@@ -1,0 +1,742 @@
+{
+  "spec": {
+    "id": "ss18-02",
+    "title": "Le carrefour à contretemps",
+    "rows": [
+      "####################",
+      "####################",
+      "####g###############",
+      "####.###############",
+      "###..............###",
+      "###..............###",
+      "###........o.B...###",
+      "###...............g#",
+      "###...~~~~~......###",
+      "###...~~~~~......###",
+      "###...~..~~...#..###",
+      "###...~~~~~...M#.###",
+      "###...........#..###",
+      "###.Z............###",
+      "###..............###",
+      "###..............###",
+      "###########.########",
+      "###########g########",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 8,
+          "y": 7
+        },
+        "facing": "SE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "cellule",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 10
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "bascule",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 10
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 13,
+          "y": 11
+        },
+        "circuit": "cellule",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 3
+        },
+        "circuit": "bascule",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 7
+        },
+        "circuit": "bascule",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 7
+        },
+        "circuit": "bascule",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 16
+        },
+        "circuit": "bascule",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCDXUURRCLUULXUUULLDLLURRRRDLDDRXUUUUULLLLLLLLUUCRURRRRRRUUUUURRRRRXRCXDDDDLLDLDDDDDLDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 36
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 18
+      }
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Mirrors · énigme 16",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-16",
+    "puzzle": 16,
+    "objective": "Transformer un reflet en commande distante, puis choisir la bonne phase pour trois branches de sortie, dont un sas à deux presses de polarités opposées.",
+    "secondary": {
+      "label": "Heroes and Light · énigme 2 · ouvertures de polarités opposées",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2"
+    }
+  },
+  "metrics": {
+    "actions": 87,
+    "selections": 5,
+    "merchantPushes": 2,
+    "songs": 1,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 1,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 0,
+    "partnerSwaps": 0,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 7,
+    "mirrorMoves": 1,
+    "reflections": 5,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le chant charge la première visée ; son reflet ouvre la cellule du Marchand.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": true,
+        "bascule": false
+      }
+    },
+    {
+      "label": "Le Marchand est sorti avant que la caisse ne quitte sa première commande.",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": false,
+        "bascule": false
+      }
+    },
+    {
+      "label": "Miroir et caisse sont décalés d’une case : le même reflet commande désormais les sorties à distance.",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": false,
+        "bascule": true
+      }
+    },
+    {
+      "label": "Le Marchand prend la branche nord pendant la phase ouverte.",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": false,
+        "bascule": true
+      }
+    },
+    {
+      "label": "Dans le sas est, le changement de phase referme une presse et ouvre l’autre : le Magicien est déposé au-delà.",
+      "turn": 69,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": false,
+        "bascule": false
+      }
+    },
+    {
+      "label": "La phase est rétablie pour la branche sud, tandis que les deux autres héros restent à leur destination.",
+      "turn": 87,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "cellule": false,
+        "bascule": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un objet réfléchi active puis libère une commande à distance.",
+      "La même commande ouvre certains passages et en ferme d’autres."
+    ],
+    "changed": [
+      "Le contrôleur sert d’abord à libérer le Marchand, puis doit être recalé sur une deuxième commande.",
+      "Trois destinations occupent les branches nord, est et sud d’une cour autour d’un bassin.",
+      "Le sas est utilise deux presses de polarités opposées et transporte son occupant pendant le changement de phase.",
+      "Le premier chargement se fait par le chant carré du Barde ; le Marchand déplace ensuite une seule pièce à la fois."
+    ],
+    "sourceReading": "Mirrors16 fournit la bascule de bouton par reflet. Light2 fournit le conflit de polarité entre accès et sortie. La cellule initiale, les trois branches et le sas de transfert sont originaux ; aucune grille commerciale n’est reproduite.",
+    "localChecks": [
+      {
+        "name": "Sas est occupé pendant la bascule",
+        "observed": "La fermeture de la première presse transporte le Magicien dans la seconde case, qui s’ouvre au même changement de circuit.",
+        "scope": "Transition concrète du témoin ; la route n’est pas annoncée optimale."
+      }
+    ]
+  }
+}

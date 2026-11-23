@@ -1,0 +1,1461 @@
+{
+  "spec": {
+    "id": "ss18-08",
+    "title": "La cour au cœur du lac",
+    "rows": [
+      "####################",
+      "#..................#",
+      "#..............~~~.#",
+      "#............o.~o~.#",
+      "#..............~~~.#",
+      "#..................#",
+      "#..B..~~~~~~~~..M..#",
+      "#.....~~~~~~~~.....#",
+      "#....Z~~~~~~~~.....#",
+      "#......~~g.g~~.....#",
+      "#.......~...~~.....#",
+      "#......~~.g.~~.....#",
+      "##.....~~~~~~~.....#",
+      "#.....~s~~~~~~.....#",
+      "#..#...............#",
+      "#.......#.#........#",
+      "#.......#o#........#",
+      "#........#.........#",
+      "#..................#",
+      "####################"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 16,
+          "y": 7
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "hydraulique",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 3
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "accord",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 3,
+            "y": 15
+          },
+          {
+            "x": 9,
+            "y": 14
+          },
+          {
+            "x": 15,
+            "y": 11
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 16,
+          "y": 5
+        },
+        "circuit": "hydraulique",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 10
+        },
+        "circuit": "accord",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 11
+        },
+        "circuit": "accord",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 16,
+          "y": 4
+        },
+        "circuit": "hydraulique",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "DRCRCDDDDDDDLLCCDDDDLDDDDDDRRLDRUUUUUUUCCUULLLUUULDDRDDDRRDDDRDLDDDLLLLLLLLLLLUUUUULLCCDDDDDLLLLLLLLLLUUCCDDDDDDDDDDDRRRRRUCCCUULLUUUUUUULLLCLLLUUUUUURDURUURRRRRUCDRRRRRRUCDDDRRRRRRRRD",
+  "actions": [
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 57
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 57
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "puzzle": "37 / 40 / 41",
+    "label": "Adaptation de Heroes and Light · énigmes 37, 40 et 41 · préserver un accès, détourner puis lâcher une charge",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/",
+    "objective": "Conserver les trois caisses sèches, recycler le miroir comme quatrième poids, libérer deux fois le Barde sans retirer ses charges puis guider l’appui jusqu’à la cour : la destination basse est elle-même une presse commandée.",
+    "secondary": {
+      "label": "Heroes and Mirrors · énigme 30 · une visée déviée conserve sa première cible",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 184,
+    "selections": 16,
+    "merchantPushes": 7,
+    "songs": 15,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 11,
+    "songMonsterMoves": 0,
+    "supportMoves": 4,
+    "swaps": 3,
+    "partnerSwaps": 2,
+    "stoneSwaps": 1,
+    "monsterSwaps": 0,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 14,
+    "mirrorMoves": 5,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand place le miroir sur la visée de la réserve puis quitte le rayon : sa propre présence intercepterait l’échange.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "label": "La visée coudée extrait la caisse au sec et laisse le Magicien dans l’alcôve hydraulique. La caisse extraite est maintenant la première cible du rayon de retour.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "label": "Le Barde éloigne la caisse de la visée, la transporte le long de la galerie et la pose sur la commande sud-ouest.",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 1,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "label": "Le Magicien peut quitter l’alcôve après dégagement du rayon. Il extrait ensuite le Barde par échange, sans faire quitter sa commande à la caisse.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 1,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "label": "La réserve récupérée et le Magicien sauvé, le poids hydraulique peut changer de rôle : il rejoint la commande nord-est et ferme la passerelle devenue inutile.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": false,
+        "accord": false
+      }
+    },
+    {
+      "label": "Le miroir quitte la visée et devient un poids final, après trois poussées vers le sud puis une poussée latérale.",
+      "turn": 64,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": false,
+        "accord": false
+      }
+    },
+    {
+      "label": "Le chant dégage la charge sud le long de sa glissière : la butée interdit la poussée directe depuis le bas.",
+      "turn": 104,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": false,
+        "accord": true
+      }
+    },
+    {
+      "label": "Le Magicien retire le Barde de sa glissière sans entraîner la caisse hors de sa commande.",
+      "turn": 123,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": false,
+        "accord": true
+      }
+    },
+    {
+      "label": "Le Barde fait contourner la langue de terre à l’appui initial puis le place dans l’accès ouest. Le poids sud-ouest reste arrêté par sa butée.",
+      "turn": 156,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": false,
+        "accord": true
+      }
+    },
+    {
+      "label": "Le Barde entre et s’éloigne d’abord de l’appui vers l’est, afin de laisser le passage intact pour les deux autres héros.",
+      "turn": 162,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": false,
+        "accord": true
+      }
+    },
+    {
+      "label": "Les trois caisses et le miroir gardent les quatre commandes. La destination basse exige la presse ouverte ; les trois héros terminent ensemble.",
+      "turn": 184,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "hydraulique": false,
+        "accord": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Light 37 : conserver un passage temporaire jusqu’à ce que son utilisateur ait effectué le trajet de retour.",
+      "Light 40 : faire contourner un obstacle à une charge plutôt que la diriger tout droit.",
+      "Light 41 : quitter une commande par déplacement forcé pour rompre le chant sans déplacer sa charge."
+    ],
+    "changed": [
+      "Les faisceaux de pouvoir sont remplacés par une visée du Magicien, un appui mobile et les capacités fixes du trio.",
+      "Les trois destinations restent au centre du lac ; quatre commandes éloignées exigent les trois caisses sèches et le miroir, tandis qu’un appui initial assure le passage.",
+      "La réserve nord-est quitte l’alcôve hydraulique ; le poids hydraulique devient ensuite un poids final ; la troisième caisse sort d’une glissière par chant puis reste sur une commande.",
+      "Le miroir sert d’abord à la visée puis voyage sur deux axes vers la quatrième commande. Le Marchand et la caisse peuvent intercepter la première cible avant leur dégagement.",
+      "L’entrée finale demande un changement d’axe du chant afin de ne pas déplacer l’appui sous le prochain passage. La presse placée sur la destination basse impose le maintien des quatre poids jusque dans l’état final."
+    ],
+    "sourceReading": "La carte reprend des contraintes de retour, de détour et de séparation du chant. Elle ne reprend ni les faisceaux de pouvoir, ni leurs couleurs fonctionnelles, ni les coordonnées des salles sources.",
+    "proofScope": "Parcours de référence légal. À la victoire, la presse-but exige les quatre commandes ; trois héros occupent les buts et seuls les trois caisses sèches et le miroir restent disponibles comme poids. La réserve nord-est est donc nécessaire et toute immersion d’une caisse retire un poids indispensable. Aucun ordre unique ni optimum de coups n’est revendiqué."
+  }
+}

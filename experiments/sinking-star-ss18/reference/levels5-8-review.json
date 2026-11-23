@@ -1,0 +1,1317 @@
+{
+  "success": true,
+  "scope": "Rejeu des quatre témoins, contre-branches locales et variante gagnante ; aucune preuve de solution unique ni de difficulté minimale.",
+  "references": [
+    {
+      "level": 5,
+      "title": "Les gardiens de l’arène",
+      "actions": 93,
+      "selections": 10,
+      "stages": 5,
+      "metrics": {
+        "actions": 93,
+        "selections": 10,
+        "merchantPushes": 1,
+        "songs": 9,
+        "groupSongs": 1,
+        "songHeroMoves": 6,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 4,
+        "supportMoves": 0,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 1,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 6,
+        "stoneMoves": 1,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 6,
+      "title": "Le miroir en tournée",
+      "actions": 58,
+      "selections": 12,
+      "stages": 6,
+      "metrics": {
+        "actions": 58,
+        "selections": 12,
+        "merchantPushes": 6,
+        "songs": 0,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "swaps": 0,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 0,
+        "mirrorMoves": 7,
+        "reflections": 3,
+        "heroReflections": 3,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 7,
+      "title": "La navette des alcôves",
+      "actions": 54,
+      "selections": 11,
+      "stages": 6,
+      "metrics": {
+        "actions": 54,
+        "selections": 11,
+        "merchantPushes": 3,
+        "songs": 12,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 12,
+        "swaps": 1,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 3,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 8,
+      "title": "La cour au cœur du lac",
+      "actions": 184,
+      "selections": 16,
+      "stages": 11,
+      "metrics": {
+        "actions": 184,
+        "selections": 16,
+        "merchantPushes": 7,
+        "songs": 15,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 11,
+        "songMonsterMoves": 0,
+        "supportMoves": 4,
+        "swaps": 3,
+        "partnerSwaps": 2,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 1,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 14,
+        "mirrorMoves": 5,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    }
+  ],
+  "checks": [
+    {
+      "level": 5,
+      "label": "wrong-side-guard-exchange",
+      "afterReferenceTurn": 27,
+      "branchCommands": "CCLURU",
+      "meaning": "Un échange depuis le dessous déplace le gardien sur une case ordinaire. Le Magicien atteint sa place mais la commande haute reste vide.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "swap"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 14
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 12
+          },
+          "facing": "E",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "circuits": {
+        "gardiens": false
+      }
+    },
+    {
+      "level": 5,
+      "label": "song-withdraws-a-kept-guard",
+      "afterReferenceTurn": 39,
+      "branchCommands": "CL",
+      "meaning": "Un retour du Barde vers la gauche retire le gardien de sa loge et referme les accès. Cette branche locale reste réparable.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "song",
+        "gate"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 14
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 13
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 12
+          },
+          "facing": "W",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "circuits": {
+        "gardiens": false
+      }
+    },
+    {
+      "level": 6,
+      "label": "mirror-cannot-descend-through-the-wall",
+      "afterReferenceTurn": 1,
+      "branchCommands": "URD",
+      "meaning": "La descente directe du miroir bute sur la paroi. Le parcours de référence le charge sur la presse latérale.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 7
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 12
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 8,
+            "y": 8
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "presse": true,
+        "station": false,
+        "departs": false
+      }
+    },
+    {
+      "level": 6,
+      "label": "used-mirror-still-intercepts-the-last-departure",
+      "afterReferenceTurn": 43,
+      "branchCommands": "CCLLLUULLLX",
+      "meaning": "Sans dégager le miroir utilisé, le reflet global final est refusé : le Magicien sur la branche est reste une cible de ce miroir et sa trajectoire traverse la presse fermée.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [
+        0
+      ],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 10
+          },
+          "facing": "W",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 11
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 1
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "presse": false,
+        "station": true,
+        "departs": true
+      }
+    },
+    {
+      "level": 6,
+      "label": "mirror-leaves-its-station-before-the-north-arrival",
+      "afterReferenceTurn": 12,
+      "branchCommands": "DL",
+      "meaning": "Retirer le miroir trop tôt puis quitter sa commande referme le passage nord avant l’arrivée du Barde. Cette erreur ne prouve pas une impasse irréversible.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "push",
+        "walk",
+        "gate"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 11
+          },
+          "facing": "W",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 12
+          },
+          "facing": "W",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "presse": true,
+        "station": false,
+        "departs": false
+      }
+    },
+    {
+      "level": 7,
+      "label": "initial-direct-exchange-is-screened",
+      "afterReferenceTurn": 0,
+      "branchCommands": "CRUUULRR",
+      "meaning": "La porte coupe la visée sur la caisse terminale. Le premier pas reste sur le quai ; le pas suivant vers l’eau est refusé.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "walk"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 4
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 10
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "mirrors": [],
+      "circuits": {
+        "vue": false
+      }
+    },
+    {
+      "level": 7,
+      "label": "occupied-ferry-is-anchored",
+      "afterReferenceTurn": 12,
+      "branchCommands": "CLLDCCL",
+      "meaning": "L’appui occupé est ancré. Le chant ne peut ni le déplacer sous le Marchand ni entraîner ce dernier dans une eau sans appui : toute cette tentative est refusée.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 7
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 13
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 7
+          },
+          "facing": "W",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 7
+        }
+      ],
+      "mirrors": [],
+      "circuits": {
+        "vue": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "merchant-intercepts-the-prepared-ray",
+      "afterReferenceTurn": 0,
+      "branchCommands": "DCR",
+      "meaning": "Si le Marchand reste devant le miroir après sa poussée, il est la première cible. Le Magicien échange avec lui au lieu d’extraire la réserve.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "swap"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 7
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "return-before-clearing-the-first-target",
+      "afterReferenceTurn": 4,
+      "branchCommands": "D",
+      "meaning": "Repartir immédiatement vers le bas suit la visée coudée en sens inverse et remet la caisse dans son alcôve.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "swap"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 7
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "ordinary-north-exit-is-walled",
+      "afterReferenceTurn": 14,
+      "branchCommands": "U",
+      "meaning": "La paroi nord bloque la sortie directe du Barde. L’échange du témoin le libère en laissant la caisse immobile.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 7
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 3
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 1,
+            "y": 13
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "ordinary-east-exit-withdraws-the-weight",
+      "afterReferenceTurn": 14,
+      "branchCommands": "R",
+      "meaning": "Partir à pied vers l’est est légal mais retire le poids de la commande sud-ouest.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "song"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 7
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 3
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 13
+          },
+          "facing": "E",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 4,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "withdraw-hydraulics-before-the-wizard-returns",
+      "afterReferenceTurn": 4,
+      "branchCommands": "CCUULLLUUULDLCD",
+      "meaning": "Le retrait prématuré du poids ferme le passage et désactive la plateforme. La tentative de retour du Magicien vers l’eau est refusée.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 3
+          },
+          "facing": "W",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 3
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 8
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": false,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "turning-too-early-withdraws-the-last-support",
+      "afterReferenceTurn": 156,
+      "branchCommands": "RRRUCDRRRRR",
+      "meaning": "Tourner vers le nord dès l’entrée de la cour déplace l’appui hors du passage. Le Marchand ne peut plus franchir le même accès.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 10
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          },
+          "facing": "W",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 9
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": false,
+        "accord": true
+      }
+    },
+    {
+      "level": 8,
+      "label": "south-crate-cannot-be-pushed-through-its-stop",
+      "afterReferenceTurn": 0,
+      "branchCommands": "LDDDDDDDDLLLLLLDD",
+      "meaning": "La caisse sud est retenue par la butée arrière : le Marchand ne peut pas la dégager en poussant depuis le haut.",
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "phases": [],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 15
+          },
+          "facing": "S",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 8
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 6
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 9,
+          "y": 16
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": true,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "ordinary-second-choir-exit-sinks-a-required-weight",
+      "afterReferenceTurn": 104,
+      "branchCommands": "U",
+      "meaning": "Monter directement après le dépôt sud entraîne la caisse dans le lac. Elle devient un appui et ne peut plus fournir le quatrième poids requis par la presse-but.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "song",
+        "gate"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 9
+          },
+          "facing": "W",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 7
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 15
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 15,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": false,
+        "accord": false
+      }
+    },
+    {
+      "level": 8,
+      "label": "mirror-withdrawal-relocks-the-destination",
+      "afterReferenceTurn": 123,
+      "branchCommands": "CCUUUUURRRRRRRRRRRDDDDDDRRDLR",
+      "meaning": "Le miroir est un quatrième poids à conserver. Le retirer puis quitter sa commande referme aussi la destination basse, même si le passage dans le lac a été préparé.",
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "phases": [
+        "push",
+        "walk",
+        "gate"
+      ],
+      "blockedMirrorIndices": [],
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 11
+          },
+          "facing": "E",
+          "dead": false
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 16
+          },
+          "facing": "N",
+          "dead": false
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 18
+          },
+          "facing": "N",
+          "dead": false
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 3,
+          "y": 15
+        },
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 13
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "circuits": {
+        "hydraulique": false,
+        "accord": false
+      }
+    }
+  ],
+  "acceptedAlternatives": [
+    {
+      "level": 7,
+      "label": "exchange-the-terminal-crate",
+      "commands": "LDDRRCCRLDDRCLLDDRCUUURRCCLUURRCCLDDDDDDLLL",
+      "metrics": {
+        "actions": 43,
+        "selections": 8,
+        "merchantPushes": 1,
+        "songs": 13,
+        "groupSongs": 4,
+        "songHeroMoves": 0,
+        "songStoneMoves": 7,
+        "songMonsterMoves": 0,
+        "supportMoves": 10,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "meaning": "Après le dépôt de la réserve sur la commande, le Magicien échange directement la caisse terminale. Le Marchand revient à l’alcôve centrale et le Barde rejoint la destination ouest. Cette solution conserve les deux premières traversées, le poids persistant et dix déplacements de l’appui ; elle évite la troisième traversée et l’immersion terminale du témoin principal."
+    }
+  ],
+  "sourceNotes": [
+    {
+      "level": 5,
+      "note": "La rencontre et la conservation des monstres viennent de Bard 13–14 ; la butée d’arrêt et la géométrie d’arène sont originales."
+    },
+    {
+      "level": 6,
+      "note": "Le retrait du miroir devenu obstacle adapte Mirrors 18. La presse déplace le miroir sans le détruire."
+    },
+    {
+      "level": 7,
+      "note": "Water 27 fournit le recalage par butées. La carte ne reproduit ni les quatre rives SS15, ni l’empilement et les pas doubles du jeu commercial."
+    },
+    {
+      "level": 8,
+      "note": "Light 37/40/41 fournit les contraintes de retour, détour et séparation. Le laboratoire emploie les règles fixes du trio, sans faisceaux de pouvoir."
+    }
+  ]
+}

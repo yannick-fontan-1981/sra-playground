@@ -13,21 +13,25 @@ export type Board = {
   motors: Motor[];
   transport?: { op: string; land: (actor: number, pivot: number) => number | null };
 };
-export type Step = { op: string; from: number; to: number; role?: string; placed?: number; boundary?: boolean };
+export type Step = { op: string; from: number; to: number; role?: string; placed?: number; boundary?: boolean;
+  passenger?: { source: number; pushes: string[] } };
 export type Project = {
   steps: Step[];
-  purpose: 'test_support' | 'reach_goal' | 'test_contact';
+  purpose: 'test_support' | 'reach_goal' | 'test_contact' | 'test_passenger';
   site: number;
   role?: string;
+  passenger?: { role: string; source: number; destination: number; pushes: string[]; witness?: string };
+  landing?: { pivot: number; launch: number; arrival: number; witness: string };
+  preparations?: { at: number; role: string; terrain?: number; observation?: string; enables: string[] }[];
 };
 export const edgeKey = (from: number, op: string, parts: readonly number[]) => [from, op, ...parts].join('/');
 const distance = (a: number, b: number, w: number) =>
   Math.abs((a % w) - (b % w)) + Math.abs(Math.floor(a / w) - Math.floor(b / w));
-function stepCell(b: Board, a: number, d: number) {
+export function stepCell(b: Board, a: number, d: number) {
   const v = a + d;
   return v >= 0 && v < b.width * b.height && distance(a, v, b.width) === 1 ? v : -1;
 }
-function components(b: Board) {
+export function components(b: Board) {
   const component = new Map<number, number>();
   for (const seed of b.floor) {
     if (component.has(seed)) continue;
@@ -44,7 +48,7 @@ function components(b: Board) {
   }
   return component;
 }
-function connectingSites(b: Board) {
+export function connectingSites(b: Board) {
   const regions = components(b),
     sites = new Set<number>();
   for (const p of b.floor)
@@ -61,7 +65,7 @@ function connectingSites(b: Board) {
     }
   return sites;
 }
-function walking(b: Board, actor: number, parts: number[], denied: Set<string>) {
+export function walking(b: Board, actor: number, parts: number[], denied: Set<string>) {
   const occupied = new Set(parts),
     path = new Map<number, Step[]>();
   path.set(actor, []);

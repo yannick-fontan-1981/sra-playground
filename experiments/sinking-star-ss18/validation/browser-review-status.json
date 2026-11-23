@@ -1,0 +1,35 @@
+{
+  "game": "SS18",
+  "nativeBrowserReviewed": false,
+  "nativeDispatcherReviewed": false,
+  "sitePublishedForSS18": false,
+  "htmlInteractionReview": {
+    "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+    "success": true,
+    "campaignLevels": 8,
+    "publicPixelsAndTiming": true,
+    "htmlSha256": "6fa0427f4d0a3eb71e9d258552bc6924156dbbae3ce9fd91d265c3364a2c0ed3",
+    "tutorialLevel": 3,
+    "level8GoalPressReviewed": true
+  },
+  "rasterReview": {
+    "scope": "Previously reviewed levels 1–7 remain byte-identical; level 8 initial, circuit-opening and winning engine frames were visually inspected.",
+    "reviewed": true,
+    "unchangedLevels": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "level8Frames": [
+      "initial",
+      "first-circuit-opening",
+      "WIN"
+    ]
+  },
+  "remaining": "Review desktop/mobile CSS, native dispatcher, direct link and deployed Site in an authorized browser during native integration. No native browser or autonomous SRA success is claimed.",
+  "version": "0.1.2"
+}

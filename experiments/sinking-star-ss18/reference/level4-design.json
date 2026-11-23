@@ -1,0 +1,798 @@
+{
+  "spec": {
+    "id": "ss18-04",
+    "title": "Personne ne part le premier",
+    "rows": [
+      "####################",
+      "####################",
+      "#########g##########",
+      "#########.##########",
+      "#########.##########",
+      "#####..........#####",
+      "#####.....Z....#####",
+      "#####..........#####",
+      "#####...~~~~...#####",
+      "#####...~~M~...#####",
+      "##g.....~~~~...#####",
+      "#####...~~~~.....g##",
+      "#####..........#####",
+      "#####.B........#####",
+      "#####..........#####",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 10,
+          "y": 5
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 11
+        },
+        "facing": "NW"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 12
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 12
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "depart-ouest",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 5
+          }
+        ],
+        "color": 12
+      },
+      {
+        "id": "depart-est",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 7
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "depart-nord",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 8
+          }
+        ],
+        "color": 6
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 3,
+          "y": 10
+        },
+        "circuit": "depart-ouest",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 11
+        },
+        "circuit": "depart-est",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 3
+        },
+        "circuit": "depart-nord",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDCCRULDDLLLDDDDDLLUDRRDRRRRRRRUDLLLLLLLXCUUUUULLLLLLLLCCUUUUUUURRRURRCCRRRRRURUUURRUX",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Mirrors · énigme 17",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-17",
+    "puzzle": 17,
+    "objective": "Aligner trois départs croisés, récupérer l’occupant de l’îlot et déclencher le reflet collectif lorsque les trois passages sont maintenus."
+  },
+  "metrics": {
+    "actions": 86,
+    "selections": 8,
+    "merchantPushes": 3,
+    "songs": 0,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "swaps": 1,
+    "partnerSwaps": 1,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 3,
+    "reflections": 2,
+    "heroReflections": 4,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Magicien prend la place du Marchand sur l’îlot : le pousseur peut préparer les trois postes.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 12
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "depart-ouest": false,
+        "depart-est": false,
+        "depart-nord": false
+      }
+    },
+    {
+      "label": "Les trois miroirs de départ sont alignés sur trois destinations séparées.",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "depart-ouest": false,
+        "depart-est": false,
+        "depart-nord": false
+      }
+    },
+    {
+      "label": "Le quatrième miroir ramène le Magicien depuis son îlot, sans reprendre le Marchand.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "depart-ouest": false,
+        "depart-est": false,
+        "depart-nord": false
+      }
+    },
+    {
+      "label": "Chaque personnage maintient le passage d’un autre ; les trois commandes sont occupées.",
+      "turn": 85,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "depart-ouest": true,
+        "depart-est": true,
+        "depart-nord": true
+      }
+    },
+    {
+      "label": "Un seul reflet transporte les trois héros vers les sorties nord, ouest et est.",
+      "turn": 86,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 5
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 5,
+            "y": 10
+          },
+          "facing": "NW"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "depart-ouest": false,
+        "depart-est": false,
+        "depart-nord": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Chaque départ dépend de la présence d’un autre héros sur une commande.",
+      "La réflexion permet de quitter plusieurs commandes dans le même mouvement."
+    ],
+    "changed": [
+      "Le cycle comporte trois héros et trois destinations placées dans des secteurs distincts.",
+      "Une cour annulaire permet de préparer les positions ; les trois miroirs sont initialement décalés.",
+      "Un quatrième miroir récupère l’occupant de l’îlot : le Magicien dans le parcours témoin, ou directement le Marchand dans une autre préparation légale.",
+      "Aucune caisse de réserve ne remplace durablement les trois héros sur les commandes."
+    ],
+    "sourceReading": "L’énigme 17 fournit le départ simultané de deux partenaires. La cour, l’îlot central, les quatre miroirs et le cycle à trois sont une composition originale pour M/Z/B. Aucun plan commercial n’est transcrit.",
+    "localChecks": [
+      {
+        "name": "Troisième commande encore libre",
+        "commands": "CDCCRULDDLLLDDDDDLLUDRRDRRRRRRRUDLLLLLLLXCUUUUULLLLLLLLCCUUUUUUURRRURRCCRRRRRURUUURRX",
+        "observed": "Le reflet est refusé : le passage nord manque et les autres transports sont annulés ensemble.",
+        "scope": "Contre-branche locale ; pas preuve d’unicité de la solution."
+      }
+    ]
+  }
+}
