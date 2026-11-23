@@ -5,7 +5,8 @@ import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
 import { chooseCoverage, coveragePullPremise, coveragePullReturn, coveragePushPremise, coveragePushReturn,
   hasObservedCoverage, observeCoverage, observedCoverageDeadlock, rememberCoverageWin, retainCoverageAfterReset,
   type CoverageLearning, type CoverageTransfer, type PullStep } from '../src/sic/observed-coverage.ts';
-import { matchesPullCircuit, planPullCircuit, type PullCircuitBinding, type PullKnowledge } from '../src/sic/observed-pull-circuits.ts';
+import { matchesPullCircuit, planPullCircuit, witnessedPullCircuitReturn,
+  type PullCircuitBinding, type PullKnowledge } from '../src/sic/observed-pull-circuits.ts';
 import { createSicPublicInputExploration, observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
 import { chooseTravelTrial, observeTravel, readTravelGrid, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
@@ -209,10 +210,10 @@ for (const mirrored of [false, true]) test(`pull and exit roles transfer to guar
 
   const family = createSicPublicInputExploration();
   assert.ok(transfer.pressureLatch, 'The earlier physical pressure return must be retained');
-  const observation = (revision: number): NativeObservation => ({
-    revision, level_epoch: 3, frame_hash: String(revision), observation_ref: `transfer:revision:${revision}`,
+  const observation = (revision: number, level = 3): NativeObservation => ({
+    revision, level_epoch: level, frame_hash: String(revision), observation_ref: `transfer:${level}:revision:${revision}`,
     coordinate_basis: 'screen', entities: [], available_action_refs: [...actionIds.keys()], state: 'NOT_FINISHED',
-    levels_completed: 2, unknowns: [], provenance: 'test',
+    levels_completed: level - 1, unknowns: [], provenance: 'test',
   });
   const firstObservation = observation(1);
   const thirdTransfer = { ...transfer, epoch: 2, ref: firstObservation.observation_ref };
@@ -302,4 +303,66 @@ for (const mirrored of [false, true]) test(`pull and exit roles transfer to guar
   assert.equal(board.levelsCompleted, 4);
   assert.equal(turns, 40);
   assert.ok(decisions <= 6);
+
+  async function replayComposedLevel(lesson: CoverageTransfer, limit: number) {
+    const previousScore = board.levelsCompleted;
+    let bound: PullCircuitBinding | undefined, verifiedActuation = false, actions = 0;
+    while (board.levelsCompleted === previousScore && actions < limit) {
+      const plan = planPullCircuit(roles, lesson, recolor(board.frame), inputs, limit - actions, bound);
+      assert.ok(plan?.steps.length);
+      for (const [index, step] of plan.steps.entries()) {
+        board = await game.dispatch({ type: 'action', actionId: actionIds.get(step.action.action_ref)! });
+        actions++;
+        if (board.levelsCompleted > previousScore) break;
+        bound = witnessedPullCircuitReturn(plan, index, recolor(board.frame));
+        assert.ok(bound);
+        verifiedActuation ||= !!step.actuated;
+      }
+    }
+    assert.equal(board.levelsCompleted, previousScore + 1);
+    return verifiedActuation;
+  }
+  await replayComposedLevel({ ...transfer, epoch: 4 }, 70);
+  await replayComposedLevel({ ...transfer, epoch: 5 }, 80);
+
+  const pistonFamily = createSicPublicInputExploration();
+  const entry = observation(1, 7);
+  const pistonTransfer = { ...transfer, epoch: 6, ref: entry.observation_ref };
+  const witnessedRoles = { ...roles, actuatorRef: 'prior-press-return' };
+  pistonFamily.restore({ ...pistonFamily.state(), epoch: 6, coverageTransfer: pistonTransfer, pullKnowledge: witnessedRoles });
+  const startRows = recolor(board.frame);
+  const proposal = await pistonFamily.proposeInGroup!(observedPressureRecoveryGroup, entry, startRows, inputs, 95);
+  const reveal = proposal?.pullCircuitPlan;
+  assert.ok(proposal && reveal?.revelation?.length === 4 && reveal.steps.length === 1);
+  assert.ok(reveal.evidence.includes(witnessedRoles.actuatorRef));
+  const revealCommand = reveal.steps[0]!.action;
+  const side = actionIds.get(revealCommand.action_ref);
+  assert.ok(side === 3 || side === 4);
+  board = await game.dispatch({ type: 'action', actionId: side });
+  const uncovered = recolor(board.frame), revealed = witnessedPullCircuitReturn(reveal, 0, uncovered);
+  assert.ok(revealed);
+  const [x, y] = reveal.start.actor.split(',').map(Number) as [number, number];
+  const wrongReveal = uncovered.map(row => [...row]);
+  wrongReveal[y]![x] = roles.grid.floor;
+  assert.equal(witnessedPullCircuitReturn(reveal, 0, wrongReveal), undefined);
+  let at = observation(2, 7);
+  await pistonFamily.record!(entry, at, revealCommand, startRows, uncovered, proposal, 0);
+  const trap = `${side === 3 ? 4 : 3}241113321`;
+  for (const [index, digit] of [...trap].entries()) {
+    const action = inputs.find(input => actionIds.get(input.action_ref) === Number(digit))!;
+    const rows = recolor(board.frame);
+    board = await game.dispatch({ type: 'action', actionId: Number(digit) });
+    const returned = observation(index + 3, 7);
+    await pistonFamily.observePublicOutcome!(at, returned, action, rows, recolor(board.frame));
+    assert.equal(pistonFamily.requestedStopReason!(returned), index === trap.length - 1 ? observedCoverageDeadlock : null);
+    at = returned;
+  }
+  assert.equal(board.state, 'NOT_FINISHED');
+  board = await game.dispatch({ type: 'reset' });
+  const restartedPistons = observation(trap.length + 3, 7);
+  const retainedPistons = pistonFamily.stateAfterLevelReset!(restartedPistons, recolor(board.frame));
+  assert.ok(retainedPistons?.pullCircuitRecovered);
+  pistonFamily.restore(retainedPistons);
+  assert.ok((await pistonFamily.proposeInGroup!(observedPressureRecoveryGroup, restartedPistons, recolor(board.frame), inputs, 95))?.pullCircuitPlan);
+  assert.ok(await replayComposedLevel(pistonTransfer, 95));
 });

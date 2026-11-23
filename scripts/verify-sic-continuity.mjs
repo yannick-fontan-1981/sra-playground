@@ -78,9 +78,13 @@ function consecutiveStonePulls(level, tickets) {
   const world = compilePullLevel(SS03_LEVELS[level - 1]);
   let state = initialPullState(world), previous;
   const pairs = [];
+  const usedPresses = new Set();
   for (const [index, ticket] of tickets.entries()) {
     if (ticket.resets !== previous?.resets) state = initialPullState(world);
     const detail = stepPullWorld(world, state, Number(ticket.action.slice(6)));
+    for (const phase of detail.phases) {
+      if (phase.kind === 'piston' && phase.moves.some(move => move.actor === 'stone')) usedPresses.add(phase.gateIndex);
+    }
     const phase = detail.phases[0];
     const pull = detail.phases.length === 1 && phase?.kind === 'pull' ? phase.moves.find(move => move.actor === 'stone') : undefined;
     if (pull && previous?.pull && equal(previous.pull.to, pull.from)
@@ -92,6 +96,12 @@ function consecutiveStonePulls(level, tickets) {
   }
   assert.equal(state.complete, true, 'Executed SS03 L' + level + ' tickets do not reproduce the official goal');
   assert.ok(pairs.length, 'SS03 L' + level + ' lost consecutive pulls of the same stone');
+  if (level === 7) {
+    assert.equal(usedPresses.size, 2, 'SS03 L7 did not displace a stone with both presses');
+    const exit = world.gates.find(gate => gate.closedWhen === 'released');
+    const controls = world.circuits.find(circuit => circuit.id === exit?.circuit);
+    assert.ok(controls?.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS03 L7 did not hold the matched exit controls');
+  }
   return pairs;
 }
 
@@ -103,7 +113,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 4 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 7 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -168,6 +178,11 @@ export function checkRun(run) {
       assert.ok(issued.length <= 45 && groups.size <= 6, 'SS03 L4 lost the shared pressure route');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L4 reset on the shared pressure route');
     }
+    if (code === 'SS03' && row.level === 7) {
+      // The exploratory route stalled at 220 commands and 153 decisions. The witnessed route completes in 60 and 11.
+      assert.ok(issued.length <= 85 && groups.size <= 16, 'SS03 L7 lost the direct press route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L7 trapped the cursor on the direct route');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
@@ -199,7 +214,7 @@ function main() {
     for (const [name, cohort, end, cap] of [
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
-      ['la-ruse-verte', 'SS03', '4', '120'],
+      ['la-ruse-verte', 'SS03', '7', '120'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
