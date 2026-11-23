@@ -61,7 +61,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? 1, code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 2 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -72,6 +72,9 @@ export function checkRun(run) {
     assert.equal(row.won, true, code + ' L' + row.level + ' failed to win');
     const issued = tickets.filter((t) => t.level === row.level);
     assert.equal(issued.length, row.actions);
+    if (code === 'SS02' && row.level === 2) {
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS02 L2 must preserve access without recovering from a reset');
+    }
     const groups = new Map();
     let last;
     for (const t of issued) {
@@ -135,7 +138,7 @@ function main() {
     files = [];
     for (const [name, cohort, end] of [
       ['mirror-isles', 'SS01', '8'],
-      ['la-force-rouge', 'SS02', '1'],
+      ['la-force-rouge', 'SS02', '2'],
       ['native-sources', 'source:AR25,HANO,DC22', '1'],
     ]) {
       const output = join(temp, name + '.jsonl');

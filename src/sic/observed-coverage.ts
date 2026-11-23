@@ -111,15 +111,15 @@ function coversFourDirections(moves: readonly Move[]): boolean {
   return moves.length === 4 && new Set(moves.map(move => tag(move.delta))).size === 4;
 }
 
-function seenPush(body: string | undefined, layout: Layout | undefined, from: string, move: Move, first: Cells, after: Cells) {
-  const target = next(from, move.delta);
+function seenPush(body: string | undefined, layout: Layout | undefined, from: string, delta: NativePoint, first: Cells, after: Cells) {
+  const target = next(from, delta);
   const initialTile = first.get(target);
   if (!initialTile || new Set(initialTile).size < 2) return;
   const candidate = body ?? stamp(initialTile);
   const original = bodiesAt(first, candidate, layout), remaining = bodiesAt(after, candidate, layout);
   if (!original.includes(target)) return;
   let end = target;
-  while (original.includes(end)) end = next(end, move.delta);
+  while (original.includes(end)) end = next(end, delta);
   const stable = original.filter(cell => cell !== target);
   if (stable.some(cell => !remaining.includes(cell)) || remaining.includes(target)) return;
   if (remaining.includes(end) && remaining.length === original.length) return { candidate, original, remaining };
@@ -127,6 +127,16 @@ function seenPush(body: string | undefined, layout: Layout | undefined, from: st
   if (remaining.length === stable.length && landing && replacement && new Set(landing).size === 1
     && new Set(replacement).size > 1 && stamp(replacement) !== candidate) {
     return { candidate, original, remaining, sunk: end, water: stamp(landing) };
+  }
+}
+
+export function observedPushBody(body: string | undefined, travel: ObservedTravel, delta: NativePoint, before: NativeRows, after: NativeRows) {
+  const from = travel.actor;
+  if (!from) return;
+  const pushed = seenPush(body, undefined, from, delta,
+    readTravelGrid(before, travel.grid).cells, readTravelGrid(after, travel.grid).cells);
+  if (pushed && !pushed.sunk) {
+    return { body: pushed.candidate, chain: pushed.original.includes(next(from, delta, 2)) };
   }
 }
 
@@ -155,8 +165,7 @@ export function observeCoverage(previous: CoverageLearning | undefined, travel: 
   if (returned.actor === destination && (new Set(firstTile).size >= 2 || new Set(tailTile).size >= 2 || local.motion === 'pull' && !local.layout)) {
     const first = readTravelGrid(before, travel.grid).cells;
     returnedCells = readTravelGrid(after, travel.grid).cells;
-    const observed = local.motion !== 'pull' ? seenPush(local.body, local.layout, from,
-      { input: command.action_ref, delta: displacement }, first, returnedCells) : undefined;
+    const observed = local.motion !== 'pull' ? seenPush(local.body, local.layout, from, displacement, first, returnedCells) : undefined;
     if (observed) {
       const layout = local.layout ?? measureLayout(first, travel.grid.pitch, travel.grid.floor, observed.original.length, 'push');
       if (layout) changed = { ...local, body: observed.candidate, motion: 'push', layout,
