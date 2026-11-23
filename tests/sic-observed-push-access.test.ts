@@ -82,10 +82,10 @@ for (const mirrored of [false, true]) {
 }
 
 const supportVariants: { name: string; levels: number[]; observe: (rows: NativeRows) => NativeRows }[] = [
-  { name: 'survives changes of layout and target count', levels: [2, 3, 4, 5], observe: rows => rows },
-  { name: 'survives mirroring and palette changes', levels: [5],
+  { name: 'survives changes of layout and target count', levels: [2, 3, 4, 5, 6], observe: rows => rows },
+  { name: 'survives mirroring and palette changes', levels: [5, 6],
     observe: rows => rows.map(row => [...row].reverse().map(ink => (ink + 5) % 16)) },
-  { name: 'survives swapped axes and a different palette', levels: [5],
+  { name: 'survives swapped axes and a different palette', levels: [5, 6],
     observe: rows => rows[0]!.map((_, x) => rows.map(row => 15 - row[x]!)) },
 ];
 for (const { name, levels, observe } of supportVariants) test(`support planning ${name}`, async () => {

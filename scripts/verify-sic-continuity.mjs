@@ -80,7 +80,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 5 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -95,6 +95,7 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS02 must preserve learned access without resetting');
       assert.equal(issued[1]?.decisionRevision, issued[0]?.decisionRevision,
         'SS02 L' + row.level + ' must begin with a plan from the learned controls');
+      if (row.level === 6) assert.ok(issued.length <= 110, 'SS02 L6 exceeded its verified action ceiling');
     }
     const groups = new Map();
     let last;
@@ -159,7 +160,7 @@ function main() {
     files = [];
     for (const [name, cohort, end, cap] of [
       ['mirror-isles', 'SS01', '8', '120'],
-      ['la-force-rouge', 'SS02', '5', '160'],
+      ['la-force-rouge', 'SS02', '6', '160'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

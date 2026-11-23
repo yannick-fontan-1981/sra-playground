@@ -331,15 +331,21 @@ function search(model: Model, start: Pose, goal: Cell, limit: number, actionLimi
   const pressure = model.marks.map(mark => ({ mark, distance: distances(model.graph, mark) }));
   type Candidate = { pose: Pose; route: Step[] };
   const queue = new Map<number, Candidate[]>();
+  const bestQueuedLength = new Map<string, number>();
+  const poseKey = (pose: Pose) => `${pose.bodies.join(';')}|${pose.supports.join(';')}|${pose.actor}`;
   function enqueue(pose: Pose, route: Step[]) {
     const estimate = distance.get(pose.actor);
     if (estimate === undefined || route.length + estimate > actionLimit) return;
+    const key = poseKey(pose);
+    // The same exact position and arrangement reached in fewer actions has identical successors.
+    if ((bestQueuedLength.get(key) ?? Infinity) <= route.length) return;
     const uncovered = pressure.filter(({ mark }) => !pose.bodies.includes(mark));
     const rank = route.length + (guidance ? guidance(pose) : uncovered.length
       ? 15 * uncovered.length + 5 * uncovered.reduce((sum, mark) =>
           sum + Math.min(20, ...pose.bodies.map(body => mark.distance.get(body) ?? 20)), 0) - 4 * pose.supports.length
       : 3 * estimate);
     if (!Number.isFinite(rank)) return;
+    bestQueuedLength.set(key, route.length);
     const bucket = queue.get(rank);
     if (bucket) bucket.push({ pose, route });
     else queue.set(rank, [{ pose, route }]);
@@ -391,8 +397,10 @@ export function choosePushAccess(knowledge: PushAccessKnowledge | undefined, tra
   const continuation = binding?.continuation;
   const resumed = continuation && continuation.steps.length <= remaining && samePose(continuation.from, pose);
   const standard = resumed ? undefined : search(model, pose, goal, field.water.length ? 8000 : 3000, remaining);
+  // Spare bodies offer more combinations of footholds. Budget those combinations before probing the live board.
+  const supportBudget = 8000 * Math.min(3, Math.max(1, pose.bodies.length - field.marks.length));
   const guidedRoute = resumed ? continuation.steps : standard && !standard.route && !standard.exhausted && field.water.length
-    ? search(model, pose, goal, 8000, remaining, supportGuidance(model, goal)).route : undefined;
+    ? search(model, pose, goal, supportBudget, remaining, supportGuidance(model, goal)).route : undefined;
   const route = standard?.route ?? guidedRoute;
   if (!route?.length) return;
   let blocked: GateProof | undefined;
