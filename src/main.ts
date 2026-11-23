@@ -47,7 +47,6 @@ import { actionFeedback as bridgesFeedback, lessonIds as bridgesLessonIds, lesso
 import { LEVEL_INFO as SS17_LEVEL_INFO } from '../experiments/sinking-star-ss17/src/level-info.ts';
 import { actionFeedback as fortressFeedback, lessonIds as fortressLessonIds, lessonPrompt as fortressPrompt, observeLesson as observeFortressLesson, TUTORIAL_LEVEL as SS17_TUTORIAL_LEVEL, visibleHeroes as visibleFortressHeroes, type FortressLesson } from '../experiments/sinking-star-ss17/src/tutorial.ts';
 import { LEVEL_INFO as SS18_LEVEL_INFO } from '../experiments/sinking-star-ss18/src/level-info.ts';
-import { SS18_LEVELS } from '../experiments/sinking-star-ss18/src/levels.ts';
 import { actionFeedback as galleryFeedback, lessonIds as galleryLessonIds, lessonPrompt as galleryPrompt, observeLesson as observeGalleryLesson, TUTORIAL_LEVEL as SS18_TUTORIAL_LEVEL, visibleHeroes as visibleGalleryHeroes, type GalleryLesson } from '../experiments/sinking-star-ss18/src/tutorial.ts';
 import { actionFeedback as accordFeedback, lessonIds as accordLessonIds, lessonPrompt as accordPrompt, observeLesson as observeAccordLesson, TUTORIAL_LEVEL as SS15_TUTORIAL_LEVEL, visibleHeroes as visibleAccordHeroes, type HarmonyLesson as AccordLesson } from '../experiments/sinking-star-ss15/src/tutorial.ts';
 import { actionFeedback as harmonyFeedback, lessonIds as harmonyLessonIds, lessonPrompt as harmonyPrompt, observeLesson as observeHarmonyLesson, TUTORIAL_LEVEL as SS14_TUTORIAL_LEVEL, visibleHeroes as visibleHarmonyHeroes, type HarmonyLesson } from '../experiments/sinking-star-ss14/src/tutorial.ts';
@@ -2169,7 +2168,7 @@ function updateInterface(): void {
   if (levelCount !== renderedLevelCount) {
     renderedLevelCount = levelCount;
     levelSelect.innerHTML = levelCount ? Array.from({ length: levelCount }, (_, index) =>
-      `<option value="${index + 1}">${selectedGame.code === 'SS18' ? escapeHtml(SS18_LEVELS[index]?.title ?? '') : `Level ${index + 1}`}</option>`,
+      `<option value="${index + 1}">Level ${index + 1}</option>`,
     ).join('') : '<option value="">Loading…</option>';
   }
   levelSelect.disabled = !canNavigate || levelCount < 2;
