@@ -2,7 +2,7 @@ import type {LevelSpec} from './core.js';
 export const SS19_LEVELS:readonly LevelSpec[]=[
   {
     "id": "ss19-l1",
-    "title": "Les galeries de la première chasse",
+    "title": "Les galeries des gardiens",
     "rows": [
       "####################",
       "####.#########o#####",
@@ -13,7 +13,7 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
       "##................##",
       "##..################",
       "##............######",
-      "##..o#o.o.....#..m##",
+      "##..o#o.o.....#.m.##",
       "##....#.......#~####",
       "##....B........#####",
       "##...o~~s......#####",
@@ -131,7 +131,7 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
       "####################",
       "####################",
       "####################",
-      "#####..........m####",
+      "###########...m#####",
       "####################",
       "####################",
       "######W.......######",
@@ -164,9 +164,66 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
           }
         ],
         "color": 15
+      },
+      {
+        "id": "poussee-1",
+        "buttons": [
+          {
+            "x": 10,
+            "y": 6
+          }
+        ],
+        "color": 11
+      },
+      {
+        "id": "poussee-2",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 6
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "poussee-3",
+        "buttons": [
+          {
+            "x": 12,
+            "y": 6
+          }
+        ],
+        "color": 12
       }
     ],
     "gates": [
+      {
+        "at": {
+          "x": 14,
+          "y": 3
+        },
+        "circuit": "poussee-1",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 3
+        },
+        "circuit": "poussee-2",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 3
+        },
+        "circuit": "poussee-3",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
       {
         "at": {
           "x": 9,
@@ -312,10 +369,10 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
       "####################",
       "##....#....~~~.....#",
       "##Woo......~~~.....#",
-      "##....#....~~~.....#",
-      "#######....~m#...Z.#",
-      "#######.B..~~#.....#",
-      "#######....~~~.....#",
+      "##....#.##.~~~.....#",
+      "#######...B~m#...Z.#",
+      "#######....#~#.....#",
+      "#######....~#~.....#",
       "#######....~~~.....#",
       "#######....~~~.....#",
       "#######....~~~.....#",
@@ -387,21 +444,21 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
     "title": "Le troisième doit rester vivant",
     "rows": [
       "####################",
-      "####################",
-      "#########.W.########",
-      "#########.og########",
-      "#########...########",
-      "########m#.#m###.###",
-      "###.####.....###Z###",
-      "###.#####.######.###",
-      "###.#.#.#.##.......#",
-      "###.#.#............#",
-      "###.#m#............#",
+      "##########W.########",
+      "##########og########",
+      "##########.#########",
+      "#########..#########",
+      "#########.##########",
+      "###.#####.##########",
+      "###.#####m##########",
+      "###.#.###.##########",
+      "###.#.#..m.........#",
+      "###.#m#.........Z..#",
       "###B#.#............#",
       "###.#o#............#",
-      "###.###............#",
+      "###.###..g.........#",
       "###................#",
-      "###..............g.#",
+      "###................#",
       "###g###............#",
       "####################",
       "####################",
@@ -419,11 +476,21 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
         "color": 12
       },
       {
+        "id": "verrou",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 9
+          }
+        ],
+        "color": 14
+      },
+      {
         "id": "presse-ouest",
         "buttons": [
           {
-            "x": 16,
-            "y": 8
+            "x": 15,
+            "y": 10
           }
         ],
         "color": 15
@@ -432,8 +499,8 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
         "id": "presse-sud",
         "buttons": [
           {
-            "x": 16,
-            "y": 12
+            "x": 15,
+            "y": 13
           }
         ],
         "color": 6
@@ -452,10 +519,28 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
     "gates": [
       {
         "at": {
-          "x": 17,
-          "y": 15
+          "x": 9,
+          "y": 13
         },
         "circuit": "captif",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 3
+        },
+        "circuit": "captif",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 16
+        },
+        "circuit": "verrou",
         "direction": "N",
         "closedWhen": "released"
       },
@@ -464,26 +549,8 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
           "x": 10,
           "y": 4
         },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "released"
-      },
-      {
-        "at": {
-          "x": 8,
-          "y": 6
-        },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 11,
-          "y": 6
-        },
-        "circuit": "captif",
-        "direction": "E",
+        "circuit": "presse-ouest",
+        "direction": "W",
         "closedWhen": "pressed"
       },
       {
@@ -491,26 +558,8 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
           "x": 9,
           "y": 4
         },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 11,
-          "y": 4
-        },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 10,
-          "y": 6
-        },
-        "circuit": "presse-ouest",
-        "direction": "W",
+        "circuit": "presse-sud",
+        "direction": "S",
         "closedWhen": "pressed"
       },
       {
@@ -520,15 +569,15 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
         },
         "circuit": "presse-sud",
         "direction": "S",
-        "closedWhen": "pressed"
+        "closedWhen": "released"
       },
       {
         "at": {
           "x": 11,
-          "y": 3
+          "y": 2
         },
         "circuit": "meule",
-        "direction": "S",
+        "direction": "N",
         "closedWhen": "released"
       }
     ]
@@ -714,18 +763,18 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
     "title": "Les deux gardiens vivants",
     "rows": [
       "####################",
-      "#....###############",
-      "#....###############",
-      "#.W..#....m#########",
-      "#....#.#############",
-      "#...Z#.##########o##",
-      "##.###.##########~##",
-      "##.#########...m#~##",
-      "##.#########.####~##",
-      "#............####~##",
-      "#.......B....####~##",
-      "#............~~~~.##",
-      "#...........########",
+      "####################",
+      "####################",
+      "######....m#########",
+      "######.#############",
+      "####....B########o##",
+      "####.#.##########~##",
+      "####.#.##########m##",
+      "####.....########~##",
+      "#...........#####~##",
+      "#...........#####~##",
+      "#...........~.~~~.##",
+      "#.Z..W......#.######",
       "#...........########",
       "#...........########",
       "#.......g...########",
@@ -756,14 +805,14 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
         "color": 10
       },
       {
-        "id": "lacher",
+        "id": "livraison",
         "buttons": [
           {
             "x": 3,
             "y": 16
           }
         ],
-        "color": 7
+        "color": 14
       },
       {
         "id": "gardien-ouest",
@@ -779,8 +828,8 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
         "id": "gardien-est",
         "buttons": [
           {
-            "x": 12,
-            "y": 11
+            "x": 13,
+            "y": 12
           }
         ],
         "color": 12
@@ -798,21 +847,21 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
       },
       {
         "at": {
-          "x": 6,
-          "y": 4
+          "x": 13,
+          "y": 11
         },
-        "circuit": "lacher",
-        "direction": "N",
-        "closedWhen": "released"
+        "circuit": "livraison",
+        "direction": "S",
+        "closedWhen": "pressed"
       },
       {
         "at": {
-          "x": 12,
-          "y": 8
+          "x": 6,
+          "y": 7
         },
-        "circuit": "lacher",
-        "direction": "N",
-        "closedWhen": "released"
+        "circuit": "gardien-ouest",
+        "direction": "S",
+        "closedWhen": "pressed"
       },
       {
         "at": {

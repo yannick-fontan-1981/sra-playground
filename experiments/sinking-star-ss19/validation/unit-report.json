@@ -1,22 +1,22 @@
 {
   "game": "SS19",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "date": "2026-11-23",
   "command": "npm test",
-  "tests": 75,
-  "passed": 75,
+  "tests": 78,
+  "passed": 78,
   "failed": 0,
   "scope": {
     "engineAndSession": 50,
-    "hunt": 14,
+    "physicalMonsters": 17,
     "publicPixelTutorial": 11
   },
   "sourceSha256": {
-    "src/core.ts": "2cadf5abb1e5defa4740ea411d75fe33de832a27b3aab1b95c2448e7cf03f6b4",
-    "src/tutorial.ts": "2ed6c34260e225fd0b2c8e7e36f952b2c04399de51649fe18adaed399e6270d0",
-    "tests/trio.test.mjs": "6b51034207c6c677944efb9f28a84b636e86823df5d7b6d48d0dd537c697b408",
-    "tests/hunt.test.mjs": "90fea0a21d63de4ea44ce256592bb796f112047fd388bfae72cb6c1c154fbb95",
-    "tests/tutorial.test.mjs": "54f485fdf05ace674cf8b170388b79f6d2d741349796757ff902e73282cc6986"
+    "src/core.ts": "ce548df7e1cc246f44ac3afa239321bb86129aa3f347673430fc4ad618c44de7",
+    "src/tutorial.ts": "06216dc9a32fc2dcd5be06ac4f60c73e5da7a595e818a2c2216152f7bda6cb36",
+    "tests/trio.test.mjs": "28ae5663bae40c6fc5d659df4e5d0b2f4430dd6ab89c76cd8d25d7be301a3c94",
+    "tests/monsters.test.mjs": "54c3bb0ae32c437e51c90e7aec89dffe11ce6bb9b9f47ed8c02bd834a8294049",
+    "tests/tutorial.test.mjs": "d096c32da164fa611de658b2fa379320c7be413621df08fef2416aa2c918ad1a"
   },
   "success": true
 }

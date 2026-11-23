@@ -73,8 +73,8 @@ const createHarness=(spec,{reducedMotion=false,single=false}={})=>{
 const report={success:false,htmlSha256:createHash('sha256').update(html).digest('hex'),scope:fixturesOnly?'fixtures-only':tutorialOnly?'tutorial-only':'focused-ui-and-full-campaign',tutorialLevel:TUTORIAL_LEVEL,pedagogicalFixtureLevel:TUTORIAL_LEVEL,environment:'Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue',visualBrowserTest:false,checks:[]};
 const checkRoleFixtures=async()=>{
  const cases=[
-  {name:'Chase follows a successful walk in its own animated phase',placements:[[10,2,'m']],id:2,warrior:[2,3],monster:[9,2],frames:6},
-  {name:'A wall stops the chosen chase axis without a fallback move',placements:[[10,2,'m'],[9,2,'#']],id:2,warrior:[2,3],monster:[10,2],frames:3},
+  {name:'A guard stays still during unrelated walking',placements:[[10,2,'m']],id:2,warrior:[2,3],monster:[10,2],frames:3},
+  {name:'Bard song moves a guard exactly once',placements:[[6,6,'B'],[8,4,'m']],role:'bard',id:4,bard:[7,6],monster:[9,4],frames:3,feedback:'Le chant déplace le monstre'},
   {name:'Warrior pushes one crate',placements:[[3,2,'o']],id:4,warrior:[3,2],stone:[4,2]},
   {name:'Warrior pushes the entire two-piece row',placements:[[3,2,'o'],[4,2,'o']],id:4,warrior:[3,2],stone:[4,2],heldStone:[5,2],frames:3},
   {name:'Warrior pushes Wizard without casting',placements:[[3,2,'Z'],[7,2,'o']],id:4,warrior:[3,2],wizard:[4,2],stone:[7,2]},
@@ -96,7 +96,8 @@ const checkRoleFixtures=async()=>{
   {name:'Wizard walks when its line has no target',placements:[],role:'wizard',id:4,wizard:[3,10]},
   {name:'Wizard bends its ray through a white face',placements:[[6,7,'Z'],[6,10,'1'],[10,10,'o']],role:'wizard',id:2,wizard:[10,10],stone:[6,7]},
   {name:'Wizard ray crosses an immersed support without targeting it',placements:[[5,10,'s'],[8,10,'o']],role:'wizard',id:4,wizard:[8,10],stone:[2,10],support:[5,10]},
-  {name:'Wizard swaps a monster while partners remain safe',placements:[[8,10,'m']],role:'wizard',id:4,wizard:[8,10],monster:[3,10],frames:6},
+  {name:'Wizard swaps a monster while partners remain safe',placements:[[8,10,'m']],role:'wizard',id:4,wizard:[8,10],monster:[2,10],frames:3},
+  {name:'A press visibly delivers a guard without a second movement',placements:[[10,10,'m']],options:{circuits:[{id:'a',buttons:[{x:3,y:2}]}],gates:[{at:{x:10,y:10},circuit:'a',direction:'E',closedWhen:'pressed'}]},id:4,warrior:[3,2],monster:[11,10],frames:6,feedback:'la presse a poussé le monstre'},
   {name:'A side press moves Bard without singing',placements:[[10,10,'B'],[9,9,'o']],options:{circuits:[{id:'a',buttons:[{x:3,y:2}]}],gates:[{at:{x:10,y:10},circuit:'a',direction:'E',closedWhen:'pressed'}]},id:4,warrior:[3,2],bard:[11,10],stone:[9,9],frames:6},
   {name:'A press deposits a remote immersed support',placements:[[10,10,'o'],[11,10,'~']],options:{circuits:[{id:'a',buttons:[{x:3,y:2}]}],gates:[{at:{x:10,y:10},circuit:'a',direction:'E',closedWhen:'pressed'}]},id:4,warrior:[3,2],support:[11,10],frames:6},
   {name:'Forced landing waits for hydraulic support',placements:[[10,10,'B'],[11,10,'~']],options:{circuits:[{id:'a',buttons:[{x:3,y:2}]}],gates:[{at:{x:10,y:10},circuit:'a',direction:'E',closedWhen:'pressed'}],platforms:[{at:{x:11,y:10},circuit:'a',activeWhen:'pressed'}]},id:4,warrior:[3,2],bard:[11,10],frames:9},
@@ -114,6 +115,7 @@ const checkRoleFixtures=async()=>{
    if(fixture.coveredSupport){const t=tile(next.frame,spec,...fixture.coveredSupport);for(const[x,y]of[[0,0],[2,0],[0,2],[2,2]])assert.equal(t[y][x],10);}
    if(fixture.mirror){const t=tile(next.frame,spec,...fixture.mirror);for(let y=0;y<3;y++)for(let x=0;x<3;x++){if(x===y)assert.equal(t[y][x],0);else if(y>x)assert.equal(t[y][x],5);}}
    if(fixture.monster)assert.deepEqual(tile(next.frame,spec,...fixture.monster),[[8,5,8],[5,8,5],[8,5,8]]);
+   if(fixture.feedback)assert.ok(h.$('feedback').textContent.includes(fixture.feedback),fixture.name+': visible cause feedback');
    if(fixture.combat)assert.deepEqual(next.frameDurationsMs.slice(-5),[80,90,100,110,0]);
    await h.reset('undo');h.equal(before);assert.deepEqual(h.errors,[]);
    result.push({case:fixture.name,frames:next.frames.length,exactPixelsAndTiming:true,exactUndo:true});
@@ -194,7 +196,7 @@ const checkActualCampaignWarning=async()=>{
   return{case:'actual campaign blocked mirrors',level,prefixActions:turn,redMirrorIndices:stepDetailed(route.world,route.trace[turn].before,5).blockedMirrorIndices,frames:4,redPixels:changed,onlyBlackBacksChanged:true,exactPixelsAndTiming:true,repeatedWarningAddsNoUndo:true,resetClearsWarning:true};
  }finally{await h.close();}
 };
-// Level 2 requires a living hunter and the extracted crate on its two controls.
+// Level 2 requires a living guard and the extracted crate on its two controls.
 // Its three destinations are visible presses; verify their actual shipped pixels.
 const checkActualLevel2GoalGate=async()=>{
  const design=JSON.parse(readFileSync(resolve(root,'reference/level2-design.json'),'utf8'));
@@ -260,10 +262,10 @@ const checkMirrorInterference=async()=>{
 let h;
 try{
  assert.equal(TUTORIAL_LEVEL,1);assert.equal(lessonIds.length,31);assert.equal(new Set(lessonIds).size,lessonIds.length);
- assert.match(html,/SS19.*La Chasse Noire/);assert.ok(!/Marchand|merchant|Voleur|thief|Forteresse Rose/.test(html.split('<script>')[0]));
+ assert.match(html,/SS19.*Les Gardiens Noirs/);assert.ok(!/Marchand|merchant|Voleur|thief|Forteresse Rose/.test(html.split('<script>')[0]));
  assert.equal((html.match(/data-lesson=/g)??[]).length,lessonIds.length);assert.equal(/<script[^>]+src=/.test(html),false);
  for(const role of Object.keys(roleColors))assert.equal((html.match(new RegExp(`data-hero="${role}"`,'g'))??[]).length,1);
- report.roleCoverage=await checkRoleFixtures();report.checks.push('Compiled-HTML role fixtures cover train pushes and autonomous hunt, songs with two partners, moving and anchored supports, first-target swaps, bent rays, presses, hydraulics and combat.');
+ report.roleCoverage=await checkRoleFixtures();report.checks.push('Compiled-HTML role fixtures cover train pushes, stable guards and their explicitly caused transport, songs with two partners, moving and anchored supports, first-target swaps, bent rays, presses, hydraulics and combat.');
  report.reflectionCoverage=await checkReflectionFixtures();report.checks.push('Global reflection uses nearest-source priority, exchanges equally distant actors and draws shape-specific previews.');
  report.wizardLoopCoverage=await checkWizardLoop();report.checks.push('A four-mirror returning ray illuminates its path and blinks the Wizard without moving occupants or awarding a false discovery.');
  report.deviceGlyphCoverage=await checkDeviceGlyphs();report.checks.push('Gray-backed buttons and black/gray press centers have the exact expected pixels.');
@@ -293,7 +295,7 @@ try{
   const win=makeArena('terminal victory',[],{goals:[[3,2],[3,6],[3,10]]});h=createHarness(win,{single:true});assert.equal(h.ref.observe().levelCount,1);await h.action(4);await h.action({id:6,data:heroData(h.ref.observe(),'bard')});await h.action(4);await h.action({id:6,data:heroData(h.ref.observe(),'wizard')});h.key('ArrowRight');const won=h.ref.action(4);assert.equal(won.state,'WIN');assert.equal(h.$('victory').hidden,true);await h.settled(won);assert.equal(h.$('victory').hidden,false);assert.ok([...h.window.document.querySelectorAll('[data-action],[data-hero]')].every(e=>e.disabled));await h.reset('undo');assert.equal(h.$('victory').hidden,true);await h.reset('restart');report.checks.push('Victory waits for all three heroes and the last frame, disables ordinary controls, and can be undone or restarted.');await h.close();h=undefined;
  }
  if(!fixturesOnly){
-  assert.equal(SS19_LEVELS.length,8);assert.equal(SS19_LEVELS[0].title,'Les galeries de la première chasse');assert.equal(SS19_LEVELS[TUTORIAL_LEVEL-1].title,SS19_LEVELS[0].title);h=createHarness();assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,false);
+  assert.equal(SS19_LEVELS.length,8);assert.equal(SS19_LEVELS[0].title,'Les galeries des gardiens');assert.equal(SS19_LEVELS[TUTORIAL_LEVEL-1].title,SS19_LEVELS[0].title);h=createHarness();assert.equal(h.board.dataset.level,'1');assert.equal(h.$('tutorial').hidden,false);
   for(let level=1;level<=SS19_LEVELS.length;level++){
    await h.choose(level);const initial=h.ref.observe();assert.deepEqual(heroes(initial.frame).map(p=>p.color).sort((a,b)=>a-b),[6,8,15]);assert.equal(goalCount(initial.frame),3);assert.equal(h.$('tutorial').hidden,level!==TUTORIAL_LEVEL);assert.equal(h.$('piston-help').hidden,!LEVEL_INFO[level-1].piston);assert.equal(h.$('level-title').textContent,SS19_LEVELS[level-1].title);assert.equal(h.$('source-label').textContent,LEVEL_INFO[level-1].label);assert.equal(h.$('level-objective').textContent,LEVEL_INFO[level-1].objective);
    assert.equal(h.$('source-link').hidden,!LEVEL_INFO[level-1].url);if(LEVEL_INFO[level-1].url)assert.equal(h.$('source-link').href,new URL(LEVEL_INFO[level-1].url).href);assert.equal(h.$('source-link-secondary').hidden,!LEVEL_INFO[level-1].secondary);if(LEVEL_INFO[level-1].secondary)assert.equal(h.$('source-link-secondary').href,new URL(LEVEL_INFO[level-1].secondary.url).href);

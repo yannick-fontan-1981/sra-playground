@@ -1,6 +1,7 @@
 {
   "gameCode": "SS19",
-  "scope": "Niveaux 3–5 : témoins et contre-branches locales, sans preuve de solution unique.",
+  "version": "0.2.0",
+  "scope": "Niveaux 3–5 : témoins, contre-branches et variantes physiques locales ; sans preuve de solution unique. La carte et le témoin de N3 sont conservés.",
   "levels": [
     {
       "id": "ss19-03",
@@ -8,11 +9,11 @@
     },
     {
       "id": "ss19-04",
-      "sha256": "8e78943a7082e2dd7902e1915aa1de30e7ecf2599c11cce2fc688b5db88cd88f"
+      "sha256": "00232d97835d46b6b4b67eb81dc398850c2f49fb76fe9c6e75c64d0ea5e51fed"
     },
     {
       "id": "ss19-05",
-      "sha256": "c62a43996b4be2182292604b49ecf051fbed2693cb6919770643afc7b10f294a"
+      "sha256": "c7c7c4a26452b921e80d3bb744d6b46427c9a383c65b16766a23360b543d83f0"
     }
   ],
   "checks": [
@@ -26,15 +27,15 @@
     {
       "name": "ss19-04: témoin complet",
       "status": "passed",
-      "actions": 143,
-      "selections": 9,
+      "actions": 135,
+      "selections": 12,
       "monstersRemaining": 0
     },
     {
       "name": "ss19-05: témoin complet",
       "status": "passed",
-      "actions": 143,
-      "selections": 15,
+      "actions": 134,
+      "selections": 13,
       "monstersRemaining": 1
     },
     {
@@ -50,25 +51,32 @@
       "observed": "La caisse quitte 8,11 et la porte-poussoir de la destination 17,7 en retire le Magicien."
     },
     {
-      "name": "N4 : éteindre le soutien avant l’appât laisse le gardien sur la commande",
+      "name": "N4 : le chant dépose le gardien sur la trappe",
       "status": "passed",
-      "commands": "RRRRRCDCCDDDDDDRRR",
-      "observed": "La chasse refuse l’eau nue : le gardien ne descend pas et sa porte reste fermée.",
-      "scope": "Erreur locale récupérable en réarmant la trappe."
+      "commands": "RRRRRCCD",
+      "observed": "Un déplacement chanté D transporte le gardien de 12,5 à 12,6. Il reste sur la trappe après la sélection du Magicien."
     },
     {
       "name": "N4 : la trappe retire réellement son occupant",
       "status": "passed",
-      "commands": "RRRRRDDDDDDRRRCU",
+      "commands": "RRRRRCCDCCU",
       "phases": [
         "walk",
         "platform"
       ]
     },
     {
+      "name": "N4 : relâcher avant le chant est une variante légale",
+      "status": "passed",
+      "commands": "RRRRRCUCDCCCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRRCCUUUURRCLLULLDRRRRRCDDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
+      "actions": 135,
+      "observed": "Le chant imposé peut aussi noyer le gardien dans l’eau nue après un retrait précoce de la trappe. Le reste du chantier mène à la victoire.",
+      "scope": "La chronologie du témoin est pédagogique ; elle n’est pas une contrainte cachée."
+    },
+    {
       "name": "N4 : deux réserves deviennent deux appuis, plus l’appui déplacé",
       "status": "passed",
-      "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRR",
+      "commands": "RRRRRCCDCCUCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRR",
       "bridge": [
         {
           "x": 11,
@@ -83,62 +91,101 @@
           "y": 11
         }
       ],
-      "scope": "État démontré du chantier ; les autres calendriers restent possibles."
+      "scope": "État démontré du chantier ; aucune unicité de calendrier revendiquée."
     },
     {
-      "name": "N4 : quitter le pont vers le nord avec la Barde est refusé",
+      "name": "N4 : quitter le pont vers le nord avec le Barde est refusé",
       "status": "passed",
-      "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCCU",
-      "observed": "Le chant imposerait un déplacement dangereux du compagnon ; il est refusé. Les échanges du témoin permettent la relève."
+      "commands": "RRRRRCCDCCUCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRRCCUUUURRCLLULLDRRRRRCCU",
+      "observed": "Le chant imposerait un déplacement dangereux du compagnon. Les échanges du témoin permettent la relève."
+    },
+    {
+      "name": "N4 : la chaîne d’appuis permet aussi une traversée chantée",
+      "status": "passed",
+      "commands": "RRRRRCCDCCUCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRRCCUUUURRCLLULLDCCRRRRRCCDDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
+      "actions": 138,
+      "observed": "Les appuis en chaîne sont retenus par la rive et les héros ; cinq pas du Barde font aussi traverser le duo.",
+      "scope": "La poussée du Barde est démontrée, mais non obligatoire."
     },
     {
       "name": "N5 : charger avant de placer le captif échoue",
       "status": "passed",
       "commands": "D",
-      "observed": "La porte 10,4 interdit la poussée de la réserve tant que le gardien n’occupe pas 5,8."
+      "observed": "La porte orange 10,3 interdit de pousser la réserve tant que le gardien n’occupe pas 5,8."
     },
     {
-      "name": "N5 : quitter le pupitre à pied déverrouille le captif",
+      "name": "N5 : quitter le pupitre à pied libère deux commandes distinctes",
       "status": "passed",
-      "commands": "CDDDDDLLLLLLRRRRRRUCUUUD",
-      "observed": "Le chant du départ emporte ensemble le gardien et son verrou ; la sortie et le chargement referment."
+      "commands": "CCUUUDD",
+      "observed": "Deux pas chantés emportent gardien et caisse. Le bouton orange puis le bouton vert se libèrent ; le chargement et les deux destinations referment."
+    },
+    {
+      "name": "N5 : la collision est un déplacement chanté visible",
+      "status": "passed",
+      "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUU",
+      "observed": "Le Barde monte le monstre 9,9 vers 9,8, au contact de celui en 9,7. Les deux disparaissent ; le captif reste."
+    },
+    {
+      "name": "N5 : le volet fermé protège le moulin d’une visée directe",
+      "status": "passed",
+      "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDCDDDDDDRRRRUUUUURRUUU",
+      "observed": "Le volet rose fermé en 9,6 arrête le pas et la visée depuis le couloir. Le Magicien ne rejoint pas le côté de la caisse avant le transfert."
     },
     {
       "name": "N5 : la seconde presse seule ne décharge pas la réserve",
       "status": "passed",
-      "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCUURRRRRRU",
-      "observed": "L’impulsion sud est vide tant que le transfert occidental n’a pas eu lieu."
+      "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDCDDDDDDRRRRRRRRRRRRU",
+      "observed": "La commande rose ouvre le volet mais sa presse est vide : la caisse reste sur la presse violette en 10,4."
     },
     {
-      "name": "N5 : l’ancien accès de chant sous le moulin est désormais bloqué",
+      "name": "N5 : relâcher trop tôt ferme le couloir sans déplacer la livraison",
       "status": "passed",
-      "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCCUURRRRUUUUURRRRRUL",
-      "observed": "Le pas vers 11,8 est un mur ; il ne déplace pas la caisse par chant à travers le sol.",
-      "scope": "Régression du contre-parcours local trouvé pendant la conception, pas preuve exhaustive de toutes les routes."
+      "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDUURCDDDDDDRRRRUUURRRRRRRRUDDLDDRUDCUUUU",
+      "observed": "Le volet rose ferme en 9,6. Le Barde ne peut plus atteindre la position qui tire la caisse ; réappuyer rétablit le passage.",
+      "scope": "Erreur récupérable, sans perte de ressource ni minuteur."
     },
     {
-      "name": "N5 : les deux impulsions livrent une caisse dans le bon ordre",
+      "name": "N5 : un monstre sur le cyan ne remplace pas la caisse",
+      "status": "passed",
+      "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUDDDCCDDDDDDDRRRRRRRUUL",
+      "observed": "Attirer le monstre sur le cyan ouvre bien le palier, mais entrer dans la destination orange 9,13 provoque le contact mortel avec 9,12.",
+      "scope": "Contre-branche concrète qui ferme le raccourci de remplacement du dernier poids."
+    },
+    {
+      "name": "N5 : le départ chanté retirerait la livraison finale",
+      "status": "passed",
+      "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDUURCDDDDDDRRRRUUURRRRRRRRUDDLDDRUCUUUDDDDDDDD",
+      "observed": "Un pas de plus emporte la caisse hors du cyan. L’échange de relève du témoin évite ce départ chanté."
+    },
+    {
+      "name": "N5 : deux impulsions et trois poids finaux distincts",
       "status": "passed",
       "pistonLandings": [
         {
           "x": 9,
-          "y": 6
+          "y": 4
         },
         {
           "x": 9,
-          "y": 7
+          "y": 5
         }
       ],
-      "captive": {
-        "x": 5,
-        "y": 8
-      },
-      "latch": {
-        "x": 5,
-        "y": 9
-      }
+      "weights": [
+        {
+          "x": 5,
+          "y": 8
+        },
+        {
+          "x": 5,
+          "y": 9
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ]
     }
   ],
-  "passed": 14,
+  "passed": 20,
   "failed": 0
 }

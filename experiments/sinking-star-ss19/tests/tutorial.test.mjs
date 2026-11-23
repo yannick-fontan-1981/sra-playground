@@ -52,21 +52,21 @@ test('a visible train push teaches the whole file while a single crate does not'
  const single=tutorialSession(fixture({W:[2,2],stones:[[3,2]]}));
  assert.ok(!observedAction(single,4).has('train-push'));
 });
-test('red hunters are not mistaken for the red Warrior and chase is read after movement',()=>{
+test('red guards remain distinct from Warrior and stay still during unrelated walking',()=>{
  const s=tutorialSession(fixture({monsters:[[10,2]]}));
  assert.equal(visibleHeroes(s.observe().frame).filter(h=>h.kind==='warrior').length,1);
- const learned=observedAction(s,2);assert.ok(learned.has('hunt'));assert.ok(!learned.has('press'));
+ const learned=observedAction(s,2);assert.ok(learned.has('monster-still'));assert.ok(!learned.has('monster-song'));assert.ok(!learned.has('press'));
 });
-test('a blocked dominant axis teaches restraint without inventing a chase movement',()=>{
- const s=tutorialSession(fixture({monsters:[[10,2]],walls:[[9,2]]}));
- const learned=observedAction(s,2);assert.ok(learned.has('hunt-block'));assert.ok(!learned.has('hunt'));
+test('a song visibly moving a monster teaches its cause rather than stillness',()=>{
+ const s=tutorialSession(fixture({B:[5,5],monsters:[[7,4]]}));select(s,5,5);
+ const learned=observedAction(s,2);assert.ok(learned.has('monster-song'));assert.ok(learned.has('bard-song'));assert.ok(!learned.has('monster-still'));assert.ok(!learned.has('monster-press'));
 });
-test('retargeting by selection is separate from a physical hunt step',()=>{
+test('selection alone does not claim a monster movement or a demonstration of walking',()=>{
  const s=tutorialSession(fixture({monsters:[[10,2]]}));
  const learned=observedAction(s,6,cellToPixel({x:6,y:6}));
- assert.ok(learned.has('hunt-target'));assert.ok(learned.has('select'));assert.ok(!learned.has('hunt'));
+ assert.ok(learned.has('select'));assert.ok(!learned.has('monster-still'));assert.ok(!learned.has('monster-song'));assert.ok(!learned.has('monster-press'));
 });
 test('a drowning press is recognized from two pixel translations despite no final monster sprite',()=>{
  const s=tutorialSession(fixture({monsters:[[10,5]],water:[[11,5]],circuits:[{id:'capture',buttons:[{x:3,y:2}],color:15}],gates:[{at:{x:10,y:5},circuit:'capture',direction:'E',closedWhen:'pressed'}]}));
- const learned=observedAction(s,4);assert.ok(learned.has('press'));assert.ok(learned.has('monster'));assert.ok(!learned.has('hunt'));
+ const learned=observedAction(s,4);assert.ok(learned.has('press'));assert.ok(learned.has('monster'));assert.ok(learned.has('monster-press'));assert.ok(!learned.has('monster-song'));assert.ok(!learned.has('monster-still'));
 });

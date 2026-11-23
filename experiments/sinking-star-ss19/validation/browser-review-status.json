@@ -1,6 +1,6 @@
 {
   "game": "SS19",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "nativeBrowserReview": "not_run",
   "cssAndResponsiveVisualReview": "not_claimed",
   "standaloneInterfaceValidation": "Happy DOM executes compiled HTML inputs; compares every public canvas frame and animation duration; independent pixel-board contact sheet inspected",

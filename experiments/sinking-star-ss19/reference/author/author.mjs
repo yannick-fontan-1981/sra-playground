@@ -14,7 +14,7 @@ export class Author {
   const queue=[{state:this.state,route:''}],seen=new Set([stateKey(this.state)]);
   for(let i=0;i<queue.length&&i<16000;i++){const n=queue[i];for(const c of 'UDLR'){
    const a=decodeCommand(c,n.state),d=stepDetailed(this.world,n.state,a.id),h=d.state.heroes[d.state.active];
-   if(d.state.failed||d.state.dead||d.phases.some(p=>!['walk','gate','platform','hunt'].includes(p.kind)||(p.kind!=='hunt'&&p.moves.some(m=>m.actor!=='hero'))))continue;
+   if(d.state.failed||d.state.dead||d.phases.some(p=>!['walk','gate','platform'].includes(p.kind)||p.moves.some(m=>m.actor!=='hero')))continue;
    const route=n.route+c;if(h.at.x===target.x&&h.at.y===target.y)return this.act(route);
    const key=stateKey(d.state);if(seen.has(key))continue;seen.add(key);queue.push({state:d.state,route});
   }}throw Error(JSON.stringify({error:'No walking route',target,kind:this.hero.kind,hero:this.hero.at,commands:this.commands,states:seen.size}));

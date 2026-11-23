@@ -5,8 +5,8 @@
   "levels": [
     {
       "level": 1,
-      "title": "Les galeries de la première chasse",
-      "mapSha256": "3afb60a2c9af4bc8caf8034aced191d07a820cebe6a004d7a8aa45bfed1d863c",
+      "title": "Les galeries des gardiens",
+      "mapSha256": "7fa1651341e3c06382685602517c9eda62f01c02fdf05ad5754b50cfc8a41f67",
       "terrainSha256": "4a509f9bffd52c41dc7c5d98e8bb4298564ab4d37f64d63ac6050e240842fbc6",
       "goals": [
         {
@@ -78,8 +78,8 @@
     {
       "level": 2,
       "title": "Le gardien du seuil",
-      "mapSha256": "032ab33c96bb19906bcc2b5ee5f255a320e5dbf0e95df476301f1cf68003f92a",
-      "terrainSha256": "c1343c84eba51546eafd32e167398ee2e5435250a539bb5dbbba2ec724d08849",
+      "mapSha256": "63b744d425757e89737a59137481faf4356e2f6cd0cc862ed6eda6c459d8097c",
+      "terrainSha256": "2969deab27c681d3e1074ada25b3166a2649ebae6615a992aa7805ed8897b7b8",
       "goals": [
         {
           "x": 17,
@@ -94,7 +94,7 @@
           "y": 15
         }
       ],
-      "landCells": 93,
+      "landCells": 86,
       "waterCells": 4,
       "walking": [
         {
@@ -147,21 +147,21 @@
       "exactHistoricalTerrainRepeats": [],
       "localChecks": [
         {
-          "name": "Caisse indispensable",
-          "observed": "À la victoire, les trois héros occupent les trois destinations, distinctes des commandes. Il ne reste que la caisse et le gardien pour les deux commandes. Immerger ou perdre la caisse rend cet accord final impossible.",
-          "scope": "Argument de conservation des occupants, indépendant du témoin.",
+          "name": "Deux poids indispensables",
+          "observed": "À la victoire, les trois héros occupent les trois destinations distinctes des commandes du seuil. Seuls la caisse et le gardien peuvent tenir les deux boutons ; perdre l’un rend cet accord impossible.",
+          "scope": "Conservation des occupants, indépendante du témoin.",
           "verification": "Reviewed by the dedicated author script"
         },
         {
-          "name": "Gardien sur une commande intérieure du rail",
-          "observed": "La commande x11 ne se trouve ni à x5 ni à x15, les deux extrémités. Les murs verticaux n’arrêtent le gardien que si le héros actif est dans le cône vertical.",
-          "scope": "Géométrie du rail et règle de poursuite du moteur.",
+          "name": "Trois commandes explicites",
+          "observed": "Les boutons jaune, vert et orange ferment respectivement les presses en 14,3, 13,3 et 12,3. Le gardien arrive sur le bouton violet distinct en 11,3.",
+          "scope": "Correspondance spatiale et circuits déclarés.",
           "verification": "Reviewed by the dedicated author script"
         },
         {
-          "name": "Aucune sortie accessible sans accord",
-          "observed": "Chaque destination est la case d’une presse fermée tant que l’une des deux commandes est libre ; les héros ne peuvent pas contourner la condition en restant derrière une porte.",
-          "scope": "Condition de victoire spatiale, sans verrou caché.",
+          "name": "Sorties sous accord",
+          "observed": "Chaque destination est fermée tant que l’un des deux boutons violets est libre ; une fermeture expulse l’occupant avant la victoire.",
+          "scope": "Condition spatiale, sans quota caché.",
           "verification": "Reviewed by the dedicated author script"
         }
       ]
@@ -271,8 +271,8 @@
     {
       "level": 4,
       "title": "Le gardien de la vanne",
-      "mapSha256": "8e78943a7082e2dd7902e1915aa1de30e7ecf2599c11cce2fc688b5db88cd88f",
-      "terrainSha256": "bb3a3ba4aaada42c395870383a2ef443b088decf9925adecc865ae6b7aebae20",
+      "mapSha256": "00232d97835d46b6b4b67eb81dc398850c2f49fb76fe9c6e75c64d0ea5e51fed",
+      "terrainSha256": "9bc9d50c74fd6fad040ade199769f5a662595af33c714b9d7d6b280b2b356739",
       "goals": [
         {
           "x": 18,
@@ -287,13 +287,13 @@
           "y": 15
         }
       ],
-      "landCells": 153,
-      "waterCells": 42,
+      "landCells": 151,
+      "waterCells": 40,
       "walking": [
         {
           "role": "warrior",
-          "states": 75,
-          "transitions": 300,
+          "states": 73,
+          "transitions": 292,
           "reachableGoals": [
             {
               "x": 5,
@@ -316,8 +316,8 @@
         },
         {
           "role": "bard",
-          "states": 75,
-          "transitions": 300,
+          "states": 73,
+          "transitions": 292,
           "reachableGoals": [
             {
               "x": 5,
@@ -330,8 +330,8 @@
       "generousWalking": [
         {
           "role": "warrior",
-          "states": 76,
-          "transitions": 304,
+          "states": 74,
+          "transitions": 296,
           "reachableGoals": [
             {
               "x": 5,
@@ -354,8 +354,8 @@
         },
         {
           "role": "bard",
-          "states": 76,
-          "transitions": 304,
+          "states": 74,
+          "transitions": 296,
           "reachableGoals": [
             {
               "x": 5,
@@ -373,94 +373,87 @@
     {
       "level": 5,
       "title": "Le troisième doit rester vivant",
-      "mapSha256": "c62a43996b4be2182292604b49ecf051fbed2693cb6919770643afc7b10f294a",
-      "terrainSha256": "bb30ac13710a1462fd1ec34c63fb60c14d37875211caaedd3ecb8e6add39ef9e",
+      "mapSha256": "c7c7c4a26452b921e80d3bb744d6b46427c9a383c65b16766a23360b543d83f0",
+      "terrainSha256": "d56cb606600bba09bc0fc334daf07e81273e40135c079ecd5adf64b3c4bfc470",
       "goals": [
         {
           "x": 11,
-          "y": 3
+          "y": 2
         },
         {
-          "x": 17,
-          "y": 15
+          "x": 9,
+          "y": 13
         },
         {
           "x": 3,
           "y": 16
         }
       ],
-      "landCells": 148,
+      "landCells": 129,
       "waterCells": 0,
       "walking": [
         {
           "role": "warrior",
-          "states": 5,
-          "transitions": 20,
+          "states": 2,
+          "transitions": 8,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 125,
-          "transitions": 500,
-          "reachableGoals": [
-            {
-              "x": 3,
-              "y": 16
-            }
-          ],
+          "states": 104,
+          "transitions": 416,
+          "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 129,
-          "transitions": 516,
-          "reachableGoals": [
-            {
-              "x": 3,
-              "y": 16
-            }
-          ],
+          "states": 109,
+          "transitions": 436,
+          "reachableGoals": [],
           "exhausted": true
         }
       ],
       "generousWalking": [
         {
           "role": "warrior",
-          "states": 5,
-          "transitions": 20,
+          "states": 2,
+          "transitions": 8,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 131,
-          "transitions": 524,
-          "reachableGoals": [
-            {
-              "x": 3,
-              "y": 16
-            }
-          ],
+          "states": 110,
+          "transitions": 440,
+          "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 131,
-          "transitions": 524,
-          "reachableGoals": [
-            {
-              "x": 3,
-              "y": 16
-            }
-          ],
+          "states": 110,
+          "transitions": 440,
+          "reachableGoals": [],
           "exhausted": true
         }
       ],
-      "maximumFrozenWalkingGoalAssignment": 1,
+      "maximumFrozenWalkingGoalAssignment": 0,
       "buttonsAndPressesSeparate": true,
       "exactHistoricalTerrainRepeats": [],
-      "localChecks": []
+      "localChecks": [
+        {
+          "name": "Trois ressources finales",
+          "observed": "Le témoin conserve le gardien en 5,8, la caisse du captif en 5,9 et la caisse du moulin en 9,12. Chacun maintient une destination distincte.",
+          "scope": "Rejeu et circuits déclarés ; les routes alternatives légales restent admises.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Un monstre ne remplace pas la livraison finale",
+          "observed": "Un gardien sur le bouton cyan 9,12 tue tout héros sur la destination orange adjacente 9,13.",
+          "scope": "Règle de contact orthogonal, indépendante du témoin.",
+          "verification": "Reviewed by the dedicated author script"
+        }
+      ]
     },
     {
       "level": 6,
@@ -609,8 +602,8 @@
     {
       "level": 8,
       "title": "Les deux gardiens vivants",
-      "mapSha256": "e79fd1d20f27f0cfe0ae72c10eaaf686a4dd9b5546bb51d9cdb42e57d319fbdf",
-      "terrainSha256": "4a0bf507316b04d340a2215cc925b99031819140ad5ddc7ad8bfc5c266da1b31",
+      "mapSha256": "f46b6402f2edbef164bec5b19bb8861a0d30fd673be05d7e9d3b9cd646b511cf",
+      "terrainSha256": "b4bc4f19e1cb974b60f0696e402133e256d4f19de9caefb6404754e68eba51b1",
       "goals": [
         {
           "x": 8,
@@ -625,27 +618,27 @@
           "y": 18
         }
       ],
-      "landCells": 163,
-      "waterCells": 10,
+      "landCells": 147,
+      "waterCells": 9,
       "walking": [
         {
           "role": "warrior",
-          "states": 135,
-          "transitions": 540,
+          "states": 128,
+          "transitions": 512,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 135,
-          "transitions": 540,
+          "states": 128,
+          "transitions": 512,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 135,
-          "transitions": 540,
+          "states": 128,
+          "transitions": 512,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -653,22 +646,22 @@
       "generousWalking": [
         {
           "role": "warrior",
-          "states": 137,
-          "transitions": 548,
+          "states": 130,
+          "transitions": 520,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "wizard",
-          "states": 137,
-          "transitions": 548,
+          "states": 130,
+          "transitions": 520,
           "reachableGoals": [],
           "exhausted": true
         },
         {
           "role": "bard",
-          "states": 137,
-          "transitions": 548,
+          "states": 130,
+          "transitions": 520,
           "reachableGoals": [],
           "exhausted": true
         }
@@ -684,18 +677,74 @@
       "script": "reference/author/review-level2-ss19.mjs",
       "success": true,
       "result": {
+        "gameCode": "SS19",
+        "version": "0.2.0",
         "level": 2,
-        "checks": 9,
-        "status": "passed"
+        "title": "Le gardien du seuil",
+        "status": "passed",
+        "checks": [
+          {
+            "name": "Témoin complet",
+            "observed": "62 entrées, 8 sélections, trois poussées de presse ; victoire sans refus, perte ni déplacement autonome.",
+            "scope": "Rejeu concret, sans revendication d’optimalité."
+          },
+          {
+            "name": "Sorties et commandes distinctes",
+            "observed": "Les trois destinations sont fermées initialement et dépendent des deux boutons violets. Aucune presse, de transport ou de sortie, ne partage sa case avec un bouton.",
+            "scope": "La fermeture expulse l’occupant avant l’évaluation de la victoire."
+          },
+          {
+            "name": "Trois impulsions pour quatre cases",
+            "observed": "Les boutons jaune, vert et orange transportent successivement le gardien de 14,3 à 13,3, 12,3 puis au bouton distinct 11,3.",
+            "scope": "Correspondance vérifiée dans les phases physiques, pas une translation dissimulée."
+          },
+          {
+            "name": "Un bouton déjà vidé ne termine pas le rail",
+            "observed": "Après les deux premières impulsions, revenir au bouton jaune ferme une presse vide : le gardien reste en 12,3 et les sorties restent fermées.",
+            "scope": "Contre-parcours concret RRRRRL."
+          },
+          {
+            "name": "Sélection et marche ne déplacent aucun gardien",
+            "observed": "Trois sélections puis trois pas vers la gauche laissent le poids sur son bouton d’arrivée, même en réactivant les presses désormais vides.",
+            "scope": "Contre-parcours concret après livraison ; aucune cible ou priorité d’axe."
+          },
+          {
+            "name": "Réserve du coude aveugle",
+            "observed": "Quatre déplacements chantés retirent la caisse sans modifier le rail.",
+            "scope": "Rejeu concret du seul chant de manutention."
+          },
+          {
+            "name": "Immerger la réserve est une impasse réelle",
+            "observed": "Une poussée supplémentaire à gauche immerge la caisse en 7,10 sans tuer de héros. Un seul poids non héroïque subsiste pour les deux boutons du seuil.",
+            "scope": "Contre-parcours concret ; impossibilité finale par conservation des poids, réversible avec Undo."
+          },
+          {
+            "name": "Relève de l’îlot",
+            "observed": "La transposition remplace le Magicien par la caisse sur le bouton 3,10, pendant que le gardien tient 11,3.",
+            "scope": "Rejeu du relais de commande."
+          },
+          {
+            "name": "Rail réservé aux trois presses",
+            "observed": "Le rail est scellé aux deux extrémités et séparé de tout sol extérieur par au moins trois cases de portée. Aucun miroir ni ligne dégagée ne permet au Magicien, au Barde ou au Guerrier d’atteindre son poids.",
+            "scope": "Vérification géométrique des possibilités de déplacement."
+          },
+          {
+            "name": "Deux ressources indispensables",
+            "observed": "À la victoire, les trois héros occupent les destinations hors commandes. La caisse et le gardien sont les deux seuls poids restants pour les boutons violets ; les appuis ne pèsent pas.",
+            "scope": "Conservation des occupants, valable indépendamment du témoin."
+          }
+        ],
+        "scope": "Rejeux contradictoires ciblés et arguments géométriques ; aucune preuve de route minimale ou d’unicité."
       },
-      "sha256": "7994bb9e32d5b3d91bee4e63de51c523a7f477dabb2d1c94371735d448110ca3"
+      "sha256": "aae3c1a781a518f517c25c5a6fd41a58b7b69d270742bcb56e91cf4290e01540"
     },
     {
       "script": "reference/author/review-ss19-middle.mjs",
       "success": true,
       "result": {
         "gameCode": "SS19",
-        "scope": "Niveaux 3–5 : témoins et contre-branches locales, sans preuve de solution unique.",
+        "version": "0.2.0",
+        "scope": "Niveaux 3–5 : témoins, contre-branches et variantes physiques locales ; sans preuve de solution unique. La carte et le témoin de N3 sont conservés.",
         "levels": [
           {
             "id": "ss19-03",
@@ -703,11 +752,11 @@
           },
           {
             "id": "ss19-04",
-            "sha256": "8e78943a7082e2dd7902e1915aa1de30e7ecf2599c11cce2fc688b5db88cd88f"
+            "sha256": "00232d97835d46b6b4b67eb81dc398850c2f49fb76fe9c6e75c64d0ea5e51fed"
           },
           {
             "id": "ss19-05",
-            "sha256": "c62a43996b4be2182292604b49ecf051fbed2693cb6919770643afc7b10f294a"
+            "sha256": "c7c7c4a26452b921e80d3bb744d6b46427c9a383c65b16766a23360b543d83f0"
           }
         ],
         "checks": [
@@ -721,15 +770,15 @@
           {
             "name": "ss19-04: témoin complet",
             "status": "passed",
-            "actions": 143,
-            "selections": 9,
+            "actions": 135,
+            "selections": 12,
             "monstersRemaining": 0
           },
           {
             "name": "ss19-05: témoin complet",
             "status": "passed",
-            "actions": 143,
-            "selections": 15,
+            "actions": 134,
+            "selections": 13,
             "monstersRemaining": 1
           },
           {
@@ -745,25 +794,32 @@
             "observed": "La caisse quitte 8,11 et la porte-poussoir de la destination 17,7 en retire le Magicien."
           },
           {
-            "name": "N4 : éteindre le soutien avant l’appât laisse le gardien sur la commande",
+            "name": "N4 : le chant dépose le gardien sur la trappe",
             "status": "passed",
-            "commands": "RRRRRCDCCDDDDDDRRR",
-            "observed": "La chasse refuse l’eau nue : le gardien ne descend pas et sa porte reste fermée.",
-            "scope": "Erreur locale récupérable en réarmant la trappe."
+            "commands": "RRRRRCCD",
+            "observed": "Un déplacement chanté D transporte le gardien de 12,5 à 12,6. Il reste sur la trappe après la sélection du Magicien."
           },
           {
             "name": "N4 : la trappe retire réellement son occupant",
             "status": "passed",
-            "commands": "RRRRRDDDDDDRRRCU",
+            "commands": "RRRRRCCDCCU",
             "phases": [
               "walk",
               "platform"
             ]
           },
           {
+            "name": "N4 : relâcher avant le chant est une variante légale",
+            "status": "passed",
+            "commands": "RRRRRCUCDCCCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRRCCUUUURRCLLULLDRRRRRCDDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
+            "actions": 135,
+            "observed": "Le chant imposé peut aussi noyer le gardien dans l’eau nue après un retrait précoce de la trappe. Le reste du chantier mène à la victoire.",
+            "scope": "La chronologie du témoin est pédagogique ; elle n’est pas une contrainte cachée."
+          },
+          {
             "name": "N4 : deux réserves deviennent deux appuis, plus l’appui déplacé",
             "status": "passed",
-            "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRR",
+            "commands": "RRRRRCCDCCUCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRR",
             "bridge": [
               {
                 "x": 11,
@@ -778,75 +834,114 @@
                 "y": 11
               }
             ],
-            "scope": "État démontré du chantier ; les autres calendriers restent possibles."
+            "scope": "État démontré du chantier ; aucune unicité de calendrier revendiquée."
           },
           {
-            "name": "N4 : quitter le pont vers le nord avec la Barde est refusé",
+            "name": "N4 : quitter le pont vers le nord avec le Barde est refusé",
             "status": "passed",
-            "commands": "RRRRRDDDDDDRRRCUCLDDDDDDDDDDRRRUUULLDDLCUUUUUUULLDDDDDDDDLDRRRRLUUUUUUUUULDDDDDDDDLDRRRRCCUUUURRCLLULLDRRRRRCCU",
-            "observed": "Le chant imposerait un déplacement dangereux du compagnon ; il est refusé. Les échanges du témoin permettent la relève."
+            "commands": "RRRRRCCDCCUCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRRCCUUUURRCLLULLDRRRRRCCU",
+            "observed": "Le chant imposerait un déplacement dangereux du compagnon. Les échanges du témoin permettent la relève."
+          },
+          {
+            "name": "N4 : la chaîne d’appuis permet aussi une traversée chantée",
+            "status": "passed",
+            "commands": "RRRRRCCDCCUCDDDDDLLDDDDDRRUUULLDDLCRURRDDDDDDDDLDRRLUUUUUUUUULLDRURDDDDDDDDLDRRRCCUUUURRCLLULLDCCRRRRRCCDDDDDDDLLLLLDDDDLLLLLCDDDDLCDDRRRR",
+            "actions": 138,
+            "observed": "Les appuis en chaîne sont retenus par la rive et les héros ; cinq pas du Barde font aussi traverser le duo.",
+            "scope": "La poussée du Barde est démontrée, mais non obligatoire."
           },
           {
             "name": "N5 : charger avant de placer le captif échoue",
             "status": "passed",
             "commands": "D",
-            "observed": "La porte 10,4 interdit la poussée de la réserve tant que le gardien n’occupe pas 5,8."
+            "observed": "La porte orange 10,3 interdit de pousser la réserve tant que le gardien n’occupe pas 5,8."
           },
           {
-            "name": "N5 : quitter le pupitre à pied déverrouille le captif",
+            "name": "N5 : quitter le pupitre à pied libère deux commandes distinctes",
             "status": "passed",
-            "commands": "CDDDDDLLLLLLRRRRRRUCUUUD",
-            "observed": "Le chant du départ emporte ensemble le gardien et son verrou ; la sortie et le chargement referment."
+            "commands": "CCUUUDD",
+            "observed": "Deux pas chantés emportent gardien et caisse. Le bouton orange puis le bouton vert se libèrent ; le chargement et les deux destinations referment."
+          },
+          {
+            "name": "N5 : la collision est un déplacement chanté visible",
+            "status": "passed",
+            "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUU",
+            "observed": "Le Barde monte le monstre 9,9 vers 9,8, au contact de celui en 9,7. Les deux disparaissent ; le captif reste."
+          },
+          {
+            "name": "N5 : le volet fermé protège le moulin d’une visée directe",
+            "status": "passed",
+            "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDCDDDDDDRRRRUUUUURRUUU",
+            "observed": "Le volet rose fermé en 9,6 arrête le pas et la visée depuis le couloir. Le Magicien ne rejoint pas le côté de la caisse avant le transfert."
           },
           {
             "name": "N5 : la seconde presse seule ne décharge pas la réserve",
             "status": "passed",
-            "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCUURRRRRRU",
-            "observed": "L’impulsion sud est vide tant que le transfert occidental n’a pas eu lieu."
+            "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDCDDDDDDRRRRRRRRRRRRU",
+            "observed": "La commande rose ouvre le volet mais sa presse est vide : la caisse reste sur la presse violette en 10,4."
           },
           {
-            "name": "N5 : l’ancien accès de chant sous le moulin est désormais bloqué",
+            "name": "N5 : relâcher trop tôt ferme le couloir sans déplacer la livraison",
             "status": "passed",
-            "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDCCUURRRRUUUUURRRRRUL",
-            "observed": "Le pas vers 11,8 est un mur ; il ne déplace pas la caisse par chant à travers le sol.",
-            "scope": "Régression du contre-parcours local trouvé pendant la conception, pas preuve exhaustive de toutes les routes."
+            "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDUURCDDDDDDRRRRUUURRRRRRRRUDDLDDRUDCUUUU",
+            "observed": "Le volet rose ferme en 9,6. Le Barde ne peut plus atteindre la position qui tire la caisse ; réappuyer rétablit le passage.",
+            "scope": "Erreur récupérable, sans perte de ressource ni minuteur."
           },
           {
-            "name": "N5 : les deux impulsions livrent une caisse dans le bon ordre",
+            "name": "N5 : un monstre sur le cyan ne remplace pas la caisse",
+            "status": "passed",
+            "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUDDDCCDDDDDDDRRRRRRRUUL",
+            "observed": "Attirer le monstre sur le cyan ouvre bien le palier, mais entrer dans la destination orange 9,13 provoque le contact mortel avec 9,12.",
+            "scope": "Contre-branche concrète qui ferme le raccourci de remplacement du dernier poids."
+          },
+          {
+            "name": "N5 : le départ chanté retirerait la livraison finale",
+            "status": "passed",
+            "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDUURCDDDDDDRRRRUUURRRRRRRRUDDLDDRUCUUUDDDDDDDD",
+            "observed": "Un pas de plus emporte la caisse hors du cyan. L’échange de relève du témoin évite ce départ chanté."
+          },
+          {
+            "name": "N5 : deux impulsions et trois poids finaux distincts",
             "status": "passed",
             "pistonLandings": [
               {
                 "x": 9,
-                "y": 6
+                "y": 4
               },
               {
                 "x": 9,
-                "y": 7
+                "y": 5
               }
             ],
-            "captive": {
-              "x": 5,
-              "y": 8
-            },
-            "latch": {
-              "x": 5,
-              "y": 9
-            }
+            "weights": [
+              {
+                "x": 5,
+                "y": 8
+              },
+              {
+                "x": 5,
+                "y": 9
+              },
+              {
+                "x": 9,
+                "y": 12
+              }
+            ]
           }
         ],
-        "passed": 14,
+        "passed": 20,
         "failed": 0
       },
-      "sha256": "820589d93f3ffc4001e697fee30e694b0bb70379442c83125e88b5968652cedb"
+      "sha256": "c3a1a5b09b30d7a2f50bfee33325e1175b6446fb51c8e37d829a8177d79b1abc"
     },
     {
       "script": "reference/author/review-final-ss19.mjs",
       "success": true,
       "result": {
         "game": "SS19",
-        "version": "0.1.0",
+        "version": "0.2.0",
         "status": "passed",
-        "scope": "Revue des niveaux6–8 par rejeux et variantes constructives, avec preuves géométriques spécifiques au dernier niveau. Aucune unicité ou optimalité des solutions n’est annoncée.",
+        "scope": "Revue des niveaux6–8 sans poursuite autonome : rejeux, variantes constructives, causes physiques visibles et preuves géométriques spécifiques au dernier niveau. N6 conserve absolument sa carte et sa route. Aucune unicité ou optimalité des solutions n’est annoncée.",
         "checks": [
           {
             "id": "level6-witness",
@@ -930,17 +1025,17 @@
             "status": "passed",
             "level": 8,
             "metrics": {
-              "actions": 115,
-              "selections": 12,
+              "actions": 97,
+              "selections": 15,
               "warriorPushes": 9,
               "trainPushes": 0,
-              "huntSteps": 12,
-              "monsterHuntMoves": 18,
-              "songs": 1,
+              "huntSteps": 0,
+              "monsterHuntMoves": 0,
+              "songs": 8,
               "groupSongs": 0,
               "songHeroMoves": 0,
               "songStoneMoves": 1,
-              "songMonsterMoves": 0,
+              "songMonsterMoves": 7,
               "supportMoves": 0,
               "swaps": 1,
               "partnerSwaps": 0,
@@ -953,9 +1048,9 @@
               "partnerMoves": 0,
               "stoneMoves": 11,
               "mirrorMoves": 0,
-              "reflections": 1,
+              "reflections": 2,
               "heroReflections": 1,
-              "pistonPushes": 1,
+              "pistonPushes": 2,
               "platformsCreated": 1,
               "monstersRemoved": 0,
               "blocked": 0,
@@ -1044,8 +1139,8 @@
             "pressClosed": true
           },
           {
-            "id": "level7-hunter-can-live",
-            "label": "Une poussée de moins conserve le chasseur derrière son écran et termine aussi",
+            "id": "level7-monster-can-live",
+            "label": "Une poussée de moins conserve le monstre derrière son écran et termine aussi",
             "status": "passed",
             "commands": "DDLUUURRUUUXUURRRDLCLLCDDDDUCCURRRURCUXUULCCLCCULX",
             "metrics": {
@@ -1080,7 +1175,7 @@
               "blocked": 0,
               "deaths": 0
             },
-            "scope": "Le déplacement du miroir, la destruction du relais, sa réouverture et les arrivées restent nécessaires au parcours ; tuer ce chasseur ne l’est pas."
+            "scope": "Le déplacement du miroir, la destruction du relais, sa réouverture et les arrivées restent nécessaires au parcours ; tuer ce monstre ne l’est pas."
           },
           {
             "id": "level8-resource-geometry",
@@ -1096,75 +1191,128 @@
               "x": 17,
               "y": 11
             },
-            "proof": "Les murs bordent l’île, sauf la case d’eau13,17. Aucun acteur n’y est initialement présent et aucun axe de miroir n’y arrive. La marche sur un appui est donc la première entrée possible. Le miroir ne peut être poussé sur aucun axe : chaque poussée rencontre un mur d’appui ou un mur d’arrivée."
+            "proof": "Les murs bordent l’île, sauf la case d’eau13,17. Aucun acteur n’y est initialement présent et aucun axe de miroir n’y arrive. Un échange ne peut y créer un premier occupant. Le miroir ne peut être poussé sur aucun axe : chaque poussée rencontre un mur d’appui ou un mur d’arrivée."
           },
           {
             "id": "level8-two-living-weights",
             "label": "Les deux presses-buts exigent les deux monstres dans l’état final",
             "status": "passed",
-            "liveHunters": 2,
+            "liveMonsters": 2,
             "dryCrates": 0,
             "proof": "Les héros sont tous sur les buts, l’unique caisse est immergée et le miroir est immobile. Les deux boutons distincts ne peuvent donc être maintenus que par les deux monstres vivants."
           },
           {
-            "id": "level8-release-too-early",
-            "label": "Relâcher trop tôt la commande renvoie les deux gardiens au-dessus des retenues",
+            "id": "level8-no-autonomous-motion",
+            "label": "Marcher et changer de héros ne provoquent aucun déplacement de monstre",
             "status": "passed",
-            "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLR",
-            "returnedHunters": [
+            "branch": "UDRLCCC",
+            "monsters": [
               {
-                "x": 6,
+                "x": 10,
                 "y": 3
               },
               {
-                "x": 12,
+                "x": 17,
                 "y": 7
               }
-            ],
-            "remainingHeroAlive": true
+            ]
           },
           {
-            "id": "level8-target-switch",
-            "label": "Changer de sélection ne fait pas marcher les chasseurs ; les pas du Barde les conduisent ensuite aux plaques",
+            "id": "level8-visible-causes",
+            "label": "Chaque déplacement des monstres du témoin appartient à un chant, un reflet ou une presse",
             "status": "passed",
-            "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCRLCCXDLLLLLLCCUDDDDLDDDDRRRRRRRDRDDDDDDLDRRRULLLLLLLLLCCDDDD",
-            "selectionWithoutTick": true,
-            "arrivalAfterBardSteps": 4
+            "causes": {
+              "song": 7,
+              "reflect": 1,
+              "piston": 1
+            },
+            "scope": "Les mouvements visibles sont ceux des effets physiques exécutés ; aucun pas supplémentaire n’est ajouté entre les phases."
           },
           {
-            "id": "level8-wrong-immersion",
-            "label": "Couler la réserve dans le bras optique perd le seul matériau du pont final",
+            "id": "level8-nearest-monster",
+            "label": "Le premier reflet déplace le monstre proche, sans toucher la réserve lointaine",
             "status": "passed",
-            "branch": "DDRLUUURCLLDDDDRRRRRRRDRRDRCCDDDLDDDDDDRRRRRRRRRR",
-            "misplacedSupport": {
+            "branch": "X",
+            "arrival": {
               "x": 13,
               "y": 11
             },
-            "waterComponent": [
-              "13,11",
-              "14,11",
-              "15,11",
-              "16,11"
-            ],
-            "proof": "Un appui se déplace uniquement entre cases d’eau. Ce bras est séparé de l’entrée13,17 par du sol ou des murs, donc aucun chant ne peut réparer cette immersion."
+            "reserve": {
+              "x": 17,
+              "y": 5
+            }
           },
           {
-            "id": "level8-direct-reflection-variant",
-            "label": "L’extraction par un reflet initial conserve toutes les contraintes de ressources",
+            "id": "level8-repeat-reflection",
+            "label": "Un reflet répété avant la livraison renvoie le monstre sur son socle",
             "status": "passed",
-            "commands": "XDDRLUUURCCRLCDDDLDDDDDDRRRRRRRRDDDDDLDRRRULLLLLLLLLCCDDDDDCCLLDDDDDDDDDDDDDRRRRRRRRCCDRRRRRRRRRRR",
+            "branch": "XX",
+            "scope": "Le monstre reste la première cible ; deux reflets ne remplacent pas sa mise hors de l’axe."
+          },
+          {
+            "id": "level8-press-before-delivery",
+            "label": "Fermer la presse avant le premier reflet bloque la livraison et allume l’avertissement",
+            "status": "passed",
+            "branch": "DDDDLLX",
+            "redMirrorIndices": [
+              0
+            ],
+            "lastActionRefused": true
+          },
+          {
+            "id": "level8-reopen-empty-press",
+            "label": "Après la livraison, la presse encore fermée continue à bloquer la réserve",
+            "status": "passed",
+            "branch": "XDDDDLLX",
+            "lastActionRefused": true,
+            "scope": "Le monstre est déjà hors du rayon, mais la fermeture matérielle doit encore être supprimée."
+          },
+          {
+            "id": "level8-song-lock",
+            "label": "La porte distincte retient le gardien ouest lorsque le Barde quitte son poste",
+            "status": "passed",
+            "branch": "XDDDDLLRCCLLLLDDDD",
+            "monster": {
+              "x": 6,
+              "y": 6
+            },
+            "blockingDoor": {
+              "x": 6,
+              "y": 7
+            },
+            "scope": "Le bouton et la porte sont deux cases différentes. Le prochain chant est retenu par la porte fermée."
+          },
+          {
+            "id": "level8-wrong-immersion",
+            "label": "Couler la réserve à côté du sas perd le seul matériau du pont final",
+            "status": "passed",
+            "branch": "XDDDDLLRCCLLLLDDDCCRRRRRRRRRURCCUUUUURRRRRRR",
+            "misplacedSupport": {
+              "x": 12,
+              "y": 11
+            },
+            "waterComponent": [
+              "12,11"
+            ],
+            "proof": "Un appui ne glisse qu’entre cases d’eau. Cette case est séparée de l’entrée13,17 par du sol et des murs ; le chant ne peut donc réparer cette immersion."
+          },
+          {
+            "id": "level8-reflected-reserve-variant",
+            "label": "Un second reflet peut extraire la réserve sans utiliser de transposition",
+            "status": "passed",
+            "commands": "XDDDDLLRCCLLLLDDDXDRDDDRRRRLCUUUUURRRRRRDDDDDLDRRRCCDDDCCDDDDDDRRRRRRRRCCRR",
             "metrics": {
-              "actions": 98,
+              "actions": 75,
               "selections": 9,
               "warriorPushes": 8,
               "trainPushes": 0,
-              "huntSteps": 9,
-              "monsterHuntMoves": 14,
-              "songs": 1,
+              "huntSteps": 0,
+              "monsterHuntMoves": 0,
+              "songs": 8,
               "groupSongs": 0,
               "songHeroMoves": 0,
               "songStoneMoves": 1,
-              "songMonsterMoves": 0,
+              "songMonsterMoves": 7,
               "supportMoves": 0,
               "swaps": 0,
               "partnerSwaps": 0,
@@ -1177,31 +1325,72 @@
               "partnerMoves": 0,
               "stoneMoves": 11,
               "mirrorMoves": 0,
-              "reflections": 1,
+              "reflections": 2,
               "heroReflections": 0,
+              "pistonPushes": 2,
+              "platformsCreated": 1,
+              "monstersRemoved": 0,
+              "blocked": 0,
+              "deaths": 0
+            },
+            "scope": "Les deux dispositifs de gardiens, la livraison de réserve et le pont sont conservés ; la visée coudée du témoin est une possibilité et non une obligation."
+          },
+          {
+            "id": "level8-sung-delivery-variant",
+            "label": "Le chant peut aussi déposer le gardien oriental hors du rayon",
+            "status": "passed",
+            "commands": "XCCLLLLDDDDRRRRRRRDLCCDRRRRURRRRRURCLCCXDLLLLLLCCUUURRRRRDDDDDDDLDRRRCCDDDDDLCCDDDDDRRRRRCCRR",
+            "metrics": {
+              "actions": 93,
+              "selections": 15,
+              "warriorPushes": 9,
+              "trainPushes": 0,
+              "huntSteps": 0,
+              "monsterHuntMoves": 0,
+              "songs": 9,
+              "groupSongs": 0,
+              "songHeroMoves": 0,
+              "songStoneMoves": 1,
+              "songMonsterMoves": 8,
+              "supportMoves": 0,
+              "swaps": 1,
+              "partnerSwaps": 0,
+              "stoneSwaps": 1,
+              "monsterSwaps": 0,
+              "bentSwaps": 1,
+              "multiMirrorSwaps": 0,
+              "swapReflections": 1,
+              "swapLoops": 0,
+              "partnerMoves": 0,
+              "stoneMoves": 11,
+              "mirrorMoves": 0,
+              "reflections": 2,
+              "heroReflections": 1,
               "pistonPushes": 1,
               "platformsCreated": 1,
               "monstersRemoved": 0,
               "blocked": 0,
               "deaths": 0
             },
-            "scope": "La visée coudée et l’ordre de récupération sont illustrés par le témoin mais ne sont pas revendiqués comme des obligations universelles."
+            "scope": "La presse verte reste une solution visible, sans être imposée : un chant depuis11,9 puis un dégagement latéral remplacent sa livraison. Les deux gardiens vivants et la caisse immergée restent utilisés."
           }
         ],
         "totals": {
-          "checks": 15,
-          "passed": 15
+          "checks": 21,
+          "passed": 21
         }
       },
-      "sha256": "f0e9ca583635f8ba86b2180e7332ec2d1c6c7746233ba9d26403c6f4320a6288"
+      "sha256": "0db8ad63499ccafe86661e0393e45b0787eadf64ae6725845fb0cbbd43d5d14d"
     },
     {
       "script": "reference/author/independent-review-ss19.mjs",
       "success": true,
       "result": {
         "status": "passed",
+        "version": "0.2.0",
         "levels": [
           1,
+          2,
           3,
           4,
           5,
@@ -1209,9 +1398,9 @@
           7,
           8
         ],
-        "checks": 29
+        "checks": 37
       },
-      "sha256": "613f6896f8ef63e1f7a727513aa4a89f6c6538940e013da99103f32e4469afdd"
+      "sha256": "80983c54def80f0e84898461f5428a33b6ee92bbb233e1c25e991f1dc26b3dc4"
     }
   ],
   "limitations": [

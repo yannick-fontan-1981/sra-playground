@@ -1,0 +1,26 @@
+{
+  "game": "SS19",
+  "version": "0.2.0",
+  "baselineCommit": "edc8db52c4891d85c14b5ef484d0fdf7a9c94a42",
+  "checks": [
+    {
+      "level": 3,
+      "specUnchanged": true,
+      "commandsUnchanged": true,
+      "specSha256": "cf7292feac4361c1ad364cf851f8c9c587064b8cfdb131be59f47ff9ecd2cb96"
+    },
+    {
+      "level": 6,
+      "specUnchanged": true,
+      "commandsUnchanged": true,
+      "specSha256": "0b385a684d4c0b05d5bb8e314670f47a291ec18a252b181ad0d78e88fa0f1c97"
+    },
+    {
+      "level": 7,
+      "specUnchanged": true,
+      "commandsUnchanged": true,
+      "specSha256": "6eb09440842ecffd249343e5d9ae3984dadc64877cdbddce0505b6c457c136e7"
+    }
+  ],
+  "success": true
+}

@@ -2,7 +2,7 @@ import type { HeroKind, Observation, Point } from './core.js';
 
 type LessonObservation = Pick<Observation, 'level' | 'frame' | 'frames' | 'levelsCompleted'>;
 export const TUTORIAL_LEVEL = 1;
-export const lessonIds = ['select','move','warrior-push','train-push','hunt','hunt-block','hunt-target','partner-push','mirror-motion','wizard-swap','wizard-partner','wizard-bend','relay-weight','bard-song','partner-song','selective-song','diagonal-song','wall-song','release-by-swap','water-support','support-slide','support-anchor','cross-support','mirror','hero-reflection','crate-reflection','button','gate','press','monster','goals'] as const;
+export const lessonIds = ['select','move','warrior-push','train-push','monster-still','partner-push','mirror-motion','wizard-swap','wizard-partner','wizard-bend','relay-weight','bard-song','partner-song','selective-song','diagonal-song','wall-song','monster-song','release-by-swap','water-support','support-slide','support-anchor','cross-support','mirror','hero-reflection','crate-reflection','button','gate','press','monster-press','monster','goals'] as const;
 export type GalleryLesson = typeof lessonIds[number];
 
 type VisibleHero=Point & {kind:HeroKind;selected:boolean};
@@ -84,27 +84,6 @@ function warriorPush(before:LessonObservation,after:LessonObservation,action:num
   let count=0;for(let n=1;n<=20;n++){const at={x:view.hero.x+view.dx*n,y:view.hero.y+view.dy*n};if(!visiblePieces(before.frame).some(p=>p.kind!=='support'&&sameCell(p,at))&&!visibleHeroes(before.frame).some(h=>sameCell(h,at)))break;count++;}
   return piece||partner?{partner:!!partner,mirror:piece?.kind==='mirror',count}:null;
 }
-/** One chase step is identified after the player's first displayed movement.
- * This uses only sprites and gate pixels, never semantic state or phase labels. */
-function huntingView(before:LessonObservation,after:LessonObservation,action:number):{moved:boolean;blocked:boolean} {
-  if(action<1||action>4)return {moved:false,blocked:false};
-  const frames=sameLevelFrames(before,after),early=frames[2],final=frames.at(-1);
-  if(!early||!final)return {moved:false,blocked:false};
-  const hero=visibleHeroes(early).find(h=>h.selected);if(!hero)return {moved:false,blocked:false};
-  const monsters=visiblePieces(early).filter(p=>p.kind==='monster'),later=visiblePieces(final).filter(p=>p.kind==='monster');
-  let moved=false,blocked=false;
-  for(const p of monsters){
-    const dx=hero.x-p.x,dy=hero.y-p.y;
-    const to={x:p.x+(Math.abs(dx)>Math.abs(dy)?Math.sign(dx):0),y:p.y+(Math.abs(dx)>Math.abs(dy)?0:Math.sign(dy))};
-    if(sameCell(p,to))continue;
-    const stationary=later.some(q=>sameCell(p,q));
-    const oldGate=gateCells(early).get(p.y*20+p.x),newGate=gateCells(final).get(p.y*20+p.x);
-    if(frames.length>=6&&monsters.length===later.length&&!stationary&&later.some(q=>sameCell(q,to))&&newGate!==5&&oldGate!==5)moved=true;
-    const center=early[3+3*to.y]?.[3+3*to.x];
-    if(stationary&&(center===4||center===9||gateCells(early).get(to.y*20+to.x)===5))blocked=true;
-  }
-  return {moved,blocked};
-}
 function unoccupiedButtons(frame:number[][]):Point[] {
   const cells:Point[]=[];
   for(let y=0;y<20;y++)for(let x=0;x<20;x++){
@@ -171,7 +150,7 @@ function songView(before:LessonObservation,after:LessonObservation,action:number
 /** A press is inferred from a newly exposed closed gate at a displaced actor's
  * old cell, after the first displayed movement has ended. Combat disappearance,
  * hydraulic withdrawal and the initial voluntary movement are not a press. */
-function pressedActor(before:LessonObservation,after:LessonObservation):boolean {
+function pressedActor(before:LessonObservation,after:LessonObservation,kind?:'monster'):boolean {
   const frames=sameLevelFrames(before,after),early=frames[2];
   if(!early||frames.length<6)return false;
   const oldActors=[...visibleHeroes(early),...visiblePieces(early).filter(p=>p.kind!=='support')];
@@ -179,6 +158,7 @@ function pressedActor(before:LessonObservation,after:LessonObservation):boolean 
   for(const frame of frames.slice(3)){
     const closed=gateCells(frame),actors=[...visibleHeroes(frame),...visiblePieces(frame)];
     for(const from of oldActors){
+      if(kind&&from.kind!==kind)continue;
       const cell=from.y*20+from.x;
       if(closed.get(cell)!==5||oldGates.get(cell)===5)continue;
       if(from.kind==='monster'&&frames.length===6){
@@ -209,9 +189,11 @@ export function observeLesson(learned:Set<GalleryLesson>,before:LessonObservatio
   const pushed=warriorPush(before,after,action);
   if(pushed)learned.add('warrior-push');
   if(pushed&&pushed.count>1)learned.add('train-push');
-  const hunt=huntingView(before,after,action);
-  if(hunt.moved)learned.add('hunt');if(hunt.blocked)learned.add('hunt-block');
-  if(action===6&&selected&&newSelected&&selected.kind!==newSelected.kind&&initial.some(p=>p.kind==='monster'))learned.add('hunt-target');
+  const initialMonsters=initial.filter(p=>p.kind==='monster');
+  if(view&&!swap&&initialMonsters.length&&sameLevelFrames(before,after).every(frame=>{
+    const pieces=visiblePieces(frame);
+    return initialMonsters.every(p=>pieces.some(q=>q.kind==='monster'&&sameCell(p,q)));
+  }))learned.add('monster-still');
   if(pushed?.partner)learned.add('partner-push');
   if(pushed?.mirror)learned.add('mirror-motion');
   if(view&&initial.some(p=>p.kind==='support'&&sameCell(p,view.later)))learned.add('cross-support');
@@ -227,6 +209,7 @@ export function observeLesson(learned:Set<GalleryLesson>,before:LessonObservatio
     }
   }
   if(song?.moved.length||song?.escorted)learned.add('bard-song');
+  if(song?.moved.some(p=>p.kind==='monster'))learned.add('monster-song');
   if(song?.escorted)learned.add('partner-song');
   if(song?.moved.length&&song.held.length)learned.add('selective-song');
   if(song?.slid)learned.add('support-slide');
@@ -256,6 +239,7 @@ export function observeLesson(learned:Set<GalleryLesson>,before:LessonObservatio
   }
   if(unoccupiedButtons(before.frame).some(p=>[...later,...currentHeroes].some(q=>q.kind!=='support'&&sameCell(p,q))))learned.add('button');
   if(pressedActor(before,after)){learned.add('press');learned.add('gate');}
+  if(pressedActor(before,after,'monster'))learned.add('monster-press');
   if(visiblePieces(final).filter(p=>p.kind==='monster').length<initial.filter(p=>p.kind==='monster').length)learned.add('monster');
   if(after.levelsCompleted>before.levelsCompleted)learned.add('goals');
 }
@@ -265,9 +249,9 @@ const hints:Record<GalleryLesson,string>={
   "move": "Le point blanc désigne le héros sélectionné. Une même flèche peut marcher, pousser une file, échanger deux places ou entraîner un groupe.",
   "warrior-push": "Le Guerrier pousse toute une file contiguë : caisses, monstres, miroirs et partenaires. Prépare la place à son extrémité ; un obstacle bloque toute la poussée.",
   "train-push": "Une seule flèche peut pousser plusieurs occupants alignés. Vérifie le dernier : si sa destination est bloquée, personne ne bouge. Une caisse envoyée dans l’eau devient un appui.",
-  "hunt": "Après un geste effectif, chaque chasseur tente un pas vers le héros sélectionné. Compare les deux distances : il choisit la plus grande ; en cas d’égalité, il choisit la verticale.",
-  "hunt-block": "Le chasseur ne cherche aucun détour. Si son axe choisi rencontre un mur, une porte, une pièce ou l’eau nue, il reste en place, même si un autre chemin est libre.",
-  "hunt-target": "Changer de héros change la cible du prochain pas de chasse, sans faire avancer les monstres. Un héros éloigné peut ainsi les attirer ; un autre peut les retenir contre une paroi.",
+  "monster-still": "Les monstres restent sur leur case pendant tes déplacements. Ils bougent uniquement lorsqu’un pouvoir, un reflet ou une presse les déplace : repère cette cause sur la grille.",
+  "monster-song": "Le carré pointillé du Barde montre sa portée. Si un monstre est dedans, le chant peut le déplacer dans le sens du pas. Prépare sa case d’arrivée et garde tes partenaires à distance.",
+  "monster-press": "La fermeture d’une presse sur la case du monstre le pousse dans la direction indiquée. Ouvrir une porte ne le fait pas avancer. Bouton de commande, presse et destination sont des cases distinctes.",
   "partner-push": "Pousser le Magicien ne lance pas son sort ; pousser le Barde ne déclenche pas son chant. Déplace un partenaire de cette façon pour le dégager sans emporter son groupe.",
   "mirror-motion": "Le Guerrier peut déplacer un miroir sans changer son orientation. Ses deux axes et les arrivées prévues se déplacent avec lui ; le Barde ne fait pas chanter les miroirs.",
   "wizard-swap": "Une flèche du Magicien échange sa place avec la première caisse, le premier monstre ou le premier partenaire rencontré. Les cibles plus loin attendent. Sans cible, il tente un pas.",
@@ -290,12 +274,12 @@ const hints:Record<GalleryLesson,string>={
   "button": "Le plus rose sur fond gris est un bouton. Son centre donne le circuit. Héros, caisse, monstre et miroir peuvent servir de poids ; tous les boutons d’un circuit doivent être occupés.",
   "gate": "Les marques colorées relient les commandes aux portes. Certaines portes se ferment à l’appui, d’autres au relâchement : observe leur centre noir ou gris.",
   "press": "Une porte qui se ferme pousse dans le sens de son repère. Elle peut déplacer une caisse, un miroir ou un héros. Z annule le déplacement et toute sa cascade.",
-  "monster": "Les contacts orthogonaux se résolvent avant et après la chasse ; même un héros inactif peut mourir. Deux monstres voisins s’éliminent simultanément. Une diagonale peut devenir dangereuse après leur pas.",
+  "monster": "Un monstre reste dangereux même immobile : un contact par un côté tue un héros, y compris inactif. Deux monstres voisins s’éliminent simultanément. Transporte-les à distance sûre avec les pouvoirs et les dispositifs.",
   "goals": "Occupe les trois contours jaunes ensemble. Les premiers arrivés restent sélectionnables. Prépare les remplaçants des poids et évite de déplacer un héros arrivé avec un chant voisin."
 };
 export function lessonPrompt(learned: ReadonlySet<GalleryLesson>): string {
   const next = lessonIds.find(id => !learned.has(id));
-  return next ? hints[next] : 'Les trente et une découvertes sont acquises. Choisis la cible des chasseurs, conserve les poids utiles et prépare les derniers départs.';
+  return next ? hints[next] : 'Les trente et une découvertes sont acquises. Prépare les transports des gardiens, conserve les poids utiles et organise les derniers départs.';
 }
 
 export function heroSelection(frame:number[][],kind?:HeroKind):Point|undefined {
@@ -310,6 +294,7 @@ export function actionFeedback(before: LessonObservation, next: LessonObservatio
   const selected=visibleHeroes(before.frame).find(h=>h.selected),final=visibleHeroes(actionFrame(before,next)).find(h=>h.kind===selected?.kind);
   const changed=selected&&!sameCell(selected,final),song=songView(before,next,action),swap=wizardSwap(before,next,action);
   const pushed=warriorPush(before,next,action);
+  const monsterPress=pressedActor(before,next,'monster');
   return next.state==='GAME_OVER'?'Un personnage a été perdu. Z annule toute la séquence ; R recommence la salle.'
     :next.levelsCompleted>before.levelsCompleted?'Les trois destinations sont occupées. Salle terminée !'
     :action===6?'Personnage sélectionné. Le décor et les monstres n’avancent pas.'
@@ -317,12 +302,15 @@ export function actionFeedback(before: LessonObservation, next: LessonObservatio
     :mirrorInterference(before,next,action)?'Reflet bloqué : les miroirs responsables clignotent en rouge. Vérifie leurs axes et les arrivées.'
     :action===5?'Reflet bloqué ou aucun occupant devant les faces blanches. Vérifie les arrivées et tous les miroirs.'
     :returnedRay(before,next,action)?'Le rayon revient sur le Magicien : il clignote sur place, sans déplacer le monde.'
+    :monsterPress?'Commande actionnée : la presse a poussé le monstre dans le sens de son repère.'
+    :pressedActor(before,next)?'Commande actionnée : une presse s’est refermée et a déplacé son occupant.'
     :swap?.bent?'Échange par un rayon dévié : le Magicien et sa première cible ont changé de place.'
     :swap?.partner?'Le Magicien échange sa place avec un partenaire, sans déclencher sa capacité.'
     :swap?'Transposition : le Magicien et la première cible échangent leurs places.'
     :pushed?.partner?'Le Guerrier déplace un partenaire sans déclencher sa capacité.'
     :pushed?.mirror?'Le miroir change de position ; son orientation reste la même.'
     :pushed?`File poussée : ${pushed.count} occupant(s), sans activer les pouvoirs des partenaires.`
+    :song?.moved.some(p=>p.kind==='monster')?'Le chant déplace le monstre dans le sens du pas du Barde. Il reste ensuite sur sa case.'
     :song?.escorted?'Le chant entraîne aussi un partenaire, sans déclencher sa capacité.'
     :song?.moved.length?`Le chant entraîne ${song.moved.length} pièce(s). ${song.held.length?'Les pièces retenues restent en place.':''}`
     :!changed?selected?.kind==='warrior'?'La poussée est bloquée. Il faut une place à l’extrémité de toute la file.':selected?.kind==='bard'?'Le pas est refusé. Vérifie la prochaine case du Barde et les appuis des héros et des miroirs.':'Aucun échange ni pas possible. Vérifie la première cible, les faces des miroirs et les arrivées.'

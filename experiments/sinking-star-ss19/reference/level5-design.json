@@ -4,21 +4,21 @@
     "title": "Le troisième doit rester vivant",
     "rows": [
       "####################",
-      "####################",
-      "#########.W.########",
-      "#########.og########",
-      "#########...########",
-      "########m#.#m###.###",
-      "###.####.....###Z###",
-      "###.#####.######.###",
-      "###.#.#.#.##.......#",
-      "###.#.#............#",
-      "###.#m#............#",
+      "##########W.########",
+      "##########og########",
+      "##########.#########",
+      "#########..#########",
+      "#########.##########",
+      "###.#####.##########",
+      "###.#####m##########",
+      "###.#.###.##########",
+      "###.#.#..m.........#",
+      "###.#m#.........Z..#",
       "###B#.#............#",
       "###.#o#............#",
-      "###.###............#",
+      "###.###..g.........#",
       "###................#",
-      "###..............g.#",
+      "###................#",
       "###g###............#",
       "####################",
       "####################",
@@ -36,11 +36,21 @@
         "color": 12
       },
       {
+        "id": "verrou",
+        "buttons": [
+          {
+            "x": 5,
+            "y": 9
+          }
+        ],
+        "color": 14
+      },
+      {
         "id": "presse-ouest",
         "buttons": [
           {
-            "x": 16,
-            "y": 8
+            "x": 15,
+            "y": 10
           }
         ],
         "color": 15
@@ -49,8 +59,8 @@
         "id": "presse-sud",
         "buttons": [
           {
-            "x": 16,
-            "y": 12
+            "x": 15,
+            "y": 13
           }
         ],
         "color": 6
@@ -69,10 +79,28 @@
     "gates": [
       {
         "at": {
-          "x": 17,
-          "y": 15
+          "x": 9,
+          "y": 13
         },
         "circuit": "captif",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 3
+        },
+        "circuit": "captif",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 16
+        },
+        "circuit": "verrou",
         "direction": "N",
         "closedWhen": "released"
       },
@@ -81,26 +109,8 @@
           "x": 10,
           "y": 4
         },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "released"
-      },
-      {
-        "at": {
-          "x": 8,
-          "y": 6
-        },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 11,
-          "y": 6
-        },
-        "circuit": "captif",
-        "direction": "E",
+        "circuit": "presse-ouest",
+        "direction": "W",
         "closedWhen": "pressed"
       },
       {
@@ -108,26 +118,8 @@
           "x": 9,
           "y": 4
         },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 11,
-          "y": 4
-        },
-        "circuit": "captif",
-        "direction": "N",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 10,
-          "y": 6
-        },
-        "circuit": "presse-ouest",
-        "direction": "W",
+        "circuit": "presse-sud",
+        "direction": "S",
         "closedWhen": "pressed"
       },
       {
@@ -137,81 +129,27 @@
         },
         "circuit": "presse-sud",
         "direction": "S",
-        "closedWhen": "pressed"
+        "closedWhen": "released"
       },
       {
         "at": {
           "x": 11,
-          "y": 3
+          "y": 2
         },
         "circuit": "meule",
-        "direction": "S",
+        "direction": "N",
         "closedWhen": "released"
       }
     ]
   },
-  "commands": "CDDDDDLLLLLLRRRRRRUCUUUCCDDDDLLLLLLLLLLLLLUCDRRRRCCDDDDDDRRRRRDRRCLLLLDCDDDUCUUUUUURRRRRRURDDDDDLURCCDDLDDDDDCUUULLLLLLLLUUURUUURCCRDDDDRRRRRRR",
+  "commands": "CCUUUCCDDDDLLLLLLLLLLLLLUCRRRRUURRUUCDDUURCDDDDDDRRRRUUURRRRRRRRUDDLDDRUCUUUDDDDDDDCCDRLDRUUUUUURRRRRRRCDLLLLLLLLLLLLLDCDCDDDDLLLLLLLL",
   "actions": [
     {
       "id": 6,
       "data": {
         "x": 51,
-        "y": 21
+        "y": 33
       }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
     },
     {
       "id": 6,
@@ -233,7 +171,7 @@
       "id": 6,
       "data": {
         "x": 33,
-        "y": 9
+        "y": 6
       }
     },
     {
@@ -305,9 +243,6 @@
       }
     },
     {
-      "id": 2
-    },
-    {
       "id": 4
     },
     {
@@ -318,13 +253,46 @@
     },
     {
       "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
     },
     {
       "id": 6,
       "data": {
         "x": 33,
-        "y": 9
+        "y": 6
       }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
     },
     {
       "id": 6,
@@ -364,10 +332,160 @@
       "id": 4
     },
     {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
       "id": 4
     },
     {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
       "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 6
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
     },
     {
       "id": 4
@@ -378,9 +496,39 @@
     {
       "id": 6,
       "data": {
-        "x": 24,
-        "y": 48
+        "x": 51,
+        "y": 45
       }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
     },
     {
       "id": 3
@@ -400,129 +548,9 @@
     {
       "id": 6,
       "data": {
-        "x": 33,
-        "y": 9
+        "x": 36,
+        "y": 6
       }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 33,
-        "y": 48
-      }
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 12,
-        "y": 51
-      }
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 33,
-        "y": 15
-      }
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 2
     },
     {
       "id": 2
@@ -531,84 +559,10 @@
       "id": 6,
       "data": {
         "x": 54,
-        "y": 39
+        "y": 30
       }
     },
     {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 1
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 12,
-        "y": 51
-      }
-    },
-    {
-      "id": 6,
-      "data": {
-        "x": 30,
-        "y": 36
-      }
-    },
-    {
-      "id": 4
-    },
-    {
       "id": 2
     },
     {
@@ -621,25 +575,28 @@
       "id": 2
     },
     {
-      "id": 4
+      "id": 3
     },
     {
-      "id": 4
+      "id": 3
     },
     {
-      "id": 4
+      "id": 3
     },
     {
-      "id": 4
+      "id": 3
     },
     {
-      "id": 4
+      "id": 3
     },
     {
-      "id": 4
+      "id": 3
     },
     {
-      "id": 4
+      "id": 3
+    },
+    {
+      "id": 3
     }
   ],
   "source": {
@@ -648,27 +605,27 @@
     "label": "Adaptation · Heroes 3 · énigmes 13–14 et Heroes and Light · énigme 1",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-13",
     "puzzle": 13,
-    "objective": "Conserver un chasseur comme poids, éliminer la paire dangereuse, extraire la Barde sans rouvrir sa prison et charger deux presses perpendiculaires.",
+    "objective": "Conserver un gardien et sa caisse comme poids distincts, provoquer une collision par chant, puis livrer la dernière caisse avec deux presses et une relève du Barde.",
     "secondary": {
       "label": "Heroes and Light · deux presses changent l’axe de livraison",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1"
     }
   },
   "metrics": {
-    "actions": 143,
-    "selections": 15,
-    "warriorPushes": 8,
+    "actions": 134,
+    "selections": 13,
+    "warriorPushes": 2,
     "trainPushes": 0,
-    "huntSteps": 5,
-    "monsterHuntMoves": 5,
-    "songs": 3,
+    "huntSteps": 0,
+    "monsterHuntMoves": 0,
+    "songs": 11,
     "groupSongs": 2,
     "songHeroMoves": 0,
-    "songStoneMoves": 3,
-    "songMonsterMoves": 2,
+    "songStoneMoves": 10,
+    "songMonsterMoves": 3,
     "supportMoves": 0,
-    "swaps": 1,
-    "partnerSwaps": 1,
+    "swaps": 2,
+    "partnerSwaps": 2,
     "stoneSwaps": 0,
     "monsterSwaps": 0,
     "bentSwaps": 0,
@@ -676,7 +633,7 @@
     "swapReflections": 0,
     "swapLoops": 0,
     "partnerMoves": 0,
-    "stoneMoves": 13,
+    "stoneMoves": 14,
     "mirrorMoves": 0,
     "reflections": 0,
     "heroReflections": 0,
@@ -688,124 +645,14 @@
   },
   "stages": [
     {
-      "label": "Le Magicien descend pour amener les deux chasseurs dans la rangée de l’arène.",
-      "turn": 12,
+      "label": "Trois chants montent le captif sur le bouton orange et sa caisse sur le bouton vert : le chargement et deux destinations sont ouverts.",
+      "turn": 5,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
             "x": 10,
-            "y": 2
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 10,
-            "y": 11
-          }
-        },
-        {
-          "kind": "bard",
-          "at": {
-            "x": 3,
-            "y": 11
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 10,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 12
-        }
-      ],
-      "supports": [],
-      "mirrors": [],
-      "monsters": [
-        {
-          "x": 8,
-          "y": 6
-        },
-        {
-          "x": 12,
-          "y": 6
-        },
-        {
-          "x": 5,
-          "y": 10
-        }
-      ],
-      "circuits": {
-        "captif": false,
-        "presse-ouest": false,
-        "presse-sud": false,
-        "meule": false
-      }
-    },
-    {
-      "label": "Le Magicien se décale à droite : la butée retient le premier chasseur et le second le rejoint.",
-      "turn": 19,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 10,
-            "y": 2
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 16,
-            "y": 10
-          }
-        },
-        {
-          "kind": "bard",
-          "at": {
-            "x": 3,
-            "y": 11
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 10,
-          "y": 3
-        },
-        {
-          "x": 5,
-          "y": 12
-        }
-      ],
-      "supports": [],
-      "mirrors": [],
-      "monsters": [
-        {
-          "x": 5,
-          "y": 10
-        }
-      ],
-      "circuits": {
-        "captif": false,
-        "presse-ouest": false,
-        "presse-sud": false,
-        "meule": false
-      }
-    },
-    {
-      "label": "Le chant monte le dernier gardien sur son bouton puis le bloque avec la caisse ; la trappe de chargement ouvre, les accès latéraux ferment.",
-      "turn": 23,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 10,
-            "y": 2
+            "y": 1
           }
         },
         {
@@ -826,7 +673,7 @@
       "stones": [
         {
           "x": 10,
-          "y": 3
+          "y": 2
         },
         {
           "x": 5,
@@ -837,26 +684,35 @@
       "mirrors": [],
       "monsters": [
         {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
           "x": 5,
           "y": 8
         }
       ],
       "circuits": {
         "captif": true,
+        "verrou": true,
         "presse-ouest": false,
         "presse-sud": false,
         "meule": false
       }
     },
     {
-      "label": "Le Magicien extrait la Barde de son étroit pupitre : aucun pas chanté ne déverrouille le captif.",
-      "turn": 43,
+      "label": "Le Magicien extrait le Barde de son pupitre par échange ; le gardien et son verrou restent en place.",
+      "turn": 25,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
             "x": 10,
-            "y": 2
+            "y": 1
           }
         },
         {
@@ -877,7 +733,7 @@
       "stones": [
         {
           "x": 10,
-          "y": 3
+          "y": 2
         },
         {
           "x": 5,
@@ -888,98 +744,56 @@
       "mirrors": [],
       "monsters": [
         {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
           "x": 5,
           "y": 8
         }
       ],
       "circuits": {
         "captif": true,
+        "verrou": true,
         "presse-ouest": false,
         "presse-sud": false,
         "meule": false
       }
     },
     {
-      "label": "La caisse de la chambre haute arrive sur la première presse, au-dessus d’un mur infranchissable.",
-      "turn": 75,
+      "label": "Un chant vers le nord rapproche les deux monstres du couloir : ils se rencontrent et disparaissent ensemble.",
+      "turn": 36,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
             "x": 10,
-            "y": 5
+            "y": 1
           }
         },
         {
           "kind": "wizard",
-          "at": {
-            "x": 10,
-            "y": 15
-          }
-        },
-        {
-          "kind": "bard",
           "at": {
             "x": 3,
-            "y": 16
-          }
-        }
-      ],
-      "stones": [
-        {
-          "x": 10,
-          "y": 6
-        },
-        {
-          "x": 5,
-          "y": 9
-        }
-      ],
-      "supports": [],
-      "mirrors": [],
-      "monsters": [
-        {
-          "x": 5,
-          "y": 8
-        }
-      ],
-      "circuits": {
-        "captif": true,
-        "presse-ouest": false,
-        "presse-sud": false,
-        "meule": false
-      }
-    },
-    {
-      "label": "La presse violette dépose la caisse dans le coude occidental.",
-      "turn": 90,
-      "heroes": [
-        {
-          "kind": "warrior",
-          "at": {
-            "x": 10,
-            "y": 4
-          }
-        },
-        {
-          "kind": "wizard",
-          "at": {
-            "x": 16,
             "y": 8
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 3,
-            "y": 16
+            "x": 9,
+            "y": 10
           }
         }
       ],
       "stones": [
         {
-          "x": 9,
-          "y": 6
+          "x": 10,
+          "y": 2
         },
         {
           "x": 5,
@@ -996,41 +810,146 @@
       ],
       "circuits": {
         "captif": true,
+        "verrou": true,
+        "presse-ouest": false,
+        "presse-sud": false,
+        "meule": false
+      }
+    },
+    {
+      "label": "Le Guerrier charge la caisse sur la presse violette.",
+      "turn": 39,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "circuits": {
+        "captif": true,
+        "verrou": true,
+        "presse-ouest": false,
+        "presse-sud": false,
+        "meule": false
+      }
+    },
+    {
+      "label": "La commande violette ferme la presse ouest : la caisse passe de 10,4 à 9,4.",
+      "turn": 65,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 1
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 5,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "circuits": {
+        "captif": true,
+        "verrou": true,
         "presse-ouest": true,
         "presse-sud": false,
         "meule": false
       }
     },
     {
-      "label": "La seconde presse transforme le transfert horizontal en livraison vers le sud.",
-      "turn": 98,
+      "label": "La commande rose ferme la presse sud et ouvre le volet de sortie : la caisse arrive en 9,5. Le Magicien reste sur la commande.",
+      "turn": 72,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 10,
-            "y": 4
+            "x": 11,
+            "y": 1
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 16,
-            "y": 12
+            "x": 15,
+            "y": 13
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 3,
-            "y": 16
+            "x": 9,
+            "y": 10
           }
         }
       ],
       "stones": [
         {
           "x": 9,
-          "y": 7
+          "y": 5
         },
         {
           "x": 5,
@@ -1047,34 +966,35 @@
       ],
       "circuits": {
         "captif": true,
+        "verrou": true,
         "presse-ouest": false,
         "presse-sud": true,
         "meule": false
       }
     },
     {
-      "label": "Le Guerrier conduit la caisse sortie du moulin jusqu’à la commande cyan.",
-      "turn": 109,
+      "label": "Sept pas chantés tirent la caisse le long du couloir ouvert jusqu’au bouton cyan en 9,12.",
+      "turn": 83,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
-            "y": 11
+            "x": 11,
+            "y": 1
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 17,
-            "y": 12
+            "x": 15,
+            "y": 13
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 3,
-            "y": 16
+            "x": 9,
+            "y": 14
           }
         }
       ],
@@ -1098,27 +1018,80 @@
       ],
       "circuits": {
         "captif": true,
+        "verrou": true,
+        "presse-ouest": false,
+        "presse-sud": true,
+        "meule": true
+      }
+    },
+    {
+      "label": "Le Magicien libère sa commande, rejoint la ligne du Barde et échange leurs places : aucun chant de départ ne retire la caisse cyan.",
+      "turn": 88,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 1
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "circuits": {
+        "captif": true,
+        "verrou": true,
         "presse-ouest": false,
         "presse-sud": false,
         "meule": true
       }
     },
     {
-      "label": "La caisse commande la chambre haute ; le gardien vivant maintient la sortie orientale.",
-      "turn": 143,
+      "label": "Le Barde rejoint la destination verte, maintenue par la caisse du captif.",
+      "turn": 119,
       "heroes": [
         {
           "kind": "warrior",
           "at": {
-            "x": 17,
-            "y": 15
+            "x": 11,
+            "y": 1
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 11,
-            "y": 3
+            "x": 17,
+            "y": 9
           }
         },
         {
@@ -1149,6 +1122,59 @@
       ],
       "circuits": {
         "captif": true,
+        "verrou": true,
+        "presse-ouest": false,
+        "presse-sud": false,
+        "meule": true
+      }
+    },
+    {
+      "label": "Les trois héros occupent leurs destinations ; le gardien, son verrou et la dernière caisse tiennent trois boutons distincts.",
+      "turn": 134,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 2
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "circuits": {
+        "captif": true,
+        "verrou": true,
         "presse-ouest": false,
         "presse-sud": false,
         "meule": true
@@ -1158,17 +1184,30 @@
   "adaptation": {
     "kind": "adaptation",
     "preserved": [
-      "Une paire de gobelins est rapprochée jusqu’au contact (Heroes 3, 13).",
-      "Un monstre conservé sur une plaque remplace un héros au moment du départ (Heroes 3, 14).",
-      "Des presses atteignent les côtés de poussée inaccessibles aux héros et changent l’axe de transport (Light 1)."
+      "Le chant rapproche une paire de gobelins jusqu’au contact (Heroes 3, 13).",
+      "Un gardien conservé sur un bouton remplace un héros au départ ; le Barde quitte son poste sans déplacer son poids (Heroes 3, 14).",
+      "Des presses atteignent les côtés de poussée inaccessibles aux héros et changent l’axe du transport (Light 1)."
     ],
     "changed": [
-      "Les monstres poursuivent tous le héros actif selon la règle déterministe SS19.",
-      "Le captif ouvre le chargement mais condamne les côtés de manœuvre ; le Guerrier commence au-dessus de la réserve, la Barde ne peut pas remplacer les presses depuis le bas.",
-      "Le chant déplace à travers le mur le gardien et son verrou ; l’échange du Magicien permet de quitter le pupitre sans desserrer ce verrou.",
-      "Deux chasses se terminent en combat, tandis que le troisième monstre doit rester séparé des deux autres.",
-      "Le moulin, ses commandes distantes et les trois sorties sont une carte originale sans eau ni miroir."
+      "Tous les monstres restent immobiles sans force visible : trois chants posent le captif, un chant provoque la rencontre de la paire.",
+      "Deux boutons voisins mais distincts donnent un rôle permanent au gardien orange et à sa caisse verte. La chambre scellée interdit leur remplacement par les héros.",
+      "Le volet rose ouvre pendant que la presse sud ferme ; il faut maintenir cette commande pendant la sortie de la caisse. La fermeture de la presse et l’ouverture du volet sont visibles dans le même circuit.",
+      "Le Barde tire ensuite la caisse vers le bouton cyan, puis un échange permet sa relève. Cette méthode est démontrée sans prétendre que le chant est l’unique transport possible après le moulin.",
+      "La destination orange jouxte la commande cyan : un monstre placé à la place de la caisse empêcherait son occupation sans perte.",
+      "Le couloir, le moulin et les trois postes sont une carte originale sans eau ni miroir."
     ],
-    "sourceReading": "Les références fournissent les contrastes éliminer/conserver et les presses orientées. La chasse, la prison à une entrée et le tracé du moulin sont propres à SS19 ; aucun plateau commercial n’est recopié."
+    "sourceReading": "Les références fournissent le contraste éliminer/conserver, le chant et les presses orientées. La géométrie, les circuits de livraison et les trois poids finaux sont propres à SS19 ; aucun mouvement autonome ni quota de combat n’est ajouté.",
+    "localChecks": [
+      {
+        "name": "Trois ressources finales",
+        "observed": "Le témoin conserve le gardien en 5,8, la caisse du captif en 5,9 et la caisse du moulin en 9,12. Chacun maintient une destination distincte.",
+        "scope": "Rejeu et circuits déclarés ; les routes alternatives légales restent admises."
+      },
+      {
+        "name": "Un monstre ne remplace pas la livraison finale",
+        "observed": "Un gardien sur le bouton cyan 9,12 tue tout héros sur la destination orange adjacente 9,13.",
+        "scope": "Règle de contact orthogonal, indépendante du témoin."
+      }
+    ]
   }
 }
