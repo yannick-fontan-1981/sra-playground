@@ -46,6 +46,8 @@ import { LEVEL_INFO as SS16_LEVEL_INFO } from '../experiments/sinking-star-ss16/
 import { actionFeedback as bridgesFeedback, lessonIds as bridgesLessonIds, lessonPrompt as bridgesPrompt, observeLesson as observeBridgesLesson, TUTORIAL_LEVEL as SS16_TUTORIAL_LEVEL, visibleHeroes as visibleBridgesHeroes, type BridgesLesson } from '../experiments/sinking-star-ss16/src/tutorial.ts';
 import { LEVEL_INFO as SS17_LEVEL_INFO } from '../experiments/sinking-star-ss17/src/level-info.ts';
 import { actionFeedback as fortressFeedback, lessonIds as fortressLessonIds, lessonPrompt as fortressPrompt, observeLesson as observeFortressLesson, TUTORIAL_LEVEL as SS17_TUTORIAL_LEVEL, visibleHeroes as visibleFortressHeroes, type FortressLesson } from '../experiments/sinking-star-ss17/src/tutorial.ts';
+import { LEVEL_INFO as SS18_LEVEL_INFO } from '../experiments/sinking-star-ss18/src/level-info.ts';
+import { actionFeedback as galleryFeedback, lessonIds as galleryLessonIds, lessonPrompt as galleryPrompt, observeLesson as observeGalleryLesson, TUTORIAL_LEVEL as SS18_TUTORIAL_LEVEL, visibleHeroes as visibleGalleryHeroes, type GalleryLesson } from '../experiments/sinking-star-ss18/src/tutorial.ts';
 import { actionFeedback as accordFeedback, lessonIds as accordLessonIds, lessonPrompt as accordPrompt, observeLesson as observeAccordLesson, TUTORIAL_LEVEL as SS15_TUTORIAL_LEVEL, visibleHeroes as visibleAccordHeroes, type HarmonyLesson as AccordLesson } from '../experiments/sinking-star-ss15/src/tutorial.ts';
 import { actionFeedback as harmonyFeedback, lessonIds as harmonyLessonIds, lessonPrompt as harmonyPrompt, observeLesson as observeHarmonyLesson, TUTORIAL_LEVEL as SS14_TUTORIAL_LEVEL, visibleHeroes as visibleHarmonyHeroes, type HarmonyLesson } from '../experiments/sinking-star-ss14/src/tutorial.ts';
 import { actionFeedback as anchorFeedback, lessonIds as anchorLessonIds, lessonPrompt as anchorPrompt, observeLesson as observeAnchorLesson, TUTORIAL_LEVEL as SS13_TUTORIAL_LEVEL, visibleHeroes as visibleAnchorHeroes, type TranspositionLesson as AnchorLesson } from '../experiments/sinking-star-ss13/src/tutorial.ts';
@@ -55,8 +57,8 @@ import { actionFeedback as warehouseFeedback, lessonIds as warehouseLessonIds, l
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
-type MultiHeroGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14' | 'SS15' | 'SS16' | 'SS17';
-const isMultiHeroNativeGame = (code: string): code is MultiHeroGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14' || code === 'SS15' || code === 'SS16' || code === 'SS17';
+type MultiHeroGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14' | 'SS15' | 'SS16' | 'SS17' | 'SS18';
+const isMultiHeroNativeGame = (code: string): code is MultiHeroGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14' || code === 'SS15' || code === 'SS16' || code === 'SS17' || code === 'SS18';
 const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || isMultiHeroNativeGame(code);
 const usesNativeManualControls = (code: string): boolean => usesReflectionShortcut(code) || isDirectionalNativeGame(code);
 const icon = (name: string, cls = ''): string => {
@@ -253,10 +255,15 @@ app.innerHTML = `
                 <button type="button" class="utility-button" data-hero-slot="2" data-ss16-hero="warrior" aria-pressed="false">Guerrier · 2</button>
                 <button type="button" class="utility-button" data-hero-slot="3" data-ss16-hero="thief" aria-pressed="false">Voleur · 3</button>
               </div>
-              <div id="ss17-role-controls" class="utility-controls native-hero-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+              <div id="ss17-role-controls" class="utility-controls native-hero-controls native-trio-touch-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
                 <button type="button" class="utility-button" data-hero-slot="1" data-ss17-hero="warrior" aria-pressed="false">Guerrier · 1</button>
                 <button type="button" class="utility-button" data-hero-slot="2" data-ss17-hero="thief" aria-pressed="false">Voleur · 2</button>
                 <button type="button" class="utility-button" data-hero-slot="3" data-ss17-hero="wizard" aria-pressed="false">Magicien · 3</button>
+              </div>
+              <div id="ss18-role-controls" class="utility-controls native-hero-controls native-trio-touch-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+                <button type="button" class="utility-button" data-hero-slot="1" data-ss18-hero="merchant" aria-pressed="false">Marchand · 1</button>
+                <button type="button" class="utility-button" data-hero-slot="2" data-ss18-hero="wizard" aria-pressed="false">Magicien · 2</button>
+                <button type="button" class="utility-button" data-hero-slot="3" data-ss18-hero="bard" aria-pressed="false">Barde · 3</button>
               </div>
               <p id="keyboard-help" class="sr-only">Arrow keys and Space for actions. Click the board to interact. Z or Control Z to undo. R to reset the level. In SS01, C or a click selects a Merchant.</p>
               <p id="ss02-level-info" class="native-game-level-info" lang="fr" hidden></p>
@@ -1289,6 +1296,133 @@ app.innerHTML = `
                   </div>
                 </details>
               </div>
+              <div id="ss18-room-help" lang="fr" hidden>
+                <p id="ss18-objective" class="native-game-level-info"></p>
+                <p class="native-game-level-info"><span id="ss18-source-label"></span> <a id="ss18-source-link" target="_blank" rel="noopener noreferrer" hidden></a> <a id="ss18-secondary-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
+                <details class="native-game-tutorial">
+                  <summary>Légende du plateau</summary>
+                  <div id="ss18-legend" class="native-game-tutorial-content duo-board-legend">
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f59e29" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Marchand orange · couleur 12</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#9e6bdb" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Magicien violet · couleur 15</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#e03bca" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Barde magenta · couleur 6</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#8b5a2b" d="M0 0h3v1H0z"/><path fill="#000" d="M1 1h1v1H1z"/></svg>Caisse mobile</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#8b5a2b" d="M0 0h3v1H0z"/><path fill="#43d9eb" d="M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2z"/></svg>Appui dans l’eau · mobile par le chant</span>
+                    <span><i class="swatch" style="background:transparent;border:1px solid #e03bca"></i>Portée du chant · carré de 5 × 5</span>
+                    <span><i class="swatch" style="--c:#2765d3"></i>Eau</span>
+                    <span><i class="swatch" style="--c:#777777"></i>Sol gris</span>
+                    <span><i class="swatch" style="--c:#333333"></i>Mur gris foncé</span>
+                    <span><i class="swatch goal"></i>Destination · trois à occuper</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Bouton de pression</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M0 0h3v1H0z"/><path fill="#000" d="M1 1h1v1H1z"/></svg>Porte / presse latérale</span>
+                    <span id="ss18-platform-legend-active" hidden><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#f5a9c8" d="M0 0h3v1H0z"/><path fill="#fff" d="M1 1h1v1H1z"/></svg>Porte-plateforme · déployée</span>
+                    <span id="ss18-platform-legend-inactive" hidden><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#2765d3" d="M0 0h3v1H0z"/><path fill="#f5a9c8" d="M0 0h1v1H0zM2 0h1v1H2zM0 2h1v1H0zM2 2h1v1H2z"/><path fill="#fff" d="M1 1h1v1H1z"/></svg>Porte-plateforme · retirée</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#777" d="M0 0h3v1H0z"/><path fill="#000" d="M0 0h2v1H0zM0 1h1v1H0z"/><path fill="#fff" d="M2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0z"/></svg>Miroir mobile · dos noir</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#000" d="M0 0h3v1H0z"/><path fill="#ef4141" d="M0 0h1v1H0zM2 0h1v1H2zM1 1h1v1H1zM0 2h1v1H0zM2 2h1v1H2z"/></svg>Monstre</span>
+                    <span><svg class="tile" viewBox="0 0 3 3" aria-hidden="true"><path fill="#ccc" d="M1 0h1v1H1zM0 1h3v1H0z"/></svg>Arrivée d’un héros par reflet</span>
+                    <span><i class="swatch" style="background:transparent;border:1px solid #ccc"></i>Arrivée d’une caisse par reflet</span>
+                  </div>
+                </details>
+                <details id="ss18-tutorial" class="native-game-tutorial" open hidden>
+                  <summary>Niveau 3 · Le jardin des trois issues</summary>
+                  <div class="native-game-tutorial-content">
+                    <p id="ss18-lesson-next" aria-live="polite"></p>
+                    <ul>
+                      <li data-ss18-lesson="select">Changer de héros sans faire avancer le monde.</li>
+                      <li data-ss18-lesson="move">Lire la même flèche selon le personnage sélectionné.</li>
+                      <li data-ss18-lesson="merchant-push">Pousser une seule pièce avec le Marchand.</li>
+                      <li data-ss18-lesson="partner-push">Déplacer un partenaire sans activer sa capacité.</li>
+                      <li data-ss18-lesson="mirror-motion">Déplacer un miroir pour modifier ses axes.</li>
+                      <li data-ss18-lesson="wizard-swap">Échanger le Magicien et la première cible de sa visée.</li>
+                      <li data-ss18-lesson="wizard-partner">Échanger le Magicien avec un partenaire.</li>
+                      <li data-ss18-lesson="wizard-bend">Viser derrière un coude de miroir.</li>
+                      <li data-ss18-lesson="relay-weight">Relever un poids sans interrompre sa commande.</li>
+                      <li data-ss18-lesson="bard-song">Entraîner les pièces du carré de chant.</li>
+                      <li data-ss18-lesson="partner-song">Transporter un partenaire sans déclencher son pouvoir.</li>
+                      <li data-ss18-lesson="selective-song">Utiliser une butée pour retenir une partie du groupe.</li>
+                      <li data-ss18-lesson="diagonal-song">Atteindre le coin du carré de 5 × 5.</li>
+                      <li data-ss18-lesson="wall-song">Commander une pièce derrière une cloison.</li>
+                      <li data-ss18-lesson="release-by-swap">Extraire le Barde en laissant son groupe en place.</li>
+                      <li data-ss18-lesson="water-support">Transformer une caisse en appui dans l’eau.</li>
+                      <li data-ss18-lesson="support-slide">Faire glisser un appui immergé par le chant.</li>
+                      <li data-ss18-lesson="support-anchor">Ancrer un appui sous un héros ou sous le prochain pas.</li>
+                      <li data-ss18-lesson="cross-support">Traverser un appui et protéger le passage.</li>
+                      <li data-ss18-lesson="mirror">Activer les reflets globaux avec Espace.</li>
+                      <li data-ss18-lesson="hero-reflection">Transporter un héros par reflet, sans sa capacité.</li>
+                      <li data-ss18-lesson="crate-reflection">Faire voyager une caisse par reflet.</li>
+                      <li data-ss18-lesson="button">Maintenir une commande avec un occupant.</li>
+                      <li data-ss18-lesson="gate">Lire l’ouverture et la fermeture d’une porte.</li>
+                      <li data-ss18-lesson="press">Déposer une pièce avec une presse latérale.</li>
+                      <li data-ss18-lesson="monster">Éloigner ou éliminer les monstres à distance sûre.</li>
+                      <li data-ss18-lesson="goals">Répartir les trois héros sur les trois destinations.</li>
+                    </ul>
+                    <p id="ss18-lesson-progress"></p>
+                    <p><strong>Choisir qui bouge et qui reste.</strong><br>Une poussée déplace une pièce. Un échange conserve deux occupants. Le chant déplace un groupe, mais les butées et les ancrages changent sa forme. Prépare ces effets avant les derniers départs.</p>
+                    <p>Annuler conserve les découvertes. Recommencer, repartir ou choisir un autre niveau remet le suivi à zéro.</p>
+                  </div>
+                </details>
+                <details id="ss18-cargo-help" class="native-game-tutorial" open>
+                  <summary>Marchand · préparer une place</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Une seule pièce.</strong> Le Marchand avance avec l’occupant juste devant lui si celui-ci peut aller sur la case suivante. Deux caisses collées bloquent cette poussée. Un chant ou un échange peut les séparer.</p>
+                    <p><strong>Le bon côté.</strong> Pousser vers un mur peut condamner un accès. Le Magicien peut rendre un autre côté accessible ; le Barde peut déplacer la caisse depuis une position décalée.</p>
+                    <p><strong>Un partenaire sans son pouvoir.</strong> Une poussée permet de déplacer le Barde en laissant ses caisses en place, ou de placer le Magicien dans une nouvelle ligne sans lancer de sort.</p>
+                  </div>
+                </details>
+                <details id="ss18-wizard-help" class="native-game-tutorial" open>
+                  <summary>Magicien · visée et conservation des places</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Flèche : échange ou marche.</strong> Le rayon cherche la première caisse, le premier partenaire ou le premier monstre. Il traverse l’eau, mais s’arrête aux murs, aux portes fermées et aux dos des miroirs. Les appuis immergés ne sont pas des cibles : seul le chant peut les déplacer sur l’eau.</p>
+                    <p><strong>Face blanche : virage.</strong> La visée peut traverser plusieurs miroirs avant de trouver sa cible. Si elle revient au Magicien, le trajet s’éclaire puis le Magicien clignote : aucune pièce ne bouge. Déplace un miroir ou change l’angle d’entrée.</p>
+                    <p><strong>Un échange conserve les occupants.</strong> Tu peux remplacer le héros qui maintient un bouton sans interrompre le circuit, mais tu ne peux pas peupler une île vide par échange. Une poussée, un pont ou un reflet doit d’abord y apporter une pièce.</p>
+                    <p><strong>Espace : autre mécanisme.</strong> Le reflet global utilise la distance au miroir et peut déplacer plusieurs pièces. Les flèches du Magicien échangent seulement le lanceur et la première cible du rayon.</p>
+                  </div>
+                </details>
+                <details id="ss18-bard-help" class="native-game-tutorial" open>
+                  <summary>Barde · portée, butées et ancrages</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Le carré avant le pas.</strong> Le chant touche les pièces à deux cases au plus horizontalement et verticalement, diagonales comprises. Le cadre magenta aide à lire cette portée ; les murs ne coupent pas le chant.</p>
+                    <p><strong>Tout le groupe tente la même direction.</strong> Caisses, monstres et partenaires peuvent avancer ensemble. Une pièce dont l’arrivée est bloquée reste en place ; les autres peuvent continuer. Les miroirs ne suivent jamais.</p>
+                    <p><strong>Le Barde doit pouvoir avancer.</strong> S’il ne peut pas poser son pied, le pas et son chant sont annulés. Le chant ne se joue pas sur place. Aucun déplacement volontaire ne peut noyer un héros.</p>
+                    <p><strong>Protéger un appui.</strong> Le chant fait glisser les appuis d’eau en eau. Un appui sous un héros au début du pas reste ancré, même si ce héros se déplace. Le prochain appui du Barde est protégé lui aussi. Un miroir ou une caisse sur un appui ne constitue pas cet ancrage. Si le glissement laisserait un miroir sans soutien, le pas entier est refusé.</p>
+                    <p><strong>Partir sans chanter.</strong> Une poussée du Marchand, une transposition du Magicien, un reflet ou une presse déplace le Barde sans entraîner le groupe. Utilise ce départ pour laisser un contrepoids en place.</p>
+                  </div>
+                </details>
+                <details id="ss18-mirror-help" class="native-game-tutorial" open>
+                  <summary>Le miroir · préparer les deux axes</summary>
+                  <div class="native-game-tutorial-content">
+                    <p><strong>Distance conservée.</strong> Espace / X active tous les miroirs ensemble. Chaque miroir relie les deux axes de sa face blanche à angle droit. Sur ces axes, le candidat le plus proche passe ; à distance égale, les deux occupants échangent leurs places.</p>
+                    <p>Le <strong>plus gris clair</strong> annonce l’arrivée d’un héros, le <strong>contour carré gris clair</strong> celle d’une caisse. Une arrivée bloquée pour le candidat plus éloigné n’empêche pas le plus proche de passer.</p>
+                    <p>Les héros, caisses et monstres se reflètent. Les appuis et les miroirs ne se transportent pas par reflet. Pour déplacer un miroir, pousse-le avec le Marchand ou utilise une presse ; son orientation reste la même.</p>
+                    <p>Un mur, une porte fermée ou un autre miroir peut bloquer le trajet. Les miroirs responsables peuvent signaler ce blocage en rouge, en conservant leur diagonale blanche. L’eau laisse passer les trajets, mais une arrivée dans l’eau sans soutien peut être fatale.</p>
+                  </div>
+                </details>
+                <details id="ss18-piston-help" class="native-game-tutorial" open hidden>
+                  <summary>Bouton, porte et presse latérale</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Le <strong>plus rose sur fond gris est un bouton</strong>. Son centre donne la couleur du circuit. Héros, caisse, monstre et miroir peuvent servir de poids. Tous les boutons du même circuit doivent être occupés ensemble.</p>
+                    <p>La presse a un <strong>centre noir fermé, gris ouvert</strong>. Ses marques colorées montrent le circuit et le sens de poussée. Selon la commande, elle se ferme à l’appui ou au relâchement.</p>
+                    <p>Quand elle se ferme, elle pousse l’occupant de sa propre case et la file éventuelle devant lui. Une fermeture sur une case vide ne pousse pas une pièce voisine. Si la file est bloquée, l’occupant pris dans la presse peut être écrasé.</p>
+                    <p>Une presse peut déposer une caisse dans un renfoncement, déplacer un miroir ou rapprocher des monstres. Les héros déplacés ne déclenchent pas leur pouvoir. Z annule la cascade entière.</p>
+                  </div>
+                </details>
+                <details id="ss18-platform-help" class="native-game-tutorial" open hidden>
+                  <summary>La plateforme et sa charge</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Une <strong>plateforme déployée porte les héros et les objets</strong>. Retirée, elle laisse l’eau visible. Son repère coloré renvoie au bouton de commande.</p>
+                    <p>Quitte la plateforme avant de retirer son poids et vérifie les deux partenaires. Une caisse restée dessus devient un appui lorsque la plateforme disparaît. Cet appui reste utilisable même si la plateforme est redéployée ; le chant peut encore le déplacer sur l’eau lorsqu’il n’est pas ancré.</p>
+                    <p>Les commandes se règlent pendant la même cascade. Un reflet ou une presse peut préparer un passage et sa charge ensemble ; le déplacement volontaire dans une eau déjà sans soutien est refusé.</p>
+                  </div>
+                </details>
+                <details id="ss18-monster-help" class="native-game-tutorial" hidden>
+                  <summary>Monstres · menace et contrepoids</summary>
+                  <div class="native-game-tutorial-content">
+                    <p>Un monstre peut être déplacé par poussée, chant, transposition, reflet ou presse. Il peut maintenir un bouton : <strong>prépare son remplaçant avant de l’éliminer</strong>.</p>
+                    <p>Après une action effective, les monstres frappent leurs voisins orthogonaux. <strong>Une diagonale n’est pas un contact.</strong> Surveille les trois héros, y compris ceux que tu ne contrôles pas.</p>
+                    <p>Deux monstres adjacents s’éliminent simultanément et frappent encore durant cette vague. Garde le trio à distance. Un monstre tombé dans l’eau sans soutien disparaît.</p>
+                    <p>L’animation montre les étapes jusqu’au résultat. La sélection et les déplacements refusés ne déclenchent pas de combat ; Annuler reste disponible pendant la séquence.</p>
+                  </div>
+                </details>
+              </div>
             </div>
             <div id="agent-panel" role="tabpanel" aria-labelledby="agent-tab" data-agent-status="${AGENT_STATUS.status}" data-agent-available="${AGENT_STATUS.available}">
               <h3>Solve with SRA.</h3>
@@ -1548,6 +1682,7 @@ const ss14Lessons = new Set<HarmonyLesson>();
 const ss15Lessons = new Set<AccordLesson>();
 const ss16Lessons = new Set<BridgesLesson>();
 const ss17Lessons = new Set<FortressLesson>();
+const ss18Lessons = new Set<GalleryLesson>();
 const multiHeroRoomHelp = {
   SS06: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'warrior', label: 'Guerrier' }], directions: 'Flèches pour marcher ou pousser.', rooms: SS06_LEVEL_INFO,
     heroes: visibleHeroes, lessons: ss06Lessons, total: duoLessonIds.length, prompt: () => duoPrompt(ss06Lessons), tutorialLevel: 1 },
@@ -1591,6 +1726,10 @@ const multiHeroRoomHelp = {
     directions: 'Flèches pour marcher, pousser, tirer ou échanger.', rooms: SS17_LEVEL_INFO,
     heroes: visibleFortressHeroes, lessons: ss17Lessons, total: fortressLessonIds.length,
     prompt: () => fortressPrompt(ss17Lessons), tutorialLevel: SS17_TUTORIAL_LEVEL },
+  SS18: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'wizard', label: 'Magicien' }, { kind: 'bard', label: 'Barde' }],
+    directions: 'Flèches pour marcher, pousser, échanger ou chanter.', rooms: SS18_LEVEL_INFO,
+    heroes: visibleGalleryHeroes, lessons: ss18Lessons, total: galleryLessonIds.length,
+    prompt: () => galleryPrompt(ss18Lessons), tutorialLevel: SS18_TUTORIAL_LEVEL },
 } as const;
 let ss06Solo = false;
 let loading = false;
@@ -1952,7 +2091,7 @@ function updateMultiHeroRoomHelp(game: MultiHeroGameCode, current: GameObservati
     ? 'Amène le Guerrier rouge sur l’unique contour jaune.'
     : third ? `Amène le ${first.label}, le ${second.label} et le ${third.label} sur les trois contours jaunes en même temps.`
     : `Amène le ${first.label} et le ${second.label} sur les deux contours jaunes en même temps.`;
-  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17') && 'objective' in info ? info.objective : objective;
+  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17' || game === 'SS18') && 'objective' in info ? info.objective : objective;
   if (game === 'SS06') element('#ss06-cooperation-help').hidden = solo;
   const selected = heroes(current.frame).find(hero => hero.selected)?.kind;
   const roleAttribute = `data-${id}-hero`;
@@ -1974,7 +2113,7 @@ function updateMultiHeroRoomHelp(game: MultiHeroGameCode, current: GameObservati
   element(`#${id}-piston-help`).hidden = !info.piston;
   const hasPlatform = 'platform' in info && info.platform;
   element(`#${id}-platform-help`).hidden = !hasPlatform;
-  if (game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17') {
+  if (game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17' || game === 'SS18') {
     const secondary = element<HTMLAnchorElement>(`#${id}-secondary-source-link`);
     const reference = 'secondary' in info ? info.secondary : undefined;
     const secondaryUrl = reference?.url ?? ('secondaryUrl' in info ? info.secondaryUrl : undefined);
@@ -2092,7 +2231,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   interruptibleAnimation = (manualAction || isMultiHeroNativeGame(next.gameCode)) && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
-  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15' || next.gameCode === 'SS16' || next.gameCode === 'SS17') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15' || next.gameCode === 'SS16' || next.gameCode === 'SS17' || next.gameCode === 'SS18') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
@@ -2176,6 +2315,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS15' && action !== undefined) observeAccordLesson(ss15Lessons, before, next, action);
     if (next.gameCode === 'SS16' && action !== undefined) observeBridgesLesson(ss16Lessons, before, next, action);
     if (next.gameCode === 'SS17' && action !== undefined) observeFortressLesson(ss17Lessons, before, next, action);
+    if (next.gameCode === 'SS18' && action !== undefined) observeGalleryLesson(ss18Lessons, before, next, action);
     if (next.gameCode === 'SS08') {
       if (action !== undefined) observeTranspositionLesson(ss08Lessons, before, next, action);
       if (next.level === SS08_TUTORIAL_LEVEL && (control === 'selectLevel' || control === 'reset')) {
@@ -2202,6 +2342,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     else if (next.gameCode === 'SS15' && action !== undefined) element('#game-feedback').textContent = accordFeedback(before, next, action);
     else if (next.gameCode === 'SS16' && action !== undefined) element('#game-feedback').textContent = bridgesFeedback(before, next, action);
     else if (next.gameCode === 'SS17' && action !== undefined) element('#game-feedback').textContent = fortressFeedback(before, next, action);
+    else if (next.gameCode === 'SS18' && action !== undefined) element('#game-feedback').textContent = galleryFeedback(before, next, action);
     else if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
@@ -2245,7 +2386,7 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
-  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14' || observation?.gameCode === 'SS15' || observation?.gameCode === 'SS16' || observation?.gameCode === 'SS17') && interruptibleAnimation) {
+  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14' || observation?.gameCode === 'SS15' || observation?.gameCode === 'SS16' || observation?.gameCode === 'SS17' || observation?.gameCode === 'SS18') && interruptibleAnimation) {
     presentationGeneration += 1;
     interruptibleAnimation = false;
     busy = false;
@@ -2301,12 +2442,14 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   ss15Lessons.clear();
   ss16Lessons.clear();
   ss17Lessons.clear();
+  ss18Lessons.clear();
   delete element('#ss12-monster-help').dataset.level;
   delete element('#ss13-monster-help').dataset.level;
   delete element('#ss14-monster-help').dataset.level;
   delete element('#ss15-monster-help').dataset.level;
   delete element('#ss16-monster-help').dataset.level;
   delete element('#ss17-monster-help').dataset.level;
+  delete element('#ss18-monster-help').dataset.level;
   ss06Solo = false;
   if (isMultiHeroNativeGame(game.code)) element<HTMLDetailsElement>(`#${game.code.toLowerCase()}-tutorial`).open = true;
   if (game.code === 'SS03' || game.code === 'SS04' || bard) {
@@ -2318,8 +2461,8 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
     'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
     'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'ss06-room-help', 'ss06-role-controls',
     'ss07-room-help', 'ss07-role-controls', 'ss08-room-help', 'ss08-role-controls', 'ss09-room-help',
-    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'ss15-room-help', 'ss15-role-controls', 'ss16-room-help', 'ss16-role-controls', 'ss17-room-help', 'ss17-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
-  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14' || game.code === 'SS15' || game.code === 'SS16' || game.code === 'SS17';
+    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'ss15-room-help', 'ss15-role-controls', 'ss16-room-help', 'ss16-role-controls', 'ss17-room-help', 'ss17-role-controls', 'ss18-room-help', 'ss18-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
+  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14' || game.code === 'SS15' || game.code === 'SS16' || game.code === 'SS17' || game.code === 'SS18';
   for (const [id, french, english] of [
     ['undo-button', 'Annuler', 'Undo'],
     ['reset-button', 'Recommencer', 'Reset'],
