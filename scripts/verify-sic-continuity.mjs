@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
+import { compileLevel, equal, initialState, stepWorld } from '../experiments/sinking-star-ss02/src/core.ts';
+import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -27,7 +29,30 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move' };
+
+function consecutiveStonePushes(level, tickets) {
+  const world = compileLevel(SS02_LEVELS[level - 1]);
+  let state = initialState(world), previous;
+  const pairs = [];
+  for (const [index, ticket] of tickets.entries()) {
+    if (ticket.resets !== previous?.resets) state = initialState(world);
+    const next = stepWorld(world, state, Number(ticket.action.slice(6)));
+    // The engine preserves stone order unless a stone is converted into a bridge.
+    const moved = state.stones.length === next.stones.length
+      ? state.stones.flatMap((stone, i) => equal(stone, next.stones[i]) ? [] : [i]) : [];
+    if (ticket.actionIndex > 0 && ticket.decisionRevision === previous?.revision
+      && ticket.resets === previous.resets && moved.some(i => previous.moved.includes(i))) {
+      pairs.push({ kind: 'stone', first: index, last: index + 1 });
+    }
+    previous = { revision: ticket.decisionRevision, resets: ticket.resets, moved };
+    state = next;
+  }
+  assert.equal(state.complete, true, 'Executed SS02 L' + level + ' tickets do not reproduce the official goal');
+  assert.ok(pairs.length, 'SS02 L' + level + ' lost consecutive pushes of the same stone');
+  return pairs;
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -80,7 +105,8 @@ export function checkRun(run) {
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
     } else assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
-    const physical = reference ? measureManipulation(row.level, issued) : [];
+    const physical = reference ? measureManipulation(row.level, issued)
+      : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -107,11 +133,12 @@ function main() {
   if (!files.length) {
     execute(['scripts/prepare-python.mjs']);
     files = [];
-    for (const [cohort, end] of [
-      ['SS01', '8'],
-      ['source:AR25,HANO,DC22', '1'],
+    for (const [name, cohort, end] of [
+      ['mirror-isles', 'SS01', '8'],
+      ['la-force-rouge', 'SS02', '1'],
+      ['native-sources', 'source:AR25,HANO,DC22', '1'],
     ]) {
-      const output = join(temp, 'cohort-' + end + '.jsonl');
+      const output = join(temp, name + '.jsonl');
       files.push(output);
       execute(['scripts/compare-source100.mjs', '.', '.', output, cohort, '1', end, '120']);
     }
@@ -122,7 +149,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

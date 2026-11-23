@@ -27,8 +27,8 @@ import { matchesCollectionEdit, proposeCollectionTrial, type CollectionTrial } f
 import { repeatedInputTargets } from './repeated-input-targets.ts';
 import { annotateTravelMarks, chooseAnnotatedMarkContact, chooseSeparationTrial, chooseTravelTrial, travelOccupies, observedTravelActor, observeTravel,
   readTravelGrid, type MarkContact, type ObservedTravel } from './observed-travel-frontier.ts';
-import { chooseCoverage, hasObservedCoverage, observeCoverage, observedCoverageDeadlock, rememberCoverageWin, retainCoverageAfterReset,
-  type CoverageLearning, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
+import { chooseCoverage, coveragePushPremise, coveragePushReturn, hasObservedCoverage, observeCoverage, observedCoverageDeadlock,
+  rememberCoverageWin, retainCoverageAfterReset, type CoverageLearning, type CoveragePushStep, type CoverageTransfer, type PullStep } from './observed-coverage.ts';
 import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
 import { checkContactPrediction, chooseContactExperiment, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
 import { assessPressurePlan, choosePressureReserve, observePressureReserve, retainPressureReserve,
@@ -175,6 +175,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   slotTransfer?: { layout: VisibleSlotLayout; ref: string };
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
+  coveragePushSeries?: readonly CoveragePushStep[];
   coveragePlacement?: true;
   separationTest?: string;
   contactExperiment?: ContactExperiment;
@@ -619,8 +620,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const jointKey = joint?.command.action_ref;
       const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows) : undefined;
       const exchangeKey = exchange?.command.action_ref;
-      const coverage = !panel && !pressure && !exchange && local.coverage?.body ? chooseCoverage(local.coverage, local.travel, rows) : undefined;
+      const coverage = !panel && !pressure && !exchange && local.coverage?.body ? chooseCoverage(local.coverage, local.travel, rows, remaining) : undefined;
       const coverageKey = coverage?.command.action_ref;
+      const coverageFrontier = coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null;
       const markTrial = !panel && !pressure && !exchange && !coverage ? chooseAnnotatedMarkContact(local.travel, rows, nonPoint) : undefined;
       const markKey = markTrial?.command.action_ref;
       const canTravel = !panel && !pressure && !exchange && !coverage && !markTrial && local.experiments >= 5 && nonPoint.length >= 2;
@@ -820,7 +822,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         : (fallbackProjection ? projected : null) ?? measuredControls ?? preferred ?? projected ?? directionRelook ?? emphasis ?? workspaceProbe ?? (pressureKey ? { action: pressureKey, probe: pressureKey, depth: 0, first: null } : null)
           ?? (jointKey ? { action: jointKey, probe: jointKey, depth: 0, first: null } : null)
           ?? (exchangeKey ? { action: exchangeKey, probe: exchangeKey, depth: 0, first: null } : null)
-          ?? (coverageKey ? { action: coverageKey, probe: coverageKey, depth: 0, first: null } : null)
+          ?? coverageFrontier
           ?? (markKey ? { action: markKey, probe: markKey, depth: 0, first: null } : null)
           ?? travelFrontier
           ?? panelProbe ?? directionalProbe
@@ -988,12 +990,17 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof };
       const series=!walk && frontier===travelFrontier && travel && 'approach' in travel && Array.isArray(travel.approach)
         ? bindWalkingSeries(travel.approach,rows,remaining):undefined;
-      const id = `public-input:${need.id}`, actions = walk ? walk.route.map(step => step.command) : series?.map(step=>step.command) ?? [command];
+      const pushSeries = !walk && !series && frontier === coverageFrontier ? coverage?.pushSeries : undefined;
+      const steps = series ? series.map(step => ({ action: step.command, expected_after: step.to }))
+        : walk ? walk.route.map(step => ({ action: step.command, expected_after: step.to }))
+        : pushSeries?.map(step => ({ action: step.command, expected_after: visibleCellBox(step.after.actor) }));
+      const id = `public-input:${need.id}`, actions = steps?.map(step => step.action) ?? [command];
       const witness = command.action_ref === 'ACTION6'
         ? await ObservedInputDomain.makeLocusWitness(observation, rows, [command.data.x!, command.data.y!], { reason: label, evidence: proof })
         : null;
       return {
         status: 'proposed', kind: publicInputExplorationId, actions, ...(series?{walkingSeries:series}:{}), source, candidates: keys, needId: need.id,
+        ...(pushSeries ? { coveragePushSeries: pushSeries } : {}),
         ...(selectedFallback ? { fallbackProjection: selectedFallback } : {}),
         ...(slotLayout && slotMove && selectedProjection === slot ? { slotPlan: { layout: slotLayout, move: slotMove } } : {}),
         ...(selectedEntry ? { entryPlan: selectedEntry } : {}),
@@ -1019,8 +1026,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(transport?.bridge ? { bridgeTarget: { tool: transport.motion.tool, target: transport.bridge.target } } : {}),
         ...(opening ? { accessGoal: opening.goal } : {}),
         ...(frontier.first?.destination ? { expected: frontier.first.destination } : {}),
-        steps: series ? series.map(s=>({action:s.command,expected_after:s.to})) : walk ? walk.route.map(step => ({ action: step.command, expected_after: step.to }))
-          : [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
+        steps: steps ?? [{ action: command, expected_after: null, ...(witness ? { point_binding: witness } : {}) }],
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true,
@@ -1108,6 +1114,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
     },
     before(proposal, index, packet, observation) {
+      const push = proposal.coveragePushSeries?.[index];
+      if (push) {
+        const admitted = !!state.coverage && !!state.travel && (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
+          && coveragePushPremise(state.coverage, state.travel, packet.frame_rows, push);
+        return { admitted, reason: admitted ? 'coverage_push_step_bound' : 'coverage_push_premise_changed' };
+      }
       const stride=proposal.walkingSeries?.[index];
       if(stride){
         const admitted=!!state.travel && (index>0 || proposal.binding?.observation_ref===observation.observation_ref) &&
@@ -1132,6 +1144,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     async after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      const push = proposal.coveragePushSeries?.[index];
+      if (push) {
+        const matched = !!state.coverage && !!state.travel && coveragePushReturn(state.coverage, state.travel, rows, afterRows, push);
+        return { matched: scored || matched, seal_prefix: scored || !matched,
+          reason: scored ? 'official_boundary' : matched ? 'coverage_push_confirmed' : 'coverage_push_contradicted',
+          ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
+      }
       const step=proposal.walkingSeries?.[index];
       if(step){
         const matched=!!state.travel && walkingReturn(step,rows,afterRows,travelOccupies(state.travel,afterRows,step.to)&&!travelOccupies(state.travel,afterRows,step.from));
