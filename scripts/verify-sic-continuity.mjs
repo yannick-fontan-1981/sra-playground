@@ -79,11 +79,21 @@ function consecutiveStonePulls(level, tickets) {
   let state = initialPullState(world), previous;
   const pairs = [];
   const usedPresses = new Set();
+  const driver = level === 8 ? world.gates.findIndex(gate => gate.closedWhen === 'pressed'
+    && world.gates.filter(other => other.circuit === gate.circuit).length === 1) : -1;
+  const control = world.circuits.find(circuit => circuit.id === world.gates[driver]?.circuit)?.buttons[0];
+  let released = false, longestStroke = 0;
   for (const [index, ticket] of tickets.entries()) {
     if (ticket.resets !== previous?.resets) state = initialPullState(world);
     const detail = stepPullWorld(world, state, Number(ticket.action.slice(6)));
     for (const phase of detail.phases) {
       if (phase.kind === 'piston' && phase.moves.some(move => move.actor === 'stone')) usedPresses.add(phase.gateIndex);
+      if (control && phase.kind === 'pull') {
+        released ||= phase.moves.some(move => move.actor === 'stone' && equal(move.from, control));
+      }
+      if (phase.kind === 'piston' && phase.gateIndex === driver) {
+        longestStroke = Math.max(longestStroke, phase.moves.filter(move => move.actor === 'stone').length);
+      }
     }
     const phase = detail.phases[0];
     const pull = detail.phases.length === 1 && phase?.kind === 'pull' ? phase.moves.find(move => move.actor === 'stone') : undefined;
@@ -102,6 +112,11 @@ function consecutiveStonePulls(level, tickets) {
     const controls = world.circuits.find(circuit => circuit.id === exit?.circuit);
     assert.ok(controls?.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS03 L7 did not hold the matched exit controls');
   }
+  if (level === 8) {
+    assert.ok(released, 'SS03 L8 did not release the initially held press control');
+    assert.equal(longestStroke, world.stones.length, 'SS03 L8 did not drive the full file of stones');
+    assert.equal(state.stones.length, world.stones.length, 'SS03 L8 lost a stone');
+  }
   return pairs;
 }
 
@@ -113,7 +128,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 7 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -183,6 +198,11 @@ export function checkRun(run) {
       assert.ok(issued.length <= 85 && groups.size <= 16, 'SS03 L7 lost the direct press route');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L7 trapped the cursor on the direct route');
     }
+    if (code === 'SS03' && row.level === 8) {
+      // The exploratory run did not finish by 130 commands. The guarded press relay completes in 160.
+      assert.ok(issued.length <= 200 && groups.size <= 24, 'SS03 L8 lost the guarded press relay');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L8 reset while building the file');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
@@ -214,7 +234,7 @@ function main() {
     for (const [name, cohort, end, cap] of [
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
-      ['la-ruse-verte', 'SS03', '7', '120'],
+      ['la-ruse-verte', 'SS03', '8', '240'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

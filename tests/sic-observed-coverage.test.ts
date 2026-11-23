@@ -270,10 +270,10 @@ for (const mirrored of [false, true]) test(`pull and exit roles transfer to guar
   const shared = planPullCircuit(roles, fourthTransfer, fourthRows, inputs, 40);
   assert.ok(shared);
   assert.equal(shared.field.gates.length, 2);
-  const [relay, otherRelay] = shared.field.gates;
-  assert.ok(relay && otherRelay && 'pattern' in relay && 'pattern' in otherRelay);
-  assert.equal(relay.marks.length, 2);
-  assert.deepEqual(relay.marks, otherRelay.marks);
+  const [firstDoor, otherRelay] = shared.field.gates;
+  assert.ok(firstDoor && otherRelay && 'pattern' in firstDoor && 'pattern' in otherRelay);
+  assert.equal(firstDoor.marks.length, 2);
+  assert.deepEqual(firstDoor.marks, otherRelay.marks);
   const partial = fourthRows.map(row => [...row]);
   const [dx, dy] = otherRelay.at.split(',').map(Number) as [number, number];
   for (const [i, ink] of otherRelay.pattern.open.split(',').map(Number).entries()) {
@@ -365,4 +365,44 @@ for (const mirrored of [false, true]) test(`pull and exit roles transfer to guar
   pistonFamily.restore(retainedPistons);
   assert.ok((await pistonFamily.proposeInGroup!(observedPressureRecoveryGroup, restartedPistons, recolor(board.frame), inputs, 95))?.pullCircuitPlan);
   assert.ok(await replayComposedLevel(pistonTransfer, 95));
+
+  const relayLesson = { ...transfer, epoch: 7, ref: 'relay-entry' };
+  const relayRows = recolor(board.frame);
+  const relay = planPullCircuit(witnessedRoles, relayLesson, relayRows, inputs, 240);
+  assert.ok(relay?.route?.length && relay.field.coveredMarks);
+  assert.ok(relay.evidence.includes(witnessedRoles.actuatorRef));
+  const marked = Object.keys(relay.field.coveredMarks);
+  assert.equal(marked.length, 2);
+  assert.ok(marked.every(cell => relay.start.bodies.includes(cell)));
+  const driver = relay.field.gates.find(gate => relay.field.gates.filter(other => other.marks[0] === gate.marks[0]).length === 1);
+  assert.ok(driver && !('pattern' in driver));
+  const driverIndex = relay.field.gates.indexOf(driver);
+  const [controlX, controlY] = driver.marks[0]!.split(',').map(Number) as [number, number];
+  const unknown = relayRows.map(row => [...row]);
+  const knownAccents = relay.field.gates.flatMap(gate => 'accent' in gate ? [gate.accent] : []);
+  const corner = relay.field.coveredMarks[driver.marks[0]!]!.corner;
+  unknown[controlY + Math.floor(corner / 3)]![controlX + corner % 3] =
+    Array.from({ length: 16 }, (_, tint) => tint).find(tint => !knownAccents.includes(tint))!;
+  assert.equal(matchesPullCircuit(witnessedRoles, relay.field, relay.start, unknown), false);
+  assert.equal(planPullCircuit(witnessedRoles, relayLesson, unknown, inputs, 240), undefined);
+
+  binding = undefined;
+  turns = 0;
+  let releasedControl = false, pressedAgain = false;
+  while (board.state !== 'WIN' && turns < 240) {
+    const plan = binding ? planPullCircuit(witnessedRoles, relayLesson, recolor(board.frame), inputs, 240 - turns, binding) : relay;
+    assert.ok(plan?.steps.length && plan.route?.length === relay.route.length - turns);
+    for (const [index, step] of plan.steps.entries()) {
+      board = await game.dispatch({ type: 'action', actionId: actionIds.get(step.action.action_ref)! });
+      turns++;
+      if (board.state === 'WIN') break;
+      binding = witnessedPullCircuitReturn(plan, index, recolor(board.frame));
+      assert.ok(binding);
+      releasedControl ||= !binding.pose.closed[driverIndex];
+      pressedAgain ||= releasedControl && !!step.actuated && !!binding.pose.closed[driverIndex];
+    }
+  }
+  assert.equal(board.state, 'WIN');
+  assert.equal(board.levelsCompleted, 8);
+  assert.ok(releasedControl && pressedAgain);
 });

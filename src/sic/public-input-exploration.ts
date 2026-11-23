@@ -687,10 +687,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const target = pushAccessBox(plan.field.goal, pullKnowledge.grid.pitch);
     const actions = plan.steps.map(step => step.action);
     const pressure = plan.field.gates.some(gate => 'pattern' in gate);
-    const label = plan.revelation ? 'Reveal the direction of the occupied gate with a guarded pull or displacement'
+    const label = plan.route ? 'Release the matched control, align the crates and trigger the press to open the exit'
+      : plan.revelation ? 'Reveal the direction of the occupied gate with a guarded pull or displacement'
       : pressure ? 'Free the passages and hold the matched pressure controls to reach the exit'
       : 'Match the marked controls to the gates, then combine pulling and gate movement to reach the exit';
-    const goal = { kind: pressure ? 'compose_pull_pressure_access' : 'compose_matched_pull_circuits', scope: ref.split(':revision:', 1)[0]!,
+    const goal = { kind: plan.route ? 'compose_pull_press_relay' : pressure ? 'compose_pull_pressure_access' : 'compose_matched_pull_circuits',
+      scope: ref.split(':revision:', 1)[0]!,
       subjects: [...new Set([plan.field.goal, ...plan.field.gates.flatMap(gate => [gate.at, ...gate.marks])])],
       parentObjective: completion, satisfactionContract: 'verify_each_gate_and_body_effect_then_reach_exit' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };

@@ -7,15 +7,17 @@ type Cell = string;
 type Gate = { at: Cell; rim: number; accent: number; back: number; delta: NativePoint; marks: Cell[]; closesOnContact: boolean };
 type PressureGate = { at: Cell; marks: Cell[]; pattern: ObservedPressureLatch };
 type Control = Gate | PressureGate;
+type CoveredMark = { accent: number; rim: number; corner: number };
 type Pose = { actor: Cell; bodies: Cell[]; closed: boolean[] };
-type Field = { floor: Cell[]; fixed: Record<Cell, string>; marks: Record<Cell, string>; gates: Control[]; goal: Cell; goalPixels: string };
+type Field = { floor: Cell[]; fixed: Record<Cell, string>; marks: Record<Cell, string>; gates: Control[]; goal: Cell; goalPixels: string;
+  coveredMarks?: Record<Cell, CoveredMark> };
 type Step = { action: NativeCommand; after: Pose; actuated?: true };
 export type PullKnowledge = { grid: ObservedTravel['grid']; moves: ObservedTravel['moves']; actorInkCount: number; body: string; ref: string;
   actuatorRef?: string };
-export type PullCircuitBinding = { field: Field; pose: Pose };
+export type PullCircuitBinding = { field: Field; pose: Pose; route?: string[] };
 type ReadScene = PullCircuitBinding & { occluded?: { at: Cell; fields: Field[] } };
 export type PullCircuitPlan = { start: Pose; field: Field; steps: Step[]; roles: PullKnowledge; evidence: string[];
-  revelation?: PullCircuitBinding[] };
+  revelation?: PullCircuitBinding[]; route?: string[] };
 type Move = { action: NativeCommand; delta: NativePoint };
 
 const stamp = (pixels: readonly number[]) => pixels.join(',');
@@ -37,10 +39,17 @@ function readField(roles: PullKnowledge, route: CoverageTransfer, rows: NativeRo
   const floor: Cell[] = [], bodies: Cell[] = [], goals: Cell[] = [];
   const fixed: Record<Cell, string> = {}, marks: Record<Cell, string> = {};
   const marked = new Map<number, Cell[]>();
+  const coveredMarks: NonNullable<Field['coveredMarks']> = {};
+  const bodyPixels = roles.body.split(',').map(Number);
+  const overlays: (CoveredMark & { at: Cell })[] = [];
   const shutters: { at: Cell; rim: number; accent: number; back: number; closed: boolean }[] = [];
   const latches: { at: Cell; closed: boolean }[] = [];
   const latch = route.pressureLatch;
   let coveredGate: { at: Cell; rim: number } | undefined;
+  const registerMark = (at: Cell, accent: number, pattern: string) => {
+    marks[at] = pattern;
+    marked.set(accent, [...marked.get(accent) ?? [], at]);
+  };
   for (const [at, pixels] of cells) {
     const pattern = stamp(pixels), [rim] = pixels;
     if (latch && (pattern === latch.closed || pattern === latch.open)) {
@@ -57,10 +66,16 @@ function readField(roles: PullKnowledge, route: CoverageTransfer, rows: NativeRo
       if (pattern === route.exitPattern) goals.push(at);
       continue;
     }
+    if (pixels[4] === bodyPixels[4] && arms.every(i => pixels[i] === bodyPixels[i])) {
+      const rim = corners.map(i => pixels[i]!).find(ink => corners.filter(i => pixels[i] === ink).length === 3);
+      const corner = corners.find(i => pixels[i] !== rim);
+      if (rim !== undefined && corner !== undefined) {
+        overlays.push({ at, accent: pixels[corner]!, rim, corner });
+        continue;
+      }
+    }
     if (corners.every(i => pixels[i] === grid.floor) && pixels[1] !== grid.floor && arms.every(i => pixels[i] === pixels[1])) {
-      const accent = pixels[4]!;
-      marks[at] = pattern;
-      marked.set(accent, [...marked.get(accent) ?? [], at]);
+      registerMark(at, pixels[4]!, pattern);
     } else if (rim !== undefined && rim !== grid.floor && corners.every(i => pixels[i] === rim) && pixels[4] !== rim) {
       const accent = arms.map(i => pixels[i]!).find(ink => ink !== rim && ink !== grid.floor
         && arms.filter(i => pixels[i] === ink).length === 3);
@@ -73,6 +88,13 @@ function readField(roles: PullKnowledge, route: CoverageTransfer, rows: NativeRo
       fixed[at] = pattern;
     }
   }
+  for (const { at, accent, rim, corner } of overlays) {
+    if (!shutters.some(gate => gate.accent === accent && gate.rim === rim)) return;
+    const { floor } = grid;
+    registerMark(at, accent, stamp([floor, rim, floor, rim, accent, rim, floor, rim, floor]));
+    coveredMarks[at] = { accent, rim, corner };
+    bodies.push(at);
+  }
   if (goals.length !== 1 || !bodies.length) return;
   const gates: Control[] = [];
   if (latch && latches.length) {
@@ -80,16 +102,16 @@ function readField(roles: PullKnowledge, route: CoverageTransfer, rows: NativeRo
     if (shutters.length || coveredGate || latches.some(gate => !gate.closed) || !controls.length
       || controls.some(cell => marks[cell] !== latch.mark)) return;
     gates.push(...latches.map(({ at }) => ({ at, marks: controls, pattern: latch })));
-  } else if (marked.size !== shutters.length + Number(!!coveredGate) || !marked.size
-    || new Set(shutters.map(gate => gate.accent)).size !== shutters.length) return;
+  } else if (!marked.size || marked.size !== new Set(shutters.map(gate => gate.accent)).size + Number(!!coveredGate)) return;
   for (const { at, rim, accent, back, closed } of shutters) {
     const controls = marked.get(accent);
     if (!controls?.length || controls.includes(at)) return;
-    // Treat the exposed sensors as idle and check this hypothesis against the next visible returns.
-    gates.push({ at, rim, accent, back, delta: gateDelta(back, grid.pitch), marks: controls, closesOnContact: !closed });
+    // An occupied sensor may already be active. Infer polarity from the settled state.
+    const held = controls.every(cell => cell === actor || bodies.includes(cell));
+    gates.push({ at, rim, accent, back, delta: gateDelta(back, grid.pitch), marks: controls, closesOnContact: closed === held });
   }
   const field: Field = { floor: [...floor, ...Object.keys(marks), ...gates.map(gate => gate.at)], fixed, marks, gates,
-    goal: goals[0]!, goalPixels: route.exitPattern };
+    goal: goals[0]!, goalPixels: route.exitPattern, ...(overlays.length ? { coveredMarks } : {}) };
   const pose = { actor, bodies: bodies.sort(), closed: [...latches.map(gate => gate.closed), ...shutters.map(gate => gate.closed)] };
   if (!coveredGate) return { field, pose };
   const { at, rim } = coveredGate;
@@ -99,7 +121,8 @@ function readField(roles: PullKnowledge, route: CoverageTransfer, rows: NativeRo
   if (accent === rim || accent === grid.floor) return;
   // The actor's facing mark can share a pigment with the shutter. Only its border is exposed.
   const fields = arms.map(back => ({ ...field, floor: [...field.floor, at],
-    gates: [...gates, { at, rim, accent, back, delta: gateDelta(back, grid.pitch), marks: controls, closesOnContact: true }] }));
+    gates: [...gates, { at, rim, accent, back, delta: gateDelta(back, grid.pitch), marks: controls,
+      closesOnContact: !controls.every(cell => cell === actor || bodies.includes(cell)) }] }));
   return { field: fields[0]!, pose: { ...pose, closed: [...pose.closed, false] }, occluded: { at, fields } };
 }
 
@@ -155,17 +178,106 @@ function routePriority(field: Field, pitch: number) {
   };
 }
 
+type Neighbor = { action: NativeCommand; at: Cell; rear: Cell };
+type Neighbors = Map<Cell, Neighbor[]>;
+
+function travelMap(start: Cell, neighbors: (cell: Cell) => Iterable<Cell>) {
+  const depth = new Map([[start, 0]]);
+  for (const [cell, distance] of depth) for (const next of neighbors(cell)) {
+    if (!depth.has(next)) depth.set(next, distance + 1);
+  }
+  return depth;
+}
+
+function relayPriority(field: Field, neighbors: Neighbors, bodyCount: number) {
+  if (bodyCount > 8) return;
+  const adjacent = (cell: Cell, omit?: Cell) => (neighbors.get(cell) ?? []).map(move => move.at).filter(at => at !== omit);
+  const directional = field.gates.filter((gate): gate is Gate => !('pattern' in gate));
+  const closing = directional.filter(gate => gate.closesOnContact);
+  const candidates: { crossingSide: Map<Cell, number>; driver: Gate; mark: Cell; track: Cell[] }[] = [];
+  for (const entry of closing) {
+    const [mark] = entry.marks;
+    if (!mark || entry.marks.length !== 1) continue;
+    const exit = directional.find(gate => !gate.closesOnContact && gate.marks.length === 1 && gate.marks[0] === mark);
+    if (!exit) continue;
+    const crossingSide = travelMap(field.goal, cell => adjacent(cell, entry.at));
+    const exitSide = travelMap(field.goal, cell => adjacent(cell, exit.at));
+    if (crossingSide.has(mark)) continue;
+    for (const driver of closing) {
+      if (driver === entry || driver.marks.length !== 1 || !crossingSide.has(driver.at) || exitSide.has(driver.at)) continue;
+      const track: Cell[] = [];
+      let cell = driver.at;
+      while (cell !== mark && neighbors.has(cell)) {
+        track.push(cell);
+        cell = offset(cell, driver.delta);
+      }
+      if (cell === mark && track.includes(entry.at) && track.length <= bodyCount) candidates.push({ crossingSide, driver, mark, track });
+    }
+  }
+  if (candidates.length !== 1) return;
+  const { crossingSide, driver, mark, track } = candidates[0]!;
+  const trackCells = new Set(track);
+  const reverse = new Map(field.floor.map(cell => [cell, new Set<Cell>()]));
+  for (const [stance, moves] of neighbors) for (const { rear } of moves) {
+    if (reverse.has(rear)) reverse.get(stance)!.add(rear);
+  }
+  for (const gate of directional) {
+    let before = gate.at;
+    for (let after = offset(before, gate.delta); reverse.has(after); after = offset(before, gate.delta)) {
+      reverse.get(after)!.add(before);
+      before = after;
+    }
+  }
+  const targets = track.map(cell => travelMap(cell, at => reverse.get(at)!));
+  const toDriver = travelMap(driver.at, adjacent), toControl = travelMap(driver.marks[0]!, adjacent), toExit = travelMap(field.goal, adjacent);
+  const cache = new Map<string, number>();
+  const count = Array.from({ length: 1 << bodyCount }, (_, i) => i.toString(2).replaceAll('0', '').length);
+  function placement(bodies: readonly Cell[]): number {
+    const key = bodies.join(';'), prior = cache.get(key);
+    if (prior !== undefined) return prior;
+    const costs = Array<number>(count.length).fill(Infinity);
+    costs[0] = 0;
+    let best = Infinity;
+    for (let mask = 0; mask < costs.length; mask++) {
+      const used = count[mask]!, cost = costs[mask]!;
+      if (used === targets.length) { best = Math.min(best, cost); continue; }
+      if (!Number.isFinite(cost)) continue;
+      for (const [i, body] of bodies.entries()) if (!(mask & (1 << i))) {
+        const next = mask | (1 << i), distance = targets[used]!.get(body) ?? field.floor.length;
+        costs[next] = Math.min(costs[next]!, cost + distance);
+      }
+    }
+    cache.set(key, best);
+    return best;
+  }
+  return (pose: Pose) => {
+    const { actor, bodies } = pose;
+    if (bodies.includes(mark) && crossingSide.has(actor)) return (toExit.get(actor) ?? field.floor.length) - 18 * (track.length + 1);
+    let aligned = 0;
+    for (const cell of track.slice(1)) {
+      if (!bodies.includes(cell)) break;
+      aligned++;
+    }
+    // Move loose crates through the cut before a growing file can block access to them.
+    const isolated = bodies.filter(cell => !trackCells.has(cell) && !crossingSide.has(cell)).length;
+    const approach = (bodies.includes(driver.at) ? toControl : toDriver).get(actor) ?? field.floor.length;
+    return 5 * placement(bodies) + approach - 18 * aligned + 45 * isolated;
+  };
+}
+
 function findRoute(field: Field, start: Pose, moves: readonly Move[], remaining: number, guided = false) {
   const allows = access(field), floor = new Set(field.floor);
-  const neighbors = new Map(field.floor.map(cell => [cell, moves.flatMap(({ action, delta }) => {
+  const neighbors: Neighbors = new Map(field.floor.map(cell => [cell, moves.flatMap(({ action, delta }) => {
     const at = offset(cell, delta);
     return floor.has(at) ? [{ action, at, rear: offset(cell, delta, -1) }] : [];
   })]));
   type Node = { pose: Pose; distance: number; previous?: Node; step?: Step };
   const buckets = new Map<number, { nodes: Node[]; cursor: number }>();
   const seen = new Map<string, number>();
+  const walked = new Map<string, number>();
   const [dx, dy] = moves[0]!.delta;
-  const priorityFor = guided ? routePriority(field, Math.abs(dx) + Math.abs(dy)) : () => 0;
+  const relay = guided ? relayPriority(field, neighbors, start.bodies.length) : undefined;
+  const priorityFor = relay ?? (guided ? routePriority(field, Math.abs(dx) + Math.abs(dy)) : () => 0);
   let best = Infinity;
   const enqueue = (node: Node) => {
     const key = JSON.stringify(node.pose);
@@ -178,23 +290,37 @@ function findRoute(field: Field, start: Pose, moves: readonly Move[], remaining:
     best = Math.min(best, priority);
   };
   enqueue({ pose: start, distance: 0 });
-  for (let visits = 0; buckets.size && visits < maximumRouteStates; visits++) {
+  for (let visits = 0; buckets.size && visits < maximumRouteStates;) {
     const bucket = buckets.get(best)!;
     const current = guided ? bucket.nodes.pop()! : bucket.nodes[bucket.cursor++]!;
     if (bucket.cursor === bucket.nodes.length) {
       buckets.delete(best);
       best = Math.min(...buckets.keys());
     }
-    const { pose, distance } = current;
-    if (pose.actor === field.goal) {
-      const route: Step[] = [];
-      for (let node: Node | undefined = current; node?.step; node = node.previous) route.push(node.step);
-      return route.reverse();
-    }
-    if (distance >= remaining) continue;
-    for (const { action, at, rear } of neighbors.get(pose.actor) ?? []) {
-      const step = projectMove(field, pose, action, at, rear, allows);
-      if (step) enqueue({ pose: step.after, distance: distance + 1, previous: current, step });
+    if (relay && (walked.get(JSON.stringify(current.pose)) ?? Infinity) <= current.distance) continue;
+    visits++;
+    const walk = [current];
+    for (const position of walk) {
+      const { pose, distance } = position;
+      if (pose.actor === field.goal) {
+        const route: Step[] = [];
+        for (let node: Node | undefined = position; node?.step; node = node.previous) route.push(node.step);
+        return { steps: route.reverse(), relay: !!relay };
+      }
+      if (distance >= remaining) continue;
+      if (relay) {
+        const key = JSON.stringify(pose);
+        if ((walked.get(key) ?? Infinity) <= distance) continue;
+        walked.set(key, distance);
+      }
+      for (const { action, at, rear } of neighbors.get(pose.actor) ?? []) {
+        const step = projectMove(field, pose, action, at, rear, allows);
+        if (!step) continue;
+        const next = { pose: step.after, distance: distance + 1, previous: position, step };
+        if (relay && step.after.bodies.every((body, i) => body === pose.bodies[i])
+          && step.after.closed.every((closed, i) => closed === pose.closed[i])) walk.push(next);
+        else enqueue(next);
+      }
     }
   }
 }
@@ -233,6 +359,8 @@ export function matchesPullCircuit(roles: PullKnowledge, field: Field, pose: Pos
       continue;
     }
     const overlay = gates.get(cell), hasBody = pose.bodies.includes(cell), isOccupied = occupied(pose, cell);
+    const covered = field.coveredMarks?.[cell];
+    if (covered && isOccupied && corners.some(i => pixels[i] !== (i === covered.corner ? covered.accent : covered.rim))) return false;
     if (overlay) {
       const { gate, closed } = overlay;
       if (closed && isOccupied) return false;
@@ -282,10 +410,27 @@ function revealGate(scene: ReadScene, moves: readonly Move[]) {
 export function witnessedPullCircuitReturn(plan: PullCircuitPlan, index: number, rows: NativeRows): PullCircuitBinding | undefined {
   if (!plan.revelation) {
     const pose = plan.steps[index]!.after;
-    return matchesPullCircuit(plan.roles, plan.field, pose, rows) ? { field: plan.field, pose } : undefined;
+    if (!matchesPullCircuit(plan.roles, plan.field, pose, rows)) return;
+    const route = plan.route?.slice(index + 1);
+    return { field: plan.field, pose, ...(route?.length ? { route } : {}) };
   }
   const matched = plan.revelation.filter(({ field, pose }) => matchesPullCircuit(plan.roles, field, pose, rows));
   return matched.length === 1 ? matched[0] : undefined;
+}
+
+function forecastRetainedRoute(scene: PullCircuitBinding, moves: readonly Move[], remaining: number): Step[] | undefined {
+  if (!scene.route?.length) return;
+  const allows = access(scene.field), steps: Step[] = [];
+  let pose = scene.pose;
+  for (const ref of scene.route.slice(0, Math.min(remaining, maximumCommittedActions))) {
+    const move = moves.find(move => move.action.action_ref === ref);
+    if (!move) return;
+    const step = projectMove(scene.field, pose, move.action, offset(pose.actor, move.delta), offset(pose.actor, move.delta, -1), allows);
+    if (!step) return;
+    steps.push(step);
+    pose = step.after;
+  }
+  return steps;
 }
 
 export function planPullCircuit(roles: PullKnowledge, transfer: CoverageTransfer, rows: NativeRows, inputs: readonly NativeCommand[],
@@ -303,12 +448,14 @@ export function planPullCircuit(roles: PullKnowledge, transfer: CoverageTransfer
     return revealed && { ...revealed, start: scene.pose, field: scene.field, roles, evidence };
   }
   const exact = fitsExactPressureSearch(scene);
-  const path = latch && !exact
-    ? pressureRoute(scene, moves, latch, remaining).steps : findRoute(scene.field, scene.pose, moves, remaining, !exact);
+  const retained = forecastRetainedRoute(scene, moves, remaining);
+  const found = retained || latch && !exact ? undefined : findRoute(scene.field, scene.pose, moves, remaining, !exact);
+  const path = retained ?? found?.steps ?? (latch && !exact ? pressureRoute(scene, moves, latch, remaining).steps : undefined);
   if (!path?.length) return;
   const change = path.findIndex(step => step.after.closed.some((closed, index) => closed !== scene.pose.closed[index]));
   const steps = path.slice(0, Math.min(maximumCommittedActions, change < 0 ? path.length : change + 1));
-  return { start: scene.pose, field: scene.field, steps, roles, evidence };
+  const route = retained ? scene.route : found?.relay ? path.map(step => step.action.action_ref) : undefined;
+  return { start: scene.pose, field: scene.field, steps, roles, evidence, ...(route ? { route } : {}) };
 }
 
 export function observePullCircuitBinding(roles: PullKnowledge, transfer: CoverageTransfer, rows: NativeRows,
@@ -350,7 +497,7 @@ export function provesPullCircuitDeadlock(roles: PullKnowledge, start: Pose, cur
     return !allows(pose, at) || pose.bodies.includes(at)
       || JSON.stringify(projectMove(field, pose, action, at, offset(pose.actor, delta, -1), allows)?.after) === key;
   });
-  return trapped && !!findRoute(field, start, moves, Infinity, !fitsExactPressureSearch(current))?.length;
+  return trapped && !!findRoute(field, start, moves, Infinity, !fitsExactPressureSearch(current))?.steps.length;
 }
 
 function pressureRoute(scene: PullCircuitBinding, moves: readonly { action: NativeCommand; delta: NativePoint }[],
