@@ -1,7 +1,7 @@
 {
   "gameCode": "SS19",
-  "version": "0.2.0",
-  "level": 2,
+  "version": "0.2.1",
+  "level": 1,
   "title": "Le gardien du seuil",
   "status": "passed",
   "checks": [

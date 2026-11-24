@@ -2,18 +2,6 @@ export const LEVEL_INFO=[
   {
     "piston": true,
     "platform": false,
-    "label": "Adaptation de Heroes 2: Monsters · énigmes 14 et 15",
-    "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/",
-    "puzzle": "14, 15",
-    "objective": "Apprendre les trois pouvoirs, livrer un monstre au chant sur une presse, puis résoudre les trois verrous des galeries.",
-    "secondary": {
-      "label": "Heroes and Water · 27–28 · appuis et départ sans chant",
-      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/"
-    }
-  },
-  {
-    "piston": true,
-    "platform": false,
     "label": "Adaptation · Heroes 2: Monsters · énigmes 15 et 22",
     "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-15",
     "puzzle": 15,
@@ -21,6 +9,18 @@ export const LEVEL_INFO=[
     "secondary": {
       "label": "Heroes and Light · énigme 1 · presses orientées",
       "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1"
+    }
+  },
+  {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Heroes 2: Monsters · énigmes 14 et 15",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/",
+    "puzzle": "14, 15",
+    "objective": "Apprendre les trois pouvoirs, livrer un monstre au chant sur une presse, puis résoudre les trois verrous des galeries.",
+    "secondary": {
+      "label": "Heroes and Water · 27–28 · appuis et départ sans chant",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/"
     }
   },
   {

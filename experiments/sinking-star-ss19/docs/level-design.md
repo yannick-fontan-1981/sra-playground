@@ -1,15 +1,17 @@
 # SS19 — Les Gardiens Noirs : conception des huit salles
 
-Version du laboratoire : **0.2.0**. La campagne associe le **Guerrier rouge (`W`)**, le **Magicien violet (`Z`)** et le **Barde magenta (`B`)**. Ses huit géométries sont originales ; elles adaptent des problèmes de placement et de transport repérés dans les guides du [Nord](https://sinkingstarwalkthrough.com/fr/north/) et des [zones mixtes](https://sinkingstarwalkthrough.com/fr/crossovers/). Les emprunts et leurs limites sont détaillés dans [l’audit des sources](source-audit.md).
+Version du laboratoire : **0.2.1**. La campagne associe le **Guerrier rouge (`W`)**, le **Magicien violet (`Z`)** et le **Barde magenta (`B`)**. Ses huit géométries sont originales ; elles adaptent des problèmes de placement et de transport repérés dans les guides du [Nord](https://sinkingstarwalkthrough.com/fr/north/) et des [zones mixtes](https://sinkingstarwalkthrough.com/fr/crossovers/). Les emprunts et leurs limites sont détaillés dans [l’audit des sources](source-audit.md).
 
 ## Progression et diversité des problèmes
+
+La révision 0.2.1 échange les deux premières salles de la version 0.2.0. Le jeu démarre au **Gardien du seuil** ; le tutoriel de **31 découvertes** suit au niveau 2, dans **Les galeries des gardiens**. Les cartes, mécanismes et parcours sont conservés avec leur salle. Les niveaux 3 à 8 restent dans le même ordre.
 
 La difficulté vient de la préparation des emplacements, du partage des ressources et des départs qui doivent préserver les poids déjà posés. **Tous les monstres restent immobiles tant qu’un pouvoir, un reflet ou une presse ne les transporte pas.** Aucun pas supplémentaire ne dépend du héros sélectionné, de sa distance ou d’un calcul de direction invisible.
 
 | Niveau | Structure et raisonnement dominant | Entrées du témoin | Dont sélections |
 | --- | --- | ---: | ---: |
-| 1 · Les galeries des gardiens | Trois galeries décalées ; 31 découvertes et trois accès verrouillés différemment | 208 | 20 |
-| 2 · Le gardien du seuil | Rail de trois presses et îlot de relève ; livrer deux poids permanents | 62 | 8 |
+| 1 · Le gardien du seuil | Rail de trois presses et îlot de relève ; livrer deux poids permanents | 62 | 8 |
+| 2 · Les galeries des gardiens | Trois galeries décalées ; 31 découvertes et trois accès verrouillés différemment | 208 | 20 |
 | 3 · L’interrupteur hors d’atteinte | Machine optique isolée et deux sas opposés ; extraire les réserves dans les bons états | 150 | 18 |
 | 4 · Le gardien de la vanne | Réserve temporaire, trappe et bassin ; coordonner le retrait du gardien et le chantier | 135 | 12 |
 | 5 · Le troisième doit rester vivant | Chambre scellée, rencontre provoquée et moulin de presses ; conserver trois poids distincts | 134 | 13 |
@@ -18,7 +20,7 @@ La difficulté vient de la préparation des emplacements, du partage des ressour
 | 8 · Les deux gardiens vivants | Deux transports de monstres, réserve optique et île vide ; répartir exactement les ressources finales | 97 | 15 |
 | **Total des huit témoins** | **Victoire sans refus ni perte dans chaque salle** | **912** | **105** |
 
-Ces comptes décrivent des parcours complets vérifiés. Ils ne mesurent pas la difficulté et ne constituent pas des minimums. Le témoin du niveau 1 comprend volontairement des démonstrations facultatives. Les variantes qualifiées sont indiquées plus bas ; le jeu accepte toute solution conforme aux mêmes règles physiques.
+Ces comptes décrivent des parcours complets vérifiés. Ils ne mesurent pas la difficulté et ne constituent pas des minimums. Le témoin du niveau 2 comprend volontairement des démonstrations facultatives. Les variantes qualifiées sont indiquées plus bas ; le jeu accepte toute solution conforme aux mêmes règles physiques.
 
 Les niveaux 3 et 6 ne contiennent pas de monstre : leurs cartes et leurs témoins sont conservés. Le niveau 7 conserve également sa carte et son témoin, dont les déplacements du monstre étaient déjà provoqués par des poussées. Les niveaux 1, 2, 4, 5 et 8 organisent désormais leurs gardiens autour de commandes explicites. La règle d’immobilité s’applique à tous les monstres de la campagne, sans catégorie particulière.
 
@@ -32,7 +34,19 @@ Les boutons et les presses occupent des cases distinctes. Un bouton montre un pl
 
 Les sorties restent soumises aux circuits après l’arrivée d’un premier héros. **La victoire exige seulement trois héros vivants sur les trois destinations simultanément.** Aucun quota de combat, nombre de reflets, usage obligatoire d’un pouvoir ou découverte pédagogique n’est ajouté à cette condition. Les nécessités mentionnées dans ce guide proviennent de la géométrie et des occupants disponibles.
 
-## 1 · Les galeries des gardiens
+## 1 · Le gardien du seuil
+
+Le rail du gardien est séparé du sol des héros par deux rangées murées. Les trois commandes **jaune, verte et orange**, alignées en **(10,6), (11,6), (12,6)**, actionnent trois presses orientées vers l’ouest. Leurs fermetures livrent successivement le monstre de **(14,3)** à **(13,3)**, puis **(12,3)**, puis au bouton violet distinct en **(11,3)**. Le joueur peut suivre chaque impulsion et son résultat sur le rail.
+
+Revenir sur une commande déjà employée ne remplace pas l’impulsion suivante : sa presse est alors vide. La portée du chant, les visées et l’absence de miroir rendent les presses nécessaires à cette livraison. Une fois arrivé, le gardien conserve sa place jusqu’à un nouveau transport imposé.
+
+Le second poids demande une autre logistique. Le Barde extrait la caisse de son coude aveugle ; le Guerrier l’aligne devant l’eau ; le Magicien échange sa place avec elle pour la laisser sur la commande de son îlot. L’accord des deux boutons violets ouvre les trois destinations.
+
+La nécessité des deux ressources est un comptage final : les trois héros occupent les trois destinations, distinctes des commandes. La caisse et le monstre sont les seuls poids restants pour les deux boutons. Leurs rôles ne sont pas imposés par un compteur invisible.
+
+**Références adaptées :** [Heroes 2, 15 et 22](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour les poids et leur relève ; [Light, 1](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/) pour les poussées depuis un côté inaccessible. Le rail à trois couleurs et l’îlot sont originaux. [Témoin et étapes du niveau 1](../reference/level1-design.json).
+
+## 2 · Les galeries des gardiens
 
 Les trois alcôves sont fermées au départ. La commande cyan demande deux poids, la commande optique doit être libérée et la galerie basse dépend de l’accord du chœur. Une simple marche ne résout donc pas la salle : la caisse déjà posée sur le bouton optique maintient notamment l’alcôve est fermée tant qu’elle n’est pas déplacée.
 
@@ -54,19 +68,7 @@ Les **31 découvertes** couvrent sept familles :
 
 Le témoin de 208 entrées démontre ces interactions ; il n’est pas nécessaire de cocher les 31 découvertes pour gagner. En particulier, la noyade enseignée n’est pas déclarée indispensable à toutes les solutions. Les extractions sans chant et les trois verrouillages donnent au tutoriel une résolution matérielle propre, au-delà de ses démonstrations.
 
-**Références adaptées :** [Heroes 2, 14–15](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour la préparation et les poids ; [Water, 27–28](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/) pour les appuis et les départs imposés ; [Mirrors, 1 et 30](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/) pour le transport et la visée. La baie de livraison, les galeries et les trois verrous sont propres à SS19. [Témoin et étapes du niveau 1](../reference/level1-design.json).
-
-## 2 · Le gardien du seuil
-
-Le rail du gardien est séparé du sol des héros par deux rangées murées. Les trois commandes **jaune, verte et orange**, alignées en **(10,6), (11,6), (12,6)**, actionnent trois presses orientées vers l’ouest. Leurs fermetures livrent successivement le monstre de **(14,3)** à **(13,3)**, puis **(12,3)**, puis au bouton violet distinct en **(11,3)**. Le joueur peut suivre chaque impulsion et son résultat sur le rail.
-
-Revenir sur une commande déjà employée ne remplace pas l’impulsion suivante : sa presse est alors vide. La portée du chant, les visées et l’absence de miroir rendent les presses nécessaires à cette livraison. Une fois arrivé, le gardien conserve sa place jusqu’à un nouveau transport imposé.
-
-Le second poids demande une autre logistique. Le Barde extrait la caisse de son coude aveugle ; le Guerrier l’aligne devant l’eau ; le Magicien échange sa place avec elle pour la laisser sur la commande de son îlot. L’accord des deux boutons violets ouvre les trois destinations.
-
-La nécessité des deux ressources est un comptage final : les trois héros occupent les trois destinations, distinctes des commandes. La caisse et le monstre sont les seuls poids restants pour les deux boutons. Leurs rôles ne sont pas imposés par un compteur invisible.
-
-**Références adaptées :** [Heroes 2, 15 et 22](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour les poids et leur relève ; [Light, 1](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/) pour les poussées depuis un côté inaccessible. Le rail à trois couleurs et l’îlot sont originaux. [Témoin et étapes du niveau 2](../reference/level2-design.json).
+**Références adaptées :** [Heroes 2, 14–15](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/) pour la préparation et les poids ; [Water, 27–28](https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/) pour les appuis et les départs imposés ; [Mirrors, 1 et 30](https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/) pour le transport et la visée. La baie de livraison, les galeries et les trois verrous sont propres à SS19. [Témoin et étapes du niveau 2](../reference/level2-design.json).
 
 ## 3 · L’interrupteur hors d’atteinte
 
@@ -171,6 +173,6 @@ La contre-branche qui immerge la caisse trop tôt en **(12,11)** crée bien un a
 
 Les fichiers de conception liés dans chaque section contiennent la carte, les commandes complètes, les métriques et les états intermédiaires. Les longues chaînes de commandes ne sont pas recopiées ici afin de conserver une seule référence rejouable.
 
-La [revue indépendante 0.2.0](../reference/independent-review-ss19.json) inspecte les huit témoins, les causes de transport et les contraintes géométriques : **37 contrôles réussis**. La [revue des niveaux 6 à 8](../reference/final-ss19-review.json), **21 contrôles réussis**, conserve notamment les variantes **95/10**, **50/9**, **75/9** et **93/15**, ainsi que les refus locaux qui expliquent les obstacles. La [revue du niveau 2](../reference/level2-review.json) contient **10 contrôles** et la [revue des niveaux 3 à 5](../reference/ss19-middle-review.json), **20 contrôles réussis**, contient les deux variantes actuelles du niveau 4. Ces rapports portent sur les cartes de la version 0.2.0. La [validation du laboratoire](validation.md) consigne l’état de la qualification générale.
+La [revue indépendante 0.2.1](../reference/independent-review-ss19.json) inspecte les huit témoins, les causes de transport et les contraintes géométriques : **37 contrôles réussis**. La [revue des niveaux 6 à 8](../reference/final-ss19-review.json), **21 contrôles réussis**, conserve notamment les variantes **95/10**, **50/9**, **75/9** et **93/15**, ainsi que les refus locaux qui expliquent les obstacles. La [revue du niveau 1](../reference/level1-review.json) contient **10 contrôles** et la [revue des niveaux 3 à 5](../reference/ss19-middle-review.json), **20 contrôles réussis**, contient les deux variantes actuelles du niveau 4. Ces rapports portent sur les cartes de la version 0.2.1. La [validation du laboratoire](validation.md) consigne l’état de la qualification générale.
 
 Un témoin gagnant établit la résolubilité. Une contre-branche établit l’effet exact de cette tentative. Une nécessité générale demande en plus un invariant de ressources, une frontière géométrique ou un examen exhaustif du cas annoncé. La campagne conserve les solutions alternatives qui satisfont ses règles visibles ; elle ne les remplace pas par des conditions cachées destinées à imposer le parcours d’auteur.

@@ -1,7 +1,232 @@
 [
   {
     "level": 1,
-    "id": "ss19-l1",
+    "id": "ss19-01",
+    "commands": "RRRRRRCCLDDDCLLLLDDDRRRRRRRDLLLLLLCRURRDRRRRRRRCCDDDDDCCDDRRRD",
+    "actions": [
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 12,
+          "y": 33
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 42,
+          "y": 30
+        }
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 39,
+          "y": 21
+        }
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 3
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 12,
+          "y": 33
+        }
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 1
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 39,
+          "y": 39
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 30,
+          "y": 33
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 54,
+          "y": 33
+        }
+      },
+      {
+        "id": 6,
+        "data": {
+          "x": 39,
+          "y": 39
+        }
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 2
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 4
+      },
+      {
+        "id": 2
+      }
+    ]
+  },
+  {
+    "level": 2,
+    "id": "ss19-02",
     "commands": "UDRRURRRRRRRDLCUURRRDRXDCCULLLDRRXCURCCURDULCDRCRRCDDDDLLLLLLLLDDDDDRRRRDCCRCRCDDDDLLLLLLLLLLLLDDRRRRDDRRRDRRRRLCLCCRDULCCRURRRDDDRRRDULLLUUUUUULLLLLLLLLLUUUULLCLUUULLLLLUUURRRRRRRRRRURRRRRCDLDDDDLLLLLLLLLLLL",
     "actions": [
       {
@@ -707,231 +932,6 @@
       },
       {
         "id": 3
-      }
-    ]
-  },
-  {
-    "level": 2,
-    "id": "ss19-02",
-    "commands": "RRRRRRCCLDDDCLLLLDDDRRRRRRRDLLLLLLCRURRDRRRRRRRCCDDDDDCCDDRRRD",
-    "actions": [
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 12,
-          "y": 33
-        }
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 42,
-          "y": 30
-        }
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 39,
-          "y": 21
-        }
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 3
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 12,
-          "y": 33
-        }
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 1
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 39,
-          "y": 39
-        }
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 30,
-          "y": 33
-        }
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 54,
-          "y": 33
-        }
-      },
-      {
-        "id": 6,
-        "data": {
-          "x": 39,
-          "y": 39
-        }
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 2
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 4
-      },
-      {
-        "id": 2
       }
     ]
   },

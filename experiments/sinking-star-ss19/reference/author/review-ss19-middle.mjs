@@ -110,5 +110,5 @@ check('N5 : deux impulsions et trois poids finaux distincts',()=>{
  for(const id of ['captif','verrou','meule'])assert.equal(circuitPressed(r.world,r.state,id),true);
  return {pistonLandings:[{x:9,y:4},{x:9,y:5}],weights:[{x:5,y:8},{x:5,y:9},{x:9,y:12}]};
 });
-const report={gameCode:'SS19',version:'0.2.0',scope:'Niveaux 3–5 : témoins, contre-branches et variantes physiques locales ; sans preuve de solution unique. La carte et le témoin de N3 sont conservés.',levels:refs.map(d=>({id:d.spec.id,sha256:createHash('sha256').update(JSON.stringify(d.spec)).digest('hex')})),checks,passed:checks.length,failed:0};
+const report={gameCode:'SS19',version:'0.2.1',scope:'Niveaux 3–5 : témoins, contre-branches et variantes physiques locales ; sans preuve de solution unique. La carte et le témoin de N3 sont conservés.',levels:refs.map(d=>({id:d.spec.id,sha256:createHash('sha256').update(JSON.stringify(d.spec)).digest('hex')})),checks,passed:checks.length,failed:0};
 writeFileSync(new URL('../ss19-middle-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

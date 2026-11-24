@@ -6,11 +6,12 @@ import {execFileSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
 import {compileLevel,initialState,terrainAt,supported,gateClosed,doorsOpen,equal} from '../dist/core.js';
 import {SS19_LEVELS} from '../dist/levels.js';
+import {TUTORIAL_LEVEL} from '../dist/tutorial.js';
 import {replay} from './solver.mjs';
 
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const directions=[[0,-1],[0,1],[-1,0],[1,0]],key=p=>p.y*20+p.x;
-const report={game:'SS19',success:false,scope:'Initial frozen geometry, exact layout comparison with SS14–18 and reproducible local counter-branches',levels:[],reviews:[],limitations:[
+const report={game:'SS19',version:'0.2.1',success:false,scope:'Initial frozen geometry, exact layout comparison with SS14–18 and reproducible local counter-branches',levels:[],reviews:[],limitations:[
  'A winning witness proves solvability, not an optimal or unique route.',
  'The walking graphs freeze resources and circuit states and suppress automatic abilities. They do not model joint puzzle solving.',
  'A geometric comparison detects exact repeats under rotations, reflections and translations; it does not measure subjective originality or difficulty.',
@@ -72,7 +73,7 @@ try{
   const walking=state.heroes.map(h=>initialWalking(world,state,h)),generousWalking=state.heroes.map(h=>initialWalking(world,state,h,true));
   const matching=matchingSize(generousWalking);
   assert.ok(matching<3,spec.id+': all three goals must not already be assignable by frozen walking');
-  if(index===0)assert.ok(walking.every(r=>r.reachableGoals.length===0),'The introductory room has no immediately reachable goal');
+  if(index===TUTORIAL_LEVEL-1)assert.ok(walking.every(r=>r.reachableGoals.length===0),'The tutorial room has no immediately reachable goal');
   const route=replay(spec,design.commands);assert.equal(route.state.complete,true);assert.equal(route.metrics.blocked,0);assert.equal(route.metrics.deaths,0);
   const local=[];
   for(const check of design.adaptation?.localChecks??[]){
@@ -84,7 +85,7 @@ try{
   }
   report.levels.push({level:index+1,title:spec.title,mapSha256:hash(spec),terrainSha256:terrainHash,goals:world.goals,landCells:world.terrain.filter(c=>c==='.').length,waterCells:world.terrain.filter(c=>c==='~').length,walking,generousWalking,maximumFrozenWalkingGoalAssignment:matching,buttonsAndPressesSeparate:true,exactHistoricalTerrainRepeats:repeats,localChecks:local});
  }
- for(const script of ['review-level2-ss19.mjs','review-ss19-middle.mjs','review-final-ss19.mjs','independent-review-ss19.mjs']){
+ for(const script of ['review-level1-ss19.mjs','review-ss19-middle.mjs','review-final-ss19.mjs','independent-review-ss19.mjs']){
   const path=new URL('../reference/author/'+script,import.meta.url);assert.ok(existsSync(path),'Missing required review: '+script);
   const output=execFileSync(process.execPath,[fileURLToPath(path)],{encoding:'utf8',maxBuffer:4*1024*1024});
   const result=JSON.parse(output);assert.ok(result.success!==false,script+': failed review');

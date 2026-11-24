@@ -1,84 +1,13 @@
 {
   "game": "SS19",
+  "version": "0.2.1",
   "success": true,
   "scope": "Initial frozen geometry, exact layout comparison with SS14–18 and reproducible local counter-branches",
   "levels": [
     {
       "level": 1,
-      "title": "Les galeries des gardiens",
-      "mapSha256": "7fa1651341e3c06382685602517c9eda62f01c02fdf05ad5754b50cfc8a41f67",
-      "terrainSha256": "4a509f9bffd52c41dc7c5d98e8bb4298564ab4d37f64d63ac6050e240842fbc6",
-      "goals": [
-        {
-          "x": 1,
-          "y": 4
-        },
-        {
-          "x": 18,
-          "y": 4
-        },
-        {
-          "x": 1,
-          "y": 16
-        }
-      ],
-      "landCells": 213,
-      "waterCells": 4,
-      "walking": [
-        {
-          "role": "warrior",
-          "states": 193,
-          "transitions": 772,
-          "reachableGoals": [],
-          "exhausted": true
-        },
-        {
-          "role": "wizard",
-          "states": 193,
-          "transitions": 772,
-          "reachableGoals": [],
-          "exhausted": true
-        },
-        {
-          "role": "bard",
-          "states": 193,
-          "transitions": 772,
-          "reachableGoals": [],
-          "exhausted": true
-        }
-      ],
-      "generousWalking": [
-        {
-          "role": "warrior",
-          "states": 195,
-          "transitions": 780,
-          "reachableGoals": [],
-          "exhausted": true
-        },
-        {
-          "role": "wizard",
-          "states": 195,
-          "transitions": 780,
-          "reachableGoals": [],
-          "exhausted": true
-        },
-        {
-          "role": "bard",
-          "states": 195,
-          "transitions": 780,
-          "reachableGoals": [],
-          "exhausted": true
-        }
-      ],
-      "maximumFrozenWalkingGoalAssignment": 0,
-      "buttonsAndPressesSeparate": true,
-      "exactHistoricalTerrainRepeats": [],
-      "localChecks": []
-    },
-    {
-      "level": 2,
       "title": "Le gardien du seuil",
-      "mapSha256": "63b744d425757e89737a59137481faf4356e2f6cd0cc862ed6eda6c459d8097c",
+      "mapSha256": "712706ae914a41a4a3a3f9807d0ed8a237ebf64a9d544e74ee50b5de2bdf28ff",
       "terrainSha256": "2969deab27c681d3e1074ada25b3166a2649ebae6615a992aa7805ed8897b7b8",
       "goals": [
         {
@@ -165,6 +94,78 @@
           "verification": "Reviewed by the dedicated author script"
         }
       ]
+    },
+    {
+      "level": 2,
+      "title": "Les galeries des gardiens",
+      "mapSha256": "436ceddeecf06fac79cc0c31ffdf4707812e8e05aeb10c306afd5e9a6d36dcf4",
+      "terrainSha256": "4a509f9bffd52c41dc7c5d98e8bb4298564ab4d37f64d63ac6050e240842fbc6",
+      "goals": [
+        {
+          "x": 1,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 4
+        },
+        {
+          "x": 1,
+          "y": 16
+        }
+      ],
+      "landCells": 213,
+      "waterCells": 4,
+      "walking": [
+        {
+          "role": "warrior",
+          "states": 193,
+          "transitions": 772,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 193,
+          "transitions": 772,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 193,
+          "transitions": 772,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "warrior",
+          "states": 195,
+          "transitions": 780,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "wizard",
+          "states": 195,
+          "transitions": 780,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 195,
+          "transitions": 780,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
     },
     {
       "level": 3,
@@ -674,12 +675,12 @@
   ],
   "reviews": [
     {
-      "script": "reference/author/review-level2-ss19.mjs",
+      "script": "reference/author/review-level1-ss19.mjs",
       "success": true,
       "result": {
         "gameCode": "SS19",
-        "version": "0.2.0",
-        "level": 2,
+        "version": "0.2.1",
+        "level": 1,
         "title": "Le gardien du seuil",
         "status": "passed",
         "checks": [
@@ -736,14 +737,14 @@
         ],
         "scope": "Rejeux contradictoires ciblés et arguments géométriques ; aucune preuve de route minimale ou d’unicité."
       },
-      "sha256": "aae3c1a781a518f517c25c5a6fd41a58b7b69d270742bcb56e91cf4290e01540"
+      "sha256": "2f0b8f998c9d7ef5ab6458904b5f577736395cdfe4f621026b5a99c769e76f55"
     },
     {
       "script": "reference/author/review-ss19-middle.mjs",
       "success": true,
       "result": {
         "gameCode": "SS19",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "scope": "Niveaux 3–5 : témoins, contre-branches et variantes physiques locales ; sans preuve de solution unique. La carte et le témoin de N3 sont conservés.",
         "levels": [
           {
@@ -932,14 +933,14 @@
         "passed": 20,
         "failed": 0
       },
-      "sha256": "c3a1a5b09b30d7a2f50bfee33325e1175b6446fb51c8e37d829a8177d79b1abc"
+      "sha256": "4684026195207c82696bf21c841b277c0f00090d6960a995b9ad30ee64cf3ced"
     },
     {
       "script": "reference/author/review-final-ss19.mjs",
       "success": true,
       "result": {
         "game": "SS19",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "status": "passed",
         "scope": "Revue des niveaux6–8 sans poursuite autonome : rejeux, variantes constructives, causes physiques visibles et preuves géométriques spécifiques au dernier niveau. N6 conserve absolument sa carte et sa route. Aucune unicité ou optimalité des solutions n’est annoncée.",
         "checks": [
@@ -1380,14 +1381,14 @@
           "passed": 21
         }
       },
-      "sha256": "0db8ad63499ccafe86661e0393e45b0787eadf64ae6725845fb0cbbd43d5d14d"
+      "sha256": "0087ac162d378b4026f90073b14d505388a0379bdf76be10b08e29942a0426e5"
     },
     {
       "script": "reference/author/independent-review-ss19.mjs",
       "success": true,
       "result": {
         "status": "passed",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "levels": [
           1,
           2,
@@ -1400,7 +1401,7 @@
         ],
         "checks": 37
       },
-      "sha256": "80983c54def80f0e84898461f5428a33b6ee92bbb233e1c25e991f1dc26b3dc4"
+      "sha256": "816c81efb402fe5464da052a898014925944aedcd7adcfea03e83be5e050ebcb"
     }
   ],
   "limitations": [

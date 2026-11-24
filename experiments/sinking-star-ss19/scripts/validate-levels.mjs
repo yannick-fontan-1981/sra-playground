@@ -22,7 +22,7 @@ assert.equal(LEVEL_INFO.length,8,'Each level needs public source metadata');
 const worlds=SS19_LEVELS.map(compileLevel),starts=worlds.map(initialState);
 const session=new TrioPuzzleSession(SS19_LEVELS),learned=new Set();
 const report={game:'SS19',version,campaignSearch:false,scope:'Eight authored routes, public observations, animation contracts and tutorial coverage',levels:[],totals:{},success:false};
-assert.equal(TUTORIAL_LEVEL,1);assert.ok(lessonIds.length>=18,'The workshop has a substantial teaching sequence');assert.equal(new Set(lessonIds).size,lessonIds.length);
+assert.equal(TUTORIAL_LEVEL,2);assert.ok(lessonIds.length>=18,'The workshop has a substantial teaching sequence');assert.equal(new Set(lessonIds).size,lessonIds.length);
 report.ordering={firstLevel:SS19_LEVELS[0].id,firstTitle:SS19_LEVELS[0].title,tutorialLevel:TUTORIAL_LEVEL};
 assert.equal(new Set(SS19_LEVELS.map(({id,title,...map})=>hash(map))).size,8,'The eight rooms must have distinct maps');
 
@@ -189,7 +189,7 @@ for(const [index,spec] of SS19_LEVELS.entries()){
  assert.ok(state.complete&&result.state.complete,label+': solved by its author witness');
  assert.equal(result.metrics.blocked,0);assert.equal(result.metrics.deaths,0);
  if(level<TUTORIAL_LEVEL)assert.equal(learned.size,0,label+': no discovery before the tutorial');
- if(level===TUTORIAL_LEVEL)assert.deepEqual([...learned].sort(),[...lessonIds].sort(),'The level 1 witness demonstrates every tutorial lesson before leaving its room');
+ if(level===TUTORIAL_LEVEL)assert.deepEqual([...learned].sort(),[...lessonIds].sort(),'The level 2 witness demonstrates every tutorial lesson before leaving its room');
  const recordedStages=checkStages(design,result,label);
  assert.deepEqual(session.undo(),beforeLast,label+': Undo restores the last action including level progression');
  const last=witness.actions.at(-1);assert.deepEqual(session.action(last.id,last.data),finalObservation,label+': redoing the completion is deterministic');
@@ -206,7 +206,7 @@ for(const [index,spec] of SS19_LEVELS.entries()){
 
 assert.equal(session.observe().state,'WIN');assert.equal(session.observe().levelsCompleted,8);
 report.campaignChecks={levels:8,finalState:'WIN',allCompletionUndosVerified:true,allShippedMapsMatchAuthorReferences:true,allWitnessesCompleteWithoutRefusalOrDeath:true};
-assert.deepEqual([...learned].sort(),[...lessonIds].sort(),'The level 1 author route demonstrates every public-pixel lesson');
+assert.deepEqual([...learned].sort(),[...lessonIds].sort(),'The level 2 author route demonstrates every public-pixel lesson');
 report.tutorial={level:TUTORIAL_LEVEL,actions:witnesses[TUTORIAL_LEVEL-1].actions.length,lessons:[...lessonIds],acquired:learned.size,publicPixelsOnly:true,onlyTutorialRoomAwardsDiscoveries:true};
 report.mechanismCoverage=report.levels.map(level=>Object.fromEntries(['level','swaps','partnerSwaps','stoneSwaps','monsterSwaps','bentSwaps','multiMirrorSwaps','swapReflections','swapLoops','warriorPushes','trainPushes','huntSteps','monsterHuntMoves','songs','groupSongs','songHeroMoves','songStoneMoves','songMonsterMoves','supportMoves','partnerMoves','platformsCreated','mirrorMoves','reflections','pistonPushes','combatWaves','hydraulicChanges'].map(key=>[key,level[key]])));
 

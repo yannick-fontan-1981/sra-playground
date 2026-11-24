@@ -37,7 +37,7 @@ function walkRegion(w,s,seeds){
  return seen;
 }
 {
- const d=read(1),w=compileLevel(d.spec),s=initialState(w),checks=[],r=replay(d.spec,d.commands);
+ const d=read(2),w=compileLevel(d.spec),s=initialState(w),checks=[],r=replay(d.spec,d.commands);
  assert.equal(r.state.complete,true);assert.equal(r.metrics.blocked,0);assert.equal(r.metrics.deaths,0);
  check(checks,'Parcours pédagogique intégral',`${r.metrics.actions} entrées, ${r.metrics.selections} sélections ; WIN sans refus ni perte.`,'Rejeu indépendant du témoin actuel ; les interactions facultatives ne sont pas déclarées nécessaires.');
  const region=walkRegion(w,s,s.heroes.map(h=>h.at));assert.ok(w.goals.every(g=>!region.has(`${g.x},${g.y}`)));
@@ -57,7 +57,7 @@ function walkRegion(w,s,seeds){
  const singingTurn=movements[0].entry,beforeSong=replay(d.spec,d.commands.slice(0,singingTurn-1));
  const refusal=stepDetailed(w,beforeSong.state,1);assert.equal(refusal.state.failed,true);assert.deepEqual(refusal.state.monsters,beforeSong.state.monsters);
  check(checks,'Le chant exige un vrai pas de la Barde','Au poste de livraison, son pas vers le haut est refusé par le mur : le gardien reste immobile. Le pas vers la gauche du témoin est accepté et lui seul transporte le monstre sur la presse.','Deux gestes locaux comparables ; aucune attraction à travers les murs n’est simulée.');
- addReport(1,d,r,checks);
+ addReport(2,d,r,checks);
 }
 {
  const d=read(3),w=compileLevel(d.spec),s=initialState(w),checks=[],r=replay(d.spec,d.commands);
@@ -123,7 +123,7 @@ function walkRegion(w,s,seeds){
 }
 
 {
- const d=read(2),w=compileLevel(d.spec),s=initialState(w),checks=[],r=replay(d.spec,d.commands);assert.equal(r.state.complete,true);assert.equal(r.metrics.blocked,0);assert.equal(r.metrics.deaths,0);
+ const d=read(1),w=compileLevel(d.spec),s=initialState(w),checks=[],r=replay(d.spec,d.commands);assert.equal(r.state.complete,true);assert.equal(r.metrics.blocked,0);assert.equal(r.metrics.deaths,0);
  const movements=physicalMonsterEvents(r);assert.equal(movements.length,3);assert.ok(movements.every(e=>e.phase==='piston'));
  assert.deepEqual(movements.map(e=>e.moves),[14,13,12].map(x=>[{actor:'monster',from:point(x,3),to:point(x-1,3)}]));
  assert.deepEqual(r.state.monsters,[point(11,3)]);assert.deepEqual(r.state.stones,[point(3,10)]);
@@ -138,7 +138,7 @@ function walkRegion(w,s,seeds){
  assert.ok(threshold.buttons.every(b=>!w.goals.some(g=>same(g,b))&&!w.gates.some(g=>same(g.at,b))));
  assert.ok(w.goals.every(goal=>w.gates.some(g=>same(g.at,goal)&&g.circuit==='seuil'&&g.closedWhen==='released')));
  check(checks,'La caisse et le monstre sont deux poids nécessaires','Les trois héros doivent occuper les trois destinations, toutes soumises au même accord. Les deux boutons violets, hors destinations et hors presses, ne peuvent alors être tenus que par la caisse et le monstre.','Comptage exhaustif des occupants disponibles ; perdre l’une des deux pièces interdit cet accord final.');
- addReport(2,d,r,checks);
+ addReport(1,d,r,checks);
 }
 {
  const d=read(4),w=compileLevel(d.spec),s=initialState(w),checks=[],r=replay(d.spec,d.commands);assert.equal(r.state.complete,true);assert.equal(r.metrics.blocked,0);assert.equal(r.metrics.deaths,0);
@@ -182,6 +182,6 @@ function walkRegion(w,s,seeds){
 }
 
 reports.sort((a,b)=>a.level-b.level);
-const report={gameCode:'SS19',version:'0.2.0',title:'Les Gardiens Noirs',status:'passed',levels:reports,scope:'Relecture des huit salles 0.2.0 et de leurs causes physiques. Le nouveau rail de N2 a été rédigé par un autre auteur, sur une géométrie 0.1.0 initialement conçue par ce relecteur ; les autres salles sont relues indépendamment de leurs auteurs. Contrôles ciblés, variantes rejouées et preuves géométriques ; aucune recherche bornée n’est présentée comme une impossibilité universelle.'};
+const report={gameCode:'SS19',version:'0.2.1',title:'Les Gardiens Noirs',status:'passed',levels:reports,scope:'Relecture des huit salles 0.2.1 et de leurs causes physiques. Le rail de N1 (ancien N2) a été rédigé par un autre auteur, sur une géométrie 0.1.0 initialement conçue par ce relecteur ; les autres salles sont relues indépendamment de leurs auteurs. Contrôles ciblés, variantes rejouées et preuves géométriques ; aucune recherche bornée n’est présentée comme une impossibilité universelle.'};
 writeFileSync(new URL('../independent-review-ss19.json',import.meta.url),JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify({status:'passed',version:report.version,levels:reports.map(r=>r.level),checks:reports.reduce((n,r)=>n+r.checks.length,0)}));
