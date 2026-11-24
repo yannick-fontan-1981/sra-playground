@@ -35,12 +35,15 @@ Il reste **cinq jeux, soit quarante niveaux**, pour le lot **SS21–SS25**. Ce l
 
 Dans cette feuille de route, `M` désigne le Marchand, `W` le Guerrier, `Z` le Magicien, `T` le Voleur et `B` le Barde. SS20 lui-même utilise uniquement **M/T/B** et trois destinations ; le passage aux quatuors demandera son propre contrat et ses propres cartes.
 
-## Prochaine phase : intégration native et publication
+## Intégration native et publication
 
-La prochaine intégration ajoute SS20 après SS19 dans SRA Playground, avec les huit images de départ, les crédits, le lien direct, les commandes et le tutoriel au niveau 1. Elle compare les observations et animations natives à la référence du laboratoire et exécute les contrôles du dépôt, dont `npm run test:sic-continuity`.
+- [x] SS20 suit SS19 dans Custom 4. Le sélecteur numéroté, les liens directs et la galerie couvrent les huit salles.
+- [x] L’atelier des marées ouvre la campagne avec le Marchand. Les trente découvertes sont observées au niveau 1.
+- [x] L’adaptateur et le dispatcher correspondent au laboratoire sur 1 344 entrées, dont 165 sélections, et 3 821 images avec leurs durées.
+- [x] Edge confirme la victoire manuelle depuis le niveau 1, l’annulation de la transition vers le niveau 2, la reprise, les dispositifs et les commandes clavier et tactiles.
 
-La sauvegarde et la publication suivent les règles de [AGENTS.md](../../../AGENTS.md) et de la [politique GitHub/Site](../../../docs/migration/git-site-sync-policy.md) : tests, commit, push, intégration sur la branche canonique, publication depuis cet état puis vérification du résultat. Le Site est le déploiement du code sauvegardé ; il ne remplace pas sa sauvegarde GitHub.
+Le parcours de référence compte 1 179 coups hors sélection. Les huit salles en demandent respectivement 219, 199, 80, 86, 117, 77, 79 et 322. Le contrôle interactif de SRA couvre le pas-à-pas et l’interruption.
 
-Le compte rendu de cette phase doit relier **branche → SHA local → SHA poussé → SHA intégré → version Site → SHA source publié**, ou préciser quand ce dernier n’est pas fourni. En cas de divergence, préserver les deux états et les réconcilier avant toute affirmation de synchronisation.
+La publication utilise le Site existant et ses accès privés. Le compte rendu relie le commit GitHub intégré à la version Site vérifiée.
 
-Les témoins, leurs longueurs et les contrôles de ressources ne démontrent ni difficulté optimale, ni solution unique, ni résolution autonome de SRA. Les variantes conformes aux règles restent autorisées.
+[Jouer à SS20 sur SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS20#playground)

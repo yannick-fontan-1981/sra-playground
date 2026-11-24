@@ -116,6 +116,11 @@ export function createGameDispatcher(loadLegacy: () => Promise<GameBackend>, loa
             backend = createSs19Backend();
             break;
           }
+          case 'SS20': {
+            const { createSs20Backend } = await import('../games/sinking-star-ss20.ts');
+            backend = createSs20Backend();
+            break;
+          }
           default:
             backend = await (legacy ??= loadLegacy().catch(error => { legacy = undefined; throw error; }));
         }
