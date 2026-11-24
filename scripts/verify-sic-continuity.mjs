@@ -223,6 +223,7 @@ function measuredCarrySeries(level, tickets) {
   const world = compileCarryLevel(SS05_LEVELS[level - 1]);
   let state = initialCarryState(world), previous, firstCarry;
   let openedWithWeight = false, reflectedWeight = false;
+  let separatedWeight = false, crossedOpenGate = false;
   const series = [];
   for (const [index, ticket] of tickets.entries()) {
     const result = stepCarryWorld(world, state, Number(ticket.action.slice(6)));
@@ -237,6 +238,24 @@ function measuredCarrySeries(level, tickets) {
         series.push({ kind: moves.length ? 'reflect the preserved movable weight' : 'reflect to another route', first: index, last: index + 1 });
       }
       openedWithWeight ||= !carryDoorsOpen(world, state) && carryDoorsOpen(world, result.state)
+        && result.state.stones.some(stone => world.buttons.some(button => equal(stone, button)));
+    }
+    if (level === 6) {
+      assert.equal(result.state.stones.length, world.stones.length, 'SS05 L6 consumed the required weight');
+      const opened = carryDoorsOpen(world, state);
+      if (phase?.kind === 'reflect') {
+        const apart = (a, b) => Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y)) > 2;
+        if (moves.some(move => !apart(state.hero, move.from) && apart(result.state.hero, move.to))) {
+          assert.ok(continued, 'SS05 L6 should reflect the weight out of range in the same series');
+          separatedWeight = true;
+          series.push({ kind: 'separate the weight from the controller through reflection', first: index, last: index + 1 });
+        }
+        if (opened && phase.paths?.some(path => path.some(cell => world.doors.some(door => equal(cell, door))))) {
+          crossedOpenGate = true;
+          series.push({ kind: 'reflect through the activated gate', first: index + 1, last: index + 1 });
+        }
+      }
+      openedWithWeight ||= !opened && carryDoorsOpen(world, result.state)
         && result.state.stones.some(stone => world.buttons.some(button => equal(stone, button)));
     }
     if (level === 3 && state.monsters.length - result.state.monsters.length === 2) {
@@ -271,6 +290,10 @@ function measuredCarrySeries(level, tickets) {
     assert.ok(openedWithWeight && reflectedWeight && series.length >= 3, 'SS05 L5 must use the preserved weight to restore access');
     return series;
   }
+  if (level === 6) {
+    assert.ok(separatedWeight && openedWithWeight && crossedOpenGate, 'SS05 L6 must separate the weight, activate the control group and reflect through');
+    return series;
+  }
   if (level === 3 || level === 4) {
     assert.equal(series.length, 1, 'SS05 did not execute the expected object composition');
     return series;
@@ -288,7 +311,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 5 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 6 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -398,7 +421,7 @@ export function checkRun(run) {
     }
     if (code === 'SS05') {
       // The earlier run used 46 isolated actions on L1 and first moved a weight on L2 at action 119.
-      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24]][row.level - 1];
+      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24], [38, 20]][row.level - 1];
       assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
@@ -436,7 +459,7 @@ function main() {
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
-      ['local-carry', 'SS05', '5', '155'],
+      ['local-carry', 'SS05', '6', '155'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

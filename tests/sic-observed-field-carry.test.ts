@@ -11,7 +11,7 @@ import { lostResourceCoverage } from '../src/sic/resource-reserve.ts';
 import { admitFieldCarry, checkFieldCarryReturn, observeFieldCarry, planFieldCarry,
   type FieldCarryMemory, type FieldCarryPlan } from '../src/sic/observed-field-carry.ts';
 
-for (const mirrored of [false, true]) test(`carry and object composition transfer across five levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, async () => {
+for (const mirrored of [false, true]) test(`carry and object composition transfer across six levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, async () => {
   const transform = (world: World, state: State) => {
     const rows = renderWorld(world, state);
     if (mirrored) for (const [index, point] of state.monsters.entries()) {
@@ -24,13 +24,14 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
   const commands = new Map([1, 2, 3, 4, 5].map(id => [`ACTION${id + (mirrored ? 10 : 20)}`, id]));
   const inputs = [...commands].map(([action_ref]) => ({ action_ref, data: {} }));
   let memory: FieldCarryMemory | undefined;
-  for (let level = 0; level < 5; level++) {
+  for (let level = 0; level < 6; level++) {
     const world = compileLevel(SS05_LEVELS[level]!);
     let current = initialState(world), marks: FieldCarryPlan['marks'] | undefined;
     let actions = 0, firstCarry = 0, continuousCarry = false, firstBody: number | undefined, compositions = 0;
     if (memory) {
       delete memory.supportAt;
       delete memory.seenFloor;
+      delete memory.gateReturns;
     }
     if (level === 4) {
       const testedCommands = inputs.map(input => input.action_ref);
@@ -65,6 +66,70 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
         await family.observePublicOutcome!(restored, lostAgain, hazardous, before, after);
         assert.equal(family.requestedStopReason!(lostAgain), 'sic_resource_loss_already_recovered');
       }
+    }
+    if (level === 5) for (const requiresBoth of [true, false]) {
+      const layout = requiresBoth ? world : { ...world, buttons: world.buttons.slice(0, 1) };
+      const display = (state: State) => {
+        const rows = transform(layout, state);
+        const other = world.buttons[1]!;
+        if (requiresBoth || [state.hero, ...state.stones].some(p => p.x === other.x && p.y === other.y)) return rows;
+        const y = 2 + other.y * 3, x = mirrored ? 59 - other.x * 3 : 2 + other.x * 3;
+        const tint = (7 + (mirrored ? 9 : 4)) % 16;
+        for (const [dx, dy] of [[1, 0], [0, 1], [1, 1], [2, 1], [1, 2]] as const) rows[y + dy]![x + dx] = tint;
+        return rows;
+      };
+      const family = createSicPublicInputExploration(), controls = inputs.map(input => input.action_ref);
+      type Proposal = NonNullable<Awaited<ReturnType<typeof family.propose>>>;
+      const measure = (state: State, revision: number) => measureNativeObservation({
+        frame_rows: display(state), frame_hash: `board:${revision}`, level: level + 1,
+        levels_completed: level, state: 'NOT_FINISHED', available_action_refs: controls,
+      }, revision);
+      let state = current, revision = 1, observation = await measure(state, revision), probes = 0;
+      family.restore({ ...family.state!(), epoch: observation.level_epoch, fieldCarry: memory! });
+      const act = async (input: typeof inputs[number], proposal?: Proposal, index = 0) => {
+        const before = display(state);
+        const next = stepDetailed(layout, state, commands.get(input.action_ref)!).state, after = display(next);
+        assert.equal(next.dead, false);
+        const returned = await measure(next, ++revision);
+        if (proposal) {
+          assert.ok(admitFieldCarry(proposal.fieldCarryPlan!, index, before));
+          if (!next.complete) {
+            assert.ok(checkFieldCarryReturn(proposal.fieldCarryPlan!, index, before, after));
+            await family.record!(observation, returned, input, before, after, proposal, index);
+          }
+        } else await family.observePublicOutcome!(observation, returned, input, before, after);
+        state = next;
+        observation = returned;
+      };
+      for (const id of [1, 4, 4, 2, 3, 4, 4]) await act(inputs.find(input => commands.get(input.action_ref) === id)!);
+      assert.equal(state.stones.length, 0);
+      assert.equal(family.requestedStopReason!(observation), null);
+      for (let phase = 0; !family.requestedStopReason!(observation) && !state.complete && phase < 4; phase++) {
+        const proposal = await family.proposeInGroup!(observedPressureRecoveryGroup, observation, display(state), inputs, 60);
+        assert.ok(proposal?.fieldCarryPlan?.reflectiveRoute, `No access plan after ${probes} probes`);
+        if (requiresBoth || probes === 0) assert.ok(proposal.fieldCarryPlan.gateProbe);
+        if (proposal.fieldCarryPlan.gateProbe) probes++;
+        for (const [index, step] of proposal.fieldCarryPlan.steps.entries()) {
+          const input = inputs.find(command => command.action_ref === step.action.action_ref)!;
+          await act(input, proposal, index);
+          if (family.requestedStopReason!(observation) || state.complete) break;
+        }
+      }
+      assert.ok(probes > 0);
+      if (!requiresBoth) {
+        assert.ok(state.complete);
+        assert.equal(family.requestedStopReason!(observation), null);
+        continue;
+      }
+      assert.equal(family.requestedStopReason!(observation), sicObservedWeightShortage);
+      const restored = await measure(current, ++revision), board = transform(world, current);
+      const retained = family.stateAfterLevelReset!(restored, board, undefined, sicObservedWeightShortage);
+      assert.ok(retained);
+      family.restore(retained);
+      assert.equal(family.requestedStopReason!(restored), null);
+      const route = await family.proposeInGroup!(observedPressureRecoveryGroup, restored, board, inputs, 60);
+      assert.ok(route?.fieldCarryPlan?.reflectiveRoute);
+      assert.equal(route.fieldCarryPlan.gateProbe, undefined);
     }
     while (!current.complete && actions < 120) {
       const visible = transform(world, current), entry = `entry:${level}:${actions}`;

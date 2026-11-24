@@ -35,7 +35,7 @@ import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindi
 import { matchesPullCircuit, observePullCircuitBinding, planPullCircuit, provesPullCircuitDeadlock, witnessedPullCircuitReturn,
   type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
 import { admitFieldCarry, assessFieldResourceLoss, checkFieldCarryReturn, fieldResourceRestored, observeFieldCarry, observeFieldConsumption,
-  planFieldCarry, type FieldCarryMemory, type FieldCarryPlan, type FieldResourceConsumption, type FieldResourceLoss } from './observed-field-carry.ts';
+  planFieldCarry, planFieldRecoveryProbe, type FieldCarryMemory, type FieldCarryPlan, type FieldResourceConsumption, type FieldResourceLoss } from './observed-field-carry.ts';
 import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, observeExchangeThreat,
   planBoundExchange, rememberExchangeVictory, witnessedExchangeStep, type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeThreat,
   type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
@@ -575,7 +575,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
   function fieldCarryForEpoch(epoch: number) {
     if (!state.fieldCarry || state.epoch === epoch) return state.fieldCarry;
-    const { supportAt: _supportAt, seenFloor: _seenFloor, ...retained } = state.fieldCarry;
+    const { supportAt: _supportAt, seenFloor: _seenFloor, gateReturns: _gateReturns, ...retained } = state.fieldCarry;
     return retained;
   }
   function enterEpoch(epoch: number): void {
@@ -668,16 +668,21 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   function proposeFieldCarry(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
     compositionOnly = false): Proposal | null {
     const current = state.epoch === observation.level_epoch, ref = observation.observation_ref;
-    if (!compositionOnly && current && state.fieldCarryRefuted) return null;
-    const plan = planFieldCarry(fieldCarryForEpoch(observation.level_epoch), rows, inputs, ref, remaining,
-      current ? state.fieldCarryMarks : undefined, current ? state.fieldCompositionsTested : undefined, compositionOnly);
+    const model = fieldCarryForEpoch(observation.level_epoch), marks = current ? state.fieldCarryMarks : undefined;
+    const probe = !compositionOnly && current && state.fieldConsumption && model
+      ? planFieldRecoveryProbe(state.fieldConsumption, model, rows, inputs, ref, remaining, marks) : undefined;
+    if (!probe && !compositionOnly && current && state.fieldCarryRefuted) return null;
+    const plan = probe ?? planFieldCarry(model, rows, inputs, ref, remaining,
+      marks, current ? state.fieldCompositionsTested : undefined, compositionOnly);
     if (!plan) return null;
     if (current && state.fieldRefutedLoss?.source === explorationKey(observation, rows)
       && state.fieldRefutedLoss.action === commandKey(plan.steps[0]!.action)) return null;
     const target = pushAccessBox(plan.target, 3), actions = plan.steps.map(step => step.action);
-    const goal = { kind: plan.composition ? 'test_reachable_object_composition' : 'compose_observed_local_carry',
+    const goal = { kind: plan.gateProbe ? 'verify_alternative_to_lost_resource'
+        : plan.composition ? 'test_reachable_object_composition' : 'compose_observed_local_carry',
       scope: ref.split(':revision:', 1)[0]!, subjects: plan.composition ? [...plan.composition.target] : [plan.target],
-      parentObjective: completion, satisfactionContract: plan.composition ? 'observe_reachable_composition' : 'verify_coupled_directional_displacement' };
+      parentObjective: completion, satisfactionContract: plan.gateProbe ? 'observe_access_with_remaining_resources'
+        : plan.composition ? 'observe_reachable_composition' : 'verify_coupled_directional_displacement' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: plan.evidence };
     const id = `field-carry:${need.id}`;
     return { status: 'proposed', kind: publicInputExplorationId, actions, fieldCarryPlan: plan,
@@ -685,7 +690,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       steps: plan.steps.map(step => ({ action: step.action, expected_after: pushAccessBox(step.after.actor, 3) })),
       binding: { observation_ref: ref, level_epoch: observation.level_epoch }, question: { reason: plan.label, hypothesis_refs: plan.evidence },
       route_refs: plan.evidence, compositions: [{ id, observed: false, open_question: plan.label, relations: [`contributes_to:${completion}`] }],
-      sicSituationCard: { strategy: goal.kind, mode: plan.observe || plan.composition ? 'exploration' : 'solving', need: plan.label, situation: plan.label, target, evidence: plan.evidence },
+      sicSituationCard: { strategy: goal.kind, mode: plan.observe || plan.composition || plan.gateProbe ? 'exploration' : 'solving',
+        need: plan.label, situation: plan.label, target, evidence: plan.evidence },
       sicLocalDecision: { strategy: goal.kind, objective: { id, label: plan.label, parent: completion }, need },
       bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: completion, purpose: plan.label,
         evidence: plan.evidence, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
