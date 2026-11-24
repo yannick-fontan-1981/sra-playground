@@ -128,6 +128,7 @@ function measuredExchangeSeries(level, tickets) {
   const entryResets = tickets[0]?.resets ?? 0;
   const mixed = [];
   let deaths = 0, threatExchanges = 0, crossedWater = false, openedWithWeight = false;
+  let reflected = false, placed = [];
   for (const [index, ticket] of tickets.entries()) {
     if (ticket.resets !== (previous?.resets ?? entryResets)) {
       if (level === 4) assert.ok(state.dead, 'SS04 L4 reset without an observed loss');
@@ -149,6 +150,14 @@ function measuredExchangeSeries(level, tickets) {
         mixed.push({ kind: 'load the pressure control', first: index + 1, last: index + 1 });
       }
     }
+    if (level === 6) {
+      assert.ok(kind === 'walk' || kind === 'swap', 'SS04 L6 used a blocked or speculative action');
+      reflected ||= kind === 'swap' && detail.phases[0].ray.some(cell => world.mirrors.some(mirror => equal(mirror.at, cell)));
+      const covered = world.buttons.filter(mark => detail.state.stones.some(stone => equal(mark, stone)));
+      assert.ok(placed.every(mark => covered.includes(mark)), 'SS04 L6 removed a weight before completing the pressure circuit');
+      if (covered.length > placed.length) mixed.push({ kind: 'load a circuit control', first: index + 1, last: index + 1 });
+      placed = covered;
+    }
     if (kind === 'swap' && previous?.kind === 'walk' && previous.revision === ticket.decisionRevision && ticket.actionIndex > 0) {
       assert.ok(detail.phases[0].moves.some(move => move.actor !== 'hero' && equal(move.to, state.hero)), 'Expected a real exchange');
       mixed.push({ kind: 'walk then swap', first: index, last: index + 1 });
@@ -169,6 +178,9 @@ function measuredExchangeSeries(level, tickets) {
     assert.ok(crossedWater && openedWithWeight, 'SS04 L5 must exchange across water and activate the pressure control with the weight');
     assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L5 lost the weight on the pressure control before the goal');
   }
+  if (level === 6) {
+    assert.ok(reflected && placed.length === world.buttons.length, 'SS04 L6 did not compose mirror exchanges with the full pressure circuit');
+  }
   return mixed;
 }
 
@@ -180,7 +192,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 5 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 6 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -274,6 +286,11 @@ export function checkRun(run) {
       assert.ok(issued.length <= 85 && groups.size <= 6, 'SS04 L5 lost the direct route to the pressure control');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L5 reset during the pressure route');
     }
+    if (code === 'SS04' && row.level === 6) {
+      // The older route exhausted 150 commands with 42 exchanges and no lasting placement.
+      assert.ok(issued.length <= 42 && groups.size <= 4, 'SS04 L6 lost its direct pressure composition');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L6 reset during the pressure composition');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : [];
@@ -307,7 +324,7 @@ function main() {
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
-      ['l-axe-violet', 'SS04', '5', '140'],
+      ['l-axe-violet', 'SS04', '6', '140'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

@@ -65,7 +65,7 @@ test('position exchange learns both participants and composes with transport and
 
 const tutorial = JSON.parse(readFileSync(new URL('../experiments/sinking-star-ss04/tests/witnesses.json', import.meta.url), 'utf8'))[0].actions as number[];
 
-for (const mirror of [false, true]) test(`exchange transfers to pressure, survival and separated footholds${mirror ? ' on a mirrored board' : ''}`, async () => {
+for (const mirror of [false, true]) test(`exchange transfers to pressure circuits, survival and separated footholds${mirror ? ' on a mirrored board' : ''}`, async () => {
   const game = createGameDispatcher(async () => { throw Error('Expected a native game'); });
   let board = await game.dispatch({ type: 'load', code: 'SS04', level: 1 });
   const map = new Map([1, 2, 3, 4].map((id, i) => [`ACTION${(mirror ? 28 : 14) + i}`, id]));
@@ -205,4 +205,47 @@ for (const mirror of [false, true]) test(`exchange transfers to pressure, surviv
   assert.equal(board.levelsCompleted, islandScore + 1);
   assert.equal(actions, 79);
   assert.ok(loadedControl);
+
+  board = await game.dispatch({ type: 'load', code: 'SS04', level: 6 });
+  const circuitEntry = frame(board.frame), circuitScore = board.levelsCompleted;
+  const { openings: _openings, ...unboundGate } = roles;
+  const { reflections: _reflections, ...unboundReflection } = roles;
+  assert.equal(planBoundExchange(unboundGate, circuitEntry, inputs, 50), undefined);
+  assert.equal(planBoundExchange(unboundReflection, circuitEntry, inputs, 50), undefined);
+  const circuitPlan = planBoundExchange(roles, circuitEntry, inputs, 50);
+  assert.ok(circuitPlan?.pressureTarget && circuitPlan.field.reflectors);
+  const controls = circuitPlan.field.doors[circuitPlan.field.exit]!.controls;
+  assert.equal(controls.length, 2);
+  assert.equal(Object.keys(circuitPlan.field.reflectors).length, 2);
+  assert.ok(circuitPlan.field.mechanismRefs?.length);
+  const changedMirror = circuitEntry.map(row => [...row]);
+  const [mx, my] = Object.keys(circuitPlan.field.reflectors)[0]!.split(',').map(Number) as [number, number];
+  changedMirror[my]![mx] = (changedMirror[my]![mx]! + 1) % 16;
+  assert.equal(matchesBoundExchange(roles, circuitPlan.field, circuitPlan.pose, changedMirror), false);
+  let placed: string[] = [], reflected = false;
+  binding = undefined;
+  actions = 0;
+  while (board.levelsCompleted === circuitScore && actions < 50) {
+    const plan = planBoundExchange(roles, frame(board.frame), inputs, 50 - actions, binding);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16);
+    let previous = plan.pose;
+    for (const step of plan.steps) {
+      board = await game.dispatch({ type: 'action', actionId: map.get(step.action.action_ref)! });
+      actions++;
+      if (board.levelsCompleted > circuitScore) break;
+      assert.ok(matchesBoundExchange(roles, plan.field, step.after, frame(board.frame)));
+      const [fromX, fromY] = previous.actor.split(','), [toX, toY] = step.after.actor.split(',');
+      reflected ||= fromX !== toX && fromY !== toY;
+      const next = controls.filter(cell => step.after.pieces.includes(cell));
+      assert.ok(placed.every(cell => next.includes(cell)));
+      if (!placed.length && next.length) assert.ok(next.includes(circuitPlan.pressureTarget));
+      placed = next;
+      binding = { field: plan.field, pose: step.after };
+      previous = step.after;
+    }
+  }
+  assert.equal(board.levelsCompleted, circuitScore + 1);
+  assert.equal(actions, 35);
+  assert.deepEqual(placed, controls);
+  assert.equal(reflected, true);
 });

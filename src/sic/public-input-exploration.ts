@@ -584,10 +584,16 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const exchange = rememberExchangeVictory(state.exchange, state.travel, rows, command, after.observation_ref);
     if (exchange) {
       const prior = state.exchangeTransfer;
-      const transmission = prior?.body === exchange.body && prior.wall === exchange.wall && prior.grid.pitch === exchange.grid.pitch
+      const compatible = prior?.body === exchange.body && prior.wall === exchange.wall && prior.grid.pitch === exchange.grid.pitch
         && prior.grid.ink === exchange.grid.ink
-        && prior.grid.floor === exchange.grid.floor ? prior.transmission : undefined;
-      state.exchangeTransfer = transmission ? { ...exchange, transmission: { ...transmission, ...exchange.transmission } } : exchange;
+        && prior.grid.floor === exchange.grid.floor;
+      if (compatible) {
+        const transmission = { ...prior.transmission, ...exchange.transmission };
+        const reflections = [...prior.reflections ?? [], ...exchange.reflections ?? []].slice(-12);
+        const openings = [...prior.openings ?? [], ...exchange.openings ?? []].slice(-8);
+        state.exchangeTransfer = { ...exchange, ...(Object.keys(transmission).length ? { transmission } : {}),
+          ...(reflections.length ? { reflections } : {}), ...(openings.length ? { openings } : {}) };
+      } else state.exchangeTransfer = exchange;
     }
     const win = rememberCoverageWin(state.coverage, state.travel, rows, command, before.level_epoch, after.observation_ref);
     if (win) {
@@ -629,7 +635,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       return witness ? [witness] : [];
     }));
     const evidence: [string, ...string[]] = [ref, roles.exchangeRef, roles.scoreRef, ...Object.values(roles.moves).map(move => move.ref),
-      ...(plan.field.threat?.evidence ?? []), ...transmissionRefs];
+      ...(plan.field.threat?.evidence ?? []), ...(plan.field.mechanismRefs ?? []), ...transmissionRefs];
     const target = pushAccessBox(plan.pressureTarget ?? plan.field.exit, roles.grid.pitch);
     const actions = plan.steps.map(step => step.action);
     const label = plan.field.threat ? 'Reach the exit through exchanges whose arrivals avoid the observed threat'
