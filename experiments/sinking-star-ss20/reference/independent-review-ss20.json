@@ -1,0 +1,903 @@
+{
+  "gameCode": "SS20",
+  "title": "Le Relais des Îles",
+  "status": "passed",
+  "levelsReviewed": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "complete": true,
+  "checks": 47,
+  "positiveVariants": 2,
+  "scope": "Relecture indépendante du moteur, des cartes et des témoins des autres auteurs. Graphes de terrain, contre-gestes ciblés, conservation de ressources et variantes gagnantes ; aucune recherche de solution unique ou optimale.",
+  "limitations": [
+    "Un témoin gagnant prouve la solvabilité, pas la nécessité universelle de chaque geste.",
+    "Les contre-gestes et les impossibilités locales sont explicitement bornés à leurs positions et hypothèses.",
+    "Le remplacement tardif du poids de N8 par un monstre n’a pas fait l’objet d’une preuve exhaustive ; le contrôle porte sur le remplacement avant la dernière traversée et sur la branche où le chantier a déjà été purgé."
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "title": "L’atelier des marées",
+      "status": "passed",
+      "mapSha256": "23ef81169d51d2f978230cf76cafa89e88e2f4949cd5a50e77f8db83d63daf2f",
+      "witnessSha256": "94cfd6c70110b62d1b1cb0457ecec33a556a5a875d8c80110124a008ea1998df",
+      "metrics": {
+        "actions": 256,
+        "selections": 37,
+        "merchantPushes": 15,
+        "thiefPulls": 10,
+        "songs": 25,
+        "groupSongs": 11,
+        "songHeroMoves": 28,
+        "songStoneMoves": 9,
+        "songMonsterMoves": 1,
+        "supportMoves": 1,
+        "partnerMoves": 37,
+        "stoneMoves": 25,
+        "mirrorMoves": 1,
+        "monsterMoves": 2,
+        "reflections": 7,
+        "heroReflections": 6,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [
+        {
+          "input": 85,
+          "phase": "song",
+          "moves": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 15,
+                "y": 3
+              },
+              "to": {
+                "x": 16,
+                "y": 3
+              }
+            }
+          ],
+          "remaining": [
+            {
+              "x": 16,
+              "y": 3
+            },
+            {
+              "x": 17,
+              "y": 4
+            }
+          ]
+        },
+        {
+          "input": 105,
+          "phase": "piston",
+          "moves": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 16,
+                "y": 3
+              },
+              "to": {
+                "x": 16,
+                "y": 4
+              }
+            }
+          ],
+          "remaining": [
+            {
+              "x": 16,
+              "y": 4
+            },
+            {
+              "x": 17,
+              "y": 4
+            }
+          ]
+        },
+        {
+          "input": 105,
+          "phase": "combat",
+          "moves": [],
+          "remaining": []
+        }
+      ],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "256 entrées, 37 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "163 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "3 événements de transport ou de disparition ; phases et coordonnées consignées.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "Trente enseignements issus des pixels publics",
+          "observed": "Les 30 découvertes sont acquises par la session publique, sans lire l’état interne pour le suivi.",
+          "scope": "Les leçons sont démontrées par ce parcours ; leur présence ne prétend pas rendre chaque geste obligatoire dans toute solution."
+        },
+        {
+          "name": "Deux commandes finales distinctes",
+          "observed": [
+            {
+              "x": 4,
+              "y": 14
+            },
+            {
+              "x": 17,
+              "y": 15
+            }
+          ],
+          "scope": "Le témoin laisse une caisse sur chacune des deux commandes orange, hors destinations ; le balcon final commence derrière une porte fermée."
+        },
+        {
+          "name": "Les gardiens suivent deux causes différentes",
+          "observed": "Un chant place un gardien, puis une fermeture de presse rapproche la paire ; les deux sont retirés au contact.",
+          "scope": "Inspection du témoin, sans quota caché de destruction dans la condition de victoire."
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Le chargement à rebours",
+      "status": "passed",
+      "mapSha256": "05a16948a47361946d17ac5b728fe16947f5df301c85826f07932ce01359212f",
+      "witnessSha256": "81a647b306147e3829bb9bdcf43236400f6d14a00fadcf4605a8087c84f8b61e",
+      "metrics": {
+        "actions": 223,
+        "selections": 24,
+        "merchantPushes": 34,
+        "thiefPulls": 16,
+        "songs": 5,
+        "groupSongs": 0,
+        "songHeroMoves": 3,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 9,
+        "stoneMoves": 46,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "223 entrées, 24 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "155 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "Aucun monstre dans cette salle.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "La coursive ne se contourne plus par le nord",
+          "observed": "Les cases (14,8) et (14,10) sont murées ; les deux accès latéraux sont les portes (14,9) et (14,11).",
+          "scope": "Inspection de la frontière de la coursive et du graphe initial ; le contrôle extérieur doit être modifié pour y entrer."
+        },
+        {
+          "name": "Le poste du Marchand est préparé avant le chant final",
+          "observed": "Au terme de l’alignement, la caisse est en (11,9), le Barde en (13,9) et le Marchand déjà au-dessus en (13,8).",
+          "scope": "Positions enregistrées et rejouées ; le témoin prépare ainsi la poussée vers (13,10), puis la traction depuis le jardin. Aucun ordre unique n’est revendiqué."
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "Le poids qui reste",
+      "status": "passed",
+      "mapSha256": "50f4a0d1d97a6b0b30585b51a80881555bda9bd31638769fb54ab2c132b66842",
+      "witnessSha256": "9c5f455d92b1b93b15fe5620b1f25eea14cbdeba8fed379890468aeedc4259ca",
+      "metrics": {
+        "actions": 85,
+        "selections": 5,
+        "merchantPushes": 3,
+        "thiefPulls": 3,
+        "songs": 0,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 2,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "85 entrées, 5 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "51 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "Aucun monstre dans cette salle.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "Deux reflets sans écran ne règlent pas le verrou",
+          "observed": "Le premier X active les deux circuits ; le deuxième les relâche ensemble. Avec les deux actifs, la passerelle centrale reste retirée.",
+          "scope": "Contre-parcours réel XX et graphe de marche après le premier reflet ; cela ne prouve pas la nécessité de chaque geste du témoin."
+        },
+        {
+          "name": "L’écran préserve réellement le poids éloigné",
+          "observed": "Après chargement et deux reflets, le poids vert reste en (7,4), l’écran est en (7,6) et le violet est relâché.",
+          "scope": "L’occupant proche reçoit le reflet suivant ; aucun acteur n’est dupliqué."
+        },
+        {
+          "name": "Une caisse amenée au coude ne remplit pas directement le trou central",
+          "observed": "La caisse peut atteindre (16,12), mais le poste de poussée (16,11) et le pas chanté depuis (15,12) vers (15,13) sont murés ; la traction sud demanderait de marcher sur (16,14), encore sans soutien.",
+          "scope": "Exclusion géométrique de cette tentative directe de pont ; aucune impossibilité universelle de toute variante n’est annoncée."
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Les quais en décalage",
+      "status": "passed",
+      "mapSha256": "a3a0a61e2fe1e49f2ae88c7e1a6d6380bdc2c990942e8fa4bd922f5459f18cf4",
+      "witnessSha256": "6d3f7509e37214f9b5d540dd4fd972c256d7eec1ad210926e619506389bd3edd",
+      "metrics": {
+        "actions": 102,
+        "selections": 16,
+        "merchantPushes": 6,
+        "thiefPulls": 2,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 8,
+        "heroReflections": 6,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "102 entrées, 16 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "34 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "Aucun monstre dans cette salle.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "Livrer avant le dernier passager retire son quai",
+          "observed": "Deux chants droits après la réception activent la livraison trop tôt. Depuis (5,7), descendre vers (5,8) est refusé ; réfléchir depuis cette distance projette le Marchand dans l’eau.",
+          "scope": "Deux contre-gestes réels à partir d’une préparation légale. Une autre manœuvre ou Undo peut réparer cette erreur ; elle n’est pas qualifiée d’irréversible."
+        },
+        {
+          "name": "L’escale sert quatre transports successifs",
+          "observed": "Le Barde, la caisse, le Marchand et le Voleur traversent le montage à deux étapes ; la caisse finale maintient ensuite (16,6).",
+          "scope": "Comptage des huit reflets du témoin, sans minimum universel de reflets déclaré."
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "title": "Le pas qui manque",
+      "status": "passed",
+      "mapSha256": "193246789d4fb75e5443ba49eef3cfbfab60425945974145b2c8fdda33471142",
+      "witnessSha256": "bd96dcd726608f712aa9188cdbb3ff7331c6920482d0e9c26a95b0aab52bc8d0",
+      "metrics": {
+        "actions": 128,
+        "selections": 11,
+        "merchantPushes": 4,
+        "thiefPulls": 4,
+        "songs": 2,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 1,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [
+        {
+          "input": 3,
+          "phase": "song",
+          "moves": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 10,
+                "y": 5
+              },
+              "to": {
+                "x": 10,
+                "y": 6
+              }
+            }
+          ],
+          "remaining": [
+            {
+              "x": 10,
+              "y": 6
+            },
+            {
+              "x": 13,
+              "y": 10
+            }
+          ]
+        },
+        {
+          "input": 4,
+          "phase": "reflect",
+          "moves": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 13,
+                "y": 10
+              },
+              "to": {
+                "x": 10,
+                "y": 7
+              }
+            }
+          ],
+          "remaining": [
+            {
+              "x": 10,
+              "y": 6
+            },
+            {
+              "x": 10,
+              "y": 7
+            }
+          ]
+        },
+        {
+          "input": 4,
+          "phase": "combat",
+          "moves": [],
+          "remaining": []
+        }
+      ],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "128 entrées, 11 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "12 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "3 événements de transport ou de disparition ; phases et coordonnées consignées.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "La correction de diagonale admet deux ordres",
+          "observed": "X seul laisse les deux monstres. La variante X puis D après sélection du Barde gagne aussi en 128 entrées, sans refus ni perte.",
+          "scope": "Variante positive complète ; l’ordre D puis X du témoin n’est pas unique. Les deux routes utilisent un déplacement réel pour changer la parité."
+        },
+        {
+          "name": "Le chargement finit dans le goulet d’eau",
+          "observed": "La seule caisse sèche devient l’appui (11,14), après extraction et changement d’axe au coude.",
+          "scope": "Rôle matériel de la caisse dans les deux parcours rejoués."
+        }
+      ],
+      "alternatives": [
+        {
+          "label": "Le reflet précède le pas correcteur du Barde",
+          "commands": "CCXDUCDRDRRRRDDDDDRDRRRRUCRRRRRDDDDDRRDRRRLLLLUULUUUULLLUULLCCDLLLCCDRRDDDDDCLDDDDDDDLDCDDRRRRRDDDDRDDDDDDDDDRRDCRDDDDDDDDRRRRRD",
+          "metrics": {
+            "actions": 128,
+            "selections": 11,
+            "merchantPushes": 4,
+            "thiefPulls": 4,
+            "songs": 2,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 1,
+            "songMonsterMoves": 1,
+            "supportMoves": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 9,
+            "mirrorMoves": 0,
+            "monsterMoves": 2,
+            "reflections": 1,
+            "heroReflections": 0,
+            "pistonPushes": 0,
+            "platformsCreated": 1,
+            "monstersRemoved": 2,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "final": {
+            "heroes": [
+              {
+                "kind": "merchant",
+                "at": {
+                  "x": 10,
+                  "y": 18
+                },
+                "facing": "S",
+                "dead": false
+              },
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 13,
+                  "y": 18
+                },
+                "facing": "S",
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 16,
+                  "y": 18
+                },
+                "facing": "S",
+                "dead": false
+              }
+            ],
+            "active": 2,
+            "stones": [],
+            "monsters": [],
+            "supports": [
+              {
+                "x": 11,
+                "y": 14
+              }
+            ],
+            "mirrors": [
+              {
+                "at": {
+                  "x": 10,
+                  "y": 10
+                },
+                "facing": "NE"
+              }
+            ],
+            "complete": true,
+            "failed": false,
+            "dead": false,
+            "gateClosed": [
+              false,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "title": "Les pierres voyageuses",
+      "status": "passed",
+      "mapSha256": "29e36a3549c21004d8379eaa47f9b1fad0504a81bf5c95a7bfcee4d0afc17b90",
+      "witnessSha256": "aeac19de1265011a14fb4e99a40a17cd082d5fef3e2b1ee07ffb60b362bdb547",
+      "metrics": {
+        "actions": 93,
+        "selections": 16,
+        "merchantPushes": 10,
+        "thiefPulls": 4,
+        "songs": 9,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 9,
+        "partnerMoves": 0,
+        "stoneMoves": 14,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "93 entrées, 16 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "73 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "Aucun monstre dans cette salle.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "La caisse finale ne peut être omise simplement",
+          "observed": "Même en autorisant toute l’eau comme passage, enlever la case de presse (13,12) sépare les trois sorties. Le bouton (12,13) est extérieur et non voisin de la presse ; l’appui ne fait pas poids.",
+          "scope": "Argument de coupure, absence de téléporteur et inventaire des occupants : le dernier héros ne peut quitter seul le bouton et entrer dans la presse pendant le même pas."
+        },
+        {
+          "name": "Une extraction différente reste gagnante",
+          "observed": "La variante utilise 104 entrées et deux tractions au lieu de quatre ; elle conserve les neuf déplacements d’appui et la caisse finale.",
+          "scope": "Variante complète rejouée : la traction initiale n’est pas déclarée obligatoire, et la fonction finale de la caisse reste conservée."
+        }
+      ],
+      "alternatives": [
+        {
+          "label": "Extraction initiale par le Barde, puis même convoyage de l’appui",
+          "commands": "CDCLRRCCRCCUURRRRCCLCRDDCURRRDRRDCURRRRDCUURRRRRDDCUURRDRRDDCURRDRDDCCLCCURDRRUURRRCCDDRRRRUCDLCURRRRRRU",
+          "metrics": {
+            "actions": 104,
+            "selections": 22,
+            "merchantPushes": 11,
+            "thiefPulls": 2,
+            "songs": 12,
+            "groupSongs": 1,
+            "songHeroMoves": 1,
+            "songStoneMoves": 3,
+            "songMonsterMoves": 0,
+            "supportMoves": 9,
+            "partnerMoves": 1,
+            "stoneMoves": 16,
+            "mirrorMoves": 0,
+            "monsterMoves": 0,
+            "reflections": 0,
+            "heroReflections": 0,
+            "pistonPushes": 0,
+            "platformsCreated": 0,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "final": {
+            "heroes": [
+              {
+                "kind": "merchant",
+                "at": {
+                  "x": 16,
+                  "y": 11
+                },
+                "facing": "W",
+                "dead": false
+              },
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 17,
+                  "y": 11
+                },
+                "facing": "N",
+                "dead": false
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 15,
+                  "y": 11
+                },
+                "facing": "N",
+                "dead": false
+              }
+            ],
+            "active": 1,
+            "stones": [
+              {
+                "x": 12,
+                "y": 13
+              }
+            ],
+            "monsters": [],
+            "supports": [
+              {
+                "x": 11,
+                "y": 9
+              }
+            ],
+            "mirrors": [],
+            "complete": true,
+            "failed": false,
+            "dead": false,
+            "gateClosed": [
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "level": 7,
+      "title": "La relève du passeur",
+      "status": "passed",
+      "mapSha256": "35f844c23b539f87346f4d6d8c2041d91d2306e9f808e0a2ec6342e596582a2a",
+      "witnessSha256": "b3104be4c5d808c3af67292a13e1d9228f63bc8e65e57692c631a64f49dfdcdb",
+      "metrics": {
+        "actions": 92,
+        "selections": 13,
+        "merchantPushes": 8,
+        "thiefPulls": 6,
+        "songs": 7,
+        "groupSongs": 0,
+        "songHeroMoves": 5,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 2,
+        "supportMoves": 0,
+        "partnerMoves": 8,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [
+        {
+          "input": 24,
+          "phase": "song",
+          "moves": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 6,
+                "y": 7
+              },
+              "to": {
+                "x": 7,
+                "y": 7
+              }
+            }
+          ],
+          "remaining": [
+            {
+              "x": 7,
+              "y": 7
+            },
+            {
+              "x": 11,
+              "y": 9
+            }
+          ]
+        },
+        {
+          "input": 31,
+          "phase": "song",
+          "moves": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 11,
+                "y": 9
+              },
+              "to": {
+                "x": 11,
+                "y": 10
+              }
+            }
+          ],
+          "remaining": [
+            {
+              "x": 7,
+              "y": 7
+            }
+          ]
+        }
+      ],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "92 entrées, 13 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "72 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "2 événements de transport ou de disparition ; phases et coordonnées consignées.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "L’ancien remplacement de la réserve par le gardien est corrigé",
+          "observed": "L’ancien parcours gagnant de 73 entrées ne termine plus. Après RR, départ DD du Voleur et sélection du Barde, chanter à droite laisse le gardien en (6,7), arrêté par la presse fermée (7,7).",
+          "scope": "Régression ciblée de l’attaque effectivement découverte sur la première carte ; elle ne démontre pas l’unicité de la nouvelle solution."
+        },
+        {
+          "name": "Le danger et la retenue ont des causes lisibles",
+          "observed": "Un chant droit initial place le gardien à côté du Voleur et le tue. Une sortie haute initiale du Voleur ferme la presse sur lui et le renvoie sur son bouton.",
+          "scope": "Deux contre-parcours locaux CCR et CU, sans règle spéciale de personnage ni déplacement autonome."
+        },
+        {
+          "name": "Le témoin conserve les deux réserves utiles",
+          "observed": "Une caisse tient la relève (7,8), l’autre la sortie (13,6), alors que les trois héros rejoignent les destinations.",
+          "scope": "Conservation des deux usages dans le parcours corrigé de 92 entrées ; les rôles exacts ne sont pas imposés par une condition cachée de victoire."
+        }
+      ]
+    },
+    {
+      "level": 8,
+      "title": "Le chantier à démonter",
+      "status": "passed",
+      "mapSha256": "8354ceeb2ebc43aa975e819ebb08c11c007480e2c727e6108e770250f3f63e6e",
+      "witnessSha256": "739d70ac62e00cdb8679583e672582b0535e510c66045c6df6633d2f34446e1b",
+      "metrics": {
+        "actions": 365,
+        "selections": 43,
+        "merchantPushes": 30,
+        "thiefPulls": 39,
+        "songs": 6,
+        "groupSongs": 1,
+        "songHeroMoves": 3,
+        "songStoneMoves": 4,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 3,
+        "stoneMoves": 75,
+        "mirrorMoves": 0,
+        "monsterMoves": 1,
+        "reflections": 10,
+        "heroReflections": 8,
+        "pistonPushes": 1,
+        "platformsCreated": 2,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "monsterEvents": [
+        {
+          "input": 35,
+          "phase": "piston",
+          "moves": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 14,
+                "y": 12
+              },
+              "to": {
+                "x": 14,
+                "y": 13
+              }
+            }
+          ],
+          "remaining": [
+            {
+              "x": 14,
+              "y": 13
+            }
+          ]
+        },
+        {
+          "input": 35,
+          "phase": "platform",
+          "moves": [],
+          "remaining": []
+        }
+      ],
+      "checks": [
+        {
+          "name": "Témoin actuel rejoué",
+          "observed": "365 entrées, 43 sélections, zéro refus et zéro perte ; trois destinations occupées.",
+          "scope": "Rejeu indépendant du JSON actuel et comparaison des métriques et actions enregistrées."
+        },
+        {
+          "name": "Aucune sortie directement accessible au départ",
+          "observed": "125 cases dans le réseau de marche initial, zéro destination.",
+          "scope": "Parcours complet du graphe initial en ignorant les occupants, avec les supports et portes dans leur état initial ; aucune capacité ou modification de circuit n’est simulée."
+        },
+        {
+          "name": "Chaque déplacement de monstre a une cause physique",
+          "observed": "2 événements de transport ou de disparition ; phases et coordonnées consignées.",
+          "scope": "Toutes les phases du témoin sont inspectées ; marche et sélection seules ne déplacent aucun monstre."
+        },
+        {
+          "name": "Deux coupures d’eau exigent deux appuis distincts",
+          "observed": "(7,11) et (4,12) coupent chacune tous les trajets terrestres vers les sorties. Elles sont isolées des autres cases d’eau : un appui ne peut glisser de l’une vers l’autre.",
+          "scope": "Inspection de deux coupures du graphe optimiste. Le seul miroir ne dessert que les deux compartiments du chantier, pas l’îlot final."
+        },
+        {
+          "name": "Le miroir ne remplace pas une caisse",
+          "observed": "Dans chacune des quatre directions, le poste de poussée ou son arrivée est muré ; le pas de traction correspondant est également muré. Le chant ne le déplace pas et aucune presse ne le dessert.",
+          "scope": "Vérification des huit configurations d’accès/arrivée autour de (9,8), puis conservation de la position dans le témoin."
+        },
+        {
+          "name": "Le dernier Voleur ne peut partir par un simple pas gauche",
+          "observed": "Après livraison, L retire la caisse (6,12) vers (5,12) et relâche le verrou. Le chant de la fin le transporte sans cette traction.",
+          "scope": "Contre-geste concret à l’entrée 349 du témoin ; cette erreur reste annulable et n’est pas présentée comme irréversible."
+        },
+        {
+          "name": "Un monstre posé trop tôt sur le bouton bloque le dernier passage",
+          "observed": "Un gardien en (6,12) menace orthogonalement (7,12), arrivée du premier pont, et (5,12), accès au second. La case nord (6,11) est murée.",
+          "scope": "Exclusion du remplacement avant la dernière traversée. Aucune preuve exhaustive des livraisons tardives après passage de tous les héros n’est revendiquée."
+        },
+        {
+          "name": "Retirer le chantier pendant le passage perd la réserve haute",
+          "observed": "Quand la réserve est sur (14,13) et le Voleur devant elle, un D du Barde retire sa plateforme : la caisse devient un appui immobile du chantier, après la purge du monstre.",
+          "scope": "Contre-parcours légal. Dans cette branche, il ne reste que deux caisses récupérables, sans monstre et avec le miroir fixe, pour les deux trous finaux et leur poids sec. C’est une nécessité conditionnée à cette branche, pas un théorème sur toutes les solutions."
+        },
+        {
+          "name": "La restauration ne confond plus chant et presse",
+          "observed": "À l’entrée 40, le chant remonte le Marchand ; la presse se ferme vide, puis la plateforme revient. Le piston n’est pas la cause de ce transport.",
+          "scope": "Vérification de la description corrigée contre les phases song/gate/platform du replay."
+        }
+      ]
+    }
+  ]
+}

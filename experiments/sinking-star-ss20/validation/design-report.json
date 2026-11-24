@@ -1,0 +1,1765 @@
+{
+  "game": "SS20",
+  "version": "0.1.0",
+  "success": true,
+  "scope": "Initial frozen geometry, exact layout comparison with SS14–19 and reproducible local counter-branches",
+  "levels": [
+    {
+      "level": 1,
+      "title": "L’atelier des marées",
+      "mapSha256": "23ef81169d51d2f978230cf76cafa89e88e2f4949cd5a50e77f8db83d63daf2f",
+      "terrainSha256": "0a7e15e44802460e38b02be33369d4ad4c3e40b89184acf5da717868cec8377a",
+      "goals": [
+        {
+          "x": 16,
+          "y": 1
+        },
+        {
+          "x": 17,
+          "y": 1
+        },
+        {
+          "x": 18,
+          "y": 1
+        }
+      ],
+      "landCells": 224,
+      "waterCells": 8,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 103,
+          "transitions": 412,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 103,
+          "transitions": 412,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 103,
+          "transitions": 412,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 105,
+          "transitions": 420,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 105,
+          "transitions": 420,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 105,
+          "transitions": 420,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": [
+        {
+          "name": "Témoin gagnant et métriques recalculées",
+          "observed": {
+            "actions": 256,
+            "selections": 37,
+            "merchantPushes": 15,
+            "thiefPulls": 10,
+            "songs": 25,
+            "groupSongs": 11,
+            "songHeroMoves": 28,
+            "songStoneMoves": 9,
+            "songMonsterMoves": 1,
+            "supportMoves": 1,
+            "partnerMoves": 37,
+            "stoneMoves": 25,
+            "mirrorMoves": 1,
+            "monsterMoves": 2,
+            "reflections": 7,
+            "heroReflections": 6,
+            "pistonPushes": 1,
+            "platformsCreated": 1,
+            "monstersRemoved": 2,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Les trente découvertes sont lues dans les images publiques",
+          "observed": {
+            "count": 30,
+            "discoveries": [
+              {
+                "turn": 1,
+                "action": 6,
+                "lessons": [
+                  "select"
+                ]
+              },
+              {
+                "turn": 2,
+                "action": 4,
+                "lessons": [
+                  "move",
+                  "thief-pull",
+                  "single-pull",
+                  "partner-pull",
+                  "release-by-pull",
+                  "monster-still",
+                  "gate",
+                  "button"
+                ]
+              },
+              {
+                "turn": 8,
+                "action": 1,
+                "lessons": [
+                  "merchant-push",
+                  "relay-weight",
+                  "partner-push"
+                ]
+              },
+              {
+                "turn": 11,
+                "action": 2,
+                "lessons": [
+                  "bard-song",
+                  "partner-song"
+                ]
+              },
+              {
+                "turn": 46,
+                "action": 4,
+                "lessons": [
+                  "selective-song",
+                  "diagonal-song",
+                  "wall-song"
+                ]
+              },
+              {
+                "turn": 85,
+                "action": 4,
+                "lessons": [
+                  "monster-song"
+                ]
+              },
+              {
+                "turn": 105,
+                "action": 4,
+                "lessons": [
+                  "press",
+                  "monster-press",
+                  "monster"
+                ]
+              },
+              {
+                "turn": 115,
+                "action": 4,
+                "lessons": [
+                  "mirror-motion"
+                ]
+              },
+              {
+                "turn": 116,
+                "action": 5,
+                "lessons": [
+                  "mirror",
+                  "crate-reflection"
+                ]
+              },
+              {
+                "turn": 120,
+                "action": 5,
+                "lessons": [
+                  "hero-reflection"
+                ]
+              },
+              {
+                "turn": 144,
+                "action": 2,
+                "lessons": [
+                  "water-support"
+                ]
+              },
+              {
+                "turn": 158,
+                "action": 3,
+                "lessons": [
+                  "support-slide"
+                ]
+              },
+              {
+                "turn": 160,
+                "action": 2,
+                "lessons": [
+                  "cross-support"
+                ]
+              },
+              {
+                "turn": 163,
+                "action": 1,
+                "lessons": [
+                  "support-anchor"
+                ]
+              },
+              {
+                "turn": 256,
+                "action": 1,
+                "lessons": [
+                  "goals"
+                ]
+              }
+            ]
+          },
+          "scope": "Parcours pédagogique complet depuis N1 ; le jeu ne charge ni témoin ni état privé pour afficher les découvertes.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "La presse rapproche les gardiens avant leur contact",
+          "observed": {
+            "phaseOrder": [
+              "walk",
+              "piston",
+              "combat"
+            ],
+            "monstersRemaining": 0
+          },
+          "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "L’appui déplacé reste en place quand un héros l’occupe",
+          "observed": {
+            "support": [
+              {
+                "x": 15,
+                "y": 13
+              }
+            ],
+            "heroes": [
+              {
+                "kind": "merchant",
+                "at": {
+                  "x": 15,
+                  "y": 12
+                }
+              },
+              {
+                "kind": "thief",
+                "at": {
+                  "x": 17,
+                  "y": 12
+                }
+              },
+              {
+                "kind": "bard",
+                "at": {
+                  "x": 13,
+                  "y": 10
+                }
+              }
+            ]
+          },
+          "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "La caisse réfléchie contre le mur est extraite par traction",
+          "observed": {
+            "landing": {
+              "x": 16,
+              "y": 9
+            },
+            "afterExtraction": {
+              "x": 16,
+              "y": 11
+            },
+            "northWall": true
+          },
+          "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée.",
+          "verification": "Reviewed by the dedicated author script"
+        }
+      ]
+    },
+    {
+      "level": 2,
+      "title": "Le chargement à rebours",
+      "mapSha256": "05a16948a47361946d17ac5b728fe16947f5df301c85826f07932ce01359212f",
+      "terrainSha256": "05a55e8408ec4910d98dc538c250257e2bf93b1538b543f738e9c14e743d3a41",
+      "goals": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 11
+        }
+      ],
+      "landCells": 183,
+      "waterCells": 0,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 144,
+          "transitions": 576,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 144,
+          "transitions": 576,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 9,
+          "transitions": 36,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 145,
+          "transitions": 580,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 145,
+          "transitions": 580,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 9,
+          "transitions": 36,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": [
+        {
+          "name": "Témoin gagnant et métriques recalculées",
+          "observed": {
+            "actions": 223,
+            "selections": 24,
+            "merchantPushes": 34,
+            "thiefPulls": 16,
+            "songs": 5,
+            "groupSongs": 0,
+            "songHeroMoves": 3,
+            "songStoneMoves": 2,
+            "songMonsterMoves": 0,
+            "supportMoves": 0,
+            "partnerMoves": 9,
+            "stoneMoves": 46,
+            "mirrorMoves": 0,
+            "monsterMoves": 0,
+            "reflections": 0,
+            "heroReflections": 0,
+            "pistonPushes": 0,
+            "platformsCreated": 0,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "La même caisse change de fonction",
+          "observed": {
+            "first": [
+              {
+                "x": 7,
+                "y": 5
+              },
+              {
+                "x": 11,
+                "y": 11
+              }
+            ],
+            "last": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 11,
+                "y": 11
+              }
+            ]
+          },
+          "scope": "Deux étapes du témoin avec deux caisses conservées, dont une demeure inaccessible dans le jardin.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Déplacer la relève avant de libérer le Barde referme son seul accès",
+          "observed": {
+            "bard": {
+              "x": 17,
+              "y": 4
+            },
+            "gateClosed": true
+          },
+          "scope": "Mauvais ordre réversible : le poids peut être réinstallé ; aucune impasse définitive n’est affirmée.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Un pas du Barde retire le poids ; le pas inverse rétablit le circuit",
+          "observed": {
+            "downCloses": true,
+            "upRestores": true
+          },
+          "scope": "Branche locale volontairement réversible. La victoire ne dépend d’aucun historique de déplacements.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Poussée puis traction amènent le Barde dans le jardin sans déplacer les charges",
+          "observed": {
+            "commands": "CCRDDDDDDDDDRRRRRRRRRRUULULCCDCLLLLL",
+            "bard": {
+              "x": 8,
+              "y": 10
+            },
+            "stones": [
+              {
+                "x": 3,
+                "y": 5
+              },
+              {
+                "x": 11,
+                "y": 9
+              }
+            ]
+          },
+          "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "La coursive ne comporte pas de troisième entrée libre",
+          "observed": {
+            "closedSides": [
+              {
+                "x": 14,
+                "y": 8
+              },
+              {
+                "x": 14,
+                "y": 10
+              },
+              {
+                "x": 13,
+                "y": 12
+              }
+            ],
+            "controlledEntrances": [
+              {
+                "x": 14,
+                "y": 9
+              },
+              {
+                "x": 14,
+                "y": 11
+              }
+            ]
+          },
+          "scope": "Inspection du bord de la coursive ; complétée par le graphe de marche initial dans la revue de conception.",
+          "verification": "Reviewed by the dedicated author script"
+        }
+      ]
+    },
+    {
+      "level": 3,
+      "title": "Le poids qui reste",
+      "mapSha256": "50f4a0d1d97a6b0b30585b51a80881555bda9bd31638769fb54ab2c132b66842",
+      "terrainSha256": "53289bccb1304a639c1a7790d55b018ddfd2d14d1bd74a6f6c95fb231ea8baab",
+      "goals": [
+        {
+          "x": 13,
+          "y": 18
+        },
+        {
+          "x": 15,
+          "y": 18
+        },
+        {
+          "x": 17,
+          "y": 18
+        }
+      ],
+      "landCells": 71,
+      "waterCells": 9,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 46,
+          "transitions": 184,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 46,
+          "transitions": 184,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 46,
+          "transitions": 184,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 48,
+          "transitions": 192,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 48,
+          "transitions": 192,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 48,
+          "transitions": 192,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": [
+        {
+          "name": "Témoin complet, étapes et métriques",
+          "observed": {
+            "actions": 85,
+            "selections": 5,
+            "merchantPushes": 3,
+            "thiefPulls": 3,
+            "songs": 0,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 0,
+            "songMonsterMoves": 0,
+            "supportMoves": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 11,
+            "mirrorMoves": 0,
+            "monsterMoves": 0,
+            "reflections": 2,
+            "heroReflections": 0,
+            "pistonPushes": 1,
+            "platformsCreated": 0,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Presse sans caisse : deux circuits encore liés après six reflets",
+          "observed": [
+            {
+              "vert": true,
+              "violet": true,
+              "bridge": [
+                true,
+                false,
+                true
+              ]
+            },
+            {
+              "vert": false,
+              "violet": false,
+              "bridge": [
+                false,
+                true,
+                false
+              ]
+            },
+            {
+              "vert": true,
+              "violet": true,
+              "bridge": [
+                true,
+                false,
+                true
+              ]
+            },
+            {
+              "vert": false,
+              "violet": false,
+              "bridge": [
+                false,
+                true,
+                false
+              ]
+            },
+            {
+              "vert": true,
+              "violet": true,
+              "bridge": [
+                true,
+                false,
+                true
+              ]
+            },
+            {
+              "vert": false,
+              "violet": false,
+              "bridge": [
+                false,
+                true,
+                false
+              ]
+            }
+          ],
+          "scope": "Branche optique depuis le chargement, avec seule la caisse de presse retirée. La branche ne remplace pas une recherche de tous les déplacements.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Écran chargé : vert stable et violet alternant pendant six reflets",
+          "observed": [
+            {
+              "vert": true,
+              "violet": true,
+              "bridge": [
+                true,
+                false,
+                true
+              ]
+            },
+            {
+              "vert": true,
+              "violet": false,
+              "bridge": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "vert": true,
+              "violet": true,
+              "bridge": [
+                true,
+                false,
+                true
+              ]
+            },
+            {
+              "vert": true,
+              "violet": false,
+              "bridge": [
+                true,
+                true,
+                true
+              ]
+            },
+            {
+              "vert": true,
+              "violet": true,
+              "bridge": [
+                true,
+                false,
+                true
+              ]
+            },
+            {
+              "vert": true,
+              "violet": false,
+              "bridge": [
+                true,
+                true,
+                true
+              ]
+            }
+          ],
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Bouton violet lisible",
+          "observed": {
+            "floor": "gray",
+            "arms": "pink",
+            "centerPalette": 15
+          },
+          "scope": "Contrôle de palette : le centre violet est distinct des bras roses. L’inspection du rendu effectif appartient à la revue UI du laboratoire.",
+          "verification": "Reviewed by the dedicated author script"
+        }
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Les quais en décalage",
+      "mapSha256": "a3a0a61e2fe1e49f2ae88c7e1a6d6380bdc2c990942e8fa4bd922f5459f18cf4",
+      "terrainSha256": "e66e06cd6a174a9ace8e33d47767582eaa691dfccbe8dcdc01fb2197f869881d",
+      "goals": [
+        {
+          "x": 13,
+          "y": 1
+        },
+        {
+          "x": 15,
+          "y": 1
+        },
+        {
+          "x": 17,
+          "y": 1
+        }
+      ],
+      "landCells": 69,
+      "waterCells": 12,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 30,
+          "transitions": 120,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 31,
+          "transitions": 124,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 30,
+          "transitions": 120,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 33,
+          "transitions": 132,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 33,
+          "transitions": 132,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 33,
+          "transitions": 132,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": [
+        {
+          "name": "Témoin complet, étapes et métriques",
+          "observed": {
+            "actions": 102,
+            "selections": 16,
+            "merchantPushes": 6,
+            "thiefPulls": 2,
+            "songs": 1,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 1,
+            "songMonsterMoves": 0,
+            "supportMoves": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 11,
+            "mirrorMoves": 0,
+            "monsterMoves": 0,
+            "reflections": 8,
+            "heroReflections": 6,
+            "pistonPushes": 0,
+            "platformsCreated": 0,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Sans l’escale-poussoir, le deuxième trajet serait revendiqué par les deux miroirs",
+          "observed": {
+            "firstImage": "valid",
+            "secondImage": "refused",
+            "blockedMirrorIndices": [
+              0,
+              1
+            ]
+          },
+          "scope": "Contrefactuel d’appareil : même carte et même trajet, porte retirée. La version livrée masque effectivement le premier bras.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Livrer trop tôt retire le départ encore nécessaire",
+          "observed": {
+            "departureActive": false,
+            "goalBridgeActive": true,
+            "boardingFrom": {
+              "x": 5,
+              "y": 7
+            },
+            "boardingRefused": true
+          },
+          "scope": "Branche légale jusqu’à la tentative d’embarquement. Cette erreur reste réversible depuis le quai de réception.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Variante légale : annuler une livraison prématurée puis terminer",
+          "observed": {
+            "actions": 116,
+            "selections": 22,
+            "merchantPushes": 6,
+            "thiefPulls": 2,
+            "songs": 5,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 5,
+            "songMonsterMoves": 0,
+            "supportMoves": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 15,
+            "mirrorMoves": 0,
+            "monsterMoves": 0,
+            "reflections": 8,
+            "heroReflections": 6,
+            "pistonPushes": 0,
+            "platformsCreated": 0,
+            "monstersRemoved": 0,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Caisse livrée sans réceptionnaire : le prochain premier trajet entre en conflit",
+          "observed": {
+            "merchant": {
+              "x": 5,
+              "y": 8
+            },
+            "cargo": {
+              "x": 13,
+              "y": 6
+            },
+            "reflectionRefused": true,
+            "blockedMirrorIndices": [
+              0,
+              1
+            ]
+          },
+          "scope": "Branche de chargement exacte, contrôlée jusqu’au reflet refusé : les deux miroirs visent la même escale.",
+          "verification": "Reviewed by the dedicated author script"
+        }
+      ]
+    },
+    {
+      "level": 5,
+      "title": "Le pas qui manque",
+      "mapSha256": "193246789d4fb75e5443ba49eef3cfbfab60425945974145b2c8fdda33471142",
+      "terrainSha256": "11d75807ccbc82fa8e97c4e27de507f5381aaa87c6bad22662b37bb266c05f83",
+      "goals": [
+        {
+          "x": 10,
+          "y": 18
+        },
+        {
+          "x": 13,
+          "y": 18
+        },
+        {
+          "x": 16,
+          "y": 18
+        }
+      ],
+      "landCells": 57,
+      "waterCells": 1,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 10,
+          "transitions": 40,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 10,
+          "transitions": 40,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 10,
+          "transitions": 40,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 12,
+          "transitions": 48,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 12,
+          "transitions": 48,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 12,
+          "transitions": 48,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": [
+        {
+          "name": "Témoin complet, étapes et métriques",
+          "observed": {
+            "actions": 128,
+            "selections": 11,
+            "merchantPushes": 4,
+            "thiefPulls": 4,
+            "songs": 2,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 1,
+            "songMonsterMoves": 1,
+            "supportMoves": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 9,
+            "mirrorMoves": 0,
+            "monsterMoves": 2,
+            "reflections": 1,
+            "heroReflections": 0,
+            "pistonPushes": 0,
+            "platformsCreated": 1,
+            "monstersRemoved": 2,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Huit reflets seuls ne créent aucune rencontre",
+          "observed": [
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 10,
+                "y": 7
+              }
+            ],
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 13,
+                "y": 10
+              }
+            ],
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 10,
+                "y": 7
+              }
+            ],
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 13,
+                "y": 10
+              }
+            ],
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 10,
+                "y": 7
+              }
+            ],
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 13,
+                "y": 10
+              }
+            ],
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 10,
+                "y": 7
+              }
+            ],
+            [
+              {
+                "x": 10,
+                "y": 5
+              },
+              {
+                "x": 13,
+                "y": 10
+              }
+            ]
+          ],
+          "scope": "Les deux monstres gardent la même parité x+y ; un voisinage orthogonal demande des parités opposées. Ce contrôle porte sur les reflets sans autre déplacement.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Variante légale : reflet puis pas du Barde, au lieu de pas puis reflet",
+          "observed": {
+            "actions": 128,
+            "selections": 11,
+            "merchantPushes": 4,
+            "thiefPulls": 4,
+            "songs": 2,
+            "groupSongs": 0,
+            "songHeroMoves": 0,
+            "songStoneMoves": 1,
+            "songMonsterMoves": 1,
+            "supportMoves": 0,
+            "partnerMoves": 0,
+            "stoneMoves": 9,
+            "mirrorMoves": 0,
+            "monsterMoves": 2,
+            "reflections": 1,
+            "heroReflections": 0,
+            "pistonPushes": 0,
+            "platformsCreated": 1,
+            "monstersRemoved": 2,
+            "blocked": 0,
+            "deaths": 0
+          },
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Caisse au coude : la voie arrière du Marchand se ferme",
+          "observed": {
+            "merchant": {
+              "x": 12,
+              "y": 10
+            },
+            "gateClosed": true,
+            "northStepRefused": true
+          },
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Chant du coude : caisse déplacée, Marchand retenu par le mur",
+          "observed": {
+            "moves": [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 10,
+                  "y": 8
+                },
+                "to": {
+                  "x": 10,
+                  "y": 9
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 11,
+                  "y": 10
+                },
+                "to": {
+                  "x": 11,
+                  "y": 11
+                }
+              }
+            ],
+            "couplingReleased": true
+          },
+          "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité.",
+          "verification": "Reviewed by the dedicated author script"
+        },
+        {
+          "name": "Recherche sans aucun chant",
+          "observed": {
+            "status": "unsolvable",
+            "states": 7920,
+            "expanded": 7920,
+            "ms": 243
+          },
+          "scope": "File épuisée : aucun parcours gagnant sous cette restriction.",
+          "verification": "Reviewed by the dedicated author script"
+        }
+      ]
+    },
+    {
+      "level": 6,
+      "title": "Les pierres voyageuses",
+      "mapSha256": "29e36a3549c21004d8379eaa47f9b1fad0504a81bf5c95a7bfcee4d0afc17b90",
+      "terrainSha256": "cb4f5c505740ab881926dd45d95c5b167b93b2ecac2ce43b56586fe82810256c",
+      "goals": [
+        {
+          "x": 15,
+          "y": 11
+        },
+        {
+          "x": 16,
+          "y": 11
+        },
+        {
+          "x": 17,
+          "y": 11
+        }
+      ],
+      "landCells": 101,
+      "waterCells": 19,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 27,
+          "transitions": 108,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 27,
+          "transitions": 108,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 44,
+          "transitions": 176,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 28,
+          "transitions": 112,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 28,
+          "transitions": 112,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 44,
+          "transitions": 176,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 7,
+      "title": "La relève du passeur",
+      "mapSha256": "35f844c23b539f87346f4d6d8c2041d91d2306e9f808e0a2ec6342e596582a2a",
+      "terrainSha256": "8b0b50d60c268482e3553d5f057e9bf18e58de7dc973a6b69280dda4088e4ea3",
+      "goals": [
+        {
+          "x": 16,
+          "y": 3
+        },
+        {
+          "x": 17,
+          "y": 3
+        },
+        {
+          "x": 18,
+          "y": 3
+        }
+      ],
+      "landCells": 85,
+      "waterCells": 2,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 12,
+          "transitions": 48,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 55,
+          "transitions": 220,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 55,
+          "transitions": 220,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 68,
+          "transitions": 272,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 68,
+          "transitions": 272,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 68,
+          "transitions": 272,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    },
+    {
+      "level": 8,
+      "title": "Le chantier à démonter",
+      "mapSha256": "8354ceeb2ebc43aa975e819ebb08c11c007480e2c727e6108e770250f3f63e6e",
+      "terrainSha256": "b6cb291d9d3344f2f9fbc1cc5fe0e9d2ca407430a3f0451aec72547d02e9b29a",
+      "goals": [
+        {
+          "x": 1,
+          "y": 17
+        },
+        {
+          "x": 2,
+          "y": 17
+        },
+        {
+          "x": 3,
+          "y": 17
+        }
+      ],
+      "landCells": 148,
+      "waterCells": 3,
+      "walking": [
+        {
+          "role": "merchant",
+          "states": 61,
+          "transitions": 244,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 61,
+          "transitions": 244,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 61,
+          "transitions": 244,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "generousWalking": [
+        {
+          "role": "merchant",
+          "states": 63,
+          "transitions": 252,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "thief",
+          "states": 63,
+          "transitions": 252,
+          "reachableGoals": [],
+          "exhausted": true
+        },
+        {
+          "role": "bard",
+          "states": 63,
+          "transitions": 252,
+          "reachableGoals": [],
+          "exhausted": true
+        }
+      ],
+      "maximumFrozenWalkingGoalAssignment": 0,
+      "buttonsAndPressesSeparate": true,
+      "exactHistoricalTerrainRepeats": [],
+      "localChecks": []
+    }
+  ],
+  "reviews": [
+    {
+      "script": "reference/author/review-intro-ss20.mjs",
+      "success": true,
+      "result": {
+        "success": true,
+        "checks": 11,
+        "report": "reference/intro-ss20-review.json"
+      },
+      "sha256": "537c5b017b3767188b953cd7f377a1d15c15312cb6cc6712f63549b951b60e54"
+    },
+    {
+      "script": "reference/author/review-middle-ss20.mjs",
+      "success": true,
+      "result": {
+        "checks": 15,
+        "passed": 15,
+        "inconclusive": 0,
+        "report": "reference/middle-ss20-review.json"
+      },
+      "sha256": "52fd3d9517cf29904313d4fafd6748bcfbed31a87d8505d8a69f92d0045ff0aa"
+    },
+    {
+      "script": "reference/author/review-final-ss20.mjs",
+      "success": true,
+      "result": {
+        "checks": 18,
+        "passed": 18,
+        "report": "reference/final-ss20-review.json"
+      },
+      "sha256": "c4b252a41e97e0c9f8596b290efde00ff9716c2c612df13f083a4a4008d5f531"
+    },
+    {
+      "script": "reference/author/independent-review-ss20.mjs",
+      "success": true,
+      "result": {
+        "status": "passed",
+        "levels": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
+        "checks": 47,
+        "positiveVariants": 2,
+        "complete": true
+      },
+      "sha256": "1988a3cf2d9168862fd397b01715c1302aadc798533d50a511e9637234e46ec4"
+    }
+  ],
+  "limitations": [
+    "A winning witness proves solvability, not an optimal or unique route.",
+    "The walking graphs freeze resources and circuit states and suppress automatic abilities. They do not model joint puzzle solving.",
+    "A geometric comparison detects exact repeats under rotations, reflections and translations; it does not measure subjective originality or difficulty.",
+    "Local counter-branches establish their observed outcomes, not permanent global impossibility after a mistake."
+  ],
+  "layoutComparison": {
+    "previousGames": [
+      "SS14",
+      "SS15",
+      "SS16",
+      "SS17",
+      "SS18",
+      "SS19"
+    ],
+    "previousLevels": 48,
+    "method": "Trim wall padding, normalize pieces to land, keep water, canonicalize all eight planar symmetries",
+    "historical": [
+      {
+        "series": "SS14",
+        "id": "ss14-01",
+        "title": "L’atelier des deux voix",
+        "terrainSha256": "f1d9242a1ce7f12b6fd2867c1c47979b3173989b38e7682574cae079b2327d73"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-02",
+        "title": "La relève silencieuse",
+        "terrainSha256": "9bfea64db67c82cc9549169500789c4efe5700e150a1482593af048ca086f346"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-03",
+        "title": "L’appui sous le partenaire",
+        "terrainSha256": "803591953efd9a9b5ab2385f96fc84549df48b27d69b3facc9632c7934365662"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-04",
+        "title": "Les deux départs sans geste",
+        "terrainSha256": "3d288afb120a955e1fe4b6845b17c3046eb525690fc253611bcca799edd75b5f"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-05",
+        "title": "Les gardiens et le poids retiré",
+        "terrainSha256": "50e1633da252c5133264d477f6a0e0adf516facb2927d212c2bf0ceb43f45159"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-06",
+        "title": "Le passage des deux presses",
+        "terrainSha256": "d96edf05056821d8090a448acaf2700e67a144aac7e2593ba69c0869e45ca35a"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-07",
+        "title": "La pierre des trois traversées",
+        "terrainSha256": "b6fbc9fb37085852e973dbfa09290bfa952c59d52f27e63055b3f9ef8813f2be"
+      },
+      {
+        "series": "SS14",
+        "id": "ss14-08",
+        "title": "Le dernier accord des deux rives",
+        "terrainSha256": "3546284170c4668c8fc08d95c10f958ae1c43f3575c2a7a1e81a49439b3f089e"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-01",
+        "title": "L’appui des deux traversées",
+        "terrainSha256": "2336b7e1ccba8c813532589455edc13c3eaab93cd7d8512e58d51d52e52dc222"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-02",
+        "title": "Le départ qui garde le poids",
+        "terrainSha256": "897756cfe79a3015e3b6f3eaf62a85ffd5af2c0fc8f06e0741f860301255aecc"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-03",
+        "title": "Le remplaçant derrière le reflet",
+        "terrainSha256": "c93154863618943b93743549e2b2fb928d15c0035b829d8796c0bb85561da37c"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-04",
+        "title": "L’atelier des passages croisés",
+        "terrainSha256": "2fb37a1ff049d8c4b32d65d5e315b1d5c5af64255bc62eff38ea2e14c8861754"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-05",
+        "title": "Les gardiens qu’il faut garder",
+        "terrainSha256": "d54e9eea562ccb4d60b13f48c1bc88bfc0158c53ac9984ebd8ee7ad4fa4abf3e"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-06",
+        "title": "La visée et le dernier appui",
+        "terrainSha256": "6aba34c09ad655d974b18773686abce0d9af917a7db1dcfc8cec72c76540a9d7"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-07",
+        "title": "Le relais des trois rives",
+        "terrainSha256": "bd768566712c79402b06c8e7ae1a940dddbe8e2962667fefa3b10fb0dbae4f26"
+      },
+      {
+        "series": "SS15",
+        "id": "ss15-08",
+        "title": "Le compte des deux rives",
+        "terrainSha256": "b506f6dc77d18d9a0431aaf5abfe0602983361d79a9c6acfa3274abb8e200557"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-01",
+        "title": "L’atelier des trois passeurs",
+        "terrainSha256": "b7187c36198b3b0bcc57be05e7f54f70a51684258befa0675014e143c5280ac1"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-02",
+        "title": "Récupérer avant de combler",
+        "terrainSha256": "6197b8b2673b5762bec8d7e5a28b8969794face96fde37cbeb4fb665faf3ae16"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-03",
+        "title": "Lâcher le miroir, garder son poids",
+        "terrainSha256": "d41f25e5a6204273ddf01b53363ecb865d4ecee8d783e887263c49ed4d403f1c"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-04",
+        "title": "Le quai des deux impulsions",
+        "terrainSha256": "b31e7cdbbf07585cdbc9c1a8b02a07d80a7ff11f8ebddc6c08df18fc49e898d2"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-05",
+        "title": "La relève du gardien",
+        "terrainSha256": "30d121ccf71b1b00e4e683e70946a8d6cd3a6ee96ead2d57ea2706c3f0d31ae9"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-06",
+        "title": "Le chantier avant la marée basse",
+        "terrainSha256": "ca2b78fd0645fbab66f9164367d7df8e07da0d22c2fbee54563ba3bb6354bf18"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-07",
+        "title": "Les deux postes du miroir",
+        "terrainSha256": "767769e25e8c877197b3afa43b3df75d7962f085f2f7fdc1fdf92e3e4edefcbf"
+      },
+      {
+        "series": "SS16",
+        "id": "ss16-08",
+        "title": "Le gardien et les trois lests",
+        "terrainSha256": "223b37f375a0c53701f9188e3afcfd1228c09020bd8d1d25f763ae616ce4001a"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-01",
+        "title": "Les trois cours de la forteresse",
+        "terrainSha256": "2d757c681af6b21162fb658b28a459c449713cab3c0862264d45bd1f9c808e79"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-02",
+        "title": "Les cellules de relève",
+        "terrainSha256": "17ad5afdae4292deaf18e2adf6f785c1e281e0e73b12df01f61ab798344b3558"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-03",
+        "title": "Le compte des îles",
+        "terrainSha256": "fb2550373346d6aa9ff0bafe07f503de0063f8ff98e76125463113f34f491c52"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-04",
+        "title": "Le miroir, puis le lest",
+        "terrainSha256": "83495fcb9a40ab975141aa2916aa6af79c184bf9fd262a35e28112ad5a3adede"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-05",
+        "title": "La relève à angle droit",
+        "terrainSha256": "33b8df750a6c98524177b080964733a94458bd43da155d2e4a440f5cbf2881d1"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-06",
+        "title": "Les deux emplois des miroirs",
+        "terrainSha256": "930c1426b53f1db38d115ef11581f0ee7b4f923d9b14b94060dc0f3c30ece922"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-07",
+        "title": "Les trois vies de la clef",
+        "terrainSha256": "975c27ac89d303ee8664f13191fe986c5fc8790cccef2b860b69e81e2fe9cf46"
+      },
+      {
+        "series": "SS17",
+        "id": "ss17-08",
+        "title": "La forteresse aux deux visées",
+        "terrainSha256": "6c9b1674677154f87bd0949c89f3d60a45ab82e47037688a29471373c6a9ff93"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-01",
+        "title": "Les trois pièces du chœur",
+        "terrainSha256": "5cb332bc2fa2dae0e90cd123fb72a0242ad99de32d7fdf11311427631d20a330"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-02",
+        "title": "Le carrefour à contretemps",
+        "terrainSha256": "1ced03fa502b826d375bd309251dae49050f49825a99626e5535403779d398b7"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-03",
+        "title": "Le jardin des trois issues",
+        "terrainSha256": "c280e963b4e5a31b2549731142cee086b90969a3aee6884583ce0575539c17d4"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-04",
+        "title": "Personne ne part le premier",
+        "terrainSha256": "b6077799d27ae4fb85dc2ae3990765345becd7260f23ef62215fe1a7673c62dd"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-05",
+        "title": "Les gardiens de l’arène",
+        "terrainSha256": "107999e5af1d1045d6ce5a4546a0913c0fd4612205e9bc49d8b04b6914bcd4de"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-06",
+        "title": "Le miroir en tournée",
+        "terrainSha256": "dd73762ce025eaa913a1f77f121bc3c51b25d4cc3e0b95e3ee780895b1eeea83"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-07",
+        "title": "La navette des alcôves",
+        "terrainSha256": "13b251b4be85f3d55b2936179be3a77ed7f025c0a8313f6347df590ead9f1698"
+      },
+      {
+        "series": "SS18",
+        "id": "ss18-08",
+        "title": "La cour au cœur du lac",
+        "terrainSha256": "36b033e345e88c1c75f9038bc6ec307a1e0035c17cf6776062079bc12f9c3f73"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-01",
+        "title": "Le gardien du seuil",
+        "terrainSha256": "2969deab27c681d3e1074ada25b3166a2649ebae6615a992aa7805ed8897b7b8"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-02",
+        "title": "Les galeries des gardiens",
+        "terrainSha256": "4a509f9bffd52c41dc7c5d98e8bb4298564ab4d37f64d63ac6050e240842fbc6"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-03",
+        "title": "L’interrupteur hors d’atteinte",
+        "terrainSha256": "179e33411758c3d468af5d7c2a2f4744fc8b28717f0d9392103c32f441850df8"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-04",
+        "title": "Le gardien de la vanne",
+        "terrainSha256": "9bc9d50c74fd6fad040ade199769f5a662595af33c714b9d7d6b280b2b356739"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-05",
+        "title": "Le troisième doit rester vivant",
+        "terrainSha256": "d56cb606600bba09bc0fc334daf07e81273e40135c079ecd5adf64b3c4bfc470"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-06",
+        "title": "La seconde image",
+        "terrainSha256": "0d048c78d1f174103375800cfdcc02bcbf7f13650ae9e0f460ac6e320e62e23a"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-07",
+        "title": "Le relais condamné",
+        "terrainSha256": "f74487d959468a7a1a2687c59190a7c3d5a6dcc913b7e998568deeb59c6845f3"
+      },
+      {
+        "series": "SS19",
+        "id": "ss19-08",
+        "title": "Les deux gardiens vivants",
+        "terrainSha256": "b4bc4f19e1cb974b60f0696e402133e256d4f19de9caefb6404754e68eba51b1"
+      }
+    ]
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "game": "SS20",
+  "title": "Le Relais des Îles",
+  "version": "0.1.0",
+  "artifact": {
+    "filename": "SS20-demo.html",
+    "bytes": 136889,
+    "sha256": "ca943358a420532703f8f6943a665e81da2dab4cf6bd9194378cf01796c1a2e8",
+    "standalone": true,
+    "networkRequiredToPlay": false,
+    "authorWitnessesIncluded": false
+  },
+  "roster": [
+    "merchant",
+    "thief",
+    "bard"
+  ],
+  "defaultHero": "merchant",
+  "tutorial": {
+    "level": 1,
+    "discoveries": 30
+  },
+  "qualification": {
+    "unitTests": 90,
+    "unitPassed": 90,
+    "levelsWon": 8,
+    "totalWitnessActions": 1344,
+    "refusedWitnessActions": 0,
+    "witnessDeaths": 0,
+    "ui": "Compiled HTML in Happy DOM with exact public canvas frames and timing",
+    "nativeBrowserSession": false,
+    "priorLayoutsCompared": 48
+  },
+  "sourceSha256": {
+    "src/core.ts": "24adcb0206b65874b6eaa0e9bba7a08de1de1477ca8e710af3ba9af16302c8b9",
+    "src/levels.ts": "8e51b9fbf5f37c6af7a6fe97d5609f313eb0dad960756ff949617d9db7b758fa",
+    "src/level-info.ts": "000e8822bce1899c1ac2b74accdeb135f2eb6b58902122628ece2dcb98291973",
+    "src/tutorial.ts": "0c083ebc0a71c040f057f7c1b12cdb97d73c260f310b660e16680ffea3f0bfa9",
+    "src/browser.ts": "e116364a7aeaf3ed49062f7c4663f7c2aef9fc75a027fcfd78c7e943f8595640",
+    "index.template.html": "617fdd8786ec70ae73b19fe1a81e09b0c366ac2e053afeca3b100a940264861f",
+    "scripts/build-demo.mjs": "9352fd69f2b1a7a0b2230c04d9daa413e9b6299719f389b6e7d93a144b83dbc2",
+    "package.json": "754cfbd01fcfa17715906ca675acb5ed250d0e741ca529aa9cde3fe99bd230f4",
+    "package-lock.json": "6da014177e427da81fd618f598041bc7512ec627d927ec3a2b5ebc827450d9e0",
+    "tsconfig.json": "5dd2083c554cb1b4095fe21191a260ad65d47ac82401250cadfcdf0a587e9c74"
+  },
+  "reportSha256": {
+    "validation/unit-tests.json": "2e66385ea1a258990c7165a6afbf06dad216d1a8cf0511a7acfa828c8c860040",
+    "validation/levels-report.json": "440133d47fb9931db461c02ab2faf68493684f29de3b7818cfac71c798344868",
+    "validation/ui-dom-report.json": "e02fe0acc4a29455233615d668e2a4c6e1d48935db8b1c70c36805e66a2aa8ef",
+    "validation/design-report.json": "c265cac5935a6e3e880325f7c7d0e6803d2c639d12486cbc563669ddda9d978d"
+  },
+  "limits": [
+    "Author witnesses prove solvability, not an optimal or unique route.",
+    "Local counter-branches and geometric resource arguments are documented separately.",
+    "This manifest qualifies the standalone laboratory, not native SRA execution or Site publication."
+  ]
+}

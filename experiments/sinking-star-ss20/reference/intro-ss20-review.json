@@ -1,0 +1,377 @@
+{
+  "game": "SS20",
+  "success": true,
+  "levels": [
+    1,
+    2
+  ],
+  "checks": [
+    {
+      "level": 1,
+      "name": "Témoin gagnant et métriques recalculées",
+      "status": "passed",
+      "observed": {
+        "actions": 256,
+        "selections": 37,
+        "merchantPushes": 15,
+        "thiefPulls": 10,
+        "songs": 25,
+        "groupSongs": 11,
+        "songHeroMoves": 28,
+        "songStoneMoves": 9,
+        "songMonsterMoves": 1,
+        "supportMoves": 1,
+        "partnerMoves": 37,
+        "stoneMoves": 25,
+        "mirrorMoves": 1,
+        "monsterMoves": 2,
+        "reflections": 7,
+        "heroReflections": 6,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Témoin gagnant et métriques recalculées",
+      "status": "passed",
+      "observed": {
+        "actions": 223,
+        "selections": 24,
+        "merchantPushes": 34,
+        "thiefPulls": 16,
+        "songs": 5,
+        "groupSongs": 0,
+        "songHeroMoves": 3,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 9,
+        "stoneMoves": 46,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Les trente découvertes sont lues dans les images publiques",
+      "status": "passed",
+      "observed": {
+        "count": 30,
+        "discoveries": [
+          {
+            "turn": 1,
+            "action": 6,
+            "lessons": [
+              "select"
+            ]
+          },
+          {
+            "turn": 2,
+            "action": 4,
+            "lessons": [
+              "move",
+              "thief-pull",
+              "single-pull",
+              "partner-pull",
+              "release-by-pull",
+              "monster-still",
+              "gate",
+              "button"
+            ]
+          },
+          {
+            "turn": 8,
+            "action": 1,
+            "lessons": [
+              "merchant-push",
+              "relay-weight",
+              "partner-push"
+            ]
+          },
+          {
+            "turn": 11,
+            "action": 2,
+            "lessons": [
+              "bard-song",
+              "partner-song"
+            ]
+          },
+          {
+            "turn": 46,
+            "action": 4,
+            "lessons": [
+              "selective-song",
+              "diagonal-song",
+              "wall-song"
+            ]
+          },
+          {
+            "turn": 85,
+            "action": 4,
+            "lessons": [
+              "monster-song"
+            ]
+          },
+          {
+            "turn": 105,
+            "action": 4,
+            "lessons": [
+              "press",
+              "monster-press",
+              "monster"
+            ]
+          },
+          {
+            "turn": 115,
+            "action": 4,
+            "lessons": [
+              "mirror-motion"
+            ]
+          },
+          {
+            "turn": 116,
+            "action": 5,
+            "lessons": [
+              "mirror",
+              "crate-reflection"
+            ]
+          },
+          {
+            "turn": 120,
+            "action": 5,
+            "lessons": [
+              "hero-reflection"
+            ]
+          },
+          {
+            "turn": 144,
+            "action": 2,
+            "lessons": [
+              "water-support"
+            ]
+          },
+          {
+            "turn": 158,
+            "action": 3,
+            "lessons": [
+              "support-slide"
+            ]
+          },
+          {
+            "turn": 160,
+            "action": 2,
+            "lessons": [
+              "cross-support"
+            ]
+          },
+          {
+            "turn": 163,
+            "action": 1,
+            "lessons": [
+              "support-anchor"
+            ]
+          },
+          {
+            "turn": 256,
+            "action": 1,
+            "lessons": [
+              "goals"
+            ]
+          }
+        ]
+      },
+      "scope": "Parcours pédagogique complet depuis N1 ; le jeu ne charge ni témoin ni état privé pour afficher les découvertes."
+    },
+    {
+      "level": 1,
+      "name": "La presse rapproche les gardiens avant leur contact",
+      "status": "passed",
+      "observed": {
+        "phaseOrder": [
+          "walk",
+          "piston",
+          "combat"
+        ],
+        "monstersRemaining": 0
+      },
+      "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "L’appui déplacé reste en place quand un héros l’occupe",
+      "status": "passed",
+      "observed": {
+        "support": [
+          {
+            "x": 15,
+            "y": 13
+          }
+        ],
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 15,
+              "y": 12
+            }
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 17,
+              "y": 12
+            }
+          },
+          {
+            "kind": "bard",
+            "at": {
+              "x": 13,
+              "y": 10
+            }
+          }
+        ]
+      },
+      "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "La caisse réfléchie contre le mur est extraite par traction",
+      "status": "passed",
+      "observed": {
+        "landing": {
+          "x": 16,
+          "y": 9
+        },
+        "afterExtraction": {
+          "x": 16,
+          "y": 11
+        },
+        "northWall": true
+      },
+      "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "La même caisse change de fonction",
+      "status": "passed",
+      "observed": {
+        "first": [
+          {
+            "x": 7,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 11
+          }
+        ],
+        "last": [
+          {
+            "x": 3,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 11
+          }
+        ]
+      },
+      "scope": "Deux étapes du témoin avec deux caisses conservées, dont une demeure inaccessible dans le jardin."
+    },
+    {
+      "level": 2,
+      "name": "Déplacer la relève avant de libérer le Barde referme son seul accès",
+      "status": "passed",
+      "observed": {
+        "bard": {
+          "x": 17,
+          "y": 4
+        },
+        "gateClosed": true
+      },
+      "scope": "Mauvais ordre réversible : le poids peut être réinstallé ; aucune impasse définitive n’est affirmée."
+    },
+    {
+      "level": 2,
+      "name": "Un pas du Barde retire le poids ; le pas inverse rétablit le circuit",
+      "status": "passed",
+      "observed": {
+        "downCloses": true,
+        "upRestores": true
+      },
+      "scope": "Branche locale volontairement réversible. La victoire ne dépend d’aucun historique de déplacements."
+    },
+    {
+      "level": 2,
+      "name": "Poussée puis traction amènent le Barde dans le jardin sans déplacer les charges",
+      "status": "passed",
+      "observed": {
+        "commands": "CCRDDDDDDDDDRRRRRRRRRRUULULCCDCLLLLL",
+        "bard": {
+          "x": 8,
+          "y": 10
+        },
+        "stones": [
+          {
+            "x": 3,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 9
+          }
+        ]
+      },
+      "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "La coursive ne comporte pas de troisième entrée libre",
+      "status": "passed",
+      "observed": {
+        "closedSides": [
+          {
+            "x": 14,
+            "y": 8
+          },
+          {
+            "x": 14,
+            "y": 10
+          },
+          {
+            "x": 13,
+            "y": 12
+          }
+        ],
+        "controlledEntrances": [
+          {
+            "x": 14,
+            "y": 9
+          },
+          {
+            "x": 14,
+            "y": 11
+          }
+        ]
+      },
+      "scope": "Inspection du bord de la coursive ; complétée par le graphe de marche initial dans la revue de conception."
+    }
+  ],
+  "limits": [
+    "Les parcours prouvent la résolution, pas une solution minimale ou unique.",
+    "Les contre-exemples locaux sont des essais contrôlés, jamais des conditions cachées dans le moteur."
+  ]
+}

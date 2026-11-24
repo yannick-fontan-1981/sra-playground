@@ -1,0 +1,493 @@
+{
+  "game": "ss20",
+  "levels": [
+    3,
+    4,
+    5
+  ],
+  "method": "Témoins rejoués, mauvais ordres ciblés, variantes légales et recherche bornée explicitement qualifiée.",
+  "limits": [
+    "Aucune unicité de solution n’est revendiquée.",
+    "Un refus dans une branche de revue est attendu et ne fait pas partie des témoins gagnants.",
+    "Les variantes admises ne changent ni la carte ni les règles."
+  ],
+  "checks": [
+    {
+      "level": 3,
+      "name": "Témoin complet, étapes et métriques",
+      "status": "passed",
+      "observed": {
+        "actions": 85,
+        "selections": 5,
+        "merchantPushes": 3,
+        "thiefPulls": 3,
+        "songs": 0,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 2,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 4,
+      "name": "Témoin complet, étapes et métriques",
+      "status": "passed",
+      "observed": {
+        "actions": 102,
+        "selections": 16,
+        "merchantPushes": 6,
+        "thiefPulls": 2,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 8,
+        "heroReflections": 6,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Témoin complet, étapes et métriques",
+      "status": "passed",
+      "observed": {
+        "actions": 128,
+        "selections": 11,
+        "merchantPushes": 4,
+        "thiefPulls": 4,
+        "songs": 2,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 1,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 3,
+      "name": "Presse sans caisse : deux circuits encore liés après six reflets",
+      "status": "passed",
+      "observed": [
+        {
+          "vert": true,
+          "violet": true,
+          "bridge": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "vert": false,
+          "violet": false,
+          "bridge": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "vert": true,
+          "violet": true,
+          "bridge": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "vert": false,
+          "violet": false,
+          "bridge": [
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "vert": true,
+          "violet": true,
+          "bridge": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "vert": false,
+          "violet": false,
+          "bridge": [
+            false,
+            true,
+            false
+          ]
+        }
+      ],
+      "scope": "Branche optique depuis le chargement, avec seule la caisse de presse retirée. La branche ne remplace pas une recherche de tous les déplacements."
+    },
+    {
+      "level": 3,
+      "name": "Écran chargé : vert stable et violet alternant pendant six reflets",
+      "status": "passed",
+      "observed": [
+        {
+          "vert": true,
+          "violet": true,
+          "bridge": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "vert": true,
+          "violet": false,
+          "bridge": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "vert": true,
+          "violet": true,
+          "bridge": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "vert": true,
+          "violet": false,
+          "bridge": [
+            true,
+            true,
+            true
+          ]
+        },
+        {
+          "vert": true,
+          "violet": true,
+          "bridge": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "vert": true,
+          "violet": false,
+          "bridge": [
+            true,
+            true,
+            true
+          ]
+        }
+      ],
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 3,
+      "name": "Bouton violet lisible",
+      "status": "passed",
+      "observed": {
+        "floor": "gray",
+        "arms": "pink",
+        "centerPalette": 15
+      },
+      "scope": "Contrôle de palette : le centre violet est distinct des bras roses. L’inspection du rendu effectif appartient à la revue UI du laboratoire."
+    },
+    {
+      "level": 4,
+      "name": "Sans l’escale-poussoir, le deuxième trajet serait revendiqué par les deux miroirs",
+      "status": "passed",
+      "observed": {
+        "firstImage": "valid",
+        "secondImage": "refused",
+        "blockedMirrorIndices": [
+          0,
+          1
+        ]
+      },
+      "scope": "Contrefactuel d’appareil : même carte et même trajet, porte retirée. La version livrée masque effectivement le premier bras."
+    },
+    {
+      "level": 4,
+      "name": "Livrer trop tôt retire le départ encore nécessaire",
+      "status": "passed",
+      "observed": {
+        "departureActive": false,
+        "goalBridgeActive": true,
+        "boardingFrom": {
+          "x": 5,
+          "y": 7
+        },
+        "boardingRefused": true
+      },
+      "scope": "Branche légale jusqu’à la tentative d’embarquement. Cette erreur reste réversible depuis le quai de réception."
+    },
+    {
+      "level": 4,
+      "name": "Variante légale : annuler une livraison prématurée puis terminer",
+      "status": "passed",
+      "observed": {
+        "actions": 116,
+        "selections": 22,
+        "merchantPushes": 6,
+        "thiefPulls": 2,
+        "songs": 5,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 5,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 15,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 8,
+        "heroReflections": 6,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 4,
+      "name": "Caisse livrée sans réceptionnaire : le prochain premier trajet entre en conflit",
+      "status": "passed",
+      "observed": {
+        "merchant": {
+          "x": 5,
+          "y": 8
+        },
+        "cargo": {
+          "x": 13,
+          "y": 6
+        },
+        "reflectionRefused": true,
+        "blockedMirrorIndices": [
+          0,
+          1
+        ]
+      },
+      "scope": "Branche de chargement exacte, contrôlée jusqu’au reflet refusé : les deux miroirs visent la même escale."
+    },
+    {
+      "level": 5,
+      "name": "Huit reflets seuls ne créent aucune rencontre",
+      "status": "passed",
+      "observed": [
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 10,
+            "y": 7
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 10
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 10,
+            "y": 7
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 10
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 10,
+            "y": 7
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 10
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 10,
+            "y": 7
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 10
+          }
+        ]
+      ],
+      "scope": "Les deux monstres gardent la même parité x+y ; un voisinage orthogonal demande des parités opposées. Ce contrôle porte sur les reflets sans autre déplacement."
+    },
+    {
+      "level": 5,
+      "name": "Variante légale : reflet puis pas du Barde, au lieu de pas puis reflet",
+      "status": "passed",
+      "observed": {
+        "actions": 128,
+        "selections": 11,
+        "merchantPushes": 4,
+        "thiefPulls": 4,
+        "songs": 2,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 1,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Caisse au coude : la voie arrière du Marchand se ferme",
+      "status": "passed",
+      "observed": {
+        "merchant": {
+          "x": 12,
+          "y": 10
+        },
+        "gateClosed": true,
+        "northStepRefused": true
+      },
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Chant du coude : caisse déplacée, Marchand retenu par le mur",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 8
+            },
+            "to": {
+              "x": 10,
+              "y": 9
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 11,
+              "y": 10
+            },
+            "to": {
+              "x": 11,
+              "y": 11
+            }
+          }
+        ],
+        "couplingReleased": true
+      },
+      "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Recherche sans aucun chant",
+      "status": "passed",
+      "observed": {
+        "status": "unsolvable",
+        "states": 7920,
+        "expanded": 7920,
+        "ms": 258
+      },
+      "scope": "File épuisée : aucun parcours gagnant sous cette restriction."
+    }
+  ]
+}

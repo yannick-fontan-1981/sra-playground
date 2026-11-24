@@ -1,0 +1,906 @@
+{
+  "spec": {
+    "id": "ss20-03",
+    "title": "Le poids qui reste",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "#######.######.#####",
+      "#######~######~#####",
+      "#######.######~#####",
+      "#######..~oo~~.#####",
+      "########.###########",
+      "##..#....###########",
+      "##.#o....###########",
+      "##..#T...###########",
+      "##.....M.........###",
+      "##.......#######~###",
+      "##B......#######~###",
+      "################~###",
+      "#############......#",
+      "#############......#",
+      "#############g#g#g##",
+      "####################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "vert",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 4
+          }
+        ],
+        "color": 14
+      },
+      {
+        "id": "violet",
+        "buttons": [
+          {
+            "x": 14,
+            "y": 4
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 8
+        },
+        "circuit": "vert",
+        "direction": "N",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 16,
+          "y": 13
+        },
+        "circuit": "vert",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 14
+        },
+        "circuit": "violet",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 15
+        },
+        "circuit": "vert",
+        "activeWhen": "pressed"
+      }
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 7,
+          "y": 7
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 7
+        },
+        "facing": "NW"
+      }
+    ]
+  },
+  "commands": "CURRRDLLDCCULURDRUUDDDLXXRRRRRRRRRDDDDDLLLDCRRRRRRRRRRDDDDDLDCUURRRRRRRRRRRRRRDDDDDRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation de Héros et Miroirs — énigme 20",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+    "puzzle": "20",
+    "objective": "Stabiliser un premier bouton tout en laissant le second alterner à chaque reflet."
+  },
+  "metrics": {
+    "actions": 85,
+    "selections": 5,
+    "merchantPushes": 3,
+    "thiefPulls": 3,
+    "songs": 0,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 11,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 2,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Extraire la caisse de la niche : aucun accès derrière elle.",
+      "turn": 9,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "vert": false,
+        "violet": false
+      }
+    },
+    {
+      "label": "Charger la presse ouverte avant d’allumer le vert.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "vert": false,
+        "violet": false
+      }
+    },
+    {
+      "label": "Le premier reflet allume les deux boutons ; la presse installe l’écran près du miroir gauche.",
+      "turn": 24,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "vert": true,
+        "violet": true
+      }
+    },
+    {
+      "label": "Le second reflet éteint le violet ; la caisse-écran prend le reflet et le poids vert reste en place.",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "vert": true,
+        "violet": false
+      }
+    },
+    {
+      "label": "Traverser le chemin vert–violet inversé–vert et réunir les trois sorties.",
+      "turn": 85,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 18
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "vert": true,
+        "violet": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un premier appui doit rester actif après sa mise en place.",
+      "Un obstacle plus proche du miroir soustrait le poids éloigné aux reflets suivants.",
+      "Le second circuit conserve une alternance indépendante."
+    ],
+    "changed": [
+      "Aucune duplication : trois caisses finies sont présentes dès le départ.",
+      "Une seule porte-poussoir visible installe l’écran, après son chargement manuel par tirage puis poussée.",
+      "Les deux états commandent un chemin de trois passerelles, avec polarité inversée au milieu."
+    ],
+    "sourceReading": "Le principe de mémoire optique vient de l’énigme 20 ; la presse, les quais isolés et le chargement Marchand/Voleur sont propres à SS20.",
+    "localChecks": [
+      {
+        "name": "Témoin complet, étapes et métriques",
+        "status": "passed",
+        "observed": {
+          "actions": 85,
+          "selections": 5,
+          "merchantPushes": 3,
+          "thiefPulls": 3,
+          "songs": 0,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 11,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 2,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Presse sans caisse : deux circuits encore liés après six reflets",
+        "status": "passed",
+        "observed": [
+          {
+            "vert": true,
+            "violet": true,
+            "bridge": [
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "vert": false,
+            "violet": false,
+            "bridge": [
+              false,
+              true,
+              false
+            ]
+          },
+          {
+            "vert": true,
+            "violet": true,
+            "bridge": [
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "vert": false,
+            "violet": false,
+            "bridge": [
+              false,
+              true,
+              false
+            ]
+          },
+          {
+            "vert": true,
+            "violet": true,
+            "bridge": [
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "vert": false,
+            "violet": false,
+            "bridge": [
+              false,
+              true,
+              false
+            ]
+          }
+        ],
+        "scope": "Branche optique depuis le chargement, avec seule la caisse de presse retirée. La branche ne remplace pas une recherche de tous les déplacements."
+      },
+      {
+        "name": "Écran chargé : vert stable et violet alternant pendant six reflets",
+        "status": "passed",
+        "observed": [
+          {
+            "vert": true,
+            "violet": true,
+            "bridge": [
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "vert": true,
+            "violet": false,
+            "bridge": [
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "vert": true,
+            "violet": true,
+            "bridge": [
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "vert": true,
+            "violet": false,
+            "bridge": [
+              true,
+              true,
+              true
+            ]
+          },
+          {
+            "vert": true,
+            "violet": true,
+            "bridge": [
+              true,
+              false,
+              true
+            ]
+          },
+          {
+            "vert": true,
+            "violet": false,
+            "bridge": [
+              true,
+              true,
+              true
+            ]
+          }
+        ],
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Bouton violet lisible",
+        "status": "passed",
+        "observed": {
+          "floor": "gray",
+          "arms": "pink",
+          "centerPalette": 15
+        },
+        "scope": "Contrôle de palette : le centre violet est distinct des bras roses. L’inspection du rendu effectif appartient à la revue UI du laboratoire."
+      }
+    ]
+  }
+}

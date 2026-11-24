@@ -1,0 +1,816 @@
+{
+  "spec": {
+    "id": "ss20-07",
+    "title": "La relève du passeur",
+    "rows": [
+      "####################",
+      "##########....o#####",
+      "#######..#.....#####",
+      "#....##o.#.....#ggg#",
+      "#....##..#.....#...#",
+      "#..M.B.............#",
+      "#######.####..##...#",
+      "######m.#####.######",
+      "######~T#####.######",
+      "######.....m..######",
+      "######...##~#.######",
+      "######...####.######",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "releve",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 7,
+            "y": 8
+          }
+        ]
+      },
+      {
+        "id": "sortie",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 13,
+            "y": 6
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 7
+        },
+        "circuit": "releve",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 6,
+          "y": 5
+        },
+        "circuit": "releve",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 9
+        },
+        "circuit": "releve",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 5
+        },
+        "circuit": "sortie",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRRRURUULDDDDCDCCUUUUCCRRRRRDDDDUUUURCCRRRRRRUUUUUUUULDRDDDDLCCDDDRRRURRRDCCRRRUUCCURRRRURRU",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "objective": "Faire passer le Barde sans chant dangereux, établir la relève du Voleur puis extraire la réserve dans deux axes.",
+    "label": "Heroes and Water — énigmes 28 et 29",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+    "puzzles": [
+      28,
+      29
+    ],
+    "secondary": {
+      "label": "Heroes and Light — énigme 2",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 92,
+    "selections": 13,
+    "merchantPushes": 8,
+    "thiefPulls": 6,
+    "songs": 7,
+    "groupSongs": 0,
+    "songHeroMoves": 5,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 2,
+    "supportMoves": 0,
+    "partnerMoves": 8,
+    "stoneMoves": 11,
+    "mirrorMoves": 0,
+    "monsterMoves": 2,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 1,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand pousse le Barde à travers le sas : chanter aurait rapproché le gardien du Voleur, immobilisé sur son bouton.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Depuis l’autre côté du sas, le Marchand contourne la réserve haute et la descend sur la presse ouverte.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur tire la caisse depuis la presse jusque sur son propre bouton en quittant celui-ci. La relève conserve les accès ouverts ; avant la livraison, sortir vers le haut l’aurait renvoyé sur son bouton.",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 6,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Depuis l’angle sec, un pas de chant vers le bas retire le second gardien dans l’eau. Le couloir du Voleur devient praticable.",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "La réserve est sortie latéralement de son alvéole. Sa face droite et son arrière sont des murs : il faut changer de côté.",
+      "turn": 54,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 1
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 1
+        },
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Après un second tirage dans l’autre axe, le Marchand dépose la réserve sur la commande d’arrivée. La première caisse reste au relais.",
+      "turn": 74,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "sortie": true
+      }
+    },
+    {
+      "label": "La dernière marche chantée entraîne aussi le Marchand ; la caisse d’arrivée est retenue par le mur à droite.",
+      "turn": 81,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 7,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "releve": true,
+        "sortie": true
+      }
+    }
+  ],
+  "adaptation": "Water 28 fournit le départ forcé du Barde, sans déclencher son chant ; Water 29 fournit la réserve qu’un tirage extrait d’un accès fermé à la poussée. Ici le départ forcé protège un Voleur sur son bouton, puis une caisse livrée depuis la réserve supérieure remplace ce passeur. Une presse orientée vers le bas empêche le Voleur d’extraire lui-même cette réserve avant le passage du Barde. Le gardien du couloir est noyé depuis un angle distinct. Les salles et le double changement d’axe remplacent entièrement les cartes sources ; il n’y a ni dragon, feu, échange magique ni déplacement autonome des monstres."
+}

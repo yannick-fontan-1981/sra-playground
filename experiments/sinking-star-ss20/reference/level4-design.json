@@ -1,0 +1,1062 @@
+{
+  "spec": {
+    "id": "ss20-04",
+    "title": "Les quais en décalage",
+    "rows": [
+      "####################",
+      "#############g.g.g##",
+      "#############.....##",
+      "##.T....#######~####",
+      "###...B.####......##",
+      "##o.....####....#.##",
+      "###.....####.....###",
+      "##......####......##",
+      "##M..~..#####~######",
+      "#####~#######~######",
+      "#####~#######~######",
+      "#####.~..~~~~.######",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "escale",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 11
+          }
+        ],
+        "color": 10
+      },
+      {
+        "id": "livraison",
+        "buttons": [
+          {
+            "x": 16,
+            "y": 6
+          }
+        ],
+        "color": 9
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 11
+        },
+        "circuit": "escale",
+        "direction": "W",
+        "closedWhen": "pressed"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 5,
+          "y": 8
+        },
+        "circuit": "livraison",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 3
+        },
+        "circuit": "livraison",
+        "activeWhen": "pressed"
+      }
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 5,
+          "y": 11
+        },
+        "facing": "NE"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 11
+        },
+        "facing": "NW"
+      }
+    ]
+  },
+  "commands": "CCDDDDLXXUURCCDDRRUULLCCURUUURDDDLDRULXXCCRCDRRXXUULCDDDDDRRXXDLCCDDRRRDLLCCUUUCUUURRUULULCUUURRRUURRU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 15
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation de Héros et Miroirs — énigmes 22–23",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+    "puzzle": "22–23",
+    "objective": "Préparer un départ latéral par deux miroirs et préserver l’accès pour les transports suivants."
+  },
+  "metrics": {
+    "actions": 102,
+    "selections": 16,
+    "merchantPushes": 6,
+    "thiefPulls": 2,
+    "songs": 1,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 1,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 11,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 8,
+    "heroReflections": 6,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Envoyer le Barde comme réceptionnaire : l’escale ferme le bras gauche, puis le second miroir dessert le quai droit.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Tirer la caisse hors de son renfoncement avant de la descendre au départ.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Présenter la caisse seule sur le quai de départ ; les autres acteurs quittent la colonne.",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Écarter la caisse du débarcadère par un chant latéral, sans encore activer le bouton de livraison.",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Faire passer le Marchand pendant que le départ reste soutenu.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Le Voleur quitte le dernier quai : la passerelle de départ peut maintenant disparaître.",
+      "turn": 64,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Livrer la caisse seulement après le dernier passage ; le bouton déploie la passerelle des sorties.",
+      "turn": 74,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": true
+      }
+    },
+    {
+      "label": "Réunir les trois personnages sur les quais d’arrivée.",
+      "turn": 102,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 1
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 1
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 11
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "escale": false,
+        "livraison": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un montage de deux miroirs transforme la position de départ en un débarquement décalé.",
+      "Le départ d’un personnage ou d’une charge peut gêner les trajets suivants.",
+      "La réception et la libération du débarcadère se préparent avant le dernier voyage."
+    ],
+    "changed": [
+      "Les reflets SS20 restent atomiques et ne dupliquent aucun acteur : une escale-bouton masque visiblement le premier miroir pendant le second trajet.",
+      "Le Marchand et le Voleur chargent une caisse finie ; le Barde la décale depuis la rive de réception.",
+      "La livraison retire le quai de départ et déploie celui des sorties : elle doit attendre le dernier passager.",
+      "Aucune plante, fusion ou création de cristal de l’original n’est reprise."
+    ],
+    "sourceReading": "Les énigmes 22–23 motivent le U optique et l’ordre des départs ; l’escale-poussoir et la livraison à polarités opposées sont une adaptation propre aux règles M/T/B.",
+    "localChecks": [
+      {
+        "name": "Témoin complet, étapes et métriques",
+        "status": "passed",
+        "observed": {
+          "actions": 102,
+          "selections": 16,
+          "merchantPushes": 6,
+          "thiefPulls": 2,
+          "songs": 1,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 1,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 11,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 8,
+          "heroReflections": 6,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Sans l’escale-poussoir, le deuxième trajet serait revendiqué par les deux miroirs",
+        "status": "passed",
+        "observed": {
+          "firstImage": "valid",
+          "secondImage": "refused",
+          "blockedMirrorIndices": [
+            0,
+            1
+          ]
+        },
+        "scope": "Contrefactuel d’appareil : même carte et même trajet, porte retirée. La version livrée masque effectivement le premier bras."
+      },
+      {
+        "name": "Livrer trop tôt retire le départ encore nécessaire",
+        "status": "passed",
+        "observed": {
+          "departureActive": false,
+          "goalBridgeActive": true,
+          "boardingFrom": {
+            "x": 5,
+            "y": 7
+          },
+          "boardingRefused": true
+        },
+        "scope": "Branche légale jusqu’à la tentative d’embarquement. Cette erreur reste réversible depuis le quai de réception."
+      },
+      {
+        "name": "Variante légale : annuler une livraison prématurée puis terminer",
+        "status": "passed",
+        "observed": {
+          "actions": 116,
+          "selections": 22,
+          "merchantPushes": 6,
+          "thiefPulls": 2,
+          "songs": 5,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 5,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 15,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 8,
+          "heroReflections": 6,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Caisse livrée sans réceptionnaire : le prochain premier trajet entre en conflit",
+        "status": "passed",
+        "observed": {
+          "merchant": {
+            "x": 5,
+            "y": 8
+          },
+          "cargo": {
+            "x": 13,
+            "y": 6
+          },
+          "reflectionRefused": true,
+          "blockedMirrorIndices": [
+            0,
+            1
+          ]
+        },
+        "scope": "Branche de chargement exacte, contrôlée jusqu’au reflet refusé : les deux miroirs visent la même escale."
+      }
+    ]
+  }
+}

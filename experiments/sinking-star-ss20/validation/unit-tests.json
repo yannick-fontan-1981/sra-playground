@@ -1,0 +1,16 @@
+{
+  "game": "SS20",
+  "version": "0.1.0",
+  "command": "node --test tests/*.test.mjs",
+  "success": true,
+  "tests": 90,
+  "passed": 90,
+  "failed": 0,
+  "skipped": 0,
+  "groups": {
+    "trio": 51,
+    "monsters": 19,
+    "tutorial": 20
+  },
+  "output": "validation/unit-tests.txt"
+}

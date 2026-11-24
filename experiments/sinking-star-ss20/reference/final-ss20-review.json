@@ -1,0 +1,452 @@
+{
+  "game": "ss20",
+  "levels": [
+    6,
+    7,
+    8
+  ],
+  "method": "Témoins exacts, variante gagnante, ancien contournement rejoué, certificats topologiques et branches physiques ciblées. Aucune recherche bornée utilisée comme preuve négative.",
+  "limits": [
+    "Aucune unicité de solution ni minimum de coups ne sont revendiqués.",
+    "La variante N6 par chant initial est conservée ; le tirage initial n’est pas indispensable.",
+    "N7 ferme le contre-exemple du gardien de relève par la géométrie de la presse, de l’eau et du bouton.",
+    "N8 exige deux appuis distincts par topologie ; après la purge du gardien, trois caisses sont nécessaires aux deux ponts et au poids sec.",
+    "Le remplacement du poids final par un gardien est rejeté avant la dernière traversée ; aucune preuve exhaustive générale sur toute installation tardive de ce gardien n’est annoncée.",
+    "Les refus et morts des branches de contrôle ne figurent pas dans les témoins gagnants."
+  ],
+  "checks": [
+    {
+      "level": 6,
+      "name": "Témoin complet sans refus ni perte",
+      "status": "passed",
+      "observed": {
+        "actions": 93,
+        "selections": 16,
+        "merchantPushes": 10,
+        "thiefPulls": 4,
+        "songs": 9,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 9,
+        "partnerMoves": 0,
+        "stoneMoves": 14,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche effectivement rejouée ; aucune unicité ni optimalité n’est revendiquée."
+    },
+    {
+      "level": 7,
+      "name": "Témoin complet sans refus ni perte",
+      "status": "passed",
+      "observed": {
+        "actions": 92,
+        "selections": 13,
+        "merchantPushes": 8,
+        "thiefPulls": 6,
+        "songs": 7,
+        "groupSongs": 0,
+        "songHeroMoves": 5,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 2,
+        "supportMoves": 0,
+        "partnerMoves": 8,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche effectivement rejouée ; aucune unicité ni optimalité n’est revendiquée."
+    },
+    {
+      "level": 8,
+      "name": "Témoin complet sans refus ni perte",
+      "status": "passed",
+      "observed": {
+        "actions": 365,
+        "selections": 43,
+        "merchantPushes": 30,
+        "thiefPulls": 39,
+        "songs": 6,
+        "groupSongs": 1,
+        "songHeroMoves": 3,
+        "songStoneMoves": 4,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 3,
+        "stoneMoves": 75,
+        "mirrorMoves": 0,
+        "monsterMoves": 1,
+        "reflections": 10,
+        "heroReflections": 8,
+        "pistonPushes": 1,
+        "platformsCreated": 2,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche effectivement rejouée ; aucune unicité ni optimalité n’est revendiquée."
+    },
+    {
+      "level": 6,
+      "name": "Variante légale : extraction initiale par le Barde",
+      "status": "passed",
+      "observed": {
+        "metrics": {
+          "actions": 97,
+          "selections": 16,
+          "merchantPushes": 11,
+          "thiefPulls": 2,
+          "songs": 10,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 1,
+          "songMonsterMoves": 0,
+          "supportMoves": 9,
+          "partnerMoves": 0,
+          "stoneMoves": 14,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "commands": "CDCLRCLUURRRRRDDCURRRRDRRDCURRRRDCUURRRRRDDCUURRDRRDDCURRDRDDCCLCCURDRRUURRRCCDDRRRRUCDLCURRRRRRU"
+      },
+      "scope": "La variante conserve la carte et rejoint le même état du quai central. Le tirage initial du Voleur n’est donc pas présenté comme obligatoire."
+    },
+    {
+      "level": 6,
+      "name": "Un appui réemployé, une caisse restée sèche",
+      "status": "passed",
+      "observed": {
+        "support": {
+          "x": 11,
+          "y": 9
+        },
+        "finalWeight": {
+          "x": 12,
+          "y": 13
+        },
+        "supportMoves": 9
+      },
+      "scope": "Le parcours conserve un seul appui ; les trois héros quittent le bouton extérieur, que la caisse maintient au terme du parcours."
+    },
+    {
+      "level": 6,
+      "name": "Le contrôleur final ne rejoint pas la presse en quittant son bouton",
+      "status": "passed",
+      "observed": {
+        "gate": {
+          "x": 13,
+          "y": 12
+        },
+        "button": {
+          "x": 12,
+          "y": 13
+        },
+        "otherCrossings": "walls",
+        "nonHeroWeights": [
+          "one dry crate"
+        ]
+      },
+      "scope": "Certificat local de passage : une seule entrée vers les trois sorties ; bouton et presse ne sont pas voisins. L’appui reste dans l’eau et ne peut servir de poids sur ce bouton de sol."
+    },
+    {
+      "level": 7,
+      "name": "Départ chanté immédiat du Barde : contact fatal",
+      "status": "passed",
+      "observed": {
+        "dead": true,
+        "phases": [
+          "song",
+          "combat"
+        ],
+        "monsters": [
+          {
+            "x": 7,
+            "y": 7
+          },
+          {
+            "x": 11,
+            "y": 9
+          }
+        ]
+      },
+      "scope": "Le mouvement du gardien est provoqué par le chant, pas par une poursuite autonome."
+    },
+    {
+      "level": 7,
+      "name": "Sortie haute prématurée du Voleur : retour physique sur la commande",
+      "status": "passed",
+      "observed": {
+        "thief": {
+          "x": 7,
+          "y": 8
+        },
+        "phases": [
+          "walk",
+          "piston",
+          "gate"
+        ],
+        "buttonStillPressed": true
+      },
+      "scope": "Branche effectivement rejouée ; aucune unicité ni optimalité n’est revendiquée."
+    },
+    {
+      "level": 7,
+      "name": "Ancien contournement par gardien-poids rejeté",
+      "status": "passed",
+      "observed": {
+        "commands": "RRCDDCRRRRRRDDDUUURCCRURRRRRUUUUUUULDRDDDDLCCRRRRRURRRDCCRRRUUCCURRRRURRU",
+        "firstBlockedTurn": 24,
+        "complete": false,
+        "metrics": {
+          "actions": 73,
+          "selections": 10,
+          "merchantPushes": 1,
+          "thiefPulls": 0,
+          "songs": 2,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 1,
+          "songMonsterMoves": 1,
+          "supportMoves": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 1,
+          "mirrorMoves": 0,
+          "monsterMoves": 1,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 0,
+          "monstersRemoved": 1,
+          "blocked": 34,
+          "deaths": 0
+        }
+      },
+      "scope": "Contre-exemple exact de l’ancienne carte, rejoué sur la correction. Ce résultat ne prétend pas énumérer toutes les stratégies."
+    },
+    {
+      "level": 7,
+      "name": "Voleur parti : le gardien ne peut prendre sa place sur le bouton",
+      "status": "passed",
+      "observed": {
+        "guard": {
+          "x": 6,
+          "y": 7
+        },
+        "onlyDryDestination": {
+          "x": 7,
+          "y": 7
+        },
+        "destinationClosed": true,
+        "otherDestinations": [
+          "north wall",
+          "west wall",
+          "south water"
+        ],
+        "button": {
+          "x": 7,
+          "y": 8
+        }
+      },
+      "scope": "Le seul déplacement sec du gardien vise la presse au-dessus du bouton. Sans poids de relève elle est fermée ; si un héros tient encore le bouton, l’arrivée du gardien le touche. La réserve établit la relève avant ce déplacement."
+    },
+    {
+      "level": 8,
+      "name": "Deux coupures d’eau indépendantes jusqu’aux sorties",
+      "status": "passed",
+      "observed": {
+        "cuts": [
+          {
+            "x": 7,
+            "y": 11
+          },
+          {
+            "x": 4,
+            "y": 12
+          }
+        ],
+        "bothPresent": true,
+        "withoutNorthCut": false,
+        "withoutWestCut": false
+      },
+      "scope": "Certificat topologique optimiste : toutes les portes sont considérées ouvertes, la plateforme hydraulique active et le port optique utilisable. Même ainsi, supprimer l’un des deux appuis coupe l’accès aux sorties."
+    },
+    {
+      "level": 8,
+      "name": "Les deux appuis finaux ne peuvent voyager de trou en trou",
+      "status": "passed",
+      "observed": {
+        "cuts": [
+          {
+            "x": 7,
+            "y": 11
+          },
+          {
+            "x": 4,
+            "y": 12
+          }
+        ],
+        "waterNeighbours": [
+          0,
+          0
+        ]
+      },
+      "scope": "Un appui ne glisse que de l’eau vers l’eau ; chacun de ces deux trous est entouré de sol ou de murs. Deux caisses distinctes sont nécessaires pour les combler."
+    },
+    {
+      "level": 8,
+      "name": "Le miroir d’angle est physiquement immobile",
+      "status": "passed",
+      "observed": {
+        "mirror": {
+          "x": 9,
+          "y": 8
+        },
+        "walls": [
+          {
+            "x": 9,
+            "y": 6
+          },
+          {
+            "x": 8,
+            "y": 8
+          },
+          {
+            "x": 9,
+            "y": 9
+          },
+          {
+            "x": 11,
+            "y": 8
+          }
+        ],
+        "ports": [
+          {
+            "x": 9,
+            "y": 7
+          },
+          {
+            "x": 10,
+            "y": 8
+          }
+        ]
+      },
+      "scope": "Une poussée depuis le nord ou l’est vise un mur. Un tirage depuis ces faces bute sur le mur situé derrière le tireur. Les deux autres faces sont murées ; le chant ignore le miroir. Ses seuls ports optiques sont les deux cases adjacentes."
+    },
+    {
+      "level": 8,
+      "name": "Démontage trop tôt : la réserve haute devient un appui perdu dans le chantier",
+      "status": "passed",
+      "observed": {
+        "dryCrates": 2,
+        "strandedSupport": {
+          "x": 14,
+          "y": 13
+        },
+        "remainingMonsters": 0
+      },
+      "scope": "Branche légale après la purge. Deux ressources sèches restent pour deux trous isolés plus un poids final : cette erreur consomme irréversiblement une ressource encore nécessaire. Cette preuve conditionnelle ne prétend pas couvrir une stratégie qui conserverait le monstre avant la purge."
+    },
+    {
+      "level": 8,
+      "name": "Le retour de commande chante le Marchand vers le nord",
+      "status": "passed",
+      "observed": {
+        "turn": 40,
+        "merchant": {
+          "x": 14,
+          "y": 14
+        },
+        "phases": [
+          "song",
+          "gate",
+          "platform"
+        ]
+      },
+      "scope": "Vérification de la légende : le sas se referme vide. L’unique poussée de presse du témoin concerne le gardien lors de la purge."
+    },
+    {
+      "level": 8,
+      "name": "Le départ actif du Voleur retire le poids final",
+      "status": "passed",
+      "observed": {
+        "thief": {
+          "x": 4,
+          "y": 12
+        },
+        "crate": {
+          "x": 5,
+          "y": 12
+        },
+        "finalGateClosed": true
+      },
+      "scope": "Branche locale valide : le tirage ferme la sortie. On ne déclare pas cette erreur globalement irréparable."
+    },
+    {
+      "level": 8,
+      "name": "Le chant depuis l’autre rive extrait le Voleur sans tirer sa caisse",
+      "status": "passed",
+      "observed": {
+        "thief": {
+          "x": 4,
+          "y": 12
+        },
+        "bard": {
+          "x": 2,
+          "y": 14
+        },
+        "finalWeight": {
+          "x": 6,
+          "y": 12
+        },
+        "gateOpen": true
+      },
+      "scope": "Le Voleur est transporté passivement ; la caisse se trouve hors de la portée initiale du Barde."
+    },
+    {
+      "level": 8,
+      "name": "Un gardien sur le bouton interdit la dernière traversée",
+      "status": "passed",
+      "observed": {
+        "guard": {
+          "x": 6,
+          "y": 12
+        },
+        "adjacentMandatoryCells": [
+          {
+            "x": 5,
+            "y": 12
+          },
+          {
+            "x": 7,
+            "y": 12
+          }
+        ],
+        "contactFatal": true
+      },
+      "scope": "Contrefactuel local, pas une position déclarée atteignable : un monstre déjà posé sur ce bouton empêche un héros restant à droite de franchir le couloir. L’installation tardive après tous les passages n’est pas exclue par une recherche exhaustive ; aucune preuve globale de ce remplacement n’est revendiquée."
+    }
+  ]
+}

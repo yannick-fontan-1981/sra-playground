@@ -1,0 +1,1456 @@
+{
+  "spec": {
+    "id": "ss20-02",
+    "title": "Le chargement à rebours",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "######.o.......#...#",
+      "##...#.T.........B.#",
+      "##...#.........#...#",
+      "##...#.........#####",
+      "##...#########....##",
+      "##...##g.g..#.#...##",
+      "##...##.....#.....##",
+      "##.#.##.......#...##",
+      "##...##g...o#.....##",
+      "##...#########....##",
+      "##................##",
+      "##..............M.##",
+      "##................##",
+      "##................##",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "loading",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 5
+          }
+        ],
+        "color": 11
+      },
+      {
+        "id": "outside",
+        "buttons": [
+          {
+            "x": 3,
+            "y": 5
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "inside",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 9
+          }
+        ],
+        "color": 12
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 15,
+          "y": 4
+        },
+        "circuit": "loading",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 9
+        },
+        "circuit": "outside",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 11
+        },
+        "circuit": "outside",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 10
+        },
+        "circuit": "inside",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDDRCLLLDDDRDDDDRRCUUUUUUULLUUULLLLLLLLDCRRRRRRDRCCRRRRRRRURDDCRRDLDDRCCDRDRDDDDDRDLLLLLLLLLLLLLDLUUULURDRUUCLDDDLLLLLLLLLLLLUULLUURLURUUUUCCDDDRRRRRRRRRRUULUUUCCLLLLUUCCRDDDDDDDDDRRRRRRRRRRUULULCCDCLLLLLCUURCCDLUCCDLLDLLLL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 15
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 36
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes of Hauling · énigmes 5, 7 et 17",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-7",
+    "puzzle": 7,
+    "objective": "Faire changer la caisse de côté et de fonction, puis faire entrer le Barde dans le jardin sans déplacer le poids intérieur.",
+    "secondary": {
+      "label": "Heroes 3: Bard, Druid · énigme 14 · passage imposé au Barde",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/#%C3%A9nigme-14"
+    }
+  },
+  "metrics": {
+    "actions": 223,
+    "selections": 24,
+    "merchantPushes": 34,
+    "thiefPulls": 16,
+    "songs": 5,
+    "groupSongs": 0,
+    "songHeroMoves": 3,
+    "songStoneMoves": 2,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 9,
+    "stoneMoves": 46,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La caisse extraite du mur devient le poids provisoire qui libère le Barde.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": true,
+        "outside": false,
+        "inside": false
+      }
+    },
+    {
+      "label": "La caisse contourne le premier angle ; le mur interdit de la pousser vers l’est.",
+      "turn": 62,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 7
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": false,
+        "inside": false
+      }
+    },
+    {
+      "label": "Deux tractions perpendiculaires préparent la descente sur la route extérieure.",
+      "turn": 70,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": false,
+        "inside": false
+      }
+    },
+    {
+      "label": "Le pilier du couloir ouest impose un nouveau changement de côté.",
+      "turn": 101,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 11
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": false,
+        "inside": false
+      }
+    },
+    {
+      "label": "Le Voleur remonte la charge derrière lui jusque sur la commande violette.",
+      "turn": 139,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": true,
+        "inside": false
+      }
+    },
+    {
+      "label": "Depuis la coursive, deux pas du Barde alignent la caisse intérieure sur le bouton orange.",
+      "turn": 168,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": true,
+        "inside": true
+      }
+    },
+    {
+      "label": "Le Marchand engage le Barde dans le passage sans faire chanter la caisse.",
+      "turn": 198,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": true,
+        "inside": true
+      }
+    },
+    {
+      "label": "Depuis le jardin, le Voleur prend le relais et tire le Barde à distance du poids.",
+      "turn": 204,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": true,
+        "inside": true
+      }
+    },
+    {
+      "label": "Les trois destinations sont occupées ; les deux poids utiles restent en place.",
+      "turn": 223,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "loading": false,
+        "outside": true,
+        "inside": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Une traction exige de changer de côté au cours du transport (Heroes 1, 5).",
+      "Une caisse rejoint une commande éloignée en contournant un grand obstacle (Heroes 1, 7).",
+      "Un poids provisoire donne accès à un héros, puis est réemployé pour maintenir l’entrée d’un jardin (Heroes 1, 17).",
+      "Un partenaire transporte le Barde après la mise en place d’un poids par chant (Heroes 3, 14)."
+    ],
+    "changed": [
+      "Le plateau impose un détour asymétrique avec deux angles où le Marchand ne peut pas se placer derrière la caisse.",
+      "Le trio remplace les échanges magiques par une poussée simple, une traction arrière simple et le chant carré.",
+      "La première caisse libère d’abord le Barde, puis tient les deux portes de la coursive ; la seconde, intérieure, est placée par chant à travers la cloison.",
+      "Marchand et Voleur se relaient pour faire entrer le Barde sans activer sa capacité.",
+      "Ce niveau est entièrement terrestre et ne comporte ni monstre ni miroir : la difficulté vient des accès et des changements de côté."
+    ],
+    "sourceReading": "Reprise des principes logistiques décrits dans les énigmes numérotées ; terrain, circuits et parcours recomposés pour SS20.",
+    "localChecks": [
+      {
+        "name": "Témoin gagnant et métriques recalculées",
+        "status": "passed",
+        "observed": {
+          "actions": 223,
+          "selections": 24,
+          "merchantPushes": 34,
+          "thiefPulls": 16,
+          "songs": 5,
+          "groupSongs": 0,
+          "songHeroMoves": 3,
+          "songStoneMoves": 2,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 9,
+          "stoneMoves": 46,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+      },
+      {
+        "name": "La même caisse change de fonction",
+        "status": "passed",
+        "observed": {
+          "first": [
+            {
+              "x": 7,
+              "y": 5
+            },
+            {
+              "x": 11,
+              "y": 11
+            }
+          ],
+          "last": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 11,
+              "y": 11
+            }
+          ]
+        },
+        "scope": "Deux étapes du témoin avec deux caisses conservées, dont une demeure inaccessible dans le jardin."
+      },
+      {
+        "name": "Déplacer la relève avant de libérer le Barde referme son seul accès",
+        "status": "passed",
+        "observed": {
+          "bard": {
+            "x": 17,
+            "y": 4
+          },
+          "gateClosed": true
+        },
+        "scope": "Mauvais ordre réversible : le poids peut être réinstallé ; aucune impasse définitive n’est affirmée."
+      },
+      {
+        "name": "Un pas du Barde retire le poids ; le pas inverse rétablit le circuit",
+        "status": "passed",
+        "observed": {
+          "downCloses": true,
+          "upRestores": true
+        },
+        "scope": "Branche locale volontairement réversible. La victoire ne dépend d’aucun historique de déplacements."
+      },
+      {
+        "name": "Poussée puis traction amènent le Barde dans le jardin sans déplacer les charges",
+        "status": "passed",
+        "observed": {
+          "commands": "CCRDDDDDDDDDRRRRRRRRRRUULULCCDCLLLLL",
+          "bard": {
+            "x": 8,
+            "y": 10
+          },
+          "stones": [
+            {
+              "x": 3,
+              "y": 5
+            },
+            {
+              "x": 11,
+              "y": 9
+            }
+          ]
+        },
+        "scope": "Branche exacte rejouée ; aucune unicité ni difficulté optimale revendiquée."
+      },
+      {
+        "name": "La coursive ne comporte pas de troisième entrée libre",
+        "status": "passed",
+        "observed": {
+          "closedSides": [
+            {
+              "x": 14,
+              "y": 8
+            },
+            {
+              "x": 14,
+              "y": 10
+            },
+            {
+              "x": 13,
+              "y": 12
+            }
+          ],
+          "controlledEntrances": [
+            {
+              "x": 14,
+              "y": 9
+            },
+            {
+              "x": 14,
+              "y": 11
+            }
+          ]
+        },
+        "scope": "Inspection du bord de la coursive ; complétée par le graphe de marche initial dans la revue de conception."
+      }
+    ]
+  }
+}

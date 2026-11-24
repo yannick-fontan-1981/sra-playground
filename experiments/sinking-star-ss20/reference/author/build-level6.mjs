@@ -1,0 +1,30 @@
+import {writeFileSync} from 'node:fs';
+import {Author,board} from './author.mjs';
+const b=board(20,20);
+b.fill(1,9,12,13,'~');
+b.fill(2,5,12,8);
+b.fill(1,10,4,13); b.fill(6,10,8,13); b.fill(10,10,12,13);
+b.fill(14,10,17,13); b.put(13,12); b.put(12,9,'#');
+b.put(1,10,'o');b.put(2,10,'T');b.put(2,12,'M');b.put(4,8,'B');b.put(5,10,'s');
+for(const x of [15,16,17])b.put(x,11,'g');
+export const spec={id:'ss20-06',title:'Les pierres voyageuses',rows:b.strings(),facing:'E',circuits:[{id:'arrivee',color:15,buttons:[{x:12,y:13}]}],gates:[{at:{x:13,y:12},circuit:'arrivee',direction:'E',closedWhen:'released'}]};
+export function build(){const a=new Author(spec);
+ a.select('thief').act('RRD');
+ a.select('merchant').act('UURRRRDD');
+ a.select('thief').act('URRDRRD');
+ a.stage('La caisse sèche et les deux passeurs sont sur le quai central. Le premier appui est maintenant libre.');
+ a.select('bard').act('URRRRD');
+ a.stage('Le Barde remonte l’appui dans le canal, le fait contourner le quai, puis le redescend dans le second passage.');
+ a.select('merchant').act('UURRRRRDD');
+ a.select('thief').go(12,11).act('DD');
+ a.stage('La caisse a traversé les deux bras d’eau. Le Voleur la tire vers le bas sans devoir accéder au mur situé derrière elle.');
+ a.select('bard').act('URRDRDD');
+ a.stage('Le même appui devient une passerelle verticale. La butée de droite corrige son décalage et le Barde rejoint les passeurs.');
+ a.select('thief').act('L');
+ a.select('merchant').go(12,11).act('D');
+ a.select('merchant').go(17,10);
+ a.select('bard').go(15,11);
+ a.select('merchant').go(16,11);
+ a.select('thief').go(17,11);
+ return a.result({objective:'Faire voyager un seul appui entre deux passages, convoyer la caisse sèche puis ramener le Barde avant la sortie commune.',label:'Heroes and Water — énigmes 27 et 32',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/',puzzles:[27,32]},'Le canal et ses butées reprennent le changement de décalage de Water 27 ; le relais matériel de Water 32 remplace ici une succession de passages. Il n’y a ni empilement ni double pas : un seul appui immergé dessert deux ponts horizontaux puis l’arrivée verticale du Barde. La caisse sèche doit atteindre le bouton final ; les trois héros doivent ensuite quitter les postes de travail.');}
+if(process.argv[1]?.endsWith('build-level6.mjs')){const d=build();writeFileSync(new URL('../level6-design.json',import.meta.url),JSON.stringify(d,null,2)+'\n');console.log(JSON.stringify({title:spec.title,metrics:d.metrics,commands:d.commands}));}
