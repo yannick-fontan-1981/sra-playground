@@ -2,7 +2,7 @@
 
 Intègre **SS20 — Le Relais des Îles, laboratoire 0.1.0**, trio **Marchand / Voleur / Barde**, dans **SRA Playground**, puis publie le **Site SRA Playground existant** depuis le code intégré sur GitHub.
 
-Le dépôt canonique est `yannick-fontan-1981/sra-playground`. Pars du `main` distant courant, préserve SS19 déjà intégré ainsi que les changements concurrents et lis `AGENTS.md`, `docs/migration/git-site-sync-policy.md`, puis les documents de `experiments/sinking-star-ss20`. Si le laboratoire SS20 n’est pas encore présent sur `main`, récupère la branche **`feat/sinking-star-ss20-20261123`**, identifie sa version qualifiée par le manifeste et intègre ses changements utiles avant l’adaptation native, en préservant les évolutions concurrentes. Le laboratoire est la référence fonctionnelle ; ses rapports ne prouvent ni une intégration native déjà faite, ni une résolution autonome de SRA, ni une publication du Site.
+Le dépôt canonique est `yannick-fontan-1981/sra-playground`. Le laboratoire SS20 est livré sur `main` par la [PR #123](https://github.com/yannick-fontan-1981/sra-playground/pull/123), à partir de la version qualifiée `aa1fe3f2aa3d864698ec623d033dae6d5b3d8bcd`. Pars du `main` distant courant contenant cette livraison, préserve SS19 déjà intégré ainsi que les changements concurrents, notamment les évolutions SIC de la PR #122, et lis `AGENTS.md`, `docs/migration/git-site-sync-policy.md`, puis les documents de `experiments/sinking-star-ss20`. Le laboratoire est la référence fonctionnelle ; ses rapports ne prouvent ni une intégration native déjà faite, ni une résolution autonome de SRA, ni une publication du Site.
 
 ## Identifier et intégrer la bonne référence
 
@@ -59,11 +59,15 @@ Contrôle pertes, reprises, sélections, changements de salle, interruptions, Un
 
 Exécute le typage, le build et les tests exigés par le dépôt. **`npm run test:sic-continuity` est requis avant intégration** de l’adaptateur, du pack, du runtime ou du moteur. La continuité doit être prouvée par les tickets et clôtures natifs, y compris les poussées successives, les transports et les préparations précédant les transferts. Une victoire ou un plan annoncé ne suffit pas. Préserve les garanties des jeux précédents, notamment SS19, et documente tout changement d’un chemin partagé.
 
+Si l’intégration demande une modification de l’apprentissage, de la reconnaissance des rôles, du passage de niveau, de la planification ou de l’arbitrage SIC, applique aussi le contrat de généricité de `AGENTS.md`. Ne décide pas du comportement de production par identifiant de jeu, numéro de niveau, couleur absolue, coordonnées fixes ou parcours témoin. Reproduis le premier échec par les observations publiques, conserve les preuves des rôles appris et vérifie leur réemploi sur la campagne depuis N1 ainsi que sur deux scénarios de transfert distincts, avec un cas ambigu et un cas contradictoire.
+
 Une exécution du témoin démontre la conformité native ; elle ne démontre pas une résolution autonome de l’agent SRA. Qualifie séparément toute exécution autonome annoncée, avec son mode et son résultat officiel.
 
 ## Sauvegarde puis publication du Site existant
 
 Suivre la chaîne obligatoire : **tests → commit → push GitHub → intégration sur main → vérification du commit distant → publication du Site existant → vérification GitHub/Site**. Préserve les évolutions parallèles. Ne crée pas un second Site et ne publie pas depuis une source conservée uniquement dans un checkout temporaire.
+
+La destination connue est **https://sra-playground.yannick-fontan.chatgpt.site**, projet Sites `appgprj_6adbc388d79081918581b93b919d7258`. Vérifie cette identité et son état courant avant publication ; conserve son audience et ses accès existants. N’utilise pas une ancienne version Site comme référence implicite du code à déployer.
 
 Si GitHub et le Site divergent, préserve les deux états, identifie leurs différences, réconcilie les sources puis reprends la publication. Après déploiement, vérifie le lien direct SS20 et les commandes sur la version publiée. Relève la version Site et le SHA source quand il est disponible ; sinon consigne le commit GitHub exact à partir duquel le déploiement a été produit.
 

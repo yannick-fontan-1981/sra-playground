@@ -13,7 +13,7 @@ Les huit cartes et leurs témoins sont présents dans `reference/`. **L’atelie
 | Qualification du laboratoire | Réussie : 90 tests, 8 victoires, 30/30 découvertes, 91 contrôles ciblés ; [rapports](validation.md) |
 | HTML autonome qualifié | `dist/SS20-demo.html`, 136 889 octets ; empreinte dans `validation/delivery-manifest.json` |
 | Sauvegarde du laboratoire | Branche `feat/sinking-star-ss20-20261123` ; le compte rendu de livraison donne le SHA poussé |
-| Intégration de SS20 sur main | Phase suivante ; préserver le main courant et les évolutions concurrentes |
+| Livraison du laboratoire SS20 sur main | [PR #123](https://github.com/yannick-fontan-1981/sra-playground/pull/123) ; version qualifiée `aa1fe3f2aa3d864698ec623d033dae6d5b3d8bcd`, avec les évolutions concurrentes de main préservées |
 | Adaptateur natif, galerie, catalogue et Custom 4 | Phase suivante décrite dans le [prompt Codex](codex-integration-prompt.md) |
 | Publication de SRA Playground | Après intégration distante et qualification native ; version Site et SHA source à consigner |
 

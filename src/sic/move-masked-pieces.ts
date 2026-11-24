@@ -101,6 +101,28 @@ function boxFor(scene: SelectedRigidScene, position: NativePoint, mask: NativePo
     oy + (y + 1 + Math.max(...mask.map(p => p[1]))) * q - 1];
 }
 
+function retainedSelection(scene: SelectedRigidScene, models: State['models'], retained: NativeExecution['retainedCursorRoles']) {
+  if (retained?.length !== 1 || retained[0]!.candidates.length !== 1) return null;
+  const { role, candidates: [sprite] } = retained[0]!;
+  const { q, origin: [ox, oy] } = scene.geometry;
+  const bodies = scene.bodies.flatMap((body, index) => {
+    const occupied = new Set(body.mask.map(([x, y]) => `${x + body.position[0]},${y + body.position[1]}`));
+    const [sx, sy] = sprite!.position;
+    return sprite!.mask.every(([x, y]) => occupied.has(`${Math.floor((sx + x - ox) / q)},${Math.floor((sy + y - oy) / q)}`))
+      ? [index] : [];
+  });
+  if (bodies.length !== 1) return null;
+  const constraints = role.effects.flatMap(effect => {
+    const index = inputs.findIndex(input => input === effect.action);
+    const [dx, dy] = effect.delta;
+    return index >= 0 && !effect.locus && Math.abs(dx) + Math.abs(dy) === q && (!dx || !dy)
+      ? [{ index, delta: [dx / q, dy / q] as NativePoint, evidence: effect.evidence }] : [];
+  });
+  if (!constraints.length) return null;
+  const compatible = models.filter(model => constraints.every(({ index, delta }) => same(model[index]!, delta)));
+  return compatible.length ? { active: bodies[0]!, models: compatible, refs: [...new Set(constraints.flatMap(effect => effect.evidence))] } : null;
+}
+
 export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily<Proposal> {
   let state: State | null = null;
   let transfer: Transfer | null = null;
@@ -111,14 +133,18 @@ export function createSicMoveMaskedPieces(id = moveMaskedPiecesId): NativeFamily
       if (remaining < 1 || !['ACTION6', ...inputs].every(id => observation.available_action_refs.includes(id))) return null;
       const prior = state?.epoch === observation.level_epoch ? state : null;
       const motion = execution?.observedControlledMotion;
-      if (id === learnSelectedAccessId && !prior && !motion) return null;
+      const cursorRoles = execution?.retainedCursorRoles;
+      if (id === learnSelectedAccessId && !prior && !motion && !cursorRoles?.length) return null;
       const scene = selectedRigidScene(rows, prior?.scene, measurement);
       if (!scene) return null;
       const continuous = prior && samePoses(selectedRigidPoses(prior.scene), selectedRigidPoses(scene));
       const recalled = scene.receptacle.access && transfer?.epoch === observation.level_epoch - 1 ? transfer : null;
       const local: State = continuous ? { ...prior, scene } : { epoch: observation.level_epoch, scene, active: null,
         models: prior?.models ?? recalled?.models ?? controlModels, route: null, refs: prior?.refs ?? recalled?.evidence ?? [] };
-      if (id === learnSelectedAccessId && !prior && motion) {
+      const reuse = !prior && retainedSelection(scene, local.models, cursorRoles);
+      if (reuse) Object.assign(local, reuse);
+      else if (id === learnSelectedAccessId && !prior) {
+        if (!motion) return null;
         const q = scene.geometry.q;
         const dx = (motion.to[0] - motion.from[0]) / q, dy = (motion.to[1] - motion.from[1]) / q;
         const inputIndex = inputs.findIndex(input => input === motion.command);

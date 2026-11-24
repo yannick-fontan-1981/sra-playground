@@ -42,6 +42,16 @@ Avant d’intégrer un changement de SIC, du pack, de l’arbitrage ou du moteur
 
 Le contrôle doit aussi vérifier les effets physiques de la campagne depuis le L1. Compter séparément les poussées successives de la même caisse, du même miroir et le positionnement continu juste avant un transfert réussi. Une hausse des séries de marche ailleurs ne compense pas leur disparition.
 
+## Généricité et transfert des rôles SIC
+
+Ces exigences s’appliquent dès qu’une session Codex modifie l’apprentissage, la reconnaissance d’un rôle, le passage de niveau, la planification ou l’arbitrage SIC.
+
+1. Reproduire la première décision qui échoue avec les observations et les commandes publiques. Avant de coder, nommer le rôle appris, le retour qui l’établit, la condition de réutilisation et le retour qui pourrait l’infirmer.
+2. Chercher d’abord où ce rôle est appris et consommé dans le moteur commun. Conserver les effets confirmés et leurs preuves indépendamment des coordonnées, du plan en cours ou de la famille qui a exécuté l’action. L’identifiant du jeu, le numéro du niveau, une couleur absolue, des coordonnées fixes et un parcours témoin ne peuvent pas décider du comportement en production.
+3. Après un changement de niveau, retrouver les instances à partir de leur forme et de leur couleur observées. Quand une instance et son interface sont compatibles, utiliser l’effet appris dès la première décision qui a besoin de ce rôle et contrôler le retour. Si plusieurs instances correspondent, choisir une observation qui peut les départager. Si un effet est contredit, revoir l’association ou la commande concernée et conserver les autres faits documentés.
+4. Avant de qualifier la modification de générique, exécuter le scénario réel depuis le niveau 1 et au moins deux scénarios de transfert distincts. Varier la forme, la couleur, les positions et les commandes entre scénarios. Inclure un cas ambigu et un cas contradictoire. Vérifier dans les tickets exécutés et leurs preuves que le premier geste utile réemploie bien le rôle et que les vérifications ciblées ne relancent pas l’apprentissage complet.
+5. Exécuter le test du rôle dans le moteur natif et le contrôle `npm run test:sic-continuity`. Dans le compte rendu de la session, donner les cas validés, le niveau où les faits ont été acquis et leurs conditions de réutilisation. Une victoire sur le jeu d’origine ne suffit pas à établir le transfert.
+
 ## Publication
 
 ### Pendant le test d’un jeu précis
