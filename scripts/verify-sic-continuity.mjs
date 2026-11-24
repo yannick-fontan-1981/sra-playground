@@ -228,6 +228,10 @@ function measuredCarrySeries(level, tickets) {
     const phase = result.phases[0];
     const moves = (phase?.moves ?? []).filter(move => move.actor === 'stone');
     const continued = previous?.revision === ticket.decisionRevision && ticket.actionIndex > 0;
+    if (level === 3 && state.monsters.length - result.state.monsters.length === 2) {
+      assert.ok(continued && result.phases.some(phase => phase.kind === 'combat'), 'SS05 L3 lost the deliberate continuous contact');
+      series.push({ kind: 'compose the two moving objects', first: index, last: index + 1 });
+    }
     if (moves.length && !firstCarry) {
       firstCarry = index + 1;
       if (level === 2) {
@@ -246,6 +250,10 @@ function measuredCarrySeries(level, tickets) {
     state = result.state;
   }
   assert.ok(state.complete, 'SS05 executed tickets do not reach the exit');
+  if (level === 3) {
+    assert.equal(series.length, 1, 'SS05 L3 did not exercise the mutual contact');
+    return series;
+  }
   assert.ok(series.some(step => step.kind === 'carry the same weight'), 'SS05 lost consecutive moves of the same weight');
   assert.equal(firstCarry, level === 1 ? 1 : 5, 'SS05 delayed the first useful carry');
   return series;
@@ -259,7 +267,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 2 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 3 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -369,7 +377,7 @@ export function checkRun(run) {
     }
     if (code === 'SS05') {
       // The earlier run used 46 isolated actions on L1 and first moved a weight on L2 at action 119.
-      const [cap, minimumContinued] = row.level === 1 ? [42, 18] : [75, 50];
+      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42]][row.level - 1];
       assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
@@ -407,7 +415,7 @@ function main() {
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
-      ['local-carry', 'SS05', '2', '140'],
+      ['local-carry', 'SS05', '3', '140'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

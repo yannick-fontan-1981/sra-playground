@@ -126,6 +126,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   fieldCarry?: FieldCarryMemory;
   fieldCarryMarks?: FieldCarryPlan['marks'];
   fieldCarryRefuted?: true;
+  fieldContactsTested?: string[];
   lastChange: { destination: string; action: string; evidence: string } | null;
   clickedControl?: ClickedControl;
   controlledPiece?: ControlledMotion;
@@ -648,14 +649,17 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     }
   }
 
-  function proposeFieldCarry(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
+  function proposeFieldCarry(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number,
+    contactOnly = false): Proposal | null {
     const current = state.epoch === observation.level_epoch, ref = observation.observation_ref;
-    if (current && state.fieldCarryRefuted) return null;
-    const plan = planFieldCarry(fieldCarryForEpoch(observation.level_epoch), rows, inputs, ref, remaining, current ? state.fieldCarryMarks : undefined);
+    if (!contactOnly && current && state.fieldCarryRefuted) return null;
+    const plan = planFieldCarry(fieldCarryForEpoch(observation.level_epoch), rows, inputs, ref, remaining,
+      current ? state.fieldCarryMarks : undefined, current ? state.fieldContactsTested : undefined, contactOnly);
     if (!plan) return null;
     const target = pushAccessBox(plan.target, 3), actions = plan.steps.map(step => step.action);
-    const goal = { kind: 'compose_observed_local_carry', scope: ref.split(':revision:', 1)[0]!, subjects: [plan.target],
-      parentObjective: completion, satisfactionContract: 'verify_coupled_directional_displacement' };
+    const goal = { kind: plan.contact ? 'test_reachable_object_contact' : 'compose_observed_local_carry',
+      scope: ref.split(':revision:', 1)[0]!, subjects: [plan.target],
+      parentObjective: completion, satisfactionContract: plan.contact ? 'observe_reachable_composition' : 'verify_coupled_directional_displacement' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: plan.evidence };
     const id = `field-carry:${need.id}`;
     return { status: 'proposed', kind: publicInputExplorationId, actions, fieldCarryPlan: plan,
@@ -663,7 +667,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       steps: plan.steps.map(step => ({ action: step.action, expected_after: pushAccessBox(step.after.actor, 3) })),
       binding: { observation_ref: ref, level_epoch: observation.level_epoch }, question: { reason: plan.label, hypothesis_refs: plan.evidence },
       route_refs: plan.evidence, compositions: [{ id, observed: false, open_question: plan.label, relations: [`contributes_to:${completion}`] }],
-      sicSituationCard: { strategy: goal.kind, mode: plan.observe ? 'exploration' : 'solving', need: plan.label, situation: plan.label, target, evidence: plan.evidence },
+      sicSituationCard: { strategy: goal.kind, mode: plan.observe || plan.contact ? 'exploration' : 'solving', need: plan.label, situation: plan.label, target, evidence: plan.evidence },
       sicLocalDecision: { strategy: goal.kind, objective: { id, label: plan.label, parent: completion }, need },
       bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: completion, purpose: plan.label,
         evidence: plan.evidence, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
@@ -864,9 +868,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       if (circuit) return circuit;
       const exchange = proposeBoundExchange(observation, rows, inputs, remaining);
       if (exchange) return exchange;
-      if (state.epoch !== observation.level_epoch || !state.pressureReserve?.gate || !state.pressureReserve.bridge) return null;
-      const proposed = await family.propose(observation, rows, inputs, remaining, execution);
-      return proposed?.pressurePlan ? proposed : null;
+      if (state.epoch === observation.level_epoch && state.pressureReserve?.gate && state.pressureReserve.bridge) {
+        const proposed = await family.propose(observation, rows, inputs, remaining, execution);
+        if (proposed?.pressurePlan) return proposed;
+      }
+      return proposeFieldCarry(observation, rows, inputs, remaining, true);
     },
     async propose(observation, rows, inputs, remaining, execution?: NativeExecution, projectionOnly = false): Promise<Proposal | null> {
       const local = state.epoch === observation.level_epoch ? state : initial(observation.level_epoch);
@@ -1475,6 +1481,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const carry = proposal.fieldCarryPlan;
       if (carry) {
         const matched = !carry.observe && checkFieldCarryReturn(carry, index, rows, afterRows);
+        if (carry.contact?.at === index) return { matched: scored || matched, seal_prefix: true,
+          reason: matched || scored ? 'reachable_composition_observed' : 'reachable_composition_contradicted',
+          ...(matched || scored ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
         return { matched: scored || matched ? true : carry.observe ? null : false, seal_prefix: scored || !matched,
           reason: scored ? 'official_boundary' : carry.observe ? 'local_carry_probe_observed' : matched ? 'local_carry_witnessed' : 'local_carry_refuted' };
       }
@@ -1633,10 +1642,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     async record(before, after, command, rows, afterRows, proposal, index, frames) {
       acquireFieldCarry(before, after, command, rows, afterRows, proposal.fieldCarryPlan?.marks);
       const carry = proposal.fieldCarryPlan;
-      if (carry && !carry.observe && before.level_epoch === after.level_epoch
-        && !checkFieldCarryReturn(carry, index, rows, afterRows)) {
+      if (carry && !carry.observe && before.level_epoch === after.level_epoch) {
+        const matched = checkFieldCarryReturn(carry, index, rows, afterRows);
         enterEpoch(before.level_epoch);
-        state.fieldCarryRefuted = true;
+        if (carry.contact && (!matched || carry.contact.at === index)) {
+          state.fieldContactsTested = [...new Set([...state.fieldContactsTested ?? [], carry.contact.signature])];
+          if (matched && state.fieldCarry) state.fieldCarry = { ...state.fieldCarry, contactRef: after.observation_ref };
+        } else if (!matched) state.fieldCarryRefuted = true;
       }
       acquireExchangeThreat(before, after, command, rows, afterRows);
       const boundExchange = proposal.boundExchangePlan;
