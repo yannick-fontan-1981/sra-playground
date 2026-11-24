@@ -24,10 +24,14 @@ La version 0.1.0 introduisait une poursuite vers le héros sélectionné. La ver
 
 ## Intégration native et publication
 
-- [ ] Raccorder SS19 0.2.1 au catalogue et au dispatcher natif SRA.
-- [ ] Conserver le départ au Gardien du seuil et le tutoriel uniquement au niveau 2.
-- [ ] Rejouer les huit routes par les contrôles natifs et vérifier les animations, Undo et le résultat officiel.
-- [ ] Exécuter les contrôles du dépôt, dont `test:sic-continuity`, puis la revue navigateur ordinateur/mobile.
-- [ ] Commit, push, intégration sur `main`, publication du Site existant avec ses accès actuels, puis vérification du SHA source.
+- [x] SS19 suit SS18 dans Custom 4. Les huit salles conservent leurs numéros, leurs références et leurs images de départ dans la galerie.
+- [x] Le Gardien du seuil ouvre la campagne avec le Guerrier. Les 31 découvertes sont suivies dans Les galeries des gardiens, au niveau 2.
+- [x] Les huit témoins correspondent au laboratoire sur 912 entrées, dont 105 sélections, et 2 615 images avec leurs durées. Chaque victoire de salle est annulable.
+- [x] Les six variantes archivées restent gagnantes. La caisse et les deux gardiens du dernier niveau conservent leur rôle physique.
+- [x] Edge confirme la victoire manuelle depuis le niveau 1, les commandes clavier et tactiles, les interruptions, les huit liens et le tutoriel du niveau 2.
 
-Le prompt correspondant est dans [codex-integration-prompt.md](codex-integration-prompt.md). La livraison autonome et la publication native sont deux étapes distinctes ; le compte rendu précise celle effectivement livrée.
+Les salles demandent respectivement 54, 188, 132, 123, 121, 64, 43 et 82 coups hors sélection sur le parcours de référence. Le contrôle du mode SRA couvre le pas-à-pas et l’interruption.
+
+La publication utilise le Site existant et les accès privés. Le compte rendu associe le SHA intégré sur GitHub à la version Site vérifiée.
+
+[Jouer à SS19 sur SRA Playground](https://sra-playground.yannick-fontan.chatgpt.site/?game=SS19#playground)

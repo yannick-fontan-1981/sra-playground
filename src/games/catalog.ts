@@ -1198,6 +1198,10 @@ records.push({code:'SS18',id:'ss18-c4000001',name:'La Galerie Résonante',group:
   description:'Push with the Merchant, swap places with the Wizard, and move groups with the Bard to reach all three destinations together.',
   sourcePath:'experiments/sinking-star-ss18/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS19',id:'ss19-c4000001',name:'Les Gardiens Noirs',group:'custom_4',family:'sinking_star_trio',levels:8,
+  description:'Push chains, exchange places and move groups by song to transport guardians and hold the passages open.',
+  sourcePath:'experiments/sinking-star-ss19/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'
