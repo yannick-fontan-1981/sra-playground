@@ -189,8 +189,10 @@ export interface NativeProgramRegistry {
 export const sicObservedCoverageDeadlock = 'sic_observed_coverage_deadlock';
 export const sicObservedWeightShortage = 'sic_observed_weight_shortage';
 export const sicObservedTransportDeadlock = 'sic_observed_transport_deadlock';
+export const sicObservedGameOver = 'sic_observed_game_over';
 export const isSicLevelRecovery = (reason: string | null) =>
-  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage || reason === sicObservedTransportDeadlock;
+  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage || reason === sicObservedTransportDeadlock
+  || reason === sicObservedGameOver;
 
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;

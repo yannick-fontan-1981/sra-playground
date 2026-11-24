@@ -15,7 +15,9 @@ export type ObservedExchange = {
   lastTransport?: { ref: string; gate: string; control: string; support: string };
 };
 export type ExchangePlan = { command: NativeCommand; goal: 'test_transport' | 'reach_exit' | 'hold_control';
-  subjects: string[]; focus: string; partner?: string; prediction: Prediction; evidence: string[] };
+  subjects: string[]; focus: string; partner?: string; prediction: Prediction; evidence: string[]; series?: ExchangeSeries };
+type ExchangeSeries = { start: Pose; steps: Prediction[]; grid: ObservedTravel['grid']; layout: Layout; body: string;
+  terrain: Record<string, string> };
 export type ExchangeTransfer = Pick<ObservedTravel, 'grid' | 'moves'> & {
   body: string; wall: string; actorInkCount: number; exitStamp: string; exchangeRef: string; scoreRef: string;
 };
@@ -299,7 +301,47 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
   }
 }
 
-export function chooseExchange(local: ObservedExchange | undefined, travel: ObservedTravel | undefined, rows: NativeRows): ExchangePlan | undefined {
+function prepareExchangeSeries(local: ObservedExchange, travel: ObservedTravel, cells: Cells, start: Pose,
+  path: readonly (Prediction & { certain: boolean })[], remaining: number): ExchangeSeries | undefined {
+  const { grid } = travel;
+  const { pitch, floor } = grid;
+  const mid = Math.floor(pitch / 2);
+  const special = new Set([...local.layout.gates.map(gate => gate.cell), ...local.supports, ...(local.layout.exit ? [local.layout.exit] : [])]);
+  const marks = Object.keys(local.layout.marks), steps: Prediction[] = [], terrain: Record<string, string> = {};
+  let previous = start;
+  for (const { pose, command, certain } of path.slice(0, Math.min(remaining, maximumCommittedActions))) {
+    if (!certain || marks.some(mark => held(previous, mark) !== held(pose, mark))
+      || [previous.actor, pose.actor, ...previous.pieces.filter(cell => !pose.pieces.includes(cell)),
+        ...pose.pieces.filter(cell => !previous.pieces.includes(cell))].some(cell => special.has(cell))) break;
+    steps.push({ pose, command });
+    previous = pose;
+  }
+  if (steps.length < 2) return;
+  for (const [cell, pixels] of cells) {
+    const profile = local.layout.marks[cell];
+    if (!held(start, cell)) terrain[cell] = tileId(pixels);
+    else if (profile) {
+      const [ink, accent] = profile;
+      terrain[cell] = tileId(Array.from({ length: pitch * pitch }, (_, index) => {
+        const x = index % pitch, y = Math.floor(index / pitch);
+        return x === mid && y === mid ? accent! : x === mid || y === mid ? ink! : floor;
+      }));
+    } else if (!special.has(cell)) terrain[cell] = tileId(Array<number>(pitch * pitch).fill(floor));
+  }
+  return { start, steps, grid, layout: local.layout, body: local.body, terrain };
+}
+
+export function matchesExchangeSeries(series: ExchangeSeries, pose: Pose, rows: NativeRows): boolean {
+  const { cells, pieces } = readTravelGrid(rows, series.grid);
+  if (pieces.length !== 1 || pieces[0] !== pose.actor || poseKey(getPose(series.layout, series.body, pose.actor, cells)) !== poseKey(pose)) return false;
+  for (const [cell, pixels] of cells) {
+    if (!held(pose, cell) && tileId(pixels) !== series.terrain[cell]) return false;
+  }
+  return true;
+}
+
+export function chooseExchange(local: ObservedExchange | undefined, travel: ObservedTravel | undefined, rows: NativeRows,
+  remaining = maximumCommittedActions): ExchangePlan | undefined {
   if (!local || !travel?.actor) return;
   const moves = directions(travel);
   if (moves.length !== 4 || new Set(moves.map(move => move.delta.join(','))).size !== 4) return;
@@ -323,6 +365,7 @@ export function chooseExchange(local: ObservedExchange | undefined, travel: Obse
   };
   function targets(pose: Pose, delta: NativePoint) {
     const queue = [{ at: pose.actor, delta }], seen = new Set<string>(), matches = new Set<string>();
+    let certain = true;
     for (const beam of queue) {
       const at = step(beam.at, beam.delta), key = `${at}:${beam.delta.join(',')}`;
       if (seen.has(key) || at === pose.actor) continue;
@@ -332,33 +375,44 @@ export function chooseExchange(local: ObservedExchange | undefined, travel: Obse
       const reflector = potentialRedirectors.get(at);
       if (!reflector) continue;
       const witnessed = local!.turns[turnKey(reflector, beam.delta)];
+      if (!witnessed) certain = false;
       const outgoing = witnessed ? [witnessed] : moves.filter(move => !!move.delta[0] !== !!beam.delta[0]).map(move => move.delta);
       for (const turn of outgoing) queue.push({ at, delta: turn });
     }
-    return matches;
+    return { matches, certain };
   }
-  function project(pose: Pose, { input, delta }: Move): Pose[] {
+  function project(pose: Pose, { input, delta }: Move): { pose: Pose; certain: boolean }[] {
     if (rejected.has(trialKey(pose, input, local!.supports))) return [];
-    const hit = targets(pose, delta);
+    const { matches: hit, certain } = targets(pose, delta);
     if (hit.size) {
-      return [...hit].map(target => ({ actor: target, pieces: pose.pieces.map(piece => piece === target ? pose.actor : piece) }));
+      return [...hit].map(target => ({ pose: { actor: target, pieces: pose.pieces.map(piece => piece === target ? pose.actor : piece) },
+        certain: certain && hit.size === 1 }));
     }
     const landing = step(pose.actor, delta);
     if (!canEnter(landing, pose)) return [];
     const next = { actor: landing, pieces: pose.pieces };
-    return canEnter(landing, next) ? [next] : [];
+    return canEnter(landing, next) ? [{ pose: next, certain }] : [];
   }
   const evidence = [...new Set([...local.refs, ...moves.map(move => travel.moves[move.input]!.ref)])];
   function path(goal: ExchangePlan['goal'], subjects: string[], check: (pose: Pose) => boolean): ExchangePlan | undefined {
-    const queue: { pose: Pose; first?: Prediction }[] = [{ pose: initial }], seen = new Set([poseKey(initial)]);
+    type Node = { pose: Pose; from?: Node; prediction?: Prediction & { certain: boolean } };
+    const queue: Node[] = [{ pose: initial }], seen = new Set([poseKey(initial)]);
     for (let i = 0; i < queue.length && i < 7500; i++) {
-      const { pose, first } = queue[i]!;
-      if (first && check(pose)) return { command: { action_ref: first.command, data: {} }, goal, subjects, focus: initial.actor,
-        ...(initial.pieces.includes(first.pose.actor) ? { partner: first.pose.actor } : {}), prediction: first, evidence };
-      for (const move of moves) for (const candidate of project(pose, move)) {
+      const node = queue[i]!, { pose } = node;
+      if (node.prediction && check(pose)) {
+        const route: (Prediction & { certain: boolean })[] = [];
+        for (let current: Node | undefined = node; current?.prediction; current = current.from) route.push(current.prediction);
+        route.reverse();
+        const { command, pose: expected } = route[0]!;
+        const series = prepareExchangeSeries(local!, travel!, cells, initial, route, remaining);
+        return { command: { action_ref: command, data: {} }, goal, subjects, focus: initial.actor,
+          ...(initial.pieces.includes(expected.actor) ? { partner: expected.actor } : {}), prediction: { command, pose: expected }, evidence,
+          ...(series ? { series } : {}) };
+      }
+      for (const move of moves) for (const { pose: candidate, certain } of project(pose, move)) {
         const key = poseKey(candidate);
         if (seen.has(key)) continue;
-        seen.add(key); queue.push({ pose: candidate, first: first ?? { command: move.input, pose: candidate } });
+        seen.add(key); queue.push({ pose: candidate, from: node, prediction: { command: move.input, pose: candidate, certain } });
       }
     }
   }

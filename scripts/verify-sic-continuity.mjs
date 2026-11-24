@@ -139,8 +139,8 @@ function measuredExchangeSeries(level, tickets) {
     state = detail.state;
   }
   assert.equal(state.complete, true, 'Executed SS04 L' + level + ' tickets do not reproduce the official goal');
+  assert.ok(mixed.length, 'SS04 L' + level + ' lost continuous positioning into an exchange');
   if (level === 2) {
-    assert.ok(mixed.length, 'SS04 L2 lost continuous positioning into an exchange');
     assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L2 did not hold the pressure control');
   }
   return mixed;
@@ -228,6 +228,11 @@ export function checkRun(run) {
       // The exploratory run did not finish by 130 commands. The guarded press relay completes in 160.
       assert.ok(issued.length <= 200 && groups.size <= 24, 'SS03 L8 lost the guarded press relay');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L8 reset while building the file');
+    }
+    if (code === 'SS04' && row.level === 1) {
+      // Acquiring the exchange previously took 50 decisions for 51 commands. The guarded route takes 26.
+      assert.ok(issued.length <= 55 && groups.size <= 32 && continued >= 20, 'SS04 L1 lost its verified exchange series');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS04 L1 reset while learning exchanges');
     }
     if (code === 'SS04' && row.level === 2) {
       // The exploratory route took 119 commands and 115 decisions. Transferred exchanges take 54 and 4.

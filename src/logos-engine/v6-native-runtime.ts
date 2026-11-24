@@ -216,7 +216,7 @@ import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 import { hydrateNativeState } from './v6-native-state-graph.ts';
-import { NativeEditRejected, isSicLevelRecovery } from './v6-native-types.ts';
+import { NativeEditRejected, isSicLevelRecovery, sicObservedGameOver } from './v6-native-types.ts';
 import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
@@ -388,6 +388,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private prefix: Prefix | null = null;
   private actions = 0;
   private resetCount = 0;
+  private readonly fatalCommands = new Set<string>();
   private levelStart: { level: number; families: readonly KnowledgeNode[] } | null = null;
   private sicFamilyActions = 0;
   private readonly sicActionCoverage: Record<Exclude<keyof SicActionCoverage, 'sicOnly'>, number> & { sicOnly?: number } = {
@@ -579,6 +580,10 @@ export class NativeV6Runtime implements NativeV6Backend {
   }
   private stop(reason: string): void { this.kind = 'stopped'; this.reason = reason; this.note({ kind: 'stop', reason }); }
 
+  private fatalCommandKey(observation: NativeObservation, command: NativeCommand): string {
+    return JSON.stringify([observation.level_epoch, observation.frame_hash, command.action_ref, Object.entries(command.data ?? {}).sort()]);
+  }
+
   async initialize(input: NativeInitialize, execution: NativeExecution): Promise<NativeRuntimeYield> {
     if (this.initialized) throw new Error('Native runtime already initialized');
     this.check(execution);
@@ -636,7 +641,11 @@ export class NativeV6Runtime implements NativeV6Backend {
         this.stop(`composition_dependency_${validation.reason}`); return;
       }
     }
-    const inputs = this.domain.candidates(this.observation);
+    const observation = this.observation;
+    const candidates = this.domain.candidates(observation);
+    const inputs = this.fatalCommands.size
+      ? candidates.filter(command => !this.fatalCommands.has(this.fatalCommandKey(observation, command))) : candidates;
+    if (candidates.length && !inputs.length) { this.stop('observed_fatal_choices_exhausted'); return; }
     const obligations = (await Promise.all(this.families.map(family => family.preservationObligations?.(this.observation!, this.current!.frame_rows) ?? []))).flat();
     let selected = await this.selectAdmittedFamily(execution, inputs);
     if (this.withdrawPrimaryFamily && !this.withdrawnPrimaryFamily && selected?.proposal.status === 'proposed'
@@ -1465,6 +1474,10 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.budgetReason()) return false;
     const { family, proposal, index } = this.prefix, command = proposal.actions[index];
     if (!command || !this.current.available_action_refs.includes(command.action_ref)) return false;
+    if (this.fatalCommands.size && this.fatalCommands.has(this.fatalCommandKey(this.observation, command))) {
+      this.prefix.interruption = 'observed_fatal_choice';
+      return false;
+    }
     let before = await family.before(proposal, index, this.current, this.observation, this.currentExecution(execution));
     if (this.caller && proposal.native_composition_dependency) {
       const parentGuard = typedMaterialParentGuard(this.caller.attention, family.compositionDependencyState?.() ?? {},
@@ -1783,7 +1796,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.adaptiveReasoning && (observedInformation || observedView)) this.latestInformationLevel = prefix.witnessed.at(-1)?.before.level_epoch ?? null;
     // common_frontier_runtime.py checks observed program refutations after
     // OP29/30/31 and before replaying a natural boundary. Official completion
-    // and GAME_OVER take precedence over an experimental stop request.
+    // takes precedence over experimental stop requests.
     const officialStop = this.current!.levels_completed >= this.budgets!.targetLevels
       || ['WIN', 'GAME_OVER'].includes(this.current!.state);
     const sourceStop = this.families.map(family => family.id === this.withdrawnPrimaryFamily ? null : family.requestedStopReason?.(this.observation!) ?? null)
@@ -1792,7 +1805,15 @@ export class NativeV6Runtime implements NativeV6Backend {
     const parentStop = parent?.owner === TYPED_MATERIAL_COMPOSITION_OWNER && parent.status === 'pending' && parent.binding?.phase === 'suspended'
       ? `composition_dependency_${parent.binding.suspension_reason}` : null;
     const incompleteStop = nativeAcquisitionsIncomplete.length ? 'native_acquisition_incomplete' : null;
-    const stopReason = officialStop ? this.budgetReason() : sourceStop ?? incompleteStop ?? parentStop ?? this.budgetReason();
+    const lastWitness = prefix.witnessed.at(-1);
+    const loss = !this.caller && prefix.sicPlan?.authority === 'sicOnly' && this.current!.state === 'GAME_OVER'
+      && lastWitness && lastWitness.before.level_epoch === lastWitness.after.level_epoch
+      && lastWitness.before.levels_completed === lastWitness.after.levels_completed ? lastWitness : undefined;
+    const fatalKey = loss && this.fatalCommandKey(loss.before, loss.command);
+    const recoverableLoss = fatalKey && !this.fatalCommands.has(fatalKey) && this.remaining() > 0
+      && this.remainingActiveMs(this.current!.level) > 0;
+    const stopReason = recoverableLoss ? sicObservedGameOver
+      : officialStop ? this.budgetReason() : sourceStop ?? incompleteStop ?? parentStop ?? this.budgetReason();
     let transfer: R | null = null;
     if (this.caller) {
       this.callerAcquisitions += prefix.witnessed.length;
@@ -1858,7 +1879,12 @@ export class NativeV6Runtime implements NativeV6Backend {
           qualification: 'The complete public packet distinguishes stationary, transient-returned and changed outcomes. No hidden-state equivalence or understood effect is inferred.' },
         relations: [{ relation: 'witnesses', target: `reasoning:transition:${transition.before.revision}` }] });
     }
-    await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [...needWrites, {
+    const losses: NativeStoreWrite[] = loss && fatalKey && !this.fatalCommands.has(fatalKey) ? [{
+      id: `reasoning:fatal-choice:${loss.before.revision}`, kind: 'transition_evidence', component: 'public_fatal_choice', status: 'observed',
+      value: { level_epoch: loss.before.level_epoch, frame_hash: loss.before.frame_hash, command: loss.command,
+        evidence: [loss.before.observation_ref, loss.after.observation_ref] },
+    }] : [];
+    await this.persistFamilies({ workflow: SELECTION_PROGRAM, step: 'sealed_prefix', statement: 'outcome.acquire' }, [...needWrites, ...losses, {
       id: evidenceId, kind: 'prefix_evidence', family: prefix.family.id, status: 'observed',
       value: { decision_revision: prefix.revision, proposal: prefix.proposal, selection: this.selectionReceipt,
         ...(this.familyAgendaReceipt ? { sic_family_selection: this.familyAgendaReceipt } : {}),
@@ -1883,6 +1909,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         ...(this.selectionReceipt ? [{ relation: 'selected_by', target: `program:${SELECTION_PROGRAM}` }] : []),
         ...needWrites.map(write => ({ relation: 'addresses', target: write.id }))],
     }, ...victoryWrites, ...contactScope, ...(this.authority?.checkpointWrites() ?? [])], evidenceId);
+    if (fatalKey) this.fatalCommands.add(fatalKey);
     this.restoreFamilies();
     this.kind = 'boundary'; this.reason = null;
     const reason = stopReason ?? this.budgetReason(); if (reason) this.stop(reason);
@@ -2799,7 +2826,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 234 : 235,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 236 : 237,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

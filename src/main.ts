@@ -1795,6 +1795,8 @@ function canDispatchAgentAction(): boolean {
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: canDispatchAgentAction,
+  canResetLevel: () => ready() && mode === 'agent'
+    && ['NOT_FINISHED', 'GAME_OVER', 'GAMEOVER'].includes(observation?.state ?? ''),
   resetLevel: async () => {
     const generation = selectionGeneration;
     busy = true;
@@ -2259,6 +2261,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   } else if (next.state === 'WIN' || next.state === 'LEVEL_COMPLETE') element('#game-feedback').textContent =
     hasNextLevel(next) ? `Level ${next.level} complete.` : 'VICTORY';
   else if (next.state === 'GAME_OVER' || next.state === 'GAMEOVER') element('#game-feedback').textContent = 'Game over. Undo or reset to continue.';
+  else if (previous?.state === 'GAME_OVER' || previous?.state === 'GAMEOVER') element('#game-feedback').textContent = '';
 }
 
 function showFailure(error: unknown, generation: number): void {

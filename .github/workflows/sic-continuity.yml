@@ -26,4 +26,5 @@ jobs:
       - run: node --test tests/sic-continuity-contract.test.mjs tests/sic-verified-walking-series.test.ts tests/sic-spatial-series.test.ts tests/v6-branch-routing-kernel.test.ts
       - run: node --test tests/sic-cursor-role-memory.test.ts tests/sic-contact-transfer.test.ts tests/sic-contact-frontier.test.ts
       - run: node --test tests/sic-observed-push-access.test.ts tests/sic-observed-coverage.test.ts tests/sic-observed-exchange.test.ts
+      - run: node --test tests/v6-agent.test.ts tests/v6-native-runtime.test.ts
       - run: npm run test:sic-continuity

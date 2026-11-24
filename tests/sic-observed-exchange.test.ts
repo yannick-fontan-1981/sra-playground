@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
-import { assessExchange, chooseExchange, matchesBoundExchange, observeExchange, planBoundExchange, rememberExchangeVictory,
+import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, planBoundExchange, rememberExchangeVictory,
   type BoundExchange, type ExchangePlan, type ExchangeTransfer, type ObservedExchange } from '../src/sic/observed-exchange.ts';
 import { observeTravel, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
@@ -36,16 +36,29 @@ test('position exchange learns both participants and composes with transport and
   assert.notEqual(exchange?.last.from, exchange?.last.to);
   assert.deepEqual(exchange?.last.turns, []);
 
-  let sawTransport = false, sawReflection = false;
+  let sawTransport = false, sawReflection = false, verifiedSeries = false;
   for (let i = 0; i < 55 && !board.levelsCompleted; i++) {
     const plan = chooseExchange(exchange, travel, picture(board.frame));
     assert.ok(plan);
+    if (plan.series) {
+      const series = plan.series, [first] = series.steps;
+      assert.ok(first && series.steps.length <= 16);
+      assert.ok(matchesExchangeSeries(series, series.start, picture(board.frame)));
+      for (const prediction of series.steps) {
+        await learn(Number(prediction.command.slice(6)), { ...plan, prediction });
+        if (board.levelsCompleted || !matchesExchangeSeries(series, prediction.pose, picture(board.frame))) break;
+        verifiedSeries = true;
+        sawReflection ||= !!exchange?.last.turns.length;
+      }
+      continue;
+    }
     const returned = await learn(Number(plan.command.action_ref.slice(6)), plan);
     if (plan.goal === 'test_transport' && returned?.satisfied) sawTransport = true;
     sawReflection ||= !!exchange?.last.turns.length;
   }
   assert.ok(sawTransport);
   assert.ok(sawReflection);
+  assert.ok(verifiedSeries);
   assert.equal(board.levelsCompleted, 1);
 });
 

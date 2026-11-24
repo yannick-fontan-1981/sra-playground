@@ -12,6 +12,7 @@ import { standalonePlanningFamilies } from '../src/sic/standalone-families.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
+import { sicObservedGameOver } from '../src/logos-engine/v6-native-types.ts';
 import type {
   NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeOutcome, NativePublicObservation,
   NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
@@ -314,6 +315,24 @@ test('an acquired loss can RESET the current level, retain evidence and replan f
   assert.equal(next.kind, 'action');
   assert.equal(state, 0);
   assert.notEqual(next.ticket?.observationRef, first.ticket?.observationRef);
+});
+
+test('SIC retains a witnessed fatal command across a same-level reset and authorizes a different command', async () => {
+  const recovery = { ...defaultRecoveryPack, solver: 'sic' } as const;
+  const service = new V6AgentService(() => createNativeV6Runtime(declarations, { recovery, now: () => 0 }));
+  const entry = { ...board(), availableActionIds: [1, 2] };
+  const sessionId = 'sic-fatal-choice';
+  const first = await service.handle({ ...init(sessionId), recovery, observation: toV6PublicObservation(entry, 0) });
+  assert.ok(first.ticket);
+  const loss = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: first.ticket.id, executionMs: 1,
+    observation: toV6PublicObservation({ ...entry, state: 'GAME_OVER' }, 1) });
+  assert.equal(loss.snapshot.reason, sicObservedGameOver);
+  assert.equal(loss.snapshot.canResetLevel, true);
+  const reset = await service.handle({ type: 'reset_level', sessionId, sequence: 1, observation: toV6PublicObservation(entry, 1) });
+  assert.equal(reset.snapshot.actions, 1);
+  const next = await service.handle({ type: 'resume', sessionId, sequence: 1 });
+  assert.ok(next.ticket, next.snapshot.reason ?? 'SIC must authorize the alternative control');
+  assert.notEqual(next.ticket.actionRef, first.ticket.actionRef);
 });
 
 test('a declared walk reconciles the confirmed prefix when its next landing changes', async () => {

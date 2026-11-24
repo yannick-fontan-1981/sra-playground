@@ -34,7 +34,7 @@ import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindi
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { matchesPullCircuit, observePullCircuitBinding, planPullCircuit, provesPullCircuitDeadlock, witnessedPullCircuitReturn,
   type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
-import { assessExchange, chooseExchange, matchesBoundExchange, observeExchange, planBoundExchange, rememberExchangeVictory,
+import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, planBoundExchange, rememberExchangeVictory,
   type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
 import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
   contactPullReturn, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
@@ -203,7 +203,8 @@ type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: st
   separationTest?: string;
   contactExperiment?: ContactExperiment;
   pullRoute?: readonly PullStep[];
-  exchangePlan?: ExchangePlan;
+  exchangePlan?: Omit<ExchangePlan, 'series'>;
+  exchangeSeries?: ExchangePlan['series'];
   boundExchangePlan?: BoundExchangePlan;
   markContact?: MarkContact;
   pressurePlan?: PressurePlan;
@@ -795,7 +796,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const recalledJoint = state.jointTransfer?.epoch === observation.level_epoch - 1 ? state.jointTransfer.measured : undefined;
       const joint = fallback && !panel && !pressure ? chooseJointInput(local.jointInput ?? recalledJoint, rows, nonPoint, remaining, !!recalledJoint) : undefined;
       const jointKey = joint?.command.action_ref;
-      const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows) : undefined;
+      const exchange = !panel && !pressure ? chooseExchange(local.exchange, local.travel, rows, remaining) : undefined;
       const exchangeKey = exchange?.command.action_ref;
       const coverage = !panel && !pressure && !exchange && local.coverage?.body ? chooseCoverage(local.coverage, local.travel, rows, remaining) : undefined;
       const coverageKey = coverage?.command.action_ref;
@@ -1171,8 +1172,14 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const pullSeries = !walk && !series && frontier === coverageFrontier ? coverage?.pullSeries : undefined;
       const contactSeries = !walk && !series && !pushSeries && !pullSeries && selectedExperiment && local.travel && local.contactMemory && local.coverage
         ? bindContactPullSeries(selectedExperiment, local.travel, local.contactMemory, local.coverage, rows, remaining) : undefined;
+      const exchangeSeries = !walk && !series && !pushSeries && !pullSeries && !contactSeries ? selectedExchange?.series : undefined;
+      const exchangePlan = selectedExchange && {
+        command: selectedExchange.command, goal: selectedExchange.goal, focus: selectedExchange.focus, subjects: selectedExchange.subjects,
+        ...(selectedExchange.partner ? { partner: selectedExchange.partner } : {}), prediction: selectedExchange.prediction, evidence: selectedExchange.evidence,
+      };
       const steps = series ? series.map(step => ({ action: step.command, expected_after: step.to }))
         : walk ? walk.route.map(step => ({ action: step.command, expected_after: step.to }))
+        : exchangeSeries ? exchangeSeries.steps.map(step => ({ action: { action_ref: step.command, data: {} }, expected_after: visibleCellBox(step.pose.actor) }))
         : (pushSeries ?? pullSeries?.steps ?? contactSeries?.steps)?.map(step => ({ action: step.command, expected_after: visibleCellBox(step.after.actor) }));
       const id = `public-input:${need.id}`, actions = steps?.map(step => step.action) ?? [command];
       const witness = command.action_ref === 'ACTION6'
@@ -1190,7 +1197,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(selectedFocus ? { clickFocus: selectedFocus } : {}),
         ...(selectedPressure ? { pressurePlan: selectedPressure } : {}),
         ...(selectedMark ? { markContact: selectedMark } : {}),
-        ...(selectedExchange ? { exchangePlan: selectedExchange } : {}),
+        ...(exchangePlan ? { exchangePlan } : {}),
+        ...(exchangeSeries ? { exchangeSeries } : {}),
         ...(selectedCoverage && !selectedCoverage.covered ? { coveragePlacement: true as const } : {}),
         ...(selectedSeparation?.experiment ? { separationTest: selectedSeparation.experiment } : {}),
         ...(selectedExperiment ? { contactExperiment: selectedExperiment } : {}),
@@ -1306,6 +1314,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
     },
     before(proposal, index, packet, observation) {
+      if (proposal.exchangeSeries) {
+        const { steps, start } = proposal.exchangeSeries;
+        const admitted = matchesExchangeSeries(proposal.exchangeSeries, index === 0 ? start : steps[index - 1]!.pose, packet.frame_rows);
+        return { admitted, reason: admitted ? 'exchange_premises_witnessed' : 'exchange_premises_changed' };
+      }
       const boundExchange = proposal.boundExchangePlan;
       if (boundExchange) {
         const pose = index === 0 ? boundExchange.pose : boundExchange.steps[index - 1]!.after;
@@ -1369,6 +1382,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     async after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      if (proposal.exchangeSeries) {
+        const matched = matchesExchangeSeries(proposal.exchangeSeries, proposal.exchangeSeries.steps[index]!.pose, afterRows);
+        return { matched: scored || matched, seal_prefix: scored || !matched,
+          reason: scored ? 'official_boundary' : matched ? 'exchange_step_confirmed' : 'exchange_prediction_refuted' };
+      }
       const boundExchange = proposal.boundExchangePlan;
       if (boundExchange) {
         const matched = matchesBoundExchange(boundExchange.roles, boundExchange.field, boundExchange.steps[index]!.after, afterRows);
@@ -1660,7 +1678,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         }
         if (before.available_action_refs.length === 4 && before.available_action_refs.every(input => /^ACTION[1-4]$/.test(input))) {
           const exchange = observeExchange(state.exchange, previous, travel, rows, afterRows, command,
-            after.observation_ref, frames, proposal.exchangePlan?.prediction);
+            after.observation_ref, frames, proposal.exchangeSeries?.steps[index] ?? proposal.exchangePlan?.prediction);
           if (exchange) state.exchange = exchange;
           const pull = proposal.coveragePullSeries;
           const retainedPullPremises = !pull || !!state.coverage && !!previous && coveragePullReturn(state.coverage, previous, rows, afterRows, pull, index);
