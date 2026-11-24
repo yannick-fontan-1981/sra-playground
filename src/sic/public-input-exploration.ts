@@ -34,13 +34,14 @@ import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindi
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { matchesPullCircuit, observePullCircuitBinding, planPullCircuit, provesPullCircuitDeadlock, witnessedPullCircuitReturn,
   type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
-import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, planBoundExchange, rememberExchangeVictory,
-  type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
+import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, observeExchangeThreat,
+  planBoundExchange, rememberExchangeVictory, type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeThreat,
+  type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
 import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
   contactPullReturn, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
 import { assessPressurePlan, choosePressureReserve, observePressureReserve, retainPressureReserve,
   type PressurePlan, type PressureReserve } from './observed-pressure-reserve.ts';
-import { sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
+import { sicObservedGameOver, sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
 import { chooseObservedClickFocus, type ObservedClickFocus } from './observed-click-focus.ts';
 import { chooseJointInput, observeJointInput, type JointProposal, type ObservedJointInput } from './observed-joint-input.ts';
 import { chooseReferenceSearch, observeReferenceView, type ReferenceView } from './observed-reference-search.ts';
@@ -163,6 +164,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   pullCircuitRefuted?: true;
   exchange?: ObservedExchange;
   exchangeTransfer?: ExchangeTransfer;
+  exchangeThreat?: ExchangeThreat;
   exchangeBinding?: BoundExchange;
   exchangeRefuted?: true;
   pressureReserve?: PressureReserve;
@@ -567,6 +569,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       ...(state.coverageTransfer?.epoch === epoch - 1 ? { coverageTransfer: state.coverageTransfer } : {}),
       ...(state.pullKnowledge ? { pullKnowledge: state.pullKnowledge } : {}),
       ...(state.exchangeTransfer ? { exchangeTransfer: state.exchangeTransfer } : {}),
+      ...(state.exchangeThreat ? { exchangeThreat: state.exchangeThreat } : {}),
       ...(state.pushAccessMemory ? { pushAccessMemory: state.pushAccessMemory } : {}),
       ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
       ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
@@ -597,16 +600,30 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     }
   }
 
+  function acquireExchangeThreat(before: NativeObservation, after: NativeObservation,
+    command: NativeCommand, rows: NativeRows, afterRows: NativeRows) {
+    if (!state.exchangeTransfer || after.state !== 'GAME_OVER' || before.level_epoch !== after.level_epoch
+      || before.levels_completed !== after.levels_completed) return;
+    const threat = observeExchangeThreat(state.exchangeTransfer, rows, afterRows, command,
+      [before.observation_ref, after.observation_ref]);
+    if (threat) {
+      enterEpoch(before.level_epoch);
+      state.exchangeThreat = threat;
+    }
+  }
+
   function proposeBoundExchange(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
     const { exchangeTransfer: roles } = state, current = state.epoch === observation.level_epoch;
     if (!roles || current && state.exchangeRefuted) return null;
-    const plan = planBoundExchange(roles, rows, inputs, remaining, current ? state.exchangeBinding : undefined);
+    const plan = planBoundExchange(roles, rows, inputs, remaining, current ? state.exchangeBinding : undefined, state.exchangeThreat);
     if (!plan) return null;
     const ref = observation.observation_ref;
-    const evidence: [string, ...string[]] = [ref, roles.exchangeRef, roles.scoreRef, ...Object.values(roles.moves).map(move => move.ref)];
+    const evidence: [string, ...string[]] = [ref, roles.exchangeRef, roles.scoreRef, ...Object.values(roles.moves).map(move => move.ref),
+      ...(plan.field.threat?.evidence ?? [])];
     const target = pushAccessBox(plan.field.exit, roles.grid.pitch);
     const actions = plan.steps.map(step => step.action);
-    const label = 'Reuse the observed exchange to position the weight and reach the exit';
+    const label = plan.field.threat ? 'Reach the exit through exchanges whose arrivals avoid the observed threat'
+      : 'Reuse the observed exchange to position the weight and reach the exit';
     const goal = { kind: 'compose_observed_exchange_access', scope: ref.split(':revision:', 1)[0]!,
       subjects: [plan.field.exit, ...Object.keys(plan.field.marks)], parentObjective: completion,
       satisfactionContract: 'verify_each_exchange_and_door_then_reach_the_exit' };
@@ -1271,6 +1288,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       };
     },
     async observePublicOutcome(before, after, command, rows, afterRows, frames) {
+      acquireExchangeThreat(before, after, command, rows, afterRows);
       acquireCoverageTransfer(before, after, command, rows);
       acquirePullCircuitOutcome(before, after, rows, afterRows);
       if (fallback) {
@@ -1535,6 +1553,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     async record(before, after, command, rows, afterRows, proposal, index, frames) {
+      acquireExchangeThreat(before, after, command, rows, afterRows);
       const boundExchange = proposal.boundExchangePlan;
       if (boundExchange) {
         enterEpoch(before.level_epoch);
@@ -1921,13 +1940,20 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       return { events, ...(reviewEvidence ? { reviewEvidence } : {}) };
     },
     requestedStopReason(observation) {
+      if (state.exchangeThreat?.evidence[1] === observation.observation_ref) return sicObservedGameOver;
       if (state.pressureReserve?.shortage === observation.observation_ref) return sicObservedWeightShortage;
       if (state.pullCircuitDeadlock?.ref === observation.observation_ref) return observedCoverageDeadlock;
       const coverage = state.coverage, proof = coverage?.deadlock;
       if (!coverage || !proof || proof.ref !== observation.observation_ref) return null;
       return coverage.recovered.includes(proof.key) ? 'sic_coverage_deadlock_already_recovered' : observedCoverageDeadlock;
     },
-    stateAfterLevelReset(observation, rows) {
+    stateAfterLevelReset(observation, rows, entry, cause) {
+      if (cause === sicObservedGameOver && state.exchangeThreat && state.exchangeTransfer && state.epoch === observation.level_epoch) {
+        // The level-entry checkpoint can still describe the preceding epoch.
+        // Preserve that epoch so the planner rebinds the reset board.
+        return { ...initial(observation.level_epoch), ...entry,
+          exchangeTransfer: state.exchangeTransfer, exchangeThreat: state.exchangeThreat };
+      }
       const { pullCircuit, pullCircuitStart, pullKnowledge, coverageTransfer } = state;
       if (state.pullCircuitDeadlock && pullCircuit && pullCircuitStart && pullKnowledge && coverageTransfer
         && matchesPullCircuit(pullKnowledge, pullCircuit.field, pullCircuitStart, rows)) {

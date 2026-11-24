@@ -6,7 +6,7 @@ type Cells = ReturnType<typeof readTravelGrid>['cells'];
 type Move = { input: string; delta: NativePoint };
 type Gate = { cell: string; mark: string; ink: number; opensWhenCovered: boolean };
 type Layout = { marks: Record<string, number[]>; gates: Gate[]; exit?: string; wall: string };
-type Pose = { actor: string; pieces: string[] };
+type Pose = { actor: string; pieces: string[]; threats?: string[] };
 type Prediction = { command: string; pose: Pose };
 type Exchange = { ref: string; from: string; to: string; turns: string[] };
 export type ObservedExchange = {
@@ -21,8 +21,9 @@ type ExchangeSeries = { start: Pose; steps: Prediction[]; grid: ObservedTravel['
 export type ExchangeTransfer = Pick<ObservedTravel, 'grid' | 'moves'> & {
   body: string; wall: string; actorInkCount: number; exitStamp: string; exchangeRef: string; scoreRef: string;
 };
+export type ExchangeThreat = { stamp: string; evidence: readonly [string, string] };
 type BoundField = { floor: string[]; marks: Record<string, string>; doors: Record<string, { shut: string; open: string }>;
-  exit: string; fixed: Record<string, string> };
+  exit: string; fixed: Record<string, string>; threat?: ExchangeThreat };
 export type BoundExchange = { field: BoundField; pose: Pose };
 type ExchangeStep = { action: NativeCommand; after: Pose };
 export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[] };
@@ -34,7 +35,8 @@ const step = (cell: string, [dx, dy]: NativePoint) => {
 };
 const tileId = (pixels: readonly number[] | undefined) => pixels?.join(',') ?? '';
 const isUniform = (pixels: readonly number[]) => pixels.every(ink => ink === pixels[0]);
-const poseKey = ({ actor, pieces }: Pose) => `${actor}|${[...pieces].sort().join(';')}`;
+const poseKey = ({ actor, pieces, threats }: Pose) =>
+  `${actor}|${[...pieces].sort().join(';')}${threats ? `|${[...threats].sort().join(';')}` : ''}`;
 const trialKey = (pose: Pose, input: string, supports: readonly string[]) => `${poseKey(pose)}|${input}|${supports.join(';')}`;
 const turnKey = (tile: readonly number[], incoming: NativePoint) => `${tileId(tile)}|${incoming.join(',')}`;
 const directions = (travel: ObservedTravel) => Object.entries(travel.moves).map(([input, move]) => ({ input, delta: move.delta }));
@@ -200,17 +202,44 @@ export function rememberExchangeVictory(local: ObservedExchange | undefined, tra
     exitStamp: tileId(exit), exchangeRef: local.last.ref, scoreRef: ref };
 }
 
-function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows): BoundExchange | undefined {
+function adjacent(a: string, b: string, pitch: number): boolean {
+  const [x, y] = point(a), [u, v] = point(b);
+  return Math.abs(x - u) + Math.abs(y - v) === pitch;
+}
+
+/** Bind the terminal change to a witnessed exchange and a stationary neighbor
+ * with the exact stamp that replaces the controlled sprite at the landing. */
+export function observeExchangeThreat(roles: ExchangeTransfer, before: NativeRows, after: NativeRows,
+  command: NativeCommand, evidence: ExchangeThreat['evidence']): ExchangeThreat | undefined {
+  const move = roles.moves[command.action_ref];
+  if (!move || !move.delta.some(Boolean)) return;
+  const { grid, body } = roles, first = readTravelGrid(before, grid), last = readTravelGrid(after, grid);
+  const actor = first.pieces[0];
+  if (!actor || first.pieces.length !== 1 || last.pieces.length || tileId(last.cells.get(actor)) !== body) return;
+  let landing = step(actor, move.delta);
+  while (first.cells.get(landing)?.every(ink => ink === grid.floor)) landing = step(landing, move.delta);
+  if (tileId(first.cells.get(landing)) !== body) return;
+  const replaced = last.cells.get(landing);
+  if (!replaced || isUniform(replaced)) return;
+  const stamp = tileId(replaced);
+  if ([body, roles.wall, roles.exitStamp].includes(stamp)) return;
+  const neighbor = [...first.cells].some(([cell, pixels]) => adjacent(cell, landing, grid.pitch)
+    && tileId(pixels) === stamp && tileId(last.cells.get(cell)) === stamp);
+  if (neighbor) return { stamp, evidence };
+}
+
+function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: ExchangeThreat): BoundExchange | undefined {
   const { grid } = roles, { cells, pieces } = readTravelGrid(rows, grid);
   if (pieces.length !== 1 || grid.pitch !== 3) return;
-  const actor = pieces[0]!, floor: string[] = [], bodies: string[] = [], exits: string[] = [];
+  const actor = pieces[0]!, floor: string[] = [], bodies: string[] = [], exits: string[] = [], threats: string[] = [];
   const marks: BoundField['marks'] = {}, doors: BoundField['doors'] = {}, fixed: BoundField['fixed'] = {};
   const shutters = new Map<string, number>();
   for (const [cell, pixels] of cells) {
     const stamp = tileId(pixels), rim = pixels[0]!;
-    if (cell === actor || stamp === roles.body || stamp === roles.exitStamp || pixels.every(ink => ink === grid.floor)) {
+    if (cell === actor || stamp === roles.body || stamp === roles.exitStamp || stamp === threat?.stamp || pixels.every(ink => ink === grid.floor)) {
       floor.push(cell);
       if (stamp === roles.body) bodies.push(cell);
+      if (stamp === threat?.stamp) threats.push(cell);
       if (stamp === roles.exitStamp) exits.push(cell);
     } else if (stamp === roles.wall) fixed[cell] = stamp;
     else {
@@ -229,12 +258,15 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows): BoundExch
   for (const [cell, rim] of shutters) {
     doors[cell] = { shut: tileId(cells.get(cell)), open: tileId(Array.from({ length: 9 }, (_, index) => corners.includes(index) ? rim : grid.floor)) };
   }
-  return { field: { floor: [...floor, ...controls, ...Object.keys(doors)], marks, doors, exit: exits[0]!, fixed },
-    pose: { actor, pieces: bodies } };
+  const threatBinding = threat && threats.length && threats.every(a => threats.every(b => !adjacent(a, b, grid.pitch))) ? threat : undefined;
+  if (threats.length && (!threatBinding || controls.length)) return;
+  return { field: { floor: [...floor, ...controls, ...Object.keys(doors)], marks, doors, exit: exits[0]!, fixed,
+      ...(threatBinding ? { threat: threatBinding } : {}) },
+    pose: { actor, pieces: bodies, ...(threatBinding ? { threats } : {}) } };
 }
 
 function held(pose: Pose, cell: string) {
-  return pose.actor === cell || pose.pieces.includes(cell);
+  return pose.actor === cell || pose.pieces.includes(cell) || !!pose.threats?.includes(cell);
 }
 
 function gatesOpen(field: BoundField, pose: Pose) {
@@ -254,6 +286,8 @@ export function matchesBoundExchange(roles: ExchangeTransfer, field: BoundField,
       if (door && corners.some(i => pixels[i] !== Number(door.open.split(',')[i]))) return false;
     } else if (pose.pieces.includes(cell)) {
       if (pixels.some((ink, i) => (!mark || !corners.includes(i)) && ink !== body[i])) return false;
+    } else if (pose.threats?.includes(cell)) {
+      if (stamp !== field.threat?.stamp) return false;
     } else if (!ground.has(cell)) {
       if (stamp !== field.fixed[cell]) return false;
     } else if (mark || cell === field.exit) {
@@ -264,9 +298,9 @@ export function matchesBoundExchange(roles: ExchangeTransfer, field: BoundField,
 }
 
 export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inputs: readonly NativeCommand[],
-  remaining: number, retained?: BoundExchange): BoundExchangePlan | undefined {
+  remaining: number, retained?: BoundExchange, threat?: ExchangeThreat): BoundExchangePlan | undefined {
   if (remaining < 1 || inputs.length !== 4 || !inputs.every(input => roles.moves[input.action_ref])) return;
-  const scene = retained ?? bindExchangeField(roles, rows);
+  const scene = retained ?? bindExchangeField(roles, rows, threat);
   if (!scene || !matchesBoundExchange(roles, scene.field, scene.pose, rows)) return;
   const { field, pose } = scene, ground = new Set(field.floor);
   const doorCells = Object.keys(field.doors);
@@ -288,11 +322,17 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
     for (const { action, delta } of moves) {
       let target: string | undefined;
       for (let beam = step(current.actor, delta); allowed(beam); beam = step(beam, delta)) {
-        if (current.pieces.includes(beam)) { target = beam; break; }
+        if (current.pieces.includes(beam) || current.threats?.includes(beam)) { target = beam; break; }
       }
       const landing = target ?? step(current.actor, delta);
       if (!allowed(landing)) continue;
-      const next = { actor: landing, pieces: target ? current.pieces.map(piece => piece === target ? current.actor : piece) : current.pieces };
+      const swapThreat = target && current.threats?.includes(target);
+      const threats = swapThreat ? current.threats!.map(cell => cell === target ? current.actor : cell) : current.threats;
+      if (threats?.some(cell => adjacent(cell, landing, roles.grid.pitch)
+        || swapThreat && cell !== current.actor && adjacent(cell, current.actor, roles.grid.pitch))) continue;
+      const next = { actor: landing, pieces: target && !swapThreat
+        ? current.pieces.map(piece => piece === target ? current.actor : piece) : current.pieces,
+        ...(threats ? { threats } : {}) };
       if (!gatesOpen(field, next) && doorCells.some(door => held(next, door))) continue;
       const key = poseKey(next);
       if (seen.has(key)) continue;

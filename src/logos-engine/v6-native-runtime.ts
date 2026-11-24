@@ -2279,7 +2279,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (family.requestedStopReason?.(before) !== recovery) continue;
       const entry = this.levelStart!.families.find(node => node.family === family.id);
       const learned = family.stateAfterLevelReset?.(measured, next.frame_rows, entry
-        ? hydrateNativeState(entry.value, id => knowledge.memory.nodes[id]?.value) as NativeRecord : undefined);
+        ? hydrateNativeState(entry.value, id => knowledge.memory.nodes[id]?.value) as NativeRecord : undefined, recovery);
       if (learned) retained.set(family.id, learned);
     }
     const writes: NativeStoreWrite[] = this.levelStart!.families.map(node => ({
@@ -2826,7 +2826,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 236 : 237,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 238 : 239,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

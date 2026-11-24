@@ -3,7 +3,8 @@ import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
-import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, planBoundExchange, rememberExchangeVictory,
+import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, observeExchangeThreat,
+  planBoundExchange, rememberExchangeVictory,
   type BoundExchange, type ExchangePlan, type ExchangeTransfer, type ObservedExchange } from '../src/sic/observed-exchange.ts';
 import { observeTravel, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
@@ -64,7 +65,7 @@ test('position exchange learns both participants and composes with transport and
 
 const tutorial = JSON.parse(readFileSync(new URL('../experiments/sinking-star-ss04/tests/witnesses.json', import.meta.url), 'utf8'))[0].actions as number[];
 
-for (const mirror of [false, true]) test(`settled exchange transfers to guarded mixed series${mirror ? ' on a mirrored board' : ''}`, async () => {
+for (const mirror of [false, true]) test(`exchange transfers to guarded pressure and survival routes${mirror ? ' on a mirrored board' : ''}`, async () => {
   const game = createGameDispatcher(async () => { throw Error('Expected a native game'); });
   let board = await game.dispatch({ type: 'load', code: 'SS04', level: 1 });
   const map = new Map([1, 2, 3, 4].map((id, i) => [`ACTION${(mirror ? 28 : 14) + i}`, id]));
@@ -130,4 +131,46 @@ for (const mirror of [false, true]) test(`settled exchange transfers to guarded 
   assert.equal(actions, 54);
   assert.equal(plans, 4);
   assert.ok(mixed > 0 && testedDoor);
+
+  board = await game.dispatch({ type: 'load', code: 'SS04', level: 4 });
+  const startingScore = board.levelsCompleted;
+  assert.equal(planBoundExchange(roles, frame(board.frame), inputs, 50), undefined);
+  board = await game.dispatch({ type: 'action', actionId: 2 });
+  const approach = frame(board.frame), east = [...map].find(([, id]) => id === 4)![0];
+  board = await game.dispatch({ type: 'action', actionId: 4 });
+  assert.equal(board.state, 'GAME_OVER');
+  const loss = frame(board.frame);
+  const threat = observeExchangeThreat(roles, approach, loss, { action_ref: east, data: {} }, ['approach', 'loss']);
+  assert.ok(threat);
+  assert.equal(observeExchangeThreat(roles, approach, approach, { action_ref: east, data: {} }, ['approach', 'loss']), undefined);
+
+  board = await game.dispatch({ type: 'reset' });
+  binding = undefined;
+  actions = 0;
+  let movedThreat = false, verifiedThreatGuard = false;
+  while (board.level === 4 && actions < 50) {
+    const plan = planBoundExchange(roles, frame(board.frame), inputs, 50 - actions, binding, threat);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16);
+    let previousPose = plan.pose;
+    for (const step of plan.steps) {
+      board = await game.dispatch({ type: 'action', actionId: map.get(step.action.action_ref)! });
+      actions++;
+      assert.notEqual(board.state, 'GAME_OVER');
+      if (board.levelsCompleted > startingScore) break;
+      const returned = frame(board.frame);
+      assert.ok(matchesBoundExchange(roles, plan.field, step.after, returned));
+      if (previousPose.threats!.join(';') !== step.after.threats!.join(';')) {
+        movedThreat = true;
+        const changed = returned.map(row => [...row]);
+        const [sx, sy] = step.after.threats![0]!.split(',').map(Number) as [number, number];
+        changed[sy]![sx] = (changed[sy]![sx]! + 1) % 16;
+        assert.equal(matchesBoundExchange(roles, plan.field, step.after, changed), false);
+        verifiedThreatGuard = true;
+      }
+      binding = { field: plan.field, pose: step.after };
+      previousPose = step.after;
+    }
+  }
+  assert.equal(board.levelsCompleted, startingScore + 1);
+  assert.ok(movedThreat && verifiedThreatGuard);
 });

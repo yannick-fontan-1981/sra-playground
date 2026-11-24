@@ -126,13 +126,22 @@ function measuredExchangeSeries(level, tickets) {
   const world = compileExchangeLevel(SS04_LEVELS[level - 1]);
   let state = initialExchangeState(world), previous;
   const mixed = [];
+  let deaths = 0, threatExchanges = 0;
   for (const [index, ticket] of tickets.entries()) {
-    if (ticket.resets !== previous?.resets) state = initialExchangeState(world);
+    if (ticket.resets !== (previous?.resets ?? 0)) {
+      if (level === 4) assert.ok(state.dead, 'SS04 L4 reset without an observed loss');
+      state = initialExchangeState(world);
+    }
     const detail = stepExchangeWorld(world, state, Number(ticket.action.slice(6)));
     const kind = detail.phases[0]?.kind;
     if (level === 2) assert.ok(kind === 'walk' || kind === 'swap', 'SS04 L2 used a blocked or speculative action');
+    if (level === 4) {
+      if (detail.state.dead) deaths++;
+      if (kind === 'swap' && !detail.state.dead && detail.phases[0].moves.some(move => move.actor === 'monster')) threatExchanges++;
+      if (ticket.resets) assert.ok(kind && !detail.state.dead, 'SS04 L4 recovery used an ineffective or fatal arrival');
+    }
     if (kind === 'swap' && previous?.kind === 'walk' && previous.revision === ticket.decisionRevision && ticket.actionIndex > 0) {
-      assert.ok(detail.phases[0].moves.some(move => move.actor === 'stone' && equal(move.to, state.hero)), 'Expected a real stone exchange');
+      assert.ok(detail.phases[0].moves.some(move => move.actor !== 'hero' && equal(move.to, state.hero)), 'Expected a real exchange');
       mixed.push({ kind: 'walk then swap', first: index, last: index + 1 });
     }
     previous = { kind, revision: ticket.decisionRevision, resets: ticket.resets };
@@ -142,6 +151,10 @@ function measuredExchangeSeries(level, tickets) {
   assert.ok(mixed.length, 'SS04 L' + level + ' lost continuous positioning into an exchange');
   if (level === 2) {
     assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L2 did not hold the pressure control');
+  }
+  if (level === 4) {
+    assert.ok(deaths <= 1 && deaths === previous?.resets, 'SS04 L4 failed to retain its first loss across reset');
+    assert.ok(threatExchanges > 0, 'SS04 L4 did not exchange with a threat and survive');
   }
   return mixed;
 }
@@ -154,7 +167,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 2 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 4 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -239,6 +252,10 @@ export function checkRun(run) {
       assert.ok(issued.length <= 60 && groups.size <= 5, 'SS04 L2 lost the direct mixed exchange route');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS04 L2 reset during the exchange route');
     }
+    if (code === 'SS04' && row.level === 4) {
+      // The earlier run made 39 decisions, died twice and stopped. The recovered route must execute verified series.
+      assert.ok(issued.length <= 55 && continued >= 30, 'SS04 L4 lost its safe exchange route');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : [];
@@ -272,7 +289,7 @@ function main() {
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
-      ['l-axe-violet', 'SS04', '2', '140'],
+      ['l-axe-violet', 'SS04', '4', '140'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

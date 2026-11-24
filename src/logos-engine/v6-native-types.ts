@@ -228,7 +228,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
   /** Transfer measured rules and recovery exclusions to an actual reset of this level. */
-  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord): NativeRecord | undefined;
+  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord, cause?: string): NativeRecord | undefined;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
