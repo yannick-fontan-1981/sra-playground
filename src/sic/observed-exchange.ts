@@ -1,5 +1,6 @@
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 type Cells = ReturnType<typeof readTravelGrid>['cells'];
 type Move = { input: string; delta: NativePoint };
@@ -15,6 +16,14 @@ export type ObservedExchange = {
 };
 export type ExchangePlan = { command: NativeCommand; goal: 'test_transport' | 'reach_exit' | 'hold_control';
   subjects: string[]; focus: string; partner?: string; prediction: Prediction; evidence: string[] };
+export type ExchangeTransfer = Pick<ObservedTravel, 'grid' | 'moves'> & {
+  body: string; wall: string; actorInkCount: number; exitStamp: string; exchangeRef: string; scoreRef: string;
+};
+type BoundField = { floor: string[]; marks: Record<string, string>; doors: Record<string, { shut: string; open: string }>;
+  exit: string; fixed: Record<string, string> };
+export type BoundExchange = { field: BoundField; pose: Pose };
+type ExchangeStep = { action: NativeCommand; after: Pose };
+export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[] };
 
 const point = (cell: string) => cell.split(',').map(Number) as [number, number];
 const step = (cell: string, [dx, dy]: NativePoint) => {
@@ -27,6 +36,7 @@ const poseKey = ({ actor, pieces }: Pose) => `${actor}|${[...pieces].sort().join
 const trialKey = (pose: Pose, input: string, supports: readonly string[]) => `${poseKey(pose)}|${input}|${supports.join(';')}`;
 const turnKey = (tile: readonly number[], incoming: NativePoint) => `${tileId(tile)}|${incoming.join(',')}`;
 const directions = (travel: ObservedTravel) => Object.entries(travel.moves).map(([input, move]) => ({ input, delta: move.delta }));
+const corners = [0, 2, 6, 8];
 
 function markProfile(pixels: number[], pitch: number, floor: number) {
   if (pitch % 2 !== 1) return;
@@ -172,6 +182,121 @@ export function assessExchange(local: ObservedExchange | undefined, travel: Obse
   const satisfied = plan.goal === 'test_transport' ? !!witnessedSupport(local, travel, start, returned, first, second.cells)
     : plan.goal === 'hold_control' && plan.subjects.every(cell => returned.pieces.includes(cell));
   return { matched: satisfied || poseKey(returned) === poseKey(plan.prediction.pose), satisfied };
+}
+
+export function rememberExchangeVictory(local: ObservedExchange | undefined, travel: ObservedTravel | undefined,
+  rows: NativeRows, command: NativeCommand, ref: string): ExchangeTransfer | undefined {
+  if (!local || !travel || travel.grid.pitch !== 3 || Object.keys(travel.moves).length !== 4) return;
+  const { grid, moves } = travel, move = moves[command.action_ref];
+  const { cells, pieces } = readTravelGrid(rows, grid);
+  if (!move || pieces.length !== 1) return;
+  const actor = pieces[0]!, destination = step(actor, move.delta);
+  const exit = cells.get(destination), actorPixels = cells.get(actor);
+  if (!exit || destination !== local.layout.exit || !actorPixels) return;
+  const actorInkCount = actorPixels.filter(ink => ink === grid.ink).length;
+  return { grid, moves, body: local.body, wall: local.layout.wall, actorInkCount,
+    exitStamp: tileId(exit), exchangeRef: local.last.ref, scoreRef: ref };
+}
+
+function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows): BoundExchange | undefined {
+  const { grid } = roles, { cells, pieces } = readTravelGrid(rows, grid);
+  if (pieces.length !== 1 || grid.pitch !== 3) return;
+  const actor = pieces[0]!, floor: string[] = [], bodies: string[] = [], exits: string[] = [];
+  const marks: BoundField['marks'] = {}, doors: BoundField['doors'] = {}, fixed: BoundField['fixed'] = {};
+  const shutters = new Map<string, number>();
+  for (const [cell, pixels] of cells) {
+    const stamp = tileId(pixels), rim = pixels[0]!;
+    if (cell === actor || stamp === roles.body || stamp === roles.exitStamp || pixels.every(ink => ink === grid.floor)) {
+      floor.push(cell);
+      if (stamp === roles.body) bodies.push(cell);
+      if (stamp === roles.exitStamp) exits.push(cell);
+    } else if (stamp === roles.wall) fixed[cell] = stamp;
+    else {
+      const mark = markProfile(pixels, grid.pitch, grid.floor);
+      if (mark && mark[0] === mark[1]) marks[cell] = stamp;
+      else if (rim !== grid.floor && pixels[4] !== rim && pixels[4] !== grid.floor
+        && pixels.every((ink, index) => index === 4 || ink === rim)) shutters.set(cell, rim);
+      else return;
+    }
+  }
+  if (!bodies.length || exits.length !== 1) return;
+  const controls = Object.keys(marks);
+  const inks = new Set(controls.map(cell => cells.get(cell)![4]));
+  if (shutters.size && (inks.size !== 1 || [...shutters.values()].some(rim => !inks.has(rim)))
+    || controls.length && !shutters.size) return;
+  for (const [cell, rim] of shutters) {
+    doors[cell] = { shut: tileId(cells.get(cell)), open: tileId(Array.from({ length: 9 }, (_, index) => corners.includes(index) ? rim : grid.floor)) };
+  }
+  return { field: { floor: [...floor, ...controls, ...Object.keys(doors)], marks, doors, exit: exits[0]!, fixed },
+    pose: { actor, pieces: bodies } };
+}
+
+function held(pose: Pose, cell: string) {
+  return pose.actor === cell || pose.pieces.includes(cell);
+}
+
+function gatesOpen(field: BoundField, pose: Pose) {
+  return Object.keys(field.marks).every(mark => held(pose, mark));
+}
+
+export function matchesBoundExchange(roles: ExchangeTransfer, field: BoundField, pose: Pose, rows: NativeRows): boolean {
+  const { grid } = roles, { cells } = readTravelGrid(rows, grid), ground = new Set(field.floor);
+  const open = gatesOpen(field, pose), body = roles.body.split(',').map(Number);
+  for (const [cell, pixels] of cells) {
+    const stamp = tileId(pixels), door = field.doors[cell], mark = field.marks[cell];
+    const occupant = held(pose, cell);
+    if (door && (!open && occupant || !occupant && stamp !== (open ? door.open : door.shut))) return false;
+    if (mark && occupant && corners.some(i => pixels[i] !== Number(mark.split(',')[4]))) return false;
+    if (cell === pose.actor) {
+      if (pixels[4] !== grid.ink || pixels.filter(ink => ink === grid.ink).length !== roles.actorInkCount) return false;
+      if (door && corners.some(i => pixels[i] !== Number(door.open.split(',')[i]))) return false;
+    } else if (pose.pieces.includes(cell)) {
+      if (pixels.some((ink, i) => (!mark || !corners.includes(i)) && ink !== body[i])) return false;
+    } else if (!ground.has(cell)) {
+      if (stamp !== field.fixed[cell]) return false;
+    } else if (mark || cell === field.exit) {
+      if (stamp !== (mark ?? roles.exitStamp)) return false;
+    } else if (!door && pixels.some(ink => ink !== grid.floor)) return false;
+  }
+  return true;
+}
+
+export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inputs: readonly NativeCommand[],
+  remaining: number, retained?: BoundExchange): BoundExchangePlan | undefined {
+  if (remaining < 1 || inputs.length !== 4 || !inputs.every(input => roles.moves[input.action_ref])) return;
+  const scene = retained ?? bindExchangeField(roles, rows);
+  if (!scene || !matchesBoundExchange(roles, scene.field, scene.pose, rows)) return;
+  const { field, pose } = scene, ground = new Set(field.floor);
+  const doorCells = Object.keys(field.doors);
+  const moves = inputs.map(action => ({ action, delta: roles.moves[action.action_ref]!.delta }));
+  if (new Set(moves.map(move => move.delta.join(','))).size !== 4
+    || moves.some(({ delta: [dx, dy] }) => Math.abs(dx) + Math.abs(dy) !== roles.grid.pitch || !!dx === !!dy)) return;
+  type Node = { pose: Pose; depth: number; previous?: Node; action?: NativeCommand };
+  const queue: Node[] = [{ pose, depth: 0 }], seen = new Set([poseKey(pose)]);
+  for (let i = 0; i < queue.length && i < 7_500; i++) {
+    const state = queue[i]!, { pose: current, depth } = state;
+    if (current.actor === field.exit && depth > 0) {
+      const path: ExchangeStep[] = [];
+      for (let node: Node | undefined = state; node?.action; node = node.previous) path.push({ action: node.action, after: node.pose });
+      return { ...scene, steps: path.reverse().slice(0, maximumCommittedActions), roles };
+    }
+    if (depth >= remaining) continue;
+    const open = gatesOpen(field, current);
+    const allowed = (cell: string) => ground.has(cell) && (open || !field.doors[cell]);
+    for (const { action, delta } of moves) {
+      let target: string | undefined;
+      for (let beam = step(current.actor, delta); allowed(beam); beam = step(beam, delta)) {
+        if (current.pieces.includes(beam)) { target = beam; break; }
+      }
+      const landing = target ?? step(current.actor, delta);
+      if (!allowed(landing)) continue;
+      const next = { actor: landing, pieces: target ? current.pieces.map(piece => piece === target ? current.actor : piece) : current.pieces };
+      if (!gatesOpen(field, next) && doorCells.some(door => held(next, door))) continue;
+      const key = poseKey(next);
+      if (seen.has(key)) continue;
+      seen.add(key); queue.push({ pose: next, depth: depth + 1, previous: state, action });
+    }
+  }
 }
 
 export function chooseExchange(local: ObservedExchange | undefined, travel: ObservedTravel | undefined, rows: NativeRows): ExchangePlan | undefined {

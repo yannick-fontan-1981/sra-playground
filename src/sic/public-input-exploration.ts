@@ -34,7 +34,8 @@ import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindi
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { matchesPullCircuit, observePullCircuitBinding, planPullCircuit, provesPullCircuitDeadlock, witnessedPullCircuitReturn,
   type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
-import { assessExchange, chooseExchange, observeExchange, type ExchangePlan, type ObservedExchange } from './observed-exchange.ts';
+import { assessExchange, chooseExchange, matchesBoundExchange, observeExchange, planBoundExchange, rememberExchangeVictory,
+  type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
 import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
   contactPullReturn, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
 import { assessPressurePlan, choosePressureReserve, observePressureReserve, retainPressureReserve,
@@ -161,6 +162,9 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   pullCircuitRecovered?: true;
   pullCircuitRefuted?: true;
   exchange?: ObservedExchange;
+  exchangeTransfer?: ExchangeTransfer;
+  exchangeBinding?: BoundExchange;
+  exchangeRefuted?: true;
   pressureReserve?: PressureReserve;
   fallbackProjection?: FallbackProjectionMemory;
   fallbackTransfer?: FallbackLevelTransfer;
@@ -200,6 +204,7 @@ type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: st
   contactExperiment?: ContactExperiment;
   pullRoute?: readonly PullStep[];
   exchangePlan?: ExchangePlan;
+  boundExchangePlan?: BoundExchangePlan;
   markContact?: MarkContact;
   pressurePlan?: PressurePlan;
   clickFocus?: ObservedClickFocus;
@@ -560,6 +565,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
       ...(state.coverageTransfer?.epoch === epoch - 1 ? { coverageTransfer: state.coverageTransfer } : {}),
       ...(state.pullKnowledge ? { pullKnowledge: state.pullKnowledge } : {}),
+      ...(state.exchangeTransfer ? { exchangeTransfer: state.exchangeTransfer } : {}),
       ...(state.pushAccessMemory ? { pushAccessMemory: state.pushAccessMemory } : {}),
       ...(compartmentTransfer ? { compartmentTransfer } : {}), ...(captureTransfer?.proved ? { captureTransfer } : {}),
       ...(displayTransfer?.scored ? { displayTransfer } : {}), ...(orderedEntryTransfer ? { orderedEntryTransfer } : {}),
@@ -571,6 +577,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   }
   function acquireCoverageTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows) {
     if (state.epoch !== before.level_epoch || after.levels_completed <= before.levels_completed) return;
+    const exchange = rememberExchangeVictory(state.exchange, state.travel, rows, command, after.observation_ref);
+    if (exchange) state.exchangeTransfer = exchange;
     const win = rememberCoverageWin(state.coverage, state.travel, rows, command, before.level_epoch, after.observation_ref);
     if (win) {
       state.coverageTransfer = win;
@@ -586,6 +594,32 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const memory = rememberPushAccess(state.pushAccess, state.travel, { rows, ref: before.observation_ref });
       if (memory) state.pushAccessMemory = memory;
     }
+  }
+
+  function proposeBoundExchange(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
+    const { exchangeTransfer: roles } = state, current = state.epoch === observation.level_epoch;
+    if (!roles || current && state.exchangeRefuted) return null;
+    const plan = planBoundExchange(roles, rows, inputs, remaining, current ? state.exchangeBinding : undefined);
+    if (!plan) return null;
+    const ref = observation.observation_ref;
+    const evidence: [string, ...string[]] = [ref, roles.exchangeRef, roles.scoreRef, ...Object.values(roles.moves).map(move => move.ref)];
+    const target = pushAccessBox(plan.field.exit, roles.grid.pitch);
+    const actions = plan.steps.map(step => step.action);
+    const label = 'Reuse the observed exchange to position the weight and reach the exit';
+    const goal = { kind: 'compose_observed_exchange_access', scope: ref.split(':revision:', 1)[0]!,
+      subjects: [plan.field.exit, ...Object.keys(plan.field.marks)], parentObjective: completion,
+      satisfactionContract: 'verify_each_exchange_and_door_then_reach_the_exit' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
+    const id = `exchange-access:${need.id}`;
+    return { status: 'proposed', kind: publicInputExplorationId, actions, boundExchangePlan: plan,
+      source: explorationKey(observation, rows), candidates: inputs.map(commandKey), needId: need.id,
+      steps: plan.steps.map(step => ({ action: step.action, expected_after: pushAccessBox(step.after.actor, roles.grid.pitch) })),
+      binding: { observation_ref: ref, level_epoch: observation.level_epoch }, question: { reason: label, hypothesis_refs: evidence }, route_refs: evidence,
+      compositions: [{ id, observed: false, open_question: label, relations: [`contributes_to:${completion}`] }],
+      sicSituationCard: { strategy: goal.kind, mode: 'solving', need: label, situation: label, target, evidence },
+      sicLocalDecision: { strategy: goal.kind, objective: { id, label, parent: completion }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: completion, purpose: label,
+        evidence, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
   }
 
   async function acquireTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows, frames: readonly NativeRows[]) {
@@ -744,6 +778,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       if (access) return access;
       const circuit = proposePullCircuit(observation, rows, inputs, remaining);
       if (circuit) return circuit;
+      const exchange = proposeBoundExchange(observation, rows, inputs, remaining);
+      if (exchange) return exchange;
       if (state.epoch !== observation.level_epoch || !state.pressureReserve?.gate || !state.pressureReserve.bridge) return null;
       const proposed = await family.propose(observation, rows, inputs, remaining, execution);
       return proposed?.pressurePlan ? proposed : null;
@@ -1270,6 +1306,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
     },
     before(proposal, index, packet, observation) {
+      const boundExchange = proposal.boundExchangePlan;
+      if (boundExchange) {
+        const pose = index === 0 ? boundExchange.pose : boundExchange.steps[index - 1]!.after;
+        const admitted = (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
+          && matchesBoundExchange(boundExchange.roles, boundExchange.field, pose, packet.frame_rows);
+        return { admitted, reason: admitted ? 'exchange_premises_witnessed' : 'exchange_premises_changed' };
+      }
       const circuit = proposal.pullCircuitPlan;
       if (circuit) {
         const pose = index === 0 ? circuit.start : circuit.steps[index - 1]!.after;
@@ -1326,6 +1369,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     async after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      const boundExchange = proposal.boundExchangePlan;
+      if (boundExchange) {
+        const matched = matchesBoundExchange(boundExchange.roles, boundExchange.field, boundExchange.steps[index]!.after, afterRows);
+        return { matched: scored || matched, seal_prefix: scored || !matched,
+          reason: scored ? 'official_boundary' : matched ? 'exchange_step_confirmed' : 'exchange_prediction_refuted' };
+      }
       const circuit = proposal.pullCircuitPlan;
       if (circuit) {
         const matched = !!witnessedPullCircuitReturn(circuit, index, afterRows);
@@ -1468,6 +1517,19 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     async record(before, after, command, rows, afterRows, proposal, index, frames) {
+      const boundExchange = proposal.boundExchangePlan;
+      if (boundExchange) {
+        enterEpoch(before.level_epoch);
+        const pose = boundExchange.steps[index]!.after;
+        if (after.levels_completed === before.levels_completed) {
+          if (matchesBoundExchange(boundExchange.roles, boundExchange.field, pose, afterRows)) state.exchangeBinding = { field: boundExchange.field, pose };
+          else {
+            delete state.exchangeBinding;
+            state.exchangeRefuted = true;
+          }
+        }
+        return { events: [] };
+      }
       const circuit = proposal.pullCircuitPlan;
       if (circuit) {
         enterEpoch(before.level_epoch);

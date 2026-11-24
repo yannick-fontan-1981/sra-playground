@@ -4,6 +4,8 @@ import { compileLevel, equal, initialState, stepWorld } from '../experiments/sin
 import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
 import { compileLevel as compilePullLevel, initialState as initialPullState, stepDetailed as stepPullWorld } from '../experiments/sinking-star-ss03/src/core.ts';
 import { SS03_LEVELS } from '../experiments/sinking-star-ss03/src/levels.ts';
+import { compileLevel as compileExchangeLevel, initialState as initialExchangeState, stepDetailed as stepExchangeWorld } from '../experiments/sinking-star-ss04/src/core.ts';
+import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -31,7 +33,7 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move', SS04: 'move' };
 
 function consecutiveStonePushes(level, tickets) {
   const world = compileLevel(SS02_LEVELS[level - 1]);
@@ -120,6 +122,30 @@ function consecutiveStonePulls(level, tickets) {
   return pairs;
 }
 
+function measuredExchangeSeries(level, tickets) {
+  const world = compileExchangeLevel(SS04_LEVELS[level - 1]);
+  let state = initialExchangeState(world), previous;
+  const mixed = [];
+  for (const [index, ticket] of tickets.entries()) {
+    if (ticket.resets !== previous?.resets) state = initialExchangeState(world);
+    const detail = stepExchangeWorld(world, state, Number(ticket.action.slice(6)));
+    const kind = detail.phases[0]?.kind;
+    if (level === 2) assert.ok(kind === 'walk' || kind === 'swap', 'SS04 L2 used a blocked or speculative action');
+    if (kind === 'swap' && previous?.kind === 'walk' && previous.revision === ticket.decisionRevision && ticket.actionIndex > 0) {
+      assert.ok(detail.phases[0].moves.some(move => move.actor === 'stone' && equal(move.to, state.hero)), 'Expected a real stone exchange');
+      mixed.push({ kind: 'walk then swap', first: index, last: index + 1 });
+    }
+    previous = { kind, revision: ticket.decisionRevision, resets: ticket.resets };
+    state = detail.state;
+  }
+  assert.equal(state.complete, true, 'Executed SS04 L' + level + ' tickets do not reproduce the official goal');
+  if (level === 2) {
+    assert.ok(mixed.length, 'SS04 L2 lost continuous positioning into an exchange');
+    assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L2 did not hold the pressure control');
+  }
+  return mixed;
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -128,7 +154,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 2 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -203,8 +229,14 @@ export function checkRun(run) {
       assert.ok(issued.length <= 200 && groups.size <= 24, 'SS03 L8 lost the guarded press relay');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L8 reset while building the file');
     }
+    if (code === 'SS04' && row.level === 2) {
+      // The exploratory route took 119 commands and 115 decisions. Transferred exchanges take 54 and 4.
+      assert.ok(issued.length <= 60 && groups.size <= 5, 'SS04 L2 lost the direct mixed exchange route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS04 L2 reset during the exchange route');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
-      : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued) : [];
+      : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
+      : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -235,6 +267,7 @@ function main() {
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
+      ['l-axe-violet', 'SS04', '2', '140'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -248,7 +281,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03', 'SS04']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
