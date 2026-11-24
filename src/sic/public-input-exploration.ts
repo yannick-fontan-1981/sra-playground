@@ -35,7 +35,7 @@ import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindi
 import { matchesPullCircuit, observePullCircuitBinding, planPullCircuit, provesPullCircuitDeadlock, witnessedPullCircuitReturn,
   type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
 import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, observeExchangeThreat,
-  planBoundExchange, rememberExchangeVictory, type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeThreat,
+  planBoundExchange, rememberExchangeVictory, witnessedExchangeStep, type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeThreat,
   type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
 import { bindContactPullSeries, checkContactPrediction, chooseContactExperiment, contactExperimentAt, contactPullPremise,
   contactPullReturn, observeContactExperiment, type ContactExperiment, type ContactMemory } from './contact-transfer.ts';
@@ -638,7 +638,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       ...(plan.field.threat?.evidence ?? []), ...(plan.field.mechanismRefs ?? []), ...transmissionRefs];
     const target = pushAccessBox(plan.bridgeTarget ?? plan.pressureTarget ?? plan.field.exit, roles.grid.pitch);
     const actions = plan.steps.map(step => step.action);
-    const label = plan.bridgeTarget ? 'Use the observed press to turn a weight into a foothold'
+    const label = plan.revealControl ? 'Test the visible control to identify its hidden mechanism'
+      : plan.bridgeTarget ? 'Use the observed press to turn a weight into a foothold'
       : plan.pressureTarget ? 'Place the movable weight on the matching control to hold the passage open'
       : plan.field.threat ? 'Reach the exit through exchanges whose arrivals avoid the observed threat'
       : 'Reach the exit using the verified exchange route';
@@ -1425,7 +1426,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
       const boundExchange = proposal.boundExchangePlan;
       if (boundExchange) {
-        const matched = matchesBoundExchange(boundExchange.roles, boundExchange.field, boundExchange.steps[index]!.after, afterRows);
+        const matched = !scored && !!witnessedExchangeStep(boundExchange, index, afterRows, after.observation_ref);
         return { matched: scored || matched, seal_prefix: scored || !matched,
           reason: scored ? 'official_boundary' : matched ? 'exchange_step_confirmed' : 'exchange_prediction_refuted' };
       }
@@ -1575,9 +1576,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const boundExchange = proposal.boundExchangePlan;
       if (boundExchange) {
         enterEpoch(before.level_epoch);
-        const pose = boundExchange.steps[index]!.after;
         if (after.levels_completed === before.levels_completed) {
-          if (matchesBoundExchange(boundExchange.roles, boundExchange.field, pose, afterRows)) state.exchangeBinding = { field: boundExchange.field, pose };
+          const witnessed = witnessedExchangeStep(boundExchange, index, afterRows, after.observation_ref);
+          if (witnessed) state.exchangeBinding = witnessed;
           else {
             delete state.exchangeBinding;
             state.exchangeRefuted = true;

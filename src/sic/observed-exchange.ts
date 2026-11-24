@@ -35,10 +35,11 @@ type Door = { shut: string; open: string; controls: string[]; bridge?: BridgeEff
 type BoundField = { floor: string[]; marks: Record<string, string>; doors: Record<string, Door>;
   exit: string; fixed: Record<string, string>; threat?: ExchangeThreat; transmission?: string[];
   reflectors?: Record<string, Record<string, NativePoint>>; coveredMarks?: Record<string, number[]>; mechanismRefs?: string[];
-  bridges?: Record<string, string> };
+  bridges?: Record<string, string>; unresolvedControls?: string[] };
 export type BoundExchange = { field: BoundField; pose: Pose };
 type ExchangeStep = { action: NativeCommand; after: Pose };
-export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[]; pressureTarget?: string; bridgeTarget?: string };
+export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[];
+  pressureTarget?: string; bridgeTarget?: string; revealControl?: string };
 
 const point = (cell: string) => cell.split(',').map(Number) as [number, number];
 const step = (cell: string, [dx, dy]: NativePoint) => {
@@ -323,10 +324,11 @@ function bindPressureDoor(pixels: number[], marks: BoundField['marks'], roles: E
   if (matches.size === 1) return matches.values().next().value;
 }
 
-function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: ExchangeThreat): BoundExchange | undefined {
+function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: ExchangeThreat,
+  prior?: BoundField, actorHint?: string): BoundExchange | undefined {
   const { grid } = roles, { cells, pieces } = readTravelGrid(rows, grid);
-  if (pieces.length !== 1 || grid.pitch !== 3) return;
-  const actor = pieces[0]!, floor: string[] = [], bodies: string[] = [], exits: string[] = [], threats: string[] = [];
+  if (grid.pitch !== 3 || (actorHint ? pieces.some(cell => cell !== actorHint) : pieces.length !== 1)) return;
+  const actor = actorHint ?? pieces[0]!, floor: string[] = [], bodies: string[] = [], exits: string[] = [], threats: string[] = [];
   const marks: BoundField['marks'] = {}, doors: BoundField['doors'] = {}, fixed: BoundField['fixed'] = {};
   const transmission: string[] = [];
   const reflectors: NonNullable<BoundField['reflectors']> = {}, coveredMarks: Record<string, number[]> = {};
@@ -334,9 +336,20 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
   const profiles = reflectionProfiles(roles.reflections ?? []);
   const unclassified = new Map<string, number[]>();
   const shutters = new Map<string, number>();
+  const knownBridges: Record<string, string> = {};
+  const bridgeMaterial = new Map(roles.openings?.flatMap(sample => sample.bridge ? [[sample.bridge.support, sample.bridge.water]] : []) ?? []);
+  const bodyStamp = roles.body.split(',').map(Number), threatStamp = threat?.stamp.split(',').map(Number);
   for (const [cell, pixels] of cells) {
     const stamp = tileId(pixels), rim = pixels[0]!;
-    if (cell === actor || stamp === roles.body || stamp === roles.exitStamp || stamp === threat?.stamp || pixels.every(ink => ink === grid.floor)) {
+    const knownMark = prior?.marks[cell];
+    if (knownMark) {
+      const hasBody = pixels.every((ink, i) => corners.includes(i) || ink === bodyStamp[i]);
+      const hasThreat = !!threatStamp && pixels.every((ink, i) => corners.includes(i) || ink === threatStamp[i]);
+      if (stamp !== knownMark && cell !== actor && !hasBody && !hasThreat) return;
+      marks[cell] = knownMark;
+      if (hasBody) bodies.push(cell);
+      if (hasThreat) threats.push(cell);
+    } else if (cell === actor || stamp === roles.body || stamp === roles.exitStamp || stamp === threat?.stamp || pixels.every(ink => ink === grid.floor)) {
       floor.push(cell);
       if (stamp === roles.body) bodies.push(cell);
       if (stamp === threat?.stamp) threats.push(cell);
@@ -344,6 +357,10 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
     } else if (stamp === roles.wall) fixed[cell] = stamp;
     else if (isUniform(pixels) && roles.transmission?.[stamp]) {
       fixed[cell] = stamp;
+      transmission.push(cell);
+    } else if (prior && bridgeMaterial.get(stamp) === prior.fixed[cell] && bridgeMaterial.has(stamp)) {
+      fixed[cell] = prior.fixed[cell]!;
+      knownBridges[cell] = stamp;
       transmission.push(cell);
     } else {
       const mark = markProfile(pixels, grid.pitch, grid.floor);
@@ -376,10 +393,16 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
   for (const [cell, rim] of shutters) {
     doors[cell] = { shut: tileId(cells.get(cell)), open: tileId(Array.from({ length: 9 }, (_, index) => corners.includes(index) ? rim : grid.floor)), controls };
   }
-  if (controls.some(control => !Object.values(doors).some(door => door.controls.includes(control)))) return;
+  const unresolvedControls = controls.filter(control => !Object.values(doors).some(door => door.controls.includes(control)));
+  if (unresolvedControls.length && !Object.values(doors).some(door => door.controls.length)) return;
+  for (const control of unresolvedControls) {
+    const mark = marks[control]!.split(',').map(Number);
+    const pattern = roles.openings?.[0];
+    if (pattern) coveredMarks[control] = pattern.covered.map(ink => ink === pattern.colors[0] ? mark[1]! : mark[4]!);
+  }
   const threatBinding = threat && threats.length && threats.every(a => threats.every(b => !adjacent(a, b, grid.pitch))) ? threat : undefined;
   if (threats.length && !threatBinding) return;
-  const bridges: Record<string, string> = {};
+  const bridges: Record<string, string> = { ...knownBridges };
   for (const [cell, door] of Object.entries(doors)) {
     if (!door.bridge) continue;
     const landing = step(cell, door.bridge.delta);
@@ -391,8 +414,23 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
       ...(Object.keys(coveredMarks).length ? { coveredMarks } : {}),
       ...(mechanismRefs.size ? { mechanismRefs: [...mechanismRefs] } : {}),
       ...(Object.keys(bridges).length ? { bridges } : {}),
+      ...(unresolvedControls.length ? { unresolvedControls } : {}),
       ...(threatBinding ? { threat: threatBinding } : {}) },
-    pose: { actor, pieces: bodies, ...(threatBinding ? { threats } : {}) } };
+    pose: { actor, pieces: bodies, ...(threatBinding ? { threats } : {}),
+      ...(Object.keys(knownBridges).length ? { bridges: Object.keys(knownBridges) } : {}) } };
+}
+
+export function witnessedExchangeStep(plan: BoundExchangePlan, index: number, rows: NativeRows, ref: string): BoundExchange | undefined {
+  const projected = plan.steps[index]!.after;
+  if (!plan.revealControl || index !== plan.steps.length - 1) {
+    if (matchesBoundExchange(plan.roles, plan.field, projected, rows)) return { field: plan.field, pose: projected };
+    return;
+  }
+  if (!held(projected, plan.revealControl)) return;
+  const rebound = bindExchangeField(plan.roles, rows, plan.field.threat, plan.field, projected.actor);
+  if (!rebound || rebound.field.unresolvedControls?.includes(plan.revealControl)
+    || !matchesBoundExchange(plan.roles, rebound.field, rebound.pose, rows)) return;
+  return { ...rebound, field: { ...rebound.field, mechanismRefs: [...new Set([...rebound.field.mechanismRefs ?? [], ref])] } };
 }
 
 function held(pose: Pose, cell: string) {
@@ -458,7 +496,9 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
   if (new Set(moves.map(move => move.delta.join(','))).size !== 4
     || moves.some(({ delta: [dx, dy] }) => Math.abs(dx) + Math.abs(dy) !== roles.grid.pitch || !!dx === !!dy)) return;
   type Node = { pose: Pose; depth: number; previous?: Node; action?: NativeCommand };
-  const pressure = [...new Set(Object.values(field.doors).flatMap(door => door.controls.length > 1 ? door.controls : []))];
+  const accessDoors = Object.values(field.doors).filter(door => !door.bridge);
+  const pressure = accessDoors.some(door => door.controls.length > 1)
+    ? [...new Set(accessDoors.flatMap(door => door.controls))] : [];
   const bridgeCount = Object.keys(field.bridges ?? {}).length;
   const capacity = pressure.length + bridgeCount;
   const placed = (value: Pose) => pressure.filter(mark => value.pieces.includes(mark) || value.threats?.includes(mark)).length
@@ -474,10 +514,13 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
     if (!queue) break;
     const state = queue.nodes[queue.head++]!, { pose: current, depth } = state;
     if (seen.get(poseKey(current)) !== depth) continue;
-    if (current.actor === field.exit && depth > 0) {
+    const reveal = field.unresolvedControls?.find(cell => !held(pose, cell) && held(current, cell));
+    if (depth > 0 && (current.actor === field.exit || reveal)) {
       const path: ExchangeStep[] = [];
       for (let node: Node | undefined = state; node?.action; node = node.previous) path.push({ action: node.action, after: node.pose });
       path.reverse();
+      if (reveal) return { ...scene, steps: path.slice(0, maximumCommittedActions), roles, pressureTarget: reveal,
+        ...(path.length <= maximumCommittedActions ? { revealControl: reveal } : {}) };
       const required = new Set(path.flatMap(({ after }) => field.doors[after.actor]?.controls ?? []));
       let pressureTarget: string | undefined, bridgeTarget: string | undefined;
       for (const { after } of path) {

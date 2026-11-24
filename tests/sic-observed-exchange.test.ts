@@ -3,7 +3,7 @@ import test from 'node:test';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
 import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, observeExchangeThreat,
-  planBoundExchange, rememberExchangeVictory,
+  planBoundExchange, rememberExchangeVictory, witnessedExchangeStep,
   type BoundExchange, type ExchangePlan, type ExchangeTransfer, type ObservedExchange } from '../src/sic/observed-exchange.ts';
 import { observeTravel, type ObservedTravel } from '../src/sic/observed-travel-frontier.ts';
 
@@ -284,4 +284,39 @@ for (const mirror of [false, true]) test(`exchange transfers to pressure circuit
   assert.equal(board.levelsCompleted, bridgeScore + 1);
   assert.equal(bridgeCount, 2);
   assert.equal(holdsWithBothRoles, true);
+
+  board = await game.dispatch({ type: 'load', code: 'SS04', level: 8 });
+  const finalScore = board.levelsCompleted;
+  const hidden = planBoundExchange(roles, frame(board.frame), inputs, 100, undefined, threat);
+  assert.ok(hidden?.revealControl);
+  assert.equal(Object.keys(hidden.field.reflectors ?? {}).length, 2);
+  actions = 0;
+  binding = undefined;
+  let observedReveal = false, tookReflectedRoute = false;
+  while (board.levelsCompleted === finalScore && actions < 100) {
+    const plan = planBoundExchange(roles, frame(board.frame), inputs, 100 - actions, binding, threat);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16, `No plan at action ${actions}`);
+    let prior = plan.pose;
+    for (const [index, step] of plan.steps.entries()) {
+      const before = frame(board.frame);
+      board = await game.dispatch({ type: 'action', actionId: map.get(step.action.action_ref)! });
+      actions++;
+      assert.notEqual(board.state, 'GAME_OVER');
+      if (board.levelsCompleted > finalScore) break;
+      const witnessed = witnessedExchangeStep(plan, index, frame(board.frame), `final-return:${actions}`);
+      assert.ok(witnessed, `Unwitnessed action ${actions}${plan.revealControl ? ' in discovery series' : ''}`);
+      if (plan.revealControl && index === plan.steps.length - 1) {
+        assert.equal(witnessedExchangeStep(plan, index, before, 'unconfirmed'), undefined);
+        assert.equal(Object.keys(witnessed.field.doors).length - Object.keys(plan.field.doors).length, 2);
+        assert.equal(witnessed.pose.bridges?.length, 1);
+        observedReveal = true;
+      }
+      const [fromX, fromY] = prior.actor.split(','), [toX, toY] = witnessed.pose.actor.split(',');
+      tookReflectedRoute ||= fromX !== toX && fromY !== toY;
+      binding = witnessed;
+      prior = witnessed.pose;
+    }
+  }
+  assert.equal(board.levelsCompleted, finalScore + 1);
+  assert.ok(observedReveal && tookReflectedRoute);
 });
