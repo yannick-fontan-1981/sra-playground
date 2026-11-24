@@ -225,6 +225,7 @@ function measuredCarrySeries(level, tickets) {
   let openedWithWeight = false, reflectedWeight = false;
   let separatedWeight = false, crossedOpenGate = false;
   let boardedFrom, crossings = 0, repositioned = 0;
+  let firstReflection, heldFinalGate = false;
   const bank = (from, to) => {
     const queue = [from], seen = new Set([from.y * 20 + from.x]);
     for (const point of queue) {
@@ -289,6 +290,17 @@ function measuredCarrySeries(level, tickets) {
         series.push({ kind: 'slide the same floating support', first: index, last: index + 1 });
       }
     }
+    if (level === 8 && phase?.kind === 'reflect' && phase.moves.some(move => move.actor === 'hero')) {
+      firstReflection ??= index + 1;
+      const gate = world.gates.find(item => item.circuit === 'final');
+      const mark = world.circuits.find(item => item.id === gate.circuit).buttons[0];
+      if (phase.paths?.some(path => path.some(cell => equal(cell, gate.at)))) {
+        assert.ok(continued, 'SS05 L8 lost the continuous approach to the final reflection');
+        heldFinalGate ||= [...state.stones, ...state.monsters].some(cell => equal(cell, mark))
+          && !state.gateClosed[world.gates.indexOf(gate)];
+      }
+      series.push({ kind: 'reflect onto a supported landing', first: index + 1, last: index + 1 });
+    }
     if (level === 3 && state.monsters.length - result.state.monsters.length === 2) {
       assert.ok(continued && result.phases.some(phase => phase.kind === 'combat'), 'SS05 L3 lost the deliberate continuous contact');
       series.push({ kind: 'compose the two moving objects', first: index, last: index + 1 });
@@ -329,6 +341,11 @@ function measuredCarrySeries(level, tickets) {
     assert.ok(crossings >= 2 && repositioned >= 2, 'SS05 L7 must reposition and cross both supports');
     return series;
   }
+  if (level === 8) {
+    assert.ok(firstReflection <= 22 && series.length >= 2, 'SS05 L8 delayed or abandoned the verified reflections');
+    assert.ok(heldFinalGate, 'SS05 L8 must keep the final gate open with an object while reflecting through');
+    return series;
+  }
   if (level === 3 || level === 4) {
     assert.equal(series.length, 1, 'SS05 did not execute the expected object composition');
     return series;
@@ -346,7 +363,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 7 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -456,7 +473,7 @@ export function checkRun(run) {
     }
     if (code === 'SS05') {
       // The earlier run used 46 isolated actions on L1 and first moved a weight on L2 at action 119.
-      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24], [38, 20], [90, 40]][row.level - 1];
+      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24], [38, 20], [90, 40], [55, 30]][row.level - 1];
       assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
@@ -494,7 +511,7 @@ function main() {
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
-      ['local-carry', 'SS05', '7', '155'],
+      ['local-carry', 'SS05', '8', '155'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

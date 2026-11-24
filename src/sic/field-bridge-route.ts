@@ -19,7 +19,8 @@ const shift = (cell: Cell, [dx, dy]: NativePoint, pitch: number) => {
   return `${x + dx * pitch},${y + dy * pitch}`;
 };
 
-export function projectBridge(chart: BridgeChart, pose: BridgePose, direction: NativePoint): BridgePose | undefined {
+export function projectBridge(chart: BridgeChart, pose: BridgePose, direction: NativePoint,
+  conversions?: { weights: boolean; hazards: boolean }): BridgePose | undefined {
   const toward = (cell: Cell) => shift(cell, direction, chart.pitch), actor = toward(pose.actor);
   const ground = (cell: Cell) => chart.floor.has(cell) || pose.supports.includes(cell);
   if (!ground(actor)) return;
@@ -34,15 +35,27 @@ export function projectBridge(chart: BridgeChart, pose: BridgePose, direction: N
     return displacing;
   };
   const subjects = [...pose.bodies, ...pose.hazards];
-  if (pose.bodies.some(cell => inScope(cell) && chart.water.has(toward(cell)) && !ground(toward(cell)))) return;
-  const movers = resolve([pose.actor, ...subjects], new Set([pose.actor, ...subjects.filter(cell => inScope(cell) && ground(toward(cell)))]));
+  const entersWater = (cell: Cell) => inScope(cell) && chart.water.has(toward(cell)) && !ground(toward(cell));
+  if (!conversions?.weights && pose.bodies.some(entersWater)) return;
+  const converts = (cell: Cell) => chart.water.has(toward(cell))
+    && (pose.bodies.includes(cell) ? conversions?.weights : conversions?.hazards);
+  const movers = resolve([pose.actor, ...subjects], new Set([pose.actor, ...subjects.filter(cell =>
+    inScope(cell) && (ground(toward(cell)) || converts(cell)))]));
   if (!movers.has(pose.actor)) return;
   const land = (cell: Cell) => movers.has(cell) ? toward(cell) : cell;
-  const hazards = pose.hazards.map(land);
-  if (hazards.some(cell => distance(actor, cell) <= chart.pitch)) return;
   const shifts = resolve(pose.supports, new Set(pose.supports.filter(cell =>
     cell !== pose.actor && cell !== actor && inScope(cell) && chart.water.has(toward(cell)))));
-  return { actor, bodies: pose.bodies.map(land), hazards, supports: pose.supports.map(cell => shifts.has(cell) ? toward(cell) : cell) };
+  const supports = pose.supports.map(cell => shifts.has(cell) ? toward(cell) : cell);
+  const bodies = pose.bodies.map(land);
+  if (conversions) for (const cell of [...bodies]) {
+    if (chart.floor.has(cell) || supports.includes(cell)) continue;
+    if (!conversions.weights || !chart.water.has(cell)) return;
+    supports.push(cell);
+    bodies.splice(bodies.indexOf(cell), 1);
+  }
+  const hazards = pose.hazards.map(land).filter(cell => !conversions?.hazards || chart.floor.has(cell) || supports.includes(cell));
+  if (hazards.some(cell => distance(actor, cell) <= chart.pitch)) return;
+  return { actor, bodies, hazards, supports };
 }
 
 export function findBridgeRoute(chart: BridgeChart, moves: readonly { action: NativeCommand; delta: NativePoint }[],

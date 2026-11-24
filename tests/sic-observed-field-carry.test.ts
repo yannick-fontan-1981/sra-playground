@@ -12,7 +12,7 @@ import { lostResourceCoverage } from '../src/sic/resource-reserve.ts';
 import { admitFieldCarry, checkFieldCarryReturn, observeFieldCarry, planFieldCarry,
   type FieldCarryMemory, type FieldCarryPlan } from '../src/sic/observed-field-carry.ts';
 
-for (const mirrored of [false, true]) test(`carry and object composition transfer across seven levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, async () => {
+for (const mirrored of [false, true]) test(`carry and object composition transfer across eight levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, async () => {
   const transform = (world: World, state: State) => {
     const rows = renderWorld(world, state);
     if (mirrored) for (const [index, point] of state.monsters.entries()) {
@@ -29,10 +29,11 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
   const inputs = [...commands].map(([action_ref]) => ({ action_ref, data: {} }));
   let memory: FieldCarryMemory | undefined;
   let learnedSupport: string | undefined;
-  for (let level = 0; level < 7; level++) {
+  for (let level = 0; level < 8; level++) {
     const world = compileLevel(SS05_LEVELS[level]!);
     let current = initialState(world), marks: FieldCarryPlan['marks'] | undefined;
     let actions = 0, firstCarry = 0, continuousCarry = false, firstBody: number | undefined, compositions = 0;
+    let reflectedEarly = false, heldTerminal = false;
     if (memory) {
       delete memory.supportAt;
       delete memory.seenFloor;
@@ -136,6 +137,42 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
       assert.ok(route?.fieldCarryPlan?.reflectiveRoute);
       assert.equal(route.fieldCarryPlan.gateProbe, undefined);
     }
+    if (level === 7 && !mirrored) for (const hasSupportBypass of [true, false]) {
+      const terrain = [...world.terrain];
+      if (!hasSupportBypass) for (const [x, y] of [[10, 16], [11, 16], [12, 16], [9, 17], [9, 18],
+        [13, 18], [10, 19], [11, 19], [12, 19], [13, 19]] as const) terrain[x + 20 * y] = '#';
+      const layout = { ...world, terrain }, initial = initialState(layout);
+      const inputNames = inputs.map(input => input.action_ref);
+      const frame = (state: State, revision: number) => measureNativeObservation({
+        frame_rows: transform(layout, state), frame_hash: `reserve:${revision}`, level: 8, levels_completed: 7,
+        state: 'NOT_FINISHED', available_action_refs: inputNames,
+      }, revision);
+      const family = createSicPublicInputExploration();
+      const first = planFieldCarry(memory, transform(layout, initial), inputs, 'fixture', 90);
+      assert.ok(first);
+      let state = initial, revision = 1, observation = await frame(initial, revision);
+      family.restore({ ...family.state!(), epoch: observation.level_epoch, fieldCarry: memory!, fieldCarryMarks: first.marks });
+      const depletion = [1, 4, 4, 1, 1, 3, 3, 1, 3, 1, 1, 1, 1, 1, 1, 4, 4, 4, 4, 4, 5,
+        2, 4, 4, 4, 1, 4, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3];
+      for (const id of depletion) {
+        const next = stepDetailed(layout, state, id).state, observed = await frame(next, ++revision);
+        assert.equal(next.dead, false);
+        await family.observePublicOutcome!(observation, observed, inputs.find(input => commands.get(input.action_ref) === id)!,
+          transform(layout, state), transform(layout, next));
+        state = next;
+        observation = observed;
+      }
+      assert.equal(state.stones.length, 1);
+      assert.equal(state.monsters.length, 1);
+      assert.equal(family.requestedStopReason!(observation), hasSupportBypass ? null : sicObservedWeightShortage);
+      if (!hasSupportBypass) {
+        const reset = await frame(initial, ++revision), board = transform(layout, initial);
+        const retained = family.stateAfterLevelReset!(reset, board, undefined, sicObservedWeightShortage);
+        assert.ok(retained);
+        family.restore(retained);
+        assert.ok((await family.proposeInGroup!(observedPressureRecoveryGroup, reset, board, inputs, 100))?.fieldCarryPlan?.bridge?.linked);
+      }
+    }
     while (!current.complete && actions < 120) {
       const visible = transform(world, current), entry = `entry:${level}:${actions}`;
       const plan = planFieldCarry(memory, visible, inputs, entry, 120 - actions, marks)
@@ -155,10 +192,17 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
         const before = transform(world, current);
         assert.ok(admitFieldCarry(plan, index, before), `Unadmitted step at level ${level + 1}, action ${actions + 1}, ${plan.label}`);
         const detail = stepDetailed(world, current, commands.get(step.action.action_ref)!);
-        if (detail.state.monsters.length < current.monsters.length) {
+        if (level === 2 && detail.state.monsters.length < current.monsters.length) {
           assert.equal(plan.composition?.at, index);
           assert.equal(current.monsters.length - detail.state.monsters.length, 2);
           compositions++;
+        }
+        if (level === 7) {
+          const terminal = world.gates.find(gate => gate.circuit === 'final')!;
+          const mark = world.circuits.find(circuit => circuit.id === terminal.circuit)!.buttons[0]!;
+          const on = ({ x, y }: { x: number; y: number }) => x === mark.x && y === mark.y;
+          reflectedEarly ||= detail.phases[0]?.kind === 'reflect' && actions < 23;
+          heldTerminal ||= !on(detail.state.hero) && [...detail.state.stones, ...detail.state.monsters].some(on);
         }
         if (level === 3 && detail.state.monsters.some(({ x, y }) => world.buttons.some(button => button.x === x && button.y === y))
           && !current.monsters.some(({ x, y }) => world.buttons.some(button => button.x === x && button.y === y))) {
@@ -210,6 +254,7 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
       }
     }
     assert.ok(current.complete);
+    if (level === 7) assert.ok(reflectedEarly && heldTerminal);
     if (level === 0) learnedSupport = memory?.support;
     if (level === 2 || level === 3) assert.equal(compositions, 1);
     else assert.ok(continuousCarry);

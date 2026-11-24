@@ -5,6 +5,7 @@ export function findCompositionFrontier<Pose, Action>(options: {
   isComposition: (before: Pose, after: Pose) => boolean;
   depth: number;
   limit: number;
+  onLimit?: () => void;
 }): { action: Action; after: Pose }[] | undefined {
   type Step = { action: Action; after: Pose };
   type Node = { pose: Pose; depth: number; trail?: { step: Step; previous: Node } };
@@ -12,7 +13,10 @@ export function findCompositionFrontier<Pose, Action>(options: {
   const seen = new Set([options.key(options.start)]);
   for (let index = 0; index < queue.length && index < options.limit; index++) {
     const node = queue[index]!;
-    if (node.depth >= options.depth) continue;
+    if (node.depth >= options.depth) {
+      options.onLimit?.();
+      continue;
+    }
     for (const step of options.successors(node.pose)) {
       if (options.isComposition(node.pose, step.after)) {
         const path = [step];
@@ -20,7 +24,11 @@ export function findCompositionFrontier<Pose, Action>(options: {
         return path.reverse();
       }
       const key = options.key(step.after);
-      if (seen.has(key) || queue.length >= options.limit) continue;
+      if (seen.has(key)) continue;
+      if (queue.length >= options.limit) {
+        options.onLimit?.();
+        continue;
+      }
       seen.add(key);
       queue.push({ pose: step.after, depth: node.depth + 1, trail: { step, previous: node } });
     }

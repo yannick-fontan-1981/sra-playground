@@ -1,6 +1,7 @@
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { findCompositionFrontier } from './composition-frontier.ts';
 import { findBridgeRoute, projectBridge, type BridgeChart, type BridgePose } from './field-bridge-route.ts';
+import { findLinkedRoute } from './field-linked-route.ts';
 import { objectRelations } from './object-composition.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { lostResourceCoverage } from './resource-reserve.ts';
@@ -37,7 +38,7 @@ export type FieldCarryPlan = {
   reflectiveRoute?: true;
   routeGates?: Gate[];
   gateProbe?: true;
-  bridge?: { key: string; probeAt?: number };
+  bridge?: { key: string; probeAt?: number; linked?: true; canSpend?: boolean };
 };
 
 const pitch = 3;
@@ -141,7 +142,8 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
     if (bodyCore && (key === memory.body || marks[cell])) {
       bodies.push(cell); ground.add(cell); continue;
     }
-    if (marks[cell] && corners.every(index => pixels[index] === marks[cell]![1])) {
+    if (marks[cell] && corners.filter(i => pixels[i] === marks[cell]![1]).length >= 3
+      && corners.every(i => [marks[cell]![1], marks[cell]![4]].includes(pixels[i]!))) {
       covered.add(cell); other.add(cell); ground.add(cell); continue;
     }
     if (marks[cell] && axes.every(i => pixels[i] === marks[cell]![i]) && pixels[4] === marks[cell]![4]) {
@@ -207,7 +209,10 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
     const linkedGroup = match.length > 1 && match.every(cell => marks[cell]![4] === marks[match[0]!]![4]);
     if (match.length === 1 || linkedGroup) {
       const occupied = match.filter(mark => covered.has(mark) || bodies.includes(mark));
-      const closed = center !== floor && (!marks[at] || center !== marks[at]![4]);
+      const previewInk = memory.mirror?.previewInk;
+      const showsLanding = center === previewInk && axes.some(i => pixels[i] === previewInk);
+      if (showsLanding) preview.add(at);
+      const closed = center !== floor && !showsLanding && (!marks[at] || center !== marks[at]![4]);
       gates.push({ at, marks: match.sort(), occupied, closed,
         opensWhenCovered: barrierShape && match.length > 1 || closed !== (occupied.length === match.length),
         returns: memory.gateReturns?.[at] ?? {} });
@@ -327,10 +332,11 @@ function project(scene: Scene, pose: Pose, memory: FieldCarryMemory, direction: 
   return { actor, bodies: pose.bodies.map(cell => moving.has(cell) ? shift(cell, direction) : cell) };
 }
 
-function projectReflection(scene: Scene, pose: Pose, wall: number): Pose | undefined {
+function projectReflection(scene: Scene, pose: Pose, wall: number, openWater?: ReadonlySet<Cell>): Pose | undefined {
   const clear = (cell: Cell) => {
     const pixels = scene.cells.get(cell);
-    return gateOpen(scene, pose, cell) && (scene.floor.has(cell) || pixels && pixels[0] !== wall && pixels.every(v => v === pixels[0]));
+    return gateOpen(scene, pose, cell) && (scene.floor.has(cell) || openWater?.has(cell)
+      || pixels && pixels[0] !== wall && pixels.every(v => v === pixels[0]));
   };
   const occupants = new Set([pose.actor, ...pose.bodies]), transfers = new Map<Cell, Cell>(), rayCells = new Set<Cell>();
   for (const mirror of scene.mirrors) for (const [index, from] of mirror.arms.entries()) {
@@ -406,6 +412,8 @@ function fieldAfterConsumption(consumption: FieldResourceConsumption, current: F
 
 export function assessFieldResourceLoss(consumption: FieldResourceConsumption, current: FieldCarryMemory,
   rows: NativeRows, available: readonly string[], marks?: Marks): FieldResourceLoss | undefined {
+  const linked = assessLinkedResourceLoss(consumption, current, rows, available, marks);
+  if (linked) return linked;
   const observed = fieldAfterConsumption(consumption, current, rows, available, marks);
   if (!observed) return;
   const inputs = available.map(action_ref => ({ action_ref, data: {} }));
@@ -614,6 +622,108 @@ function chartForBridge(scene: Scene, rows: NativeRows, memory: FieldCarryMemory
   };
 }
 
+function linkedSubject(pose: BridgePose): Pose {
+  return { actor: pose.actor, bodies: [...pose.bodies, ...pose.hazards] };
+}
+
+function linkedProjection(scene: Scene, chart: BridgeChart, memory: FieldCarryMemory) {
+  const floorsByOpenGates = new Map<string, Set<Cell>>();
+  return (pose: BridgePose, action: NativeCommand, canSpend: boolean): BridgePose | undefined => {
+    const subject = linkedSubject(pose);
+    const open = scene.gates.filter(gate => gateAllows(gate, subject));
+    const gateKey = open.map(gate => gate.at).join(';');
+    let floor = floorsByOpenGates.get(gateKey);
+    if (!floor) {
+      floor = new Set([...chart.floor].filter(cell => !scene.gates.some(gate => gate.at === cell)));
+      open.forEach(gate => floor!.add(gate.at));
+      floorsByOpenGates.set(gateKey, floor);
+    }
+    const direction = memory.controls[action.action_ref];
+    let after: BridgePose | undefined;
+    if (direction) {
+      after = projectBridge({ ...chart, floor }, pose, direction.delta, { weights: canSpend, hazards: true });
+    } else if (action.action_ref === memory.mirror?.action) {
+      const landing = projectReflection({ ...scene, floor: new Set([...floor, ...pose.supports]) }, subject, memory.profile.wall, chart.water);
+      if (landing) {
+        const hazards = landing.bodies.slice(pose.bodies.length);
+        if (hazards.some(cell => adjacent(landing.actor, cell))) return;
+        after = { actor: landing.actor, bodies: landing.bodies.slice(0, pose.bodies.length), hazards, supports: pose.supports };
+      }
+    }
+    if (!after) return;
+    const projected = linkedSubject(after);
+    if ([after.actor, ...projected.bodies].some(cell => !gateOpen(scene, projected, cell))) return;
+    return after;
+  };
+}
+
+function linkedControls(scene: Scene) {
+  return [...new Map(scene.gates.filter(gate => gate.opensWhenCovered).map(gate => [gate.marks.join(';'), gate.marks])).values()];
+}
+
+function assessLinkedResourceLoss(consumption: FieldResourceConsumption, memory: FieldCarryMemory, rows: NativeRows,
+  available: readonly string[], marks?: Marks): FieldResourceLoss | undefined {
+  if (!memory.mirror || !memory.support || consumption.body !== memory.body
+    || available.some(action => !memory.controls[action] && action !== memory.mirror?.action)) return;
+  const scene = picture(rows, memory, { ...consumption.marks, ...marks });
+  if (!scene?.mirrors.length || consumption.previousCount <= scene.bodies.length) return;
+  const positive = scene.gates.filter(gate => gate.opensWhenCovered);
+  const openedByActor = positive.filter(gate => !gate.closed && gate.marks.includes(scene.actor));
+  if (!openedByActor.length) return;
+  const current = chartForBridge(scene, rows, memory);
+  const occupants = [...current.pose.bodies, ...current.pose.hazards];
+  if (scene.other.size !== current.pose.hazards.length || occupants.some(cell => !positive.some(gate => gate.marks.includes(cell)))) return;
+  const inputs = available.map(action_ref => ({ action_ref, data: {} }));
+  const chart = { ...current, pose: { ...current.pose, bodies: [], hazards: [] },
+    floor: new Set([...current.floor, ...scene.gates.map(gate => gate.at)]) };
+  const reaches = (gates: Gate[]) => {
+    if (!soloExitRoute({ ...scene, floor: chart.floor, gates }, memory, inputs, true)) return 'blocked';
+    let limited = false;
+    const projectAction = linkedProjection({ ...scene, gates }, chart, memory);
+    const path = findCompositionFrontier({
+      start: chart.pose, key: pose => `${pose.actor}|${[...pose.supports].sort().join(';')}`,
+      depth: 22_000, limit: 22_000, onLimit: () => { limited = true; },
+      successors: pose => inputs.flatMap(action => {
+        const after = projectAction(pose, action, false);
+        return after ? [{ action, after }] : [];
+      }),
+      isComposition: (_, pose) => pose.actor === chart.exit,
+    });
+    return path ? 'reachable' : limited ? 'unknown' : 'blocked';
+  };
+  // Keep all other gates open when checking whether a single requirement is unavoidable.
+  // Free routes over the retained movable supports remain available during both checks.
+  if (reaches([]) !== 'reachable' || reaches(openedByActor) !== 'blocked') return;
+  const dependent = [...new Map(positive.map(gate => [gate.marks.join(';'), gate.marks])).values()].filter(group =>
+    reaches(positive.filter(gate => gate.marks.join(';') === group.join(';'))) === 'blocked');
+  if (!dependent.some(group => group.includes(scene.actor))
+    || occupants.some(cell => !dependent.some(group => group.includes(cell)))) return;
+  const dependencies = [...new Set(dependent.flat())].sort();
+  return { marks: scene.marks, dependencies, required: 1, available: 0, key: JSON.stringify(dependencies) };
+}
+
+function planLinkedField(scene: Scene, rows: NativeRows, memory: FieldCarryMemory, inputs: readonly NativeCommand[],
+  evidence: string[], remaining: number, tested: readonly string[]): FieldCarryPlan | undefined {
+  if (!scene.mirrors.length || !memory.mirror || !memory.support) return;
+  const chart = chartForBridge(scene, rows, memory);
+  const controls = linkedControls(scene);
+  if (!chart.pose.hazards.length || !controls.length) return;
+  const projectAction = linkedProjection(scene, chart, memory);
+  const route = findLinkedRoute(chart, controls,
+    (pose, canSpend) => inputs.flatMap(action => {
+      const after = projectAction(pose, action, canSpend);
+      return after ? [{ action, after }] : [];
+    }), remaining, tested);
+  if (!route) return;
+  const steps = route.path.slice(0, maximumCommittedActions);
+  const key = route.placement ? 'hold_access:' + route.placement.join(';') : 'follow_bound_passage';
+  return { memory, steps, start: chart.pose, target: route.target, marks: scene.marks, evidence, observe: false,
+    label: route.placement ? 'Keep a movable object on the required access control'
+      : 'Use the verified reflection and crossing to reach the next area',
+    bridge: { key, linked: true, canSpend: route.canSpend,
+      ...(route.placement && steps.length === route.path.length ? { probeAt: steps.length - 1 } : {}) } };
+}
+
 function planBridge(scene: Scene, rows: NativeRows, memory: FieldCarryMemory, moves: { action: NativeCommand; delta: NativePoint }[],
   evidence: string[], remaining: number, tested: readonly string[]): FieldCarryPlan | undefined {
   if (!memory.support || scene.mirrors.length || moves.length < 4) return;
@@ -653,6 +763,8 @@ export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: Nativ
   if (bridge) return bridge;
   const preserving = planPreservingReflection(scene, model, inputs, evidence, remaining);
   if (preserving) return preserving;
+  const linked = planLinkedField(scene, rows, model, inputs, evidence, remaining, testedCompositions);
+  if (linked) return linked;
   const missingWeight = scene.gates.filter(gate => gate.opensWhenCovered).flatMap(gate => gate.marks).find(mark => !start.bodies.includes(mark));
   const unset = Object.keys(scene.marks).find(mark => mark !== start.actor && !start.bodies.includes(mark) && !scene.gates.some(gate => gate.marks.includes(mark)));
   const unmapped = inputs.filter(action => !model.controls[action.action_ref]);
@@ -735,6 +847,11 @@ export function admitFieldCarry(plan: FieldCarryPlan, index: number, rows: Nativ
   const next = plan.steps[index]!, direction = plan.memory.controls[next.action.action_ref];
   if (plan.bridge) {
     const chart = chartForBridge(scene, rows, plan.memory);
+    if (plan.bridge.linked) {
+      const projected = linkedProjection(scene, chart, plan.memory)(chart.pose, next.action, plan.bridge.canSpend ?? false);
+      return sameBridgePose(chart.pose, before) && sameBridgePose(projected, next.after)
+        && (!!direction || next.after.actor === before.actor || scene.preview.has(next.after.actor));
+    }
     return !!direction && sameBridgePose(chart.pose, before) && sameBridgePose(projectBridge(chart, chart.pose, direction.delta), next.after);
   }
   const projectedScene = plan.gateProbe ? onStableGround(scene) : scene;

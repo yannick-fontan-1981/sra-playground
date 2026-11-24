@@ -654,7 +654,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       if (marks && Object.keys(marks).length) state.fieldCarryMarks = marks;
       if (prior && next.supportRef === after.observation_ref && next.supportRef !== prior.supportRef) {
         const consumption = observeFieldConsumption(prior, rows, knownMarks);
-        if (consumption && (!state.fieldConsumption || consumption.previousCount > state.fieldConsumption.previousCount)) {
+        if (consumption) {
           state.fieldConsumption = { ...consumption, source: explorationKey(before, rows), action: commandKey(command) };
         }
       }
@@ -1675,7 +1675,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         const matched = checkFieldCarryReturn(carry, index, rows, afterRows);
         enterEpoch(before.level_epoch);
         if (carry.bridge?.probeAt === index) {
-          state.fieldCompositionsTested = [...new Set([...state.fieldCompositionsTested ?? [], carry.bridge.key])];
+          if (!carry.bridge.linked || !matched) {
+            state.fieldCompositionsTested = [...new Set([...state.fieldCompositionsTested ?? [], carry.bridge.key])];
+          }
         } else if (carry.composition && (!matched || carry.composition.at === index)) {
           state.fieldCompositionsTested = [...new Set([...state.fieldCompositionsTested ?? [], carry.composition.key])];
           if (matched && state.fieldCarry) state.fieldCarry = { ...state.fieldCarry, contactRef: after.observation_ref };
