@@ -7,7 +7,7 @@ import { measureComponentTranslations } from './observed-translation.ts';
 
 type Move = { delta: NativePoint; ref: string };
 type Grid = { pitch: number; phase: NativePoint; ink: number; floor: number; signature?: string;
-  annotatedMarks?: Readonly<Record<string, readonly number[]>> };
+  annotatedMarks?: Readonly<Record<string, readonly number[]>>; actorFooting?: readonly number[] };
 type Calibration = { grid: Grid; previous: string[]; next: string[]; destination: string; delta: NativePoint };
 export type ObservedTravel = { grid: Grid; actor: string | null; supports: string[]; visited: string[];
   moves: Record<string, Move>; tested: Record<string, number>; altered: string[]; controls: string[];
@@ -43,6 +43,19 @@ function matchesAnnotatedOverlay(pixels: readonly number[], grid: Grid, cell: st
   return paletteSignature(normalized) === grid.signature;
 }
 
+function matchesActorFooting(pixels: readonly number[], grid: Grid) {
+  if (!grid.signature || grid.actorFooting?.length !== pixels.length || !pixels.includes(grid.ink)) return false;
+  const footing = grid.actorFooting;
+  if (footing.includes(grid.ink)) return false;
+  let exposed = false;
+  const normalized = pixels.map((ink, index) => {
+    if (ink !== footing[index]) return ink;
+    exposed = true;
+    return grid.floor;
+  });
+  return exposed && paletteSignature(normalized) === grid.signature;
+}
+
 function dominant(pixels: readonly number[], excluded: number) {
   const counts = new Map<number, number>();
   for (const ink of pixels) if (ink !== excluded) counts.set(ink, (counts.get(ink) ?? 0) + 1);
@@ -58,19 +71,31 @@ function frameMarks(rows: NativeRows, { pitch, phase, floor }: Grid) {
 }
 
 function read(rows: NativeRows, grid: Grid) {
-  const cells = new Map<string, number[]>(), pieces: string[] = [];
+  const cells = new Map<string, number[]>(), pieces: string[] = [], onFooting = new Set<string>();
   for (let y = grid.phase[1]; y + grid.pitch <= rows.length; y += grid.pitch) {
     for (let x = grid.phase[0]; x + grid.pitch <= rows[0]!.length; x += grid.pitch) {
       const id = key([x, y]), pixels = tile(rows, grid, [x, y]);
       cells.set(id, pixels);
       if (grid.signature ? pixels.includes(grid.ink) && (paletteSignature(pixels) === grid.signature || matchesAnnotatedOverlay(pixels, grid, id))
         : pixels.filter(ink => ink === grid.ink).length >= Math.max(2, Math.floor(grid.pitch / 2))) pieces.push(id);
+      else if (matchesActorFooting(pixels, grid)) { pieces.push(id); onFooting.add(id); }
     }
   }
-  return { cells, pieces };
+  return { cells, pieces, onFooting };
 }
 
 export { read as readTravelGrid, tile as readTravelCell };
+
+export function rebindTravelControls(previous: Pick<ObservedTravel, 'grid' | 'moves'>, rows: NativeRows,
+  inputs: readonly string[]): ObservedTravel | undefined {
+  const { grid, moves } = previous;
+  if (inputs.length !== 4 || Object.keys(moves).length !== inputs.length || !inputs.every(input => moves[input])) return;
+  const { pieces } = read(rows, grid);
+  if (pieces.length !== 1) return;
+  const actor = pieces[0]!;
+  return { grid, moves, actor, visited: [actor], supports: [], tested: {}, altered: [], controls: [],
+    completed: [], switches: {}, refs: Object.values(moves).map(move => move.ref), stalled: 0 };
+}
 
 export function annotateTravelMarks(travel: ObservedTravel | undefined, rows: NativeRows): ObservedTravel | undefined {
   if (!travel?.grid.signature || travel.grid.annotatedMarks || travel.grid.pitch % 2 !== 1) return travel;

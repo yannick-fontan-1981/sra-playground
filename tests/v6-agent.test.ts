@@ -6,7 +6,7 @@ import { BrowserV6Agent, BrowserV6WorkerClient } from '../src/runtime/v6-agent.t
 import type { V6AgentSnapshot, V6DispatchResult } from '../src/runtime/v6-agent.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
 import { as66Contradiction } from '../src/sic/contradiction-review.ts';
-import { sicObservedCoverageDeadlock } from '../src/logos-engine/v6-native-types.ts';
+import { sicObservedCoverageDeadlock, sicObservedGameOver, sicObservedWeightShortage } from '../src/logos-engine/v6-native-types.ts';
 import {
   emptyV6Snapshot, nativeV6Action, sameV6Observation, toV6PublicObservation, v6FrameHash, V6AgentError, V6_REFERENCE_COMMIT,
 } from '../src/runtime/v6-agent-protocol.ts';
@@ -178,11 +178,11 @@ test('coordinate clicks flow intact from the authorized ticket to the real host 
   assert.equal(state.agent.snapshot.sequence, 1);
 });
 
-test('observed placement deadlock resets the same level and continues with the same sequence', async () => {
+for (const reason of [sicObservedCoverageDeadlock, sicObservedWeightShortage]) test(`${reason} resets the same level and continues with the same sequence`, async () => {
   for (const pauseBeforeReset of [false, true]) {
     const { agent, context, transport, setOnState } = harness(new ScriptedTransport(), undefined, true);
     transport.hook = async (operation, result) => operation.type === 'advance' && operation.sequence === 1
-      ? { ...transport.boundary(), kind: 'stopped', phase: 'stopped', reason: sicObservedCoverageDeadlock,
+      ? { ...transport.boundary(), kind: 'stopped', phase: 'stopped', reason,
         snapshot: { ...result.snapshot, canResetLevel: true } }
       : result;
     if (pauseBeforeReset) setOnState(snapshot => {
@@ -202,6 +202,37 @@ test('observed placement deadlock resets the same level and continues with the s
     assert.equal(new Set(transport.operations.map(operation => operation.sessionId)).size, 1);
     agent.dispose();
   }
+});
+
+test('a recoverable game over resets even when ordinary dispatch is disabled', async () => {
+  const transport = new ScriptedTransport(), actions: number[] = [];
+  let current = board(), resets = 0;
+  const agent = new BrowserV6Agent({
+    transport, getObservation: () => current, canDispatch: () => current.state === 'NOT_FINISHED',
+    canResetLevel: () => true, onState: () => {},
+    resetLevel: async () => { resets++; return current = board(); },
+    dispatch: async action => {
+      assert.equal(current.state, 'NOT_FINISHED');
+      actions.push(action.id);
+      return current = board(actions.length, actions.length === 1 ? { state: 'GAME_OVER' } : {});
+    },
+  });
+  transport.hook = async (operation, result) => {
+    if (operation.type === 'advance' && operation.sequence === 1) {
+      return { ...result, kind: 'stopped', phase: 'stopped', reason: sicObservedGameOver,
+        snapshot: { ...result.snapshot, canResetLevel: true } };
+    }
+    if (operation.type === 'reset_level') transport.command = { actionRef: 'ACTION2', data: {} };
+    return result;
+  };
+  await agent.run(2);
+  assert.deepEqual(actions, [1, 2]);
+  assert.equal(resets, 1);
+  assert.equal(agent.snapshot.actionCount, 2);
+  assert.deepEqual(transport.operations.map(operation => [operation.type, operation.sequence]),
+    [['init', 0], ['advance', 1], ['reset_level', 1], ['resume', 1], ['advance', 2]]);
+  assert.equal(new Set(transport.operations.map(operation => operation.sessionId)).size, 1);
+  agent.dispose();
 });
 
 test('reading the SIC shadow leaves V6 commands and acquisition order identical through a terminal return', async () => {
