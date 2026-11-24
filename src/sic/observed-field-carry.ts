@@ -1,5 +1,6 @@
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { findCompositionFrontier } from './composition-frontier.ts';
+import { objectRelations } from './object-composition.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 
 type Profile = { phase: NativePoint; ink: number; floor: number; wall: number; radius: number };
@@ -9,20 +10,21 @@ export type FieldCarryMemory = {
   body?: string; witness?: string; support?: string; supportAt?: Cell; supportRef?: string;
   mirror?: { action: string; ref: string };
   contactRef?: string;
+  mobile?: Record<string, string>;
 };
 type Cell = string;
 type Pose = { actor: Cell; bodies: Cell[] };
 type Marks = Record<Cell, number[]>;
 type Scene = Pose & {
   cells: Map<Cell, number[]>; floor: Set<Cell>; marks: Marks; exit: Cell; preview: Set<Cell>; supports: Set<Cell>;
-  body?: string; gates: { at: Cell; mark: Cell; opensWhenCovered: boolean }[];
+  body?: string; gates: { at: Cell; mark: Cell; closed: boolean; opensWhenCovered: boolean }[];
   mirrors: { at: Cell; arms: NativePoint[] }[]; other: Set<Cell>;
 };
 type Step = { action: NativeCommand; after: Pose };
 export type FieldCarryPlan = {
   memory: FieldCarryMemory; steps: Step[]; start: Pose; target: Cell; label: string;
   marks: Marks; evidence: string[]; observe: boolean; testControl?: true;
-  contact?: { signature: string; at?: number };
+  composition?: { key: string; signatures: string[]; target: readonly [Cell, Cell]; at?: number; opens?: Cell[] };
 };
 
 const pitch = 3;
@@ -91,6 +93,7 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
   const preview = new Set<Cell>(), supports = new Set<Cell>();
   const mirrors: Scene['mirrors'] = [], gates: Scene['gates'] = [];
   const candidates = new Map<string, Cell[]>(), rawGates = new Map<Cell, number[]>();
+  const covered = new Set<Cell>();
   for (let y = phase[1]; y + pitch <= rows.length; y += pitch) for (let x = phase[0]; x + pitch <= rows[0]!.length; x += pitch) {
     const cell = `${x},${y}`, raw = tile(rows, x, y);
     const overlaid = (i: number) => raw[i] === ink && raw[4] !== ink
@@ -101,12 +104,20 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
     cells.set(cell, pixels);
     if (cell === actor) {
       if (cell === memory.supportAt) supports.add(cell);
+      if (corners.every(index => pixels[index] === pixels[0]) && ![floor, wall, ink].includes(pixels[0]!)
+        && !Object.values(marks).some(mark => mark[1] === pixels[0])) {
+        marks[cell] ??= pixels.map((_, index) => corners.includes(index) ? floor : pixels[0]!);
+      }
+      if (marks[cell]) covered.add(cell);
       continue;
     }
     const key = stamp(pixels), rim = pixels[0]!, center = pixels[4]!;
     if (memory.body && (key === memory.body || marks[cell]
       && pixels.every((value, i) => corners.includes(i) || value === Number(memory.body!.split(',')[i])))) {
       bodies.push(cell); ground.add(cell); continue;
+    }
+    if (marks[cell] && corners.every(index => pixels[index] === marks[cell]![1])) {
+      covered.add(cell); other.add(cell); ground.add(cell); continue;
     }
     if (marks[cell] && axes.every(i => pixels[i] === marks[cell]![i]) && pixels[4] === marks[cell]![4]) {
       ground.add(cell); continue;
@@ -118,7 +129,10 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
     }
     if (pixels.every((value, i) => i === 4 || value === rim) && rim !== floor && rim !== wall) {
       if (center === floor) { exits.push(cell); ground.add(cell); }
-      else candidates.set(key, [...candidates.get(key) ?? [], cell]);
+      else {
+        candidates.set(key, [...candidates.get(key) ?? [], cell]);
+        rawGates.set(cell, pixels);
+      }
       continue;
     }
     if (corners.every(i => pixels[i] === floor) && axes.every(i => pixels[i] === pixels[1]) && pixels[1] !== floor) {
@@ -140,18 +154,25 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
     else if (corners.every(i => pixels[i] === rim) && rim !== floor) rawGates.set(cell, pixels);
     else other.add(cell);
   }
+  if (!mirrors.length) for (const cell of preview) marks[cell] = cells.get(cell)!;
   const family = [...candidates].filter(([, at]) => at.length >= 2);
   const body = memory.body ?? (family.length === 1 ? family[0]![0] : undefined);
   if (!memory.body && body) for (const cell of candidates.get(body) ?? []) { bodies.push(cell); ground.add(cell); }
   for (const [pattern, at] of candidates) if (pattern !== body) for (const cell of at) other.add(cell);
   for (const [at, pixels] of rawGates) {
+    if (bodies.includes(at)) continue;
     const match = Object.keys(marks).filter(cell => {
       const mark = marks[cell]!;
-      return axes.filter(i => pixels[i] === mark[4]).length >= 3 && pixels[0] === mark[1];
+      const rim = pixels[0]!, center = pixels[4]!;
+      const linkedPiston = axes.filter(i => pixels[i] === mark[4]).length >= 3;
+      const linkedBarrier = mark[4] === mark[1] && (center === floor && axes.every(i => pixels[i] === floor)
+        || center !== floor && center !== rim && axes.every(i => pixels[i] === rim));
+      return rim === mark[1] && (linkedPiston || linkedBarrier);
     });
     if (match.length === 1) {
       const mark = match[0]!, closed = pixels[4] !== floor;
-      gates.push({ at, mark, opensWhenCovered: closed !== (actor === mark || bodies.includes(mark)) });
+      gates.push({ at, mark, closed, opensWhenCovered: closed !== (covered.has(mark) || bodies.includes(mark)) });
+      other.delete(at);
       ground.add(at);
     } else other.add(at);
   }
@@ -190,9 +211,20 @@ export function observeFieldCarry(memory: FieldCarryMemory | undefined, before: 
   const controls = indicated ? { ...prior.controls, [action.action_ref]: { delta: indicated, ref } } : prior.controls;
   const transported = direction && a.body && a.bodies.some(cell => !b.bodies.includes(cell) && b.bodies.includes(shift(cell, direction))
     && point(cell).every((coordinate, i) => Math.abs(coordinate - point(a.actor)[i]!) <= prior.profile.radius * pitch));
+  const mobile = { ...prior.mobile };
+  if (direction) for (const signature of movableMotifs(a, prior)) {
+    if (mobile[signature]) continue;
+    const oldCells = motifCells(a, before, prior.profile, signature), newCells = motifCells(b, after, prior.profile, signature);
+    if (oldCells.some(cell => {
+      const to = shift(cell, direction);
+      return !newCells.includes(cell) && !oldCells.includes(to) && newCells.includes(to)
+        && point(cell).every((coordinate, i) => Math.abs(coordinate - point(a.actor)[i]!) <= prior.profile.radius * pitch);
+    })) mobile[signature] = ref;
+  }
   const created = newSupport(a, b, prior.profile);
   const reflected = !direction && a.actor !== b.actor && a.preview.has(b.actor);
   return { ...prior, controls, tried: [...new Set([...prior.tried, action.action_ref])],
+    ...(Object.keys(mobile).length ? { mobile } : {}),
     ...(transported && a.body ? { body: a.body, witness: prior.witness ?? ref } : {}),
     ...(created ? { ...created, supportRef: ref } : {}),
     ...(reflected ? { mirror: { action: action.action_ref, ref } } : {}) };
@@ -259,68 +291,101 @@ function isControlReturn(plan: FieldCarryPlan, before: NativeRows, after: Native
 
 const adjacent = (a: Cell, b: Cell) => arms.some(delta => shift(a, delta) === b);
 
-function contactingPair(peers: Cell[]) {
-  for (const [index, left] of peers.entries()) {
-    const right = peers.slice(index + 1).find(cell => adjacent(left, cell));
-    if (right) return [left, right];
-  }
-}
-
-function withContactPeers(scene: Scene, rows: NativeRows, profile: Profile, signature: string): Scene {
+function motifCells(scene: Scene, rows: NativeRows, profile: Profile, signature: string) {
   const pixels = signature.split(',').map(Number);
   const overlay = perimeter(point(scene.actor), profile.radius);
-  const peers = [...scene.other].filter(cell => {
+  return [...scene.other].filter(cell => {
     if (stamp(scene.cells.get(cell)!) === signature) return true;
     const [x, y] = point(cell);
     const visible = tile(rows, x, y);
     return visible[4] === pixels[4] && visible.every((value, index) => value === pixels[index]
+      || !!scene.marks[cell] && corners.includes(index)
       || value === profile.ink && overlay.has(`${x + index % pitch},${y + Math.floor(index / pitch)}`));
   });
+}
+
+function assignedMotifs(scene: Scene, rows: NativeRows, profile: Profile, signatures: string[]) {
+  const matches = signatures.map(signature => motifCells(scene, rows, profile, signature));
+  return matches.map((cells, index) => cells.filter(cell => stamp(scene.cells.get(cell)!) === signatures[index]
+    || matches.every((peers, other) => other === index || !peers.includes(cell))));
+}
+
+function withMotifs(scene: Scene, rows: NativeRows, profile: Profile, signatures: string[]): Scene {
+  const peers = assignedMotifs(scene, rows, profile, signatures).flat();
   return { ...scene, bodies: [...scene.bodies, ...peers], floor: new Set([...scene.floor, ...peers]) };
 }
 
-function contactSignatures(scene: Scene, floor: number) {
-  const signatures = new Set([...scene.other].flatMap(cell => {
+function movableMotifs(scene: Scene, memory: FieldCarryMemory) {
+  return [...new Set([...Object.keys(memory.mobile ?? {}), ...[...scene.other].flatMap(cell => {
     const pixels = scene.cells.get(cell)!;
-    return pixels.includes(floor) ? [] : [stamp(pixels)];
-  }));
-  return signatures;
+    return scene.marks[cell] ? [] : [stamp(pixels)];
+  })])];
 }
 
-function planContact(scene: Scene, rows: NativeRows, memory: FieldCarryMemory,
+function planObjectComposition(scene: Scene, rows: NativeRows, memory: FieldCarryMemory,
   moves: { action: NativeCommand; delta: NativePoint }[], evidence: string[], remaining: number, rejected: readonly string[]) {
   if (moves.length < 2 || remaining < 1) return;
-  let best: FieldCarryPlan | undefined, distance = remaining;
-  for (const signature of contactSignatures(scene, memory.profile.floor)) {
-    if (rejected.includes(signature)) continue;
-    const projected = withContactPeers(scene, rows, memory.profile, signature);
-    const known = scene.bodies.length, peers = projected.bodies.slice(known);
-    if (peers.length < 2 || contactingPair(peers) || peers.some(cell => adjacent(scene.actor, cell))) continue;
-    const start = { actor: projected.actor, bodies: projected.bodies };
+  const signatures = movableMotifs(scene, memory);
+  const groups = assignedMotifs(scene, rows, memory.profile, signatures);
+  const projected = withMotifs(scene, rows, memory.profile, signatures);
+  const start = { actor: scene.actor, bodies: projected.bodies };
+  if (!start.bodies.length || projected.bodies.slice(scene.bodies.length).some(cell => adjacent(scene.actor, cell))) return;
+  const families = [...scene.bodies.map(() => memory.body ?? 'observed-body'),
+    ...groups.flatMap((cells, index) => cells.map(() => signatures[index]!))];
+  const fixed = [...new Set([...Object.keys(scene.marks), ...scene.supports, ...scene.mirrors.map(mirror => mirror.at),
+    ...scene.gates.map(gate => gate.at)])];
+  const bindings = [
+    ...families.map((signature, index) => ({ id: JSON.stringify([signature, families.slice(0, index).filter(other => other === signature).length]),
+      movable: true, cell: (positions: readonly Cell[]) => positions[index] })),
+    ...fixed.map(cell => ({ id: cell, movable: false, cell: () => cell })),
+  ];
+  const relations = objectRelations(bindings, adjacent).filter(relation => !rejected.includes(relation.id) && !relation.cells(start.bodies));
+  const activeMarks = new Set(scene.gates.filter(gate => gate.opensWhenCovered).map(gate => gate.mark));
+  const isAccess = (cells: readonly [Cell, Cell] | undefined) => !!cells && cells[0] === cells[1] && activeMarks.has(cells[0]);
+  const threatens = (pose: Pose) => pose.bodies.slice(scene.bodies.length).some(cell => adjacent(pose.actor, cell));
+  const lostPlacement = (before: Pose, after: Pose) => before.bodies.some(cell => scene.marks[cell] && !after.bodies.includes(cell));
+  const newMobileContact = (before: Pose, after: Pose) => after.bodies.some((cell, left) =>
+    after.bodies.some((right, index) => left < index && index >= scene.bodies.length && adjacent(cell, right)
+      && !adjacent(before.bodies[left]!, before.bodies[index]!)));
+  const newAccess = (before: Pose, after: Pose) => after.bodies.some(cell => activeMarks.has(cell) && !before.bodies.includes(cell));
+  const search = (kind: 'exit' | 'access' | 'interaction') => {
     const path = findCompositionFrontier({
-      start, key: pose => `${pose.actor}|${pose.bodies.join(';')}`, depth: distance, limit: 18_000,
+      start, key: pose => `${pose.actor}|${pose.bodies.join(';')}`, depth: remaining, limit: 18_000,
       successors: pose => moves.flatMap(({ action, delta }) => {
         const after = project(projected, pose, memory, delta);
-        if (!after || after.bodies.some((cell, index) => index >= known && adjacent(after.actor, cell))) return [];
-        if (pose.bodies.some(cell => scene.marks[cell] && !after.bodies.includes(cell))) return [];
+        if (!after || threatens(after) || after.actor !== scene.exit && lostPlacement(pose, after)
+          || kind === 'exit' && (newMobileContact(pose, after) || newAccess(pose, after))) return [];
         return [{ action, after }];
       }),
-      isComposition: (_, after) => !!contactingPair(after.bodies.slice(known)),
+      isComposition: (_, after) => kind === 'exit' ? after.actor === scene.exit : relations.some(relation => {
+        const pair = relation.cells(after.bodies);
+        return kind === 'access' ? isAccess(pair) : !!pair;
+      }),
     });
-    if (!path) continue;
-    distance = path.length - 1;
+    if (!path) return;
     const steps = path.slice(0, maximumCommittedActions), last = path.at(-1)!;
-    best = { memory, start, steps, target: contactingPair(last.after.bodies.slice(known))![0]!,
-      label: 'Test a reachable contact between visible objects from a separate position',
-      marks: scene.marks, evidence, observe: false,
-      contact: { signature, ...(steps.length === path.length ? { at: steps.length - 1 } : {}) } };
-  }
-  return best;
+    const relation = relations.find(relation => kind === 'access' ? isAccess(relation.cells(last.after.bodies))
+      : !!relation.cells(last.after.bodies));
+    const pair = relation?.cells(last.after.bodies);
+    if (kind !== 'exit' && (!relation || !pair)) return;
+    const opens = kind === 'access' ? scene.gates.filter(gate => gate.mark === pair![0] && gate.opensWhenCovered).map(gate => gate.at) : [];
+    return { memory, start, steps, target: kind === 'exit' ? scene.exit : pair![1],
+      label: kind === 'exit' ? 'Reach the exit while preserving the observed object placement'
+        : kind === 'access' ? 'Compose two observed objects to test access'
+          : 'Test a reachable composition of two observed objects',
+      marks: scene.marks, evidence, observe: false, composition: {
+        signatures, key: kind === 'exit' ? 'exit:' + scene.exit : relation!.id, target: pair ?? [scene.exit, scene.exit],
+        ...(kind !== 'exit' && steps.length === path.length ? { at: steps.length - 1 } : {}),
+        ...(opens.length ? { opens } : {}),
+      } } satisfies FieldCarryPlan;
+  };
+  return (!rejected.includes('exit:' + scene.exit) ? search('exit') : undefined)
+    ?? (activeMarks.size ? search('access') : undefined) ?? search('interaction');
 }
 
 export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: NativeRows, inputs: readonly NativeCommand[],
-  ref: string, remaining: number, knownMarks?: Marks, rejectedContacts: readonly string[] = [],
-  contactOnly = false): FieldCarryPlan | undefined {
+  ref: string, remaining: number, knownMarks?: Marks, testedCompositions: readonly string[] = [],
+  compositionOnly = false): FieldCarryPlan | undefined {
   const role = subject(rows, memory?.profile);
   if (!role || inputs.length < 4 || inputs.length > 5) return;
   const model = memory ?? { profile: role.profile, controls: {}, tried: [] };
@@ -328,9 +393,10 @@ export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: Nativ
   if (!scene) return;
   const start = { actor: scene.actor, bodies: scene.bodies };
   const evidence = [...new Set([ref, ...Object.values(model.controls).map(move => move.ref),
-    ...[model.witness, model.supportRef, model.mirror?.ref, model.contactRef].filter((value): value is string => !!value)])];
+    ...[model.witness, model.supportRef, model.mirror?.ref, model.contactRef].filter((value): value is string => !!value),
+    ...Object.values(model.mobile ?? {})])];
   const moves = inputs.flatMap(action => model.controls[action.action_ref] ? [{ action, delta: model.controls[action.action_ref]!.delta }] : []);
-  if (contactOnly) return planContact(scene, rows, model, moves, evidence, remaining, rejectedContacts);
+  if (compositionOnly) return planObjectComposition(scene, rows, model, moves, evidence, remaining, testedCompositions);
   const missingWeight = scene.gates.find(gate => gate.opensWhenCovered && !start.bodies.includes(gate.mark))?.mark;
   const unset = Object.keys(scene.marks).find(mark => mark !== start.actor && !start.bodies.includes(mark) && !scene.gates.some(gate => gate.mark === mark));
   const unmapped = inputs.filter(action => !model.controls[action.action_ref]);
@@ -347,7 +413,7 @@ export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: Nativ
     return { memory: model, steps: [{ action: pulse, after: { ...start, actor: visibleLanding } }], start, target: visibleLanding,
       label: 'Use the visible reflected landing', marks: scene.marks, evidence, observe: false };
   }
-  if ((model.body || model.contactRef) && (missingWeight || unset || scene.other.size === 0)) {
+  if ((model.body || model.contactRef) && (missingWeight && start.bodies.length || unset || scene.other.size === 0)) {
     const target = missingWeight ?? unset ?? scene.exit;
     const held = start.bodies.filter(cell => !!scene.marks[cell]);
     const canCalibrateAt = (actor: Cell) => held.every(cell => point(cell).some((v, i) =>
@@ -390,10 +456,11 @@ export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: Nativ
   }
   const fresh = inputs.find(action => !model.tried.includes(action.action_ref));
   if (!fresh || moves.length >= 4) return;
-  if (!scene.bodies.length && ![...contactSignatures(scene, model.profile.floor)].some(signature => {
-    const peers = withContactPeers(scene, rows, model.profile, signature).bodies;
-    return peers.length >= 2 && peers.every(cell => arms.every(delta => !adjacent(shift(scene.actor, delta), cell)));
-  })) return;
+  if (!scene.bodies.length) {
+    const peers = withMotifs(scene, rows, model.profile, movableMotifs(scene, model)).bodies;
+    if (peers.length + Number(Object.keys(scene.marks).length > 0) < 2
+      || peers.some(cell => arms.some(delta => adjacent(shift(scene.actor, delta), cell)))) return;
+  }
   return { memory: model, steps: [{ action: fresh, after: start }], start, target: start.actor,
     label: 'Measure a directional response from the visible moving field', marks: scene.marks, evidence, observe: true };
 }
@@ -405,7 +472,7 @@ function samePose(scene: Pose | undefined, expected: Pose) {
 
 export function admitFieldCarry(plan: FieldCarryPlan, index: number, rows: NativeRows): boolean {
   const visible = picture(rows, plan.memory, plan.marks);
-  const scene = visible && plan.contact ? withContactPeers(visible, rows, plan.memory.profile, plan.contact.signature) : visible;
+  const scene = visible && plan.composition ? withMotifs(visible, rows, plan.memory.profile, plan.composition.signatures) : visible;
   const before = index === 0 ? plan.start : plan.steps[index - 1]!.after;
   if (!scene || !samePose(scene, before)) return false;
   if (plan.observe) return true;
@@ -418,10 +485,11 @@ export function admitFieldCarry(plan: FieldCarryPlan, index: number, rows: Nativ
 export function checkFieldCarryReturn(plan: FieldCarryPlan, index: number, before: NativeRows, after: NativeRows): boolean {
   if (plan.testControl && index === plan.steps.length - 1) return isControlReturn(plan, before, after, index);
   const scene = picture(after, plan.memory, plan.marks), expected = plan.steps[index]!.after;
-  if (!scene || !plan.contact) return samePose(scene, expected);
-  const visible = withContactPeers(scene, after, plan.memory.profile, plan.contact.signature);
+  if (!scene || !plan.composition) return samePose(scene, expected);
+  const visible = withMotifs(scene, after, plan.memory.profile, plan.composition.signatures);
+  if (plan.composition.at === index && plan.composition.opens?.some(cell => !scene.gates.some(gate => gate.at === cell && !gate.closed))) return false;
   if (samePose(visible, expected)) return true;
-  if (plan.contact.at !== index) return false;
-  const pair = contactingPair(expected.bodies.slice(scene.bodies.length));
-  return !!pair && samePose(visible, { ...expected, bodies: expected.bodies.filter(cell => !pair.includes(cell)) });
+  if (plan.composition.at !== index || plan.composition.target[0] === plan.composition.target[1]) return false;
+  const pair = plan.composition.target;
+  return samePose(visible, { ...expected, bodies: expected.bodies.filter(cell => !pair.includes(cell)) });
 }

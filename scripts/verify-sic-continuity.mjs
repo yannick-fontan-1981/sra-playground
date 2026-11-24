@@ -6,7 +6,7 @@ import { compileLevel as compilePullLevel, initialState as initialPullState, ste
 import { SS03_LEVELS } from '../experiments/sinking-star-ss03/src/levels.ts';
 import { compileLevel as compileExchangeLevel, initialState as initialExchangeState, stepDetailed as stepExchangeWorld, terrainAt as exchangeTerrainAt } from '../experiments/sinking-star-ss04/src/core.ts';
 import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
-import { compileLevel as compileCarryLevel, initialState as initialCarryState, stepDetailed as stepCarryWorld } from '../experiments/sinking-star-ss05/src/core.ts';
+import { compileLevel as compileCarryLevel, doorsOpen as carryDoorsOpen, initialState as initialCarryState, stepDetailed as stepCarryWorld } from '../experiments/sinking-star-ss05/src/core.ts';
 import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
@@ -232,6 +232,12 @@ function measuredCarrySeries(level, tickets) {
       assert.ok(continued && result.phases.some(phase => phase.kind === 'combat'), 'SS05 L3 lost the deliberate continuous contact');
       series.push({ kind: 'compose the two moving objects', first: index, last: index + 1 });
     }
+    if (level === 4 && !carryDoorsOpen(world, state) && carryDoorsOpen(world, result.state)
+      && result.state.monsters.some(monster => world.buttons.some(button => equal(button, monster)))) {
+      assert.ok(continued && phase?.moves.some(move => move.actor === 'monster'
+        && world.buttons.some(button => equal(button, move.to))), 'SS05 L4 lost the continuous placement that opens the exit');
+      series.push({ kind: 'place the moving object on the control and open access', first: index, last: index + 1 });
+    }
     if (moves.length && !firstCarry) {
       firstCarry = index + 1;
       if (level === 2) {
@@ -250,8 +256,8 @@ function measuredCarrySeries(level, tickets) {
     state = result.state;
   }
   assert.ok(state.complete, 'SS05 executed tickets do not reach the exit');
-  if (level === 3) {
-    assert.equal(series.length, 1, 'SS05 L3 did not exercise the mutual contact');
+  if (level === 3 || level === 4) {
+    assert.equal(series.length, 1, 'SS05 did not execute the expected object composition');
     return series;
   }
   assert.ok(series.some(step => step.kind === 'carry the same weight'), 'SS05 lost consecutive moves of the same weight');
@@ -267,7 +273,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 3 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 4 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -377,7 +383,7 @@ export function checkRun(run) {
     }
     if (code === 'SS05') {
       // The earlier run used 46 isolated actions on L1 and first moved a weight on L2 at action 119.
-      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42]][row.level - 1];
+      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75]][row.level - 1];
       assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
@@ -415,7 +421,7 @@ function main() {
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
-      ['local-carry', 'SS05', '3', '140'],
+      ['local-carry', 'SS05', '4', '155'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
