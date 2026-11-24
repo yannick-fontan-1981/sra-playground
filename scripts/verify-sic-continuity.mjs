@@ -8,6 +8,8 @@ import { compileLevel as compileExchangeLevel, initialState as initialExchangeSt
 import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
 import { compileLevel as compileCarryLevel, doorsOpen as carryDoorsOpen, initialState as initialCarryState, stepDetailed as stepCarryWorld } from '../experiments/sinking-star-ss05/src/core.ts';
 import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
+import { compileLevel as compileActorLevel, initialState as initialActorState, stepDetailed as stepActorWorld } from '../experiments/sinking-star-ss06/src/core.ts';
+import { SS06_LEVELS } from '../experiments/sinking-star-ss06/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -35,7 +37,7 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move' };
 
 function consecutiveStonePushes(level, tickets) {
   const world = compileLevel(SS02_LEVELS[level - 1]);
@@ -355,6 +357,40 @@ function measuredCarrySeries(level, tickets) {
   return series;
 }
 
+function measureActorComposition(issued) {
+  const world = compileActorLevel(SS06_LEVELS[0]);
+  let state = initialActorState(world);
+  const firstPush = new Map();
+  const transfers = new Map();
+  const events = [];
+  for (const [index, ticket] of issued.entries()) {
+    const result = stepActorWorld(world, state, Number(ticket.action.slice(6)), ticket.data);
+    const active = state.heroes[state.active].kind;
+    const phase = result.phases[0];
+    if ((phase?.kind === 'push' || phase?.kind === 'reflect') && phase.moves.length) {
+      if (phase.kind === 'push' && phase.moves.some(move => move.actor === 'stone')) {
+        if (!firstPush.has(active)) firstPush.set(active, index + 1);
+        if (phase.moves.filter(move => move.actor === 'stone').length > 1
+          && result.state.supports.length > state.supports.length) {
+          events.push({kind: 'push a row to create support', first: index + 1, last: index + 1});
+        }
+      } else if (phase.kind === 'reflect' && phase.moves.some(move => move.actor === 'hero')) {
+        if (!transfers.has(active)) transfers.set(active, index + 1);
+      }
+    }
+    state = result.state;
+  }
+  assert.equal(state.complete, true, 'SS06 must stand both actor roles on destinations together');
+  assert.ok(firstPush.get('merchant') <= 12 && firstPush.get('warrior') <= 20,
+    'SS06 must test contact promptly for each controllable actor');
+  assert.equal(transfers.size, 2, 'SS06 must use the observed transfer with both actors');
+  assert.ok(events.length, 'SS06 must use the distinct line-push capacity to create access');
+  return [
+    ...[...firstPush].map(([role,index]) => ({kind: 'test push with ' + role, first: index, last: index})),
+    ...events,
+    ...[...transfers].map(([role,index]) => ({kind: 'use transfer with ' + role, first: index, last: index})),
+  ];
+}
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -477,9 +513,14 @@ export function checkRun(run) {
       assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
+    if (code === 'SS06') {
+      assert.ok(issued.length <= 45 && continued >= 15, 'SS06 lost its guarded multi-actor routes');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
-      : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued) : [];
+      : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
+      : code === 'SS06' ? measureActorComposition(issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -512,6 +553,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
+      ['actor-composition', 'SS06', '1', '65'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -525,7 +567,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

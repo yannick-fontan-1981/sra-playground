@@ -1,3 +1,4 @@
+import { observedActorCompositionId } from './observed-actor-composition.ts';
 import { fieldRepairId } from './field-repair.ts';
 import { learnContactOrderId, verifyContactOrderId } from './ordered-contact.ts';
 import { supportTransferId } from './support-transfer.ts';
@@ -117,7 +118,7 @@ import { learnCorrespondenceId, learnRepeatedCellsId } from './learn-corresponde
 import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
-  { id: observedPressureRecoveryGroup, families: [publicInputExplorationId] },
+  { id: observedPressureRecoveryGroup, families: [observedActorCompositionId, publicInputExplorationId] },
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId, learnTransportAccessId,
     learnTurnPostsId, learnDirectionalReceptionId,

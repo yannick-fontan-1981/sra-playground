@@ -159,6 +159,7 @@ import { createSicCatalogueComparison, revealedExampleId } from '../sic/catalogu
 import { exposedViewValues } from './v6-occluded-catalogue-observation.ts';
 import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/reception-access.ts';
 import { createSicVerifyMarkerPlacement } from '../sic/marker-coverage.ts';
+import { createObservedActorComposition } from '../sic/observed-actor-composition.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
 import { createCompositionTrials, compositionFamily, compositionPrior } from '../sic/test-observed-compositions.ts';
 import { createPreparedEffects, preparedEffectsId } from '../sic/test-prepared-effects.ts';
@@ -2826,12 +2827,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 255,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 256,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(),
+      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(), createObservedActorComposition(),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),
