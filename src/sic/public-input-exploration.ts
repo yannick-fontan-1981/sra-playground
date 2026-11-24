@@ -582,7 +582,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   function acquireCoverageTransfer(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows) {
     if (state.epoch !== before.level_epoch || after.levels_completed <= before.levels_completed) return;
     const exchange = rememberExchangeVictory(state.exchange, state.travel, rows, command, after.observation_ref);
-    if (exchange) state.exchangeTransfer = exchange;
+    if (exchange) {
+      const prior = state.exchangeTransfer;
+      const transmission = prior?.body === exchange.body && prior.wall === exchange.wall && prior.grid.pitch === exchange.grid.pitch
+        && prior.grid.ink === exchange.grid.ink
+        && prior.grid.floor === exchange.grid.floor ? prior.transmission : undefined;
+      state.exchangeTransfer = transmission ? { ...exchange, transmission: { ...transmission, ...exchange.transmission } } : exchange;
+    }
     const win = rememberCoverageWin(state.coverage, state.travel, rows, command, before.level_epoch, after.observation_ref);
     if (win) {
       state.coverageTransfer = win;
@@ -618,12 +624,17 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const plan = planBoundExchange(roles, rows, inputs, remaining, current ? state.exchangeBinding : undefined, state.exchangeThreat);
     if (!plan) return null;
     const ref = observation.observation_ref;
+    const transmissionRefs = new Set((plan.field.transmission ?? []).flatMap(cell => {
+      const witness = roles.transmission?.[plan.field.fixed[cell]!];
+      return witness ? [witness] : [];
+    }));
     const evidence: [string, ...string[]] = [ref, roles.exchangeRef, roles.scoreRef, ...Object.values(roles.moves).map(move => move.ref),
-      ...(plan.field.threat?.evidence ?? [])];
-    const target = pushAccessBox(plan.field.exit, roles.grid.pitch);
+      ...(plan.field.threat?.evidence ?? []), ...transmissionRefs];
+    const target = pushAccessBox(plan.pressureTarget ?? plan.field.exit, roles.grid.pitch);
     const actions = plan.steps.map(step => step.action);
     const label = plan.field.threat ? 'Reach the exit through exchanges whose arrivals avoid the observed threat'
-      : 'Reuse the observed exchange to position the weight and reach the exit';
+      : plan.pressureTarget ? 'Place the movable weight on the matching control to hold the passage open'
+      : 'Reach the exit using the verified exchange route';
     const goal = { kind: 'compose_observed_exchange_access', scope: ref.split(':revision:', 1)[0]!,
       subjects: [plan.field.exit, ...Object.keys(plan.field.marks)], parentObjective: completion,
       satisfactionContract: 'verify_each_exchange_and_door_then_reach_the_exit' };

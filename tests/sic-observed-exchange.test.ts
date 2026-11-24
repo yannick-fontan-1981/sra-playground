@@ -65,7 +65,7 @@ test('position exchange learns both participants and composes with transport and
 
 const tutorial = JSON.parse(readFileSync(new URL('../experiments/sinking-star-ss04/tests/witnesses.json', import.meta.url), 'utf8'))[0].actions as number[];
 
-for (const mirror of [false, true]) test(`exchange transfers to guarded pressure and survival routes${mirror ? ' on a mirrored board' : ''}`, async () => {
+for (const mirror of [false, true]) test(`exchange transfers to pressure, survival and separated footholds${mirror ? ' on a mirrored board' : ''}`, async () => {
   const game = createGameDispatcher(async () => { throw Error('Expected a native game'); });
   let board = await game.dispatch({ type: 'load', code: 'SS04', level: 1 });
   const map = new Map([1, 2, 3, 4].map((id, i) => [`ACTION${(mirror ? 28 : 14) + i}`, id]));
@@ -86,6 +86,7 @@ for (const mirror of [false, true]) test(`exchange transfers to guarded pressure
     travel = observed;
   }
   assert.ok(roles?.exchangeRef.startsWith('tutorial-return:'));
+  assert.ok(Object.values(roles.transmission ?? {}).some(ref => ref.startsWith('tutorial-return:')));
   roles = { ...roles, moves: Object.fromEntries([...map].map(([alias, id]) => [alias, roles!.moves[`ACTION${id}`]!])) };
   assert.equal(board.level, 2);
   const first = planBoundExchange(roles, frame(board.frame), inputs, 65);
@@ -173,4 +174,35 @@ for (const mirror of [false, true]) test(`exchange transfers to guarded pressure
   }
   assert.equal(board.levelsCompleted, startingScore + 1);
   assert.ok(movedThreat && verifiedThreatGuard);
+
+  board = await game.dispatch({ type: 'load', code: 'SS04', level: 5 });
+  const islandEntry = frame(board.frame), islandScore = board.levelsCompleted;
+  const { transmission: _transmission, ...unmeasured } = roles;
+  assert.equal(planBoundExchange(unmeasured, islandEntry, inputs, 85), undefined);
+  const islandPlan = planBoundExchange(roles, islandEntry, inputs, 85);
+  assert.ok(islandPlan?.pressureTarget && islandPlan.field.transmission);
+  const [wx, wy] = islandPlan.field.transmission[0]!.split(',').map(Number) as [number, number];
+  const changedWater = islandEntry.map(row => [...row]);
+  changedWater[wy]![wx] = (changedWater[wy]![wx]! + 1) % 16;
+  assert.equal(matchesBoundExchange(roles, islandPlan.field, islandPlan.pose, changedWater), false);
+
+  binding = undefined;
+  actions = 0;
+  let loadedControl = false;
+  while (board.levelsCompleted === islandScore && actions < 85) {
+    const plan = planBoundExchange(roles, frame(board.frame), inputs, 85 - actions, binding);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16);
+    for (const step of plan.steps) {
+      board = await game.dispatch({ type: 'action', actionId: map.get(step.action.action_ref)! });
+      actions++;
+      assert.notEqual(board.state, 'GAME_OVER');
+      if (board.levelsCompleted > islandScore) break;
+      assert.ok(matchesBoundExchange(roles, plan.field, step.after, frame(board.frame)));
+      loadedControl ||= step.after.pieces.includes(islandPlan.pressureTarget);
+      binding = { field: plan.field, pose: step.after };
+    }
+  }
+  assert.equal(board.levelsCompleted, islandScore + 1);
+  assert.equal(actions, 79);
+  assert.ok(loadedControl);
 });

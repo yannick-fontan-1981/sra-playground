@@ -12,6 +12,7 @@ type Exchange = { ref: string; from: string; to: string; turns: string[] };
 export type ObservedExchange = {
   body: string; layout: Layout; refs: string[]; supports: string[];
   turns: Record<string, NativePoint>; rejected: string[]; last: Exchange;
+  transmission?: Record<string, string>;
   lastTransport?: { ref: string; gate: string; control: string; support: string };
 };
 export type ExchangePlan = { command: NativeCommand; goal: 'test_transport' | 'reach_exit' | 'hold_control';
@@ -20,13 +21,14 @@ type ExchangeSeries = { start: Pose; steps: Prediction[]; grid: ObservedTravel['
   terrain: Record<string, string> };
 export type ExchangeTransfer = Pick<ObservedTravel, 'grid' | 'moves'> & {
   body: string; wall: string; actorInkCount: number; exitStamp: string; exchangeRef: string; scoreRef: string;
+  transmission?: Record<string, string>;
 };
 export type ExchangeThreat = { stamp: string; evidence: readonly [string, string] };
 type BoundField = { floor: string[]; marks: Record<string, string>; doors: Record<string, { shut: string; open: string }>;
-  exit: string; fixed: Record<string, string>; threat?: ExchangeThreat };
+  exit: string; fixed: Record<string, string>; threat?: ExchangeThreat; transmission?: string[] };
 export type BoundExchange = { field: BoundField; pose: Pose };
 type ExchangeStep = { action: NativeCommand; after: Pose };
-export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[] };
+export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[]; pressureTarget?: string };
 
 const point = (cell: string) => cell.split(',').map(Number) as [number, number];
 const step = (cell: string, [dx, dy]: NativePoint) => {
@@ -137,15 +139,19 @@ export function observeExchange(local: ObservedExchange | undefined, old: Observ
     const ray = visibleTrace(old.actor, travel.actor, directions(old), grid.pitch, before, frames?.[0]);
     const direct = deltaTo(old.actor, travel.actor) === deltaTo(old.actor, step(old.actor, delta));
     if (direct || ray?.length && ray[0]!.delta.every((value, i) => value === delta[i])) {
-      const turns = { ...local?.turns }, measured: string[] = [];
+      const turns = { ...local?.turns }, transmission = { ...local?.transmission }, measured: string[] = [];
       for (let i = 0; ray && i + 1 < ray.length; i++) {
         const { cell, delta: incoming } = ray[i]!, outgoing = ray[i + 1]!.delta, pixels = first.get(cell);
         if (pixels && incoming.some((value, j) => value !== outgoing[j])) {
           turns[turnKey(pixels, incoming)] = outgoing; measured.push(cell);
+        } else if (pixels && isUniform(pixels) && pixels[0] !== grid.floor) {
+          const stamp = tileId(pixels);
+          if (stamp !== layout.wall && stamp === tileId(second.get(cell))) transmission[stamp] ??= ref;
         }
       }
       result = { ...local, body, layout, turns, supports: local?.supports ?? [], rejected: local?.rejected ?? [],
-        refs: [...(local?.refs ?? []).slice(-7), ref], last: { ref, from: old.actor, to: travel.actor, turns: measured } };
+        refs: [...(local?.refs ?? []).slice(-7), ref], last: { ref, from: old.actor, to: travel.actor, turns: measured },
+        ...(Object.keys(transmission).length ? { transmission } : {}) };
     }
   }
   if (!result) return;
@@ -199,7 +205,8 @@ export function rememberExchangeVictory(local: ObservedExchange | undefined, tra
   if (!exit || destination !== local.layout.exit || !actorPixels) return;
   const actorInkCount = actorPixels.filter(ink => ink === grid.ink).length;
   return { grid, moves, body: local.body, wall: local.layout.wall, actorInkCount,
-    exitStamp: tileId(exit), exchangeRef: local.last.ref, scoreRef: ref };
+    exitStamp: tileId(exit), exchangeRef: local.last.ref, scoreRef: ref,
+    ...(local.transmission ? { transmission: local.transmission } : {}) };
 }
 
 function adjacent(a: string, b: string, pitch: number): boolean {
@@ -233,6 +240,7 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
   if (pieces.length !== 1 || grid.pitch !== 3) return;
   const actor = pieces[0]!, floor: string[] = [], bodies: string[] = [], exits: string[] = [], threats: string[] = [];
   const marks: BoundField['marks'] = {}, doors: BoundField['doors'] = {}, fixed: BoundField['fixed'] = {};
+  const transmission: string[] = [];
   const shutters = new Map<string, number>();
   for (const [cell, pixels] of cells) {
     const stamp = tileId(pixels), rim = pixels[0]!;
@@ -242,7 +250,10 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
       if (stamp === threat?.stamp) threats.push(cell);
       if (stamp === roles.exitStamp) exits.push(cell);
     } else if (stamp === roles.wall) fixed[cell] = stamp;
-    else {
+    else if (isUniform(pixels) && roles.transmission?.[stamp]) {
+      fixed[cell] = stamp;
+      transmission.push(cell);
+    } else {
       const mark = markProfile(pixels, grid.pitch, grid.floor);
       if (mark && mark[0] === mark[1]) marks[cell] = stamp;
       else if (rim !== grid.floor && pixels[4] !== rim && pixels[4] !== grid.floor
@@ -261,6 +272,7 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
   const threatBinding = threat && threats.length && threats.every(a => threats.every(b => !adjacent(a, b, grid.pitch))) ? threat : undefined;
   if (threats.length && (!threatBinding || controls.length)) return;
   return { field: { floor: [...floor, ...controls, ...Object.keys(doors)], marks, doors, exit: exits[0]!, fixed,
+      ...(transmission.length ? { transmission } : {}),
       ...(threatBinding ? { threat: threatBinding } : {}) },
     pose: { actor, pieces: bodies, ...(threatBinding ? { threats } : {}) } };
 }
@@ -303,6 +315,7 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
   const scene = retained ?? bindExchangeField(roles, rows, threat);
   if (!scene || !matchesBoundExchange(roles, scene.field, scene.pose, rows)) return;
   const { field, pose } = scene, ground = new Set(field.floor);
+  const transmission = new Set(field.transmission);
   const doorCells = Object.keys(field.doors);
   const moves = inputs.map(action => ({ action, delta: roles.moves[action.action_ref]!.delta }));
   if (new Set(moves.map(move => move.delta.join(','))).size !== 4
@@ -314,14 +327,18 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
     if (current.actor === field.exit && depth > 0) {
       const path: ExchangeStep[] = [];
       for (let node: Node | undefined = state; node?.action; node = node.previous) path.push({ action: node.action, after: node.pose });
-      return { ...scene, steps: path.reverse().slice(0, maximumCommittedActions), roles };
+      path.reverse();
+      const usesDoor = path.some(({ after }) => doorCells.includes(after.actor));
+      const pressureTarget = usesDoor ? path.flatMap(({ after }) => after.pieces)
+        .find(cell => field.marks[cell] && !pose.pieces.includes(cell)) : undefined;
+      return { ...scene, steps: path.slice(0, maximumCommittedActions), roles, ...(pressureTarget ? { pressureTarget } : {}) };
     }
     if (depth >= remaining) continue;
     const open = gatesOpen(field, current);
     const allowed = (cell: string) => ground.has(cell) && (open || !field.doors[cell]);
     for (const { action, delta } of moves) {
       let target: string | undefined;
-      for (let beam = step(current.actor, delta); allowed(beam); beam = step(beam, delta)) {
+      for (let beam = step(current.actor, delta); allowed(beam) || transmission.has(beam); beam = step(beam, delta)) {
         if (current.pieces.includes(beam) || current.threats?.includes(beam)) { target = beam; break; }
       }
       const landing = target ?? step(current.actor, delta);

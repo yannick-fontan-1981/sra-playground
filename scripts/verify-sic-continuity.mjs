@@ -4,7 +4,7 @@ import { compileLevel, equal, initialState, stepWorld } from '../experiments/sin
 import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
 import { compileLevel as compilePullLevel, initialState as initialPullState, stepDetailed as stepPullWorld } from '../experiments/sinking-star-ss03/src/core.ts';
 import { SS03_LEVELS } from '../experiments/sinking-star-ss03/src/levels.ts';
-import { compileLevel as compileExchangeLevel, initialState as initialExchangeState, stepDetailed as stepExchangeWorld } from '../experiments/sinking-star-ss04/src/core.ts';
+import { compileLevel as compileExchangeLevel, initialState as initialExchangeState, stepDetailed as stepExchangeWorld, terrainAt as exchangeTerrainAt } from '../experiments/sinking-star-ss04/src/core.ts';
 import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
@@ -125,10 +125,11 @@ function consecutiveStonePulls(level, tickets) {
 function measuredExchangeSeries(level, tickets) {
   const world = compileExchangeLevel(SS04_LEVELS[level - 1]);
   let state = initialExchangeState(world), previous;
+  const entryResets = tickets[0]?.resets ?? 0;
   const mixed = [];
-  let deaths = 0, threatExchanges = 0;
+  let deaths = 0, threatExchanges = 0, crossedWater = false, openedWithWeight = false;
   for (const [index, ticket] of tickets.entries()) {
-    if (ticket.resets !== (previous?.resets ?? 0)) {
+    if (ticket.resets !== (previous?.resets ?? entryResets)) {
       if (level === 4) assert.ok(state.dead, 'SS04 L4 reset without an observed loss');
       state = initialExchangeState(world);
     }
@@ -138,7 +139,15 @@ function measuredExchangeSeries(level, tickets) {
     if (level === 4) {
       if (detail.state.dead) deaths++;
       if (kind === 'swap' && !detail.state.dead && detail.phases[0].moves.some(move => move.actor === 'monster')) threatExchanges++;
-      if (ticket.resets) assert.ok(kind && !detail.state.dead, 'SS04 L4 recovery used an ineffective or fatal arrival');
+      if (ticket.resets > entryResets) assert.ok(kind && !detail.state.dead, 'SS04 L4 recovery used an ineffective or fatal arrival');
+    }
+    if (level === 5) {
+      assert.ok(kind === 'walk' || kind === 'swap', 'SS04 L5 used a blocked or speculative action');
+      crossedWater ||= kind === 'swap' && detail.phases[0].ray.some(cell => exchangeTerrainAt(world, cell) === '~');
+      if (kind === 'swap' && !openedWithWeight && world.buttons.every(mark => detail.state.stones.some(stone => equal(mark, stone)))) {
+        openedWithWeight = true;
+        mixed.push({ kind: 'load the pressure control', first: index + 1, last: index + 1 });
+      }
     }
     if (kind === 'swap' && previous?.kind === 'walk' && previous.revision === ticket.decisionRevision && ticket.actionIndex > 0) {
       assert.ok(detail.phases[0].moves.some(move => move.actor !== 'hero' && equal(move.to, state.hero)), 'Expected a real exchange');
@@ -148,13 +157,17 @@ function measuredExchangeSeries(level, tickets) {
     state = detail.state;
   }
   assert.equal(state.complete, true, 'Executed SS04 L' + level + ' tickets do not reproduce the official goal');
-  assert.ok(mixed.length, 'SS04 L' + level + ' lost continuous positioning into an exchange');
+  assert.ok(mixed.some(step => step.kind === 'walk then swap'), 'SS04 L' + level + ' lost continuous positioning into an exchange');
   if (level === 2) {
     assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L2 did not hold the pressure control');
   }
   if (level === 4) {
-    assert.ok(deaths <= 1 && deaths === previous?.resets, 'SS04 L4 failed to retain its first loss across reset');
+    assert.ok(deaths <= 1 && deaths === previous?.resets - entryResets, 'SS04 L4 failed to retain its first loss across reset');
     assert.ok(threatExchanges > 0, 'SS04 L4 did not exchange with a threat and survive');
+  }
+  if (level === 5) {
+    assert.ok(crossedWater && openedWithWeight, 'SS04 L5 must exchange across water and activate the pressure control with the weight');
+    assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L5 lost the weight on the pressure control before the goal');
   }
   return mixed;
 }
@@ -167,7 +180,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 4 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 5 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -256,6 +269,11 @@ export function checkRun(run) {
       // The earlier run made 39 decisions, died twice and stopped. The recovered route must execute verified series.
       assert.ok(issued.length <= 55 && continued >= 30, 'SS04 L4 lost its safe exchange route');
     }
+    if (code === 'SS04' && row.level === 5) {
+      // Without the earlier transmission witness SIC exhausted 180 commands without one exchange.
+      assert.ok(issued.length <= 85 && groups.size <= 6, 'SS04 L5 lost the direct route to the pressure control');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L5 reset during the pressure route');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : [];
@@ -289,7 +307,7 @@ function main() {
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
-      ['l-axe-violet', 'SS04', '4', '140'],
+      ['l-axe-violet', 'SS04', '5', '140'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
