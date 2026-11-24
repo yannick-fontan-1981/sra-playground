@@ -34,6 +34,7 @@ import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindi
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { matchesPullCircuit, observePullCircuitBinding, planPullCircuit, provesPullCircuitDeadlock, witnessedPullCircuitReturn,
   type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
+import { admitFieldCarry, checkFieldCarryReturn, observeFieldCarry, planFieldCarry, type FieldCarryMemory, type FieldCarryPlan } from './observed-field-carry.ts';
 import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, observeExchangeThreat,
   planBoundExchange, rememberExchangeVictory, witnessedExchangeStep, type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeThreat,
   type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
@@ -122,6 +123,9 @@ type PanelAccessGoal = { peer: NativeBox; source: KnownPanelSource; tool: string
   access: NonNullable<ReturnType<typeof comparePanelSupportAccess>> };
 export type ControlledMotion = { from: NativeBox; to: NativeBox; command: string; evidence: readonly [string, string]; destination: string };
 type State = { epoch: number; experiments: number; transitions: ObservedCommandGraph; options: Record<string, string[]>;
+  fieldCarry?: FieldCarryMemory;
+  fieldCarryMarks?: FieldCarryPlan['marks'];
+  fieldCarryRefuted?: true;
   lastChange: { destination: string; action: string; evidence: string } | null;
   clickedControl?: ClickedControl;
   controlledPiece?: ControlledMotion;
@@ -196,6 +200,7 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   slotTransfer?: { layout: VisibleSlotLayout; ref: string };
   recheck: { until: number; evidence: readonly string[] } | null };
 type Proposal = NativeProposal & { walkingSeries?:BoundWalkingStep[]; source: string; candidates: string[]; expected?: string; selectedBox?: NativeBox;
+  fieldCarryPlan?: FieldCarryPlan;
   coveragePushSeries?: readonly CoverageMovementStep[];
   coveragePullSeries?: CoveragePullSeries;
   contactPullSeries?: CoveragePullSeries;
@@ -562,10 +567,17 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   let state = initial();
   let decide: NativeProgramHandle | undefined;
   const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
+  function fieldCarryForEpoch(epoch: number) {
+    if (!state.fieldCarry || state.epoch === epoch) return state.fieldCarry;
+    const { supportAt: _supportAt, ...retained } = state.fieldCarry;
+    return retained;
+  }
   function enterEpoch(epoch: number): void {
     if (state.epoch === epoch) return;
+    const fieldCarry = fieldCarryForEpoch(epoch);
     const { fallbackTransfer, compartmentTransfer, captureTransfer, displayTransfer, orderedEntryTransfer, relayTransfer, navigationTransfer, relationsTransfer, directionTransfer, catalogueTransfer, jointTransfer, panelServiceTransfer, symbolTransfer, programWitness, outletWitness, instructionTransfer } = state;
     state = { ...initial(epoch), ...(fallbackTransfer ? { fallbackTransfer } : {}),
+      ...(fieldCarry ? { fieldCarry } : {}),
       ...(state.coverageTransfer?.epoch === epoch - 1 ? { coverageTransfer: state.coverageTransfer } : {}),
       ...(state.pullKnowledge ? { pullKnowledge: state.pullKnowledge } : {}),
       ...(state.exchangeTransfer ? { exchangeTransfer: state.exchangeTransfer } : {}),
@@ -622,6 +634,39 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       enterEpoch(before.level_epoch);
       state.exchangeThreat = threat;
     }
+  }
+
+  function acquireFieldCarry(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows,
+    marks?: FieldCarryPlan['marks']) {
+    if (before.level_epoch !== after.level_epoch || before.state !== after.state) return;
+    const next = observeFieldCarry(fieldCarryForEpoch(before.level_epoch), rows, afterRows, command, after.observation_ref, before.available_action_refs,
+      marks ?? (state.epoch === before.level_epoch ? state.fieldCarryMarks : undefined));
+    if (next && next !== state.fieldCarry) {
+      enterEpoch(before.level_epoch);
+      state.fieldCarry = next;
+      if (marks && Object.keys(marks).length) state.fieldCarryMarks = marks;
+    }
+  }
+
+  function proposeFieldCarry(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
+    const current = state.epoch === observation.level_epoch, ref = observation.observation_ref;
+    if (current && state.fieldCarryRefuted) return null;
+    const plan = planFieldCarry(fieldCarryForEpoch(observation.level_epoch), rows, inputs, ref, remaining, current ? state.fieldCarryMarks : undefined);
+    if (!plan) return null;
+    const target = pushAccessBox(plan.target, 3), actions = plan.steps.map(step => step.action);
+    const goal = { kind: 'compose_observed_local_carry', scope: ref.split(':revision:', 1)[0]!, subjects: [plan.target],
+      parentObjective: completion, satisfactionContract: 'verify_coupled_directional_displacement' };
+    const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: plan.evidence };
+    const id = `field-carry:${need.id}`;
+    return { status: 'proposed', kind: publicInputExplorationId, actions, fieldCarryPlan: plan,
+      source: explorationKey(observation, rows), candidates: inputs.map(commandKey), needId: need.id,
+      steps: plan.steps.map(step => ({ action: step.action, expected_after: pushAccessBox(step.after.actor, 3) })),
+      binding: { observation_ref: ref, level_epoch: observation.level_epoch }, question: { reason: plan.label, hypothesis_refs: plan.evidence },
+      route_refs: plan.evidence, compositions: [{ id, observed: false, open_question: plan.label, relations: [`contributes_to:${completion}`] }],
+      sicSituationCard: { strategy: goal.kind, mode: plan.observe ? 'exploration' : 'solving', need: plan.label, situation: plan.label, target, evidence: plan.evidence },
+      sicLocalDecision: { strategy: goal.kind, objective: { id, label: plan.label, parent: completion }, need },
+      bundle_template: { operation_key: 'OP18', composition_ref: id, objective_ref: completion, purpose: plan.label,
+        evidence: plan.evidence, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
   }
 
   function proposeBoundExchange(observation: NativeObservation, rows: NativeRows, inputs: readonly NativeCommand[], remaining: number): Proposal | null {
@@ -811,6 +856,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         return proposal?.fallbackProjection || proposal?.entryPlan || proposal?.jointPlan ? proposal : null;
       }
       if (group !== observedPressureRecoveryGroup) return family.propose(observation, rows, inputs, remaining, execution);
+      const carry = proposeFieldCarry(observation, rows, inputs, remaining);
+      if (carry) return carry;
       const access = proposePushAccess(observation, rows, inputs, remaining);
       if (access) return access;
       const circuit = proposePullCircuit(observation, rows, inputs, remaining);
@@ -1307,6 +1354,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       };
     },
     async observePublicOutcome(before, after, command, rows, afterRows, frames) {
+      acquireFieldCarry(before, after, command, rows, afterRows);
       acquireExchangeThreat(before, after, command, rows, afterRows);
       acquireCoverageTransfer(before, after, command, rows);
       acquirePullCircuitOutcome(before, after, rows, afterRows);
@@ -1351,6 +1399,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       }
     },
     before(proposal, index, packet, observation) {
+      const carry = proposal.fieldCarryPlan;
+      if (carry) {
+        const admitted = admitFieldCarry(carry, index, packet.frame_rows);
+        return { admitted, reason: admitted ? 'local_carry_premises_witnessed' : 'local_carry_premises_changed' };
+      }
       if (proposal.exchangeSeries) {
         const { steps, start } = proposal.exchangeSeries;
         const admitted = matchesExchangeSeries(proposal.exchangeSeries, index === 0 ? start : steps[index - 1]!.pose, packet.frame_rows);
@@ -1419,6 +1472,12 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     },
     async after(proposal, index, before, after, rows, afterRows) {
       const scored = after.levels_completed > before.levels_completed;
+      const carry = proposal.fieldCarryPlan;
+      if (carry) {
+        const matched = !carry.observe && checkFieldCarryReturn(carry, index, rows, afterRows);
+        return { matched: scored || matched ? true : carry.observe ? null : false, seal_prefix: scored || !matched,
+          reason: scored ? 'official_boundary' : carry.observe ? 'local_carry_probe_observed' : matched ? 'local_carry_witnessed' : 'local_carry_refuted' };
+      }
       if (proposal.exchangeSeries) {
         const matched = matchesExchangeSeries(proposal.exchangeSeries, proposal.exchangeSeries.steps[index]!.pose, afterRows);
         return { matched: scored || matched, seal_prefix: scored || !matched,
@@ -1572,6 +1631,13 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
         ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
     },
     async record(before, after, command, rows, afterRows, proposal, index, frames) {
+      acquireFieldCarry(before, after, command, rows, afterRows, proposal.fieldCarryPlan?.marks);
+      const carry = proposal.fieldCarryPlan;
+      if (carry && !carry.observe && before.level_epoch === after.level_epoch
+        && !checkFieldCarryReturn(carry, index, rows, afterRows)) {
+        enterEpoch(before.level_epoch);
+        state.fieldCarryRefuted = true;
+      }
       acquireExchangeThreat(before, after, command, rows, afterRows);
       const boundExchange = proposal.boundExchangePlan;
       if (boundExchange) {
