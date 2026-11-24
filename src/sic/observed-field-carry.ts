@@ -680,7 +680,7 @@ function assessLinkedResourceLoss(consumption: FieldResourceConsumption, memory:
     if (!soloExitRoute({ ...scene, floor: chart.floor, gates }, memory, inputs, true)) return 'blocked';
     let limited = false;
     const projectAction = linkedProjection({ ...scene, gates }, chart, memory);
-    const path = findCompositionFrontier({
+    const path = findCompositionFrontier<BridgePose, NativeCommand>({
       start: chart.pose, key: pose => `${pose.actor}|${[...pose.supports].sort().join(';')}`,
       depth: 22_000, limit: 22_000, onLimit: () => { limited = true; },
       successors: pose => inputs.flatMap(action => {
