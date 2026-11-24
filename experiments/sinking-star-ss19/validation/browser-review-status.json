@@ -1,9 +1,9 @@
 {
   "game": "SS19",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "nativeBrowserReview": "not_run",
   "cssAndResponsiveVisualReview": "not_claimed",
-  "standaloneInterfaceValidation": "Happy DOM executes compiled HTML inputs; compares every public canvas frame and animation duration; independent pixel-board contact sheet inspected",
+  "standaloneInterfaceValidation": "Happy DOM executes compiled HTML inputs; compares every public canvas frame and animation duration; verifies the new 1→2 order and tutorial visibility only in room 2.",
   "productionSraRuntime": "not_integrated_in_this_lab_delivery",
   "nextStep": "Native integration must verify desktop/mobile CSS, public link, dispatcher and deployed Site."
 }

@@ -1,8 +1,8 @@
 {
   "game": "SS19",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "date": "2026-11-23",
-  "command": "npm test",
+  "command": "npm run build && node --test tests/*.test.mjs",
   "tests": 78,
   "passed": 78,
   "failed": 0,
@@ -13,10 +13,10 @@
   },
   "sourceSha256": {
     "src/core.ts": "ce548df7e1cc246f44ac3afa239321bb86129aa3f347673430fc4ad618c44de7",
-    "src/tutorial.ts": "06216dc9a32fc2dcd5be06ac4f60c73e5da7a595e818a2c2216152f7bda6cb36",
+    "src/tutorial.ts": "076a3d93d314df6f07894729b68f881baef545d011891dafe916fb1304777360",
     "tests/trio.test.mjs": "28ae5663bae40c6fc5d659df4e5d0b2f4430dd6ab89c76cd8d25d7be301a3c94",
     "tests/monsters.test.mjs": "54c3bb0ae32c437e51c90e7aec89dffe11ce6bb9b9f47ed8c02bd834a8294049",
-    "tests/tutorial.test.mjs": "d096c32da164fa611de658b2fa379320c7be413621df08fef2416aa2c918ad1a"
+    "tests/tutorial.test.mjs": "cbe7d0b854f5a7f4123d7a54b473b02cfb79af50c63afc1dee29f5ab979a344d"
   },
   "success": true
 }

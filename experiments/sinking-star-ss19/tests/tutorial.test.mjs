@@ -42,7 +42,7 @@ test('pushing Bard teaches the partner push without awarding a passive song',()=
 });
 test('the same visible push in another room awards no discovery',()=>{
  const spec=fixture({W:[4,4],stones:[[5,4]]});
- const s=new TrioPuzzleSession([spec,{...spec,id:'other-room'}]);s.selectLevel(2);
+ const s=new TrioPuzzleSession([spec,{...spec,id:'other-room'}]);s.selectLevel(TUTORIAL_LEVEL===1?2:1);
  assert.deepEqual([...observedAction(s,4)],[]);
 });
 

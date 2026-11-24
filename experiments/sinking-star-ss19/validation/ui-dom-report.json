@@ -1,9 +1,9 @@
 {
   "success": true,
-  "htmlSha256": "11c3ad41fa297d12e668bdfac3870921ff1fb7340a551173b548272854ec06e6",
+  "htmlSha256": "2c854b0a0ea7cc016119ccb5324f960d66ab50ca7c1e204143c85270c9db745f",
   "scope": "focused-ui-and-full-campaign",
-  "tutorialLevel": 1,
-  "pedagogicalFixtureLevel": 1,
+  "tutorialLevel": 2,
+  "pedagogicalFixtureLevel": 2,
   "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
   "visualBrowserTest": false,
   "checks": [
@@ -12,14 +12,14 @@
     "A four-mirror returning ray illuminates its path and blinks the Wizard without moving occupants or awarding a false discovery.",
     "Gray-backed buttons and black/gray press centers have the exact expected pixels.",
     "Mirror warnings flash only involved backs, preserve diagonals and lock ordinary controls.",
-    "The actual level 2 destination retains yellow corners while locked, opens only with two weights, and preserves black/gray centres through Undo and replay.",
+    "The actual level 1 destination retains yellow corners while locked, opens only with two weights, and preserves black/gray centres through Undo and replay.",
     "Keys 1/2/3, repeated Tab, all three role buttons and image clicks select correctly without advancing the world; Shift+Tab and off-canvas clicks are respected.",
-    "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries in the current room; Restart returns to level 1 with its tutorial visible.",
+    "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries in the current room; Restart returns to level 1 with its tutorial hidden; the teaching room remains at level 2.",
     "Reduced-motion mode paints the final result without timer waits.",
     "Defeat appears only after the combat animation and its Undo restores the three living heroes.",
     "Victory waits for all three heroes and the last frame, disables ordinary controls, and can be undone or restarted.",
-    "All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; the teaching galleries open at level 1; later rooms have contextual rules without awarding tutorial discoveries.",
-    "The actual gallery route at level 1 earns all 31 discoveries from displayed public pixels; other rooms add none.",
+    "All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; the campaign opens with the guard at level 1 and the teaching galleries are at level 2; other rooms have contextual rules without awarding tutorial discoveries.",
+    "The actual gallery route at level 2 earns all 31 discoveries from displayed public pixels; other rooms add none.",
     "The compiled HTML completes all eight real rooms with every frame and duration checked, including Undo and replay of each completion."
   ],
   "roleCoverage": [
@@ -354,8 +354,8 @@
       "resetClearsWarning": true
     }
   ],
-  "level2GoalGateCoverage": {
-    "level": 2,
+  "level1GoalGateCoverage": {
+    "level": 1,
     "goal": {
       "x": 9,
       "y": 15
@@ -403,15 +403,15 @@
   "campaignCoverage": [
     {
       "level": 1,
-      "title": "Les galeries des gardiens",
-      "actions": 208,
+      "title": "Le gardien du seuil",
+      "actions": 62,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
     {
       "level": 2,
-      "title": "Le gardien du seuil",
-      "actions": 62,
+      "title": "Les galeries des gardiens",
+      "actions": 208,
       "exactPixelsAndTiming": true,
       "completionUndo": true
     },
@@ -459,7 +459,7 @@
     }
   ],
   "tutorialCoverage": {
-    "level": 1,
+    "level": 2,
     "actions": 208,
     "discoveries": [
       "select",

@@ -1,25 +1,96 @@
 {
   "game": "SS19",
-  "version": "0.2.0",
-  "baselineCommit": "edc8db52c4891d85c14b5ef484d0fdf7a9c94a42",
+  "version": "0.2.1",
+  "baselineCommit": "f0abf30bbe00eb972a0e1135140978fa6698075a",
+  "scope": "Swap rooms 1 and 2; preserve all map contents, author actions and source metadata. Only positional IDs change for the two moved rooms.",
   "checks": [
     {
-      "level": 3,
-      "specUnchanged": true,
+      "level": 1,
+      "previousLevel": 2,
+      "previousId": "ss19-02",
+      "id": "ss19-01",
+      "specUnchangedExceptId": true,
       "commandsUnchanged": true,
-      "specSha256": "cf7292feac4361c1ad364cf851f8c9c587064b8cfdb131be59f47ff9ecd2cb96"
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "fd1261e0a220fa5a86d48ee7b9833f540bd2203563d821969ecd4e543c2e3f61"
+    },
+    {
+      "level": 2,
+      "previousLevel": 1,
+      "previousId": "ss19-l1",
+      "id": "ss19-02",
+      "specUnchangedExceptId": true,
+      "commandsUnchanged": true,
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "452933096963e77892d4e4ce28d5b2c0cae8147e12a57b458e0031e25bba6fc0"
+    },
+    {
+      "level": 3,
+      "previousLevel": 3,
+      "previousId": "ss19-03",
+      "id": "ss19-03",
+      "specUnchangedExceptId": true,
+      "commandsUnchanged": true,
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "d1d4ab9a7b1c0a625609b9ad6b4f53e2260c05bae25f995eca3a079390656a6d"
+    },
+    {
+      "level": 4,
+      "previousLevel": 4,
+      "previousId": "ss19-04",
+      "id": "ss19-04",
+      "specUnchangedExceptId": true,
+      "commandsUnchanged": true,
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "16ce94869660564a96861abfc887104f2cfaf49857af1045c5205d18b0dc93b4"
+    },
+    {
+      "level": 5,
+      "previousLevel": 5,
+      "previousId": "ss19-05",
+      "id": "ss19-05",
+      "specUnchangedExceptId": true,
+      "commandsUnchanged": true,
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "beebe57e9edb740672138628ee1121cc96868f70418bf3791e6e14030e182f69"
     },
     {
       "level": 6,
-      "specUnchanged": true,
+      "previousLevel": 6,
+      "previousId": "ss19-06",
+      "id": "ss19-06",
+      "specUnchangedExceptId": true,
       "commandsUnchanged": true,
-      "specSha256": "0b385a684d4c0b05d5bb8e314670f47a291ec18a252b181ad0d78e88fa0f1c97"
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "05fc7bd9aaf4836dbf16c51b19ac8275b479ef1669b128151bb1be8d484389a8"
     },
     {
       "level": 7,
-      "specUnchanged": true,
+      "previousLevel": 7,
+      "previousId": "ss19-07",
+      "id": "ss19-07",
+      "specUnchangedExceptId": true,
       "commandsUnchanged": true,
-      "specSha256": "6eb09440842ecffd249343e5d9ae3984dadc64877cdbddce0505b6c457c136e7"
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "309aa83a7c25d5772cc2cd33daf8e82caa9c32c2f0aec6f413a9bfcbceef47e9"
+    },
+    {
+      "level": 8,
+      "previousLevel": 8,
+      "previousId": "ss19-08",
+      "id": "ss19-08",
+      "specUnchangedExceptId": true,
+      "commandsUnchanged": true,
+      "actionsUnchanged": true,
+      "sourceMetadataUnchanged": true,
+      "normalizedSpecSha256": "41a5ad4b6a659ad6e1b15ceeefc2b825815ec2d96038bc60cd2aaa31ac8f9152"
     }
   ],
   "success": true

@@ -1,63 +1,60 @@
 import {Author,board} from './author.mjs';
+import {circuitPressed} from '../../dist/core.js';
 
-// Three staggered galleries. Each yellow alcove has its own physical lock.
-// The guard stays in a separated bay until a visible song delivers it to a press.
 const b=board(20,20);
-b.fill(2,2,17,6);b.fill(2,8,13,12);b.fill(2,14,17,17);
-b.fill(2,7,3,7);b.fill(12,13,13,13);b.fill(14,11,14,12);
-b.put(4,1);b.put(14,1);b.fill(15,9,17,9);b.put(15,10,'~');
-for(const[x,y]of [[1,4],[18,4],[1,16]])b.put(x,y,'g');
-for(const[x,y]of [[5,9],[6,10]])b.put(x,y,'#');
-for(const[x,y]of [[6,12],[7,12]])b.put(x,y,'~');b.put(8,12,'s');
-for(const[x,y]of [[4,2],[4,3],[14,1],[4,9],[6,9],[8,9],[5,12],[16,15]])b.put(x,y,'o');
-b.put(4,4,'W');b.put(6,4,'Z');b.put(6,11,'B');b.put(16,9,'m');
-const spec={id:'ss19-l1',title:'Les galeries des gardiens',rows:b.strings(),facing:'N',
- mirrors:[{at:{x:13,y:3},facing:'NW'}],
- circuits:[
-  {id:'charge',color:10,buttons:[{x:4,y:1},{x:16,y:16}]},
-  {id:'optique',color:15,buttons:[{x:14,y:1}]},
-  {id:'chœur',color:6,buttons:[{x:9,y:9},{x:11,y:9}]},
-  {id:'capture',color:14,buttons:[{x:13,y:12}]},
- ],
+// Three visible, separately operated presses deliver the weight to a fourth cell.
+// The rail is beyond both the singer and every unobstructed Wizard ray.
+b.fill(11,3,14,3);
+b.put(14,3,'m');
+b.fill(6,6,13,6);
+b.put(8,7);
+b.fill(8,8,16,14);
+// A blind elbow: no hero can stand to the right or above the reserve.
+b.put(14,7);b.put(15,7,'o');b.put(15,8,'#');
+// A distant operating island, separated by four cells of unsupported water.
+b.fill(2,9,3,11);b.fill(4,10,7,10,'~');
+b.put(6,6,'W');b.put(3,10,'Z');b.put(13,9,'B');
+for(const [x,y] of [[9,15],[15,15],[17,10]])b.put(x,y,'g');
+const spec={id:'ss19-01',title:'Le gardien du seuil',rows:b.strings(),facing:'E',
+ circuits:[{id:'seuil',buttons:[{x:11,y:3},{x:3,y:10}],color:15},
+  {id:'poussee-1',buttons:[{x:10,y:6}],color:11},
+  {id:'poussee-2',buttons:[{x:11,y:6}],color:14},
+  {id:'poussee-3',buttons:[{x:12,y:6}],color:12}],
  gates:[
-  {at:{x:2,y:4},circuit:'charge',direction:'W',closedWhen:'released'},
-  {at:{x:17,y:4},circuit:'optique',direction:'E',closedWhen:'pressed'},
-  {at:{x:2,y:16},circuit:'chœur',direction:'W',closedWhen:'released'},
-  {at:{x:15,y:9},circuit:'capture',direction:'S',closedWhen:'pressed'},
- ]};
+  {at:{x:14,y:3},circuit:'poussee-1',direction:'W',closedWhen:'pressed'},
+  {at:{x:13,y:3},circuit:'poussee-2',direction:'W',closedWhen:'pressed'},
+  {at:{x:12,y:3},circuit:'poussee-3',direction:'W',closedWhen:'pressed'},
+  {at:{x:9,y:15},circuit:'seuil',direction:'N',closedWhen:'released'},
+  {at:{x:15,y:15},circuit:'seuil',direction:'N',closedWhen:'released'},
+  {at:{x:17,y:10},circuit:'seuil',direction:'W',closedWhen:'released'}
+ ]
+};
 const a=new Author(spec);
-a.act('U').stage('Une seule poussée avance les deux caisses. Le monstre reste dans sa baie : les pas des héros ne le déplacent pas.');
-a.go(5,4).act('R').stage('Le Magicien poussé ne lance aucun sort. Les monstres restent en place sans déplacement imposé.');
-a.go(12,3).act('R').go(12,4).stage('Le miroir rejoint son poste ; ses deux axes se déplacent avec lui.');
-a.go(10,3,'wizard').act('RX').stage('Le rayon dévié échange le Magicien avec le poids violet ; le reflet fait ensuite sortir le Magicien sans marcher.');
-a.act('D');
-a.go(9,3,'warrior').act('RRX').stage('La caisse rapprochée devient prioritaire et remonte sur le bouton par reflet.');
-a.go(12,3,'wizard').act('R').stage('La transposition relève le poids de la commande sans interrompre son occupation.');
-a.go(12,2,'warrior').act('D').go(11,2);
-a.select('wizard').act('D').go(15,2).stage('Le Magicien libère enfin la commande violette ; la porte de l’alcôve droite reste ouverte.');
-a.select('bard').act('RR').stage('Le chant passe à travers la cloison. Une caisse est retenue, une autre suit en diagonale, et la troisième devient puis déplace un appui.');
-a.go(7,12,'warrior');
-a.select('bard').act('R').stage('Le Guerrier ancre le premier appui et suit le chant sur le suivant ; une caisse atteint le bouton magenta.');
-a.select('warrior').act('R');
-a.go(14,11,'wizard').act('L').stage('Le Magicien dépose la Barde près de la baie par échange, sans chanter.');
-a.select('bard').act('L').stage('Le carré pointillé contient le monstre : le chant le décale sur la presse verte ouverte.');
-a.select('wizard').act('R').stage('Le Magicien extrait la Barde sans reprendre le monstre avec son chant.');
-a.act('D').stage('La commande verte ferme la presse : le monstre tombe dans l’eau. Le geste et son effet sont visibles.');
-a.go(13,11).act('L').stage('Le Magicien extrait le Barde sans chant ; le poids magenta reste sur sa commande.');
-a.go(12,11,'warrior').act('R').stage('Le Guerrier prolonge l’extraction : le Barde sort de la portée du dernier poids sans le chanter.');
-a.go(16,14,'warrior').act('D').stage('La seconde charge cyan rejoint sa place. L’alcôve ouest devient accessible.');
-a.go(1,4).stage('Le Guerrier rejoint son alcôve : les deux autres héros continuent à agir.');
-a.go(18,4,'wizard').stage('Le Magicien rejoint l’alcôve optique après avoir laissé sa commande libre.');
-a.go(1,16,'bard').stage('Le Barde gagne la galerie basse sans déplacer le poids resté derrière la cloison.');
-a.save(new URL('../level1-design.json',import.meta.url),{
- label:'Adaptation de Heroes 2: Monsters · énigmes 14 et 15',
- url:'https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/',puzzle:'14, 15',
- secondaryLabel:'Heroes and Water · 27–28 · appuis et départ sans chant',
- secondaryUrl:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/',
- objective:'Apprendre les trois pouvoirs, livrer un monstre au chant sur une presse, puis résoudre les trois verrous des galeries.',
- },{
- kind:'adaptation',
- preserved:['Préparer le placement d’un monstre et manipuler les occupants avec les capacités des héros (Heroes 2, 14 et 15).','Recaler et ancrer les appuis avec la Barde ; quitter un cortège par déplacement imposé (Water, 27–28).','Déplacer une pièce par reflet et viser au travers d’un miroir (Mirrors, 1 et 30).'],
- changed:['Plan original en trois galeries décalées ; aucune grille ni séquence de la source n’est reproduite.','Les monstres n’ont aucun déplacement autonome. Le chant livre le gardien sur une presse ouverte, puis sa fermeture le pousse vers l’eau.','La presse et l’eau remplacent le cristal offensif de Heroes 2.','Le tutoriel montre aussi des interactions facultatives ; les découvertes n’ajoutent aucune condition cachée à la victoire.'],
- sourceReading:'Les guides motivent les interactions ; la géométrie, les trois verrouillages, la livraison par chant et le parcours pédagogique sont propres à SS19. La poursuite de la source n’est pas reproduite.',
- });
+a.go(9,6).act('R').stage('La commande jaune ferme la première presse : le gardien avance de 14,3 à 13,3.');
+a.act('R').stage('La commande verte ferme la deuxième presse et livre le gardien en 12,3.');
+a.act('R').stage('La commande orange actionne la dernière presse : le gardien arrive sur le bouton violet en 11,3.');
+if(!circuitPressed(a.world,a.state,'seuil'))throw Error('The three presses must deliver the guardian onto its separate arrival plate.');
+a.select('bard').act('LDDD').stage('Le gardien reste sur son bouton. Quatre pas chantés retirent la réserve du coude aveugle.');
+a.go(15,10,'warrior').act('LLLLLL').stage('Le Guerrier amène la caisse dans la visée du Magicien et s’arrête avant l’eau.');
+a.select('wizard').act('R').stage('La caisse remplace le Magicien sur la commande de l’îlot : les deux poids permanents maintiennent les sorties ouvertes.');
+a.go(17,10).stage('Le Magicien occupe la sortie est.');
+a.go(9,15,'warrior').stage('Le Guerrier rejoint la sortie sud-ouest.');
+a.go(15,15,'bard').stage('Le Barde ferme la marche : les deux poids restent en place pendant les trois arrivées.');
+const source={
+ label:'Adaptation · Heroes 2: Monsters · énigmes 15 et 22',
+ url:'https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-15',puzzle:15,
+ objective:'Livrer un monstre par trois presses orientées, puis remplacer le Magicien par une caisse sur un îlot de commande.',
+ secondaryLabel:'Heroes and Light · énigme 1 · presses orientées',
+ secondaryUrl:'https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-1'
+};
+const adaptation={kind:'adaptation',
+ preserved:['Un monstre et une caisse servent de poids pour libérer les sorties (Heroes 2, 15 et 22).','La transposition remplace un occupant sur sa commande.','Des presses poussent depuis des côtés inaccessibles aux héros (Heroes and Light, 1).'],
+ changed:['Le rail court comporte trois presses de couleurs distinctes et un bouton d’arrivée sur une quatrième case : aucune porte ne fait aussi office de bouton.','Chaque monstre reste immobile tant qu’une force visible ne le déplace. Aucun déplacement automatique ne dépend de la sélection ou du placement d’un héros.','La réserve sort du coude aveugle par le chant, puis le Guerrier l’aligne avec le Magicien.','Les trois destinations sont des portes du même accord de deux commandes ; le rail, l’îlot, la géométrie et le trajet sont propres à SS19.'],
+ sourceReading:'Heroes 2 fournit la conservation des monstres et des caisses comme poids. Light 1 fournit le déplacement imposé par une presse. Cette carte originale combine ces mécanismes, sans reprendre un plateau commercial.',
+ localChecks:[
+  {name:'Deux poids indispensables',observed:'À la victoire, les trois héros occupent les trois destinations distinctes des commandes du seuil. Seuls la caisse et le gardien peuvent tenir les deux boutons ; perdre l’un rend cet accord impossible.',scope:'Conservation des occupants, indépendante du témoin.'},
+  {name:'Trois commandes explicites',observed:'Les boutons jaune, vert et orange ferment respectivement les presses en 14,3, 13,3 et 12,3. Le gardien arrive sur le bouton violet distinct en 11,3.',scope:'Correspondance spatiale et circuits déclarés.'},
+  {name:'Sorties sous accord',observed:'Chaque destination est fermée tant que l’un des deux boutons violets est libre ; une fermeture expulse l’occupant avant la victoire.',scope:'Condition spatiale, sans quota caché.'}
+ ]
+};
+a.save(new URL('../level1-design.json',import.meta.url),source,adaptation);

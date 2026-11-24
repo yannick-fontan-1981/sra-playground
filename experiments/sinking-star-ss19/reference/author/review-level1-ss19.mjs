@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,writeFileSync} from 'node:fs';
 import {compileLevel,initialState,circuitPressed,terrainAt} from '../../dist/core.js';
 import {replay} from '../../scripts/solver.mjs';
-const design=JSON.parse(readFileSync(new URL('../level2-design.json',import.meta.url),'utf8'));
+const design=JSON.parse(readFileSync(new URL('../level1-design.json',import.meta.url),'utf8'));
 const {spec,commands,stages}=design,w=compileLevel(spec),initial=initialState(w),checks=[];
 const pos=points=>points.map(p=>`${p.x},${p.y}`).sort();
 const check=(name,observed,scope)=>checks.push({name,observed,scope});
@@ -37,5 +37,5 @@ assert.ok(rail.every(p=>outside.every(q=>Math.max(Math.abs(q.x-p.x),Math.abs(q.y
 assert.equal(w.mirrors.length,0);assert.equal(w.stones.length,1);assert.equal(w.monsters.length,1);assert.equal(w.circuits.find(c=>c.id==='seuil').buttons.length,2);
 check('Rail réservé aux trois presses','Le rail est scellé aux deux extrémités et séparé de tout sol extérieur par au moins trois cases de portée. Aucun miroir ni ligne dégagée ne permet au Magicien, au Barde ou au Guerrier d’atteindre son poids.','Vérification géométrique des possibilités de déplacement.');
 check('Deux ressources indispensables','À la victoire, les trois héros occupent les destinations hors commandes. La caisse et le gardien sont les deux seuls poids restants pour les boutons violets ; les appuis ne pèsent pas.','Conservation des occupants, valable indépendamment du témoin.');
-const report={gameCode:'SS19',version:'0.2.0',level:2,title:spec.title,status:'passed',checks,scope:'Rejeux contradictoires ciblés et arguments géométriques ; aucune preuve de route minimale ou d’unicité.'};
-writeFileSync(new URL('../level2-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));
+const report={gameCode:'SS19',version:'0.2.1',level:1,title:spec.title,status:'passed',checks,scope:'Rejeux contradictoires ciblés et arguments géométriques ; aucune preuve de route minimale ou d’unicité.'};
+writeFileSync(new URL('../level1-review.json',import.meta.url),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report));

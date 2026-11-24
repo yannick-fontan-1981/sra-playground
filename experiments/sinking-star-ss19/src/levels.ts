@@ -1,131 +1,7 @@
 import type {LevelSpec} from './core.js';
 export const SS19_LEVELS:readonly LevelSpec[]=[
   {
-    "id": "ss19-l1",
-    "title": "Les galeries des gardiens",
-    "rows": [
-      "####################",
-      "####.#########o#####",
-      "##..o.............##",
-      "##..o.............##",
-      "#g..W.Z...........g#",
-      "##................##",
-      "##................##",
-      "##..################",
-      "##............######",
-      "##..o#o.o.....#.m.##",
-      "##....#.......#~####",
-      "##....B........#####",
-      "##...o~~s......#####",
-      "############..######",
-      "##................##",
-      "##..............o.##",
-      "#g................##",
-      "##................##",
-      "####################",
-      "####################"
-    ],
-    "facing": "N",
-    "mirrors": [
-      {
-        "at": {
-          "x": 13,
-          "y": 3
-        },
-        "facing": "NW"
-      }
-    ],
-    "circuits": [
-      {
-        "id": "charge",
-        "color": 10,
-        "buttons": [
-          {
-            "x": 4,
-            "y": 1
-          },
-          {
-            "x": 16,
-            "y": 16
-          }
-        ]
-      },
-      {
-        "id": "optique",
-        "color": 15,
-        "buttons": [
-          {
-            "x": 14,
-            "y": 1
-          }
-        ]
-      },
-      {
-        "id": "chœur",
-        "color": 6,
-        "buttons": [
-          {
-            "x": 9,
-            "y": 9
-          },
-          {
-            "x": 11,
-            "y": 9
-          }
-        ]
-      },
-      {
-        "id": "capture",
-        "color": 14,
-        "buttons": [
-          {
-            "x": 13,
-            "y": 12
-          }
-        ]
-      }
-    ],
-    "gates": [
-      {
-        "at": {
-          "x": 2,
-          "y": 4
-        },
-        "circuit": "charge",
-        "direction": "W",
-        "closedWhen": "released"
-      },
-      {
-        "at": {
-          "x": 17,
-          "y": 4
-        },
-        "circuit": "optique",
-        "direction": "E",
-        "closedWhen": "pressed"
-      },
-      {
-        "at": {
-          "x": 2,
-          "y": 16
-        },
-        "circuit": "chœur",
-        "direction": "W",
-        "closedWhen": "released"
-      },
-      {
-        "at": {
-          "x": 15,
-          "y": 9
-        },
-        "circuit": "capture",
-        "direction": "S",
-        "closedWhen": "pressed"
-      }
-    ]
-  },
-  {
-    "id": "ss19-02",
+    "id": "ss19-01",
     "title": "Le gardien du seuil",
     "rows": [
       "####################",
@@ -250,6 +126,130 @@ export const SS19_LEVELS:readonly LevelSpec[]=[
         "circuit": "seuil",
         "direction": "W",
         "closedWhen": "released"
+      }
+    ]
+  },
+  {
+    "id": "ss19-02",
+    "title": "Les galeries des gardiens",
+    "rows": [
+      "####################",
+      "####.#########o#####",
+      "##..o.............##",
+      "##..o.............##",
+      "#g..W.Z...........g#",
+      "##................##",
+      "##................##",
+      "##..################",
+      "##............######",
+      "##..o#o.o.....#.m.##",
+      "##....#.......#~####",
+      "##....B........#####",
+      "##...o~~s......#####",
+      "############..######",
+      "##................##",
+      "##..............o.##",
+      "#g................##",
+      "##................##",
+      "####################",
+      "####################"
+    ],
+    "facing": "N",
+    "mirrors": [
+      {
+        "at": {
+          "x": 13,
+          "y": 3
+        },
+        "facing": "NW"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "charge",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 1
+          },
+          {
+            "x": 16,
+            "y": 16
+          }
+        ]
+      },
+      {
+        "id": "optique",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 14,
+            "y": 1
+          }
+        ]
+      },
+      {
+        "id": "chœur",
+        "color": 6,
+        "buttons": [
+          {
+            "x": 9,
+            "y": 9
+          },
+          {
+            "x": 11,
+            "y": 9
+          }
+        ]
+      },
+      {
+        "id": "capture",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 13,
+            "y": 12
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 2,
+          "y": 4
+        },
+        "circuit": "charge",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 4
+        },
+        "circuit": "optique",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 2,
+          "y": 16
+        },
+        "circuit": "chœur",
+        "direction": "W",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 9
+        },
+        "circuit": "capture",
+        "direction": "S",
+        "closedWhen": "pressed"
       }
     ]
   },

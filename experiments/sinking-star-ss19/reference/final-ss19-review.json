@@ -1,6 +1,6 @@
 {
   "game": "SS19",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "status": "passed",
   "scope": "Revue des niveaux6–8 sans poursuite autonome : rejeux, variantes constructives, causes physiques visibles et preuves géométriques spécifiques au dernier niveau. N6 conserve absolument sa carte et sa route. Aucune unicité ou optimalité des solutions n’est annoncée.",
   "checks": [

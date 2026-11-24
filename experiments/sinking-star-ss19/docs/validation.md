@@ -1,4 +1,4 @@
-# Qualification de SS19 0.2.0
+# Qualification de SS19 0.2.1
 
 La qualification porte sur le laboratoire autonome **Les Gardiens Noirs**, son moteur, ses huit cartes et son HTML compilé. Les huit parcours d’auteur sont rejoués par les commandes de l’interface livrée, depuis le niveau 1 jusqu’au résultat public **`WIN`**. Les monstres restent immobiles tant qu’un pouvoir ou une presse ne les transporte pas. Aucun déplacement autonome ni comportement dépendant du héros sélectionné ne subsiste.
 
@@ -14,29 +14,25 @@ Les résultats établissent la validité des parcours et des contre-branches ind
 | Régressions du suivi pédagogique public | 11 réussies |
 | **Total des tests** | **78 réussis, aucun échec** |
 | Campagne | 8 témoins gagnants, aucun refus, aucune perte de héros |
-| Tutoriel N1 | 31 découvertes sur 31, démontrées dans les images publiques |
+| Tutoriel N2 | 31 découvertes sur 31, démontrées dans les images publiques |
 | Interface livrée | 29 cas de mécanismes, contrôles complémentaires et huit parcours complets dans le HTML compilé |
 | Images et temps | 2 615 images de campagne, comparaison exacte des pixels et durées |
 | Undo | Fin de chacune des huit salles annulée puis rejouée |
 | Revues de conception | 88 contrôles réussis dans quatre scripts reproductibles |
 | Répétitions exactes | Aucun doublon de terrain parmi les huit cartes ni avec les 40 terrains SS14–SS18, sous les huit symétries et après recadrage |
-| Cartes conservées | Géométrie et commandes des N3, N6 et N7 identiques à la base 0.1.0 |
+| Cartes et parcours conservés | Huit cartes, commandes, actions et crédits identiques à la base 0.2.0 selon la permutation `[2,1,3,4,5,6,7,8]` ; seuls les identifiants positionnels des deux premières salles changent |
 | Navigateur natif et Site | À qualifier lors de l’intégration native ; aucune exécution revendiquée ici |
 
-Empreinte SHA-256 du HTML qualifié :
-
-`11c3ad41fa297d12e668bdfac3870921ff1fb7340a551173b548272854ec06e6`
-
-Les rapports [levels-report.json](../validation/levels-report.json) et [ui-dom-report.json](../validation/ui-dom-report.json) portent cette même empreinte. Le manifeste [delivery.json](../validation/delivery.json) rassemble les références de livraison. `dist/` est un résultat de construction ignoré par Git ; le code nécessaire à sa reproduction est conservé dans le dépôt.
+L’empreinte SHA-256 du HTML qualifié est enregistrée dans le champ `artifact.sha256` du manifeste [delivery.json](../validation/delivery.json). Les rapports [levels-report.json](../validation/levels-report.json) et [ui-dom-report.json](../validation/ui-dom-report.json) portent la même empreinte. Le manifeste rassemble les références de livraison de la version 0.2.1. `dist/` est un résultat de construction ignoré par Git ; le code nécessaire à sa reproduction est conservé dans le dépôt.
 
 ## Parcours de campagne
 
-Le départ est le **niveau 1**, avec le trio **Guerrier / Magicien / Barde**. Les entrées comprennent ACTION1–6 ; les actions hors sélection retirent les changements de héros. Les images comprennent les transitions vers la salle suivante. Le dernier résultat public est **`WIN`**, avec les huit salles terminées.
+Le départ est le **niveau 1, Le gardien du seuil** ; le tutoriel vient au **niveau 2, Les galeries des gardiens**. Le trio reste **Guerrier / Magicien / Barde**. Les entrées comprennent ACTION1–6 ; les actions hors sélection retirent les changements de héros. Les images comprennent les transitions vers la salle suivante. Le dernier résultat public est **`WIN`**, avec les huit salles terminées.
 
 | Niveau | Entrées | Sélections | Actions hors sélection | Images |
 | --- | ---: | ---: | ---: | ---: |
-| 1 | 208 | 20 | 188 | 600 |
-| 2 | 62 | 8 | 54 | 184 |
+| 1 | 62 | 8 | 54 | 184 |
+| 2 | 208 | 20 | 188 | 600 |
 | 3 | 150 | 18 | 132 | 423 |
 | 4 | 135 | 12 | 123 | 392 |
 | 5 | 134 | 13 | 121 | 400 |
@@ -47,7 +43,7 @@ Le départ est le **niveau 1**, avec le trio **Guerrier / Magicien / Barde**. Le
 
 Les témoins réalisent 75 actions de poussée du Guerrier, dont 11 poussées en file ; 41 chants ; 16 échanges, dont 3 visées coudées ; 12 actions de reflet ; 8 poussées de presse ; et 3 déplacements d’appui. Les chants déplacent individuellement des monstres à 12 reprises. Ces valeurs décrivent les parcours enseignés, sans imposer les mêmes événements à toutes les solutions. Le moteur n’ajoute aucun pas de monstre après leur transport physique. Les métriques complètes figurent dans [levels-report.json](../validation/levels-report.json).
 
-Le contrôle [preserved-levels.json](../validation/preserved-levels.json) compare les géométries et commandes des N3, N6 et N7 à la base Git `edc8db52c4891d85c14b5ef484d0fdf7a9c94a42` et confirme leur conservation.
+Le contrôle [preserved-levels.json](../validation/preserved-levels.json) compare les huit salles à la base 0.2.0, commit Git `f0abf30bbe00eb972a0e1135140978fa6698075a`. Les cartes, commandes, actions et crédits restent identiques selon la permutation `[2,1,3,4,5,6,7,8]`. Seuls les identifiants positionnels des deux salles déplacées changent : le nouveau N1 porte `ss19-01` et le nouveau N2 porte `ss19-02`.
 
 ## Moteur et pédagogie
 
@@ -55,7 +51,7 @@ Le contrôle [preserved-levels.json](../validation/preserved-levels.json) compar
 
 Les 17 tests de `tests/monsters.test.mjs` vérifient l’immobilité après marche ou sélection, la stabilité d’un monstre posé sur un bouton sans mur pour le retenir, et les transports par poussée, chant, échange, reflet et presse. Chaque transport conserve ses images visibles et ne déclenche aucun mouvement supplémentaire. Ouvrir une porte ou fermer une presse vide ne déplace pas un monstre voisin : la presse agit sur l’occupant de sa propre case lors de sa fermeture. Les tests couvrent également la noyade, le combat simultané, les contacts avant la validation des destinations et la restauration du tour entier par Undo.
 
-Les 11 régressions pédagogiques vérifient le suivi depuis les pixels publics : une poussée de file se distingue d’une poussée simple ; un monstre rouge reste distinct du Guerrier ; un chant qui transporte un monstre est reconnu comme tel ; une sélection seule ne démontre ni marche ni transport ; un appui déplacé n’est pas déclaré nouvellement créé ; un Barde bloqué ne valide pas de chant. Une presse qui déplace un monstre ensuite noyé est reconnue à partir des images intermédiaires. Aucune découverte n’est accordée hors du niveau 1.
+Les 11 régressions pédagogiques vérifient le suivi depuis les pixels publics : une poussée de file se distingue d’une poussée simple ; un monstre rouge reste distinct du Guerrier ; un chant qui transporte un monstre est reconnu comme tel ; une sélection seule ne démontre ni marche ni transport ; un appui déplacé n’est pas déclaré nouvellement créé ; un Barde bloqué ne valide pas de chant. Une presse qui déplace un monstre ensuite noyé est reconnue à partir des images intermédiaires. Aucune découverte n’est accordée hors du niveau 2.
 
 Le rapport [unit-report.json](../validation/unit-report.json) conserve la répartition des tests et les empreintes des sources du moteur, du tutoriel et des tests qualifiés.
 
@@ -71,11 +67,11 @@ Rapport : [levels-report.json](../validation/levels-report.json).
 
 `scripts/verify-ui-dom.mjs` exécute le vrai HTML compilé dans **Happy DOM**, avec tampon RGBA du canvas et temporisateurs contrôlés. Il compare les pixels et les délais au moteur de référence. Ses **29 cas de mécanismes** couvrent les trois rôles, les poussées en file, les gardiens immobiles et leurs transports explicites, les appuis, les presses, l’hydraulique et le combat. Des contrôles complémentaires couvrent les reflets, la boucle de visée et les dessins des dispositifs.
 
-Les touches 1/2/3, Tab, les clics et boutons de rôle, les commandes de direction, les interruptions par Undo/Reset/Restart, le changement de niveau, la réduction des animations et les panneaux de défaite/victoire sont exercés. Les huit routes sont ensuite jouées par l’interface et les 31 découvertes du tutoriel sont lues dans le DOM. La comparaison porte sur toutes les images et durées de ces parcours, y compris l’annulation et le rejeu de chaque fin de salle.
+Les touches 1/2/3, Tab, les clics et boutons de rôle, les commandes de direction, les interruptions par Undo/Reset/Restart, le changement de niveau, la réduction des animations et les panneaux de défaite/victoire sont exercés. Les huit routes sont ensuite jouées par l’interface et les 31 découvertes du tutoriel sont lues dans le DOM. La comparaison porte sur toutes les images et durées de ces parcours, y compris l’annulation et le rejeu de chaque fin de salle. La transition N1 → N2 active le tutoriel dans la salle des galeries ; les commandes de reprise conservent le nouveau départ au Gardien du seuil.
 
 Sur la **vraie carte N8**, après un préfixe de **7 entrées**, un reflet bloqué fait clignoter le dos du miroir concerné : quatre images, trois pixels noirs devenant rouges, diagonale intacte. Les durées sont 110/70/110/0 ms ; des avertissements répétés n’ajoutent pas d’Undo et Reset efface l’avertissement. Le rapport enregistre ce cas sous `actual campaign blocked mirrors`, avec `level: 8` et `prefixActions: 7`.
 
-Une presse placée sur une destination de **N2** est également contrôlée dans le HTML : coins jaunes et centre noir lorsqu’elle est fermée, cadre jaune et centre gris lorsqu’elle s’ouvre, aucun bleu parasite. Son ouverture exige les deux poids de la salle. Annuler puis rejouer conserve les pixels et durées attendus. Les boutons rose-violet sont dessinés sur un fond gris opaque.
+Une presse placée sur une destination de **N1** est également contrôlée dans le HTML : coins jaunes et centre noir lorsqu’elle est fermée, cadre jaune et centre gris lorsqu’elle s’ouvre, aucun bleu parasite. Son ouverture exige les deux poids de la salle. Annuler puis rejouer conserve les pixels et durées attendus. Les boutons rose-violet sont dessinés sur un fond gris opaque.
 
 **Limite de cette qualification :** Happy DOM exécute les commandes et le code du canvas, mais ne calcule pas la mise en page CSS comme un navigateur natif. Ces résultats ne constituent donc pas une revue visuelle ordinateur/mobile, une mesure de fluidité sur un appareil réel ou une vérification du Site publié. Ces contrôles restent à effectuer dans l’environnement d’intégration.
 
@@ -83,25 +79,25 @@ Rapports : [ui-dom-report.json](../validation/ui-dom-report.json) et [browser-re
 
 ## Conception et raccourcis
 
-`scripts/verify-design-constraints.mjs` vérifie les trois héros et les trois destinations, l’absence de départ sur une destination, la séparation boutons/presses, les graphes de marche dans la géométrie initiale figée et les empreintes de terrain. Les trois destinations ne doivent pas être assignables par simple marche dans ce modèle. Au N1, aucune destination n’est immédiatement accessible dans ces graphes.
+`scripts/verify-design-constraints.mjs` vérifie les trois héros et les trois destinations, l’absence de départ sur une destination, la séparation boutons/presses, les graphes de marche dans la géométrie initiale figée et les empreintes de terrain. Les trois destinations ne doivent pas être assignables par simple marche dans ce modèle. Au N2, la salle pédagogique conserve son contrôle spécifique : aucune destination n’est immédiatement accessible dans ces graphes. Le nouveau N1 conserve ses trois destinations fermées par son circuit à deux poids.
 
 Les quatre revues reproductibles totalisent **88 contrôles réussis** :
 
 | Script | Contrôles | Objet principal |
 | --- | ---: | --- |
-| `review-level2-ss19.mjs` | 10 | Rail à trois presses, deux poids, remplacement du Magicien et fermeture des destinations |
+| `review-level1-ss19.mjs` | 10 | Rail à trois presses, deux poids, remplacement du Magicien et fermeture des destinations |
 | `review-ss19-middle.mjs` | 20 | Contrôleur optique, réserve hydraulique, appuis, collision chantée et moulin à deux presses |
 | `review-final-ss19.mjs` | 21 | Reflets, relais, deux gardiens, ressources nécessaires et variantes des N6–N8 |
 | `independent-review-ss19.mjs` | 37 | Causes physiques, contre-parcours, géométrie, ressources et variantes des huit salles |
 | **Total** | **88** | |
 
-La provenance de la relecture de N2 est explicitée dans le rapport indépendant : son nouveau rail a été écrit par un autre auteur, sur une géométrie héritée d’une version conçue par le relecteur. Les contrôles sont ciblés et leurs limites sont déclarées.
+La provenance de la relecture de N1 est explicitée dans le rapport indépendant : son nouveau rail a été écrit par un autre auteur, sur une géométrie héritée d’une version conçue par le relecteur. Les contrôles sont ciblés et leurs limites sont déclarées.
 
-Au N2, une fermeture vide ne termine pas le trajet du gardien. Au N4, déplacer le gardien avant d’extraire les réserves ferme leur accès ; la trappe active ne donne pas de traversée directe du bassin. Au N5, deux poids restent enfermés dans leur chambre. La caisse haute est la seule réserve extérieure compatible avec la commande cyan finale : un contre-parcours place réellement un monstre sur ce bouton, puis constate le contact mortel lorsqu’un héros entre sur la destination voisine. Fermer la première presse contre la seconde déjà fermée écrase également cette caisse.
+Au N1, une fermeture vide ne termine pas le trajet du gardien. Au N4, déplacer le gardien avant d’extraire les réserves ferme leur accès ; la trappe active ne donne pas de traversée directe du bassin. Au N5, deux poids restent enfermés dans leur chambre. La caisse haute est la seule réserve extérieure compatible avec la commande cyan finale : un contre-parcours place réellement un monstre sur ce bouton, puis constate le contact mortel lorsqu’un héros entre sur la destination voisine. Fermer la première presse contre la seconde déjà fermée écrase également cette caisse.
 
 ### Variantes gagnantes requalifiées
 
-Le tableau présente des routes entièrement rejouées sur les cartes **0.2.0**, sans refus ni perte de héros. Les nombres sont des observations, sans revendication de minimum.
+Le tableau présente des routes entièrement rejouées sur les cartes **0.2.1**, sans refus ni perte de héros. Les nombres sont des observations, sans revendication de minimum.
 
 | Niveau | Variante | Entrées | Sélections | Portée de la conclusion |
 | --- | --- | ---: | ---: | --- |
