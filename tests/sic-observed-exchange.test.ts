@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
 import test from 'node:test';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createGameDispatcher } from '../src/runtime/native-game-dispatcher.ts';
@@ -63,7 +62,13 @@ test('position exchange learns both participants and composes with transport and
   assert.equal(board.levelsCompleted, 1);
 });
 
-const tutorial = JSON.parse(readFileSync(new URL('../experiments/sinking-star-ss04/tests/witnesses.json', import.meta.url), 'utf8'))[0].actions as number[];
+// The level-entry replay calibrates the controls before the bridge is made,
+// so the tests can transfer both the witnessed actuator and the reflected ray.
+const tutorial = [
+  1, 3, 2, 4, 1, 3, 1, 4, 4, 1, 2, 1, 3, 2, 2, 4, 4,
+  4, 4, 3, 2, 4, 4, 4, 1, 1, 1, 4, 2, 3, 3, 3, 1, 1,
+  1, 3, 1, 4, 4, 4, 2, 2, 4, 4, 4, 1, 2, 1, 2, 2, 4,
+];
 
 for (const mirror of [false, true]) test(`exchange transfers to pressure circuits, survival and separated footholds${mirror ? ' on a mirrored board' : ''}`, async () => {
   const game = createGameDispatcher(async () => { throw Error('Expected a native game'); });
@@ -248,4 +253,35 @@ for (const mirror of [false, true]) test(`exchange transfers to pressure circuit
   assert.equal(actions, 35);
   assert.deepEqual(placed, controls);
   assert.equal(reflected, true);
+
+  board = await game.dispatch({ type: 'load', code: 'SS04', level: 7 });
+  const bridgeEntry = frame(board.frame), bridgeScore = board.levelsCompleted;
+  const withoutTransport = { ...roles, openings: roles.openings?.filter(sample => !sample.bridge) };
+  assert.equal(planBoundExchange(withoutTransport, bridgeEntry, inputs, 110, undefined, threat), undefined);
+  const bridgePlan = planBoundExchange(roles, bridgeEntry, inputs, 110, undefined, threat);
+  assert.ok(bridgePlan && (bridgePlan.bridgeTarget || bridgePlan.pressureTarget), 'The first proposal should advance the composition');
+  assert.equal(Object.keys(bridgePlan.field.bridges ?? {}).length, 2);
+  binding = undefined;
+  actions = 0;
+  let bridgeCount = 0, holdsWithBothRoles = false;
+  while (board.levelsCompleted === bridgeScore && actions < 110) {
+    const plan = planBoundExchange(roles, frame(board.frame), inputs, 110 - actions, binding, threat);
+    assert.ok(plan?.steps.length && plan.steps.length <= 16);
+    const dependencies = Object.values(plan.field.doors).find(door => door.controls.length === 2)!.controls;
+    for (const step of plan.steps) {
+      board = await game.dispatch({ type: 'action', actionId: map.get(step.action.action_ref)! });
+      actions++;
+      assert.notEqual(board.state, 'GAME_OVER');
+      if (board.levelsCompleted > bridgeScore) break;
+      assert.ok(matchesBoundExchange(roles, plan.field, step.after, frame(board.frame)), `Bridge route diverged at command ${actions}`);
+      assert.ok((step.after.bridges?.length ?? 0) >= bridgeCount);
+      bridgeCount = step.after.bridges?.length ?? 0;
+      holdsWithBothRoles ||= dependencies.some(cell => step.after.pieces.includes(cell))
+        && dependencies.some(cell => step.after.threats?.includes(cell));
+      binding = { field: plan.field, pose: step.after };
+    }
+  }
+  assert.equal(board.levelsCompleted, bridgeScore + 1);
+  assert.equal(bridgeCount, 2);
+  assert.equal(holdsWithBothRoles, true);
 });

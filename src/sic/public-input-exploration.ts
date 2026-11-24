@@ -636,10 +636,11 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     }));
     const evidence: [string, ...string[]] = [ref, roles.exchangeRef, roles.scoreRef, ...Object.values(roles.moves).map(move => move.ref),
       ...(plan.field.threat?.evidence ?? []), ...(plan.field.mechanismRefs ?? []), ...transmissionRefs];
-    const target = pushAccessBox(plan.pressureTarget ?? plan.field.exit, roles.grid.pitch);
+    const target = pushAccessBox(plan.bridgeTarget ?? plan.pressureTarget ?? plan.field.exit, roles.grid.pitch);
     const actions = plan.steps.map(step => step.action);
-    const label = plan.field.threat ? 'Reach the exit through exchanges whose arrivals avoid the observed threat'
+    const label = plan.bridgeTarget ? 'Use the observed press to turn a weight into a foothold'
       : plan.pressureTarget ? 'Place the movable weight on the matching control to hold the passage open'
+      : plan.field.threat ? 'Reach the exit through exchanges whose arrivals avoid the observed threat'
       : 'Reach the exit using the verified exchange route';
     const goal = { kind: 'compose_observed_exchange_access', scope: ref.split(':revision:', 1)[0]!,
       subjects: [plan.field.exit, ...Object.keys(plan.field.marks)], parentObjective: completion,

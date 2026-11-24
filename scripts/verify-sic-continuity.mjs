@@ -129,6 +129,8 @@ function measuredExchangeSeries(level, tickets) {
   const mixed = [];
   let deaths = 0, threatExchanges = 0, crossedWater = false, openedWithWeight = false;
   let reflected = false, placed = [];
+  const sharedControl = level === 7 ? world.circuits.find(circuit => circuit.buttons.length > 1)?.buttons : undefined;
+  let builtFromWeight = 0;
   for (const [index, ticket] of tickets.entries()) {
     if (ticket.resets !== (previous?.resets ?? entryResets)) {
       if (level === 4) assert.ok(state.dead, 'SS04 L4 reset without an observed loss');
@@ -158,6 +160,17 @@ function measuredExchangeSeries(level, tickets) {
       if (covered.length > placed.length) mixed.push({ kind: 'load a circuit control', first: index + 1, last: index + 1 });
       placed = covered;
     }
+    if (level === 7) {
+      assert.ok((kind === 'walk' || kind === 'swap') && !detail.state.dead, 'SS04 L7 used an ineffective or unsafe action');
+      const constructed = detail.state.supports.length - state.supports.length;
+      if (constructed > 0) {
+        assert.ok(detail.phases.some(phase => phase.kind === 'piston' && phase.moves.some(move => move.actor === 'stone')),
+          'SS04 L7 created a foothold without a witnessed press');
+        assert.equal(state.stones.length - detail.state.stones.length, constructed);
+        builtFromWeight += constructed;
+        mixed.push({ kind: 'press a weight into water', first: index + 1, last: index + 1 });
+      }
+    }
     if (kind === 'swap' && previous?.kind === 'walk' && previous.revision === ticket.decisionRevision && ticket.actionIndex > 0) {
       assert.ok(detail.phases[0].moves.some(move => move.actor !== 'hero' && equal(move.to, state.hero)), 'Expected a real exchange');
       mixed.push({ kind: 'walk then swap', first: index, last: index + 1 });
@@ -181,6 +194,13 @@ function measuredExchangeSeries(level, tickets) {
   if (level === 6) {
     assert.ok(reflected && placed.length === world.buttons.length, 'SS04 L6 did not compose mirror exchanges with the full pressure circuit');
   }
+  if (level === 7) {
+    assert.equal(builtFromWeight, 2, 'SS04 L7 must build both footholds with the presses');
+    assert.ok(sharedControl?.length === 2 && sharedControl.every(mark => [...state.stones, ...state.monsters].some(body => equal(mark, body))),
+      'SS04 L7 did not keep the shared pressure circuit active');
+    assert.ok(sharedControl.some(mark => state.stones.some(body => equal(mark, body)))
+      && sharedControl.some(mark => state.monsters.some(body => equal(mark, body))), 'SS04 L7 must use the crate and monster together');
+  }
   return mixed;
 }
 
@@ -192,7 +212,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 6 : 1), code + ' incomplete campaign');
+  assert.equal(levels.length, reference?.length ?? (code === 'SS02' ? 6 : code === 'SS03' ? 8 : code === 'SS04' ? 7 : 1), code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -291,6 +311,10 @@ export function checkRun(run) {
       assert.ok(issued.length <= 42 && groups.size <= 4, 'SS04 L6 lost its direct pressure composition');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L6 reset during the pressure composition');
     }
+    if (code === 'SS04' && row.level === 7) {
+      assert.ok(issued.length <= 90 && groups.size <= 7, 'SS04 L7 lost the verified bridge and pressure composition');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L7 reset during the composition');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : [];
@@ -324,7 +348,7 @@ function main() {
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
-      ['l-axe-violet', 'SS04', '6', '140'],
+      ['l-axe-violet', 'SS04', '7', '150'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

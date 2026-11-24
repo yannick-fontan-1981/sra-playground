@@ -4,13 +4,14 @@ import { maximumCommittedActions } from './plan-step.ts';
 
 type Cells = ReturnType<typeof readTravelGrid>['cells'];
 type Move = { input: string; delta: NativePoint };
-type Gate = { cell: string; mark: string; ink: number; opensWhenCovered: boolean };
+type Gate = { cell: string; mark: string; ink: number; opensWhenCovered: boolean; rest?: number[] };
 type Layout = { marks: Record<string, number[]>; gates: Gate[]; exit?: string; wall: string };
-type Pose = { actor: string; pieces: string[]; threats?: string[] };
+type Pose = { actor: string; pieces: string[]; threats?: string[]; bridges?: string[] };
 type Prediction = { command: string; pose: Pose };
 type Exchange = { ref: string; from: string; to: string; turns: string[] };
 type Reflection = { pixels: number[]; incoming: NativePoint; outgoing: NativePoint; ref: string };
-type PressureOpening = { colors: number[]; closed: number[]; open: number[]; covered: number[]; ref: string };
+type BridgeEffect = { delta: NativePoint; water: string; support: string };
+type PressureOpening = { colors: number[]; closed: number[]; open: number[]; covered: number[]; ref: string; bridge?: BridgeEffect };
 export type ObservedExchange = {
   body: string; layout: Layout; refs: string[]; supports: string[];
   turns: Record<string, NativePoint>; rejected: string[]; last: Exchange;
@@ -30,13 +31,14 @@ export type ExchangeTransfer = Pick<ObservedTravel, 'grid' | 'moves'> & {
   openings?: PressureOpening[];
 };
 export type ExchangeThreat = { stamp: string; evidence: readonly [string, string] };
-type Door = { shut: string; open: string; controls: string[] };
+type Door = { shut: string; open: string; controls: string[]; bridge?: BridgeEffect };
 type BoundField = { floor: string[]; marks: Record<string, string>; doors: Record<string, Door>;
   exit: string; fixed: Record<string, string>; threat?: ExchangeThreat; transmission?: string[];
-  reflectors?: Record<string, Record<string, NativePoint>>; coveredMarks?: Record<string, number[]>; mechanismRefs?: string[] };
+  reflectors?: Record<string, Record<string, NativePoint>>; coveredMarks?: Record<string, number[]>; mechanismRefs?: string[];
+  bridges?: Record<string, string> };
 export type BoundExchange = { field: BoundField; pose: Pose };
 type ExchangeStep = { action: NativeCommand; after: Pose };
-export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[]; pressureTarget?: string };
+export type BoundExchangePlan = BoundExchange & { roles: ExchangeTransfer; steps: ExchangeStep[]; pressureTarget?: string; bridgeTarget?: string };
 
 const point = (cell: string) => cell.split(',').map(Number) as [number, number];
 const step = (cell: string, [dx, dy]: NativePoint) => {
@@ -45,8 +47,8 @@ const step = (cell: string, [dx, dy]: NativePoint) => {
 };
 const tileId = (pixels: readonly number[] | undefined) => pixels?.join(',') ?? '';
 const isUniform = (pixels: readonly number[]) => pixels.every(ink => ink === pixels[0]);
-const poseKey = ({ actor, pieces, threats }: Pose) =>
-  `${actor}|${[...pieces].sort().join(';')}${threats ? `|${[...threats].sort().join(';')}` : ''}`;
+const poseKey = ({ actor, pieces, threats, bridges }: Pose) =>
+  `${actor}|${[...pieces].sort().join(';')}${threats ? `|${[...threats].sort().join(';')}` : ''}${bridges ? `|support:${[...bridges].sort().join(';')}` : ''}`;
 const trialKey = (pose: Pose, input: string, supports: readonly string[]) => `${poseKey(pose)}|${input}|${supports.join(';')}`;
 const turnKey = (tile: readonly number[], incoming: NativePoint) => `${tileId(tile)}|${incoming.join(',')}`;
 const directions = (travel: ObservedTravel) => Object.entries(travel.moves).map(([input, move]) => ({ input, delta: move.delta }));
@@ -89,7 +91,7 @@ function measureLayout(cells: Cells, actor: string, pitch: number, floor: number
     if (rim === floor || isUniform(pixels) || !corners.every(i => pixels[i] === rim)) continue;
     const compatible = Object.entries(marks).filter(([, [arm, accent]]) => rim === arm && (accent === arm || pixels.includes(accent!)));
     if (compatible.length === 1) {
-      gates.push({ cell, mark: compatible[0]![0], ink: rim, opensWhenCovered: pixels[center] !== floor });
+      gates.push({ cell, mark: compatible[0]![0], ink: rim, opensWhenCovered: pixels[center] !== floor, rest: pixels });
     } else if (pixels[center] === floor && Object.values(marks).every(([arm]) => arm !== rim)) exits.push(cell);
   }
   return { marks, gates, wall, ...(exits.length === 1 ? { exit: exits[0]! } : {}) };
@@ -139,7 +141,7 @@ export function observeExchange(local: ObservedExchange | undefined, old: Observ
   expected?: Prediction): ObservedExchange | undefined {
   if (!old?.actor || !travel?.actor || old.grid.ink !== travel.grid.ink) return local;
   const delta = old.moves[command.action_ref]?.delta;
-  if (!delta || !local && ((frames?.length ?? 0) < 2 || travel.actor === old.actor)) return local;
+  if (!local && (!delta || (frames?.length ?? 0) < 2 || travel.actor === old.actor)) return local;
   const { grid } = old, first = readTravelGrid(before, grid).cells, second = readTravelGrid(after, grid).cells;
   const landing = first.get(travel.actor), replacement = second.get(old.actor);
   const body = local?.body ?? tileId(landing);
@@ -153,7 +155,7 @@ export function observeExchange(local: ObservedExchange | undefined, old: Observ
     && returned.pieces.includes(old.actor) && start.pieces.length === returned.pieces.length
     && start.pieces.every(piece => piece === travel.actor || returned.pieces.includes(piece));
   let result = local;
-  if (swapped) {
+  if (swapped && delta) {
     const ray = visibleTrace(old.actor, travel.actor, directions(old), grid.pitch, before, frames?.[0]);
     const direct = deltaTo(old.actor, travel.actor) === deltaTo(old.actor, step(old.actor, delta));
     if (direct || ray?.length && ray[0]!.delta.every((value, i) => value === delta[i])) {
@@ -193,8 +195,15 @@ export function observeExchange(local: ObservedExchange | undefined, old: Observ
   }
   const transport = witnessedSupport(result, old, start, returned, first, second);
   if (transport) {
-    return { ...result, supports: [...new Set([...result.supports, transport.support])],
-      lastTransport: { ...transport, ref }, refs: [...result.refs.slice(-7), ref] };
+    const { gate, control, support, bridge } = transport;
+    const open = result.layout.gates.find(item => item.cell === gate)?.rest, closed = second.get(gate);
+    const colors: number[] | undefined = result.layout.marks[control], covered = second.get(control);
+    const sample = grid.pitch === 3 && open && closed && colors && covered && open[4] === grid.floor && closed[4] !== grid.floor
+      && corners.every(index => colors.includes(covered[index]!))
+      ? { colors, closed, open, covered: corners.map(i => covered[i]!), ref, bridge } : undefined;
+    return { ...result, supports: [...new Set([...result.supports, support])],
+      ...(sample ? { openings: [...(result.openings ?? []), sample].slice(-8) } : {}),
+      lastTransport: { gate, control, support, ref }, refs: [...result.refs.slice(-7), ref] };
   }
   if (expected && expected.command === command.action_ref && poseKey(expected.pose) !== poseKey(returned)) {
     const key = trialKey(start, command.action_ref, result.supports);
@@ -208,11 +217,12 @@ function witnessedSupport(local: ObservedExchange, travel: ObservedTravel, befor
   for (const gate of local.layout.gates) {
     if (gate.opensWhenCovered || !before.pieces.includes(gate.cell) || after.pieces.includes(gate.cell)
       || before.actor === gate.mark || after.actor !== gate.mark) continue;
-    for (const { delta } of directions(travel)) {
+    const pitch = travel.grid.pitch;
+    for (const delta of [[pitch, 0], [-pitch, 0], [0, pitch], [0, -pitch]] as NativePoint[]) {
       const cell = step(gate.cell, delta), prior = first.get(cell), current = second.get(cell);
       if (prior && current && isUniform(prior) && prior[0] !== travel.grid.floor && tileId(prior) !== local.layout.wall
         && !isUniform(current) && cell !== after.actor && !after.pieces.includes(cell)) {
-        return { gate: gate.cell, control: gate.mark, support: cell };
+        return { gate: gate.cell, control: gate.mark, support: cell, bridge: { delta, water: tileId(prior), support: tileId(current) } };
       }
     }
   }
@@ -287,7 +297,7 @@ function reflectionProfiles(samples: readonly Reflection[]) {
   return profiles;
 }
 
-function bindPressureDoor(pixels: number[], marks: BoundField['marks'], roles: ExchangeTransfer) {
+function bindPressureDoor(pixels: number[], marks: BoundField['marks'], roles: ExchangeTransfer, pose: Pose) {
   const openExit = roles.exitStamp.split(',').map(Number);
   const isExit = corners.every(i => pixels[i] === openExit[i]);
   const groups = new Map<string, string[]>();
@@ -295,14 +305,19 @@ function bindPressureDoor(pixels: number[], marks: BoundField['marks'], roles: E
   const matches = new Map<string, { door: Door; covered: number[]; ref: string; isExit: boolean }>();
   for (const sample of roles.openings ?? []) for (const [stamp, controls] of groups) {
     const mark = stamp.split(',').map(Number);
+    const initiallyOpen = controls.every(cell => held(pose, cell)) !== !!sample.bridge;
     const bindColors = (tile: readonly number[]) => tile.map(ink => ink === sample.colors[0] ? mark[1]!
       : ink === sample.colors[1] ? mark[4]! : ink);
     for (const transform of orientations) {
       const shut = orientedTile(bindColors(sample.closed), transform);
-      if (!pixels.every((ink, i) => ink === shut[i] || isExit && corners.includes(i))) continue;
-      const open = isExit ? roles.exitStamp : tileId(orientedTile(bindColors(sample.open), transform));
+      const opened = orientedTile(bindColors(sample.open), transform);
+      if (initiallyOpen ? tileId(opened) !== tileId(pixels)
+        : !pixels.every((ink, i) => ink === shut[i] || isExit && corners.includes(i))) continue;
+      const open = isExit ? roles.exitStamp : tileId(opened);
       const covered = bindColors(sample.covered);
-      matches.set(JSON.stringify([open, controls, covered]), { door: { shut: tileId(pixels), open, controls }, covered, ref: sample.ref, isExit });
+      const bridge = sample.bridge && { ...sample.bridge, delta: transform(sample.bridge.delta) };
+      const door = { shut: isExit ? tileId(pixels) : tileId(shut), open, controls, ...(bridge ? { bridge } : {}) };
+      matches.set(JSON.stringify([door, covered]), { door, covered, ref: sample.ref, isExit });
     }
   }
   if (matches.size === 1) return matches.values().next().value;
@@ -347,7 +362,7 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
       for (const ref of reflector.refs) mechanismRefs.add(ref);
       continue;
     }
-    const opening = bindPressureDoor(pixels, marks, roles);
+    const opening = bindPressureDoor(pixels, marks, roles, { actor, pieces: bodies, threats });
     if (!opening) return;
     doors[cell] = opening.door;
     if (opening.isExit) exits.push(cell);
@@ -363,12 +378,19 @@ function bindExchangeField(roles: ExchangeTransfer, rows: NativeRows, threat?: E
   }
   if (controls.some(control => !Object.values(doors).some(door => door.controls.includes(control)))) return;
   const threatBinding = threat && threats.length && threats.every(a => threats.every(b => !adjacent(a, b, grid.pitch))) ? threat : undefined;
-  if (threats.length && (!threatBinding || controls.length)) return;
+  if (threats.length && !threatBinding) return;
+  const bridges: Record<string, string> = {};
+  for (const [cell, door] of Object.entries(doors)) {
+    if (!door.bridge) continue;
+    const landing = step(cell, door.bridge.delta);
+    if (fixed[landing] === door.bridge.water) bridges[landing] = door.bridge.support;
+  }
   return { field: { floor: [...floor, ...controls, ...Object.keys(doors)], marks, doors, exit: exits[0]!, fixed,
       ...(transmission.length ? { transmission } : {}),
       ...(Object.keys(reflectors).length ? { reflectors } : {}),
       ...(Object.keys(coveredMarks).length ? { coveredMarks } : {}),
       ...(mechanismRefs.size ? { mechanismRefs: [...mechanismRefs] } : {}),
+      ...(Object.keys(bridges).length ? { bridges } : {}),
       ...(threatBinding ? { threat: threatBinding } : {}) },
     pose: { actor, pieces: bodies, ...(threatBinding ? { threats } : {}) } };
 }
@@ -378,24 +400,43 @@ function held(pose: Pose, cell: string) {
 }
 
 function doorOpen(door: Door, pose: Pose) {
-  return door.controls.every(mark => held(pose, mark));
+  return door.controls.every(mark => held(pose, mark)) !== !!door.bridge;
+}
+
+/** Reuse only the witnessed transport: one weight leaves a closing device
+ * and becomes a stable foothold. Other occupied closures need fresh evidence. */
+function settleExchangeDoors(field: BoundField, before: Pose, swapped: Pose, doorCells: readonly string[]): Pose | undefined {
+  let settled = swapped;
+  for (const cell of doorCells) {
+    const door = field.doors[cell]!;
+    if (!held(settled, cell) || doorOpen(door, settled)) continue;
+    if (!door.bridge || !doorOpen(door, before) || !settled.pieces.includes(cell)) return;
+    const landing = step(cell, door.bridge.delta);
+    if (field.bridges?.[landing] !== door.bridge.support || held(settled, landing) || settled.bridges?.includes(landing)) return;
+    settled = { ...settled, pieces: settled.pieces.filter(piece => piece !== cell), bridges: [...(settled.bridges ?? []), landing] };
+  }
+  return settled;
 }
 
 export function matchesBoundExchange(roles: ExchangeTransfer, field: BoundField, pose: Pose, rows: NativeRows): boolean {
   const { grid } = roles, { cells } = readTravelGrid(rows, grid), ground = new Set(field.floor);
-  const body = roles.body.split(',').map(Number);
+  const body = roles.body.split(',').map(Number), threat = field.threat?.stamp.split(',').map(Number);
   for (const [cell, pixels] of cells) {
     const stamp = tileId(pixels), door = field.doors[cell], mark = field.marks[cell];
     const occupant = held(pose, cell);
+    const support = pose.bridges?.includes(cell) ? field.bridges?.[cell] : undefined;
     if (door && (!doorOpen(door, pose) && occupant || !occupant && stamp !== (doorOpen(door, pose) ? door.open : door.shut))) return false;
     if (mark && occupant && corners.some((i, index) => pixels[i] !== (field.coveredMarks?.[cell]?.[index] ?? Number(mark.split(',')[4])))) return false;
     if (cell === pose.actor) {
       if (pixels[4] !== grid.ink || pixels.filter(ink => ink === grid.ink).length !== roles.actorInkCount) return false;
       if (door && corners.some(i => pixels[i] !== Number(door.open.split(',')[i]))) return false;
+      if (support && corners.some(i => pixels[i] !== Number(support.split(',')[i]))) return false;
     } else if (pose.pieces.includes(cell)) {
       if (pixels.some((ink, i) => (!mark || !corners.includes(i)) && ink !== body[i])) return false;
     } else if (pose.threats?.includes(cell)) {
-      if (stamp !== field.threat?.stamp) return false;
+      if (pixels.some((ink, i) => (!mark || !corners.includes(i)) && ink !== threat?.[i])) return false;
+    } else if (support) {
+      if (stamp !== support) return false;
     } else if (!ground.has(cell)) {
       if (stamp !== field.fixed[cell]) return false;
     } else if (!door && (mark || cell === field.exit)) {
@@ -418,11 +459,15 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
     || moves.some(({ delta: [dx, dy] }) => Math.abs(dx) + Math.abs(dy) !== roles.grid.pitch || !!dx === !!dy)) return;
   type Node = { pose: Pose; depth: number; previous?: Node; action?: NativeCommand };
   const pressure = [...new Set(Object.values(field.doors).flatMap(door => door.controls.length > 1 ? door.controls : []))];
-  const heldWeight = (value: Pose) => pressure.filter(mark => value.pieces.includes(mark)).length;
-  const queues = Array.from({ length: pressure.length + 1 }, (): { nodes: Node[]; head: number } => ({ nodes: [], head: 0 }));
-  queues[pressure.length - heldWeight(pose)]!.nodes.push({ pose, depth: 0 });
+  const bridgeCount = Object.keys(field.bridges ?? {}).length;
+  const capacity = pressure.length + bridgeCount;
+  const placed = (value: Pose) => pressure.filter(mark => value.pieces.includes(mark) || value.threats?.includes(mark)).length
+    + (value.bridges?.length ?? 0);
+  const queues = Array.from({ length: capacity + 1 }, (): { nodes: Node[]; head: number } => ({ nodes: [], head: 0 }));
+  queues[capacity - placed(pose)]!.nodes.push({ pose, depth: 0 });
   const seen = new Map([[poseKey(pose), 0]]);
-  for (let i = 0; i < 7_500; i++) {
+  const searchLimit = bridgeCount ? 12_000 : 7_500;
+  for (let i = 0; i < searchLimit; i++) {
     // A verified placement advances the access dependency. Keep the other
     // states available so a placement can be revised if its route is blocked.
     const queue = queues.find(value => value.head < value.nodes.length);
@@ -434,12 +479,18 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
       for (let node: Node | undefined = state; node?.action; node = node.previous) path.push({ action: node.action, after: node.pose });
       path.reverse();
       const required = new Set(path.flatMap(({ after }) => field.doors[after.actor]?.controls ?? []));
-      const pressureTarget = path.flatMap(({ after }) => after.pieces)
-        .find(cell => required.has(cell) && !pose.pieces.includes(cell));
-      return { ...scene, steps: path.slice(0, maximumCommittedActions), roles, ...(pressureTarget ? { pressureTarget } : {}) };
+      let pressureTarget: string | undefined, bridgeTarget: string | undefined;
+      for (const { after } of path) {
+        bridgeTarget = after.bridges?.find(cell => !pose.bridges?.includes(cell));
+        pressureTarget = [...after.pieces, ...after.threats ?? []].find(cell => required.has(cell) && !held(pose, cell));
+        if (pressureTarget || bridgeTarget) break;
+      }
+      return { ...scene, steps: path.slice(0, maximumCommittedActions), roles,
+        ...(pressureTarget ? { pressureTarget } : {}), ...(bridgeTarget ? { bridgeTarget } : {}) };
     }
     if (depth >= remaining) continue;
-    const allowed = (cell: string) => ground.has(cell) && (!field.doors[cell] || doorOpen(field.doors[cell], current));
+    const allowed = (cell: string) => (ground.has(cell) || current.bridges?.includes(cell))
+      && (!field.doors[cell] || doorOpen(field.doors[cell], current));
     for (const { action, delta } of moves) {
       let target: string | undefined, direction = delta, loop = false;
       const ray = field.reflectors ? new Set<string>() : undefined;
@@ -466,14 +517,15 @@ export function planBoundExchange(roles: ExchangeTransfer, rows: NativeRows, inp
       const threats = swapThreat ? current.threats!.map(cell => cell === target ? current.actor : cell) : current.threats;
       if (threats?.some(cell => adjacent(cell, landing, roles.grid.pitch)
         || swapThreat && cell !== current.actor && adjacent(cell, current.actor, roles.grid.pitch))) continue;
-      const next = { actor: landing, pieces: target && !swapThreat
+      const exchanged = { ...current, actor: landing, pieces: target && !swapThreat
         ? current.pieces.map(piece => piece === target ? current.actor : piece) : current.pieces,
         ...(threats ? { threats } : {}) };
-      if (doorCells.some(door => held(next, door) && !doorOpen(field.doors[door]!, next))) continue;
+      const next = settleExchangeDoors(field, current, exchanged, doorCells);
+      if (!next) continue;
       const key = poseKey(next);
       if ((seen.get(key) ?? Infinity) <= depth + 1) continue;
       seen.set(key, depth + 1);
-      queues[pressure.length - heldWeight(next)]!.nodes.push({ pose: next, depth: depth + 1, previous: state, action });
+      queues[capacity - placed(next)]!.nodes.push({ pose: next, depth: depth + 1, previous: state, action });
     }
   }
 }
