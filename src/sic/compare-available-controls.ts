@@ -33,7 +33,7 @@ export function createSicCompareAvailableControls(): NativeFamily<Proposal> {
     async attachPrograms(registry) {
       choose = await registry.registerProgram(chooseAvailableControl, {}, await availableControlsModule());
     },
-    async propose(observation, _rows, _inputs, remaining, execution) {
+    async propose(observation, _rows, inputs, remaining, execution) {
       const { level_epoch: epoch, observation_ref: ref } = observation;
       const keys = observation.available_action_refs.filter(key => key !== 'ACTION7');
       if (!choose || remaining < 1 || stoppedEpoch === epoch || keys.length !== 2 ||
@@ -47,7 +47,8 @@ export function createSicCompareAvailableControls(): NativeFamily<Proposal> {
       const { result, receipt: audit } = await choose.run({ situation }, { signal: execution?.signal });
       if (result !== 'probe_unmeasured_input' && result !== 'compare_alternative') return null;
       const initial = result === 'probe_unmeasured_input';
-      const key = initial ? (probe ? keys[0] : null) : comparison && keys.find(key => key !== comparison.command);
+      const candidates = keys.filter(key => inputs.some(command => command.action_ref === key));
+      const key = initial ? (probe ? candidates[0] : null) : comparison && candidates.find(key => key !== comparison.command);
       if (!key) return null;
       const command: NativeCommand = { action_ref: key, data: {} };
       const evidence = [ref, ...(initial || !comparison ? [] : [comparison.beforeRef])];

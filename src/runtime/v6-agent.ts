@@ -11,7 +11,7 @@ import type {
 } from './v6-agent-protocol.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 import { immutableJson } from '../logos-engine/canonical.ts';
-import { isSicLevelRecovery, sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
+import { isSicLevelRecovery, sicObservedGameOver, sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
 
 export { BrowserV6WorkerClient } from './v6-agent-client.ts';
 
@@ -46,6 +46,7 @@ export interface V6AgentHost {
   recoveryConfiguration?(): import('../sic/active-recovery.ts').RecoveryPack;
   /** Serialize one native command and await its final public visual observation. */
   dispatch(action: AgentAction): Promise<V6DispatchResult>;
+  canResetLevel?(): boolean;
   resetLevel?(): Promise<GameObservation>;
   onState(snapshot: V6AgentSnapshot): void;
   /** Optional host checkpoint, after acquiring the return and before the next action. */
@@ -146,7 +147,7 @@ export class BrowserV6Agent {
     const problem = this.entryProblem(current);
     const canStep = !this.disposed && !this.operation && !this.requiresNewSession && this.host.canDispatch() && !problem;
     const canResetLevel = !this.disposed && !this.operation && !!this.sessionId && !!this.observed
-      && !!this.knowledge.canResetLevel && !!this.host.resetLevel && this.host.canDispatch() && this.status !== 'error';
+      && !!this.knowledge.canResetLevel && this.hostCanReset() && this.status !== 'error';
     let pendingAction: AgentAction | null = null;
     if (this.pending?.kind === 'action' && this.pending.command) {
       try { pendingAction = nativeV6Action(this.pending.command); } catch { /* Invalid replies never dispatch. */ }
@@ -167,10 +168,10 @@ export class BrowserV6Agent {
   private state(status: V6AgentStatus, message: string): void { this.status = status; this.message = message; this.emit(); }
   private stillCurrent(epoch: number): boolean { return !this.disposed && epoch === this.epoch; }
 
-  private assertFresh(expected: V6PublicObservation, epoch: number): void {
+  private assertFresh(expected: V6PublicObservation, epoch: number, resetting = false): void {
     if (!this.stillCurrent(epoch)) throw new V6AgentError('cancelled', 'The V6 session was replaced.');
     const current = this.host.getObservation();
-    if (!this.host.canDispatch() || !this.sessionId || current?.gameCode !== this.gameCode
+    if (!(resetting ? this.hostCanReset() : this.host.canDispatch()) || !this.sessionId || current?.gameCode !== this.gameCode
       || expected.stepIndex !== this.sequence || !sameV6Observation(expected, current)) {
       throw new V6AgentError('stale', 'The public board changed while V6 was reasoning. Start a new session.');
     }
@@ -321,7 +322,6 @@ export class BrowserV6Agent {
         const expected = this.observed;
         const sessionId = this.sessionId;
         if (!expected || !sessionId || !this.pending) throw new V6AgentError('invalid', 'The native V6 transfer has no current state.');
-        this.assertFresh(expected, epoch);
         if (this.pending.kind === 'stopped') {
           if (this.canRecoverLevel(this.pending.reason)) {
             if (await this.acquireLevelReset(epoch, true)) continue;
@@ -329,6 +329,7 @@ export class BrowserV6Agent {
           }
           this.finish(this.pending.reason); return;
         }
+        this.assertFresh(expected, epoch);
         if (this.pending.kind === 'boundary') {
           this.phase = 'planning'; this.state('thinking', 'V6 sealed its action prefix and is planning from the acquired evidence…');
           if (this.stopRequested) break;
@@ -366,6 +367,10 @@ export class BrowserV6Agent {
         const acquired = await this.request({ type: 'advance', sessionId, sequence: this.sequence, ticketId: pending.ticket!.id, observation: after, executionMs }, epoch);
         if (!acquired) return;
         const progressed = next.levelsCompleted > expected.levelsCompleted || next.level > expected.level;
+        if (acquired.kind === 'stopped' && acquired.reason === sicObservedGameOver && this.canRecoverLevel(acquired.reason)) {
+          if (!this.stopRequested && await this.acquireLevelReset(epoch, true)) continue;
+          break;
+        }
         if (isTerminalState(next.state)) {
           this.state('stopped', `The game reports ${next.state}. Its final public outcome has been acquired.`);
           return;
@@ -418,19 +423,24 @@ export class BrowserV6Agent {
   }
 
   private canRecoverLevel(reason: string | null): boolean {
-    return isSicLevelRecovery(reason) && !!this.host.resetLevel && !!this.knowledge.canResetLevel;
+    return isSicLevelRecovery(reason) && this.hostCanReset() && !!this.knowledge.canResetLevel;
+  }
+
+  private hostCanReset(): boolean {
+    return !!this.host.resetLevel && (this.host.canResetLevel?.() ?? this.host.canDispatch());
   }
 
   private async acquireLevelReset(epoch: number, automatic = false): Promise<boolean> {
     const before = this.observed, sessionId = this.sessionId;
     if (!before || !sessionId || !this.host.resetLevel || !this.stillCurrent(epoch)) return false;
-    this.assertFresh(before, epoch);
+    this.assertFresh(before, epoch, true);
     this.phase = 'acting';
-    this.state('acting', automatic ? this.pending?.reason === sicObservedWeightShortage
-      ? 'Resetting to recover a movable weight for the observed gate…'
+    const reason = this.pending?.reason;
+    this.state('acting', automatic ? reason === sicObservedGameOver ? 'Resetting after the observed game over…'
+      : reason === sicObservedWeightShortage ? 'Resetting to recover a movable weight for the observed gate…'
       : 'Resetting after an observed placement deadlock…' : 'Resetting the current level…');
     if (!this.stillCurrent(epoch) || automatic && this.stopRequested) return false;
-    this.assertFresh(before, epoch);
+    this.assertFresh(before, epoch, true);
     const returned = await this.host.resetLevel();
     if (!this.stillCurrent(epoch)) return false;
     const next = toV6PublicObservation(returned, this.sequence);

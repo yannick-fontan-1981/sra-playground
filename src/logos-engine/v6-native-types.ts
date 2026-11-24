@@ -133,6 +133,7 @@ export interface NativeExecution {
   readonly remainingLevelActions?: number;
   readonly reasoningMode?: import('../sic/reasoning-mode.ts').ReasoningMode;
   readonly observedControlledMotion?: import('../sic/public-input-exploration.ts').ControlledMotion;
+  readonly retainedCursorRoles?: ReturnType<typeof import('../sic/cursor-role-memory.ts').currentCursorRoles>;
   readonly panelFrontier?: import('../sic/public-input-exploration.ts').PanelFrontier;
   readonly observedQueue?: ReturnType<typeof import('./v6-queued-field-models.ts').acquireQueuedField>;
   readonly readEncounterTransition?: () => { readonly beforeRef: string; readonly afterRef: string } | null;
@@ -188,8 +189,10 @@ export interface NativeProgramRegistry {
 export const sicObservedCoverageDeadlock = 'sic_observed_coverage_deadlock';
 export const sicObservedWeightShortage = 'sic_observed_weight_shortage';
 export const sicObservedTransportDeadlock = 'sic_observed_transport_deadlock';
+export const sicObservedGameOver = 'sic_observed_game_over';
 export const isSicLevelRecovery = (reason: string | null) =>
-  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage || reason === sicObservedTransportDeadlock;
+  reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage || reason === sicObservedTransportDeadlock
+  || reason === sicObservedGameOver;
 
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;
@@ -225,7 +228,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
   /** Transfer measured rules and recovery exclusions to an actual reset of this level. */
-  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord): NativeRecord | undefined;
+  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord, cause?: string): NativeRecord | undefined;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;

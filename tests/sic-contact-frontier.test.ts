@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
+import { splitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 import { contactProject, type Board } from '../src/sic/contact-frontier-search.ts';
 import {
   newContactMemory,
@@ -71,6 +72,8 @@ test('entry into an unvisited component creates and checks an object experiment 
   const trial = proposeFrontierContact(memory, learning, after.observation, after.pixels, limits)!;
   assert.equal(trial.project.purpose, 'test_contact');
   assert.equal(trial.step.op, 'east');
+  assert.equal(Object.hasOwn(trial, 'controlRole'), false);
+  assert.doesNotThrow(() => splitNativeState({ experiment: { contactProject: trial } }, 'pivot-free-contact'));
   const moved = await room(7, 8, true, 3);
   assert.equal(
     recordFrontierContact(memory, learning, after.observation, moved.observation, after.pixels, moved.pixels, trial),

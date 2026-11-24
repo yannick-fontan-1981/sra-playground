@@ -1,5 +1,6 @@
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
-import type { CoverageLearning, CoverageTransfer } from './observed-coverage.ts';
+import { bindPullSeries, matchesPullGates, type CoverageLearning, type CoverageTransfer, type CoveragePullSeries } from './observed-coverage.ts';
+import { unchangedOutside } from './plan-step.ts';
 import { observedTravelActor, readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
 
 type Effect = { control: string; site: string; ref: string };
@@ -11,7 +12,9 @@ export type ContactMemory = {
 export type ContactExperiment = {
   command: NativeCommand; purpose: 'revisit_exit' | 'test_surface' | 'couple_effect' | 'repeat_transport' | 'place_object';
   experiment: string; actor: string; bodies: string[]; final: boolean; evidence: string[];
+  route?: readonly ContactStep[];
 };
+type ContactStep = { input: string; actor: string; bodies: string[] };
 type Cells = ReturnType<typeof readTravelGrid>['cells'];
 const stamp = (pixels: readonly number[] | undefined) => pixels?.join(',') ?? '';
 const point = (cell: string) => cell.split(',').map(Number) as [number, number];
@@ -27,10 +30,52 @@ function matchesBody(pixels: readonly number[] | undefined, shape: readonly numb
   return pixels[middle] === shape[middle] && pixels.filter((value, i) => value === shape[i]).length > shape.length / 2;
 }
 
-export function checkContactPrediction(plan: ContactExperiment, travel: ObservedTravel, coverage: CoverageLearning, rows: NativeRows) {
+export function checkContactPrediction(plan: Pick<ContactExperiment, 'actor' | 'bodies'>, travel: ObservedTravel, coverage: CoverageLearning, rows: NativeRows) {
   if (!coverage.body || observedTravelActor(travel, rows) !== plan.actor) return false;
   const cells = readTravelGrid(rows, travel.grid).cells, shape = coverage.body.split(',').map(Number);
   return plan.bodies.every(cell => matchesBody(cells.get(cell), shape));
+}
+
+export function bindContactPullSeries(plan: ContactExperiment, travel: ObservedTravel, local: ContactMemory, coverage: CoverageLearning,
+  rows: NativeRows, remaining: number) {
+  if (!plan.route || !travel.actor) return;
+  const board = readTravelGrid(rows, travel.grid);
+  if (!matchesContactPose(board, coverage, { actor: travel.actor, arrangement: local.bodies.join(';') })) return;
+  const { cells } = board;
+  const bodies = new Set(local.bodies);
+  // An unoccupied patterned surface can be a gate or a control whose effect is still being tested.
+  const gate = new Set(coverage.layout?.gate);
+  for (const [cell, pixels] of cells) if (cell !== travel.actor && !bodies.has(cell) && patterned(pixels)) gate.add(cell);
+  const route = plan.route.map(({ input, actor, bodies }) => ({ input, actor, arrangement: bodies.join(';') }));
+  return bindPullSeries(route, travel.actor, bodies, cells, { marks: coverage.layout?.marks ?? [], gate: [...gate] }, travel.grid.pitch, remaining);
+}
+
+export function contactExperimentAt(plan: ContactExperiment, index: number): ContactExperiment {
+  const step = plan.route?.[index];
+  return step ? { ...plan, command: { action_ref: step.input, data: {} }, actor: step.actor, bodies: step.bodies,
+    final: index + 1 === plan.route!.length } : plan;
+}
+
+function matchesContactPose(board: ReturnType<typeof readTravelGrid>, coverage: CoverageLearning, pose: { actor: string; arrangement: string }) {
+  if (!coverage.body || board.pieces.length !== 1 || board.pieces[0] !== pose.actor) return false;
+  const bodies = new Set(pose.arrangement.split(';'));
+  const shape = coverage.body.split(',').map(Number);
+  return [...bodies].every(cell => matchesBody(board.cells.get(cell), shape))
+    && [...board.cells].every(([cell, pixels]) => bodies.has(cell) || stamp(pixels) !== coverage.body);
+}
+
+export function contactPullPremise(series: CoveragePullSeries, index: number, travel: ObservedTravel, coverage: CoverageLearning, rows: NativeRows) {
+  const step = series.steps[index]!;
+  const board = readTravelGrid(rows, travel.grid);
+  return matchesPullGates(series, travel, rows) && stamp(board.cells.get(step.landing)) === step.substrate
+    && matchesContactPose(board, coverage, step.before);
+}
+
+export function contactPullReturn(series: CoveragePullSeries, index: number, travel: ObservedTravel, coverage: CoverageLearning,
+  before: NativeRows, after: NativeRows) {
+  const step = series.steps[index]!;
+  return matchesPullGates(series, travel, after) && unchangedOutside(before, after, step.changed)
+    && matchesContactPose(readTravelGrid(after, travel.grid), coverage, step.after);
 }
 
 export function observeContactExperiment(previous: ContactMemory | undefined, transfer: CoverageTransfer, coverage: CoverageLearning,
@@ -80,7 +125,7 @@ export function observeContactExperiment(previous: ContactMemory | undefined, tr
       }
     }
   }
-  const tested = plan?.final && plan.actor === returned.actor && !local.tested.includes(plan.experiment)
+  const tested = plan?.final && plan.actor === returned.actor && plan.bodies.every(body => seenBodies.includes(body)) && !local.tested.includes(plan.experiment)
     ? [...local.tested, plan.experiment] : local.tested;
   return { ...local, bodies: seenBodies.sort(), features, effects, transfers, blocked, tested };
 }
@@ -130,15 +175,14 @@ export function chooseContactExperiment(local: ContactMemory, transfer: Coverage
     && !satisfies(probe, travel.actor!, local.bodies));
   if (!goals.length) return;
 
-  type FirstStep = { input: string; actor: string; bodies: string[] };
-  type Node = { actor: string; bodies: string[]; first?: FirstStep };
+  type Node = { actor: string; bodies: string[]; step?: ContactStep; previous?: Node };
   const queue: Node[] = [{ actor: travel.actor, bodies: local.bodies }];
   const seen = new Set([travel.actor + '|' + local.bodies.join(';')]);
   const neighbors = new Map([...ground].map(cell => [cell, moves.flatMap(([input, { delta }]) => {
     const actor = step(cell, delta);
     return ground.has(actor) ? [{ input, actor, tail: step(cell, delta, -1) }] : [];
   })]));
-  let selected: { probe: Probe; first: FirstStep; final: boolean } | undefined;
+  let selected: { probe: Probe; node: Node } | undefined;
   const bestRank = Math.min(...goals.map(probe => probe.rank));
   // Within each experimental priority, breadth-first order favors the shortest reachable trial.
   search: for (let i = 0; i < queue.length && i < 16000; i++) {
@@ -151,18 +195,23 @@ export function chooseContactExperiment(local: ContactMemory, transfer: Coverage
       const key = actor + '|' + bodies.join(';');
       if (seen.has(key)) continue;
       seen.add(key);
-      const first = node.first ?? { input, actor, bodies };
+      const candidate = { actor, bodies, step: { input, actor, bodies }, previous: node };
       for (const probe of goals) {
         if ((!selected || probe.rank < selected.probe.rank) && satisfies(probe, actor, bodies)) {
-          selected = { probe, first, final: !node.first };
+          selected = { probe, node: candidate };
           if (probe.rank === bestRank) break search;
         }
       }
-      queue.push({ actor, bodies, first });
+      queue.push(candidate);
     }
   }
   if (!selected) return;
-  const { probe, first, final } = selected;
+  const { probe } = selected;
+  const route: ContactStep[] = [];
+  for (let node: Node | undefined = selected.node; node?.step; node = node.previous) route.push(node.step);
+  route.reverse();
+  const first = route[0]!;
   return { command: { action_ref: first.input, data: {} }, purpose: probe.purpose, experiment: probe.id,
-    actor: first.actor, bodies: first.bodies, final, evidence: [transfer.ref, coverage.lastPull.ref, probe.ref, travel.moves[first.input]!.ref] };
+    actor: first.actor, bodies: first.bodies, final: route.length === 1, route,
+    evidence: [transfer.ref, coverage.lastPull.ref, probe.ref, travel.moves[first.input]!.ref] };
 }

@@ -2,6 +2,12 @@ import assert from 'node:assert/strict';
 import { measureManipulation, requireManipulation } from './measure-ss01-manipulation.mjs';
 import { compileLevel, equal, initialState, stepWorld } from '../experiments/sinking-star-ss02/src/core.ts';
 import { SS02_LEVELS } from '../experiments/sinking-star-ss02/src/levels.ts';
+import { compileLevel as compilePullLevel, initialState as initialPullState, stepDetailed as stepPullWorld } from '../experiments/sinking-star-ss03/src/core.ts';
+import { SS03_LEVELS } from '../experiments/sinking-star-ss03/src/levels.ts';
+import { compileLevel as compileExchangeLevel, initialState as initialExchangeState, stepDetailed as stepExchangeWorld, terrainAt as exchangeTerrainAt } from '../experiments/sinking-star-ss04/src/core.ts';
+import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
+import { compileLevel as compileCarryLevel, doorsOpen as carryDoorsOpen, initialState as initialCarryState, stepDetailed as stepCarryWorld } from '../experiments/sinking-star-ss05/src/core.ts';
+import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -29,18 +35,27 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move' };
 
 function consecutiveStonePushes(level, tickets) {
   const world = compileLevel(SS02_LEVELS[level - 1]);
   let state = initialState(world), previous;
   const pairs = [];
+  const crossed = new Set();
+  const pushingFootings = new Set();
+  let exitFooting;
   for (const [index, ticket] of tickets.entries()) {
     if (ticket.resets !== previous?.resets) state = initialState(world);
     const next = stepWorld(world, state, Number(ticket.action.slice(6)));
+    if (next.supports.some(support => equal(support, next.hero))) crossed.add(`${next.hero.x},${next.hero.y}`);
     // The engine preserves stone order unless a stone is converted into a bridge.
     const moved = state.stones.length === next.stones.length
       ? state.stones.flatMap((stone, i) => equal(stone, next.stones[i]) ? [] : [i]) : [];
+    if (state.supports.some(support => equal(support, state.hero))) {
+      const footing = `${state.hero.x},${state.hero.y}`;
+      if (moved.length || next.stones.length < state.stones.length) pushingFootings.add(footing);
+      if (world.doors.some(door => equal(door, next.hero))) exitFooting = footing;
+    }
     if (ticket.actionIndex > 0 && ticket.decisionRevision === previous?.revision
       && ticket.resets === previous.resets && moved.some(i => previous.moved.includes(i))) {
       pairs.push({ kind: 'stone', first: index, last: index + 1 });
@@ -50,7 +65,294 @@ function consecutiveStonePushes(level, tickets) {
   }
   assert.equal(state.complete, true, 'Executed SS02 L' + level + ' tickets do not reproduce the official goal');
   assert.ok(pairs.length, 'SS02 L' + level + ' lost consecutive pushes of the same stone');
+  if (level >= 3) {
+    assert.ok(crossed.size > 0 && state.supports.length > world.supports.length,
+      'SS02 L' + level + ' did not build and traverse an immersed support');
+    assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))),
+      'SS02 L' + level + ' did not leave a stone holding each pressure mark');
+  }
+  if (level === 5) {
+    assert.ok(pushingFootings.size >= 2, 'SS02 L5 did not use separate supports as pushing stances');
+    assert.ok(exitFooting && !pushingFootings.has(exitFooting), 'SS02 L5 did not cross a separate support into the exit gate');
+  }
   return pairs;
+}
+
+function consecutiveStonePulls(level, tickets) {
+  const world = compilePullLevel(SS03_LEVELS[level - 1]);
+  let state = initialPullState(world), previous;
+  const pairs = [];
+  const usedPresses = new Set();
+  const driver = level === 8 ? world.gates.findIndex(gate => gate.closedWhen === 'pressed'
+    && world.gates.filter(other => other.circuit === gate.circuit).length === 1) : -1;
+  const control = world.circuits.find(circuit => circuit.id === world.gates[driver]?.circuit)?.buttons[0];
+  let released = false, longestStroke = 0;
+  for (const [index, ticket] of tickets.entries()) {
+    if (ticket.resets !== previous?.resets) state = initialPullState(world);
+    const detail = stepPullWorld(world, state, Number(ticket.action.slice(6)));
+    for (const phase of detail.phases) {
+      if (phase.kind === 'piston' && phase.moves.some(move => move.actor === 'stone')) usedPresses.add(phase.gateIndex);
+      if (control && phase.kind === 'pull') {
+        released ||= phase.moves.some(move => move.actor === 'stone' && equal(move.from, control));
+      }
+      if (phase.kind === 'piston' && phase.gateIndex === driver) {
+        longestStroke = Math.max(longestStroke, phase.moves.filter(move => move.actor === 'stone').length);
+      }
+    }
+    const phase = detail.phases[0];
+    const pull = detail.phases.length === 1 && phase?.kind === 'pull' ? phase.moves.find(move => move.actor === 'stone') : undefined;
+    if (pull && previous?.pull && equal(previous.pull.to, pull.from)
+      && ticket.actionIndex > 0 && ticket.decisionRevision === previous.revision && ticket.resets === previous.resets) {
+      pairs.push({ kind: 'pull', first: index, last: index + 1 });
+    }
+    previous = { revision: ticket.decisionRevision, resets: ticket.resets, pull };
+    state = detail.state;
+  }
+  assert.equal(state.complete, true, 'Executed SS03 L' + level + ' tickets do not reproduce the official goal');
+  assert.ok(pairs.length, 'SS03 L' + level + ' lost consecutive pulls of the same stone');
+  if (level === 7) {
+    assert.equal(usedPresses.size, 2, 'SS03 L7 did not displace a stone with both presses');
+    const exit = world.gates.find(gate => gate.closedWhen === 'released');
+    const controls = world.circuits.find(circuit => circuit.id === exit?.circuit);
+    assert.ok(controls?.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS03 L7 did not hold the matched exit controls');
+  }
+  if (level === 8) {
+    assert.ok(released, 'SS03 L8 did not release the initially held press control');
+    assert.equal(longestStroke, world.stones.length, 'SS03 L8 did not drive the full file of stones');
+    assert.equal(state.stones.length, world.stones.length, 'SS03 L8 lost a stone');
+  }
+  return pairs;
+}
+
+function measuredExchangeSeries(level, tickets) {
+  const world = compileExchangeLevel(SS04_LEVELS[level - 1]);
+  let state = initialExchangeState(world), previous;
+  const entryResets = tickets[0]?.resets ?? 0;
+  const mixed = [];
+  let deaths = 0, threatExchanges = 0, crossedWater = false, openedWithWeight = false;
+  let reflected = false, placed = [];
+  const sharedControl = level === 7 ? world.circuits.find(circuit => circuit.buttons.length > 1)?.buttons : undefined;
+  let builtFromWeight = 0;
+  let reflectedTwice = false, observedRelay = false;
+  for (const [index, ticket] of tickets.entries()) {
+    if (ticket.resets !== (previous?.resets ?? entryResets)) {
+      if (level === 4) assert.ok(state.dead, 'SS04 L4 reset without an observed loss');
+      state = initialExchangeState(world);
+    }
+    const detail = stepExchangeWorld(world, state, Number(ticket.action.slice(6)));
+    const kind = detail.phases[0]?.kind;
+    if (level === 2) assert.ok(kind === 'walk' || kind === 'swap', 'SS04 L2 used a blocked or speculative action');
+    if (level === 4) {
+      if (detail.state.dead) deaths++;
+      if (kind === 'swap' && !detail.state.dead && detail.phases[0].moves.some(move => move.actor === 'monster')) threatExchanges++;
+      if (ticket.resets > entryResets) assert.ok(kind && !detail.state.dead, 'SS04 L4 recovery used an ineffective or fatal arrival');
+    }
+    if (level === 5) {
+      assert.ok(kind === 'walk' || kind === 'swap', 'SS04 L5 used a blocked or speculative action');
+      crossedWater ||= kind === 'swap' && detail.phases[0].ray.some(cell => exchangeTerrainAt(world, cell) === '~');
+      if (kind === 'swap' && !openedWithWeight && world.buttons.every(mark => detail.state.stones.some(stone => equal(mark, stone)))) {
+        openedWithWeight = true;
+        mixed.push({ kind: 'load the pressure control', first: index + 1, last: index + 1 });
+      }
+    }
+    if (level === 6) {
+      assert.ok(kind === 'walk' || kind === 'swap', 'SS04 L6 used a blocked or speculative action');
+      reflected ||= kind === 'swap' && detail.phases[0].ray.some(cell => world.mirrors.some(mirror => equal(mirror.at, cell)));
+      const covered = world.buttons.filter(mark => detail.state.stones.some(stone => equal(mark, stone)));
+      assert.ok(placed.every(mark => covered.includes(mark)), 'SS04 L6 removed a weight before completing the pressure circuit');
+      if (covered.length > placed.length) mixed.push({ kind: 'load a circuit control', first: index + 1, last: index + 1 });
+      placed = covered;
+    }
+    if (level === 7) {
+      assert.ok((kind === 'walk' || kind === 'swap') && !detail.state.dead, 'SS04 L7 used an ineffective or unsafe action');
+      const constructed = detail.state.supports.length - state.supports.length;
+      if (constructed > 0) {
+        assert.ok(detail.phases.some(phase => phase.kind === 'piston' && phase.moves.some(move => move.actor === 'stone')),
+          'SS04 L7 created a foothold without a witnessed press');
+        assert.equal(state.stones.length - detail.state.stones.length, constructed);
+        builtFromWeight += constructed;
+        mixed.push({ kind: 'press a weight into water', first: index + 1, last: index + 1 });
+      }
+    }
+    if (level === 8) {
+      assert.ok((kind === 'walk' || kind === 'swap') && !detail.state.dead, 'SS04 L8 used an ineffective or unsafe action');
+      observedRelay ||= detail.phases.filter(phase => phase.kind === 'piston').length > 1
+        && detail.state.supports.length > state.supports.length;
+      if (kind === 'swap' && detail.phases[0].ray.filter(cell => world.mirrors.some(mirror => equal(mirror.at, cell))).length >= 2) {
+        reflectedTwice = true;
+        mixed.push({ kind: 'exchange via two mirrors', first: index + 1, last: index + 1 });
+      }
+    }
+    if (kind === 'swap' && previous?.kind === 'walk' && previous.revision === ticket.decisionRevision && ticket.actionIndex > 0) {
+      assert.ok(detail.phases[0].moves.some(move => move.actor !== 'hero' && equal(move.to, state.hero)), 'Expected a real exchange');
+      mixed.push({ kind: 'walk then swap', first: index, last: index + 1 });
+    }
+    previous = { kind, revision: ticket.decisionRevision, resets: ticket.resets };
+    state = detail.state;
+  }
+  assert.equal(state.complete, true, 'Executed SS04 L' + level + ' tickets do not reproduce the official goal');
+  assert.ok(mixed.some(step => step.kind === 'walk then swap'), 'SS04 L' + level + ' lost continuous positioning into an exchange');
+  if (level === 2) {
+    assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L2 did not hold the pressure control');
+  }
+  if (level === 4) {
+    assert.ok(deaths <= 1 && deaths === previous?.resets - entryResets, 'SS04 L4 failed to retain its first loss across reset');
+    assert.ok(threatExchanges > 0, 'SS04 L4 did not exchange with a threat and survive');
+  }
+  if (level === 5) {
+    assert.ok(crossedWater && openedWithWeight, 'SS04 L5 must exchange across water and activate the pressure control with the weight');
+    assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))), 'SS04 L5 lost the weight on the pressure control before the goal');
+  }
+  if (level === 6) {
+    assert.ok(reflected && placed.length === world.buttons.length, 'SS04 L6 did not compose mirror exchanges with the full pressure circuit');
+  }
+  if (level === 7) {
+    assert.equal(builtFromWeight, 2, 'SS04 L7 must build both footholds with the presses');
+    assert.ok(sharedControl?.length === 2 && sharedControl.every(mark => [...state.stones, ...state.monsters].some(body => equal(mark, body))),
+      'SS04 L7 did not keep the shared pressure circuit active');
+    assert.ok(sharedControl.some(mark => state.stones.some(body => equal(mark, body)))
+      && sharedControl.some(mark => state.monsters.some(body => equal(mark, body))), 'SS04 L7 must use the crate and monster together');
+  }
+  if (level === 8) {
+    assert.ok(observedRelay && reflectedTwice, 'SS04 L8 lost the revealed relay or the exchange via two mirrors');
+  }
+  return mixed;
+}
+
+function measuredCarrySeries(level, tickets) {
+  const world = compileCarryLevel(SS05_LEVELS[level - 1]);
+  let state = initialCarryState(world), previous, firstCarry;
+  let openedWithWeight = false, reflectedWeight = false;
+  let separatedWeight = false, crossedOpenGate = false;
+  let boardedFrom, crossings = 0, repositioned = 0;
+  let firstReflection, heldFinalGate = false;
+  const bank = (from, to) => {
+    const queue = [from], seen = new Set([from.y * 20 + from.x]);
+    for (const point of queue) {
+      if (equal(point, to)) return true;
+      for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
+        const x = point.x + dx, y = point.y + dy, key = y * 20 + x;
+        if (x >= 0 && x < 20 && y >= 0 && y < 20 && world.terrain[key] === '.' && !seen.has(key)) {
+          seen.add(key); queue.push({ x, y });
+        }
+      }
+    }
+    return false;
+  };
+  const series = [];
+  for (const [index, ticket] of tickets.entries()) {
+    const result = stepCarryWorld(world, state, Number(ticket.action.slice(6)));
+    const phase = result.phases[0];
+    const moves = (phase?.moves ?? []).filter(move => move.actor === 'stone');
+    const continued = previous?.revision === ticket.decisionRevision && ticket.actionIndex > 0;
+    if (level === 5) {
+      assert.equal(result.state.stones.length, world.stones.length, 'SS05 L5 consumed the required weight');
+      if (phase?.kind === 'reflect') {
+        assert.ok(continued, 'SS05 L5 separated the approach from the useful reflection');
+        reflectedWeight ||= moves.length > 0;
+        series.push({ kind: moves.length ? 'reflect the preserved movable weight' : 'reflect to another route', first: index, last: index + 1 });
+      }
+      openedWithWeight ||= !carryDoorsOpen(world, state) && carryDoorsOpen(world, result.state)
+        && result.state.stones.some(stone => world.buttons.some(button => equal(stone, button)));
+    }
+    if (level === 6) {
+      assert.equal(result.state.stones.length, world.stones.length, 'SS05 L6 consumed the required weight');
+      const opened = carryDoorsOpen(world, state);
+      if (phase?.kind === 'reflect') {
+        const apart = (a, b) => Math.max(Math.abs(a.x - b.x), Math.abs(a.y - b.y)) > 2;
+        if (moves.some(move => !apart(state.hero, move.from) && apart(result.state.hero, move.to))) {
+          assert.ok(continued, 'SS05 L6 should reflect the weight out of range in the same series');
+          separatedWeight = true;
+          series.push({ kind: 'separate the weight from the controller through reflection', first: index, last: index + 1 });
+        }
+        if (opened && phase.paths?.some(path => path.some(cell => world.doors.some(door => equal(cell, door))))) {
+          crossedOpenGate = true;
+          series.push({ kind: 'reflect through the activated gate', first: index + 1, last: index + 1 });
+        }
+      }
+      openedWithWeight ||= !opened && carryDoorsOpen(world, result.state)
+        && result.state.stones.some(stone => world.buttons.some(button => equal(stone, button)));
+    }
+    const supports = (phase?.moves ?? []).filter(move => move.actor === 'support');
+    if (level === 7) {
+      const standing = state.supports.some(spot => equal(spot, state.hero));
+      const landed = result.state.supports.some(spot => equal(spot, result.state.hero));
+      if (!standing && landed) {
+        assert.ok(continued, 'SS05 L7 must board the support in a continuous route');
+        boardedFrom = state.hero;
+      }
+      if (standing && !landed && boardedFrom && !bank(boardedFrom, result.state.hero)) {
+        crossings++;
+        series.push({ kind: 'cross to another bank using the support', first: index, last: index + 1 });
+      }
+      if (continued && supports.some(move => previous.supports.some(prior => equal(prior.to, move.from)))) {
+        repositioned++;
+        series.push({ kind: 'slide the same floating support', first: index, last: index + 1 });
+      }
+    }
+    if (level === 8 && phase?.kind === 'reflect' && phase.moves.some(move => move.actor === 'hero')) {
+      firstReflection ??= index + 1;
+      const gate = world.gates.find(item => item.circuit === 'final');
+      const mark = world.circuits.find(item => item.id === gate.circuit).buttons[0];
+      if (phase.paths?.some(path => path.some(cell => equal(cell, gate.at)))) {
+        assert.ok(continued, 'SS05 L8 lost the continuous approach to the final reflection');
+        heldFinalGate ||= [...state.stones, ...state.monsters].some(cell => equal(cell, mark))
+          && !state.gateClosed[world.gates.indexOf(gate)];
+      }
+      series.push({ kind: 'reflect onto a supported landing', first: index + 1, last: index + 1 });
+    }
+    if (level === 3 && state.monsters.length - result.state.monsters.length === 2) {
+      assert.ok(continued && result.phases.some(phase => phase.kind === 'combat'), 'SS05 L3 lost the deliberate continuous contact');
+      series.push({ kind: 'compose the two moving objects', first: index, last: index + 1 });
+    }
+    if (level === 4 && !carryDoorsOpen(world, state) && carryDoorsOpen(world, result.state)
+      && result.state.monsters.some(monster => world.buttons.some(button => equal(button, monster)))) {
+      assert.ok(continued && phase?.moves.some(move => move.actor === 'monster'
+        && world.buttons.some(button => equal(button, move.to))), 'SS05 L4 lost the continuous placement that opens the exit');
+      series.push({ kind: 'place the moving object on the control and open access', first: index, last: index + 1 });
+    }
+    if (moves.length && !firstCarry) {
+      firstCarry = index + 1;
+      if (level === 2) {
+        assert.ok(continued && previous.kind === 'walk', 'SS05 L2 must approach the first weight and carry it in the same series');
+        assert.ok(moves.some(move => equal(move.from, world.stones[0])), 'SS05 L2 bypassed the first accessible weight');
+      }
+    }
+    if (level < 3 && continued && moves.some(move => previous.moves.some(prior => equal(prior.to, move.from)))) {
+      series.push({ kind: 'carry the same weight', first: index, last: index + 1 });
+    }
+    if (level < 3 && continued && moves.length && previous.kind === 'walk') {
+      series.push({ kind: 'approach then carry', first: index, last: index + 1 });
+    }
+    assert.ok(!result.state.dead, 'SS05 lost the actor during the carry');
+    previous = { revision: ticket.decisionRevision, kind: phase?.kind, moves, supports };
+    state = result.state;
+  }
+  assert.ok(state.complete, 'SS05 executed tickets do not reach the exit');
+  if (level === 5) {
+    assert.ok(openedWithWeight && reflectedWeight && series.length >= 3, 'SS05 L5 must use the preserved weight to restore access');
+    return series;
+  }
+  if (level === 6) {
+    assert.ok(separatedWeight && openedWithWeight && crossedOpenGate, 'SS05 L6 must separate the weight, activate the control group and reflect through');
+    return series;
+  }
+  if (level === 7) {
+    assert.ok(crossings >= 2 && repositioned >= 2, 'SS05 L7 must reposition and cross both supports');
+    return series;
+  }
+  if (level === 8) {
+    assert.ok(firstReflection <= 22 && series.length >= 2, 'SS05 L8 delayed or abandoned the verified reflections');
+    assert.ok(heldFinalGate, 'SS05 L8 must keep the final gate open with an object while reflecting through');
+    return series;
+  }
+  if (level === 3 || level === 4) {
+    assert.equal(series.length, 1, 'SS05 did not execute the expected object composition');
+    return series;
+  }
+  assert.ok(series.some(step => step.kind === 'carry the same weight'), 'SS05 lost consecutive moves of the same weight');
+  assert.equal(firstCarry, level === 1 ? 1 : 5, 'SS05 delayed the first useful carry');
+  return series;
 }
 
 export function checkRun(run) {
@@ -61,7 +363,8 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  assert.equal(levels.length, reference?.length ?? 1, code + ' incomplete campaign');
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8 };
+  assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -72,6 +375,12 @@ export function checkRun(run) {
     assert.equal(row.won, true, code + ' L' + row.level + ' failed to win');
     const issued = tickets.filter((t) => t.level === row.level);
     assert.equal(issued.length, row.actions);
+    if (code === 'SS02' && row.level > 1) {
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS02 must preserve learned access without resetting');
+      assert.equal(issued[1]?.decisionRevision, issued[0]?.decisionRevision,
+        'SS02 L' + row.level + ' must begin with a plan from the learned controls');
+      if (row.level === 6) assert.ok(issued.length <= 110, 'SS02 L6 exceeded its verified action ceiling');
+    }
     const groups = new Map();
     let last;
     for (const t of issued) {
@@ -105,8 +414,72 @@ export function checkRun(run) {
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
     } else assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
+    if (code === 'SS03' && row.level === 2) {
+      // The exploratory route needed 111 commands and 95 decisions; the composed route needs 27 and 7.
+      assert.ok(issued.length <= 35 && groups.size <= 10, 'SS03 L2 lost the direct pull and gate route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L2 reset during the direct route');
+    }
+    if (code === 'SS03' && row.level === 3) {
+      // The exploratory route stalled at 220 commands and 199 decisions. The composed route completes in 63 and 5.
+      assert.ok(issued.length <= 75 && groups.size <= 8, 'SS03 L3 lost the direct pressure route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L3 entered a trap on the direct route');
+    }
+    if (code === 'SS03' && row.level === 4) {
+      // The exploratory route took 84 commands and 48 decisions. The shortest composed route takes 40 and 4.
+      assert.ok(issued.length <= 45 && groups.size <= 6, 'SS03 L4 lost the shared pressure route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L4 reset on the shared pressure route');
+    }
+    if (code === 'SS03' && row.level === 7) {
+      // The exploratory route stalled at 220 commands and 153 decisions. The witnessed route completes in 60 and 11.
+      assert.ok(issued.length <= 85 && groups.size <= 16, 'SS03 L7 lost the direct press route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L7 trapped the cursor on the direct route');
+    }
+    if (code === 'SS03' && row.level === 8) {
+      // The exploratory run did not finish by 130 commands. The guarded press relay completes in 160.
+      assert.ok(issued.length <= 200 && groups.size <= 24, 'SS03 L8 lost the guarded press relay');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS03 L8 reset while building the file');
+    }
+    if (code === 'SS04' && row.level === 1) {
+      // Acquiring the exchange previously took 50 decisions for 51 commands. The guarded route takes 26.
+      assert.ok(issued.length <= 55 && groups.size <= 32 && continued >= 20, 'SS04 L1 lost its verified exchange series');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS04 L1 reset while learning exchanges');
+    }
+    if (code === 'SS04' && row.level === 2) {
+      // The exploratory route took 119 commands and 115 decisions. Transferred exchanges take 54 and 4.
+      assert.ok(issued.length <= 60 && groups.size <= 5, 'SS04 L2 lost the direct mixed exchange route');
+      assert.ok(issued.every(ticket => ticket.resets === 0), 'SS04 L2 reset during the exchange route');
+    }
+    if (code === 'SS04' && row.level === 4) {
+      // The earlier run made 39 decisions, died twice and stopped. The recovered route must execute verified series.
+      assert.ok(issued.length <= 55 && continued >= 30, 'SS04 L4 lost its safe exchange route');
+    }
+    if (code === 'SS04' && row.level === 5) {
+      // Without the earlier transmission witness SIC exhausted 180 commands without one exchange.
+      assert.ok(issued.length <= 85 && groups.size <= 6, 'SS04 L5 lost the direct route to the pressure control');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L5 reset during the pressure route');
+    }
+    if (code === 'SS04' && row.level === 6) {
+      // The older route exhausted 150 commands with 42 exchanges and no lasting placement.
+      assert.ok(issued.length <= 42 && groups.size <= 4, 'SS04 L6 lost its direct pressure composition');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L6 reset during the pressure composition');
+    }
+    if (code === 'SS04' && row.level === 7) {
+      assert.ok(issued.length <= 90 && groups.size <= 7, 'SS04 L7 lost the verified bridge and pressure composition');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L7 reset during the composition');
+    }
+    if (code === 'SS04' && row.level === 8) {
+      assert.ok(issued.length <= 90 && groups.size <= 8, 'SS04 L8 lost the direct reflected exchange route');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS04 L8 reset during the reflected route');
+    }
+    if (code === 'SS05') {
+      // The earlier run used 46 isolated actions on L1 and first moved a weight on L2 at action 119.
+      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24], [38, 20], [90, 40], [55, 30]][row.level - 1];
+      assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
+      assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
-      : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : [];
+      : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
+      : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -133,14 +506,17 @@ function main() {
   if (!files.length) {
     execute(['scripts/prepare-python.mjs']);
     files = [];
-    for (const [name, cohort, end] of [
-      ['mirror-isles', 'SS01', '8'],
-      ['la-force-rouge', 'SS02', '1'],
-      ['native-sources', 'source:AR25,HANO,DC22', '1'],
+    for (const [name, cohort, end, cap] of [
+      ['mirror-isles', 'SS01', '8', '120'],
+      ['la-force-rouge', 'SS02', '6', '160'],
+      ['la-ruse-verte', 'SS03', '8', '240'],
+      ['l-axe-violet', 'SS04', '8', '150'],
+      ['local-carry', 'SS05', '8', '155'],
+      ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
       files.push(output);
-      execute(['scripts/compare-source100.mjs', '.', '.', output, cohort, '1', end, '120']);
+      execute(['scripts/compare-source100.mjs', '.', '.', output, cohort, '1', end, cap]);
     }
   }
   const runs = files.flatMap((file) =>
@@ -149,7 +525,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
