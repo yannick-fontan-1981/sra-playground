@@ -1,0 +1,996 @@
+{
+  "spec": {
+    "id": "ss21-07",
+    "title": "L’écluse à deux étages",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "########gg.gg#######",
+      "########.....#######",
+      "##########.#########",
+      "########..m..#######",
+      "########W....#######",
+      "########.....#######",
+      "########....o#######",
+      "##########Z#########",
+      "##########~#########",
+      "##.....###.#########",
+      "##.....###.#########",
+      "##..M........#######",
+      "##...........#######",
+      "##.....oo....#######",
+      "##T..........#######",
+      "#######......#######",
+      "#######......#######",
+      "####################",
+      "####################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "ecluse",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 12
+          }
+        ]
+      },
+      {
+        "id": "fronton",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 11,
+            "y": 4
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 10
+        },
+        "circuit": "ecluse",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 3
+        },
+        "circuit": "fronton",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 10,
+          "y": 9
+        },
+        "circuit": "ecluse",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CCCDUCDCCCDDDCCCUUURRRRRRRRUCDDRCUCCRLLULCCCRDRDDCCCDCDDDDDLLLLDRRDRRUUUUUUUULURDRUUCCCDRRRRRDRUUUUUUUURULDLUUCCCLUUUUUUUUUUULLCCLUUUULCRRUUUURUCCRUUURRU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 6
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "objective": "Échanger le gardien, stabiliser l’écluse en appui permanent puis répartir les deux caisses de la file sur les commandes du fronton.",
+    "label": "Heroes and Water — énigmes 6 et 12",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+    "puzzles": [
+      6,
+      12
+    ]
+  },
+  "metrics": {
+    "actions": 153,
+    "selections": 32,
+    "merchantPushes": 12,
+    "warriorPushes": 15,
+    "thiefPulls": 2,
+    "swaps": 2,
+    "partnerSwaps": 1,
+    "stoneSwaps": 0,
+    "monsterSwaps": 1,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 2,
+    "stoneMoves": 31,
+    "mirrorMoves": 0,
+    "monsterMoves": 1,
+    "supportMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 1,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Magicien monte sur la plateforme active puis échange sa place avec le gardien. Le Marchand relâche l’écluse : le gardien tombe, tandis que le sas inférieur s’ouvre.",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 14
+        },
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ecluse": false,
+        "fronton": false
+      }
+    },
+    {
+      "label": "Le Magicien fait passer le Voleur au nord par échange, avant que le sas inférieur ne se referme. La plateforme est remise en service pour recevoir sa charge.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 7,
+          "y": 14
+        },
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ecluse": true,
+        "fronton": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la réserve du renfoncement. Le Guerrier la dépose sur l’écluse, puis le retrait la transforme en appui fixe : le passage devient permanent et le Marchand peut partir.",
+      "turn": 53,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 14
+        },
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ecluse": false,
+        "fronton": false
+      }
+    },
+    {
+      "label": "La file du dépôt doit d’abord être décalée ensemble. Sa tête traverse l’appui et rejoint la commande orientale du fronton.",
+      "turn": 84,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 14
+        },
+        {
+          "x": 11,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ecluse": false,
+        "fronton": false
+      }
+    },
+    {
+      "label": "La seconde caisse rejoint l’autre commande sans sacrifier l’appui. Les deux poids secs libèrent la porte des quatre destinations.",
+      "turn": 110,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 4
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "ecluse": false,
+        "fronton": true
+      }
+    }
+  ],
+  "adaptation": "Water 12 inspire le transfert d’un gardien sur un soutien qui disparaît ; Water 6 fournit la caisse déposée avant retrait. Ici, un sas de polarité opposée impose le relais magique puis une file à répartir entre deux commandes. Les appuis persistent à la réactivation ; ni dragon, ni feu, ni porte comptant les monstres."
+}

@@ -1,0 +1,1765 @@
+{
+  "spec": {
+    "id": "ss21-05",
+    "title": "Le dernier intercepteur",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "###########g.g.g.g##",
+      "###########.......##",
+      "######..#######.####",
+      "####Z...#######.####",
+      "######..####.....o##",
+      "######..#######.####",
+      "######..###.......##",
+      "##......###.......##",
+      "##....W.......oo..##",
+      "##.....T###.......##",
+      "######..###.......##",
+      "######..###.......##",
+      "#####...###.......##",
+      "####M...###.......##",
+      "######..###.......##",
+      "######..############",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "double-serrure",
+        "buttons": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 14
+          }
+        ],
+        "color": 15
+      },
+      {
+        "id": "sortie",
+        "buttons": [
+          {
+            "x": 13,
+            "y": 5
+          }
+        ],
+        "color": 10
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 9
+        },
+        "circuit": "double-serrure",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 3
+        },
+        "circuit": "sortie",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRRRRRURRRRRDLLLLLLLLCLLUURUUUUURCRRCCLCLDDDDDLDDRDDDDDRCCCRRRRDDDRCDLCDDDDDDDDDLLDLCURRCCCRCCCCCUUUURRRRDDDDRRRRRRCCURUUUUUURRRRUURRRRUURLDDLCUUUUURRRRRURRRRUUULLRCCCRUUCLUUUUCCUUUUURRRUUUUULULLLCCCUUUUUULLUUUUURURCCLUUULLU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 30
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 12
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 48
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 6
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 6
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Light · énigme 8",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-8",
+    "puzzle": 8,
+    "objective": "Conserver une première cible utile dans la visée du Magicien et relever deux postes avant le départ collectif.",
+    "secondary": {
+      "label": "Énigme 2 · maintenir une commande à distance avec des charges",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-2"
+    }
+  },
+  "metrics": {
+    "actions": 224,
+    "selections": 34,
+    "merchantPushes": 0,
+    "warriorPushes": 9,
+    "thiefPulls": 11,
+    "swaps": 5,
+    "partnerSwaps": 2,
+    "stoneSwaps": 3,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 8,
+    "stoneMoves": 31,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "supportMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Pendant que deux héros maintiennent les postes, le Guerrier ramène les deux caisses en file à travers la serrure.",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur sépare la première caisse et la remonte jusqu’à l’axe du poste supérieur.",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Magicien remplace son propre poids par la caisse sans interrompre la double commande.",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 3
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "La deuxième caisse descend à hauteur du poste inférieur ; le Voleur s’écarte de sa ligne.",
+      "turn": 56,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Magicien relève le Marchand sur le second poste par un échange de partenaires.",
+      "turn": 84,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "La deuxième caisse prend le relais à son tour ; les quatre personnages sont libres de rejoindre le dépôt.",
+      "turn": 92,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 16
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 17,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la dernière caisse de son cul-de-sac, puis libère l’accès et la visée.",
+      "turn": 142,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": false
+      }
+    },
+    {
+      "label": "La caisse remplace le Magicien sur le dernier bouton, mais le Magicien se retrouve dans l’alcôve.",
+      "turn": 164,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": true
+      }
+    },
+    {
+      "label": "Le Voleur intercepte la visée de retour avant la caisse : le dernier poids reste en place.",
+      "turn": 172,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": true
+      }
+    },
+    {
+      "label": "Le groupe quitte le dépôt ; les trois caisses gardent les trois commandes.",
+      "turn": 224,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 1
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 1
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 1
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 1
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "double-serrure": true,
+        "sortie": true
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Dans un couloir, un pas du Magicien peut devenir un échange involontaire avec une cible plus loin.",
+      "Une pièce conservée ou interposée sur le rayon permet de sortir sans reprendre la cible distante.",
+      "Les commandes qui doivent rester occupées se préparent depuis un autre secteur avec des charges."
+    ],
+    "changed": [
+      "Les faisceaux colorés et les blocs à effacer de la source sont remplacés par des alcôves et une double serrure visible.",
+      "Le Guerrier ramène une file de deux caisses ; le Voleur la sépare pour les deux postes de relève.",
+      "Le Magicien échange d’abord des poids puis un partenaire, sans ouvrir momentanément les boutons.",
+      "Le dernier intercepteur est le Voleur : il libère le Magicien de l’alcôve tout en conservant la troisième caisse sur son bouton.",
+      "Carte originale entièrement sèche, sans miroirs ni monstres, centrée sur le transport et les cibles de la magie."
+    ],
+    "sourceReading": "Light 8 motive la conservation d’un obstacle ou d’une cible proche pour contrôler une visée imposée ; Light 2 motive la relève distante d’une commande. Les trois caisses finies et la double serrure constituent un problème original pour quatre héros.",
+    "localChecks": [
+      {
+        "name": "Témoin complet et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 224,
+          "selections": 34,
+          "merchantPushes": 0,
+          "warriorPushes": 9,
+          "thiefPulls": 11,
+          "swaps": 5,
+          "partnerSwaps": 2,
+          "stoneSwaps": 3,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 8,
+          "stoneMoves": 31,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "supportMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Deux caisses franchissent la serrure en file",
+        "status": "passed",
+        "observed": {
+          "chainPushes": 8,
+          "stones": [
+            {
+              "x": 17,
+              "y": 5
+            },
+            {
+              "x": 6,
+              "y": 9
+            },
+            {
+              "x": 7,
+              "y": 9
+            }
+          ]
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Relève 2 sans interruption de la double commande",
+        "status": "passed",
+        "observed": {
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 4,
+                "y": 4
+              },
+              "to": {
+                "x": 6,
+                "y": 4
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 6,
+                "y": 4
+              },
+              "to": {
+                "x": 4,
+                "y": 4
+              }
+            }
+          ],
+          "gateBefore": false,
+          "gateAfter": false
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Relève 4 sans interruption de la double commande",
+        "status": "passed",
+        "observed": {
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 5,
+                "y": 14
+              },
+              "to": {
+                "x": 4,
+                "y": 14
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 4,
+                "y": 14
+              },
+              "to": {
+                "x": 5,
+                "y": 14
+              }
+            }
+          ],
+          "gateBefore": false,
+          "gateAfter": false
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Relève 5 sans interruption de la double commande",
+        "status": "passed",
+        "observed": {
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 4,
+                "y": 14
+              },
+              "to": {
+                "x": 6,
+                "y": 14
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 6,
+                "y": 14
+              },
+              "to": {
+                "x": 4,
+                "y": 14
+              }
+            }
+          ],
+          "gateBefore": false,
+          "gateAfter": false
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Les deux postes sont tenus par des caisses",
+        "status": "passed",
+        "observed": {
+          "buttons": [
+            {
+              "x": 4,
+              "y": 4
+            },
+            {
+              "x": 4,
+              "y": 14
+            }
+          ],
+          "heroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 7,
+                "y": 13
+              }
+            },
+            {
+              "kind": "warrior",
+              "at": {
+                "x": 12,
+                "y": 12
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 6,
+                "y": 16
+              }
+            },
+            {
+              "kind": "wizard",
+              "at": {
+                "x": 6,
+                "y": 14
+              }
+            }
+          ]
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Sans intercepteur, la visée reprend le poids final",
+        "status": "passed",
+        "observed": {
+          "wizard": {
+            "x": 13,
+            "y": 5
+          },
+          "stoneReturnedTo": {
+            "x": 16,
+            "y": 5
+          },
+          "buttonStillHeldByWizard": true
+        },
+        "scope": "La contre-branche reste légale et le Magicien remplace provisoirement le poids ; aucune impasse irréversible n’est affirmée."
+      },
+      {
+        "name": "Le premier partenaire intercepte la visée",
+        "status": "passed",
+        "observed": {
+          "wizard": {
+            "x": 15,
+            "y": 5
+          },
+          "thief": {
+            "x": 16,
+            "y": 5
+          },
+          "weight": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Variante légale : le Guerrier intercepte à la place du Voleur",
+        "status": "passed",
+        "observed": {
+          "actions": 224,
+          "selections": 34,
+          "merchantPushes": 0,
+          "warriorPushes": 9,
+          "thiefPulls": 11,
+          "swaps": 5,
+          "partnerSwaps": 2,
+          "stoneSwaps": 3,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 8,
+          "stoneMoves": 31,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "supportMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      }
+    ]
+  }
+}

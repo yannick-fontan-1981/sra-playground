@@ -1,0 +1,994 @@
+{
+  "spec": {
+    "id": "ss21-03",
+    "title": "Les quatre balcons",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~g.~~~~~~~#",
+      "#~~~~~~~~~~~~~.g~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~g.~~.g~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~~~~~~~~~~~~~~~~~#",
+      "#~~.~~~~~~......~~~#",
+      "#~...~~~~~..~~..~~~#",
+      "#~...~~~~~..~~..~~~#",
+      "#~...~~~~~...T..~~~#",
+      "#~...~~~~~..~~..~~~#",
+      "#~.M.~~~~~..~~..~~~#",
+      "#~..W.Z...........~#",
+      "#~................~#",
+      "####################"
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 12,
+          "y": 14
+        },
+        "facing": "NW"
+      }
+    ]
+  },
+  "commands": "CCRRDCCUURXRCDRRRURRRRRRRUUUUUCCRRRRUUUUUUXRCCRULLLRRDDDDDDLLLLLLLLLLUUUUULUXLCULLLLUUDDDLDDLLLLLLUUUXL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 54
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 54
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 54
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 54
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation · Heroes and Mirrors · énigme 32",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-32",
+    "puzzle": 32,
+    "objective": "Choisir les stations d’un miroir mobile et conserver le personnage capable d’effectuer son dernier déplacement.",
+    "secondary": {
+      "label": "Énigme 31 · position du miroir et diagonale de départ",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/#%C3%A9nigme-31"
+    }
+  },
+  "metrics": {
+    "actions": 103,
+    "selections": 10,
+    "merchantPushes": 0,
+    "warriorPushes": 6,
+    "thiefPulls": 5,
+    "swaps": 0,
+    "partnerSwaps": 0,
+    "stoneSwaps": 0,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 11,
+    "monsterMoves": 0,
+    "supportMoves": 0,
+    "reflections": 4,
+    "heroReflections": 4,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur tire le miroir jusqu’à la première station et quitte sa poignée de côté.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 16
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand atteint le balcon le plus haut et quitte l’axe de retour.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier remonte le miroir de trois cases, jusqu’à la station du deuxième balcon.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien gagne le balcon droit par reflet, sans cible permettant un échange préalable.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 14,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier gare le miroir dans la colonne intérieure avant son propre départ.",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le troisième passager quitte le rayon ; le Voleur reste seul pour descendre le miroir.",
+      "turn": 78,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 11
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le dernier déplacement se tire depuis le sud : aucune case de poussée ne se trouve au nord du miroir.",
+      "turn": 89,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Voleur rejoint le quatrième balcon après avoir quitté le miroir sans le reprendre.",
+      "turn": 103,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 14
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "La position utile du miroir se détermine à partir de la destination et des cases de départ disponibles.",
+      "Un miroir placé trop tôt peut barrer la position nécessaire à sa prochaine manutention.",
+      "L’approche par l’autre côté et le parking final doivent se préparer avant le départ."
+    ],
+    "changed": [
+      "Un seul miroir ordinaire dessert quatre balcons séparés ; il ne se casse pas et ne se transpose pas.",
+      "Le Guerrier remonte puis décale le miroir ; le Voleur doit rester disponible pour son déplacement vers le sud.",
+      "Les quatre balcons offrent une case de retrait hors du rayon, évitant de rappeler les premiers passagers.",
+      "Aucune caisse à consommer, aucun bouton, aucun monstre : l’eau dessine le rail de manutention et les départs possibles."
+    ],
+    "sourceReading": "Les énigmes 31–32 motivent le choix d’une station et de la face d’approche ; le rail original à trois stations et les quatre balcons sont une adaptation à M/W/T/Z. Le témoin n’est pas une preuve d’ordre unique.",
+    "localChecks": [
+      {
+        "name": "Témoin complet et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 103,
+          "selections": 10,
+          "merchantPushes": 0,
+          "warriorPushes": 6,
+          "thiefPulls": 5,
+          "swaps": 0,
+          "partnerSwaps": 0,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 0,
+          "mirrorMoves": 11,
+          "monsterMoves": 0,
+          "supportMoves": 0,
+          "reflections": 4,
+          "heroReflections": 4,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Quatre balcons vides et isolés",
+        "status": "passed",
+        "observed": [
+          [
+            {
+              "x": 10,
+              "y": 3
+            },
+            {
+              "x": 11,
+              "y": 3
+            }
+          ],
+          [
+            {
+              "x": 15,
+              "y": 4
+            },
+            {
+              "x": 14,
+              "y": 4
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 7
+            },
+            {
+              "x": 11,
+              "y": 7
+            }
+          ],
+          [
+            {
+              "x": 15,
+              "y": 7
+            },
+            {
+              "x": 14,
+              "y": 7
+            }
+          ]
+        ],
+        "scope": "Géométrie statique : chacun a deux cases, aucune caisse ou plateforme ne peut construire un pont. Une transposition requiert une cible déjà présente ; le premier occupant de chaque balcon doit donc arriver par reflet."
+      },
+      {
+        "name": "Stations du miroir réellement utilisées",
+        "status": "passed",
+        "observed": [
+          {
+            "x": 14,
+            "y": 14
+          },
+          {
+            "x": 14,
+            "y": 11
+          },
+          {
+            "x": 11,
+            "y": 11
+          },
+          {
+            "x": 11,
+            "y": 14
+          }
+        ],
+        "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Dernière descente tirée depuis le sud",
+        "status": "passed",
+        "observed": {
+          "northPushCell": {
+            "x": 11,
+            "y": 10,
+            "terrain": "water"
+          },
+          "pulls": 3,
+          "mirror": {
+            "x": 11,
+            "y": 14
+          }
+        },
+        "scope": "La position nord est inutilisable au stade contrôlé. Cela ne démontre pas que tous les ordres alternatifs sont impossibles."
+      },
+      {
+        "name": "Deuxième départ sans remonter le miroir",
+        "status": "passed",
+        "observed": {
+          "wizard": {
+            "x": 10,
+            "y": 11
+          },
+          "mirror": {
+            "x": 14,
+            "y": 14
+          },
+          "refused": true
+        },
+        "scope": "Contre-branche locale : la station basse ne dessert pas la case (10,11). Le miroir reste déplaçable."
+      },
+      {
+        "name": "Variante légale : garer le premier passager seulement à la fin",
+        "status": "passed",
+        "observed": {
+          "actions": 105,
+          "selections": 12,
+          "merchantPushes": 0,
+          "warriorPushes": 6,
+          "thiefPulls": 5,
+          "swaps": 0,
+          "partnerSwaps": 0,
+          "stoneSwaps": 0,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 0,
+          "stoneMoves": 0,
+          "mirrorMoves": 11,
+          "monsterMoves": 0,
+          "supportMoves": 0,
+          "reflections": 4,
+          "heroReflections": 4,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Le retrait immédiat du premier passager fait partie du témoin, sans être une obligation générale."
+      }
+    ]
+  }
+}

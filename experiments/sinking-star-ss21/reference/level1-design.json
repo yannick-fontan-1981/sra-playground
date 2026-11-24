@@ -1,0 +1,2215 @@
+{
+  "spec": {
+    "id": "ss21-01",
+    "title": "L’école des quatre",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "#........#.........#",
+      "#.Mo.....#.........#",
+      "#........#..#......#",
+      "#.WooT...#.#Z~o.o..#",
+      "#...........#......#",
+      "#........#......1.o#",
+      "#........#.........#",
+      "#........#.........#",
+      "#........########.##",
+      "#..................#",
+      "#.............###.##",
+      "#.............m.m.##",
+      "#.............###.##",
+      "#.............###.##",
+      "###.###.###.#####.##",
+      "###.###.###.#####.##",
+      "###g###g###g#####g##",
+      "###.###.###.#####.##",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "atelier",
+        "color": 9,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 2
+          }
+        ]
+      },
+      {
+        "id": "rencontre",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 11
+          }
+        ]
+      },
+      {
+        "id": "sorties",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 3,
+            "y": 12
+          },
+          {
+            "x": 7,
+            "y": 12
+          },
+          {
+            "x": 11,
+            "y": 12
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 5
+        },
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 9
+        },
+        "circuit": "atelier",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 12
+        },
+        "circuit": "rencontre",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 3,
+          "y": 15
+        },
+        "circuit": "sorties",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 15
+        },
+        "circuit": "sorties",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 15
+        },
+        "circuit": "sorties",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 15
+        },
+        "circuit": "sorties",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RCRRCRDLLLLLULDCRRDXLLCDRDDRRRRRRDRRRRRRXULULLCCCRDDCCDDLCCCRUULLDLDDLLLLULLULDDDDDDDDCRUUURRRRDDDDDDDRRRRRDCDDDDDRRRDDRRDRUUURRRRRRRRRUUURUUULUULDLLLDRDDDDRURRRCCURRRRRRRRRRRRRRRCCDLDDDCCLLLLLLCCULLLLDDLLUDDCDDRRRRDDDDDDDDDCLDLDDDLLLLLLLDDDCDDDLLLLLDDDCLDRDDD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Atelier original : Heroes of Hauling 3, 4 et 13",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/",
+    "puzzle": "3, 4 et 13",
+    "objective": "Apprendre les quatre rôles, manipuler les arrivées optiques et installer trois poids pour les quatre sorties.",
+    "note": "Adaptation pédagogique : commandes à maintenir et relève par échange ; quatre rôles, appui fixe, quai optique et rencontre commandée ajoutés.",
+    "secondary": {
+      "label": "Heroes and Mirrors — premières visées",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 260,
+    "selections": 26,
+    "merchantPushes": 19,
+    "warriorPushes": 9,
+    "thiefPulls": 20,
+    "swaps": 6,
+    "partnerSwaps": 1,
+    "stoneSwaps": 5,
+    "monsterSwaps": 0,
+    "bentSwaps": 1,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 1,
+    "swapLoops": 0,
+    "partnerMoves": 3,
+    "chainPushes": 2,
+    "stoneMoves": 55,
+    "mirrorMoves": 1,
+    "monsterMoves": 1,
+    "supportMoves": 0,
+    "reflections": 2,
+    "heroReflections": 1,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand pousse une caisse sur le bouton bleu.",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 4
+        },
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Le Guerrier avance la file de deux caisses et du Voleur.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Le Voleur sépare la caisse de tête, puis tire le Guerrier sans déclencher sa poussée.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Première cible au-delà de l’eau, échange coudé, puis reflet des occupants à distance égale.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 2
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 18,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Le miroir est décalé ; la caisse reflétée arrive au quai de reprise.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "La caisse devient un appui fixe et le Marchand le traverse.",
+      "turn": 46,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Le Magicien échange avec le Marchand sur l’appui puis marche hors de la visée.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Première charge sèche installée sous la commande de sortie.",
+      "turn": 86,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": false
+      }
+    },
+    {
+      "label": "La presse avance un gardien vers le second ; leur rencontre libère la colonne est.",
+      "turn": 108,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "rencontre": true,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Le Voleur remplace son propre poids par la deuxième caisse sans abandonner la commande.",
+      "turn": 123,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 7,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 17,
+          "y": 5
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "rencontre": true,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Extraction du quai puis transfert de la caisse dans le couloir de livraison.",
+      "turn": 161,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 7,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 17,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "rencontre": true,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Le Marchand livre la caisse au débouché de la troisième colonne.",
+      "turn": 194,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 7,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "rencontre": true,
+        "sorties": false
+      }
+    },
+    {
+      "label": "Trois charges occupent les trois boutons ; les quatre passages de sortie sont ouverts.",
+      "turn": 208,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 7,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "rencontre": true,
+        "sorties": true
+      }
+    },
+    {
+      "label": "Les quatre destinations sont occupées.",
+      "turn": 260,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 17
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 17
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 2
+        },
+        {
+          "x": 3,
+          "y": 12
+        },
+        {
+          "x": 7,
+          "y": 12
+        },
+        {
+          "x": 16,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 13,
+          "y": 4
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 17,
+            "y": 6
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "rencontre": false,
+        "sorties": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Transformer les poids temporaires en charges permanentes et distribuer les accès entre des capacités différentes.",
+    "changes": "Trois commandes communes protègent quatre sorties séparées. Le trajet pédagogique ajoute une file mixte, la séparation de sa tête, une visée coudée distincte du reflet global et une presse dont le déplacement des gardiens reste visible.",
+    "teaching": "Le témoin montre les capacités du quatuor sans imposer de quota de découvertes à la victoire. Les démonstrations optiques supplémentaires restent des exercices légaux, pas des obligations cachées.",
+    "localChecks": []
+  }
+}
