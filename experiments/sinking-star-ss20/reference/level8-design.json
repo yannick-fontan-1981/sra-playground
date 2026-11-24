@@ -1,0 +1,2036 @@
+{
+  "spec": {
+    "id": "ss20-08",
+    "title": "Le chantier à démonter",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "#o.......###########",
+      "#.....B..###########",
+      "#........###########",
+      "#........###########",
+      "#...M.....##########",
+      "#.......#..#########",
+      "#.T......#.#......o#",
+      "#........#.#.......#",
+      "#######~##.#.......#",
+      "#...~....#..##m#####",
+      "#...#...##..##~#####",
+      "#...#####.......####",
+      "##.######.........##",
+      "#...######...#o#..##",
+      "#ggg######........##",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 9,
+          "y": 8
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "chantier",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 14,
+            "y": 16
+          }
+        ]
+      },
+      {
+        "id": "arrivee",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 6,
+            "y": 12
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 14,
+          "y": 12
+        },
+        "circuit": "chantier",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 15
+        },
+        "circuit": "chantier",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 2,
+          "y": 15
+        },
+        "circuit": "arrivee",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 14,
+          "y": 13
+        },
+        "circuit": "chantier",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "RRRRRXDDDDDDRRRRCCDDDRRRXDDDDDDDRRDCDCCUCUUULCUURRRRRRRXDDDDDDRRRRUUUUURRRLLLLDRDDDDLCCRDDCLLLLDRRUUULUUUUXLCCDLLLDLUUUUUUXCLLLDRDDLCCDDDRCUUURRRRXDDDDCDLCDDDRRRDDLLLCDDDDUUUUUUUUXLCCLUUUUUUUUXCLLDRDDLCCUXLLDDDUULLDRURDDDDRCRDDUCCLLLCUUUUUUULLLLLCCRRUUUUUUUULLLLCCUUUULUUUUXLLDDDDDLLLLDDCCURRRRDLDDDDLCCDDDRRRURDDDDDDRCDDRRRDDUCCLDLLULLDLDDDDLCDDLLUCLDDRDCCLDDLDDLD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 45
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 48
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 54
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 54
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "objective": "Extraire les deux caisses du chantier, démonter sa commande et employer les trois ressources aux deux ponts et au verrou final.",
+    "label": "Heroes and Mirrors — énigmes 4 et 6",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+    "puzzles": [
+      4,
+      6
+    ],
+    "secondary": {
+      "label": "Heroes and Light — énigme 39",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 365,
+    "selections": 43,
+    "merchantPushes": 30,
+    "thiefPulls": 39,
+    "songs": 6,
+    "groupSongs": 1,
+    "songHeroMoves": 3,
+    "songStoneMoves": 4,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 3,
+    "stoneMoves": 75,
+    "mirrorMoves": 0,
+    "monsterMoves": 1,
+    "reflections": 10,
+    "heroReflections": 8,
+    "pistonPushes": 1,
+    "platformsCreated": 2,
+    "monstersRemoved": 1,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le miroir d’angle fait entrer les deux opérateurs dans le chantier. Son socle fermé empêche de le transformer en ressource mobile.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 18,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "chantier": true,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le Barde retire à distance la caisse de commande. La plateforme disparaît et la presse chasse le gardien dans l’eau nue.",
+      "turn": 35,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 18,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 17
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La caisse revient sur sa commande : la passerelle réapparaît. Le chant remonte aussi le Marchand au nord, puis le sas sud se referme vide. Il faut conserver ce réglage pendant l’extraction haute.",
+      "turn": 40,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 18,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": true,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La réserve haute traverse le sas encore ouvert et son appui temporaire. Le Marchand finit la poussée, puis le Voleur la reprend latéralement : elle doit rester sèche.",
+      "turn": 95,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 14
+        },
+        {
+          "x": 14,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": true,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Première livraison par le miroir : la caisse haute est rangée dans la cour d’arrivée, avant le démontage du chantier.",
+      "turn": 132,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 16
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": true,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le chantier n’a plus d’occupant au nord. Le Barde retire définitivement la commande et décale la caisse dans la cour basse ; le Marchand peut maintenant la reprendre.",
+      "turn": 166,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 17
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La seconde livraison devient le premier pont permanent. La plateforme du chantier est démontée ; aucune de ses caisses ne peut y être abandonnée.",
+      "turn": 210,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        },
+        {
+          "x": 6,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La réserve haute descend au-delà du coude. Un tirage la remonte dans l’axe horizontal et une poussée crée le second pont, séparé du premier par un quai sec.",
+      "turn": 233,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le Barde traverse les deux ponts puis attend sur l’îlot d’arrivée. Il devra encore aider le dernier passeur à quitter la commande sans la tirer.",
+      "turn": 287,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La troisième caisse reste sèche sur le bouton final. Le Voleur ne peut pas partir vers la gauche à pied : il la tirerait hors de la commande.",
+      "turn": 349,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": false,
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Depuis l’autre rive, le Barde entraîne le Voleur seul sur l’appui. La caisse est hors de son carré de chant ; le verrou reste ouvert pour les trois arrivées.",
+      "turn": 355,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 4,
+          "y": 12
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 9,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "chantier": false,
+        "arrivee": true
+      }
+    }
+  ],
+  "adaptation": "Mirrors 4 fournit le départ qui ne doit pas déclencher le tirage du Voleur : le chant forcé depuis l’autre rive remplace ici le dernier reflet de la source. Mirrors 6 fournit la planification des ressources entre trous d’eau et transport optique, recomposée en trois caisses nécessaires : deux appuis isolés et un poids sec. Light 39 inspire le démontage différé d’un dispositif encore utile. Un miroir d’angle échange entre deux compartiments ; une commande sert d’abord à expulser le monstre et porter le transport, puis sa caisse est récupérée. Ni duplication, feu, empilement, magie d’échange, ni condition de victoire cachée."
+}

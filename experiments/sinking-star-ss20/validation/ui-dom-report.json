@@ -1,0 +1,512 @@
+{
+  "success": true,
+  "htmlSha256": "ca943358a420532703f8f6943a665e81da2dab4cf6bd9194378cf01796c1a2e8",
+  "scope": "focused-ui-and-full-campaign",
+  "tutorialLevel": 1,
+  "pedagogicalFixtureLevel": 1,
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Compiled-HTML role fixtures cover single pushes and pulls, stable monsters and their explicit transport, songs with two partners, moving and anchored supports, presses, hydraulics and combat.",
+    "Global reflection uses nearest-source priority, exchanges equally distant actors and draws shape-specific previews.",
+    "Single rear traction preserves the second crate, awards the matching discoveries and can be interrupted without stale animation frames.",
+    "Gray-backed buttons and black/gray press centers have the exact expected pixels.",
+    "Mirror warnings flash only involved backs, preserve diagonals and lock ordinary controls.",
+    "A two-weight goal press preserves yellow destination corners and black/gray centres through opening, Undo and replay.",
+    "Keys 1/2/3, repeated Tab, all three role buttons and image clicks select correctly without advancing the world; Shift+Tab and off-canvas clicks are respected.",
+    "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries in the current room; Restart returns to level 1 with its thirty-discovery workshop visible.",
+    "Reduced-motion mode paints the final result without timer waits.",
+    "Defeat appears only after the combat animation and its Undo restores the three living heroes.",
+    "Victory waits for all three heroes and the last frame, disables ordinary controls, and can be undone or restarted.",
+    "All eight rooms expose three heroes, three goals, correct titles, objectives, links and contextual help; the campaign opens with the teaching workshop at level 1; other rooms have contextual rules without awarding tutorial discoveries.",
+    "The actual workshop route at level 1 earns all 30 discoveries from displayed public pixels; other rooms add none.",
+    "The compiled HTML completes all eight real rooms with every frame and duration checked, including Undo and replay of each completion."
+  ],
+  "roleCoverage": [
+    {
+      "case": "A guard stays still during unrelated walking",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Bard song moves a guard exactly once",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes one crate",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant refuses a two-piece row",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes Thief without a rear pull",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes Bard without singing",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant moves a mirror without changing its face",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant crate creates an immersed support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant cannot push a companion into unsupported water",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Bard transports both companions and cargo together",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A butte retains one sung crate while the other advances",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Song reaches a diagonal corner and crosses a wall",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Blocked Bard cancels the complete song",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A mirror never follows the song",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Song slides a free immersed support along water",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Bard landing anchors the next immersed support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Song atomically refuses to drown an inactive companion",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls the nearest crate and leaves its rear neighbour",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls Merchant without a passive push",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls Bard without a passive song",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief walks past a distant crate without a ranged power",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls a mirror without rotating it",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief leaves an immersed rear support in place",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief cannot push a crate from the front",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief leaves its crate by departing sideways",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pull hands a monster to a lateral press before contact",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A side press moves Thief without a rear pull",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A press visibly delivers a guard without a second movement",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A side press moves Bard without singing",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A press deposits a remote immersed support",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Forced landing waits for hydraulic support",
+      "frames": 9,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Pressed monsters fight simultaneously away from every hero",
+      "frames": 11,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square preview",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange two roles without passive abilities",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    }
+  ],
+  "tractionAnimationCoverage": {
+    "case": "one-piece rear traction",
+    "frames": 3,
+    "exactPixelsAndTiming": true,
+    "controlsLocked": true,
+    "secondCrateUnchanged": true,
+    "correctDiscoveries": true,
+    "resetCancelsCallbacks": true
+  },
+  "deviceGlyphCoverage": [
+    {
+      "sharedPlate": false,
+      "openPixels": [
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          3,
+          15
+        ],
+        [
+          7,
+          15,
+          7
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    },
+    {
+      "sharedPlate": true,
+      "openPixels": [
+        [
+          3,
+          7,
+          3
+        ],
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          7,
+          3
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    }
+  ],
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible mirror destinations both flash",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "wall-blocked reflection flashes its source mirror",
+      "redMirrorIndices": [
+        0
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "closed-press reflection flashes its source mirror",
+      "redMirrorIndices": [
+        0
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "independent blocked mirrors flash together without a partial valid transfer",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "blocked reflection respects reduced motion",
+      "frames": 4,
+      "noTimerWaits": true,
+      "normalRestingFrame": true
+    },
+    {
+      "case": "actual campaign blocked mirrors",
+      "level": 4,
+      "prefixActions": 20,
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "redPixels": 3,
+      "onlyBlackBacksChanged": true,
+      "exactPixelsAndTiming": true,
+      "repeatedWarningAddsNoUndo": true,
+      "resetClearsWarning": true
+    }
+  ],
+  "goalPressCoverage": {
+    "case": "two-weight goal press",
+    "requiredWeights": 2,
+    "closedPixels": [
+      [
+        11,
+        15,
+        11
+      ],
+      [
+        7,
+        5,
+        15
+      ],
+      [
+        11,
+        15,
+        11
+      ]
+    ],
+    "openPixels": [
+      [
+        11,
+        11,
+        11
+      ],
+      [
+        11,
+        3,
+        11
+      ],
+      [
+        11,
+        11,
+        11
+      ]
+    ],
+    "threeVisibleGoals": true,
+    "exactPixelsAndTiming": true,
+    "openingUndoAndReplay": true
+  },
+  "campaignCoverage": [
+    {
+      "level": 1,
+      "title": "L’atelier des marées",
+      "actions": 256,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 2,
+      "title": "Le chargement à rebours",
+      "actions": 223,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 3,
+      "title": "Le poids qui reste",
+      "actions": 85,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 4,
+      "title": "Les quais en décalage",
+      "actions": 102,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 5,
+      "title": "Le pas qui manque",
+      "actions": 128,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 6,
+      "title": "Les pierres voyageuses",
+      "actions": 93,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 7,
+      "title": "La relève du passeur",
+      "actions": 92,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 8,
+      "title": "Le chantier à démonter",
+      "actions": 365,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    }
+  ],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 256,
+    "discoveries": [
+      "select",
+      "move",
+      "merchant-push",
+      "thief-pull",
+      "single-pull",
+      "partner-push",
+      "partner-pull",
+      "mirror-motion",
+      "relay-weight",
+      "release-by-pull",
+      "monster-still",
+      "bard-song",
+      "partner-song",
+      "selective-song",
+      "diagonal-song",
+      "wall-song",
+      "monster-song",
+      "water-support",
+      "support-slide",
+      "support-anchor",
+      "cross-support",
+      "mirror",
+      "hero-reflection",
+      "crate-reflection",
+      "button",
+      "gate",
+      "press",
+      "monster-press",
+      "monster",
+      "goals"
+    ],
+    "onlyTutorialRoomAwardsDiscoveries": true
+  }
+}

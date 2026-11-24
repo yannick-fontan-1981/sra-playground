@@ -1,0 +1,1153 @@
+{
+  "spec": {
+    "id": "ss20-05",
+    "title": "Le pas qui manque",
+    "rows": [
+      "####################",
+      "####################",
+      "#####M...###########",
+      "#####...B###########",
+      "#####T.....#########",
+      "##########m#########",
+      "##########.#########",
+      "##########.#########",
+      "##########..########",
+      "##########...##.####",
+      "##########...m..o###",
+      "###########.########",
+      "###########.########",
+      "###########.########",
+      "###########~########",
+      "##########.......###",
+      "##########.......###",
+      "##########.......###",
+      "##########g##g##g###",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "rail",
+        "buttons": [
+          {
+            "x": 10,
+            "y": 5
+          }
+        ],
+        "color": 9
+      },
+      {
+        "id": "coude",
+        "buttons": [
+          {
+            "x": 11,
+            "y": 10
+          }
+        ],
+        "color": 3
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 9,
+          "y": 4
+        },
+        "circuit": "rail",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 9
+        },
+        "circuit": "coude",
+        "direction": "N",
+        "closedWhen": "pressed"
+      }
+    ],
+    "mirrors": [
+      {
+        "at": {
+          "x": 10,
+          "y": 10
+        },
+        "facing": "NE"
+      }
+    ]
+  },
+  "commands": "CCDXUCDRDRRRRDDDDDRDRRRRUCRRRRRDDDDDRRDRRRLLLLUULUUUULLLUULLCCDLLLCCDRRDDDDDCLDDDDDDDLDCDDRRRRRDDDDRDDDDDDDDDRRDCRDDDDDDDDRRRRRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation de Héros et Miroirs — énigmes 24–25",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-mirrors-solutions/",
+    "puzzle": "24–25",
+    "objective": "Reconnaître une contrainte de diagonale, puis modifier un seul départ pour rendre une rencontre possible."
+  },
+  "metrics": {
+    "actions": 128,
+    "selections": 11,
+    "merchantPushes": 4,
+    "thiefPulls": 4,
+    "songs": 2,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 1,
+    "songMonsterMoves": 1,
+    "supportMoves": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 9,
+    "mirrorMoves": 0,
+    "monsterMoves": 2,
+    "reflections": 1,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Un seul pas vers le sud déplace le gardien du haut ; le rail libère son bouton et ouvre l’entrée.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 10,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 10
+        }
+      ],
+      "circuits": {
+        "rail": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Le reflet dépose l’autre gardien à côté du premier : leur rencontre libère le passage, sans marche autonome.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rail": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Préparer le Marchand dans le renfoncement droit avant de tirer la charge dans le couloir.",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 16,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rail": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Extraire la caisse du fond : le Voleur la ramène à portée, puis évacue le coude.",
+      "turn": 60,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rail": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Pousser la caisse jusqu’au coude ; le Marchand ne peut pas passer derrière pour tourner.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rail": false,
+        "coude": true
+      }
+    },
+    {
+      "label": "Le chant descend seulement la caisse dans la branche sud ; le mur retient le Marchand.",
+      "turn": 76,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rail": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Conserver la caisse sèche jusqu’au dernier goulet, puis la poser dans l’eau.",
+      "turn": 87,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 18
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 2
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rail": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Franchir le passage créé et réunir les trois personnages.",
+      "turn": 128,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 18
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rail": false,
+        "coude": false
+      }
+    }
+  ],
+  "adaptation": {
+    "kind": "adaptation",
+    "preserved": [
+      "Un reflet conserve la classe de diagonale de son acteur ; répéter la même image ne rapproche pas automatiquement les monstres.",
+      "Une rencontre orthogonale élimine une paire et libère matériellement le passage.",
+      "Les positions se préparent avant le reflet."
+    ],
+    "changed": [
+      "Les deux monstres sont stables et aucun n’effectue de chasse ou de déplacement automatique.",
+      "Un déplacement sélectif du Barde modifie la géométrie ; aucun cristal dupliqué, fusionné ou créé.",
+      "Après la rencontre, un coude étroit exige extraction Voleur, poussée Marchand et décalage Barde avant l’unique traversée d’eau.",
+      "Les monstres ne deviennent pas des poids permanents sur deux boutons de sortie."
+    ],
+    "sourceReading": "Les énigmes 24–25 exposent les restrictions de diagonale des monstres réfléchis ; SS20 en tire une seule correction visible, puis une manutention au coude propre au trio M/T/B.",
+    "localChecks": [
+      {
+        "name": "Témoin complet, étapes et métriques",
+        "status": "passed",
+        "observed": {
+          "actions": 128,
+          "selections": 11,
+          "merchantPushes": 4,
+          "thiefPulls": 4,
+          "songs": 2,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 1,
+          "songMonsterMoves": 1,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 9,
+          "mirrorMoves": 0,
+          "monsterMoves": 2,
+          "reflections": 1,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Huit reflets seuls ne créent aucune rencontre",
+        "status": "passed",
+        "observed": [
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 10,
+              "y": 7
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 10
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 10,
+              "y": 7
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 10
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 10,
+              "y": 7
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 10
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 10,
+              "y": 7
+            }
+          ],
+          [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 13,
+              "y": 10
+            }
+          ]
+        ],
+        "scope": "Les deux monstres gardent la même parité x+y ; un voisinage orthogonal demande des parités opposées. Ce contrôle porte sur les reflets sans autre déplacement."
+      },
+      {
+        "name": "Variante légale : reflet puis pas du Barde, au lieu de pas puis reflet",
+        "status": "passed",
+        "observed": {
+          "actions": 128,
+          "selections": 11,
+          "merchantPushes": 4,
+          "thiefPulls": 4,
+          "songs": 2,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 1,
+          "songMonsterMoves": 1,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 9,
+          "mirrorMoves": 0,
+          "monsterMoves": 2,
+          "reflections": 1,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Caisse au coude : la voie arrière du Marchand se ferme",
+        "status": "passed",
+        "observed": {
+          "merchant": {
+            "x": 12,
+            "y": 10
+          },
+          "gateClosed": true,
+          "northStepRefused": true
+        },
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Chant du coude : caisse déplacée, Marchand retenu par le mur",
+        "status": "passed",
+        "observed": {
+          "moves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 8
+              },
+              "to": {
+                "x": 10,
+                "y": 9
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 11,
+                "y": 10
+              },
+              "to": {
+                "x": 11,
+                "y": 11
+              }
+            }
+          ],
+          "couplingReleased": true
+        },
+        "scope": "Parcours ou branche locale effectivement rejouée ; aucune prétention d’unicité."
+      },
+      {
+        "name": "Recherche sans aucun chant",
+        "status": "passed",
+        "observed": {
+          "status": "unsolvable",
+          "states": 7920,
+          "expanded": 7920,
+          "ms": 258
+        },
+        "scope": "File épuisée : aucun parcours gagnant sous cette restriction."
+      }
+    ]
+  }
+}
