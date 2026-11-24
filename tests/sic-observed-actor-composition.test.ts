@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
+import { createSs06Backend } from '../src/games/sinking-star-ss06.ts';
 import { createObservedActorComposition } from '../src/sic/observed-actor-composition.ts';
 
 type Point = readonly [number, number];
@@ -162,4 +163,52 @@ test('rebinds verified roles after the same motifs change positions on the next 
   next.perform(proposal.actions[0]!);
   const returned=await next.observed();
   assert.notEqual((await family.after(proposal,0,observation,returned.observation,packet.frame_rows,returned.packet.frame_rows)).matched,false);
+});
+const mirroredPresentations = [
+  {name:'horizontal reflection, new colors and reordered inputs', flipX:true, flipY:false, colors:3, inputs:[3,5,2,1,4]},
+  {name:'vertical reflection, different colors and a different interaction command', flipX:false, flipY:true, colors:7, inputs:[5,2,4,3,1]},
+] as const;
+
+for (const presentation of mirroredPresentations) test('reuses both roles for a joint transfer with '+presentation.name, async () => {
+  const game = createSs06Backend();
+  const family = createObservedActorComposition();
+  let board = await game.dispatch({type:'load',code:'SS06',level:1});
+  let revision=0, firstSecondLevelOffer='', joint=false;
+  const show = async () => {
+    let frame=board.frame.map(row=>row.map(value=>(value+presentation.colors)%16));
+    if(presentation.flipX)frame=frame.map(row=>row.reverse());
+    if(presentation.flipY)frame.reverse();
+    const packet={frame_rows:frame,frame_hash:await publicFrameHash(frame),level:board.level,
+      levels_completed:board.levelsCompleted,state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
+    return {packet,observation:await measureNativeObservation(packet,revision,'shifted-campaign')};
+  };
+  while(board.level<=2 && revision<110){
+    const {packet,observation}=await show();
+    const proposal=await family.propose(observation,packet.frame_rows,[],110-revision);
+    assert.ok(proposal,'Missing proposal after '+revision+' actions, level '+board.level);
+    if(board.level===2) {
+      if (!firstSecondLevelOffer) firstSecondLevelOffer=proposal.offer.kind;
+      assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
+      joint ||= proposal.offer.kind==='compose_simultaneous_observed_transfers';
+    }
+    let issued=0;
+    for(const [index,command] of proposal.actions.entries()){
+      const first=await show();
+      const binding=await family.before(proposal,index,first.packet,first.observation);
+      if(!binding.admitted)break;
+      const slot=Number(command.action_ref.slice(6));
+      const point=slot===6?{x:presentation.flipX?63-command.data.x!:command.data.x!,y:presentation.flipY?63-command.data.y!:command.data.y!}:undefined;
+      board=await game.dispatch({type:'action',actionId:slot===6?6:presentation.inputs[slot-1]!,...(point?{data:point}:{})});
+      revision++;
+      issued++;
+      const second=await show();
+      const result=await family.after(proposal,index,first.observation,second.observation,first.packet.frame_rows,second.packet.frame_rows);
+      await family.record(first.observation,second.observation,command,first.packet.frame_rows,second.packet.frame_rows,proposal,index,[]);
+      if(result.seal_prefix)break;
+    }
+    assert.ok(issued,'A proposed prefix must admit its first action');
+  }
+  assert.equal(firstSecondLevelOffer,'prepare_transfer_by_moving_reflector');
+  assert.ok(joint);
+  assert.equal(board.levelsCompleted,2);
 });

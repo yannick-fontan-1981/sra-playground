@@ -10,17 +10,17 @@ type Actor = { ink: number; cell: Cell; marker: number | null };
 type Shape = { pitch: number; phase: Point; mask: number[]; inks: number[]; floor: number; backing: number };
 type Direction = { action: string; axis: Point; evidence: string };
 type Role = { moved: boolean; contact: boolean; capacity: number; effects: Record<string, string>; controls?: Direction[] };
-type RoleTransfer = { interface: string; motif: string; roles: Record<string, Role>; directions: Direction[] };
+type RoleTransfer = { interface: string; motif: string; roles: Record<string, Role>; directions: Direction[]; trigger?: string };
 type History = {
   epoch: number; shape?: Shape; directions: Direction[]; roles: Record<number, Role>; selections: Record<number, string>; transfer?: RoleTransfer;
-  guarded: string[]; goals: Cell[]; plates: Cell[]; supports: Record<Cell,string>; trigger?: string;
+  guarded: string[]; goals: Cell[]; plates: Cell[]; supports: Record<Cell,string>; trigger?: string; gates: Record<Cell,{accent:number;open:boolean}>; switches: Record<Cell,number>;
   lastPush?: { ink: number; direction: string; object: Cell };
   obstruction?: { ink: number; stance: Cell; object: Cell };
 };
 type Tile = { pixels: number[]; uniform: boolean; passable: boolean; object: boolean; plate: boolean;
-  mirror: Point[] | null; preview: boolean };
+  mirror: Point[] | null; preview: boolean; gate: {accent:number;open:boolean}|null; plateAccent: number|null };
 type Scene = { actors: Actor[]; active: Actor; tiles: Map<Cell, Tile>; goals: Cell[]; plates: Cell[] };
-type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell };
+type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; expectedActors?: {ink:number;from:Cell;to:Cell}[] };
 type Offer = { ink: number; steps: Step[]; kind: string; score: number; test?: string; target?: Cell };
 type Proposal = ReturnType<typeof proposed>;
 type Path = { cell: Cell; route: Step[] };
@@ -61,12 +61,12 @@ function readTile(rows: NativeRows, x: number, y: number, pitch: number) {
   return Array.from({length:pitch*pitch}, (_,i) => rows[y+Math.floor(i/pitch)]![x+i%pitch]!);
 }
 
-function motif(pixels: number[], mask: number[]) {
+function motif(pixels: number[], mask: number[], markedFloor?: number) {
   const inside = new Set(mask);
   const outside = pixels.filter((_,i) => !inside.has(i));
   if (!outside.length) return null;
-  const floor = outside[0]!;
-  if (outside.some(value => value!==floor)) return null;
+  const floor = markedFloor??outside[0]!;
+  if (markedFloor===undefined && outside.some(value => value!==floor)) return null;
   const values = mask.map(i => pixels[i]!);
   const ink = values.find(value => values.filter(other => other===value).length >= values.length-1);
   if (ink===undefined || ink===floor || values.includes(floor)) return null;
@@ -125,7 +125,7 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
   const solidColors = new Map<number,Cell[]>();
   const mid = Math.floor(pitch*pitch/2);
   for(let y=phase[1];y+pitch<=rows.length;y+=pitch) for(let x=phase[0];x+pitch<=rows[0]!.length;x+=pitch){
-    const cell = key([(x-phase[0])/pitch,(y-phase[1])/pitch]), pixels=readTile(rows,x,y,pitch), body=motif(pixels,mask);
+    const cell = key([(x-phase[0])/pitch,(y-phase[1])/pitch]), pixels=readTile(rows,x,y,pitch), body=motif(pixels,mask,history.plates.includes(cell)?floor:undefined);
     const uniform=pixels.every(value=>value===pixels[0]);
     if(body && inks.includes(body.ink)) actors.push({ink:body.ink,cell,marker:body.marker});
     const edge = pixels.filter((_,i)=>i%pitch===0 || i%pitch===pitch-1 || i<pitch || i>=pitch*(pitch-1));
@@ -135,9 +135,10 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
     const plate=!mirror&&!object && (!body||body.marker===mid) && onBoard>=pixels.length-mask.length
       && mask.every(index=>pixels[index]!==floor)
       && pixels.filter((_,i)=>!mask.includes(i)).every(value=>value===floor);
-    const preview=!!(body && !inks.includes(body.ink) && body.marker===null && body.floor===floor);
+    const preview=!!(body && !inks.includes(body.ink) && body.marker===null && (body.floor===floor||history.goals.includes(cell)));
+    const gate=gateMark(pixels,pitch,floor);
     tiles.set(cell,{pixels,uniform,
-      passable:onBoard>=Math.ceil(pixels.length/2)||preview||plate,object,plate,mirror,preview});
+      passable:gate?gate.open:onBoard>=Math.ceil(pixels.length/2)||preview||plate,object,plate,mirror,preview,gate,plateAccent:plate?pixels[mid]!:null});
     const outline = edge.every(value => value===edge[0]) && edge[0]!==floor && pixels[mid]===floor;
     if ((uniform||outline) && pixels[0]!==floor && pixels[0]!==shape.backing) {
       const list = solidColors.get(pixels[0]!) ?? [];
@@ -193,6 +194,144 @@ function transferTarget(scene: Scene, source: Cell, mirror: Cell, [first,second]
     if(possible) return destination;
   }
 }
+
+function gateMark(pixels: number[], pitch: number, floor: number) {
+  const center=Math.floor(pixels.length/2), frame=pixels[0]!;
+  const corners=[0,pitch-1,pixels.length-pitch,pixels.length-1];
+  if(frame===floor || pixels[center]===frame || corners.some(i=>pixels[i]!==frame)) return null;
+  const sides=[-pitch,pitch,-1,1].map(offset=>pixels[center+offset]!);
+  const accent=sides.find(value=>value!==frame && value!==floor&&sides.filter(v=>v===value).length===3);
+  if(accent===undefined) return null;
+  const open=pixels[center]===floor&&sides.includes(floor);
+  if(!open&&!sides.includes(frame)) return null;
+  return {accent,open};
+}
+
+type Alignment = { mirror: Cell; placement: Cell; stance: Cell; destination: Cell; cost: number };
+const portable = (tile: Tile | undefined) => !!tile && (tile.object || tile.mirror!==null);
+const background = (tile: Tile | undefined, shape: Shape) => !tile || tile.uniform&&tile.pixels[0]===shape.backing;
+
+function rays(placement: Cell, stance: Cell, destination: Cell, axes: Point[]) {
+  const length=distance(placement,stance);
+  for(const [a,b] of [[axes[0]!,axes[1]!],[axes[1]!,axes[0]!]] as const){
+    const projected:Cell[]=[];
+    let from=placement,to=placement;
+    for(let k=0;k<length;k++){
+      from=next(from,a);
+      to=next(to,b);
+      projected.push(from,to);
+    }
+    if(from===stance&&to===destination&&length) return projected;
+  }
+  return null;
+}
+
+function alignments(scene: Scene, h: History) {
+  const mirrors=[...scene.tiles].filter(([,tile])=>tile.mirror);
+  if(mirrors.length<2||scene.goals.length!==2) return null;
+  // A fixed support or switch is a stronger staging point than an arbitrary
+  // square on a ray. It can keep a circuit engaged during a second approach.
+  const stances=scene.plates.length>=scene.goals.length?scene.plates:
+    [...scene.tiles].filter(([cell,tile])=>tile.passable && !portable(tile)&&!scene.goals.includes(cell)).map(([cell])=>cell);
+  const options=scene.goals.map(destination=>mirrors.flatMap(([mirror,tile])=>stances.flatMap(stance=>{
+    const [sx,sy]=point(stance), [dx,dy]=point(destination);
+    if(stance===destination||Math.abs(sx-dx)!==Math.abs(sy-dy)) return [];
+    return [key([dx,sy]),key([sx,dy])].flatMap(placement=>{
+      const substrate=scene.tiles.get(placement);
+      const projection=rays(placement,stance,destination,tile.mirror!);
+      if(!projection || background(substrate,h.shape!)
+        || !(placement===mirror||substrate?.passable||substrate?.object)
+        || projection.some(cell=>background(scene.tiles.get(cell),h.shape!))) return [];
+      return [{mirror,placement,stance,destination,cost:distance(mirror,placement)*4+
+        Math.min(...scene.actors.map(a=>distance(a.cell,stance)))}];
+    });
+  })));
+  let best: [Alignment,Alignment] | null=null;
+  for(const a of options[0]!) for(const b of options[1]!){
+    if(a.mirror===b.mirror||a.stance===b.stance||a.placement===b.placement)continue;
+    if(!best||a.cost+b.cost<best[0].cost+best[1].cost)best=[a,b];
+  }
+  return best;
+}
+
+function pairedTransfer(scene: Scene, h: History, o: NativeObservation): Offer | undefined {
+  const pairs=alignments(scene,h);
+  if(!pairs) return;
+  const routes=scene.actors.map(actor=>walks(scene,h,actor));
+  const offers:Offer[]=[];
+  const active=scene.active;
+  const add=(actor:Actor, steps:Step[], kind:string, score:number, test?:string,target?:Cell)=>{
+    const selection=actor.ink!==active.ink;
+    if(!steps.length||selection&&h.guarded.includes(JSON.stringify([active.ink,active.cell,'ACTION6',actor.ink])))return;
+    const switchStep:Step={action:address(actor.cell,h.shape!),from:active.cell,actor:active.ink,select:actor.ink};
+    offers.push({ink:actor.ink,steps:selection?[switchStep,...steps]:steps,kind,score:score-steps.length-(selection?4:0),
+      ...(test?{test}:{}),...(target?{target}:{})});
+  };
+  const ready=pairs.every(pair=>pair.mirror===pair.placement && scene.actors.some(actor=>actor.cell===pair.stance)
+    && scene.tiles.get(pair.destination)?.preview);
+  if(ready){
+    const expectedActors=pairs.map(pair=>({ink:scene.actors.find(actor=>actor.cell===pair.stance)!.ink,from:pair.stance,to:pair.destination}));
+    const input=h.trigger?[h.trigger]:o.available_action_refs.filter(ref=>ref!=='ACTION6'&&!h.directions.some(d=>d.action===ref));
+    for(const action of input){
+      const test=JSON.stringify([action,expectedActors]);
+      if(!h.guarded.includes(test))add(active,[{action:command(action),from:active.cell,actor:active.ink,expectedActors}],
+        'compose_simultaneous_observed_transfers',900,test);
+    }
+  }
+  for(const pair of pairs){
+    if(pair.mirror!==pair.placement){
+      for(const [index,actor] of scene.actors.entries()){
+        if(pairs.some(other=>other!==pair&&other.stance===actor.cell))continue;
+        for(const dir of observedDirections(h,actor.ink)){
+          const opposite:Point=[-dir.axis[0],-dir.axis[1]];
+          const stance=next(pair.mirror,opposite), movedMirror=next(pair.mirror,dir.axis);
+          const route=routes[index]!.get(stance)?.route;
+          if(!route||distance(movedMirror,pair.placement)>=distance(pair.mirror,pair.placement))continue;
+          let landing=movedMirror,n=1;
+          while(portable(scene.tiles.get(landing))){landing=next(landing,dir.axis);n++;}
+          const tile=scene.tiles.get(landing);
+          if(background(tile,h.shape!)||tile?.gate&&!tile.gate.open||scene.actors.some(a=>a.cell===landing)
+            || n>1&&actor.ink in h.roles&&h.roles[actor.ink]!.capacity<n)continue;
+          // The reflector itself needs footing even when a displaced load can
+          // change medium. Never use an unsupported reflector as a probe.
+          if(!scene.tiles.get(movedMirror)?.passable&&!portable(scene.tiles.get(movedMirror)))continue;
+          const test=JSON.stringify([actor.ink,stance,dir.action,pair.mirror,tileKey(tile)]);
+          if(!h.guarded.includes(test))add(actor,[...route,{action:command(dir.action),from:stance,actor:actor.ink,
+            tile:tileKey(scene.tiles.get(pair.mirror))}],'prepare_transfer_by_moving_reflector',650,test,pair.mirror);
+        }
+      }
+      continue;
+    }
+    if(!scene.actors.some(actor=>actor.cell===pair.stance)){
+      for(const [index,actor] of scene.actors.entries()){
+        if(pairs.some(other=>other!==pair&&other.stance===actor.cell))continue;
+        const route=routes[index]!.get(pair.stance)?.route;
+        if(route) add(actor,route,'occupy_stance_for_joint_transfer',550);
+      }
+    }
+  }
+  if(!ready&&pairs.every(pair=>pair.mirror===pair.placement&&scene.actors.some(actor=>actor.cell===pair.stance))){
+    for(const pair of pairs){
+      const mirror=scene.tiles.get(pair.mirror)?.mirror;
+      if(!mirror||scene.tiles.get(pair.destination)?.preview)continue;
+      for(const blocker of rays(pair.mirror,pair.stance,pair.destination,mirror)??[]){
+        const gate=h.gates[blocker];
+        if(!gate||!scene.tiles.get(blocker)?.object)continue;
+        const controller=scene.actors.find(actor=>h.switches[actor.cell]===gate.accent);
+        if(!controller)continue;
+        const paths=routes[scene.actors.indexOf(controller)]!;
+        const test=JSON.stringify(['release_linked_gate',controller.cell,blocker,tileKey(scene.tiles.get(blocker))]);
+        if(h.guarded.includes(test))continue;
+        for(const {cell,route} of paths.values()){
+          if(route.length!==1||scene.plates.includes(cell))continue;
+          add(controller,route,'verify_gate_release_on_blocking_object',720,test,blocker);
+        }
+      }
+    }
+  }
+  return offers.sort((a,b)=>b.score-a.score)[0];
+}
+
 
 function draft(scene: Scene, h: History, o: NativeObservation): Offer | undefined {
   const {active}=scene;
@@ -287,7 +426,7 @@ function draft(scene: Scene, h: History, o: NativeObservation): Offer | undefine
 }
 
 function fresh(epoch: number): History {
-  return {epoch,directions:[],roles:{},selections:{},guarded:[],goals:[],plates:[],supports:{}};
+  return {epoch,directions:[],roles:{},selections:{},guarded:[],goals:[],plates:[],supports:{},gates:{},switches:{}};
 }
 
 function restoreRoles(h: History, shape: Shape, o: NativeObservation) {
@@ -300,21 +439,23 @@ function restoreRoles(h: History, shape: Shape, o: NativeObservation) {
     if(peers.every(([,role])=>!!role)) {
       h.roles=Object.fromEntries(peers.map(([ink,role])=>[ink,structuredClone(role!)]));
       h.directions=structuredClone(previous.directions);
+      if(previous.trigger&&o.available_action_refs.includes(previous.trigger))h.trigger=previous.trigger;
     }
   }
-  h.transfer={interface:commands,motif,roles:{},directions:h.directions};
+  h.transfer={interface:commands,motif,roles:Object.fromEntries(shape.inks.flatMap(ink=>h.roles[ink]?[[color(o,ink),h.roles[ink]!]]:[])), directions:h.directions,...(h.trigger?{trigger:h.trigger}:{})};
 }
 function proposed(o: NativeObservation, offer: Offer, steps: (Step & { point_binding?: unknown })[], evidence:string[]) {
   const actions=steps.map(step=>step.action), reason=offer.kind.replaceAll('_',' ');
   const goal={kind:offer.kind,scope:o.observation_ref.split(':revision:',1)[0]!,subjects:[String(offer.ink)],
     parentObjective:'G_official_completion',satisfactionContract:'observe_the_predicted_actor_or_interaction'};
-  const id='actor-composition:'+sicNeedId(goal);
+  const needId=sicNeedId(goal);
+  const id='actor-composition:'+needId;
   return {status:'proposed',kind:observedActorCompositionId,actions,steps:steps.map(step=>({...step,expected_after:step.to?point(step.to):null})),offer,
     binding:{observation_ref:o.observation_ref,level_epoch:o.level_epoch},
     question:{reason,hypothesis_refs:evidence},route_refs:evidence,
     compositions:[{id,observed:false,open_question:reason,relations:['contributes_to:G_official_completion']}],
     sicSituationCard:{mode:offer.kind.startsWith('bring_')?'solving':'exploration',strategy:offer.kind,need:reason,situation:reason,evidence},
-    sicLocalDecision:{strategy:offer.kind,objective:{id,label:reason,parent:'G_official_completion'},need:{...goal,id,status:'assigned',evidence}},
+    sicLocalDecision:{strategy:offer.kind,objective:{id,label:reason,parent:'G_official_completion'},need:{...goal,id:needId,status:'assigned',evidence}},
     bundle_template:{operation_key:'OP18',composition_ref:id,objective_ref:'G_official_completion',purpose:reason,
       preconditions:{},preserve_refs:[],evidence,actions,outcome_guard:{path:['value'],contains:id}}};
 }
@@ -332,9 +473,14 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if(!h.shape) restoreRoles(h,shape,o);
       h.goals=scene.goals;
       h.plates=scene.plates;
-      const offer=draft(scene,h,o);
+      for(const [cell,tile] of scene.tiles){
+        if(tile.gate)h.gates[cell]=tile.gate;
+        if(tile.plateAccent!==null)h.switches[cell]=tile.plateAccent;
+      }
+      const offer=pairedTransfer(scene,h,o)??draft(scene,h,o);
       if(!offer || remaining<1) return null;
-      const evidence=[...new Set([o.observation_ref,...h.directions.map(d=>d.evidence),...Object.values(h.selections)])];
+      const roleEvidence=Object.values(h.roles[offer.ink]?.effects??{});
+      const evidence=[...new Set([o.observation_ref,...observedDirections(h,offer.ink).map(d=>d.evidence),...Object.values(h.selections),...roleEvidence])];
       const steps=offer.steps.slice(0,Math.min(remaining,16));
       const first=steps[0]!;
       if(first.select!==undefined){
@@ -349,7 +495,8 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
         ?next(step.from,observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)!.axis):undefined);
       const admitted=!!scene && scene.active.ink===step.actor&&scene.active.cell===step.from
         && (step.tile===undefined||!!destination&&tileKey(scene.tiles.get(destination))===step.tile);
-      return {admitted,reason:admitted?'observed_actor_and_local_contact_preserved':'actor_or_contact_changed'};
+      const joint = !step.expectedActors || step.expectedActors.every(actor=>scene?.actors.some(part=>part.ink===actor.ink&&part.cell===actor.from)&&scene.tiles.get(actor.to)?.preview);
+      return {admitted:admitted&&joint,reason:admitted?'observed_actor_and_local_contact_preserved':'actor_or_contact_changed'};
     },
     after(p,index,b,a,first,second) {
       const step=p.steps[index]!;
@@ -357,7 +504,8 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const scene=h.shape&&decode(second,h.shape,h);
       const moved=scene?.active.cell===step.to && scene?.active.ink===step.actor;
       const selected=scene?.active.ink===step.select && scene?.active.cell!==undefined;
-      const matched=boundary|| (step.select!==undefined?selected:step.to!==undefined?moved:b.frame_hash!==a.frame_hash);
+      const joint=step.expectedActors?.every(actor=>scene?.actors.some(part=>part.ink===actor.ink&&part.cell===actor.to));
+      const matched=boundary|| (joint!==undefined?joint:step.select!==undefined?selected:step.to!==undefined?moved:b.frame_hash!==a.frame_hash);
       const sealed=boundary||!matched||step.select!==undefined||step.to===undefined||index===p.steps.length-1;
       return {matched,seal_prefix:sealed,reason:boundary?'official_boundary':matched?'actor_outcome_observed':'actor_outcome_contradicted'};
     },
@@ -398,11 +546,13 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if(step.to&&step.to!==observed.cell){
         h.guarded.push(JSON.stringify([actor.ink,actor.cell,action.action_ref,step.tile??step.to]));
       }
-      if(p.offer.kind==='verify_visible_transport_destination'&&step.to===observed.cell){
+      if((p.offer.kind==='verify_visible_transport_destination'&&step.to===observed.cell)||step.expectedActors?.every(expected=>after.actors.some(actor=>actor.ink===expected.ink&&actor.cell===expected.to))){
         h.trigger=action.action_ref;
+        if(h.transfer)h.transfer.trigger=action.action_ref;
 
         role.effects[action.action_ref]=a.observation_ref;
       }
+      if(p.offer.test && step.select===undefined && (step.expectedActors||p.offer.kind==='verify_gate_release_on_blocking_object'))h.guarded.push(p.offer.test);
       if(p.offer.test && step.contact && p.offer.target) {
         const delta=tileKey(before.tiles.get(step.contact))!==tileKey(after.tiles.get(step.contact));
         if(delta){ role.contact=true; role.effects[p.offer.kind+':'+action.action_ref]=a.observation_ref; }
@@ -411,7 +561,7 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
         const dir=observedDirections(h,actor.ink).find(d=>d.action===action.action_ref), cargo=p.offer.target;
         if(dir&&observed.cell===cargo){
           let cursor=cargo,count=0;
-          while(before.tiles.get(cursor)?.object){count++;cursor=next(cursor,dir.axis);}
+          while(portable(before.tiles.get(cursor))){count++;cursor=next(cursor,dir.axis);}
           delete h.obstruction;
           role.contact=true;
           h.guarded.push(p.offer.test);
@@ -429,6 +579,6 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       return {events:[]};
     },
     state:()=>h,
-    restore(value){ h=structuredClone(value as History); },
+    restore(value){ h={...fresh(-1),...structuredClone(value as History)}; },
   };
 }

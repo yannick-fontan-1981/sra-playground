@@ -391,6 +391,42 @@ function measureActorComposition(issued) {
     ...[...transfers].map(([role,index]) => ({kind: 'use transfer with ' + role, first: index, last: index})),
   ];
 }
+function measureJointActorTransfer(issued) {
+  const world = compileActorLevel(SS06_LEVELS[1]);
+  let state = initialActorState(world);
+  const preparations = new Map();
+  let released = null, joint = null, chained = false;
+  assert.equal(issued[0]?.actorPlan?.strategy, 'prepare_transfer_by_moving_reflector',
+    'SS06 L2 must start by preparing a transfer using the learned controls');
+  assert.ok(issued.every(ticket => ticket.actorPlan && ticket.actorPlan.strategy !== 'calibrate_actor_action'),
+    'SS06 L2 recalibrated controls instead of using previously observed roles');
+  for (const [i, ticket] of issued.entries()) {
+    const result = stepActorWorld(world, state, Number(ticket.action.slice(6)), ticket.data);
+    for (const phase of result.phases) {
+      if (phase.kind === 'push' && phase.moves.some(move => move.actor === 'mirror')) {
+        const role = state.heroes[state.active].kind;
+        assert.equal(ticket.actorPlan.strategy, 'prepare_transfer_by_moving_reflector');
+        assert.ok(ticket.actorPlan.evidence.some(ref => /:epoch:1:revision:(?:[6-9]|[1-9][0-9]+):/.test(ref)),
+          'Mirror preparation must cite a role effect learned in L1');
+        preparations.set(role, i + 1);
+        chained ||= phase.moves.some(move => move.actor === 'stone');
+      } else if (phase.kind === 'piston' && phase.moves.some(move => move.actor === 'stone')) {
+        released = i + 1;
+      } else if (phase.kind === 'reflect' && phase.moves.filter(move => move.actor === 'hero').length === 2) {
+        assert.equal(ticket.actorPlan.strategy, 'compose_simultaneous_observed_transfers');
+        joint = i + 1;
+      }
+    }
+    state = result.state;
+  }
+  assert.equal(state.complete, true, 'SS06 L2 must reach both destinations');
+  assert.equal(preparations.size, 2, 'Both learned actor roles must reposition a reflector');
+  assert.ok(chained && released && joint && joint > released, 'The chain and linked release must precede the joint transfer');
+  return [...[...preparations].map(([role,i])=>({kind:'prepare reflector with '+role,first:i,last:i})),
+    {kind:'clear a transfer ray with the linked gate',first:released,last:released},
+    {kind:'transfer both actors together',first:joint,last:joint}];
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -399,7 +435,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 2 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -514,13 +550,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
     if (code === 'SS06') {
-      assert.ok(issued.length <= 45 && continued >= 15, 'SS06 lost its guarded multi-actor routes');
+      const cap=row.level===1?45:42;
+      assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? measureActorComposition(issued) : [];
+      : code === 'SS06' ? row.level===1 ? measureActorComposition(issued) : measureJointActorTransfer(issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -553,7 +590,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
-      ['actor-composition', 'SS06', '1', '65'],
+      ['actor-composition', 'SS06', '2', '75'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
