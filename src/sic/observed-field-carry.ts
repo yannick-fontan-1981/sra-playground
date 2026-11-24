@@ -2,15 +2,18 @@ import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-
 import { findCompositionFrontier } from './composition-frontier.ts';
 import { objectRelations } from './object-composition.ts';
 import { maximumCommittedActions } from './plan-step.ts';
+import { lostResourceCoverage } from './resource-reserve.ts';
 
 type Profile = { phase: NativePoint; ink: number; floor: number; wall: number; radius: number };
 type Direction = { delta: NativePoint; ref: string };
 export type FieldCarryMemory = {
   profile: Profile; controls: Record<string, Direction>; tried: string[];
   body?: string; witness?: string; support?: string; supportAt?: Cell; supportRef?: string;
-  mirror?: { action: string; ref: string };
+  mirror?: { action: string; ref: string; previewInk: number };
   contactRef?: string;
   mobile?: Record<string, string>;
+  seenFloor?: Cell[];
+  reflectedBodyRef?: string;
 };
 type Cell = string;
 type Pose = { actor: Cell; bodies: Cell[] };
@@ -21,10 +24,13 @@ type Scene = Pose & {
   mirrors: { at: Cell; arms: NativePoint[] }[]; other: Set<Cell>;
 };
 type Step = { action: NativeCommand; after: Pose };
+export type FieldResourceLoss = { marks: Marks; dependencies: Cell[]; required: number; available: number; key: string };
+export type FieldResourceConsumption = { marks: Marks; body: string; previousCount: number };
 export type FieldCarryPlan = {
   memory: FieldCarryMemory; steps: Step[]; start: Pose; target: Cell; label: string;
   marks: Marks; evidence: string[]; observe: boolean; testControl?: true;
   composition?: { key: string; signatures: string[]; target: readonly [Cell, Cell]; at?: number; opens?: Cell[] };
+  reflectiveRoute?: true;
 };
 
 const pitch = 3;
@@ -94,6 +100,7 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
   const mirrors: Scene['mirrors'] = [], gates: Scene['gates'] = [];
   const candidates = new Map<string, Cell[]>(), rawGates = new Map<Cell, number[]>();
   const covered = new Set<Cell>();
+  const bodyPixels = memory.body?.split(',').map(Number);
   for (let y = phase[1]; y + pitch <= rows.length; y += pitch) for (let x = phase[0]; x + pitch <= rows[0]!.length; x += pitch) {
     const cell = `${x},${y}`, raw = tile(rows, x, y);
     const overlaid = (i: number) => raw[i] === ink && raw[4] !== ink
@@ -112,8 +119,11 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
       continue;
     }
     const key = stamp(pixels), rim = pixels[0]!, center = pixels[4]!;
-    if (memory.body && (key === memory.body || marks[cell]
-      && pixels.every((value, i) => corners.includes(i) || value === Number(memory.body!.split(',')[i])))) {
+    const bodyCore = bodyPixels && pixels.every((value, i) => corners.includes(i) || value === bodyPixels[i]);
+    if (bodyCore && !marks[cell] && corners.every(i => pixels[i] === rim) && ![bodyPixels[0], floor, wall, ink].includes(rim)) {
+      marks[cell] = pixels.map((_, i) => corners.includes(i) ? floor : rim);
+    }
+    if (bodyCore && (key === memory.body || marks[cell])) {
       bodies.push(cell); ground.add(cell); continue;
     }
     if (marks[cell] && corners.every(index => pixels[index] === marks[cell]![1])) {
@@ -124,11 +134,13 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
     }
     if (memory.support === key) { supports.add(cell); ground.add(cell); continue; }
     if (pixels.every(value => value === center)) {
-      if (center === floor) ground.add(cell);
+      if (center === floor || center === memory.mirror?.previewInk && memory.seenFloor?.includes(cell)) ground.add(cell);
       continue;
     }
     if (pixels.every((value, i) => i === 4 || value === rim) && rim !== floor && rim !== wall) {
-      if (center === floor) { exits.push(cell); ground.add(cell); }
+      if (rim === memory.mirror?.previewInk) {
+        if (center === floor || memory.seenFloor?.includes(cell)) ground.add(cell);
+      } else if (center === floor) { exits.push(cell); ground.add(cell); }
       else {
         candidates.set(key, [...candidates.get(key) ?? [], cell]);
         rawGates.set(cell, pixels);
@@ -182,7 +194,7 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
 
 function newSupport(a: Scene, b: Scene, profile: Profile) {
   if (a.bodies.length !== b.bodies.length + 1) return;
-  const candidates = [...b.other].filter(cell => {
+  const candidates = [...b.other, ...b.supports].filter(cell => {
     const before = a.cells.get(cell)!;
     return before[0] !== profile.floor && before[0] !== profile.wall && before.every(p => p === before[0])
       && arms.some(delta => a.bodies.includes(shift(cell, delta)) && !b.bodies.includes(shift(cell, delta)));
@@ -223,16 +235,24 @@ export function observeFieldCarry(memory: FieldCarryMemory | undefined, before: 
   }
   const created = newSupport(a, b, prior.profile);
   const reflected = !direction && a.actor !== b.actor && a.preview.has(b.actor);
+  const reflectedBody = action.action_ref === prior.mirror?.action && a.bodies.length === b.bodies.length
+    && a.bodies.some(cell => !b.bodies.includes(cell));
+  const seenFloor = a.mirrors.length && a.gates.length ? [...new Set([...prior.seenFloor ?? [],
+    ...[a, b].flatMap(scene => [...scene.floor].filter(cell => !scene.supports.has(cell)))])] : prior.seenFloor;
   return { ...prior, controls, tried: [...new Set([...prior.tried, action.action_ref])],
     ...(Object.keys(mobile).length ? { mobile } : {}),
     ...(transported && a.body ? { body: a.body, witness: prior.witness ?? ref } : {}),
     ...(created ? { ...created, supportRef: ref } : {}),
-    ...(reflected ? { mirror: { action: action.action_ref, ref } } : {}) };
+    ...(reflected ? { mirror: { action: action.action_ref, ref, previewInk: a.cells.get(b.actor)![4]! } } : {}),
+    ...(reflectedBody && !prior.reflectedBodyRef ? { reflectedBodyRef: ref } : {}),
+    ...(seenFloor ? { seenFloor } : {}) };
 }
 
+const gateOpen = (scene: Scene, pose: Pose, cell: Cell) => scene.gates.every(gate => gate.at !== cell
+  || (pose.actor === gate.mark || pose.bodies.includes(gate.mark)) === gate.opensWhenCovered);
+
 function project(scene: Scene, pose: Pose, memory: FieldCarryMemory, direction: NativePoint): Pose | undefined {
-  const open = (cell: Cell) => scene.floor.has(cell) && scene.gates.every(gate => gate.at !== cell
-    || (pose.actor === gate.mark || pose.bodies.includes(gate.mark)) === gate.opensWhenCovered);
+  const open = (cell: Cell) => scene.floor.has(cell) && gateOpen(scene, pose, cell);
   const actor = shift(pose.actor, direction);
   if (!open(actor)) return;
   const origin = point(pose.actor);
@@ -258,6 +278,85 @@ function project(scene: Scene, pose: Pose, memory: FieldCarryMemory, direction: 
     if (cell !== pose.actor && cell !== actor && inScope(cell) && unmeasuredWater(shift(cell, direction))) return;
   }
   return { actor, bodies: pose.bodies.map(cell => moving.has(cell) ? shift(cell, direction) : cell) };
+}
+
+function projectReflection(scene: Scene, pose: Pose, wall: number): Pose | undefined {
+  const clear = (cell: Cell) => {
+    const pixels = scene.cells.get(cell);
+    return gateOpen(scene, pose, cell) && (scene.floor.has(cell) || pixels && pixels[0] !== wall && pixels.every(v => v === pixels[0]));
+  };
+  const occupants = new Set([pose.actor, ...pose.bodies]), transfers = new Map<Cell, Cell>(), rayCells = new Set<Cell>();
+  for (const mirror of scene.mirrors) for (const [index, from] of mirror.arms.entries()) {
+    const to = mirror.arms[1 - index]!, source: Cell[] = [];
+    for (let distance = 1; distance <= 20; distance++) {
+      const origin = shift(mirror.at, from, distance * pitch);
+      if (!clear(origin)) break;
+      source.push(origin);
+      if (!occupants.has(origin)) continue;
+      const destination = shift(mirror.at, to, distance * pitch);
+      if (!scene.floor.has(destination) || transfers.has(origin) && transfers.get(origin) !== destination) return;
+      for (let step = 1; step <= distance; step++) {
+        const crossed = shift(mirror.at, to, step * pitch);
+        if (!clear(crossed)) return;
+        rayCells.add(crossed);
+      }
+      source.forEach(cell => rayCells.add(cell));
+      transfers.set(origin, destination);
+      break;
+    }
+  }
+  if (!transfers.size || new Set(transfers.values()).size !== transfers.size
+    || [...rayCells].some(cell => occupants.has(cell) && !transfers.has(cell))) return;
+  const after = { actor: transfers.get(pose.actor) ?? pose.actor, bodies: pose.bodies.map(cell => transfers.get(cell) ?? cell) };
+  if ([after.actor, ...after.bodies].some(cell => !gateOpen(scene, after, cell))) return;
+  return after;
+}
+
+function soloExitReachable(scene: Scene, memory: FieldCarryMemory) {
+  const queue = [scene.actor], seen = new Set(queue);
+  for (const actor of queue) {
+    if (actor === scene.exit) return true;
+    const pose = { actor, bodies: [] };
+    const landings = arms.map(delta => project(scene, pose, memory, delta));
+    if (memory.mirror) landings.push(projectReflection(scene, pose, memory.profile.wall));
+    for (const landing of landings) {
+      if (!landing || seen.has(landing.actor) || !gateOpen(scene, landing, landing.actor)) continue;
+      seen.add(landing.actor);
+      queue.push(landing.actor);
+    }
+  }
+  return false;
+}
+
+export function observeFieldConsumption(previous: FieldCarryMemory, before: NativeRows, marks?: Marks): FieldResourceConsumption | undefined {
+  const scene = previous.body && picture(before, previous, marks);
+  if (scene && scene.bodies.length) return { marks: scene.marks, previousCount: scene.bodies.length, body: previous.body! };
+}
+
+export function assessFieldResourceLoss(consumption: FieldResourceConsumption, current: FieldCarryMemory,
+  rows: NativeRows, available: readonly string[], marks?: Marks): FieldResourceLoss | undefined {
+  if (consumption.body !== current.body
+    || available.some(action => !current.controls[action] && action !== current.mirror?.action)) return;
+  const observed = picture(rows, current, { ...consumption.marks, ...marks });
+  if (!observed || consumption.previousCount <= observed.bodies.length || observed.other.size
+    || observed.mirrors.length && !current.mirror) return;
+  const positive = observed.gates.filter(gate => gate.opensWhenCovered);
+  const independent = observed.gates.filter(gate => !gate.opensWhenCovered);
+  if (!positive.length || !soloExitReachable({ ...observed, gates: independent }, current)) return;
+  const dependencies = [...new Set(positive.map(gate => gate.mark))].filter(mark =>
+    !soloExitReachable({ ...observed, gates: [...independent, ...positive.filter(gate => gate.mark === mark)] }, current));
+  const before = Array.from({ length: consumption.previousCount }, (_, index) => index);
+  const after = before.slice(0, observed.bodies.length);
+  // Separately necessary controls can share a resource in sequence. This observation proves a
+  // lower bound of one assignment, even when more than one control is necessary.
+  const deficit = lostResourceCoverage(dependencies.slice(0, 1), before, after, () => true);
+  if (!deficit) return;
+  return { marks: observed.marks, dependencies, key: JSON.stringify([...dependencies].sort()), ...deficit };
+}
+
+export function fieldResourceRestored(memory: FieldCarryMemory, rows: NativeRows, loss: FieldResourceLoss) {
+  const scene = picture(rows, memory, loss.marks);
+  return !!scene && scene.bodies.length >= loss.required;
 }
 
 function mirrorLanding(scene: Scene, pose: Pose, wall: number) {
@@ -383,6 +482,28 @@ function planObjectComposition(scene: Scene, rows: NativeRows, memory: FieldCarr
     ?? (activeMarks.size ? search('access') : undefined) ?? search('interaction');
 }
 
+function planPreservingReflection(scene: Scene, memory: FieldCarryMemory, inputs: readonly NativeCommand[], evidence: string[], remaining: number): FieldCarryPlan | undefined {
+  const pulse = inputs.find(action => action.action_ref === memory.mirror?.action);
+  if (!pulse || !scene.mirrors.length || !scene.gates.some(gate => gate.opensWhenCovered) || !scene.bodies.length || scene.other.size) return;
+  const start = { actor: scene.actor, bodies: scene.bodies };
+  const route = findCompositionFrontier({
+    start, key: pose => `${pose.actor}|${[...pose.bodies].sort().join(';')}`, depth: remaining, limit: 30_000,
+    successors: pose => inputs.flatMap(action => {
+      const direction = memory.controls[action.action_ref];
+      const after = direction ? project(scene, pose, memory, direction.delta)
+        : action === pulse ? projectReflection(scene, pose, memory.profile.wall) : undefined;
+      return after && [after.actor, ...after.bodies].every(cell => gateOpen(scene, after, cell)) ? [{ action, after }] : [];
+    }),
+    isComposition: (_, after) => after.actor === scene.exit,
+  });
+  if (!route || !memory.reflectedBodyRef && !route.some((step, index) => step.action === pulse && step.after.bodies.some(cell =>
+    !(index ? route[index - 1]!.after : start).bodies.includes(cell)))) return;
+  const seenFloor = [...new Set([...memory.seenFloor ?? [], ...[...scene.floor].filter(cell => !scene.supports.has(cell))])];
+  return { memory: { ...memory, seenFloor }, start, steps: route.slice(0, maximumCommittedActions), target: scene.exit,
+    label: 'Preserve the movable resource while routing through reflected positions',
+    marks: scene.marks, evidence, observe: false, reflectiveRoute: true };
+}
+
 export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: NativeRows, inputs: readonly NativeCommand[],
   ref: string, remaining: number, knownMarks?: Marks, testedCompositions: readonly string[] = [],
   compositionOnly = false): FieldCarryPlan | undefined {
@@ -393,10 +514,12 @@ export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: Nativ
   if (!scene) return;
   const start = { actor: scene.actor, bodies: scene.bodies };
   const evidence = [...new Set([ref, ...Object.values(model.controls).map(move => move.ref),
-    ...[model.witness, model.supportRef, model.mirror?.ref, model.contactRef].filter((value): value is string => !!value),
+    ...[model.witness, model.supportRef, model.mirror?.ref, model.contactRef, model.reflectedBodyRef].filter((value): value is string => !!value),
     ...Object.values(model.mobile ?? {})])];
   const moves = inputs.flatMap(action => model.controls[action.action_ref] ? [{ action, delta: model.controls[action.action_ref]!.delta }] : []);
   if (compositionOnly) return planObjectComposition(scene, rows, model, moves, evidence, remaining, testedCompositions);
+  const preserving = planPreservingReflection(scene, model, inputs, evidence, remaining);
+  if (preserving) return preserving;
   const missingWeight = scene.gates.find(gate => gate.opensWhenCovered && !start.bodies.includes(gate.mark))?.mark;
   const unset = Object.keys(scene.marks).find(mark => mark !== start.actor && !start.bodies.includes(mark) && !scene.gates.some(gate => gate.mark === mark));
   const unmapped = inputs.filter(action => !model.controls[action.action_ref]);
@@ -477,7 +600,12 @@ export function admitFieldCarry(plan: FieldCarryPlan, index: number, rows: Nativ
   if (!scene || !samePose(scene, before)) return false;
   if (plan.observe) return true;
   const next = plan.steps[index]!, direction = plan.memory.controls[next.action.action_ref];
-  if (direction) return samePose(project(scene, before, plan.memory, direction.delta), next.after);
+  if (direction) return samePose(project(scene, before, plan.memory, direction.delta), next.after)
+    && (!plan.reflectiveRoute || [next.after.actor, ...next.after.bodies].every(cell => gateOpen(scene, next.after, cell)));
+  if (plan.reflectiveRoute && next.action.action_ref === plan.memory.mirror?.action) {
+    return samePose(projectReflection(scene, before, plan.memory.profile.wall), next.after)
+      && (next.after.actor === before.actor || scene.preview.has(next.after.actor));
+  }
   return scene.preview.size === 1 && scene.preview.has(next.after.actor)
     && mirrorLanding(scene, before, plan.memory.profile.wall) === next.after.actor;
 }

@@ -2,12 +2,16 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { compileLevel, initialState, renderWorld, stepDetailed, type State, type World } from '../experiments/sinking-star-ss05/src/core.ts';
 import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
+import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
+import { sicObservedWeightShortage } from '../src/logos-engine/v6-native-types.ts';
 import { findCompositionFrontier } from '../src/sic/composition-frontier.ts';
 import { objectRelations } from '../src/sic/object-composition.ts';
+import { createSicPublicInputExploration, observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
+import { lostResourceCoverage } from '../src/sic/resource-reserve.ts';
 import { admitFieldCarry, checkFieldCarryReturn, observeFieldCarry, planFieldCarry,
   type FieldCarryMemory, type FieldCarryPlan } from '../src/sic/observed-field-carry.ts';
 
-for (const mirrored of [false, true]) test(`carry and object composition transfer across four levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, () => {
+for (const mirrored of [false, true]) test(`carry and object composition transfer across five levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, async () => {
   const transform = (world: World, state: State) => {
     const rows = renderWorld(world, state);
     if (mirrored) for (const [index, point] of state.monsters.entries()) {
@@ -20,11 +24,48 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
   const commands = new Map([1, 2, 3, 4, 5].map(id => [`ACTION${id + (mirrored ? 10 : 20)}`, id]));
   const inputs = [...commands].map(([action_ref]) => ({ action_ref, data: {} }));
   let memory: FieldCarryMemory | undefined;
-  for (let level = 0; level < 4; level++) {
+  for (let level = 0; level < 5; level++) {
     const world = compileLevel(SS05_LEVELS[level]!);
     let current = initialState(world), marks: FieldCarryPlan['marks'] | undefined;
     let actions = 0, firstCarry = 0, continuousCarry = false, firstBody: number | undefined, compositions = 0;
-    if (memory) delete memory.supportAt;
+    if (memory) {
+      delete memory.supportAt;
+      delete memory.seenFloor;
+    }
+    if (level === 4) {
+      const testedCommands = inputs.map(input => input.action_ref);
+      const hazardous = inputs.find(input => commands.get(input.action_ref) === 1)!;
+      const packet = (frame_rows: number[][], revision: number, hash: string) => measureNativeObservation({
+        frame_rows, frame_hash: hash, level: level + 1, levels_completed: level, state: 'NOT_FINISHED',
+        available_action_refs: testedCommands,
+      }, revision);
+      for (const hasAccessRequirement of [true, false]) {
+        const layout = hasAccessRequirement ? world : { ...world, doors: [] };
+        const before = transform(layout, current);
+        const sunk = stepDetailed(layout, current, 1).state;
+        assert.equal(sunk.stones.length, 0);
+        assert.equal(sunk.supports.length, 1);
+        const after = transform(layout, sunk);
+        const start = await packet(before, 1, 'entry'), lost = await packet(after, 2, 'lost');
+        const family = createSicPublicInputExploration();
+        family.restore({ ...family.state!(), epoch: start.level_epoch, fieldCarry: memory! });
+        await family.observePublicOutcome!(start, lost, hazardous, before, after);
+        assert.equal(family.requestedStopReason!(lost), hasAccessRequirement ? sicObservedWeightShortage : null);
+        if (!hasAccessRequirement) continue;
+        const restored = await packet(before, 3, 'entry');
+        assert.equal(family.stateAfterLevelReset!(lost, after, undefined, sicObservedWeightShortage), undefined);
+        const rebound = family.stateAfterLevelReset!(restored, before, undefined, sicObservedWeightShortage);
+        assert.ok(rebound);
+        family.restore(rebound);
+        const next = await family.proposeInGroup!(observedPressureRecoveryGroup, restored, before, inputs, 80);
+        assert.ok(next?.fieldCarryPlan?.reflectiveRoute);
+        assert.notEqual(next.actions[0]?.action_ref, hazardous.action_ref);
+        assert.equal(family.requestedStopReason!(restored), null);
+        const lostAgain = await packet(after, 4, 'lost');
+        await family.observePublicOutcome!(restored, lostAgain, hazardous, before, after);
+        assert.equal(family.requestedStopReason!(lostAgain), 'sic_resource_loss_already_recovered');
+      }
+    }
     while (!current.complete && actions < 120) {
       const visible = transform(world, current), entry = `entry:${level}:${actions}`;
       const plan = planFieldCarry(memory, visible, inputs, entry, 120 - actions, marks)
@@ -64,7 +105,7 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
         if (current.complete) break;
         const after = transform(world, current);
         if (!plan.observe) {
-          assert.ok(checkFieldCarryReturn(plan, index, before, after));
+          assert.ok(checkFieldCarryReturn(plan, index, before, after), `Unexpected return at level ${level + 1}, action ${actions}, ${plan.label}`);
           if (moved) assert.equal(checkFieldCarryReturn(plan, index, before, before), false);
           if (level === 3 && plan.composition?.at === index) {
             assert.ok(plan.evidence.some(ref => ref.startsWith('return:2:')));
@@ -84,13 +125,21 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
       }
     }
     assert.ok(current.complete);
-    if (level >= 2) assert.equal(compositions, 1);
+    if (level === 2 || level === 3) assert.equal(compositions, 1);
     else assert.ok(continuousCarry);
     if (level === 1) {
       assert.equal(firstCarry, 5);
       assert.equal(firstBody, 0);
     } else if (level === 0) assert.equal(firstCarry, 1);
   }
+});
+
+test('recovery requires a real loss of assignable coverage', () => {
+  const fits = (need: string, item: string[]) => item.includes(need);
+  assert.deepEqual(lostResourceCoverage(['hold', 'cross'], [['hold', 'cross'], ['hold']], [['cross']], fits),
+    { required: 2, available: 1 });
+  assert.equal(lostResourceCoverage(['hold'], [['hold'], ['hold']], [['hold'], ['cross']], fits), undefined);
+  assert.equal(lostResourceCoverage(['hold', 'cross'], [['hold']], [], fits), undefined);
 });
 
 test('pair enumeration keeps distinct instances and can compose differently bound objects', () => {

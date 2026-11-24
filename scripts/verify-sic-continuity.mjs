@@ -222,12 +222,23 @@ function measuredExchangeSeries(level, tickets) {
 function measuredCarrySeries(level, tickets) {
   const world = compileCarryLevel(SS05_LEVELS[level - 1]);
   let state = initialCarryState(world), previous, firstCarry;
+  let openedWithWeight = false, reflectedWeight = false;
   const series = [];
   for (const [index, ticket] of tickets.entries()) {
     const result = stepCarryWorld(world, state, Number(ticket.action.slice(6)));
     const phase = result.phases[0];
     const moves = (phase?.moves ?? []).filter(move => move.actor === 'stone');
     const continued = previous?.revision === ticket.decisionRevision && ticket.actionIndex > 0;
+    if (level === 5) {
+      assert.equal(result.state.stones.length, world.stones.length, 'SS05 L5 consumed the required weight');
+      if (phase?.kind === 'reflect') {
+        assert.ok(continued, 'SS05 L5 separated the approach from the useful reflection');
+        reflectedWeight ||= moves.length > 0;
+        series.push({ kind: moves.length ? 'reflect the preserved movable weight' : 'reflect to another route', first: index, last: index + 1 });
+      }
+      openedWithWeight ||= !carryDoorsOpen(world, state) && carryDoorsOpen(world, result.state)
+        && result.state.stones.some(stone => world.buttons.some(button => equal(stone, button)));
+    }
     if (level === 3 && state.monsters.length - result.state.monsters.length === 2) {
       assert.ok(continued && result.phases.some(phase => phase.kind === 'combat'), 'SS05 L3 lost the deliberate continuous contact');
       series.push({ kind: 'compose the two moving objects', first: index, last: index + 1 });
@@ -245,10 +256,10 @@ function measuredCarrySeries(level, tickets) {
         assert.ok(moves.some(move => equal(move.from, world.stones[0])), 'SS05 L2 bypassed the first accessible weight');
       }
     }
-    if (continued && moves.some(move => previous.moves.some(prior => equal(prior.to, move.from)))) {
+    if (level < 3 && continued && moves.some(move => previous.moves.some(prior => equal(prior.to, move.from)))) {
       series.push({ kind: 'carry the same weight', first: index, last: index + 1 });
     }
-    if (continued && moves.length && previous.kind === 'walk') {
+    if (level < 3 && continued && moves.length && previous.kind === 'walk') {
       series.push({ kind: 'approach then carry', first: index, last: index + 1 });
     }
     assert.ok(!result.state.dead, 'SS05 lost the actor during the carry');
@@ -256,6 +267,10 @@ function measuredCarrySeries(level, tickets) {
     state = result.state;
   }
   assert.ok(state.complete, 'SS05 executed tickets do not reach the exit');
+  if (level === 5) {
+    assert.ok(openedWithWeight && reflectedWeight && series.length >= 3, 'SS05 L5 must use the preserved weight to restore access');
+    return series;
+  }
   if (level === 3 || level === 4) {
     assert.equal(series.length, 1, 'SS05 did not execute the expected object composition');
     return series;
@@ -273,7 +288,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 4 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 5 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -383,7 +398,7 @@ export function checkRun(run) {
     }
     if (code === 'SS05') {
       // The earlier run used 46 isolated actions on L1 and first moved a weight on L2 at action 119.
-      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75]][row.level - 1];
+      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24]][row.level - 1];
       assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
@@ -421,7 +436,7 @@ function main() {
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
-      ['local-carry', 'SS05', '4', '155'],
+      ['local-carry', 'SS05', '5', '155'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

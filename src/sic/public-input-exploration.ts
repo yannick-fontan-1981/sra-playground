@@ -34,7 +34,8 @@ import { choosePushAccess, matchesPushAccess, observePushAccess, pushAccessBindi
   type PushAccessBinding, type PushAccessKnowledge, type PushAccessMemory, type PushAccessPlan } from './observed-push-access.ts';
 import { matchesPullCircuit, observePullCircuitBinding, planPullCircuit, provesPullCircuitDeadlock, witnessedPullCircuitReturn,
   type PullCircuitBinding, type PullCircuitPlan, type PullKnowledge } from './observed-pull-circuits.ts';
-import { admitFieldCarry, checkFieldCarryReturn, observeFieldCarry, planFieldCarry, type FieldCarryMemory, type FieldCarryPlan } from './observed-field-carry.ts';
+import { admitFieldCarry, assessFieldResourceLoss, checkFieldCarryReturn, fieldResourceRestored, observeFieldCarry, observeFieldConsumption,
+  planFieldCarry, type FieldCarryMemory, type FieldCarryPlan, type FieldResourceConsumption, type FieldResourceLoss } from './observed-field-carry.ts';
 import { assessExchange, chooseExchange, matchesBoundExchange, matchesExchangeSeries, observeExchange, observeExchangeThreat,
   planBoundExchange, rememberExchangeVictory, witnessedExchangeStep, type BoundExchange, type BoundExchangePlan, type ExchangePlan, type ExchangeThreat,
   type ExchangeTransfer, type ObservedExchange } from './observed-exchange.ts';
@@ -127,6 +128,10 @@ type State = { epoch: number; experiments: number; transitions: ObservedCommandG
   fieldCarryMarks?: FieldCarryPlan['marks'];
   fieldCarryRefuted?: true;
   fieldCompositionsTested?: string[];
+  fieldConsumption?: FieldResourceConsumption & { source: string; action: string };
+  fieldLoss?: FieldResourceLoss & { ref: string };
+  fieldRecovered?: string[];
+  fieldRefutedLoss?: { source: string; action: string };
   lastChange: { destination: string; action: string; evidence: string } | null;
   clickedControl?: ClickedControl;
   controlledPiece?: ControlledMotion;
@@ -570,7 +575,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   const entryReturns = new WeakMap<EntryProposal, Promise<OrderedEntry>>();
   function fieldCarryForEpoch(epoch: number) {
     if (!state.fieldCarry || state.epoch === epoch) return state.fieldCarry;
-    const { supportAt: _supportAt, ...retained } = state.fieldCarry;
+    const { supportAt: _supportAt, seenFloor: _seenFloor, ...retained } = state.fieldCarry;
     return retained;
   }
   function enterEpoch(epoch: number): void {
@@ -640,12 +645,23 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
   function acquireFieldCarry(before: NativeObservation, after: NativeObservation, command: NativeCommand, rows: NativeRows, afterRows: NativeRows,
     marks?: FieldCarryPlan['marks']) {
     if (before.level_epoch !== after.level_epoch || before.state !== after.state) return;
-    const next = observeFieldCarry(fieldCarryForEpoch(before.level_epoch), rows, afterRows, command, after.observation_ref, before.available_action_refs,
-      marks ?? (state.epoch === before.level_epoch ? state.fieldCarryMarks : undefined));
+    const prior = fieldCarryForEpoch(before.level_epoch);
+    const knownMarks = marks ?? (state.epoch === before.level_epoch ? state.fieldCarryMarks : undefined);
+    const next = observeFieldCarry(prior, rows, afterRows, command, after.observation_ref, before.available_action_refs, knownMarks);
     if (next && next !== state.fieldCarry) {
       enterEpoch(before.level_epoch);
       state.fieldCarry = next;
       if (marks && Object.keys(marks).length) state.fieldCarryMarks = marks;
+      if (prior && next.supportRef === after.observation_ref && next.supportRef !== prior.supportRef) {
+        const consumption = observeFieldConsumption(prior, rows, knownMarks);
+        if (consumption && (!state.fieldConsumption || consumption.previousCount > state.fieldConsumption.previousCount)) {
+          state.fieldConsumption = { ...consumption, source: explorationKey(before, rows), action: commandKey(command) };
+        }
+      }
+      if (state.fieldConsumption && !state.fieldLoss) {
+        const loss = assessFieldResourceLoss(state.fieldConsumption, next, afterRows, after.available_action_refs, knownMarks);
+        if (loss) state.fieldLoss = { ...loss, ref: after.observation_ref };
+      }
     }
   }
 
@@ -656,6 +672,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const plan = planFieldCarry(fieldCarryForEpoch(observation.level_epoch), rows, inputs, ref, remaining,
       current ? state.fieldCarryMarks : undefined, current ? state.fieldCompositionsTested : undefined, compositionOnly);
     if (!plan) return null;
+    if (current && state.fieldRefutedLoss?.source === explorationKey(observation, rows)
+      && state.fieldRefutedLoss.action === commandKey(plan.steps[0]!.action)) return null;
     const target = pushAccessBox(plan.target, 3), actions = plan.steps.map(step => step.action);
     const goal = { kind: plan.composition ? 'test_reachable_object_composition' : 'compose_observed_local_carry',
       scope: ref.split(':revision:', 1)[0]!, subjects: plan.composition ? [...plan.composition.target] : [plan.target],
@@ -877,6 +895,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     async propose(observation, rows, inputs, remaining, execution?: NativeExecution, projectionOnly = false): Promise<Proposal | null> {
       const local = state.epoch === observation.level_epoch ? state : initial(observation.level_epoch);
       if (remaining < 1) return null;
+      if (local.fieldRefutedLoss?.source === explorationKey(observation, rows)) {
+        inputs = inputs.filter(command => commandKey(command) !== local.fieldRefutedLoss!.action);
+      }
       const ref = observation.observation_ref;
       const nonPoint = inputs.filter(command => /^ACTION[1-5]$/.test(command.action_ref));
       const panel = nonPoint.length > 1 && observation.available_action_refs.includes('ACTION6') ? visibleCommandPanel(rows) : null;
@@ -2037,6 +2058,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       return { events, ...(reviewEvidence ? { reviewEvidence } : {}) };
     },
     requestedStopReason(observation) {
+      if (state.fieldLoss?.ref === observation.observation_ref) {
+        return state.fieldRecovered?.includes(state.fieldLoss.key) ? 'sic_resource_loss_already_recovered' : sicObservedWeightShortage;
+      }
       if (state.exchangeThreat?.evidence[1] === observation.observation_ref) return sicObservedGameOver;
       if (state.pressureReserve?.shortage === observation.observation_ref) return sicObservedWeightShortage;
       if (state.pullCircuitDeadlock?.ref === observation.observation_ref) return observedCoverageDeadlock;
@@ -2045,6 +2069,14 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       return coverage.recovered.includes(proof.key) ? 'sic_coverage_deadlock_already_recovered' : observedCoverageDeadlock;
     },
     stateAfterLevelReset(observation, rows, entry, cause) {
+      const { fieldLoss, fieldCarry, fieldConsumption } = state;
+      if (cause === sicObservedWeightShortage && fieldLoss && fieldCarry && fieldConsumption && state.epoch === observation.level_epoch
+        && fieldResourceRestored(fieldCarry, rows, fieldLoss)) {
+        const { supportAt: _supportAt, seenFloor: _seenFloor, ...retained } = fieldCarry;
+        return { ...initial(observation.level_epoch), fieldCarry: retained, fieldCarryMarks: fieldLoss.marks,
+          fieldRecovered: [...state.fieldRecovered ?? [], fieldLoss.key],
+          fieldRefutedLoss: { source: fieldConsumption.source, action: fieldConsumption.action } };
+      }
       if (cause === sicObservedGameOver && state.exchangeThreat && state.exchangeTransfer && state.epoch === observation.level_epoch) {
         // The level-entry checkpoint can still describe the preceding epoch.
         // Preserve that epoch so the planner rebinds the reset board.

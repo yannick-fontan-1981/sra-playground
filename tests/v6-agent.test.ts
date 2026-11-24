@@ -6,7 +6,7 @@ import { BrowserV6Agent, BrowserV6WorkerClient } from '../src/runtime/v6-agent.t
 import type { V6AgentSnapshot, V6DispatchResult } from '../src/runtime/v6-agent.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
 import { as66Contradiction } from '../src/sic/contradiction-review.ts';
-import { sicObservedCoverageDeadlock, sicObservedGameOver } from '../src/logos-engine/v6-native-types.ts';
+import { sicObservedCoverageDeadlock, sicObservedGameOver, sicObservedWeightShortage } from '../src/logos-engine/v6-native-types.ts';
 import {
   emptyV6Snapshot, nativeV6Action, sameV6Observation, toV6PublicObservation, v6FrameHash, V6AgentError, V6_REFERENCE_COMMIT,
 } from '../src/runtime/v6-agent-protocol.ts';
@@ -178,11 +178,11 @@ test('coordinate clicks flow intact from the authorized ticket to the real host 
   assert.equal(state.agent.snapshot.sequence, 1);
 });
 
-test('observed placement deadlock resets the same level and continues with the same sequence', async () => {
+for (const reason of [sicObservedCoverageDeadlock, sicObservedWeightShortage]) test(`${reason} resets the same level and continues with the same sequence`, async () => {
   for (const pauseBeforeReset of [false, true]) {
     const { agent, context, transport, setOnState } = harness(new ScriptedTransport(), undefined, true);
     transport.hook = async (operation, result) => operation.type === 'advance' && operation.sequence === 1
-      ? { ...transport.boundary(), kind: 'stopped', phase: 'stopped', reason: sicObservedCoverageDeadlock,
+      ? { ...transport.boundary(), kind: 'stopped', phase: 'stopped', reason,
         snapshot: { ...result.snapshot, canResetLevel: true } }
       : result;
     if (pauseBeforeReset) setOnState(snapshot => {
