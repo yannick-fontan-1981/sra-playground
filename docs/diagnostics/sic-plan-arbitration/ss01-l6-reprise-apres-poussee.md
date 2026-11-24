@@ -1,5 +1,16 @@
 # SS01 L6 · Revenir avant une poussée qui supprime une capacité
 
+## Annuler la poussée depuis le point de blocage
+
+En campagne SIC depuis le L1, la révision 217 gagne le L6 en **88 commandes de jeu et une annulation**, contre **116 commandes de jeu et un reset** en r215. Les 29 premières commandes et leurs retours sont identiques. La poussée 29 immobilise le miroir. Le moteur renvoie alors à SIC exactement l’image qui précédait cette poussée. Au coup 30, SIC prend la branche alternative auparavant jouée au coup 58. Toute la suite jusqu’à la victoire est identique.
+
+SIC autorise l’annulation lorsque la perte de mobilité est attribuée à la dernière action acquise, que le point de reprise est identifié et que le jeu propose un undo public. Le retour doit correspondre à l’image, au niveau, au score et aux commandes disponibles avant le geste. Le raisonnement reprend au même point avec la poussée perdante exclue et le plan alternatif conservé. La commande tentée reste comptée. Quand le jeu ne propose pas l’annulation, SIC peut reprendre par reset.
+
+Le test de continuité contrôle le budget de 88 commandes du L6, l’absence de reset et, pour chaque annulation, le retour à la même image suivi d’un choix différent. Les tests du protocole couvrent également le refus d’un retour erroné ou répété et le repli vers le reset.
+
+## Mesure historique avec reset
+
+
 La révision 199 de SIC gagne le L6 en campagne en **116 coups**, reprise comprise. Le site local 64925 ouvre le L7 avec six niveaux crédités à 36, 68, 110, 189, 251 et 367 actions cumulées. Le témoin en révision 197 restait au L6 à la limite de 120 coups. Le moteur de jeu est identique. [Lancer SIC depuis le L1](http://127.0.0.1:64925/?game=SS01&runThrough=6#playground)
 
 ## La décision perdante

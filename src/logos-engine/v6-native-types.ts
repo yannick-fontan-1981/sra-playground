@@ -225,7 +225,8 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   /** Source refusal, read only after the real prefix has been fully acquired. */
   requestedStopReason?(observation: NativeObservation): string | null;
   /** Transfer measured rules and recovery exclusions to an actual reset of this level. */
-  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord): NativeRecord | undefined;
+  undoTarget?(observation: NativeObservation): string | undefined;
+  stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord, control?: 'UNDO' | 'RESET'): NativeRecord | undefined;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
@@ -282,6 +283,7 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly sourceDigest: string;
   readonly proposal: unknown;
   readonly canResetLevel?: boolean;
+  readonly undoFrameHash?: string;
   readonly graphChain?: string;
   readonly graphRevision?: number;
   readonly nativeExecutionDigest?: string;
@@ -352,6 +354,7 @@ export interface NativeV6Backend {
   readonly sourceDigest: string;
   initialize(input: NativeInitialize, execution: NativeExecution): Promise<NativeRuntimeYield>;
   advance(outcome: NativeOutcome, execution: NativeExecution): Promise<NativeRuntimeYield>;
+  undoAction?(observation: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield>;
   resetLevel?(observation: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield>;
   resume(execution: NativeExecution): Promise<NativeRuntimeYield>;
   snapshot(): NativeRuntimeSnapshot;

@@ -63,6 +63,7 @@ export type ContactMemory = RelayControlMemory & {
   explorer?: { actor: string; origin: XY };
 };
 export type ContactRepair = {
+  control?: 'UNDO' | 'RESET';
   frame: string;
   edge: string;
   project: Project;
@@ -203,6 +204,18 @@ function calibratedBoard(
   const local = fittedTransport(l, fit.g.actor, visualLayout(o, rows), fit.g, new Set(b.motors.map(m => m.op)),
     new Set(o.available_action_refs), { epoch: o.level_epoch, pivot: b.roles[b.pivotIndex]! });
   return local ? { ...b, transport: local } : null;
+}
+
+function orientedTransport(
+  fit: NonNullable<ReturnType<typeof contactBoard>>, learning: PreviewLearning, o: NativeObservation, rows: NativeRows
+) {
+  const { board, g } = fit, pivot = board.roles[board.pivotIndex];
+  if (!pivot) return null;
+  const layout = visualLayout(o, rows), form = layout[pivot]?.[0]?.form;
+  const mask = o.entities.find(e => e.signature === form && e.area <= 16)?.mask.map(([x,y]): XY => [x,y]);
+  if (!mask) return null;
+  return fittedTransport(learning, g.actor, layout, g, new Set(board.motors.map(m => m.op)),
+    new Set(o.available_action_refs), { pivot, mask });
 }
 
 function repairWithPassenger(b: Board, role: string, witness: string, allowed: (at: number) => boolean,
@@ -534,12 +547,7 @@ export function proposeFrontierContact(
           if (witness) witnesses.set(role,witness);
         }
         if (witnesses.size) {
-          const layout = visualLayout(o,rows), pivot = board.roles[board.pivotIndex]!;
-          const form = layout[pivot]?.[0]?.form;
-          const mask = o.entities.find(e => e.signature === form && e.area <= 16)?.mask.map(([x,y]): XY => [x,y]);
-          const oriented = mask && fittedTransport(l,g.actor,layout,g,new Set(board.motors.map(v => v.op)),
-            new Set(o.available_action_refs),{pivot,mask});
-          const transport = oriented ?? calibratedBoard(fit,l,o,rows)?.transport;
+          const transport = orientedTransport(fit,l,o,rows) ?? calibratedBoard(fit,l,o,rows)?.transport;
           if (transport) {
             project = transportLandingPlan({...board,transport},witnesses,permits,deny,limits);
             for (const site of project?.preparations ?? []) {
@@ -553,12 +561,16 @@ export function proposeFrontierContact(
       if (!project && board.transport && board.pivotIndex >= 0) {
         for (const [i, part] of board.parts.entries()) {
           if (i === board.pivotIndex) continue;
-          const role = board.roles[i]!, witness = m.passengerWitnesses?.[passengerBinding(board, g.actor, role)];
+          const role = board.roles[i]!, binding = passengerBinding(board, g.actor, role);
+          const witness = m.passengerWitnesses?.[binding];
           const appearance = m.appearances?.[role] ?? cellAppearance(rows, part, g);
           const related = inherited.filter(law => appearanceVariant(law.appearance, appearance));
           if (!related.length) continue;
-          const transform = fittedTransport(l, g.actor, visualLayout(o, rows), g, new Set(board.motors.map(v => v.op)),
-            new Set(o.available_action_refs), { epoch: o.level_epoch, pivot: board.roles[board.pivotIndex]! });
+          // A novel passive role warrants a discriminating experiment. For a known
+          // passenger, reconfirm the local geometry before moving its control.
+          const knownPassenger = witness ?? m.inheritedPassengers?.[binding];
+          const transform = calibratedBoard(fit,l,o,rows)?.transport ??
+            (!knownPassenger ? orientedTransport(fit,l,o,rows) : null);
           if (!transform) continue;
           project = passengerProject({ ...board, transport: transform }, i, witness,
             at => related.some(law => law.terrain === terrainAt(at)), deny, limits);
@@ -595,7 +607,7 @@ export function proposeFrontierContact(
     step,
     project,
     parts: board.parts,
-    controlRole: board.roles[board.pivotIndex],
+    ...(board.pivotIndex >= 0 ? { controlRole: board.roles[board.pivotIndex] } : {}),
     acquired: verifyEntry,
     transform: board.transport?.op ?? null,
     ref: o.observation_ref,

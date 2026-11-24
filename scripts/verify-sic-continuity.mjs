@@ -15,8 +15,8 @@ const campaign = [
   [32, 22],
   [42, 20],
   [79, 58],
-  [62, 14],
-  [116, 59],
+  [38, 19],
+  [88, 48],
   [37, 23],
   [41, 30],
 ];
@@ -24,7 +24,7 @@ const requiredPhysical = {
   2: ['mirror', 'position'],
   3: ['crate', 'position'],
   4: ['crate', 'mirror', 'position'],
-  5: ['crate', 'mirror'],
+  5: ['crate', 'mirror', 'position'],
   6: ['crate', 'mirror', 'position'],
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
@@ -100,6 +100,21 @@ export function checkRun(run) {
     const continued = issued.length - groups.size;
     if (reference) {
       const [actions, minContinued] = reference[i];
+      if (row.level === 6) {
+        assert.ok(issued.length <= actions, 'SS01 L6 exceeded the verified recovery budget');
+        assert.equal(issued.at(-1).resets, issued[0].resets, 'SS01 L6 restarted despite public undo');
+        for (let index = 1; index < issued.length; index++) {
+          const previous = issued[index - 1], next = issued[index];
+          if (next.undos === previous.undos) continue;
+          assert.equal(next.undos, previous.undos + 1);
+          assert.ok(previous.frameHash && previous.frameHash === next.frameHash, 'Undo did not return to the pre-push frame');
+          assert.notDeepEqual([next.action, next.data], [previous.action, previous.data], 'Repeated the refuted action after undo');
+        }
+      }
+      if (row.level === 5) {
+        assert.ok(issued.length <= 38 && groups.size <= 19,
+          'SS01 L5 lost the preparation gain (' + issued.length + ' commands, ' + groups.size + ' decisions)');
+      }
       assert.ok(
         continued >= Math.min(issued.length - 1, Math.ceil((minContinued * issued.length) / actions)),
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',

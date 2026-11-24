@@ -1,5 +1,26 @@
 # SS01 L5 · Découverte et réutilisation du transport d’une pièce
 
+## Placement anticipé dans SIC r215
+
+En campagne depuis le L1 sur le site local, SIC gagne le L5 en **38 coups et 19 décisions**. Le témoin r211, rejoué avec le même moteur et le même budget de 120 coups, gagne en **62 coups et 48 décisions**. Les images observées avant les 38 coups sont toutes distinctes, contre huit répétitions sur le parcours du témoin.
+
+| Événement observé au L5 | r211 | r213 |
+|---|---:|---:|
+| Début de l’expérience qui déplace la caisse | 28 | 1 |
+| Premier transfert de la caisse confirmé | 41 | 17 |
+| Deuxième transfert de la caisse confirmé | 50 | 26 |
+| Entrée sur le support créé | 59 | 35 |
+| Victoire | 62 | 38 |
+
+La calibration locale conserve la priorité. En son absence, SIC peut orienter une loi de transfert apprise précédemment à partir de la silhouette visible du mécanisme. Cela justifie de préparer un essai sur un nouvel objet. Seul le retour public du geste confirme que l’objet est transportable. Les pas de préparation vérifiés bénéficient aussi de l’exécution continue. SIC s’arrête avant le test de transfert pour en acquérir le résultat.
+
+Sur la même observation et avec le même budget, retirer les silhouettes des pivots dans les souvenirs supprime la proposition initiale. Retirer le savoir antérieur sur les supports la supprime également. Pour un passager dont le transfert a déjà été confirmé, SIC vérifie la géométrie locale avant de déplacer de nouveau le mécanisme. La qualification de campagne protège le coût en commandes et en décisions, les poussées continues et l’approche d’un transfert effectif.
+
+Le premier candidat r213 avançait bien le test au L5, mais appliquait aussi cette anticipation au passager déjà connu du L6. Il y épuisait 120 coups sans déclencher sa reprise. En r215, le L6 retrouve son reset et sa victoire en 116 coups. Sur l’ensemble de la campagne, les sept autres niveaux conservent leurs commandes, coordonnées et images avant et après chaque action. Le total passe de 445 à 421 coups.
+
+## Mesure historique de la découverte
+
+
 SIC révision 197 gagne le L5 en **62 coups** après une campagne commencée au L1. Sur le site local 64925, l’interface affiche cinq niveaux crédités, le L6 ouvert et 251 actions au total. Les scores successifs sont 36, 32, 42, 79 et 62. Le témoin, révision 195, gagnait les quatre premiers dans les mêmes budgets et échouait au L5 à 120 coups. Les deux campagnes ont utilisé SIC, le moteur natif et un seul pilote. Le paquet livré est `index-Wcfc-UcC.js`. [Rejouer depuis le L1](http://127.0.0.1:64925/?game=SS01&runThrough=5#playground)
 
 | Coup du L5 | Décision ou retour mesuré |

@@ -47,6 +47,7 @@ export interface V6AgentHost {
   /** Serialize one native command and await its final public visual observation. */
   dispatch(action: AgentAction): Promise<V6DispatchResult>;
   resetLevel?(): Promise<GameObservation>;
+  undoAction?(): Promise<GameObservation>;
   onState(snapshot: V6AgentSnapshot): void;
   /** Optional host checkpoint, after acquiring the return and before the next action. */
   onAcquired?(snapshot: V6AgentSnapshot): void;
@@ -324,7 +325,7 @@ export class BrowserV6Agent {
         this.assertFresh(expected, epoch);
         if (this.pending.kind === 'stopped') {
           if (this.canRecoverLevel(this.pending.reason)) {
-            if (await this.acquireLevelReset(epoch, true)) continue;
+            if (await this.acquireLevelRecovery(epoch, true)) continue;
             break;
           }
           this.finish(this.pending.reason); return;
@@ -378,7 +379,7 @@ export class BrowserV6Agent {
         }
         if (acquired.kind === 'stopped') {
           if (this.canRecoverLevel(acquired.reason)) {
-            if (!this.stopRequested && await this.acquireLevelReset(epoch, true)) continue;
+            if (!this.stopRequested && await this.acquireLevelRecovery(epoch, true)) continue;
             break;
           }
           this.finish(acquired.reason); return;
@@ -418,27 +419,33 @@ export class BrowserV6Agent {
   }
 
   private canRecoverLevel(reason: string | null): boolean {
-    return isSicLevelRecovery(reason) && !!this.host.resetLevel && !!this.knowledge.canResetLevel;
+    return isSicLevelRecovery(reason) && !!this.knowledge.canResetLevel && (!!this.host.resetLevel || this.canUndoRecovery());
   }
 
-  private async acquireLevelReset(epoch: number, automatic = false): Promise<boolean> {
+  private canUndoRecovery(): boolean {
+    return !!this.knowledge.undoFrameHash && !!this.host.undoAction && this.host.getObservation()?.canUndo === true;
+  }
+
+  private async acquireLevelRecovery(epoch: number, automatic = false): Promise<boolean> {
     const before = this.observed, sessionId = this.sessionId;
-    if (!before || !sessionId || !this.host.resetLevel || !this.stillCurrent(epoch)) return false;
+    const undo = automatic && this.canUndoRecovery();
+    const recover = undo ? this.host.undoAction : this.host.resetLevel;
+    if (!before || !sessionId || !recover || !this.stillCurrent(epoch)) return false;
     this.assertFresh(before, epoch);
     this.phase = 'acting';
-    this.state('acting', automatic ? this.pending?.reason === sicObservedWeightShortage
+    this.state('acting', undo ? 'Undoing the last action to restore the observed placement…' : automatic ? this.pending?.reason === sicObservedWeightShortage
       ? 'Resetting to recover a movable weight for the observed gate…'
       : 'Resetting after an observed placement deadlock…' : 'Resetting the current level…');
     if (!this.stillCurrent(epoch) || automatic && this.stopRequested) return false;
     this.assertFresh(before, epoch);
-    const returned = await this.host.resetLevel();
+    const returned = await recover.call(this.host);
     if (!this.stillCurrent(epoch)) return false;
     const next = toV6PublicObservation(returned, this.sequence);
     if (returned.gameCode !== this.gameCode || !sameV6Observation(next, this.host.getObservation())) {
-      throw new V6AgentError('stale', 'The displayed board does not match the level reset.');
+      throw new V6AgentError('stale', 'The displayed board does not match the recovery return.');
     }
     this.phase = 'observing';
-    if (!await this.request({ type: 'reset_level', sessionId, sequence: this.sequence, observation: next }, epoch)) return false;
+    if (!await this.request({ type: undo ? 'undo_action' : 'reset_level', sessionId, sequence: this.sequence, observation: next }, epoch)) return false;
     this.observed = next;
     this.requiresNewSession = false;
     return true;
@@ -450,7 +457,7 @@ export class BrowserV6Agent {
     const epoch = this.epoch;
     let operation: Promise<void>;
     operation = Promise.resolve().then(async () => {
-      if (!await this.acquireLevelReset(epoch)) return;
+      if (!await this.acquireLevelRecovery(epoch)) return;
       this.stopRequested = false;
       this.state('paused', 'Level reset. Previous evidence is retained. Run to plan from the reset board.');
     }).catch(error => {

@@ -90,7 +90,7 @@ class ScriptedTransport implements V6AgentTransport {
         this.prefixIndex = 0; this.revision += 1;
         result = await this.action();
       } else {
-        if (operation.type === 'reset_level') {
+        if (operation.type === 'reset_level' || operation.type === 'undo_action') {
           assert.equal(operation.observation.stepIndex, this.actions);
           this.observation = operation.observation;
         }
@@ -104,8 +104,8 @@ class ScriptedTransport implements V6AgentTransport {
   dispose(): void { this.disposed = true; }
 }
 
-function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6AgentSnapshot) => void, canReset = false) {
-  const context = { current: board(), enabled: true, actions: [] as AgentAction[], snapshots: [] as V6AgentSnapshot[], resets: 0 };
+function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6AgentSnapshot) => void, canReset = false, hostUndo = false) {
+  const context = { current: board(), enabled: true, actions: [] as AgentAction[], snapshots: [] as V6AgentSnapshot[], resets: 0, undos: 0 };
   let onState: ((snapshot: V6AgentSnapshot) => void) | null = null;
   let dispatch: (action: AgentAction) => Promise<V6DispatchResult> = async action => {
     context.actions.push(action);
@@ -113,6 +113,7 @@ function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6
     return context.current;
   };
   const agent = new BrowserV6Agent({ transport, getObservation: () => context.current, canDispatch: () => context.enabled,
+    ...(hostUndo ? { undoAction: async () => { context.undos++; return context.current = board(); } } : {}),
     ...(canReset ? { resetLevel: async () => { context.resets++; return context.current = board(); } } : {}),
     dispatch: action => dispatch(action), onAcquired, onState: state => { context.snapshots.push(state); onState?.(state); } });
   return { agent, context, transport, setDispatch: (value: typeof dispatch) => { dispatch = value; },
@@ -201,6 +202,22 @@ test('observed placement deadlock resets the same level and continues with the s
       [['init', 0], ['advance', 1], ['reset_level', 1], ['resume', 1], ['advance', 2]]);
     assert.equal(new Set(transport.operations.map(operation => operation.sessionId)).size, 1);
     agent.dispose();
+  }
+});
+
+test('host chooses a proven undo when publicly available, otherwise falls back to reset', async () => {
+  for (const canUndo of [true, false]) {
+    const h = harness(new ScriptedTransport(), undefined, true, true);
+    h.setDispatch(async () => h.context.current = board(1, {canUndo}));
+    const hash = await v6FrameHash(board().frame);
+    h.transport.hook = async (op, result) => op.type === 'advance' && op.sequence === 1
+      ? { ...h.transport.boundary(), kind: 'stopped', phase: 'stopped', reason: 'sic_observed_transport_deadlock',
+        snapshot: { ...result.snapshot, canResetLevel: true, undoFrameHash: hash } } : result;
+    await h.agent.run(2);
+    assert.equal(h.context.undos, Number(canUndo));
+    assert.equal(h.context.resets, Number(!canUndo));
+    assert.deepEqual(h.transport.operations.map(op => op.type), ['init', 'advance', canUndo ? 'undo_action' : 'reset_level', 'resume', 'advance']);
+    h.agent.dispose();
   }
 });
 
