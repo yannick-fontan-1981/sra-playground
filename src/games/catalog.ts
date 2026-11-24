@@ -1202,6 +1202,10 @@ records.push({code:'SS19',id:'ss19-c4000001',name:'Les Gardiens Noirs',group:'cu
   description:'Push chains, exchange places and move groups by song to transport guardians and hold the passages open.',
   sourcePath:'experiments/sinking-star-ss19/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS20',id:'ss20-c4000001',name:'Le Relais des Îles',group:'custom_4',family:'sinking_star_trio',levels:8,
+  description:'Push and pull cargo, move groups by song and reuse supports to bring all three heroes across the islands.',
+  sourcePath:'experiments/sinking-star-ss20/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

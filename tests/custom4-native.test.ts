@@ -97,6 +97,14 @@ import { TrioPuzzleSession as GuardiansSession, compileLevel as compileGuardians
 import { SS19_LEVELS } from '../experiments/sinking-star-ss19/src/levels.ts';
 import { heroSelection as guardiansHeroSelection, lessonIds as guardiansLessonIds, observeLesson as observeGuardiansLesson, TUTORIAL_LEVEL as SS19_TUTORIAL_LEVEL, visibleHeroes as visibleGuardiansHeroes, type GalleryLesson as GuardiansLesson } from '../experiments/sinking-star-ss19/src/tutorial.ts';
 import ss19Witnesses from '../experiments/sinking-star-ss19/tests/witnesses.json' with { type: 'json' };
+import { createSs20Backend } from '../src/games/sinking-star-ss20.ts';
+import { TrioPuzzleSession as RelaySession } from '../experiments/sinking-star-ss20/src/core.ts';
+import { SS20_LEVELS } from '../experiments/sinking-star-ss20/src/levels.ts';
+import { heroSelection as relayHeroSelection, lessonIds as relayLessonIds, observeLesson as observeRelayLesson, TUTORIAL_LEVEL as SS20_TUTORIAL_LEVEL, visibleHeroes as visibleRelayHeroes, type GalleryLesson as RelayLesson } from '../experiments/sinking-star-ss20/src/tutorial.ts';
+import ss20Witnesses from '../experiments/sinking-star-ss20/tests/witnesses.json' with { type: 'json' };
+
+import ss20FinalReview from '../experiments/sinking-star-ss20/reference/final-ss20-review.json' with { type: 'json' };
+import ss20IndependentReview from '../experiments/sinking-star-ss20/reference/independent-review-ss20.json' with { type: 'json' };
 import ss19MiddleReview from '../experiments/sinking-star-ss19/reference/ss19-middle-review.json' with { type: 'json' };
 import ss19FinalReview from '../experiments/sinking-star-ss19/reference/final-ss19-review.json' with { type: 'json' };
 import ss19IndependentReview from '../experiments/sinking-star-ss19/reference/independent-review-ss19.json' with { type: 'json' };
@@ -111,11 +119,11 @@ import fortressLevel7Variant from '../experiments/sinking-star-ss17/reference/le
 import fortressLevel8Shortcut from '../experiments/sinking-star-ss17/reference/level8-rejected-shortcut.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS19 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS20 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 119);
+  assert.equal(GAME_CATALOG.length, 120);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15','SS16','SS17','SS18','SS19']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15','SS16','SS17','SS18','SS19','SS20']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -303,7 +311,7 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS19', 'SS18', 'SS17', 'SS16', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
+  for (const code of ['CASC', 'SS20', 'SS19', 'SS18', 'SS17', 'SS16', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -2434,6 +2442,171 @@ test('SS19 preserves the final physical resources and six valid alternatives', a
       const selected = visibleGuardiansHeroes(result.frame).find(hero => hero.selected)?.kind;
       const nextRole = roles[(roles.findIndex(role => role === selected) + 1) % roles.length]!;
       const data = actionId === 6 ? guardiansHeroSelection(result.frame, nextRole) ?? undefined : undefined;
+      result = await routed.dispatch({ type: 'action', actionId, data });
+      assert.deepEqual(result, ref.action(actionId, data));
+    }
+    assert.equal(result.level, 1);
+    assert.equal(result.levelsCompleted, 1);
+  }
+});
+
+test('SS20 preserves all three heroes across eight levels, animations and thirty tutorial discoveries', async () => {
+  const { getGameByCode } = await import('../src/games/catalog.ts');
+  const entry = getGameByCode(' ss20 ')!;
+  assert.deepEqual([entry.id, entry.name, entry.group, entry.family, entry.levels, entry.availability],
+    ['ss20-c4000001', 'Le Relais des Îles', 'custom_4', 'sinking_star_trio', 8, 'playable']);
+  assert.equal(entry.sourcePath, 'experiments/sinking-star-ss20/src/levels.ts');
+  assert.deepEqual(SS20_LEVELS.map(level => level.title), [
+    'L’atelier des marées', 'Le chargement à rebours', 'Le poids qui reste', 'Les quais en décalage',
+    'Le pas qui manque', 'Les pierres voyageuses', 'La relève du passeur', 'Le chantier à démonter',
+  ]);
+  assert.equal(SS20_TUTORIAL_LEVEL, 1);
+  assert.deepEqual(ss20Witnesses.map(({ actions }) => actions.length), [256, 223, 85, 102, 128, 93, 92, 365]);
+  assert.deepEqual(SS20_LEVELS.map(level => level.id), Array.from({ length: 8 }, (_, i) => `ss20-0${i + 1}`));
+
+  const backend = createSs20Backend(), reference = new RelaySession(SS20_LEVELS);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const lessons = new Set<RelayLesson>();
+  const outsideTutorial = new Set<RelayLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss20 ' });
+  assert.deepEqual(current, reference.observe());
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS20' }), current);
+  const publicKeys = Object.keys(current);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss20Witnesses) {
+    assert.equal(current.level, level);
+    assert.equal(current.palette?.length, 16);
+    assert.deepEqual(visibleRelayHeroes(current.frame).map(({ kind, selected }) => ({ kind, selected })).sort((a, b) => a.kind.localeCompare(b.kind)),
+      [{ kind: 'bard', selected: false }, { kind: 'merchant', selected: true }, { kind: 'thief', selected: false }]);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const expected = reference.action(id, data);
+      const request = { type: 'action', actionId: id, data } as const;
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(backend.dispatch(request), expected);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleRelayHeroes(frame).map(({ kind, x, y }) => [kind, x, y]);
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      const priorDiscoveries = lessons.size;
+      observeRelayLesson(lessons, before, current, id);
+      if (level !== SS20_TUTORIAL_LEVEL) {
+        assert.equal(lessons.size, priorDiscoveries);
+        observeRelayLesson(outsideTutorial, before, current, id);
+        assert.equal(outsideTutorial.size, 0);
+      }
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    const victory = current;
+    const undo = reference.undo();
+    assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), undo);
+    assert.deepEqual(backend.dispatch({ type: 'undo' }), undo);
+    assert.equal(undo.level, level);
+    assert.equal(undo.levelsCompleted, level - 1);
+    const last = route.at(-1)! as DuoAction;
+    const request = { type: 'action', actionId: last.id, data: last.data } as const;
+    assert.deepEqual(reference.action(last.id, last.data), victory);
+    current = await dispatcher.dispatch(request);
+    assert.deepEqual(current, victory);
+    assert.deepEqual(backend.dispatch(request), victory);
+    if (level >= SS20_TUTORIAL_LEVEL) assert.deepEqual(relayLessonIds.filter(id => lessons.has(id)), [...relayLessonIds]);
+  }
+  assert.equal(current.state, 'WIN');
+  assert.deepEqual([actions, selections, frames], [1344, 165, 3821]);
+});
+
+test('SS20 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart', async () => {
+  const backend = createSs20Backend(), reference = new RelaySession(SS20_LEVELS);
+  const initial = reference.selectLevel(4);
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS20', level: 4 }), initial);
+  for (const level of [0, 9, 1.5, NaN]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS20', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: 1.5, y: 20 }, { x: -1, y: 0 }, { x: 0, y: 64 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS20 action/);
+  assert.throws(() => backend.dispatch({ type: 'selectLevel', level: 0 }), /Invalid level/);
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  assert.deepEqual(await routed.dispatch({ type: 'load', code: 'SS20', level: 4 }), initial);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: 6, data: { x: 64, y: 1 } })), /pixel coordinates/);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: -1 })), /Invalid SS20 action/);
+  assert.deepEqual(await routed.dispatch({ type: 'undo' }), initial);
+  for (const level of [8, 3, 7, 2, 5, 1, 6, 4]) {
+    assert.deepEqual(await routed.dispatch({ type: 'selectLevel', level }), reference.selectLevel(level));
+  }
+  const data = relayHeroSelection(initial.frame, 'bard')!;
+  assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
+  assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(backend.dispatch({ type: 'selectLevel', level: 8 }), reference.selectLevel(8));
+  assert.deepEqual(backend.dispatch({ type: 'restart' }), reference.restart());
+  assert.deepEqual(await routed.dispatch({ type: 'restart' }), reference.observe());
+});
+
+
+
+test('SS20 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher', async () => {
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const ref = new RelaySession(SS20_LEVELS);
+  for (const [level, prefix] of [[4, 20], [1, 118]] as const) {
+    assert.deepEqual(await routed.dispatch({ type: 'load', code: 'SS20', level }), ref.selectLevel(level));
+    let previous = ref.observe();
+    for (const { id, data } of ss20Witnesses[level - 1]!.actions.slice(0, prefix) as DuoAction[]) {
+      previous = ref.observe();
+      assert.deepEqual(await routed.dispatch({ type: 'action', actionId: id, data }), ref.action(id, data));
+    }
+    const before = ref.observe();
+    const result = await routed.dispatch({ type: 'action', actionId: 5 });
+    assert.deepEqual(result, ref.action(5));
+    if (level === 4) {
+      assert.deepEqual(result.frameDurationsMs, [110, 70, 110, 0]);
+      const red = result.frames[0]!.flat();
+      assert.deepEqual(before.frame.flat().flatMap((color, i) => color === red[i] ? [] : [[color, red[i]]]), [[5, 8], [5, 8], [5, 8]]);
+      assert.deepEqual(result.frames, [result.frames[0], before.frame, result.frames[0], before.frame]);
+      assert.deepEqual(await routed.dispatch({ type: 'action', actionId: 5 }), result);
+      assert.deepEqual(await routed.dispatch({ type: 'undo' }), previous);
+    } else {
+      assert.equal(result.state, 'GAME_OVER');
+      assert.deepEqual(await routed.dispatch({ type: 'undo' }), before);
+    }
+  }
+});
+
+
+
+test('SS20 keeps the documented winning alternatives legal through the native dispatcher', async () => {
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const ref = new RelaySession(SS20_LEVELS);
+  const roles = ['merchant', 'thief', 'bard'] as const;
+  const directions = { U: 1, D: 2, L: 3, R: 4, X: 5 } as const;
+  const reviewed = ss20IndependentReview.levels;
+  const final = ss20FinalReview.checks.find(item => item.name.includes('extraction initiale par le Barde'));
+  const commands = final?.observed && 'commands' in final.observed ? final.observed.commands : undefined;
+  const routes = [
+    [5, 128, reviewed[4]?.alternatives?.[0]?.commands],
+    [6, 104, reviewed[5]?.alternatives?.[0]?.commands],
+    [6, 97, commands],
+  ] as const;
+  for (const [level, length, route] of routes) {
+    assert.equal(route?.length, length);
+    ref.restart();
+    let result = await routed.dispatch({ type: 'load', code: 'SS20', level });
+    assert.deepEqual(result, ref.selectLevel(level));
+    for (const command of route!) {
+      const actionId = command === 'C' ? 6 : directions[command as keyof typeof directions];
+      assert.ok(actionId);
+      const selected = visibleRelayHeroes(result.frame).find(hero => hero.selected)?.kind;
+      const nextRole = roles[(roles.findIndex(role => role === selected) + 1) % roles.length]!;
+      const data = actionId === 6 ? relayHeroSelection(result.frame, nextRole) ?? undefined : undefined;
       result = await routed.dispatch({ type: 'action', actionId, data });
       assert.deepEqual(result, ref.action(actionId, data));
     }
