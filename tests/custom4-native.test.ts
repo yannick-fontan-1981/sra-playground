@@ -91,6 +91,16 @@ import { TrioPuzzleSession as GallerySession, compileLevel as compileGalleryLeve
 import { SS18_LEVELS } from '../experiments/sinking-star-ss18/src/levels.ts';
 import { heroSelection as galleryHeroSelection, lessonIds as galleryLessonIds, observeLesson as observeGalleryLesson, TUTORIAL_LEVEL as SS18_TUTORIAL_LEVEL, visibleHeroes as visibleGalleryHeroes, type GalleryLesson } from '../experiments/sinking-star-ss18/src/tutorial.ts';
 import ss18Witnesses from '../experiments/sinking-star-ss18/tests/witnesses.json' with { type: 'json' };
+
+import { createSs19Backend } from '../src/games/sinking-star-ss19.ts';
+import { TrioPuzzleSession as GuardiansSession, compileLevel as compileGuardiansLevel } from '../experiments/sinking-star-ss19/src/core.ts';
+import { SS19_LEVELS } from '../experiments/sinking-star-ss19/src/levels.ts';
+import { heroSelection as guardiansHeroSelection, lessonIds as guardiansLessonIds, observeLesson as observeGuardiansLesson, TUTORIAL_LEVEL as SS19_TUTORIAL_LEVEL, visibleHeroes as visibleGuardiansHeroes, type GalleryLesson as GuardiansLesson } from '../experiments/sinking-star-ss19/src/tutorial.ts';
+import ss19Witnesses from '../experiments/sinking-star-ss19/tests/witnesses.json' with { type: 'json' };
+import ss19MiddleReview from '../experiments/sinking-star-ss19/reference/ss19-middle-review.json' with { type: 'json' };
+import ss19FinalReview from '../experiments/sinking-star-ss19/reference/final-ss19-review.json' with { type: 'json' };
+import ss19IndependentReview from '../experiments/sinking-star-ss19/reference/independent-review-ss19.json' with { type: 'json' };
+
 import galleryFinalReview from '../experiments/sinking-star-ss18/reference/final-levels-independent-review.json' with { type: 'json' };
 
 import fortressLevel1Variant from '../experiments/sinking-star-ss17/reference/level1-alternative.json' with { type: 'json' };
@@ -101,11 +111,11 @@ import fortressLevel7Variant from '../experiments/sinking-star-ss17/reference/le
 import fortressLevel8Shortcut from '../experiments/sinking-star-ss17/reference/level8-rejected-shortcut.json' with { type: 'json' };
 import { routes } from './ss01-routes.ts';
 
-test('Custom 4 lists SS01 through SS18 and preserves all four legacy collections', async () => {
+test('Custom 4 lists SS01 through SS19 and preserves all four legacy collections', async () => {
   const { GAME_CATALOG, getGameByCode } = await import('../src/games/catalog.ts');
-  assert.equal(GAME_CATALOG.length, 118);
+  assert.equal(GAME_CATALOG.length, 119);
   assert.equal(new Set(GAME_CATALOG.map(g => g.id)).size, GAME_CATALOG.length);
-  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15','SS16','SS17','SS18']);
+  assert.deepEqual(GAME_CATALOG.filter(g => g.group === 'custom_4').map(g => g.code), ['SS01','SS02','SS03','SS04','SS05','SS06','SS07','SS08','SS09','SS10','SS11','SS12','SS13','SS14','SS15','SS16','SS17','SS18','SS19']);
   for (const group of ['official','custom','custom_2','custom_3']) assert.equal(GAME_CATALOG.filter(g => g.group === group).length,25);
   assert.equal(getGameByCode(' ss01 ')?.levels,8);
   assert.match(getGameByCode('SS01')!.sourceUrl, /src\/games\/sinking-star\/levels\.ts$/);
@@ -293,7 +303,7 @@ test('all native and legacy sessions switch with Python loaded only once after a
   assert.equal(loads, 0);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'load', code: 'CASC' })), /offline/);
   await assert.rejects(() => Promise.resolve(dispatcher.dispatch({ type: 'action', actionId: 1 })), /Load a game/);
-  for (const code of ['CASC', 'SS18', 'SS17', 'SS16', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
+  for (const code of ['CASC', 'SS19', 'SS18', 'SS17', 'SS16', 'SS15', 'SS14', 'SS13', 'SS12', 'SS11', 'SS10', 'SS09', 'SS08', 'SS07', 'SS06', 'SS05', 'SS04', 'SS03', 'SS02', 'SS01', 'LS20', 'SS10']) {
     assert.equal((await dispatcher.dispatch({ type: 'load', code })).gameCode, code);
   }
   assert.equal(loads, 2);
@@ -2254,5 +2264,180 @@ test('SS18 retains the four-weight material lock and the archived alternatives a
       assert.equal(result.frame[36]![33], 5);
       assert.deepEqual(await routed.dispatch({ type: 'undo' }), ref.undo());
     }
+  }
+});
+
+test('SS19 preserves all three heroes across eight levels, animations and thirty-one tutorial discoveries', async () => {
+  const { getGameByCode } = await import('../src/games/catalog.ts');
+  const entry = getGameByCode(' ss19 ')!;
+  assert.deepEqual([entry.id, entry.name, entry.group, entry.family, entry.levels, entry.availability],
+    ['ss19-c4000001', 'Les Gardiens Noirs', 'custom_4', 'sinking_star_trio', 8, 'playable']);
+  assert.equal(entry.sourcePath, 'experiments/sinking-star-ss19/src/levels.ts');
+  assert.deepEqual(SS19_LEVELS.map(level => level.title), [
+    'Le gardien du seuil', 'Les galeries des gardiens', 'L’interrupteur hors d’atteinte', 'Le gardien de la vanne',
+    'Le troisième doit rester vivant', 'La seconde image', 'Le relais condamné', 'Les deux gardiens vivants',
+  ]);
+  assert.equal(SS19_TUTORIAL_LEVEL, 2);
+  assert.deepEqual(ss19Witnesses.map(({ actions }) => actions.length), [62, 208, 150, 135, 134, 74, 52, 97]);
+  assert.deepEqual(SS19_LEVELS.map(level => level.id), Array.from({ length: 8 }, (_, i) => `ss19-0${i + 1}`));
+
+  const backend = createSs19Backend(), reference = new GuardiansSession(SS19_LEVELS);
+  const dispatcher = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const lessons = new Set<GuardiansLesson>();
+  let current = await dispatcher.dispatch({ type: 'load', code: ' ss19 ' });
+  assert.deepEqual(current, reference.observe());
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS19' }), current);
+  const publicKeys = Object.keys(current);
+  let actions = 0, selections = 0, frames = 0;
+  for (const { level, actions: route } of ss19Witnesses) {
+    assert.equal(current.level, level);
+    assert.equal(current.palette?.length, 16);
+    assert.deepEqual(visibleGuardiansHeroes(current.frame).map(({ kind, selected }) => ({ kind, selected })).sort((a, b) => a.kind.localeCompare(b.kind)),
+      [{ kind: 'bard', selected: false }, { kind: 'warrior', selected: true }, { kind: 'wizard', selected: false }]);
+    for (const { id, data } of route as DuoAction[]) {
+      const before = current;
+      const expected = reference.action(id, data);
+      const request = { type: 'action', actionId: id, data } as const;
+      current = await dispatcher.dispatch(request);
+      assert.deepEqual(current, expected);
+      assert.deepEqual(backend.dispatch(request), expected);
+      assert.ok(Object.keys(current).every(key => key === 'frameDurationsMs' || publicKeys.includes(key)));
+      assert.equal(current.frameDurationsMs?.length, current.frames.length);
+      assert.deepEqual(current.frames.at(-1), current.frame);
+      if (id === 6) {
+        assert.equal(current.frames.length, 1);
+        const positions = (frame: number[][]) => visibleGuardiansHeroes(frame).map(({ kind, x, y }) => [kind, x, y]);
+        assert.deepEqual(positions(current.frame), positions(before.frame));
+        selections++;
+      }
+      const priorDiscoveries = lessons.size;
+      observeGuardiansLesson(lessons, before, current, id);
+      if (level !== SS19_TUTORIAL_LEVEL) assert.equal(lessons.size, priorDiscoveries);
+      actions++;
+      frames += current.frames.length;
+    }
+    assert.equal(current.levelsCompleted, level);
+    const victory = current;
+    const undo = reference.undo();
+    assert.deepEqual(await dispatcher.dispatch({ type: 'undo' }), undo);
+    assert.deepEqual(backend.dispatch({ type: 'undo' }), undo);
+    assert.equal(undo.level, level);
+    assert.equal(undo.levelsCompleted, level - 1);
+    const last = route.at(-1)! as DuoAction;
+    const request = { type: 'action', actionId: last.id, data: last.data } as const;
+    assert.deepEqual(reference.action(last.id, last.data), victory);
+    current = await dispatcher.dispatch(request);
+    assert.deepEqual(current, victory);
+    assert.deepEqual(backend.dispatch(request), victory);
+    if (level < SS19_TUTORIAL_LEVEL) assert.equal(lessons.size, 0);
+    if (level >= SS19_TUTORIAL_LEVEL) assert.deepEqual(guardiansLessonIds.filter(id => lessons.has(id)), [...guardiansLessonIds]);
+  }
+  assert.equal(current.state, 'WIN');
+  assert.deepEqual([actions, selections, frames], [912, 105, 2615]);
+});
+
+test('SS19 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart', async () => {
+  const backend = createSs19Backend(), reference = new GuardiansSession(SS19_LEVELS);
+  const initial = reference.selectLevel(4);
+  assert.deepEqual(backend.dispatch({ type: 'load', code: 'SS19', level: 4 }), initial);
+  for (const level of [0, 9, 1.5, NaN]) {
+    assert.throws(() => backend.dispatch({ type: 'load', code: 'SS19', level }), /Invalid level/);
+  }
+  for (const data of [undefined, { x: 1.5, y: 20 }, { x: -1, y: 0 }, { x: 0, y: 64 }]) {
+    assert.throws(() => backend.dispatch({ type: 'action', actionId: 6, data }), /pixel coordinates/);
+  }
+  assert.throws(() => backend.dispatch({ type: 'action', actionId: 7 }), /Invalid SS19 action/);
+  assert.throws(() => backend.dispatch({ type: 'selectLevel', level: 0 }), /Invalid level/);
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  assert.deepEqual(await routed.dispatch({ type: 'load', code: 'SS19', level: 4 }), initial);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: 6, data: { x: 64, y: 1 } })), /pixel coordinates/);
+  await assert.rejects(() => Promise.resolve(routed.dispatch({ type: 'action', actionId: -1 })), /Invalid SS19 action/);
+  assert.deepEqual(await routed.dispatch({ type: 'undo' }), initial);
+  for (const level of [8, 3, 7, 2, 5, 1, 6, 4]) {
+    assert.deepEqual(await routed.dispatch({ type: 'selectLevel', level }), reference.selectLevel(level));
+  }
+  const data = guardiansHeroSelection(initial.frame, 'bard')!;
+  assert.deepEqual(backend.dispatch({ type: 'action', actionId: 6, data }), reference.action(6, data));
+  assert.deepEqual(backend.dispatch({ type: 'undo' }), reference.undo());
+  assert.deepEqual(backend.dispatch({ type: 'reset' }), reference.reset());
+  assert.deepEqual(backend.dispatch({ type: 'selectLevel', level: 8 }), reference.selectLevel(8));
+  assert.deepEqual(backend.dispatch({ type: 'restart' }), reference.restart());
+  assert.deepEqual(await routed.dispatch({ type: 'restart' }), reference.observe());
+});
+
+
+
+test('SS19 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher', async () => {
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const ref = new GuardiansSession(SS19_LEVELS);
+  for (const [level, prefix] of [[8, 7], [6, 31]] as const) {
+    assert.deepEqual(await routed.dispatch({ type: 'load', code: 'SS19', level }), ref.selectLevel(level));
+    let previous = ref.observe();
+    for (const { id, data } of ss19Witnesses[level - 1]!.actions.slice(0, prefix) as DuoAction[]) {
+      previous = ref.observe();
+      assert.deepEqual(await routed.dispatch({ type: 'action', actionId: id, data }), ref.action(id, data));
+    }
+    const before = ref.observe();
+    const result = await routed.dispatch({ type: 'action', actionId: 5 });
+    assert.deepEqual(result, ref.action(5));
+    if (level === 8) {
+      assert.deepEqual(result.frameDurationsMs, [110, 70, 110, 0]);
+      const red = result.frames[0]!.flat();
+      assert.deepEqual(before.frame.flat().flatMap((color, i) => color === red[i] ? [] : [[color, red[i]]]), [[5, 8], [5, 8], [5, 8]]);
+      assert.deepEqual(result.frames, [result.frames[0], before.frame, result.frames[0], before.frame]);
+      assert.deepEqual(await routed.dispatch({ type: 'action', actionId: 5 }), result);
+      assert.deepEqual(await routed.dispatch({ type: 'undo' }), previous);
+    } else {
+      assert.equal(result.state, 'GAME_OVER');
+      assert.deepEqual(await routed.dispatch({ type: 'undo' }), before);
+    }
+  }
+});
+
+
+test('SS19 preserves the final physical resources and six valid alternatives', async () => {
+  const spec = SS19_LEVELS[7]!;
+  const world = compileGuardiansLevel(spec);
+  assert.equal(world.stones.length, 1);
+  assert.equal(world.monsters.length, 2);
+  assert.equal(world.mirrors.length, 1);
+  assert.equal(world.goals.length, 3);
+  assert.equal(spec.rows[17]![13], '~');
+  assert.equal(world.gates.filter(gate => world.goals.some(goal => goal.x === gate.at.x && goal.y === gate.at.y)
+    && gate.closedWhen === 'released').length, 2);
+
+  const alternative = (level: number, length: number, commands: string | undefined) => {
+    assert.equal(commands?.length, length);
+    return { level, commands: commands! };
+  };
+  const middle = ss19MiddleReview.checks;
+  const final = ss19FinalReview.checks;
+  const replays = [
+    alternative(4, 135, middle.find(item => item.name.includes('relâcher avant le chant'))?.commands),
+    alternative(4, 138, middle.find(item => item.name.includes('traversée chantée'))?.commands),
+    alternative(6, 95, final.find(item => item.id === 'level6-alternative-calendar')?.commands),
+    alternative(7, 50, ss19IndependentReview.levels.find(item => item.level === 7)?.alternatives?.[0]?.commands),
+    alternative(8, 75, final.find(item => item.id === 'level8-reflected-reserve-variant')?.commands),
+    alternative(8, 93, final.find(item => item.id === 'level8-sung-delivery-variant')?.commands),
+  ];
+  const routed = createGameDispatcher(async () => { throw new Error('Unexpected Python'); });
+  const ref = new GuardiansSession(SS19_LEVELS);
+  const roles = ['warrior', 'wizard', 'bard'] as const;
+  const directions = { U: 1, D: 2, L: 3, R: 4, X: 5 } as const;
+  for (const { level, commands } of replays) {
+    ref.restart();
+    let result = await routed.dispatch({ type: 'load', code: 'SS19', level });
+    assert.deepEqual(result, ref.selectLevel(level));
+    for (const command of commands) {
+      const actionId = command === 'C' ? 6 : directions[command as keyof typeof directions];
+      assert.ok(actionId);
+      const selected = visibleGuardiansHeroes(result.frame).find(hero => hero.selected)?.kind;
+      const nextRole = roles[(roles.findIndex(role => role === selected) + 1) % roles.length]!;
+      const data = actionId === 6 ? guardiansHeroSelection(result.frame, nextRole) ?? undefined : undefined;
+      result = await routed.dispatch({ type: 'action', actionId, data });
+      assert.deepEqual(result, ref.action(actionId, data));
+    }
+    assert.equal(result.level, 1);
+    assert.equal(result.levelsCompleted, 1);
   }
 });
