@@ -9,7 +9,7 @@ const same = (a: Point,b: Point) => a[0]===b[0] && a[1]===b[1];
 const add = (a: Point,b: Point): Point => [a[0]+b[0],a[1]+b[1]];
 
 function habitat(pitch: number, inks: readonly [number,number], commands: readonly [string,Point][],
-  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point } = {}) {
+  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point } = {}) {
   const span = 12, alignment = 1, floor = 2, background = 3, cargoInk = 5, inset = 6;
   const marker = 7, destination = 8;
   const actorOrigins: Point[] = [[2,3],[2,7]];
@@ -29,7 +29,8 @@ function habitat(pitch: number, inks: readonly [number,number], commands: readon
       }
     };
     for(let y=0;y<span;y++) for(let x=0;x<span;x++) if(floorAt([x,y]))tile([x,y],()=>floor);
-    for(const p of [[10,2],[10,9]] as const)tile(p,(x,y)=>x===middle&&y===middle?floor:destination);
+    if(!options.hideGoals)for(const p of [[10,2],[10,9]] as const)tile(p,(x,y)=>x===middle&&y===middle?floor:destination);
+    if(options.pressure)tile(options.pressure,(x,y)=>x===middle&&y===middle?marker:x===middle||y===middle?12:floor);
     for(const p of cargo)tile(p,(x,y)=>x===middle&&y===middle?inset:cargoInk);
     for(const [i,p] of actors.entries()){
       tile(p,(x,y)=>{
@@ -173,7 +174,7 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   const game = createSs06Backend();
   const family = createObservedActorComposition();
   let board = await game.dispatch({type:'load',code:'SS06',level:1});
-  let revision=0, firstSecondLevelOffer='', joint=false;
+  let revision=0, firstSecondLevelOffer='', joint=false, chain=false, pressure=false;
   const show = async () => {
     let frame=board.frame.map(row=>row.map(value=>(value+presentation.colors)%16));
     if(presentation.flipX)frame=frame.map(row=>row.reverse());
@@ -182,14 +183,19 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       levels_completed:board.levelsCompleted,state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'shifted-campaign')};
   };
-  while(board.level<=2 && revision<110){
+  while(board.level<=3 && revision<245){
     const {packet,observation}=await show();
-    const proposal=await family.propose(observation,packet.frame_rows,[],110-revision);
+    const proposal=await family.propose(observation,packet.frame_rows,[],245-revision);
     assert.ok(proposal,'Missing proposal after '+revision+' actions, level '+board.level);
     if(board.level===2) {
       if (!firstSecondLevelOffer) firstSecondLevelOffer=proposal.offer.kind;
       assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
       joint ||= proposal.offer.kind==='compose_simultaneous_observed_transfers';
+    }
+    if(board.level===3){
+      assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
+      chain ||= proposal.offer.kind==='test_reachable_chain_composition';
+      pressure ||= proposal.offer.kind==='test_reachable_pressure_composition';
     }
     let issued=0;
     for(const [index,command] of proposal.actions.entries()){
@@ -206,9 +212,34 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       await family.record(first.observation,second.observation,command,first.packet.frame_rows,second.packet.frame_rows,proposal,index,[]);
       if(result.seal_prefix)break;
     }
-    assert.ok(issued,'A proposed prefix must admit its first action');
+    assert.ok(issued,'A proposed prefix must admit its first action at level '+board.level+' after '+revision+' commands ('+proposal.offer.kind+')');
   }
   assert.equal(firstSecondLevelOffer,'prepare_transfer_by_moving_reflector');
   assert.ok(joint);
-  assert.equal(board.levelsCompleted,2);
+  assert.equal(board.levelsCompleted,3);
+  assert.ok(chain&&pressure);
+});
+
+test('tests an accessible pressure composition even with no recognized destinations', async () => {
+  const learned=await study(habitat(3,[9,10],directions,'activation'),10);
+  const pressure:Point=[3,5];
+  const game=habitat(3,[9,10],directions,'activation',{level:2,hideGoals:true,pressure});
+  const family=createObservedActorComposition();
+  family.restore(learned.state);
+  const {packet,observation}=await game.observed();
+  const proposal=await family.propose(observation,packet.frame_rows,[],30);
+  assert.ok(proposal);
+  assert.equal(proposal.offer.kind,'test_reachable_pressure_composition');
+  assert.equal(family.state().goals.length,0);
+  const expected=proposal.offer.test!;
+  assert.ok(!family.state().guarded.includes(expected));
+  for(const [i,command] of proposal.actions.entries()){
+    const before=await game.observed();
+    assert.equal((await family.before(proposal,i,before.packet,before.observation)).admitted,true);
+    game.perform(command);
+    const after=await game.observed();
+    await family.record(before.observation,after.observation,command,before.packet.frame_rows,after.packet.frame_rows,proposal,i,[]);
+    if(i<proposal.actions.length-1)assert.ok(!family.state().guarded.includes(expected),'Approach must not close the experiment');
+  }
+  assert.ok(family.state().guarded.includes(expected),'The actual contact closes the experiment');
 });

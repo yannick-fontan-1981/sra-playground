@@ -8,7 +8,7 @@ import { compileLevel as compileExchangeLevel, initialState as initialExchangeSt
 import { SS04_LEVELS } from '../experiments/sinking-star-ss04/src/levels.ts';
 import { compileLevel as compileCarryLevel, doorsOpen as carryDoorsOpen, initialState as initialCarryState, stepDetailed as stepCarryWorld } from '../experiments/sinking-star-ss05/src/core.ts';
 import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
-import { compileLevel as compileActorLevel, initialState as initialActorState, stepDetailed as stepActorWorld } from '../experiments/sinking-star-ss06/src/core.ts';
+import { compileLevel as compileActorLevel, initialState as initialActorState, stepDetailed as stepActorWorld, circuitPressed as actorCircuitPressed, gateClosed as actorGateClosed } from '../experiments/sinking-star-ss06/src/core.ts';
 import { SS06_LEVELS } from '../experiments/sinking-star-ss06/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
@@ -427,6 +427,50 @@ function measureJointActorTransfer(issued) {
     {kind:'transfer both actors together',first:joint,last:joint}];
 }
 
+
+function measureLinkedGateRelay(issued) {
+  const world=compileActorLevel(SS06_LEVELS[2]);
+  let state=initialActorState(world);
+  let firstChain=null,firstPress=null,firstUsefulReflection=null;
+  const toggled=new Set();
+  assert.ok(issued.every(ticket=>ticket.actorPlan&&ticket.actorPlan.strategy!=='calibrate_actor_action'),
+    'SS06 L3 must keep the observed actor controls');
+  for(const [i,ticket] of issued.entries()){
+    const result=stepActorWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    if(ticket.actorPlan.strategy==='test_reachable_chain_composition'
+      &&result.phases.some(phase=>phase.kind==='push'&&phase.moves.filter(move=>move.actor==='stone').length>=2)){
+      firstChain??=i+1;
+      assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:(?:[6-9]|[1-9][0-9]+):/.test(ref)),
+        'The chain attempt must reuse a prior role effect');
+    }
+    if(ticket.actorPlan.strategy==='test_reachable_pressure_composition'
+      &&!actorCircuitPressed(world,state,world.circuits[0].id)&&actorCircuitPressed(world,result.state,world.circuits[0].id)){
+      firstPress??=i+1;
+      assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:2:revision:/.test(ref)),
+        'The new pressure experiment must cite the previously witnessed gate reaction');
+    }
+    if(result.phases.some(phase=>phase.kind==='reflect'&&phase.moves.length)){
+      firstUsefulReflection??=i+1;
+      assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)),
+        'Relay activation must cite evidence from before the current level');
+    }
+    for(const gate of world.gates.keys()){
+      if(actorGateClosed(world,state,gate)!==actorGateClosed(world,result.state,gate))toggled.add(gate);
+    }
+    state=result.state;
+  }
+  assert.ok(firstChain!==null&&firstChain<=5,'SS06 L3 must physically test the reachable row promptly');
+  assert.ok(firstPress!==null&&firstPress<=10,'SS06 L3 must physically test the reachable button promptly');
+  assert.ok(firstUsefulReflection&&toggled.size>=2&&state.complete,
+    'SS06 L3 must compose verified reflection and linked gate access through official completion');
+  return [
+    {kind:'test reachable row',first:firstChain,last:firstChain},
+    {kind:'test reachable pressure mark',first:firstPress,last:firstPress},
+    {kind:'activate witnessed transport',first:firstUsefulReflection,last:firstUsefulReflection},
+  ];
+}
+
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -435,7 +479,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 2 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 3 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -550,14 +594,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
     if (code === 'SS06') {
-      const cap=row.level===1?45:42;
+      const cap=[45,42,115][row.level-1];
       assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? row.level===1 ? measureActorComposition(issued) : measureJointActorTransfer(issued) : [];
+      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -590,7 +634,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
-      ['actor-composition', 'SS06', '2', '75'],
+      ['actor-composition', 'SS06', '3', '125'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

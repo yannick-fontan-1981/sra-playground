@@ -52,6 +52,12 @@ Ces exigences s’appliquent dès qu’une session Codex modifie l’apprentissa
 4. Avant de qualifier la modification de générique, exécuter le scénario réel depuis le niveau 1 et au moins deux scénarios de transfert distincts. Varier la forme, la couleur, les positions et les commandes entre scénarios. Inclure un cas ambigu et un cas contradictoire. Vérifier dans les tickets exécutés et leurs preuves que le premier geste utile réemploie bien le rôle et que les vérifications ciblées ne relancent pas l’apprentissage complet.
 5. Exécuter le test du rôle dans le moteur natif et le contrôle `npm run test:sic-continuity`. Dans le compte rendu de la session, donner les cas validés, le niveau où les faits ont été acquis et leurs conditions de réutilisation. Une victoire sur le jeu d’origine ne suffit pas à établir le transfert.
 
+## Compositions atteignables
+
+1. Avant de corriger un blocage, identifier le premier moment où une interaction atteignable est proposée, écartée ou perdue. Donner le retour observable et distinguer l'absence de reconnaissance, l'absence de chemin, la priorité et l'échec d'un garde.
+2. Conserver les essais de contact atteignables quand l'objectif terminal est inconnu. Considérer un essai comme effectué après la commande de contact et son retour. Un trajet préparatoire ou une sélection de curseur seuls ne suffisent pas.
+3. Pour qualifier la correction, vérifier dans les tickets le contact réel, les rôles réutilisés, la continuité de la préparation et l'effet physique. Ajouter au moins un cas avec une observation ambiguë ou manquante et un cas distinct du parcours corrigé. Annoncer les conditions et les limites de la preuve.
+
 ## Publication
 
 ### Pendant le test d’un jeu précis

@@ -1,5 +1,6 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeCommand, NativeFamily, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { findRelayPlan, type RelayModel, type RelayState, type RelayStep } from './observed-relay-plan.ts';
 import { sicNeedId } from './need-identity.ts';
 
 export const observedActorCompositionId = 'sic_observed_actor_composition';
@@ -10,17 +11,18 @@ type Actor = { ink: number; cell: Cell; marker: number | null };
 type Shape = { pitch: number; phase: Point; mask: number[]; inks: number[]; floor: number; backing: number };
 type Direction = { action: string; axis: Point; evidence: string };
 type Role = { moved: boolean; contact: boolean; capacity: number; effects: Record<string, string>; controls?: Direction[] };
-type RoleTransfer = { interface: string; motif: string; roles: Record<string, Role>; directions: Direction[]; trigger?: string };
+type RoleTransfer = { interface: string; motif: string; roles: Record<string, Role>; directions: Direction[]; trigger?: string; gateReaction?: string; projectionColor?: string };
 type History = {
   epoch: number; shape?: Shape; directions: Direction[]; roles: Record<number, Role>; selections: Record<number, string>; transfer?: RoleTransfer;
   guarded: string[]; goals: Cell[]; plates: Cell[]; supports: Record<Cell,string>; trigger?: string; gates: Record<Cell,{accent:number;open:boolean}>; switches: Record<Cell,number>;
   lastPush?: { ink: number; direction: string; object: Cell };
   obstruction?: { ink: number; stance: Cell; object: Cell };
+  projectionInk?: number; relayField?: RelayField; relay?: RelayStep[]; relayChecked: string[]; relayLoads?: number[]; seenChain?: boolean; seenPlate?: boolean;
 };
 type Tile = { pixels: number[]; uniform: boolean; passable: boolean; object: boolean; plate: boolean;
   mirror: Point[] | null; preview: boolean; gate: {accent:number;open:boolean}|null; plateAccent: number|null };
 type Scene = { actors: Actor[]; active: Actor; tiles: Map<Cell, Tile>; goals: Cell[]; plates: Cell[] };
-type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; expectedActors?: {ink:number;from:Cell;to:Cell}[] };
+type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; relay?: RelayStep; expectedActors?: {ink:number;from:Cell;to:Cell}[] };
 type Offer = { ink: number; steps: Step[]; kind: string; score: number; test?: string; target?: Cell };
 type Proposal = ReturnType<typeof proposed>;
 type Path = { cell: Cell; route: Step[] };
@@ -125,17 +127,19 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
   const solidColors = new Map<number,Cell[]>();
   const mid = Math.floor(pitch*pitch/2);
   for(let y=phase[1];y+pitch<=rows.length;y+=pitch) for(let x=phase[0];x+pitch<=rows[0]!.length;x+=pitch){
-    const cell = key([(x-phase[0])/pitch,(y-phase[1])/pitch]), pixels=readTile(rows,x,y,pitch), body=motif(pixels,mask,history.plates.includes(cell)?floor:undefined);
+    const cell = key([(x-phase[0])/pitch,(y-phase[1])/pitch]), pixels=readTile(rows,x,y,pitch), body=motif(pixels,mask,history.plates.includes(cell)||history.supports[cell]?floor:undefined);
     const uniform=pixels.every(value=>value===pixels[0]);
     if(body && inks.includes(body.ink)) actors.push({ink:body.ink,cell,marker:body.marker});
     const edge = pixels.filter((_,i)=>i%pitch===0 || i%pitch===pitch-1 || i<pitch || i>=pitch*(pitch-1));
-    const object=!uniform && edge.every(value=>value===edge[0]) && edge[0]!==floor && pixels[mid]!==edge[0] && pixels[mid]!==floor;
+    // A preview can cover a switch and retain its original centre pigment.
+    const overlay=history.projectionInk!==undefined&&edge.every(value=>value===history.projectionInk);
+    const object=!overlay&&!uniform && edge.every(value=>value===edge[0]) && edge[0]!==floor && pixels[mid]!==edge[0] && pixels[mid]!==floor;
     const mirror=!object&&!uniform ? diagonalAperture(pixels,pitch,floor) : null;
     const onBoard=pixels.filter(value=>value===floor).length;
     const plate=!mirror&&!object && (!body||body.marker===mid) && onBoard>=pixels.length-mask.length
       && mask.every(index=>pixels[index]!==floor)
       && pixels.filter((_,i)=>!mask.includes(i)).every(value=>value===floor);
-    const preview=!!(body && !inks.includes(body.ink) && body.marker===null && (body.floor===floor||history.goals.includes(cell)));
+    const preview=overlay||!!(body && !inks.includes(body.ink) && body.marker===null && (body.floor===floor||history.goals.includes(cell)));
     const gate=gateMark(pixels,pitch,floor);
     tiles.set(cell,{pixels,uniform,
       passable:gate?gate.open:onBoard>=Math.ceil(pixels.length/2)||preview||plate,object,plate,mirror,preview,gate,plateAccent:plate?pixels[mid]!:null});
@@ -148,7 +152,9 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
   }
   const active=actors.filter(actor=>actor.marker!==null);
   if(actors.length!==inks.length || active.length!==1 || new Set(actors.map(a=>a.ink)).size!==inks.length) return null;
-  const candidateGoals=[...solidColors.values()].filter(cells=>cells.length===actors.length && distance(cells[0]!,cells[1]!)>1);
+  const repeated=[...solidColors.values()].filter(cells=>cells.length===actors.length);
+  const outlines=repeated.filter(cells=>cells.some(cell=>!tiles.get(cell)?.uniform));
+  const candidateGoals=outlines.length?outlines:repeated.filter(cells=>distance(cells[0]!,cells[1]!)>1);
   const goals=history.goals.length ? history.goals : candidateGoals.length===1 ? candidateGoals[0]! : [];
   const plates=[...new Set([...history.plates,...[...tiles].filter(([,tile])=>tile.plate).map(([cell])=>cell)])];
   return {actors,active:active[0]!,tiles,goals,plates};
@@ -425,8 +431,147 @@ function draft(scene: Scene, h: History, o: NativeObservation): Offer | undefine
   return offers.filter(x=>x.steps.length).sort((a,b)=>b.score-a.score||a.steps.length-b.steps.length)[0];
 }
 
+
+type RelayField = {
+  floor: number[]; water: number[]; waterInks: Record<number,number>; plate: number; gates: RelayModel['gates']; arms: number[]; goals: number[];
+};
+const encode=(cell:Cell)=>{const [x,y]=point(cell);return x+y*64;};
+const decodeCell=(cell:number)=>key([cell%64,Math.floor(cell/64)]);
+const toAxis=([x,y]:Point)=>x+y*64;
+const sorted=(cells:number[])=>cells.sort((a,b)=>a-b);
+
+function actorSwitch(scene:Scene,h:History,actor:Actor):Step {
+  return {action:address(actor.cell,h.shape!),from:scene.active.cell,actor:scene.active.ink,select:actor.ink};
+}
+
+function atOpportunity(scene:Scene,h:History,actor:Actor,steps:Step[],kind:string,score:number,test:string,target:Cell):Offer {
+  return {ink:actor.ink,steps:actor.ink===scene.active.ink?steps:[actorSwitch(scene,h,actor),...steps],kind,score,test,target};
+}
+
+function reachableCompositions(scene:Scene,h:History) {
+  const pending:Offer[]=[];
+  for(const actor of scene.actors){
+    if(scene.goals.includes(actor.cell))continue;
+    if(actor.ink!==scene.active.ink && h.guarded.includes(JSON.stringify([scene.active.ink,scene.active.cell,'ACTION6',actor.ink])))continue;
+    for(const {cell,route} of walks(scene,h,actor).values()){
+      if(route.length&&scene.plates.includes(cell)&&!scene.tiles.get(cell)?.object){
+        const test=JSON.stringify(['plate',cell,scene.tiles.get(cell)?.plateAccent??h.switches[cell]??null]);
+        if(!h.guarded.includes(test))pending.push(atOpportunity(scene,h,actor,route,'test_reachable_pressure_composition',60-route.length,test,cell));
+      }
+      for(const dir of observedDirections(h,actor.ink)){
+        const cargo=next(cell,dir.axis), contact=scene.tiles.get(cargo);
+        if(!portable(contact)||scene.plates.includes(cargo))continue;
+        let last=cargo,n=0;
+        const bodyKeys=[];
+        while(portable(scene.tiles.get(last))){ bodyKeys.push(tileKey(scene.tiles.get(last)));last=next(last,dir.axis);n++; }
+        const landing=scene.tiles.get(last);
+        if(background(landing,h.shape!)||landing?.gate&&!landing.gate.open||scene.actors.some(a=>a.cell===last))continue;
+        const test=JSON.stringify(['contact',actor.ink,cargo,dir.action,bodyKeys,tileKey(landing)]);
+        if(h.guarded.includes(test))continue;
+        // A measured greater capacity can face the same row of objects.
+        // Without that evidence, a single contact remains a legitimate experiment.
+        if(n>1&&n>(h.roles[actor.ink]?.capacity??0))continue;
+        pending.push(atOpportunity(scene,h,actor,[...route,{action:command(dir.action),from:cell,actor:actor.ink,tile:tileKey(contact)}],
+          n>1?'test_reachable_chain_composition':'test_reachable_object_composition',
+          (n>1?85:35)-route.length,test,cargo));
+      }
+    }
+  }
+  return pending.sort((a,b)=>b.score-a.score||a.steps.length-b.steps.length);
+}
+
+function relayField(scene:Scene,h:History):RelayField|undefined {
+  if(scene.plates.length!==1 || scene.goals.length!==2 || !h.trigger||!h.transfer?.gateReaction)return;
+  const mirrors=[...scene.tiles].filter(([,tile])=>tile.mirror);
+  if(mirrors.length!==1)return;
+  const plate=scene.plates[0]!, ink=h.switches[plate];
+  const occupied=scene.actors.some(a=>a.cell===plate)||portable(scene.tiles.get(plate));
+  const linked=Object.entries(h.gates).filter(([,gate])=>gate.accent===ink);
+  if(!linked.some(([,gate])=>gate.open)||!linked.some(([,gate])=>!gate.open))return;
+  const gates=linked.map(([cell,gate])=>({cell:encode(cell),closedWhenPressed:gate.open!==occupied}));
+  const floor:number[]=[],water:number[]=[];
+  const waterInks:Record<number,number>={};
+  for(const [cell,tile] of scene.tiles){
+    if(background(tile,h.shape!))continue;
+    if(scene.goals.includes(cell)||scene.plates.includes(cell)||tile.gate||portable(tile)||tile.passable
+      ||scene.actors.some(a=>a.cell===cell))floor.push(encode(cell));
+    else if(tile.uniform){
+      const address=encode(cell);
+      water.push(address);
+      waterInks[address]=tile.pixels[0]!;
+    }
+  }
+  return {floor,water,waterInks,plate:encode(plate),gates,arms:mirrors[0]![1].mirror!.map(toAxis),goals:scene.goals.map(encode)};
+}
+
+function relayPose(scene: Scene,h:History):RelayState|undefined {
+  const mirror=[...scene.tiles].find(([,tile])=>tile.mirror);
+  if(!mirror||!h.relayField)return;
+  const field=h.relayField;
+  const actors=h.shape!.inks.map(ink=>encode(scene.actors.find(a=>a.ink===ink)!.cell));
+  const loads=sorted([...scene.tiles].filter(([,tile])=>tile.object).map(([cell])=>encode(cell)));
+  for(const plate of scene.plates) {
+    // The control's corner pixels remain on top of a load, not on top
+    // of a bare pressure mark. Rebind using the previously seen load inset.
+    const cell=encode(plate), target=scene.tiles.get(plate);
+    if(!target||target.plate||target.preview||actors.includes(cell)||encode(mirror[0])===cell||loads.includes(cell))continue;
+    const stock=Array.from(scene.tiles.values()).find(tile=>tile.object);
+    const center=Math.floor(target.pixels.length/2);
+    if(h.relayLoads?.includes(target.pixels[center]!)||stock?.pixels[center]===target.pixels[center])loads.push(cell);
+  }
+  const supports=field.water.filter(cell=>{
+    const id=decodeCell(cell), tile=scene.tiles.get(id);
+    return !!tile&&!tile.uniform&&!tile.object&&!tile.preview&&!tile.mirror&&!actors.includes(cell)&&tile.pixels.every(ink=>ink!==field.waterInks[cell])
+      ||!!h.supports[id]&&(actors.includes(cell)||loads.includes(cell)||encode(mirror[0])===cell||tileKey(tile)===h.supports[id]);
+  });
+  return {actors,loads:sorted(loads),reflector:encode(mirror[0]),supports:sorted(supports)};
+}
+
+const sameRelayPose=(a:RelayState|undefined,b:RelayState)=>!!a&&JSON.stringify(a)===JSON.stringify(b);
+
+function relayAgreement(scene:Scene,h:History,expected:RelayState){
+  if(!sameRelayPose(relayPose(scene,h),expected))return false;
+  const field=h.relayField!;
+  const pressed=expected.reflector===field.plate||expected.actors.includes(field.plate)||expected.loads.includes(field.plate);
+  return field.gates.every(gate=>{
+    const seen=scene.tiles.get(decodeCell(gate.cell))?.gate;
+    return !seen||seen.open===(gate.closedWhenPressed!==pressed);
+  });
+}
+
+async function relayOffer(scene:Scene,h:History,remaining:number,execution?:NativeExecution):Promise<Offer|undefined> {
+  const field=h.relayField;
+  if(!field||!h.trigger)return;
+  const pose=relayPose(scene,h);
+  if(!pose)return;
+  if(h.relay?.length&&!sameRelayPose(pose,h.relay[0]!.before))delete h.relay;
+  if(!h.relay?.length){
+    const fingerprint=JSON.stringify(pose);
+    if(h.relayChecked.includes(fingerprint)||h.relayChecked.length>=4)return;
+    const model:RelayModel={...field,floor:new Set(field.floor),water:new Set(field.water),trigger:h.trigger,
+      controls:h.shape!.inks.map(ink=>observedDirections(h,ink).map(d=>({action:d.action,axis:toAxis(d.axis)}))),
+      capacity:h.shape!.inks.map(ink=>h.roles[ink]?.capacity??0)};
+    const route=await findRelayPlan(model,pose,{maxNodes:75000,yieldControl:execution?.yieldControl??(async()=>{}),signal:execution?.signal});
+    if(execution?.signal?.aborted)return;
+    h.relayChecked.push(fingerprint);
+    if(!route?.length)return;
+    h.relay=route;
+  }
+  const line=h.relay;
+  const initial=line[0]!, actor=scene.actors.find(a=>a.ink===h.shape!.inks[initial.actor])!;
+  if(scene.active.ink!==actor.ink)return {ink:actor.ink,steps:[actorSwitch(scene,h,actor)],kind:'select_actor_for_relay_plan',score:650};
+  const steps:Step[]=[];
+  for(const predicted of line){
+    if(predicted.actor!==initial.actor||steps.length>=remaining)break;
+    const from=decodeCell(predicted.before.actors[predicted.actor]!),to=decodeCell(predicted.after.actors[predicted.actor]!);
+    steps.push({action:command(predicted.action),from,actor:actor.ink,to,relay:predicted});
+    if(predicted.projected.length)break;
+  }
+  return {ink:actor.ink,steps,kind:'compose_reflection_and_linked_gate_access',score:800};
+}
+
 function fresh(epoch: number): History {
-  return {epoch,directions:[],roles:{},selections:{},guarded:[],goals:[],plates:[],supports:{},gates:{},switches:{}};
+  return {epoch,directions:[],roles:{},selections:{},guarded:[],goals:[],plates:[],supports:{},gates:{},switches:{},relayChecked:[]};
 }
 
 function restoreRoles(h: History, shape: Shape, o: NativeObservation) {
@@ -440,9 +585,13 @@ function restoreRoles(h: History, shape: Shape, o: NativeObservation) {
       h.roles=Object.fromEntries(peers.map(([ink,role])=>[ink,structuredClone(role!)]));
       h.directions=structuredClone(previous.directions);
       if(previous.trigger&&o.available_action_refs.includes(previous.trigger))h.trigger=previous.trigger;
+      if(previous.projectionColor!==undefined){
+        const ink=o.palette?o.palette.indexOf(previous.projectionColor):Number(previous.projectionColor);
+        if(Number.isInteger(ink)&&ink>=0)h.projectionInk=ink;
+      }
     }
   }
-  h.transfer={interface:commands,motif,roles:Object.fromEntries(shape.inks.flatMap(ink=>h.roles[ink]?[[color(o,ink),h.roles[ink]!]]:[])), directions:h.directions,...(h.trigger?{trigger:h.trigger}:{})};
+  h.transfer={interface:commands,motif,roles:Object.fromEntries(shape.inks.flatMap(ink=>h.roles[ink]?[[color(o,ink),h.roles[ink]!]]:[])), directions:h.directions,...(h.trigger?{trigger:h.trigger}:{}),...(previous?.gateReaction?{gateReaction:previous.gateReaction}:{}),...(h.projectionInk!==undefined?{projectionColor:color(o,h.projectionInk)}:{})};
 }
 function proposed(o: NativeObservation, offer: Offer, steps: (Step & { point_binding?: unknown })[], evidence:string[]) {
   const actions=steps.map(step=>step.action), reason=offer.kind.replaceAll('_',' ');
@@ -464,12 +613,12 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
   let h=fresh(-1);
   return {
     id:observedActorCompositionId,
-    async propose(o,rows,_,remaining) {
+    async propose(o,rows,_,remaining,execution) {
       if (h.epoch!==o.level_epoch) h={...fresh(o.level_epoch),...(h.transfer?{transfer:h.transfer}:{})};
       const shape=h.shape??spotPair(o,rows);
       if (!shape) return null;
       const scene=decode(rows,shape,h);
-      if (!scene || !scene.goals.length) return null;
+      if (!scene) return null;
       if(!h.shape) restoreRoles(h,shape,o);
       h.goals=scene.goals;
       h.plates=scene.plates;
@@ -477,10 +626,24 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
         if(tile.gate)h.gates[cell]=tile.gate;
         if(tile.plateAccent!==null)h.switches[cell]=tile.plateAccent;
       }
-      const offer=pairedTransfer(scene,h,o)??draft(scene,h,o);
+      if(!h.relayField){
+        const field=relayField(scene,h);
+        if(field){
+          h.relayField=field;
+          const marked=Math.floor(shape.pitch*shape.pitch/2);
+          h.relayLoads=[...new Set([...scene.tiles.values()].filter(tile=>tile.object).map(tile=>tile.pixels[marked]!))];
+        }
+      }
+      const frontier=reachableCompositions(scene,h);
+      const chain=h.relayField&&!h.seenChain?frontier.find(offer=>offer.kind==='test_reachable_chain_composition'):undefined;
+      const press=h.relayField&&!h.seenPlate?frontier.find(offer=>offer.kind==='test_reachable_pressure_composition'):undefined;
+      const paired=scene.goals.length?pairedTransfer(scene,h,o):undefined;
+      const planned=chain??press??paired??await relayOffer(scene,h,remaining,execution);
+      const direct=planned?undefined:draft(scene,h,o);
+      const offer=planned??(scene.goals.length&&direct&&direct.score>155?direct:frontier[0]??direct);
       if(!offer || remaining<1) return null;
       const roleEvidence=Object.values(h.roles[offer.ink]?.effects??{});
-      const evidence=[...new Set([o.observation_ref,...observedDirections(h,offer.ink).map(d=>d.evidence),...Object.values(h.selections),...roleEvidence])];
+      const evidence=[...new Set([o.observation_ref,...observedDirections(h,offer.ink).map(d=>d.evidence),...Object.values(h.selections),...roleEvidence,...(h.transfer?.gateReaction?[h.transfer.gateReaction]:[])])];
       const steps=offer.steps.slice(0,Math.min(remaining,16));
       const first=steps[0]!;
       if(first.select!==undefined){
@@ -495,8 +658,11 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
         ?next(step.from,observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)!.axis):undefined);
       const admitted=!!scene && scene.active.ink===step.actor&&scene.active.cell===step.from
         && (step.tile===undefined||!!destination&&tileKey(scene.tiles.get(destination))===step.tile);
+      const modelBound=!step.relay||!!scene&&relayAgreement(scene,h,step.relay.before)
+        && step.relay.projected.every(cell=>scene.tiles.get(decodeCell(cell))?.preview
+          || step.relay!.before.actors.includes(cell)||step.relay!.before.loads.includes(cell));
       const joint = !step.expectedActors || step.expectedActors.every(actor=>scene?.actors.some(part=>part.ink===actor.ink&&part.cell===actor.from)&&scene.tiles.get(actor.to)?.preview);
-      return {admitted:admitted&&joint,reason:admitted?'observed_actor_and_local_contact_preserved':'actor_or_contact_changed'};
+      return {admitted:admitted&&joint&&modelBound,reason:admitted&&joint&&modelBound?'observed_actor_and_local_contact_preserved':'actor_or_contact_changed'};
     },
     after(p,index,b,a,first,second) {
       const step=p.steps[index]!;
@@ -505,7 +671,8 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const moved=scene?.active.cell===step.to && scene?.active.ink===step.actor;
       const selected=scene?.active.ink===step.select && scene?.active.cell!==undefined;
       const joint=step.expectedActors?.every(actor=>scene?.actors.some(part=>part.ink===actor.ink&&part.cell===actor.to));
-      const matched=boundary|| (joint!==undefined?joint:step.select!==undefined?selected:step.to!==undefined?moved:b.frame_hash!==a.frame_hash);
+      const forecast=step.relay&&scene?relayAgreement(scene,h,step.relay.after):undefined;
+      const matched=boundary|| (forecast!==undefined?forecast:joint!==undefined?joint:step.select!==undefined?selected:step.to!==undefined?moved:b.frame_hash!==a.frame_hash);
       const sealed=boundary||!matched||step.select!==undefined||step.to===undefined||index===p.steps.length-1;
       return {matched,seal_prefix:sealed,reason:boundary?'official_boundary':matched?'actor_outcome_observed':'actor_outcome_contradicted'};
     },
@@ -549,10 +716,41 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if((p.offer.kind==='verify_visible_transport_destination'&&step.to===observed.cell)||step.expectedActors?.every(expected=>after.actors.some(actor=>actor.ink===expected.ink&&actor.cell===expected.to))){
         h.trigger=action.action_ref;
         if(h.transfer)h.transfer.trigger=action.action_ref;
+        const cue=step.to?before.tiles.get(step.to):undefined;
+        if(cue?.preview){
+          const ink=cue.pixels[Math.floor(cue.pixels.length/2)]!;
+          h.projectionInk=ink;
+          if(h.transfer)h.transfer.projectionColor=color(b,ink);
+        }
 
         role.effects[action.action_ref]=a.observation_ref;
       }
-      if(p.offer.test && step.select===undefined && (step.expectedActors||p.offer.kind==='verify_gate_release_on_blocking_object'))h.guarded.push(p.offer.test);
+      if(p.offer.test && step.select===undefined && (step.expectedActors||p.offer.kind==='verify_gate_release_on_blocking_object')){
+        h.guarded.push(p.offer.test);
+        if(p.offer.kind==='verify_gate_release_on_blocking_object'&&p.offer.target
+          && tileKey(before.tiles.get(p.offer.target))!==tileKey(after.tiles.get(p.offer.target))&&h.transfer)
+          h.transfer.gateReaction=a.observation_ref;
+      }
+      if(step.relay){
+        if(relayAgreement(after,h,step.relay.after)){
+          for(const support of step.relay.after.supports.filter(cell=>!step.relay!.before.supports.includes(cell))){
+            const cell=decodeCell(support);
+            h.supports[cell]=tileKey(after.tiles.get(cell));
+          }
+          h.relay?.shift();
+        }
+        else delete h.relay;
+      }
+      if(p.offer.kind==='test_reachable_pressure_composition'&&p.offer.target===step.to&&p.offer.test){
+        h.guarded.push(p.offer.test);
+        h.seenPlate=observed.cell===step.to;
+        if(h.seenPlate&&h.transfer&&!h.transfer.gateReaction
+          && [...before.tiles].some(([cell,tile])=>tile.gate&&after.tiles.get(cell)?.gate
+            && tile.gate.open!==after.tiles.get(cell)!.gate!.open))
+          h.transfer.gateReaction=a.observation_ref;
+      }
+      if(p.offer.kind==='test_reachable_chain_composition'&&step.select===undefined&&step.to===undefined)
+        h.seenChain=true;
       if(p.offer.test && step.contact && p.offer.target) {
         const delta=tileKey(before.tiles.get(step.contact))!==tileKey(after.tiles.get(step.contact));
         if(delta){ role.contact=true; role.effects[p.offer.kind+':'+action.action_ref]=a.observation_ref; }
