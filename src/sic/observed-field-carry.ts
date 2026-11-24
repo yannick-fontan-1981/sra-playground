@@ -1,5 +1,6 @@
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { findCompositionFrontier } from './composition-frontier.ts';
+import { findBridgeRoute, projectBridge, type BridgeChart, type BridgePose } from './field-bridge-route.ts';
 import { objectRelations } from './object-composition.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { lostResourceCoverage } from './resource-reserve.ts';
@@ -26,16 +27,17 @@ type Scene = Pose & {
   body?: string; gates: Gate[];
   mirrors: { at: Cell; arms: NativePoint[] }[]; other: Set<Cell>;
 };
-type Step = { action: NativeCommand; after: Pose };
+type Step = { action: NativeCommand; after: Pose | BridgePose };
 export type FieldResourceLoss = { marks: Marks; dependencies: Cell[]; required: number; available: number; key: string };
 export type FieldResourceConsumption = { marks: Marks; body: string; previousCount: number };
 export type FieldCarryPlan = {
-  memory: FieldCarryMemory; steps: Step[]; start: Pose; target: Cell; label: string;
+  memory: FieldCarryMemory; steps: Step[]; start: Pose | BridgePose; target: Cell; label: string;
   marks: Marks; evidence: string[]; observe: boolean; testControl?: true;
   composition?: { key: string; signatures: string[]; target: readonly [Cell, Cell]; at?: number; opens?: Cell[] };
   reflectiveRoute?: true;
   routeGates?: Gate[];
   gateProbe?: true;
+  bridge?: { key: string; probeAt?: number };
 };
 
 const pitch = 3;
@@ -106,6 +108,7 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
   const candidates = new Map<string, Cell[]>(), rawGates = new Map<Cell, number[]>();
   const covered = new Set<Cell>();
   const bodyPixels = memory.body?.split(',').map(Number);
+  const supportRim = memory.support?.split(',')[0];
   for (let y = phase[1]; y + pitch <= rows.length; y += pitch) for (let x = phase[0]; x + pitch <= rows[0]!.length; x += pitch) {
     const cell = `${x},${y}`, raw = tile(rows, x, y);
     const overlaid = (i: number) => raw[i] === ink && raw[4] !== ink
@@ -115,8 +118,8 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
     const pixels = raw.map((value, i) => overlaid(i) ? underneath : value);
     cells.set(cell, pixels);
     if (cell === actor) {
-      if (cell === memory.supportAt) supports.add(cell);
-      if (corners.every(index => pixels[index] === pixels[0]) && ![floor, wall, ink].includes(pixels[0]!)
+      if (cell === memory.supportAt || supportRim !== undefined && corners.every(i => pixels[i] === Number(supportRim))) supports.add(cell);
+      if (!supports.has(cell) && corners.every(index => pixels[index] === pixels[0]) && ![floor, wall, ink].includes(pixels[0]!)
         && !Object.values(marks).some(mark => mark[1] === pixels[0])) {
         marks[cell] ??= pixels.map((_, index) => corners.includes(index) ? floor : pixels[0]!);
       }
@@ -124,6 +127,13 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
       continue;
     }
     const key = stamp(pixels), rim = pixels[0]!, center = pixels[4]!;
+    const accent = axes.map(i => pixels[i]!).find(color => color !== rim && color !== floor && color !== ink
+      && axes.filter(i => pixels[i] === color).length === 3);
+    if (accent !== undefined && corners.every(i => pixels[i] === rim) && ![wall, floor, ink].includes(rim)) {
+      rawGates.set(cell, pixels);
+      if (center === accent) marks[cell] = pixels.map((_, i) => corners.includes(i) ? floor : i === 4 ? accent : rim);
+      continue;
+    }
     const bodyCore = bodyPixels && pixels.every((value, i) => corners.includes(i) || value === bodyPixels[i]);
     if (bodyCore && !marks[cell] && corners.every(i => pixels[i] === rim) && ![bodyPixels[0], floor, wall, ink].includes(rim)) {
       marks[cell] = pixels.map((_, i) => corners.includes(i) ? floor : rim);
@@ -182,6 +192,7 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
   const body = memory.body ?? (family.length === 1 ? family[0]![0] : undefined);
   if (!memory.body && body) for (const cell of candidates.get(body) ?? []) { bodies.push(cell); ground.add(cell); }
   for (const [pattern, at] of candidates) if (pattern !== body) for (const cell of at) other.add(cell);
+  for (const [at, pixels] of rawGates) if (marks[at] && pixels[4] !== floor && pixels[4] !== marks[at]![4]) covered.add(at);
   for (const [at, pixels] of rawGates) {
     if (bodies.includes(at)) continue;
     const rim = pixels[0]!, center = pixels[4]!;
@@ -193,10 +204,13 @@ function picture(rows: NativeRows, memory: FieldCarryMemory, knownMarks: Marks =
       const linkedBarrier = mark[4] === mark[1] && barrierShape;
       return rim === mark[1] && (linkedPiston || linkedBarrier);
     });
-    if (match.length === 1 || match.length > 1 && barrierShape && match.every(cell => marks[cell]![4] === rim)) {
-      const occupied = match.filter(mark => covered.has(mark) || bodies.includes(mark)), closed = center !== floor;
+    const linkedGroup = match.length > 1 && match.every(cell => marks[cell]![4] === marks[match[0]!]![4]);
+    if (match.length === 1 || linkedGroup) {
+      const occupied = match.filter(mark => covered.has(mark) || bodies.includes(mark));
+      const closed = center !== floor && (!marks[at] || center !== marks[at]![4]);
       gates.push({ at, marks: match.sort(), occupied, closed,
-        opensWhenCovered: match.length > 1 || closed !== !!occupied.length, returns: memory.gateReturns?.[at] ?? {} });
+        opensWhenCovered: barrierShape && match.length > 1 || closed !== (occupied.length === match.length),
+        returns: memory.gateReturns?.[at] ?? {} });
       other.delete(at);
       ground.add(at);
     } else other.add(at);
@@ -584,6 +598,43 @@ function planPreservingReflection(scene: Scene, memory: FieldCarryMemory, inputs
     marks: scene.marks, evidence, observe: false, reflectiveRoute: true };
 }
 
+function chartForBridge(scene: Scene, rows: NativeRows, memory: FieldCarryMemory): BridgeChart {
+  const { floor, wall, radius } = memory.profile;
+  const hazards = [...new Set(Object.keys(memory.mobile ?? {}).flatMap(shape => motifCells(scene, rows, memory.profile, shape)))];
+  return {
+    pose: { actor: scene.actor, bodies: scene.bodies, supports: [...scene.supports], hazards },
+    floor: new Set([...scene.floor, ...hazards].filter(cell => !scene.supports.has(cell)
+      && !scene.gates.some(gate => gate.at === cell && gate.closed))),
+    water: new Set([...scene.cells].filter(([cell, pixels]) => scene.supports.has(cell)
+      || pixels[4] !== floor && pixels[4] !== wall && pixels.every(value => value === pixels[4])).map(([cell]) => cell)),
+    marks: Object.keys(scene.marks),
+    groups: [...new Map(scene.gates.map(gate => [gate.marks.join(';'), gate.marks])).values()],
+    held: new Set(scene.gates.filter(gate => gate.closed && scene.marks[gate.at]).map(gate => gate.at)),
+    exit: scene.exit, radius: radius * pitch, pitch,
+  };
+}
+
+function planBridge(scene: Scene, rows: NativeRows, memory: FieldCarryMemory, moves: { action: NativeCommand; delta: NativePoint }[],
+  evidence: string[], remaining: number, tested: readonly string[]): FieldCarryPlan | undefined {
+  if (!memory.support || scene.mirrors.length || moves.length < 4) return;
+  const chart = chartForBridge(scene, rows, memory);
+  if (!chart.water.size || !chart.marks.length) return;
+  const route = findBridgeRoute(chart, moves, remaining, tested);
+  if (!route) return;
+  const steps = route.steps.slice(0, maximumCommittedActions);
+  return { memory, steps, start: chart.pose, target: route.steps.at(-1)!.after.actor,
+    label: route.probe ? 'Test the reachable controls for a new crossing'
+      : 'Move the floating support into place and cross on it',
+    marks: scene.marks, evidence, observe: false, bridge: { key: route.key,
+      ...(route.probe && steps.length === route.steps.length ? { probeAt: steps.length - 1 } : {}) } };
+}
+
+function sameBridgePose(actual: BridgePose | undefined, expected: Pose | BridgePose) {
+  const sameSet = (a: Cell[], b: Cell[]) => a.length === b.length && a.every(cell => b.includes(cell));
+  return !!actual && 'supports' in expected && samePose(actual, expected)
+    && sameSet(actual.supports, expected.supports) && sameSet(actual.hazards, expected.hazards);
+}
+
 export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: NativeRows, inputs: readonly NativeCommand[],
   ref: string, remaining: number, knownMarks?: Marks, testedCompositions: readonly string[] = [],
   compositionOnly = false): FieldCarryPlan | undefined {
@@ -598,6 +649,8 @@ export function planFieldCarry(memory: FieldCarryMemory | undefined, rows: Nativ
     ...Object.values(model.mobile ?? {})])];
   const moves = inputs.flatMap(action => model.controls[action.action_ref] ? [{ action, delta: model.controls[action.action_ref]!.delta }] : []);
   if (compositionOnly) return planObjectComposition(scene, rows, model, moves, evidence, remaining, testedCompositions);
+  const bridge = planBridge(scene, rows, model, moves, evidence, remaining, testedCompositions);
+  if (bridge) return bridge;
   const preserving = planPreservingReflection(scene, model, inputs, evidence, remaining);
   if (preserving) return preserving;
   const missingWeight = scene.gates.filter(gate => gate.opensWhenCovered).flatMap(gate => gate.marks).find(mark => !start.bodies.includes(mark));
@@ -680,6 +733,10 @@ export function admitFieldCarry(plan: FieldCarryPlan, index: number, rows: Nativ
   if (!scene || !samePose(scene, before)) return false;
   if (plan.observe) return true;
   const next = plan.steps[index]!, direction = plan.memory.controls[next.action.action_ref];
+  if (plan.bridge) {
+    const chart = chartForBridge(scene, rows, plan.memory);
+    return !!direction && sameBridgePose(chart.pose, before) && sameBridgePose(projectBridge(chart, chart.pose, direction.delta), next.after);
+  }
   const projectedScene = plan.gateProbe ? onStableGround(scene) : scene;
   if (direction) return samePose(project(projectedScene, before, plan.memory, direction.delta), next.after)
     && (!plan.reflectiveRoute || [next.after.actor, ...next.after.bodies].every(cell => gateOpen(scene, next.after, cell)));
@@ -694,6 +751,17 @@ export function admitFieldCarry(plan: FieldCarryPlan, index: number, rows: Nativ
 export function checkFieldCarryReturn(plan: FieldCarryPlan, index: number, before: NativeRows, after: NativeRows): boolean {
   if (plan.testControl && index === plan.steps.length - 1) return isControlReturn(plan, before, after, index);
   const scene = picture(after, plan.memory, plan.marks), expected = plan.steps[index]!.after;
+  if (plan.bridge) {
+    if (!scene) return false;
+    if (plan.bridge.probeAt === index) {
+      const prior = picture(before, plan.memory, plan.marks);
+      return !!prior && (!!newSupport(prior, scene, plan.memory) || scene.gates.some(gate => {
+        const old = prior.gates.find(candidate => candidate.at === gate.at);
+        return !!old && old.closed !== gate.closed;
+      }));
+    }
+    return sameBridgePose(chartForBridge(scene, after, plan.memory).pose, expected);
+  }
   if (scene && plan.routeGates?.some(gate => {
     const actual = scene.gates.find(candidate => candidate.at === gate.at);
     return actual ? actual.closed === gateAllows(gate, expected)

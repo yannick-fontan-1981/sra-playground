@@ -678,10 +678,10 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     if (current && state.fieldRefutedLoss?.source === explorationKey(observation, rows)
       && state.fieldRefutedLoss.action === commandKey(plan.steps[0]!.action)) return null;
     const target = pushAccessBox(plan.target, 3), actions = plan.steps.map(step => step.action);
-    const goal = { kind: plan.gateProbe ? 'verify_alternative_to_lost_resource'
+    const goal = { kind: plan.bridge ? 'compose_reachable_crossing_with_support' : plan.gateProbe ? 'verify_alternative_to_lost_resource'
         : plan.composition ? 'test_reachable_object_composition' : 'compose_observed_local_carry',
       scope: ref.split(':revision:', 1)[0]!, subjects: plan.composition ? [...plan.composition.target] : [plan.target],
-      parentObjective: completion, satisfactionContract: plan.gateProbe ? 'observe_access_with_remaining_resources'
+      parentObjective: completion, satisfactionContract: plan.bridge ? 'verify_support_motion_and_crossing' : plan.gateProbe ? 'observe_access_with_remaining_resources'
         : plan.composition ? 'observe_reachable_composition' : 'verify_coupled_directional_displacement' };
     const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: plan.evidence };
     const id = `field-carry:${need.id}`;
@@ -1508,6 +1508,8 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       const carry = proposal.fieldCarryPlan;
       if (carry) {
         const matched = !carry.observe && checkFieldCarryReturn(carry, index, rows, afterRows);
+        if (carry.bridge?.probeAt === index) return { matched: scored || matched, seal_prefix: true,
+          reason: matched || scored ? 'support_crossing_effect_observed' : 'support_crossing_effect_unconfirmed' };
         if (carry.composition?.at === index) return { matched: scored || matched, seal_prefix: true,
           reason: matched || scored ? 'reachable_composition_observed' : 'reachable_composition_contradicted',
           ...(matched || scored ? { sic_need: { id: proposal.needId, status: 'satisfied' as const } } : {}) };
@@ -1672,7 +1674,9 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
       if (carry && !carry.observe && before.level_epoch === after.level_epoch) {
         const matched = checkFieldCarryReturn(carry, index, rows, afterRows);
         enterEpoch(before.level_epoch);
-        if (carry.composition && (!matched || carry.composition.at === index)) {
+        if (carry.bridge?.probeAt === index) {
+          state.fieldCompositionsTested = [...new Set([...state.fieldCompositionsTested ?? [], carry.bridge.key])];
+        } else if (carry.composition && (!matched || carry.composition.at === index)) {
           state.fieldCompositionsTested = [...new Set([...state.fieldCompositionsTested ?? [], carry.composition.key])];
           if (matched && state.fieldCarry) state.fieldCarry = { ...state.fieldCarry, contactRef: after.observation_ref };
         } else if (!matched) state.fieldCarryRefuted = true;

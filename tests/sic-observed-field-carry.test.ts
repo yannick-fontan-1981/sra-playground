@@ -5,13 +5,14 @@ import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
 import { measureNativeObservation } from '../src/logos-engine/v6-native-observer.ts';
 import { sicObservedWeightShortage } from '../src/logos-engine/v6-native-types.ts';
 import { findCompositionFrontier } from '../src/sic/composition-frontier.ts';
+import { projectBridge, type BridgeChart } from '../src/sic/field-bridge-route.ts';
 import { objectRelations } from '../src/sic/object-composition.ts';
 import { createSicPublicInputExploration, observedPressureRecoveryGroup } from '../src/sic/public-input-exploration.ts';
 import { lostResourceCoverage } from '../src/sic/resource-reserve.ts';
 import { admitFieldCarry, checkFieldCarryReturn, observeFieldCarry, planFieldCarry,
   type FieldCarryMemory, type FieldCarryPlan } from '../src/sic/observed-field-carry.ts';
 
-for (const mirrored of [false, true]) test(`carry and object composition transfer across six levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, async () => {
+for (const mirrored of [false, true]) test(`carry and object composition transfer across seven levels${mirrored ? ' with different object shapes and mirrored geometry' : ''}`, async () => {
   const transform = (world: World, state: State) => {
     const rows = renderWorld(world, state);
     if (mirrored) for (const [index, point] of state.monsters.entries()) {
@@ -19,12 +20,16 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
       rows[y]![x + 1] = index === 0 ? 8 : 10;
       rows[y + 1]![x] = index === 0 ? 5 : 10;
     }
+    if (mirrored) for (const support of state.supports) {
+      if (state.hero.x !== support.x || state.hero.y !== support.y) rows[3 + 3 * support.y]![3 + 3 * support.x] = 12;
+    }
     return rows.map(row => (mirrored ? [...row].reverse() : row).map(ink => (ink + (mirrored ? 9 : 4)) % 16));
   };
   const commands = new Map([1, 2, 3, 4, 5].map(id => [`ACTION${id + (mirrored ? 10 : 20)}`, id]));
   const inputs = [...commands].map(([action_ref]) => ({ action_ref, data: {} }));
   let memory: FieldCarryMemory | undefined;
-  for (let level = 0; level < 6; level++) {
+  let learnedSupport: string | undefined;
+  for (let level = 0; level < 7; level++) {
     const world = compileLevel(SS05_LEVELS[level]!);
     let current = initialState(world), marks: FieldCarryPlan['marks'] | undefined;
     let actions = 0, firstCarry = 0, continuousCarry = false, firstBody: number | undefined, compositions = 0;
@@ -137,6 +142,10 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
         ?? planFieldCarry(memory, visible, inputs, entry, 120 - actions, marks, [], true);
       assert.ok(plan, `No plan at level ${level + 1}, command ${actions}`);
       assert.ok(plan.steps.length <= 16);
+      if (level === 6 && plan.bridge) {
+        assert.ok(learnedSupport);
+        assert.equal(plan.memory.support, learnedSupport);
+      }
       if (level) {
         assert.equal(plan.observe, false);
         assert.ok(plan.evidence.includes('return:0:1'));
@@ -144,7 +153,7 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
       marks = plan.marks;
       for (const [index, step] of plan.steps.entries()) {
         const before = transform(world, current);
-        assert.ok(admitFieldCarry(plan, index, before));
+        assert.ok(admitFieldCarry(plan, index, before), `Unadmitted step at level ${level + 1}, action ${actions + 1}, ${plan.label}`);
         const detail = stepDetailed(world, current, commands.get(step.action.action_ref)!);
         if (detail.state.monsters.length < current.monsters.length) {
           assert.equal(plan.composition?.at, index);
@@ -172,6 +181,17 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
         if (!plan.observe) {
           assert.ok(checkFieldCarryReturn(plan, index, before, after), `Unexpected return at level ${level + 1}, action ${actions}, ${plan.label}`);
           if (moved) assert.equal(checkFieldCarryReturn(plan, index, before, before), false);
+          const shiftedSupport = level === 6 && plan.bridge && detail.phases[0]?.moves.find(piece => piece.actor === 'support');
+          if (shiftedSupport) {
+            const unchanged = after.map(row => [...row]);
+            for (const point of [shiftedSupport.from, shiftedSupport.to]) {
+              const y = 2 + point.y * 3, x = mirrored ? 59 - point.x * 3 : 2 + point.x * 3;
+              for (let offset = 0; offset < 3; offset++) {
+                unchanged[y + offset]!.splice(x, 3, ...before[y + offset]!.slice(x, x + 3));
+              }
+            }
+            assert.equal(checkFieldCarryReturn(plan, index, before, unchanged), false);
+          }
           if (level === 3 && plan.composition?.at === index) {
             assert.ok(plan.evidence.some(ref => ref.startsWith('return:2:')));
             const gates = plan.composition.opens;
@@ -190,6 +210,7 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
       }
     }
     assert.ok(current.complete);
+    if (level === 0) learnedSupport = memory?.support;
     if (level === 2 || level === 3) assert.equal(compositions, 1);
     else assert.ok(continuousCarry);
     if (level === 1) {
@@ -197,6 +218,24 @@ for (const mirrored of [false, true]) test(`carry and object composition transfe
       assert.equal(firstBody, 0);
     } else if (level === 0) assert.equal(firstCarry, 1);
   }
+});
+
+test('a movable support can be aligned and stays in place during boarding and departure', () => {
+  const chart: BridgeChart = {
+    pose: { actor: '0,0', bodies: [], hazards: [], supports: ['1,1'] },
+    floor: new Set(['0,0', '0,1', '0,2', '2,2']), water: new Set(['1,1', '1,2']),
+    marks: [], groups: [], held: new Set(), exit: '2,2', radius: 2, pitch: 1,
+  };
+  const moved = projectBridge(chart, chart.pose, [0, 1]);
+  assert.equal(moved?.supports[0], '1,2');
+  const approach = projectBridge(chart, moved!, [0, 1]);
+  const board = projectBridge(chart, approach!, [1, 0]);
+  assert.equal(board?.actor, '1,2');
+  assert.deepEqual(board?.supports, ['1,2']);
+  const depart = projectBridge(chart, board!, [1, 0]);
+  assert.equal(depart?.actor, chart.exit);
+  assert.deepEqual(depart?.supports, ['1,2']);
+  assert.equal(projectBridge(chart, { ...approach!, supports: ['1,1'] }, [1, 0]), undefined);
 });
 
 test('recovery requires a real loss of assignable coverage', () => {

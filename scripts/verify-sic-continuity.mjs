@@ -224,6 +224,20 @@ function measuredCarrySeries(level, tickets) {
   let state = initialCarryState(world), previous, firstCarry;
   let openedWithWeight = false, reflectedWeight = false;
   let separatedWeight = false, crossedOpenGate = false;
+  let boardedFrom, crossings = 0, repositioned = 0;
+  const bank = (from, to) => {
+    const queue = [from], seen = new Set([from.y * 20 + from.x]);
+    for (const point of queue) {
+      if (equal(point, to)) return true;
+      for (const [dx, dy] of [[0, -1], [0, 1], [-1, 0], [1, 0]]) {
+        const x = point.x + dx, y = point.y + dy, key = y * 20 + x;
+        if (x >= 0 && x < 20 && y >= 0 && y < 20 && world.terrain[key] === '.' && !seen.has(key)) {
+          seen.add(key); queue.push({ x, y });
+        }
+      }
+    }
+    return false;
+  };
   const series = [];
   for (const [index, ticket] of tickets.entries()) {
     const result = stepCarryWorld(world, state, Number(ticket.action.slice(6)));
@@ -258,6 +272,23 @@ function measuredCarrySeries(level, tickets) {
       openedWithWeight ||= !opened && carryDoorsOpen(world, result.state)
         && result.state.stones.some(stone => world.buttons.some(button => equal(stone, button)));
     }
+    const supports = (phase?.moves ?? []).filter(move => move.actor === 'support');
+    if (level === 7) {
+      const standing = state.supports.some(spot => equal(spot, state.hero));
+      const landed = result.state.supports.some(spot => equal(spot, result.state.hero));
+      if (!standing && landed) {
+        assert.ok(continued, 'SS05 L7 must board the support in a continuous route');
+        boardedFrom = state.hero;
+      }
+      if (standing && !landed && boardedFrom && !bank(boardedFrom, result.state.hero)) {
+        crossings++;
+        series.push({ kind: 'cross to another bank using the support', first: index, last: index + 1 });
+      }
+      if (continued && supports.some(move => previous.supports.some(prior => equal(prior.to, move.from)))) {
+        repositioned++;
+        series.push({ kind: 'slide the same floating support', first: index, last: index + 1 });
+      }
+    }
     if (level === 3 && state.monsters.length - result.state.monsters.length === 2) {
       assert.ok(continued && result.phases.some(phase => phase.kind === 'combat'), 'SS05 L3 lost the deliberate continuous contact');
       series.push({ kind: 'compose the two moving objects', first: index, last: index + 1 });
@@ -282,7 +313,7 @@ function measuredCarrySeries(level, tickets) {
       series.push({ kind: 'approach then carry', first: index, last: index + 1 });
     }
     assert.ok(!result.state.dead, 'SS05 lost the actor during the carry');
-    previous = { revision: ticket.decisionRevision, kind: phase?.kind, moves };
+    previous = { revision: ticket.decisionRevision, kind: phase?.kind, moves, supports };
     state = result.state;
   }
   assert.ok(state.complete, 'SS05 executed tickets do not reach the exit');
@@ -292,6 +323,10 @@ function measuredCarrySeries(level, tickets) {
   }
   if (level === 6) {
     assert.ok(separatedWeight && openedWithWeight && crossedOpenGate, 'SS05 L6 must separate the weight, activate the control group and reflect through');
+    return series;
+  }
+  if (level === 7) {
+    assert.ok(crossings >= 2 && repositioned >= 2, 'SS05 L7 must reposition and cross both supports');
     return series;
   }
   if (level === 3 || level === 4) {
@@ -311,7 +346,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 6 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 7 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -421,7 +456,7 @@ export function checkRun(run) {
     }
     if (code === 'SS05') {
       // The earlier run used 46 isolated actions on L1 and first moved a weight on L2 at action 119.
-      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24], [38, 20]][row.level - 1];
+      const [cap, minimumContinued] = [[42, 18], [75, 50], [55, 42], [96, 75], [40, 24], [38, 20], [90, 40]][row.level - 1];
       assert.ok(issued.length <= cap && continued >= minimumContinued, 'SS05 lost its verified carry series');
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
@@ -459,7 +494,7 @@ function main() {
       ['la-force-rouge', 'SS02', '6', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
-      ['local-carry', 'SS05', '6', '155'],
+      ['local-carry', 'SS05', '7', '155'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
