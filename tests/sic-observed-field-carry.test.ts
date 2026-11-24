@@ -58,3 +58,12 @@ for (const mirrored of [false, true]) test(`carry learns once and reaches the fi
     } else assert.equal(firstCarry, 1);
   }
 });
+
+test('carry abstains when two observed fields give equally strong controller matches', () => {
+  const world = compileLevel(SS05_LEVELS[0]!);
+  const frame = renderWorld(world, initialState(world));
+  const inputs = [1, 2, 3, 4, 5].map(id => ({ action_ref: `ACTION${id}`, data: {} }));
+  assert.ok(planFieldCarry(undefined, frame, inputs, 'unique', 16));
+  const ambiguous = frame.map(row => [...row, ...row]);
+  assert.equal(planFieldCarry(undefined, ambiguous, inputs, 'ambiguous', 16), undefined);
+});
