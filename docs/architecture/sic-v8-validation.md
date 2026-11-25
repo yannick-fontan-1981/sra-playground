@@ -2768,3 +2768,9 @@ Avec les rôles observés au niveau 1 et une limite de 80 commandes, la projecti
 La marge habituelle de 20 % sur ces 84 commandes donne un plafond de 101. Avec ce plafond et une limite temporelle de diagnostic de 81 s au niveau 8, le rejeu SIC depuis le niveau 1 gagne les huit niveaux en 40, 27, 39, 80, 126, 96, 54 et 84 commandes. Le dernier niveau prend 46,4 s, réconciliation comprise. Sa première décision réemploie les commandes et les rôles observés pour planifier des appuis, des postures de poussée et des poids distincts.
 
 Le viewer local affiche la victoire après les mêmes 546 commandes et huit niveaux. Le contrôle de continuité couvre maintenant les huit niveaux. Au niveau 8, 68 commandes continuent une décision déjà ouverte, huit paires de poussées consécutives concernent la même pierre et la plus longue série atteint 16 commandes.
+
+### Réutiliser les encodages canoniques au bon niveau
+
+Le cache conserve l’encodage des racines et des sous-arbres validés d’au moins 24 valeurs JSON. Les petits sous-arbres sont encodés lors de leur lecture. Le cache applique les mêmes limites de taille et de profondeur et renvoie les mêmes octets canoniques.
+
+Dans deux paires de rejeux locaux avec profilage, le temps CPU échantillonné passe de 57,7 à 53,1 s sur AS66 niveaux 1 à 4 et de 40,4 à 36,1 s sur GORI jusqu’à son arrêt au niveau 5. Les empreintes des commandes et de leurs retours restent identiques dans chaque paire. Les 52 contrôles ciblés couvrent le cache canonique, les graphes d’état et les transactions de connaissance.
