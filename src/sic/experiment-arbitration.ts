@@ -36,7 +36,8 @@ export function witnessedObjective(x: Experiment): boolean {
   if (x.cue) return x.cue.blocked.length>=2;
   if (x.localCapacity && x.localCapacity.stage!=='control')return true;
   if (x.terminalContact?.preparationKey) return !!x.terminalContact.blockedGoal;
-  if ((x.terminalContact && x.phase!=='testScoringContact') || x.witnessedPreview?.basis === 'observed_in_previous_level') return true;
+  if ((x.terminalContact?.distance === 1 && x.terminalContact.currentMotionWitness && x.phase !== 'testScoringContact')
+    || x.witnessedPreview?.basis === 'observed_in_previous_level') return true;
   const trial = x.mechanism;
   return !!trial?.plan.arrival && (trial.cause.tag === 'projected_access_limit' || trial.index > 0);
 }

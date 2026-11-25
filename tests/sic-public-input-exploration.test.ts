@@ -16,7 +16,22 @@ import { dockingDistance, findPanelDock, measureAlignedTool, measurePanelTranspo
   panelTransportPose, unchangedPanelTransport } from '../src/sic/panel-mechanism-probe.ts';
 import { measureComponentTranslations, motionIntoFootprint, type DirectionalMotion } from '../src/sic/observed-translation.ts';
 import { chooseTravelTrial, observeTravel } from '../src/sic/observed-travel-frontier.ts';
+import { acquireInstructionReturn } from '../src/sic/symbol-contribution.ts';
 import type { NativePublicObservation } from '../src/logos-engine/v6-native-types.ts';
+
+test('an optional diagram extraction preserves prior evidence when its component budget is exhausted', async () => {
+  for (const palette of [[2, 5], [11, 6]]) {
+    const first = Array.from({ length: 64 }, (_, y) => Array.from({ length: 64 }, (_, x) => palette[(x + y) % 2]!));
+    const second = first.map(row => [...row]);
+    second[7]![13] = 9;
+    const packet = { level: 2, levels_completed: 1, state: 'LIVE', available_action_refs: ['ACTION6'] };
+    const before = await measureNativeObservation({ ...packet, frame_rows: first, frame_hash: 'fragmented' }, 1);
+    const after = await measureNativeObservation({ ...packet, frame_rows: second, frame_hash: 'changed' }, 2);
+    const prior = { epoch: 1, appearance: palette[0]!, examples: {} };
+    const clicked = { action_ref: 'ACTION6', data: { x: 13, y: 7 } };
+    assert.equal(acquireInstructionReturn(prior, before, after, clicked, first, second), prior);
+  }
+});
 
 test('a measured tile displacement gives untried directions a turn after a blocked contact', () => {
   const board = (at: number, alternate: boolean) => {
