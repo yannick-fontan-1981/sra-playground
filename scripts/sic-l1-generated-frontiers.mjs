@@ -1,6 +1,6 @@
 import { geometricComponents } from '../src/logos-engine/v6-native-observer.ts';
 import { spotPair } from '../src/sic/observed-actor-composition.ts';
-import { observedSelectionHypotheses, selectionReturnFacts, witnessedSelection } from '../src/sic/observed-role-selection.ts';
+import { observedSelectionHypotheses, selectionReturnFacts, witnessedSelection, selectionNeedsWitness } from '../src/sic/observed-role-selection.ts';
 import { newGame, targetGames } from './sic-l1-actor-frontier.mjs';
 
 const copy = rows => rows.map(row => row.slice());
@@ -196,8 +196,9 @@ export function assessSituation(anchors, spec, rule = null) {
   const strict = spotPair(observed,scene.before);
   const old = !!strict && strict.inks.includes(scene.ink) && strict.inks.includes(scene.active);
   const proposed = observedSelectionHypotheses(observed,scene.before,backing(scene.before));
+  if (!selectionNeedsWitness(strict, proposed)) return { expected:true, baseline:old, candidate:old, clicks:0, hypotheses:proposed.length };
   const index = proposed.findIndex(h => key(h.target) === key(scene.target) && h.peer === scene.ink && h.active === scene.active);
-  if (spec.task === 'recognition') return { expected:true, baseline:old, candidate:old || index >= 0, hypotheses:proposed.length };
+  if (spec.task === 'recognition') return { expected:true, baseline:old, candidate:index >= 0, hypotheses:proposed.length };
   const choices = proposed.map(hypothesis => ({
     mixed: Number(hypothesis.mixed),
     distance: Math.abs(hypothesis.current[0] - hypothesis.target[0]) + Math.abs(hypothesis.current[1] - hypothesis.target[1]),
@@ -224,5 +225,5 @@ export function assessSituation(anchors, spec, rule = null) {
       break;
     }
   }
-  return { expected:true, baseline:old, candidate:old || confirmed, clicks, hypotheses:proposed.length, choices };
+  return { expected:true, baseline:old, candidate:confirmed, clicks, hypotheses:proposed.length, choices };
 }

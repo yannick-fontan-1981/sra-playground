@@ -5,7 +5,7 @@ import { findRelayPlan, relayControlOccupied, relayControlWeighted, relayGateClo
 import { planHydraulicRelay } from './observed-hydraulic-relay.ts';
 import { planPlatformRelay, platformAvailable, type PlatformPose, type PlatformRelayModel, type PlatformStep } from './observed-platform-relay.ts';
 import { sicNeedId } from './need-identity.ts';
-import { maskedRole, observedSelectionHypotheses, witnessedSelection, type SelectionHypothesis } from './observed-role-selection.ts';
+import { maskedRole, observedSelectionHypotheses, witnessedSelection, selectionNeedsWitness, type SelectionHypothesis } from './observed-role-selection.ts';
 
 export const observedActorCompositionId = 'sic_observed_actor_composition';
 
@@ -1556,22 +1556,26 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if(h.trigger&&!h.available.includes(h.trigger))delete h.trigger;
       if(!h.trigger&&h.shape&&h.transfer?.trigger&&compatibleRoles(o,h.transfer)
         && h.available.includes(h.transfer.trigger))h.trigger=h.transfer.trigger;
-      let shape=h.shape??spotPair(o,rows)??rebindKnownActors(o,rows,h.transfer);
+      let shape = h.shape;
       if (!shape) {
-        if (remaining < 1) return null;
-        const probe = observedSelectionHypotheses(o, rows, backingColor(rows))
-          .find(candidate => !h.roleSelectionTests?.includes(candidate.id));
-        if (!probe) return null;
-        const { target: [x, y], current: [cx, cy], shape: geometry } = probe;
-        const pad = (geometry.pitch - 1) / 2;
-        const action = { action_ref: 'ACTION6', data: { x: x + pad, y: y + pad } };
-        const from = key([(cx - geometry.phase[0]) / geometry.pitch, (cy - geometry.phase[1]) / geometry.pitch]);
-        const evidence = [o.observation_ref];
-        const point_binding = await ObservedInputDomain.makeLocusWitness(o, rows, [x + pad, y + pad],
-          { reason: 'Test whether the selection marker transfers between matching bodies', evidence });
-        const step = { action, actor: probe.active, from, select: probe.peer, roleProbe: probe, point_binding };
-        return proposed(o, { ink: probe.active, kind: 'test_selection_between_matching_bodies', steps: [step], score: 160 },
-          [step], evidence);
+        const strict = spotPair(o, rows);
+        const hypotheses = observedSelectionHypotheses(o, rows, strict?.backing ?? backingColor(rows));
+        shape = (selectionNeedsWitness(strict, hypotheses) ? undefined : strict) ?? rebindKnownActors(o, rows, h.transfer);
+        if (!shape) {
+          if (remaining < 1) return null;
+          const probe = hypotheses.find(candidate => !h.roleSelectionTests?.includes(candidate.id));
+          if (!probe) return null;
+          const { target: [x, y], current: [cx, cy], shape: geometry } = probe;
+          const pad = (geometry.pitch - 1) / 2;
+          const action = { action_ref: 'ACTION6', data: { x: x + pad, y: y + pad } };
+          const from = key([(cx - geometry.phase[0]) / geometry.pitch, (cy - geometry.phase[1]) / geometry.pitch]);
+          const evidence = [o.observation_ref];
+          const point_binding = await ObservedInputDomain.makeLocusWitness(o, rows, [x + pad, y + pad],
+            { reason: 'Test whether the selection marker transfers between matching bodies', evidence });
+          const step = { action, actor: probe.active, from, select: probe.peer, roleProbe: probe, point_binding };
+          return proposed(o, { ink: probe.active, kind: 'test_selection_between_matching_bodies', steps: [step], score: 160 },
+            [step], evidence);
+        }
       }
       if(shape.inks.length===1&&h.transfer?.goalColor!==undefined){
         const ink=o.palette?o.palette.indexOf(h.transfer.goalColor):Number(h.transfer.goalColor);

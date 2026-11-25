@@ -16,10 +16,11 @@ export function maskedRole(pixels: readonly number[], mask: readonly number[], f
   const ink = inside.find(value => inside.filter(other => other === value).length >= inside.length - 1);
   if (ink === undefined || shades.has(ink) || ink === floor || (floor !== undefined && inside.includes(floor))) return;
   const marker = inside.findIndex(value => value !== ink);
-  return { ink, marker: marker < 0 ? null : mask[marker]!, background: [...shades] };
+  const dominantBackground = [...shades].find(color => outside.filter(value => value === color).length * 4 >= outside.length * 3);
+  return { ink, marker: marker < 0 ? null : mask[marker]!, background: [...shades], dominantBackground };
 }
 
-function nearbyFloor(rows: NativeRows, [x, y]: NativePoint, pitch: number, backing: number): number | undefined {
+function nearbyFloor(rows: NativeRows, [x, y]: NativePoint, pitch: number, backing: number, visibleBackground?: number): number | undefined {
   const counts = new Map<number, number>();
   for (const [dx, dy] of [[-1, 0], [1, 0], [0, -1], [0, 1]] as const) {
     const at: NativePoint = [x + dx * pitch, y + dy * pitch];
@@ -29,7 +30,8 @@ function nearbyFloor(rows: NativeRows, [x, y]: NativePoint, pitch: number, backi
     if (ink !== backing && pixels.every(value => value === ink)) counts.set(ink, (counts.get(ink) ?? 0) + 1);
   }
   const [first, next] = [...counts].sort((left, right) => right[1] - left[1]);
-  return first && first[1] >= 2 && first[1] > (next?.[1] ?? 0) ? first[0] : undefined;
+  if (first && first[1] >= 2 && first[1] > (next?.[1] ?? 0)) return first[0];
+  return visibleBackground !== undefined && counts.get(visibleBackground) ? visibleBackground : undefined;
 }
 
 export function observedSelectionHypotheses(observation: NativeObservation, rows: NativeRows, backing: number): SelectionHypothesis[] {
@@ -58,7 +60,7 @@ export function observedSelectionHypotheses(observation: NativeObservation, rows
       && ((glyph.marker % pitch === center) !== (Math.floor(glyph.marker / pitch) === center)));
     if (selected.length !== 1) continue;
     const active = selected[0]!;
-    const floor = active.background.length === 1 ? active.background[0] : nearbyFloor(rows, active.at, pitch, backing);
+    const floor = active.background.length === 1 ? active.background[0] : nearbyFloor(rows, active.at, pitch, backing, active.dominantBackground);
     if (floor === undefined || floor === active.ink) continue;
     const peers = glyphs.filter(glyph => glyph.ink !== active.ink && glyph.marker === null
       && (glyph.background.includes(floor) || glyph.background.length === 2));
@@ -71,6 +73,13 @@ export function observedSelectionHypotheses(observation: NativeObservation, rows
     }
   }
   return out.sort((left, right) => Number(right.mixed) - Number(left.mixed));
+}
+
+export function selectionNeedsWitness(strict: SelectionShape | undefined, hypotheses: readonly SelectionHypothesis[]): boolean {
+  return !strict || hypotheses.some(({ shape, active, peer }) =>
+    shape.pitch === strict.pitch && shape.phase.every((coordinate,index)=>coordinate === strict.phase[index])
+      && shape.mask.length === strict.mask.length && shape.mask.every((pixel,index)=>pixel === strict.mask[index])
+      && strict.inks.includes(active) && !strict.inks.includes(peer));
 }
 
 export function selectionReturnFacts(hypothesis: SelectionHypothesis, before: NativeRows, after: NativeRows) {
