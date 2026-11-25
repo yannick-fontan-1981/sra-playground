@@ -2752,3 +2752,7 @@ La disposition peut aussi justifier la priorité du premier essai. Une fois le r
 ### Extraction commune des composantes
 
 Les projections de perception et de navigation partagent l’extraction des composantes contiguës. Le calcul de la maille reste dans la projection qui en a besoin. Les formes réutilisent leur représentation compacte en paires d’entiers pour l’égalité et l’empreinte. Le même test sur 70 images synthétiques et deux connectivités conserve l’empreinte de toutes les composantes. Les 116 cas des tests de perception et de navigation vérifient les structures et les identifiants historiques.
+
+### Mesurer la résolution avant et après le score public
+
+Le superviseur garde le plafond de résolution associé au niveau jusqu’au score renvoyé par le jeu. Après ce score, il mesure la réconciliation et lui accorde un délai séparé pouvant aller jusqu’à cinq secondes. Le rejeu refuse une commande reçue avant le prochain niveau déclaré. Si le superviseur arrête le processus, le rapport garde le score déjà obtenu et un résumé borné des commandes appliquées au dernier niveau. ELAS franchit la transition du niveau 3 lors du nouveau rejeu et gagne le niveau 4. M0R0 conserve la victoire du niveau 1 mais sa réconciliation atteint encore son propre plafond.

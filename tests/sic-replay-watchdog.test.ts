@@ -16,7 +16,8 @@ test('the supervisor stops a blocked level and retains the completed levels and 
       process.send({ kind: 'command-applied', sicAuthorized: true });
       process.send({ kind: 'level-finished', level: { level: 1, won: true, actions: 1, budget: firstBudget } });
       process.send({ kind: 'level-started', level: 2, target: 2, budget: secondBudget });
-      process.send({ kind: 'command-applied', sicAuthorized: true }, () => { for (;;) {} });
+      process.send({ kind: 'command-applied', sicAuthorized: true,
+        command: { id: 2, family: 'measured_route', strategy: 'approach' } }, () => { for (;;) {} });
     `);
     const result = await superviseSicReplay(script, [], 'FIXTURE');
     assert.equal(result.reason, 'level_wall_time_budget');
@@ -26,6 +27,8 @@ test('the supervisor stops a blocked level and retains the completed levels and 
     assert.equal(result.authority, 2);
     assert.deepEqual(result.levelStats.map(level => [level.level, level.won, level.actions]), [[1, true, 1], [2, false, 1]]);
     assert.equal(result.levelStats[1].budget.activeTimeMs, 100);
+    assert.deepEqual(result.recentCommands.map(({ id, family, strategy, index }) => [id, family, strategy, index]),
+      [[2, 'measured_route', 'approach', 2]]);
   } finally {
     await unlink(script);
     await rmdir(directory);
@@ -47,6 +50,45 @@ test('the watchdog retains the public score when native reconciliation misses th
       assert.equal(result.levels, 1);
       assert.equal(result.levelStats[0].won, true);
     }
+  } finally {
+    await unlink(script);
+    await rmdir(directory);
+  }
+});
+
+test('post-score settlement is bounded independently and admits no further command', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'sic-watchdog-transition-'));
+  const script = join(directory, 'transition.mjs');
+  try {
+    await writeFile(script, `
+      const budget = { actions: 5, activeTimeMs: 60 };
+      const send = (message) => new Promise(resolve => process.send(message, resolve));
+      await send({ kind: 'level-started', level: 1, target: 2, budget });
+      await send({ kind: 'command-applied', sicAuthorized: true, levelsCompleted: 1 });
+      if (process.argv[2] === 'extra') {
+        await send({ kind: 'command-applied', sicAuthorized: true, levelsCompleted: 2 });
+      } else {
+        await new Promise(resolve => setTimeout(resolve, 120));
+        await send({ kind: 'level-finished', level: { level: 1, won: true, actions: 1, budget } });
+        await send({ kind: 'level-started', level: 2, target: 2, budget });
+        await send({ kind: 'command-applied', sicAuthorized: true, levelsCompleted: 2 });
+        await send({ kind: 'level-finished', level: { level: 2, won: true, actions: 1, budget } });
+        await send({ kind: 'result', result: { levels: 2, reason: 'target_levels_completed', actions: 2, authority: 2 } });
+      }
+      process.disconnect();
+    `);
+    const result = await superviseSicReplay(script, [], 'FIXTURE');
+    assert.equal(result.reason, 'target_levels_completed');
+    assert.equal(result.actions, 2);
+    assert.equal(result.levelStats[0].won, true);
+    assert.ok(result.levelStats[0].scoredMs < 60);
+    assert.ok(result.levelStats[0].settlementMs >= 100);
+
+    const extra = await superviseSicReplay(script, ['extra'], 'FIXTURE');
+    assert.equal(extra.reason, 'command_outside_active_level');
+    assert.equal(extra.status, 'harness_error');
+    assert.equal(extra.levels, 1);
+    assert.equal(extra.levelStats[0].actions, 1);
   } finally {
     await unlink(script);
     await rmdir(directory);

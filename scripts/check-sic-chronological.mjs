@@ -67,7 +67,8 @@ async function run(code,requestedTarget,parallelWorkers) {
       first??=issued-start;
       const previous=board; board=await game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);
-      process.send({ kind:'command-applied', sicAuthorized:plan!==undefined && mode==='sic', levelsCompleted:board.levelsCompleted });
+      process.send({ kind:'command-applied', sicAuthorized:plan!==undefined && mode==='sic', levelsCompleted:board.levelsCompleted,
+        command: { id:action.id, family:plan?.family??null, strategy:plan?.strategy??null } });
       const family=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.family??'unbound'; usage.set(family,(usage.get(family)??0)+1); const strategy=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.strategy??'unbound'; decisions.set(strategy,(decisions.get(strategy)??0)+1);
       gameMs+=executionMs;
       trajectory.update(JSON.stringify([action,board.frame,board.frames,board.level,board.levelsCompleted,board.state]));
