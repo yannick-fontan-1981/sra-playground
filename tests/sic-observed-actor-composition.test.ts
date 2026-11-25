@@ -3,6 +3,7 @@ import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
 import { createSs06Backend } from '../src/games/sinking-star-ss06.ts';
 import { createObservedActorComposition } from '../src/sic/observed-actor-composition.ts';
+import { sicObservedMotionCycle } from '../src/logos-engine/v6-native-types.ts';
 
 type Point = readonly [number, number];
 const same = (a: Point,b: Point) => a[0]===b[0] && a[1]===b[1];
@@ -119,6 +120,37 @@ const permuted: readonly [string,Point][] = [
   ['ACTION3',[0,-1]],['ACTION1',[0,1]],['ACTION5',[-1,0]],['ACTION2',[1,0]],
 ];
 
+for(const fixture of [
+  { pitch:3, inks:[6,14] as const, motors:directions, loop:['ACTION1','ACTION2'], across:'ACTION4' },
+  { pitch:5, inks:[11,9] as const, motors:permuted, loop:['ACTION3','ACTION1'], across:'ACTION2' },
+]) test('recovers a repeated displacement with actor pitch '+fixture.pitch,async()=>{
+  const game=habitat(fixture.pitch,fixture.inks,fixture.motors,'activation',{pressure:[3,2]});
+  const family=createObservedActorComposition();
+  const entry=await game.observed();
+  await family.propose(entry.observation,entry.packet.frame_rows,[],40);
+  async function apply(action_ref:string){
+    const before=await game.observed(),command={action_ref,data:{}};
+    game.perform(command);
+    const after=await game.observed();
+    await family.observePublicOutcome!(before.observation,after.observation,command,before.packet.frame_rows,after.packet.frame_rows);
+    return family.requestedStopReason!(after.observation);
+  }
+  await apply(fixture.loop[0]!);
+  await apply(fixture.loop[0]!);
+  for(let n=0;n<7;n++)assert.equal(await apply(fixture.loop[0]!),null);
+  await apply(fixture.loop[1]!);
+  await apply(fixture.across);
+  for(let n=0;n<5;n++)assert.equal(await apply(fixture.loop[n%2]!),null);
+  assert.equal(await apply(fixture.loop[1]!),sicObservedMotionCycle);
+  const stopped=await game.observed();
+  const recovery=family.stateAfterLevelReset!(entry.observation,entry.packet.frame_rows,undefined,sicObservedMotionCycle);
+  assert.ok(recovery);
+  assert.equal(family.requestedStopReason!(stopped.observation),sicObservedMotionCycle);
+  family.restore(recovery);
+  await family.propose(stopped.observation,stopped.packet.frame_rows,[],40);
+  for(let n=0;n<6;n++)assert.equal(await apply(fixture.loop[n%2]!),null);
+});
+
 test('distinguishes a pushing role from a withdrawal interaction on a differently scaled board', async () => {
   const result=await study(habitat(5,[11,9],permuted,'withdrawal'),9);
   assert.ok(result.state.roles[11]?.capacity>=1);
@@ -174,7 +206,7 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   const game = createSs06Backend();
   const family = createObservedActorComposition();
   let board = await game.dispatch({type:'load',code:'SS06',level:1});
-  let revision=0, firstSecondLevelOffer='', joint=false, chain=false, pressure=false, extension=false;
+  let revision=0, firstSecondLevelOffer='', joint=false, chain=false, pressure=false, extension=false, sharedCircuit=false;
   const show = async () => {
     let frame=board.frame.map(row=>row.map(value=>(value+presentation.colors)%16));
     if(presentation.flipX)frame=frame.map(row=>row.reverse());
@@ -183,9 +215,9 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       levels_completed:board.levelsCompleted,state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'shifted-campaign')};
   };
-  while(board.level<=4 && revision<285){
+  while(board.level<=5 && revision<320){
     const {packet,observation}=await show();
-    const proposal=await family.propose(observation,packet.frame_rows,[],285-revision);
+    const proposal=await family.propose(observation,packet.frame_rows,[],320-revision);
     assert.ok(proposal,'Missing proposal after '+revision+' actions, level '+board.level);
     if(board.level===2) {
       if (!firstSecondLevelOffer) firstSecondLevelOffer=proposal.offer.kind;
@@ -198,6 +230,10 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       pressure ||= proposal.offer.kind==='test_reachable_pressure_composition';
     }
     if(board.level===4)extension ||= proposal.offer.kind==='test_extended_chain_capacity';
+    if(board.level===5){
+      assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
+      sharedCircuit ||= proposal.offer.kind==='execute_joint_transport_through_observed_open_gates';
+    }
     let issued=0;
     for(const [index,command] of proposal.actions.entries()){
       const first=await show();
@@ -217,8 +253,8 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   }
   assert.equal(firstSecondLevelOffer,'prepare_transfer_by_moving_reflector');
   assert.ok(joint);
-  assert.equal(board.levelsCompleted,4);
-  assert.ok(chain&&pressure&&extension);
+  assert.equal(board.levelsCompleted,5);
+  assert.ok(chain&&pressure&&extension&&sharedCircuit);
 });
 
 test('tests an accessible pressure composition even with no recognized destinations', async () => {

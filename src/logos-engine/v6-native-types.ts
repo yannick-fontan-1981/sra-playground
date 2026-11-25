@@ -190,9 +190,10 @@ export const sicObservedCoverageDeadlock = 'sic_observed_coverage_deadlock';
 export const sicObservedWeightShortage = 'sic_observed_weight_shortage';
 export const sicObservedTransportDeadlock = 'sic_observed_transport_deadlock';
 export const sicObservedGameOver = 'sic_observed_game_over';
+export const sicObservedMotionCycle = 'sic_observed_motion_cycle';
 export const isSicLevelRecovery = (reason: string | null) =>
   reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage || reason === sicObservedTransportDeadlock
-  || reason === sicObservedGameOver;
+  || reason === sicObservedGameOver || reason === sicObservedMotionCycle;
 
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;

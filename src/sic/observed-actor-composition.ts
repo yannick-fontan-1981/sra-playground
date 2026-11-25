@@ -1,5 +1,6 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { sicObservedMotionCycle } from '../logos-engine/v6-native-types.ts';
 import { findRelayPlan, type RelayModel, type RelayState, type RelayStep } from './observed-relay-plan.ts';
 import { sicNeedId } from './need-identity.ts';
 
@@ -20,11 +21,16 @@ type History = {
   lastPush?: { ink: number; direction: string; object: Cell };
   obstruction?: { ink: number; stance: Cell; object: Cell };
   projectionInk?: number; relayField?: RelayField; relay?: RelayStep[]; relayChecked: string[]; relayLoads?: number[]; seenChain?: boolean; seenPlate?: boolean;
+  motion?: { last: string; visits: string[]; cycle?: string[] };
+  recoveredCycles?: string[][];
+  triedPlates?: Cell[];
+  cargoPattern?: string;
 };
 type Tile = { pixels: number[]; uniform: boolean; passable: boolean; object: boolean; plate: boolean;
   mirror: Point[] | null; preview: boolean; gate: {accent:number;open:boolean}|null; plateAccent: number|null };
 type Scene = { actors: Actor[]; active: Actor; tiles: Map<Cell, Tile>; goals: Cell[]; plates: Cell[] };
-type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; relay?: RelayStep; expectedActors?: {ink:number;from:Cell;to:Cell}[] };
+type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; relay?: RelayStep; expectedActors?: {ink:number;from:Cell;to:Cell}[];
+  loads?: { from: Cell[]; to: Cell[]; support?: Cell }; };
 type Offer = { ink: number; steps: Step[]; kind: string; score: number; test?: string; target?: Cell };
 type Proposal = ReturnType<typeof proposed>;
 type Path = { cell: Cell; route: Step[] };
@@ -40,9 +46,43 @@ const distance = (a: Cell, b: Cell) => {
   return Math.abs(x-u)+Math.abs(y-v);
 };
 const tileKey = (tile: Tile | undefined) => tile?.pixels.join(',') ?? '';
+const inset = (pixels: number[],pitch:number) => pixels.filter((_,i)=>i%pitch===Math.floor(pitch/2)||Math.floor(i/pitch)===Math.floor(pitch/2)).join(',');
 const color = (o: NativeObservation, ink: number) => o.palette?.[ink] ?? String(ink);
 const command = (action_ref: string): NativeCommand => ({ action_ref, data: {} });
 const isDirectional = (direction: Direction, name: string) => direction.action === name;
+
+function repeatedShortMotion(visits: readonly string[]): readonly string[] | undefined {
+  for(let period=2;period<=6;period++){
+    const end=visits.length, start=end-period*3-1;
+    if(start<0)continue;
+    const lap=visits.slice(start,start+period);
+    if(new Set(lap).size>1&&visits.slice(start+period).every((pose,i)=>pose===lap[i%period]))return lap;
+  }
+}
+
+function keepMotionEvidence(h: History,b: NativeObservation,a: NativeObservation,before: Scene,after: Scene) {
+  if(b.level_epoch!==a.level_epoch||a.state!=='NOT_FINISHED')return;
+  const eligible=after.actors.every(part=>{
+    const from=before.actors.find(peer=>peer.ink===part.ink)!;
+    return distance(from.cell,part.cell)<=1 && before.goals.includes(from.cell)===after.goals.includes(part.cell);
+  });
+  const covered=new Set([...before.actors,...after.actors].map(part=>part.cell));
+  const change=[...before.tiles].some(([cell,prior])=>{
+    if(covered.has(cell))return false;
+    const tile=after.tiles.get(cell)!;
+    return prior.object!==tile.object&&!prior.preview&&!tile.preview
+      || Boolean(prior.mirror)!==Boolean(tile.mirror)||prior.gate?.open!==tile.gate?.open
+      || !prior.preview&&!tile.preview&&tileKey(prior)!==tileKey(tile);
+  });
+  const pose=(scene:Scene)=>scene.actors.map(part=>[part.ink,part.cell]).sort((x,y)=>Number(x[0])-Number(y[0])).join('|');
+  const from=pose(before),to=pose(after);
+  if(!eligible||change){h.motion={last:a.observation_ref,visits:[to]};return;}
+  const visits=h.motion?.last===b.observation_ref?h.motion.visits:[from];
+  if(visits.at(-1)!==to)visits.push(to);
+  const window=visits.slice(-19), cycle=repeatedShortMotion(window);
+  const signature=cycle&&[...new Set(cycle)].sort();
+  h.motion={last:a.observation_ref,visits:window,...(signature?{cycle:signature}:{})};
+}
 
 function supported(scene: Scene, h: History, cell: Cell) {
   const bound=h.supports[cell], tile=scene.tiles.get(cell);
@@ -167,6 +207,11 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
   const candidateGoals=outlines.length?outlines:repeated.filter(cells=>distance(cells[0]!,cells[1]!)>1);
   const goals=history.goals.length ? history.goals : candidateGoals.length===1 ? candidateGoals[0]! : [];
   const plates=[...new Set([...history.plates,...[...tiles].filter(([,tile])=>tile.plate).map(([cell])=>cell)])];
+  if(history.cargoPattern)for(const cell of plates){
+    const tile=tiles.get(cell)!;
+    if(!tile.plate&&!tile.preview&&!tile.mirror&&!actors.some(actor=>actor.cell===cell)
+      && inset(tile.pixels,pitch)===history.cargoPattern)tile.object=true;
+  }
   return {actors,active:active[0]!,tiles,goals,plates};
 }
 
@@ -361,6 +406,158 @@ function pairedTransfer(scene: Scene, h: History, o: NativeObservation): Offer |
 }
 
 
+function loadCells(scene: Scene): Cell[] {
+  return [...scene.tiles].filter(([,tile])=>tile.object).map(([cell])=>cell).sort();
+}
+
+function matchesSupport(scene:Scene,h:History,o:NativeObservation,cell:Cell) {
+  const pattern=h.transfer?.support?.pattern, tile=scene.tiles.get(cell);
+  return !!pattern&&!!tile&&pattern.length===tile.pixels.length
+    &&tile.pixels.every((ink,i)=>color(o,ink)===pattern[i]);
+}
+
+function pressureHeld(scene: Scene, cell: Cell) {
+  return scene.actors.some(actor=>actor.cell===cell)||portable(scene.tiles.get(cell));
+}
+
+type PressureOutcome = 'actor'|'load'|'either'|'release';
+const pressureStepKey=(actor:number,from:Cell,action:string,loads:Cell[],tile:Tile|undefined)=>
+  JSON.stringify(['pressure_step',actor,from,action,loads,tileKey(tile)]);
+
+function pressureRoute(scene:Scene,h:History,o:NativeObservation,actor:Actor,target:Cell,
+  outcome:PressureOutcome,reserve:readonly Cell[],clear:readonly Cell[]):Step[] | undefined {
+  const original=loadCells(scene), peers=new Set(scene.actors.filter(peer=>peer!==actor).map(peer=>peer.cell));
+  const directions=observedDirections(h,actor.ink), capacity=h.roles[actor.ink]?.capacity??0;
+  const reachable=(cell:Cell,foundations:readonly Cell[])=>{
+    const tile=scene.tiles.get(cell);
+    return !peers.has(cell) && !tile?.mirror && (!tile?.gate||tile.gate.open)
+      && (tile?.passable||original.includes(cell)||scene.goals.includes(cell)||scene.plates.includes(cell)
+        ||supported(scene,h,cell)||foundations.includes(cell)||cell===actor.cell);
+  };
+  const medium=(cell:Cell)=>{
+    const tile=scene.tiles.get(cell);
+    return tile?.uniform && color(o,tile.pixels[0]!)===h.transfer?.support?.medium;
+  };
+  const solutions=(allowLoss:boolean)=>{
+    const start={at:actor.cell,loads:original,foundations:[] as Cell[],steps:[] as Step[]};
+    const queue=[start], known=new Set([JSON.stringify([start.at,start.loads,start.foundations])]);
+    for(const {at,loads,foundations,steps} of queue){
+      const occupiedByActor=at===target, occupiedByLoad=loads.includes(target);
+      const satisfied=outcome==='release'?!occupiedByActor&&!occupiedByLoad
+        :outcome!=='load'&&occupiedByActor||outcome!=='actor'&&occupiedByLoad;
+      if(steps.length&&satisfied&&clear.every(cell=>at!==cell&&!loads.includes(cell)&&!peers.has(cell)))return steps;
+      if(steps.length>=24||queue.length>=2500)continue;
+      for(const dir of directions){
+        const dest=next(at,dir.axis);
+        if(!reachable(dest,foundations))continue;
+        if(h.guarded.includes(pressureStepKey(actor.ink,at,dir.action,loads,scene.tiles.get(dest))))continue;
+        let shifted=loads;
+        let support:Cell|undefined;
+        if(loads.includes(dest)){
+          const row: Cell[]=[];
+          let end=dest;
+          while(loads.includes(end)&&row.length<=capacity){row.push(end);end=next(end,dir.axis);}
+          if(row.length>capacity||row.some(cell=>reserve.includes(cell))||peers.has(end))continue;
+          const sink=!reachable(end,foundations);
+          if(sink&&(!allowLoss||!medium(end)||loads.length<=reserve.length))continue;
+          if(sink)support=end;
+          shifted=loads.filter(cell=>!row.includes(cell));
+          shifted.push(...row.map(cell=>next(cell,dir.axis)).filter(cell=>!sink||cell!==end));
+          shifted.sort();
+        }
+        const nextFoundations=support?[...foundations,support].sort():foundations;
+        const signature=JSON.stringify([dest,shifted,nextFoundations]);
+        if(known.has(signature))continue;
+        known.add(signature);
+        const step:Step={action:command(dir.action),from:at,to:dest,actor:actor.ink,
+          loads:{from:loads,to:shifted,...(support?{support}:{})}};
+        queue.push({at:dest,loads:shifted,foundations:nextFoundations,steps:[...steps,step]});
+      }
+    }
+  };
+  return solutions(false)??solutions(true);
+}
+
+function linkedTransport(scene:Scene,h:History,o:NativeObservation):Offer|undefined{
+  if(!h.transfer?.gateReaction||!h.trigger||scene.goals.length!==scene.actors.length)return;
+  const mirrors=[...scene.tiles].filter(([,tile])=>tile.mirror);
+  if(mirrors.length<2)return;
+  const groups=new Map<number,Cell[]>();
+  for(const cell of scene.plates){
+    const accent=h.switches[cell];
+    if(accent===undefined)continue;
+    const group=groups.get(accent)??[];
+    group.push(cell);
+    groups.set(accent,group);
+  }
+  for(const [accent,plates] of groups){
+    const barriers=Object.entries(h.gates).filter(([,gate])=>gate.accent===accent).map(([cell])=>cell);
+    if(plates.length<scene.actors.length||barriers.length<scene.actors.length)continue;
+    const region=new Set(scene.goals);
+    for(const cell of region)for(const axis of cardinal){
+      const dest=next(cell,axis),tile=scene.tiles.get(dest);
+      if(!tile||region.has(dest)||barriers.includes(dest)||tile.mirror
+        || !(tile.passable||tile.gate||tile.object||supported(scene,h,dest)||scene.actors.some(actor=>actor.cell===dest)))continue;
+      region.add(dest);
+    }
+    if(scene.actors.every(actor=>region.has(actor.cell)))continue;
+    const onExitSide=(actor:Actor)=>region.has(actor.cell);
+    const choices=mirrors.map(([mirror,tile])=>plates.flatMap(stance=>[...region].flatMap(destination=>{
+      const ray=rays(mirror,stance,destination,tile.mirror!);
+      if(!ray||!ray.some(cell=>barriers.includes(cell))||ray.some(cell=>background(scene.tiles.get(cell),h.shape!)))return [];
+      return [{stance,destination,ray}];
+    })));
+    const pairs=choices.flatMap((one,i)=>choices.slice(i+1).flatMap(two=>
+      one.flatMap(a=>two.filter(b=>b.stance!==a.stance&&b.destination!==a.destination).map(b=>[a,b]))));
+    const offers:Offer[]=[];
+    const reserve=plates.filter(cell=>scene.tiles.get(cell)?.object);
+    const add=(actor:Actor,target:Cell,kind:string,score:number,outcome:PressureOutcome,clear:Cell[]=[]):boolean=>{
+      if(outcome==='release'&&!scene.tiles.get(target)?.object&&actor.cell!==target)return false;
+      const route=pressureRoute(scene,h,o,actor,target,outcome,reserve,clear);
+      if(!route?.length)return false;
+      // Close the prefix where a different circuit could have changed the topology.
+      const waypoints=new Set(scene.plates.filter(cell=>cell!==target));
+      const firstChange=route.findIndex(step=>waypoints.has(step.from)||waypoints.has(step.to!)
+        ||step.loads?.to.some(cell=>waypoints.has(cell)&&!step.loads!.from.includes(cell)));
+      const steps=firstChange<0?route:route.slice(0,firstChange+1);
+      offers.push(atOpportunity(scene,h,actor,steps,kind,score-route.length,JSON.stringify([kind,actor.ink,target]),target));
+      return true;
+    };
+    const joint=pairs.flatMap(pair=>[pair,[...pair].reverse()]).sort((a,b)=>
+      scene.actors.reduce((total,actor,i)=>total+distance(actor.cell,a[i]!.stance)-distance(actor.cell,b[i]!.stance),0))[0];
+    const spare=joint?plates.filter(cell=>!joint.some(stage=>stage.stance===cell)):plates;
+    for(const actor of scene.actors.filter(actor=>!onExitSide(actor))){
+      for(const cell of spare.filter(cell=>!pressureHeld(scene,cell))){
+        // With the alignment still occluded, commit only a nearby persistent weight.
+        if(joint||distance(actor.cell,cell)<=2)add(actor,cell,'place_weight_for_shared_gate',900,'load');
+      }
+      for(const cell of scene.plates.filter(cell=>!plates.includes(cell)&&!pressureHeld(scene,cell)&&!h.triedPlates?.includes(cell))){
+        add(actor,cell,'test_independent_pressure_before_transport',850,'either');
+      }
+    }
+    if(joint){
+      const auxiliaryGates=joint.flatMap(stage=>stage.ray).map(cell=>scene.tiles.get(cell)?.gate)
+        .filter(gate=>gate&&!gate.open&&gate.accent!==accent);
+      const release=[...new Set(auxiliaryGates.flatMap(gate=>groups.get(gate!.accent)??[]))].filter(cell=>pressureHeld(scene,cell));
+      const expectedActors=scene.actors.map((actor,i)=>({ink:actor.ink,from:joint[i]!.stance,to:joint[i]!.destination}));
+      if(expectedActors.every(effect=>scene.actors.some(actor=>actor.ink===effect.ink&&actor.cell===effect.from)
+          && scene.tiles.get(effect.to)?.preview)){
+        return {ink:scene.active.ink,steps:[{action:command(h.trigger),actor:scene.active.ink,from:scene.active.cell,expectedActors}],
+          kind:'execute_joint_transport_through_observed_open_gates',score:1100};
+      }
+      for(const [index,actor] of scene.actors.entries()){
+        if(onExitSide(actor)||actor.cell===joint[index]!.stance)continue;
+        const local=release.filter(cell=>pressureHeld(scene,cell)&&!scene.actors.some(peer=>peer!==actor&&peer.cell===cell)
+          && distance(cell,actor.cell)<distance(cell,scene.actors.find(peer=>peer!==actor)!.cell));
+        if(!add(actor,joint[index]!.stance,'prepare_actor_and_load_path_to_linked_control',800,'actor',local))
+          for(const cell of local)add(actor,cell,'release_auxiliary_control_blocking_transfer',750,'release');
+      }
+    }
+    const offer=offers.sort((a,b)=>b.score-a.score)[0];
+    if(offer)return offer;
+  }
+}
+
 function draft(scene: Scene, h: History, o: NativeObservation): Offer | undefined {
   const {active}=scene;
   const role = h.roles[active.ink];
@@ -432,6 +629,8 @@ function draft(scene: Scene, h: History, o: NativeObservation): Offer | undefine
         if(!target || aim(target)>=aim(cell) || !(scene.tiles.get(target)?.passable||supported(scene,h,target)||scene.goals.includes(target))) continue;
         const gain=aim(cell)-aim(target), rendered=scene.tiles.get(target)?.preview && cell===actor.cell;
         if (route.length && !rendered) {
+          const stalledStance=[actor.ink,cell].join(',');
+          if(h.recoveredCycles?.some(cycle=>cycle.some(pose=>pose.split('|').includes(stalledStance))))continue;
           add(route,'approach_a_visible_transfer_alignment',540+gain*3-route.length*4);
         } else if(rendered){
           for(const action of h.trigger?[h.trigger]:inputs.filter(name=>!h.directions.some(d=>isDirectional(d,name)))) {
@@ -667,6 +866,8 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       }
       h.goals=scene.goals;
       h.plates=scene.plates;
+      const cargo=[...scene.tiles.values()].find(tile=>tile.object&&!tile.gate);
+      if(!h.cargoPattern&&cargo)h.cargoPattern=inset(cargo.pixels,shape.pitch);
       for(const [cell,tile] of scene.tiles){
         if(tile.gate)h.gates[cell]=tile.gate;
         if(tile.plateAccent!==null)h.switches[cell]=tile.plateAccent;
@@ -683,7 +884,7 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const chain=h.relayField&&!h.seenChain?frontier.find(offer=>(offer.kind==='test_reachable_chain_composition'||offer.kind==='test_extended_chain_capacity')):undefined;
       const press=h.relayField&&!h.seenPlate?frontier.find(offer=>offer.kind==='test_reachable_pressure_composition'):undefined;
       const paired=scene.goals.length?pairedTransfer(scene,h,o):undefined;
-      const planned=chain??press??paired??await relayOffer(scene,h,remaining,execution);
+      const planned=chain??press??linkedTransport(scene,h,o)??paired??await relayOffer(scene,h,remaining,execution);
       const direct=planned?undefined:draft(scene,h,o);
       const offer=planned??(scene.goals.length&&direct&&direct.score>155?direct:frontier[0]??direct);
       if(!offer || remaining<1) return null;
@@ -702,7 +903,9 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const destination=step.contact??step.to??(step.tile&&observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)
         ?next(step.from,observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)!.axis):undefined);
       const admitted=!!scene && scene.active.ink===step.actor&&scene.active.cell===step.from
-        && (step.tile===undefined||!!destination&&tileKey(scene.tiles.get(destination))===step.tile);
+        && (step.tile===undefined||!!destination&&tileKey(scene.tiles.get(destination))===step.tile)
+        && (!step.loads||scene.tiles.get(step.to!)?.gate?.open!==false
+          && JSON.stringify(loadCells(scene))===JSON.stringify(step.loads.from));
       const modelBound=!step.relay||!!scene&&relayAgreement(scene,h,step.relay.before)
         && step.relay.projected.every(cell=>scene.tiles.get(decodeCell(cell))?.preview
           || step.relay!.before.actors.includes(cell)||step.relay!.before.loads.includes(cell));
@@ -713,7 +916,9 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const step=p.steps[index]!;
       const boundary=b.level_epoch!==a.level_epoch||b.levels_completed!==a.levels_completed;
       const scene=h.shape&&decode(second,h.shape,h);
-      const moved=scene?.active.cell===step.to && scene?.active.ink===step.actor;
+      const moved=scene?.active.cell===step.to && scene?.active.ink===step.actor
+        && (!step.loads||JSON.stringify(loadCells(scene))===JSON.stringify(step.loads.to)
+          && (!step.loads.support||matchesSupport(scene,h,a,step.loads.support)));
       const selected=scene?.active.ink===step.select && scene?.active.cell!==undefined;
       const joint=step.expectedActors?.every(actor=>scene?.actors.some(part=>part.ink===actor.ink&&part.cell===actor.to));
       const forecast=step.relay&&scene?relayAgreement(scene,h,step.relay.after):undefined;
@@ -725,8 +930,18 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if(!h.shape||b.level_epoch!==a.level_epoch)return {events:[]};
       const before=decode(first,h.shape,h), after=decode(second,h.shape,h), step=p.steps[index]!;
       if(!before||!after) return {events:[]};
+      keepMotionEvidence(h,b,a,before,after);
       const actor=before.active, observed=after.active;
       const role=h.roles[actor.ink]??={moved:false,contact:false,capacity:0,effects:{}};
+      for(const cell of after.plates){
+        if(pressureHeld(after,cell)&&!pressureHeld(before,cell)&&!h.triedPlates?.includes(cell))
+          (h.triedPlates??=[]).push(cell);
+      }
+      const foundation=step.loads?.support;
+      if(foundation&&matchesSupport(after,h,a,foundation))h.supports[foundation]=tileKey(after.tiles.get(foundation));
+      if(step.loads&&(observed.cell!==step.to||JSON.stringify(loadCells(after))!==JSON.stringify(step.loads.to)
+        || foundation&&!matchesSupport(after,h,a,foundation)))
+        h.guarded.push(pressureStepKey(actor.ink,actor.cell,action.action_ref,step.loads.from,before.tiles.get(step.to!)));
       if(step.select!==undefined){
         if(observed.ink===step.select && before.actors.every(part=>after.actors.some(end=>part.ink===end.ink&&part.cell===end.cell))){
           h.selections[observed.ink]=a.observation_ref;
@@ -825,6 +1040,22 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
         }
       }
       return {events:[]};
+    },
+    observePublicOutcome(b,a,_command,first,second) {
+      if(h.epoch!==b.level_epoch||!h.shape||b.level_epoch!==a.level_epoch)return;
+      const before=decode(first,h.shape,h),after=decode(second,h.shape,h);
+      if(before&&after)keepMotionEvidence(h,b,a,before,after);
+    },
+    requestedStopReason(o) {
+      const cycle=h.motion?.cycle;
+      if(h.epoch===o.level_epoch&&h.motion?.last===o.observation_ref&&cycle
+        && (h.recoveredCycles?.length??0)<2&&!h.recoveredCycles?.some(prior=>JSON.stringify(prior)===JSON.stringify(cycle)))return sicObservedMotionCycle;
+      return null;
+    },
+    stateAfterLevelReset(o,_rows,_entry,cause) {
+      if(cause!==sicObservedMotionCycle||!h.motion?.cycle)return;
+      return {...fresh(o.level_epoch),...(h.transfer?{transfer:h.transfer}:{}),
+        recoveredCycles:[...(h.recoveredCycles??[]),h.motion.cycle]};
     },
     state:()=>h,
     restore(value){ h={...fresh(-1),...structuredClone(value as History)}; },

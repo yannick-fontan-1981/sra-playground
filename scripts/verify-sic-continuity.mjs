@@ -516,6 +516,34 @@ function measureBypassWithStackedSupport(issued) {
 }
 
 
+function measureSharedPressureTransport(issued) {
+  const world=compileActorLevel(SS06_LEVELS[4]);
+  const circuit=world.circuits.find(group=>group.buttons.length>2);
+  assert.ok(circuit);
+  let state=initialActorState(world), piston, pressing, transport, carry, previous;
+  assert.ok(issued.every(ticket=>ticket.actorPlan&&ticket.actorPlan.strategy!=='calibrate_actor_action'),
+    'SS06 L5 must reuse the observed action and actor roles');
+  for(const [i,ticket] of issued.entries()){
+    const {state:after,phases}=stepActorWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    const loadMoves=phases.filter(phase=>phase.kind==='push').flatMap(phase=>phase.moves.filter(move=>move.actor==='stone'));
+    if(phases.some(phase=>phase.kind==='piston'&&phase.moves.some(move=>move.actor==='mirror')))piston??=i+1;
+    if(ticket.actionIndex>0&&previous?.revision===ticket.decisionRevision
+      &&loadMoves.some(move=>previous.loads.some(load=>equal(move.from,load))))carry??=i+1;
+    const warrior=after.heroes.find(actor=>actor.kind==='warrior');
+    if(!actorCircuitPressed(world,state,circuit.id)&&actorCircuitPressed(world,after,circuit.id)
+      &&circuit.buttons.some(cell=>equal(warrior.at,cell))
+      &&circuit.buttons.some(cell=>after.stones.some(stone=>equal(stone,cell))))pressing??=i+1;
+    if(phases.some(phase=>phase.kind==='reflect'&&phase.moves.filter(move=>move.actor==='hero').length===2))transport??=i+1;
+    previous={revision:ticket.decisionRevision,loads:loadMoves.map(move=>move.to)};
+    state=after;
+  }
+  assert.ok(piston&&carry&&pressing&&transport>pressing&&state.complete,
+    'SS06 L5 must align a reflector, push a load in series, press the shared circuit and transfer both actors');
+  return [[piston,'align reflector by piston'],[carry,'carry the same load during a prefix'],
+    [pressing,'press the shared circuit'],[transport,'transfer both actors jointly']]
+    .map(([action,kind])=>({kind,first:action,last:action}));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -524,7 +552,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 4 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 5 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -639,14 +667,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
     if (code === 'SS06') {
-      const cap=[45,42,115,55][row.level-1];
+      const cap=[45,42,115,55,65][row.level-1];
       assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport][row.level-1](issued) : [];
+      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -679,7 +707,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
-      ['actor-composition', 'SS06', '4', '125'],
+      ['actor-composition', 'SS06', '5', '125'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

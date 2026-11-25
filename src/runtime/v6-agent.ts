@@ -11,7 +11,7 @@ import type {
 } from './v6-agent-protocol.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 import { immutableJson } from '../logos-engine/canonical.ts';
-import { isSicLevelRecovery, sicObservedGameOver, sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
+import { isSicLevelRecovery, sicObservedGameOver, sicObservedMotionCycle, sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
 
 export { BrowserV6WorkerClient } from './v6-agent-client.ts';
 
@@ -45,7 +45,7 @@ export interface V6AgentHost {
   canDispatch(): boolean;
   recoveryConfiguration?(): import('../sic/active-recovery.ts').RecoveryPack;
   /** Serialize one native command and await its final public visual observation. */
-  dispatch(action: AgentAction): Promise<V6DispatchResult>;
+  dispatch(action: AgentAction, presentation?: { continuous: boolean }): Promise<V6DispatchResult>;
   canResetLevel?(): boolean;
   resetLevel?(): Promise<GameObservation>;
   onState(snapshot: V6AgentSnapshot): void;
@@ -348,7 +348,7 @@ export class BrowserV6Agent {
         this.assertFresh(expected, epoch);
         this.usedTickets.add(pending.ticket!.id);
         const started = performance.now();
-        const dispatched = await this.host.dispatch(action);
+        const dispatched = await this.host.dispatch(action, { continuous: maxActions > 1 && pending.ticket!.actionIndex > 0 });
         const measured = Math.max(0, performance.now() - started);
         if (!this.stillCurrent(epoch)) return;
         this.actionCount += 1; this.sequence += 1; applied += 1;
@@ -438,6 +438,7 @@ export class BrowserV6Agent {
     const reason = this.pending?.reason;
     this.state('acting', automatic ? reason === sicObservedGameOver ? 'Resetting after the observed game over…'
       : reason === sicObservedWeightShortage ? 'Resetting to recover a movable weight for the observed gate…'
+      : reason === sicObservedMotionCycle ? 'Resetting after repeated movement without progress…'
       : 'Resetting after an observed placement deadlock…' : 'Resetting the current level…');
     if (!this.stillCurrent(epoch) || automatic && this.stopRequested) return false;
     this.assertFresh(before, epoch, true);
