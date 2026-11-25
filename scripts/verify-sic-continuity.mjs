@@ -698,6 +698,51 @@ function measureDestinationSet(issued) {
     .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
+function measureReflectorWithdrawal(issued) {
+  const world=compileSetLevel(SS07_LEVELS[1]);
+  let state=initialSetState(world), attached, firstPull, series, turn, transfer, arrangement;
+  for(const [index,ticket] of issued.entries()){
+    const {state:after,phases}=stepSetWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    const order=index+1;
+    const priorPull=attached;
+    assert.notEqual(ticket.actorPlan?.strategy,'calibrate_actor_action','Reuse the controls learned on the first board');
+    if(attached){
+      const actor=after.heroes.find(hero=>hero.kind===attached.kind);
+      const stillThere=after.mirrors.some(mirror=>equal(mirror.at,attached.reflector));
+      if(actor&&stillThere&&!equal(actor.at,attached.stance)){
+        const dx=actor.at.x-attached.stance.x,dy=actor.at.y-attached.stance.y;
+        if(phases.some(phase=>phase.kind==='reflect'&&phase.moves.some(move=>move.actor==='hero'&&equal(move.from,attached.stance))))
+          transfer??=order;
+        else if(Math.abs(dx)+Math.abs(dy)===1&&dx*attached.dx+dy*attached.dy===0
+          &&state.heroes[state.active].kind===actor.kind)turn??=order;
+      }
+      if(!actor||!stillThere||!equal(actor.at,attached.stance))attached=undefined;
+    }
+    const pull=phases.find(phase=>phase.kind==='pull'&&phase.moves.some(move=>move.actor==='mirror'));
+    if(pull){
+      assert.equal(ticket.actorPlan?.strategy,'compose_group_destination_after_access');
+      if(firstPull===undefined){
+        assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)),'Transfer the measured withdrawal role');
+        firstPull=order;
+      }
+      if(ticket.actionIndex>0&&issued[index-1]?.decisionRevision===ticket.decisionRevision
+        &&priorPull?.order===order-1)series??=order;
+      const hero=pull.moves.find(move=>move.actor==='hero'), reflector=pull.moves.find(move=>move.actor==='mirror');
+      attached={kind:state.heroes[state.active].kind,stance:hero.to,dx:hero.to.x-hero.from.x,dy:hero.to.y-hero.from.y,
+        reflector:reflector.to,order};
+    }
+    if(after.complete&&world.goals.every(goal=>after.heroes.some(hero=>equal(goal,hero.at)))){
+      assert.equal(ticket.actorPlan?.subjects.length,world.goals.length,'Retain the complete destination criterion');
+      arrangement=order;
+    }
+    state=after;
+  }
+  assert.ok(firstPull&&series&&turn&&transfer&&arrangement,'SS07 L2 must pull in series, leave the reflector in place by both routes and complete the set');
+  return [[firstPull,'pull the reflector'],[series,'continue a pull in series'],[turn,'leave the reflector by turning'],
+    [transfer,'leave it by reflection'],[arrangement,'occupy the whole destination set']]
+    .map(([action,kind])=>({kind,first:action,last:action}));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -706,7 +751,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 2 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -827,13 +872,13 @@ export function checkRun(run) {
     }
     if (code === 'SS07') {
       assert.ok(issued.length<=85&&continued>=20&&issued.every(ticket=>ticket.resets===0),
-        'SS07 L1 must prepare and complete the destination set in guarded series');
+        'SS07 must prepare and complete the destination set in guarded series');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
-      : code === 'SS07' ? measureDestinationSet(issued) : [];
+      : code === 'SS07' ? [measureDestinationSet,measureReflectorWithdrawal][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -867,7 +912,7 @@ function main() {
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
       ['actor-composition', 'SS06', '8', '125'],
-      ['destination-set', 'SS07', '1', '100'],
+      ['destination-set', 'SS07', '2', '100'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
 import { createSs06Backend } from '../src/games/sinking-star-ss06.ts';
+import { createSs07Backend } from '../src/games/sinking-star-ss07.ts';
 import { createObservedActorComposition } from '../src/sic/observed-actor-composition.ts';
 import { sicObservedMotionCycle } from '../src/logos-engine/v6-native-types.ts';
 
@@ -299,6 +300,64 @@ const mirroredPresentations = [
   {name:'horizontal reflection, new colors and reordered inputs', flipX:true, flipY:false, colors:3, inputs:[3,5,2,1,4], alternateOccupant:false},
   {name:'vertical reflection, a changed occupant motif and a different interaction command', flipX:false, flipY:true, colors:7, inputs:[5,2,4,3,1], alternateOccupant:true},
 ] as const;
+
+for(const presentation of mirroredPresentations)test('reuses traction and detaches the reflector with '+presentation.name,async()=>{
+  const game=createSs07Backend(),family=createObservedActorComposition();
+  let board=await game.dispatch({type:'load',code:'SS07',level:1}), revision=0;
+  let inherited=false, rejectedUnchangedMirror=false;
+  const show=async()=>{
+    let frame=board.frame.map(row=>row.map(value=>(value+presentation.colors)%16));
+    if(presentation.flipX)frame=frame.map(row=>row.reverse());
+    if(presentation.flipY)frame.reverse();
+    const packet={frame_rows:frame,frame_hash:await publicFrameHash(frame),level:board.level,levels_completed:board.levelsCompleted,
+      state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
+    return {packet,observation:await measureNativeObservation(packet,revision,'withdrawal-campaign')};
+  };
+  while(board.level<=2&&revision<180){
+    const first=await show(), level=board.level;
+    const offer=await family.propose(first.observation,first.packet.frame_rows,[],180-revision);
+    assert.ok(offer,`Missing composition at level ${level}, after ${revision} actions`);
+    if(level===2){
+      assert.notEqual(offer.offer.kind,'calibrate_actor_action');
+      assert.equal(offer.offer.destinations?.length,2);
+      inherited ||= Object.values(family.state().roles).some(role=>/:epoch:1:revision:/.test(role.pull??''));
+    }
+    let issued=0;
+    for(const [index,action] of offer.actions.entries()){
+      const before=await show(), step=offer.steps[index]!;
+      if(!(await family.before(offer,index,before.packet,before.observation)).admitted)break;
+      const slot=Number(action.action_ref.slice(6));
+      const point=slot===6?{x:presentation.flipX?63-action.data.x!:action.data.x!,y:presentation.flipY?63-action.data.y!:action.data.y!}:undefined;
+      board=await game.dispatch({type:'action',actionId:slot===6?6:presentation.inputs[slot-1]!,...(point?{data:point}:{})});
+      revision++;
+      issued++;
+      const after=await show();
+      const verdict=await family.after(offer,index,before.observation,after.observation,before.packet.frame_rows,after.packet.frame_rows);
+      if(level===2&&!rejectedUnchangedMirror&&verdict.matched&&step.relay&&step.relay.before.reflector!==step.relay.after.reflector){
+        const {pitch,phase,floor}=family.state().shape!, rows=after.packet.frame_rows.map(row=>[...row]);
+        const coords=(cell:number)=>[phase[0]+cell%64*pitch,phase[1]+Math.floor(cell/64)*pitch] as const;
+        const [oldX,oldY]=coords(step.relay.before.reflector),[newX,newY]=coords(step.relay.after.reflector);
+        for(let y=0;y<pitch;y++)for(let x=0;x<pitch;x++){
+          rows[oldY+y]![oldX+x]=before.packet.frame_rows[oldY+y]![oldX+x]!;
+          rows[newY+y]![newX+x]=floor;
+        }
+        const refused=await family.after(offer,index,before.observation,after.observation,before.packet.frame_rows,rows);
+        assert.equal(refused.matched,false);
+        assert.equal(refused.seal_prefix,true);
+        rejectedUnchangedMirror=true;
+      }
+      await family.record(before.observation,after.observation,action,before.packet.frame_rows,after.packet.frame_rows,offer,index,[]);
+      if(verdict.seal_prefix)break;
+    }
+    assert.ok(issued,'The first command must be bound to the current scene');
+  }
+  assert.equal(board.levelsCompleted,2);
+  assert.ok(inherited&&rejectedUnchangedMirror);
+  const traction=Object.values(family.state().roles).find(role=>role.pull)!;
+  assert.match(traction.effects.move_reflector_by_withdrawal??'',/:epoch:2:revision:/);
+  assert.match(traction.effects.leave_reflector_in_place_by_transfer??'',/:epoch:2:revision:/);
+  assert.match(traction.effects.leave_reflector_in_place_by_turning??'',/:epoch:2:revision:/);
+});
 
 for (const presentation of mirroredPresentations) test('reuses both roles for a joint transfer with '+presentation.name, async () => {
   const game = createSs06Backend();

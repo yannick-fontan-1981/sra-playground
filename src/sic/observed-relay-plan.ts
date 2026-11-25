@@ -13,6 +13,7 @@ export type RelayModel = {
   pull?: boolean[];
   nearestReflection?: boolean;
   finishAtPlate?: boolean;
+  activeActor?: number;
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
@@ -241,13 +242,16 @@ function dequeue(queue:Node[]) {
 }
 
 export async function findRelayPlan(model:RelayModel,start:RelayState,options:{maxNodes:number; emphasis?:number; yieldControl:()=>Promise<void>;signal?:AbortSignal}) {
-  const rank=ordering(model,options.emphasis??19), seen=new Map([[signature(start),0]]);
+  const stateKey=(state:RelayState,actor:number|undefined)=>model.activeActor===undefined
+    ?signature(state):JSON.stringify([signature(state),actor]);
+  const rank=ordering(model,options.emphasis??19), seen=new Map([[stateKey(start,model.activeActor),0]]);
   const templates=relayStances(model), ready=new Set<string>();
   const queue:Node[]=[{branch:{state:start,steps:[]},parent:null,cost:0,priority:rank(start)}];
   for(let read=0;queue.length&&read<options.maxNodes;read++){
     if(read%64===0){await options.yieldControl();if(options.signal?.aborted)return;}
     const node=dequeue(queue);
-    if(node.cost!==seen.get(signature(node.branch.state)))continue;
+    const active=node.branch.steps.at(-1)?.actor??model.activeActor;
+    if(node.cost!==seen.get(stateKey(node.branch.state,active)))continue;
     const state=node.branch.state;
     if(solved(model,state))return replayPath(node);
     const stage=templates.find(template=>template.mirror===state.reflector
@@ -261,7 +265,9 @@ export async function findRelayPlan(model:RelayModel,start:RelayState,options:{m
       }
     }
     for(const branch of branches(model,node.branch.state)){
-      const id=signature(branch.state), cost=node.cost+branch.steps.length;
+      const actor=branch.steps[0]!.actor;
+      const selection=model.activeActor!==undefined&&actor!==active?1:0;
+      const id=stateKey(branch.state,actor), cost=node.cost+branch.steps.length+selection;
       if((seen.get(id)??Infinity)<=cost)continue;
       seen.set(id,cost);
       enqueue(queue,{branch,parent:node,cost,priority:cost+rank(branch.state)});

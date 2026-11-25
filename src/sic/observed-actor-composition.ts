@@ -35,6 +35,7 @@ type History = {
   available?: string[];
   arrangements?:Record<string,string>;
   destinationGroups?:Cell[][];
+  mirrorPull?:{ink:number;reflector:Cell;stance:Cell;axis:Point};
 };
 type Tile = { pixels: number[]; uniform: boolean; passable: boolean; object: boolean; plate: boolean;
   mirror: Point[] | null; preview: boolean; gate: {accent:number;open:boolean}|null; plateAccent: number|null };
@@ -294,6 +295,8 @@ function walks(scene: Scene, h: History, actor: Actor): Map<Cell,Path> {
   const paths = new Map<Cell,Path>([[actor.cell,start]]);
   for (const {cell,route} of paths.values()) for (const direction of observedDirections(h,actor.ink)) {
     const dest=next(cell,direction.axis), tile=scene.tiles.get(dest);
+    const rear=next(cell,[-direction.axis[0],-direction.axis[1]]);
+    if(h.roles[actor.ink]?.pull&&(portable(scene.tiles.get(rear))||scene.actors.some(peer=>peer.ink!==actor.ink&&peer.cell===rear)))continue;
     if (paths.has(dest) || !tile || tile.object || tile.mirror || scene.actors.some(a=>a.cell===dest)
       || !tile.plate&&tile.plateAccent!==null
       || !(tile.passable||scene.goals.includes(dest)||supported(scene,h,dest))
@@ -1086,8 +1089,9 @@ function reachableCompositions(scene:Scene,h:History) {
 }
 
 function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefined {
-  const traction=scene.goals.length===2&&scene.plates.length===1&&scene.actors.some(actor=>h.roles[actor.ink]?.pull);
-  if(scene.goals.length!==2||!h.trigger&&!traction)return;
+  const traction=scene.actors.some(actor=>h.roles[actor.ink]?.pull);
+  const pressureTrial=traction&&scene.plates.length===1;
+  if(scene.goals.length!==2||!h.trigger&&!pressureTrial)return;
   const mirrors=[...scene.tiles].filter(([,tile])=>tile.mirror);
   if(mirrors.length!==1)return;
   const law=h.transfer?.support;
@@ -1099,7 +1103,7 @@ function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefi
     && [...scene.tiles.values()].some(tile=>tile.uniform&&color(o,tile.pixels[0]!)===law.medium);
   const plate=bridge?null:scene.plates[0]??null;
   let gates:RelayField['gates']=[];
-  if(traction&&plate!==null){
+  if(pressureTrial&&plate!==null){
     const ink=h.switches[plate];
     const occupied=pressureHeld(scene,plate);
     gates=observedGates.filter(([,gate])=>gate.accent===ink)
@@ -1136,7 +1140,7 @@ function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefi
     }
   }
   return {floor,water,waterInks,plate:plate===null?null:encode(plate),gates,arms:mirrors[0]![1].mirror!.map(toAxis),goals:scene.goals.map(encode),
-    ...(traction?{learnedMobility:true,...(!h.seenPlate?{finishAtPlate:true}:{})}:{}),
+    ...(traction?{learnedMobility:true,...(pressureTrial&&!h.seenPlate?{finishAtPlate:true}:{})}:{}),
     ...(bridge&&controlConstraints?controlConstraints:released&&bridge?{unoccupiedControls:scene.plates.map(encode)}:{})};
 }
 
@@ -1188,7 +1192,8 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
     const model:RelayModel={...field,floor:new Set(field.floor),water:new Set(field.water),trigger:h.trigger??(spare.length===1?spare[0]!:'') ,
       controls:h.shape!.inks.map(ink=>observedDirections(h,ink).map(d=>({action:d.action,axis:toAxis(d.axis)}))),
       capacity:h.shape!.inks.map(ink=>h.roles[ink]?.capacity||(field.learnedMobility&&!h.roles[ink]?.pull?1:0)),
-      ...(field.learnedMobility?{pull:h.shape!.inks.map(ink=>!!h.roles[ink]?.pull),nearestReflection:true}:{})};
+      ...(field.learnedMobility?{pull:h.shape!.inks.map(ink=>!!h.roles[ink]?.pull),nearestReflection:true,
+        ...(field.plate===null?{activeActor:h.shape!.inks.indexOf(scene.active.ink)}:{})}: {})};
     const route=await findRelayPlan(model,pose,{maxNodes:field.plate===null?150000:75000,yieldControl:execution?.yieldControl??(async()=>{}),signal:execution?.signal});
     if(execution?.signal?.aborted)return;
     h.relayChecked.push(fingerprint);
@@ -1211,6 +1216,38 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
     :field.learnedMobility?'compose_group_destination_after_access'
     :field.plate===null?'compose_reflection_and_support_access':'compose_reflection_and_linked_gate_access',score:800,
     ...(field.learnedMobility?{destinations:scene.goals}:{})};
+}
+
+function observeMirrorTraction(h:History,before:Scene,after:Scene,o:NativeObservation,action:string) {
+  const remember=(ink:number,effect:string)=>{
+    const role=h.roles[ink];
+    if(!role)return;
+    role.effects[effect]=o.observation_ref;
+    if(h.transfer)h.transfer.roles[color(o,ink)]=role;
+  };
+  const attached=h.mirrorPull;
+  if(attached){
+    const prior=before.actors.find(peer=>peer.ink===attached.ink);
+    const actor=after.actors.find(peer=>peer.ink===attached.ink);
+    const bound=prior?.cell===attached.stance&&!!before.tiles.get(attached.reflector)?.mirror;
+    const stays=!!after.tiles.get(attached.reflector)?.mirror;
+    if(bound&&stays&&actor&&actor.cell!==attached.stance){
+      const from=point(attached.stance),to=point(actor.cell);
+      if(action===h.trigger)remember(attached.ink,'leave_reflector_in_place_by_transfer');
+      else if(before.active.ink===attached.ink&&observedDirections(h,attached.ink).some(dir=>dir.action===action
+        &&next(attached.stance,dir.axis)===actor.cell)
+        &&(to[0]-from[0])*attached.axis[0]+(to[1]-from[1])*attached.axis[1]===0)
+        remember(attached.ink,'leave_reflector_in_place_by_turning');
+    }
+    if(!bound||!stays||!actor||actor.cell!==attached.stance)delete h.mirrorPull;
+  }
+  const actor=before.active, moved=after.active;
+  const direction=observedDirections(h,actor.ink).find(dir=>dir.action===action);
+  if(!h.roles[actor.ink]?.pull||!direction||moved.ink!==actor.ink||moved.cell!==next(actor.cell,direction.axis))return;
+  const rear=next(actor.cell,[-direction.axis[0],-direction.axis[1]]);
+  if(!before.tiles.get(rear)?.mirror||after.tiles.get(rear)?.mirror||!after.tiles.get(actor.cell)?.mirror)return;
+  h.mirrorPull={ink:actor.ink,reflector:actor.cell,stance:moved.cell,axis:direction.axis};
+  remember(actor.ink,'move_reflector_by_withdrawal');
 }
 
 function fresh(epoch: number): History {
@@ -1540,6 +1577,7 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
           h.obstruction={ink:actor.ink,stance:actor.cell,object:cargo};
         }
       }
+      observeMirrorTraction(h,before,after,a,action.action_ref);
       return {events:[]};
     },
     observePublicOutcome(b,a,_command,first,second) {
