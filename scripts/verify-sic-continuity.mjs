@@ -10,6 +10,8 @@ import { compileLevel as compileCarryLevel, doorsOpen as carryDoorsOpen, initial
 import { SS05_LEVELS } from '../experiments/sinking-star-ss05/src/levels.ts';
 import { compileLevel as compileActorLevel, initialState as initialActorState, stepDetailed as stepActorWorld, circuitPressed as actorCircuitPressed, gateClosed as actorGateClosed } from '../experiments/sinking-star-ss06/src/core.ts';
 import { SS06_LEVELS } from '../experiments/sinking-star-ss06/src/levels.ts';
+import { compileLevel as compileSetLevel, initialState as initialSetState, stepDetailed as stepSetWorld } from '../experiments/sinking-star-ss07/src/core.ts';
+import { SS07_LEVELS } from '../experiments/sinking-star-ss07/src/levels.ts';
 import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -37,7 +39,7 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 
 function consecutiveStonePushes(level, tickets) {
   const world = compileLevel(SS02_LEVELS[level - 1]);
@@ -674,6 +676,28 @@ function measureWeightedPlatformCrossing(issued) {
     .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
+function measureDestinationSet(issued) {
+  const world=compileSetLevel(SS07_LEVELS[0]);
+  let state=initialSetState(world), firstPull, crossing, reflection, arrangement;
+  for(const [index,ticket] of issued.entries()){
+    const {state:after,phases}=stepSetWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    if(phases.some(phase=>phase.kind==='pull'&&phase.moves.some(move=>move.actor==='stone')))firstPull??=index+1;
+    if(phases.some(phase=>phase.moves.some(move=>move.actor==='hero'&&state.supports.some(cell=>equal(cell,move.to)))))crossing??=index+1;
+    if(phases.some(phase=>phase.kind==='reflect'&&phase.moves.some(move=>move.actor==='hero')))reflection??=index+1;
+    if(after.complete&&world.goals.every(goal=>after.heroes.some(hero=>equal(goal,hero.at)))){
+      assert.ok(ticket.actorPlan?.strategy==='compose_group_destination_after_access'
+        ||ticket.actorPlan?.strategy==='test_complete_destination_arrangement');
+      assert.equal(ticket.actorPlan.subjects.length,world.goals.length,'Track the whole destination criterion');
+      arrangement=index+1;
+    }
+    state=after;
+  }
+  assert.ok(firstPull&&crossing&&reflection&&arrangement,'SS07 L1 needs the observed pull, prepared access, transport and complete placement');
+  return [[firstPull,'learn an available withdrawal'],[crossing,'walk on prepared access'],[reflection,'reflect a participant to the reachable side'],
+    [arrangement,'occupy all destinations in the same settled state']]
+    .map(([action,kind])=>({kind,first:action,last:action}));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -801,10 +825,15 @@ export function checkRun(run) {
       assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
+    if (code === 'SS07') {
+      assert.ok(issued.length<=85&&continued>=20&&issued.every(ticket=>ticket.resets===0),
+        'SS07 L1 must prepare and complete the destination set in guarded series');
+    }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued) : [];
+      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
+      : code === 'SS07' ? measureDestinationSet(issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -838,6 +867,7 @@ function main() {
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
       ['actor-composition', 'SS06', '8', '125'],
+      ['destination-set', 'SS07', '1', '100'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -851,7 +881,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

@@ -9,16 +9,16 @@ type Point = readonly [number, number];
 const same = (a: Point,b: Point) => a[0]===b[0] && a[1]===b[1];
 const add = (a: Point,b: Point): Point => [a[0]+b[0],a[1]+b[1]];
 
-function habitat(pitch: number, inks: readonly [number,number], commands: readonly [string,Point][],
-  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point; loadPositions?: readonly Point[]; idleSolo?:boolean } = {}) {
+function habitat(pitch: number, inks: readonly number[], commands: readonly [string,Point][],
+  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point; loadPositions?: readonly Point[]; idleSolo?:boolean; destinationGroups?:readonly (readonly Point[])[] } = {}) {
   const span = 12, alignment = 1, floor = 2, background = 3, cargoInk = 5, inset = 6;
   const marker = 7, destination = 8;
-  const actorOrigins: Point[] = [[2,3],[2,7]];
-  const actors=actorOrigins.map(p=>add(p,options.offset??[0,0]));
+  const actorOrigins: Point[] = [[2,3],[2,7],[2,5]];
+  const actors=actorOrigins.slice(0,inks.length).map(p=>add(p,options.offset??[0,0]));
   const cargoOrigins: Point[] = [[4,3],[4,7]];
   const cargo=(options.loadPositions??cargoOrigins).map(p=>add(p,options.offset??[0,0]));
   let active = 0, facing: Point = [0,-1], revision = 0;
-  let present=new Set([0,1]);
+  let present=new Set(actors.map((_,i)=>i));
   const contactCommand=commands.find(([name])=>name==='ACTION5') && !commands.find(([name])=>name==='ACTION4') ? 'ACTION4' : 'ACTION5';
   const available = [...commands.map(([name])=>name),contactCommand,'ACTION6'];
   const floorAt = ([x,y]:Point)=>x>=1&&x<=8&&y>=1&&y<=9;
@@ -31,7 +31,9 @@ function habitat(pitch: number, inks: readonly [number,number], commands: readon
       }
     };
     for(let y=0;y<span;y++) for(let x=0;x<span;x++) if(floorAt([x,y]))tile([x,y],()=>floor);
-    if(!options.hideGoals)for(const p of [[10,2],[10,9]] as const)tile(p,(x,y)=>x===middle&&y===middle?floor:destination);
+    const groups=options.destinationGroups??[[[10,2],[10,9]] as const];
+    if(!options.hideGoals)for(const [index,group] of groups.entries())for(const p of group)
+      tile(p,(x,y)=>x===middle&&y===middle?floor:destination+index*3);
     if(options.pressure)tile(options.pressure,(x,y)=>x===middle&&y===middle?marker:x===middle||y===middle?12:floor);
     for(const p of cargo)tile(p,(x,y)=>x===middle&&y===middle?inset:cargoInk);
     for(const [i,p] of actors.entries()){
@@ -242,6 +244,55 @@ for(const fixture of [{pitch:3,inks:[9,10] as const,motors:directions},
   ambiguous.setRoster([1]);
   const duplicate=await ambiguous.observed();
   assert.equal(await family.propose(duplicate.observation,duplicate.packet.frame_rows,[],25),null);
+});
+
+async function playArrangement(game:ReturnType<typeof habitat>,family:ReturnType<typeof createObservedActorComposition>,until:number) {
+  for(let trial=0;trial<60;trial++){
+    const first=await game.observed();
+    const proposal=await family.propose(first.observation,first.packet.frame_rows,[],70);
+    assert.ok(proposal);
+    assert.equal(proposal.offer.kind,'test_complete_destination_arrangement');
+    let executed=0;
+    for(const [index,action] of proposal.actions.entries()){
+      const before=await game.observed();
+      assert.equal((await family.before(proposal,index,before.packet,before.observation)).admitted,true);
+      game.perform(action);executed++;
+      const after=await game.observed();
+      const result=await family.after(proposal,index,before.observation,after.observation,before.packet.frame_rows,after.packet.frame_rows);
+      await family.record(before.observation,after.observation,action,before.packet.frame_rows,after.packet.frame_rows,proposal,index,[]);
+      assert.ok(result.matched);
+      if(result.seal_prefix)break;
+    }
+    assert.ok(executed);
+    if(trial===0)assert.equal(Object.keys(family.state().arrangements??{}).length,0,'A partial position or a selection is not a set trial');
+    if(Object.keys(family.state().arrangements??{}).length===until)return;
+  }
+  assert.fail('Reachable complete arrangements were not exhausted');
+}
+
+test('tries all reachable assignments for two equally sized destination groups',async()=>{
+  const prior=await study(habitat(3,[9,10],directions,'activation'),10);
+  const family=createObservedActorComposition();
+  family.restore(prior.state);
+  const game=habitat(3,[9,10],directions,'activation',{
+    level:2,loadPositions:[],destinationGroups:[[[3,3],[3,7]],[[4,3],[4,7]]],
+  });
+  await playArrangement(game,family,4);
+  const placements=Object.keys(family.state().arrangements!);
+  assert.equal(new Set(placements.map(key=>JSON.parse(key).map(([,cell]:[number,string])=>cell).sort().join('|'))).size,2);
+});
+
+test('treats the positions of three known actors as one common criterion',async()=>{
+  const first=await study(habitat(5,[9,10],permuted,'activation'),10);
+  const additional=await study(habitat(5,[9,14],permuted,'activation'),14);
+  first.state.transfer!.roles['14']=additional.state.transfer!.roles['14']!;
+  const family=createObservedActorComposition();
+  family.restore(first.state);
+  const game=habitat(5,[9,10,14],permuted,'activation',{
+    level:2,loadPositions:[],destinationGroups:[[[3,3],[3,7],[3,5]]],
+  });
+  await playArrangement(game,family,1);
+  assert.equal(JSON.parse(Object.keys(family.state().arrangements!)[0]!).length,3);
 });
 
 const mirroredPresentations = [

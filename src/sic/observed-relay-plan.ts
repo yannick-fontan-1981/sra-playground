@@ -10,6 +10,9 @@ export type RelayModel = {
   goals: number[]; arms: readonly number[]; controls: RelayMotion[][]; capacity: number[]; trigger: string;
   unoccupiedControls?: number[];
   heldLoadControls?: number[];
+  pull?: boolean[];
+  nearestReflection?: boolean;
+  finishAtPlate?: boolean;
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
@@ -21,7 +24,7 @@ const blocked = (m:RelayModel,s:RelayState,p:number) => !m.floor.has(p)&&!m.wate
 const stands = (m:RelayModel,s:RelayState,p:number) => m.floor.has(p)||s.supports.includes(p);
 const sorted=(xs:number[])=>xs.sort((a,b)=>a-b);
 const signature=(s:RelayState)=>[...s.actors,s.reflector,...s.loads,-1,...s.supports].join(',');
-const solved=(m:RelayModel,s:RelayState)=>m.goals.every(goal=>s.actors.includes(goal));
+const solved=(m:RelayModel,s:RelayState)=>m.finishAtPlate&&m.plate!==null?s.actors.includes(m.plate):m.goals.every(goal=>s.actors.includes(goal));
 
 function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) {
   const position=(cell:number)=>moves.get(cell)??cell;
@@ -46,21 +49,27 @@ function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) 
 function reflection(m:RelayModel,s:RelayState):{state:RelayState;keys:number[]}|undefined {
   const [a,b]=m.arms, transfers=new Map<number,number>(), ray=new Set<number>();
   if(a===undefined||b===undefined)return;
+  const candidates:{origin:number;destination:number;span:number;outgoing:number}[]=[];
   for(const [from,to] of [[a,b],[b,a]] as const){
     let origin=s.reflector, destination=s.reflector;
     for(let i=0;i<25;i++){
       origin+=from; destination+=to;
       if(blocked(m,s,origin))break;
       if(!occupied(s,origin))continue;
-      if(!stands(m,s,destination)&&s.actors.includes(origin))return;
-      for(let p=s.reflector+to;;p+=to){
-        if(blocked(m,s,p))return;
-        ray.add(p);
-        if(p===destination)break;
-      }
-      transfers.set(origin,destination);
+      candidates.push({origin,destination,span:i+1,outgoing:to});
       break;
     }
+  }
+  const nearest=Math.min(...candidates.map(candidate=>candidate.span));
+  for(const {origin,destination,span,outgoing} of candidates){
+    if(m.nearestReflection&&span!==nearest)continue;
+    if(!stands(m,s,destination)&&s.actors.includes(origin))return;
+    for(let p=s.reflector+outgoing;;p+=outgoing){
+      if(blocked(m,s,p))return;
+      ray.add(p);
+      if(p===destination)break;
+    }
+    transfers.set(origin,destination);
   }
   if(!transfers.size||new Set(transfers.values()).size!==transfers.size
     ||[...ray].some(p=>occupied(s,p)&&!transfers.has(p)))return;
@@ -82,7 +91,7 @@ function branches(model:RelayModel,origin:RelayState, keepPrepared=false):Branch
         out.push({state:s,steps:path});
         if(pressed(model,origin)!==pressed(model,s)||solved(model,s))continue;
       }
-      const reflected=reflection(model,s);
+      const reflected=model.trigger?reflection(model,s):undefined;
       if(reflected)emit(model.trigger,reflected.state,reflected.keys);
       for(const {action,axis} of controls){
         const dest=at+axis;
@@ -101,7 +110,14 @@ function branches(model:RelayModel,origin:RelayState, keepPrepared=false):Branch
           if(pushed)emit(action,pushed);
           continue;
         }
-        if(paths.has(dest)||!stands(model,s,dest))continue;
+        if(!stands(model,s,dest))continue;
+        const rear=at-axis;
+        if(model.pull?.[actor]&&occupied(s,rear)){
+          const pulled=shift(model,s,new Map([[at,dest],[rear,at]]));
+          if(pulled)emit(action,pulled);
+          continue;
+        }
+        if(paths.has(dest))continue;
         const after=shift(model,s,new Map([[at,dest]]));
         if(after)paths.set(dest,[...path,{actor,action,before:s,after,projected:[]}]);
       }
@@ -158,6 +174,12 @@ function bridgeOrdering(model:RelayModel){
 
 
 function ordering(model: RelayModel, emphasis:number) {
+  if(model.finishAtPlate&&model.plate!==null){
+    const floor=new Set([...model.floor,...model.water]);
+    const distances=distanceMap({...model,floor},model.plate);
+    return (pose:RelayState)=>Math.min(...pose.actors.map(actor=>distances.get(actor)??40))*5;
+  }
+  if(model.pull?.some(Boolean))return bridgeOrdering(model);
   if(model.plate===null)return bridgeOrdering(model);
   const [first,second]=model.goals.map(goal=>distanceMap(model,goal));
   const dist=(map:Map<number,number>,p:number)=>map.get(p)??50;
