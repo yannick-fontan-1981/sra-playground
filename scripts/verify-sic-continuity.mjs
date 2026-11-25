@@ -69,9 +69,11 @@ function consecutiveStonePushes(level, tickets) {
   }
   assert.equal(state.complete, true, 'Executed SS02 L' + level + ' tickets do not reproduce the official goal');
   assert.ok(pairs.length, 'SS02 L' + level + ' lost consecutive pushes of the same stone');
-  if (level >= 3) {
+  if (level >= 3 && world.terrain.includes('~')) {
     assert.ok(crossed.size > 0 && state.supports.length > world.supports.length,
       'SS02 L' + level + ' did not build and traverse an immersed support');
+  }
+  if (level >= 3) {
     assert.ok(world.buttons.every(mark => state.stones.some(stone => equal(mark, stone))),
       'SS02 L' + level + ' did not leave a stone holding each pressure mark');
   }
@@ -917,7 +919,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -933,7 +935,8 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS02 must preserve learned access without resetting');
       assert.equal(issued[1]?.decisionRevision, issued[0]?.decisionRevision,
         'SS02 L' + row.level + ' must begin with a plan from the learned controls');
-      if (row.level === 6) assert.ok(issued.length <= 110, 'SS02 L6 exceeded its verified action ceiling');
+      const ceiling = { 6: 110, 7: 65, 8: 101 }[row.level];
+      if (ceiling) assert.ok(issued.length <= ceiling, 'SS02 L' + row.level + ' exceeded its verified action ceiling');
     }
     const groups = new Map();
     let last;
@@ -1076,7 +1079,7 @@ function main() {
     files = [];
     for (const [name, cohort, end, cap] of [
       ['mirror-isles', 'SS01', '8', '120'],
-      ['la-force-rouge', 'SS02', '6', '160'],
+      ['la-force-rouge', 'SS02', '8', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
