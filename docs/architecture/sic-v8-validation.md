@@ -2710,3 +2710,11 @@ Le moteur mesure le temps actif par niveau. Le banc exécute chaque jeu dans un 
 À la commande cumulée 141, la composition réintroduisait une commande annoncée par le jeu que le domaine d’entrée n’avait pas admise pour l’exploration. Son retour correspond exactement à la grille de début du niveau. La composition utilise désormais les commandes admises par le domaine, ainsi que les clics dont le point peut être justifié. Le traitement dédié de la récupération garde sa propre autorité.
 
 Le rejeu local avec cette correction gagne les six premiers niveaux en 144 commandes, dont 65 au niveau 6 en 152 secondes de temps actif. Il reprend au niveau 1 dans la même session SIC et conserve le plafond du rejeu comparatif de 516 commandes et 486 secondes pour le niveau 6.
+
+### MOTO niveau 6, réutiliser les trajectoires élémentaires
+
+Sous le même plafond de 90 secondes et avec le même jeu local, les solveurs du jalon 160 et de la révision 277 s’arrêtent au niveau 6. La trace de la révision 277 atteint la recherche des placements de déviation après six commandes de préparation, puis cette recherche monopolise le processus.
+
+Les transitions d’un mobile à une autre position et direction dépendent de la grille et de son empreinte. Le chercheur les calcule une fois par état géométrique et les réutilise pendant l’énumération des placements. Deux éléments déjà engagés ne peuvent plus changer de place dans cette branche. Leur recouvrement suffit à éliminer cette branche avant d’explorer ses descendants. Le chercheur vérifie son échéance pendant l’énumération.
+
+Avec ces changements, le rejeu chronologique local gagne les six niveaux en 79 commandes, dont 19 au niveau 6 en environ 19 secondes écoulées. Les cinq premiers niveaux conservent leurs nombres de commandes. Deux tests synthétiques vérifient le placement, le refus d’une sortie fermée et l’arrêt à l’échéance.
