@@ -471,6 +471,51 @@ function measureLinkedGateRelay(issued) {
 }
 
 
+
+function measureBypassWithStackedSupport(issued) {
+  const world=compileActorLevel(SS06_LEVELS[3]);
+  let state=initialActorState(world), firstExtension=null, layeredLoad=null, beforeMovedBack=null;
+  let direction=null, traversed=false, lead=null;
+  const matches=(a,b)=>equal(a,b);
+  assert.ok(issued.every(ticket=>ticket.actorPlan&&ticket.actorPlan.strategy!=='calibrate_actor_action'),
+    'SS06 L4 must use observed control roles without recalibrating them');
+  for(const [i,ticket] of issued.entries()){
+    const result=stepActorWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    const phase=result.phases[0], moves=phase?.moves??[];
+    if(ticket.actorPlan.strategy==='test_extended_chain_capacity'&&phase?.kind==='push'
+      &&moves.filter(move=>move.actor==='stone').length>=4){
+      const movement=moves.find(move=>move.actor==='hero');
+      assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)),
+        'The long push must be an extension of an observed role');
+      assert.ok(movement);
+      direction={x:movement.to.x-movement.from.x,y:movement.to.y-movement.from.y};
+      lead=state.heroes[state.active].kind;
+      firstExtension??=i+1;
+    }
+    if(['reflect','push'].includes(phase?.kind)&&moves.some(move=>move.actor==='stone'
+      &&state.supports.some(p=>matches(p,move.to))&&result.state.stones.some(p=>matches(p,move.to)))){
+      layeredLoad??=i+1;
+    }
+    if(direction&&lead===state.heroes[state.active].kind){
+      if(moves.some(move=>move.actor==='hero'&&state.supports.some(p=>matches(p,move.to))))traversed=true;
+      if(traversed&&moves.some(move=>move.actor==='mirror'
+        &&(move.to.x-move.from.x)*direction.x+(move.to.y-move.from.y)*direction.y<0)){
+        beforeMovedBack??=i+1;
+      }
+    }
+    state=result.state;
+  }
+  assert.ok(firstExtension!==null&&firstExtension<=6,'SS06 L4 skipped the reachable longer chain');
+  assert.ok(layeredLoad&&beforeMovedBack&&traversed&&state.complete,
+    'SS06 L4 must use a load on an existing support and reach the other side of the mirror');
+  return [
+    {kind:'test longer reachable chain',first:firstExtension,last:firstExtension},
+    {kind:'land transportable load on an established support',first:layeredLoad,last:layeredLoad},
+    {kind:'cross supports and push from behind the reflector',first:beforeMovedBack,last:beforeMovedBack},
+  ];
+}
+
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -479,7 +524,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 3 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 4 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -594,14 +639,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
     if (code === 'SS06') {
-      const cap=[45,42,115][row.level-1];
+      const cap=[45,42,115,55][row.level-1];
       assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay][row.level-1](issued) : [];
+      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -634,7 +679,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
-      ['actor-composition', 'SS06', '3', '125'],
+      ['actor-composition', 'SS06', '4', '125'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

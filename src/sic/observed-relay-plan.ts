@@ -6,14 +6,14 @@ export type RelayState = { actors: number[]; loads: number[]; reflector: number;
 export type RelayStep = { actor: number; action: string; before: RelayState; after: RelayState; projected: number[] };
 type Gate = { cell: number; closedWhenPressed: boolean };
 export type RelayModel = {
-  floor: Set<number>; water: Set<number>; gates: Gate[]; plate: number;
+  floor: Set<number>; water: Set<number>; gates: Gate[]; plate: number | null;
   goals: number[]; arms: readonly number[]; controls: RelayMotion[][]; capacity: number[]; trigger: string;
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
 
 const occupied = (s: RelayState, cell:number) => s.reflector===cell||s.loads.includes(cell)||s.actors.includes(cell);
-const pressed = (m:RelayModel,s:RelayState) => occupied(s,m.plate);
+const pressed = (m:RelayModel,s:RelayState) => m.plate!==null&&occupied(s,m.plate);
 const blocked = (m:RelayModel,s:RelayState,p:number) => !m.floor.has(p)&&!m.water.has(p)
   ||m.gates.some(gate=>gate.cell===p&&gate.closedWhenPressed===pressed(m,s));
 const stands = (m:RelayModel,s:RelayState,p:number) => m.floor.has(p)||s.supports.includes(p);
@@ -117,15 +117,16 @@ function distanceMap(model: RelayModel, start:number) {
 
 
 function relayStances(model:RelayModel){
+  if(model.plate===null)return [];
   const templates:{mirror:number;load:number}[]=[];
   const [a,b]=model.arms;
   for(const [from,to] of [[a!,b!],[b!,a!]] as const) {
-    let center=model.plate, other=model.plate;
+    let center:number=model.plate;
     for(let span=1;span<25;span++){
       center-=from;
       if(!model.floor.has(center)&&!model.water.has(center))break;
       if(!model.floor.has(center))continue;
-      other=center+to*span;
+      const other=center+to*span;
       if(!model.floor.has(other)||other===model.plate)continue;
       let lane=true;
       for(let i=1;i<span;i++){
@@ -138,7 +139,22 @@ function relayStances(model:RelayModel){
   return templates;
 }
 
+function bridgeOrdering(model:RelayModel){
+  const field=model.goals.map(goal=>distanceMap({...model,floor:new Set([...model.floor,...model.water])},goal));
+  const [left,right]=field;
+  return (s:RelayState)=>{
+    const distance=(known:Map<number,number>,cell:number)=>known.get(cell)??50;
+    const [a,b]=s.actors as [number,number];
+    const total=Math.min(distance(left!,a)+distance(right!,b),distance(left!,b)+distance(right!,a));
+    // A new footing changes traversability. Cargo arriving on existing
+    // footing remains a load and can subsequently be pushed farther.
+    return total*2.6-Math.min(6,s.supports.length)*4;
+  };
+}
+
+
 function ordering(model: RelayModel, emphasis:number) {
+  if(model.plate===null)return bridgeOrdering(model);
   const [first,second]=model.goals.map(goal=>distanceMap(model,goal));
   const dist=(map:Map<number,number>,p:number)=>map.get(p)??50;
   const goal=(p:number,q:number)=>Math.min(dist(first!,p)+dist(second!,q),dist(first!,q)+dist(second!,p));
@@ -146,7 +162,7 @@ function ordering(model: RelayModel, emphasis:number) {
   return (s:RelayState)=>{
     const total=goal(s.actors[0]!,s.actors[1]!);
     const logistics=Math.min(25,...templates.map(t=>dist(t.mirrorDistance,s.reflector)*1.6+
-      Math.min(...s.loads.map(load=>dist(t.loadDistance,load)),s.loads.includes(model.plate)?1:25)));
+      Math.min(...s.loads.map(load=>dist(t.loadDistance,load)),model.plate!==null&&s.loads.includes(model.plate)?1:25)));
     return total*0.45+logistics*emphasis;
   };
 }
@@ -209,7 +225,7 @@ export async function findRelayPlan(model:RelayModel,start:RelayState,options:{m
     const state=node.branch.state;
     if(solved(model,state))return replayPath(node);
     const stage=templates.find(template=>template.mirror===state.reflector
-      &&(state.loads.includes(template.load)||state.loads.includes(model.plate)));
+      &&(state.loads.includes(template.load)||model.plate!==null&&state.loads.includes(model.plate)));
     if(stage){
       const trial=signature(state);
       if(!ready.has(trial)&&ready.size<12){
