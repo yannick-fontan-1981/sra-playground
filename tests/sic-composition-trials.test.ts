@@ -88,6 +88,17 @@ test('different observed routes back to the same scene can also trigger a compos
   }
   assert.ok(await family.proposeInGroup!(cycleGroup, root, frame, inputs, 10));
 });
+
+test('composition explores admitted controls without promoting an advertised recovery input', async () => {
+  const family = createCompositionTrials();
+  const reference = observation('stationary');
+  const recoveryAvailable = { ...reference, available_action_refs: ['ACTION2', 'ACTION7'] };
+  await family.observePublicOutcome!(recoveryAvailable, recoveryAvailable, control(2), frame, frame);
+
+  const experiment = await family.proposeInGroup!(exhaustedGroup, recoveryAvailable, frame, [control(2)], 10);
+  assert.equal(experiment?.actions[0]?.action_ref, 'ACTION2');
+  assert.equal(await family.proposeInGroup!(exhaustedGroup, recoveryAvailable, frame, [], 10), null);
+});
 test('an addressed action distinguishes a new region from repeating the same command', () => {
   assert.equal(actionRelation('ACTION6:1,1', 'ACTION6:8,2'), 'change_target');
   const h: Step[] = [

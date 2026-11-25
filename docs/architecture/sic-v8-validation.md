@@ -2704,3 +2704,9 @@ Le banc fixe deux plafonds pour chaque niveau. Il ajoute au nombre de commandes 
 `SIC_REPLAY_REFERENCES` accepte un fichier JSON associant chaque code de jeu à un tableau de références, indexé par niveau à partir de zéro. Chaque référence renseigne `actions`, `source` et, lorsqu’elle a été mesurée, `timeMs`. Une entrée absente ou `null` conserve la référence archivée si elle existe. Un oracle vérifié peut fournir le nombre de commandes et sa provenance. Ni le parcours témoin ni les données de l’oracle ne sont transmis à SIC.
 
 Le moteur mesure le temps actif par niveau. Le rejeu journalise la provenance des plafonds, le temps effectivement consommé et le motif d’arrêt. Un dépassement de budget signale une victoire qui reste à reproduire sous ces plafonds.
+
+### AS66 niveau 6, respecter le domaine d’entrée du moteur
+
+À la commande cumulée 141, la composition réintroduisait une commande annoncée par le jeu que le domaine d’entrée n’avait pas admise pour l’exploration. Son retour correspond exactement à la grille de début du niveau. La composition utilise désormais les commandes admises par le domaine, ainsi que les clics dont le point peut être justifié. Le traitement dédié de la récupération garde sa propre autorité.
+
+Le rejeu local avec cette correction gagne les six premiers niveaux en 144 commandes, dont 65 au niveau 6 en 152 secondes de temps actif. Il reprend au niveau 1 dans la même session SIC et conserve le plafond du rejeu comparatif de 516 commandes et 486 secondes pour le niveau 6.
