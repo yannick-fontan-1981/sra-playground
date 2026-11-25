@@ -85,6 +85,12 @@ const complete = (spec, state) => covers(state.facts, spec.finalFacts) && !(stat
 const identity = (spec, state) => spec.timed
   ? [state.facts, state.units, state.tick, state.ready, state.until].join(',')
   : (state.facts << 5) + state.units;
+
+function projectionKey(spec, { facts, tick, ready, until }) {
+  if (!spec.timed) return facts;
+  // An expired window leaves no future transition. An open window only keeps its closing time.
+  return [facts, tick, until > tick ? Math.max(ready, tick) : 0, until > tick ? until : 0].join(',');
+}
 const maxTicks = 33, maxActions = 21;
 
 function project(spec, before, op) {
@@ -175,10 +181,11 @@ function searchReplay(spec, greedy) {
 export function compareMechanic(spec) {
   const initial = start(spec);
   const certificate = composePlan({
-    domain: spec.family, initial, key: state => identity(spec, state),
+    domain: spec.family, initial, key: state => projectionKey(spec, state),
+    reserve: state => state.units,
     goal: { relation: 'conditions finales', holds: state => complete(spec, state) },
     *choices(state) { for (const op of spec.operations) yield project(spec, state, op); },
-    budget: { commands: maxActions, states: 28000 },
+    budget: { commands: maxActions, states: 70000 },
   });
   const baseline = searchReplay(spec, true);
   const oracle = searchReplay(spec, false);

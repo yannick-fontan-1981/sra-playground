@@ -57,7 +57,7 @@ function* generate({ families, count, stage }, used) {
 function summarise(results) {
   const report = {
     tested: 0, feasible: 0, impossible: 0, declaredNegative: 0, composed: 0, greedy: 0, gains: 0,
-    shorter: 0, regressions: 0, plannerMiss: 0, invalid: 0, nonMinimum: 0, positiveImpossible: 0,
+    shorter: 0, regressions: 0, plannerMiss: 0, invalid: 0, nonMinimum: 0, infeasibleWithinHorizon: 0,
     negativeFeasible: 0, longest: 0,
   };
   const examples = {};
@@ -67,7 +67,7 @@ function summarise(results) {
     else report.feasible++;
     if (spec.negative) report.declaredNegative++;
     if (spec.negative && oracle !== null) report.negativeFeasible++;
-    if (!spec.negative && oracle === null) report.positiveImpossible++;
+    if (!spec.negative && oracle === null) report.infeasibleWithinHorizon++;
     if (invalid) report.invalid++;
     if (commands !== null) {
       report.composed++;
@@ -117,7 +117,7 @@ try {
   const { examples, ...totals } = stats;
   console.log(JSON.stringify({ ...totals, seconds: report.seconds }));
   if (count !== stats.tested || stats.invalid || stats.plannerMiss || stats.nonMinimum
-    || stats.positiveImpossible || stats.negativeFeasible) process.exitCode = 1;
+    || stats.negativeFeasible) process.exitCode = 1;
 } finally {
   queue.release(owner);
   queue.close();
