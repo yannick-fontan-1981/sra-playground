@@ -1,0 +1,37 @@
+{
+  "game": "SS21",
+  "mode": "Manual",
+  "environment": "Chrome via authorized CUA, local native SRA Playground preview",
+  "startLevel": 1,
+  "endLevel": 8,
+  "officialVisibleResult": "VICTORY · Les quatre destinations sont occupées",
+  "inputsByLevel": [
+    260,
+    143,
+    103,
+    182,
+    224,
+    202,
+    153,
+    219
+  ],
+  "totalInputs": 1486,
+  "tutorialDiscoveries": 31,
+  "finalVictoryUndoAndReplay": true,
+  "sourceBaseline": "a4af366b4b8c7d4b882b876f3cbe7aa617784af3",
+  "checks": [
+    "fourth hero by keyboard",
+    "Tab cycling",
+    "Warrior file push",
+    "Undo",
+    "contextual platform help",
+    "Restart from level 7 returns to tutorial",
+    "complete campaign using public buttons and keyboard controls",
+    "final victory after final animation",
+    "Undo and replay of the final action"
+  ],
+  "limits": [
+    "This is a human-authored witness replay in Manual mode, not autonomous SRA resolution.",
+    "Responsive CSS was inspected; a narrow viewport was not exercised in this browser session."
+  ]
+}

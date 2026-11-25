@@ -12,7 +12,7 @@ SS21 est le premier quatuor de la série : **Marchand / Guerrier / Voleur / Magi
 | Tutoriel | 31/31 découvertes acquises à partir des pixels publics, uniquement au N1. |
 | HTML autonome | `dist/SS21-demo.html` ; identité et qualifications dans `validation/delivery-manifest.json`. |
 | Conception et variantes | Revues d’introduction, du milieu, de finale et indépendante ; portée de chaque conclusion explicitée. |
-| Intégration native | Raccordement réalisé — 86 tests natifs et typage réussis ; vérification de continuité SIC avant publication. |
+| Intégration native | Réalisé — 86 tests natifs, typage, build et continuité SIC réussis ; campagne manuelle N1→N8 gagnée dans Chrome. |
 | Sauvegarde et publication | GitHub canonique ; pousser et intégrer sur main avant publication du Site existant. |
 
 Les témoins prouvent la solvabilité. Leurs compteurs ne sont ni des minima ni des quotas de victoire. Une résolution autonome par SRA doit être qualifiée séparément.
