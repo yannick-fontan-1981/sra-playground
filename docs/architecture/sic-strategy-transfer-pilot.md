@@ -45,3 +45,14 @@ Le mode induction ajoute les supports à phases et le trajet à l'abri d'un écl
 Lors d'un échec, le banc réduit les observations de phase à une suite de symboles d'égalité et de positions masquées. Il construit les hypothèses de suffixes périodiques à partir de ces suites. Chaque phase doit être vérifiée après avoir été observée deux fois. Si des hypothèses compatibles prédisent des suites différentes, la règle s'abstient. L'induction énumère des conditions sur des grandeurs observables avec les valeurs rencontrées dans les traces. Elle retient des conjonctions qui réduisent les admissions sur les contre-exemples et couvrent plusieurs stratégies. Le rapport conserve ces conditions et les identifiants des exemples qui les étayent. L'espace de recherche reste borné aux relations temporelles et aux preuves de phase.
 
 Le rejeu des niveaux réels charge seulement la règle figée issue de la validation. Il teste les L1 de SS08 à SS19 en mode SIC seul avec les mêmes départs et budgets, en comparant l'empreinte du premier plateau. Il enregistre les victoires, les commandes exécutées et les preuves produites par la règle. Les rapports et la file restent sous `artifacts`.
+
+## Campagne ciblée sur les L1 de SS08 à SS12
+
+```powershell
+npm run test:sic-l1-transfer
+node scripts/sic-l1-actor-frontier.mjs 30
+```
+
+Les premiers blocages réels ont motivé trois mesures liées. Il faut extraire le masque commun des deux corps malgré un appui dessiné, proposer un essai quand un autre symbole présente le même masque et vérifier que la sélection s'est déplacée sans déplacer les corps. La reconnaissance stricte reste le premier point d'entrée. En cas d'absence de résultat, la famille peut attester la sélection avec un clic, puis réutiliser les rôles attestés pour les déplacements, les contacts et les transferts.
+
+Le générateur collecte ses points d'ancrage en jouant les moteurs réels depuis L1 avec de courtes suites de commandes publiques. Il vérifie sur le moteur les sélections utiles. Les 10 000 comparaisons composent des fonds mixtes, des glyphes inertes, des retours ambigus et des rotations ou variations de palette. Les variantes sont évaluées sur trois décisions distinctes. La référence est le détecteur strict pour reconnaître le duo. Pour le retour de sélection, l'ablation se fonde sur le seul marqueur d'arrivée. L'induction cherche les faits à conserver ensemble et l'ordre des essais à partir des échecs. Les règles sont éprouvées sur des départs distincts issus des cinq L1. Les résultats synthétiques et les rejeux natifs restent disponibles séparément.

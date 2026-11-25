@@ -5,13 +5,14 @@ import { findRelayPlan, relayControlOccupied, relayControlWeighted, relayGateClo
 import { planHydraulicRelay } from './observed-hydraulic-relay.ts';
 import { planPlatformRelay, platformAvailable, type PlatformPose, type PlatformRelayModel, type PlatformStep } from './observed-platform-relay.ts';
 import { sicNeedId } from './need-identity.ts';
+import { maskedRole, observedSelectionHypotheses, witnessedSelection, type SelectionHypothesis } from './observed-role-selection.ts';
 
 export const observedActorCompositionId = 'sic_observed_actor_composition';
 
 type Point = readonly [number, number];
 type Cell = string;
 type Actor = { ink: number; cell: Cell; marker: number | null };
-type Shape = { pitch: number; phase: Point; mask: number[]; inks: number[]; floor: number; backing: number };
+type Shape = { pitch: number; phase: Point; mask: number[]; inks: number[]; floor: number; backing: number; selectionConfirmed?: boolean };
 type Direction = { action: string; axis: Point; evidence: string };
 // Capacity is the length of a witnessed displacement, a lower bound.
 type Role = { moved: boolean; contact: boolean; capacity: number; effects: Record<string, string>; controls?: Direction[]; pull?:string };
@@ -35,6 +36,7 @@ type History = {
   platformChecked?: string[];
   available?: string[];
   arrangements?:Record<string,string>;
+  roleSelectionTests?: string[];
   destinationGroups?:Cell[][];
   mirrorPull?:{ink:number;reflector:Cell;stance:Cell;axis:Point};
   circuitTrials?:Record<number,string>;
@@ -52,7 +54,7 @@ type ObservedObject = { cell:Cell; glyph:string; kind:'actor'|'load'|'reflector'
 type ControlTransfer = { source: Cell; destination: Cell; reflector: Cell; mark: number; subject: string; gates: Cell[] };
 type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; relay?: RelayStep; expectedActors?: {ink:number;from:Cell;to:Cell}[];
   loads?: { from: Cell[]; to: Cell[]; support?: Cell }; reflectorMove?: { from: Cell; to: Cell }; controlTransfer?: ControlTransfer; platform?: PlatformStep; pressureTrial?:Cell;
-  roster?: {ink:number;cell:Cell}[]; probeLanding?:{cell:Cell;glyph:string}; circuitTrial?:number; supportAccess?:Cell; clearLinkedObstruction?:Cell; };
+  roster?: {ink:number;cell:Cell}[]; probeLanding?:{cell:Cell;glyph:string}; circuitTrial?:number; supportAccess?:Cell; clearLinkedObstruction?:Cell; roleProbe?: SelectionHypothesis; };
 type Offer = { ink: number; steps: Step[]; kind: string; score: number; test?: string; target?: Cell; destinations?:Cell[] };
 type Proposal = ReturnType<typeof proposed>;
 type Path = { cell: Cell; route: Step[] };
@@ -148,7 +150,7 @@ function motif(pixels: number[], mask: number[], markedFloor?: number) {
   return {ink, floor, marker:accent<0?null:mask[accent]!};
 }
 
-function spotPair(o: NativeObservation, rows: NativeRows): Shape | undefined {
+export function spotPair(o: NativeObservation, rows: NativeRows): Shape | undefined {
   if (!o.available_action_refs.includes('ACTION6') || o.available_action_refs.length<5) return;
   const proposals = new Map<string, Shape>();
   for (const part of o.entities) {
@@ -239,7 +241,9 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
   for(let y=phase[1];y+pitch<=rows.length;y+=pitch) for(let x=phase[0];x+pitch<=rows[0]!.length;x+=pitch){
     const cell = key([(x-phase[0])/pitch,(y-phase[1])/pitch]), pixels=readTile(rows,x,y,pitch);
     const marked=history.plates.includes(cell)||history.supports[cell]||history.platformField?.bindings[encode(cell)]||history.hydraulic?.bindings[encode(cell)];
-    const body=motif(pixels,mask,marked?floor:undefined);
+    const basicBody = motif(pixels, mask, marked ? floor : undefined);
+    const coveredBody = shape.selectionConfirmed && !basicBody ? maskedRole(pixels, mask, floor) : undefined;
+    const body = basicBody ?? (coveredBody && inks.includes(coveredBody.ink) ? { ...coveredBody, floor } : null);
     const uniform=pixels.every(value=>value===pixels[0]);
     if(body && inks.includes(body.ink)) actors.push({ink:body.ink,cell,marker:body.marker});
     const edge = pixels.filter((_,i)=>i%pitch===0 || i%pitch===pitch-1 || i<pitch || i>=pitch*(pitch-1));
@@ -1553,7 +1557,22 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if(!h.trigger&&h.shape&&h.transfer?.trigger&&compatibleRoles(o,h.transfer)
         && h.available.includes(h.transfer.trigger))h.trigger=h.transfer.trigger;
       let shape=h.shape??spotPair(o,rows)??rebindKnownActors(o,rows,h.transfer);
-      if (!shape) return null;
+      if (!shape) {
+        if (remaining < 1) return null;
+        const probe = observedSelectionHypotheses(o, rows, backingColor(rows))
+          .find(candidate => !h.roleSelectionTests?.includes(candidate.id));
+        if (!probe) return null;
+        const { target: [x, y], current: [cx, cy], shape: geometry } = probe;
+        const pad = (geometry.pitch - 1) / 2;
+        const action = { action_ref: 'ACTION6', data: { x: x + pad, y: y + pad } };
+        const from = key([(cx - geometry.phase[0]) / geometry.pitch, (cy - geometry.phase[1]) / geometry.pitch]);
+        const evidence = [o.observation_ref];
+        const point_binding = await ObservedInputDomain.makeLocusWitness(o, rows, [x + pad, y + pad],
+          { reason: 'Test whether the selection marker transfers between matching bodies', evidence });
+        const step = { action, actor: probe.active, from, select: probe.peer, roleProbe: probe, point_binding };
+        return proposed(o, { ink: probe.active, kind: 'test_selection_between_matching_bodies', steps: [step], score: 160 },
+          [step], evidence);
+      }
       if(shape.inks.length===1&&h.transfer?.goalColor!==undefined){
         const ink=o.palette?o.palette.indexOf(h.transfer.goalColor):Number(h.transfer.goalColor);
         if(Number.isInteger(ink)&&ink>=0)h.goalInk=ink;
@@ -1636,7 +1655,13 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       return proposed(o,offer,steps,evidence);
     },
     before(p,index,packet,o) {
-      const step=p.steps[index]!, scene=h.shape&&decode(packet.frame_rows,h.shape,h);
+      const step=p.steps[index]!;
+      if (step.roleProbe) {
+        const current = observedSelectionHypotheses(o, packet.frame_rows, step.roleProbe.shape.backing)
+          .find(probe => probe.id === step.roleProbe!.id && probe.active === step.roleProbe!.active);
+        return { admitted: !!current, reason: current ? 'selection_hypothesis_visible' : 'selection_hypothesis_changed' };
+      }
+      const scene=h.shape&&decode(packet.frame_rows,h.shape,h);
       const destination=step.contact??step.to??(step.tile&&observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)
         ?next(step.from,observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)!.axis):undefined);
       const admitted=!!scene && !h.rejectedLossChoices?.includes(materialChoice(o,step.action))
@@ -1667,6 +1692,10 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
     },
     after(p,index,b,a,first,second) {
       const step=p.steps[index]!;
+      if (step.roleProbe) {
+        const matched = witnessedSelection(step.roleProbe, first, second);
+        return { matched, seal_prefix: true, reason: matched ? 'selection_marker_transferred' : 'selection_marker_did_not_transfer' };
+      }
       const boundary=b.level_epoch!==a.level_epoch||b.levels_completed!==a.levels_completed;
       const scene=h.shape&&decode(second,h.shape,h);
       const prior=!boundary&&scene&&h.shape&&decode(first,h.shape,h);
@@ -1694,8 +1723,19 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       return {matched,seal_prefix:sealed,reason:boundary?'official_boundary':matched?'actor_outcome_observed':'actor_outcome_contradicted'};
     },
     record(b,a,action,first,second,p,index) {
-      if(!h.shape||b.level_epoch!==a.level_epoch)return {events:[]};
-      const before=decode(first,h.shape,h), after=decode(second,h.shape,h), step=p.steps[index]!;
+      const step = p.steps[index]!;
+      if (b.level_epoch !== a.level_epoch) return { events: [] };
+      if (step.roleProbe) {
+        const probe = step.roleProbe;
+        (h.roleSelectionTests ??= []).push(probe.id);
+        if (witnessedSelection(probe, first, second)) {
+          h.shape = { ...probe.shape, selectionConfirmed: true };
+          h.selections[probe.peer] = a.observation_ref;
+        }
+        return { events: [] };
+      }
+      if(!h.shape)return {events:[]};
+      const before=decode(first,h.shape,h), after=decode(second,h.shape,h);
       if(!before||!after) return {events:[]};
       if(unplannedMaterialLoss(h,step,before,after,b,a)){
         h.materialLoss={evidence:a.observation_ref,choice:materialChoice(b,action),...(p.offer.test?{test:p.offer.test}:{})};
