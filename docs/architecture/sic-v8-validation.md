@@ -2729,6 +2729,14 @@ Une préparation directionnelle transposée peut céder la place à une directio
 
 Le rejeu depuis le niveau 1 gagne à nouveau le niveau 8 en 66 commandes, soit 235 commandes cumulées. Les 32 comparaisons d’accès sont suivies de 34 commandes d’exploration publique. Les tests du moteur vérifient le choix du parcours public en présence d’une comparaison admissible et l’autorisation de la préparation lorsque la proposition de remplacement reste spéculative.
 
+### Glissement, franchissement de bord et accès à une ouverture
+
+SIC mesure le bord de la zone jouable et la maille de la pièce. Il acquiert un franchissement orienté quand une animation suit la même pièce entre deux bords opposés, sur la même ligne ou colonne et avec un pas local cohérent. La preuve est réutilisée sur une géométrie et une maille compatibles. Une disparition ou un saut intérieur ne valide aucun franchissement.
+
+Une ouverture entre deux appuis permet de chercher un trajet qui amène une pièce de couleur compatible jusqu’à cette ouverture, y compris s’il faut traverser une bande qui change sa couleur. La recherche compare des glissements bornés et tient compte de la position des obstacles mobiles. SIC vérifie le déplacement de la pièce et les positions prédites après chaque commande. Une contradiction remet la projection en question et laisse disponibles les comparaisons publiques. Seul le jeu valide la victoire.
+
+Dans le rejeu chronologique AS66 en SIC seul, les niveaux 6, 7 et 8 passent de 65, 25 et 66 commandes à 37, 13 et 17. Le total passe de 250 à 161 commandes pour les neuf niveaux. Deux plateaux synthétiques changent la taille, la palette, l’orientation, le décalage et la commande. Ils vérifient l’utilisation de la preuve dans le trajet, le refus d’une piste interrompue et le rejet d’un retour où la pièce est restée au départ.
+
 ### Mesures des trajectoires régulées
 
 La mesure d’un réglage visible sur le plateau de départ conditionne l’acquisition d’une trajectoire régulée. Vérifier cette condition avant de reconstruire la trajectoire évite d’analyser les images intermédiaires lorsqu’aucun réglage n’est mesurable. Sur les trois premiers niveaux de DICO, les 19 commandes, les retours et les animations gardent la même empreinte. Deux essais sous charge locale ont consommé environ 33 et 27 secondes de temps actif, respectivement avant et après cette modification.

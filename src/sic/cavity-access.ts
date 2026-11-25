@@ -1,13 +1,14 @@
 import { measureOpenCavityStopGeometry, rectangularOpenComplements } from '../logos-engine/v6-cavity-measurements.ts';
 import { supportParts, supportResidualCorrespondences } from '../logos-engine/v6-support-measurements.ts';
-import type { NativeBox, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativePoint, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { compileStrategyGraph, resolveStrategyGraph } from './strategy-agenda.ts';
 import { sicNeedId } from './need-identity.ts';
 import { acquireTemporalOpening, intersectsBox, movingOpeningMask, planTemporalCavity } from './temporal-cavity.ts';
 import { observedCommandFrontier, rememberCommandReturn, type ObservedCommandGraph } from './observed-command-frontier.ts';
 import { pairedOpenings } from './paired-opening.ts';
 import { visibleCommandPanel } from './visible-command-panel.ts';
-import { chooseJointSlide, observeJointSlide, readJointSlide, slideBox, type JointSlide, type JointSlideStep } from './joint-slide.ts';
+import { chooseJointSlide, observeJointSlide, readJointSlide, readSingleSlide, slideBox, type JointSlide, type JointSlideStep } from './joint-slide.ts';
+import { measureSlideBoundary, rectangularSlideInteriors, type SlideBoundary } from './slide-boundary.ts';
 
 export const cavityAccessId = 'sic_cavity_access';
 const objective = 'G_official_completion';
@@ -35,6 +36,7 @@ type Stop = { claim_ref: string; local_row_pitch: number; local_column_pitch: nu
 type State = { epoch: number; body: readonly [number, number, number] | null; floor: number | null;
   directions: Record<string, Displacement>; recent: Displacement | null; tried: string[]; packet: readonly NativeRows[]; stop: Stop | null;
   motion: ReturnType<typeof acquireTemporalOpening>; motionEvidence: readonly string[]; transitions: ObservedCommandGraph;
+  interiors?: NativeBox[]; seams?: SlideBoundary[]; slotBody?: true; rejectedSlotContact?: true;
   slots: readonly NativeBox[]; slotEvidence: string | null; slotChecks?: number;
   lastSlotReturn?: string; lastRepeatedSlotReturn?: string };
 type Proposal = NativeProposal & { key: string; needId: string; expectedStop?: NativePoint; expectedFrame?: string;
@@ -76,11 +78,12 @@ function observedRectangleTranslation(first: NativeRows, second: NativeRows, mot
   });
 }
 
-export function animationSlideDirection(positions: readonly NativePoint[], width: number, height: number): NativePoint | null {
+export function animationSlideDirection(positions: readonly (NativePoint | null)[], width: number, height: number): NativePoint | null {
   const directions = new Map<string, NativePoint>();
-  for (const [i, [row, column]] of positions.slice(1).entries()) {
-    const [previousRow, previousColumn] = positions[i]!;
-    const dr = row - previousRow, dc = column - previousColumn;
+  for (const [i, position] of positions.slice(1).entries()) {
+    const previous = positions[i];
+    if (!position || !previous) continue;
+    const dr = position[0] - previous[0], dc = position[1] - previous[1];
     if ((dr === 0) === (dc === 0) || Math.abs(dr) > height || Math.abs(dc) > width) continue;
     const direction = [Math.sign(dr), Math.sign(dc)] as const;
     directions.set(direction.join(','), direction);
@@ -97,7 +100,7 @@ function measureAccess(state: State, observation: NativeObservation, rows: Nativ
     interface_action_translation_deltas: Object.values(state.directions).map(d => [d.action, ...d.delta]),
     known_action_translation_deltas: state.recent ? [[state.recent.action, ...state.recent.delta]] : [],
     last_action_ref: state.recent?.action, canonical_surface_stop_facts: state.stop ? [state.stop] : [],
-    canonical_screen_wrap_facts: [], latest_ordered_action_frames: state.packet.map(frame => ({ rows: frame })),
+    canonical_screen_wrap_facts: state.seams ?? [], latest_ordered_action_frames: state.packet.map(frame => ({ rows: frame })),
     route_generation_policy: { open_cavity_action_order: options, open_cavity_search_state_bound: 256 },
   });
 }
@@ -105,6 +108,82 @@ function measureAccess(state: State, observation: NativeObservation, rows: Nativ
 export function createSicCavityAccess(): NativeFamily<Proposal> {
   let state: State = structuredClone(empty);
   let joint: JointSlide | null = null, rejectedJointEpoch: number | null = null;
+  const learn = (before: NativeObservation, after: NativeObservation, command: NativeCommand, first: NativeRows, second: NativeRows,
+    frames: readonly NativeRows[] = [], proposal?: Proposal) => {
+    if (after.level_epoch !== before.level_epoch || after.state !== before.state) return;
+    if (!proposal && (state.epoch !== before.level_epoch || !state.slotBody)) return;
+    if (state.epoch !== before.level_epoch) state = { ...structuredClone(empty), epoch: before.level_epoch };
+    state.interiors ??= rectangularSlideInteriors(first, supportParts(first));
+    if (proposal?.slots?.length) {
+      state.slots = proposal.slots;
+      state.slotEvidence = before.observation_ref;
+    }
+    if (proposal?.comparesSlot) {
+      state.slotChecks = (state.slotChecks ?? 0) + 1;
+      state.lastSlotReturn = after.observation_ref;
+      if (after.frame_hash === before.frame_hash || Object.hasOwn(state.transitions, after.frame_hash)) state.lastRepeatedSlotReturn = after.observation_ref;
+    }
+    const key = `${before.frame_hash}:${command.action_ref}`;
+    if (!state.tried.includes(key)) state.tried.push(key);
+    rememberCommandReturn(state.transitions, before.frame_hash, after.frame_hash, command.action_ref, after.observation_ref);
+    state.motion = acquireTemporalOpening(first, second, command.action_ref, after.observation_ref, state.motion);
+    if (state.motion?.otherEvidence && !state.motionEvidence.length) state.motionEvidence = [state.motion.otherEvidence, state.motion.evidence];
+    const openings = rectangularOpenComplements(supportParts(second));
+    const correspondences = state.motion ? observedRectangleTranslation(first, second, state.motion)
+      : supportResidualCorrespondences(before, after, first, second).candidates;
+    const moved = correspondences.filter((pair: { after: { bbox: number[]; palette_value: number } }) => {
+      const [l, t, r, b] = pair.after.bbox, width = r! - l! + 1, height = b! - t! + 1;
+      return openings.some(([, box]) => width === box.width && height === box.height)
+        && (!state.body || state.body[0] === pair.after.palette_value && state.body[1] === width && state.body[2] === height);
+    });
+    if (!state.body && state.slots.length === 1 && state.interiors.length) {
+      const local = readSingleSlide(first, before, supportParts(first), [], [], state.interiors);
+      if (local) {
+        const piece = local.world.pieces[0]!;
+        state.body = [piece.ink, local.board.pitch, local.board.pitch];
+        state.slotBody = true;
+      }
+    }
+    if (!state.slotBody && moved.length !== 1) return;
+    const pair = moved.length === 1 ? moved[0] : undefined;
+    if (pair) {
+      const { before: from, after: to } = pair;
+      const delta = [to.position[1] - from.position[1], to.position[0] - from.position[0]] as const;
+      if ((delta[0] === 0) !== (delta[1] === 0)) {
+        state.body = [to.palette_value, to.bbox[2] - to.bbox[0] + 1, to.bbox[3] - to.bbox[1] + 1];
+        const [l, t, r, b] = from.bbox, floor = new Set<number>();
+        for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) floor.add(second[y]![x]!);
+        if (floor.size === 1 && !floor.has(to.palette_value)) state.floor = [...floor][0]!;
+        state.recent = { action: command.action_ref, delta, ref: after.observation_ref };
+      } else if (!state.slotBody) return;
+    }
+    const body = state.body;
+    if (!body) return;
+    state.packet = [first, ...(frames.length ? frames : [second])];
+    const [, width, height] = body;
+    const positions = state.packet.map((frame): NativePoint | null => {
+      const bodies = bodyOutsideMask(frame, body, state.motion);
+      return bodies.length === 1 ? [bodies[0]!.bbox.left, bodies[0]!.bbox.top] : null;
+    });
+    const direction = animationSlideDirection(positions.flatMap(p => p ? [[p[1], p[0]]] : state.slotBody ? [null] : []), width, height);
+    if (direction) {
+      state.directions[command.action_ref] = { action: command.action_ref, delta: direction, ref: after.observation_ref };
+      const known = state.seams ??= [];
+      for (const bounds of state.interiors) {
+        const fact = measureSlideBoundary(positions, bounds, width, height, [direction[1], direction[0]], after.observation_ref);
+        if (fact && !known.some(prior => prior.directed_edge_pair_ref === fact.directed_edge_pair_ref
+          && prior.playable_origin_column === fact.playable_origin_column && prior.playable_origin_row === fact.playable_origin_row)) known.push(fact);
+      }
+    }
+    const matches = bodyOutsideMask(second, body, state.motion);
+    const checked = matches.length === 1 && state.floor !== null ? measureAccess(state, after, second, matches[0]!.bbox) : null;
+    if (checked?.open_cavity_observed_first_stop_matches && state.floor !== null && !state.stop) {
+      state.stop = { claim_ref: after.observation_ref, local_row_pitch: height, local_column_pitch: width,
+        revisable_floor_value: state.floor, stop_surface_values: checked.open_cavity_stop_surface_values ?? [] };
+    }
+    if (pair && state.recent) return { kind: 'sic_observed_slide', command: command.action_ref,
+      delta: state.recent.delta, direction, observation: after.observation_ref };
+  };
   return {
     id: cavityAccessId,
     propose(observation, rows, inputs, remaining) {
@@ -112,28 +191,38 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       if (remaining < 1 || options.length < 2) return null;
       const ref = observation.observation_ref;
       const components = supportParts(rows);
+      const local = state.epoch === observation.level_epoch ? state : empty;
+      const directions = Object.values(local.directions);
       const shared = joint?.epoch === observation.level_epoch ? joint
-        : rejectedJointEpoch !== observation.level_epoch ? readJointSlide(rows, observation, components) : null;
-      const jointStep = shared && chooseJointSlide(shared, remaining);
-      const jointAction = jointStep && options.find(command => command.action_ref === jointStep.input);
+        : (rejectedJointEpoch !== observation.level_epoch ? readJointSlide(rows, observation, components) : null)
+          ?? (directions.length >= 2 && local.interiors?.length ? readSingleSlide(rows, observation, components,
+            directions.map(d => [d.action, [d.delta[1], d.delta[0]]]), local.seams ?? [], local.interiors) : null);
+      const jointStep = shared && chooseJointSlide(shared, remaining, !local.rejectedSlotContact);
+      const jointAction = jointStep && options.find(command => command.action_ref === jointStep.input
+        && (shared?.board.open || !local.tried.includes(`${observation.frame_hash}:${command.action_ref}`)));
       if (shared && jointStep && jointAction) {
         const proof: [string, ...string[]] = [ref, ...shared.refs.filter(value => value !== ref)];
+        const multiple = !!shared.board.open;
         const situation = jointStep.temporarilyVacatesSeat ? 'Leave the first seat temporarily so both pieces can finish together'
-          : 'Check where both pieces stop and how the moving obstacle changes';
+          : multiple ? 'Check where both pieces stop and how the moving obstacle changes' : 'Check the predicted slide toward the matching slot';
         const goal = { kind: 'occupy_compatible_openings_simultaneously', scope: ref.split(':revision:', 1)[0]!,
-          subjects: ['controlled_pieces', 'colored_seat', 'generic_seat', 'moving_obstacle'], parentObjective: objective,
-          satisfactionContract: 'observe_official_progress_after_both_seats_are_occupied' };
+          subjects: multiple ? ['controlled_pieces', 'colored_seat', 'generic_seat', 'moving_obstacle'] : ['controlled_piece', 'colored_seat'],
+          parentObjective: objective, satisfactionContract: 'observe_official_progress_after_compatible_slots_are_occupied' };
         const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence: proof }, id = `cavity:${need.id}`;
         const strategy = 'follow_timed_slide', actions = [jointAction];
         return { status: 'proposed', kind: cavityAccessId, actions,
           steps: [{ action: jointAction, expected_after: jointStep.next }], joint: { local: shared, step: jointStep },
           key: observation.frame_hash + ':' + jointAction.action_ref, needId: need.id,
           binding: { observation_ref: ref, level_epoch: observation.level_epoch },
-          sicSituationCard: { strategy, need: 'Bring both pieces to their compatible seats on the same return',
+          sicSituationCard: { strategy, need: multiple ? 'Bring both pieces to their compatible seats on the same return' : 'Bring the piece to its matching slot',
             situation, mode: shared.refs.length === 1 ? 'exploration' : 'solving', agenda: [], evidence: proof,
+            ...(jointStep.crossedSeam ? { boundaryTraversal: local.seams?.some(fact => {
+              const direction = local.directions[jointAction.action_ref]?.delta;
+              return direction && fact.directed_edge_pair_ref === `edge_pair:${direction[0]}:${direction[1]}` && shared.refs.includes(fact.claim_ref);
+            }) ? 'observed' : 'hypothesis' } : {}),
             controlledPieces: shared.world.pieces.map(piece => slideBox(shared, piece.at)),
-            slots: [slideBox(shared, shared.board.colored.at), slideBox(shared, shared.board.open)],
-            movingObstacle: slideBox(shared, shared.world.patrol.at), remainingCommands: jointStep.distance },
+            slots: [slideBox(shared, shared.board.colored.at), ...(shared.board.open ? [slideBox(shared, shared.board.open)] : [])],
+            movingObstacles: shared.world.patrols.map(p => slideBox(shared, p.at)), remainingCommands: jointStep.distance },
           compositions: [{ id, observed: false, open_question: situation, relations: [`contributes_to:${objective}`] }],
           question: { reason: situation, hypothesis_refs: proof }, route_refs: proof,
           sicLocalDecision: { strategy, objective: { id, label: situation, parent: objective }, need },
@@ -141,7 +230,6 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
             evidence: proof, preconditions: {}, preserve_refs: [], actions, outcome_guard: { path: ['value'], contains: id } } };
       }
       const openings = rectangularOpenComplements(components).map(([, box]) => box);
-      const local = state.epoch === observation.level_epoch ? state : empty;
       const visibleFit = openings.some(box => box.width > 1 && box.height > 1 && components.some(part => part.area === box.width * box.height
         && part.bbox.width === box.width && part.bbox.height === box.height));
       const testedEveryDirection = options.every(({ action_ref }) => local.tried.some(attempt => attempt.endsWith(`:${action_ref}`)));
@@ -149,7 +237,6 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
       const slots = local.slotEvidence ? local.slots : shouldLookForSlots ? pairedOpenings(rows, components) : [];
       if (!visibleFit && !slots.length) return null;
       const body = local.body && bodyOutsideMask(rows, local.body, local.motion);
-      const directions = Object.values(local.directions);
       const measured = body?.length === 1 && local.floor !== null ? measureAccess(local, observation, rows, body[0]!.bbox) : null;
       const path: string[] = measured?.open_cavity_conditional_route_action_refs?.length ? measured.open_cavity_conditional_route_action_refs
         : measured?.open_cavity_next_stop_equals_core ? measured.open_cavity_nonreturn_first_action_refs ?? [] : [];
@@ -237,7 +324,7 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
         const { local, step } = proposal.joint;
         const matched = scored || before.level_epoch === after.level_epoch && !!observeJointSlide(second, local, step, after);
         return { matched, seal_prefix: true, reason: scored ? 'official_boundary'
-          : matched ? 'joint_slide_and_patrol_confirmed' : 'joint_slide_projection_refuted',
+          : matched ? 'slide_projection_confirmed' : 'slide_projection_refuted',
           ...(scored ? { sic_need: { id: proposal.needId, status: 'satisfied' } } : {}) };
       }
       const boxes = proposal.expectedStop && state.body ? bodyOutsideMask(second, state.body, state.motion) : [];
@@ -254,64 +341,25 @@ export function createSicCavityAccess(): NativeFamily<Proposal> {
         if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
         joint = observeJointSlide(second, proposal.joint.local, proposal.joint.step, after);
         if (!joint) rejectedJointEpoch = before.level_epoch;
+        if (!proposal.joint.local.board.open) {
+          learn(before, after, command, first, second, frames, proposal);
+          if (joint && proposal.joint.step.reachedSlot) state.rejectedSlotContact = true;
+        }
         return { events: [], ...(joint && proposal.joint.step.temporarilyVacatesSeat
           ? { reviewEvidence: 'The first piece left its seat while the other advanced. Both placements remain in the plan.' } : {}) };
       }
-      if (after.level_epoch !== before.level_epoch || after.state !== before.state) return { events: [] };
-      if (state.epoch !== before.level_epoch) state = { ...structuredClone(empty), epoch: before.level_epoch };
-      if (proposal.slots?.length) {
-        state.slots = proposal.slots;
-        state.slotEvidence = before.observation_ref;
-      }
-      if (proposal.comparesSlot) {
-        state.slotChecks = (state.slotChecks ?? 0) + 1;
-        state.lastSlotReturn = after.observation_ref;
-        if (after.frame_hash === before.frame_hash || Object.hasOwn(state.transitions, after.frame_hash)) {
-          state.lastRepeatedSlotReturn = after.observation_ref;
-        }
-      }
-      state.tried.push(proposal.key);
-      rememberCommandReturn(state.transitions, before.frame_hash, after.frame_hash, command.action_ref, after.observation_ref);
-      state.motion = acquireTemporalOpening(first, second, command.action_ref, after.observation_ref, state.motion);
-      if (state.motion?.otherEvidence && !state.motionEvidence.length) state.motionEvidence = [state.motion.otherEvidence, state.motion.evidence];
-      const openings = rectangularOpenComplements(supportParts(second));
-      const correspondences = state.motion ? observedRectangleTranslation(first, second, state.motion)
-        : supportResidualCorrespondences(before, after, first, second).candidates;
-      const moved = correspondences.filter((pair: { after: { bbox: number[]; palette_value: number } }) => {
-        const [l, t, r, b] = pair.after.bbox, width = r! - l! + 1, height = b! - t! + 1;
-        return openings.some(([, box]) => width === box.width && height === box.height)
-          && (!state.body || state.body[0] === pair.after.palette_value && state.body[1] === width && state.body[2] === height);
-      });
-      if (moved.length !== 1) return { events: [] };
-      const { before: from, after: to } = moved[0]!;
-      const delta = [to.position[1] - from.position[1], to.position[0] - from.position[0]] as const;
-      if ((delta[0] === 0) === (delta[1] === 0)) return { events: [] };
-      state.body = [to.palette_value, to.bbox[2] - to.bbox[0] + 1, to.bbox[3] - to.bbox[1] + 1];
-      const [l, t, r, b] = from.bbox, floor = new Set<number>();
-      for (let y = t; y <= b; y++) for (let x = l; x <= r; x++) floor.add(second[y]![x]!);
-      if (floor.size === 1 && !floor.has(to.palette_value)) state.floor = [...floor][0]!;
-      state.recent = { action: command.action_ref, delta, ref: after.observation_ref };
-      state.packet = [first, ...(frames.length ? frames : [second])];
-      const [, width, height] = state.body;
-      const positions: NativePoint[] = state.packet.flatMap(frame => {
-        const bodies = bodyOutsideMask(frame, state.body!, state.motion);
-        return bodies.length === 1 ? [[bodies[0]!.bbox.top, bodies[0]!.bbox.left]] : [];
-      });
-      const direction = animationSlideDirection(positions, width, height);
-      if (direction) state.directions[command.action_ref] = { ...state.recent, delta: direction };
-      const body = bodyOutsideMask(second, state.body, state.motion);
-      const checked = body.length === 1 && state.floor !== null ? measureAccess(state, after, second, body[0]!.bbox) : null;
-      if (checked?.open_cavity_observed_first_stop_matches && state.floor !== null && !state.stop) {
-        state.stop = { claim_ref: after.observation_ref, local_row_pitch: height, local_column_pitch: width,
-          revisable_floor_value: state.floor, stop_surface_values: checked.open_cavity_stop_surface_values ?? [] };
-      }
-      return { events: [{ kind: 'sic_observed_slide', command: command.action_ref, delta, direction, observation: after.observation_ref }] };
+      const event = learn(before, after, command, first, second, frames, proposal);
+      return { events: event ? [event] : [] };
+    },
+    observePublicOutcome(before, after, command, first, second, frames) {
+      learn(before, after, command, first, second, frames);
     },
     state: () => ({ ...state, ...(joint ? { joint } : {}), ...(rejectedJointEpoch === null ? {} : { rejectedJointEpoch }) }),
     restore(value: NativeRecord) {
       const { joint: savedJoint, rejectedJointEpoch: rejected, ...legacy } = value;
       state = structuredClone(legacy as State);
-      joint = structuredClone((savedJoint as JointSlide | undefined) ?? null);
+      const saved = savedJoint as JointSlide | undefined;
+      joint = saved && Array.isArray(saved.world?.patrols) ? structuredClone(saved) : null;
       rejectedJointEpoch = typeof rejected === 'number' ? rejected : null;
     },
   };
