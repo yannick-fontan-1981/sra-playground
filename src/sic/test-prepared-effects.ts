@@ -5,7 +5,7 @@ import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal
 import { sicObservedTransportDeadlock } from '../logos-engine/v6-native-types.ts';
 import {rememberRelayControl} from './relay-control.ts';
 import { proposeRelayContact, observeStrandedTransport, newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
-import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, isUnwitnessedDirectionalPreparation, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
+import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, transferredPreviewGroup, hasExperimentOpportunity, isUnwitnessedDirectionalPreparation, mayPursueWitnessedEffect, requiresPreviewRevalidation, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import {offerCursorTrial,newCursorMemory,measuredReturnSelection} from './marked-cursor-selection.ts';
@@ -261,6 +261,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
       return this.proposeInGroup!(entry, observation, rows, inputs, remaining, execution);
     },
     async proposeInGroup(group, o, rows, inputs, remaining) {
+      const revalidatePreview = group === transferredPreviewGroup;
+      if (revalidatePreview) group = evidencedPlanGroup;
       enter(o);
       if(remaining<1)return null;
       const focused=group===coveragePlanGroup;
@@ -326,6 +328,7 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
           'a_distinctive_colored_mark_on_a_homologous_piece_may_identify_the_controlled_cursor',refs:[],cursorTrial:cursor,
       } : relative ? {phase:'useRelativePlacement',origin:-1,a:relative.op,b:relative.op,rule:'open_a_route_by_changing_a_relative_placement',refs:[],relative} : selectExperiment(m,o,available,group===exhaustedGroup,rows,localOpportunity,configurationOpportunity);
       if(!landmark&&!cursor&&group===recurrentExperimentGroup&&!hasExperimentOpportunity(m)&&!experiment?.localCapacity&&!experiment?.configurationTrial)return null;
+      if (group === evidencedPlanGroup && revalidatePreview !== requiresPreviewRevalidation(experiment)) return null;
       if (!experiment || (!contactProject && !cooperative && !landmark && !cursor && group === evidencedPlanGroup && !witnessedObjective(experiment))) return null;
       const { a, b, phase } = experiment;
       const key=experimentCommand(experiment);

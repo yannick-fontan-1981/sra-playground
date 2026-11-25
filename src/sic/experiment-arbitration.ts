@@ -3,7 +3,17 @@ import type { LocalForecast } from './prospective-local-use.ts';
 
 export const coveragePlanGroup='test_or_continue_a_grounded_coverage_plan';
 export const evidencedPlanGroup = 'continue_or_test_a_witnessed_effect';
+export const transferredPreviewGroup = 'revalidate_transferred_preview_after_grounded_mechanics';
 export const recurrentExperimentGroup = 'experiment_after_unproductive_returns';
+
+function usesTransferredPreview(experiment: Pick<Experiment, 'witnessedPreview'> | null): boolean {
+  return experiment?.witnessedPreview?.basis === 'observed_in_previous_level';
+}
+
+export function requiresPreviewRevalidation(experiment: Pick<Experiment, 'rule' | 'witnessedPreview'> | null): boolean {
+  // A cue just rediscovered by an active search already has a current return.
+  return usesTransferredPreview(experiment) && experiment?.rule !== 'use_the_rediscovered_cue';
+}
 /** A negative control at the current placement is evidence for the question,
  * but the proposed preparation still comes from a different placement. */
 export function isUnwitnessedDirectionalPreparation(forecast: Pick<LocalForecast,
@@ -46,7 +56,7 @@ export function witnessedObjective(x: Experiment): boolean {
   if (x.localCapacity && x.localCapacity.stage!=='control')return true;
   if (x.terminalContact?.preparationKey) return !!x.terminalContact.blockedGoal;
   if ((x.terminalContact?.distance === 1 && x.terminalContact.currentMotionWitness && x.phase !== 'testScoringContact')
-    || x.witnessedPreview?.basis === 'observed_in_previous_level') return true;
+    || usesTransferredPreview(x)) return true;
   const trial = x.mechanism;
   return !!trial?.plan.arrival && (trial.cause.tag === 'projected_access_limit' || trial.index > 0);
 }

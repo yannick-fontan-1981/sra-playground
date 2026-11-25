@@ -2740,3 +2740,9 @@ Dans le rejeu chronologique AS66 en SIC seul, les niveaux 6, 7 et 8 passent de 6
 ### Mesures des trajectoires régulées
 
 La mesure d’un réglage visible sur le plateau de départ conditionne l’acquisition d’une trajectoire régulée. Vérifier cette condition avant de reconstruire la trajectoire évite d’analyser les images intermédiaires lorsqu’aucun réglage n’est mesurable. Sur les trois premiers niveaux de DICO, les 19 commandes, les retours et les animations gardent la même empreinte. Deux essais sous charge locale ont consommé environ 33 et 27 secondes de temps actif, respectivement avant et après cette modification.
+
+### Arbitrage d’une préparation apprise à un niveau précédent
+
+Une commande prédite par une préparation transférée reste une expérience tant que son effet n’a pas été corroboré dans la disposition courante. SIC essaie les stratégies de mouvement fondées sur le plateau courant avant de tester cette préparation. Il conserve le témoin antérieur et vérifie le résultat si la préparation est appelée. Lorsqu’une recherche active vient de retrouver l’indice manquant, la vérification déjà engagée reste prioritaire.
+
+À budget identique et depuis le niveau 1, KA59 gagne le niveau 4 en 38 commandes après un arrêt antérieur à 46. TU93 gagne le niveau 3 en 19 commandes après un arrêt antérieur à 24. Le contrôle ciblé vérifie le transfert d’une autre disposition, son refus dans le groupe prioritaire et la reprise d’une vérification après la réapparition de l’indice.

@@ -3,6 +3,7 @@ import test from 'node:test';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
 import type { NativeCommand } from '../src/logos-engine/v6-native-types.ts';
 import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
+import { evidencedPlanGroup, transferredPreviewGroup } from '../src/sic/experiment-arbitration.ts';
 import {observedSituatedOperations,retainSituatedOperations} from '../src/sic/situated-preparation.ts';
 import {initialMemory} from '../src/sic/preparation-experiments.ts';
 import {offerTerminalContact,measureTerminalContact} from '../src/sic/terminal-contact.ts';
@@ -186,7 +187,8 @@ test('the family restores the witnessed relation across an official completion a
   );
   const restored = createPreparedEffects();
   restored.restore!(family.state!());
-  const proposal = await restored.proposeInGroup!('explore', next.o, next.rows, [], 20);
+  assert.equal(await restored.proposeInGroup!(evidencedPlanGroup, next.o, next.rows, [], 20), null);
+  const proposal = await restored.proposeInGroup!(transferredPreviewGroup, next.o, next.rows, [], 20);
   assert.equal(proposal?.experiment.phase, 'witnessedPreview');
   const read = proposal!.experiment.witnessedPreview!;
   assert.equal(read.basis, 'observed_in_previous_level');

@@ -5,7 +5,7 @@ import { createNativeV6Runtime, NATIVE_V6_REFERENCE_COMMIT } from '../src/logos-
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { recoveryRevision, readRecoveryRevision } from '../src/sic/recovery-pack.ts';
 import { hasExperimentOpportunity, isUnwitnessedDirectionalPreparation,
-  recordReturn, mayPursueWitnessedEffect } from '../src/sic/experiment-arbitration.ts';
+  recordReturn, mayPursueWitnessedEffect, transferredPreviewGroup } from '../src/sic/experiment-arbitration.ts';
 import { initialMemory } from '../src/sic/preparation-experiments.ts';
 import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
 import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
@@ -91,6 +91,9 @@ test('both planning modes dispatch the same experimental capabilities and accept
   for (const id of [preparedEffectsId, compositionFamily]) assert.ok(full.registeredFamilies.includes(id));
   const byId = (groups: typeof full.sourceGroups) => Object.fromEntries(groups.map(group => [group.id, group]));
   assert.deepEqual(byId(full.sourceGroups), byId(fallback.sourceGroups));
+  const motion = byId(full.sourceGroups).coordinate_visible_motion!;
+  assert.equal(motion.families.at(-1), preparedEffectsId);
+  assert.equal(motion.entryPoints?.at(-1), transferredPreviewGroup);
   const projected = fallback.sourceGroups[0]!;
   assert.equal(projected.entryPoints?.[0], 'test_or_continue_a_grounded_coverage_plan');
   assert.ok(full.sourceGroups.findIndex(group => group.id === projected.id) > 0);
