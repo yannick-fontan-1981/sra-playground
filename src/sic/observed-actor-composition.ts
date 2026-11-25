@@ -1471,8 +1471,7 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const planned=await platformOffer(scene,h,o,remaining,execution)??relay??releaseBlockedControl(scene,h)??prepareRelayControls(scene,h,o)
         ??chain??press??linkedTransport(scene,h,o)??paired??await relayOffer(scene,h,remaining,execution)??arrangeActors(scene,h);
       const direct=planned?undefined:draft(scene,h,o);
-      const directed=scene.goals.length&&direct&&direct.score>155
-        &&(direct.kind!=='approach_a_visible_transfer_alignment'||frontier.length)?direct:undefined;
+      const directed=scene.goals.length&&direct&&direct.score>155?direct:undefined;
       const generic=!planned&&!directed&&h.directions.length>=4?testObservedObjects(scene,h,objects):undefined;
       const interaction=generic&&(!frontier[0]||generic.score>frontier[0].score)?generic:frontier[0];
       const offer=planned??directed??interaction??direct;
