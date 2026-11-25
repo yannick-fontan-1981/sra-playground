@@ -1,3 +1,4 @@
+import { composePlan } from './effect-composer.ts';
 import { measureOrderedSupportScene, measureSupportBand, orderedSupportSelectionMatches,
   type MaterialBand, type OrderedSupportScene } from '../logos-engine/v6-ordered-support.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
@@ -30,27 +31,28 @@ function nextTransfer(scene: Scene, local: State): Move | null {
   const total = configuration.flat().length;
   const key = signature(configuration);
   const selected = local.selected?.key === key ? local.selected.source : null;
-  const queue: { state: number[][]; first: Move | null }[] = [{ state: configuration, first: null }];
-  const seen = new Set([key]);
-  for (let cursor = 0; cursor < queue.length && cursor < 12000; cursor++) {
-    const { state, first } = queue[cursor]!;
-    if (state[target]!.length === total) return first;
-    for (const [source, stack] of state.entries()) {
-      if (!first && selected !== null && selected !== source) continue;
-      const piece = stack.at(-1);
-      if (piece === undefined) continue;
-      for (const [destination, receiver] of state.entries()) {
-        if (destination === source || (receiver.at(-1) ?? Infinity) <= piece) continue;
-        if (!first && local.refused.includes(JSON.stringify([key, source, destination]))) continue;
-        const expected = state.map((support, i) => i === source ? support.slice(0,-1) : i === destination ? [...support, piece] : support);
-        const id = signature(expected);
-        if (seen.has(id)) continue;
-        seen.add(id);
-        queue.push({ state: expected, first: first ?? { source, destination, expected } });
+  const plan = composePlan<number[][], Move>({
+    domain: 'ordered-support-transfer',
+    initial: configuration, key: signature,
+    goal: { relation: 'all pieces on the marked support', holds: state => state[target]!.length === total },
+    budget: { commands: 12_000, states: 12_000 },
+    *choices(state) {
+      for (const [source, stack] of state.entries()) {
+        if (state === configuration && selected !== null && selected !== source) continue;
+        const piece = stack.at(-1);
+        if (piece === undefined) continue;
+        for (const [destination, receiver] of state.entries()) {
+          if (destination === source) continue;
+          if (state === configuration && local.refused.includes(JSON.stringify([key, source, destination]))) continue;
+          const expected = state.map((support, i) => i === source ? support.slice(0,-1) : i === destination ? [...support, piece] : support);
+          yield { action: { source, destination, expected }, after: expected, evidence: local.effects,
+            requires: [{ relation: 'receiver accepts the order relationship',
+              holds: () => (receiver.at(-1) ?? Infinity) > piece }] };
+        }
       }
-    }
-  }
-  return null;
+    },
+  });
+  return plan?.effects[0]?.action ?? null;
 }
 
 export function createSicLearnSupportMoves(family = learnSupportMovesId): NativeFamily<Offer> {

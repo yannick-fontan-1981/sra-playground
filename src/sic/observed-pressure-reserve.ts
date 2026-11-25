@@ -1,3 +1,4 @@
+import { composePlan } from './effect-composer.ts';
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
 
@@ -234,19 +235,22 @@ export function choosePressureReserve(local: PressureReserve | undefined, travel
 
   function route(goal: PressurePlan['goal'], target: string, match: (pose: Pose) => boolean,
     preserve: (pose: Pose) => boolean = () => true): PressurePlan | undefined {
-    const queue: { pose: Pose; first?: { command: NativeCommand; expected: Pose } }[] = [{ pose: initial! }];
-    const seen = new Set([poseKey(initial!)]);
-    for (let i = 0; i < queue.length && i < 7500; i++) {
-      const { pose, first } = queue[i]!;
-      if (first && match(pose)) return { ...first, goal, target, evidence };
-      for (const move of moves) {
-        const expected = project(pose, move);
-        if (!expected || !preserve(expected)) continue;
-        const key = poseKey(expected);
-        if (seen.has(key)) continue;
-        seen.add(key); queue.push({ pose: expected, first: first ?? { command: move.command, expected } });
-      }
-    }
+    const invariant = { relation: 'reserved resource remains on its support', holds: preserve };
+    const plan = composePlan<Pose, { command: NativeCommand; expected: Pose }>({
+      domain: 'reserve-and-build',
+      initial: initial!, key: poseKey,
+      goal: { relation: goal, holds: match },
+      budget: { commands: 7_500, states: 7_500 },
+      *choices(pose) {
+        for (const move of moves) {
+          const expected = project(pose, move);
+          if (expected) yield { action: { command: move.command, expected }, after: expected,
+            maintains: [invariant], evidence };
+        }
+      },
+    });
+    const first = plan?.effects[0]?.action;
+    return first ? { ...first, goal, target, evidence } : undefined;
   }
   if (!gate.closedRef && initial.actor === gate.mark && !initial.pieces.length) {
     const move = moves.find(item => project(initial, item));

@@ -2,6 +2,7 @@ import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-
 import { readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
 import { observedGateDependencies } from './observed-gate-dependency.ts';
 import { maximumCommittedActions } from './plan-step.ts';
+import { composePlan } from './effect-composer.ts';
 
 type Cells = ReturnType<typeof readTravelGrid>['cells'];
 type Move = { input: string; delta: NativePoint };
@@ -672,26 +673,24 @@ export function chooseExchange(local: ObservedExchange | undefined, travel: Obse
   }
   const evidence = [...new Set([...local.refs, ...moves.map(move => travel.moves[move.input]!.ref)])];
   function path(goal: ExchangePlan['goal'], subjects: string[], check: (pose: Pose) => boolean): ExchangePlan | undefined {
-    type Node = { pose: Pose; from?: Node; prediction?: Prediction & { certain: boolean } };
-    const queue: Node[] = [{ pose: initial }], seen = new Set([poseKey(initial)]);
-    for (let i = 0; i < queue.length && i < 7500; i++) {
-      const node = queue[i]!, { pose } = node;
-      if (node.prediction && check(pose)) {
-        const route: (Prediction & { certain: boolean })[] = [];
-        for (let current: Node | undefined = node; current?.prediction; current = current.from) route.push(current.prediction);
-        route.reverse();
-        const { command, pose: expected } = route[0]!;
-        const series = prepareExchangeSeries(local!, travel!, cells, initial, route, remaining);
-        return { command: { action_ref: command, data: {} }, goal, subjects, focus: initial.actor,
-          ...(initial.pieces.includes(expected.actor) ? { partner: expected.actor } : {}), prediction: { command, pose: expected }, evidence,
-          ...(series ? { series } : {}) };
-      }
-      for (const move of moves) for (const { pose: candidate, certain } of project(pose, move)) {
-        const key = poseKey(candidate);
-        if (seen.has(key)) continue;
-        seen.add(key); queue.push({ pose: candidate, from: node, prediction: { command: move.input, pose: candidate, certain } });
-      }
-    }
+    const result = composePlan<Pose, Prediction & { certain: boolean }>({
+      domain: 'observed-exchange', initial, key: poseKey,
+      goal: { relation: goal, holds: check }, budget: { commands: 7500, states: 7500 },
+      *choices(pose) {
+        for (const move of moves) for (const next of project(pose, move)) {
+          const gate = pose.pieces.includes(next.pose.actor) ? undefined : gates.get(next.pose.actor);
+          yield { action: { command: move.input, ...next }, after: next.pose, evidence,
+            ...(gate ? { maintains: [{ relation: 'exchange-gate-open', holds: state => canEnter(gate.cell, state) }] } : {}) };
+        }
+      },
+    });
+    const route = result?.effects.map(effect => effect.action);
+    if (!route?.length) return;
+    const { command, pose: expected } = route[0]!;
+    const series = prepareExchangeSeries(local!, travel!, cells, initial, route, remaining);
+    return { command: { action_ref: command, data: {} }, goal, subjects, focus: initial.actor,
+      ...(initial.pieces.includes(expected.actor) ? { partner: expected.actor } : {}), prediction: { command, pose: expected }, evidence,
+      ...(series ? { series } : {}) };
   }
   for (const gate of layout.gates) {
     if (gate.opensWhenCovered || !moves.some(move => {

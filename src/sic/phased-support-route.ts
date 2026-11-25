@@ -1,3 +1,4 @@
+import { composePlan } from './effect-composer.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { inferCycleAfterTransient, type CycleEvidence } from './observed-cycle.ts';
@@ -143,31 +144,28 @@ export function planPhasedSupport(state: PhasedSupport, directions: readonly num
     const ink = values.find(value => value !== undefined) ?? terrain.base[cell]!;
     return ink >= 0 && !terrain.voids.includes(ink);
   };
-  type Node = { position: PhasePosition; parent: Node | null; step: PhaseStep | null; depth: number };
-  const queue: Node[] = [{ position: state.position, parent: null, step: null, depth: 0 }];
-  const key = ({ cell, phases }: PhasePosition) => [cell, ...phases].join(',');
-  const visited = new Set([key(state.position)]);
-  for (const node of queue) {
-    const { position: { cell, phases }, depth } = node;
-    if (cell === target) {
-      const route: PhaseStep[] = [];
-      for (let current = node; current.parent && current.step; current = current.parent) route.push(current.step);
-      return route.reverse();
-    }
-    if (depth >= remaining || queue.length > 100_000) continue;
-    const add = (step: PhaseStep) => {
-      const mark = key(step.next);
-      if (step.next.cell < 0 || visited.has(mark) || !passes(step.next)) return;
-      visited.add(mark);
-      queue.push({ position: step.next, parent: node, step, depth: depth + 1 });
-    };
-    for (const direction of directions) add({ direction, next: { cell: neighbor(terrain, cell, deltas[direction]!), phases } });
-    for (const [control, period] of counts.entries()) add({ control, probing: false,
-      next: { cell, phases: phases.map((phase, i) => i === control ? (phase + 1) % period : phase) } });
-    const pad = pads.findIndex(p => p.cell === cell);
-    if (pad !== -1) add({ portal: true, next: { cell: pads[1 - pad]!.cell, phases } });
-  }
-  return [];
+  const supported = { relation: 'footing remains supported', holds: passes };
+  return composePlan<PhasePosition, PhaseStep>({
+    domain: 'phased-support',
+    initial: state.position, key: ({ cell, phases }) => [cell, ...phases].join(','),
+    goal: { relation: 'reach the destination support', holds: position => position.cell === target },
+    budget: { commands: remaining, states: 100_001 },
+    *choices({ cell, phases }) {
+      for (const direction of directions) {
+        const after = { cell: neighbor(terrain, cell, deltas[direction]!), phases };
+        if (after.cell >= 0) yield { action: { direction, next: after }, after, ensures: [supported] };
+      }
+      for (const [control, period] of counts.entries()) {
+        const after = { cell, phases: phases.map((phase, i) => i === control ? (phase + 1) % period : phase) };
+        yield { action: { control, probing: false, next: after }, after, maintains: [supported] };
+      }
+      const pad = pads.findIndex(item => item.cell === cell);
+      if (pad !== -1) {
+        const after = { cell: pads[1 - pad]!.cell, phases };
+        yield { action: { portal: true, next: after }, after, ensures: [supported] };
+      }
+    },
+  })?.effects.map(result => result.action) ?? [];
 }
 
 export function phaseAffectedSupport(state: PhasedSupport, control: number): NativeBox | null {

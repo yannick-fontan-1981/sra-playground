@@ -1,3 +1,4 @@
+import { composePlan } from './effect-composer.ts';
 import { provisional_scenes } from '../logos-engine/v6-inventory-initial.ts';
 import { world_complements, transferred_shape, display_matches } from '../logos-engine/v6-inventory-contrast.ts';
 import { complements, current_goal_witnesses, revalidate } from '../logos-engine/v6-inventory-boundary.ts';
@@ -98,17 +99,22 @@ function initialScene(observation: Parameters<NativeFamily['propose']>[0], rows:
 function path(scene: Scene, from: NativePoint, to: NativePoint, unavailable: readonly string[], crossed: boolean): NativePoint[] | null {
   const open = new Set(scene.grid.filter(cell => includeAll(cell.values, scene.travel) || same(cell.at, scene.start)
     || crossed && same(cell.at, scene.link.gate)).map(cell => key(cell.at)));
-  const queue = [{ at: from, steps: [] as NativePoint[] }], visited = new Set([key(from)]);
-  for (const { at, steps } of queue) {
-    if (same(at, to)) return steps;
-    for (const direction of Object.values(directions)) {
-      const next = add(at, direction), nextKey = key(next);
-      if (visited.has(nextKey) || unavailable.includes(key(at) + '>' + nextKey) || !open.has(nextKey) && !same(next, to)) continue;
-      visited.add(nextKey);
-      queue.push({ at: next, steps: [...steps, direction] });
-    }
-  }
-  return null;
+  return composePlan<NativePoint, NativePoint>({
+    domain: 'inventory-access',
+    initial: from, key,
+    goal: { relation: 'reach the selected approach', holds: at => same(at, to) },
+    budget: { commands: open.size + 1, states: open.size + 2 },
+    *choices(at) {
+      for (const direction of Object.values(directions)) {
+        const next = add(at, direction), nextKey = key(next);
+        if (unavailable.includes(key(at) + '>' + nextKey)) continue;
+        yield { action: direction, after: next, ensures: [{
+          relation: 'stay within the observed access or reach its contact',
+          holds: landing => open.has(key(landing)) || same(landing, to),
+        }] };
+      }
+    },
+  })?.effects.map(result => result.action) ?? null;
 }
 
 function slotLooksOccupied(memory: Boundary, observation: NativeObservation, rows: NativeRows): boolean {

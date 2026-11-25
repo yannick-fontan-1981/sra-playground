@@ -1,3 +1,4 @@
+import { composePlan } from './effect-composer.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { CoupledPair } from '../logos-engine/v6-coupled-pair-observation.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
@@ -146,26 +147,22 @@ export function confirmedPressureControl(field: PressureField, before: Positions
 export function planPressureRoute(state: PressureState, available: readonly string[], limit: number, interrupted: () => boolean = () => false) {
   const { field, controls } = state, span = field.terrain.length;
   const identity = ([a, b]: Positions) => a * span + b;
-  const tested = new Uint8Array(span * span);
-  const choices = available.flatMap(key => controls[key] ? [[key, controls[key]!] as const] : []);
-  type Node = { positions: Positions; predecessor: number; depth: number; step?: PressureStep };
-  const queue: Node[] = [{ positions: state.positions, predecessor: -1, depth: 0 }];
-  tested[identity(state.positions)] = 1;
-  for (let i = 0; i < queue.length; i++) {
-    if (i % 128 === 0 && interrupted()) return [];
-    const item = queue[i]!;
-    if (item.positions[0] === item.positions[1]) {
-      const path: PressureStep[] = [];
-      for (let at = i; queue[at]!.predecessor >= 0; at = queue[at]!.predecessor) path.push(queue[at]!.step!);
-      return path.reverse();
-    }
-    if (item.depth >= limit) continue;
-    for (const [command, motion] of choices) {
-      const step = projectPressureControl(field, item.positions, command, motion);
-      if (!step || tested[identity(step.positions)]) continue;
-      tested[identity(step.positions)] = 1;
-      queue.push({ positions: step.positions, predecessor: i, depth: item.depth + 1, step });
-    }
-  }
-  return [];
+  const controlsByInput = available.flatMap(key => controls[key] ? [[key, controls[key]!] as const] : []);
+  return composePlan<Positions, PressureStep>({
+    domain: 'simultaneous-motion-and-pressure',
+    initial: state.positions, key: identity, interrupted,
+    goal: { relation: 'coincidence of the two roles', holds: ([first, second]) => first === second },
+    budget: { commands: limit, states: span * span },
+    *choices(positions) {
+      for (const [command, motion] of controlsByInput) {
+        const step = projectPressureControl(field, positions, command, motion);
+        if (!step) continue;
+        yield { action: step, after: step.positions, evidence: state.evidence,
+          maintains: step.gateCrossings.map(index => ({
+            relation: 'pressure maintained during the crossing',
+            holds: candidate => pressureOpen(field, candidate)[index] === true,
+          })) };
+      }
+    },
+  })?.effects.map(result => result.action) ?? [];
 }

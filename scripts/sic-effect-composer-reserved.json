@@ -1,0 +1,11 @@
+{
+  "protocol": "effect-composer-1",
+  "source": "public source dispatcher",
+  "games": ["KEYD", "LKEY", "SWCH", "RSWP", "PRTL", "GARE"],
+  "start": 1,
+  "finish": 1,
+  "actionsPerLevel": 55,
+  "mode": "sic",
+  "arms": ["compose", "one-effect-per-search"],
+  "partition": "Out of this development round. Chosen by catalogue remit before opening any of these runs or inspecting their simulator rules."
+}
