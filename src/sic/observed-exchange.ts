@@ -1,5 +1,6 @@
 import type { NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { readTravelGrid, type ObservedTravel } from './observed-travel-frontier.ts';
+import { observedGateDependencies } from './observed-gate-dependency.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 
 type Cells = ReturnType<typeof readTravelGrid>['cells'];
@@ -183,12 +184,16 @@ export function observeExchange(local: ObservedExchange | undefined, old: Observ
   }
   if (!result) return;
   for (const gate of result.layout.gates) {
-    if (grid.pitch !== 3 || !gate.opensWhenCovered || held(start, gate.mark) || !held(returned, gate.mark)
-      || held(start, gate.cell) || held(returned, gate.cell)) continue;
+    if (grid.pitch !== 3 || !gate.opensWhenCovered || held(start, gate.cell) || held(returned, gate.cell)) continue;
     const closed = first.get(gate.cell), open = second.get(gate.cell), covered = second.get(gate.mark);
     const colors: number[] | undefined = result.layout.marks[gate.mark];
-    if (closed && open && covered && colors && closed[4] !== grid.floor && open[4] === grid.floor
-      && closed[0] === colors[0] && open[0] === colors[0]
+    if (!closed || !open || !covered || !colors || closed[4] === grid.floor || open[4] !== grid.floor) continue;
+    const evidence = observedGateDependencies(
+      { occupied: new Map([[gate.mark, held(start, gate.mark)]]), closed: new Map([[gate.cell, true]]) },
+      { occupied: new Map([[gate.mark, held(returned, gate.mark)]]), closed: new Map([[gate.cell, false]]) },
+      ref, (control,site) => control === gate.mark && site === gate.cell,
+    ).get(gate.cell);
+    if (evidence?.closedWhenPressed === false && closed[0] === colors[0] && open[0] === colors[0]
       && corners.every(index => colors.includes(covered[index]!))
       && !result.openings?.some(sample => tileId(sample.closed) === tileId(closed))) {
       result = { ...result, openings: [...(result.openings ?? []), { colors, closed, open, covered: corners.map(i => covered[i]!), ref }].slice(-8) };

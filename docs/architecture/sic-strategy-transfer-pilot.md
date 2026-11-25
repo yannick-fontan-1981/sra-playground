@@ -58,3 +58,17 @@ Les premiers blocages réels ont motivé trois mesures liées. Il faut extraire 
 Le générateur collecte ses points d'ancrage en jouant les moteurs réels depuis L1 avec de courtes suites de commandes publiques. Il vérifie sur le moteur les sélections utiles. Les 10 000 comparaisons composent des fonds mixtes, des glyphes inertes, des retours ambigus et des rotations ou variations de palette. Les variantes sont évaluées sur trois décisions distinctes. La référence est le détecteur strict pour reconnaître le duo. Pour le retour de sélection, l'ablation se fonde sur le seul marqueur d'arrivée. L'induction cherche les faits à conserver ensemble et l'ordre des essais à partir des échecs. Les règles sont éprouvées sur des départs distincts issus des cinq L1. Les résultats synthétiques et les rejeux natifs restent disponibles séparément.
 
 Le périmètre inclut les imposteurs qui conservent le masque d'un héros mais changent d'identité, ainsi que les décors dont la couleur est corroborée à la fois par les coins visibles du corps et une case voisine. L'ordre d'essai induit peut être rejoué sur les moteurs réels avec le module expérimental `scripts/sic-l1-learned-selection-profile.mjs` chargé par `node --import`. La variable `SIC_L1_SELECTION_REPORT` désigne son rapport de validation.
+
+## Composer les accès, les échanges et les ressources
+
+```powershell
+npm run test:sic-pressure-transfer
+```
+
+Un changement isolé de l'occupation d'une commande peut attester la polarité d'un accès observé. La même mesure est utilisée pour un relais entre acteurs et pour l'échange de positions déjà acquis par un mobile seul. Les deux implémentations conservent la preuve du retour public et leur propre validation des formes visibles. Une contradiction invalide la dépendance concernée et oblige à recalculer les suites qui en dépendent.
+
+Sur SS11, SIC a d'abord vérifié l'ouverture de la porte. La caisse a ensuite pris la place du magicien au lieu d'avancer dans la direction du contact. Le planificateur distingue donc une poussée, un déplacement de la caisse lors du retrait et un échange. Il vérifie la portée par un essai observable sur un trajet libre et conserve des preuves distinctes pour un partenaire et une charge. Ces effets entrent dans la même recherche bornée que les positions, les moyens de déplacement, l'état de la porte et le but simultané. Le plan garde la condition d'accès vraie lorsqu'un corps occupe le passage. Le moteur vérifie le retour avant de libérer la suite.
+
+La campagne rejoue les commandes proposées contre un simulateur indépendant sur soixante configurations. Les familles comprennent le relais de garde, l'ouverture maintenue par une charge, l'ouverture au relâchement, la création d'un appui consommant une charge et l'échange sans porte. Chaque famille change de géométrie, d'orientation et d'alphabet de commandes. L'ablation retire les relations d'accès et la projection d'échange. Mille contrôles de causalité vérifient aussi les polarités opposées, les changements concomitants, les effets masqués et les indices incompatibles.
+
+Les résultats complets sont écrits dans `artifacts/l1-pressure-proof`. La comparaison native utilise le moteur officiel du jeu et l'autorité SIC pour chaque commande. Le rejeu de SS11 L1 atteint L2 après 45 commandes. AR25, DC22 et HANO servent de contrôles hors Custom 4.

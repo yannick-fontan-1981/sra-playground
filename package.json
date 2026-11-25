@@ -15,6 +15,7 @@
     "test:sic-l1-transfer": "node scripts/sic-l1-targeted-campaign.mjs",
     "test:sic-campaign": "node scripts/sic-transfer-campaign.mjs",
     "test:sic-transfer": "node scripts/sic-transfer-cycle.mjs",
+    "test:sic-pressure-transfer": "node scripts/sic-pressure-transfer-campaign.mjs",
     "test:sic-continuity": "node scripts/verify-sic-continuity.mjs",
     "typecheck": "tsc --noEmit"
   },

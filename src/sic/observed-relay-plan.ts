@@ -12,6 +12,8 @@ export type RelayModel = {
   unoccupiedControls?: number[];
   heldLoadControls?: number[];
   pull?: boolean[];
+  exchange?: boolean[];
+  rayExchange?: (Readonly<{ loads: boolean; peers: boolean }> | null)[];
   nearestReflection?: boolean;
   finishAtPlate?: boolean;
   settleSubjectOnControl?: boolean;
@@ -135,7 +137,24 @@ function branches(model:RelayModel,origin:RelayState, keepPrepared=false):Branch
       for(const {action,axis} of controls){
         const dest=at+axis;
         if(blocked(model,s,dest))continue;
+        const ray=model.rayExchange?.[actor];
+        if(ray){
+          let target=dest;
+          while(!blocked(model,s,target)&&stands(model,s,target)&&!occupied(s,target))target+=axis;
+          if(!blocked(model,s,target)&&occupied(s,target)){
+            if(ray.loads&&s.loads.includes(target)||ray.peers&&s.actors.includes(target)){
+              const exchanged=shift(model,s,new Map([[at,target],[target,at]]));
+              if(exchanged)emit(action,exchanged);
+            }
+            continue;
+          }
+        }
         if(occupied(s,dest)){
+          if(model.exchange?.[actor]&&s.loads.includes(dest)){
+            const exchanged=shift(model,s,new Map([[at,dest],[dest,at]]));
+            if(exchanged)emit(action,exchanged);
+            continue;
+          }
           const moves=new Map([[at,dest]]);
           let p=dest, count=0;
           for(;occupied(s,p)&&count<model.capacity[actor]!;p+=axis){
@@ -176,7 +195,7 @@ function distanceMap(model: RelayModel, start:number) {
 
 
 function relayStances(model:RelayModel){
-  if(model.plate===null)return [];
+  if(model.plate===null||!model.arms.length)return [];
   const templates:{mirror:number;load:number}[]=[];
   const [a,b]=model.arms[0]!;
   for(const [from,to] of [[a!,b!],[b!,a!]] as const) {
@@ -232,8 +251,11 @@ function ordering(model: RelayModel, emphasis:number) {
     const distances=distanceMap({...model,floor},model.plate);
     return (pose:RelayState)=>Math.min(...pose.actors.map(actor=>distances.get(actor)??40))*5;
   }
-  if(model.pull?.some(Boolean))return bridgeOrdering(model);
-  if(model.plate===null)return bridgeOrdering(model);
+  if(model.plate===null||model.arms.length&&model.pull?.some(Boolean))return bridgeOrdering(model);
+  if(!model.arms.length){
+    const arrival=bridgeOrdering(model), control=distanceMap(model,model.plate);
+    return (pose:RelayState)=>arrival(pose)+Math.min(32,...pose.loads.map(load=>control.get(load)??32))*3;
+  }
   const [first,second]=model.goals.map(goal=>distanceMap(model,goal));
   const dist=(map:Map<number,number>,p:number)=>map.get(p)??50;
   const goal=(p:number,q:number)=>Math.min(dist(first!,p)+dist(second!,q),dist(first!,q)+dist(second!,p));
