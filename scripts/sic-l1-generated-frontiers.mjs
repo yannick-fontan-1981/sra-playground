@@ -127,6 +127,12 @@ function sceneFor(anchor, spec) {
     restoreTile(before, after, current, pitch);
     restoreTile(before, after, target, pitch);
   }
+  if (spec.returnType === 6) {
+    const excluded = new Set(Array.from({ length: pitch ** 2 }, (_,i) =>
+      after[target[1] + Math.floor(i / pitch)][target[0] + i % pitch]));
+    const impostor = anchor.colors.find(color => !excluded.has(color));
+    editTile(after, target, pitch, (value,i) => mask.includes(i) && value === peer ? impostor ?? value : value);
+  }
   return { before: transform(before,spec), after: transform(after,spec),
     target: orientedTile(target,pitch,spec.orientation), current: orientedTile(current,pitch,spec.orientation),
     ink: (peer+spec.palette)%16, active: (active+spec.palette)%16 };
@@ -154,7 +160,7 @@ export function generatedCases(anchors, count, stage, existing) {
     const anchor = group[pick(group.length)];
     const scenario = {
       anchor, code: anchors[anchor].code, task: ['recognition','verification','disambiguation'][Math.floor(ordinal/5)%3],
-      originLayer: pick(6), peerLayer: pick(6), decoy: pick(12), returnType: pick(10)<6 ? 0 : 1+pick(5),
+      originLayer: pick(6), peerLayer: pick(6), decoy: pick(12), returnType: pick(10)<6 ? 0 : 1+pick(6),
       orientation: pick(8), palette: pick(16),
     };
     if (scenario.task !== 'verification') scenario.returnType = 0;
@@ -203,7 +209,16 @@ export function assessSituation(anchors, spec, rule = null) {
   let confirmed = false, clicks = 0;
   for (const { hypothesis } of ordered) {
     clicks++;
-    const after = key(hypothesis.target) === key(scene.target) ? scene.after : scene.before;
+    let after = key(hypothesis.target) === key(scene.target) ? scene.after : scene.before;
+    if (after === scene.before && spec.decoy % 2 === 1) {
+      const { pitch, mask, floor, backing } = hypothesis.shape;
+      const center = (pitch - 1) / 2;
+      const arm = mask.find(i => (i % pitch === center) !== (Math.floor(i / pitch) === center));
+      if (arm !== undefined && backing !== floor && backing !== hypothesis.peer) {
+        after = copy(scene.before);
+        editTile(after,hypothesis.target,pitch,(value,i)=>i===arm?backing:value);
+      }
+    }
     if (witnessedSelection(hypothesis,scene.before,after)) {
       confirmed = hypothesis.peer === scene.ink;
       break;
