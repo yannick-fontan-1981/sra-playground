@@ -1,0 +1,11 @@
+{
+  "protocol": "effect-composer-1",
+  "source": "public source dispatcher",
+  "games": ["SKBN", "PORT", "VALV", "GABA", "ETAG", "AMZE", "GIGO", "RECR"],
+  "start": 1,
+  "finish": 1,
+  "actionsPerLevel": 75,
+  "mode": "sic",
+  "arms": ["compose", "one-effect-per-search"],
+  "partition": "Second frozen partition, after the first report found one active game. Catalogue selection spans pushing, portals, resources, transport, navigation, and roles. Solver source identical to the first partition. These runs and rules were not opened in this study before freezing."
+}

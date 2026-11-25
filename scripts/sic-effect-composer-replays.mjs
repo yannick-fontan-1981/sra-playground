@@ -8,6 +8,7 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const { values } = parseArgs({ options: {
   environment: { type: 'string', default: root },
   state: { type: 'string', default: join(root, 'artifacts', 'sic-effect-composer-replays') },
+  partition: { type: 'string', default: 'initial' },
   workers: { type: 'string', default: '4' },
   deadline: { type: 'string', default: '300' },
 } });
@@ -24,8 +25,12 @@ if (git('status', '--porcelain', '--', 'src', 'scripts', 'package.json')) {
   throw new Error('Commit the solver and protocol before opening the reserved games');
 }
 const revision = git('rev-parse', 'HEAD');
-const frozen = read(join(root, 'scripts', 'sic-effect-composer-reserved.json'));
-const configuration = { revision, frozen, environment, deadline };
+const manifests = { initial: 'sic-effect-composer-reserved.json', extension: 'sic-effect-composer-reserved-extension.json' };
+const manifest = manifests[values.partition];
+if (!Object.hasOwn(manifests, values.partition)) throw new Error('Unknown reserved partition');
+const frozen = read(join(root, 'scripts', manifest));
+const solverTree = git('rev-parse', 'HEAD:src');
+const configuration = { revision, solverTree, frozen, environment, deadline };
 mkdirSync(directory, { recursive: true });
 const configurationFile = join(directory, 'configuration.json');
 if (existsSync(configurationFile) && JSON.stringify(read(configurationFile)) !== JSON.stringify(configuration)) {
