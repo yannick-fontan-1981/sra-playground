@@ -177,9 +177,12 @@ function readScene(knowledge: PushAccessKnowledge, travel: ObservedTravel, rows:
   return { pose: { actor, bodies: bodies.sort(), supports: supports.sort() }, field };
 }
 
-type Graph = ReadonlyMap<Cell, readonly { command: NativeCommand; cell: Cell; delta: NativePoint }[]>;
-type Walk = { previous?: Cell; command?: NativeCommand };
-type Model = { graph: Graph; water: ReadonlySet<Cell>; gates: ReadonlySet<Cell>; marks: Cell[]; chain: boolean };
+type Edge = { command: NativeCommand; cell: Cell; beyond: Cell };
+type Graph = ReadonlyMap<Cell, readonly Edge[]>;
+type Walk = { previous?: Cell; command?: NativeCommand; depth: number; order: number };
+type PushStance = { stance: Cell; edge: Edge; order: number };
+type Model = { graph: Graph; stances: ReadonlyMap<Cell, readonly PushStance[]>; water: ReadonlySet<Cell>;
+  gates: ReadonlySet<Cell>; marks: Cell[]; chain: boolean };
 
 function occupancy(model: Model, pose: Pose) {
   const bodies = new Set(pose.bodies), supports = new Set(pose.supports);
@@ -189,10 +192,10 @@ function occupancy(model: Model, pose: Pose) {
 }
 
 function reachable(graph: Graph, origin: Cell, blocked: ReadonlySet<Cell>, enter?: (cell: Cell) => boolean): Map<Cell, Walk> {
-  const visited = new Map<Cell, Walk>([[origin, {}]]);
-  for (const [from] of visited) for (const edge of graph.get(from) ?? []) {
+  const visited = new Map<Cell, Walk>([[origin, { depth: 0, order: 0 }]]);
+  for (const [from, walk] of visited) for (const edge of graph.get(from) ?? []) {
     if (!blocked.has(edge.cell) && !visited.has(edge.cell) && (!enter || enter(edge.cell))) {
-      visited.set(edge.cell, { previous: from, command: edge.command });
+      visited.set(edge.cell, { previous: from, command: edge.command, depth: walk.depth + 1, order: visited.size });
     }
   }
   return visited;
@@ -209,24 +212,33 @@ function approach(cells: ReadonlyMap<Cell, Walk>, pose: Pose, target: Cell): Ste
 }
 
 function pushes(model: Model, pose: Pose, positions: ReadonlyMap<Cell, Walk>, local: ReturnType<typeof occupancy>) {
-  const result: { stance: Cell; landing: Cell; step: Step }[] = [];
-  for (const [stance] of positions) for (const edge of model.graph.get(stance) ?? []) {
-    if (!local.bodies.has(edge.cell) || !local.enter(edge.cell)) continue;
-    let landing = plus(edge.cell, edge.delta);
-    if (model.chain) while (local.bodies.has(landing)) landing = plus(landing, edge.delta);
-    if (local.bodies.has(landing) || !model.graph.has(landing)) continue;
-    const sink = model.water.has(landing) && !local.supports.has(landing);
-    if (!sink && !local.enter(landing)) continue;
-    const displaced = pose.bodies.filter(cell => cell !== edge.cell);
-    if (!sink) displaced.push(landing);
-    if (displaced.length < model.marks.length) continue;
-    const occupiedGate = model.gates.has(edge.cell) || displaced.some(cell => model.gates.has(cell));
-    if (occupiedGate && !model.marks.every(mark => displaced.includes(mark))) continue;
-    const supports = sink ? pose.supports.concat(landing).sort() : pose.supports;
-    result.push({ stance, landing, step: { command: edge.command,
-      after: { actor: edge.cell, bodies: displaced.sort(), supports }, pushed: true } });
+  const result: { stance: Cell; landing: Cell; step: Step; visit: number; order: number }[] = [];
+  for (const body of pose.bodies) {
+    if (!local.enter(body)) continue;
+    for (const { stance, edge, order } of model.stances.get(body) ?? []) {
+      const walk = positions.get(stance);
+      if (!walk) continue;
+      let landing: Cell | undefined = edge.beyond;
+      if (model.chain) {
+        while (landing !== undefined && local.bodies.has(landing)) {
+          landing = model.graph.get(landing)?.find(next => next.command.action_ref === edge.command.action_ref)?.cell;
+        }
+      }
+      if (landing === undefined || local.bodies.has(landing) || !model.graph.has(landing)) continue;
+      const sink = model.water.has(landing) && !local.supports.has(landing);
+      if (!sink && !local.enter(landing)) continue;
+      const displaced = pose.bodies.filter(cell => cell !== body);
+      if (!sink) displaced.push(landing);
+      if (displaced.length < model.marks.length) continue;
+      const occupiedGate = model.gates.has(body) || displaced.some(cell => model.gates.has(cell));
+      if (occupiedGate && !model.marks.every(mark => displaced.includes(mark))) continue;
+      const supports = sink ? pose.supports.concat(landing).sort() : pose.supports;
+      result.push({ stance, landing, visit: walk.order, order, step: { command: edge.command,
+        after: { actor: body, bodies: displaced.sort(), supports }, pushed: true } });
+    }
   }
-  return result;
+  // Preserve the walk traversal order, including command ties within a stance.
+  return result.sort((a, b) => a.visit - b.visit || a.order - b.order);
 }
 
 function distances(graph: Graph, goal: Cell) {
@@ -237,17 +249,17 @@ function distances(graph: Graph, goal: Cell) {
   return distance;
 }
 
-function weightedDistances(graph: Graph, goal: Cell, cost: (from: Cell, to: Cell, backward: NativePoint) => number) {
+function weightedDistances(graph: Graph, goal: Cell, cost: (to: Cell, stance: Cell) => number) {
   const distance = new Map<Cell, number>([[goal, 0]]);
   const nextStep = new Map<Cell, { to: Cell; stance: Cell }>();
   const buckets: Cell[][] = [[goal]];
   for (let rank = 0; rank < buckets.length; rank++) for (const to of buckets[rank] ?? []) {
     if (distance.get(to) !== rank) continue;
-    for (const { cell: from, delta } of graph.get(to) ?? []) {
-      const next = rank + cost(from, to, delta);
+    for (const { cell: from, beyond: stance } of graph.get(to) ?? []) {
+      const next = rank + cost(to, stance);
       if (next >= (distance.get(from) ?? Infinity)) continue;
       distance.set(from, next);
-      nextStep.set(from, { to, stance: plus(from, delta) });
+      nextStep.set(from, { to, stance });
       (buckets[next] ??= []).push(from);
     }
   }
@@ -284,11 +296,9 @@ function supportGuidance(model: Model, goal: Cell) {
     const missing = (cell: Cell) => Number(model.water.has(cell) && !supports.has(cell));
     let table = tables.get(key);
     if (!table) {
-      const pressure = model.marks.map(mark => weightedDistances(model.graph, mark, (from, to, backward) => {
-        const stance = plus(from, backward);
-        return model.graph.has(stance) ? 1 + 12 * (missing(stance) + missing(to)) : Infinity;
-      }));
-      const exit = weightedDistances(model.graph, goal, (_, to) => 1 + 12 * missing(to));
+      const pressure = model.marks.map(mark => weightedDistances(model.graph, mark, (to, stance) =>
+        model.graph.has(stance) ? 1 + 12 * (missing(stance) + missing(to)) : Infinity));
+      const exit = weightedDistances(model.graph, goal, to => 1 + 12 * missing(to));
       table = { pressure, exit, supplies: new Map() };
       if (tables.size >= 256) tables.delete(tables.keys().next().value!);
       tables.set(key, table);
@@ -310,10 +320,8 @@ function supportGuidance(model: Model, goal: Cell) {
     const supplyDistances = [...demands].map(target => {
       let supply = table.supplies.get(target);
       if (!supply) {
-        supply = weightedDistances(model.graph, target, (from, to, backward) => {
-          const stance = plus(from, backward);
-          return model.graph.has(stance) ? 1 + 12 * (missing(stance) + (to === target ? 0 : missing(to))) : Infinity;
-        });
+        supply = weightedDistances(model.graph, target, (to, stance) =>
+          model.graph.has(stance) ? 1 + 12 * (missing(stance) + (to === target ? 0 : missing(to))) : Infinity);
         table.supplies.set(target, supply);
       }
       return supply.distance;
@@ -330,35 +338,43 @@ function search(model: Model, start: Pose, goal: Cell, limit: number, actionLimi
   const distance = distances(model.graph, goal);
   const pressure = model.marks.map(mark => ({ mark, distance: distances(model.graph, mark) }));
   type Candidate = { pose: Pose; route: Step[] };
-  const queue = new Map<number, Candidate[]>();
+  const queue = new Map<number, { candidates: (Candidate | null)[]; next: number }>();
+  let queuedRank = Infinity;
   const bestQueuedLength = new Map<string, number>();
   const poseKey = (pose: Pose) => `${pose.bodies.join(';')}|${pose.supports.join(';')}|${pose.actor}`;
-  function enqueue(pose: Pose, route: Step[]) {
+  function enqueue(pose: Pose, length: number, route: () => Step[]) {
     const estimate = distance.get(pose.actor);
-    if (estimate === undefined || route.length + estimate > actionLimit) return;
+    if (estimate === undefined || length + estimate > actionLimit) return;
     const key = poseKey(pose);
     // The same exact position and arrangement reached in fewer actions has identical successors.
-    if ((bestQueuedLength.get(key) ?? Infinity) <= route.length) return;
+    if ((bestQueuedLength.get(key) ?? Infinity) <= length) return;
     const uncovered = pressure.filter(({ mark }) => !pose.bodies.includes(mark));
-    const rank = route.length + (guidance ? guidance(pose) : uncovered.length
+    const rank = length + (guidance ? guidance(pose) : uncovered.length
       ? 15 * uncovered.length + 5 * uncovered.reduce((sum, mark) =>
           sum + Math.min(20, ...pose.bodies.map(body => mark.distance.get(body) ?? 20)), 0) - 4 * pose.supports.length
       : 3 * estimate);
     if (!Number.isFinite(rank)) return;
-    bestQueuedLength.set(key, route.length);
+    bestQueuedLength.set(key, length);
+    const candidate = { pose, route: route() };
     const bucket = queue.get(rank);
-    if (bucket) bucket.push({ pose, route });
-    else queue.set(rank, [{ pose, route }]);
+    if (bucket) bucket.candidates.push(candidate);
+    else queue.set(rank, { candidates: [candidate], next: 0 });
+    queuedRank = Math.min(queuedRank, rank);
   }
-  enqueue(start, []);
+  enqueue(start, 0, () => []);
   const best = new Map<string, number>();
   while (queue.size) {
-    const rank = Math.min(...queue.keys()), bucket = queue.get(rank)!;
-    const { pose, route } = bucket.shift()!;
-    if (!bucket.length) queue.delete(rank);
+    if (!queue.has(queuedRank)) queuedRank = Math.min(...queue.keys());
+    const bucket = queue.get(queuedRank)!;
+    const { pose, route } = bucket.candidates[bucket.next]!;
+    bucket.candidates[bucket.next++] = null;
+    if (bucket.next === bucket.candidates.length) queue.delete(queuedRank);
     const local = occupancy(model, pose);
     const positions = reachable(model.graph, pose.actor, local.bodies, local.enter);
-    const origin = actionLimit === Infinity || model.water.size ? [...positions.keys()].sort()[0] : pose.actor;
+    let origin = pose.actor;
+    if (actionLimit === Infinity || model.water.size) for (const cell of positions.keys()) {
+      if (cell < origin) origin = cell;
+    }
     const key = `${pose.bodies.join(';')}|${pose.supports.join(';')}|${origin}`;
     if ((best.get(key) ?? Infinity) <= route.length) continue;
     if (best.size >= limit) return { exhausted: false };
@@ -368,8 +384,8 @@ function search(model: Model, start: Pose, goal: Cell, limit: number, actionLimi
       if (complete.length <= actionLimit) return { exhausted: false, route: complete };
     }
     for (const { stance, step } of pushes(model, pose, positions, local)) {
-      const suffix = approach(positions, pose, stance);
-      enqueue(step.after, route.concat(suffix, step));
+      enqueue(step.after, route.length + positions.get(stance)!.depth + 1,
+        () => route.concat(approach(positions, pose, stance), step));
     }
   }
   return { exhausted: true };
@@ -391,9 +407,16 @@ export function choosePushAccess(knowledge: PushAccessKnowledge | undefined, tra
   const floor = new Set(ground);
   const graph: Graph = new Map(ground.map(cell => [cell, moves.flatMap(({ command, delta }: Move) => {
     const neighbor = plus(cell, delta);
-    return floor.has(neighbor) ? [{ command, cell: neighbor, delta }] : [];
+    return floor.has(neighbor) ? [{ command, cell: neighbor, beyond: plus(neighbor, delta) }] : [];
   })]));
-  const model: Model = { graph, water: new Set(field.water), gates: new Set(field.gates), marks: field.marks, chain: knowledge.push.chain };
+  const stances = new Map<Cell, PushStance[]>();
+  for (const [stance, edges] of graph) for (const [order, edge] of edges.entries()) {
+    const incoming = stances.get(edge.cell);
+    const choice = { stance, edge, order };
+    if (incoming) incoming.push(choice);
+    else stances.set(edge.cell, [choice]);
+  }
+  const model: Model = { graph, stances, water: new Set(field.water), gates: new Set(field.gates), marks: field.marks, chain: knowledge.push.chain };
   const continuation = binding?.continuation;
   const resumed = continuation && continuation.steps.length <= remaining && samePose(continuation.from, pose);
   const standard = resumed ? undefined : search(model, pose, goal, field.water.length ? 8000 : 3000, remaining);

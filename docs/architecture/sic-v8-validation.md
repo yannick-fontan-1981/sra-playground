@@ -2758,3 +2758,9 @@ Le calcul de maille parcourt les suites horizontales et verticales dans l’ordr
 ### Mesurer la résolution avant et après le score public
 
 Le superviseur garde le plafond de résolution associé au niveau jusqu’au score renvoyé par le jeu. Après ce score, il mesure la réconciliation et lui accorde un délai séparé pouvant aller jusqu’à cinq secondes. Le rejeu refuse une commande reçue avant le prochain niveau déclaré. Si le superviseur arrête le processus, le rapport garde le score déjà obtenu et un résumé borné des commandes appliquées au dernier niveau. ELAS franchit la transition du niveau 3 lors du nouveau rejeu et gagne le niveau 4. M0R0 conserve la victoire du niveau 1 mais sa réconciliation atteint encore son propre plafond.
+
+### Indexer les postures de poussée
+
+Le graphe dérivé des commandes observées précalcule la cellule au-delà de chaque voisin et indexe les postures de poussée par cellule occupable. La recherche énumère les postures des objets visibles et conserve l’ordre de visite des déplacements. Elle calcule la longueur des approches avant de construire les commandes et garde une file FIFO pour chaque rang. Le budget de recherche et les contrôles d’occupation, de pression et de support restent identiques.
+
+Avec les rôles observés au niveau 1 et une limite de 80 commandes, la projection initiale de SS02 niveau 8 prend environ 18 s après indexation, contre 42 s avant. Le rejeu depuis le niveau 1 garde les mêmes comptes sur les sept premières victoires. Au niveau 8, il applique 11 commandes avant le plafond de 90 s, contre une dans le diagnostic précédent. Un essai séparé, initialisé directement au niveau 8 avec les rôles observés au niveau 1, déclenche le score du jeu en 84 commandes. Il construit six appuis et laisse un poids sur chacun des trois repères. Cet essai fournit une référence d’actions pour le rejeu chronologique.
