@@ -1936,24 +1936,28 @@ function canDispatchAgentAction(): boolean {
     && (!usesNativeManualControls(selectedGame.code) || observation?.state === 'NOT_FINISHED');
 }
 
+async function presentAgentRecovery(recover:()=>Promise<GameObservation>){
+  const generation=selectionGeneration;
+  busy=true;
+  updateInterface();
+  try{
+    const next=await recover();
+    await present(next,generation);
+    return next;
+  }catch(error){
+    if(generation===selectionGeneration){busy=false;updateInterface();}
+    throw error;
+  }
+}
+
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: canDispatchAgentAction,
   canResetLevel: () => ready() && mode === 'agent'
     && ['NOT_FINISHED', 'GAME_OVER', 'GAMEOVER'].includes(observation?.state ?? ''),
-  resetLevel: async () => {
-    const generation = selectionGeneration;
-    busy = true;
-    updateInterface();
-    try {
-      const next = await runtime.reset();
-      await present(next, generation);
-      return next;
-    } catch (error) {
-      if (generation === selectionGeneration) { busy = false; updateInterface(); }
-      throw error;
-    }
-  },
+  resetLevel:()=>presentAgentRecovery(()=>runtime.reset()),
+  canUndoAction:()=>ready()&&mode==='agent'&&!!observation?.canUndo,
+  undoAction:()=>presentAgentRecovery(()=>runtime.undo()),
   recoveryConfiguration: () => {
     const { maxDepth, maxNodes, informationPreference } = recoveryConfiguration();
     const solver = element<HTMLSelectElement>('#agent-planning').value === 'sic-fallback' ? 'sic-fallback' : 'sic';

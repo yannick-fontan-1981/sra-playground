@@ -11,7 +11,7 @@ import type {
 } from './v6-agent-protocol.ts';
 import type { KnowledgeMemory } from '../logos-engine/kernel.ts';
 import { immutableJson } from '../logos-engine/canonical.ts';
-import { isSicLevelRecovery, sicObservedGameOver, sicObservedMotionCycle, sicObservedWeightShortage } from '../logos-engine/v6-native-types.ts';
+import { isSicLevelRecovery, sicObservedGameOver, sicObservedMotionCycle, sicObservedWeightShortage, sicObservedUnplannedMaterialLoss } from '../logos-engine/v6-native-types.ts';
 
 export { BrowserV6WorkerClient } from './v6-agent-client.ts';
 
@@ -48,6 +48,8 @@ export interface V6AgentHost {
   dispatch(action: AgentAction, presentation?: { continuous: boolean }): Promise<V6DispatchResult>;
   canResetLevel?(): boolean;
   resetLevel?(): Promise<GameObservation>;
+  canUndoAction?(): boolean;
+  undoAction?(): Promise<GameObservation>;
   onState(snapshot: V6AgentSnapshot): void;
   /** Optional host checkpoint, after acquiring the return and before the next action. */
   onAcquired?(snapshot: V6AgentSnapshot): void;
@@ -324,7 +326,7 @@ export class BrowserV6Agent {
         if (!expected || !sessionId || !this.pending) throw new V6AgentError('invalid', 'The native V6 transfer has no current state.');
         if (this.pending.kind === 'stopped') {
           if (this.canRecoverLevel(this.pending.reason)) {
-            if (await this.acquireLevelReset(epoch, true)) continue;
+            if (await this.acquireRecovery(epoch)) continue;
             break;
           }
           this.finish(this.pending.reason); return;
@@ -367,8 +369,9 @@ export class BrowserV6Agent {
         const acquired = await this.request({ type: 'advance', sessionId, sequence: this.sequence, ticketId: pending.ticket!.id, observation: after, executionMs }, epoch);
         if (!acquired) return;
         const progressed = next.levelsCompleted > expected.levelsCompleted || next.level > expected.level;
-        if (acquired.kind === 'stopped' && acquired.reason === sicObservedGameOver && this.canRecoverLevel(acquired.reason)) {
-          if (!this.stopRequested && await this.acquireLevelReset(epoch, true)) continue;
+        if (acquired.kind === 'stopped' && (acquired.reason === sicObservedGameOver||acquired.reason===sicObservedUnplannedMaterialLoss)
+          && this.canRecoverLevel(acquired.reason)) {
+          if (!this.stopRequested && await this.acquireRecovery(epoch)) continue;
           break;
         }
         if (isTerminalState(next.state)) {
@@ -383,7 +386,7 @@ export class BrowserV6Agent {
         }
         if (acquired.kind === 'stopped') {
           if (this.canRecoverLevel(acquired.reason)) {
-            if (!this.stopRequested && await this.acquireLevelReset(epoch, true)) continue;
+            if (!this.stopRequested && await this.acquireRecovery(epoch)) continue;
             break;
           }
           this.finish(acquired.reason); return;
@@ -423,7 +426,31 @@ export class BrowserV6Agent {
   }
 
   private canRecoverLevel(reason: string | null): boolean {
-    return isSicLevelRecovery(reason) && this.hostCanReset() && !!this.knowledge.canResetLevel;
+    return this.canUndo(reason)||isSicLevelRecovery(reason) && this.hostCanReset() && !!this.knowledge.canResetLevel;
+  }
+
+  private canUndo(reason:string|null){
+    return reason===sicObservedUnplannedMaterialLoss&&!!this.knowledge.canUndoAction&&!!this.host.undoAction
+      &&(this.host.canUndoAction?.()??this.host.canDispatch());
+  }
+
+  private async acquireRecovery(epoch:number):Promise<boolean>{
+    if(!this.canUndo(this.pending?.reason??null))return this.acquireLevelReset(epoch,true);
+    const before=this.observed,sessionId=this.sessionId;
+    if(!before||!sessionId||!this.stillCurrent(epoch)||this.stopRequested)return false;
+    this.assertFresh(before,epoch,true);
+    this.phase='acting';this.state('acting','Undoing an observed unplanned loss of movable material…');
+    if(!this.stillCurrent(epoch)||this.stopRequested)return false;
+    this.assertFresh(before,epoch,true);
+    const returned=await this.host.undoAction!();
+    if(!this.stillCurrent(epoch))return false;
+    const next=toV6PublicObservation(returned,this.sequence);
+    if(returned.gameCode!==this.gameCode||!sameV6Observation(next,this.host.getObservation()))
+      throw new V6AgentError('stale','The displayed board does not match the recovered observation.');
+    this.phase='observing';
+    if(!await this.request({type:'undo_action',sessionId,sequence:this.sequence,observation:next},epoch))return false;
+    this.observed=next;this.requiresNewSession=false;
+    return true;
   }
 
   private hostCanReset(): boolean {
@@ -439,6 +466,7 @@ export class BrowserV6Agent {
     this.state('acting', automatic ? reason === sicObservedGameOver ? 'Resetting after the observed game over…'
       : reason === sicObservedWeightShortage ? 'Resetting to recover a movable weight for the observed gate…'
       : reason === sicObservedMotionCycle ? 'Resetting after repeated movement without progress…'
+      : reason === sicObservedUnplannedMaterialLoss ? 'Resetting to recover the lost movable material…'
       : 'Resetting after an observed placement deadlock…' : 'Resetting the current level…');
     if (!this.stillCurrent(epoch) || automatic && this.stopRequested) return false;
     this.assertFresh(before, epoch, true);

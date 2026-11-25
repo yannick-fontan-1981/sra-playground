@@ -1,7 +1,8 @@
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
-import { sicObservedMotionCycle } from '../logos-engine/v6-native-types.ts';
-import { findRelayPlan, relayControlOccupied, relayControlWeighted, relayGateClosed, type RelayModel, type RelayState, type RelayStep } from './observed-relay-plan.ts';
+import type { NativeCommand, NativeExecution, NativeFamily, NativeObservation, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { sicObservedMotionCycle, sicObservedUnplannedMaterialLoss } from '../logos-engine/v6-native-types.ts';
+import { findRelayPlan, relayControlOccupied, relayControlWeighted, relayGateClosed, relayPlatformAvailable, type RelayModel, type RelayState, type RelayStep, type RelayPlatform } from './observed-relay-plan.ts';
+import { planHydraulicRelay } from './observed-hydraulic-relay.ts';
 import { planPlatformRelay, platformAvailable, type PlatformPose, type PlatformRelayModel, type PlatformStep } from './observed-platform-relay.ts';
 import { sicNeedId } from './need-identity.ts';
 
@@ -39,6 +40,10 @@ type History = {
   circuitTrials?:Record<number,string>;
   circuitTarget?:number;
   linkedGateRules?:Record<Cell,{control:Cell;closedWhenPressed:boolean}>;
+  hydraulic?:{bindings:Record<number,PlatformBinding>;platforms:RelayPlatform[]};
+  relayPurpose?:string;
+  materialLoss?:{evidence:string;choice:string;test?:string};
+  rejectedLossChoices?:string[];
 };
 type Tile = { pixels: number[]; uniform: boolean; passable: boolean; object: boolean; plate: boolean;
   mirror: Point[] | null; preview: boolean; gate: {accent:number;open:boolean}|null; plateAccent: number|null };
@@ -47,7 +52,7 @@ type ObservedObject = { cell:Cell; glyph:string; kind:'actor'|'load'|'reflector'
 type ControlTransfer = { source: Cell; destination: Cell; reflector: Cell; mark: number; subject: string; gates: Cell[] };
 type Step = { action: NativeCommand; from: Cell; actor: number; to?: Cell; tile?: string; select?: number; contact?: Cell; relay?: RelayStep; expectedActors?: {ink:number;from:Cell;to:Cell}[];
   loads?: { from: Cell[]; to: Cell[]; support?: Cell }; reflectorMove?: { from: Cell; to: Cell }; controlTransfer?: ControlTransfer; platform?: PlatformStep; pressureTrial?:Cell;
-  roster?: {ink:number;cell:Cell}[]; probeLanding?:{cell:Cell;glyph:string}; circuitTrial?:number; };
+  roster?: {ink:number;cell:Cell}[]; probeLanding?:{cell:Cell;glyph:string}; circuitTrial?:number; supportAccess?:Cell; clearLinkedObstruction?:Cell; };
 type Offer = { ink: number; steps: Step[]; kind: string; score: number; test?: string; target?: Cell; destinations?:Cell[] };
 type Proposal = ReturnType<typeof proposed>;
 type Path = { cell: Cell; route: Step[] };
@@ -233,7 +238,7 @@ function decode(rows: NativeRows, shape: Shape, history: History): Scene | null 
   const pressureCorners=[0,pitch-1,pitch*(pitch-1),pitch*pitch-1];
   for(let y=phase[1];y+pitch<=rows.length;y+=pitch) for(let x=phase[0];x+pitch<=rows[0]!.length;x+=pitch){
     const cell = key([(x-phase[0])/pitch,(y-phase[1])/pitch]), pixels=readTile(rows,x,y,pitch);
-    const marked=history.plates.includes(cell)||history.supports[cell]||history.platformField?.bindings[encode(cell)];
+    const marked=history.plates.includes(cell)||history.supports[cell]||history.platformField?.bindings[encode(cell)]||history.hydraulic?.bindings[encode(cell)];
     const body=motif(pixels,mask,marked?floor:undefined);
     const uniform=pixels.every(value=>value===pixels[0]);
     if(body && inks.includes(body.ink)) actors.push({ink:body.ink,cell,marker:body.marker});
@@ -563,7 +568,7 @@ function pairedTransfer(scene: Scene, h: History, o: NativeObservation): Offer |
         if(h.guarded.includes(test))continue;
         for(const {cell,route} of paths.values()){
           if(route.length!==1||scene.plates.includes(cell))continue;
-          add(controller,route,'verify_gate_release_on_blocking_object',720,test,blocker);
+          add(controller,[{...route[0]!,clearLinkedObstruction:blocker}],'verify_gate_release_on_blocking_object',720,test,blocker);
         }
       }
     }
@@ -866,12 +871,17 @@ function draft(scene: Scene, h: History, o: NativeObservation): Offer | undefine
         if (h.guarded.includes(test)) continue;
         const pressure=scene.plates.includes(end);
         const medium=!landing.passable&&!supported(scene,h,end)&&!scene.goals.includes(end);
+        const knownMedium=medium&&isKnownMedium(landing,h,o);
+        const supportAccess=knownMedium&&bestKnown&&bestKnown.capacity>=count
+          &&opensAccessByPush(scene,h,actor,cargo,end)?end:undefined;
+        if(knownMedium&&!supportAccess)continue;
         const continues=h.lastPush?.ink===actor.ink&&h.lastPush.direction===direction.action&&h.lastPush.object===cargo;
         const probe=!bestKnown?.contact;
         const guide=aim(cargo)-aim(end);
         if(!probe && !pressure && !medium && !continues && guide<=0) continue;
         const relevance=probe?90:0;
-        add([...route,{action:command(direction.action),from:cell,actor:actor.ink,tile:tileKey(tile)}],
+        add([...route,{action:command(direction.action),from:cell,actor:actor.ink,tile:tileKey(tile),
+          ...(supportAccess?{supportAccess,to:cargo,probeLanding:{cell:end,glyph:tileKey(landing)}}:{})}],
           pressure?'compose_object_with_stationary_mark':count>1?'contrast_capacity_at_a_row_of_objects':'test_reachable_object_contact',
           200+relevance+(pressure?160:0)+(medium?80:0)+(pressure||medium?guide*4:guide*2)
           +(count>1?70:0)+(continues?45:0)-route.length*7,test,cargo);
@@ -937,6 +947,7 @@ type RelayField = {
   settleSubjectOnControl?:boolean;
   keepSubjectOnControl?:boolean;
   experimentControls?:number[];
+  platforms?:RelayPlatform[];
 };
 const encode=(cell:Cell)=>{const [x,y]=point(cell);return x+y*64;};
 const decodeCell=(cell:number)=>key([cell%64,Math.floor(cell/64)]);
@@ -992,8 +1003,67 @@ function mediumInk(h:History,o:NativeObservation):number|undefined{
   return Number.isInteger(ink)&&ink>=0?ink:undefined;
 }
 
-function fieldWithPlatforms(scene:Scene,h:History,o:NativeObservation):{field:PlatformField;pose:PlatformPose}|undefined{
-  if(scene.actors.length!==1||scene.goals.length!==1||!h.trigger||!h.transfer?.gateReaction)return;
+function isKnownMedium(tile:Tile|undefined,h:History,o:NativeObservation){
+  return !!tile?.uniform&&tile.pixels[0]===mediumInk(h,o);
+}
+
+const materialChoice=(o:NativeObservation,action:NativeCommand)=>JSON.stringify([o.frame_hash,action.action_ref,action.data]);
+
+function supportOpensObjective(scene:Scene,h:History,newSupports:readonly Cell[],required:Cell){
+  const points=[...scene.goals,...scene.plates];
+  const mirrors=[...scene.tiles].filter(([,tile])=>tile.mirror);
+  const supports={...h.supports};
+  for(const cell of newSupports)supports[cell]=tileKey(scene.tiles.get(cell));
+  const projected={...h,supports};
+  for(const actor of scene.actors){
+    const axes=observedDirections(h,actor.ink).map(direction=>direction.axis);
+    const opportunities=[...points,...mirrors.flatMap(([cell])=>axes.map(axis=>next(cell,axis)))];
+    const withSupport=walks(scene,projected,actor);
+    if(!withSupport.has(required))continue;
+    const withoutSupport=walks(scene,projected,actor,new Set([required]));
+    for(const cell of withSupport.keys()){
+      if(cell===required||withoutSupport.has(cell))continue;
+      if(opportunities.includes(cell))return true;
+      if(mirrors.some(([mirror,tile])=>{
+        const landing=transferTarget(scene,cell,mirror,tile.mirror!);
+        return landing&&(scene.goals.includes(landing)||scene.tiles.get(landing)?.passable||supported(scene,projected,landing));
+      }))return true;
+    }
+  }
+  return false;
+}
+
+function opensAccessByPush(scene:Scene,h:History,actor:Actor,cargo:Cell,destination:Cell){
+  const tiles=new Map(scene.tiles);
+  tiles.set(cargo,{...tiles.get(cargo)!,object:false,passable:true});
+  const actors=scene.actors.map(peer=>peer.ink===actor.ink?{...peer,cell:cargo}:peer);
+  return supportOpensObjective({...scene,tiles,actors},h,[destination],destination);
+}
+
+function unplannedMaterialLoss(h:History,step:Step,before:Scene,after:Scene,b:NativeObservation,a:NativeObservation){
+  if(!h.transfer?.support)return false;
+  const expected=step.relay?.after.supports??[];
+  const unexpected=[...after.tiles.keys()].filter(cell=>{
+    const at=encode(cell);
+    return cell!==step.loads?.support&&cell!==step.supportAccess&&!expected.includes(at)
+      &&(isKnownMedium(before.tiles.get(cell),h,b)||!!h.hydraulic?.bindings[at])
+      &&!matchesSupport(before,h,b,cell)&&matchesSupport(after,h,a,cell);
+  });
+  if(!unexpected.length)return false;
+  const prior=relayPose(before,h)?.loads.length??loadCells(before).length;
+  const remaining=relayPose(after,h)?.loads.length??loadCells(after).length;
+  if(remaining>=prior)return false;
+  const obstruction=step.clearLinkedObstruction;
+  if(obstruction&&unexpected.length===1&&prior-remaining===1&&distance(obstruction,unexpected[0]!)===1
+    &&portable(before.tiles.get(obstruction))&&after.tiles.get(obstruction)?.gate
+    &&pressureHeld(before,step.from)&&!pressureHeld(after,step.from))return false;
+  // A controlled experiment may move a load remotely. Keep its new footing
+  // only when it demonstrably opens an approach to another usable object or goal.
+  const testedControl=step.circuitTrial!==undefined||step.pressureTrial!==undefined;
+  return !testedControl||unexpected.some(cell=>!supportOpensObjective(after,h,unexpected,cell));
+}
+
+function observedPlatforms(scene:Scene,h:History,o:NativeObservation){
   const medium=mediumInk(h,o);
   if(medium===undefined)return;
   const marks=scene.plates.filter(cell=>h.switches[cell]!==undefined);
@@ -1013,6 +1083,14 @@ function fieldWithPlatforms(scene:Scene,h:History,o:NativeObservation):{field:Pl
     platforms.push({cell:id,control:encode(control),activeWhenPressed:glyph.active===pressureHeld(scene,control)});
   }
   if(!platforms.length)return;
+  return {bindings,platforms,medium};
+}
+
+function fieldWithPlatforms(scene:Scene,h:History,o:NativeObservation):{field:PlatformField;pose:PlatformPose}|undefined{
+  if(scene.actors.length!==1||scene.goals.length!==1||!h.trigger||!h.transfer?.gateReaction)return;
+  const observed=observedPlatforms(scene,h,o);
+  if(!observed)return;
+  const {bindings,platforms,medium}=observed;
   const floor:number[]=[],water:number[]=[],loads:number[]=[],reflectors:number[]=[],arms:number[][]=[];
   for(const [cell,tile] of scene.tiles){
     const id=encode(cell);
@@ -1106,7 +1184,7 @@ function atOpportunity(scene:Scene,h:History,actor:Actor,steps:Step[],kind:strin
   return {ink:actor.ink,steps:actor.ink===scene.active.ink?steps:[actorSwitch(scene,h,actor),...steps],kind,score,test,target};
 }
 
-function testObservedObjects(scene:Scene,h:History,objects:readonly ObservedObject[]):Offer|undefined{
+function testObservedObjects(scene:Scene,h:History,o:NativeObservation,objects:readonly ObservedObject[]):Offer|undefined{
   const opportunities:Offer[]=[];
   const occupied=new Set(objects.map(object=>object.cell));
   const commands=h.available?.filter(ref=>ref!=='ACTION6')??[];
@@ -1127,7 +1205,7 @@ function testObservedObjects(scene:Scene,h:History,objects:readonly ObservedObje
           const landing=motion?next(toward?object.cell:stance,motion):undefined;
           const tile=landing?scene.tiles.get(landing):undefined;
           if(motion&&(!landing||!tile||background(tile,h.shape!)||tile.gate?.open===false||occupied.has(landing)
-            ||away&&!tile.passable&&!supported(scene,h,landing)))continue;
+            ||toward&&isKnownMedium(tile,h,o)||away&&!tile.passable&&!supported(scene,h,landing)))continue;
           const probeLanding=landing?{cell:landing,glyph:tileKey(tile)}:undefined;
           const test=JSON.stringify(['object_interaction',object.cell,object.glyph,actor.ink,stance,ref,probeLanding?.glyph??null]);
           if(h.guarded.includes(test))continue;
@@ -1142,7 +1220,7 @@ function testObservedObjects(scene:Scene,h:History,objects:readonly ObservedObje
   return opportunities.sort((a,b)=>b.score-a.score||a.steps.length-b.steps.length)[0];
 }
 
-function reachableCompositions(scene:Scene,h:History) {
+function reachableCompositions(scene:Scene,h:History,o:NativeObservation) {
   const pending:Offer[]=[];
   for(const actor of scene.actors){
     if(scene.goals.includes(actor.cell))continue;
@@ -1159,7 +1237,7 @@ function reachableCompositions(scene:Scene,h:History) {
         const bodyKeys=[];
         while(portable(scene.tiles.get(last))){ bodyKeys.push(tileKey(scene.tiles.get(last)));last=next(last,dir.axis);n++; }
         const landing=scene.tiles.get(last);
-        if(background(landing,h.shape!)||landing?.gate&&!landing.gate.open||scene.actors.some(a=>a.cell===last))continue;
+        if(background(landing,h.shape!)||landing?.gate&&!landing.gate.open||isKnownMedium(landing,h,o)||scene.actors.some(a=>a.cell===last))continue;
         const test=JSON.stringify(['contact',actor.ink,cargo,dir.action,bodyKeys,tileKey(landing)]);
         if(h.guarded.includes(test))continue;
         const proved=h.roles[actor.ink]?.capacity??0;
@@ -1181,6 +1259,7 @@ function relayField(scene:Scene,h:History,o:NativeObservation,objects:readonly O
   const mirrors=relayReflectors(scene);
   if(!mirrors.length)return;
   const law=h.transfer?.support;
+  const hydraulic=h.hydraulic;
   const observedGates=Object.entries(h.gates);
   const linkedControls=mirrors.length>1;
   if(linkedControls&&(!traction||!h.trigger||!h.transfer?.gateReaction||!law||!observedGates.length))return;
@@ -1189,9 +1268,9 @@ function relayField(scene:Scene,h:History,o:NativeObservation,objects:readonly O
     && observedGates.every(([cell,gate])=>scene.tiles.get(cell)?.gate?.open&&scene.plates.some(plate=>h.switches[plate]===gate.accent));
   const bridge=law&&(released||controlConstraints||scene.plates.length===0&&observedGates.length===0)
     && [...scene.tiles.values()].some(tile=>tile.uniform&&color(o,tile.pixels[0]!)===law.medium);
-  const plate=bridge||linkedControls?null:scene.plates[0]??null;
+  const plate=hydraulic?decodeCell(hydraulic.platforms[0]!.control):bridge||linkedControls?null:scene.plates[0]??null;
   let gates:RelayField['gates']=[];
-  if(linkedControls){
+  if(linkedControls||hydraulic){
     for(const [cell,gate] of observedGates){
       const controls=scene.plates.filter(plate=>h.switches[plate]===gate.accent);
       const control=controls[0];
@@ -1199,7 +1278,10 @@ function relayField(scene:Scene,h:History,o:NativeObservation,objects:readonly O
       const visible=scene.tiles.get(cell)?.gate;
       const prior=h.linkedGateRules?.[cell];
       const hidden=observedProjection(scene,h,cell)||scene.actors.some(actor=>actor.cell===cell)||portable(scene.tiles.get(cell));
-      if(!visible&&(!hidden||prior?.control!==control))return;
+      if(!visible&&(!hidden||prior?.control!==control)){
+        if(hydraulic)continue;
+        return;
+      }
       const closedWhenPressed=visible?visible.open!==pressureHeld(scene,control):prior!.closedWhenPressed;
       (h.linkedGateRules??={})[cell]={control,closedWhenPressed};
       gates.push({cell:encode(cell),control:encode(control),closedWhenPressed});
@@ -1221,12 +1303,17 @@ function relayField(scene:Scene,h:History,o:NativeObservation,objects:readonly O
   }
   const floor:number[]=[],water:number[]=[];
   const waterInks:Record<number,number>={};
-  const subjectPatterns=(linkedControls||plate!==null&&gates.some(gate=>!gate.closedWhenPressed))&&traction&&h.trigger
+  const subjectPatterns=!hydraulic&&(linkedControls||plate!==null&&gates.some(gate=>!gate.closedWhenPressed))&&traction&&h.trigger
     ?[...new Map(objects.filter(object=>object.kind==='undetermined'&&!scene.goals.includes(object.cell)&&!scene.plates.includes(object.cell))
       .map(object=>[object.glyph,{glyph:object.glyph,interior:inset(scene.tiles.get(object.cell)!.pixels,h.shape!.pitch)}])).values()]:[];
   const experimentControls=linkedControls&&(subjectPatterns.length||h.circuitTrials)
     ?[...new Set(gates.flatMap(gate=>gate.control===undefined?[]:[gate.control]))]:[];
   for(const [cell,tile] of scene.tiles){
+    const id=encode(cell);
+    if(hydraulic?.bindings[id]){
+      water.push(id);waterInks[id]=mediumInk(h,o)!;
+      continue;
+    }
     if(background(tile,h.shape!))continue;
     const observedMedium=(bridge||traction)&&law&&(tile.uniform||tile.preview)
       ?tile.pixels.find(ink=>color(o,ink)===law.medium):undefined;
@@ -1247,6 +1334,7 @@ function relayField(scene:Scene,h:History,o:NativeObservation,objects:readonly O
     }
   }
   return {floor,water,waterInks,plate:plate===null?null:encode(plate),gates,arms:mirrors.map(mirror=>mirror.arms),goals:scene.goals.map(encode),
+    ...(hydraulic?{platforms:hydraulic.platforms}:{}),
     ...(linkedControls?{linkedControls:true}:{}),
     ...(traction?{learnedMobility:true,...(!linkedControls&&pressureTrial&&!h.seenPlate&&!subjectPatterns.length?{finishAtPlate:true}:{})}:{}),
     ...(subjectPatterns.length?{subjectPatterns,...(plate!==null?{settleSubjectOnControl:true}:{})}:{}),
@@ -1263,7 +1351,10 @@ function relayPose(scene: Scene,h:History):RelayState|undefined {
   const actors=h.shape!.inks.map(ink=>encode(scene.actors.find(a=>a.ink===ink)!.cell));
   const subjects=field.subjectPatterns?sorted([...scene.tiles].flatMap(([cell,tile])=>
     isRelaySubject(scene,field,cell,tile,h.shape!.pitch)?[encode(cell)]:[])):undefined;
-  const loads=sorted([...scene.tiles].filter(([cell,tile])=>tile.object&&!subjects?.includes(encode(cell))).map(([cell])=>encode(cell)));
+  const loads=sorted([...scene.tiles].filter(([cell,tile])=>{
+    const id=encode(cell),binding=h.hydraulic?.bindings[id];
+    return tile.object&&!subjects?.includes(id)&&(!binding||!platformGlyph(tile,h.shape!.pitch,field.waterInks[id]!,binding.accent));
+  }).map(([cell])=>encode(cell)));
   for(const plate of scene.plates) {
     // The control's corner pixels remain on top of a load, not on top
     // of a bare pressure mark. Rebind using the previously seen load inset.
@@ -1287,7 +1378,13 @@ const sameRelayPose=(a:RelayState|undefined,b:RelayState)=>!!a&&relayPoseKey(a)=
 function relayAgreement(scene:Scene,h:History,expected:RelayState){
   if(!sameRelayPose(relayPose(scene,h),expected))return false;
   const field=h.relayField!;
-  return field.gates.every(gate=>{
+  const platformsAgree=field.platforms?.every(mark=>{
+    if(relayControlOccupied(expected,mark.cell)||expected.supports.includes(mark.cell))return true;
+    const cell=decodeCell(mark.cell),tile=scene.tiles.get(cell),binding=h.hydraulic!.bindings[mark.cell]!;
+    const glyph=platformGlyph(tile,h.shape!.pitch,field.waterInks[mark.cell]!,binding.accent);
+    return glyph?.frame===binding.frame&&glyph.active===relayPlatformAvailable(mark,expected)||observedProjection(scene,h,cell);
+  });
+  return platformsAgree!==false&&field.gates.every(gate=>{
     const seen=scene.tiles.get(decodeCell(gate.cell))?.gate;
     if(seen)return seen.open!==relayGateClosed(gate,expected,field.plate);
     return !field.linkedControls&&!field.subjectPatterns||!relayGateClosed(gate,expected,field.plate)
@@ -1310,11 +1407,21 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
       controls:h.shape!.inks.map(ink=>observedDirections(h,ink).map(d=>({action:d.action,axis:toAxis(d.axis)}))),
       capacity:h.shape!.inks.map(ink=>h.roles[ink]?.capacity||(field.learnedMobility&&!h.roles[ink]?.pull?1:0)),
       ...(field.learnedMobility?{pull:h.shape!.inks.map(ink=>!!h.roles[ink]?.pull),nearestReflection:true,
-        ...(field.plate===null||field.subjectPatterns?{activeActor:h.shape!.inks.indexOf(scene.active.ink)}:{})}: {})};
+        ...(field.plate===null||field.subjectPatterns||field.platforms?{activeActor:h.shape!.inks.indexOf(scene.active.ink)}:{})}: {})};
     const search={yieldControl:execution?.yieldControl??(async()=>{}),signal:execution?.signal};
     let route:RelayStep[]|undefined;
     delete h.circuitTarget;
-    const pending=field.experimentControls?.filter(control=>!relayControlWeighted(pose,control))??[];
+    delete h.relayPurpose;
+    if(field.platforms){
+      const untested=scene.plates.map(encode).filter(cell=>cell!==field.plate&&!h.circuitTrials?.[cell]);
+      const plan=await planHydraulicRelay(model,pose,untested,search);
+      if(plan){
+        route=plan.steps;
+        h.relayPurpose=plan.purpose;
+        if(plan.trial!==undefined)h.circuitTarget=plan.trial;
+      }
+    }
+    const pending=route?.length?[]:field.experimentControls?.filter(control=>!relayControlWeighted(pose,control))??[];
     for(const control of pending){
       route=await findRelayPlan({...model,trialControl:control,trialWeightOnly:true},pose,{...search,maxNodes:2500});
       if(!route?.length&&!h.circuitTrials?.[control]&&!relayControlOccupied(pose,control))
@@ -1322,7 +1429,7 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
       if(execution?.signal?.aborted)return;
       if(route?.length){h.circuitTarget=control;break;}
     }
-    if(!route?.length){
+    if(!route?.length&&!field.platforms){
       const maxNodes=field.experimentControls?9000:field.settleSubjectOnControl?15000:field.plate===null?150000:75000;
       route=await findRelayPlan(field.experimentControls?{...model,guidingControls:field.experimentControls}:model,pose,{...search,maxNodes});
     }
@@ -1346,9 +1453,9 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
       ...(circuitTrial!==undefined?{circuitTrial}:{})});
     if(predicted.projected.length||pressure||circuitTrial!==undefined)break;
   }
-  return {ink:actor.ink,steps,kind:h.circuitTarget!==undefined?'test_linked_control_effect':field.settleSubjectOnControl?'compose_subject_with_linked_control':field.finishAtPlate?'prepare_access_to_test_linked_control'
+  return {ink:actor.ink,steps,kind:h.relayPurpose??(h.circuitTarget!==undefined?'test_linked_control_effect':field.settleSubjectOnControl?'compose_subject_with_linked_control':field.finishAtPlate?'prepare_access_to_test_linked_control'
     :field.learnedMobility?'compose_group_destination_after_access'
-    :field.plate===null?'compose_reflection_and_support_access':'compose_reflection_and_linked_gate_access',score:800,
+    :field.plate===null?'compose_reflection_and_support_access':'compose_reflection_and_linked_gate_access'),score:800,
     ...(field.learnedMobility?{destinations:scene.goals}:{})};
 }
 
@@ -1487,6 +1594,10 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
         if(tile.gate)h.gates[cell]=tile.gate;
         if(tile.plateAccent!==null)h.switches[cell]=tile.plateAccent;
       }
+      if(!h.hydraulic&&scene.actors.length>1&&h.trigger&&h.transfer?.support&&h.transfer.gateReaction){
+        const observed=observedPlatforms(scene,h,o);
+        if(observed)h.hydraulic={bindings:observed.bindings,platforms:observed.platforms};
+      }
       const objects=observedObjects(scene,h,o);
       if(!h.relayField){
         const field=relayField(scene,h,o,objects);
@@ -1496,19 +1607,20 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
           h.relayLoads=[...new Set([...scene.tiles.values()].filter(tile=>tile.object).map(tile=>tile.pixels[marked]!))];
         }
       }
-      const frontier=reachableCompositions(scene,h);
+      const frontier=reachableCompositions(scene,h,o);
       const learningRelay=h.relayField&&!h.relayField.unoccupiedControls&&!h.relayField.learnedMobility;
       const chain=learningRelay&&!h.seenChain?frontier.find(offer=>(offer.kind==='test_reachable_chain_composition'||offer.kind==='test_extended_chain_capacity')):undefined;
       const press=learningRelay&&!h.seenPlate?frontier.find(offer=>offer.kind==='test_reachable_pressure_composition'):undefined;
       const paired=scene.goals.length?pairedTransfer(scene,h,o):undefined;
-      const relay=h.relayField?.linkedControls?await relayOffer(scene,h,remaining,execution):undefined;
+      const relay=h.relayField?.linkedControls||h.relayField?.platforms?await relayOffer(scene,h,remaining,execution):undefined;
       const planned=await platformOffer(scene,h,o,remaining,execution)??relay??releaseBlockedControl(scene,h)??prepareRelayControls(scene,h,o)
         ??chain??press??linkedTransport(scene,h,o)??paired??await relayOffer(scene,h,remaining,execution)??arrangeActors(scene,h);
       const direct=planned?undefined:draft(scene,h,o);
       const directed=scene.goals.length&&direct&&direct.score>155?direct:undefined;
-      const generic=!planned&&!directed&&h.directions.length>=4?testObservedObjects(scene,h,objects):undefined;
+      const generic=!planned&&!directed&&h.directions.length>=4?testObservedObjects(scene,h,o,objects):undefined;
       const interaction=generic&&(!frontier[0]||generic.score>frontier[0].score)?generic:frontier[0];
-      const offer=planned??directed??interaction??direct;
+      const offer=[planned,directed,interaction,...frontier,direct].find(candidate=>candidate
+        &&!h.rejectedLossChoices?.includes(materialChoice(o,candidate.steps[0]!.action)));
       if(!offer || remaining<1) return null;
       const roleEvidence=Object.values(h.roles[offer.ink]?.effects??{});
       const evidence=[...new Set([o.observation_ref,...observedDirections(h,offer.ink).map(d=>d.evidence),...Object.values(h.selections),...roleEvidence,
@@ -1527,7 +1639,8 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const step=p.steps[index]!, scene=h.shape&&decode(packet.frame_rows,h.shape,h);
       const destination=step.contact??step.to??(step.tile&&observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)
         ?next(step.from,observedDirections(h,step.actor).find(d=>d.action===step.action.action_ref)!.axis):undefined);
-      const admitted=!!scene && scene.active.ink===step.actor&&scene.active.cell===step.from
+      const admitted=!!scene && !h.rejectedLossChoices?.includes(materialChoice(o,step.action))
+        && scene.active.ink===step.actor&&scene.active.cell===step.from
         && (step.tile===undefined||!!destination&&tileKey(scene.tiles.get(destination))===step.tile)
         && (!step.probeLanding||tileKey(scene.tiles.get(step.probeLanding.cell))===step.probeLanding.glyph
           &&!scene.actors.some(actor=>actor.cell===step.probeLanding!.cell))
@@ -1543,17 +1656,23 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
         && !scene.actors.some(actor=>actor.cell===reflector.to);
       const projectionBound=!transfer||!!scene&&controlProjectionAgrees(scene,h,transfer);
       const platform=step.platform;
+      const obstruction=step.clearLinkedObstruction;
+      const linkedEffectBound=!obstruction||!!scene&&portable(scene.tiles.get(obstruction))
+        &&pressureHeld(scene,step.from)&&h.gates[obstruction]?.accent===h.switches[step.from];
       const rosterBound=!step.roster||step.roster.every(actor=>scene?.actors.some(part=>part.ink===actor.ink&&part.cell===actor.cell));
       const platformBound=!platform||!!scene&&!!h.platformField&&platformAgreement(scene,h,o,h.platformField,platform.before)
         && (!platform.projected.length||[...scene.tiles.keys()].filter(cell=>observedProjection(scene,h,cell)).map(encode).sort((a,b)=>a-b).join(',')===platform.projected.join(','));
-      const valid=admitted&&joint&&modelBound&&contactBound&&projectionBound&&platformBound&&rosterBound;
+      const valid=admitted&&joint&&modelBound&&contactBound&&projectionBound&&platformBound&&rosterBound&&linkedEffectBound;
       return {admitted:valid,reason:valid?'observed_actor_and_local_contact_preserved':'actor_or_contact_changed'};
     },
     after(p,index,b,a,first,second) {
       const step=p.steps[index]!;
       const boundary=b.level_epoch!==a.level_epoch||b.levels_completed!==a.levels_completed;
       const scene=h.shape&&decode(second,h.shape,h);
+      const prior=!boundary&&scene&&h.shape&&decode(first,h.shape,h);
+      if(prior&&scene&&unplannedMaterialLoss(h,step,prior,scene,b,a))return {matched:false,seal_prefix:true,reason:sicObservedUnplannedMaterialLoss};
       const moved=scene?.active.cell===step.to && scene?.active.ink===step.actor
+        && (!step.supportAccess||matchesSupport(scene,h,a,step.supportAccess))
         && (!step.loads||JSON.stringify(loadCells(scene))===JSON.stringify(step.loads.to)
           && (!step.loads.support||matchesSupport(scene,h,a,step.loads.support)))
         && (!step.reflectorMove||!!scene.tiles.get(step.reflectorMove.to)?.mirror&&!scene.tiles.get(step.reflectorMove.from)?.mirror);
@@ -1578,6 +1697,10 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if(!h.shape||b.level_epoch!==a.level_epoch)return {events:[]};
       const before=decode(first,h.shape,h), after=decode(second,h.shape,h), step=p.steps[index]!;
       if(!before||!after) return {events:[]};
+      if(unplannedMaterialLoss(h,step,before,after,b,a)){
+        h.materialLoss={evidence:a.observation_ref,choice:materialChoice(b,action),...(p.offer.test?{test:p.offer.test}:{})};
+        return {events:[]};
+      }
       keepMotionEvidence(h,b,a,before,after);
       const actor=before.active, observed=after.active;
       const role=h.roles[actor.ink]??={moved:false,contact:false,capacity:0,effects:{}};
@@ -1602,7 +1725,7 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
           (h.controlTrials??={})[cell]={evidence:a.observation_ref,opens};
         }
       }
-      const foundation=step.loads?.support;
+      const foundation=step.loads?.support??step.supportAccess;
       if(foundation&&matchesSupport(after,h,a,foundation))h.supports[foundation]=tileKey(after.tiles.get(foundation));
       if(step.loads&&(observed.cell!==step.to||JSON.stringify(loadCells(after))!==JSON.stringify(step.loads.to)
         || foundation&&!matchesSupport(after,h,a,foundation)))
@@ -1762,15 +1885,29 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       if(before&&after)keepMotionEvidence(h,b,a,before,after);
     },
     requestedStopReason(o) {
+      if(h.materialLoss?.evidence===o.observation_ref)return sicObservedUnplannedMaterialLoss;
       const cycle=h.motion?.cycle;
       if(h.epoch===o.level_epoch&&h.motion?.last===o.observation_ref&&cycle
         && (h.recoveredCycles?.length??0)<2&&!h.recoveredCycles?.some(prior=>JSON.stringify(prior)===JSON.stringify(cycle)))return sicObservedMotionCycle;
       return null;
     },
     stateAfterLevelReset(o,_rows,_entry,cause) {
+      if(cause===sicObservedUnplannedMaterialLoss&&h.materialLoss){
+        return {...fresh(o.level_epoch),...(h.transfer?{transfer:h.transfer}:{}),
+          rejectedLossChoices:[...new Set([...(h.rejectedLossChoices??[]),h.materialLoss.choice])]};
+      }
       if(cause!==sicObservedMotionCycle||!h.motion?.cycle)return;
       return {...fresh(o.level_epoch),...(h.transfer?{transfer:h.transfer}:{}),
         recoveredCycles:[...(h.recoveredCycles??[]),h.motion.cycle]};
+    },
+    stateAfterActionUndo(entry){
+      if(!h.materialLoss)return;
+      const recovered=structuredClone(entry as unknown as History);
+      recovered.rejectedLossChoices=[...new Set([...(h.rejectedLossChoices??[]),h.materialLoss.choice])];
+      if(h.materialLoss.test)recovered.guarded.push(h.materialLoss.test);
+      delete recovered.relay;
+      recovered.relayChecked=[];
+      return recovered as unknown as NativeRecord;
     },
     state:()=>h,
     restore(value){ h={...fresh(-1),...structuredClone(value as History)}; },

@@ -12,7 +12,7 @@ import { standalonePlanningFamilies } from '../src/sic/standalone-families.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
-import { sicObservedGameOver } from '../src/logos-engine/v6-native-types.ts';
+import { sicObservedGameOver, sicObservedUnplannedMaterialLoss } from '../src/logos-engine/v6-native-types.ts';
 import type {
   NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeOutcome, NativePublicObservation,
   NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
@@ -315,6 +315,47 @@ test('an acquired loss can RESET the current level, retain evidence and replan f
   assert.equal(next.kind, 'action');
   assert.equal(state, 0);
   assert.notEqual(next.ticket?.observationRef, first.ticket?.observationRef);
+});
+
+test('SIC undoes only the action that consumed capacity and retains the preceding acquired prefix', async () => {
+  let acquired = 0, rejected = false;
+  const family: NativeFamily = {
+    id: 'undo-material-test',
+    propose: () => ({ status: 'proposed', kind: 'undo-material-test',
+      actions: acquired === 0 ? [{ action_ref: 'ACTION1', data: {} }, { action_ref: 'ACTION1', data: {} }]
+        : [{ action_ref: 'ACTION1', data: {} }], steps: acquired === 0 ? [{}, {}] : [{}] }),
+    before: () => ({ admitted: true, reason: 'current' }),
+    after: (_proposal, index) => index === 1 ? { matched: false, seal_prefix: true, reason: sicObservedUnplannedMaterialLoss }
+      : { matched: true, seal_prefix: false, reason: 'witnessed' },
+    record: () => { acquired++; return { events: [] }; },
+    requestedStopReason: () => acquired === 2 ? sicObservedUnplannedMaterialLoss : null,
+    state: () => ({ acquired, rejected }),
+    restore: value => { acquired = value.acquired as number; rejected = value.rejected as boolean; },
+    stateAfterActionUndo: entry => ({ ...entry, rejected: true }),
+  };
+  const backend = new NativeV6Runtime({ families: [family], maxPointOccurrences: 250, sourceDigest: 'test-material-undo' });
+  const service = new V6AgentService(() => backend);
+  const first = await service.handle(init());
+  const second = await service.handle({ type: 'advance', sessionId: first.sessionId, sequence: 1, ticketId: first.ticket!.id,
+    observation: toV6PublicObservation(board(1), 1), executionMs: 1 });
+  assert.equal(second.kind, 'action');
+  const lost = await service.handle({ type: 'advance', sessionId: first.sessionId, sequence: 2, ticketId: second.ticket!.id,
+    observation: toV6PublicObservation(board(2), 2), executionMs: 1 });
+  assert.equal(lost.kind, 'stopped');
+  assert.equal(lost.snapshot.reason, sicObservedUnplannedMaterialLoss);
+  assert.equal(lost.snapshot.canUndoAction, true);
+  const undo = (pixel: number) => service.handle({ type: 'undo_action', sessionId: first.sessionId, sequence: 2,
+    observation: toV6PublicObservation(board(pixel), 2) });
+  await assert.rejects(backend.undoAction(toV6PublicObservation(board(0), 2), {}), /observed board before the lost action/);
+  const recovered = await undo(1);
+  assert.equal(recovered.kind, 'boundary');
+  assert.equal(recovered.snapshot.canUndoAction, false);
+  assert.equal(recovered.snapshot.actions, 2);
+  const next = await service.handle({ type: 'resume', sessionId: first.sessionId, sequence: 2 });
+  assert.equal(acquired, 1);
+  assert.equal(rejected, true);
+  assert.equal(next.command?.actionRef, 'ACTION1');
+  assert.notEqual(next.ticket?.observationRef, second.ticket?.observationRef);
 });
 
 test('SIC retains a witnessed fatal command across a same-level reset and authorizes a different command', async () => {

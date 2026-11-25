@@ -191,9 +191,10 @@ export const sicObservedWeightShortage = 'sic_observed_weight_shortage';
 export const sicObservedTransportDeadlock = 'sic_observed_transport_deadlock';
 export const sicObservedGameOver = 'sic_observed_game_over';
 export const sicObservedMotionCycle = 'sic_observed_motion_cycle';
+export const sicObservedUnplannedMaterialLoss = 'sic_observed_unplanned_material_loss';
 export const isSicLevelRecovery = (reason: string | null) =>
   reason === sicObservedCoverageDeadlock || reason === sicObservedWeightShortage || reason === sicObservedTransportDeadlock
-  || reason === sicObservedGameOver || reason === sicObservedMotionCycle;
+  || reason === sicObservedGameOver || reason === sicObservedMotionCycle || reason === sicObservedUnplannedMaterialLoss;
 
 export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   readonly id: string;
@@ -230,6 +231,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
   requestedStopReason?(observation: NativeObservation): string | null;
   /** Transfer measured rules and recovery exclusions to an actual reset of this level. */
   stateAfterLevelReset?(observation: NativeObservation, rows: NativeRows, entry?: NativeRecord, cause?: string): NativeRecord | undefined;
+  stateAfterActionUndo?(entry:NativeRecord):NativeRecord|undefined;
   /** Read-only: proves acquisition separately from the current before-action guard. */
   learnedPreparationWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeLearnedPreparationWitness | null>;
   groundedInquiryWitness?(proposal: P, observation: NativeObservation): NativeMaybePromise<NativeGroundedInquiryWitness | null>;
@@ -286,6 +288,7 @@ export interface NativeRuntimeSnapshot extends NativeRecord {
   readonly sourceDigest: string;
   readonly proposal: unknown;
   readonly canResetLevel?: boolean;
+  readonly canUndoAction?: boolean;
   readonly graphChain?: string;
   readonly graphRevision?: number;
   readonly nativeExecutionDigest?: string;
@@ -357,6 +360,7 @@ export interface NativeV6Backend {
   initialize(input: NativeInitialize, execution: NativeExecution): Promise<NativeRuntimeYield>;
   advance(outcome: NativeOutcome, execution: NativeExecution): Promise<NativeRuntimeYield>;
   resetLevel?(observation: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield>;
+  undoAction?(observation: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield>;
   resume(execution: NativeExecution): Promise<NativeRuntimeYield>;
   snapshot(): NativeRuntimeSnapshot;
   /** Opt-in read of current authority; backends without it retain snapshot validation. */

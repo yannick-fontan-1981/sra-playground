@@ -4,6 +4,7 @@
 export type RelayMotion = { action: string; axis: number };
 export type RelayState = { actors: number[]; loads: number[]; reflectors: number[]; supports: number[]; subjects?: number[] };
 export type RelayStep = { actor: number; action: string; before: RelayState; after: RelayState; projected: number[] };
+export type RelayPlatform = { cell:number; control:number; activeWhenPressed:boolean };
 type Gate = { cell: number; closedWhenPressed: boolean; control?: number };
 export type RelayModel = {
   floor: Set<number>; water: Set<number>; gates: Gate[]; plate: number | null;
@@ -20,6 +21,9 @@ export type RelayModel = {
   trialControl?: number;
   trialWeightOnly?: boolean;
   guidingControls?: number[];
+  platforms?: RelayPlatform[];
+  heldBy?: {actor:number; cell:number};
+  observedTargets?: readonly number[];
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
@@ -31,7 +35,9 @@ const pressed = (s:RelayState,plate:number|null) => plate!==null&&occupied(s,pla
 export const relayGateClosed = (gate:Gate,s:RelayState,plate:number|null) => gate.closedWhenPressed===pressed(s,gate.control??plate);
 const blocked = (m:RelayModel,s:RelayState,p:number) => !m.floor.has(p)&&!m.water.has(p)
   ||m.gates.some(gate=>gate.cell===p&&relayGateClosed(gate,s,m.plate));
-const stands = (m:RelayModel,s:RelayState,p:number) => m.floor.has(p)||s.supports.includes(p);
+export const relayPlatformAvailable=(mark:RelayPlatform,s:RelayState)=>occupied(s,mark.control)===mark.activeWhenPressed;
+const stands = (m:RelayModel,s:RelayState,p:number) => m.floor.has(p)||s.supports.includes(p)
+  ||!!m.platforms?.some(mark=>mark.cell===p&&relayPlatformAvailable(mark,s));
 const sorted=(xs:number[])=>xs.sort((a,b)=>a-b);
 const signature=(s:RelayState)=>[...s.actors,-1,...s.reflectors,-1,...s.loads,-1,...s.supports,-1,...(s.subjects??[])].join(',');
 const solved=(m:RelayModel,s:RelayState)=>m.trialControl!==undefined?(m.trialWeightOnly?relayControlWeighted(s,m.trialControl):occupied(s,m.trialControl))
@@ -50,6 +56,7 @@ function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) 
   }
   const after:RelayState={actors:before.actors.map(position),loads:before.loads.map(position),reflectors,supports:[...before.supports],
     ...(before.subjects?{subjects:sorted(before.subjects.map(position))}:{})};
+  if(m.heldBy&&after.actors[m.heldBy.actor]!==m.heldBy.cell)return;
   if(m.keepSubjectOnControl&&m.plate!==null&&!after.subjects?.includes(m.plate))return;
   // An untested body may be hazardous on contact. Use non-contact transport
   // and keep both cursors clear until an observation supports a closer move.
@@ -57,6 +64,7 @@ function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) 
   if(m.unoccupiedControls?.some(cell=>occupied(after,cell)))return;
   if(m.heldLoadControls?.some(cell=>!after.loads.includes(cell)))return;
   if(!after.actors.every(p=>stands(m,after,p))||!after.reflectors.every(p=>stands(m,after,p)))return;
+  if(m.platforms&&after.loads.some(p=>!stands(m,after,p)&&!m.platforms!.some(mark=>mark.cell===p&&relayPlatformAvailable(mark,before))))return;
   after.loads=after.loads.filter(p=>{
     if(stands(m,after,p))return true;
     if(m.water.has(p))after.supports.push(p);
@@ -118,7 +126,7 @@ function branches(model:RelayModel,origin:RelayState, keepPrepared=false):Branch
       };
       const pressureChanged=pressed(origin,model.plate)!==pressed(s,model.plate)||model.gates.some(gate=>
         gate.control!==undefined&&pressed(origin,gate.control)!==pressed(s,gate.control));
-      if(path.length&&(pressureChanged||model.goals.includes(at))){
+      if(path.length&&(pressureChanged||model.goals.includes(at)||model.observedTargets?.includes(at))){
         out.push({state:s,steps:path});
         if(pressureChanged||solved(model,s))continue;
       }
@@ -316,14 +324,15 @@ function dequeue(queue:Node[]) {
   return n;
 }
 
-export async function findRelayPlan(model:RelayModel,start:RelayState,options:{maxNodes:number; emphasis?:number; yieldControl:()=>Promise<void>;signal?:AbortSignal}) {
+export async function findRelayPlan(model:RelayModel,start:RelayState,options:{maxNodes:number; emphasis?:number; yieldControl:()=>Promise<void>;signal?:AbortSignal;
+  objective?: {accept:(pose:RelayState)=>boolean;rank:(pose:RelayState)=>number;admit?:(pose:RelayState)=>boolean}}) {
   if(model.trialWeightOnly){
     const direct=directControlSetup(model,start);
     if(direct)return direct;
   }
   const stateKey=(state:RelayState,actor:number|undefined)=>model.activeActor===undefined
     ?signature(state):JSON.stringify([signature(state),actor]);
-  const rank=ordering(model,options.emphasis??19), seen=new Map([[stateKey(start,model.activeActor),0]]);
+  const rank=options.objective?.rank??ordering(model,options.emphasis??19), seen=new Map([[stateKey(start,model.activeActor),0]]);
   const templates=relayStances(model), ready=new Set<string>();
   const queue:Node[]=[{branch:{state:start,steps:[]},parent:null,cost:0,priority:rank(start)}];
   for(let read=0;queue.length&&read<options.maxNodes;read++){
@@ -332,10 +341,10 @@ export async function findRelayPlan(model:RelayModel,start:RelayState,options:{m
     const active=node.branch.steps.at(-1)?.actor??model.activeActor;
     if(node.cost!==seen.get(stateKey(node.branch.state,active)))continue;
     const state=node.branch.state;
-    if(solved(model,state))return replayPath(node);
+    if(options.objective?options.objective.accept(state):solved(model,state))return replayPath(node);
     const stage=templates.find(template=>template.mirror===state.reflectors[0]
       &&(state.loads.includes(template.load)||model.plate!==null&&state.loads.includes(model.plate)));
-    if(stage){
+    if(stage&&!options.objective){
       const trial=signature(state);
       if(!ready.has(trial)&&ready.size<12){
         ready.add(trial);
@@ -344,6 +353,7 @@ export async function findRelayPlan(model:RelayModel,start:RelayState,options:{m
       }
     }
     for(const branch of branches(model,node.branch.state)){
+      if(options.objective?.admit&&!options.objective.admit(branch.state))continue;
       const actor=branch.steps[0]!.actor;
       const selection=model.activeActor!==undefined&&actor!==active?1:0;
       const id=stateKey(branch.state,actor), cost=node.cost+branch.steps.length+selection;

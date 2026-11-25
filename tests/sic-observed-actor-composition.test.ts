@@ -5,7 +5,7 @@ import { createSs06Backend } from '../src/games/sinking-star-ss06.ts';
 import { createSs07Backend } from '../src/games/sinking-star-ss07.ts';
 import { createObservedActorComposition } from '../src/sic/observed-actor-composition.ts';
 import { relayGateClosed } from '../src/sic/observed-relay-plan.ts';
-import { sicObservedMotionCycle } from '../src/logos-engine/v6-native-types.ts';
+import { sicObservedMotionCycle, sicObservedUnplannedMaterialLoss } from '../src/logos-engine/v6-native-types.ts';
 
 type Point = readonly [number, number];
 const same = (a: Point,b: Point) => a[0]===b[0] && a[1]===b[1];
@@ -310,6 +310,8 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
   let inherited=false, rejectedUnchangedMirror=false, rejectedUnseenGate=false, rejectedWrongGate=false;
   let verifiedThird=false, completedBeforeSubject=0, transfers=0, pressedWithSubject=false, rejectedMissingSubjectPreview=false, rejectedStaticSubject=false;
   let verifiedSixth=false, completedBeforeCircuits=0, sawSubjectsBeforeTrial=false, recoveredAfterTrial=false;
+  let verifiedSeventh=false, verifiedEighth=false, beforeEighth=0;
+  let remoteTrial=false, preparedBridge=false, rejectedMissingPlatform=false;
   const testedControls=new Set<number>();
   const show=async()=>{
     let frame=board.frame.map(row=>[...row]);
@@ -331,9 +333,9 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
       state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'withdrawal-campaign')};
   };
-  while((!verifiedThird&&board.level<=3||board.level===6&&!verifiedSixth||board.level===7)&&revision<350){
+  while((!verifiedThird&&board.level<=3||board.level===6&&!verifiedSixth||board.level>=7&&!verifiedEighth)&&revision<530){
     const first=await show(), level=board.level;
-    const offer=await family.propose(first.observation,first.packet.frame_rows,[],350-revision);
+    const offer=await family.propose(first.observation,first.packet.frame_rows,[],530-revision);
     assert.ok(offer,`Missing composition at level ${level}, after ${revision} actions`);
     if(level>=2){
       assert.notEqual(offer.offer.kind,'calibrate_actor_action');
@@ -345,6 +347,21 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
       const before=await show(), step=offer.steps[index]!;
       if(!(await family.before(offer,index,before.packet,before.observation)).admitted)break;
       const relay=step.relay, field=family.state().relayField;
+      if(level===8&&field?.platforms&&relay){
+        const platform=field.platforms.find(mark=>relay.after.actors[relay.actor]===mark.cell
+          &&relay.before.actors.some((cell,index)=>index!==relay.actor&&cell===mark.control));
+        if(platform&&!rejectedMissingPlatform){
+          const rows=before.packet.frame_rows.map(row=>[...row]);
+          const {pitch,phase}=family.state().shape!;
+          const x=phase[0]+platform.cell%64*pitch,y=phase[1]+Math.floor(platform.cell/64)*pitch;
+          const water=family.state().transfer!.support!.medium;
+          const ink=Number(water);
+          assert.ok(Number.isInteger(ink));
+          for(let dy=0;dy<pitch;dy++)for(let dx=0;dx<pitch;dx++)rows[y+dy]![x+dx]=ink;
+          assert.equal((await family.before(offer,index,{...before.packet,frame_rows:rows},before.observation)).admitted,false);
+          rejectedMissingPlatform=true;
+        }
+      }
       if(level===7&&relay){
         sawSubjectsBeforeTrial ||= (relay.before.subjects?.length??0)>=2;
         recoveredAfterTrial ||= testedControls.size===2&&sawSubjectsBeforeTrial&&!(relay.before.subjects?.length);
@@ -368,6 +385,18 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
       issued++;
       const after=await show();
       const verdict=await family.after(offer,index,before.observation,after.observation,before.packet.frame_rows,after.packet.frame_rows);
+      if(level===8&&relay&&field?.platforms){
+        if(step.circuitTrial!==undefined&&offer.offer.kind==='cross_on_held_platforms_and_test_control'){
+          assert.equal(verdict.seal_prefix,true);
+          assert.ok(field.platforms.some(mark=>relay.before.actors.includes(mark.control)&&relay.after.actors.includes(mark.control)));
+          remoteTrial=true;
+        }
+        if(offer.offer.kind==='release_control_to_build_permanent_crossing'&&relay.after.supports.length>relay.before.supports.length){
+          assert.ok(verdict.matched);
+          assert.ok(field.platforms.every(mark=>relay.before.loads.includes(mark.cell)&&relay.after.supports.includes(mark.cell)));
+          preparedBridge=true;
+        }
+      }
       if(relay&&typeof subjectLanding==='number'&&typeof subjectSource==='number'){
         assert.ok(verdict.matched,'The predicted independent subject must move and match its landing');
         transfers++;
@@ -446,6 +475,16 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
         completedBeforeCircuits=board.levelsCompleted;
         break;
       }
+      if(level===7&&board.level!==7){
+        verifiedSeventh=true;
+        board=await game.dispatch({type:'selectLevel',level:8});
+        beforeEighth=board.levelsCompleted;
+        break;
+      }
+      if(level===8&&board.levelsCompleted>beforeEighth){
+        verifiedEighth=true;
+        break;
+      }
       if(verdict.seal_prefix)break;
     }
     assert.ok(issued,'The first command must be bound to the current scene');
@@ -455,6 +494,7 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
   assert.ok(transfers>=2&&pressedWithSubject&&rejectedMissingSubjectPreview&&rejectedStaticSubject);
   assert.equal(testedControls.size,2);
   assert.ok(recoveredAfterTrial,'Rebind both circuits after the previously occluded actuator changes the occupants');
+  assert.deepEqual([verifiedSeventh,verifiedEighth,remoteTrial,preparedBridge,rejectedMissingPlatform],[true,true,true,true,true]);
 });
 
 for (const presentation of mirroredPresentations) test('reuses both roles for a joint transfer with '+presentation.name, async () => {
@@ -605,6 +645,36 @@ test('tests an accessible pressure composition even with no recognized destinati
     if(i<proposal.actions.length-1)assert.ok(!family.state().guarded.includes(expected),'Approach must not close the experiment');
   }
   assert.ok(family.state().guarded.includes(expected),'The actual contact closes the experiment');
+});
+
+test('invalidates the exact choice that unexpectedly consumed a movable load', async () => {
+  const learned=await study(habitat(3,[9,10],directions,'activation'),10);
+  const game=habitat(3,[9,10],directions,'activation',{level:2,hideGoals:true,loadPositions:[[4,3]],objects:[
+    {cell:[7,5],paint:()=>13},
+  ]});
+  const family=createObservedActorComposition();
+  assert.ok(learned.state.transfer);
+  learned.state.transfer.support={medium:'13',pattern:Array<string>(9).fill('2'),evidence:'observed-support'};
+  family.restore(learned.state);
+  const {packet,observation}=await game.observed();
+  const offer=await family.propose(observation,packet.frame_rows,[],30);
+  assert.ok(offer);
+  assert.ok((await family.before(offer,0,packet,observation)).admitted);
+  const checkpoint=structuredClone(family.state());
+  const rows=packet.frame_rows.map(row=>[...row]);
+  for(const [x,y] of [[4,3],[7,5]])for(let dy=0;dy<3;dy++)for(let dx=0;dx<3;dx++)rows[y!*3+1+dy]![x!*3+1+dx]=2;
+  const after=await measureNativeObservation({...packet,frame_rows:rows,frame_hash:await publicFrameHash(rows)},1,'actor-fixture');
+  const command=offer.actions[0]!;
+  const result=await family.after(offer,0,observation,after,packet.frame_rows,rows);
+  assert.deepEqual(result,{matched:false,seal_prefix:true,reason:sicObservedUnplannedMaterialLoss});
+  await family.record(observation,after,command,packet.frame_rows,rows,offer,0,[]);
+  assert.equal(family.requestedStopReason!(after),sicObservedUnplannedMaterialLoss);
+  const recovered=family.stateAfterActionUndo!(checkpoint);
+  assert.ok(recovered);
+  family.restore(recovered);
+  assert.equal((await family.before(offer,0,packet,observation)).admitted,false);
+  assert.equal(family.requestedStopReason!(observation),null);
+  assert.deepEqual(family.state().transfer,checkpoint.transfer);
 });
 
 test('tests each visible object instance with no mirror, pressure control or known objective', async () => {

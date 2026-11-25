@@ -869,6 +869,46 @@ function measureLinkedCircuitTrials(issued){
     .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
+function measureHydraulicCrossing(issued) {
+  const world = compileSetLevel(SS07_LEVELS[7]);
+  const span = world.platforms.map(platform => platform.at);
+  let state = initialSetState(world);
+  let crossing, trial, bridge, finish;
+  for (const [index, ticket] of issued.entries()) {
+    const order = index + 1;
+    const { state: after, phases } = stepSetWorld(world, state, Number(ticket.action.slice(6)), ticket.data);
+    assert.notEqual(ticket.actorPlan?.strategy, 'calibrate_actor_action');
+    const heldCrossing = phases.some(phase => phase.kind === 'walk' && phase.moves.some(move => {
+      const platform = world.platforms.find(item => equal(item.at, move.to));
+      const circuit = world.circuits.find(item => item.id === platform?.circuit);
+      return platform && circuit?.buttons.some(button =>
+        state.heroes.some(hero => equal(hero.at, button)) && after.heroes.some(hero => equal(hero.at, button)));
+    }));
+    if (heldCrossing && ticket.actorPlan?.strategy === 'cross_on_held_platforms_and_test_control') crossing ??= order;
+    if (ticket.actorPlan?.strategy === 'cross_on_held_platforms_and_test_control' &&
+      phases.some(phase => phase.kind === 'piston' && phase.moves.some(move => move.actor === 'stone'))) {
+      assert.ok(ticket.actorPlan.evidence.some(ref => /:epoch:1:revision:/.test(ref)), 'Cross with an inherited role');
+      trial ??= order;
+    }
+    const added = after.supports.filter(cell => !state.supports.some(existing => equal(existing, cell)));
+    if (added.length || after.stones.length < state.stones.length) {
+      assert.equal(ticket.actorPlan?.strategy, 'release_control_to_build_permanent_crossing');
+      assert.equal(added.length, span.length);
+      assert.equal(state.stones.length - after.stones.length, span.length);
+      assert.ok(span.every(cell => state.stones.some(stone => equal(stone, cell)) && added.some(support => equal(support, cell))));
+      assert.ok(after.platformActive?.every(active => !active));
+      bridge = order;
+    }
+    if (after.complete && world.goals.every(goal => after.heroes.some(hero => equal(goal, hero.at)))) finish = order;
+    state = after;
+  }
+  assert.ok(crossing && trial > crossing && bridge > trial && finish > bridge,
+    'Hold the crossing, test the remote control, prepare every support, and finish with both actors');
+  return [[crossing, 'cross while another actor holds the control'], [trial, 'test the remote control and free the load'],
+    [bridge, 'release the control after all supports are loaded'], [finish, 'occupy both destinations']]
+    .map(([action, kind]) => ({ kind, first: action, last: action }));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -877,7 +917,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 7 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -997,7 +1037,7 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     if (code === 'SS07') {
-      const cap=[85,85,40,85,85,55,105][row.level-1];
+      const cap=[85,85,40,85,85,55,105,150][row.level-1];
       assert.ok(issued.length<=cap&&continued>=(row.level===3?14:20)&&issued.every(ticket=>ticket.resets===0),
         'SS07 must prepare and complete the destination set in guarded series');
     }
@@ -1006,6 +1046,7 @@ export function checkRun(run) {
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
       : code === 'SS07' ? row.level<=3?[measureDestinationSet,measureReflectorWithdrawal,measureLinkedReflectorAccess][row.level-1](issued)
+        :row.level===8?measureHydraulicCrossing(issued)
         :row.level===7?measureLinkedCircuitTrials(issued):measureComposedAccess(row.level,issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
@@ -1040,7 +1081,7 @@ function main() {
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
       ['actor-composition', 'SS06', '8', '125'],
-      ['destination-set', 'SS07', '7', '110'],
+      ['destination-set', 'SS07', '8', '180'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

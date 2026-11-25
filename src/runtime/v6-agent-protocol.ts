@@ -69,6 +69,7 @@ export interface V6BackendSnapshot {
   sourceDigest: string;
   proposal: unknown;
   canResetLevel?: boolean;
+  canUndoAction?: boolean;
   graphChain?: string;
   graphRevision?: number;
   nativeExecutionDigest?: string;
@@ -101,6 +102,7 @@ export type V6AgentOperation =
       recovery?: import('../sic/active-recovery.ts').RecoveryPack }
   | { type: 'advance'; sessionId: string; sequence: number; ticketId: string; observation: V6PublicObservation; executionMs: number }
   | { type: 'reset_level'; sessionId: string; sequence: number; observation: V6PublicObservation }
+  | { type: 'undo_action'; sessionId: string; sequence: number; observation: V6PublicObservation }
   | { type: 'edit'; sessionId: string; sequence: number; edit: NativeGraphEdit }
   | { type: 'resume' | 'snapshot' | 'inspect' | 'close'; sessionId: string; sequence: number };
 
