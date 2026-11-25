@@ -544,6 +544,47 @@ function measureSharedPressureTransport(issued) {
     .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
+function measureReleasedControlCrossing(issued) {
+  const world=compileActorLevel(SS06_LEVELS[5]);
+  let state=initialActorState(world), continuousAlignment;
+  const crossings=new Map(), usedFootings=new Set(), createdFootings=new Set();
+  const releases=[];
+  assert.ok(issued.every(ticket=>ticket.actorPlan&&ticket.actorPlan.strategy!=='calibrate_actor_action'),
+    'SS06 L6 must reuse the learned actors and trigger');
+  for(const [i,ticket] of issued.entries()){
+    const {state:after,phases}=stepActorWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    const moved=phases.filter(phase=>phase.kind==='reflect').flatMap(phase=>phase.moves);
+    if(ticket.actionIndex>0&&phases.some(phase=>phase.kind==='push'&&phase.moves.some(move=>move.actor==='mirror')))
+      continuousAlignment??=i+1;
+    for(const move of moved.filter(item=>item.actor==='monster')){
+      const gate=world.gates.findIndex(item=>world.circuits.some(circuit=>circuit.id===item.circuit
+        &&circuit.buttons.some(button=>equal(button,move.from))));
+      if(gate>=0&&actorGateClosed(world,state,gate)&&!actorGateClosed(world,after,gate)){
+        assert.equal(ticket.actorPlan.strategy,'transfer_subject_off_linked_control');
+        assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)),
+          'The release must use evidence for the previously observed transfer');
+        releases.push(i+1);
+      }
+    }
+    if(after.supports.length>state.supports.length){
+      assert.equal(releases.length,world.gates.length,'SS06 L6 consumed a load before releasing its controls');
+      for(const cell of after.supports.filter(cell=>!state.supports.some(old=>equal(cell,old))))createdFootings.add(JSON.stringify(cell));
+    }
+    for(const move of moved.filter(item=>item.actor==='hero')){
+      const actor=state.heroes.find(hero=>equal(hero.at,move.from));
+      if(actor&&releases.length===world.gates.length&&!crossings.has(actor.kind))crossings.set(actor.kind,i+1);
+    }
+    for(const hero of after.heroes)if(after.supports.some(cell=>equal(hero.at,cell)))usedFootings.add(JSON.stringify(hero.at));
+    state=after;
+  }
+  assert.ok(releases.length===world.gates.length&&releases.at(-1)<=10&&continuousAlignment&&crossings.size===state.heroes.length&&state.complete,
+    'SS06 L6 must release the controls and carry both actors through verified reflections');
+  assert.ok([...createdFootings].every(cell=>usedFootings.has(cell)),'SS06 L6 sacrificed a load on an unused foothold');
+  return [[continuousAlignment,'position the reflector in series'],[releases[0],'release the first occupied control'],
+    [releases[1],'release the second occupied control'],...[...crossings.values()].map(action=>[action,'reflect an actor through the open access'])]
+    .map(([action,kind])=>({kind,first:action,last:action}));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -552,7 +593,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 5 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 6 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -667,14 +708,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
     if (code === 'SS06') {
-      const cap=[45,42,115,55,65][row.level-1];
+      const cap=[45,42,115,55,65,65][row.level-1];
       assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport][row.level-1](issued) : [];
+      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -707,7 +748,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
-      ['actor-composition', 'SS06', '5', '125'],
+      ['actor-composition', 'SS06', '6', '125'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

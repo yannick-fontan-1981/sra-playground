@@ -8,6 +8,7 @@ type Gate = { cell: number; closedWhenPressed: boolean };
 export type RelayModel = {
   floor: Set<number>; water: Set<number>; gates: Gate[]; plate: number | null;
   goals: number[]; arms: readonly number[]; controls: RelayMotion[][]; capacity: number[]; trigger: string;
+  unoccupiedControls?: number[];
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
@@ -24,6 +25,7 @@ const solved=(m:RelayModel,s:RelayState)=>m.goals.every(goal=>s.actors.includes(
 function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) {
   const position=(cell:number)=>moves.get(cell)??cell;
   const after={actors:before.actors.map(position),loads:before.loads.map(position),reflector:position(before.reflector),supports:[...before.supports]};
+  if(m.unoccupiedControls?.some(cell=>occupied(after,cell)))return;
   if(!after.actors.every(p=>stands(m,after,p))||!stands(m,after,after.reflector))return;
   after.loads=after.loads.filter(p=>{
     if(stands(m,after,p))return true;

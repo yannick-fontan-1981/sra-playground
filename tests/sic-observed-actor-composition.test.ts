@@ -198,8 +198,8 @@ test('rebinds verified roles after the same motifs change positions on the next 
   assert.notEqual((await family.after(proposal,0,observation,returned.observation,packet.frame_rows,returned.packet.frame_rows)).matched,false);
 });
 const mirroredPresentations = [
-  {name:'horizontal reflection, new colors and reordered inputs', flipX:true, flipY:false, colors:3, inputs:[3,5,2,1,4]},
-  {name:'vertical reflection, different colors and a different interaction command', flipX:false, flipY:true, colors:7, inputs:[5,2,4,3,1]},
+  {name:'horizontal reflection, new colors and reordered inputs', flipX:true, flipY:false, colors:3, inputs:[3,5,2,1,4], alternateOccupant:false},
+  {name:'vertical reflection, a changed occupant motif and a different interaction command', flipX:false, flipY:true, colors:7, inputs:[5,2,4,3,1], alternateOccupant:true},
 ] as const;
 
 for (const presentation of mirroredPresentations) test('reuses both roles for a joint transfer with '+presentation.name, async () => {
@@ -207,17 +207,29 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   const family = createObservedActorComposition();
   let board = await game.dispatch({type:'load',code:'SS06',level:1});
   let revision=0, firstSecondLevelOffer='', joint=false, chain=false, pressure=false, extension=false, sharedCircuit=false;
+  let releases=0, missingProjectionChecked=false;
   const show = async () => {
-    let frame=board.frame.map(row=>row.map(value=>(value+presentation.colors)%16));
+    let frame=board.frame.map(row=>[...row]);
+    if(board.level===6&&presentation.alternateOccupant){
+      // Change the subject motif while preserving the pressure mark at the corners.
+      for(let y=3;y<61;y+=3)for(let x=3;x<61;x+=3){
+        if(frame[y]![x]===8&&frame[y-1]![x]===5&&frame[y+1]![x]===5
+          &&frame[y]![x-1]===5&&frame[y]![x+1]===5){
+          frame[y]![x]=14;
+          frame[y]![x+1]=4;
+        }
+      }
+    }
+    frame=frame.map(row=>row.map(value=>(value+presentation.colors)%16));
     if(presentation.flipX)frame=frame.map(row=>row.reverse());
     if(presentation.flipY)frame.reverse();
     const packet={frame_rows:frame,frame_hash:await publicFrameHash(frame),level:board.level,
       levels_completed:board.levelsCompleted,state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'shifted-campaign')};
   };
-  while(board.level<=5 && revision<320){
+  while(board.level<=6 && revision<400){
     const {packet,observation}=await show();
-    const proposal=await family.propose(observation,packet.frame_rows,[],320-revision);
+    const proposal=await family.propose(observation,packet.frame_rows,[],400-revision);
     assert.ok(proposal,'Missing proposal after '+revision+' actions, level '+board.level);
     if(board.level===2) {
       if (!firstSecondLevelOffer) firstSecondLevelOffer=proposal.offer.kind;
@@ -234,11 +246,28 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
       sharedCircuit ||= proposal.offer.kind==='execute_joint_transport_through_observed_open_gates';
     }
+    if(board.level===6)assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
     let issued=0;
     for(const [index,command] of proposal.actions.entries()){
       const first=await show();
       const binding=await family.before(proposal,index,first.packet,first.observation);
       if(!binding.admitted)break;
+      const transfer=proposal.steps[index]!.controlTransfer;
+      if(transfer&&!missingProjectionChecked){
+        const {shape,projectionInk}=family.state();
+        const [x,y]=transfer.destination.split(',').map(Number);
+        const [left,top]=[shape!.phase[0]+x!*shape!.pitch,shape!.phase[1]+y!*shape!.pitch];
+        const rows=first.packet.frame_rows.map(row=>[...row]);
+        for(let j=top;j<top+shape!.pitch;j++)for(let i=left;i<left+shape!.pitch;i++){
+          if(rows[j]![i]===projectionInk)rows[j]![i]=shape!.floor;
+        }
+        const withoutProjection={...first.packet,frame_rows:rows,frame_hash:await publicFrameHash(rows)};
+        assert.equal((await family.before(proposal,index,withoutProjection,first.observation)).admitted,false);
+        const noEffect=await family.after(proposal,index,first.observation,first.observation,first.packet.frame_rows,first.packet.frame_rows);
+        assert.equal(noEffect.matched,false);
+        assert.equal(noEffect.seal_prefix,true);
+        missingProjectionChecked=true;
+      }
       const slot=Number(command.action_ref.slice(6));
       const point=slot===6?{x:presentation.flipX?63-command.data.x!:command.data.x!,y:presentation.flipY?63-command.data.y!:command.data.y!}:undefined;
       board=await game.dispatch({type:'action',actionId:slot===6?6:presentation.inputs[slot-1]!,...(point?{data:point}:{})});
@@ -246,6 +275,7 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       issued++;
       const second=await show();
       const result=await family.after(proposal,index,first.observation,second.observation,first.packet.frame_rows,second.packet.frame_rows);
+      if(transfer&&result.matched)releases++;
       await family.record(first.observation,second.observation,command,first.packet.frame_rows,second.packet.frame_rows,proposal,index,[]);
       if(result.seal_prefix)break;
     }
@@ -253,7 +283,9 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   }
   assert.equal(firstSecondLevelOffer,'prepare_transfer_by_moving_reflector');
   assert.ok(joint);
-  assert.equal(board.levelsCompleted,5);
+  assert.equal(board.levelsCompleted,6);
+  assert.equal(releases,2);
+  assert.ok(missingProjectionChecked);
   assert.ok(chain&&pressure&&extension&&sharedCircuit);
 });
 
