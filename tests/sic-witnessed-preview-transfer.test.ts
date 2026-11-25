@@ -199,6 +199,21 @@ test('the family restores the witnessed relation across an official completion a
   const rec = await restored.record(next.o, result.o, q, next.rows, result.rows, proposal!, 0, []);
   assert.equal(rec?.events?.[0]?.result, 'preview_realized');
 });
+test('a transferred preview preserves priority after reflecting and exchanging the axes', async () => {
+  const family = createPreparedEffects();
+  const before = await scene(1, 1, [[3, 4]], [11, 9]);
+  const after = await scene(1, 2, [[11, 9]], null);
+  const next = await scene(2, 3, [[14, 3]], [10, 11]);
+  await family.observePublicOutcome!(before.o, after.o, q, before.rows, after.rows);
+  await family.observePublicOutcome!(after.o, next.o, { action_ref: 'ACTION2', data: {} }, after.rows, next.rows);
+  const proposal = await family.proposeInGroup!(evidencedPlanGroup, next.o, next.rows, [q], 20);
+  assert.equal(proposal?.experiment.witnessedPreview?.basis, 'observed_in_previous_level');
+  assert.deepEqual(proposal?.actions, [q]);
+  assert.equal(await family.proposeInGroup!(transferredPreviewGroup, next.o, next.rows, [q], 20), null);
+  const blocked = await scene(2, 4, [[14, 3]], [10, 11]);
+  const receipt = await family.record(next.o, blocked.o, q, next.rows, blocked.rows, proposal!, 0, []);
+  assert.equal(receipt.events[0]?.result, 'preview_contradicted');
+});
 test('a reset or another campaign cannot supply a prior witness, and the next action can refute it', async () => {
   const a = await scene(1, 1, [[3, 4]], [11, 9]),
     b = await scene(1, 2, [[11, 9]], null),

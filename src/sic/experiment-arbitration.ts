@@ -12,7 +12,14 @@ function usesTransferredPreview(experiment: Pick<Experiment, 'witnessedPreview'>
 
 export function requiresPreviewRevalidation(experiment: Pick<Experiment, 'rule' | 'witnessedPreview'> | null): boolean {
   // A cue just rediscovered by an active search already has a current return.
-  return usesTransferredPreview(experiment) && experiment?.rule !== 'use_the_rediscovered_cue';
+  const preview = experiment?.witnessedPreview;
+  if (preview?.basis !== 'observed_in_previous_level' || experiment?.rule === 'use_the_rediscovered_cue') return false;
+  const { from, indicated, witness } = preview;
+  const dx = Math.abs(indicated[0] - from[0]), dy = Math.abs(indicated[1] - from[1]);
+  const oldDx = Math.abs(witness.indicated[0] - witness.from[0]), oldDy = Math.abs(witness.indicated[1] - witness.from[1]);
+  // The shape and the command are already matched. Preserve priority when the
+  // relative positions also match through a translation or an orthogonal symmetry.
+  return !(dx === oldDx && dy === oldDy || dx === oldDy && dy === oldDx);
 }
 /** A negative control at the current placement is evidence for the question,
  * but the proposed preparation still comes from a different placement. */
