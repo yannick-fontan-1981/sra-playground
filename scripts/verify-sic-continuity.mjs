@@ -831,7 +831,7 @@ function measureComposedAccess(level,issued) {
       [crossing,'cross the gate held by the subject']];
   assert.ok(effects.every(([action])=>action),'Required physical composition missing at SS07 L'+level);
   if(level===6){
-    const tail=issued.filter(ticket=>ticket.actorPlan?.strategy==='test_complete_destination_arrangement');
+    const tail=issued.slice(-13);
     assert.ok(tail.filter(ticket=>ticket.action==='ACTION6').length<=2,'Charge changes of actor in the shared destination route');
     assert.ok(tail.some(ticket=>ticket.actionIndex>=4),'Keep several finishing moves in a single guarded series');
   }
