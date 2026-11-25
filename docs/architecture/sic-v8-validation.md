@@ -2705,6 +2705,8 @@ Le banc fixe deux plafonds pour chaque niveau. Il ajoute au nombre de commandes 
 
 Le moteur mesure le temps actif par niveau. Le banc exécute chaque jeu dans un processus surveillé et applique la même limite au temps écoulé de chaque niveau. Le processus parent peut interrompre un calcul natif qui monopolise son processus et conserver les résultats des niveaux terminés ainsi que les commandes confirmées. Le rejeu journalise la provenance des plafonds, le temps effectivement consommé et le motif d’arrêt. Un dépassement de budget signale une victoire qui reste à reproduire sous ces plafonds.
 
+Le surveillant reçoit aussi le score public après chaque commande appliquée. Si le moteur dépasse son délai en enregistrant une victoire déjà annoncée par le jeu, le niveau reste gagné. Le banc signale un arrêt pendant la transition lorsque cette situation empêche de poursuivre la session.
+
 ### AS66 niveau 6, respecter le domaine d’entrée du moteur
 
 À la commande cumulée 141, la composition réintroduisait une commande annoncée par le jeu que le domaine d’entrée n’avait pas admise pour l’exploration. Son retour correspond exactement à la grille de début du niveau. La composition utilise désormais les commandes admises par le domaine, ainsi que les clics dont le point peut être justifié. Le traitement dédié de la récupération garde sa propre autorité.

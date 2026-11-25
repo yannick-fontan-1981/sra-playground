@@ -31,3 +31,24 @@ test('the supervisor stops a blocked level and retains the completed levels and 
     await rmdir(directory);
   }
 });
+
+test('the watchdog retains the public score when native reconciliation misses the deadline', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'sic-watchdog-score-'));
+  const script = join(directory, 'settled.mjs');
+  try {
+    await writeFile(script, `
+      const target = Number(process.argv[2]);
+      process.send({ kind: 'level-started', level: 1, target, budget: { actions: 5, activeTimeMs: 100 } });
+      process.send({ kind: 'command-applied', sicAuthorized: true, levelsCompleted: 1 }, () => { for (;;) {} });
+    `);
+    for (const [target, reason] of [[1, 'target_levels_completed'], [2, 'level_transition_wall_time_budget']]) {
+      const result = await superviseSicReplay(script, [String(target)], 'FIXTURE');
+      assert.equal(result.reason, reason);
+      assert.equal(result.levels, 1);
+      assert.equal(result.levelStats[0].won, true);
+    }
+  } finally {
+    await unlink(script);
+    await rmdir(directory);
+  }
+});
