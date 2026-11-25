@@ -133,37 +133,60 @@ export function rasterComponents(rows: NativeRows, connectivity: 4 | 8 = 4): Ras
   return result;
 }
 
+function maskScale(mask: readonly Pixel[], height: number): number {
+  // The column-major mask visits each row and column in increasing order.
+  const lastColumn = new Int32Array(height).fill(-2);
+  const rowLengths = new Uint32Array(height);
+  let scale = 0, previousX = -1, previousY = -2, verticalLength = 0;
+  for (const [x, y] of mask) {
+    if (x !== previousX || y !== previousY + 1) {
+      scale = gcd(scale, verticalLength);
+      verticalLength = 0;
+    }
+    if (lastColumn[y]! + 1 !== x) {
+      scale = gcd(scale, rowLengths[y]!);
+      rowLengths[y] = 0;
+    }
+    if (scale === 1) return 1;
+    rowLengths[y] = rowLengths[y]! + 1;
+    lastColumn[y] = x;
+    verticalLength++;
+    previousX = x;
+    previousY = y;
+  }
+  scale = gcd(scale, verticalLength);
+  for (const length of rowLengths) {
+    scale = gcd(scale, length);
+    if (scale === 1) return 1;
+  }
+  return scale || 1;
+}
+
 /** V6 masks are relative [x,y] pairs, unlike V5 pixels ([row,column]). */
 export function geometricComponents(rows: NativeRows, connectivity: 4 | 8 = 4): GeometricComponent[] {
   const components = rasterComponents(rows, connectivity), width = rows[0]!.length;
   return components.map(({ color, bbox, pixels }, index) => {
     const [left, top, right, bottom] = bbox;
     const mask: Pixel[] = pixels.map(index => [index % width - left, Math.floor(index / width) - top] as Pixel).sort(comparePixel);
-    // The Python observer takes the GCD of every horizontal AND vertical run.
-    const axes: [Map<number, number[]>, Map<number, number[]>] = [new Map(), new Map()];
-    for (const [px, py] of mask) {
-      const horizontal = axes[0].get(py) ?? []; horizontal.push(px); axes[0].set(py, horizontal);
-      const vertical = axes[1].get(px) ?? []; vertical.push(py); axes[1].set(px, vertical);
-    }
-    let scale = 0;
-    for (const lines of axes) for (const line of lines.values()) {
-      line.sort((a, b) => a - b);
-      let run = 1;
-      for (let i = 1; i < line.length; i++) {
-        if (line[i] === line[i - 1]! + 1) run++;
-        else { scale = gcd(scale, run); run = 1; }
+    const boxWidth = right - left + 1, boxHeight = bottom - top + 1;
+    const rectangular = pixels.length === boxWidth * boxHeight;
+    // The reference takes the GCD of every horizontal and vertical run.
+    const scale = rectangular ? gcd(boxWidth, boxHeight) : maskScale(mask, boxHeight);
+    let normalized: Pixel[];
+    if (scale === 1) {
+      normalized = mask.map(([x, y]) => [x, y]);
+    } else if (rectangular) {
+      const rows = boxHeight / scale;
+      normalized = Array.from({ length: (boxWidth / scale) * rows }, (_, i) => [Math.floor(i / rows), i % rows]);
+    } else {
+      const normalizedMap = new Map<string, Pixel>();
+      for (const [px, py] of mask) {
+        const x = Math.floor(px / scale), y = Math.floor(py / scale);
+        normalizedMap.set(pixelKey(x, y), [x, y]);
       }
-      scale = gcd(scale, run);
+      normalized = [...normalizedMap.values()].sort(comparePixel);
     }
-    scale ||= 1;
-    const normalizedMap = new Map<string, Pixel>();
-    for (const [px, py] of mask) {
-      const nx = Math.floor(px / scale), ny = Math.floor(py / scale);
-      normalizedMap.set(pixelKey(nx, ny), [nx, ny]);
-    }
-    return { id: `component-${index}`, color, bbox, area: pixels.length,
-      scale, mask, normalized: [...normalizedMap.values()].sort(comparePixel),
-      rectangular: pixels.length === (right - left + 1) * (bottom - top + 1) };
+    return { id: `component-${index}`, color, bbox, area: pixels.length, scale, mask, normalized, rectangular };
   });
 }
 
