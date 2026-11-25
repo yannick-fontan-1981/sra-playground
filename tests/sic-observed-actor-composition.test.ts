@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
+import { measureNativeObservation, publicFrameHash, v6Canonical } from '../src/logos-engine/v6-native-observer.ts';
 import { createSs06Backend } from '../src/games/sinking-star-ss06.ts';
 import { createSs07Backend } from '../src/games/sinking-star-ss07.ts';
 import { createObservedActorComposition } from '../src/sic/observed-actor-composition.ts';
@@ -416,6 +416,7 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
         rejectedUnchangedMirror=true;
       }
       await family.record(before.observation,after.observation,action,before.packet.frame_rows,after.packet.frame_rows,offer,index,[]);
+      if(level===7&&step.select!==undefined)family.restore(JSON.parse(v6Canonical(family.state())));
       if(level===7&&step.circuitTrial!==undefined){
         assert.equal(verdict.seal_prefix,true);
         assert.ok(family.state().circuitTrials?.[step.circuitTrial]);

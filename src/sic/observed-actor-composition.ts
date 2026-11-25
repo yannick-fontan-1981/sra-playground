@@ -1281,7 +1281,8 @@ function relayPose(scene: Scene,h:History):RelayState|undefined {
   return {actors,loads:sorted(loads),reflectors,supports:sorted(supports),...(subjects?{subjects}:{})};
 }
 
-const sameRelayPose=(a:RelayState|undefined,b:RelayState)=>!!a&&JSON.stringify(a)===JSON.stringify(b);
+const relayPoseKey=(pose:RelayState)=>JSON.stringify([pose.actors,pose.loads,pose.reflectors,pose.supports,pose.subjects??[]]);
+const sameRelayPose=(a:RelayState|undefined,b:RelayState)=>!!a&&relayPoseKey(a)===relayPoseKey(b);
 
 function relayAgreement(scene:Scene,h:History,expected:RelayState){
   if(!sameRelayPose(relayPose(scene,h),expected))return false;
@@ -1302,7 +1303,7 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
   if(!pose)return;
   if(h.relay?.length&&!sameRelayPose(pose,h.relay[0]!.before))delete h.relay;
   if(!h.relay?.length){
-    const fingerprint=JSON.stringify(pose);
+    const fingerprint=JSON.stringify([relayPoseKey(pose),scene.active.ink]);
     if(h.relayChecked.includes(fingerprint)||h.relayChecked.length>=4)return;
     const spare=h.available?.filter(ref=>ref!=='ACTION6'&&!h.directions.some(direction=>direction.action===ref))??[];
     const model:RelayModel={...field,floor:new Set(field.floor),water:new Set(field.water),trigger:h.trigger??(spare.length===1?spare[0]!:'') ,
