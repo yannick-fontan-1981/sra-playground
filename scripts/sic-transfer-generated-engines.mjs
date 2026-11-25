@@ -109,13 +109,14 @@ function switchedSupport(spec) {
   const target = 3 + 2 * spec.span;
   const period = spec.phases.length;
   const probeCap = spec.intent === 'insufficient' ? spec.startup.length + period : spec.startup.length + 3 * period - 1;
-  let count = 0, actor = 1, rejectedCommands = 0;
+  let count = 0, actor = 1, rejectedCommands = 0, blockedWalks = 0;
   let active = supportPainting(spec, count), rows = supportRows(spec, actor, active);
   for (let effort = 0; effort < probeCap + 15; effort++) {
     const move = nextCarriedStep(state, rows, 45 - effort);
     const cycle = state.switchCycles?.[0];
     if (!move || (move.kind === 'switch' && move.measureCycle && count >= probeCap)) {
-      return { outcome: 'abstained', frontier: cycle?.period ? 'support-route' : 'phase-measurement', calibration: count };
+      return { outcome: 'abstained', frontier: cycle?.period ? 'support-route' : 'phase-measurement',
+        calibration: count, blockedWalks };
     }
     if (move.kind === 'switch') {
       const next = supportPainting(spec, count + 1);
@@ -124,14 +125,19 @@ function switchedSupport(spec) {
         count++;
         active = next;
       } else rejectedCommands++;
-    } else if (move.kind === 'walk' && move.expectedActor[1] === 5) {
-      const next = move.expectedActor[0];
-      const cell = (next - 3) / 2;
-      if (Math.abs(next - actor) !== 2 || next < 1 || next > target
-        || (next !== 1 && next !== target && !(active.mask & (1 << cell)))) {
-        return { outcome: 'mismatch', frontier: 'unsupported-footing', calibration: count };
+    } else if (move.kind === 'walk') {
+      const [next, y] = move.expectedActor;
+      if (y !== 5 || next < 1 || next > target) {
+        // The visible mechanism outside the crossing is solid. A blocked walk
+        // returns the unchanged board so SIC can learn the obstruction.
+        blockedWalks++;
+      } else {
+        const cell = (next - 3) / 2;
+        if (Math.abs(next - actor) !== 2 || (next !== 1 && next !== target && !(active.mask & (1 << cell)))) {
+          return { outcome: 'mismatch', frontier: 'unsupported-footing', calibration: count, blockedWalks };
+        }
+        actor = next;
       }
-      actor = next;
     } else {
       return { outcome: 'mismatch', frontier: 'illegal-control', calibration: count };
     }
@@ -142,7 +148,7 @@ function switchedSupport(spec) {
     rows = after;
     if (actor === target) {
       const proof = state.switchCycles?.[0]?.transientEvidence;
-      return { outcome: 'verified', frontier: 'terminal', proof: proof ? [proof] : [], calibration: count, rejectedCommands };
+      return { outcome: 'verified', frontier: 'terminal', proof: proof ? [proof] : [], calibration: count, rejectedCommands, blockedWalks };
     }
   }
   return { outcome: 'abstained', frontier: 'command-budget', calibration: count };
