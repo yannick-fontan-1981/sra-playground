@@ -1,0 +1,492 @@
+{
+  "game": "SS21",
+  "success": true,
+  "levels": [
+    6,
+    7,
+    8
+  ],
+  "method": "Rejeu des allocations de ressources, transitions hydrauliques, presses, relèves et variantes finales.",
+  "limits": [
+    "Aucune solution unique ou optimale n’est revendiquée.",
+    "Les contraintes constatées dans le témoin ne prouvent pas que chaque capacité est indispensable dans tous les plans.",
+    "Les branches de retrait et de réactivation sont locales et réparables."
+  ],
+  "checks": [
+    {
+      "level": 6,
+      "name": "Parcours complet sans refus ni décès",
+      "status": "passed",
+      "observed": {
+        "actions": 202,
+        "selections": 22,
+        "merchantPushes": 21,
+        "warriorPushes": 3,
+        "thiefPulls": 6,
+        "swaps": 1,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 3,
+        "stoneMoves": 33,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "supportMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 3,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+    },
+    {
+      "level": 7,
+      "name": "Parcours complet sans refus ni décès",
+      "status": "passed",
+      "observed": {
+        "actions": 153,
+        "selections": 32,
+        "merchantPushes": 12,
+        "warriorPushes": 15,
+        "thiefPulls": 2,
+        "swaps": 2,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 1,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 31,
+        "mirrorMoves": 0,
+        "monsterMoves": 1,
+        "supportMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+    },
+    {
+      "level": 8,
+      "name": "Parcours complet sans refus ni décès",
+      "status": "passed",
+      "observed": {
+        "actions": 219,
+        "selections": 32,
+        "merchantPushes": 16,
+        "warriorPushes": 18,
+        "thiefPulls": 7,
+        "swaps": 4,
+        "partnerSwaps": 0,
+        "stoneSwaps": 4,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 48,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "supportMoves": 0,
+        "reflections": 2,
+        "heroReflections": 1,
+        "pistonPushes": 2,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+    },
+    {
+      "level": 6,
+      "name": "L’échange initial conserve les deux positions occupées",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 6
+            },
+            "to": {
+              "x": 10,
+              "y": 11
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 11
+            },
+            "to": {
+              "x": 10,
+              "y": 6
+            }
+          }
+        ]
+      },
+      "scope": "Cet échange change les rôles présents sur les îlots, sans ajouter d’occupant ni créer de franchissement."
+    },
+    {
+      "level": 6,
+      "name": "Retirer trop tôt la commande ferme le départ ; revenir la rétablit",
+      "status": "passed",
+      "observed": {
+        "counterBranch": "DDR",
+        "closed": {
+          "gateClosed": true,
+          "westHeroes": [
+            {
+              "kind": "merchant",
+              "at": {
+                "x": 3,
+                "y": 6
+              }
+            },
+            {
+              "kind": "thief",
+              "at": {
+                "x": 2,
+                "y": 3
+              }
+            }
+          ]
+        },
+        "repair": "L",
+        "reopened": true
+      },
+      "scope": "Branche locale réversible avant le transfert des deux héros occidentaux ; ce n’est pas une preuve d’impasse."
+    },
+    {
+      "level": 6,
+      "name": "Quatre caisses affectées à trois franchissements et un poids sec",
+      "status": "passed",
+      "observed": {
+        "supports": [
+          {
+            "x": 7,
+            "y": 5
+          },
+          {
+            "x": 10,
+            "y": 9
+          },
+          {
+            "x": 13,
+            "y": 12
+          }
+        ],
+        "dryWeight": {
+          "x": 11,
+          "y": 11
+        },
+        "crateResourceCount": 4
+      },
+      "scope": "Comptabilité exacte du parcours : les caisses immergées restent présentes comme appuis fixes."
+    },
+    {
+      "level": 6,
+      "name": "Le départ ne se referme qu’après le passage des deux opérateurs",
+      "status": "passed",
+      "observed": {
+        "crossed": [
+          {
+            "x": 10,
+            "y": 8
+          },
+          {
+            "x": 11,
+            "y": 7
+          }
+        ],
+        "gateClosedAfterReuse": true
+      },
+      "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+    },
+    {
+      "level": 7,
+      "name": "Le gardien est transporté avant le retrait de son soutien",
+      "status": "passed",
+      "observed": {
+        "transport": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 9
+            },
+            "to": {
+              "x": 10,
+              "y": 4
+            }
+          },
+          {
+            "actor": "monster",
+            "from": {
+              "x": 10,
+              "y": 4
+            },
+            "to": {
+              "x": 10,
+              "y": 9
+            }
+          }
+        ],
+        "platformBefore": true,
+        "platformAfter": false,
+        "monsterLost": true,
+        "heroesAlive": true
+      },
+      "scope": "Le retrait d’eau, et non un combat de contact, élimine ce gardien dans le parcours."
+    },
+    {
+      "level": 7,
+      "name": "Le relais magique précède la fermeture du sas inférieur",
+      "status": "passed",
+      "observed": {
+        "thief": {
+          "x": 10,
+          "y": 7
+        },
+        "wizard": {
+          "x": 11,
+          "y": 12
+        },
+        "platformActive": true,
+        "lowerGateClosed": true
+      },
+      "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+    },
+    {
+      "level": 7,
+      "name": "L’appui fixe survit à une nouvelle activation et au retrait",
+      "status": "passed",
+      "observed": {
+        "support": {
+          "x": 10,
+          "y": 9
+        },
+        "counterBranch": "UD",
+        "preservedOnBothTransitions": true
+      },
+      "scope": "Contrat SRA explicite : l’appui immergé n’est pas écrasé par le redéploiement de la plateforme."
+    },
+    {
+      "level": 7,
+      "name": "Les deux caisses sèches ouvrent ensemble le fronton",
+      "status": "passed",
+      "observed": {
+        "oneWeightClosed": true,
+        "twoWeightsOpen": true,
+        "stones": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 11,
+            "y": 4
+          }
+        ],
+        "support": [
+          {
+            "x": 10,
+            "y": 9
+          }
+        ]
+      },
+      "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+    },
+    {
+      "level": 7,
+      "name": "Variante gagnante : le Marchand évacue avant les autres",
+      "status": "passed",
+      "observed": {
+        "actions": 148,
+        "selections": 27,
+        "merchantPushes": 12,
+        "warriorPushes": 15,
+        "thiefPulls": 2,
+        "swaps": 2,
+        "partnerSwaps": 1,
+        "stoneSwaps": 0,
+        "monsterSwaps": 1,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 31,
+        "mirrorMoves": 0,
+        "monsterMoves": 1,
+        "supportMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 1,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "L’ordre final de stationnement reste libre lorsque les deux charges sont en place."
+    },
+    {
+      "level": 8,
+      "name": "Deux presses distinctes placent le gardien sur sa commande",
+      "status": "passed",
+      "observed": {
+        "presses": [
+          {
+            "gate": {
+              "x": 12,
+              "y": 7
+            },
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 12,
+                  "y": 7
+                },
+                "to": {
+                  "x": 13,
+                  "y": 7
+                }
+              }
+            ]
+          },
+          {
+            "gate": {
+              "x": 13,
+              "y": 7
+            },
+            "moves": [
+              {
+                "actor": "monster",
+                "from": {
+                  "x": 13,
+                  "y": 7
+                },
+                "to": {
+                  "x": 14,
+                  "y": 7
+                }
+              }
+            ]
+          }
+        ],
+        "monsterPreservedThroughout": true
+      },
+      "scope": "Le gardien reste vivant et immobilisé sur son poids final dans tout le parcours."
+    },
+    {
+      "level": 8,
+      "name": "Le quai reçoit la caisse, est dégagé, puis reçoit le Magicien",
+      "status": "passed",
+      "observed": {
+        "crateArrival": {
+          "x": 8,
+          "y": 5
+        },
+        "storedCrate": {
+          "x": 12,
+          "y": 14
+        },
+        "heroArrival": {
+          "actor": "hero",
+          "from": {
+            "x": 7,
+            "y": 4
+          },
+          "to": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      },
+      "scope": "Ordre causal du témoin : la traction libère la case que le reflet du Magicien réutilise."
+    },
+    {
+      "level": 8,
+      "name": "Trois poids secs et un appui remplissent des fonctions différentes",
+      "status": "passed",
+      "observed": {
+        "dryCrates": [
+          {
+            "x": 12,
+            "y": 14
+          },
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "monsterWeight": {
+          "x": 14,
+          "y": 7
+        },
+        "support": {
+          "x": 15,
+          "y": 16
+        },
+        "gateOpen": true
+      },
+      "scope": "Le gardien fournit le troisième poids sec ; les trois caisses deviennent deux poids et un appui dans la solution qualifiée."
+    },
+    {
+      "level": 8,
+      "name": "Variante gagnante : départ collectif dans un ordre différent",
+      "status": "passed",
+      "observed": {
+        "actions": 218,
+        "selections": 31,
+        "merchantPushes": 16,
+        "warriorPushes": 18,
+        "thiefPulls": 7,
+        "swaps": 4,
+        "partnerSwaps": 0,
+        "stoneSwaps": 4,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 2,
+        "stoneMoves": 48,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "supportMoves": 0,
+        "reflections": 2,
+        "heroReflections": 1,
+        "pistonPushes": 2,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+    }
+  ]
+}

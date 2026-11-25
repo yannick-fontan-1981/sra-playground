@@ -43,6 +43,8 @@ import { TrioPuzzleSession as GuardiansTrioSession } from '../experiments/sinkin
 import { SS19_LEVELS } from '../experiments/sinking-star-ss19/src/levels.ts';
 import { TrioPuzzleSession as RelayTrioSession } from '../experiments/sinking-star-ss20/src/core.ts';
 import { SS20_LEVELS } from '../experiments/sinking-star-ss20/src/levels.ts';
+import { QuartetPuzzleSession } from '../experiments/sinking-star-ss21/src/core.ts';
+import { SS21_LEVELS } from '../experiments/sinking-star-ss21/src/levels.ts';
 
 function crc32(bytes) {
   let crc = 0xffffffff;
@@ -65,7 +67,7 @@ export async function makeNativeGalleryGroup(root) {
     new ThiefDuoSession(SS07_LEVELS), new WizardDuoSession(SS08_LEVELS), new ChorusDuoSession(SS09_LEVELS),
     new WarehouseDuoSession(SS10_LEVELS), new ForgeDuoSession(SS11_LEVELS),
     new ColumnDuoSession(SS12_LEVELS), new AnchorDuoSession(SS13_LEVELS), new HarmonyDuoSession(SS14_LEVELS),
-    new AccordDuoSession(SS15_LEVELS), new TrioPuzzleSession(SS16_LEVELS), new FortressTrioSession(SS17_LEVELS), new GalleryTrioSession(SS18_LEVELS), new GuardiansTrioSession(SS19_LEVELS), new RelayTrioSession(SS20_LEVELS),
+    new AccordDuoSession(SS15_LEVELS), new TrioPuzzleSession(SS16_LEVELS), new FortressTrioSession(SS17_LEVELS), new GalleryTrioSession(SS18_LEVELS), new GuardiansTrioSession(SS19_LEVELS), new RelayTrioSession(SS20_LEVELS), new QuartetPuzzleSession(SS21_LEVELS),
   ];
   const games = sessions.map((session, row) => {
     const { gameCode: code, levelCount } = session.observe();

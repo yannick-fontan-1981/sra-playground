@@ -1,0 +1,32 @@
+import {writeFileSync} from 'node:fs';
+import {Author,board} from './author.mjs';
+const b=board(20,20);
+b.fill(1,2,6,8);b.fill(8,4,12,8);b.fill(9,1,12,1);b.fill(9,2,9,3);b.fill(12,2,12,3);b.put(7,5,'~');
+b.fill(8,10,12,15);b.put(10,9,'~');
+b.fill(14,10,18,12);b.put(13,12,'~');b.put(16,13);b.fill(14,14,18,17);
+for(const [x,y] of [[15,16],[17,16],[15,17],[17,17]])b.put(x,y,'g');
+b.put(3,6,'M');b.put(2,3,'T');b.put(10,6,'Z');b.put(10,11,'W');
+for(const [x,y] of [[1,3],[9,2],[9,3],[12,14]])b.put(x,y,'o');
+export const spec={id:'ss21-06',title:'Le compte des îlots',mode:'quartet',rows:b.strings(),facing:'E',circuits:[{id:'lancement',color:15,buttons:[{x:9,y:6}]},{id:'arrivee',color:14,buttons:[{x:11,y:11}]}],gates:[{at:{x:6,y:5},circuit:'lancement',direction:'W',closedWhen:'released'},{at:{x:16,y:13},circuit:'arrivee',direction:'S',closedWhen:'released'}]};
+export function build(){const a=new Author(spec);
+ a.select('wizard').act('D').act('RDD');
+ a.select('warrior').go(9,1).act('DDD');
+ a.stage('Le Magicien échange sa place avec le Guerrier au-dessus du détroit. La file descend ensuite sur la commande : le passage du premier quai est maintenant ouvert.');
+ a.select('thief').act('RRRR');
+ a.select('merchant').go(5,2).act('DD').go(4,5).act('RR').go(10,8);
+ a.select('thief').go(11,7);
+ a.stage('Le Voleur extrait la réserve adossée au mur ; le Marchand la transforme en premier appui. Les deux opérateurs quittent le quai avant de libérer sa commande.');
+ a.select('merchant').go(8,6).act('R').go(10,5).act('DDD');
+ a.stage('La tête de file quitte la commande et comble le deuxième détroit. Le premier sas se referme derrière les deux héros déjà transférés.');
+ a.select('merchant').go(10,15);
+ a.select('thief').go(11,14).act('LL');
+ a.select('merchant').go(10,15).act('UU').go(9,12).act('RRR');
+ a.stage('La réserve orientale est tirée hors de son renfoncement, remontée et poussée dans le troisième détroit. Chaque appui fixe relie deux îlots différents.');
+ a.go(8,5).act('R').go(10,4).act('DDDDDD').go(9,11).act('R');
+ a.stage('La dernière caisse reste sèche sur la commande d’arrivée. Aucun échange ne pouvait augmenter seul le nombre d’occupants des îlots : il fallait ouvrir les trois franchissements.');
+ a.select('wizard').go(17,16);
+ a.select('merchant').go(15,16);
+ a.select('warrior').go(15,17);
+ a.select('thief').go(17,17);
+ return a.result({objective:'Faire venir le Guerrier, transférer les quatre héros entre les îlots et répartir les quatre caisses entre trois appuis fixes et la commande sèche.',label:'Heroes and Water — énigmes 7 et 11',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/',puzzles:[7,11]},'Les échanges conservent le nombre d’occupants d’un îlot dans Water 7/11. Ici, quatre quais décalés, une file qui ouvre le départ et trois détroits imposent des transferts physiques. Quatre rôles remplacent le duo ; une quatrième caisse reste sèche pour libérer les quatre arrivées.');}
+if(process.argv[1]?.endsWith('build-level6.mjs')){const d=build();writeFileSync(new URL('../level6-design.json',import.meta.url),JSON.stringify(d,null,2)+'\n');console.log(JSON.stringify({title:spec.title,metrics:d.metrics,commands:d.commands}));}

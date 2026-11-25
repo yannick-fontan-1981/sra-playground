@@ -1,0 +1,683 @@
+{
+  "game": "ss21",
+  "levels": [
+    3,
+    4,
+    5
+  ],
+  "method": "Témoins complets, géométrie des balcons, branches de visée et de presses, relèves de poids et variantes gagnantes rejouées.",
+  "limits": [
+    "Aucune solution unique ou difficulté optimale n’est revendiquée.",
+    "Les contre-branches peuvent contenir un refus attendu et ne font pas partie des témoins gagnants.",
+    "Les variantes légales utilisent les mêmes cartes et les mêmes règles.",
+    "Les contraintes géométriques décrites sont distinctes des constats portant seulement sur un stade du témoin."
+  ],
+  "checks": [
+    {
+      "level": 3,
+      "name": "Témoin complet et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 103,
+        "selections": 10,
+        "merchantPushes": 0,
+        "warriorPushes": 6,
+        "thiefPulls": 5,
+        "swaps": 0,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 0,
+        "mirrorMoves": 11,
+        "monsterMoves": 0,
+        "supportMoves": 0,
+        "reflections": 4,
+        "heroReflections": 4,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 4,
+      "name": "Témoin complet et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 182,
+        "selections": 22,
+        "merchantPushes": 3,
+        "warriorPushes": 1,
+        "thiefPulls": 3,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 1,
+        "swapLoops": 0,
+        "partnerMoves": 1,
+        "chainPushes": 1,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "supportMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Témoin complet et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 224,
+        "selections": 34,
+        "merchantPushes": 0,
+        "warriorPushes": 9,
+        "thiefPulls": 11,
+        "swaps": 5,
+        "partnerSwaps": 2,
+        "stoneSwaps": 3,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 8,
+        "stoneMoves": 31,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "supportMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 3,
+      "name": "Quatre balcons vides et isolés",
+      "status": "passed",
+      "observed": [
+        [
+          {
+            "x": 10,
+            "y": 3
+          },
+          {
+            "x": 11,
+            "y": 3
+          }
+        ],
+        [
+          {
+            "x": 15,
+            "y": 4
+          },
+          {
+            "x": 14,
+            "y": 4
+          }
+        ],
+        [
+          {
+            "x": 10,
+            "y": 7
+          },
+          {
+            "x": 11,
+            "y": 7
+          }
+        ],
+        [
+          {
+            "x": 15,
+            "y": 7
+          },
+          {
+            "x": 14,
+            "y": 7
+          }
+        ]
+      ],
+      "scope": "Géométrie statique : chacun a deux cases, aucune caisse ou plateforme ne peut construire un pont. Une transposition requiert une cible déjà présente ; le premier occupant de chaque balcon doit donc arriver par reflet."
+    },
+    {
+      "level": 3,
+      "name": "Stations du miroir réellement utilisées",
+      "status": "passed",
+      "observed": [
+        {
+          "x": 14,
+          "y": 14
+        },
+        {
+          "x": 14,
+          "y": 11
+        },
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 11,
+          "y": 14
+        }
+      ],
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 3,
+      "name": "Dernière descente tirée depuis le sud",
+      "status": "passed",
+      "observed": {
+        "northPushCell": {
+          "x": 11,
+          "y": 10,
+          "terrain": "water"
+        },
+        "pulls": 3,
+        "mirror": {
+          "x": 11,
+          "y": 14
+        }
+      },
+      "scope": "La position nord est inutilisable au stade contrôlé. Cela ne démontre pas que tous les ordres alternatifs sont impossibles."
+    },
+    {
+      "level": 3,
+      "name": "Deuxième départ sans remonter le miroir",
+      "status": "passed",
+      "observed": {
+        "wizard": {
+          "x": 10,
+          "y": 11
+        },
+        "mirror": {
+          "x": 14,
+          "y": 14
+        },
+        "refused": true
+      },
+      "scope": "Contre-branche locale : la station basse ne dessert pas la case (10,11). Le miroir reste déplaçable."
+    },
+    {
+      "level": 3,
+      "name": "Variante légale : garer le premier passager seulement à la fin",
+      "status": "passed",
+      "observed": {
+        "actions": 105,
+        "selections": 12,
+        "merchantPushes": 0,
+        "warriorPushes": 6,
+        "thiefPulls": 5,
+        "swaps": 0,
+        "partnerSwaps": 0,
+        "stoneSwaps": 0,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 0,
+        "mirrorMoves": 11,
+        "monsterMoves": 0,
+        "supportMoves": 0,
+        "reflections": 4,
+        "heroReflections": 4,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Le retrait immédiat du premier passager fait partie du témoin, sans être une obligation générale."
+    },
+    {
+      "level": 4,
+      "name": "Boucle initiale de la visée",
+      "status": "passed",
+      "observed": {
+        "loop": true,
+        "refused": true,
+        "mirrors": [
+          {
+            "x": 6,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 12
+          },
+          {
+            "x": 6,
+            "y": 12
+          }
+        ],
+        "phases": [
+          "swap-loop"
+        ]
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 4,
+      "name": "Injection d’une case par la presse",
+      "status": "passed",
+      "observed": {
+        "loaded": [
+          {
+            "x": 14,
+            "y": 9
+          }
+        ],
+        "injected": [
+          {
+            "x": 13,
+            "y": 9
+          }
+        ],
+        "moves": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 14,
+              "y": 9
+            },
+            "to": {
+              "x": 13,
+              "y": 9
+            }
+          }
+        ]
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 4,
+      "name": "La cible coupe la boucle et reçoit le Magicien",
+      "status": "passed",
+      "observed": {
+        "wizard": {
+          "x": 13,
+          "y": 9
+        },
+        "stone": {
+          "x": 9,
+          "y": 5
+        },
+        "path": [
+          {
+            "x": 9,
+            "y": 5
+          },
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 5
+          },
+          {
+            "x": 12,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 13,
+            "y": 6
+          },
+          {
+            "x": 13,
+            "y": 7
+          },
+          {
+            "x": 13,
+            "y": 8
+          },
+          {
+            "x": 13,
+            "y": 9
+          }
+        ]
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 4,
+      "name": "Quitter la commande intérieure referme la trappe",
+      "status": "passed",
+      "observed": {
+        "opened": true,
+        "afterDepartureClosed": true
+      },
+      "scope": "Le départ est légal et réversible ; il ferme l’accès de récupération sans créer un verrou caché."
+    },
+    {
+      "level": 4,
+      "name": "Une même caisse sert au secours, à l’extraction puis au poids final",
+      "status": "passed",
+      "observed": {
+        "stoneCount": 1,
+        "extracted": {
+          "x": 9,
+          "y": 2
+        },
+        "final": {
+          "x": 6,
+          "y": 2
+        }
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 4,
+      "name": "Variante légale : charger la presse sans pousser la file",
+      "status": "passed",
+      "observed": {
+        "actions": 195,
+        "selections": 26,
+        "merchantPushes": 3,
+        "warriorPushes": 2,
+        "thiefPulls": 4,
+        "swaps": 1,
+        "partnerSwaps": 0,
+        "stoneSwaps": 1,
+        "monsterSwaps": 0,
+        "bentSwaps": 1,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 1,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 0,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "supportMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La poussée de file du témoin est une solution pratique, pas un quota imposé ni une nécessité universelle."
+    },
+    {
+      "level": 5,
+      "name": "Deux caisses franchissent la serrure en file",
+      "status": "passed",
+      "observed": {
+        "chainPushes": 8,
+        "stones": [
+          {
+            "x": 17,
+            "y": 5
+          },
+          {
+            "x": 6,
+            "y": 9
+          },
+          {
+            "x": 7,
+            "y": 9
+          }
+        ]
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Relève 2 sans interruption de la double commande",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 4,
+              "y": 4
+            },
+            "to": {
+              "x": 6,
+              "y": 4
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 6,
+              "y": 4
+            },
+            "to": {
+              "x": 4,
+              "y": 4
+            }
+          }
+        ],
+        "gateBefore": false,
+        "gateAfter": false
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Relève 4 sans interruption de la double commande",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 14
+            },
+            "to": {
+              "x": 4,
+              "y": 14
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 4,
+              "y": 14
+            },
+            "to": {
+              "x": 5,
+              "y": 14
+            }
+          }
+        ],
+        "gateBefore": false,
+        "gateAfter": false
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Relève 5 sans interruption de la double commande",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 4,
+              "y": 14
+            },
+            "to": {
+              "x": 6,
+              "y": 14
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 6,
+              "y": 14
+            },
+            "to": {
+              "x": 4,
+              "y": 14
+            }
+          }
+        ],
+        "gateBefore": false,
+        "gateAfter": false
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Les deux postes sont tenus par des caisses",
+      "status": "passed",
+      "observed": {
+        "buttons": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 4,
+            "y": 14
+          }
+        ],
+        "heroes": [
+          {
+            "kind": "merchant",
+            "at": {
+              "x": 7,
+              "y": 13
+            }
+          },
+          {
+            "kind": "warrior",
+            "at": {
+              "x": 12,
+              "y": 12
+            }
+          },
+          {
+            "kind": "thief",
+            "at": {
+              "x": 6,
+              "y": 16
+            }
+          },
+          {
+            "kind": "wizard",
+            "at": {
+              "x": 6,
+              "y": 14
+            }
+          }
+        ]
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Sans intercepteur, la visée reprend le poids final",
+      "status": "passed",
+      "observed": {
+        "wizard": {
+          "x": 13,
+          "y": 5
+        },
+        "stoneReturnedTo": {
+          "x": 16,
+          "y": 5
+        },
+        "buttonStillHeldByWizard": true
+      },
+      "scope": "La contre-branche reste légale et le Magicien remplace provisoirement le poids ; aucune impasse irréversible n’est affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Le premier partenaire intercepte la visée",
+      "status": "passed",
+      "observed": {
+        "wizard": {
+          "x": 15,
+          "y": 5
+        },
+        "thief": {
+          "x": 16,
+          "y": 5
+        },
+        "weight": {
+          "x": 13,
+          "y": 5
+        }
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    },
+    {
+      "level": 5,
+      "name": "Variante légale : le Guerrier intercepte à la place du Voleur",
+      "status": "passed",
+      "observed": {
+        "actions": 224,
+        "selections": 34,
+        "merchantPushes": 0,
+        "warriorPushes": 9,
+        "thiefPulls": 11,
+        "swaps": 5,
+        "partnerSwaps": 2,
+        "stoneSwaps": 3,
+        "monsterSwaps": 0,
+        "bentSwaps": 0,
+        "multiMirrorSwaps": 0,
+        "swapReflections": 0,
+        "swapLoops": 0,
+        "partnerMoves": 0,
+        "chainPushes": 8,
+        "stoneMoves": 31,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "supportMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Parcours ou branche locale rejouée ; aucune prétention d’unicité."
+    }
+  ]
+}

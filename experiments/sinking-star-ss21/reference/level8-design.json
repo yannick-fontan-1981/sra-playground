@@ -1,0 +1,1466 @@
+{
+  "spec": {
+    "id": "ss21-08",
+    "title": "Le verrou à trois poids",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "#o.....#############",
+      "#......#############",
+      "#....Z.#############",
+      "#.......############",
+      "#######..###########",
+      "########.....#######",
+      "#......#...#m..#####",
+      "#...M..#....########",
+      "#......#.......#####",
+      "#......#.......#####",
+      "#......#.......#####",
+      "#..............#####",
+      "#......#.......#####",
+      "#Woo...#.......#g.g#",
+      "#......#.......#...#",
+      "#....T.#.......~...#",
+      "#......#.......#...#",
+      "################g.g#",
+      "####################"
+    ],
+    "facing": "E",
+    "mirrors": [
+      {
+        "at": {
+          "x": 7,
+          "y": 5
+        },
+        "facing": "NE"
+      }
+    ],
+    "circuits": [
+      {
+        "id": "premiere",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 10
+          }
+        ]
+      },
+      {
+        "id": "seconde",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 10,
+            "y": 12
+          }
+        ]
+      },
+      {
+        "id": "arrivee",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 14,
+            "y": 7
+          },
+          {
+            "x": 10,
+            "y": 10
+          },
+          {
+            "x": 12,
+            "y": 14
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 12,
+          "y": 7
+        },
+        "circuit": "premiere",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 12
+        },
+        "circuit": "premiere",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 7
+        },
+        "circuit": "seconde",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 16
+        },
+        "circuit": "arrivee",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCUUUURRRURCCDDCCRDCCUCCUUUUUULLCULLLULDRRURLDDDRRURDDDRRLXCCCDDDDDDDRDDCCDDDRRRRRRRURDDCCCRRRXDDDDDDDDDDDDRRCCRRDRRUULURRRRRRRRRURDDDDLDRULCCCULLLLLLDDDLLUULURRRRRRDRUUCCCRURRRRRDDRRCCDRRRUUCDRRRRRRRURRUCCDDDDDRRRRRRDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 12
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 54
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 54
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 48
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 48
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 57
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "objective": "Conserver le gardien comme poids, extraire la réserve de l’archive puis répartir les trois caisses entre l’appui d’arrivée et les deux commandes sèches.",
+    "label": "Heroes and Light — énigmes 4 et 45",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/",
+    "puzzles": [
+      4,
+      45
+    ]
+  },
+  "metrics": {
+    "actions": 219,
+    "selections": 32,
+    "merchantPushes": 16,
+    "warriorPushes": 18,
+    "thiefPulls": 7,
+    "swaps": 4,
+    "partnerSwaps": 0,
+    "stoneSwaps": 4,
+    "monsterSwaps": 0,
+    "bentSwaps": 0,
+    "multiMirrorSwaps": 0,
+    "swapReflections": 0,
+    "swapLoops": 0,
+    "partnerMoves": 0,
+    "chainPushes": 2,
+    "stoneMoves": 48,
+    "mirrorMoves": 0,
+    "monsterMoves": 2,
+    "supportMoves": 0,
+    "reflections": 2,
+    "heroReflections": 1,
+    "pistonPushes": 2,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur passe avant la fermeture du passage de traverse. Les deux commandes déplacent ensuite le gardien, une case par presse, jusqu’à son bouton : il reste nécessaire comme troisième poids.",
+      "turn": 32,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 1,
+          "y": 1
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 3,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "premiere": false,
+        "seconde": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le Magicien décolle la réserve de l’archive, change son axe puis l’installe dans le port du miroir. Le reflet l’envoie contre la paroi du quai de réception.",
+      "turn": 59,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 3,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "premiere": false,
+        "seconde": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la livraison et la descend jusqu’à la traverse. Le Marchand la range sur la commande basse avant le retour du Magicien : la visée de sortie du quai doit être libre.",
+      "turn": 88,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 14
+        },
+        {
+          "x": 2,
+          "y": 14
+        },
+        {
+          "x": 3,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "premiere": false,
+        "seconde": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le Guerrier décale la file entière, sépare sa tête et l’achemine autour du chantier. Cette caisse devient l’unique appui vers la cour encore vide des destinations.",
+      "turn": 140,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 14
+        },
+        {
+          "x": 4,
+          "y": 14
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 16
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "premiere": false,
+        "seconde": false,
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La dernière caisse quitte le dépôt et maintient la commande haute. Deux caisses sèches et le gardien alimentent ensemble le verrou ; la troisième caisse porte le passage d’eau.",
+      "turn": 169,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 15
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 17
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 14
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [
+        {
+          "x": 15,
+          "y": 16
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 5
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 14,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "premiere": false,
+        "seconde": false,
+        "arrivee": true
+      }
+    }
+  ],
+  "adaptation": {
+    "description": "Light 4 inspire le gardien déplacé par des presses successives pour compléter deux poids secs. Light 45 fournit l’extraction d’une ressource adossée à une paroi par transport indirect. Ici, magie, miroir fixe et traction remplacent les faisceaux, dans une archive séparée de deux dépôts décalés ; une troisième caisse devient le passage vers quatre destinations.",
+    "localChecks": [
+      {
+        "name": "Parcours complet sans refus ni décès",
+        "status": "passed",
+        "observed": {
+          "actions": 219,
+          "selections": 32,
+          "merchantPushes": 16,
+          "warriorPushes": 18,
+          "thiefPulls": 7,
+          "swaps": 4,
+          "partnerSwaps": 0,
+          "stoneSwaps": 4,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 48,
+          "mirrorMoves": 0,
+          "monsterMoves": 2,
+          "supportMoves": 0,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 2,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+      },
+      {
+        "name": "Deux presses distinctes placent le gardien sur sa commande",
+        "status": "passed",
+        "observed": {
+          "presses": [
+            {
+              "gate": {
+                "x": 12,
+                "y": 7
+              },
+              "moves": [
+                {
+                  "actor": "monster",
+                  "from": {
+                    "x": 12,
+                    "y": 7
+                  },
+                  "to": {
+                    "x": 13,
+                    "y": 7
+                  }
+                }
+              ]
+            },
+            {
+              "gate": {
+                "x": 13,
+                "y": 7
+              },
+              "moves": [
+                {
+                  "actor": "monster",
+                  "from": {
+                    "x": 13,
+                    "y": 7
+                  },
+                  "to": {
+                    "x": 14,
+                    "y": 7
+                  }
+                }
+              ]
+            }
+          ],
+          "monsterPreservedThroughout": true
+        },
+        "scope": "Le gardien reste vivant et immobilisé sur son poids final dans tout le parcours."
+      },
+      {
+        "name": "Le quai reçoit la caisse, est dégagé, puis reçoit le Magicien",
+        "status": "passed",
+        "observed": {
+          "crateArrival": {
+            "x": 8,
+            "y": 5
+          },
+          "storedCrate": {
+            "x": 12,
+            "y": 14
+          },
+          "heroArrival": {
+            "actor": "hero",
+            "from": {
+              "x": 7,
+              "y": 4
+            },
+            "to": {
+              "x": 8,
+              "y": 5
+            }
+          }
+        },
+        "scope": "Ordre causal du témoin : la traction libère la case que le reflet du Magicien réutilise."
+      },
+      {
+        "name": "Trois poids secs et un appui remplissent des fonctions différentes",
+        "status": "passed",
+        "observed": {
+          "dryCrates": [
+            {
+              "x": 12,
+              "y": 14
+            },
+            {
+              "x": 10,
+              "y": 10
+            }
+          ],
+          "monsterWeight": {
+            "x": 14,
+            "y": 7
+          },
+          "support": {
+            "x": 15,
+            "y": 16
+          },
+          "gateOpen": true
+        },
+        "scope": "Le gardien fournit le troisième poids sec ; les trois caisses deviennent deux poids et un appui dans la solution qualifiée."
+      },
+      {
+        "name": "Variante gagnante : départ collectif dans un ordre différent",
+        "status": "passed",
+        "observed": {
+          "actions": 218,
+          "selections": 31,
+          "merchantPushes": 16,
+          "warriorPushes": 18,
+          "thiefPulls": 7,
+          "swaps": 4,
+          "partnerSwaps": 0,
+          "stoneSwaps": 4,
+          "monsterSwaps": 0,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 48,
+          "mirrorMoves": 0,
+          "monsterMoves": 2,
+          "supportMoves": 0,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 2,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+      }
+    ],
+    "sourcePrinciple": "Un gardien peut tenir un bouton ; une charge inaccessible peut être récupérée par transport indirect.",
+    "changes": "Quatre héros, deux presses latérales, archive optique, gardien stable et trois caisses réparties entre un appui et deux poids secs."
+  }
+}

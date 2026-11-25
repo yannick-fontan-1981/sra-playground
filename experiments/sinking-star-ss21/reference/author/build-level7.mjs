@@ -1,0 +1,33 @@
+import {writeFileSync} from 'node:fs';
+import {Author,board} from './author.mjs';
+const b=board(20,20);
+b.fill(8,1,12,2);b.put(10,3);b.fill(8,4,12,7);b.put(10,8);b.put(10,9,'~');
+b.fill(2,10,6,15);b.fill(7,12,12,17);b.put(10,10);b.put(10,11);
+for(const x of [8,9,11,12])b.put(x,1,'g');
+b.put(4,12,'M');b.put(8,5,'W');b.put(2,15,'T');b.put(10,8,'Z');
+b.put(10,4,'m');b.put(12,7,'o');b.put(7,14,'o');b.put(8,14,'o');
+export const spec={id:'ss21-07',title:'L’écluse à deux étages',mode:'quartet',rows:b.strings(),facing:'N',circuits:[{id:'ecluse',color:15,buttons:[{x:4,y:12}]},{id:'fronton',color:14,buttons:[{x:9,y:4},{x:11,y:4}]}],gates:[{at:{x:10,y:10},circuit:'ecluse',direction:'S',closedWhen:'pressed'},{at:{x:10,y:3},circuit:'fronton',direction:'N',closedWhen:'released'}],platforms:[{at:{x:10,y:9},circuit:'ecluse',activeWhen:'pressed'}]};
+export function build(){const a=new Author(spec);
+ a.select('wizard').act('D');
+ a.act('U');
+ a.select('merchant').act('D');
+ a.stage('Le Magicien monte sur la plateforme active puis échange sa place avec le gardien. Le Marchand relâche l’écluse : le gardien tombe, tandis que le sas inférieur s’ouvre.');
+ a.select('wizard').go(10,7);
+ a.select('thief').go(10,11);
+ a.select('wizard').act('D').go(11,12);
+ a.select('merchant').go(4,12);
+ a.stage('Le Magicien fait passer le Voleur au nord par échange, avant que le sas inférieur ne se referme. La plateforme est remise en service pour recevoir sa charge.');
+ a.select('thief').go(11,7).act('LL').go(8,6);
+ a.select('warrior').go(10,6).act('DD');
+ a.select('merchant').act('D');
+ a.stage('Le Voleur extrait la réserve du renfoncement. Le Guerrier la dépose sur l’écluse, puis le retrait la transforme en appui fixe : le passage devient permanent et le Marchand peut partir.');
+ a.select('warrior').go(6,14).act('RR').go(10,15).act('UUUUUUUU').go(9,6).act('R').go(11,7).act('UU');
+ a.stage('La file du dépôt doit d’abord être décalée ensemble. Sa tête traverse l’appui et rejoint la commande orientale du fronton.');
+ a.select('merchant').go(8,14).act('R').go(10,15).act('UUUUUUUU').go(11,6).act('L').go(9,7).act('UU');
+ a.stage('La seconde caisse rejoint l’autre commande sans sacrifier l’appui. Les deux poids secs libèrent la porte des quatre destinations.');
+ a.select('wizard').go(8,1);
+ a.select('warrior').go(9,1);
+ a.select('thief').go(11,1);
+ a.select('merchant').go(12,1);
+ return a.result({objective:'Échanger le gardien, stabiliser l’écluse en appui permanent puis répartir les deux caisses de la file sur les commandes du fronton.',label:'Heroes and Water — énigmes 6 et 12',url:'https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/',puzzles:[6,12]},'Water 12 inspire le transfert d’un gardien sur un soutien qui disparaît ; Water 6 fournit la caisse déposée avant retrait. Ici, un sas de polarité opposée impose le relais magique puis une file à répartir entre deux commandes. Les appuis persistent à la réactivation ; ni dragon, ni feu, ni porte comptant les monstres.');}
+if(process.argv[1]?.endsWith('build-level7.mjs')){const d=build();writeFileSync(new URL('../level7-design.json',import.meta.url),JSON.stringify(d,null,2)+'\n');console.log(JSON.stringify({title:spec.title,metrics:d.metrics,commands:d.commands}));}

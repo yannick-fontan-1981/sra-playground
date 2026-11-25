@@ -1,0 +1,774 @@
+{
+  "game": "SS21",
+  "success": true,
+  "method": "Rejeu direct des listes d’actions du livrable avec stepDetailed, sans Author, solve ni les commandes textuelles du solveur ; examen de la causalité des phases.",
+  "levels": [
+    {
+      "level": 1,
+      "title": "L’école des quatre",
+      "actions": 260,
+      "selections": 26,
+      "mapSha256": "90b2fea385ec1053273c889a19a54392d7cfd9d59a56b5d44d05a6c27e713c19",
+      "actionSha256": "84f7b923be4ac492dc0f80a9fe67803423f50eefd4dc27853ac287723bdfd812",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 3,
+            "y": 17
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 7,
+            "y": 17
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 11,
+            "y": 17
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 17,
+            "y": 17
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    },
+    {
+      "level": 2,
+      "title": "Trois caisses, deux chambres",
+      "actions": 143,
+      "selections": 30,
+      "mapSha256": "0652931f769f84eb135e7ae80aa6111d097bc669b184034a5c1400f8056fcfa3",
+      "actionSha256": "17d363c6cd8e4dbca5e9368cc8ea17ba9ba47a6342cfbfcc1cc343a6a70eea57",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 2,
+            "y": 15
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 3,
+            "y": 17
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 6,
+            "y": 17
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 5,
+            "y": 15
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    },
+    {
+      "level": 3,
+      "title": "Les quatre balcons",
+      "actions": 103,
+      "selections": 10,
+      "mapSha256": "3d6a30b6424e31c33870589e6dbef4964b8640e70b183a508b1b3ed3d47f9306",
+      "actionSha256": "d88ff0b024bba0d52f476ba88c9772f5877325129a547432ecfa42fb16e619e2",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 10,
+            "y": 3
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    },
+    {
+      "level": 4,
+      "title": "Le rectangle sans issue",
+      "actions": 182,
+      "selections": 22,
+      "mapSha256": "e7e6e2dc5e7c760340b466b8227f7ce04839a8c1d29246cf81f52704535b8b62",
+      "actionSha256": "1db28cda6e3fa6811d4fa598808d7f1bd158c3b395deb94b4f40c94debfc3800",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    },
+    {
+      "level": 5,
+      "title": "Le dernier intercepteur",
+      "actions": 224,
+      "selections": 34,
+      "mapSha256": "28e381a51b79daa2fbc2a0db276a1e6391663f014c6e381b656aa58f16d0ba43",
+      "actionSha256": "7cd00dfe1685b0da5b0bc064194b924a9003fccd1609ec4f6810606e187e60e1",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 17,
+            "y": 1
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 11,
+            "y": 1
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 13,
+            "y": 1
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 15,
+            "y": 1
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    },
+    {
+      "level": 6,
+      "title": "Le compte des îlots",
+      "actions": 202,
+      "selections": 22,
+      "mapSha256": "751d53a31bb0f088ad247ad27caf360cbdfab62ec732b23a15333281ba9c6e27",
+      "actionSha256": "e9d74e6cb632f688412f652fd331ceeb49cb643f34a1e0628d150b8ed868b3eb",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 15,
+            "y": 16
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 15,
+            "y": 17
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 17,
+            "y": 17
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 17,
+            "y": 16
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    },
+    {
+      "level": 7,
+      "title": "L’écluse à deux étages",
+      "actions": 153,
+      "selections": 32,
+      "mapSha256": "70129ab7e3c34a3ae8496fde96a83675ab7f37183f0d9ee0316a96f8624d1de9",
+      "actionSha256": "139dd7b3259b4d10e2222d444ed1e4a03151e646ca8cf630255df6b5868ad933",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 12,
+            "y": 1
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 9,
+            "y": 1
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 11,
+            "y": 1
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 8,
+            "y": 1
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    },
+    {
+      "level": 8,
+      "title": "Le verrou à trois poids",
+      "actions": 219,
+      "selections": 32,
+      "mapSha256": "fe556d62a7df373b1356467128c5999bf502276c2de2e08dcbf28df47031b7d6",
+      "actionSha256": "f54d5d69775f96e81a63ab8b9b7ab26b104bd852acd07db70d955785df53e325",
+      "finalDestinations": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 16,
+            "y": 18
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 18,
+            "y": 18
+          }
+        }
+      ],
+      "complete": true,
+      "refused": 0,
+      "deaths": 0
+    }
+  ],
+  "checks": [
+    {
+      "level": 1,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 260,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 1,
+      "name": "L’atelier lie les capacités, l’eau, le combat et les sorties",
+      "status": "passed",
+      "observed": {
+        "mixedFileObserved": true,
+        "combatTurn": 108,
+        "combatCause": [
+          "walk",
+          "piston",
+          "combat"
+        ],
+        "exitWeights": [
+          {
+            "x": 3,
+            "y": 12
+          },
+          {
+            "x": 7,
+            "y": 12
+          },
+          {
+            "x": 11,
+            "y": 12
+          }
+        ]
+      },
+      "scope": "Causalité du parcours qualifié, sans affirmation de solution unique ou de capacité universellement indispensable."
+    },
+    {
+      "level": 2,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 143,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 2,
+      "name": "Les chambres gardent leurs occupants mais changent de nature",
+      "status": "passed",
+      "observed": {
+        "isolatedCells": [
+          {
+            "x": 2,
+            "y": 3
+          },
+          {
+            "x": 16,
+            "y": 12
+          }
+        ],
+        "swaps": 4,
+        "finalChamberOccupants": "two crates",
+        "finalDryWeight": {
+          "x": 9,
+          "y": 15
+        }
+      },
+      "scope": "Conservation observée pour tous les états de ce parcours ; aucun pont ni miroir n’y est utilisé."
+    },
+    {
+      "level": 3,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 103,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 3,
+      "name": "Chaque balcon reçoit son premier héros par reflet",
+      "status": "passed",
+      "observed": {
+        "arrivals": [
+          {
+            "turn": 77,
+            "from": {
+              "x": 3,
+              "y": 11
+            },
+            "to": {
+              "x": 11,
+              "y": 3
+            },
+            "role": "warrior"
+          },
+          {
+            "turn": 11,
+            "from": {
+              "x": 4,
+              "y": 14
+            },
+            "to": {
+              "x": 14,
+              "y": 4
+            },
+            "role": "merchant"
+          },
+          {
+            "turn": 102,
+            "from": {
+              "x": 4,
+              "y": 14
+            },
+            "to": {
+              "x": 11,
+              "y": 7
+            },
+            "role": "thief"
+          },
+          {
+            "turn": 43,
+            "from": {
+              "x": 10,
+              "y": 11
+            },
+            "to": {
+              "x": 14,
+              "y": 7
+            },
+            "role": "wizard"
+          }
+        ],
+        "mirrorMoves": 11
+      },
+      "scope": "La géométrie des balcons et les premières arrivées sont vérifiées, sans prétendre imposer l’ordre du témoin."
+    },
+    {
+      "level": 4,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 182,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 4,
+      "name": "La presse transforme la boucle en visée exploitable",
+      "status": "passed",
+      "observed": {
+        "injectionTurn": 9,
+        "moves": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 14,
+              "y": 9
+            },
+            "to": {
+              "x": 13,
+              "y": 9
+            }
+          }
+        ],
+        "beforeLoop": true,
+        "afterTarget": {
+          "x": 13,
+          "y": 9
+        },
+        "exchangeTurn": 13,
+        "finalWeight": {
+          "x": 6,
+          "y": 2
+        }
+      },
+      "scope": "Causalité du parcours qualifié, sans affirmation de solution unique ou de capacité universellement indispensable."
+    },
+    {
+      "level": 5,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 224,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 5,
+      "name": "Les relèves conservent la double commande puis protègent le dernier poids",
+      "status": "passed",
+      "observed": {
+        "relayTurns": [
+          35,
+          84,
+          92
+        ],
+        "lastSwap": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 16,
+              "y": 5
+            },
+            "to": {
+              "x": 15,
+              "y": 5
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 15,
+              "y": 5
+            },
+            "to": {
+              "x": 16,
+              "y": 5
+            }
+          }
+        ],
+        "protectedWeight": {
+          "x": 13,
+          "y": 5
+        }
+      },
+      "scope": "Causalité du parcours qualifié, sans affirmation de solution unique ou de capacité universellement indispensable."
+    },
+    {
+      "level": 6,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 202,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 6,
+      "name": "La réserve totale devient trois appuis et un poids",
+      "status": "passed",
+      "observed": {
+        "conversions": [
+          {
+            "turn": 41,
+            "newSupport": {
+              "x": 7,
+              "y": 5
+            }
+          },
+          {
+            "turn": 79,
+            "newSupport": {
+              "x": 10,
+              "y": 9
+            }
+          },
+          {
+            "turn": 108,
+            "newSupport": {
+              "x": 13,
+              "y": 12
+            }
+          }
+        ],
+        "dryWeight": {
+          "x": 11,
+          "y": 11
+        }
+      },
+      "scope": "Causalité du parcours qualifié, sans affirmation de solution unique ou de capacité universellement indispensable."
+    },
+    {
+      "level": 7,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 153,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 7,
+      "name": "Deux retraits produisent deux résultats matériels distincts",
+      "status": "passed",
+      "observed": {
+        "monsterDropTurn": 7,
+        "crateConversionTurn": 53,
+        "permanentSupport": {
+          "x": 10,
+          "y": 9
+        },
+        "dryWeights": [
+          {
+            "x": 9,
+            "y": 4
+          },
+          {
+            "x": 11,
+            "y": 4
+          }
+        ]
+      },
+      "scope": "Un gardien disparaît sans soutien ; une caisse se transforme en appui fixe."
+    },
+    {
+      "level": 8,
+      "name": "La quatrième destination déclenche exactement la victoire",
+      "status": "passed",
+      "observed": {
+        "actions": 219,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "roles": [
+          "merchant",
+          "thief",
+          "warrior",
+          "wizard"
+        ]
+      },
+      "scope": "Vérification directe de tous les états du parcours livré, distincte de son outil de construction."
+    },
+    {
+      "level": 8,
+      "name": "La ressource optique et le gardien complètent le verrou",
+      "status": "passed",
+      "observed": {
+        "pressMoves": [
+          {
+            "actor": "monster",
+            "from": {
+              "x": 12,
+              "y": 7
+            },
+            "to": {
+              "x": 13,
+              "y": 7
+            }
+          },
+          {
+            "actor": "monster",
+            "from": {
+              "x": 13,
+              "y": 7
+            },
+            "to": {
+              "x": 14,
+              "y": 7
+            }
+          }
+        ],
+        "crateReflectionTurn": 59,
+        "heroReflectionTurn": 95,
+        "dryCrates": [
+          {
+            "x": 12,
+            "y": 14
+          },
+          {
+            "x": 10,
+            "y": 10
+          }
+        ],
+        "monsterWeight": {
+          "x": 14,
+          "y": 7
+        },
+        "support": {
+          "x": 15,
+          "y": 16
+        }
+      },
+      "scope": "Causalité du parcours qualifié, sans affirmation de solution unique ou de capacité universellement indispensable."
+    }
+  ],
+  "limits": [
+    "La revue ne recherche pas exhaustivement toutes les solutions.",
+    "Une séquence réussie et ses effets ne prouvent ni optimalité, ni difficulté minimale, ni unicité.",
+    "Les preuves portent sur la solvabilité des cartes, la victoire matérielle et les dépendances observées dans les parcours qualifiés."
+  ]
+}

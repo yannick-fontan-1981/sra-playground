@@ -1206,6 +1206,10 @@ records.push({code:'SS20',id:'ss20-c4000001',name:'Le Relais des Îles',group:'c
   description:'Push and pull cargo, move groups by song and reuse supports to bring all three heroes across the islands.',
   sourcePath:'experiments/sinking-star-ss20/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS21',id:'ss21-c4000001',name:'Les Quatre Destinations',group:'custom_4',family:'sinking_star_quartet',levels:8,
+  description:'Coordinate single pushes, whole files, rear pulls and Wizard exchanges to prepare four destinations across eight rooms.',
+  sourcePath:'experiments/sinking-star-ss21/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

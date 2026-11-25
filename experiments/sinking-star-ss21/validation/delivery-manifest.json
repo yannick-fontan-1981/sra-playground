@@ -1,0 +1,58 @@
+{
+  "game": "SS21",
+  "title": "Les Quatre Destinations",
+  "version": "0.1.0",
+  "artifact": {
+    "filename": "SS21-demo.html",
+    "bytes": 140256,
+    "sha256": "b4f720f6eda4412319235e8a2cfec97d7ad86d94e513179712705f9107884ee3",
+    "standalone": true,
+    "networkRequiredToPlay": false,
+    "authorWitnessesIncluded": false
+  },
+  "roster": [
+    "merchant",
+    "warrior",
+    "thief",
+    "wizard"
+  ],
+  "defaultHero": "merchant",
+  "tutorial": {
+    "level": 1,
+    "discoveries": 31
+  },
+  "qualification": {
+    "unitTests": 103,
+    "unitPassed": 103,
+    "levelsWon": 8,
+    "totalWitnessActions": 1486,
+    "refusedWitnessActions": 0,
+    "witnessDeaths": 0,
+    "ui": "Compiled HTML in Happy DOM with exact public canvas frames and timing",
+    "nativeBrowserSession": false,
+    "priorLayoutsCompared": 56
+  },
+  "sourceSha256": {
+    "src/core.ts": "cf05d86ac6bf872526be789f3a79752ff703d26ea6d98478fea40e4e24692c02",
+    "src/levels.ts": "7f1baddee871bb18fea3411b1aed1924cbb796cb91bedb85fdc105406323067b",
+    "src/level-info.ts": "9ea1834e8fbd527ba1d49cce4f04abff37fcec5fe3b51d08129a3dd2c69452b5",
+    "src/tutorial.ts": "17d4385d007ad3b160cddca3835793820f36791f1e21604a60fe7b425bc2907a",
+    "src/browser.ts": "d2177217add7be11ee50f62380a2df13fdb082699c110851f885c7bc41573de3",
+    "index.template.html": "84ddf5f2129c19adf5b99dbd4cbc70cee43f00d55d1542693c371a2ec822a000",
+    "scripts/build-demo.mjs": "54a2ee46f4d33e4f5ddc27c2440f9fa66e4d833077c02acaba048a0efe7651ed",
+    "package.json": "6219612121f4b88a2f469cb03493577bb777dde7544daa843396c8c54008262d",
+    "package-lock.json": "3715b52a02d44ac25a496a9155c88ddff17c55a660d3ebbdbdf880703884c536",
+    "tsconfig.json": "5dd2083c554cb1b4095fe21191a260ad65d47ac82401250cadfcdf0a587e9c74"
+  },
+  "reportSha256": {
+    "validation/unit-tests.json": "a62c2bb929cc0033d7e305926ccdb85baa642447d90bc49b2b2b6e45ccb5b2b7",
+    "validation/levels-report.json": "142af4f6571071aefdfb856444ad8ec8a7d605c909f22091475740a18243d8f3",
+    "validation/ui-dom-report.json": "d3ccae463e3e4a47c85baf000bd21723225e2971026a98eaea598581a6ff9aef",
+    "validation/design-report.json": "42c0da17739fdfa5ffe8a404d3ed8129f558d4168d49e87881bbfd8ca99c3d5e"
+  },
+  "limits": [
+    "Author witnesses prove solvability, not an optimal or unique route.",
+    "Local counter-branches and geometric resource arguments are documented separately.",
+    "This manifest qualifies the standalone laboratory, not native SRA execution or Site publication."
+  ]
+}
