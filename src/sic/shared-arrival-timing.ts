@@ -1,5 +1,6 @@
 import { configuredCrosses, configuredDistances, configuredPatch, configuredRoute, configuredTrajectories, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
+import { inferCycleAfterTransient } from './observed-cycle.ts';
 
 type Point = [number, number];
 type Gate = { point: Point; open: boolean; mark: string };
@@ -8,7 +9,7 @@ export type GateEffects = Readonly<Record<string, Point[]>>;
 type ClockMark = { point: Point; mark: string };
 export type TimedNetwork = { gates: Gate[]; pads: Map<string, string>; clocks: Map<string, ClockMark>; nodes: Set<string> };
 export type ArrivalTiming = { orders: Point[][]; delays: Record<string, number>; observed: (number | null)[];
-  clocks?: Record<string, boolean[]> };
+  clocks?: Record<string, boolean[]>; clockPrefixes?: Record<string, (boolean | null)[]> };
 const key = (point: Point) => point.join(',');
 const oneStep = (from: string, to: string, pitch: number) => {
   const [x, y] = from.split(',').map(Number) as Point, [u, v] = to.split(',').map(Number) as Point;
@@ -94,7 +95,7 @@ function clockCycle(samples: readonly (boolean | null)[]): boolean[] | null {
   return null;
 }
 
-function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pick<ArrivalTiming, 'delays' | 'clocks'>): number[] | null {
+function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pick<ArrivalTiming, 'delays' | 'clocks' | 'clockPrefixes'>): number[] | null {
   const ticks = [0];
   for (let i = 1; i < path.length; i++) {
     const pad = network.pads.get(key(path[i - 1]!)), dwell = pad ? timing.delays[pad] : 0;
@@ -103,7 +104,13 @@ function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pic
     const destination = key(path[i]!), cycle = timing.clocks?.[destination];
     if (network.clocks.has(destination)) {
       if (!cycle?.includes(true)) return null;
-      while (!cycle[attempted % cycle.length]) attempted++;
+      const prefix = timing.clockPrefixes?.[destination] ?? [];
+      while (attempted < prefix.length && prefix[attempted] === false) attempted++;
+      if (attempted < prefix.length) {
+        if (prefix[attempted] !== true) return null;
+      } else {
+        while (!cycle[(attempted - prefix.length) % cycle.length]) attempted++;
+      }
     }
     ticks.push(attempted);
   }
@@ -115,13 +122,21 @@ function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, fra
   const last = Math.max(...[...paths.values()].map(([, times]) => times.at(-1)!));
   const ticks = frames.slice(0, last + 1).filter((_, index) => index % baseline === 0);
   const clocks: Record<string, boolean[]> = {};
+  const clockPrefixes: Record<string, (boolean | null)[]> = {};
   for (const [id, { point, mark }] of network.clocks) {
-    const cycle = clockCycle(ticks.map(frame => {
+    const samples = ticks.map(frame => {
       const appearance = clockAppearance(scene, configuredPatch(frame, point).flat());
       return appearance?.mark === mark ? appearance.open : null;
-    }));
-    if (!cycle) return null;
-    clocks[id] = cycle;
+    });
+    const cycle = clockCycle(samples);
+    if (cycle) {
+      clocks[id] = cycle;
+      continue;
+    }
+    const steady = inferCycleAfterTransient(samples);
+    if (!steady) return null;
+    clocks[id] = steady.phases;
+    clockPrefixes[id] = samples.slice(0, steady.start);
   }
   const [pitch, left, top] = scene.grid;
   const positions = ticks.map(frame => configuredCrosses(frame)
@@ -149,7 +164,7 @@ function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, fra
   const distances = configuredDistances(network.nodes, scene.target, pitch);
   const compatible = orders.filter(order => scene.actors.every(([, x, y], i) => {
     const path = configuredRoute(network.nodes, [x, y], scene.target, order, pitch, distances);
-    const dates = path && arrivalTicks(path, network, { delays, clocks });
+    const dates = path && arrivalTicks(path, network, { delays, clocks, clockPrefixes });
     if (!path || !dates || traces[i]!.filter(Boolean).length < 2) return false;
     let position = 0;
     return traces[i]!.every((observed, tick) => {
@@ -162,7 +177,8 @@ function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, fra
     const frame = paths.get(color)?.[1].at(-1);
     return frame === undefined ? null : frame / baseline;
   });
-  return { orders: compatible, delays, observed, clocks };
+  return { orders: compatible, delays, observed, clocks,
+    ...(Object.keys(clockPrefixes).length ? { clockPrefixes } : {}) };
 }
 
 function visiblePrefixes(scene: ConfiguredScene, frames: readonly NativeRows[]): Map<number, Point[]> {

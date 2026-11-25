@@ -1,4 +1,5 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
+import { inferCycleAfterTransient } from './observed-cycle.ts';
 import { symbolicDigest } from '../logos-engine/v6-hash.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { measureAnimatedCells } from './observed-animation.ts';
@@ -269,24 +270,26 @@ function extendSwitchCycle(state: CarriedSupport, index: number, before: NativeR
   const image = paint(after);
   const delta = Object.fromEntries(Object.entries(image).filter(([at, ink]) => ink !== start[at]));
   const phases = [...(previous?.phases ?? [{}]), delta];
-  const cellsByPhase = phases.map(phase => Object.keys(phase));
   let period: number | undefined;
+  const samePhase = (left: Readonly<Record<string, string>>, right: Readonly<Record<string, string>>) => {
+    const cells = Object.keys(left);
+    return cells.length === Object.keys(right).length && cells.every(at => left[at] === right[at]);
+  };
   for (let candidate = 1; candidate < phases.length / 2; candidate++) {
-    const repeats = phases.slice(candidate).every((image, i) => {
-      const cells = cellsByPhase[i]!;
-      return cells.length === cellsByPhase[i + candidate]!.length && cells.every(at => image[at] === phases[i]![at]);
-    });
+    const repeats = phases.slice(candidate).every((image, i) => samePhase(image, phases[i]!));
     if (repeats && (candidate > 1 || phases.length >= 5)) {
       period = candidate;
       break;
     }
   }
+  const steady = period === undefined ? inferCycleAfterTransient(phases, samePhase) : undefined;
+  if (steady) period = steady.phases.length;
   if (phases.length >= 27 && period === undefined) period = 0;
-  const cycle = period === undefined ? phases : phases.slice(0, period);
+  const cycle = steady?.phases ?? (period === undefined ? phases : phases.slice(0, period));
   const footprint = new Set(cycle.flatMap(phase => Object.keys(phase)));
   const baseline = period === undefined ? start : Object.fromEntries([...footprint].map(at => [at, start[at]!]));
   const updated: SwitchCycle = { index, anchor, start: baseline, phases: cycle,
-    current: period ? (phases.length - 1) % period : 0, ...(period === undefined ? {} : { period }) };
+    current: period ? (phases.length - 1 - (steady?.start ?? 0)) % period : 0, ...(period === undefined ? {} : { period }) };
   return [...(state.switchCycles ?? []).filter(cycle => cycle.index !== index), updated].sort((a, b) => a.index - b.index);
 }
 

@@ -11,6 +11,7 @@
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.ts",
     "demo:logos": "node scripts/demo-logos.ts",
+    "test:sic-transfer": "node scripts/sic-transfer-cycle.mjs",
     "test:sic-continuity": "node scripts/verify-sic-continuity.mjs",
     "typecheck": "tsc --noEmit"
   },
