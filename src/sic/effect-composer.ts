@@ -44,18 +44,27 @@ function accepts<State, Action>(before: State, effect: ComposableEffect<State, A
 
 /** Compose admissible effects. Callers bind them to observations and verify actual returns. */
 export function composePlan<State, Action>(problem: CompositionProblem<State, Action>): Composition<State, Action> | undefined {
+  const first = composePlans(problem).next();
+  return first.done ? undefined : first.value;
+}
+
+/** Enumerate admissible final states in command order when an intermediate goal has several useful arrivals. */
+export function* composePlans<State, Action>(
+  problem: CompositionProblem<State, Action>,
+): Generator<Composition<State, Action>> {
   const { initial, key, goal, choices, budget, reserve, interrupted } = problem;
   const frontier: Entry<State, Action>[] = [{ state: initial, depth: 0 }];
   const bestReserve = new Map([[key(initial), reserve?.(initial) ?? 0]]);
   for (let cursor = 0; cursor < frontier.length; cursor++) {
-    if ((cursor & 63) === 0 && interrupted?.()) return;
+    if (interrupted?.()) return;
     const entry = frontier[cursor]!;
     if (goal.holds(entry.state)) {
       const effects: ComposableEffect<State, Action>[] = [];
       for (let node: Entry<State, Action> | undefined = entry; node?.result; node = node.predecessor) {
         effects.push(node.result);
       }
-      return { end: entry.state, effects: effects.reverse(), explored: cursor + 1 };
+      yield { end: entry.state, effects: effects.reverse(), explored: cursor + 1 };
+      continue;
     }
     if (entry.depth >= budget.commands || frontier.length >= budget.states) continue;
     for (const result of choices(entry.state)) {

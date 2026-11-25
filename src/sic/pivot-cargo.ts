@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { composePlans } from './effect-composer.ts';
 
 export const pivotCargoId = 'sic_pivot_cargo';
 export const learnPivotCargoId = 'sic_deliver_cargo_after_observed_motion';
@@ -134,51 +135,54 @@ function measure(rows: NativeRows, reassemble = false, receivers?: ReceiverBindi
 function* cargoRoutes(layout: Layout, start: Position, stopAtDelivery: boolean, budget: { remaining: number },
   subject?: number): Generator<Move[]> {
   const floor = new Set(layout.floor), pivot = new Set(layout.pivot), done = (1 << start.cargo.length) - 1;
-  const queue: { at: Position; parent: number; move: Move | null }[] = [{ at: start, parent: -1, move: null }];
-  const seen = new Set([identity(start)]);
-  for (let i = 0; i < queue.length && budget.remaining > 0; i++) {
-    budget.remaining--;
-    const { at } = queue[i]!;
-    if (at.delivered === done || stopAtDelivery && at.delivered !== start.delivered) {
-      const steps: Move[] = [];
-      for (let j = i; j >= 0 && queue[j]!.move; j = queue[j]!.parent) steps.push(queue[j]!.move!);
-      yield steps.reverse();
-      if (!stopAtDelivery) return;
-      continue;
-    }
-    const fixed = new Set(at.cargo.flatMap((group, j) => j === at.held ? [] : group.map(key)));
-    const occupiable = (p: NativePoint) => floor.has(key(p)) && !fixed.has(key(p));
-    const offer = (input: string, intent: Intent, next: Position, subject: number) => {
-      const id = identity(next);
-      if (seen.has(id)) return;
-      seen.add(id);
-      queue.push({ at: next, parent: i, move: { input, intent, next, subject } });
-    };
-    for (const [input, dx, dy] of directions) {
-      const actor = shift(at.actor, dx, dy);
-      if (!occupiable(actor)) continue;
-      const moving = at.held >= 0 ? at.cargo[at.held]!.map(p => shift(p, dx, dy)) : [];
-      if (!moving.every(occupiable)) continue;
-      offer(input, 'move', { ...at, actor, cargo: at.cargo.map((p, j) => j === at.held ? moving : p) }, at.held);
-    }
-    if (at.held < 0) {
-      const adjacent = at.cargo.flatMap((group, j) => !(at.delivered & (1 << j)) && group.some(p => directions.some(([, x, y]) => same(p, shift(at.actor, x, y)))) ? [j] : []);
-      if (adjacent.length === 1 && (subject === undefined || subject === adjacent[0])) {
-        offer('ACTION5', 'attach', { ...at, held: adjacent[0]! }, adjacent[0]!);
+  const plans = composePlans<Position, Move>({
+    domain: 'cargo-clearance', initial: start, key: identity,
+    goal: { relation: stopAtDelivery ? 'supported drop' : 'deliver every cargo', holds: state =>
+      state.delivered === done || stopAtDelivery && state.delivered !== start.delivered },
+    budget: { states: budget.remaining, commands: budget.remaining },
+    interrupted: () => budget.remaining-- <= 0,
+    *choices(at) {
+      const fixed = new Set(at.cargo.flatMap((group, j) => j === at.held ? [] : group.map(key)));
+      const occupiable = (p: NativePoint) => floor.has(key(p)) && !fixed.has(key(p));
+      const motion = (input: string, intent: 'move' | 'turn', actor: NativePoint, moving: NativePoint[]) => {
+        const next = { ...at, actor, cargo: at.cargo.map((p, j) => j === at.held ? moving : p) };
+        return { action: { input, intent, next, subject: at.held }, after: next,
+          maintains: [{ relation: 'keep the same cargo attached', holds: (state: Position) => state.held === at.held }],
+          ensures: [{ relation: 'carrier and cargo fit on clear ground', holds: (_: Position) =>
+            occupiable(actor) && moving.every(occupiable) }] };
+      };
+      for (const [input, dx, dy] of directions) {
+        yield motion(input, 'move', shift(at.actor, dx, dy),
+          at.held >= 0 ? at.cargo[at.held]!.map(p => shift(p, dx, dy)) : []);
       }
-      continue;
-    }
-    const cargo = at.cargo[at.held]!;
-    if (cargo.every(p => layout.destinations[at.held]!.includes(key(p)))) {
-      offer('ACTION5', 'drop', { ...at, delivered: at.delivered | (1 << at.held), held: -1 }, at.held);
-      continue;
-    }
-    if (!pivot.has(key(at.actor))) continue;
-    const [x, y] = at.actor;
-    const rotated = cargo.map(([a, b]): NativePoint => [x + y - b, y + a - x]);
-    if (rotated.every(occupiable) && !rotated.some(p => same(p, at.actor)) && !aligned(rotated, cargo)) {
-      offer('ACTION5', 'turn', { ...at, cargo: at.cargo.map((p, j) => j === at.held ? rotated : p) }, at.held);
-    }
+      if (at.held < 0) {
+        const adjacent = at.cargo.flatMap((group, j) => !(at.delivered & (1 << j))
+          && group.some(p => directions.some(([, x, y]) => same(p, shift(at.actor, x, y)))) ? [j] : []);
+        if (adjacent.length !== 1 || subject !== undefined && subject !== adjacent[0]) return;
+        const next = { ...at, held: adjacent[0]! };
+        yield { action: { input: 'ACTION5', intent: 'attach', next, subject: next.held }, after: next };
+        return;
+      }
+      const cargo = at.cargo[at.held]!;
+      const receiver = layout.destinations[at.held]!;
+      if (cargo.every(p => receiver.includes(key(p)))) {
+        const next = { ...at, delivered: at.delivered | (1 << at.held), held: -1 };
+        yield { action: { input: 'ACTION5', intent: 'drop', next, subject: at.held }, after: next,
+          ensures: [{ relation: 'delivered cargo stays in its receiver', holds: state =>
+            state.cargo[at.held]!.every(p => receiver.includes(key(p))) }] };
+        return;
+      }
+      if (!pivot.has(key(at.actor))) return;
+      const [x, y] = at.actor;
+      const rotated = cargo.map(([a, b]): NativePoint => [x + y - b, y + a - x]);
+      if (!rotated.some(p => same(p, at.actor)) && !aligned(rotated, cargo)) {
+        yield motion('ACTION5', 'turn', at.actor, rotated);
+      }
+    },
+  });
+  for (const plan of plans) {
+    yield plan.effects.map(effect => effect.action);
+    if (!stopAtDelivery) return;
   }
 }
 

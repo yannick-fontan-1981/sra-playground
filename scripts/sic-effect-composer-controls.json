@@ -1,0 +1,11 @@
+{
+  "protocol": "effect-composer-2",
+  "source": "public source dispatcher",
+  "games": ["PORT", "GABA", "GIGO", "KEYD"],
+  "start": 1,
+  "finish": 1,
+  "actionsPerLevel": 55,
+  "mode": "sic",
+  "arms": ["compose", "one-effect-per-search"],
+  "partition": "L1 controls. These L1 results were available before the adapter extension."
+}

@@ -1,0 +1,11 @@
+{
+  "protocol": "effect-composer-2",
+  "source": "public source dispatcher at direct level entry",
+  "games": ["PORT", "GABA", "GIGO", "KEYD", "AS66", "CAVA"],
+  "start": 2,
+  "finish": 2,
+  "actionsPerLevel": 100,
+  "mode": "sic",
+  "arms": ["compose", "one-effect-per-search"],
+  "partition": "Frozen after adapting the observed planning interfaces from the L1 study. No frames, trajectories or simulator rules from these levels were opened for the follow-up. PORT, GABA, GIGO and KEYD have separate L1 controls. AS66 and CAVA add new games to the study."
+}

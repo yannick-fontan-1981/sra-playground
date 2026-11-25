@@ -25,10 +25,14 @@ if (git('status', '--porcelain', '--', 'src', 'scripts', 'package.json')) {
   throw new Error('Commit the solver and protocol before opening the reserved games');
 }
 const revision = git('rev-parse', 'HEAD');
-const manifests = { initial: 'sic-effect-composer-reserved.json', extension: 'sic-effect-composer-reserved-extension.json' };
-const manifest = manifests[values.partition];
+const manifests = {
+  initial: 'sic-effect-composer-reserved.json',
+  extension: 'sic-effect-composer-reserved-extension.json',
+  followup: 'sic-effect-composer-reserved-followup.json',
+  controls: 'sic-effect-composer-controls.json',
+};
 if (!Object.hasOwn(manifests, values.partition)) throw new Error('Unknown reserved partition');
-const frozen = read(join(root, 'scripts', manifest));
+const frozen = read(join(root, 'scripts', manifests[values.partition]));
 const solverTree = git('rev-parse', 'HEAD:src');
 const configuration = { revision, solverTree, frozen, environment, deadline };
 mkdirSync(directory, { recursive: true });
@@ -71,13 +75,15 @@ function run(game, arm) {
         const line = readFileSync(raw, 'utf8').trim();
         const data = line ? JSON.parse(line) : null;
         const level = data?.levels?.[0];
-        if (code !== 0 || data?.solver !== frozen.mode || data.sic !== data.issued || data.initialCompleted !== 0
+        if (code !== 0 || data?.solver !== frozen.mode || data.sic !== data.issued || !Number.isInteger(data.initialCompleted)
+          || data.initialCompleted < 0 || data.initialCompleted >= frozen.start
           || level?.level !== frozen.start || data.replayCommands?.length !== data.issued) {
           throw new Error(error ?? data?.error ?? 'Missing comparable SIC replay');
         }
         const executedFamilies = {};
         for (const { family } of data.replayCommands) executedFamilies[family ?? 'other'] = (executedFamilies[family ?? 'other'] ?? 0) + 1;
         result = { status: 'completed', won: level.won, commands: level.actions, sic: data.sic, initial: data.initial,
+          initialCompleted: data.initialCompleted, level: level.level, resets: data.resets,
           state: level.state, reason: level.reason, usage: read(usage), executedFamilies };
       } catch (issue) {
         result = { status: expired ? 'timeout' : 'error', reason: expired ? 'deadline' : issue.message };
@@ -101,7 +107,8 @@ await Promise.all(Array.from({ length: workers }, async () => {
 }));
 const comparisons = frozen.games.map(game => {
   const arms = frozen.arms.map(arm => results.find(result => result.game === game && result.arm === arm));
-  const comparable = arms.every(result => result.status === 'completed') && arms[0].initial === arms[1].initial;
+  const comparable = arms.every(result => result.status === 'completed')
+    && arms[0].initial === arms[1].initial && arms[0].initialCompleted === arms[1].initialCompleted;
   return { game, comparable, arms };
 });
 write(join(directory, 'report.json'), { configuration, comparisons });

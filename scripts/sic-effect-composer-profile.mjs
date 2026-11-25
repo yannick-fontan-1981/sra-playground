@@ -7,13 +7,18 @@ const output = process.env.SIC_COMPOSER_USAGE;
 const usage = {};
 if (!['compose', 'one-effect-per-search'].includes(arm) || !output) throw new Error('Missing composer profile');
 
-export function observe(compose, problem) {
-  const { domain, budget, goal } = problem;
-  const result = compose(arm === 'compose' ? problem : {
-    ...problem, budget: { ...budget, commands: Math.min(1, budget.commands) },
-  });
-  const entry = usage[domain] ??= { attempts: 0, plans: 0, multi: 0, longest: 0 };
+function begin(problem) {
+  const entry = usage[problem.domain] ??= { attempts: 0, plans: 0, multi: 0, longest: 0 };
   entry.attempts++;
+  return entry;
+}
+
+function restrict(problem) {
+  const { budget } = problem;
+  return arm === 'compose' ? problem : { ...problem, budget: { ...budget, commands: Math.min(1, budget.commands) } };
+}
+
+function record(entry, goal, result) {
   if (!result?.effects.length) return result;
   entry.plans++;
   entry.longest = Math.max(entry.longest, result.effects.length);
@@ -27,14 +32,24 @@ export function observe(compose, problem) {
   return result;
 }
 
+export function observe(compose, problem) {
+  return record(begin(problem), problem.goal, compose(restrict(problem)));
+}
+
+export function* observeMany(compose, problem) {
+  const entry = begin(problem);
+  for (const result of compose(restrict(problem))) yield record(entry, problem.goal, result);
+}
+
 function relations(effects, property) {
   return [...new Set(effects.flatMap(effect => effect[property]?.map(condition => condition.relation) ?? []))].sort();
 }
 
 const wrapper = 'data:text/javascript,' + encodeURIComponent(
-  'import { composePlan as plan } from ' + JSON.stringify(source)
-  + '; import { observe } from ' + JSON.stringify(import.meta.url)
+  'import { composePlan as plan, composePlans as plans } from ' + JSON.stringify(source)
+  + '; import { observe, observeMany } from ' + JSON.stringify(import.meta.url)
   + '; export function composePlan(problem) { return observe(plan, problem); }'
+  + ' export function composePlans(problem) { return observeMany(plans, problem); }'
 );
 registerHooks({
   resolve(specifier, context, nextResolve) {

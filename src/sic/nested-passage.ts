@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { motionIntoFootprint } from './observed-translation.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
+import { composePlan } from './effect-composer.ts';
 
 export const nestedPassageId = 'sic_nested_passage';
 export const learnNestedPassageId = 'sic_connect_openings_after_observed_motion';
@@ -190,27 +191,28 @@ function translated(layout: Layout, p: Position, dx: number, dy: number): Positi
 
 function choose(local: State): Move | null {
   const { position, layout, rejected } = local;
-  const queue: { p: Position; first: Move | null }[] = [{ p: position, first: null }];
-  const seen = new Set([positionKey(position)]);
-  for (let i = 0; i < queue.length && i < 3000; i++) {
-    const { p, first } = queue[i]!;
-    if (connected(layout, p)) return first ?? { position: p, input: 'ACTION5' };
-    const offer = (m: Move) => {
-      const k = positionKey(m.position);
-      if (seen.has(k) || !first && rejected.includes(positionKey(p) + '/' + k)) return;
-      seen.add(k);
-      queue.push({ p: m.position, first: first ?? m });
-    };
-    for (let j = 1; j < layout.rooms.length; j++) if (j !== p.selected) {
-      const [x, y] = boxFor(layout, p, j);
-      offer({ position: { ...p, selected: j }, input: 'ACTION6', click: [x + 1, y + 1] });
-    }
-    for (const [input, dx, dy] of dirs) {
-      const next = translated(layout, p, dx, dy);
-      if (next) offer({ position: next, input });
-    }
-  }
-  return null;
+  const result = composePlan<Position, Move>({
+    domain: 'nested-connectivity', initial: position, key: positionKey,
+    goal: { relation: 'connect the source to the exit through the nested openings', holds: p => connected(layout, p) },
+    budget: { commands: 3000, states: 3000 },
+    *choices(p) {
+      function effect(action: Move) {
+        return { action, after: action.position, evidence: local.refs, requires: [{
+          relation: 'initial transition was not refused', holds: (state: Position) =>
+            state !== position || !rejected.includes(positionKey(state) + '/' + positionKey(action.position)),
+        }] };
+      }
+      for (let j = 1; j < layout.rooms.length; j++) if (j !== p.selected) {
+        const [x, y] = boxFor(layout, p, j);
+        yield effect({ position: { ...p, selected: j }, input: 'ACTION6', click: [x + 1, y + 1] });
+      }
+      for (const [input, dx, dy] of dirs) {
+        const next = translated(layout, p, dx, dy);
+        if (next) yield effect({ position: next, input });
+      }
+    },
+  });
+  return result ? result.effects[0]?.action ?? { position, input: 'ACTION5' } : null;
 }
 
 function passageDistance(layout: Layout) {

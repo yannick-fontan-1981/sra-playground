@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { searchCoverageRoute } from './coverage-route.ts';
+import { composePlan } from './effect-composer.ts';
 import { maximumCommittedActions } from './plan-step.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
 
@@ -284,36 +285,35 @@ function coverPassages(scene: Scene, memory: Memory, inputs: readonly string[]):
 }
 
 function plan(scene: Scene, memory: Memory, inputs: readonly string[]): Route | null {
+  type State = { point: NativePoint; target?: Frame; crossing?: Crossing };
   const start = origin(scene.actor.bbox);
   const unfinished = scene.pairs.filter(pair => !memory.traversed.includes(pair.key));
   const crossings = scene.pairs.flatMap(pair => pair.frames.map((from, i) => ({ pair, from, to: pair.frames[1 - i]! })));
-  const queue: { point: NativePoint; steps: Step[] }[] = [{ point: start, steps: [] }];
-  const seen = new Set([key(start)]);
-  for (const item of queue) {
-    for (const direction of directions) {
-      if (!inputs.includes(direction[0]) || memory.rejected.includes(key(item.point) + '/' + direction[0])) continue;
-      const point = shift(item.point, direction, scene.pitch);
-      const crossing = crossings.find(pair => same(pair.from.point, point));
-      if (crossing) {
-        const landing = shift(crossing.to.point, direction, scene.pitch);
-        if (!scene.floor[key(landing)]) continue;
-        const steps = [...item.steps, { direction, point: landing, crossing }];
-        if (unfinished.includes(crossing.pair)) return { steps, target: crossing.from, crossing };
-        if (seen.has(key(landing))) continue;
-        seen.add(key(landing));
-        queue.push({ point: landing, steps });
-        continue;
+  const landings = Object.keys(scene.floor).length + 2;
+  const result = composePlan<State, Step>({
+    domain: 'paired-passage', initial: { point: start },
+    key: state => state.target ? 'target' : key(state.point),
+    goal: { relation: 'reach an unverified passage or the fully covered exit', holds: state => !!state.target },
+    budget: { commands: landings, states: landings },
+    *choices(before) {
+      for (const direction of directions) {
+        const entry = shift(before.point, direction, scene.pitch);
+        const crossing = crossings.find(pair => same(pair.from.point, entry));
+        const point = crossing ? shift(crossing.to.point, direction, scene.pitch) : entry;
+        const touchesExit = !crossing && same(scene.goal.point, entry);
+        const target = crossing && unfinished.includes(crossing.pair) ? crossing.from : touchesExit ? scene.goal : undefined;
+        yield { action: { direction, point, ...(crossing ? { crossing } : {}) },
+          after: { point, target, ...(target && crossing ? { crossing } : {}) }, evidence: memory.evidence,
+          requires: [{ relation: 'available movement with no refused contact', holds: state =>
+            inputs.includes(direction[0]) && !memory.rejected.includes(key(state.point) + '/' + direction[0]) }],
+          ensures: [{ relation: 'safe landing or exit after remaining passages', holds: state =>
+            touchesExit ? !unfinished.length : !!scene.floor[key(state.point)] }] };
       }
-      if (same(scene.goal.point, point)) {
-        if (!unfinished.length) return { steps: [...item.steps, { direction, point }], target: scene.goal };
-        continue;
-      }
-      if (!scene.floor[key(point)] || seen.has(key(point))) continue;
-      seen.add(key(point));
-      queue.push({ point, steps: [...item.steps, { direction, point }] });
-    }
-  }
-  return null;
+    },
+  });
+  if (!result?.end.target) return null;
+  return { steps: result.effects.map(effect => effect.action), target: result.end.target,
+    ...(result.end.crossing ? { crossing: result.end.crossing } : {}) };
 }
 
 function actorAt(rows: NativeRows, actor: Part, point: NativePoint): boolean {
