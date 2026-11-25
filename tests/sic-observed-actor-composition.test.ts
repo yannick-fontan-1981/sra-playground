@@ -302,21 +302,34 @@ const mirroredPresentations = [
   {name:'vertical reflection, a changed occupant motif and a different interaction command', flipX:false, flipY:true, colors:7, inputs:[5,2,4,3,1], alternateOccupant:true},
 ] as const;
 
-for(const presentation of mirroredPresentations)test('reuses traction and coordinates linked reflectors with '+presentation.name,async()=>{
+for(const presentation of mirroredPresentations)test('reuses traction, coordinates reflectors and transports an independent subject with '+presentation.name,async()=>{
   const game=createSs07Backend(),family=createObservedActorComposition();
   let board=await game.dispatch({type:'load',code:'SS07',level:1}), revision=0;
   let inherited=false, rejectedUnchangedMirror=false, rejectedUnseenGate=false, rejectedWrongGate=false;
+  let verifiedThird=false, completedBeforeSubject=0, transfers=0, pressedWithSubject=false, rejectedMissingSubjectPreview=false, rejectedStaticSubject=false;
   const show=async()=>{
-    let frame=board.frame.map(row=>row.map(value=>(value+presentation.colors)%16));
+    let frame=board.frame.map(row=>[...row]);
+    if(board.level===6&&presentation.alternateOccupant){
+      // Change the independent subject's interior and outline, including its
+      // visible interior under the pressed marker. Keep the environment real.
+      for(let y=2;y<62;y+=3)for(let x=2;x<62;x+=3){
+        const inner=[[1,0],[0,1],[1,1],[2,1],[1,2]] as const;
+        if(!inner.every(([dx,dy],i)=>frame[y+dy]![x+dx]===(i===2?8:5)))continue;
+        const plain=[[0,0],[2,0],[0,2],[2,2]].every(([dx,dy])=>frame[y+dy]![x+dx]===8);
+        for(const [i,[dx,dy]] of inner.entries())frame[y+dy]![x+dx]=[5,8,8,15,5][i]!;
+        if(plain)frame[y]![x+2]=15;
+      }
+    }
+    frame=frame.map(row=>row.map(value=>(value+presentation.colors)%16));
     if(presentation.flipX)frame=frame.map(row=>row.reverse());
     if(presentation.flipY)frame.reverse();
     const packet={frame_rows:frame,frame_hash:await publicFrameHash(frame),level:board.level,levels_completed:board.levelsCompleted,
       state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'withdrawal-campaign')};
   };
-  while(board.level<=3&&revision<180){
+  while((!verifiedThird&&board.level<=3||board.level===6)&&revision<240){
     const first=await show(), level=board.level;
-    const offer=await family.propose(first.observation,first.packet.frame_rows,[],180-revision);
+    const offer=await family.propose(first.observation,first.packet.frame_rows,[],240-revision);
     assert.ok(offer,`Missing composition at level ${level}, after ${revision} actions`);
     if(level>=2){
       assert.notEqual(offer.offer.kind,'calibrate_actor_action');
@@ -327,6 +340,19 @@ for(const presentation of mirroredPresentations)test('reuses traction and coordi
     for(const [index,action] of offer.actions.entries()){
       const before=await show(), step=offer.steps[index]!;
       if(!(await family.before(offer,index,before.packet,before.observation)).admitted)break;
+      const relay=step.relay, field=family.state().relayField;
+      const subjectLanding=level===6&&relay?.after.subjects?.find(cell=>!relay.before.subjects?.includes(cell));
+      const subjectSource=level===6&&relay?.before.subjects?.find(cell=>!relay.after.subjects?.includes(cell));
+      if(relay&&typeof subjectLanding==='number'&&typeof subjectSource==='number'){
+        assert.equal(offer.offer.kind,'compose_subject_with_linked_control');
+        assert.ok(offer.actions.some(action=>action.action_ref==='ACTION'+(presentation.inputs.findIndex(id=>id===5)+1)));
+        const rows=before.packet.frame_rows.map(row=>[...row]);
+        const {pitch,phase,floor}=family.state().shape!;
+        const x=phase[0]+subjectLanding%64*pitch,y=phase[1]+Math.floor(subjectLanding/64)*pitch;
+        for(let dy=0;dy<pitch;dy++)for(let dx=0;dx<pitch;dx++)rows[y+dy]![x+dx]=floor;
+        assert.equal((await family.before(offer,index,{...before.packet,frame_rows:rows},before.observation)).admitted,false);
+        rejectedMissingSubjectPreview=true;
+      }
       const slot=Number(action.action_ref.slice(6));
       const point=slot===6?{x:presentation.flipX?63-action.data.x!:action.data.x!,y:presentation.flipY?63-action.data.y!:action.data.y!}:undefined;
       board=await game.dispatch({type:'action',actionId:slot===6?6:presentation.inputs[slot-1]!,...(point?{data:point}:{})});
@@ -334,7 +360,22 @@ for(const presentation of mirroredPresentations)test('reuses traction and coordi
       issued++;
       const after=await show();
       const verdict=await family.after(offer,index,before.observation,after.observation,before.packet.frame_rows,after.packet.frame_rows);
-      const relay=step.relay, field=family.state().relayField;
+      if(relay&&typeof subjectLanding==='number'&&typeof subjectSource==='number'){
+        assert.ok(verdict.matched,'The predicted independent subject must move and match its landing');
+        transfers++;
+        if(field?.settleSubjectOnControl&&subjectLanding===field.plate){
+          assert.ok(field.gates.some(gate=>relayGateClosed(gate,relay.before,field.plate)&&!relayGateClosed(gate,relay.after,field.plate)));
+          pressedWithSubject=true;
+        }
+        const rows=after.packet.frame_rows.map(row=>[...row]);
+        const {pitch,phase}=family.state().shape!;
+        const x=phase[0]+subjectSource%64*pitch,y=phase[1]+Math.floor(subjectSource/64)*pitch;
+        for(let dy=0;dy<pitch;dy++)for(let dx=0;dx<pitch;dx++)rows[y+dy]![x+dx]=before.packet.frame_rows[y+dy]![x+dx]!;
+        const refused=await family.after(offer,index,before.observation,after.observation,before.packet.frame_rows,rows);
+        assert.equal(refused.matched,false);
+        assert.equal(refused.seal_prefix,true);
+        rejectedStaticSubject=true;
+      }
       if(level===3&&board.level===3&&verdict.matched&&relay&&field?.linkedControls&&(!rejectedUnseenGate||!rejectedWrongGate)){
         const gate=field.gates.find(gate=>relayGateClosed(gate,relay.before,field.plate)!==relayGateClosed(gate,relay.after,field.plate)
           && ![...relay.after.actors,...relay.after.reflectors,...relay.after.loads,...relay.projected].includes(gate.cell));
@@ -373,15 +414,24 @@ for(const presentation of mirroredPresentations)test('reuses traction and coordi
         assert.match(traction.effects.leave_reflector_in_place_by_transfer??'',/:epoch:2:revision:/);
         assert.match(traction.effects.leave_reflector_in_place_by_turning??'',/:epoch:2:revision:/);
       }
+      if(level===3&&board.level===4){
+        assert.equal(board.levelsCompleted,3);
+        const traction=Object.values(family.state().roles).find(role=>role.pull)!;
+        assert.match(traction.effects.move_reflector_by_withdrawal??'',/:epoch:3:revision:/);
+        assert.match(traction.effects.leave_reflector_in_place_by_transfer??'',/:epoch:3:revision:/);
+        verifiedThird=true;
+        // Isolate this transfer test from the two intervening puzzle layouts.
+        board=await game.dispatch({type:'selectLevel',level:6});
+        completedBeforeSubject=board.levelsCompleted;
+        break;
+      }
       if(verdict.seal_prefix)break;
     }
     assert.ok(issued,'The first command must be bound to the current scene');
   }
-  assert.equal(board.levelsCompleted,3);
-  assert.ok(inherited&&rejectedUnchangedMirror&&rejectedUnseenGate&&rejectedWrongGate);
-  const traction=Object.values(family.state().roles).find(role=>role.pull)!;
-  assert.match(traction.effects.move_reflector_by_withdrawal??'',/:epoch:3:revision:/);
-  assert.match(traction.effects.leave_reflector_in_place_by_transfer??'',/:epoch:3:revision:/);
+  assert.ok(board.levelsCompleted>completedBeforeSubject);
+  assert.ok(verifiedThird&&inherited&&rejectedUnchangedMirror&&rejectedUnseenGate&&rejectedWrongGate);
+  assert.ok(transfers>=2&&pressedWithSubject&&rejectedMissingSubjectPreview&&rejectedStaticSubject);
 });
 
 for (const presentation of mirroredPresentations) test('reuses both roles for a joint transfer with '+presentation.name, async () => {

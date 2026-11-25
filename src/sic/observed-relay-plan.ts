@@ -2,7 +2,7 @@
  * This module receives a visible scene and control hypotheses. Only the caller
  * can release a command, after binding it to a fresh observation. */
 export type RelayMotion = { action: string; axis: number };
-export type RelayState = { actors: number[]; loads: number[]; reflectors: number[]; supports: number[] };
+export type RelayState = { actors: number[]; loads: number[]; reflectors: number[]; supports: number[]; subjects?: number[] };
 export type RelayStep = { actor: number; action: string; before: RelayState; after: RelayState; projected: number[] };
 type Gate = { cell: number; closedWhenPressed: boolean; control?: number };
 export type RelayModel = {
@@ -13,21 +13,24 @@ export type RelayModel = {
   pull?: boolean[];
   nearestReflection?: boolean;
   finishAtPlate?: boolean;
+  settleSubjectOnControl?: boolean;
+  keepSubjectOnControl?: boolean;
   activeActor?: number;
   linkedControls?: boolean;
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
 
-const occupied = (s: RelayState, cell:number) => s.reflectors.includes(cell)||s.loads.includes(cell)||s.actors.includes(cell);
+const occupied = (s: RelayState, cell:number) => s.reflectors.includes(cell)||s.loads.includes(cell)||s.actors.includes(cell)||!!s.subjects?.includes(cell);
 const pressed = (s:RelayState,plate:number|null) => plate!==null&&occupied(s,plate);
 export const relayGateClosed = (gate:Gate,s:RelayState,plate:number|null) => gate.closedWhenPressed===pressed(s,gate.control??plate);
 const blocked = (m:RelayModel,s:RelayState,p:number) => !m.floor.has(p)&&!m.water.has(p)
   ||m.gates.some(gate=>gate.cell===p&&relayGateClosed(gate,s,m.plate));
 const stands = (m:RelayModel,s:RelayState,p:number) => m.floor.has(p)||s.supports.includes(p);
 const sorted=(xs:number[])=>xs.sort((a,b)=>a-b);
-const signature=(s:RelayState)=>[...s.actors,-1,...s.reflectors,-1,...s.loads,-1,...s.supports].join(',');
-const solved=(m:RelayModel,s:RelayState)=>m.finishAtPlate&&m.plate!==null?s.actors.includes(m.plate):m.goals.every(goal=>s.actors.includes(goal));
+const signature=(s:RelayState)=>[...s.actors,-1,...s.reflectors,-1,...s.loads,-1,...s.supports,-1,...(s.subjects??[])].join(',');
+const solved=(m:RelayModel,s:RelayState)=>m.settleSubjectOnControl&&m.plate!==null?!!s.subjects?.includes(m.plate)
+  :m.finishAtPlate&&m.plate!==null?s.actors.includes(m.plate):m.goals.every(goal=>s.actors.includes(goal));
 
 function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) {
   const position=(cell:number)=>moves.get(cell)??cell;
@@ -39,7 +42,12 @@ function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) 
     if(end-first>1)reflectors.splice(first,end-first,...sorted(reflectors.slice(first,end)));
     first=end;
   }
-  const after={actors:before.actors.map(position),loads:before.loads.map(position),reflectors,supports:[...before.supports]};
+  const after:RelayState={actors:before.actors.map(position),loads:before.loads.map(position),reflectors,supports:[...before.supports],
+    ...(before.subjects?{subjects:sorted(before.subjects.map(position))}:{})};
+  if(m.keepSubjectOnControl&&m.plate!==null&&!after.subjects?.includes(m.plate))return;
+  // An untested body may be hazardous on contact. Use non-contact transport
+  // and keep both cursors clear until an observation supports a closer move.
+  if(after.subjects?.some(p=>!stands(m,after,p)||after.actors.some(actor=>p===actor||[1,-1,64,-64].includes(p-actor))))return;
   if(m.unoccupiedControls?.some(cell=>occupied(after,cell)))return;
   if(m.heldLoadControls?.some(cell=>!after.loads.includes(cell)))return;
   if(!after.actors.every(p=>stands(m,after,p))||!after.reflectors.every(p=>stands(m,after,p)))return;
@@ -193,7 +201,13 @@ function bridgeOrdering(model:RelayModel){
 function ordering(model: RelayModel, emphasis:number) {
   // With independent gates, geometric progress can point through a closed
   // circuit. Use observed action costs, including selection, across relays.
-  if(model.linkedControls)return ()=>0;
+  if(model.linkedControls||model.settleSubjectOnControl)return ()=>0;
+  if(model.keepSubjectOnControl){
+    const goal=bridgeOrdering(model);
+    // Once the infrastructure is held, favor command cost. A weak distance
+    // term breaks ties without encouraging unnecessary reflector moves.
+    return (pose:RelayState)=>goal(pose)*0.35;
+  }
   if(model.finishAtPlate&&model.plate!==null){
     const floor=new Set([...model.floor,...model.water]);
     const distances=distanceMap({...model,floor},model.plate);

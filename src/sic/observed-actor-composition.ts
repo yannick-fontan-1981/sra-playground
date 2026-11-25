@@ -925,6 +925,9 @@ type RelayField = {
   finishAtPlate?:boolean;
   learnedMobility?:boolean;
   linkedControls?:boolean;
+  subjectPatterns?:{glyph:string;interior:string}[];
+  settleSubjectOnControl?:boolean;
+  keepSubjectOnControl?:boolean;
 };
 const encode=(cell:Cell)=>{const [x,y]=point(cell);return x+y*64;};
 const decodeCell=(cell:number)=>key([cell%64,Math.floor(cell/64)]);
@@ -934,6 +937,30 @@ const sorted=(cells:number[])=>cells.sort((a,b)=>a-b);
 function relayReflectors(scene:Scene){
   return [...scene.tiles].flatMap(([cell,tile])=>tile.mirror?[{cell:encode(cell),arms:tile.mirror.map(toAxis)}]:[])
     .sort((a,b)=>a.arms[0]!-b.arms[0]!||a.arms[1]!-b.arms[1]!||a.cell-b.cell);
+}
+
+function relaySubjectPatterns(scene:Scene,h:History,o:NativeObservation){
+  const surface=h.transfer?.support;
+  if(!surface||!h.shape)return [];
+  const {pitch,floor,backing}=h.shape;
+  const patterns=new Map<string,string>();
+  for(const [cell,tile] of scene.tiles){
+    if(tile.uniform||tile.object||tile.gate||tile.plate||tile.mirror||tile.preview||scene.actors.some(actor=>actor.cell===cell)
+      ||tile.pixels.some(ink=>ink===floor||ink===backing||color(o,ink)===surface.medium)
+      ||tile.pixels.every((ink,index)=>color(o,ink)===surface.pattern[index]))continue;
+    // Treat an isolated foreground motif as a hypothesis until the same
+    // body is observed at the projected landing. Continuous terrain repeats.
+    const glyph=tileKey(tile);
+    if(cardinal.every(axis=>tileKey(scene.tiles.get(next(cell,axis)))!==glyph))
+      patterns.set(glyph,inset(tile.pixels,pitch));
+  }
+  return [...patterns].map(([glyph,interior])=>({glyph,interior}));
+}
+
+function isRelaySubject(scene:Scene,field:Pick<RelayField,'subjectPatterns'>,cell:Cell,tile:Tile,pitch:number){
+  if(tile.preview||tile.gate||tile.plate||tile.mirror||scene.actors.some(actor=>actor.cell===cell))return false;
+  return field.subjectPatterns?.some(pattern=>pattern.glyph===tileKey(tile)
+    ||scene.plates.includes(cell)&&pattern.interior===inset(tile.pixels,pitch))??false;
 }
 
 type PlatformBinding = {frame:number;accent:number;active:boolean};
@@ -1145,6 +1172,8 @@ function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefi
   }
   const floor:number[]=[],water:number[]=[];
   const waterInks:Record<number,number>={};
+  const subjectPatterns=plate!==null&&traction&&h.trigger&&gates.some(gate=>!gate.closedWhenPressed)
+    ?relaySubjectPatterns(scene,h,o):[];
   for(const [cell,tile] of scene.tiles){
     if(background(tile,h.shape!))continue;
     const observedMedium=(bridge||traction)&&law&&(tile.uniform||tile.preview)
@@ -1157,6 +1186,7 @@ function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefi
       if(observedMedium!==undefined)waterInks[location]=observedMedium;
       if(knownSupport)h.supports[cell]=tileKey(tile);
     } else if(scene.goals.includes(cell)||scene.plates.includes(cell)||tile.gate||portable(tile)||tile.passable
+      ||isRelaySubject(scene,{subjectPatterns},cell,tile,h.shape!.pitch)
       ||scene.actors.some(a=>a.cell===cell))floor.push(encode(cell));
     else if(tile.uniform&&!bridge){
       const location=encode(cell);
@@ -1166,7 +1196,8 @@ function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefi
   }
   return {floor,water,waterInks,plate:plate===null?null:encode(plate),gates,arms:mirrors.map(mirror=>mirror.arms),goals:scene.goals.map(encode),
     ...(linkedControls?{linkedControls:true}:{}),
-    ...(traction?{learnedMobility:true,...(!linkedControls&&pressureTrial&&!h.seenPlate?{finishAtPlate:true}:{})}:{}),
+    ...(traction?{learnedMobility:true,...(!linkedControls&&pressureTrial&&!h.seenPlate&&!subjectPatterns.length?{finishAtPlate:true}:{})}:{}),
+    ...(subjectPatterns.length?{subjectPatterns,settleSubjectOnControl:true}:{}),
     ...(bridge&&controlConstraints?controlConstraints:released&&bridge?{unoccupiedControls:scene.plates.map(encode)}:{})};
 }
 
@@ -1177,22 +1208,24 @@ function relayPose(scene: Scene,h:History):RelayState|undefined {
   if(mirrors.length!==field.arms.length||mirrors.some((mirror,i)=>mirror.arms.join(',')!==field.arms[i]!.join(',')))return;
   const reflectors=mirrors.map(mirror=>mirror.cell);
   const actors=h.shape!.inks.map(ink=>encode(scene.actors.find(a=>a.ink===ink)!.cell));
-  const loads=sorted([...scene.tiles].filter(([,tile])=>tile.object).map(([cell])=>encode(cell)));
+  const subjects=field.subjectPatterns?sorted([...scene.tiles].flatMap(([cell,tile])=>
+    isRelaySubject(scene,field,cell,tile,h.shape!.pitch)?[encode(cell)]:[])):undefined;
+  const loads=sorted([...scene.tiles].filter(([cell,tile])=>tile.object&&!subjects?.includes(encode(cell))).map(([cell])=>encode(cell)));
   for(const plate of scene.plates) {
     // The control's corner pixels remain on top of a load, not on top
     // of a bare pressure mark. Rebind using the previously seen load inset.
     const cell=encode(plate), target=scene.tiles.get(plate);
-    if(!target||target.plate||target.preview||actors.includes(cell)||reflectors.includes(cell)||loads.includes(cell))continue;
+    if(!target||target.plate||target.preview||actors.includes(cell)||reflectors.includes(cell)||loads.includes(cell)||subjects?.includes(cell))continue;
     const stock=Array.from(scene.tiles.values()).find(tile=>tile.object);
     const center=Math.floor(target.pixels.length/2);
     if(h.relayLoads?.includes(target.pixels[center]!)||stock?.pixels[center]===target.pixels[center])loads.push(cell);
   }
   const supports=field.water.filter(cell=>{
     const id=decodeCell(cell), tile=scene.tiles.get(id);
-    return !!tile&&!tile.uniform&&!tile.object&&!tile.preview&&!tile.mirror&&!actors.includes(cell)&&tile.pixels.every(ink=>ink!==field.waterInks[cell])
+    return !!tile&&!tile.uniform&&!tile.object&&!tile.preview&&!tile.mirror&&!actors.includes(cell)&&!subjects?.includes(cell)&&tile.pixels.every(ink=>ink!==field.waterInks[cell])
       ||!!h.supports[id]&&(actors.includes(cell)||loads.includes(cell)||reflectors.includes(cell)||supported(scene,h,id));
   });
-  return {actors,loads:sorted(loads),reflectors,supports:sorted(supports)};
+  return {actors,loads:sorted(loads),reflectors,supports:sorted(supports),...(subjects?{subjects}:{})};
 }
 
 const sameRelayPose=(a:RelayState|undefined,b:RelayState)=>!!a&&JSON.stringify(a)===JSON.stringify(b);
@@ -1203,7 +1236,7 @@ function relayAgreement(scene:Scene,h:History,expected:RelayState){
   return field.gates.every(gate=>{
     const seen=scene.tiles.get(decodeCell(gate.cell))?.gate;
     if(seen)return seen.open!==relayGateClosed(gate,expected,field.plate);
-    return !field.linkedControls||!relayGateClosed(gate,expected,field.plate)
+    return !field.linkedControls&&!field.subjectPatterns||!relayGateClosed(gate,expected,field.plate)
       && (expected.actors.includes(gate.cell)||expected.reflectors.includes(gate.cell)||expected.loads.includes(gate.cell)
         ||scene.tiles.get(decodeCell(gate.cell))?.preview);
   });
@@ -1223,8 +1256,9 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
       controls:h.shape!.inks.map(ink=>observedDirections(h,ink).map(d=>({action:d.action,axis:toAxis(d.axis)}))),
       capacity:h.shape!.inks.map(ink=>h.roles[ink]?.capacity||(field.learnedMobility&&!h.roles[ink]?.pull?1:0)),
       ...(field.learnedMobility?{pull:h.shape!.inks.map(ink=>!!h.roles[ink]?.pull),nearestReflection:true,
-        ...(field.plate===null?{activeActor:h.shape!.inks.indexOf(scene.active.ink)}:{})}: {})};
-    const route=await findRelayPlan(model,pose,{maxNodes:field.plate===null?150000:75000,yieldControl:execution?.yieldControl??(async()=>{}),signal:execution?.signal});
+        ...(field.plate===null||field.subjectPatterns?{activeActor:h.shape!.inks.indexOf(scene.active.ink)}:{})}: {})};
+    const maxNodes=field.settleSubjectOnControl?15000:field.plate===null?150000:75000;
+    const route=await findRelayPlan(model,pose,{maxNodes,yieldControl:execution?.yieldControl??(async()=>{}),signal:execution?.signal});
     if(execution?.signal?.aborted)return;
     h.relayChecked.push(fingerprint);
     if(!route?.length)return;
@@ -1242,7 +1276,7 @@ async function relayOffer(scene:Scene,h:History,remaining:number,execution?:Nati
     steps.push({action:command(predicted.action),from,actor:actor.ink,to,relay:predicted,...(pressure?{pressureTrial:to}:{})});
     if(predicted.projected.length||pressure)break;
   }
-  return {ink:actor.ink,steps,kind:field.finishAtPlate?'prepare_access_to_test_linked_control'
+  return {ink:actor.ink,steps,kind:field.settleSubjectOnControl?'compose_subject_with_linked_control':field.finishAtPlate?'prepare_access_to_test_linked_control'
     :field.learnedMobility?'compose_group_destination_after_access'
     :field.plate===null?'compose_reflection_and_support_access':'compose_reflection_and_linked_gate_access',score:800,
     ...(field.learnedMobility?{destinations:scene.goals}:{})};
@@ -1575,6 +1609,16 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
             }
           }
           h.relay?.shift();
+          const field=h.relayField;
+          if(field?.settleSubjectOnControl&&field.plate!==null&&step.relay.after.subjects?.includes(field.plate)){
+            const prior=step.relay.before;
+            delete field.settleSubjectOnControl;
+            field.keepSubjectOnControl=true;
+            h.relayChecked=[];
+            h.seenPlate=true;
+            if(h.transfer&&field.gates.some(gate=>relayGateClosed(gate,prior,field.plate)
+              &&after.tiles.get(decodeCell(gate.cell))?.gate?.open))h.transfer.gateReaction=a.observation_ref;
+          }
         }
         else delete h.relay;
       }
