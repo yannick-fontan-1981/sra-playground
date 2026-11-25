@@ -5,7 +5,7 @@ import {canCompareAnotherPreparation,nextLocalLevel,revisitedChoice,stalledLocal
 import { sicObservedTransportDeadlock } from '../logos-engine/v6-native-types.ts';
 import {rememberRelayControl} from './relay-control.ts';
 import { proposeRelayContact, observeStrandedTransport, newContactMemory, proposeFrontierContact, recordFrontierContact, inheritFrontierContacts, observeRegionArrival, observeContactDisplacement } from './contact-frontier.ts';
-import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
+import { coveragePlanGroup, evidencedPlanGroup, recurrentExperimentGroup, hasExperimentOpportunity, isUnwitnessedDirectionalPreparation, mayPursueWitnessedEffect, witnessedObjective } from './experiment-arbitration.ts';
 import {acceptPreviewCarry,carryPreviewBindings,newPreviewLearning,observePreviewBindings,visualLayout} from './witnessed-preview-transfer.ts';
 import {repeatedFrameCommand} from './inverse-frame-experiment.ts';
 import {offerCursorTrial,newCursorMemory,measuredReturnSelection} from './marked-cursor-selection.ts';
@@ -449,6 +449,8 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
         kind: preparedEffectsId,
         actions, ...(spatial?{spatialSeries:spatial}:walking?{walkingSeries:walking}:{}),
         experiment,
+        ...(group === recurrentExperimentGroup && isUnwitnessedDirectionalPreparation(experiment.localCapacity)
+          ? { compare_public_frontier_first: true } : {}),
         ...(cooperative?{cooperativeTransportForecast:cooperative}:{}),
         ...(cursor ? {cursorSelectionForecast:{...cursor,...(cursor.contrast||cursor.stage==='reroute'||cursor.beyondReturn?{
           decisionMode:cursor.stage==='advance'?'continue_verified_plan':'explore_competing_explanations',

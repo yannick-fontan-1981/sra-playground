@@ -71,12 +71,14 @@ export function learnCurveWitness(before: NativeObservation, after: NativeObserv
   first: NativeRows, second: NativeRows, frames: readonly NativeRows[], prior?: CurveWitness | null,
   sourceCandidate?: string): CurveWitness | null {
   if (command.action_ref !== 'ACTION6' || frames.length < 5) return null;
+  const fill = measureScalarFillDisplay(first);
+  if (!fill.scalar_fill_display_present || fill.scalar_fill_count < 1) return null;
   const intermediate = symbolicDigest(frames.at(-1)!) === symbolicDigest(second) ? frames.slice(0, -1) : frames;
   const facts = orderedTransientComponentPathFacts(first, intermediate, second, command.action_ref, command.data);
   if (sourceCandidate && sourceCandidate !== facts.unique_transient_path_source_component_ref) return null;
   const model = acquireTransientCurve(first, intermediate, facts, before.level_epoch, [before.observation_ref, after.observation_ref],
     command, prior ? [prior.model] : []);
-  if (!model?.fill.scalar_fill_display_present || model.fill.scalar_fill_count < 1) return null;
+  if (!model) return null;
   const impact = sourceCandidate || prior?.impact
     ? measureImpact(model, facts, first, second, intermediate[0]!, command, after.observation_ref) : null;
   return { model, epoch: null, controls: {}, attempted: [], ...(impact ? { impact } : {}) };

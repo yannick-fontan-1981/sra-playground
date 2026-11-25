@@ -41,7 +41,7 @@ import { createSicLearnSupportMoves, learnObservedSupportsId } from '../sic/lear
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects, learnVisibleGroupEffectsId } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
-import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, projectedPublicEffectsGroup, publicInputExplorationId } from '../sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, observedPressureRecoveryGroup, projectedPublicEffectsGroup, publicInputExplorationId } from '../sic/public-input-exploration.ts';
 import { createCursorRoleMemory, currentCursorRoles, cursorRoleMemoryId } from '../sic/cursor-role-memory.ts';
 import { createSicRecheckDirectionalControls } from '../sic/recheck-directional-controls.ts';
 import { createSicTrialRepeatedLinearControls } from '../sic/trial-repeated-linear-controls.ts';
@@ -416,6 +416,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private acquiredRecordCount = 0;
   private compositionIds = new Set<string>();
   private lastFamily: string | null = null;
+  private openPublicFrontierEpoch: number | null = null;
   private knowledge: NativeKnowledgeStore | null = null;
   private executionDigest: string | null = null;
   private selectionProgram: StoredNativeProgram | null = null;
@@ -859,6 +860,12 @@ export class NativeV6Runtime implements NativeV6Backend {
       let offered: { family: NativeFamily; proposal: NativeProposal } | null = null;
       for (const [entryIndex, id] of group.families.entries()) {
         const family = this.families.find(candidate => candidate.id === id)!;
+        if (group.id === observedPressureRecoveryGroup && id === preparedEffectsId
+          && this.openPublicFrontierEpoch === this.observation.level_epoch) {
+          offered = await this.openDirectionalFrontier();
+          if (offered) break;
+          this.openPublicFrontierEpoch = null;
+        }
         const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
         const entry = group.entryPoints?.[entryIndex];
         const entryKey = `${group.id}:${family.id}:${entry}`;
@@ -905,6 +912,14 @@ export class NativeV6Runtime implements NativeV6Backend {
           && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal, index, entryIndex)
             || await this.scopeReturnedContactRefusal(family, proposal))) continue;
         if (proposal) {
+          if (proposal.compare_public_frontier_first === true && group.families.includes(publicInputExplorationId)) {
+            const preferred = await this.openDirectionalFrontier();
+            if (preferred) {
+              this.note({ kind: 'native_coordination', rule: 'public_frontier_before_translated_preparation',
+                observation_ref: this.observation.observation_ref, deferred_family: family.id, preferred_family: preferred.family.id });
+              offered = preferred; break;
+            }
+          }
           const preferred = await this.preferCurrentRequiredService(index, entryIndex, family, proposal)
             ?? await this.preferAcquiredContinuation(index, entryIndex, family, proposal);
           if (preferred) {
@@ -985,6 +1000,19 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (this.caller) this.caller.reasoningMode = undefined;
       this.planning = null;
     }
+  }
+
+  private async openDirectionalFrontier(): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
+    if (!this.planning || !this.observation || !this.current) return null;
+    const family = this.families.find(candidate => candidate.id === publicInputExplorationId);
+    if (!family || objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled !== true) return null;
+    const { inputs, execution } = this.planning;
+    const proposal = await family.propose(this.observation, this.current.frame_rows, inputs, this.remaining(), execution);
+    const strategy = (proposal?.sicSituationCard as R | undefined)?.strategy;
+    const direction = proposal?.actions[0]?.action_ref;
+    if (proposal?.status !== 'proposed' || (strategy !== 'compare_public_input' && strategy !== 'revisit_input_frontier')
+      || !direction || !/^ACTION[1-4]$/.test(direction) || !inputs.some(command => command.action_ref === direction)) return null;
+    return { family, proposal: { ...proposal, follows_open_public_frontier: true } };
   }
 
   /** Retain a current computation limit without turning it into a refutation. */
@@ -1538,6 +1566,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       let result = await prefix.family.after(prefix.proposal, prefix.index, before, after,
         first.frame_rows, this.current!.frame_rows, this.current!.frame_packet);
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
+      this.openPublicFrontierEpoch = !publicBoundary && prefix.proposal.follows_open_public_frontier === true ? after.level_epoch : null;
       const previousQueue = this.observedQueue?.ref === before.observation_ref ? this.observedQueue.model : null;
       this.observedQueue = undefined;
       if (!publicBoundary && authority === 'sicOnly' && prefix.family.id === publicInputExplorationId &&
@@ -2290,6 +2319,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.check(execution);
     await knowledge.commit(writes,{workflow:SELECTION_PROGRAM,step:'recovery',statement:'official_action_undo'});
     this.current=next;this.observation=measured;this.recoveryCount++;
+    this.openPublicFrontierEpoch = null;
     this.undoCheckpoint=null;this.prefix=null;this.kind='boundary';this.reason=null;
     this.latestReasoningReturn=null;this.observedQueue=undefined;this.lastClickReturn=null;
     this.note({kind:'action_undo',...receipt});
@@ -2330,6 +2360,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     this.check(execution);
     await knowledge.commit(writes, { workflow: SELECTION_PROGRAM, step: 'recovery', statement: 'official_level_reset' });
     this.current = next; this.observation = measured; this.recoveryCount++;this.undoCheckpoint=null;
+    this.openPublicFrontierEpoch = null;
     this.prefix = null; this.kind = 'boundary'; this.reason = null;
     this.latestReasoningReturn = null; this.observedQueue = undefined; this.lastClickReturn = null;
     this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref,
@@ -2863,7 +2894,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 278,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 283,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

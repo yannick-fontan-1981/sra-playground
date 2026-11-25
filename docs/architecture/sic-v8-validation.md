@@ -2718,3 +2718,15 @@ Sous le même plafond de 90 secondes et avec le même jeu local, les solveurs du
 Les transitions d’un mobile à une autre position et direction dépendent de la grille et de son empreinte. Le chercheur les calcule une fois par état géométrique et les réutilise pendant l’énumération des placements. Deux éléments déjà engagés ne peuvent plus changer de place dans cette branche. Leur recouvrement suffit à éliminer cette branche avant d’explorer ses descendants. Le chercheur vérifie son échéance pendant l’énumération.
 
 Avec ces changements, le rejeu chronologique local gagne les six niveaux en 79 commandes, dont 19 au niveau 6 en environ 19 secondes écoulées. Les cinq premiers niveaux conservent leurs nombres de commandes. Deux tests synthétiques vérifient le placement, le refus d’une sortie fermée et l’arrêt à l’échéance.
+
+### AS66 niveau 8, poursuivre les comparaisons directionnelles ouvertes
+
+Après les 32 comparaisons d’accès, la révision 277 privilégie une préparation apprise dans une autre disposition. Le contrôle négatif observé sur place justifie une question sur la préparation. L’effet positif de la préparation reste à vérifier dans cette disposition.
+
+Une préparation directionnelle transposée peut céder la place à une direction publique encore inexplorée ou à un trajet observé qui y mène. Une fois ce retour acquis, l’enquête garde la priorité sur les essais de préparation tant qu’elle peut produire une comparaison publique admissible. La vérification des commandes et les choix de récupération précèdent sa reprise. Un changement de niveau, une restauration du plateau ou l’épuisement de cette exploration met fin à cette priorité.
+
+Le rejeu depuis le niveau 1 gagne à nouveau le niveau 8 en 66 commandes, soit 235 commandes cumulées. Les 32 comparaisons d’accès sont suivies de 34 commandes d’exploration publique. Les tests du moteur vérifient le choix du parcours public en présence d’une comparaison admissible et l’autorisation de la préparation lorsque la proposition de remplacement reste spéculative.
+
+### Mesures des trajectoires régulées
+
+La mesure d’un réglage visible sur le plateau de départ conditionne l’acquisition d’une trajectoire régulée. Vérifier cette condition avant de reconstruire la trajectoire évite d’analyser les images intermédiaires lorsqu’aucun réglage n’est mesurable. Sur les trois premiers niveaux de DICO, les 19 commandes, les retours et les animations gardent la même empreinte. Deux essais sous charge locale ont consommé environ 33 et 27 secondes de temps actif, respectivement avant et après cette modification.

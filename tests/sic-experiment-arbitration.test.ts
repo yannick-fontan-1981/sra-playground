@@ -4,7 +4,8 @@ import { readFile } from 'node:fs/promises';
 import { createNativeV6Runtime, NATIVE_V6_REFERENCE_COMMIT } from '../src/logos-engine/v6-native-runtime.ts';
 import { defaultRecoveryPack } from '../src/sic/active-recovery.ts';
 import { recoveryRevision, readRecoveryRevision } from '../src/sic/recovery-pack.ts';
-import { hasExperimentOpportunity, recordReturn, mayPursueWitnessedEffect } from '../src/sic/experiment-arbitration.ts';
+import { hasExperimentOpportunity, isUnwitnessedDirectionalPreparation,
+  recordReturn, mayPursueWitnessedEffect } from '../src/sic/experiment-arbitration.ts';
 import { initialMemory } from '../src/sic/preparation-experiments.ts';
 import { planningGroupsWithExperiments } from '../src/sic/experiment-selection-groups.ts';
 import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
@@ -51,6 +52,16 @@ test('all original fallback entries retain their order and experiments share the
   const explore = groups.find(group => group.id === 'explore_available_inputs')!;
   assert.ok(explore.families.indexOf(preparedEffectsId) < explore.families.indexOf(publicInputExplorationId));
   assert.ok(explore.families.lastIndexOf(preparedEffectsId) > explore.families.indexOf(publicInputExplorationId));
+});
+
+test('a translated directional preparation waits for the public frontier until supported by local progress', () => {
+  const preparation = { stage: 'prepare' as const, origin: 'current-placement', training: 'previous-placement',
+    revised: false, a: 'ACTION4', b: 'ACTION1', c: 'ACTION3' };
+  assert.equal(isUnwitnessedDirectionalPreparation(preparation), true);
+  assert.equal(isUnwitnessedDirectionalPreparation({ ...preparation, training: preparation.origin }), false);
+  assert.equal(isUnwitnessedDirectionalPreparation({ ...preparation, revised: true }), false);
+  assert.equal(isUnwitnessedDirectionalPreparation({ ...preparation, stage: 'test' }), false);
+  assert.equal(isUnwitnessedDirectionalPreparation({ ...preparation, b: 'ACTION6:8,3' }), false);
 });
 
 test('a pack can place a grounded coverage forecast ahead of independent projected inputs',()=>{

@@ -6,8 +6,19 @@ import rules from '../src/logos-engine/v6/animated-contact-rules.json' with {typ
 import { AnimatedContact,animatedCrossInvitation } from '../src/logos-engine/v6-animated-contact.ts';
 import { acquireTransientCurve,projectTransientCurve,transientCalibration,transientSourceRoleProbe } from '../src/logos-engine/v6-transient-contact-memory.ts';
 import { orderedTransientComponentPathFacts,measureScalarFillDisplay,maximalTransientBars,consistentTransientTurn,transientLinearSlope,transientQuadratic,transientRound,ballisticContactClick } from '../src/logos-engine/v6-transient-measurements.ts';
+import { learnCurveWitness } from '../src/sic/regulated-transient-contact.ts';
+import type { NativeObservation, NativeRows } from '../src/logos-engine/v6-native-types.ts';
 const oracle=JSON.parse(await readFile(new URL('./fixtures/v6-animated-contact-reference.json',import.meta.url),'utf8')),scenes=oracle.scenes,packets=oracle.packets;
 const component=(c:any):any=>({...c,bbox:{...c.bbox,height:c.bbox.bottom-c.bbox.top+1,width:c.bbox.right-c.bbox.left+1}});
+test('a regulated curve requires a visible parameter before reading the animation', () => {
+  const board = Array.from({ length: 12 }, () => Array(12).fill(0));
+  const unneeded = new Proxy([] as NativeRows, {
+    get() { throw new Error('The trajectory frames should not be inspected.'); },
+  });
+  const observation = {} as NativeObservation;
+  assert.equal(learnCurveWitness(observation, observation, { action_ref: 'ACTION6', data: { x: 5, y: 7 } },
+    board, board, Array(6).fill(unneeded)), null);
+});
 test('animation oracle and DRM predicates bind unchanged source and only public pixels',async()=>{
   assert.match(oracle.qualification,/zero claimed completed game levels/);assert.deepEqual(rules,oracle.rules);
   for(const[path,hash]of Object.entries(oracle.sourceHashes))assert.equal(createHash('sha256').update(await readFile(new URL('../reference/v6/'+oracle.commit+'/source/'+path,import.meta.url))).digest('hex'),hash,path);

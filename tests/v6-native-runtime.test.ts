@@ -257,6 +257,31 @@ test('native runtime defers family recording until a sealed prefix and ignores p
   assert.equal(result.kind, 'boundary'); assert.deepEqual(records, [0, 1]); assert.equal(result.snapshot.activeSeconds, 0.012);
 });
 
+test('a translated preparation gives way to a grounded public frontier and survives an unavailable alternative', async () => {
+  const publicOwner = 'sic_public_input_exploration';
+  const passive = {
+    before: () => ({ admitted: true, reason: 'current' }),
+    after: () => ({ matched: true, seal_prefix: true, reason: 'witnessed' }),
+    record: () => ({ events: [] }), state: () => ({}), restore: () => {},
+  };
+  for (const strategy of ['compare_public_input', 'unverified_projection']) {
+    const prepared: NativeFamily = {
+      ...passive, id: 'translated-preparation',
+      propose: () => ({ status: 'proposed', kind: 'prepared',
+        compare_public_frontier_first: true, actions: [{ action_ref: 'ACTION1', data: {} }], steps: [{}] }),
+    };
+    const proposal = () => ({ status: 'proposed', kind: 'public',
+      sicSituationCard: { strategy }, actions: [{ action_ref: 'ACTION2', data: {} }], steps: [{}] });
+    const explorer: NativeFamily = { ...passive, id: publicOwner, propose: proposal, proposeInGroup: proposal };
+    const service = new V6AgentService(() => new NativeV6Runtime({ families: [prepared, explorer],
+      groups: [{ id: 'observed-frontier', families: [prepared.id, explorer.id] }],
+      sourceDigest: 'public-frontier-priority-test', maxPointOccurrences: 32 }));
+    const result = await service.handle({ ...init(),
+      observation: toV6PublicObservation({ ...board(), availableActionIds: [1, 2] }) });
+    assert.equal(result.ticket?.actionRef, strategy === 'compare_public_input' ? 'ACTION2' : 'ACTION1');
+  }
+});
+
 test('SIC Fallback withdraws the admitted family before any of its commands is released', async () => {
   const family = (id: string, action_ref: string, length: number): NativeFamily => ({
     id,

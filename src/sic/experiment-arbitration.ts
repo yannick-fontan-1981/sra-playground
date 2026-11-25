@@ -1,8 +1,17 @@
 import type { Experiment, Memory } from './preparation-experiments.ts';
+import type { LocalForecast } from './prospective-local-use.ts';
 
 export const coveragePlanGroup='test_or_continue_a_grounded_coverage_plan';
 export const evidencedPlanGroup = 'continue_or_test_a_witnessed_effect';
 export const recurrentExperimentGroup = 'experiment_after_unproductive_returns';
+/** A negative control at the current placement is evidence for the question,
+ * but the proposed preparation still comes from a different placement. */
+export function isUnwitnessedDirectionalPreparation(forecast: Pick<LocalForecast,
+  'stage' | 'origin' | 'training' | 'revised' | 'observedPrefix' | 'a' | 'b' | 'c'> | undefined): boolean {
+  return forecast?.stage === 'prepare' && forecast.origin !== forecast.training
+    && !forecast.revised && !forecast.observedPrefix
+    && [forecast.a, forecast.b, forecast.c].every(command => /^ACTION[1-4]$/.test(command));
+}
 
 export type ReturnHistory = {
   repeatedChanges: number;
