@@ -40,8 +40,8 @@ export function inferObservedCycle<T>(
 export function inferCycleAfterTransient<T>(
   samples: readonly (T | null)[],
   equal: (left: T, right: T) => boolean = Object.is,
+  maxTransient = 3,
 ): ObservedCycle<T> | undefined {
-  const maxTransient = 3;
   const minWitnesses = 3;
   for (let period = 2; period * minWitnesses < samples.length; period++) {
     for (let start = 1; start <= maxTransient && start + period * minWitnesses <= samples.length; start++) {

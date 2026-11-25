@@ -1,10 +1,10 @@
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { linkSync, mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
-import { registerHooks } from 'node:module';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
+import { installCycleProfile } from './sic-transfer-profiles.mjs';
 
 const ownPath = fileURLToPath(import.meta.url);
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -15,23 +15,11 @@ const candidateFiles = [
   join(root, 'src/sic/shared-arrival-timing.ts'),
   join(root, 'src/sic/carried-support-route.ts'),
   join(root, 'scripts/sic-transfer-scenarios.mjs'),
+  join(root, 'scripts/sic-transfer-profiles.mjs'),
 ];
 
 async function evaluate(cycle, ablate) {
-  if (ablate) {
-    const ablation = 'data:text/javascript,' + encodeURIComponent(
-      'export { inferObservedCycle } from ' + JSON.stringify(sharedCycle.href) +
-      '; export const inferCycleAfterTransient = () => undefined;',
-    );
-    registerHooks({
-      resolve(specifier, context, nextResolve) {
-        const result = nextResolve(specifier, context);
-        return result.url === sharedCycle.href && context.parentURL !== ablation
-          ? { url: ablation, shortCircuit: true }
-          : result;
-      },
-    });
-  }
+  if (ablate) installCycleProfile('disabled');
   const { casesForCycle, strategies } = await import('./sic-transfer-scenarios.mjs');
   return casesForCycle(cycle).map(spec => ({
     ...spec, ...strategies[spec.strategy](spec),
