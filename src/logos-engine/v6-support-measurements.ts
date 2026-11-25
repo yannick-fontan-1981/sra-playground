@@ -1,8 +1,8 @@
 /** Exact public geometry used by the transferred V6 SupportNavigation.
  * Source 786dcf51ca57773d8e3a8948ce9ea3655e7baf8e; no role is inferred here.
  */
-import { geometricComponents, v6Canonical, validateRows } from './v6-native-observer.ts';
-import { symbolicDigest } from './v6-hash.ts';
+import { rasterComponents, rasterRowColumnPixels, v6Canonical, validateRows } from './v6-native-observer.ts';
+import { sha256Bytes, symbolicDigest } from './v6-hash.ts';
 import type { NativeRows } from './v6-native-types.ts';
 export type SupportRecord = Record<string, any>;
 export type RC = readonly [number, number];
@@ -17,6 +17,7 @@ export function supportCompare(a: any, b: any): number {
 // raster-content key; never trust the identity of a caller-owned mutable array.
 // The eight-entry LRU is fixed-size and cannot grow with episode history.
 const componentCache = new Map<string, readonly SupportRecord[]>();
+const shapeEncoder = new TextEncoder();
 function freezeMeasurement<T>(value:T):T {
   if(value&&typeof value==='object'&&!Object.isFrozen(value)){for(const child of Object.values(value))freezeMeasurement(child);Object.freeze(value);}return value;
 }
@@ -26,13 +27,17 @@ export function supportParts(rows: NativeRows, connectivity: 4 | 8 = 4): Support
   validateRows(rows);const rasterKey=(connectivity===4?'':'8:')+JSON.stringify(rows),cached=componentCache.get(rasterKey);
   if(cached){componentCache.delete(rasterKey);componentCache.set(rasterKey,cached);return [...cached];}
   const instances=new Map<string,number>(),hashes=new Map<string,string>();
-  const measured=geometricComponents(rows,connectivity).map(c=>{
-    const [left,top,right,bottom]=c.bbox,height=bottom-top+1,width=right-left+1;
-    const relative_pixels=c.mask.map(([x,y])=>[y,x]).sort(supportCompare),pixels=relative_pixels.map(([r,s])=>[top+r!,left+s!]);
-    const key=v6Canonical(relative_pixels),instance=(instances.get(key)??0)+1;instances.set(key,instance);
-    const hash=hashes.get(key)??symbolicDigest(relative_pixels).slice(0,8);hashes.set(key,hash);
-    return {component_id:`${connectivity===4?'block':'zone'}.shape_${height}x${width}.area_${c.area}.pattern_${hash}.instance_${String(instance).padStart(3,'0')}`,
-      value:c.color,pixels,relative_pixels,bbox:{top,left,right,bottom,height,width},area:c.area,
+  const stride = rows[0]!.length;
+  const measured = rasterComponents(rows, connectivity).map(({ bbox, color, pixels: offsets }) => {
+    const [left, top, right, bottom] = bbox, height = bottom - top + 1, width = right - left + 1;
+    const pixels = rasterRowColumnPixels(offsets, stride);
+    const relative_pixels = pixels.map(([row, column]) => [row - top, column - left]);
+    // The extractor creates dense pairs of nonnegative integers. Their compact JSON
+    // is already canonical and can serve as both the equality key and hash input.
+    const key=JSON.stringify(relative_pixels),instance=(instances.get(key)??0)+1;instances.set(key,instance);
+    const hash=hashes.get(key)??sha256Bytes(shapeEncoder.encode(key)).slice(0,8);hashes.set(key,hash);
+    return {component_id:`${connectivity===4?'block':'zone'}.shape_${height}x${width}.area_${pixels.length}.pattern_${hash}.instance_${String(instance).padStart(3,'0')}`,
+      value:color,pixels,relative_pixels,bbox:{top,left,right,bottom,height,width},area:pixels.length,
       touches_frame_boundary:top===0||left===0||bottom===rows.length-1||right===rows[0]!.length-1,schema_version:'yf_arc3_v5.component_description.v1'};
   });
   freezeMeasurement(measured);componentCache.set(rasterKey,measured);if(componentCache.size>8)componentCache.delete(componentCache.keys().next().value!);return [...measured];

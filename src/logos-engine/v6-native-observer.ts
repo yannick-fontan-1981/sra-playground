@@ -14,6 +14,11 @@ export interface GeometricComponent {
   id: string; color: number; bbox: PixelBox; area: number; scale: number;
   mask: readonly Pixel[]; normalized: readonly Pixel[]; rectangular: boolean;
 }
+interface RasterComponent {
+  color: number;
+  bbox: PixelBox;
+  pixels: number[];
+}
 export interface MeasuredEntity extends NativeEntity {
   id: string; signature: string; position: Pixel; bbox: PixelBox; area: number;
   scale: number; mask: readonly Pixel[]; palette_value: number; rectangular: boolean;
@@ -98,13 +103,13 @@ export function projection(rows: NativeRows, box: readonly number[]): number[][]
   return rows.slice(y, bottom + 1).map(row => row.slice(x, right + 1));
 }
 
-/** V6 masks are relative [x,y] pairs, unlike V5 pixels ([row,column]). */
-export function geometricComponents(rows: NativeRows, connectivity: 4 | 8 = 4): GeometricComponent[] {
+/** Connected pixels in raster order of discovery, before either coordinate projection. */
+export function rasterComponents(rows: NativeRows, connectivity: 4 | 8 = 4): RasterComponent[] {
   validateRows(rows);
   if (connectivity !== 4 && connectivity !== 8) throw new TypeError('Connectivity must be 4 or 8');
   const height = rows.length, width = rows[0]!.length;
   const offsets = connectivity === 4 ? FOUR_NEIGHBOR_OFFSETS : EIGHT_NEIGHBOR_OFFSETS;
-  const seen = new Uint8Array(height * width), result: GeometricComponent[] = [];
+  const seen = new Uint8Array(height * width), result: RasterComponent[] = [];
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const origin = y * width + x;
     if (seen[origin]) continue;
@@ -123,6 +128,16 @@ export function geometricComponents(rows: NativeRows, connectivity: 4 | 8 = 4): 
         }
       }
     }
+    result.push({ color, bbox: [left, top, right, bottom], pixels });
+  }
+  return result;
+}
+
+/** V6 masks are relative [x,y] pairs, unlike V5 pixels ([row,column]). */
+export function geometricComponents(rows: NativeRows, connectivity: 4 | 8 = 4): GeometricComponent[] {
+  const components = rasterComponents(rows, connectivity), width = rows[0]!.length;
+  return components.map(({ color, bbox, pixels }, index) => {
+    const [left, top, right, bottom] = bbox;
     const mask: Pixel[] = pixels.map(index => [index % width - left, Math.floor(index / width) - top] as Pixel).sort(comparePixel);
     // The Python observer takes the GCD of every horizontal AND vertical run.
     const axes: [Map<number, number[]>, Map<number, number[]>] = [new Map(), new Map()];
@@ -146,11 +161,14 @@ export function geometricComponents(rows: NativeRows, connectivity: 4 | 8 = 4): 
       const nx = Math.floor(px / scale), ny = Math.floor(py / scale);
       normalizedMap.set(pixelKey(nx, ny), [nx, ny]);
     }
-    result.push({ id: `component-${result.length}`, color, bbox: [left, top, right, bottom], area: pixels.length,
+    return { id: `component-${index}`, color, bbox, area: pixels.length,
       scale, mask, normalized: [...normalizedMap.values()].sort(comparePixel),
-      rectangular: pixels.length === (right - left + 1) * (bottom - top + 1) });
-  }
-  return result;
+      rectangular: pixels.length === (right - left + 1) * (bottom - top + 1) };
+  });
+}
+
+export function rasterRowColumnPixels(pixels: number[], width: number): Pixel[] {
+  return pixels.sort((a, b) => a - b).map(index => [Math.floor(index / width), index % width]);
 }
 
 export function rotateMask(mask: readonly Pixel[], turns = 1): Pixel[] {
@@ -255,34 +273,17 @@ export function nativeObservationSummary(observation: NativeObservation) {
 
 /** V5 component identifiers are shape-only; equal shapes share ordinal counters. */
 export async function detectV5Components(rows: NativeRows, connectivity: 4 | 8 = 4): Promise<V5ComponentExtraction> {
-  validateRows(rows);
-  if (connectivity !== 4 && connectivity !== 8) throw new TypeError('Connectivity must be 4 or 8');
-  const height = rows.length, width = rows[0]!.length, seen = new Uint8Array(height * width);
+  const raster = rasterComponents(rows, connectivity);
+  const height = rows.length, width = rows[0]!.length;
   const components: V5Component[] = [], instances = new Map<string, number>(), hashes = new Map<string, string>();
-  const directions: readonly Pixel[] = connectivity === 4 ? [[-1, 0], [0, -1], [0, 1], [1, 0]]
-    : [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1, 1]];
-  for (let row = 0; row < height; row++) for (let column = 0; column < width; column++) {
-    const origin = row * width + column;
-    if (seen[origin]) continue;
-    const value = rows[row]![column]!, pending = [origin], pixels: Pixel[] = [];
-    seen[origin] = 1;
-    let top = row, left = column, bottom = row, right = column;
-    while (pending.length) {
-      const current = pending.pop()!, y = Math.floor(current / width), x = current % width;
-      pixels.push([y, x]); top = Math.min(top, y); bottom = Math.max(bottom, y); left = Math.min(left, x); right = Math.max(right, x);
-      for (const [dy, dx] of directions) {
-        const ny = y + dy, nx = x + dx, next = ny * width + nx;
-        if (ny >= 0 && nx >= 0 && ny < height && nx < width && !seen[next] && rows[ny]![nx] === value) {
-          seen[next] = 1; pending.push(next);
-        }
-      }
-    }
-    pixels.sort(comparePixel);
+  const shapeEncoder = new TextEncoder();
+  for (const { color: value, bbox: [left, top, right, bottom], pixels: offsets } of raster) {
+    const pixels = rasterRowColumnPixels(offsets, width);
     const relative_pixels = pixels.map(([y, x]) => [y - top, x - left] as Pixel);
     const shape = JSON.stringify(relative_pixels), instance = (instances.get(shape) ?? 0) + 1;
     instances.set(shape, instance);
     let shapeHash = hashes.get(shape);
-    if (!shapeHash) { shapeHash = (await v6Digest(relative_pixels)).slice(0, 8); hashes.set(shape, shapeHash); }
+    if (!shapeHash) { shapeHash = (await sha256(shapeEncoder.encode(shape))).slice(0, 8); hashes.set(shape, shapeHash); }
     const h = bottom - top + 1, w = right - left + 1;
     components.push({ component_id: `${connectivity === 4 ? 'block' : 'zone'}.shape_${h}x${w}.area_${pixels.length}.pattern_${shapeHash}.instance_${String(instance).padStart(3, '0')}`,
       value, pixels, relative_pixels, bbox: { top, left, bottom, right, height: h, width: w }, area: pixels.length,
