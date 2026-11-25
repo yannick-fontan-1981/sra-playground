@@ -2703,7 +2703,7 @@ Le banc fixe deux plafonds pour chaque niveau. Il ajoute au nombre de commandes 
 
 `SIC_REPLAY_REFERENCES` accepte un fichier JSON associant chaque code de jeu à un tableau de références, indexé par niveau à partir de zéro. Chaque référence renseigne `actions`, `source` et, lorsqu’elle a été mesurée, `timeMs`. Une entrée absente ou `null` conserve la référence archivée si elle existe. Un oracle vérifié peut fournir le nombre de commandes et sa provenance. Ni le parcours témoin ni les données de l’oracle ne sont transmis à SIC.
 
-Le moteur mesure le temps actif par niveau. Le rejeu journalise la provenance des plafonds, le temps effectivement consommé et le motif d’arrêt. Un dépassement de budget signale une victoire qui reste à reproduire sous ces plafonds.
+Le moteur mesure le temps actif par niveau. Le banc exécute chaque jeu dans un processus surveillé et applique la même limite au temps écoulé de chaque niveau. Le processus parent peut interrompre un calcul natif qui monopolise son processus et conserver les résultats des niveaux terminés ainsi que les commandes confirmées. Le rejeu journalise la provenance des plafonds, le temps effectivement consommé et le motif d’arrêt. Un dépassement de budget signale une victoire qui reste à reproduire sous ces plafonds.
 
 ### AS66 niveau 6, respecter le domaine d’entrée du moteur
 

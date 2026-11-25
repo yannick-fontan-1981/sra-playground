@@ -4,25 +4,16 @@
 // SIC_REPLAY_REFERENCES may provide per-level counts from prior wins or a verified oracle.
 // One process runs games sequentially. No source-game logic or oracle is exposed to SIC.
 // Raw observations remain local; per-level prefixes hash actions and official returns.
-import {pathToFileURL} from 'node:url';
+import {fileURLToPath,pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
 import {readFile,writeFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import { historicalReplayReferences, replayCampaignBudgets } from './sic-replay-budgets.mjs';
-crypto.randomUUID=()=>"98d555fa-6cf9-42fc-b483-9225bfc834d9";
+import { superviseSicReplay } from './sic-replay-watchdog.mjs';
+const replayChild=process.env.SIC_REPLAY_CHILD==='1' && typeof process.send==='function';
 const load=file=>import(pathToFileURL(resolve(file)));
-const {createGameDispatcher}=await load('src/runtime/native-game-dispatcher.ts');
-const {createNativeV6Runtime}=await load('src/logos-engine/v6-native-runtime.ts');
-const {BrowserV6Agent}=await load('src/runtime/v6-agent.ts');
-const {V6_MAX_RUN_ACTIONS}=await load('src/runtime/v6-agent-protocol.ts');
-const {V6AgentService}=await load('src/runtime/v6-agent-service.ts');
-const {defaultRecoveryPack}=await load('src/sic/active-recovery.ts');
 const pinned=resolve('reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6');
 const json=async file=>JSON.parse(await readFile(resolve(pinned,file),'utf8'));
-const declarations={common:await json('laya_proto/common_frontier_policy.drm.json'),strategy:await json('morphology_policy/strategy.drm')};
-const historical=historicalReplayReferences(JSON.parse(await readFile(resolve('docs/architecture/sic-v8-level6-campaign-7bb9f152.json'),'utf8')));
-const supplied=process.env.SIC_REPLAY_REFERENCES
-  ? JSON.parse(await readFile(process.env.SIC_REPLAY_REFERENCES, 'utf8')) : undefined;
 let legacy;
 async function loadLegacy() {
   if (legacy) return legacy;
@@ -43,10 +34,22 @@ async function loadLegacy() {
 }
 const metric=values=>{const sorted=[...values].sort((a,b)=>a-b);return {count:sorted.length,median:sorted.length?Math.round(sorted[Math.floor(sorted.length/2)]):null};};
 async function run(code,requestedTarget,parallelWorkers) {
+  crypto.randomUUID=()=>"98d555fa-6cf9-42fc-b483-9225bfc834d9";
+  const [{createGameDispatcher},{createNativeV6Runtime},{BrowserV6Agent},{V6_MAX_RUN_ACTIONS},
+    {V6AgentService},{defaultRecoveryPack},common,strategy,historicalData,suppliedData]=await Promise.all([
+    load('src/runtime/native-game-dispatcher.ts'),load('src/logos-engine/v6-native-runtime.ts'),
+    load('src/runtime/v6-agent.ts'),load('src/runtime/v6-agent-protocol.ts'),
+    load('src/runtime/v6-agent-service.ts'),load('src/sic/active-recovery.ts'),
+    json('laya_proto/common_frontier_policy.drm.json'),json('morphology_policy/strategy.drm'),
+    readFile(resolve('docs/architecture/sic-v8-level6-campaign-7bb9f152.json'),'utf8'),
+    process.env.SIC_REPLAY_REFERENCES ? readFile(process.env.SIC_REPLAY_REFERENCES,'utf8') : null,
+  ]);
+  const historical=historicalReplayReferences(JSON.parse(historicalData));
+  const supplied=suppliedData ? JSON.parse(suppliedData) : undefined;
   const pack={...defaultRecoveryPack,solver:mode};
   const games=createGameDispatcher(loadLegacy);
   const game=request=>games.dispatch(request);
-  let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime(declarations,{recovery})));
+  let solver;const service=new V6AgentService(async recovery=>(solver=await createNativeV6Runtime({common,strategy},{recovery})));
   const costs={};const transport={request:async operation=>{if(operation.type==='resume') resumes++;const start=performance.now();try{return await service.handle(operation);}finally{const stat=costs[operation.type]??={ms:0,count:0};stat.ms+=performance.now()-start;stat.count++;}},reset:()=>{},dispose:()=>{}};
   const usage = new Map(), decisions = new Map(), series = new Map(); let resumes=0, priorDispatch=null;const continuedGaps=[], boundaryGaps=[]; let board=await game({type:'load',code,level:1}), gameMs=0, first=null; const effects=[]; const pathKinds = new Map();
   const target = requestedTarget ?? board.levelCount;
@@ -64,6 +67,7 @@ async function run(code,requestedTarget,parallelWorkers) {
       first??=issued-start;
       const previous=board; board=await game({type:'action',actionId:action.id,...(action.id===6?{data:action.data}:{})});
       const executionMs=performance.now()-issued; let changed=0, left=64, right=-1, top=64, bottom=-1; for(let y=0;y<64;y++) for(let x=0;x<64;x++) if(previous.frame[y][x]!==board.frame[y][x]){changed++; left=Math.min(left,x);right=Math.max(right,x);top=Math.min(top,y);bottom=Math.max(bottom,y);} effects.push([action.id,action.data??null,changed,changed?[left,top,right,bottom]:null,board.frames.length,board.levelsCompleted,agent.snapshot.proposal?.sicSituationCard?.strategy,agent.snapshot.trace.findLast(e=>e.kind==="sic_native_plan")?.family,agent.snapshot.proposal?.sicSituationCard?.situation,agent.snapshot.proposal?.sicSituationCard?.evidence?.length]);
+      process.send({ kind:'command-applied', sicAuthorized:plan!==undefined && mode==='sic' });
       const family=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.family??'unbound'; usage.set(family,(usage.get(family)??0)+1); const strategy=agent.snapshot.trace.findLast(e=>e.kind==='sic_native_plan')?.strategy??'unbound'; decisions.set(strategy,(decisions.get(strategy)??0)+1);
       gameMs+=executionMs;
       trajectory.update(JSON.stringify([action,board.frame,board.frames,board.level,board.levelsCompleted,board.state]));
@@ -76,6 +80,7 @@ async function run(code,requestedTarget,parallelWorkers) {
       const beforeActive = agent.snapshot.activeSeconds;
       const started = performance.now(), phases=structuredClone(costs), gameStart=gameMs;
       const actionCap=levelBudgets[level].actions;
+      process.send({ kind:'level-started', target, level:level+1, budget:levelBudgets[level] });
       let priorActions;
       do {
         priorActions=agent.snapshot.actionCount;
@@ -86,7 +91,8 @@ async function run(code,requestedTarget,parallelWorkers) {
         activeMs:Math.max(0,Math.round(1000*(agent.snapshot.activeSeconds-beforeActive))),
         budget:levelBudgets[level],
         actions: agent.snapshot.actionCount - before, ms: Math.round(performance.now() - started), gameMs:Math.round(gameMs-gameStart), costs:Object.fromEntries(Object.entries(costs).map(([key,stat])=>[key,{ms:Math.round(stat.ms-(phases[key]?.ms??0)),count:stat.count-(phases[key]?.count??0)}])), graph:solver?.inspectKnowledge().chain, deltas:solver?.inspectKnowledge().deltas.length, acquiredRecords:agent.snapshot.acquiredRecords, nodes:agent.snapshot.nodeCount, traceEvents:agent.snapshot.trace.length, prefixHash:trajectory.copy().digest("hex") });
-      await appendFile(process.argv[4]+'.levels',JSON.stringify({code,level:levelStats.at(-1)})+String.fromCharCode(10)); console.log(JSON.stringify({game:code,level:level+1,won:board.levelsCompleted>level,totalCommands:agent.snapshot.actionCount}));
+      process.send({ kind:'level-finished', level:levelStats.at(-1) });
+      console.log(JSON.stringify({game:code,level:level+1,won:board.levelsCompleted>level,totalCommands:agent.snapshot.actionCount}));
       if (board.levelsCompleted <= level || agent.snapshot.status === 'stopped') break;
     }
     const wall=performance.now()-start;
@@ -109,12 +115,21 @@ const target=process.argv[3]==='auto' ? undefined : Number(process.argv[3]);
 const parallelWorkers=Number(process.argv[5]);
 if ((target!==undefined && (!Number.isInteger(target)||target<1||target>10))
   || !Number.isInteger(parallelWorkers) || parallelWorkers<1) throw new Error('Invalid chronological campaign configuration');
-for (const code of process.argv[2].split(',')) {
-  console.log(JSON.stringify({game:code,target,status:'started'}));
+const codes=process.argv[2].split(',');
+if (replayChild) {
+  const [code]=codes;
+  let result;
   try {
-    const result = await run(code,target,parallelWorkers);
-    await appendFile(process.argv[4], JSON.stringify(result)+'\n');
+    result = await run(code,target,parallelWorkers);
   } catch (error) {
-    await appendFile(process.argv[4], JSON.stringify({code,target,status:'harness_error',message:String(error)})+'\n');
+    result={code,target,status:'harness_error',message:String(error)};
   }
+  process.send({ kind:'result', result }, () => process.disconnect());
+} else for (const code of codes) {
+  console.log(JSON.stringify({game:code,target,status:'started'}));
+  const result=await superviseSicReplay(fileURLToPath(import.meta.url),[code,...process.argv.slice(3)],code);
+  if(result.levelStats?.length) {
+    await appendFile(process.argv[4]+'.levels',result.levelStats.map(level=>JSON.stringify({code,level})).join('\n')+'\n');
+  }
+  await appendFile(process.argv[4],JSON.stringify(result)+'\n');
 }
