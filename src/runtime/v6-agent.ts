@@ -61,6 +61,7 @@ export type V6DispatchResult = GameObservation | { observation: GameObservation;
 export interface V6AgentOptions extends V6AgentHost {
   transport?: V6AgentTransport;
   actionsPerLevel?: number;
+  levelBudgets?: readonly { actions: number; activeTimeMs: number }[];
   /** Defaults to the game's complete native campaign. */
   targetLevels?: number;
   maxSessionActions?: number;
@@ -107,6 +108,7 @@ export class BrowserV6Agent {
   private readonly host: V6AgentHost;
   private readonly transport: V6AgentTransport;
   private readonly actionsPerLevel: number;
+  private readonly levelBudgets?: V6AgentOptions['levelBudgets'];
   private readonly requestedTarget?: number;
   private readonly maxSessionActions?: number;
   private readonly parallelWorkers?: number;
@@ -131,6 +133,10 @@ export class BrowserV6Agent {
   constructor(options: V6AgentOptions) {
     this.host = options; this.transport = options.transport ?? new BrowserV6WorkerClient();
     this.actionsPerLevel = positiveInteger(options.actionsPerLevel ?? V6_DEFAULT_ACTIONS_PER_LEVEL, 'The action cap per level');
+    if (options.levelBudgets) this.levelBudgets = Array.from(options.levelBudgets, budget => ({
+      actions: positiveInteger(budget?.actions, 'The action cap per level'),
+      activeTimeMs: positiveInteger(budget?.activeTimeMs, 'The active-time cap per level'),
+    }));
     if (options.targetLevels !== undefined) this.requestedTarget = positiveInteger(options.targetLevels, 'The target level count');
     if (options.maxSessionActions !== undefined) this.maxSessionActions = positiveInteger(options.maxSessionActions, 'The session action cap');
     if (options.parallelWorkers !== undefined) this.parallelWorkers = positiveInteger(options.parallelWorkers, 'The campaign worker count');
@@ -196,11 +202,14 @@ export class BrowserV6Agent {
     const count = positiveInteger(current.levelCount, 'The native level count');
     const targetLevels = this.requestedTarget ?? count;
     if (targetLevels > count) throw new V6AgentError('invalid', 'The requested target exceeds the native level count.');
-    const levelActionCaps = Array<number>(targetLevels).fill(this.actionsPerLevel);
-    const total = targetLevels * this.actionsPerLevel;
+    if (this.levelBudgets && this.levelBudgets.length !== targetLevels)
+      throw new V6AgentError('invalid', 'Level budgets must cover the requested campaign exactly.');
+    const levelActionCaps = this.levelBudgets?.map(level => level.actions) ?? Array<number>(targetLevels).fill(this.actionsPerLevel);
+    const total = levelActionCaps.reduce((sum, cap) => sum + cap, 0);
     if (!Number.isSafeInteger(total)) throw new V6AgentError('invalid', 'The total action budget is too large.');
     this.targetLevels = targetLevels;
     return { targetLevels, levelActionCaps,
+      ...(this.levelBudgets ? { levelActiveTimeCapsMs: this.levelBudgets.map(level => level.activeTimeMs) } : {}),
       ...(this.maxSessionActions === undefined ? {} : { maxActions: Math.min(this.maxSessionActions, total) }),
       ...(this.parallelWorkers === undefined ? {} : { parallelWorkers: this.parallelWorkers }) };
   }

@@ -569,7 +569,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     return null;
   }
   private remainingActiveMs(level: number, now?: number): number {
-    return Math.max(0, this.levelActiveTimeMs - (this.levelMs.get(level) ?? 0) - this.runningMs(level, now));
+    const cap = this.budgets?.levelActiveTimeCapsMs?.[level - 1] ?? this.levelActiveTimeMs;
+    return Math.max(0, cap - (this.levelMs.get(level) ?? 0) - this.runningMs(level, now));
   }
   private remaining(): number {
     if (!this.current || !this.budgets) return 0;
@@ -2862,7 +2863,7 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 275,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 276,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');

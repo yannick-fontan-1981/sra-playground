@@ -2696,3 +2696,11 @@ Le banc `scripts/check-sic-chronological.mjs` charge chaque jeu officiel au nive
 La campagne prend **54 min 54 s** avec quatre workers en priorité basse, dont une période de saturation du CPU par une autre suite de tests. La somme des durées mesurées par niveau est de **3 h 23 min 20 s**. Le budget par niveau est de 600 commandes et de 514,29 s de temps agent actif.
 
 La comparaison des commandes et des images de retour retrouve **635 trajectoires identiques sur 636**. SELE niveau 1 demeure gagnant avec 69 commandes, contre 36 dans la référence historique. Le premier écart apparaît à la commande 12. Un rejeu isolé au budget du profil huit workers reproduit cet écart. Les niveaux 2 à 6 de SELE sont identiques à la référence.
+
+## Budgets des rejeux chronologiques
+
+Le banc fixe deux plafonds pour chaque niveau. Il ajoute au nombre de commandes de la victoire de référence une marge de 20 %, arrondie au supérieur et comprise entre 5 et 30 commandes. Il ajoute à sa durée mesurée une marge de 35 %, avec un minimum de 5 secondes. Si seul le nombre de commandes est attesté, la durée de référence est estimée à 1,5 seconde par commande, entre 20 et 360 secondes, avant d’ajouter la marge. En l’absence de référence, le niveau reçoit 80 commandes et 90 secondes de temps actif.
+
+`SIC_REPLAY_REFERENCES` accepte un fichier JSON associant chaque code de jeu à un tableau de références, indexé par niveau à partir de zéro. Chaque référence renseigne `actions`, `source` et, lorsqu’elle a été mesurée, `timeMs`. Une entrée absente ou `null` conserve la référence archivée si elle existe. Un oracle vérifié peut fournir le nombre de commandes et sa provenance. Ni le parcours témoin ni les données de l’oracle ne sont transmis à SIC.
+
+Le moteur mesure le temps actif par niveau. Le rejeu journalise la provenance des plafonds, le temps effectivement consommé et le motif d’arrêt. Un dépassement de budget signale une victoire qui reste à reproduire sous ces plafonds.

@@ -447,6 +447,36 @@ for (const [parallelWorkers, expectedMs] of [[1, 360_000], [4, 514_286], [8, 720
   });
 }
 
+test('each level receives its own action count and active deadline through the native service', async () => {
+  const offers: [number, number][] = [];
+  const command = { action_ref: 'ACTION1', data: {} };
+  const family: NativeFamily = {
+    id:'explicit-level-budgets',
+    propose: (_o, _rows, _inputs, remaining, execution) => {
+      offers.push([remaining, execution!.deadlineMs!]);
+      return { status:'proposed', kind:'public_test', actions:[command], steps:[{}] };
+    },
+    before: () => ({ admitted:true, reason:'current' }),
+    after: () => ({ matched:true, seal_prefix:true, reason:'witnessed' }),
+    record: () => ({ events:[] }), state: () => ({}), restore: () => {},
+  };
+  const service = new V6AgentService(() => new NativeV6Runtime({ families:[family], maxPointOccurrences:250,
+    sourceDigest:'explicit-budget-test', now:()=>0 }));
+  const first = await service.handle({ ...init(), budgets: {
+    targetLevels:2, levelActionCaps:[2,3], levelActiveTimeCapsMs:[500,200], parallelWorkers:8,
+  } });
+  const nextLevel = { ...board(1), level:2, levelsCompleted:1 };
+  const next = await service.handle({ type:'advance', sessionId:first.sessionId, sequence:1,
+    ticketId:first.ticket!.id, observation:toV6PublicObservation(nextLevel,1), executionMs:450 });
+  assert.equal(next.kind,'boundary');
+  const issued = await service.handle({ type:'resume', sessionId:first.sessionId, sequence:1 });
+  assert.deepEqual(offers,[[2,500],[3,200]]);
+  const stopped = await service.handle({ type:'advance',sessionId:first.sessionId,sequence:2,
+    ticketId:issued.ticket!.id, observation:toV6PublicObservation({ ...board(2), level:2, levelsCompleted:1 },2), executionMs:200 });
+  assert.equal(stopped.reason,'level_active_time_budget');
+  assert.equal(stopped.snapshot.levelsCompleted,1);
+});
+
 for (const [runtimeOrigin, callerOrigin] of [[1000, 10], [10, 1000]] as const) {
   test(`native current deadlines convert caller clock ${callerOrigin} to runtime clock ${runtimeOrigin}`, async () => {
     let runtimeClock: number = runtimeOrigin, callerClock: number = callerOrigin;

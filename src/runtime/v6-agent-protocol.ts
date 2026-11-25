@@ -26,6 +26,7 @@ export interface V6PublicObservation {
 export interface V6Budgets {
   targetLevels: number;
   levelActionCaps: number[];
+  levelActiveTimeCapsMs?: number[];
   maxActions?: number;
   parallelWorkers?: number;
 }

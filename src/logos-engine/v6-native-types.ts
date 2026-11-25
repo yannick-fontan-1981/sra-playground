@@ -267,6 +267,7 @@ export interface NativeFamily<P extends NativeProposal = NativeProposal> {
 export interface NativeBudgets {
   readonly targetLevels: number;
   readonly levelActionCaps: readonly number[];
+  readonly levelActiveTimeCapsMs?: readonly number[];
   readonly maxActions?: number;
   readonly parallelWorkers?: number;
 }
