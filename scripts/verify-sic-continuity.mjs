@@ -585,6 +585,59 @@ function measureReleasedControlCrossing(issued) {
     .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
+function measureBridgeToReflector(issued) {
+  const world=compileActorLevel(SS06_LEVELS[6]);
+  let state=initialActorState(world), held, firstChain, layered, cleared, approach, push;
+  const dryByActor=new Map(), created=new Set(), used=new Set(), reflected=new Set();
+  const cell=point=>[point.x,point.y].join(',');
+  assert.ok(issued.every(ticket=>ticket.actorPlan&&ticket.actorPlan.strategy!=='calibrate_actor_action'),
+    'SS06 L7 must reuse controls and learned mobility');
+  for(const [index,ticket] of issued.entries()){
+    const order=index+1, active=state.heroes[state.active].kind;
+    const {state:after,phases}=stepActorWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    const loads=phases.filter(phase=>phase.kind==='push').flatMap(phase=>phase.moves.filter(move=>move.actor==='stone'));
+    if(ticket.actorPlan.strategy==='hold_relay_gate_with_observed_load'&&loads.length>1&&active==='warrior'&&ticket.actionIndex>0){
+      assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)),
+        'The opening composition must reuse the observed controls');
+      firstChain??=order;
+    }
+    if(loads.some(move=>state.supports.some(support=>equal(support,move.to))&&after.stones.some(stone=>equal(stone,move.to)))){
+      layered??=order;
+    }
+    if(!held)for(const [index,gate] of world.gates.entries()){
+      if(!actorGateClosed(world,state,index)||actorGateClosed(world,after,index))continue;
+      const reserved=world.circuits.find(circuit=>circuit.id===gate.circuit)?.buttons
+        .find(button=>loads.some(move=>equal(move.to,button))&&after.stones.some(stone=>equal(stone,button)));
+      if(reserved){held={cell:reserved,gate:index,order};break;}
+    }
+    if(held)assert.ok(after.stones.some(stone=>equal(stone,held.cell))&&!actorGateClosed(world,after,held.gate),
+      'SS06 L7 must keep the loaded gate open while spending other weights on access');
+    if(phases.some(phase=>phase.kind==='piston'&&phase.moves.some(move=>move.actor==='monster'))
+      &&after.monsters.length<state.monsters.length)cleared??=order;
+    for(const tile of after.supports)if(!state.supports.some(old=>equal(old,tile)))created.add(cell(tile));
+    for(const hero of after.heroes)if(created.has(cell(hero.at))){
+      dryByActor.set(hero.kind,order);
+      used.add(cell(hero.at));
+    }
+    if(phases.some(phase=>phase.kind==='push'&&phase.moves.some(move=>move.actor==='mirror'))&&dryByActor.has(active)){
+      approach??=dryByActor.get(active);
+      push??=order;
+    }
+    for(const move of phases.filter(phase=>phase.kind==='reflect').flatMap(phase=>phase.moves).filter(move=>move.actor==='hero')){
+      const actor=state.heroes.find(hero=>equal(hero.at,move.from));
+      if(actor&&cleared&&push)reflected.add(actor.kind);
+    }
+    state=after;
+  }
+  assert.ok(firstChain&&held&&layered&&cleared&&approach&&push&&state.complete&&reflected.size===state.heroes.length,
+    'SS06 L7 must hold the gate, test a separate control, extend footing, reach and reposition the mirror and cross with both actors');
+  assert.ok(created.size>0&&[...created].every(tile=>used.has(tile)),'SS06 L7 must use the footholds it makes');
+  return [[firstChain,'push the known row in series'],[held.order,'hold the gate with a load'],
+    [cleared,'release the independent actuator'],[layered,'move a load over established footing'],[approach,'walk over new footing'],
+    [push,'reposition the reflector after crossing']]
+    .map(([action,kind])=>({kind,first:action,last:action}));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -593,7 +646,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 6 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 7 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -708,14 +761,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
     if (code === 'SS06') {
-      const cap=[45,42,115,55,65,65][row.level-1];
+      const cap=[45,42,115,55,65,65,90][row.level-1];
       assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing][row.level-1](issued) : [];
+      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -748,7 +801,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
-      ['actor-composition', 'SS06', '6', '125'],
+      ['actor-composition', 'SS06', '7', '125'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

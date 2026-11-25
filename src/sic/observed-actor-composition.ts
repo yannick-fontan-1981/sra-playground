@@ -26,6 +26,7 @@ type History = {
   triedPlates?: Cell[];
   cargoPattern?: string;
   releasedControls?: Record<Cell,string>;
+  controlTrials?: Record<Cell,{evidence:string;opens:boolean}>;
 };
 type Tile = { pixels: number[]; uniform: boolean; passable: boolean; object: boolean; plate: boolean;
   mirror: Point[] | null; preview: boolean; gate: {accent:number;open:boolean}|null; plateAccent: number|null };
@@ -575,6 +576,66 @@ function pressureRoute(scene:Scene,h:History,o:NativeObservation,actor:Actor,tar
   return solutions(false)??solutions(true);
 }
 
+function hasIndependentRelayControls(scene:Scene,h:History) {
+  return !!h.trigger&&!!h.transfer?.support&&!!h.transfer.gateReaction&&scene.plates.length>1
+    && scene.plates.every(cell=>h.switches[cell]!==undefined)
+    && new Set(scene.plates.map(cell=>h.switches[cell])).size===scene.plates.length
+    && [...scene.tiles.values()].filter(tile=>tile.mirror).length===1
+    && Object.values(h.gates).some(gate=>scene.plates.some(cell=>h.switches[cell]===gate.accent));
+}
+
+function prepareRelayControls(scene:Scene,h:History,o:NativeObservation):Offer|undefined{
+  if(!hasIndependentRelayControls(scene,h)||h.relayField)return;
+  const reserve=scene.plates.filter(cell=>scene.tiles.get(cell)?.object);
+  const offers:Offer[]=[];
+  for(const cell of scene.plates){
+    if(h.releasedControls?.[cell]||reserve.includes(cell))continue;
+    const trial=h.controlTrials?.[cell];
+    const closed=Object.values(h.gates).some(gate=>gate.accent===h.switches[cell]&&!gate.open);
+    if(!closed&&trial&&!pressureHeld(scene,cell))continue;
+    for(const actor of scene.actors){
+      let route:Step[]|undefined,kind:string,rank:number;
+      if(actor.cell===cell){
+        route=[...walks(scene,h,actor).values()].filter(path=>path.route.length===1&&!scene.plates.includes(path.cell))
+          .sort((a,b)=>Math.min(...scene.goals.map(goal=>distance(a.cell,goal)))-Math.min(...scene.goals.map(goal=>distance(b.cell,goal))))[0]?.route;
+        kind='release_tested_relay_control';
+        rank=980;
+      }else if(pressureHeld(scene,cell)){
+        continue;
+      }else if(closed&&trial?.opens!==false){
+        route=pressureRoute(scene,h,o,actor,cell,'load',reserve,[]);
+        kind='hold_relay_gate_with_observed_load';
+        rank=920;
+      }else if(!trial){
+        route=walks(scene,h,actor).get(cell)?.route;
+        kind='test_reachable_relay_control';
+        rank=850;
+      }else continue;
+      if(!route?.length)continue;
+      const checkpoint=route.findIndex(step=>step.to!==cell&&scene.plates.includes(step.to!)
+        ||step.loads?.to.some(load=>load!==cell&&scene.plates.includes(load)&&!step.loads!.from.includes(load)));
+      const steps=checkpoint<0?route:route.slice(0,checkpoint+1);
+      offers.push(atOpportunity(scene,h,actor,steps,kind,rank-route.length-(scene.active.ink===actor.ink?0:1),JSON.stringify([kind,actor.ink,cell]),cell));
+    }
+  }
+  return offers.sort((a,b)=>b.score-a.score)[0];
+}
+
+function openRelayControls(scene:Scene,h:History) {
+  if(!hasIndependentRelayControls(scene,h))return;
+  const gates=Object.entries(h.gates);
+  if(gates.some(([cell,gate])=>!scene.tiles.get(cell)?.gate?.open
+    ||!scene.plates.some(plate=>h.switches[plate]===gate.accent)))return;
+  const heldLoadControls:number[]=[],unoccupiedControls:number[]=[];
+  for(const cell of scene.plates){
+    const tile=scene.tiles.get(cell);
+    if(tile?.object&&h.controlTrials?.[cell]?.opens)heldLoadControls.push(encode(cell));
+    else if(tile?.plate&&(h.controlTrials?.[cell]||h.releasedControls?.[cell]))unoccupiedControls.push(encode(cell));
+    else return;
+  }
+  return {heldLoadControls,unoccupiedControls};
+}
+
 function linkedTransport(scene:Scene,h:History,o:NativeObservation):Offer|undefined{
   if(!h.transfer?.gateReaction||!h.trigger||scene.goals.length!==scene.actors.length)return;
   const mirrors=[...scene.tiles].filter(([,tile])=>tile.mirror);
@@ -753,6 +814,7 @@ function draft(scene: Scene, h: History, o: NativeObservation): Offer | undefine
 type RelayField = {
   floor: number[]; water: number[]; waterInks: Record<number,number>; plate: number|null; gates: RelayModel['gates']; arms: number[]; goals: number[];
   unoccupiedControls?: number[];
+  heldLoadControls?: number[];
 };
 const encode=(cell:Cell)=>{const [x,y]=point(cell);return x+y*64;};
 const decodeCell=(cell:number)=>key([cell%64,Math.floor(cell/64)]);
@@ -805,13 +867,14 @@ function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefi
   if(mirrors.length!==1)return;
   const law=h.transfer?.support;
   const observedGates=Object.entries(h.gates);
+  const controlConstraints=openRelayControls(scene,h);
   const released=scene.plates.length>0&&observedGates.length>0&&scene.plates.every(cell=>h.releasedControls?.[cell])
     && observedGates.every(([cell,gate])=>scene.tiles.get(cell)?.gate?.open&&scene.plates.some(plate=>h.switches[plate]===gate.accent));
-  const bridge=law&&(released||scene.plates.length===0&&observedGates.length===0)
+  const bridge=law&&(released||controlConstraints||scene.plates.length===0&&observedGates.length===0)
     && [...scene.tiles.values()].some(tile=>tile.uniform&&color(o,tile.pixels[0]!)===law.medium);
   const plate=bridge?null:scene.plates[0]??null;
   let gates:RelayField['gates']=[];
-  if(released&&bridge){
+  if((released||controlConstraints)&&bridge){
     gates=observedGates.map(([cell])=>({cell:encode(cell),closedWhenPressed:true}));
   }else if(!bridge){
     if(plate===null||scene.plates.length!==1||!h.transfer?.gateReaction)return;
@@ -843,7 +906,7 @@ function relayField(scene:Scene,h:History,o:NativeObservation):RelayField|undefi
     }
   }
   return {floor,water,waterInks,plate:plate===null?null:encode(plate),gates,arms:mirrors[0]![1].mirror!.map(toAxis),goals:scene.goals.map(encode),
-    ...(released&&bridge?{unoccupiedControls:scene.plates.map(encode)}:{})};
+    ...(bridge&&controlConstraints?controlConstraints:released&&bridge?{unoccupiedControls:scene.plates.map(encode)}:{})};
 }
 
 function relayPose(scene: Scene,h:History):RelayState|undefined {
@@ -989,13 +1052,13 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       const chain=learningRelay&&!h.seenChain?frontier.find(offer=>(offer.kind==='test_reachable_chain_composition'||offer.kind==='test_extended_chain_capacity')):undefined;
       const press=learningRelay&&!h.seenPlate?frontier.find(offer=>offer.kind==='test_reachable_pressure_composition'):undefined;
       const paired=scene.goals.length?pairedTransfer(scene,h,o):undefined;
-      const planned=releaseBlockedControl(scene,h)??chain??press??linkedTransport(scene,h,o)??paired??await relayOffer(scene,h,remaining,execution);
+      const planned=releaseBlockedControl(scene,h)??prepareRelayControls(scene,h,o)??chain??press??linkedTransport(scene,h,o)??paired??await relayOffer(scene,h,remaining,execution);
       const direct=planned?undefined:draft(scene,h,o);
       const offer=planned??(scene.goals.length&&direct&&direct.score>155?direct:frontier[0]??direct);
       if(!offer || remaining<1) return null;
       const roleEvidence=Object.values(h.roles[offer.ink]?.effects??{});
       const evidence=[...new Set([o.observation_ref,...observedDirections(h,offer.ink).map(d=>d.evidence),...Object.values(h.selections),...roleEvidence,
-        ...Object.values(h.releasedControls??{}),...(h.transfer?.triggerEvidence?[h.transfer.triggerEvidence]:[]),
+        ...Object.values(h.releasedControls??{}),...Object.values(h.controlTrials??{}).map(trial=>trial.evidence),...(h.transfer?.triggerEvidence?[h.transfer.triggerEvidence]:[]),
         ...(h.transfer?.gateReaction?[h.transfer.gateReaction]:[]),...(h.transfer?.support?[h.transfer.support.evidence]:[])])];
       const steps=offer.steps.slice(0,Math.min(remaining,16));
       const first=steps[0]!;
@@ -1056,8 +1119,13 @@ export function createObservedActorComposition(): NativeFamily<Proposal> {
       }
       if(reflector&&p.offer.test&&(observed.cell!==step.to||!after.tiles.get(reflector.to)?.mirror))h.guarded.push(p.offer.test);
       for(const cell of after.plates){
-        if(pressureHeld(after,cell)&&!pressureHeld(before,cell)&&!h.triedPlates?.includes(cell))
-          (h.triedPlates??=[]).push(cell);
+        if(!pressureHeld(after,cell)||pressureHeld(before,cell))continue;
+        if(!h.triedPlates?.includes(cell))(h.triedPlates??=[]).push(cell);
+        if(hasIndependentRelayControls(before,h)){
+          const opens=[...before.tiles].some(([gate,tile])=>tile.gate?.open===false&&tile.gate.accent===h.switches[cell]
+            && after.tiles.get(gate)?.gate?.open===true);
+          (h.controlTrials??={})[cell]={evidence:a.observation_ref,opens};
+        }
       }
       const foundation=step.loads?.support;
       if(foundation&&matchesSupport(after,h,a,foundation))h.supports[foundation]=tileKey(after.tiles.get(foundation));

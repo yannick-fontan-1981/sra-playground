@@ -208,6 +208,7 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   let board = await game.dispatch({type:'load',code:'SS06',level:1});
   let revision=0, firstSecondLevelOffer='', joint=false, chain=false, pressure=false, extension=false, sharedCircuit=false;
   let releases=0, missingProjectionChecked=false;
+  let heldGate=false, preparedFooting=false, rejectedMissingFooting=false;
   const show = async () => {
     let frame=board.frame.map(row=>[...row]);
     if(board.level===6&&presentation.alternateOccupant){
@@ -227,9 +228,9 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       levels_completed:board.levelsCompleted,state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'shifted-campaign')};
   };
-  while(board.level<=6 && revision<400){
+  while(board.level<=7 && revision<480){
     const {packet,observation}=await show();
-    const proposal=await family.propose(observation,packet.frame_rows,[],400-revision);
+    const proposal=await family.propose(observation,packet.frame_rows,[],480-revision);
     assert.ok(proposal,'Missing proposal after '+revision+' actions, level '+board.level);
     if(board.level===2) {
       if (!firstSecondLevelOffer) firstSecondLevelOffer=proposal.offer.kind;
@@ -246,13 +247,16 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
       sharedCircuit ||= proposal.offer.kind==='execute_joint_transport_through_observed_open_gates';
     }
-    if(board.level===6)assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
+    if(board.level>=6)assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
+    if(board.level===7)heldGate ||= proposal.offer.kind==='hold_relay_gate_with_observed_load';
     let issued=0;
     for(const [index,command] of proposal.actions.entries()){
       const first=await show();
       const binding=await family.before(proposal,index,first.packet,first.observation);
       if(!binding.admitted)break;
       const transfer=proposal.steps[index]!.controlTransfer;
+      const relay=proposal.steps[index]!.relay;
+      const newFooting=board.level===7?relay?.after.supports.find(cell=>!relay.before.supports.includes(cell)):undefined;
       if(transfer&&!missingProjectionChecked){
         const {shape,projectionInk}=family.state();
         const [x,y]=transfer.destination.split(',').map(Number);
@@ -276,6 +280,19 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       const second=await show();
       const result=await family.after(proposal,index,first.observation,second.observation,first.packet.frame_rows,second.packet.frame_rows);
       if(transfer&&result.matched)releases++;
+      if(newFooting!==undefined&&result.matched){
+        preparedFooting=true;
+        if(!rejectedMissingFooting){
+          const {pitch,phase}=family.state().shape!;
+          const left=phase[0]+(newFooting%64)*pitch,top=phase[1]+Math.floor(newFooting/64)*pitch;
+          const rows=second.packet.frame_rows.map(row=>[...row]);
+          for(let y=top;y<top+pitch;y++)for(let x=left;x<left+pitch;x++)rows[y]![x]=first.packet.frame_rows[y]![x]!;
+          const withoutFooting=await family.after(proposal,index,first.observation,second.observation,first.packet.frame_rows,rows);
+          assert.equal(withoutFooting.matched,false);
+          assert.equal(withoutFooting.seal_prefix,true);
+          rejectedMissingFooting=true;
+        }
+      }
       await family.record(first.observation,second.observation,command,first.packet.frame_rows,second.packet.frame_rows,proposal,index,[]);
       if(result.seal_prefix)break;
     }
@@ -283,9 +300,10 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   }
   assert.equal(firstSecondLevelOffer,'prepare_transfer_by_moving_reflector');
   assert.ok(joint);
-  assert.equal(board.levelsCompleted,6);
+  assert.equal(board.levelsCompleted,7);
   assert.equal(releases,2);
   assert.ok(missingProjectionChecked);
+  assert.ok(heldGate&&preparedFooting&&rejectedMissingFooting);
   assert.ok(chain&&pressure&&extension&&sharedCircuit);
 });
 
