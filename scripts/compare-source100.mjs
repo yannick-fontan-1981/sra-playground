@@ -265,8 +265,10 @@ async function run(code, games) {
       });
       const executionMs = performance.now() - began;
       issued++;
-      if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
-        console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));
+      const progressInterval = Number(process.env.SIC_STUDY_PROGRESS_EVERY ?? 100);
+      if (process.env.SIC_STUDY_PROGRESS === '1' && progressInterval > 0 && issued % progressInterval === 0)
+        console.log(JSON.stringify({ code, level: board.level, issued, state: board.state,
+          seconds: Math.round(process.uptime()) }));
       if (replayCommands)
         replayCommands.push({id:action.id, ...(plan?.contactFrontierForecast ? {contactFrontier:plan.contactFrontierForecast} : {}), ...(localSeal?{localCapacity,localSeal}:{}), ...(plan?.family ? {family:plan.family} : {}), ...(forecastSeal ? { forecastSeal } : {}), ...(frameSeal ? {frameSeal}:{}), ...(activationSeal?{activationSeal}:{}), ...(territorySeal?{territorySeal}:{}), ...(occupancySeal?{occupancySeal}:{}), ...(previewReadSeal?{previewReadSeal}:{}), ...(indicatorProbeSeal?{indicatorProbeSeal}:{}), ...(mechanismSeal?{mechanismSeal}:{}), ...(mobilitySeal?{mobilitySeal}:{}), ...(terminalContactSeal?{terminalContactSeal}:{}), ...(retainedSeal ? {retainedSeal}:{}), ...(transportSeal ? {transportSeal} : {}), ...(siteSeal ? {siteSeal,siteStepSeal:hash(plan.instrumentPosition??null)} : {}), ...(action.id === 6 ? { data:action.data } : {}),
           ...(plan?.compositionForecast?{composition:plan.compositionForecast}:{}),
