@@ -1,8 +1,9 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { inferCycleAfterTransient, type CycleEvidence } from './observed-cycle.ts';
 
 type Change = readonly [cell: number, ink: number];
-type Cycle = { phases: Change[][]; closed: boolean };
+type Cycle = { phases: Change[][]; closed: boolean; evidence?: CycleEvidence };
 type Pad = { cell: number; pixels: number[] };
 type Terrain = { origin: NativePoint; width: number; height: number; pitch: number; base: number[]; voids: number[] };
 export type PhaseControls = { pitch: number; actor: number; target: number };
@@ -105,18 +106,25 @@ function matchesPads(state: PhasedSupport, rows: NativeRows, actor: number) {
   });
 }
 
-export function observePhaseStep(state: PhasedSupport, step: PhaseStep, rows: NativeRows): PhasedSupport | null {
+export function observePhaseStep(state: PhasedSupport, step: PhaseStep, rows: NativeRows, maximumObservations = 12): PhasedSupport | null {
   const { terrain, actorInk } = state, next = step.next, observed = raster(rows, terrain);
   if (observed[next.cell] !== actorInk || observed.filter(ink => ink === actorInk).length !== 1 || !matchesPads(state, rows, next.cell)) return null;
   if ('control' in step && step.probing) {
     const changes = observed.flatMap<Change>((ink, cell) => cell !== next.cell && ink !== terrain.base[cell] ? [[cell, ink]] : []);
     const cycle = state.cycles[step.control]!;
-    if (!changes.length && cycle.phases.length === 1 || cycle.phases.length >= 12 && changes.length) return null;
+    if (!changes.length && cycle.phases.length === 1 || cycle.phases.length >= maximumObservations && changes.length) return null;
     const previous = new Set(state.cycles.flatMap((other, index) => index === step.control ? [] : other.phases.flat().map(([cell]) => cell)));
     if (changes.some(([cell]) => previous.has(cell))) return null;
-    const updated = changes.length ? { phases: [...cycle.phases, changes], closed: false } : { ...cycle, closed: true };
+    const samples = [...cycle.phases, changes];
+    const learned = changes.length ? inferCycleAfterTransient(samples, (left, right) =>
+      left.length === right.length && left.every(([cell, ink], i) => cell === right[i]![0] && ink === right[i]![1]), 0) : undefined;
+    const updated: Cycle = learned
+      ? { phases: learned.phases, closed: true, evidence: { start: learned.start, witnesses: learned.witnesses } }
+      : changes.length ? { phases: samples, closed: false } : { ...cycle, closed: true };
     const cycles = state.cycles.map((other, index) => index === step.control ? updated : other);
-    return { ...state, cycles };
+    const position = learned ? { ...next, phases: next.phases.map((phase, index) => index === step.control
+      ? (samples.length - 1 - learned.start) % learned.phases.length : phase) } : state.position;
+    return { ...state, cycles, position };
   }
   const expected = projected(state, next);
   if (observed.some((ink, cell) => cell !== next.cell && ink !== expected[cell])) return null;

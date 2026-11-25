@@ -32,3 +32,16 @@ La file SQLite et le rapport JSON sont écrits dans `artifacts/sic-transfer-camp
 Les 800 premiers cas composent des portes périodiques en série, des délais de déplacement, des états de support partiellement accessibles, des contraintes de commande et des phases perturbées. Les scénarios déterminent le résultat physique avec un simulateur de test. SIC mesure ses phases sur les images rendues et exécute les planificateurs de production à partir d'une scène initiale reconnue. Les cas incluent des contrôles stationnaires, des retours contradictoires et des historiques trop courts. Sur le support commandé, un obstacle renvoie le plateau inchangé pour permettre au planificateur de réviser le trajet.
 
 Le banc regroupe les échecs par premier stade observable et garde pour chaque groupe un cas représentatif de faible complexité. S'il rencontre au moins trois échecs de mesure après un transitoire long dans chacune de deux stratégies, il sélectionne la variante qui étend la fenêtre d'observation de trois à six échantillons. Il la compare à la politique courante sur les 200 situations du second lot, générées avec une autre graine. Le seuil de preuve reste de trois témoins par phase. Le rapport indique les gains attribués à cette preuve, les cas précédemment résolus qui régressent, les admissions sur les cas qui appellent une abstention et les nouvelles erreurs pendant l'exécution. Une qualification pilote exige des gains prouvés dans plusieurs stratégies et zéro nouvelle régression sur ces contrôles. La politique expérimentale reste dans le banc. L'ajout de nouvelles stratégies, de jeux réservés et de nouvelles familles de candidates prolonge ce mécanisme de sélection.
+
+## Induction sur quatre stratégies
+
+```powershell
+npm run test:sic-campaign -- --induce --count 10000
+npm run test:sic-transfer-levels
+```
+
+Le mode induction ajoute les supports à phases et le trajet à l'abri d'un éclairage périodique aux deux consommateurs initiaux. Il alloue 6 000 comparaisons à la découverte, 2 000 à l'épreuve de la première règle et 2 000 à la validation de la règle figée. Ces lots ont des graines distinctes et des signatures de mécaniques disjointes.
+
+Lors d'un échec, le banc réduit les observations de phase à une suite de symboles d'égalité et de positions masquées. Il construit les hypothèses de suffixes périodiques à partir de ces suites. Chaque phase doit être vérifiée après avoir été observée deux fois. Si des hypothèses compatibles prédisent des suites différentes, la règle s'abstient. L'induction énumère des conditions sur des grandeurs observables avec les valeurs rencontrées dans les traces. Elle retient des conjonctions qui réduisent les admissions sur les contre-exemples et couvrent plusieurs stratégies. Le rapport conserve ces conditions et les identifiants des exemples qui les étayent. L'espace de recherche reste borné aux relations temporelles et aux preuves de phase.
+
+Le rejeu des niveaux réels charge seulement la règle figée issue de la validation. Il teste les L1 de SS08 à SS19 en mode SIC seul avec les mêmes départs et budgets, en comparant l'empreinte du premier plateau. Il enregistre les victoires, les commandes exécutées et les preuves produites par la règle. Les rapports et la file restent sous `artifacts`.

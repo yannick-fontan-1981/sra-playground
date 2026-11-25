@@ -1,6 +1,6 @@
 import { createHash } from 'node:crypto';
 
-const consumers = ['clocked-arrival', 'switched-support'];
+const consumers = ['clocked-arrival', 'switched-support', 'relay-supports', 'timed-light-route'];
 const discoveryIntents = ['transfer', 'transfer', 'transfer', 'transfer', 'late-onset', 'contradiction', 'insufficient', 'control'];
 const probeIntents = ['late-onset', 'late-onset', 'late-onset', 'late-onset', 'late-onset', 'contradiction', 'insufficient', 'control'];
 
@@ -35,7 +35,8 @@ function createClock(random, startup, forcePeriod) {
 
 function clockSituation(random, intent, stage) {
   const late = intent === 'late-onset' || (stage === 'probe' && intent === 'contradiction');
-  const startup = intent === 'control' ? 0 : late ? 4 + random(3) : 1 + random(3);
+  const lateChoices = stage.startsWith('induction') ? 6 : 3;
+  const startup = intent === 'control' ? 0 : late ? 4 + random(lateChoices) : 1 + random(3);
   const small = intent === 'insufficient';
   const distance = small ? 8 + random(2) : 25 + random(5);
   const admission = 7 + random(2);
@@ -48,7 +49,8 @@ function clockSituation(random, intent, stage) {
 
 function supportSituation(random, intent, stage) {
   const late = intent === 'late-onset' || (stage === 'probe' && intent === 'contradiction');
-  const startupLength = intent === 'control' ? 0 : late ? 4 + random(3) : 1 + random(3);
+  const lateChoices = stage.startsWith('induction') ? 6 : 3;
+  const startupLength = intent === 'control' ? 0 : late ? 4 + random(lateChoices) : 1 + random(3);
   const span = 2 + random(2), all = (1 << span) - 1;
   const phases = periodicPattern(random, 2 + random(5), all);
   const startup = Array.from({ length: startupLength }, () => 1 + random(all));
@@ -62,19 +64,31 @@ function semanticKey(spec) {
     const { strategy, distance, gates, delays, disturbance } = spec;
     return JSON.stringify([strategy, distance, gates, delays, disturbance]);
   }
-  const { strategy, intent, span, phases, startup, disturbance, controlAccess } = spec;
-  return JSON.stringify([strategy, span, phases, startup, disturbance, controlAccess, intent === 'insufficient']);
+  const { strategy, intent, span, phases, startup, disturbance, controlAccess, distance, offset } = spec;
+  return JSON.stringify([strategy, span, phases, startup, disturbance, strategy === 'switched-support' ? controlAccess : null, distance, offset, intent === 'insufficient']);
 }
 
 export function generateSituations(count, seed, stage, existing = new Set()) {
   const random = randomFrom(seed);
-  const intents = stage === 'probe' ? probeIntents : discoveryIntents;
+  const induction = stage.startsWith('induction');
+  const intents = stage === 'probe' || stage === 'induction-validation' ? probeIntents
+    : induction ? ['late-onset', 'late-onset', 'transfer', 'contradiction', 'control', 'insufficient', 'late-onset', 'transfer']
+    : discoveryIntents;
+  const width = induction ? consumers.length : 2;
   const situations = [];
   for (let attempt = 0; situations.length < count; attempt++) {
     if (attempt >= count * 120) throw new Error('The generator exhausted this campaign');
     const i = situations.length;
-    const intent = intents[Math.floor(i / 2) % intents.length];
-    const spec = i % 2 === 0 ? clockSituation(random, intent, stage) : supportSituation(random, intent, stage);
+    const intent = intents[Math.floor(i / width) % intents.length];
+    const strategy = consumers[i % width];
+    const spec = strategy === consumers[0] ? clockSituation(random, intent, stage) : supportSituation(random, intent, stage);
+    spec.strategy = strategy;
+    if (strategy === 'relay-supports' && spec.startup.length) spec.startup[0] = 0;
+    if (strategy === 'timed-light-route') {
+      spec.distance = 16 + random(8);
+      spec.offset = 4 + random(3);
+      if (intent === 'contradiction') spec.disturbance = spec.startup.length + 3 * spec.phases.length - 1;
+    }
     const key = createHash('sha256').update(semanticKey(spec)).digest('hex');
     if (existing.has(key)) continue;
     existing.add(key);

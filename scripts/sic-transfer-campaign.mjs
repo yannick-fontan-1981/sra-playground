@@ -9,6 +9,7 @@ import { Worker } from 'node:worker_threads';
 import { chooseProbe, summarize } from './sic-transfer-evidence.mjs';
 import { generateSituations } from './sic-transfer-generator.mjs';
 import { openQueue } from './sic-transfer-queue.mjs';
+import { induceAbstraction } from './sic-transfer-induction.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const workerFile = new URL('./sic-transfer-worker.mjs', import.meta.url);
@@ -103,51 +104,74 @@ function integer(value, name, min, max) {
 const inputs = [
   'scripts/sic-transfer-campaign.mjs', 'scripts/sic-transfer-queue.mjs', 'scripts/sic-transfer-evidence.mjs',
   'scripts/sic-transfer-generator.mjs', 'scripts/sic-transfer-generated-engines.mjs', 'scripts/sic-transfer-worker.mjs',
-  'scripts/sic-transfer-profiles.mjs', 'src/sic/observed-cycle.ts',
+  'scripts/sic-transfer-profiles.mjs', 'scripts/sic-transfer-induction.mjs', 'scripts/sic-transfer-rule.mjs',
+  'scripts/sic-transfer-additional-engines.mjs', 'src/sic/observed-cycle.ts', 'src/sic/phased-support-route.ts',
+  'src/sic/lit-route-timing.ts',
   'src/sic/shared-arrival-timing.ts', 'src/sic/carried-support-route.ts',
 ];
 const { values } = parseArgs({ options: {
   count: { type: 'string', default: '1000' }, workers: { type: 'string', default: '4' },
-  state: { type: 'string', default: join(root, 'artifacts', 'sic-transfer-campaign') },
+  state: { type: 'string' },
+  induce: { type: 'boolean', default: false },
   seed: { type: 'string', default: '8026' },
 } });
 const total = integer(values.count, 'count', 32, 100_000);
 const lanes = integer(values.workers, 'workers', 1, 16);
 const seed = integer(values.seed, 'seed', 1, 2 ** 31 - 1);
-const directory = resolve(values.state);
+const induction = values.induce;
+const directory = resolve(values.state ?? join(root, 'artifacts', induction ? 'sic-transfer-induction' : 'sic-transfer-campaign'));
 const revision = spawnSync('git', ['rev-parse', 'HEAD'], { cwd: root, encoding: 'utf8' }).stdout?.trim() || null;
 const fingerprint = inputs.reduce((hash, file) => hash.update(readFileSync(join(root, file))),
   createHash('sha256').update(revision ?? ''),).digest('hex');
-const configuration = { total, seed, fingerprint, revision };
-const discoveryCount = Math.floor(total * 0.8 / 2) * 2;
-const probeCount = total - discoveryCount;
+const configuration = { total, seed, fingerprint, revision, induction };
+const discoveryCount = induction ? Math.floor(total * 0.6 / 4) * 4 : Math.floor(total * 0.8 / 2) * 2;
+const calibrationCount = induction ? Math.floor(total * 0.2 / 4) * 4 : 0;
+const probeCount = total - discoveryCount - calibrationCount;
 
 mkdirSync(directory, { recursive: true });
 const queue = openQueue(join(directory, 'queue.sqlite'), configuration);
 const start = Date.now();
 try {
-  const discoveryPlan = queue.seed('discovery', used => generateSituations(discoveryCount, seed, 'discovery', used),
-    { baseline: 'disabled', candidate: 'production' });
-  console.log(JSON.stringify({ stage: 'discovery', pending: queue.pending('discovery'), total: discoveryCount, lanes }));
-  await executeStage(queue, 'discovery', discoveryPlan, lanes, discoveryCount);
-  const discovery = summarize(queue.results('discovery'), discoveryPlan);
-  const proposed = chooseProbe(discovery);
-  const probePlan = queue.seed('probe', used => generateSituations(probeCount, seed ^ 0x51f15e, 'probe', used), proposed);
-  console.log(JSON.stringify({ stage: 'probe', ...probePlan, pending: queue.pending('probe'), total: probeCount, lanes }));
-  await executeStage(queue, 'probe', probePlan, lanes, probeCount);
-  const probe = summarize(queue.results('probe'), probePlan);
-  if (discovery.comparisons + probe.comparisons !== total) throw new Error('Campaign completed with a comparison missing');
+  async function run(stage, count, proposed, multiplier) {
+    const generator = induction ? 'induction-' + stage : stage;
+    const plan = queue.seed(stage, used => generateSituations(count, seed ^ multiplier, generator, used), proposed);
+    console.log(JSON.stringify({ stage, pending: queue.pending(stage), total: count, lanes,
+      ...(plan.rule ? { conditions: plan.rule.conditions, training: plan.rule.fit } : {}),
+      ...(plan.target ? { target: plan.target, reason: plan.reason } : {}),
+    }));
+    await executeStage(queue, stage, plan, lanes, count);
+    const rows = queue.results(stage);
+    return { rows, summary: summarize(rows, plan) };
+  }
+  const traced = { mode: 'trace' };
+  const discovery = await run('discovery', discoveryCount,
+    { baseline: 'disabled', candidate: induction ? traced : 'production' }, 0);
+  let calibration, probe;
+  if (induction) {
+    const first = induceAbstraction(discovery.rows);
+    calibration = await run('calibration', calibrationCount,
+      { baseline: traced, candidate: { mode: 'induced', rule: first }, rule: first }, 0x51f15e);
+    const refined = induceAbstraction([...discovery.rows, ...calibration.rows]);
+    probe = await run('validation', probeCount,
+      { baseline: traced, candidate: { mode: 'induced', rule: refined }, rule: refined }, 0x39afd1);
+  } else {
+    probe = await run('probe', probeCount, chooseProbe(discovery.summary), 0x51f15e);
+  }
+  if (discovery.rows.length + (calibration?.rows.length ?? 0) + probe.rows.length !== total) {
+    throw new Error('Campaign completed with a comparison missing');
+  }
   const elapsedSeconds = Math.round((Date.now() - start) / 100) / 10;
   const report = { configuration, pairedComparisons: total, strategyExecutions: total * 2,
-    latestRunSeconds: elapsedSeconds, discovery, probe };
+    latestRunSeconds: elapsedSeconds, discovery: discovery.summary,
+    ...(calibration ? { calibration: calibration.summary } : {}), probe: probe.summary };
   const destination = join(directory, 'report.json');
   const temporary = join(directory, 'report-' + process.pid + '.tmp');
   writeFileSync(temporary, JSON.stringify(report, null, 2) + '\n');
   renameSync(temporary, destination);
   console.log(JSON.stringify({
     paired: total, executions: total * 2, elapsedSeconds,
-    discovery: { supported: discovery.supported, qualified: discovery.qualified },
-    probe: { supported: probe.supported, qualified: probe.qualified }, report: destination,
+    discovery: { supported: discovery.summary.supported, qualified: discovery.summary.qualified },
+    probe: { supported: probe.summary.supported, qualified: probe.summary.qualified }, report: destination,
   }));
 } finally {
   queue.close();

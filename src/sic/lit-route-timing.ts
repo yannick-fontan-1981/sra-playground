@@ -1,4 +1,5 @@
 import type { NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { inferCycleAfterTransient, type CycleEvidence } from './observed-cycle.ts';
 
 export type LightTiming = {
   samples: string[];
@@ -6,6 +7,7 @@ export type LightTiming = {
   period: number;
   waitTicks: number;
   stopped: boolean;
+  evidence?: CycleEvidence;
 };
 export type LightRoute = { point: NativePoint; route: NativePoint[] };
 type TimedStep = LightRoute & { wait?: true };
@@ -52,6 +54,14 @@ export function collectLightTiming(timing: LightTiming | null, before: NativeRow
   for (let length = 2; length + confirmation <= samples.length; length++) {
     if (samples[length] !== origin || !samples.slice(0, length).some(mask => mask !== origin)) continue;
     if (samples.every((mask, i) => i < length || mask === samples[i - length])) { period = length; break; }
+  }
+  if (!period) {
+    const learned = inferCycleAfterTransient(samples, Object.is, 0);
+    if (learned) {
+      const { start, phases, witnesses } = learned;
+      return { samples: phases, elapsed: samples.length - 1 - start, period: phases.length,
+        waitTicks: ticks, stopped: false, evidence: { start, witnesses } };
+    }
   }
   return { samples: period ? samples.slice(0, period) : samples, elapsed: samples.length - 1,
     period, waitTicks: ticks, stopped: !period && samples.length >= 320 };
