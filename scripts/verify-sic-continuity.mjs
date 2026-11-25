@@ -638,6 +638,42 @@ function measureBridgeToReflector(issued) {
     .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
+function measureWeightedPlatformCrossing(issued) {
+  const world=compileActorLevel(SS06_LEVELS[7]);
+  const anchor=world.circuits.find(circuit=>world.platforms.filter(mark=>mark.circuit===circuit.id).every(mark=>mark.activeWhen==='pressed'));
+  const alternating=world.circuits.find(circuit=>new Set(world.platforms.filter(mark=>mark.circuit===circuit.id).map(mark=>mark.activeWhen)).size>1);
+  assert.ok(anchor&&alternating);
+  assert.ok(issued.every(ticket=>ticket.actorPlan&&ticket.actorPlan.strategy!=='calibrate_actor_action'
+    &&ticket.actorPlan.strategy!=='verify_transfer_of_control'),'SS06 L8 must reuse a known role after the roster shrinks');
+  let state=initialActorState(world), pressureTransfer, mirrorInSeries, firstToggle, secondToggle, platformWalk;
+  for(const [index,ticket] of issued.entries()){
+    const order=index+1, {state:after,phases}=stepActorWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    const reflected=phases.filter(phase=>phase.kind==='reflect').flatMap(phase=>phase.moves).filter(move=>move.actor==='stone');
+    if(world.buttons.every(button=>reflected.some(move=>equal(move.to,button)))){
+      assert.equal(ticket.actorPlan.strategy,'reflect_loads_onto_linked_controls');
+      assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)),'Use the witnessed reflection trigger');
+      pressureTransfer??=order;
+    }
+    if(pressureTransfer){
+      assert.ok(anchor.buttons.every(button=>after.stones.some(stone=>equal(stone,button))),
+        'Keep the permanent bridge load in place throughout alternating transfers');
+      if(ticket.actionIndex>0&&phases.some(phase=>phase.kind==='push'&&phase.moves.some(move=>move.actor==='mirror')))
+        mirrorInSeries??=order;
+      const before=actorCircuitPressed(world,state,alternating.id), pressed=actorCircuitPressed(world,after,alternating.id);
+      if(reflected.length&&before&&!pressed)firstToggle??=order;
+      if(reflected.length&&!before&&pressed&&firstToggle)secondToggle??=order;
+      if(phases.some(phase=>phase.kind==='walk'&&phase.moves.some(move=>world.platforms.some(mark=>equal(move.to,mark.at)))))
+        platformWalk??=order;
+    }
+    state=after;
+  }
+  assert.ok(pressureTransfer&&mirrorInSeries&&platformWalk&&firstToggle&&secondToggle&&state.complete,
+    'SS06 L8 must compose loading two controls, guarding one while alternating the other, and traverse the platforms');
+  return [[pressureTransfer,'reflect both loads onto controls'],[mirrorInSeries,'push the ray blocker in series'],
+    [platformWalk,'cross the observed platforms'],[firstToggle,'unload the alternating control'],[secondToggle,'load it again']]
+    .map(([action,kind])=>({kind,first:action,last:action}));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -646,7 +682,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 7 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -761,14 +797,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === issued[0].resets), 'SS05 reset during a carry route');
     }
     if (code === 'SS06') {
-      const cap=[45,42,115,55,65,65,90][row.level-1];
+      const cap=[45,42,115,55,65,65,90,90][row.level-1];
       assert.ok(issued.length <= cap && continued >= 15, 'SS06 lost its guarded multi-actor routes');
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
-      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector][row.level-1](issued) : [];
+      : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -801,7 +837,7 @@ function main() {
       ['la-ruse-verte', 'SS03', '8', '240'],
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
-      ['actor-composition', 'SS06', '7', '125'],
+      ['actor-composition', 'SS06', '8', '125'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

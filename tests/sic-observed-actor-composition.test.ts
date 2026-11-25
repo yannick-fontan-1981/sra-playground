@@ -10,7 +10,7 @@ const same = (a: Point,b: Point) => a[0]===b[0] && a[1]===b[1];
 const add = (a: Point,b: Point): Point => [a[0]+b[0],a[1]+b[1]];
 
 function habitat(pitch: number, inks: readonly [number,number], commands: readonly [string,Point][],
-  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point; loadPositions?: readonly Point[] } = {}) {
+  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point; loadPositions?: readonly Point[]; idleSolo?:boolean } = {}) {
   const span = 12, alignment = 1, floor = 2, background = 3, cargoInk = 5, inset = 6;
   const marker = 7, destination = 8;
   const actorOrigins: Point[] = [[2,3],[2,7]];
@@ -18,6 +18,7 @@ function habitat(pitch: number, inks: readonly [number,number], commands: readon
   const cargoOrigins: Point[] = [[4,3],[4,7]];
   const cargo=(options.loadPositions??cargoOrigins).map(p=>add(p,options.offset??[0,0]));
   let active = 0, facing: Point = [0,-1], revision = 0;
+  let present=new Set([0,1]);
   const contactCommand=commands.find(([name])=>name==='ACTION5') && !commands.find(([name])=>name==='ACTION4') ? 'ACTION4' : 'ACTION5';
   const available = [...commands.map(([name])=>name),contactCommand,'ACTION6'];
   const floorAt = ([x,y]:Point)=>x>=1&&x<=8&&y>=1&&y<=9;
@@ -34,16 +35,17 @@ function habitat(pitch: number, inks: readonly [number,number], commands: readon
     if(options.pressure)tile(options.pressure,(x,y)=>x===middle&&y===middle?marker:x===middle||y===middle?12:floor);
     for(const p of cargo)tile(p,(x,y)=>x===middle&&y===middle?inset:cargoInk);
     for(const [i,p] of actors.entries()){
+      if(!present.has(i))continue;
       tile(p,(x,y)=>{
         if(x!==middle&&y!==middle)return floor;
-        if(i===active&&x===middle+facing[0]*middle&&y===middle+facing[1]*middle)return marker;
+        if(i===active&&!(options.idleSolo&&present.size===1)&&x===middle+facing[0]*middle&&y===middle+facing[1]*middle)return marker;
         return inks[i]!;
       });
     }
     if(options.duplicatePeer)tile([6,6],(x,y)=>x===middle||y===middle?inks[1]:floor);
     const level=options.level??1;
     const packet={frame_rows:rows, frame_hash:await publicFrameHash(rows), level, levels_completed:level-1,
-      state:'NOT_FINISHED',available_action_refs:available};
+      state:'NOT_FINISHED',available_action_refs:present.size===1?available.filter(action=>action!=='ACTION6'):available};
     return {packet, observation:await measureNativeObservation(packet,revision,'actor-fixture')};
   };
   const perform=(action: {action_ref:string;data:Readonly<Record<string,number>>})=>{
@@ -52,7 +54,7 @@ function habitat(pitch: number, inks: readonly [number,number], commands: readon
     if(action_ref==='ACTION6'){
       const address:Point=[Math.floor((data.x!-alignment)/pitch),Math.floor((data.y!-alignment)/pitch)];
       const index=actors.findIndex(p=>same(p,address));
-      if(index>=0&&!options.rejectSelection)active=index;
+      if(index>=0&&present.has(index)&&!options.rejectSelection)active=index;
       return;
     }
     const origin=actors[active]!;
@@ -70,7 +72,7 @@ function habitat(pitch: number, inks: readonly [number,number], commands: readon
     }
     facing=dir;
     const dest=add(origin,dir);
-    if(!floorAt(dest)||actors.some(p=>same(p,dest)))return;
+    if(!floorAt(dest)||actors.some((p,i)=>present.has(i)&&same(p,dest)))return;
     const load=cargo.findIndex(p=>same(p,dest));
     if(load>=0){
       const landing=add(dest,dir);
@@ -83,7 +85,11 @@ function habitat(pitch: number, inks: readonly [number,number], commands: readon
     }
     actors[active]=dest;
   };
-  return { observed, perform };
+  return { observed, perform, setRoster(indices:number[]) {
+    present=new Set(indices);
+    if(!present.has(active))active=indices[0]!;
+    revision++;
+  } };
 }
 
 async function study(game: ReturnType<typeof habitat>, secondInk: number, limit=55) {
@@ -197,6 +203,47 @@ test('rebinds verified roles after the same motifs change positions on the next 
   const returned=await next.observed();
   assert.notEqual((await family.after(proposal,0,observation,returned.observation,packet.frame_rows,returned.packet.frame_rows)).matched,false);
 });
+for(const fixture of [{pitch:3,inks:[9,10] as const,motors:directions},
+  {pitch:5,inks:[11,9] as const,motors:permuted}])test('a role can disappear and return with pitch '+fixture.pitch,async()=>{
+  const {pitch,inks,motors}=fixture;
+  const prior=await study(habitat(pitch,inks,motors,'activation'),inks[1]);
+  const returnedEvidence=Object.values(prior.state.transfer!.roles[String(inks[1])]!.effects);
+  assert.ok(returnedEvidence.length);
+  const board=habitat(pitch,inks,motors,'activation',{level:2,offset:[1,-1],idleSolo:pitch===5});
+  const family=createObservedActorComposition();
+  family.restore(prior.state);
+  board.setRoster([0]);
+  const first=await board.observed();
+  const plan=await family.propose(first.observation,first.packet.frame_rows,[],25);
+  assert.ok(plan&&plan.offer.kind!=='calibrate_actor_action');
+  assert.equal((await family.before(plan,0,first.packet,first.observation)).admitted,true);
+  assert.deepEqual(family.state().shape?.inks,[inks[0]]);
+  assert.ok(family.state().roles[inks[0]]?.capacity);
+  assert.deepEqual(Object.values(family.state().transfer!.roles[String(inks[1])]!.effects),returnedEvidence);
+  board.perform(plan.actions[0]!);
+  const moved=await board.observed();
+  assert.equal((await family.after(plan,0,first.observation,moved.observation,first.packet.frame_rows,moved.packet.frame_rows)).matched,true);
+  board.setRoster([0,1]);
+  const reunited=await board.observed();
+  await family.propose(reunited.observation,reunited.packet.frame_rows,[],25);
+  assert.equal(family.state().shape?.inks.length,2);
+  assert.deepEqual(Object.values(family.state().roles[inks[1]]!.effects),returnedEvidence);
+  board.setRoster([1]);
+  const remaining=await board.observed();
+  await family.propose(remaining.observation,remaining.packet.frame_rows,[],25);
+  assert.deepEqual(family.state().shape?.inks,[inks[1]]);
+  assert.ok(family.state().transfer!.roles[String(inks[0])]?.capacity);
+  const replacement=await habitat(pitch,[inks[0],15],motors,'activation',{level:3,offset:[1,-1]}).observed();
+  await family.propose(replacement.observation,replacement.packet.frame_rows,[],25);
+  assert.ok(family.state().roles[inks[0]]?.capacity);
+  assert.ok(!family.state().roles[15]?.contact);
+  assert.deepEqual(Object.values(family.state().transfer!.roles[String(inks[1])]!.effects),returnedEvidence);
+  const ambiguous=habitat(pitch,inks,motors,'activation',{level:4,duplicatePeer:true});
+  ambiguous.setRoster([1]);
+  const duplicate=await ambiguous.observed();
+  assert.equal(await family.propose(duplicate.observation,duplicate.packet.frame_rows,[],25),null);
+});
+
 const mirroredPresentations = [
   {name:'horizontal reflection, new colors and reordered inputs', flipX:true, flipY:false, colors:3, inputs:[3,5,2,1,4], alternateOccupant:false},
   {name:'vertical reflection, a changed occupant motif and a different interaction command', flipX:false, flipY:true, colors:7, inputs:[5,2,4,3,1], alternateOccupant:true},
@@ -209,6 +256,7 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   let revision=0, firstSecondLevelOffer='', joint=false, chain=false, pressure=false, extension=false, sharedCircuit=false;
   let releases=0, missingProjectionChecked=false;
   let heldGate=false, preparedFooting=false, rejectedMissingFooting=false;
+  let loadedBoth=false, withheldWithoutPreview=false;
   const show = async () => {
     let frame=board.frame.map(row=>[...row]);
     if(board.level===6&&presentation.alternateOccupant){
@@ -228,9 +276,9 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       levels_completed:board.levelsCompleted,state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'shifted-campaign')};
   };
-  while(board.level<=7 && revision<480){
+  while(board.state!=='WIN' && board.level<=8 && revision<600){
     const {packet,observation}=await show();
-    const proposal=await family.propose(observation,packet.frame_rows,[],480-revision);
+    const proposal=await family.propose(observation,packet.frame_rows,[],600-revision);
     assert.ok(proposal,'Missing proposal after '+revision+' actions, level '+board.level);
     if(board.level===2) {
       if (!firstSecondLevelOffer) firstSecondLevelOffer=proposal.offer.kind;
@@ -249,6 +297,10 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
     }
     if(board.level>=6)assert.notEqual(proposal.offer.kind,'calibrate_actor_action');
     if(board.level===7)heldGate ||= proposal.offer.kind==='hold_relay_gate_with_observed_load';
+    if(board.level===8){
+      assert.equal(family.state().shape?.inks.length,1);
+      assert.equal(Object.keys(family.state().transfer!.roles).length,2);
+    }
     let issued=0;
     for(const [index,command] of proposal.actions.entries()){
       const first=await show();
@@ -256,6 +308,20 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       if(!binding.admitted)break;
       const transfer=proposal.steps[index]!.controlTransfer;
       const relay=proposal.steps[index]!.relay;
+      const platform=proposal.steps[index]!.platform;
+      const loadedControls=platform?.projected.filter(cell=>platform.after.loads.includes(cell)
+        &&family.state().platformField?.platforms.some(mark=>mark.control===cell))??[];
+      if(loadedControls.length>1&&!withheldWithoutPreview){
+        const {shape,projectionInk}=family.state(), position=loadedControls[0]!;
+        const left=shape!.phase[0]+(position%64)*shape!.pitch, top=shape!.phase[1]+Math.floor(position/64)*shape!.pitch;
+        const rows=first.packet.frame_rows.map(row=>[...row]);
+        for(let y=top;y<top+shape!.pitch;y++)for(let x=left;x<left+shape!.pitch;x++){
+          if(rows[y]![x]===projectionInk)rows[y]![x]=shape!.floor;
+        }
+        const withoutPreview={...first.packet,frame_rows:rows,frame_hash:await publicFrameHash(rows)};
+        assert.equal((await family.before(proposal,index,withoutPreview,first.observation)).admitted,false);
+        withheldWithoutPreview=true;
+      }
       const newFooting=board.level===7?relay?.after.supports.find(cell=>!relay.before.supports.includes(cell)):undefined;
       if(transfer&&!missingProjectionChecked){
         const {shape,projectionInk}=family.state();
@@ -280,6 +346,7 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
       const second=await show();
       const result=await family.after(proposal,index,first.observation,second.observation,first.packet.frame_rows,second.packet.frame_rows);
       if(transfer&&result.matched)releases++;
+      if(loadedControls.length>1&&result.matched)loadedBoth=true;
       if(newFooting!==undefined&&result.matched){
         preparedFooting=true;
         if(!rejectedMissingFooting){
@@ -300,10 +367,11 @@ for (const presentation of mirroredPresentations) test('reuses both roles for a 
   }
   assert.equal(firstSecondLevelOffer,'prepare_transfer_by_moving_reflector');
   assert.ok(joint);
-  assert.equal(board.levelsCompleted,7);
+  assert.equal(board.levelsCompleted,8);
   assert.equal(releases,2);
   assert.ok(missingProjectionChecked);
   assert.ok(heldGate&&preparedFooting&&rejectedMissingFooting);
+  assert.ok(loadedBoth&&withheldWithoutPreview);
   assert.ok(chain&&pressure&&extension&&sharedCircuit);
 });
 
