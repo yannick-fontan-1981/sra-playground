@@ -1,7 +1,8 @@
 import { spawn } from 'node:child_process';
 import { closeSync, existsSync, mkdirSync, openSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
+import { setTimeout as pause } from 'node:timers/promises';
 import { parseArgs } from 'node:util';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
@@ -12,6 +13,7 @@ const { values } = parseArgs({ options: {
   workers: { type: 'string', default: '6' },
   budget: { type: 'string', default: '180' },
   deadline: { type: 'string', default: '240' },
+  'reference-state': { type: 'string' },
 } });
 
 function ranged(value, min, max, name) {
@@ -39,10 +41,23 @@ if (existsSync(configFile) && JSON.stringify(JSON.parse(readFileSync(configFile,
 }
 writeFileSync(configFile, JSON.stringify(configuration, null, 2) + '\n');
 
+const reuse = values['reference-state'] ? resolve(values['reference-state']) : null;
+if (reuse) {
+  if (reuse === directory) throw new Error('Use separate state directories when reusing reference replays');
+  const reference = JSON.parse(readFileSync(join(reuse, 'configuration.json'), 'utf8'));
+  for (const key of ['revision', 'budget', 'deadline', 'mode', 'level']) {
+    if (reference[key] !== configuration[key]) throw new Error('Different reference configuration for ' + key);
+  }
+  if (!games.every(game => reference.games.includes(game))) throw new Error('A requested reference game is missing');
+}
+
 function runGame(code, arm) {
   const prefix = join(directory, code + '-' + arm);
   const resultFile = prefix + '.jsonl', usageFile = prefix + '-usage.json', checkpoint = prefix + '-result.json';
-  if (existsSync(checkpoint)) return Promise.resolve(JSON.parse(readFileSync(checkpoint, 'utf8')));
+  if (existsSync(checkpoint)) {
+    const saved = JSON.parse(readFileSync(checkpoint, 'utf8'));
+    if (saved.status !== 'error') return Promise.resolve(saved);
+  }
   writeFileSync(resultFile, '');
   const ambient = Object.fromEntries(Object.entries(process.env).filter(([key]) => !key.startsWith('SIC_STUDY_')));
   const env = { ...ambient, SIC_STUDY_SOLVER: 'sic', SIC_STUDY_WORKERS: '1', SIC_STUDY_PROGRESS: '1' };
@@ -50,7 +65,7 @@ function runGame(code, arm) {
   if (arm === 'induced') {
     env.SIC_TRANSFER_RULE_REPORT = reportPath;
     env.SIC_TRANSFER_RULE_USAGE = usageFile;
-    args.push('--import', join(root, 'scripts/sic-transfer-level-profile.mjs'));
+    args.push('--import', pathToFileURL(join(root, 'scripts/sic-transfer-level-profile.mjs')).href);
   }
   args.push(join(root, 'scripts/compare-source100.mjs'), root, root, resultFile, code, '1', '1', String(budget));
   const descriptor = openSync(prefix + '.log', 'w');
@@ -71,7 +86,7 @@ function runGame(code, arm) {
         const valid = status === 0 && data?.solver === 'sic' && data.sic === data.issued && level?.level === 1 && data.initialCompleted === 0;
         result = { code, arm, status: valid ? 'completed' : expired ? 'timeout' : 'error',
           won: valid ? level.won : null, actions: valid ? level.actions : null,
-          state: valid ? level.state : null, initial: valid ? data.initial : null, reason: valid ? level.reason : error ?? data?.error ?? null,
+          state: valid ? level.state : null, initial: valid ? data.initial : null, reason: valid ? level.reason : error ?? data?.error ?? null, log: prefix + '.log',
           usage: arm === 'induced' && !expired && existsSync(usageFile) ? JSON.parse(readFileSync(usageFile, 'utf8')) : null,
           seconds: Math.round((performance.now() - start) / 100) / 10 };
       } catch (issue) {
@@ -84,7 +99,24 @@ function runGame(code, arm) {
   });
 }
 
-const pending = games.flatMap(code => [{ code, arm: 'reference' }, { code, arm: 'induced' }]);
+async function retrieveReference(code) {
+  const file = join(reuse, code + '-reference-result.json');
+  const until = Date.now() + (deadline * Math.ceil(games.length / workers) + 60) * 1000;
+  while (Date.now() < until) {
+    if (existsSync(file)) {
+      try {
+        return JSON.parse(readFileSync(file, 'utf8'));
+      } catch (error) {
+        if (!(error instanceof SyntaxError)) throw error;
+      }
+    }
+    await pause(500);
+  }
+  return { code, arm: 'reference', status: 'error', won: null, actions: null, reason: 'Reference checkpoint unavailable' };
+}
+
+const pending = games.flatMap(code => reuse ? [{ code, arm: 'induced' }] : [{ code, arm: 'reference' }, { code, arm: 'induced' }]);
+const references = reuse ? Promise.all(games.map(retrieveReference)) : Promise.resolve([]);
 const results = [];
 async function lane() {
   while (pending.length) {
@@ -93,6 +125,7 @@ async function lane() {
   }
 }
 await Promise.all(Array.from({ length: workers }, lane));
+results.push(...await references);
 const comparisons = games.map(code => ({
   code,
   reference: results.find(result => result.code === code && result.arm === 'reference'),
