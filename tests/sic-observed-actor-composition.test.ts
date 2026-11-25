@@ -309,9 +309,11 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
   let board=await game.dispatch({type:'load',code:'SS07',level:1}), revision=0;
   let inherited=false, rejectedUnchangedMirror=false, rejectedUnseenGate=false, rejectedWrongGate=false;
   let verifiedThird=false, completedBeforeSubject=0, transfers=0, pressedWithSubject=false, rejectedMissingSubjectPreview=false, rejectedStaticSubject=false;
+  let verifiedSixth=false, completedBeforeCircuits=0, sawSubjectsBeforeTrial=false, recoveredAfterTrial=false;
+  const testedControls=new Set<number>();
   const show=async()=>{
     let frame=board.frame.map(row=>[...row]);
-    if(board.level===6&&presentation.alternateOccupant){
+    if((board.level===6||board.level===7)&&presentation.alternateOccupant){
       // Change the independent subject's interior and outline, including its
       // visible interior under the pressed marker. Keep the environment real.
       for(let y=2;y<62;y+=3)for(let x=2;x<62;x+=3){
@@ -329,9 +331,9 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
       state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'withdrawal-campaign')};
   };
-  while((!verifiedThird&&board.level<=3||board.level===6)&&revision<240){
+  while((!verifiedThird&&board.level<=3||board.level===6&&!verifiedSixth||board.level===7)&&revision<350){
     const first=await show(), level=board.level;
-    const offer=await family.propose(first.observation,first.packet.frame_rows,[],240-revision);
+    const offer=await family.propose(first.observation,first.packet.frame_rows,[],350-revision);
     assert.ok(offer,`Missing composition at level ${level}, after ${revision} actions`);
     if(level>=2){
       assert.notEqual(offer.offer.kind,'calibrate_actor_action');
@@ -343,6 +345,10 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
       const before=await show(), step=offer.steps[index]!;
       if(!(await family.before(offer,index,before.packet,before.observation)).admitted)break;
       const relay=step.relay, field=family.state().relayField;
+      if(level===7&&relay){
+        sawSubjectsBeforeTrial ||= (relay.before.subjects?.length??0)>=2;
+        recoveredAfterTrial ||= testedControls.size===2&&sawSubjectsBeforeTrial&&!(relay.before.subjects?.length);
+      }
       const subjectLanding=level===6&&relay?.after.subjects?.find(cell=>!relay.before.subjects?.includes(cell));
       const subjectSource=level===6&&relay?.before.subjects?.find(cell=>!relay.after.subjects?.includes(cell));
       if(relay&&typeof subjectLanding==='number'&&typeof subjectSource==='number'){
@@ -410,6 +416,11 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
         rejectedUnchangedMirror=true;
       }
       await family.record(before.observation,after.observation,action,before.packet.frame_rows,after.packet.frame_rows,offer,index,[]);
+      if(level===7&&step.circuitTrial!==undefined){
+        assert.equal(verdict.seal_prefix,true);
+        assert.ok(family.state().circuitTrials?.[step.circuitTrial]);
+        testedControls.add(step.circuitTrial);
+      }
       if(level===2&&board.level===3){
         const traction=Object.values(family.state().roles).find(role=>role.pull)!;
         assert.match(traction.effects.move_reflector_by_withdrawal??'',/:epoch:2:revision:/);
@@ -427,13 +438,22 @@ for(const presentation of mirroredPresentations)test('reuses traction, coordinat
         completedBeforeSubject=board.levelsCompleted;
         break;
       }
+      if(level===6&&board.level!==6){
+        assert.ok(board.levelsCompleted>completedBeforeSubject);
+        verifiedSixth=true;
+        board=await game.dispatch({type:'selectLevel',level:7});
+        completedBeforeCircuits=board.levelsCompleted;
+        break;
+      }
       if(verdict.seal_prefix)break;
     }
     assert.ok(issued,'The first command must be bound to the current scene');
   }
-  assert.ok(board.levelsCompleted>completedBeforeSubject);
+  assert.ok(verifiedSixth&&board.levelsCompleted>completedBeforeCircuits);
   assert.ok(verifiedThird&&inherited&&rejectedUnchangedMirror&&rejectedUnseenGate&&rejectedWrongGate);
   assert.ok(transfers>=2&&pressedWithSubject&&rejectedMissingSubjectPreview&&rejectedStaticSubject);
+  assert.equal(testedControls.size,2);
+  assert.ok(recoveredAfterTrial,'Rebind both circuits after the previously occluded actuator changes the occupants');
 });
 
 for (const presentation of mirroredPresentations) test('reuses both roles for a joint transfer with '+presentation.name, async () => {

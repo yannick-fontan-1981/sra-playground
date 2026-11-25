@@ -830,7 +830,43 @@ function measureComposedAccess(level,issued) {
     :[[reflectedSubject,'reflect the independent subject to a staging cell'],[heldControl,'reflect it onto the control and open the gate'],
       [crossing,'cross the gate held by the subject']];
   assert.ok(effects.every(([action])=>action),'Required physical composition missing at SS07 L'+level);
+  if(level===6){
+    const tail=issued.filter(ticket=>ticket.actorPlan?.strategy==='test_complete_destination_arrangement');
+    assert.ok(tail.filter(ticket=>ticket.action==='ACTION6').length<=2,'Charge changes of actor in the shared destination route');
+    assert.ok(tail.some(ticket=>ticket.actionIndex>=4),'Keep several finishing moves in a single guarded series');
+  }
   return [...effects,[arrangement,'occupy the whole destination set']].map(([action,kind])=>({kind,first:action,last:action}));
+}
+
+function measureLinkedCircuitTrials(issued){
+  const world=compileSetLevel(SS07_LEVELS[6]);
+  let state=initialSetState(world), loadControl, piston, handoff, arrangement;
+  for(const [index,ticket] of issued.entries()){
+    const order=index+1;
+    const {state:after,phases}=stepSetWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    assert.notEqual(ticket.actorPlan?.strategy,'calibrate_actor_action');
+    const reflect=phases.find(phase=>phase.kind==='reflect');
+    if(reflect?.moves.some(move=>move.actor==='stone'&&world.buttons.some(button=>equal(move.to,button)))
+      &&after.gateClosed.some((closed,i)=>!closed&&state.gateClosed[i]))loadControl??=order;
+    if(phases.some(phase=>phase.kind==='piston'&&phase.moves.some(move=>move.actor==='monster'))){
+      assert.equal(ticket.actorPlan?.strategy,'test_linked_control_effect');
+      assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)));
+      assert.ok(state.monsters.length>0&&after.monsters.length===0&&phases.some(phase=>phase.kind==='combat'));
+      piston??=order;
+    }
+    if(reflect?.moves.some(move=>move.actor==='hero'&&world.buttons.some(button=>equal(move.to,button))
+      &&reflect.moves.some(other=>other.actor==='stone'&&equal(other.from,move.to)))
+      &&state.gateClosed.every((closed,i)=>closed===after.gateClosed[i]))handoff??=order;
+    if(after.complete&&world.goals.every(goal=>after.heroes.some(hero=>equal(goal,hero.at)))){
+      assert.equal(ticket.actorPlan?.subjects.length,world.goals.length);
+      arrangement=order;
+    }
+    state=after;
+  }
+  assert.ok(loadControl&&piston&&handoff&&arrangement,'Test both circuits and observe the piston effect and the simultaneous handoff');
+  return [[loadControl,'reflect a weight onto the first control'],[piston,'actuate the occupied piston and observe the resulting combat'],
+    [handoff,'replace the holding weight without closing its gates'],[arrangement,'occupy the whole destination set']]
+    .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
 export function checkRun(run) {
@@ -841,7 +877,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 6 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 7 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -961,7 +997,8 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     if (code === 'SS07') {
-      assert.ok(issued.length<=(row.level===3?40:85)&&continued>=(row.level===3?14:20)&&issued.every(ticket=>ticket.resets===0),
+      const cap=[85,85,40,85,85,55,105][row.level-1];
+      assert.ok(issued.length<=cap&&continued>=(row.level===3?14:20)&&issued.every(ticket=>ticket.resets===0),
         'SS07 must prepare and complete the destination set in guarded series');
     }
     const physical = reference ? measureManipulation(row.level, issued)
@@ -969,7 +1006,7 @@ export function checkRun(run) {
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
       : code === 'SS07' ? row.level<=3?[measureDestinationSet,measureReflectorWithdrawal,measureLinkedReflectorAccess][row.level-1](issued)
-        :measureComposedAccess(row.level,issued) : [];
+        :row.level===7?measureLinkedCircuitTrials(issued):measureComposedAccess(row.level,issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -1003,7 +1040,7 @@ function main() {
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
       ['actor-composition', 'SS06', '8', '125'],
-      ['destination-set', 'SS07', '6', '100'],
+      ['destination-set', 'SS07', '7', '110'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

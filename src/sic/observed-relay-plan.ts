@@ -17,11 +17,16 @@ export type RelayModel = {
   keepSubjectOnControl?: boolean;
   activeActor?: number;
   linkedControls?: boolean;
+  trialControl?: number;
+  trialWeightOnly?: boolean;
+  guidingControls?: number[];
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
 
 const occupied = (s: RelayState, cell:number) => s.reflectors.includes(cell)||s.loads.includes(cell)||s.actors.includes(cell)||!!s.subjects?.includes(cell);
+export { occupied as relayControlOccupied };
+export const relayControlWeighted = (s:RelayState,cell:number) => s.reflectors.includes(cell)||s.loads.includes(cell)||!!s.subjects?.includes(cell);
 const pressed = (s:RelayState,plate:number|null) => plate!==null&&occupied(s,plate);
 export const relayGateClosed = (gate:Gate,s:RelayState,plate:number|null) => gate.closedWhenPressed===pressed(s,gate.control??plate);
 const blocked = (m:RelayModel,s:RelayState,p:number) => !m.floor.has(p)&&!m.water.has(p)
@@ -29,7 +34,8 @@ const blocked = (m:RelayModel,s:RelayState,p:number) => !m.floor.has(p)&&!m.wate
 const stands = (m:RelayModel,s:RelayState,p:number) => m.floor.has(p)||s.supports.includes(p);
 const sorted=(xs:number[])=>xs.sort((a,b)=>a-b);
 const signature=(s:RelayState)=>[...s.actors,-1,...s.reflectors,-1,...s.loads,-1,...s.supports,-1,...(s.subjects??[])].join(',');
-const solved=(m:RelayModel,s:RelayState)=>m.settleSubjectOnControl&&m.plate!==null?!!s.subjects?.includes(m.plate)
+const solved=(m:RelayModel,s:RelayState)=>m.trialControl!==undefined?(m.trialWeightOnly?relayControlWeighted(s,m.trialControl):occupied(s,m.trialControl))
+  :m.settleSubjectOnControl&&m.plate!==null?!!s.subjects?.includes(m.plate)
   :m.finishAtPlate&&m.plate!==null?s.actors.includes(m.plate):m.goals.every(goal=>s.actors.includes(goal));
 
 function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) {
@@ -199,6 +205,11 @@ function bridgeOrdering(model:RelayModel){
 
 
 function ordering(model: RelayModel, emphasis:number) {
+  if(model.trialControl!==undefined)return controlOrdering(model,model.trialControl);
+  if(model.guidingControls){
+    const goal=bridgeOrdering(model);
+    return (pose:RelayState)=>goal(pose)+model.guidingControls!.filter(control=>!occupied(pose,control)).length*12;
+  }
   // With independent gates, geometric progress can point through a closed
   // circuit. Use observed action costs, including selection, across relays.
   if(model.linkedControls||model.settleSubjectOnControl)return ()=>0;
@@ -225,6 +236,37 @@ function ordering(model: RelayModel, emphasis:number) {
       Math.min(...s.loads.map(load=>dist(t.loadDistance,load)),model.plate!==null&&s.loads.includes(model.plate)?1:25)));
     return total*0.45+logistics*emphasis;
   };
+}
+
+function controlOrdering(model:RelayModel,target:number){
+  const distance=(a:number,b:number)=>Math.abs(a%64-b%64)+Math.abs((a>>6)-(b>>6));
+  const approaches=distanceMap(model,target);
+  const transfers=model.arms.map(arms=>relayStances({...model,plate:target,arms:[arms]}));
+  return (pose:RelayState)=>{
+    const near=(cell:number)=>Math.min(...pose.actors.map(actor=>distance(actor,cell)));
+    const candidates=[...pose.loads,...(model.trialWeightOnly?[]:pose.actors),...(pose.subjects??[])];
+    const adjacent=approaches.size>1?Math.min(...[...pose.reflectors,...candidates].map(cell=>
+      (approaches.get(cell)??distance(cell,target)+8)*3+near(cell)*0.35)):Infinity;
+    const reflect=Math.min(80,...transfers.flatMap((options,index)=>options.map(option=>
+      distance(pose.reflectors[index]!,option.mirror)*3+Math.min(...candidates.map(cell=>
+        distance(cell,option.load)*3+near(cell)*0.35)))));
+    return solved(model,pose)?0:Math.min(adjacent,reflect);
+  };
+}
+
+function directControlSetup(model:RelayModel,start:RelayState){
+  const target=model.trialControl!;
+  const distance=(s:RelayState)=>Math.min(...[...s.loads,...s.reflectors,...(s.subjects??[])].map(cell=>
+    Math.abs(cell%64-target%64)+Math.abs((cell>>6)-(target>>6))));
+  const initialDistance=distance(start);
+  const first=branches(model,start).filter(candidate=>distance(candidate.state)<initialDistance)
+    .sort((a,b)=>distance(a.state)-distance(b.state)||a.steps.length-b.steps.length);
+  for(const branch of first.slice(0,8)){
+    if(solved(model,branch.state))return branch.steps;
+    const next=branches(model,branch.state).filter(candidate=>solved(model,candidate.state))
+      .sort((a,b)=>a.steps.length-b.steps.length)[0];
+    if(next)return [...branch.steps,...next.steps];
+  }
 }
 
 function replayPath(node:Node) {
@@ -275,6 +317,10 @@ function dequeue(queue:Node[]) {
 }
 
 export async function findRelayPlan(model:RelayModel,start:RelayState,options:{maxNodes:number; emphasis?:number; yieldControl:()=>Promise<void>;signal?:AbortSignal}) {
+  if(model.trialWeightOnly){
+    const direct=directControlSetup(model,start);
+    if(direct)return direct;
+  }
   const stateKey=(state:RelayState,actor:number|undefined)=>model.activeActor===undefined
     ?signature(state):JSON.stringify([signature(state),actor]);
   const rank=ordering(model,options.emphasis??19), seen=new Map([[stateKey(start,model.activeActor),0]]);
