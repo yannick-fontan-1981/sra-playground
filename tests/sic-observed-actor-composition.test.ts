@@ -4,6 +4,7 @@ import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v
 import { createSs06Backend } from '../src/games/sinking-star-ss06.ts';
 import { createSs07Backend } from '../src/games/sinking-star-ss07.ts';
 import { createObservedActorComposition } from '../src/sic/observed-actor-composition.ts';
+import { relayGateClosed } from '../src/sic/observed-relay-plan.ts';
 import { sicObservedMotionCycle } from '../src/logos-engine/v6-native-types.ts';
 
 type Point = readonly [number, number];
@@ -301,10 +302,10 @@ const mirroredPresentations = [
   {name:'vertical reflection, a changed occupant motif and a different interaction command', flipX:false, flipY:true, colors:7, inputs:[5,2,4,3,1], alternateOccupant:true},
 ] as const;
 
-for(const presentation of mirroredPresentations)test('reuses traction and detaches the reflector with '+presentation.name,async()=>{
+for(const presentation of mirroredPresentations)test('reuses traction and coordinates linked reflectors with '+presentation.name,async()=>{
   const game=createSs07Backend(),family=createObservedActorComposition();
   let board=await game.dispatch({type:'load',code:'SS07',level:1}), revision=0;
-  let inherited=false, rejectedUnchangedMirror=false;
+  let inherited=false, rejectedUnchangedMirror=false, rejectedUnseenGate=false, rejectedWrongGate=false;
   const show=async()=>{
     let frame=board.frame.map(row=>row.map(value=>(value+presentation.colors)%16));
     if(presentation.flipX)frame=frame.map(row=>row.reverse());
@@ -313,11 +314,11 @@ for(const presentation of mirroredPresentations)test('reuses traction and detach
       state:board.state,available_action_refs:board.availableActionIds.map(id=>'ACTION'+id)};
     return {packet,observation:await measureNativeObservation(packet,revision,'withdrawal-campaign')};
   };
-  while(board.level<=2&&revision<180){
+  while(board.level<=3&&revision<180){
     const first=await show(), level=board.level;
     const offer=await family.propose(first.observation,first.packet.frame_rows,[],180-revision);
     assert.ok(offer,`Missing composition at level ${level}, after ${revision} actions`);
-    if(level===2){
+    if(level>=2){
       assert.notEqual(offer.offer.kind,'calibrate_actor_action');
       assert.equal(offer.offer.destinations?.length,2);
       inherited ||= Object.values(family.state().roles).some(role=>/:epoch:1:revision:/.test(role.pull??''));
@@ -333,10 +334,29 @@ for(const presentation of mirroredPresentations)test('reuses traction and detach
       issued++;
       const after=await show();
       const verdict=await family.after(offer,index,before.observation,after.observation,before.packet.frame_rows,after.packet.frame_rows);
-      if(level===2&&!rejectedUnchangedMirror&&verdict.matched&&step.relay&&step.relay.before.reflector!==step.relay.after.reflector){
+      const relay=step.relay, field=family.state().relayField;
+      if(level===3&&board.level===3&&verdict.matched&&relay&&field?.linkedControls&&(!rejectedUnseenGate||!rejectedWrongGate)){
+        const gate=field.gates.find(gate=>relayGateClosed(gate,relay.before,field.plate)!==relayGateClosed(gate,relay.after,field.plate)
+          && ![...relay.after.actors,...relay.after.reflectors,...relay.after.loads,...relay.projected].includes(gate.cell));
+        if(gate){
+          const {pitch,phase,floor}=family.state().shape!;
+          const x=phase[0]+gate.cell%64*pitch,y=phase[1]+Math.floor(gate.cell/64)*pitch;
+          for(const missing of [true,false]){
+            const rows=after.packet.frame_rows.map(row=>[...row]);
+            for(let dy=0;dy<pitch;dy++)for(let dx=0;dx<pitch;dx++)
+              rows[y+dy]![x+dx]=missing?floor:before.packet.frame_rows[y+dy]![x+dx]!;
+            const refused=await family.after(offer,index,before.observation,after.observation,before.packet.frame_rows,rows);
+            assert.equal(refused.matched,false);
+            assert.equal(refused.seal_prefix,true);
+            if(missing)rejectedUnseenGate=true;
+            else rejectedWrongGate=true;
+          }
+        }
+      }
+      if(level===2&&!rejectedUnchangedMirror&&verdict.matched&&step.relay&&step.relay.before.reflectors[0]!==step.relay.after.reflectors[0]){
         const {pitch,phase,floor}=family.state().shape!, rows=after.packet.frame_rows.map(row=>[...row]);
         const coords=(cell:number)=>[phase[0]+cell%64*pitch,phase[1]+Math.floor(cell/64)*pitch] as const;
-        const [oldX,oldY]=coords(step.relay.before.reflector),[newX,newY]=coords(step.relay.after.reflector);
+        const [oldX,oldY]=coords(step.relay.before.reflectors[0]!),[newX,newY]=coords(step.relay.after.reflectors[0]!);
         for(let y=0;y<pitch;y++)for(let x=0;x<pitch;x++){
           rows[oldY+y]![oldX+x]=before.packet.frame_rows[oldY+y]![oldX+x]!;
           rows[newY+y]![newX+x]=floor;
@@ -347,16 +367,21 @@ for(const presentation of mirroredPresentations)test('reuses traction and detach
         rejectedUnchangedMirror=true;
       }
       await family.record(before.observation,after.observation,action,before.packet.frame_rows,after.packet.frame_rows,offer,index,[]);
+      if(level===2&&board.level===3){
+        const traction=Object.values(family.state().roles).find(role=>role.pull)!;
+        assert.match(traction.effects.move_reflector_by_withdrawal??'',/:epoch:2:revision:/);
+        assert.match(traction.effects.leave_reflector_in_place_by_transfer??'',/:epoch:2:revision:/);
+        assert.match(traction.effects.leave_reflector_in_place_by_turning??'',/:epoch:2:revision:/);
+      }
       if(verdict.seal_prefix)break;
     }
     assert.ok(issued,'The first command must be bound to the current scene');
   }
-  assert.equal(board.levelsCompleted,2);
-  assert.ok(inherited&&rejectedUnchangedMirror);
+  assert.equal(board.levelsCompleted,3);
+  assert.ok(inherited&&rejectedUnchangedMirror&&rejectedUnseenGate&&rejectedWrongGate);
   const traction=Object.values(family.state().roles).find(role=>role.pull)!;
-  assert.match(traction.effects.move_reflector_by_withdrawal??'',/:epoch:2:revision:/);
-  assert.match(traction.effects.leave_reflector_in_place_by_transfer??'',/:epoch:2:revision:/);
-  assert.match(traction.effects.leave_reflector_in_place_by_turning??'',/:epoch:2:revision:/);
+  assert.match(traction.effects.move_reflector_by_withdrawal??'',/:epoch:3:revision:/);
+  assert.match(traction.effects.leave_reflector_in_place_by_transfer??'',/:epoch:3:revision:/);
 });
 
 for (const presentation of mirroredPresentations) test('reuses both roles for a joint transfer with '+presentation.name, async () => {

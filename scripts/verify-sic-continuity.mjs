@@ -743,6 +743,50 @@ function measureReflectorWithdrawal(issued) {
     .map(([action,kind])=>({kind,first:action,last:action}));
 }
 
+function measureLinkedReflectorAccess(issued) {
+  const world=compileSetLevel(SS07_LEVELS[2]);
+  let state=initialSetState(world), landing, crossing, handoff, transfer, arrangement;
+  for(const [index,ticket] of issued.entries()){
+    const {state:after,phases}=stepSetWorld(world,state,Number(ticket.action.slice(6)),ticket.data);
+    const order=index+1;
+    assert.notEqual(ticket.actorPlan?.strategy,'calibrate_actor_action','Retain both roles after the previous board');
+    const traveler=state.heroes.find(hero=>hero.kind==='thief');
+    const reflect=phases.find(phase=>phase.kind==='reflect'&&phase.moves.some(move=>move.actor==='hero'&&equal(move.from,traveler.at)));
+    if(reflect&&!landing){
+      const arrive=reflect.moves.find(move=>move.actor==='hero'&&equal(move.from,traveler.at)).to;
+      const gateIndex=world.gates.findIndex(gate=>gate.at.x===arrive.x&&gate.at.y===arrive.y-1);
+      if(gateIndex>=0)landing={order,arrive,gateIndex};
+    }
+    if(landing&&!crossing&&equal(traveler.at,landing.arrive)&&!state.gateClosed[landing.gateIndex]&&!after.gateClosed[landing.gateIndex]
+      &&phases.some(phase=>phase.kind==='walk'&&phase.moves.some(move=>move.actor==='hero'&&equal(move.from,traveler.at)
+        &&equal(move.to,world.gates[landing.gateIndex].at)))){
+      const gate=world.gates[landing.gateIndex], circuit=world.circuits.find(control=>control.id===gate.circuit);
+      assert.ok(circuit.buttons.every(button=>state.heroes.some(hero=>hero!==traveler&&equal(hero.at,button))));
+      crossing=order;
+    }
+    const pull=phases.find(phase=>phase.kind==='pull'&&phase.moves.some(move=>move.actor==='mirror'));
+    if(pull&&!handoff){
+      const mirror=pull.moves.find(move=>move.actor==='mirror');
+      const circuit=world.circuits.find(control=>control.buttons.some(button=>equal(button,mirror.to)));
+      if(circuit&&equal(traveler.at,mirror.to)){
+        assert.ok(ticket.actorPlan.evidence.some(ref=>/:epoch:1:revision:/.test(ref)),'Reuse the original traction evidence');
+        assert.ok(world.gates.every((gate,i)=>gate.circuit!==circuit.id||!state.gateClosed[i]&&!after.gateClosed[i]));
+        handoff={order,reflector:mirror.to};
+      }
+    }
+    if(handoff&&!transfer&&reflect&&after.mirrors.some(mirror=>equal(mirror.at,handoff.reflector)))transfer=order;
+    if(after.complete&&world.goals.every(goal=>after.heroes.some(hero=>equal(goal,hero.at)))){
+      assert.equal(ticket.actorPlan?.subjects.length,world.goals.length);
+      arrangement=order;
+    }
+    state=after;
+  }
+  assert.ok(landing&&crossing&&handoff&&transfer&&arrangement,'SS07 L3 must cross after reflection, leave a reflector on its control and complete the set');
+  return [[landing.order,'reflect to the opened passage'],[crossing,'walk up through the held gate'],[handoff.order,'pull a reflector onto the second control'],
+    [transfer,'leave the reflector pressed by transferring'],[arrangement,'occupy the whole destination set']]
+    .map(([action,kind])=>({kind,first:action,last:action}));
+}
+
 export function checkRun(run) {
   const { code, executedTickets: tickets, levels } = run;
   const reference = code === 'SS01' ? campaign : null;
@@ -751,7 +795,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 2 };
+  const campaignLengths = { SS02: 6, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 3 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -871,14 +915,14 @@ export function checkRun(run) {
       assert.ok(issued.every(ticket => ticket.resets === 0), 'SS06 must retain the prepared access');
     }
     if (code === 'SS07') {
-      assert.ok(issued.length<=85&&continued>=20&&issued.every(ticket=>ticket.resets===0),
+      assert.ok(issued.length<=(row.level===3?40:85)&&continued>=(row.level===3?14:20)&&issued.every(ticket=>ticket.resets===0),
         'SS07 must prepare and complete the destination set in guarded series');
     }
     const physical = reference ? measureManipulation(row.level, issued)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
-      : code === 'SS07' ? [measureDestinationSet,measureReflectorWithdrawal][row.level-1](issued) : [];
+      : code === 'SS07' ? [measureDestinationSet,measureReflectorWithdrawal,measureLinkedReflectorAccess][row.level-1](issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
     result.push({
       game: code,
@@ -912,7 +956,7 @@ function main() {
       ['l-axe-violet', 'SS04', '8', '150'],
       ['local-carry', 'SS05', '8', '155'],
       ['actor-composition', 'SS06', '8', '125'],
-      ['destination-set', 'SS07', '2', '100'],
+      ['destination-set', 'SS07', '3', '100'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

@@ -2,37 +2,47 @@
  * This module receives a visible scene and control hypotheses. Only the caller
  * can release a command, after binding it to a fresh observation. */
 export type RelayMotion = { action: string; axis: number };
-export type RelayState = { actors: number[]; loads: number[]; reflector: number; supports: number[] };
+export type RelayState = { actors: number[]; loads: number[]; reflectors: number[]; supports: number[] };
 export type RelayStep = { actor: number; action: string; before: RelayState; after: RelayState; projected: number[] };
-type Gate = { cell: number; closedWhenPressed: boolean };
+type Gate = { cell: number; closedWhenPressed: boolean; control?: number };
 export type RelayModel = {
   floor: Set<number>; water: Set<number>; gates: Gate[]; plate: number | null;
-  goals: number[]; arms: readonly number[]; controls: RelayMotion[][]; capacity: number[]; trigger: string;
+  goals: number[]; arms: readonly (readonly number[])[]; controls: RelayMotion[][]; capacity: number[]; trigger: string;
   unoccupiedControls?: number[];
   heldLoadControls?: number[];
   pull?: boolean[];
   nearestReflection?: boolean;
   finishAtPlate?: boolean;
   activeActor?: number;
+  linkedControls?: boolean;
 };
 type Branch = { state: RelayState; steps: RelayStep[] };
 type Node = { branch: Branch; parent: Node | null; cost: number; priority: number };
 
-const occupied = (s: RelayState, cell:number) => s.reflector===cell||s.loads.includes(cell)||s.actors.includes(cell);
-const pressed = (m:RelayModel,s:RelayState) => m.plate!==null&&occupied(s,m.plate);
+const occupied = (s: RelayState, cell:number) => s.reflectors.includes(cell)||s.loads.includes(cell)||s.actors.includes(cell);
+const pressed = (s:RelayState,plate:number|null) => plate!==null&&occupied(s,plate);
+export const relayGateClosed = (gate:Gate,s:RelayState,plate:number|null) => gate.closedWhenPressed===pressed(s,gate.control??plate);
 const blocked = (m:RelayModel,s:RelayState,p:number) => !m.floor.has(p)&&!m.water.has(p)
-  ||m.gates.some(gate=>gate.cell===p&&gate.closedWhenPressed===pressed(m,s));
+  ||m.gates.some(gate=>gate.cell===p&&relayGateClosed(gate,s,m.plate));
 const stands = (m:RelayModel,s:RelayState,p:number) => m.floor.has(p)||s.supports.includes(p);
 const sorted=(xs:number[])=>xs.sort((a,b)=>a-b);
-const signature=(s:RelayState)=>[...s.actors,s.reflector,...s.loads,-1,...s.supports].join(',');
+const signature=(s:RelayState)=>[...s.actors,-1,...s.reflectors,-1,...s.loads,-1,...s.supports].join(',');
 const solved=(m:RelayModel,s:RelayState)=>m.finishAtPlate&&m.plate!==null?s.actors.includes(m.plate):m.goals.every(goal=>s.actors.includes(goal));
 
 function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) {
   const position=(cell:number)=>moves.get(cell)??cell;
-  const after={actors:before.actors.map(position),loads:before.loads.map(position),reflector:position(before.reflector),supports:[...before.supports]};
+  const reflectors=before.reflectors.map(position);
+  // Indistinguishable reflectors share a slot ordering even after displacement.
+  for(let first=0;first<m.arms.length;){
+    let end=first+1;
+    while(end<m.arms.length&&m.arms[end]!.join(',')===m.arms[first]!.join(','))end++;
+    if(end-first>1)reflectors.splice(first,end-first,...sorted(reflectors.slice(first,end)));
+    first=end;
+  }
+  const after={actors:before.actors.map(position),loads:before.loads.map(position),reflectors,supports:[...before.supports]};
   if(m.unoccupiedControls?.some(cell=>occupied(after,cell)))return;
   if(m.heldLoadControls?.some(cell=>!after.loads.includes(cell)))return;
-  if(!after.actors.every(p=>stands(m,after,p))||!stands(m,after,after.reflector))return;
+  if(!after.actors.every(p=>stands(m,after,p))||!after.reflectors.every(p=>stands(m,after,p)))return;
   after.loads=after.loads.filter(p=>{
     if(stands(m,after,p))return true;
     if(m.water.has(p))after.supports.push(p);
@@ -40,37 +50,41 @@ function shift(m:RelayModel,before:RelayState,moves:ReadonlyMap<number,number>) 
   });
   // Shutting a gate is admitted only when nothing would be struck. The
   // observed circuit family handles actuator contacts separately.
-  if(pressed(m,before)!==pressed(m,after)&&m.gates.some(g=>
-    g.closedWhenPressed===pressed(m,after)&&occupied(after,g.cell)))return;
+  if(m.gates.some(g=>occupied(after,g.cell)&&relayGateClosed(g,after,m.plate)&&!relayGateClosed(g,before,m.plate)))return;
   after.loads=sorted(after.loads);
   after.supports=sorted(after.supports);
   return after;
 }
 
 function reflection(m:RelayModel,s:RelayState):{state:RelayState;keys:number[]}|undefined {
-  const [a,b]=m.arms, transfers=new Map<number,number>(), ray=new Set<number>();
-  if(a===undefined||b===undefined)return;
-  const candidates:{origin:number;destination:number;span:number;outgoing:number}[]=[];
-  for(const [from,to] of [[a,b],[b,a]] as const){
-    let origin=s.reflector, destination=s.reflector;
-    for(let i=0;i<25;i++){
-      origin+=from; destination+=to;
-      if(blocked(m,s,origin))break;
-      if(!occupied(s,origin))continue;
-      candidates.push({origin,destination,span:i+1,outgoing:to});
-      break;
+  const transfers=new Map<number,number>(), ray=new Set<number>();
+  for(const [index,reflector] of s.reflectors.entries()){
+    const [a,b]=m.arms[index]!;
+    if(a===undefined||b===undefined)return;
+    const candidates:{origin:number;destination:number;span:number;outgoing:number}[]=[];
+    for(const [from,to] of [[a,b],[b,a]] as const){
+      let origin=reflector, destination=reflector;
+      for(let i=0;i<25;i++){
+        origin+=from; destination+=to;
+        if(blocked(m,s,origin)||s.reflectors.includes(origin))break;
+        if(!occupied(s,origin))continue;
+        candidates.push({origin,destination,span:i+1,outgoing:to});
+        break;
+      }
     }
-  }
-  const nearest=Math.min(...candidates.map(candidate=>candidate.span));
-  for(const {origin,destination,span,outgoing} of candidates){
-    if(m.nearestReflection&&span!==nearest)continue;
-    if(!stands(m,s,destination)&&s.actors.includes(origin))return;
-    for(let p=s.reflector+outgoing;;p+=outgoing){
-      if(blocked(m,s,p))return;
-      ray.add(p);
-      if(p===destination)break;
+    const nearest=Math.min(...candidates.map(candidate=>candidate.span));
+    for(const {origin,destination,span,outgoing} of candidates){
+      if(m.nearestReflection&&span!==nearest)continue;
+      if(!stands(m,s,destination)&&s.actors.includes(origin))return;
+      for(let p=reflector+outgoing;;p+=outgoing){
+        if(blocked(m,s,p)||s.reflectors.includes(p))return;
+        ray.add(p);
+        if(p===destination)break;
+      }
+      const previous=transfers.get(origin);
+      if(previous!==undefined&&previous!==destination)return;
+      transfers.set(origin,destination);
     }
-    transfers.set(origin,destination);
   }
   if(!transfers.size||new Set(transfers.values()).size!==transfers.size
     ||[...ray].some(p=>occupied(s,p)&&!transfers.has(p)))return;
@@ -88,9 +102,11 @@ function branches(model:RelayModel,origin:RelayState, keepPrepared=false):Branch
       const emit=(action:string,after:RelayState,projected:number[]=[])=>{
         out.push({state:after,steps:[...path,{actor,action,before:s,after,projected}]});
       };
-      if(path.length&&(pressed(model,origin)!==pressed(model,s)||model.goals.includes(at))){
+      const pressureChanged=pressed(origin,model.plate)!==pressed(s,model.plate)||model.gates.some(gate=>
+        gate.control!==undefined&&pressed(origin,gate.control)!==pressed(s,gate.control));
+      if(path.length&&(pressureChanged||model.goals.includes(at))){
         out.push({state:s,steps:path});
-        if(pressed(model,origin)!==pressed(model,s)||solved(model,s))continue;
+        if(pressureChanged||solved(model,s))continue;
       }
       const reflected=model.trigger?reflection(model,s):undefined;
       if(reflected)emit(model.trigger,reflected.state,reflected.keys);
@@ -140,7 +156,7 @@ function distanceMap(model: RelayModel, start:number) {
 function relayStances(model:RelayModel){
   if(model.plate===null)return [];
   const templates:{mirror:number;load:number}[]=[];
-  const [a,b]=model.arms;
+  const [a,b]=model.arms[0]!;
   for(const [from,to] of [[a!,b!],[b!,a!]] as const) {
     let center:number=model.plate;
     for(let span=1;span<25;span++){
@@ -175,6 +191,9 @@ function bridgeOrdering(model:RelayModel){
 
 
 function ordering(model: RelayModel, emphasis:number) {
+  // With independent gates, geometric progress can point through a closed
+  // circuit. Use observed action costs, including selection, across relays.
+  if(model.linkedControls)return ()=>0;
   if(model.finishAtPlate&&model.plate!==null){
     const floor=new Set([...model.floor,...model.water]);
     const distances=distanceMap({...model,floor},model.plate);
@@ -188,7 +207,7 @@ function ordering(model: RelayModel, emphasis:number) {
   const templates=relayStances(model).map(t=>({...t,mirrorDistance:distanceMap(model,t.mirror),loadDistance:distanceMap(model,t.load)}));
   return (s:RelayState)=>{
     const total=goal(s.actors[0]!,s.actors[1]!);
-    const logistics=Math.min(25,...templates.map(t=>dist(t.mirrorDistance,s.reflector)*1.6+
+    const logistics=Math.min(25,...templates.map(t=>dist(t.mirrorDistance,s.reflectors[0]!)*1.6+
       Math.min(...s.loads.map(load=>dist(t.loadDistance,load)),model.plate!==null&&s.loads.includes(model.plate)?1:25)));
     return total*0.45+logistics*emphasis;
   };
@@ -254,7 +273,7 @@ export async function findRelayPlan(model:RelayModel,start:RelayState,options:{m
     if(node.cost!==seen.get(stateKey(node.branch.state,active)))continue;
     const state=node.branch.state;
     if(solved(model,state))return replayPath(node);
-    const stage=templates.find(template=>template.mirror===state.reflector
+    const stage=templates.find(template=>template.mirror===state.reflectors[0]
       &&(state.loads.includes(template.load)||model.plate!==null&&state.loads.includes(model.plate)));
     if(stage){
       const trial=signature(state);
