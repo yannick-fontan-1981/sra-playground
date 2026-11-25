@@ -19,11 +19,15 @@ const candidateFiles = [
 
 async function evaluate(cycle, ablate) {
   if (ablate) {
+    const ablation = 'data:text/javascript,' + encodeURIComponent(
+      'export { inferObservedCycle } from ' + JSON.stringify(sharedCycle.href) +
+      '; export const inferCycleAfterTransient = () => undefined;',
+    );
     registerHooks({
       resolve(specifier, context, nextResolve) {
         const result = nextResolve(specifier, context);
-        return result.url === sharedCycle.href
-          ? { url: 'data:text/javascript,export const inferCycleAfterTransient=()=>undefined', shortCircuit: true }
+        return result.url === sharedCycle.href && context.parentURL !== ablation
+          ? { url: ablation, shortCircuit: true }
           : result;
       },
     });
@@ -55,8 +59,12 @@ function qualifier(cycle, seed, revision, fingerprint) {
     if (!before || before.strategy !== strategy || before.id !== id) throw new Error('Baseline and candidate cases differ');
     const result = resultOf({ verified, abstained });
     const previous = resultOf(before);
+    const transfer = previous === 'abstained' && result === 'verified';
+    const proof = evidence?.cycleProof;
+    const proved = !transfer || (proof?.start > 0 && proof.witnesses.length === evidence.period
+      && proof.witnesses.every(count => count >= 3));
     return { strategy, id, parameters, baseline: previous, candidate: result, expected, baselineExpected,
-      baselineEvidence: before.evidence, evidence, pass: result === expected && previous === baselineExpected };
+      baselineEvidence: before.evidence, evidence, pass: result === expected && previous === baselineExpected && proved };
   });
   const gains = cases.filter(item => item.baseline === 'abstained' && item.candidate === 'verified');
   const changedStrategies = [...new Set(gains.map(item => item.strategy))];

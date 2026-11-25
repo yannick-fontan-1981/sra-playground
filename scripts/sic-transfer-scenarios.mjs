@@ -37,7 +37,7 @@ function clockedArrival({ period, control, contradiction, insufficient, translat
   const verified = Boolean(plan && plan.edits.length === 0 && terminal?.every(point => node(point) === node(target)));
   return { verified, abstained: plan == null, evidence: result ? {
     period: result.clocks[node(gate)].length, prefix: result.clockPrefixes?.[node(gate)] ?? [],
-    launch: plan?.ticks ?? [],
+    launch: plan?.ticks ?? [], cycleProof: result.clockEvidence?.[node(gate)] ?? null,
   } : null };
 }
 
@@ -101,7 +101,8 @@ function switchedSupport({ period, control, contradiction, insufficient, transla
     if (actor === 7) break;
   }
   return { verified: actor === 7 && !stopped, abstained: executed.length === 0 && !stopped,
-    evidence: { period: observed.switchCycles?.[0]?.period ?? null, calibration: ix, executed } };
+    evidence: { period: observed.switchCycles?.[0]?.period ?? null, calibration: ix, executed,
+      cycleProof: observed.switchCycles?.[0]?.transientEvidence ?? null } };
 }
 
 export const strategies = {

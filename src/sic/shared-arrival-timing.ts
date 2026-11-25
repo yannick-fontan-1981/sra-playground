@@ -1,6 +1,6 @@
 import { configuredCrosses, configuredDistances, configuredPatch, configuredRoute, configuredTrajectories, type ConfiguredScene } from '../logos-engine/v6-configured-arrivals.ts';
 import type { NativeRows } from '../logos-engine/v6-native-types.ts';
-import { inferCycleAfterTransient } from './observed-cycle.ts';
+import { inferCycleAfterTransient, inferObservedCycle, type CycleEvidence } from './observed-cycle.ts';
 
 type Point = [number, number];
 type Gate = { point: Point; open: boolean; mark: string };
@@ -9,7 +9,7 @@ export type GateEffects = Readonly<Record<string, Point[]>>;
 type ClockMark = { point: Point; mark: string };
 export type TimedNetwork = { gates: Gate[]; pads: Map<string, string>; clocks: Map<string, ClockMark>; nodes: Set<string> };
 export type ArrivalTiming = { orders: Point[][]; delays: Record<string, number>; observed: (number | null)[];
-  clocks?: Record<string, boolean[]>; clockPrefixes?: Record<string, (boolean | null)[]> };
+  clocks?: Record<string, boolean[]>; clockPrefixes?: Record<string, (boolean | null)[]>; clockEvidence?: Record<string, CycleEvidence> };
 const key = (point: Point) => point.join(',');
 const oneStep = (from: string, to: string, pitch: number) => {
   const [x, y] = from.split(',').map(Number) as Point, [u, v] = to.split(',').map(Number) as Point;
@@ -79,22 +79,6 @@ export function timedNetwork(scene: ConfiguredScene): TimedNetwork | null {
   return pads.size && gates.length && gates.length <= gateLimit ? { gates, pads, clocks, nodes } : null;
 }
 
-function clockCycle(samples: readonly (boolean | null)[]): boolean[] | null {
-  for (let period = 2; period * 2 <= samples.length; period++) {
-    const phases = Array<boolean | undefined>(period).fill(undefined), hits = Array<number>(period).fill(0);
-    const consistent = samples.every((sample, time) => {
-      if (sample === null) return true;
-      const phase = time % period;
-      if (phases[phase] !== undefined && phases[phase] !== sample) return false;
-      phases[phase] = sample;
-      hits[phase]!++;
-      return true;
-    });
-    if (consistent && hits.every(hit => hit >= 2) && phases.includes(true) && phases.includes(false)) return phases as boolean[];
-  }
-  return null;
-}
-
 function arrivalTicks(path: readonly Point[], network: TimedNetwork, timing: Pick<ArrivalTiming, 'delays' | 'clocks' | 'clockPrefixes'>): number[] | null {
   const ticks = [0];
   for (let i = 1; i < path.length; i++) {
@@ -123,20 +107,23 @@ function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, fra
   const ticks = frames.slice(0, last + 1).filter((_, index) => index % baseline === 0);
   const clocks: Record<string, boolean[]> = {};
   const clockPrefixes: Record<string, (boolean | null)[]> = {};
+  const clockEvidence: Record<string, CycleEvidence> = {};
   for (const [id, { point, mark }] of network.clocks) {
     const samples = ticks.map(frame => {
       const appearance = clockAppearance(scene, configuredPatch(frame, point).flat());
       return appearance?.mark === mark ? appearance.open : null;
     });
-    const cycle = clockCycle(samples);
-    if (cycle) {
-      clocks[id] = cycle;
+    const cycle = inferObservedCycle(samples, { minimumPeriod: 2, minimumWitnesses: 2 });
+    if (cycle?.phases.includes(true) && cycle.phases.includes(false)) {
+      clocks[id] = cycle.phases;
       continue;
     }
     const steady = inferCycleAfterTransient(samples);
     if (!steady) return null;
-    clocks[id] = steady.phases;
-    clockPrefixes[id] = samples.slice(0, steady.start);
+    const { phases, ...evidence } = steady;
+    clocks[id] = phases;
+    clockPrefixes[id] = samples.slice(0, evidence.start);
+    clockEvidence[id] = evidence;
   }
   const [pitch, left, top] = scene.grid;
   const positions = ticks.map(frame => configuredCrosses(frame)
@@ -178,7 +165,7 @@ function measureClockedTiming(scene: ConfiguredScene, network: TimedNetwork, fra
     return frame === undefined ? null : frame / baseline;
   });
   return { orders: compatible, delays, observed, clocks,
-    ...(Object.keys(clockPrefixes).length ? { clockPrefixes } : {}) };
+    ...(Object.keys(clockPrefixes).length ? { clockPrefixes, clockEvidence } : {}) };
 }
 
 function visiblePrefixes(scene: ConfiguredScene, frames: readonly NativeRows[]): Map<number, Point[]> {
