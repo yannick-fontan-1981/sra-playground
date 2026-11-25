@@ -2210,6 +2210,256 @@
     "sourcePrinciple": "Transformer les poids temporaires en charges permanentes et distribuer les accès entre des capacités différentes.",
     "changes": "Trois commandes communes protègent quatre sorties séparées. Le trajet pédagogique ajoute une file mixte, la séparation de sa tête, une visée coudée distincte du reflet global et une presse dont le déplacement des gardiens reste visible.",
     "teaching": "Le témoin montre les capacités du quatuor sans imposer de quota de découvertes à la victoire. Les démonstrations optiques supplémentaires restent des exercices légaux, pas des obligations cachées.",
-    "localChecks": []
+    "localChecks": [
+      {
+        "name": "Parcours complet avec quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 260,
+          "selections": 26,
+          "merchantPushes": 19,
+          "warriorPushes": 9,
+          "thiefPulls": 20,
+          "swaps": 6,
+          "partnerSwaps": 1,
+          "stoneSwaps": 5,
+          "monsterSwaps": 0,
+          "bentSwaps": 1,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 1,
+          "swapLoops": 0,
+          "partnerMoves": 3,
+          "chainPushes": 2,
+          "stoneMoves": 55,
+          "mirrorMoves": 1,
+          "monsterMoves": 1,
+          "supportMoves": 0,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 1,
+          "platformsCreated": 1,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune nécessité globale ni solution unique affirmée."
+      },
+      {
+        "name": "Une seule caisse ouvre les deux accès bleus",
+        "status": "passed",
+        "observed": {
+          "button": {
+            "x": 4,
+            "y": 2
+          },
+          "gates": [
+            {
+              "x": 9,
+              "y": 5
+            },
+            {
+              "x": 17,
+              "y": 9
+            }
+          ]
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune nécessité globale ni solution unique affirmée."
+      },
+      {
+        "name": "La file mixte puis son extraction changent réellement les occupants",
+        "status": "passed",
+        "observed": {
+          "mixedPushes": [
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 2,
+                  "y": 4
+                },
+                "to": {
+                  "x": 3,
+                  "y": 4
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 3,
+                  "y": 4
+                },
+                "to": {
+                  "x": 4,
+                  "y": 4
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 4,
+                  "y": 4
+                },
+                "to": {
+                  "x": 5,
+                  "y": 4
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 5,
+                  "y": 4
+                },
+                "to": {
+                  "x": 6,
+                  "y": 4
+                }
+              }
+            ],
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 3,
+                  "y": 4
+                },
+                "to": {
+                  "x": 4,
+                  "y": 4
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 4,
+                  "y": 4
+                },
+                "to": {
+                  "x": 5,
+                  "y": 4
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 5,
+                  "y": 4
+                },
+                "to": {
+                  "x": 6,
+                  "y": 4
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 4
+                },
+                "to": {
+                  "x": 7,
+                  "y": 4
+                }
+              }
+            ]
+          ],
+          "partnerPulls": 3
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune nécessité globale ni solution unique affirmée."
+      },
+      {
+        "name": "Les transports optiques précèdent un appui fixe réellement traversé",
+        "status": "passed",
+        "observed": {
+          "bentSwaps": 1,
+          "reflections": 2,
+          "mirrorMoves": 1,
+          "supports": [
+            {
+              "x": 13,
+              "y": 4
+            }
+          ]
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune nécessité globale ni solution unique affirmée."
+      },
+      {
+        "name": "La presse déclenche une rencontre, sans déplacement autonome des gardiens",
+        "status": "passed",
+        "observed": {
+          "phases": [
+            "walk",
+            "piston",
+            "combat"
+          ],
+          "moved": [
+            {
+              "actor": "monster",
+              "from": {
+                "x": 14,
+                "y": 12
+              },
+              "to": {
+                "x": 15,
+                "y": 12
+              }
+            }
+          ],
+          "monstersBefore": 2,
+          "monstersAfter": 0
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune nécessité globale ni solution unique affirmée."
+      },
+      {
+        "name": "Retirer le troisième poids referme les quatre passages",
+        "status": "passed",
+        "observed": {
+          "command": "D",
+          "thiefBefore": {
+            "x": 11,
+            "y": 13
+          },
+          "stoneAfter": {
+            "x": 11,
+            "y": 13
+          },
+          "closedExitCount": 4
+        },
+        "scope": "Retrait légal au stade préparé ; il ne constitue pas une preuve d’impasse irréversible."
+      },
+      {
+        "name": "Variante gagnante : le Magicien part en dernier",
+        "status": "passed",
+        "observed": {
+          "actions": 265,
+          "selections": 31,
+          "merchantPushes": 19,
+          "warriorPushes": 9,
+          "thiefPulls": 20,
+          "swaps": 6,
+          "partnerSwaps": 1,
+          "stoneSwaps": 5,
+          "monsterSwaps": 0,
+          "bentSwaps": 1,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 1,
+          "swapLoops": 0,
+          "partnerMoves": 3,
+          "chainPushes": 2,
+          "stoneMoves": 55,
+          "mirrorMoves": 1,
+          "monsterMoves": 1,
+          "supportMoves": 0,
+          "reflections": 2,
+          "heroReflections": 1,
+          "pistonPushes": 1,
+          "platformsCreated": 1,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Les mêmes poids autorisent plusieurs ordres de départ ; le témoin ne fixe pas un ordre caché."
+      }
+    ]
   }
 }

@@ -992,5 +992,167 @@
       }
     }
   ],
-  "adaptation": "Water 12 inspire le transfert d’un gardien sur un soutien qui disparaît ; Water 6 fournit la caisse déposée avant retrait. Ici, un sas de polarité opposée impose le relais magique puis une file à répartir entre deux commandes. Les appuis persistent à la réactivation ; ni dragon, ni feu, ni porte comptant les monstres."
+  "adaptation": {
+    "description": "Water 12 inspire le transfert d’un gardien sur un soutien qui disparaît ; Water 6 fournit la caisse déposée avant retrait. Ici, un sas de polarité opposée impose le relais magique puis une file à répartir entre deux commandes. Les appuis persistent à la réactivation ; ni dragon, ni feu, ni porte comptant les monstres.",
+    "localChecks": [
+      {
+        "name": "Parcours complet sans refus ni décès",
+        "status": "passed",
+        "observed": {
+          "actions": 153,
+          "selections": 32,
+          "merchantPushes": 12,
+          "warriorPushes": 15,
+          "thiefPulls": 2,
+          "swaps": 2,
+          "partnerSwaps": 1,
+          "stoneSwaps": 0,
+          "monsterSwaps": 1,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 31,
+          "mirrorMoves": 0,
+          "monsterMoves": 1,
+          "supportMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 1,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+      },
+      {
+        "name": "Le gardien est transporté avant le retrait de son soutien",
+        "status": "passed",
+        "observed": {
+          "transport": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 9
+              },
+              "to": {
+                "x": 10,
+                "y": 4
+              }
+            },
+            {
+              "actor": "monster",
+              "from": {
+                "x": 10,
+                "y": 4
+              },
+              "to": {
+                "x": 10,
+                "y": 9
+              }
+            }
+          ],
+          "platformBefore": true,
+          "platformAfter": false,
+          "monsterLost": true,
+          "heroesAlive": true
+        },
+        "scope": "Le retrait d’eau, et non un combat de contact, élimine ce gardien dans le parcours."
+      },
+      {
+        "name": "Le relais magique précède la fermeture du sas inférieur",
+        "status": "passed",
+        "observed": {
+          "thief": {
+            "x": 10,
+            "y": 7
+          },
+          "wizard": {
+            "x": 11,
+            "y": 12
+          },
+          "platformActive": true,
+          "lowerGateClosed": true
+        },
+        "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+      },
+      {
+        "name": "L’appui fixe survit à une nouvelle activation et au retrait",
+        "status": "passed",
+        "observed": {
+          "support": {
+            "x": 10,
+            "y": 9
+          },
+          "counterBranch": "UD",
+          "preservedOnBothTransitions": true
+        },
+        "scope": "Contrat SRA explicite : l’appui immergé n’est pas écrasé par le redéploiement de la plateforme."
+      },
+      {
+        "name": "Les deux caisses sèches ouvrent ensemble le fronton",
+        "status": "passed",
+        "observed": {
+          "oneWeightClosed": true,
+          "twoWeightsOpen": true,
+          "stones": [
+            {
+              "x": 9,
+              "y": 4
+            },
+            {
+              "x": 11,
+              "y": 4
+            }
+          ],
+          "support": [
+            {
+              "x": 10,
+              "y": 9
+            }
+          ]
+        },
+        "scope": "Étapes et conséquences physiques du parcours rejouées ; aucune unicité ou impossibilité globale affirmée."
+      },
+      {
+        "name": "Variante gagnante : le Marchand évacue avant les autres",
+        "status": "passed",
+        "observed": {
+          "actions": 148,
+          "selections": 27,
+          "merchantPushes": 12,
+          "warriorPushes": 15,
+          "thiefPulls": 2,
+          "swaps": 2,
+          "partnerSwaps": 1,
+          "stoneSwaps": 0,
+          "monsterSwaps": 1,
+          "bentSwaps": 0,
+          "multiMirrorSwaps": 0,
+          "swapReflections": 0,
+          "swapLoops": 0,
+          "partnerMoves": 0,
+          "chainPushes": 2,
+          "stoneMoves": 31,
+          "mirrorMoves": 0,
+          "monsterMoves": 1,
+          "supportMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 1,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "L’ordre final de stationnement reste libre lorsque les deux charges sont en place."
+      }
+    ],
+    "sourcePrinciple": "Une plateforme commandée permet de transporter une charge puis de changer le terrain disponible.",
+    "changes": "Écluse à deux étages, gardien échangé, appui permanent conservé sous la plateforme réactivée et deux caisses de commande."
+  }
 }

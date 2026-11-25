@@ -1,0 +1,11 @@
+{
+  "game": "SS21",
+  "version": "0.1.0",
+  "command": "node --test tests/*.test.mjs",
+  "success": true,
+  "tests": 103,
+  "passed": 103,
+  "failed": 0,
+  "skipped": 0,
+  "output": "validation/unit-tests.txt"
+}

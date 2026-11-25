@@ -1,0 +1,537 @@
+{
+  "success": true,
+  "htmlSha256": "b4f720f6eda4412319235e8a2cfec97d7ad86d94e513179712705f9107884ee3",
+  "scope": "focused-ui-and-full-campaign",
+  "tutorialLevel": 1,
+  "pedagogicalFixtureLevel": 1,
+  "environment": "Happy DOM, compiled standalone HTML, canvas pixel buffer and controlled animation queue",
+  "visualBrowserTest": false,
+  "checks": [
+    "Compiled-HTML role fixtures cover Merchant pushes, Warrior files, Thief pulls, Wizard exchanges, stable monsters and explicit transport, fixed supports, presses, hydraulics and combat.",
+    "Global reflection uses nearest-source priority, exchanges equally distant actors and draws shape-specific previews.",
+    "Single rear traction preserves the second crate, awards the matching discoveries and can be interrupted without stale animation frames.",
+    "Gray-backed buttons and black/gray press centers have the exact expected pixels.",
+    "A returning Wizard ray displays every mirror turn and two white pulses without moving the world; repeated loops preserve Undo history.",
+    "Mirror warnings flash only involved backs, preserve diagonals and lock ordinary controls.",
+    "A two-weight goal press preserves yellow destination corners and black/gray centres through opening, Undo and replay.",
+    "Keys 1/2/3/4, repeated Tab, all four role buttons and image clicks select correctly without advancing the world; Shift+Tab and off-canvas clicks are respected.",
+    "Direction buttons work; Undo, Reset, Restart and level selection interrupt animations without stale frames. Reset clears discoveries in the current room; Restart returns to level 1 with its thirty-one-discovery workshop visible.",
+    "Reduced-motion mode paints the final result without timer waits.",
+    "Defeat appears only after the combat animation and its Undo restores the four living heroes.",
+    "Victory waits for all four heroes and the last frame, disables ordinary controls, and can be undone or restarted.",
+    "All eight rooms expose four heroes, four goals, correct titles, objectives, links and contextual help; the campaign opens with the teaching workshop at level 1; other rooms have contextual rules without awarding tutorial discoveries.",
+    "The actual workshop route at level 1 earns all 31 discoveries from displayed public pixels; other rooms add none.",
+    "The compiled HTML completes all eight real rooms with every frame and duration checked, including Undo and replay of each completion."
+  ],
+  "roleCoverage": [
+    {
+      "case": "A guard stays still during unrelated walking",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard exchanges a guard exactly once",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes one crate",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant refuses a two-piece row",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes Thief without a rear pull",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes Warrior without a chain power",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant pushes Wizard without a distant exchange",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant moves a mirror without changing its face",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant crate creates an immersed support",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Merchant cannot push a companion into unsupported water",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Warrior pushes all three partners and a mixed file atomically",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A blocked Warrior file refuses every mover",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Warrior creates a support with the far crate of a file",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Warrior cannot push Wizard into unsupported water",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls the nearest crate and leaves its rear neighbour",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls Merchant without a passive push",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls Wizard without a passive exchange",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls Warrior without pushing its forward occupant",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief walks past a distant crate without a ranged power",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pulls a mirror without rotating it",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief leaves an immersed rear support in place",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief cannot push a crate from the front",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief leaves its crate by departing sideways",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Thief pull hands a monster to a lateral press before contact",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard exchanges a partner across bare water",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard ray crosses two white mirror faces",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard walks when the ray has no target",
+      "frames": 3,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Wizard refuses the back of an adjacent mirror",
+      "frames": 1,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A side press moves Thief without a rear pull",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A press visibly delivers a guard without a second movement",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A side press moves Wizard without a distant exchange",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "A press deposits a remote immersed support",
+      "frames": 6,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Forced landing waits for hydraulic support",
+      "frames": 9,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    },
+    {
+      "case": "Pressed monsters fight simultaneously away from every hero",
+      "frames": 11,
+      "exactPixelsAndTiming": true,
+      "exactUndo": true
+    }
+  ],
+  "reflectionCoverage": [
+    {
+      "case": "near hero ignores farther blocked arrival",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "near crate has a square preview",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    },
+    {
+      "case": "equal distances exchange two roles without passive abilities",
+      "teleportFrames": 3,
+      "preview": true,
+      "noAutomaticAbility": true,
+      "exactUndo": true
+    }
+  ],
+  "tractionAnimationCoverage": {
+    "case": "one-piece rear traction",
+    "frames": 3,
+    "exactPixelsAndTiming": true,
+    "controlsLocked": true,
+    "secondCrateUnchanged": true,
+    "correctDiscoveries": true,
+    "resetCancelsCallbacks": true
+  },
+  "deviceGlyphCoverage": [
+    {
+      "sharedPlate": false,
+      "openPixels": [
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          3,
+          15
+        ],
+        [
+          7,
+          15,
+          7
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    },
+    {
+      "sharedPlate": true,
+      "openPixels": [
+        [
+          3,
+          7,
+          3
+        ],
+        [
+          7,
+          15,
+          7
+        ],
+        [
+          3,
+          7,
+          3
+        ]
+      ],
+      "closedCenter": 5,
+      "exactUndo": true
+    }
+  ],
+  "wizardLoopCoverage": {
+    "case": "returning Wizard ray",
+    "mirrorTurns": 4,
+    "frames": 9,
+    "whitePulses": 2,
+    "exactPixelsAndTiming": true,
+    "controlsLocked": true,
+    "noWorldMovement": true,
+    "repeatedLoopAddsNoUndo": true
+  },
+  "mirrorInterferenceCoverage": [
+    {
+      "case": "blocking mirror alone flashes",
+      "redMirrorIndices": [
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "incompatible mirror destinations both flash",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "wall-blocked reflection flashes its source mirror",
+      "redMirrorIndices": [
+        0
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "closed-press reflection flashes its source mirror",
+      "redMirrorIndices": [
+        0
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "independent blocked mirrors flash together without a partial valid transfer",
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "exactPixelsAndTiming": true,
+      "unrelatedMirrorsUnchanged": true,
+      "controlsLocked": true,
+      "noUndoEntry": true
+    },
+    {
+      "case": "blocked reflection respects reduced motion",
+      "frames": 4,
+      "noTimerWaits": true,
+      "normalRestingFrame": true
+    },
+    {
+      "case": "actual campaign blocked mirrors",
+      "level": 4,
+      "prefixActions": 0,
+      "redMirrorIndices": [
+        0,
+        1
+      ],
+      "frames": 4,
+      "redPixels": 6,
+      "onlyBlackBacksChanged": true,
+      "exactPixelsAndTiming": true,
+      "repeatedWarningAddsNoUndo": true,
+      "resetClearsWarning": true
+    }
+  ],
+  "goalPressCoverage": {
+    "case": "two-weight goal press",
+    "requiredWeights": 2,
+    "closedPixels": [
+      [
+        11,
+        15,
+        11
+      ],
+      [
+        7,
+        5,
+        15
+      ],
+      [
+        11,
+        15,
+        11
+      ]
+    ],
+    "openPixels": [
+      [
+        11,
+        11,
+        11
+      ],
+      [
+        11,
+        3,
+        11
+      ],
+      [
+        11,
+        11,
+        11
+      ]
+    ],
+    "fourVisibleGoals": true,
+    "exactPixelsAndTiming": true,
+    "openingUndoAndReplay": true
+  },
+  "campaignCoverage": [
+    {
+      "level": 1,
+      "title": "L’école des quatre",
+      "actions": 260,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 2,
+      "title": "Trois caisses, deux chambres",
+      "actions": 143,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 3,
+      "title": "Les quatre balcons",
+      "actions": 103,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 4,
+      "title": "Le rectangle sans issue",
+      "actions": 182,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 5,
+      "title": "Le dernier intercepteur",
+      "actions": 224,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 6,
+      "title": "Le compte des îlots",
+      "actions": 202,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 7,
+      "title": "L’écluse à deux étages",
+      "actions": 153,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    },
+    {
+      "level": 8,
+      "title": "Le verrou à trois poids",
+      "actions": 219,
+      "exactPixelsAndTiming": true,
+      "completionUndo": true
+    }
+  ],
+  "tutorialCoverage": {
+    "level": 1,
+    "actions": 260,
+    "discoveries": [
+      "select",
+      "move",
+      "merchant-push",
+      "warrior-push",
+      "chain",
+      "mixed-chain",
+      "thief-pull",
+      "single-pull",
+      "partner-push",
+      "partner-pull",
+      "release",
+      "relay-weight",
+      "mirror-motion",
+      "water-support",
+      "cross-support",
+      "wizard-swap",
+      "wizard-partner",
+      "wizard-bend",
+      "wizard-first",
+      "wizard-water",
+      "wizard-walk",
+      "mirror",
+      "hero-reflection",
+      "crate-reflection",
+      "button",
+      "gate",
+      "press",
+      "monster-still",
+      "monster-press",
+      "monster",
+      "goals"
+    ],
+    "onlyTutorialRoomAwardsDiscoveries": true
+  }
+}
