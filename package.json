@@ -16,6 +16,8 @@
     "test:sic-campaign": "node scripts/sic-transfer-campaign.mjs",
     "test:sic-transfer": "node scripts/sic-transfer-cycle.mjs",
     "test:sic-pressure-transfer": "node scripts/sic-pressure-transfer-campaign.mjs",
+    "test:sic-effect-composer": "node scripts/sic-effect-composer-campaign.mjs",
+    "test:sic-effect-replays": "node scripts/sic-effect-composer-replays.mjs",
     "test:sic-continuity": "node scripts/verify-sic-continuity.mjs",
     "typecheck": "tsc --noEmit"
   },
