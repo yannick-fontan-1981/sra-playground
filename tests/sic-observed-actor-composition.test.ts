@@ -12,7 +12,8 @@ const same = (a: Point,b: Point) => a[0]===b[0] && a[1]===b[1];
 const add = (a: Point,b: Point): Point => [a[0]+b[0],a[1]+b[1]];
 
 function habitat(pitch: number, inks: readonly number[], commands: readonly [string,Point][],
-  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point; loadPositions?: readonly Point[]; idleSolo?:boolean; destinationGroups?:readonly (readonly Point[])[] } = {}) {
+  secondary: 'withdrawal' | 'activation', options: { rejectSelection?: boolean; duplicatePeer?: boolean; level?: number; offset?: Point; hideGoals?: boolean; pressure?: Point; loadPositions?: readonly Point[]; idleSolo?:boolean; destinationGroups?:readonly (readonly Point[])[];
+    objects?:readonly {cell:Point;paint:(x:number,y:number)=>number}[] } = {}) {
   const span = 12, alignment = 1, floor = 2, background = 3, cargoInk = 5, inset = 6;
   const marker = 7, destination = 8;
   const actorOrigins: Point[] = [[2,3],[2,7],[2,5]];
@@ -38,6 +39,7 @@ function habitat(pitch: number, inks: readonly number[], commands: readonly [str
       tile(p,(x,y)=>x===middle&&y===middle?floor:destination+index*3);
     if(options.pressure)tile(options.pressure,(x,y)=>x===middle&&y===middle?marker:x===middle||y===middle?12:floor);
     for(const p of cargo)tile(p,(x,y)=>x===middle&&y===middle?inset:cargoInk);
+    for(const object of options.objects??[])tile(object.cell,object.paint);
     for(const [i,p] of actors.entries()){
       if(!present.has(i))continue;
       tile(p,(x,y)=>{
@@ -76,7 +78,7 @@ function habitat(pitch: number, inks: readonly number[], commands: readonly [str
     }
     facing=dir;
     const dest=add(origin,dir);
-    if(!floorAt(dest)||actors.some((p,i)=>present.has(i)&&same(p,dest)))return;
+    if(!floorAt(dest)||actors.some((p,i)=>present.has(i)&&same(p,dest))||options.objects?.some(object=>same(object.cell,dest)))return;
     const load=cargo.findIndex(p=>same(p,dest));
     if(load>=0){
       const landing=add(dest,dir);
@@ -582,6 +584,55 @@ test('tests an accessible pressure composition even with no recognized destinati
     if(i<proposal.actions.length-1)assert.ok(!family.state().guarded.includes(expected),'Approach must not close the experiment');
   }
   assert.ok(family.state().guarded.includes(expected),'The actual contact closes the experiment');
+});
+
+test('tests each visible object instance with no mirror, pressure control or known objective', async () => {
+  const learned=await study(habitat(3,[9,10],directions,'activation'),10);
+  const game=habitat(3,[9,10],directions,'activation',{level:2,hideGoals:true,loadPositions:[],objects:[
+    {cell:[4,3],paint:()=>13},
+    {cell:[5,3],paint:()=>13},
+    {cell:[4,7],paint:(x,y)=>x===0||y===0&&x===1?14:2},
+  ]});
+  const family=createObservedActorComposition();
+  family.restore(learned.state);
+  const tested=new Set<string>();
+  const knownCapacity=learned.state.transfer!.roles['9']!.capacity;
+  let rejectedMissingObject=false;
+  for(let i=0;i<110&&tested.size<3;i++){
+    const first=await game.observed();
+    const plan=await family.propose(first.observation,first.packet.frame_rows,[],110-i);
+    if(!plan)break;
+    for(const [index,action] of plan.actions.entries()){
+      const before=await game.observed();
+      assert.ok((await family.before(plan,index,before.packet,before.observation)).admitted);
+      const step=plan.steps[index]!;
+      const probe=plan.offer.kind==='test_observed_object_interaction'&&step.contact&&['4,3','5,3','4,7'].includes(step.contact);
+      if(probe&&!rejectedMissingObject){
+        const {pitch,phase,floor}=family.state().shape!;
+        const [x,y]=step.contact!.split(',').map(Number);
+        const rows=before.packet.frame_rows.map(row=>[...row]);
+        for(let dy=0;dy<pitch;dy++)for(let dx=0;dx<pitch;dx++)
+          rows[phase[1]+y!*pitch+dy]![phase[0]+x!*pitch+dx]=floor;
+        assert.equal((await family.before(plan,index,{...before.packet,frame_rows:rows},before.observation)).admitted,false);
+        assert.ok(!family.state().guarded.includes(plan.offer.test!));
+        rejectedMissingObject=true;
+      }
+      game.perform(action);
+      const after=await game.observed();
+      await family.record(before.observation,after.observation,action,before.packet.frame_rows,after.packet.frame_rows,plan,index,[]);
+      if(probe){
+        assert.ok(family.state().guarded.includes(plan.offer.test!));
+        assert.ok(plan.sicLocalDecision.need.subjects.includes('object@'+step.contact));
+        tested.add(step.contact!);
+      }else if(plan.offer.kind==='test_observed_object_interaction'&&!step.contact){
+        assert.ok(!family.state().guarded.includes(plan.offer.test!));
+      }
+      if((await family.after(plan,index,before.observation,after.observation,before.packet.frame_rows,after.packet.frame_rows)).seal_prefix)break;
+    }
+  }
+  assert.deepEqual([...tested].sort(),['4,3','4,7','5,3']);
+  assert.ok(rejectedMissingObject);
+  assert.equal(family.state().roles[9]?.capacity,knownCapacity);
 });
 
 test('a refused longer row does not overwrite an observed lower bound or consume other poses', async () => {
