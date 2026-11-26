@@ -4,7 +4,7 @@
 
 La reprise réunit `main` après SS23 (`7ba57180f543b0954fc98d1f3f1e016c8f161508`) et la branche SIC sauvegardée (`19a82e7afb4bcac034de9a7f16b643153b1c00ac`). Le témoin intégré est `844e4be77efc69bde6c1fb8ba31b3d5325cb9702`. Le nouveau correctif de production est `fa1ac73068c3800002d887228e7d3ac6a9166b4a`, sur `fix/sic-campaign-recovery-20261126` ([PR 129](https://github.com/yannick-fontan-1981/sra-playground/pull/129)).
 
-Les corrections SIGN et GABA de la session interrompue étaient déjà sauvegardées sur la branche SIC. L’extension de continuité WA30 ne l’était pas. Cette reprise conserve les sources SS23 et leurs réglages d’animation dans le merge.
+Les corrections SIGN et GABA de la session interrompue étaient déjà sauvegardées sur la branche SIC. L’extension de continuité WA30 ne l’était pas. Cette reprise conserve les sources SS23 et leurs réglages d’animation dans le merge. SS24 a ensuite été publié sur `main` (`66127782bd56b98b3e5925c5027de9ab3f73dbe7`) pendant ce travail et a été intégré sans perte dans `1987d7389758a931b93b42bb39cebfe8ed890c05`.
 
 Les [références archivées](../../architecture/sic-replay-reference-provenance-20261126.md) décrivent explicitement les 100 jeux source et SS01–SS07. Le fichier temporaire Windows de la campagne interrompue n’a pas été retrouvé. Les anciens compteurs « 12 verdicts, 7 jeux, 69 niveaux » ne sont donc pas repris comme résultats de ce lot. Aucun plafond de qualification n’est augmenté.
 
@@ -82,13 +82,47 @@ La [capture WA30 complète](wa30-continuity.jsonl.gz) contient 412 tickets et re
 
 Les 264 décisions ont exactement une clôture finale acquérant leurs commandes, sans clôture intermédiaire. Aucun retour n’est absent ou ambigu dans cette capture. Les 45 retours réfutés, dont 13 fermant une série, ne sont jamais suivis d’une commande de la même décision. Les paires physiques les excluent; une réfutation finale légitime ne doit pas être confondue avec une perte de continuité.
 
-Le lot de tests ciblés du parent compte **58 tests TS réussis**, auxquels s’ajoutent **10 tests de contrat et de collecte**. Le typecheck passe. Les résultats complets du gate, de la reproduction dans le viewer et les identités de publication seront ajoutés après vérification.
+Le lot de tests ciblés compte **58 tests TS réussis**, auxquels s’ajoutent **10 tests de contrat et de collecte**. Le typecheck passe. Le contrôle complet `npm run test:sic-continuity` et sa revalidation avec les seuils finaux sont tous deux réussis : **78 niveaux, 13 jeux, 4 439 commandes SIC et 3 247 continuations**.
+
+| Jeu | Niveaux contrôlés | Commandes | Continuations |
+|---|---:|---:|---:|
+| AR25 | 1 | 17 | 12 |
+| DC22 | 1 | 22 | 7 |
+| GABA | 6 | 447 | 408 |
+| HANO | 1 | 6 | 3 |
+| SIGN | 6 | 271 | 117 |
+| SS01 | 8 | 444 | 243 |
+| SS02 | 8 | 546 | 439 |
+| SS03 | 8 | 491 | 424 |
+| SS04 | 8 | 442 | 374 |
+| SS05 | 8 | 393 | 351 |
+| SS06 | 8 | 399 | 284 |
+| SS07 | 8 | 549 | 437 |
+| WA30 | 7 | 412 | 148 |
+
+L’[archive des onze cohortes](continuity-78.tar.gz) contient les JSONL, le journal de capture et celui de la revalidation finale. Le [manifeste](continuity-78.summary.json) fournit les empreintes de chaque fichier et des sources contrôlées. La capture séquentielle a traversé l’intégration de SS24 : elle n’est pas présentée comme l’exécution d’un unique commit. Les sources SIC, le collecteur, le contrat et les moteurs SS01–SS07 n’ont pas changé dans cet intervalle. La revalidation finale a été effectuée sur `5c1c647a60c4c1f206ef85e34b08033c6f5300b7`.
+
+La CI [SIC continuity, exécution 45860115434](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/45860115434) a également réussi : **141 tests**, onze cohortes indépendantes puis assemblage et vérification des 78 niveaux. Le head de la PR est `5c1c647a`; GitHub a testé son merge `30c8ab604d73d42bf1274c2161a702c17271c11d` avec `main`. Les deux commits ont exactement le même arbre `111a040f5790b1d36dfeeadef6f9457cc6fa5355`. Chaque cohorte vérifie la révision de ses sources et conserve son manifeste avec l’empreinte de ses preuves. Les plafonds des jeux restent inchangés. Le [résumé CI](ci-78.summary.json) précise les identités et résultats des treize jobs.
+
+### Reproduction dans le viewer
+
+Les trois rejeux de l’interface utilisent le code intégré avec SS24 dans l’aperçu local `http://127.0.0.1:4173/`, le mode SIC et une session neuve commencée au niveau 1. Chaque niveau suivant est lancé après le score précédent, sans reset ni sélection directe d’un niveau. Les lectures de l’interface sont consignées dans [ui-replays.json](ui-replays.json).
+
+| Jeu | Niveaux gagnés | Commandes par niveau | Total | Plans terminés | État final visible |
+|---|---:|---|---:|---:|---|
+| GABA | 6 sur 6 | 47, 37, 67, 88, 106, 102 | 447 | 39 | `The game reports WIN.` |
+| SIGN | 6 sur 6 | 15, 44, 56, 22, 53, 81 | 271 | 154 | `The game reports WIN.` |
+| WA30 | 7 sur 9 | 26, 59, 76, 48, 113, 48, 42 | 412 | 264 | `Level completed.`; niveau 8 prêt |
+
+Le premier onglet WA30 a disparu après trois niveaux; cette tentative partielle est exclue de la preuve. Le rejeu retenu a recommencé au niveau 1 et a gagné les sept niveaux dans son unique session. Aucun coup n’a été exécuté au niveau 8 dans ce rejeu visuel. Les temps de ces passages de l’interface ne servent pas de mesure de campagne; les temps stricts proviennent uniquement des campagnes isolées ci-dessus.
+
+La portée du lot chronométré reste **21 niveaux gagnés sur quatre jeux, dont deux jeux complets**. Les 78 niveaux du contrat recouvrent une partie de ces résultats et ne s’y additionnent pas. La campagne entière des 107 jeux n’a pas été rejouée ici.
 
 ## Suite de la campagne
 
 | Sujet | État de ce lot | Prochaine preuve requise |
 |---|---|---|
-| WA30 L1–L7 | Plafonds stricts et contrat de tickets respectés | Terminer le gate complet et la reproduction du viewer |
+| WA30 L1–L7 | Plafonds stricts, contrat complet et viewer validés | Conserver ces preuves lors de la correction de L8 |
 | WA30 L8–L9 | Arrêt temporel L8; L9 non atteint | Reproduire la première route/attente coûteuse L8 depuis L1 |
 | GABA et SIGN | Six niveaux chacun, parcours conservés | Conserver les gardes et la continuité dans le gate |
 | M0R0 | L1–L2 passent sur cet hôte | Reprendre ensuite la campagne complète; profiler le seal si l’arrêt revient |

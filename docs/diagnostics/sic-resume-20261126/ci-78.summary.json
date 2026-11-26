@@ -1,0 +1,262 @@
+{
+  "schema": "sic.continuity-ci-summary.v1",
+  "repository": "yannick-fontan-1981/sra-playground",
+  "run": {
+    "id": 45860115434,
+    "name": "SIC continuity",
+    "number": 56,
+    "attempt": 1,
+    "event": "pull_request",
+    "branch": "fix/sic-campaign-recovery-20261126",
+    "status": "completed",
+    "conclusion": "success",
+    "startedAtUtc": "2026-11-26T16:35:08Z",
+    "completedAtUtc": "2026-11-26T16:43:55Z",
+    "completedAtSource": "workflow_run.updated_at after completed/success"
+  },
+  "source": {
+    "pullRequest": 129,
+    "headSha": "5c1c647a60c4c1f206ef85e34b08033c6f5300b7",
+    "testedMergeSha": "30c8ab604d73d42bf1274c2161a702c17271c11d",
+    "mergeBaseSha": "66127782bd56b98b3e5925c5027de9ab3f73dbe7",
+    "headTreeSha": "111a040f5790b1d36dfeeadef6f9457cc6fa5355",
+    "testedTreeSha": "111a040f5790b1d36dfeeadef6f9457cc6fa5355",
+    "identicalTrees": true,
+    "note": "The pull_request workflow checked out github.sha (the synthetic merge), whose tree is exactly the pull request head tree."
+  },
+  "jobs": [
+    {
+      "id": 140048757804,
+      "name": "Continuity / cargo-transport",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758122,
+      "name": "Continuity / la-ruse-verte",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758190,
+      "name": "TypeScript and continuity contracts",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758294,
+      "name": "Continuity / actor-composition",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758315,
+      "name": "Continuity / mirror-isles",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758326,
+      "name": "Continuity / native-sources",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758376,
+      "name": "Continuity / marked-field",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758454,
+      "name": "Continuity / destination-set",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758558,
+      "name": "Continuity / l-axe-violet",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758577,
+      "name": "Continuity / la-force-rouge",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758771,
+      "name": "Continuity / oriented-delivery",
+      "conclusion": "success"
+    },
+    {
+      "id": 140048758858,
+      "name": "Continuity / local-carry",
+      "conclusion": "success"
+    },
+    {
+      "id": 140052686531,
+      "name": "Executed series and final reconciliation",
+      "conclusion": "success"
+    }
+  ],
+  "contracts": {
+    "jobId": 140048758190,
+    "typecheck": "success",
+    "testFiles": 18,
+    "tests": 141,
+    "passed": 141,
+    "failed": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "batches": [
+      {
+        "step": 6,
+        "command": "node --test tests/sic-continuity-contract.test.mjs tests/sic-continuity-evidence.test.mjs tests/sic-verified-walking-series.test.ts tests/sic-spatial-series.test.ts tests/v6-branch-routing-kernel.test.ts",
+        "tests": 21,
+        "passed": 21,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      {
+        "step": 7,
+        "command": "node --test tests/sic-cursor-role-memory.test.ts tests/sic-observed-actor-composition.test.ts tests/sic-contact-transfer.test.ts tests/sic-contact-frontier.test.ts",
+        "tests": 32,
+        "passed": 32,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      {
+        "step": 8,
+        "command": "node --test tests/sic-observed-push-access.test.ts tests/sic-observed-coverage.test.ts tests/sic-observed-exchange.test.ts tests/sic-observed-field-carry.test.ts",
+        "tests": 21,
+        "passed": 21,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      {
+        "step": 9,
+        "command": "node --test tests/v6-agent.test.ts tests/v6-native-runtime.test.ts",
+        "tests": 45,
+        "passed": 45,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0
+      },
+      {
+        "step": 10,
+        "command": "node --test tests/sic-oriented-delivery-continuity.test.ts tests/v6-knowledge-store-noop.test.ts tests/sic-prepared-effects-native-state.test.ts",
+        "tests": 22,
+        "passed": 22,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0
+      }
+    ]
+  },
+  "continuity": {
+    "jobId": 140052686531,
+    "conclusion": "success",
+    "cohortCount": 11,
+    "gameCount": 13,
+    "validatedLevelCount": 78,
+    "source": "The successful verify-sic-continuity output contains rows 0 through 77.",
+    "games": [
+      {
+        "code": "AR25",
+        "start": 1,
+        "end": 1,
+        "validatedLevels": 1
+      },
+      {
+        "code": "DC22",
+        "start": 1,
+        "end": 1,
+        "validatedLevels": 1
+      },
+      {
+        "code": "GABA",
+        "start": 1,
+        "end": 6,
+        "validatedLevels": 6
+      },
+      {
+        "code": "HANO",
+        "start": 1,
+        "end": 1,
+        "validatedLevels": 1
+      },
+      {
+        "code": "SIGN",
+        "start": 1,
+        "end": 6,
+        "validatedLevels": 6
+      },
+      {
+        "code": "SS01",
+        "start": 1,
+        "end": 8,
+        "validatedLevels": 8
+      },
+      {
+        "code": "SS02",
+        "start": 1,
+        "end": 8,
+        "validatedLevels": 8
+      },
+      {
+        "code": "SS03",
+        "start": 1,
+        "end": 8,
+        "validatedLevels": 8
+      },
+      {
+        "code": "SS04",
+        "start": 1,
+        "end": 8,
+        "validatedLevels": 8
+      },
+      {
+        "code": "SS05",
+        "start": 1,
+        "end": 8,
+        "validatedLevels": 8
+      },
+      {
+        "code": "SS06",
+        "start": 1,
+        "end": 8,
+        "validatedLevels": 8
+      },
+      {
+        "code": "SS07",
+        "start": 1,
+        "end": 8,
+        "validatedLevels": 8
+      },
+      {
+        "code": "WA30",
+        "start": 1,
+        "end": 7,
+        "validatedLevels": 7
+      }
+    ],
+    "manifestVerification": "success",
+    "manifestChecks": [
+      "exact 11 cohort file pairs",
+      "same run ID and checkout SHA",
+      "raw JSONL SHA-256",
+      "expected game codes",
+      "start 1 and initialCompleted 0",
+      "expected finish and unchanged cohort cap",
+      "solver sic and parallelWorkers 1"
+    ],
+    "downloadedArtifacts": 11,
+    "artifactNamePrefix": "sic-continuity-30c8ab604d73d42bf1274c2161a702c17271c11d-",
+    "scope": "Protected continuity levels; not a full 107-game campaign or a new strict chronological timing qualification."
+  },
+  "sources": {
+    "run": "https://github.com/yannick-fontan-1981/sra-playground/actions/runs/45860115434",
+    "runApi": "https://api.github.com/repos/yannick-fontan-1981/sra-playground/actions/runs/45860115434",
+    "jobs": "https://api.github.com/repos/yannick-fontan-1981/sra-playground/actions/runs/45860115434/jobs",
+    "artifacts": "https://api.github.com/repos/yannick-fontan-1981/sra-playground/actions/runs/45860115434/artifacts",
+    "contractsLog": "https://api.github.com/repos/yannick-fontan-1981/sra-playground/actions/jobs/140048758190/logs",
+    "aggregationLog": "https://api.github.com/repos/yannick-fontan-1981/sra-playground/actions/jobs/140052686531/logs",
+    "headCommit": "https://api.github.com/repos/yannick-fontan-1981/sra-playground/git/commits/5c1c647a60c4c1f206ef85e34b08033c6f5300b7",
+    "testedMergeCommit": "https://api.github.com/repos/yannick-fontan-1981/sra-playground/git/commits/30c8ab604d73d42bf1274c2161a702c17271c11d"
+  }
+}
