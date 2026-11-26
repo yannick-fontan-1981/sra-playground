@@ -2774,3 +2774,11 @@ Le viewer local affiche la victoire après les mêmes 546 commandes et huit nive
 Le cache conserve l’encodage des racines et des sous-arbres validés d’au moins 24 valeurs JSON. Les petits sous-arbres sont encodés lors de leur lecture. Le cache applique les mêmes limites de taille et de profondeur et renvoie les mêmes octets canoniques.
 
 Dans deux paires de rejeux locaux avec profilage, le temps CPU échantillonné passe de 57,7 à 53,1 s sur AS66 niveaux 1 à 4 et de 40,4 à 36,1 s sur GORI jusqu’à son arrêt au niveau 5. Les empreintes des commandes et de leurs retours restent identiques dans chaque paire. Les 52 contrôles ciblés couvrent le cache canonique, les graphes d’état et les transactions de connaissance.
+
+### Poursuivre les essais directs après un retour animé
+
+Un tir produit un témoin de réglage courant lorsque l’agent a lancé une trajectoire régulée et reçu une animation intermédiaire distincte des deux plateaux stables. Le témoin reste disponible jusqu’au changement de niveau, y compris lorsque la jauge saturée ne présente momentanément plus de contraste. Un modèle secondaire peut encore proposer un contact et préparer un réglage qui projette un nouveau contact.
+
+Après ce retour, un essai direct admissible du plateau courant prend la priorité sur une composition lancée par la seule répétition des retours. Un clic exige son témoin de point courant. L’arbitrage conserve l’essai de composition si la recherche directe ne propose aucune commande admissible.
+
+Le rejeu chronologique de GORI depuis le niveau 1 retrouve les six scores SIC en 2, 6, 7, 3, 25 et 3 commandes. Le niveau 5 gagne en 21,4 s jusqu’au score public, sous les plafonds de 30 commandes et 29 s. Le niveau 6 gagne en 2,0 s sous les plafonds de 8 commandes et 7 s. Les essais synthétiques couvrent deux trajectoires distinctes, une source ambiguë, un retour sans animation et l’expiration du témoin au changement de niveau.

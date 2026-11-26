@@ -101,7 +101,7 @@ import { createSicContrastControls, contrastProbeId } from '../sic/contrast-cont
 import { createSicFollowStableReference } from '../sic/framed-search.ts';
 import { createSicFramedReception, learnFramedReceptionId } from '../sic/framed-reception.ts';
 import { createSicWindowRelation, learnWindowRelationId } from '../sic/window-relation.ts';
-import { createSicAnimationContact, learnAnimationContactId } from '../sic/animation-contact.ts';
+import { animationContactId, createSicAnimationContact, currentRegulatedTrial, learnAnimationContactId } from '../sic/animation-contact.ts';
 import { coordinateObservedMotionId, createSicReflectedPlacement } from '../sic/reflected-placement.ts';
 import { createSicMaterialAssembly, learnMaterialAssemblyId } from '../sic/material-assembly.ts';
 import { createSicVerifyCoupledRoute } from '../sic/coupled-motion.ts';
@@ -161,11 +161,12 @@ import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/recepti
 import { createSicVerifyMarkerPlacement } from '../sic/marker-coverage.ts';
 import { createObservedActorComposition } from '../sic/observed-actor-composition.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
-import { createCompositionTrials, compositionFamily, compositionPrior } from '../sic/test-observed-compositions.ts';
+import { createCompositionTrials, compositionFamily, compositionPrior, cycleGroup } from '../sic/test-observed-compositions.ts';
 import { createPreparedEffects, preparedEffectsId } from '../sic/test-prepared-effects.ts';
 import { preparationReturns } from '../sic/preparation-experiments.ts';
 import { decidePlanContinuation, maximumCommittedActions } from '../sic/plan-step.ts';
 import { planningGroupsWithExperiments } from '../sic/experiment-selection-groups.ts';
+import { recurrentExperimentGroup } from '../sic/experiment-arbitration.ts';
 import { sourceFieldRelations } from '../sic/compose-field-relations.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
@@ -821,6 +822,12 @@ export class NativeV6Runtime implements NativeV6Backend {
     const motion = exploration ? currentControlledMotion(exploration, this.observation) : undefined;
     const panelFrontier = exploration && currentPanelFrontier(exploration, this.observation);
     const observation = this.observation, rows = this.current.frame_rows;
+    let regulatedTrialRef: string | undefined;
+    if (observation.available_action_refs.includes('ACTION6')) for (const family of this.families) {
+      if (family.id !== animationContactId && family.id !== learnAnimationContactId) continue;
+      regulatedTrialRef = currentRegulatedTrial(family.state(), observation);
+      if (regulatedTrialRef) break;
+    }
     const cursorState = this.knowledge?.memory.nodes[`family_state:${cursorRoleMemoryId}`];
     const roleMemory = cursorState ? this.knowledge!.value(cursorState.id) as Parameters<typeof currentCursorRoles>[0] : undefined;
     const retainedCursorRoles = roleMemory && currentCursorRoles(roleMemory, observation);
@@ -829,6 +836,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(motion ? { observedControlledMotion: motion } : {}),
       ...(retainedCursorRoles?.length ? { retainedCursorRoles } : {}),
       ...(panelFrontier ? { panelFrontier } : {}),
+      ...(regulatedTrialRef ? { regulatedTrialRef } : {}),
       ...(this.readDirectionalMotion ? { readDirectionalMotion: this.readDirectionalMotion } : {}),
       ...(this.observedQueue?.ref === this.observation?.observation_ref ? { observedQueue: this.observedQueue.model } : {}),
       ...(this.readEncounterTransition ? { readEncounterTransition: this.readEncounterTransition } : {}),
@@ -862,7 +870,7 @@ export class NativeV6Runtime implements NativeV6Backend {
         const family = this.families.find(candidate => candidate.id === id)!;
         if (group.id === observedPressureRecoveryGroup && id === preparedEffectsId
           && this.openPublicFrontierEpoch === this.observation.level_epoch) {
-          offered = await this.openDirectionalFrontier();
+          offered = await this.openPublicInputFrontier();
           if (offered) break;
           this.openPublicFrontierEpoch = null;
         }
@@ -912,8 +920,19 @@ export class NativeV6Runtime implements NativeV6Backend {
           && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal, index, entryIndex)
             || await this.scopeReturnedContactRefusal(family, proposal))) continue;
         if (proposal) {
+          const recurrent = family.id === preparedEffectsId && entry === recurrentExperimentGroup
+            || family.id === compositionFamily && proposal.trigger === cycleGroup;
+          if (regulatedTrialRef && recurrent) {
+            const direct = await this.openPublicInputFrontier(true);
+            if (direct) {
+              this.note({ kind: 'native_coordination', rule: 'open_input_after_regulated_return',
+                observation_ref: this.observation.observation_ref, evidence_ref: regulatedTrialRef,
+                deferred_family: family.id, preferred_family: direct.family.id });
+              offered = direct; break;
+            }
+          }
           if (proposal.compare_public_frontier_first === true && group.families.includes(publicInputExplorationId)) {
-            const preferred = await this.openDirectionalFrontier();
+            const preferred = await this.openPublicInputFrontier();
             if (preferred) {
               this.note({ kind: 'native_coordination', rule: 'public_frontier_before_translated_preparation',
                 observation_ref: this.observation.observation_ref, deferred_family: family.id, preferred_family: preferred.family.id });
@@ -1002,7 +1021,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     }
   }
 
-  private async openDirectionalFrontier(): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
+  private async openPublicInputFrontier(includeClicks = false): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
     if (!this.planning || !this.observation || !this.current) return null;
     const family = this.families.find(candidate => candidate.id === publicInputExplorationId);
     if (!family || objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled !== true) return null;
@@ -1010,8 +1029,10 @@ export class NativeV6Runtime implements NativeV6Backend {
     const proposal = await family.propose(this.observation, this.current.frame_rows, inputs, this.remaining(), execution);
     const strategy = (proposal?.sicSituationCard as R | undefined)?.strategy;
     const direction = proposal?.actions[0]?.action_ref;
+    const admittedDirection = direction && /^ACTION[1-4]$/.test(direction) && inputs.some(command => command.action_ref === direction);
+    const boundClick = includeClicks && direction === 'ACTION6' && proposal?.steps?.[0]?.point_binding;
     if (proposal?.status !== 'proposed' || (strategy !== 'compare_public_input' && strategy !== 'revisit_input_frontier')
-      || !direction || !/^ACTION[1-4]$/.test(direction) || !inputs.some(command => command.action_ref === direction)) return null;
+      || (!admittedDirection && !boundClick)) return null;
     return { family, proposal: { ...proposal, follows_open_public_frontier: true } };
   }
 

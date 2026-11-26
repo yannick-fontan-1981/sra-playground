@@ -9,6 +9,12 @@ import { chooseRegulatedContact, learnCurveWitness, mayRegulateContact, measureR
 
 export const animationContactId = 'sic_animation_contact';
 export const learnAnimationContactId = 'sic_learn_animation_contact';
+
+export function currentRegulatedTrial(state: NativeRecord, observation: NativeObservation): string | undefined {
+  const trial = (state.curve as CurveWitness | undefined)?.animatedTrial;
+  return trial?.epoch === observation.level_epoch ? trial.ref : undefined;
+}
+
 export const animationContactStrategies = {
   observe_transient_motion: 'Test an input and follow what moves through the animation',
   refine_transient_path: 'Test a new point to clarify the observed path',
@@ -93,7 +99,7 @@ export function createSicAnimationContact(family = animationContactId, transferO
     async propose(observation, rows, _inputs, remaining, execution) {
       if (remaining < 1 || !observation.available_action_refs.includes('ACTION6')) return null;
       if ((!learns || transferObservedContact) && curve && mayRegulateContact(curve, observation)) {
-        const choice = chooseRegulatedContact(curve, observation, rows, transferObservedContact);
+        const choice = chooseRegulatedContact(curve, observation, rows, transferObservedContact, execution?.regulatedTrialRef);
         return choice ? regulatedProposal(observation, rows, choice, family) : null;
       }
       const previous = state?.epoch === observation.level_epoch ? state : null;

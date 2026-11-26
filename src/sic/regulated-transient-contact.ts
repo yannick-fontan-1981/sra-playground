@@ -9,6 +9,7 @@ type Model = NonNullable<ReturnType<typeof acquireTransientCurve>>;
 type Adjustment = { delta: number; evidence: string };
 type Impact = { point: NativePoint; count: number; obstacle: NativeBox; evidence: string; displayOverlay?: string };
 export type CurveWitness = { model: Model; epoch: number | null; controls: Record<string, Adjustment>; attempted: string[];
+  animatedTrial?: { epoch: number; ref: string };
   boundary?: string; impact?: Impact; revalidated?: true; unconfirmedAim?: { count: number; point: NativePoint } };
 export const regulatedContactStrategies = {
   measure_trajectory_adjustment: 'Test how an available command changes the visible magnitude',
@@ -84,7 +85,8 @@ export function learnCurveWitness(before: NativeObservation, after: NativeObserv
   return { model, epoch: null, controls: {}, attempted: [], ...(impact ? { impact } : {}) };
 }
 
-export function chooseRegulatedContact(witness: CurveWitness, observation: NativeObservation, rows: NativeRows, recalibrateObservedTrajectory = false): RegulatedChoice | null {
+export function chooseRegulatedContact(witness: CurveWitness, observation: NativeObservation, rows: NativeRows,
+  recalibrateObservedTrajectory = false, currentTrial?: string): RegulatedChoice | null {
   const available = observation.available_action_refs;
   if (!mayRegulateContact(witness, observation) || !available.includes('ACTION6')) return null;
   const fill = measureScalarFillDisplay(rows), count = fill.scalar_fill_count as number;
@@ -176,6 +178,9 @@ export function chooseRegulatedContact(witness: CurveWitness, observation: Nativ
     return { ...view, strategy: 'extend_trajectory_measurement', action: { action_ref: 'ACTION6', data: { x, y } },
       projected: [x, y], expectedSign: null, shot: [count, x, y].join(','), ...(sourceCandidate ? { sourceCandidate } : {}) };
   }
+  // A regulated trial already ran in this layout. A secondary model may
+  // contribute a new contact, but another adjustment needs a projected gain.
+  if (recalibrateObservedTrajectory && currentTrial && (!increase || !project(count + increase[1].delta).contact_solution)) return null;
   const input = increase?.[0] ?? available.find(action => /^ACTION[1-4]$/.test(action) && !witness.controls[action]);
   if (!input) return null;
   const strategy = increase ? 'raise_trajectory_clearance' : 'measure_trajectory_adjustment';
@@ -197,7 +202,7 @@ export function measureRegulatedAdjustment(choice: RegulatedChoice, first: Nativ
 export function retainRegulatedReturn(witness: CurveWitness, choice: RegulatedChoice, before: NativeObservation,
   after: NativeObservation, first: NativeRows, second: NativeRows, frames: readonly NativeRows[], recalibrateObservedTrajectory = false): CurveWitness {
   if (after.levels_completed > before.levels_completed) {
-    const { impact: _impact, revalidated: _revalidated, unconfirmedAim: _aim, ...retained } = witness;
+    const { impact: _impact, revalidated: _revalidated, unconfirmedAim: _aim, animatedTrial: _trial, ...retained } = witness;
     return { ...retained, epoch: after.level_epoch, boundary: after.observation_ref, attempted: [] };
   }
   if (choice.avoidedPortals && witness.epoch !== before.level_epoch) {
@@ -214,7 +219,13 @@ export function retainRegulatedReturn(witness: CurveWitness, choice: RegulatedCh
       }
     }
     const { impact: _impact, ...retained } = witness;
+    const animatedTrial = before.level_epoch === after.level_epoch && frames.length >= 5 && (() => {
+      if (measurement) return true;
+      const settled = new Set([symbolicDigest(first), symbolicDigest(second)]);
+      return frames.some(frame => !settled.has(symbolicDigest(frame)));
+    })();
     return { ...retained, ...(measurement ? { model: measurement.model } : {}), ...(measurement?.impact ? { impact: measurement.impact } : {}),
+      ...(animatedTrial ? { animatedTrial: { epoch: after.level_epoch, ref: after.observation_ref } } : {}),
       attempted: [...witness.attempted, choice.shot],
       ...(recalibrateObservedTrajectory && choice.strategy === 'test_regulated_contact' && choice.projected && witness.unconfirmedAim?.count !== choice.count
         ? { unconfirmedAim: { count: choice.count, point: choice.projected } } : {}) };

@@ -136,6 +136,7 @@ export interface NativeExecution {
   readonly retainedCursorRoles?: ReturnType<typeof import('../sic/cursor-role-memory.ts').currentCursorRoles>;
   readonly panelFrontier?: import('../sic/public-input-exploration.ts').PanelFrontier;
   readonly observedQueue?: ReturnType<typeof import('./v6-queued-field-models.ts').acquireQueuedField>;
+  readonly regulatedTrialRef?: string;
   readonly readEncounterTransition?: () => { readonly beforeRef: string; readonly afterRef: string } | null;
   readonly readDirectionalMotion?: () => import('../sic/observed-translation.ts').DirectionalMotion | null;
   readonly readPriorDirectionalScene?: <T>(project: (rows: NativeRows, observation: NativeObservation) => T | null) => {
