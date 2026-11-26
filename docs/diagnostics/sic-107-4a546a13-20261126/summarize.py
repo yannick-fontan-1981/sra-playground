@@ -439,6 +439,70 @@ def cell(value):
     return "—" if value is None else str(value).replace("|", "\\|").replace("\n", " ")
 
 
+def seconds(value):
+    return "—" if not duration(value) else f"{value / 1000:.3f}".rstrip("0").rstrip(".").replace(".", ",")
+
+
+def incomplete_details(game):
+    """Presentation only: keep the received verdict, score and counters intact."""
+    last = game["levels"][-1] if game["levels"] else {}
+    number = last.get("level")
+    won = last.get("won") is True
+    stage, reason, category = game["stopStage"], game["rawReason"], game["terminalCategory"]
+    level_text = f"Après L{number} (score acquis)" if won and number is not None else \
+        f"L{number}" if number is not None else "Démarrage" if stage == "startup" else "Non connu"
+    budget = last.get("budget") if isinstance(last.get("budget"), dict) else {}
+    moves = f"{cell(last.get('actions'))} / {cell(budget.get('actions'))}"
+    cap, scored, settled = budget.get("activeTimeMs"), last.get("scoredMs"), last.get("settlementMs")
+    if won:
+        timing = f"score {seconds(scored)} / {seconds(cap)} s"
+        if stage in {"transition", "final_reconciliation"} or duration(settled):
+            allocation = max(cap - scored, min(5000, max(250, math.ceil(cap / 4)))) \
+                if duration(cap) and cap > 0 and duration(scored) else None
+            timing = f"réconciliation {seconds(settled)} / ≈{seconds(allocation)} s ; {timing}" \
+                if allocation is not None else f"réconciliation {seconds(settled)} s (plafond non calculable) ; {timing}"
+    else:
+        active = reason == "level_active_time_budget" and duration(last.get("activeMs"))
+        observed = last.get("activeMs") if active else last.get("ms")
+        timing = f"{seconds(observed)} / {seconds(cap)} s ({'calcul actif' if active else 'mural'})" \
+            if duration(observed) or duration(cap) else "Non disponible"
+    reasons = {
+        "level_action_budget": "Plafond de commandes du niveau atteint",
+        "session_action_budget": "Plafond de commandes de la session atteint",
+        "level_wall_time_budget": "Plafond de temps de résolution atteint",
+        "level_active_time_budget": "Plafond de calcul actif atteint",
+        "level_transition_wall_time_budget": "Transition arrêtée après le score acquis : délai de réconciliation atteint",
+        "no_applicable_transferred_family": "Aucune famille acquise applicable",
+        "native_game_over": "Défaite signalée par le jeu",
+        "sic_observed_game_over": "Défaite observée, récupération non aboutie",
+        "native_acquisition_incomplete": "Acquisition du retour incomplète",
+        "sic_observed_coverage_deadlock": "Impasse de couverture observée",
+        "sic_observed_transport_deadlock": "Transport bloqué selon les observations",
+        "sic_observed_weight_shortage": "Poids mobile nécessaire indisponible",
+        "sic_observed_motion_cycle": "Cycle de déplacements sans progrès observé",
+        "sic_observed_unplanned_material_loss": "Perte de matériel mobile observée",
+        "replay_process_unresponsive": "Processus de rejeu sans réponse",
+        "command_outside_active_level": "Erreur du banc : commande reçue hors d'un niveau actif",
+    }
+    if category == "complete_unsettled":
+        motive = "Tous les scores acquis ; réconciliation finale non attestée"
+    elif category == "harness_error":
+        motive = reasons.get(reason, "Erreur du banc de rejeu") if isinstance(reason, str) else "Erreur du banc de rejeu"
+    elif category == "engine_error":
+        motive = "Erreur du moteur SIC ; détail conservé dans le rapport"
+    elif category == "invalid_result":
+        motive = "Résultat incohérent à vérifier ; détail conservé dans le rapport"
+    elif category == "missing":
+        motive = "Résultat absent après clôture de la campagne"
+    elif isinstance(reason, str) and reason.startswith("composition_dependency_"):
+        motive = "Dépendance de composition non satisfaite"
+    else:
+        motive = reasons.get(reason, "Autre arrêt ; motif brut dans le tableau détaillé") if isinstance(reason, str) else "Motif d'arrêt non disponible"
+    if game["stopBudgetBasis"] == "no_level_reference":
+        motive += " ; plafond de repli sans référence individuelle"
+    return [level_text, f"{cell(game['levelsScored'])}/{game['expectedLevels']}", moves, timing, motive]
+
+
 def readme_text(report):
     a = report["aggregate"]
     lines = ["# Campagne SIC des 107 jeux", "", f"Instantané généré le {report['generatedAt']}.", "",
@@ -456,6 +520,17 @@ def readme_text(report):
         f"Compteurs de récupération connus : **{a['knownResets']} réinitialisations**, **{a['knownUndos']} retours arrière**. Parmi les résultats valides reçus, {a['gamesWithUnknownResetCount']} n'ont pas de compteur de réinitialisation et {a['gamesWithUnknownUndoCount']} n'ont pas de compteur de retour arrière.", "",
         "## Catégories", "", "| Catégorie | Jeux |", "|---|---:|"]
     lines.extend(f"| {category} | {count} |" for category, count in a["categories"].items())
+    lines.extend(["", "## Jeux incomplets et résultats à vérifier", "",
+        "Les coups et les temps de ce tableau concernent le niveau d'arrêt. Une transition interrompue conserve le score déjà acquis. L'allocation de réconciliation affichée est recalculée avec la règle du surveillant à partir des mesures arrondies ; elle est distincte du plafond jusqu'au score.",
+        "Les jeux encore en attente figurent dans le tableau exhaustif qui suit.", ""])
+    incomplete = [game for game in report["games"] if game["terminalCategory"] not in {"complete", "pending"}]
+    if incomplete:
+        lines.extend(["| Jeu | Niveau d'arrêt | Gagnés / cible | Coups du niveau / plafond du niveau | Temps observé / plafond | Motif |",
+            "|---|---|---:|---:|---|---|"])
+        for game in incomplete:
+            lines.append("| " + " | ".join(cell(value) for value in [game["code"], *incomplete_details(game)]) + " |")
+    else:
+        lines.append("Aucun résultat incomplet reçu à cet instant.")
     lines.extend(["", "## Verdicts par jeu", "", "| Jeu | Score public | Réconciliés | Verdict | Étape | Coups | Base du plafond | Raison brute |", "|---|---:|---:|---|---|---:|---|---|"])
     for game in report["games"]:
         score = f"{cell(game['levelsScored'])}/{game['expectedLevels']}"

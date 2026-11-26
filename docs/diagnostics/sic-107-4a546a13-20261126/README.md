@@ -1,15 +1,15 @@
 # Campagne SIC des 107 jeux
 
-Instantané généré le 2026-11-26T18:50:18.481875+00:00.
+Instantané généré le 2026-11-26T19:03:54.985864+00:00.
 
-**État : `running` — 23/107 résultats reçus.**
+**État : `running` — 39/107 résultats reçus.**
 Source figée : `4a546a139f9064422c078ef5f40b8c22133c39a8`. Périmètre : **107 jeux / 692 niveaux**.
 
-**15 jeux ont tous leurs scores publics ; 15 ont aussi leur réconciliation finale attestée.**
-Niveaux publiquement gagnés confirmés : **124/692** ; réconciliation attestée : **124**.
-Commandes connues : **3308**, dont **3308** attribuées à SIC.
+**27 jeux ont tous leurs scores publics ; 27 ont aussi leur réconciliation finale attestée.**
+Niveaux publiquement gagnés confirmés : **204/692** ; réconciliation attestée : **204**.
+Commandes connues : **5208**, dont **5208** attribuées à SIC.
 
-En attente : **84**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
+En attente : **68**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
 
 Les scores acquis sont conservés en cas d'arrêt pendant la transition. `complete_unsettled` distingue une victoire publique complète d'une réconciliation finale non attestée.
 Un jeu en attente n'est pas un échec. L'absence du reçu de fin maintient le statut en attente ; ce rapport ne sonde pas le processus.
@@ -24,10 +24,30 @@ Compteurs de récupération connus : **0 réinitialisations**, **0 retours arri�
 
 | Catégorie | Jeux |
 |---|---:|
-| commands | 7 |
-| complete | 15 |
-| pending | 84 |
+| commands | 11 |
+| complete | 27 |
+| pending | 68 |
 | time | 1 |
+
+## Jeux incomplets et résultats à vérifier
+
+Les coups et les temps de ce tableau concernent le niveau d'arrêt. Une transition interrompue conserve le score déjà acquis. L'allocation de réconciliation affichée est recalculée avec la règle du surveillant à partir des mesures arrondies ; elle est distincte du plafond jusqu'au score.
+Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
+
+| Jeu | Niveau d'arrêt | Gagnés / cible | Coups du niveau / plafond du niveau | Temps observé / plafond | Motif |
+|---|---|---:|---:|---|---|
+| CASC | L4 | 3/6 | 25 / 25 | 17,951 / 25 s (mural) | Plafond de commandes du niveau atteint |
+| CGWL | L5 | 4/6 | 71 / 74 | 45 / 45 s (mural) | Plafond de temps de résolution atteint |
+| CLRS | L6 | 5/6 | 29 / 29 | 12,668 / 23 s (mural) | Plafond de commandes du niveau atteint |
+| COLM | L2 | 1/6 | 34 / 34 | 13,068 / 24 s (mural) | Plafond de commandes du niveau atteint |
+| CRAF | L6 | 5/6 | 33 / 33 | 18,933 / 324 s (mural) | Plafond de commandes du niveau atteint |
+| CWSE | L3 | 2/6 | 80 / 80 | 44,615 / 90 s (mural) | Plafond de commandes du niveau atteint ; plafond de repli sans référence individuelle |
+| DC22 | L6 | 5/6 | 271 / 271 | 299,524 / 455 s (mural) | Plafond de commandes du niveau atteint |
+| ESCT | L2 | 1/6 | 22 / 22 | 8,743 / 12 s (mural) | Plafond de commandes du niveau atteint |
+| ETAG | L4 | 3/6 | 80 / 80 | 71,97 / 90 s (mural) | Plafond de commandes du niveau atteint ; plafond de repli sans référence individuelle |
+| FOGW | L2 | 1/6 | 19 / 19 | 5,981 / 9 s (mural) | Plafond de commandes du niveau atteint |
+| GRAV | L5 | 4/6 | 28 / 28 | 13,19 / 23 s (mural) | Plafond de commandes du niveau atteint |
+| GRIL | L2 | 1/6 | 10 / 10 | 3,37 / 8 s (mural) | Plafond de commandes du niveau atteint |
 
 ## Verdicts par jeu
 
@@ -56,22 +76,22 @@ Compteurs de récupération connus : **0 réinitialisations**, **0 retours arri�
 | DNOI | 6/6 | 6 | complete | — | 59 | no_level_reference | target_levels_completed |
 | ELAS | 6/6 | 6 | complete | — | 268 | measured | target_levels_completed |
 | ESCT | 1/6 | 1 | commands | resolution | 38 | measured | level_action_budget |
-| ETAG | —/6 | 0 | pending | — | — | — | — |
-| EVAS | —/6 | 0 | pending | — | — | — | — |
-| FITE | —/6 | 0 | pending | — | — | — | — |
-| FOGW | —/6 | 0 | pending | — | — | — | — |
-| FT09 | —/6 | 0 | pending | — | — | — | — |
-| FUIT | —/6 | 0 | pending | — | — | — | — |
-| G50T | —/7 | 0 | pending | — | — | — | — |
-| GABA | —/6 | 0 | pending | — | — | — | — |
-| GARE | —/6 | 0 | pending | — | — | — | — |
-| GIGO | —/6 | 0 | pending | — | — | — | — |
-| GLOB | —/6 | 0 | pending | — | — | — | — |
-| GMAP | —/6 | 0 | pending | — | — | — | — |
-| GORI | —/6 | 0 | pending | — | — | — | — |
-| GRAV | —/6 | 0 | pending | — | — | — | — |
-| GRIL | —/6 | 0 | pending | — | — | — | — |
-| HANO | —/4 | 0 | pending | — | — | — | — |
+| ETAG | 3/6 | 3 | commands | resolution | 220 | no_level_reference | level_action_budget |
+| EVAS | 6/6 | 6 | complete | — | 86 | no_level_reference | target_levels_completed |
+| FITE | 6/6 | 6 | complete | — | 64 | no_level_reference | target_levels_completed |
+| FOGW | 1/6 | 1 | commands | resolution | 37 | measured | level_action_budget |
+| FT09 | 6/6 | 6 | complete | — | 75 | measured | target_levels_completed |
+| FUIT | 6/6 | 6 | complete | — | 190 | measured | target_levels_completed |
+| G50T | 7/7 | 7 | complete | — | 301 | measured | target_levels_completed |
+| GABA | 6/6 | 6 | complete | — | 447 | measured | target_levels_completed |
+| GARE | 6/6 | 6 | complete | — | 56 | no_level_reference | target_levels_completed |
+| GIGO | 6/6 | 6 | complete | — | 70 | measured | target_levels_completed |
+| GLOB | 6/6 | 6 | complete | — | 79 | no_level_reference | target_levels_completed |
+| GMAP | 6/6 | 6 | complete | — | 69 | measured | target_levels_completed |
+| GORI | 6/6 | 6 | complete | — | 46 | measured | target_levels_completed |
+| GRAV | 4/6 | 4 | commands | resolution | 85 | measured | level_action_budget |
+| GRIL | 1/6 | 1 | commands | resolution | 15 | measured | level_action_budget |
+| HANO | 4/4 | 4 | complete | — | 60 | no_level_reference | target_levels_completed |
 | HOLE | —/6 | 0 | pending | — | — | — | — |
 | HPDL | —/6 | 0 | pending | — | — | — | — |
 | ISOS | —/6 | 0 | pending | — | — | — | — |
@@ -143,7 +163,7 @@ Compteurs de récupération connus : **0 réinitialisations**, **0 retours arri�
 
 ## Mesures jusqu'au score
 
-124 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
+204 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
 Seul `scoredMs` est comparé au plafond de résolution. La durée totale et la réconciliation ne sont pas comparées à ce plafond. Les éventuels dépassements restent distincts du score public et du verdict brut ; les mesures arrondies et l'ordonnancement IPC devront être interprétés à l'audit final.
 
 Aucun dépassement rapporté parmi les scores dont le temps est disponible.
