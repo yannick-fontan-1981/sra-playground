@@ -1,0 +1,1151 @@
+{
+  "spec": {
+    "id": "ss24-02",
+    "title": "L’escalier à rebours",
+    "mode": "quartet",
+    "rows": [
+      "################",
+      "########....#..#",
+      "########.M..o..#",
+      "########....T..#",
+      "########BZ.....#",
+      "########.......#",
+      "############.###",
+      "########.......#",
+      "#.g.g..#.......#",
+      "#......#.......#",
+      "#.g.g.o........#",
+      "#......#.......#",
+      "########.......#",
+      "################"
+    ],
+    "circuits": [
+      {
+        "id": "passage",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 9
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 10
+        },
+        "circuit": "passage",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDDDDDLDDLCCCDRDDRRDDDCCRRRDLCCDDDDRDDDDRCCCRRRRCCCURUCCCUUURLLLDRRRURUUCCDDLDDCCDDDRRCLDCCCDDLLLLLLLLLDLLLUCCULLUULLCCCDLLLDLUUCCCLLLLCCCUULLLLLLLLULLLDL",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Heroes of Hauling — énigme 6",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-6",
+    "puzzle": 6,
+    "objective": "Descendre une charge, maintenir le passage inférieur et extraire le dernier obstacle sans retirer le poids de commande."
+  },
+  "metrics": {
+    "actions": 154,
+    "selections": 36,
+    "merchantPushes": 2,
+    "thiefPulls": 14,
+    "thiefPartnerPulls": 6,
+    "thiefMirrorPulls": 0,
+    "swaps": 3,
+    "wizardHeroSwaps": 3,
+    "wizardStoneSwaps": 0,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 1,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 1,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 9,
+    "stoneMoves": 11,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur extrait la charge sous le mur puis la descend par l’unique escalier.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": false
+      }
+    },
+    {
+      "label": "Le Marchand prend le relais et dépose la charge sur la commande du passage inférieur.",
+      "turn": 22,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 8,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Le Magicien échange les postes avec le Marchand sans déranger le poids.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 8,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "La Barde est installée dans l’escalier sans chant.",
+      "turn": 54,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 8,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Trois tractions sortent la Barde de la portée du poids, qui reste sur sa commande.",
+      "turn": 64,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 8,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Depuis l’autre côté du mur, un chant dégage le bloc de passage ; la butée inférieure le retient au pas suivant.",
+      "turn": 79,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Le Voleur descend le Magicien sans le laisser échanger avec le poids au fond de sa ligne.",
+      "turn": 86,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 16,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 8,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Le bloc contre le mur est tiré vers une place de réserve pour libérer la route de toute l’équipe.",
+      "turn": 107,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "L’échange final transfère le Magicien dans la salle basse et rend au Voleur le passage déjà dégagé.",
+      "turn": 128,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 5,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "La source descend une charge par la droite, tire un autre cristal sur une plaque, puis extrait l’obstacle contre le mur de la salle basse.",
+    "changes": "Deux charges et quatre rôles MTZB remplacent le héros isolé. Le premier poids ouvre le passage ; l’installation silencieuse de la Barde et la traction du Magicien évitent de le reprendre pendant les transports. Un chant à travers la cloison puis une traction dégagent le dernier bloc.",
+    "limits": "La coopération décrite est celle du parcours vérifié. La salle conserve une liberté de préparation ; ni ordre unique ni nécessité globale de chaque pouvoir ne sont revendiqués.",
+    "localChecks": []
+  }
+}

@@ -1218,6 +1218,10 @@ records.push({code:'SS23',id:'ss23-c4000001',name:'Les Chambres de Résonance',g
   description:'Coordinate single pushes, whole files, Wizard exchanges and the Bard’s song to preserve weights and reach four destinations.',
   sourcePath:'experiments/sinking-star-ss23/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS24',id:'ss24-c4000001',name:'Les Voies de Traverse',group:'custom_4',family:'sinking_star_quartet',levels:8,
+  description:'Coordinate single pushes, rear pulls, Wizard exchanges and the Bard’s song to leave cargo in place and prepare four destinations.',
+  sourcePath:'experiments/sinking-star-ss24/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'
