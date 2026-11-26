@@ -6,7 +6,7 @@ import { BrowserV6Agent, BrowserV6WorkerClient } from '../src/runtime/v6-agent.t
 import type { V6AgentSnapshot, V6DispatchResult } from '../src/runtime/v6-agent.ts';
 import { readControlEffectShadow } from '../src/sic/shadow.ts';
 import { as66Contradiction } from '../src/sic/contradiction-review.ts';
-import { sicObservedCoverageDeadlock, sicObservedGameOver, sicObservedWeightShortage } from '../src/logos-engine/v6-native-types.ts';
+import { sicObservedCoverageDeadlock, sicObservedGameOver, sicObservedMotionCycle, sicObservedWeightShortage } from '../src/logos-engine/v6-native-types.ts';
 import {
   emptyV6Snapshot, nativeV6Action, sameV6Observation, toV6PublicObservation, v6FrameHash, V6AgentError, V6_REFERENCE_COMMIT,
 } from '../src/runtime/v6-agent-protocol.ts';
@@ -107,6 +107,7 @@ class ScriptedTransport implements V6AgentTransport {
 function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6AgentSnapshot) => void, canReset = false) {
   const context = { current: board(), enabled: true, actions: [] as AgentAction[], snapshots: [] as V6AgentSnapshot[], resets: 0 };
   let onState: ((snapshot: V6AgentSnapshot) => void) | null = null;
+  const presentationModes: boolean[] = [];
   let dispatch: (action: AgentAction) => Promise<V6DispatchResult> = async action => {
     context.actions.push(action);
     context.current = board(context.actions.length % 16, { level: context.current.level, levelsCompleted: context.current.levelsCompleted });
@@ -114,8 +115,9 @@ function harness(transport = new ScriptedTransport(), onAcquired?: (snapshot: V6
   };
   const agent = new BrowserV6Agent({ transport, getObservation: () => context.current, canDispatch: () => context.enabled,
     ...(canReset ? { resetLevel: async () => { context.resets++; return context.current = board(); } } : {}),
-    dispatch: action => dispatch(action), onAcquired, onState: state => { context.snapshots.push(state); onState?.(state); } });
-  return { agent, context, transport, setDispatch: (value: typeof dispatch) => { dispatch = value; },
+    dispatch: (action, presentation) => { presentationModes.push(!!presentation?.continuous); return dispatch(action); },
+    onAcquired, onState: state => { context.snapshots.push(state); onState?.(state); } });
+  return { agent, context, transport, presentationModes, setDispatch: (value: typeof dispatch) => { dispatch = value; },
     setOnState: (value: typeof onState) => { onState = value; } };
 }
 
@@ -147,7 +149,7 @@ test('native V6 commands require exact coordinate arguments and never alias acti
 });
 
 test('sixteen-action batches preserve the coroutine beyond twelve actions and reconcile only at prefix boundaries', async () => {
-  const { agent, context, transport } = harness();
+  const { agent, context, transport, presentationModes } = harness();
   const running = agent.run();
   assert.equal(agent.run(16), running);
   await running;
@@ -161,6 +163,7 @@ test('sixteen-action batches preserve the coroutine beyond twelve actions and re
   await agent.step();
   assert.equal(agent.snapshot.sessionId, session);
   assert.equal(agent.snapshot.actionCount, 17);
+  assert.deepEqual(presentationModes, Array.from({length:17},(_,index)=>index<16&&index%3!==0));
   assert.equal(transport.cycles, 5);
   const init = transport.operations[0]!;
   assert.equal(init.type, 'init');
@@ -178,7 +181,7 @@ test('coordinate clicks flow intact from the authorized ticket to the real host 
   assert.equal(state.agent.snapshot.sequence, 1);
 });
 
-for (const reason of [sicObservedCoverageDeadlock, sicObservedWeightShortage]) test(`${reason} resets the same level and continues with the same sequence`, async () => {
+for (const reason of [sicObservedCoverageDeadlock, sicObservedMotionCycle, sicObservedWeightShortage]) test(`${reason} resets the same level and continues with the same sequence`, async () => {
   for (const pauseBeforeReset of [false, true]) {
     const { agent, context, transport, setOnState } = harness(new ScriptedTransport(), undefined, true);
     transport.hook = async (operation, result) => operation.type === 'advance' && operation.sequence === 1

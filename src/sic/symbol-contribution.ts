@@ -1,5 +1,5 @@
 import { FrameGrid, measureConcentricFrames, type ConcentricFrame } from '../logos-engine/v5-concentric-frames.ts';
-import { measureDiagramCandidate, measureDiagramRows, measureDiagramTransition } from '../logos-engine/v5-symbolic-diagrams.ts';
+import { DiagramBoundExceeded, measureDiagramCandidate, measureDiagramRows, measureDiagramTransition } from '../logos-engine/v5-symbolic-diagrams.ts';
 import { ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativeFamily, NativeObservation, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { navigationPrimitives } from './navigation-primitives.ts';
@@ -37,6 +37,17 @@ const transferLabels: Record<SymbolStep['kind'], string> = {
   transform: 'Test the displayed recipe that supplies a missing symbol',
 };
 
+// Let other families consume the public return when this optional
+// measurement has exceeded its own extraction budget.
+function optionalDiagram<T>(measure: () => T): T | undefined {
+  try {
+    return measure();
+  } catch (error) {
+    if (error instanceof DiagramBoundExceeded) return undefined;
+    throw error;
+  }
+}
+
 function guideAt(frame: FrameGrid, observation: NativeObservation, appearance: number | null) {
   const diagrams = measureDiagramRows(frame);
   if (diagrams.length < 2 || !diagrams.some(row => row.left_values.length === 2)) return null;
@@ -68,9 +79,10 @@ export function acquireInstructionReturn(prior: SymbolAcquisition | undefined, b
   const { x, y } = command.data;
   if (x === undefined || y === undefined) return prior;
   const local = prior?.epoch === before.level_epoch ? prior : { epoch: before.level_epoch, appearance: null, examples: {} };
-  const grid = new FrameGrid(first), guide = guideAt(grid, before, local.appearance);
+  const grid = new FrameGrid(first), guide = optionalDiagram(() => guideAt(grid, before, local.appearance));
   if (!guide || !atCenter(guide, x, y)) return prior;
-  const facts = measureDiagramCandidate(grid, { point: guide.center }, guide.outer_value);
+  const facts = optionalDiagram(() => measureDiagramCandidate(grid, { point: guide.center }, guide.outer_value));
+  if (!facts) return prior;
   const options: [VisibleInstruction, boolean][] = [
     ['select_indicated_symbol', facts.diagram_point_full_symbol_count === 1 && facts.diagram_tight_white_center_count === 0],
     ['load_indicated_operand', facts.diagram_point_equal_pair_center_count === 1 && facts.diagram_tight_white_center_count === 1],
@@ -79,7 +91,7 @@ export function acquireInstructionReturn(prior: SymbolAcquisition | undefined, b
   ];
   const supported = options.filter(([strategy, eligible]) => eligible && (after.levels_completed > before.levels_completed
     ? strategy === 'deliver_matching_symbol'
-    : observed({ strategy, actions: [command], appearance: guide.outer_value, guide: frameBox(guide) }, first, second)));
+    : optionalDiagram(() => observed({ strategy, actions: [command], appearance: guide.outer_value, guide: frameBox(guide) }, first, second))));
   if (supported.length !== 1) return prior;
   const examples = rememberSymbolExample(local.examples, supported[0]![0], [x, y], first, after.observation_ref);
   if (after.levels_completed > before.levels_completed) {
@@ -92,8 +104,8 @@ export function acquireInstructionReturn(prior: SymbolAcquisition | undefined, b
 export function projectRecalledInstruction(memory: SymbolAcquisition, observation: NativeObservation, rows: NativeRows, prior?: SymbolTransaction) {
   const { learned } = memory;
   if (!learned || memory.epoch !== observation.level_epoch - 1) return null;
-  const grid = new FrameGrid(rows), transaction = prior ?? rebindSymbolWorkspace(grid, learned);
-  const step = transaction && nextSymbolStep(grid, transaction);
+  const grid = new FrameGrid(rows), transaction = prior ?? optionalDiagram(() => rebindSymbolWorkspace(grid, learned));
+  const step = transaction && optionalDiagram(() => nextSymbolStep(grid, transaction));
   return transaction && step ? { step, transaction, learned } : null;
 }
 
@@ -118,16 +130,17 @@ export function createSicSymbolContribution(): NativeFamily<Proposal> {
         || observation.available_action_refs.some(ref => /^ACTION[1-5]$/.test(ref))) return null;
       const local = state.epoch === observation.level_epoch ? state : freshLevel(observation.level_epoch, state.learned);
       if (local.stopped || local.count >= 32) return null;
-      const frame = new FrameGrid(rows), guide = local.transaction ? null : guideAt(frame, observation, local.appearance);
+      const frame = new FrameGrid(rows), guide = local.transaction ? null : optionalDiagram(() => guideAt(frame, observation, local.appearance));
       const learned = local.learned;
-      const transaction = guide || !learned ? null : local.transaction ?? rebindSymbolWorkspace(frame, learned);
-      const step = transaction ? nextSymbolStep(frame, transaction) : null;
+      const transaction = guide || !learned ? null : local.transaction ?? optionalDiagram(() => rebindSymbolWorkspace(frame, learned));
+      const step = transaction ? optionalDiagram(() => nextSymbolStep(frame, transaction)) : null;
       const transfer = transaction && learned && step ? { transaction, learned, step } : null;
       if (!guide && !transfer) return null;
       const [x, y] = guide ? [guide.center[1], guide.center[0]] : transfer!.step.point;
       const focus = guide ? frameBox(guide) : transfer!.step.target;
       const appearance = guide?.outer_value ?? transfer!.learned.selectionOutline;
-      const facts = guide ? measureDiagramCandidate(frame, { point: guide.center }, guide.outer_value) : null;
+      const facts = guide ? optionalDiagram(() => measureDiagramCandidate(frame, { point: guide.center }, guide.outer_value)) : null;
+      if (guide && !facts) return null;
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.evidence, ...(transfer?.learned.proof ?? [])].filter(item => item !== ref))];
       const command = { action_ref: 'ACTION6', data: { x, y } };
@@ -220,7 +233,7 @@ export function createSicSymbolContribution(): NativeFamily<Proposal> {
 function confirmedEffect(proposal: Proposal, first: NativeRows, second: NativeRows): string | null {
   const { transfer } = proposal;
   if (transfer) return verifySymbolStep(transfer.step, transfer.transaction.workspace, first, second, transfer.learned.selectionOutline);
-  return observed(proposal, first, second) ? 'symbol_contribution_observed' : null;
+  return optionalDiagram(() => observed(proposal, first, second)) ? 'symbol_contribution_observed' : null;
 }
 
 function observed({ strategy, actions, appearance, guide }: Pick<Proposal, 'strategy' | 'actions' | 'appearance' | 'guide'>, first: NativeRows, second: NativeRows): boolean {

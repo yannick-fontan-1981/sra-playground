@@ -139,7 +139,7 @@ async function run(code, games) {
   });
   // Count only commands acknowledged by the native service after dispatch.
   const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
-  let pendingTicket;
+  let pendingTicket, dispatchedActorPlan;
   const transport = { async request(operation) {
     const result = await service.handle(operation);
     if (executedTickets) {
@@ -147,7 +147,8 @@ async function run(code, games) {
         if (!pendingTicket || operation.ticketId !== pendingTicket.id) throw Error('Continuity ticket mismatch');
         const {level,decisionRevision,actionIndex,actionRef} = pendingTicket;
         const seal = result.snapshot.trace.findLast(e => e.kind === 'sealed_prefix' && e.revision === decisionRevision);
-        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,sealed:seal?.acquired_actions ?? null});
+        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,sealed:seal?.acquired_actions ?? null,...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{})});
+        dispatchedActorPlan = undefined;
       }
       pendingTicket = result.ticket;
     }
@@ -238,6 +239,7 @@ async function run(code, games) {
         throw Error('Action after target level');
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
+      if (executedTickets && plan?.family==='sic_observed_actor_composition') dispatchedActorPlan={strategy:plan.strategy,subjects:plan.need?.subjects??[],evidence:plan.need?.evidence??[]};
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
       const localCapacity=plan?.localCapacityForecast?structuredClone(plan.localCapacityForecast):null;

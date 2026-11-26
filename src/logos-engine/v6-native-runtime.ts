@@ -41,7 +41,7 @@ import { createSicLearnSupportMoves, learnObservedSupportsId } from '../sic/lear
 import { createSicSubsetExperiment } from '../sic/subset-experiment.ts';
 import { createSicLearnScopeEffects, learnVisibleGroupEffectsId } from '../sic/learn-scope-effects.ts';
 import { createSicCavityAccess } from '../sic/cavity-access.ts';
-import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, projectedPublicEffectsGroup, publicInputExplorationId } from '../sic/public-input-exploration.ts';
+import { createSicPublicInputExploration, currentControlledMotion, currentPanelFrontier, observedPressureRecoveryGroup, projectedPublicEffectsGroup, publicInputExplorationId } from '../sic/public-input-exploration.ts';
 import { createCursorRoleMemory, currentCursorRoles, cursorRoleMemoryId } from '../sic/cursor-role-memory.ts';
 import { createSicRecheckDirectionalControls } from '../sic/recheck-directional-controls.ts';
 import { createSicTrialRepeatedLinearControls } from '../sic/trial-repeated-linear-controls.ts';
@@ -101,7 +101,7 @@ import { createSicContrastControls, contrastProbeId } from '../sic/contrast-cont
 import { createSicFollowStableReference } from '../sic/framed-search.ts';
 import { createSicFramedReception, learnFramedReceptionId } from '../sic/framed-reception.ts';
 import { createSicWindowRelation, learnWindowRelationId } from '../sic/window-relation.ts';
-import { createSicAnimationContact, learnAnimationContactId } from '../sic/animation-contact.ts';
+import { animationContactId, createSicAnimationContact, currentRegulatedTrial, learnAnimationContactId } from '../sic/animation-contact.ts';
 import { coordinateObservedMotionId, createSicReflectedPlacement } from '../sic/reflected-placement.ts';
 import { createSicMaterialAssembly, learnMaterialAssemblyId } from '../sic/material-assembly.ts';
 import { createSicVerifyCoupledRoute } from '../sic/coupled-motion.ts';
@@ -159,12 +159,14 @@ import { createSicCatalogueComparison, revealedExampleId } from '../sic/catalogu
 import { exposedViewValues } from './v6-occluded-catalogue-observation.ts';
 import { createSicReceptionAccess, learnReceptionAccessId } from '../sic/reception-access.ts';
 import { createSicVerifyMarkerPlacement } from '../sic/marker-coverage.ts';
+import { createObservedActorComposition } from '../sic/observed-actor-composition.ts';
 import { standalonePlanningGroups } from '../sic/standalone-families.ts';
-import { createCompositionTrials, compositionFamily, compositionPrior } from '../sic/test-observed-compositions.ts';
+import { createCompositionTrials, compositionFamily, compositionPrior, cycleGroup } from '../sic/test-observed-compositions.ts';
 import { createPreparedEffects, preparedEffectsId } from '../sic/test-prepared-effects.ts';
 import { preparationReturns } from '../sic/preparation-experiments.ts';
 import { decidePlanContinuation, maximumCommittedActions } from '../sic/plan-step.ts';
 import { planningGroupsWithExperiments } from '../sic/experiment-selection-groups.ts';
+import { recurrentExperimentGroup } from '../sic/experiment-arbitration.ts';
 import { sourceFieldRelations } from '../sic/compose-field-relations.ts';
 import { retainMissingControlTrial } from '../sic/missing-control-strategy.ts';
 import { defaultFrontierConfiguration } from '../sic/frontier-configuration.ts';
@@ -216,7 +218,7 @@ import { retainNativeJson } from './v6-native-owned.ts';
 import type { NativeStoreWrite, StoredNativeProgram } from './v6-knowledge-store.ts';
 import type { DeltaCause, KnowledgeMemory, KnowledgeNode } from './kernel.ts';
 import { hydrateNativeState } from './v6-native-state-graph.ts';
-import { NativeEditRejected, isSicLevelRecovery, sicObservedGameOver } from './v6-native-types.ts';
+import { NativeEditRejected, isSicLevelRecovery, sicObservedGameOver, sicObservedUnplannedMaterialLoss } from './v6-native-types.ts';
 import { v6LevelActiveTimeMs } from './v6-time-budget.ts';
 import { NativeCompositionAuthority } from './v6-native-authority.ts';
 import { projectNativeClickReturn, type NativeClickReturn } from './v6-native-click-return.ts';
@@ -387,7 +389,8 @@ export class NativeV6Runtime implements NativeV6Backend {
   private omittedClickReturns = 0;
   private prefix: Prefix | null = null;
   private actions = 0;
-  private resetCount = 0;
+  private recoveryCount = 0;
+  private undoCheckpoint: {frameHash:string; families:Map<string,NativeRecord>} | null = null;
   private readonly fatalCommands = new Set<string>();
   private levelStart: { level: number; families: readonly KnowledgeNode[] } | null = null;
   private sicFamilyActions = 0;
@@ -414,6 +417,7 @@ export class NativeV6Runtime implements NativeV6Backend {
   private acquiredRecordCount = 0;
   private compositionIds = new Set<string>();
   private lastFamily: string | null = null;
+  private openPublicFrontierEpoch: number | null = null;
   private knowledge: NativeKnowledgeStore | null = null;
   private executionDigest: string | null = null;
   private selectionProgram: StoredNativeProgram | null = null;
@@ -567,7 +571,8 @@ export class NativeV6Runtime implements NativeV6Backend {
     return null;
   }
   private remainingActiveMs(level: number, now?: number): number {
-    return Math.max(0, this.levelActiveTimeMs - (this.levelMs.get(level) ?? 0) - this.runningMs(level, now));
+    const cap = this.budgets?.levelActiveTimeCapsMs?.[level - 1] ?? this.levelActiveTimeMs;
+    return Math.max(0, cap - (this.levelMs.get(level) ?? 0) - this.runningMs(level, now));
   }
   private remaining(): number {
     if (!this.current || !this.budgets) return 0;
@@ -817,6 +822,12 @@ export class NativeV6Runtime implements NativeV6Backend {
     const motion = exploration ? currentControlledMotion(exploration, this.observation) : undefined;
     const panelFrontier = exploration && currentPanelFrontier(exploration, this.observation);
     const observation = this.observation, rows = this.current.frame_rows;
+    let regulatedTrialRef: string | undefined;
+    if (observation.available_action_refs.includes('ACTION6')) for (const family of this.families) {
+      if (family.id !== animationContactId && family.id !== learnAnimationContactId) continue;
+      regulatedTrialRef = currentRegulatedTrial(family.state(), observation);
+      if (regulatedTrialRef) break;
+    }
     const cursorState = this.knowledge?.memory.nodes[`family_state:${cursorRoleMemoryId}`];
     const roleMemory = cursorState ? this.knowledge!.value(cursorState.id) as Parameters<typeof currentCursorRoles>[0] : undefined;
     const retainedCursorRoles = roleMemory && currentCursorRoles(roleMemory, observation);
@@ -825,6 +836,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       ...(motion ? { observedControlledMotion: motion } : {}),
       ...(retainedCursorRoles?.length ? { retainedCursorRoles } : {}),
       ...(panelFrontier ? { panelFrontier } : {}),
+      ...(regulatedTrialRef ? { regulatedTrialRef } : {}),
       ...(this.readDirectionalMotion ? { readDirectionalMotion: this.readDirectionalMotion } : {}),
       ...(this.observedQueue?.ref === this.observation?.observation_ref ? { observedQueue: this.observedQueue.model } : {}),
       ...(this.readEncounterTransition ? { readEncounterTransition: this.readEncounterTransition } : {}),
@@ -856,6 +868,12 @@ export class NativeV6Runtime implements NativeV6Backend {
       let offered: { family: NativeFamily; proposal: NativeProposal } | null = null;
       for (const [entryIndex, id] of group.families.entries()) {
         const family = this.families.find(candidate => candidate.id === id)!;
+        if (group.id === observedPressureRecoveryGroup && id === preparedEffectsId
+          && this.openPublicFrontierEpoch === this.observation.level_epoch) {
+          offered = await this.openPublicInputFrontier();
+          if (offered) break;
+          this.openPublicFrontierEpoch = null;
+        }
         const enabled = objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled === true;
         const entry = group.entryPoints?.[entryIndex];
         const entryKey = `${group.id}:${family.id}:${entry}`;
@@ -902,6 +920,25 @@ export class NativeV6Runtime implements NativeV6Backend {
           && (await this.deferUnlearnedInvitation(proposal) || await this.scopeStationaryContactRefusal(family, proposal, index, entryIndex)
             || await this.scopeReturnedContactRefusal(family, proposal))) continue;
         if (proposal) {
+          const recurrent = family.id === preparedEffectsId && entry === recurrentExperimentGroup
+            || family.id === compositionFamily && proposal.trigger === cycleGroup;
+          if (regulatedTrialRef && recurrent) {
+            const direct = await this.openPublicInputFrontier(true);
+            if (direct) {
+              this.note({ kind: 'native_coordination', rule: 'open_input_after_regulated_return',
+                observation_ref: this.observation.observation_ref, evidence_ref: regulatedTrialRef,
+                deferred_family: family.id, preferred_family: direct.family.id });
+              offered = direct; break;
+            }
+          }
+          if (proposal.compare_public_frontier_first === true && group.families.includes(publicInputExplorationId)) {
+            const preferred = await this.openPublicInputFrontier();
+            if (preferred) {
+              this.note({ kind: 'native_coordination', rule: 'public_frontier_before_translated_preparation',
+                observation_ref: this.observation.observation_ref, deferred_family: family.id, preferred_family: preferred.family.id });
+              offered = preferred; break;
+            }
+          }
           const preferred = await this.preferCurrentRequiredService(index, entryIndex, family, proposal)
             ?? await this.preferAcquiredContinuation(index, entryIndex, family, proposal);
           if (preferred) {
@@ -982,6 +1019,21 @@ export class NativeV6Runtime implements NativeV6Backend {
       if (this.caller) this.caller.reasoningMode = undefined;
       this.planning = null;
     }
+  }
+
+  private async openPublicInputFrontier(includeClicks = false): Promise<{ family: NativeFamily; proposal: NativeProposal } | null> {
+    if (!this.planning || !this.observation || !this.current) return null;
+    const family = this.families.find(candidate => candidate.id === publicInputExplorationId);
+    if (!family || objectValue(this.knowledge!.value(`family_activation:${family.id}`)).enabled !== true) return null;
+    const { inputs, execution } = this.planning;
+    const proposal = await family.propose(this.observation, this.current.frame_rows, inputs, this.remaining(), execution);
+    const strategy = (proposal?.sicSituationCard as R | undefined)?.strategy;
+    const direction = proposal?.actions[0]?.action_ref;
+    const admittedDirection = direction && /^ACTION[1-4]$/.test(direction) && inputs.some(command => command.action_ref === direction);
+    const boundClick = includeClicks && direction === 'ACTION6' && proposal?.steps?.[0]?.point_binding;
+    if (proposal?.status !== 'proposed' || (strategy !== 'compare_public_input' && strategy !== 'revisit_input_frontier')
+      || (!admittedDirection && !boundClick)) return null;
+    return { family, proposal: { ...proposal, follows_open_public_frontier: true } };
   }
 
   /** Retain a current computation limit without turning it into a refutation. */
@@ -1530,11 +1582,12 @@ export class NativeV6Runtime implements NativeV6Backend {
     if (this.familyAgendaReceipt?.mode === 'active') this.sicFamilyActions += 1;
     this.actions += 1; this.levelActions.set(first.level, (this.levelActions.get(first.level) ?? 0) + 1); this.current = freeze(structuredClone(outcome.observation));
     await this.timed(first.level, async () => {
-      this.observation = freeze(await measureNativeObservation(this.current!, this.actions + this.resetCount + 1, this.sessionId));
+      this.observation = freeze(await measureNativeObservation(this.current!, this.actions + this.recoveryCount + 1, this.sessionId));
       const after = this.observation;
       let result = await prefix.family.after(prefix.proposal, prefix.index, before, after,
         first.frame_rows, this.current!.frame_rows, this.current!.frame_packet);
       const publicBoundary = first.level !== this.current!.level || first.levels_completed !== this.current!.levels_completed || ['WIN', 'GAME_OVER'].includes(this.current!.state);
+      this.openPublicFrontierEpoch = !publicBoundary && prefix.proposal.follows_open_public_frontier === true ? after.level_epoch : null;
       const previousQueue = this.observedQueue?.ref === before.observation_ref ? this.observedQueue.model : null;
       this.observedQueue = undefined;
       if (!publicBoundary && authority === 'sicOnly' && prefix.family.id === publicInputExplorationId &&
@@ -1716,6 +1769,10 @@ export class NativeV6Runtime implements NativeV6Backend {
       const common = this.caller && CALLER_PROVIDERS.includes(prefix.family.id as typeof CALLER_PROVIDERS[number]);
       const selectedSupport = this.acquisitionFamilies && Boolean(prefix.proposal.support_plan);
       const selectedFamily = selectedSupport ? this.acquisitionFamilies!.supports : prefix.family;
+      if(!this.caller&&transition.outcome.reason===sicObservedUnplannedMaterialLoss){
+        this.undoCheckpoint={frameHash:transition.first.frame_hash,
+          families:new Map(this.families.map(family=>[family.id,familyCheckpoint(family)]))};
+      }
       // These bounded selected owners consume the native scheduling argument.
       // Other source adapters retain their exact historical argument lists.
       const record = common ? null : selectedFamily.id === 'branch_routing' && branchAcquisitionBarrier
@@ -1812,7 +1869,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     const fatalKey = loss && this.fatalCommandKey(loss.before, loss.command);
     const recoverableLoss = fatalKey && !this.fatalCommands.has(fatalKey) && this.remaining() > 0
       && this.remainingActiveMs(this.current!.level) > 0;
-    const stopReason = recoverableLoss ? sicObservedGameOver
+    const stopReason = sourceStop===sicObservedUnplannedMaterialLoss&&this.undoCheckpoint&&!officialStop?sourceStop:recoverableLoss ? sicObservedGameOver
       : officialStop ? this.budgetReason() : sourceStop ?? incompleteStop ?? parentStop ?? this.budgetReason();
     let transfer: R | null = null;
     if (this.caller) {
@@ -2260,6 +2317,36 @@ export class NativeV6Runtime implements NativeV6Backend {
       && this.current.state !== 'WIN' && this.current.levels_completed < this.budgets.targetLevels;
   }
 
+  private canUndoCurrentAction():boolean {
+    return this.canResetCurrentLevel()&&this.kind==='stopped'&&this.reason===sicObservedUnplannedMaterialLoss&&!!this.undoCheckpoint;
+  }
+
+  async undoAction(packet:NativePublicObservation,execution:NativeExecution):Promise<NativeRuntimeYield>{
+    this.check(execution);
+    const checkpoint=this.undoCheckpoint,before=this.observation,current=this.current,knowledge=this.knowledge;
+    if(!this.canUndoCurrentAction()||!checkpoint||!before||!current||!knowledge
+      ||packet.frame_hash!==checkpoint.frameHash||packet.level!==current.level||packet.levels_completed!==current.levels_completed
+      ||packet.step_index!==current.step_index||packet.state!=='NOT_FINISHED')throw new Error('UNDO must restore the observed board before the lost action');
+    const next=freeze(structuredClone(packet));
+    const measured=freeze(await measureNativeObservation(next,this.actions+this.recoveryCount+2,this.sessionId));
+    const writes:NativeStoreWrite[]=this.families.map(family=>{
+      const entry=checkpoint.families.get(family.id)!;
+      return {id:`family_state:${family.id}`,kind:'family_state',family:family.id,value:family.stateAfterActionUndo?.(entry)??entry};
+    });
+    const receipt={level:next.level,observation_ref:measured.observation_ref,before_observation_ref:before.observation_ref,
+      action_ref:'UNDO',cause:sicObservedUnplannedMaterialLoss};
+    writes.push({id:`reasoning:action-undo:${measured.revision}`,kind:'component_state',component:'public_action_undo',
+      status:'observed',value:receipt,evidence:[before.observation_ref,measured.observation_ref]});
+    this.check(execution);
+    await knowledge.commit(writes,{workflow:SELECTION_PROGRAM,step:'recovery',statement:'official_action_undo'});
+    this.current=next;this.observation=measured;this.recoveryCount++;
+    this.openPublicFrontierEpoch = null;
+    this.undoCheckpoint=null;this.prefix=null;this.kind='boundary';this.reason=null;
+    this.latestReasoningReturn=null;this.observedQueue=undefined;this.lastClickReturn=null;
+    this.note({kind:'action_undo',...receipt});
+    return this.output();
+  }
+
   /** RESET is a host control at an acquired boundary. It retains the physical
    * return and restores planning state from the entry of this same level. */
   async resetLevel(packet: NativePublicObservation, execution: NativeExecution): Promise<NativeRuntimeYield> {
@@ -2272,7 +2359,7 @@ export class NativeV6Runtime implements NativeV6Backend {
     }
     this.rememberLevelStart();
     const next = freeze(structuredClone(packet));
-    const measured = freeze(await measureNativeObservation(next, this.actions + this.resetCount + 2, this.sessionId));
+    const measured = freeze(await measureNativeObservation(next, this.actions + this.recoveryCount + 2, this.sessionId));
     const recovery = isSicLevelRecovery(this.reason) ? this.reason : undefined;
     const retained = new Map<string, NativeRecord>();
     if (recovery) for (const family of this.families) {
@@ -2293,7 +2380,8 @@ export class NativeV6Runtime implements NativeV6Backend {
       status: 'observed', value: receipt, evidence: [before.observation_ref, measured.observation_ref] });
     this.check(execution);
     await knowledge.commit(writes, { workflow: SELECTION_PROGRAM, step: 'recovery', statement: 'official_level_reset' });
-    this.current = next; this.observation = measured; this.resetCount++;
+    this.current = next; this.observation = measured; this.recoveryCount++;this.undoCheckpoint=null;
+    this.openPublicFrontierEpoch = null;
     this.prefix = null; this.kind = 'boundary'; this.reason = null;
     this.latestReasoningReturn = null; this.observedQueue = undefined; this.lastClickReturn = null;
     this.note({ kind: 'level_reset', level: next.level, before_observation_ref: before.observation_ref, observation_ref: measured.observation_ref,
@@ -2410,6 +2498,7 @@ export class NativeV6Runtime implements NativeV6Backend {
       activeSeconds: (this.elapsedMs + this.runningMs()) / 1000, lastDecision: this.lastFamily, trace: this.trace.slice(), reason: this.reason,
       sourceCommit: this.sourceCommit, sourceDigest: this.sourceDigest, proposal: this.prefix?.proposal ?? null,
       canResetLevel: this.canResetCurrentLevel(),
+      canUndoAction: this.canUndoCurrentAction(),
       ...(this.lastClickReturn ? { lastClickReturn: this.lastClickReturn } : {}),
       ...(reviews.length ? { victoryReviews: reviews } : {}),
       ...(this.clickReturns.length ? { clickReturns: this.clickReturns, omittedClickReturns: this.omittedClickReturns } : {}),
@@ -2826,12 +2915,12 @@ export async function createNativeV6Runtime(declarations?: NativeV6Declarations,
     const groups = planningGroupsWithExperiments(standalonePlanningGroups, preferCoverage, withdrawPrimaryFamily);
     const support = loaded.common.ordered_support_transfer;
     const routeIntervention = createSicObservedRouteIntervention();
-    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 255,
+    const manifest = { implementation: NATIVE_V6_IMPLEMENTATION, solver: 'sic', revision: withdrawPrimaryFamily ? 248 : 283,
       groups, symmetry, policy, sequence, support, recovery, compositionPrior, preparationReturns, sourceFieldRelations };
     const hash = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(JSON.stringify(manifest)));
     const sourceDigest = Array.from(new Uint8Array(hash), byte => byte.toString(16).padStart(2, '0')).join('');
     return new NativeV6Runtime({ sourceDigest, groups, families: [
-      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(),
+      createCompositionTrials(), createPreparedEffects(recovery.informationPreference, recovery), createCursorRoleMemory(), createObservedActorComposition(),
       createSicFieldRepair(symmetry), createSicVerifyContactOrder(policy, recovery), createSicVerifyContactOrder(policy, recovery, learnContactOrderId), createSicSupportTransfer(support), createSicLearnSupportMoves(), createSicLearnSupportMoves(learnObservedSupportsId),
       createSicVerifyParallelSymbolPrefixes(), createSicPeriodicProfileAlignment(),
       createSicLearnGridAccess(), createSicMoveMaskedPieces(learnSelectedAccessId), createSicTranslateCoupledPieces(learnContactAccessId),

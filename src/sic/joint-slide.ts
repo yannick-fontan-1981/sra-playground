@@ -2,15 +2,18 @@ import { rectangularOpenComplements } from '../logos-engine/v6-cavity-measuremen
 import { supportParts } from '../logos-engine/v6-support-measurements.ts';
 import type { NativeBox, NativeObservation, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { pairedOpenings } from './paired-opening.ts';
+import { slideBoundaryMatches, type SlideBoundary } from './slide-boundary.ts';
 
 type Piece = { at: NativePoint; ink: number };
-type Patrol = { at: NativePoint; direction: NativePoint };
-type World = { pieces: Piece[]; patrol: Patrol };
+type Patrol = { at: NativePoint; direction: NativePoint; side: number; ink: number; markerInk: number };
+type World = { pieces: Piece[]; patrols: Patrol[] };
 type Rule = { wrap: boolean; reverseAndMove: boolean; reservePreviousMask: boolean };
 type Board = { origin: NativePoint; pitch: number; width: number; height: number; floor: string[]; paint: Record<string, number>;
-  colored: Piece; open: NativePoint; markerInk: number; patrolInk: number; patrolSide: number };
-export type JointSlide = { epoch: number; board: Board; world: World; rules: Rule[]; refs: string[] };
-export type JointSlideStep = { input: string; next: World; rule: Rule; distance: number; temporarilyVacatesSeat: boolean };
+  colored: Piece; open?: NativePoint; knownSeams?: string[] };
+type Direction = readonly [string, NativePoint];
+export type JointSlide = { epoch: number; board: Board; world: World; rules: Rule[]; refs: string[]; inputs?: readonly Direction[] };
+type SlideProjection = { next: World; crossedSeam: boolean; reachedSlot: boolean };
+export type JointSlideStep = SlideProjection & { input: string; rule: Rule; distance: number; temporarilyVacatesSeat: boolean };
 type Part = ReturnType<typeof supportParts>[number];
 type Bounds = Part['bbox'];
 
@@ -101,38 +104,100 @@ export function readJointSlide(rows: NativeRows, observation: NativeObservation,
     for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
       if (tile([x, y]) === floorInk || Object.hasOwn(paint, key([x, y]))) floor.add(key([x, y]));
     }
-    const board: Board = { origin, pitch, width, height, floor: [...floor], paint, colored: { at: front, ink: pin.ink },
-      open, markerInk: marker.value, patrolInk: patrol.value, patrolSide: side };
+    const board: Board = { origin, pitch, width, height, floor: [...floor], paint, colored: { at: front, ink: pin.ink }, open };
     const rules = [true, false].flatMap(wrap => [true, false].flatMap(reverseAndMove =>
       [false, true].map(reservePreviousMask => ({ wrap, reverseAndMove, reservePreviousMask }))));
-    return [{ epoch: observation.level_epoch, board, world: { pieces, patrol: { at, direction } }, rules,
+    return [{ epoch: observation.level_epoch, board, world: { pieces, patrols: [{ at, direction, side, ink: patrol.value, markerInk: marker.value }] }, rules,
       refs: [observation.observation_ref] }];
   });
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
-export function chooseJointSlide(local: JointSlide, remaining: number): JointSlideStep | null {
+export function readSingleSlide(rows: NativeRows, observation: NativeObservation, parts: Part[],
+  inputs: readonly Direction[], boundaries: readonly SlideBoundary[], interiors: readonly NativeBox[]): JointSlide | null {
+  if (observation.available_action_refs.some(input => /^ACTION[56]$/.test(input))) return null;
+  const gaps = pairedOpenings(rows, parts);
+  if (gaps.length !== 1) return null;
+  const [slot] = gaps, pitch = slot![2] - slot![0] + 1;
+  const candidates = interiors.flatMap(bounds => {
+    const [left, top, right, bottom] = bounds, width = (right - left + 1) / pitch, height = (bottom - top + 1) / pitch;
+    if (!Number.isInteger(width) || !Number.isInteger(height) || width * height > 384) return [];
+    const cell = (x: number, y: number): NativePoint => [(x - left) / pitch, (y - top) / pitch];
+    const inside = ([x, y]: NativePoint) => Number.isInteger(x) && Number.isInteger(y) && x >= 0 && y >= 0 && x < width && y < height;
+    const front = cell(slot![0], slot![1]);
+    if (!inside(front)) return [];
+    const enclosed = parts.filter(p => inside(cell(p.bbox.left, p.bbox.top)) && p.bbox.right <= right && p.bbox.bottom <= bottom);
+    const tiles = enclosed.filter(p => p.bbox.width === pitch && p.bbox.height === pitch && p.area === pitch ** 2);
+    const markers = new Set<Part>();
+    const patrols = enclosed.flatMap(p => {
+      const side = p.bbox.width / pitch;
+      if (side < 3 || side % 2 !== 1 || p.bbox.height !== p.bbox.width || p.area !== (side ** 2 - 1) * pitch ** 2) return [];
+      const insideTiles = tiles.filter(tile => owns(p.bbox, [tile.bbox.left, tile.bbox.top]));
+      if (insideTiles.length !== 1) return [];
+      const marker = insideTiles[0]!, radius = Math.floor(side / 2);
+      const at = add(cell(p.bbox.left, p.bbox.top), [radius, radius]), markerAt = cell(marker.bbox.left, marker.bbox.top);
+      const direction: NativePoint = [Math.sign(markerAt[0] - at[0]), Math.sign(markerAt[1] - at[1])];
+      if (equal(direction, [0, 0])) return [];
+      markers.add(marker);
+      return [{ at, direction, side, ink: p.value, markerInk: marker.value }];
+    });
+    const inkAt = ([x, y]: NativePoint) => rows[top + y * pitch]?.[left + x * pitch];
+    const floorPart = enclosed.find(p => p.bbox.left === left && p.bbox.top === top && p.bbox.right === right && p.bbox.bottom === bottom);
+    if (!floorPart) return [];
+    const strips = enclosed.filter(({ bbox, area, value }) => area === bbox.width * bbox.height && value !== floorPart.value
+      && Math.min(bbox.width, bbox.height) === pitch && Math.max(bbox.width, bbox.height) >= pitch * 2
+      && Math.max(bbox.width, bbox.height) % pitch === 0);
+    const pin = tiles.find(p => equal(cell(p.bbox.left, p.bbox.top), front));
+    if (!pin || markers.has(pin) || !strips.some(strip => strip.value === pin.value)) return [];
+    const actors = tiles.filter(p => p !== pin && !markers.has(p) && p.value !== floorPart.value
+      && !enclosed.some(peer => peer.value === p.value && peer.area > p.area));
+    if (actors.length !== 1) return [];
+    const actor = actors[0]!, piece = { at: cell(actor.bbox.left, actor.bbox.top), ink: actor.value };
+    const paint: Record<string, number> = {};
+    for (const { value, bbox } of strips.filter(p => p.value === pin.value || p.value === actor.value)) {
+      const [x, y] = cell(bbox.left, bbox.top);
+      for (let dy = 0; dy < bbox.height / pitch; dy++) for (let dx = 0; dx < bbox.width / pitch; dx++) paint[key([x + dx, y + dy])] = value;
+    }
+    const floor = new Set([front, piece.at, ...patrols.flatMap(p => footprint(p.at, p.side))].map(key));
+    for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+      if (inkAt([x, y]) === floorPart.value || Object.hasOwn(paint, key([x, y]))) floor.add(key([x, y]));
+    }
+    const known = boundaries.filter(fact => slideBoundaryMatches(fact, bounds, pitch, pitch));
+    const rules = [false, true].flatMap(wrap => [true, false].flatMap(reverseAndMove =>
+      [false, true].map(reservePreviousMask => ({ wrap, reverseAndMove, reservePreviousMask }))));
+    return [{ epoch: observation.level_epoch, board: { origin: [left, top] as NativePoint, pitch, width, height,
+      floor: [...floor], paint, colored: { at: front, ink: pin.value }, knownSeams: known.map(fact => fact.directed_edge_pair_ref) },
+      world: { pieces: [piece], patrols }, rules, inputs,
+      refs: [observation.observation_ref, ...known.map(fact => fact.claim_ref)] }];
+  });
+  return candidates.length === 1 ? candidates[0]! : null;
+}
+
+export function chooseJointSlide(local: JointSlide, remaining: number, preferContact = true): JointSlideStep | null {
   const { board, world, rules } = local, floor = new Set(board.floor);
   const seated = (p: Piece) => equal(p.at, board.colored.at) && p.ink === board.colored.ink;
-  const atGoal = (w: World) => w.pieces.some(seated) && w.pieces.some(p => equal(p.at, board.open));
+  const atGoal = (w: World) => w.pieces.some(seated) && (!board.open || w.pieces.some(p => equal(p.at, board.open!)));
 
-  const advance = (world: World, delta: NativePoint, rule: Rule): World | null => {
-    const old = world.patrol, candidate = add(old.at, old.direction);
-    const permitsPatrol = (at: NativePoint) => footprint(at, board.patrolSide).every(cell => floor.has(key(cell)));
-    const reverse: NativePoint = [-old.direction[0], -old.direction[1]];
-    const backward = add(old.at, reverse);
-    const patrol = permitsPatrol(candidate) ? { ...old, at: candidate }
-      : { at: rule.reverseAndMove && permitsPatrol(backward) ? backward : old.at, direction: reverse };
-    const mask = new Set(footprint(patrol.at, board.patrolSide).map(key));
+  const advance = (world: World, delta: NativePoint, rule: Rule): SlideProjection | null => {
+    const wrap = rule.wrap || board.knownSeams?.includes(`edge_pair:${delta[1]}:${delta[0]}`);
+    const patrols = world.patrols.map(old => {
+      const permits = (at: NativePoint) => footprint(at, old.side).every(cell => floor.has(key(cell)));
+      const candidate = add(old.at, old.direction);
+      const reverse: NativePoint = [-old.direction[0], -old.direction[1]], backward = add(old.at, reverse);
+      return permits(candidate) ? { ...old, at: candidate }
+        : { ...old, at: rule.reverseAndMove && permits(backward) ? backward : old.at, direction: reverse };
+    });
+    const mask = new Set(patrols.flatMap(p => footprint(p.at, p.side)).map(key));
     if (world.pieces.some(p => mask.has(key(p.at)))) return null;
-    if (rule.reservePreviousMask) for (const at of footprint(old.at, board.patrolSide)) mask.add(key(at));
+    if (rule.reservePreviousMask) for (const old of world.patrols) for (const at of footprint(old.at, old.side)) mask.add(key(at));
     const pieces = world.pieces.slice(), seen = pieces.map(p => new Set([key(p.at)])), stopped = pieces.map(() => false);
+    let reachedSlot = false, crossedSeam = false;
     for (let phase = 0; phase <= Math.max(board.width, board.height); phase++) {
       let moved = false;
       for (let i = 0; i < pieces.length; i++) {
         if (stopped[i]) continue;
         const piece = pieces[i]!, [x, y] = add(piece.at, delta);
-        const at: NativePoint = rule.wrap ? [modulo(x, board.width), modulo(y, board.height)] : [x, y];
+        const at: NativePoint = wrap ? [modulo(x, board.width), modulo(y, board.height)] : [x, y];
         const cell = key(at);
         if (!floor.has(cell) || seen[i]!.has(cell) || pieces.some((other, j) => i !== j && equal(other.at, at))) {
           stopped[i] = true;
@@ -140,30 +205,34 @@ export function chooseJointSlide(local: JointSlide, remaining: number): JointSli
         }
         if (mask.has(cell)) return null;
         pieces[i] = { at, ink: board.paint[cell] ?? piece.ink };
+        crossedSeam ||= x !== at[0] || y !== at[1];
+        reachedSlot ||= seated(pieces[i]!);
         seen[i]!.add(cell);
         moved = true;
       }
       if (!moved) break;
     }
-    return { pieces, patrol };
+    return { next: { pieces, patrols }, crossedSeam, reachedSlot };
   };
 
   for (const rule of rules) {
-    const queue: { world: World; first: { input: string; next: World } | null; distance: number }[] =
+    const queue: { world: World; first: (SlideProjection & { input: string }) | null; distance: number }[] =
       [{ world, first: null, distance: 0 }];
     const visited = new Set([JSON.stringify(world)]);
-    for (let i = 0; i < queue.length && i < 14_000; i++) {
+    for (let i = 0; i < queue.length && i < (board.open ? 14_000 : 2_000); i++) {
       const node = queue[i]!;
       if (node.first && atGoal(node.world)) return { ...node.first, rule, distance: node.distance,
         temporarilyVacatesSeat: world.pieces.some(seated) && !node.first.next.pieces.some(seated) };
       if (node.distance >= Math.min(remaining, 64)) continue;
-      for (const [input, delta] of moves) {
-        const next = advance(node.world, delta, rule);
-        if (!next) continue;
+      for (const [input, delta] of local.inputs ?? moves) {
+        const prediction = advance(node.world, delta, rule);
+        if (!prediction) continue;
+        const { next, reachedSlot } = prediction, first = node.first ?? { input, ...prediction };
+        if (!board.open && preferContact && reachedSlot) return { ...first, rule, distance: node.distance + 1, temporarilyVacatesSeat: false };
         const stamp = JSON.stringify(next);
         if (visited.has(stamp)) continue;
         visited.add(stamp);
-        queue.push({ world: next, first: node.first ?? { input, next }, distance: node.distance + 1 });
+        queue.push({ world: next, first, distance: node.distance + 1 });
       }
     }
   }
@@ -171,14 +240,18 @@ export function chooseJointSlide(local: JointSlide, remaining: number): JointSli
 }
 
 export function observeJointSlide(rows: NativeRows, local: JointSlide, step: JointSlideStep, observation: NativeObservation): JointSlide | null {
-  const { board } = local, { patrol, pieces } = step.next;
-  const marker = add(patrol.at, patrol.direction.map(v => v * Math.floor(board.patrolSide / 2)) as [number, number]);
+  const { board } = local, { patrols, pieces } = step.next;
   const solid = (at: NativePoint, ink: number) => {
     const [l, t, r, b] = slideBox(local, at);
     return rows.slice(t, b + 1).length === board.pitch
       && rows.slice(t, b + 1).every(row => row.slice(l, r + 1).length === board.pitch && row.slice(l, r + 1).every(value => value === ink));
   };
-  if (!pieces.every(p => solid(p.at, p.ink))
-    || !footprint(patrol.at, board.patrolSide).every(at => solid(at, equal(at, marker) ? board.markerInk : board.patrolInk))) return null;
+  const leftPreviousCell = ({ at, ink }: Piece) => board.paint[key(at)] === ink || (equal(at, board.colored.at) && ink === board.colored.ink)
+    || pieces.some(piece => equal(piece.at, at)) || !solid(at, ink);
+  if (!board.open && !local.world.pieces.every(leftPreviousCell)) return null;
+  if (!pieces.every(p => solid(p.at, p.ink)) || !patrols.every(patrol => {
+    const marker = add(patrol.at, patrol.direction.map(v => v * Math.floor(patrol.side / 2)) as [number, number]);
+    return footprint(patrol.at, patrol.side).every(at => solid(at, equal(at, marker) ? patrol.markerInk : patrol.ink));
+  })) return null;
   return { ...local, world: step.next, rules: [step.rule], refs: [...local.refs.slice(-5), observation.observation_ref] };
 }

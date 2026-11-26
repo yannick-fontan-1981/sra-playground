@@ -2124,31 +2124,35 @@ function canDispatchAgentAction(): boolean {
     && (!usesNativeManualControls(selectedGame.code) || observation?.state === 'NOT_FINISHED');
 }
 
+async function presentAgentRecovery(recover:()=>Promise<GameObservation>){
+  const generation=selectionGeneration;
+  busy=true;
+  updateInterface();
+  try{
+    const next=await recover();
+    await present(next,generation);
+    return next;
+  }catch(error){
+    if(generation===selectionGeneration){busy=false;updateInterface();}
+    throw error;
+  }
+}
+
 const agent = new BrowserV6Agent({
   getObservation: () => observation,
   canDispatch: canDispatchAgentAction,
   canResetLevel: () => ready() && mode === 'agent'
     && ['NOT_FINISHED', 'GAME_OVER', 'GAMEOVER'].includes(observation?.state ?? ''),
-  resetLevel: async () => {
-    const generation = selectionGeneration;
-    busy = true;
-    updateInterface();
-    try {
-      const next = await runtime.reset();
-      await present(next, generation);
-      return next;
-    } catch (error) {
-      if (generation === selectionGeneration) { busy = false; updateInterface(); }
-      throw error;
-    }
-  },
+  resetLevel:()=>presentAgentRecovery(()=>runtime.reset()),
+  canUndoAction:()=>ready()&&mode==='agent'&&!!observation?.canUndo,
+  undoAction:()=>presentAgentRecovery(()=>runtime.undo()),
   recoveryConfiguration: () => {
     const { maxDepth, maxNodes, informationPreference } = recoveryConfiguration();
     const solver = element<HTMLSelectElement>('#agent-planning').value === 'sic-fallback' ? 'sic-fallback' : 'sic';
     return { ...defaultRecoveryPack, maxDepth, maxNodes, solver,
       ...(informationPreference ? { informationPreference } : {}) };
   },
-  dispatch: async action => {
+  dispatch: async (action, presentation) => {
     if (!canDispatchAgentAction() || !observation?.availableActionIds.includes(action.id)) {
       throw new Error('The game changed before the action could be sent.');
     }
@@ -2163,7 +2167,7 @@ const agent = new BrowserV6Agent({
       const actionStarted = performance.now();
       const next = await runtime.action(action.id, action.id === 6 ? action.data : undefined);
       const executionMs = performance.now() - actionStarted;
-      await present(next, generation);
+      await present(next, generation, false, presentation?.continuous);
       if (generation !== selectionGeneration || next.gameCode !== selectedGame.code) {
         throw new Error('The action belongs to an earlier game session.');
       }
@@ -2541,7 +2545,7 @@ function updateInterface(): void {
   updateAgentInterface();
 }
 
-async function present(next: GameObservation, selectedGeneration: number, manualAction = false): Promise<void> {
+async function present(next: GameObservation, selectedGeneration: number, manualAction = false, continuous = false): Promise<void> {
   if (selectedGeneration !== selectionGeneration || next.gameCode !== selectedGame.code) return;
   const generation = ++presentationGeneration;
   const previous = observation;
@@ -2566,14 +2570,24 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   interruptibleAnimation = (manualAction || isMultiHeroNativeGame(next.gameCode)) && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
+  const durations = frames.slice(0, -1).map((_, i) => {
+    const requested = next.frameDurationsMs?.[i];
+    return requested !== undefined && Number.isFinite(requested) && requested >= 0 ? requested : frameDuration;
+  });
+  // Keep a visible beat per committed command without stacking all authored phase delays.
+  const animationBudget = 48;
+  const scale = continuous ? Math.min(1, animationBudget / Math.max(1, durations.reduce((total, value) => total + value, 0))) : 1;
+  const started = performance.now();
+  let scheduled = 0;
   const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15' || next.gameCode === 'SS16' || next.gameCode === 'SS17' || next.gameCode === 'SS18' || next.gameCode === 'SS19' || next.gameCode === 'SS20' || next.gameCode === 'SS21' || next.gameCode === 'SS22' || next.gameCode === 'SS23') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
-    const requestedDuration = next.frameDurationsMs?.[i];
-    const duration = requestedDuration !== undefined && Number.isFinite(requestedDuration) && requestedDuration >= 0
-      ? requestedDuration : frameDuration;
-    if (i < frames.length - 1 && !reducedMotion) await new Promise<void>(resolve => window.setTimeout(resolve, duration));
+    if (i < frames.length - 1 && !reducedMotion) {
+      scheduled += durations[i]! * scale;
+      const wait = continuous ? scheduled - (performance.now() - started) : durations[i]!;
+      if (wait > 0 || !continuous) await new Promise<void>(resolve => window.setTimeout(resolve, Math.max(0, wait)));
+    }
   }
   if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
   paint(next.frame, next.palette ?? fallbackPalette);

@@ -2696,3 +2696,113 @@ Le banc `scripts/check-sic-chronological.mjs` charge chaque jeu officiel au nive
 La campagne prend **54 min 54 s** avec quatre workers en priorité basse, dont une période de saturation du CPU par une autre suite de tests. La somme des durées mesurées par niveau est de **3 h 23 min 20 s**. Le budget par niveau est de 600 commandes et de 514,29 s de temps agent actif.
 
 La comparaison des commandes et des images de retour retrouve **635 trajectoires identiques sur 636**. SELE niveau 1 demeure gagnant avec 69 commandes, contre 36 dans la référence historique. Le premier écart apparaît à la commande 12. Un rejeu isolé au budget du profil huit workers reproduit cet écart. Les niveaux 2 à 6 de SELE sont identiques à la référence.
+
+## Budgets des rejeux chronologiques
+
+Le banc fixe deux plafonds pour chaque niveau. Il ajoute au nombre de commandes de la victoire de référence une marge de 20 %, arrondie au supérieur et comprise entre 5 et 30 commandes. Il ajoute à sa durée mesurée une marge de 35 %, avec un minimum de 5 secondes. Si seul le nombre de commandes est attesté, la durée de référence est estimée à 1,5 seconde par commande, entre 20 et 360 secondes, avant d’ajouter la marge. En l’absence de référence, le niveau reçoit 80 commandes et 90 secondes de temps actif.
+
+`SIC_REPLAY_REFERENCES` accepte un fichier JSON associant chaque code de jeu à un tableau de références, indexé par niveau à partir de zéro. Chaque référence renseigne `actions`, `source` et, lorsqu’elle a été mesurée, `timeMs`. Une entrée absente ou `null` conserve la référence archivée si elle existe. Un oracle vérifié peut fournir le nombre de commandes et sa provenance. Ni le parcours témoin ni les données de l’oracle ne sont transmis à SIC.
+
+Le moteur mesure le temps actif par niveau. Le banc exécute chaque jeu dans un processus surveillé et applique la même limite au temps écoulé de chaque niveau. Le processus parent peut interrompre un calcul natif qui monopolise son processus et conserver les résultats des niveaux terminés ainsi que les commandes confirmées. Le rejeu journalise la provenance des plafonds, le temps effectivement consommé et le motif d’arrêt. Un dépassement de budget signale une victoire qui reste à reproduire sous ces plafonds.
+
+Le surveillant reçoit aussi le score public après chaque commande appliquée. Si le moteur dépasse son délai en enregistrant une victoire déjà annoncée par le jeu, le niveau reste gagné. Le banc signale un arrêt pendant la transition lorsque cette situation empêche de poursuivre la session.
+
+### AS66 niveau 6, respecter le domaine d’entrée du moteur
+
+À la commande cumulée 141, la composition réintroduisait une commande annoncée par le jeu que le domaine d’entrée n’avait pas admise pour l’exploration. Son retour correspond exactement à la grille de début du niveau. La composition utilise désormais les commandes admises par le domaine, ainsi que les clics dont le point peut être justifié. Le traitement dédié de la récupération garde sa propre autorité.
+
+Le rejeu local avec cette correction gagne les six premiers niveaux en 144 commandes, dont 65 au niveau 6 en 152 secondes de temps actif. Il reprend au niveau 1 dans la même session SIC et conserve le plafond du rejeu comparatif de 516 commandes et 486 secondes pour le niveau 6.
+
+### MOTO niveau 6, réutiliser les trajectoires élémentaires
+
+Sous le même plafond de 90 secondes et avec le même jeu local, les solveurs du jalon 160 et de la révision 277 s’arrêtent au niveau 6. La trace de la révision 277 atteint la recherche des placements de déviation après six commandes de préparation, puis cette recherche monopolise le processus.
+
+Les transitions d’un mobile à une autre position et direction dépendent de la grille et de son empreinte. Le chercheur les calcule une fois par état géométrique et les réutilise pendant l’énumération des placements. Deux éléments déjà engagés ne peuvent plus changer de place dans cette branche. Leur recouvrement suffit à éliminer cette branche avant d’explorer ses descendants. Le chercheur vérifie son échéance pendant l’énumération.
+
+Avec ces changements, le rejeu chronologique local gagne les six niveaux en 79 commandes, dont 19 au niveau 6 en environ 19 secondes écoulées. Les cinq premiers niveaux conservent leurs nombres de commandes. Deux tests synthétiques vérifient le placement, le refus d’une sortie fermée et l’arrêt à l’échéance.
+
+### AS66 niveau 8, poursuivre les comparaisons directionnelles ouvertes
+
+Après les 32 comparaisons d’accès, la révision 277 privilégie une préparation apprise dans une autre disposition. Le contrôle négatif observé sur place justifie une question sur la préparation. L’effet positif de la préparation reste à vérifier dans cette disposition.
+
+Une préparation directionnelle transposée peut céder la place à une direction publique encore inexplorée ou à un trajet observé qui y mène. Une fois ce retour acquis, l’enquête garde la priorité sur les essais de préparation tant qu’elle peut produire une comparaison publique admissible. La vérification des commandes et les choix de récupération précèdent sa reprise. Un changement de niveau, une restauration du plateau ou l’épuisement de cette exploration met fin à cette priorité.
+
+Le rejeu depuis le niveau 1 gagne à nouveau le niveau 8 en 66 commandes, soit 235 commandes cumulées. Les 32 comparaisons d’accès sont suivies de 34 commandes d’exploration publique. Les tests du moteur vérifient le choix du parcours public en présence d’une comparaison admissible et l’autorisation de la préparation lorsque la proposition de remplacement reste spéculative.
+
+### Glissement, franchissement de bord et accès à une ouverture
+
+SIC mesure le bord de la zone jouable et la maille de la pièce. Il acquiert un franchissement orienté quand une animation suit la même pièce entre deux bords opposés, sur la même ligne ou colonne et avec un pas local cohérent. La preuve est réutilisée sur une géométrie et une maille compatibles. Une disparition ou un saut intérieur ne valide aucun franchissement.
+
+Une ouverture entre deux appuis permet de chercher un trajet qui amène une pièce de couleur compatible jusqu’à cette ouverture, y compris s’il faut traverser une bande qui change sa couleur. La recherche compare des glissements bornés et tient compte de la position des obstacles mobiles. SIC vérifie le déplacement de la pièce et les positions prédites après chaque commande. Une contradiction remet la projection en question et laisse disponibles les comparaisons publiques. Seul le jeu valide la victoire.
+
+Dans le rejeu chronologique AS66 en SIC seul, les niveaux 6, 7 et 8 passent de 65, 25 et 66 commandes à 37, 13 et 17. Le total passe de 250 à 161 commandes pour les neuf niveaux. Deux plateaux synthétiques changent la taille, la palette, l’orientation, le décalage et la commande. Ils vérifient l’utilisation de la preuve dans le trajet, le refus d’une piste interrompue et le rejet d’un retour où la pièce est restée au départ.
+
+### Mesures des trajectoires régulées
+
+La mesure d’un réglage visible sur le plateau de départ conditionne l’acquisition d’une trajectoire régulée. Vérifier cette condition avant de reconstruire la trajectoire évite d’analyser les images intermédiaires lorsqu’aucun réglage n’est mesurable. Sur les trois premiers niveaux de DICO, les 19 commandes, les retours et les animations gardent la même empreinte. Deux essais sous charge locale ont consommé environ 33 et 27 secondes de temps actif, respectivement avant et après cette modification.
+
+### Arbitrage d’une préparation apprise à un niveau précédent
+
+Une commande prédite par une préparation transférée reste une expérience tant que son effet n’a pas été corroboré dans la disposition courante. SIC essaie les stratégies de mouvement fondées sur le plateau courant avant de tester cette préparation. Il conserve le témoin antérieur et vérifie le résultat si la préparation est appelée. Lorsqu’une recherche active vient de retrouver l’indice manquant, la vérification déjà engagée reste prioritaire.
+
+À budget identique et depuis le niveau 1, KA59 gagne le niveau 4 en 38 commandes après un arrêt antérieur à 46. TU93 gagne le niveau 3 en 19 commandes après un arrêt antérieur à 24. Le contrôle ciblé vérifie le transfert d’une autre disposition, son refus dans le groupe prioritaire et la reprise d’une vérification après la réapparition de l’indice.
+
+La disposition peut aussi justifier la priorité du premier essai. Une fois le rôle de la pièce, celui du repère et la commande alignés, SIC compare leurs écarts relatifs en autorisant l’échange des axes et leur réflexion. Une disposition compatible passe dans le groupe prioritaire et le retour peut réfuter la projection. Sur LF52, les deux essais utiles du niveau 4 retrouvent ainsi leur place avant le déplacement du porteur. Le niveau gagne à nouveau en 54 commandes au plafond de 65 et l’empreinte depuis le niveau 1 correspond à la référence. KA59 conserve ses 38 commandes. TU93 conserve 19 commandes au niveau 3 lors d’un diagnostic à plafond d’actions inchangé. Le plafond temporel de ce diagnostic est de 40 s sur le poste chargé. Un plateau synthétique vérifie le même transfert après réflexion, puis sa réfutation si la pièce ne rejoint pas le repère.
+
+### Extraction commune des composantes
+
+Les projections de perception et de navigation partagent l’extraction des composantes contiguës. Le calcul de la maille reste dans la projection qui en a besoin. Les formes réutilisent leur représentation compacte en paires d’entiers pour l’égalité et l’empreinte. Le même test sur 70 images synthétiques et deux connectivités conserve l’empreinte de toutes les composantes. Les 116 cas des tests de perception et de navigation vérifient les structures et les identifiants historiques.
+
+Le calcul de maille parcourt les suites horizontales et verticales dans l’ordre du masque. Un rectangle utilise directement le PGCD de ses dimensions. Un masque irrégulier peut finir dès que le PGCD atteint un. Le test comparatif conserve les mesures sur 180 grilles avec deux connectivités. COLM et CGWL conservent les empreintes de leurs premiers parcours à l’identique. Avec les plafonds stricts, COLM gagne son niveau 1 en 17 commandes et CGWL gagne ses trois premiers niveaux en 46 commandes. Les parcours restent arrêtés par le temps au niveau 2 de COLM et au niveau 4 de CGWL.
+
+### Mesurer la résolution avant et après le score public
+
+Le superviseur garde le plafond de résolution associé au niveau jusqu’au score renvoyé par le jeu. Après ce score, il mesure la réconciliation et lui accorde un délai séparé pouvant aller jusqu’à cinq secondes. Le rejeu refuse une commande reçue avant le prochain niveau déclaré. Si le superviseur arrête le processus, le rapport garde le score déjà obtenu et un résumé borné des commandes appliquées au dernier niveau. ELAS franchit la transition du niveau 3 lors du nouveau rejeu et gagne le niveau 4. M0R0 conserve la victoire du niveau 1 mais sa réconciliation atteint encore son propre plafond.
+
+### Indexer les postures de poussée
+
+Le graphe dérivé des commandes observées précalcule la cellule au-delà de chaque voisin et indexe les postures de poussée par cellule occupable. La recherche énumère les postures des objets visibles et conserve l’ordre de visite des déplacements. Elle calcule la longueur des approches avant de construire les commandes et garde une file FIFO pour chaque rang. Le budget de recherche et les contrôles d’occupation, de pression et de support restent identiques.
+
+Avec les rôles observés au niveau 1 et une limite de 80 commandes, la projection initiale de SS02 niveau 8 prend environ 18 s après indexation, contre 42 s avant. Au niveau 8, le rejeu applique 11 commandes avant le plafond de 90 s, contre une dans le diagnostic précédent. Un essai séparé, initialisé au niveau 8 avec les rôles observés au niveau 1, déclenche le score du jeu en 84 commandes. Il construit six appuis et laisse un poids sur chacun des trois repères.
+
+La marge habituelle de 20 % sur ces 84 commandes donne un plafond de 101. Avec ce plafond et une limite temporelle de diagnostic de 81 s au niveau 8, le rejeu SIC depuis le niveau 1 gagne les huit niveaux en 40, 27, 39, 80, 126, 96, 54 et 84 commandes. Le dernier niveau prend 46,4 s, réconciliation comprise. Sa première décision réemploie les commandes et les rôles observés pour planifier des appuis, des postures de poussée et des poids distincts.
+
+Le viewer local affiche la victoire après les mêmes 546 commandes et huit niveaux. Le contrôle de continuité couvre maintenant les huit niveaux. Au niveau 8, 68 commandes continuent une décision déjà ouverte, huit paires de poussées consécutives concernent la même pierre et la plus longue série atteint 16 commandes.
+
+### Réutiliser les encodages canoniques au bon niveau
+
+Le cache conserve l’encodage des racines et des sous-arbres validés d’au moins 24 valeurs JSON. Les petits sous-arbres sont encodés lors de leur lecture. Le cache applique les mêmes limites de taille et de profondeur et renvoie les mêmes octets canoniques.
+
+Dans deux paires de rejeux locaux avec profilage, le temps CPU échantillonné passe de 57,7 à 53,1 s sur AS66 niveaux 1 à 4 et de 40,4 à 36,1 s sur GORI jusqu’à son arrêt au niveau 5. Les empreintes des commandes et de leurs retours restent identiques dans chaque paire. Les 52 contrôles ciblés couvrent le cache canonique, les graphes d’état et les transactions de connaissance.
+
+### Poursuivre les essais directs après un retour animé
+
+Un tir produit un témoin de réglage courant lorsque l’agent a lancé une trajectoire régulée et reçu une animation intermédiaire distincte des deux plateaux stables. Le témoin reste disponible jusqu’au changement de niveau, y compris lorsque la jauge saturée ne présente momentanément plus de contraste. Un modèle secondaire peut encore proposer un contact et préparer un réglage qui projette un nouveau contact.
+
+Après ce retour, un essai direct admissible du plateau courant prend la priorité sur une composition lancée par la seule répétition des retours. Un clic exige son témoin de point courant. L’arbitrage conserve l’essai de composition si la recherche directe ne propose aucune commande admissible.
+
+Le rejeu chronologique de GORI depuis le niveau 1 retrouve les six scores SIC en 2, 6, 7, 3, 25 et 3 commandes. Le niveau 5 gagne en 21,4 s jusqu’au score public, sous les plafonds de 30 commandes et 29 s. Le niveau 6 gagne en 2,0 s sous les plafonds de 8 commandes et 7 s. Les essais synthétiques couvrent deux trajectoires distinctes, une source ambiguë, un retour sans animation et l’expiration du témoin au changement de niveau.
+
+### Réutiliser les commandes et les trajets des grilles à repères
+
+Un mécanisme de grille qui a déjà contribué à un score peut proposer une suite dès qu’il reconnaît le curseur, les repères et le compteur du nouveau plateau. Sa proposition passe avant l’essai d’une arrivée suggérée par une observation héritée. Les essais restent accessibles lorsque la grille ne peut pas établir une suite.
+
+Pour un repère fixe, le trajet visible fournit une série bornée des déplacements déjà confirmés. Avant chaque mouvement supplémentaire, SIC vérifie l’emplacement du curseur, le compteur et l’apparence du repère. Le retour doit montrer le déplacement prévu. Un blocage clôt la série, conserve les retours déjà observés et écarte le passage contredit. Le déclenchement au repère et les déplacements qui dépendent du prochain rendez-vous restent guidés par le retour courant.
+
+À conditions identiques depuis le niveau 1, la référence gagne SIGN niveau 3 en 56 commandes et `13874eed` s’arrête à 68. Le nouveau rejeu gagne les six niveaux en 15, 44, 56, 22, 53 et 81 commandes sous les plafonds chronologiques. Au niveau 6, la priorité de la grille seule s’arrêtait à 74 commandes sous la limite de 88 s. Avec les séries, le score arrive à 71,4 s.
+
+Le contrôle examine les retours des commandes réellement exécutées. Au niveau 6, 31 commandes continuent une décision déjà ouverte et la plus longue série comporte 10 déplacements. Le niveau 4 exécute ses 22 commandes en décisions unitaires. Deux dispositions synthétiques vérifient les déplacements opposés, le recoloriage, le refus d’un curseur ambigu et la fermeture de la série sur un retour incompatible.
+
+### Enchaîner les interactions confirmées d’une charge
+
+Une série de transport peut inclure une translation, un attachement, une rotation ou un dépôt dont l’effet est déjà confirmé. Elle s’arrête avant la première opération inconnue et reste bornée à seize commandes. La préparation vérifie les cases nouvellement occupées, puis chaque retour vérifie le porteur et les charges. Une séparation inattendue des pièces clôt la série et déclenche une nouvelle mesure.
+
+À partir du niveau 1 de GABA, la référence historique et la version de départ reproduisent les mêmes 84 commandes et retours lorsqu’elles disposent du temps nécessaire. Lors du rejeu apparié sous le plafond de 16 s au niveau 2, le témoin s’arrête à 29 commandes. Avec les séries, le niveau gagne en 37 commandes et 11,2 s jusqu’au score. Le code de production obtient également ce score, en 11,8 s, et gagne les quatre premiers niveaux en 47, 37, 67 et 88 commandes. Le niveau 5 atteint 102 commandes avant le plafond de 50 s.
+
+Les tickets du niveau 2 conservent exactement la trajectoire physique de référence. Ils confirment 34 commandes en continuation et trois séries qui combinent les déplacements et le contrôle de la charge. Le même contrôle de continuité utilise les retours des séries de SIGN. Les essais synthétiques couvrent deux tailles de maille, des déplacements opposés et le refus d’une case dont l’apparence change.
+
+Si un déplacement vise une case qui était masquée au début de la série, son contenu est vérifié après que le porteur ou la charge l’a libérée. Le mouvement reste autorisé seulement si le motif complet de la case révélée correspond à un terrain praticable déjà visible sur le plateau. Les autres cases conservent leur vérification exacte.
+
+Cette règle permet à GABA de marquer le niveau 5 en 106 commandes. Le rejeu chronométré confirmé obtient le score en 35,8 s et prépare le plateau suivant en 42,2 s, sous le plafond de 50 s. Au niveau 5, 99 commandes continuent une série en cours et sept séries combinent déplacement et contrôle de la charge. Deux dispositions testent le retour sur la case libérée ainsi que le refus d’un motif inconnu.
+
+Le contrat de continuité couvre les six niveaux depuis une seule session démarrée au niveau 1. Dans le rejeu de continuité, le niveau 6 gagne en 102 commandes, dont 93 en continuation. Le parcours local dans le navigateur affiche également la victoire. La campagne chronométrée s’arrête encore à 75 commandes au plafond de 37 s au niveau 6.
