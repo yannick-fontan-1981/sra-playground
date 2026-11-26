@@ -11,20 +11,168 @@ concurrency:
   group: sic-continuity-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 jobs:
-  executed-series:
-    name: Executed series and final reconciliation
+  contracts:
+    name: TypeScript and continuity contracts
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    # The previous complete setup/typecheck/unit-test phase took under four minutes.
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
       - uses: actions/setup-node@v4
         with:
           node-version: 24
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - run: node --test tests/sic-continuity-contract.test.mjs tests/sic-verified-walking-series.test.ts tests/sic-spatial-series.test.ts tests/v6-branch-routing-kernel.test.ts
+      - run: node --test tests/sic-continuity-contract.test.mjs tests/sic-continuity-evidence.test.mjs tests/sic-verified-walking-series.test.ts tests/sic-spatial-series.test.ts tests/v6-branch-routing-kernel.test.ts
       - run: node --test tests/sic-cursor-role-memory.test.ts tests/sic-observed-actor-composition.test.ts tests/sic-contact-transfer.test.ts tests/sic-contact-frontier.test.ts
       - run: node --test tests/sic-observed-push-access.test.ts tests/sic-observed-coverage.test.ts tests/sic-observed-exchange.test.ts tests/sic-observed-field-carry.test.ts
       - run: node --test tests/v6-agent.test.ts tests/v6-native-runtime.test.ts
-      - run: npm run test:sic-continuity
+      - run: node --test tests/sic-oriented-delivery-continuity.test.ts tests/v6-knowledge-store-noop.test.ts tests/sic-prepared-effects-native-state.test.ts
+
+  cohort-replays:
+    name: Continuity / ${{ matrix.name }}
+    runs-on: ubuntu-24.04
+    # Historical cohorts took up to 2m13s; retain room for WA30 and runner variance.
+    # This job timeout does not change the game's action or active-time budgets.
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        include:
+          - { name: oriented-delivery, cohort: 'source:WA30', end: 7, cap: 136 }
+          - { name: mirror-isles, cohort: SS01, end: 8, cap: 120 }
+          - { name: la-force-rouge, cohort: SS02, end: 8, cap: 160 }
+          - { name: la-ruse-verte, cohort: SS03, end: 8, cap: 240 }
+          - { name: l-axe-violet, cohort: SS04, end: 8, cap: 150 }
+          - { name: local-carry, cohort: SS05, end: 8, cap: 155 }
+          - { name: actor-composition, cohort: SS06, end: 8, cap: 125 }
+          - { name: destination-set, cohort: SS07, end: 8, cap: 180 }
+          - { name: marked-field, cohort: 'source:SIGN', end: 6, cap: 98 }
+          - { name: cargo-transport, cohort: 'source:GABA', end: 6, cap: 128 }
+          - { name: native-sources, cohort: 'source:AR25,HANO,DC22', end: 1, cap: 120 }
+    env:
+      SIC_STUDY_CONTINUITY: '1'
+      SIC_STUDY_WORKERS: '1'
+      SIC_STUDY_SOLVER: sic
+      COHORT_NAME: ${{ matrix.name }}
+      COHORT: ${{ matrix.cohort }}
+      LAST_LEVEL: ${{ matrix.end }}
+      ACTION_CAP: ${{ matrix.cap }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Replay one complete cohort from level one
+        run: |
+          mkdir -p continuity
+          node scripts/compare-source100.mjs . . "continuity/$COHORT_NAME.jsonl" "$COHORT" 1 "$LAST_LEVEL" "$ACTION_CAP"
+      - name: Validate cohort and bind evidence to the checkout
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { execFileSync } from 'node:child_process';
+          import { createHash } from 'node:crypto';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { checkRun } from './scripts/verify-sic-continuity.mjs';
+          const { COHORT_NAME: name, COHORT: cohort, GITHUB_SHA: sha } = process.env;
+          assert.equal(execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), sha);
+          const file = `${name}.jsonl`, raw = readFileSync(`continuity/${file}`);
+          const runs = raw.toString().trim().split(/\r?\n/).map(JSON.parse);
+          const codes = cohort.replace(/^source:/, '').split(',').sort();
+          assert.deepEqual(runs.map(run => run.code).sort(), codes);
+          for (const run of runs) {
+            assert.equal(run.start, 1); assert.equal(run.initialCompleted, 0);
+            assert.equal(run.finish, Number(process.env.LAST_LEVEL));
+            assert.equal(run.cap, Number(process.env.ACTION_CAP));
+            assert.equal(run.parallelWorkers, 1); assert.equal(run.solver, 'sic');
+            checkRun(run);
+          }
+          const manifest = { schema: 'sic.continuity-ci.v1', sha, runId: process.env.GITHUB_RUN_ID,
+            name, cohort, codes, start: 1, end: Number(process.env.LAST_LEVEL), cap: Number(process.env.ACTION_CAP),
+            solver: 'sic', parallelWorkers: 1, file, sha256: createHash('sha256').update(raw).digest('hex') };
+          writeFileSync(`continuity/${name}.manifest.json`, JSON.stringify(manifest, null, 2) + '\n');
+          NODE
+      - name: Retain executed evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sic-continuity-${{ github.sha }}-${{ matrix.name }}
+          path: continuity/
+          if-no-files-found: error
+          # A failed-job rerun replaces only this cohort's artifact in this run.
+          overwrite: true
+          retention-days: 7
+
+  executed-series:
+    name: Executed series and final reconciliation
+    needs: [contracts, cohort-replays]
+    if: always()
+    runs-on: ubuntu-24.04
+    # Only artifact checks and deterministic physical verification run here.
+    timeout-minutes: 5
+    steps:
+      - name: Require successful contracts and every replay
+        env:
+          CONTRACTS_RESULT: ${{ needs.contracts.result }}
+          REPLAYS_RESULT: ${{ needs.cohort-replays.result }}
+        run: |
+          test "$CONTRACTS_RESULT" = success
+          test "$REPLAYS_RESULT" = success
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: sic-continuity-${{ github.sha }}-*
+          path: continuity
+          merge-multiple: true
+      - name: Verify the complete cohort set and matching source revision
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { execFileSync } from 'node:child_process';
+          import { createHash } from 'node:crypto';
+          import { readFileSync, readdirSync } from 'node:fs';
+          const expected = [
+            ['oriented-delivery', 'source:WA30', 7, 136], ['mirror-isles', 'SS01', 8, 120],
+            ['la-force-rouge', 'SS02', 8, 160], ['la-ruse-verte', 'SS03', 8, 240],
+            ['l-axe-violet', 'SS04', 8, 150], ['local-carry', 'SS05', 8, 155],
+            ['actor-composition', 'SS06', 8, 125], ['destination-set', 'SS07', 8, 180],
+            ['marked-field', 'source:SIGN', 6, 98], ['cargo-transport', 'source:GABA', 6, 128],
+            ['native-sources', 'source:AR25,HANO,DC22', 1, 120],
+          ];
+          const { GITHUB_SHA: sha, GITHUB_RUN_ID: runId } = process.env;
+          assert.equal(execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), sha);
+          const files = readdirSync('continuity');
+          assert.deepEqual(files.sort(), expected.flatMap(([name]) => [`${name}.jsonl`, `${name}.manifest.json`]).sort());
+          for (const [name, cohort, end, cap] of expected) {
+            const file = `${name}.jsonl`, raw = readFileSync(`continuity/${file}`);
+            const codes = cohort.replace(/^source:/, '').split(',').sort();
+            assert.deepEqual(JSON.parse(readFileSync(`continuity/${name}.manifest.json`, 'utf8')),
+              { schema: 'sic.continuity-ci.v1', sha, runId, name, cohort, codes, start: 1, end, cap,
+                solver: 'sic', parallelWorkers: 1, file, sha256: createHash('sha256').update(raw).digest('hex') });
+            const runs = raw.toString().trim().split(/\r?\n/).map(JSON.parse);
+            assert.deepEqual(runs.map(run => run.code).sort(), codes);
+            for (const run of runs) {
+              assert.equal(run.start, 1); assert.equal(run.initialCompleted, 0);
+              assert.equal(run.finish, end); assert.equal(run.cap, cap);
+              assert.equal(run.parallelWorkers, 1); assert.equal(run.solver, 'sic');
+            }
+          }
+          NODE
+      - run: npm run test:sic-continuity -- continuity/*.jsonl
