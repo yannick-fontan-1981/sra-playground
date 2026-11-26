@@ -1,0 +1,22 @@
+{
+  "success": true,
+  "scope": "independent pedagogical fixtures; no authored campaign route",
+  "command": "node --test --test-reporter=tap --test-skip-pattern='the real first workshop|the complete workshop route' tests/tutorial.test.mjs",
+  "tests": 42,
+  "passed": 42,
+  "failed": 0,
+  "skipped": 0,
+  "excludedAuthoredRouteTests": 2,
+  "publicObservationFields": [
+    "level",
+    "frame",
+    "frames",
+    "levelsCompleted"
+  ],
+  "sha256": {
+    "tests/tutorial.test.mjs": "91b12c7eb79d6e3124a883b1d1a9f3c10410d849f8c1e027531172d453f68fe7",
+    "dist/core.js": "7248efb9344046dce7504f2004155fc2776ee2e9023a30221a46804b466d310a",
+    "dist/tutorial.js": "4eb70aafbb953f77ffef4c2fe4432a755f4b6ff88d6fa5f344f2deb14a22cc5d"
+  },
+  "output": "tutorial-fixtures.txt"
+}

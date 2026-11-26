@@ -1,0 +1,520 @@
+TAP version 13
+# Subtest: monsters remain still after any hero walks, regardless of distance, axis or selected hero
+ok 1 - monsters remain still after any hero walks, regardless of distance, axis or selected hero
+  ---
+  duration_ms: 21.910574
+  type: 'test'
+  ...
+# Subtest: repeated walks and hero selections leave a freely accessible monster weight in place
+ok 2 - repeated walks and hero selections leave a freely accessible monster weight in place
+  ---
+  duration_ms: 2.652553
+  type: 'test'
+  ...
+# Subtest: Wizard exchange transports only its intended monster, with no second movement
+ok 3 - Wizard exchange transports only its intended monster, with no second movement
+  ---
+  duration_ms: 3.193167
+  type: 'test'
+  ...
+# Subtest: Bard song transports only its intended monster, with no second movement
+ok 4 - Bard song transports only its intended monster, with no second movement
+  ---
+  duration_ms: 6.581529
+  type: 'test'
+  ...
+# Subtest: global reflection transports only its intended monster, with no second movement
+ok 5 - global reflection transports only its intended monster, with no second movement
+  ---
+  duration_ms: 2.643309
+  type: 'test'
+  ...
+# Subtest: Merchant push hands a monster to a side press before contact, without autonomous movement
+ok 6 - Merchant push hands a monster to a side press before contact, without autonomous movement
+  ---
+  duration_ms: 3.625618
+  type: 'test'
+  ...
+# Subtest: Thief pull hands a monster to a side press before contact, without autonomous movement
+ok 7 - Thief pull hands a monster to a side press before contact, without autonomous movement
+  ---
+  duration_ms: 2.248655
+  type: 'test'
+  ...
+# Subtest: an unrelayed monster pull remains dangerous and Undo restores both positions
+ok 8 - an unrelayed monster pull remains dangerous and Undo restores both positions
+  ---
+  duration_ms: 5.240329
+  type: 'test'
+  ...
+# Subtest: Merchant cannot use a crate to push a remote monster file
+ok 9 - Merchant cannot use a crate to push a remote monster file
+  ---
+  duration_ms: 0.593423
+  type: 'test'
+  ...
+# Subtest: a closing press delivers its occupant to a button which stays weighted after release
+ok 10 - a closing press delivers its occupant to a button which stays weighted after release
+  ---
+  duration_ms: 0.759874
+  type: 'test'
+  ...
+# Subtest: opening a gate and closing an empty press do not transport a nearby monster
+ok 11 - opening a gate and closing an empty press do not transport a nearby monster
+  ---
+  duration_ms: 0.537669
+  type: 'test'
+  ...
+# Subtest: a press has three visible movement frames and Undo restores the complete physical turn
+ok 12 - a press has three visible movement frames and Undo restores the complete physical turn
+  ---
+  duration_ms: 9.457878
+  type: 'test'
+  ...
+# Subtest: selection, refused movement and an empty reflection neither move monsters nor tick combat
+ok 13 - selection, refused movement and an empty reflection neither move monsters nor tick combat
+  ---
+  duration_ms: 0.614184
+  type: 'test'
+  ...
+# Subtest: a stationary monster still kills any adjacent hero after an accepted world action
+ok 14 - a stationary monster still kills any adjacent hero after an accepted world action
+  ---
+  duration_ms: 0.539272
+  type: 'test'
+  ...
+# Subtest: press-induced monster combat is simultaneous and releases the dead monster weight
+ok 15 - press-induced monster combat is simultaneous and releases the dead monster weight
+  ---
+  duration_ms: 0.948468
+  type: 'test'
+  ...
+# Subtest: press transport onto a raising platform is safe, and its withdrawal still drowns the monster
+ok 16 - press transport onto a raising platform is safe, and its withdrawal still drowns the monster
+  ---
+  duration_ms: 7.811189
+  type: 'test'
+  ...
+# Subtest: a sung monster can rest on an immersed support without turning into a mobile crate
+ok 17 - a sung monster can rest on an immersed support without turning into a mobile crate
+  ---
+  duration_ms: 0.659914
+  type: 'test'
+  ...
+# Subtest: forced transport into bare water removes a monster without producing a support
+ok 18 - forced transport into bare water removes a monster without producing a support
+  ---
+  duration_ms: 0.657109
+  type: 'test'
+  ...
+# Subtest: goals settle after actual contact hazards, without adding a hypothetical pursuing attack
+ok 19 - goals settle after actual contact hazards, without adding a hypothetical pursuing attack
+  ---
+  duration_ms: 0.987297
+  type: 'test'
+  ...
+# Subtest: walking into stationary contact is public GAME_OVER and Undo restores the visible threat
+ok 20 - walking into stationary contact is public GAME_OVER and Undo restores the visible threat
+  ---
+  duration_ms: 4.157739
+  type: 'test'
+  ...
+# Subtest: SS24 compiles exactly M/T/Z/B and four goals, with Merchant selected and colors 12/14/15/6
+ok 21 - SS24 compiles exactly M/T/Z/B and four goals, with Merchant selected and colors 12/14/15/6
+  ---
+  duration_ms: 8.327907
+  type: 'test'
+  ...
+# Subtest: map centering and circuit/device validation remain strict
+ok 22 - map centering and circuit/device validation remain strict
+  ---
+  duration_ms: 4.864503
+  type: 'test'
+  ...
+# Subtest: selection cycles all four roles without moving or ticking adjacent monsters
+ok 23 - selection cycles all four roles without moving or ticking adjacent monsters
+  ---
+  duration_ms: 18.548984
+  type: 'test'
+  ...
+# Subtest: public observations expose only palette-indexed frames and the session contract
+ok 24 - public observations expose only palette-indexed frames and the session contract
+  ---
+  duration_ms: 4.597601
+  type: 'test'
+  ...
+# Subtest: malformed actions and invalid selections never mutate a session
+ok 25 - malformed actions and invalid selections never mutate a session
+  ---
+  duration_ms: 2.383428
+  type: 'test'
+  ...
+# Subtest: Merchant pushes one crate in every direction and refuses every two-piece file
+ok 26 - Merchant pushes one crate in every direction and refuses every two-piece file
+  ---
+  duration_ms: 1.913811
+  type: 'test'
+  ...
+# Subtest: Merchant pushes each companion without triggering their song, pull or exchange
+ok 27 - Merchant pushes each companion without triggering their song, pull or exchange
+  ---
+  duration_ms: 0.933855
+  type: 'test'
+  ...
+# Subtest: a Merchant refuses an occupied landing and never drowns a partner or mirror voluntarily
+ok 28 - a Merchant refuses an occupied landing and never drowns a partner or mirror voluntarily
+  ---
+  duration_ms: 1.210893
+  type: 'test'
+  ...
+# Subtest: a Merchant creates an immersed support; a later crate remains mobile on it
+ok 29 - a Merchant creates an immersed support; a later crate remains mobile on it
+  ---
+  duration_ms: 0.645803
+  type: 'test'
+  ...
+# Subtest: all four heroes reject voluntary unsupported water, including inactive hydraulic cells
+ok 30 - all four heroes reject voluntary unsupported water, including inactive hydraulic cells
+  ---
+  duration_ms: 2.507295
+  type: 'test'
+  ...
+# Subtest: Bard carries all three partners and cargo in the pre-move square, including diagonals across walls
+ok 31 - Bard carries all three partners and cargo in the pre-move square, including diagonals across walls
+  ---
+  duration_ms: 0.595277
+  type: 'test'
+  ...
+# Subtest: sung Merchant, Thief and Wizard do not activate their own push, pull or exchange
+ok 32 - sung Merchant, Thief and Wizard do not activate their own push, pull or exchange
+  ---
+  duration_ms: 0.593764
+  type: 'test'
+  ...
+# Subtest: blocked choir members stay put; a blocked Bard cancels every movement
+ok 33 - blocked choir members stay put; a blocked Bard cancels every movement
+  ---
+  duration_ms: 0.444359
+  type: 'test'
+  ...
+# Subtest: Bard cannot move a mirror or propagate movement through an occupant outside the aura
+ok 34 - Bard cannot move a mirror or propagate movement through an occupant outside the aura
+  ---
+  duration_ms: 3.202542
+  type: 'test'
+  ...
+# Subtest: the song slides free supports only along water and anchors the Bard landing
+ok 35 - the song slides free supports only along water and anchors the Bard landing
+  ---
+  duration_ms: 0.625762
+  type: 'test'
+  ...
+# Subtest: an occupied immersed support anchors each companion while the hero can cross to the next one
+ok 36 - an occupied immersed support anchors each companion while the hero can cross to the next one
+  ---
+  duration_ms: 0.795708
+  type: 'test'
+  ...
+# Subtest: a song cannot drown any companion or remove a mirror support
+ok 37 - a song cannot drown any companion or remove a mirror support
+  ---
+  duration_ms: 2.121583
+  type: 'test'
+  ...
+# Subtest: a sung crate becomes a support while another crate later occupies it
+ok 38 - a sung crate becomes a support while another crate later occupies it
+  ---
+  duration_ms: 0.415595
+  type: 'test'
+  ...
+# Subtest: song-induced monster combat is simultaneous, including a dying attacker
+ok 39 - song-induced monster combat is simultaneous, including a dying attacker
+  ---
+  duration_ms: 5.226167
+  type: 'test'
+  ...
+# Subtest: Thief pulls only the immediately rear occupant in every direction, never its whole file
+ok 40 - Thief pulls only the immediately rear occupant in every direction, never its whole file
+  ---
+  duration_ms: 1.179024
+  type: 'test'
+  ...
+# Subtest: Thief cannot push from the front and a refused forward step never pulls
+ok 41 - Thief cannot push from the front and a refused forward step never pulls
+  ---
+  duration_ms: 0.833815
+  type: 'test'
+  ...
+# Subtest: Thief pulls any companion without invoking its push, exchange or song
+ok 42 - Thief pulls any companion without invoking its push, exchange or song
+  ---
+  duration_ms: 0.798763
+  type: 'test'
+  ...
+# Subtest: Thief pulls a mirror without rotating it and cannot pull an immersed support
+ok 43 - Thief pulls a mirror without rotating it and cannot pull an immersed support
+  ---
+  duration_ms: 0.507724
+  type: 'test'
+  ...
+# Subtest: Thief can pull a mobile crate across an immersed support without extracting that support
+ok 44 - Thief can pull a mobile crate across an immersed support without extracting that support
+  ---
+  duration_ms: 0.370908
+  type: 'test'
+  ...
+# Subtest: Thief leaves cargo behind by departing sideways and replaces its own button weight when pulling
+ok 45 - Thief leaves cargo behind by departing sideways and replaces its own button weight when pulling
+  ---
+  duration_ms: 0.600534
+  type: 'test'
+  ...
+# Subtest: global reflection chooses the nearest actor in every quadrant independently of the selected role
+ok 46 - global reflection chooses the nearest actor in every quadrant independently of the selected role
+  ---
+  duration_ms: 2.277139
+  type: 'test'
+  ...
+# Subtest: equal-distance reflected companions exchange without abilities or selection changes
+ok 47 - equal-distance reflected companions exchange without abilities or selection changes
+  ---
+  duration_ms: 0.502948
+  type: 'test'
+  ...
+# Subtest: a blocked farther reflected arrival cannot veto a nearer valid one
+ok 48 - a blocked farther reflected arrival cannot veto a nearer valid one
+  ---
+  duration_ms: 0.673283
+  type: 'test'
+  ...
+# Subtest: multiple mirrors refuse incompatible destinations and conflicting destinations without cloning
+ok 49 - multiple mirrors refuse incompatible destinations and conflicting destinations without cloning
+  ---
+  duration_ms: 0.593264
+  type: 'test'
+  ...
+# Subtest: forced reflection into water drowns any hero, whereas a crate becomes an immersed support
+ok 50 - forced reflection into water drowns any hero, whereas a crate becomes an immersed support
+  ---
+  duration_ms: 1.36846
+  type: 'test'
+  ...
+# Subtest: walls, doors and closed presses flash the projecting mirror twice without a new Undo entry
+ok 51 - walls, doors and closed presses flash the projecting mirror twice without a new Undo entry
+  ---
+  duration_ms: 26.699414
+  type: 'test'
+  ...
+# Subtest: an intervening mirror warns on its black back and retains every white diagonal pixel
+ok 52 - an intervening mirror warns on its black back and retains every white diagonal pixel
+  ---
+  duration_ms: 2.320143
+  type: 'test'
+  ...
+# Subtest: every independently blocked mirror warns and a valid third transfer is not partially applied
+ok 53 - every independently blocked mirror warns and a valid third transfer is not partially applied
+  ---
+  duration_ms: 2.15865
+  type: 'test'
+  ...
+# Subtest: a reflection refused by later door closure warns and leaves the entire earlier world intact
+ok 54 - a reflection refused by later door closure warns and leaves the entire earlier world intact
+  ---
+  duration_ms: 4.992556
+  type: 'test'
+  ...
+# Subtest: a side press moves every role without invoking a push, exchange or song
+ok 55 - a side press moves every role without invoking a push, exchange or song
+  ---
+  duration_ms: 1.45447
+  type: 'test'
+  ...
+# Subtest: a press pushes a mixed train without invoking the companions’ abilities
+ok 56 - a press pushes a mixed train without invoking the companions’ abilities
+  ---
+  duration_ms: 0.489607
+  type: 'test'
+  ...
+# Subtest: hydraulic activation resolves before a forced press landing and Undo restores the cascade
+ok 57 - hydraulic activation resolves before a forced press landing and Undo restores the cascade
+  ---
+  duration_ms: 5.160529
+  type: 'test'
+  ...
+# Subtest: withdrawal of a platform can kill any distant inactive companion and is reversible
+ok 58 - withdrawal of a platform can kill any distant inactive companion and is reversible
+  ---
+  duration_ms: 9.47255
+  type: 'test'
+  ...
+# Subtest: retracting a hydraulic platform turns its crate into a persistent support
+ok 59 - retracting a hydraulic platform turns its crate into a persistent support
+  ---
+  duration_ms: 0.355465
+  type: 'test'
+  ...
+# Subtest: buttons have opaque gray corners, pink arms and the circuit pixel above the aura
+ok 60 - buttons have opaque gray corners, pink arms and the circuit pixel above the aura
+  ---
+  duration_ms: 0.619592
+  type: 'test'
+  ...
+# Subtest: a pure violet press has gray center open and black closed without blue or a button overlay
+ok 61 - a pure violet press has gray center open and black closed without blue or a button overlay
+  ---
+  duration_ms: 0.659432
+  type: 'test'
+  ...
+# Subtest: mirror diagonals and black backs remain above every circuit marking in all orientations
+ok 62 - mirror diagonals and black backs remain above every circuit marking in all orientations
+  ---
+  duration_ms: 1.469252
+  type: 'test'
+  ...
+# Subtest: the Bard aura and moving submerged support advance by one pixel in each animation frame
+ok 63 - the Bard aura and moving submerged support advance by one pixel in each animation frame
+  ---
+  duration_ms: 1.286687
+  type: 'test'
+  ...
+# Subtest: walk, push, pull, swap and song expose exact durations and a clean final frame
+ok 64 - walk, push, pull, swap and song expose exact durations and a clean final frame
+  ---
+  duration_ms: 18.612109
+  type: 'test'
+  ...
+# Subtest: all four goals must be simultaneously occupied, including heroes previously parked there
+ok 65 - all four goals must be simultaneously occupied, including heroes previously parked there
+  ---
+  duration_ms: 16.057534
+  type: 'test'
+  ...
+# Subtest: campaign transitions preserve all four identities and can be undone across levels
+ok 66 - campaign transitions preserve all four identities and can be undone across levels
+  ---
+  duration_ms: 5.515493
+  type: 'test'
+  ...
+# Subtest: arbitrary level order, Reset and Restart retain completed levels only where appropriate
+ok 67 - arbitrary level order, Reset and Restart retain completed levels only where appropriate
+  ---
+  duration_ms: 5.012426
+  type: 'test'
+  ...
+# Subtest: every initial room is checked before accepting a new campaign
+ok 68 - every initial room is checked before accepting a new campaign
+  ---
+  duration_ms: 1.290162
+  type: 'test'
+  ...
+# Subtest: four-button circuits count every hero and settle when any operator leaves
+ok 69 - four-button circuits count every hero and settle when any operator leaves
+  ---
+  duration_ms: 0.402406
+  type: 'test'
+  ...
+# Subtest: Wizard exchanges the first aligned crate and walks only when the ray has no target
+ok 70 - Wizard exchanges the first aligned crate and walks only when the ray has no target
+  ---
+  duration_ms: 2.987348
+  type: 'test'
+  ...
+# Subtest: Wizard exchanges each companion across water and never invokes the transferred companion power
+ok 71 - Wizard exchanges each companion across water and never invokes the transferred companion power
+  ---
+  duration_ms: 0.623639
+  type: 'test'
+  ...
+# Subtest: Wizard ray crosses water and relays through two white mirror faces
+ok 72 - Wizard ray crosses water and relays through two white mirror faces
+  ---
+  duration_ms: 0.941397
+  type: 'test'
+  ...
+# Subtest: every mirror face turns only its two accepted Wizard arrival directions
+ok 73 - every mirror face turns only its two accepted Wizard arrival directions
+  ---
+  duration_ms: 2.09961
+  type: 'test'
+  ...
+# Subtest: walls, closed doors and presses stop Wizard targeting; an adjacent mirror is never pushed or exchanged
+ok 74 - walls, closed doors and presses stop Wizard targeting; an adjacent mirror is never pushed or exchanged
+  ---
+  duration_ms: 0.619002
+  type: 'test'
+  ...
+# Subtest: submerged supports never become swap targets or movable crates
+ok 75 - submerged supports never become swap targets or movable crates
+  ---
+  duration_ms: 0.583479
+  type: 'test'
+  ...
+# Subtest: atomic swaps conserve both button weights and keep their shared door and press open
+ok 76 - atomic swaps conserve both button weights and keep their shared door and press open
+  ---
+  duration_ms: 0.3119
+  type: 'test'
+  ...
+# Subtest: Wizard monster swap resolves simultaneous combat after transport and preserves a distant companion
+ok 77 - Wizard monster swap resolves simultaneous combat after transport and preserves a distant companion
+  ---
+  duration_ms: 1.639448
+  type: 'test'
+  ...
+# Subtest: a monster swap can kill an inactive companion in the same simultaneous attack wave
+ok 78 - a monster swap can kill an inactive companion in the same simultaneous attack wave
+  ---
+  duration_ms: 0.424088
+  type: 'test'
+  ...
+# Subtest: presses and global reflection move the Wizard without recursively casting a visible spell
+ok 79 - presses and global reflection move the Wizard without recursively casting a visible spell
+  ---
+  duration_ms: 0.589027
+  type: 'test'
+  ...
+# Subtest: Wizard arrows and ACTION5 retain distinct targeting and transport semantics
+ok 80 - Wizard arrows and ACTION5 retain distinct targeting and transport semantics
+  ---
+  duration_ms: 0.261163
+  type: 'test'
+  ...
+# Subtest: a returning Wizard ray animates every turn and two pulses without moving or adding repeated Undo snapshots
+ok 81 - a returning Wizard ray animates every turn and two pulses without moving or adding repeated Undo snapshots
+  ---
+  duration_ms: 8.800728
+  type: 'test'
+  ...
+# Subtest: Wizard exchanges the Thief without pulling cargo behind the transported Thief
+ok 82 - Wizard exchanges the Thief without pulling cargo behind the transported Thief
+  ---
+  duration_ms: 0.306892
+  type: 'test'
+  ...
+# Subtest: a Wizard with no forward target walks without pulling an immediately rear crate
+ok 83 - a Wizard with no forward target walks without pulling an immediately rear crate
+  ---
+  duration_ms: 0.204869
+  type: 'test'
+  ...
+# Subtest: Bard carries a Thief without extracting the rear crate outside the initial aura
+ok 84 - Bard carries a Thief without extracting the rear crate outside the initial aura
+  ---
+  duration_ms: 0.273752
+  type: 'test'
+  ...
+# Subtest: Thief extracts Bard without singing nearby cargo or a free water support
+ok 85 - Thief extracts Bard without singing nearby cargo or a free water support
+  ---
+  duration_ms: 1.560489
+  type: 'test'
+  ...
+1..85
+# tests 85
+# suites 0
+# pass 85
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 378.219205
