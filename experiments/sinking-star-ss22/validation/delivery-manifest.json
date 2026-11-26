@@ -4,8 +4,8 @@
   "version": "0.1.0",
   "artifact": {
     "filename": "SS22-demo.html",
-    "bytes": 137980,
-    "sha256": "f30784753ba1c6c1b562d52ee81c286e80b87462fbb0ad286463b3b13725bed6",
+    "bytes": 137981,
+    "sha256": "ecbf4d4ea43ec349b9527993aa53cd8e4eed49f4473d7f0e8896e9888475e0d4",
     "standalone": true,
     "networkRequiredToPlay": false,
     "authorWitnessesIncluded": false
@@ -38,7 +38,7 @@
     "src/level-info.ts": "76e7cfb4a0cca922c40de4779a06d6907395de02b808387c6b71d1a5f7fbc0cd",
     "src/tutorial.ts": "eb277a48a4a0f68e4dd90308429529cc6bb63596a126e421296453bf8fcaae12",
     "src/browser.ts": "9094effbf1e02b31fa42b6a1281d3f3d77517410e1ad25a389cd0e2e4d130f2d",
-    "index.template.html": "4774639f465d924aae11dc5b2ae95f41d0225f56c52a04e4b2f61da7ac8a8a9a",
+    "index.template.html": "2a60755de8d3ff696459f7362c6c29eaf70d03666a44869418b3c583e7c8fd1b",
     "scripts/build-demo.mjs": "edc06fd997eaad0674b8dbbbaa77d4fbeab03c9db346177b8a1a2b93088f2dff",
     "package.json": "d2979eada0b6dc0123d5595b3d56fb80b5203f8923a7de62a727e77be9c4b36c",
     "package-lock.json": "fc00c71e66b5ad15a43e17773f079f33e4a09aa411bd858a08cf52af856178c6",
@@ -46,8 +46,8 @@
   },
   "reportSha256": {
     "validation/unit-tests.json": "a724c825c477cd060a2419a37f3e4308dc376a13384edf6c429025dc42cdb0b0",
-    "validation/levels-report.json": "4637e01c8d0005996dd62774817dcfd1fca26090504eaf457d316e677eff8131",
-    "validation/ui-dom-report.json": "6f8dd4c56c4abf3cfbbaa1b928baffa7696a75768d13d55693341574fcd8fa37",
+    "validation/levels-report.json": "852f931c82db89713bd709abfa2439a0962a4cfbbdcf7818b3ba0c19fa2f8ae6",
+    "validation/ui-dom-report.json": "b6aa7a485ec1b075ecaf926c5e9061315093de4a0ad7aa8701bb4a984cff6424",
     "validation/design-report.json": "5bc5a5d39d11db284b5ffa1b3478334a0b024ad7f0e55ebf718c784825f7db68"
   },
   "limits": [
