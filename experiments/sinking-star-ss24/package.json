@@ -1,0 +1,20 @@
+{
+  "name": "sra-sinking-star-ss24-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node scripts/build-demo.mjs",
+    "test": "npm run build && node --test tests/*.test.mjs",
+    "validate": "npm run build && node scripts/validate-levels.mjs",
+    "validate:ui": "node scripts/verify-ui-dom.mjs",
+    "validate:design": "node scripts/verify-design-constraints.mjs"
+  },
+  "devDependencies": {
+    "happy-dom": "21.0.4",
+    "typescript": "5.9.3"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  }
+}

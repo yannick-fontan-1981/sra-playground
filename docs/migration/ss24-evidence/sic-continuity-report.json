@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "command": "npm run test:sic-continuity",
+  "protectedLevels": 41,
+  "completionEvidence": "The script emits its final table only after runs.flatMap(checkRun) has returned for every protected run. All 41 rows and the closed final table are present, with no errors.",
+  "logSha256": "8f537a005deb32c330fef5d8680ce8c0fa6d19717488159df07bf01ce0d65521",
+  "scope": "Existing SIC continuity contracts SS01\u2013SS05 and native AR25/HANO/DC22; this does not qualify autonomous SS24 play."
+}

@@ -1,0 +1,29 @@
+{
+  "success": true,
+  "scope": "SS24 native adapter/dispatcher plus Custom 4 and SS21/SS22/SS23 regressions",
+  "command": "node --test --test-reporter=tap tests/ss24-native.test.ts tests/custom4-native.test.ts tests/ss21-native.test.ts tests/ss22-native.test.ts tests/ss23-native.test.ts",
+  "exitCode": 0,
+  "tests": 98,
+  "passed": 98,
+  "failed": 0,
+  "skipped": 0,
+  "cancelled": 0,
+  "campaign": {
+    "commandsByLevel": [
+      212,
+      154,
+      118,
+      85,
+      127,
+      122,
+      92,
+      141
+    ],
+    "actions": 1051,
+    "selections": 176,
+    "frames": 2875,
+    "discoveries": 37
+  },
+  "output": "native-tests.txt",
+  "outputSha256": "aea9a321d72b7d3e704b340761be50033b6b01cfaab9d9fe52c7f8e878d75c16"
+}

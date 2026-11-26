@@ -1,0 +1,262 @@
+TAP version 13
+# Subtest: the first workshop exposes thirty-seven distinct discoveries and four public hero colours
+ok 1 - the first workshop exposes thirty-seven distinct discoveries and four public hero colours
+  ---
+  duration_ms: 36.221278
+  type: 'test'
+  ...
+# Subtest: a Merchant single push teaches handling, while a blocked two-piece file teaches nothing
+ok 2 - a Merchant single push teaches handling, while a blocked two-piece file teaches nothing
+  ---
+  duration_ms: 14.998239
+  type: 'test'
+  ...
+# Subtest: Thief pulling the nearest crate leaves the second one and teaches single traction
+ok 3 - Thief pulling the nearest crate leaves the second one and teaches single traction
+  ---
+  duration_ms: 5.838612
+  type: 'test'
+  ...
+# Subtest: a lone pull does not claim a demonstration of separating a rear file
+ok 4 - a lone pull does not claim a demonstration of separating a rear file
+  ---
+  duration_ms: 5.128624
+  type: 'test'
+  ...
+# Subtest: a blocked Thief cannot earn a pull or move discovery
+ok 5 - a blocked Thief cannot earn a pull or move discovery
+  ---
+  duration_ms: 3.34416
+  type: 'test'
+  ...
+# Subtest: pulling Merchant beside an idle Bard does not teach extraction of the Bard
+ok 6 - pulling Merchant beside an idle Bard does not teach extraction of the Bard
+  ---
+  duration_ms: 4.337174
+  type: 'test'
+  ...
+# Subtest: pulling Bard while his nearby crate stays teaches departure without song
+ok 7 - pulling Bard while his nearby crate stays teaches departure without song
+  ---
+  duration_ms: 4.718317
+  type: 'test'
+  ...
+# Subtest: pulling a crate onto the Thief button demonstrates weight handover without a gate pulse
+ok 8 - pulling a crate onto the Thief button demonstrates weight handover without a gate pulse
+  ---
+  duration_ms: 7.584228
+  type: 'test'
+  ...
+# Subtest: pushing a partner off a button replaces its weight during the same move
+ok 9 - pushing a partner off a button replaces its weight during the same move
+  ---
+  duration_ms: 4.077472
+  type: 'test'
+  ...
+# Subtest: a mirror can be visibly handled by either Merchant or Thief
+ok 10 - a mirror can be visibly handled by either Merchant or Thief
+  ---
+  duration_ms: 10.500082
+  type: 'test'
+  ...
+# Subtest: moving an existing water support is not reported as creating a new one
+ok 11 - moving an existing water support is not reported as creating a new one
+  ---
+  duration_ms: 3.67649
+  type: 'test'
+  ...
+# Subtest: a blocked Bard awards no song or movement discovery
+ok 12 - a blocked Bard awards no song or movement discovery
+  ---
+  duration_ms: 1.96133
+  type: 'test'
+  ...
+# Subtest: pushing Bard teaches the partner push without awarding a passive song
+ok 13 - pushing Bard teaches the partner push without awarding a passive song
+  ---
+  duration_ms: 2.420601
+  type: 'test'
+  ...
+# Subtest: the same visible push in another room awards no discovery
+ok 14 - the same visible push in another room awards no discovery
+  ---
+  duration_ms: 1.593336
+  type: 'test'
+  ...
+# Subtest: red monsters and circuit buttons remain distinct from all four heroes during unrelated walking
+ok 15 - red monsters and circuit buttons remain distinct from all four heroes during unrelated walking
+  ---
+  duration_ms: 3.894167
+  type: 'test'
+  ...
+# Subtest: a song visibly moving a monster teaches its cause rather than stillness
+ok 16 - a song visibly moving a monster teaches its cause rather than stillness
+  ---
+  duration_ms: 2.853081
+  type: 'test'
+  ...
+# Subtest: selection alone does not claim a monster movement or walking demonstration
+ok 17 - selection alone does not claim a monster movement or walking demonstration
+  ---
+  duration_ms: 1.148738
+  type: 'test'
+  ...
+# Subtest: a drowning press is recognized from two pixel translations despite no final monster sprite
+ok 18 - a drowning press is recognized from two pixel translations despite no final monster sprite
+  ---
+  duration_ms: 4.425076
+  type: 'test'
+  ...
+# Subtest: a press transporting Wizard does not earn an active exchange discovery
+ok 19 - a press transporting Wizard does not earn an active exchange discovery
+  ---
+  duration_ms: 4.765297
+  type: 'test'
+  ...
+# Subtest: Wizard exchanges the first visible target without claiming an ordinary walk or a push
+ok 20 - Wizard exchanges the first visible target without claiming an ordinary walk or a push
+  ---
+  duration_ms: 13.455789
+  type: 'test'
+  ...
+# Subtest: an adjacent Wizard exchange is still an exchange rather than a one-cell walk
+ok 21 - an adjacent Wizard exchange is still an exchange rather than a one-cell walk
+  ---
+  duration_ms: 3.091619
+  type: 'test'
+  ...
+# Subtest: a farther target hidden behind a wall is not evidence for the first-target lesson
+ok 22 - a farther target hidden behind a wall is not evidence for the first-target lesson
+  ---
+  duration_ms: 7.288532
+  type: 'test'
+  ...
+# Subtest: an empty Wizard ray teaches walking and leaves an immediately rear crate still
+ok 23 - an empty Wizard ray teaches walking and leaves an immediately rear crate still
+  ---
+  duration_ms: 8.325442
+  type: 'test'
+  ...
+# Subtest: a Wizard ray crossing bare water teaches exchange without building or walking a support
+ok 24 - a Wizard ray crossing bare water teaches exchange without building or walking a support
+  ---
+  duration_ms: 1.859046
+  type: 'test'
+  ...
+# Subtest: two white mirror faces teach the bent Wizard ray from its public violet path
+ok 25 - two white mirror faces teach the bent Wizard ray from its public violet path
+  ---
+  duration_ms: 1.993639
+  type: 'test'
+  ...
+# Subtest: exchanging Bard while nearby cargo stays teaches extraction without a passive song
+ok 26 - exchanging Bard while nearby cargo stays teaches extraction without a passive song
+  ---
+  duration_ms: 2.488724
+  type: 'test'
+  ...
+# Subtest: exchanging Merchant beside an idle Bard does not teach extraction of the Bard
+ok 27 - exchanging Merchant beside an idle Bard does not teach extraction of the Bard
+  ---
+  duration_ms: 1.800147
+  type: 'test'
+  ...
+# Subtest: exchanging an isolated Bard without a nearby held piece does not demonstrate leaving a group
+ok 28 - exchanging an isolated Bard without a nearby held piece does not demonstrate leaving a group
+  ---
+  duration_ms: 2.785259
+  type: 'test'
+  ...
+# Subtest: a sung Wizard moves with the Bard without casting toward a visible distant crate
+ok 29 - a sung Wizard moves with the Bard without casting toward a visible distant crate
+  ---
+  duration_ms: 1.713948
+  type: 'test'
+  ...
+# Subtest: a Wizard exchange preserves the weight on its original button without claiming a gate pulse
+ok 30 - a Wizard exchange preserves the weight on its original button without claiming a gate pulse
+  ---
+  duration_ms: 2.355353
+  type: 'test'
+  ...
+# Subtest: a returning Wizard ray teaches no displacement, exchange or combat and reports its actual refusal
+ok 31 - a returning Wizard ray teaches no displacement, exchange or combat and reports its actual refusal
+  ---
+  duration_ms: 11.7487
+  type: 'test'
+  ...
+# Subtest: a press transporting Thief does not earn the active pull discovery
+ok 32 - a press transporting Thief does not earn the active pull discovery
+  ---
+  duration_ms: 2.991961
+  type: 'test'
+  ...
+# Subtest: a returning geometric layout does not turn Thief movement into a ranged power
+ok 33 - a returning geometric layout does not turn Thief movement into a ranged power
+  ---
+  duration_ms: 2.889146
+  type: 'test'
+  ...
+# Subtest: single-pull needs an adjacent second piece, not distant cargo across a gap or an immersed support
+ok 34 - single-pull needs an adjacent second piece, not distant cargo across a gap or an immersed support
+  ---
+  duration_ms: 3.881998
+  type: 'test'
+  ...
+# Subtest: pulling an isolated Bard or leaving only a nearby mirror does not demonstrate releasing his group
+ok 35 - pulling an isolated Bard or leaving only a nearby mirror does not demonstrate releasing his group
+  ---
+  duration_ms: 4.673188
+  type: 'test'
+  ...
+# Subtest: release-by-pull recognizes a held crate, monster or free support in the Bard initial range
+ok 36 - release-by-pull recognizes a held crate, monster or free support in the Bard initial range
+  ---
+  duration_ms: 5.675896
+  type: 'test'
+  ...
+# Subtest: pulling Wizard teaches partner traction without an active exchange or a passive rear chain
+ok 37 - pulling Wizard teaches partner traction without an active exchange or a passive rear chain
+  ---
+  duration_ms: 1.711043
+  type: 'test'
+  ...
+# Subtest: a sung Thief leaves rear cargo outside the aura and earns no active traction discovery
+ok 38 - a sung Thief leaves rear cargo outside the aura and earns no active traction discovery
+  ---
+  duration_ms: 1.779496
+  type: 'test'
+  ...
+# Subtest: exchanging Thief teaches a Wizard partner exchange without pulling cargo behind that Thief
+ok 39 - exchanging Thief teaches a Wizard partner exchange without pulling cargo behind that Thief
+  ---
+  duration_ms: 1.726978
+  type: 'test'
+  ...
+# Subtest: a selected Thief reflected by ACTION5 does not claim his voluntary rear pull
+ok 40 - a selected Thief reflected by ACTION5 does not claim his voluntary rear pull
+  ---
+  duration_ms: 1.894039
+  type: 'test'
+  ...
+# Subtest: the same visible Thief extraction outside the workshop awards no discovery
+ok 41 - the same visible Thief extraction outside the workshop awards no discovery
+  ---
+  duration_ms: 1.259505
+  type: 'test'
+  ...
+# Subtest: detached public pixels alone reproduce traction feedback and discoveries
+ok 42 - detached public pixels alone reproduce traction feedback and discoveries
+  ---
+  duration_ms: 1.829983
+  type: 'test'
+  ...
+1..42
+# tests 42
+# suites 0
+# pass 42
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 376.50685

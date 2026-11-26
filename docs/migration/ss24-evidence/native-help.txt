@@ -1,0 +1,9 @@
+✔ SS24 native help exposes the same 37 discoveries and describes the quartet with mobile supports (2.974709ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 1
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 272.238717

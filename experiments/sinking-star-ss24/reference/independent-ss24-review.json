@@ -1,0 +1,1155 @@
+{
+  "game": "SS24",
+  "success": true,
+  "levels": [
+    {
+      "level": 1,
+      "title": "L’atelier des départs",
+      "actions": 212,
+      "selections": 38,
+      "mapSha256": "cd7a18657032980d88b16448e389ae294f75d5ff90b0c9ae0ed9e84a46ba6fb4",
+      "actionsSha256": "49e47e249d2e070931d5fe379be9c581752e793e8fe4057825f2123d28a8a85d",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "pull": 3,
+        "push": 3,
+        "walk": 148,
+        "swap": 4,
+        "song": 14,
+        "piston": 1,
+        "combat": 2,
+        "gate": 1,
+        "reflect": 2
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 11,
+            "y": 11
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 11,
+            "y": 17
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 17,
+            "y": 11
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 17,
+            "y": 17
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "level": 2,
+      "title": "L’escalier à rebours",
+      "actions": 154,
+      "selections": 36,
+      "mapSha256": "9eaae1cc5abcac5fbc54c3286938fcf14717895806d31cda93c44a3dbeab2f28",
+      "actionsSha256": "b3c68948e9b0a490789aeaa733a6aa6267a96b49785229daf170bc4179581830",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "pull": 14,
+        "walk": 98,
+        "push": 2,
+        "gate": 1,
+        "swap": 3,
+        "song": 1
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1,
+        1
+      ]
+    },
+    {
+      "level": 3,
+      "title": "Les tiroirs décalés",
+      "actions": 118,
+      "selections": 21,
+      "mapSha256": "a9714c3d527095cc709ba8186aae232d3353bffaee054e5627f14e887528f895",
+      "actionsSha256": "ca83cb70f1385df4faa1fa9139c1eef3cd441c2fc680cad032a68464c0229158",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "pull": 6,
+        "walk": 79,
+        "push": 4,
+        "swap": 5,
+        "song": 3
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 14,
+            "y": 13
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        2,
+        2
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Le pas et la visée",
+      "actions": 85,
+      "selections": 21,
+      "mapSha256": "471283ce7af40706f23850a2d4403fa80d27ed9f49112816c137409ab072fe33",
+      "actionsSha256": "20fc96e279af203be39c574f0934456f06073947cb4131eb89d43676dd356238",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "pull": 2,
+        "swap": 2,
+        "walk": 55,
+        "push": 4,
+        "song": 1,
+        "gate": 1
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 16,
+            "y": 8
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1,
+        1
+      ]
+    },
+    {
+      "level": 5,
+      "title": "Le relais interrompu",
+      "actions": 127,
+      "selections": 21,
+      "mapSha256": "8e1fb266facffcbfb105a91d4af42df56776d41ab95bed79b69fdd41d754539c",
+      "actionsSha256": "c27504ed3fe3a02cfb63c488a57e344c03b1318e54f43e61d3a742b07371753e",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "push": 1,
+        "swap": 2,
+        "walk": 100,
+        "pull": 2,
+        "song": 1,
+        "piston": 1,
+        "gate": 1
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "level": 6,
+      "title": "Trois postes, un seul retour",
+      "actions": 122,
+      "selections": 15,
+      "mapSha256": "a4c14a5706b1d3fb31ad9a38d79be3cf19a8a04e261f2d685e4cbcde065d380e",
+      "actionsSha256": "6d141c43029e137ab21911ef22289f9ae223f3aad66d943b9ee5df61f1328b0a",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "pull": 14,
+        "walk": 86,
+        "push": 2,
+        "gate": 5,
+        "song": 4,
+        "swap": 1
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 4,
+            "y": 3
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1
+      ]
+    },
+    {
+      "level": 7,
+      "title": "La place qui restera sûre",
+      "actions": 92,
+      "selections": 11,
+      "mapSha256": "f7616adb1c884d29ee387ec26e5d1e18ba2c915fb42dcc45361ada2fe8872cfd",
+      "actionsSha256": "b3f0b88c9de405a829841c820c255441d2c6c6294d66bc9f4cb866abe7755a0a",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "pull": 9,
+        "walk": 51,
+        "push": 9,
+        "gate": 6,
+        "swap": 1,
+        "platform": 4,
+        "song": 11
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 18,
+            "y": 4
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 18,
+            "y": 5
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1,
+        1
+      ]
+    },
+    {
+      "level": 8,
+      "title": "Le dernier pas sans échange",
+      "actions": 141,
+      "selections": 13,
+      "mapSha256": "c81a963c96ec2849881cd5816da702c40ddb20024adf916f8a7fc7cec26adbd2",
+      "actionsSha256": "e66c10a5268c8f51bc4903b59c8e618c37f0a9e37963dc89dbcebf8d3bd9939d",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "phaseCounts": {
+        "push": 3,
+        "gate": 6,
+        "walk": 112,
+        "pull": 11,
+        "platform": 6,
+        "song": 1,
+        "swap": 1
+      },
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 16,
+            "y": 3
+          }
+        },
+        {
+          "role": "thief",
+          "at": {
+            "x": 17,
+            "y": 3
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 15,
+            "y": 3
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 18,
+            "y": 3
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        2,
+        1,
+        1
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "level": 1,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 212,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 11,
+        "conservedMirrors": 1
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 1,
+      "name": "La prise unique maintient deux accès et les transports passifs restent distincts",
+      "status": "passed",
+      "observed": {
+        "firstPull": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 3
+            },
+            "to": {
+              "x": 6,
+              "y": 3
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 4,
+              "y": 3
+            },
+            "to": {
+              "x": 5,
+              "y": 3
+            }
+          }
+        ],
+        "secondCratePreserved": {
+          "x": 3,
+          "y": 3
+        },
+        "relayDoors": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 18,
+            "y": 9
+          }
+        ],
+        "bothCloseOnUnreplacedDeparture": true,
+        "supportMoves": 3,
+        "monstersRemoved": 4
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 2,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 154,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 2,
+        "conservedMirrors": 0
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 2,
+      "name": "La descente de charge et les transports préservent un passage tenu",
+      "status": "passed",
+      "observed": {
+        "button": {
+          "x": 14,
+          "y": 12
+        },
+        "silentPartnerPulls": 6,
+        "voluntaryBardDepartureClosesGate": true,
+        "alternativeActions": 180
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 3,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 118,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 4,
+        "conservedMirrors": 0
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 3,
+      "name": "Deux paires imposent des places de réception et une ligne dégagée",
+      "status": "passed",
+      "observed": {
+        "initialMerchantPushRefused": true,
+        "initialComponents": [
+          2,
+          2
+        ],
+        "firstTwoSwaps": [
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 7,
+                "y": 11
+              },
+              "to": {
+                "x": 8,
+                "y": 11
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 8,
+                "y": 11
+              },
+              "to": {
+                "x": 7,
+                "y": 11
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 11
+              },
+              "to": {
+                "x": 9,
+                "y": 11
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 11
+              },
+              "to": {
+                "x": 8,
+                "y": 11
+              }
+            }
+          ]
+        ],
+        "unclearedReturnHitsCrate": true,
+        "bardNotYetExchanged": true,
+        "selectiveSong": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 11,
+              "y": 10
+            },
+            "to": {
+              "x": 11,
+              "y": 11
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 10,
+              "y": 8
+            },
+            "to": {
+              "x": 10,
+              "y": 9
+            }
+          }
+        ],
+        "cratesConserved": 4
+      },
+      "scope": "La paire haute bloque la poussée simple. Après les deux échanges du bas, la caisse renvoyée masque la Barde tant qu’elle reste dans cette ligne."
+    },
+    {
+      "level": 4,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 85,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 2,
+        "conservedMirrors": 1
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 4,
+      "name": "La traction laisse le Voleur du côté utile de la réception",
+      "status": "passed",
+      "observed": {
+        "wizardPull": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 7,
+              "y": 8
+            },
+            "to": {
+              "x": 8,
+              "y": 8
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 8
+            },
+            "to": {
+              "x": 7,
+              "y": 8
+            }
+          }
+        ],
+        "directSwapBranch": [
+          "select wizard",
+          "ACTION4",
+          "ACTION1",
+          "select thief"
+        ],
+        "thiefLocalRefusals": [
+          {
+            "id": 1,
+            "failed": true
+          },
+          {
+            "id": 2,
+            "failed": true
+          },
+          {
+            "id": 3,
+            "failed": true
+          },
+          {
+            "id": 4,
+            "failed": true
+          }
+        ],
+        "selectiveSong": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 10
+            },
+            "to": {
+              "x": 11,
+              "y": 10
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 8,
+              "y": 8
+            },
+            "to": {
+              "x": 9,
+              "y": 8
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 8,
+              "y": 10
+            },
+            "to": {
+              "x": 9,
+              "y": 10
+            }
+          }
+        ],
+        "finalDeliveredWeight": {
+          "x": 8,
+          "y": 12
+        },
+        "cratesConserved": 2
+      },
+      "scope": "L’échange direct permet le même rayon mais laisse le Voleur entouré de trois murs et de la caisse reçue. Une intervention des partenaires peut encore le libérer."
+    },
+    {
+      "level": 5,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 127,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 3,
+        "conservedMirrors": 0
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 5,
+      "name": "La relève continue et la rupture provoquent des effets différents",
+      "status": "passed",
+      "observed": {
+        "wizardExitsFromLoadedPost": [
+          {
+            "id": 1,
+            "failed": true,
+            "pressed": true,
+            "phases": []
+          },
+          {
+            "id": 2,
+            "failed": true,
+            "pressed": true,
+            "phases": []
+          },
+          {
+            "id": 3,
+            "failed": false,
+            "pressed": true,
+            "phases": [
+              "swap"
+            ]
+          },
+          {
+            "id": 4,
+            "failed": false,
+            "pressed": true,
+            "phases": [
+              "swap"
+            ]
+          }
+        ],
+        "closingPress": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 13,
+              "y": 6
+            },
+            "to": {
+              "x": 14,
+              "y": 6
+            }
+          }
+        ],
+        "supportCreated": {
+          "x": 14,
+          "y": 6
+        },
+        "finalButtonHeld": true,
+        "alternativeThiefPullReleasesButton": true
+      },
+      "scope": "Les côtés du poste empêchent la simple marche verticale du Magicien. Les deux directions horizontales échangent avec une cible qui remplace le poids."
+    },
+    {
+      "level": 6,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 122,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 1,
+        "conservedMirrors": 1
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 6,
+      "name": "Rétablir le coude précède la livraison qui ferme son accès",
+      "status": "passed",
+      "observed": {
+        "mirrorPulls": 8,
+        "earlyLoadClosesServicePassage": true,
+        "earlyReturnRefused": true,
+        "restoredMirror": {
+          "x": 6,
+          "y": 9
+        },
+        "deliveredWeight": {
+          "x": 11,
+          "y": 13
+        },
+        "merchantTemporarilyHoldsFirstButton": true,
+        "monsterPreserved": true,
+        "bardLeavesByOwnSteps": true
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 7,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 92,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 3,
+        "conservedMirrors": 1
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 7,
+      "name": "Trois stationnements sont détruits par les commandes du transport suivant",
+      "status": "passed",
+      "observed": {
+        "testedUnsafePosts": [
+          {
+            "mirrorPost": {
+              "x": 4,
+              "y": 8
+            },
+            "thiefRightMoves": 0,
+            "merchantRightMoves": 1,
+            "mirrorRemoved": true,
+            "heroDeaths": 0
+          },
+          {
+            "mirrorPost": {
+              "x": 7,
+              "y": 8
+            },
+            "thiefRightMoves": 3,
+            "merchantRightMoves": 4,
+            "mirrorRemoved": true,
+            "heroDeaths": 0
+          },
+          {
+            "mirrorPost": {
+              "x": 10,
+              "y": 8
+            },
+            "thiefRightMoves": 6,
+            "merchantRightMoves": 7,
+            "mirrorRemoved": true,
+            "heroDeaths": 0
+          }
+        ],
+        "safeWitnessPost": {
+          "x": 13,
+          "y": 8
+        },
+        "mirrorPreserved": true
+      },
+      "scope": "Trois postes précis sont testés ; aucun classement exhaustif de toutes les cases de stationnement n’est revendiqué."
+    },
+    {
+      "level": 7,
+      "name": "Appui mobile et plateforme composent deux cases de passage",
+      "status": "passed",
+      "observed": {
+        "supportAtCrossing": {
+          "x": 16,
+          "y": 12
+        },
+        "platformAtCrossing": {
+          "x": 15,
+          "y": 12
+        },
+        "supportHeldDuringBardCrossing": true,
+        "platformWithdrawalTurn": 78,
+        "allHeroesAlreadyOnEastBank": true,
+        "finalSupportMoves": 5
+      },
+      "scope": "L’appui reste d’abord disponible derrière la Barde ; il peut être déplacé plus tard par les chants de rassemblement, une fois les héros sur la rive droite."
+    },
+    {
+      "level": 8,
+      "name": "Les actions numériques réunissent les quatre rôles vivants sur quatre buts",
+      "status": "passed",
+      "observed": {
+        "actions": 141,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0,
+        "conservedCargoAndSupports": 4,
+        "conservedMirrors": 1
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    },
+    {
+      "level": 8,
+      "name": "Le poste change ce que reçoit le dernier dépôt",
+      "status": "passed",
+      "observed": {
+        "prematureExchangePlacesReserveAt": {
+          "x": 11,
+          "y": 9
+        },
+        "preparedNorthernApproachUnsupported": {
+          "x": 12,
+          "y": 8
+        },
+        "mirrorHoldsHydraulicCommand": true,
+        "sungWizardMove": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 13,
+              "y": 11
+            },
+            "to": {
+              "x": 14,
+              "y": 11
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 11,
+              "y": 9
+            },
+            "to": {
+              "x": 12,
+              "y": 9
+            }
+          }
+        ],
+        "preparedReserveAt": {
+          "x": 12,
+          "y": 9
+        },
+        "leftBardDepartureRemovesWeight": true,
+        "platformReactivatedAfterMirrorDeparture": true
+      },
+      "scope": "Effets constatés sur le témoin ou la branche indiquée ; aucune nécessité universelle de cet ordre exact."
+    }
+  ],
+  "shortcutReview": [
+    {
+      "level": 1,
+      "candidate": "Quitter le bouton initial puis passer par le couloir droit.",
+      "result": "Le départ sans caisse ferme aussi la porte du couloir droit en (18,9). Le témoin garde le bouton chargé par sa première traction.",
+      "branch": [
+        "select thief",
+        "ACTION2"
+      ],
+      "limit": "Ce contrôle porte sur le départ sans relève ; les autres préparations restent libres."
+    },
+    {
+      "level": 2,
+      "candidate": "Pousser directement le bloc du bas avec le Marchand.",
+      "result": "Variante gagnante de 180 entrées sans chant. Elle conserve la descente de charge, le passage commandé et six tractions de partenaires, mais remplace le chant et la traction du dernier bloc.",
+      "commands": "CDDDDDLDDLCCCDRDDRRDDDLDLLDLLLLLLLULDRRRRRRRUURRRRCCRRRDLCCDDDDRDDDDRCCCRRRRCCCURUCCCUUURLLLDRRRURUUCCDDLDDCCDDDRRCLDCCCDDLLLLLLLLLLLLCCULLUULLCCCDLLLDLUUCCCLLLLCCCUULLLLLLLLULLLDL",
+      "actions": 180,
+      "limit": "Le chant à travers le mur n’est donc pas une capacité globalement obligatoire."
+    },
+    {
+      "level": 4,
+      "candidate": "Échanger les places du Magicien et du Voleur au lieu de tirer le Magicien.",
+      "result": "Le rayon atteint la loge, mais le Voleur reste derrière la caisse reçue et ses quatre directions sont refusées dans cet état.",
+      "limit": "Ce poste local est bloqué pour le Voleur seul, pas déclaré définitivement perdu pour le groupe."
+    },
+    {
+      "level": 5,
+      "candidate": "Après le chargement, tirer le Magicien hors du bouton avec le Voleur.",
+      "result": "La branche est légale : le bouton se vide, la presse immerge sa charge et crée l’appui, sans chant ni échange actif dans cette entrée. Elle conserve le besoin de charger la presse et de rétablir ensuite le passage.",
+      "startTurn": 25,
+      "branch": [
+        "select thief",
+        "ACTION4"
+      ],
+      "limit": "Cette vérification locale ne prétend pas rendre le chant obligatoire ; la variante complète est documentée par la revue des salles centrales."
+    },
+    {
+      "level": 6,
+      "candidate": "Livrer la charge avant de redescendre le miroir du garage.",
+      "result": "La livraison est légale mais ferme le couloir sous le Voleur. Son pas de retour vers le bas est refusé et le miroir reste au mauvais étage.",
+      "startTurn": 27,
+      "reusedWitnessActions": [
+        39,
+        52
+      ],
+      "finalBranch": [
+        "select thief",
+        "ACTION2"
+      ],
+      "limit": "La commande peut encore être déchargée par une autre préparation ; ce n’est pas une impasse globale démontrée."
+    },
+    {
+      "level": 8,
+      "candidate": "Échanger avant le chant, puis déplacer la réserve reçue au lieu du Magicien.",
+      "result": "Variante gagnante de 137 entrées. Après le chant, elle retrouve les mêmes positions que le témoin après son dernier échange. Elle conserve les dépôts, le coude hydraulique, le miroir et le chant, mais inverse l’ordre des deux gestes. Une sélection redondante du Barde est omise.",
+      "commands": "RRRDDDDDDLLLLLLLCURRRRUUUDDRDLDULDLUULDDRRRURRRLLLDLDLDDLLLLLCLURCRRRUUUUUUUURRCCCRURUCCUUURRRRRRRRRRRRURRUUUUUUCUUURRRRRRRRRUULUUURURRRU",
+      "actions": 137,
+      "limit": "Le transport chanté du Magicien n’est donc pas globalement nécessaire ; le témoin illustre une solution parmi deux ordres vérifiés."
+    }
+  ],
+  "qualitativeDiversity": [
+    {
+      "levels": [
+        1,
+        2
+      ],
+      "comparison": "N1 assemble les 37 comparaisons pédagogiques dans trois cours et un bassin. N2 réduit le matériel à deux charges sèches, un escalier et un seul passage commandé.",
+      "remainingSimilarity": "Les relèves de bouton et les transports passifs sont communs ; N2 les isole sans miroir ni monstre."
+    },
+    {
+      "levels": [
+        3
+      ],
+      "comparison": "Deux paires de caisses, deux galeries décalées et une coupure d’eau organisent la circulation et les retours de cible. Aucun bouton ni tableau de dépôts ne remplace le problème de rangement.",
+      "distinctObservedFeatures": [
+        "deux composantes de deux caisses",
+        "quatre caisses conservées",
+        "cibles renvoyées à dégager"
+      ]
+    },
+    {
+      "levels": [
+        4,
+        8
+      ],
+      "comparison": "Les deux salles demandent de distinguer un pas du Magicien de sa visée. N4 traite la réception d’une caisse et la position laissée au Voleur ; N8 traite le dernier dépôt d’une composition et l’ordre échange/chant.",
+      "remainingSimilarity": "La visée coudée et le décalage d’un héros sont des mécanismes réutilisés ; la variante N8 montre que le chant peut aussi transporter la réserve."
+    },
+    {
+      "levels": [
+        5
+      ],
+      "comparison": "La même commande doit être maintenue, relâchée pour charger un appui, puis maintenue à nouveau. L’événement utile est une interruption préparée, pas seulement un état final ouvert."
+    },
+    {
+      "levels": [
+        6,
+        7
+      ],
+      "comparison": "N6 exige de restaurer le miroir avant une fermeture de service ; N7 anticipe trois fermetures futures qui détruiraient des stationnements précis.",
+      "distinctObservedFeatures": [
+        "une charge réutilisée et un monstre conservé dans N6",
+        "trois presses indépendantes puis appui mobile et plateforme dans N7"
+      ],
+      "remainingSimilarity": "Les deux salles déplacent un miroir avant une livraison et utilisent ensuite une visée distante ; cette parenté est reconnue."
+    },
+    {
+      "levels": [
+        7,
+        8
+      ],
+      "comparison": "N7 compose une traversée avec un appui mobile et une plateforme temporaire. N8 emploie une seule case hydraulique pour modifier une approche locale du dernier dépôt, puis la réactive en reprenant le miroir.",
+      "remainingSimilarity": "Le maintien d’un circuit, la préparation d’un coude et la sortie préservant une charge restent des moyens communs de la série."
+    },
+    {
+      "levels": [
+        8
+      ],
+      "comparison": "Le final utilise quatre caisses réparties, trois boutons de composition, une commande d’atelier et une commande hydraulique sous le miroir ; il ne reprend pas les neuf poids en fragments du final SS23.",
+      "distinctObservedFeatures": [
+        "quatre caisses au lieu de neuf",
+        "cinq boutons aux fonctions distinctes",
+        "alternative échange puis chant vérifiée"
+      ]
+    }
+  ],
+  "method": "Exécution directe des actions numériques avec stepDetailed, inspection des phases et ressources, contre-branches explicites et variantes gagnantes. Aucun générateur d’auteur ni solveur.",
+  "limits": [
+    "Un témoin gagnant prouve la faisabilité, pas une solution unique ou optimale.",
+    "Les 80 comparaisons historiques SS14–23 et les affectations de buts par marche avec ressources fixes sont exécutées par scripts/verify-design-constraints.mjs ; elles ne sont pas dupliquées ici.",
+    "Une contre-branche montre son effet depuis le poste décrit, pas une impasse définitive après toute autre préparation.",
+    "La comparaison qualitative distingue les problèmes centraux et reconnaît les mécanismes réutilisés ; elle ne mesure pas la difficulté ressentie.",
+    "Les commandes d’auteur ne sont ni un apprentissage ni une résolution autonome SRA."
+  ]
+}

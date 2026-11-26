@@ -1,0 +1,637 @@
+{
+  "game": "SS24",
+  "success": true,
+  "levels": [
+    1
+  ],
+  "method": "Rejeu public et mécanique, 37 découvertes par pixels, contre-branches locales, exploration restreinte des marches et variante gagnante.",
+  "mapSha256": "cd7a18657032980d88b16448e389ae294f75d5ff90b0c9ae0ed9e84a46ba6fb4",
+  "witnessSha256": "49e47e249d2e070931d5fe379be9c581752e793e8fe4057825f2123d28a8a85d",
+  "checks": [
+    {
+      "level": 1,
+      "name": "Témoin complet sans refus ni décès",
+      "status": "passed",
+      "observed": {
+        "actions": 212,
+        "selections": 38,
+        "merchantPushes": 3,
+        "thiefPulls": 3,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 1,
+        "swaps": 4,
+        "wizardHeroSwaps": 3,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 14,
+        "groupSongs": 10,
+        "songHeroMoves": 19,
+        "songStoneMoves": 14,
+        "songMonsterMoves": 1,
+        "supportMoves": 3,
+        "partnerMoves": 24,
+        "stoneMoves": 20,
+        "mirrorMoves": 1,
+        "monsterMoves": 2,
+        "reflections": 2,
+        "heroReflections": 1,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 4,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Rejeu exact du JSON sauvegardé et comparaison avec le générateur d’auteur."
+    },
+    {
+      "level": 1,
+      "name": "37 découvertes par les seules images publiques, puis victoire et Undo",
+      "status": "passed",
+      "observed": {
+        "actions": 212,
+        "acquired": 37,
+        "lessons": [
+          "select",
+          "move",
+          "merchant-push",
+          "thief-pull",
+          "single-pull",
+          "partner-pull",
+          "release-by-pull",
+          "partner-push",
+          "mirror-motion",
+          "relay-weight",
+          "monster-still",
+          "wizard-swap",
+          "wizard-first",
+          "wizard-partner",
+          "wizard-bend",
+          "wizard-water",
+          "wizard-walk",
+          "bard-song",
+          "partner-song",
+          "selective-song",
+          "diagonal-song",
+          "wall-song",
+          "monster-song",
+          "release-by-swap",
+          "water-support",
+          "support-slide",
+          "support-anchor",
+          "cross-support",
+          "mirror",
+          "hero-reflection",
+          "crate-reflection",
+          "button",
+          "gate",
+          "press",
+          "monster-press",
+          "monster",
+          "goals"
+        ],
+        "firstObservedAt": {
+          "select": 1,
+          "move": 2,
+          "thief-pull": 2,
+          "single-pull": 2,
+          "relay-weight": 2,
+          "monster-still": 2,
+          "merchant-push": 6,
+          "partner-push": 13,
+          "wizard-swap": 16,
+          "wizard-first": 16,
+          "wizard-partner": 16,
+          "release-by-swap": 16,
+          "partner-pull": 32,
+          "release-by-pull": 32,
+          "wizard-walk": 34,
+          "bard-song": 36,
+          "partner-song": 36,
+          "selective-song": 36,
+          "diagonal-song": 36,
+          "wall-song": 36,
+          "water-support": 50,
+          "gate": 71,
+          "button": 71,
+          "press": 71,
+          "monster-press": 71,
+          "monster": 71,
+          "support-slide": 78,
+          "cross-support": 79,
+          "support-anchor": 79,
+          "wizard-water": 92,
+          "monster-song": 113,
+          "mirror": 136,
+          "crate-reflection": 136,
+          "hero-reflection": 140,
+          "wizard-bend": 141,
+          "mirror-motion": 164,
+          "goals": 212
+        },
+        "frames": 574,
+        "publicFields": [
+          "level",
+          "frame",
+          "frames",
+          "levelsCompleted"
+        ],
+        "finalState": "WIN",
+        "completionUndo": true
+      },
+      "scope": "Aucune position privée, carte d’auteur ou solution n’est passée au détecteur pédagogique. La session ne contient que cette carte."
+    },
+    {
+      "level": 1,
+      "name": "Prise unique et relève de la commande pour les deux accès",
+      "status": "passed",
+      "observed": {
+        "pull": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 3
+            },
+            "to": {
+              "x": 6,
+              "y": 3
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 4,
+              "y": 3
+            },
+            "to": {
+              "x": 5,
+              "y": 3
+            }
+          }
+        ],
+        "secondCratePreserved": {
+          "x": 3,
+          "y": 3
+        },
+        "heldButton": {
+          "x": 5,
+          "y": 3
+        },
+        "relayGates": [
+          {
+            "x": 9,
+            "y": 13
+          },
+          {
+            "x": 18,
+            "y": 9
+          }
+        ],
+        "sideExitCommands": "CD",
+        "bothGatesCloseWithoutReplacement": true
+      },
+      "scope": "Comparaison locale rejouée ; aucune optimalité ou unicité revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "La poussée simple ne déplace pas les deux caisses initiales",
+      "status": "passed",
+      "observed": {
+        "initialCommands": "R",
+        "initialPushRefused": true,
+        "afterSinglePullTurn": 6,
+        "merchantPushesOneCrate": true
+      },
+      "scope": "Comparaison locale rejouée ; aucune optimalité ou unicité revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Les quatre buts ne sont pas accessibles par quatre promenades isolées",
+      "status": "passed",
+      "observed": {
+        "reachableGoalsWithOtherActorsFrozen": [
+          {
+            "kind": "merchant",
+            "states": 246,
+            "goals": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "kind": "thief",
+            "states": 174,
+            "goals": []
+          },
+          {
+            "kind": "wizard",
+            "states": 243,
+            "goals": [
+              0,
+              1,
+              2,
+              3
+            ]
+          },
+          {
+            "kind": "bard",
+            "states": 1,
+            "goals": []
+          }
+        ],
+        "completeGoalAssignment": false
+      },
+      "scope": "Exploration finie des marches seules dans le vrai moteur, portes recalculées à chaque position ; tout déplacement d’un autre acteur et tout pouvoir sont exclus. Ce contrôle restreint ne cherche pas toutes les solutions coopératives."
+    },
+    {
+      "level": 1,
+      "name": "La première cible arrête le rayon ; les transports de partenaires restent silencieux",
+      "status": "passed",
+      "observed": {
+        "wizardPushTurn": 13,
+        "firstSwapTurn": 16,
+        "fartherCratePreserved": {
+          "x": 8,
+          "y": 7
+        },
+        "silentBardPullTurn": 32,
+        "voluntaryBardCommands": "CRCCCRDDDLLDRCCRCR",
+        "voluntaryStoneMoves": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 2,
+              "y": 5
+            },
+            "to": {
+              "x": 3,
+              "y": 5
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 4,
+              "y": 5
+            },
+            "to": {
+              "x": 5,
+              "y": 5
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 3,
+              "y": 9
+            },
+            "to": {
+              "x": 4,
+              "y": 9
+            }
+          }
+        ]
+      },
+      "scope": "Comparaison locale rejouée ; aucune optimalité ou unicité revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Le Magicien sans cible marche sans traction",
+      "status": "passed",
+      "observed": {
+        "turn": 34,
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 7
+            },
+            "to": {
+              "x": 6,
+              "y": 8
+            }
+          }
+        ]
+      },
+      "scope": "Comparaison locale rejouée ; aucune optimalité ou unicité revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Portée diagonale, cloison, butée et partenaires passifs dans le même chant",
+      "status": "passed",
+      "observed": {
+        "turn": 36,
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 4,
+              "y": 7
+            },
+            "to": {
+              "x": 5,
+              "y": 7
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 2,
+              "y": 7
+            },
+            "to": {
+              "x": 3,
+              "y": 7
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 7
+            },
+            "to": {
+              "x": 6,
+              "y": 7
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 8
+            },
+            "to": {
+              "x": 7,
+              "y": 8
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 2,
+              "y": 5
+            },
+            "to": {
+              "x": 3,
+              "y": 5
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 4,
+              "y": 5
+            },
+            "to": {
+              "x": 5,
+              "y": 5
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 3,
+              "y": 9
+            },
+            "to": {
+              "x": 4,
+              "y": 9
+            }
+          }
+        ],
+        "interveningWall": {
+          "x": 4,
+          "y": 6
+        },
+        "retainedCrate": {
+          "x": 6,
+          "y": 5
+        },
+        "blockingWall": {
+          "x": 7,
+          "y": 5
+        }
+      },
+      "scope": "La portée est déterminée avant le pas. Les héros entraînés ne poussent, ne tirent et n’échangent pas avec un autre acteur."
+    },
+    {
+      "level": 1,
+      "name": "L’échange installe la Barde au bassin sans faire suivre les charges",
+      "status": "passed",
+      "observed": {
+        "turn": 44,
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 10
+            },
+            "to": {
+              "x": 5,
+              "y": 7
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 7
+            },
+            "to": {
+              "x": 5,
+              "y": 10
+            }
+          }
+        ],
+        "stonesAndSupportsPreserved": true
+      },
+      "scope": "Comparaison locale rejouée ; aucune optimalité ou unicité revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Appui créé, appuis libres glissés et appuis occupés ou d’arrivée ancrés",
+      "status": "passed",
+      "observed": {
+        "createdAt": {
+          "x": 2,
+          "y": 11
+        },
+        "supportMoves": [
+          {
+            "actor": "support",
+            "from": {
+              "x": 5,
+              "y": 11
+            },
+            "to": {
+              "x": 6,
+              "y": 11
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 4,
+              "y": 12
+            },
+            "to": {
+              "x": 5,
+              "y": 12
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 5,
+              "y": 12
+            },
+            "to": {
+              "x": 5,
+              "y": 13
+            }
+          }
+        ],
+        "bardLanding": {
+          "x": 6,
+          "y": 11
+        },
+        "occupiedSupport": {
+          "x": 6,
+          "y": 11
+        },
+        "waterSwapTurn": 92,
+        "waterSwapPreservesSupports": true,
+        "unsupportedCommands": "CRCCCRDDDLLDRCCRCCCDRRDDLDDLLLURCDCRCCCLLDDUCCDDLDUURRRDRDRRDDDDDLLLLLDDLLCCCRDD",
+        "unsupportedStepRefused": true
+      },
+      "scope": "Comparaison locale rejouée ; aucune optimalité ou unicité revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Presse et chant réunissent deux paires de gardiens à distance des héros",
+      "status": "passed",
+      "observed": {
+        "pressTurn": 71,
+        "pressMoves": [
+          {
+            "actor": "monster",
+            "from": {
+              "x": 15,
+              "y": 15
+            },
+            "to": {
+              "x": 14,
+              "y": 15
+            }
+          }
+        ],
+        "songTurn": 113,
+        "songMoves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 14,
+              "y": 4
+            },
+            "to": {
+              "x": 15,
+              "y": 4
+            }
+          },
+          {
+            "actor": "monster",
+            "from": {
+              "x": 16,
+              "y": 2
+            },
+            "to": {
+              "x": 17,
+              "y": 2
+            }
+          }
+        ],
+        "monstersRemoved": 4,
+        "unsafeApproachCommands": "DRRRRRRRRUURRRRR",
+        "unsafeAdjacentHeroDies": true
+      },
+      "scope": "Les gardiens ne sont pas une ressource à éliminer par quota. La contre-branche reproduit le danger du contact orthogonal ; le témoin reste sans décès."
+    },
+    {
+      "level": 1,
+      "name": "Reflets, rayon dévié et traction du miroir restent distincts",
+      "status": "passed",
+      "observed": {
+        "reflections": [
+          [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 13,
+                "y": 10
+              },
+              "to": {
+                "x": 15,
+                "y": 12
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 13,
+                "y": 10
+              },
+              "to": {
+                "x": 15,
+                "y": 12
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 15,
+                "y": 12
+              },
+              "to": {
+                "x": 13,
+                "y": 10
+              }
+            }
+          ]
+        ],
+        "bentSwapTurn": 141,
+        "mirrorPullTurn": 164,
+        "orientationPreserved": true
+      },
+      "scope": "Comparaison locale rejouée ; aucune optimalité ou unicité revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Variante gagnante : deux arrivées sont permutées",
+      "status": "passed",
+      "observed": {
+        "commands": "CRCCCRDDDLLDRCCRCCCDRRDDLDDLLLURCDCRCCCLLDDUCCDDLDUURRRDRDRRDDDDDLLLLLDDLLCCCRDCCCLDDRRRDRDLCUUUUUUURRRUUURDDDRRRCCCLDDDDDDDDDRRUURRUCCXCCRXLCCCLLDDDDDDRDRDDDRRRRRDCCDDDRDRRDDDDDDDDDLCUUURRRRRRRURRUURRRRRRRCLDDDLCDLL",
+        "actions": 216,
+        "swappedFinalRoles": [
+          "merchant",
+          "wizard"
+        ],
+        "finalState": "WIN"
+      },
+      "scope": "Les quatre destinations sont communes. La variante conserve les démonstrations du témoin et ne prétend pas être la route la plus courte."
+    }
+  ],
+  "limits": [
+    "Les 37 découvertes sont pédagogiques et ne constituent pas une condition cachée de victoire.",
+    "Le témoin illustre les mécanismes ; il ne prouve pas que chacun soit indispensable à toute solution.",
+    "L’exploration des marches garde les autres acteurs fixes et ne recherche pas toutes les coopérations possibles.",
+    "Aucune optimalité, unicité ni résolution autonome SRA démontrée."
+  ]
+}

@@ -1,0 +1,980 @@
+{
+  "spec": {
+    "id": "ss24-06",
+    "title": "Trois postes, un seul retour",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "##ggg###############",
+      "##...#..############",
+      "####.#..############",
+      "##......########g###",
+      "##......########.m.#",
+      "##....T.....####.###",
+      "##M.o.2......~~B.###",
+      "##.........#########",
+      "##..........########",
+      "##....Z...#.########",
+      "##........~.########",
+      "##........##########",
+      "##........##########",
+      "##........##########",
+      "####################",
+      "####################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "chargement",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 10,
+            "y": 10
+          }
+        ]
+      },
+      {
+        "id": "depot",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 11,
+            "y": 12
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 6,
+          "y": 6
+        },
+        "circuit": "chargement",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 8
+        },
+        "circuit": "chargement",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 4,
+          "y": 4
+        },
+        "circuit": "depot",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 6
+        },
+        "circuit": "depot",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CUUUURDDDDDLLRRRRRRULLLLUULDDDDLDDDLLLCCCURRRRRRRRDDCCCRCCCUCRRRDDDDCUUULLLUULLLUUULLCUUUUUUURRUUULCUUUCLUUUUUUUULUULLLUUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 51
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "objective": "Dégager une charge, restaurer le coude avant de fermer son accès, puis préparer la relève distante et le dépôt dans une niche sans poste inférieur.",
+    "label": "Heroes and Light — énigme 11",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/",
+    "puzzles": [
+      11
+    ]
+  },
+  "metrics": {
+    "actions": 122,
+    "selections": 15,
+    "merchantPushes": 2,
+    "thiefPulls": 14,
+    "thiefPartnerPulls": 0,
+    "thiefMirrorPulls": 8,
+    "swaps": 1,
+    "wizardHeroSwaps": 1,
+    "wizardStoneSwaps": 0,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 1,
+    "songs": 4,
+    "groupSongs": 1,
+    "songHeroMoves": 1,
+    "songStoneMoves": 3,
+    "songMonsterMoves": 1,
+    "supportMoves": 0,
+    "partnerMoves": 2,
+    "stoneMoves": 11,
+    "mirrorMoves": 8,
+    "monsterMoves": 1,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur remonte le miroir dans le garage supérieur, puis extrait la charge par le passage libéré. La charge attend au milieu : la livrer tout de suite fermerait le passage nécessaire au retour du miroir.",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 5
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 17,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "chargement": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "Le miroir revient à son coude avant la fermeture de son couloir de service. Le Voleur peut quitter le poste inférieur ; la charge reste accessible depuis le haut.",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 17,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "chargement": false,
+        "depot": false
+      }
+    },
+    {
+      "label": "La livraison intermédiaire ferme le couloir supérieur mais ouvre la fenêtre droite. L’ordre précédent conserve donc le miroir au bon étage lorsque la visée devient disponible.",
+      "turn": 52,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 17,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "chargement": true,
+        "depot": false
+      }
+    },
+    {
+      "label": "Dans la chambre distante, la Barde décale le monstre vers le bout de sa corniche. Il reste vivant ; sa nouvelle distance permet au futur occupant de rejoindre la sortie sans contact.",
+      "turn": 56,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 18,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "chargement": true,
+        "depot": false
+      }
+    },
+    {
+      "label": "La visée passe par le miroir remis en place et par la fenêtre ouverte. Le Magicien remplace la Barde dans la chambre droite ; la Barde rejoint l’atelier inférieur.",
+      "turn": 60,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 18,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "chargement": true,
+        "depot": false
+      }
+    },
+    {
+      "label": "Depuis la bordure de la niche, la Barde fait tourner la charge vers la droite puis la descend jusqu’au dépôt inaccessible par le bas. Le Marchand est entraîné sur la commande intermédiaire et la tient pendant cette livraison.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 18,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "chargement": true,
+        "depot": true
+      }
+    },
+    {
+      "label": "Deux pas vers le bas laissent le dépôt contre son fond de niche et sortent la Barde de sa portée. Son départ ne demande ni extraction par échange, ni abandon du poids.",
+      "turn": 68,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 13
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 6,
+            "y": 9
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 18,
+          "y": 7
+        }
+      ],
+      "circuits": {
+        "chargement": true,
+        "depot": true
+      }
+    }
+  ],
+  "adaptation": "Light 11 présente trois compartiments et une réorganisation provisoire : une pièce doit être écartée, puis remise avant le retour du faisceau, faute de quoi le retour est perdu. SS24 remplace la traversée de murs donnée par la lumière verte par un miroir tracté entre deux étages et une fenêtre commandée. Le Voleur gare le miroir, sort la charge, puis restaure le coude avant que le Marchand ne pose la charge sur le bouton qui ferme le couloir de service. La Barde éloigne le monstre dans la chambre distante avant de céder sa place au Magicien. La charge passe ensuite du poste intermédiaire à une niche accessible au chant mais sans poste de traction inférieur ; le Marchand entraîné assure une relève temporaire de commande. Le monstre n’est ni un poids final ni un adversaire détruit. La Barde quitte la portée par un détour inférieur, sans extraction silencieuse. Cette construction transpose l’ordre des stationnements et le maintien du retour ; elle ne reproduit pas la carte ni les pouvoirs lumineux de la source."
+}
