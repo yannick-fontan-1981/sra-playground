@@ -41,7 +41,7 @@ const requiredPhysical = {
 };
 const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
-const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99]];
+const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99], [102, 93]];
 
 function measuredMotionSeries(run, issued, groups, kind, owners, contact) {
   const offset = run.executedTickets.indexOf(issued[0]);
@@ -1002,7 +1002,7 @@ export function checkRun(run) {
     }
     if (code === 'GABA') {
       const [actions, minContinued] = cargoContinuity[i];
-      assert.ok(issued.length <= [57, 45, 81, 106, 128][i] && issued.every(ticket => ticket.resets === 0),
+      assert.ok(issued.length <= [57, 45, 81, 106, 128, 120][i] && issued.every(ticket => ticket.resets === 0),
         'GABA exceeded its verified action ceiling or reset');
       assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
         'GABA L' + row.level + ' lost executed cargo continuity');
