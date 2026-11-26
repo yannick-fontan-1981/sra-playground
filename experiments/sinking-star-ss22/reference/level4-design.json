@@ -1,0 +1,1229 @@
+{
+  "spec": {
+    "id": "ss22-04",
+    "title": "La frontière du chant",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "############......##",
+      "############......##",
+      "############......##",
+      "###.....m.m.......##",
+      "###.....####......##",
+      "###...B.#######.####",
+      "###.###########.####",
+      "###T#...o~#####.####",
+      "###.#...........####",
+      "###.#...........####",
+      "###.#...........####",
+      "#.W.#...........#gg#",
+      "#...#...........~..#",
+      "#.M.#############..#",
+      "#...#############..#",
+      "#...#############gg#",
+      "####################"
+    ]
+  },
+  "commands": "CCCURURRRRRDRRRRRCCCUUUURRRRRRRRRDRRRDDDDLLLLLLLLULLDRDDRCCURUUUUUUUUURRRRRRRRRDRRRDDDDLLLLLLLLLLDRRRRRRRRRURDDDLDCRUUUUUUUURRRRRRRRRDRRRDDDDDDDLLDRCCCRRDDDCULLLCDDRRRRRRRRRRDDRDCLLDDDDDDDDRRURCCDRRRRRRU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 51
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 48
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 57
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation · Heroes Doubled · énigme 8",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-doubled-solutions/#%C3%A9nigme-8",
+    "puzzle": 8,
+    "objective": "Choisir la frontière de portée qui déplace le gardien sans immerger la réserve, puis livrer cette réserve jusqu’au passage final."
+  },
+  "metrics": {
+    "actions": 203,
+    "selections": 17,
+    "merchantPushes": 12,
+    "warriorPushes": 1,
+    "chainPushes": 1,
+    "mixedPushes": 1,
+    "thiefPulls": 4,
+    "songs": 1,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 1,
+    "supportMoves": 0,
+    "partnerMoves": 1,
+    "stoneMoves": 17,
+    "mirrorMoves": 0,
+    "monsterMoves": 1,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Un pas vers le haut place la réserve hors de portée. Le pas latéral ne déplace alors que le gardien du haut ; sa rencontre libère la galerie.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Barde quitte le poste par la galerie libérée. La caisse reste sèche dans son renfoncement, au-delà de la cloison basse.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 3,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Voleur extrait la réserve contre la paroi, puis la descend selon un second axe dans le dépôt inférieur.",
+      "turn": 57,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand achemine la caisse au bord de l’eau ; il attend devant le Guerrier dans la courte file de lancement.",
+      "turn": 114,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 15
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier pousse ensemble le Marchand et la caisse. La caisse devient l’appui, tandis que son partenaire arrive sur la rive de départ.",
+      "turn": 148,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 15,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 15
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 7,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La seule caisse est devenue le passage utile ; les quatre héros occupent leurs destinations.",
+      "turn": 203,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 18
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 16,
+          "y": 15
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Atteindre une galerie depuis la limite du chant permet de sélectionner son contenu sans déplacer celui de l’autre salle.",
+    "changes": "Le décalage de cristal de la référence devient une rencontre de gardiens. Une caisse dans la galerie basse doit rester sèche : la petite mare voisine ne communique pas avec la coupure finale. Le retrait par deux axes et la file mixte ajoutent la coopération du quatuor.",
+    "limits": "La contre-branche du poste bas établit la perte de la réserve sèche à cet instant. Le parcours n’affirme pas que toute autre préparation des héros ou tous les autres ordres sont impossibles.",
+    "localChecks": [
+      {
+        "name": "Témoin complet, quatre personnages et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 203,
+          "selections": 17,
+          "merchantPushes": 12,
+          "warriorPushes": 1,
+          "chainPushes": 1,
+          "mixedPushes": 1,
+          "thiefPulls": 4,
+          "songs": 1,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 1,
+          "supportMoves": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 17,
+          "mirrorMoves": 0,
+          "monsterMoves": 1,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Un pas change la galerie sélectionnée",
+        "status": "passed",
+        "observed": {
+          "lowerPost": {
+            "x": 6,
+            "y": 8
+          },
+          "upperPost": {
+            "x": 6,
+            "y": 7
+          },
+          "lowerSong": {
+            "monsters": 0,
+            "stones": 0,
+            "support": {
+              "x": 9,
+              "y": 10
+            }
+          },
+          "upperSong": {
+            "monsters": 0,
+            "dryCrate": {
+              "x": 8,
+              "y": 10
+            }
+          }
+        },
+        "scope": "Les deux branches partent de la même position. Seul le pas vers le haut exclut la réserve du carré de chant."
+      },
+      {
+        "name": "La mare inutile ne peut pas fournir l’appui final",
+        "status": "passed",
+        "observed": {
+          "waterCells": [
+            {
+              "x": 9,
+              "y": 10
+            },
+            {
+              "x": 16,
+              "y": 15
+            }
+          ],
+          "wrongBranchDryCrates": 0,
+          "wrongBranchSupport": {
+            "x": 9,
+            "y": 10
+          },
+          "supportHasNoWaterNeighbour": true,
+          "destinationComponent": [
+            {
+              "x": 17,
+              "y": 14
+            },
+            {
+              "x": 18,
+              "y": 14
+            },
+            {
+              "x": 17,
+              "y": 15
+            },
+            {
+              "x": 18,
+              "y": 15
+            },
+            {
+              "x": 17,
+              "y": 16
+            },
+            {
+              "x": 18,
+              "y": 16
+            },
+            {
+              "x": 17,
+              "y": 17
+            },
+            {
+              "x": 18,
+              "y": 17
+            },
+            {
+              "x": 17,
+              "y": 18
+            },
+            {
+              "x": 18,
+              "y": 18
+            }
+          ]
+        },
+        "scope": "Argument géométrique pour cette branche : aucun miroir ni plateforme, plus de caisse sèche, un appui qui ne peut se déplacer que vers une case d’eau voisine, et toutes les destinations dans une composante terrestre encore vide. Annuler le geste restaure la ressource."
+      },
+      {
+        "name": "La ressource sauvée est extraite puis lancée avec un partenaire",
+        "status": "passed",
+        "observed": {
+          "extracted": {
+            "x": 6,
+            "y": 12
+          },
+          "mixedFile": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 13,
+                "y": 15
+              },
+              "to": {
+                "x": 14,
+                "y": 15
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 14,
+                "y": 15
+              },
+              "to": {
+                "x": 15,
+                "y": 15
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 15,
+                "y": 15
+              },
+              "to": {
+                "x": 16,
+                "y": 15
+              }
+            }
+          ],
+          "finalSupport": {
+            "x": 16,
+            "y": 15
+          }
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Variante gagnante : le Marchand lance seul la caisse",
+        "status": "passed",
+        "observed": {
+          "actions": 196,
+          "selections": 13,
+          "merchantPushes": 13,
+          "warriorPushes": 0,
+          "chainPushes": 0,
+          "mixedPushes": 0,
+          "thiefPulls": 4,
+          "songs": 1,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 1,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 17,
+          "mirrorMoves": 0,
+          "monsterMoves": 1,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "La file mixte montre un réemploi coopératif ; cette variante prouve que la poussée du Guerrier n’est pas imposée pour gagner cette salle.",
+        "commands": "CCCURURRRRRDRRRRRCCCUUUURRRRRRRRRDRRRDDDDLLLLLLLLULLDRDDRCCURUUUUUUUUURRRRRRRRRDRRRDDDDLLLLLLLLLLDRRRRRRRRRURDDDLDRRRDDDCRUUUUUUUURRRRRRRRRDRRRDDDDDDDLLLLCDDRRRRRRRRRRDDRDCLLDDDDDDDDRRURCCDRRRRRRU",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

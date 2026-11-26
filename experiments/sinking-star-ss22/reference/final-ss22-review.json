@@ -1,0 +1,490 @@
+{
+  "game": "SS22",
+  "title": "Les Cortèges Mécaniques",
+  "status": "passed",
+  "scope": "Revue auteur des niveaux 6–8 : témoins complets, géométrie excluant la marche seule, contre-épreuves locales et variantes constructives. Les besoins locaux sont distingués des choix du témoin. Ni unicité, ni optimalité, ni impossibilité globale issue d’une recherche bornée ne sont revendiquées.",
+  "checks": [
+    {
+      "id": "level6-witness",
+      "label": "Le parcours auteur termine avec les quatre héros, sans refus ni perte",
+      "status": "passed",
+      "level": 6,
+      "title": "Le quartier des reprises",
+      "metrics": {
+        "actions": 136,
+        "selections": 10,
+        "merchantPushes": 0,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "thiefPulls": 0,
+        "songs": 23,
+        "groupSongs": 2,
+        "songHeroMoves": 1,
+        "songStoneMoves": 22,
+        "songMonsterMoves": 2,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 23,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level7-witness",
+      "label": "Le parcours auteur termine avec les quatre héros, sans refus ni perte",
+      "status": "passed",
+      "level": 7,
+      "title": "Les cales du bassin",
+      "metrics": {
+        "actions": 149,
+        "selections": 10,
+        "merchantPushes": 0,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "thiefPulls": 0,
+        "songs": 14,
+        "groupSongs": 6,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 20,
+        "partnerMoves": 0,
+        "stoneMoves": 0,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level8-witness",
+      "label": "Le parcours auteur termine avec les quatre héros, sans refus ni perte",
+      "status": "passed",
+      "level": 8,
+      "title": "La dernière traverse",
+      "metrics": {
+        "actions": 116,
+        "selections": 14,
+        "merchantPushes": 0,
+        "warriorPushes": 5,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "thiefPulls": 8,
+        "songs": 15,
+        "groupSongs": 14,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 30,
+        "partnerMoves": 1,
+        "stoneMoves": 13,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level6-walking-insufficient",
+      "label": "Les deux commandes du fret sont inaccessibles aux héros à pied",
+      "status": "passed",
+      "proof": "Même en ouvrant toutes les presses pour majorer les accès, aucun départ de héros ne rejoint les deux commandes de la rue de fret. Les poids doivent donc y être déplacés. La porte des quatre arrivées dépend de ces commandes."
+    },
+    {
+      "id": "level6-two-itineraries",
+      "label": "La charge et la Barde empruntent des rues différentes",
+      "status": "passed",
+      "firstCargo": {
+        "x": 11,
+        "y": 4
+      },
+      "lastCorner": {
+        "x": 7,
+        "y": 12
+      },
+      "operator": {
+        "x": 5,
+        "y": 10
+      }
+    },
+    {
+      "id": "level6-premature-discharge",
+      "label": "Fermer avant la dernière marche retient la caisse au-dessus de la presse",
+      "status": "passed",
+      "commands": "CCCRRRRRRRRRRDDDDRRRRUUUULLLLLLLLLLLLLLLLDDDDRRRRRRRRLLLLDDDCLCCCD",
+      "cargo": {
+        "x": 7,
+        "y": 11
+      },
+      "scope": "Ceci établit un obstacle local réparable en rouvrant la presse, pas une impasse irréversible."
+    },
+    {
+      "id": "level6-actual-discharge",
+      "label": "La fermeture correcte effectue le changement d’axe",
+      "status": "passed",
+      "cargo": {
+        "x": 8,
+        "y": 12
+      },
+      "pistonPushes": 1,
+      "lowerAccessesOpen": true
+    },
+    {
+      "id": "level6-safe-departure",
+      "label": "Le départ par le bas laisse les deux poids sur leurs commandes",
+      "status": "passed",
+      "safePrefix": 80,
+      "wrongDeparture": "CCCRRRRRRRRRRDDDDRRRRUUUULLLLLLLLLLLLLLLLDDDDRRRRRRRRLLLLDDDDCLCCCDDDDRRRRRRRRL",
+      "scope": "Le départ vers l’ouest déplace les poids ; le départ vers le sud est retenu par les bâtiments."
+    },
+    {
+      "id": "level6-guardian-first-variant",
+      "label": "Le gardien peut être placé avant la dernière livraison de la caisse",
+      "status": "passed",
+      "commands": "CCCRRRRRRRRRRDDDDDDDDRRRRUUUUUUUULLLLLLLLLLLLLLLLDDDDRRRRRRRRLLLLDDDDCLCCCDDDDRRRRRRRRDDDRRDRRRCRDDRRRRRRRRRRRRDCDRRRRRRRRRRRRRRDCDRRRRRRRRRRRRD",
+      "metrics": {
+        "actions": 144,
+        "selections": 10,
+        "merchantPushes": 0,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "thiefPulls": 0,
+        "songs": 25,
+        "groupSongs": 0,
+        "songHeroMoves": 1,
+        "songStoneMoves": 22,
+        "songMonsterMoves": 2,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 23,
+        "mirrorMoves": 0,
+        "monsterMoves": 2,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La préparation du gardien et la livraison finale peuvent être ordonnées autrement. Le témoin ne démontre ni ordre unique ni solution optimale."
+    },
+    {
+      "id": "level7-walking-insufficient",
+      "label": "Les arrivées basses sont séparées de tous les départs sans déplacement d’appui",
+      "status": "passed",
+      "initialSupports": 2,
+      "proof": "Même en ignorant les collisions entre héros, aucune des quatre arrivées n’appartient aux composantes de marche initiales. Il n’existe ni caisse supplémentaire, ni reflet, ni plateforme pour combler le passage."
+    },
+    {
+      "id": "level7-disembark-before-moving",
+      "label": "Le chant refuse de déplacer le pont avec un voyageur encore dessus",
+      "status": "passed",
+      "refusalWithOccupant": true,
+      "supportsAfterDisembarking": [
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "scope": "Un appui occupé reste ancré ; la tentative ne noie pas le voyageur et ne modifie pas le monde."
+    },
+    {
+      "id": "level7-first-buttress",
+      "label": "La première butée crée deux hauteurs différentes",
+      "status": "passed",
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ]
+    },
+    {
+      "id": "level7-regrouping",
+      "label": "La file devient une paire devant l’entrée de la cour",
+      "status": "passed",
+      "file": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "pair": [
+        {
+          "x": 9,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ]
+    },
+    {
+      "id": "level7-wrong-final-approach",
+      "label": "Remonter directement après le calage défait le pont",
+      "status": "passed",
+      "commands": "CCCDLLCDDLLLLUULLLLLLCDLLLLLDLLLLLLCULLLLDDDDLLLLLLCRRDDDDDDLLUURRDDDDLDDDRUU",
+      "supports": [
+        {
+          "x": 9,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "scope": "Le témoin effectue donc un détour pour rejoindre la traverse sans la déplacer. La mauvaise approche reste réparable."
+    },
+    {
+      "id": "level7-upper-crossing-variant",
+      "label": "Les voyageurs peuvent quitter le débarcadère avant la première descente du pont",
+      "status": "passed",
+      "commands": "DLLLLLULLLLLCLLLLLDDLLLLLLCUULLLLLDDDDDLLLLLCDDDDDDDLLUURRDDDDLDDDRULUURRRRRRUURRCDDRDDDDDDDRRRRRRRRRUUCDDRDDDDRRRRRRRRRURUCDDDRRRRRRRRRRURRU",
+      "metrics": {
+        "actions": 141,
+        "selections": 6,
+        "merchantPushes": 0,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "thiefPulls": 0,
+        "songs": 14,
+        "groupSongs": 6,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 20,
+        "partnerMoves": 0,
+        "stoneMoves": 0,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La ligne de départ des voyageurs peut être la rangée initiale du pont. Le calage inférieur et le changement de formation restent présents."
+    },
+    {
+      "id": "level8-walking-insufficient",
+      "label": "La réserve et la cour finale ne sont pas accessibles par la marche initiale",
+      "status": "passed",
+      "initialSupports": 3,
+      "initialDryCrates": 1,
+      "proof": "La dernière cour reste inaccessible même avec la presse ouverte et la plateforme active. Le Voleur commence dans une composante distincte ; la commande ne remplace pas l’appui de sa branche."
+    },
+    {
+      "id": "level8-deposited-part",
+      "label": "Un appui est laissé dans la branche et les deux autres préparent la traverse",
+      "status": "passed",
+      "supports": [
+        {
+          "x": 14,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "thiefStillInReserve": true,
+      "scope": "Le retour de la caisse est encore à faire ; la pièce de la branche n’est pas un surplus abandonné après usage."
+    },
+    {
+      "id": "level8-reclaim-breaks-return",
+      "label": "Reprendre l’appui déposé coupe concrètement le retour du Voleur",
+      "status": "passed",
+      "commands": "CCCRDRRUUDCCCDD",
+      "missingSupport": {
+        "x": 9,
+        "y": 6
+      },
+      "returnRefused": true,
+      "scope": "Preuve locale de l’utilité de la dépose. Remettre l’appui répare l’accès ; aucun quota ni sacrifice irréversible n’est annoncé."
+    },
+    {
+      "id": "level8-occupied-support-anchors",
+      "label": "Un appui occupé reste sur place lorsque le chant fait descendre le Voleur vers la plateforme",
+      "status": "passed",
+      "branch": "CCCRDRRUUCCCDDCD",
+      "supportStayed": {
+        "x": 9,
+        "y": 6
+      },
+      "passengerArrival": {
+        "x": 9,
+        "y": 7
+      },
+      "crateStayed": {
+        "x": 9,
+        "y": 5
+      },
+      "scope": "Le Voleur est déplacé par le chant, pas porté par l’appui ; sa traction personnelle ne se déclenche pas."
+    },
+    {
+      "id": "level8-platform-still-needed",
+      "label": "L’appui déposé ne remplace pas la plateforme tenue par le Marchand",
+      "status": "passed",
+      "commands": "CCCRDRRUUCLCCDDD",
+      "unsupportedPlatform": {
+        "x": 9,
+        "y": 7
+      },
+      "scope": "Le retour nécessite deux appuis de nature différente : celui déposé et la plateforme encore alimentée."
+    },
+    {
+      "id": "level8-dry-return",
+      "label": "La caisse traverse les deux appuis du retour en restant sèche",
+      "status": "passed",
+      "crate": {
+        "x": 9,
+        "y": 11
+      },
+      "thiefPulls": 8,
+      "supports": [
+        {
+          "x": 14,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ]
+    },
+    {
+      "id": "level8-continuous-mixed-relay",
+      "label": "La poussée de rangée remplace le Marchand sans interrompre le circuit",
+      "status": "passed",
+      "moves": [
+        {
+          "actor": "hero",
+          "from": {
+            "x": 6,
+            "y": 11
+          },
+          "to": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "actor": "stone",
+          "from": {
+            "x": 6,
+            "y": 12
+          },
+          "to": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "actor": "hero",
+          "from": {
+            "x": 6,
+            "y": 13
+          },
+          "to": {
+            "x": 6,
+            "y": 14
+          }
+        }
+      ],
+      "circuitBefore": true,
+      "circuitAfter": true,
+      "chainPushes": 1,
+      "mixedPushes": 1
+    },
+    {
+      "id": "level8-return-first-variant",
+      "label": "La caisse peut revenir avant la construction de la traverse finale",
+      "status": "passed",
+      "commands": "CCCRDRRUURRRDDDDDDDRCCCDDDDDDDDLCCCRRRURRURULLLULDDCCCLUUUUUULCUULLCLLLLCUUUUULLLLURRRRDDDDDDLLUURRRRRRRUUCDRDDDRRDRRRRRRRRRRUUCDRDRRDRRRRRRRRRRUCRRRRDRRRRRRRRRRU",
+      "metrics": {
+        "actions": 162,
+        "selections": 18,
+        "merchantPushes": 0,
+        "warriorPushes": 5,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "thiefPulls": 8,
+        "songs": 15,
+        "groupSongs": 14,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 30,
+        "partnerMoves": 1,
+        "stoneMoves": 13,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La dépose garde son utilité, mais l’ordre entre retour du chargement et construction de la traverse n’est pas unique."
+    },
+    {
+      "id": "all-support-motions-empty-water",
+      "label": "Les témoins ne déplacent que des appuis vides entre cases d’eau",
+      "status": "passed",
+      "supportMoves": 50,
+      "occupiedSupportMoves": 0
+    }
+  ],
+  "totals": {
+    "checks": 24,
+    "passed": 24
+  }
+}

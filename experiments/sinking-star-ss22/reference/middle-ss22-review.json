@@ -1,0 +1,745 @@
+{
+  "game": "SS22",
+  "success": true,
+  "levels": [
+    3,
+    4,
+    5
+  ],
+  "method": "Témoins complets, conséquences de presses, comparaison de portées, bilan d’une ressource et géométrie des accès ; variantes complètes rejouées.",
+  "limits": [
+    "Aucune solution unique ou optimale revendiquée.",
+    "Les comparaisons de branches partent d’états précisés et ne remplacent pas une recherche exhaustive.",
+    "Le bilan géométrique du niveau 4 concerne la branche qui immerge l’unique caisse dans la mare isolée.",
+    "Les variantes des niveaux 4 et 5 restent légales et font partie de la qualification."
+  ],
+  "checks": [
+    {
+      "level": 3,
+      "name": "Témoin complet, quatre personnages et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 106,
+        "selections": 9,
+        "merchantPushes": 0,
+        "warriorPushes": 2,
+        "chainPushes": 2,
+        "mixedPushes": 0,
+        "thiefPulls": 4,
+        "songs": 2,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 10,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 4,
+      "name": "Témoin complet, quatre personnages et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 203,
+        "selections": 17,
+        "merchantPushes": 12,
+        "warriorPushes": 1,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "thiefPulls": 4,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 1,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 17,
+        "mirrorMoves": 0,
+        "monsterMoves": 1,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Témoin complet, quatre personnages et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 198,
+        "selections": 22,
+        "merchantPushes": 6,
+        "warriorPushes": 3,
+        "chainPushes": 3,
+        "mixedPushes": 0,
+        "thiefPulls": 11,
+        "songs": 2,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 25,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Une file réelle distribue les deux charges",
+      "status": "passed",
+      "observed": {
+        "pushes": [
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 7,
+                "y": 5
+              },
+              "to": {
+                "x": 8,
+                "y": 5
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 8,
+                "y": 5
+              },
+              "to": {
+                "x": 9,
+                "y": 5
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 5
+              },
+              "to": {
+                "x": 10,
+                "y": 5
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 5
+              },
+              "to": {
+                "x": 9,
+                "y": 5
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 5
+              },
+              "to": {
+                "x": 10,
+                "y": 5
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 10,
+                "y": 5
+              },
+              "to": {
+                "x": 11,
+                "y": 5
+              }
+            }
+          ]
+        ],
+        "loadingPositions": [
+          {
+            "x": 10,
+            "y": 5
+          },
+          {
+            "x": 11,
+            "y": 5
+          }
+        ]
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Le départ volontaire reprend le poids de sortie",
+      "status": "passed",
+      "observed": {
+        "from": {
+          "x": 10,
+          "y": 10
+        },
+        "command": "D",
+        "thiefAfter": {
+          "x": 10,
+          "y": 11
+        },
+        "crateAfter": {
+          "x": 10,
+          "y": 10
+        },
+        "exitClosed": true
+      },
+      "scope": "Contre-branche locale ; la caisse est encore présente et peut nécessiter une nouvelle intervention."
+    },
+    {
+      "level": 3,
+      "name": "La presse libère le Voleur en laissant sa caisse",
+      "status": "passed",
+      "observed": {
+        "turn": 21,
+        "phases": [
+          "song",
+          "piston"
+        ],
+        "pressMoves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 10
+            },
+            "to": {
+              "x": 10,
+              "y": 11
+            }
+          }
+        ],
+        "exitWeight": {
+          "x": 10,
+          "y": 9
+        },
+        "controlWeight": {
+          "x": 11,
+          "y": 3
+        }
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Le chant traverse la cloison, puis le mur retient la commande",
+      "status": "passed",
+      "observed": {
+        "songCrateMoves": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 11,
+              "y": 5
+            },
+            "to": {
+              "x": 11,
+              "y": 4
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 11,
+              "y": 4
+            },
+            "to": {
+              "x": 11,
+              "y": 3
+            }
+          }
+        ],
+        "bardAfter": {
+          "x": 6,
+          "y": 6
+        },
+        "controlPreserved": true
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Variante gagnante : le Marchand entre en dernier",
+      "status": "passed",
+      "observed": {
+        "actions": 109,
+        "selections": 12,
+        "merchantPushes": 0,
+        "warriorPushes": 2,
+        "chainPushes": 2,
+        "mixedPushes": 0,
+        "thiefPulls": 4,
+        "songs": 2,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 10,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Les deux poids autorisent plusieurs ordres d’arrivée ; le choix du témoin n’est pas une règle.",
+      "commands": "CRRLDDLLLLLLLCDDDDCUULLDDDDLDLLLDDDDDRRRRDDDDRRRRCCCLLLDDDDDDDRRRRRCCCRRDDDDDRRRRDDDDDRCCCDDDDRDDDDDRRRRDDDDL",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 4,
+      "name": "Un pas change la galerie sélectionnée",
+      "status": "passed",
+      "observed": {
+        "lowerPost": {
+          "x": 6,
+          "y": 8
+        },
+        "upperPost": {
+          "x": 6,
+          "y": 7
+        },
+        "lowerSong": {
+          "monsters": 0,
+          "stones": 0,
+          "support": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        "upperSong": {
+          "monsters": 0,
+          "dryCrate": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      },
+      "scope": "Les deux branches partent de la même position. Seul le pas vers le haut exclut la réserve du carré de chant."
+    },
+    {
+      "level": 4,
+      "name": "La mare inutile ne peut pas fournir l’appui final",
+      "status": "passed",
+      "observed": {
+        "waterCells": [
+          {
+            "x": 9,
+            "y": 10
+          },
+          {
+            "x": 16,
+            "y": 15
+          }
+        ],
+        "wrongBranchDryCrates": 0,
+        "wrongBranchSupport": {
+          "x": 9,
+          "y": 10
+        },
+        "supportHasNoWaterNeighbour": true,
+        "destinationComponent": [
+          {
+            "x": 17,
+            "y": 14
+          },
+          {
+            "x": 18,
+            "y": 14
+          },
+          {
+            "x": 17,
+            "y": 15
+          },
+          {
+            "x": 18,
+            "y": 15
+          },
+          {
+            "x": 17,
+            "y": 16
+          },
+          {
+            "x": 18,
+            "y": 16
+          },
+          {
+            "x": 17,
+            "y": 17
+          },
+          {
+            "x": 18,
+            "y": 17
+          },
+          {
+            "x": 17,
+            "y": 18
+          },
+          {
+            "x": 18,
+            "y": 18
+          }
+        ]
+      },
+      "scope": "Argument géométrique pour cette branche : aucun miroir ni plateforme, plus de caisse sèche, un appui qui ne peut se déplacer que vers une case d’eau voisine, et toutes les destinations dans une composante terrestre encore vide. Annuler le geste restaure la ressource."
+    },
+    {
+      "level": 4,
+      "name": "La ressource sauvée est extraite puis lancée avec un partenaire",
+      "status": "passed",
+      "observed": {
+        "extracted": {
+          "x": 6,
+          "y": 12
+        },
+        "mixedFile": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 13,
+              "y": 15
+            },
+            "to": {
+              "x": 14,
+              "y": 15
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 14,
+              "y": 15
+            },
+            "to": {
+              "x": 15,
+              "y": 15
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 15,
+              "y": 15
+            },
+            "to": {
+              "x": 16,
+              "y": 15
+            }
+          }
+        ],
+        "finalSupport": {
+          "x": 16,
+          "y": 15
+        }
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 4,
+      "name": "Variante gagnante : le Marchand lance seul la caisse",
+      "status": "passed",
+      "observed": {
+        "actions": 196,
+        "selections": 13,
+        "merchantPushes": 13,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "thiefPulls": 4,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 1,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 17,
+        "mirrorMoves": 0,
+        "monsterMoves": 1,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La file mixte montre un réemploi coopératif ; cette variante prouve que la poussée du Guerrier n’est pas imposée pour gagner cette salle.",
+      "commands": "CCCURURRRRRDRRRRRCCCUUUURRRRRRRRRDRRRDDDDLLLLLLLLULLDRDDRCCURUUUUUUUUURRRRRRRRRDRRRDDDDLLLLLLLLLLDRRRRRRRRRURDDDLDRRRDDDCRUUUUUUUURRRRRRRRRDRRRDDDDDDDLLLLCDDRRRRRRRRRRDDRDCLLDDDDDDDDRRURCCDRRRRRRU",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 5,
+      "name": "Deux livraisons détachent la file avant le réglage central",
+      "status": "passed",
+      "observed": {
+        "initialFileDestination": [
+          {
+            "x": 7,
+            "y": 4
+          },
+          {
+            "x": 8,
+            "y": 4
+          },
+          {
+            "x": 10,
+            "y": 9
+          }
+        ],
+        "upperWeight": {
+          "x": 8,
+          "y": 3
+        },
+        "lowerWeight": {
+          "x": 8,
+          "y": 15
+        },
+        "finalAccessStillClosed": true
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "La sortie haute conserve le décalage utile",
+      "status": "passed",
+      "observed": {
+        "bardBefore": {
+          "x": 10,
+          "y": 7
+        },
+        "command": "U",
+        "bardAfter": {
+          "x": 10,
+          "y": 6
+        },
+        "middleWeight": {
+          "x": 12,
+          "y": 9
+        },
+        "weightPreservedThroughoutDetour": true
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Le retrait autonome de l’accès bas reprend la charge",
+      "status": "passed",
+      "observed": {
+        "bard": {
+          "x": 10,
+          "y": 11
+        },
+        "onlyFreeNeighbour": {
+          "x": 9,
+          "y": 11
+        },
+        "retreat": "L",
+        "middleCrateAfter": {
+          "x": 11,
+          "y": 9
+        },
+        "exitClosed": true
+      },
+      "scope": "L’impossibilité porte sur un retrait autonome conservant la charge depuis ce poste ; elle ne supprime pas les transports par un partenaire."
+    },
+    {
+      "level": 5,
+      "name": "Un partenaire fournit une autre sortie sans chant",
+      "status": "passed",
+      "observed": {
+        "pulls": [
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 9,
+                "y": 11
+              },
+              "to": {
+                "x": 8,
+                "y": 11
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 11
+              },
+              "to": {
+                "x": 9,
+                "y": 11
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 11
+              },
+              "to": {
+                "x": 7,
+                "y": 11
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 9,
+                "y": 11
+              },
+              "to": {
+                "x": 8,
+                "y": 11
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 7,
+                "y": 11
+              },
+              "to": {
+                "x": 6,
+                "y": 11
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 8,
+                "y": 11
+              },
+              "to": {
+                "x": 7,
+                "y": 11
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 6,
+                "y": 11
+              },
+              "to": {
+                "x": 5,
+                "y": 11
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 7,
+                "y": 11
+              },
+              "to": {
+                "x": 6,
+                "y": 11
+              }
+            }
+          ]
+        ],
+        "bardAfter": {
+          "x": 6,
+          "y": 11
+        },
+        "middleWeightPreserved": true
+      },
+      "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Variante gagnante : entrée basse et secours du Voleur",
+      "status": "passed",
+      "observed": {
+        "actions": 216,
+        "selections": 26,
+        "merchantPushes": 6,
+        "warriorPushes": 3,
+        "chainPushes": 3,
+        "mixedPushes": 0,
+        "thiefPulls": 15,
+        "songs": 2,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 4,
+        "stoneMoves": 25,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "L’accès haut autorise le départ autonome ; l’accès bas fonctionne aussi grâce au transport imposé. L’adaptation conserve les quatre pouvoirs sans ajouter de règle cachée interdisant cette coopération.",
+      "commands": "CRRRUULLLLLCCCDRRRRDRRUCCRRDLCCDLLCCLDDDDDDDDRRRCCDDDDDDDLLDRRRCCDDLLLLLLLCCLULLLLLCCCRRDDRRRRRRCCCUUURUURRRRRRRLLLLDDDDDLLLLCDLDDDDRRRRRRDDRRRRRRRCDDDRDRRRRRRRRRUURRRCDDDDDDDDDDDDDRDRRRRRRRRRURRRRURRCRRRRRRRRRRDDRRR",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    }
+  ]
+}

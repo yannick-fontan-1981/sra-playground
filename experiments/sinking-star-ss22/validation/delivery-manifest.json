@@ -1,0 +1,58 @@
+{
+  "game": "SS22",
+  "title": "Les Cortèges Mécaniques",
+  "version": "0.1.0",
+  "artifact": {
+    "filename": "SS22-demo.html",
+    "bytes": 137981,
+    "sha256": "ecbf4d4ea43ec349b9527993aa53cd8e4eed49f4473d7f0e8896e9888475e0d4",
+    "standalone": true,
+    "networkRequiredToPlay": false,
+    "authorWitnessesIncluded": false
+  },
+  "roster": [
+    "merchant",
+    "warrior",
+    "thief",
+    "bard"
+  ],
+  "defaultHero": "merchant",
+  "tutorial": {
+    "level": 1,
+    "discoveries": 33
+  },
+  "qualification": {
+    "unitTests": 104,
+    "unitPassed": 104,
+    "levelsWon": 8,
+    "totalWitnessActions": 1414,
+    "refusedWitnessActions": 0,
+    "witnessDeaths": 0,
+    "ui": "Compiled HTML in Happy DOM with exact public canvas frames and timing",
+    "nativeBrowserSession": false,
+    "priorLayoutsCompared": 64
+  },
+  "sourceSha256": {
+    "src/core.ts": "5d150ba23a18b15e68eacbabf9331587f3d39ae4302523f93671a5250b18f9b9",
+    "src/levels.ts": "88698ac7c2244eaa1afc2a69ca585049348ecaacae1ad8dd786509e0d73526e9",
+    "src/level-info.ts": "76e7cfb4a0cca922c40de4779a06d6907395de02b808387c6b71d1a5f7fbc0cd",
+    "src/tutorial.ts": "eb277a48a4a0f68e4dd90308429529cc6bb63596a126e421296453bf8fcaae12",
+    "src/browser.ts": "9094effbf1e02b31fa42b6a1281d3f3d77517410e1ad25a389cd0e2e4d130f2d",
+    "index.template.html": "2a60755de8d3ff696459f7362c6c29eaf70d03666a44869418b3c583e7c8fd1b",
+    "scripts/build-demo.mjs": "edc06fd997eaad0674b8dbbbaa77d4fbeab03c9db346177b8a1a2b93088f2dff",
+    "package.json": "d2979eada0b6dc0123d5595b3d56fb80b5203f8923a7de62a727e77be9c4b36c",
+    "package-lock.json": "fc00c71e66b5ad15a43e17773f079f33e4a09aa411bd858a08cf52af856178c6",
+    "tsconfig.json": "5dd2083c554cb1b4095fe21191a260ad65d47ac82401250cadfcdf0a587e9c74"
+  },
+  "reportSha256": {
+    "validation/unit-tests.json": "a724c825c477cd060a2419a37f3e4308dc376a13384edf6c429025dc42cdb0b0",
+    "validation/levels-report.json": "852f931c82db89713bd709abfa2439a0962a4cfbbdcf7818b3ba0c19fa2f8ae6",
+    "validation/ui-dom-report.json": "b6aa7a485ec1b075ecaf926c5e9061315093de4a0ad7aa8701bb4a984cff6424",
+    "validation/design-report.json": "5bc5a5d39d11db284b5ffa1b3478334a0b024ad7f0e55ebf718c784825f7db68"
+  },
+  "limits": [
+    "Author witnesses prove solvability, not an optimal or unique route.",
+    "Local counter-branches and geometric resource arguments are documented separately.",
+    "This manifest qualifies the standalone laboratory, not native SRA execution or Site publication."
+  ]
+}
