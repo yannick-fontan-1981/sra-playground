@@ -825,7 +825,7 @@
       }
     },
     {
-      "label": "Un seul chant règle l’écart : l’appui vide avance jusqu’à la rive orientale, tandis que l’appui occupé reste à l’ouest. Le Magicien fait un pas sur la plateforme tenue par le Marchand ; il n’est jamais porté par un appui.",
+      "label": "Un seul chant règle l’écart : l’appui vide avance jusqu’à la rive orientale, tandis que l’appui occupé reste à l’ouest. Le Magicien est entraîné sur la plateforme tenue par le Marchand ; il n’est jamais porté par un appui.",
       "turn": 17,
       "heroes": [
         {

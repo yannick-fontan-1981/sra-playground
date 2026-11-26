@@ -4,12 +4,12 @@
     "title": "Les deux côtés du sort",
     "mode": "quartet",
     "rows": [
-      "########gW#######",
-      "#########g#..mg.#",
-      "#########.#.....#",
-      "#......#.B#.....#",
-      "#..Z...~~.om.####",
-      "#......###M######",
+      "######gW#########",
+      "#######g###..mg.#",
+      "#######B#.#.....#",
+      "#......##.#.....#",
+      "#......##m...####",
+      "#..Z...~~oM######",
       "#......##########",
       "#......##########",
       "#...g..##########",
@@ -34,12 +34,12 @@
       }
     ]
   },
-  "commands": "CLCCUUUCCCRDCCRURRCCURCDDDLRUUCCCLDDDDRCCURU",
+  "commands": "CLCCUUCCCRRCCURRURRCCURCDDUCCCRDLLDLDLLDLDDDRCCUUR",
   "actions": [
     {
       "id": 6,
       "data": {
-        "x": 33,
+        "x": 27,
         "y": 15
       }
     },
@@ -50,18 +50,15 @@
       "id": 6,
       "data": {
         "x": 15,
-        "y": 27
+        "y": 30
       }
     },
     {
       "id": 6,
       "data": {
-        "x": 33,
-        "y": 24
+        "x": 27,
+        "y": 21
       }
-    },
-    {
-      "id": 1
     },
     {
       "id": 1
@@ -79,7 +76,7 @@
     {
       "id": 6,
       "data": {
-        "x": 30,
+        "x": 24,
         "y": 15
       }
     },
@@ -87,28 +84,34 @@
       "id": 6,
       "data": {
         "x": 15,
-        "y": 27
+        "y": 30
       }
     },
     {
       "id": 4
     },
     {
-      "id": 2
+      "id": 4
     },
     {
       "id": 6,
       "data": {
-        "x": 33,
+        "x": 27,
         "y": 15
       }
     },
     {
       "id": 6,
       "data": {
-        "x": 36,
-        "y": 27
+        "x": 33,
+        "y": 30
       }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
     },
     {
       "id": 4
@@ -125,7 +128,7 @@
     {
       "id": 6,
       "data": {
-        "x": 30,
+        "x": 24,
         "y": 15
       }
     },
@@ -145,7 +148,7 @@
     {
       "id": 6,
       "data": {
-        "x": 33,
+        "x": 27,
         "y": 15
       }
     },
@@ -154,18 +157,6 @@
     },
     {
       "id": 2
-    },
-    {
-      "id": 2
-    },
-    {
-      "id": 3
-    },
-    {
-      "id": 4
-    },
-    {
-      "id": 1
     },
     {
       "id": 1
@@ -180,7 +171,7 @@
     {
       "id": 6,
       "data": {
-        "x": 30,
+        "x": 24,
         "y": 15
       }
     },
@@ -190,6 +181,36 @@
         "x": 45,
         "y": 18
       }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
     },
     {
       "id": 3
@@ -204,15 +225,12 @@
       "id": 2
     },
     {
-      "id": 2
-    },
-    {
       "id": 4
     },
     {
       "id": 6,
       "data": {
-        "x": 33,
+        "x": 27,
         "y": 18
       }
     },
@@ -227,10 +245,10 @@
       "id": 1
     },
     {
-      "id": 4
+      "id": 1
     },
     {
-      "id": 1
+      "id": 4
     }
   ],
   "source": {
@@ -242,7 +260,7 @@
     "objective": "Sécuriser l’arrivée du Magicien, libérer le voisinage qui recevra un monstre, puis réemployer la visée après une rencontre préparée."
   },
   "metrics": {
-    "actions": 44,
+    "actions": 50,
     "selections": 16,
     "merchantPushes": 0,
     "warriorPushes": 0,
@@ -252,17 +270,17 @@
     "wizardHeroSwaps": 1,
     "wizardStoneSwaps": 2,
     "wizardMonsterSwaps": 1,
-    "bentSwaps": 2,
-    "songs": 7,
-    "groupSongs": 1,
+    "bentSwaps": 1,
+    "songs": 4,
+    "groupSongs": 0,
     "songHeroMoves": 0,
     "songStoneMoves": 0,
-    "songMonsterMoves": 8,
+    "songMonsterMoves": 4,
     "supportMoves": 0,
     "partnerMoves": 1,
     "stoneMoves": 2,
     "mirrorMoves": 0,
-    "monsterMoves": 9,
+    "monsterMoves": 5,
     "reflections": 0,
     "heroReflections": 0,
     "pistonPushes": 0,
@@ -286,7 +304,7 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
@@ -294,21 +312,21 @@
           "kind": "wizard",
           "at": {
             "x": 4,
-            "y": 8
+            "y": 9
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 10,
-            "y": 7
+            "x": 8,
+            "y": 6
           }
         }
       ],
       "stones": [
         {
-          "x": 11,
-          "y": 8
+          "x": 10,
+          "y": 9
         }
       ],
       "supports": [],
@@ -334,15 +352,15 @@
           "y": 5
         },
         {
-          "x": 12,
+          "x": 10,
           "y": 8
         }
       ],
       "circuits": {}
     },
     {
-      "label": "La paroi retient la caisse tandis que le chant éloigne son gardien. L’arrivée du Magicien et la future sortie du Marchand sont maintenant sûres.",
-      "turn": 7,
+      "label": "La caisse reste hors de portée tandis que le chant éloigne son gardien. L’arrivée du Magicien et la future sortie du Marchand sont maintenant sûres.",
+      "turn": 6,
       "heroes": [
         {
           "kind": "merchant",
@@ -354,7 +372,7 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
@@ -362,21 +380,21 @@
           "kind": "wizard",
           "at": {
             "x": 4,
-            "y": 8
+            "y": 9
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 10,
+            "x": 8,
             "y": 4
           }
         }
       ],
       "stones": [
         {
-          "x": 11,
-          "y": 8
+          "x": 10,
+          "y": 9
         }
       ],
       "supports": [],
@@ -402,15 +420,15 @@
           "y": 5
         },
         {
-          "x": 12,
-          "y": 5
+          "x": 10,
+          "y": 6
         }
       ],
       "circuits": {}
     },
     {
       "label": "Le premier échange retire la caisse du goulot et installe le Magicien au poste de visée. Sans préparation, le gardien voisin tuerait ce nouvel arrivant.",
-      "turn": 11,
+      "turn": 10,
       "heroes": [
         {
           "kind": "merchant",
@@ -422,21 +440,21 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
         {
           "kind": "wizard",
           "at": {
-            "x": 11,
-            "y": 8
+            "x": 10,
+            "y": 9
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 10,
+            "x": 8,
             "y": 4
           }
         }
@@ -444,7 +462,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 8
+          "y": 9
         }
       ],
       "supports": [],
@@ -470,15 +488,15 @@
           "y": 5
         },
         {
-          "x": 12,
-          "y": 5
+          "x": 10,
+          "y": 6
         }
       ],
       "circuits": {}
     },
     {
       "label": "Le Magicien libère le Marchand par un échange de places. Le Marchand quitte ensuite le voisinage qui doit recevoir le second gardien.",
-      "turn": 18,
+      "turn": 19,
       "heroes": [
         {
           "kind": "merchant",
@@ -490,7 +508,7 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
@@ -504,7 +522,7 @@
         {
           "kind": "bard",
           "at": {
-            "x": 10,
+            "x": 8,
             "y": 4
           }
         }
@@ -512,7 +530,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 8
+          "y": 9
         }
       ],
       "supports": [],
@@ -538,15 +556,15 @@
           "y": 5
         },
         {
-          "x": 12,
-          "y": 5
+          "x": 10,
+          "y": 6
         }
       ],
       "circuits": {}
     },
     {
       "label": "Le rayon à deux coudes amène le second gardien dans le poste libéré. Aucun partenaire ne demeure à côté de sa réception.",
-      "turn": 22,
+      "turn": 23,
       "heroes": [
         {
           "kind": "merchant",
@@ -558,7 +576,7 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
@@ -572,7 +590,7 @@
         {
           "kind": "bard",
           "at": {
-            "x": 10,
+            "x": 8,
             "y": 4
           }
         }
@@ -580,7 +598,7 @@
       "stones": [
         {
           "x": 4,
-          "y": 8
+          "y": 9
         }
       ],
       "supports": [],
@@ -606,15 +624,15 @@
           "y": 8
         },
         {
-          "x": 12,
-          "y": 5
+          "x": 10,
+          "y": 6
         }
       ],
       "circuits": {}
     },
     {
-      "label": "Les deux gardiens suivent des décalages différents : le logement bas retient l’un pendant que le pas latéral rapproche l’autre. Leur rencontre libère le goulot.",
-      "turn": 27,
+      "label": "Le premier gardien suit le chant tandis que le second demeure hors de portée. Leur rencontre libère le goulot et le retour du Magicien.",
+      "turn": 26,
       "heroes": [
         {
           "kind": "merchant",
@@ -626,7 +644,7 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
@@ -640,15 +658,15 @@
         {
           "kind": "bard",
           "at": {
-            "x": 9,
-            "y": 7
+            "x": 8,
+            "y": 6
           }
         }
       ],
       "stones": [
         {
           "x": 4,
-          "y": 8
+          "y": 9
         }
       ],
       "supports": [],
@@ -672,8 +690,8 @@
       "circuits": {}
     },
     {
-      "label": "Le trajet optique dégagé rend la caisse au poste oriental et ramène le Magicien sur la rive de départ. La ressource d’échange est conservée.",
-      "turn": 34,
+      "label": "Le goulot dégagé permet au Magicien de retrouver la balise. La caisse revient à son poste et le Magicien rejoint sa rive de départ.",
+      "turn": 41,
       "heroes": [
         {
           "kind": "merchant",
@@ -685,7 +703,7 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
@@ -693,21 +711,21 @@
           "kind": "wizard",
           "at": {
             "x": 4,
-            "y": 8
+            "y": 9
           }
         },
         {
           "kind": "bard",
           "at": {
-            "x": 10,
+            "x": 8,
             "y": 5
           }
         }
       ],
       "stones": [
         {
-          "x": 14,
-          "y": 5
+          "x": 10,
+          "y": 9
         }
       ],
       "supports": [],
@@ -732,7 +750,7 @@
     },
     {
       "label": "Les quatre héros rejoignent leurs destinations réparties entre les trois postes. Aucun bouton ni compteur de monstres n’entre dans la victoire.",
-      "turn": 44,
+      "turn": 50,
       "heroes": [
         {
           "kind": "merchant",
@@ -744,7 +762,7 @@
         {
           "kind": "warrior",
           "at": {
-            "x": 9,
+            "x": 7,
             "y": 4
           }
         },
@@ -758,15 +776,15 @@
         {
           "kind": "bard",
           "at": {
-            "x": 10,
+            "x": 8,
             "y": 5
           }
         }
       ],
       "stones": [
         {
-          "x": 14,
-          "y": 5
+          "x": 10,
+          "y": 9
         }
       ],
       "supports": [],
@@ -792,8 +810,276 @@
   ],
   "adaptation": {
     "sourcePrinciple": "Préparer les emplacements successifs d’échange et faire aider le Magicien par un partenaire qui règle la prochaine position des monstres.",
-    "changes": "La progression du canyon est recomposée en trois postes compacts, une coupure d’eau de deux cases et une visée à deux coudes. Le Barde éloigne le premier gardien de la caisse-cible ; le Magicien libère le Marchand avant de recevoir le second monstre. Les monstres sont stationnaires hors transport et les contacts orthogonaux sont simultanés. Aucune héroïne invulnérable, poursuite ni porte à décompte de morts n’est reprise.",
-    "limits": "Les deux contre-branches dangereuses concernent des positions précises : arrivée sur la caisse adjacente au gardien, ou réception du monstre auprès du Marchand. La rencontre finale explique le dégagement du goulot sans imposer un quota de morts ; d’autres façons de déplacer les gardiens restent légales.",
-    "localChecks": []
+    "changes": "La progression du canyon est recomposée en trois postes compacts, une coupure d’eau de deux cases et une visée à deux coudes. Le Barde éloigne le premier gardien de la caisse-cible ; le Magicien libère le Marchand avant de recevoir le second monstre. La distance du gardien occidental fait viser un miroir occupé lors du reflet global initial : ce raccourci est refusé atomiquement. Les monstres sont stationnaires hors transport et les contacts orthogonaux sont simultanés. Aucune héroïne invulnérable, poursuite ni porte à décompte de morts n’est reprise.",
+    "limits": "Les deux contre-branches dangereuses concernent des positions précises : arrivée sur la caisse adjacente au gardien, ou réception du monstre auprès du Marchand. La rencontre finale explique le dégagement du goulot sans imposer un quota de morts ; d’autres façons de déplacer les gardiens restent légales après préparation.",
+    "localChecks": [
+      {
+        "name": "Témoin complet et quatre destinations occupées",
+        "status": "passed",
+        "observed": {
+          "actions": 50,
+          "selections": 16,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "chainPushes": 0,
+          "mixedPushes": 0,
+          "swaps": 4,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 2,
+          "wizardMonsterSwaps": 1,
+          "bentSwaps": 1,
+          "songs": 4,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 4,
+          "supportMoves": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 2,
+          "mirrorMoves": 0,
+          "monsterMoves": 5,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "Une caisse échangeable peut être une arrivée mortelle",
+        "status": "passed",
+        "observed": {
+          "commands": "CCR",
+          "wizardArrival": {
+            "x": 10,
+            "y": 9
+          },
+          "adjacentMonster": {
+            "x": 10,
+            "y": 8
+          },
+          "deadHero": "wizard"
+        },
+        "scope": "La cible est une caisse voisine d’un monstre ; cette mort ne repose pas sur un monstre qui attaquerait avant son échange."
+      },
+      {
+        "name": "Un seul décalage sécurise le Magicien, pas encore le passage du Marchand",
+        "status": "passed",
+        "observed": {
+          "commands": "CLCCUCCCRRCCU",
+          "merchantArrival": {
+            "x": 10,
+            "y": 8
+          },
+          "monster": {
+            "x": 10,
+            "y": 7
+          },
+          "deadHero": "merchant"
+        },
+        "scope": "Le second décalage du témoin dégage le voisinage de ce passage ; d’autres préparations ne sont pas exclues."
+      },
+      {
+        "name": "Le monstre reçu frappe le partenaire revenu à côté",
+        "status": "passed",
+        "observed": {
+          "commands": "CLCCUUCCCRRUCCRCCR",
+          "monsterArrival": {
+            "x": 11,
+            "y": 8
+          },
+          "merchant": {
+            "x": 11,
+            "y": 9
+          },
+          "deadHero": "merchant"
+        },
+        "scope": "Le Marchand revient dans sa niche au lieu de s’écarter. Ce contre-parcours local met en évidence le danger du point de réception."
+      },
+      {
+        "name": "La même réception devient sûre après évacuation",
+        "status": "passed",
+        "observed": {
+          "merchant": {
+            "x": 14,
+            "y": 7
+          },
+          "swap": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 11,
+                "y": 8
+              },
+              "to": {
+                "x": 14,
+                "y": 5
+              }
+            },
+            {
+              "actor": "monster",
+              "from": {
+                "x": 14,
+                "y": 5
+              },
+              "to": {
+                "x": 11,
+                "y": 8
+              }
+            }
+          ],
+          "ray": [
+            {
+              "x": 11,
+              "y": 8
+            },
+            {
+              "x": 12,
+              "y": 8
+            },
+            {
+              "x": 13,
+              "y": 8
+            },
+            {
+              "x": 13,
+              "y": 7
+            },
+            {
+              "x": 13,
+              "y": 6
+            },
+            {
+              "x": 13,
+              "y": 5
+            },
+            {
+              "x": 14,
+              "y": 5
+            }
+          ],
+          "aliveHeroes": 4
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "La portée sélective provoque une rencontre et dégage le goulot",
+        "status": "passed",
+        "observed": {
+          "beforeContact": [
+            {
+              "x": 11,
+              "y": 8
+            },
+            {
+              "x": 10,
+              "y": 8
+            }
+          ],
+          "monstersAfter": 0,
+          "circuits": 0,
+          "gates": 0
+        },
+        "scope": "Le retrait des deux acteurs libère le passage de retour. La victoire ne lit aucun compteur de morts."
+      },
+      {
+        "name": "Variante gagnante : l’échange de caisse précède le dernier décalage",
+        "status": "passed",
+        "observed": {
+          "actions": 54,
+          "selections": 20,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "chainPushes": 0,
+          "mixedPushes": 0,
+          "swaps": 4,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 2,
+          "wizardMonsterSwaps": 1,
+          "bentSwaps": 1,
+          "songs": 4,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 4,
+          "supportMoves": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 2,
+          "mirrorMoves": 0,
+          "monsterMoves": 5,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Le premier pas suffit à l’arrivée du Magicien ; le second reste effectué avant l’évacuation du Marchand. L’ordre entre ces préparations reste ouvert.",
+        "commands": "CLCCUCCCRCUCCCRCCURRURRCCURCDDUCCCRDLLDLDLLDLDDDRCCUUR",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      },
+      {
+        "name": "Le reflet global initial est refusé sans effet partiel",
+        "status": "passed",
+        "observed": {
+          "command": "X",
+          "refused": true,
+          "monstersPreserved": true,
+          "blockedMirrorIndices": [
+            1
+          ]
+        },
+        "scope": "Le gardien occidental viserait la case du second miroir. Cette géométrie corrige le raccourci initial découvert lors de la revue indépendante."
+      },
+      {
+        "name": "Variante gagnante : reflet préparé et étape d’évacuation intermédiaire",
+        "status": "passed",
+        "observed": {
+          "actions": 51,
+          "selections": 20,
+          "merchantPushes": 0,
+          "warriorPushes": 0,
+          "chainPushes": 0,
+          "mixedPushes": 0,
+          "swaps": 4,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 2,
+          "wizardMonsterSwaps": 1,
+          "bentSwaps": 1,
+          "songs": 4,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 4,
+          "supportMoves": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 2,
+          "mirrorMoves": 0,
+          "monsterMoves": 6,
+          "reflections": 1,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 2,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Après les deux chants préparatoires, le reflet devient légal. Il place le second gardien dans la visée : le Marchand attend un poste plus proche, puis poursuit son évacuation après l’échange du monstre.",
+        "commands": "CLCCUUXCCCRRCCURRUCCURCCRRCCCDDUCCCDLDLLDLDDDRCCUUR",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
   }
 }

@@ -578,6 +578,188 @@
     "sourcePrinciple": "Une dépendance circulaire de déplacements est rompue par une pièce qui dispose d’une case supplémentaire de décalage.",
     "changes": "Les pièces de lumière deviennent deux courtes files perpendiculaires dans un croisement sec. Le Guerrier exploite le débattement du bras droit ; le Barde fait entrer puis décaler le groupe, dont une caisse est retenue par une butée. La même place de travail sert à pousser une nouvelle file. Le Magicien règle ensuite le passage des partenaires dans le bras sud. Aucun faisceau de pouvoir, couleur spéciale ni porte finale à plusieurs lests n’est ajouté.",
     "limits": "Le témoin conserve les quatre caisses et utilise le débattement droit. Les essais locaux comparent les préparations du croisement ; ils ne démontrent ni unicité, ni nécessité de chaque capacité, ni impossibilité de toute permutation alternative par le Magicien.",
-    "localChecks": []
+    "localChecks": [
+      {
+        "name": "Témoin complet et quatre destinations occupées",
+        "status": "passed",
+        "observed": {
+          "actions": 43,
+          "selections": 12,
+          "merchantPushes": 0,
+          "warriorPushes": 3,
+          "chainPushes": 3,
+          "mixedPushes": 0,
+          "swaps": 1,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 0,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 4,
+          "groupSongs": 4,
+          "songHeroMoves": 0,
+          "songStoneMoves": 12,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 18,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "Le groupe nord ne peut pas entrer dans le croisement occupé",
+        "status": "passed",
+        "observed": {
+          "commands": "CCCDD",
+          "firstStepChangesCrates": false,
+          "secondStepRefused": true
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "La dernière case du bras droit finance la seconde poussée",
+        "status": "passed",
+        "observed": {
+          "removedCell": {
+            "x": 12,
+            "y": 11
+          },
+          "shortArmSecondPushRefused": true,
+          "realArmChainPushes": 2
+        },
+        "scope": "Comparaison locale avec cette seule case murée ; ne prouve pas l’impossibilité de toute autre stratégie sur la carte modifiée."
+      },
+      {
+        "name": "Le Guerrier doit aussi dégager la réception de cette branche",
+        "status": "passed",
+        "observed": {
+          "commands": "CRRCCDD",
+          "warrior": {
+            "x": 10,
+            "y": 11
+          },
+          "bard": {
+            "x": 10,
+            "y": 8
+          },
+          "refused": true
+        },
+        "scope": "Le Guerrier encore dans le croisement est hors portée et bloque la dernière caisse ; le témoin le range dans le bras sud."
+      },
+      {
+        "name": "La butée fabrique une nouvelle file avec les mêmes charges",
+        "status": "passed",
+        "observed": {
+          "afterThreeLeftSongs": [
+            {
+              "x": 9,
+              "y": 10
+            },
+            {
+              "x": 7,
+              "y": 11
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 9,
+              "y": 11
+            }
+          ],
+          "wall": {
+            "x": 8,
+            "y": 10
+          },
+          "reusedFile": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 9,
+                "y": 12
+              },
+              "to": {
+                "x": 9,
+                "y": 11
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 11
+              },
+              "to": {
+                "x": 9,
+                "y": 10
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 10
+              },
+              "to": {
+                "x": 9,
+                "y": 9
+              }
+            }
+          ],
+          "cratesConserved": 4
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "Variante gagnante : le Magicien sort par une caisse après le départ du Guerrier",
+        "status": "passed",
+        "observed": {
+          "actions": 37,
+          "selections": 8,
+          "merchantPushes": 0,
+          "warriorPushes": 3,
+          "chainPushes": 3,
+          "mixedPushes": 0,
+          "swaps": 1,
+          "wizardHeroSwaps": 0,
+          "wizardStoneSwaps": 1,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 4,
+          "groupSongs": 4,
+          "songHeroMoves": 0,
+          "songStoneMoves": 12,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 19,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Les trois poussées de file et la transformation chantée subsistent ; l’échange avec le Guerrier du témoin n’est pas imposé.",
+        "commands": "CRRLDCCDDLLLCCURRRUUUURCURDRRUUUUCCUU",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
   }
 }

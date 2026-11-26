@@ -1,6 +1,6 @@
 # SS23 — spécification du contrat jouable
 
-Cette spécification décrit le moteur de **SS23 — Les Chambres de Résonance**. Elle s’appuie sur [le moteur](../src/core.ts), [le tutoriel public](../src/tutorial.ts), [les tests](../tests/) et [l’adaptateur natif](../../../src/games/sinking-star-ss23.ts). Les huit salles et leurs dossiers d’adaptation sont en cours de finalisation ; les noms de salles et les résultats de campagne ne sont pas figés dans ce document.
+Cette spécification décrit le moteur de **SS23 — Les Chambres de Résonance**. Elle s’appuie sur [le moteur](../src/core.ts), [le tutoriel public](../src/tutorial.ts), [les tests](../tests/) et [l’adaptateur natif](../../../src/games/sinking-star-ss23.ts). Les huit salles définitives sont synchronisées avec leurs références et leurs témoins ; leur correspondance et les preuves de rejeu figurent à la section 10.
 
 ## 1. Composition et victoire
 
@@ -166,10 +166,23 @@ La liste suivante suit exactement l’ordre de `lessonIds`. Les textes détaill�
 
 ## 10. Références, adaptations et preuves
 
-Les références d’auteur doivent décrire le principe retenu, les transformations du plan, les rôles ajoutés ou remplacés et les limites de la comparaison. Les liens publics exposés dans chaque salle doivent correspondre à ce dossier. Une salle adaptée est présentée comme une adaptation, sauf preuve explicite d’une reprise exacte.
+Les références d’auteur décrivent le principe retenu, les transformations du plan, les rôles ajoutés ou remplacés et les limites de la comparaison. Les liens publics exposés dans chaque salle correspondent à ce dossier. Les salles adaptées sont présentées comme des adaptations ; aucune reprise géométrique exacte n’est revendiquée.
 
-Les témoignages de walkthrough servent à étudier les mécanismes et la structure d’une énigme. Ils ne certifient pas automatiquement la difficulté, la fidélité géométrique ou la nécessité d’un pouvoir dans SS23. Les titres et correspondances détaillés des huit salles seront consignés après validation des dossiers sources.
+| Salle | Référence | Principe adapté |
+| --- | --- | --- |
+| Le conservatoire des échanges | Atelier original, [pouvoirs du monde Nord](https://sinkingstarwalkthrough.com/fr/north/) | Enseigner les quatre rôles et leurs interactions à partir des observations publiques |
+| La grille des places libres | [Heroes of Hauling, énigme 11](https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11) | Traverser une grille de neuf caisses pour déplacer le poste de travail ; sas sec, sans bouton ni monstre dans l’adaptation |
+| La case de trop | [Heroes and Light, énigme 14](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-14) | Employer une case supplémentaire dans un croisement, puis déformer les files par un chant sélectif |
+| Le poste emprunté | [Heroes and Artifacts, énigmes 4–5](https://sinkingstarwalkthrough.com/fr/heroes-and-artifacts-solutions/#%C3%A9nigme-4) | Envoyer le Barde dans un poste distant et réutiliser les charges pour la traversée collective |
+| Les deux côtés du sort | [Heroes 2: Monsters, énigmes 26–27](https://sinkingstarwalkthrough.com/fr/heroes-2-monsters-solutions/#%C3%A9nigme-26) | Préparer les deux voisinages d’un échange avant de transporter un monstre |
+| Le poste derrière la file | [Heroes and Stones, West, énigme 9](https://sinkingstarwalkthrough.com/fr/heroes-and-stones-west-solutions/) | Séparer une charge, déplacer le poste du Guerrier et ranger les poids par fermeture latérale |
+| Le pas qui laisse un appui | [Heroes and Stones, West, énigmes 16–17](https://sinkingstarwalkthrough.com/fr/heroes-and-stones-west-solutions/) | Conserver un appui au moment du chant et organiser les traversées autour des soutiens mobiles et hydrauliques |
+| La forme et la place vide | [Heroes and Light, énigmes 52–53](https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/) | Transformer deux fragments décalés, extraire le Barde sans chant puis compléter les neuf poids |
+
+Les témoignages de walkthrough servent à étudier les mécanismes et la structure d’une énigme. Ils ne certifient pas automatiquement la difficulté, la fidélité géométrique ou la nécessité d’un pouvoir dans SS23. Les changements précis et les variantes locales sont documentés dans `reference/levelN-design.json` et les revues d’auteur.
 
 Les références JSON et les témoins doivent correspondre aux cartes expédiées. Les validations rejouent les commandes publiques, comparent les images et durées, vérifient la victoire officielle, les découvertes et Undo. Les essais d’ablation ou de recherche restent des outils d’auteur ; un budget épuisé est inconclusif. Le simple usage d’un mécanisme dans un témoin n’en prouve pas la nécessité.
 
-La qualification complète et la publication de SS23 restent en attente. Les preuves courantes sont décrites dans la note d’intégration native ; aucune résolution autonome SRA n’est déduite du rejeu d’auteur.
+Les huit témoins comptent respectivement **221, 91, 43, 132, 50, 126, 172 et 112 commandes**, soit **947**, dont **173 sélections**. La validation constate **2 537 images publiques**, huit victoires, zéro refus et zéro mort. Le tutoriel atteint **36/36** sur N1 uniquement ; chaque fin de salle est annulée et rejouée. Ces mesures sont identiques dans le laboratoire, le contrôle du HTML compilé et les tests du dispatcher natif. Elles sont consignées dans `validation/levels-report.json`, `validation/ui-dom-report.json` et `docs/migration/ss23-evidence/native-tests.txt` à la racine du dépôt.
+
+Les **114 tests du laboratoire**, les **94 tests natifs** Custom 4 / SS21 / SS22 / SS23 et le build du Site ont réussi. Le contrôle de continuité SIC termine avec exit 0 sur les **41 niveaux protégés** existants. La note d’intégration suit séparément la vérification dans le navigateur et la publication. Aucune résolution autonome SRA n’est déduite du rejeu d’auteur.

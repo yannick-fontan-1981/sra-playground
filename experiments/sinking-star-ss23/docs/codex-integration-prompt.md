@@ -1,6 +1,6 @@
 # Prompt Codex — reprendre SS23, intégrer et publier sans régression
 
-Ce prompt décrit une reprise **idempotente**. Il ne signifie pas que SS23 manque dans l’état où il sera exécuté. Au moment de sa rédaction, la qualification complète et la publication de SS23 sont encore en attente. Les preuves et l’état réel doivent être relus avant toute action.
+Ce prompt décrit une reprise **idempotente**. Il ne signifie pas que SS23 manque dans l’état où il sera exécuté. Les huit cartes sont finalisées et les rejeux du laboratoire, du HTML et du moteur natif ont réussi ; l’état de l’intégration et de la publication doit être relu dans le compte rendu courant. Les preuves et l’état réel doivent être inspectés avant toute action.
 
 ---
 

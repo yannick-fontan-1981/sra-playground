@@ -36,7 +36,7 @@ dist/assets/common_frontier_policy.drm-Dl1WBFy2.json     48.53 kB │ gzip:  16.
 dist/assets/lab-worker-BMgQHqC8.js                       54.83 kB
 dist/gallery.html                                       184.92 kB │ gzip:  11.36 kB
 dist/assets/bundle-DhSwXDTY.json                        422.27 kB │ gzip:  24.22 kB
-dist/assets/game-worker-DC8Mj7rn.js                     612.90 kB
+dist/assets/game-worker-CEQ1PeXm.js                     612.90 kB
 dist/assets/v6-agent-worker-CYn7HVV1.js               9,824.79 kB
 dist/assets/symbolic-reasoning-ClXzdkf8.css               3.41 kB │ gzip:   0.95 kB
 dist/assets/gallery-CWQ-8Wez.css                          6.21 kB │ gzip:   1.70 kB
@@ -50,11 +50,16 @@ dist/assets/reading-DHR76JLS.js                           1.47 kB │ gzip:   0.
 dist/assets/symbolic-reasoning-NVIlotO7.js                4.02 kB │ gzip:   1.49 kB
 dist/assets/reasoning-lab-BlPlXnq9.js                    12.72 kB │ gzip:   4.88 kB
 dist/assets/site-header-BbY9ZXZX.js                      43.52 kB │ gzip:  11.48 kB
-dist/assets/index-mvWcVMfy.js                         2,056.25 kB │ gzip: 320.44 kB
+dist/assets/index-BFY1g-PP.js                         2,056.25 kB │ gzip: 320.44 kB
+
+[33m[PLUGIN_TIMINGS] [0mYour build spent significant time in plugins. Here is a breakdown:
+  - vite:worker-import-meta-url (50%)
+  - vite:build-html (32%)
+See https://rolldown.rs/options/checks#plugintimings for more details.
 
 [plugin builtin:vite-reporter] 
 (!) Some chunks are larger than 500 kB after minification. Consider:
 - Using dynamic import() to code-split the application
 - Use build.rolldownOptions.output.codeSplitting to improve chunking: https://rolldown.rs/reference/OutputOptions.codeSplitting
 - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
-✓ built in 2.98s
+✓ built in 3.69s

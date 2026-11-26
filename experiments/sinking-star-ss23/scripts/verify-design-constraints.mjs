@@ -11,22 +11,24 @@ import {replay} from './solver.mjs';
 
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 const directions=[[0,-1],[0,1],[-1,0],[1,0]],key=p=>p.y*20+p.x;
-const report={game:'SS23',version:'0.1.0',success:false,scope:'Initial frozen geometry, exact layout comparison with SS14–22 and reproducible local counter-branches',levels:[],reviews:[],limitations:[
+const report={game:'SS23',version:'0.1.0',success:false,scope:'Individual walking with fixed resources, exact layout comparison with SS14–22 and reproducible local counter-branches',levels:[],reviews:[],limitations:[
  'A winning witness proves solvability, not an optimal or unique route.',
- 'The walking graphs freeze resources and circuit states and suppress automatic abilities. They do not model joint puzzle solving.',
+ 'The walking graphs freeze other pieces and suppress role abilities, recompute circuits when the moving hero leaves a button, and exclude orthogonal contact with a stationary monster. They do not model joint puzzle solving or piston displacement.',
  'A geometric comparison detects exact repeats under rotations, reflections and translations; it does not measure subjective originality or difficulty.',
  'Local counter-branches establish their observed outcomes, not permanent global impossibility after a mistake.'
 ]};
 
 function initialWalking(world,state,hero,ignoreOtherHeroes=false){
  const occupied=[...state.stones,...state.monsters,...state.mirrors.map(m=>m.at),...(!ignoreOtherHeroes?state.heroes.filter(h=>h.kind!==hero.kind).map(h=>h.at):[])];
- const blocked=p=>!supported(world,state,p)||terrainAt(world,p)==='#'||occupied.some(q=>equal(p,q))
-  ||world.gates.some((g,i)=>equal(g.at,p)&&gateClosed(world,state,i))
-  ||world.doors.some(q=>equal(p,q))&&!doorsOpen(world,state);
+ const withHeroAt=p=>({...state,gateClosed:undefined,platformActive:undefined,heroes:state.heroes.map(h=>h.kind===hero.kind?{...h,at:p}:h)});
+ const blocked=(p,before,after)=>!supported(world,before,p)||!supported(world,after,p)||terrainAt(world,p)==='#'||occupied.some(q=>equal(p,q))
+  ||state.monsters.some(m=>Math.abs(m.x-p.x)+Math.abs(m.y-p.y)===1)
+  ||world.gates.some((g,i)=>equal(g.at,p)&&(gateClosed(world,before,i)||gateClosed(world,after,i)))
+  ||world.doors.some(q=>equal(p,q))&&(!doorsOpen(world,before)||!doorsOpen(world,after));
  const queue=[hero.at],seen=new Set([key(hero.at)]);let transitions=0;
  for(let i=0;i<queue.length;i++)for(const [dx,dy]of directions){
   transitions++;const q={x:queue[i].x+dx,y:queue[i].y+dy};
-  if(blocked(q)||seen.has(key(q)))continue;seen.add(key(q));queue.push(q);
+  if(blocked(q,withHeroAt(queue[i]),withHeroAt(q))||seen.has(key(q)))continue;seen.add(key(q));queue.push(q);
  }
  return{role:hero.kind,states:seen.size,transitions,reachableGoals:world.goals.filter(g=>seen.has(key(g))),exhausted:true};
 }
@@ -72,8 +74,8 @@ try{
   const repeats=previous.filter(p=>p.terrainSha256===terrainHash);assert.deepEqual(repeats,[],spec.id+': no exact historical terrain repeat');
   const walking=state.heroes.map(h=>initialWalking(world,state,h)),generousWalking=state.heroes.map(h=>initialWalking(world,state,h,true));
   const matching=matchingSize(generousWalking);
-  assert.ok(matching<4,spec.id+': all four goals must not already be assignable by frozen walking');
-  if(index===TUTORIAL_LEVEL-1)assert.ok(walking.every(r=>r.reachableGoals.length===0),'The tutorial room has no immediately reachable goal');
+  assert.ok(matching<4,spec.id+': individual walking with fixed resources must not assign all four goals');
+  if(index===TUTORIAL_LEVEL-1)assert.ok(walking.some(r=>r.reachableGoals.length===0),'At least one tutorial role requires a prepared transfer or a change of resources');
   const route=replay(spec,design.commands);assert.equal(route.state.complete,true);assert.equal(route.metrics.blocked,0);assert.equal(route.metrics.deaths,0);
   const local=[];
   for(const check of design.adaptation?.localChecks??[]){
@@ -83,7 +85,7 @@ try{
    for(const field of ['complete','dead','failed'])if(check.expected?.[field]!==undefined)assert.equal(result.state[field],check.expected[field]);
    local.push({name:check.name,observed:check.observed,scope:check.scope,actions:result.metrics.actions,blocked:result.metrics.blocked,deaths:result.metrics.deaths,complete:result.state.complete,finalStateSha256:hash(result.state)});
   }
-  report.levels.push({level:index+1,title:spec.title,mapSha256:hash(spec),terrainSha256:terrainHash,goals:world.goals,landCells:world.terrain.filter(c=>c==='.').length,waterCells:world.terrain.filter(c=>c==='~').length,walking,generousWalking,maximumFrozenWalkingGoalAssignment:matching,buttonsAndPressesSeparate:true,exactHistoricalTerrainRepeats:repeats,localChecks:local});
+  report.levels.push({level:index+1,title:spec.title,mapSha256:hash(spec),terrainSha256:terrainHash,goals:world.goals,landCells:world.terrain.filter(c=>c==='.').length,waterCells:world.terrain.filter(c=>c==='~').length,walking,generousWalking,maximumIndividualWalkingGoalAssignment:matching,buttonsAndPressesSeparate:true,exactHistoricalTerrainRepeats:repeats,localChecks:local});
  }
  for(const script of ['review-intro-ss23.mjs','review-level2-ss23.mjs','review-middle-ss23.mjs','review-final-ss23.mjs','independent-review-ss23.mjs']){
   const path=new URL('../reference/author/'+script,import.meta.url);assert.ok(existsSync(path),'Missing required review: '+script);

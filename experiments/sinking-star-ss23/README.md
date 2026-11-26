@@ -1,16 +1,27 @@
 # SS23 — Les Chambres de Résonance
 
-Laboratoire de la campagne **SS23** de SRA Playground : huit salles prévues, un tutoriel de **36 découvertes**, quatre héros — **Marchand, Guerrier, Magicien, Barde** — et quatre destinations à occuper ensemble.
+Laboratoire de la campagne **SS23** de SRA Playground : huit salles, un tutoriel de **36 découvertes**, quatre héros — **Marchand, Guerrier, Magicien, Barde** — et quatre destinations à occuper ensemble.
 
 Le Marchand pousse une pièce, le Guerrier avance une file, le Magicien échange deux occupants et le Barde entraîne les pièces de sa portée. Les salles combinent ces capacités avec les caisses, l’eau, les appuis immergés, les miroirs, les monstres, les boutons, les portes, les presses latérales et les plateformes hydrauliques. Les règles réutilisent les contrats établis dans les campagnes précédentes ; le remplacement du Voleur par le Magicien ne crée pas de traction implicite.
 
-## État du chantier
+## Campagne et validation
 
-Les raccordements natifs, le moteur, le tutoriel public et l’interface autonome sont préparés. Les cartes et leurs références sont en cours de finalisation. La qualification complète des huit salles, l’intégration sur `main` et la publication de SS23 restent en attente.
+Les huit cartes définitives, leurs références et leurs témoins sont synchronisés. Le parcours complet atteint `WIN` en **947 commandes**, dont **173 sélections**, avec **2 537 images publiques** contrôlées, aucun refus et aucune mort. Les 36 découvertes sont acquises dans la première salle seulement. Undo et le rejeu de chaque victoire sont vérifiés.
 
-Les vérifications déjà réussies sont décrites dans [la note d’intégration native](../../docs/migration/ss23-native-integration.md). À ce stade, elles couvrent 81 tests moteur/monstres, 33 tests pédagogiques (dont le parcours réel N1), l’aide native, le contrôle TypeScript et les fixtures du HTML compilé. Elles ne remplacent pas le rejeu des huit cartes définitives ni la vérification du Site publié.
+Les preuves détaillées figurent dans [la note d’intégration native](../../docs/migration/ss23-native-integration.md) : **114 tests du laboratoire**, **94 tests natifs** incluant Custom 4 et les régressions SS21/SS22, validation des huit témoins et contrôle complet du HTML compilé. Le build du Site et le contrôle de continuité SIC des **41 niveaux protégés** sont également passés. Le parcours a ensuite été reproduit dans Chrome en mode Manual, depuis N1 jusqu’au panneau de victoire finale, avec 36/36 découvertes. La [validation de livraison](docs/validation.md) décrit les preuves ; la [PR 127](https://github.com/yannick-fontan-1981/sra-playground/pull/127) conserve le relevé d’intégration sur `main` et de publication.
 
-Les noms, parcours et totaux de commandes des salles seront consignés seulement après leur stabilisation. Le nombre de découvertes n’est pas une condition cachée de victoire : ce sont les quatre destinations occupées par les quatre héros vivants qui terminent une salle.
+| Salle | Problème principal | Commandes du témoin |
+| --- | --- | ---: |
+| 1. Le conservatoire des échanges | Les 36 découvertes : quatre pouvoirs, déplacements imposés, appuis, reflets, presses et contacts | 221 |
+| 2. La grille des places libres | Sas sec encombré de neuf caisses : déplacer les postes de travail par échange et ouvrir un passage par chant | 91 |
+| 3. La case de trop | Un croisement serré, deux files et une case supplémentaire pour déformer le groupe | 43 |
+| 4. Le poste emprunté | Envoyer le Barde au poste de travail, récupérer la balise et réemployer les charges pour traverser l’eau | 132 |
+| 5. Les deux côtés du sort | Préparer les deux extrémités d’un échange de monstre et les contacts après une visée déviée | 50 |
+| 6. Le poste derrière la file | Séparer une charge, changer le Guerrier de poste et utiliser une fermeture latérale | 126 |
+| 7. Le pas qui laisse un appui | Choisir les appuis qui suivent le chant et ceux qui doivent rester pour les traversées | 172 |
+| 8. La forme et la place vide | Réunir deux fragments décalés, retirer le Barde silencieusement et compléter neuf poids | 112 |
+
+Les commandes incluent les sélections ; ce ne sont pas des longueurs optimales. Le nombre de découvertes n’est pas une condition cachée de victoire : ce sont les quatre destinations occupées par les quatre héros vivants qui terminent une salle.
 
 ## Jouer
 
@@ -53,7 +64,7 @@ Depuis la racine du dépôt, les tests natifs doivent inclure explicitement `tes
 | --- | --- |
 | `src/core.ts` | Règles déterministes, rendu 64 × 64, animations, historique et session |
 | `src/tutorial.ts` | Sélection et découvertes tirées uniquement des observations publiques |
-| `src/levels.ts` | Les huit cartes expédiées, une fois synchronisées |
+| `src/levels.ts` | Les huit cartes expédiées, synchronisées avec leurs références |
 | `src/level-info.ts` | Objectifs et liens publics de référence de chaque salle |
 | `src/browser.ts`, `index.template.html` | Interface autonome et commandes |
 | `tests/*.test.mjs` | Contrats moteur, monstres et pédagogie |
@@ -65,6 +76,6 @@ Le contrat complet figure dans [specification.md](docs/specification.md), le pro
 
 ## Sources et portée
 
-Chaque salle adaptée doit relier son objectif et ses choix à une référence identifiée, en distinguant le principe conservé des changements apportés à la géométrie, aux rôles et aux mécanismes. Les liens détaillés seront exposés par `src/level-info.ts` et les dossiers d’auteur. Une référence de walkthrough ne constitue pas, à elle seule, une certification de reproduction exacte.
+La première salle est un atelier original. Les sept suivantes adaptent des énigmes identifiées de *Heroes of Hauling*, *Heroes and Light*, *Heroes and Artifacts*, *Heroes 2: Monsters* et *Heroes and Stones, West*. Chaque dossier distingue le principe conservé des changements apportés à la géométrie, aux rôles et aux mécanismes. Les liens détaillés sont exposés par `src/level-info.ts` et les dossiers d’auteur ; leur correspondance figure aussi dans [la spécification](docs/specification.md#10-références-adaptations-et-preuves). Une référence de walkthrough ne constitue pas, à elle seule, une certification de reproduction exacte.
 
 Les témoins établissent la jouabilité des salles par les commandes publiques. Ils ne prouvent ni optimalité, ni unicité, ni nécessité de chaque capacité. Leur rejeu n’est pas une résolution autonome par SRA ; ce lot ne modifie aucun apprentissage, planificateur ou arbitrage SIC.

@@ -23,7 +23,7 @@ export function build(){
  a.go(5,8,'wizard').act('R');
  a.stage('Le Guerrier a posé la réserve sur le premier appui. Le Magicien l’échange depuis la rive : la réserve revient au sec et le Magicien ancre maintenant cet appui.');
  a.select('bard').act('R');
- a.stage('Un seul chant règle l’écart : l’appui vide avance jusqu’à la rive orientale, tandis que l’appui occupé reste à l’ouest. Le Magicien fait un pas sur la plateforme tenue par le Marchand ; il n’est jamais porté par un appui.');
+ a.stage('Un seul chant règle l’écart : l’appui vide avance jusqu’à la rive orientale, tandis que l’appui occupé reste à l’ouest. Le Magicien est entraîné sur la plateforme tenue par le Marchand ; il n’est jamais porté par un appui.');
  a.go(9,3,'wizard').act('D');
  a.stage('Le Magicien monte au poste nord puis échange avec la Barde. Elle quitte le poste de chant sans déplacer les appuis ; lui rejoint la galerie basse.');
  a.select('merchant').act('L');a.go(3,3,'bard');a.select('merchant').act('R');a.go(4,6,'wizard');
