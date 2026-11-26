@@ -1,0 +1,58 @@
+{
+  "game": "SS25",
+  "title": "Les Derniers Équilibres",
+  "version": "0.1.0",
+  "artifact": {
+    "filename": "SS25-demo.html",
+    "bytes": 159970,
+    "sha256": "358f1e976aca5754f07a3e9a851d25716b8c8dbf814474a2c88b0c2d24efd895",
+    "standalone": true,
+    "networkRequiredToPlay": false,
+    "authorWitnessesIncluded": false
+  },
+  "roster": [
+    "warrior",
+    "thief",
+    "wizard",
+    "bard"
+  ],
+  "defaultHero": "warrior",
+  "tutorial": {
+    "level": 1,
+    "discoveries": 39
+  },
+  "qualification": {
+    "unitTests": 137,
+    "unitPassed": 137,
+    "levelsWon": 8,
+    "totalWitnessActions": 1209,
+    "refusedWitnessActions": 0,
+    "witnessDeaths": 0,
+    "ui": "Compiled HTML in Happy DOM with exact public canvas frames and timing",
+    "nativeBrowserSession": false,
+    "priorLayoutsCompared": 88
+  },
+  "sourceSha256": {
+    "src/core.ts": "3dd00d8e7b26ab32a3f0c0e4ab662b82aa14b51d4912ed43826548c082d439cd",
+    "src/levels.ts": "8d784f151af604f81d992c87d91471c6e619a91e9e416621ea3c71d2229a0401",
+    "src/level-info.ts": "222a6a159a7223cfe4e88c91e2fc76bb1dbfa422a0df276071b121c5b4d3d2c0",
+    "src/tutorial.ts": "246e9a1ea980888b406845a5292cfaf427add357cfd2f88bd553e2fa1654850d",
+    "src/browser.ts": "e6ce302a14cdb6f5073058ab6851e368eff3d37bc4ea785598bf2059055f32a8",
+    "index.template.html": "f4de240b66d195b4fee5a881fb9cdd9a0eb36cc7d4e51bc41846c4f16ecf352f",
+    "scripts/build-demo.mjs": "b1f9ca1aa475267b2a9386c13cda2b470a33a1b1ef8aa2b34e85441913de7a94",
+    "package.json": "e54675a35e2f8a1d5f0a649c2ded1181ac49752b1b1620077ed9499b12722496",
+    "package-lock.json": "78c9d4a482ec6b63c6aeab38b6d2b6ae77c700ee026a08cfd93eff592553805c",
+    "tsconfig.json": "5dd2083c554cb1b4095fe21191a260ad65d47ac82401250cadfcdf0a587e9c74"
+  },
+  "reportSha256": {
+    "validation/unit-tests.json": "6becb9a6914fae6613808716865a4efb0218d513998c0194dfa4212145144c68",
+    "validation/levels-report.json": "c7f199c76875ea90b89c0fcfd499eccb3d28f790d262a13e758b69f32a161f1c",
+    "validation/ui-dom-report.json": "d875d2df53dd0a8c0f2f376b1b607e9e6b96c5b8ca0ee49210e2a064695d6298",
+    "validation/design-report.json": "a1a3d8b1a72572e2a07f3271601d69a49389885762ad5857cced22d1e3816f4f"
+  },
+  "limits": [
+    "Author witnesses prove solvability, not an optimal or unique route.",
+    "Local counter-branches and geometric resource arguments are documented separately.",
+    "This manifest qualifies the standalone laboratory, not native SRA execution or Site publication."
+  ]
+}

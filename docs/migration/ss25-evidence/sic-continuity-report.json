@@ -1,0 +1,798 @@
+{
+  "success": true,
+  "exitCode": 0,
+  "command": "npm run test:sic-continuity",
+  "log": "sic-continuity.txt",
+  "cohorts": 11,
+  "games": 13,
+  "protectedLevels": 78,
+  "scope": "Executed series, final reconciliation and physical effects for the existing protected campaigns; does not qualify autonomous SS25 resolution",
+  "levels": [
+    {
+      "game": "SS06",
+      "level": 1,
+      "commands": 36,
+      "continued": 20,
+      "physical": "test push with merchant 8-8, test push with warrior 14-14, push a row to create support 14-14, use transfer with warrior 19-19, use transfer with merchant 33-33",
+      "series": 6,
+      "longest": 9
+    },
+    {
+      "game": "SS06",
+      "level": 2,
+      "commands": 35,
+      "continued": 26,
+      "physical": "prepare reflector with merchant 8-8, prepare reflector with warrior 23-23, clear a transfer ray with the linked gate 33-33, transfer both actors together 35-35",
+      "series": 4,
+      "longest": 8
+    },
+    {
+      "game": "SS06",
+      "level": 3,
+      "commands": 89,
+      "continued": 62,
+      "physical": "test reachable row 2-2, test reachable pressure mark 6-6, activate witnessed transport 28-28",
+      "series": 10,
+      "longest": 16
+    },
+    {
+      "game": "SS06",
+      "level": 4,
+      "commands": 37,
+      "continued": 18,
+      "physical": "test longer reachable chain 2-2, land transportable load on an established support 17-17, cross supports and push from behind the reflector 24-24",
+      "series": 8,
+      "longest": 8
+    },
+    {
+      "game": "SS06",
+      "level": 5,
+      "commands": 45,
+      "continued": 30,
+      "physical": "align reflector by piston 2-2, carry the same load during a prefix 16-16, press the shared circuit 25-25, transfer both actors jointly 26-26",
+      "series": 6,
+      "longest": 9
+    },
+    {
+      "game": "SS06",
+      "level": 6,
+      "commands": 33,
+      "continued": 23,
+      "physical": "position the reflector in series 2-2, release the first occupied control 3-3, release the second occupied control 5-5, reflect an actor through the open access 14-14, reflect an actor through the open access 27-27",
+      "series": 5,
+      "longest": 8
+    },
+    {
+      "game": "SS06",
+      "level": 7,
+      "commands": 63,
+      "continued": 51,
+      "physical": "push the known row in series 3-3, hold the gate with a load 10-10, release the independent actuator 14-14, move a load over established footing 4-4, walk over new footing 34-34, reposition the reflector after crossing 36-36",
+      "series": 8,
+      "longest": 16
+    },
+    {
+      "game": "SS06",
+      "level": 8,
+      "commands": 61,
+      "continued": 54,
+      "physical": "reflect both loads onto controls 18-18, push the ray blocker in series 24-24, cross the observed platforms 50-50, unload the alternating control 53-53, load it again 56-56",
+      "series": 7,
+      "longest": 16
+    },
+    {
+      "game": "GABA",
+      "level": 1,
+      "commands": 47,
+      "continued": 38,
+      "physical": "cargo transport 14-29, cargo transport 30-45",
+      "series": 4,
+      "longest": 16
+    },
+    {
+      "game": "GABA",
+      "level": 2,
+      "commands": 37,
+      "continued": 34,
+      "physical": "cargo transport 0-15, cargo transport 16-31, cargo transport 32-36",
+      "series": 3,
+      "longest": 16
+    },
+    {
+      "game": "GABA",
+      "level": 3,
+      "commands": 67,
+      "continued": 62,
+      "physical": "cargo transport 0-15, cargo transport 16-31, cargo transport 32-47, cargo transport 48-63, cargo transport 64-66",
+      "series": 5,
+      "longest": 16
+    },
+    {
+      "game": "GABA",
+      "level": 4,
+      "commands": 88,
+      "continued": 82,
+      "physical": "cargo transport 0-15, cargo transport 16-31, cargo transport 32-47, cargo transport 48-63, cargo transport 64-79, cargo transport 80-87",
+      "series": 6,
+      "longest": 16
+    },
+    {
+      "game": "GABA",
+      "level": 5,
+      "commands": 106,
+      "continued": 99,
+      "physical": "cargo transport 0-15, cargo transport 16-31, cargo transport 32-47, cargo transport 48-63, cargo transport 64-79, cargo transport 80-95, cargo transport 96-105",
+      "series": 7,
+      "longest": 16
+    },
+    {
+      "game": "GABA",
+      "level": 6,
+      "commands": 102,
+      "continued": 93,
+      "physical": "cargo transport 2-10, cargo transport 11-26, cargo transport 27-42, cargo transport 43-58, cargo transport 59-74, cargo transport 75-90, cargo transport 91-101",
+      "series": 7,
+      "longest": 16
+    },
+    {
+      "game": "SS07",
+      "level": 1,
+      "commands": 54,
+      "continued": 36,
+      "physical": "learn an available withdrawal 11-11, walk on prepared access 26-26, reflect a participant to the reachable side 40-40, occupy all destinations in the same settled state 54-54",
+      "series": 9,
+      "longest": 11
+    },
+    {
+      "game": "SS07",
+      "level": 2,
+      "commands": 59,
+      "continued": 47,
+      "physical": "pull the reflector 10-10, continue a pull in series 11-11, leave the reflector by turning 12-12, leave it by reflection 18-18, occupy the whole destination set 59-59",
+      "series": 11,
+      "longest": 15
+    },
+    {
+      "game": "SS07",
+      "level": 3,
+      "commands": 28,
+      "continued": 19,
+      "physical": "reflect to the opened passage 2-2, walk up through the held gate 6-6, pull a reflector onto the second control 12-12, leave the reflector pressed by transferring 13-13, occupy the whole destination set 28-28",
+      "series": 7,
+      "longest": 7
+    },
+    {
+      "game": "SS07",
+      "level": 4,
+      "commands": 73,
+      "continued": 54,
+      "physical": "reflect a movable load 21-21, build footing from a load 39-39, occupy the whole destination set 73-73",
+      "series": 11,
+      "longest": 14
+    },
+    {
+      "game": "SS07",
+      "level": 5,
+      "commands": 69,
+      "continued": 59,
+      "physical": "use the observed gate actuator 2-2, pull the reflector 2-2, leave the reflector in place 5-5, occupy the whole destination set 69-69",
+      "series": 6,
+      "longest": 16
+    },
+    {
+      "game": "SS07",
+      "level": 6,
+      "commands": 45,
+      "continued": 34,
+      "physical": "reflect the independent subject to a staging cell 4-4, reflect it onto the control and open the gate 10-10, cross the gate held by the subject 31-31, occupy the whole destination set 45-45",
+      "series": 8,
+      "longest": 9
+    },
+    {
+      "game": "SS07",
+      "level": 7,
+      "commands": 87,
+      "continued": 73,
+      "physical": "reflect a weight onto the first control 19-19, actuate the occupied piston and observe the resulting combat 39-39, replace the holding weight without closing its gates 43-43, occupy the whole destination set 87-87",
+      "series": 9,
+      "longest": 16
+    },
+    {
+      "game": "SS07",
+      "level": 8,
+      "commands": 134,
+      "continued": 115,
+      "physical": "cross while another actor holds the control 20-20, test the remote control and free the load 29-29, release the control after all supports are loaded 83-83, occupy both destinations 134-134",
+      "series": 10,
+      "longest": 16
+    },
+    {
+      "game": "SS04",
+      "level": 1,
+      "commands": 51,
+      "continued": 25,
+      "physical": "walk then swap 15-16, walk then swap 19-20",
+      "series": 4,
+      "longest": 16
+    },
+    {
+      "game": "SS04",
+      "level": 2,
+      "commands": 54,
+      "continued": 50,
+      "physical": "walk then swap 2-3, walk then swap 8-9, walk then swap 18-19, walk then swap 29-30, walk then swap 44-45",
+      "series": 4,
+      "longest": 16
+    },
+    {
+      "game": "SS04",
+      "level": 3,
+      "commands": 14,
+      "continued": 9,
+      "physical": "walk then swap 8-9",
+      "series": 1,
+      "longest": 10
+    },
+    {
+      "game": "SS04",
+      "level": 4,
+      "commands": 46,
+      "continued": 33,
+      "physical": "walk then swap 12-13, walk then swap 21-22, walk then swap 27-28, walk then swap 39-40",
+      "series": 3,
+      "longest": 16
+    },
+    {
+      "game": "SS04",
+      "level": 5,
+      "commands": 79,
+      "continued": 74,
+      "physical": "walk then swap 9-10, walk then swap 27-28, walk then swap 43-44, walk then swap 51-52, walk then swap 55-56, walk then swap 60-61, walk then swap 62-63, load the pressure control 74-74, walk then swap 73-74",
+      "series": 5,
+      "longest": 16
+    },
+    {
+      "game": "SS04",
+      "level": 6,
+      "commands": 35,
+      "continued": 32,
+      "physical": "walk then swap 3-4, load a circuit control 7-7, walk then swap 6-7, walk then swap 9-10, walk then swap 14-15, load a circuit control 24-24, walk then swap 23-24, walk then swap 31-32",
+      "series": 3,
+      "longest": 16
+    },
+    {
+      "game": "SS04",
+      "level": 7,
+      "commands": 82,
+      "continued": 76,
+      "physical": "walk then swap 2-3, walk then swap 8-9, press a weight into water 12-12, walk then swap 25-26, walk then swap 29-30, press a weight into water 34-34, walk then swap 34-35, walk then swap 37-38, walk then swap 60-61",
+      "series": 6,
+      "longest": 16
+    },
+    {
+      "game": "SS04",
+      "level": 8,
+      "commands": 81,
+      "continued": 75,
+      "physical": "exchange via two mirrors 7-7, walk then swap 6-7, walk then swap 14-15, walk then swap 26-27, exchange via two mirrors 35-35, walk then swap 39-40, walk then swap 48-49, walk then swap 55-56, exchange via two mirrors 57-57, walk then swap 68-69",
+      "series": 6,
+      "longest": 16
+    },
+    {
+      "game": "SS02",
+      "level": 1,
+      "commands": 40,
+      "continued": 20,
+      "physical": "stone 13-14, stone 27-28, stone 28-29",
+      "series": 6,
+      "longest": 7
+    },
+    {
+      "game": "SS02",
+      "level": 2,
+      "commands": 27,
+      "continued": 19,
+      "physical": "stone 3-4, stone 13-14, stone 17-18, stone 23-24",
+      "series": 8,
+      "longest": 6
+    },
+    {
+      "game": "SS02",
+      "level": 3,
+      "commands": 39,
+      "continued": 32,
+      "physical": "stone 3-4, stone 4-5, stone 21-22, stone 25-26",
+      "series": 7,
+      "longest": 13
+    },
+    {
+      "game": "SS02",
+      "level": 4,
+      "commands": 80,
+      "continued": 68,
+      "physical": "stone 10-11, stone 11-12, stone 17-18, stone 31-32, stone 44-45, stone 45-46, stone 46-47, stone 47-48, stone 51-52, stone 52-53, stone 53-54, stone 54-55, stone 69-70",
+      "series": 11,
+      "longest": 12
+    },
+    {
+      "game": "SS02",
+      "level": 5,
+      "commands": 126,
+      "continued": 111,
+      "physical": "stone 2-3, stone 6-7, stone 7-8, stone 11-12, stone 12-13, stone 13-14, stone 14-15, stone 15-16, stone 16-17, stone 17-18, stone 18-19, stone 26-27, stone 27-28, stone 28-29, stone 29-30, stone 33-34, stone 34-35, stone 35-36, stone 39-40, stone 69-70, stone 77-78, stone 78-79, stone 87-88, stone 88-89, stone 89-90, stone 90-91, stone 91-92, stone 108-109",
+      "series": 14,
+      "longest": 16
+    },
+    {
+      "game": "SS02",
+      "level": 6,
+      "commands": 96,
+      "continued": 78,
+      "physical": "stone 11-12, stone 12-13, stone 13-14, stone 34-35, stone 35-36, stone 58-59, stone 59-60, stone 63-64, stone 64-65, stone 88-89",
+      "series": 18,
+      "longest": 13
+    },
+    {
+      "game": "SS02",
+      "level": 7,
+      "commands": 54,
+      "continued": 43,
+      "physical": "stone 3-4, stone 17-18, stone 24-25, stone 36-37, stone 40-41, stone 41-42, stone 45-46",
+      "series": 10,
+      "longest": 8
+    },
+    {
+      "game": "SS02",
+      "level": 8,
+      "commands": 84,
+      "continued": 68,
+      "physical": "stone 4-5, stone 10-11, stone 36-37, stone 42-43, stone 43-44, stone 55-56, stone 61-62, stone 62-63",
+      "series": 16,
+      "longest": 16
+    },
+    {
+      "game": "SS03",
+      "level": 1,
+      "commands": 47,
+      "continued": 34,
+      "physical": "pull 7-8, pull 18-19, pull 19-20, pull 20-21, pull 30-31, pull 31-32",
+      "series": 3,
+      "longest": 16
+    },
+    {
+      "game": "SS03",
+      "level": 2,
+      "commands": 27,
+      "continued": 20,
+      "physical": "pull 8-9",
+      "series": 5,
+      "longest": 10
+    },
+    {
+      "game": "SS03",
+      "level": 3,
+      "commands": 63,
+      "continued": 58,
+      "physical": "pull 3-4, pull 9-10, pull 25-26, pull 49-50, pull 50-51",
+      "series": 5,
+      "longest": 16
+    },
+    {
+      "game": "SS03",
+      "level": 4,
+      "commands": 40,
+      "continued": 36,
+      "physical": "pull 2-3, pull 8-9, pull 9-10, pull 13-14, pull 14-15, pull 18-19, pull 19-20",
+      "series": 4,
+      "longest": 16
+    },
+    {
+      "game": "SS03",
+      "level": 5,
+      "commands": 38,
+      "continued": 35,
+      "physical": "pull 8-9, pull 12-13, pull 13-14, pull 26-27, pull 27-28, pull 28-29",
+      "series": 3,
+      "longest": 16
+    },
+    {
+      "game": "SS03",
+      "level": 6,
+      "commands": 56,
+      "continued": 51,
+      "physical": "pull 8-9, pull 17-18, pull 18-19, pull 28-29, pull 35-36",
+      "series": 5,
+      "longest": 16
+    },
+    {
+      "game": "SS03",
+      "level": 7,
+      "commands": 60,
+      "continued": 49,
+      "physical": "pull 11-12, pull 12-13, pull 13-14, pull 21-22, pull 28-29, pull 40-41, pull 41-42, pull 42-43",
+      "series": 7,
+      "longest": 16
+    },
+    {
+      "game": "SS03",
+      "level": 8,
+      "commands": 160,
+      "continued": 141,
+      "physical": "pull 1-2, pull 5-6, pull 30-31, pull 31-32, pull 32-33, pull 33-34, pull 34-35, pull 49-50, pull 55-56, pull 57-58, pull 83-84, pull 84-85, pull 85-86, pull 91-92, pull 92-93, pull 97-98, pull 98-99, pull 99-100, pull 100-101, pull 101-102, pull 107-108, pull 108-109, pull 114-115, pull 115-116, pull 116-117, pull 117-118, pull 118-119, pull 119-120, pull 125-126, pull 126-127, pull 139-140, pull 140-141, pull 141-142, pull 142-143, pull 143-144, pull 149-150, pull 150-151",
+      "series": 12,
+      "longest": 16
+    },
+    {
+      "game": "SS05",
+      "level": 1,
+      "commands": 36,
+      "continued": 25,
+      "physical": "carry the same weight 2-3",
+      "series": 5,
+      "longest": 13
+    },
+    {
+      "game": "SS05",
+      "level": 2,
+      "commands": 65,
+      "continued": 60,
+      "physical": "approach then carry 4-5, carry the same weight 5-6, approach then carry 7-8, carry the same weight 8-9, carry the same weight 9-10, carry the same weight 10-11, carry the same weight 11-12, carry the same weight 12-13, approach then carry 14-15, carry the same weight 15-16, carry the same weight 17-18, approach then carry 20-21, carry the same weight 21-22, approach then carry 36-37, carry the same weight 37-38, carry the same weight 38-39, carry the same weight 39-40, approach then carry 41-42, approach then carry 47-48, carry the same weight 49-50, carry the same weight 50-51, carry the same weight 51-52, approach then carry 53-54",
+      "series": 4,
+      "longest": 16
+    },
+    {
+      "game": "SS05",
+      "level": 3,
+      "commands": 51,
+      "continued": 47,
+      "physical": "compose the two moving objects 37-38",
+      "series": 4,
+      "longest": 16
+    },
+    {
+      "game": "SS05",
+      "level": 4,
+      "commands": 87,
+      "continued": 81,
+      "physical": "place the moving object on the control and open access 77-78",
+      "series": 6,
+      "longest": 16
+    },
+    {
+      "game": "SS05",
+      "level": 5,
+      "commands": 31,
+      "continued": 29,
+      "physical": "reflect the preserved movable weight 4-5, reflect to another route 13-14, reflect to another route 21-22",
+      "series": 2,
+      "longest": 16
+    },
+    {
+      "game": "SS05",
+      "level": 6,
+      "commands": 26,
+      "continued": 24,
+      "physical": "separate the weight from the controller through reflection 4-5, reflect through the activated gate 24-24",
+      "series": 2,
+      "longest": 16
+    },
+    {
+      "game": "SS05",
+      "level": 7,
+      "commands": 59,
+      "continued": 52,
+      "physical": "slide the same floating support 9-10, slide the same floating support 10-11, slide the same floating support 11-12, slide the same floating support 12-13, slide the same floating support 13-14, cross to another bank using the support 16-17, slide the same floating support 18-19, slide the same floating support 19-20, slide the same floating support 20-21, slide the same floating support 32-33, slide the same floating support 35-36, slide the same floating support 43-44, slide the same floating support 44-45, slide the same floating support 45-46, slide the same floating support 46-47, slide the same floating support 47-48, slide the same floating support 48-49, slide the same floating support 49-50, slide the same floating support 51-52, cross to another bank using the support 54-55, slide the same floating support 56-57",
+      "series": 6,
+      "longest": 16
+    },
+    {
+      "game": "SS05",
+      "level": 8,
+      "commands": 38,
+      "continued": 33,
+      "physical": "reflect onto a supported landing 21-21, reflect onto a supported landing 35-35",
+      "series": 4,
+      "longest": 16
+    },
+    {
+      "game": "SIGN",
+      "level": 1,
+      "commands": 15,
+      "continued": 4,
+      "physical": "marker walk 4-5, marker walk 7-10",
+      "series": 2,
+      "longest": 4
+    },
+    {
+      "game": "SIGN",
+      "level": 2,
+      "commands": 44,
+      "continued": 26,
+      "physical": "marker walk 0-4, marker walk 8-9, marker walk 11-12, marker walk 14-19, marker walk 21-23, marker walk 25-28, marker walk 30-37, marker walk 39-42",
+      "series": 8,
+      "longest": 8
+    },
+    {
+      "game": "SIGN",
+      "level": 3,
+      "commands": 56,
+      "continued": 28,
+      "physical": "marker walk 0-1, marker walk 3-4, marker walk 7-8, marker walk 10-13, marker walk 15-16, marker walk 18-19, marker walk 21-26, marker walk 28-29, marker walk 32-33, marker walk 35-42, marker walk 44-47, marker walk 50-53",
+      "series": 12,
+      "longest": 8
+    },
+    {
+      "game": "SIGN",
+      "level": 4,
+      "commands": 22,
+      "continued": 0,
+      "physical": "",
+      "series": 0,
+      "longest": 1
+    },
+    {
+      "game": "SIGN",
+      "level": 5,
+      "commands": 53,
+      "continued": 28,
+      "physical": "marker walk 0-4, marker walk 6-9, marker walk 11-12, marker walk 14-19, marker walk 21-23, marker walk 26-29, marker walk 31-38, marker walk 40-43",
+      "series": 8,
+      "longest": 8
+    },
+    {
+      "game": "SIGN",
+      "level": 6,
+      "commands": 81,
+      "continued": 31,
+      "physical": "marker walk 0-5, marker walk 7-8, marker walk 10-13, marker walk 15-16, marker walk 18-21, marker walk 24-25, marker walk 27-34, marker walk 52-61, marker walk 63-64",
+      "series": 9,
+      "longest": 10
+    },
+    {
+      "game": "SS01",
+      "level": 1,
+      "commands": 36,
+      "continued": 17,
+      "physical": "",
+      "series": 4,
+      "longest": 8
+    },
+    {
+      "game": "SS01",
+      "level": 2,
+      "commands": 32,
+      "continued": 22,
+      "physical": "mirror 7-8, position 9-12, mirror 21-24, position 25-29",
+      "series": 3,
+      "longest": 15
+    },
+    {
+      "game": "SS01",
+      "level": 3,
+      "commands": 42,
+      "continued": 20,
+      "physical": "crate 16-17, position 31-33, crate 36-37",
+      "series": 7,
+      "longest": 11
+    },
+    {
+      "game": "SS01",
+      "level": 4,
+      "commands": 79,
+      "continued": 58,
+      "physical": "mirror 19-21, position 22-25, crate 30-32, crate 41-42, crate 45-46, mirror 65-68, position 69-70, position 73-76",
+      "series": 7,
+      "longest": 16
+    },
+    {
+      "game": "SS01",
+      "level": 5,
+      "commands": 61,
+      "continued": 14,
+      "physical": "mirror 43-44, crate 55-56",
+      "series": 4,
+      "longest": 8
+    },
+    {
+      "game": "SS01",
+      "level": 6,
+      "commands": 116,
+      "continued": 59,
+      "physical": "crate 9-10, position 13-17, crate 38-39, position 42-46, position 58-61, position 70-75, position 77-80, mirror 84-88, mirror 97-101, position 102-103, position 105-112",
+      "series": 14,
+      "longest": 10
+    },
+    {
+      "game": "SS01",
+      "level": 7,
+      "commands": 37,
+      "continued": 23,
+      "physical": "position 19-20, crate 28-29",
+      "series": 4,
+      "longest": 8
+    },
+    {
+      "game": "SS01",
+      "level": 8,
+      "commands": 41,
+      "continued": 30,
+      "physical": "crate 5-9, position 23-29, mirror 35-37",
+      "series": 5,
+      "longest": 16
+    },
+    {
+      "game": "AR25",
+      "level": 1,
+      "commands": 17,
+      "continued": 12,
+      "physical": "",
+      "series": 2,
+      "longest": 10
+    },
+    {
+      "game": "HANO",
+      "level": 1,
+      "commands": 6,
+      "continued": 3,
+      "physical": "",
+      "series": 3,
+      "longest": 2
+    },
+    {
+      "game": "DC22",
+      "level": 1,
+      "commands": 22,
+      "continued": 7,
+      "physical": "",
+      "series": 7,
+      "longest": 2
+    },
+    {
+      "game": "WA30",
+      "level": 1,
+      "commands": 26,
+      "continued": 5,
+      "physical": "own carrier walk 7-8, own carrier walk 16-17, own carrier walk 17-18, own carrier walk 18-19, own carrier walk 23-24, same cargo translation 23-24",
+      "series": 3,
+      "longest": 4
+    },
+    {
+      "game": "WA30",
+      "level": 2,
+      "commands": 59,
+      "continued": 18,
+      "physical": "own carrier walk 16-17, same cargo translation 16-17, own carrier walk 19-20, same cargo translation 19-20, own carrier walk 20-21, same cargo translation 20-21, own carrier walk 21-22, same cargo translation 21-22, own carrier walk 25-26, own carrier walk 28-29, own carrier walk 29-30, own carrier walk 30-31, own carrier walk 31-32, own carrier walk 32-33, own carrier walk 36-37, same cargo translation 36-37, own carrier walk 41-42, same cargo translation 41-42, own carrier walk 42-43, same cargo translation 42-43",
+      "series": 9,
+      "longest": 6
+    },
+    {
+      "game": "WA30",
+      "level": 3,
+      "commands": 76,
+      "continued": 22,
+      "physical": "own carrier walk 6-7, same cargo translation 6-7, own carrier walk 7-8, same cargo translation 7-8, own carrier walk 13-14, own carrier walk 14-15, own carrier walk 15-16, own carrier walk 20-21, same cargo translation 20-21, own carrier walk 21-22, same cargo translation 21-22, own carrier walk 22-23, same cargo translation 22-23, own carrier walk 23-24, same cargo translation 23-24, own carrier walk 28-29, own carrier walk 29-30, own carrier walk 30-31, own carrier walk 31-32, own carrier walk 32-33, own carrier walk 33-34, own carrier walk 34-35, own carrier walk 40-41, same cargo translation 40-41, own carrier walk 41-42, same cargo translation 41-42, own carrier walk 42-43, same cargo translation 42-43, own carrier walk 43-44, same cargo translation 43-44",
+      "series": 6,
+      "longest": 9
+    },
+    {
+      "game": "WA30",
+      "level": 4,
+      "commands": 48,
+      "continued": 0,
+      "physical": "",
+      "series": 0,
+      "longest": 1
+    },
+    {
+      "game": "WA30",
+      "level": 5,
+      "commands": 113,
+      "continued": 59,
+      "physical": "own carrier walk 0-1, own carrier walk 1-2, own carrier walk 8-9, same cargo translation 8-9, own carrier walk 9-10, same cargo translation 9-10, own carrier walk 10-11, same cargo translation 10-11, own carrier walk 15-16, own carrier walk 16-17, own carrier walk 17-18, own carrier walk 21-22, same cargo translation 21-22, own carrier walk 24-25, same cargo translation 24-25, own carrier walk 25-26, same cargo translation 25-26, own carrier walk 26-27, same cargo translation 26-27, own carrier walk 27-28, same cargo translation 27-28, own carrier walk 32-33, own carrier walk 33-34, own carrier walk 37-38, same cargo translation 37-38, own carrier walk 38-39, same cargo translation 38-39, own carrier walk 39-40, same cargo translation 39-40, own carrier walk 40-41, same cargo translation 40-41, own carrier walk 43-44, same cargo translation 43-44, own carrier walk 44-45, same cargo translation 44-45, own carrier walk 48-49, own carrier walk 49-50, own carrier walk 52-53, own carrier walk 56-57, same cargo translation 56-57, own carrier walk 57-58, same cargo translation 57-58, own carrier walk 58-59, same cargo translation 58-59, own carrier walk 59-60, same cargo translation 59-60, own carrier walk 60-61, same cargo translation 60-61, own carrier walk 61-62, same cargo translation 61-62, own carrier walk 65-66, same cargo translation 65-66, own carrier walk 66-67, same cargo translation 66-67, own carrier walk 67-68, same cargo translation 67-68, own carrier walk 71-72, own carrier walk 72-73, own carrier walk 73-74, own carrier walk 78-79, same cargo translation 78-79, own carrier walk 79-80, same cargo translation 79-80, own carrier walk 80-81, same cargo translation 80-81, own carrier walk 81-82, same cargo translation 81-82, own carrier walk 82-83, same cargo translation 82-83, own carrier walk 83-84, same cargo translation 83-84, own carrier walk 84-85, same cargo translation 84-85, own carrier walk 85-86, same cargo translation 85-86, own carrier walk 86-87, same cargo translation 86-87, own carrier walk 102-103, same cargo translation 102-103, own carrier walk 103-104, same cargo translation 103-104, own carrier walk 104-105, same cargo translation 104-105, own carrier walk 105-106, same cargo translation 105-106, own carrier walk 106-107, same cargo translation 106-107, own carrier walk 107-108, same cargo translation 107-108, own carrier walk 108-109, same cargo translation 108-109, own carrier walk 109-110, same cargo translation 109-110, own carrier walk 110-111, same cargo translation 110-111",
+      "series": 15,
+      "longest": 10
+    },
+    {
+      "game": "WA30",
+      "level": 6,
+      "commands": 48,
+      "continued": 24,
+      "physical": "own carrier walk 0-1, own carrier walk 18-19, same cargo translation 18-19, own carrier walk 19-20, same cargo translation 19-20, own carrier walk 20-21, same cargo translation 20-21, own carrier walk 21-22, same cargo translation 21-22, own carrier walk 22-23, same cargo translation 22-23, own carrier walk 23-24, same cargo translation 23-24, own carrier walk 27-28, own carrier walk 28-29, own carrier walk 29-30, own carrier walk 30-31, own carrier walk 31-32, own carrier walk 32-33, own carrier walk 33-34, own carrier walk 37-38, same cargo translation 37-38, own carrier walk 38-39, same cargo translation 38-39, own carrier walk 39-40, same cargo translation 39-40, own carrier walk 40-41, same cargo translation 40-41, own carrier walk 41-42, same cargo translation 41-42, own carrier walk 42-43, same cargo translation 42-43, own carrier walk 43-44, same cargo translation 43-44, own carrier walk 44-45, same cargo translation 44-45, own carrier walk 45-46, same cargo translation 45-46",
+      "series": 4,
+      "longest": 10
+    },
+    {
+      "game": "WA30",
+      "level": 7,
+      "commands": 42,
+      "continued": 20,
+      "physical": "own carrier walk 11-12, own carrier walk 12-13, own carrier walk 16-17, same cargo translation 16-17, own carrier walk 17-18, same cargo translation 17-18, own carrier walk 18-19, same cargo translation 18-19, own carrier walk 19-20, same cargo translation 19-20, own carrier walk 20-21, same cargo translation 20-21, own carrier walk 24-25, own carrier walk 25-26, own carrier walk 26-27, own carrier walk 27-28, own carrier walk 28-29, own carrier walk 32-33, same cargo translation 32-33, own carrier walk 33-34, same cargo translation 33-34, own carrier walk 34-35, same cargo translation 34-35, own carrier walk 35-36, same cargo translation 35-36, own carrier walk 36-37, same cargo translation 36-37, own carrier walk 37-38, same cargo translation 37-38, own carrier walk 38-39, same cargo translation 38-39, own carrier walk 39-40, same cargo translation 39-40",
+      "series": 4,
+      "longest": 9
+    }
+  ],
+  "inputs": [
+    {
+      "file": "continuity/actor-composition.jsonl.gz",
+      "uncompressedSha256": "7e34ae07e173b21e64899ec2dc57548ec0439c5dfe5248a8a957ee709add65b0",
+      "compressedSha256": "84ed67649bee057b2209252bc7ac42b6c31e66532c951eca8f14afc66125fa98",
+      "uncompressedBytes": 680767,
+      "bytes": 16825
+    },
+    {
+      "file": "continuity/cargo-transport.jsonl.gz",
+      "uncompressedSha256": "2844208881030c16df854affabd4afeeeb007fcac334ec35dd97986893d4f00f",
+      "compressedSha256": "260cb69692b81b03c060123076ae7fda81fcc76a0f8dc7e1bcb521614097d60b",
+      "uncompressedBytes": 325785,
+      "bytes": 20492
+    },
+    {
+      "file": "continuity/destination-set.jsonl.gz",
+      "uncompressedSha256": "b3cc6616e66c633f0a01d70d83e09ef055f7d98e5fe795ba0b952796214ce734",
+      "compressedSha256": "8c894aab1bdefa7d8b40562183ac15ad4dfad82b6836eb89a7cb1f76b4cf8cfb",
+      "uncompressedBytes": 944090,
+      "bytes": 21467
+    },
+    {
+      "file": "continuity/l-axe-violet.jsonl.gz",
+      "uncompressedSha256": "715424cd5681167e7d2a29523c2982a4e28fb3c8a00da8e3ea74a7b47b2ea999",
+      "compressedSha256": "f48d1217e3bffce4b949e40471ee03dad732e2150494ff7d19e07d16fe898dc2",
+      "uncompressedBytes": 272018,
+      "bytes": 13963
+    },
+    {
+      "file": "continuity/la-force-rouge.jsonl.gz",
+      "uncompressedSha256": "0ed81e58292f93dc7a5781126c522898066dfb84db3f2465734dd4aa57100829",
+      "compressedSha256": "ff5b97ef087a6d708c785c145c8625f6eaca9f316eef593419a00bb4e354d59b",
+      "uncompressedBytes": 322147,
+      "bytes": 14575
+    },
+    {
+      "file": "continuity/la-ruse-verte.jsonl.gz",
+      "uncompressedSha256": "12bdaaef856e71e4d5f5d88f4ac03000c897a8d859e716527ee1c41a57c96b29",
+      "compressedSha256": "849816fa2415b0532aba1f115f665df63af72d8ade03e4890d3f3d9a622fb652",
+      "uncompressedBytes": 290532,
+      "bytes": 12960
+    },
+    {
+      "file": "continuity/local-carry.jsonl.gz",
+      "uncompressedSha256": "91232a4847753f6902f123e7ca43a1a51cc7a12179bb413abd72eb9cd5d789ad",
+      "compressedSha256": "5b53818ee369b039b55406dc77f6653c043dbe24bf7e1625b22a39316cb1d74a",
+      "uncompressedBytes": 230925,
+      "bytes": 10593
+    },
+    {
+      "file": "continuity/marked-field.jsonl.gz",
+      "uncompressedSha256": "4b61a9b2c92cbd5fcf72bef27b00a2c574c38dd3730e8ebee6655ffd1feb3583",
+      "compressedSha256": "af31d66d81ea163feb3b257ba55aae6cfb2bf7ddf2a531e4d6f0494016d604b5",
+      "uncompressedBytes": 197559,
+      "bytes": 13535
+    },
+    {
+      "file": "continuity/mirror-isles.jsonl.gz",
+      "uncompressedSha256": "032f85061de933200740920a4302e33b46e2df8312367336bb5bac91028abfa1",
+      "compressedSha256": "f25f498ed7305266ff99e12f1b8974e6dfe87446690e96b44b7b32d643d03040",
+      "uncompressedBytes": 338125,
+      "bytes": 19883
+    },
+    {
+      "file": "continuity/native-sources.jsonl.gz",
+      "uncompressedSha256": "fdb90604ea83c9677f2e3d8acd7b45131dda80eeee9118cddf6b9774b2eee5a7",
+      "compressedSha256": "499bf182f5dedbb529503f8ade62f5f9a92fcd7f3ff755b9d55e3d9475a14847",
+      "uncompressedBytes": 35152,
+      "bytes": 3151
+    },
+    {
+      "file": "continuity/oriented-delivery.jsonl.gz",
+      "uncompressedSha256": "b10a999f490e7359735a40ea92ace55b04c7e9ceeae1436e07e3019ae3fe2c2d",
+      "compressedSha256": "be16f58429d9560ba7e03a41cb8490a5c9c515a1d9a53ee40838b5eacbaa795e",
+      "uncompressedBytes": 383560,
+      "bytes": 25485
+    }
+  ],
+  "sourceSha256": {
+    "scripts/verify-sic-continuity.mjs": "ac16f385f4ca3976872d8ee8e89ad28bc6f99e07b6d10c548255917199afd8b2",
+    "scripts/compare-source100.mjs": "b41529f908e5bbd6ce93fbf4f0cd9d3021caafcb3cf2e34454f8b2f7021cdc58",
+    "src/runtime/native-game-dispatcher.ts": "5fc014ebabb395f7c78e40b17a476301d56a188991a57134dec19740643750dd"
+  }
+}

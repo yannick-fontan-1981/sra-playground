@@ -1,0 +1,626 @@
+TAP version 13
+# Subtest: Custom 4 lists SS01 through SS25 and preserves all four legacy collections
+ok 1 - Custom 4 lists SS01 through SS25 and preserves all four legacy collections
+  ---
+  duration_ms: 8.434088
+  type: 'test'
+  ...
+# Subtest: SS01 loads natively without invoking the Python loader
+ok 2 - SS01 loads natively without invoking the Python loader
+  ---
+  duration_ms: 9.161573
+  type: 'test'
+  ...
+# Subtest: eight levels retain pixel/action/animation parity and finish WIN through the production router
+ok 3 - eight levels retain pixel/action/animation parity and finish WIN through the production router
+  ---
+  duration_ms: 355.805017
+  type: 'test'
+  ...
+# Subtest: Undo, reset, restart, direct level navigation and manual merchant switch match v5
+ok 4 - Undo, reset, restart, direct level navigation and manual merchant switch match v5
+  ---
+  duration_ms: 4.202297
+  type: 'test'
+  ...
+# Subtest: native observations expose pixels and public metadata, never maps or solutions
+ok 5 - native observations expose pixels and public metadata, never maps or solutions
+  ---
+  duration_ms: 5.988025
+  type: 'test'
+  ...
+# Subtest: legacy games reuse the legacy backend after switching from and to SS01
+ok 6 - legacy games reuse the legacy backend after switching from and to SS01
+  ---
+  duration_ms: 1.203021
+  type: 'test'
+  ...
+# Subtest: failed loads do not leave an old game active and can be retried
+ok 7 - failed loads do not leave an old game active and can be retried
+  ---
+  duration_ms: 1.788362
+  type: 'test'
+  ...
+# Subtest: invalid levels and malformed coordinate actions are rejected without changing state
+ok 8 - invalid levels and malformed coordinate actions are rejected without changing state
+  ---
+  duration_ms: 0.944091
+  type: 'test'
+  ...
+# Subtest: SS02 matches the laboratory through all 536 directions and eight levels without Python
+ok 9 - SS02 matches the laboratory through all 536 directions and eight levels without Python
+  ---
+  duration_ms: 332.307711
+  type: 'test'
+  ...
+# Subtest: SS02 rejects Space and Merchant selection, and matches Undo, Reset, Restart and level selection
+ok 10 - SS02 rejects Space and Merchant selection, and matches Undo, Reset, Restart and level selection
+  ---
+  duration_ms: 2.349076
+  type: 'test'
+  ...
+# Subtest: all native and legacy sessions switch with Python loaded only once after an initial failure
+ok 11 - all native and legacy sessions switch with Python loaded only once after an initial failure
+  ---
+  duration_ms: 166.61258
+  type: 'test'
+  ...
+# Subtest: SS03 replays the eight lab witnesses through the dispatcher without Python
+ok 12 - SS03 replays the eight lab witnesses through the dispatcher without Python
+  ---
+  duration_ms: 331.343965
+  type: 'test'
+  ...
+# Subtest: SS03 can finish at level 1 after solving the other seven and supports navigation and Undo
+ok 13 - SS03 can finish at level 1 after solving the other seven and supports navigation and Undo
+  ---
+  duration_ms: 239.716748
+  type: 'test'
+  ...
+# Subtest: SS03 preserves GAME_OVER, blocks directional changes and recovers via Undo and Reset
+ok 14 - SS03 preserves GAME_OVER, blocks directional changes and recovers via Undo and Reset
+  ---
+  duration_ms: 3.373359
+  type: 'test'
+  ...
+# Subtest: SS04 matches all eight witnesses through the native dispatcher with public observations only
+ok 15 - SS04 matches all eight witnesses through the native dispatcher with public observations only
+  ---
+  duration_ms: 313.463049
+  type: 'test'
+  ...
+# Subtest: SS04 handles direct navigation, invalid loads, Undo across a transition and an out-of-order victory
+ok 16 - SS04 handles direct navigation, invalid loads, Undo across a transition and an out-of-order victory
+  ---
+  duration_ms: 169.011193
+  type: 'test'
+  ...
+# Subtest: SS04 preserves a reachable monster defeat, blocks directions, and recovers through Undo and Reset
+ok 17 - SS04 preserves a reachable monster defeat, blocks directions, and recovers through Undo and Reset
+  ---
+  duration_ms: 2.173663
+  type: 'test'
+  ...
+# Subtest: SS05 matches the 395 actions and 1222 frames of the lab witnesses through the native dispatcher
+ok 18 - SS05 matches the 395 actions and 1222 frames of the lab witnesses through the native dispatcher
+  ---
+  duration_ms: 434.230124
+  type: 'test'
+  ...
+# Subtest: SS05 validates direct loads and selections before replacing the current session
+ok 19 - SS05 validates direct loads and selections before replacing the current session
+  ---
+  duration_ms: 2.093923
+  type: 'test'
+  ...
+# Subtest: SS05 supports out-of-order victory and ignores directions and reflection after WIN
+ok 20 - SS05 supports out-of-order victory and ignores directions and reflection after WIN
+  ---
+  duration_ms: 219.030658
+  type: 'test'
+  ...
+# Subtest: SS05 level 3 preserves GAME_OVER and restores the board through Undo and Reset
+ok 21 - SS05 level 3 preserves GAME_OVER and restores the board through Undo and Reset
+  ---
+  duration_ms: 20.008524
+  type: 'test'
+  ...
+# Subtest: SS05 level 6 preserves GAME_OVER and restores the board through Undo and Reset
+ok 22 - SS05 level 6 preserves GAME_OVER and restores the board through Undo and Reset
+  ---
+  duration_ms: 5.8318
+  type: 'test'
+  ...
+# Subtest: SS06 preserves public observations, timing and all eight tutorial discoveries through the native dispatcher
+ok 23 - SS06 preserves public observations, timing and all eight tutorial discoveries through the native dispatcher
+  ---
+  duration_ms: 404.983909
+  type: 'test'
+  ...
+# Subtest: SS06 validates loads and ACTION6 coordinates and preserves same-hero selection as a no-op
+ok 24 - SS06 validates loads and ACTION6 coordinates and preserves same-hero selection as a no-op
+  ---
+  duration_ms: 7.70506
+  type: 'test'
+  ...
+# Subtest: SS06 supports out-of-order progress and can undo the duo to solo transition
+ok 25 - SS06 supports out-of-order progress and can undo the duo to solo transition
+  ---
+  duration_ms: 292.872973
+  type: 'test'
+  ...
+# Subtest: SS06 level 6 restores the board with Undo after Attaque mortelle de monstre
+ok 26 - SS06 level 6 restores the board with Undo after Attaque mortelle de monstre
+  ---
+  duration_ms: 8.661349
+  type: 'test'
+  ...
+# Subtest: SS06 level 6 restores the board with Undo after Chute par reflet
+ok 27 - SS06 level 6 restores the board with Undo after Chute par reflet
+  ---
+  duration_ms: 5.949837
+  type: 'test'
+  ...
+# Subtest: SS06 level 8 restores the board with Undo after Retrait de la première plateforme violette sous le Guerrier après blocage du circuit vert
+ok 28 - SS06 level 8 restores the board with Undo after Retrait de la première plateforme violette sous le Guerrier après blocage du circuit vert
+  ---
+  duration_ms: 32.603714
+  type: 'test'
+  ...
+# Subtest: SS07 replays 593 actions through the adapter and the router with all nine tutorial discoveries
+ok 29 - SS07 replays 593 actions through the adapter and the router with all nine tutorial discoveries
+  ---
+  duration_ms: 1026.299761
+  type: 'test'
+  ...
+# Subtest: SS07 level 7 reflects only the near crate when the Merchant stands farther from the mirror
+ok 30 - SS07 level 7 reflects only the near crate when the Merchant stands farther from the mirror
+  ---
+  duration_ms: 14.01529
+  type: 'test'
+  ...
+# Subtest: SS07 validates ACTION6 and bad loads and keeps progress across out-of-order rooms
+ok 31 - SS07 validates ACTION6 and bad loads and keeps progress across out-of-order rooms
+  ---
+  duration_ms: 103.545205
+  type: 'test'
+  ...
+# Subtest: SS07 level 6 presents the reachable defeat and restores the entire action with Undo
+ok 32 - SS07 level 6 presents the reachable defeat and restores the entire action with Undo
+  ---
+  duration_ms: 8.538435
+  type: 'test'
+  ...
+# Subtest: SS07 level 7 presents the reachable defeat and restores the entire action with Undo
+ok 33 - SS07 level 7 presents the reachable defeat and restores the entire action with Undo
+  ---
+  duration_ms: 35.53694
+  type: 'test'
+  ...
+# Subtest: SS07 level 8 presents the reachable defeat and restores the entire action with Undo
+ok 34 - SS07 level 8 presents the reachable defeat and restores the entire action with Undo
+  ---
+  duration_ms: 22.027643
+  type: 'test'
+  ...
+# Subtest: SS08 replays 324 actions through the adapter and router with all ten level 4 discoveries
+ok 35 - SS08 replays 324 actions through the adapter and router with all ten level 4 discoveries
+  ---
+  duration_ms: 614.93158
+  type: 'test'
+  ...
+# Subtest: SS08 plays the returning Wizard loop in both directions and repeats without adding Undo entries
+ok 36 - SS08 plays the returning Wizard loop in both directions and repeats without adding Undo entries
+  ---
+  duration_ms: 17.621559
+  type: 'test'
+  ...
+# Subtest: SS08 refuses unsupported water immediately without marking it and validates ACTION6 and level loads
+ok 37 - SS08 refuses unsupported water immediately without marking it and validates ACTION6 and level loads
+  ---
+  duration_ms: 20.077607
+  type: 'test'
+  ...
+# Subtest: SS08 level 4 presents its reachable defeat and restores the board with Undo
+ok 38 - SS08 level 4 presents its reachable defeat and restores the board with Undo
+  ---
+  duration_ms: 39.365735
+  type: 'test'
+  ...
+# Subtest: SS08 level 7 presents its reachable defeat and restores the board with Undo
+ok 39 - SS08 level 7 presents its reachable defeat and restores the board with Undo
+  ---
+  duration_ms: 7.294531
+  type: 'test'
+  ...
+# Subtest: SS09 replays the eight unmodified witnesses through adapter and router and satisfies all twelve lessons
+ok 40 - SS09 replays the eight unmodified witnesses through adapter and router and satisfies all twelve lessons
+  ---
+  duration_ms: 975.297662
+  type: 'test'
+  ...
+# Subtest: SS09 validates loads and ACTION6 and can replay a coordinate-bearing selection
+ok 41 - SS09 validates loads and ACTION6 and can replay a coordinate-bearing selection
+  ---
+  duration_ms: 7.005178
+  type: 'test'
+  ...
+# Subtest: SS09 level 5 replays the four red-white frames of one blocked mirror and leaves Undo unchanged
+ok 42 - SS09 level 5 replays the four red-white frames of one blocked mirror and leaves Undo unchanged
+  ---
+  duration_ms: 42.601321
+  type: 'test'
+  ...
+# Subtest: SS09 chooses the first unfinished level, restores a transition, and restarts at level 1
+ok 43 - SS09 chooses the first unfinished level, restores a transition, and restarts at level 1
+  ---
+  duration_ms: 52.495478
+  type: 'test'
+  ...
+# Subtest: SS09 defeat 1 at level 8 ends after the last frame and Undo restores the state
+ok 44 - SS09 defeat 1 at level 8 ends after the last frame and Undo restores the state
+  ---
+  duration_ms: 6.315559
+  type: 'test'
+  ...
+# Subtest: SS09 defeat 2 at level 8 ends after the last frame and Undo restores the state
+ok 45 - SS09 defeat 2 at level 8 ends after the last frame and Undo restores the state
+  ---
+  duration_ms: 28.966973
+  type: 'test'
+  ...
+# Subtest: SS10 matches the laboratory in all eight rooms and records twelve tutorial discoveries
+ok 46 - SS10 matches the laboratory in all eight rooms and records twelve tutorial discoveries
+  ---
+  duration_ms: 1095.937796
+  type: 'test'
+  ...
+# Subtest: SS10 level 5 flashes only the backing of two blocking mirrors and replays the warning without new Undo
+ok 47 - SS10 level 5 flashes only the backing of two blocking mirrors and replays the warning without new Undo
+  ---
+  duration_ms: 16.622808
+  type: 'test'
+  ...
+# Subtest: SS10 validates ACTION6, preserves the adapter on bad loads and restores out-of-order completion
+ok 48 - SS10 validates ACTION6, preserves the adapter on bad loads and restores out-of-order completion
+  ---
+  duration_ms: 162.482046
+  type: 'test'
+  ...
+# Subtest: SS10 level 1 retains its reachable defeat and Undo returns to the last safe state
+ok 49 - SS10 level 1 retains its reachable defeat and Undo returns to the last safe state
+  ---
+  duration_ms: 21.733722
+  type: 'test'
+  ...
+# Subtest: SS11 preserves eight ordered levels, public observations, animations and twelve tutorial discoveries
+ok 50 - SS11 preserves eight ordered levels, public observations, animations and twelve tutorial discoveries
+  ---
+  duration_ms: 967.82682
+  type: 'test'
+  ...
+# Subtest: SS11 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 51 - SS11 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 4.716071
+  type: 'test'
+  ...
+# Subtest: SS12 preserves eight ordered levels, public observations, animations and thirteen tutorial discoveries
+ok 52 - SS12 preserves eight ordered levels, public observations, animations and thirteen tutorial discoveries
+  ---
+  duration_ms: 1009.958083
+  type: 'test'
+  ...
+# Subtest: SS12 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 53 - SS12 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 5.208061
+  type: 'test'
+  ...
+# Subtest: SS13 preserves eight ordered levels, public observations, animations and fourteen tutorial discoveries
+ok 54 - SS13 preserves eight ordered levels, public observations, animations and fourteen tutorial discoveries
+  ---
+  duration_ms: 1465.337942
+  type: 'test'
+  ...
+# Subtest: SS13 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 55 - SS13 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 5.035701
+  type: 'test'
+  ...
+# Subtest: SS14 preserves eight ordered levels, public observations, animations and seventeen tutorial discoveries
+ok 56 - SS14 preserves eight ordered levels, public observations, animations and seventeen tutorial discoveries
+  ---
+  duration_ms: 1829.011819
+  type: 'test'
+  ...
+# Subtest: SS14 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 57 - SS14 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 7.019077
+  type: 'test'
+  ...
+# Subtest: SS14 preserves the distinct quay button and both press states in level 6 and the exposed level 8 button
+ok 58 - SS14 preserves the distinct quay button and both press states in level 6 and the exposed level 8 button
+  ---
+  duration_ms: 11.652854
+  type: 'test'
+  ...
+# Subtest: SS15 preserves eight ordered levels, public observations, animations and twenty tutorial discoveries
+ok 59 - SS15 preserves eight ordered levels, public observations, animations and twenty tutorial discoveries
+  ---
+  duration_ms: 1520.811471
+  type: 'test'
+  ...
+# Subtest: SS15 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 60 - SS15 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 6.593708
+  type: 'test'
+  ...
+# Subtest: SS15 keeps each press distinct from buttons and the workshop final circuit uses three posts
+ok 61 - SS15 keeps each press distinct from buttons and the workshop final circuit uses three posts
+  ---
+  duration_ms: 13.230841
+  type: 'test'
+  ...
+# Subtest: SS16 preserves all three heroes across eight levels, animations and twenty tutorial discoveries
+ok 62 - SS16 preserves all three heroes across eight levels, animations and twenty tutorial discoveries
+  ---
+  duration_ms: 2883.225719
+  type: 'test'
+  ...
+# Subtest: SS16 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 63 - SS16 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 11.672555
+  type: 'test'
+  ...
+# Subtest: SS16 level 8 flashes only the refused mirror and leaves the undo history and world unchanged
+ok 64 - SS16 level 8 flashes only the refused mirror and leaves the undo history and world unchanged
+  ---
+  duration_ms: 4.719577
+  type: 'test'
+  ...
+# Subtest: SS16 keeps the reinforced level 5, three goals and manual out-of-order progress
+ok 65 - SS16 keeps the reinforced level 5, three goals and manual out-of-order progress
+  ---
+  duration_ms: 369.653894
+  type: 'test'
+  ...
+# Subtest: SS17 preserves all three heroes across eight levels, animations and twenty-three tutorial discoveries
+ok 66 - SS17 preserves all three heroes across eight levels, animations and twenty-three tutorial discoveries
+  ---
+  duration_ms: 3364.053323
+  type: 'test'
+  ...
+# Subtest: SS17 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 67 - SS17 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 10.632979
+  type: 'test'
+  ...
+# Subtest: SS17 preserves the reachable two-mirror warning without an Undo entry
+ok 68 - SS17 preserves the reachable two-mirror warning without an Undo entry
+  ---
+  duration_ms: 10.161558
+  type: 'test'
+  ...
+# Subtest: SS17 keeps the physical locks, rejects the two shortcuts and accepts five archived variants
+ok 69 - SS17 keeps the physical locks, rejects the two shortcuts and accepts five archived variants
+  ---
+  duration_ms: 1359.349621
+  type: 'test'
+  ...
+# Subtest: SS18 preserves all three heroes across eight levels, animations and twenty-seven tutorial discoveries
+ok 70 - SS18 preserves all three heroes across eight levels, animations and twenty-seven tutorial discoveries
+  ---
+  duration_ms: 1522.878012
+  type: 'test'
+  ...
+# Subtest: SS18 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 71 - SS18 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 10.340812
+  type: 'test'
+  ...
+# Subtest: SS18 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher
+ok 72 - SS18 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher
+  ---
+  duration_ms: 69.630187
+  type: 'test'
+  ...
+# Subtest: SS18 retains the four-weight material lock and the archived alternatives and counterexamples
+ok 73 - SS18 retains the four-weight material lock and the archived alternatives and counterexamples
+  ---
+  duration_ms: 780.419886
+  type: 'test'
+  ...
+# Subtest: SS19 preserves all three heroes across eight levels, animations and thirty-one tutorial discoveries
+ok 74 - SS19 preserves all three heroes across eight levels, animations and thirty-one tutorial discoveries
+  ---
+  duration_ms: 2067.239324
+  type: 'test'
+  ...
+# Subtest: SS19 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 75 - SS19 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 11.441075
+  type: 'test'
+  ...
+# Subtest: SS19 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher
+ok 76 - SS19 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher
+  ---
+  duration_ms: 43.472258
+  type: 'test'
+  ...
+# Subtest: SS19 preserves the final physical resources and six valid alternatives
+ok 77 - SS19 preserves the final physical resources and six valid alternatives
+  ---
+  duration_ms: 594.105625
+  type: 'test'
+  ...
+# Subtest: SS20 preserves all three heroes across eight levels, animations and thirty tutorial discoveries
+ok 78 - SS20 preserves all three heroes across eight levels, animations and thirty tutorial discoveries
+  ---
+  duration_ms: 2604.231752
+  type: 'test'
+  ...
+# Subtest: SS20 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 79 - SS20 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 11.003942
+  type: 'test'
+  ...
+# Subtest: SS20 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher
+ok 80 - SS20 retains warning pixels, repeat timing, Undo and defeat across the native dispatcher
+  ---
+  duration_ms: 133.199634
+  type: 'test'
+  ...
+# Subtest: SS20 keeps the documented winning alternatives legal through the native dispatcher
+ok 81 - SS20 keeps the documented winning alternatives legal through the native dispatcher
+  ---
+  duration_ms: 279.518008
+  type: 'test'
+  ...
+# Subtest: SS21 preserves all four heroes across eight levels, animations and thirty-one tutorial discoveries
+ok 82 - SS21 preserves all four heroes across eight levels, animations and thirty-one tutorial discoveries
+  ---
+  duration_ms: 2535.475919
+  type: 'test'
+  ...
+# Subtest: SS21 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 83 - SS21 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 15.63544
+  type: 'test'
+  ...
+# Subtest: SS21 selects all four roles from public pixels and restores every selection with Undo
+ok 84 - SS21 selects all four roles from public pixels and restores every selection with Undo
+  ---
+  duration_ms: 4.298972
+  type: 'test'
+  ...
+# Subtest: SS21 keeps the returning Wizard ray, repeated feedback and whole-turn Undo in the native dispatcher
+ok 85 - SS21 keeps the returning Wizard ray, repeated feedback and whole-turn Undo in the native dispatcher
+  ---
+  duration_ms: 11.426193
+  type: 'test'
+  ...
+# Subtest: SS21 native help exposes the same 31 discoveries and describes the fixed-support quartet
+ok 86 - SS21 native help exposes the same 31 discoveries and describes the fixed-support quartet
+  ---
+  duration_ms: 0.630059
+  type: 'test'
+  ...
+# Subtest: SS22 preserves all four heroes across eight levels, animations and thirty-three tutorial discoveries
+ok 87 - SS22 preserves all four heroes across eight levels, animations and thirty-three tutorial discoveries
+  ---
+  duration_ms: 2651.277587
+  type: 'test'
+  ...
+# {"commandsByLevel":[321,185,106,203,198,136,149,116],"actions":1414,"selections":173,"frames":3932,"discoveries":33}
+# Subtest: SS22 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 88 - SS22 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 8.079885
+  type: 'test'
+  ...
+# Subtest: SS22 selects all four roles from public pixels and restores every selection with Undo
+ok 89 - SS22 selects all four roles from public pixels and restores every selection with Undo
+  ---
+  duration_ms: 2.433323
+  type: 'test'
+  ...
+# Subtest: SS22 native help exposes the same 33 discoveries and describes the quartet with mobile supports
+ok 90 - SS22 native help exposes the same 33 discoveries and describes the quartet with mobile supports
+  ---
+  duration_ms: 0.53799
+  type: 'test'
+  ...
+# Subtest: SS23 preserves all four heroes across eight levels, animations and thirty-six tutorial discoveries
+ok 91 - SS23 preserves all four heroes across eight levels, animations and thirty-six tutorial discoveries
+  ---
+  duration_ms: 2425.227331
+  type: 'test'
+  ...
+# {"commandsByLevel":[221,91,43,132,50,126,172,112],"actions":947,"selections":173,"frames":2537,"discoveries":36}
+# Subtest: SS23 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 92 - SS23 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 11.585232
+  type: 'test'
+  ...
+# Subtest: SS23 selects all four roles from public pixels and restores every selection with Undo
+ok 93 - SS23 selects all four roles from public pixels and restores every selection with Undo
+  ---
+  duration_ms: 5.342743
+  type: 'test'
+  ...
+# Subtest: SS23 native help exposes the same 36 discoveries and describes the quartet with mobile supports
+ok 94 - SS23 native help exposes the same 36 discoveries and describes the quartet with mobile supports
+  ---
+  duration_ms: 0.92333
+  type: 'test'
+  ...
+# Subtest: SS24 preserves all four heroes across eight levels, animations and thirty-seven tutorial discoveries
+ok 95 - SS24 preserves all four heroes across eight levels, animations and thirty-seven tutorial discoveries
+  ---
+  duration_ms: 2363.904778
+  type: 'test'
+  ...
+# {"commandsByLevel":[212,154,118,85,127,122,92,141],"actions":1051,"selections":176,"frames":2875,"discoveries":37}
+# Subtest: SS24 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 96 - SS24 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 14.826532
+  type: 'test'
+  ...
+# Subtest: SS24 selects all four roles from public pixels and restores every selection with Undo
+ok 97 - SS24 selects all four roles from public pixels and restores every selection with Undo
+  ---
+  duration_ms: 8.049609
+  type: 'test'
+  ...
+# Subtest: SS24 native help exposes the same 37 discoveries and describes the quartet with mobile supports
+ok 98 - SS24 native help exposes the same 37 discoveries and describes the quartet with mobile supports
+  ---
+  duration_ms: 1.386888
+  type: 'test'
+  ...
+# Subtest: SS25 preserves all four heroes across eight levels, animations and thirty-nine tutorial discoveries
+ok 99 - SS25 preserves all four heroes across eight levels, animations and thirty-nine tutorial discoveries
+  ---
+  duration_ms: 2316.988864
+  type: 'test'
+  ...
+# {"commandsByLevel":[216,123,212,159,124,151,134,90],"actions":1209,"selections":201,"frames":3296,"discoveries":39}
+# Subtest: SS25 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+ok 100 - SS25 rejects invalid loads and actions and preserves selection, Undo, Reset and Restart
+  ---
+  duration_ms: 14.517356
+  type: 'test'
+  ...
+# Subtest: SS25 selects all four roles from public pixels and restores every selection with Undo
+ok 101 - SS25 selects all four roles from public pixels and restores every selection with Undo
+  ---
+  duration_ms: 6.138111
+  type: 'test'
+  ...
+# Subtest: SS25 native help exposes the same 39 discoveries and describes the quartet with mobile supports
+ok 102 - SS25 native help exposes the same 39 discoveries and describes the quartet with mobile supports
+  ---
+  duration_ms: 1.392937
+  type: 'test'
+  ...
+1..102
+# tests 102
+# suites 0
+# pass 102
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 31648.856019

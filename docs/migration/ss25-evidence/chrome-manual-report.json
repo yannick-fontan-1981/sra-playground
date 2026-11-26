@@ -1,0 +1,156 @@
+{
+  "game": "SS25",
+  "success": true,
+  "environment": "Chrome cloud browser, managed native SRA Playground preview",
+  "startUrl": "http://127.0.0.1:4173/?game=SS25&level=1",
+  "finalUrl": "http://127.0.0.1:4173/?game=SS25&level=8",
+  "mode": "Manual",
+  "startLevel": 1,
+  "singleCampaignSession": true,
+  "mechanism": "Documented CUA Playwright locator key presses on #game-canvas, with public aria-busy=false waits; no injected actions or private runtime state",
+  "keys": {
+    "U": "ArrowUp",
+    "D": "ArrowDown",
+    "L": "ArrowLeft",
+    "R": "ArrowRight",
+    "C": "Tab",
+    "X": "x"
+  },
+  "levels": [
+    {
+      "level": 1,
+      "title": "Le chantier des quatre gestes",
+      "inputs": 216,
+      "selections": 38,
+      "nextLevelObserved": 2,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "CDCCCDDUURRRDCCDCCCDLUURRRRRULDCRCDCCCUURLCCUURRDDDLDDDDDDDDDDDCCCDRCCCURDDDRUCLDDRRRRRRUUUUUCCCULDDDDDDDDDDLLLLDXRXLCCCRDDDDDDDDDDDDLLLDRUUUUUUUUURUURRDDDRDDRRCCDDDDLDDDDRRRRDCCDDLLLLDDDRRDCCCRRRRDRRRRUCCDDRDRRRRRUR",
+      "mapSha256": "69072d28fb550fe3e465936d080089bdfab351c24266e06e5db935b6508e9a4b",
+      "actionsSha256": "39ed39f1b1c6e4644686b1d647877f92d79e6b37d30d911e607f9c43b405b9fe"
+    },
+    {
+      "level": 2,
+      "title": "Le quai à deux réceptions",
+      "inputs": 123,
+      "selections": 21,
+      "nextLevelObserved": 3,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "RRRRRRCRRRRRRDRCCRCCUCLULCLCRCCCRCCURDCCLRRRRRRRRRRURRDDRRCDDRRRRRURRCCLLLLLLDDDRRRRRDDRRRRRUCCCULLLLLLLDDDRRRRRDDRRRRRRDLD",
+      "mapSha256": "27bce94b6f8d6c53258de721307703ecf5d3ecc7b29735edb819a943e7017f88",
+      "actionsSha256": "8595ad25676afedddb33dbd21a45d75909c80db7a2eab0118f30d10efe492b81"
+    },
+    {
+      "level": 3,
+      "title": "Les deux formes du pont",
+      "inputs": 212,
+      "selections": 26,
+      "nextLevelObserved": 4,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "CDRCCCRRRRCURDCUCCLLUUULCULLLDDLLDDDDRRDRRCCCDDDDDDDRRRRLLLUUUUUUULCDRUCLUULLULCCCULLLLLUUUUUULLLLUCCRRURUCCDDDDDDDRRRLLUUUUUULUCCUUUURDDRRRRRRRRRDDRRRCDDDDDRRRRRRRRRUURRRCDDDDDRRRRRRRRRRRRDDRCDDDDDRRRRRRRRRRRURU",
+      "mapSha256": "1e1d8b77b5148ab6c9a6f2212848848fd5c465e15d5c7059bd0f9245f9cab915",
+      "actionsSha256": "b1ef9f31a8435ab1452fb1f0c46d3b9f5008de7acbffb360fabd1d3430faad58"
+    },
+    {
+      "level": 4,
+      "title": "La cale que l’on reprend",
+      "inputs": 159,
+      "selections": 24,
+      "nextLevelObserved": 5,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "RCRCLUXRRRUURRRRCCURDDLDRRRRRRLLLDDDDDCRURRUUULDUURDDDDRRRCCUUCCCDDDLLUULLCCCUULRDDDDLLDLLLDDCCDDDDLDDDDDDDRRCCCRDDDDDRRDDDLLCCCUURRRDDDDDDLLCCCURRRRUURRRDDDRR",
+      "mapSha256": "dc858c9a2027ab447c1984acb19f58b401ce45e5193a59c80c955bf91f97e79e",
+      "actionsSha256": "0e5c96736f496cdc2266e49977c0664735a12d71a316d1afbd520c655c66456f"
+    },
+    {
+      "level": 5,
+      "title": "La cale qui change de côté",
+      "inputs": 124,
+      "selections": 19,
+      "nextLevelObserved": 6,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "RRRRCRRRDDDDLLRRRULLLDLRRULLUCCCURRDRRURRRDDLUCCCRCCUURRCCCDLUUUUCLLUUULCCCDXUUUURCDRRRRRDDDDLXUUURRUCDDDRDDXUUURCUURUXRRUUU",
+      "mapSha256": "284927608177a3534dadfda757d07bec0b126b30ab48463941bfb21c694cfcf2",
+      "actionsSha256": "3deed02fecb1c0a66419a16501b35fbab3a13eff6559547424640bda3496965d"
+    },
+    {
+      "level": 6,
+      "title": "Le dernier usage de la butée",
+      "inputs": 151,
+      "selections": 39,
+      "nextLevelObserved": 7,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "CCURCCRRRDRRUUUCUUULUCCCLURCUURRDCCCRUUUCLLLLRCCDCCULLLCCCDDDDDDLLCCDLURRRRDCCUUUUUULURRDRUUUDDLCDRRRRUCLLCCCUULCCCRUCCRUUUUUCCURUUUULULCUURRUULUCCUUUU",
+      "mapSha256": "d7b5329ca8db475ab2b93014e9bae85667cf0b90be79d9f586d41ab25cc29731",
+      "actionsSha256": "6625616c9aecf560d407abf1d8a415e8c38e05c49bf6cf095cd2511ab2c1ea26"
+    },
+    {
+      "level": 7,
+      "title": "Le retour de la troisième charge",
+      "inputs": 134,
+      "selections": 19,
+      "nextLevelObserved": 8,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "RRDLDDDDLCCCRRRRCCCDCCCRRRULDLLLLLCUUUURRCLLUCCDLLUDDDDCUUULUUUUURCCUURRRRRRRRRRURRRRRUUUUULCRUUURRRRRURRRRRUUUUUCCRRRRUURRURRRRRUUUUR",
+      "mapSha256": "bd741031cd601e1e09ff6e4b447c91736fc068d5b4cf478d40b0b46b7a3fb1fd",
+      "actionsSha256": "09e8819aca3a8a370e24132de3353711e7fc137ceefc2970759144d26d446646"
+    },
+    {
+      "level": 8,
+      "title": "Les deux accès avant le retour",
+      "inputs": 90,
+      "selections": 15,
+      "nextLevelObserved": 8,
+      "manualTabSelected": true,
+      "completionFeedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "commands": "CUUUUURCCCUUUUUCCDCUULLXCCCRRDDRDDDDRRCCLLLLDDDDDDDDDDCDDRRRRDDDDDDDDDRDCCRRRRRDDDRRRRDLDD",
+      "mapSha256": "4912d6978106c36193419014199b6c60a84bc3646dd2f934f890e2187f7c7c0b",
+      "actionsSha256": "4b8cc6fcdafae19fc811b06036cf8c07f225f8eedd482afd098537a1948c4e17"
+    }
+  ],
+  "totalWitnessInputs": 1209,
+  "totalWitnessSelections": 201,
+  "tutorial": {
+    "level": 1,
+    "acquired": 39,
+    "total": 39,
+    "visibleText": "Niveau 1 · Le chantier des quatre gestes39 / 39 découvertes"
+  },
+  "officialResult": "VICTORY · Les quatre destinations sont occupées",
+  "finalUndo": {
+    "via": "#undo-button click",
+    "victoryVisibleAfterUndo": false,
+    "redoKey": "ArrowDown",
+    "victoryVisibleAfterRedo": true,
+    "additionalInputsOutsideWitness": 2
+  },
+  "setup": [
+    "Selected SS25 from the existing native game selector; Manual was selected automatically.",
+    "Pressed 1 once while Warrior already selected before the witness; unchanged initial room."
+  ],
+  "console": {
+    "applicationErrorsObserved": 0,
+    "browserExtensionMetadataErrorsObserved": 8,
+    "scope": "The returned error log contained only chrome-extension content-script metadata errors, no application-origin error."
+  },
+  "sourceSha256": {
+    "src/main.ts": "276e26370753d3370421473167e3a3055abd9fbff3d5802e0a69017e90263eba",
+    "src/games/sinking-star-ss25.ts": "e34e4f6f7f593886a26ef18c237ca6c34a798262bed09fd25e8aa11f88380593",
+    "src/games/sinking-star-ss25-help.ts": "255490cb57b317c06d1c2d93740cefbdd3216fb4ab565439c74dc00ce9d49706",
+    "src/runtime/native-game-dispatcher.ts": "5fc014ebabb395f7c78e40b17a476301d56a188991a57134dec19740643750dd",
+    "experiments/sinking-star-ss25/src/core.ts": "3dd00d8e7b26ab32a3f0c0e4ab662b82aa14b51d4912ed43826548c082d439cd",
+    "experiments/sinking-star-ss25/src/levels.ts": "8d784f151af604f81d992c87d91471c6e619a91e9e416621ea3c71d2229a0401",
+    "experiments/sinking-star-ss25/src/tutorial.ts": "246e9a1ea980888b406845a5292cfaf427add357cfd2f88bd553e2fa1654850d"
+  },
+  "limits": [
+    "This replay qualifies native UI solvability in the managed preview, not an autonomous SRA solution.",
+    "Published Site source provenance is checked separately.",
+    "Browser screenshots were inspected live; this report does not claim exported screenshot files."
+  ]
+}

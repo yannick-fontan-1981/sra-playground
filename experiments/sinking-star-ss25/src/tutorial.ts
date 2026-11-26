@@ -294,7 +294,7 @@ export function observeLesson(learned:Set<GalleryLesson>,before:LessonObservatio
 
 const hints:Record<GalleryLesson,string>={
   "select": "Clique sur un héros, utilise Tab ou 1 / 2 / 3 / 4 : Guerrier rouge, Voleur vert, Magicien violet, Barde magenta. Changer la sélection ne fait pas avancer le monde.",
-  "move": "Le point blanc désigne le héros actif. La même flèche peut faire marcher, pousser, échanger ou chanter : observe qui agit et ce qui reste en place.",
+  "move": "Le point blanc désigne le héros actif. La même flèche peut faire marcher, pousser, tirer, échanger ou chanter : observe qui agit et ce qui reste en place.",
   "warrior-push": "Le Guerrier pousse caisses, miroirs, monstres et partenaires. Prépare son accès du bon côté : il ne tire pas et reste vulnérable aux monstres.",
   "file-push": "Le Guerrier pousse toute la file contiguë d’une case. La première butée bloque l’ensemble. Une caisse peut devenir un appui si le bout de la file atteint l’eau.",
   "mixed-file": "Une file peut mêler caisses, miroirs et partenaires. Le Guerrier déplace ces occupants ensemble ; le Voleur ne tire pas, le Barde ne chante pas et le Magicien ne vise pas pendant ce transport.",
@@ -324,7 +324,7 @@ const hints:Record<GalleryLesson,string>={
   "support-anchor": "Un héros sur un appui l’ancre pendant le chant. L’appui d’arrivée du Barde est également protégé. Échanger les occupants peut changer l’ancrage sans faire chanter le Barde.",
   "cross-support": "Les appuis portent les quatre héros. Un occupant qui les traverse ne les extrait pas de l’eau ; sa présence peut les protéger pendant un chant.",
   "mirror": "Espace / X active les miroirs ensemble. L’occupant le plus proche est prioritaire ; à distance égale, les deux occupants échangent leurs places.",
-  "hero-reflection": "Un héros transporté par reflet n’active ni poussée, ni chant, ni sort. La marque gris clair permet de préparer son arrivée.",
+  "hero-reflection": "Un héros transporté par reflet n’active ni poussée, ni traction, ni chant, ni sort. La marque gris clair permet de préparer son arrivée.",
   "crate-reflection": "Le contour gris clair indique une arrivée de caisse. Un reflet transporte la charge en conservant sa distance au miroir.",
   "button": "Le plus rose sur fond gris est une commande. Héros, caisses, monstres et miroirs font poids ; un appui immergé ne fait pas poids.",
   "gate": "Tous les boutons d’un circuit doivent être occupés ensemble. Observe si sa porte se ferme à l’appui ou au relâchement : centre noir fermé, gris ouvert.",

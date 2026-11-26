@@ -1,0 +1,598 @@
+{
+  "success": true,
+  "campaign": "SS25 — Les Derniers Équilibres",
+  "scope": "Revue d’auteur des salles 5 à 8",
+  "checks": [
+    {
+      "label": "ss25-05 : témoin complet, sans refus ni décès",
+      "passed": true,
+      "inputs": 124,
+      "selections": 19
+    },
+    {
+      "label": "ss25-05 : inventaire fixe et quatre arrivées",
+      "passed": true,
+      "roles": [
+        "warrior",
+        "thief",
+        "wizard",
+        "bard"
+      ],
+      "width": 20,
+      "height": 18
+    },
+    {
+      "label": "ss25-06 : témoin complet, sans refus ni décès",
+      "passed": true,
+      "inputs": 151,
+      "selections": 39
+    },
+    {
+      "label": "ss25-06 : inventaire fixe et quatre arrivées",
+      "passed": true,
+      "roles": [
+        "warrior",
+        "thief",
+        "wizard",
+        "bard"
+      ],
+      "width": 20,
+      "height": 20
+    },
+    {
+      "label": "ss25-07 : témoin complet, sans refus ni décès",
+      "passed": true,
+      "inputs": 134,
+      "selections": 19
+    },
+    {
+      "label": "ss25-07 : inventaire fixe et quatre arrivées",
+      "passed": true,
+      "roles": [
+        "warrior",
+        "thief",
+        "wizard",
+        "bard"
+      ],
+      "width": 20,
+      "height": 20
+    },
+    {
+      "label": "ss25-08 : témoin complet, sans refus ni décès",
+      "passed": true,
+      "inputs": 90,
+      "selections": 15
+    },
+    {
+      "label": "ss25-08 : inventaire fixe et quatre arrivées",
+      "passed": true,
+      "roles": [
+        "warrior",
+        "thief",
+        "wizard",
+        "bard"
+      ],
+      "width": 20,
+      "height": 20
+    },
+    {
+      "label": "N5 : le Guerrier déplace une file de deux caisses et un miroir",
+      "passed": true,
+      "pushes": 4,
+      "objectsPerFile": 3
+    },
+    {
+      "label": "N5 : un départ individuel du Guerrier interrompt le service",
+      "passed": true,
+      "action": "Guerrier R après relève du miroir",
+      "serviceReleased": true,
+      "limit": "La variante gagnante rétablit ensuite ce service ; ce n’est pas une impasse globale."
+    },
+    {
+      "label": "N5 : le chant remplace le Guerrier par la caisse sans déplacer le miroir",
+      "passed": true,
+      "serviceHeld": true,
+      "mirrorUnaffected": true
+    },
+    {
+      "label": "N5 : une réflexion avant extraction de la cale vise la caisse",
+      "passed": true,
+      "reflected": "stone",
+      "departureIncomplete": true
+    },
+    {
+      "label": "N5 : la traction sépare le poids final du miroir et dégage le rayon",
+      "passed": true,
+      "mirror": {
+        "x": 13,
+        "y": 6
+      },
+      "finalWeight": {
+        "x": 11,
+        "y": 7
+      },
+      "heroReflections": 4
+    },
+    {
+      "label": "N6 : la relève conserve le service pendant le premier chantier",
+      "passed": true,
+      "checkedInputs": 36
+    },
+    {
+      "label": "N6 : enlever la cible sans remplaçant ferme l’ancien accès",
+      "passed": true,
+      "serviceReleased": true,
+      "limit": "La cible peut encore être remise en place ; seule la fermeture locale est établie."
+    },
+    {
+      "label": "N6 : les deux immersions précèdent la récupération du poids provisoire",
+      "passed": true,
+      "supportsBeforeRecovery": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 6,
+          "y": 11
+        }
+      ],
+      "recoveredWeight": {
+        "x": 8,
+        "y": 6
+      }
+    },
+    {
+      "label": "N6 : le Guerrier intercepte le second échange si le groupe ne se dégage pas",
+      "passed": true,
+      "firstTarget": "warrior",
+      "target": {
+        "x": 8,
+        "y": 10
+      },
+      "intendedTarget": "bard"
+    },
+    {
+      "label": "N6 : le poids final intercepte la marche du Magicien dans le couloir",
+      "passed": true,
+      "interceptedBy": {
+        "x": 8,
+        "y": 6
+      },
+      "detail": "L’échange remplace momentanément la caisse par le Magicien sur le bouton ; il n’éteint pas immédiatement la couronne."
+    },
+    {
+      "label": "N6 : traction puis poussée font traverser le Magicien sans reprendre le poids",
+      "passed": true,
+      "wizard": {
+        "x": 8,
+        "y": 7
+      },
+      "weightRetained": true,
+      "passivePulls": 2
+    },
+    {
+      "label": "N7 : la butée garde la première charge pendant le transport de la deuxième",
+      "passed": true,
+      "heldWeight": {
+        "x": 5,
+        "y": 5
+      },
+      "transportedWeight": {
+        "x": 9,
+        "y": 8
+      }
+    },
+    {
+      "label": "N7 : le retour prématuré ferme la réserve et retire un pont encore vide",
+      "passed": true,
+      "bridgeWithdrawnWithoutSupport": true,
+      "wizardStillInReserve": true,
+      "limit": "Les poids peuvent être ramenés ; aucune impossibilité globale n’est affirmée."
+    },
+    {
+      "label": "N7 : la caisse revenue sur le pont devient l’appui du retour",
+      "passed": true,
+      "convertedAt": {
+        "x": 11,
+        "y": 8
+      },
+      "finalWeights": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ]
+    },
+    {
+      "label": "N7 : un départ chanté vers le bas reprend les deux poids finaux",
+      "passed": true,
+      "arrivalGateClosed": true,
+      "weightsDisplaced": 2
+    },
+    {
+      "label": "N7 : l’extraction du Voleur laisse les deux commandes occupées",
+      "passed": true,
+      "passiveBardSteps": 4,
+      "arrivalWeightsRetained": true
+    },
+    {
+      "label": "N8 : déclencher avant de remplacer le Magicien sur la presse est fatal",
+      "passed": true,
+      "fatalDestination": {
+        "x": 10,
+        "y": 11
+      },
+      "cause": "éjection latérale dans le trou sans appui"
+    },
+    {
+      "label": "N8 : le retour volontaire du Magicien reprend la caisse préparée",
+      "passed": true,
+      "pressReplacementUndone": true,
+      "limit": "Attendre l’ouverture des plateformes permet une autre extraction gagnante, vérifiée plus bas."
+    },
+    {
+      "label": "N8 : le chant extrait le Magicien et les butées retiennent la caisse",
+      "passed": true,
+      "passiveSteps": 4,
+      "pressWeightRetained": true
+    },
+    {
+      "label": "N8 : laisser le Voleur dans le rayon ne libère qu’une commande",
+      "passed": true,
+      "leftCommandHeld": true,
+      "rightCommandReleased": true,
+      "returnIncomplete": true,
+      "interceptingHero": "thief"
+    },
+    {
+      "label": "N8 : réflexion, libération des commandes et presse complètent le retour",
+      "passed": true,
+      "monstersRemovedByContact": 2,
+      "activePlatforms": 5,
+      "pressedStoneBecomesSupport": {
+        "x": 10,
+        "y": 11
+      }
+    },
+    {
+      "label": "N8 : reprendre l’appui avant les partenaires recoupe leur voie supérieure",
+      "passed": true,
+      "missingSupport": {
+        "x": 10,
+        "y": 11
+      },
+      "tested": "Guerrier D depuis 10,10",
+      "limit": "Refus de cette traversée supérieure ; les autres réorganisations ne sont pas exclues."
+    },
+    {
+      "label": "N8 : les partenaires traversent avant les trois glissements de l’appui",
+      "passed": true,
+      "partnerCrossingsBeforeSupportMoves": [
+        "warrior",
+        "thief"
+      ],
+      "checkedSupportMotions": 3
+    },
+    {
+      "label": "N5 : variante gagnante — Relève manuelle avec interruption temporaire du service",
+      "passed": true,
+      "inputs": 131,
+      "selections": 15
+    },
+    {
+      "label": "N6 : variante gagnante — Magicien installé au-dessus avant le dépôt du poids final",
+      "passed": true,
+      "inputs": 130,
+      "selections": 31
+    },
+    {
+      "label": "N7 : variante gagnante — Premier pas du retour avant la fin de la troisième livraison",
+      "passed": true,
+      "inputs": 139,
+      "selections": 23
+    },
+    {
+      "label": "N8 : variante gagnante — Extraction du Magicien après ouverture des plateformes",
+      "passed": true,
+      "inputs": 74,
+      "selections": 7
+    }
+  ],
+  "passed": 35,
+  "main": [
+    {
+      "id": "ss25-05",
+      "title": "La cale qui change de côté",
+      "metrics": {
+        "actions": 124,
+        "selections": 19,
+        "warriorPushes": 10,
+        "thiefPulls": 7,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 3,
+        "swaps": 0,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 1,
+        "groupSongs": 1,
+        "songHeroMoves": 1,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 18,
+        "mirrorMoves": 12,
+        "monsterMoves": 0,
+        "reflections": 4,
+        "heroReflections": 4,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "ss25-06",
+      "title": "Le dernier usage de la butée",
+      "metrics": {
+        "actions": 151,
+        "selections": 39,
+        "warriorPushes": 21,
+        "thiefPulls": 5,
+        "thiefPartnerPulls": 2,
+        "thiefMirrorPulls": 0,
+        "swaps": 3,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 1,
+        "groupSongs": 1,
+        "songHeroMoves": 1,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 6,
+        "stoneMoves": 26,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 2,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "ss25-07",
+      "title": "Le retour de la troisième charge",
+      "metrics": {
+        "actions": 134,
+        "selections": 19,
+        "warriorPushes": 2,
+        "thiefPulls": 10,
+        "thiefPartnerPulls": 4,
+        "thiefMirrorPulls": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 7,
+        "groupSongs": 3,
+        "songHeroMoves": 3,
+        "songStoneMoves": 9,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 7,
+        "stoneMoves": 18,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "ss25-08",
+      "title": "Les deux accès avant le retour",
+      "metrics": {
+        "actions": 90,
+        "selections": 15,
+        "warriorPushes": 5,
+        "thiefPulls": 5,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 5,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 7,
+        "groupSongs": 0,
+        "songHeroMoves": 4,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 3,
+        "partnerMoves": 4,
+        "stoneMoves": 2,
+        "mirrorMoves": 10,
+        "monsterMoves": 2,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      }
+    }
+  ],
+  "variations": [
+    {
+      "level": 5,
+      "label": "Relève manuelle avec interruption temporaire du service",
+      "commands": "RRRRCRRRDDDDLLRRRULLLDLRRULLUCCCURRDRRURRRDDLURDDLLLLUURRCUURRCCCDRUUUUCLLUUULCCCDXUUUURCDRRRRRDDDDLXUUURRUCDDDRDDXUUURCUURRUXRRUUU",
+      "metrics": {
+        "actions": 131,
+        "selections": 15,
+        "warriorPushes": 11,
+        "thiefPulls": 7,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 3,
+        "swaps": 0,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 0,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 18,
+        "mirrorMoves": 12,
+        "monsterMoves": 0,
+        "reflections": 4,
+        "heroReflections": 4,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 6,
+      "label": "Magicien installé au-dessus avant le dépôt du poids final",
+      "commands": "CCURCCRRRDRRUUUCUUULUCCCLURCUURRDCCCRUUUCLLLLRCCDCCULLLCCCDDDDDDLLCCDLURRUUUURCCUUUUUULURRDRUUUCCUUUCCRUUUULULCRRRRUURUUUULUCCUUUU",
+      "metrics": {
+        "actions": 130,
+        "selections": 31,
+        "warriorPushes": 20,
+        "thiefPulls": 3,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 0,
+        "swaps": 3,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 1,
+        "groupSongs": 1,
+        "songHeroMoves": 1,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 3,
+        "stoneMoves": 26,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 2,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 7,
+      "label": "Premier pas du retour avant la fin de la troisième livraison",
+      "commands": "RRDLDDDDLCCCRRRRCCCDCCCRRRULDLLLLCUUUURRCLCCLCCLUCCLLLLUDDDDCUUULUUUUURCCUURRRRRRRRRRURRRRRUUUUULCRUUURRRRRURRRRRUUUUUCCRRRRUURRURRRRRUUUUR",
+      "metrics": {
+        "actions": 139,
+        "selections": 23,
+        "warriorPushes": 2,
+        "thiefPulls": 10,
+        "thiefPartnerPulls": 4,
+        "thiefMirrorPulls": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 7,
+        "groupSongs": 2,
+        "songHeroMoves": 0,
+        "songStoneMoves": 9,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 4,
+        "stoneMoves": 18,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 8,
+      "label": "Extraction du Magicien après ouverture des plateformes",
+      "commands": "UUUUUCUUUUURCDXRDDDDRRCCLLLLDDDDDDDDDDCDDRRRRDDDDDDDDDRDCCUURRRDDDRRRRDLDD",
+      "metrics": {
+        "actions": 74,
+        "selections": 7,
+        "warriorPushes": 5,
+        "thiefPulls": 5,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 5,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 3,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 3,
+        "partnerMoves": 0,
+        "stoneMoves": 2,
+        "mirrorMoves": 10,
+        "monsterMoves": 2,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      }
+    }
+  ],
+  "limits": [
+    "Les témoins établissent la victoire, pas une longueur minimale ni une difficulté mesurée sur des joueurs.",
+    "Les contrebranches décrivent les états et les actions testés ; elles ne prouvent pas l’absence de toute autre solution.",
+    "N5 peut interrompre puis rétablir le service par manutention ; le chant est une relève continue, pas une obligation globale.",
+    "N6 peut installer le Magicien avant le dernier poids ; la traction puis la poussée constituent une réponse au placement plus tardif du témoin.",
+    "N7 admet un premier pas du retour avant la livraison complète, tant que la première commande reste tenue.",
+    "N8 exige de remplacer le Magicien sur la presse avant le déclenchement du témoin ; sa sortie de la poche peut aussi attendre les nouvelles plateformes, comme le prouve la variante.",
+    "Le Guerrier n’a aucun pouvoir de combat : les monstres de N8 meurent par contact mutuel. Aucune condition de victoire ne compte les éliminations.",
+    "Les circuits et géométries sont des adaptations originales. Aucun pouvoir absent des quatre rôles n’est supposé.",
+    "Ces scripts privés ne doivent jamais être importés par le bundle jouable."
+  ]
+}
