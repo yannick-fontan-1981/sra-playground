@@ -1,0 +1,947 @@
+{
+  "spec": {
+    "id": "ss25-05",
+    "title": "La cale qui change de côté",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "################.gg#",
+      "################.gg#",
+      "#########...Z..#...#",
+      "#########......#...#",
+      "#########......~...#",
+      "#########.T....#...#",
+      "##.......#.##..#####",
+      "##.......#.##..#####",
+      "##.............#####",
+      "##.Woo2........#####",
+      "##.........B...#####",
+      "##.............#####",
+      "##.............#####",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "reserve",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 8,
+            "y": 11
+          }
+        ]
+      },
+      {
+        "id": "service",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 13,
+            "y": 11
+          }
+        ]
+      },
+      {
+        "id": "depart",
+        "color": 9,
+        "buttons": [
+          {
+            "x": 13,
+            "y": 6
+          },
+          {
+            "x": 11,
+            "y": 7
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 9
+        },
+        "circuit": "reserve",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "circuit": "service",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 6
+        },
+        "circuit": "depart",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRRRCRRRDDDDLLRRRULLLDLRRULLUCCCURRDRRURRRDDLUCCCRCCUURRCCCDLUUUUCLLUUULCCCDXUUUURCDRRRRRDDDDLXUUURRUCDDDRDDXUUURCUURUXRRUUU",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "objective": "Intervertir la caisse et le miroir, relever la commande pendant le chantier puis séparer la cale pour préparer le départ des quatre héros.",
+    "label": "Adaptation · Heroes and Light · énigme 30",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/",
+    "puzzles": [
+      30
+    ]
+  },
+  "metrics": {
+    "actions": 124,
+    "selections": 19,
+    "warriorPushes": 10,
+    "thiefPulls": 7,
+    "thiefPartnerPulls": 0,
+    "thiefMirrorPulls": 3,
+    "swaps": 0,
+    "wizardHeroSwaps": 0,
+    "wizardStoneSwaps": 0,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 1,
+    "groupSongs": 1,
+    "songHeroMoves": 1,
+    "songStoneMoves": 1,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 1,
+    "stoneMoves": 18,
+    "mirrorMoves": 12,
+    "monsterMoves": 0,
+    "reflections": 4,
+    "heroReflections": 4,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La file est déplacée entière : la première caisse tient la réserve, la seconde reste devant le miroir. Il faut maintenant séparer la manutention sans reprendre le premier poids.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 12
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "service": false,
+        "depart": false
+      }
+    },
+    {
+      "label": "Le miroir tient le service ; la seconde caisse a été extraite de la file et attend une case avant lui.",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 12
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "service": true,
+        "depart": false
+      }
+    },
+    {
+      "label": "Le Guerrier pousse le miroir vers le haut et prend sa place sur le service. La caisse se trouve à sa gauche : la relève suivante doit déplacer le Guerrier et la caisse ensemble.",
+      "turn": 46,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "service": true,
+        "depart": false
+      }
+    },
+    {
+      "label": "Le chant fait avancer la caisse sur le service en libérant le Guerrier. Le miroir ignore le chant ; le premier poids reste hors de portée.",
+      "turn": 50,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 11
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "service": true,
+        "depart": false
+      }
+    },
+    {
+      "label": "La caisse sert de cale à la file verticale. Après la première poussée, le service est encore tenu par le Guerrier ; les suivantes ferment ce passage tandis que le Voleur attend déjà au-dessus.",
+      "turn": 65,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "service": false,
+        "depart": false
+      }
+    },
+    {
+      "label": "La traction latérale sort la cale du rayon et la dépose sur le second bouton du départ. Le miroir reste en station : les deux ressources, jusque-là solidaires, ont maintenant des fonctions différentes.",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 9
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 7
+          },
+          "facing": "SE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "reserve": true,
+        "service": false,
+        "depart": true
+      }
+    }
+  ],
+  "adaptation": "Light 30 demande de déplacer tôt un émetteur, de l’intervertir avec une pierre et de réemployer cette pierre comme cale lors des déplacements suivants. SS25 transpose ce travail à un miroir et à deux caisses : la file horizontale est dissociée, le miroir puis le Guerrier puis la caisse occupent le service, et une nouvelle file monte vers le poste de reflet. Le Voleur en extrait la cale latéralement pour libérer le rayon et compléter la commande du départ. Aucun faisceau violet ni téléportation automatique n’est ajouté. Les quatre rôles et les circuits visibles remplacent les pouvoirs de la source ; la géométrie et les destinations sont originales."
+}

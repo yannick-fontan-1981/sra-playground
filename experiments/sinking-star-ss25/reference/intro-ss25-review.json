@@ -1,0 +1,540 @@
+{
+  "game": "SS25",
+  "success": true,
+  "levels": [
+    1
+  ],
+  "mapSha256": "69072d28fb550fe3e465936d080089bdfab351c24266e06e5db935b6508e9a4b",
+  "witnessSha256": "39ed39f1b1c6e4644686b1d647877f92d79e6b37d30d911e607f9c43b405b9fe",
+  "checks": [
+    {
+      "level": 1,
+      "name": "Le témoin sauvegardé termine avec quatre héros vivants",
+      "status": "passed",
+      "observed": {
+        "actions": 216,
+        "selections": 38,
+        "warriorPushes": 4,
+        "thiefPulls": 7,
+        "thiefPartnerPulls": 4,
+        "thiefMirrorPulls": 1,
+        "swaps": 4,
+        "wizardHeroSwaps": 3,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 20,
+        "groupSongs": 17,
+        "songHeroMoves": 35,
+        "songStoneMoves": 20,
+        "songMonsterMoves": 1,
+        "supportMoves": 4,
+        "partnerMoves": 44,
+        "stoneMoves": 29,
+        "mirrorMoves": 1,
+        "monsterMoves": 2,
+        "reflections": 2,
+        "heroReflections": 1,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 4,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Rejeu du JSON et égalité avec le générateur de carte."
+    },
+    {
+      "level": 1,
+      "name": "39 découvertes sur les seules observations publiques et Undo exact",
+      "status": "passed",
+      "observed": {
+        "acquired": 39,
+        "lessons": [
+          "select",
+          "move",
+          "warrior-push",
+          "file-push",
+          "mixed-file",
+          "thief-pull",
+          "single-pull",
+          "partner-pull",
+          "release-by-pull",
+          "partner-push",
+          "mirror-motion",
+          "relay-weight",
+          "monster-still",
+          "wizard-swap",
+          "wizard-first",
+          "wizard-partner",
+          "wizard-bend",
+          "wizard-water",
+          "wizard-walk",
+          "bard-song",
+          "partner-song",
+          "selective-song",
+          "diagonal-song",
+          "wall-song",
+          "monster-song",
+          "release-by-swap",
+          "water-support",
+          "support-slide",
+          "support-anchor",
+          "cross-support",
+          "mirror",
+          "hero-reflection",
+          "crate-reflection",
+          "button",
+          "gate",
+          "press",
+          "monster-press",
+          "monster",
+          "goals"
+        ],
+        "firstObservedAt": {
+          "select": 1,
+          "move": 2,
+          "thief-pull": 2,
+          "single-pull": 2,
+          "relay-weight": 2,
+          "monster-still": 2,
+          "warrior-push": 6,
+          "file-push": 7,
+          "mixed-file": 7,
+          "partner-push": 7,
+          "wizard-swap": 16,
+          "wizard-first": 16,
+          "wizard-partner": 16,
+          "release-by-swap": 16,
+          "partner-pull": 31,
+          "release-by-pull": 31,
+          "wizard-walk": 33,
+          "bard-song": 35,
+          "partner-song": 35,
+          "selective-song": 35,
+          "diagonal-song": 35,
+          "wall-song": 35,
+          "water-support": 48,
+          "gate": 61,
+          "button": 61,
+          "press": 61,
+          "monster-press": 61,
+          "monster": 61,
+          "support-slide": 67,
+          "cross-support": 68,
+          "support-anchor": 68,
+          "wizard-water": 78,
+          "monster-song": 89,
+          "mirror": 114,
+          "crate-reflection": 114,
+          "hero-reflection": 116,
+          "wizard-bend": 117,
+          "mirror-motion": 137,
+          "goals": 216
+        },
+        "frames": 587,
+        "actions": 216,
+        "publicFields": [
+          "level",
+          "frame",
+          "frames",
+          "levelsCompleted"
+        ],
+        "finalState": "WIN",
+        "completionUndo": true
+      },
+      "scope": "Le détecteur reçoit uniquement des copies JSON explicites des quatre champs publics, sans carte ni état privé."
+    },
+    {
+      "level": 1,
+      "name": "La traction remplace le poids, mais ne prend pas la deuxième caisse",
+      "status": "passed",
+      "observed": {
+        "turn": 2,
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 3,
+              "y": 5
+            },
+            "to": {
+              "x": 3,
+              "y": 6
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 3,
+              "y": 4
+            },
+            "to": {
+              "x": 3,
+              "y": 5
+            }
+          }
+        ],
+        "secondStoneUnchanged": {
+          "x": 3,
+          "y": 3
+        }
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "La file mixte transporte deux caisses et le Voleur sans sa traction",
+      "status": "passed",
+      "observed": {
+        "turn": 7,
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 3,
+              "y": 3
+            },
+            "to": {
+              "x": 3,
+              "y": 4
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 3,
+              "y": 4
+            },
+            "to": {
+              "x": 3,
+              "y": 5
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 3,
+              "y": 5
+            },
+            "to": {
+              "x": 3,
+              "y": 6
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 3,
+              "y": 6
+            },
+            "to": {
+              "x": 3,
+              "y": 7
+            }
+          }
+        ]
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "Les transports imposés restent distincts du pouvoir volontaire",
+      "status": "passed",
+      "observed": {
+        "wizardPushTurn": 13,
+        "firstTargetSwapTurn": 16,
+        "fartherStonePreserved": {
+          "x": 6,
+          "y": 9
+        },
+        "bardPullTurn": 31,
+        "voluntarySongCommands": "CDCCCDDUURRRDCCDCD"
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "Le Magicien sans cible effectue un pas ordinaire",
+      "status": "passed",
+      "observed": {
+        "turn": 33,
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 7
+            },
+            "to": {
+              "x": 7,
+              "y": 7
+            }
+          }
+        ]
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "Le même chant démontre diagonale, cloison, butée et trois partenaires",
+      "status": "passed",
+      "observed": {
+        "turn": 35,
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 5
+            },
+            "to": {
+              "x": 6,
+              "y": 6
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 3
+            },
+            "to": {
+              "x": 6,
+              "y": 4
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 6
+            },
+            "to": {
+              "x": 6,
+              "y": 7
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 7,
+              "y": 7
+            },
+            "to": {
+              "x": 7,
+              "y": 8
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 4,
+              "y": 3
+            },
+            "to": {
+              "x": 4,
+              "y": 4
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 4,
+              "y": 5
+            },
+            "to": {
+              "x": 4,
+              "y": 6
+            }
+          }
+        ],
+        "wall": {
+          "x": 5,
+          "y": 5
+        },
+        "heldStone": {
+          "x": 4,
+          "y": 7
+        },
+        "stop": {
+          "x": 4,
+          "y": 8
+        }
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "Appui consommé, glissement libre et deux formes d’ancrage",
+      "status": "passed",
+      "observed": {
+        "createdAt": {
+          "x": 9,
+          "y": 2
+        },
+        "supportMoves": [
+          {
+            "actor": "support",
+            "from": {
+              "x": 10,
+              "y": 5
+            },
+            "to": {
+              "x": 10,
+              "y": 6
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 9,
+              "y": 6
+            },
+            "to": {
+              "x": 9,
+              "y": 7
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 10,
+              "y": 6
+            },
+            "to": {
+              "x": 11,
+              "y": 6
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 9,
+              "y": 7
+            },
+            "to": {
+              "x": 9,
+              "y": 8
+            }
+          }
+        ],
+        "bardLanding": {
+          "x": 9,
+          "y": 7
+        },
+        "occupiedSupport": {
+          "x": 9,
+          "y": 7
+        },
+        "waterSwapTurn": 78,
+        "unsupportedStepRefused": true,
+        "unsupportedCommands": "CDCCCDDUURRRDCCDCCCDLUURRRRRULDCRCDCCCUURLCCUURRDDDLDDDDDDDDDDDCCCDRR"
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "Presse et chant réunissent les monstres ; le Guerrier reste vulnérable",
+      "status": "passed",
+      "observed": {
+        "press": [
+          {
+            "actor": "monster",
+            "from": {
+              "x": 3,
+              "y": 17
+            },
+            "to": {
+              "x": 3,
+              "y": 16
+            }
+          }
+        ],
+        "monstersRemoved": 4,
+        "unsafeApproachCommands": "LDDDDDDDDDDDDLDR",
+        "orthogonalContactFatal": true
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "Le miroir sert au transport puis au second poids de sortie",
+      "status": "passed",
+      "observed": {
+        "reflections": [
+          [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 10,
+                "y": 14
+              },
+              "to": {
+                "x": 12,
+                "y": 16
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 14
+              },
+              "to": {
+                "x": 12,
+                "y": 16
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 12,
+                "y": 16
+              },
+              "to": {
+                "x": 10,
+                "y": 14
+              }
+            }
+          ]
+        ],
+        "bentSwapTurn": 117,
+        "mirrorPullTurn": 137,
+        "orientationPreserved": true,
+        "removalCommands": "CDCCCDDUURRRDCCDCCCDLUURRRRRULDCRCDCCCUURLCCUURRDDDLDDDDDDDDDDDCCCDRCCCURDDDRUCLDDRRRRRRUUUUUCCCULDDDDDDDDDDLLLLDXRXLCCCRDDDDDDDDDDDDLLLDLUL",
+        "gateClosesWhenMirrorLeaves": true
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "L’extraction tardive du Barde conserve sa charge et les deux commandes",
+      "status": "passed",
+      "observed": {
+        "passiveTurn": 160,
+        "stonesUnchanged": true,
+        "voluntarySongCommands": "CDCCCDDUURRRDCCDCCCDLUURRRRRULDCRCDCCCUURLCCUURRDDDLDDDDDDDDDDDCCCDRCCCURDDDRUCLDDRRRRRRUUUUUCCCULDDDDDDDDDDLLLLDXRXLCCCRDDDDDDDDDDDDLLLDCCD",
+        "voluntarySongMovesStone": true
+      },
+      "scope": "Contre-branche ou état local réellement rejoué ; aucune unicité ni optimalité déduite."
+    },
+    {
+      "level": 1,
+      "name": "Trois arrivées permutées donnent une autre victoire",
+      "status": "passed",
+      "observed": {
+        "commands": "CDCCCDDUURRRDCCDCCCDLUURRRRRULDCRCDCCCUURLCCUURRDDDLDDDDDDDDDDDCCCDRCCCURDDDRUCLDDRRRRRRUUUUUCCCULDDDDDDDDDDLLLLDXRXLCCCRDDDDDDDDDDDDLLLDRUUUUUUUUURUURRDDDRDDRRCCDDDDLDDDDRRRRDCCDDLLLLDDDRRURRCCCRRRRDRRRRDCCDDRDRRRRU",
+        "actions": 216,
+        "finalState": "WIN"
+      },
+      "scope": "Les buts n’imposent aucune couleur ; cette variante conserve toutes les démonstrations et ne prouve pas un minimum de coups."
+    }
+  ],
+  "limits": [
+    "Tutoriel sans quota caché.",
+    "Contre-branches locales, sans preuve de solution unique ou optimale.",
+    "Aucune qualification de résolution autonome SRA."
+  ]
+}

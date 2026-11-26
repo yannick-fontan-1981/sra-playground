@@ -1222,6 +1222,10 @@ records.push({code:'SS24',id:'ss24-c4000001',name:'Les Voies de Traverse',group:
   description:'Coordinate single pushes, rear pulls, Wizard exchanges and the Bard’s song to leave cargo in place and prepare four destinations.',
   sourcePath:'experiments/sinking-star-ss24/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS25',id:'ss25-c4000001',name:'Les Derniers Équilibres',group:'custom_4',family:'sinking_star_quartet',levels:8,
+  description:'Coordinate whole-file pushes, single rear pulls, Wizard exchanges and the Bard’s song to preserve working positions and prepare four destinations.',
+  sourcePath:'experiments/sinking-star-ss25/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

@@ -1,0 +1,836 @@
+{
+  "spec": {
+    "id": "ss25-08",
+    "title": "Les deux accès avant le retour",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "#####m########m#####",
+      "#####.########.#####",
+      "###..............###",
+      "###..............###",
+      "###..............###",
+      "###..............###",
+      "#####.####~###.#####",
+      "###.....##~##.....##",
+      "###..T..#Z~##.....##",
+      "###..1....~##.4...##",
+      "###.....#.~##.W...##",
+      "###....B#o~#########",
+      "##########.....#####",
+      "##########.....#####",
+      "##########.....#####",
+      "##########gggg.#####",
+      "####################"
+    ],
+    "facing": "N",
+    "circuits": [
+      {
+        "id": "rive-gauche",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 5,
+            "y": 3
+          }
+        ]
+      },
+      {
+        "id": "rive-droite",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 14,
+            "y": 3
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 5,
+          "y": 9
+        },
+        "circuit": "rive-gauche",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 9,
+          "y": 11
+        },
+        "circuit": "rive-gauche",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 9
+        },
+        "circuit": "rive-droite",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 10,
+          "y": 9
+        },
+        "circuit": "rive-gauche",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 10
+        },
+        "circuit": "rive-gauche",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 12
+        },
+        "circuit": "rive-droite",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 13
+        },
+        "circuit": "rive-droite",
+        "activeWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 14
+        },
+        "circuit": "rive-droite",
+        "activeWhen": "released"
+      }
+    ]
+  },
+  "commands": "CUUUUURCCCUUUUUCCDCUULLXCCCRRDDRDDDDRRCCLLLLDDDDDDDDDDCDDRRRRDDDDDDDDDRDCCRRRRRDDDRRRRDLDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 57
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "objective": "Préparer les deux miroirs et remplacer le Magicien sur la presse avant de libérer les commandes, puis laisser passer les partenaires avant de reprendre l’appui avec le chant.",
+    "label": "Adaptation · Heroes and Water · énigme 22",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+    "puzzles": [
+      22
+    ]
+  },
+  "metrics": {
+    "actions": 90,
+    "selections": 15,
+    "warriorPushes": 5,
+    "thiefPulls": 5,
+    "thiefPartnerPulls": 0,
+    "thiefMirrorPulls": 5,
+    "swaps": 1,
+    "wizardHeroSwaps": 0,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 7,
+    "groupSongs": 0,
+    "songHeroMoves": 4,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 3,
+    "partnerMoves": 4,
+    "stoneMoves": 2,
+    "mirrorMoves": 10,
+    "monsterMoves": 2,
+    "reflections": 1,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 2,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Les deux monstres maintiennent les accès de chantier. Le Voleur remonte un miroir par traction, le Guerrier pousse l’autre depuis sa rive. Ils quittent les axes avant de réunir les monstres ; le Magicien occupe encore la presse latérale.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 14,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "rive-gauche": true,
+        "rive-droite": true
+      }
+    },
+    {
+      "label": "L’échange extrait la caisse de la poche et la dépose sur la presse, à la place du Magicien. La caisse doit rester sèche jusqu’à la fermeture : elle comblera alors le seul trou sans plateforme du retour.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 14,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "rive-gauche": true,
+        "rive-droite": true
+      }
+    },
+    {
+      "label": "Le chant ramène le Magicien hors de sa poche sans activer son échange. La butée au-dessus de la presse retient la caisse pendant les pas vers le haut, puis le mur de gauche la retient pendant l’extraction latérale.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [
+        {
+          "x": 5,
+          "y": 3
+        },
+        {
+          "x": 14,
+          "y": 3
+        }
+      ],
+      "circuits": {
+        "rive-gauche": true,
+        "rive-droite": true
+      }
+    },
+    {
+      "label": "Une seule réflexion amène les deux monstres au contact. Leur départ libère les deux commandes : les anciens accès ferment, les deux familles de plateformes apparaissent et la presse pousse la caisse vers l’est. Elle devient l’appui qui complète le retour.",
+      "turn": 24,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rive-gauche": false,
+        "rive-droite": false
+      }
+    },
+    {
+      "label": "Le Magicien emprunte le raccord latéral ; le Guerrier et le Voleur traversent le retour central complet. La Barde attend encore sur la rive : déplacer l’appui avant leur passage rouvrirait le trou supérieur.",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 18
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 18
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "mirrors": [
+        {
+          "at": {
+            "x": 5,
+            "y": 7
+          },
+          "facing": "NE"
+        },
+        {
+          "at": {
+            "x": 14,
+            "y": 7
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "rive-gauche": false,
+        "rive-droite": false
+      }
+    }
+  ],
+  "adaptation": "Water 22 conserve deux commandes pendant l’extraction des héros, puis les libère pour ouvrir le trajet final. SS25 remplace les dragons et le Clerc par deux monstres qui servent de poids, deux miroirs préparés par manutention et une presse latérale. L’échange retire le Magicien de la presse et y dépose la caisse ; le chant le ramène sans reprendre cette cible. La réflexion libère les deux commandes, ferme les accès de chantier et fait apparaître les plateformes. La presse immerge alors la caisse dans le seul trou qui reste. Le Guerrier et le Voleur utilisent ce retour avant que la Barde, dernière passagère, entraîne l’appui derrière elle. Les monstres sont éliminés par leur contact mutuel ; le Guerrier n’a aucun pouvoir d’attaque. La carte, l’optique, les quatre rôles et les circuits sont une adaptation SS25, sans Clerc, dragon, immunité ni quota d’élimination."
+}
