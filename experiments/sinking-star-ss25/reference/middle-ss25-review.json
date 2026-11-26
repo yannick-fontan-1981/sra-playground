@@ -1,0 +1,1818 @@
+{
+  "game": "SS25",
+  "scope": "N2–N4; exact routes, resource handovers and local counter-branches",
+  "success": true,
+  "checks": [
+    {
+      "name": "N2: author route wins with four living heroes",
+      "passed": true
+    },
+    {
+      "name": "N2: no refused or lethal author action",
+      "passed": true
+    },
+    {
+      "name": "N2: numerical actions match the declared route",
+      "passed": true
+    },
+    {
+      "name": "N2: all recorded stages match the replay",
+      "passed": true
+    },
+    {
+      "name": "N3: author route wins with four living heroes",
+      "passed": true
+    },
+    {
+      "name": "N3: no refused or lethal author action",
+      "passed": true
+    },
+    {
+      "name": "N3: numerical actions match the declared route",
+      "passed": true
+    },
+    {
+      "name": "N3: all recorded stages match the replay",
+      "passed": true
+    },
+    {
+      "name": "N4: author route wins with four living heroes",
+      "passed": true
+    },
+    {
+      "name": "N4: no refused or lethal author action",
+      "passed": true
+    },
+    {
+      "name": "N4: numerical actions match the declared route",
+      "passed": true
+    },
+    {
+      "name": "N4: all recorded stages match the replay",
+      "passed": true
+    },
+    {
+      "name": "N2: the initial six pushes move a crate and a mirror together",
+      "passed": true
+    },
+    {
+      "name": "N2: the press sends the crate first, then the mirror",
+      "passed": true
+    },
+    {
+      "name": "N2: a premature send closes the receiver access",
+      "passed": true
+    },
+    {
+      "name": "N2: the second load reaches an occupied receiving bay without the exchanges",
+      "passed": true
+    },
+    {
+      "name": "N2: the lower manual pushing stance is bare water",
+      "passed": true
+    },
+    {
+      "name": "N2: both deposits persist after the receiver and operator leave",
+      "passed": true
+    },
+    {
+      "name": "N3: the two weights are delivered while the supports remain separated",
+      "passed": true
+    },
+    {
+      "name": "N3: separated delivery supports do not cross the central gap",
+      "passed": true
+    },
+    {
+      "name": "N3: a voluntary departure moves the support already parked",
+      "passed": true
+    },
+    {
+      "name": "N3: pulling the Bard preserves that support",
+      "passed": true
+    },
+    {
+      "name": "N3: the same two supports form the final adjacent bridge",
+      "passed": true
+    },
+    {
+      "name": "N3: the complete route preserves both dry weights and uses no extra immersed crate",
+      "passed": true
+    },
+    {
+      "name": "N3: the Wizard carries the remaining convoy crate across the water column",
+      "passed": true
+    },
+    {
+      "name": "N4: the original blocker is the first reflected target",
+      "passed": true
+    },
+    {
+      "name": "N4: an ordinary Thief step takes the delivered weight off its command",
+      "passed": true
+    },
+    {
+      "name": "N4: exchange and reflection release the Thief without moving the deposited weight",
+      "passed": true
+    },
+    {
+      "name": "N4: extracting the blocker before its replacement withdraws both hydraulic cells",
+      "passed": true
+    },
+    {
+      "name": "N4: the two-piece push replaces the relay without withdrawing the bridge",
+      "passed": true
+    },
+    {
+      "name": "N4: the last two songs carry the Thief but the northern wall holds the Wizard",
+      "passed": true
+    },
+    {
+      "name": "N4: the Bard would reclaim the final weight on an ordinary downward exit",
+      "passed": true
+    },
+    {
+      "name": "N4: the passive extraction leaves all three final commands weighted",
+      "passed": true
+    },
+    {
+      "name": "N4: no side opening bypasses the three final gates",
+      "passed": true
+    }
+  ],
+  "levels": [
+    {
+      "level": 2,
+      "title": "Le quai à deux réceptions",
+      "mapSha256": "27bce94b6f8d6c53258de721307703ecf5d3ecc7b29735edb819a943e7017f88",
+      "commandsSha256": "e02630fd5fde6b823a2d5f0ff59d1b5dcea62e527e62f9d5909567d3248e12d8",
+      "actions": 123,
+      "selections": 21,
+      "metrics": {
+        "actions": 123,
+        "selections": 21,
+        "warriorPushes": 7,
+        "thiefPulls": 3,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 1,
+        "swaps": 2,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 0,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 9,
+        "mirrorMoves": 9,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 2,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 3,
+      "title": "Les deux formes du pont",
+      "mapSha256": "1e1d8b77b5148ab6c9a6f2212848848fd5c465e15d5c7059bd0f9245f9cab915",
+      "commandsSha256": "23eb9696d4f5fca97450330e1ef49fae94e1fa8f2a2c7509310671f2de01b578",
+      "actions": 212,
+      "selections": 26,
+      "metrics": {
+        "actions": 212,
+        "selections": 26,
+        "warriorPushes": 5,
+        "thiefPulls": 6,
+        "thiefPartnerPulls": 4,
+        "thiefMirrorPulls": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 5,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 5,
+        "partnerMoves": 4,
+        "stoneMoves": 12,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 4,
+      "title": "La cale que l’on reprend",
+      "mapSha256": "dc858c9a2027ab447c1984acb19f58b401ce45e5193a59c80c955bf91f97e79e",
+      "commandsSha256": "31d771eea258586fc75691cc5593c1e50c210abb21cf48108fab5860bc517fcc",
+      "actions": 159,
+      "selections": 24,
+      "metrics": {
+        "actions": 159,
+        "selections": 24,
+        "warriorPushes": 9,
+        "thiefPulls": 4,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 0,
+        "swaps": 2,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 2,
+        "groupSongs": 2,
+        "songHeroMoves": 2,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 5,
+        "stoneMoves": 17,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 1,
+        "heroReflections": 1,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    }
+  ],
+  "counterBranches": [
+    {
+      "level": 2,
+      "name": "Send before placing the receiver",
+      "prefix": "RRRRRRCCCRCCRRRR",
+      "attempt": "R",
+      "actions": [
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 24
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 48,
+            "y": 27
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 15,
+            "y": 42
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 33
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 24
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        }
+      ],
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "0e79193bb5db61d37db26785f1576831aeb083e8921c6c6020ccc17124f7c0ca"
+    },
+    {
+      "level": 2,
+      "name": "Second load without clearing the first delivery",
+      "prefix": "RRRRRRCRRRRRRDRCCRCCUCCLCRCCCRCC",
+      "attempt": "D",
+      "actions": [
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 24
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 48,
+            "y": 27
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 15,
+            "y": 42
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 33
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 39,
+            "y": 27
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 48,
+            "y": 27
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 42
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 33
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 39,
+            "y": 24
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 48,
+            "y": 27
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 15,
+            "y": 42
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 36,
+            "y": 33
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 39,
+            "y": 24
+          }
+        },
+        {
+          "id": 2
+        }
+      ],
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "3aca78853058c181d51b606154da8dcb0bed52266b115a10b986538d1a2e24aa"
+    },
+    {
+      "level": 2,
+      "name": "Try to stand below the lateral sending post",
+      "prefix": "RRRRRRCRRRRRRDRCCCLLLDDDRRRRUU",
+      "attempt": "R",
+      "actions": [
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 24
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 48,
+            "y": 27
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 15,
+            "y": 42
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 33
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        }
+      ],
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "421c1f37cc13a2b2b380a2b0a0ebd506c575fc1e37a163deadabf2b75399d16c"
+    },
+    {
+      "level": 3,
+      "name": "Attempt the central route before joining the supports",
+      "prefix": "CDRCCCRRRRCURDCUCCLLUUULCULLLDDLLDDDDRRDRRCCCDDDDDDDRRRRLLLUUUUUUULCDRUCLUULLULCCCULLLLLUUUUUULLLLUCCCDDDDDR",
+      "attempt": "R",
+      "actions": [
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 21
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 39
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 15,
+            "y": 27
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 24
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 39
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 27,
+            "y": 27
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 36,
+            "y": 24
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 24,
+            "y": 27
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 18
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 42
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 24,
+            "y": 27
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 18
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 36,
+            "y": 42
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 18
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 18
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        }
+      ],
+      "failed": true,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "7ab74c25134ce7a7e102cacdd873e155ce1e7ebdbc282a26429812822c24269f"
+    },
+    {
+      "level": 3,
+      "name": "Move the Bard voluntarily after the first support is parked",
+      "prefix": "CDRCCCRRRRCURDCUCCLLUUULCULLLDDLLDDDDRRDRRCCCDDDDDDDRRRRLLLUUUUUUULCDRUCLUULLULCCCULLLLLUUUUUULLLLUCCRRURU",
+      "attempt": "U",
+      "actions": [
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 21
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 39
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 15,
+            "y": 27
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 24
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 39
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 27,
+            "y": 27
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 36,
+            "y": 24
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 24,
+            "y": 27
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 18
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 33,
+            "y": 42
+          }
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 24,
+            "y": 27
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 18,
+            "y": 18
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 36,
+            "y": 42
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 18
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 12,
+            "y": 45
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        }
+      ],
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "b993fedfcbf8e83d4668621a8cd53f9ad72fbe2561c9e973bfb3f425449c2751"
+    },
+    {
+      "level": 4,
+      "name": "Reflect before extracting the blocker",
+      "prefix": "RCR",
+      "attempt": "X",
+      "actions": [
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 21
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 5
+        }
+      ],
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "40dae9764a7b8c3fa5be355bb3d605b3478ae9e1c84874ec01d5b86849445345"
+    },
+    {
+      "level": 4,
+      "name": "Leave the first pull by walking forward",
+      "prefix": "RCR",
+      "attempt": "R",
+      "actions": [
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 21
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        }
+      ],
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "06973c8bc866e5757b0e71e8db3715d4574c6ab9ba10114807e153f58b41285c"
+    },
+    {
+      "level": 4,
+      "name": "Recover the blocker before delivering its replacement",
+      "prefix": "RCRCLUXCCCRU",
+      "attempt": "D",
+      "actions": [
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 21
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 42,
+            "y": 27
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 5
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 51,
+            "y": 24
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 21,
+            "y": 21
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 39,
+            "y": 33
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        }
+      ],
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "90e94cb45d414693376a46a82af7e59c21ca07ccfde545f951aebbce4de499a0"
+    },
+    {
+      "level": 4,
+      "name": "Leave the final song by walking down",
+      "prefix": "RCRCLUXRRRUURRRRCCURDDLDRRRRRRLLLDDDDDCRURRUUULDUURDDDDRRRCCUU",
+      "attempt": "D",
+      "actions": [
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 30,
+            "y": 21
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 42,
+            "y": 27
+          }
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 5
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 51,
+            "y": 24
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 21,
+            "y": 21
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 39,
+            "y": 33
+          }
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 3
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 2
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 4
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 54,
+            "y": 15
+          }
+        },
+        {
+          "id": 6,
+          "data": {
+            "x": 51,
+            "y": 24
+          }
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 1
+        },
+        {
+          "id": 2
+        }
+      ],
+      "failed": false,
+      "dead": false,
+      "complete": false,
+      "finalStateSha256": "88f867dd9e11d5fda5e9feeb715475ed36e9c8ec0ba605d48f285274635d9eff"
+    }
+  ],
+  "limitations": [
+    "These tests demonstrate the listed local effects and winning routes, not unique or optimal solutions.",
+    "No claim of an irrecoverable global deadlock is inferred from a blocked local move or a lost command.",
+    "N2 uses the Bard as a remote command operator; the author route does not require a song.",
+    "The East and Light references are adaptations of causal structure; ricochets, light powers and timed movement are not added."
+  ]
+}

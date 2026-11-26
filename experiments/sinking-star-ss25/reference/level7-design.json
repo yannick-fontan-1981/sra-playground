@@ -1,0 +1,958 @@
+{
+  "spec": {
+    "id": "ss25-07",
+    "title": "Le retour de la troisième charge",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "################ggg#",
+      "################..g#",
+      "##.........#####...#",
+      "##Wo..#....#####...#",
+      "##.........######.##",
+      "##..B......#.......#",
+      "##...o.....~.T.....#",
+      "##.........#....Z..#",
+      "##.........#.......#",
+      "##.........#.......#",
+      "################.###",
+      "################.###",
+      "##############..o.##",
+      "##############....##",
+      "##############....##",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "traversee",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 5,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "reserve",
+        "color": 9,
+        "buttons": [
+          {
+            "x": 9,
+            "y": 8
+          }
+        ]
+      },
+      {
+        "id": "arrivees",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 4,
+            "y": 4
+          },
+          {
+            "x": 7,
+            "y": 7
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 16,
+          "y": 12
+        },
+        "circuit": "reserve",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 17,
+          "y": 6
+        },
+        "circuit": "arrivees",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 11,
+          "y": 8
+        },
+        "circuit": "traversee",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "RRDLDDDDLCCCRRRRCCCDCCCRRRULDLLLLLCUUUURRCLLUCCDLLUDDDDCUUULUUUUURCCUURRRRRRRRRRURRRRRUUUUULCRUUURRRRRURRRRRUUUUUCCRRRRUURRURRRRRUUUUR",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "objective": "Maintenir une charge par une butée pendant l’aller, rapporter une troisième caisse avant de reprendre ce poids, puis quitter les deux commandes finales sans les entraîner.",
+    "label": "Adaptation · Heroes, Doubled · énigme 10",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-doubled-solutions/",
+    "puzzles": [
+      10
+    ]
+  },
+  "metrics": {
+    "actions": 134,
+    "selections": 19,
+    "warriorPushes": 2,
+    "thiefPulls": 10,
+    "thiefPartnerPulls": 4,
+    "thiefMirrorPulls": 0,
+    "swaps": 1,
+    "wizardHeroSwaps": 0,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 7,
+    "groupSongs": 3,
+    "songHeroMoves": 3,
+    "songStoneMoves": 9,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 7,
+    "stoneMoves": 18,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La butée retient la première caisse sur sa commande pendant que le chant transporte la deuxième jusqu’à la réserve. Un même mouvement agit donc sur la charge libre et laisse la charge bloquée en place.",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 16,
+          "y": 14
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "traversee": true,
+        "reserve": true,
+        "arrivees": false
+      }
+    },
+    {
+      "label": "L’ouverture de la réserve permet au Magicien d’échanger avec la troisième caisse. Il reste à la faire revenir pendant que la deuxième maintient encore le passage de sa propre sortie.",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 16,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "traversee": true,
+        "reserve": true,
+        "arrivees": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la troisième charge, lui fait changer d’axe puis la laisse sur le pont provisoire. Cette charge doit attendre là : elle remplacera le soutien quand le premier poids sera repris.",
+      "turn": 34,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "traversee": true,
+        "reserve": true,
+        "arrivees": false
+      }
+    },
+    {
+      "label": "Le Magicien quitte la réserve avant la reprise de sa commande. Les deux livraisons ont préparé à la fois une sortie de héros et une ressource de retour.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "traversee": true,
+        "reserve": true,
+        "arrivees": false
+      }
+    },
+    {
+      "label": "Le retour change les deux premières caisses de rôle. Le premier poids quitte sa butée : le pont se retire sous la troisième caisse, qui devient un appui permanent. Le pas vers le haut range les deux poids sur les commandes des arrivées.",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "traversee": false,
+        "reserve": false,
+        "arrivees": true
+      }
+    },
+    {
+      "label": "Le Voleur extrait la Barde de quatre cases sans chant. Un départ volontaire à proximité déplacerait de nouveau un poids ; les deux commandes restent occupées pendant cette extraction.",
+      "turn": 55,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "traversee": false,
+        "reserve": false,
+        "arrivees": true
+      }
+    }
+  ],
+  "adaptation": "Doubled 10 maintient une copie contre un mur sur une commande pendant qu’une autre va chercher la pierre d’un troisième bouton ; le retour utilise un autre placement. SS25 ne contient pas de copies synchronisées. Le chant déplace une caisse et laisse la première contre sa butée ; cette dissymétrie prépare l’extraction de la troisième charge par le Magicien et le Voleur. La charge revient sur une plateforme avant que le premier poids quitte sa commande et la transforme en appui permanent. Les deux caisses initiales deviennent alors les deux poids des arrivées, et le Voleur extrait la Barde sans réactiver leur mouvement. L’aller et le retour n’utilisent donc pas la même configuration. Les quatre héros, la réserve basse, la plateforme et les circuits sont une construction SS25."
+}
