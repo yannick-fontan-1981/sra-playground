@@ -3,14 +3,15 @@ import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgram
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions } from './plan-step.ts';
-import { assessMarkerStep, markerDirections, nextMarkerStep, readMarkerField, retainMarkerStep,
-  type MarkerField, type MarkerStep } from './observed-marker-field.ts';
+import { assessMarkerStep, markerDirections, markerWalkMatches, nextMarkerStep, readMarkerField, retainMarkerStep,
+  type MarkerField, type MarkerLeg, type MarkerStep } from './observed-marker-field.ts';
 import { assessRendezvous, nextRendezvousStep, readRendezvousField, retainRendezvous,
   type RendezvousField, type RendezvousStep } from './marker-rendezvous.ts';
 
 export const markedLatticeId = 'sic_marked_lattice';
 export const verifyMarkedLatticeId = 'sic_verify_marked_lattice';
 export const learnMarkedLatticeId = 'sic_learn_marked_lattice';
+export const continueMarkedField = 'continue_observed_marked_field';
 export const markedLatticeStrategies = {
   acquire_marked_lattice_motion: 'Test how the cursor moves on the marked surface',
   approach_unvisited_marker: 'Move toward the nearest marker still awaiting a test',
@@ -19,7 +20,6 @@ export const markedLatticeStrategies = {
 
 type State = { epoch: number; field: NativeBox; color: number; pitch: number; markers: NativeBox[];
   at: NativePoint; visited: number[]; count: number; evidence: string[]; stopped: boolean; movements?: string[] };
-type MarkerLeg = { from: NativePoint; landing: NativePoint; command: NativeCommand };
 type LegacyProposal = NativeProposal & { local: State; landing: NativePoint | null; walk?: MarkerLeg[]; target: number; needId: string };
 type FieldProposal = NativeProposal & { field: MarkerField; step: MarkerStep; needId: string };
 type PatrolProposal = NativeProposal & { patrol: RendezvousField; rendezvous: RendezvousStep; needId: string };
@@ -79,6 +79,11 @@ export function createSicVerifyMarkedLattice(family = verifyMarkedLatticeId): Na
     async attachPrograms(registry) {
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
+    async proposeInSubquestion(_group, subquestion, observation, rows, inputs, remaining, execution) {
+      if (subquestion !== continueMarkedField || transfer?.completed !== observation.levels_completed) return null;
+      const proposal = await this.propose(observation, rows, inputs, remaining, execution);
+      return proposal && (isFieldProposal(proposal) || isPatrolProposal(proposal)) ? proposal : null;
+    },
     async propose(observation, rows, inputs, remaining, execution) {
       if (remaining < 1 || observation.available_action_refs.includes('ACTION6') || !inputs.some(command => command.action_ref === 'ACTION5')) return null;
       if (patrol?.epoch === observation.level_epoch) {
@@ -108,7 +113,7 @@ export function createSicVerifyMarkedLattice(family = verifyMarkedLatticeId): Na
         if (!transfer || transfer.completed !== observation.levels_completed) return null;
         const field = current ?? readMarkerField(rows, observation.level_epoch, transfer.evidence, transfer.movements);
         if (field) {
-          const step = nextMarkerStep(field, rows, inputs);
+          const step = nextMarkerStep(field, rows, inputs, remaining);
           return step ? fieldProposal(observation, field, step, decide, execution) : null;
         }
         const moving = transfer.preparation ? readRendezvousField(rows, observation.level_epoch,
@@ -174,6 +179,11 @@ export function createSicVerifyMarkedLattice(family = verifyMarkedLatticeId): Na
           preconditions: {}, preserve_refs: [], evidence, actions, outcome_guard: { path: ['value'], contains: id } } };
     },
     before(proposal, index, packet, observation) {
+      if (index > 0 && isFieldProposal(proposal) && proposal.step.walk) {
+        const { walk } = proposal.step, leg = walk.legs[index];
+        const admitted = !!leg && proposal.field.epoch === observation.level_epoch && markerWalkMatches(proposal.field, walk, leg, packet.frame_rows);
+        return { admitted, reason: admitted ? 'marked_field_walk_still_visible' : 'marked_field_walk_changed' };
+      }
       if (index > 0 && !isPatrolProposal(proposal) && !isFieldProposal(proposal) && proposal.walk) {
         const { from: [x, y], landing: [nx, ny] } = proposal.walk[index]!, { local } = proposal;
         const admitted = local.epoch === observation.level_epoch && packet.frame_rows[y]?.[x] === local.color
@@ -192,9 +202,12 @@ export function createSicVerifyMarkedLattice(family = verifyMarkedLatticeId): Na
           reason: `marker_rendezvous_${result.kind}` };
       }
       if (isFieldProposal(proposal)) {
-        const result = assessMarkerStep(proposal.field, proposal.step, first, second);
+        const leg = proposal.step.walk?.legs[index];
+        const field = leg ? { ...proposal.field, at: leg.from } : proposal.field;
+        const step = leg ? { ...proposal.step, command: leg.command, landing: leg.landing } : proposal.step;
+        const result = assessMarkerStep(field, step, first, second);
         return { matched: result.kind === 'tested' ? null : result.kind !== 'contradicted' && result.kind !== 'blocked',
-          seal_prefix: true, reason: `marker_field_${result.kind}` };
+          seal_prefix: result.kind !== 'moved' || index + 1 >= proposal.actions.length, reason: `marker_field_${result.kind}` };
       }
       const leg = proposal.walk?.[index];
       const matched = observed(leg ? { ...proposal, local: { ...proposal.local, at: leg.from }, landing: leg.landing } : proposal, first, second);
@@ -219,8 +232,11 @@ export function createSicVerifyMarkedLattice(family = verifyMarkedLatticeId): Na
         } : {}) };
       }
       if (isFieldProposal(proposal)) {
-        const result = assessMarkerStep(proposal.field, proposal.step, first, second);
-        measured = retainMarkerStep(proposal.field, proposal.step, result, after.observation_ref, second);
+        const field = index > 0 && measured?.epoch === before.level_epoch ? measured : proposal.field;
+        const leg = proposal.step.walk?.legs[index];
+        const step = leg ? { ...proposal.step, command: leg.command, landing: leg.landing } : proposal.step;
+        const result = assessMarkerStep(field, step, first, second);
+        measured = retainMarkerStep(field, step, result, after.observation_ref, second);
         return { events: [] };
       }
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
@@ -275,9 +291,11 @@ async function fieldProposal(observation: Parameters<NativeFamily['propose']>[0]
     subjects: ['controlled_cursor', 'unresolved_marker', 'acquisition_counter'], parentObjective: parent,
     satisfactionContract: 'observe_official_progress_after_marker_contacts' };
   const need = { ...goal, id: sicNeedId(goal), status: 'assigned', evidence };
-  const id = `marked-lattice:${need.id}`, actions = [command];
+  const walk = step.walk?.legs;
+  const id = `marked-lattice:${need.id}`, actions = walk ? walk.map(leg => leg.command) : [command];
   return { status: 'proposed', kind: verifyMarkedLatticeId, actions, field, step, needId: need.id,
-    steps: [{ action: command, expected_after: landing }], binding: { observation_ref: ref, level_epoch: observation.level_epoch },
+    steps: walk ? walk.map(leg => ({ action: leg.command, expected_after: leg.landing })) : [{ action: command, expected_after: landing }],
+    binding: { observation_ref: ref, level_epoch: observation.level_epoch },
     sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash, instructions: decision.receipt.instructions,
       edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts },
     sicSituationCard: { strategy, need: 'Fill the remaining acquisition slots', mode, situation: label,

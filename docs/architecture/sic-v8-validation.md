@@ -2782,3 +2782,13 @@ Un tir produit un témoin de réglage courant lorsque l’agent a lancé une tra
 Après ce retour, un essai direct admissible du plateau courant prend la priorité sur une composition lancée par la seule répétition des retours. Un clic exige son témoin de point courant. L’arbitrage conserve l’essai de composition si la recherche directe ne propose aucune commande admissible.
 
 Le rejeu chronologique de GORI depuis le niveau 1 retrouve les six scores SIC en 2, 6, 7, 3, 25 et 3 commandes. Le niveau 5 gagne en 21,4 s jusqu’au score public, sous les plafonds de 30 commandes et 29 s. Le niveau 6 gagne en 2,0 s sous les plafonds de 8 commandes et 7 s. Les essais synthétiques couvrent deux trajectoires distinctes, une source ambiguë, un retour sans animation et l’expiration du témoin au changement de niveau.
+
+### Réutiliser les commandes et les trajets des grilles à repères
+
+Un mécanisme de grille qui a déjà contribué à un score peut proposer une suite dès qu’il reconnaît le curseur, les repères et le compteur du nouveau plateau. Sa proposition passe avant l’essai d’une arrivée suggérée par une observation héritée. Les essais restent accessibles lorsque la grille ne peut pas établir une suite.
+
+Pour un repère fixe, le trajet visible fournit une série bornée des déplacements déjà confirmés. Avant chaque mouvement supplémentaire, SIC vérifie l’emplacement du curseur, le compteur et l’apparence du repère. Le retour doit montrer le déplacement prévu. Un blocage clôt la série, conserve les retours déjà observés et écarte le passage contredit. Le déclenchement au repère et les déplacements qui dépendent du prochain rendez-vous restent guidés par le retour courant.
+
+À conditions identiques depuis le niveau 1, la référence gagne SIGN niveau 3 en 56 commandes et `13874eed` s’arrête à 68. Le nouveau rejeu gagne les six niveaux en 15, 44, 56, 22, 53 et 81 commandes sous les plafonds chronologiques. Au niveau 6, la priorité de la grille seule s’arrêtait à 74 commandes sous la limite de 88 s. Avec les séries, le score arrive à 71,4 s.
+
+Le contrôle examine les retours des commandes réellement exécutées. Au niveau 6, 31 commandes continuent une décision déjà ouverte et la plus longue série comporte 10 déplacements. Le niveau 4 exécute ses 22 commandes en décisions unitaires. Deux dispositions synthétiques vérifient les déplacements opposés, le recoloriage, le refus d’un curseur ambigu et la fermeture de la série sur un retour incompatible.

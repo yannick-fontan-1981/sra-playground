@@ -39,7 +39,25 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
+const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
+
+function markerWalks(run, issued, groups) {
+  const offset = run.executedTickets.indexOf(issued[0]);
+  const effects = new Map(issued.map((ticket, index) => [ticket, run.steps?.[offset + index]]));
+  const walks = [];
+  for (const group of groups.values()) {
+    if (group.length < 2 || !group.every(ticket => {
+      const effect = effects.get(ticket);
+      return /^ACTION[1-4]$/.test(ticket.action) && effect?.a === Number(ticket.action.slice(6))
+        && effect.pixels > 0 && ['sic_verify_marked_lattice', 'sic_learn_marked_lattice'].includes(effect.family);
+    })) continue;
+    const first = issued.indexOf(group[0]);
+    walks.push({ kind: 'marker walk', first, last: first + group.length - 1 });
+  }
+  assert.ok(walks.length, 'SIGN lost its executed marked-field walks');
+  return walks;
+}
 
 function consecutiveStonePushes(level, tickets) {
   const world = compileLevel(SS02_LEVELS[level - 1]);
@@ -919,7 +937,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SIGN: 6, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -970,7 +988,15 @@ export function checkRun(run) {
         continued >= Math.min(issued.length - 1, Math.ceil((minContinued * issued.length) / actions)),
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
-    } else assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
+    } else if (code !== 'SIGN') assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
+    if (code === 'SIGN') {
+      const ceiling = [20, 58, 68, 27, 64, 98][row.level - 1];
+      const [actions, minContinued] = markedFieldContinuity[i];
+      assert.ok(issued.length <= ceiling && issued.every(ticket => ticket.resets === 0),
+        'SIGN exceeded its verified action ceiling or reset');
+      assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
+        'SIGN L' + row.level + ' lost executed marked-field continuity');
+    }
     if (code === 'SS03' && row.level === 2) {
       // The exploratory route needed 111 commands and 95 decisions; the composed route needs 27 and 7.
       assert.ok(issued.length <= 35 && groups.size <= 10, 'SS03 L2 lost the direct pull and gate route');
@@ -1045,6 +1071,7 @@ export function checkRun(run) {
         'SS07 must prepare and complete the destination set in guarded series');
     }
     const physical = reference ? measureManipulation(row.level, issued)
+      : code === 'SIGN' && markedFieldContinuity[i][1] > 0 ? markerWalks(run, issued, groups)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
@@ -1085,6 +1112,7 @@ function main() {
       ['local-carry', 'SS05', '8', '155'],
       ['actor-composition', 'SS06', '8', '125'],
       ['destination-set', 'SS07', '8', '180'],
+      ['marked-field', 'source:SIGN', '6', '98'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -1098,7 +1126,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

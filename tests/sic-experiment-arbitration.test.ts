@@ -12,6 +12,7 @@ import { standalonePlanningGroups } from '../src/sic/standalone-families.ts';
 import { publicInputExplorationId } from '../src/sic/public-input-exploration.ts';
 import { compositionFamily } from '../src/sic/test-observed-compositions.ts';
 import { preparedEffectsId } from '../src/sic/test-prepared-effects.ts';
+import { continueMarkedField, learnMarkedLatticeId, verifyMarkedLatticeId } from '../src/sic/marked-lattice.ts';
 
 test('return history expires and fresh progress immediately restores precedence', () => {
   const memory = initialMemory(1);
@@ -46,9 +47,14 @@ test('all original fallback entries retain their order and experiments share the
   assert.equal(groups.length, 16);
   for (const original of standalonePlanningGroups) {
     const group = groups.find(candidate => candidate.id === original.id)!;
-    assert.deepEqual(group.families.filter(id => id !== preparedEffectsId && id !== compositionFamily), original.families);
+    assert.deepEqual(group.families.filter((id, index) => id !== preparedEffectsId && id !== compositionFamily
+      && group.entryPoints?.[index] !== continueMarkedField), original.families);
     if (group.entryPoints) assert.equal(group.families.length, group.entryPoints.length);
   }
+  const markerGroup = groups.find(group => group.entryPoints?.includes(continueMarkedField))!;
+  const continuations = markerGroup.families.filter((_id, index) => markerGroup.entryPoints?.[index] === continueMarkedField);
+  assert.deepEqual(continuations, [verifyMarkedLatticeId, learnMarkedLatticeId]);
+  assert.ok(markerGroup.entryPoints!.lastIndexOf(continueMarkedField) < markerGroup.families.indexOf(preparedEffectsId));
   const explore = groups.find(group => group.id === 'explore_available_inputs')!;
   assert.ok(explore.families.indexOf(preparedEffectsId) < explore.families.indexOf(publicInputExplorationId));
   assert.ok(explore.families.lastIndexOf(preparedEffectsId) > explore.families.indexOf(publicInputExplorationId));
