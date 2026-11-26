@@ -41,7 +41,7 @@ const requiredPhysical = {
 };
 const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
-const cargoContinuity = [[47, 38], [37, 34]];
+const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99]];
 
 function measuredMotionSeries(run, issued, groups, kind, owners, contact) {
   const offset = run.executedTickets.indexOf(issued[0]);
@@ -940,7 +940,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SIGN: 6, GABA: 2, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -1002,7 +1002,7 @@ export function checkRun(run) {
     }
     if (code === 'GABA') {
       const [actions, minContinued] = cargoContinuity[i];
-      assert.ok(issued.length <= [57, 45][i] && issued.every(ticket => ticket.resets === 0),
+      assert.ok(issued.length <= [57, 45, 81, 106, 128][i] && issued.every(ticket => ticket.resets === 0),
         'GABA exceeded its verified action ceiling or reset');
       assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
         'GABA L' + row.level + ' lost executed cargo continuity');
@@ -1126,7 +1126,7 @@ function main() {
       ['actor-composition', 'SS06', '8', '125'],
       ['destination-set', 'SS07', '8', '180'],
       ['marked-field', 'source:SIGN', '6', '98'],
-      ['cargo-transport', 'source:GABA', '2', '57'],
+      ['cargo-transport', 'source:GABA', String(cargoContinuity.length), '128'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');

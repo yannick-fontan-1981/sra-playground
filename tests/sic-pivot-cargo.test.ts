@@ -107,4 +107,21 @@ for (const reflected of [false, true]) test('a cargo series checks known contact
     await family.record(before, after, command, first, second, plan, index, []);
   }
   assert.deepEqual((family.state().state as { at: unknown }).at, delivered);
+
+  const returning = reflected ? 'ACTION4' : 'ACTION3';
+  const back = { ...held, actor: at.actor, cargo: [cargo(2)] };
+  family.restore({ ...initial, state: { ...initial.state, interactions: ['attach'], steps: [
+    ...steps.slice(0, 2), { input: returning, intent: 'move', subject: 0, next: back },
+  ] } });
+  const revisit = await family.propose(observation(0), board(at), [], 16);
+  assert.ok(revisit);
+  assert.deepEqual(revisit.actions.map(command => command.action_ref), [direction, 'ACTION5', returning]);
+
+  const exposed = board(held);
+  const checkLanding = (frame_rows: number[][]) =>
+    family.before(revisit, 2, { frame_rows } as Parameters<NativeFamily['before']>[2], observation(2));
+  assert.equal((await checkLanding(exposed)).admitted, true);
+  const [vacatedX, vacatedY] = at.actor;
+  exposed[vacatedY * pitch]![vacatedX * pitch] = 14;
+  assert.equal((await checkLanding(exposed)).admitted, false);
 });
