@@ -44,7 +44,7 @@ La transition N1–N2 et son annulation doivent restaurer la bonne aide. Les pan
 
 ## Qualification et preuves
 
-Les résultats connus à la rédaction sont **104 tests de laboratoire** et **90 tests natifs couvrant SS01–SS22**, tous réussis. Le parcours Chrome depuis N1 et le contrôle de continuité SIC sont encore en cours ; consulte leur résultat final avant de les déclarer réussis. Des modifications ultérieures imposent de vérifier les contrôles affectés et de consigner le SHA effectivement qualifié.
+Les résultats connus à la rédaction sont **104 tests de laboratoire** et **90 tests natifs couvrant SS01–SS22**, tous réussis. La campagne manuelle Chrome N1→N8 a atteint la victoire officielle avec les 33 découvertes ; Undo et rejeu des fins N1/N8 ont été vérifiés. Le typage, le build et le contrôle de continuité SIC ont réussi ; les preuves se trouvent dans `docs/migration/ss22-evidence/`. Des modifications ultérieures imposent de vérifier les contrôles affectés et de consigner le SHA effectivement qualifié.
 
 Dans `experiments/sinking-star-ss22`, installe les dépendances avec `npm ci` si nécessaire, puis exécute :
 
