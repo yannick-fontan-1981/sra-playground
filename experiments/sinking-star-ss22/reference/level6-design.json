@@ -1,0 +1,896 @@
+{
+  "spec": {
+    "id": "ss22-06",
+    "title": "Le quartier des reprises",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "#..B..............##",
+      "#.###########.###.##",
+      "#.###o......#.###.##",
+      "#.#########.#.###.##",
+      "#.........#.#.....##",
+      "#.###.#####.#.###.##",
+      "#.###.#.....#.###.##",
+      "#.###.#.#####.###.##",
+      "#.###.#.#####.....##",
+      "#.###.#.############",
+      "#.###.#....m..######",
+      "#.###.##############",
+      "#.............######",
+      "#..M..#######.######",
+      "#.W.T.#######.#....#",
+      "#..................#",
+      "###############gggg#",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "dechargement",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 3,
+            "y": 15
+          }
+        ]
+      },
+      {
+        "id": "livraison",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 12
+          },
+          {
+            "x": 13,
+            "y": 12
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 7,
+          "y": 12
+        },
+        "circuit": "dechargement",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 5,
+          "y": 14
+        },
+        "circuit": "dechargement",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 15
+        },
+        "circuit": "dechargement",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 17
+        },
+        "circuit": "livraison",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCCRRRRRRRRRRDDDDRRRRUUUULLLLLLLLLLLLLLLLDDDDRRRRRRRRLLLLDDDDCLCCCDDDDRRRRRRRRDDDRRDRRRCRDDRRRRRRRRRRRRDCDRRRRRRRRRRRRRRDCDRRRRRRRRRRRRD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 9
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 48
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 48
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 51
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 51
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "objective": "Guider la charge dans une rue inaccessible, changer de poste à chaque carrefour, décharger au bon moment puis conserver le bloc et le gardien sur leurs commandes.",
+    "label": "Heroes 3: Bard, Druid — énigme 18",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-3-bard-druid-solutions/",
+    "puzzles": [
+      18
+    ]
+  },
+  "metrics": {
+    "actions": 136,
+    "selections": 10,
+    "merchantPushes": 0,
+    "warriorPushes": 0,
+    "chainPushes": 0,
+    "mixedPushes": 0,
+    "thiefPulls": 0,
+    "songs": 23,
+    "groupSongs": 2,
+    "songHeroMoves": 1,
+    "songStoneMoves": 22,
+    "songMonsterMoves": 2,
+    "supportMoves": 0,
+    "partnerMoves": 1,
+    "stoneMoves": 23,
+    "mirrorMoves": 0,
+    "monsterMoves": 2,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La caisse traverse la rue haute tandis que la Barde reste dans la galerie parallèle, séparée par les bâtiments.",
+      "turn": 9,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 4
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "dechargement": true,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Le mur du premier carrefour retient la caisse pendant le changement de poste, puis le chant la descend dans la rue orientale.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "dechargement": true,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Après un détour extérieur, la Barde reprend la charge depuis le nord, puis depuis l’ouest. Elle la dépose sur la presse ouverte au dernier coude.",
+      "turn": 61,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "dechargement": true,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Le Marchand libère la commande : la presse décharge la caisse vers l’est et les deux accès de la galerie basse s’ouvrent. Fermer avant la livraison laisserait la charge au-dessus du coude.",
+      "turn": 63,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 4,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 11,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "dechargement": false,
+        "livraison": false
+      }
+    },
+    {
+      "label": "La Barde reprend la charge depuis le sud. Le gardien entre ensuite dans sa portée ; les deux avancent ensemble et le mur du fond fixe leurs places sur les deux commandes.",
+      "turn": 78,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "dechargement": false,
+        "livraison": true
+      }
+    },
+    {
+      "label": "Le départ par le bas conserve les deux poids : les bâtiments empêchent leurs mouvements vers le sud. Le retour vers l’ouest les aurait retirés des commandes.",
+      "turn": 80,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 16
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [
+        {
+          "x": 13,
+          "y": 12
+        }
+      ],
+      "circuits": {
+        "dechargement": false,
+        "livraison": true
+      }
+    }
+  ],
+  "adaptation": "Le principe repris est le guidage depuis plusieurs coins de rue, avec des itinéraires distincts pour la Barde et la charge. La source ne permet pas de fixer avec certitude le statut de sa créature rouge ; SS22 emploie explicitement une caisse puis un monstre statique. La rue des marchandises est inaccessible à pied. Le changement de galerie final dépend d’une presse latérale à commande distante, qui décharge la caisse au moment où ses accès s’ouvrent. Les deux derniers poids sont placés par la portée progressive du chant et conservés par les murs. Aucun Druide, clone, rayon coloré, déplacement autonome ou condition de victoire supplémentaire."
+}

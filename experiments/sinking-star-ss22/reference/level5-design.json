@@ -1,0 +1,1416 @@
+{
+  "spec": {
+    "id": "ss22-05",
+    "title": "Les entrées décalées",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "#.......############",
+      "#.M....#.###########",
+      "#..Woo...###########",
+      "#....T...###########",
+      "#..........#########",
+      "#......#...#########",
+      "#......#############",
+      "#.B....###o..#######",
+      "#......#############",
+      "#..........#########",
+      "#......#############",
+      "#........###########",
+      "#........##...g..g.#",
+      "#........##........#",
+      "#..................#",
+      "###########........#",
+      "###########...g...g#",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "arrivee",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 8,
+            "y": 3
+          },
+          {
+            "x": 12,
+            "y": 9
+          },
+          {
+            "x": 8,
+            "y": 15
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 16
+        },
+        "circuit": "arrivee",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRRRUULLLLLCCCDRRRRDRRUCCRRDLCCDLLCCLDDDDDDDDRRRCCDDDDDDDLLDRRRCCDDLLLLLLLCCLULLLLLCCCUUURRRRRRDRRULLLLDDDDDDLDDDDRRRRRRDDRRRRRRRCDDDRDRRRRRRRRRUURRRCDDDDDDDDDDDDDRDRRRRRRRRRURRRRURRCRRRRRRRRRRDDRRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 15
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 21
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 9
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 51
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Light · énigme 42",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-42",
+    "puzzle": 42,
+    "objective": "Séparer les livraisons, choisir l’accès qui conserve le bon décalage avec la charge centrale et repartir sans défaire son placement."
+  },
+  "metrics": {
+    "actions": 198,
+    "selections": 22,
+    "merchantPushes": 6,
+    "warriorPushes": 3,
+    "chainPushes": 3,
+    "mixedPushes": 0,
+    "thiefPulls": 11,
+    "songs": 2,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 2,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 25,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier avance les deux caisses ensemble jusqu’aux postes de séparation.",
+      "turn": 11,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 4
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La caisse de tête quitte la file et rejoint la commande haute. La caisse arrière peut maintenant descendre séparément.",
+      "turn": 23,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 4
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "arrivee": false
+      }
+    },
+    {
+      "label": "La caisse arrière est extraite, changée d’axe puis descendue dans le dépôt inférieur.",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 13
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le Voleur termine la livraison basse par traction et peut s’écarter latéralement en laissant son poids en place.",
+      "turn": 83,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 1,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 2,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 15
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "arrivee": false
+      }
+    },
+    {
+      "label": "Le Barde entre par l’accès haut, garde deux cases de décalage avec la caisse centrale et la livre sur son bouton à travers la cloison.",
+      "turn": 98,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 1,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 15
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "La sortie haute permet un détour hors de portée. Revenir directement par la galerie basse aurait repris la caisse dans le chant.",
+      "turn": 103,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 2
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 1,
+            "y": 16
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 15
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "arrivee": true
+      }
+    },
+    {
+      "label": "Trois livraisons différentes maintiennent l’accès aux quatre destinations.",
+      "turn": 198,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 14,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 17,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 15
+        },
+        {
+          "x": 8,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "arrivee": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Trois charges ont des contraintes de livraison différentes. Pour celle du milieu, l’entrée haute ménage une sortie qui conserve le placement ; revenir par l’entrée basse reprendrait la charge.",
+    "changes": "Les itinéraires et le chant à travers la cloison remplacent les faisceaux orange. La livraison supérieure sépare la tête de file ; la livraison inférieure demande une traction après changement d’axe. Les trois charges commandent un seul accès final.",
+    "limits": "L’accès inférieur reste une branche légale : son retrait volontaire du Barde déplace la caisse. La présence d’un partenaire pourrait fournir un transport imposé ; cette possibilité n’est pas déclarée impossible.",
+    "localChecks": [
+      {
+        "name": "Témoin complet, quatre personnages et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 198,
+          "selections": 22,
+          "merchantPushes": 6,
+          "warriorPushes": 3,
+          "chainPushes": 3,
+          "mixedPushes": 0,
+          "thiefPulls": 11,
+          "songs": 2,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 2,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 25,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Deux livraisons détachent la file avant le réglage central",
+        "status": "passed",
+        "observed": {
+          "initialFileDestination": [
+            {
+              "x": 7,
+              "y": 4
+            },
+            {
+              "x": 8,
+              "y": 4
+            },
+            {
+              "x": 10,
+              "y": 9
+            }
+          ],
+          "upperWeight": {
+            "x": 8,
+            "y": 3
+          },
+          "lowerWeight": {
+            "x": 8,
+            "y": 15
+          },
+          "finalAccessStillClosed": true
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "La sortie haute conserve le décalage utile",
+        "status": "passed",
+        "observed": {
+          "bardBefore": {
+            "x": 10,
+            "y": 7
+          },
+          "command": "U",
+          "bardAfter": {
+            "x": 10,
+            "y": 6
+          },
+          "middleWeight": {
+            "x": 12,
+            "y": 9
+          },
+          "weightPreservedThroughoutDetour": true
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Le retrait autonome de l’accès bas reprend la charge",
+        "status": "passed",
+        "observed": {
+          "bard": {
+            "x": 10,
+            "y": 11
+          },
+          "onlyFreeNeighbour": {
+            "x": 9,
+            "y": 11
+          },
+          "retreat": "L",
+          "middleCrateAfter": {
+            "x": 11,
+            "y": 9
+          },
+          "exitClosed": true
+        },
+        "scope": "L’impossibilité porte sur un retrait autonome conservant la charge depuis ce poste ; elle ne supprime pas les transports par un partenaire."
+      },
+      {
+        "name": "Un partenaire fournit une autre sortie sans chant",
+        "status": "passed",
+        "observed": {
+          "pulls": [
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 9,
+                  "y": 11
+                },
+                "to": {
+                  "x": 8,
+                  "y": 11
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 10,
+                  "y": 11
+                },
+                "to": {
+                  "x": 9,
+                  "y": 11
+                }
+              }
+            ],
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 8,
+                  "y": 11
+                },
+                "to": {
+                  "x": 7,
+                  "y": 11
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 9,
+                  "y": 11
+                },
+                "to": {
+                  "x": 8,
+                  "y": 11
+                }
+              }
+            ],
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 7,
+                  "y": 11
+                },
+                "to": {
+                  "x": 6,
+                  "y": 11
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 8,
+                  "y": 11
+                },
+                "to": {
+                  "x": 7,
+                  "y": 11
+                }
+              }
+            ],
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 6,
+                  "y": 11
+                },
+                "to": {
+                  "x": 5,
+                  "y": 11
+                }
+              },
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 7,
+                  "y": 11
+                },
+                "to": {
+                  "x": 6,
+                  "y": 11
+                }
+              }
+            ]
+          ],
+          "bardAfter": {
+            "x": 6,
+            "y": 11
+          },
+          "middleWeightPreserved": true
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Variante gagnante : entrée basse et secours du Voleur",
+        "status": "passed",
+        "observed": {
+          "actions": 216,
+          "selections": 26,
+          "merchantPushes": 6,
+          "warriorPushes": 3,
+          "chainPushes": 3,
+          "mixedPushes": 0,
+          "thiefPulls": 15,
+          "songs": 2,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 2,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 4,
+          "stoneMoves": 25,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "L’accès haut autorise le départ autonome ; l’accès bas fonctionne aussi grâce au transport imposé. L’adaptation conserve les quatre pouvoirs sans ajouter de règle cachée interdisant cette coopération.",
+        "commands": "CRRRUULLLLLCCCDRRRRDRRUCCRRDLCCDLLCCLDDDDDDDDRRRCCDDDDDDDLLDRRRCCDDLLLLLLLCCLULLLLLCCCRRDDRRRRRRCCCUUURUURRRRRRRLLLLDDDDDLLLLCDLDDDDRRRRRRDDRRRRRRRCDDDRDRRRRRRRRRUURRRCDDDDDDDDDDDDDRDRRRRRRRRRURRRRURRCRRRRRRRRRRDDRRR",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

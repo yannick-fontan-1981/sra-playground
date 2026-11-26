@@ -1,0 +1,309 @@
+{
+  "game": "SS22",
+  "success": true,
+  "levels": [
+    1,
+    2
+  ],
+  "method": "Rejeu des témoins, images publiques, phases physiques et contre-branches locales sans solveur.",
+  "checks": [
+    {
+      "level": 1,
+      "name": "Témoin complet sans refus ni décès",
+      "status": "passed",
+      "observed": {
+        "actions": 321,
+        "selections": 57,
+        "merchantPushes": 8,
+        "warriorPushes": 10,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "thiefPulls": 3,
+        "songs": 12,
+        "groupSongs": 1,
+        "songHeroMoves": 10,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 1,
+        "supportMoves": 1,
+        "partnerMoves": 21,
+        "stoneMoves": 14,
+        "mirrorMoves": 1,
+        "monsterMoves": 2,
+        "reflections": 7,
+        "heroReflections": 6,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Témoin complet sans refus ni décès",
+      "status": "passed",
+      "observed": {
+        "actions": 185,
+        "selections": 34,
+        "merchantPushes": 6,
+        "warriorPushes": 4,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "thiefPulls": 4,
+        "songs": 5,
+        "groupSongs": 3,
+        "songHeroMoves": 4,
+        "songStoneMoves": 4,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 8,
+        "stoneMoves": 14,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "33 découvertes par les observations publiques",
+      "status": "passed",
+      "observed": {
+        "acquired": 33,
+        "lessons": [
+          "select",
+          "move",
+          "merchant-push",
+          "warrior-push",
+          "file-push",
+          "mixed-file",
+          "thief-pull",
+          "single-pull",
+          "partner-push",
+          "partner-pull",
+          "mirror-motion",
+          "relay-weight",
+          "release-by-pull",
+          "monster-still",
+          "bard-song",
+          "partner-song",
+          "selective-song",
+          "diagonal-song",
+          "wall-song",
+          "monster-song",
+          "water-support",
+          "support-slide",
+          "support-anchor",
+          "cross-support",
+          "mirror",
+          "hero-reflection",
+          "crate-reflection",
+          "button",
+          "gate",
+          "press",
+          "monster-press",
+          "monster",
+          "goals"
+        ]
+      },
+      "scope": "Le détecteur ne reçoit que les images, leurs séquences et les commandes publiques du tutoriel."
+    },
+    {
+      "level": 1,
+      "name": "Pousser ou tirer le Barde ne chante pas",
+      "status": "passed",
+      "observed": {
+        "forcedMoves": 9,
+        "causes": [
+          "pull",
+          "push"
+        ],
+        "loadsPreserved": true
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "La file du Guerrier contient deux caisses et un partenaire",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 2,
+              "y": 16
+            },
+            "to": {
+              "x": 3,
+              "y": 16
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 3,
+              "y": 16
+            },
+            "to": {
+              "x": 4,
+              "y": 16
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 4,
+              "y": 16
+            },
+            "to": {
+              "x": 5,
+              "y": 16
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 16
+            },
+            "to": {
+              "x": 6,
+              "y": 16
+            }
+          }
+        ]
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Presse et rencontre des deux gardiens",
+      "status": "passed",
+      "observed": {
+        "pressMoves": [
+          {
+            "actor": "monster",
+            "from": {
+              "x": 18,
+              "y": 3
+            },
+            "to": {
+              "x": 18,
+              "y": 4
+            }
+          }
+        ],
+        "monstersRemoved": 2
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Le témoin déplace un appui vide",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "support",
+            "from": {
+              "x": 14,
+              "y": 12
+            },
+            "to": {
+              "x": 15,
+              "y": 12
+            }
+          }
+        ]
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Le retour volontaire annule la course chantée",
+      "status": "passed",
+      "observed": {
+        "commands": "CCCLR",
+        "crateBefore": {
+          "x": 10,
+          "y": 8
+        },
+        "crateAfter": {
+          "x": 10,
+          "y": 8
+        }
+      },
+      "scope": "Contre-branche depuis le premier pas ; elle montre une perte de progression, pas une impasse globale."
+    },
+    {
+      "level": 2,
+      "name": "La course volontaire est trop courte pour atteindre le bouton",
+      "status": "passed",
+      "observed": {
+        "commands": "CCCLL",
+        "refused": 1
+      },
+      "scope": "Le Guerrier et la butée ferment le deuxième pas à gauche dans cet état précis."
+    },
+    {
+      "level": 2,
+      "name": "Le replacement imposé conserve la progression",
+      "status": "passed",
+      "observed": {
+        "commands": "CCCLCCR",
+        "bard": {
+          "x": 9,
+          "y": 10
+        },
+        "freight": {
+          "x": 9,
+          "y": 8
+        }
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Quatre cycles déposent le fret sur sa commande",
+      "status": "passed",
+      "observed": {
+        "turn": 25,
+        "freight": [
+          {
+            "x": 12,
+            "y": 4
+          },
+          {
+            "x": 6,
+            "y": 8
+          }
+        ],
+        "warriorPushes": 4,
+        "sungCrateMoves": 4
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Variante gagnante : le Guerrier arrive en dernier",
+      "status": "passed",
+      "observed": {
+        "commands": "CCCLCCRCCLCCRCCLCCRCCLCCRCCDDRRRRUURRUUUUUCCDDRRRRUURRCUURRRRRRRRUUUUUUULDDDRURDDDCCURRRRRRRRRRUUUULUURDDDDDDLCCCLLLLLULLLLDLLUULLCCCUUUUULLLLDCCRUUUUUUULLLUULLLLCUUUUULLLLLULLLLDDLLLL",
+        "actions": 184
+      },
+      "scope": "Les poids restent en place ; les arrivées admettent plusieurs ordres."
+    }
+  ],
+  "limits": [
+    "Aucune optimalité ni unicité démontrée.",
+    "Les découvertes sont pédagogiques et ne constituent pas une condition cachée de victoire."
+  ]
+}

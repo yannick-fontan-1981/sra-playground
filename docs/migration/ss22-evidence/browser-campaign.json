@@ -1,0 +1,36 @@
+{
+  "game": "SS22",
+  "success": true,
+  "environment": "Chrome cloud browser, managed local preview of the native SRA Playground interface",
+  "url": "http://127.0.0.1:4173/?game=SS22&level=1#playground",
+  "mode": "Manual",
+  "startLevel": 1,
+  "completedLevels": 8,
+  "perLevelWitnessInputs": [321,185,106,203,198,136,149,116],
+  "totalWitnessInputs": 1414,
+  "selectionInputs": 173,
+  "physicalInputs": 1241,
+  "tutorialDiscoveries": "33 / 33 découvertes",
+  "officialFinalStatus": "VICTORY · Les quatre destinations sont occupées",
+  "interaction": "Documented browser Playwright locator.press on #game-canvas: arrows, Tab, Space; public DOM observations and screenshots",
+  "privateEngineStateUsed": false,
+  "authorWitnessUsed": true,
+  "autonomousSRASuccessClaimed": false,
+  "checks": [
+    "Every witness reached the next level through ordinary UI controls, without selecting a later level.",
+    "The tutorial reached 33 discoveries before the transition to N2.",
+    "Undo restored N1 before its last arrival; redoing the last Left command restored N2 and preserved discoveries.",
+    "After the complete campaign, Undo hid the final victory; redoing the final Up command restored it.",
+    "The final victory overlay was observed in both the DOM and a screenshot after animation settlement."
+  ],
+  "operatorNotes": [
+    "During the extra N1 Undo check, a key sent before Undo animation settled was ignored; the settled replay then passed.",
+    "After the first complete campaign, the final Undo redo was initially attempted with Right instead of the witness's Up. Up restored victory, then a clean Undo/Up check passed. These extra checks are outside the 1414-input witness campaign."
+  ],
+  "consoleObservation": "The inspected recent error log entries belonged to the browser extension metadata transport, not the application. No general claim that every console entry was audited is made.",
+  "limits": [
+    "The browser campaign was executed on the managed local preview, not the authenticated hosted Site.",
+    "Pixel-by-pixel and frame-duration equality are established separately by the laboratory DOM and native dispatcher tests.",
+    "Hosted publication and GitHub/Site identity are verified separately in the delivery report."
+  ]
+}

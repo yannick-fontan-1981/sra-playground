@@ -1,0 +1,973 @@
+{
+  "spec": {
+    "id": "ss22-03",
+    "title": "L’atelier du décrochage",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "#.........##########",
+      "#.M.......#.########",
+      "#........B#.########",
+      "#......Woo..########",
+      "#........#T#########",
+      "#........#.#########",
+      "###.######.#########",
+      "###.######.#########",
+      "###.######.#########",
+      "###.###....#########",
+      "###.....############",
+      "#######.############",
+      "#####.........######",
+      "#####.........######",
+      "#####.g....g..######",
+      "#####...g.....######",
+      "#####.......g.######",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "decrochage",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 11,
+            "y": 3
+          }
+        ]
+      },
+      {
+        "id": "sortie",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 10,
+            "y": 9
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 10
+        },
+        "circuit": "decrochage",
+        "direction": "S",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 7,
+          "y": 13
+        },
+        "circuit": "sortie",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRRLDDLLLLLLLCDDDDCUULLDDDDLDLLLDDDDDRRRRDDDDRRRRCCCLLLDDDDDDDRRRRRCCDDDDRDDDDDRRRRDDDDLCRRDDDDDRRRRDDDDDR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 15
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 36
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes Doubled · énigme 5",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-doubled-solutions/#%C3%A9nigme-5",
+    "puzzle": 5,
+    "objective": "Préparer deux voies de manutention, déposer un poids puis faire partir le Voleur sans reprendre sa caisse."
+  },
+  "metrics": {
+    "actions": 106,
+    "selections": 9,
+    "merchantPushes": 0,
+    "warriorPushes": 2,
+    "chainPushes": 2,
+    "mixedPushes": 0,
+    "thiefPulls": 4,
+    "songs": 2,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 2,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 0,
+    "stoneMoves": 10,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier engage la file dans les deux voies : une caisse au-dessus du Voleur, l’autre au fond de la colonne de commande.",
+      "turn": 13,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "decrochage": false,
+        "sortie": false
+      }
+    },
+    {
+      "label": "Le Voleur descend la première caisse sur la commande de sortie. Il reste devant elle, dans un couloir sans dégagement latéral.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 5
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "decrochage": false,
+        "sortie": true
+      }
+    },
+    {
+      "label": "Depuis la galerie parallèle, le Barde remonte la deuxième caisse. Son arrivée sur la commande ferme la presse : le Voleur est transporté sans tirer son poids.",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 2
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "decrochage": true,
+        "sortie": true
+      }
+    },
+    {
+      "label": "La cloison retient la caisse pendant que le Barde quitte le pupitre. La presse reste fermée et les sorties restent ouvertes.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "decrochage": true,
+        "sortie": true
+      }
+    },
+    {
+      "label": "Les quatre héros rejoignent la salle basse ; la caisse de sortie est restée dans sa branche.",
+      "turn": 106,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 16
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 17
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 16
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 11,
+          "y": 3
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "decrochage": true,
+        "sortie": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Un Voleur transporté par un autre effet ne déclenche pas sa traction et peut abandonner une charge à l’endroit voulu.",
+    "changes": "La synchronisation de deux Voleurs est remplacée par une presse commandée à distance. Deux caisses issues d’une même file prennent des fonctions distinctes ; un chant à travers la cloison commande le décrochage.",
+    "limits": "La presse donne un départ sans traction dans le parcours qualifié. Aucun ordre unique ni usage universellement obligatoire de chaque capacité n’est affirmé.",
+    "localChecks": [
+      {
+        "name": "Témoin complet, quatre personnages et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 106,
+          "selections": 9,
+          "merchantPushes": 0,
+          "warriorPushes": 2,
+          "chainPushes": 2,
+          "mixedPushes": 0,
+          "thiefPulls": 4,
+          "songs": 2,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 2,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 10,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Une file réelle distribue les deux charges",
+        "status": "passed",
+        "observed": {
+          "pushes": [
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 7,
+                  "y": 5
+                },
+                "to": {
+                  "x": 8,
+                  "y": 5
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 8,
+                  "y": 5
+                },
+                "to": {
+                  "x": 9,
+                  "y": 5
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 9,
+                  "y": 5
+                },
+                "to": {
+                  "x": 10,
+                  "y": 5
+                }
+              }
+            ],
+            [
+              {
+                "actor": "hero",
+                "from": {
+                  "x": 8,
+                  "y": 5
+                },
+                "to": {
+                  "x": 9,
+                  "y": 5
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 9,
+                  "y": 5
+                },
+                "to": {
+                  "x": 10,
+                  "y": 5
+                }
+              },
+              {
+                "actor": "stone",
+                "from": {
+                  "x": 10,
+                  "y": 5
+                },
+                "to": {
+                  "x": 11,
+                  "y": 5
+                }
+              }
+            ]
+          ],
+          "loadingPositions": [
+            {
+              "x": 10,
+              "y": 5
+            },
+            {
+              "x": 11,
+              "y": 5
+            }
+          ]
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Le départ volontaire reprend le poids de sortie",
+        "status": "passed",
+        "observed": {
+          "from": {
+            "x": 10,
+            "y": 10
+          },
+          "command": "D",
+          "thiefAfter": {
+            "x": 10,
+            "y": 11
+          },
+          "crateAfter": {
+            "x": 10,
+            "y": 10
+          },
+          "exitClosed": true
+        },
+        "scope": "Contre-branche locale ; la caisse est encore présente et peut nécessiter une nouvelle intervention."
+      },
+      {
+        "name": "La presse libère le Voleur en laissant sa caisse",
+        "status": "passed",
+        "observed": {
+          "turn": 21,
+          "phases": [
+            "song",
+            "piston"
+          ],
+          "pressMoves": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 10
+              },
+              "to": {
+                "x": 10,
+                "y": 11
+              }
+            }
+          ],
+          "exitWeight": {
+            "x": 10,
+            "y": 9
+          },
+          "controlWeight": {
+            "x": 11,
+            "y": 3
+          }
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Le chant traverse la cloison, puis le mur retient la commande",
+        "status": "passed",
+        "observed": {
+          "songCrateMoves": [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 11,
+                "y": 5
+              },
+              "to": {
+                "x": 11,
+                "y": 4
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 11,
+                "y": 4
+              },
+              "to": {
+                "x": 11,
+                "y": 3
+              }
+            }
+          ],
+          "bardAfter": {
+            "x": 6,
+            "y": 6
+          },
+          "controlPreserved": true
+        },
+        "scope": "État ou branche locale rejouée ; aucune unicité ou nécessité universelle de chaque capacité affirmée."
+      },
+      {
+        "name": "Variante gagnante : le Marchand entre en dernier",
+        "status": "passed",
+        "observed": {
+          "actions": 109,
+          "selections": 12,
+          "merchantPushes": 0,
+          "warriorPushes": 2,
+          "chainPushes": 2,
+          "mixedPushes": 0,
+          "thiefPulls": 4,
+          "songs": 2,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 2,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 10,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Les deux poids autorisent plusieurs ordres d’arrivée ; le choix du témoin n’est pas une règle.",
+        "commands": "CRRLDDLLLLLLLCDDDDCUULLDDDDLDLLLDDDDDRRRRDDDDRRRRCCCLLLDDDDDDDRRRRRCCCRRDDDDDRRRRDDDDDRCCCDDDDRDDDDDRRRRDDDDL",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

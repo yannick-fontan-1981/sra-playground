@@ -1,0 +1,845 @@
+{
+  "spec": {
+    "id": "ss22-07",
+    "title": "Les cales du bassin",
+    "mode": "quartet",
+    "rows": [
+      "###################",
+      "###################",
+      "#........##########",
+      "#.......B~~.M..####",
+      "#........ss..W.####",
+      "#........~~....####",
+      "#........~~.T..####",
+      "#........~~########",
+      "#........~~########",
+      "#........#~########",
+      "#........~~#gggg###",
+      "#........#~#....###",
+      "#........~~.....###",
+      "#........#~########",
+      "#........##########",
+      "#........##########",
+      "###################",
+      "###################"
+    ],
+    "facing": "S"
+  },
+  "commands": "CCCDLLCDDLLLLUULLLLLLCDLLLLLDLLLLLLCULLLLDDDDLLLLLLCRRDDDDDDLLUURRDDDDLDDDRULUURRRRRRUURRCDDRDDDDDDDRRRRRRRRRUUCDDRDDDDRRRRRRRRRURUCDDDRRRRRRRRRRURRU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "objective": "Évacuer le débarcadère supérieur, faire contourner trois butées aux deux appuis vides, puis rétablir un pont devant la cour finale.",
+    "label": "Heroes and Water — énigme 33",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/",
+    "puzzles": [
+      33
+    ]
+  },
+  "metrics": {
+    "actions": 149,
+    "selections": 10,
+    "merchantPushes": 0,
+    "warriorPushes": 0,
+    "chainPushes": 0,
+    "mixedPushes": 0,
+    "thiefPulls": 0,
+    "songs": 14,
+    "groupSongs": 6,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 20,
+    "partnerMoves": 0,
+    "stoneMoves": 0,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Les deux appuis forment le pont du débarcadère supérieur. La Barde se décale sur le quai pour laisser les trois voyageurs passer.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Les trois voyageurs ont quitté les appuis. Un appui occupé par un héros ne transporte pas son passager : tenter de déplacer le pont avant le débarquement serait refusé.",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La première butée retient l’appui de gauche. Celui de droite continue seul, donnant deux hauteurs différentes au dispositif.",
+      "turn": 60,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Depuis un poste décalé, la Barde engage le premier appui dans la seconde colonne. Les deux descendent ensuite en file jusqu’à la butée basse.",
+      "turn": 70,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 14
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La butée basse retient un appui pendant que l’autre se décale à gauche. Un détour par le bas reprend seulement le second et rétablit le pont devant l’unique entrée de la cour finale.",
+      "turn": 76,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La Barde embarque et débarque à pied sur le pont reconstitué. Les appuis demeurent en place pour les trois autres arrivées.",
+      "turn": 89,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 7
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 9,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 13
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": "Water 33 fournit le principe de calage contre des obstacles et de correction séparée du voyageur et de son dispositif. Ici les deux appuis ne portent personne pendant leur déplacement : la présence d’un héros les ancre, et un chant qui laisserait un héros sans appui est refusé. Les trois voyageurs débarquent avant la réorganisation. Une colonne de trois butées transforme la paire horizontale en file, puis en paire devant une autre entrée. Le chant agit dans un carré de cinq cases, les appuis vides glissent seulement entre cases d’eau, sans empilement, vitesse double, statue spéciale ou nouveau type de terrain."
+}

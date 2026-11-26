@@ -171,6 +171,10 @@ export function observeLesson(learned:Set<GalleryLesson>,before:LessonObservatio
   const pushed=handling(before,after,action,'merchant'),pulled=handling(before,after,action,'thief');
   if(pushed)learned.add('merchant-push');
   const file=pushLength(before,after,action);
+  const inFile=(p:Point):boolean=>!!view&&file>0
+    &&(view.dx===0?p.x===view.hero.x:p.y===view.hero.y)
+    &&(p.x-view.hero.x)*view.dx+(p.y-view.hero.y)*view.dy>0
+    &&(p.x-view.hero.x)*view.dx+(p.y-view.hero.y)*view.dy<=file;
   if(file)learned.add('warrior-push');
   if(file>1)learned.add('file-push');
   if(view&&file&&initialHeroes.some(h=>h.kind!=='warrior'
@@ -183,14 +187,15 @@ export function observeLesson(learned:Set<GalleryLesson>,before:LessonObservatio
   if(pulled?.single)learned.add('single-pull');
   if(pulled?.partner)learned.add('partner-pull');
   if(pulled?.partner==='bard'&&initial.some(p=>(p.kind==='stone'||p.kind==='monster')&&Math.max(Math.abs(p.x-pulled.from.x),Math.abs(p.y-pulled.from.y))<=2&&visiblePieces(pulled.view.frame).some(q=>samePiece(p,q))))learned.add('release-by-pull');
-  if((pushed?.partner&&plateAt(before.frame,pushed.from))||(pulled&&plateAt(before.frame,pulled.view.hero)))learned.add('relay-weight');
+  if((pushed?.partner&&plateAt(before.frame,pushed.from))||(pulled&&plateAt(before.frame,pulled.view.hero))
+    ||(file&&initialHeroes.some(h=>h.kind!=='warrior'&&inFile(h)&&plateAt(before.frame,h))))learned.add('relay-weight');
   const initialMonsters=initial.filter(p=>p.kind==='monster');
   if(view&&initialMonsters.length&&sameLevelFrames(before,after).every(frame=>{
     const pieces=visiblePieces(frame);
     return initialMonsters.every(p=>pieces.some(q=>q.kind==='monster'&&sameCell(p,q)));
   }))learned.add('monster-still');
   if(pushed?.partner)learned.add('partner-push');
-  if(pushed?.mirror||pulled?.mirror)learned.add('mirror-motion');
+  if(pushed?.mirror||pulled?.mirror||(file&&initial.some(p=>p.kind==='mirror'&&inFile(p))))learned.add('mirror-motion');
   if(view&&initial.some(p=>p.kind==='support'&&sameCell(p,view.later)))learned.add('cross-support');
   if(song?.moved.length||song?.escorted)learned.add('bard-song');
   if(song?.moved.some(p=>p.kind==='monster'))learned.add('monster-song');

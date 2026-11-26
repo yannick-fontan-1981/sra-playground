@@ -1,0 +1,1006 @@
+{
+  "spec": {
+    "id": "ss22-02",
+    "title": "La marche à deux temps",
+    "mode": "quartet",
+    "rows": [
+      "#################",
+      "#g..#g....#######",
+      "#...#.....#o...##",
+      "#.....#........##",
+      "#g....#..g#....##",
+      "###########....##",
+      "#####....o#....##",
+      "###########....##",
+      "######W.B##....##",
+      "########.###.####",
+      "#..............##",
+      "#.M............##",
+      "#...T..........##",
+      "#..............##",
+      "#################"
+    ],
+    "circuits": [
+      {
+        "id": "cadence",
+        "color": 15,
+        "buttons": [
+          {
+            "x": 5,
+            "y": 6
+          }
+        ]
+      },
+      {
+        "id": "livraison",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 11
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 12,
+          "y": 9
+        },
+        "circuit": "cadence",
+        "direction": "N",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 3
+        },
+        "circuit": "livraison",
+        "direction": "W",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCCLCCRCCLCCRCCLCCRCCLCCRCCDDRRRRUURRUUUUUCCDDRRRRUURRCUURRRRRRRRUUUUUUULDDDRURDDDCCURRRRRRRRRRUUUULUURDDDDDDLCCCLLLLLULLLLDLLUULLCCUUUUULLLLLULLLLDDLLLLCCCRUUUUUUULLLUULLLLCCUUUUULLLLD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Low Heroes · énigme 11",
+    "url": "https://sinkingstarwalkthrough.com/fr/low-heroes-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "objective": "Alterner une course chantée et un replacement silencieux, puis extraire et livrer la réserve."
+  },
+  "metrics": {
+    "actions": 185,
+    "selections": 34,
+    "merchantPushes": 6,
+    "warriorPushes": 4,
+    "chainPushes": 0,
+    "mixedPushes": 0,
+    "thiefPulls": 4,
+    "songs": 5,
+    "groupSongs": 3,
+    "songHeroMoves": 4,
+    "songStoneMoves": 4,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 8,
+    "stoneMoves": 14,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Quatre petites courses chantées déplacent la caisse dans sa galerie. Après chacune, le Guerrier replace le Barde sans chant : le chargement ne revient pas en arrière.",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cadence": true,
+        "livraison": false
+      }
+    },
+    {
+      "label": "La caisse a atteint sa commande. Le Barde quitte son pupitre par la seule ouverture basse ; la réserve devient accessible.",
+      "turn": 42,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 6,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cadence": true,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la caisse du coin et la présente dans la colonne de livraison.",
+      "turn": 82,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 7
+        },
+        {
+          "x": 6,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cadence": true,
+        "livraison": false
+      }
+    },
+    {
+      "label": "Le Marchand descend la réserve jusqu’à la seconde commande. La salle des quatre arrivées s’ouvre.",
+      "turn": 110,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 13
+        },
+        {
+          "x": 6,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "cadence": true,
+        "livraison": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Le Guerrier replace le Barde entre deux avancées : le transport imposé évite le chant de retour qui annulerait le travail.",
+    "changes": "La voiture à pédales est transposée dans un atelier sec. Une galerie de fret séparée, une course volontaire très courte et deux commandes successives remplacent le véhicule de la source. Le Voleur extrait la réserve du coin avant la livraison.",
+    "limits": "Le témoin qualifié utilise quatre replacements par le Guerrier. Aucune unicité du parcours ni nécessité universelle du Guerrier n’est affirmée ; le Voleur peut également imposer un transport silencieux.",
+    "localChecks": []
+  }
+}

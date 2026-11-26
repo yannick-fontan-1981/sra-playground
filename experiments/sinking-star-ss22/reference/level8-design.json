@@ -1,0 +1,804 @@
+{
+  "spec": {
+    "id": "ss22-08",
+    "title": "La dernière traverse",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "########.o..########",
+      "########.T..########",
+      "########....########",
+      "#########~##########",
+      "######sss~~~~~~~####",
+      "####..........~~####",
+      "####..B.......~~####",
+      "####..........~~#..#",
+      "####..........~~#gg#",
+      "####..........~~#gg#",
+      "####..M.......~~...#",
+      "####W.........~~#..#",
+      "####..........###..#",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "retour",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 6,
+            "y": 11
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 16,
+          "y": 11
+        },
+        "circuit": "retour",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 5
+        },
+        "circuit": "retour",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CCCRDRRUURRRDDLLLURRRRDDDDDDLLUURRRRRRRUUCCCDDDDDDDDLCCCRRRURRURULLLULDDCCCRURRRRRRRRRRUUCRDRRRRRRRRRRUCDRRRRRRRRRRU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "objective": "Déposer un des trois appuis pour le retour de la caisse, préparer la traverse finale avec les deux autres, puis remplacer le passeur par une poussée de rangée.",
+    "label": "Low Heroes — énigme 19",
+    "url": "https://sinkingstarwalkthrough.com/fr/low-heroes-solutions/",
+    "puzzles": [
+      19
+    ],
+    "secondary": {
+      "label": "Heroes and Water — énigme 34",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/"
+    }
+  },
+  "metrics": {
+    "actions": 116,
+    "selections": 14,
+    "merchantPushes": 0,
+    "warriorPushes": 5,
+    "chainPushes": 1,
+    "mixedPushes": 1,
+    "thiefPulls": 8,
+    "songs": 15,
+    "groupSongs": 14,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 30,
+    "partnerMoves": 1,
+    "stoneMoves": 13,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La première translation place les trois appuis dans l’axe. La Barde en dépose ensuite un dans la branche nord : il complète, avec la plateforme tenue par le Marchand, le retour du Voleur et de sa caisse.",
+      "turn": 9,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "retour": true
+      }
+    },
+    {
+      "label": "L’appui de la branche nord reste sur place. Les deux autres longent le bâtiment, tournent vers le sud et forment la dernière traverse devant la porte. La trajectoire se prépare depuis les positions d’arrivée.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "retour": true
+      }
+    },
+    {
+      "label": "La Barde franchit la traverse reconstruite. Elle a laissé libre l’appui du retour : le Voleur peut maintenant rapporter la caisse depuis la réserve haute.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 3
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "retour": true
+      }
+    },
+    {
+      "label": "Le Voleur extrait la caisse contre le mur, traverse l’appui déposé puis la plateforme et la ramène dans la cour. Retirer l’appui nord avant ce passage couperait ce retour.",
+      "turn": 53,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 14
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "retour": true
+      }
+    },
+    {
+      "label": "Le Guerrier pousse la caisse et le Marchand dans la même rangée. La caisse remplace le Marchand sur la commande sans aucun relâchement : la plateforme et la porte restent ouvertes.",
+      "turn": 72,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 6,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 18,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 13
+        },
+        {
+          "x": 15,
+          "y": 13
+        },
+        {
+          "x": 9,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "retour": true
+      }
+    }
+  ],
+  "adaptation": "Low Heroes 19 fournit la décision de déposer une partie du dispositif de transport pour rendre un passage possible, puis de réorganiser les éléments restants. Water 34 fournit la préparation d’une configuration de départ à partir de la trajectoire d’arrivée. SS22 utilise trois appuis qui ne déplacent jamais de passager : l’un reste dans une branche pour le retour du Voleur et d’une caisse sèche, les deux autres sont conduits autour de la cour vers une traverse distincte. Une plateforme tenue par le Marchand complète le retour. Le Guerrier réalise enfin une relève continue en poussant ensemble la caisse et ce Marchand. La réserve ne doit pas être immergée. Les cartes, les mouvements d’un pas, le détour de commande et les quatre arrivées sont recomposés ; aucun empilement, véhicule porteur, feu, quota ou déclencheur de victoire caché."
+}
