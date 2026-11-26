@@ -1,15 +1,15 @@
 # Campagne SIC des 107 jeux
 
-Instantané généré le 2026-11-26T19:03:54.985864+00:00.
+Instantané généré le 2026-11-26T19:19:32.906288+00:00.
 
-**État : `running` — 39/107 résultats reçus.**
+**État : `running` — 52/107 résultats reçus.**
 Source figée : `4a546a139f9064422c078ef5f40b8c22133c39a8`. Périmètre : **107 jeux / 692 niveaux**.
 
-**27 jeux ont tous leurs scores publics ; 27 ont aussi leur réconciliation finale attestée.**
-Niveaux publiquement gagnés confirmés : **204/692** ; réconciliation attestée : **204**.
-Commandes connues : **5208**, dont **5208** attribuées à SIC.
+**38 jeux ont tous leurs scores publics ; 38 ont aussi leur réconciliation finale attestée.**
+Niveaux publiquement gagnés confirmés : **285/692** ; réconciliation attestée : **285**.
+Commandes connues : **7252**, dont **7252** attribuées à SIC.
 
-En attente : **68**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
+En attente : **55**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
 
 Les scores acquis sont conservés en cas d'arrêt pendant la transition. `complete_unsettled` distingue une victoire publique complète d'une réconciliation finale non attestée.
 Un jeu en attente n'est pas un échec. L'absence du reçu de fin maintient le statut en attente ; ce rapport ne sonde pas le processus.
@@ -18,16 +18,16 @@ Le contrôle de réconciliation repose sur les comptes rendus de l'enfant ; il n
 
 Les plafonds sont comparés exactement à l'export du module de budgets inchangé : 432 niveaux avec temps mesuré, 57 avec temps estimé depuis les commandes, et 203 sans référence individuelle (repli : 80 commandes / 90 secondes). Un arrêt au repli ne suffit pas à identifier un défaut du solveur.
 
-Compteurs de récupération connus : **0 réinitialisations**, **0 retours arrière**. Parmi les résultats valides reçus, 1 n'ont pas de compteur de réinitialisation et 1 n'ont pas de compteur de retour arrière.
+Compteurs de récupération connus : **0 réinitialisations**, **0 retours arrière**. Parmi les résultats valides reçus, 3 n'ont pas de compteur de réinitialisation et 3 n'ont pas de compteur de retour arrière.
 
 ## Catégories
 
 | Catégorie | Jeux |
 |---|---:|
 | commands | 11 |
-| complete | 27 |
-| pending | 68 |
-| time | 1 |
+| complete | 38 |
+| pending | 55 |
+| time | 3 |
 
 ## Jeux incomplets et résultats à vérifier
 
@@ -48,6 +48,8 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 | FOGW | L2 | 1/6 | 19 / 19 | 5,981 / 9 s (mural) | Plafond de commandes du niveau atteint |
 | GRAV | L5 | 4/6 | 28 / 28 | 13,19 / 23 s (mural) | Plafond de commandes du niveau atteint |
 | GRIL | L2 | 1/6 | 10 / 10 | 3,37 / 8 s (mural) | Plafond de commandes du niveau atteint |
+| LF52 | L6 | 5/10 | 97 / 110 | 76,001 / 76 s (mural) | Plafond de temps de résolution atteint |
+| LKEY | L6 | 5/6 | 27 / 36 | 18,001 / 18 s (mural) | Plafond de temps de résolution atteint |
 
 ## Verdicts par jeu
 
@@ -92,19 +94,19 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 | GRAV | 4/6 | 4 | commands | resolution | 85 | measured | level_action_budget |
 | GRIL | 1/6 | 1 | commands | resolution | 15 | measured | level_action_budget |
 | HANO | 4/4 | 4 | complete | — | 60 | no_level_reference | target_levels_completed |
-| HOLE | —/6 | 0 | pending | — | — | — | — |
-| HPDL | —/6 | 0 | pending | — | — | — | — |
-| ISOS | —/6 | 0 | pending | — | — | — | — |
-| KA59 | —/7 | 0 | pending | — | — | — | — |
-| KATA | —/6 | 0 | pending | — | — | — | — |
-| KEYD | —/6 | 0 | pending | — | — | — | — |
-| KLOT | —/6 | 0 | pending | — | — | — | — |
-| LF52 | —/10 | 0 | pending | — | — | — | — |
-| LIFE | —/6 | 0 | pending | — | — | — | — |
-| LKEY | —/6 | 0 | pending | — | — | — | — |
-| LOGI | —/6 | 0 | pending | — | — | — | — |
-| LP85 | —/8 | 0 | pending | — | — | — | — |
-| LS19 | —/8 | 0 | pending | — | — | — | — |
+| HOLE | 6/6 | 6 | complete | — | 83 | measured | target_levels_completed |
+| HPDL | 6/6 | 6 | complete | — | 55 | measured | target_levels_completed |
+| ISOS | 6/6 | 6 | complete | — | 49 | measured | target_levels_completed |
+| KA59 | 7/7 | 7 | complete | — | 311 | measured | target_levels_completed |
+| KATA | 6/6 | 6 | complete | — | 144 | measured | target_levels_completed |
+| KEYD | 6/6 | 6 | complete | — | 153 | measured | target_levels_completed |
+| KLOT | 6/6 | 6 | complete | — | 100 | measured | target_levels_completed |
+| LF52 | 5/10 | 5 | time | resolution | 344 | measured | level_wall_time_budget |
+| LIFE | 6/6 | 6 | complete | — | 139 | no_level_reference | target_levels_completed |
+| LKEY | 5/6 | 5 | time | resolution | 115 | measured | level_wall_time_budget |
+| LOGI | 6/6 | 6 | complete | — | 30 | no_level_reference | target_levels_completed |
+| LP85 | 8/8 | 8 | complete | — | 189 | measured | target_levels_completed |
+| LS19 | 8/8 | 8 | complete | — | 332 | measured | target_levels_completed |
 | LS20 | —/7 | 0 | pending | — | — | — | — |
 | M0R0 | —/6 | 0 | pending | — | — | — | — |
 | MEMO | —/6 | 0 | pending | — | — | — | — |
@@ -163,7 +165,7 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 
 ## Mesures jusqu'au score
 
-204 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
+285 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
 Seul `scoredMs` est comparé au plafond de résolution. La durée totale et la réconciliation ne sont pas comparées à ce plafond. Les éventuels dépassements restent distincts du score public et du verdict brut ; les mesures arrondies et l'ordonnancement IPC devront être interprétés à l'audit final.
 
 Aucun dépassement rapporté parmi les scores dont le temps est disponible.
