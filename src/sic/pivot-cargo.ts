@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const pivotCargoId = 'sic_pivot_cargo';
 export const learnPivotCargoId = 'sic_deliver_cargo_after_observed_motion';
@@ -15,8 +16,8 @@ type Position = { actor: NativePoint; cargo: NativePoint[][]; held: number; deli
 type Intent = 'move' | 'attach' | 'turn' | 'drop';
 type Move = { input: string; intent: Intent; next: Position; subject: number };
 type Memory = { epoch: number; layout: Layout; at: Position; steps: Move[]; refs: string[]; moves: boolean; interactions: Intent[]; failed: boolean };
-type Landing = { point: NativePoint; pixels: number[] };
-type Proposal = NativeProposal & { local: Memory; move: Move; needId: string; landings?: Landing[][] };
+type Landing = { point: NativePoint; pixels?: number[] };
+type Proposal = NativeProposal & { local: Memory; move: Move; needId: string; landings?: Landing[][]; floorSamples?: string[] };
 type ReceiverBinding = { cargo: number; receiver: number };
 type CargoWitness = { epoch: number; score: number; pitch: number; actorColor: number; core: number; interactions: Intent[]; refs: string[];
   receivers?: ReceiverBinding[] };
@@ -288,27 +289,38 @@ function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): 
   });
 }
 
-function translationLandings(rows: NativeRows, local: Memory, remaining: number): Landing[][] {
+function cargoLandings(rows: NativeRows, local: Memory, remaining: number): { landings: Landing[][]; floorSamples: string[] } {
   const { layout, at, steps } = local;
-  const occupied = new Set([key(at.actor), ...at.cargo.flat().map(key)]);
-  const moving = (position: Position) => [position.actor, ...(position.cargo[position.held] ?? [])];
+  const occupiedBy = (position: Position) => [position.actor, ...position.cargo.flat()];
+  const occupied = new Set(occupiedBy(at).map(key));
   const result: Landing[][] = [];
+  let floorSamples: string[] | undefined;
   let previous = at;
-  for (const move of steps.slice(0, remaining)) {
-    if (move.intent !== 'move') break;
-    const entering = moving(move.next).filter(point => !moving(previous).some(current => same(current, point)));
-    // A cell vacated earlier in this series has no observed background at
-    // planning time. Rebind it at the next decision instead of guessing.
-    if (entering.some(point => occupied.has(key(point)))) break;
+  for (const move of steps.slice(0, Math.min(remaining, maximumCommittedActions))) {
+    if (move.intent === 'move' ? !local.moves : !local.interactions.includes(move.intent)) break;
+    const occupiedBefore = new Set(occupiedBy(previous).map(key));
+    const entering = occupiedBy(move.next).filter(point => !occupiedBefore.has(key(point)));
     const landings = entering.map(point => {
+      // An initially covered site must first match an exposed floor sample
+      // on the actual return of the preceding primitive.
+      if (occupied.has(key(point))) return { point };
       const [x, y] = tileBox(layout, point);
       return { point, pixels: patch(rows, [x, y], layout.pitch) };
     });
-    if (landings.some(landing => landing.pixels.length !== layout.pitch ** 2)) break;
+    if (landings.some(landing => landing.pixels && landing.pixels.length !== layout.pitch ** 2)) break;
+    if (landings.some(landing => !landing.pixels)) {
+      floorSamples ??= [...new Set(layout.floor.filter(site => !occupied.has(site)).flatMap(site => {
+        const [column, row] = site.split(',').map(Number);
+        const [x, y] = tileBox(layout, [column!, row!]);
+        const pixels = patch(rows, [x, y], layout.pitch);
+        return pixels.length === layout.pitch ** 2 ? [pixels.join(',')] : [];
+      }))];
+      if (!floorSamples.length) break;
+    }
     result.push(landings);
     previous = move.next;
   }
-  return result;
+  return { landings: result, floorSamples: floorSamples ?? [] };
 }
 
 function initial(rows: NativeRows, epoch: number, witness: CargoWitness | null): Memory | null {
@@ -395,7 +407,7 @@ export function createSicPivotCargo(family = pivotCargoId, transferObservedMotio
         subjects: ['carrier', 'cargo', 'pivot_surface', 'receiving_cells'], parentObjective: parent, satisfactionContract: 'official_progress_after_all_deliveries' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = pivotCargoId + ':' + need.id, action = { action_ref: move.input, data: {} };
-      const landings = motion && known ? translationLandings(rows, local, remaining) : [];
+      const { landings, floorSamples } = known ? cargoLandings(rows, local, remaining) : { landings: [], floorSamples: [] };
       const series = landings.length > 1 ? local.steps.slice(0, landings.length) : [move];
       const actions = series.length > 1 ? series.map(step => ({ action_ref: step.input, data: {} })) : [action];
       const situation = { move: 'Translate the carrier and verify the position of every attached tile', attach: 'Test attaching the adjacent cargo',
@@ -407,7 +419,7 @@ export function createSicPivotCargo(family = pivotCargoId, transferObservedMotio
         status: 'proposed', kind: family, local, move, needId: need.id,
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
         steps: series.map((step, index) => ({ action: actions[index], expected_after: step.next.actor })),
-        ...(series.length > 1 ? { landings } : {}),
+        ...(series.length > 1 ? { landings, floorSamples } : {}),
         ...(decision ? { sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
           instructions: decision.receipt.instructions, edited: 'edited' in decision.receipt && decision.receipt.edited === true, situation: facts } } : {}),
         sicSituationCard: { strategy, need: 'Deliver the differently shaped cargo', situation, evidence, agenda: navigation?.entries ?? [], mode,
@@ -427,7 +439,10 @@ export function createSicPivotCargo(family = pivotCargoId, transferObservedMotio
         const admitted = proposal.binding?.level_epoch === observation.level_epoch && !!landing && landing.every(expected => {
           const [x, y] = tileBox(layout, expected.point);
           const actual = patch(packet.frame_rows, [x, y], layout.pitch);
-          return actual.length === expected.pixels.length && actual.every((value, i) => value === expected.pixels[i]);
+          const pixels = expected.pixels;
+          return actual.length === layout.pitch ** 2 && (pixels
+            ? actual.every((value, i) => value === pixels[i])
+            : proposal.floorSamples?.includes(actual.join(',')) === true);
         });
         return { admitted, reason: admitted ? 'cargo_landing_still_available' : 'cargo_landing_changed' };
       }

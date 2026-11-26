@@ -1,3 +1,4 @@
+import { observedActorCompositionId } from './observed-actor-composition.ts';
 import { fieldRepairId } from './field-repair.ts';
 import { learnContactOrderId, verifyContactOrderId } from './ordered-contact.ts';
 import { supportTransferId } from './support-transfer.ts';
@@ -117,7 +118,7 @@ import { learnCorrespondenceId, learnRepeatedCellsId } from './learn-corresponde
 import { learnMaterialAssemblyId, materialAssemblyId } from './material-assembly.ts';
 
 export const standalonePlanningGroups = [
-  { id: observedPressureRecoveryGroup, families: [publicInputExplorationId] },
+  { id: observedPressureRecoveryGroup, families: [observedActorCompositionId, publicInputExplorationId] },
   { id: observedMechanicsGroup, families: [markedCollectionId, visibleConfigurationCoverageId, markedCompartmentFlowId, animationContactId,
     observedRelayRouteId, observedPrefixQuotasId, observedCarrierReductionId, observedLinePlacementId, observedPolePairId, verifyPreviewPlacementId, learnTransportAccessId,
     learnTurnPostsId, learnDirectionalReceptionId,
@@ -137,7 +138,7 @@ export const standalonePlanningGroups = [
   { id: 'follow_symbol_diagram', families: [symbolContributionId, legendRecolorId, matchExampleId, facetGrowthId, learnFacetGrowthId] },
   { id: 'visit_marked_surface', families: [verifyTraceCoverageId, verifyMarkedLatticeId, learnMarkedLatticeId] },
   { id: 'place_incoming_groups', families: [queuedPlacementId, learnQueuedPlacementId, gatedCascadeId, learnCascadeId] },
-  { id: 'explore_available_inputs', families: [cursorRoleMemoryId, displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, learnGaugeEffectId, verifyChannelAccessId, compartmentGrowthId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, learnRepeatedCellsId, learnVisibleGroupEffectsId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
+  { id: 'explore_available_inputs', families: [cursorRoleMemoryId, displayCouplingId, contrastControlsId, fieldIsolationId, learnFieldIsolationId, cavityAccessId, learnCorrespondenceId, verifyGaugeEffectId, learnGaugeEffectId, verifyChannelAccessId, compartmentGrowthId, learnGridAccessId, learnSelectedAccessId, contrastProbeId, compareAvailableControlsId, learnRepeatedCellsId, learnVisibleGroupEffectsId, learnReactiveMotionId, publicInputExplorationId, recheckDirectionalControlsId, trialRepeatedLinearControlsId] },
 ] as const;
 
 export const standalonePlanningFamilies: readonly string[] = Object.freeze([...new Set(standalonePlanningGroups.flatMap(group => group.families)), 'sic_test_observed_compositions','sic_test_prepared_effects']);

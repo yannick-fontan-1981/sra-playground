@@ -6,8 +6,47 @@ import rules from '../src/logos-engine/v6/animated-contact-rules.json' with {typ
 import { AnimatedContact,animatedCrossInvitation } from '../src/logos-engine/v6-animated-contact.ts';
 import { acquireTransientCurve,projectTransientCurve,transientCalibration,transientSourceRoleProbe } from '../src/logos-engine/v6-transient-contact-memory.ts';
 import { orderedTransientComponentPathFacts,measureScalarFillDisplay,maximalTransientBars,consistentTransientTurn,transientLinearSlope,transientQuadratic,transientRound,ballisticContactClick } from '../src/logos-engine/v6-transient-measurements.ts';
+import { learnCurveWitness, retainRegulatedReturn, type RegulatedChoice } from '../src/sic/regulated-transient-contact.ts';
+import { currentRegulatedTrial } from '../src/sic/animation-contact.ts';
+import type { NativeObservation, NativeRows } from '../src/logos-engine/v6-native-types.ts';
 const oracle=JSON.parse(await readFile(new URL('./fixtures/v6-animated-contact-reference.json',import.meta.url),'utf8')),scenes=oracle.scenes,packets=oracle.packets;
 const component=(c:any):any=>({...c,bbox:{...c.bbox,height:c.bbox.bottom-c.bbox.top+1,width:c.bbox.right-c.bbox.left+1}});
+test('a regulated curve requires a visible parameter before reading the animation', () => {
+  const board = Array.from({ length: 12 }, () => Array(12).fill(0));
+  const unneeded = new Proxy([] as NativeRows, {
+    get() { throw new Error('The trajectory frames should not be inspected.'); },
+  });
+  const observation = {} as NativeObservation;
+  assert.equal(learnCurveWitness(observation, observation, { action_ref: 'ACTION6', data: { x: 5, y: 7 } },
+    board, board, Array(6).fill(unneeded)), null);
+});
+for (const id of ['contact', 'disclosure']) test('a regulated trial certifies the current animated return: ' + id, () => {
+  const packet = packets[id];
+  const before = { level_epoch: 3, levels_completed: 2, observation_ref: 'before' } as NativeObservation;
+  const after = { ...before, observation_ref: 'returned' };
+  const action = { action_ref: packet.action_ref, data: packet.action_data };
+  const witness = learnCurveWitness(before, after, action, packet.before, packet.after, packet.intermediate);
+  assert.ok(witness);
+  const choice: RegulatedChoice = {
+    strategy: 'test_regulated_contact', action, count: witness.model.fill.scalar_fill_count, evidence: ['before'],
+    source: [0, 0, 2, 2], peer: [5, 5, 7, 7], meter: [0, 9, 9, 9],
+    projected: [packet.action_data.x, packet.action_data.y], expectedSign: null,
+    shot: [witness.model.fill.scalar_fill_count, packet.action_data.x, packet.action_data.y].join(','),
+  };
+  const retained = (frames: NativeRows[], result = after) =>
+    retainRegulatedReturn(witness, choice, before, result, packet.before, packet.after, frames);
+  assert.equal(currentRegulatedTrial({ curve: retained(packet.intermediate) }, after), 'returned');
+  assert.equal(currentRegulatedTrial({ curve: retained(packet.intermediate.slice(0, 2)) }, after), undefined);
+  assert.equal(currentRegulatedTrial({ curve: retained(Array(6).fill(packet.after)) }, after), undefined);
+  const next = { ...after, level_epoch: 4, levels_completed: 3, observation_ref: 'next' };
+  assert.equal(currentRegulatedTrial({ curve: retained(packet.intermediate, next) }, next), undefined);
+});
+test('an ambiguous moving source cannot establish a regulation model', () => {
+  const packet = packets.ambiguous;
+  const before = { level_epoch: 3, observation_ref: 'before' } as NativeObservation;
+  assert.equal(learnCurveWitness(before, { ...before, observation_ref: 'returned' },
+    { action_ref: packet.action_ref, data: packet.action_data }, packet.before, packet.after, packet.intermediate), null);
+});
 test('animation oracle and DRM predicates bind unchanged source and only public pixels',async()=>{
   assert.match(oracle.qualification,/zero claimed completed game levels/);assert.deepEqual(rules,oracle.rules);
   for(const[path,hash]of Object.entries(oracle.sourceHashes))assert.equal(createHash('sha256').update(await readFile(new URL('../reference/v6/'+oracle.commit+'/source/'+path,import.meta.url))).digest('hex'),hash,path);

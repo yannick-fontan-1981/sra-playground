@@ -1,5 +1,6 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeCommand, NativePoint, NativeRows } from '../logos-engine/v6-native-types.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 type Part = ReturnType<typeof geometricComponents>[number];
 type Target = { point: NativePoint; kind: 'calibration' | 'marker' | 'mode' };
@@ -18,7 +19,9 @@ export type MarkerField = {
   mobile?: MobileMarker | null;
   tracksInitialPatrol?: true;
 };
-export type MarkerStep = { target: Target; landing: NativePoint | null; command: NativeCommand; followsMobile?: true };
+export type MarkerLeg = { command: NativeCommand; from: NativePoint; landing: NativePoint };
+type MarkerWalk = { legs: MarkerLeg[]; anchor: NativeBox; pixels: string };
+export type MarkerStep = { target: Target; landing: NativePoint | null; command: NativeCommand; followsMobile?: true; walk?: MarkerWalk };
 type Result = { kind: 'moved' | 'blocked' | 'calibrated' | 'acquired' | 'tested' | 'mode_changed' | 'contradicted'; counter: string[] }
   | { kind: 'prepared'; counter: string[]; preparation: string[] };
 
@@ -217,7 +220,7 @@ function approachMobileMarker(state: MarkerField, moves: MarkerMove[], sites: Se
   return null;
 }
 
-export function nextMarkerStep(state: MarkerField, rows: NativeRows, inputs: readonly NativeCommand[]): MarkerStep | null {
+export function nextMarkerStep(state: MarkerField, rows: NativeRows, inputs: readonly NativeCommand[], remaining = 1): MarkerStep | null {
   const { scene, at, target: retained } = state;
   if (state.stopped || state.count >= 96 || !locateActor(scene, rows, at) || !sameCounter(counterValues(scene, rows), state.counter)) return null;
   if (state.prepared && (!same(at, state.prepared.point)
@@ -226,13 +229,14 @@ export function nextMarkerStep(state: MarkerField, rows: NativeRows, inputs: rea
     const command = inputs.find(input => input.action_ref === id);
     return command ? [{ command, x: x * scene.pitch, y: y * scene.pitch }] : [];
   });
-  type Node = { point: NativePoint; distance: number; first: Pick<MarkerStep, 'command' | 'landing'> | null };
+  type Node = { point: NativePoint; distance: number; first: MarkerLeg | null; leg?: MarkerLeg; parent?: Node };
   const root = { point: at, distance: 0, first: null };
   const nodes = new Map<string, Node>([[key(at), root]]), queue: Node[] = [root];
   for (const node of queue) for (const move of moves) {
     const landing: NativePoint = [node.point[0] + move.x, node.point[1] + move.y], id = key(landing);
     if (!sites.has(id) || nodes.has(id) || state.blocked.includes(edge(node.point, move.command.action_ref))) continue;
-    const next = { point: landing, distance: node.distance + 1, first: node.first ?? { command: move.command, landing } };
+    const leg = { command: move.command, from: node.point, landing };
+    const next = { point: landing, distance: node.distance + 1, first: node.first ?? leg, leg, parent: node };
     nodes.set(id, next);
     queue.push(next);
   }
@@ -249,7 +253,8 @@ export function nextMarkerStep(state: MarkerField, rows: NativeRows, inputs: rea
         if (rendezvous) return rendezvous;
         if (!state.mobile.cycle && state.mobile.history.length < 24) {
           const sample = queue.find(node => node.first && !state.mobile!.history.some(at => same(at, node.point)));
-          if (sample?.first) return { ...sample.first, target: { point: state.mobile.history.at(-1)!, kind: 'marker' }, followsMobile: true };
+          if (sample?.first) return { command: sample.first.command, landing: sample.first.landing,
+            target: { point: state.mobile.history.at(-1)!, kind: 'marker' }, followsMobile: true };
         }
       }
       if (state.modeChanges < 3) target = { kind: 'mode', point: [scene.control[0], scene.control[1]] };
@@ -258,7 +263,30 @@ export function nextMarkerStep(state: MarkerField, rows: NativeRows, inputs: rea
   if (!target) return null;
   const path = nodes.get(key(target.point));
   if (!path) return null;
-  return path.first ? { target, ...path.first } : operation ? { target, command: operation, landing: null } : null;
+  if (!path.first) return operation ? { target, command: operation, landing: null } : null;
+  const { command, landing } = path.first;
+  const step = { target, command, landing };
+  // A static target remains selected between moves. Recheck its appearance at
+  // every release and stop before the first direction whose effect is unknown.
+  const limit = Math.min(remaining, maximumCommittedActions, 96 - state.count);
+  if (limit < 2 || path.distance < 2) return step;
+  const route: MarkerLeg[] = [];
+  for (let node = path; node.leg && node.parent; node = node.parent) route.push(node.leg);
+  const legs: MarkerLeg[] = [];
+  for (const leg of route.reverse().slice(0, limit)) {
+    if (!state.movements.includes(leg.command.action_ref)) break;
+    legs.push(leg);
+  }
+  if (legs.length < 2) return step;
+  const anchor = target.kind === 'mode' ? scene.control
+    : target.kind === 'calibration' && scene.calibrator ? scene.calibrator : boxAt(target.point, scene.extent);
+  return { ...step, walk: { legs, anchor, pixels: JSON.stringify(rect(rows, anchor)) } };
+}
+
+export function markerWalkMatches(state: MarkerField, walk: MarkerWalk, leg: MarkerLeg, rows: NativeRows): boolean {
+  const { scene } = state;
+  return locateActor(scene, rows, leg.from) && !locateActor(scene, rows, leg.landing)
+    && sameCounter(counterValues(scene, rows), state.counter) && JSON.stringify(rect(rows, walk.anchor)) === walk.pixels;
 }
 
 export function assessMarkerStep(state: MarkerField, step: MarkerStep, first: NativeRows, second: NativeRows): Result {

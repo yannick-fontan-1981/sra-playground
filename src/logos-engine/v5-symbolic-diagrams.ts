@@ -14,7 +14,7 @@ export interface DiagramRow {
   readonly symbol_extent: number;
 }
 export type EqualRowPair = readonly [ConcentricFrame, ConcentricFrame];
-class DiagramBoundExceeded extends Error {
+export class DiagramBoundExceeded extends Error {
   constructor(message: string) { super(message); this.name = 'ValueError'; }
 }
 const componentsCache = new Map<FrameGrid, readonly V5Component[]>();

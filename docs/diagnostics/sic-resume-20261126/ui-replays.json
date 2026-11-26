@@ -1,0 +1,133 @@
+{
+  "schema": "sic.viewer-observation.v1",
+  "observedDate": "2026-11-26",
+  "sourceCommit": "5c1c647a60c4c1f206ef85e34b08033c6f5300b7",
+  "origin": "http://127.0.0.1:4173/",
+  "method": "Direct browser UI interaction and observation; one fresh SIC session from level 1 per retained replay. Run to next level clicked only after each previous level boundary. No reset or direct level selection.",
+  "timingQualification": false,
+  "scope": "Functional viewer evidence for the prepared code. Strict campaign times are in the separate JSONL reports. No hosted-production browser replay is claimed.",
+  "replays": [
+    {
+      "game": "GABA",
+      "mode": "SIC",
+      "startLevel": 1,
+      "totalGameLevels": 6,
+      "levelsWon": 6,
+      "runToNextLevelClicks": 6,
+      "resetCount": 0,
+      "directLevelSelectionCount": 0,
+      "commandsPerLevel": [
+        47,
+        37,
+        67,
+        88,
+        106,
+        102
+      ],
+      "cumulativeCommands": [
+        47,
+        84,
+        151,
+        239,
+        345,
+        447
+      ],
+      "cumulativeCompletedPlans": [
+        9,
+        12,
+        17,
+        23,
+        30,
+        39
+      ],
+      "finalVisibleStatus": "The game reports WIN.",
+      "fullGameWinReported": true,
+      "finalSelectedLevel": 6,
+      "finalObservedURL": "http://127.0.0.1:4173/?game=GABA&level=6",
+      "finalTabMarkedDeliverable": true
+    },
+    {
+      "game": "SIGN",
+      "mode": "SIC",
+      "startLevel": 1,
+      "totalGameLevels": 6,
+      "levelsWon": 6,
+      "runToNextLevelClicks": 6,
+      "resetCount": 0,
+      "directLevelSelectionCount": 0,
+      "commandsPerLevel": [
+        15,
+        44,
+        56,
+        22,
+        53,
+        81
+      ],
+      "cumulativeCommands": [
+        15,
+        59,
+        115,
+        137,
+        190,
+        271
+      ],
+      "cumulativeCompletedPlans": [
+        11,
+        29,
+        57,
+        79,
+        104,
+        154
+      ],
+      "finalVisibleStatus": "The game reports WIN.",
+      "fullGameWinReported": true,
+      "finalSelectedLevel": 6,
+      "finalObservedURL": "http://127.0.0.1:4173/?game=SIGN&level=6",
+      "finalTabMarkedDeliverable": true
+    },
+    {
+      "game": "WA30",
+      "mode": "SIC",
+      "startLevel": 1,
+      "totalGameLevels": 9,
+      "levelsWon": 7,
+      "runToNextLevelClicks": 7,
+      "resetCount": 0,
+      "directLevelSelectionCount": 0,
+      "commandsPerLevel": [
+        26,
+        59,
+        76,
+        48,
+        113,
+        48,
+        42
+      ],
+      "cumulativeCommands": [
+        26,
+        85,
+        161,
+        209,
+        322,
+        370,
+        412
+      ],
+      "cumulativeCompletedPlans": [
+        21,
+        62,
+        116,
+        164,
+        218,
+        242,
+        264
+      ],
+      "finalVisibleStatus": "Level completed.",
+      "fullGameWinReported": false,
+      "finalSelectedLevel": 8,
+      "finalObservedURL": "http://127.0.0.1:4173/?game=WA30&level=8",
+      "finalTabMarkedDeliverable": true,
+      "commandsAtNextLevel": 0,
+      "excludedAttempt": "An earlier tab disappeared after three levels. This retained replay restarted at level 1 and completed all seven levels in its own uninterrupted session."
+    }
+  ]
+}

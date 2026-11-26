@@ -12,7 +12,7 @@ import { standalonePlanningFamilies } from '../src/sic/standalone-families.ts';
 import type { GameObservation } from '../src/runtime/browser-games.ts';
 import { emptyV6Snapshot, toV6PublicObservation, V6_REFERENCE_COMMIT, v6FrameHash } from '../src/runtime/v6-agent-protocol.ts';
 import type { V6AgentOperation, V6AgentTransport } from '../src/runtime/v6-agent-protocol.ts';
-import { sicObservedGameOver } from '../src/logos-engine/v6-native-types.ts';
+import { sicObservedGameOver, sicObservedUnplannedMaterialLoss } from '../src/logos-engine/v6-native-types.ts';
 import type {
   NativeCommand, NativeExecution, NativeFamily, NativeInitialize, NativeOutcome, NativePublicObservation,
   NativeRuntimeSnapshot, NativeRuntimeYield, NativeV6Backend,
@@ -257,6 +257,31 @@ test('native runtime defers family recording until a sealed prefix and ignores p
   assert.equal(result.kind, 'boundary'); assert.deepEqual(records, [0, 1]); assert.equal(result.snapshot.activeSeconds, 0.012);
 });
 
+test('a translated preparation gives way to a grounded public frontier and survives an unavailable alternative', async () => {
+  const publicOwner = 'sic_public_input_exploration';
+  const passive = {
+    before: () => ({ admitted: true, reason: 'current' }),
+    after: () => ({ matched: true, seal_prefix: true, reason: 'witnessed' }),
+    record: () => ({ events: [] }), state: () => ({}), restore: () => {},
+  };
+  for (const strategy of ['compare_public_input', 'unverified_projection']) {
+    const prepared: NativeFamily = {
+      ...passive, id: 'translated-preparation',
+      propose: () => ({ status: 'proposed', kind: 'prepared',
+        compare_public_frontier_first: true, actions: [{ action_ref: 'ACTION1', data: {} }], steps: [{}] }),
+    };
+    const proposal = () => ({ status: 'proposed', kind: 'public',
+      sicSituationCard: { strategy }, actions: [{ action_ref: 'ACTION2', data: {} }], steps: [{}] });
+    const explorer: NativeFamily = { ...passive, id: publicOwner, propose: proposal, proposeInGroup: proposal };
+    const service = new V6AgentService(() => new NativeV6Runtime({ families: [prepared, explorer],
+      groups: [{ id: 'observed-frontier', families: [prepared.id, explorer.id] }],
+      sourceDigest: 'public-frontier-priority-test', maxPointOccurrences: 32 }));
+    const result = await service.handle({ ...init(),
+      observation: toV6PublicObservation({ ...board(), availableActionIds: [1, 2] }) });
+    assert.equal(result.ticket?.actionRef, strategy === 'compare_public_input' ? 'ACTION2' : 'ACTION1');
+  }
+});
+
 test('SIC Fallback withdraws the admitted family before any of its commands is released', async () => {
   const family = (id: string, action_ref: string, length: number): NativeFamily => ({
     id,
@@ -315,6 +340,47 @@ test('an acquired loss can RESET the current level, retain evidence and replan f
   assert.equal(next.kind, 'action');
   assert.equal(state, 0);
   assert.notEqual(next.ticket?.observationRef, first.ticket?.observationRef);
+});
+
+test('SIC undoes only the action that consumed capacity and retains the preceding acquired prefix', async () => {
+  let acquired = 0, rejected = false;
+  const family: NativeFamily = {
+    id: 'undo-material-test',
+    propose: () => ({ status: 'proposed', kind: 'undo-material-test',
+      actions: acquired === 0 ? [{ action_ref: 'ACTION1', data: {} }, { action_ref: 'ACTION1', data: {} }]
+        : [{ action_ref: 'ACTION1', data: {} }], steps: acquired === 0 ? [{}, {}] : [{}] }),
+    before: () => ({ admitted: true, reason: 'current' }),
+    after: (_proposal, index) => index === 1 ? { matched: false, seal_prefix: true, reason: sicObservedUnplannedMaterialLoss }
+      : { matched: true, seal_prefix: false, reason: 'witnessed' },
+    record: () => { acquired++; return { events: [] }; },
+    requestedStopReason: () => acquired === 2 ? sicObservedUnplannedMaterialLoss : null,
+    state: () => ({ acquired, rejected }),
+    restore: value => { acquired = value.acquired as number; rejected = value.rejected as boolean; },
+    stateAfterActionUndo: entry => ({ ...entry, rejected: true }),
+  };
+  const backend = new NativeV6Runtime({ families: [family], maxPointOccurrences: 250, sourceDigest: 'test-material-undo' });
+  const service = new V6AgentService(() => backend);
+  const first = await service.handle(init());
+  const second = await service.handle({ type: 'advance', sessionId: first.sessionId, sequence: 1, ticketId: first.ticket!.id,
+    observation: toV6PublicObservation(board(1), 1), executionMs: 1 });
+  assert.equal(second.kind, 'action');
+  const lost = await service.handle({ type: 'advance', sessionId: first.sessionId, sequence: 2, ticketId: second.ticket!.id,
+    observation: toV6PublicObservation(board(2), 2), executionMs: 1 });
+  assert.equal(lost.kind, 'stopped');
+  assert.equal(lost.snapshot.reason, sicObservedUnplannedMaterialLoss);
+  assert.equal(lost.snapshot.canUndoAction, true);
+  const undo = (pixel: number) => service.handle({ type: 'undo_action', sessionId: first.sessionId, sequence: 2,
+    observation: toV6PublicObservation(board(pixel), 2) });
+  await assert.rejects(backend.undoAction(toV6PublicObservation(board(0), 2), {}), /observed board before the lost action/);
+  const recovered = await undo(1);
+  assert.equal(recovered.kind, 'boundary');
+  assert.equal(recovered.snapshot.canUndoAction, false);
+  assert.equal(recovered.snapshot.actions, 2);
+  const next = await service.handle({ type: 'resume', sessionId: first.sessionId, sequence: 2 });
+  assert.equal(acquired, 1);
+  assert.equal(rejected, true);
+  assert.equal(next.command?.actionRef, 'ACTION1');
+  assert.notEqual(next.ticket?.observationRef, second.ticket?.observationRef);
 });
 
 test('SIC retains a witnessed fatal command across a same-level reset and authorizes a different command', async () => {
@@ -405,6 +471,36 @@ for (const [parallelWorkers, expectedMs] of [[1, 360_000], [4, 514_286], [8, 720
     assert.equal(stopped.snapshot.actions, 2);
   });
 }
+
+test('each level receives its own action count and active deadline through the native service', async () => {
+  const offers: [number, number][] = [];
+  const command = { action_ref: 'ACTION1', data: {} };
+  const family: NativeFamily = {
+    id:'explicit-level-budgets',
+    propose: (_o, _rows, _inputs, remaining, execution) => {
+      offers.push([remaining, execution!.deadlineMs!]);
+      return { status:'proposed', kind:'public_test', actions:[command], steps:[{}] };
+    },
+    before: () => ({ admitted:true, reason:'current' }),
+    after: () => ({ matched:true, seal_prefix:true, reason:'witnessed' }),
+    record: () => ({ events:[] }), state: () => ({}), restore: () => {},
+  };
+  const service = new V6AgentService(() => new NativeV6Runtime({ families:[family], maxPointOccurrences:250,
+    sourceDigest:'explicit-budget-test', now:()=>0 }));
+  const first = await service.handle({ ...init(), budgets: {
+    targetLevels:2, levelActionCaps:[2,3], levelActiveTimeCapsMs:[500,200], parallelWorkers:8,
+  } });
+  const nextLevel = { ...board(1), level:2, levelsCompleted:1 };
+  const next = await service.handle({ type:'advance', sessionId:first.sessionId, sequence:1,
+    ticketId:first.ticket!.id, observation:toV6PublicObservation(nextLevel,1), executionMs:450 });
+  assert.equal(next.kind,'boundary');
+  const issued = await service.handle({ type:'resume', sessionId:first.sessionId, sequence:1 });
+  assert.deepEqual(offers,[[2,500],[3,200]]);
+  const stopped = await service.handle({ type:'advance',sessionId:first.sessionId,sequence:2,
+    ticketId:issued.ticket!.id, observation:toV6PublicObservation({ ...board(2), level:2, levelsCompleted:1 },2), executionMs:200 });
+  assert.equal(stopped.reason,'level_active_time_budget');
+  assert.equal(stopped.snapshot.levelsCompleted,1);
+});
 
 for (const [runtimeOrigin, callerOrigin] of [[1000, 10], [10, 1000]] as const) {
   test(`native current deadlines convert caller clock ${callerOrigin} to runtime clock ${runtimeOrigin}`, async () => {

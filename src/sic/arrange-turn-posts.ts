@@ -1,5 +1,5 @@
 import { geometricComponents, ObservedInputDomain } from '../logos-engine/v6-native-observer.ts';
-import type { NativeBox, NativeCommand, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
+import type { NativeBox, NativeCommand, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
@@ -150,7 +150,7 @@ function towardExit(scene: Scene, rows: NativeRows, { point, heading }: Aim): bo
   return false;
 }
 
-function plan(scene: Scene, rows: NativeRows, posts: Post[], rejected: string[]): Layout | null {
+export function planTurnPostLayout(scene: Scene, rows: NativeRows, posts: Post[], rejected: string[], execution?: NativeExecution): Layout | null {
   const { pitch } = scene, mid = Math.floor(pitch / 2);
   const initial = posts.map(post => post.point);
   const valid = (post: Post, [x,y]: NativePoint) => post.mask.every(([dx,dy]) => {
@@ -164,36 +164,60 @@ function plan(scene: Scene, rows: NativeRows, posts: Post[], rejected: string[])
     }
     return positions.sort((a,b) => distance(a,post.point) - distance(b,post.point));
   });
-  let best: Layout | null = null, bestCost = Infinity;
+  type Continuation = { index: number; point: NativePoint; aim: Aim };
+  const byAim = new Map<string, { exits: boolean; edges: Continuation[] }>();
+  const placements = initial.slice();
+  const refusals = new Set(rejected);
+  const overlaps = (a: NativePoint, b: NativePoint) => Math.abs(a[0] - b[0]) < pitch && Math.abs(a[1] - b[1]) < pitch;
+  const now = execution?.now ?? (() => performance.now());
+  const deadline = execution?.deadlineMs ?? Infinity;
+  let best: Layout | null = null, bestCost = Infinity, visited = 0, interrupted = false;
   const costOf = (layout: Layout) => layout.reduce((sum,p,i) => sum + (same(initial[i]!,p) ? 0 : 2 + distance(initial[i]!,p) / 100), 0);
-  function visit(aim: Aim, layout: Layout, used: number[]) {
-    // A post already committed to the trajectory keeps its placement in every continuation.
-    if (posts.length > 4 && best && costOf(layout) >= bestCost) return;
-    if (used.length && towardExit(scene, rows, aim)) {
-      const overlapping = layout.some((a,i) => layout.some((b,j) => j > i && Math.abs(a[0]-b[0]) < pitch && Math.abs(a[1]-b[1]) < pitch));
-      if (overlapping || rejected.includes(JSON.stringify(layout))) return;
-      const cost = costOf(layout);
-      if (cost < bestCost) { best = layout; bestCost = cost; }
-      return;
-    }
-    if (used.length >= posts.length) return;
-    for (const [i,post] of posts.entries()) {
-      if (used.includes(i)) continue;
-      for (const point of targets[i]!) {
-        const next = turn(scene, rows, aim, post, point, used.length > 0);
-        if (!next) continue;
-        visit(next, layout.map((old,j) => i === j ? point : old), [...used,i]);
+  function geometry(aim: Aim, afterTurn: boolean) {
+    const key = JSON.stringify([aim.point, aim.heading, afterTurn]);
+    const cached = byAim.get(key);
+    if (cached) return cached;
+    const exits = afterTurn && towardExit(scene, rows, aim);
+    const edges: Continuation[] = [];
+    if (!exits) for (const [index, post] of posts.entries()) {
+      for (const point of targets[index]!) {
+        const next = turn(scene, rows, aim, post, point, afterTurn);
+        if (next) edges.push({ index, point, aim: next });
       }
     }
+    const result = { exits, edges };
+    byAim.set(key, result);
+    return result;
   }
-  visit({ point: scene.start, heading: scene.heading }, initial, []);
+  function visit(aim: Aim, used: number) {
+    if ((visited++ & 127) === 0 && (execution?.signal?.aborted || now() >= deadline)) interrupted = true;
+    if (interrupted) return;
+    // A post already committed to the trajectory keeps its placement in every continuation.
+    if (posts.length > 4 && best && costOf(placements) >= bestCost) return;
+    const { exits, edges } = geometry(aim, used !== 0);
+    if (exits) {
+      if (placements.some((a,i) => placements.some((b,j) => j > i && overlaps(a, b))) || refusals.has(JSON.stringify(placements))) return;
+      const cost = costOf(placements);
+      if (cost < bestCost) { best = placements.slice(); bestCost = cost; }
+      return;
+    }
+    for (const edge of edges) {
+      if (interrupted) break;
+      const bit = 1 << edge.index;
+      if ((used & bit) || placements.some((point, i) => (used & (1 << i)) && overlaps(point, edge.point))) continue;
+      placements[edge.index] = edge.point;
+      visit(edge.aim, used | bit);
+      placements[edge.index] = initial[edge.index]!;
+    }
+  }
+  visit({ point: scene.start, heading: scene.heading }, 0);
   return best;
 }
 
 const activation: NativeCommand = { action_ref: 'ACTION5', data: {} };
-function choose(local: State, rows: NativeRows, posts: Post[]): Choice | null {
+function choose(local: State, rows: NativeRows, posts: Post[], execution?: NativeExecution): Choice | null {
   if (!local.observedLaunch) return { action: activation, kind: 'observe' };
-  const layout = local.layout ?? plan(local.scene, rows, posts, local.rejected);
+  const layout = local.layout ?? planTurnPostLayout(local.scene, rows, posts, local.rejected, execution);
   if (!layout) return null;
   const index = layout.findIndex((point,i) => !same(point,posts[i]!.point));
   if (index < 0) return { action: activation, kind: 'launch', layout };
@@ -251,7 +275,7 @@ export function createSicArrangeTurnPosts(family = arrangeTurnPostsId): NativeFa
       if (learns && !prior && !observedLaunch) return null;
       const local = prior ?? { epoch: observation.level_epoch, scene, refs: reusable ? [reusable.ref] : observedLaunch && receipt ? [receipt.beforeRef, ref] : [],
         observedLaunch, selected: null, layout: null, rejected: [] };
-      const choice = choose(local, rows, posts);
+      const choice = choose(local, rows, posts, execution);
       if (!choice) return null;
       const evidence: [string, ...string[]] = [ref, ...local.refs.filter(v => v !== ref)];
       const mode = execution?.reasoningMode ?? 'exploration';

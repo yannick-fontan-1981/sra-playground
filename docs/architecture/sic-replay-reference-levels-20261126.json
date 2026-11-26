@@ -1,0 +1,2807 @@
+{
+  "AMZE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "AR25": [
+    {
+      "actions": 17,
+      "timeMs": 5133,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=AR25; level=1; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 2879,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=AR25; level=2; won=true"
+    },
+    {
+      "actions": 40,
+      "timeMs": 14409,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=AR25; level=3; won=true"
+    },
+    {
+      "actions": 22,
+      "timeMs": 9608,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=AR25; level=4; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 9146,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=AR25; level=5; won=true"
+    },
+    {
+      "actions": 53,
+      "timeMs": 9890,
+      "source": "docs/architecture/sic-v8-validation.md :: AR25 niveau 6, conserver les deux axes et les deux pièces"
+    },
+    {
+      "actions": 37,
+      "timeMs": 9100,
+      "source": "docs/architecture/sic-v8-validation.md :: AR25 niveau 7, réutiliser la couverture par deux pièces et deux axes"
+    },
+    {
+      "actions": 47,
+      "timeMs": 11990,
+      "source": "docs/architecture/sic-v8-validation.md :: AR25 niveau 8, conserver les contributeurs alignés"
+    }
+  ],
+  "AS66": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "actions": 486,
+      "source": "docs/architecture/sic-v8-validation.md :: AS66 niveau 7, atteindre les essais encore ouverts par des retours observés; six-level prefix 565 minus five-level prefix (532 total minus 453 at level 6) = 486; no isolated measured time archived"
+    },
+    {
+      "actions": 25,
+      "timeMs": 19350,
+      "source": "docs/architecture/sic-v8-validation.md :: AS66 niveau 7, atteindre les essais encore ouverts par des retours observés"
+    },
+    {
+      "actions": 66,
+      "timeMs": 55470,
+      "source": "docs/architecture/sic-v8-validation.md :: AS66 niveau 8"
+    },
+    {
+      "actions": 15,
+      "timeMs": 13510,
+      "source": "docs/architecture/sic-v8-validation.md :: AS66 niveau 9"
+    }
+  ],
+  "BP35": [
+    {
+      "actions": 16,
+      "timeMs": 9755,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=BP35; level=1; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 33606,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=BP35; level=2; won=true"
+    },
+    {
+      "actions": 34,
+      "timeMs": 20450,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=BP35; level=3; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 9703,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=BP35; level=4; won=true"
+    },
+    {
+      "actions": 32,
+      "timeMs": 18293,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=BP35; level=5; won=true"
+    },
+    {
+      "actions": 42,
+      "timeMs": 17600,
+      "source": "docs/architecture/sic-v8-validation.md :: BP35 niveau 6, préparer la descente et ouvrir la sortie avant le détour"
+    },
+    {
+      "actions": 46,
+      "timeMs": 44550,
+      "source": "docs/architecture/sic-v8-validation.md :: BP35 niveau 7, enchaîner les appuis et les inversions"
+    },
+    {
+      "actions": 51,
+      "timeMs": 35500,
+      "source": "docs/architecture/sic-v8-validation.md :: BP35 niveau 8"
+    },
+    {
+      "actions": 110,
+      "timeMs": 68370,
+      "source": "docs/architecture/sic-v8-validation.md :: BP35 niveau 9 — Reprendre une construction de supports à travers plusieurs inversions"
+    }
+  ],
+  "CASC": [
+    {
+      "actions": 6,
+      "timeMs": 5711,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=1; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 10999,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=2; won=true"
+    },
+    {
+      "actions": 22,
+      "timeMs": 19019,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=3; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 18439,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=4; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 8184,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=5; won=true"
+    },
+    {
+      "actions": 22,
+      "timeMs": 15790,
+      "source": "docs/architecture/sic-v8-validation.md :: CASC niveau 6, réserver une jonction avant de lancer les rafales"
+    }
+  ],
+  "CATL": [
+    {
+      "actions": 8,
+      "timeMs": 6644,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CATL; level=1; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 4980,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CATL; level=2; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 5272,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CATL; level=3; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 5615,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CATL; level=4; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 5343,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CATL; level=5; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 4410,
+      "source": "docs/architecture/sic-v8-validation.md :: CATL niveau 6, composer deux conditions visibles"
+    }
+  ],
+  "CATR": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "CAVA": [
+    {
+      "actions": 7,
+      "timeMs": 3960,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CAVA; level=1; won=true"
+    },
+    {
+      "actions": 12,
+      "timeMs": 8022,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CAVA; level=2; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 12462,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CAVA; level=3; won=true"
+    },
+    {
+      "actions": 12,
+      "timeMs": 9257,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CAVA; level=4; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 10816,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CAVA; level=5; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 14940,
+      "source": "docs/architecture/sic-v8-validation.md :: CAVA niveau 6, suivre les portes avec les sceaux, le portail et les dalles"
+    }
+  ],
+  "CD82": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "CGWL": [
+    {
+      "actions": 15,
+      "timeMs": 6661,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CGWL; level=1; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 6659,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CGWL; level=2; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 6372,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CGWL; level=3; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 8597,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CGWL; level=4; won=true"
+    },
+    {
+      "actions": 61,
+      "timeMs": 33054,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CGWL; level=5; won=true"
+    },
+    {
+      "actions": 40,
+      "timeMs": 22140,
+      "source": "docs/architecture/sic-v8-validation.md :: CGWL niveau 6, retenir les incompatibilités en changeant la disposition"
+    }
+  ],
+  "CLRS": [
+    {
+      "actions": 8,
+      "timeMs": 6309,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=1; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 5418,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=2; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 7861,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=3; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 9482,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=4; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 9290,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=5; won=true"
+    },
+    {
+      "actions": 24,
+      "timeMs": 16770,
+      "source": "docs/architecture/sic-v8-validation.md :: CLRS niveau 6, ajuster l'union de deux panneaux de même couleur"
+    }
+  ],
+  "CN04": [
+    {
+      "actions": 18,
+      "timeMs": 8811,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CN04; level=1; won=true"
+    },
+    {
+      "actions": 43,
+      "timeMs": 21509,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CN04; level=2; won=true"
+    },
+    {
+      "actions": 32,
+      "timeMs": 21049,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CN04; level=3; won=true"
+    },
+    {
+      "actions": 43,
+      "timeMs": 21794,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CN04; level=4; won=true"
+    },
+    {
+      "actions": 55,
+      "timeMs": 30781,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CN04; level=5; won=true"
+    },
+    {
+      "actions": 49,
+      "timeMs": 36610,
+      "source": "docs/architecture/sic-v8-validation.md :: CN04 niveau 6, suivre les pièces quand les connecteurs se déplacent"
+    }
+  ],
+  "COLM": [
+    {
+      "actions": 17,
+      "timeMs": 14440,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=1; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 17384,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=2; won=true"
+    },
+    {
+      "actions": 52,
+      "timeMs": 31760,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=3; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 13507,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=4; won=true"
+    },
+    {
+      "actions": 57,
+      "timeMs": 31727,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COLM; level=5; won=true"
+    },
+    {
+      "actions": 21,
+      "timeMs": 7480,
+      "source": "docs/architecture/sic-v8-validation.md :: COLM niveau 6, planifier sur toute la file visible"
+    }
+  ],
+  "COMB": [
+    {
+      "actions": 8,
+      "timeMs": 7369,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COMB; level=1; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 2469,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COMB; level=2; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 3914,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COMB; level=3; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 5613,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COMB; level=4; won=true"
+    },
+    {
+      "actions": 23,
+      "timeMs": 8520,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=COMB; level=5; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 9370,
+      "source": "docs/architecture/sic-v8-validation.md :: COMB niveau 6, réutiliser le cycle des commandes après un changement de palette"
+    }
+  ],
+  "CONN": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "CRAF": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "actions": 27,
+      "timeMs": 239980,
+      "source": "docs/architecture/sic-v8-validation.md :: paragraph \"CRAF gagne les six niveaux en 106 clics\"; level 6 = 27 clics, 239,98 s; chronological SIC qualification"
+    }
+  ],
+  "CWSE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "DAME": [
+    {
+      "actions": 7,
+      "timeMs": 3810,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DAME; level=1; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 2905,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DAME; level=2; won=true"
+    },
+    {
+      "actions": 12,
+      "timeMs": 5862,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DAME; level=3; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 4608,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DAME; level=4; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 2729,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DAME; level=5; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 4580,
+      "source": "docs/architecture/sic-v8-validation.md :: DAME niveau 6, composer recoloration et téléportation"
+    }
+  ],
+  "DC22": [
+    {
+      "actions": 22,
+      "timeMs": 12777,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=1; won=true"
+    },
+    {
+      "actions": 44,
+      "timeMs": 24994,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=2; won=true"
+    },
+    {
+      "actions": 45,
+      "timeMs": 19462,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=3; won=true"
+    },
+    {
+      "actions": 76,
+      "timeMs": 46754,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=4; won=true"
+    },
+    {
+      "actions": 185,
+      "timeMs": 168261,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=5; won=true"
+    },
+    {
+      "actions": 241,
+      "timeMs": 336324,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=6; won=true"
+    }
+  ],
+  "DICO": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "DNOI": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "ELAS": [
+    {
+      "actions": 2,
+      "timeMs": 2132,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ELAS; level=1; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 6020,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ELAS; level=2; won=true"
+    },
+    {
+      "actions": 22,
+      "timeMs": 8367,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ELAS; level=3; won=true"
+    },
+    {
+      "actions": 46,
+      "timeMs": 20323,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ELAS; level=4; won=true"
+    },
+    {
+      "actions": 136,
+      "timeMs": 92570,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ELAS; level=5; won=true"
+    },
+    {
+      "actions": 107,
+      "timeMs": 46090,
+      "source": "docs/architecture/sic-v8-validation.md :: ELAS niveau 6, reconstruire une grille dont un axe est masqué"
+    }
+  ],
+  "ESCT": [
+    {
+      "actions": 16,
+      "timeMs": 8736,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=1; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 6766,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=2; won=true"
+    },
+    {
+      "actions": 21,
+      "timeMs": 9317,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=3; won=true"
+    },
+    {
+      "actions": 22,
+      "timeMs": 10079,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=4; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 8031,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ESCT; level=5; won=true"
+    },
+    {
+      "actions": 25,
+      "timeMs": 12030,
+      "source": "docs/architecture/sic-v8-validation.md :: ESCT niveau 6, libérer le rail occupé avant l'interception"
+    }
+  ],
+  "ETAG": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "EVAS": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "FITE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "FOGW": [
+    {
+      "actions": 18,
+      "timeMs": 7806,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FOGW; level=1; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 3985,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FOGW; level=2; won=true"
+    },
+    {
+      "actions": 25,
+      "timeMs": 8697,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FOGW; level=3; won=true"
+    },
+    {
+      "actions": 29,
+      "timeMs": 13417,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FOGW; level=4; won=true"
+    },
+    {
+      "actions": 38,
+      "timeMs": 21030,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FOGW; level=5; won=true"
+    },
+    {
+      "actions": 63,
+      "timeMs": 27060,
+      "source": "docs/architecture/sic-v8-validation.md :: FOGW niveau 6, réactiver les supports après un franchissement refusé"
+    }
+  ],
+  "FT09": [
+    {
+      "actions": 4,
+      "timeMs": 3336,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FT09; level=1; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 2466,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FT09; level=2; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 4425,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FT09; level=3; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 7566,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FT09; level=4; won=true"
+    },
+    {
+      "actions": 21,
+      "timeMs": 8698,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FT09; level=5; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 3200,
+      "source": "docs/architecture/sic-v8-validation.md :: FT09 niveau 6, dériver les effets d'une marque directionnelle"
+    }
+  ],
+  "FUIT": [
+    {
+      "actions": 48,
+      "timeMs": 12202,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FUIT; level=1; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 6909,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FUIT; level=2; won=true"
+    },
+    {
+      "actions": 25,
+      "timeMs": 10263,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FUIT; level=3; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 20155,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FUIT; level=4; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 12350,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=FUIT; level=5; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 3890,
+      "source": "docs/architecture/sic-v8-validation.md :: FUIT niveau 6, compter l'autre sprite parmi les obstacles à la retraite"
+    }
+  ],
+  "G50T": [
+    {
+      "actions": 27,
+      "timeMs": 20552,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=G50T; level=1; won=true"
+    },
+    {
+      "actions": 31,
+      "timeMs": 26635,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=G50T; level=2; won=true"
+    },
+    {
+      "actions": 64,
+      "timeMs": 60865,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=G50T; level=3; won=true"
+    },
+    {
+      "actions": 31,
+      "timeMs": 30080,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=G50T; level=4; won=true"
+    },
+    {
+      "actions": 50,
+      "timeMs": 53361,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=G50T; level=5; won=true"
+    },
+    {
+      "actions": 49,
+      "timeMs": 34220,
+      "source": "docs/architecture/sic-v8-validation.md :: G50T niveau 6, synchroniser les enregistrements avec un porteur autonome"
+    },
+    {
+      "actions": 43,
+      "timeMs": 33500,
+      "source": "docs/architecture/sic-v8-validation.md :: G50T niveau 7, synchroniser deux transferts distincts"
+    }
+  ],
+  "GABA": [
+    {
+      "actions": 47,
+      "timeMs": 14741,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=1; won=true"
+    },
+    {
+      "actions": 37,
+      "timeMs": 10200,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=2; won=true"
+    },
+    {
+      "actions": 67,
+      "timeMs": 16791,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=3; won=true"
+    },
+    {
+      "actions": 88,
+      "timeMs": 26167,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=4; won=true"
+    },
+    {
+      "actions": 106,
+      "timeMs": 36884,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GABA; level=5; won=true"
+    },
+    {
+      "actions": 100,
+      "timeMs": 26820,
+      "source": "docs/architecture/sic-v8-validation.md :: GABA niveau 6, séparer les charges au retour de l'attachement"
+    }
+  ],
+  "GARE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "GIGO": [
+    {
+      "actions": 6,
+      "timeMs": 5040,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GIGO; level=1; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 7391,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GIGO; level=2; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 7853,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GIGO; level=3; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 10511,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GIGO; level=4; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 25415,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GIGO; level=5; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 14930,
+      "source": "docs/architecture/sic-v8-validation.md :: GIGO niveau 6, mesurer les murs d'un pixel derrière un marqueur plus large"
+    }
+  ],
+  "GLOB": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "GMAP": [
+    {
+      "actions": 5,
+      "timeMs": 4496,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GMAP; level=1; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 4415,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GMAP; level=2; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 11504,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GMAP; level=3; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 5351,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GMAP; level=4; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 8449,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GMAP; level=5; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 8220,
+      "source": "docs/architecture/sic-v8-validation.md :: GMAP niveau 6, raccorder une carte aux cases jointives"
+    }
+  ],
+  "GORI": [
+    {
+      "actions": 2,
+      "timeMs": 4501,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GORI; level=1; won=true"
+    },
+    {
+      "actions": 6,
+      "timeMs": 4822,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GORI; level=2; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 5653,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GORI; level=3; won=true"
+    },
+    {
+      "actions": 3,
+      "timeMs": 1777,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GORI; level=4; won=true"
+    },
+    {
+      "actions": 25,
+      "timeMs": 21004,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GORI; level=5; won=true"
+    },
+    {
+      "actions": 3,
+      "timeMs": 1240,
+      "source": "docs/architecture/sic-v8-validation.md :: GORI niveau 6, retrouver un arc hors des portails"
+    }
+  ],
+  "GRAV": [
+    {
+      "actions": 11,
+      "timeMs": 9557,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=1; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 38998,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=2; won=true"
+    },
+    {
+      "actions": 6,
+      "timeMs": 2629,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=3; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 3352,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=4; won=true"
+    },
+    {
+      "actions": 23,
+      "timeMs": 16887,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=5; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 2570,
+      "source": "docs/architecture/sic-v8-validation.md :: GRAV niveau 6, prévoir les glissements avec et sans colle"
+    }
+  ],
+  "GRIL": [
+    {
+      "actions": 5,
+      "timeMs": 4677,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=1; won=true"
+    },
+    {
+      "actions": 5,
+      "timeMs": 2958,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=2; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 4697,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=3; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 5243,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=4; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 9002,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRIL; level=5; won=true"
+    },
+    {
+      "actions": 32,
+      "timeMs": 20390,
+      "source": "docs/architecture/sic-v8-validation.md :: GRIL niveau 6, comparer toutes les formes après un déplacement"
+    }
+  ],
+  "HANO": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "HOLE": [
+    {
+      "actions": 5,
+      "timeMs": 5546,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=HOLE; level=1; won=true"
+    },
+    {
+      "actions": 6,
+      "timeMs": 4992,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=HOLE; level=2; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 9478,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=HOLE; level=3; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 8345,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=HOLE; level=4; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 20762,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=HOLE; level=5; won=true"
+    },
+    {
+      "actions": 27,
+      "timeMs": 23770,
+      "source": "docs/architecture/sic-v8-validation.md :: HOLE niveau 6, retrouver un contour de la couleur du fond"
+    }
+  ],
+  "HPDL": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "actions": 20,
+      "timeMs": 67350,
+      "source": "docs/architecture/sic-v8-validation.md :: HPDL niveau 6, mesurer une cascade et éliminer les réglages incompatibles"
+    }
+  ],
+  "ISOS": [
+    {
+      "actions": 3,
+      "timeMs": 4077,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ISOS; level=1; won=true"
+    },
+    {
+      "actions": 4,
+      "timeMs": 3517,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ISOS; level=2; won=true"
+    },
+    {
+      "actions": 5,
+      "timeMs": 4969,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ISOS; level=3; won=true"
+    },
+    {
+      "actions": 5,
+      "timeMs": 5036,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ISOS; level=4; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 8398,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=ISOS; level=5; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 10690,
+      "source": "docs/architecture/sic-v8-validation.md :: ISOS niveau 6, borner la croissance par les dimensions de la référence"
+    }
+  ],
+  "KA59": [
+    {
+      "actions": 15,
+      "timeMs": 10029,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KA59; level=1; won=true"
+    },
+    {
+      "actions": 43,
+      "timeMs": 28654,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KA59; level=2; won=true"
+    },
+    {
+      "actions": 37,
+      "timeMs": 17961,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KA59; level=3; won=true"
+    },
+    {
+      "actions": 38,
+      "timeMs": 20482,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KA59; level=4; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 5314,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KA59; level=5; won=true"
+    },
+    {
+      "actions": 51,
+      "timeMs": 14960,
+      "source": "docs/architecture/sic-v8-validation.md :: KA59 niveau 6, réutiliser un poussoir après le placement d'une charge"
+    },
+    {
+      "actions": 107,
+      "timeMs": 30050,
+      "source": "docs/architecture/sic-v8-validation.md :: KA59 niveau 7, préparer une impulsion en passant le contrôle entre deux barres"
+    }
+  ],
+  "KATA": [
+    {
+      "actions": 8,
+      "timeMs": 7901,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KATA; level=1; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 7146,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KATA; level=2; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 5813,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KATA; level=3; won=true"
+    },
+    {
+      "actions": 33,
+      "timeMs": 10803,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KATA; level=4; won=true"
+    },
+    {
+      "actions": 34,
+      "timeMs": 13681,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KATA; level=5; won=true"
+    },
+    {
+      "actions": 41,
+      "timeMs": 10380,
+      "source": "docs/architecture/sic-v8-validation.md :: KATA niveau 6, terminer le calcul de partition dans le budget"
+    }
+  ],
+  "KEYD": [
+    {
+      "actions": 34,
+      "timeMs": 19988,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KEYD; level=1; won=true"
+    },
+    {
+      "actions": 6,
+      "timeMs": 4149,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KEYD; level=2; won=true"
+    },
+    {
+      "actions": 30,
+      "timeMs": 16571,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KEYD; level=3; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 12788,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KEYD; level=4; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 12699,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KEYD; level=5; won=true"
+    },
+    {
+      "actions": 31,
+      "timeMs": 11880,
+      "source": "docs/architecture/sic-v8-validation.md :: KEYD niveau 6, vérifier les objets d'un inventaire opaque"
+    }
+  ],
+  "KLOT": [
+    {
+      "actions": 14,
+      "timeMs": 9808,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KLOT; level=1; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 8961,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KLOT; level=2; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 9006,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KLOT; level=3; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 8416,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KLOT; level=4; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 10370,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=KLOT; level=5; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 8850,
+      "source": "docs/architecture/sic-v8-validation.md :: KLOT niveau 6, préserver la marge de la réserve"
+    }
+  ],
+  "LF52": [
+    {
+      "actions": 8,
+      "timeMs": 2796,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LF52; level=1; won=true"
+    },
+    {
+      "actions": 40,
+      "timeMs": 12734,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LF52; level=2; won=true"
+    },
+    {
+      "actions": 46,
+      "timeMs": 29634,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LF52; level=3; won=true"
+    },
+    {
+      "actions": 50,
+      "timeMs": 32100,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LF52; level=4; won=true"
+    },
+    {
+      "actions": 99,
+      "timeMs": 123392,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LF52; level=5; won=true"
+    },
+    {
+      "actions": 91,
+      "timeMs": 56120,
+      "source": "docs/architecture/sic-v8-validation.md :: LF52 niveau 6, emmener le jeton auxiliaire et découvrir la suite du plateau"
+    },
+    {
+      "actions": 148,
+      "timeMs": 77470,
+      "source": "docs/architecture/sic-v8-validation.md :: LF52 niveau 7, révéler les réceptions puis fermer le dernier triplet"
+    },
+    {
+      "actions": 68,
+      "timeMs": 123180,
+      "source": "docs/architecture/sic-v8-validation.md :: LF52 niveau 8"
+    },
+    {
+      "actions": 112,
+      "timeMs": 223080,
+      "source": "docs/architecture/sic-v8-validation.md :: LF52 niveau 9 — Rendre le saut accessible avant de poursuivre le trajet"
+    },
+    {
+      "actions": 47,
+      "timeMs": 99970,
+      "source": "docs/architecture/sic-v8-validation.md :: LF52 niveau 10 — Réutiliser les commandes et suivre les chariots au bord du champ"
+    }
+  ],
+  "LIFE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "LKEY": [
+    {
+      "actions": 8,
+      "timeMs": 6653,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LKEY; level=1; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 5481,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LKEY; level=2; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 8739,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LKEY; level=3; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 13778,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LKEY; level=4; won=true"
+    },
+    {
+      "actions": 24,
+      "timeMs": 12847,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LKEY; level=5; won=true"
+    },
+    {
+      "actions": 30,
+      "timeMs": 12800,
+      "source": "docs/architecture/sic-v8-validation.md :: LKEY niveau 6, distinguer les effets des outils sur les dents"
+    }
+  ],
+  "LOGI": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "LP85": [
+    {
+      "actions": 5,
+      "timeMs": 3165,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LP85; level=1; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 7478,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LP85; level=2; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 4863,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LP85; level=3; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 3960,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LP85; level=4; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 4832,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LP85; level=5; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 7530,
+      "source": "docs/architecture/sic-v8-validation.md :: LP85 niveau 6, distinguer les décalages sur les rayons et les anneaux"
+    },
+    {
+      "actions": 13,
+      "timeMs": 3930,
+      "source": "docs/architecture/sic-v8-validation.md :: LP85 niveau 7, composer les rotations d'un même contrôle"
+    },
+    {
+      "actions": 82,
+      "timeMs": 35040,
+      "source": "docs/architecture/sic-v8-validation.md :: LP85 niveau 8"
+    }
+  ],
+  "LS19": [
+    {
+      "actions": 5,
+      "timeMs": 2115,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS19; level=1; won=true"
+    },
+    {
+      "actions": 31,
+      "timeMs": 5512,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS19; level=2; won=true"
+    },
+    {
+      "actions": 42,
+      "timeMs": 8853,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS19; level=3; won=true"
+    },
+    {
+      "actions": 65,
+      "timeMs": 12832,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS19; level=4; won=true"
+    },
+    {
+      "actions": 30,
+      "timeMs": 7147,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS19; level=5; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 10290,
+      "source": "docs/architecture/sic-v8-validation.md :: LS19 niveau 6, vérifier une transition avant de dépenser la réserve"
+    },
+    {
+      "actions": 58,
+      "timeMs": 25780,
+      "source": "docs/architecture/sic-v8-validation.md :: LS19 niveau 7, fermer deux demandes avec des motifs successifs"
+    },
+    {
+      "actions": 54,
+      "timeMs": 44500,
+      "source": "docs/architecture/sic-v8-validation.md :: LS19 niveau 8"
+    }
+  ],
+  "LS20": [
+    {
+      "actions": 15,
+      "timeMs": 6256,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS20; level=1; won=true"
+    },
+    {
+      "actions": 45,
+      "timeMs": 14095,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS20; level=2; won=true"
+    },
+    {
+      "actions": 41,
+      "timeMs": 18709,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS20; level=3; won=true"
+    },
+    {
+      "actions": 43,
+      "timeMs": 16740,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS20; level=4; won=true"
+    },
+    {
+      "actions": 48,
+      "timeMs": 19662,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=LS20; level=5; won=true"
+    },
+    {
+      "actions": 94,
+      "timeMs": 37030,
+      "source": "docs/architecture/sic-v8-validation.md :: LS20 niveau 6, conserver assez de réserve pour les deux sorties"
+    },
+    {
+      "actions": 107,
+      "timeMs": 49460,
+      "source": "docs/architecture/sic-v8-validation.md :: LS20 niveau 7, revenir à une sortie mémorisée sous visibilité partielle"
+    }
+  ],
+  "M0R0": [
+    {
+      "actions": 19,
+      "timeMs": 5358,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=M0R0; level=1; won=true"
+    },
+    {
+      "actions": 27,
+      "timeMs": 12650,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=M0R0; level=2; won=true"
+    },
+    {
+      "actions": 57,
+      "timeMs": 22222,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=M0R0; level=3; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 6426,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=M0R0; level=4; won=true"
+    },
+    {
+      "actions": 49,
+      "timeMs": 17472,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=M0R0; level=5; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 18080,
+      "source": "docs/architecture/sic-v8-validation.md :: M0R0 niveau 6, tenir une plaque avec un bloc mobile"
+    }
+  ],
+  "MEMO": [
+    {
+      "actions": 10,
+      "timeMs": 6741,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MEMO; level=1; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 5544,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MEMO; level=2; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 6068,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MEMO; level=3; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 7835,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MEMO; level=4; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 7813,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MEMO; level=5; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 6210,
+      "source": "docs/architecture/sic-v8-validation.md :: MEMO niveau 6, lire les indicateurs sous un motif"
+    }
+  ],
+  "MIND": [
+    {
+      "actions": 8,
+      "timeMs": 5930,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=1; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 3909,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=2; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 9628,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=3; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 12815,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=4; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 12809,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=5; won=true"
+    },
+    {
+      "actions": 24,
+      "timeMs": 13270,
+      "source": "docs/architecture/sic-v8-validation.md :: MIND niveau 6, comparer les codes après l'ajout d'une valeur"
+    }
+  ],
+  "MOTO": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "actions": 19,
+      "source": "docs/architecture/sic-v8-validation.md :: MOTO niveau 6, réutiliser les trajectoires élémentaires; chronological SIC win, 19 commands; approximate time omitted"
+    }
+  ],
+  "ONDE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "PIPE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "POLA": [
+    {
+      "actions": 2,
+      "timeMs": 1877,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=POLA; level=1; won=true"
+    },
+    {
+      "actions": 3,
+      "timeMs": 1223,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=POLA; level=2; won=true"
+    },
+    {
+      "actions": 4,
+      "timeMs": 1665,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=POLA; level=3; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 3008,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=POLA; level=4; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 3576,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=POLA; level=5; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 5860,
+      "source": "docs/architecture/sic-v8-validation.md :: POLA niveau 6, préparer les alignements qui permettent un arrêt sur la cible"
+    }
+  ],
+  "PORT": [
+    {
+      "actions": 16,
+      "timeMs": 6994,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=1; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 9299,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=2; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 14282,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=3; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 9115,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=4; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 8072,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PORT; level=5; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 6190,
+      "source": "docs/architecture/sic-v8-validation.md :: PORT niveau 6, ouvrir les passages encore sans partenaire"
+    }
+  ],
+  "PRTL": [
+    {
+      "actions": 6,
+      "timeMs": 5363,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PRTL; level=1; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 11725,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PRTL; level=2; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 6500,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PRTL; level=3; won=true"
+    },
+    {
+      "actions": 12,
+      "timeMs": 8692,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PRTL; level=4; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 14049,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=PRTL; level=5; won=true"
+    },
+    {
+      "actions": 34,
+      "timeMs": 19200,
+      "source": "docs/architecture/sic-v8-validation.md :: PRTL niveau 6, laisser deux charges sur les plaques de sortie"
+    }
+  ],
+  "R11L": [
+    {
+      "actions": 3,
+      "timeMs": 2849,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=R11L; level=1; won=true"
+    },
+    {
+      "actions": 12,
+      "timeMs": 6988,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=R11L; level=2; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 12071,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=R11L; level=3; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 11328,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=R11L; level=4; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 12287,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=R11L; level=5; won=true"
+    },
+    {
+      "actions": 26,
+      "timeMs": 12580,
+      "source": "docs/architecture/sic-v8-validation.md :: R11L niveau 6, retrouver les ancres et vérifier les ressources partiellement masquées"
+    }
+  ],
+  "RE86": [
+    {
+      "actions": 26,
+      "timeMs": 8199,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RE86; level=1; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 10593,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RE86; level=2; won=true"
+    },
+    {
+      "actions": 61,
+      "timeMs": 14208,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RE86; level=3; won=true"
+    },
+    {
+      "actions": 52,
+      "timeMs": 30505,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RE86; level=4; won=true"
+    },
+    {
+      "actions": 76,
+      "timeMs": 59282,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RE86; level=5; won=true"
+    },
+    {
+      "actions": 46,
+      "timeMs": 10890,
+      "source": "docs/architecture/sic-v8-validation.md :: RE86 niveau 6, utiliser les contacts pour atteindre la forme requise"
+    },
+    {
+      "actions": 98,
+      "timeMs": 21430,
+      "source": "docs/architecture/sic-v8-validation.md :: RE86 niveau 7, affecter ensemble les formes, les couleurs et les repères"
+    },
+    {
+      "actions": 155,
+      "timeMs": 34860,
+      "source": "docs/architecture/sic-v8-validation.md :: RE86 niveau 8"
+    }
+  ],
+  "RECR": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "REGN": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "REWI": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "RSWP": [
+    {
+      "actions": 3,
+      "timeMs": 3573,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=1; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 6051,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=2; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 6065,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=3; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 8698,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=4; won=true"
+    },
+    {
+      "actions": 30,
+      "timeMs": 25433,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=RSWP; level=5; won=true"
+    },
+    {
+      "actions": 50,
+      "timeMs": 36480,
+      "source": "docs/architecture/sic-v8-validation.md :: RSWP niveau 6, planifier le traitement de neuf caisses"
+    }
+  ],
+  "S5I5": [
+    {
+      "actions": 13,
+      "timeMs": 7420,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=S5I5; level=1; won=true"
+    },
+    {
+      "actions": 38,
+      "timeMs": 21322,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=S5I5; level=2; won=true"
+    },
+    {
+      "actions": 37,
+      "timeMs": 20592,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=S5I5; level=3; won=true"
+    },
+    {
+      "actions": 30,
+      "timeMs": 20207,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=S5I5; level=4; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 15707,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=S5I5; level=5; won=true"
+    },
+    {
+      "actions": 25,
+      "timeMs": 5740,
+      "source": "docs/architecture/sic-v8-validation.md :: S5I5 niveau 6, prendre en compte les pivots de la chaîne"
+    },
+    {
+      "actions": 45,
+      "timeMs": 19060,
+      "source": "docs/architecture/sic-v8-validation.md :: S5I5 niveau 7, composer un trajet avec des barres aux commandes différentes"
+    },
+    {
+      "actions": 36,
+      "timeMs": 13110,
+      "source": "docs/architecture/sic-v8-validation.md :: S5I5 niveau 8"
+    }
+  ],
+  "SB26": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "actions": 17,
+      "timeMs": 11170,
+      "source": "docs/architecture/sic-v8-validation.md :: SB26 niveau 7, départager les programmes qui produisent le même mot"
+    },
+    {
+      "actions": 17,
+      "timeMs": 11100,
+      "source": "docs/architecture/sic-v8-validation.md :: SB26 niveau 8, fermer deux appels pour produire la répétition"
+    }
+  ],
+  "SC25": [
+    {
+      "actions": 17,
+      "timeMs": 9010,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SC25; level=1; won=true"
+    },
+    {
+      "actions": 5,
+      "timeMs": 2125,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SC25; level=2; won=true"
+    },
+    {
+      "actions": 12,
+      "timeMs": 5097,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SC25; level=3; won=true"
+    },
+    {
+      "actions": 27,
+      "timeMs": 13160,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SC25; level=4; won=true"
+    },
+    {
+      "actions": 45,
+      "timeMs": 25857,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SC25; level=5; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 18790,
+      "source": "docs/architecture/sic-v8-validation.md :: SC25 niveau 6, relier les impacts aux nouveaux accès"
+    }
+  ],
+  "SELE": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "SEQN": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "SERI": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "SIGN": [
+    {
+      "actions": 15,
+      "timeMs": 13122,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SIGN; level=1; won=true"
+    },
+    {
+      "actions": 48,
+      "timeMs": 43084,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SIGN; level=2; won=true"
+    },
+    {
+      "actions": 56,
+      "timeMs": 60649,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SIGN; level=3; won=true"
+    },
+    {
+      "actions": 22,
+      "timeMs": 23105,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SIGN; level=4; won=true"
+    },
+    {
+      "actions": 53,
+      "timeMs": 55360,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SIGN; level=5; won=true"
+    },
+    {
+      "actions": 81,
+      "timeMs": 64870,
+      "source": "docs/architecture/sic-v8-validation.md :: SIGN niveau 6, apprendre le rendez-vous propre à chaque mode"
+    }
+  ],
+  "SK48": [
+    {
+      "actions": 19,
+      "timeMs": 9048,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SK48; level=1; won=true"
+    },
+    {
+      "actions": 37,
+      "timeMs": 9824,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SK48; level=2; won=true"
+    },
+    {
+      "actions": 33,
+      "timeMs": 9207,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SK48; level=3; won=true"
+    },
+    {
+      "actions": 29,
+      "timeMs": 9542,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SK48; level=4; won=true"
+    },
+    {
+      "actions": 33,
+      "timeMs": 13396,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SK48; level=5; won=true"
+    },
+    {
+      "actions": 69,
+      "timeMs": 24470,
+      "source": "docs/architecture/sic-v8-validation.md :: SK48 niveau 6, assembler deux ordres avec des tiges perpendiculaires"
+    },
+    {
+      "actions": 80,
+      "timeMs": 31200,
+      "source": "docs/architecture/sic-v8-validation.md :: SK48 niveau 7, apprendre où s'arrête le déplacement des cubes"
+    },
+    {
+      "actions": 42,
+      "timeMs": 11800,
+      "source": "docs/architecture/sic-v8-validation.md :: SK48 niveau 8"
+    }
+  ],
+  "SKBN": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "SMLP": [
+    {
+      "actions": 3,
+      "timeMs": 4418,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SMLP; level=1; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 27267,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SMLP; level=2; won=true"
+    },
+    {
+      "actions": 6,
+      "timeMs": 7252,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SMLP; level=3; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 9908,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SMLP; level=4; won=true"
+    },
+    {
+      "actions": 6,
+      "timeMs": 10465,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SMLP; level=5; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 33780,
+      "source": "docs/architecture/sic-v8-validation.md :: SMLP niveau 6, vérifier les réglages d'un réseau périodique plus large"
+    }
+  ],
+  "SNAR": [
+    {
+      "actions": 16,
+      "timeMs": 10987,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=1; won=true"
+    },
+    {
+      "actions": 24,
+      "timeMs": 17392,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=2; won=true"
+    },
+    {
+      "actions": 23,
+      "timeMs": 9915,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=3; won=true"
+    },
+    {
+      "actions": 36,
+      "timeMs": 17172,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=4; won=true"
+    },
+    {
+      "actions": 35,
+      "timeMs": 20465,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=5; won=true"
+    },
+    {
+      "actions": 29,
+      "timeMs": 11280,
+      "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et préserver les passages ouverts"
+    }
+  ],
+  "SP80": [
+    {
+      "actions": 8,
+      "timeMs": 4808,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SP80; level=1; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 4356,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SP80; level=2; won=true"
+    },
+    {
+      "actions": 10,
+      "timeMs": 4701,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SP80; level=3; won=true"
+    },
+    {
+      "actions": 25,
+      "timeMs": 14503,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SP80; level=4; won=true"
+    },
+    {
+      "actions": 21,
+      "timeMs": 8509,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SP80; level=5; won=true"
+    },
+    {
+      "actions": 35,
+      "timeMs": 11820,
+      "source": "docs/architecture/sic-v8-validation.md :: SP80 niveau 6, utiliser une source mobile avec deux coudes"
+    }
+  ],
+  "SPOR": [
+    {
+      "actions": 18,
+      "timeMs": 18599,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=1; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 8313,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=2; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 11295,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=3; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 12636,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=4; won=true"
+    },
+    {
+      "actions": 27,
+      "timeMs": 19492,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SPOR; level=5; won=true"
+    },
+    {
+      "actions": 29,
+      "timeMs": 20830,
+      "source": "docs/architecture/sic-v8-validation.md :: SPOR niveau 6, alimenter les lots en respectant les réserves"
+    }
+  ],
+  "SS01": [
+    {
+      "actions": 36,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=1; commands=36; no measured time"
+    },
+    {
+      "actions": 32,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=2; commands=32; no measured time"
+    },
+    {
+      "actions": 42,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=3; commands=42; no measured time"
+    },
+    {
+      "actions": 79,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=4; commands=79; no measured time"
+    },
+    {
+      "actions": 62,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=5; commands=62; no measured time"
+    },
+    {
+      "actions": 116,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=6; commands=116; no measured time"
+    },
+    {
+      "actions": 37,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=7; commands=37; no measured time"
+    },
+    {
+      "actions": 41,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS01; level=8; commands=41; no measured time"
+    }
+  ],
+  "SS02": [
+    {
+      "actions": 40,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS02; level=1; commands=40; no measured time"
+    },
+    {
+      "actions": 27,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS02; level=2; commands=27; no measured time"
+    },
+    {
+      "actions": 39,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS02; level=3; commands=39; no measured time"
+    },
+    {
+      "actions": 80,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS02; level=4; commands=80; no measured time"
+    },
+    {
+      "actions": 126,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS02; level=5; commands=126; no measured time"
+    },
+    {
+      "actions": 96,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS02; level=6; commands=96; no measured time"
+    },
+    {
+      "actions": 54,
+      "source": "docs/architecture/sic-v8-validation.md :: Indexer les postures de poussée; chronological eight-level SIC sequence 40,27,39,80,126,96,54,84; level 7"
+    },
+    {
+      "actions": 84,
+      "timeMs": 46400,
+      "source": "docs/architecture/sic-v8-validation.md :: Indexer les postures de poussée; chronological SIC level 8, 84 commands, 46.4 seconds including reconciliation; diagnostic cap 81 seconds"
+    }
+  ],
+  "SS03": [
+    {
+      "actions": 47,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=1; commands=47; no measured time"
+    },
+    {
+      "actions": 27,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=2; commands=27; no measured time"
+    },
+    {
+      "actions": 63,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=3; commands=63; no measured time"
+    },
+    {
+      "actions": 40,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=4; commands=40; no measured time"
+    },
+    {
+      "actions": 38,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=5; commands=38; no measured time"
+    },
+    {
+      "actions": 56,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=6; commands=56; no measured time"
+    },
+    {
+      "actions": 60,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=7; commands=60; no measured time"
+    },
+    {
+      "actions": 160,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS03; level=8; commands=160; no measured time"
+    }
+  ],
+  "SS04": [
+    {
+      "actions": 51,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=1; commands=51; no measured time"
+    },
+    {
+      "actions": 54,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=2; commands=54; no measured time"
+    },
+    {
+      "actions": 14,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=3; commands=14; no measured time"
+    },
+    {
+      "actions": 46,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=4; commands=46; no measured time"
+    },
+    {
+      "actions": 79,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=5; commands=79; no measured time"
+    },
+    {
+      "actions": 35,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=6; commands=35; no measured time"
+    },
+    {
+      "actions": 82,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=7; commands=82; no measured time"
+    },
+    {
+      "actions": 81,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS04; level=8; commands=81; no measured time"
+    }
+  ],
+  "SS05": [
+    {
+      "actions": 36,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=1; commands=36; no measured time"
+    },
+    {
+      "actions": 65,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=2; commands=65; no measured time"
+    },
+    {
+      "actions": 51,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=3; commands=51; no measured time"
+    },
+    {
+      "actions": 87,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=4; commands=87; no measured time"
+    },
+    {
+      "actions": 31,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=5; commands=31; no measured time"
+    },
+    {
+      "actions": 26,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=6; commands=26; no measured time"
+    },
+    {
+      "actions": 59,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=7; commands=59; no measured time"
+    },
+    {
+      "actions": 38,
+      "source": "docs/migration/ss22-evidence/sic-continuity.txt :: successful executed-ticket continuity table; game=SS05; level=8; commands=38; no measured time"
+    }
+  ],
+  "SS06": [
+    {
+      "actions": 35,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=1; solved=true; witnessSha256=8bd7acdda6591832aec24f1e7ccb27164f1e53b52d558fe3f355f5f89f05c6ed; not a SIC timing measurement"
+    },
+    {
+      "actions": 35,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=2; solved=true; witnessSha256=7072d9944f5330ec7f03b62f89006fc85570870537329f493e8f520684f2ea6f; not a SIC timing measurement"
+    },
+    {
+      "actions": 119,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=3; solved=true; witnessSha256=bee6ef2dac0eed0c67e616a53c3558d1cd7cf779d5454a03d82b0e5f2fc0a1af; not a SIC timing measurement"
+    },
+    {
+      "actions": 35,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=4; solved=true; witnessSha256=544f36e5065f3c460717b0b3371365c1a75943cc1235720d1f6e17ee34cdc8d4; not a SIC timing measurement"
+    },
+    {
+      "actions": 43,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=5; solved=true; witnessSha256=9df65ae9490c14deb3d98780d65cf595dfc6948a238adad9e3732497fac9a6a5; not a SIC timing measurement"
+    },
+    {
+      "actions": 37,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=6; solved=true; witnessSha256=af64f844730d3f0dbcc21e8a7f68a7a4e390b209da1185a231e80dd015ac2e6c; not a SIC timing measurement"
+    },
+    {
+      "actions": 68,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=7; solved=true; witnessSha256=b0593e19fe65cbde30ca8557070310d8352f5ea14a57059aa0f66148f623fbad; not a SIC timing measurement"
+    },
+    {
+      "actions": 61,
+      "source": "author_oracle :: experiments/sinking-star-ss06/validation/levels-report.json; level=8; solved=true; witnessSha256=72d236c3857602301efd70836cc6cdcea8c825b096de47292cb76998fa8c4cf9; not a SIC timing measurement"
+    }
+  ],
+  "SS07": [
+    {
+      "actions": 59,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=1; solved=true; witnessSha256=6214f898a618df2153bb32bddc4bd3289ea075347cb45ba65b4f65fa6377914d; not a SIC timing measurement"
+    },
+    {
+      "actions": 59,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=2; solved=true; witnessSha256=26a5f89ede2abe3b7f0803e6ad7034edc9cedec51b78750d5bb5dd58ba359beb; not a SIC timing measurement"
+    },
+    {
+      "actions": 29,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=3; solved=true; witnessSha256=d4556eb27cbf0f36256303231f2aaa0f4d1815abc19efc56318f7aa2e4bdf991; not a SIC timing measurement"
+    },
+    {
+      "actions": 94,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=4; solved=true; witnessSha256=68d642690ef1448acd51a8261f464ef66392460fb86fac6e7b9510825c679160; not a SIC timing measurement"
+    },
+    {
+      "actions": 77,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=5; solved=true; witnessSha256=23f5ad0258191bac4926ca0e8525e70e4c923df7e593a2558a40995b84ac3d44; not a SIC timing measurement"
+    },
+    {
+      "actions": 51,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=6; solved=true; witnessSha256=229ea2d80bec477dffb8709293c56ac6180a77e986e377bcb0617b94f47a0517; not a SIC timing measurement"
+    },
+    {
+      "actions": 88,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=7; solved=true; witnessSha256=efdb61a6226926029bcf083b696de4eaf7ee54ecd612ff7ca6abe3d8f9fd3ae6; not a SIC timing measurement"
+    },
+    {
+      "actions": 136,
+      "source": "author_oracle :: experiments/sinking-star-ss07/validation/levels-report.json; level=8; solved=true; witnessSha256=abbf023d889eea1956fc9284e82d9d83787a4fb740faf78079f6de1c0ea4e8ca; not a SIC timing measurement"
+    }
+  ],
+  "STCK": [
+    {
+      "actions": 3,
+      "timeMs": 2673,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=STCK; level=1; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 3351,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=STCK; level=2; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 10093,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=STCK; level=3; won=true"
+    },
+    {
+      "actions": 5,
+      "timeMs": 2617,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=STCK; level=4; won=true"
+    },
+    {
+      "actions": 6,
+      "timeMs": 3788,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=STCK; level=5; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 6980,
+      "source": "docs/architecture/sic-v8-validation.md :: STCK niveau 6, recomposer un tour avec plusieurs répondants"
+    }
+  ],
+  "SU15": [
+    {
+      "actions": 7,
+      "timeMs": 6382,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SU15; level=1; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 10353,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SU15; level=2; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 14175,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SU15; level=3; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 10058,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SU15; level=4; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 15911,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SU15; level=5; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 6900,
+      "source": "docs/architecture/sic-v8-validation.md :: SU15 niveau 6, transformer le carré et synchroniser les livraisons"
+    },
+    {
+      "actions": 6,
+      "timeMs": 3980,
+      "source": "docs/architecture/sic-v8-validation.md :: SU15 niveau 7, faire avancer la fusion et la transformation en parallèle"
+    },
+    {
+      "actions": 15,
+      "timeMs": 8500,
+      "source": "docs/architecture/sic-v8-validation.md :: SU15 niveau 8"
+    },
+    {
+      "actions": 13,
+      "timeMs": 8670,
+      "source": "docs/architecture/sic-v8-validation.md :: SU15 niveau 9 — Synchroniser des produits de types différents"
+    }
+  ],
+  "SWCH": [
+    {
+      "actions": 25,
+      "timeMs": 11201,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SWCH; level=1; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 10072,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SWCH; level=2; won=true"
+    },
+    {
+      "actions": 30,
+      "timeMs": 17492,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SWCH; level=3; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 16794,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SWCH; level=4; won=true"
+    },
+    {
+      "actions": 48,
+      "timeMs": 29760,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SWCH; level=5; won=true"
+    },
+    {
+      "actions": 47,
+      "timeMs": 27210,
+      "source": "docs/architecture/sic-v8-validation.md :: SWCH niveau 6, traverser une salle sans éclairage"
+    }
+  ],
+  "SYME": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "TEQU": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "THER": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "TICT": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ],
+  "TN36": [
+    {
+      "actions": 8,
+      "timeMs": 4810,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TN36; level=1; won=true"
+    },
+    {
+      "actions": 11,
+      "timeMs": 4741,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TN36; level=2; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 6476,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TN36; level=3; won=true"
+    },
+    {
+      "actions": 16,
+      "timeMs": 7236,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TN36; level=4; won=true"
+    },
+    {
+      "actions": 21,
+      "timeMs": 9614,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TN36; level=5; won=true"
+    },
+    {
+      "actions": 25,
+      "timeMs": 8420,
+      "source": "docs/architecture/sic-v8-validation.md :: TN36 niveau 6, chaîner deux programmes via une dalle de reprise"
+    },
+    {
+      "actions": 40,
+      "timeMs": 15270,
+      "source": "docs/architecture/sic-v8-validation.md :: TN36 niveau 7, franchir un passage avant son activation"
+    }
+  ],
+  "TR87": [
+    {
+      "actions": 26,
+      "timeMs": 10989,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TR87; level=1; won=true"
+    },
+    {
+      "actions": 37,
+      "timeMs": 13810,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TR87; level=2; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 11215,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TR87; level=3; won=true"
+    },
+    {
+      "actions": 30,
+      "timeMs": 11477,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TR87; level=4; won=true"
+    },
+    {
+      "actions": 29,
+      "timeMs": 15935,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TR87; level=5; won=true"
+    },
+    {
+      "actions": 49,
+      "timeMs": 18030,
+      "source": "docs/architecture/sic-v8-validation.md :: TR87 niveau 6, composer les deux tables de traduction"
+    }
+  ],
+  "TRCP": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    {
+      "actions": 49,
+      "timeMs": 154210,
+      "source": "docs/architecture/sic-v8-validation.md :: TRCP niveau 6, confirmer le pigment même si le marqueur reste dominant"
+    }
+  ],
+  "TRIA": [
+    {
+      "actions": 14,
+      "timeMs": 22239,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TRIA; level=1; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 7705,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TRIA; level=2; won=true"
+    },
+    {
+      "actions": 4,
+      "timeMs": 2977,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TRIA; level=3; won=true"
+    },
+    {
+      "actions": 31,
+      "timeMs": 20047,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TRIA; level=4; won=true"
+    },
+    {
+      "actions": 23,
+      "timeMs": 15490,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TRIA; level=5; won=true"
+    },
+    {
+      "actions": 32,
+      "timeMs": 15970,
+      "source": "docs/architecture/sic-v8-validation.md :: TRIA niveau 6, lire une pièce sous un repère de destination"
+    }
+  ],
+  "TU93": [
+    {
+      "actions": 30,
+      "timeMs": 10871,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TU93; level=1; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 5260,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TU93; level=2; won=true"
+    },
+    {
+      "actions": 19,
+      "timeMs": 10143,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TU93; level=3; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 11825,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TU93; level=4; won=true"
+    },
+    {
+      "actions": 29,
+      "timeMs": 19458,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=TU93; level=5; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 13200,
+      "source": "docs/architecture/sic-v8-validation.md :: TU93 niveau 6, combiner les prises latérales et les patrouilles"
+    },
+    {
+      "actions": 14,
+      "timeMs": 5790,
+      "source": "docs/architecture/sic-v8-validation.md :: TU93 niveau 7, distinguer le réveil du garde de son déplacement"
+    },
+    {
+      "actions": 21,
+      "timeMs": 11830,
+      "source": "docs/architecture/sic-v8-validation.md :: TU93 niveau 8"
+    },
+    {
+      "actions": 29,
+      "timeMs": 13900,
+      "source": "docs/architecture/sic-v8-validation.md :: TU93 niveau 9 — Traverser avec les patrouilles et le poursuivant dans la même prévision"
+    }
+  ],
+  "UPST": [
+    {
+      "actions": 30,
+      "timeMs": 27807,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=1; won=true"
+    },
+    {
+      "actions": 4,
+      "timeMs": 5839,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=2; won=true"
+    },
+    {
+      "actions": 14,
+      "timeMs": 15274,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=3; won=true"
+    },
+    {
+      "actions": 7,
+      "timeMs": 8228,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=4; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 17292,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=UPST; level=5; won=true"
+    },
+    {
+      "actions": 17,
+      "timeMs": 13810,
+      "source": "docs/architecture/sic-v8-validation.md :: UPST niveau 6, retrouver les rangées basses et leurs portes"
+    }
+  ],
+  "VALV": [
+    {
+      "actions": 10,
+      "timeMs": 11598,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VALV; level=1; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 7752,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VALV; level=2; won=true"
+    },
+    {
+      "actions": 8,
+      "timeMs": 7706,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VALV; level=3; won=true"
+    },
+    {
+      "actions": 3,
+      "timeMs": 2993,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VALV; level=4; won=true"
+    },
+    {
+      "actions": 13,
+      "timeMs": 12509,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VALV; level=5; won=true"
+    },
+    {
+      "actions": 15,
+      "timeMs": 10770,
+      "source": "docs/architecture/sic-v8-validation.md :: VALV niveau 6, amorcer le relais avant de charger la tour"
+    }
+  ],
+  "VC33": [
+    {
+      "actions": 5,
+      "timeMs": 2335,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VC33; level=1; won=true"
+    },
+    {
+      "actions": 9,
+      "timeMs": 2361,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VC33; level=2; won=true"
+    },
+    {
+      "actions": 23,
+      "timeMs": 4104,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VC33; level=3; won=true"
+    },
+    {
+      "actions": 21,
+      "timeMs": 14008,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VC33; level=4; won=true"
+    },
+    {
+      "actions": 65,
+      "timeMs": 26736,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VC33; level=5; won=true"
+    },
+    {
+      "actions": 20,
+      "timeMs": 6590,
+      "source": "docs/architecture/sic-v8-validation.md :: VC33 niveau 6, préparer un passage à partir de deux origines distinctes"
+    },
+    {
+      "actions": 49,
+      "timeMs": 19130,
+      "source": "docs/architecture/sic-v8-validation.md :: VC33 niveau 7, combiner plusieurs passages autour d'un compartiment commun"
+    }
+  ],
+  "VOIS": [
+    {
+      "actions": 14,
+      "timeMs": 9036,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=1; won=true"
+    },
+    {
+      "actions": 18,
+      "timeMs": 9958,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=2; won=true"
+    },
+    {
+      "actions": 34,
+      "timeMs": 12600,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=3; won=true"
+    },
+    {
+      "actions": 23,
+      "timeMs": 8789,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=4; won=true"
+    },
+    {
+      "actions": 37,
+      "timeMs": 14847,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=5; won=true"
+    },
+    {
+      "actions": 66,
+      "timeMs": 19820,
+      "source": "docs/architecture/sic-v8-validation.md :: VOIS niveau 6, placer l'appui hors du contour comparé"
+    }
+  ],
+  "WA30": [
+    {
+      "actions": 26,
+      "timeMs": 12737,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=1; won=true"
+    },
+    {
+      "actions": 53,
+      "timeMs": 33672,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=2; won=true"
+    },
+    {
+      "actions": 76,
+      "timeMs": 29994,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=3; won=true"
+    },
+    {
+      "actions": 48,
+      "timeMs": 21564,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=4; won=true"
+    },
+    {
+      "actions": 113,
+      "timeMs": 44582,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WA30; level=5; won=true"
+    },
+    {
+      "actions": 48,
+      "timeMs": 15030,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 6, retrouver un réceptacle masqué et interrompre un retrait"
+    },
+    {
+      "actions": 42,
+      "timeMs": 16240,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 7, laisser libre la case du rendez-vous"
+    },
+    {
+      "actions": 138,
+      "timeMs": 76280,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 8"
+    },
+    {
+      "actions": 66,
+      "timeMs": 37340,
+      "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 9 — Combiner les relais, les livraisons locales et la coopération"
+    }
+  ],
+  "WEAV": [
+    {
+      "actions": 27,
+      "timeMs": 10646,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=1; won=true"
+    },
+    {
+      "actions": 28,
+      "timeMs": 12696,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=2; won=true"
+    },
+    {
+      "actions": 24,
+      "timeMs": 12021,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=3; won=true"
+    },
+    {
+      "actions": 40,
+      "timeMs": 21319,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=4; won=true"
+    },
+    {
+      "actions": 40,
+      "timeMs": 21361,
+      "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=WEAV; level=5; won=true"
+    },
+    {
+      "actions": 40,
+      "timeMs": 20360,
+      "source": "docs/architecture/sic-v8-validation.md :: WEAV niveau 6, préserver les pastilles qui commandent les lignes"
+    }
+  ],
+  "ZIPP": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null
+  ]
+}

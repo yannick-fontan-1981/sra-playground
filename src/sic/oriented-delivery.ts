@@ -34,8 +34,9 @@ type Intent = 'motion' | 'attach' | 'release';
 type Step = { input: string; intent: Intent; prediction: Move | null; target: NativePoint | null; waitForTransport?: true;
   intercept?: true;
   route?: Motion[] };
-type WalkStep = { input: string; before: Scene; after: Scene };
-type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string; walk?: WalkStep[] };
+type WalkStep = { input: string; before: Scene; after: Scene; cargoBefore: NativePoint | null; cargoAfter: NativePoint | null };
+type PeerGuard = { landings: { point: NativePoint; pixels: number[] | null }[][]; floorSamples: string[]; protectedCells: NativePoint[] };
+type Proposal = NativeProposal & { local: State; scene: Scene; step: Step; needId: string; attempt: string; walk?: WalkStep[]; peerGuard?: PeerGuard };
 
 const labels = { ACTION1: [0, -1], ACTION2: [0, 1], ACTION3: [-1, 0], ACTION4: [1, 0] } as const;
 const sectorInterceptionRange = 8;
@@ -192,6 +193,9 @@ function transportReturn(before: NativeObservation, after: NativeObservation, lo
       if (Math.abs(from[0] - pose[0]) + Math.abs(from[1] - pose[1]) !== 1 || shifts.some(shift => same(shift.from, from))) return [];
       const to = add(from, delta);
       if (Object.hasOwn(old.boxes, key(to)) || !Object.hasOwn(next.boxes, key(to)) || shifts.some(shift => same(shift.to, to))) return [];
+      const owners = [...carriers].flatMap(([identity, sites]) => sites.filter(site => distance(site, from) === 1
+        && returned.get(identity)?.some(arrival => same(arrival, add(site, delta)))).map(site => ({ identity, site })));
+      if (owners.length !== 1 || owners[0]!.identity !== carrier || !same(owners[0]!.site, pose)) return [];
       return [{ from, to }];
     });
     if (pairs.length !== 1) continue;
@@ -636,7 +640,8 @@ function relayMatches(proposal: Proposal, scene: Scene): boolean {
 function walkPrefix(step: Step, initial: Scene, local: State, remaining: number): WalkStep[] {
   const walk: WalkStep[] = [];
   let before = initial, cargo = local.held;
-  for (const { input, prediction } of step.route?.slice(0, Math.min(remaining, maximumCommittedActions, 70 - local.count)) ?? []) {
+  const limit = local.passage ? remaining : (local.relay || local.sectorNetwork ? 120 : 70) - local.count;
+  for (const { input, prediction } of step.route?.slice(0, Math.max(0, Math.min(remaining, maximumCommittedActions, limit))) ?? []) {
     const known = (cargo ? local.loaded : local.free)[input];
     if (!known || !same(add(before.pose, known), prediction.pose)) break;
     const boxes = { ...before.boxes };
@@ -648,7 +653,7 @@ function walkPrefix(step: Step, initial: Scene, local: State, remaining: number)
     const ahead = add(prediction.pose, prediction.face);
     if (!same(ahead, prediction.cargo) && Object.hasOwn(boxes, key(ahead))) break;
     const after = { ...before, pose: prediction.pose, face: prediction.face, boxes };
-    walk.push({ input, before, after });
+    walk.push({ input, before, after, cargoBefore: cargo, cargoAfter: prediction.cargo });
     cargo = prediction.cargo;
     before = after;
   }
@@ -659,6 +664,89 @@ function matchesScene(actual: Scene | null, predicted: Scene): boolean {
   return !!actual && same(actual.pose, predicted.pose) && same(actual.face, predicted.face)
     && actual.face_value === predicted.face_value && Object.keys(actual.boxes).length === Object.keys(predicted.boxes).length
     && Object.entries(predicted.boxes).every(([position, value]) => actual.boxes[position] === value);
+}
+
+function receiverEdge(g: Geometry, [x, y]: NativePoint, dx: number, dy: number): boolean {
+  const target = (u: number, v: number) => g.targets.some(site => same(site, [u, v]));
+  return dx === 0 && !target(x - 1, y) || dx === g.pitch - 1 && !target(x + 1, y)
+    || dy === 0 && !target(x, y - 1) || dy === g.pitch - 1 && !target(x, y + 1);
+}
+
+function visibleReceiverFill(rows: NativeRows, local: State, scene: Scene): number | undefined {
+  const g = local.geometry, fills = new Set<number>();
+  for (const site of g.targets) {
+    if (same(site, scene.pose) || Object.hasOwn(scene.boxes, key(site))) continue;
+    const tile = orientedCouplingTile(rows, g, site), inside = new Set<number>();
+    let visibleEdge = false;
+    if (!tile?.every((row, y) => row.every((ink, x) => {
+      if (receiverEdge(g, site, x, y)) { visibleEdge = true; return ink === g.core; }
+      inside.add(ink); return true;
+    }))) continue;
+    if (visibleEdge && inside.size === 1) fills.add([...inside][0]!);
+  }
+  return fills.size === 1 ? [...fills][0] : g.insetFill;
+}
+
+function knownRouteSurface(rows: NativeRows, local: State, site: NativePoint, pixels: number[], receiverFill: number | undefined): boolean {
+  const g = local.geometry;
+  if (pixels.length !== g.pitch ** 2) return false;
+  if (g.targets.some(target => same(target, site))) return receiverFill !== undefined
+    && pixels.every((ink, i) => ink === (receiverEdge(g, site, i % g.pitch, Math.floor(i / g.pitch)) ? g.core : receiverFill));
+  if (pixels.every(ink => ink === g.background) || g.insetFill !== undefined && pixels.every(ink => ink === g.insetFill)) return true;
+  const ports = [...(local.relay?.cells ?? []), ...(local.sectorNetwork?.receiving.flatMap(sector => sector.ports.map(port => port.cell)) ?? [])];
+  if (!ports.some(port => same(port, site)) || !pixels.includes(g.background) || pixels.includes(g.core)) return false;
+  // A shared strip retains its repeated visible surface; one changed port cannot redefine it.
+  return ports.filter(port => orientedCouplingTile(rows, g, port)?.flat().every((ink, i) => ink === pixels[i])).length >= 2;
+}
+
+function guardPeerRoute(rows: NativeRows, local: State, scene: Scene, step: Step, walk: WalkStep[]): PeerGuard {
+  const occupied = new Set([key(scene.pose), ...Object.keys(scene.boxes)]), receiverFill = visibleReceiverFill(rows, local, scene);
+  const floorSamples = [...new Set([...deliveryFloor(local.geometry, scene, rows)].filter(site => !occupied.has(site))
+    .flatMap(site => { const pixels = orientedCouplingTile(rows, local.geometry, point(site))!.flat();
+      return knownRouteSurface(rows, local, point(site), pixels, receiverFill) ? [pixels.join(',')] : []; }))];
+  const landings = walk.map(move => {
+    const covered = [move.before.pose, ...(move.cargoBefore ? [move.cargoBefore] : [])];
+    return [move.after.pose, ...(move.cargoAfter ? [move.cargoAfter] : [])]
+      .filter(site => !covered.some(prior => same(site, prior)))
+      .map(site => {
+        const pixels = orientedCouplingTile(rows, local.geometry, site)?.flat() ?? [];
+        return { point: site, pixels: occupied.has(key(site)) ? null : knownRouteSurface(rows, local, site, pixels, receiverFill) ? pixels : [] };
+      });
+  });
+  const last = step.route?.at(-1)?.prediction;
+  const subject = !local.held && last ? add(last.pose, last.face) : null;
+  return { landings, floorSamples, protectedCells: [step.target, subject].filter((site): site is NativePoint => !!site) };
+}
+
+function matchesOwnRoute(actual: Scene | null, predicted: Scene, cargo: NativePoint | null): actual is Scene {
+  return !!actual && same(actual.pose, predicted.pose) && same(actual.face, predicted.face)
+    && actual.face_value === predicted.face_value && same(sceneHeld(actual), cargo);
+}
+
+function protectedRouteCells(actual: Scene, predicted: Scene, guard: PeerGuard): boolean {
+  return guard.protectedCells.every(site => actual.boxes[key(site)] === predicted.boxes[key(site)]);
+}
+
+function peerRouteReturn(proposal: Proposal, walk: WalkStep, before: NativeObservation, after: NativeObservation,
+  first: NativeRows, second: NativeRows): boolean {
+  const { local, peerGuard } = proposal;
+  const old = orientedCouplingScene(first, local.geometry, local.color) as Scene | null;
+  const actual = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
+  if (!peerGuard || !matchesOwnRoute(old, walk.before, walk.cargoBefore)
+    || !matchesOwnRoute(actual, walk.after, walk.cargoAfter) || !protectedRouteCells(actual, walk.after, peerGuard)) return false;
+  const expected = { ...old.boxes };
+  if (walk.cargoBefore) delete expected[key(walk.cargoBefore)];
+  if (walk.cargoAfter) expected[key(walk.cargoAfter)] = walk.after.boxes[key(walk.cargoAfter)]!;
+  const external = transportReturn(before, after, { ...local, held: walk.cargoBefore }, old, actual);
+  for (const shift of external.shifts) {
+    const carrier = external.transports.find(item => same(item.box, shift.to));
+    if (!carrier || !local.transportCarriers?.includes(carrier.carrier)) return false;
+    const value = old.boxes[key(shift.from)]!;
+    delete expected[key(shift.from)];
+    expected[key(shift.to)] = value;
+  }
+  return Object.keys(expected).length === Object.keys(actual.boxes).length
+    && Object.entries(expected).every(([position, value]) => actual.boxes[position] === value);
 }
 
 function confirmsInterception(proposal: Proposal, rows: NativeRows, scene: Scene | null): boolean {
@@ -839,12 +927,25 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const prediction = known || handsOff ? step.prediction : null;
       const peer = relay ? externalCarriers(observation, local).get(relay.carrier) : null;
       const exclusive = !local.sharedEvidence || (inset && !!local.interceptionRef && !blockers.length);
-      const prefix = known && !parallel && !handsOff && exclusive ? walkPrefix(step, scene, local, remaining) : [];
-      const walk = prefix.length > 1 ? prefix : undefined;
+      const prefix = known && !parallel && !step.intercept && !step.waitForTransport
+        && (exclusive || local.sharedEvidence) && (!local.interference || exclusive)
+        ? walkPrefix(step, scene, local, remaining) : [];
+      const cooperative = !exclusive || handsOff;
+      let walk = prefix.length > 1 || cooperative && prefix.length ? prefix : undefined;
+      const peerGuard = walk && cooperative ? guardPeerRoute(rows, local, scene, step, walk) : undefined;
+      if (peerGuard) {
+        const blocked = peerGuard.landings.findIndex(landings => landings.some(({ pixels }) =>
+          pixels ? pixels.length !== geometry.pitch ** 2 : !peerGuard.floorSamples.length));
+        if (blocked === 0) return null;
+        if (blocked > 0) {
+          walk = walk!.slice(0, blocked);
+          peerGuard.landings = peerGuard.landings.slice(0, blocked);
+        }
+      }
       const actions = walk?.map(step => ({ action_ref: step.input, data: {} })) ?? [action];
       return { status: 'proposed', kind: family, actions,
         steps: actions.map((action, index) => ({ action, expected_after: walk?.[index]?.after ?? prediction })),
-        ...(walk ? { walk } : {}),
+        ...(walk ? { walk } : {}), ...(peerGuard ? { peerGuard } : {}),
         local, scene, step, needId: need.id, attempt: unique(step),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch },
         sicSrcDecision: { workflow: decision.receipt.workflow, hash: decision.receipt.src_hash,
@@ -872,12 +973,24 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
     },
     before(proposal, index, packet, observation) {
       const { local } = proposal, step = proposal.walk?.[index];
+      if (step && proposal.peerGuard) {
+        const guard = proposal.peerGuard, actual = orientedCouplingScene(packet.frame_rows, local.geometry, local.color) as Scene | null;
+        const admitted = proposal.binding?.level_epoch === observation.level_epoch
+          && (index > 0 || proposal.binding?.observation_ref === observation.observation_ref)
+          && matchesOwnRoute(actual, step.before, step.cargoBefore) && protectedRouteCells(actual, step.before, guard)
+          && guard.landings[index]!.every(({ point, pixels }) => {
+            const tile = orientedCouplingTile(packet.frame_rows, local.geometry, point)?.flat();
+            return !!tile && (pixels ? pixels.length === tile.length && pixels.every((ink, i) => ink === tile[i])
+              : guard.floorSamples.includes(tile.join(',')));
+          });
+        return { admitted, reason: admitted ? 'own_route_and_current_landings_confirmed' : 'cooperative_route_premise_changed' };
+      }
       const admitted = index === 0 ? proposal.binding?.observation_ref === observation.observation_ref
         : !!step && proposal.binding?.level_epoch === observation.level_epoch
           && matchesScene(orientedCouplingScene(packet.frame_rows, local.geometry, local.color) as Scene | null, step.before);
       return { admitted, reason: admitted ? 'current_oriented_carrier_bound' : 'oriented_carrier_context_changed' };
     },
-    after(proposal, index, before, after, _first, second) {
+    after(proposal, index, before, after, first, second) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
       const parallel = proposal.local.parallel;
@@ -911,8 +1024,9 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const walk = proposal.walk?.[index];
       if (walk) {
         const { local } = proposal;
-        const matched = before.state === after.state
-          && matchesScene(orientedCouplingScene(second, local.geometry, local.color) as Scene | null, walk.after);
+        const matched = before.state === after.state && (proposal.peerGuard
+          ? peerRouteReturn(proposal, walk, before, after, first, second)
+          : matchesScene(orientedCouplingScene(second, local.geometry, local.color) as Scene | null, walk.after));
         return { matched, seal_prefix: !matched || index + 1 === proposal.actions.length,
           reason: matched ? 'carrier_and_parts_followed_declared_route' : 'carrier_or_parts_diverged' };
       }
@@ -943,11 +1057,15 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         && expected.size === Object.keys(scene.boxes).length && Object.keys(scene.boxes).every(p => expected.has(p)) : null;
       return { matched, seal_prefix: true, reason: 'compare_carrier_orientation_and_part_positions' };
     },
-    record(before, after, action, _first, second, proposal, index) {
+    record(before, after, action, first, second, proposal, index) {
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const local = index > 0 ? state ?? proposal.local : proposal.local;
-      const old = proposal.walk?.[index]?.before ?? proposal.scene;
-      const { step } = proposal;
+      const walk = proposal.walk?.[index];
+      const old = proposal.peerGuard ? orientedCouplingScene(first, local.geometry, local.color) as Scene | null
+        : walk?.before ?? proposal.scene;
+      if (!old) return { events: [] };
+      const step = walk ? { ...proposal.step, input: walk.input,
+        prediction: { pose: walk.after.pose, face: walk.after.face, cargo: walk.cargoAfter } } : proposal.step;
       const scene = orientedCouplingScene(second, local.geometry, local.color) as Scene | null;
       if (!scene) return { events: [] };
       if (local.parallel) {
@@ -996,7 +1114,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         next.transportCarriers = [...new Set([...(local.transportCarriers ?? []), ...confirmedCarriers.map(item => item.carrier)])];
       }
       if (local.relay || local.sectorNetwork || local.passage) {
-        const matched = relayMatches(proposal, scene);
+        const matched = relayMatches({ ...proposal, scene: old, local, step }, scene);
         next.stopped = !local.passage && !matched;
         if (step.waitForTransport) {
           const peerChanged = local.relay

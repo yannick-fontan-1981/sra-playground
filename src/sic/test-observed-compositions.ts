@@ -192,11 +192,9 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       if(returning && ((!state.rewrites?.length&&!operands?.rules.length) || !history.slice(0,-1).some(s=>s.source===scene(observation))))return null;
       if (group === cycleGroup && !replaying && !revisiting) return null;
       if (group !== cycleGroup && group !== exhaustedGroup && !follow && !returning) return null;
-      const available = [...inputs];
-      for (const op of observation.available_action_refs)
-        if (op !== 'ACTION6' && !available.some((c) => c.action_ref === op))
-          available.push({ action_ref: op, data: {} });
-      const sequence = chooseSequence(history, scene(observation), available);
+      // The input domain decides which unaddressed controls can be composed.
+      // An advertised command with no admitted input can have a recovery effect.
+      const sequence = chooseSequence(history, scene(observation), inputs);
       let program=state.pendingProgram;
       if(program&&!readyStep(program.steps[program.index]!,rows))program=undefined;
       if(follow&&!program&&!continuing)return null;
@@ -204,7 +202,9 @@ export function createCompositionTrials(): NativeFamily<Offer> {
         const blocked=new Set((state.attempted??[]).filter(p=>p.origin===observation.frame_hash).map(p=>p.word));
         const stalledInputs=new Set(history.filter(s=>s.source===scene(observation)&&s.effect==='unchanged').map(s=>s.key));
         const depth=Math.min(remaining-1,state.verifiedPrograms?.length?4:3);
-        const proposed=composeRewrites(state.rewrites,rows,history.map(s=>s.key),observation.available_action_refs,blocked,
+        const admitted = new Set(inputs.map(command => command.action_ref));
+        if (observation.available_action_refs.includes('ACTION6')) admitted.add('ACTION6');
+        const proposed=composeRewrites(state.rewrites,rows,history.map(s=>s.key),[...admitted],blocked,
           {length:depth,limit:700,verified:state.verifiedPrograms,blocked:stalledInputs,coverage:state.coverage,
             requireContinuation:true,completed:new Set(state.completedGoals)});
         if(proposed?.continuation)program={steps:[...proposed.steps,proposed.continuation],index:0,origin:observation.frame_hash,
@@ -213,13 +213,13 @@ export function createCompositionTrials(): NativeFamily<Offer> {
       let operand=!program&&operands?operandPlan(operands,observation,rows,remaining):undefined;
       if(follow&&operand&&operands?.continueFrom&&!operands.pending&&operand.role!==operands.continueFrom)operand=undefined;
       const needed=program?.steps[program.index]?.op??operand?.steps[operand.index]?.input;
-      let synthesized=needed?available.find(cmd=>observedCommandKey(cmd)===needed):undefined;
+      let synthesized=needed?inputs.find(cmd=>observedCommandKey(cmd)===needed):undefined;
       if(needed&&!synthesized&&needed.startsWith('ACTION6:')&&observation.available_action_refs.includes('ACTION6')){
         const [x,y]=needed.slice(8).split(',').map(Number);
         if(Number.isInteger(x)&&Number.isInteger(y)&&rows[y!]?.[x!]!==undefined)synthesized={action_ref:'ACTION6',data:{x:x!,y:y!}};
       }
       if(!synthesized){program=undefined;operand=undefined;if(follow||returning)return null;}
-      const relational = !program && !operand && (state.active || state.trials % 2 === 1) && relationTrial(state, observation, available);
+      const relational = !program && !operand && (state.active || state.trials % 2 === 1) && relationTrial(state, observation, inputs);
       const command = synthesized ?? (relational ? relational.command : sequence),
         goal = relational ? relational.goal : null;
       if(!command)return null;

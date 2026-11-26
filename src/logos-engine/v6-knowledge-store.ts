@@ -15,6 +15,20 @@ const GRAPH_STATE_KINDS = new Set(['family_state', 'prefix_evidence', 'component
 const publicationWriteQuantum = 64;
 const publicationTurnMs = 16;
 
+/** A repeated family publication can be a Kernel no-op. Compare only closed
+ * fields already accepted by this store: identical scalars/objects, or fresh
+ * evidence/relation arrays containing the same immutable entries in order.
+ * Different metadata takes the ordinary validation and commit path. */
+function samePublishedNode(previous: KnowledgeNode, candidate: Record<string, unknown>): boolean {
+  const keys = Object.keys(candidate);
+  return keys.length === Object.keys(previous).length && keys.every(key => {
+    if (!Object.hasOwn(previous, key)) return false;
+    const before = previous[key], after = candidate[key];
+    return Object.is(before, after) || (key === 'evidence' || key === 'relations') && Array.isArray(before) && Array.isArray(after)
+      && before.length === after.length && after.every((value, index) => Object.is(value, before[index]));
+  });
+}
+
 /**
  * Keep V7 canonical integers unchanged. Fractional numbers and negative zero
  * become explicitly typed IEEE754 leaves; objects with reserved keys are escaped.
@@ -165,6 +179,7 @@ export class NativeKnowledgeStore {
         const source = write.value;
         const currentValue = staged.node(write.id)?.value;
         let storedValue: JsonValue;
+        let repeatedFamilySource = false;
         if (GRAPH_STATE_KINDS.has(write.kind)) {
           // Appended traces and public returns have distinct identities, but
           // often repeat closed evidence. A component's last root is only a
@@ -178,6 +193,7 @@ export class NativeKnowledgeStore {
           // traverse the complete encoder, even with the same frozen input.
           const graph = published && currentValue === published ? null : splitNativeState(source, write.id, isNativeStateGraph(root)
             ? { prior: { root, readFragment: id => staged.node(id)?.value } } : undefined);
+          repeatedFamilySource = write.kind === 'family_state' && graph === null;
           const encoded = graph?.root ?? published!;
           if (this.yieldControl && performance.now() - this.lastYieldAt >= publicationTurnMs) {
             this.writesSinceYield = 0;
@@ -226,7 +242,17 @@ export class NativeKnowledgeStore {
           ...(write.component === undefined ? previous?.component === undefined ? {} : { component: previous.component } : { component: write.component }),
           ...(definition === undefined ? {} : { definition }),
         };
-        await staged.commit(immutableJson(node) as JsonObject, cause);
+        // The exact frozen source was validated, encoded and committed here,
+        // and the candidate retains every accepted field. The Kernel would
+        // return its old node without a delta. In particular, new evidence,
+        // status or relations must still pass the ordinary commit below.
+        if (!repeatedFamilySource || !previous || !samePublishedNode(previous, node)) {
+          await staged.commit(immutableJson(node) as JsonObject, cause);
+        } else {
+          // Preserve the ordinary asynchronous write boundary before reading
+          // the next caller-supplied entry in this transaction.
+          await Promise.resolve();
+        }
         if (this.yieldControl && ++this.writesSinceYield >= publicationWriteQuantum) {
           this.writesSinceYield = 0;
           await this.yieldControl();

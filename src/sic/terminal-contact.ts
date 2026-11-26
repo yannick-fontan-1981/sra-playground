@@ -1,6 +1,6 @@
 import type { NativeObservation, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { add, diff, same, size, type XY } from './access-terrain.ts';
-import { aligned } from './controlled-parts.ts';
+import { aligned, type PartMotion } from './controlled-parts.ts';
 import { cellMatches, spatialControls, surfaceFromVisits } from './calibrate-spatial-controls.ts';
 import { visualLayout, type PreviewLearning, type VisualLayout } from './witnessed-preview-transfer.ts';
 import type { Memory, Experiment } from './preparation-experiments.ts';
@@ -38,9 +38,23 @@ export type TerminalTrial = {
   distance: number;
   before: string;
   key: string;
+  blockedStroke?: string;
+  currentMotionWitness?: boolean;
 };
 const selectBody = (v: VisualLayout, p: string, last?: XY) =>
   v[p]?.length === 1 ? v[p]![0] : v[p]?.find((x) => last && same(x.at, last));
+
+const motionKey = (actor: string, op: string, displacement: XY) => JSON.stringify([actor, op, displacement]);
+const motionWitness = (motion: PartMotion | undefined, op: string, displacement: XY) =>
+  (motion?.displacements ?? motion?.axes)?.[op]?.[displacement.join()]?.last ?? null;
+
+function strokeContext(rows: NativeRows, actor: string, op: string, from: XY, to: XY, pitch: XY) {
+  const [left, top] = to.map((center, axis) => Math.ceil((center - pitch[axis]! / 2) / 2));
+  const [right, bottom] = to.map((center, axis) => Math.ceil((center + pitch[axis]! / 2) / 2));
+  const landing: number[][] = [];
+  for (let y = top!; y < bottom!; y++) landing.push(rows[y]?.slice(Math.max(0, left!), right!) ?? []);
+  return JSON.stringify([actor, op, from, to, landing]);
+}
 
 // A contact is an experiment until an official transition identifies a scoring event.
 function untestedContacts(learn:PreviewLearning, layout:VisualLayout, available:Set<string>, ref:string): ContactHypothesis[] {
@@ -146,9 +160,10 @@ export function offerTerminalContact(
     const known = new Set(
       Object.keys(motion.sites).map((k) => aligned(k.split(',').map(Number) as XY, p, pitch).join())
     );
-    const moves = model.motors.filter((z) => hypothesize || positioned
-      ? z.basis === 'observed' && z.support > 0
-      : z.support > 0 || available.size >= 4);
+    const moves = model.motors.filter((z) => {
+      if (learn.terminalMotionRefutations?.[motionKey(w.actor, z.op, z.d)] === motionWitness(motion, z.op, z.d)) return false;
+      return hypothesize || positioned ? z.basis === 'observed' && z.support > 0 : z.support > 0;
+    });
     for (const part of markers) {
       const goal = aligned(diff(part.at, w.offset), p, pitch);
       const preparationKey=preparation ? JSON.stringify([w.actor,w.marker,part.at,w.offset,preparation.operation,peers]) : undefined;
@@ -188,6 +203,8 @@ export function offerTerminalContact(
           const first = parent.n ? parent.first : d.op;
           if (attempts[attemptKey(first)] !== undefined)
             continue;
+          if (!parent.n && learn.terminalBlockedStrokes?.[strokeContext(rows, w.actor, first, p, v, pitch)])
+            continue;
           seen.set(k, {
             first,
             to: parent.n ? parent.to : v,
@@ -199,6 +216,9 @@ export function offerTerminalContact(
       }
       const route = same(goal,p)&&preparation ? {first:preparation.operation,to:p,n:0,walked:true} : seen.get(goal.join());
       if (!route || (!route.n && !preparation)) continue;
+      // A remembered scoring contact locates a candidate destination. A
+      // route to it also needs a current witness of the actor's movement.
+      if (route.n > 1 && !Object.keys(motion.sites).length) continue;
       if (route.n > 1 && m.localProgress?.active) continue;
       if (route.n > 2 && !route.walked && m.localProgress?.foreignArrival?.actor !== w.actor) continue;
       const key=attemptKey(route.first),terminal=preparation ? route.n===0 : route.n===1;
@@ -225,6 +245,8 @@ export function offerTerminalContact(
             distance: route.n,
             before: o.observation_ref,
             key,
+            ...(route.n ? { blockedStroke: strokeContext(rows, w.actor, route.first, p, route.to, pitch) } : {}),
+            currentMotionWitness: motion.sites[p.join()] !== undefined,
           },
         };
     }
@@ -264,6 +286,15 @@ export function measureTerminalContact(
   const use=!!trial.preparationKey && trial.distance===0;
   const featureChanged=use && !(after[trial.witness.marker]??[]).some(z=>same(z.at,trial.site));
   const matched = live && (won || (reached && (!use || featureChanged)));
+  if (live && !won && !reached && actual && !cellMatches(actual, trial.from, trial.pitch)) {
+    const displacement = diff(trial.to, trial.from);
+    const actor = trial.witness.actor;
+    (learn.terminalMotionRefutations ??= {})[motionKey(actor, op, displacement)] =
+      motionWitness(learn.partMotion?.[actor], op, displacement);
+  }
+  if (live && !won && !reached && trial.blockedStroke && cellMatches(actual, trial.from, trial.pitch)) {
+    (learn.terminalBlockedStrokes ??= {})[trial.blockedStroke] = true;
+  }
   if(trial.preparationKey){
     (learn.preparationAttempts??={})[trial.key]=a.revision;
     if(live && use){

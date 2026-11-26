@@ -75,6 +75,8 @@ export type PreviewLearning = {
   testedPreparations?: Record<string,number>;
   terminal?: TerminalContact[];
   goalAttempts?: Record<string, number>;
+  terminalBlockedStrokes?: Record<string, true>;
+  terminalMotionRefutations?: Record<string, string | null>;
   visitedContacts?: Record<string, number>;
   partMotion?: Record<string, PartMotion>;
   bindings: Record<string, WitnessedBinding>;

@@ -25,17 +25,24 @@ function integer(value: unknown, minimum: number, maximum: number, name: string)
 }
 
 function budgets(value: V6Budgets): NativeBudgets {
-  if (!value || typeof value !== 'object' || Object.keys(value).some(key => !['targetLevels', 'levelActionCaps', 'maxActions', 'parallelWorkers'].includes(key))) {
+  if (!value || typeof value !== 'object' || Object.keys(value).some(key => !['targetLevels', 'levelActionCaps', 'levelActiveTimeCapsMs', 'maxActions', 'parallelWorkers'].includes(key))) {
     throw new V6AgentError('invalid', 'Malformed native solver budgets.');
   }
   const targetLevels = integer(value.targetLevels, 1, 1000, 'target level count');
   if (!Array.isArray(value.levelActionCaps) || value.levelActionCaps.length !== targetLevels) throw new V6AgentError('invalid', 'An explicit action cap is required for every target level.');
-  const caps = value.levelActionCaps.map(cap => integer(cap, 1, 100_000, 'per-level action cap'));
+  const caps = Array.from(value.levelActionCaps, cap => integer(cap, 1, 100_000, 'per-level action cap'));
+  const times = value.levelActiveTimeCapsMs;
+  if (times !== undefined && (!Array.isArray(times) || times.length !== targetLevels)) {
+    throw new V6AgentError('invalid', 'An explicit active-time cap is required for every target level.');
+  }
+  const levelActiveTimeCapsMs = times && Array.from(times, cap => integer(cap, 1, 3_600_000, 'per-level active-time cap'));
   const total = caps.reduce((sum, cap) => sum + cap, 0);
   const maxActions = value.maxActions === undefined ? total : Math.min(total, integer(value.maxActions, 1, 1_000_000, 'total action cap'));
   const parallelWorkers = value.parallelWorkers === undefined ? undefined
     : integer(value.parallelWorkers, 1, Number.MAX_SAFE_INTEGER, 'campaign worker count');
-  return freeze({ targetLevels, levelActionCaps: caps, maxActions, ...(parallelWorkers === undefined ? {} : { parallelWorkers }) });
+  return freeze({ targetLevels, levelActionCaps: caps, maxActions,
+    ...(levelActiveTimeCapsMs ? { levelActiveTimeCapsMs } : {}),
+    ...(parallelWorkers === undefined ? {} : { parallelWorkers }) });
 }
 
 async function nativeObservation(packet: V6PublicObservation): Promise<NativePublicObservation> {
@@ -245,21 +252,24 @@ export class V6AgentService {
         return this.accept(yielded);
       }
       if (operation.sequence !== this.sequence) throw new V6AgentError('stale', 'The native solver observation sequence has changed.');
-      if (operation.type === 'reset_level') {
-        if (this.pending || !this.result.snapshot.canResetLevel || !this.backend.resetLevel) {
-          throw new V6AgentError('invalid', 'Reset requires an acquired level boundary without an outstanding command.');
+      if (operation.type === 'reset_level' || operation.type === 'undo_action') {
+        const undo=operation.type==='undo_action';
+        const available=undo?this.result.snapshot.canUndoAction:this.result.snapshot.canResetLevel;
+        const recover=undo?this.backend.undoAction:this.backend.resetLevel;
+        if (this.pending || !available || !recover) {
+          throw new V6AgentError('invalid', 'Recovery requires an acquired boundary without an outstanding command.');
         }
         const packet = validateV6PublicObservation(operation.observation);
         if (packet.stepIndex !== this.sequence || packet.level !== this.current.level
           || packet.levelsCompleted !== this.current.levels_completed || packet.state !== 'NOT_FINISHED') {
-          throw new V6AgentError('stale', 'The reset did not restore the current level and completed score.');
+          throw new V6AgentError('stale', 'The recovery did not restore the current level and completed score.');
         }
         const observation = await nativeObservation(packet);
         this.checkSignal(signal);
         backendWork = true;
-        const yielded = await this.backend.resetLevel(observation, this.execution(signal));
+        const yielded = await recover.call(this.backend,observation, this.execution(signal));
         this.checkSignal(signal);
-        if (yielded.kind !== 'boundary') throw new V6AgentError('invalid', 'A reset does not release a command.');
+        if (yielded.kind !== 'boundary') throw new V6AgentError('invalid', 'Recovery does not release a command.');
         this.current = observation;
         return this.accept(yielded);
       }

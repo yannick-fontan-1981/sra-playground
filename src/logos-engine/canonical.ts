@@ -23,6 +23,7 @@ const immutableObjects = new ShardedWeakSet();
 // cache holds at most 16 MiB of UTF-16 text plus an allowance for each entry;
 // eviction only removes a recomputable encoding, never a knowledge revision.
 const canonicalObjects = new BoundedWeakCache<{ text: string; nodes: number; height: number }>(16 * 1024 * 1024, 4096);
+const minimumNestedCacheNodes = 24;
 const MAX_DEPTH = 128;
 export const MAX_JSON_NODES = 1_000_000;
 const validUnicode = new Set<string>();
@@ -308,7 +309,12 @@ export function canonical(value: unknown): string {
       ancestors.delete(item);
     }
     lastHeight = height; lastImmutable = deeplyImmutable;
-    if (deeplyImmutable) canonicalObjects.set(item, { text: encoded, nodes: nodes - initialNodes + 1, height }, 2 * encoded.length + 128);
+    const size = nodes - initialNodes + 1;
+    // Small nested values are cheaper to encode than to cache independently.
+    // Cache roots because subsequent equality and digest calls reuse them.
+    if (deeplyImmutable && (depth === 0 || size >= minimumNestedCacheNodes)) {
+      canonicalObjects.set(item, { text: encoded, nodes: size, height }, 2 * encoded.length + 128);
+    }
     return encoded;
   }
   return encode(value, 0);

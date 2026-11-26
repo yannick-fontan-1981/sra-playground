@@ -218,7 +218,9 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
       decide = await registry.registerProgram(chooseLanding, {}, await landingModule());
     },
     async proposeInGroup(group, observation, rows, available, remaining, execution) {
-      if(family===learnReactiveMotionId&&sampledResponse.epoch===observation.level_epoch&&sampledResponse.multiple&&remaining>0){
+      if (group === 'explore_available_inputs') {
+        if (family !== learnReactiveMotionId || sampledResponse.epoch !== observation.level_epoch
+          || !sampledResponse.multiple || remaining < 1) return null;
         const trial=choosePursuit(sampledResponse.response,sampledResponse.learn,visualLayout(observation,rows),rows,
           new Set(available.map(c=>c.action_ref)),sampledResponse.attempts);
         if(trial&&trial.basis!=='one_possible_response'){
@@ -246,6 +248,7 @@ export function createSicVerifyReactiveMotion(family = verifyReactiveMotionId): 
                 evidence,actions,outcome_guard:{path:['value'],contains:id}}};
           }
         }
+        return null;
       }
       if (group !== observedMechanicsGroup) return this.propose(observation, rows, available, remaining, execution);
       if (witness?.epoch !== observation.level_epoch || witness.score !== observation.levels_completed) return null;
