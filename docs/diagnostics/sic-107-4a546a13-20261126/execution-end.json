@@ -1,0 +1,10 @@
+{
+  "startedAt": "2026-11-26T18:17:37.815592+00:00",
+  "finishedAt": "2026-11-26T20:18:27.277103+00:00",
+  "parentExitCode": 0,
+  "sourceCommitAtEnd": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "sourceCleanAtEnd": true,
+  "childUserCpuSeconds": 8123.277984,
+  "childSystemCpuSeconds": 478.488618,
+  "childMaximumRssKiB": 2274356
+}

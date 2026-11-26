@@ -1,15 +1,15 @@
 # Campagne SIC des 107 jeux
 
-Instantané généré le 2026-11-26T20:11:09.339579+00:00.
+Instantané généré le 2026-11-26T20:21:09.794233+00:00.
 
-**État : `running` — 101/107 résultats reçus.**
+**État : `finished` — 107/107 résultats reçus.**
 Source figée : `4a546a139f9064422c078ef5f40b8c22133c39a8`. Périmètre : **107 jeux / 692 niveaux**.
 
-**77 jeux ont tous leurs scores publics ; 77 ont aussi leur réconciliation finale attestée.**
-Niveaux publiquement gagnés confirmés : **577/692** ; réconciliation attestée : **577**.
-Commandes connues : **15771**, dont **15771** attribuées à SIC.
+**80 jeux ont tous leurs scores publics ; 80 ont aussi leur réconciliation finale attestée.**
+Niveaux publiquement gagnés confirmés : **605/692** ; réconciliation attestée : **605**.
+Commandes connues : **16755**, dont **16755** attribuées à SIC.
 
-En attente : **6**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
+En attente : **0**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
 
 Les scores acquis sont conservés en cas d'arrêt pendant la transition. `complete_unsettled` distingue une victoire publique complète d'une réconciliation finale non attestée.
 Un jeu en attente n'est pas un échec. L'absence du reçu de fin maintient le statut en attente ; ce rapport ne sonde pas le processus.
@@ -18,16 +18,15 @@ Le contrôle de réconciliation repose sur les comptes rendus de l'enfant ; il n
 
 Les plafonds sont comparés exactement à l'export du module de budgets inchangé : 432 niveaux avec temps mesuré, 57 avec temps estimé depuis les commandes, et 203 sans référence individuelle (repli : 80 commandes / 90 secondes). Un arrêt au repli ne suffit pas à identifier un défaut du solveur.
 
-Compteurs de récupération connus : **2 réinitialisations**, **0 retours arrière**. Parmi les résultats valides reçus, 8 n'ont pas de compteur de réinitialisation et 8 n'ont pas de compteur de retour arrière.
+Compteurs de récupération connus : **2 réinitialisations**, **0 retours arrière**. Parmi les résultats valides reçus, 9 n'ont pas de compteur de réinitialisation et 9 n'ont pas de compteur de retour arrière.
 
 ## Catégories
 
 | Catégorie | Jeux |
 |---|---:|
-| commands | 16 |
-| complete | 77 |
-| pending | 6 |
-| time | 8 |
+| commands | 18 |
+| complete | 80 |
+| time | 9 |
 
 ## Jeux incomplets et résultats à vérifier
 
@@ -60,6 +59,9 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 | SPOR | L2 | 1/6 | 18 / 18 | 8,793 / 14 s (mural) | Plafond de commandes du niveau atteint |
 | TRCP | L4 | 3/6 | 80 / 80 | 53,523 / 90 s (mural) | Plafond de commandes du niveau atteint ; plafond de repli sans référence individuelle |
 | UPST | L1 | 0/6 | 36 / 36 | 15,677 / 38 s (mural) | Plafond de commandes du niveau atteint |
+| VOIS | L2 | 1/6 | 23 / 23 | 6,846 / 15 s (mural) | Plafond de commandes du niveau atteint |
+| WA30 | L8 | 7/9 | 96 / 166 | 103,002 / 103 s (mural) | Plafond de temps de résolution atteint |
+| WEAV | L2 | 1/6 | 34 / 34 | 12,683 / 18 s (mural) | Plafond de commandes du niveau atteint |
 
 ## Verdicts par jeu
 
@@ -166,23 +168,23 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 | TRIA | 6/6 | 6 | complete | — | 119 | measured | target_levels_completed |
 | TU93 | 9/9 | 9 | complete | — | 205 | measured | target_levels_completed |
 | UPST | 0/6 | 0 | commands | resolution | 36 | measured | level_action_budget |
-| VALV | —/6 | 0 | pending | — | — | — | — |
-| VC33 | —/7 | 0 | pending | — | — | — | — |
-| VOIS | —/6 | 0 | pending | — | — | — | — |
-| WA30 | —/9 | 0 | pending | — | — | — | — |
-| WEAV | —/6 | 0 | pending | — | — | — | — |
-| ZIPP | —/6 | 0 | pending | — | — | — | — |
+| VALV | 6/6 | 6 | complete | — | 57 | measured | target_levels_completed |
+| VC33 | 7/7 | 7 | complete | — | 192 | measured | target_levels_completed |
+| VOIS | 1/6 | 1 | commands | resolution | 37 | measured | level_action_budget |
+| WA30 | 7/9 | 7 | time | resolution | 508 | measured | level_wall_time_budget |
+| WEAV | 1/6 | 1 | commands | resolution | 61 | measured | level_action_budget |
+| ZIPP | 6/6 | 6 | complete | — | 129 | no_level_reference | target_levels_completed |
 
 ## Mesures jusqu'au score
 
-577 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
+605 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
 Seul `scoredMs` est comparé au plafond de résolution. La durée totale et la réconciliation ne sont pas comparées à ce plafond. Les éventuels dépassements restent distincts du score public et du verdict brut ; les mesures arrondies et l'ordonnancement IPC devront être interprétés à l'audit final.
 
 Aucun dépassement rapporté parmi les scores dont le temps est disponible.
 
 ## Contrôle et provenance
 
-Couverture complète : **False**. Contrôles de cet instantané : **True**.
+Couverture complète : **True**. Contrôles de cet instantané : **True**.
 Les plafonds rapportés sont comparés, champs et sources compris, aux plafonds exportés par le module pur du SHA évalué.
 
 Aucune incohérence détectée dans cet instantané.
