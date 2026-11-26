@@ -4,6 +4,7 @@ import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { observedMechanicsGroup } from './strategy-agenda.ts';
+import { maximumCommittedActions } from './plan-step.ts';
 
 export const pivotCargoId = 'sic_pivot_cargo';
 export const learnPivotCargoId = 'sic_deliver_cargo_after_observed_motion';
@@ -288,15 +289,16 @@ function witnessed(rows: NativeRows, layout: Layout, at: Position, move: Move): 
   });
 }
 
-function translationLandings(rows: NativeRows, local: Memory, remaining: number): Landing[][] {
+function cargoLandings(rows: NativeRows, local: Memory, remaining: number): Landing[][] {
   const { layout, at, steps } = local;
-  const occupied = new Set([key(at.actor), ...at.cargo.flat().map(key)]);
-  const moving = (position: Position) => [position.actor, ...(position.cargo[position.held] ?? [])];
+  const occupiedBy = (position: Position) => [position.actor, ...position.cargo.flat()];
+  const occupied = new Set(occupiedBy(at).map(key));
   const result: Landing[][] = [];
   let previous = at;
-  for (const move of steps.slice(0, remaining)) {
-    if (move.intent !== 'move') break;
-    const entering = moving(move.next).filter(point => !moving(previous).some(current => same(current, point)));
+  for (const move of steps.slice(0, Math.min(remaining, maximumCommittedActions))) {
+    if (move.intent === 'move' ? !local.moves : !local.interactions.includes(move.intent)) break;
+    const occupiedBefore = new Set(occupiedBy(previous).map(key));
+    const entering = occupiedBy(move.next).filter(point => !occupiedBefore.has(key(point)));
     // A cell vacated earlier in this series has no observed background at
     // planning time. Rebind it at the next decision instead of guessing.
     if (entering.some(point => occupied.has(key(point)))) break;
@@ -395,7 +397,7 @@ export function createSicPivotCargo(family = pivotCargoId, transferObservedMotio
         subjects: ['carrier', 'cargo', 'pivot_surface', 'receiving_cells'], parentObjective: parent, satisfactionContract: 'official_progress_after_all_deliveries' };
       const need = { ...objective, id: sicNeedId(objective), status: 'assigned', evidence };
       const id = pivotCargoId + ':' + need.id, action = { action_ref: move.input, data: {} };
-      const landings = motion && known ? translationLandings(rows, local, remaining) : [];
+      const landings = known ? cargoLandings(rows, local, remaining) : [];
       const series = landings.length > 1 ? local.steps.slice(0, landings.length) : [move];
       const actions = series.length > 1 ? series.map(step => ({ action_ref: step.input, data: {} })) : [action];
       const situation = { move: 'Translate the carrier and verify the position of every attached tile', attach: 'Test attaching the adjacent cargo',

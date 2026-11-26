@@ -39,24 +39,27 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
+const cargoContinuity = [[47, 38], [37, 34]];
 
-function markerWalks(run, issued, groups) {
+function measuredMotionSeries(run, issued, groups, kind, owners, contact) {
   const offset = run.executedTickets.indexOf(issued[0]);
   const effects = new Map(issued.map((ticket, index) => [ticket, run.steps?.[offset + index]]));
-  const walks = [];
+  const series = [];
+  const movement = action => /^ACTION[1-4]$/.test(action);
   for (const group of groups.values()) {
-    if (group.length < 2 || !group.every(ticket => {
+    if (group.length < 2 || !group.some(ticket => movement(ticket.action))
+      || contact && !group.some(ticket => ticket.action === contact) || !group.every(ticket => {
       const effect = effects.get(ticket);
-      return /^ACTION[1-4]$/.test(ticket.action) && effect?.a === Number(ticket.action.slice(6))
-        && effect.pixels > 0 && ['sic_verify_marked_lattice', 'sic_learn_marked_lattice'].includes(effect.family);
+      return (movement(ticket.action) || ticket.action === contact) && effect?.a === Number(ticket.action.slice(6))
+        && effect.pixels > 0 && owners.includes(effect.family);
     })) continue;
     const first = issued.indexOf(group[0]);
-    walks.push({ kind: 'marker walk', first, last: first + group.length - 1 });
+    series.push({ kind, first, last: first + group.length - 1 });
   }
-  assert.ok(walks.length, 'SIGN lost its executed marked-field walks');
-  return walks;
+  assert.ok(series.length, run.code + ' lost its executed ' + kind + ' series');
+  return series;
 }
 
 function consecutiveStonePushes(level, tickets) {
@@ -937,7 +940,7 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SIGN: 6, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SIGN: 6, GABA: 2, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
   assert.equal(
     tickets.length,
@@ -996,6 +999,13 @@ export function checkRun(run) {
         'SIGN exceeded its verified action ceiling or reset');
       assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
         'SIGN L' + row.level + ' lost executed marked-field continuity');
+    }
+    if (code === 'GABA') {
+      const [actions, minContinued] = cargoContinuity[i];
+      assert.ok(issued.length <= [57, 45][i] && issued.every(ticket => ticket.resets === 0),
+        'GABA exceeded its verified action ceiling or reset');
+      assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
+        'GABA L' + row.level + ' lost executed cargo continuity');
     }
     if (code === 'SS03' && row.level === 2) {
       // The exploratory route needed 111 commands and 95 decisions; the composed route needs 27 and 7.
@@ -1071,7 +1081,10 @@ export function checkRun(run) {
         'SS07 must prepare and complete the destination set in guarded series');
     }
     const physical = reference ? measureManipulation(row.level, issued)
-      : code === 'SIGN' && markedFieldContinuity[i][1] > 0 ? markerWalks(run, issued, groups)
+      : code === 'SIGN' && markedFieldContinuity[i][1] > 0 ? measuredMotionSeries(run, issued, groups, 'marker walk',
+        ['sic_verify_marked_lattice', 'sic_learn_marked_lattice'])
+      : code === 'GABA' ? measuredMotionSeries(run, issued, groups, 'cargo transport',
+        ['sic_pivot_cargo', 'sic_deliver_cargo_after_observed_motion'], 'ACTION5')
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
@@ -1113,6 +1126,7 @@ function main() {
       ['actor-composition', 'SS06', '8', '125'],
       ['destination-set', 'SS07', '8', '180'],
       ['marked-field', 'source:SIGN', '6', '98'],
+      ['cargo-transport', 'source:GABA', '2', '57'],
       ['native-sources', 'source:AR25,HANO,DC22', '1', '120'],
     ]) {
       const output = join(temp, name + '.jsonl');
@@ -1126,7 +1140,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'HANO', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'GABA', 'HANO', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();

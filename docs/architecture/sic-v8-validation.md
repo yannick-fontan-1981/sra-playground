@@ -2792,3 +2792,11 @@ Pour un repère fixe, le trajet visible fournit une série bornée des déplacem
 À conditions identiques depuis le niveau 1, la référence gagne SIGN niveau 3 en 56 commandes et `13874eed` s’arrête à 68. Le nouveau rejeu gagne les six niveaux en 15, 44, 56, 22, 53 et 81 commandes sous les plafonds chronologiques. Au niveau 6, la priorité de la grille seule s’arrêtait à 74 commandes sous la limite de 88 s. Avec les séries, le score arrive à 71,4 s.
 
 Le contrôle examine les retours des commandes réellement exécutées. Au niveau 6, 31 commandes continuent une décision déjà ouverte et la plus longue série comporte 10 déplacements. Le niveau 4 exécute ses 22 commandes en décisions unitaires. Deux dispositions synthétiques vérifient les déplacements opposés, le recoloriage, le refus d’un curseur ambigu et la fermeture de la série sur un retour incompatible.
+
+### Enchaîner les interactions confirmées d’une charge
+
+Une série de transport peut inclure une translation, un attachement, une rotation ou un dépôt dont l’effet est déjà confirmé. Elle s’arrête avant la première opération inconnue et reste bornée à seize commandes. La préparation vérifie les cases nouvellement occupées, puis chaque retour vérifie le porteur et les charges. Une séparation inattendue des pièces clôt la série et déclenche une nouvelle mesure.
+
+À partir du niveau 1 de GABA, la référence historique et la version de départ reproduisent les mêmes 84 commandes et retours lorsqu’elles disposent du temps nécessaire. Lors du rejeu apparié sous le plafond de 16 s au niveau 2, le témoin s’arrête à 29 commandes. Avec les séries, le niveau gagne en 37 commandes et 11,2 s jusqu’au score. Le code de production obtient également ce score, en 11,8 s, et gagne les quatre premiers niveaux en 47, 37, 67 et 88 commandes. Le niveau 5 atteint 102 commandes avant le plafond de 50 s.
+
+Les tickets du niveau 2 conservent exactement la trajectoire physique de référence. Ils confirment 34 commandes en continuation et trois séries qui combinent les déplacements et le contrôle de la charge. Le même contrôle de continuité utilise les retours des séries de SIGN. Les essais synthétiques couvrent deux tailles de maille, des déplacements opposés et le refus d’une case dont l’apparence change.
