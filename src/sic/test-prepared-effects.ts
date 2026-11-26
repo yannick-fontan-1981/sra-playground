@@ -41,6 +41,7 @@ import {
 } from './preparation-experiments.ts';
 import { sicNeedId } from './need-identity.ts';
 import { exhaustedGroup } from './test-observed-compositions.ts';
+import { copyNativeValue, retainNativeJson } from '../logos-engine/v6-native-owned.ts';
 export const preparedEffectsId = 'sic_test_prepared_effects';
 import { freshCapabilities } from './derive-capabilities.ts';
 import { newSpatialMemory } from './spatial-access.ts';
@@ -132,6 +133,15 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
   const seekAccess=planAfterSelection || comparePreparations && informationPreference?.strategy==='indicated_access';
   const prepareArrival=seekAccess || comparePreparations && informationPreference?.strategy==='paired_arrival';
   let m = initialMemory(0);
+  let checkpoint: typeof m | undefined;
+  function restoreCopiedMemory(value: typeof m) {
+    m = value;
+    m.delayed ??= newDelayedMemory();
+    m.frontier ??= {...newFrontierMemory(),lastEdge:m.turns,lastScene:m.turns};
+    m.projection ??= newProjectionMemory();
+    m.space ??= newSpatialMemory();
+    m.equations ??= freshCapabilities();
+  }
   function enter(o:NativeObservation){
     if(m.epoch===o.level_epoch)return;
     const { previewCarry, localCarry, contactFrontier, transportRetry } = m;
@@ -615,12 +625,12 @@ export function createPreparedEffects(informationPreference?:InformationPreferen
     },
     state: () => m,
     restore(value) {
-      m = structuredClone(value as typeof m);
-      m.delayed ??= newDelayedMemory();
-      m.frontier ??= {...newFrontierMemory(),lastEdge:m.turns,lastScene:m.turns};
-      m.projection ??= newProjectionMemory();
-      m.space ??= newSpatialMemory();
-      m.equations ??= freshCapabilities();
+      restoreCopiedMemory(structuredClone(value as typeof m));
+    },
+    nativeState: () => checkpoint = retainNativeJson(m, checkpoint),
+    restoreNative(value) {
+      // The graph value is immutable; only this detached working copy mutates.
+      restoreCopiedMemory(copyNativeValue(value as typeof m));
     },
   };
 }
