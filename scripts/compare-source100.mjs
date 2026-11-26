@@ -3,6 +3,7 @@ import {publicLesson} from './sic-study-public-lesson.mjs';
 import { sourceBackend } from './sic-study-source-games.mjs';
 import { sourceInterface } from './sic-study-source-interface.mjs';
 import { fromSourceFork } from './sic-study-source-fork.mjs';
+import { bindContinuityPlan, collectContinuityReturn, observeOrientedContinuity, orientedContinuityEvidence } from './sic-continuity-evidence.mjs';
 import { appendFile, readFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -37,6 +38,8 @@ const declarations = {
   strategy: await declaration('morphology_policy/strategy.drm'),
 };
 const motion = source ? null : await load(solverRoot, 'src/sic/observed-translation.ts');
+const orientedScene = process.env.SIC_STUDY_CONTINUITY === '1'
+  ? (await load(solverRoot, 'src/logos-engine/v6-oriented-coupling.ts')).orientedCouplingScene : null;
 
 const hash = (value) => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 function clickPatch(frame, data) {
@@ -139,18 +142,21 @@ async function run(code, games) {
   });
   // Count only commands acknowledged by the native service after dispatch.
   const executedTickets = process.env.SIC_STUDY_CONTINUITY === '1' ? [] : null;
-  let pendingTicket, dispatchedActorPlan;
+  let pendingTicket, pendingPlan, dispatchedActorPlan, dispatchedOriented;
   const transport = { async request(operation) {
     const result = await service.handle(operation);
     if (executedTickets) {
       if (operation.type === 'advance') {
         if (!pendingTicket || operation.ticketId !== pendingTicket.id) throw Error('Continuity ticket mismatch');
         const {level,decisionRevision,actionIndex,actionRef} = pendingTicket;
-        const seal = result.snapshot.trace.findLast(e => e.kind === 'sealed_prefix' && e.revision === decisionRevision);
-        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,sealed:seal?.acquired_actions ?? null,...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{})});
+        executedTickets.push({level,decisionRevision,actionIndex,action:actionRef,...(actionRef==='ACTION6'?{data:pendingTicket.data}:{}),resets,
+          ...collectContinuityReturn(pendingTicket, pendingPlan, result.snapshot.trace),
+          ...(dispatchedActorPlan?{actorPlan:dispatchedActorPlan}:{}), ...(dispatchedOriented!==undefined?{oriented:dispatchedOriented}:{})});
         dispatchedActorPlan = undefined;
+        dispatchedOriented = undefined;
       }
       pendingTicket = result.ticket;
+      pendingPlan = bindContinuityPlan(pendingTicket, result.snapshot.trace, pendingPlan);
     }
     return result;
   }, reset() {}, dispose() {} };
@@ -239,6 +245,9 @@ async function run(code, games) {
         throw Error('Action after target level');
       const previous = board;
       const plan = agent.snapshot.trace.findLast((event) => event.kind === 'sic_native_plan');
+      const orientedProposal = executedTickets && ['sic_oriented_delivery','sic_verify_oriented_delivery','sic_learn_oriented_delivery'].includes(pendingPlan?.family)
+        ? agent.snapshot.proposal : null;
+      const ownBefore = orientedProposal ? observeOrientedContinuity(previous.frame, orientedProposal, orientedScene) : null;
       if (executedTickets && plan?.family==='sic_observed_actor_composition') dispatchedActorPlan={strategy:plan.strategy,subjects:plan.need?.subjects??[],evidence:plan.need?.evidence??[]};
       const frameSeal=plan?.frameForecast?hash(plan.frameForecast):null;
       const terminalContactSeal=plan?.terminalContactForecast?hash(plan.terminalContactForecast):null;
@@ -264,6 +273,9 @@ async function run(code, games) {
         ...(action.id === 6 ? { data: action.data } : {}),
       });
       const executionMs = performance.now() - began;
+      if (orientedProposal) dispatchedOriented = orientedContinuityEvidence(ownBefore,
+        board.level === previous.level && board.levelsCompleted === previous.levelsCompleted
+          ? observeOrientedContinuity(board.frame, orientedProposal, orientedScene) : null);
       issued++;
       if (process.env.SIC_STUDY_PROGRESS === '1' && issued % 100 === 0)
         console.log(JSON.stringify({ code, level:board.level, issued, seconds:Math.round(process.uptime()) }));

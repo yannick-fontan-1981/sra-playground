@@ -39,9 +39,41 @@ const requiredPhysical = {
   7: ['crate', 'position'],
   8: ['crate', 'mirror', 'position'],
 };
-const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
+const sources = { AR25: 'move', HANO: 'click', DC22: 'mixed', SIGN: 'move', GABA: 'move', WA30: 'move', SS02: 'move', SS03: 'move', SS04: 'move', SS05: 'move', SS06: 'move', SS07: 'move' };
 const markedFieldContinuity = [[15, 4], [44, 26], [56, 28], [22, 0], [53, 28], [81, 31]];
 const cargoContinuity = [[47, 38], [37, 34], [67, 62], [88, 82], [106, 99], [102, 93]];
+const orientedDeliveryCeilings = [32, 64, 92, 58, 136, 58, 51];
+// Executed [commands, continued commands, same-cargo translation pairs], 2026-11-26.
+const orientedDeliveryContinuity = [[26, 5, 1], [59, 18, 7], [76, 22, 10], [48, 0, 0], [113, 59, 41], [48, 24, 15], [42, 20, 13]];
+const orientedDeliverySeriesLevels = new Set([1, 2, 3, 5, 6, 7]);
+
+export function measureOrientedDelivery(issued, groups) {
+  const same = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === 2 && b.length === 2
+    && a.every((value, axis) => Number.isFinite(value) && value === b[axis]);
+  const delta = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === 2 && b.length === 2
+    && [...a, ...b].every(Number.isFinite) ? b.map((value, axis) => value - a[axis]) : null;
+  const ownMove = ticket => {
+    const result = ticket.outcome, observed = ticket.oriented;
+    if (!observed || typeof ticket.planId !== 'string' || !ticket.planId || ticket.outcomeCount !== 1
+      || result?.matched !== true || result.sic_plan !== ticket.planId
+      || result.index !== ticket.actionIndex || !['sic_verify_oriented_delivery', 'sic_learn_oriented_delivery'].includes(result.family)
+      || !/^ACTION[1-4]$/.test(ticket.action)) return null;
+    const movement = delta(observed.poseBefore, observed.poseAfter);
+    return movement?.some(value => value !== 0) ? movement : null;
+  };
+  const physical = [];
+  for (const group of groups.values()) for (let index = 1; index < group.length; index++) {
+    const before = group[index - 1], after = group[index], a = before.oriented, b = after.oriented;
+    const first = ownMove(before), second = ownMove(after);
+    if (!first || !second || before.planId !== after.planId || !same(a.poseAfter, b.poseBefore)) continue;
+    const start = issued.indexOf(before), end = issued.indexOf(after);
+    physical.push({ kind: 'own carrier walk', first: start, last: end });
+    if (same(delta(a.cargoBefore, a.cargoAfter), first) && same(delta(b.cargoBefore, b.cargoAfter), second)
+      && same(a.cargoAfter, b.cargoBefore)) physical.push({ kind: 'same cargo translation', first: start, last: end });
+  }
+  assert.ok(physical.some(effect => effect.kind === 'own carrier walk'), 'WA30 lost its measured own-carrier series');
+  return physical;
+}
 
 function measuredMotionSeries(run, issued, groups, kind, owners, contact) {
   const offset = run.executedTickets.indexOf(issued[0]);
@@ -940,8 +972,12 @@ export function checkRun(run) {
   assert.ok(Array.isArray(tickets) && tickets.length > 0, 'Missing executed tickets');
   assert.equal(tickets.length, run.sic);
   assert.equal(tickets.length, run.issued);
-  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
+  const campaignLengths = { SIGN: 6, GABA: cargoContinuity.length, WA30: orientedDeliveryCeilings.length, SS02: 8, SS03: 8, SS04: 8, SS05: 8, SS06: 8, SS07: 8 };
   assert.equal(levels.length, reference?.length ?? campaignLengths[code] ?? 1, code + ' incomplete campaign');
+  if (code === 'WA30') {
+    assert.equal(run.start, 1, 'WA30 must start at level one');
+    assert.equal(run.initialCompleted, 0, 'WA30 must preserve one chronological session');
+  }
   assert.equal(
     tickets.length,
     levels.reduce((n, l) => n + l.actions, 0),
@@ -979,6 +1015,13 @@ export function checkRun(run) {
       assert.ok(group.length <= 16, 'More than 16 commands under one decision');
       for (const t of group.slice(0, -1)) assert.equal(t.sealed, null, 'Reconciliation before end of series');
       assert.equal(group.at(-1).sealed, group.length, 'Missing final reconciliation of actual commands');
+      if (code === 'WA30') {
+        for (const ticket of group.slice(0, -1)) {
+          assert.equal(ticket.sealCount, 0, 'Unexpected intermediate reconciliation');
+          assert.notEqual(ticket.outcome?.matched, false, 'WA30 continued after a contradicted return');
+        }
+        assert.equal(group.at(-1).sealCount, 1, 'WA30 requires exactly one final reconciliation');
+      }
       if (group.length < 2) continue;
       lengths.push(group.length);
       const clicks = group.filter((t) => t.action === 'ACTION6').length;
@@ -991,7 +1034,8 @@ export function checkRun(run) {
         continued >= Math.min(issued.length - 1, Math.ceil((minContinued * issued.length) / actions)),
         code + ' L' + row.level + ' lost executed continuity (' + continued + '/' + issued.length + ')',
       );
-    } else if (code !== 'SIGN') assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
+    } else if (code !== 'SIGN' && (code !== 'WA30' || orientedDeliverySeriesLevels.has(row.level)))
+      assert.ok(kinds.has(sources[code]), code + ' lost its ' + sources[code] + ' series');
     if (code === 'SIGN') {
       const ceiling = [20, 58, 68, 27, 64, 98][row.level - 1];
       const [actions, minContinued] = markedFieldContinuity[i];
@@ -1006,6 +1050,13 @@ export function checkRun(run) {
         'GABA exceeded its verified action ceiling or reset');
       assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minContinued * issued.length / actions)),
         'GABA L' + row.level + ' lost executed cargo continuity');
+    }
+    if (code === 'WA30') {
+      assert.ok(issued.length <= orientedDeliveryCeilings[i] && issued.every(ticket => ticket.resets === 0),
+        'WA30 exceeded its verified action ceiling or reset');
+      const [actions, minimumContinued] = orientedDeliveryContinuity[i];
+      assert.ok(continued >= Math.min(issued.length - 1, Math.ceil(minimumContinued * issued.length / actions)),
+        'WA30 L' + row.level + ' lost executed oriented-delivery continuity');
     }
     if (code === 'SS03' && row.level === 2) {
       // The exploratory route needed 111 commands and 95 decisions; the composed route needs 27 and 7.
@@ -1085,6 +1136,7 @@ export function checkRun(run) {
         ['sic_verify_marked_lattice', 'sic_learn_marked_lattice'])
       : code === 'GABA' ? measuredMotionSeries(run, issued, groups, 'cargo transport',
         ['sic_pivot_cargo', 'sic_deliver_cargo_after_observed_motion'], 'ACTION5')
+      : code === 'WA30' && orientedDeliverySeriesLevels.has(row.level) ? measureOrientedDelivery(issued, groups)
       : code === 'SS02' ? consecutiveStonePushes(row.level, issued) : code === 'SS03' ? consecutiveStonePulls(row.level, issued)
       : code === 'SS04' ? measuredExchangeSeries(row.level, issued) : code === 'SS05' ? measuredCarrySeries(row.level, issued)
       : code === 'SS06' ? [measureActorComposition,measureJointActorTransfer,measureLinkedGateRelay,measureBypassWithStackedSupport,measureSharedPressureTransport,measureReleasedControlCrossing,measureBridgeToReflector,measureWeightedPlatformCrossing][row.level-1](issued)
@@ -1092,6 +1144,12 @@ export function checkRun(run) {
         :row.level===8?measureHydraulicCrossing(issued)
         :row.level===7?measureLinkedCircuitTrials(issued):measureComposedAccess(row.level,issued) : [];
     if (reference) requireManipulation(physical, requiredPhysical[row.level] ?? [], row.level);
+    if (code === 'WA30') {
+      const [actions, , minimumCargoPairs] = orientedDeliveryContinuity[i];
+      assert.ok(physical.filter(effect => effect.kind === 'same cargo translation').length
+        >= Math.ceil(minimumCargoPairs * issued.length / actions),
+      'WA30 L' + row.level + ' lost consecutive translations of the same cargo');
+    }
     result.push({
       game: code,
       level: row.level,
@@ -1118,6 +1176,7 @@ function main() {
     execute(['scripts/prepare-python.mjs']);
     files = [];
     for (const [name, cohort, end, cap] of [
+      ['oriented-delivery', 'source:WA30', String(orientedDeliveryCeilings.length), '136'],
       ['mirror-isles', 'SS01', '8', '120'],
       ['la-force-rouge', 'SS02', '8', '160'],
       ['la-ruse-verte', 'SS03', '8', '240'],
@@ -1132,6 +1191,8 @@ function main() {
       const output = join(temp, name + '.jsonl');
       files.push(output);
       execute(['scripts/compare-source100.mjs', '.', '.', output, cohort, '1', end, cap]);
+      // Refuse an incomplete witness before starting another long campaign.
+      for (const line of readFileSync(output, 'utf8').trim().split(/\r?\n/)) checkRun(JSON.parse(line));
     }
   }
   const runs = files.flatMap((file) =>
@@ -1140,7 +1201,7 @@ function main() {
       .split(/\r?\n/)
       .map((line) => JSON.parse(line)),
   );
-  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'GABA', 'HANO', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07']);
+  assert.deepEqual(runs.map((r) => r.code).sort(), ['AR25', 'DC22', 'GABA', 'HANO', 'SIGN', 'SS01', 'SS02', 'SS03', 'SS04', 'SS05', 'SS06', 'SS07', 'WA30']);
   console.table(runs.flatMap(checkRun));
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
