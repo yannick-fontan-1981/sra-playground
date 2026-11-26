@@ -1,15 +1,15 @@
 # Campagne SIC des 107 jeux
 
-Instantané généré le 2026-11-26T19:35:06.810074+00:00.
+Instantané généré le 2026-11-26T19:52:03.583480+00:00.
 
-**État : `running` — 69/107 résultats reçus.**
+**État : `running` — 84/107 résultats reçus.**
 Source figée : `4a546a139f9064422c078ef5f40b8c22133c39a8`. Périmètre : **107 jeux / 692 niveaux**.
 
-**51 jeux ont tous leurs scores publics ; 51 ont aussi leur réconciliation finale attestée.**
-Niveaux publiquement gagnés confirmés : **382/692** ; réconciliation attestée : **382**.
-Commandes connues : **9514**, dont **9514** attribuées à SIC.
+**62 jeux ont tous leurs scores publics ; 62 ont aussi leur réconciliation finale attestée.**
+Niveaux publiquement gagnés confirmés : **469/692** ; réconciliation attestée : **469**.
+Commandes connues : **12453**, dont **12453** attribuées à SIC.
 
-En attente : **38**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
+En attente : **23**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
 
 Les scores acquis sont conservés en cas d'arrêt pendant la transition. `complete_unsettled` distingue une victoire publique complète d'une réconciliation finale non attestée.
 Un jeu en attente n'est pas un échec. L'absence du reçu de fin maintient le statut en attente ; ce rapport ne sonde pas le processus.
@@ -18,16 +18,16 @@ Le contrôle de réconciliation repose sur les comptes rendus de l'enfant ; il n
 
 Les plafonds sont comparés exactement à l'export du module de budgets inchangé : 432 niveaux avec temps mesuré, 57 avec temps estimé depuis les commandes, et 203 sans référence individuelle (repli : 80 commandes / 90 secondes). Un arrêt au repli ne suffit pas à identifier un défaut du solveur.
 
-Compteurs de récupération connus : **0 réinitialisations**, **0 retours arrière**. Parmi les résultats valides reçus, 6 n'ont pas de compteur de réinitialisation et 6 n'ont pas de compteur de retour arrière.
+Compteurs de récupération connus : **1 réinitialisations**, **0 retours arrière**. Parmi les résultats valides reçus, 8 n'ont pas de compteur de réinitialisation et 8 n'ont pas de compteur de retour arrière.
 
 ## Catégories
 
 | Catégorie | Jeux |
 |---|---:|
-| commands | 12 |
-| complete | 51 |
-| pending | 38 |
-| time | 6 |
+| commands | 14 |
+| complete | 62 |
+| pending | 23 |
+| time | 8 |
 
 ## Jeux incomplets et résultats à vérifier
 
@@ -54,6 +54,10 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 | MIND | L2 | 1/6 | 5 / 13 | 9 / 9 s (mural) | Plafond de temps de résolution atteint |
 | PORT | L6 | 5/6 | 16 / 21 | 12,001 / 12 s (mural) | Plafond de temps de résolution atteint |
 | RSWP | L5 | 4/6 | 36 / 36 | 21,176 / 35 s (mural) | Plafond de commandes du niveau atteint |
+| SB26 | L7 | 6/8 | 22 / 22 | 8,918 / 17 s (mural) | Plafond de commandes du niveau atteint |
+| SK48 | L6 | 5/8 | 73 / 83 | 34,001 / 34 s (mural) | Plafond de temps de résolution atteint |
+| SNAR | L4 | 3/6 | 31 / 44 | 24,001 / 24 s (mural) | Plafond de temps de résolution atteint |
+| SPOR | L2 | 1/6 | 18 / 18 | 8,793 / 14 s (mural) | Plafond de commandes du niveau atteint |
 
 ## Verdicts par jeu
 
@@ -128,21 +132,21 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 | REWI | 6/6 | 6 | complete | — | 31 | no_level_reference | target_levels_completed |
 | RSWP | 4/6 | 4 | commands | resolution | 69 | measured | level_action_budget |
 | S5I5 | 8/8 | 8 | complete | — | 252 | measured | target_levels_completed |
-| SB26 | —/8 | 0 | pending | — | — | — | — |
-| SC25 | —/6 | 0 | pending | — | — | — | — |
-| SELE | —/6 | 0 | pending | — | — | — | — |
-| SEQN | —/6 | 0 | pending | — | — | — | — |
-| SERI | —/6 | 0 | pending | — | — | — | — |
-| SIGN | —/6 | 0 | pending | — | — | — | — |
-| SK48 | —/8 | 0 | pending | — | — | — | — |
-| SKBN | —/6 | 0 | pending | — | — | — | — |
-| SMLP | —/6 | 0 | pending | — | — | — | — |
-| SNAR | —/6 | 0 | pending | — | — | — | — |
-| SP80 | —/6 | 0 | pending | — | — | — | — |
-| SPOR | —/6 | 0 | pending | — | — | — | — |
-| SS01 | —/8 | 0 | pending | — | — | — | — |
-| SS02 | —/8 | 0 | pending | — | — | — | — |
-| SS03 | —/8 | 0 | pending | — | — | — | — |
+| SB26 | 6/8 | 6 | commands | resolution | 186 | measured | level_action_budget |
+| SC25 | 6/6 | 6 | complete | — | 153 | measured | target_levels_completed |
+| SELE | 6/6 | 6 | complete | — | 117 | no_level_reference | target_levels_completed |
+| SEQN | 6/6 | 6 | complete | — | 46 | no_level_reference | target_levels_completed |
+| SERI | 6/6 | 6 | complete | — | 54 | no_level_reference | target_levels_completed |
+| SIGN | 6/6 | 6 | complete | — | 271 | measured | target_levels_completed |
+| SK48 | 5/8 | 5 | time | resolution | 230 | measured | level_wall_time_budget |
+| SKBN | 6/6 | 6 | complete | — | 109 | no_level_reference | target_levels_completed |
+| SMLP | 6/6 | 6 | complete | — | 59 | measured | target_levels_completed |
+| SNAR | 3/6 | 3 | time | resolution | 91 | measured | level_wall_time_budget |
+| SP80 | 6/6 | 6 | complete | — | 110 | measured | target_levels_completed |
+| SPOR | 1/6 | 1 | commands | resolution | 32 | measured | level_action_budget |
+| SS01 | 8/8 | 8 | complete | — | 444 | estimated_from_actions | target_levels_completed |
+| SS02 | 8/8 | 8 | complete | — | 546 | measured | target_levels_completed |
+| SS03 | 8/8 | 8 | complete | — | 491 | estimated_from_actions | target_levels_completed |
 | SS04 | —/8 | 0 | pending | — | — | — | — |
 | SS05 | —/8 | 0 | pending | — | — | — | — |
 | SS06 | —/8 | 0 | pending | — | — | — | — |
@@ -169,7 +173,7 @@ Les jeux encore en attente figurent dans le tableau exhaustif qui suit.
 
 ## Mesures jusqu'au score
 
-382 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
+469 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
 Seul `scoredMs` est comparé au plafond de résolution. La durée totale et la réconciliation ne sont pas comparées à ce plafond. Les éventuels dépassements restent distincts du score public et du verdict brut ; les mesures arrondies et l'ordonnancement IPC devront être interprétés à l'audit final.
 
 Aucun dépassement rapporté parmi les scores dont le temps est disponible.
