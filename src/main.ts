@@ -53,6 +53,9 @@ import { actionFeedback as guardiansFeedback, lessonIds as guardiansLessonIds, l
 import { SS22_ROOM_HELP_HTML } from './games/sinking-star-ss22-help.ts';
 import { LEVEL_INFO as SS22_LEVEL_INFO } from '../experiments/sinking-star-ss22/src/level-info.ts';
 import { actionFeedback as cortegeFeedback, lessonIds as cortegeLessonIds, lessonPrompt as cortegePrompt, observeLesson as observeCortegeLesson, TUTORIAL_LEVEL as SS22_TUTORIAL_LEVEL, visibleHeroes as visibleCortegeHeroes, type GalleryLesson as CortegeLesson } from '../experiments/sinking-star-ss22/src/tutorial.ts';
+import { SS23_ROOM_HELP_HTML } from './games/sinking-star-ss23-help.ts';
+import { LEVEL_INFO as SS23_LEVEL_INFO } from '../experiments/sinking-star-ss23/src/level-info.ts';
+import { actionFeedback as resonanceFeedback, lessonIds as resonanceLessonIds, lessonPrompt as resonancePrompt, observeLesson as observeResonanceLesson, TUTORIAL_LEVEL as SS23_TUTORIAL_LEVEL, visibleHeroes as visibleResonanceHeroes, type GalleryLesson as ResonanceLesson } from '../experiments/sinking-star-ss23/src/tutorial.ts';
 import { SS21_ROOM_HELP_HTML } from './games/sinking-star-ss21-help.ts';
 import { LEVEL_INFO as SS21_LEVEL_INFO } from '../experiments/sinking-star-ss21/src/level-info.ts';
 import { actionFeedback as quartetFeedback, lessonIds as quartetLessonIds, lessonPrompt as quartetPrompt, observeLesson as observeQuartetLesson, TUTORIAL_LEVEL as SS21_TUTORIAL_LEVEL, visibleHeroes as visibleQuartetHeroes, type GalleryLesson as QuartetLesson } from '../experiments/sinking-star-ss21/src/tutorial.ts';
@@ -67,8 +70,8 @@ import { actionFeedback as warehouseFeedback, lessonIds as warehouseLessonIds, l
 
 const websiteRepo = 'https://github.com/yannick-fontan-1981/sra-playground';
 const isDirectionalNativeGame = (code: string): boolean => code === 'SS02' || code === 'SS03' || code === 'SS04';
-type MultiHeroGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14' | 'SS15' | 'SS16' | 'SS17' | 'SS18' | 'SS19' | 'SS20' | 'SS21' | 'SS22';
-const isMultiHeroNativeGame = (code: string): code is MultiHeroGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14' || code === 'SS15' || code === 'SS16' || code === 'SS17' || code === 'SS18' || code === 'SS19' || code === 'SS20' || code === 'SS21' || code === 'SS22';
+type MultiHeroGameCode = 'SS06' | 'SS07' | 'SS08' | 'SS09' | 'SS10' | 'SS11' | 'SS12' | 'SS13' | 'SS14' | 'SS15' | 'SS16' | 'SS17' | 'SS18' | 'SS19' | 'SS20' | 'SS21' | 'SS22' | 'SS23';
+const isMultiHeroNativeGame = (code: string): code is MultiHeroGameCode => code === 'SS06' || code === 'SS07' || code === 'SS08' || code === 'SS09' || code === 'SS10' || code === 'SS11' || code === 'SS12' || code === 'SS13' || code === 'SS14' || code === 'SS15' || code === 'SS16' || code === 'SS17' || code === 'SS18' || code === 'SS19' || code === 'SS20' || code === 'SS21' || code === 'SS22' || code === 'SS23';
 const usesReflectionShortcut = (code: string): boolean => code === 'SS05' || isMultiHeroNativeGame(code);
 const usesNativeManualControls = (code: string): boolean => usesReflectionShortcut(code) || isDirectionalNativeGame(code);
 const icon = (name: string, cls = ''): string => {
@@ -291,6 +294,12 @@ app.innerHTML = `
                 <button type="button" class="utility-button" data-hero-slot="2" data-ss22-hero="warrior" aria-pressed="false">Guerrier · 2</button>
                 <button type="button" class="utility-button" data-hero-slot="3" data-ss22-hero="thief" aria-pressed="false">Voleur · 3</button>
                 <button type="button" class="utility-button" data-hero-slot="4" data-ss22-hero="bard" aria-pressed="false">Barde · 4</button>
+              </div>
+              <div id="ss23-role-controls" class="utility-controls native-hero-controls native-trio-touch-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
+                <button type="button" class="utility-button" data-hero-slot="1" data-ss23-hero="merchant" aria-pressed="false">Marchand · 1</button>
+                <button type="button" class="utility-button" data-hero-slot="2" data-ss23-hero="warrior" aria-pressed="false">Guerrier · 2</button>
+                <button type="button" class="utility-button" data-hero-slot="3" data-ss23-hero="wizard" aria-pressed="false">Magicien · 3</button>
+                <button type="button" class="utility-button" data-hero-slot="4" data-ss23-hero="bard" aria-pressed="false">Barde · 4</button>
               </div>
               <div id="ss20-role-controls" class="utility-controls native-hero-controls native-trio-touch-controls" role="group" aria-label="Sélection du personnage" lang="fr" hidden>
                 <button type="button" class="utility-button" data-hero-slot="1" data-ss20-hero="merchant" aria-pressed="false">Marchand · 1</button>
@@ -1589,6 +1598,7 @@ app.innerHTML = `
               </div>
               ${SS21_ROOM_HELP_HTML}
               ${SS22_ROOM_HELP_HTML}
+              ${SS23_ROOM_HELP_HTML}
               <div id="ss20-room-help" lang="fr" hidden>
                 <p id="ss20-objective" class="native-game-level-info"></p>
                 <p class="native-game-level-info"><span id="ss20-source-label"></span> <a id="ss20-source-link" target="_blank" rel="noopener noreferrer" hidden></a> <a id="ss20-secondary-source-link" target="_blank" rel="noopener noreferrer" hidden></a></p>
@@ -1984,6 +1994,7 @@ const ss19Lessons = new Set<GuardiansLesson>();
 const ss20Lessons = new Set<RelayLesson>();
 const ss21Lessons = new Set<QuartetLesson>();
 const ss22Lessons = new Set<CortegeLesson>();
+const ss23Lessons = new Set<ResonanceLesson>();
 const multiHeroRoomHelp = {
   SS06: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'warrior', label: 'Guerrier' }], directions: 'Flèches pour marcher ou pousser.', rooms: SS06_LEVEL_INFO,
     heroes: visibleHeroes, lessons: ss06Lessons, total: duoLessonIds.length, prompt: () => duoPrompt(ss06Lessons), tutorialLevel: 1 },
@@ -2043,6 +2054,10 @@ const multiHeroRoomHelp = {
     directions: 'Flèches pour marcher, pousser, tirer ou chanter.', rooms: SS22_LEVEL_INFO,
     heroes: visibleCortegeHeroes, lessons: ss22Lessons, total: cortegeLessonIds.length,
     prompt: () => cortegePrompt(ss22Lessons), tutorialLevel: SS22_TUTORIAL_LEVEL },
+  SS23: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'warrior', label: 'Guerrier' }, { kind: 'wizard', label: 'Magicien' }, { kind: 'bard', label: 'Barde' }],
+    directions: 'Flèches pour marcher, pousser, échanger ou chanter.', rooms: SS23_LEVEL_INFO,
+    heroes: visibleResonanceHeroes, lessons: ss23Lessons, total: resonanceLessonIds.length,
+    prompt: () => resonancePrompt(ss23Lessons), tutorialLevel: SS23_TUTORIAL_LEVEL },
   SS20: { roles: [{ kind: 'merchant', label: 'Marchand' }, { kind: 'thief', label: 'Voleur' }, { kind: 'bard', label: 'Barde' }],
     directions: 'Flèches pour marcher, pousser, tirer ou chanter.', rooms: SS20_LEVEL_INFO,
     heroes: visibleRelayHeroes, lessons: ss20Lessons, total: relayLessonIds.length,
@@ -2411,7 +2426,7 @@ function updateMultiHeroRoomHelp(game: MultiHeroGameCode, current: GameObservati
     : fourth ? `Amène le ${first.label}, le ${second.label}, le ${third!.label} et le ${fourth.label} sur les quatre contours jaunes en même temps.`
     : third ? `Amène le ${first.label}, le ${second.label} et le ${third.label} sur les trois contours jaunes en même temps.`
     : `Amène le ${first.label} et le ${second.label} sur les deux contours jaunes en même temps.`;
-  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17' || game === 'SS18' || game === 'SS19' || game === 'SS20' || game === 'SS21' || game === 'SS22') && 'objective' in info ? info.objective : objective;
+  element(`#${id}-objective`).textContent = (game === 'SS09' || game === 'SS10' || game === 'SS11' || game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17' || game === 'SS18' || game === 'SS19' || game === 'SS20' || game === 'SS21' || game === 'SS22' || game === 'SS23') && 'objective' in info ? info.objective : objective;
   if (game === 'SS06') element('#ss06-cooperation-help').hidden = solo;
   const selected = heroes(current.frame).find(hero => hero.selected)?.kind;
   const roleAttribute = `data-${id}-hero`;
@@ -2433,7 +2448,7 @@ function updateMultiHeroRoomHelp(game: MultiHeroGameCode, current: GameObservati
   element(`#${id}-piston-help`).hidden = !info.piston;
   const hasPlatform = 'platform' in info && info.platform;
   element(`#${id}-platform-help`).hidden = !hasPlatform;
-  if (game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17' || game === 'SS18' || game === 'SS19' || game === 'SS20' || game === 'SS21' || game === 'SS22') {
+  if (game === 'SS12' || game === 'SS13' || game === 'SS14' || game === 'SS15' || game === 'SS16' || game === 'SS17' || game === 'SS18' || game === 'SS19' || game === 'SS20' || game === 'SS21' || game === 'SS22' || game === 'SS23') {
     const secondary = element<HTMLAnchorElement>(`#${id}-secondary-source-link`);
     const reference = 'secondary' in info ? info.secondary : undefined;
     const secondaryUrl = reference?.url ?? ('secondaryUrl' in info ? info.secondaryUrl : undefined);
@@ -2551,7 +2566,7 @@ async function present(next: GameObservation, selectedGeneration: number, manual
   interruptibleAnimation = (manualAction || isMultiHeroNativeGame(next.gameCode)) && usesNativeManualControls(next.gameCode) && frames.length > 1;
   updateInterface();
   const frameDuration = 1000 / Math.max(1, Math.min(60, next.defaultFps || 10));
-  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15' || next.gameCode === 'SS16' || next.gameCode === 'SS17' || next.gameCode === 'SS18' || next.gameCode === 'SS19' || next.gameCode === 'SS20' || next.gameCode === 'SS21' || next.gameCode === 'SS22') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const reducedMotion = (next.gameCode === 'SS11' || next.gameCode === 'SS12' || next.gameCode === 'SS13' || next.gameCode === 'SS14' || next.gameCode === 'SS15' || next.gameCode === 'SS16' || next.gameCode === 'SS17' || next.gameCode === 'SS18' || next.gameCode === 'SS19' || next.gameCode === 'SS20' || next.gameCode === 'SS21' || next.gameCode === 'SS22' || next.gameCode === 'SS23') && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   for (let i = 0; i < frames.length; i += 1) {
     if (generation !== presentationGeneration || selectedGeneration !== selectionGeneration) return;
     paint(frames[i]!, next.palette ?? fallbackPalette);
@@ -2641,6 +2656,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     if (next.gameCode === 'SS20' && action !== undefined) observeRelayLesson(ss20Lessons, before, next, action);
     if (next.gameCode === 'SS21' && action !== undefined) observeQuartetLesson(ss21Lessons, before, next, action);
     if (next.gameCode === 'SS22' && action !== undefined) observeCortegeLesson(ss22Lessons, before, next, action);
+    if (next.gameCode === 'SS23' && action !== undefined) observeResonanceLesson(ss23Lessons, before, next, action);
     if (next.gameCode === 'SS08') {
       if (action !== undefined) observeTranspositionLesson(ss08Lessons, before, next, action);
       if (next.level === SS08_TUTORIAL_LEVEL && (control === 'selectLevel' || control === 'reset')) {
@@ -2672,6 +2688,7 @@ async function run(operation: () => Promise<GameObservation>, options: {
     else if (next.gameCode === 'SS20' && action !== undefined) element('#game-feedback').textContent = relayFeedback(before, next, action);
     else if (next.gameCode === 'SS21' && action !== undefined) element('#game-feedback').textContent = quartetFeedback(before, next, action);
     else if (next.gameCode === 'SS22' && action !== undefined) element('#game-feedback').textContent = cortegeFeedback(before, next, action);
+    else if (next.gameCode === 'SS23' && action !== undefined) element('#game-feedback').textContent = resonanceFeedback(before, next, action);
     else if (announcement) element('#game-feedback').textContent = announcement;
   } catch (error) {
     showFailure(error, generation);
@@ -2715,7 +2732,7 @@ function focusCanvas(): void {
 }
 
 function setMode(next: 'manual' | 'agent', focusTab = false): void {
-  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14' || observation?.gameCode === 'SS15' || observation?.gameCode === 'SS16' || observation?.gameCode === 'SS17' || observation?.gameCode === 'SS18' || observation?.gameCode === 'SS19' || observation?.gameCode === 'SS20' || observation?.gameCode === 'SS21' || observation?.gameCode === 'SS22') && interruptibleAnimation) {
+  if (mode !== next && (observation?.gameCode === 'SS11' || observation?.gameCode === 'SS12' || observation?.gameCode === 'SS13' || observation?.gameCode === 'SS14' || observation?.gameCode === 'SS15' || observation?.gameCode === 'SS16' || observation?.gameCode === 'SS17' || observation?.gameCode === 'SS18' || observation?.gameCode === 'SS19' || observation?.gameCode === 'SS20' || observation?.gameCode === 'SS21' || observation?.gameCode === 'SS22' || observation?.gameCode === 'SS23') && interruptibleAnimation) {
     presentationGeneration += 1;
     interruptibleAnimation = false;
     busy = false;
@@ -2776,6 +2793,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   ss20Lessons.clear();
   ss21Lessons.clear();
   ss22Lessons.clear();
+  ss23Lessons.clear();
   delete element('#ss12-monster-help').dataset.level;
   delete element('#ss13-monster-help').dataset.level;
   delete element('#ss14-monster-help').dataset.level;
@@ -2787,6 +2805,7 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
   delete element('#ss20-monster-help').dataset.level;
   delete element('#ss21-monster-help').dataset.level;
   delete element('#ss22-monster-help').dataset.level;
+  delete element('#ss23-monster-help').dataset.level;
   ss06Solo = false;
   if (isMultiHeroNativeGame(game.code)) element<HTMLDetailsElement>(`#${game.code.toLowerCase()}-tutorial`).open = true;
   if (game.code === 'SS03' || game.code === 'SS04' || bard) {
@@ -2798,8 +2817,8 @@ async function selectGame(code: string, historyMode: 'push' | 'replace' | 'none'
     'ss04-piston-help', 'ss04-mirror-help', 'ss04-monster-help', 'ss05-tutorial', 'ss05-level-info',
     'ss05-piston-help', 'ss05-mirror-help', 'ss05-monster-help', 'ss06-room-help', 'ss06-role-controls',
     'ss07-room-help', 'ss07-role-controls', 'ss08-room-help', 'ss08-role-controls', 'ss09-room-help',
-    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'ss15-room-help', 'ss15-role-controls', 'ss16-room-help', 'ss16-role-controls', 'ss17-room-help', 'ss17-role-controls', 'ss18-room-help', 'ss18-role-controls', 'ss19-room-help', 'ss19-role-controls', 'ss20-room-help', 'ss20-role-controls', 'ss21-room-help', 'ss21-role-controls', 'ss22-room-help', 'ss22-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
-  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14' || game.code === 'SS15' || game.code === 'SS16' || game.code === 'SS17' || game.code === 'SS18' || game.code === 'SS19' || game.code === 'SS20' || game.code === 'SS21' || game.code === 'SS22';
+    'ss09-role-controls', 'ss10-room-help', 'ss10-role-controls', 'ss11-room-help', 'ss11-role-controls', 'ss12-room-help', 'ss12-role-controls', 'ss13-room-help', 'ss13-role-controls', 'ss14-room-help', 'ss14-role-controls', 'ss15-room-help', 'ss15-role-controls', 'ss16-room-help', 'ss16-role-controls', 'ss17-room-help', 'ss17-role-controls', 'ss18-room-help', 'ss18-role-controls', 'ss19-room-help', 'ss19-role-controls', 'ss20-room-help', 'ss20-role-controls', 'ss21-room-help', 'ss21-role-controls', 'ss22-room-help', 'ss22-role-controls', 'ss23-room-help', 'ss23-role-controls', 'native-defeat']) element(`#${id}`).hidden = true;
+  const inFrench = game.code === 'SS12' || game.code === 'SS13' || game.code === 'SS14' || game.code === 'SS15' || game.code === 'SS16' || game.code === 'SS17' || game.code === 'SS18' || game.code === 'SS19' || game.code === 'SS20' || game.code === 'SS21' || game.code === 'SS22' || game.code === 'SS23';
   for (const [id, french, english] of [
     ['undo-button', 'Annuler', 'Undo'],
     ['reset-button', 'Recommencer', 'Reset'],

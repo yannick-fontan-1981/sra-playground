@@ -1,0 +1,36 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm. See `npm help npmrc` for supported config options.
+
+> sra-playground@0.1.0 test:sic-continuity
+> node scripts/verify-sic-continuity.mjs
+
+Prepared pyodide.mjs
+Prepared pyodide.asm.mjs
+Prepared pyodide.asm.wasm
+Prepared python_stdlib.zip
+Prepared pyodide-lock.json
+Prepared package.json
+Prepared numpy-2.4.6-cp314-cp314-pyemscripten_2026_0_wasm32.whl
+Prepared pydantic-2.12.5-py3-none-any.whl
+Prepared typing_extensions-4.15.0-py3-none-any.whl
+Prepared pydantic_core-2.41.5-cp314-cp314-pyemscripten_2026_0_wasm32.whl
+Prepared annotated_types-0.7.0-py3-none-any.whl
+Prepared typing_inspection-0.4.2-py3-none-any.whl
+Browser Python 3.14.2: self-hosted assets ready.
+SS01 [
+  [ true, 36 ],
+  [ true, 32 ],
+  [ true, 42 ],
+  [ true, 79 ],
+  [ true, 62 ],
+  [ true, 116 ],
+  [ true, 37 ],
+  [ true, 41 ]
+]
+SS02 [
+  [ true, 40 ],
+  [ true, 27 ],
+  [ true, 39 ],
+  [ true, 80 ],
+  [ true, 126 ],
+  [ true, 96 ]
+]

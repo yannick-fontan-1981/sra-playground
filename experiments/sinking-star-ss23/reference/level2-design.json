@@ -1,0 +1,1025 @@
+{
+  "spec": {
+    "id": "ss23-02",
+    "title": "La grille des places libres",
+    "mode": "quartet",
+    "rows": [
+      "##############",
+      "#...#####....#",
+      "#....#..#.g..#",
+      "#.......#...g#",
+      "#...#ooo.....#",
+      "#MWZ.ooo#....#",
+      "#...#ooo#.g..#",
+      "#...B...#....#",
+      "#....####...g#",
+      "#...#####....#",
+      "##############"
+    ],
+    "facing": "E"
+  },
+  "commands": "CCRRRURRCDCCURRRURRRRDDDDRRRCULLDLLLLDDLLDLRULLUUUUURRDRDRURRCCDDDDRUUULURRRCCCRURRRDDRCUUR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation · Heroes of Hauling · énigme 11",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-of-hauling-solutions/#%C3%A9nigme-11",
+    "puzzle": 11,
+    "objective": "Traverser une grille de neuf caisses par échanges, déplacer les postes de travail puis dégager le sas pour les quatre héros."
+  },
+  "metrics": {
+    "actions": 91,
+    "selections": 12,
+    "merchantPushes": 6,
+    "warriorPushes": 5,
+    "chainPushes": 2,
+    "mixedPushes": 2,
+    "swaps": 10,
+    "wizardHeroSwaps": 1,
+    "wizardStoneSwaps": 9,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 9,
+    "groupSongs": 9,
+    "songHeroMoves": 7,
+    "songStoneMoves": 32,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 16,
+    "stoneMoves": 46,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Magicien traverse la grille de neuf caisses par échanges successifs, puis atteint la chambre droite. Chaque échange laisse une caisse à son départ ; aucune charge ne disparaît.",
+      "turn": 8,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Depuis le poste inférieur, le Barde descend les deux colonnes proches. La colonne droite reste hors de portée. Le Guerrier et la caisse ramenée par le Magicien descendent aussi, sans pouvoir secondaire.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier utilise la rangée libérée pour pousser une caisse vers le renfoncement haut, puis dégage le port droit. Sa file transporte le Magicien sans lancer de rayon.",
+      "turn": 28,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Deux échanges verticaux déplacent la place de travail au bas de la grille. Le Magicien rejoint le poste extérieur et échange avec le Barde : celui-ci quitte sa butée sans chanter.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 11
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien reprend le poste supérieur par une caisse, change de rangée, puis utilise la caisse envoyée dans la chambre droite comme cible de sortie. Ses échanges préservent les neuf charges.",
+      "turn": 61,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 11
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand conduit le Barde jusqu’au centre depuis le côté libre. Les six poussées déplacent un seul partenaire et laissent toutes les caisses en place.",
+      "turn": 76,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        },
+        {
+          "x": 9,
+          "y": 11
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le décalage latéral, puis le dégagement haut, ouvrent le port. Les butées retiennent les rangs inférieurs ; le chant transporte le Marchand dans la chambre d’arrivée en même temps que le Barde.",
+      "turn": 87,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 11
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Les quatre héros vivants occupent les quatre destinations. Les neuf caisses sont conservées, sans commande de poids ni objectif de rangement caché.",
+      "turn": 91,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 14,
+          "y": 10
+        },
+        {
+          "x": 6,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 11
+        },
+        {
+          "x": 10,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "L’énigme 11 fait progresser le Magicien à travers une grille de cristaux 3 × 3 par échanges successifs, avant un dernier transfert vers le côté de la sortie.",
+    "changes": "SS23 conserve la grille pleine et la mobilité de la place de travail, mais remplace le bouton et le bloc de sortie du guide par un sas sec à deux accès décalés. Le Barde désaligne les rangées depuis des postes distincts, le Guerrier ouvre le port droit et le Marchand replace le Barde sans chant. Les neuf caisses restent présentes ; quatre destinations remplacent la sortie du personnage seul.",
+    "limits": "Le plan et la coopération MWZB constituent une adaptation, pas une reproduction exacte. Les contrôles locaux comparent les premières cibles, la portée et les butées du chant ainsi que le replacement sans chant. Ils ne prouvent ni un ordre unique ni l’impossibilité globale sans une capacité.",
+    "localChecks": [
+      {
+        "name": "Première cible et conservation des places",
+        "observed": "Le premier échange atteint la caisse proche et laisse les deux autres caisses de sa rangée en place ; les neuf charges subsistent à chaque étape.",
+        "scope": "Rejeu des premières commandes et du témoin complet ; aucune nécessité globale du rayon déduite."
+      },
+      {
+        "name": "La poussée frontale ne remplace pas le premier désalignement",
+        "observed": "Avant le chant inférieur, la rangée de trois caisses bute contre le mur de droite et refuse la poussée ; après le chant, le Guerrier entre dans la rangée libérée.",
+        "scope": "Deux branches locales depuis le premier transfert du Magicien ; aucune impasse permanente revendiquée."
+      },
+      {
+        "name": "Le décalage précède le dégagement haut",
+        "observed": "Au centre, chanter vers le haut immédiatement est refusé. Décaler vers la droite puis monter permet le transport ; condamner la case haute de dégagement bloque cette montée.",
+        "scope": "Comparaison locale du même poste du Barde et d’une variante de terrain avec une case fermée ; aucune impossibilité globale démontrée."
+      },
+      {
+        "name": "Le replacement silencieux préserve les charges",
+        "observed": "Les six poussées du Marchand amènent le Barde au centre sans déplacer une caisse. Un pas volontaire du Barde vers le haut déplace au contraire la caisse proche.",
+        "scope": "Comparaison entre transport imposé et un pas chanté depuis le même état intermédiaire."
+      },
+      {
+        "name": "Deux affectations gagnantes des destinations",
+        "observed": "Le Marchand et le Magicien peuvent échanger leurs destinations finales, avec neuf caisses conservées et sans refus ni décès.",
+        "scope": "Variante gagnante explicite ; pas d’affectation cachée d’une destination à un héros."
+      }
+    ]
+  }
+}

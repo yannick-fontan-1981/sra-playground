@@ -1214,6 +1214,10 @@ records.push({code:'SS22',id:'ss22-c4000001',name:'Les Cortèges Mécaniques',gr
   description:'Coordinate single pushes, whole files, rear pulls and the Bard’s song to move cargo and water supports toward four destinations.',
   sourcePath:'experiments/sinking-star-ss22/src/levels.ts',availability:'playable'});
 
+records.push({code:'SS23',id:'ss23-c4000001',name:'Les Chambres de Résonance',group:'custom_4',family:'sinking_star_quartet',levels:8,
+  description:'Coordinate single pushes, whole files, Wizard exchanges and the Bard’s song to preserve weights and reach four destinations.',
+  sourcePath:'experiments/sinking-star-ss23/src/levels.ts',availability:'playable'});
+
 export const GAME_CATALOG: readonly GameCatalogEntry[] = records.map((entry) => ({
   ...entry,
   sourceUrl: entry.group === 'official'

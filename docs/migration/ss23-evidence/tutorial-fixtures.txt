@@ -1,0 +1,196 @@
+TAP version 13
+# Subtest: the first workshop exposes thirty-six distinct discoveries and four public hero colours
+ok 1 - the first workshop exposes thirty-six distinct discoveries and four public hero colours
+  ---
+  duration_ms: 22.252317
+  type: 'test'
+  ...
+# Subtest: a Merchant single push teaches handling, while a blocked two-piece file teaches nothing
+ok 2 - a Merchant single push teaches handling, while a blocked two-piece file teaches nothing
+  ---
+  duration_ms: 10.66888
+  type: 'test'
+  ...
+# Subtest: pushing a partner off a button replaces its weight during the same move
+ok 3 - pushing a partner off a button replaces its weight during the same move
+  ---
+  duration_ms: 4.551091
+  type: 'test'
+  ...
+# Subtest: a mirror can be visibly handled by either Merchant or Warrior
+ok 4 - a mirror can be visibly handled by either Merchant or Warrior
+  ---
+  duration_ms: 5.518266
+  type: 'test'
+  ...
+# Subtest: moving an existing water support is not reported as creating a new one
+ok 5 - moving an existing water support is not reported as creating a new one
+  ---
+  duration_ms: 3.446538
+  type: 'test'
+  ...
+# Subtest: a blocked Bard awards no song or movement discovery
+ok 6 - a blocked Bard awards no song or movement discovery
+  ---
+  duration_ms: 1.887431
+  type: 'test'
+  ...
+# Subtest: pushing Bard teaches the partner push without awarding a passive song
+ok 7 - pushing Bard teaches the partner push without awarding a passive song
+  ---
+  duration_ms: 1.960792
+  type: 'test'
+  ...
+# Subtest: the same visible push in another room awards no discovery
+ok 8 - the same visible push in another room awards no discovery
+  ---
+  duration_ms: 1.383042
+  type: 'test'
+  ...
+# Subtest: red monsters remain distinct from the red Warrior and the other heroes and stay still during unrelated walking
+ok 9 - red monsters remain distinct from the red Warrior and the other heroes and stay still during unrelated walking
+  ---
+  duration_ms: 2.640365
+  type: 'test'
+  ...
+# Subtest: a song visibly moving a monster teaches its cause rather than stillness
+ok 10 - a song visibly moving a monster teaches its cause rather than stillness
+  ---
+  duration_ms: 2.375446
+  type: 'test'
+  ...
+# Subtest: selection alone does not claim a monster movement or walking demonstration
+ok 11 - selection alone does not claim a monster movement or walking demonstration
+  ---
+  duration_ms: 1.320127
+  type: 'test'
+  ...
+# Subtest: a drowning press is recognized from two pixel translations despite no final monster sprite
+ok 12 - a drowning press is recognized from two pixel translations despite no final monster sprite
+  ---
+  duration_ms: 3.847642
+  type: 'test'
+  ...
+# Subtest: a press transporting Wizard does not earn an active exchange discovery
+ok 13 - a press transporting Wizard does not earn an active exchange discovery
+  ---
+  duration_ms: 2.655938
+  type: 'test'
+  ...
+# Subtest: Warrior single, file and mixed-file discoveries distinguish what visibly moved
+ok 14 - Warrior single, file and mixed-file discoveries distinguish what visibly moved
+  ---
+  duration_ms: 4.849821
+  type: 'test'
+  ...
+# Subtest: a blocked Warrior file awards no push, file or movement discovery
+ok 15 - a blocked Warrior file awards no push, file or movement discovery
+  ---
+  duration_ms: 1.134388
+  type: 'test'
+  ...
+# Subtest: a Bard carrying Warrior and cargo teaches song without a Warrior or Merchant push
+ok 16 - a Bard carrying Warrior and cargo teaches song without a Warrior or Merchant push
+  ---
+  duration_ms: 1.951178
+  type: 'test'
+  ...
+# Subtest: a press transporting the Warrior does not claim his active file push
+ok 17 - a press transporting the Warrior does not claim his active file push
+  ---
+  duration_ms: 1.647701
+  type: 'test'
+  ...
+# Subtest: Warrior visibly moving a mirror also teaches mirror handling
+ok 18 - Warrior visibly moving a mirror also teaches mirror handling
+  ---
+  duration_ms: 1.48771
+  type: 'test'
+  ...
+# Subtest: Warrior replacing a partner on a button demonstrates an uninterrupted weight handover
+ok 19 - Warrior replacing a partner on a button demonstrates an uninterrupted weight handover
+  ---
+  duration_ms: 1.411214
+  type: 'test'
+  ...
+# Subtest: Wizard exchanges the first visible target without claiming an ordinary walk or a push
+ok 20 - Wizard exchanges the first visible target without claiming an ordinary walk or a push
+  ---
+  duration_ms: 2.207393
+  type: 'test'
+  ...
+# Subtest: an adjacent Wizard exchange is still an exchange rather than a one-cell walk
+ok 21 - an adjacent Wizard exchange is still an exchange rather than a one-cell walk
+  ---
+  duration_ms: 1.746418
+  type: 'test'
+  ...
+# Subtest: a farther target hidden behind a wall is not evidence for the first-target lesson
+ok 22 - a farther target hidden behind a wall is not evidence for the first-target lesson
+  ---
+  duration_ms: 1.493749
+  type: 'test'
+  ...
+# Subtest: an empty Wizard ray teaches walking and leaves an immediately rear crate still
+ok 23 - an empty Wizard ray teaches walking and leaves an immediately rear crate still
+  ---
+  duration_ms: 1.818167
+  type: 'test'
+  ...
+# Subtest: a Wizard ray crossing bare water teaches exchange without building or walking a support
+ok 24 - a Wizard ray crossing bare water teaches exchange without building or walking a support
+  ---
+  duration_ms: 1.987011
+  type: 'test'
+  ...
+# Subtest: two white mirror faces teach the bent Wizard ray from its public violet path
+ok 25 - two white mirror faces teach the bent Wizard ray from its public violet path
+  ---
+  duration_ms: 3.357364
+  type: 'test'
+  ...
+# Subtest: exchanging Bard while nearby cargo stays teaches extraction without a passive song
+ok 26 - exchanging Bard while nearby cargo stays teaches extraction without a passive song
+  ---
+  duration_ms: 1.984287
+  type: 'test'
+  ...
+# Subtest: exchanging Merchant beside an idle Bard does not teach extraction of the Bard
+ok 27 - exchanging Merchant beside an idle Bard does not teach extraction of the Bard
+  ---
+  duration_ms: 7.421662
+  type: 'test'
+  ...
+# Subtest: exchanging an isolated Bard without a nearby held piece does not demonstrate leaving a group
+ok 28 - exchanging an isolated Bard without a nearby held piece does not demonstrate leaving a group
+  ---
+  duration_ms: 6.094164
+  type: 'test'
+  ...
+# Subtest: a sung Wizard moves with the Bard without casting toward a visible distant crate
+ok 29 - a sung Wizard moves with the Bard without casting toward a visible distant crate
+  ---
+  duration_ms: 7.098876
+  type: 'test'
+  ...
+# Subtest: a Wizard exchange preserves the weight on its original button without claiming a gate pulse
+ok 30 - a Wizard exchange preserves the weight on its original button without claiming a gate pulse
+  ---
+  duration_ms: 8.771834
+  type: 'test'
+  ...
+# Subtest: a returning Wizard ray teaches no displacement, exchange or combat and reports its actual refusal
+ok 31 - a returning Wizard ray teaches no displacement, exchange or combat and reports its actual refusal
+  ---
+  duration_ms: 13.372501
+  type: 'test'
+  ...
+1..31
+# tests 31
+# suites 0
+# pass 31
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 269.86435
