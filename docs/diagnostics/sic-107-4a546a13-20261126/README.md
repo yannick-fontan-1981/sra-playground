@@ -1,15 +1,15 @@
 # Campagne SIC des 107 jeux
 
-Instantané généré le 2026-11-26T18:33:06.178060+00:00.
+Instantané généré le 2026-11-26T18:50:18.481875+00:00.
 
-**État : `running` — 14/107 résultats reçus.**
+**État : `running` — 23/107 résultats reçus.**
 Source figée : `4a546a139f9064422c078ef5f40b8c22133c39a8`. Périmètre : **107 jeux / 692 niveaux**.
 
-**10 jeux ont tous leurs scores publics ; 10 ont aussi leur réconciliation finale attestée.**
-Niveaux publiquement gagnés confirmés : **81/692** ; réconciliation attestée : **81**.
-Commandes connues : **1884**, dont **1884** attribuées à SIC.
+**15 jeux ont tous leurs scores publics ; 15 ont aussi leur réconciliation finale attestée.**
+Niveaux publiquement gagnés confirmés : **124/692** ; réconciliation attestée : **124**.
+Commandes connues : **3308**, dont **3308** attribuées à SIC.
 
-En attente : **93**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
+En attente : **84**. Manquants après clôture : **0**. Résultats avec incohérence : **0**.
 
 Les scores acquis sont conservés en cas d'arrêt pendant la transition. `complete_unsettled` distingue une victoire publique complète d'une réconciliation finale non attestée.
 Un jeu en attente n'est pas un échec. L'absence du reçu de fin maintient le statut en attente ; ce rapport ne sonde pas le processus.
@@ -24,9 +24,9 @@ Compteurs de récupération connus : **0 réinitialisations**, **0 retours arri�
 
 | Catégorie | Jeux |
 |---|---:|
-| commands | 3 |
-| complete | 10 |
-| pending | 93 |
+| commands | 7 |
+| complete | 15 |
+| pending | 84 |
 | time | 1 |
 
 ## Verdicts par jeu
@@ -47,15 +47,15 @@ Compteurs de récupération connus : **0 réinitialisations**, **0 retours arri�
 | CN04 | 6/6 | 6 | complete | — | 240 | measured | target_levels_completed |
 | COLM | 1/6 | 1 | commands | resolution | 51 | measured | level_action_budget |
 | COMB | 6/6 | 6 | complete | — | 90 | measured | target_levels_completed |
-| CONN | —/6 | 0 | pending | — | — | — | — |
-| CRAF | —/6 | 0 | pending | — | — | — | — |
-| CWSE | —/6 | 0 | pending | — | — | — | — |
-| DAME | —/6 | 0 | pending | — | — | — | — |
-| DC22 | —/6 | 0 | pending | — | — | — | — |
-| DICO | —/6 | 0 | pending | — | — | — | — |
-| DNOI | —/6 | 0 | pending | — | — | — | — |
-| ELAS | —/6 | 0 | pending | — | — | — | — |
-| ESCT | —/6 | 0 | pending | — | — | — | — |
+| CONN | 6/6 | 6 | complete | — | 66 | no_level_reference | target_levels_completed |
+| CRAF | 5/6 | 5 | commands | resolution | 125 | measured | level_action_budget |
+| CWSE | 2/6 | 2 | commands | resolution | 89 | no_level_reference | level_action_budget |
+| DAME | 6/6 | 6 | complete | — | 65 | measured | target_levels_completed |
+| DC22 | 5/6 | 5 | commands | resolution | 643 | measured | level_action_budget |
+| DICO | 6/6 | 6 | complete | — | 71 | no_level_reference | target_levels_completed |
+| DNOI | 6/6 | 6 | complete | — | 59 | no_level_reference | target_levels_completed |
+| ELAS | 6/6 | 6 | complete | — | 268 | measured | target_levels_completed |
+| ESCT | 1/6 | 1 | commands | resolution | 38 | measured | level_action_budget |
 | ETAG | —/6 | 0 | pending | — | — | — | — |
 | EVAS | —/6 | 0 | pending | — | — | — | — |
 | FITE | —/6 | 0 | pending | — | — | — | — |
@@ -143,7 +143,7 @@ Compteurs de récupération connus : **0 réinitialisations**, **0 retours arri�
 
 ## Mesures jusqu'au score
 
-81 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
+124 scores ont un temps disponible ; 0 scores n'en ont pas. Dépassement rapporté cumulé : **0 ms** ; maximum : **0 ms**.
 Seul `scoredMs` est comparé au plafond de résolution. La durée totale et la réconciliation ne sont pas comparées à ce plafond. Les éventuels dépassements restent distincts du score public et du verdict brut ; les mesures arrondies et l'ordonnancement IPC devront être interprétés à l'audit final.
 
 Aucun dépassement rapporté parmi les scores dont le temps est disponible.
