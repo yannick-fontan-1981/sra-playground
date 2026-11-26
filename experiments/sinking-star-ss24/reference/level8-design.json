@@ -1,0 +1,1052 @@
+{
+  "spec": {
+    "id": "ss24-08",
+    "title": "Le dernier pas sans échange",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "##############.gggg#",
+      "##############.....#",
+      "############oo.....#",
+      "##.........#.......#",
+      "##....Mo...#..##.###",
+      "##.........#~..#.###",
+      "##..............4###",
+      "##......T....Z.#.###",
+      "##........o..B....##",
+      "##.........#..######",
+      "##.........#..######",
+      "####################",
+      "####################",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "atelier",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 10,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "composition",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 5
+          },
+          {
+            "x": 10,
+            "y": 7
+          },
+          {
+            "x": 12,
+            "y": 7
+          }
+        ]
+      },
+      {
+        "id": "coude",
+        "color": 6,
+        "buttons": [
+          {
+            "x": 13,
+            "y": 7
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 7
+        },
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 8
+        },
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 11,
+          "y": 9
+        },
+        "circuit": "atelier",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 3
+        },
+        "circuit": "composition",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 5
+        },
+        "circuit": "composition",
+        "direction": "N",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 12,
+          "y": 6
+        },
+        "circuit": "coude",
+        "activeWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRRDDDDDDLLLLLLLCURRRRUUUDDRDLDULDLUULDDRRRURRRLLLDLDLDDLLLLLCLUCRCCCRCRRUUUUUUUURRCCCRURUCCUUURRRRRRRRRRRRURRUUUUUUCUUURRRRRRRRRUULUUURURRRU",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 30
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "objective": "Préparer trois dépôts et un coude optique, puis faire entrer le Magicien sur la dernière commande sans déclencher un échange prématuré.",
+    "label": "Heroes and Light, Advanced — énigme 8",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-advanced-solutions/",
+    "puzzles": [
+      8
+    ]
+  },
+  "metrics": {
+    "actions": 141,
+    "selections": 13,
+    "merchantPushes": 3,
+    "thiefPulls": 11,
+    "thiefPartnerPulls": 1,
+    "thiefMirrorPulls": 6,
+    "swaps": 1,
+    "wizardHeroSwaps": 0,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 1,
+    "songs": 1,
+    "groupSongs": 0,
+    "songHeroMoves": 1,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 2,
+    "stoneMoves": 8,
+    "mirrorMoves": 6,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand livre le premier bloc. Ce dépôt ouvre les passages entre l’atelier large et le couloir étroit ; il doit rester en place pendant la préparation du tableau.",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 5
+        },
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "composition": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait le bloc du cul-de-sac supérieur, puis tire le bloc bas vers le haut. Les deux dépôts se font depuis des côtés différents, sans poussée de file.",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 16,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "composition": false,
+        "coude": false
+      }
+    },
+    {
+      "label": "Le Voleur ramène le miroir jusqu’au coude, qui retire la plateforme au-dessus de la dernière commande. En se dégageant par la gauche, il entraîne le Magicien d’une case sans lancer son sort. Le miroir reste un outil optique, une butée physique et la commande de cette case hydraulique.",
+      "turn": 61,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "composition": false,
+        "coude": true
+      }
+    },
+    {
+      "label": "Depuis le poste à gauche de la dernière commande, un pas volontaire à droite atteindrait la réserve par le miroir et échangerait trop tôt : il ne ferait pas avancer le Magicien d’une case.",
+      "turn": 64,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "composition": false,
+        "coude": true
+      }
+    },
+    {
+      "label": "Le chant prend le Magicien sur sa bordure gauche, mais laisse le poids en bas à gauche hors de portée. Le Magicien rejoint la case vide sans lancer son pouvoir.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "composition": true,
+        "coude": true
+      }
+    },
+    {
+      "label": "Depuis la bonne case, la visée coudée échange la réserve haute avec le Magicien. Le dernier poids complète le tableau ; le miroir retient ce poids pendant le départ vers la droite de la Barde.",
+      "turn": 70,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 2,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 12,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 7
+        },
+        {
+          "x": 10,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 13,
+            "y": 9
+          },
+          "facing": "NW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "atelier": true,
+        "composition": true,
+        "coude": true
+      }
+    }
+  ],
+  "adaptation": "Light Advanced 8 décrit un tableau dont le dernier emplacement ne peut pas être rejoint par le pas habituel du Magicien : ce pas échange avec une pierre déjà placée. Dans le guide, la lumière orange autorise un saut ; SS24 ne possède ni cette lumière ni la parité. La transposition emploie un chant sélectif qui entraîne le Magicien sans son pouvoir. Les quatre boutons de l’atelier et de la composition sont répartis entre deux espaces et non en carré 2×2 ; le premier ouvre l’accès de travail, deux blocs sont extraits par traction et un miroir est ramené de trois cases. Une cinquième commande, sous le miroir, retire la case hydraulique située au-dessus du dernier dépôt : cette approche devient impraticable mais le rayon passe toujours vers le poids supérieur. Depuis le poste gauche, la visée atteint la réserve mais la dépose trop tôt ; après le pas forcé, le même rayon coudé produit la bonne dépose. Le miroir reste utile au rayon et sert de butée contre le chant de sortie. La Barde rejoint les arrivées par ses propres pas ; le Voleur peut ensuite reprendre le miroir et réactiver la petite plateforme. La contrainte porte sur l’état préparé montré par le témoin ; aucune unicité globale de méthode n’est revendiquée."
+}

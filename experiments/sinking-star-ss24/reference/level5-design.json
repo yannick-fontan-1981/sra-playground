@@ -1,0 +1,1256 @@
+{
+  "spec": {
+    "id": "ss24-05",
+    "title": "Le relais interrompu",
+    "mode": "quartet",
+    "rows": [
+      "##################",
+      "##################",
+      "##############g.g#",
+      "############o#...#",
+      "##...........~...#",
+      "##...........#...#",
+      "##...........#g.g#",
+      "##...........#####",
+      "###.........######",
+      "###.....#..#######",
+      "###..Mo.TZ.o######",
+      "###.....#..#######",
+      "###.......B.######",
+      "###.........######",
+      "##################",
+      "##################"
+    ],
+    "circuits": [
+      {
+        "id": "relais",
+        "buttons": [
+          {
+            "x": 8,
+            "y": 10
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 12,
+          "y": 4
+        },
+        "circuit": "relais",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RCCLCCCUUUUUURRRDLDDDLDLDCRCRCCCUUULLLLLCCCLRDDLLULCCDLUUUUUUUUURRRRDDRRCUUUUUURRRRRRRRUURRCCUUURRRRRRRRRUUCCCUUUUUUURRRRRRRRDD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 39
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 45
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 30
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Water · énigme 9",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-water-solutions/#%C3%A9nigme-9",
+    "puzzle": 9,
+    "objective": "Préparer le chargement, interrompre une relève pour déclencher la presse, puis rétablir une occupation continue avant la traversée."
+  },
+  "metrics": {
+    "actions": 127,
+    "selections": 21,
+    "merchantPushes": 1,
+    "thiefPulls": 2,
+    "thiefPartnerPulls": 0,
+    "thiefMirrorPulls": 0,
+    "swaps": 2,
+    "wizardHeroSwaps": 2,
+    "wizardStoneSwaps": 0,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 1,
+    "groupSongs": 1,
+    "songHeroMoves": 2,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 4,
+    "stoneMoves": 4,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 1,
+    "platformsCreated": 1,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Marchand présente la réserve derrière le Voleur, qui tient la presse ouverte. Deux charges encadrent maintenant la ligne de visée du poste de commande.",
+      "turn": 1,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "L’échange remplace le Voleur par le Magicien sur la commande. Cette relève libère le chargeur sans interrompre le circuit.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "Le Voleur tire la charge depuis sa niche sur la presse ouverte, puis revient devant le Magicien sans reprendre le chargement.",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "Un nouvel échange remet le Voleur sur la commande. Le Magicien n’aurait pu simplement en sortir : les côtés sont fermés et les deux axes de marche rencontrent une cible.",
+      "turn": 27,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "Le chant atteint le Voleur et le Magicien au coin de sa portée, mais pas la réserve derrière le bouton. L’écran droit reste contre sa butée. La commande se vide : la presse ferme et immerge le chargement dans le détroit.",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": false
+      }
+    },
+    {
+      "label": "Le Magicien se retire du dos du Voleur. Celui-ci revient ouvrir la presse, puis repart en tirant la réserve sur sa commande. Cette seconde relève maintient le passage ouvert.",
+      "turn": 45,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 9
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    },
+    {
+      "label": "L’appui créé par la fermeture et le poids conservé sur la commande permettent les quatre arrivées. La victoire ne compte ni fermetures ni tractions.",
+      "turn": 127,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 12,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "relais": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Préparer un déclencheur, déplacer les opérateurs, puis retirer un écran au moment utile afin de libérer un autre accès.",
+    "changes": "Le pont escamoté, le cristal-écran et le feu de dragon du guide deviennent un chargement de presse et une commande tenue par un héros. Le Voleur charge la presse après une première relève. Sur le poste resserré, le Magicien voit une cible sur chacun des deux axes disponibles : un échange y maintient un occupant. Un chant sélectif transporte ensuite le Voleur sans tirer la réserve ; l’écran opposé reste contre sa butée et la fermeture dépose le chargement. Le retour puis la traction de relève réouvrent le passage en conservant son poids. Ce sont les règles de collision et de circuit ordinaires de SS24, sans feu ni déclencheur caché.",
+    "limits": "La source fournit la préparation et le retrait différé, pas la chaîne de causes exacte de cette machine. Les comparaisons locales établissent la différence entre une relève continue et une rupture depuis les postes documentés. La variante ancienne qui faisait simplement marcher le Magicien hors du bouton est refusée par les parois actuelles. D’autres retraits préparés des écrans ou d’autres constructions du détroit ne sont pas exclus ; aucune unicité ni nécessité de chaque rôle n’est affirmée.",
+    "localChecks": [
+      {
+        "name": "Témoin complet : quatre rôles vivants et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 127,
+          "selections": 21,
+          "merchantPushes": 1,
+          "thiefPulls": 2,
+          "thiefPartnerPulls": 0,
+          "thiefMirrorPulls": 0,
+          "swaps": 2,
+          "wizardHeroSwaps": 2,
+          "wizardStoneSwaps": 0,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 1,
+          "groupSongs": 1,
+          "songHeroMoves": 2,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 4,
+          "stoneMoves": 4,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0,
+          "goalCountBeforeLastAction": 3,
+          "mapSha256": "8e1fb266facffcbfb105a91d4af42df56776d41ab95bed79b69fdd41d754539c",
+          "actionsSha256": "c27504ed3fe3a02cfb63c488a57e344c03b1318e54f43e61d3a742b07371753e"
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "La première relève libère le chargeur sans fermer la presse",
+        "status": "passed",
+        "observed": {
+          "wizard": {
+            "x": 9,
+            "y": 12
+          },
+          "thief": {
+            "x": 10,
+            "y": 12
+          },
+          "circuitPressed": true,
+          "pistonPushes": 0
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Depuis le poste chargé, aucune flèche du Magicien ne vide simplement la commande",
+        "status": "passed",
+        "observed": {
+          "fromTurn": 25,
+          "directions": {
+            "U": {
+              "refused": true,
+              "circuitPressed": true,
+              "phases": []
+            },
+            "D": {
+              "refused": true,
+              "circuitPressed": true,
+              "phases": []
+            },
+            "L": {
+              "refused": false,
+              "circuitPressed": true,
+              "phases": [
+                "swap"
+              ]
+            },
+            "R": {
+              "refused": false,
+              "circuitPressed": true,
+              "phases": [
+                "swap"
+              ]
+            }
+          }
+        },
+        "scope": "Quatre gestes depuis cet état précis. Les déplacements ultérieurs des deux écrans peuvent modifier ces possibilités."
+      },
+      {
+        "name": "La traction du partenaire peut aussi produire la rupture préparée",
+        "status": "passed",
+        "observed": {
+          "fromTurn": 25,
+          "command": "R",
+          "active": "thief",
+          "wizardAfter": {
+            "x": 10,
+            "y": 12
+          },
+          "phaseKinds": [
+            "pull",
+            "piston"
+          ],
+          "createdSupport": {
+            "x": 14,
+            "y": 6
+          }
+        },
+        "scope": "Ce transport ne lance aucun sort et conserve le problème du chargement puis du retrait. Une variante complète ci-dessous remplace le chant par cette traction."
+      },
+      {
+        "name": "Une traction volontaire remplace le Voleur et laisse le chargement sur la presse",
+        "status": "passed",
+        "observed": {
+          "commands": "RCCLCCCUUUUUURRRDLDDDLDLDCRUUULLLLCCCR",
+          "circuitPressed": true,
+          "weight": {
+            "x": 9,
+            "y": 12
+          },
+          "cargoStillLoaded": true,
+          "pistonPushes": 0
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Le chant laisse les écrans en place et produit une véritable fermeture chargée",
+        "status": "passed",
+        "observed": {
+          "song": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 11,
+                "y": 14
+              },
+              "to": {
+                "x": 12,
+                "y": 14
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 9,
+                "y": 12
+              },
+              "to": {
+                "x": 10,
+                "y": 12
+              }
+            },
+            {
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 12
+              },
+              "to": {
+                "x": 11,
+                "y": 12
+              }
+            }
+          ],
+          "piston": [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 13,
+                "y": 6
+              },
+              "to": {
+                "x": 14,
+                "y": 6
+              }
+            }
+          ],
+          "createdSupport": {
+            "x": 14,
+            "y": 6
+          },
+          "rearScreenOutOfRange": true,
+          "rightScreenHeldBy": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Revenir avant le retrait du Magicien le tire dans le passage",
+        "status": "passed",
+        "observed": {
+          "commands": "RCCLCCCUUUUUURRRDLDDDLDLDCRCRCCLR",
+          "firstMoveAccepted": true,
+          "pulledWizard": {
+            "x": 10,
+            "y": 12
+          },
+          "nextMoveRefused": true
+        },
+        "scope": "Le retour immédiat reste légal mais ramène le Magicien devant le Voleur. Le témoin le range avant cette traction."
+      },
+      {
+        "name": "La réouverture et la relève finale conservent les trois ressources",
+        "status": "passed",
+        "observed": {
+          "dryCrates": 2,
+          "supports": 1,
+          "finalWeight": {
+            "x": 9,
+            "y": 12
+          },
+          "pistonPushes": 1,
+          "circuitPressed": true
+        },
+        "scope": "Inventaire et maintien du passage sur le témoin ; le moteur n’exige pas un nombre particulier de fermetures."
+      },
+      {
+        "name": "Une fermeture avant chargement ne construit aucun appui",
+        "status": "passed",
+        "observed": {
+          "commands": "CCCR",
+          "pressClosed": true,
+          "supportsCreated": 0,
+          "pistonPushes": 0
+        },
+        "scope": "La fermeture prématurée est légale et peut être réparée. Le test établit uniquement l’absence de dépôt quand la presse est vide."
+      },
+      {
+        "name": "Variante gagnante : le Voleur assure la première relève par traction",
+        "status": "passed",
+        "observed": {
+          "actions": 129,
+          "selections": 21,
+          "merchantPushes": 1,
+          "thiefPulls": 3,
+          "thiefPartnerPulls": 1,
+          "thiefMirrorPulls": 0,
+          "swaps": 1,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 0,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 1,
+          "groupSongs": 1,
+          "songHeroMoves": 2,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 4,
+          "stoneMoves": 4,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "La première relève remplace le Voleur par le Magicien tiré, puis le Marchand prépare la réserve plus tard. Le chargement, la rupture chantée, la fermeture et la relève finale sont conservés.",
+        "commands": "CLUUUUUURRRRRDLDDDLDLDCCCRCCRCRCCCUUULLLLLCCCLRDDLLULCCDLUUUUUUUUURRRRDDRRCUUUUUURRRRRRRRUURRCCUUURRRRRRRRRUUCCCUUUUUUURRRRRRRRDD",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      },
+      {
+        "name": "Variante gagnante : tirer le Magicien pour déclencher la fermeture",
+        "status": "passed",
+        "observed": {
+          "actions": 123,
+          "selections": 17,
+          "merchantPushes": 1,
+          "thiefPulls": 3,
+          "thiefPartnerPulls": 1,
+          "thiefMirrorPulls": 0,
+          "swaps": 1,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 0,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 0,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 2,
+          "stoneMoves": 4,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 1,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Après chargement, le Voleur tire le Magicien hors de la commande, puis contourne l’écran droit avant de rétablir le circuit. La variante n’emploie aucun chant ; elle conserve la relève, le chargement, le transport passif qui interrompt l’occupation, la fermeture et le poids final.",
+        "commands": "RCCLCCCUUUUUURRRDLDDDLDLDRCUUULLLLCCCULDLRUULLDDDLCCUUUUUUUURRRRDDRRCUUUUUURRRRRRRRUURRCCUUURRRRRRRRRUUCCCUUUUUUURRRRRRRRDD",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

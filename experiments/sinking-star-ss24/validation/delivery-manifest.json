@@ -1,0 +1,58 @@
+{
+  "game": "SS24",
+  "title": "Les Voies de Traverse",
+  "version": "0.1.0",
+  "artifact": {
+    "filename": "SS24-demo.html",
+    "bytes": 153039,
+    "sha256": "1871dfedeffe3e5992b260bb75733c724ca60605b63ecda957f2523ec3d169b7",
+    "standalone": true,
+    "networkRequiredToPlay": false,
+    "authorWitnessesIncluded": false
+  },
+  "roster": [
+    "merchant",
+    "thief",
+    "wizard",
+    "bard"
+  ],
+  "defaultHero": "merchant",
+  "tutorial": {
+    "level": 1,
+    "discoveries": 37
+  },
+  "qualification": {
+    "unitTests": 129,
+    "unitPassed": 129,
+    "levelsWon": 8,
+    "totalWitnessActions": 1051,
+    "refusedWitnessActions": 0,
+    "witnessDeaths": 0,
+    "ui": "Compiled HTML in Happy DOM with exact public canvas frames and timing",
+    "nativeBrowserSession": false,
+    "priorLayoutsCompared": 80
+  },
+  "sourceSha256": {
+    "src/core.ts": "dc1b7bf2851a96222559572e60dea16f1bbf3db8125302998bc34fba6b63e8f5",
+    "src/levels.ts": "255ca8c2f080b9555f252163b19678a27e47aebc004b3239faf9aeeddb65286b",
+    "src/level-info.ts": "2429ad487bd0255954862d50d215112260d76b602f5f301b7687e9efe8d661a3",
+    "src/tutorial.ts": "35f8bdd6f19624b1180455dc525a588622777f5168146023da0b02fdeb05996c",
+    "src/browser.ts": "e1ee3e85844ae2ff14f02ca14a30039741e5c7c9d7a46241c890dcfeac8bbdce",
+    "index.template.html": "76011bbc1b4bdbeaae7b9b0b85d54dfb287067d0198b5102a4409ac59c2af0f7",
+    "scripts/build-demo.mjs": "e9c1603b840849b22602076dbb29324c9d61c0b87140f1a7ac34a2a31d39bdcc",
+    "package.json": "ecdaed1e4c9db846378c932d111cab9de0cac2830c7132f766baf3c3b34ef0fa",
+    "package-lock.json": "b2c75aa35e5ee96572ad353ce1f3d4ca944b1f852902dd28cb27a42b02496354",
+    "tsconfig.json": "5dd2083c554cb1b4095fe21191a260ad65d47ac82401250cadfcdf0a587e9c74"
+  },
+  "reportSha256": {
+    "validation/unit-tests.json": "8eee9bca0d459e4cc3f42c0be197df92a0a30269c7d47e9641ca0ea619e467db",
+    "validation/levels-report.json": "b81a7c733deb3cc883b177f3410119eb796b660f76d97b0d9f97422482bcd317",
+    "validation/ui-dom-report.json": "31777477955e4b5ba3e719a4504e3bcf1fbd6507823d03acbe49db6c467e595e",
+    "validation/design-report.json": "794c33a4f19071ebcfb8193d25e0b28f738c8c837c816192c2ee2b59b07cedb9"
+  },
+  "limits": [
+    "Author witnesses prove solvability, not an optimal or unique route.",
+    "Local counter-branches and geometric resource arguments are documented separately.",
+    "This manifest qualifies the standalone laboratory, not native SRA execution or Site publication."
+  ]
+}

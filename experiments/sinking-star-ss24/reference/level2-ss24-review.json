@@ -1,0 +1,254 @@
+{
+  "game": "SS24",
+  "success": true,
+  "levels": [
+    2
+  ],
+  "method": "Rejeu du témoin, sortie publique, comparaisons mécaniques locales et variante gagnante sans chant ; aucune recherche exhaustive.",
+  "mapSha256": "9eaae1cc5abcac5fbc54c3286938fcf14717895806d31cda93c44a3dbeab2f28",
+  "witnessSha256": "b3c68948e9b0a490789aeaa733a6aa6267a96b49785229daf170bc4179581830",
+  "checks": [
+    {
+      "level": 2,
+      "name": "Témoin complet : deux charges, un passage commandé et quatre arrivées",
+      "status": "passed",
+      "observed": {
+        "actions": 154,
+        "selections": 36,
+        "merchantPushes": 2,
+        "thiefPulls": 14,
+        "thiefPartnerPulls": 6,
+        "thiefMirrorPulls": 0,
+        "swaps": 3,
+        "wizardHeroSwaps": 3,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 9,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Rejeu exact du JSON sauvegardé et comparaison avec le générateur d’auteur. La salle reste sèche, sans miroir, monstre ni combinaison de poids."
+    },
+    {
+      "level": 2,
+      "name": "Victoire publique et Undo de la dernière entrée",
+      "status": "passed",
+      "observed": {
+        "actions": 154,
+        "frames": 391,
+        "finalState": "WIN",
+        "completionUndo": true
+      },
+      "scope": "Session publique de cette carte seule ; témoin d’auteur, sans qualification de résolution autonome SRA."
+    },
+    {
+      "level": 2,
+      "name": "La commande ouvre l’unique liaison avec les arrivées",
+      "status": "passed",
+      "observed": {
+        "closedApproachCommands": "DRDDRRDDDDDLLLLL",
+        "closedAttemptRefused": true,
+        "weight": {
+          "x": 14,
+          "y": 12
+        },
+        "loadedTurn": 22,
+        "gateOpen": true
+      },
+      "scope": "Contre-branche locale rejouée ; aucune optimalité, unicité ou impossibilité globale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "La charge sous plafond est descendue par cinq prises uniques",
+      "status": "passed",
+      "observed": {
+        "upwardPushCommands": "CLCCCDRDRRUU",
+        "upwardPushRefused": true,
+        "ceiling": {
+          "x": 14,
+          "y": 4
+        },
+        "pulls": 5,
+        "loadAfterStair": {
+          "x": 14,
+          "y": 10
+        }
+      },
+      "scope": "La poussée vers ce plafond est impossible ; cette comparaison ne prétend pas exclure toute autre préparation latérale."
+    },
+    {
+      "level": 2,
+      "name": "Échanger puis tirer la Barde préserve le poids ; son propre pas le déplace",
+      "status": "passed",
+      "observed": {
+        "silentSwapTurn": 54,
+        "silentPartnerPulls": 3,
+        "weightPreserved": {
+          "x": 14,
+          "y": 12
+        },
+        "voluntaryCommands": "CDDDDDLDDLCCCDRDDRRDDDCCRRRDLCCDDDDRDDDDRCCCRRRRCCCURUCL",
+        "weightAfterVoluntaryStep": {
+          "x": 13,
+          "y": 12
+        },
+        "voluntaryGateClosed": true
+      },
+      "scope": "Contre-branche locale rejouée ; aucune optimalité, unicité ou impossibilité globale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Le chant agit à travers la cloison, puis la butée retient le bloc",
+      "status": "passed",
+      "observed": {
+        "songTurn": 78,
+        "stoneMove": {
+          "from": {
+            "x": 8,
+            "y": 13
+          },
+          "to": {
+            "x": 8,
+            "y": 14
+          }
+        },
+        "wallBetween": {
+          "x": 9,
+          "y": 12
+        },
+        "nextStepTurn": 79,
+        "blockedStoneDestination": {
+          "x": 8,
+          "y": 15
+        },
+        "weightPreserved": {
+          "x": 14,
+          "y": 12
+        }
+      },
+      "scope": "Contre-branche locale rejouée ; aucune optimalité, unicité ou impossibilité globale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "La traction du Magicien laisse le lest ; son propre rayon le reprend",
+      "status": "passed",
+      "observed": {
+        "silentPartnerPulls": 3,
+        "silentWizardAt": {
+          "x": 14,
+          "y": 10
+        },
+        "weightPreserved": {
+          "x": 14,
+          "y": 12
+        },
+        "voluntaryCommands": "CDDDDDLDDLCCCDRDDRRDDDCCRRRDLCCDDDDRDDDDRCCCRRRRCCCURUCCCUUURLLLDRRRURUUCCDDLDDCCCDDL",
+        "exchangedWeight": {
+          "x": 14,
+          "y": 8
+        },
+        "wizardTemporarilyHoldsButton": true,
+        "gateClosesAfterWizardLeaves": true
+      },
+      "scope": "Le premier rayon rencontre le Voleur. Le second échange avec le poids ; le Magicien maintient alors lui-même la commande jusqu’à son départ."
+    },
+    {
+      "level": 2,
+      "name": "Le bloc du bas demande un dégagement, pas une marche à travers",
+      "status": "passed",
+      "observed": {
+        "refusedCommands": "CDDDDDLDDLCCCDRDDRRDDDCCRRRDLCCDDDDRDDDDRCCCRRRRCCCURUCCCUUURLLLDRRRURUUCCDDLDDCCDDDRRCLDCCCDDLLLLLLLLD",
+        "blockedAt": {
+          "x": 8,
+          "y": 14
+        },
+        "finalStonePulls": 3,
+        "reserve": {
+          "x": 5,
+          "y": 14
+        },
+        "buttonStillHeld": true
+      },
+      "scope": "Contre-branche locale rejouée ; aucune optimalité, unicité ou impossibilité globale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Variante gagnante sans chant : le Marchand range le dernier bloc",
+      "status": "passed",
+      "observed": {
+        "commands": "CDDDDDLDDLCCCDRDDRRDDDLDLLDLLLLLLLULDRRRRRRRUURRRRCCRRRDLCCDDDDRDDDDRCCCRRRRCCCURUCCCUUURLLLDRRRURUUCCDDLDDCCDDDRRCLDCCCDDLLLLLLLLLLLLCCULLUULLCCCDLLLDLUUCCCLLLLCCCUULLLLLLLLULLLDL",
+        "metrics": {
+          "actions": 180,
+          "selections": 36,
+          "merchantPushes": 8,
+          "thiefPulls": 11,
+          "thiefPartnerPulls": 6,
+          "thiefMirrorPulls": 0,
+          "swaps": 3,
+          "wizardHeroSwaps": 3,
+          "wizardStoneSwaps": 0,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 0,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 0,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 9,
+          "stoneMoves": 13,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "finalState": "WIN",
+        "lastBlockReserve": {
+          "x": 3,
+          "y": 14
+        },
+        "weightRemains": {
+          "x": 14,
+          "y": 12
+        },
+        "omitted": [
+          "chant à travers la cloison",
+          "traction du dernier bloc"
+        ],
+        "retained": [
+          "descente de la charge",
+          "maintien du passage",
+          "échanges de partenaires",
+          "tractions silencieuses de la Barde et du Magicien"
+        ]
+      },
+      "scope": "Alternative conservée après revue : elle remplace le dégagement du dernier bloc, sans supprimer la charge ni le passage. Le chant n’est pas artificiellement imposé. Aucune unicité ni optimalité revendiquée."
+    }
+  ],
+  "limits": [
+    "La carte transpose le problème de Heroes of Hauling 6 sans reproduire exactement son plan.",
+    "Le chant à travers la cloison et la traction du dernier bloc ne sont pas globalement nécessaires : une variante publique gagnante en apporte la contrepreuve.",
+    "Les refus locaux ne prouvent pas une impasse définitive ni la nécessité globale de chaque pouvoir.",
+    "Aucune optimalité ni résolution autonome SRA démontrée."
+  ]
+}

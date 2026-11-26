@@ -1,0 +1,1271 @@
+{
+  "spec": {
+    "id": "ss24-03",
+    "title": "Les tiroirs décalés",
+    "mode": "quartet",
+    "rows": [
+      "################",
+      "################",
+      "#.....####..g.g#",
+      "#.....####.....#",
+      "#....MooT.#....#",
+      "#.....##.......#",
+      "#.....##.......#",
+      "#...BZoo~......#",
+      "#.......##.....#",
+      "#......###..g.g#",
+      "################",
+      "################"
+    ]
+  },
+  "commands": "CRDDDRCCCRCCRRRCCLDDLLDDRRUDLLCDLDLLCLCULDRRCUUUURRRRRDDRRRUUUURRRCCCUUUUURCCCUURURDDDRDDRRRRCCCUUUUULURRDRRRDDRDRDDRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation · Heroes, Doubled · énigme 4",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-doubled-solutions/#%C3%A9nigme-4",
+    "puzzle": 4,
+    "objective": "Séparer une paire qui bloque la poussée simple, libérer les cibles de retour et ranger une tête de file depuis une autre portée."
+  },
+  "metrics": {
+    "actions": 118,
+    "selections": 21,
+    "merchantPushes": 4,
+    "thiefPulls": 6,
+    "thiefPartnerPulls": 0,
+    "thiefMirrorPulls": 0,
+    "swaps": 5,
+    "wizardHeroSwaps": 2,
+    "wizardStoneSwaps": 3,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 3,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 3,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 2,
+    "stoneMoves": 16,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Voleur prend seulement la caisse voisine de la paire haute. Le décalage obtenu permet désormais une poussée simple depuis l’autre extrémité. Il rejoint ensuite le poste de retour.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand avance la caisse restée en arrière dans la place libérée. La paire initiale aurait bloqué cette poussée.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Deux échanges traversent la paire basse et laissent ses caisses dans les anciennes places du Magicien. Un troisième échange franchit la coupure en prenant la place du Voleur au poste de retour.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La caisse renvoyée dans l’atelier est rangée vers le haut. Elle cesse de masquer la Barde dans la ligne de retour.",
+      "turn": 30,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Voleur retire la seconde caisse basse dans la poche décalée. Les deux anciennes places du Magicien ont été libérées par des gestes différents.",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La ligne dégagée permet d’envoyer la Barde à droite. Les deux caisses rangées restent hors de sa future course de travail.",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La butée retient la caisse arrière en haut ; la Barde abaisse puis déporte celle de tête dans le renfoncement droit. Le chantier supérieur retrouve un débouché.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand reprend la caisse haute désormais isolée et ouvre le passage entre les deux ateliers.",
+      "turn": 66,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 6,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 11,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La caisse haute sert de cible au retour du Magicien. Elle revient dans l’atelier gauche et occupe encore son accès.",
+      "turn": 93,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 6,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Les quatre caisses sont conservées et les quatre héros rejoignent leurs destinations. Aucun circuit ne transforme leur rangement en condition supplémentaire.",
+      "turn": 118,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 13
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 13
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 14,
+            "y": 6
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Deux pierres alignées servent de butée parce que le Marchand ne peut pas pousser leur file ; des décalages de colonne et de rangée changent ce qui peut avancer.",
+    "changes": "Les héros doublés deviennent un quatuor sans synchronisation de clones. Deux galeries ont chacune une paire de caisses ; une coupure d’une case distingue la fenêtre d’échange basse du passage physique supérieur. La traction sépare la paire haute ; les échanges traversent la paire basse, dont les pièces renvoyées doivent être retirées de la visée. La Barde travaille ensuite depuis le côté opposé et une butée retient une charge pendant la dépose latérale de sa voisine. La caisse haute redevient cible puis charge à extraire lors du retour. Aucune poussée de file ni pouvoir du héros transporté n’est ajouté.",
+    "limits": "Les contrôles établissent les effets des deux paires, des cibles renvoyées et de la butée sur la route décrite. La route conserve les quatre caisses sèches ; une stratégie qui construit un autre passage dans l’eau reste autorisée si elle réussit. Les autres échanges de caisses et ordres de manutention restent légaux ; ni chaque capacité ni chaque détour du témoin ne sont déclarés nécessaires dans toutes les solutions.",
+    "localChecks": [
+      {
+        "name": "Témoin complet : quatre rôles vivants et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 118,
+          "selections": 21,
+          "merchantPushes": 4,
+          "thiefPulls": 6,
+          "thiefPartnerPulls": 0,
+          "thiefMirrorPulls": 0,
+          "swaps": 5,
+          "wizardHeroSwaps": 2,
+          "wizardStoneSwaps": 3,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 3,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 3,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 2,
+          "stoneMoves": 16,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0,
+          "goalCountBeforeLastAction": 3,
+          "mapSha256": "a9714c3d527095cc709ba8186aae232d3353bffaee054e5627f14e887528f895",
+          "actionsSha256": "ca83cb70f1385df4faa1fa9139c1eef3cd441c2fc680cad032a68464c0229158"
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "La paire bloque le Marchand ; la traction ne sépare que son voisin",
+        "status": "passed",
+        "observed": {
+          "initialPushRefused": true,
+          "firstPull": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 10,
+                "y": 8
+              },
+              "to": {
+                "x": 11,
+                "y": 8
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 8
+              },
+              "to": {
+                "x": 10,
+                "y": 8
+              }
+            }
+          ],
+          "pushAfterSeparation": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 7,
+                "y": 8
+              },
+              "to": {
+                "x": 8,
+                "y": 8
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 8,
+                "y": 8
+              },
+              "to": {
+                "x": 9,
+                "y": 8
+              }
+            }
+          ]
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Les caisses renvoyées masquent la Barde jusqu’à leur dégagement",
+        "status": "passed",
+        "observed": {
+          "returnedTargets": [
+            {
+              "x": 7,
+              "y": 11
+            },
+            {
+              "x": 8,
+              "y": 11
+            }
+          ],
+          "firstThiefInterception": {
+            "x": 9,
+            "y": 11
+          },
+          "crateAfterThiefReposition": {
+            "x": 8,
+            "y": 11
+          },
+          "bardAfterClearing": {
+            "x": 12,
+            "y": 11
+          }
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "La butée garde la caisse arrière pendant la dépose de la tête",
+        "status": "passed",
+        "observed": {
+          "pushBeforeSongRefused": true,
+          "bard": {
+            "x": 11,
+            "y": 10
+          },
+          "held": {
+            "x": 9,
+            "y": 8
+          },
+          "movedTo": {
+            "x": 10,
+            "y": 9
+          },
+          "wall": {
+            "x": 9,
+            "y": 9
+          }
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "La charge haute sert encore de cible puis de charge extraite au retour",
+        "status": "passed",
+        "observed": {
+          "cratesConserved": 4,
+          "returnedCharge": {
+            "x": 7,
+            "y": 8
+          },
+          "laterPulls": 4,
+          "gates": 0
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Variante gagnante : construire l’appui de la galerie basse",
+        "status": "passed",
+        "observed": {
+          "actions": 83,
+          "selections": 15,
+          "merchantPushes": 2,
+          "thiefPulls": 5,
+          "thiefPartnerPulls": 4,
+          "thiefMirrorPulls": 0,
+          "swaps": 3,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 2,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 4,
+          "groupSongs": 1,
+          "songHeroMoves": 1,
+          "songStoneMoves": 5,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 6,
+          "stoneMoves": 10,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 1,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "La variante dépense une caisse dans la coupure basse et réorganise les partenaires par traction. Elle garde des échanges, une extraction et des chants ; la conservation de quatre caisses sèches et le trajet supérieur ne sont pas obligatoires.",
+        "commands": "CDDRDRCRRRCCCDLDCCUCDLLDDRRRRRUURRRUUURRRCCDDRRRRCCCULLDDRURRURRRDDRRCCRURRUURRUUUR",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

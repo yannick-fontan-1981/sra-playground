@@ -11,7 +11,7 @@ export function spec(){
  for(const[x,y]of[[11,11],[17,11],[11,17],[17,17]])put(x,y,'g');
  return{id:'ss24-01',title:'L’atelier des départs',mode:'quartet',rows:b.strings(),
   circuits:[{id:'relai',color:14,buttons:[{x:5,y:3}]},{id:'presse',color:10,buttons:[{x:3,y:16}]}],
-  gates:[{at:{x:9,y:13},circuit:'relai',direction:'E',closedWhen:'released'},{at:{x:15,y:15},circuit:'presse',direction:'W',closedWhen:'pressed'}]};
+  gates:[{at:{x:9,y:13},circuit:'relai',direction:'E',closedWhen:'released'},{at:{x:18,y:9},circuit:'relai',direction:'S',closedWhen:'released'},{at:{x:15,y:15},circuit:'presse',direction:'W',closedWhen:'pressed'}]};
 }
 export function build(){
  const a=new Author(spec());

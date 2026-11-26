@@ -1,0 +1,96 @@
+{
+  "success": true,
+  "game": "SS24",
+  "title": "Les Voies de Traverse",
+  "date": "2026-11-26",
+  "browser": "Chrome via cloud browser",
+  "mode": "Manual",
+  "interface": "Native SRA Playground served by managed Sites preview",
+  "startLevel": 1,
+  "finalLevel": 8,
+  "officialVictoryVisible": true,
+  "officialVictoryText": "VICTORY · Les quatre destinations sont occupées",
+  "publicUrl": "http://127.0.0.1:4173/?game=SS24&level=8",
+  "inputMethod": "Visible canvas keyboard events: arrow keys, Tab for selection, X for mirrors; wait for public aria-busy and inspect UI after each batch. No private session access or solution injection.",
+  "authorInputs": 1051,
+  "selections": 176,
+  "perLevel": [
+    {
+      "level": 1,
+      "inputs": 212,
+      "completionObserved": true,
+      "nextLevel": 2
+    },
+    {
+      "level": 2,
+      "inputs": 154,
+      "completionObserved": true,
+      "nextLevel": 3
+    },
+    {
+      "level": 3,
+      "inputs": 118,
+      "completionObserved": true,
+      "nextLevel": 4
+    },
+    {
+      "level": 4,
+      "inputs": 85,
+      "completionObserved": true,
+      "nextLevel": 5
+    },
+    {
+      "level": 5,
+      "inputs": 127,
+      "completionObserved": true,
+      "nextLevel": 6
+    },
+    {
+      "level": 6,
+      "inputs": 122,
+      "completionObserved": true,
+      "nextLevel": 7
+    },
+    {
+      "level": 7,
+      "inputs": 92,
+      "completionObserved": true,
+      "nextLevel": 8
+    },
+    {
+      "level": 8,
+      "inputs": 141,
+      "completionObserved": true,
+      "nextLevel": 8
+    }
+  ],
+  "tutorial": {
+    "initial": "0 / 37 découvertes",
+    "atEndOfLevel1": "37 / 37 découvertes",
+    "final": "37 / 37 découvertes",
+    "onlyLevel1": true
+  },
+  "finalUndo": {
+    "victoryHiddenAfterUndo": true,
+    "victoryVisibleAfterReplayingLastInput": true,
+    "extraUndoInputs": 1,
+    "extraReplayInputs": 1
+  },
+  "sourceSha256": {
+    "src/main.ts": "a2620dabce9731daa913942ca816112f3e55aad202e7b1ace7c10fb61b1d85ce",
+    "src/styles.css": "4c17ddaa2997afdc623325f442854b57f187ffeed70f745b64718d31e27cfb45",
+    "src/games/sinking-star-ss24.ts": "b47e5a3fc13f34d0323135deb65fd59a4547c34104083711c99ed643c567d7b4",
+    "src/games/sinking-star-ss24-help.ts": "ebf9f50a26c4422c4120803e4e19c40765432cde7abc36bee46cccc03b9f85dc",
+    "src/runtime/native-game-dispatcher.ts": "75289aab4201f2187bcd89c7b901705c26bbb964812e241c1bc354d6b5a7d5ab",
+    "experiments/sinking-star-ss24/src/core.ts": "dc1b7bf2851a96222559572e60dea16f1bbf3db8125302998bc34fba6b63e8f5",
+    "experiments/sinking-star-ss24/src/levels.ts": "255ca8c2f080b9555f252163b19678a27e47aebc004b3239faf9aeeddb65286b",
+    "experiments/sinking-star-ss24/src/tutorial.ts": "35f8bdd6f19624b1180455dc525a588622777f5168146023da0b02fdeb05996c",
+    "experiments/sinking-star-ss24/tests/witnesses.json": "3595edbaed288903d3cf61752046210f537ed3ede8b4d0395d995acd0b0a3bb3"
+  },
+  "standaloneHtmlSha256": "1871dfedeffe3e5992b260bb75733c724ca60605b63ecda957f2523ec3d169b7",
+  "limits": [
+    "The 1,051 inputs are the author route, not an autonomous SRA solution.",
+    "The browser tested the managed native preview. Production deployment and its source SHA are verified separately.",
+    "Setup interactions and the final Undo/replay check are outside the 1,051 route inputs."
+  ]
+}

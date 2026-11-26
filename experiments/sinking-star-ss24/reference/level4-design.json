@@ -1,0 +1,1122 @@
+{
+  "spec": {
+    "id": "ss24-04",
+    "title": "Le pas et la visée",
+    "mode": "quartet",
+    "rows": [
+      "#################",
+      "#################",
+      "#...#############",
+      "#..o~~3##########",
+      "#...##......#####",
+      "#...#ZT...M.#g.g#",
+      "#...###.#...#...#",
+      "#......o.B......#",
+      "#######.#...#...#",
+      "#######.....#g.g#",
+      "#######.....#####",
+      "#################",
+      "#################"
+    ],
+    "circuits": [
+      {
+        "id": "acces",
+        "buttons": [
+          {
+            "x": 7,
+            "y": 9
+          }
+        ],
+        "color": 15
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 4,
+          "y": 7
+        },
+        "circuit": "acces",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 7
+        },
+        "circuit": "acces",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CRCUCCCRURRRCCCULLLDCCCRCLDDDCCCDDDRUUURRDDRRCUUURRDDRRRRUURRCCDDDDRRRRRRUUCCCDDDRRDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Light Advanced · énigmes 6–7",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-advanced-solutions/#%C3%A9nigme-6",
+    "puzzle": "6–7",
+    "objective": "Décaler le Magicien sans lancer de sort, récupérer la cible renvoyée et libérer la colonne de livraison sans pousser une file.",
+    "secondary": {
+      "label": "Heroes and Light Advanced · énigme 7",
+      "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-advanced-solutions/#%C3%A9nigme-7"
+    }
+  },
+  "metrics": {
+    "actions": 85,
+    "selections": 21,
+    "merchantPushes": 4,
+    "thiefPulls": 2,
+    "thiefPartnerPulls": 1,
+    "thiefMirrorPulls": 0,
+    "swaps": 2,
+    "wizardHeroSwaps": 0,
+    "wizardStoneSwaps": 2,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 1,
+    "songs": 1,
+    "groupSongs": 1,
+    "songHeroMoves": 1,
+    "songStoneMoves": 1,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 2,
+    "stoneMoves": 8,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La traction décale le Magicien d’une colonne sans lancer de sort. Le Voleur reste devant lui, disponible pour reprendre ce que la nouvelle visée rapportera.",
+      "turn": 2,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 4,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": false
+      }
+    },
+    {
+      "label": "Le rayon atteint maintenant la face blanche du miroir, traverse la coupure et échange la caisse de la loge. Le Magicien prend sa place ; la charge arrive dans son ancienne case.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": false
+      }
+    },
+    {
+      "label": "Le Voleur retire la charge de la case d’arrivée et la présente dans la colonne de livraison, puis laisse la place au Marchand.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 11,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": false
+      }
+    },
+    {
+      "label": "Le Marchand engage la charge. Une seconde caisse bloque encore la colonne : pousser deux occupants n’est pas une capacité de ce quatuor.",
+      "turn": 20,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": false
+      }
+    },
+    {
+      "label": "La butée retient la charge engagée tandis que le chant décale la caisse basse. Le Marchand est entraîné séparément, sans nouvelle poussée.",
+      "turn": 24,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 9
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": false
+      }
+    },
+    {
+      "label": "La colonne dégagée reçoit la charge jusqu’à sa commande. La même ouverture donne accès au retour de la loge et à la chambre d’arrivée.",
+      "turn": 29,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 8,
+            "y": 11
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": true
+      }
+    },
+    {
+      "label": "La caisse basse, écartée du chantier, fournit la première cible de retour. Le Magicien la renvoie dans la loge et revient dans l’atelier sans reprendre le poids livré.",
+      "turn": 75,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": true
+      }
+    },
+    {
+      "label": "Les quatre héros occupent leurs destinations. Les deux caisses existent encore, et le miroir est resté un outil de visée plutôt qu’un poids final.",
+      "turn": 85,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 16,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 14,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 14,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 4,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 7,
+            "y": 6
+          },
+          "facing": "SW"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "acces": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Un déplacement d’une case change les cibles vues par le Magicien ; une pièce proche peut aussi masquer celle que l’on veut atteindre ensuite.",
+    "changes": "La parité de lumière orange n’est pas importée. La traction du Voleur donne au Magicien une nouvelle colonne de visée tout en gardant le Voleur du côté utile de la réception. Un miroir fixe dévie ce rayon vers une loge. La caisse rapportée est extraite puis livrée ; un chant sélectif dégage sa colonne tout en transportant le Marchand sans poussée. La caisse écartée redevient ensuite une cible de retour, tandis que le poids final reste en place.",
+    "limits": "Les essais locaux distinguent la position du Magicien et celle laissée au Voleur par une traction ou un échange direct. Un Voleur enfermé derrière la caisse reçue n’est pas déclaré définitivement perdu : les partenaires peuvent encore intervenir. La route ne prétend ni rendre la traction du Magicien universellement obligatoire ni interdire d’autres emplois du reflet global.",
+    "localChecks": [
+      {
+        "name": "Témoin complet : quatre rôles vivants et quatre destinations",
+        "status": "passed",
+        "observed": {
+          "actions": 85,
+          "selections": 21,
+          "merchantPushes": 4,
+          "thiefPulls": 2,
+          "thiefPartnerPulls": 1,
+          "thiefMirrorPulls": 0,
+          "swaps": 2,
+          "wizardHeroSwaps": 0,
+          "wizardStoneSwaps": 2,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 1,
+          "songs": 1,
+          "groupSongs": 1,
+          "songHeroMoves": 1,
+          "songStoneMoves": 1,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 2,
+          "stoneMoves": 8,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0,
+          "goalCountBeforeLastAction": 3,
+          "mapSha256": "471283ce7af40706f23850a2d4403fa80d27ed9f49112816c137409ab072fe33",
+          "actionsSha256": "20fc96e279af203be39c574f0934456f06073947cb4131eb89d43676dd356238"
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Une traction donne une autre colonne de visée sans lancer de sort",
+        "status": "passed",
+        "observed": {
+          "initialUpRefused": true,
+          "wizardAfterPull": {
+            "x": 7,
+            "y": 8
+          },
+          "newTarget": {
+            "x": 4,
+            "y": 6
+          },
+          "ray": [
+            {
+              "x": 7,
+              "y": 7
+            },
+            {
+              "x": 7,
+              "y": 6
+            },
+            {
+              "x": 6,
+              "y": 6
+            },
+            {
+              "x": 5,
+              "y": 6
+            },
+            {
+              "x": 4,
+              "y": 6
+            }
+          ],
+          "reflections": 1
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "L’échange direct laisse le Voleur derrière la caisse reçue",
+        "status": "passed",
+        "observed": {
+          "commands": "CCRUCCCR",
+          "thief": {
+            "x": 6,
+            "y": 8
+          },
+          "blockingCharge": {
+            "x": 7,
+            "y": 8
+          },
+          "firstExitRefused": true
+        },
+        "scope": "Ce refus concerne la sortie immédiate. Une variante complète ci-dessous réorganise les charges et récupère le Voleur."
+      },
+      {
+        "name": "Le reflet global initial envoie le Voleur dans l’eau nue",
+        "status": "passed",
+        "observed": {
+          "command": "X",
+          "refused": false,
+          "deadHero": "thief",
+          "landing": {
+            "x": 5,
+            "y": 6
+          },
+          "cratesPreserved": true
+        },
+        "scope": "Cette activation est légale mais mortelle. Seul l’état initial est comparé ; les autres usages possibles du miroir restent autorisés."
+      },
+      {
+        "name": "La butée sépare le chargement et le chant transporte le Marchand sans poussée",
+        "status": "passed",
+        "observed": {
+          "doublePushRefused": true,
+          "heldCharge": {
+            "x": 8,
+            "y": 9
+          },
+          "shiftedCharge": {
+            "x": 9,
+            "y": 10
+          },
+          "merchantAfter": {
+            "x": 9,
+            "y": 8
+          },
+          "phaseKinds": [
+            "song"
+          ]
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Le retour réemploie la caisse écartée et conserve le poids livré",
+        "status": "passed",
+        "observed": {
+          "returnSwap": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 4,
+                "y": 10
+              },
+              "to": {
+                "x": 9,
+                "y": 10
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 10
+              },
+              "to": {
+                "x": 4,
+                "y": 10
+              }
+            }
+          ],
+          "weight": {
+            "x": 8,
+            "y": 12
+          },
+          "cratesConserved": 2,
+          "mirrorMoved": false,
+          "pistonPushes": 0
+        },
+        "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+      },
+      {
+        "name": "Variante gagnante : échange direct puis récupération du Voleur",
+        "status": "passed",
+        "observed": {
+          "actions": 97,
+          "selections": 17,
+          "merchantPushes": 3,
+          "thiefPulls": 1,
+          "thiefPartnerPulls": 1,
+          "thiefMirrorPulls": 0,
+          "swaps": 3,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 2,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 1,
+          "songs": 9,
+          "groupSongs": 7,
+          "songHeroMoves": 8,
+          "songStoneMoves": 11,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 10,
+          "stoneMoves": 16,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "L’échange initial atteint la même colonne mais laisse le Voleur dans la niche. Neuf chants, puis une traction de partenaire, réorganisent la réception. La visée coudée, la livraison et la cible de retour restent utiles ; la traction initiale du Magicien n’est pas universellement nécessaire.",
+        "commands": "CCRUCUULRRDDLDCCRRRRDRRDDLRUUUUCCCUULLLDDDCCCDDRUUURRDDRRCUUURRDDRRRRUURRCCDDDDRRRRRRUUCCCDDDRRDD",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

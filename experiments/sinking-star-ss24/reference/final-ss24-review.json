@@ -1,0 +1,435 @@
+{
+  "campaign": "SS24 — Les Voies de Traverse",
+  "scope": "Revue d’auteur des salles 6 à 8",
+  "checks": [
+    {
+      "label": "ss24-06: témoin complet, sans refus ni décès",
+      "passed": true,
+      "inputs": 122,
+      "selections": 15
+    },
+    {
+      "label": "ss24-07: témoin complet, sans refus ni décès",
+      "passed": true,
+      "inputs": 92,
+      "selections": 11
+    },
+    {
+      "label": "ss24-08: témoin complet, sans refus ni décès",
+      "passed": true,
+      "inputs": 141,
+      "selections": 13
+    },
+    {
+      "label": "ss24-06: inventaire fixe et quatre arrivées",
+      "passed": true,
+      "width": 20,
+      "height": 18
+    },
+    {
+      "label": "ss24-07: inventaire fixe et quatre arrivées",
+      "passed": true,
+      "width": 20,
+      "height": 16
+    },
+    {
+      "label": "ss24-08: inventaire fixe et quatre arrivées",
+      "passed": true,
+      "width": 20,
+      "height": 16
+    },
+    {
+      "label": "N6 : livrer avant de restituer le miroir ferme bien son passage direct",
+      "passed": true,
+      "tested": "D du Voleur après livraison prématurée",
+      "refused": true,
+      "limit": "La livraison peut encore être annulée ; ce contrôle ne prétend pas à une impasse globale."
+    },
+    {
+      "label": "N6 : le miroir est revenu avant la livraison du témoin",
+      "passed": true,
+      "mirrorPulls": 8
+    },
+    {
+      "label": "N6 : sans le décalage du monstre, la montée finale tue le Magicien",
+      "passed": true,
+      "tested": "Montée depuis la chambre droite après omission du premier chant",
+      "death": true
+    },
+    {
+      "label": "N6 : le monstre reste vivant et quitte le voisinage dangereux dans le témoin",
+      "passed": true,
+      "monsterMoves": 1
+    },
+    {
+      "label": "N6 : un départ gauche prématuré immerge le poids du dépôt",
+      "passed": true,
+      "tested": "L de la Barde juste après le dépôt",
+      "supportCreated": true,
+      "depositReleased": true
+    },
+    {
+      "label": "N6 : le fond de niche interdit le poste de traction inférieur",
+      "passed": true,
+      "lowerPullStation": "wall",
+      "upperPushStation": "wall"
+    },
+    {
+      "label": "N7 : la fenêtre fermée interdit l’usage optique avant la livraison",
+      "passed": true,
+      "rayBlockedBeforeDelivery": true
+    },
+    {
+      "label": "N7 : station 4,6 détruite par le transport suivant",
+      "passed": true,
+      "station": {
+        "x": 4,
+        "y": 6
+      },
+      "mirrorDestroyed": true,
+      "heroDeaths": 0
+    },
+    {
+      "label": "N7 : station 7,6 détruite par le transport suivant",
+      "passed": true,
+      "station": {
+        "x": 7,
+        "y": 6
+      },
+      "mirrorDestroyed": true,
+      "heroDeaths": 0
+    },
+    {
+      "label": "N7 : station 10,6 détruite par le transport suivant",
+      "passed": true,
+      "station": {
+        "x": 10,
+        "y": 6
+      },
+      "mirrorDestroyed": true,
+      "heroDeaths": 0
+    },
+    {
+      "label": "N7 : les trois presses sont effectivement activées pendant la livraison sûre",
+      "passed": true,
+      "pressesTriggered": 3,
+      "mirrorSurvives": true
+    },
+    {
+      "label": "N7 : tous les glissements d’appui partent d’une case vide et restent dans l’eau",
+      "passed": true,
+      "checkedSupportMotions": 5
+    },
+    {
+      "label": "N7 : le passage conserve son appui pour les partenaires après la Barde",
+      "passed": true,
+      "support": {
+        "x": 16,
+        "y": 10
+      },
+      "platformActive": true
+    },
+    {
+      "label": "N8 : depuis le poste gauche, le sort dépose la réserve une case trop tôt",
+      "passed": true,
+      "wrongDeposit": {
+        "x": 11,
+        "y": 7
+      },
+      "requiredDeposit": {
+        "x": 12,
+        "y": 7
+      }
+    },
+    {
+      "label": "N8 : la dernière commande ne peut être abordée par le haut dans l’état préparé",
+      "passed": true,
+      "upperApproach": "unsupported water",
+      "rayRemainsTransparent": true
+    },
+    {
+      "label": "N8 : depuis le bas, la visée traverse cette eau et reprend le poids supérieur",
+      "passed": true,
+      "target": {
+        "x": 12,
+        "y": 5
+      },
+      "lastCell": {
+        "x": 12,
+        "y": 7
+      }
+    },
+    {
+      "label": "N8 : le miroir occupe la quatrième approche",
+      "passed": true,
+      "rightApproach": "mirror"
+    },
+    {
+      "label": "N8 : reculer le poste du Barde fait suivre un poids qui devait rester",
+      "passed": true,
+      "extraMovedStone": {
+        "from": {
+          "x": 10,
+          "y": 7
+        },
+        "to": {
+          "x": 11,
+          "y": 7
+        }
+      },
+      "compositionIncomplete": true
+    },
+    {
+      "label": "N8 : reprendre le miroir tandis que la Barde reste proche expose le dernier poids",
+      "passed": true,
+      "earlyMirrorPull": true,
+      "bardStillInRange": true,
+      "lastWeightMoves": true,
+      "detail": "Le Voleur contourne le coude en entraînant la Barde de deux cases sans chant, puis reprend le miroir ; le pas droit suivant de la Barde déplace le poids."
+    },
+    {
+      "label": "N8 : le chant utile entraîne le Magicien sans lancer son sort ni déplacer de poids",
+      "passed": true,
+      "songHeroMoves": 1,
+      "songStoneMoves": 0,
+      "bentSwaps": 1
+    },
+    {
+      "label": "N6 : variante gagnante — Garage du miroir une case plus bas",
+      "passed": true,
+      "inputs": 118,
+      "selections": 15
+    },
+    {
+      "label": "N7 : variante gagnante — Stationnement intermédiaire sûr, puis livraison entrelacée avec la traction du miroir",
+      "passed": true,
+      "inputs": 114,
+      "selections": 19
+    },
+    {
+      "label": "N8 : variante gagnante — Extraction du bloc inférieur avant celle du bloc supérieur",
+      "passed": true,
+      "inputs": 131,
+      "selections": 13
+    }
+  ],
+  "passed": 29,
+  "main": [
+    {
+      "id": "ss24-06",
+      "title": "Trois postes, un seul retour",
+      "metrics": {
+        "actions": 122,
+        "selections": 15,
+        "merchantPushes": 2,
+        "thiefPulls": 14,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 8,
+        "swaps": 1,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 4,
+        "groupSongs": 1,
+        "songHeroMoves": 1,
+        "songStoneMoves": 3,
+        "songMonsterMoves": 1,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 11,
+        "mirrorMoves": 8,
+        "monsterMoves": 1,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "ss24-07",
+      "title": "La place qui restera sûre",
+      "metrics": {
+        "actions": 92,
+        "selections": 11,
+        "merchantPushes": 9,
+        "thiefPulls": 9,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 9,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 11,
+        "groupSongs": 8,
+        "songHeroMoves": 18,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 5,
+        "partnerMoves": 18,
+        "stoneMoves": 10,
+        "mirrorMoves": 9,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "ss24-08",
+      "title": "Le dernier pas sans échange",
+      "metrics": {
+        "actions": 141,
+        "selections": 13,
+        "merchantPushes": 3,
+        "thiefPulls": 11,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 6,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 1,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 8,
+        "mirrorMoves": 6,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    }
+  ],
+  "variations": [
+    {
+      "level": 6,
+      "label": "Garage du miroir une case plus bas",
+      "commands": "CUUURDDDDLLRRRRRRULLLLULDDDLDDDLLLCCCURRRRRRRRDDCCCRCCCUCRRRDDDDCUUULLLUULLLUUULLCUUUUUUURRUUULCUUUCLUUUUUUUULUULLLUUU",
+      "metrics": {
+        "actions": 118,
+        "selections": 15,
+        "merchantPushes": 2,
+        "thiefPulls": 12,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 6,
+        "swaps": 1,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 4,
+        "groupSongs": 1,
+        "songHeroMoves": 1,
+        "songStoneMoves": 3,
+        "songMonsterMoves": 1,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 11,
+        "mirrorMoves": 6,
+        "monsterMoves": 1,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 7,
+      "label": "Stationnement intermédiaire sûr, puis livraison entrelacée avec la traction du miroir",
+      "commands": "CRRRRDDLLLLLCCCRRRCRRRRURURRRRRDLLDLLLLLLLLCCCRRRRRRCCCDDCCCDDCRRRDDDRCURRRDRRRDCDRRRRRRRRRRDRRRRDCUUUUCUUUUUUUUUU",
+      "metrics": {
+        "actions": 114,
+        "selections": 19,
+        "merchantPushes": 9,
+        "thiefPulls": 9,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 9,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 11,
+        "groupSongs": 8,
+        "songHeroMoves": 18,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 5,
+        "partnerMoves": 18,
+        "stoneMoves": 10,
+        "mirrorMoves": 9,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "level": 8,
+      "label": "Extraction du bloc inférieur avant celle du bloc supérieur",
+      "commands": "RRRDDDDDDLLLLLLLCRRUULDDRRRUUUUDDRDRRLLLDLDLDDLLLLLCLUCRCCCRCRRUUUUUUUURRCCCRURUCCUUURRRRRRRRRRRRURRUUUUUUCUUURRRRRRRRRUULUUURURRRU",
+      "metrics": {
+        "actions": 131,
+        "selections": 13,
+        "merchantPushes": 3,
+        "thiefPulls": 11,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 6,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 1,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 8,
+        "mirrorMoves": 6,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    }
+  ],
+  "limits": [
+    "Les témoins établissent la victoire, pas une longueur minimale.",
+    "Les contre-branches portent sur les états et actions indiqués ; elles ne prouvent pas l’absence de toute autre solution.",
+    "La contrainte de dernier pas de N8 est vérifiée dans la composition préparée ; préparer le Magicien plus tôt demeure une piste légitime.",
+    "Les variantes de N6 et N8 changent un stationnement ou un ordre d’extraction ; celle de N7 entrelace deux préparations qui peuvent être anticipées séparément.",
+    "Aucun solveur ni script d’auteur ne doit être importé dans le bundle jouable."
+  ]
+}

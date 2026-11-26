@@ -64,19 +64,22 @@ function checkPhases(world,detail,label){
   checkActors(world,phase.before,label+' before '+phase.kind);checkActors(world,phase.after,label+' after '+phase.kind);
   if(phase.kind==='push'){
    const active=phase.before.heroes[phase.before.active],first=phase.moves[0],piece=phase.moves[1];
-   assert.ok(['merchant','warrior'].includes(active.kind),label+': active role causes the handling');
-   if(active.kind==='warrior')assert.ok(phase.moves.length>=2,label+': Warrior moves a nonempty contiguous file');
-   else assert.equal(phase.moves.length,2,label+': Merchant handles one occupant');
+   assert.equal(active.kind,'merchant',label+': only the Merchant causes a frontal push');
+   assert.equal(phase.moves.length,2,label+': Merchant handles one occupant');
    assert.equal(first.actor,'hero');assert.deepEqual(first.from,active.at);
    const dx=first.to.x-first.from.x,dy=first.to.y-first.from.y;
    assert.deepEqual(piece.from,{x:active.at.x+dx,y:active.at.y+dy},label+': one frontal occupant');
    assert.deepEqual(piece.to,{x:piece.from.x+dx,y:piece.from.y+dy});
    assert.notEqual(piece.actor,'support',label+': submerged supports cannot be handled directly');
-   if(active.kind==='warrior')for(const [i,moved]of phase.moves.slice(1).entries()){
-    assert.deepEqual(moved.from,{x:active.at.x+(i+1)*dx,y:active.at.y+(i+1)*dy},label+': contiguous ordered Warrior file');
-    assert.deepEqual(moved.to,{x:moved.from.x+dx,y:moved.from.y+dy});
-    assert.notEqual(moved.actor,'support',label+': a submerged support is never in a pushed file');
-   }
+  }
+  if(phase.kind==='pull'){
+   const active=phase.before.heroes[phase.before.active];assert.equal(active.kind,'thief',label+': only the Thief causes a rear pull');
+   assert.equal(phase.moves.length,2,label+': Thief handles one immediately rear occupant');
+   const [walker,piece]=phase.moves;assert.equal(walker.actor,'hero');assert.deepEqual(walker.from,active.at);
+   const dx=walker.to.x-walker.from.x,dy=walker.to.y-walker.from.y;
+   assert.deepEqual(piece.from,{x:active.at.x-dx,y:active.at.y-dy},label+': one immediately rear occupant');
+   assert.deepEqual(piece.to,active.at,label+': the pulled occupant takes the vacated tile');
+   assert.notEqual(piece.actor,'support',label+': submerged supports cannot be pulled directly');
   }
   if(phase.kind==='swap'){
    const active=phase.before.heroes[phase.before.active];assert.equal(active.kind,'wizard');
@@ -102,7 +105,7 @@ function checkPhases(world,detail,label){
    const target=phase.moves.find(m=>m.actor==='support'&&m.from.x===old.x&&m.from.y===old.y)?.to??old;
    assert.ok(phase.after.supports.some(p=>p.x===target.x&&p.y===target.y),label+': a support persists at its translated or anchored location');
   }
-  if(['walk','push','song','piston'].includes(phase.kind)){
+  if(['walk','push','pull','song','piston'].includes(phase.kind)){
    assert.ok(phase.moves.length>0,label+': motion phase has movers');
    const first=phase.moves[0],dx=first.to.x-first.from.x,dy=first.to.y-first.from.y;
    assert.equal(Math.abs(dx)+Math.abs(dy),1,label+': movement is cardinal');

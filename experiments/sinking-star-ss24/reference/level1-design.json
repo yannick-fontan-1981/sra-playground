@@ -59,6 +59,15 @@
       },
       {
         "at": {
+          "x": 18,
+          "y": 9
+        },
+        "circuit": "relai",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
           "x": 15,
           "y": 15
         },

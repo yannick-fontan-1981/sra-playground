@@ -1,0 +1,767 @@
+{
+  "game": "SS24",
+  "success": true,
+  "levels": [
+    3,
+    4,
+    5
+  ],
+  "method": "Direct replay of authored routes, comparison of concrete local branches and complete legal alternatives. No search timeout is used as an impossibility proof.",
+  "checks": [
+    {
+      "level": 3,
+      "name": "Témoin complet : quatre rôles vivants et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 118,
+        "selections": 21,
+        "merchantPushes": 4,
+        "thiefPulls": 6,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 0,
+        "swaps": 5,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 3,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 3,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 3,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 16,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0,
+        "goalCountBeforeLastAction": 3,
+        "mapSha256": "a9714c3d527095cc709ba8186aae232d3353bffaee054e5627f14e887528f895",
+        "actionsSha256": "ca83cb70f1385df4faa1fa9139c1eef3cd441c2fc680cad032a68464c0229158"
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 4,
+      "name": "Témoin complet : quatre rôles vivants et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 85,
+        "selections": 21,
+        "merchantPushes": 4,
+        "thiefPulls": 2,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 0,
+        "swaps": 2,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 1,
+        "groupSongs": 1,
+        "songHeroMoves": 1,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 8,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0,
+        "goalCountBeforeLastAction": 3,
+        "mapSha256": "471283ce7af40706f23850a2d4403fa80d27ed9f49112816c137409ab072fe33",
+        "actionsSha256": "20fc96e279af203be39c574f0934456f06073947cb4131eb89d43676dd356238"
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Témoin complet : quatre rôles vivants et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 127,
+        "selections": 21,
+        "merchantPushes": 1,
+        "thiefPulls": 2,
+        "thiefPartnerPulls": 0,
+        "thiefMirrorPulls": 0,
+        "swaps": 2,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 1,
+        "groupSongs": 1,
+        "songHeroMoves": 2,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 4,
+        "stoneMoves": 4,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0,
+        "goalCountBeforeLastAction": 3,
+        "mapSha256": "8e1fb266facffcbfb105a91d4af42df56776d41ab95bed79b69fdd41d754539c",
+        "actionsSha256": "c27504ed3fe3a02cfb63c488a57e344c03b1318e54f43e61d3a742b07371753e"
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "La paire bloque le Marchand ; la traction ne sépare que son voisin",
+      "status": "passed",
+      "observed": {
+        "initialPushRefused": true,
+        "firstPull": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 8
+            },
+            "to": {
+              "x": 11,
+              "y": 8
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 8
+            },
+            "to": {
+              "x": 10,
+              "y": 8
+            }
+          }
+        ],
+        "pushAfterSeparation": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 7,
+              "y": 8
+            },
+            "to": {
+              "x": 8,
+              "y": 8
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 8,
+              "y": 8
+            },
+            "to": {
+              "x": 9,
+              "y": 8
+            }
+          }
+        ]
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Les caisses renvoyées masquent la Barde jusqu’à leur dégagement",
+      "status": "passed",
+      "observed": {
+        "returnedTargets": [
+          {
+            "x": 7,
+            "y": 11
+          },
+          {
+            "x": 8,
+            "y": 11
+          }
+        ],
+        "firstThiefInterception": {
+          "x": 9,
+          "y": 11
+        },
+        "crateAfterThiefReposition": {
+          "x": 8,
+          "y": 11
+        },
+        "bardAfterClearing": {
+          "x": 12,
+          "y": 11
+        }
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "La butée garde la caisse arrière pendant la dépose de la tête",
+      "status": "passed",
+      "observed": {
+        "pushBeforeSongRefused": true,
+        "bard": {
+          "x": 11,
+          "y": 10
+        },
+        "held": {
+          "x": 9,
+          "y": 8
+        },
+        "movedTo": {
+          "x": 10,
+          "y": 9
+        },
+        "wall": {
+          "x": 9,
+          "y": 9
+        }
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "La charge haute sert encore de cible puis de charge extraite au retour",
+      "status": "passed",
+      "observed": {
+        "cratesConserved": 4,
+        "returnedCharge": {
+          "x": 7,
+          "y": 8
+        },
+        "laterPulls": 4,
+        "gates": 0
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Variante gagnante : construire l’appui de la galerie basse",
+      "status": "passed",
+      "observed": {
+        "actions": 83,
+        "selections": 15,
+        "merchantPushes": 2,
+        "thiefPulls": 5,
+        "thiefPartnerPulls": 4,
+        "thiefMirrorPulls": 0,
+        "swaps": 3,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 4,
+        "groupSongs": 1,
+        "songHeroMoves": 1,
+        "songStoneMoves": 5,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 6,
+        "stoneMoves": 10,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La variante dépense une caisse dans la coupure basse et réorganise les partenaires par traction. Elle garde des échanges, une extraction et des chants ; la conservation de quatre caisses sèches et le trajet supérieur ne sont pas obligatoires.",
+      "commands": "CDDRDRCRRRCCCDLDCCUCDLLDDRRRRRUURRRUUURRRCCDDRRRRCCCULLDDRURRURRRDDRRCCRURRUURRUUUR",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 4,
+      "name": "Une traction donne une autre colonne de visée sans lancer de sort",
+      "status": "passed",
+      "observed": {
+        "initialUpRefused": true,
+        "wizardAfterPull": {
+          "x": 7,
+          "y": 8
+        },
+        "newTarget": {
+          "x": 4,
+          "y": 6
+        },
+        "ray": [
+          {
+            "x": 7,
+            "y": 7
+          },
+          {
+            "x": 7,
+            "y": 6
+          },
+          {
+            "x": 6,
+            "y": 6
+          },
+          {
+            "x": 5,
+            "y": 6
+          },
+          {
+            "x": 4,
+            "y": 6
+          }
+        ],
+        "reflections": 1
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 4,
+      "name": "L’échange direct laisse le Voleur derrière la caisse reçue",
+      "status": "passed",
+      "observed": {
+        "commands": "CCRUCCCR",
+        "thief": {
+          "x": 6,
+          "y": 8
+        },
+        "blockingCharge": {
+          "x": 7,
+          "y": 8
+        },
+        "firstExitRefused": true
+      },
+      "scope": "Ce refus concerne la sortie immédiate. Une variante complète ci-dessous réorganise les charges et récupère le Voleur."
+    },
+    {
+      "level": 4,
+      "name": "Le reflet global initial envoie le Voleur dans l’eau nue",
+      "status": "passed",
+      "observed": {
+        "command": "X",
+        "refused": false,
+        "deadHero": "thief",
+        "landing": {
+          "x": 5,
+          "y": 6
+        },
+        "cratesPreserved": true
+      },
+      "scope": "Cette activation est légale mais mortelle. Seul l’état initial est comparé ; les autres usages possibles du miroir restent autorisés."
+    },
+    {
+      "level": 4,
+      "name": "La butée sépare le chargement et le chant transporte le Marchand sans poussée",
+      "status": "passed",
+      "observed": {
+        "doublePushRefused": true,
+        "heldCharge": {
+          "x": 8,
+          "y": 9
+        },
+        "shiftedCharge": {
+          "x": 9,
+          "y": 10
+        },
+        "merchantAfter": {
+          "x": 9,
+          "y": 8
+        },
+        "phaseKinds": [
+          "song"
+        ]
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 4,
+      "name": "Le retour réemploie la caisse écartée et conserve le poids livré",
+      "status": "passed",
+      "observed": {
+        "returnSwap": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 4,
+              "y": 10
+            },
+            "to": {
+              "x": 9,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 10
+            },
+            "to": {
+              "x": 4,
+              "y": 10
+            }
+          }
+        ],
+        "weight": {
+          "x": 8,
+          "y": 12
+        },
+        "cratesConserved": 2,
+        "mirrorMoved": false,
+        "pistonPushes": 0
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 4,
+      "name": "Variante gagnante : échange direct puis récupération du Voleur",
+      "status": "passed",
+      "observed": {
+        "actions": 97,
+        "selections": 17,
+        "merchantPushes": 3,
+        "thiefPulls": 1,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 0,
+        "swaps": 3,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 9,
+        "groupSongs": 7,
+        "songHeroMoves": 8,
+        "songStoneMoves": 11,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 10,
+        "stoneMoves": 16,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "L’échange initial atteint la même colonne mais laisse le Voleur dans la niche. Neuf chants, puis une traction de partenaire, réorganisent la réception. La visée coudée, la livraison et la cible de retour restent utiles ; la traction initiale du Magicien n’est pas universellement nécessaire.",
+      "commands": "CCRUCUULRRDDLDCCRRRRDRRDDLRUUUUCCCUULLLDDDCCCDDRUUURRDDRRCUUURRDDRRRRUURRCCDDDDRRRRRRUUCCCDDDRRDD",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 5,
+      "name": "La première relève libère le chargeur sans fermer la presse",
+      "status": "passed",
+      "observed": {
+        "wizard": {
+          "x": 9,
+          "y": 12
+        },
+        "thief": {
+          "x": 10,
+          "y": 12
+        },
+        "circuitPressed": true,
+        "pistonPushes": 0
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Depuis le poste chargé, aucune flèche du Magicien ne vide simplement la commande",
+      "status": "passed",
+      "observed": {
+        "fromTurn": 25,
+        "directions": {
+          "U": {
+            "refused": true,
+            "circuitPressed": true,
+            "phases": []
+          },
+          "D": {
+            "refused": true,
+            "circuitPressed": true,
+            "phases": []
+          },
+          "L": {
+            "refused": false,
+            "circuitPressed": true,
+            "phases": [
+              "swap"
+            ]
+          },
+          "R": {
+            "refused": false,
+            "circuitPressed": true,
+            "phases": [
+              "swap"
+            ]
+          }
+        }
+      },
+      "scope": "Quatre gestes depuis cet état précis. Les déplacements ultérieurs des deux écrans peuvent modifier ces possibilités."
+    },
+    {
+      "level": 5,
+      "name": "La traction du partenaire peut aussi produire la rupture préparée",
+      "status": "passed",
+      "observed": {
+        "fromTurn": 25,
+        "command": "R",
+        "active": "thief",
+        "wizardAfter": {
+          "x": 10,
+          "y": 12
+        },
+        "phaseKinds": [
+          "pull",
+          "piston"
+        ],
+        "createdSupport": {
+          "x": 14,
+          "y": 6
+        }
+      },
+      "scope": "Ce transport ne lance aucun sort et conserve le problème du chargement puis du retrait. Une variante complète ci-dessous remplace le chant par cette traction."
+    },
+    {
+      "level": 5,
+      "name": "Une traction volontaire remplace le Voleur et laisse le chargement sur la presse",
+      "status": "passed",
+      "observed": {
+        "commands": "RCCLCCCUUUUUURRRDLDDDLDLDCRUUULLLLCCCR",
+        "circuitPressed": true,
+        "weight": {
+          "x": 9,
+          "y": 12
+        },
+        "cargoStillLoaded": true,
+        "pistonPushes": 0
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Le chant laisse les écrans en place et produit une véritable fermeture chargée",
+      "status": "passed",
+      "observed": {
+        "song": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 11,
+              "y": 14
+            },
+            "to": {
+              "x": 12,
+              "y": 14
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 9,
+              "y": 12
+            },
+            "to": {
+              "x": 10,
+              "y": 12
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 10,
+              "y": 12
+            },
+            "to": {
+              "x": 11,
+              "y": 12
+            }
+          }
+        ],
+        "piston": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 13,
+              "y": 6
+            },
+            "to": {
+              "x": 14,
+              "y": 6
+            }
+          }
+        ],
+        "createdSupport": {
+          "x": 14,
+          "y": 6
+        },
+        "rearScreenOutOfRange": true,
+        "rightScreenHeldBy": {
+          "x": 13,
+          "y": 12
+        }
+      },
+      "scope": "Conséquence de l’état ou de la branche annoncés ; aucune unicité ni optimalité affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Revenir avant le retrait du Magicien le tire dans le passage",
+      "status": "passed",
+      "observed": {
+        "commands": "RCCLCCCUUUUUURRRDLDDDLDLDCRCRCCLR",
+        "firstMoveAccepted": true,
+        "pulledWizard": {
+          "x": 10,
+          "y": 12
+        },
+        "nextMoveRefused": true
+      },
+      "scope": "Le retour immédiat reste légal mais ramène le Magicien devant le Voleur. Le témoin le range avant cette traction."
+    },
+    {
+      "level": 5,
+      "name": "La réouverture et la relève finale conservent les trois ressources",
+      "status": "passed",
+      "observed": {
+        "dryCrates": 2,
+        "supports": 1,
+        "finalWeight": {
+          "x": 9,
+          "y": 12
+        },
+        "pistonPushes": 1,
+        "circuitPressed": true
+      },
+      "scope": "Inventaire et maintien du passage sur le témoin ; le moteur n’exige pas un nombre particulier de fermetures."
+    },
+    {
+      "level": 5,
+      "name": "Une fermeture avant chargement ne construit aucun appui",
+      "status": "passed",
+      "observed": {
+        "commands": "CCCR",
+        "pressClosed": true,
+        "supportsCreated": 0,
+        "pistonPushes": 0
+      },
+      "scope": "La fermeture prématurée est légale et peut être réparée. Le test établit uniquement l’absence de dépôt quand la presse est vide."
+    },
+    {
+      "level": 5,
+      "name": "Variante gagnante : le Voleur assure la première relève par traction",
+      "status": "passed",
+      "observed": {
+        "actions": 129,
+        "selections": 21,
+        "merchantPushes": 1,
+        "thiefPulls": 3,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 1,
+        "groupSongs": 1,
+        "songHeroMoves": 2,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 4,
+        "stoneMoves": 4,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La première relève remplace le Voleur par le Magicien tiré, puis le Marchand prépare la réserve plus tard. Le chargement, la rupture chantée, la fermeture et la relève finale sont conservés.",
+      "commands": "CLUUUUUURRRRRDLDDDLDLDCCCRCCRCRCCCUUULLLLLCCCLRDDLLULCCDLUUUUUUUUURRRRDDRRCUUUUUURRRRRRRRUURRCCUUURRRRRRRRRUUCCCUUUUUUURRRRRRRRDD",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 5,
+      "name": "Variante gagnante : tirer le Magicien pour déclencher la fermeture",
+      "status": "passed",
+      "observed": {
+        "actions": 123,
+        "selections": 17,
+        "merchantPushes": 1,
+        "thiefPulls": 3,
+        "thiefPartnerPulls": 1,
+        "thiefMirrorPulls": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 0,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 2,
+        "stoneMoves": 4,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Après chargement, le Voleur tire le Magicien hors de la commande, puis contourne l’écran droit avant de rétablir le circuit. La variante n’emploie aucun chant ; elle conserve la relève, le chargement, le transport passif qui interrompt l’occupation, la fermeture et le poids final.",
+      "commands": "RCCLCCCUUUUUURRRDLDDDLDLDRCUUULLLLCCCULDLRUULLDDDLCCUUUUUUUURRRRDDRRCUUUUUURRRRRRRRUURRCCUUURRRRRRRRRUUCCCUUUUUUURRRRRRRRDD",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    }
+  ],
+  "limits": [
+    "Les témoins prouvent une résolution, sans optimalité ni unicité.",
+    "Les variantes publiées peuvent éviter un geste du témoin ; le jeu ne compte pas les capacités employées.",
+    "La marche individuelle initiale et la comparaison des terrains historiques sont qualifiées séparément par le contrôle global.",
+    "Les mécanismes de la source qui ne sont pas dans SS24 (clones, lumière orange, feu de dragon) ne sont pas importés."
+  ]
+}
