@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "tests": 102,
+  "passed": 102,
+  "failed": 0,
+  "skipped": 0,
+  "cancelled": 0,
+  "exitCode": 0,
+  "command": "node --test --test-reporter=tap tests/ss25-native.test.ts tests/custom4-native.test.ts tests/ss21-native.test.ts tests/ss22-native.test.ts tests/ss23-native.test.ts tests/ss24-native.test.ts",
+  "log": "native-tests.txt"
+}

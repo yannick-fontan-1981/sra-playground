@@ -1,0 +1,958 @@
+{
+  "spec": {
+    "id": "ss25-02",
+    "title": "Le quai à deux réceptions",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "####...####...#...##",
+      "####.T........#...##",
+      "####...####....Z..##",
+      "#.......####.##...##",
+      "#...W1o........#####",
+      "#.......###.~..#g.g#",
+      "#.......###........#",
+      "#...B..........#...#",
+      "#.......###....#g.g#",
+      "####################",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "envoi",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 5,
+            "y": 10
+          }
+        ]
+      },
+      {
+        "id": "reception",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 12,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "depot",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 15,
+            "y": 5
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 12,
+          "y": 7
+        },
+        "circuit": "envoi",
+        "direction": "N",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 4
+        },
+        "circuit": "envoi",
+        "direction": "E",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 14,
+          "y": 5
+        },
+        "circuit": "reception",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 15,
+          "y": 9
+        },
+        "circuit": "reception",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 9
+        },
+        "circuit": "depot",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "RRRRRRCRRRRRRDRCCRCCUCLULCLCRCCCRCCURDCCLRRRRRRRRRRURRDDRRCDDRRRRRURRCCLLLLLLDDDRRRRRDDRRRRRUCCCULLLLLLLDDDRRRRRDDRRRRRRDLD",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 24
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 48,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 33
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 24
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Stones, East · énigme 2",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-stones-east-solutions/",
+    "puzzles": [
+      2
+    ],
+    "objective": "Préparer le réceptionnaire avant chaque envoi, dégager le quai par échange puis conserver les deux dépôts."
+  },
+  "metrics": {
+    "actions": 123,
+    "selections": 21,
+    "warriorPushes": 7,
+    "thiefPulls": 3,
+    "thiefPartnerPulls": 1,
+    "thiefMirrorPulls": 1,
+    "swaps": 2,
+    "wizardHeroSwaps": 1,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 0,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 2,
+    "stoneMoves": 9,
+    "mirrorMoves": 9,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 2,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le convoi réunit un miroir et une caisse. Le Guerrier pousse la file jusqu’au poste latéral ; le Voleur rejoint le quai supérieur avant que la commande ferme son accès.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "envoi": false,
+        "reception": true,
+        "depot": true
+      }
+    },
+    {
+      "label": "La première fermeture déporte la caisse vers le nord et coupe en même temps la galerie d’accès au quai. Le Voleur attend déjà du bon côté de la charge.",
+      "turn": 18,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "envoi": true,
+        "reception": true,
+        "depot": true
+      }
+    },
+    {
+      "label": "La traction remonte uniquement la caisse reçue et remplace le poids du Voleur sur le relais. La baie du Magicien reste ouverte, mais le quai ne peut recevoir la seconde pièce tant que la caisse y reste.",
+      "turn": 21,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 15,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "envoi": true,
+        "reception": true,
+        "depot": true
+      }
+    },
+    {
+      "label": "Le Magicien échange avec la caisse, qui remplace son poids dans la baie distante. Il échange ensuite avec le Voleur : celui-ci reprend le relais sans reprendre la caisse, et le poste de réception est prêt pour le miroir.",
+      "turn": 25,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 10,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 11,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "envoi": true,
+        "reception": true,
+        "depot": true
+      }
+    },
+    {
+      "label": "La commande est rouverte pour charger le miroir, puis refermée. Le même poste latéral sert une seconde fois ; le poids distant est conservé.",
+      "turn": 33,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 9
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "envoi": true,
+        "reception": true,
+        "depot": true
+      }
+    },
+    {
+      "label": "Le Voleur tire le miroir sur le relais puis quitte la commande sans la libérer. Les deux charges occupent des postes distincts ; les deux passages d’arrivée peuvent rester ouverts.",
+      "turn": 41,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 11,
+            "y": 10
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 13
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 12,
+            "y": 8
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "envoi": false,
+        "reception": true,
+        "depot": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Le guide place le Voleur à l’extrémité de chaque tronçon avant la poussée et choisit le sens de traction pour préparer la suite.",
+    "changes": "Les ricochets de pierres sont remplacés par une file de caisse et de miroir poussée par le Guerrier, puis par deux transports successifs d’une presse latérale. La commande ferme aussi la galerie du réceptionnaire. La première charge doit quitter le quai sans perdre le poids de commande : l’échange la dépose dans la baie du Magicien en remplaçant son poids, et un échange de partenaires maintient le relais de réception. Le miroir peut alors être réceptionné sur ce relais. Les deux commandes finales sont séparées ; aucun projectile, chronomètre ou pouvoir de ricochet n’est importé.",
+    "limits": "La contre-branche établit la fermeture de l’accès après un envoi prématuré et la nécessité de rouvrir ce passage pour revenir à cette préparation. Elle ne prétend pas prouver une impasse définitive ni l’unicité de la route.",
+    "localChecks": [
+      {
+        "name": "Réception préparée avant envoi",
+        "observed": "Un envoi effectué avant le placement du Voleur ferme sa galerie ; son pas depuis la case voisine est refusé.",
+        "scope": "Contre-branche locale reproduite dans review-middle-ss25.mjs ; rouvrir la commande reste une récupération autorisée."
+      },
+      {
+        "name": "Le quai doit être libéré pour la deuxième charge",
+        "observed": "Sans les échanges intermédiaires, la caisse reçue occupe encore la case où le Voleur doit se placer pour extraire le miroir.",
+        "scope": "État obtenu par les mêmes deux envois, sans les échanges ; pas une preuve d’impasse définitive."
+      },
+      {
+        "name": "Absence de poste inférieur de poussée",
+        "observed": "L’eau nue sous le poste latéral interdit au Guerrier de s’y placer par marche pour remplacer directement cet envoi.",
+        "scope": "Test du pas vers cette case, appuis et ressources inchangés."
+      }
+    ]
+  }
+}

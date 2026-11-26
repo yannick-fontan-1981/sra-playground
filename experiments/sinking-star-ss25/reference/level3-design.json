@@ -1,0 +1,1227 @@
+{
+  "spec": {
+    "id": "ss25-03",
+    "title": "Les deux formes du pont",
+    "mode": "quartet",
+    "rows": [
+      "###################",
+      "###################",
+      "#......############",
+      "#......#.T..#######",
+      "#......~....##....#",
+      "#...Woos....##.g.g#",
+      "#......~~~####....#",
+      "#......~~.........#",
+      "#......~~~####....#",
+      "#......s.Z..##.g.g#",
+      "#......~....##....#",
+      "#..B...#....#######",
+      "###################",
+      "###################"
+    ],
+    "circuits": [
+      {
+        "id": "haut",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 10,
+            "y": 4
+          }
+        ]
+      },
+      {
+        "id": "bas",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 10,
+            "y": 10
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 11,
+          "y": 7
+        },
+        "circuit": "haut",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 13,
+          "y": 7
+        },
+        "circuit": "bas",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CDRCCCRRRRCURDCUCCLLUUULCULLLDDLLDDDDRRDRRCCCDDDDDDDRRRRLLLUUUUUUULCDRUCLUULLULCCCULLLLLUUUUUULLLLUCCRRURUCCDDDDDDDRRRLLUUUUUULUCCUUUURDDRRRRRRRRRDDRRRCDDDDDRRRRRRRRRUURRRCDDDDDRRRRRRRRRRRRDDRCDDDDDRRRRRRRRRRRURU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 42
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 36,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "label": "Adaptation · Heroes and Stones, East · énigme 4",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-stones-east-solutions/",
+    "puzzles": [
+      4
+    ],
+    "objective": "Employer deux appuis séparés pour livrer les charges puis les réunir sans perdre les dépôts ni les partenaires."
+  },
+  "metrics": {
+    "actions": 212,
+    "selections": 26,
+    "warriorPushes": 5,
+    "thiefPulls": 6,
+    "thiefPartnerPulls": 4,
+    "thiefMirrorPulls": 0,
+    "swaps": 1,
+    "wizardHeroSwaps": 0,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 5,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 5,
+    "partnerMoves": 4,
+    "stoneMoves": 12,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Les deux appuis sont encore séparés. Le Voleur attend dans la baie nord avant l’arrivée de la file, extrait sa tête sur la commande haute puis laisse la seconde caisse dans la ligne verticale.",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "haut": true,
+        "bas": false
+      }
+    },
+    {
+      "label": "Le Magicien échange depuis la baie basse à travers la colonne d’eau. La caisse arrière du convoi rejoint ainsi le second atelier, sans transformer cette charge en appui.",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 11,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "haut": true,
+        "bas": false
+      }
+    },
+    {
+      "label": "La seconde charge est livrée par poussée puis traction vers le sud. Les deux relais restent lestés, mais les appuis qui ont servi aux livraisons ne forment toujours aucun passage vers les destinations.",
+      "turn": 99,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 7,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "haut": true,
+        "bas": true
+      }
+    },
+    {
+      "label": "La Barde remonte l’appui inférieur, le décale vers la droite puis le remonte encore. Le premier appui reste au nord, hors de portée pendant ces trois gestes.",
+      "turn": 106,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "haut": true,
+        "bas": true
+      }
+    },
+    {
+      "label": "Le Voleur retire la Barde du bord du bassin sans chanter : le premier appui rangé ne la suit pas pendant son changement de poste.",
+      "turn": 128,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "haut": true,
+        "bas": true
+      }
+    },
+    {
+      "label": "Depuis la rive supérieure, la Barde abaisse le second appui. Les deux pièces deviennent voisines dans le chenal central ; les appuis séparés de l’aller sont maintenant un pont continu pour le départ commun.",
+      "turn": 137,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 5,
+            "y": 5
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 2,
+            "y": 5
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 13
+        },
+        {
+          "x": 10,
+          "y": 7
+        }
+      ],
+      "supports": [
+        {
+          "x": 7,
+          "y": 10
+        },
+        {
+          "x": 8,
+          "y": 10
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "haut": true,
+        "bas": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Le guide distingue une disposition espacée des plateformes pour aller et revenir d’une livraison, puis une disposition accolée pour disposer du poste nécessaire à une autre poussée.",
+    "changes": "Deux appuis immergés desservent d’abord des baies séparées, au nord et au sud. Un convoi de deux caisses est fractionné : la tête est extraite vers le haut, la seconde charge passe à travers la colonne d’eau par échange, puis est extraite vers le bas. Les poids maintiennent deux portes tandis que les mêmes appuis doivent quitter les deux traversées initiales et former un pont central de deux cases. La Barde réalise les déplacements, puis le Voleur la dégage sans entraîner l’appui déjà rangé. Aucun courant, ricochet, Druide ou empilement supplémentaire n’est ajouté.",
+    "limits": "La revue compare des configurations et des contre-gestes précis du témoin. Elle établit que les deux traversées latérales ne franchissent pas le chenal central, sans déclarer la route optimale ni exclure toute autre coopération légale.",
+    "localChecks": [
+      {
+        "name": "Deux configurations des mêmes appuis",
+        "observed": "Après les livraisons, les deux appuis séparés ne soutiennent pas le chenal central ; le pas de traversée est refusé. Les deux appuis deviennent ensuite voisins sans nouvelle caisse immergée.",
+        "scope": "Ressources inchangées et états de la route reproduits ; pas d’exclusion de toute stratégie différente."
+      },
+      {
+        "name": "Quitter le premier appui sans le reprendre",
+        "observed": "Le départ volontaire de la Barde fait remonter l’appui déjà rangé, tandis que sa traction passive le conserve.",
+        "scope": "Comparaison d’un contre-geste avec la relève effectivement exécutée."
+      }
+    ]
+  }
+}

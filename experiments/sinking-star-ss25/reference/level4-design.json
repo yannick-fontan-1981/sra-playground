@@ -1,0 +1,1207 @@
+{
+  "spec": {
+    "id": "ss25-04",
+    "title": "La cale que l’on reprend",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "####################",
+      "#........####......#",
+      "#........####......#",
+      "#....WooT..........#",
+      "#........#~##...B..#",
+      "#.........o~~Z.....#",
+      "#.........~##......#",
+      "#.........1......###",
+      "#.........###.##.###",
+      "#.............##.###",
+      "#.........####g...g#",
+      "#.........####.....#",
+      "#.........####.....#",
+      "##############g...g#",
+      "####################"
+    ],
+    "circuits": [
+      {
+        "id": "traction",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 9,
+            "y": 5
+          }
+        ]
+      },
+      {
+        "id": "releve",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 13,
+            "y": 7
+          }
+        ]
+      },
+      {
+        "id": "dernier",
+        "color": 14,
+        "buttons": [
+          {
+            "x": 14,
+            "y": 3
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 10,
+          "y": 11
+        },
+        "circuit": "releve",
+        "direction": "E",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 9
+        },
+        "circuit": "traction",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 10
+        },
+        "circuit": "releve",
+        "direction": "S",
+        "closedWhen": "released"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 11
+        },
+        "circuit": "dernier",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 11,
+          "y": 7
+        },
+        "circuit": "releve",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 12,
+          "y": 7
+        },
+        "circuit": "releve",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "RCRCLUXRRRUURRRRCCURDDLDRRRRRRLLLDDDDDCRURRUUULDUURDDDDRRRCCUUCCCDDDLLUULLCCCUULRDDDDLLDLLLDDCCDDDDLDDDDDDDRRCCCRDDDDDRRDDDLLCCCUURRRDDDDDDLLCCCURRRRUURRRDDDRR",
+  "actions": [
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 21
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 5
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 21
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 24
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 45,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 51
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 42
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "label": "Adaptation · Heroes and Light · énigme 29",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/",
+    "puzzles": [
+      29
+    ],
+    "objective": "Extraire une cale qui masque le transport, lâcher une charge sans la reprendre, puis remplacer et réemployer cette même cale."
+  },
+  "metrics": {
+    "actions": 159,
+    "selections": 24,
+    "warriorPushes": 9,
+    "thiefPulls": 4,
+    "thiefPartnerPulls": 1,
+    "thiefMirrorPulls": 0,
+    "swaps": 2,
+    "wizardHeroSwaps": 1,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 2,
+    "groupSongs": 2,
+    "songHeroMoves": 2,
+    "songStoneMoves": 2,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 5,
+    "stoneMoves": 17,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 1,
+    "heroReflections": 1,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier avance les deux caisses et le Voleur ensemble. La traction suivante ne prend que la caisse voisine : elle reste sur la première commande, tandis que la caisse arrière est conservée pour la relève.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 10,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "traction": true,
+        "releve": true,
+        "dernier": false
+      }
+    },
+    {
+      "label": "La cale qui masquait le miroir remplace le poids du Magicien dans la baie droite. Elle maintient la passerelle hydraulique et le retour inférieur. Le Magicien échange ensuite avec le Voleur, qui quitte la charge sans la tirer.",
+      "turn": 6,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 10,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "traction": true,
+        "releve": true,
+        "dernier": false
+      }
+    },
+    {
+      "label": "Le reflet emporte le Voleur depuis l’îlot intermédiaire vers la rive droite. La caisse restée sur la commande haute ne suit pas ; sans extraction de la cale, c’est cette dernière que le miroir aurait prise.",
+      "turn": 7,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 6
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 10,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 7,
+          "y": 6
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "traction": true,
+        "releve": true,
+        "dernier": false
+      }
+    },
+    {
+      "label": "La caisse arrière descend dans la galerie de service, franchit les deux cases hydrauliques puis pousse la cale en file. Elle remplace son poids sans interrompre la passerelle : la cale peut maintenant servir ailleurs.",
+      "turn": 38,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 12,
+            "y": 10
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 8
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "traction": true,
+        "releve": true,
+        "dernier": false
+      }
+    },
+    {
+      "label": "Le Voleur extrait la cale libérée vers le haut puis rejoint la bordure droite du chant. La relève reste en place, et la dernière charge est préparée pour une remontée par le chant depuis le flanc.",
+      "turn": 58,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 6
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "traction": true,
+        "releve": true,
+        "dernier": false
+      }
+    },
+    {
+      "label": "Deux chants depuis la rive droite remontent la cale sur le dernier bouton et rapprochent le Voleur de son prochain poste. La caisse de relève reste hors de portée, tandis que le mur retient le Magicien.",
+      "turn": 62,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 18,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 4
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "traction": true,
+        "releve": true,
+        "dernier": true
+      }
+    },
+    {
+      "label": "Le Voleur retire la Barde de sa portée de travail. Son prochain déplacement ne reprend plus la cale ; les trois poids restent en place pour le départ des quatre héros.",
+      "turn": 93,
+      "heroes": [
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 13
+          }
+        },
+        {
+          "kind": "thief",
+          "at": {
+            "x": 13,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 4
+        }
+      ],
+      "supports": [],
+      "mirrors": [
+        {
+          "at": {
+            "x": 10,
+            "y": 10
+          },
+          "facing": "NE"
+        }
+      ],
+      "monsters": [],
+      "circuits": {
+        "traction": true,
+        "releve": true,
+        "dernier": true
+      }
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Une pierre bloque un faisceau pendant la traction d’une autre charge. Le transport violet permet au Voleur de quitter une traction sans entraîner sa prise ; la première cale est ensuite reprise pour préparer une autre ligne et les derniers dépôts.",
+    "changes": "Le faisceau violet devient une succession d’échange et de reflet, avec une vraie première cible visible. Une cale sur l’îlot masque d’abord le Voleur : le Magicien la dépose sur un relais, puis extrait le Voleur sans reprendre la caisse qu’il vient de livrer. Le reflet termine ce transport passif. La même cale maintient ensuite deux plateformes jusqu’à ce que le Guerrier la pousse en file avec la caisse de relève : le poids est remplacé sans coupure. Enfin le Voleur et la Barde réemploient la cale sur la dernière commande ; une traction passive retire la Barde sans déplacer son dernier dépôt. Les lumières violettes, leur vitesse et leurs autres pouvoirs ne sont pas importés.",
+    "limits": "Les contrefactuels portent sur le premier reflet masqué, la traction qui reprendrait une charge, le retrait du poids avant la relève et la reprise du dernier poids par un départ chanté. Ils décrivent des états réellement rejoués, sans affirmer que tous les autres ordres légaux sont impossibles.",
+    "localChecks": [
+      {
+        "name": "La première cible masque le Voleur",
+        "observed": "Le reflet tenté avant l’extraction de la cale transporte cette dernière et laisse le Voleur en place.",
+        "scope": "Contre-branche depuis la première livraison ; effet local du choix de la cible la plus proche."
+      },
+      {
+        "name": "Transport passif pour lâcher la charge",
+        "observed": "Le pas volontaire du Voleur reprend le poids du premier bouton ; l’échange suivi du reflet laisse ce poids sur place.",
+        "scope": "Comparaison de gestes réellement exécutés depuis le même état de livraison."
+      },
+      {
+        "name": "Remplacer le poids avant de le récupérer",
+        "observed": "Une extraction anticipée de la cale retire les deux plateformes. La poussée de file y substitue la caisse de relève sans retrait.",
+        "scope": "Deux branches locales comparées ; aucune conclusion d’impasse définitive."
+      },
+      {
+        "name": "Conserver le dernier dépôt",
+        "observed": "Descendre volontairement avec la Barde reprend la cale ; la retirer par traction permet de partir avec les trois commandes lestées.",
+        "scope": "Contre-geste et départ passif reproduits sur les cartes finales."
+      }
+    ]
+  }
+}

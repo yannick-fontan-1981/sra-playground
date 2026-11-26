@@ -530,16 +530,16 @@ button:focus-visible,a:focus-visible,canvas:focus-visible,select:focus-visible{o
 .native-game-tutorial-content li.done::before{content:'✓';color:#83cdae}
 .native-hero-controls{flex-direction:row;flex-wrap:wrap;margin-top:10px}
 #ss16-role-controls .utility-button,.native-trio-touch-controls .utility-button{min-height:44px;flex:1 1 auto}
-#ss21-role-controls .utility-button,#ss22-role-controls .utility-button,#ss23-role-controls .utility-button,#ss24-role-controls .utility-button{flex:1 1 calc(50% - 8px)}
-#ss21-room-help .native-game-tutorial-content,#ss22-room-help .native-game-tutorial-content,#ss23-room-help .native-game-tutorial-content,#ss24-room-help .native-game-tutorial-content{font-size:1rem}
-#ss21-tutorial summary,#ss22-tutorial summary,#ss23-tutorial summary,#ss24-tutorial summary{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4rem}
-#ss21-tutorial .lesson-count,#ss22-tutorial .lesson-count,#ss23-tutorial .lesson-count,#ss24-tutorial .lesson-count{font-size:.875rem;color:var(--muted)}
-#ss21-room-help .teaching-note,#ss22-room-help .teaching-note,#ss23-room-help .teaching-note,#ss24-room-help .teaching-note{margin-top:.75rem}
+#ss21-role-controls .utility-button,#ss22-role-controls .utility-button,#ss23-role-controls .utility-button,#ss24-role-controls .utility-button,#ss25-role-controls .utility-button{flex:1 1 calc(50% - 8px)}
+#ss21-room-help .native-game-tutorial-content,#ss22-room-help .native-game-tutorial-content,#ss23-room-help .native-game-tutorial-content,#ss24-room-help .native-game-tutorial-content,#ss25-room-help .native-game-tutorial-content{font-size:1rem}
+#ss21-tutorial summary,#ss22-tutorial summary,#ss23-tutorial summary,#ss24-tutorial summary,#ss25-tutorial summary{display:flex;flex-wrap:wrap;justify-content:space-between;gap:.4rem}
+#ss21-tutorial .lesson-count,#ss22-tutorial .lesson-count,#ss23-tutorial .lesson-count,#ss24-tutorial .lesson-count,#ss25-tutorial .lesson-count{font-size:.875rem;color:var(--muted)}
+#ss21-room-help .teaching-note,#ss22-room-help .teaching-note,#ss23-room-help .teaching-note,#ss24-room-help .teaching-note,#ss25-room-help .teaching-note{margin-top:.75rem}
 .native-hero-controls button[aria-pressed="true"]{outline:2px solid #ef4141;outline-offset:1px}
 .native-hero-controls button:is([data-ss06-hero="merchant"],[data-ss07-hero="merchant"],[data-ss08-hero="merchant"],[data-ss09-hero="merchant"],[data-ss16-hero="merchant"],[data-ss18-hero="merchant"],[data-ss20-hero="merchant"],[data-ss21-hero="merchant"],[data-ss22-hero="merchant"],[data-ss23-hero="merchant"],[data-ss24-hero="merchant"])[aria-pressed="true"]{outline-color:#f59e29}
-.native-hero-controls button:is([data-ss07-hero="thief"],[data-ss10-hero="thief"],[data-ss13-hero="thief"],[data-ss14-hero="thief"],[data-ss16-hero="thief"],[data-ss17-hero="thief"],[data-ss20-hero="thief"],[data-ss21-hero="thief"],[data-ss22-hero="thief"],[data-ss24-hero="thief"])[aria-pressed="true"]{outline-color:#50b848}
-.native-hero-controls button:is([data-ss08-hero="wizard"],[data-ss11-hero="wizard"],[data-ss13-hero="wizard"],[data-ss15-hero="wizard"],[data-ss17-hero="wizard"],[data-ss18-hero="wizard"],[data-ss19-hero="wizard"],[data-ss21-hero="wizard"],[data-ss23-hero="wizard"],[data-ss24-hero="wizard"])[aria-pressed="true"]{outline-color:#9e6bdb}
-.native-hero-controls button:is([data-ss09-hero="bard"],[data-ss12-hero="bard"],[data-ss14-hero="bard"],[data-ss15-hero="bard"],[data-ss18-hero="bard"],[data-ss19-hero="bard"],[data-ss20-hero="bard"],[data-ss22-hero="bard"],[data-ss23-hero="bard"],[data-ss24-hero="bard"])[aria-pressed="true"]{outline-color:#e03bca}
+.native-hero-controls button:is([data-ss07-hero="thief"],[data-ss10-hero="thief"],[data-ss13-hero="thief"],[data-ss14-hero="thief"],[data-ss16-hero="thief"],[data-ss17-hero="thief"],[data-ss20-hero="thief"],[data-ss21-hero="thief"],[data-ss22-hero="thief"],[data-ss24-hero="thief"],[data-ss25-hero="thief"])[aria-pressed="true"]{outline-color:#50b848}
+.native-hero-controls button:is([data-ss08-hero="wizard"],[data-ss11-hero="wizard"],[data-ss13-hero="wizard"],[data-ss15-hero="wizard"],[data-ss17-hero="wizard"],[data-ss18-hero="wizard"],[data-ss19-hero="wizard"],[data-ss21-hero="wizard"],[data-ss23-hero="wizard"],[data-ss24-hero="wizard"],[data-ss25-hero="wizard"])[aria-pressed="true"]{outline-color:#9e6bdb}
+.native-hero-controls button:is([data-ss09-hero="bard"],[data-ss12-hero="bard"],[data-ss14-hero="bard"],[data-ss15-hero="bard"],[data-ss18-hero="bard"],[data-ss19-hero="bard"],[data-ss20-hero="bard"],[data-ss22-hero="bard"],[data-ss23-hero="bard"],[data-ss24-hero="bard"],[data-ss25-hero="bard"])[aria-pressed="true"]{outline-color:#e03bca}
 .duo-board-legend{display:flex;flex-wrap:wrap;gap:.5rem 1rem}
 .duo-board-legend>span:not([hidden]){display:inline-flex;align-items:center;gap:.375rem}
 .duo-board-legend svg,.duo-board-legend .swatch{width:.875rem;height:.875rem;flex:none}
