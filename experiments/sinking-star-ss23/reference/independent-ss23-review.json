@@ -1,0 +1,1060 @@
+{
+  "game": "SS23",
+  "success": true,
+  "levels": [
+    {
+      "level": 1,
+      "title": "Le conservatoire des échanges",
+      "actions": 221,
+      "selections": 34,
+      "mapSha256": "56836c54f294caaa8283a9e0074e2acd950090fe45adfba89bdae65e0f4eb768",
+      "actionsSha256": "48a3b08c5a443ab5e6022e186ff08fea976c365c26ac4ffe50f12ef5c95e6b39",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 16,
+            "y": 14
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 18,
+            "y": 14
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 16,
+            "y": 17
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 18,
+            "y": 17
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "level": 2,
+      "title": "La grille des places libres",
+      "actions": 91,
+      "selections": 12,
+      "mapSha256": "1068bc796ff813c72f8195c028ff9ce5e5ed3b1a7089431adfccb847965560eb",
+      "actionsSha256": "edde494357682325e5e5b644ffc3cb854fb1df6feaaac0e61fff111f5d2f33b9",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 13,
+            "y": 6
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 15,
+            "y": 12
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 15,
+            "y": 7
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 13,
+            "y": 10
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        9
+      ]
+    },
+    {
+      "level": 3,
+      "title": "La case de trop",
+      "actions": 43,
+      "selections": 12,
+      "mapSha256": "63ea786e52e66d751dde8f3e43e50b4002e51ee9b6ffdd99568376fad3096005",
+      "actionsSha256": "8bfa86f36c98d3f04229b6e840b122867f1f8beb6016c59e3b28eea3ae0b91d3",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 13,
+            "y": 7
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        4
+      ]
+    },
+    {
+      "level": 4,
+      "title": "Le poste emprunté",
+      "actions": 132,
+      "selections": 17,
+      "mapSha256": "739687591ca9af4bab358a5e40d624f18cc83339cee7870197d5c12838299af3",
+      "actionsSha256": "9f284f33d0db16c06ea28f3c250625a8ed927728b7e708bab27310bd536e6e78",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "level": 5,
+      "title": "Les deux côtés du sort",
+      "actions": 50,
+      "selections": 16,
+      "mapSha256": "41e84beb5e652f741c1e4f84ea79f4b2bc5f048214db996c46b4430003d66002",
+      "actionsSha256": "98be036e08e374cd9cf4f4a9f34d1d366090c22792cf05f48dde0821f95c5e5f",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 15,
+            "y": 5
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 7,
+            "y": 4
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 5,
+            "y": 12
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 8,
+            "y": 5
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1
+      ]
+    },
+    {
+      "level": 6,
+      "title": "Le poste derrière la file",
+      "actions": 126,
+      "selections": 28,
+      "mapSha256": "dd027caaaf63311f0beeba6ffb1ee07b936191b08946b61db53cee1971b3ef83",
+      "actionsSha256": "36e6f53d47f66840658a3f0aeb28e24667a9531aedf8ee4204291bd173cdf4fc",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 4,
+            "y": 3
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 2,
+            "y": 3
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 1,
+            "y": 3
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        2
+      ]
+    },
+    {
+      "level": 7,
+      "title": "Le pas qui laisse un appui",
+      "actions": 172,
+      "selections": 33,
+      "mapSha256": "a5474a2167eb6beae1741dc6d4fa86d1a5676a20d2c2bd966e5af74448e674b5",
+      "actionsSha256": "2b7a0535719f1072e2052c068cae61045cf18d99dc97abcc4a57fedbc20fc1df",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 17,
+            "y": 4
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 18,
+            "y": 4
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 18,
+            "y": 5
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        1
+      ]
+    },
+    {
+      "level": 8,
+      "title": "La forme et la place vide",
+      "actions": 112,
+      "selections": 21,
+      "mapSha256": "035f4fc781953d28aca5ddcb139c3b70adf78aea8c51049f09bdbd6ec93cde02",
+      "actionsSha256": "02982f2e35fb75b43671f1ff93679e3fb38878cf2b73ef3c400815cc9978f761",
+      "complete": true,
+      "refusedActions": 0,
+      "deaths": 0,
+      "goalCountBeforeLastAction": 3,
+      "goalCountAfterLastAction": 4,
+      "finalPositions": [
+        {
+          "role": "merchant",
+          "at": {
+            "x": 4,
+            "y": 18
+          }
+        },
+        {
+          "role": "warrior",
+          "at": {
+            "x": 3,
+            "y": 17
+          }
+        },
+        {
+          "role": "wizard",
+          "at": {
+            "x": 2,
+            "y": 18
+          }
+        },
+        {
+          "role": "bard",
+          "at": {
+            "x": 3,
+            "y": 18
+          }
+        }
+      ],
+      "initialStoneComponents": [
+        5,
+        3,
+        1
+      ]
+    }
+  ],
+  "checks": [
+    {
+      "level": 1,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 221,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 1,
+      "name": "Tutorial transports distinguish voluntary powers from imposed movement",
+      "status": "passed",
+      "observed": {
+        "mixedFile": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 2,
+              "y": 2
+            },
+            "to": {
+              "x": 3,
+              "y": 2
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 3,
+              "y": 2
+            },
+            "to": {
+              "x": 4,
+              "y": 2
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 4,
+              "y": 2
+            },
+            "to": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 2
+            },
+            "to": {
+              "x": 6,
+              "y": 2
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 6,
+              "y": 2
+            },
+            "to": {
+              "x": 7,
+              "y": 2
+            }
+          }
+        ],
+        "sungWizard": {
+          "actor": "hero",
+          "from": {
+            "x": 14,
+            "y": 6
+          },
+          "to": {
+            "x": 15,
+            "y": 6
+          }
+        },
+        "silentBardSwapTurns": [
+          4,
+          22,
+          70,
+          88,
+          100
+        ],
+        "monstersRemoved": 4,
+        "supportMoves": 5
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 2,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 91,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 2,
+      "name": "The dense grid is crossed and its work places are reused",
+      "status": "passed",
+      "observed": {
+        "cratesConserved": 9,
+        "initialComponents": [
+          9
+        ],
+        "silentMerchantPushes": 6,
+        "crateSwaps": 9,
+        "lastSong": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 12,
+              "y": 10
+            },
+            "to": {
+              "x": 13,
+              "y": 10
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 11,
+              "y": 8
+            },
+            "to": {
+              "x": 12,
+              "y": 8
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 13,
+              "y": 10
+            },
+            "to": {
+              "x": 14,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 10,
+              "y": 8
+            },
+            "to": {
+              "x": 11,
+              "y": 8
+            }
+          }
+        ],
+        "gates": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 3,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 43,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 3,
+      "name": "The same four crates form two successive working files",
+      "status": "passed",
+      "observed": {
+        "filePushes": 3,
+        "songs": 4,
+        "cratesConserved": 4,
+        "alternativeActions": 37
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 4,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 132,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 4,
+      "name": "The Bard is sent into the work station and all three charges are reused",
+      "status": "passed",
+      "observed": {
+        "bardStation": {
+          "x": 12,
+          "y": 5
+        },
+        "unchangedStocksDuringSwap": true,
+        "finalSupports": [
+          {
+            "x": 8,
+            "y": 12
+          },
+          {
+            "x": 9,
+            "y": 12
+          },
+          {
+            "x": 10,
+            "y": 12
+          }
+        ],
+        "initialCrates": 3
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 5,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 50,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 5,
+      "name": "The shortcut correction preserves legitimate prepared reflection",
+      "status": "passed",
+      "observed": {
+        "initialReflectionRefused": true,
+        "unpreparedCrateSwapKillsWizard": true,
+        "preparedReflectionAlternativeActions": 51,
+        "monsterSwapCount": 1,
+        "circuits": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 6,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 126,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 6,
+      "name": "A new working side and the closing press complete the placement",
+      "status": "passed",
+      "observed": {
+        "straightContinuationRefused": true,
+        "selectedCrateMove": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 9
+            },
+            "to": {
+              "x": 9,
+              "y": 10
+            }
+          }
+        ],
+        "warriorDeployment": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 14,
+              "y": 9
+            },
+            "to": {
+              "x": 8,
+              "y": 9
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 8,
+              "y": 9
+            },
+            "to": {
+              "x": 14,
+              "y": 9
+            }
+          }
+        ],
+        "pressMoves": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 8,
+              "y": 10
+            },
+            "to": {
+              "x": 7,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 7,
+              "y": 10
+            },
+            "to": {
+              "x": 6,
+              "y": 10
+            }
+          }
+        ],
+        "finalWeights": [
+          {
+            "x": 6,
+            "y": 10
+          },
+          {
+            "x": 7,
+            "y": 10
+          }
+        ]
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 7,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 172,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 7,
+      "name": "The exchange changes the occupied support before the differential song",
+      "status": "passed",
+      "observed": {
+        "before": [
+          {
+            "x": 8,
+            "y": 8
+          },
+          {
+            "x": 10,
+            "y": 8
+          }
+        ],
+        "after": [
+          {
+            "x": 8,
+            "y": 8
+          },
+          {
+            "x": 11,
+            "y": 8
+          }
+        ],
+        "wizardAfter": {
+          "x": 9,
+          "y": 8
+        },
+        "platformSupportsWizard": true,
+        "withoutAnchor": [
+          {
+            "x": 9,
+            "y": 8
+          },
+          {
+            "x": 11,
+            "y": 8
+          }
+        ],
+        "westernEntranceUnsupportedWithoutAnchor": true
+      },
+      "scope": "The unanchored branch is legal but removes the western entrance at this moment. It is not claimed irreparable."
+    },
+    {
+      "level": 7,
+      "name": "The release window and the final handover keep their distinct roles",
+      "status": "passed",
+      "observed": {
+        "temporaryReleaseTurn": 29,
+        "noHeroOnWithdrawnPlatforms": true,
+        "continuousHandover": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 3,
+              "y": 11
+            },
+            "to": {
+              "x": 3,
+              "y": 12
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 3,
+              "y": 12
+            },
+            "to": {
+              "x": 3,
+              "y": 13
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 3,
+              "y": 13
+            },
+            "to": {
+              "x": 3,
+              "y": 14
+            }
+          }
+        ],
+        "supportMoves": 3,
+        "allMovedSupportsInitiallyUnoccupied": true
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 8,
+      "name": "Direct replay reaches four destinations with the four living roles",
+      "status": "passed",
+      "observed": {
+        "actions": 112,
+        "goalsBeforeLastAction": 3,
+        "goalsAfterLastAction": 4,
+        "refusedActions": 0,
+        "deaths": 0
+      },
+      "scope": "Observed effects on the stated route or local branch; no universal necessity of its exact order claimed."
+    },
+    {
+      "level": 8,
+      "name": "The fragments enter the song at different moments",
+      "status": "passed",
+      "observed": {
+        "initialStoneComponents": [
+          5,
+          3,
+          1
+        ],
+        "firstTwoSongsHoldLowerRow": true,
+        "thirdSongMovesLowerRow": [
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 10
+            },
+            "to": {
+              "x": 10,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 10,
+              "y": 10
+            },
+            "to": {
+              "x": 11,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 11,
+              "y": 10
+            },
+            "to": {
+              "x": 12,
+              "y": 10
+            }
+          }
+        ],
+        "allNineCratesConserved": true
+      },
+      "scope": "The lower fragment is initially held by members outside the range. It joins the moving group only after the Bard advances; the new silhouette changes an actual dependency."
+    },
+    {
+      "level": 8,
+      "name": "The final replacement preserves a constructed pattern",
+      "status": "passed",
+      "observed": {
+        "buttons": [
+          {
+            "x": 11,
+            "y": 3
+          },
+          {
+            "x": 12,
+            "y": 3
+          },
+          {
+            "x": 13,
+            "y": 3
+          },
+          {
+            "x": 12,
+            "y": 4
+          },
+          {
+            "x": 13,
+            "y": 4
+          },
+          {
+            "x": 12,
+            "y": 6
+          },
+          {
+            "x": 13,
+            "y": 6
+          },
+          {
+            "x": 14,
+            "y": 8
+          },
+          {
+            "x": 14,
+            "y": 9
+          }
+        ],
+        "initiallyOccupiedByHero": true,
+        "afterReserveSwapAllNineAreCrateWeights": true,
+        "gateOpen": true
+      },
+      "scope": "Pattern construction is the new central operation. Extracting the Bard after placing weights is a reused supporting mechanism, not claimed as a new idea."
+    }
+  ],
+  "shortcutReview": [
+    {
+      "level": 3,
+      "candidate": "Let the Warrior leave first, then use the remaining crate as the Wizard target.",
+      "result": "Complete legal 37-action alternative. It retains the three file pushes and the selective group rearrangement.",
+      "actions": 37,
+      "commands": "CRRLDCCDDLLLCCURRRUUUURCURDRRUUUUCCUU",
+      "limit": "The identity of the Wizard target in the 43-action witness is not mandatory."
+    },
+    {
+      "level": 5,
+      "candidate": "Activate every mirror immediately and remove both guards before any preparation.",
+      "result": "Rejected atomically on the corrected geometry; both guards remain. A prepared reflection is still legal and has a complete 51-action witness, including intermediate evacuation and a monster swap.",
+      "initialRefused": true,
+      "preparedActions": 51,
+      "commands": "CLCCUUXCCCRRCCURRUCCURCCRRCCCDDUCCCDLDLLDLDDDRCCUUR",
+      "limit": "This checks the initial activation and the stated prepared branch, not all optical strategies."
+    },
+    {
+      "level": 6,
+      "candidate": "After parking the other heroes, leave the final Bard post straight down without checking the nearby load.",
+      "result": "The action is legal but removes the two weights and closes the destination access.",
+      "fromTurn": 63,
+      "action": 2,
+      "cratesAfter": [
+        {
+          "x": 6,
+          "y": 11
+        },
+        {
+          "x": 7,
+          "y": 11
+        }
+      ],
+      "limit": "The local change can be repaired; this is not a global dead-end claim."
+    },
+    {
+      "level": 7,
+      "candidate": "Walk the Wizard off the first support before singing and use the same crossing.",
+      "result": "The song also moves that now-empty support; the western entrance at (8,8) is bare water in the source map.",
+      "fromTurn": 15,
+      "branch": [
+        "wizard R",
+        "bard R"
+      ],
+      "limit": "This isolates the useful anchoring effect. Another preparation or a recovery route is not ruled out."
+    }
+  ],
+  "qualitativeDiversity": [
+    {
+      "levels": [
+        2,
+        8
+      ],
+      "comparison": "N2 starts with one connected 3×3 block of nine crates and has no buttons. N8 starts with separate five- and three-crate fragments plus a reserve; staggered range entry builds a nine-button pattern.",
+      "distinctObservedFeatures": [
+        "initial components [9] versus [5,3,1]",
+        "circulation through a dense grid versus composition by successive stops"
+      ],
+      "remainingSimilarity": "Both use group translation and exchanges; the revised N8 avoids presenting another full 3×3 starting grid."
+    },
+    {
+      "levels": [
+        3
+      ],
+      "comparison": "A narrow dry crossing with two short perpendicular files and a single extra end cell; no water, mirror, monster or circuit. It is not another dense square grid."
+    },
+    {
+      "levels": [
+        4,
+        6
+      ],
+      "comparison": "Both deploy a specialist by exchange. N4 sends the Bard to an isolated work bay and reuses three charges as supports; N6 sends the Warrior behind a file and uses a closing press to finish two weights."
+    },
+    {
+      "levels": [
+        5
+      ],
+      "comparison": "Two receiving positions and a trapped partner determine spell safety. Guards never act as button weights; the corrected initial global reflection is blocked by ordinary mirror geometry."
+    },
+    {
+      "levels": [
+        7
+      ],
+      "comparison": "The occupied support is held while its occupant steps onto a platform; the other support moves. Water reuse and keeper replacement are established series mechanisms, while choosing the anchor by exchange is the focal combination."
+    },
+    {
+      "levels": [
+        6,
+        7,
+        8
+      ],
+      "remainingSimilarity": "All three finales still contain maintained circuits and a departure preserving a prepared load. Their central preparations differ, but this supporting pattern is deliberately acknowledged rather than labelled wholly new."
+    }
+  ],
+  "method": "Direct execution of the delivered numeric actions with stepDetailed, phase and resource inspection, local alternative branches and explicit shortcut candidates. No author builder or solver.",
+  "limits": [
+    "A completed witness proves solvability, not a unique or optimal route.",
+    "The 72 historical terrain comparisons and maximumIndividualWalkingGoalAssignment are independently run by scripts/verify-design-constraints.mjs. Individual walking keeps other pieces fixed, recomputes circuits at each hero position and excludes orthogonal monster contact; it does not prove impossibility of every joint plan. These controls are not duplicated here.",
+    "Local failures establish their consequence from the stated position, not permanent impossibility after every other preparation.",
+    "The qualitative comparison distinguishes central problems and repeated supporting mechanisms; it does not measure player difficulty."
+  ]
+}

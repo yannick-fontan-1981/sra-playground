@@ -1,0 +1,258 @@
+{
+  "game": "SS23",
+  "success": true,
+  "levels": [
+    2
+  ],
+  "method": "Rejeu public et mécanique du témoin, cinq comparaisons causales locales et une variante gagnante, sans recherche exhaustive.",
+  "mapSha256": "1068bc796ff813c72f8195c028ff9ce5e5ed3b1a7089431adfccb847965560eb",
+  "witnessSha256": "edde494357682325e5e5b644ffc3cb854fb1df6feaaac0e61fff111f5d2f33b9",
+  "checks": [
+    {
+      "level": 2,
+      "name": "Témoin complet : sas sec, neuf charges conservées et quatre destinations",
+      "status": "passed",
+      "observed": {
+        "actions": 91,
+        "selections": 12,
+        "merchantPushes": 6,
+        "warriorPushes": 5,
+        "chainPushes": 2,
+        "mixedPushes": 2,
+        "swaps": 10,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 9,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 9,
+        "groupSongs": 9,
+        "songHeroMoves": 7,
+        "songStoneMoves": 32,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 16,
+        "stoneMoves": 46,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Rejeu exact de la carte et des commandes sauvegardées, sans mécanisme ajouté au contrat MWZB."
+    },
+    {
+      "level": 2,
+      "name": "Victoire publique, images et Undo exacts",
+      "status": "passed",
+      "observed": {
+        "actions": 91,
+        "frames": 249,
+        "finalState": "WIN",
+        "completionUndo": true
+      },
+      "scope": "Une session publique, sans carte privée dans les observations ; témoin d’auteur, pas une résolution autonome SRA."
+    },
+    {
+      "level": 2,
+      "name": "La caisse proche arrête le rayon",
+      "status": "passed",
+      "observed": {
+        "commands": "CCR",
+        "wizard": {
+          "x": 8,
+          "y": 9
+        },
+        "nearCrateReplacedOrigin": true,
+        "twoFartherCratesStillPresent": true
+      },
+      "scope": "Contre-branche locale rejouée ; aucune optimalité, unicité ou impossibilité globale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Sans le désalignement inférieur, la file frontale rencontre sa butée",
+      "status": "passed",
+      "observed": {
+        "refusedCommands": "CCRRRURRCCCURDRR",
+        "blockedFrontRow": [
+          {
+            "x": 8,
+            "y": 9
+          },
+          {
+            "x": 9,
+            "y": 9
+          },
+          {
+            "x": 10,
+            "y": 9
+          }
+        ],
+        "wall": {
+          "x": 11,
+          "y": 9
+        },
+        "afterSongWalkingCommands": "CCRRRURRCDCCURRR",
+        "afterSongWarrior": {
+          "x": 8,
+          "y": 9
+        }
+      },
+      "scope": "Contre-branche locale rejouée ; aucune optimalité, unicité ou impossibilité globale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Portée initiale et pouvoirs passifs",
+      "status": "passed",
+      "observed": {
+        "songMoves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 7,
+              "y": 11
+            },
+            "to": {
+              "x": 7,
+              "y": 12
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 9
+            },
+            "to": {
+              "x": 5,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 6,
+              "y": 9
+            },
+            "to": {
+              "x": 6,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 8,
+              "y": 9
+            },
+            "to": {
+              "x": 8,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 9
+            },
+            "to": {
+              "x": 9,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 8,
+              "y": 10
+            },
+            "to": {
+              "x": 8,
+              "y": 11
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 10
+            },
+            "to": {
+              "x": 9,
+              "y": 11
+            }
+          }
+        ],
+        "rightColumnOutsideRange": true,
+        "warriorPushesCarryingWizard": 2
+      },
+      "scope": "La portée est mesurée avant le pas. Le Guerrier chanté et le Magicien poussé ne déclenchent pas leur capacité."
+    },
+    {
+      "level": 2,
+      "name": "Pousser le Barde conserve la grille ; son propre pas déplace une charge",
+      "status": "passed",
+      "observed": {
+        "silentCommands": "CCRRRURRCDCCURRRURRRRDDDDRRRCULLDLLLLDDLLDLRULLUUUUURRDRDRURRCCDDDDRUUULURRR",
+        "merchantPushes": 6,
+        "voluntaryCommands": "CCRRRURRCDCCURRRURRRRDDDDRRRCULLDLLLLDDLLDLRULLUUUUURRDRDRURRCU",
+        "shiftedCrate": {
+          "from": {
+            "x": 6,
+            "y": 10
+          },
+          "to": {
+            "x": 6,
+            "y": 9
+          }
+        }
+      },
+      "scope": "Contre-branche locale rejouée ; aucune optimalité, unicité ou impossibilité globale revendiquée."
+    },
+    {
+      "level": 2,
+      "name": "Décaler avant de monter, avec une case haute libre",
+      "status": "passed",
+      "observed": {
+        "immediateUpCommands": "CCRRRURRCDCCURRRURRRRDDDDRRRCULLDLLLLDDLLDLRULLUUUUURRDRDRURRCCDDDDRUUULURRRCCCU",
+        "immediateUpRefused": true,
+        "rightUpCommands": "CCRRRURRCDCCURRRURRRRDDDDRRRCULLDLLLLDDLLDLRULLUUUUURRDRDRURRCCDDDDRUUULURRRCCCRU",
+        "rightUpBard": {
+          "x": 9,
+          "y": 8
+        },
+        "narrowedCell": {
+          "x": 6,
+          "y": 2
+        },
+        "narrowedMapSha256": "30de5b136877a796df4574b69daf09011dcce72c0dd2a5f2d73ded0432fb4399",
+        "narrowedUpRefused": true
+      },
+      "scope": "Le même préfixe est légal dans les deux géométries. Fermer une seule case bloque ce mouvement local, sans preuve d’impossibilité de toutes les autres routes."
+    },
+    {
+      "level": 2,
+      "name": "Variante gagnante : deux arrivées sont échangées",
+      "status": "passed",
+      "observed": {
+        "commands": "CCRRRURRCDCCURRRURRRRDDDDRRRCULLDLLLLDDLLDLRULLUUUUURRDRDRURRCCDDDDRUUULURRRCCCRURRRDDRCCCULLCCURRR",
+        "actions": 99,
+        "swappedFinalRoles": [
+          "merchant",
+          "wizard"
+        ],
+        "finalState": "WIN"
+      },
+      "scope": "Les destinations sont communes. Cette variante ne revendique ni le parcours le plus court ni un unique ordre des phases."
+    }
+  ],
+  "limits": [
+    "Le plan est une adaptation de Heroes of Hauling 11, pas une reproduction exacte.",
+    "Les refus locaux ne prouvent pas une impasse définitive ou une capacité globalement nécessaire.",
+    "Aucune optimalité ni résolution autonome SRA démontrée."
+  ]
+}

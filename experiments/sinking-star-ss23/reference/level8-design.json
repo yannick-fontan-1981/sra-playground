@@ -1,0 +1,1098 @@
+{
+  "spec": {
+    "id": "ss23-08",
+    "title": "La forme et la place vide",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "#######..........###",
+      "#.....#..........###",
+      "#.o...~..........###",
+      "#.....#..........###",
+      "#.....#..........###",
+      "#.....#ooo....#..###",
+      "#..B..~oZo.....#.###",
+      "#.....#.........####",
+      "#.....#..ooo.....###",
+      "#.....#..........###",
+      "#MW...#..........###",
+      "#.....##############",
+      "#.....##############",
+      "###.################",
+      "##...###############",
+      "##.g.###############",
+      "##ggg###############",
+      "####################"
+    ],
+    "facing": "W",
+    "circuits": [
+      {
+        "id": "composition",
+        "color": 11,
+        "buttons": [
+          {
+            "x": 11,
+            "y": 3
+          },
+          {
+            "x": 12,
+            "y": 3
+          },
+          {
+            "x": 13,
+            "y": 3
+          },
+          {
+            "x": 12,
+            "y": 4
+          },
+          {
+            "x": 13,
+            "y": 4
+          },
+          {
+            "x": 12,
+            "y": 6
+          },
+          {
+            "x": 13,
+            "y": 6
+          },
+          {
+            "x": 14,
+            "y": 8
+          },
+          {
+            "x": 14,
+            "y": 9
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 3,
+          "y": 15
+        },
+        "circuit": "composition",
+        "direction": "S",
+        "closedWhen": "released"
+      }
+    ]
+  },
+  "commands": "CCLLCRRRRRUUUUCCCUUURRURCDDDDDDDDLLCUUUUUUUURRRDCCLCCCUUULCDDDDDDDDDDLLDDDLCCDDDDDDDDDLDDDRCCCDDDDDDCCDDDDDRRDDD",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 27
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 15
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 54
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 57
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 6,
+        "y": 30
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": false,
+    "objective": "Réunir et déformer deux fragments décalés, extraire la Barde sans chanter, puis remplir la dernière place en faisant sortir le Magicien.",
+    "label": "Heroes and Light — énigmes 52–53",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/",
+    "puzzles": [
+      52,
+      53
+    ]
+  },
+  "metrics": {
+    "actions": 112,
+    "selections": 21,
+    "merchantPushes": 3,
+    "warriorPushes": 0,
+    "chainPushes": 0,
+    "mixedPushes": 0,
+    "swaps": 4,
+    "wizardHeroSwaps": 2,
+    "wizardStoneSwaps": 2,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 10,
+    "groupSongs": 10,
+    "songHeroMoves": 2,
+    "songStoneMoves": 56,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 4,
+    "stoneMoves": 61,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le premier échange déplace la lacune du fragment supérieur ; le second y installe la Barde, de l’autre côté de la coupure d’eau. Le rang inférieur est séparé par une ligne vide et décalé de deux cases.",
+      "turn": 4,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 7,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 9,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 8
+        },
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "composition": false
+      }
+    },
+    {
+      "label": "Au début, les blocs du fragment inférieur hors portée retiennent ceux qui entendent déjà le chant. Quand la Barde avance, ce rang entre dans la portée et rejoint le mouvement. Les butées arrêtent ensuite les rangs à des moments différents.",
+      "turn": 10,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 10
+        },
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "composition": false
+      }
+    },
+    {
+      "label": "Le rang de droite reste contre sa butée tandis que les six autres blocs montent. Huit boutons sont couverts et la Barde occupe la neuvième place, au milieu de la composition.",
+      "turn": 14,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 3,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "composition": true
+      }
+    },
+    {
+      "label": "Le Magicien extrait la Barde par la seconde fenêtre. Aucun chant ne touche aux huit blocs déjà placés ; le Magicien occupe maintenant la place restée vide dans le motif.",
+      "turn": 24,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 1,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "composition": true
+      }
+    },
+    {
+      "label": "Le Marchand amène le bloc de réserve devant la fenêtre de retour. Ce bloc est la cible de sortie du Magicien et deviendra le neuvième poids.",
+      "turn": 48,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "composition": true
+      }
+    },
+    {
+      "label": "L’échange final remplace le Magicien par la réserve au cœur du motif. Tous les boutons restent couverts quand les quatre héros quittent l’atelier.",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 2,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "composition": true
+      }
+    },
+    {
+      "label": "Le dernier déplacement chanté range le Marchand et le Magicien contre le fond de la salle d’arrivée. Le Guerrier ferme le cortège sur la quatrième destination.",
+      "turn": 100,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 18
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 1,
+            "y": 9
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 2,
+            "y": 18
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 18
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "composition": true
+      }
+    }
+  ],
+  "adaptation": "Les énigmes 52–53 donnent le principe d’un ensemble de cristaux remodelé par la Barde en plusieurs morceaux ou en escalier. Le départ de SS23 possède deux fragments, séparés par une rangée vide et décalés de deux colonnes ; les membres hors portée retiennent d’abord le fragment inférieur. Les butées ordinaires et la portée du chant déforment ensuite les huit blocs conservés, sans faisceau multicolore, explosion ou empilement. Les deux fenêtres d’eau interdisent un simple accès à pied à l’atelier. Le Magicien prépare la lacune, y installe la Barde, la récupère à la fin puis transforme la réserve en neuvième poids en échangeant sa propre sortie. La forme n’est pas reconnue par un objectif caché : neuf boutons physiques commandent la porte, et seules les quatre arrivées terminent la salle."
+}

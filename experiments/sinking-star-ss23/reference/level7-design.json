@@ -1,0 +1,1159 @@
+{
+  "spec": {
+    "id": "ss23-07",
+    "title": "Le pas qui laisse un appui",
+    "mode": "quartet",
+    "rows": [
+      "####################",
+      "####################",
+      "#.......############",
+      "#.........~~########",
+      "#.......~.~~....#gg#",
+      "#....Z..~.~~....#gg#",
+      "#.......~.~~....#..#",
+      "#.......~.~~....#..#",
+      "#.....Wos~s~.......#",
+      "#.......~~~~....#..#",
+      "#.......B..~....#..#",
+      "#..........~....#..#",
+      "#..........~....#..#",
+      "#..M....~~~~....#..#",
+      "#.......~~~~....#..#",
+      "#.......~~~~....#..#",
+      "#.......############",
+      "####################",
+      "####################"
+    ],
+    "facing": "E",
+    "circuits": [
+      {
+        "id": "passage",
+        "color": 10,
+        "buttons": [
+          {
+            "x": 3,
+            "y": 13
+          }
+        ]
+      }
+    ],
+    "gates": [
+      {
+        "at": {
+          "x": 8,
+          "y": 3
+        },
+        "circuit": "passage",
+        "direction": "W",
+        "closedWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 16,
+          "y": 8
+        },
+        "circuit": "passage",
+        "direction": "E",
+        "closedWhen": "released"
+      }
+    ],
+    "platforms": [
+      {
+        "at": {
+          "x": 9,
+          "y": 8
+        },
+        "circuit": "passage",
+        "activeWhen": "pressed"
+      },
+      {
+        "at": {
+          "x": 10,
+          "y": 8
+        },
+        "circuit": "passage",
+        "activeWhen": "pressed"
+      }
+    ]
+  },
+  "commands": "CRDDDDLLLLCDDDRCRCCCUUUUUDCCLCCCLLLLLLCRCCLLUUUULLLCCCUUURRRULLULDDDDDCDDRRRRRRRRRRRRRUUURCCRUUUUUURRRRRRRRRRRRRUUUCCCDDDDDRRCCUUUURRRRRCCRRRRCCDDDDCCRRRRRUUUCCUUUURRRRRUUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 33
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 27
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 12
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 9,
+        "y": 42
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 33
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 42
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 21
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 45
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 12
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 12,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 27
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 57,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 27
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 54,
+        "y": 15
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": true,
+    "platform": true,
+    "objective": "Choisir quel appui reste en place pendant le chant, retirer la Barde silencieusement, puis faire passer deux éclaireurs et le dernier duo.",
+    "label": "Heroes and Stones, West — énigmes 16–17",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-stones-west-solutions/",
+    "puzzles": [
+      16,
+      17
+    ]
+  },
+  "metrics": {
+    "actions": 172,
+    "selections": 33,
+    "merchantPushes": 0,
+    "warriorPushes": 12,
+    "chainPushes": 1,
+    "mixedPushes": 1,
+    "swaps": 2,
+    "wizardHeroSwaps": 1,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 6,
+    "groupSongs": 4,
+    "songHeroMoves": 7,
+    "songStoneMoves": 0,
+    "songMonsterMoves": 0,
+    "supportMoves": 3,
+    "partnerMoves": 13,
+    "stoneMoves": 9,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Guerrier a posé la réserve sur le premier appui. Le Magicien l’échange depuis la rive : la réserve revient au sec et le Magicien ancre maintenant cet appui.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 8,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 10,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Un seul chant règle l’écart : l’appui vide avance jusqu’à la rive orientale, tandis que l’appui occupé reste à l’ouest. Le Magicien est entraîné sur la plateforme tenue par le Marchand ; il n’est jamais porté par un appui.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Le Magicien monte au poste nord puis échange avec la Barde. Elle quitte le poste de chant sans déplacer les appuis ; lui rejoint la galerie basse.",
+      "turn": 26,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 10
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Le Marchand relâche brièvement le circuit lorsque personne ne se tient sur les plateformes. La porte nord s’ouvre pour la Barde, puis se referme quand le passage d’eau est rétabli : cette galerie ne permet pas de contourner l’appui occidental pendant la traversée.",
+      "turn": 51,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 5,
+          "y": 8
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "La réserve revenue au sec remplace le Marchand par une poussée de file. Le circuit reste enfoncé pendant la relève : les deux plateformes ne disparaissent pas.",
+      "turn": 70,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 3,
+            "y": 14
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 6
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 3,
+            "y": 3
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "Le Magicien et le Marchand traversent d’abord. Le Guerrier installe ensuite la Barde sur la première plateforme sans chanter et se tient lui-même sur l’appui occidental.",
+      "turn": 136,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 8,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 9,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    },
+    {
+      "label": "La Barde et le Guerrier finissent ensemble la traversée. Le Guerrier ancre encore le premier appui au début du passage, puis cet appui glisse derrière les deux derniers voyageurs. Aucun appui ne porte un passager pendant son déplacement.",
+      "turn": 142,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 17,
+            "y": 5
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 8
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 18,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 8
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 3,
+          "y": 13
+        }
+      ],
+      "supports": [
+        {
+          "x": 10,
+          "y": 8
+        },
+        {
+          "x": 11,
+          "y": 8
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {
+        "passage": true
+      }
+    }
+  ],
+  "adaptation": "Stones West 16 travaille les positions relatives par des mouvements différents ; le 17 prépare un élément qui sert de butée. SS23 emploie uniquement le contrat des appuis occupés : un héros ancre l’appui où il se trouvait au début du chant, tandis qu’un appui vide peut glisser d’eau en eau. Le Magicien choisit ce point d’ancrage par échange avec une réserve, puis est entraîné sur une plateforme par le chant. La Barde est extraite par un second échange depuis un poste éloigné. Une porte inverse du circuit ouvre sa sortie nord seulement lorsque les plateformes sont retirées. La réserve remplace ensuite le Marchand. Après les deux éclaireurs, le Guerrier installe la Barde sans chanter et ancre à son tour le premier appui pendant le départ du dernier duo. Aucun ricochet, vitesse double, bateau porteur, empilement ou effet de timing n’est repris."
+}

@@ -1,0 +1,765 @@
+{
+  "spec": {
+    "id": "ss23-03",
+    "title": "La case de trop",
+    "mode": "quartet",
+    "rows": [
+      "###########",
+      "###########",
+      "######.####",
+      "######B#gg#",
+      "######.#.##",
+      "#g.g..o#.##",
+      "#...#.o#.##",
+      "#M..Woo..##",
+      "#####.#####",
+      "#####.#####",
+      "#####Z#####",
+      "###########"
+    ]
+  },
+  "commands": "CRRLDCCDDLLLCCUCURRRUUUURCCCUUURRRUUUUCCCUU",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 27,
+        "y": 36
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 45
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 33,
+        "y": 24
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 39
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 30,
+        "y": 45
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 42,
+        "y": 24
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 30
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 36
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation · Heroes and Light · énigme 14",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-light-solutions/#%C3%A9nigme-14",
+    "puzzle": 14,
+    "objective": "Utiliser la case supplémentaire pour dégager le croisement, puis transformer les deux files par un déplacement sélectif."
+  },
+  "metrics": {
+    "actions": 43,
+    "selections": 12,
+    "merchantPushes": 0,
+    "warriorPushes": 3,
+    "chainPushes": 3,
+    "mixedPushes": 0,
+    "swaps": 1,
+    "wizardHeroSwaps": 1,
+    "wizardStoneSwaps": 0,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 4,
+    "groupSongs": 4,
+    "songHeroMoves": 0,
+    "songStoneMoves": 12,
+    "songMonsterMoves": 0,
+    "supportMoves": 0,
+    "partnerMoves": 1,
+    "stoneMoves": 18,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 0,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "La case supplémentaire au bout du bras droit reçoit la tête de file. Deux poussées dégagent le croisement ; le Guerrier quitte la case de réception du second groupe.",
+      "turn": 5,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 7
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 9
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La première avancée approche le Barde sans déplacer la tête bloquée. La seconde entraîne enfin les deux charges dans le croisement libéré.",
+      "turn": 9,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 11
+        },
+        {
+          "x": 11,
+          "y": 11
+        },
+        {
+          "x": 12,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le groupe repart vers le bras gauche. La butée sous la petite alcôve retient une caisse tandis que les autres se décalent ; une nouvelle file de deux charges apparaît devant le Guerrier.",
+      "turn": 12,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 11
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Guerrier réemploie la place libérée : une poussée remonte la nouvelle file et ouvre la circulation vers le bras oriental.",
+      "turn": 15,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien échange sa place avec le Guerrier dans le passage sans croisement. Le premier peut partir vers l’est ; le second reprend le chemin depuis le fond du bras sud.",
+      "turn": 17,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 11
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 9,
+            "y": 14
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 9,
+            "y": 11
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Les deux destinations orientales sont accessibles et les quatre héros se répartissent entre les deux bras. Les quatre caisses sont encore présentes.",
+      "turn": 43,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 9
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 7
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 13,
+            "y": 7
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 7,
+            "y": 9
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 9,
+          "y": 9
+        },
+        {
+          "x": 7,
+          "y": 11
+        },
+        {
+          "x": 8,
+          "y": 11
+        },
+        {
+          "x": 9,
+          "y": 10
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Une dépendance circulaire de déplacements est rompue par une pièce qui dispose d’une case supplémentaire de décalage.",
+    "changes": "Les pièces de lumière deviennent deux courtes files perpendiculaires dans un croisement sec. Le Guerrier exploite le débattement du bras droit ; le Barde fait entrer puis décaler le groupe, dont une caisse est retenue par une butée. La même place de travail sert à pousser une nouvelle file. Le Magicien règle ensuite le passage des partenaires dans le bras sud. Aucun faisceau de pouvoir, couleur spéciale ni porte finale à plusieurs lests n’est ajouté.",
+    "limits": "Le témoin conserve les quatre caisses et utilise le débattement droit. Les essais locaux comparent les préparations du croisement ; ils ne démontrent ni unicité, ni nécessité de chaque capacité, ni impossibilité de toute permutation alternative par le Magicien.",
+    "localChecks": [
+      {
+        "name": "Témoin complet et quatre destinations occupées",
+        "status": "passed",
+        "observed": {
+          "actions": 43,
+          "selections": 12,
+          "merchantPushes": 0,
+          "warriorPushes": 3,
+          "chainPushes": 3,
+          "mixedPushes": 0,
+          "swaps": 1,
+          "wizardHeroSwaps": 1,
+          "wizardStoneSwaps": 0,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 4,
+          "groupSongs": 4,
+          "songHeroMoves": 0,
+          "songStoneMoves": 12,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 1,
+          "stoneMoves": 18,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "Le groupe nord ne peut pas entrer dans le croisement occupé",
+        "status": "passed",
+        "observed": {
+          "commands": "CCCDD",
+          "firstStepChangesCrates": false,
+          "secondStepRefused": true
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "La dernière case du bras droit finance la seconde poussée",
+        "status": "passed",
+        "observed": {
+          "removedCell": {
+            "x": 12,
+            "y": 11
+          },
+          "shortArmSecondPushRefused": true,
+          "realArmChainPushes": 2
+        },
+        "scope": "Comparaison locale avec cette seule case murée ; ne prouve pas l’impossibilité de toute autre stratégie sur la carte modifiée."
+      },
+      {
+        "name": "Le Guerrier doit aussi dégager la réception de cette branche",
+        "status": "passed",
+        "observed": {
+          "commands": "CRRCCDD",
+          "warrior": {
+            "x": 10,
+            "y": 11
+          },
+          "bard": {
+            "x": 10,
+            "y": 8
+          },
+          "refused": true
+        },
+        "scope": "Le Guerrier encore dans le croisement est hors portée et bloque la dernière caisse ; le témoin le range dans le bras sud."
+      },
+      {
+        "name": "La butée fabrique une nouvelle file avec les mêmes charges",
+        "status": "passed",
+        "observed": {
+          "afterThreeLeftSongs": [
+            {
+              "x": 9,
+              "y": 10
+            },
+            {
+              "x": 7,
+              "y": 11
+            },
+            {
+              "x": 8,
+              "y": 11
+            },
+            {
+              "x": 9,
+              "y": 11
+            }
+          ],
+          "wall": {
+            "x": 8,
+            "y": 10
+          },
+          "reusedFile": [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 9,
+                "y": 12
+              },
+              "to": {
+                "x": 9,
+                "y": 11
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 11
+              },
+              "to": {
+                "x": 9,
+                "y": 10
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 10
+              },
+              "to": {
+                "x": 9,
+                "y": 9
+              }
+            }
+          ],
+          "cratesConserved": 4
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "Variante gagnante : le Magicien sort par une caisse après le départ du Guerrier",
+        "status": "passed",
+        "observed": {
+          "actions": 37,
+          "selections": 8,
+          "merchantPushes": 0,
+          "warriorPushes": 3,
+          "chainPushes": 3,
+          "mixedPushes": 0,
+          "swaps": 1,
+          "wizardHeroSwaps": 0,
+          "wizardStoneSwaps": 1,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 4,
+          "groupSongs": 4,
+          "songHeroMoves": 0,
+          "songStoneMoves": 12,
+          "songMonsterMoves": 0,
+          "supportMoves": 0,
+          "partnerMoves": 0,
+          "stoneMoves": 19,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 0,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "Les trois poussées de file et la transformation chantée subsistent ; l’échange avec le Guerrier du témoin n’est pas imposé.",
+        "commands": "CRRLDCCDDLLLCCURRRUUUURCURDRRUUUUCCUU",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

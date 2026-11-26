@@ -1,0 +1,491 @@
+{
+  "game": "SS23",
+  "success": true,
+  "levels": [
+    1
+  ],
+  "method": "Rejeu du témoin, observations publiques, phases physiques et contre-branches locales sans recherche exhaustive.",
+  "checks": [
+    {
+      "level": 1,
+      "name": "Témoin complet sans refus ni décès",
+      "status": "passed",
+      "observed": {
+        "actions": 221,
+        "selections": 34,
+        "merchantPushes": 6,
+        "warriorPushes": 1,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "swaps": 6,
+        "wizardHeroSwaps": 5,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 3,
+        "groupSongs": 3,
+        "songHeroMoves": 1,
+        "songStoneMoves": 2,
+        "songMonsterMoves": 1,
+        "supportMoves": 5,
+        "partnerMoves": 10,
+        "stoneMoves": 10,
+        "mirrorMoves": 1,
+        "monsterMoves": 2,
+        "reflections": 2,
+        "heroReflections": 1,
+        "pistonPushes": 1,
+        "platformsCreated": 1,
+        "monstersRemoved": 4,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "36 découvertes par les observations publiques",
+      "status": "passed",
+      "observed": {
+        "acquired": 36,
+        "lessons": [
+          "select",
+          "move",
+          "merchant-push",
+          "warrior-push",
+          "file-push",
+          "mixed-file",
+          "partner-push",
+          "mirror-motion",
+          "relay-weight",
+          "monster-still",
+          "wizard-swap",
+          "wizard-first",
+          "wizard-partner",
+          "wizard-bend",
+          "wizard-water",
+          "wizard-walk",
+          "bard-song",
+          "partner-song",
+          "selective-song",
+          "diagonal-song",
+          "wall-song",
+          "monster-song",
+          "release-by-swap",
+          "water-support",
+          "support-slide",
+          "support-anchor",
+          "cross-support",
+          "mirror",
+          "hero-reflection",
+          "crate-reflection",
+          "button",
+          "gate",
+          "press",
+          "monster-press",
+          "monster",
+          "goals"
+        ]
+      },
+      "scope": "Le détecteur reçoit uniquement les images, leurs séquences et les commandes publiques du tutoriel."
+    },
+    {
+      "level": 1,
+      "name": "La file initiale demande la poussée du Guerrier",
+      "status": "passed",
+      "observed": {
+        "merchantRefused": 1,
+        "warriorMoves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 2,
+              "y": 2
+            },
+            "to": {
+              "x": 3,
+              "y": 2
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 3,
+              "y": 2
+            },
+            "to": {
+              "x": 4,
+              "y": 2
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 4,
+              "y": 2
+            },
+            "to": {
+              "x": 5,
+              "y": 2
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 2
+            },
+            "to": {
+              "x": 6,
+              "y": 2
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 6,
+              "y": 2
+            },
+            "to": {
+              "x": 7,
+              "y": 2
+            }
+          }
+        ]
+      },
+      "scope": "Comparaison de la même file initiale : trois partenaires et une caisse devant le Guerrier."
+    },
+    {
+      "level": 1,
+      "name": "La première cible intercepte le rayon",
+      "status": "passed",
+      "observed": {
+        "moves": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 5,
+              "y": 2
+            },
+            "to": {
+              "x": 6,
+              "y": 2
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 6,
+              "y": 2
+            },
+            "to": {
+              "x": 5,
+              "y": 2
+            }
+          }
+        ],
+        "fartherCratePreserved": true
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Pousser ou échanger le Barde ne chante pas",
+      "status": "passed",
+      "observed": {
+        "checked": 6,
+        "causes": [
+          "swap",
+          "push"
+        ],
+        "neighbouringPiecesPreserved": true
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Le Magicien entraîné par le chant ne lance pas de sort",
+      "status": "passed",
+      "observed": {
+        "wizardMove": {
+          "actor": "hero",
+          "from": {
+            "x": 14,
+            "y": 6
+          },
+          "to": {
+            "x": 15,
+            "y": 6
+          }
+        },
+        "phase": "song"
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Un pas de retour volontaire altère le groupe ; l’échange préserve son placement",
+      "status": "passed",
+      "observed": {
+        "returnCommands": "CRCRURRDDDDLDDLUCCRCCUURRDDDDRRRDDCCURRRDLLLDDDLDLLDDDDDDDDDLCCCRDCCCLUCRRRCCCURRRRRRRUDLUURDCRL",
+        "silentExitCommands": "CRCRURRDDDDLDDLUCCRCCUURRDDDDRRRDDCCURRRDLLLDDDLDLLDDDDDDDDDLCCCRDCCCLUCRRRCCCURRRRRRRUDLUURDCRCCCDU",
+        "returnedCrates": [
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 12,
+            "y": 2
+          },
+          {
+            "x": 14,
+            "y": 2
+          },
+          {
+            "x": 15,
+            "y": 4
+          },
+          {
+            "x": 6,
+            "y": 12
+          }
+        ],
+        "preservedCrates": [
+          {
+            "x": 4,
+            "y": 2
+          },
+          {
+            "x": 13,
+            "y": 2
+          },
+          {
+            "x": 15,
+            "y": 2
+          },
+          {
+            "x": 16,
+            "y": 4
+          },
+          {
+            "x": 6,
+            "y": 12
+          }
+        ]
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Le prochain appui du Barde reste ancré",
+      "status": "passed",
+      "observed": {
+        "landing": {
+          "x": 7,
+          "y": 7
+        },
+        "supportMoves": [
+          {
+            "actor": "support",
+            "from": {
+              "x": 6,
+              "y": 7
+            },
+            "to": {
+              "x": 7,
+              "y": 7
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 7,
+              "y": 7
+            },
+            "to": {
+              "x": 8,
+              "y": 7
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 4,
+              "y": 7
+            },
+            "to": {
+              "x": 5,
+              "y": 7
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 8,
+              "y": 7
+            },
+            "to": {
+              "x": 8,
+              "y": 8
+            }
+          },
+          {
+            "actor": "support",
+            "from": {
+              "x": 5,
+              "y": 7
+            },
+            "to": {
+              "x": 5,
+              "y": 8
+            }
+          }
+        ]
+      },
+      "scope": "Aucun appui déplacé ne transporte un passager ; la case d’arrivée du Barde est protégée."
+    },
+    {
+      "level": 1,
+      "name": "Un échange au-dessus de l’eau conserve les appuis",
+      "status": "passed",
+      "observed": {
+        "supports": [
+          {
+            "x": 7,
+            "y": 7
+          },
+          {
+            "x": 8,
+            "y": 8
+          },
+          {
+            "x": 5,
+            "y": 8
+          }
+        ],
+        "swap": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 11,
+              "y": 7
+            },
+            "to": {
+              "x": 7,
+              "y": 7
+            }
+          },
+          {
+            "actor": "hero",
+            "from": {
+              "x": 7,
+              "y": 7
+            },
+            "to": {
+              "x": 11,
+              "y": 7
+            }
+          }
+        ]
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Presse et chant provoquent deux rencontres de gardiens",
+      "status": "passed",
+      "observed": {
+        "pressMoves": [
+          {
+            "actor": "monster",
+            "from": {
+              "x": 12,
+              "y": 11
+            },
+            "to": {
+              "x": 12,
+              "y": 10
+            }
+          }
+        ],
+        "monstersRemoved": 4
+      },
+      "scope": "Deux paires distinctes se rencontrent ; la sortie ne dépend pas d’un compteur de monstres éliminés."
+    },
+    {
+      "level": 1,
+      "name": "Reflet à distance égale et rayon dévié sont distincts",
+      "status": "passed",
+      "observed": {
+        "reflectionPhases": 2,
+        "bentWizardSwaps": 1,
+        "moves": [
+          [
+            {
+              "actor": "stone",
+              "from": {
+                "x": 6,
+                "y": 12
+              },
+              "to": {
+                "x": 9,
+                "y": 15
+              }
+            }
+          ],
+          [
+            {
+              "actor": "hero",
+              "from": {
+                "x": 6,
+                "y": 12
+              },
+              "to": {
+                "x": 9,
+                "y": 15
+              }
+            },
+            {
+              "actor": "stone",
+              "from": {
+                "x": 9,
+                "y": 15
+              },
+              "to": {
+                "x": 6,
+                "y": 12
+              }
+            }
+          ]
+        ]
+      },
+      "scope": "Branche locale rejouée ; aucune solution unique ou optimale revendiquée."
+    },
+    {
+      "level": 1,
+      "name": "Retirer le poids referme la sortie",
+      "status": "passed",
+      "observed": {
+        "commands": "CRCRURRDDDDLDDLUCCRCCUURRDDDDRRRDDCCURRRDLLLDLUR",
+        "doorClosed": true,
+        "dead": false
+      },
+      "scope": "Contre-branche locale sur la commande ; aucune impasse définitive affirmée."
+    },
+    {
+      "level": 1,
+      "name": "Variante gagnante : deux arrivées sont permutées",
+      "status": "passed",
+      "observed": {
+        "commands": "CRCRURRDDDDLDDLUCCRCCUURRDDDDRRRDDCCURRRDLLLDDDLDLLDDDDDDDDDLCCCRDCCCLUCRRRCCCURRRRRRRUDLUURDCRCCCDUCCUUUURRRRRXCCLDDDDDDLDDLLLLLLLXLCCLDDDDRCCCDDDDLLDDDDRRDDRRRCCDDDDRRRRRRRRDDDDDDDDDRRRRURCCCURRRRDRRRRRRRURCCDDRRRRDRRRRRDRD",
+        "actions": 225
+      },
+      "scope": "Les quatre arrivées sont communes et non affectées à une identité de héros."
+    }
+  ],
+  "limits": [
+    "Aucune optimalité ni unicité démontrée.",
+    "Les 36 découvertes enseignent les règles et ne constituent pas une condition cachée de victoire."
+  ]
+}

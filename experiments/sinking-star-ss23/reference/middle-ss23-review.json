@@ -1,0 +1,641 @@
+{
+  "game": "SS23",
+  "success": true,
+  "levels": [
+    3,
+    4,
+    5
+  ],
+  "method": "Rejeu des témoins et de variantes complètes, conséquences locales des déplacements, portée et première cible, conservation des ressources et sécurité des deux extrémités.",
+  "checks": [
+    {
+      "level": 3,
+      "name": "Témoin complet et quatre destinations occupées",
+      "status": "passed",
+      "observed": {
+        "actions": 43,
+        "selections": 12,
+        "merchantPushes": 0,
+        "warriorPushes": 3,
+        "chainPushes": 3,
+        "mixedPushes": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 4,
+        "groupSongs": 4,
+        "songHeroMoves": 0,
+        "songStoneMoves": 12,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 18,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+    },
+    {
+      "level": 4,
+      "name": "Témoin complet et quatre destinations occupées",
+      "status": "passed",
+      "observed": {
+        "actions": 132,
+        "selections": 17,
+        "merchantPushes": 8,
+        "warriorPushes": 1,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "swaps": 3,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 19,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 18,
+        "songMonsterMoves": 0,
+        "supportMoves": 1,
+        "partnerMoves": 3,
+        "stoneMoves": 28,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 3,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+    },
+    {
+      "level": 5,
+      "name": "Témoin complet et quatre destinations occupées",
+      "status": "passed",
+      "observed": {
+        "actions": 50,
+        "selections": 16,
+        "merchantPushes": 0,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "swaps": 4,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 1,
+        "bentSwaps": 1,
+        "songs": 4,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 4,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 2,
+        "mirrorMoves": 0,
+        "monsterMoves": 5,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Le groupe nord ne peut pas entrer dans le croisement occupé",
+      "status": "passed",
+      "observed": {
+        "commands": "CCCDD",
+        "firstStepChangesCrates": false,
+        "secondStepRefused": true
+      },
+      "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+    },
+    {
+      "level": 3,
+      "name": "La dernière case du bras droit finance la seconde poussée",
+      "status": "passed",
+      "observed": {
+        "removedCell": {
+          "x": 12,
+          "y": 11
+        },
+        "shortArmSecondPushRefused": true,
+        "realArmChainPushes": 2
+      },
+      "scope": "Comparaison locale avec cette seule case murée ; ne prouve pas l’impossibilité de toute autre stratégie sur la carte modifiée."
+    },
+    {
+      "level": 3,
+      "name": "Le Guerrier doit aussi dégager la réception de cette branche",
+      "status": "passed",
+      "observed": {
+        "commands": "CRRCCDD",
+        "warrior": {
+          "x": 10,
+          "y": 11
+        },
+        "bard": {
+          "x": 10,
+          "y": 8
+        },
+        "refused": true
+      },
+      "scope": "Le Guerrier encore dans le croisement est hors portée et bloque la dernière caisse ; le témoin le range dans le bras sud."
+    },
+    {
+      "level": 3,
+      "name": "La butée fabrique une nouvelle file avec les mêmes charges",
+      "status": "passed",
+      "observed": {
+        "afterThreeLeftSongs": [
+          {
+            "x": 9,
+            "y": 10
+          },
+          {
+            "x": 7,
+            "y": 11
+          },
+          {
+            "x": 8,
+            "y": 11
+          },
+          {
+            "x": 9,
+            "y": 11
+          }
+        ],
+        "wall": {
+          "x": 8,
+          "y": 10
+        },
+        "reusedFile": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 9,
+              "y": 12
+            },
+            "to": {
+              "x": 9,
+              "y": 11
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 11
+            },
+            "to": {
+              "x": 9,
+              "y": 10
+            }
+          },
+          {
+            "actor": "stone",
+            "from": {
+              "x": 9,
+              "y": 10
+            },
+            "to": {
+              "x": 9,
+              "y": 9
+            }
+          }
+        ],
+        "cratesConserved": 4
+      },
+      "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+    },
+    {
+      "level": 3,
+      "name": "Variante gagnante : le Magicien sort par une caisse après le départ du Guerrier",
+      "status": "passed",
+      "observed": {
+        "actions": 37,
+        "selections": 8,
+        "merchantPushes": 0,
+        "warriorPushes": 3,
+        "chainPushes": 3,
+        "mixedPushes": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 0,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 4,
+        "groupSongs": 4,
+        "songHeroMoves": 0,
+        "songStoneMoves": 12,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 0,
+        "stoneMoves": 19,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Les trois poussées de file et la transformation chantée subsistent ; l’échange avec le Guerrier du témoin n’est pas imposé.",
+      "commands": "CRRLDCCDDLLLCCURRRUUUURCURDRRUUUUCCUU",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 4,
+      "name": "Sans dégagement, la balise intercepte le retour",
+      "status": "passed",
+      "observed": {
+        "fromTurn": 3,
+        "command": "L",
+        "wizardAfter": {
+          "x": 6,
+          "y": 5
+        },
+        "bardUnchanged": true,
+        "beaconReturnedToStation": true
+      },
+      "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+    },
+    {
+      "level": 4,
+      "name": "L’échange installe le spécialiste sans déplacer les stocks",
+      "status": "passed",
+      "observed": {
+        "bardStation": {
+          "x": 12,
+          "y": 5
+        },
+        "stonesPreservedBySwap": true,
+        "firstSongMoved": {
+          "x": 14,
+          "y": 6
+        },
+        "firstSongHeld": {
+          "x": 15,
+          "y": 9
+        }
+      },
+      "scope": "La portée est mesurée avant le pas, depuis la loge. Cette comparaison porte sur les deux stocks et ce poste précis."
+    },
+    {
+      "level": 4,
+      "name": "La balise et les deux réserves sont réemployées",
+      "status": "passed",
+      "observed": {
+        "initialCrates": 3,
+        "finalSupports": [
+          {
+            "x": 8,
+            "y": 12
+          },
+          {
+            "x": 9,
+            "y": 12
+          },
+          {
+            "x": 10,
+            "y": 12
+          }
+        ],
+        "reflections": 0,
+        "hydraulicPlatforms": 0,
+        "gates": 0
+      },
+      "scope": "Conservation vérifiée sur chaque étape du témoin ; ne fixe pas tous les emplacements possibles d’une autre traversée."
+    },
+    {
+      "level": 4,
+      "name": "Le départ de la case de service conserve l’appui",
+      "status": "passed",
+      "observed": {
+        "bard": {
+          "x": 10,
+          "y": 14
+        },
+        "upRefused": true,
+        "downAccepted": true,
+        "supportsPreserved": true,
+        "blockingCell": {
+          "x": 10,
+          "y": 13
+        }
+      },
+      "scope": "La comparaison porte sur les deux pas depuis la case de service ; l’appui sous-jacent n’est pas un passager."
+    },
+    {
+      "level": 4,
+      "name": "Variante gagnante : le Marchand immerge seul la balise",
+      "status": "passed",
+      "observed": {
+        "actions": 133,
+        "selections": 17,
+        "merchantPushes": 9,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "swaps": 3,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 19,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 18,
+        "songMonsterMoves": 0,
+        "supportMoves": 1,
+        "partnerMoves": 2,
+        "stoneMoves": 28,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 3,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La poussée mixte enseigne la manutention d’un partenaire ; elle n’est pas une obligation de cette salle. L’envoi du Barde et le travail des réserves sont conservés.",
+      "commands": "CCRCCUUUURUURDULCCLCCDRDDDDDDLDRRCCCDDDDDDDDDDRRRRULLLLLLDRRUUUUUUURDDDDDDDRRRULLLLLDRRRRRCRRRRDDDRCDRRRRRRRRRRRRCDDDDDDRRRDRCCCRRRRR",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 5,
+      "name": "Une caisse échangeable peut être une arrivée mortelle",
+      "status": "passed",
+      "observed": {
+        "commands": "CCR",
+        "wizardArrival": {
+          "x": 10,
+          "y": 9
+        },
+        "adjacentMonster": {
+          "x": 10,
+          "y": 8
+        },
+        "deadHero": "wizard"
+      },
+      "scope": "La cible est une caisse voisine d’un monstre ; cette mort ne repose pas sur un monstre qui attaquerait avant son échange."
+    },
+    {
+      "level": 5,
+      "name": "Un seul décalage sécurise le Magicien, pas encore le passage du Marchand",
+      "status": "passed",
+      "observed": {
+        "commands": "CLCCUCCCRRCCU",
+        "merchantArrival": {
+          "x": 10,
+          "y": 8
+        },
+        "monster": {
+          "x": 10,
+          "y": 7
+        },
+        "deadHero": "merchant"
+      },
+      "scope": "Le second décalage du témoin dégage le voisinage de ce passage ; d’autres préparations ne sont pas exclues."
+    },
+    {
+      "level": 5,
+      "name": "Le monstre reçu frappe le partenaire revenu à côté",
+      "status": "passed",
+      "observed": {
+        "commands": "CLCCUUCCCRRUCCRCCR",
+        "monsterArrival": {
+          "x": 11,
+          "y": 8
+        },
+        "merchant": {
+          "x": 11,
+          "y": 9
+        },
+        "deadHero": "merchant"
+      },
+      "scope": "Le Marchand revient dans sa niche au lieu de s’écarter. Ce contre-parcours local met en évidence le danger du point de réception."
+    },
+    {
+      "level": 5,
+      "name": "La même réception devient sûre après évacuation",
+      "status": "passed",
+      "observed": {
+        "merchant": {
+          "x": 14,
+          "y": 7
+        },
+        "swap": [
+          {
+            "actor": "hero",
+            "from": {
+              "x": 11,
+              "y": 8
+            },
+            "to": {
+              "x": 14,
+              "y": 5
+            }
+          },
+          {
+            "actor": "monster",
+            "from": {
+              "x": 14,
+              "y": 5
+            },
+            "to": {
+              "x": 11,
+              "y": 8
+            }
+          }
+        ],
+        "ray": [
+          {
+            "x": 11,
+            "y": 8
+          },
+          {
+            "x": 12,
+            "y": 8
+          },
+          {
+            "x": 13,
+            "y": 8
+          },
+          {
+            "x": 13,
+            "y": 7
+          },
+          {
+            "x": 13,
+            "y": 6
+          },
+          {
+            "x": 13,
+            "y": 5
+          },
+          {
+            "x": 14,
+            "y": 5
+          }
+        ],
+        "aliveHeroes": 4
+      },
+      "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+    },
+    {
+      "level": 5,
+      "name": "La portée sélective provoque une rencontre et dégage le goulot",
+      "status": "passed",
+      "observed": {
+        "beforeContact": [
+          {
+            "x": 11,
+            "y": 8
+          },
+          {
+            "x": 10,
+            "y": 8
+          }
+        ],
+        "monstersAfter": 0,
+        "circuits": 0,
+        "gates": 0
+      },
+      "scope": "Le retrait des deux acteurs libère le passage de retour. La victoire ne lit aucun compteur de morts."
+    },
+    {
+      "level": 5,
+      "name": "Variante gagnante : l’échange de caisse précède le dernier décalage",
+      "status": "passed",
+      "observed": {
+        "actions": 54,
+        "selections": 20,
+        "merchantPushes": 0,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "swaps": 4,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 1,
+        "bentSwaps": 1,
+        "songs": 4,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 4,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 2,
+        "mirrorMoves": 0,
+        "monsterMoves": 5,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Le premier pas suffit à l’arrivée du Magicien ; le second reste effectué avant l’évacuation du Marchand. L’ordre entre ces préparations reste ouvert.",
+      "commands": "CLCCUCCCRCUCCCRCCURRURRCCURCDDUCCCRDLLDLDLLDLDDDRCCUUR",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    },
+    {
+      "level": 5,
+      "name": "Le reflet global initial est refusé sans effet partiel",
+      "status": "passed",
+      "observed": {
+        "command": "X",
+        "refused": true,
+        "monstersPreserved": true,
+        "blockedMirrorIndices": [
+          1
+        ]
+      },
+      "scope": "Le gardien occidental viserait la case du second miroir. Cette géométrie corrige le raccourci initial découvert lors de la revue indépendante."
+    },
+    {
+      "level": 5,
+      "name": "Variante gagnante : reflet préparé et étape d’évacuation intermédiaire",
+      "status": "passed",
+      "observed": {
+        "actions": 51,
+        "selections": 20,
+        "merchantPushes": 0,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "swaps": 4,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 1,
+        "bentSwaps": 1,
+        "songs": 4,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 4,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 2,
+        "mirrorMoves": 0,
+        "monsterMoves": 6,
+        "reflections": 1,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 2,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Après les deux chants préparatoires, le reflet devient légal. Il place le second gardien dans la visée : le Marchand attend un poste plus proche, puis poursuit son évacuation après l’échange du monstre.",
+      "commands": "CLCCUUXCCCRRCCURRUCCURCCRRCCCDDUCCCDLDLLDLDDDRCCUUR",
+      "expected": {
+        "complete": true,
+        "dead": false,
+        "failed": false
+      }
+    }
+  ],
+  "limits": [
+    "Aucune solution unique ni longueur minimale démontrée.",
+    "La case murée du N3 est un contre-factuel local, pas une recherche exhaustive sur une autre carte.",
+    "Les variantes restent autorisées ; la poussée mixte du N4 et le choix de la cible de sortie du N3 ne sont pas des obligations universelles.",
+    "Les morts contrôlées du N5 appartiennent uniquement aux branches de revue ; les témoins livrés n’en contiennent aucune."
+  ]
+}

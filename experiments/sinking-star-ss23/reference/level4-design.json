@@ -1,0 +1,1164 @@
+{
+  "spec": {
+    "id": "ss23-04",
+    "title": "Le poste emprunté",
+    "mode": "quartet",
+    "rows": [
+      "################",
+      "#.....~~~#######",
+      "#.....~~~#######",
+      "#.B.Z.~~~.o#####",
+      "#.....~~~..#o###",
+      "#.....~~~......#",
+      "#.....~~~....#.#",
+      "#.....~~~....o.#",
+      "#.M...~~~......#",
+      "#.W...~~~......#",
+      "#.....~~~.g...g#",
+      "#########...##.#",
+      "########.......#",
+      "########..g...g#",
+      "################"
+    ]
+  },
+  "commands": "CCRCCUUUURUURDULCCLCCDRDDDDDDLDRCDRRCCDDDDDDDDDDRRRRULLLLLLDRRUUUUUUURDDDDDDDRRRULLLLLDRRRRRCRRRRDDDRCRRRRRRRRRRCDDDDDDRRRDRCCCRRRRR",
+  "actions": [
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 18
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 33
+      }
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 18,
+        "y": 15
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 36
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 1
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 3
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 21,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 15,
+        "y": 18
+      }
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 2
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 51,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 39,
+        "y": 48
+      }
+    },
+    {
+      "id": 6,
+      "data": {
+        "x": 24,
+        "y": 39
+      }
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    },
+    {
+      "id": 4
+    }
+  ],
+  "source": {
+    "piston": false,
+    "platform": false,
+    "label": "Adaptation · Heroes and Artifacts · énigmes 4–5",
+    "url": "https://sinkingstarwalkthrough.com/fr/heroes-and-artifacts-solutions/#%C3%A9nigme-4",
+    "puzzle": "4–5",
+    "objective": "Envoyer le Barde dans le poste de travail, récupérer la balise et réemployer les trois charges pour la traversée collective."
+  },
+  "metrics": {
+    "actions": 132,
+    "selections": 17,
+    "merchantPushes": 8,
+    "warriorPushes": 1,
+    "chainPushes": 1,
+    "mixedPushes": 1,
+    "swaps": 3,
+    "wizardHeroSwaps": 2,
+    "wizardStoneSwaps": 1,
+    "wizardMonsterSwaps": 0,
+    "bentSwaps": 0,
+    "songs": 19,
+    "groupSongs": 0,
+    "songHeroMoves": 0,
+    "songStoneMoves": 18,
+    "songMonsterMoves": 0,
+    "supportMoves": 1,
+    "partnerMoves": 3,
+    "stoneMoves": 28,
+    "mirrorMoves": 0,
+    "monsterMoves": 0,
+    "reflections": 0,
+    "heroReflections": 0,
+    "pistonPushes": 0,
+    "platformsCreated": 3,
+    "monstersRemoved": 0,
+    "blocked": 0,
+    "deaths": 0
+  },
+  "stages": [
+    {
+      "label": "Le Magicien échange avec la balise de la loge. La caisse est rapatriée, et le poste distant possède son premier opérateur.",
+      "turn": 3,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 4,
+            "y": 10
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 5
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Marchand retire la balise renvoyée de la ligne de retour et dégage lui-même la visée.",
+      "turn": 16,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Magicien envoie le Barde dans la loge de travail. Le transfert ne chante pas et laisse les deux réserves en place.",
+      "turn": 19,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 5,
+            "y": 4
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 4,
+            "y": 11
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 6,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "supports": [],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La balise récupérée devient le premier appui. Une poussée mixte libère le Marchand, sans autre ressource ajoutée.",
+      "turn": 36,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 5
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Depuis la loge, le Barde fait descendre la première réserve. Le second stock reste hors de la portée latérale.",
+      "turn": 44,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 12,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 14,
+          "y": 12
+        },
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "La première réserve devient appui, puis glisse d’une case supplémentaire. La case de service laisse le Barde sur le sol.",
+      "turn": 59,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 10,
+            "y": 14
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 9
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le Barde rejoint le second poste. La butée supérieure conserve la réserve pendant son approche, puis les trois pas la mettent en ligne.",
+      "turn": 73,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 13,
+            "y": 11
+          }
+        }
+      ],
+      "stones": [
+        {
+          "x": 15,
+          "y": 12
+        }
+      ],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 9,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Le dernier appui complète la traversée. Les butées inférieures conservent les appuis pendant le départ du Barde.",
+      "turn": 92,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 7,
+            "y": 12
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 6,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 4,
+            "y": 5
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    },
+    {
+      "label": "Les quatre héros occupent les quatre destinations au-delà de la coupure ; les trois anciennes caisses forment le passage.",
+      "turn": 132,
+      "heroes": [
+        {
+          "kind": "merchant",
+          "at": {
+            "x": 12,
+            "y": 15
+          }
+        },
+        {
+          "kind": "warrior",
+          "at": {
+            "x": 12,
+            "y": 12
+          }
+        },
+        {
+          "kind": "wizard",
+          "at": {
+            "x": 16,
+            "y": 12
+          }
+        },
+        {
+          "kind": "bard",
+          "at": {
+            "x": 16,
+            "y": 15
+          }
+        }
+      ],
+      "stones": [],
+      "supports": [
+        {
+          "x": 8,
+          "y": 12
+        },
+        {
+          "x": 9,
+          "y": 12
+        },
+        {
+          "x": 10,
+          "y": 12
+        }
+      ],
+      "mirrors": [],
+      "monsters": [],
+      "circuits": {}
+    }
+  ],
+  "adaptation": {
+    "sourcePrinciple": "Préparer la position du spécialiste par échange et employer une cible intermédiaire pour atteindre sa case de travail.",
+    "changes": "Le poste de l’Explorateur et la baguette du guide deviennent une loge où le chant atteint une réserve bloquée contre une paroi. Le Magicien prend d’abord la place d’une balise, puis celle du Barde ; le Marchand dégage la cible renvoyée. Les charges et les appuis suivent les règles déterministes de SS23, sans orientation spéciale ni artefact.",
+    "limits": "La route décrit un envoi du spécialiste, puis un chantier de retour. Les contre-branches établiront les effets locaux de la visée et de la portée ; elles ne fixent pas un ordre unique de tous les transports.",
+    "localChecks": [
+      {
+        "name": "Témoin complet et quatre destinations occupées",
+        "status": "passed",
+        "observed": {
+          "actions": 132,
+          "selections": 17,
+          "merchantPushes": 8,
+          "warriorPushes": 1,
+          "chainPushes": 1,
+          "mixedPushes": 1,
+          "swaps": 3,
+          "wizardHeroSwaps": 2,
+          "wizardStoneSwaps": 1,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 19,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 18,
+          "songMonsterMoves": 0,
+          "supportMoves": 1,
+          "partnerMoves": 3,
+          "stoneMoves": 28,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 3,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "Sans dégagement, la balise intercepte le retour",
+        "status": "passed",
+        "observed": {
+          "fromTurn": 3,
+          "command": "L",
+          "wizardAfter": {
+            "x": 6,
+            "y": 5
+          },
+          "bardUnchanged": true,
+          "beaconReturnedToStation": true
+        },
+        "scope": "État ou contre-branche locale rejouée ; aucune solution unique ou optimale affirmée."
+      },
+      {
+        "name": "L’échange installe le spécialiste sans déplacer les stocks",
+        "status": "passed",
+        "observed": {
+          "bardStation": {
+            "x": 12,
+            "y": 5
+          },
+          "stonesPreservedBySwap": true,
+          "firstSongMoved": {
+            "x": 14,
+            "y": 6
+          },
+          "firstSongHeld": {
+            "x": 15,
+            "y": 9
+          }
+        },
+        "scope": "La portée est mesurée avant le pas, depuis la loge. Cette comparaison porte sur les deux stocks et ce poste précis."
+      },
+      {
+        "name": "La balise et les deux réserves sont réemployées",
+        "status": "passed",
+        "observed": {
+          "initialCrates": 3,
+          "finalSupports": [
+            {
+              "x": 8,
+              "y": 12
+            },
+            {
+              "x": 9,
+              "y": 12
+            },
+            {
+              "x": 10,
+              "y": 12
+            }
+          ],
+          "reflections": 0,
+          "hydraulicPlatforms": 0,
+          "gates": 0
+        },
+        "scope": "Conservation vérifiée sur chaque étape du témoin ; ne fixe pas tous les emplacements possibles d’une autre traversée."
+      },
+      {
+        "name": "Le départ de la case de service conserve l’appui",
+        "status": "passed",
+        "observed": {
+          "bard": {
+            "x": 10,
+            "y": 14
+          },
+          "upRefused": true,
+          "downAccepted": true,
+          "supportsPreserved": true,
+          "blockingCell": {
+            "x": 10,
+            "y": 13
+          }
+        },
+        "scope": "La comparaison porte sur les deux pas depuis la case de service ; l’appui sous-jacent n’est pas un passager."
+      },
+      {
+        "name": "Variante gagnante : le Marchand immerge seul la balise",
+        "status": "passed",
+        "observed": {
+          "actions": 133,
+          "selections": 17,
+          "merchantPushes": 9,
+          "warriorPushes": 0,
+          "chainPushes": 0,
+          "mixedPushes": 0,
+          "swaps": 3,
+          "wizardHeroSwaps": 2,
+          "wizardStoneSwaps": 1,
+          "wizardMonsterSwaps": 0,
+          "bentSwaps": 0,
+          "songs": 19,
+          "groupSongs": 0,
+          "songHeroMoves": 0,
+          "songStoneMoves": 18,
+          "songMonsterMoves": 0,
+          "supportMoves": 1,
+          "partnerMoves": 2,
+          "stoneMoves": 28,
+          "mirrorMoves": 0,
+          "monsterMoves": 0,
+          "reflections": 0,
+          "heroReflections": 0,
+          "pistonPushes": 0,
+          "platformsCreated": 3,
+          "monstersRemoved": 0,
+          "blocked": 0,
+          "deaths": 0
+        },
+        "scope": "La poussée mixte enseigne la manutention d’un partenaire ; elle n’est pas une obligation de cette salle. L’envoi du Barde et le travail des réserves sont conservés.",
+        "commands": "CCRCCUUUURUURDULCCLCCDRDDDDDDLDRRCCCDDDDDDDDDDRRRRULLLLLLDRRUUUUUUURDDDDDDDRRRULLLLLDRRRRRCRRRRDDDRCDRRRRRRRRRRRRCDDDDDDRRRDRCCCRRRRR",
+        "expected": {
+          "complete": true,
+          "dead": false,
+          "failed": false
+        }
+      }
+    ]
+  }
+}

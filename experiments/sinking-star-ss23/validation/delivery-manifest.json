@@ -1,0 +1,58 @@
+{
+  "game": "SS23",
+  "title": "Les Chambres de Résonance",
+  "version": "0.1.0",
+  "artifact": {
+    "filename": "SS23-demo.html",
+    "bytes": 144949,
+    "sha256": "2c3d7cf83a71a82860376809f318583738adcd041f4e33ff368d81b0a7d9d5ce",
+    "standalone": true,
+    "networkRequiredToPlay": false,
+    "authorWitnessesIncluded": false
+  },
+  "roster": [
+    "merchant",
+    "warrior",
+    "wizard",
+    "bard"
+  ],
+  "defaultHero": "merchant",
+  "tutorial": {
+    "level": 1,
+    "discoveries": 36
+  },
+  "qualification": {
+    "unitTests": 114,
+    "unitPassed": 114,
+    "levelsWon": 8,
+    "totalWitnessActions": 947,
+    "refusedWitnessActions": 0,
+    "witnessDeaths": 0,
+    "ui": "Compiled HTML in Happy DOM with exact public canvas frames and timing",
+    "nativeBrowserSession": false,
+    "priorLayoutsCompared": 72
+  },
+  "sourceSha256": {
+    "src/core.ts": "82c5fc03887aafd309deeaf93354b3364fdc321a71af6970e62c468d67668ee4",
+    "src/levels.ts": "1f57dca41a4a0b8623c40a081ba99a00cd6b8d0aa8100bdaa725556b1b8eb248",
+    "src/level-info.ts": "9f1522a29f4993d29e1f29d600217c3e18e33eaed05b22ab041a7938bd4145b9",
+    "src/tutorial.ts": "13ddcca5cc58bc1e1e8e996af062c56227aa08b7a5547850c5ce0ec22016dbca",
+    "src/browser.ts": "ef5175fa8db562d665ffb3c572d6a8a1d6fe617aa5f86ef5e94d801339592be3",
+    "index.template.html": "ffe4f6e3be10bb8e356990d3cbaccd32b4e985946ab0f18ca0e779ba0d8639c4",
+    "scripts/build-demo.mjs": "7f06dd3bd2ca7558df4b91f94435bc443229faad1a92f798471ae0ae9a709475",
+    "package.json": "73312951cb5d7b3e9b15ced469f8eef25784ba328eac024b8348e6767c192330",
+    "package-lock.json": "2327af3b71d056ec4ef8e1f6a8b7d9f5ff99e43cdb8e77dc3e4009d3ec1895f6",
+    "tsconfig.json": "5dd2083c554cb1b4095fe21191a260ad65d47ac82401250cadfcdf0a587e9c74"
+  },
+  "reportSha256": {
+    "validation/unit-tests.json": "3d360d4850e3bbbe4347a0e4f857a92f30ea575f67bdeb806e6fd85c19638518",
+    "validation/levels-report.json": "b93bda93c01d4437f31e236ca4e3a628199bbb2471a4dda8ca45639d5584e7ce",
+    "validation/ui-dom-report.json": "e0a0ea67c6e8361dd075ee1475e362149d2b053f1091640f647794ce2dda1573",
+    "validation/design-report.json": "7b17fa7a945b6b3f47c58dd3132a5f99f98136dfce78556c70e9206ad0772d61"
+  },
+  "limits": [
+    "Author witnesses prove solvability, not an optimal or unique route.",
+    "Local counter-branches and geometric resource arguments are documented separately.",
+    "This manifest qualifies the standalone laboratory, not native SRA execution or Site publication."
+  ]
+}

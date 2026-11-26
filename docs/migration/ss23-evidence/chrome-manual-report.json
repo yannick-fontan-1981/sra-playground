@@ -1,0 +1,120 @@
+{
+  "game": "SS23",
+  "success": true,
+  "observedAtUtc": "2026-11-26T14:05:04.419866+00:00",
+  "browser": "Chrome via supported cua_repl",
+  "mode": "Manual",
+  "startLevel": 1,
+  "levelsCompleted": 8,
+  "terminalResult": "WIN",
+  "visibleVictory": "VICTORY · Les quatre destinations sont occupées",
+  "finalCanvasBusy": false,
+  "finalUrl": "http://127.0.0.1:4173/?game=SS23&level=8",
+  "commands": 947,
+  "selections": 173,
+  "physicalCommands": 774,
+  "tutorialDiscoveries": 36,
+  "controls": "Public keyboard ArrowUp/ArrowDown/ArrowLeft/ArrowRight, Tab and X; each next command waits for the public canvas aria-busy=false.",
+  "levels": [
+    {
+      "level": 1,
+      "title": "Le conservatoire des échanges",
+      "commands": 221,
+      "selections": 34,
+      "nextVisibleLevel": 2,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": false,
+      "mapSha256": "56836c54f294caaa8283a9e0074e2acd950090fe45adfba89bdae65e0f4eb768"
+    },
+    {
+      "level": 2,
+      "title": "La grille des places libres",
+      "commands": 91,
+      "selections": 12,
+      "nextVisibleLevel": 3,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": false,
+      "mapSha256": "1068bc796ff813c72f8195c028ff9ce5e5ed3b1a7089431adfccb847965560eb"
+    },
+    {
+      "level": 3,
+      "title": "La case de trop",
+      "commands": 43,
+      "selections": 12,
+      "nextVisibleLevel": 4,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": false,
+      "mapSha256": "63ea786e52e66d751dde8f3e43e50b4002e51ee9b6ffdd99568376fad3096005"
+    },
+    {
+      "level": 4,
+      "title": "Le poste emprunté",
+      "commands": 132,
+      "selections": 17,
+      "nextVisibleLevel": 5,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": false,
+      "mapSha256": "739687591ca9af4bab358a5e40d624f18cc83339cee7870197d5c12838299af3"
+    },
+    {
+      "level": 5,
+      "title": "Les deux côtés du sort",
+      "commands": 50,
+      "selections": 16,
+      "nextVisibleLevel": 6,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": false,
+      "mapSha256": "41e84beb5e652f741c1e4f84ea79f4b2bc5f048214db996c46b4430003d66002"
+    },
+    {
+      "level": 6,
+      "title": "Le poste derrière la file",
+      "commands": 126,
+      "selections": 28,
+      "nextVisibleLevel": 7,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": false,
+      "mapSha256": "dd027caaaf63311f0beeba6ffb1ee07b936191b08946b61db53cee1971b3ef83"
+    },
+    {
+      "level": 7,
+      "title": "Le pas qui laisse un appui",
+      "commands": 172,
+      "selections": 33,
+      "nextVisibleLevel": 8,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": false,
+      "mapSha256": "a5474a2167eb6beae1741dc6d4fa86d1a5676a20d2c2bd966e5af74448e674b5"
+    },
+    {
+      "level": 8,
+      "title": "La forme et la place vide",
+      "commands": 112,
+      "selections": 21,
+      "nextVisibleLevel": 8,
+      "feedback": "Les quatre destinations sont occupées. Salle terminée !",
+      "tutorialCounter": "36 / 36 découvertes",
+      "finalVictoryOverlayVisible": true,
+      "mapSha256": "035f4fc781953d28aca5ddcb139c3b70adf78aea8c51049f09bdbd6ec93cde02"
+    }
+  ],
+  "sourceSha256": {
+    "experiments/sinking-star-ss23/src/core.ts": "82c5fc03887aafd309deeaf93354b3364fdc321a71af6970e62c468d67668ee4",
+    "experiments/sinking-star-ss23/src/levels.ts": "1f57dca41a4a0b8623c40a081ba99a00cd6b8d0aa8100bdaa725556b1b8eb248",
+    "experiments/sinking-star-ss23/src/tutorial.ts": "13ddcca5cc58bc1e1e8e996af062c56227aa08b7a5547850c5ce0ec22016dbca",
+    "src/games/sinking-star-ss23.ts": "c4489634a9629321cf27456b1a704e7dcf39da7e3fd6bb4e2fd60d27473bd699",
+    "src/main.ts": "9bb51bcc1b7bc20c1233fa718fee3892bd9f2325402b9e3fbf906bcadd045eb1"
+  },
+  "limits": [
+    "Author witness replayed through the delivered native Manual UI; no autonomous SRA resolution is claimed.",
+    "Exploratory UI checks before the final clean restart are excluded from the 947-command campaign.",
+    "Refusal/death totals are checked in the engine/DOM/native reports; the browser confirms the same route, each room transition, the tutorial counter and the final visible victory."
+  ]
+}

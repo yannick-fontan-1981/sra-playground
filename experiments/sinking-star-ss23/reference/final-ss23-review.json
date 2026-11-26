@@ -1,0 +1,644 @@
+{
+  "game": "SS23",
+  "title": "Les Chambres de Résonance",
+  "status": "passed",
+  "scope": "Revue auteur des salles 6–8 : témoins complets, contraintes de poids et de géométrie, contre-épreuves locales et variantes gagnantes. Les preuves locales ne sont pas présentées comme une unicité globale. Aucun résultat de recherche bornée ne vaut preuve d’impossibilité, et aucune optimalité n’est revendiquée.",
+  "checks": [
+    {
+      "id": "level6-witness",
+      "label": "Le témoin termine avec les quatre rôles, sans refus ni décès",
+      "status": "passed",
+      "level": 6,
+      "title": "Le poste derrière la file",
+      "metrics": {
+        "actions": 126,
+        "selections": 28,
+        "merchantPushes": 0,
+        "warriorPushes": 7,
+        "chainPushes": 6,
+        "mixedPushes": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 16,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level7-witness",
+      "label": "Le témoin termine avec les quatre rôles, sans refus ni décès",
+      "status": "passed",
+      "level": 7,
+      "title": "Le pas qui laisse un appui",
+      "metrics": {
+        "actions": 172,
+        "selections": 33,
+        "merchantPushes": 0,
+        "warriorPushes": 12,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "swaps": 2,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 6,
+        "groupSongs": 4,
+        "songHeroMoves": 7,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 3,
+        "partnerMoves": 13,
+        "stoneMoves": 9,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level8-witness",
+      "label": "Le témoin termine avec les quatre rôles, sans refus ni décès",
+      "status": "passed",
+      "level": 8,
+      "title": "La forme et la place vide",
+      "metrics": {
+        "actions": 112,
+        "selections": 21,
+        "merchantPushes": 3,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "swaps": 4,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 10,
+        "groupSongs": 10,
+        "songHeroMoves": 2,
+        "songStoneMoves": 56,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 4,
+        "stoneMoves": 61,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      }
+    },
+    {
+      "id": "level6-walking-insufficient",
+      "label": "Les deux poids de rangement ne peuvent être remplacés par les héros à l’arrivée",
+      "status": "passed",
+      "proof": "Les quatre héros doivent quitter les deux boutons pour occuper les quatre destinations. Les deux blocs doivent donc être livrés ; les miroirs ont, sur chaque axe de poussée, un mur devant ou derrière et ne peuvent servir de poids de remplacement. Une marche seule ne change pas leur placement."
+    },
+    {
+      "id": "level6-end-wall-and-selective-song",
+      "label": "Le mur arrête la file et le chant n’abaisse qu’un de ses blocs",
+      "status": "passed",
+      "blockedExtraPush": true,
+      "loweredBlock": {
+        "x": 9,
+        "y": 10
+      },
+      "upperBlock": {
+        "x": 10,
+        "y": 9
+      }
+    },
+    {
+      "id": "level6-sacrificial-access-loses-weight",
+      "label": "Pousser le bloc du bas plus loin le convertit en appui et retire un poids",
+      "status": "passed",
+      "commands": "CRRRRCCDD",
+      "remainingDryBlocks": 1,
+      "requiredFinalWeights": 2,
+      "scope": "L’eau peut ouvrir un passage local, mais le bloc coulé ne peut plus couvrir un bouton. Les deux miroirs restent immobiles et les quatre héros doivent rejoindre leurs destinations."
+    },
+    {
+      "id": "level6-bent-specialist-deployment",
+      "label": "La visée contourne les blocs par deux miroirs et déploie le Guerrier",
+      "status": "passed",
+      "path": [
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 7
+        },
+        {
+          "x": 14,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 5
+        },
+        {
+          "x": 13,
+          "y": 5
+        },
+        {
+          "x": 12,
+          "y": 5
+        },
+        {
+          "x": 11,
+          "y": 5
+        },
+        {
+          "x": 10,
+          "y": 5
+        },
+        {
+          "x": 9,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 5
+        },
+        {
+          "x": 8,
+          "y": 6
+        },
+        {
+          "x": 8,
+          "y": 7
+        },
+        {
+          "x": 8,
+          "y": 8
+        },
+        {
+          "x": 8,
+          "y": 9
+        }
+      ],
+      "reflections": 2,
+      "warriorArrival": {
+        "x": 14,
+        "y": 9
+      }
+    },
+    {
+      "id": "level6-press-causal-placement",
+      "label": "La fermeture pousse réellement les deux blocs sur leurs boutons",
+      "status": "passed",
+      "pistonMoves": [
+        {
+          "actor": "stone",
+          "from": {
+            "x": 8,
+            "y": 10
+          },
+          "to": {
+            "x": 7,
+            "y": 10
+          }
+        },
+        {
+          "actor": "stone",
+          "from": {
+            "x": 7,
+            "y": 10
+          },
+          "to": {
+            "x": 6,
+            "y": 10
+          }
+        }
+      ],
+      "earlyRelease": "CRRRRCCDCCCUCCCULLLLDURRDDLLU",
+      "scope": "Quitter la commande une étape plus tôt laisse un bloc dans la reprise. Cette erreur locale est réparable ; aucun ordre global unique n’est déduit."
+    },
+    {
+      "id": "level6-preserving-the-storage",
+      "label": "La sortie latérale de la Barde conserve le rangement",
+      "status": "passed",
+      "upwardDepartureReleases": true,
+      "leftwardDeparturePreserves": true,
+      "scope": "La butée ordinaire bloque les blocs vers la gauche, même s’ils se trouvent dans la portée du chant."
+    },
+    {
+      "id": "level6-right-block-first-variant",
+      "label": "Le poste droit peut être préparé avant le premier chant",
+      "status": "passed",
+      "commands": "CRRRRCULLDDDDDLCCCULLLLDCCDCCURRDDLLLULLLLLDDDDDCCCDLLCCCLLLLUUUUUUUULLCCCUUULUUUULUUULUCCCUUUUUUULUUUUCCCUUUUUUURRUUURU",
+      "metrics": {
+        "actions": 120,
+        "selections": 24,
+        "merchantPushes": 0,
+        "warriorPushes": 7,
+        "chainPushes": 6,
+        "mixedPushes": 0,
+        "swaps": 1,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 0,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 1,
+        "songs": 1,
+        "groupSongs": 0,
+        "songHeroMoves": 0,
+        "songStoneMoves": 1,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 1,
+        "stoneMoves": 16,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 1,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "L’échange et la préparation du bloc droit peuvent précéder le chant sélectif, à condition de retirer le Magicien de la file. Le témoin principal ne revendique pas un ordre unique."
+    },
+    {
+      "id": "level7-walking-insufficient",
+      "label": "Le dispositif initial ne relie aucun départ aux arrivées",
+      "status": "passed",
+      "proof": "Même en ignorant les collisions entre héros, les appuis initiaux et les plateformes actives laissent une case d’eau ouverte avant la rive orientale. Le poste de chant est une galerie distincte."
+    },
+    {
+      "id": "level7-differential-anchoring",
+      "label": "Le héros est entraîné sur la plateforme tandis que son ancien appui reste en place",
+      "status": "passed",
+      "anchored": {
+        "x": 8,
+        "y": 8
+      },
+      "heroArrival": {
+        "x": 9,
+        "y": 8
+      },
+      "emptySupportArrival": {
+        "x": 11,
+        "y": 8
+      },
+      "unanchoredBranch": "CRDDDDLLLLCDDDCR",
+      "scope": "Sans l’occupant, le même chant déplace les deux appuis et coupe l’accès occidental. Ceci compare deux états locaux, pas toutes les solutions possibles."
+    },
+    {
+      "id": "level7-platform-needed-for-sung-hero",
+      "label": "Retirer les plateformes avant ce chant refuse la marche forcée du Magicien",
+      "status": "passed",
+      "commands": "CRDDDDLLLLCDDDRCCLCCCR",
+      "refusal": true,
+      "scope": "Le héros aurait quitté l’appui ancré vers une case d’eau nue. Le moteur refuse le chant entier sans noyer le héros."
+    },
+    {
+      "id": "level7-inverse-north-door",
+      "label": "La galerie nord n’est ouverte que pendant le retrait des plateformes",
+      "status": "passed",
+      "northOpensWhenPlatformsWithdrawn": true,
+      "exitDoorClosedDuringWithdrawal": true,
+      "scope": "Le témoin relâche seulement après le transfert des deux héros vers des sols secs. La réserve doit rester sèche pour ouvrir ensuite la porte des quatre arrivées."
+    },
+    {
+      "id": "level7-continuous-reserve-relay",
+      "label": "La poussée de file remplace le Marchand sans couper les plateformes",
+      "status": "passed",
+      "moves": [
+        {
+          "actor": "hero",
+          "from": {
+            "x": 3,
+            "y": 11
+          },
+          "to": {
+            "x": 3,
+            "y": 12
+          }
+        },
+        {
+          "actor": "stone",
+          "from": {
+            "x": 3,
+            "y": 12
+          },
+          "to": {
+            "x": 3,
+            "y": 13
+          }
+        },
+        {
+          "actor": "hero",
+          "from": {
+            "x": 3,
+            "y": 13
+          },
+          "to": {
+            "x": 3,
+            "y": 14
+          }
+        }
+      ],
+      "circuitStayedPressed": true
+    },
+    {
+      "id": "level7-quiet-boarding-matters",
+      "label": "Approcher la Barde en marchant déplace prématurément le premier appui",
+      "status": "passed",
+      "commands": "CRDDDDLLLLCDDDRCRCCCUUUUUDCCLCCCLLLLLLCRCCLLUUUULLLCCCUUURRRULLULDDDDDCCLLDDDDDDRRRRURRR",
+      "firstSupportMissing": {
+        "x": 8,
+        "y": 8
+      },
+      "scope": "Le témoin utilise donc le Guerrier pour installer la Barde silencieusement. Cette contre-épreuve porte sur l’approche choisie, sans prétendre exclure toute autre préparation."
+    },
+    {
+      "id": "level7-final-duo-has-two-phases",
+      "label": "Le dernier duo laisse d’abord l’appui puis le déplace derrière lui",
+      "status": "passed",
+      "firstPulseKeepsSupport": true,
+      "secondPulseMovesEmptySupport": true,
+      "allHeroesAcrossAtLastPulse": true
+    },
+    {
+      "id": "level7-reserve-first-variant",
+      "label": "La réserve peut remplacer le Marchand avant l’extraction de la Barde",
+      "status": "passed",
+      "commands": "CRDDDDLLLLCDDDRCRCCUUURRRULLULDDDDDCUUUUUDCCCRDLULLDCCLLLLLLCCRCLLUUUULLLDDRRRRRRRRRRRRRUUURCCRUUUUUURRRRRRRRRRRRRUUUCCCDDDDDRRCCUUUUURRRRRRCCRRRRCCDDDDCCRRRRRUUUCCUUUURRRRRUUU",
+      "metrics": {
+        "actions": 176,
+        "selections": 29,
+        "merchantPushes": 0,
+        "warriorPushes": 14,
+        "chainPushes": 1,
+        "mixedPushes": 1,
+        "swaps": 2,
+        "wizardHeroSwaps": 1,
+        "wizardStoneSwaps": 1,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 6,
+        "groupSongs": 4,
+        "songHeroMoves": 7,
+        "songStoneMoves": 0,
+        "songMonsterMoves": 0,
+        "supportMoves": 3,
+        "partnerMoves": 13,
+        "stoneMoves": 11,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "La réserve est livrée plus tôt, puis déplacée temporairement pour ouvrir la porte nord et remise sur le bouton. Le Marchand n’a pas à rester le gardien du circuit jusqu’à cette extraction."
+    },
+    {
+      "id": "level8-walking-insufficient-and-finite-load",
+      "label": "Neuf boutons physiques nécessitent les neuf blocs conservés",
+      "status": "passed",
+      "buttons": 9,
+      "initialBlocks": 9,
+      "spilledReserveBranch": "UUUUUUUURRRR",
+      "proof": "Aucun bloc ne commence sur un bouton ; quatre marcheurs ne peuvent couvrir neuf boutons. À l’arrivée, les quatre héros sont sur des destinations distinctes des boutons, donc chacun des neuf blocs doit rester utilisable comme poids. Un bloc coulé ne se récupère pas."
+    },
+    {
+      "id": "level8-two-staggered-fragments",
+      "label": "Le fragment inférieur ne rejoint le chant qu’au troisième pas",
+      "status": "passed",
+      "initialLowerFragment": [
+        {
+          "x": 9,
+          "y": 10
+        },
+        {
+          "x": 10,
+          "y": 10
+        },
+        {
+          "x": 11,
+          "y": 10
+        }
+      ],
+      "firstTwoSongsLeaveItStill": true,
+      "thirdSongMovesIt": true,
+      "scope": "Le départ n’est pas un carré 3×3. Une rangée vide et deux colonnes de décalage séparent les fragments ; les membres encore hors portée retiennent d’abord le rang inférieur."
+    },
+    {
+      "id": "level8-different-stops-shape-the-load",
+      "label": "Les deux axes déforment les fragments de façons différentes",
+      "status": "passed",
+      "horizontalBlocks": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 7
+        },
+        {
+          "x": 12,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 7
+        },
+        {
+          "x": 13,
+          "y": 8
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 10
+        },
+        {
+          "x": 13,
+          "y": 10
+        },
+        {
+          "x": 14,
+          "y": 10
+        }
+      ],
+      "composedBlocks": [
+        {
+          "x": 2,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "bardFillsNinthPlace": true
+    },
+    {
+      "id": "level8-preserve-the-composition",
+      "label": "L’échange extrait la Barde sans déformer les huit blocs",
+      "status": "passed",
+      "silentExchangePreserves": true,
+      "sungLeftDepartureReleases": true,
+      "scope": "La fabrication du motif est le sujet de la salle. Le retrait silencieux conserve ensuite ce travail ; il n’est pas présenté comme une mécanique inédite de SS23."
+    },
+    {
+      "id": "level8-last-vacancy-replaced",
+      "label": "La réserve remplace physiquement le Magicien dans la neuvième place",
+      "status": "passed",
+      "finalWeights": [
+        {
+          "x": 12,
+          "y": 4
+        },
+        {
+          "x": 11,
+          "y": 3
+        },
+        {
+          "x": 12,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 3
+        },
+        {
+          "x": 13,
+          "y": 4
+        },
+        {
+          "x": 14,
+          "y": 8
+        },
+        {
+          "x": 12,
+          "y": 6
+        },
+        {
+          "x": 13,
+          "y": 6
+        },
+        {
+          "x": 14,
+          "y": 9
+        }
+      ],
+      "wizardReturnedToGallery": true,
+      "scope": "La porte vérifie des boutons ordinaires. Aucun quota de chants, nombre de déplacements, ordre de découverte ou test caché de motif ne déclenche la victoire."
+    },
+    {
+      "id": "level8-reserve-parking-variant",
+      "label": "La réserve peut être garée plus bas avant la composition puis remontée",
+      "status": "passed",
+      "commands": "CCLLCCUUUUUUUUURDDLDDDDDDDCCCRRRRRUUUUCCCUUURRURCDDDDDDDDLLCUUUUURUULURRRDCCLCCCUUULCDDDDDDDDDDLLDDDLCCDDDDDDDDDLDDDRCCCDDDDDDCCDDDDDRRDDD",
+      "metrics": {
+        "actions": 138,
+        "selections": 25,
+        "merchantPushes": 7,
+        "warriorPushes": 0,
+        "chainPushes": 0,
+        "mixedPushes": 0,
+        "swaps": 4,
+        "wizardHeroSwaps": 2,
+        "wizardStoneSwaps": 2,
+        "wizardMonsterSwaps": 0,
+        "bentSwaps": 0,
+        "songs": 10,
+        "groupSongs": 10,
+        "songHeroMoves": 2,
+        "songStoneMoves": 56,
+        "songMonsterMoves": 0,
+        "supportMoves": 0,
+        "partnerMoves": 4,
+        "stoneMoves": 65,
+        "mirrorMoves": 0,
+        "monsterMoves": 0,
+        "reflections": 0,
+        "heroReflections": 0,
+        "pistonPushes": 0,
+        "platformsCreated": 0,
+        "monstersRemoved": 0,
+        "blocked": 0,
+        "deaths": 0
+      },
+      "scope": "Le premier stationnement de la réserve n’est pas imposé. Elle peut attendre dans une autre zone sèche hors du chant, puis retrouver la fenêtre de retour. Le motif final et son dernier poids restent physiques."
+    },
+    {
+      "id": "all-support-motions-empty-water",
+      "label": "Les appuis déplacés sont vides de héros et glissent uniquement entre cases d’eau",
+      "status": "passed",
+      "supportMoves": 3,
+      "occupiedSupportMoves": 0
+    }
+  ],
+  "totals": {
+    "checks": 25,
+    "passed": 25
+  }
+}
