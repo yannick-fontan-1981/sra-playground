@@ -1,0 +1,164 @@
+{
+  "schema": "sic.workshop-phase-continuity.v1",
+  "game": "LS20",
+  "qualification": "passive executed evidence; strict timing in parent archive",
+  "collectorSource": {
+    "local": "de683d72d652dab4913d99984039054c314ec13c",
+    "github": "2d0a2542b2c0a4a289994be32224550858dd282d",
+    "tree": "c9ea787743b347cf59a2f406bb93c940ba5b58f3",
+    "sourceUnchanged": true
+  },
+  "strictSource": "af3e957f512a43548102992f9ac812c38fca33cc",
+  "productionMatchesStrict": true,
+  "trajectory": "6541166c4d64796d06e108954750d594316b53e70ce94d0f11001fadce5d2eb7",
+  "trajectoryMatchesStrict": true,
+  "levelsWon": 7,
+  "commands": 393,
+  "sicCommands": 393,
+  "sealedCommands": 393,
+  "nativeReconciliations": 266,
+  "startLevel": 1,
+  "initialCompleted": 0,
+  "workers": 1,
+  "resets": 0,
+  "undo": null,
+  "perLevel": [
+    {
+      "level": 1,
+      "won": true,
+      "commands": 15,
+      "nativeDecisions": 6,
+      "continuedCommands": 9,
+      "phaseSeriesLengths": [],
+      "phaseCommands": 0,
+      "continuedPhaseCommands": 0,
+      "strictActionCeiling": 20
+    },
+    {
+      "level": 2,
+      "won": true,
+      "commands": 45,
+      "nativeDecisions": 17,
+      "continuedCommands": 28,
+      "phaseSeriesLengths": [],
+      "phaseCommands": 0,
+      "continuedPhaseCommands": 0,
+      "strictActionCeiling": 54
+    },
+    {
+      "level": 3,
+      "won": true,
+      "commands": 41,
+      "nativeDecisions": 21,
+      "continuedCommands": 20,
+      "phaseSeriesLengths": [],
+      "phaseCommands": 0,
+      "continuedPhaseCommands": 0,
+      "strictActionCeiling": 50
+    },
+    {
+      "level": 4,
+      "won": true,
+      "commands": 43,
+      "nativeDecisions": 25,
+      "continuedCommands": 18,
+      "phaseSeriesLengths": [],
+      "phaseCommands": 0,
+      "continuedPhaseCommands": 0,
+      "strictActionCeiling": 52
+    },
+    {
+      "level": 5,
+      "won": true,
+      "commands": 48,
+      "nativeDecisions": 33,
+      "continuedCommands": 15,
+      "phaseSeriesLengths": [],
+      "phaseCommands": 0,
+      "continuedPhaseCommands": 0,
+      "strictActionCeiling": 58
+    },
+    {
+      "level": 6,
+      "won": true,
+      "commands": 94,
+      "nativeDecisions": 57,
+      "continuedCommands": 37,
+      "phaseSeriesLengths": [
+        5,
+        7,
+        2,
+        3,
+        2,
+        2,
+        7,
+        3,
+        5,
+        7,
+        5
+      ],
+      "phaseCommands": 48,
+      "continuedPhaseCommands": 37,
+      "strictActionCeiling": 113
+    },
+    {
+      "level": 7,
+      "won": true,
+      "commands": 107,
+      "nativeDecisions": 107,
+      "continuedCommands": 0,
+      "phaseSeriesLengths": [],
+      "phaseCommands": 0,
+      "continuedPhaseCommands": 0,
+      "strictActionCeiling": 129
+    }
+  ],
+  "initialStationOcclusions": [
+    {
+      "globalCommand": 223,
+      "level": 6,
+      "actionIndex": 0,
+      "hiddenRoles": [
+        "color"
+      ]
+    },
+    {
+      "globalCommand": 248,
+      "level": 6,
+      "actionIndex": 0,
+      "hiddenRoles": [
+        "shape"
+      ]
+    },
+    {
+      "globalCommand": 265,
+      "level": 6,
+      "actionIndex": 0,
+      "hiddenRoles": [
+        "rotation"
+      ]
+    }
+  ],
+  "occludedPositionsReplacedByPrediction": false,
+  "gate": {
+    "localCommit": "aed16cc225c5d85c223bf78bab9c9f297680f9fb",
+    "levels": 115,
+    "games": 19,
+    "cohorts": 17,
+    "previous108CapsUnchanged": true,
+    "completeCi": "pending integration"
+  },
+  "validation": {
+    "passiveAndGateTests": 50,
+    "passed": 50,
+    "exitCode": 0,
+    "syntaxAndWorkflowCheckExitCode": 0,
+    "independentReadOnlyReview": "favorable"
+  },
+  "limits": [
+    "The collector does not expose an undo counter; the strict result separately records zero.",
+    "Three initial station readings remain null under the observed actor. Every counted continuation has three directly measured stations before and after.",
+    "The collector is not a timing qualification.",
+    "Full integrated CI and published viewer verification are subsequent gates."
+  ]
+}

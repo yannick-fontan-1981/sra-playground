@@ -1,0 +1,28 @@
+✔ a win with identical commands but a new decision at every step fails the continuity gate (2.424239ms)
+✔ refuses early or incomplete reconciliation, a skipped ticket and an oversized series (0.777174ms)
+✔ walking continuity alone cannot satisfy an object or launch-positioning requirement (0.281501ms)
+✔ oriented transport permits genuine unitary waits but requires one chronological session and one seal (1.733395ms)
+✔ a peer changing pixels cannot stand in for measured motion of the controlled carrier (1.066797ms)
+✔ physical accounting distinguishes continuous motion of the same cargo from walking (0.365156ms)
+✔ continuity retains the exact plan across later tickets even when the opening trace has expired (1.264413ms)
+✔ continuity correlates actual returns by plan, family and ticket index and counts only their seals (0.457645ms)
+✔ oriented evidence measures the own body and coupled crate from pixels independently of peer movement or predicted walk (44.199769ms)
+✔ missing or ambiguous public scenes remain null, including the unbound side of a level boundary (4.005817ms)
+✔ the passive workshop capture retains earlier proof and reads the complete public phase (4.387879ms)
+✔ an open prefix never samples or claims acquired workshop state (2.252092ms)
+✔ workshop evidence exposes an unreadable actor: {"missingActor":true} (0.40732ms)
+✔ workshop evidence exposes an unreadable actor: {"duplicateActor":true} (0.862722ms)
+✔ workshop evidence exposes an unreadable station: {"missingStation":1} (0.907188ms)
+✔ workshop evidence exposes an unreadable station: {"duplicateStation":1} (0.793668ms)
+✔ the observer preserves actual phase, glyph and reserve contradictions (0.965966ms)
+✔ native closure samples and detaches the real acquired phase once (1.222711ms)
+✔ missing frames or acquisition remain missing rather than predicted (2.0109ms)
+✔ unknown periods, unitary probes and malformed geometry do not produce workshop phase evidence (0.927168ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 259.5196

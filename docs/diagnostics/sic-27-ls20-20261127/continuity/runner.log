@@ -1,0 +1,12 @@
+{"code":"LS20","level":3,"issued":100,"seconds":28}
+{"code":"LS20","level":6,"issued":200,"seconds":60}
+{"code":"LS20","level":7,"issued":300,"seconds":111}
+LS20 [
+  [ true, 15 ],
+  [ true, 45 ],
+  [ true, 41 ],
+  [ true, 43 ],
+  [ true, 48 ],
+  [ true, 94 ],
+  [ true, 107 ]
+]

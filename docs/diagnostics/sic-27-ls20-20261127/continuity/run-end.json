@@ -1,0 +1,18 @@
+{
+  "observedEndAt": "2026-11-27T05:23:15.551922+00:00",
+  "exitCode": 0,
+  "sourceCommit": "de683d72d652dab4913d99984039054c314ec13c",
+  "clean": true,
+  "sourceHashes": {
+    "src/sic/framed-contact.ts": "ae57f60c47e29bff9ba19994cc2635526183374cb05f05c3e3f28dcab7f8f0ae",
+    "src/logos-engine/v6-native-runtime.ts": "ae5b257903e8e8dbe73a1fda0c4673efffbfcefadff99ad74f3936fc81471722",
+    "src/runtime/v6-agent-service.ts": "05333b7d65fc24d7ab3df6ea94733984836e21a05cfa49f5dc278f7d2a5c71d2",
+    "scripts/compare-source100.mjs": "219889de8fa31f8d47a4efed7125aa9024b51ee3682d6ece0089f62e59fe43ed",
+    "scripts/sic-continuity-evidence.mjs": "9b43fc59c7a7f0e6eed87abf4e45078abd0c3462df2b5849c527c269a7b14de5",
+    "scripts/sic-continuity-contract.mjs": "a3479f18e0c55167000e7cd700a7ebef4b4b39991091f86b649d67f12cdb4c2b",
+    "scripts/sic-workshop-phase-continuity.mjs": "a88edfac0a2c0f1bd1d03077e53681d98fd4a52e7ff71c7039302929be844f9c",
+    "scripts/sic-workshop-phase-continuity-contract.mjs": "85b12ce2955e6b040ed2cc135bbaa33d24bd0ebb9a2df8a30f90e5b9c1395961"
+  },
+  "resultsSha256": "20fbaa1d0618edb4544c1c9f7b2295a6e397ed89c882ea2da7f7a2dd8312bff4",
+  "sourceUnchanged": true
+}

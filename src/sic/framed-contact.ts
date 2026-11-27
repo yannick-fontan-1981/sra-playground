@@ -246,6 +246,11 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
   let glyphMemory: GlyphRouteMemory | null = null;
   let glyphRoute: GlyphRouteState | null = null;
   let glyphWorkshop: GlyphWorkshopState | null = null;
+  // A guard may observe several returns before the native prefix is sealed.
+  // Keep their ordered state with this proposal; only record publishes it.
+  const workshopReturns = new WeakMap<Proposal, {
+    beforeRef: string; afterRef: string; result: ReturnType<typeof observeGlyphWorkshop>;
+  }[]>();
   let fogCarry: { epoch: number; knowledge: FogGlyphCarry } | null = null;
   let fogGlyph: FogGlyphRoute | null = null;
   function offerFogGlyph(observation: NativeObservation, rows: NativeRows, available: readonly string[], remaining: number,
@@ -477,6 +482,13 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
           || proposal.binding?.level_epoch !== observation.level_epoch) {
           return { admitted: false, reason: 'framed_contact_scope_changed' };
         }
+        if (proposal.glyphWorkshop) {
+          const prior = workshopReturns.get(proposal)?.[index - 1];
+          if (!prior?.result?.matched || prior.afterRef !== observation.observation_ref
+            || prior.result.state.epoch !== observation.level_epoch) {
+            return { admitted: false, reason: 'workshop_prefix_return_not_bound' };
+          }
+        }
         const [x, y] = step.expected_after;
         const pixels = pixelsAt(packet.frame_rows, [x, y], pitch);
         const expected = step.landingBefore;
@@ -517,8 +529,16 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       }
       if (proposal.glyphWorkshop && !scored) {
         const { local, step } = proposal.glyphWorkshop;
-        const current = index > 0 && glyphWorkshop?.epoch === before.level_epoch ? glyphWorkshop : local;
+        const returns = workshopReturns.get(proposal) ?? [], prior = returns[index - 1];
+        if (index > 0 && (!prior?.result?.matched || prior.afterRef !== before.observation_ref
+          || prior.result.state.epoch !== before.level_epoch)) {
+          return { matched: false, seal_prefix: true, reason: 'workshop_prefix_return_not_bound' };
+        }
+        const current = index > 0 ? prior!.result!.state : local;
         const result = observeGlyphWorkshop(first, second, current, workshopLeg(step, index), after.observation_ref);
+        workshopReturns.set(proposal, [...returns.slice(0, index), {
+          beforeRef: before.observation_ref, afterRef: after.observation_ref, result,
+        }]);
         return { matched: result?.matched ?? false, seal_prefix: complete || result?.matched !== true,
           reason: result?.reason ?? 'glyph_or_landing_unresolved' };
       }
@@ -628,7 +648,9 @@ export function createSicFramedContact(family = framedContactId): NativeFamily<P
       if (proposal.glyphWorkshop) {
         const { local, step } = proposal.glyphWorkshop;
         const current = index > 0 && glyphWorkshop?.epoch === before.level_epoch ? glyphWorkshop : local;
-        const result = observeGlyphWorkshop(first, second, current, workshopLeg(step, index), after.observation_ref);
+        const returned = workshopReturns.get(proposal)?.[index];
+        const result = returned?.beforeRef === before.observation_ref && returned.afterRef === after.observation_ref
+          ? returned.result : observeGlyphWorkshop(first, second, current, workshopLeg(step, index), after.observation_ref);
         glyphWorkshop = result?.state ?? { ...current, stopped: true };
         return { events: [], ...(result?.evidence ? { reviewEvidence: result.evidence } : {}) };
       }
