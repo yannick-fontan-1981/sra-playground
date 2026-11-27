@@ -25,7 +25,7 @@ async function witnessedRoom(rotated = false) {
     for (let y = 0; y < pitch; y++) for (let x = 0; x < pitch; x++)
       rows[phase[1] + v * pitch + y]![phase[0] + u * pitch + x] = pixels(x, y);
   };
-  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean; interference?: boolean; distantCargo?: boolean; duplicatePeer?: boolean; ambiguousPeers?: boolean } = {}) {
+  function frame(tick: number, options: { blocked?: boolean; ambiguous?: boolean; lostCargo?: boolean; unpairedShift?: boolean; targetTaken?: boolean; secondOwner?: boolean; interference?: boolean; distantCargo?: boolean; duplicatePeer?: boolean; ambiguousPeers?: boolean; peerTick?: number; peerReleased?: boolean; unfamiliarPeerShell?: boolean; ambiguousPeerCargo?: boolean; peerFloor?: boolean } = {}) {
     const rows = Array.from({ length: 64 }, () => Array<number>(64).fill(background));
     const receiverTiles: NativePoint[] = [[8, 2], [9, 2], [9, 5], [10, 5]];
     for (const site of receiverTiles) paint(rows, site, (x, y) => {
@@ -38,8 +38,12 @@ async function witnessedRoom(rotated = false) {
     const part = (ink: number) => (x: number, y: number) => x === 0 || y === 0 || x === pitch - 1 || y === pitch - 1 ? ink : core;
     paint(rows, [tick, 2], own);
     paint(rows, options.distantCargo ? [7, 2] : [tick + 1, 2], part(options.lostCargo || options.distantCargo ? shell : faceInk));
-    paint(rows, [2 + tick - Number(!!options.unpairedShift), 5], () => carrier);
-    paint(rows, options.targetTaken ? [8, 2] : [3 + tick, 5], part(peerShell));
+    const peerTick = options.peerTick ?? tick;
+    paint(rows, [2 + peerTick - Number(!!options.unpairedShift), 5], () => carrier);
+    paint(rows, options.targetTaken ? [8, 2] : [3 + peerTick, 5],
+      part(options.unfamiliarPeerShell ? rotated ? 14 : 6 : options.peerReleased ? shell : peerShell));
+    if (options.ambiguousPeerCargo) paint(rows, [2 + peerTick, 6], part(peerShell));
+    if (options.peerFloor) paint(rows, [5, 6], () => rotated ? 1 : 2);
     if (options.duplicatePeer) {
       paint(rows, [12 - tick, 8], () => carrier);
       paint(rows, [13 - tick, 8], part(peerShell));
@@ -49,7 +53,7 @@ async function witnessedRoom(rotated = false) {
       paint(rows, [8 - tick, 6], part(peerShell));
     }
     if (options.blocked) paint(rows, [tick + 2, 2], () => rotated ? 0 : 6);
-    if (options.secondOwner) paint(rows, [3 + tick, 6], () => rotated ? 0 : 6);
+    if (options.secondOwner) paint(rows, [3 + peerTick, 6], () => rotated ? 0 : 6);
     if (options.ambiguous) paint(rows, [0, 8], own);
     if (options.interference) paint(rows, [0, 9], () => interferingInk);
     return rows;
@@ -270,4 +274,78 @@ test('an unanchored interior carrier cannot supply the receiver floor color', as
     held: null, free: { ACTION2: [0, 1] } } });
   assert.equal(await room.family.propose(await room.observe(rows, 4), rows, [], 40), null,
     'With all receiver contours hidden, a central full-cell object is not evidence of traversable receiver fill');
+});
+
+for (const rotated of [false, true]) test('known peer coupling changes preserve the actually executed own route'
+  + (rotated ? ' after rotated geometry and recolored coupling' : ''), async () => {
+  const room = await settledParallelRoom(rotated);
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'observed-peer-coupling', maxPointOccurrences: 250 }));
+  room.family.restore({ state: { ...room.family.state().state as Record<string, any>,
+    geometry: { ...room.learned.geometry, insetFill: rotated ? 1 : 2 } } });
+  const sessionId = 'peer-coupling-' + rotated;
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(room.packet(room.frame(2, { peerFloor: true }))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+  const indices: number[] = [];
+  while (result.ticket) {
+    const ticket = result.ticket;
+    indices.push(ticket.actionIndex);
+    assert.ok(indices.length <= 5);
+    const tick = 2 + indices.length;
+    result = await service.handle({ type: 'advance', sessionId, sequence: indices.length, ticketId: ticket.id, executionMs: 1,
+      observation: toV6PublicObservation(room.packet(room.frame(tick,
+        { peerTick: Math.max(2, tick - 2), peerReleased: tick === 3, peerFloor: true })), indices.length) });
+  }
+  assert.deepEqual(indices, [0, 1, 2, 3, 4], 'The stationary release and renewed attachment have their acquired meanings');
+  const state = room.family.state().state as Record<string, any>;
+  assert.deepEqual(state.held, room.at([8, 2]));
+  assert.deepEqual(state.transports[0].box, room.at([8, 5]));
+  assert.ok(result.snapshot.trace.filter(event => event.kind === 'actual_outcome').every(event => event.matched === true));
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 5);
+});
+
+for (const rotated of [false, true]) test('a newly attached part immediately reuses the witnessed carrier role'
+  + (rotated ? ' with a changed palette and controller' : ''), async () => {
+  const room = await settledParallelRoom(rotated);
+  const propose = room.family.propose.bind(room.family);
+  room.family.propose = (observation, rows, inputs, remaining, execution) => propose(observation, rows, inputs, Math.min(remaining, 2), execution);
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'reused-peer-coupling', maxPointOccurrences: 250 }));
+  const sessionId = 'peer-coupling-reuse-' + rotated;
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(room.packet(room.frame(2))), budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+  for (let count = 1; count <= 2; count++) {
+    assert.ok(result.ticket, 'Both declared commands must actually be issued');
+    result = await service.handle({ type: 'advance', sessionId, sequence: count, ticketId: result.ticket.id, executionMs: 1,
+      observation: toV6PublicObservation(room.packet(room.frame(2 + count, { peerTick: 2, peerReleased: count === 1 })), count) });
+  }
+  assert.equal(result.kind, 'boundary');
+  const state = room.family.state().state as Record<string, any>;
+  assert.equal(state.transports[0].sources.length, 1, 'The new attachment supplies one current association, without two repeated translations');
+  const currentProof = state.transports[0].sources[0];
+  result = await service.handle({ type: 'resume', sessionId, sequence: 2 });
+  assert.ok(result.ticket);
+  const proposal = result.snapshot.proposal as Record<string, any>;
+  assert.equal(proposal.sicSituationCard.reservedParts.length, 1);
+  assert.ok(proposal.route_refs.includes(currentProof));
+  assert.ok(proposal.route_refs.includes(room.learned.sharedEvidence));
+  result = await service.handle({ type: 'advance', sessionId, sequence: 3, ticketId: result.ticket.id, executionMs: 1,
+    observation: toV6PublicObservation(room.packet(room.frame(5, { peerTick: 3 })), 3) });
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+});
+
+for (const condition of ['secondOwner', 'unfamiliarPeerShell', 'ambiguousPeerCargo'] as const) test('a peer coupling return closes on ' + condition, async () => {
+  const room = await settledParallelRoom();
+  const service = new V6AgentService(() => new NativeV6Runtime({ families: [room.family], sourceDigest: 'peer-coupling-refutation', maxPointOccurrences: 250 }));
+  const sessionId = 'peer-coupling-refutation-' + condition;
+  if (condition === 'ambiguousPeerCargo') room.family.restore({ state: { ...room.family.state().state as Record<string, any>,
+    geometry: { ...room.learned.geometry, initial_boxes: [...room.learned.geometry.initial_boxes, room.at([4, 6])] } } });
+  let result = await service.handle({ type: 'init', sessionId, sequence: 0,
+    observation: toV6PublicObservation(room.packet(room.frame(2, { secondOwner: condition === 'secondOwner', ambiguousPeerCargo: condition === 'ambiguousPeerCargo' }))),
+    budgets: { targetLevels: 2, levelActionCaps: [40, 40] } });
+  assert.ok(result.ticket);
+  result = await service.handle({ type: 'advance', sessionId, sequence: 1, ticketId: result.ticket.id, executionMs: 1,
+    observation: toV6PublicObservation(room.packet(room.frame(3, { peerTick: 2, peerReleased: true, [condition]: true })), 1) });
+  assert.equal(result.ticket, null);
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, false);
+  assert.equal(result.snapshot.trace.findLast(event => event.kind === 'sealed_prefix')?.acquired_actions, 1);
+  assert.equal((room.family.state().state as Record<string, any>).sharedEvidence, room.learned.sharedEvidence);
 });

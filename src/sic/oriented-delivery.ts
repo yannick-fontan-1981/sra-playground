@@ -19,13 +19,14 @@ type Scene = { pose: NativePoint; face: NativePoint; face_value: number; boxes: 
 type Relay = { axis: 0 | 1; line: number; direction: NativePoint; cells: NativePoint[]; carrier: string; evidence: string[] };
 type State = { epoch: number; geometry: Geometry; color: number; held: NativePoint | null; invitation: NativePoint | null;
   free: Record<string, NativePoint>; loaded: Record<string, NativePoint>; tried: string[]; refs: string[]; count: number;
-  transports?: readonly Transport[]; sharedEvidence?: string; transportCarriers?: string[];
+  transports?: readonly Transport[]; sharedEvidence?: string; transportCarriers?: string[]; transportCouplings?: readonly TransportCoupling[];
   relay?: Relay; sectorNetwork?: SectorNetwork; passage?: DeliveryPassage; waits?: number; stalledWaits?: number; stopped?: boolean;
   interference?: { ink: number; ref: string }; interceptionRef?: string; interceptedInk?: number;
   rendezvousWaits?: number; transferEvidence?: { part: NativePoint; ref: string }; parallel?: ParallelDelivery;
   sectorInterception?: ParallelDelivery };
 type Transport = { readonly carrier: string; readonly pose: NativePoint; readonly box: NativePoint;
-  readonly sources: readonly string[] };
+  readonly sources: readonly string[]; readonly shell?: number };
+type TransportCoupling = { readonly carrier: string; readonly shell: number; readonly sources: readonly string[] };
 type Move = { pose: NativePoint; face: NativePoint; cargo: NativePoint | null };
 type Motion = { input: string; prediction: Move };
 type ParallelDelivery = { ink: number; ref: string; track?: NativePoint; returns: Record<string, Record<string, number>>;
@@ -145,7 +146,7 @@ function carrierPositions(observation: NativeObservation, local: State): Map<str
   for (const part of observation.entities) {
     const [x, y, r, b] = part.bbox;
     if (part.area !== pitch * pitch || r - x + 1 !== pitch || b - y + 1 !== pitch ||
-      [background, core, local.color].includes(part.palette_value) || (x - phase[0]) % pitch || (y - phase[1]) % pitch) continue;
+      [background, core, local.color, local.geometry.insetFill].includes(part.palette_value) || (x - phase[0]) % pitch || (y - phase[1]) % pitch) continue;
     const sites = found.get(part.signature) ?? [];
     sites.push([(x - phase[0]) / pitch, (y - phase[1]) / pitch]);
     found.set(part.signature, sites);
@@ -161,11 +162,8 @@ function sectorCarriers(observation: NativeObservation, local: State): NativePoi
   return [...carrierPositions(observation, local)].flatMap(([signature, sites]) => local.transportCarriers?.includes(signature) ? sites : []).sort(compare);
 }
 
-function transportReturn(before: NativeObservation, after: NativeObservation, local: State, old: Scene, next: Scene) {
+function pairedCarriers(before: NativeObservation, after: NativeObservation, local: State) {
   const carriers = carrierPositions(before, local), returned = carrierPositions(after, local);
-  const removed = positions(old).filter(box => !Object.hasOwn(next.boxes, key(box)) && !same(box, local.held));
-  const shifts: { from: NativePoint; to: NativePoint }[] = [];
-  const transports: Transport[] = [];
   const pairs = [...carriers].flatMap(([carrier, origins]) => {
     const destinations = returned.get(carrier);
     if (!destinations || origins.length !== destinations.length) return [];
@@ -179,6 +177,19 @@ function transportReturn(before: NativeObservation, after: NativeObservation, lo
         ? [{ carrier, pose, position }] : [];
     });
   });
+  return { carriers, returned, pairs };
+}
+
+function reservedTransports(local: State): readonly Transport[] {
+  return (local.transports ?? []).filter(item => item.sources.length >= 2
+    || item.sources.length > 0 && !!local.sharedEvidence && local.transportCarriers?.includes(item.carrier));
+}
+
+function transportReturn(before: NativeObservation, after: NativeObservation, local: State, old: Scene, next: Scene) {
+  const { carriers, returned, pairs } = pairedCarriers(before, after, local);
+  const removed = positions(old).filter(box => !Object.hasOwn(next.boxes, key(box)) && !same(box, local.held));
+  const shifts: { from: NativePoint; to: NativePoint }[] = [];
+  const transports: Transport[] = [];
   for (const { carrier, pose, position } of pairs) {
     const previous = local.transports?.find(candidate => candidate.carrier === carrier && same(candidate.pose, pose));
     const delta = sub(position, pose);
@@ -201,10 +212,33 @@ function transportReturn(before: NativeObservation, after: NativeObservation, lo
     if (pairs.length !== 1) continue;
     const shift = pairs[0]!;
     shifts.push(shift);
-    const evidence = previous && same(previous.box, shift.from) ? previous.sources.slice(-1) : [];
-    transports.push({ carrier, pose: position, box: shift.to, sources: [...evidence, after.observation_ref] });
+    const shell = next.boxes[key(shift.to)]!;
+    const evidence = previous && same(previous.box, shift.from) && previous.shell === shell
+      && old.boxes[key(shift.from)] === shell ? previous.sources.slice(-1) : [];
+    transports.push({ carrier, pose: position, box: shift.to, shell, sources: [...evidence, after.observation_ref] });
   }
   return { shifts, transports };
+}
+
+function couplingReturns(before: NativeObservation, after: NativeObservation, local: State, old: Scene, next: Scene) {
+  const { carriers, returned, pairs } = pairedCarriers(before, after, local);
+  const origins = [...carriers.values()].flat(), destinations = [...returned.values()].flat();
+  const changes = positions(old).filter(box => !same(box, local.held) && Object.hasOwn(next.boxes, key(box))
+    && old.boxes[key(box)] !== next.boxes[key(box)]);
+  return changes.flatMap(box => {
+    const source = old.boxes[key(box)]!, shell = next.boxes[key(box)]!;
+    const attached = source === local.geometry.rest_shell;
+    if (!attached && shell !== local.geometry.rest_shell) return [];
+    const owners = pairs.filter(pair => same(pair.pose, pair.position) && distance(pair.pose, box) === 1);
+    if (owners.length !== 1 || origins.filter(pose => distance(pose, box) === 1).length !== 1
+      || destinations.filter(pose => distance(pose, box) === 1).length !== 1) return [];
+    const owner = owners[0]!;
+    const role = local.transportCouplings?.find(role => role.carrier === owner.carrier && role.shell === (attached ? shell : source));
+    if (!role || !role.sources.length || changes.filter(other => distance(owner.pose, other) === 1).length !== 1) return [];
+    const coupled = attached ? next : old;
+    if (positions(coupled).filter(other => distance(owner.pose, other) === 1 && coupled.boxes[key(other)] === role.shell).length !== 1) return [];
+    return [{ carrier: owner.carrier, pose: owner.position, box, shell, attached, sources: [after.observation_ref] }];
+  });
 }
 
 function shortest(start: Move, fixed: Set<string>, floor: Set<string>, vectors: Readonly<Record<string, NativePoint>>,
@@ -279,7 +313,7 @@ function planInterception(local: State, scene: Scene, rows: NativeRows, commands
 function planDelivery(local: State, scene: Scene, rows: NativeRows, commands: Readonly<Record<string, NativePoint>>,
   blockers: readonly NativePoint[] = []): Step | null {
   const { geometry: g, held } = local, parts = positions(scene);
-  const reserved = new Set((local.transports ?? []).filter(item => item.sources.length >= 2).map(item => key(item.box)));
+  const reserved = new Set(reservedTransports(local).map(item => key(item.box)));
   const goal = new Set(g.targets.map(key));
   const sending = local.sectorNetwork?.localTargets?.length ? new Set(local.sectorNetwork.sending) : null;
   const floor = sending ?? deliveryFloor(g, scene, rows);
@@ -444,7 +478,7 @@ function planPassage(local: State, scene: Scene, commands: Readonly<Record<strin
   const passage = local.passage!;
   const parts = positions(scene), held = local.held;
   const targets = new Set(local.geometry.targets.map(key));
-  const reserved = new Set((local.transports ?? []).filter(item => item.sources.length >= 2).map(item => key(item.box)));
+  const reserved = new Set(reservedTransports(local).map(item => key(item.box)));
   const pending = parts.filter(part => !targets.has(key(part)));
   const work = held ? [held] : pending.filter(part => !reserved.has(key(part)));
   const current: Move = { pose: scene.pose, face: scene.face, cargo: held };
@@ -746,6 +780,9 @@ function peerRouteReturn(proposal: Proposal, walk: WalkStep, before: NativeObser
     delete expected[key(shift.from)];
     expected[key(shift.to)] = value;
   }
+  for (const change of couplingReturns(before, after, { ...local, held: walk.cargoBefore }, old, actual)) {
+    expected[key(change.box)] = change.shell;
+  }
   return Object.keys(expected).length === Object.keys(actual.boxes).length
     && Object.entries(expected).every(([position, value]) => actual.boxes[position] === value);
 }
@@ -840,14 +877,14 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
         ? { ...initial, ...(interference ? { interference } : {}), ...(relay ? { relay } : {}), ...(sectorNetwork ? { sectorNetwork } : {}), ...(passage ? { passage } : {}),
           ...(parallel ? { parallel } : {}),
           free: previous.free, loaded: previous.loaded, sharedEvidence: previous.sharedEvidence!,
-          transportCarriers: [...(previous.transportCarriers ?? [])] } : initial;
+          transportCarriers: [...(previous.transportCarriers ?? [])], transportCouplings: [...(previous.transportCouplings ?? [])] } : initial;
       if (passage && !local.passage) local = { ...local, passage };
       if (relay && !local.relay) {
         local = { ...local, relay, waits: 0, stalledWaits: 0 };
         delete local.passage;
       }
       const commands: Readonly<Record<string, NativePoint>> = { ...labels, ...local.free, ...(local.held ? local.loaded : {}) };
-      const reserved = (local.transports ?? []).filter(item => item.sources.length >= 2);
+      const reserved = reservedTransports(local);
       const invited = same(ahead, local.invitation) && Object.hasOwn(scene.boxes, key(ahead)) && !reserved.some(item => same(item.box, ahead));
       const forms = local.interference ? carrierForms(rows, geometry, local.interference.ink) : [];
       const carrier = forms.length === 1 ? forms[0]! : null;
@@ -882,7 +919,7 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const ref = observation.observation_ref;
       const evidence: [string, ...string[]] = [ref, ...new Set([...local.refs, local.sharedEvidence, local.interference?.ref, local.interceptionRef, parallel?.ref,
         local.transferEvidence?.ref,
-        ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources)]
+        ...(relay?.evidence ?? []), ...reserved.flatMap(item => item.sources), ...(local.transportCouplings ?? []).flatMap(role => role.sources)]
         .filter((value): value is string => !!value && value !== ref))];
       const known = step.intent === 'motion' ? (local.held ? local.loaded : local.free)[step.input] : null;
       const mode = execution?.reasoningMode ?? 'exploration';
@@ -1076,13 +1113,21 @@ export function createSicVerifyOrientedDelivery(family = verifyOrientedDeliveryI
       const changed = Object.keys(old.boxes).filter(key => Object.hasOwn(scene.boxes, key) && old.boxes[key] !== scene.boxes[key]);
       const ahead = add(scene.pose, scene.face);
       const external = transportReturn(before, after, local, old, scene);
+      const attachments = couplingReturns(before, after, local, old, scene).filter(change => change.attached);
       const next: State = { ...local, count: local.count + 1, invitation: null, refs: [...local.refs.slice(-5), after.observation_ref],
         tried: [...local.tried, index === 0 ? proposal.attempt : JSON.stringify([old.pose, old.face, old.boxes, local.held, action.action_ref])] };
-      if (local.transports?.length || external.transports.length) next.transports = external.transports;
+      if (local.transports?.length || external.transports.length || attachments.length) next.transports = [...external.transports, ...attachments];
       const confirmedCarriers = external.transports.filter(item => item.sources.length >= 2);
       if (confirmedCarriers.length) {
         next.sharedEvidence ??= after.observation_ref;
         next.transportCarriers = [...new Set([...(local.transportCarriers ?? []), ...confirmedCarriers.map(item => item.carrier)])];
+        const couplings = [...(local.transportCouplings ?? [])];
+        for (const transport of confirmedCarriers) {
+          if (transport.shell === undefined || transport.shell === local.geometry.rest_shell
+            || couplings.some(role => role.carrier === transport.carrier && role.shell === transport.shell)) continue;
+          couplings.push({ carrier: transport.carrier, shell: transport.shell, sources: [...transport.sources] });
+        }
+        next.transportCouplings = couplings;
       }
       if (local.parallel) {
         state = { ...next, held: sceneHeld(scene), tried: local.tried };

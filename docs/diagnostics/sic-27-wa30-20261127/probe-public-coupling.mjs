@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {readFileSync, writeFileSync} from 'node:fs';
+import {gunzipSync} from 'node:zlib';
+import {createSicVerifyOrientedDelivery} from '../../../src/sic/oriented-delivery.ts';
+import {measureNativeObservation} from '../../../src/logos-engine/v6-native-observer.ts';
+import {orientedCouplingScene} from '../../../src/logos-engine/v6-oriented-coupling.ts';
+const {frames,hashes,steps,captured}=JSON.parse(gunzipSync(readFileSync(new URL('wa30-coupling-public-prefix.json.gz',import.meta.url))));
+assert.deepEqual(frames[2],captured.first,'Both actual captures reach exactly the same public frame');
+const observe=async(rows,revision,hash)=>({...await measureNativeObservation({frame_rows:rows,frame_hash:hash,state:'NOT_FINISHED',level:8,levels_completed:7,available_action_refs:['ACTION1','ACTION2','ACTION3','ACTION4','ACTION5']},revision,'coupling-public-return'),level_epoch:8});
+const family=createSicVerifyOrientedDelivery();
+family.restore({state:{...structuredClone(captured.proposal.local),count:59,held:null,transports:[],transportCouplings:[]}});
+for(let index=0;index<2;index++) {
+  const before=await observe(frames[index],index,hashes[index]), after=await observe(frames[index+1],index+1,hashes[index+1]);
+  const local=family.state().state;
+  const action={action_ref:steps[index].input,data:{}};
+  await family.record(before,after,action,frames[index],frames[index+1],{local,scene:orientedCouplingScene(frames[index],local.geometry,local.color),step:steps[index],attempt:'actual-public-prefix'},0,[]);
+}
+const learned=family.state().state;
+assert.ok(learned.transportCouplings.length);
+assert.ok(learned.transportCouplings.every(role=>role.sources.length===2));
+const before=await observe(captured.first,3,'captured-62-before'),after=await observe(captured.second,4,'captured-62-after');
+const oldResult=await family.after(captured.proposal,0,before,after,captured.first,captured.second);
+const proposal=structuredClone(captured.proposal);
+proposal.local.transportCouplings=learned.transportCouplings;
+const reusedResult=await family.after(proposal,0,before,after,captured.first,captured.second);
+assert.equal(oldResult.matched,false);
+assert.equal(reusedResult.matched,true);
+const result={limitation:'Offline reacquisition from two actual public returns, not a full runtime checkpoint or timed replay.',commands:[60,61],firstLoss:62,learnedRoles:learned.transportCouplings,before:oldResult,after:reusedResult};
+writeFileSync(process.argv[2]??'/tmp/wa30-coupling-public-counterfactual.json',JSON.stringify(result,null,2)+'\n');
+console.log(JSON.stringify(result));
