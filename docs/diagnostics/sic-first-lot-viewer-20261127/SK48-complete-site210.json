@@ -1,0 +1,77 @@
+{
+  "game": "SK48",
+  "siteVersion": 210,
+  "source": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "surface": "published",
+  "bundle": "/assets/index-5nnSgotL.js",
+  "start": "https://sra-playground.yannick-fontan.chatgpt.site/?game=SK48&level=1",
+  "finish": "https://sra-playground.yannick-fontan.chatgpt.site/?game=SK48&level=8",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessions": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 8,
+  "totalActions": 348,
+  "levels": [
+    {
+      "level": 1,
+      "actions": 19,
+      "cumulativeActions": 19,
+      "completedPlans": 6,
+      "observedAt": "2026-11-27T15:18:11.816Z"
+    },
+    {
+      "level": 2,
+      "actions": 39,
+      "cumulativeActions": 58,
+      "completedPlans": 10,
+      "observedAt": "2026-11-27T15:18:29.498Z"
+    },
+    {
+      "level": 3,
+      "actions": 33,
+      "cumulativeActions": 91,
+      "completedPlans": 13,
+      "observedAt": "2026-11-27T15:18:42.637Z"
+    },
+    {
+      "level": 4,
+      "actions": 33,
+      "cumulativeActions": 124,
+      "completedPlans": 21,
+      "observedAt": "2026-11-27T15:18:57.176Z"
+    },
+    {
+      "level": 5,
+      "actions": 33,
+      "cumulativeActions": 157,
+      "completedPlans": 24,
+      "observedAt": "2026-11-27T15:19:48.004Z"
+    },
+    {
+      "level": 6,
+      "actions": 69,
+      "cumulativeActions": 226,
+      "completedPlans": 33,
+      "observedAt": "2026-11-27T15:20:22.709Z"
+    },
+    {
+      "level": 7,
+      "actions": 80,
+      "cumulativeActions": 306,
+      "completedPlans": 43,
+      "observedAt": "2026-11-27T15:21:39.481Z"
+    },
+    {
+      "level": 8,
+      "actions": 42,
+      "cumulativeActions": 348,
+      "completedPlans": 51,
+      "observedAt": "2026-11-27T15:21:57.473Z"
+    }
+  ]
+}
