@@ -1,0 +1,63 @@
+{
+  "game": "DC22",
+  "siteVersion": 210,
+  "source": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "surface": "local",
+  "bundle": "/assets/index-5nnSgotL.js",
+  "start": "http://127.0.0.1:4173/?game=DC22&level=1",
+  "finish": "http://127.0.0.1:4173/?game=DC22&level=6",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessions": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 6,
+  "totalActions": 630,
+  "levels": [
+    {
+      "level": 1,
+      "actions": 22,
+      "cumulativeActions": 22,
+      "completedPlans": 15,
+      "observedAt": "2026-11-27T15:17:20.694Z"
+    },
+    {
+      "level": 2,
+      "actions": 44,
+      "cumulativeActions": 66,
+      "completedPlans": 37,
+      "observedAt": "2026-11-27T15:17:59.407Z"
+    },
+    {
+      "level": 3,
+      "actions": 45,
+      "cumulativeActions": 111,
+      "completedPlans": 60,
+      "observedAt": "2026-11-27T15:18:15.635Z"
+    },
+    {
+      "level": 4,
+      "actions": 76,
+      "cumulativeActions": 187,
+      "completedPlans": 136,
+      "observedAt": "2026-11-27T15:19:46.997Z"
+    },
+    {
+      "level": 5,
+      "actions": 185,
+      "cumulativeActions": 372,
+      "completedPlans": 321,
+      "observedAt": "2026-11-27T15:22:21.790Z"
+    },
+    {
+      "level": 6,
+      "actions": 258,
+      "cumulativeActions": 630,
+      "completedPlans": 499,
+      "observedAt": "2026-11-27T15:25:54.135Z"
+    }
+  ]
+}
