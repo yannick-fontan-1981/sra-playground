@@ -1,6 +1,31 @@
 # GRIL — réemploi des commandes de vue acquises
 
-## Résultat conservé
+## Qualification native du complément
+
+Le complément gagne **6 niveaux sur 6 en 74 commandes** dans une session SIC
+depuis le niveau 1, avec les six budgets archivés inchangés. Les 74 commandes
+sont autorisées par SIC et acquises ; aucun reset, undo ou dépassement de
+plafond n'est relevé. La session se réconcilie normalement avec
+`target_levels_completed`. Les six objets `.levels` sont identiques au résultat
+principal. Le premier niveau conserve son préfixe public de référence.
+
+| Niveau | Commandes / plafond | Score observé / plafond |
+| --- | ---: | ---: |
+| 1 | 5 / 10 | 2,523 s / 10 s |
+| 2 | 5 / 10 | 1,369 s / 8 s |
+| 3 | 8 / 13 | 2,244 s / 10 s |
+| 4 | 8 / 13 | 2,561 s / 11 s |
+| 5 | 13 / 18 | 4,698 s / 15 s |
+| 6 | 35 / 39 | 17,830 s / 28 s |
+
+Source effectivement mesurée : local
+`8bddf9db717602ecfaf87543ceba476b8eb6bce7`, distant
+`c6f8dd387a0f0b6504dc7522461cb8da6f90b17f`, arbre
+`d1b4f43ad4e9db058c3e3beb210bca74176d7bb7`. Ce commit ajoute seulement la
+première archive au complément testé fonctionnellement. Les décisions restent
+unitaires ; ce lot ne revendique aucune nouvelle série de plusieurs commandes.
+
+## Première mesure conservée
 
 Le premier candidat est **incomplet : 2 niveaux sur 6**. Une session SIC depuis
 le niveau 1 gagne les deux premiers niveaux en **5 puis 5 commandes**. Le niveau
@@ -49,8 +74,8 @@ couvrent la commande absente, les sélecteurs dupliqués, deux interfaces
 antérieures également compatibles, un retour ambigu et un retour contradictoire.
 Une acquisition par une autre famille est également vérifiée.
 
-Le complément n'a pas encore de rejeu strict dans cette version de l'archive.
-La continuité complète et la vérification du viewer livré restent des étapes
+Le complément a le rejeu strict complet décrit plus haut. La continuité
+complète et la vérification du viewer livré restent des étapes
 d'intégration. Aucun nouveau bilan complet des 107 jeux n'est annoncé.
 
 Le rôle reste conservateur lorsqu'un niveau entier se termine sans retour de
@@ -62,7 +87,8 @@ Cette limite n'a pas été élargie sans observation correspondante.
 `report.json` donne les compteurs et les deux états du code. `manifest.json`
 donne les empreintes des fichiers stockés et décompressés. Les bruts du premier
 strict, son miroir `.levels` et le résultat GRIL de la campagne de référence
-sont archivés. `first-decision.public.json.gz` conserve toutes les grilles et
+sont archivés, ainsi que le strict complet du complément et son manifeste
+de source. `first-decision.public.json.gz` conserve toutes les grilles et
 animations, commandes, propositions, retours natifs et états du rôle de la
 capture. Seules les entités géométriques recalculables, les autres mémoires de
 familles et les traces globales dupliquées sont omises ; l'empreinte du fichier
