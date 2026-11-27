@@ -5,6 +5,7 @@ import { NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts'
 import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
 import { measureNativeObservation, publicFrameHash } from '../src/logos-engine/v6-native-observer.ts';
 import { createPreparedEffects } from '../src/sic/test-prepared-effects.ts';
+import { coveragePlanGroup, evidencedPlanGroup } from '../src/sic/experiment-arbitration.ts';
 import { initialMemory } from '../src/sic/preparation-experiments.ts';
 
 const stateId = 'family_state:sic_test_prepared_effects';
@@ -81,6 +82,11 @@ test('complete hydrated state can survive two restores before the first mutable 
   family.restoreNative!(graphState);
   family.restoreNative!(graphState);
   assert.equal(family.nativeState!(), graphState);
+  const observed = await frame(1, 4, null, 4);
+  for (const group of [coveragePlanGroup, evidencedPlanGroup]) {
+    assert.equal(await family.proposeInGroup!(group, observed.o, observed.rows, [], 15), null);
+    assert.equal(family.nativeState!(), graphState, 'An inapplicable read-only strategy has no working state to publish');
+  }
   await store.commit([{ id: stateId, kind: 'family_state', family: family.id,
     value: family.nativeState!() }], cause('unchanged-restored-state'));
   assert.equal(store.graphChain, chain);
