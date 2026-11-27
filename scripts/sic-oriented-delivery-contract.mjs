@@ -1,11 +1,13 @@
 import assert from 'node:assert/strict';
 import { continuityObservation, requireExecutedPrefix } from './sic-continuity-contract.mjs';
 
-export const orientedDeliveryCeilings = [32, 64, 92, 58, 136, 58, 51];
+export const orientedDeliveryCeilings = [32, 64, 92, 58, 136, 58, 51, 166, 80];
 // Actual [commands, continued commands, successive translations of the same cargo].
 // The historical seven-level receipt remains the floor for its existing levels.
 export const orientedDeliveryContinuity = [
   [26, 5, 1], [59, 18, 7], [76, 22, 10], [48, 0, 0], [113, 59, 41], [48, 24, 15], [42, 20, 13],
+  // Levels eight and nine from the independent physical receipt of b037f9f9.
+  [135, 56, 44], [66, 19, 8],
 ];
 export const orientedDeliverySeriesLevels = new Set(orientedDeliveryContinuity.flatMap((row, index) => row[1] ? [index + 1] : []));
 

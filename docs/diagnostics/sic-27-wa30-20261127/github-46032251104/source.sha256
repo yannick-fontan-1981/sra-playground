@@ -1,0 +1,4 @@
+8a2d08701313f5a8d6e80182abb1a1b46f05c7d086521a3d5606153d056e9d5f  scripts/compare-source100.mjs
+9b43fc59c7a7f0e6eed87abf4e45078abd0c3462df2b5849c527c269a7b14de5  scripts/sic-continuity-evidence.mjs
+61f877ae0b54d2bdc606bab001cee6e443a5d5492c2506f1f4f41e5137990624  scripts/sic-oriented-delivery-contract.mjs
+06d169a7eec4ebcac5d9b881207465a9b2e90f002b4ce4a3b28d182e270b0aeb  src/sic/oriented-delivery.ts

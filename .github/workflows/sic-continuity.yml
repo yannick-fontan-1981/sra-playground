@@ -66,7 +66,7 @@ jobs:
       max-parallel: 4
       matrix:
         include:
-          - { name: oriented-delivery, cohort: 'source:WA30', end: 7, cap: 136 }
+          - { name: oriented-delivery, cohort: 'source:WA30', end: 9, cap: 166 }
           - { name: mirror-isles, cohort: SS01, end: 8, cap: 120 }
           - { name: la-force-rouge, cohort: SS02, end: 8, cap: 160 }
           - { name: la-ruse-verte, cohort: SS03, end: 8, cap: 240 }
@@ -186,7 +186,7 @@ jobs:
           import { createHash } from 'node:crypto';
           import { readFileSync, readdirSync } from 'node:fs';
           const expected = [
-            ['oriented-delivery', 'source:WA30', 7, 136], ['mirror-isles', 'SS01', 8, 120],
+            ['oriented-delivery', 'source:WA30', 9, 166], ['mirror-isles', 'SS01', 8, 120],
             ['la-force-rouge', 'SS02', 8, 160], ['la-ruse-verte', 'SS03', 8, 240],
             ['l-axe-violet', 'SS04', 8, 150], ['local-carry', 'SS05', 8, 155],
             ['actor-composition', 'SS06', 8, 125], ['destination-set', 'SS07', 8, 180],

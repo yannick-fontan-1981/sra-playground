@@ -47,7 +47,7 @@ test('walking continuity alone cannot satisfy an object or launch-positioning re
 });
 
 function orientedRun() {
-  const levels = Array.from({ length: 7 }, (_, index) => ({ level: index + 1, won: true, actions: index === 3 ? 1 : 2 }));
+  const levels = Array.from({ length: 9 }, (_, index) => ({ level: index + 1, won: true, actions: index === 3 ? 1 : 2 }));
   const executedTickets = levels.flatMap(({ level, actions }) => {
     const decisionRevision = level * 10;
     const planId = 'sic-plan:oriented-fixture:epoch:' + level + ':revision:' + decisionRevision + ':frame:abc0';

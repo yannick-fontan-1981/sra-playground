@@ -5,6 +5,7 @@ import { gunzipSync } from 'node:zlib';
 import { requireOrientedDelivery } from '../scripts/sic-oriented-delivery-contract.mjs';
 
 const historical = JSON.parse(gunzipSync(readFileSync(new URL('../docs/diagnostics/sic-resume-20261126/wa30-continuity.jsonl.gz', import.meta.url))));
+const qualified = JSON.parse(gunzipSync(readFileSync(new URL('../docs/diagnostics/sic-27-wa30-20261127/github-46032251104/wa30.jsonl.gz', import.meta.url))));
 const atLevel = (run, level) => structuredClone(run.executedTickets.filter(ticket => ticket.level === level));
 function groupsFor(tickets) {
   const groups = new Map();
@@ -21,6 +22,19 @@ test('the oriented contract preserves the historical seven-level native and phys
     const tickets = atLevel(historical, level);
     const physical = requireOrientedDelivery(level, tickets, groupsFor(tickets));
     if (level !== 4) assert.ok(physical.some(effect => effect.kind === 'same cargo translation'));
+  }
+});
+
+test('the qualified end levels retain their measured native and cargo continuations', () => {
+  for (const [level, continued, sameCargo] of [[8, 56, 44], [9, 19, 8]]) {
+    const tickets = atLevel(qualified, level);
+    assert.equal(tickets.filter(ticket => ticket.actionIndex > 0).length, continued);
+    const physical = requireOrientedDelivery(level, tickets, groupsFor(tickets));
+    assert.equal(physical.filter(effect => effect.kind === 'same cargo translation').length, sameCargo);
+    for (const ticket of tickets) {
+      if (ticket.oriented) ticket.oriented.cargoBefore = ticket.oriented.cargoAfter = null;
+    }
+    assert.throws(() => requireOrientedDelivery(level, tickets, groupsFor(tickets)), /consecutive translations of the same cargo/);
   }
 });
 
