@@ -1,5 +1,5 @@
 {
-  "recordedAt": "2026-11-27T05:52:03.127438+00:00",
+  "recordedAt": "2026-11-27T06:02:05.454003+00:00",
   "status": "partial_strict_four_of_six",
   "candidate": {
     "local": "7f45cf182c5d9e0f9506f5d2fb07af64f3ae2def",
@@ -683,5 +683,17 @@
     "finalStatus": "",
     "sourceUnchanged": true
   },
-  "nextMeasurement": "No further SNAR change is justified by this receipt alone. A future capture would need the first interrupted known route or ineffective probe in level 5, including public before/after frames, actual ticket, proposal and seal. This archive records no such new capture."
+  "nextMeasurement": "Before any further SNAR correction, capture the first remaining loss with the full original agent.run budget and a dispatch-only stop. The v2 diagnostic is a public counterexample under a reduced remaining horizon, not an exact reproduction of the full runner decision. The standard strict replay remains a valid four-of-six measurement.",
+  "diagnosticQualification": {
+    "kind": "public_counterexample_under_reduced_remaining_horizon",
+    "agentRunBudgetUnchanged": false,
+    "targetLevel": 5,
+    "agentRunTargetActions": 8,
+    "originalTargetActions": 42,
+    "watchdogReferenceBudgetsUnchanged": true,
+    "exactFullRunnerDecisionReproduction": false,
+    "earlierFourWinningPrefixHashesEqual": true,
+    "rawReceiptNote": "The originalBudgetsUnchanged field in the historical raw diagnostic receipt describes watchdog references only; it does not establish that agent.run received the full level budget.",
+    "requiredBeforeNextCorrection": "Capture the first loss again with the original agent.run budget; bound only dispatch permission after an observed return."
+  }
 }
