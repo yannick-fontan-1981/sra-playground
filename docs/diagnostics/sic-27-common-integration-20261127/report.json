@@ -1,0 +1,1246 @@
+{
+  "schema": "sic.strict-combined-qualification.v1",
+  "sourceLocal": "cd229cd0b703ef4cee8de7894c4eeac3d8f42499",
+  "sourceRemote": "8e4321073e1b5445b08cd128fe7a9b2c26fb0752",
+  "mergedMain": "f4e7a3bd760b9bcdbbb15c00f850f055fbeaaaa1",
+  "tree": "0b4662930918e6515d651096d09e63c27b84360b",
+  "baseline": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "parallelWorkers": 1,
+  "budgetsChanged": false,
+  "ci": {
+    "run": 45920939273,
+    "jobsSuccessful": 13,
+    "finalJob": 140253616747,
+    "command": "npm run test:sic-continuity -- continuity/*.jsonl",
+    "conclusion": "success"
+  },
+  "site": {
+    "version": 201,
+    "source": "f4e7a3bd760b9bcdbbb15c00f850f055fbeaaaa1",
+    "status": "succeeded"
+  },
+  "games": [
+    {
+      "code": "CRAF",
+      "target": 6,
+      "levels": 6,
+      "commands": 106,
+      "sicAuthorized": 106,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levelStats": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 4214,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 9,
+          "ms": 4385,
+          "gameMs": 71,
+          "costs": {
+            "init": {
+              "ms": 901,
+              "count": 1
+            },
+            "advance": {
+              "ms": 1749,
+              "count": 9
+            },
+            "resume": {
+              "ms": 1569,
+              "count": 8
+            }
+          },
+          "graph": "a4f3e3dc1dccfbeea9b526d4f4895b9024e7756dccfa375756bafb052ac7245a",
+          "deltas": 2428,
+          "acquiredRecords": 9,
+          "nodes": 518,
+          "traceEvents": 54,
+          "prefixHash": "7c16581499aadaa9539c60d2d6a687e5fd72adc937576a4011ef7380c991a331",
+          "scoredMs": 4227,
+          "settlementMs": 157
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 4806,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 11,
+          "ms": 5034,
+          "gameMs": 83,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 2509,
+              "count": 11
+            },
+            "resume": {
+              "ms": 2305,
+              "count": 11
+            }
+          },
+          "graph": "9045437c2c5674f4811cd06b57da42c42017988f007562e984dd02157844baba",
+          "deltas": 4935,
+          "acquiredRecords": 20,
+          "nodes": 683,
+          "traceEvents": 120,
+          "prefixHash": "a703cec0517ee2962ded618b6f7d9df8215f73fc617d58d5eb549478592e3a68",
+          "scoredMs": 4840,
+          "settlementMs": 194
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 7232,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 16,
+          "ms": 7620,
+          "gameMs": 126,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 4114,
+              "count": 16
+            },
+            "resume": {
+              "ms": 3149,
+              "count": 16
+            }
+          },
+          "graph": "d8a7d2bfcb0e6955091e7d05dd8766e4a531f426d5743161867f9df5d1efdd14",
+          "deltas": 8598,
+          "acquiredRecords": 36,
+          "nodes": 939,
+          "traceEvents": 128,
+          "prefixHash": "ef28b1a8cb65763bda159d74ffed05741cdc95251c9c9b8aa80813508c56a10c",
+          "scoredMs": 7429,
+          "settlementMs": 191
+        },
+        {
+          "level": 4,
+          "won": true,
+          "activeMs": 9071,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 19,
+          "ms": 9545,
+          "gameMs": 148,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 5180,
+              "count": 19
+            },
+            "resume": {
+              "ms": 3936,
+              "count": 19
+            }
+          },
+          "graph": "a14ea0be3f09b567064d34369b33d193f85ae8032246927bb649b093fd956d81",
+          "deltas": 12971,
+          "acquiredRecords": 55,
+          "nodes": 1266,
+          "traceEvents": 128,
+          "prefixHash": "8a8648f4279395cb97b26684582a7c278dfa1e7e3c28a39aea3d70a07dfe2eb4",
+          "scoredMs": 9301,
+          "settlementMs": 244
+        },
+        {
+          "level": 5,
+          "won": true,
+          "activeMs": 12305,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 24,
+          "ms": 12966,
+          "gameMs": 192,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 7394,
+              "count": 24
+            },
+            "resume": {
+              "ms": 5027,
+              "count": 24
+            }
+          },
+          "graph": "c5b0aa914f513aae8b3d3b4168f36d7414a21f58511da05de1f7c151ef9ce3af",
+          "deltas": 18509,
+          "acquiredRecords": 79,
+          "nodes": 1693,
+          "traceEvents": 128,
+          "prefixHash": "5adef232b5500e842b1ac15433d1ee35a2c63abd9046b2d52ec17c8c44f6b63a",
+          "scoredMs": 12713,
+          "settlementMs": 252
+        },
+        {
+          "level": 6,
+          "won": true,
+          "activeMs": 14372,
+          "budget": {
+            "actions": 33,
+            "activeTimeMs": 324000,
+            "source": "docs/architecture/sic-v8-validation.md :: paragraph \"CRAF gagne les six niveaux en 106 clics\"; level 6 = 27 clics, 239,98 s; chronological SIC qualification",
+            "timeBasis": "measured"
+          },
+          "actions": 27,
+          "ms": 15061,
+          "gameMs": 209,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 8326,
+              "count": 27
+            },
+            "resume": {
+              "ms": 6131,
+              "count": 27
+            }
+          },
+          "graph": "4f94a8b30ef55bebae9d3fae3c8526e68ee6f6534197e32d4c21a195f3df45da",
+          "deltas": 24715,
+          "acquiredRecords": 106,
+          "nodes": 2149,
+          "traceEvents": 128,
+          "prefixHash": "35ede3d950cc656d021d22f93eee9d75aafd29b6cbff327f1c993883bea7da58",
+          "scoredMs": 14786,
+          "settlementMs": 275
+        }
+      ]
+    },
+    {
+      "code": "SB26",
+      "target": 8,
+      "levels": 8,
+      "commands": 124,
+      "sicAuthorized": 124,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levelStats": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 3276,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 9,
+          "ms": 3590,
+          "gameMs": 336,
+          "costs": {
+            "init": {
+              "ms": 841,
+              "count": 1
+            },
+            "advance": {
+              "ms": 1580,
+              "count": 9
+            },
+            "resume": {
+              "ms": 674,
+              "count": 8
+            }
+          },
+          "graph": "4d717a2a99b7f9249c500b178221a27ddf27adb9fa971f5bac1cebb0f33adb67",
+          "deltas": 2420,
+          "acquiredRecords": 9,
+          "nodes": 510,
+          "traceEvents": 54,
+          "prefixHash": "f8a01c6e6c57dab7a60bd01309dfbef6df4743c5de8c9869ed4ea2dfa4cdb326",
+          "scoredMs": 3367,
+          "settlementMs": 221
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 4832,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 15,
+          "ms": 5475,
+          "gameMs": 501,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 3005,
+              "count": 15
+            },
+            "resume": {
+              "ms": 1554,
+              "count": 15
+            }
+          },
+          "graph": "11854da8eeda2cb765c3f1e398e0d9402b650a08f2953aab66ba23cfa156c660",
+          "deltas": 5798,
+          "acquiredRecords": 24,
+          "nodes": 694,
+          "traceEvents": 128,
+          "prefixHash": "6936f8d27b9ebbb066c67bb5c333ae4f66f7fca624596128466c68789916cbb6",
+          "scoredMs": 5080,
+          "settlementMs": 396
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 5967,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 15,
+          "ms": 6992,
+          "gameMs": 562,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 3991,
+              "count": 15
+            },
+            "resume": {
+              "ms": 1724,
+              "count": 15
+            }
+          },
+          "graph": "3b739a1c1a944a929a1723045bbdf2578e6e358c7016b4e110fab4c568b0b528",
+          "deltas": 9186,
+          "acquiredRecords": 39,
+          "nodes": 888,
+          "traceEvents": 128,
+          "prefixHash": "65841875e0ff120228107112652f05c342e553f2e2a9d921dd5041ed0f87111a",
+          "scoredMs": 6373,
+          "settlementMs": 619
+        },
+        {
+          "level": 4,
+          "won": true,
+          "activeMs": 5467,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 15,
+          "ms": 6397,
+          "gameMs": 502,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 3575,
+              "count": 15
+            },
+            "resume": {
+              "ms": 1666,
+              "count": 15
+            }
+          },
+          "graph": "a5f698f94b8c7fdf37e4e36c50ad2a4365aeb9b1ab69117dd8ede651e346b459",
+          "deltas": 12582,
+          "acquiredRecords": 54,
+          "nodes": 1090,
+          "traceEvents": 128,
+          "prefixHash": "14dd5cc328147b2b0bdf13b2d7ee26d419c590cb847d28403d883b5bc6db8dbe",
+          "scoredMs": 6047,
+          "settlementMs": 350
+        },
+        {
+          "level": 5,
+          "won": true,
+          "activeMs": 6648,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 17,
+          "ms": 7686,
+          "gameMs": 651,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 4337,
+              "count": 17
+            },
+            "resume": {
+              "ms": 2003,
+              "count": 17
+            }
+          },
+          "graph": "c8676cf0e98902fdcdecc8692a20d0d7f5aae4512eb821833887d226291835fd",
+          "deltas": 16428,
+          "acquiredRecords": 71,
+          "nodes": 1316,
+          "traceEvents": 128,
+          "prefixHash": "2b4fbd9abf98a36cb76087f2381110c7ce59f9879525a5503aa22a1b3f2d868a",
+          "scoredMs": 7220,
+          "settlementMs": 467
+        },
+        {
+          "level": 6,
+          "won": true,
+          "activeMs": 8181,
+          "budget": {
+            "actions": 80,
+            "activeTimeMs": 90000,
+            "source": "no_level_reference"
+          },
+          "actions": 19,
+          "ms": 9429,
+          "gameMs": 720,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 5528,
+              "count": 19
+            },
+            "resume": {
+              "ms": 2312,
+              "count": 19
+            }
+          },
+          "graph": "2c46902aa43ad9c35aa1d4556ec79b6854c6167523071ed46790aaf6d7f5ab40",
+          "deltas": 20761,
+          "acquiredRecords": 90,
+          "nodes": 1603,
+          "traceEvents": 128,
+          "prefixHash": "31b4c82dc34aedbf0375c4fdfdc8ecc3c5d2ef6159627a8428216a561576a4fa",
+          "scoredMs": 8975,
+          "settlementMs": 454
+        },
+        {
+          "level": 7,
+          "won": true,
+          "activeMs": 7250,
+          "budget": {
+            "actions": 22,
+            "activeTimeMs": 17000,
+            "source": "docs/architecture/sic-v8-validation.md :: SB26 niveau 7, d\u00e9partager les programmes qui produisent le m\u00eame mot",
+            "timeBasis": "measured"
+          },
+          "actions": 17,
+          "ms": 8377,
+          "gameMs": 545,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 5069,
+              "count": 17
+            },
+            "resume": {
+              "ms": 1949,
+              "count": 17
+            }
+          },
+          "graph": "9dae4fdb63e2de661c5e25f003f2744df750375b2540d70a3f96d7d3a0bc290f",
+          "deltas": 24618,
+          "acquiredRecords": 107,
+          "nodes": 1840,
+          "traceEvents": 128,
+          "prefixHash": "6a2de5ca3ff5cefa0dbe6444703d01e829e6c66af13a6a527ef9c88f413df6d4",
+          "scoredMs": 7979,
+          "settlementMs": 398
+        },
+        {
+          "level": 8,
+          "won": true,
+          "activeMs": 7315,
+          "budget": {
+            "actions": 22,
+            "activeTimeMs": 17000,
+            "source": "docs/architecture/sic-v8-validation.md :: SB26 niveau 8, fermer deux appels pour produire la r\u00e9p\u00e9tition",
+            "timeBasis": "measured"
+          },
+          "actions": 17,
+          "ms": 8472,
+          "gameMs": 714,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 4863,
+              "count": 17
+            },
+            "resume": {
+              "ms": 2125,
+              "count": 17
+            }
+          },
+          "graph": "c3626f382d9e09408546c8a8c0596889ef2db467f22f70ae1999520102ccd90e",
+          "deltas": 28479,
+          "acquiredRecords": 124,
+          "nodes": 2081,
+          "traceEvents": 128,
+          "prefixHash": "f3277035290297a66c05ed209b7b84e743dc9c06ef151bb27ff3dd5c058dfe8c",
+          "scoredMs": 7891,
+          "settlementMs": 582
+        }
+      ]
+    },
+    {
+      "code": "CASC",
+      "target": 6,
+      "levels": 6,
+      "commands": 95,
+      "sicAuthorized": 95,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levelStats": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 2909,
+          "budget": {
+            "actions": 11,
+            "activeTimeMs": 11000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=1; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 6,
+          "ms": 3073,
+          "gameMs": 100,
+          "costs": {
+            "init": {
+              "ms": 1128,
+              "count": 1
+            },
+            "advance": {
+              "ms": 819,
+              "count": 6
+            },
+            "resume": {
+              "ms": 927,
+              "count": 4
+            }
+          },
+          "graph": "18412f2693da1d83ffc1bb697a744ec2c8249bcce059c02a71a049a249a05aa3",
+          "deltas": 1521,
+          "acquiredRecords": 6,
+          "nodes": 467,
+          "traceEvents": 32,
+          "prefixHash": "63fea697ab7a9cf49ec307c8e414721b652088f33255fb132c6a7a600579e1e8",
+          "scoredMs": 2978,
+          "settlementMs": 95
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 5569,
+          "budget": {
+            "actions": 19,
+            "activeTimeMs": 16000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=2; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 14,
+          "ms": 5758,
+          "gameMs": 98,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 2308,
+              "count": 14
+            },
+            "resume": {
+              "ms": 3229,
+              "count": 14
+            }
+          },
+          "graph": "2e96944632579844d131752e2c344c232bee386d8913eafdc8b788a09cb5e2b7",
+          "deltas": 4662,
+          "acquiredRecords": 20,
+          "nodes": 640,
+          "traceEvents": 116,
+          "prefixHash": "b795352edc9003c7e87d1865d359e5df23f225e8539cdc1736e4aef2e24161d6",
+          "scoredMs": 5567,
+          "settlementMs": 191
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 11484,
+          "budget": {
+            "actions": 27,
+            "activeTimeMs": 26000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=3; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 22,
+          "ms": 11864,
+          "gameMs": 168,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 5919,
+              "count": 22
+            },
+            "resume": {
+              "ms": 5549,
+              "count": 22
+            }
+          },
+          "graph": "faf92eb062098a0788e5c7e48d0e242189a9e2c491a8f993ed98843e7e8992a5",
+          "deltas": 9670,
+          "acquiredRecords": 42,
+          "nodes": 985,
+          "traceEvents": 128,
+          "prefixHash": "b8af04f5713f1bd4f0bbde6b4a647c4060cc373da24eac81d0f7baa5ff7649a6",
+          "scoredMs": 11594,
+          "settlementMs": 271
+        },
+        {
+          "level": 4,
+          "won": true,
+          "activeMs": 12296,
+          "budget": {
+            "actions": 25,
+            "activeTimeMs": 25000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=4; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 20,
+          "ms": 12594,
+          "gameMs": 123,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 6915,
+              "count": 20
+            },
+            "resume": {
+              "ms": 5364,
+              "count": 20
+            }
+          },
+          "graph": "e2ab4ad04103e5ee8e67c0517fba377c9d88278451017c8374bad3bbf79515bf",
+          "deltas": 14275,
+          "acquiredRecords": 62,
+          "nodes": 1350,
+          "traceEvents": 128,
+          "prefixHash": "4c32ba79d154a214812ec65da21f181ef1337fc6d7a81a40f63bc6be75a56844",
+          "scoredMs": 12239,
+          "settlementMs": 355
+        },
+        {
+          "level": 5,
+          "won": true,
+          "activeMs": 6667,
+          "budget": {
+            "actions": 14,
+            "activeTimeMs": 14000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CASC; level=5; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 11,
+          "ms": 6870,
+          "gameMs": 93,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 3942,
+              "count": 11
+            },
+            "resume": {
+              "ms": 2704,
+              "count": 11
+            }
+          },
+          "graph": "668e8f184ecf7c03012122bfdd7a36b0605785f9c71a0eb61fbe6d16049f9a6f",
+          "deltas": 16814,
+          "acquiredRecords": 73,
+          "nodes": 1556,
+          "traceEvents": 128,
+          "prefixHash": "bb142b72d25bfbf3ca115390f787cf12d309572a075a0dd44962293260efc9cf",
+          "scoredMs": 6532,
+          "settlementMs": 338
+        },
+        {
+          "level": 6,
+          "won": true,
+          "activeMs": 15802,
+          "budget": {
+            "actions": 27,
+            "activeTimeMs": 22000,
+            "source": "docs/architecture/sic-v8-validation.md :: CASC niveau 6, r\u00e9server une jonction avant de lancer les rafales",
+            "timeBasis": "measured"
+          },
+          "actions": 22,
+          "ms": 16150,
+          "gameMs": 142,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 9320,
+              "count": 22
+            },
+            "resume": {
+              "ms": 6476,
+              "count": 22
+            }
+          },
+          "graph": "d2e709a39b13ddc4523cf116132847a5fa0c24f56f814284cd52fe0728ff1159",
+          "deltas": 21936,
+          "acquiredRecords": 95,
+          "nodes": 2012,
+          "traceEvents": 128,
+          "prefixHash": "d760eeb17cd88c742dcb734046aa5be55463a407446f777ad0d33f4e61c03814",
+          "scoredMs": 15666,
+          "settlementMs": 484
+        }
+      ]
+    },
+    {
+      "code": "CLRS",
+      "target": 6,
+      "levels": 6,
+      "commands": 84,
+      "sicAuthorized": 84,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levelStats": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 3001,
+          "budget": {
+            "actions": 13,
+            "activeTimeMs": 12000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=1; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 8,
+          "ms": 3131,
+          "gameMs": 64,
+          "costs": {
+            "init": {
+              "ms": 983,
+              "count": 1
+            },
+            "advance": {
+              "ms": 1068,
+              "count": 8
+            },
+            "resume": {
+              "ms": 959,
+              "count": 7
+            }
+          },
+          "graph": "79594bf59727850d24b1dcdda1c9107f5546145bc89d15980d02a5d61401db71",
+          "deltas": 2189,
+          "acquiredRecords": 8,
+          "nodes": 498,
+          "traceEvents": 48,
+          "prefixHash": "86d909e16abb259b7090e5019dae013e82361b6218c6e4063c52fcd7a21d31e3",
+          "scoredMs": 3040,
+          "settlementMs": 91
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 2442,
+          "budget": {
+            "actions": 15,
+            "activeTimeMs": 11000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=2; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 10,
+          "ms": 2618,
+          "gameMs": 64,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 1169,
+              "count": 10
+            },
+            "resume": {
+              "ms": 1269,
+              "count": 10
+            }
+          },
+          "graph": "bbe5b84670099b2847a7a9719317b2a845e5db379b2f78799defb5dfe5c7f6be",
+          "deltas": 4415,
+          "acquiredRecords": 18,
+          "nodes": 603,
+          "traceEvents": 108,
+          "prefixHash": "b1465032b5d0b1a94dbf34a8fa1cc230b1fd918d7a4be11f363cd88bdf70f8f1",
+          "scoredMs": 2532,
+          "settlementMs": 86
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 3628,
+          "budget": {
+            "actions": 18,
+            "activeTimeMs": 13000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=3; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 13,
+          "ms": 3833,
+          "gameMs": 76,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 1913,
+              "count": 13
+            },
+            "resume": {
+              "ms": 1721,
+              "count": 13
+            }
+          },
+          "graph": "9499f7f0d2b7254268a1edc3c37091f2b2a23b0a26d6d367f4c7e175d1887ebe",
+          "deltas": 7320,
+          "acquiredRecords": 31,
+          "nodes": 751,
+          "traceEvents": 128,
+          "prefixHash": "64498f42a9a4757d79fea0503d197ef39286af95f61e5e20f30aa9b01e61f091",
+          "scoredMs": 3720,
+          "settlementMs": 113
+        },
+        {
+          "level": 4,
+          "won": true,
+          "activeMs": 4460,
+          "budget": {
+            "actions": 20,
+            "activeTimeMs": 15000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=4; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 15,
+          "ms": 4710,
+          "gameMs": 84,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 2431,
+              "count": 15
+            },
+            "resume": {
+              "ms": 2046,
+              "count": 15
+            }
+          },
+          "graph": "939179a4d9228bbd1db7f7f1c1da35775005a1f2a3f2171e1f9544d959b4b6bb",
+          "deltas": 10687,
+          "acquiredRecords": 46,
+          "nodes": 937,
+          "traceEvents": 128,
+          "prefixHash": "2f8508d7caf36aa0f0af745eeef97aea3b3aa6664b592300929ed03856e425c4",
+          "scoredMs": 4588,
+          "settlementMs": 122
+        },
+        {
+          "level": 5,
+          "won": true,
+          "activeMs": 4423,
+          "budget": {
+            "actions": 19,
+            "activeTimeMs": 15000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=CLRS; level=5; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 14,
+          "ms": 4674,
+          "gameMs": 84,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 2594,
+              "count": 14
+            },
+            "resume": {
+              "ms": 1850,
+              "count": 14
+            }
+          },
+          "graph": "902d3950da451a02ca3bdfaad09519d8a695bdd293bae667284fd5c9d23aafcc",
+          "deltas": 13842,
+          "acquiredRecords": 60,
+          "nodes": 1123,
+          "traceEvents": 128,
+          "prefixHash": "58f0269e9d6c7c13e14262ee77314c80c6b95e1f85fdc53a277732649f27068a",
+          "scoredMs": 4539,
+          "settlementMs": 135
+        },
+        {
+          "level": 6,
+          "won": true,
+          "activeMs": 8631,
+          "budget": {
+            "actions": 29,
+            "activeTimeMs": 23000,
+            "source": "docs/architecture/sic-v8-validation.md :: CLRS niveau 6, ajuster l'union de deux panneaux de m\u00eame couleur",
+            "timeBasis": "measured"
+          },
+          "actions": 24,
+          "ms": 9083,
+          "gameMs": 148,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 4648,
+              "count": 24
+            },
+            "resume": {
+              "ms": 4036,
+              "count": 24
+            }
+          },
+          "graph": "97f54f7f92e78e98823421ab60e5bc6a851923034720d517ef0dc117e23a35f8",
+          "deltas": 19272,
+          "acquiredRecords": 84,
+          "nodes": 1460,
+          "traceEvents": 128,
+          "prefixHash": "4aed1452c9c8ed2fa5d672736b94ccffb12119ad625fb66cfe31d25692ad00ea",
+          "scoredMs": 8906,
+          "settlementMs": 178
+        }
+      ]
+    },
+    {
+      "code": "MIND",
+      "target": 6,
+      "levels": 6,
+      "commands": 93,
+      "sicAuthorized": 93,
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "levelStats": [
+        {
+          "level": 1,
+          "won": true,
+          "activeMs": 2798,
+          "budget": {
+            "actions": 13,
+            "activeTimeMs": 11000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=1; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 8,
+          "ms": 2937,
+          "gameMs": 61,
+          "costs": {
+            "init": {
+              "ms": 782,
+              "count": 1
+            },
+            "advance": {
+              "ms": 1459,
+              "count": 8
+            },
+            "resume": {
+              "ms": 571,
+              "count": 7
+            }
+          },
+          "graph": "3472f832d42a57315c85f36cd1263c91650ac615b5e6d8a95b67d0128b6e501c",
+          "deltas": 2196,
+          "acquiredRecords": 8,
+          "nodes": 500,
+          "traceEvents": 48,
+          "prefixHash": "d2af6be8e55804dace772b7227f902dc86056bea5dedae2a4b1532f3c0c87a50",
+          "scoredMs": 2831,
+          "settlementMs": 106
+        },
+        {
+          "level": 2,
+          "won": true,
+          "activeMs": 1606,
+          "budget": {
+            "actions": 13,
+            "activeTimeMs": 9000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=2; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 8,
+          "ms": 1768,
+          "gameMs": 58,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 1275,
+              "count": 8
+            },
+            "resume": {
+              "ms": 333,
+              "count": 8
+            }
+          },
+          "graph": "d38ae7186beef35a89929546785fe5d1c8cd1f16e8f82f954924f314dea6ac92",
+          "deltas": 3985,
+          "acquiredRecords": 16,
+          "nodes": 588,
+          "traceEvents": 96,
+          "prefixHash": "9f38a5c35f0a01e49e2ba5e2d938847a32885c6318e0ecc8a1aa5b6f5dce854e",
+          "scoredMs": 1645,
+          "settlementMs": 124
+        },
+        {
+          "level": 3,
+          "won": true,
+          "activeMs": 4165,
+          "budget": {
+            "actions": 20,
+            "activeTimeMs": 15000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=3; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 15,
+          "ms": 4470,
+          "gameMs": 91,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 3350,
+              "count": 15
+            },
+            "resume": {
+              "ms": 846,
+              "count": 15
+            }
+          },
+          "graph": "2e0eb4719a8917e503fbcb1b0584ac7668b6495cfd3519a78ceba4a000029120",
+          "deltas": 7380,
+          "acquiredRecords": 31,
+          "nodes": 792,
+          "traceEvents": 128,
+          "prefixHash": "87c9e8ea28823f9739418f2da13069e3bf4d7328efbb01da1b368d85dd55962f",
+          "scoredMs": 4304,
+          "settlementMs": 166
+        },
+        {
+          "level": 4,
+          "won": true,
+          "activeMs": 5455,
+          "budget": {
+            "actions": 25,
+            "activeTimeMs": 18000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=4; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 20,
+          "ms": 5943,
+          "gameMs": 113,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 4481,
+              "count": 20
+            },
+            "resume": {
+              "ms": 1091,
+              "count": 20
+            }
+          },
+          "graph": "57d4208d14f52361669c4366de2eb175adc15eb2b80098d5f24390714a56711a",
+          "deltas": 11906,
+          "acquiredRecords": 51,
+          "nodes": 1063,
+          "traceEvents": 128,
+          "prefixHash": "a274d547bfcbce2b2f800fd747dfa6e290203a4a76354e31b4050f3ce089efdf",
+          "scoredMs": 5760,
+          "settlementMs": 183
+        },
+        {
+          "level": 5,
+          "won": true,
+          "activeMs": 5114,
+          "budget": {
+            "actions": 23,
+            "activeTimeMs": 18000,
+            "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=MIND; level=5; won=true",
+            "timeBasis": "measured"
+          },
+          "actions": 18,
+          "ms": 5531,
+          "gameMs": 103,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 4124,
+              "count": 18
+            },
+            "resume": {
+              "ms": 1064,
+              "count": 18
+            }
+          },
+          "graph": "c08b0926e072c525ac09d21f5402f02d87360b9566be7a6a2a404c67ca42a956",
+          "deltas": 15982,
+          "acquiredRecords": 69,
+          "nodes": 1309,
+          "traceEvents": 128,
+          "prefixHash": "92f4417e31aab2a43dd3f53313cd204c6a36b2f19d5f231a9643c8b80bb47a26",
+          "scoredMs": 5351,
+          "settlementMs": 179
+        },
+        {
+          "level": 6,
+          "won": true,
+          "activeMs": 7335,
+          "budget": {
+            "actions": 29,
+            "activeTimeMs": 19000,
+            "source": "docs/architecture/sic-v8-validation.md :: MIND niveau 6, comparer les codes apr\u00e8s l'ajout d'une valeur",
+            "timeBasis": "measured"
+          },
+          "actions": 24,
+          "ms": 7852,
+          "gameMs": 124,
+          "costs": {
+            "init": {
+              "ms": 0,
+              "count": 0
+            },
+            "advance": {
+              "ms": 5846,
+              "count": 24
+            },
+            "resume": {
+              "ms": 1591,
+              "count": 24
+            }
+          },
+          "graph": "b7a48dac26bc9084e213be1279a8e4cef679ed16b617c09a36bb8c853d865550",
+          "deltas": 21433,
+          "acquiredRecords": 93,
+          "nodes": 1653,
+          "traceEvents": 128,
+          "prefixHash": "7a9cac0f1e17d2904152b04479b45764a0834dff75c3426db1e90333f2785001",
+          "scoredMs": 7665,
+          "settlementMs": 187
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "common-integration-strict.jsonl.gz",
+      "bytes": 12001,
+      "sha256": "ed1eb17bd7730ed59f4ac72b1febb901d5ae6987a578093d02e1766d8ec1c4e3",
+      "rawBytes": 91125,
+      "rawSha256": "167a9cf20e80c4c369e4864273f1e9527bd073654f0ee6351d8e398c3e2151ef"
+    },
+    {
+      "path": "common-integration-strict.levels.jsonl.gz",
+      "bytes": 5215,
+      "sha256": "644fc67246c4f7d7f3d77c6222b583eae8218b23fc7f2759ba9c5187541cc2c3",
+      "rawBytes": 19791,
+      "rawSha256": "5d85044653ec3d5a8b093676ceec765d00086acbfb4f03875965b9f6a637ee87"
+    }
+  ]
+}

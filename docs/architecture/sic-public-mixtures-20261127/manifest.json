@@ -1,0 +1,311 @@
+{
+  "recordedAt": "2026-11-27T01:33:43.214943+00:00",
+  "source": {
+    "local": "c409eb8266a765e799abbd2cbf9ed22d446dde11",
+    "remote": "1c58dab1cfa26ec2e2b83bdc7fa048a581420f85",
+    "tree": "5d183892fd869c499bab5cf0b11328fe0d46e308",
+    "branch": "fix/sic-27-public-mixtures-20261127",
+    "includesSeparateOutletCheckpoint": true,
+    "mergedVerifiedIntegration": "8e4321073e1b5445b08cd128fe7a9b2c26fb0752"
+  },
+  "codeOnly": {
+    "local": "9716bb6b19b54078db4a2cb570da30a006081085",
+    "remote": "fa2e5e90620ecf6cd837aa91164405afb6f31d51",
+    "tree": "9011bc115931405478124e320b842ab5d0e40a16",
+    "files": [
+      "src/sic/paired-channels.ts",
+      "tests/helpers/sic-native-public-boundaries.ts",
+      "tests/sic-channel-mixture-transfer.test.ts",
+      "tests/fixtures/sic-channel-mixture-public.json.gz"
+    ]
+  },
+  "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "publicCaptureSource": "c70f8027e85e2f7f34fc2d5bd46e50832757b0c9",
+  "startLevel": 1,
+  "target": 6,
+  "wonLevels": 6,
+  "actions": 240,
+  "authority": 240,
+  "acquiredRecords": 240,
+  "reason": "target_levels_completed",
+  "usage": {
+    "sic_public_input_exploration": 54,
+    "sic_verify_channel_access": 186
+  },
+  "levels": [
+    {
+      "level": 1,
+      "won": true,
+      "activeMs": 11699,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 24,
+      "ms": 12165,
+      "gameMs": 207,
+      "costs": {
+        "init": {
+          "ms": 1178,
+          "count": 1
+        },
+        "advance": {
+          "ms": 5980,
+          "count": 24
+        },
+        "resume": {
+          "ms": 4537,
+          "count": 23
+        }
+      },
+      "graph": "c3b71843181ea5e395e5920d032894da7a59f29e0d786a5290f54b5a0e41699a",
+      "deltas": 5828,
+      "acquiredRecords": 24,
+      "nodes": 725,
+      "traceEvents": 128,
+      "prefixHash": "c4d142041c4232e1450fba1dd7cb84369a50cdfe0429ec34645db062c4a71cfd",
+      "scoredMs": 12031,
+      "settlementMs": 133
+    },
+    {
+      "level": 2,
+      "won": true,
+      "activeMs": 15479,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 30,
+      "ms": 16207,
+      "gameMs": 268,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 9275,
+          "count": 30
+        },
+        "resume": {
+          "ms": 6247,
+          "count": 30
+        }
+      },
+      "graph": "8124651280a4803e0b52dcc12fcb2ff5c6da61a052998e695413372e62d1db20",
+      "deltas": 12680,
+      "acquiredRecords": 54,
+      "nodes": 1190,
+      "traceEvents": 128,
+      "prefixHash": "68d58349d9159e8d251391ba922df30807e75adf432ef67249ed733ab8098c3d",
+      "scoredMs": 16035,
+      "settlementMs": 173
+    },
+    {
+      "level": 3,
+      "won": true,
+      "activeMs": 19152,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 37,
+      "ms": 20115,
+      "gameMs": 333,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 13381,
+          "count": 37
+        },
+        "resume": {
+          "ms": 5866,
+          "count": 37
+        }
+      },
+      "graph": "d87c622787d3e70a4c427e8fd1ee1e6e7bd9006d290a02ef40d497d2fb6cc7f7",
+      "deltas": 21172,
+      "acquiredRecords": 91,
+      "nodes": 1805,
+      "traceEvents": 128,
+      "prefixHash": "352b52b6328fbff43a5c8b06ab75ed5656f254e58b17365a20807aab578542f4",
+      "scoredMs": 19933,
+      "settlementMs": 182
+    },
+    {
+      "level": 4,
+      "won": true,
+      "activeMs": 26832,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 46,
+      "ms": 28175,
+      "gameMs": 469,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 20144,
+          "count": 46
+        },
+        "resume": {
+          "ms": 6814,
+          "count": 46
+        }
+      },
+      "graph": "476d912695bc1ca30fa9e3eac2fff638dfe27f929bd6253a5fad876789424256",
+      "deltas": 31759,
+      "acquiredRecords": 137,
+      "nodes": 2598,
+      "traceEvents": 128,
+      "prefixHash": "5a0f483b7866fabe8ebb1a6872ac9ce455e35eb3eb015ae0b6be3fd79968fb4a",
+      "scoredMs": 27944,
+      "settlementMs": 231
+    },
+    {
+      "level": 5,
+      "won": true,
+      "activeMs": 29019,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 90000,
+        "source": "no_level_reference"
+      },
+      "actions": 54,
+      "ms": 30554,
+      "gameMs": 553,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 24034,
+          "count": 54
+        },
+        "resume": {
+          "ms": 5112,
+          "count": 54
+        }
+      },
+      "graph": "0d5b53375533ab49a6666c7204de2939884fd3bc1b7aed3724df8abbc2c75eed",
+      "deltas": 44151,
+      "acquiredRecords": 191,
+      "nodes": 3493,
+      "traceEvents": 128,
+      "prefixHash": "057b8c4cc54cf5bbb09b53aa4bf40072faf83afcf9b7619c8839ad6b152bfb40",
+      "scoredMs": 30285,
+      "settlementMs": 269
+    },
+    {
+      "level": 6,
+      "won": true,
+      "activeMs": 40031,
+      "budget": {
+        "actions": 59,
+        "activeTimeMs": 209000,
+        "source": "docs/architecture/sic-v8-validation.md :: TRCP niveau 6, confirmer le pigment m\u00eame si le marqueur reste dominant",
+        "timeBasis": "measured"
+      },
+      "actions": 49,
+      "ms": 41554,
+      "gameMs": 553,
+      "costs": {
+        "init": {
+          "ms": 0,
+          "count": 0
+        },
+        "advance": {
+          "ms": 26487,
+          "count": 49
+        },
+        "resume": {
+          "ms": 13734,
+          "count": 49
+        }
+      },
+      "graph": "b06628b3d40b0cbad2cd1eb6c193ce36f3be31dfe8b007973202676db7e1d765",
+      "deltas": 55465,
+      "acquiredRecords": 240,
+      "nodes": 4376,
+      "traceEvents": 128,
+      "prefixHash": "b5a80210ff4c118daa17bc9c3135b033d3ffecd28aae393f4cbf982d01f41bac",
+      "scoredMs": 41071,
+      "settlementMs": 484
+    }
+  ],
+  "budgets": "Unchanged archived references: levels1-5 fallback80 commands/90000ms; level6 existing59commands/209000ms reference",
+  "comparison": {
+    "prefixes": [
+      {
+        "level": 1,
+        "identical": true
+      },
+      {
+        "level": 2,
+        "identical": true
+      },
+      {
+        "level": 3,
+        "identical": false
+      }
+    ],
+    "firstChangedCommand": 55,
+    "note": "Only the first two complete trajectories are identical; level3 has the same37commands with a different route"
+  },
+  "acquisition": {
+    "firstForeignMixture": "captured global37, level2; both sources recolor in the actual returned grid after one actual opening",
+    "reuse": "existing observed-mechanics consumer owns all186 commands from level3; original before/after proof is retained in native transfer tests",
+    "progressiveOwnedMix": "previous owned-route acquisition remains available when one participant already reached the resulting pigment"
+  },
+  "qualification": {
+    "nativeReplay": "six levels won in one session from level1",
+    "series": "none; no additional multi-command continuity claimed",
+    "tests": "10 targeted tests pass, including two native transfer variants and five negative cases; typecheck passes after merge",
+    "review": "independent read-only review favorable",
+    "globalGate": "required before integration, not yet run for this lot",
+    "ui": "required after delivery, not yet qualified"
+  },
+  "timingNote": "Another agent reported already-running RSWP tests overlapping the beginning for at most6.57seconds. No comparative speed gain is claimed; original limits were unchanged. No second native game ran concurrently.",
+  "files": {
+    "trcp-native.jsonl.gz": {
+      "bytes": 4387,
+      "sha256": "c4a6d480f80dfb69fa61005a169be1ea4d38e0031fb1a498345007c4b7acdc33",
+      "uncompressedBytes": 39427,
+      "uncompressedSha256": "c9b9ca678aa5f556f901c735bf6dd96cf633ca6778720db239dfc70710b1b85e"
+    },
+    "trcp-native.levels.jsonl.gz": {
+      "bytes": 1203,
+      "sha256": "91def825b498ca469208fb36ffec2999005ccdbbdb318dd2a92748b40d867ff0",
+      "uncompressedBytes": 3338,
+      "uncompressedSha256": "c148368fb61b3825449d4ae2778badba91c714adc06bf6d5009d54f04e3764e7"
+    },
+    "mixture-boundary-public-capture.json.gz": {
+      "bytes": 1850369,
+      "sha256": "d4e08f416270719c1476f8005520bc75138e4a092ab884de9b2dd1876615f372",
+      "uncompressedBytes": 23114492,
+      "uncompressedSha256": "03820a0c33897526d1418048634abe524588d167e9617651adcdf9fa7c5f95f8"
+    },
+    "baseline-trcp-native.jsonl.gz": {
+      "bytes": 3206,
+      "sha256": "136e72a06994478f3d7c28308bfff99bcb5ecc82b7ddec7421190d0a4a6b3815",
+      "uncompressedBytes": 30340,
+      "uncompressedSha256": "1a6d4a4d78077750d7edea5e0e3a6e8b4fc6393114f1e7ed84bf3cf85a98e323"
+    },
+    "public-mixture-reacquisition.json": {
+      "bytes": 1610,
+      "sha256": "7a7e0cb0059739ef66e3a48e02e835bfd1135b8c4e4d675eccb990e4807fdff0"
+    }
+  }
+}
