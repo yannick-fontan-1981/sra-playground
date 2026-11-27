@@ -177,7 +177,7 @@ export async function chooseFallbackProjection(previous: FallbackProjectionMemor
   }
   if (pointer && outlet && (!prior || prior.kind === 'outlet')) {
     const attempted = prior?.attempted ?? [], projection = await projectRecalledOutlet(outlet, observation, rows, attempted);
-    if (projection) return { command: click(projection.choice.point), box: projection.choice.box, goal: projection.outlet,
+    if (projection) return { command: click(projection.choice.point), box: projection.controlBox, goal: projection.outlet,
       label: 'Use the current marked compartment to advance the materials toward the proved outlet',
       objective: 'move_material_through_marked_compartments', evidence: [...new Set([...projection.evidence, ...evidence])],
       recurring: 'Reuse the previously scoring outlet after matching the current chambers',

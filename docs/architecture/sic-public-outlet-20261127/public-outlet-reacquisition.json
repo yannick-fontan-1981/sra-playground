@@ -1,0 +1,435 @@
+{
+  "capture": "spor-boundary-public-capture.json",
+  "baselineSource": "c70f8027",
+  "role": "A clicked control releases one uniquely measured ready outlet",
+  "effect": "Public animation empties the material outlet before exactly one official completion",
+  "reuse": "Compatible chamber anchors, unique ready outlet, unchanged measured control pattern and preserved click offset",
+  "refutation": "Missing, ambiguous, contradictory or new-level-only release; changed control; material rearrangement without population loss",
+  "boundary": {
+    "ordinal": 14,
+    "command": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 53,
+        "y": 30
+      }
+    },
+    "beforeCompleted": 0,
+    "afterCompleted": 1,
+    "beforeWitness": null,
+    "nextBaselineWitness": null,
+    "acquired": {
+      "epoch": 2,
+      "mark": 0,
+      "normal": 3,
+      "background": 5,
+      "chambers": [
+        [
+          5,
+          17,
+          10,
+          28
+        ],
+        [
+          5,
+          32,
+          10,
+          43
+        ],
+        [
+          7,
+          48,
+          12,
+          57
+        ],
+        [
+          16,
+          23,
+          23,
+          37
+        ],
+        [
+          16,
+          48,
+          23,
+          57
+        ],
+        [
+          25,
+          20,
+          28,
+          37
+        ],
+        [
+          25,
+          44,
+          28,
+          60
+        ],
+        [
+          34,
+          48,
+          41,
+          57
+        ],
+        [
+          43,
+          44,
+          46,
+          57
+        ],
+        [
+          50,
+          23,
+          57,
+          37
+        ],
+        [
+          54,
+          44,
+          60,
+          57
+        ],
+        [
+          59,
+          20,
+          62,
+          37
+        ]
+      ],
+      "outlet": [
+        59,
+        20,
+        62,
+        37
+      ],
+      "wins": 1,
+      "refs": [
+        "observed-public-outlet:epoch:1:revision:14:frame:public-outlet-14",
+        "observed-public-outlet:epoch:2:revision:15:frame:public-outlet-15"
+      ],
+      "control": {
+        "box": [
+          50,
+          23,
+          57,
+          37
+        ],
+        "offset": [
+          3,
+          7
+        ],
+        "pattern": [
+          [
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            5,
+            5
+          ],
+          [
+            3,
+            5,
+            5,
+            3,
+            3,
+            3,
+            3,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            5,
+            5,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            5,
+            5,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            3,
+            3,
+            3,
+            3,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            5,
+            5,
+            3
+          ],
+          [
+            5,
+            5,
+            5,
+            5,
+            3,
+            3,
+            3,
+            3
+          ]
+        ]
+      }
+    },
+    "fallbackEqual": true,
+    "animation": [
+      {
+        "index": 0,
+        "outputFilled": 28,
+        "outputBorder": 0
+      },
+      {
+        "index": 1,
+        "outputFilled": 24,
+        "outputBorder": 0
+      },
+      {
+        "index": 2,
+        "outputFilled": 22,
+        "outputBorder": 0
+      },
+      {
+        "index": 3,
+        "outputFilled": 20,
+        "outputBorder": 0
+      },
+      {
+        "index": 4,
+        "outputFilled": 16,
+        "outputBorder": 0
+      },
+      {
+        "index": 5,
+        "outputFilled": 14,
+        "outputBorder": 0
+      },
+      {
+        "index": 6,
+        "outputFilled": 12,
+        "outputBorder": 0
+      },
+      {
+        "index": 7,
+        "outputFilled": 8,
+        "outputBorder": 0
+      },
+      {
+        "index": 8,
+        "outputFilled": 6,
+        "outputBorder": 0
+      },
+      {
+        "index": 9,
+        "outputFilled": 4,
+        "outputBorder": 0
+      },
+      {
+        "index": 10,
+        "outputFilled": 2,
+        "outputBorder": 0
+      },
+      {
+        "index": 11,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 12,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 13,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 14,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 15,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 16,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 17,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 18,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 19,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 20,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 21,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 22,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 23,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 24,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 25,
+        "outputFilled": null,
+        "outputBorder": null
+      },
+      {
+        "index": 26,
+        "outputFilled": null,
+        "outputBorder": null
+      }
+    ]
+  },
+  "firstNextDecision": {
+    "baselineCommand": {
+      "id": 5
+    },
+    "baselineFamily": "sic_test_prepared_effects",
+    "proposedCommand": {
+      "action_ref": "ACTION6",
+      "data": {
+        "x": 7,
+        "y": 22
+      }
+    },
+    "proposedFamily": "sic_follow_observed_compartment_readiness",
+    "strategy": "use_marked_compartment",
+    "evidence": [
+      "observed-public-outlet:epoch:2:revision:15:frame:public-outlet-15",
+      "observed-public-outlet:epoch:1:revision:14:frame:public-outlet-14"
+    ]
+  },
+  "qualification": "Offline replay of public observation only; full native replay pending, budgets unchanged"
+}

@@ -230,3 +230,23 @@ Les trois interfaces affichent `The game reports WIN.`. L'archive `docs/diagnost
 Le candidat local `294d68e88f63d43299d080ae2beffba7308b8276`, sauvegardé sur GitHub sous `97967f2d2d70ae008eb3f639be309a0c5258d089`, termine DC22 depuis L1 en une session SIC, **6/6 et 630 commandes**. Les cinq premiers parcours restent identiques au témoin ; le sixième passe en 258 coups, score à 255,108 s sous 271 coups / 455 s. Les preuves sont dans `docs/diagnostics/sic-public-panel-priority-20261127/strict-qualified/`.
 
 La continuation de panneau est désormais placée après les spécialistes déjà associés. Le premier candidat qui les interrompait reste archivé avec son échec L5. Le collecteur physique, la CI complète et la publication de ce nouveau candidat restent à effectuer ; le compte livré demeure 16/27 à ce stade. LS20 est qualifié 7/7 séparément et sa PR138 exécute le contrôle de 115 niveaux.
+
+### Reprise des dix jeux restants — premier lot combiné
+
+Le travail reprend sur `main` publié en version207 au commit `7ac0738058a461c57564d7858e2ee718745d9ac1`, en conservant la mise à jour Design Premise. Les17 corrections précédentes restent intégrées ; LS20 doit encore recevoir son reçu de viewer final.
+
+Cinq nouveaux parcours stricts sont complets, depuis L1 en une session SIC par jeu, avec un worker et les plafonds d’origine :
+
+| Jeu | Niveaux | Commandes par niveau | Total |
+| --- | --- | --- | ---: |
+| CGWL | 6/6 | 15,16,15,18,61,42 | 167 |
+| DC22 | 6/6 | 22,44,45,76,185,258 | 630 |
+| GRAV | 6/6 | 11,32,6,8,13,10 | 80 |
+| WEAV | 6/6 | 27,28,24,40,40,40 | 199 |
+| SPOR | 6/6 | 14,14,17,17,29,30 | 121 |
+
+Aucun reset ou undo n’est utilisé. Les propositions natives de SPOR sont unitaires ; aucune nouvelle série continue n’est revendiquée pour ce jeu. Les contrats de continuité ajoutent les six niveaux CGWL, GRAV et WEAV ainsi que les cinq niveaux DC22 qui manquaient, sans retirer les115 niveaux antérieurs :138 niveaux,22 jeux,21 cohortes. Chaque effet physique nouvellement compté provient de tickets exécutés et de rasters publics. Les niveaux unitaires restent explicitement identifiés.
+
+Le premier collecteur CGWL a révélé une ambiguïté de composantes connectées due au recouvrement du passager ; ce reçu initial n’est pas une preuve physique réussie. Le collecteur corrigé utilise l’empreinte acquise à la prise et ses pixels réellement visibles, et sera rejoué dans la CI combinée. Les reçus GRAV/DC22/WEAV passent leur contrôle physique indépendant.
+
+La branche `fix/sic-10-qualified-batch1-20261127` rassemble ces cinq corrections. La qualification de la source combinée, sa CI complète, la fusion, la publication et le viewer restent les prochaines étapes de ce checkpoint. Ce suivi ne remplace pas une campagne finale107 jeux sur une source unique. LF52 et WA30 sont en qualification ; ETAG, SNAR et SK48 restent en diagnostic/correction.

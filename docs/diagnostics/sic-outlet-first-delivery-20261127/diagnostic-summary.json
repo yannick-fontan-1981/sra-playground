@@ -1,0 +1,17 @@
+{
+  "source_commit": "f942deccdb1ff36e7e40c6afc544a4720e6ad9a6",
+  "first_loss": {
+    "family": "sic_test_prepared_effects",
+    "strategy": "witnessedPreview",
+    "action": {
+      "id": 5
+    }
+  },
+  "global_command": 46,
+  "level": 4,
+  "level_command": 1,
+  "capture_sha256": "f4e90920bfbff0dcfb1016e6a1b587733a6b49a1cda043b4ef50454c094c82f7",
+  "counterfactual_sha256": "03444173010ea9a17c0fca76e47f4dcea60e19a8e427bf99adb7618ec9a58bc6",
+  "qualification": false,
+  "counterfactual_source": "24df980efd3b97e578913ec6fc2b4fdbdf63f7e2"
+}

@@ -4,6 +4,11 @@ import { crossedPrefixSlot } from '../src/logos-engine/v6-crossed-prefix-observa
 import { continuityObservation, requireExecutedPrefix } from './sic-continuity-contract.mjs';
 
 export const crossingOwners = new Set(['sic_crossing_rows', 'sic_verify_crossing_rows', 'sic_learn_crossing_rows']);
+export const crossingCeilings = [33, 34, 29, 48, 48, 48];
+// Actual [commands, native continuations, changed cells, crossing cells,
+// physically measured continuations]. Later rooms are deliberately unitary.
+export const crossingContinuity = [[27, 10, 15, 7, 9], [28, 0, 0, 0, 0], [24, 0, 0, 0, 0],
+  [40, 0, 0, 0, 0], [40, 0, 0, 0, 0], [40, 0, 0, 0, 0]];
 const hash = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
 const point = value => Array.isArray(value) && value.length === 2 && value.every(Number.isSafeInteger);
 const same = (first, second) => point(first) && point(second) && first.every((value, axis) => value === second[axis]);
@@ -129,5 +134,20 @@ export function measureCrossingContinuity(issued, groups) {
       last: issued.indexOf(group.at(-1)), changedCells: changed.length, crossingCells: changed.filter(item => item.crossing).length,
       continuedCells: changed.filter(item => item.index > 0).length });
   }
+  return physical;
+}
+
+export function requireCrossingContinuity(run, issued, groups) {
+  const index = issued[0]?.level - 1, reference = crossingContinuity[index];
+  assert.ok(reference && issued.length <= crossingCeilings[index]
+    && issued.every(ticket => ticket.resets === 0), 'WEAV exceeded its original ceiling or reset');
+  const [actions, native, cells, crossings, continued] = reference;
+  const minimum = count => Math.ceil(count * issued.length / actions);
+  assert.ok(issued.length - groups.size >= minimum(native), 'WEAV lost its native continuation');
+  const physical = measureCrossingContinuity(issued, groups);
+  assert.ok(physical.reduce((sum, item) => sum + item.changedCells, 0) >= minimum(cells)
+    && physical.reduce((sum, item) => sum + item.crossingCells, 0) >= minimum(crossings)
+    && physical.reduce((sum, item) => sum + item.continuedCells, 0) >= minimum(continued),
+  'WEAV lost its actual cell advances or acquired crossings');
   return physical;
 }

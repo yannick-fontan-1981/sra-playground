@@ -740,7 +740,7 @@ export function createSicPublicInputExploration(fallback = false): NativeFamily<
     const compartment = acquireCompartmentReturn(state.compartmentTransfer, before, after, command, rows, afterRows, frames);
     const instruction = acquireInstructionReturn(state.instructionTransfer, before, after, command, rows, afterRows);
     const outlet = after.levels_completed > before.levels_completed
-      ? await acquireMarkedOutlet(state.outletWitness ?? null, before, after, command, rows) : null;
+      ? await acquireMarkedOutlet(state.outletWitness ?? null, before, after, command, rows, afterRows, frames) : null;
     const symbols = observeSymbolPrefix(state.symbolTransfer, before, after, command, rows, afterRows);
     const catalogue = before.available_action_refs.includes('ACTION6') && before.frame_hash !== after.frame_hash ? acquireCatalogueReturn(state.catalogueTransfer, before, after, command, rows, afterRows, frames) : undefined;
     const relations = acquireRelationReturn(state.relationsTransfer, before, after, command, rows, afterRows, frames);

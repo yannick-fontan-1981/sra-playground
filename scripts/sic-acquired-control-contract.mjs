@@ -4,6 +4,17 @@ import { continuityObservation, requireExecutedPrefix } from './sic-continuity-c
 import { matchingEdgeOwner } from './sic-matching-edge-continuity.mjs';
 import { publicPanelOwner } from './sic-public-panel-continuity.mjs';
 
+// Original chronological action ceilings; the collector uses each maximum.
+export const matchingEdgeCeilings = [16, 57, 11, 13, 28, 15];
+export const publicPanelCeilings = [27, 53, 54, 92, 215, 271];
+// Actual [commands, continued settling commands, acquired switches in series].
+export const matchingEdgeContinuity = [[11, 0, 0], [32, 0, 0], [6, 0, 0], [8, 0, 0], [13, 6, 0], [10, 9, 2]];
+// Actual [commands, all continued commands, continued preparations, physical contacts].
+// The first three levels retain the earlier mixed remote-support compositions.
+// Later boundary trials may stop a walk; only completed approaches immediately
+// followed by an independently executed, acquired contact count as preparation.
+export const publicPanelContinuity = [[22, 7, 0, 0], [44, 22, 0, 0], [45, 22, 0, 0], [76, 0, 0, 0], [185, 0, 0, 0], [258, 80, 9, 3]];
+
 const equal = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const frameHash = rows => Array.isArray(rows) ? createHash('sha256').update(JSON.stringify(rows)).digest('hex').slice(0, 16) : null;
 const positions = pieces => Array.isArray(pieces) ? pieces.map(({ x, y, ink }) => [ink, x, y].join(':')).sort().join('|') : null;
@@ -20,6 +31,7 @@ function actualTicket(ticket, observed, effect) {
     && before.epoch === ticket.level && observed.levelEpoch === ticket.level
     && observed.scoreBefore === ticket.level - 1 && observed.actionRef === ticket.action
     && observed.afterRef === ticket.outcome?.observation_ref && effect?.a === Number(ticket.action.slice(6))
+    && equal(effect.data ?? {}, ticket.data ?? {})
     && effect.family === ticket.outcome.family && effect.from === before.frame && effect.to === after.frame,
   'Acquired control lost its actual command, observation or public return');
   assert.ok(frameHash(observed.before?.frame) === before.frame
@@ -35,9 +47,9 @@ function effectMap(run, issued) {
 export function measureMatchingEdgeContinuity(run, issued, groups) {
   const effects = effectMap(run, issued), series = [];
   for (const group of groups.values()) {
-    if (!group.some(ticket => ticket.outcome?.family === matchingEdgeOwner && ticket.edge?.switched)) continue;
+    if (!group.some(ticket => ticket.outcome?.family === matchingEdgeOwner)) continue;
     requireExecutedPrefix('GRAV', group);
-    assert.ok(group.every(ticket => ticket.outcome?.family === matchingEdgeOwner && ticket.edge?.switched),
+    assert.ok(group.every(ticket => ticket.outcome?.family === matchingEdgeOwner && ticket.edge),
       'GRAV mixed attachment role owners or lost measured evidence');
     for (const [index, ticket] of group.entries()) {
       const e = ticket.edge, effect = effects.get(ticket), { before, after } = actualTicket(ticket, e, effect);
@@ -83,6 +95,8 @@ export function measurePublicPanelContinuity(run, issued, groups) {
   const effects = effectMap(run, issued), preparations = [];
   for (const group of groups.values()) {
     if (group.length < 2 || !group.some(ticket => ticket.panel?.role === 'walk')) continue;
+    const last = group.at(-1), first = issued.indexOf(group[0]), contact = issued[first + group.length], p = contact?.panel;
+    if (p?.role !== 'contact') continue;
     requireExecutedPrefix('DC22', group);
     assert.ok(group.every(ticket => ticket.outcome?.family === publicPanelOwner && ticket.panel?.role === 'walk'),
       'DC22 lost a bounded public panel approach');
@@ -100,8 +114,6 @@ export function measurePublicPanelContinuity(run, issued, groups) {
         && equal(p.acquisition.controls?.[ticket.action], p.control),
       'DC22 final reconciliation lost the acquired walking role');
     }
-    const last = group.at(-1), first = issued.indexOf(group[0]), contact = issued[first + group.length], p = contact?.panel;
-    if (p?.role !== 'contact') continue;
     requireExecutedPrefix('DC22 contact', [contact]);
     const effect = effects.get(contact), { before, after } = actualTicket(contact, p, effect);
     assert.ok(contact.actionIndex === 0 && contact.outcome.family === publicPanelOwner && contact.action === 'ACTION6'

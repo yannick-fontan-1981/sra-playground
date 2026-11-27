@@ -42,6 +42,10 @@ jobs:
       - run: node --test tests/sic-observed-route-transfer.test.ts tests/sic-observed-route-continuity.test.ts tests/sic-outline-service.test.ts
       - run: node --test tests/sic-route-opening-evidence.test.mjs tests/sic-route-opening-contract.test.mjs tests/sic-population-continuity-evidence.test.ts
       - run: node --test tests/sic-population-continuity-contract.test.mjs tests/sic-passage-continuity-evidence.test.mjs tests/sic-passage-continuity-contract.test.mjs
+      - run: node --test tests/sic-edge-switch-transfer.test.ts tests/sic-settle-matching-edges.test.ts tests/sic-public-panel-continuation.test.ts tests/sic-acquired-control-evidence.test.mjs tests/sic-acquired-control-contract.test.mjs
+      - run: node --test tests/sic-guarded-passenger-continuity.test.ts tests/sic-passenger-continuity-evidence.test.mjs
+      - run: node --test tests/sic-crossing-row-transfer.test.ts tests/sic-crossing-continuity.test.ts tests/sic-crossing-campaign-contract.test.mjs
+      - run: node --test tests/sic-marked-control-state.test.ts tests/sic-marked-outlet-transfer.test.ts tests/sic-marked-compartment-flow.test.ts
       - run: node --test tests/sic-paired-passage-continuity.test.ts
       - run: node --test tests/sic-glyph-cycle-continuity.test.ts tests/sic-moving-glyph-route.test.ts
       - run: node --test tests/sic-workshop-phase-continuity-evidence.test.mjs tests/sic-workshop-phase-continuity-contract.test.mjs tests/sic-workshop-phase-real-continuity.test.mjs tests/sic-continuity-workshop-gate.test.mjs
@@ -73,7 +77,11 @@ jobs:
           - { name: population-preparation, cohort: 'source:VOIS', end: 6, cap: 80 }
           - { name: passage-walking, cohort: 'source:PORT', end: 6, cap: 32 }
           - { name: workshop-phase, cohort: 'source:LS20', end: 7, cap: 129 }
-          - { name: native-sources, cohort: 'source:AR25,HANO,DC22', end: 1, cap: 120 }
+          - { name: matching-edges, cohort: 'source:GRAV', end: 6, cap: 57 }
+          - { name: public-panel, cohort: 'source:DC22', end: 6, cap: 271 }
+          - { name: guarded-passengers, cohort: 'source:CGWL', end: 6, cap: 74 }
+          - { name: crossing-rows, cohort: 'source:WEAV', end: 6, cap: 48 }
+          - { name: native-sources, cohort: 'source:AR25,HANO', end: 1, cap: 120 }
     env:
       SIC_STUDY_CONTINUITY: '1'
       SIC_STUDY_WORKERS: '1'
@@ -180,7 +188,11 @@ jobs:
             ['population-preparation', 'source:VOIS', 6, 80],
             ['passage-walking', 'source:PORT', 6, 32],
             ['workshop-phase', 'source:LS20', 7, 129],
-            ['native-sources', 'source:AR25,HANO,DC22', 1, 120],
+            ['matching-edges', 'source:GRAV', 6, 57],
+            ['public-panel', 'source:DC22', 6, 271],
+            ['guarded-passengers', 'source:CGWL', 6, 74],
+            ['crossing-rows', 'source:WEAV', 6, 48],
+            ['native-sources', 'source:AR25,HANO', 1, 120],
           ];
           const { GITHUB_SHA: sha, GITHUB_RUN_ID: runId } = process.env;
           assert.equal(execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(), sha);
