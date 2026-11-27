@@ -38,7 +38,7 @@ export function evaluate(spec,turns) {
     second.receipt.objective===trial?.released && after.returned?.closure?.objective===trial?.released);
   test('pas de gain de vue aux deux retours',first?.receipt?.newPixels===0 && second?.receipt?.newPixels===0 &&
     second?.receipt?.status==='no_new_area');
-  if(spec.change==='passage') test('la pose modifiée lève la question de blocage',second?.block===null);
+  if(['passage','partiel'].includes(spec.change)) test('la pose modifiée lève la question de blocage',second?.block===null);
   else test('deuxième immobilité inscrite sous la même clé',second?.block?.stationary_trials===2 &&
     second.block.key===first?.block?.key && eq(second.offset,[0,0]));
   test('aucune troisième confirmation avec le même dossier',turns.length>13 &&

@@ -5,13 +5,14 @@ const ls=capture('ls19');
 
 // La capture enregistre deux bandes du mobile, sur un sol de couleur 3.
 // L'ouverture libère le carré d'entrée. Le passage déplace les huit lignes du mobile.
-function variant(frame,change,drift) {
+function variant(frame,change,drift,band) {
   if(change==='identique') return frame;
   const next=frame.map(row=>[...row]);
-  if(change==='decalage') {
+  if(change==='partiel') {
     assert.ok(Number.isInteger(drift) && Math.abs(drift)>=1 && Math.abs(drift)<=3);
-    for(let y=48;y<56;y++) for(let x=40;x<48;x++) next[y][x]=3;
-    for(let y=48;y<56;y++) for(let x=40;x<48;x++) next[y][x+drift]=frame[y][x];
+    assert.ok([9,12].includes(band));
+    for(let y=48;y<56;y++) for(let x=40;x<48;x++) if(frame[y][x]===band) next[y][x]=3;
+    for(let y=48;y<56;y++) for(let x=40;x<48;x++) if(frame[y][x]===band) next[y][x+drift]=band;
     return next;
   }
   for(let y=0;y<8;y++) for(let x=40;x<48;x++) {
@@ -37,7 +38,7 @@ export function game(spec) {
   assert.ok(tail>=0 && tail<=4);
   function observation(i) {
     const o=ls.observations[Math.min(step,i)];
-    const map=f=>orient(i>=step?variant(f,change,spec.drift):f,mode);
+    const map=f=>orient(i>=step?variant(f,change,spec.drift,spec.band):f,mode);
     return {frame:map(o.frame),frames:o.frames.map(map),availableActionIds:o.availableActionIds,
       state:o.state,level:o.level,levelsCompleted:o.levelsCompleted,stepIndex:i};
   }

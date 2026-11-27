@@ -11,6 +11,8 @@ Le contrat antérieur de SIC 2 est `68efddd2d009ace4f4b898cc82c4bb7941e815ae`. S
 
 **Besoin, plan et durée de la preuve.** Le besoin de vue `observe_view_access` conserve son identifiant sous `G_official_completion`. Le plan d'approche libéré et le plan de confirmation ont deux sous-objectifs différents. Une confirmation admissible cite un passage antérieur attesté, une première immobilité, les observations avant et après, une cause exclusive encore inconnue et un garde admis. Son reçu doit citer le nouveau sous-objectif et la révision effective. Une image identique à la précédente peut avoir une autre référence temporelle. Dès le prochain choix, une confirmation consommée ne peut être relibérée sur le seul dossier stationnaire. Les témoins altérés examineront la remise en circulation de l'ancien ticket et la substitution d'un reçu périmé.
 
+**Cas de porteurs multiples.** Conclure à une deuxième immobilité exige que chaque porteur conserve sa pose. Si un seul change et que l'autre reste fixe, le compteur ne doit pas passer à deux sur l'ancienne clé. L'audit vérifiera dans les images effectivement transmises que les pixels d'un seul des deux porteurs sont déplacés.
+
 **Portée.** La fixture fournit un préfixe de transitions partielles de LS19. Les contrefactuels changent uniquement l'observation utile dans chaque paire. Au-delà du préfixe capturé, une petite fenêtre construite laisse l'image constante pour toute commande directionnelle proposée. Le verdict examine un mécanisme de décision du service et ses retours sur ces situations. La complétion du jeu, le Banc de non-régression et l'intégration canonique ont leurs propres mesures.
 
 Depuis ce répertoire, dans un clone contenant la fixture du contrat de la ligne 90 et le SHA de la ligne 91 :
