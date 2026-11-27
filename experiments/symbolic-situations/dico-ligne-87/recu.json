@@ -1,0 +1,52 @@
+{
+  "révisions": [
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "c0b9f4027f1df257d7b8c96f5656f9dbb83661f0"
+  ],
+  "catalogue": {
+    "offres": 6,
+    "coût": 2,
+    "optima": 2,
+    "point": {
+      "x": 6,
+      "y": 3
+    },
+    "question": "74cd95c9b651b30d5b8401743745eb744e36efdd240849d4d7751f2c3437dd79",
+    "cadres": 9,
+    "retour": "LOCAL",
+    "restants": [
+      1,
+      5
+    ]
+  },
+  "ouvertureActive": {
+    "ouverture": {
+      "x": 25,
+      "y": 36
+    },
+    "famille": "observed_frontier",
+    "tour4": "subset_scope_navigation"
+  },
+  "autreOptimum": {
+    "offres": 6,
+    "coût": 2,
+    "optima": 2,
+    "point": {
+      "x": 27,
+      "y": 3
+    },
+    "question": "3357943feef55d884c06db7fe7c0c0b84ebf9ae5b5842bd0b6ce86fde125ce3b",
+    "cadres": 16,
+    "retour": "GLOBAL",
+    "restants": [
+      1,
+      5
+    ]
+  },
+  "empreintes": {
+    "catalogue": "c248c4bb8a08e6ea5d64723b1ae93f5afb31a0c5b77f05893e1228f7df31bf7f",
+    "curieux": "f19877fa9074a7660fadaaedc4fb69a3051f6d297b7fc49fc41a004e0505a758",
+    "finite.dev": "6e3cc56b07d295f5d591a898374bea74c772ca7fe741aaaccf9ca55e14f49289",
+    "finite.res": "86035c013258221469ed5945053fa56b1d992c008bc1f27c11a4901f30bad8b2"
+  }
+}
