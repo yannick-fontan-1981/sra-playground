@@ -1,0 +1,675 @@
+{
+  "schema": "sic.neighbor-effect-transfer-diagnostic.v1",
+  "baselineSource": "fe822410b2d544553d6b8b2536c3af45cfb9e10f",
+  "baselineTree": "487bf0c739ba57dccfbb7cb9255e8eb6b0a4b3ce",
+  "mainEquivalent": "c97797426f619db16de5b29738a8d4209c78ebca",
+  "code": "VOIS",
+  "startLevel": 1,
+  "mode": "sic",
+  "workers": 1,
+  "diagnosticOnly": true,
+  "budgetQualification": false,
+  "capturedCommands": 135,
+  "firstDecision": 126,
+  "firstFiveCommands": [
+    14,
+    18,
+    34,
+    23,
+    36
+  ],
+  "prefixHashes": [
+    "cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186",
+    "3f135185cabbc08b0b18ba5be3eeb843689afbfafe442b2acd752d6998899439",
+    "a973efa26aeddc92bbc8f941bc11ec99d561fef31953b7e90eb393425150671f",
+    "490c1ffbfc4fe7b94d5bc4d3893c316e7d838c46351399b9400c9481e751cd19",
+    "6548237e4ed5d62b7b38e01186e22a03ec1e283a8e338deeff1d341ed588cf79"
+  ],
+  "roles": {
+    "knownControls": {
+      "ACTION1": {
+        "delta": [
+          -1,
+          0
+        ]
+      },
+      "ACTION2": {
+        "delta": [
+          1,
+          0
+        ]
+      },
+      "ACTION3": {
+        "delta": [
+          0,
+          -1
+        ]
+      },
+      "ACTION4": {
+        "delta": [
+          0,
+          1
+        ]
+      }
+    },
+    "knownNeighborhoodMasks": [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "12",
+      "13",
+      "14"
+    ],
+    "observedNeighborEffect": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:117:frame:09ba56664c3f6f9c",
+    "witnessHasNeighborEffect": false
+  },
+  "counterfactual": [
+    {
+      "zone": [
+        5,
+        5,
+        17,
+        17
+      ],
+      "retainedEffectPlan": null
+    },
+    {
+      "zone": [
+        33,
+        9,
+        53,
+        29
+      ],
+      "retainedEffectPlan": {
+        "support": {
+          "cells": [
+            [
+              4,
+              10
+            ]
+          ],
+          "evidence": [
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:56:frame:326e82b4ac9358b9",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:62:frame:0dc6391691dc842b",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:66:frame:7dd4ca4100a4b83f",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:51:frame:2fef7d324241158e",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:3:revision:47:frame:f53908b59a7bb680",
+            "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:5:revision:117:frame:09ba56664c3f6f9c"
+          ],
+          "unknownMasks": [
+            11
+          ]
+        },
+        "orderedLength": 71,
+        "first": {
+          "cell": [
+            0,
+            9
+          ],
+          "slot": [
+            3,
+            9
+          ],
+          "expected": null,
+          "ordered": true,
+          "command": {
+            "action_ref": "ACTION6",
+            "data": {
+              "x": 39,
+              "y": 3
+            }
+          }
+        }
+      }
+    }
+  ],
+  "artifact": {
+    "name": "public-evidence.tar.gz",
+    "bytes": 1938845,
+    "sha256": "30ae6c243e2fa00bf00f05f424fcaa2cbde8b8e775af75f76abbe95b9cfd8957"
+  },
+  "members": [
+    {
+      "name": "vois-l6-public-fe822410.json",
+      "bytes": 15185334,
+      "sha256": "cbe5aff7b8cc3619e23cb469eae7e8e74212400aa24f57e6e04e90ba671aae43"
+    },
+    {
+      "name": "vois-l6-plan-diagnosis-fe822410.json",
+      "bytes": 14804,
+      "sha256": "17cd55619db6462587f40480a72808fb9c8938cf34fffe4614f9920949d71f68"
+    },
+    {
+      "name": "capture-population-boundary.mjs",
+      "bytes": 13566,
+      "sha256": "8650ea0bbfa3b0c65db406f13cab0e3886e43c2a2066450bb85c69e3222d49aa"
+    },
+    {
+      "name": "probe-population-plan.mjs",
+      "bytes": 2470,
+      "sha256": "7d34e3829508d8d1de3ac93c01997a9cc7539502027d8ec147816abe8addcc66"
+    }
+  ],
+  "validation": {
+    "targetedTests": 16,
+    "typecheck": "passed",
+    "strictReplay": "pending",
+    "fullContinuity": "pending",
+    "viewer": "pending"
+  },
+  "firstStrict": {
+    "source": "dad93b27aadf9d589f7dc4a3921e7a490102ad68",
+    "remote": "043615e53d561ab2cb2002fb06a8dc1418470891",
+    "levels": 5,
+    "target": 6,
+    "actions": 186,
+    "authority": 186,
+    "reason": "level_wall_time_budget",
+    "levels1to5HashesUnchanged": true,
+    "lastLevel": {
+      "level": 6,
+      "won": false,
+      "actions": 61,
+      "ms": 27000,
+      "budget": {
+        "actions": 80,
+        "activeTimeMs": 27000,
+        "source": "docs/architecture/sic-v8-validation.md :: VOIS niveau 6, placer l'appui hors du contour comparé",
+        "timeBasis": "measured"
+      }
+    },
+    "finalAcquisitions": null,
+    "finalRecoveries": null
+  },
+  "selectionContinuity": {
+    "firstLostPreparation": 37,
+    "level": 3,
+    "oneClickExposed": true,
+    "orderedActions": 30,
+    "knownMarkers": [
+      [
+        1,
+        1,
+        0
+      ]
+    ],
+    "knownControls": {
+      "ACTION1": {
+        "delta": [
+          -1,
+          0
+        ]
+      },
+      "ACTION2": {
+        "delta": [
+          1,
+          0
+        ]
+      },
+      "ACTION3": {
+        "delta": [
+          0,
+          -1
+        ]
+      },
+      "ACTION4": {
+        "delta": [
+          0,
+          1
+        ]
+      }
+    },
+    "nativeVariants": 2,
+    "targetedTests": 21,
+    "typecheck": "passed",
+    "secondStrictReplay": "pending",
+    "fullContinuity": "pending",
+    "viewer": "pending"
+  },
+  "completeStrict": {
+    "source": {
+      "local": "00f4f66080c092f3c2a02ba559bc77b082970843",
+      "github": "3404e61b38d942ecb5f17aeb0c1b0ba06224da2e",
+      "tree": "ae6aadf8f0cea06868ab97cac31abd2f24e2b4d2"
+    },
+    "files": [
+      {
+        "path": "vois-strict-00f4f660.jsonl.gz",
+        "bytes": 3707,
+        "sha256": "b336cc32514e8c549816dea2140db7bff3119d476ad1026385bdaeb1c629400f",
+        "rawSha256": "daaaa1ed1e23d845cd942ac184fd8ecced5ef8a3610643d6afb5bf5f9ad25cf5"
+      },
+      {
+        "path": "vois-strict-00f4f660.jsonl.levels.gz",
+        "bytes": 1287,
+        "sha256": "477236b1102799f99cbd35c7870583e052544ef018ed73460edce6f4027b45c8",
+        "rawSha256": "39f6fd0e016ec8a3712a117210c61efc043319494ae7426c372ef21988b14ad1"
+      }
+    ],
+    "levels": 6,
+    "commands": 196,
+    "authority": 196,
+    "acquisitions": 196,
+    "recoveries": {
+      "reset": 0,
+      "undo": 0
+    },
+    "levelsDetail": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 3709,
+        "budget": {
+          "actions": 19,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 14,
+        "ms": 3863,
+        "gameMs": 55,
+        "costs": {
+          "init": {
+            "ms": 1344,
+            "count": 1
+          },
+          "advance": {
+            "ms": 1936,
+            "count": 14
+          },
+          "resume": {
+            "ms": 450,
+            "count": 8
+          }
+        },
+        "graph": "c06ea69cfc0d072b649ffc588e541b1e5f11cbf2285cecbecbe5acff0291c61b",
+        "deltas": 2423,
+        "acquiredRecords": 14,
+        "nodes": 517,
+        "traceEvents": 64,
+        "prefixHash": "cbba416cc9be373a894c1ee08324922d8c0eb71a7dcad2c551a2593bee83f186",
+        "scoredMs": 3461,
+        "settlementMs": 402
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 3416,
+        "budget": {
+          "actions": 23,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 18,
+        "ms": 3601,
+        "gameMs": 65,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 2701,
+            "count": 18
+          },
+          "resume": {
+            "ms": 720,
+            "count": 12
+          }
+        },
+        "graph": "ee5c9ee03785752008216949d71ab2b4a9deebd3cbc916c21acb4ad395ad4d36",
+        "deltas": 5135,
+        "acquiredRecords": 32,
+        "nodes": 679,
+        "traceEvents": 128,
+        "prefixHash": "3f135185cabbc08b0b18ba5be3eeb843689afbfafe442b2acd752d6998899439",
+        "scoredMs": 3245,
+        "settlementMs": 356
+      },
+      {
+        "level": 3,
+        "won": true,
+        "activeMs": 6097,
+        "budget": {
+          "actions": 41,
+          "activeTimeMs": 18000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 34,
+        "ms": 6418,
+        "gameMs": 110,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 5089,
+            "count": 34
+          },
+          "resume": {
+            "ms": 1031,
+            "count": 12
+          }
+        },
+        "graph": "62dc54f7ee371a91688673b3a949e66ab576743b2dfaac13fda66febfb55b4bc",
+        "deltas": 7947,
+        "acquiredRecords": 66,
+        "nodes": 940,
+        "traceEvents": 128,
+        "prefixHash": "a973efa26aeddc92bbc8f941bc11ec99d561fef31953b7e90eb393425150671f",
+        "scoredMs": 6199,
+        "settlementMs": 219
+      },
+      {
+        "level": 4,
+        "won": true,
+        "activeMs": 4451,
+        "budget": {
+          "actions": 28,
+          "activeTimeMs": 14000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=4; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 23,
+        "ms": 4688,
+        "gameMs": 81,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 3933,
+            "count": 23
+          },
+          "resume": {
+            "ms": 537,
+            "count": 7
+          }
+        },
+        "graph": "133b80feeac8f86572ae4fc9f8cf0a2f51bbb190690874063026aee8970c2438",
+        "deltas": 9608,
+        "acquiredRecords": 89,
+        "nodes": 1110,
+        "traceEvents": 128,
+        "prefixHash": "490c1ffbfc4fe7b94d5bc4d3893c316e7d838c46351399b9400c9481e751cd19",
+        "scoredMs": 3484,
+        "settlementMs": 1203
+      },
+      {
+        "level": 5,
+        "won": true,
+        "activeMs": 8401,
+        "budget": {
+          "actions": 45,
+          "activeTimeMs": 21000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=VOIS; level=5; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 36,
+        "ms": 8779,
+        "gameMs": 120,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 7425,
+            "count": 36
+          },
+          "resume": {
+            "ms": 1023,
+            "count": 10
+          }
+        },
+        "graph": "b371298e4d3765824e02ff862ebfc682999326e1a838868198a7c8c4c6b36a11",
+        "deltas": 12019,
+        "acquiredRecords": 125,
+        "nodes": 1392,
+        "traceEvents": 128,
+        "prefixHash": "6548237e4ed5d62b7b38e01186e22a03ec1e283a8e338deeff1d341ed588cf79",
+        "scoredMs": 7375,
+        "settlementMs": 1405
+      },
+      {
+        "level": 6,
+        "won": true,
+        "activeMs": 18738,
+        "budget": {
+          "actions": 80,
+          "activeTimeMs": 27000,
+          "source": "docs/architecture/sic-v8-validation.md :: VOIS niveau 6, placer l'appui hors du contour comparé",
+          "timeBasis": "measured"
+        },
+        "actions": 71,
+        "ms": 19478,
+        "gameMs": 247,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 16745,
+            "count": 71
+          },
+          "resume": {
+            "ms": 2087,
+            "count": 16
+          }
+        },
+        "graph": "23f8450e5441289b765f7dd04aebeef6a46f7508679890fe5958ebb7f901c26e",
+        "deltas": 16076,
+        "acquiredRecords": 196,
+        "nodes": 2041,
+        "traceEvents": 128,
+        "prefixHash": "8324e6a9e34907ce62fe0b49a7ec8453fddd36705ad9309f756dedd3f3aff4bd",
+        "scoredMs": 17045,
+        "settlementMs": 2434
+      }
+    ],
+    "series": [
+      3,
+      4,
+      3,
+      3,
+      3,
+      2,
+      6,
+      4,
+      4,
+      5,
+      4,
+      4,
+      2,
+      4,
+      4,
+      5,
+      6,
+      3,
+      4,
+      7,
+      7,
+      2,
+      9,
+      2,
+      4,
+      5,
+      6,
+      6,
+      2,
+      6,
+      2,
+      8,
+      2,
+      10,
+      2,
+      2,
+      12
+    ],
+    "pathKinds": [
+      {
+        "length": 3,
+        "type": "move"
+      },
+      {
+        "length": 4,
+        "type": "move"
+      },
+      {
+        "length": 3,
+        "type": "move"
+      },
+      {
+        "length": 3,
+        "type": "move"
+      },
+      {
+        "length": 3,
+        "type": "move"
+      },
+      {
+        "length": 2,
+        "type": "move"
+      },
+      {
+        "length": 6,
+        "type": "click+move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 5,
+        "type": "click+move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 5,
+        "type": "click+move"
+      },
+      {
+        "length": 6,
+        "type": "click+move"
+      },
+      {
+        "length": 3,
+        "type": "click+move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 7,
+        "type": "click+move"
+      },
+      {
+        "length": 7,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "click+move"
+      },
+      {
+        "length": 9,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "move"
+      },
+      {
+        "length": 4,
+        "type": "click+move"
+      },
+      {
+        "length": 5,
+        "type": "click+move"
+      },
+      {
+        "length": 6,
+        "type": "click+move"
+      },
+      {
+        "length": 6,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "click+move"
+      },
+      {
+        "length": 6,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "click+move"
+      },
+      {
+        "length": 8,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "click+move"
+      },
+      {
+        "length": 10,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "click+move"
+      },
+      {
+        "length": 2,
+        "type": "click+move"
+      },
+      {
+        "length": 12,
+        "type": "click+move"
+      }
+    ],
+    "finalPrefixHash": "8324e6a9e34907ce62fe0b49a7ec8453fddd36705ad9309f756dedd3f3aff4bd",
+    "strictBudgetsUnchanged": true
+  }
+}

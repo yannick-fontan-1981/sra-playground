@@ -191,3 +191,11 @@ Les trois interfaces affichent `The game reports WIN.`. L’archive `docs/diagno
 | WEAV | 1/6 dans le témoin ; L2 atteint 34 commandes | Premier diagnostic public |
 
 Ces résultats proviennent de révisions différentes et restent un suivi des corrections. Les candidats partiels ne sont pas annoncés comme des jeux corrigés. Les prochaines fusions conservent les seuils de la continuité existante et les budgets de la campagne de départ.
+
+### Préparations de file publiées en version 204
+
+PR136 est fusionnée sur `main` au commit **`0dc7f2eeccdcf29f27564d279750cc5fb1c10e1e`**, arbre `d77d7610fc47e81d3515f065dfed5c69cdd1799e`. La branche de travail `fix/sic-27-queue-integration-20261127` est sauvegardée sur GitHub au commit `51e5bffc9a4670766431633c7b24af094ab5d480` (local `232d24b5b1a3133e9f70787e9e46fde2e623ad65`). Les 15 jobs de la CI 45932306615 passent, dont le contrôle complet de continuité, job 140290343275 : 90 niveaux protégés dans 15 jeux, avec les 84 plafonds antérieurs inchangés.
+
+Le Site **204** porte exactement ce SHA source. Le viewer local servant cette source publiée affiche `The game reports WIN.` pour COLM, depuis L1 en une seule session SIC, sans reset ni nouvelle session intermédiaire : **17, 17, 20, 23, 10 et 16 commandes**, soit **103** et 46 plans terminés. L’archive `docs/diagnostics/sic-queue-continuity-20261127/viewer-204.json` conserve les compteurs et la provenance ; la mesure chronométrée et les 29 réceptions préparées sont archivées séparément.
+
+**Treize des 27 jeux initiaux sont corrigés, fusionnés, publiés et reproduits dans le viewer** : UPST, CWSE, CRAF, SB26, CASC, CLRS, MIND, FOGW, TRCP, GRIL, RSWP, LKEY et COLM. La campagne définitive des 107 jeux sur une même révision reste à exécuter.
