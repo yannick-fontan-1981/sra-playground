@@ -89,7 +89,7 @@ for (const varied of [false, true]) test('native navigation retains known terrai
     reply = await service.handle({ type: 'resume', sessionId, sequence });
     assert.ok(reply.ticket);
     const proposal = reply.snapshot.proposal as Proposal, revision = reply.ticket.decisionRevision;
-    assert.equal(proposal.actions.length, 6);
+    assert.equal(proposal.actions.length, 8);
     const crossed = [111, 112, 113].map(cell => varied ? mapped(cell) : cell);
     assert.ok(crossed.every(cell => proposal.local.last.memory[cell] === 'free'));
     for (const [index, step] of fixture.walk.entries()) {
@@ -100,16 +100,31 @@ for (const varied of [false, true]) test('native navigation retains known terrai
       reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: reply.ticket.id,
         executionMs: 1, observation: packet(transform(step.after, varied), sequence) });
       const outcome = reply.snapshot.trace.findLast(event => event.kind === 'actual_outcome');
-      assert.equal(outcome?.matched, true); assert.equal(outcome?.seal_prefix, index === 5);
-      if (index < 5) assert.deepEqual(family.state(), before, 'Actual readings remain private until the single ordered reconciliation');
+      assert.equal(outcome?.matched, true); assert.equal(outcome?.seal_prefix, false);
+      assert.deepEqual(family.state(), before, 'Actual readings remain private until the single ordered reconciliation');
     }
-    assert.equal(reply.snapshot.acquiredRecords, fixture.learning.length + 6);
+    // The last continuation is a declared functional return, not a recorded
+    // backend frame: execute the actual directional input; other bodies keep
+    // their currently observed pose. The full strict campaign tests the backend.
+    assert.ok(reply.ticket); assert.equal(reply.ticket.actionIndex, 7);
+    assert.equal(reply.ticket.decisionRevision, revision);
+    const returned = transform(fixture.walk.at(-1)!.after, varied), grid = proposal.local.grid;
+    const from = proposal.walk![6]!.target;
+    const vector: Record<string,number> = { ACTION1: -grid.columns, ACTION2: grid.columns, ACTION3: -1, ACTION4: 1 };
+    const to = from + vector[reply.ticket.actionRef]!, [x,y] = tile(grid,from), [u,v] = tile(grid,to);
+    for (const [dx,dy] of grid.actorPixels!) returned.frame[y+dy]![x+dx]=grid.base;
+    for (const [dx,dy] of grid.actorPixels!) returned.frame[v+dy]![u+dx]=grid.actor;
+    returned.frames=[returned.frame];
+    reply = await service.handle({ type: 'advance', sessionId, sequence: ++sequence, ticketId: reply.ticket.id,
+      executionMs: 1, observation: packet(returned, sequence) });
+    assert.equal(reply.snapshot.trace.findLast(event => event.kind === 'actual_outcome')?.matched, true);
+    assert.equal(reply.snapshot.acquiredRecords, fixture.learning.length + 8);
     const seal = reply.snapshot.trace.filter(event => event.kind === 'sealed_prefix' && event.revision === revision);
-    assert.equal(seal.length, 1); assert.equal(seal[0]!.acquired_actions, 6);
+    assert.equal(seal.length, 1); assert.equal(seal[0]!.acquired_actions, 8);
     const acquired = family.state().state as Proposal['local'];
     assert.ok(crossed.every(cell => acquired.last.memory[cell] === 'free'), 'A moving patrol does not replace independently known terrain');
     assert.ok(acquired.last.sentries?.length);
-    assert.equal(acquired.timing!.clock!.turn, proposal.local.timing!.clock!.turn + 6);
+    assert.equal(acquired.timing!.clock!.turn, proposal.local.timing!.clock!.turn + 8);
   } finally { runtime.close('test_complete'); }
 });
 
@@ -184,3 +199,52 @@ for (const changed of ['none', 'missing-carrier', 'duplicate-carrier', 'displace
       assert.equal((await family.before(offered, 1, packet, { ...after, observation_ref: after.observation_ref + ':missing-return' })).admitted, false);
     }
   });
+
+for (const condition of ['repeated-public-cycle', 'missing-period', 'incomplete-cycle', 'contradicted-cycle', 'ambiguous-track'] as const)
+  test('a remembered rail cell requires ' + condition, async () => {
+    const family = createSicNavigateRevealedGrid(), saved = structuredClone(fixture.acquired), local = saved.state;
+    const actual = fixture.walk[6]!.after.frame, grid = fixture.grid;
+    const target = Array.from({ length: grid.size }, (_, cell) => cell).find(cell => {
+      const [x,y] = tile(grid,cell);
+      return actual[y]![x] !== grid.enemy && grid.actorPixels!.every(([dx,dy]) => actual[y+dy]![x+dx] === grid.actor);
+    })!;
+    assert.ok(Number.isSafeInteger(target));
+    const index = local.timing!.walls.findIndex(track => track.includes(target) && track.length > 8);
+    assert.ok(index >= 0);
+    if (condition === 'missing-period') for (const rail of Object.values(local.timing!.clock!.rails)) delete rail.period;
+    if (condition === 'incomplete-cycle') local.timing!.walls[index] = local.timing!.walls[index]!.slice(-7);
+    if (condition === 'contradicted-cycle') local.timing!.walls[index]![5] = local.timing!.walls[index]![5]! + 1;
+    if (condition === 'ambiguous-track') local.timing!.walls.push([...local.timing!.walls[index]!]);
+    family.restore(saved);
+    const prior = structuredClone(family.state()), current = fixture.walk[0]!.before;
+    const observation = await measureNativeObservation({ frame_rows: current.frame, frame_hash: 'rail-recurrence-current',
+      level: current.level, levels_completed: current.levelsCompleted, state: current.state,
+      available_action_refs: current.availableActionIds.map(id => 'ACTION' + id) }, 150, 'rail-recurrence');
+    const offered = await family.propose(observation, current.frame, [], 35);
+    assert.ok(offered);
+    assert.equal(offered.actions.length, condition === 'repeated-public-cycle' ? 8 : 6);
+    assert.deepEqual(family.state(), prior, 'Forecasting an acquired cycle does not publish new observations');
+  });
+
+test('an actual rail return contradicting the acquired recurrence closes before its future crossing', async () => {
+  const family = createSicNavigateRevealedGrid(); family.restore(fixture.acquired);
+  const first = fixture.walk[0]!.before, second = structuredClone(fixture.walk[0]!.after), grid = fixture.grid;
+  const observe = (value: Packet, revision: number) => measureNativeObservation({ frame_rows: value.frame,
+    frame_hash: 'rail-changed-' + revision, level: value.level, levels_completed: value.levelsCompleted,
+    state: value.state, available_action_refs: value.availableActionIds.map(id => 'ACTION' + id) }, revision, 'rail-changed');
+  const before = await observe(first, 1), proposal = await family.propose(before, first.frame, [], 35);
+  assert.ok(proposal); assert.equal(proposal.actions.length, 8);
+  const futureCell = proposal.walk![6]!.target;
+  const track = proposal.local.timing!.walls.find(track => track.includes(futureCell) && track.length > 8)!;
+  const expected = track[0]!, [x,y] = tile(grid,expected), [u,v] = tile(grid,futureCell);
+  const pixels = second.frame.slice(y,y+grid.pitch).map(row=>row.slice(x,x+grid.pitch));
+  assert.equal(pixels[0]![0],grid.enemy);
+  for(let dy=0;dy<grid.pitch;dy++) for(let dx=0;dx<grid.pitch;dx++) {
+    second.frame[v+dy]![u+dx]=pixels[dy]![dx]!;
+    second.frame[y+dy]![x+dx]=grid.tint;
+  }
+  const retained = structuredClone(family.state());
+  const outcome = await family.after(proposal, 0, before, await observe(second,2), first.frame, second.frame, [second.frame]);
+  assert.equal(outcome.matched,true); assert.equal(outcome.seal_prefix,true);
+  assert.deepEqual(family.state(),retained);
+});

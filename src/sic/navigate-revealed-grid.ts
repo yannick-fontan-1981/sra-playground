@@ -570,6 +570,29 @@ function acquireNavigationStep(local: State, choice: Choice, after: NativeObserv
     : opened ? { reviewEvidence: 'The pulse changed a closed passage into an opening.' } : {}) };
 }
 
+function observedRailClearance(local: State, target: number, turns: number): boolean {
+  const timing = local.timing, clock = timing?.clock;
+  if (!clock || turns < 1) return false;
+  const tracks = timing.walls.filter(track => track.includes(target));
+  if (tracks.length !== 1) return false;
+  const track = tracks[0]!, rails = Object.values(clock.rails).filter(rail => rail.at === track.at(-1));
+  if (rails.length !== 1 || !rails[0]!.period) return false;
+  const predictions = new Set<number>();
+  for (let period = rails[0]!.period!; period <= Math.floor(track.length / 2); period += rails[0]!.period!) {
+    const last = track.slice(-period), previous = track.slice(-2 * period, -period);
+    if (new Set(last).size > 1 && last.every((cell, i) => cell === previous[i])) predictions.add(last[(turns - 1) % period]!);
+  }
+  return predictions.size === 1 && !predictions.has(target);
+}
+
+function knownWalkCell(local: State, reading: Reading, target: number, turns: number): boolean {
+  const clearance = observedRailClearance(local, target, turns);
+  return reading.memory[target] === 'free' && !reading.sentryRisk?.includes(target) && !reading.sentries?.includes(target)
+    && (!reading.risk.includes(target) || clearance)
+    && (!reading.obstacles.includes(target) || turns > 1 && clearance)
+    && (!reading.nextHazards?.includes(target) || turns > 1 && clearance);
+}
+
 function guardedHold(local: State, choice: Choice, rows: NativeRows, remaining: number): GuardedHold | null {
   const role = local.stationary, clock = local.timing?.clock;
   if (choice.kind !== 'wait' || !role || !clock || role.input !== choice.action.action_ref
@@ -685,10 +708,8 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const walk: Walk[] = [];
       const first = path?.[0];
       if (known && (!timing || first?.action === action.action_ref && first.target === choice.target)) for (const leg of path!.slice(0, Math.min(remaining, maximumCommittedActions))) {
-        if (last.memory[leg.target] !== 'free' || last.risk.includes(leg.target) || last.sentryRisk?.includes(leg.target)
-          || last.obstacles.includes(leg.target)) break;
-        if (timing && (leg.entry !== undefined || grid.mechanisms?.pads[leg.target] || grid.mechanisms?.doors[leg.target] !== undefined
-          || last.nextHazards?.includes(leg.target))) break;
+        if (!knownWalkCell(local, last, leg.target, walk.length + 1)) break;
+        if (timing && (leg.entry !== undefined || grid.mechanisms?.pads[leg.target] || grid.mechanisms?.doors[leg.target] !== undefined)) break;
         walk.push(leg);
       }
       const actions = walk.length > 1 ? walk.map(leg => ({ action_ref: leg.action, data: {} }))
@@ -773,8 +794,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         const reading = basis && read(packet.frame_rows, local.grid, basis.last), target = proposal.walk[index]!.target;
         const nextHazards = basis ? nextNavigationHazards(basis, packet.frame_rows) : [];
         const admitted = !!basis && local.epoch === current.level_epoch && reading?.position === proposal.walk[index - 1]!.target
-          && reading.memory[target] === 'free' && !reading.risk.includes(target) && !reading.obstacles.includes(target)
-          && !reading.sentryRisk?.includes(target) && !nextHazards.includes(target);
+          && knownWalkCell(basis, { ...reading, nextHazards }, target, 1);
         return { admitted, reason: admitted ? 'next_grid_cell_still_open' : 'revealed_grid_changed' };
       }
       const admitted = index === 0 && proposal.binding?.observation_ref === current.observation_ref;
@@ -810,8 +830,8 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         prefixReturns.set(proposal, prefix);
         next.nextHazards = nextNavigationHazards(acquired.state, second);
       }
-      const routeChanged = proposal.walk?.slice(index + 1).some(leg => next.memory[leg.target] !== 'free'
-        || next.risk.includes(leg.target) || next.sentryRisk?.includes(leg.target) || hazardOnNextMove(next, leg.target));
+      const routeChanged = proposal.walk?.slice(index + 1).some((leg, offset) =>
+        !knownWalkCell(acquired?.state ?? local, next, leg.target, offset + 1));
       const holdChanged = proposal.hold && (!next.obstacles.includes(proposal.hold.target)
         || next.nextHazards?.includes(next.position)
         || acquired?.state.timing?.clock?.rails[proposal.hold.rail]?.period !== proposal.hold.period);
