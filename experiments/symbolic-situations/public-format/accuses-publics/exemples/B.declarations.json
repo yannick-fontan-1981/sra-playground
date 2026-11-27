@@ -1,0 +1,39 @@
+{
+  "sources": {
+    "3": "indexer P est disponible si P est non indexé. La commande indexe P et renvoie exactement « indexé »."
+  },
+  "entries": [
+    {
+      "command": [
+        "indexer",
+        "P"
+      ],
+      "status": "declared",
+      "replies": [
+        {
+          "label": "indexé",
+          "kind": "confirmed",
+          "source": [
+            3
+          ],
+          "coverage": [
+            {
+              "effect": {
+                "set": [
+                  [
+                    "indexed",
+                    "P"
+                  ],
+                  true
+                ]
+              },
+              "source": [
+                3
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

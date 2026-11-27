@@ -1,0 +1,254 @@
+{
+  "format": "sra.public/1.1",
+  "goal": {
+    "command": [
+      "valider"
+    ],
+    "criterion": "minimax_actions",
+    "source": [
+      1
+    ]
+  },
+  "observations": [
+    {
+      "ref": [
+        "indexed",
+        "P"
+      ],
+      "status": "known",
+      "value": false,
+      "source": [
+        2
+      ]
+    }
+  ],
+  "domains": [],
+  "commands": [
+    {
+      "command": [
+        "indexer",
+        "P"
+      ],
+      "source": [
+        3
+      ]
+    },
+    {
+      "command": [
+        "valider"
+      ],
+      "source": [
+        1,
+        4
+      ]
+    },
+    {
+      "command": [
+        "toucher",
+        "T"
+      ],
+      "source": [
+        5
+      ]
+    },
+    {
+      "command": [
+        "toucher",
+        "U"
+      ],
+      "source": [
+        6
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "command": [
+        "indexer",
+        "P"
+      ],
+      "requires": {
+        "eq": [
+          [
+            "indexed",
+            "P"
+          ],
+          false
+        ]
+      },
+      "source": [
+        3
+      ]
+    },
+    {
+      "command": [
+        "indexer",
+        "P"
+      ],
+      "effect": {
+        "set": [
+          [
+            "indexed",
+            "P"
+          ],
+          true
+        ]
+      },
+      "source": [
+        3
+      ]
+    },
+    {
+      "command": [
+        "valider"
+      ],
+      "when": {
+        "eq": [
+          [
+            "indexed",
+            "P"
+          ],
+          true
+        ]
+      },
+      "effect": {
+        "end": "success"
+      },
+      "source": [
+        4
+      ]
+    },
+    {
+      "command": [
+        "valider"
+      ],
+      "when": {
+        "eq": [
+          [
+            "indexed",
+            "P"
+          ],
+          false
+        ]
+      },
+      "effect": {
+        "end": "failure"
+      },
+      "source": [
+        4
+      ]
+    }
+  ],
+  "sources": {
+    "1": "Atteindre succès par valider, en minimisant le nombre de commandes dans le pire cas.",
+    "2": "Le poste P est initialement non indexé.",
+    "3": "indexer P exige P non indexé. Une exécution indexe P et renvoie « indexé » ou « indexation faite ». Un refus sans effet renvoie « verrou local ». Le signal « compte rendu incomplet » ne permet pas de savoir si le geste a été exécuté.",
+    "4": "valider termine sur succès si P est indexé, sur échec sinon.",
+    "5": "toucher T confirme son exécution par « traité ». Aucun effet matériel de ce geste n’est annoncé.",
+    "6": "toucher U possède deux notices incompatibles concernant son accusé. Le libellé applicable est indéterminé."
+  },
+  "receipts": [
+    {
+      "command": [
+        "indexer",
+        "P"
+      ],
+      "status": "declared",
+      "replies": [
+        {
+          "label": "indexé",
+          "kind": "confirmed",
+          "source": [
+            3
+          ],
+          "coverage": [
+            {
+              "effect": {
+                "set": [
+                  [
+                    "indexed",
+                    "P"
+                  ],
+                  true
+                ]
+              },
+              "source": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "label": "indexation faite",
+          "kind": "confirmed",
+          "source": [
+            3
+          ],
+          "coverage": [
+            {
+              "effect": {
+                "set": [
+                  [
+                    "indexed",
+                    "P"
+                  ],
+                  true
+                ]
+              },
+              "source": [
+                3
+              ]
+            }
+          ]
+        },
+        {
+          "label": "verrou local",
+          "kind": "refused",
+          "source": [
+            3
+          ]
+        },
+        {
+          "label": "compte rendu incomplet",
+          "kind": "ambiguous",
+          "source": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "command": [
+        "valider"
+      ],
+      "status": "undeclared"
+    },
+    {
+      "command": [
+        "toucher",
+        "T"
+      ],
+      "status": "declared",
+      "replies": [
+        {
+          "label": "traité",
+          "kind": "confirmed",
+          "source": [
+            5
+          ],
+          "coverage": "unknown"
+        }
+      ]
+    },
+    {
+      "command": [
+        "toucher",
+        "U"
+      ],
+      "status": "ambiguous",
+      "source": [
+        6
+      ]
+    }
+  ]
+}
