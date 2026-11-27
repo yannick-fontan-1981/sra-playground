@@ -1,0 +1,174 @@
+{
+  "schema": "sic.edge-switch-strict.v1",
+  "game": "GRAV",
+  "source": {
+    "local": "c6d37b9cbfdfd956022b6a22eaaf6397dd7b8838",
+    "github": "4cd0f572a696192bbeb232eb4aa09d8396d9ec9a",
+    "tree": "6a73878b00fde907274721b7d25bd26c90b130fd",
+    "unchanged": true
+  },
+  "levelsWon": 6,
+  "commands": 80,
+  "sicCommands": 80,
+  "acquiredRecords": 80,
+  "recoveries": {
+    "reset": 0,
+    "undo": 0
+  },
+  "workerCount": 1,
+  "startLevel": 1,
+  "status": "stopped",
+  "reason": "target_levels_completed",
+  "levelMirrorExact": true,
+  "firstFourScoredPrefixesMatchBaseline": true,
+  "firstPublicCommandDifference": 63,
+  "trajectory": "7c68292ee088c2255825aed1532df38862bce5d42b83ec83c50ae4001d27226e",
+  "perLevel": [
+    {
+      "level": 1,
+      "won": true,
+      "actions": 11,
+      "ms": 4704,
+      "activeMs": 4500,
+      "scoredMs": 4624,
+      "settlementMs": 79,
+      "budget": {
+        "actions": 16,
+        "activeTimeMs": 15000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=1; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 11,
+      "prefixHash": "f3330d8522da2fe8685ba3455147104d7e453800590d69d67ed4cd449f84f3fa"
+    },
+    {
+      "level": 2,
+      "won": true,
+      "actions": 32,
+      "ms": 12418,
+      "activeMs": 11706,
+      "scoredMs": 12285,
+      "settlementMs": 133,
+      "budget": {
+        "actions": 57,
+        "activeTimeMs": 53000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=2; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 43,
+      "prefixHash": "51fa5b495232886c6412908885fd863bb64c8fdf3ebb8a3790a17b32c2d1a692"
+    },
+    {
+      "level": 3,
+      "won": true,
+      "actions": 6,
+      "ms": 1428,
+      "activeMs": 1243,
+      "scoredMs": 1304,
+      "settlementMs": 124,
+      "budget": {
+        "actions": 11,
+        "activeTimeMs": 8000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=3; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 49,
+      "prefixHash": "eeccddef0a19d0e3e040fb0bd1d4764bb8d30f1588e46c3fc90202de5ce780ca"
+    },
+    {
+      "level": 4,
+      "won": true,
+      "actions": 8,
+      "ms": 2042,
+      "activeMs": 1775,
+      "scoredMs": 1859,
+      "settlementMs": 183,
+      "budget": {
+        "actions": 13,
+        "activeTimeMs": 9000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=4; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 57,
+      "prefixHash": "09d4cdf02413576af479fbb5363efbf1fdd2da36751d77130ec6d98cc1075246"
+    },
+    {
+      "level": 5,
+      "won": true,
+      "actions": 13,
+      "ms": 3638,
+      "activeMs": 3288,
+      "scoredMs": 3069,
+      "settlementMs": 569,
+      "budget": {
+        "actions": 28,
+        "activeTimeMs": 23000,
+        "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=GRAV; level=5; won=true",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 70,
+      "prefixHash": "01fbdeee9d7b0bb8d282f838ebc4c3f8305ba3c7bad9bb5f47bba50c201710a0"
+    },
+    {
+      "level": 6,
+      "won": true,
+      "actions": 10,
+      "ms": 1722,
+      "activeMs": 1490,
+      "scoredMs": 808,
+      "settlementMs": 915,
+      "budget": {
+        "actions": 15,
+        "activeTimeMs": 8000,
+        "source": "docs/architecture/sic-v8-validation.md :: GRAV niveau 6, prévoir les glissements avec et sans colle",
+        "timeBasis": "measured"
+      },
+      "acquiredRecords": 80,
+      "prefixHash": "7c68292ee088c2255825aed1532df38862bce5d42b83ec83c50ae4001d27226e"
+    }
+  ],
+  "executedSeries": [
+    7,
+    10
+  ],
+  "seriesActionKinds": [
+    {
+      "length": 7,
+      "type": "move"
+    },
+    {
+      "length": 10,
+      "type": "move+other"
+    }
+  ],
+  "continuedCommands": 15,
+  "unknownAttachmentProbe": {
+    "globalCommand": 63,
+    "action": "ACTION5",
+    "strategy": "P05",
+    "commandsInDecision": 1
+  },
+  "knownContinuation": {
+    "level5": {
+      "first": 64,
+      "last": 70,
+      "commands": 7
+    },
+    "level6": {
+      "first": 71,
+      "last": 80,
+      "commands": 10,
+      "knownAttachmentCommands": [
+        74,
+        77
+      ]
+    }
+  },
+  "exactTicketCollector": null,
+  "uniqueSealCount": null,
+  "qualification": {
+    "strict": "six levels qualified under original caps",
+    "integrationContinuity": "pending",
+    "publishedViewer": "pending"
+  }
+}

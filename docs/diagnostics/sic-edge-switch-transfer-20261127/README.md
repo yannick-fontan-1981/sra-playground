@@ -28,4 +28,21 @@ Le code candidat est `853094f8e6fb6300433ce8eb475b5871dab9c8cb`, sauvegardé sou
 
 Le collecteur arrête uniquement l'exécution via `canDispatch` ; les valeurs `remaining` reçues par le planificateur et les budgets historiques restent inchangés. Cet arrêt volontaire provoque le statut de banc « public board changed » après le dernier retour. Il est conservé comme **arrêt de diagnostic**, et ne constitue pas un verdict d'échec du jeu. Les durées de cette capture instrumentée ne qualifient pas les plafonds de temps.
 
-Le rejeu strict complet, la continuité d'intégration et le viewer publié restent à exécuter. GRAV n'est pas déclaré entièrement corrigé à ce stade.
+## Rejeu strict du candidat
+
+Le rejeu standard de `c6d37b9cbfdfd956022b6a22eaaf6397dd7b8838` (GitHub `4cd0f572a696192bbeb232eb4aa09d8396d9ec9a`) a gagné **les six niveaux en 80 commandes**, dans une seule session SIC depuis le niveau 1. La source est restée propre et inchangée. Les 80 commandes sont autorisées par SIC et les 80 retours sont acquis ; aucun reset ni undo n'a été utilisé. Les six entrées `.levels` sont exactement celles de `levelStats`.
+
+| Niveau | Commandes | Plafond de commandes | Score observé | Plafond de temps |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 11 | 16 | 4,624 s | 15 s |
+| 2 | 32 | 57 | 12,285 s | 53 s |
+| 3 | 6 | 11 | 1,304 s | 8 s |
+| 4 | 8 | 13 | 1,859 s | 9 s |
+| 5 | 13 | 28 | 3,069 s | 23 s |
+| 6 | 10 | 15 | 0,808 s | 8 s |
+
+Les quatre premiers préfixes gagnants sont identiques au témoin. La première divergence est exactement la commande globale 63 : l'essai unitaire d'attachement remplace le clic sans effet. Après son retour confirmé, les sept gestes suivants sont exécutés dans une seule série au niveau 5. Le niveau 6 utilise une série de dix gestes, dont deux commandes d'attachement déjà acquises. Les plafonds n'ont pas été modifiés.
+
+Les temps du tableau s'arrêtent au score public. Le rapport distingue le temps actif et la réconciliation finale ; celle du niveau 6 dure 915 ms après les derniers gestes. Le passage strict ne conserve pas les tickets détaillés ni un compteur de clôtures uniques : il ne se substitue donc pas à leur future collecte physique.
+
+`strict-summary.json`, les deux JSONL compressés et leurs reçus de source documentent ce verdict. La continuité d'intégration et le viewer publié restent à exécuter avant la livraison.

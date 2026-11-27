@@ -136,7 +136,7 @@
     "independentReadOnlyReview": "favorable"
   },
   "qualification": {
-    "fullStrict": "pending",
+    "fullStrict": "6/6, see strict-summary.json",
     "integrationContinuity": "pending",
     "publishedViewer": "pending",
     "fullyCorrected": false
