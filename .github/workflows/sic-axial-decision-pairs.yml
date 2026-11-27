@@ -13,7 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        game: ${{ fromJSON(github.ref_name == 'audit/sic-axial-a5a90c33-temoins' && '["G50T","FOGW"]' || '["AS66","HOLE","PORT","DC22"]') }}
+        game: ${{ fromJSON(github.ref_name == 'audit/sic-axial-a5a90c33-temoins' && '["G50T","FOGW"]' || '["AS66","HOLE","PORT","DC22","SNAR","SS01","SS04","CWSE"]') }}
     name: Parent and child / ${{ matrix.game }}
     env:
       GAME: ${{ matrix.game }}
@@ -42,6 +42,15 @@ jobs:
           set -euo pipefail
           test "$(git -C engine rev-parse "$CHILD^")" = "$PARENT"
           tool=bench/scripts/sic-compare-displacement-revisions.py
+          if [[ "$GITHUB_REF_NAME" == audit/sic-axial-a5a90c33-proteges ]]; then
+            python3 "$tool" record "$GAME" results --checkout engine --label B
+            if python3 "$tool" reuse "$GAME" results; then exit 0; else rc=$?; fi
+            if [[ "$rc" != 3 ]]; then exit "$rc"; fi
+            git -C engine checkout --detach "$PARENT"
+            python3 "$tool" record "$GAME" results --checkout engine --label A
+            python3 "$tool" compare "$GAME" results
+            exit
+          fi
           git -C engine checkout --detach "$PARENT"
           python3 "$tool" record "$GAME" results --checkout engine --label A
           git -C engine checkout --detach "$CHILD"

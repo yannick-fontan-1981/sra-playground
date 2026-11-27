@@ -98,10 +98,46 @@ def call_witness(game, folder, label, ordinary):
                 json.dumps(samples, sort_keys=True).encode()).hexdigest()}
 
 
+def complete(receipt, target):
+    return (receipt.get("reason") == "target_levels_completed" and receipt.get("authority") == receipt.get("actions")
+            and receipt.get("levels") == target and len(receipt.get("levelStats", [])) == target
+            and all(s["won"] and s.get("scoredMs", float("inf")) <= s["budget"]["activeTimeMs"]
+                    and s.get("prefixHash") for s in receipt["levelStats"]))
+
+
+def reuse(opts):
+    folder, game = opts.folder, opts.game
+    reference, entry = parent_receipt(game)
+    check(game not in SITES, "The two consumer witnesses require actual paired captures")
+    check(read(folder / "B.source.json")["source"] == CHILD, "Mismatched child capture")
+    prior = entry.get("decisions")
+    if prior is None:
+        return 3  # This game has historical receipts but no detailed parent trace in the index.
+    check(prior["comparison"]["equal"] and prior["sha256A"] == prior["sha256B"], "Unqualified parent trace")
+    trace = sha(folder / "B.jsonl")
+    if trace != prior["sha256B"]:
+        return 3  # The workflow now captures the parent and runs the first-event comparator.
+    receipt = read(folder / "B.receipt")
+    diff = BENCH["receipt_difference"](reference, receipt)
+    valid = complete(receipt, reference["target"]) and diff is None
+    result = {"game": game, "frozen": FROZEN, "parentRowSHA256": entry["candidateRowSHA256"],
+              "method": "verified-parent-trace-sha256", "matches": valid, "comparison": prior["comparison"],
+              "A": {"source": PARENT, "traceSHA256": prior["sha256B"], "receiptOrigin": "parent campaign",
+                    "levels": reference["levels"], "actions": reference["actions"], "trajectory": reference["trace"]},
+              "B": {"source": CHILD, "traceSHA256": trace, "receiptSHA256": sha(folder / "B.receipt"),
+                    "levels": receipt["levels"], "actions": receipt["actions"], "trajectory": receipt.get("trace"),
+                    "parentReceiptDifference": diff, "complete": complete(receipt, reference["target"]),
+                    "reason": receipt["reason"], "commandsByLevel": [s["actions"] for s in receipt["levelStats"]]}}
+    BENCH["atomic_record"](folder / "pair.json", result)
+    print(game, "parent trace SHA-256 verified", "matches", valid)
+    return int(not valid)
+
+
 def compare(opts):
     folder, game = opts.folder, opts.game
     reference, entry = parent_receipt(game)
-    result = {"game": game, "frozen": FROZEN, "parentRowSHA256": entry["candidateRowSHA256"]}
+    result = {"game": game, "frozen": FROZEN, "parentRowSHA256": entry["candidateRowSHA256"],
+              "method": "ordered-pair"}
     comparison = subprocess.run([opts.node, str(BENCH["COMPARATOR"]), str(folder/"A.jsonl"), str(folder/"B.jsonl")],
                                 capture_output=True, text=True)
     check(comparison.returncode in (0, 1), comparison.stderr[:300])
@@ -112,18 +148,15 @@ def compare(opts):
         path = folder / (label + ".receipt")
         receipt = read(path)
         diff = BENCH["receipt_difference"](reference, receipt)
-        complete = (receipt.get("reason") == "target_levels_completed" and receipt.get("authority") == receipt.get("actions")
-                    and receipt.get("levels") == reference["target"] and len(receipt.get("levelStats", [])) == reference["target"]
-                    and all(s["won"] and s.get("scoredMs", float("inf")) <= s["budget"]["activeTimeMs"]
-                            and s.get("prefixHash") for s in receipt["levelStats"]))
+        finished = complete(receipt, reference["target"])
         data = {"source": source, "traceSHA256": sha(folder / (label + ".jsonl")), "receiptSHA256": sha(path),
-                "parentReceiptDifference": diff, "complete": complete, "levels": receipt["levels"],
+                "parentReceiptDifference": diff, "complete": finished, "levels": receipt["levels"],
                 "actions": receipt["actions"], "reason": receipt["reason"], "trajectory": receipt.get("trace"),
                 "commandsByLevel": [s["actions"] for s in receipt["levelStats"]]}
         if game in SITES:
             data["calls"] = call_witness(game, folder, label, receipt)
         result[label] = data
-        ok = ok and diff is None and complete
+        ok = ok and diff is None and finished
     if game in SITES:
         ok = ok and result["A"]["calls"]["allSamplesSHA256"] == result["B"]["calls"]["allSamplesSHA256"]
     result["matches"] = bool(ok)
@@ -134,7 +167,7 @@ def compare(opts):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("operation", choices=("record", "compare"))
+    parser.add_argument("operation", choices=("record", "compare", "reuse"))
     parser.add_argument("game")
     parser.add_argument("folder", type=lambda p: Path(p).resolve())
     parser.add_argument("--checkout", type=lambda p: Path(p).resolve())
@@ -145,5 +178,7 @@ if __name__ == "__main__":
         if not options.checkout or not options.label:
             parser.error("record requires --checkout and --label")
         record(options)
+    elif options.operation == "reuse":
+        raise SystemExit(reuse(options))
     else:
         raise SystemExit(compare(options))
