@@ -43,7 +43,7 @@ export function observeMatchingEdgeBoard(rows, geometry) {
       if (!Number.isSafeInteger(center)) return null;
       attached = center !== base;
     }
-    return { pieces, piecesKey: piecesKey(pieces), blockers: JSON.stringify(blockers), attached };
+    return { pieces, piecesKey: piecesKey(pieces), blockers: JSON.stringify(blockers), attached, frame: copy(rows) };
   } catch { return null; }
 }
 

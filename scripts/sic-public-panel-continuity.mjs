@@ -24,7 +24,7 @@ export function observePublicPanel(rows, geometry) {
     const actors = geometricComponents(rows).filter(part => part.color === ink && part.rectangular && part.area === 4
       && part.bbox[2] - part.bbox[0] === 1 && contains(field, part.bbox));
     return { actor: actors.length === 1 ? [...actors[0].bbox] : null, actorCandidates: actors.length,
-      panel: digest(patch(rows, panel)), field: digest(patch(rows, field)) };
+      panel: digest(patch(rows, panel)), field: digest(patch(rows, field)), frame: copy(rows) };
   } catch { return null; }
 }
 
