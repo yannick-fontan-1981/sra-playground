@@ -216,3 +216,77 @@ test('within field service a terminal refusal ends selection while an unavailabl
   assert.equal(select(), base);
   assert.equal(fillOffer.mock.callCount(), 1);
 });
+
+test('48 drops the transfer at T11 when its two genuine observation references span the wrong step', async t => {
+  const emit = FieldServiceMemory.prototype.transferEvent;
+  let previous: string | undefined, genuine: string[] | undefined, forged: string[] | undefined;
+  t.mock.method(FieldServiceMemory.prototype, 'transferEvent', function (this: FieldServiceMemory, ...args: Parameters<typeof emit>) {
+    const [model, ctx, stop, refs] = args;
+    if (model?.official_boundary_witness && !forged) {
+      assert.ok(previous);
+      genuine = model.official_boundary_witness;
+      assert.deepEqual(genuine, refs);
+      forged = [previous, refs[1]!];
+      return emit.call(this, { ...model, official_boundary_witness: forged }, ctx, stop, refs);
+    }
+    previous = refs[0];
+    return emit.apply(this, args);
+  });
+  const game = await start();
+  for (let turn = 1; turn <= 10; turn++) {
+    const ticket = await game.decision();
+    if (turn === 10) assert.deepEqual([ticket.proposal.kind, ticket.command?.data], [field, { x: 32, y: 50 }]);
+    await game.advance();
+  }
+  assert.ok(genuine && forged);
+  assert.match(genuine[0]!, /:epoch:1:revision:10:/);
+  assert.match(forged[0]!, /:epoch:1:revision:9:/);
+  assert.match(forged[1]!, /:epoch:2:revision:11:/);
+  assert.equal(forged[1], genuine[1]);
+  const next = await game.decision();
+  assert.deepEqual([next.kind, next.family, next.proposal.kind, next.command?.data],
+    ['action', 'public_occurrence_recall', 'nested_control_experiment', { x: 32, y: 51 }]);
+});
+
+test('48 checks the source receipt, acquired subject and epoch after hydration, including a retained transfer context', async t => {
+  const offer = FieldServiceMemory.prototype.offerFieldTransfer;
+  type Captured = { state: ReturnType<FieldServiceMemory['currentState']>; args: Parameters<typeof offer> };
+  const captured = new Map<number, Captured>();
+  t.mock.method(FieldServiceMemory.prototype, 'offerFieldTransfer', function (this: FieldServiceMemory, ...args: Parameters<typeof offer>) {
+    const result = offer.apply(this, args);
+    if (result?.kind === transfer && [11, 12].includes(args[0].revision)) captured.set(args[0].revision, { state: this.currentState(), args });
+    return result;
+  });
+  const game = await start();
+  for (let turn = 1; turn <= 11; turn++) { await game.decision(); await game.advance(); }
+  await game.decision();
+  assert.equal(captured.size, 2);
+  for (const [revision, sample] of captured) {
+    const { args } = sample, [observed, rows, , config] = args;
+    assert.equal(Boolean(sample.state.transfer_context), revision === 12);
+    function restore(alter: (state: Captured['state']) => void) {
+      const state = structuredClone(sample.state), owner = new FieldServiceMemory();
+      alter(state);
+      for (const events of [state.nested_events, state.fill_events, state.service_events, state.transfer_events]) {
+        for (const e of events) owner.applyEvent(e);
+      }
+      return owner;
+    }
+    const noReceiver = restore(s => { s.transfer_events.at(-1)!.model.receiver = null; });
+    assert.deepEqual(offer.apply(noReceiver, args), { status: 'abstained', reason: 'service_transfer_current_shape_not_bound' });
+    const nominal = restore(() => {});
+    assert.equal(offer.apply(nominal, args)?.kind, transfer);
+    for (const alter of [
+      (s: Captured['state']) => { s.transfer_events.at(-1)!.model.receiver_fill = -1; },
+      (s: Captured['state']) => { s.transfer_events.at(-1)!.model.acquisition_epoch = 0; },
+      (s: Captured['state']) => { s.nested_events.findLast(e => e.official_progress)!.official_progress = false; },
+      (s: Captured['state']) => { s.service_events.findLast(e => e.context?.phase === 'boundary_revalidation_required')!.context.epoch = 0; },
+      (s: Captured['state']) => { s.service_events.findLast(e => e.context?.phase === 'boundary_revalidation_required')!.context.selected_field.alternative_fill_palette = -1; },
+    ]) {
+      const invalid = restore(alter);
+      assert.equal(offer.apply(invalid, args), undefined);
+      assert.equal(invalid.bindTransfer(observed, rows, config), null);
+    }
+    assert.equal(nominal.bindTransfer({ ...observed, level_epoch: sample.state.transfer_model!.acquisition_epoch }, rows, config), null);
+  }
+});

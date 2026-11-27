@@ -28,6 +28,11 @@ const changedPoints = (rows: NativeRows, later: NativeRows): number[][] => {
   return points;
 };
 
+function relayShape(field: R): R {
+  const [left, top, right, bottom] = field.bbox, width = right - left + 1, height = bottom - top + 1;
+  return { extent: [width, height], area: width * height, background: field.alternative_fill_palette };
+}
+
 function questionEnvelope(observation: R, plan: R, prefix: string, kind: string, planKey: string | null,
   why: string, facts: R, roles: unknown, reason: string, hypotheses: readonly string[], evidence: readonly string[]): R {
   const ref = prefix + identity(plan).slice(0, 20), action = plan.action;
@@ -205,9 +210,28 @@ export class FieldServiceMemory {
     return undefined;
   }
 
+  private hasTransferWitness(model: R, currentEpoch: number): boolean {
+    const pair = model.official_boundary_witness;
+    if (!Array.isArray(pair) || pair.length !== 2 || !model.receiver || !(currentEpoch > model.acquisition_epoch)) return false;
+
+    // The boundary payload may claim a different pair or subject. Use the
+    // independently dated return and the model acquired before that return.
+    const boundary = this.transferEvents.findIndex(event => event.context === null && equal(event.evidence, pair));
+    const prior = this.transferEvents[boundary - 1]?.model;
+    if (!prior?.receiver || prior.acquisition_epoch !== model.acquisition_epoch ||
+        prior.receiver_fill !== model.receiver_fill || prior.conducting_orientation !== model.conducting_orientation ||
+        !equal(prior.receiver, model.receiver) || !equal(prior.relay, model.relay)) return false;
+
+    const service = this.serviceEvents.find(event => event.context?.phase === 'boundary_revalidation_required' &&
+      event.context.epoch === model.acquisition_epoch && equal(event.evidence, pair))?.context;
+    if (!service?.selected_field?.bbox || service.control?.orientation !== model.conducting_orientation ||
+        !equal(relayShape(service.selected_field), model.relay)) return false;
+    return this.nestedEvents.some(event => event.same_epoch === false && event.official_progress === true && equal(event.evidence, pair));
+  }
+
   bindTransfer(observation: R, rows: NativeRows, config: R): R | null {
     const model = this.transferModel;
-    if (!truth(model) || !truth(model!.official_boundary_witness) || !truth(model!.receiver)) return null;
+    if (!model || !this.hasTransferWitness(model, observation.level_epoch)) return null;
     const m = model!, parts = geometricComponents(rows), relays = parts.filter(part => sameFieldShape(part, m.relay)), targets = parts.filter(part => sameFieldShape(part, m.receiver));
     if (relays.length > 1 || !targets.length) return null;
     const controls = pairedControls(rows), relay = relays[0] ?? null, gate = relay ? linkedControl(relay, controls) : null;
@@ -235,8 +259,10 @@ export class FieldServiceMemory {
   offerFieldTransfer(observation: R, rows: NativeRows, _maxPrefix: number, config: R): R | undefined {
     if (!truth(config.field_service_transfer)) return undefined;
     const model = this.transferModel;
-    if (truth(model) && truth(model!.official_boundary_witness) && observation.level_epoch !== model!.acquisition_epoch) {
-      const m = model!;
+    if (model && truth(model.official_boundary_witness) && observation.level_epoch !== model.acquisition_epoch) {
+      if (!model.receiver) return { status: 'abstained', reason: 'service_transfer_current_shape_not_bound' };
+      if (!this.hasTransferWitness(model, observation.level_epoch)) return undefined;
+      const m = model;
       let context = this.transferContext;
       if (!truth(context) || context!.epoch !== observation.level_epoch) context = this.bindTransfer(observation, rows, config);
       if (context === null) return { status: 'abstained', reason: 'service_transfer_current_shape_not_bound' };
@@ -411,8 +437,7 @@ export class FieldServiceMemory {
     if (truth(service)) {
       const context = service.service_context;
       if (model === null) {
-        const field = context.selected_field, [l, t, r, b] = field.bbox;
-        model = { acquisition_epoch: before.level_epoch, relay: { extent: [r - l + 1, b - t + 1], area: (r - l + 1) * (b - t + 1), background: field.alternative_fill_palette },
+        model = { acquisition_epoch: before.level_epoch, relay: relayShape(context.selected_field),
           conducting_orientation: context.control.orientation, receiver: null, evidence: [] };
       }
       if (before.level_epoch === after.level_epoch && service.phase === 'serve' && model.receiver === null) {
