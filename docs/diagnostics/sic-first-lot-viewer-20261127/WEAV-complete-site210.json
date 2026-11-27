@@ -1,0 +1,63 @@
+{
+  "game": "WEAV",
+  "siteVersion": 210,
+  "source": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "surface": "local",
+  "bundle": "/assets/index-5nnSgotL.js",
+  "start": "http://127.0.0.1:4173/?game=WEAV&level=1",
+  "finish": "http://127.0.0.1:4173/?game=WEAV&level=6",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessions": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 6,
+  "totalActions": 199,
+  "levels": [
+    {
+      "level": 1,
+      "actions": 27,
+      "cumulativeActions": 27,
+      "completedPlans": 17,
+      "observedAt": "2026-11-27T15:17:21.024Z"
+    },
+    {
+      "level": 2,
+      "actions": 28,
+      "cumulativeActions": 55,
+      "completedPlans": 45,
+      "observedAt": "2026-11-27T15:17:59.711Z"
+    },
+    {
+      "level": 3,
+      "actions": 24,
+      "cumulativeActions": 79,
+      "completedPlans": 69,
+      "observedAt": "2026-11-27T15:18:13.695Z"
+    },
+    {
+      "level": 4,
+      "actions": 40,
+      "cumulativeActions": 119,
+      "completedPlans": 109,
+      "observedAt": "2026-11-27T15:18:38.563Z"
+    },
+    {
+      "level": 5,
+      "actions": 40,
+      "cumulativeActions": 159,
+      "completedPlans": 149,
+      "observedAt": "2026-11-27T15:19:47.316Z"
+    },
+    {
+      "level": 6,
+      "actions": 40,
+      "cumulativeActions": 199,
+      "completedPlans": 189,
+      "observedAt": "2026-11-27T15:20:27.894Z"
+    }
+  ]
+}

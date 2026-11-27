@@ -1,0 +1,63 @@
+{
+  "game": "ETAG",
+  "siteVersion": 210,
+  "source": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "surface": "published",
+  "bundle": "/assets/index-5nnSgotL.js",
+  "start": "https://sra-playground.yannick-fontan.chatgpt.site/?game=ETAG&level=1",
+  "finish": "https://sra-playground.yannick-fontan.chatgpt.site/?game=ETAG&level=6",
+  "planning": "SIC",
+  "startLevel": 1,
+  "initialActions": 0,
+  "control": "Run to next level",
+  "sessions": 1,
+  "resets": 0,
+  "undos": 0,
+  "verdict": "The game reports WIN.",
+  "levelsSolved": 6,
+  "totalActions": 274,
+  "levels": [
+    {
+      "level": 1,
+      "actions": 7,
+      "cumulativeActions": 7,
+      "completedPlans": 5,
+      "observedAt": "2026-11-27T15:18:06.462Z"
+    },
+    {
+      "level": 2,
+      "actions": 35,
+      "cumulativeActions": 42,
+      "completedPlans": 11,
+      "observedAt": "2026-11-27T15:18:16.045Z"
+    },
+    {
+      "level": 3,
+      "actions": 40,
+      "cumulativeActions": 82,
+      "completedPlans": 18,
+      "observedAt": "2026-11-27T15:18:29.832Z"
+    },
+    {
+      "level": 4,
+      "actions": 46,
+      "cumulativeActions": 128,
+      "completedPlans": 27,
+      "observedAt": "2026-11-27T15:18:48.083Z"
+    },
+    {
+      "level": 5,
+      "actions": 66,
+      "cumulativeActions": 194,
+      "completedPlans": 38,
+      "observedAt": "2026-11-27T15:19:48.360Z"
+    },
+    {
+      "level": 6,
+      "actions": 80,
+      "cumulativeActions": 274,
+      "completedPlans": 51,
+      "observedAt": "2026-11-27T15:20:24.723Z"
+    }
+  ]
+}
