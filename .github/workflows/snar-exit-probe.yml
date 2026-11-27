@@ -1,0 +1,106 @@
+name: SNAR strict guarded visible exit
+on:
+  push:
+    branches: [qualification/snar-exit-probe-20261127]
+permissions:
+  contents: read
+jobs:
+  strict-replay:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      SOURCE_SHA: 9756ab4e79612c8be8615f6629edc5c14b4687cf
+      SIC_REPLAY_REFERENCES: docs/architecture/sic-replay-reference-levels-20261126.json
+    steps:
+      - name: Initialize durable receipt
+        run: |
+          mkdir -p "$RUNNER_TEMP/snar-qualification"
+          printf '%s\n' "$SOURCE_SHA" > "$RUNNER_TEMP/snar-qualification/expected-source.sha"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.SOURCE_SHA }}
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node scripts/prepare-python.mjs
+      - name: Freeze source and original SNAR budgets
+        run: |
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+          git rev-parse HEAD HEAD^{tree} > "$RUNNER_TEMP/snar-qualification/source.txt"
+          sha256sum scripts/check-sic-chronological.mjs scripts/sic-replay-budgets.mjs scripts/sic-replay-watchdog.mjs \
+            "$SIC_REPLAY_REFERENCES" src/sic/navigate-revealed-grid.ts src/logos-engine/v6-native-owned.ts src/logos-engine/v6-native-state-graph.ts src/logos-engine/canonical.ts > "$RUNNER_TEMP/snar-qualification/source.sha256"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          import { replayCampaignBudgets } from './scripts/sic-replay-budgets.mjs';
+          const refs = JSON.parse(readFileSync(process.env.SIC_REPLAY_REFERENCES, 'utf8'));
+          const budgets = replayCampaignBudgets('SNAR', 6, new Map(), refs);
+          assert.deepEqual(budgets.map(row => [row.actions, row.activeTimeMs]), [
+            [21, 16000], [29, 24000], [28, 15000],
+            [44, 24000], [42, 28000], [35, 17000],
+          ]);
+          const command = ['node', 'scripts/check-sic-chronological.mjs', 'SNAR', 'auto', 'strict.jsonl', '1', 'sic'];
+          writeFileSync(join(process.env.RUNNER_TEMP, 'snar-qualification', 'manifest.json'), JSON.stringify({
+            source: process.env.SOURCE_SHA, workflowCommit: process.env.GITHUB_SHA, runId: process.env.GITHUB_RUN_ID,
+            node: process.version, start: 1, target: 6, workers: 1, mode: 'sic', command, budgets,
+          }, null, 2) + '\n');
+          NODE
+      - name: Replay from level one under the original budgets
+        shell: bash
+        run: |
+          node scripts/check-sic-chronological.mjs SNAR auto "$RUNNER_TEMP/snar-qualification/strict.jsonl" 1 sic \
+            2>&1 | tee "$RUNNER_TEMP/snar-qualification/strict.log"
+      - name: Verify source and official completion
+        run: |
+          sha256sum --check "$RUNNER_TEMP/snar-qualification/source.sha256"
+          test "$(git rev-parse HEAD)" = "$SOURCE_SHA"
+          test -z "$(git status --porcelain --untracked-files=no)"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { createHash } from 'node:crypto';
+          import { readFileSync, writeFileSync } from 'node:fs';
+          import { join } from 'node:path';
+          const receipt = join(process.env.RUNNER_TEMP, 'snar-qualification');
+          const manifest = JSON.parse(readFileSync(join(receipt, 'manifest.json'), 'utf8'));
+          const raw = readFileSync(join(receipt, 'strict.jsonl'));
+          const runs = raw.toString().trim().split(/\r?\n/).map(JSON.parse);
+          assert.equal(runs.length, 1);
+          const [run] = runs;
+          const result = {
+            source: manifest.source, code: run.code, reason: run.reason, status: run.status, actions: run.actions, won: run.levels,
+            byLevel: run.levelStats?.map(row => ({ level: row.level, won: row.won, actions: row.actions,
+              scoredMs: row.scoredMs, activeMs: row.activeMs ?? row.ms, prefixHash: row.prefixHash })),
+            resultSHA256: createHash('sha256').update(raw).digest('hex'),
+          };
+          writeFileSync(join(receipt, 'result.json'), JSON.stringify(result, null, 2) + '\n');
+          console.log(JSON.stringify(result));
+          assert.equal(run.code, 'SNAR');
+          assert.equal(run.reason, 'target_levels_completed');
+          assert.equal(run.mode, 'sic'); assert.equal(run.parallelWorkers, 1);
+          assert.equal(run.reason, 'target_levels_completed');
+          assert.equal(run.target, 6); assert.equal(run.levels, 6);
+          assert.equal(run.authority, run.actions);
+          assert.deepEqual(run.recoveries, { reset: 0, undo: 0 });
+          assert.equal(run.levelStats.length, 6);
+          assert.equal(run.levelStats.at(-1).acquiredRecords, run.actions);
+          assert.equal(run.levelStats.reduce((sum, level) => sum + level.actions, 0), run.actions);
+          for (const [index, level] of run.levelStats.entries()) {
+            assert.equal(level.level, index + 1); assert.equal(level.won, true);
+            assert.deepEqual(level.budget, manifest.budgets[index]);
+            assert.ok(level.actions <= level.budget.actions);
+            assert.ok(Number.isFinite(level.scoredMs) && level.scoredMs <= level.budget.activeTimeMs);
+          }
+          NODE
+      - name: Preserve strict receipts including failures
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: snar-exit-probe-${{ env.SOURCE_SHA }}
+          path: ${{ runner.temp }}/snar-qualification/
+          if-no-files-found: error
+          retention-days: 14
