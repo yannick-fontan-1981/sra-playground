@@ -4,6 +4,7 @@ import test from 'node:test';
 import { immutableJson } from '../src/logos-engine/canonical.ts';
 import { sha256Bytes } from '../src/logos-engine/v6-hash.ts';
 import { decodeNativeState, encodeNativeState, NativeKnowledgeStore } from '../src/logos-engine/v6-knowledge-store.ts';
+import { retainNativeJson } from '../src/logos-engine/v6-native-owned.ts';
 import { hydrateNativeState, isHydratedNativeJson, isNativeStateGraph, splitNativeState, type SplitNativeState } from '../src/logos-engine/v6-native-state-graph.ts';
 
 function restore(graph: SplitNativeState) {
@@ -193,27 +194,38 @@ test('native state snapshots acquire array length descriptors and normalize prox
 });
 
 test('native state reuses only private immutable ingress property validation', context => {
-  const input = immutableJson({ '\u{10000}': Array.from({ length: 40 }, (_, index) => [index, index / 3, -0]), '\ue000': { observed: true } });
+  const raw = { '\u{10000}': Array.from({ length: 40 }, (_, index) => [index, index / 3, -0]),
+    '\ue000': { observed: true, dense: Array.from({ length: 40 }, (_, index) => [index, index + 1]) } };
   const trusted = new Set<object>();
   const collect = (value: unknown): void => {
     if (!value || typeof value !== 'object') return;
     trusted.add(value); for (const child of Object.values(value)) collect(child);
   };
-  collect(input);
+  const inputs = [immutableJson(raw), retainNativeJson(raw)];
+  for (const input of inputs) collect(input);
   const original = Object.getOwnPropertyDescriptor;
   let trustedReads = 0;
   context.mock.method(Object, 'getOwnPropertyDescriptor', (value: object, key: PropertyKey) => {
     if (trusted.has(value)) trustedReads++;
     return original(value, key);
   });
-  const trustedGraph = splitNativeState(input, 'owned', { maxFragmentNodes: 32 });
+  const rawGraph = splitNativeState(raw, 'owned', { maxFragmentNodes: 32 });
+  for (const input of [...inputs, restore(rawGraph)]) {
+    const trustedGraph = splitNativeState(input, 'owned', { maxFragmentNodes: 32 });
+    assert.deepEqual(trustedGraph, rawGraph);
+    assert.deepEqual(restore(trustedGraph), input);
+  }
   assert.equal(trustedReads, 0);
-  assert.deepEqual(trustedGraph, splitNativeState(structuredClone(input), 'owned', { maxFragmentNodes: 32 }));
-  assert.deepEqual(restore(trustedGraph), input);
   const mutable = { value: 3 }, shallow = Object.freeze({ mutable });
   assert.deepEqual(restore(splitNativeState(shallow, 'foreign')), { mutable: { value: 3 } });
   mutable.value = 4;
   assert.deepEqual(restore(splitNativeState(shallow, 'foreign')), { mutable: { value: 4 } });
+  const proxy = new Proxy(Object.freeze([1, 2]), { get(target, key) {
+    assert.notEqual(key, '0', 'Caller-frozen inputs must still use descriptors');
+    return Reflect.get(target, key);
+  } });
+  assert.equal(retainNativeJson(proxy), proxy);
+  assert.deepEqual(restore(splitNativeState(proxy, 'foreign-frozen-array')), [1, 2]);
 });
 
 test('hydration ownership marks only closed decoder outputs, including assembled groups', () => {
