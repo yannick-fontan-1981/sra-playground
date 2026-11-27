@@ -1,5 +1,5 @@
 /** Lossless native state graphs; immutable fragments are ordinary versioned V7 nodes. */
-import { assertUnicode, compareUnicode, immutableJson, immutableJsonArray, immutableJsonRecord, isJsonObject, isOwnedImmutableJson } from './canonical.ts';
+import { assertUnicode, compareUnicode, denseIntegerText, immutableJson, immutableJsonArray, immutableJsonRecord, isJsonObject, isOwnedImmutableJson } from './canonical.ts';
 import { sha256Bytes, symbolicDigest } from './v6-hash.ts';
 import type { JsonObject, JsonValue } from './ir.ts';
 import { BoundedWeakCache } from './bounded-weak-cache.ts';
@@ -99,13 +99,19 @@ function encodedMembers(children: readonly (readonly [string, Sized])[]): Encode
  */
 const encodedText = new BoundedWeakCache<string>(4 * 1024 * 1024, 2048);
 function encodedCanonical(node: Encoded): string {
+  if (typeof node === 'number') return String(node);
   if (node === null || typeof node !== 'object') return JSON.stringify(node);
+  // Scalar envelopes have short fixed layouts. Their strings do not need
+  // separate weak-cache entries as part of a larger cached collection.
+  if (node.kind === 'float64') return `{"bits":${JSON.stringify(node.bits)},"kind":"float64"}`;
+  if (node.kind === 'ref') return `{"id":${JSON.stringify(node.id)},"kind":"ref"}`;
   const cached = encodedText.get(node); if (cached !== undefined) return cached;
   let result: string;
   switch (node.kind) {
-    case 'float64': result = `{"bits":${JSON.stringify(node.bits)},"kind":"float64"}`; break;
-    case 'ref': result = `{"id":${JSON.stringify(node.id)},"kind":"ref"}`; break;
-    case 'array': result = `{"items":[${node.items.map(encodedCanonical).join(',')}],"kind":"array"}`; break;
+    case 'array': {
+      const fields = denseIntegerText(node.items) ?? node.items.map(encodedCanonical).join(',');
+      result = `{"items":[${fields}],"kind":"array"}`; break;
+    }
     case 'object': result = `{"kind":"object","members":{${Object.keys(node.members).sort(compareUnicode)
       .map(key => `${JSON.stringify(key)}:${encodedCanonical(node.members[key]!)}`).join(',')}}}`; break;
     case 'concat': case 'merge': result = `{"kind":"${node.kind}","parts":[${node.parts.map(encodedCanonical).join(',')}]}`; break;
@@ -252,6 +258,19 @@ export function splitNativeState(value: unknown, component: string, options: Spl
           offset += chunk.items.length;
           return chunk.items;
         });
+        // Portable integers contribute one node and no fragment each. Dense
+        // raster rows can be encoded without allocating a Sized leaf per pixel.
+        // The property snapshot above remains the only source of input values.
+        const flatCost = 3 + entries.length;
+        if (flatCost <= bound && entries.every(([, value]) => typeof value === 'number' && Number.isSafeInteger(value) && !Object.is(value, -0))) {
+          if (entries.length) {
+            if (depth === 128) throw new TypeError('Native state nesting exceeds the V7 structural contract');
+            note(0, true);
+          }
+          const node = priorArray?.items.length === entries.length && entries.every(([, value], index) => value === priorArray.items[index])
+            ? priorArray : ownedEncoded({ kind: 'array', items: entries.map(([, value]) => value as number) });
+          return { node, cost: flatCost };
+        }
         const children = entries.map(([, value], index) => visit(value, depth + 1, priorItems?.[index]));
         const cost = 3 + children.reduce((n, child) => n + child.cost, 0);
         if (cost <= bound) {

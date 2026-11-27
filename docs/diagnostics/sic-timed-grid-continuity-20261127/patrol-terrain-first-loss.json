@@ -1,0 +1,45 @@
+{
+  "source": "c137a9d576b17896cf0f796e07bf52be3b7d6d5a",
+  "firstCut": 150,
+  "publicFrameBefore": "6ac28a2adc161b4d",
+  "plannedCommands": [
+    {
+      "action_ref": "ACTION2",
+      "data": {}
+    },
+    {
+      "action_ref": "ACTION4",
+      "data": {}
+    },
+    {
+      "action_ref": "ACTION4",
+      "data": {}
+    },
+    {
+      "action_ref": "ACTION1",
+      "data": {}
+    },
+    {
+      "action_ref": "ACTION1",
+      "data": {}
+    },
+    {
+      "action_ref": "ACTION1",
+      "data": {}
+    }
+  ],
+  "independentPatrolCells": [
+    111,
+    112,
+    113
+  ],
+  "diagnosis": "Measured patrol sprites were also classified as static walls, falsely contradicting already acquired free terrain outside the known walk.",
+  "preservedWinningActions": [
+    16,
+    24,
+    23,
+    36,
+    35
+  ],
+  "qualification": "5/6 strict; final level stopped at unchanged 17000 ms watchdog after 22/35 actions. No full-game qualification."
+}

@@ -1,0 +1,302 @@
+{
+  "createdAt": "2026-11-27T03:50:04.345593+00:00",
+  "game": "SNAR",
+  "status": "partial_checkpoint_4_of_6",
+  "source": {
+    "local": "07676e1eb49caf0d4323c798df20b15a2e480161",
+    "github": "5773d96313daec7d62d6d314c484274f03ed565c",
+    "tree": "9e155b4413a2cc109c5ea37e0ea38d701b2878f9",
+    "base": "c97797426f619db16de5b29738a8d4209c78ebca"
+  },
+  "baselineSource": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "runner": "scripts/check-sic-chronological.mjs",
+  "workers": 1,
+  "references": "docs/architecture/sic-replay-reference-levels-20261126.json",
+  "qualification": {
+    "levels": 4,
+    "target": 6,
+    "actions": 132,
+    "authority": 132,
+    "reason": "level_wall_time_budget",
+    "levelStats": [
+      {
+        "level": 1,
+        "won": true,
+        "activeMs": 6208,
+        "budget": {
+          "actions": 21,
+          "activeTimeMs": 16000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=1; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 16,
+        "ms": 6701,
+        "gameMs": 350,
+        "costs": {
+          "init": {
+            "ms": 1214,
+            "count": 1
+          },
+          "advance": {
+            "ms": 2609,
+            "count": 16
+          },
+          "resume": {
+            "ms": 2207,
+            "count": 9
+          }
+        },
+        "graph": "680e344daa84949cf543fd5df495f5e920e467731a6f1754cc40110db12e8707",
+        "deltas": 2679,
+        "acquiredRecords": 16,
+        "nodes": 565,
+        "traceEvents": 72,
+        "prefixHash": "b9af930c627d06ddb5ecfa96d1425cd5ce3c10e8e5660d9bdf6b16afbd2cd121",
+        "scoredMs": 6511,
+        "settlementMs": 189
+      },
+      {
+        "level": 2,
+        "won": true,
+        "activeMs": 8709,
+        "budget": {
+          "actions": 29,
+          "activeTimeMs": 24000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=2; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 21,
+        "ms": 9355,
+        "gameMs": 403,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 4635,
+            "count": 21
+          },
+          "resume": {
+            "ms": 3867,
+            "count": 15
+          }
+        },
+        "graph": "4ca662d42931343294069c222e420a7b5ba436e30c32531d6ca0206c991bdd4d",
+        "deltas": 6154,
+        "acquiredRecords": 37,
+        "nodes": 860,
+        "traceEvents": 128,
+        "prefixHash": "50ecdcd21c3bd4d156f844fdbecd847aeb8ac45caf8d79814e05ce9856909735",
+        "scoredMs": 9014,
+        "settlementMs": 342
+      },
+      {
+        "level": 3,
+        "won": true,
+        "activeMs": 8124,
+        "budget": {
+          "actions": 28,
+          "activeTimeMs": 15000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=3; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 23,
+        "ms": 8784,
+        "gameMs": 382,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 6090,
+            "count": 23
+          },
+          "resume": {
+            "ms": 1857,
+            "count": 16
+          }
+        },
+        "graph": "ead1e09131fda026a258f44b3774ed90ea8c5615fa8fb6cd32c529049353f652",
+        "deltas": 9914,
+        "acquiredRecords": 60,
+        "nodes": 1228,
+        "traceEvents": 128,
+        "prefixHash": "80e7b15eb24a474261548e78d9afdfccfbb3773b785a8d9f208c335501404ed6",
+        "scoredMs": 8439,
+        "settlementMs": 345
+      },
+      {
+        "level": 4,
+        "won": true,
+        "activeMs": 16040,
+        "budget": {
+          "actions": 44,
+          "activeTimeMs": 24000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=4; won=true",
+          "timeBasis": "measured"
+        },
+        "actions": 36,
+        "ms": 17343,
+        "gameMs": 841,
+        "costs": {
+          "init": {
+            "ms": 0,
+            "count": 0
+          },
+          "advance": {
+            "ms": 12041,
+            "count": 36
+          },
+          "resume": {
+            "ms": 3569,
+            "count": 28
+          }
+        },
+        "graph": "2d6615a20487db732086055b0f1c2fa16b028d006729444a95be0f7ce5d81a98",
+        "deltas": 16527,
+        "acquiredRecords": 96,
+        "nodes": 1905,
+        "traceEvents": 128,
+        "prefixHash": "1ab077d6170d1094e39672aa4936aed74fc2ade2ab9578c481b5d2fbdf1f06d5",
+        "scoredMs": 16886,
+        "settlementMs": 456
+      },
+      {
+        "level": 5,
+        "won": false,
+        "actions": 36,
+        "ms": 28001,
+        "budget": {
+          "actions": 42,
+          "activeTimeMs": 28000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=SNAR; level=5; won=true",
+          "timeBasis": "measured"
+        }
+      }
+    ],
+    "completedPrefixHashesMatchPrevious": true
+  },
+  "tests": {
+    "targetedPassed": 24,
+    "typecheck": true,
+    "independentReview": "favorable; read-only by feedback",
+    "globalContinuityGate": "not run for this partial checkpoint"
+  },
+  "diagnostic": {
+    "source": "c97797426f619db16de5b29738a8d4209c78ebca",
+    "stoppedByHarnessAtFirstPrefixCut": true,
+    "rawErrorAfterCanDispatchStop": "The public board changed while V6 was reasoning; intentional diagnostic stop, not a game verdict",
+    "level": 2,
+    "levelAction": 3,
+    "ordinal": 19,
+    "announced": 5,
+    "closedAfter": 1
+  },
+  "files": {
+    "baseline-native.jsonl.gz": {
+      "bytes": 1011,
+      "sha256": "1548bc07f8ed8b3123f3ddccdf7dd6a1a6d05abde009ebb9a07a309a07d06b56",
+      "uncompressedBytes": 3180,
+      "uncompressedSha256": "08e9ba64b44f81cc5dd2d6a38b06016cfb35d7256ca77b605a79676ff3047286"
+    },
+    "candidate-native.jsonl.gz": {
+      "bytes": 1015,
+      "sha256": "6462bcac16726a300c8f457e4610c20d5f4715458f2912282c1930192fd85d0e",
+      "uncompressedBytes": 3180,
+      "uncompressedSha256": "38bce2974b534a5f5b4eee13e0c10af6e87fbd74eb38693aa13e1f5c95dc38c8"
+    },
+    "candidate-native.levels.jsonl.gz": {
+      "bytes": 802,
+      "sha256": "2f3b2e249cc2983b59b75dabb65fec1afd65e152427bd5437e4ce2780939145d",
+      "uncompressedBytes": 2299,
+      "uncompressedSha256": "c7beab5bcfb99f9e58173c62e8048f428910c4b326b2d17f4ec1a34e774af96f"
+    },
+    "first-prefix-public-capture.json.gz": {
+      "bytes": 151552,
+      "sha256": "2c233928ae4756e800910fc8fac358f141ea0be891aa05bf31f7bd1ec43ec900",
+      "uncompressedBytes": 5275941,
+      "uncompressedSha256": "d236b9b0649717f03dbea2b4cdaf4b614e909269e44a3b51d750d708099241ae"
+    },
+    "diagnostic-native.jsonl.gz": {
+      "bytes": 1665,
+      "sha256": "6337b85878c78f70298371e754e150a05c86081c90c2a48b662075263b63843c",
+      "uncompressedBytes": 7998,
+      "uncompressedSha256": "51b5088e6cccfebb22975ef99b25126d68349efd474946eccb744212683de8aa"
+    },
+    "reassociated-native.jsonl.gz": {
+      "bytes": 1168,
+      "sha256": "d96d07f914ee13f8403bfdd1d42b3bb0c7456bf0964ab41ac4810ce7a2275598",
+      "uncompressedBytes": 3842,
+      "uncompressedSha256": "06e517e187f872eaa917fcab24a80f314b7916fd3a43f4bb3a277680497c82ca"
+    },
+    "reassociated-native.levels.jsonl.gz": {
+      "bytes": 957,
+      "sha256": "ef8b1bb171e71d6bd548cf7879d0de712a91611c04f302336c632d83b4290572",
+      "uncompressedBytes": 2975,
+      "uncompressedSha256": "f7fb427a9c0a9014b8d649976784d771113bd77707ff26eebc7e932db1186fd6"
+    },
+    "confirmed-prefix-and-boundary.json.gz": {
+      "bytes": 58262,
+      "sha256": "22278eb8be0aa82b1d9159c8fb15ee29114628a1835702c6a01bfa7dcdca8a29",
+      "uncompressedBytes": 2009155,
+      "uncompressedSha256": "602118254a4a03cbfabc9e9ef70399e78b3d4280ca3abbd649553adad5cfd7a0"
+    },
+    "boundary-native-diagnostic.jsonl.gz": {
+      "bytes": 2340,
+      "sha256": "74d03c4e10973efcf3c8ecee117c6836e69d351e6124a0c0d91e96df902db269",
+      "uncompressedBytes": 14127,
+      "uncompressedSha256": "0ad0671a12cb1021bf9a580db6dbe3497998c9eeb4c67e342229460e64a26acb"
+    },
+    "next-boundary-first-return.json.gz": {
+      "bytes": 28214,
+      "sha256": "d58cce888aaefc135999012c7d43ca1162977e1aaa13dff11d48cac785ef2dac",
+      "uncompressedBytes": 976122,
+      "uncompressedSha256": "9065394552404702868ab47f1f5af22130b88be8e08cf635890fdfe4798f4378"
+    },
+    "next-boundary-diagnostic.jsonl.gz": {
+      "bytes": 2862,
+      "sha256": "5d94c119a1b1fad818fbf9d079a2734f3bddf63c1d1d01aa6c8d9712dde7d314",
+      "uncompressedBytes": 19608,
+      "uncompressedSha256": "bba53e061e51c8961fbf5e5d7f748815df6365ff9128a8c7577813ecdbc1e4d3"
+    },
+    "instrumentation-error.jsonl.gz": {
+      "bytes": 845,
+      "sha256": "502ff1a0ce27e6849e1950147b0c93f9d592e5aac8a36d53c119117fa0cee4f1",
+      "uncompressedBytes": 2064,
+      "uncompressedSha256": "be5ece368ee62a5f25dfbd81417b023c6bf09a77e633c15ad8ffe09a417bbde8"
+    },
+    "instrumentation-error-wrapper.mjs.gz": {
+      "bytes": 5896,
+      "sha256": "6287f7c3dcb1a7a6300419de11447402694580f46c2bd7f7787850698748cdde",
+      "uncompressedBytes": 17517,
+      "uncompressedSha256": "5b0aa0a1b998b7c2fc7477aed2b9eb6baae769358be7fb63574e4a7737557ab0"
+    }
+  },
+  "previousCheckpoint": "checkpoint-3-levels.json",
+  "qualifiedRaw": "reassociated-native.jsonl.gz",
+  "qualifiedLevels": "reassociated-native.levels.jsonl.gz",
+  "nextMissingMeasure": "First later L5 return or admission where inherited navigation becomes unavailable; first L5 return alone remains recognizable. Deferred while another game is investigated.",
+  "nextBoundaryDiagnostic": {
+    "raw": "next-boundary-diagnostic.jsonl.gz",
+    "publicSamples": "next-boundary-first-return.json.gz",
+    "report": "next-boundary-report.json",
+    "fromLevel": 1,
+    "targetLevel": 5,
+    "targetDiagnosticActionCap": 1,
+    "firstFourPrefixesMatchQualified": true,
+    "qualification": false,
+    "result": "First L5 return remains recognizable; first later loss is not localized."
+  },
+  "instrumentationError": {
+    "raw": "instrumentation-error.jsonl.gz",
+    "wrapper": "instrumentation-error-wrapper.mjs.gz",
+    "status": "harness_error",
+    "message": "RangeError: Maximum call stack size exceeded",
+    "qualification": false,
+    "gameVerdict": null,
+    "cause": "The diagnostic host canDispatch callback read agent.snapshot, whose getter invokes host.canDispatch. Recursive instrumentation was reached at L5 arrival; no production source changed and no L5 capture was saved.",
+    "firstCompletedLevels": 3
+  }
+}

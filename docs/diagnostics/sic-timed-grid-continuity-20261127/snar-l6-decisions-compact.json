@@ -1,0 +1,2341 @@
+{
+  "publicCaptureSource": "c137a9d5",
+  "nativeTailSource": "81084152",
+  "decisions": [
+    {
+      "index": 135,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 151,
+        "uncertain": true
+      },
+      "at": 166,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "turn": 0,
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "shifted": []
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "shifted": []
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "shifted": []
+          }
+        },
+        "crossed": [],
+        "visits": [
+          166
+        ],
+        "scans": []
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 136,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 121,
+        "uncertain": true,
+        "entry": 136
+      },
+      "at": 151,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "shifted": []
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "shifted": []
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "shifted": []
+          }
+        },
+        "scans": [],
+        "turn": 1,
+        "visits": [
+          166,
+          151
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 137,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 107,
+        "uncertain": true
+      },
+      "at": 106,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [],
+        "rails": {
+          "4,4,column,11": {
+            "at": 86,
+            "shifted": [
+              2
+            ]
+          },
+          "4,4,column,3": {
+            "at": 138,
+            "shifted": [
+              2
+            ]
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "shifted": []
+          }
+        },
+        "scans": [],
+        "turn": 2,
+        "visits": [
+          166,
+          151,
+          106
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 138,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 108,
+        "uncertain": true
+      },
+      "at": 107,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [],
+        "rails": {
+          "4,4,column,11": {
+            "at": 86,
+            "shifted": [
+              2
+            ]
+          },
+          "4,4,column,3": {
+            "at": 138,
+            "shifted": [
+              2
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "shifted": [
+              3
+            ]
+          }
+        },
+        "scans": [],
+        "turn": 3,
+        "visits": [
+          166,
+          151,
+          106,
+          107
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 139,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION5",
+          "data": {}
+        },
+        "kind": "pulse",
+        "target": 109,
+        "uncertain": true
+      },
+      "at": 108,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              2,
+              4
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              2,
+              4
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "shifted": [
+              3
+            ]
+          }
+        },
+        "scans": [],
+        "turn": 4,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 140,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 109,
+        "uncertain": false
+      },
+      "at": 108,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [],
+        "gateGoal": 109,
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              2,
+              4
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              2,
+              4
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "shifted": [
+              3
+            ]
+          }
+        },
+        "scans": [
+          108
+        ],
+        "turn": 5,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 141,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 110,
+        "uncertain": true
+      },
+      "at": 109,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [],
+        "gateEntry": {
+          "from": 108,
+          "gate": 109
+        },
+        "gateGoal": 109,
+        "rails": {
+          "4,4,column,11": {
+            "at": 56,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6
+            ]
+          },
+          "4,4,column,3": {
+            "at": 108,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6
+            ]
+          },
+          "4,8,column,9": {
+            "at": 114,
+            "period": 3,
+            "shifted": [
+              3,
+              6
+            ]
+          }
+        },
+        "scans": [
+          108
+        ],
+        "turn": 6,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 142,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION5",
+          "data": {}
+        },
+        "kind": "pulse",
+        "target": 113,
+        "uncertain": true
+      },
+      "at": 113,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 56,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6
+            ]
+          },
+          "4,4,column,3": {
+            "at": 108,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6
+            ]
+          },
+          "4,8,column,9": {
+            "at": 114,
+            "period": 3,
+            "shifted": [
+              3,
+              6
+            ]
+          }
+        },
+        "scans": [
+          108
+        ],
+        "turn": 7,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 143,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "wait",
+        "target": 114,
+        "uncertain": true
+      },
+      "at": 113,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6,
+              8
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6,
+              8
+            ]
+          },
+          "4,8,column,9": {
+            "at": 114,
+            "period": 3,
+            "shifted": [
+              3,
+              6
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 8,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 144,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "wait",
+        "target": 114,
+        "uncertain": true
+      },
+      "at": 113,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6,
+              8
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              2,
+              4,
+              6,
+              8
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              3,
+              6,
+              9
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 9,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 145,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "wait",
+        "target": 114,
+        "uncertain": true
+      },
+      "at": 113,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 86,
+            "period": 2,
+            "shifted": [
+              4,
+              6,
+              8,
+              10
+            ]
+          },
+          "4,4,column,3": {
+            "at": 138,
+            "period": 2,
+            "shifted": [
+              4,
+              6,
+              8,
+              10
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              3,
+              6,
+              9
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 10,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 146,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "wait",
+        "target": 114,
+        "uncertain": true
+      },
+      "at": 113,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 86,
+            "period": 2,
+            "shifted": [
+              4,
+              6,
+              8,
+              10
+            ]
+          },
+          "4,4,column,3": {
+            "at": 138,
+            "period": 2,
+            "shifted": [
+              4,
+              6,
+              8,
+              10
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              3,
+              6,
+              9
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 11,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 147,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 114,
+        "uncertain": true
+      },
+      "at": 113,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": null,
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              6,
+              8,
+              10,
+              12
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              6,
+              8,
+              10,
+              12
+            ]
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "period": 3,
+            "shifted": [
+              3,
+              6,
+              9,
+              12
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 12,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 148,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "wait",
+        "target": 99,
+        "uncertain": true
+      },
+      "at": 114,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              6,
+              8,
+              10,
+              12
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              6,
+              8,
+              10,
+              12
+            ]
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "period": 3,
+            "shifted": [
+              3,
+              6,
+              9,
+              12
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 13,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 149,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 129,
+        "uncertain": false
+      },
+      "at": 114,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 56,
+            "period": 2,
+            "shifted": [
+              8,
+              10,
+              12,
+              14
+            ]
+          },
+          "4,4,column,3": {
+            "at": 108,
+            "period": 2,
+            "shifted": [
+              8,
+              10,
+              12,
+              14
+            ]
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "period": 3,
+            "shifted": [
+              3,
+              6,
+              9,
+              12
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 14,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 150,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 144,
+        "uncertain": false
+      },
+      "at": 129,
+      "walk": [
+        {
+          "action": "ACTION2",
+          "target": 144
+        },
+        {
+          "action": "ACTION4",
+          "target": 145
+        },
+        {
+          "action": "ACTION4",
+          "target": 146
+        },
+        {
+          "action": "ACTION1",
+          "target": 131
+        },
+        {
+          "action": "ACTION1",
+          "target": 116
+        },
+        {
+          "action": "ACTION1",
+          "target": 101
+        }
+      ],
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 56,
+            "period": 2,
+            "shifted": [
+              8,
+              10,
+              12,
+              14
+            ]
+          },
+          "4,4,column,3": {
+            "at": 108,
+            "period": 2,
+            "shifted": [
+              8,
+              10,
+              12,
+              14
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              6,
+              9,
+              12,
+              15
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 15,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 151,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 145,
+        "uncertain": false
+      },
+      "at": 144,
+      "walk": [
+        {
+          "action": "ACTION4",
+          "target": 145
+        },
+        {
+          "action": "ACTION4",
+          "target": 146
+        },
+        {
+          "action": "ACTION1",
+          "target": 131
+        },
+        {
+          "action": "ACTION1",
+          "target": 116
+        },
+        {
+          "action": "ACTION1",
+          "target": 101
+        }
+      ],
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              10,
+              12,
+              14,
+              16
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              10,
+              12,
+              14,
+              16
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              6,
+              9,
+              12,
+              15
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 16,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 152,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 145,
+        "uncertain": false
+      },
+      "at": 144,
+      "walk": [
+        {
+          "action": "ACTION4",
+          "target": 145
+        },
+        {
+          "action": "ACTION4",
+          "target": 146
+        },
+        {
+          "action": "ACTION1",
+          "target": 131
+        },
+        {
+          "action": "ACTION1",
+          "target": 116
+        },
+        {
+          "action": "ACTION1",
+          "target": 101
+        }
+      ],
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              10,
+              12,
+              14,
+              16
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              10,
+              12,
+              14,
+              16
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              6,
+              9,
+              12,
+              15
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 16,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 153,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 131,
+        "uncertain": false
+      },
+      "at": 146,
+      "walk": [
+        {
+          "action": "ACTION1",
+          "target": 131
+        },
+        {
+          "action": "ACTION1",
+          "target": 116
+        },
+        {
+          "action": "ACTION1",
+          "target": 101
+        }
+      ],
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 86,
+            "period": 2,
+            "shifted": [
+              12,
+              14,
+              16,
+              18
+            ]
+          },
+          "4,4,column,3": {
+            "at": 138,
+            "period": 2,
+            "shifted": [
+              12,
+              14,
+              16,
+              18
+            ]
+          },
+          "4,8,column,9": {
+            "at": 114,
+            "period": 3,
+            "shifted": [
+              9,
+              12,
+              15,
+              18
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 18,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 154,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 131,
+        "uncertain": false
+      },
+      "at": 146,
+      "walk": [
+        {
+          "action": "ACTION1",
+          "target": 131
+        },
+        {
+          "action": "ACTION1",
+          "target": 116
+        },
+        {
+          "action": "ACTION1",
+          "target": 101
+        }
+      ],
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 86,
+            "period": 2,
+            "shifted": [
+              12,
+              14,
+              16,
+              18
+            ]
+          },
+          "4,4,column,3": {
+            "at": 138,
+            "period": 2,
+            "shifted": [
+              12,
+              14,
+              16,
+              18
+            ]
+          },
+          "4,8,column,9": {
+            "at": 114,
+            "period": 3,
+            "shifted": [
+              9,
+              12,
+              15,
+              18
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 18,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 155,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 101,
+        "uncertain": false
+      },
+      "at": 116,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              14,
+              16,
+              18,
+              20
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              14,
+              16,
+              18,
+              20
+            ]
+          },
+          "4,8,column,9": {
+            "at": 114,
+            "period": 3,
+            "shifted": [
+              9,
+              12,
+              15,
+              18
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 20,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146,
+          131,
+          116
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 156,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 86,
+        "uncertain": false
+      },
+      "at": 101,
+      "walk": null,
+      "wallTime": null,
+      "memoryAtTarget": "free",
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              14,
+              16,
+              18,
+              20
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              14,
+              16,
+              18,
+              20
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              12,
+              15,
+              18,
+              21
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 21,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146,
+          131,
+          116,
+          101
+        ]
+      },
+      "knownRefCount": 5
+    },
+    {
+      "index": 157,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION2",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 144,
+        "uncertain": false
+      },
+      "at": 129,
+      "walk": [
+        {
+          "action": "ACTION2",
+          "target": 144
+        },
+        {
+          "action": "ACTION4",
+          "target": 145
+        },
+        {
+          "action": "ACTION4",
+          "target": 146
+        },
+        {
+          "action": "ACTION1",
+          "target": 131
+        },
+        {
+          "action": "ACTION1",
+          "target": 116
+        },
+        {
+          "action": "ACTION1",
+          "target": 101
+        },
+        {
+          "action": "ACTION1",
+          "target": 86
+        },
+        {
+          "action": "ACTION1",
+          "target": 71
+        }
+      ],
+      "actual": {
+        "kind": "actual_outcome",
+        "family": "sic_navigate_revealed_grid",
+        "index": 7,
+        "matched": true,
+        "seal_prefix": true,
+        "reason": "observed_grid_step",
+        "observation_ref": "observed-tail-native-diagnostic:epoch:6:revision:158:frame:8d2e7f73152a26bd",
+        "sic_plan": "sic-plan:observed-tail-native-diagnostic:epoch:6:revision:150:frame:6ac28a2adc161b4d"
+      },
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 56,
+            "period": 2,
+            "shifted": [
+              8,
+              10,
+              12,
+              14
+            ]
+          },
+          "4,4,column,3": {
+            "at": 108,
+            "period": 2,
+            "shifted": [
+              8,
+              10,
+              12,
+              14
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              6,
+              9,
+              12,
+              15
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 15,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129
+        ]
+      },
+      "afterPosition": 71
+    },
+    {
+      "index": 158,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION3",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 70,
+        "uncertain": false
+      },
+      "at": 71,
+      "walk": null,
+      "actual": {
+        "kind": "actual_outcome",
+        "family": "sic_navigate_revealed_grid",
+        "index": 0,
+        "matched": true,
+        "seal_prefix": true,
+        "reason": "observed_grid_step",
+        "observation_ref": "observed-tail-native-diagnostic:epoch:6:revision:159:frame:aac2d39538aa5525",
+        "sic_plan": "sic-plan:observed-tail-native-diagnostic:epoch:6:revision:158:frame:8d2e7f73152a26bd"
+      },
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 56,
+            "period": 2,
+            "shifted": [
+              16,
+              18,
+              20,
+              22
+            ]
+          },
+          "4,4,column,3": {
+            "at": 108,
+            "period": 2,
+            "shifted": [
+              16,
+              18,
+              20,
+              22
+            ]
+          },
+          "4,8,column,9": {
+            "at": 99,
+            "period": 3,
+            "shifted": [
+              12,
+              15,
+              18,
+              21
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 23,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146,
+          131,
+          116,
+          101,
+          86,
+          71
+        ]
+      },
+      "afterPosition": 70
+    },
+    {
+      "index": 159,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 55,
+        "uncertain": false
+      },
+      "at": 70,
+      "walk": null,
+      "actual": {
+        "kind": "actual_outcome",
+        "family": "sic_navigate_revealed_grid",
+        "index": 0,
+        "matched": true,
+        "seal_prefix": true,
+        "reason": "observed_grid_step",
+        "observation_ref": "observed-tail-native-diagnostic:epoch:6:revision:160:frame:76415750c043a9f5",
+        "sic_plan": "sic-plan:observed-tail-native-diagnostic:epoch:6:revision:159:frame:aac2d39538aa5525"
+      },
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              18,
+              20,
+              22,
+              24
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              18,
+              20,
+              22,
+              24
+            ]
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "period": 3,
+            "shifted": [
+              15,
+              18,
+              21,
+              24
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 24,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146,
+          131,
+          116,
+          101,
+          86,
+          71,
+          70
+        ]
+      },
+      "afterPosition": 55
+    },
+    {
+      "index": 160,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION4",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 57,
+        "uncertain": true,
+        "entry": 56
+      },
+      "at": 55,
+      "walk": null,
+      "actual": {
+        "kind": "actual_outcome",
+        "family": "sic_navigate_revealed_grid",
+        "index": 0,
+        "matched": null,
+        "seal_prefix": true,
+        "reason": "check_directional_marker_landing",
+        "observation_ref": "observed-tail-native-diagnostic:epoch:6:revision:161:frame:bf9b8769279c56ff",
+        "sic_plan": "sic-plan:observed-tail-native-diagnostic:epoch:6:revision:160:frame:76415750c043a9f5"
+      },
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 71,
+            "period": 2,
+            "shifted": [
+              18,
+              20,
+              22,
+              24
+            ]
+          },
+          "4,4,column,3": {
+            "at": 123,
+            "period": 2,
+            "shifted": [
+              18,
+              20,
+              22,
+              24
+            ]
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "period": 3,
+            "shifted": [
+              15,
+              18,
+              21,
+              24
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 25,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146,
+          131,
+          116,
+          101,
+          86,
+          71,
+          70,
+          55
+        ]
+      },
+      "afterPosition": 58
+    },
+    {
+      "index": 161,
+      "choice": {
+        "action": {
+          "action_ref": "ACTION1",
+          "data": {}
+        },
+        "kind": "move",
+        "target": 43,
+        "uncertain": true
+      },
+      "at": 58,
+      "walk": null,
+      "actual": {
+        "kind": "actual_outcome",
+        "family": "sic_navigate_revealed_grid",
+        "index": 0,
+        "matched": true,
+        "seal_prefix": true,
+        "reason": "observed_grid_step",
+        "observation_ref": "observed-tail-native-diagnostic:epoch:6:revision:162:frame:78602f03b0c64abb",
+        "sic_plan": "sic-plan:observed-tail-native-diagnostic:epoch:6:revision:161:frame:bf9b8769279c56ff"
+      },
+      "clock": {
+        "crossed": [
+          109
+        ],
+        "rails": {
+          "4,4,column,11": {
+            "at": 86,
+            "period": 2,
+            "shifted": [
+              20,
+              22,
+              24,
+              26
+            ]
+          },
+          "4,4,column,3": {
+            "at": 138,
+            "period": 2,
+            "shifted": [
+              20,
+              22,
+              24,
+              26
+            ]
+          },
+          "4,8,column,9": {
+            "at": 84,
+            "period": 3,
+            "shifted": [
+              15,
+              18,
+              21,
+              24
+            ]
+          }
+        },
+        "scans": [
+          108,
+          113
+        ],
+        "turn": 26,
+        "visits": [
+          166,
+          151,
+          106,
+          107,
+          108,
+          109,
+          113,
+          114,
+          129,
+          144,
+          145,
+          146,
+          131,
+          116,
+          101,
+          86,
+          71,
+          70,
+          55,
+          58
+        ]
+      },
+      "afterPosition": 43
+    }
+  ],
+  "strictCheckpoints": [
+    {
+      "source": "c137a9d5",
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "levels": 5,
+      "actions": 156,
+      "lastLevel": {
+        "level": 6,
+        "won": false,
+        "actions": 22,
+        "ms": 17001,
+        "budget": {
+          "actions": 35,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et pr\u00e9server les passages ouverts",
+          "timeBasis": "measured"
+        }
+      },
+      "recentCommands": [
+        {
+          "id": 2,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 149,
+          "elapsedMs": 11312
+        },
+        {
+          "id": 2,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 150,
+          "elapsedMs": 12165
+        },
+        {
+          "id": 4,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 151,
+          "elapsedMs": 13433
+        },
+        {
+          "id": 4,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 152,
+          "elapsedMs": 13502
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 153,
+          "elapsedMs": 14444
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 154,
+          "elapsedMs": 14582
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 155,
+          "elapsedMs": 15669
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 156,
+          "elapsedMs": 16742
+        }
+      ]
+    },
+    {
+      "source": "d5ff51c4",
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "levels": 5,
+      "actions": 159,
+      "lastLevel": {
+        "level": 6,
+        "won": false,
+        "actions": 25,
+        "ms": 17001,
+        "budget": {
+          "actions": 35,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et pr\u00e9server les passages ouverts",
+          "timeBasis": "measured"
+        }
+      },
+      "recentCommands": [
+        {
+          "id": 4,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 152,
+          "elapsedMs": 12081
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 153,
+          "elapsedMs": 12159
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 154,
+          "elapsedMs": 12219
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 155,
+          "elapsedMs": 12290
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 156,
+          "elapsedMs": 13994
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 157,
+          "elapsedMs": 15150
+        },
+        {
+          "id": 3,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 158,
+          "elapsedMs": 16014
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 159,
+          "elapsedMs": 16926
+        }
+      ]
+    },
+    {
+      "source": "81084152",
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "levels": 5,
+      "actions": 161,
+      "lastLevel": {
+        "level": 6,
+        "won": false,
+        "actions": 27,
+        "ms": 17001,
+        "budget": {
+          "actions": 35,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et pr\u00e9server les passages ouverts",
+          "timeBasis": "measured"
+        }
+      },
+      "recentCommands": [
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 154,
+          "elapsedMs": 11222
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 155,
+          "elapsedMs": 11296
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 156,
+          "elapsedMs": 11360
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 157,
+          "elapsedMs": 11412
+        },
+        {
+          "id": 3,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 158,
+          "elapsedMs": 13328
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 159,
+          "elapsedMs": 14516
+        },
+        {
+          "id": 4,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P05",
+          "index": 160,
+          "elapsedMs": 15546
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P05",
+          "index": 161,
+          "elapsedMs": 16550
+        }
+      ]
+    },
+    {
+      "source": "8fa6ad2b",
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "levels": 5,
+      "actions": 160,
+      "lastLevel": {
+        "level": 6,
+        "won": false,
+        "actions": 26,
+        "ms": 17001,
+        "budget": {
+          "actions": 35,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et pr\u00e9server les passages ouverts",
+          "timeBasis": "measured"
+        }
+      },
+      "recentCommands": [
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 153,
+          "elapsedMs": 12835
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 154,
+          "elapsedMs": 12893
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 155,
+          "elapsedMs": 12966
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 156,
+          "elapsedMs": 13036
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 157,
+          "elapsedMs": 13088
+        },
+        {
+          "id": 3,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 158,
+          "elapsedMs": 15326
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 159,
+          "elapsedMs": 15402
+        },
+        {
+          "id": 4,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P05",
+          "index": 160,
+          "elapsedMs": 16693
+        }
+      ]
+    },
+    {
+      "source": "8fa6ad2b",
+      "isolationControl": true,
+      "status": "stopped",
+      "reason": "level_wall_time_budget",
+      "levels": 5,
+      "actions": 159,
+      "lastLevel": {
+        "level": 6,
+        "won": false,
+        "actions": 25,
+        "ms": 17003,
+        "budget": {
+          "actions": 35,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et pr\u00e9server les passages ouverts",
+          "timeBasis": "measured"
+        }
+      },
+      "recentCommands": [
+        {
+          "id": 4,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 152,
+          "elapsedMs": 13854
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 153,
+          "elapsedMs": 13926
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 154,
+          "elapsedMs": 13998
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 155,
+          "elapsedMs": 14075
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 156,
+          "elapsedMs": 14154
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 157,
+          "elapsedMs": 14212
+        },
+        {
+          "id": 3,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 158,
+          "elapsedMs": 16281
+        },
+        {
+          "id": 1,
+          "family": "sic_navigate_revealed_grid",
+          "strategy": "P07",
+          "index": 159,
+          "elapsedMs": 16349
+        }
+      ]
+    }
+  ]
+}

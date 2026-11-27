@@ -1,0 +1,69 @@
+{
+  "source": "c97797426f619db16de5b29738a8d4209c78ebca",
+  "captureSha256": "d236b9b0649717f03dbea2b4cdaf4b614e909269e44a3b51d750d708099241ae",
+  "level": 2,
+  "ordinal": 19,
+  "index": 0,
+  "announced": 5,
+  "closedAfter": 1,
+  "role": "Walk through previously observed open lattice cells",
+  "acquisition": "The preceding public pulse reveals the cells; the actual first move confirms the carrier at its announced destination.",
+  "reuse": "Same observed lattice, unique carrier at prior expected cell, destination already free and no route cell newly contradicted or occupied.",
+  "refutation": "Unreadable or ambiguous carrier, wrong displacement, known terrain contradiction, observed hazard on the remaining route, or official boundary.",
+  "outcome": {
+    "matched": true,
+    "seal_prefix": true,
+    "reason": "observed_grid_step"
+  },
+  "nextGuard": {
+    "admitted": true,
+    "reason": "next_grid_cell_still_open"
+  },
+  "own": {
+    "before": 75,
+    "after": 74
+  },
+  "terrainDelta": [
+    {
+      "cell": 64,
+      "before": null,
+      "after": "free"
+    }
+  ],
+  "remaining": [
+    {
+      "action": "ACTION1",
+      "target": 63,
+      "knownBefore": true,
+      "knownAfter": true,
+      "risk": false,
+      "occupied": false
+    },
+    {
+      "action": "ACTION1",
+      "target": 52,
+      "knownBefore": true,
+      "knownAfter": true,
+      "risk": false,
+      "occupied": false
+    },
+    {
+      "action": "ACTION3",
+      "target": 51,
+      "knownBefore": true,
+      "knownAfter": true,
+      "risk": false,
+      "occupied": false
+    },
+    {
+      "action": "ACTION1",
+      "target": 40,
+      "knownBefore": true,
+      "knownAfter": true,
+      "risk": false,
+      "occupied": false
+    }
+  ],
+  "conclusion": "The only new terrain fact is a cell outside the committed route, uncovered by a moving obstacle; all four remaining destinations retain their premises. The original next-step guard admits continuation.",
+  "qualification": false
+}

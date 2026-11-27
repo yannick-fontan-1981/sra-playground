@@ -93,6 +93,22 @@ test('a shallow frozen container cannot conceal a mutable descendant from retain
   assert.equal(retainNativeJson(first), first);
 });
 
+test('dense numeric values retain exact identity and ownership across native updates', () => {
+  const input = Array.from({ length: 64 }, (_, index) => index * 0.5);
+  const original = retainNativeJson(input);
+  assert.equal(retainNativeJson(input.slice(), original), original);
+  input[0] = -0;
+  const changed = retainNativeJson(input, original);
+  assert.notEqual(changed, original);
+  assert.ok(Object.is(changed[0], -0));
+  assert.ok(Object.is(original[0], 0));
+  input[1] = Infinity;
+  assert.throws(() => retainNativeJson(input, changed), /finite/);
+  assert.equal(changed[1], 0.5);
+  Object.defineProperty(input, '1', { value: 0.5, enumerable: false });
+  assert.throws(() => retainNativeJson(input), /enumerable data/);
+});
+
 test('retained native values reject malformed graphs without getters, partial writes or warmed depth bypasses', () => {
   const memory = new NativeReasoningMemory(); memory.nativePut('e', 'value', { accepted: true });
   const before = memory.nativeCheckpoint(); let called = false;
