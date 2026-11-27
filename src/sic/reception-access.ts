@@ -3,7 +3,7 @@ import type { NativeBox, NativeFamily, NativePoint, NativeProposal, NativeRecord
 import { sicNeedId } from './need-identity.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { maximumCommittedActions } from './plan-step.ts';
-import { motionIntoFootprint } from './observed-translation.ts';
+import { motionIntoFootprint, singleStepDisplacement } from './observed-translation.ts';
 import { observedPressureRecoveryGroup } from './public-input-exploration.ts';
 import { chooseReceptionActivation, crossingRestoredStart, recordReceptionActivation, startReceptionActivation,
   type ReceptionActivation, type ReceptionActivationStep, type ReceptionMemory } from './reception-activation.ts';
@@ -328,8 +328,8 @@ export function createSicReceptionAccess(family = receptionAccessId): NativeFami
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
       const { wait } = proposal, position = carrier(second, local.scene), controls = { ...local.controls };
       if (from && position) {
-        const delta: NativePoint = [position[0] - from[0], position[1] - from[1]];
-        if (Math.abs(delta[0]) + Math.abs(delta[1]) === local.scene.pitch && (delta[0] === 0 || delta[1] === 0)) controls[issued.action_ref] = delta;
+        const delta = singleStepDisplacement(from, position, local.scene.pitch);
+        if (delta) controls[issued.action_ref] = delta;
       }
       const attempt = index === 0 ? proposal.attempt : JSON.stringify([from, local.scene.target.anchor, issued.action_ref]);
       state = { ...local, count: local.count + 1, controls, trials: equal(from, position) || !position ? [...local.trials, attempt] : local.trials, waits: local.waits + Number(wait),

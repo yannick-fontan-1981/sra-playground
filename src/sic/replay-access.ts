@@ -4,6 +4,7 @@ import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
 import { sicNeedId } from './need-identity.ts';
+import { singleStepDisplacement } from './observed-translation.ts';
 import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
 import { beginRecording, chooseRecording, linkedTransfers, needsTransferPulse, observeRecording, openSupports, recordingActor, replaySprites,
   transferForChoice, type Recording, type RecordingChoice, type RecordingScene } from './recorded-replay-access.ts';
@@ -371,8 +372,9 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
         next.stopped = !equal(position, scene.body.start) || equal(position, from);
         if (!next.stopped) next.phaseEvidence = after.observation_ref;
       } else {
-        const delta = minus(position, from), moved = delta.some(Boolean);
-        if (Math.abs(delta[0]) + Math.abs(delta[1]) === scene.body.quantum && (!delta[0] || !delta[1])) {
+        const moved = !equal(position, from);
+        const delta = singleStepDisplacement(from, position, scene.body.quantum);
+        if (delta) {
           next.controls = { ...local.controls, [command.action_ref]: delta };
           next.controlEvidence = { ...local.controlEvidence, [command.action_ref]: after.observation_ref };
         }
