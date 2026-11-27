@@ -25,11 +25,13 @@ type RailClock = { turn: number; rails: Record<string, RailTrack>; crossed: numb
   gateGoal?: number; gateEntry?: { gate: number; from: number } };
 type Timing = { start: number; patrols: number[][]; walls: number[][]; scannedPads: number[]; pendingPad?: number;
   clock?: RailClock };
+type StationaryControl = { input: string; at: number; wall: number; before: string; after: string };
+type GuardedHold = { role: StationaryControl; rail: string; period: number; count: number; target: number };
 type CompletedNavigation = { epoch: number; score: number; before: string; after: string; actor: number; tint: number; inputs: string[] };
-type State = { epoch: number; score?: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number; timing?: Timing; completed?: CompletedNavigation };
+type State = { epoch: number; score?: number; grid: Grid; last: Reading; previousObstacle: number | null; motions?: Motion[]; refs: string[]; consecutiveWaits: number; timing?: Timing; completed?: CompletedNavigation; stationary?: StationaryControl };
 type Choice = { action: NativeCommand; kind: 'pulse' | 'wait' | 'move'; target: number; uncertain: boolean; entry?: number };
 type Walk = { action: string; target: number; entry?: number };
-type Proposal = NativeProposal & { local: State; choice: Choice; walk?: Walk[]; needId: string };
+type Proposal = NativeProposal & { local: State; choice: Choice; walk?: Walk[]; hold?: GuardedHold; needId: string };
 
 const directions = [['ACTION1', 0, -1], ['ACTION2', 0, 1], ['ACTION4', 1, 0], ['ACTION3', -1, 0]] as const;
 const width = ([l, , r]: NativeBox) => r - l + 1;
@@ -168,6 +170,14 @@ function measure(rows: NativeRows, inherited?: Grid): Grid | null {
   return candidates.length === 1 ? candidates[0]! : null;
 }
 
+function visibleStaticWall(rows: NativeRows, grid: Grid, cell: number): boolean {
+  if (cell < 0 || cell >= grid.size) return false;
+  const [x, y] = tile(grid, cell), a = rows[y]?.[x], b = rows[y]?.[x + 1], c = rows[y + 1]?.[x + 1];
+  return a !== undefined && a === b && c !== b && a !== grid.tint && a !== grid.base && a !== grid.enemy
+    && !grid.sentry?.every(([dx, dy, ink]) => rows[y + dy]?.[x + dx] === ink)
+    && !grid.sentryPatterns?.some(pattern => pattern.every(([dx, dy, ink]) => rows[y + dy]?.[x + dx] === ink));
+}
+
 function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
   const memory = { ...prior?.memory }, risk = new Set(prior?.risk);
   const positions: number[] = [], obstacles: number[] = [], sentries: number[] = [];
@@ -178,8 +188,9 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
     const actorVisible = grid.actorPixels ? grid.actorPixels.every(([dx, dy]) => rows[y + dy]?.[x + dx] === grid.actor) : d === grid.actor;
     const occupied = actorVisible && a !== grid.enemy && i !== grid.goal;
     if (occupied) positions.push(i);
-    if (grid.sentry?.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value)
-      || grid.sentryPatterns?.some(pattern => pattern.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value))) sentries.push(i);
+    const patrolled = grid.sentry?.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value)
+      || grid.sentryPatterns?.some(pattern => pattern.every(([dx, dy, value]) => rows[y + dy]?.[x + dx] === value));
+    if (patrolled) sentries.push(i);
     if (a === grid.enemy) obstacles.push(i);
     if (a === grid.enemy || d === grid.trail || (grid.rail !== undefined && d === grid.rail)) risk.add(i);
     const door = grid.mechanisms?.doors[i];
@@ -188,7 +199,8 @@ function read(rows: NativeRows, grid: Grid, prior?: Reading): Reading | null {
       if (!open) closedDoors.push(i);
       memory[i] = 'free';
     } else if (i === grid.goal || occupied || grid.mechanisms?.pads[i]) memory[i] = 'free';
-    else if (a === grid.enemy) continue;
+    // A separately measured moving body occludes terrain; its silhouette is not a wall.
+    else if (a === grid.enemy || patrolled) continue;
     else if (a === b && c !== b && a !== grid.tint && a !== grid.base) memory[i] = 'wall';
     else if (a === grid.tint && b === a && c === a && memory[i] !== 'wall') memory[i] = 'free';
   }
@@ -309,12 +321,13 @@ function movingRails(rows: NativeRows, grid: Grid) {
     const headings = directions.filter(([, dx, dy]) => rows[cy + dy]?.[cx + dx] === grid.rail);
     if (headings.length !== 1) return [];
     const [, dx, dy] = headings[0]!;
-    const next: number[] = [];
+    const next: number[] = [], cells: number[] = [];
     for (let j = 0; j < h / pitch; j++) for (let i = 0; i < w / pitch; i++) {
+      cells.push((y + j) * columns + x + i);
       const col = x + i + dx, at = (y + j + dy) * columns + col;
       if (col >= 0 && col < columns && at >= 0 && at < size) next.push(at);
     }
-    return [{ id: [w, h, dx ? 'row' : 'column', dx ? y : x].join(','), at: y * columns + x, next }];
+    return [{ id: [w, h, dx ? 'row' : 'column', dx ? y : x].join(','), at: y * columns + x, next, cells }];
   });
 }
 
@@ -505,7 +518,7 @@ export function observeRecalledNavigation({ local, choice }: NonNullable<ReturnT
 }
 
 function acquireNavigationStep(local: State, choice: Choice, after: NativeObservation,
-  second: NativeRows, frames: readonly NativeRows[]) {
+  second: NativeRows, frames: readonly NativeRows[], beforeRef: string) {
   const next = read(second, local.grid, local.last);
   if (!next) return null;
   const contact = choice.entry ?? choice.target, timing = local.timing;
@@ -534,7 +547,14 @@ function acquireNavigationStep(local: State, choice: Choice, after: NativeObserv
     ? clock.visits : [...clock.visits.slice(-31), next.position];
   const scans = !clock || reset ? [] : choice.kind === 'pulse' && next.charges < local.last.charges
     ? [...clock.scans, local.last.position] : clock.scans;
-  const state: State = { ...local, score: after.levels_completed, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
+  const direction = directions.find(([input]) => input === choice.action.action_ref);
+  const heldWall = direction ? local.last.position + direction[1] + direction[2] * local.grid.columns : -1;
+  const stationary = choice.kind === 'wait' && direction && !reset && local.refs.length > 0
+    && next.position === local.last.position && next.charges === local.last.charges
+    && local.last.memory[heldWall] === 'wall' && visibleStaticWall(second, local.grid, heldWall)
+    ? { input: choice.action.action_ref, at: next.position, wall: heldWall,
+      before: beforeRef, after: after.observation_ref } : local.stationary;
+  const state: State = { ...local, ...(stationary ? { stationary } : {}), score: after.levels_completed, last: next, previousObstacle: next.obstacle !== local.last.obstacle ? local.last.obstacle : local.previousObstacle,
     ...(local.grid.actorPixels ? { motions: track(local.last, next, local.grid, local.motions) } : {}),
     ...(timing ? { timing: { start: timing.start, patrols: updateTracks(reset ? [] : timing.patrols, next.sentries ?? [], local.grid),
       walls: updateTracks(reset ? [] : timing.walls, next.obstacles, local.grid),
@@ -550,6 +570,20 @@ function acquireNavigationStep(local: State, choice: Choice, after: NativeObserv
     : opened ? { reviewEvidence: 'The pulse changed a closed passage into an opening.' } : {}) };
 }
 
+function guardedHold(local: State, choice: Choice, rows: NativeRows, remaining: number): GuardedHold | null {
+  const role = local.stationary, clock = local.timing?.clock;
+  if (choice.kind !== 'wait' || !role || !clock || role.input !== choice.action.action_ref
+    || role.at !== local.last.position || local.last.memory[role.wall] !== 'wall' || !visibleStaticWall(rows, local.grid, role.wall)
+    || !local.refs.includes(role.after) || role.before === role.after
+    || local.last.nextHazards?.includes(role.at) || !local.last.obstacles.includes(choice.target)) return null;
+  const rails = movingRails(rows, local.grid).filter(item => item.cells.includes(choice.target));
+  if (rails.length !== 1) return null;
+  const rail = rails[0]!, track = clock.rails[rail.id], period = track?.period;
+  if (!period || period < 2 || track.at !== rail.at || !track.shifted.length) return null;
+  const count = Math.min(remaining, maximumCommittedActions, period - (clock.turn - track.shifted.at(-1)!) % period);
+  return count > 1 ? { role: { ...role }, rail: rail.id, period, count, target: choice.target } : null;
+}
+
 function carriesCompletedNavigation(local: State | null, observation: NativeObservation): boolean {
   const completed = local?.completed, scope = observation.observation_ref.split(':epoch:', 1)[0]! + ':epoch:';
   return !!completed && completed.epoch === observation.level_epoch - 1 && completed.score === observation.levels_completed
@@ -561,7 +595,7 @@ function carriesCompletedNavigation(local: State | null, observation: NativeObse
 function navigationChoice(proposal: Proposal, index: number): Choice {
   const leg = proposal.walk?.[index];
   return leg ? { action: proposal.actions[index]!, kind: 'move', target: leg.target, uncertain: false,
-    ...(leg.entry === undefined ? {} : { entry: leg.entry }) } : proposal.choice;
+    ...(leg.entry === undefined ? {} : { entry: leg.entry }) } : { ...proposal.choice, action: proposal.actions[index]! };
 }
 
 function nextNavigationHazards(local: State, rows: NativeRows): number[] {
@@ -574,10 +608,10 @@ function nextNavigationHazards(local: State, rows: NativeRows): number[] {
 export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
   let state: State | null = null;
   // Per-return state is private to this prefix. Only record publishes acquired facts.
-  const walkingReturns = new WeakMap<Proposal, Map<number, { ref: string; state: State }>>();
+  const prefixReturns = new WeakMap<Proposal, Map<number, { ref: string; state: State }>>();
   const prefixBasis = (proposal: Proposal, index: number, before: NativeObservation): State | null => {
     if (index === 0) return proposal.binding?.observation_ref === before.observation_ref ? proposal.local : null;
-    const returned = walkingReturns.get(proposal)?.get(index - 1);
+    const returned = prefixReturns.get(proposal)?.get(index - 1);
     return returned?.ref === before.observation_ref && returned.state.epoch === before.level_epoch
       && returned.state.score === before.levels_completed ? returned.state : null;
   };
@@ -621,8 +655,9 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const path = route(last, grid, false, destination, timing?.clock), choice = timing ? grid.sentryPatterns
         ? chooseWithPulseReserve(local, path, destination) : chooseTimed(local, path) : choose(local, path);
       if (!choice) return null;
+      const hold = guardedHold(local, choice, rows, remaining);
       const ref = observation.observation_ref, evidence: [string, ...string[]] = [ref, ...new Set([
-        ...local.refs, ...(carriesCompletedNavigation(local, observation) ? [local.completed!.before, local.completed!.after] : []),
+        ...local.refs, ...(hold ? [hold.role.before, hold.role.after] : []), ...(carriesCompletedNavigation(local, observation) ? [local.completed!.before, local.completed!.after] : []),
       ].filter(v => v !== ref))];
       const mode = execution?.reasoningMode ?? 'exploration';
       const target = tile(grid, choice.target), offer = { input: choice.action.action_ref, expected: center(target), evidence };
@@ -656,10 +691,11 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
           || last.nextHazards?.includes(leg.target))) break;
         walk.push(leg);
       }
-      const actions = walk.length > 1 ? walk.map(leg => ({ action_ref: leg.action, data: {} })) : [action];
+      const actions = walk.length > 1 ? walk.map(leg => ({ action_ref: leg.action, data: {} }))
+        : hold ? Array.from({ length: hold.count }, () => ({ ...action, data: { ...action.data } })) : [action];
       return {
         status: 'proposed', kind: navigateRevealedGridId, local, choice, needId: need.id,
-        ...(walk.length > 1 ? { walk } : {}),
+        ...(walk.length > 1 ? { walk } : {}), ...(hold ? { hold } : {}),
         binding: { observation_ref: ref, level_epoch: observation.level_epoch }, actions,
         steps: actions.map((action, index) => ({ action, expected_after: choice.kind === 'move' ? tile(grid, walk[index]?.target ?? choice.target) : null })),
         sicSituationCard: { strategy: selected.id, need: 'Find a passable route to the exit', situation, evidence, agenda: entries, mode,
@@ -718,10 +754,20 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         previousObstacle: null, refs: [...inherited.refs.slice(-3), before.observation_ref], consecutiveWaits: 0,
         ...(timing ? { timing } : {}), ...(inherited.completed ? { completed: inherited.completed } : {}) };
       const choice: Choice = { action: command, kind: 'move', target, uncertain: previous.memory[target] === undefined };
-      const acquired = acquireNavigationStep(local, choice, after, second, frames);
+      const acquired = acquireNavigationStep(local, choice, after, second, frames, before.observation_ref);
       if (acquired) state = acquired.state;
     },
     before(proposal, index, packet, current) {
+      if (index > 0 && proposal.hold) {
+        const basis = prefixBasis(proposal, index, current), hold = proposal.hold;
+        const reading = basis && read(packet.frame_rows, basis.grid, basis.last);
+        const hazards = basis ? nextNavigationHazards(basis, packet.frame_rows) : [];
+        const admitted = !!basis && !!reading && reading.position === hold.role.at && reading.memory[hold.role.wall] === 'wall'
+          && visibleStaticWall(packet.frame_rows, basis.grid, hold.role.wall)
+          && reading.charges === proposal.local.last.charges && reading.obstacles.includes(hold.target)
+          && basis.timing?.clock?.rails[hold.rail]?.period === hold.period && !hazards.includes(reading.position);
+        return { admitted, reason: admitted ? 'stationary_control_still_blocked' : 'stationary_control_changed' };
+      }
       if (index > 0 && proposal.walk) {
         const { local } = proposal, basis = prefixBasis(proposal, index, current);
         const reading = basis && read(packet.frame_rows, local.grid, basis.last), target = proposal.walk[index]!.target;
@@ -737,7 +783,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
     after(proposal, index, before, after, first, second, frames) {
       if (after.levels_completed > before.levels_completed) return { matched: true, seal_prefix: true, reason: 'official_boundary',
         sic_need: { id: proposal.needId, status: 'satisfied' } };
-      const local = proposal.walk ? prefixBasis(proposal, index, before) : proposal.local, choice = navigationChoice(proposal, index);
+      const local = proposal.walk || proposal.hold ? prefixBasis(proposal, index, before) : proposal.local, choice = navigationChoice(proposal, index);
       if (!local) return { matched: false, seal_prefix: true, reason: 'grid_preceding_return_missing' };
       const prior = index > 0 ? read(first, local.grid, local.last) ?? local.last : local.last;
       const next = read(second, local.grid, prior);
@@ -748,24 +794,29 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
       const contact = choice.entry ?? choice.target;
       const probeLanding = choice.kind === 'move' && !!local.grid.mechanisms?.pads[contact]
         && prior.landings?.[contact] === undefined && next.position !== prior.position && next.position !== contact;
-      const matched = choice.kind === 'pulse' ? next.charges < local.last.charges
+      const matched = proposal.hold ? next.position === prior.position && next.charges === prior.charges
+        && visibleStaticWall(second, local.grid, proposal.hold.role.wall)
+        : choice.kind === 'pulse' ? next.charges < local.last.charges
         && (!!doorChanged || Object.keys(next.memory).length > Object.keys(local.last.memory).length)
         : choice.kind === 'move' && !probeLanding ? next.position === choice.target : null;
       // A newly uncovered cell need not change an already observed route. Contradictions
       // and hazards still close the prefix; acquisition remains deferred to record.
-      const terrainContradicted = proposal.walk && Object.entries(next.memory).some(([cell, value]) =>
+      const terrainContradicted = (proposal.walk || proposal.hold) && Object.entries(next.memory).some(([cell, value]) =>
         prior.memory[Number(cell)] !== undefined && prior.memory[Number(cell)] !== value);
-      const acquired = proposal.walk && matched ? acquireNavigationStep(local, choice, after, second, frames ?? []) : null;
+      const acquired = (proposal.walk || proposal.hold) && matched ? acquireNavigationStep(local, choice, after, second, frames ?? [], before.observation_ref) : null;
       if (acquired) {
-        const prefix = walkingReturns.get(proposal) ?? new Map();
+        const prefix = prefixReturns.get(proposal) ?? new Map();
         prefix.set(index, { ref: after.observation_ref, state: acquired.state });
-        walkingReturns.set(proposal, prefix);
+        prefixReturns.set(proposal, prefix);
         next.nextHazards = nextNavigationHazards(acquired.state, second);
       }
       const routeChanged = proposal.walk?.slice(index + 1).some(leg => next.memory[leg.target] !== 'free'
         || next.risk.includes(leg.target) || next.sentryRisk?.includes(leg.target) || hazardOnNextMove(next, leg.target));
-      return { matched, seal_prefix: !matched || !!terrainContradicted || !!routeChanged || index + 1 >= proposal.actions.length, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
-        ? probeLanding ? 'check_directional_marker_landing' : matched ? 'observed_grid_step' : 'grid_step_contradicted' : 'observe_obstacle_phase' };
+      const holdChanged = proposal.hold && (!next.obstacles.includes(proposal.hold.target)
+        || next.nextHazards?.includes(next.position)
+        || acquired?.state.timing?.clock?.rails[proposal.hold.rail]?.period !== proposal.hold.period);
+      return { matched, seal_prefix: !matched || !!terrainContradicted || !!routeChanged || !!holdChanged || index + 1 >= proposal.actions.length, reason: choice.kind === 'pulse' ? 'check_revealed_cells' : choice.kind === 'move'
+        ? probeLanding ? 'check_directional_marker_landing' : matched ? 'observed_grid_step' : 'grid_step_contradicted' : proposal.hold ? 'verify_stationary_control_return' : 'observe_obstacle_phase' };
     },
     record(before, after, _action, _first, second, proposal, index, frames) {
       const local = (index > 0 && state?.epoch === before.level_epoch ? state : null) ?? proposal.local;
@@ -777,7 +828,7 @@ export function createSicNavigateRevealedGrid(): NativeFamily<Proposal> {
         return { events: [] };
       }
       if (before.level_epoch !== after.level_epoch || before.state !== after.state) return { events: [] };
-      const acquired = acquireNavigationStep(local, choice, after, second, frames);
+      const acquired = acquireNavigationStep(local, choice, after, second, frames, before.observation_ref);
       if (!acquired) return { events: [] };
       state = acquired.state;
       return { events: [], ...(acquired.reviewEvidence ? { reviewEvidence: acquired.reviewEvidence } : {}) };

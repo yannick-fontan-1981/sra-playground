@@ -27,3 +27,19 @@ The other 40 existing navigation, ordinary continuity and reassociation tests pa
 ## Qualification boundary
 
 The first-loss capture is diagnostic, not a success claim. A frozen-source chronological strict replay from L1 to the final level with the unchanged archived per-level budgets is required before this candidate is counted complete. Physical continuity and the global regression gate must then retain the previously won levels. CGWL remains independently qualified at the earlier `50dcefe1` boundary.
+
+## Qualified partial milestone and the first remaining rail cut
+
+Candidate `c137a9d5` is durable as GitHub `169632339da810e429567529b18c58688316ff7e`, exact tree `abeef6cb978055067b1d82e46f4b9586fd43342a`. Its frozen strict replay wins five levels in 16, 24, 23, 36 and 35 commands. These reproduce the historical winning cumulative trajectories through 134 commands. The unchanged 17,000 ms watchdog stops L6 after 22/35 commands. The attached strict result remains partial.
+
+The subsequent full-horizon public capture reproduces that exact command prefix. At global150/L6-16 it offers six ordinary known moves, then closes after one. The independently recognized patrol at cell111 is also classified as static wall, changing known free terrain outside the route. Equivalent false contradictions recur at cells112 and113 on commands152 and154. These numeric locations describe retained evidence only; production has no such constants.
+
+The reader now treats an independently recognized patrol as an occluder of terrain. It preserves any acquired underlying cell and still tracks the moving hazard. The actual route cells remain free throughout the six returns. Two complete native public-teaching sessions (original and reflected/palette/silhouette/command variation) verify one six-command seal, unchanged facts until reconciliation, and the six clock updates in order. True unknown wall signatures, changed route terrain and duplicate carriers still close the prefix. All 54 targeted navigation tests pass. This read correction still needs its own frozen strict replay.
+
+## Reuse of an actually observed stationary control
+
+The same L6 capture also exposes an earlier unnecessary boundary. Command143 establishes that the selected directional command hits a visibly static wall, leaves the unique controlled carrier in place and preserves the pulse reserve. The next three commands144–146 repeat that same needed hold while a measured rail still covers the desired passage. Its acquired cadence predicts the next rail movement after three returned turns. Previously each hold was acquired and replanned individually.
+
+The acquisition now retains that control's actual before/after references, input, carrier site and blocking wall. Reuse requires the same current site/input, a currently visible static wall, unchanged reserve, a uniquely measured rail covering the desired passage, and its previously measured period. The offered prefix is bounded by the next scheduled rail movement, the remaining budget and the common maximum of16. Every actual return and intermediate guard checks the unique carrier, current wall, reserve, continued passage occupation, rail period and next hazard forecast. The prefix closes immediately when the passage clears or any premise changes. There is no pulse repetition and no optimistic movement through an unobserved cell.
+
+The two native transfer sessions now also verify that the first useful repetition reuses this role, executes three actual holds under one decision, and reconciles them once while retaining the pulse. Seven targeted counterexamples cover no change, missing/duplicate carrier, displacement, spent charge, an opened blocking wall and an earlier cleared passage. The last one closes successfully; contradictory controls close as unmatched. Exact predecessor references remain mandatory. All61 targeted tests and TypeScript compilation pass.
