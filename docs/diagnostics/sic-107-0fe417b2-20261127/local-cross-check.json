@@ -1,0 +1,42 @@
+{
+  "source": "0fe417b2e91bb8ca15573e82b79b7081157aeb37",
+  "environment": "Windows / Node v24.22.3",
+  "workersPerGame": 1,
+  "concurrentShards": 2,
+  "startedAt": "2026-11-27T18:06:23.5102558+00:00",
+  "finishedAt": "2026-11-27T18:10:32.1968516+00:00",
+  "wallSeconds": 248.686,
+  "summedShardSeconds": 495.706724,
+  "games": 16,
+  "complete": 16,
+  "strict": 16,
+  "levels": 94,
+  "actions": 840,
+  "localReceiptDigests": [
+    {
+      "path": "local-summary.json",
+      "sha256": "78c0020e4baae405e37fbc938a9053be2366ef29ac61236034e3f3a942d64879",
+      "bytes": 5406
+    },
+    {
+      "path": "local-1.jsonl",
+      "sha256": "2052dea35510403f8a90ae62f3f18f21b39159ddd6453542383911c6c1a75ac5",
+      "bytes": 77634
+    },
+    {
+      "path": "local-1.jsonl.levels",
+      "sha256": "62ddad2d68f58e62d777fcae21dfc6d7a65999fd8dea78800ac82fc9b0dddb8e",
+      "bytes": 25185
+    },
+    {
+      "path": "local-2.jsonl",
+      "sha256": "97ee8b50f6d3730655d9736e9b8b66290d161d62104519bfe329f9e6d6140d7b",
+      "bytes": 99972
+    },
+    {
+      "path": "local-2.jsonl.levels",
+      "sha256": "a5fa983878ff212827fcbc342044d9d8c8493ecf6d926bd98df171839b794844",
+      "bytes": 27674
+    }
+  ]
+}

@@ -1,0 +1,598 @@
+{
+  "baseline": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "source": "0fe417b2e91bb8ca15573e82b79b7081157aeb37",
+  "baselineComplete": 80,
+  "baselineLevelsScored": 605,
+  "newlyComplete": [
+    {
+      "code": "CASC",
+      "target": 6,
+      "baselineLevels": 3,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 22,
+        "ms": 16659,
+        "won": true,
+        "budget": {
+          "actions": 27,
+          "activeTimeMs": 22000,
+          "source": "docs/architecture/sic-v8-validation.md :: CASC niveau 6, r\u00e9server une jonction avant de lancer les rafales",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "CGWL",
+      "target": 6,
+      "baselineLevels": 4,
+      "currentLevels": 6,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 42,
+        "ms": 18960,
+        "won": true,
+        "budget": {
+          "actions": 48,
+          "activeTimeMs": 30000,
+          "source": "docs/architecture/sic-v8-validation.md :: CGWL niveau 6, retenir les incompatibilit\u00e9s en changeant la disposition",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "CLRS",
+      "target": 6,
+      "baselineLevels": 5,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 24,
+        "ms": 7101,
+        "won": true,
+        "budget": {
+          "actions": 29,
+          "activeTimeMs": 23000,
+          "source": "docs/architecture/sic-v8-validation.md :: CLRS niveau 6, ajuster l'union de deux panneaux de m\u00eame couleur",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "COLM",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 16,
+        "ms": 3898,
+        "won": true,
+        "budget": {
+          "actions": 26,
+          "activeTimeMs": 13000,
+          "source": "docs/architecture/sic-v8-validation.md :: COLM niveau 6, planifier sur toute la file visible",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "CRAF",
+      "target": 6,
+      "baselineLevels": 5,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 27,
+        "ms": 12042,
+        "won": true,
+        "budget": {
+          "actions": 33,
+          "activeTimeMs": 324000,
+          "source": "docs/architecture/sic-v8-validation.md :: paragraph \"CRAF gagne les six niveaux en 106 clics\"; level 6 = 27 clics, 239,98 s; chronological SIC qualification",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "CWSE",
+      "target": 6,
+      "baselineLevels": 2,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 79,
+        "ms": 39689,
+        "won": true,
+        "budget": {
+          "actions": 80,
+          "activeTimeMs": 90000,
+          "source": "no_level_reference"
+        }
+      }
+    },
+    {
+      "code": "DC22",
+      "target": 6,
+      "baselineLevels": 5,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 258,
+        "ms": 172731,
+        "won": true,
+        "budget": {
+          "actions": 271,
+          "activeTimeMs": 455000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=DC22; level=6; won=true",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "ESCT",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 25,
+        "ms": 11865,
+        "won": true,
+        "budget": {
+          "actions": 30,
+          "activeTimeMs": 18000,
+          "source": "docs/architecture/sic-v8-validation.md :: ESCT niveau 6, lib\u00e9rer le rail occup\u00e9 avant l'interception",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "ETAG",
+      "target": 6,
+      "baselineLevels": 3,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 80,
+        "ms": 13778,
+        "won": true,
+        "budget": {
+          "actions": 80,
+          "activeTimeMs": 90000,
+          "source": "no_level_reference"
+        }
+      }
+    },
+    {
+      "code": "FOGW",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 63,
+        "ms": 29671,
+        "won": true,
+        "budget": {
+          "actions": 76,
+          "activeTimeMs": 37000,
+          "source": "docs/architecture/sic-v8-validation.md :: FOGW niveau 6, r\u00e9activer les supports apr\u00e8s un franchissement refus\u00e9",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "GRAV",
+      "target": 6,
+      "baselineLevels": 4,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 10,
+        "ms": 1397,
+        "won": true,
+        "budget": {
+          "actions": 15,
+          "activeTimeMs": 8000,
+          "source": "docs/architecture/sic-v8-validation.md :: GRAV niveau 6, pr\u00e9voir les glissements avec et sans colle",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "GRIL",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 35,
+        "ms": 18135,
+        "won": true,
+        "budget": {
+          "actions": 39,
+          "activeTimeMs": 28000,
+          "source": "docs/architecture/sic-v8-validation.md :: GRIL niveau 6, comparer toutes les formes apr\u00e8s un d\u00e9placement",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "LF52",
+      "target": 10,
+      "baselineLevels": 5,
+      "currentLevels": 10,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 10,
+        "actions": 47,
+        "ms": 53427,
+        "won": true,
+        "budget": {
+          "actions": 57,
+          "activeTimeMs": 135000,
+          "source": "docs/architecture/sic-v8-validation.md :: LF52 niveau 10 \u2014 R\u00e9utiliser les commandes et suivre les chariots au bord du champ",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "LKEY",
+      "target": 6,
+      "baselineLevels": 5,
+      "currentLevels": 6,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 30,
+        "ms": 8702,
+        "won": true,
+        "budget": {
+          "actions": 36,
+          "activeTimeMs": 18000,
+          "source": "docs/architecture/sic-v8-validation.md :: LKEY niveau 6, distinguer les effets des outils sur les dents",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "LS20",
+      "target": 7,
+      "baselineLevels": 5,
+      "currentLevels": 7,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 7,
+        "actions": 107,
+        "ms": 46025,
+        "won": true,
+        "budget": {
+          "actions": 129,
+          "activeTimeMs": 67000,
+          "source": "docs/architecture/sic-v8-validation.md :: LS20 niveau 7, revenir \u00e0 une sortie m\u00e9moris\u00e9e sous visibilit\u00e9 partielle",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "MIND",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 24,
+        "ms": 7128,
+        "won": true,
+        "budget": {
+          "actions": 29,
+          "activeTimeMs": 19000,
+          "source": "docs/architecture/sic-v8-validation.md :: MIND niveau 6, comparer les codes apr\u00e8s l'ajout d'une valeur",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "PORT",
+      "target": 6,
+      "baselineLevels": 5,
+      "currentLevels": 6,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 18,
+        "ms": 7476,
+        "won": true,
+        "budget": {
+          "actions": 21,
+          "activeTimeMs": 12000,
+          "source": "docs/architecture/sic-v8-validation.md :: PORT niveau 6, ouvrir les passages encore sans partenaire",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "RSWP",
+      "target": 6,
+      "baselineLevels": 4,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 50,
+        "ms": 21642,
+        "won": true,
+        "budget": {
+          "actions": 60,
+          "activeTimeMs": 50000,
+          "source": "docs/architecture/sic-v8-validation.md :: RSWP niveau 6, planifier le traitement de neuf caisses",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "SB26",
+      "target": 8,
+      "baselineLevels": 6,
+      "currentLevels": 8,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 8,
+        "actions": 17,
+        "ms": 7641,
+        "won": true,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SB26 niveau 8, fermer deux appels pour produire la r\u00e9p\u00e9tition",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "SK48",
+      "target": 8,
+      "baselineLevels": 5,
+      "currentLevels": 8,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 8,
+        "actions": 42,
+        "ms": 12662,
+        "won": true,
+        "budget": {
+          "actions": 51,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SK48 niveau 8",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "SPOR",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 30,
+        "ms": 15516,
+        "won": true,
+        "budget": {
+          "actions": 35,
+          "activeTimeMs": 29000,
+          "source": "docs/architecture/sic-v8-validation.md :: SPOR niveau 6, alimenter les lots en respectant les r\u00e9serves",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "TRCP",
+      "target": 6,
+      "baselineLevels": 3,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 49,
+        "ms": 33358,
+        "won": true,
+        "budget": {
+          "actions": 59,
+          "activeTimeMs": 209000,
+          "source": "docs/architecture/sic-v8-validation.md :: TRCP niveau 6, confirmer le pigment m\u00eame si le marqueur reste dominant",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "UPST",
+      "target": 6,
+      "baselineLevels": 0,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 17,
+        "ms": 7328,
+        "won": true,
+        "budget": {
+          "actions": 22,
+          "activeTimeMs": 19000,
+          "source": "docs/architecture/sic-v8-validation.md :: UPST niveau 6, retrouver les rang\u00e9es basses et leurs portes",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "VOIS",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 71,
+        "ms": 12872,
+        "won": true,
+        "budget": {
+          "actions": 80,
+          "activeTimeMs": 27000,
+          "source": "docs/architecture/sic-v8-validation.md :: VOIS niveau 6, placer l'appui hors du contour compar\u00e9",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "WA30",
+      "target": 9,
+      "baselineLevels": 7,
+      "currentLevels": 9,
+      "baselineCategory": "time",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 9,
+        "actions": 66,
+        "ms": 42865,
+        "won": true,
+        "budget": {
+          "actions": 80,
+          "activeTimeMs": 51000,
+          "source": "docs/architecture/sic-v8-validation.md :: WA30 niveau 9 \u2014 Combiner les relais, les livraisons locales et la coop\u00e9ration",
+          "timeBasis": "measured"
+        }
+      }
+    },
+    {
+      "code": "WEAV",
+      "target": 6,
+      "baselineLevels": 1,
+      "currentLevels": 6,
+      "baselineCategory": "commands",
+      "currentCategory": "complete",
+      "currentReason": "target_levels_completed",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 40,
+        "ms": 18053,
+        "won": true,
+        "budget": {
+          "actions": 48,
+          "activeTimeMs": 28000,
+          "source": "docs/architecture/sic-v8-validation.md :: WEAV niveau 6, pr\u00e9server les pastilles qui commandent les lignes",
+          "timeBasis": "measured"
+        }
+      }
+    }
+  ],
+  "regressed": [
+    {
+      "code": "HOLE",
+      "target": 6,
+      "baselineLevels": 6,
+      "currentLevels": 4,
+      "baselineCategory": "complete",
+      "currentCategory": "incomplete",
+      "currentReason": "level_action_budget",
+      "currentFrontier": {
+        "level": 5,
+        "actions": 24,
+        "ms": 11950,
+        "won": false,
+        "budget": {
+          "actions": 24,
+          "activeTimeMs": 29000,
+          "source": "docs/architecture/sic-v8-level6-campaign-7bb9f152.json :: source=7bb9f15298c4e7d93a5c55f6f71ffa2fbe6acdaa; game=HOLE; level=5; won=true",
+          "timeBasis": "measured"
+        }
+      }
+    }
+  ],
+  "stillIncomplete": [
+    {
+      "code": "SNAR",
+      "target": 6,
+      "baselineLevels": 3,
+      "currentLevels": 5,
+      "baselineCategory": "time",
+      "currentCategory": "incomplete",
+      "currentReason": "level_wall_time_budget",
+      "currentFrontier": {
+        "level": 6,
+        "actions": 27,
+        "ms": 17002,
+        "won": false,
+        "budget": {
+          "actions": 35,
+          "activeTimeMs": 17000,
+          "source": "docs/architecture/sic-v8-validation.md :: SNAR niveau 6, traverser les rails et pr\u00e9server les passages ouverts",
+          "timeBasis": "measured"
+        }
+      }
+    }
+  ]
+}

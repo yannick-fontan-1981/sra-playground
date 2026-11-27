@@ -1,0 +1,1854 @@
+{
+  "source": "0fe417b2e91bb8ca15573e82b79b7081157aeb37",
+  "tree": "359b57d62ee36110cfb349496eabe13d4ebfb13a",
+  "baseline": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "runId": "46047191373",
+  "matrixResult": "success",
+  "expectedGames": 107,
+  "rawResults": 107,
+  "expectedLevels": 692,
+  "categories": {
+    "complete": 105,
+    "complete_unsettled": 0,
+    "incomplete": 2,
+    "harness_error": 0,
+    "missing": 0
+  },
+  "noRecoveryComplete": 103,
+  "knownResets": 2,
+  "knownUndos": 0,
+  "unknownRecoveryCounts": 1,
+  "issues": [],
+  "shards": [
+    {
+      "shard": "01",
+      "sha256": "5e05e539eb671ae8feaf3cbc0633b3152d3fc32e1f800708daec932112c49caf",
+      "bytes": 136956
+    },
+    {
+      "shard": "02",
+      "sha256": "7f2602374c3ed136f13e53474b6b2afd885f6fa6c1563d7efd4a97800c3006e9",
+      "bytes": 95060
+    },
+    {
+      "shard": "03",
+      "sha256": "bbc141ca1c29703a1911eabacf0d88143ba8ae05af89bce9ee7e8db5e7cd0657",
+      "bytes": 113879
+    },
+    {
+      "shard": "04",
+      "sha256": "3bf34c4f9d14148962baed39c4d2bcb9791773926a8fbc500950021d370b54cd",
+      "bytes": 82201
+    },
+    {
+      "shard": "05",
+      "sha256": "9518cd33e06c2f3a525bc245724eac6c503c7e49c15641c5ad3b39e0d13a0ecc",
+      "bytes": 76745
+    },
+    {
+      "shard": "06",
+      "sha256": "75523945ac59c8402c0ee09aa1d79ef8ba8b483f515a4470dcb99024ae5c53c8",
+      "bytes": 136557
+    },
+    {
+      "shard": "07",
+      "sha256": "4141a29f58692b10768690ad456384f3fd4938cdb2201f6f66ef4f500394f651",
+      "bytes": 109022
+    },
+    {
+      "shard": "08",
+      "sha256": "cd3488b91f9e588de763015b57f6a8572b3f9c160334143bf276f49ac3f55390",
+      "bytes": 192776
+    },
+    {
+      "shard": "09",
+      "sha256": "d39f9a3d6a3084f4919366d4a049999a75b99e3ad41e3ca0bf78753e7a911f40",
+      "bytes": 123837
+    },
+    {
+      "shard": "10",
+      "sha256": "97c68412b8763daf5a8bcb6f37739919890dfd3eb20566b7ab5a8e4ffa607a79",
+      "bytes": 175436
+    },
+    {
+      "shard": "11",
+      "sha256": "0651a3e108551beeab5b2a875d4c52e8e5dcf0fc7f55e449c7c3e4ae085fca12",
+      "bytes": 138800
+    },
+    {
+      "shard": "12",
+      "sha256": "92e56ac7bc2c3854afb0a2ca9cef8bf6f8ce41c0432df76b5b2f5a3481a0a954",
+      "bytes": 105867
+    },
+    {
+      "shard": "13",
+      "sha256": "5d64cb5e63ecb56dda6cc2f787ffc8972dc9e373741044c19d95bbb4f8a5c37b",
+      "bytes": 103917
+    },
+    {
+      "shard": "14",
+      "sha256": "e9e52f69f2f8d363eb48d3eb0b71791e68e0bb6ff45c2ad49a981714fd776d4b",
+      "bytes": 171854
+    },
+    {
+      "shard": "15",
+      "sha256": "5465b72229c3e7d64e5a2eed7d510f126098b46980db40ad18922a5b0d606633",
+      "bytes": 168668
+    },
+    {
+      "shard": "16",
+      "sha256": "1a15733fb4685922634eacc988ef7b317fca8499b5528784b03c03a643d43633",
+      "bytes": 131741
+    },
+    {
+      "shard": "17",
+      "sha256": "fdec7da220e432ef4363be30b148d2b3d53d3fb05d692d10f4142b9e40585b7d",
+      "bytes": 152356
+    },
+    {
+      "shard": "18",
+      "sha256": "c230a8d221d523c25a7074400a746ae87a1b7e0da6d42064fabb8329863497e2",
+      "bytes": 144671
+    },
+    {
+      "shard": "19",
+      "sha256": "4293dabe8985d10f091f131a8557d49cad9201986ce50dcf9d804366a288c18a",
+      "bytes": 187072
+    },
+    {
+      "shard": "20",
+      "sha256": "23721ab8f753ad356f8d033b462a9e733b6cee2bdeae4a81cc7eaf1f8e067df9",
+      "bytes": 131441
+    },
+    {
+      "shard": "21",
+      "sha256": "6c4134fab6466bdaad52e8387913dfbe5b265d52cd34688782bc074da8e41aaf",
+      "bytes": 140913
+    },
+    {
+      "shard": "22",
+      "sha256": "e0036b7dc7b6d94abc2806aeb4deb313a79ca2b0731a8032cc3603e23fdbbb7c",
+      "bytes": 118051
+    },
+    {
+      "shard": "23",
+      "sha256": "92ee161541f8ea1814e70c118d53e98525d78b9e537767c4c1d4f6786502a5e1",
+      "bytes": 131393
+    },
+    {
+      "shard": "24",
+      "sha256": "fcfca1bc3722ecf7afbf2969aad38322c14d0455d3d1c2ee066ed0228d0dc602",
+      "bytes": 132372
+    }
+  ],
+  "verdicts": [
+    {
+      "code": "AMZE",
+      "target": 6,
+      "levels": 6,
+      "actions": 34,
+      "authority": 34,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "cca080cbe2380941325904a54e94477be6ed4de604e461c99d255538276cd159",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "AR25",
+      "target": 8,
+      "levels": 8,
+      "actions": 255,
+      "authority": 255,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "943997fc739b7cbe9c9361daacf563489df89aebd5ac2ed638de23a1d57a7a90",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "AS66",
+      "target": 9,
+      "levels": 9,
+      "actions": 161,
+      "authority": 161,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "c6127bbfc62744eb0d3f2ea55cd17c0bcde795b35c2aec23ee377497e521bd33",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "BP35",
+      "target": 9,
+      "levels": 9,
+      "actions": 397,
+      "authority": 397,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "2bb8a8821410f494a366540b02717f15aa4324f6038e8440742ed5a748419735",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CASC",
+      "target": 6,
+      "levels": 6,
+      "actions": 95,
+      "authority": 95,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "d760eeb17cd88c742dcb734046aa5be55463a407446f777ad0d33f4e61c03814",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CATL",
+      "target": 6,
+      "levels": 6,
+      "actions": 48,
+      "authority": 48,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "af1f95da9d4c8f1b78b2fd1124321b7dddf89c7e5296a10ccb11a94e49f17bd4",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CATR",
+      "target": 6,
+      "levels": 6,
+      "actions": 121,
+      "authority": 121,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "d7b968a945b368ea28bea4308057298bed82344fb99ce17952e14b41267e4d93",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CAVA",
+      "target": 6,
+      "levels": 6,
+      "actions": 83,
+      "authority": 83,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "187b30b40a315747fbaa5fd9ea2dc4d346e831d15b5d2a8fa7fa0e3a70be8955",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CD82",
+      "target": 6,
+      "levels": 6,
+      "actions": 111,
+      "authority": 111,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "c57275d5e07b7b408beed7eef9ad330ad6d1081e23dddb6022394c9c1d534380",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CGWL",
+      "target": 6,
+      "levels": 6,
+      "actions": 167,
+      "authority": 167,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "e3419ba179db97e57c5b63bb515e7d7abca1991678dda6866b40201496c43a99",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CLRS",
+      "target": 6,
+      "levels": 6,
+      "actions": 84,
+      "authority": 84,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "4aed1452c9c8ed2fa5d672736b94ccffb12119ad625fb66cfe31d25692ad00ea",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CN04",
+      "target": 6,
+      "levels": 6,
+      "actions": 240,
+      "authority": 240,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "9e71d73eb2dbe22346cc0c9e2837c16d83a75ffabffff44046682f5f2bac8965",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "COLM",
+      "target": 6,
+      "levels": 6,
+      "actions": 103,
+      "authority": 103,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "96fa4f9de4fa3bdd962b528ee2cd5b87cb45f32b373cc4545c3aa208986102db",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "COMB",
+      "target": 6,
+      "levels": 6,
+      "actions": 90,
+      "authority": 90,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "80c6811d4aa24dc191d81b44e45949e23dea345b57f40eb5d3ff846703cad585",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CONN",
+      "target": 6,
+      "levels": 6,
+      "actions": 66,
+      "authority": 66,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "8e8cf2b2c5d6f9dc7036537baaadefd931ba012d7f41d0fd069bf3ac2f17252e",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CRAF",
+      "target": 6,
+      "levels": 6,
+      "actions": 106,
+      "authority": 106,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "35ede3d950cc656d021d22f93eee9d75aafd29b6cbff327f1c993883bea7da58",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "CWSE",
+      "target": 6,
+      "levels": 6,
+      "actions": 195,
+      "authority": 195,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "6c91655b9494547ad9303fcb7e0199842229e8d173816885f4ad25bef53f4682",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "DAME",
+      "target": 6,
+      "levels": 6,
+      "actions": 65,
+      "authority": 65,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "d256314cd4cc2950e999bc9204ea6e35e5eacca329b6f80e70ed069c3cad3156",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "DC22",
+      "target": 6,
+      "levels": 6,
+      "actions": 630,
+      "authority": 630,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "854ad877ba896c78a9a63fb3e30bf49d1a8778c164861f1fb935abce3c706e36",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "DICO",
+      "target": 6,
+      "levels": 6,
+      "actions": 71,
+      "authority": 71,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "c4db97549bee424946d6c9d03e8f4a0b70011f823ba85dc75bafa53943fcbc0c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "DNOI",
+      "target": 6,
+      "levels": 6,
+      "actions": 59,
+      "authority": 59,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "2dfa31a94e2f96e98a18a2c7434ce9c5eb308fd3cf0ff4174bf5f5365d1b0393",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "ELAS",
+      "target": 6,
+      "levels": 6,
+      "actions": 268,
+      "authority": 268,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "60f1961c0557e740671c286ea1fac6f4c1ffb8f48e41cdaa71d9737fd0303782",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "ESCT",
+      "target": 6,
+      "levels": 6,
+      "actions": 118,
+      "authority": 118,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "59f699cae3803de03a511ccd66d05bc71ae5df61e2dcdcfb7e869ab0b8f06ef8",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "ETAG",
+      "target": 6,
+      "levels": 6,
+      "actions": 274,
+      "authority": 274,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "07b73e6e24a00c5f06ad367675c145e59bac9681d2e1911becb12e7dfb537baa",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "EVAS",
+      "target": 6,
+      "levels": 6,
+      "actions": 86,
+      "authority": 86,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "46369580aed408e434b5d9e617dc67ae556fc5bbe4775f56d7c03630f5657dfc",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "FITE",
+      "target": 6,
+      "levels": 6,
+      "actions": 64,
+      "authority": 64,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "623e7c0db78064539acc56ef34b4c86e39fb3b2ee4ed8ce246d8baba76c1e0f6",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "FOGW",
+      "target": 6,
+      "levels": 6,
+      "actions": 173,
+      "authority": 173,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3cf90da4101acf07b405e5550bbbb21497aac5aff132425eb53e75212c23c7dd",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "FT09",
+      "target": 6,
+      "levels": 6,
+      "actions": 75,
+      "authority": 75,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "40f02e926de47cbfa120ca39d0e78c4c0a51de0ae9dfa039389564be36d8dbb9",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "FUIT",
+      "target": 6,
+      "levels": 6,
+      "actions": 190,
+      "authority": 190,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "09f84326619a118550f6deca315697fdae7aa11ed64998dfb9d162c4cd9c99ab",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "G50T",
+      "target": 7,
+      "levels": 7,
+      "actions": 301,
+      "authority": 301,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3439182e859d557cbabe18d6955270bde6036bf1ad888c418617571f827f182c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GABA",
+      "target": 6,
+      "levels": 6,
+      "actions": 447,
+      "authority": 447,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "6e150708fd23daf07480d4e310a4fe9855659861132d179b26a9a9822cc412cc",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GARE",
+      "target": 6,
+      "levels": 6,
+      "actions": 56,
+      "authority": 56,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "ed547a8b2551602137ca68a2415a851f6c5866d8a0c26626e94729d71ab00d7d",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GIGO",
+      "target": 6,
+      "levels": 6,
+      "actions": 70,
+      "authority": 70,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "7e2a8b61573d7cab9b0aaa41bf8d2dc815c5ad194f672221f6ba4fd1fb7d58c3",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GLOB",
+      "target": 6,
+      "levels": 6,
+      "actions": 79,
+      "authority": 79,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "6fb3f6be470fc772e2ab9adb751ef63530045c3a49b67df2889a7b82ef2ae382",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GMAP",
+      "target": 6,
+      "levels": 6,
+      "actions": 69,
+      "authority": 69,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "cea526e2d85a7b93147a0de7ade55c55814344b4a069ca0921edb143ee4683f2",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GORI",
+      "target": 6,
+      "levels": 6,
+      "actions": 46,
+      "authority": 46,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "42300732e791649c4f0644baa828503be1239d5129dd795174dd6f85f6617639",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GRAV",
+      "target": 6,
+      "levels": 6,
+      "actions": 80,
+      "authority": 80,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "7c68292ee088c2255825aed1532df38862bce5d42b83ec83c50ae4001d27226e",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "GRIL",
+      "target": 6,
+      "levels": 6,
+      "actions": 74,
+      "authority": 74,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "dcd42dfed5d6c41635dfc75f4d738474033d15c316844fec2afd4ef1a3350256",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "HANO",
+      "target": 4,
+      "levels": 4,
+      "actions": 60,
+      "authority": 60,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3a543fb12eab86430572d635d4ae17daa7d702b6137b58dfaea981b5946707fb",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "HOLE",
+      "target": 6,
+      "levels": 4,
+      "actions": 54,
+      "authority": 54,
+      "reason": "level_action_budget",
+      "status": "stopped",
+      "trace": "0f3713456fbffbb9ff24c279e3a5ea7738e80c9d643cf891d3ed469e477f82f6",
+      "category": "incomplete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "HPDL",
+      "target": 6,
+      "levels": 6,
+      "actions": 54,
+      "authority": 54,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "08163cf885f8d1190aff44dc452a0371fe491974fd30a56fba9abae96c1b2e65",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "ISOS",
+      "target": 6,
+      "levels": 6,
+      "actions": 33,
+      "authority": 33,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "ea3baf915647f9f03c096f4dc90706a06966ef7307f462bd4b9c1263796db9b8",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "KA59",
+      "target": 7,
+      "levels": 7,
+      "actions": 311,
+      "authority": 311,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "bbe0c97e3aa2f1df0a8f12dea8dd970fcd84b0559b8ee275df8f53a9c58c5c70",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "KATA",
+      "target": 6,
+      "levels": 6,
+      "actions": 144,
+      "authority": 144,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3051eefe0e4d0e49933a6b78fa99a43d3872fb20b931fedb3e4652db6c2cc101",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "KEYD",
+      "target": 6,
+      "levels": 6,
+      "actions": 153,
+      "authority": 153,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "c62b1a59130ce9841ca5237b33b1925c56e4cfbaf7aee8de293f6e2608542514",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "KLOT",
+      "target": 6,
+      "levels": 6,
+      "actions": 100,
+      "authority": 100,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "807f9bf3b61077499cc88a3bece0298d9b5cdd920dfbbc04f08848dbc556639c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "LF52",
+      "target": 10,
+      "levels": 10,
+      "actions": 713,
+      "authority": 713,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "d19704a5589bbb009ece09a686749e27eecc63e027cbe3061566c6c34c779e5a",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "LIFE",
+      "target": 6,
+      "levels": 6,
+      "actions": 139,
+      "authority": 139,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "f6d4ec9344d935799f55cf0744e3bed192b78145afe8b6847aaac6b4eb7db477",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "LKEY",
+      "target": 6,
+      "levels": 6,
+      "actions": 119,
+      "authority": 119,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3f50d25d81af73c6f4f1c523f037de1cac53f3974558751f7182e87b071c300c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "LOGI",
+      "target": 6,
+      "levels": 6,
+      "actions": 30,
+      "authority": 30,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "b3c796ba0d1d3c7a9659ee41229cdc7ec884885648bbc94d30b63c228f4cda3d",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "LP85",
+      "target": 8,
+      "levels": 8,
+      "actions": 189,
+      "authority": 189,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "81489e6173ef277917d6facc42d8a08a11c33db880ce90638d47a7fb04e1469b",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "LS19",
+      "target": 8,
+      "levels": 8,
+      "actions": 332,
+      "authority": 332,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "04353a68c6e193db09d36d861d7dcf6bfe6c6dd8e92cf61b53f8316b84f2ee3c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "LS20",
+      "target": 7,
+      "levels": 7,
+      "actions": 393,
+      "authority": 393,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "6541166c4d64796d06e108954750d594316b53e70ce94d0f11001fadce5d2eb7",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "M0R0",
+      "target": 6,
+      "levels": 6,
+      "actions": 210,
+      "authority": 210,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "d52f4f1d457c15cef26f2e207f68d5aa33b6df93ca2d756f9a095580200dfa53",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "MEMO",
+      "target": 6,
+      "levels": 6,
+      "actions": 60,
+      "authority": 60,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "07bdf38a8695e76c7c529246c227239f9bd089dfe53b732945fe94f8823d4968",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "MIND",
+      "target": 6,
+      "levels": 6,
+      "actions": 93,
+      "authority": 93,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "7a9cac0f1e17d2904152b04479b45764a0834dff75c3426db1e90333f2785001",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "MOTO",
+      "target": 6,
+      "levels": 6,
+      "actions": 57,
+      "authority": 57,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "2088630b2dbb2bf2d98549f296398d2054914f72066a87380313db3f30e7bf77",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "ONDE",
+      "target": 6,
+      "levels": 6,
+      "actions": 44,
+      "authority": 44,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "4726ae331e4ae3dfb7a0e084d8b4577e2754384724a1f191fa507b56b79afc59",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "PIPE",
+      "target": 6,
+      "levels": 6,
+      "actions": 84,
+      "authority": 84,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "daf90fdb077f94f49d6845e5789191a2d28fb188c1e829d8aeb99cb69ab4c6d9",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "POLA",
+      "target": 6,
+      "levels": 6,
+      "actions": 40,
+      "authority": 40,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3e6790dc0350e699729577d778dc31011e019d86014f086f9b67bc47b429e472",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "PORT",
+      "target": 6,
+      "levels": 6,
+      "actions": 116,
+      "authority": 116,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "6ac0996092896e035f77015d8a6f76a5aaba6857ca936c6af7832723877834e1",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "PRTL",
+      "target": 6,
+      "levels": 6,
+      "actions": 108,
+      "authority": 108,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "471de06c8cf7d194607e2215f6fa4cd79a875489175e2b2da61dfbd439d0bf55",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "R11L",
+      "target": 6,
+      "levels": 6,
+      "actions": 97,
+      "authority": 97,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "9d722ffd662f7dafcbf0182fcc14344246915ade70812874646a1385c02a9092",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "RE86",
+      "target": 8,
+      "levels": 8,
+      "actions": 561,
+      "authority": 561,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "84051177248408ec33e9ec8107c0a602f3edc80c418aeed0548ea4849b080963",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "RECR",
+      "target": 6,
+      "levels": 6,
+      "actions": 134,
+      "authority": 134,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "4be4de76c6c24bedf078832d5615149b4a0558ee6783abaa817c8b349eaf6b04",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "REGN",
+      "target": 6,
+      "levels": 6,
+      "actions": 132,
+      "authority": 132,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "da4ea6f5c5907f172d7ba57c080bb7ba44d6cad3bed85579c19a7808e0885807",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "REWI",
+      "target": 6,
+      "levels": 6,
+      "actions": 31,
+      "authority": 31,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "4d436c65678db38e0ab4a753940ddfba737cecd3e9a68c69898bd6d42c021044",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "RSWP",
+      "target": 6,
+      "levels": 6,
+      "actions": 110,
+      "authority": 110,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "4fb20580a611b668663c3bac9fdb83ffb0454a6541c53edb59572be442d5659d",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "S5I5",
+      "target": 8,
+      "levels": 8,
+      "actions": 252,
+      "authority": 252,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "c722a6f5f89b9ae5ad6dcf31ae248dd7bf78f2e9ef515f37ff7709999d74db37",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SB26",
+      "target": 8,
+      "levels": 8,
+      "actions": 124,
+      "authority": 124,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "f3277035290297a66c05ed209b7b84e743dc9c06ef151bb27ff3dd5c058dfe8c",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SC25",
+      "target": 6,
+      "levels": 6,
+      "actions": 153,
+      "authority": 153,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "6743f1973788f1eede609cadb43601837687215dfa6f384f2158dfe5aa7d05fd",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SELE",
+      "target": 6,
+      "levels": 6,
+      "actions": 117,
+      "authority": 117,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "6aff4e85b7cebed8180d46dd14bdb1ce481d4afc3887f83b37e8435787f69022",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SEQN",
+      "target": 6,
+      "levels": 6,
+      "actions": 46,
+      "authority": 46,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "01c45fc26789501146653109c428564964299ce525dbf0e0e36c9f68eedf838e",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SERI",
+      "target": 6,
+      "levels": 6,
+      "actions": 54,
+      "authority": 54,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3e865b1df0dff88893c6d06110b7e75feddb88fda39f83a40e9955c1e5210529",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SIGN",
+      "target": 6,
+      "levels": 6,
+      "actions": 271,
+      "authority": 271,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "896620cdb06459d7d13b2f3f0f53060869bbc929cf850bf22b9b2c78e99dafd7",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SK48",
+      "target": 8,
+      "levels": 8,
+      "actions": 348,
+      "authority": 348,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "8a2de5509a5edd2f058a373dfd64b55a0e6434524d53d36e4c5cdcfd385ddf21",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SKBN",
+      "target": 6,
+      "levels": 6,
+      "actions": 109,
+      "authority": 109,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "565301a06ad3bcdbbb7e80fb789ae1ef23e34a95d9bb18d62b199f9d33145bf8",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SMLP",
+      "target": 6,
+      "levels": 6,
+      "actions": 59,
+      "authority": 59,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "33d7136b5bea083f7c96ea319990fa6a64258eb902eaf9b583cc658a47719d24",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SNAR",
+      "target": 6,
+      "levels": 5,
+      "actions": 161,
+      "authority": 161,
+      "reason": "level_wall_time_budget",
+      "status": "stopped",
+      "category": "incomplete",
+      "recoveries": null,
+      "noRecovery": null
+    },
+    {
+      "code": "SP80",
+      "target": 6,
+      "levels": 6,
+      "actions": 110,
+      "authority": 110,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "afe10293f9b166c9dcbfb7803e8418cbc55082c4ef99fdc5b37d7ae9384f9153",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SPOR",
+      "target": 6,
+      "levels": 6,
+      "actions": 121,
+      "authority": 121,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "e9d1391feb5cbfccc0f1cd6136478a63542de64eb85fc8e6e71fdb94aa0b55ac",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SS01",
+      "target": 8,
+      "levels": 8,
+      "actions": 444,
+      "authority": 444,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "fa0a9473ed9bc3257f157ef41ff5e5bd9399cdc5d74807407fca0530c0498044",
+      "category": "complete",
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "noRecovery": false
+    },
+    {
+      "code": "SS02",
+      "target": 8,
+      "levels": 8,
+      "actions": 546,
+      "authority": 546,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "2931b7f4370ac9ea22385ded59f95e9febb9ac3f155094aaade9aca105e58eef",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SS03",
+      "target": 8,
+      "levels": 8,
+      "actions": 491,
+      "authority": 491,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "e06f94f8470254872b27af9d412318d13f21207938841c94e5976fed8cba791f",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SS04",
+      "target": 8,
+      "levels": 8,
+      "actions": 443,
+      "authority": 443,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "edd2a72881e8a3ceb9ef474839491ececb9198884912422803ec2adda1e33340",
+      "category": "complete",
+      "recoveries": {
+        "reset": 1,
+        "undo": 0
+      },
+      "noRecovery": false
+    },
+    {
+      "code": "SS05",
+      "target": 8,
+      "levels": 8,
+      "actions": 393,
+      "authority": 393,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "abc0ae249bc5b543b5b608f8c4fad4c3ec85050825580fd5eae64045ca5c0aa7",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SS06",
+      "target": 8,
+      "levels": 8,
+      "actions": 399,
+      "authority": 399,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "eea5520cfbdac3a14f401fcfa87c1638ea14361250cd41045203bc2f421190d6",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SS07",
+      "target": 8,
+      "levels": 8,
+      "actions": 549,
+      "authority": 549,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "879a8eef9f3b634269c66d60adca7315bbda3a150ae483bea13c0cf4e2e54e69",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "STCK",
+      "target": 6,
+      "levels": 6,
+      "actions": 52,
+      "authority": 52,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "0bd97295549c6521a5970dbc1d6122867f9f05b210abe05d4fb3487e4c64761e",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SU15",
+      "target": 9,
+      "levels": 9,
+      "actions": 122,
+      "authority": 122,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "15d4a8112cb0740d8c577a67880b25e4573119ebfd868b79578bf0ce77ba1a86",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SWCH",
+      "target": 6,
+      "levels": 6,
+      "actions": 198,
+      "authority": 198,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "f56ccebadc1cf91f371ed680b44e7075a52447e40c4cd38fee9c10405ada7b77",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "SYME",
+      "target": 6,
+      "levels": 6,
+      "actions": 78,
+      "authority": 78,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "fa06e863b485f5697beb26da591eadedc4886cfb9ee6215532b6a3fcdf35c45a",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "TEQU",
+      "target": 6,
+      "levels": 6,
+      "actions": 106,
+      "authority": 106,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "de2b362c8144006f6f8b20bd60621e8280933e58c594c573ff6e5ebbbd7139b9",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "THER",
+      "target": 6,
+      "levels": 6,
+      "actions": 47,
+      "authority": 47,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "66111506c0d9f385cd78a979aed9b75cdb85dfaab7ea09bdcf334143af74cd16",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "TICT",
+      "target": 6,
+      "levels": 6,
+      "actions": 58,
+      "authority": 58,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "9dd90aac62f0b1f1797982f78c6bd955b2a4553cdd5c7ad766c6a8993762f3ff",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "TN36",
+      "target": 7,
+      "levels": 7,
+      "actions": 138,
+      "authority": 138,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "24bdab1f44a5b22adf32d0a61510d9dac3e5da707ce389aa04989c77db885e57",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "TR87",
+      "target": 6,
+      "levels": 6,
+      "actions": 199,
+      "authority": 199,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "da1a1431f1d20b498106ee42a92a3aaef12ac2d2b10c1b90a8475209f4e27628",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "TRCP",
+      "target": 6,
+      "levels": 6,
+      "actions": 240,
+      "authority": 240,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "b5a80210ff4c118daa17bc9c3135b033d3ffecd28aae393f4cbf982d01f41bac",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "TRIA",
+      "target": 6,
+      "levels": 6,
+      "actions": 119,
+      "authority": 119,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "a9caf95fb7ff83ca12b79cd6cec12221b434193de9fbbe1c3106a6c144f145b6",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "TU93",
+      "target": 9,
+      "levels": 9,
+      "actions": 205,
+      "authority": 205,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "13696000201593c382a25091dfeaa3f4ccf1ba6a08cd92c06ea440f14de2a292",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "UPST",
+      "target": 6,
+      "levels": 6,
+      "actions": 72,
+      "authority": 72,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "eb53670dec4cedd4802ed4e627590c9d9c71e197d82179fa03bfc0a6acd5f091",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "VALV",
+      "target": 6,
+      "levels": 6,
+      "actions": 57,
+      "authority": 57,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "3679e26e7b98a7acd4abd3f322750cad1dc5acec61550673ee1fc829ae1da50a",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "VC33",
+      "target": 7,
+      "levels": 7,
+      "actions": 192,
+      "authority": 192,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "e12ebb632fd8ac8edf61338c721aa5cf37f52f4b9fdbbf0cd4ec7f82d90518e9",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "VOIS",
+      "target": 6,
+      "levels": 6,
+      "actions": 196,
+      "authority": 196,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "8324e6a9e34907ce62fe0b49a7ec8453fddd36705ad9309f756dedd3f3aff4bd",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "WA30",
+      "target": 9,
+      "levels": 9,
+      "actions": 613,
+      "authority": 613,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "b66300dd5d4096e5a33d3facc34ff9f5ff21fcd6d2238d60f5f69b93a8c9add9",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "WEAV",
+      "target": 6,
+      "levels": 6,
+      "actions": 199,
+      "authority": 199,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "edfe272676670067ceab7237f32bad22a26aa779a47be0b2e6733c650682595f",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    },
+    {
+      "code": "ZIPP",
+      "target": 6,
+      "levels": 6,
+      "actions": 101,
+      "authority": 101,
+      "reason": "target_levels_completed",
+      "status": "stopped",
+      "trace": "8f725af33c34c91c07b8e5142e80682200e882c2c0d2ddc8e3f9bc782c4d5d94",
+      "category": "complete",
+      "recoveries": {
+        "reset": 0,
+        "undo": 0
+      },
+      "noRecovery": true
+    }
+  ]
+}

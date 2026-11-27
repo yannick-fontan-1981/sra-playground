@@ -1,0 +1,476 @@
+{
+  "source": "0fe417b2e91bb8ca15573e82b79b7081157aeb37",
+  "tree": "359b57d62ee36110cfb349496eabe13d4ebfb13a",
+  "baseline": "4a546a139f9064422c078ef5f40b8c22133c39a8",
+  "codes": [
+    "AMZE",
+    "AR25",
+    "AS66",
+    "BP35",
+    "CASC",
+    "CATL",
+    "CATR",
+    "CAVA",
+    "CD82",
+    "CGWL",
+    "CLRS",
+    "CN04",
+    "COLM",
+    "COMB",
+    "CONN",
+    "CRAF",
+    "CWSE",
+    "DAME",
+    "DC22",
+    "DICO",
+    "DNOI",
+    "ELAS",
+    "ESCT",
+    "ETAG",
+    "EVAS",
+    "FITE",
+    "FOGW",
+    "FT09",
+    "FUIT",
+    "G50T",
+    "GABA",
+    "GARE",
+    "GIGO",
+    "GLOB",
+    "GMAP",
+    "GORI",
+    "GRAV",
+    "GRIL",
+    "HANO",
+    "HOLE",
+    "HPDL",
+    "ISOS",
+    "KA59",
+    "KATA",
+    "KEYD",
+    "KLOT",
+    "LF52",
+    "LIFE",
+    "LKEY",
+    "LOGI",
+    "LP85",
+    "LS19",
+    "LS20",
+    "M0R0",
+    "MEMO",
+    "MIND",
+    "MOTO",
+    "ONDE",
+    "PIPE",
+    "POLA",
+    "PORT",
+    "PRTL",
+    "R11L",
+    "RE86",
+    "RECR",
+    "REGN",
+    "REWI",
+    "RSWP",
+    "S5I5",
+    "SB26",
+    "SC25",
+    "SELE",
+    "SEQN",
+    "SERI",
+    "SIGN",
+    "SK48",
+    "SKBN",
+    "SMLP",
+    "SNAR",
+    "SP80",
+    "SPOR",
+    "SS01",
+    "SS02",
+    "SS03",
+    "SS04",
+    "SS05",
+    "SS06",
+    "SS07",
+    "STCK",
+    "SU15",
+    "SWCH",
+    "SYME",
+    "TEQU",
+    "THER",
+    "TICT",
+    "TN36",
+    "TR87",
+    "TRCP",
+    "TRIA",
+    "TU93",
+    "UPST",
+    "VALV",
+    "VC33",
+    "VOIS",
+    "WA30",
+    "WEAV",
+    "ZIPP"
+  ],
+  "levels": {
+    "AMZE": 6,
+    "AR25": 8,
+    "AS66": 9,
+    "BP35": 9,
+    "CASC": 6,
+    "CATL": 6,
+    "CATR": 6,
+    "CAVA": 6,
+    "CD82": 6,
+    "CGWL": 6,
+    "CLRS": 6,
+    "CN04": 6,
+    "COLM": 6,
+    "COMB": 6,
+    "CONN": 6,
+    "CRAF": 6,
+    "CWSE": 6,
+    "DAME": 6,
+    "DC22": 6,
+    "DICO": 6,
+    "DNOI": 6,
+    "ELAS": 6,
+    "ESCT": 6,
+    "ETAG": 6,
+    "EVAS": 6,
+    "FITE": 6,
+    "FOGW": 6,
+    "FT09": 6,
+    "FUIT": 6,
+    "G50T": 7,
+    "GABA": 6,
+    "GARE": 6,
+    "GIGO": 6,
+    "GLOB": 6,
+    "GMAP": 6,
+    "GORI": 6,
+    "GRAV": 6,
+    "GRIL": 6,
+    "HANO": 4,
+    "HOLE": 6,
+    "HPDL": 6,
+    "ISOS": 6,
+    "KA59": 7,
+    "KATA": 6,
+    "KEYD": 6,
+    "KLOT": 6,
+    "LF52": 10,
+    "LIFE": 6,
+    "LKEY": 6,
+    "LOGI": 6,
+    "LP85": 8,
+    "LS19": 8,
+    "LS20": 7,
+    "M0R0": 6,
+    "MEMO": 6,
+    "MIND": 6,
+    "MOTO": 6,
+    "ONDE": 6,
+    "PIPE": 6,
+    "POLA": 6,
+    "PORT": 6,
+    "PRTL": 6,
+    "R11L": 6,
+    "RE86": 8,
+    "RECR": 6,
+    "REGN": 6,
+    "REWI": 6,
+    "RSWP": 6,
+    "S5I5": 8,
+    "SB26": 8,
+    "SC25": 6,
+    "SELE": 6,
+    "SEQN": 6,
+    "SERI": 6,
+    "SIGN": 6,
+    "SK48": 8,
+    "SKBN": 6,
+    "SMLP": 6,
+    "SNAR": 6,
+    "SP80": 6,
+    "SPOR": 6,
+    "SS01": 8,
+    "SS02": 8,
+    "SS03": 8,
+    "SS04": 8,
+    "SS05": 8,
+    "SS06": 8,
+    "SS07": 8,
+    "STCK": 6,
+    "SU15": 9,
+    "SWCH": 6,
+    "SYME": 6,
+    "TEQU": 6,
+    "THER": 6,
+    "TICT": 6,
+    "TN36": 7,
+    "TR87": 6,
+    "TRCP": 6,
+    "TRIA": 6,
+    "TU93": 9,
+    "UPST": 6,
+    "VALV": 6,
+    "VC33": 7,
+    "VOIS": 6,
+    "WA30": 9,
+    "WEAV": 6,
+    "ZIPP": 6
+  },
+  "shards": [
+    {
+      "shard": "01",
+      "games": [
+        "LF52"
+      ],
+      "estimatedMs": 570000
+    },
+    {
+      "shard": "02",
+      "games": [
+        "DC22"
+      ],
+      "estimatedMs": 532091
+    },
+    {
+      "shard": "03",
+      "games": [
+        "WA30",
+        "FOGW"
+      ],
+      "estimatedMs": 298881
+    },
+    {
+      "shard": "04",
+      "games": [
+        "BP35",
+        "SERI",
+        "GARE"
+      ],
+      "estimatedMs": 292043
+    },
+    {
+      "shard": "05",
+      "games": [
+        "G50T",
+        "EVAS",
+        "SYME",
+        "AMZE"
+      ],
+      "estimatedMs": 294003
+    },
+    {
+      "shard": "06",
+      "games": [
+        "SS07",
+        "HOLE",
+        "CLRS",
+        "CATL"
+      ],
+      "estimatedMs": 291862
+    },
+    {
+      "shard": "07",
+      "games": [
+        "RE86",
+        "SNAR",
+        "GLOB",
+        "ONDE"
+      ],
+      "estimatedMs": 292943
+    },
+    {
+      "shard": "08",
+      "games": [
+        "SS01",
+        "SS05",
+        "ZIPP",
+        "FT09"
+      ],
+      "estimatedMs": 291524
+    },
+    {
+      "shard": "09",
+      "games": [
+        "ETAG",
+        "SMLP",
+        "CAVA",
+        "MEMO",
+        "VOIS"
+      ],
+      "estimatedMs": 311008
+    },
+    {
+      "shard": "10",
+      "games": [
+        "SS02",
+        "REGN",
+        "CASC",
+        "DAME",
+        "GRIL"
+      ],
+      "estimatedMs": 305882
+    },
+    {
+      "shard": "11",
+      "games": [
+        "SS06",
+        "TEQU",
+        "HPDL",
+        "GMAP",
+        "ESCT"
+      ],
+      "estimatedMs": 294246
+    },
+    {
+      "shard": "12",
+      "games": [
+        "ELAS",
+        "LKEY",
+        "TN36",
+        "ISOS",
+        "DNOI"
+      ],
+      "estimatedMs": 291214
+    },
+    {
+      "shard": "13",
+      "games": [
+        "TRCP",
+        "TRIA",
+        "SELE",
+        "VALV",
+        "LOGI"
+      ],
+      "estimatedMs": 292037
+    },
+    {
+      "shard": "14",
+      "games": [
+        "SS03",
+        "LIFE",
+        "PRTL",
+        "KATA",
+        "THER"
+      ],
+      "estimatedMs": 291170
+    },
+    {
+      "shard": "15",
+      "games": [
+        "LS20",
+        "M0R0",
+        "SU15",
+        "SP80",
+        "COLM",
+        "POLA"
+      ],
+      "estimatedMs": 310634
+    },
+    {
+      "shard": "16",
+      "games": [
+        "RECR",
+        "CGWL",
+        "VC33",
+        "PIPE",
+        "STCK",
+        "MIND"
+      ],
+      "estimatedMs": 310212
+    },
+    {
+      "shard": "17",
+      "games": [
+        "KA59",
+        "SK48",
+        "GIGO",
+        "FITE",
+        "SKBN"
+      ],
+      "estimatedMs": 291053
+    },
+    {
+      "shard": "18",
+      "games": [
+        "GABA",
+        "PORT",
+        "FUIT",
+        "R11L",
+        "UPST"
+      ],
+      "estimatedMs": 292589
+    },
+    {
+      "shard": "19",
+      "games": [
+        "SS04",
+        "CRAF",
+        "AR25",
+        "GRAV",
+        "GORI",
+        "REWI"
+      ],
+      "estimatedMs": 310830
+    },
+    {
+      "shard": "20",
+      "games": [
+        "LS19",
+        "SB26",
+        "SC25",
+        "COMB",
+        "MOTO"
+      ],
+      "estimatedMs": 291303
+    },
+    {
+      "shard": "21",
+      "games": [
+        "CN04",
+        "KEYD",
+        "LP85",
+        "DICO",
+        "WEAV",
+        "SEQN"
+      ],
+      "estimatedMs": 310837
+    },
+    {
+      "shard": "22",
+      "games": [
+        "TU93",
+        "CATR",
+        "CWSE",
+        "RSWP",
+        "HANO"
+      ],
+      "estimatedMs": 291208
+    },
+    {
+      "shard": "23",
+      "games": [
+        "S5I5",
+        "AS66",
+        "CD82",
+        "KLOT",
+        "SPOR"
+      ],
+      "estimatedMs": 291688
+    },
+    {
+      "shard": "24",
+      "games": [
+        "SIGN",
+        "SWCH",
+        "TR87",
+        "CONN",
+        "TICT"
+      ],
+      "estimatedMs": 291450
+    }
+  ]
+}
