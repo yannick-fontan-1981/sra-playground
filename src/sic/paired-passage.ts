@@ -1,6 +1,7 @@
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeExecution, NativeFamily, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { qualifyControlTrial } from './control-effect-next.ts';
 import { navigationPrimitives, resolveNavigationPrimitives } from './navigation-primitives.ts';
 import { sicNeedId } from './need-identity.ts';
 import { searchCoverageRoute } from './coverage-route.ts';
@@ -421,7 +422,15 @@ export function createSicPairedPassage(family = pairedPassageId, transferObserve
       const mode = execution?.reasoningMode ?? 'exploration';
       const offer = { input: action.action_ref, expected: step.point, evidence };
       const switchContact = !!route.switchTest && same(step.point, route.switchTest);
-      const facts = { eligibleProbe: switchContact || !memory.evidence.length || !!crossing && !memory.traversed.length,
+      // planSwitchRoute offers a site for testing only after the current connections gave no coverage route.
+      const eligibleProbe = switchContact
+        ? qualifyControlTrial(offer, offer.input, offer.evidence[0], {
+          observationRef: ref, availableActions: observation.available_action_refs, evidence,
+          objectiveSupported: rewrite !== null, subjectBound: switches?.sites.some(site => same(site, step.point)) === true,
+          effectKnown: false, triedInContext: rewrite?.tests.includes(switchTestKey(scene, rewrite.visited, step.point)) ?? false,
+        }).result === 'selected'
+        : !memory.evidence.length || !!crossing && !memory.traversed.length;
+      const facts = { eligibleProbe,
         routeSupported: !switchContact && memory.evidence.length > 0 && !crossing,
         knownInteraction: !switchContact && !!crossing && memory.traversed.length > 0, mode };
       const decision = learns ? await decide?.run({ situation: facts }, { signal: execution?.signal }) : null;
