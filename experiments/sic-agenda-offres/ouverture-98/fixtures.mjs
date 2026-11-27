@@ -1,0 +1,38 @@
+import { readFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+import { current } from './versions.mjs';
+import { prepareFixture } from './fiche.mjs';
+const play = await prepareFixture(process.argv[2] ?? current.href);
+const read = async name => JSON.parse(await readFile(new URL('public/'+name+'.json',import.meta.url),'utf8'));
+const out = {};
+for (const name of ['egalite','voisin','repetition','meme_clic','sans_voisin']) {
+  out[name]=await play(await read(name));
+}
+out.shadow=await play(await read('meme_clic'),'shadow');
+out.absent=await play(await read('meme_clic'),'absent');
+const scores = r=>r.slate.pre.eligible.map(x=>x.target?.count ?? null);
+const initial = await read('egalite'), enriched = await read('voisin');
+assert.deepEqual(enriched.clics,initial.clics);
+assert.deepEqual(enriched.points.slice(0,-1),initial.points);
+const removed = await play({...enriched,points:enriched.points.slice(0,-1)});
+assert.deepEqual(removed,out.egalite);
+assert.deepEqual(scores(out.egalite),[1,1]);
+assert.deepEqual(scores(out.voisin),[1,2]);
+assert.deepEqual(scores(out.repetition),[1,2]);
+assert.deepEqual(out.egalite.command.data,{x:10,y:10});
+assert.deepEqual(out.voisin.command.data,{x:40,y:40});
+assert.deepEqual(out.repetition.command,out.voisin.command);
+assert.deepEqual(out.voisin.slate.pre.eligible.map(o=>o.command),out.egalite.slate.pre.eligible.map(o=>o.command));
+assert.deepEqual(out.voisin.slate.pre.eligible.map(o=>o.priority),out.egalite.slate.pre.eligible.map(o=>o.priority));
+for (const r of Object.values(out)) assert.equal(r.guard.admitted,true);
+for (const r of [out.meme_clic,out.sans_voisin,out.shadow,out.absent]) assert.deepEqual(r.command.data,{x:25,y:36});
+assert.equal(out.meme_clic.opening.selected,true);
+assert.equal(out.shadow.opening.selected,false);
+assert.equal(out.shadow.slate.sha256,out.meme_clic.slate.sha256);
+assert.equal(out.absent.slate,null);
+assert.equal(out.sans_voisin.opening,null);
+assert.deepEqual(scores(out.sans_voisin),[null]);
+assert.equal(out.meme_clic.question.id,out.shadow.question.id);
+assert.notEqual(out.meme_clic.question.label,out.shadow.question.label);
+assert.equal(out.shadow.question.label,out.absent.question.label);
+process.stdout.write(JSON.stringify(out));

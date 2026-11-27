@@ -7,7 +7,7 @@ import type { DrmCondition } from './v6-drm-projector.ts';
 import { predictCandidateRule } from './v6-transition-learning.ts';
 import { retainNativeJson } from './v6-native-owned.ts';
 import { frontierAccessNeed, frontierInformationNeed, frontierStrategyGraph, selectFrontierStrategy } from '../sic/frontier-strategy.ts';
-import { openingClickTargets, openingCuriosityLabel, type OpeningCuriosityMode } from '../sic/opening-curiosity.ts';
+import { openingClickTargets, openingCuriosityLabel, selectOpeningOffer, type OpeningCuriosityMode, type OpeningOffer } from '../sic/opening-curiosity.ts';
 import { evaluateFrontierLocalRule, defaultFrontierConfiguration, type FrontierConfiguration, type FrontierChoiceEvidence } from '../sic/frontier-configuration.ts';
 
 type R = Record<string, any>;
@@ -417,14 +417,16 @@ export class ObservedFrontier {
       ? localRule.prefer === 'least_tried' ? ranked?.leastTried : ranked?.commandOrder
       : undefined;
     const normalQuestion = customQuestion ?? questions[0];
-    let opening: { question: R; evidence: NonNullable<ReturnType<typeof openingClickTargets>[number]> } | null = null;
+    let opening: OpeningOffer<R> | null = null;
     if (usesAgenda && options.sic_opening_curiosity && !fixedExperiment && normalQuestion?.action?.action_ref === 'ACTION6') {
       const eligible = [normalQuestion, ...questions.filter(question => question !== normalQuestion
         && question.priority === normalQuestion.priority && question.action.action_ref === 'ACTION6')];
       const targets = openingClickTargets(observation.entities, eligible.map(({ action }) => [action.data.x, action.data.y]));
-      for (const [i, target] of targets.entries()) if (target && (!opening || target.distinctRelations > opening.evidence.distinctRelations)) {
-        opening = { question: eligible[i]!, evidence: target };
+      const offers: OpeningOffer<R>[] = [];
+      for (const [i, evidence] of targets.entries()) {
+        if (evidence) offers.push({ question: eligible[i]!, evidence });
       }
+      opening = selectOpeningOffer(offers);
     }
     const localQuestion = options.sic_opening_curiosity === 'active' && opening ? opening.question : normalQuestion;
     const access = !localQuestion && options.return_episode == null ? await this.access(index, order) : null;

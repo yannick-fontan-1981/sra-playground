@@ -11,6 +11,21 @@ export interface OpeningTarget {
   readonly distinctRelations: number;
 }
 
+export interface OpeningOffer<Question> {
+  readonly question: Question;
+  readonly evidence: OpeningTarget;
+}
+
+/** The caller has already limited these offers to one admissible priority tier.
+ * Keep its question order on ties, including distinct clicks on the same entity. */
+export function selectOpeningOffer<Question>(offers: readonly OpeningOffer<Question>[]): OpeningOffer<Question> | null {
+  let selected: OpeningOffer<Question> | null = null;
+  for (const offer of offers) {
+    if (!selected || offer.evidence.distinctRelations > selected.evidence.distinctRelations) selected = offer;
+  }
+  return selected;
+}
+
 /** Count distinct neighboring roles from measured entity boundaries. A
  * repeated shape on the same side contributes one relation. */
 export function openingClickTargets(entities: readonly NativeEntity[], points: readonly (readonly [number, number])[]) {

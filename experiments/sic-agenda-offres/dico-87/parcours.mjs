@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { evaluateurJeu } from '../evaluateur-jeu.mjs';
 import { mock } from 'node:test';
 import { loadGame } from '../frontiere-22-23/game.mjs';
 import { observeQueries, sha } from './sonde.mjs';
@@ -15,14 +15,7 @@ observeQueries(root, (family, obs, rows, remaining, value) => {
 }, intervention === 'autre-optimum');
 const native = path => import(new URL('src/' + path, root));
 const { SubsetDiagnosis } = await native('logos-engine/v6-subset-diagnosis.ts');
-const { createNativeV6Runtime } = await native('logos-engine/v6-native-runtime.ts');
-const { V6AgentService } = await native('runtime/v6-agent-service.ts');
-const { defaultRecoveryPack } = await native('sic/active-recovery.ts');
-const { defaultBrowserFamilyAgenda } = await native('sic/family-agenda.ts');
-const { toV6PublicObservation } = await native('runtime/v6-agent-protocol.ts');
-const source = new URL('reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6/', root);
-const read = async file => JSON.parse(await readFile(new URL(file, source), 'utf8'));
-const declarations = { common: await read('laya_proto/common_frontier_policy.drm.json'), strategy: await read('morphology_policy/strategy.drm') };
+const { defaultRecoveryPack, createService, packet } = await evaluateurJeu(root);
 const game = await loadGame('DICO', vendor, root);
 const boards = [game.initial];
 mock.method(Date, 'now', () => 1700000000000);
@@ -42,11 +35,8 @@ SubsetDiagnosis.prototype.record = function (...args) {
 };
 const pack = opening === 'curieux' ? { ...defaultRecoveryPack, openingCuriosity: 'active' } : defaultRecoveryPack;
 async function play(mode) {
-  const service = new V6AgentService(config => createNativeV6Runtime(declarations, {
-    recovery: { ...config, familyAgenda: defaultBrowserFamilyAgenda }, now: () => 0,
-  }));
+  const service = createService();
   const sessionId = 'subset-qualification', initial = boards[0];
-  const packet = (board, step) => toV6PublicObservation({ ...board, gameCode: board.code ?? board.gameCode }, step);
   captures = []; posts = [];
   let result = await service.handle({ type: 'init', sessionId, sequence: 0, budgets: {
     targetLevels: initial.levelCount, levelActionCaps: Array(initial.levelCount).fill(600) }, observation: packet(initial, 0), recovery: pack });
