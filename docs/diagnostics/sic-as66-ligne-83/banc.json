@@ -1,0 +1,62 @@
+{
+  "candidate": "1aaafe36177ab73edf63c18f1a0950bd790a9c6c",
+  "freeze": "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+  "srcTreeOnBoth": "a1cbde2afc41532c7c047eb05c8637ef02b584d0",
+  "captureSources": [
+    "1aaafe36177ab73edf63c18f1a0950bd790a9c6c",
+    "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021"
+  ],
+  "comparableFields": "games (complete)",
+  "game": "AS66",
+  "selected": [
+    {
+      "family": "sliding_cavity",
+      "strategy": "sliding_cavity",
+      "entry": "sliding_cavity",
+      "proposal": "cavity_direction_question",
+      "authority": "native",
+      "sequence": 6,
+      "level": 2,
+      "action": 1,
+      "operation": "OP18",
+      "aim": "The retained cavity method has current shape and surface bindings but lacks this input direction; observe it once in this context before binding a complete route.",
+      "advanced": false,
+      "result": null,
+      "packet": "c4485a39bb8578959a9e25bbe7915e08d294fd9121c2f43480298f56dd405f82",
+      "command": {
+        "id": 1
+      },
+      "nextCommand": {
+        "id": 4
+      }
+    },
+    {
+      "family": "sliding_cavity",
+      "strategy": "sliding_cavity",
+      "entry": "sliding_cavity",
+      "proposal": "cavity_direction_question",
+      "authority": "native",
+      "sequence": 7,
+      "level": 2,
+      "action": 4,
+      "operation": "OP18",
+      "aim": "The retained cavity method has current shape and surface bindings but lacks this input direction; observe it once in this context before binding a complete route.",
+      "advanced": false,
+      "result": null,
+      "packet": "0f74e97d13299bc4054beb375439877c9b504c594045fc3d5d6485d6b5201bd2",
+      "command": {
+        "id": 4
+      },
+      "nextCommand": {
+        "id": 1
+      }
+    }
+  ],
+  "startLevel": 1,
+  "seed": 0,
+  "maxActions": 16,
+  "candidateTests": 97,
+  "frozenOverlayTests": 5,
+  "archiveSHA256": "ac1e168da0f169841b0bcd6cd27846e4c04fcad1dfa1505131d51edbc3256368"
+}
