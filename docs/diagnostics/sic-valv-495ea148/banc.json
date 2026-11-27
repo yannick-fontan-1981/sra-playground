@@ -1,0 +1,62 @@
+{
+  "parent": "699ac89e70be0e3cd9bceafa16689552576310a0",
+  "correctif": "495ea14890c1d0cd69de356d40a3b243e0b86f6d",
+  "parentSrc": "6e2b585a7eaf5ff8045989ff4358713cff8d4b53",
+  "correctifSrc": "390d2b149d8ab83d9faa1081e67c264d10947c8c",
+  "preenregistrement": "9f127358332a36df6815fcc73f79ece30d1b3351",
+  "identicalNominal": true,
+  "tests": 254,
+  "lines": {
+    "44": 3,
+    "47": 6,
+    "48": 6
+  },
+  "boundary": {
+    "genuine": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:e5b5caee3d2078be",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946"
+    ],
+    "incorrect": [
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:5113e2c4dd08d801",
+      "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946"
+    ]
+  },
+  "firstDecisionDifference": {
+    "game": "VALV",
+    "level": 2,
+    "turn": 11,
+    "before": {
+      "kind": "field_service_transfer_experiment",
+      "family": "public_occurrence_recall",
+      "action": "ACTION6",
+      "question": "revalidate_source_access",
+      "point": {
+        "x": 11,
+        "y": 35
+      },
+      "admitted": true,
+      "outcome": {
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:44bfab904d5f19a4",
+        "matched": null,
+        "reason": "unknown_control_response_observed"
+      }
+    },
+    "after": {
+      "kind": "nested_control_experiment",
+      "family": "public_occurrence_recall",
+      "action": "ACTION6",
+      "question": "test_unique_nested_compact_motif",
+      "point": {
+        "x": 32,
+        "y": 51
+      },
+      "admitted": true,
+      "outcome": {
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+        "matched": null,
+        "reason": "unknown_control_response_observed"
+      }
+    }
+  },
+  "archiveSHA256": "dbe0ad54cf0aa4b64892692dfca98d2bfeed0ee1bd9b09effc215db48dda08a6"
+}

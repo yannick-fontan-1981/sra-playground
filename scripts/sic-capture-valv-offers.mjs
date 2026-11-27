@@ -9,13 +9,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { sourceBackend } from './sic-study-source-games.mjs';
 
 const [revision, destination, option] = process.argv.slice(2);
-assert.ok(revision && destination && (!option || option === '--retraits'), 'REVISION OUTPUT [--retraits]');
+assert.ok(revision && destination && (!option || ['--retraits', '--frontiere'].includes(option)), 'REVISION OUTPUT [--retraits|--frontiere]');
 const bench = fileURLToPath(new URL('../', import.meta.url));
 const git = (...args) => execFileSync('git', args, { cwd: bench });
 const sha = git('rev-parse', revision + '^{commit}').toString().trim();
 const ref = 'reference/v6/786dcf51ca57773d8e3a8948ce9ea3655e7baf8e/source/agents/yf_arc3_v6';
 const frozen = 'd0e7527ca8033bd805a6d7a8bb021eff62e87021';
-const candidate = '699ac89e70be0e3cd9bceafa16689552576310a0';
 git('diff', '--exit-code', frozen, '--', 'public/python', ref, 'scripts/sic-study-source-games.mjs');
 const read = p => JSON.parse(git('show', sha + ':' + ref + '/' + p));
 const config = { common: read('laya_proto/common_frontier_policy.drm.json'), strategy: read('morphology_policy/strategy.drm') };
@@ -25,7 +24,6 @@ const arms = [
   [47, 5, 'offerFieldService', 'field_service_experiment'],
   [48, 11, 'offerFieldTransfer', 'field_service_transfer_experiment'],
 ];
-if (option) assert.equal(sha, candidate);
 const engine = mkdtempSync(join(tmpdir(), 'valv-banc-'));
 try {
   const tar = join(engine, 'source.tar');
@@ -59,10 +57,25 @@ try {
     }
     return events;
   };
-  async function play(arm) {
+  async function play(arm, wrongBoundary = false) {
     const runtime = await createNativeV6Runtime(config, { now: () => 0 });
     const service = new V6AgentService(() => runtime);
     let withdrawn = 0;
+    const refs = [];
+    let altered;
+    const transfer = prototype.transferEvent;
+    if (wrongBoundary) prototype.transferEvent = function (model, context, stop, evidence) {
+      if (refs.length === 10 && model?.official_boundary_witness && !altered) {
+        assert.deepEqual(model.official_boundary_witness, evidence);
+        const incorrect = [refs[8], evidence[1]];
+        assert.match(incorrect[0], /:epoch:1:revision:9:/);
+        assert.match(evidence[0], /:epoch:1:revision:10:/);
+        assert.match(evidence[1], /:epoch:2:revision:11:/);
+        altered = { genuine: evidence, incorrect };
+        model = { ...model, official_boundary_witness: incorrect };
+      }
+      return transfer.call(this, model, context, stop, evidence);
+    };
     const method = arm?.[2], originalOffer = method && prototype[method];
     if (arm) prototype[method] = function (...args) {
       const offer = originalOffer.apply(this, args);
@@ -84,6 +97,7 @@ try {
           kind: p.kind, phase: plan?.phase, point: ticket.data, action: ticket.actionRef,
           question: p.question?.reason, hypotheses: p.question?.hypothesis_refs, admitted: guard?.admitted };
         assert.equal(row.admitted, true);
+        refs.push(ticket.observationRef);
         const board = game.dispatch({ type: 'action', actionId: Number(ticket.actionRef.slice(6)), data: ticket.data });
         const observation = toV6PublicObservation(board, turn);
         frames.push(digest(observation.frame));
@@ -92,8 +106,10 @@ try {
         const outcome = reply.snapshot.trace.findLast(e => e.kind === 'actual_outcome');
         rows.push({ ...row, outcome: { ref: outcome.observation_ref, matched: outcome.matched, reason: outcome.reason }, acquisitions });
       }
-      return { withdrawn, frames, rows, final: reply.kind, reason: reply.snapshot.reason };
+      if (wrongBoundary) assert.ok(altered);
+      return { withdrawn, altered, frames, rows, final: reply.kind, reason: reply.snapshot.reason };
     } finally {
+      if (wrongBoundary) prototype.transferEvent = transfer;
       if (arm) prototype[method] = originalOffer;
     }
   }
@@ -101,7 +117,7 @@ try {
   for (const [line, turn, , kind] of arms) {
     const expected = line === 44 ? 3 : 6;
     assert.equal(nominal.rows.filter(r => r.kind === kind).length, expected);
-    if (!option) continue;
+    if (option !== '--retraits') continue;
     const result = await play(arms.find(a => a[0] === line));
     assert.deepEqual(result.rows.slice(0, turn - 1), nominal.rows.slice(0, turn - 1));
     const released = result.rows[turn-1];
@@ -113,7 +129,14 @@ try {
     assert.deepEqual(receipt.evidence, [released.ref, released.outcome.ref]);
     withdrawals[line] = result;
   }
-  const report = { source: sha, srcTree: git('rev-parse', sha + ':src').toString().trim(), sessionId, budgets, nominal, withdrawals };
+  const boundary = option === '--frontiere' ? await play(null, true) : undefined;
+  if (boundary) {
+    assert.deepEqual(nominal.rows.slice(0, 9), boundary.rows.slice(0, 9));
+    assert.deepEqual(nominal.frames.slice(0, 11), boundary.frames.slice(0, 11));
+    assert.deepEqual(nominal.rows[9].outcome, boundary.rows[9].outcome);
+    assert.deepEqual(nominal.rows[10].point, { x: 11, y: 35 });
+  }
+  const report = { boundary, source: sha, srcTree: git('rev-parse', sha + ':src').toString().trim(), sessionId, budgets, nominal, withdrawals };
   writeFileSync(resolve(destination), JSON.stringify(report) + '\n', { flag: 'wx' });
   console.log(sha.slice(0,8), nominal.rows.length, Object.keys(withdrawals));
 } finally {
