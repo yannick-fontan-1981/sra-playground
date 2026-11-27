@@ -1,0 +1,7 @@
+# Unintegrated passive collector drafts
+
+These helpers are preserved for the next owner. They do not affect production or the runner. The five public-raster observer tests passed before this archive was relocated. The physical contract has not been exercised against a complete collected campaign. It intentionally has no qualified minima or `requireGridContinuity` entry point yet.
+
+After strict SNAR6/6 is achieved, move the observer and contract into `scripts/`, move/adapt its test into `tests/`, wire `captureGridContinuity` before dispatch, `observeGridReturn` after the public backend return, and `completeGridContinuity` after native reconciliation. Use the final chronological passive campaign to derive per-level physical minima and register the new cohort in the shared gate, preserving all old thresholds. Its import of `./sic-continuity-contract.mjs` is designed for that final `scripts/` location.
+
+The observer counts unique actual carriers directly from the raster, separately from expected targets; it preserves missing, duplicate and unexpected positions. The contract is a draft for exact native ticket identity, ordered single reconciliation, actual ordinary walks, learned stationary holds, rail-clock updates and completed-role evidence. Add a check that acquired known terrain beneath a measured patrol remains unchanged; the observer already records `terrainUnderPatrols`, but that assertion is not implemented here.
