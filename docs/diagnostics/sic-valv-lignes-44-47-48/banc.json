@@ -1,0 +1,411 @@
+{
+  "sources": [
+    "8ce7ee3563fa1d5eca1639c6ad03975cfc962460",
+    "d0e7527ca8033bd805a6d7a8bb021eff62e87021",
+    "699ac89e70be0e3cd9bceafa16689552576310a0"
+  ],
+  "identicalNominal": true,
+  "controls": {
+    "frozenTests": 246,
+    "candidateTests": 252
+  },
+  "lines": {
+    "44": {
+      "positions": [
+        2,
+        3,
+        4
+      ],
+      "withdrawn": "envelope_fill_experiment",
+      "fallback": {
+        "turn": 2,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:2",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:295ef69927a324e5",
+        "family": "public_occurrence_recall",
+        "kind": "nested_control_experiment",
+        "point": {
+          "x": 32,
+          "y": 50
+        },
+        "action": "ACTION6",
+        "question": "test_unique_nested_compact_motif",
+        "hypotheses": [],
+        "admitted": true,
+        "outcome": {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658",
+          "matched": null,
+          "reason": "unknown_control_response_observed"
+        },
+        "acquisitions": [
+          {
+            "kind": "nested_control_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:295ef69927a324e5",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658"
+            ],
+            "changed": 143,
+            "inside": 0,
+            "outside": 143,
+            "point": [
+              32,
+              50
+            ]
+          },
+          {
+            "kind": "envelope_fill_context",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:295ef69927a324e5",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658"
+            ],
+            "nextPhase": "repeat"
+          }
+        ]
+      },
+      "next": {
+        "turn": 3,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:3",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658",
+        "family": "public_occurrence_recall",
+        "kind": "envelope_fill_experiment",
+        "phase": "repeat",
+        "point": {
+          "x": 32,
+          "y": 50
+        },
+        "action": "ACTION6",
+        "question": "measure_envelope_repeat",
+        "hypotheses": [],
+        "admitted": true,
+        "outcome": {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:cde1b5db276f7597",
+          "matched": null,
+          "reason": "unknown_control_response_observed"
+        },
+        "acquisitions": [
+          {
+            "kind": "nested_control_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:cde1b5db276f7597"
+            ],
+            "changed": 187,
+            "inside": 0,
+            "outside": 187,
+            "point": [
+              32,
+              50
+            ]
+          },
+          {
+            "kind": "envelope_fill_context",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:cde1b5db276f7597"
+            ],
+            "nextPhase": "contrast",
+            "repeatable": false
+          }
+        ]
+      },
+      "strictStatus": "qualified"
+    },
+    "47": {
+      "positions": [
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "withdrawn": "field_service_experiment",
+      "fallback": {
+        "turn": 5,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:5",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:cde1b5db276f7597",
+        "family": "public_occurrence_recall",
+        "kind": "nested_control_experiment",
+        "point": {
+          "x": 32,
+          "y": 50
+        },
+        "action": "ACTION6",
+        "question": "test_unique_nested_compact_motif",
+        "hypotheses": [],
+        "admitted": true,
+        "outcome": {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5",
+          "matched": null,
+          "reason": "unknown_control_response_observed"
+        },
+        "acquisitions": [
+          {
+            "kind": "nested_control_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:cde1b5db276f7597",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5"
+            ],
+            "changed": 72,
+            "inside": 0,
+            "outside": 72,
+            "point": [
+              32,
+              50
+            ]
+          },
+          {
+            "kind": "envelope_fill_context",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:cde1b5db276f7597",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5"
+            ],
+            "nextPhase": "service_choice_required",
+            "restoredFields": true,
+            "repeatable": false
+          },
+          {
+            "kind": "field_service_context",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:cde1b5db276f7597",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5"
+            ],
+            "nextPhase": "isolate",
+            "attempts": 0
+          }
+        ]
+      },
+      "next": {
+        "turn": 6,
+        "level": 1,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:6",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5",
+        "family": "public_occurrence_recall",
+        "kind": "field_service_experiment",
+        "phase": "isolate",
+        "point": {
+          "x": 50,
+          "y": 33
+        },
+        "action": "ACTION6",
+        "question": "conditional_field_isolate",
+        "hypotheses": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:1:frame:cde1b5db276f7597",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:295ef69927a324e5",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:2:frame:295ef69927a324e5",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:3:frame:63102c58c15e2658",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:295ef69927a324e5",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:4:frame:295ef69927a324e5",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:cde1b5db276f7597",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:cde1b5db276f7597",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5"
+        ],
+        "admitted": true,
+        "outcome": {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:a068d0b31f24992a",
+          "matched": null,
+          "reason": "unknown_control_response_observed"
+        },
+        "acquisitions": [
+          {
+            "kind": "nested_control_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:a068d0b31f24992a"
+            ],
+            "changed": 32,
+            "inside": 10,
+            "outside": 22,
+            "point": [
+              50,
+              33
+            ]
+          },
+          {
+            "kind": "field_service_context",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:a068d0b31f24992a"
+            ],
+            "changed": 32,
+            "nextPhase": "serve",
+            "fieldsPreserved": true,
+            "orientationChanged": true,
+            "attempts": 0
+          },
+          {
+            "kind": "field_service_transfer",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:295ef69927a324e5",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:a068d0b31f24992a"
+            ]
+          }
+        ]
+      },
+      "strictStatus": "qualified"
+    },
+    "48": {
+      "positions": [
+        11,
+        12,
+        13,
+        14,
+        15,
+        16
+      ],
+      "withdrawn": "field_service_transfer_experiment",
+      "fallback": {
+        "turn": 11,
+        "level": 2,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:11",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946",
+        "family": "public_occurrence_recall",
+        "kind": "nested_control_experiment",
+        "point": {
+          "x": 32,
+          "y": 51
+        },
+        "action": "ACTION6",
+        "question": "test_unique_nested_compact_motif",
+        "hypotheses": [],
+        "admitted": true,
+        "outcome": {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+          "matched": null,
+          "reason": "unknown_control_response_observed"
+        },
+        "acquisitions": [
+          {
+            "kind": "nested_control_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946"
+            ],
+            "changed": 0,
+            "inside": 0,
+            "outside": 0,
+            "point": [
+              32,
+              51
+            ]
+          },
+          {
+            "kind": "envelope_fill_context",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946"
+            ],
+            "nextPhase": "service_choice_required",
+            "restoredFields": true,
+            "repeatable": false
+          }
+        ]
+      },
+      "next": {
+        "turn": 12,
+        "level": 2,
+        "id": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:native:12",
+        "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+        "family": "public_occurrence_recall",
+        "kind": "field_service_transfer_experiment",
+        "phase": "revalidate_source_access",
+        "point": {
+          "x": 11,
+          "y": 35
+        },
+        "action": "ACTION6",
+        "question": "revalidate_source_access",
+        "hypotheses": [
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:5:frame:cde1b5db276f7597",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:e750e6d7402b163a",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:6:frame:e750e6d7402b163a",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:dc902371304c45dc",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:7:frame:dc902371304c45dc",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:08c797be765ceb92",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:8:frame:08c797be765ceb92",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:5113e2c4dd08d801",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:5113e2c4dd08d801",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:e5b5caee3d2078be",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:e5b5caee3d2078be",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946",
+          "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946"
+        ],
+        "admitted": true,
+        "outcome": {
+          "ref": "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:44bfab904d5f19a4",
+          "matched": null,
+          "reason": "unknown_control_response_observed"
+        },
+        "acquisitions": [
+          {
+            "kind": "nested_control_response",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:44bfab904d5f19a4"
+            ],
+            "changed": 35,
+            "inside": 10,
+            "outside": 25,
+            "point": [
+              11,
+              35
+            ]
+          },
+          {
+            "kind": "field_service_transfer",
+            "evidence": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:44bfab904d5f19a4"
+            ],
+            "boundaryWitness": [
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:e5b5caee3d2078be",
+              "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946"
+            ],
+            "lastControl": {
+              "point": [
+                11,
+                35
+              ],
+              "from": "horizontal",
+              "to": "vertical",
+              "evidence": [
+                "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:12:frame:a11b2b9fad91b946",
+                "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:13:frame:44bfab904d5f19a4"
+              ]
+            },
+            "sourceRevalidated": false
+          }
+        ]
+      },
+      "strictStatus": "open_boundary_provenance",
+      "boundaryCounterexample": {
+        "operator": "e835a6eec139bad091b7dc9481944e2f8c5b4c14",
+        "witness": {
+          "avant": [
+            "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:10:frame:e5b5caee3d2078be",
+            "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946"
+          ],
+          "après": [
+            "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:1:revision:9:frame:5113e2c4dd08d801",
+            "sra-v6-f8f552d2-2a43-4897-9ef4-aba266fe9c10:epoch:2:revision:11:frame:a11b2b9fad91b946"
+          ]
+        },
+        "incorrectlyAdmitted": [
+          "d0e7527c",
+          "699ac89e"
+        ],
+        "turn": 11,
+        "point": [
+          11,
+          35
+        ]
+      }
+    }
+  },
+  "archiveSHA256": "a8a9b6dc43f60a3155cfd86f94640776d7d6f25e071bfa444815beb7b7406f5b"
+}
