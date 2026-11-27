@@ -52,3 +52,30 @@ Les durées d’exécution et les métadonnées de présentation du viewer sont 
 | Copie coupée après 25 événements | L1, tour 3, événement 26 | `$event` | décision présente → absente |
 
 Les positions attendues sont fixées dans le test. Il vérifie les valeurs complètes avec le même comparateur que le rejeu natif, ainsi que la troncature en sens inverse et au milieu d’une ligne.
+
+## Relais à P05 — comparer A au candidat B
+
+Les fichiers A conservés sur ce poste se trouvent dans `D:/dev/ARC-AGI/SRA-Playground/sic-comparison-bench/artifacts/sic-comparison/run-VVq4CG/`. Pour chaque jeu, `<jeu>-A.jsonl` est la trace et `<jeu>-A.receipt` est le reçu natif. `report.json` rassemble le verdict des trois paires A/A′.
+
+Ouvrir PowerShell à la racine du checkout candidat. Le lanceur du banc charge `src` et le backend de jeu depuis le répertoire courant. Les scripts de mesure et le fichier de plafonds viennent du checkout du banc. Le contrôle d’identité de `src` dans `sic-comparison-bench.mjs` continue à protéger la production des références A/A′.
+
+```powershell
+$banc = 'D:/dev/ARC-AGI/SRA-Playground/sic-comparison-bench'
+$a = Join-Path $banc 'artifacts/sic-comparison/run-VVq4CG'
+$node24 = (& npx.cmd --yes --package=node@24.22.3 -c 'node -p process.execPath').Trim()
+$b = New-Item -ItemType Directory -Path (Join-Path $banc ('artifacts/sic-comparison/candidat-' + [guid]::NewGuid()))
+git rev-parse HEAD | Set-Content (Join-Path $b.FullName 'candidat.sha')
+& $node24 scripts/prepare-python.mjs
+if ($LASTEXITCODE) { throw 'Préparation Pyodide en échec' }
+$env:SIC_REPLAY_REFERENCES = Join-Path $banc 'docs/architecture/sic-replay-reference-levels-20261126.json'
+foreach ($jeu in 'AS66','G50T','HOLE') {
+  $env:SIC_DECISION_TRACE = Join-Path $b.FullName "$jeu-B.jsonl"
+  $recu = Join-Path $b.FullName "$jeu-B.receipt"
+  & $node24 (Join-Path $banc 'scripts/check-sic-chronological.mjs') $jeu auto $recu 1 sic
+  if ($LASTEXITCODE) { throw "Échec du lanceur pour $jeu" }
+  Get-Content -Raw $recu | ConvertFrom-Json | Select-Object code, levels, actions, status, reason, message
+  & $node24 (Join-Path $banc 'scripts/compare-sic-decisions.mjs') (Join-Path $a "$jeu-A.jsonl") $env:SIC_DECISION_TRACE
+}
+```
+
+Le comparateur indique `equal: true` ou le premier écart pour chaque jeu. Le reçu conserve un éventuel arrêt sur budget. La capture depuis un checkout distinct a été vérifiée avec HOLE au SHA du gel : 6/6, 78 décisions, 784 événements identiques à A. La comparaison du candidat P05 reste à exécuter. Sur un autre poste, recréer A avec la commande de reproduction et désigner son dossier dans `$a`.
