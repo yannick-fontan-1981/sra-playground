@@ -1,0 +1,125 @@
+{
+  "kind": "offline-public-capture-reacquisition",
+  "nativeGameExecuted": false,
+  "sources": {
+    "src/sic/compartment-growth.ts": "220c3343c82890a4d2e61d3f03dbd04a83f097275edce086035a7170ae92dd7c",
+    "src/sic/directional-reception.ts": "b7ef6be7af806e18940a5a1e52e86ee4b0ad7ea80b5ecfab49d59560ae654888",
+    "src/sic/observed-role-completion.ts": "e7297d97c85f644716615789e0c3ce998fd1d080abc8a87169cce57ad9d6b873",
+    "src/sic/public-input-exploration.ts": "49c7206e552710f49a8aed59cce662fea7253c871908ba0f7fad09b1d86ff61c"
+  },
+  "UPST": {
+    "captureSha256": "9263d37d09e38117c643f454ae0cd1d7dadd4071dc7ef2a54e72b924b7cfde0e",
+    "winningOrdinal": 23,
+    "beforeCompleted": 1,
+    "model": {
+      "food": 14,
+      "starter": 11,
+      "activated": 12,
+      "grower": 8,
+      "threshold": 15,
+      "completed": 2,
+      "evidence": [
+        "public-reacquisition:epoch:1:revision:16:frame:capture-16",
+        "public-reacquisition:epoch:1:revision:19:frame:capture-19",
+        "public-reacquisition:epoch:2:revision:20:frame:capture-20",
+        "public-reacquisition:epoch:2:revision:23:frame:capture-23",
+        "public-reacquisition:epoch:3:revision:24:frame:capture-24"
+      ]
+    },
+    "fallbackModel": {
+      "food": 14,
+      "starter": 11,
+      "activated": 12,
+      "grower": 8,
+      "threshold": 15,
+      "completed": 2,
+      "evidence": [
+        "public-reacquisition:epoch:1:revision:16:frame:capture-16",
+        "public-reacquisition:epoch:1:revision:19:frame:capture-19",
+        "public-reacquisition:epoch:2:revision:20:frame:capture-20",
+        "public-reacquisition:epoch:2:revision:23:frame:capture-23",
+        "public-reacquisition:epoch:3:revision:24:frame:capture-24"
+      ]
+    },
+    "firstNextOffer": {
+      "actions": [
+        {
+          "action_ref": "ACTION6",
+          "data": {
+            "x": 49,
+            "y": 13
+          }
+        }
+      ],
+      "strategy": "P05",
+      "situation": "Open the next passage toward resources that the small sprites can reach.",
+      "evidence": [
+        "public-reacquisition:epoch:3:revision:24:frame:capture-24",
+        "public-reacquisition:epoch:1:revision:16:frame:capture-16",
+        "public-reacquisition:epoch:1:revision:19:frame:capture-19",
+        "public-reacquisition:epoch:2:revision:20:frame:capture-20",
+        "public-reacquisition:epoch:2:revision:23:frame:capture-23"
+      ]
+    }
+  },
+  "CWSE": {
+    "captureSha256": "d8e43ebfaba279614e693ef7ba29b5036b1bdba348e9e0e7cf79ef2e8f5c8abc",
+    "winningOrdinal": 9,
+    "beforeKnown": {
+      "completed": 1,
+      "directions": {
+        "ACTION4": [
+          1,
+          0
+        ]
+      },
+      "pitch": 5,
+      "ref": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:5:frame:f172436b7a7b73f1"
+    },
+    "known": {
+      "completed": 2,
+      "directions": {
+        "ACTION4": [
+          1,
+          0
+        ]
+      },
+      "pitch": 5,
+      "ref": "public-reacquisition:epoch:3:revision:10:frame:capture-10",
+      "evidence": [
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:5:frame:f172436b7a7b73f1",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:9:frame:5088653b3ac06db2",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:6:frame:5e2896faea4b908f",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:7:frame:9a806c6c33f64357",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:8:frame:7e73d3bf8bcf3680",
+        "public-reacquisition:epoch:2:revision:9:frame:capture-9",
+        "public-reacquisition:epoch:3:revision:10:frame:capture-10"
+      ]
+    },
+    "photo": {
+      "epoch": 2,
+      "lit": 14,
+      "ref": "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:9:frame:5088653b3ac06db2",
+      "shadow": 15
+    },
+    "firstNextOffer": {
+      "actions": [
+        {
+          "action_ref": "ACTION4",
+          "data": {}
+        }
+      ],
+      "strategy": "P07",
+      "situation": "Move along the route and verify the cursor, the pieces and the occupied receivers",
+      "evidence": [
+        "public-reacquisition:epoch:3:revision:10:frame:capture-10",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:9:frame:5088653b3ac06db2",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:5:frame:f172436b7a7b73f1",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:6:frame:5e2896faea4b908f",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:7:frame:9a806c6c33f64357",
+        "sra-v6-98d555fa-6cf9-42fc-b483-9225bfc834d9:epoch:2:revision:8:frame:7e73d3bf8bcf3680",
+        "public-reacquisition:epoch:2:revision:9:frame:capture-9"
+      ]
+    }
+  }
+}
