@@ -61,3 +61,11 @@ WA30 won 9/9 in 613 actions on both the private Site 212 and port 4173. Each run
 PR144 passed all 38 checks on the same Git tree. The strict campaign confirmed all ten games and the continuity gate validated 170 levels across 26 games and 25 cohorts. The successful and failed qualification receipts remain on [the PR144 audit branch](https://github.com/yannick-fontan-1981/sra-playground/tree/39236e89787f786900c62bd497bd115c00a999d3/docs/diagnostics/sic-10-integration-20261127).
 
 All 27 corrections from the original campaign are qualified and integrated. The qualification record combines multiple revisions. The original complete campaign remains the recorded 80/107 result for a single revision.
+
+## Campaign of 107 games after the SNAR and HOLE fixes
+
+The full campaign on `4be368a365a6347fb551bb4c73dd5756413bb34e` completed 107/107 games and won and reconciled 692/692 levels under the original ceilings. GitHub took 14 minutes 30 seconds with 24 shards and a measured peak of 16 simultaneous shard jobs. [Campaign evidence](https://github.com/yannick-fontan-1981/sra-playground/tree/e36b550cfcaa79f5ee210694a8569cdf47265323/docs/diagnostics/sic-107-4be368a3-20261127)
+
+PR145 passed 38 checks, including continuity on 170 levels. Integrated main `d0e7527ca8033bd805a6d7a8bb021eff62e87021` and the tested commit have the same tree. The integrated SHA was deployed to private Site 213 and rebuilt locally on port 4173. Both surfaces served `/assets/index-CXRgbhOv.js`. The local replays began on the identical build of the campaign SHA while the last PR check was in progress.
+
+Each game won in one SIC session starting at level 1 on each surface. SNAR won 6/6 in 163 actions, and HOLE won 6/6 in 78 actions. The exact counts and timestamps are in [the Site 213 viewer receipt](SNAR-HOLE-complete-site213.json).
