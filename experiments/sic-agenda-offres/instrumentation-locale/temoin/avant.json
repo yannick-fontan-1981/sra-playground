@@ -1,0 +1,38 @@
+[
+  {
+    "event": {
+      "invocation": 1,
+      "family": "sic_verify_remote_replay",
+      "observationRef": "fixture-approche-contact:epoch:1:revision:1:frame:695ec10b2665d4ae",
+      "facts": {
+        "routeSupported": true,
+        "eligibleProbe": false,
+        "knownInteraction": false,
+        "mode": "assimilation"
+      },
+      "evidence": [
+        "fixture-approche-contact:epoch:1:revision:1:frame:695ec10b2665d4ae",
+        "fixture:directions-acquises"
+      ]
+    },
+    "sha256": "295312e289f087d031a41648114f985eb4f354833fed713708abe5870479a8eb"
+  },
+  {
+    "event": {
+      "invocation": 2,
+      "family": "sic_verify_remote_replay",
+      "observationRef": "fixture-approche-contact:epoch:1:revision:2:frame:5ad286ca7e5687ed",
+      "facts": {
+        "routeSupported": false,
+        "eligibleProbe": true,
+        "knownInteraction": false,
+        "mode": "solving"
+      },
+      "evidence": [
+        "fixture-approche-contact:epoch:1:revision:2:frame:5ad286ca7e5687ed",
+        "fixture:directions-acquises"
+      ]
+    },
+    "sha256": "0d648e2ded8e47f79e76a560bbfebc487c516dffb0efebde249924ab8f481d10"
+  }
+]

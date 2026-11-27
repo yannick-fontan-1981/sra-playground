@@ -3,6 +3,7 @@ import { temporalPatch } from '../logos-engine/v6-linked-temporal-common.ts';
 import { geometricComponents } from '../logos-engine/v6-native-observer.ts';
 import type { NativeBox, NativeExecution, NativeFamily, NativeObservation, NativePoint, NativeProgramHandle, NativeProposal, NativeRecord, NativeRows } from '../logos-engine/v6-native-types.ts';
 import { chooseLanding, landingModule } from './highlighted-route-card.ts';
+import { RecordingDecisionObservations } from './recording-decision-observation.ts';
 import { sicNeedId } from './need-identity.ts';
 import { maximumCommittedActions, unchangedOutside } from './plan-step.ts';
 import { beginRecording, chooseRecording, linkedTransfers, needsTransferPulse, observeRecording, openSupports, recordingActor, replaySprites,
@@ -89,8 +90,13 @@ function peerBounds(points: readonly NativePoint[]): NativeBox | null {
   return [Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys)];
 }
 
+function recordingEvidence(ref: string, recording: Recording): [string, ...string[]] {
+  return [ref, ...new Set([...recording.paths.flatMap(item => item.evidence), ...recording.evidence].filter(item => item !== ref))];
+}
+
 async function proposeRecording(observation: NativeObservation, rows: NativeRows, current: Recording,
-  decide: NativeProgramHandle, execution: NativeExecution | undefined, family: string): Promise<RecordedProposal | null> {
+  decide: NativeProgramHandle, execution: NativeExecution | undefined, family: string,
+  observations?: RecordingDecisionObservations): Promise<RecordedProposal | null> {
   const choice = chooseRecording(observation, rows, current);
   const from = recordingActor(observation, current.scene);
   if (!choice || !from || !observation.available_action_refs.includes(choice.command.action_ref)) return null;
@@ -102,6 +108,7 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   const measuringShift = !recording.paths.length && shifts.some(item => !item.event && equal(item.node.position, destination));
   const probing = pulseProbe || !!measuringShift && equal(choice.expected, destination);
   const facts = { routeSupported: !knownInteraction && !probing, eligibleProbe: probing, knownInteraction, mode };
+  if (observations) RecordingDecisionObservations.capture(observations, family, ref, facts, recordingEvidence(ref, recording));
   const decision = await decide.run({ situation: facts }, { signal: execution?.signal });
   const strategy = knownInteraction ? 'P02' : probing ? 'P05' : 'P07';
   if (decision.result !== strategy) return null;
@@ -123,8 +130,7 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
     : auxiliary && recording.paths.length === scene.slots.length - 1 ? 'Cross while the independent carrier keeps the relevant passage open'
     : recording.node ? 'Reach another contact while checking the replayed paths'
       : 'Reach the receiver while the recorded contacts keep the passages open';
-  const evidence: [string, ...string[]] = [ref, ...new Set([...recording.paths.flatMap(item => item.evidence), ...recording.evidence]
-    .filter(item => item !== ref))];
+  const evidence = recordingEvidence(ref, recording);
   const parent = 'G_official_completion';
   const objective = { kind: 'coordinate_recorded_contributions_to_access_receiver', scope: ref.split(':revision:', 1)[0]!,
     subjects: ['carrier', 'recorded_contributions', 'open_receiver'], parentObjective: parent,
@@ -151,7 +157,7 @@ async function proposeRecording(observation: NativeObservation, rows: NativeRows
   };
 }
 
-export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): NativeFamily<ReplayProposal> {
+export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId, observations?: RecordingDecisionObservations): NativeFamily<ReplayProposal> {
   const learns = family === learnRemoteReplayId;
   let state: State | null = null;
   let recording: Recording | null = null;
@@ -167,7 +173,7 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
       const previous = state?.epoch === epoch ? state : null;
       if (previous?.stopped || (previous?.count ?? 0) >= 72) return null;
       const running = recording?.epoch === epoch ? recording : null;
-      if (running) return decide ? proposeRecording(observation, rows, running, decide, execution, family) : null;
+      if (running) return decide ? proposeRecording(observation, rows, running, decide, execution, family, observations) : null;
       let scene = previous?.scene ?? sceneAtStart(observation, rows);
       if (!scene) return null;
       if (scene.slots.length > 2) {
@@ -179,7 +185,7 @@ export function createSicVerifyRemoteReplay(family = verifyRemoteReplayId): Nati
             .filter((ref): ref is string => !!ref);
           current = beginRecording(scene, epoch, state.controls, state.replay, [...new Set(evidence)], rows, observation);
         }
-        return current && decide ? proposeRecording(observation, rows, current, decide, execution, family) : null;
+        return current && decide ? proposeRecording(observation, rows, current, decide, execution, family, observations) : null;
       }
       const from = actorPosition(observation, scene);
       if (!from) return null;

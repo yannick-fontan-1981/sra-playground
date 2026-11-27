@@ -1,0 +1,24 @@
+[
+  {
+    "observationRef": "fixture-approche-contact:epoch:1:revision:1:frame:695ec10b2665d4ae",
+    "family": "sic_verify_remote_replay",
+    "strategy": "P07",
+    "proposalDigest": "b7d6dc48648e7808f31d23e65605ed755b3c026a494aaa186a66cd698092ed5a",
+    "command": {
+      "actionRef": "ACTION4",
+      "data": {}
+    },
+    "index": 0
+  },
+  {
+    "observationRef": "fixture-approche-contact:epoch:1:revision:2:frame:5ad286ca7e5687ed",
+    "family": "sic_verify_remote_replay",
+    "strategy": "P05",
+    "proposalDigest": "6d68e44ebb450348c899d49a7b4db80ec2fc808b166d48a9024933d11b95d348",
+    "command": {
+      "actionRef": "ACTION4",
+      "data": {}
+    },
+    "index": 0
+  }
+]

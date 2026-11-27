@@ -1,0 +1,19 @@
+{
+  "event": [
+    {
+      "observationRef": "fixture-approche-contact:epoch:1:revision:1:frame:695ec10b2665d4ae",
+      "invocation": 1,
+      "family": "sic_verify_remote_replay",
+      "sha256": "295312e289f087d031a41648114f985eb4f354833fed713708abe5870479a8eb",
+      "decision": "P07"
+    },
+    {
+      "observationRef": "fixture-approche-contact:epoch:1:revision:2:frame:5ad286ca7e5687ed",
+      "invocation": 2,
+      "family": "sic_verify_remote_replay",
+      "sha256": "0d648e2ded8e47f79e76a560bbfebc487c516dffb0efebde249924ab8f481d10",
+      "decision": "P05"
+    }
+  ],
+  "sha256": "90cd99e8accc1047f6fb4f50bbee5b3367cfb2ef45ff9607d3eef200ac04a709"
+}

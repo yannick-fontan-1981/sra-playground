@@ -6,6 +6,8 @@ Base vérifiée dans un checkout propre, `d0e7527ca8033bd805a6d7a8bb021eff62e870
 
 ## Rejouer hors ligne
 
+La branche d’instrumentation contient un [rejeu natif de l’approche au contact](instrumentation-locale/README.md) avec prédiction locale scellée, reçus séparés et comparaison sonde active/inactive.
+
 Depuis la racine du checkout, sous PowerShell :
 
 ```powershell
