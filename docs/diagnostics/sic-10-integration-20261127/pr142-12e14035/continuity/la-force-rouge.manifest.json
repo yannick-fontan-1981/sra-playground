@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "12e1403500b9bd6193dd7be015acbe37aaa48828",
+  "runId": "46019347091",
+  "name": "la-force-rouge",
+  "cohort": "SS02",
+  "codes": [
+    "SS02"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 160,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "la-force-rouge.jsonl",
+  "sha256": "3a40c6184624d97b63ac863d4c003d18a9dd197904336f27ba9a59f6fabf6dde"
+}

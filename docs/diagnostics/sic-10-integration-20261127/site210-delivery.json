@@ -1,0 +1,26 @@
+{
+  "schema": "sic.second-batch-delivery.v1",
+  "pullRequest": 142,
+  "main": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "tree": "ed2a800a9727f4c6c4b8b46409f759f42126c47e",
+  "checkedHead": "dedba47f12120c8f60f65fd6e07e999b7b7166c8",
+  "testedMerge": "12e1403500b9bd6193dd7be015acbe37aaa48828",
+  "strictRunId": 46019347021,
+  "continuityRunId": 46019347091,
+  "passedChecks": 27,
+  "site": {
+    "versionNumber": 210,
+    "versionId": "appgprj_6adbc388d79081918581b93b919d7258~appgver_29e0d0a520f481918994ee82bd456457",
+    "deploymentId": "appgprj_6adbc388d79081918581b93b919d7258~appgdep_c9edc3cd926c81918d591139ae02cde1",
+    "sourceSha": "4313d7ce41505cece5f397dc8125b430697176ed",
+    "status": "succeeded",
+    "publicationStage": "ready",
+    "url": "https://sra-playground.yannick-fontan.chatgpt.site",
+    "accessMode": "custom",
+    "accessPolicyRevision": 3,
+    "allowedAccountCount": 1,
+    "allowedGroupCount": 0
+  },
+  "localPreview": "http://127.0.0.1:4173/",
+  "bundleServedByBoth": "index-5nnSgotL.js"
+}

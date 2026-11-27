@@ -46,3 +46,22 @@ PR141 a finalement fusionné normalement, après les **24 checks verts** de la t
 La branche d'intégration suivante a incorporé ce main. Ses **162 niveaux** de contrats passent sur les reçus physiques conservés : 138 du premier lot, LF52 (10), SK48 (8), ETAG (6). Les 38 tests de contrat de ces trois ajouts passent ensemble. La prochaine CI rejouera leurs parties sur la source combinée ; les archives actuelles restent liées à leurs sources individuelles. SK48 reproduit348 commandes et ETAG274 avec leurs observations passives ; ETAG conserve aussi exactement la trace complète du strict après sa correction de scope.
 
 Le workflow strict inclut maintenant les huit jeux qualifiés. Son délai global passe à45 minutes pour la cohorte séquentielle élargie ; les limites de commandes et de temps de chaque niveau restent les limites originales. SNAR demeure5/6 et WA30 est en cours de nouveau rejeu ; leurs niveaux finaux ne sont pas ajoutés avant qualification.
+
+## PR142 fusionnée et Site 210 publié
+
+Les 27 contrôles de la PR142 ont réussi sur la tête `dedba47f12120c8f60f65fd6e07e999b7b7166c8`. Les workflows [strict](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46019347021) et [continuité](https://github.com/yannick-fontan-1981/sra-playground/actions/runs/46019347091) ont testé le merge synthétique `12e1403500b9bd6193dd7be015acbe37aaa48828`. Le merge sur `main`, `4313d7ce41505cece5f397dc8125b430697176ed`, a les mêmes parents et exactement le même arbre `ed2a800a9727f4c6c4b8b46409f759f42126c47e`.
+
+| Jeu | Niveaux stricts | Commandes par niveau | Total |
+| --- | ---: | --- | ---: |
+| CGWL | 6/6 | 15, 16, 15, 18, 61, 42 | 167 |
+| DC22 | 6/6 | 22, 44, 45, 76, 185, 258 | 630 |
+| ETAG | 6/6 | 7, 35, 40, 46, 66, 80 | 274 |
+| GRAV | 6/6 | 11, 32, 6, 8, 13, 10 | 80 |
+| LF52 | 10/10 | 8, 40, 46, 54, 99, 91, 148, 68, 112, 47 | 713 |
+| SK48 | 8/8 | 19, 39, 33, 33, 33, 69, 80, 42 | 348 |
+| SPOR | 6/6 | 14, 14, 17, 17, 29, 30 | 121 |
+| WEAV | 6/6 | 27, 28, 24, 40, 40, 40 | 199 |
+
+Les 24 cohortes protègent 162 niveaux de 25 jeux. Le contrôle déterministe `npm run test:sic-continuity` et la validation du manifeste strict ont réussi sur les reçus CI téléchargés. L’[index des reçus](pr142-12e14035/receipt-index.json) relie les pièces conservées à leurs empreintes SHA-256 avant compression. Le strict a été exécuté dans GitHub Actions avec un worker et les plafonds originaux.
+
+Le [reçu de livraison du Site 210](site210-delivery.json) atteste le statut `succeeded/ready` et le SHA source exact de `main`. L’audience privée est restée à un compte et zéro groupe. L’aperçu local sur le port 4173 et la version hébergée servent le même bundle. Les reçus de parcours dans le viewer sont suivis sur la branche dédiée.

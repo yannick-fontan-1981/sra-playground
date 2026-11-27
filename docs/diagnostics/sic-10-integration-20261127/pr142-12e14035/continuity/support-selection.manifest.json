@@ -1,0 +1,17 @@
+{
+  "schema": "sic.continuity-ci.v1",
+  "sha": "12e1403500b9bd6193dd7be015acbe37aaa48828",
+  "runId": "46019347091",
+  "name": "support-selection",
+  "cohort": "source:SK48",
+  "codes": [
+    "SK48"
+  ],
+  "start": 1,
+  "end": 8,
+  "cap": 96,
+  "solver": "sic",
+  "parallelWorkers": 1,
+  "file": "support-selection.jsonl",
+  "sha256": "a209cca719b6c4cf3c822c7436dc4caba2769f08f54b3ebe01e51fb5f3fa4097"
+}

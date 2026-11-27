@@ -1,0 +1,285 @@
+{
+  "schema": "sic.integration-receipts.v1",
+  "pr": 142,
+  "head": "dedba47f12120c8f60f65fd6e07e999b7b7166c8",
+  "testedMerge": "12e1403500b9bd6193dd7be015acbe37aaa48828",
+  "integrated": "4313d7ce41505cece5f397dc8125b430697176ed",
+  "tree": "ed2a800a9727f4c6c4b8b46409f759f42126c47e",
+  "strictRunId": 46019347021,
+  "continuityRunId": 46019347091,
+  "continuityLevels": 162,
+  "continuityGames": 25,
+  "continuityCohorts": 24,
+  "files": [
+    {
+      "path": "strict/manifest.json",
+      "rawSha256": "050f5e25a2665af14d4f33ab98ecefc572307a3d0eef99c58de680ac944b5c6c",
+      "rawBytes": 1034
+    },
+    {
+      "path": "strict/source.sha",
+      "rawSha256": "3e6b45c915f16ce56ec124555465cfa406589e2104870a084c22e5fb88d81243",
+      "rawBytes": 41
+    },
+    {
+      "path": "strict/strict.jsonl.gz",
+      "rawSha256": "55cb1b3b19d12da20d29ca0630962d2133b8c852c705d856f0e2801934abbba4",
+      "rawBytes": 435234
+    },
+    {
+      "path": "strict/strict.jsonl.levels.gz",
+      "rawSha256": "2b73c03c6eda88acbdd6d40699bb92eb341bb5a43e17b4593453f835254a8811",
+      "rawBytes": 35102
+    },
+    {
+      "path": "strict/artifacts.json",
+      "rawSha256": "2c7b5d979809dfa60347282ee78a58dffee7380999891a489b3bd66a3d7b7504",
+      "rawBytes": 183
+    },
+    {
+      "path": "continuity/actor-composition.jsonl.gz",
+      "rawSha256": "d0def7a7e5b16ba0f4dc0bc3d46a3262502e01944d047ec2fd996f6f84ad4b5c",
+      "rawBytes": 680767
+    },
+    {
+      "path": "continuity/actor-composition.manifest.json",
+      "rawSha256": "eb55b2d60f6abcf8e416aa6ac2353786af27ff605d7ed8d06c9fe357e9c71914",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/cargo-transport.jsonl.gz",
+      "rawSha256": "4edfee9ddda2e8f2529a9f5d128ca5858ffe57339d8450e06f99abab7ea6f7d7",
+      "rawBytes": 325785
+    },
+    {
+      "path": "continuity/cargo-transport.manifest.json",
+      "rawSha256": "bd754062adb2b20a4f1d2b806d4d0ae47180b36d00a02ded41937461a41be992",
+      "rawBytes": 401
+    },
+    {
+      "path": "continuity/carrier-preparation.jsonl.gz",
+      "rawSha256": "3bc9fc69e29a15927c559a91981a513fdfd48a3026271f1e34f5b1f3ef02ae33",
+      "rawBytes": 2131323
+    },
+    {
+      "path": "continuity/carrier-preparation.manifest.json",
+      "rawSha256": "faa43a9055d6ef3a7f467ced14760252ba738799782d6e41f882ec0934380367",
+      "rawBytes": 410
+    },
+    {
+      "path": "continuity/crossing-rows.jsonl.gz",
+      "rawSha256": "ec52ccb172cb7dda5c4a41db41371f4cab121360ef2d573a6b4fbf6bb3189d62",
+      "rawBytes": 1049103
+    },
+    {
+      "path": "continuity/crossing-rows.manifest.json",
+      "rawSha256": "86683c47c2e2dc329c9f7330dc7260d19949b791fa74ab036c9f0428d1d5e96a",
+      "rawBytes": 396
+    },
+    {
+      "path": "continuity/destination-set.jsonl.gz",
+      "rawSha256": "4a714c3ae7d08eb7ff6d109b67afadf9bb3762e0b9904f6aaf638f547c1b2d4e",
+      "rawBytes": 944090
+    },
+    {
+      "path": "continuity/destination-set.manifest.json",
+      "rawSha256": "9c83456985dffc825fcbbce33c8e97177d6aba15fe85e0dbca43eda16493bb99",
+      "rawBytes": 394
+    },
+    {
+      "path": "continuity/guarded-passengers.jsonl.gz",
+      "rawSha256": "a871cfcd6585e580d80c44834a51515ba58a60883633473c669423f1027f04f3",
+      "rawBytes": 394822
+    },
+    {
+      "path": "continuity/guarded-passengers.manifest.json",
+      "rawSha256": "316703d69cc8041c4c61c38b0b5e43dfe628b16a10305924cd8dc82174c6b3cb",
+      "rawBytes": 406
+    },
+    {
+      "path": "continuity/l-axe-violet.jsonl.gz",
+      "rawSha256": "79f50462466d18972f0bd6fb3f62f1c3ea0587c04e6dfe35771df2431711fa48",
+      "rawBytes": 284435
+    },
+    {
+      "path": "continuity/l-axe-violet.manifest.json",
+      "rawSha256": "35a6e1e935657d26f90686da21e12789b247389d11b5b125943fa1fc3a529951",
+      "rawBytes": 388
+    },
+    {
+      "path": "continuity/la-force-rouge.jsonl.gz",
+      "rawSha256": "3a40c6184624d97b63ac863d4c003d18a9dd197904336f27ba9a59f6fabf6dde",
+      "rawBytes": 329245
+    },
+    {
+      "path": "continuity/la-force-rouge.manifest.json",
+      "rawSha256": "3191edcd7f9009baa5d051ea98c982fa2386b760bb4c3f8ca25b327c516f6656",
+      "rawBytes": 392
+    },
+    {
+      "path": "continuity/la-ruse-verte.jsonl.gz",
+      "rawSha256": "4a3b96411cc4265466749652c7e01ab2c627347d1c90a2d2fc513bacf1bb9c81",
+      "rawBytes": 296915
+    },
+    {
+      "path": "continuity/la-ruse-verte.manifest.json",
+      "rawSha256": "746e380da98d661429d61ce183b1e7d29eaecc3b7728588bc9a24816b3cd7601",
+      "rawBytes": 390
+    },
+    {
+      "path": "continuity/local-carry.jsonl.gz",
+      "rawSha256": "59b0ab752d3e29eb5c6f5213e70ae019bbd8f54341c5b814bc10df4b799932f4",
+      "rawBytes": 236034
+    },
+    {
+      "path": "continuity/local-carry.manifest.json",
+      "rawSha256": "dc84dbb4412bb0a93982673a359ca97eab63d6ee8b2c947c8e2f480d873d5052",
+      "rawBytes": 386
+    },
+    {
+      "path": "continuity/marked-field.jsonl.gz",
+      "rawSha256": "4fc9da9afce63d0a0cc8ccbb46b54aa050d0106e0544361a309caa8094409349",
+      "rawBytes": 197559
+    },
+    {
+      "path": "continuity/marked-field.manifest.json",
+      "rawSha256": "ce96ca76f79071315a6c3ba5f364ebb25b68b39b7f9c00cd855aa9c37d9d61f3",
+      "rawBytes": 394
+    },
+    {
+      "path": "continuity/matching-edges.jsonl.gz",
+      "rawSha256": "9b0dcd56211657489ffe74dff22582bcdc1b1454af628d7e96e72c11b835a571",
+      "rawBytes": 681087
+    },
+    {
+      "path": "continuity/matching-edges.manifest.json",
+      "rawSha256": "516213d7dfc75813955e51a2ed4764fcc3b03e189f3e5d49e1bbf1334a2eff42",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/mirror-isles.jsonl.gz",
+      "rawSha256": "70ce549a735d12c17a4a2f20678c89c11f93f22a103ea2d4b90339762edab2a0",
+      "rawBytes": 339007
+    },
+    {
+      "path": "continuity/mirror-isles.manifest.json",
+      "rawSha256": "a73ecdf74ed5c90fe2068476e98e322a6d9a04ba86c79cc7f885fa424f1f3904",
+      "rawBytes": 388
+    },
+    {
+      "path": "continuity/native-sources.jsonl.gz",
+      "rawSha256": "2e4796c4fc55ed45ec0851144ba3fe42a13f3d234d2b8c81f7133b64a4c34275",
+      "rawBytes": 18303
+    },
+    {
+      "path": "continuity/native-sources.manifest.json",
+      "rawSha256": "a9ea24e1a838e89e04a6bfe90203af07fce8e024cf7922cd255c2b7de92a93b9",
+      "rawBytes": 416
+    },
+    {
+      "path": "continuity/observed-openings.jsonl.gz",
+      "rawSha256": "f3624038514e2498dd24d06b2ae070186044207c95ba3529ffe48a609896357c",
+      "rawBytes": 403636
+    },
+    {
+      "path": "continuity/observed-openings.manifest.json",
+      "rawSha256": "9e271d05596551dbdc392db56eac26d138cb95d2f1e2cd66136e2053f1b78ea7",
+      "rawBytes": 404
+    },
+    {
+      "path": "continuity/oriented-delivery.jsonl.gz",
+      "rawSha256": "3df8064f7e8cb01c83d33602f8cd66af705d982f5f73232f051ae2a9b962b13a",
+      "rawBytes": 383608
+    },
+    {
+      "path": "continuity/oriented-delivery.manifest.json",
+      "rawSha256": "5881a77faa8ac4c016908e952cbf59624e372a9b98035c481d4e6b16cf75ee38",
+      "rawBytes": 405
+    },
+    {
+      "path": "continuity/passage-walking.jsonl.gz",
+      "rawSha256": "1cdda6d27d3a328e517f5b8c197449b3d397335f08efa98715da8b26c00bb988",
+      "rawBytes": 247605
+    },
+    {
+      "path": "continuity/passage-walking.manifest.json",
+      "rawSha256": "40adf3d45b34acbd24a5b5417d711ada079b1d7f99d25d95fb25b52d00c39f16",
+      "rawBytes": 400
+    },
+    {
+      "path": "continuity/population-preparation.jsonl.gz",
+      "rawSha256": "5a8053ff7436eb0db384921b367104dfeca33ca96fb1ff9b0885db2e5b6b1031",
+      "rawBytes": 591850
+    },
+    {
+      "path": "continuity/population-preparation.manifest.json",
+      "rawSha256": "4a85e19c4feac68e8c85b3f9b582a00006b59ea0f8e6373071c4c4390c79b3d8",
+      "rawBytes": 414
+    },
+    {
+      "path": "continuity/profile-preparation.jsonl.gz",
+      "rawSha256": "436f59eb28f01a0630997cac0130a0719806f4f9004184957d3d755a8ec90cce",
+      "rawBytes": 99547
+    },
+    {
+      "path": "continuity/profile-preparation.manifest.json",
+      "rawSha256": "45e606444152beb3a18a310cee6f1481889d3003b67d1723be6eaa10e7e8261c",
+      "rawBytes": 408
+    },
+    {
+      "path": "continuity/public-panel.jsonl.gz",
+      "rawSha256": "9f642add37a9b8c9a1e3b47a54b08ff5a2c228ea26c99f7337b0db1f988331a3",
+      "rawBytes": 5478153
+    },
+    {
+      "path": "continuity/public-panel.manifest.json",
+      "rawSha256": "a6745f28bbfeee9b22d9f01f0e288e6f55d553b0435570c2466071368d2f1065",
+      "rawBytes": 395
+    },
+    {
+      "path": "continuity/queue-receipts.jsonl.gz",
+      "rawSha256": "5f14405d464ba5458e2807d40d0ca48db5feb58eb29d29b68548cd6e62e729b0",
+      "rawBytes": 144818
+    },
+    {
+      "path": "continuity/queue-receipts.manifest.json",
+      "rawSha256": "627cbde332217b0845077fbcd9b50d797fe9630e5f9fe8ee4a5abca516e4be75",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/support-selection.jsonl.gz",
+      "rawSha256": "a209cca719b6c4cf3c822c7436dc4caba2769f08f54b3ebe01e51fb5f3fa4097",
+      "rawBytes": 759807
+    },
+    {
+      "path": "continuity/support-selection.manifest.json",
+      "rawSha256": "67efa7bac81ecd0d2cea93b5cce97ce523a12803955b1ab9d45bd317e7ab09bf",
+      "rawBytes": 404
+    },
+    {
+      "path": "continuity/surface-routes.jsonl.gz",
+      "rawSha256": "42f552153ad65d3d3ce3d1059691c46bc018ff983dfa7100c47c33cfb29b4528",
+      "rawBytes": 6897306
+    },
+    {
+      "path": "continuity/surface-routes.manifest.json",
+      "rawSha256": "2a39514dccb0867c2802b81a1d8295d4c68db9a9553faf20382fe3c5905f06c8",
+      "rawBytes": 398
+    },
+    {
+      "path": "continuity/workshop-phase.jsonl.gz",
+      "rawSha256": "5b0f259566236059ac54181e21dc8b176f6f64668f30ae7832f0a8aece79c353",
+      "rawBytes": 392803
+    },
+    {
+      "path": "continuity/workshop-phase.manifest.json",
+      "rawSha256": "4c40cd99606f17c525f4b42f7c2e352ff2eee185016d79e81fae06559f54f162",
+      "rawBytes": 399
+    },
+    {
+      "path": "continuity/artifacts.json",
+      "rawSha256": "81189046c7d22e22a429dbff34d4f1cd469539f543f929c1b22475a8f5d713b1",
+      "rawBytes": 4803
+    }
+  ]
+}
